@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Planche de travail comparant trois pistes visuelles pour raconter les risques et les bénéfices de l’intelligence artificielle.">
+  <title>Explorations visuelles IA — M.R.S.C</title>
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <style>
+    .design-header {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+    .design-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .design-mark {
+      color: var(--navy);
+      font-size: .78rem;
+      font-weight: 850;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .design-header a { font-size: .9rem; font-weight: 700; }
+    .design-intro {
+      max-width: 850px;
+      padding-block: clamp(3rem, 7vw, 5.5rem) 2rem;
+    }
+    .design-intro h1 { font-size: clamp(2.35rem, 5vw, 4rem); }
+    .design-intro > p:last-child { max-width: 760px; color: var(--muted); font-size: 1.08rem; }
+    .draft-notice {
+      display: inline-flex;
+      gap: .5rem;
+      align-items: center;
+      margin-top: .5rem;
+      padding: .45rem .7rem;
+      border: 1px solid #ead9a8;
+      border-radius: 8px;
+      background: #fbf7ed;
+      color: #665325;
+      font-size: .78rem;
+      font-weight: 750;
+    }
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      padding-bottom: 3.5rem;
+    }
+    .concept-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 10px 32px rgba(26, 48, 91, .055);
+    }
+    .concept-label {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: .75rem;
+      margin-bottom: .2rem;
+      color: var(--blue);
+      font-size: .72rem;
+      font-weight: 850;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    .concept-label span:last-child { color: var(--muted); font-size: .68rem; }
+    .concept-card h2 { margin: .25rem 0 .45rem; font-size: 1.4rem; }
+    .concept-summary { min-height: 5.2em; margin: 0 0 1rem; color: var(--muted); font-size: .9rem; }
+    .concept-stage {
+      position: relative;
+      min-height: 248px;
+      overflow: hidden;
+      border-radius: 15px;
+      isolation: isolate;
+    }
+    .concept-explanation { margin: 1rem 0 .7rem; color: #45536a; font-size: .91rem; }
+    .concept-strength {
+      margin: auto 0 0;
+      padding-top: .8rem;
+      border-top: 1px solid var(--line);
+      color: #435168;
+      font-size: .82rem;
+    }
+    .concept-strength strong { color: var(--navy); }
+
+    /* A — une capacité commune se divise selon l’usage et les garde-fous */
+    .stage-double {
+      background: #142246;
+      color: #fff;
+    }
+    .double-core {
+      position: absolute;
+      z-index: 2;
+      top: 38%;
+      left: 50%;
+      display: grid;
+      place-content: center;
+      width: 93px;
+      height: 93px;
+      border: 6px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      background: #fff;
+      color: var(--navy);
+      text-align: center;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 6px 20px rgba(0,0,0,.2);
+    }
+    .double-core strong { font-size: .83rem; letter-spacing: .04em; }
+    .double-core small { color: var(--muted); font-size: .58rem; line-height: 1.2; }
+    .double-branch {
+      position: absolute;
+      top: 45%;
+      width: 40%;
+      height: 1px;
+      background: rgba(255,255,255,.45);
+    }
+    .double-branch-left { left: 7%; transform: rotate(24deg); transform-origin: right; }
+    .double-branch-right { right: 7%; transform: rotate(-24deg); transform-origin: left; }
+    .double-outcome {
+      position: absolute;
+      top: 65%;
+      display: grid;
+      gap: .25rem;
+      width: 43%;
+      min-height: 65px;
+      align-content: center;
+      padding: .6rem;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 11px;
+      text-align: center;
+    }
+    .double-outcome small { font-size: .64rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .double-outcome strong { font-size: .82rem; }
+    .double-risk { left: 4%; background: rgba(229,80,88,.16); }
+    .double-risk small { color: #ffb4b6; }
+    .double-common { right: 4%; background: rgba(118,181,68,.17); }
+    .double-common small { color: #c6ebaa; }
+    .double-guardrail {
+      position: absolute;
+      right: 8%;
+      bottom: 7%;
+      left: 8%;
+      padding: .36rem .5rem;
+      border: 1px dashed rgba(255,255,255,.32);
+      border-radius: 8px;
+      color: rgba(255,255,255,.8);
+      font-size: .65rem;
+      font-weight: 720;
+      text-align: center;
+    }
+
+    /* B — une constellation relie domaines, publics, effets et décideurs */
+    .stage-atlas {
+      background:
+        radial-gradient(circle at 50% 48%, rgba(118,181,68,.12), transparent 9rem),
+        #f0f4fa;
+    }
+    .atlas-lines { position: absolute; inset: 0; width: 100%; height: 100%; color: #9cabc2; }
+    .atlas-core {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      display: grid;
+      place-items: center;
+      width: 57px;
+      height: 57px;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-size: .85rem;
+      font-weight: 850;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 7px 18px rgba(29,50,104,.2);
+    }
+    .atlas-node {
+      position: absolute;
+      display: grid;
+      gap: .08rem;
+      min-width: 78px;
+      padding: .4rem .5rem;
+      border: 1px solid #dce4f0;
+      border-radius: 9px;
+      background: #fff;
+      color: #34445f;
+      text-align: center;
+      box-shadow: 0 5px 14px rgba(26,48,91,.07);
+    }
+    .atlas-node strong { font-size: .66rem; letter-spacing: .035em; }
+    .atlas-node small { color: var(--muted); font-size: .58rem; }
+    .atlas-work { top: 9%; left: 8%; }
+    .atlas-health { top: 9%; right: 8%; }
+    .atlas-info { bottom: 11%; left: 7%; }
+    .atlas-place { right: 7%; bottom: 11%; }
+    .atlas-foot {
+      position: absolute;
+      right: 4%;
+      bottom: 1.8%;
+      left: 4%;
+      color: #63718a;
+      font-size: .61rem;
+      font-weight: 690;
+      text-align: center;
+    }
+
+    /* C — un usage franchit des étapes de vigilance avant et après le déploiement */
+    .stage-journey {
+      display: flex;
+      align-items: center;
+      padding: 1rem .55rem;
+      background: linear-gradient(135deg, #edf5e7, #f4f7fb 62%, #fbf3e2);
+    }
+    .journey-track {
+      position: absolute;
+      top: 45%;
+      right: 10%;
+      left: 10%;
+      height: 2px;
+      background: #b9c9dc;
+    }
+    .journey-list {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0,1fr));
+      gap: .15rem;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .journey-list li {
+      display: grid;
+      justify-items: center;
+      gap: .65rem;
+      color: #3d4c64;
+      font-size: .61rem;
+      font-weight: 750;
+      text-align: center;
+    }
+    .journey-dot {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border: 4px solid #f5f7fa;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: .68rem;
+      box-shadow: 0 4px 12px rgba(29,50,104,.15);
+    }
+    .journey-list li:nth-child(2) .journey-dot,
+    .journey-list li:nth-child(4) .journey-dot { background: #588b35; }
+    .journey-list li:last-child .journey-dot { background: #bd7d15; }
+    .journey-foot {
+      position: absolute;
+      right: 5%;
+      bottom: 8%;
+      left: 5%;
+      color: #56647a;
+      font-size: .65rem;
+      text-align: center;
+    }
+
+    .comparison-section {
+      margin-bottom: 3rem;
+      padding: clamp(1.4rem, 4vw, 2.5rem);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #f6f8fb;
+    }
+    .comparison-section h2 { font-size: 1.55rem; }
+    .comparison-table-wrap { overflow-x: auto; }
+    .comparison-table { width: 100%; border-collapse: collapse; background: #fff; font-size: .88rem; }
+    .comparison-table th, .comparison-table td { padding: .8rem; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .comparison-table th { color: var(--navy); background: #edf2fa; }
+    .comparison-table td:first-child { min-width: 150px; color: var(--navy); font-weight: 750; }
+    .design-outro { margin: -1rem 0 4rem; color: var(--muted); font-size: .9rem; }
+    .design-footer { padding: 1.3rem 0 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
+    @media (max-width: 960px) {
+      .concept-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .concept-card:last-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      .design-header-inner { align-items: flex-start; flex-direction: column; gap: .35rem; }
+      .concept-grid { grid-template-columns: 1fr; }
+      .concept-card:last-child { grid-column: auto; }
+      .concept-summary { min-height: 0; }
+      .comparison-table { min-width: 620px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="design-header">
+    <div class="container design-header-inner">
+      <span class="design-mark">M.R.S.C · exploration éditoriale</span>
+      <a href="../ia-societe.html">Retour à la page IA &amp; société <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main class="container">
+    <section class="design-intro">
+      <p class="eyebrow">Comparer avant de choisir</p>
+      <h1>Trois façons de raconter la même question.</h1>
+      <p>Comment parler de modèles toujours plus capables : du risque qu’ils soient détournés, et de ce qu’ils peuvent apporter lorsqu’ils sont utilisés avec discernement et au service du bien commun ? Ces croquis sont des pistes de travail, pas trois identités finalisées.</p>
+      <span class="draft-notice"><span aria-hidden="true">●</span> Planche de comparaison · non intégrée à la navigation publique</span>
+    </section>
+
+    <section class="concept-grid" aria-label="Trois pistes visuelles">
+      <article class="concept-card">
+        <div class="concept-label"><span>A · Le double horizon</span><span>Contraste</span></div>
+        <h2>Une capacité, deux trajectoires</h2>
+        <p class="concept-summary">Partir du même modèle, puis montrer comment l’intention, l’accès et les garde-fous influencent ses effets.</p>
+        <div class="concept-stage stage-double" role="img" aria-label="Un modèle aux capacités avancées ouvre deux trajectoires : le détournement et le service du bien commun, avec des garde-fous à chaque étape.">
+          <span class="double-branch double-branch-left" aria-hidden="true"></span>
+          <span class="double-branch double-branch-right" aria-hidden="true"></span>
+          <div class="double-core"><strong>CAPACITÉS</strong><small>modèles plus<br>performants</small></div>
+          <div class="double-outcome double-risk"><small>Si détournées</small><strong>Abus amplifiés</strong></div>
+          <div class="double-outcome double-common"><small>Si bien orientées</small><strong>Intérêt collectif</strong></div>
+          <div class="double-guardrail">Accès · règles · contrôle humain · responsabilité</div>
+        </div>
+        <p class="concept-explanation">La plus directe pour rendre visible la tension que tu as nommée : la puissance n’indique pas, à elle seule, la direction prise.</p>
+        <p class="concept-strength"><strong>Force :</strong> impact clair et lecture rapide. <strong>Vigilance :</strong> ne pas simplifier le débat en deux camps étanches.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-label"><span>B · L’atlas des effets</span><span>Transversalité</span></div>
+        <h2>Une technologie, des vies différentes</h2>
+        <p class="concept-summary">Relier formes d’IA et domaines de la vie, puis détailler pour chacun les usages, les personnes concernées et les effets à surveiller.</p>
+        <div class="concept-stage stage-atlas" role="img" aria-label="Une constellation relie l’intelligence artificielle au travail, à la santé, à l’information et aux territoires.">
+          <svg class="atlas-lines" viewBox="0 0 400 250" fill="none" aria-hidden="true" focusable="false">
+            <circle cx="200" cy="120" r="57" stroke="currentColor" stroke-opacity=".22" stroke-dasharray="3 6"></circle>
+            <path d="M200 120 76 51M200 120l124-69M200 120 70 196M200 120l130 76" stroke="currentColor" stroke-width="1.5" stroke-opacity=".55"></path>
+            <circle cx="76" cy="51" r="4" fill="#76b544"></circle><circle cx="324" cy="51" r="4" fill="#e7a126"></circle>
+            <circle cx="70" cy="196" r="4" fill="#e55058"></circle><circle cx="330" cy="196" r="4" fill="#76b544"></circle>
+          </svg>
+          <span class="atlas-core">IA</span>
+          <span class="atlas-node atlas-work"><strong>TRAVAIL</strong><small>tâches · revenus</small></span>
+          <span class="atlas-node atlas-health"><strong>SANTÉ</strong><small>aide · soin</small></span>
+          <span class="atlas-node atlas-info"><strong>INFORMATION</strong><small>source · confiance</small></span>
+          <span class="atlas-node atlas-place"><strong>TERRITOIRE</strong><small>services · énergie</small></span>
+          <span class="atlas-foot">Pour chaque point : qui bénéficie ? qui décide ?</span>
+        </div>
+        <p class="concept-explanation">La plus adaptée à un dossier qui embrasse plusieurs métiers, générations, revenus, capacités et usages quotidiens.</p>
+        <p class="concept-strength"><strong>Force :</strong> montre la répartition des effets. <strong>Vigilance :</strong> garder la carte lisible et toujours la doubler d’un récit concret.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-label"><span>C · Le parcours de confiance</span><span>Responsabilité</span></div>
+        <h2>Du besoin au recours humain</h2>
+        <p class="concept-summary">Suivre un usage à travers les questions qui permettent d’en juger l’utilité, les limites et la responsabilité.</p>
+        <div class="concept-stage stage-journey" role="img" aria-label="Cinq étapes pour examiner un usage de l’IA : définir le besoin, évaluer, tester, superviser et permettre un recours.">
+          <span class="journey-track" aria-hidden="true"></span>
+          <ol class="journey-list">
+            <li><span class="journey-dot">1</span>Besoin</li>
+            <li><span class="journey-dot">2</span>Évaluer</li>
+            <li><span class="journey-dot">3</span>Tester</li>
+            <li><span class="journey-dot">4</span>Superviser</li>
+            <li><span class="journey-dot">5</span>Recours</li>
+          </ol>
+          <span class="journey-foot">Le bénéfice et le risque sont vérifiés tout au long du parcours.</span>
+        </div>
+        <p class="concept-explanation">La plus pratique pour aider chacun à poser les mêmes bonnes questions, dans un service, une entreprise, une école ou une association.</p>
+        <p class="concept-strength"><strong>Force :</strong> rend les garde-fous concrets. <strong>Vigilance :</strong> ne pas laisser croire qu’une checklist suffit à supprimer le risque.</p>
+      </article>
+    </section>
+
+    <section class="comparison-section" aria-labelledby="comparaison-title">
+      <p class="eyebrow">Lecture comparée</p>
+      <h2 id="comparaison-title">Ce que chaque piste met au premier plan</h2>
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead><tr><th scope="col">Piste</th><th scope="col">Question principale</th><th scope="col">Convient particulièrement à</th><th scope="col">Point de vigilance</th></tr></thead>
+          <tbody>
+            <tr><td>A · Double horizon</td><td>Comment la même capacité peut-elle servir ou nuire ?</td><td>Un accueil marquant sur les risques de détournement et les bénéfices du bien commun.</td><td>Éviter une opposition trop simple entre « bon » et « mauvais » usages.</td></tr>
+            <tr><td>B · Atlas des effets</td><td>Qui est concerné, dans quels domaines, et avec quels effets ?</td><td>Une vue d’ensemble inclusive des usages et de leur répartition sociale.</td><td>Relier chaque nœud à un exemple vérifiable pour éviter l’abstraction.</td></tr>
+            <tr><td>C · Parcours de confiance</td><td>Quelles garanties examiner avant et pendant un usage ?</td><td>Des repères accessibles pour discuter d’une situation précise.</td><td>Garder visibles les déséquilibres de pouvoir et les risques résiduels.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="design-outro">Ces pistes peuvent rester distinctes ou se compléter — par exemple une entrée en double horizon, une carte des domaines, puis des questions de confiance. Aucune n’est retenue comme signature avant ton retour et la vérification des contenus.</p>
+  </main>
+  <footer class="design-footer">
+    <div class="container">Planche de conception exploratoire · M.R.S.C · Les visuels et formulations ne constituent pas encore une identité ou une position officiellement adoptée.</div>
+  </footer>
+</body>
+</html>
