@@ -1,0 +1,51 @@
+name: Veille — moteur du simulateur
+
+# Le simulateur se développe dans son propre dépôt ; le site embarque une copie
+# datée de son moteur. Cette veille compare les deux révisions une fois par
+# semaine : si le moteur amont a bougé, le job échoue et GitHub prévient par
+# courriel (notification par défaut des exécutions planifiées).
+#
+# Elle ne modifie rien, ne publie rien et n'écrit nulle part : la mise à jour
+# reste une décision humaine, en deux commandes.
+#
+#     python3 outils/mettre-a-jour-simulateur.py
+#     python3 outils/verifier-integration.py
+#
+# Lancement manuel possible depuis l'onglet Actions (« Run workflow »).
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # chaque lundi, 7 h UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  veille:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Comparer les révisions (échec = mise à jour disponible)
+        run: python3 outils/verifier-maj-amont.py
+
+      - name: Marche à suivre
+        if: failure()
+        run: |
+          {
+            echo "### Mise à jour du moteur disponible"
+            echo
+            echo '```sh'
+            echo "python3 outils/mettre-a-jour-simulateur.py"
+            echo "python3 outils/verifier-integration.py"
+            echo '```'
+            echo
+            echo "Relire le diff avant de valider : le moteur est copié tel quel, la page publiée est régénérée."
+          } >> "$GITHUB_STEP_SUMMARY"
