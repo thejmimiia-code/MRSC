@@ -1,0 +1,10 @@
+# Même périmètre de publication que le workflow GitHub Pages
+# (`.github/workflows/deploy-pages.yml`) : seules les pages publiques et
+# `assets/` sont déployées sur Vercel. Les documents de travail restent privés.
+docs/
+outils/
+.github/
+README.md
+LICENCE
+.gitignore
+.vercelignore
