@@ -25,7 +25,7 @@ Puis ouvrir `http://localhost:4173`.
 
 ## Publication sur GitHub Pages
 
-Le workflow `.github/workflows/deploy-pages.yml` publie les pages HTML et `assets/` uniquement ; les documents de travail dans `docs/` ne sont pas copiés sur le site. Pour une première publication, activer GitHub Pages dans **Settings → Pages → Build and deployment → Source → GitHub Actions**, puis lancer le workflow « Publish M.R.S.C site » depuis l’onglet **Actions**. L’adresse de projet attendue est `https://thejmimiia-code.github.io/MRSC/`.
+Le workflow `.github/workflows/deploy-pages.yml` publie les pages HTML et `assets/` uniquement ; les documents de travail dans `docs/` ne sont pas copiés sur le site. Le déploiement est automatique à chaque push sur `main` (un lancement manuel reste possible depuis l’onglet **Actions** avec « Publish M.R.S.C site »). Prérequis : activer GitHub Pages dans **Settings → Pages → Build and deployment → Source → GitHub Actions**. L’adresse de projet attendue est `https://thejmimiia-code.github.io/MRSC/`.
 
 ## Contenu et ressources externes
 
