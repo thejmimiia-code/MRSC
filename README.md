@@ -10,6 +10,7 @@ Reproduction statique des pages publiques de [www.mrsc.fr](https://www.mrsc.fr/)
 - `liens-utiles.html` — ressources externes référencées sur le site d’origine
 - `localisation.html` — carte Google My Maps et repères affichés
 - `nous-contacter.html` — coordonnées de contact
+- `transparence.html` — projet, méthode, registre des sources page par page et licence d’utilisation
 
 La mise en page est responsive, les liens de navigation fonctionnent sans framework et le menu mobile est piloté par `assets/js/site.js`. La veille éditoriale se trouve dans `docs/veille-rd-mrsc.md` ; `docs/pistes-visuelles-ia.html` présente trois directions graphiques exploratoires, hors navigation publique.
 
@@ -30,3 +31,9 @@ Le workflow `.github/workflows/deploy-pages.yml` publie les pages HTML et `asset
 ## Contenu et ressources externes
 
 Le logo du site a été repris localement dans `assets/images/logo-mrsc.jpg`. Les pages existantes et leurs éléments visibles ont été reconstitués à partir du site public ; `ia-societe.html` est un premier contenu de R&D ajouté au site. Les documents PDF (statuts, bulletins et parution officielle) pointent vers leurs fichiers d’origine ; la carte de localisation est intégrée depuis Google My Maps. Ces ressources nécessitent donc encore une connexion à leurs services hébergeurs.
+
+## Transparence et licence
+
+Chaque page publique comporte un encadré « Sources & traçabilité » distinguant les sources externes des apports « Original M.R.S.C ». La page `transparence.html` présente le projet, la méthode, le registre des sources page par page et la licence d'utilisation.
+
+L'outil est open-source et gratuit, selon les conditions du fichier [LICENCE](LICENCE). Toute réutilisation impose l'attribution « Source : M.R.S.C — https://thejmimiia-code.github.io/MRSC/ ». Il est interdit de s'en attribuer le mérite ou la paternité ; l'outil reste la propriété intellectuelle exclusive de son créateur, unique auteur.

@@ -33,7 +33,7 @@ jobs:
           set -euo pipefail
           rm -rf _site
           mkdir -p _site
-          cp index.html ia-societe.html documents.html liens-utiles.html localisation.html nous-contacter.html _site/
+          cp index.html ia-societe.html documents.html liens-utiles.html localisation.html nous-contacter.html transparence.html _site/
           cp -R assets _site/assets
 
       - name: Upload the static site
