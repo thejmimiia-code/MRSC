@@ -1,0 +1,73 @@
+name: Veille — moteur du simulateur
+
+# Le simulateur se développe en continu dans son dépôt. Le site embarque une
+# copie datée de son moteur : cette veille compare les deux révisions une fois
+# par semaine et ouvre (ou complète) une alerte quand une mise à jour existe.
+#
+# Elle ne modifie rien et ne publie rien : la mise à jour se fait ensuite par
+# `python3 outils/mettre-a-jour-simulateur.py`, relue et validée par une
+# personne. Le lancement manuel est possible depuis l'onglet Actions.
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # chaque lundi, 7 h UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  veille:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Comparer les révisions
+        id: revision
+        continue-on-error: true
+        run: |
+          # `pipefail` est indispensable : sans lui, le code de sortie du script
+          # (1 = mise à jour disponible) serait masqué par celui de `tee`, et
+          # l'alerte ne partirait jamais.
+          set -o pipefail
+          python3 outils/verifier-maj-amont.py --json | tee revision.json
+
+      - name: Rappel dans le résumé du job
+        if: steps.revision.outcome == 'failure'
+        run: |
+          {
+            echo "## Mise à jour du moteur disponible"
+            echo
+            echo '```sh'
+            echo "python3 outils/mettre-a-jour-simulateur.py"
+            echo "python3 outils/verifier-integration.py"
+            echo '```'
+            echo
+            echo '```json'
+            cat revision.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Ouvrir ou compléter l'alerte
+        if: steps.revision.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TITRE="Moteur du simulateur : mise à jour disponible"
+          AMONT=$(python3 -c "import json;print(json.load(open('revision.json'))['revision_amont'][:12])")
+          COPIE=$(python3 -c "import json;print(json.load(open('revision.json'))['revision_copiee'][:12])")
+          CORPS=$(printf 'La branche `main` du dépôt amont est passée à `%s`, alors que le site embarque `%s`.\n\nMise à jour :\n\n```sh\npython3 outils/mettre-a-jour-simulateur.py\npython3 outils/verifier-integration.py\n```\n\nLire le diff avant de publier : le moteur est copié tel quel, mais la page publiée est régénérée.\n' "$AMONT" "$COPIE")
+          EXISTANTE=$(gh issue list --state open --search "$TITRE in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTANTE" ]; then
+            gh issue comment "$EXISTANTE" --body "$CORPS"
+          else
+            gh issue create --title "$TITRE" --body "$CORPS"
+          fi
