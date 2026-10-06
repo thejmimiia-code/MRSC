@@ -10,6 +10,13 @@ _site/
 # Additional Ruby/bundler ignore for when you run: bundle install
 /vendor
 
+# Caches Python (outils/serveur-local.py, outils/verifier-integration.py)
+__pycache__/
+*.pyc
+
+# Cache local des données publiques relevées par le simulateur
+.simulateur_cache/
+
 # Specific ignore for GitHub Pages
 # GitHub Pages will always use its own deployed version of pages-gem
 # This means GitHub Pages will NOT use your Gemfile.lock and therefore it is
