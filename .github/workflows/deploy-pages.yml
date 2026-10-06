@@ -32,9 +32,12 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf _site
-          mkdir -p _site
-          cp index.html ia-societe.html documents.html liens-utiles.html localisation.html nous-contacter.html transparence.html _site/
+          mkdir -p _site/simulateur
+          cp index.html ia-societe.html simulateur.html documents.html liens-utiles.html localisation.html nous-contacter.html transparence.html 404.html _site/
           cp -R assets _site/assets
+          # Page publiée du simulateur (générée depuis le moteur) et sa provenance.
+          # Les sources Python du moteur ne sont pas publiées sur les Pages.
+          cp simulateur/index.html simulateur/PROVENANCE.json _site/simulateur/
 
       - name: Upload the static site
         uses: actions/upload-pages-artifact@v3

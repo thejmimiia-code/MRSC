@@ -1,0 +1,15 @@
+# Même périmètre de publication que le workflow GitHub Pages
+# (`.github/workflows/deploy-pages.yml`) : site statique + moteur du simulateur
+# (fonctions `api/` et page `simulateur/`). Les documents de travail restent privés.
+docs/
+outils/
+.github/
+README.md
+LICENCE
+.gitignore
+.vercelignore
+
+# Caches et artifacts locaux
+__pycache__/
+*.pyc
+.simulateur_cache/
