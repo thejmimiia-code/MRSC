@@ -1,6 +1,9 @@
 # M.R.S.C — site public
 
-Reproduction statique des pages publiques de [www.mrsc.fr](https://www.mrsc.fr/) pour servir de base aux travaux de R&D, complétée par un outil citoyen : le simulateur macro-politique.
+Reproduction statique des pages publiques de [www.mrsc.fr](https://www.mrsc.fr/) 
+En attente de mise à jour avec la version R et D (https://thejmimiia-code.github.io/MRSC/)
+
+pour servir de base aux travaux de R&D, complétée par un outil citoyen : le simulateur macro-politique.
 
 ## Pages
 
