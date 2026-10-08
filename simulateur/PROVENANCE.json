@@ -1,10 +1,10 @@
 {
   "depot_amont": "https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple",
-  "revision": "8a4e53872873a717e52554b1e534d038b45cece1",
-  "revision_courte": "8a4e5387",
-  "date_revision": "2026-10-05T20:18:31+02:00",
-  "sujet": "Merge pull request #14 — Simulateur paramétrable : 93 leviers, 20 domaines, bulles explicatives et aides au survol",
-  "copie_le": "2026-10-06",
+  "revision": "99491d872f1fb2716041aeb4733f5921359ec7c6",
+  "revision_courte": "99491d8",
+  "date_revision": "2026-10-08T18:24:18+02:00",
+  "sujet": "Merge pull request #21 from thejmimiia-code/arena/5a48d8ab-d-mocratie-et-politique-du-peu",
+  "copie_le": "2026-10-08",
   "fichiers_ajoutes_par_le_site": [
     "pont_api.py"
   ],

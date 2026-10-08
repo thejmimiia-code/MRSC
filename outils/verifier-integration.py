@@ -83,10 +83,13 @@ STATUTS_ACCEPTES: dict[str, tuple[int, ...]] = {
 ROUTES_TESTS: dict[str, tuple[str, int]] = {
     "/api/catalogue": ("", 200),
     "/api/contexte": ("?refresh=0", 200),
+    "/api/marches": ("", 200),
     "/api/presets": ("", 200),
     "/api/scenarios": ("", 200),
     "/api/simuler": ("", 200),
     "/api/comparer": ("", 200),
+    "/api/garde_fous": ("", 200),
+    "/api/lexique": ("", 200),
     "/api/run?scenario=mandature": ("", 200),
     "/api/bulle?levier=tva_taux_normal": ("", 200),
 }
@@ -437,8 +440,18 @@ def demander(fichier: Path, chemin: str, methode: str, corps: bytes | None) -> t
 
 def routes_servies() -> None:
     for route in ROUTES:
-        methode = "POST" if route in ("simuler", "donnees") else "GET"
-        corps = json.dumps({"parametres": {}, "horizon": 5}).encode() if methode == "POST" else None
+        if route in ("simuler", "donnees"):
+            methode = "POST"
+            corps = json.dumps({"parametres": {}, "horizon": 5}).encode()
+        elif route == "conseil":
+            # Conseiller « effet papillon » : un mouvement complet de levier.
+            methode = "POST"
+            corps = json.dumps(
+                {"cle": "tva_taux_normal", "avant": 20.0, "apres": 19.0}
+            ).encode()
+        else:
+            methode = "GET"
+            corps = None
         statut, contenu = demander(RACINE / "api" / f"{route}.py", f"/api/{route}", methode, corps)
         acceptes = STATUTS_ACCEPTES.get(route, (200,))
         verifier(

@@ -32,10 +32,12 @@ from simulateur.reglements_lois import (
     rechercher_loi,
 )
 from simulateur.scenarios import (
+    get_scenario_alternance_2032,
     get_scenario_austerite_brutale,
     get_scenario_choc_mondial_stagflation,
     get_scenario_convergence_ww3,
     get_scenario_crise_taiwan,
+    get_scenario_double_mandature,
     get_scenario_escalade_nucleaire_tactique,
     get_scenario_fermeture_hormuz,
     get_scenario_mandature_5_ans,
@@ -68,6 +70,8 @@ __all__ = [
     "get_scenario_escalade_nucleaire_tactique",
     "get_scenario_convergence_ww3",
     "get_scenario_resilience_republicaine",
+    "get_scenario_double_mandature",
+    "get_scenario_alternance_2032",
     "EchelonGeopolitique",
     "PointDePassageStrategique",
     "EffetsGeopolitiques",

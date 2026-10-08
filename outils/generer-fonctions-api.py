@@ -32,12 +32,16 @@ FONCTIONS_DU_SITE: tuple[str, ...] = ("verifier-source",)
 ROUTES: tuple[str, ...] = (
     "catalogue",
     "contexte",
+    "marches",
     "donnees",
+    "conseil",
     "simuler",
     "comparer",
+    "garde_fous",
     "presets",
     "bulles",
     "bulle",
+    "lexique",
     "proxy",
     "run",
     "scenarios",
@@ -68,7 +72,7 @@ class handler(FonctionAPI):
 def routes_du_moteur() -> set[str]:
     """Routes réellement servies, lues dans le source du moteur."""
     source = (RACINE / "simulateur" / "dashboard.py").read_text(encoding="utf-8")
-    return {nom for nom in re.findall(r'chemin == "(/api/[a-z]+)"', source)}
+    return {nom for nom in re.findall(r'chemin == "(/api/[a-z0-9_-]+)"', source)}
 
 
 def main() -> int:

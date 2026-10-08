@@ -18,6 +18,42 @@ from simulateur.model import (
     ResultatEtapeSimulation,
 )
 
+#: Délai de maturité des investissements à cycle long (années).
+#: Hypothèse R&D « deux mandatures consécutives » (docs/RD_DOUBLE_MANDATURE.md,
+#: point P6) : EPR2, lois de programmation militaire, prévention santé, recherche…
+#: le coût est payé tout de suite, le rendement n'arrive qu'à maturité (courbe en J).
+DELAI_MATURITE_INVESTISSEMENTS = 5
+
+#: Rendement annuel d'un investissement à cycle long mature (part de PIB ajoutée
+#: par Md€ investi) et plafond par programme, pour éviter toute divergence sur
+#: les horizons longs. Calibrage exploratoire, pas une prévision.
+RENDEMENT_INVESTISSEMENTS_MATURES = 0.08
+PLAFOND_RENDEMENT_PAR_PROGRAMME_MDE = 2.5
+
+#: Phase 2 — hypothèses de scénario (docs/RD_DOUBLE_MANDATURE.md, P16-P21).
+#: La Cour des comptes estime à 140-150 Md€ les besoins d'investissement des
+#: bâtiments publics à l'horizon 2050. Simple annualisation centrale sur 24 ans
+#: (2026-2050), PAS un besoin d'entretien officiel ni une dette observée.
+BESOIN_ANNUALISE_CAPITAL_PUBLIC_MDE = 145.0 / 24.0
+#: Un délai exploratoire de huit ans rend visibles, à l'horizon de deux
+#: mandatures, des investissements d'éducation/formation à cycle long. Il
+#: n'encode aucun taux de rendement macroéconomique.
+DELAI_MATURITE_CAPITAL_HUMAIN = 8
+#: Six ans, fenêtre d'une LPM (2024-2030), utilisée comme proxy de montée en
+#: capacité — pas une durée moyenne officielle de tous les programmes BITD.
+DELAI_MATURITE_CAPACITES_DEFENSE = 6
+#: PNACC-3 estime à 143 Md€ les sinistres climatiques cumulés 2020-2050.
+#: Leur annualisation uniforme (143/30) est un repère de scénario, pas une
+#: trajectoire annuelle observée ni une dépense des administrations publiques.
+DOMMAGES_CLIMAT_ANNUALISES_MDE = 143.0 / 30.0
+#: Le PNACC-3 rapporte, pour les projets soutenus par le fonds Barnier, 1 €
+#: investi pour 8 € de dommages évités. Annualisation illustrative sur 30 ans ;
+#: ce ratio ne se généralise pas à toutes les dépenses d'adaptation.
+RENDEMENT_PREVENTION_ANNUALISE = 8.0 / 30.0
+#: Seuil de saturation administratif utilisé pour un stress-test, sans valeur
+#: officielle universelle : à faire varier en analyse de sensibilité.
+SEUIL_SATURATION_ADMINISTRATIVE = 8
+
 
 class MoteurSimulationSystemique:
     """
@@ -52,6 +88,7 @@ class MoteurSimulationSystemique:
             "inflation_pct": 2.1,
             "taux_oat_pct": 4.18,
             "taux_bund_pct": 3.30,
+            "taux_credit_immobilier_pct": 3.85,
             "spread_bps": 88.0,
             "facture_energetique_mde": 64.5,
             "recettes_base_mde": 1565.0,
@@ -66,6 +103,48 @@ class MoteurSimulationSystemique:
         self.reforme_regimes_speciaux_active = False
         self.reforme_anti_pantouflage_active = False
         self.reforme_non_cumul_active = False
+
+        # ── Profondeur temporelle : deux mandatures consécutives ─────────────
+        # Registre des investissements à cycle long : (année de maturité, Md€).
+        # Le rendement n'est compté qu'à maturité, jamais avant (courbe en J).
+        self.investissements_differes: list[tuple[int, float]] = []
+        # Phase 2 (points P16-P21) : registres explicites de scénarios longs.
+        self.dette_technique_infrastructures_mde: float = 0.0
+        self.stock_adaptation_climat_mde: float = 0.0
+        self.investissements_capital_humain: list[tuple[int, float]] = []
+        self.investissements_capacites_defense: list[tuple[int, float]] = []
+
+    def _capital_humain_mature(self, annee: int) -> float:
+        """Investissements éducatifs arrivés à maturité (proxy en Md€), P18."""
+        return round(sum(
+            montant for annee_maturite, montant in self.investissements_capital_humain
+            if annee >= annee_maturite
+        ), 2)
+
+    def _capacites_defense_matures(self, annee: int) -> float:
+        """Investissements BITD arrivés à maturité (proxy en Md€), P19."""
+        return round(sum(
+            montant for annee_maturite, montant in self.investissements_capacites_defense
+            if annee >= annee_maturite
+        ), 2)
+
+    def _investissements_matures(self, annee: int) -> tuple[float, float]:
+        """Stock mature (Md€) et rendement annuel (Md€ de PIB) à l'année donnée.
+
+        Chaque programme investi rapporte, une fois mature,
+        `RENDEMENT_INVESTISSEMENTS_MATURES` Md€ de PIB par Md€ investi et par an,
+        plafonné à `PLAFOND_RENDEMENT_PAR_PROGRAMME_MDE` par programme.
+        """
+        stock_mature = 0.0
+        rendement = 0.0
+        for annee_maturite, montant in self.investissements_differes:
+            if annee >= annee_maturite:
+                stock_mature += montant
+                rendement += min(
+                    PLAFOND_RENDEMENT_PAR_PROGRAMME_MDE,
+                    montant * RENDEMENT_INVESTISSEMENTS_MATURES,
+                )
+        return round(stock_mature, 2), round(rendement, 2)
 
     def appliquer_etape(
         self, decision: DecisionPolitique, *, facteur_activite: float = 1.0
@@ -183,6 +262,11 @@ class MoteurSimulationSystemique:
         # - Coupes dans les dotations aux collectivités : multiplicateur récessif fort (-0.85)
         # - Choc d'inflation importée sur l'activité : impact récessif (-0.25 par point d'inflation au-dessus de 2%)
         impact_choc_inflation = -max(0.0, (self.mondial.inflation_globale_pct - 2.0) * 3.5)
+        stock_investissements_matures, rendement_investissements_matures = (
+            self._investissements_matures(decision.annee)
+        )
+        stock_capital_humain_mature = self._capital_humain_mature(decision.annee)
+        stock_capacites_defense_matures = self._capacites_defense_matures(decision.annee)
         impact_multiplicateur = (
             (decision.baisse_tva_energie_5_5_mde * 0.75)
             - ((decision.recettes_fraude_ia_mde + decision.taxe_superprofits_rachats_mde + decision.extension_ttf_mde + decision.recettes_pilier2_ocde_mde + decision.recettes_macf_carbone_mde) * 0.12)
@@ -194,6 +278,13 @@ class MoteurSimulationSystemique:
             # légèrement récessif (−0,12), comme les prélèvements existants.
             + (decision.depenses_prioritaires_mde * 0.55)
             - (decision.recettes_nouvelles_mde * 0.12)
+            # Deux mandatures consécutives : le « second dividende » de la dette
+            # (baisse de charge refinancée, réinvestie) agit comme une dépense
+            # publique financée sans déficit, et les investissements à cycle
+            # long de la mandature 1 arrivent à maturité en mandature 2
+            # (rendement différé, courbe en J).
+            + (decision.reinvestissement_dividende_dette_mde * 0.55)
+            + rendement_investissements_matures
         )
         pib_annee = round(max(500.0, pib_t + impact_multiplicateur), 2)
 
@@ -310,6 +401,145 @@ class MoteurSimulationSystemique:
                 100.0, max(0.0, self.national.confiance_democratique + effets_geo.confiance_delta)
             )
 
+        # ── PROFONDEUR TEMPORELLE : DEUX MANDATURES CONSÉCUTIVES ─────────────
+        # Dynamiques propres à la période de dix ans (docs/RD_DOUBLE_MANDATURE.md) :
+        # usure du capital politique, année électorale, verrou constitutionnel,
+        # clauses de revoyure et « second dividende » de la dette. Tous ces effets
+        # sont neutres tant que les champs dédiés de la décision restent à leurs
+        # valeurs par défaut (scénarios quinquennaux inchangés).
+        usure_politique = max(0.0, min(100.0, decision.usure_politique_pts))
+        if usure_politique > 0.0:
+            # La réforme de fatigue : l'usure érode la confiance et tend le climat
+            # social, même sans nouvelle mesure impopulaire.
+            self.national.confiance_democratique = max(
+                0.0, self.national.confiance_democratique - usure_politique * 0.08
+            )
+            self.local.tension_sociale_territoriale = min(
+                100.0, self.local.tension_sociale_territoriale + usure_politique * 0.06
+            )
+            commentaires.append(
+                f"[Deux mandatures] Usure du capital politique à {usure_politique:.0f}/100 : "
+                f"chaque réforme coûte désormais plus cher politiquement."
+            )
+        if decision.verrouillage_irreversibilite:
+            # L'ancrage constitutionnel crédibilise la trajectoire : les marchés et
+            # les citoyens savent qu'une alternance ne défera pas les réformes.
+            self.national.confiance_democratique = min(
+                100.0, self.national.confiance_democratique + 2.0
+            )
+            commentaires.append(
+                "[Deux mandatures] Ancrage constitutionnel des réformes adopté : "
+                "prime de crédibilité (+2 pts de confiance démocratique)."
+            )
+        if decision.clause_revoyure_evaluation:
+            self.national.confiance_democratique = min(
+                100.0, self.national.confiance_democratique + 1.0
+            )
+        if decision.reinvestissement_dividende_dette_mde > 0.0:
+            # La baisse de la charge de la dette finance la restitution aux ménages :
+            # c'est une dépense gagée, donc sans déficit supplémentaire, et elle
+            # apaise le corps social.
+            self.local.tension_sociale_territoriale = max(
+                0.0,
+                self.local.tension_sociale_territoriale
+                - decision.reinvestissement_dividende_dette_mde * 0.3,
+            )
+            commentaires.append(
+                f"[Deux mandatures] Second dividende : {decision.reinvestissement_dividende_dette_mde:.1f} Md€ "
+                f"d'économies d'intérêts réinvestis en pouvoir d'achat et services publics."
+            )
+
+        # ───────────────────────────────────────────────────────────────────────
+        # PROFONDEUR TEMPORELLE, PHASE 2 (R&D « deux mandatures », points P16-P21).
+        # Chaque dynamique est neutre tant que son champ reste à sa valeur par
+        # défaut, afin de préserver strictement les scénarios quinquennaux.
+        # ───────────────────────────────────────────────────────────────────────
+
+        # P16 : besoin de rattrapage du capital public (proxy annualisé, cf. doc).
+        # Il n'est activé que si l'appel simule une période longue (>5 ans) ; le
+        # stock est un besoin d'investissement non couvert, pas une dette comptable.
+        entretien_mde = max(0.0, decision.entretien_capital_public_mde)
+        if decision.horizon_deux_mandatures:
+            self.dette_technique_infrastructures_mde = max(
+                0.0,
+                self.dette_technique_infrastructures_mde
+                + BESOIN_ANNUALISE_CAPITAL_PUBLIC_MDE - entretien_mde,
+            )
+            if entretien_mde > 0.0 or self.dette_technique_infrastructures_mde > 0.0:
+                commentaires.append(
+                    f"[Deux mandatures, P16] Besoin annualisé de référence : "
+                    f"{BESOIN_ANNUALISE_CAPITAL_PUBLIC_MDE:.2f} Md€ ; effort déclaré "
+                    f"{entretien_mde:.1f} Md€ ; besoin non couvert cumulé (proxy) : "
+                    f"{self.dette_technique_infrastructures_mde:.1f} Md€."
+                )
+
+        # P17 : exposition climatique. Le chiffre annualisé est un proxy de
+        # pertes sociétales, distinct des dépenses APU : il n'est jamais ajouté
+        # au déficit public. Le rendement du fonds Barnier est annualisé sur
+        # 30 ans et constitue une hypothèse de scénario, pas un taux universel.
+        dommages_climat_subis_mde = 0.0
+        dommages_climat_evites_mde = 0.0
+        if decision.horizon_deux_mandatures:
+            self.stock_adaptation_climat_mde += max(
+                0.0, decision.effort_adaptation_climat_mde
+            )
+            dommages_climat_subis_mde = DOMMAGES_CLIMAT_ANNUALISES_MDE
+            dommages_climat_evites_mde = min(
+                dommages_climat_subis_mde,
+                self.stock_adaptation_climat_mde * RENDEMENT_PREVENTION_ANNUALISE,
+            )
+            if decision.effort_adaptation_climat_mde > 0.0:
+                commentaires.append(
+                    f"[Deux mandatures, P17] Risque annualisé : "
+                    f"{dommages_climat_subis_mde:.2f} Md€ ; dommages évités estimés : "
+                    f"{dommages_climat_evites_mde:.2f} Md€ (proxy hors déficit APU)."
+                )
+
+        # P18 : capital humain. On enregistre les cohortes de dépenses et leur
+        # date de maturité exploratoire, sans inventer de rendement PIB.
+        if decision.capital_humain_mde > 0.0:
+            self.investissements_capital_humain.append(
+                (decision.annee + DELAI_MATURITE_CAPITAL_HUMAIN,
+                 decision.capital_humain_mde)
+            )
+        if stock_capital_humain_mature > 0.0:
+            commentaires.append(
+                f"[Deux mandatures, P18] Stock d'investissements éducatifs arrivé "
+                f"à maturité (proxy) : {stock_capital_humain_mature:.1f} Md€."
+            )
+
+        # P19 : registre de montée en capacité BITD (délai LPM de référence).
+        # Le stock est exposé, mais n'est pas converti arbitrairement en spread.
+        if decision.montee_capacite_defense_mde > 0.0:
+            self.investissements_capacites_defense.append(
+                (decision.annee + DELAI_MATURITE_CAPACITES_DEFENSE,
+                 decision.montee_capacite_defense_mde)
+            )
+        if stock_capacites_defense_matures > 0.0:
+            commentaires.append(
+                f"[Deux mandatures, P19] Stock d'investissements BITD arrivé "
+                f"à maturité (proxy) : {stock_capacites_defense_matures:.1f} Md€."
+            )
+
+        # P20 : capacité d'exécution administrative. Le nombre simultané est un
+        # paramètre explicite (non inféré de tous les interrupteurs du catalogue).
+        # Le seuil et les effets ci-dessous sont des stress-test, non des valeurs
+        # institutionnelles universelles.
+        reformes_actives = max(0.0, decision.reformes_structurelles_actives)
+        if reformes_actives > SEUIL_SATURATION_ADMINISTRATIVE:
+            exces = reformes_actives - SEUIL_SATURATION_ADMINISTRATIVE
+            self.local.tension_sociale_territoriale = min(
+                100.0, self.local.tension_sociale_territoriale + exces * 0.3
+            )
+            self.national.confiance_democratique = max(
+                0.0, self.national.confiance_democratique - exces * 0.15
+            )
+            commentaires.append(
+                f"[Deux mandatures, P20] Charge simultanée : {reformes_actives:.0f} réformes "
+                f"(seuil exploratoire : {SEUIL_SATURATION_ADMINISTRATIVE}) ; stress-test "
+                "d'une capacité administrative saturée."
+            )
+
         # =========================================================================
         # 3. STRATE NATIONALE (État, Sécurité Sociale, Déficit au sens de Maastricht)
         # =========================================================================
@@ -366,6 +596,14 @@ class MoteurSimulationSystemique:
             # Climat pacifié et confiance civique en hausse
             self.national.parlement.probabilite_motion_censure_pct = max(10.0, 52.0 - (self.national.confiance_democratique * 0.4))
 
+        # Deux mandatures consécutives : l'usure du capital politique fragilise
+        # la majorité (députés sortants hésitants, fronde interne).
+        if usure_politique > 0.0:
+            self.national.parlement.probabilite_motion_censure_pct = min(
+                95.0,
+                self.national.parlement.probabilite_motion_censure_pct + usure_politique * 0.15,
+            )
+
         # =========================================================================
         # 4. STRATE MONDIALE (Agence France Trésor, Spreads, OAT 10 ans, Rating)
         # =========================================================================
@@ -412,6 +650,31 @@ class MoteurSimulationSystemique:
             self.mondial.spread_oat_bund_bps = min(
                 600.0, self.mondial.spread_oat_bund_bps + effets_geo.prime_spread_bps
             )
+
+        # Deux mandatures consécutives : prime de risque électorale. Une année de
+        # scrutin national général renchérit le crédit de l'État tant que les
+        # réformes ne sont pas ancrées dans la Constitution (risque d'abrogation
+        # par une alternance). Le verrou constitutionnel divise la prime par trois.
+        if decision.annee_electorale_majeure:
+            prime_electorale_bps = 4.0 if decision.verrouillage_irreversibilite else 12.0
+            self.mondial.spread_oat_bund_bps = min(
+                600.0, self.mondial.spread_oat_bund_bps + prime_electorale_bps
+            )
+            incertitude_sociale = 0.8 if decision.clause_revoyure_evaluation else 2.0
+            self.local.tension_sociale_territoriale = min(
+                100.0, self.local.tension_sociale_territoriale + incertitude_sociale
+            )
+            if not decision.verrouillage_irreversibilite:
+                self.national.confiance_democratique = max(
+                    0.0, self.national.confiance_democratique - 1.0
+                )
+            commentaires.append(
+                f"[Deux mandatures] Année électorale majeure : prime d'incertitude de "
+                f"{prime_electorale_bps:.0f} bps sur le spread souverain"
+                + (" (réformes verrouillées)." if decision.verrouillage_irreversibilite
+                   else " (réformes révocables : risque d'alternance).")
+            )
+
         if effets_geo.degradation_notation:
             self.mondial.note_souveraine = "BBB+"
             commentaires.append(
@@ -429,7 +692,11 @@ class MoteurSimulationSystemique:
 
         # Transmission de l'OAT aux taux de crédit bancaire dans l'économie réelle
         self.mondial.taux_credit_pme_entreprises = round(self.mondial.taux_oat_france_10ans + 0.85, 2)
-        self.mondial.taux_credit_immobilier_menages = round(self.mondial.taux_oat_france_10ans - 0.30, 2)
+        self.mondial.taux_credit_immobilier_menages = round(
+            self.reference["taux_credit_immobilier_pct"]
+            + (self.mondial.taux_oat_france_10ans - self.reference["taux_oat_pct"]),
+            2,
+        )
 
         # Règle de sensibilité de la charge de la dette (AFT - roll-over de maturité moyenne 8.5 ans)
         # Transmission progressive : seulement ~35 % du changement de taux impacte la
@@ -446,12 +713,36 @@ class MoteurSimulationSystemique:
             f"maturité moyenne {self.mondial.maturite_moyenne_dette_ans:.1f} a)."
         )
 
+        # Deux mandatures consécutives : les investissements à cycle long
+        # (EPR2, lois de programmation militaire, prévention santé, recherche)
+        # sont payés MAINTENANT — ils dégradent le solde à court terme (courbe
+        # en J) — mais leur rendement n'arrive qu'à maturité, au-delà de cinq
+        # ans, c'est-à-dire pendant la mandature suivante.
+        if decision.investissements_cycle_long_mde > 0.0:
+            annee_maturite = decision.annee + DELAI_MATURITE_INVESTISSEMENTS
+            self.investissements_differes.append(
+                (annee_maturite, decision.investissements_cycle_long_mde)
+            )
+            commentaires.append(
+                f"[Deux mandatures] Investissement à cycle long de "
+                f"{decision.investissements_cycle_long_mde:.1f} Md€ : coût immédiat, "
+                f"rendement différé à partir de l'année {annee_maturite} (courbe en J)."
+            )
+
         # Dépenses consolidées effectives des APU
         depenses_primaires_apu = (
             (self.reference["depenses_primaires_mde"] - self.national.etat.charge_nette_dette_mde)
             - economies_volet3
             + effets_geo.surcout_defense_mde
             + decision.depenses_prioritaires_mde
+            + decision.investissements_cycle_long_mde
+            # Phase 2 (P16-P19) : seuls les décaissements réellement choisis
+            # entrent dans le budget APU. Les dommages climatiques évités sont
+            # un indicateur sociétal distinct, pas une recette publique.
+            + max(0.0, decision.entretien_capital_public_mde)
+            + max(0.0, decision.effort_adaptation_climat_mde)
+            + max(0.0, decision.capital_humain_mde)
+            + max(0.0, decision.montee_capacite_defense_mde)
         )
         depenses_totales_apu = depenses_primaires_apu + charge_dette_effective
 
@@ -529,6 +820,7 @@ class MoteurSimulationSystemique:
             spread_bund_bps=round(self.mondial.spread_oat_bund_bps, 1),
             note_souveraine=self.mondial.note_souveraine,
             taux_credit_pme=round(self.mondial.taux_credit_pme_entreprises, 2),
+            taux_credit_immobilier_menages=round(self.mondial.taux_credit_immobilier_menages, 2),
             cours_petrole_usd=round(self.mondial.cours_petrole_brent_usd, 1),
             taux_change_eur_usd=round(self.mondial.taux_change_eur_usd, 3),
             facture_energetique_mde=round(self.mondial.facture_energetique_nette_mde, 1),
@@ -542,6 +834,22 @@ class MoteurSimulationSystemique:
             prime_risque_geopolitique_bps=round(self.geo.prime_risque_geopolitique_bps, 1),
             chokepoints_sous_tension=self.geo.nombre_chokepoints_sous_tension,
             stocks_strategiques_petrole_jours=round(self.geo.stocks_strategiques_petrole_jours, 1),
+            usure_politique_pts=round(usure_politique, 1),
+            irreversibilite_reformes_active=bool(decision.verrouillage_irreversibilite),
+            investissements_matures_mde=stock_investissements_matures,
+            dette_technique_infrastructures_mde=round(self.dette_technique_infrastructures_mde, 2),
+            entretien_capital_public_mde=round(max(0.0, decision.entretien_capital_public_mde), 2),
+            dommages_climat_subis_mde=round(dommages_climat_subis_mde, 2),
+            dommages_climat_evites_mde=round(dommages_climat_evites_mde, 2),
+            capital_humain_mature_mde=stock_capital_humain_mature,
+            capacites_defense_matures_mde=stock_capacites_defense_matures,
+            investissements_longs_engages_cumules_mde=round(
+                sum(montant for _, montant in self.investissements_differes)
+                + sum(montant for _, montant in self.investissements_capital_humain)
+                + sum(montant for _, montant in self.investissements_capacites_defense),
+                2,
+            ),
+            reformes_structurelles_actives=reformes_actives,
             commentaires=commentaires,
         )
 

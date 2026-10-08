@@ -124,7 +124,7 @@ Trois options, de la plus rapide à la plus complète :
 
 ### A bis. Depuis l'intégration du simulateur au site M.R.S.C
 
-Le site M.R.S.C embarque désormais le moteur du simulateur (copie datée dans `simulateur/`), sa page publiée (`simulateur/index.html`) et les fonctions `api/*.py` qui exposent ses 12 routes — voir `docs/integration-simulateur.md`. Conséquence pratique pour l'ancien projet : au lieu de bricoler une page d'accueil dans le dépôt du simulateur, il suffit de publier **ce** dépôt sur Vercel (l'outil y est complet et interactif), et de retirer du dépôt du simulateur le champ *Website* qui pointe vers l'adresse 404 — ou de le faire pointer vers la page du simulateur du site.
+Le site M.R.S.C embarque désormais le moteur du simulateur (copie datée dans `simulateur/`), sa page publiée (`simulateur/index.html`) et les fonctions `api/*.py` qui exposent ses 16 routes — voir `docs/integration-simulateur.md`. Conséquence pratique pour l'ancien projet : au lieu de bricoler une page d'accueil dans le dépôt du simulateur, il suffit de publier **ce** dépôt sur Vercel (l'outil y est complet et interactif), et de retirer du dépôt du simulateur le champ *Website* qui pointe vers l'adresse 404 — ou de le faire pointer vers la page du simulateur du site.
 
 ### B. Pour publier le site M.R.S.C sur Vercel (dépôt MRSC, celui-ci)
 

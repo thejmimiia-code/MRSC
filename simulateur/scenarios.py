@@ -1,5 +1,8 @@
 """
-simulateur/scenarios.py — Catalogue des scénarios types de simulation sur 5 ans.
+simulateur/scenarios.py — Catalogue des scénarios types de simulation.
+
+Scénarios quinquennaux (une mandature) et scénarios décennaux
+(deux mandatures consécutives : cf. docs/RD_DOUBLE_MANDATURE.md).
 """
 
 
@@ -89,6 +92,180 @@ def get_scenario_mandature_5_ans() -> list[DecisionPolitique]:
             delta_dotation_dgf_mde=0.0,
         ),
     ]
+
+
+# =============================================================================
+# SCÉNARIOS DÉCENNAUX — DEUX MANDATURES CONSÉCUTIVES (2027-2037)
+# (R&D : docs/RD_DOUBLE_MANDATURE.md — points stratégiques systématiques de la
+#  période de dix ans : calendrier électoral, verrou constitutionnel, dividende
+#  de la dette, investissements à cycle long, usure du capital politique.)
+# =============================================================================
+
+#: Marges du plan de mandature à régime de croisière (Année 5 et au-delà).
+_REGIME_CROISIERE = {
+    "recettes_fraude_ia_mde": 10.0,
+    "conditionnement_aides_entreprises_mde": 15.0,
+    "taxe_superprofits_rachats_mde": 6.0,
+    "extension_ttf_mde": 5.0,
+    "fusion_doublons_territoriaux_mde": 8.0,
+    "commande_publique_massifiee_mde": 6.0,
+    "extinction_niches_inefficaces_mde": 7.0,
+    "fraude_sociale_criminelle_mde": 3.0,
+    "baisse_tva_energie_5_5_mde": 9.0,
+}
+
+
+def get_scenario_double_mandature() -> list[DecisionPolitique]:
+    """
+    Scénario « deux mandatures consécutives » (2027-2037, dix exercices).
+
+    * Années 1-5  : plan de mandature quinquennal du dossier global, plus les
+      investissements à cycle long déjà engagés à l'instant T (EPR2, LPM
+      2024-2030, France 2030, prévention santé) dont le rendement n'arrive
+      qu'en fin de période (courbe en J) ; année 5 = année électorale 2032
+      (présidentielle + législatives, évaluation de bilan par clauses de
+      revoyure) ;
+    * Année 6     : investiture de la mandature 2, ancrage constitutionnel
+      des réformes de la mandature 1 (verrou d'irréversibilité) ;
+    * Années 7-10 : régime de croisière + « second dividende » de la dette
+      (le stock, maturité moyenne 8,5 ans, est intégralement refinancé aux
+      taux détendus) + poursuite des investissements à cycle long + usure
+      croissante du capital politique, maximale en fin de seconde mandature
+      (élection 2037).
+    """
+    premiere = get_scenario_mandature_5_ans()
+    # Année 4 : les investissements à cycle long déjà engagés à l'instant T
+    # (EPR2, LPM 2024-2030) sont poursuivis ; leur rendement est différé.
+    premiere[3].investissements_cycle_long_mde = 4.0
+    premiere[3].description = (
+        "Année 4 : Montée en puissance internationale DAC7/DAC8, rationalisation foncière "
+        "et investissements à cycle long déjà engagés (EPR2, LPM 2024-2030)"
+    )
+    # Année 5 : année électorale 2032 + investissements France 2030 / prévention.
+    premiere[4].annee_electorale_majeure = True
+    premiere[4].clause_revoyure_evaluation = True
+    premiere[4].investissements_cycle_long_mde = 5.0
+    premiere[4].description = (
+        "Année 5 : Régime de croisière stabilisé (+60 Md€ / an), investissements à cycle "
+        "long (France 2030, prévention santé) et année électorale 2032 "
+        "(présidentielle + législatives, évaluation de bilan)"
+    )
+    seconde = [
+        DecisionPolitique(
+            annee=6,
+            description="Mandature 2, An 1 : investiture 2032, verrou constitutionnel des réformes "
+                        "de la mandature 1 et premiers investissements à cycle long (EPR2, LPM)",
+            verrouillage_irreversibilite=True,
+            clause_revoyure_evaluation=True,
+            investissements_cycle_long_mde=4.0,
+            **_REGIME_CROISIERE,
+        ),
+        DecisionPolitique(
+            annee=7,
+            description="Mandature 2, An 2 : le refinancement de la dette produit ses premiers "
+                        "dividendes (3 Md€ réinvestis), poursuite des investissements à cycle long",
+            verrouillage_irreversibilite=True,
+            clause_revoyure_evaluation=True,
+            reinvestissement_dividende_dette_mde=3.0,
+            investissements_cycle_long_mde=5.0,
+            **_REGIME_CROISIERE,
+        ),
+        DecisionPolitique(
+            annee=8,
+            description="Mandature 2, An 3 : dividende de la dette à 5 Md€, usure politique naissante",
+            verrouillage_irreversibilite=True,
+            clause_revoyure_evaluation=True,
+            reinvestissement_dividende_dette_mde=5.0,
+            investissements_cycle_long_mde=6.0,
+            usure_politique_pts=10.0,
+            **_REGIME_CROISIERE,
+        ),
+        DecisionPolitique(
+            annee=9,
+            description="Mandature 2, An 4 : maturité des premiers investissements à cycle long, "
+                        "dividende à 7 Md€, usure politique croissante",
+            verrouillage_irreversibilite=True,
+            clause_revoyure_evaluation=True,
+            reinvestissement_dividende_dette_mde=7.0,
+            investissements_cycle_long_mde=6.0,
+            usure_politique_pts=20.0,
+            **_REGIME_CROISIERE,
+        ),
+        DecisionPolitique(
+            annee=10,
+            description="Mandature 2, An 5 : année électorale 2037 — bilan des deux mandatures, "
+                        "réformes verrouillées, dividende à 8 Md€, usure de fin de cycle",
+            annee_electorale_majeure=True,
+            verrouillage_irreversibilite=True,
+            clause_revoyure_evaluation=True,
+            reinvestissement_dividende_dette_mde=8.0,
+            investissements_cycle_long_mde=6.0,
+            usure_politique_pts=30.0,
+            **_REGIME_CROISIERE,
+        ),
+    ]
+    trajectoire = premiere + seconde
+    for decision in trajectoire:
+        decision.horizon_deux_mandatures = True
+        decision.entretien_capital_public_mde = 6.0
+        decision.effort_adaptation_climat_mde = 1.0
+        decision.capital_humain_mde = 2.0
+        decision.montee_capacite_defense_mde = 2.0
+        decision.reformes_structurelles_actives = 6.0
+    return trajectoire
+
+
+def get_scenario_alternance_2032() -> list[DecisionPolitique]:
+    """
+    Stress-test « alternance 2032 » : deux mandatures sans verrou.
+
+    La mandature 1 déroule le plan de mandature, mais les réformes ne sont
+    jamais ancrées dans la Constitution. En 2032, une majorité hostile
+    l'emporte : elle n'abroge pas les recettes fiscales (peu coûteux
+    politiquement de les conserver) mais gèle les investissements à cycle
+    long, ne réinvestit aucun dividende de la dette et laisse l'usure du
+    capital politique monter jusqu'à l'élection de 2037.
+
+    Ce scénario mesure, par comparaison avec `get_scenario_double_mandature`,
+    le coût de l'absence de verrouillage constitutionnel (limite assumée du
+    prototype : l'abrogation effective des réformes n'est pas encore modélisée,
+    cf. docs/RD_DOUBLE_MANDATURE.md §Limites).
+    """
+    premiere = get_scenario_mandature_5_ans()
+    # Les investissements à cycle long engagés en mandature 1 existent dans les
+    # deux scénarios : les infrastructures mûrissent quel que soit le vainqueur
+    # de 2032 (c'est le réinvestissement de la mandature 2 qui diverge).
+    premiere[3].investissements_cycle_long_mde = 4.0
+    premiere[4].annee_electorale_majeure = True
+    premiere[4].investissements_cycle_long_mde = 5.0
+    premiere[4].description = (
+        "Année 5 : Régime de croisière et année électorale 2032 — réformes NON verrouillées"
+    )
+    seconde = [
+        DecisionPolitique(
+            annee=annee,
+            description=(
+                f"Mandature d'alternance, An {annee - 5} : réformes révocables, "
+                f"investissements à cycle long gelés, aucun dividende réinvesti"
+                + (" — année électorale 2037" if annee == 10 else "")
+            ),
+            annee_electorale_majeure=(annee == 10),
+            usure_politique_pts=min(70.0, 30.0 + (annee - 6) * 10.0),
+            **_REGIME_CROISIERE,
+        )
+        for annee in range(6, 11)
+    ]
+    trajectoire = premiere + seconde
+    for decision in trajectoire:
+        decision.horizon_deux_mandatures = True
+        decision.entretien_capital_public_mde = 6.0
+        decision.effort_adaptation_climat_mde = 1.0
+        decision.reformes_structurelles_actives = 6.0
+        if decision.annee <= 5:
+            # Même investissement de départ avant le scrutin de 2032.
+            decision.capital_humain_mde = 2.0
+            decision.montee_capacite_defense_mde = 2.0
+    return trajectoire
 
 
 def get_scenario_statut_quo() -> list[DecisionPolitique]:

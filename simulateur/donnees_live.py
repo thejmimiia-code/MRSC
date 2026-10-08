@@ -100,14 +100,70 @@ def ad_eurostat(payload: Any, chemin: str | None = None) -> tuple[float | None, 
     elif not valeur:
         raise ErreurSource("réponse Eurostat sans observation (value vide)")
     else:
-        cle = next(iter(valeur))  # clé la plus petite = dernière période demandée
+        # Avec lastTimePeriod>1, les indices JSON-stat vont du plus ancien au
+        # plus récent. Certains derniers mois sont absents (ex. séries par
+        # catégorie avant la publication complète) : retenir le dernier point
+        # effectivement publié plutôt que le premier ou un zéro artificiel.
+        cles_numeriques = [cle_valeur for cle_valeur in valeur if str(cle_valeur).isdigit()]
+        cle = max(cles_numeriques, key=int) if cles_numeriques else next(iter(valeur))
+    valeur_observee = valeur[cle]
+    if valeur_observee is None:
+        raise ErreurSource("dernière observation Eurostat manquante")
     periode = None
     try:
-        codes = list(payload["dimension"]["time"]["category"]["index"].keys())
-        periode = codes[int(cle)] if int(cle) < len(codes) else codes[-1]
-    except (KeyError, IndexError, TypeError, ValueError):
+        index_temps = payload["dimension"]["time"]["category"]["index"]
+        indice = int(cle)
+        periode = next(
+            (code for code, position in index_temps.items() if int(position) == indice),
+            None,
+        )
+    except (KeyError, TypeError, ValueError):
         periode = None
-    return float(valeur[cle]), periode
+    return float(valeur_observee), periode
+
+
+def qualite_eurostat(payload: Any, cle: str | None) -> str | None:
+    """Renvoie le code de statut de l'observation JSON-stat, s'il existe.
+
+    Eurostat stocke les marqueurs (e = estimé, p = provisoire, f = prévision,
+    i = imputé, etc.) dans un objet `status` parallèle à `value`. Le code brut
+    est conservé afin de ne pas perdre les statuts moins courants.
+    """
+    if not isinstance(payload, dict) or cle is None:
+        return None
+    statuts = payload.get("status") or {}
+    if isinstance(statuts, dict):
+        statut = statuts.get(str(cle))
+    elif isinstance(statuts, list):
+        try:
+            statut = statuts[int(cle)]
+        except (IndexError, TypeError, ValueError):
+            statut = None
+    else:
+        statut = None
+    return str(statut) if statut not in (None, "") else None
+
+
+_LIBELLES_QUALITE = {
+    "b": "rupture de série",
+    "c": "confidentielle",
+    "d": "définition différente",
+    "e": "estimée",
+    "f": "prévision",
+    "i": "imputée",
+    "m": "valeur manquante",
+    "p": "provisoire",
+    "s": "valeur supprimée",
+    "u": "fiabilité limitée",
+}
+
+
+def libelle_qualite(code: str | None) -> str:
+    """Traduit les marqueurs connus en conservant le code source ailleurs."""
+    if not code:
+        return "aucun marqueur fourni par la source"
+    libelle = _LIBELLES_QUALITE.get(code.lower())
+    return f"{libelle} (code {code})" if libelle else f"marqueur source {code}"
 
 
 def ad_sdmx(payload: Any, chemin: str | None = None) -> tuple[float | None, str | None]:
@@ -257,6 +313,10 @@ class Indicateur:
     #: Facteur appliqué aux valeurs lues et de référence (conversion d'unité,
     #: ex. l'API Eurostat publie des millions d'euros, le modèle raisonne en Md€).
     conversion: float = 1.0
+    #: Cadence réelle de publication; ne signifie pas que la donnée est quotidienne.
+    frequence: str = ""
+    #: Marqueur éventuel attaché à une valeur de référence embarquée.
+    qualite_reference: str | None = None
 
     @property
     def valeur_reference(self) -> float | None:
@@ -274,6 +334,7 @@ class Lecture:
     url: str
     statut: str              # "live" | "reference" | "indisponible"
     detail: str = ""
+    qualite_code: str | None = None  # statut brut de l'observation (ex. Eurostat: e, p, f)
     horodatage: str = field(
         default_factory=lambda: datetime.now(UTC).isoformat(timespec="seconds")
     )
@@ -363,13 +424,54 @@ def src_stooq(symbole: str, libelle: str) -> Source:
 
 
 #: Date de vérification des valeurs embarquées (lecture réseau réelle).
-DATE_VERIFICATION = "2026-10-05"
+DATE_VERIFICATION = "2026-10-07"
 
 # ─── Registre des indicateurs ──────────────────────────────────────────────
 #: Toute clé du registre peut alimenter la calibration du moteur
 #: (`moteur_parametrique.calibrer_contexte`) ou l'affichage du contexte.
 
 INDICATEURS: dict[str, Indicateur] = {}
+
+_FREQUENCES_PAR_CLE = {
+    "pib_nominal_mde": "Annuelle; comptes nationaux publiés avec révisions.",
+    "dette_publique_pct_pib": "Annuelle; comptes publics notifiés et révisés.",
+    "deficit_public_pct_pib": "Annuelle; comptes publics notifiés et révisés.",
+    "depenses_publiques_pct_pib": "Annuelle; comptes nationaux des administrations publiques.",
+    "dette_souveraine_negociable_mde": "Mise à jour selon les enregistrements du portail AFT.",
+    "taux_oat_france_10ans": "Mensuelle (série BCE des taux à long terme).",
+    "taux_bund_allemagne_10ans": "Mensuelle (série BCE des taux à long terme).",
+    "taux_bce_depot": "À chaque décision de politique monétaire de la BCE.",
+    "eur_usd": "Quotidienne les jours ouvrés (taux de référence BCE).",
+    "eur_cny": "Quotidienne les jours ouvrés (taux de référence BCE).",
+    "eur_gbp": "Quotidienne les jours ouvrés (taux de référence BCE).",
+    "eur_chf": "Quotidienne les jours ouvrés (taux de référence BCE).",
+    "brent_usd": "Quotidienne les jours de marché; cours volatil.",
+    "gaz_ttf_eur_mwh": "Intra-journalière / quotidienne selon la série Energy-Charts.",
+    "prix_carbone_ets": "Quotidienne les jours de marché; collecte manuelle ou portail.",
+    "taux_chomage_pct": "Mensuelle; série désaisonnalisée, révisions possibles.",
+    "taux_chomage_jeunes_pct": "Mensuelle; série désaisonnalisée, révisions possibles.",
+    "inflation_france_pct": "Mensuelle; flash en fin de mois puis données complètes vers le 16 du mois suivant.",
+    "inflation_zone_euro_pct": "Mensuelle; flash en fin de mois puis données complètes vers le 16 du mois suivant.",
+    "taux_pauvrete_pct": "Annuelle; publication avec décalage et révisions possibles.",
+    "indice_gini": "Annuelle; publication avec décalage et révisions possibles.",
+    "emissions_co2_mt": "Annuelle; inventaire publié avec environ 18 mois de décalage.",
+    "depenses_sante_pct_pib": "Annuelle; comptes des administrations publiques.",
+    "depenses_education_pct_pib": "Annuelle; comptes des administrations publiques.",
+    "depenses_defense_pct_pib": "Annuelle; comptes publics, publication avec décalage.",
+    "depenses_protection_sociale_pct_pib": "Annuelle; comptes des administrations publiques.",
+    "depenses_justice_pct_pib": "Annuelle; comptes des administrations publiques.",
+    "depenses_ordre_securite_pct_pib": "Annuelle; comptes des administrations publiques.",
+    "depenses_investissement_public_pct_pib": "Annuelle; comptes des administrations publiques.",
+    "recettes_publiques_pct_pib": "Annuelle; comptes des administrations publiques.",
+    "taux_prelevement_obligatoire_pct_pib": "Annuelle; comptes nationaux et documents budgétaires.",
+    "part_energie_importee_pct": "Annuelle; bilan énergétique publié avec décalage.",
+    "demographie_65plus_pct": "Annuelle; statistiques démographiques.",
+    "population_france": "Annuelle; estimations de population révisables.",
+    "dette_locale_mde": "Annuelle; comptes locaux publiés avec décalage.",
+    "solde_commercial_mde": "Mensuelle; statistiques du commerce extérieur.",
+    "production_industrielle_indice": "Mensuelle; indice corrigé des variations saisonnières et calendaires.",
+    "taux_emploi_pct": "Annuelle; enquête Emploi et comptes du marché du travail.",
+}
 
 
 def _declarer(indicateur: Indicateur) -> Indicateur:
@@ -384,6 +486,10 @@ def _declarer(indicateur: Indicateur) -> Indicateur:
             indicateur.note.strip()
             + " Valeur de référence non embarquée : à collecter en ligne via l'API."
         ).strip()
+    indicateur.frequence = indicateur.frequence or _FREQUENCES_PAR_CLE.get(
+        indicateur.cle,
+        "Fréquence propre au jeu de données; consulter le calendrier officiel de la source.",
+    )
     INDICATEURS[indicateur.cle] = indicateur
     return indicateur
 
@@ -399,6 +505,7 @@ _declarer(Indicateur(
     ),
     reference=(2991055.9, "2025 (provisoire)", "Eurostat NAMA_10_GDP", DATE_VERIFICATION),
     conversion=0.001,  # l'API publie 2 991 056 M€ ; le modèle raisonne en milliards d'euros
+    qualite_reference="p",
     note="PIB aux prix courants (Eurostat publie 2 991 056 M€, soit 2 991 Md€) ; "
          "écart avec la comptabilité nationale INSEE < 1 %.",
 ))
@@ -416,8 +523,9 @@ _declarer(Indicateur(
     unite="% du PIB", categorie="Finances publiques",
     sources=(src_eurostat("gov_10dd_edpt1", geo="FR", unit="PC_GDP", na_item="B9",
                           sector="S13", lastTimePeriod="1"),),
-    reference=(5.1, "2025", "Eurostat GOV_10DD_EDPT1", DATE_VERIFICATION),
-    note="Valeur positive = besoin de financement (déficit).",
+    reference=(-5.1, "2025", "Eurostat GOV_10DD_EDPT1", DATE_VERIFICATION),
+    conversion=-1.0,  # Eurostat publie B9 négatif en cas de déficit; le moteur affiche le taux positif
+    note="Eurostat publie le solde B9 négatif en cas de déficit; conversion de signe pour exposer le taux de déficit en valeur positive.",
 ))
 _declarer(Indicateur(
     cle="depenses_publiques_pct_pib",
@@ -460,6 +568,22 @@ _declarer(Indicateur(
     unite="%", categorie="Marchés financiers", precision=3,
     sources=(src_sdmx("IRS", "M.DE.L.L40.CI.0000.EUR.N.Z", lastNObservations="1"),),
     reference=(3.185, "2026-08", "BCE IRS", DATE_VERIFICATION),
+))
+_declarer(Indicateur(
+    cle="taux_credit_immobilier_menages_pct",
+    libelle="Taux moyen des nouveaux crédits à l'habitat des ménages (toutes durées)",
+    unite="%/an", categorie="Logement et marchés financiers", precision=2,
+    sources=(src_sdmx(
+        "MIR", "M.FR.B.A2C.A.R.A.2250.EUR.N", lastNObservations="1"
+    ),),
+    reference=(3.2, "2026-08", "BCE MIR / Banque de France", DATE_VERIFICATION),
+    note=(
+        "Moyenne mensuelle des nouveaux prêts à l'habitat, secteur ménages, toutes durées; "
+        "référence nationale de marché, non offre personnalisée et hors assurance/frais. "
+        "La variation simulée suit l'écart d'OAT selon une transmission de 1 pour 1, "
+        "hypothèse simplificatrice explicitée dans le moteur."
+    ),
+    frequence="Mensuelle; dernière période complète publiée avec décalage, révisable.",
 ))
 _declarer(Indicateur(
     cle="taux_bce_depot",
@@ -561,16 +685,89 @@ _declarer(Indicateur(
     cle="inflation_france_pct",
     libelle="Inflation France (IPCH, glissement annuel)",
     unite="%", categorie="Pouvoir d'achat", precision=1,
-    sources=(src_eurostat("prc_hicp_manr", geo="FR", coicop="CP00", lastTimePeriod="1"),),
-    reference=(0.7, "2025-12", "Eurostat PRC_HICP_MANR", DATE_VERIFICATION),
+    sources=(src_eurostat(
+        "prc_hicp_minr", freq="M", geo="FR", unit="RCH_A", coicop18="TOTAL",
+        lastTimePeriod="1",
+    ),),
+    reference=(3.4, "2026-09 (estimé)", "Eurostat PRC_HICP_MINR", DATE_VERIFICATION),
+    qualite_reference="e",
+    note=(
+        "Estimation flash Eurostat pour septembre 2026 (code qualité e); les données "
+        "complètes sont annoncées vers le 16 octobre et peuvent réviser cette valeur."
+    ),
 ))
 _declarer(Indicateur(
     cle="inflation_zone_euro_pct",
-    libelle="Inflation zone euro (IPCH, glissement annuel)",
+    libelle="Inflation zone euro EA21 (IPCH, glissement annuel)",
     unite="%", categorie="Pouvoir d'achat", precision=1,
-    sources=(src_eurostat("prc_hicp_manr", geo="EA20", coicop="CP00", lastTimePeriod="1"),),
-    reference=(2.0, "2025-12", "Eurostat PRC_HICP_MANR", DATE_VERIFICATION),
+    sources=(src_eurostat(
+        "prc_hicp_minr", freq="M", geo="EA21", unit="RCH_A", coicop18="TOTAL",
+        lastTimePeriod="1",
+    ),),
+    reference=(3.8, "2026-09 (estimé, EA21)", "Eurostat PRC_HICP_MINR", DATE_VERIFICATION),
+    qualite_reference="e",
+    note=(
+        "Estimation flash Eurostat pour septembre 2026 (code qualité e); l'agrégat "
+        "EA21 comprend la Bulgarie à partir de janvier 2026."
+    ),
 ))
+# IPCH mensuel par poste de consommation. Les séries servent de repère de prix
+# au panier du foyer; les codes de qualité Eurostat (estimé/provisoire/prévision)
+# sont conservés dans `Lecture` et transmis jusqu'à l'interface.
+_CATEGORIES_IPCH = (
+    ("CP01", "Produits alimentaires et boissons non alcoolisées"),
+    ("CP02", "Boissons alcoolisées, tabac et stupéfiants"),
+    ("CP03", "Habillement et chaussures"),
+    ("CP04", "Logement, eau et services liés au logement"),
+    ("CP045", "Électricité, gaz et autres combustibles"),
+    ("CP05", "Meubles et entretien du foyer"),
+    ("CP06", "Santé"),
+    ("CP07", "Transports"),
+    ("CP08", "Information et communication"),
+    ("CP09", "Loisirs, sport et culture"),
+    ("CP10", "Enseignement"),
+    ("CP11", "Restaurants et hébergement"),
+    ("CP12", "Autres biens et services"),
+)
+_VALEURS_IPCH_REFERENCE = {
+    "CP01": 1.1,
+    "CP02": 1.9,
+    "CP03": -1.5,
+    "CP04": 3.6,
+    "CP045": 7.7,
+    "CP05": 0.0,
+    "CP06": 0.8,
+    "CP07": 7.2,
+    "CP08": 4.9,
+    "CP09": -1.0,
+    "CP10": 4.5,
+    "CP11": 1.9,
+    "CP12": 3.2,
+}
+for _code_ipch, _libelle_ipch in _CATEGORIES_IPCH:
+    _declarer(Indicateur(
+        cle=f"inflation_ipch_{_code_ipch.lower()}",
+        libelle=f"IPCH France — {_libelle_ipch} (glissement annuel)",
+        unite="%", categorie="Pouvoir d'achat", precision=1,
+        sources=(src_eurostat(
+            "prc_hicp_minr", freq="M", geo="FR", unit="RCH_A", coicop18=_code_ipch,
+            lastTimePeriod="12",
+        ),),
+        reference=(
+            _VALEURS_IPCH_REFERENCE[_code_ipch], "2026-08",
+            "Eurostat PRC_HICP_MINR", DATE_VERIFICATION,
+        ),
+        note=(
+            "Repère de prix mensuel par catégorie pour le panier du ménage. Snapshot "
+            "de la période 2026-08 vérifié le 2026-10-07; les nouvelles lectures "
+            "affichent le statut Eurostat de chaque observation lorsqu'il existe."
+        ),
+        frequence=(
+            "Mensuelle; la dernière période peut être une estimation flash révisable "
+            "au milieu du mois suivant."
+        ),
+    ))
+
 _declarer(Indicateur(
     cle="taux_pauvrete_pct",
     libelle="Taux de pauvreté monétaire (seuil 60 % du revenu médian)",
@@ -731,6 +928,7 @@ def _lire_source(source: Source, timeout: float = 12.0) -> Lecture:
     if source.fournisseur in _BLACKLIST:
         if time.monotonic() - _BLACKLIST[source.fournisseur] < DUREE_BLACKLIST_S:
             raise ErreurSource("source temporairement écartée après échec réseau")
+    qualite_code = None
     try:
         brut = _http_texte(source.url, timeout=timeout)
         if source.adaptateur == "stooq":
@@ -741,6 +939,14 @@ def _lire_source(source: Source, timeout: float = 12.0) -> Lecture:
             if adaptateur is None:
                 raise ErreurSource(f"adaptateur inconnu : {source.adaptateur}")
             valeur, periode = adaptateur(charge, source.chemin)
+            if source.adaptateur == "eurostat":
+                observations = charge.get("value") or {}
+                cle_observation = (
+                    source.chemin
+                    if source.chemin and source.chemin in observations
+                    else next(iter(observations), None)
+                )
+                qualite_code = qualite_eurostat(charge, cle_observation)
     except ErreurSource:
         raise
     except (json.JSONDecodeError, KeyError, TypeError, ValueError) as exc:
@@ -749,7 +955,7 @@ def _lire_source(source: Source, timeout: float = 12.0) -> Lecture:
         raise ErreurSource("aucune valeur retournée")
     return Lecture(
         cle="", valeur=float(valeur), periode=periode, fournisseur=source.fournisseur,
-        url=source.url, statut="live",
+        url=source.url, statut="live", qualite_code=qualite_code,
     )
 
 
@@ -782,6 +988,7 @@ def interroger(cle: str, timeout: float = 12.0) -> Lecture:
             statut="reference",
             detail=f"référence embarquée vérifiée le {verifie}"
                    + (f" · échecs : {'; '.join(erreurs)}" if erreurs else ""),
+            qualite_code=indicateur.qualite_reference,
         )
     return Lecture(
         cle=cle, valeur=None, periode=None,
@@ -866,6 +1073,7 @@ class ContexteInstant:
     taux_oat_10ans: float
     taux_bund_10ans: float
     taux_bce_depot: float
+    taux_credit_immobilier_menages_pct: float
     inflation_pct: float
     inflation_zone_euro_pct: float
     chomage_pct: float
@@ -915,6 +1123,7 @@ _REPLI = {
     "taux_oat_10ans": 4.18,
     "taux_bund_10ans": 3.30,
     "taux_bce_depot": 2.50,
+    "taux_credit_immobilier_menages_pct": 3.20,
     "inflation_pct": 2.1,
     "inflation_zone_euro_pct": 2.0,
     "chomage_pct": 8.2,
@@ -937,6 +1146,7 @@ _CORRESPONDANCE = {
     "taux_oat_10ans": "taux_oat_france_10ans",
     "taux_bund_10ans": "taux_bund_allemagne_10ans",
     "taux_bce_depot": "taux_bce_depot",
+    "taux_credit_immobilier_menages_pct": "taux_credit_immobilier_menages_pct",
     "inflation_pct": "inflation_france_pct",
     "inflation_zone_euro_pct": "inflation_zone_euro_pct",
     "chomage_pct": "taux_chomage_pct",
@@ -1019,28 +1229,48 @@ def construire_contexte(
     statuts: set[str] = set()
     for champ, cle_indicateur in _CORRESPONDANCE.items():
         lecture = lectures.get(cle_indicateur)
+        indicateur = INDICATEURS[cle_indicateur]
+        reference = indicateur.reference
+        lecture_valide = lecture is not None and lecture.valeur is not None
         valeur = _valeur(lectures, cle_indicateur)
         if valeur is None:
             valeur = _REPLI[champ]
-            statut = "reference"
-            source_txt = "référence documentaire du projet"
-        else:
-            statut = lecture.statut if lecture else "reference"
-            source_txt = lecture.fournisseur if lecture else "référence documentaire du projet"
+        statut = lecture.statut if lecture_valide else "reference"
+        source_txt = (
+            lecture.fournisseur if lecture_valide
+            else (reference[2] if reference else "référence documentaire du projet")
+        )
+        periode = lecture.periode if lecture_valide else (reference[1] if reference else None)
+        date_collecte = (
+            lecture.horodatage[:10] if lecture_valide
+            else (reference[3] if reference else None)
+        )
+        qualite_code = (
+            lecture.qualite_code if lecture_valide else indicateur.qualite_reference
+        )
+        url_source = (
+            lecture.url if lecture_valide
+            else (indicateur.sources[0].url if indicateur.sources else "")
+        )
         valeurs[champ] = float(valeur)
         statuts.add(statut)
         provenance[champ] = {
             "indicateur": cle_indicateur,
-            "libelle": INDICATEURS[cle_indicateur].libelle,
-            "unite": INDICATEURS[cle_indicateur].unite,
+            "libelle": indicateur.libelle,
+            "unite": indicateur.unite,
             "statut": statut,
             "source": source_txt,
-            "periode": lecture.periode if lecture else None,
-            "url": lecture.url if lecture else "",
+            "periode": periode,
+            "date_collecte": date_collecte,
+            "frequence": indicateur.frequence,
+            "qualite_code": qualite_code,
+            "qualite": libelle_qualite(qualite_code),
+            "detail": lecture.detail if lecture and lecture.detail else indicateur.note,
+            "url": url_source,
             "licence": (
-                INDICATEURS[cle_indicateur].sources[0].licence
-                if INDICATEURS[cle_indicateur].sources else ""
+                indicateur.sources[0].licence if indicateur.sources else ""
             ),
+            "note": indicateur.note,
         }
 
     # Séries collectées qui ne calibrent pas le moteur (santé, CO2, emploi…)
@@ -1050,17 +1280,40 @@ def construire_contexte(
         if cle_indicateur in _CORRESPONDANCE.values():
             continue
         lecture = lectures.get(cle_indicateur)
-        if lecture is None or lecture.valeur is None:
+        if lecture is not None and lecture.valeur is not None:
+            # Les `Lecture` sont déjà converties dans l'unité canonique par
+            # `interroger` (ou par le client avant son POST au serveur).
+            valeur = lecture.valeur
+            periode = lecture.periode
+            date_collecte = lecture.horodatage[:10]
+            fournisseur = lecture.fournisseur
+            statut = lecture.statut
+            qualite_code = lecture.qualite_code
+            url = lecture.url
+        elif indicateur.reference is not None:
+            valeur = indicateur.reference[0] * indicateur.conversion
+            periode = indicateur.reference[1]
+            date_collecte = indicateur.reference[3]
+            fournisseur = indicateur.reference[2]
+            statut = "reference"
+            qualite_code = indicateur.qualite_reference
+            url = indicateur.sources[0].url if indicateur.sources else ""
+        else:
             continue
         complementaires[cle_indicateur] = {
             "libelle": indicateur.libelle,
             "unite": indicateur.unite,
             "categorie": indicateur.categorie,
-            "valeur": round(lecture.valeur * indicateur.conversion, 4),
-            "periode": lecture.periode,
-            "fournisseur": lecture.fournisseur,
-            "statut": lecture.statut,
-            "url": lecture.url,
+            "valeur": round(valeur, 4),
+            "periode": periode,
+            "date_collecte": date_collecte,
+            "frequence": indicateur.frequence,
+            "fournisseur": fournisseur,
+            "statut": statut,
+            "qualite_code": qualite_code,
+            "qualite": libelle_qualite(qualite_code),
+            "note": indicateur.note,
+            "url": url,
             "licence": _licence_indicateur(cle_indicateur),
         }
 
@@ -1112,6 +1365,8 @@ def browser_payload(cles: list[str] | None = None) -> dict[str, Any]:
             "categorie": indicateur.categorie,
             "precision": indicateur.precision,
             "note": indicateur.note,
+            "frequence": indicateur.frequence,
+            "qualite_reference": indicateur.qualite_reference,
             "conversion": indicateur.conversion,
             # Repli même-origine : le serveur relaie la source quand le
             # navigateur est bloqué par CORS (Yahoo, Stooq, ICE/EEX…).
@@ -1124,6 +1379,8 @@ def browser_payload(cles: list[str] | None = None) -> dict[str, Any]:
                     "periode": indicateur.reference[1],
                     "fournisseur": indicateur.reference[2],
                     "verifie_le": indicateur.reference[3],
+                    "qualite_code": indicateur.qualite_reference,
+                    "qualite": libelle_qualite(indicateur.qualite_reference),
                 }
                 if indicateur.reference else None
             ),
@@ -1141,12 +1398,16 @@ def catalogue_public() -> list[dict[str, Any]]:
             "categorie": indicateur.categorie,
             "sources": [source.fournisseur for source in indicateur.sources],
             "licences": sorted({source.licence for source in indicateur.sources}),
+            "frequence": indicateur.frequence,
+            "qualite_reference": indicateur.qualite_reference,
             "reference": (
                 {
                     "valeur": indicateur.reference[0],
                     "periode": indicateur.reference[1],
                     "fournisseur": indicateur.reference[2],
                     "verifie_le": indicateur.reference[3],
+                    "qualite_code": indicateur.qualite_reference,
+                    "qualite": libelle_qualite(indicateur.qualite_reference),
                 }
                 if indicateur.reference else None
             ),

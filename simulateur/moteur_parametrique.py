@@ -93,6 +93,7 @@ def calibrer_contexte(moteur: MoteurSimulationSystemique,
     # Strate 4 — mondiale
     moteur.mondial.taux_oat_france_10ans = contexte.taux_oat_10ans
     moteur.mondial.taux_bund_allemagne_10ans = contexte.taux_bund_10ans
+    moteur.mondial.taux_credit_immobilier_menages = contexte.taux_credit_immobilier_menages_pct
     moteur.mondial.spread_oat_bund_bps = contexte.spread_oat_bund_bps
     moteur.mondial.cours_petrole_brent_usd = contexte.brent_usd
     moteur.mondial.taux_change_eur_usd = contexte.eur_usd
@@ -109,6 +110,7 @@ def calibrer_contexte(moteur: MoteurSimulationSystemique,
         "inflation_pct": contexte.inflation_pct,
         "taux_oat_pct": contexte.taux_oat_10ans,
         "taux_bund_pct": contexte.taux_bund_10ans,
+        "taux_credit_immobilier_pct": contexte.taux_credit_immobilier_menages_pct,
         "spread_bps": contexte.spread_oat_bund_bps,
         "facture_energetique_mde": round(pib * 0.022, 1),
         "recettes_base_mde": round(pib * recettes_pct / 100.0, 1),
@@ -139,7 +141,7 @@ def _executer_serie(parametres: dict[str, float], contexte: ContexteInstant,
     moteur = moteur_calibre(contexte)
     flux_par_annee: list[dict[str, float]] = []
     for annee in range(1, horizon + 1):
-        decision = decision_moteur(parametres, annee)
+        decision = decision_moteur(parametres, annee, horizon=horizon)
         moteur.appliquer_etape(decision)
         flux_par_annee.append(construire_flux(parametres, annee - 1))
     return moteur, flux_par_annee
@@ -188,6 +190,10 @@ def _mediteurs_annee(resultat: ResultatEtapeSimulation, flux: dict[str, float],
     flux["spread_oat_ecart_bps"] = round(resultat.spread_bund_bps - contexte.spread_oat_bund_bps, 1)
     flux["taux_credit_ecart_pts"] = round(
         resultat.taux_credit_pme - (contexte.taux_oat_10ans + 0.85), 3
+    )
+    taux_immobilier_reference = contexte.taux_credit_immobilier_menages_pct
+    flux["taux_credit_immobilier_ecart_pts"] = round(
+        resultat.taux_credit_immobilier_menages - taux_immobilier_reference, 3
     )
     flux["chokepoints_nb"] = float(resultat.chokepoints_sous_tension)
     flux["choc_semi"] = 1.0 - float(resultat.disponibilite_semiconducteurs_pct) / 100.0
@@ -388,6 +394,13 @@ class SortieSimulation:
     avertissements: list[str] = field(default_factory=list)
     impacts: list[dict[str, Any]] = field(default_factory=list)
     diagnostic: dict[str, Any] = field(default_factory=dict)
+    horizon: int = 5
+    #: Trajectoire sans levier, mêmes années et mêmes données de départ.
+    etapes_reference: list[dict[str, Any]] = field(default_factory=list)
+    #: Flux annuels du scénario et de la référence, dont les clés `levier:*`.
+    flux_annuels: list[dict[str, Any]] = field(default_factory=list)
+    flux_reference: list[dict[str, Any]] = field(default_factory=list)
+    domaines_reference: list[dict[str, Any]] = field(default_factory=list)
 
     def en_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -400,15 +413,17 @@ def simuler(parametres: dict[str, float] | None = None,
             avec_impacts: bool = True,
             max_leviers_impacts: int = 24) -> SortieSimulation:
     """Exécute une simulation complète : moteur + domaines + matrice d'impacts."""
+    if not 1 <= horizon <= 10:
+        raise ValueError("L'horizon de simulation doit être compris entre 1 et 10 ans.")
     parametres_normalises = normaliser(parametres)
     contexte = contexte or construire_contexte()
     avertissements: list[str] = []
     if contexte.mode != "live":
         avertissements.append(
-            "Données de contexte non rafraîchies (mode "
-            f"« {contexte.mode} ») : les valeurs de référence embarquées sont datées "
-            "du 5 octobre 2026. Utilisez « Rafraîchir les données » pour interroger "
-            "les API publiques depuis votre navigateur ou votre poste."
+            "Données de contexte non entièrement rafraîchies (mode "
+            f"« {contexte.mode} ») : chaque valeur de référence conserve sa propre "
+            "période et sa date de vérification dans la provenance. Utilisez « Rafraîchir "
+            "les données » pour tenter une collecte auprès des API publiques."
         )
     avertissements.append(
         "Trajectoire de référence = moteur inchangé, leviers neutres. Elle inclut la "
@@ -472,6 +487,12 @@ def simuler(parametres: dict[str, float] | None = None,
         ),
         "taux_oat_final": final.taux_oat_pct,
         "spread_final_bps": final.spread_bund_bps,
+        "taux_credit_pme_final": final.taux_credit_pme,
+        "taux_credit_immobilier_final": final.taux_credit_immobilier_menages,
+        "taux_credit_immobilier_reference": reference_final.taux_credit_immobilier_menages,
+        "taux_credit_immobilier_ecart_pts": round(
+            final.taux_credit_immobilier_menages - reference_final.taux_credit_immobilier_menages, 2
+        ),
         "note_souveraine": final.note_souveraine,
         "tension_finale": final.tension_sociale_locale,
         "confiance_finale": final.confiance_democratique,
@@ -492,6 +513,27 @@ def simuler(parametres: dict[str, float] | None = None,
         ),
         "nombre_domaines_en_hausse": sum(1 for d in domaines if d.score > 50.5),
         "nombre_domaines_en_baisse": sum(1 for d in domaines if d.score < 49.5),
+        # P21 : un tableau de bord intergénérationnel en composantes physiques,
+        # sans indice composite ni pondération normative cachée.
+        "bilan_intergenerationnel": {
+            "annee_terminal": final.annee,
+            "dette_publique_mde": final.dette_nominale_mde,
+            "dette_publique_pct_pib": final.ratio_dette_pib,
+            "besoin_non_couvert_capital_public_mde": final.dette_technique_infrastructures_mde,
+            "investissements_longs_engages_cumules_mde": final.investissements_longs_engages_cumules_mde,
+            "actifs_arrives_a_maturite_mde": {
+                "cycle_long": final.investissements_matures_mde,
+                "capital_humain_proxy": final.capital_humain_mature_mde,
+                "capacites_bitd_proxy": final.capacites_defense_matures_mde,
+            },
+            "risque_climat_annualise_hors_budget_mde": final.dommages_climat_subis_mde,
+            "dommages_climat_evites_annualises_hors_budget_mde": final.dommages_climat_evites_mde,
+            "note_methodologique": (
+                "Composantes séparées, pas de score synthétique : les actifs mûrs, "
+                "la dette publique, le besoin de patrimoine non couvert et le risque "
+                "climatique n'ont ni la même unité ni la même incidence."
+            ),
+        },
     }
 
     journal: list[str] = []
@@ -524,6 +566,11 @@ def simuler(parametres: dict[str, float] | None = None,
             "domaines": [d.en_dict() for d in domaines],
             "synthese": synthese,
         }),
+        horizon=horizon,
+        etapes_reference=[asdict(r) for r in moteur_ref.historique_etapes],
+        flux_annuels=[{"annee": i + 1, **flux} for i, flux in enumerate(flux_annee)],
+        flux_reference=[{"annee": i + 1, **flux} for i, flux in enumerate(flux_ref)],
+        domaines_reference=[d.en_dict() for d in domaines_ref],
     )
 
 

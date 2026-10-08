@@ -259,7 +259,7 @@ GARDE_FOUS: tuple[GardeFou, ...] = (
     # ── Strate 1 et 2 : la population ──────────────────────────────────────
     _g(cle="pouvoir_achat_index", libelle="Pouvoir d'achat (base 100)", strate=1, sens="min",
        unite="indice", precision=1, famille="population",
-       source="INSEE (revenu réel par ménage) ; seuil politique : 1 % de perte",
+       source="INSEE (revenu réel des ménages, ancrage) ; bornes de stress propres au simulateur, non officielles",
        cible=(102.0, "Objectif d'une mandature : +2 % de pouvoir d'achat."),
        bornes=[
            (99.0, "tolerable", "Pouvoir d'achat à {valeur} : les ménages ne perdent pas de terrain."),
@@ -267,11 +267,14 @@ GARDE_FOUS: tuple[GardeFou, ...] = (
             "Pouvoir d'achat à {valeur} : la perte devient perceptible — c'est le premier motif de "
             "colère sociale, bien avant les agrégats budgétaires."),
            (95.5, "risque",
-            "Pouvoir d'achat à {valeur} : recul de 4,5 %, les ménages modestes arbitrent entre "
-            "l'alimentaire, le chauffage et le logement."),
+            "Pouvoir d'achat à {valeur} : recul supérieur à 4,5 %, les ménages modestes arbitrent "
+            "entre l'alimentaire, le chauffage et le logement."),
+           (85.0, "risque",
+            "Pouvoir d'achat à {valeur} : recul supérieur à 15 %, appauvrissement très sévère "
+            "simulé; il manque {marge} point pour revenir dans la zone de risque élevé."),
            (float("-inf"), "hors_sol",
-            "Pouvoir d'achat à {valeur} : hors-sol — paupérisation mesurable, "
-            "il manque {marge} point pour revenir dans la zone de vigilance."),
+            "Pouvoir d'achat à {valeur} : hors-sol — recul supérieur à 15 %, paupérisation "
+            "mesurable; il manque {marge} point pour revenir sous le seuil de rupture."),
        ]),
     _g(cle="tension_finale", libelle="Tension sociale locale (/100)", strate=1, sens="max",
        unite="/100", precision=1, famille="population", ou="synthese",
@@ -448,6 +451,37 @@ GARDE_FOUS: tuple[GardeFou, ...] = (
            (float("-inf"), "hors_sol",
             "Défense à {valeur} % du PIB : hors-sol — désarmement de fait, la sécurité du pays "
             "dépend entièrement de choix étrangers."),
+       ]),
+    # ── Profondeur temporelle : deux mandatures consécutives (2027-2037) ────
+    _g(cle="usure_politique_pts", libelle="Usure du capital politique", strate=2, sens="max",
+       unite="pts", precision=0, famille="general",
+       source="R&D deux mandatures consécutives (docs/RD_DOUBLE_MANDATURE.md, point P4) ; "
+              "baromètre de la confiance politique CEVIPOF.",
+       cible=(20.0, "Objectif sur dix ans : préserver le capital politique sous 20 pts."),
+       bornes=[
+           (20.0, "favorable",
+            "Usure à {valeur}/100 : le capital politique est intact, les réformes passent au calendrier prévu."),
+           (35.0, "tolerable",
+            "Usure à {valeur}/100 : fatigue normale de mi-parcours, séquencer les réformes et soigner l'évaluation."),
+           (55.0, "vigilance",
+            "Usure à {valeur}/100 : réforme de fatigue — chaque réforme coûte désormais plus cher politiquement qu'elle ne rapporte."),
+           (75.0, "risque",
+            "Usure à {valeur}/100 : fin de cycle, risque élevé de censure et de blocage parlementaire."),
+           (float("inf"), "hors_sol",
+            "Usure à {valeur}/100 : hors-sol — capital politique épuisé, plus aucune réforme n'est adoptable avant l'élection suivante."),
+       ]),
+    _g(cle="irreversibilite_reformes_active", libelle="Verrou constitutionnel des réformes",
+       strate=2, sens="booleen", famille="general",
+       source="Constitution de 1958, art. 89 (Congrès, majorité des 3/5) et art. 11 ; "
+              "R&D deux mandatures (docs/RD_DOUBLE_MANDATURE.md, points P3 et P7).",
+       cible=(1.0, "Objectif de la deuxième mandature : ancrer les réformes structurelles dans la Constitution."),
+       bornes=[
+           (1.0, "tolerable",
+            "Réformes ancrées dans la Constitution : une alternance ne peut plus les abroger d'un trait de plume, "
+            "les marchés et les citoyens anticipent dans la durée."),
+           (0.0, "vigilance",
+            "Réformes non verrouillées : sur deux mandatures, le risque d'abrogation par une alternance est systémique — "
+            "chaque année électorale renchérit le crédit de l'État."),
        ]),
 )
 
@@ -798,6 +832,43 @@ def evaluer_sortie(donnees: dict[str, Any]) -> dict[str, Any]:
         "indicateurs": evaluations,
         "barème": list(NIVEAUX),
         "libelles_niveaux": LIBELLES_NIVEAUX,
+    }
+
+
+def bareme_public() -> dict[str, Any]:
+    """Barème complet des garde-fous, pour la section « audit et traçabilité ».
+
+    Chaque entrée livre la grandeur surveillée, sa strate, ses bornes
+    (seuil → niveau → message) et la source institutionnelle : la veille
+    n'est pas une boîte noire, tout seuil est vérifiable à la source.
+    """
+    def borne(b: Borne) -> dict[str, Any]:
+        # Une borne infinie (ex. « au-delà de… ») devient nulle : JSON ne
+        # connaît pas Infinity et le navigateur doit pouvoir tout relire.
+        seuil = b.seuil if math.isfinite(b.seuil) else None
+        return {"seuil": seuil, "niveau": b.niveau, "message": b.message}
+
+    def entree(garde_fou: GardeFou, en_ecart: bool) -> dict[str, Any]:
+        return {
+            "cle": garde_fou.cle,
+            "libelle": garde_fou.libelle,
+            "strate": garde_fou.strate,
+            "strate_libelle": LIBELLES_STRATES.get(garde_fou.strate, ""),
+            "sens": garde_fou.sens,
+            "unite": garde_fou.unite,
+            "precision": garde_fou.precision,
+            "source": garde_fou.source,
+            "famille": garde_fou.famille,
+            "en_ecart": en_ecart,
+            "bornes": [borne(b) for b in garde_fou.bornes],
+        }
+
+    return {
+        "niveaux": list(NIVEAUX),
+        "libelles_niveaux": LIBELLES_NIVEAUX,
+        "libelles_strates": {str(cle): libelle for cle, libelle in LIBELLES_STRATES.items()},
+        "garde_fous": ([entree(g, en_ecart=False) for g in GARDE_FOUS]
+                       + [entree(g, en_ecart=True) for g in GARDE_FOUS_ECART]),
     }
 
 

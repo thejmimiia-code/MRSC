@@ -13,10 +13,12 @@ from simulateur.model import (
 )
 from simulateur.moteur import MoteurSimulationSystemique
 from simulateur.scenarios import (
+    get_scenario_alternance_2032,
     get_scenario_austerite_brutale,
     get_scenario_choc_mondial_stagflation,
     get_scenario_convergence_ww3,
     get_scenario_crise_taiwan,
+    get_scenario_double_mandature,
     get_scenario_escalade_nucleaire_tactique,
     get_scenario_fermeture_hormuz,
     get_scenario_mandature_5_ans,
@@ -52,6 +54,14 @@ CATALOGUE_SCENARIOS: dict[str, tuple] = {
     "resilience": (
         get_scenario_resilience_republicaine,
         "RÉSILIENCE RÉPUBLICAINE (Mandature + réarmement OTAN 3,50 % PIB + souveraineté industrielle)",
+    ),
+    "double_mandature": (
+        get_scenario_double_mandature,
+        "DEUX MANDATURES CONSÉCUTIVES 2027-2037 (10 ans : verrou constitutionnel, dividende de la dette)",
+    ),
+    "alternance_2032": (
+        get_scenario_alternance_2032,
+        "STRESS-TEST ALTERNANCE 2032 (Deux mandatures sans verrou constitutionnel)",
     ),
 }
 
@@ -230,13 +240,16 @@ def lancer_menu_interactif() -> None:
         print("  7. Scénario B : Escalade nucléaire tactique OTAN-Russie")
         print("  8. Scénario D : Convergence Chine-Russie-Iran (guerre mondiale)")
         print("  9. Résilience républicaine (Mandature + réarmement OTAN 3,50 % PIB)")
+        print(" -- Profondeur temporelle : deux mandatures consécutives (10 ans) --")
+        print(" 14. Deux mandatures consécutives 2027-2037 (verrou, dividende de la dette)")
+        print(" 15. Stress-test : alternance 2032 (réformes non verrouillées)")
         print("  -- Outils --")
         print(" 10. Comparer TOUS les scénarios à l'Année 5")
         print(" 11. Exporter le Plan de Mandature en JSON")
         print(" 12. Exporter le Plan de Mandature en CSV")
         print(" 13. Quitter")
 
-        choix = input("\nVotre choix (1-13) : ").strip()
+        choix = input("\nVotre choix (1-15) : ").strip()
         raccourcis = {
             "1": "mandature",
             "2": "statut_quo",
@@ -247,6 +260,8 @@ def lancer_menu_interactif() -> None:
             "7": "escalade_nucleaire",
             "8": "convergence_ww3",
             "9": "resilience",
+            "14": "double_mandature",
+            "15": "alternance_2032",
         }
         if choix in raccourcis:
             res = executer_scenario(raccourcis[choix])

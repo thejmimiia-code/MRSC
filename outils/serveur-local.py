@@ -33,10 +33,12 @@ RACINE = Path(__file__).resolve().parent.parent
 if str(RACINE) not in sys.path:  # le script vit dans outils/, le moteur à la racine
     sys.path.insert(0, str(RACINE))
 
-#: Routes servies par le moteur (voir `simulateur/dashboard.py`).
+#: Routes servies par le moteur (voir `simulateur/dashboard.py`, en écho de
+#: `outils/generer-fonctions-api.py`).
 ROUTES_MOTEUR = (
-    "catalogue", "contexte", "donnees", "simuler", "comparer", "presets",
-    "bulles", "bulle", "proxy", "run", "scenarios", "export",
+    "catalogue", "contexte", "marches", "donnees", "conseil", "simuler",
+    "comparer", "garde_fous", "presets", "bulles", "bulle", "lexique",
+    "proxy", "run", "scenarios", "export",
 )
 
 

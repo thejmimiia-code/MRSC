@@ -30,7 +30,7 @@ Le site intègre le **simulateur macro-politique systémique** du projet *Démoc
 |---|---|
 | `simulateur/` | Moteur embarqué (Python), copié depuis son dépôt d’origine — voir `simulateur/PROVENANCE.json` |
 | `simulateur/index.html` | Page publiée du simulateur, **générée** depuis le moteur ; le générateur ajoute le retour permanent vers le site, les commandes de parcours et les réglages d’affichage |
-| `api/*.py` | Fonctions serveur exposant les 12 routes du moteur (`/api/catalogue`, `/api/simuler`, `/api/bulles`…) |
+| `api/*.py` | Fonctions serveur exposant les 16 routes du moteur (`/api/catalogue`, `/api/simuler`, `/api/bulles`, `/api/garde_fous`…) |
 | `simulateur/pont_api.py` | Pont entre les routes déclarées et le gestionnaire HTTP du moteur (ajout propre au site) |
 | `simulateur.html` | Page du site : présentation, limites assumées, aperçu embarqué |
 | `outils/verifier-integration.py` | Vérifie la page, les fonctions et chaque route, sans navigateur |
