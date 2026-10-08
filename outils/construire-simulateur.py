@@ -51,6 +51,22 @@ header.entete {
   border-color: #344b79;
   background: linear-gradient(135deg, #1d3268, #26375f);
 }
+header.entete .site-status-note {
+  margin: 0 0 .8rem;
+  padding: .5rem .8rem;
+  border: 1px solid #c88712;
+  border-radius: 9px;
+  background: #fff3d2;
+  color: #49320a;
+  font-size: .82rem;
+  font-weight: 730;
+  line-height: 1.4;
+}
+html.contraste-renforce header.entete .site-status-note {
+  border-color: var(--ambre);
+  background: var(--panel);
+  color: var(--texte);
+}
 button.primaire {
   border-color: #456d29;
   background: linear-gradient(135deg, #1d3268, #2958a2);
@@ -425,6 +441,11 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
     box-shadow: none !important;
     backdrop-filter: none !important;
   }
+  header.entete .site-status-note {
+    border-color: CanvasText !important;
+    background: Canvas !important;
+    color: CanvasText !important;
+  }
   a { color: LinkText !important; }
   button, .site-return-bar a, .site-return-bar .site-journey-button, .sim-display-button {
     border: 1px solid ButtonText !important;
@@ -601,6 +622,23 @@ def page_complete() -> str:
         )
     contenu = ajouter_zones_defilantes_accessibles(contenu)
     contenu = ajouter_zone_principale_accessible(contenu)
+
+    ouverture_entete = re.search(
+        r'<header\b(?=[^>]*class="entete")[^>]*>', contenu, re.IGNORECASE
+    )
+    if not ouverture_entete:
+        raise SystemExit("Impossible d’ajouter l’avis de développement à l’entête du simulateur.")
+    if 'class="site-status-note"' not in contenu:
+        note_developpement = (
+            '\n    <p class="site-status-note" role="note">'
+            "Version de recherche et développement (R&amp;D) — le site est en cours de développement."
+            "</p>"
+        )
+        contenu = (
+            contenu[:ouverture_entete.end()]
+            + note_developpement
+            + contenu[ouverture_entete.end():]
+        )
 
     # L'interface du moteur est autonome et ne connaît pas le site qui l'embarque.
     # Ces ajouts restent dans la couche d'intégration ; le moteur amont est intact.

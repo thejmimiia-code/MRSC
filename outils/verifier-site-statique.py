@@ -410,6 +410,8 @@ def verifier_dossier_apprentissage() -> None:
             "[MDN — boucles JavaScript](https://developer.mozilla.org/fr/",
         ),
         ROOT / "assets" / "css" / "site.css": (
+            ".site-status-note",
+            "html.contraste-renforce .site-status-note",
             ".learning-code-sample pre:focus-visible",
             "overscroll-behavior-inline:contain",
             "@media (forced-colors: active)",
@@ -429,6 +431,29 @@ def verifier_dossier_apprentissage() -> None:
             signaler(f"{relatif} : état de relecture/droits absent : {'; '.join(absentes)}")
     if not ERREURS:
         print("R&D apprentissages : objectif 1 000, autonomie, statut du prototype et grille de relecture vérifiés.")
+
+
+def verifier_note_rnd() -> None:
+    """Vérifie que chaque page publique signale son statut de développement sans JavaScript."""
+    marqueur = (
+        '<p class="site-status-note" role="note">'
+        "Version de recherche et développement (R&amp;D) — le site est en cours de développement."
+        "</p>"
+    )
+    avant = len(ERREURS)
+    for chemin in PAGES:
+        if not chemin.is_file():
+            signaler(f"{chemin.relative_to(ROOT)} : page requise pour la note R&D absente")
+            continue
+        try:
+            contenu = chemin.read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as erreur:
+            signaler(f"{chemin.relative_to(ROOT)} : lecture de la note R&D impossible : {erreur}")
+            continue
+        if marqueur not in contenu:
+            signaler(f"{chemin.relative_to(ROOT)} : note de version R&D absente de l’entête")
+    if len(ERREURS) == avant:
+        print(f"Note de version R&D : présente dans les {len(PAGES)} pages publiques, sans dépendre de JavaScript.")
 
 
 def verifier_registres_sans_references_retirees() -> None:
@@ -477,6 +502,7 @@ def main() -> int:
     verifier_liens(infos)
     verifier_dependances_apprentissage()
     verifier_dossier_apprentissage()
+    verifier_note_rnd()
     verifier_registres_sans_references_retirees()
     verifier_sitemap()
     verifier_javascript(infos)

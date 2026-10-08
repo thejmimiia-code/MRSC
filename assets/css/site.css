@@ -134,6 +134,36 @@ address {
   backdrop-filter: blur(12px);
 }
 
+.site-status-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  margin: 0;
+  padding: .35rem 1rem;
+  border-bottom: 1px solid #c88712;
+  background: #fff3d2;
+  color: #49320a;
+  font-size: .82rem;
+  font-weight: 730;
+  line-height: 1.35;
+  text-align: center;
+}
+
+html.contraste-renforce .site-status-note {
+  border-color: currentColor;
+  background: var(--white);
+  color: var(--ink);
+}
+
+@media (forced-colors: active) {
+  .site-status-note {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+}
+
 .identity {
   display: flex;
   align-items: center;

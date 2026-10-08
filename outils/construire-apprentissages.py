@@ -89,6 +89,7 @@ def classes_entete(prefixe: str = "", page: str = "apprendre") -> str:
     )
     return f'''  <a class="skip-link" href="#contenu">Aller au contenu principal</a>
   <header class="site-header">
+    <p class="site-status-note" role="note">Version de recherche et développement (R&amp;D) — le site est en cours de développement.</p>
     <div class="identity">
       <a href="{prefixe}index.html" data-site-home aria-label="M.R.S.C — Accueil">
         <img class="brand-logo" src="{prefixe}assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
