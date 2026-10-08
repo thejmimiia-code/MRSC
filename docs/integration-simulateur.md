@@ -24,7 +24,7 @@ Le simulateur est un moteur Python autonome (bibliothèque standard uniquement) 
 
 > [`thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple`](https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple)
 
-Il expose une page interactive et 12 routes HTTP (`/api/catalogue`, `/api/contexte`, `/api/simuler`, `/api/bulles`, `/api/export`…). Deux contraintes ont guidé l’intégration :
+Il expose une page interactive et 16 routes HTTP (`/api/catalogue`, `/api/contexte`, `/api/simuler`, `/api/bulles`, `/api/garde_fous`, `/api/export`…). Deux contraintes ont guidé l’intégration :
 
 | Contrainte | Conséquence |
 |---|---|

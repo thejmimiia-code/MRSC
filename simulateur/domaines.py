@@ -498,7 +498,7 @@ SPECS: tuple[SpecIndicateur, ...] = (
     # ── Logement & territoires ─────────────────────────────────────────────
     _spec("construction_logements", "logement", "Logements construits par an", "milliers", 260.0,
           (("logement_social_milliers", 1.0), ("territoires_mde", 0.60),
-           ("taux_credit_ecart_pts", -7.0), ("zan_pts", -25.0)),
+           ("taux_credit_immobilier_ecart_pts", -7.0), ("zan_pts", -25.0)),
           formule="+ 1 logement social par logement social financé − coût du crédit − contrainte foncière",
           source="SDES — mises en chantier (≈ 260 000/an contre 400 000 en 2017).",
           plancher=80.0, plafond=600.0),
@@ -518,7 +518,7 @@ SPECS: tuple[SpecIndicateur, ...] = (
           plancher=20.0, plafond=100.0),
     _spec("loyers", "logement", "Loyer moyen (indice base 100)", "indice base 100", 100.0,
           (("encadrement_loyers_pts", -3.0), ("logement_social_milliers", -0.02),
-           ("taux_credit_ecart_pts", 1.5)),
+           ("taux_credit_immobilier_ecart_pts", 1.5)),
           sens=-1,
           formule="loyers : − encadrement et construction sociale, + coût du crédit et rareté",
           source="ONRE / INSEE — indices de loyers (IRL) et tension des marchés.",
@@ -1064,7 +1064,7 @@ def decisions_depuis_flux(flux: dict[str, float]) -> dict[str, float]:
     }
 
 
-def decision_moteur(parametres: dict[str, float], annee: int) -> DecisionPolitique:
+def decision_moteur(parametres: dict[str, float], annee: int, *, horizon: int = 5) -> DecisionPolitique:
     """Construit la `DecisionPolitique` transmise au moteur pour une année.
 
     * les leviers rattachés à un champ du moteur y sont écrits directement ;
@@ -1072,7 +1072,11 @@ def decision_moteur(parametres: dict[str, float], annee: int) -> DecisionPolitiq
       `depenses_prioritaires_mde` (voir `model.py` et `moteur.py`).
     """
     index = max(0, annee - 1)
-    decision = DecisionPolitique(annee=annee, description=f"Année {annee} — leviers libres")
+    decision = DecisionPolitique(
+        annee=annee,
+        description=f"Année {annee} — leviers libres",
+        horizon_deux_mandatures=horizon > 5,
+    )
     recettes_libres = 0.0
     depenses_libres = 0.0
     for cle, levier in LEVIERS.items():

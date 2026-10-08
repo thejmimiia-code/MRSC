@@ -763,12 +763,17 @@ _lev(Levier(
     cle="adaptation_climat",
     libelle="Adaptation au changement climatique",
     famille="energie_climat",
-    description="Sécheresse, inondations, littoral, forêts, eau : le plan d'adaptation "
-                "national est financé à hauteur de ~0,2 % du PIB, le besoin est estimé à 1 %.",
+    description="Sécheresse, inondations, littoral, forêts, eau : le levier poursuit "
+                "les politiques d'adaptation. Sur dix ans (P17), un proxy de pertes "
+                "climatiques annualisées et de dommages évités est affiché séparément "
+                "du budget APU ; il n'est pas assimilé à une dépense publique ni à "
+                "une prévision annuelle.",
     unite="Md€", defaut=0.0, minimum=0.0, maximum=15.0, pas=0.5,
-    ligne="adaptation", profil=(0.4, 0.7, 0.9, 1.0, 1.0),
+    ligne="adaptation", champ="effort_adaptation_climat_mde",
+    profil=(0.4, 0.7, 0.9, 1.0, 1.0),
     effets_directs={"climat": 0.8, "resilience": 1.0, "territoires": 0.7, "agriculture": 0.6},
-    source="PNACC-3 ; rapport de la Cour des comptes sur l'adaptation (2024).",
+    source="PNACC-3 ; rapport de la Cour des comptes sur l'adaptation (2024) ; R&D "
+           "deux mandatures (docs/RD_DOUBLE_MANDATURE.md, point P17).",
 ))
 _lev(Levier(
     cle="transports_publics",
@@ -1050,6 +1055,136 @@ _lev(Levier(
     champ="reforme_non_cumul_mandats",
     effets_directs={"democratie": 0.7, "confiance": 0.5, "territoires": 0.3},
     source="Loi organique 2014-125 ; rapports sur le renouvellement démocratique.",
+))
+# ── Profondeur temporelle : deux mandatures consécutives (2027-2037) ────────
+# Quatre leviers issus de la R&D « points stratégiques systématiques de la
+# période de dix ans » : cf. docs/RD_DOUBLE_MANDATURE.md.
+_lev(Levier(
+    cle="verrouillage_irreversibilite",
+    libelle="Verrou constitutionnel des réformes",
+    famille="institutions_democratie",
+    description="Ancrage constitutionnel des réformes adoptées en première mandature "
+                "(révision par Congrès aux 3/5 ou référendum) : une alternance ne peut "
+                "plus les abroger d'un trait de plume. Divise par trois la prime de "
+                "risque électorale sur le spread souverain.",
+    unite="bool", type=TYPE_INTERRUPTEUR, defaut=0.0,
+    champ="verrouillage_irreversibilite", profil=(1.0, 1.0, 1.0, 1.0, 1.0),
+    effets_directs={"democratie": 0.5, "confiance": 0.6, "stabilite_gouvernementale": 0.5,
+                    "marches": 0.3},
+    source="Constitution de 1958, art. 89 et 11 ; R&D deux mandatures "
+           "(docs/RD_DOUBLE_MANDATURE.md, points P3 et P7).",
+))
+_lev(Levier(
+    cle="clause_revoyure_evaluation",
+    libelle="Clauses de revoyure & évaluation systématique",
+    famille="etat_fonction_publique",
+    description="Chaque réforme majeure est évaluée à date fixe (LOLF, Cour des comptes) "
+                "avec clause de revoyure : prolongation, ajustement ou abrogation "
+                "documentée. Condition de pilotage de la seconde mandature et "
+                "d'apaisement des années électorales.",
+    unite="bool", type=TYPE_INTERRUPTEUR, defaut=0.0,
+    champ="clause_revoyure_evaluation", profil=(1.0, 1.0, 1.0, 1.0, 1.0),
+    effets_directs={"confiance": 0.5, "democratie": 0.4},
+    source="LOLF du 1er août 2001 ; Constitution, art. 47-2 ; R&D deux mandatures "
+           "(docs/RD_DOUBLE_MANDATURE.md, point P13).",
+))
+_lev(Levier(
+    cle="dividende_dette_reinvesti",
+    libelle="Second dividende : charge de la dette réinvestie",
+    famille="etat_fonction_publique",
+    description="La maturité moyenne de la dette négociable est de 8,5 ans : sur deux "
+                "mandatures, le stock est intégralement refinancé aux taux détendus par "
+                "la trajectoire de désendettement. Les économies d'intérêts sont "
+                "réinvesties en pouvoir d'achat et services publics — une dépense gagée, "
+                "sans déficit supplémentaire. Ce dividende n'apparaît qu'en mandature 2.",
+    unite="Md€", defaut=0.0, minimum=0.0, maximum=15.0, pas=0.5,
+    champ="reinvestissement_dividende_dette_mde",
+    profil=(0.0, 0.2, 0.5, 0.8, 1.0),
+    effets_directs={"pouvoir_achat": 0.5, "confiance": 0.3, "dette": 0.4},
+    source="Agence France Trésor, maturité moyenne 8,5 ans ; R&D deux mandatures "
+           "(docs/RD_DOUBLE_MANDATURE.md, point P5).",
+))
+_lev(Levier(
+    cle="investissements_cycle_long",
+    libelle="Investissements à cycle long (rendement différé)",
+    famille="energie_climat",
+    description="EPR2, lois de programmation militaire, France 2030, prévention santé, "
+                "recherche : le coût est payé immédiatement (courbe en J), le rendement "
+                "n'arrive qu'au-delà de cinq ans — les fruits de la première mandature "
+                "sont récoltés pendant la seconde.",
+    unite="Md€", defaut=0.0, minimum=0.0, maximum=20.0, pas=0.5,
+    champ="investissements_cycle_long_mde", profil=(1.0, 1.0, 1.0, 1.0, 1.0),
+    effets_directs={"investissement": 0.5, "energie": 0.4, "defense": 0.3,
+                    "innovation": 0.3, "croissance": 0.3},
+    source="PPE ; LPM 2024-2030 ; sommet OTAN de La Haye (2025) ; dossier de "
+           "mandature, chiffrage prévention santé ; R&D deux mandatures (point P6).",
+))
+# ── Profondeur temporelle, phase 2 : points P16-P21 (R&D deux mandatures) ────
+_lev(Levier(
+    cle="entretien_capital_public",
+    libelle="Entretien du capital public (dette technique)",
+    famille="etat_fonction_publique",
+    description="Effort de maintenance et de rattrapage du patrimoine public : "
+                "bâtiments, ponts, rail, écoles et hôpitaux. Le simulateur compare "
+                "cet effort à une annualisation exploratoire des 140-150 Md€ de "
+                "besoins d'investissement estimés par la Cour des comptes à l'horizon "
+                "2050. Le stock non couvert est un proxy de scénario, pas une dette "
+                "comptable ni un montant officiel d'entretien annuel.",
+    unite="Md€", defaut=0.0, minimum=0.0, maximum=15.0, pas=0.5,
+    champ="entretien_capital_public_mde",
+    profil=(1.0, 1.0, 1.0, 1.0, 1.0),
+    effets_directs={"investissement": 0.4, "territoires": 0.4, "services_publics": 0.3},
+    source="Cour des comptes, analyse de l'exécution budgétaire 2023 — gestion du "
+           "patrimoine immobilier de l'État (140-150 Md€ de besoins d'investissement "
+           "à l'horizon 2050) ; annualisation exploratoire documentée au point P16.",
+))
+_lev(Levier(
+    cle="capital_humain",
+    libelle="Capital humain : éducation & formation",
+    famille="education_recherche",
+    description="Investissement additionnel d'éducation et de formation. Le coût "
+                "est immédiat ; le modèle suit la cohorte comme arrivée à maturité "
+                "après un délai exploratoire de huit ans. Aucun taux de rendement PIB "
+                "n'est présumé : le stock mature est affiché séparément.",
+    unite="Md€", defaut=0.0, minimum=0.0, maximum=15.0, pas=0.5,
+    champ="capital_humain_mde",
+    profil=(1.0, 1.0, 1.0, 1.0, 1.0),
+    effets_directs={"education": 0.5, "emploi": 0.4, "croissance": 0.3},
+    source="DEPP / Eurostat COFOG GF09 pour les dépenses d'éducation ; délai de "
+           "maturité de huit ans = hypothèse de scénario P18, sans rendement macro "
+           "attribué."
+))
+_lev(Levier(
+    cle="montee_capacite_defense",
+    libelle="Montée en capacité de défense (BITD)",
+    famille="regalien",
+    description="Investissement additionnel dans la base industrielle et "
+                "technologique de défense. Le coût est immédiat ; le modèle suit "
+                "le stock comme opérationnel après six ans (fenêtre LPM 2024-2030, "
+                "proxy de scénario). Aucun effet automatique sur les spreads n'est "
+                "présumé : le stock mature est affiché séparément.",
+    unite="Md€", defaut=0.0, minimum=0.0, maximum=20.0, pas=0.5,
+    champ="montee_capacite_defense_mde",
+    profil=(1.0, 1.0, 1.0, 1.0, 1.0),
+    effets_directs={"defense": 0.6, "souverainete": 0.4, "innovation": 0.3},
+    source="Loi de programmation militaire 2024-2030 (calendrier) ; délai de six "
+           "ans = hypothèse de montée en capacité, pas durée moyenne auditée."
+))
+_lev(Levier(
+    cle="charge_reformes_simultanees",
+    libelle="Grandes réformes menées de front",
+    famille="etat_fonction_publique",
+    description="Charge de mise en œuvre choisie pour le stress-test : nombre de "
+                "grands chantiers simultanés (et non nombre automatique de curseurs "
+                "ou d'interrupteurs activés). Au-delà de huit, un coût de saturation "
+                "administrative exploratoire s'applique à la confiance et à la tension. "
+                "Le seuil et les coefficients sont hypothétiques et doivent être testés "
+                "en sensibilité ; aucune borne officielle universelle n'existe.",
+    unite="réformes simultanées", defaut=0.0, minimum=0.0, maximum=16.0, pas=1.0,
+    champ="reformes_structurelles_actives", profil=(1.0, 1.0, 1.0, 1.0, 1.0),
+    effets_directs={"services_publics": -0.3, "stabilite_gouvernementale": -0.2},
+    source="Hypothèse de stress-test du moteur (P20), sans seuil officiel ; "
+           "à documenter par délais de mise en œuvre, évaluations et capacité RH.",
 ))
 _lev(Levier(
     cle="reforme_proportionnelle",
@@ -1346,6 +1481,42 @@ PRESETS: dict[str, dict[str, Any]] = {
             "dgf_delta": 0.0,
         },
         "couleur": "#22c55e",
+    },
+    "double_mandature": {
+        "libelle": "Deux mandatures consécutives (2027-2037)",
+        "description": "Doctrine de dix ans : réformes et verrou, second dividende, "
+                       "investissements de cycle long, rattrapage du patrimoine public, "
+                       "adaptation, capital humain, BITD et charge administrative. "
+                       "Hypothèses exploratoires distinctes des données observées.",
+        "parametres": {
+            "lutte_fraude_fiscale_ia": 10.0,
+            "fraude_sociale": 2.5,
+            "conditionnement_aides_entreprises": 12.0,
+            "taxe_superprofits": 6.0,
+            "extension_ttf": 5.0,
+            "impot_minimum_pilier2": 6.0,
+            "macf_carbone_frontiere": 4.0,
+            "niches_fiscales": 40.0,
+            "commande_publique": 5.0,
+            "fusion_doublons": 6.5,
+            "tva_energie_5_5": 1.0,
+            "reforme_casier_b2": 1.0,
+            "reforme_vote_blanc": 1.0,
+            "reforme_ric": 1.0,
+            "reforme_regimes_speciaux": 1.0,
+            "reforme_anti_pantouflage": 1.0,
+            "verrouillage_irreversibilite": 1.0,
+            "clause_revoyure_evaluation": 1.0,
+            "dividende_dette_reinvesti": 6.0,
+            "investissements_cycle_long": 6.0,
+            "entretien_capital_public": 6.0,
+            "adaptation_climat": 1.0,
+            "capital_humain": 2.0,
+            "montee_capacite_defense": 2.0,
+            "charge_reformes_simultanees": 6.0,
+            "dgf_delta": 0.0,
+        },
+        "couleur": "#2dd4bf",
     },
     "resilience": {
         "libelle": "Résilience républicaine & réarmement",

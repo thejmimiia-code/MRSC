@@ -1,7 +1,7 @@
 """
 simulateur/bulles.py — Bulles explicatives par levier.
 
-Chaque levier du catalogue (93 aujourd'hui) possède une **bulle** : une fiche
+Chaque levier du catalogue possède une **bulle** : une fiche
 calculée qui répond à trois questions, dans cet ordre :
 
   1. **Que déclenche ce réglage ?** — la chaîne technique réelle, lue dans le

@@ -253,6 +253,27 @@ class DecisionPolitique:
     plan_souverainete_semiconducteurs_mde: float = 0.0  # Chips Act / relocalisation (Md€/an)
     activation_clause_sauvegarde_nationale_ue: bool = False  # Dérogation défense du Pacte de stabilité
 
+    # --- PROFONDEUR TEMPORELLE : DEUX MANDATURES CONSÉCUTIVES (2027-2037) -----
+    # Dynamiques qui n'existent que sur la période de dix ans (R&D :
+    # docs/RD_DOUBLE_MANDATURE.md). Tous ces champs sont neutres par défaut :
+    # les scénarios quinquennaux existants restent strictement inchangés.
+    annee_electorale_majeure: bool = False            # Scrutin national général (présidentielle + législatives)
+    usure_politique_pts: float = 0.0                  # Usure cumulée du capital politique (0 à 100)
+    verrouillage_irreversibilite: bool = False        # Ancrage constitutionnel des réformes adoptées
+    clause_revoyure_evaluation: bool = False          # Évaluation systématique et clauses de revoyure
+    reinvestissement_dividende_dette_mde: float = 0.0 # Baisse de charge de la dette réinvestie (« second dividende »)
+    investissements_cycle_long_mde: float = 0.0       # Investissements à rendement différé au-delà de 5 ans
+
+    # --- PROFONDEUR TEMPORELLE, PHASE 2 (R&D « deux mandatures », suite) ------
+    # Points stratégiques complémentaires (docs/RD_DOUBLE_MANDATURE.md, P16-P21).
+    # Les nouvelles dynamiques de référence ne s'activent qu'au-delà de 5 ans.
+    horizon_deux_mandatures: bool = False
+    entretien_capital_public_mde: float = 0.0         # Besoin d'entretien / rattrapage (P16)
+    effort_adaptation_climat_mde: float = 0.0         # Adaptation climatique anticipée (P17)
+    capital_humain_mde: float = 0.0                   # Éducation/formation (P18)
+    montee_capacite_defense_mde: float = 0.0          # Montée en capacité de la BITD (P19)
+    reformes_structurelles_actives: float = 0.0       # Nombre de réformes menées de front (P20)
+
 
 @dataclass
 class ResultatEtapeSimulation:
@@ -287,6 +308,7 @@ class ResultatEtapeSimulation:
     spread_bund_bps: float
     note_souveraine: str
     taux_credit_pme: float
+    taux_credit_immobilier_menages: float = 3.85
     cours_petrole_usd: float = 82.5
     taux_change_eur_usd: float = 1.08
     facture_energetique_mde: float = 64.5
@@ -302,5 +324,20 @@ class ResultatEtapeSimulation:
     prime_risque_geopolitique_bps: float = 12.0
     chokepoints_sous_tension: int = 0
     stocks_strategiques_petrole_jours: float = 98.0
+
+    # Profondeur temporelle : deux mandatures consécutives (2027-2037)
+    usure_politique_pts: float = 0.0
+    irreversibilite_reformes_active: bool = False
+    investissements_matures_mde: float = 0.0
+
+    # Profondeur temporelle, phase 2 (R&D « deux mandatures », P16-P21)
+    dette_technique_infrastructures_mde: float = 0.0   # P16 : besoin d'investissement non couvert (proxy)
+    entretien_capital_public_mde: float = 0.0          # P16 : effort annuel déclaré
+    dommages_climat_subis_mde: float = 0.0            # P17 : risque annualisé (hors budget APU)
+    dommages_climat_evites_mde: float = 0.0            # P17 : dommages évités estimés (hors budget APU)
+    capital_humain_mature_mde: float = 0.0             # P18 : investissements ayant atteint maturité
+    capacites_defense_matures_mde: float = 0.0         # P19 : investissements BITD ayant atteint maturité
+    investissements_longs_engages_cumules_mde: float = 0.0  # P21 : flux d'investissement cumulés
+    reformes_structurelles_actives: float = 0.0        # P20 : intensité simultanée déclarée
 
     commentaires: list[str] = field(default_factory=list)

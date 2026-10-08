@@ -4,11 +4,12 @@ simulateur/dashboard.py — Serveur web du simulateur macro-politique.
 
 Deux niveaux de service cohabitent :
 
-  * **Simulateur interactif** (page `/`) : 93 leviers réglables, contexte de
+  * **Simulateur interactif** (page `/`) : catalogue de leviers réglables, contexte de
     données publiques « instant T », 20 domaines d'impact, matrice croisée
     levier × domaine, exports.
       - `GET  /api/catalogue`  : leviers, familles, préréglages, domaines ;
       - `GET  /api/contexte`   : contexte réel + provenance + sources navigateur ;
+      - `GET  /api/marches`    : 13 indices représentatifs, cotations à la demande et fraîcheur ;
       - `POST /api/donnees`    : valeurs collectées par le navigateur (API publiques) ;
       - `POST /api/simuler`    : simulation paramétrique complète ;
       - `GET  /api/comparer`   : comparaison des préréglages à l'année finale ;
@@ -33,15 +34,20 @@ import argparse
 import csv as csv_mod
 import json
 import os
+import sys
 import traceback
 from dataclasses import asdict
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from threading import Lock
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
 from simulateur.bulles import DETAILS, bulle_levier, bulles_catalogue
+from simulateur.clarte import lecture_claire
 from simulateur.cli import CATALOGUE_SCENARIOS, SCENARIOS_DISPONIBLES, executer_scenario
+from simulateur.compression import EN_TETE_VARY, repondre
+from simulateur.conseil import conseil_mouvement
 from simulateur.donnees_live import (
     INDICATEURS,
     Lecture,
@@ -52,6 +58,8 @@ from simulateur.donnees_live import (
     sauver_cache,
 )
 from simulateur.interface import HTML_PAGE
+from simulateur.lexique import lexique_public
+from simulateur.marches import obtenir_cotations
 from simulateur.moteur_parametrique import (
     catalogue_complet,
     comparer,
@@ -59,7 +67,9 @@ from simulateur.moteur_parametrique import (
 from simulateur.moteur_parametrique import (
     simuler as simuler_parametrique,
 )
+from simulateur.observatoire import observatoire_public
 from simulateur.parametres import PRESETS
+from simulateur.seuils import bareme_public
 
 #: Catalogue des scénarios historiques : clé → (fabrique de décisions, nom,
 #: description, couleur). `fn` est exposé pour la compatibilité des tests.
@@ -118,6 +128,20 @@ SCENARIOS: dict[str, dict[str, Any]] = {
         "couleur": "#38bdf8",
         "fn": CATALOGUE_SCENARIOS["resilience"][0],
     },
+    "double_mandature": {
+        "nom": "Deux mandatures consécutives (2027-2037)",
+        "description": "Dix ans : verrou constitutionnel des réformes, second dividende "
+                       "de la dette réinvesti, investissements à cycle long.",
+        "couleur": "#2dd4bf",
+        "fn": CATALOGUE_SCENARIOS["double_mandature"][0],
+    },
+    "alternance_2032": {
+        "nom": "Stress-test : alternance 2032",
+        "description": "Deux mandatures sans verrou constitutionnel : réformes révocables, "
+                       "usure maximale du capital politique.",
+        "couleur": "#f43f5e",
+        "fn": CATALOGUE_SCENARIOS["alternance_2032"][0],
+    },
 }
 
 #: Référence de contexte réutilisée entre les requêtes (mise en cache mémoire).
@@ -150,6 +174,54 @@ def contexte_courant(rafraichir: bool = False):
     return _CONTEXTE_CACHE["contexte"]
 
 
+_CACHE_BULLES: dict[tuple, Any] = {}
+_VERROU_BULLES = Lock()
+
+
+def catalogue_bulles(contexte, cles=None, avec_mesure: bool = True, detail: str = "resume"):
+    """Catalogue de bulles **mémoïsé** : le calcul complet coûte plusieurs secondes.
+
+    Mesuré sur ce dépôt : la construction des 101 bulles « détail complet »
+    prenait environ 4,6 s et produisait 2,1 Mio de JSON. Le contenu ne dépend
+    que du catalogue des leviers et du contexte « instant T » : il est donc
+    identique d'une requête à l'autre tant que le contexte n'a pas changé. On le
+    calcule une fois, puis on le ressert.
+
+    La clé de cache contient l'horodatage du contexte : un « Rafraîchir les
+    données » change l'horodatage et invalide donc naturellement le cache. Un
+    verrou évite que deux requêtes concurrentes ne calculent la même chose.
+    """
+    cle_cache = (detail, avec_mesure, tuple(cles or ()), contexte.mode, contexte.horodatage)
+    with _VERROU_BULLES:
+        if cle_cache in _CACHE_BULLES:
+            return _CACHE_BULLES[cle_cache]
+    resultat = bulles_catalogue(contexte, cles=cles, avec_mesure=avec_mesure, detail=detail)
+    with _VERROU_BULLES:
+        # Petit cache : au-delà de 6 entrées on repart de zéro (les variantes
+        # « résumé / complet » et les sous-ensembles de leviers sont en nombre
+        # fini, mais un usage soutenu ne doit pas faire croître la mémoire).
+        if len(_CACHE_BULLES) >= 6:
+            _CACHE_BULLES.clear()
+        _CACHE_BULLES[cle_cache] = resultat
+    return resultat
+
+
+def _avec_lecture(sortie) -> dict[str, Any]:
+    """Ajoute la « lecture en clair » à une sortie de simulation sérialisée.
+
+    Les chiffres du moteur sont exacts ; ils ne sont pas forcément lisibles par
+    quelqu'un qui ne pratique pas les finances publiques. `lecture_claire`
+    traduit la trajectoire en phrases ordinaires, à partir des mêmes nombres —
+    jamais à côté d'eux.
+    """
+    charge = sortie.en_dict()
+    try:
+        charge["lecture"] = lecture_claire(charge)
+    except Exception:  # pragma: no cover - la lecture est un confort
+        charge["lecture"] = {}
+    return charge
+
+
 def enregistrer_donnees_navigateur(lectures_brutes: dict[str, Any]) -> dict[str, Any]:
     """Fusionne des valeurs collectées par le navigateur dans le cache local.
 
@@ -173,6 +245,7 @@ def enregistrer_donnees_navigateur(lectures_brutes: dict[str, Any]) -> dict[str,
             url=brut.get("url") or "",
             statut="live",
             detail="collecté par le navigateur de l'utilisateur",
+            qualite_code=(str(brut["qualite_code"]) if brut.get("qualite_code") else None),
         )
     if lectures:
         try:
@@ -224,21 +297,38 @@ class DashboardHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", "0")
         self.end_headers()
 
+    def _preparer_charge(self, charge: bytes) -> tuple[bytes, str | None]:
+        """Compresse la charge si le navigateur l'accepte (voir compression.py).
+
+        Le gain est mesuré et documenté dans docs/RD_OPTIMISATION_FLUIDITE.md :
+        une simulation complète passe d'environ 240 Kio à une trentaine de Kio
+        sur le réseau, pour le même contenu.
+        """
+        return repondre(self.headers.get("Accept-Encoding"), charge)
+
     def _send_html(self, contenu: str) -> None:
-        charge = contenu.encode("utf-8")
+        charge, encodage = self._preparer_charge(contenu.encode("utf-8"))
         self.send_response(200)
         self.send_header("Content-Type", "text/html; charset=utf-8")
         self.send_header("Content-Length", str(len(charge)))
+        self.send_header("Vary", EN_TETE_VARY)
+        if encodage:
+            self.send_header("Content-Encoding", encodage)
         self.send_header("Cache-Control", "no-store")
         self.end_headers()
         if not self._tete_seulement:
             self.wfile.write(charge)
 
     def _send_json(self, donnees: dict[str, Any], status: int = 200) -> None:
-        charge = json.dumps(donnees, ensure_ascii=False, default=str).encode("utf-8")
+        charge, encodage = self._preparer_charge(
+            json.dumps(donnees, ensure_ascii=False, default=str).encode("utf-8")
+        )
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(charge)))
+        self.send_header("Vary", EN_TETE_VARY)
+        if encodage:
+            self.send_header("Content-Encoding", encodage)
         self.end_headers()
         if not self._tete_seulement:
             self.wfile.write(charge)
@@ -317,8 +407,13 @@ class DashboardHandler(BaseHTTPRequestHandler):
             self._send_json({
                 "contexte": contexte.en_dict(),
                 "browser": browser_payload(),
+                "observatoire": observatoire_public(),
                 "diagnostic": rapport_collecte(),
             })
+
+        elif chemin == "/api/marches":
+            actualiser = query.get("refresh", ["0"])[0] in ("1", "true", "oui")
+            self._send_json(obtenir_cotations(actualiser=actualiser))
 
         elif chemin == "/api/simuler":
             parametres = self._parametres_depuis_requete(None, query)
@@ -327,7 +422,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
                 sortie = simuler_parametrique(
                     parametres, contexte_courant(), avec_impacts=avec_impacts
                 )
-                self._send_json(sortie.en_dict())
+                self._send_json(_avec_lecture(sortie))
             except ValueError as exc:
                 self._send_json({"error": str(exc)}, status=400)
             except Exception:
@@ -339,6 +434,14 @@ class DashboardHandler(BaseHTTPRequestHandler):
             except Exception:
                 self._send_json({"error": traceback.format_exc()}, status=500)
 
+        elif chemin == "/api/garde_fous":
+            # Barème complet (audit et traçabilité) : chaque seuil est livré
+            # avec sa strate, ses bornes et sa source institutionnelle.
+            try:
+                self._send_json(bareme_public())
+            except Exception:
+                self._send_json({"error": traceback.format_exc()}, status=500)
+
         elif chemin == "/api/bulles":
             detail = query.get("detail", ["resume"])[0]
             if detail not in DETAILS:
@@ -347,7 +450,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
             avec_mesure = query.get("mesure", ["1"])[0] not in ("0", "false", "non")
             brutes = [cle for valeur in query.get("levier", []) for cle in valeur.split(",") if cle]
             try:
-                self._send_json(bulles_catalogue(
+                self._send_json(catalogue_bulles(
                     contexte_courant(), cles=brutes or None,
                     avec_mesure=avec_mesure, detail=detail,
                 ))
@@ -371,6 +474,12 @@ class DashboardHandler(BaseHTTPRequestHandler):
                 self._send_json({"error": str(exc)}, status=400)
             except Exception:
                 self._send_json({"error": traceback.format_exc()}, status=500)
+
+        elif chemin == "/api/lexique":
+            # Lexique « compréhensible pour tous » : chaque terme technique
+            # employé par la page, défini en français ordinaire, cherchable.
+            recherche = query.get("q", [""])[0]
+            self._send_json(lexique_public(recherche or None))
 
         elif chemin == "/api/presets":
             self._send_json({"presets": PRESETS})
@@ -467,7 +576,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
                     avec_impacts=bool(corps.get("avec_impacts", True)),
                     max_leviers_impacts=int(corps.get("max_impacts", 16)),
                 )
-                self._send_json(sortie.en_dict())
+                self._send_json(_avec_lecture(sortie))
             except ValueError as exc:
                 self._send_json({"error": str(exc)}, status=400)
             except Exception:
@@ -479,6 +588,28 @@ class DashboardHandler(BaseHTTPRequestHandler):
                 return
             try:
                 self._send_json(enregistrer_donnees_navigateur(corps.get("lectures") or {}))
+            except Exception:
+                self._send_json({"error": traceback.format_exc()}, status=500)
+
+        elif chemin == "/api/conseil":
+            # Conseiller temps réel (« effet papillon ») : compare deux exécutions
+            # réelles du moteur, le levier à sa position avant le dernier
+            # mouvement puis à sa position à l'instant T, toutes choses égales.
+            if not isinstance(corps, dict) or not corps.get("cle"):
+                self._send_json({"error": "Corps JSON avec « cle » attendu."}, status=400)
+                return
+            try:
+                conseil = conseil_mouvement(
+                    corps.get("parametres") or {},
+                    str(corps["cle"]),
+                    float(corps.get("avant", 0.0)),
+                    float(corps.get("apres", corps.get("avant", 0.0))),
+                    contexte_courant(),
+                    horizon=int(corps.get("horizon", 5)),
+                )
+                self._send_json(conseil)
+            except (TypeError, ValueError) as exc:
+                self._send_json({"error": str(exc)}, status=400)
             except Exception:
                 self._send_json({"error": traceback.format_exc()}, status=500)
 
@@ -497,12 +628,30 @@ def create_server(host: str = "0.0.0.0", port: int = 8080) -> ThreadingHTTPServe
     return serveur
 
 
+def _port_defaut() -> int:
+    """Port d'écoute : celui de l'hébergeur s'il en impose un, sinon 8080.
+
+    Presque toutes les plateformes (Render, Railway, Heroku, Scalingo, Fly,
+    Clever Cloud…) injectent ``PORT`` et refusent toute autre valeur. Lire la
+    variable permet de garder la même commande en local et en ligne, tout en
+    laissant ``--port`` gagner lorsqu'il est fourni explicitement.
+    """
+    brut = os.environ.get("PORT", "").strip()
+    try:
+        return int(brut) if brut else 8080
+    except ValueError:
+        print(f"  PORT invalide ({brut!r}) — repli sur 8080.", file=sys.stderr)
+        return 8080
+
+
 def main() -> None:
     analyseur = argparse.ArgumentParser(
         description="Simulateur macro-politique — serveur web interactif"
     )
-    analyseur.add_argument("--host", default="0.0.0.0", help="Adresse d'écoute (défaut : 0.0.0.0)")
-    analyseur.add_argument("--port", type=int, default=8080, help="Port d'écoute (défaut : 8080)")
+    analyseur.add_argument("--host", default=os.environ.get("HOST", "0.0.0.0"),
+                           help="Adresse d'écoute (défaut : $HOST ou 0.0.0.0)")
+    analyseur.add_argument("--port", type=int, default=_port_defaut(),
+                           help="Port d'écoute (défaut : $PORT ou 8080)")
     analyseur.add_argument("--rafraichir", action="store_true",
                            help="Interroge les API publiques au démarrage")
     arguments = analyseur.parse_args()
