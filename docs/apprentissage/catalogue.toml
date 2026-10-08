@@ -1,0 +1,1815 @@
+[[fiche]]
+id = "fr-lire-consigne"
+titre = "Lire une consigne en repérant l’action"
+matiere = "Français et communication"
+matiere_id = "francais"
+domaine = "langue-communication"
+niveau = 1
+minutes = 7
+resume = "Repérer ce qu’il faut faire, sur quoi, et sous quelle condition."
+objectif = "Comprendre l’action demandée sans devoir deviner les étapes."
+situation = "Consigne fictive : « Lisez la note, repérez la date et écrivez une question à poser. »"
+analogie_titre = "Comme une petite recette"
+analogie = "Dans une recette, le verbe indique le geste, l’ingrédient dit ce qu’on manipule et les détails précisent comment. Dans une consigne, le verbe d’action dit quoi faire, le complément indique sur quoi, et les conditions ajoutent les limites."
+limite_analogie = "Une recette suit souvent un ordre de cuisine. Une consigne peut être plus libre : lis-la en entier et vérifie le résultat attendu avant de commencer."
+notions = [
+  "Verbe d’action — mot qui annonce un geste, comme lire, comparer, entourer ou écrire.",
+  "Complément — mot ou groupe de mots qui précise ce que l’action concerne.",
+  "Condition — détail à respecter, comme une date, un nombre d’éléments ou un ordre."
+]
+demarche = [
+  "Lis toute la phrase une première fois, sans t’arrêter sur chaque mot.",
+  "Repère les verbes qui demandent une action : lire, repérer, écrire.",
+  "Pour chaque verbe, demande-toi : quoi ? sur quel document ? combien ? dans quel ordre ?",
+  "Redis la consigne avec tes propres mots avant de répondre."
+]
+exercice = "Dans cette consigne inventée, que faut-il faire en premier et quelle information faut-il noter ? « Entourez la salle B sur le plan, puis notez l’heure indiquée à côté. »"
+aide = "Cherche d’abord les mots qui se terminent par -ez : ils donnent ici les actions. Le mot « puis » indique un ordre."
+correction = [
+  "Première action : entourer la salle B sur le plan.",
+  "Deuxième action : noter l’heure indiquée à côté de cette salle. Le plan et l’heure sont les éléments à repérer."
+]
+a_retenir = [
+  "Le verbe donne souvent l’action à faire.",
+  "Les petits mots comme « puis », « avant » ou « seulement » changent parfois l’ordre ou les limites.",
+  "Tu peux reformuler la consigne avant d’agir."
+]
+transferer = "Cette méthode peut servir pour lire une notice, un planning, une demande de travail ou un formulaire. Si une consigne reste ambiguë, demander une précision est une stratégie utile."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — socle commun et cycles"
+url = "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"
+
+[[fiche]]
+id = "fr-ecrire-message"
+titre = "Écrire un message court et clair"
+matiere = "Français et communication"
+matiere_id = "francais"
+domaine = "langue-communication"
+niveau = 1
+minutes = 8
+resume = "Organiser les informations pour que la personne sache quoi comprendre ou faire."
+objectif = "Rédiger un message bref avec son sujet, l’information principale et la demande."
+situation = "Tu veux proposer un rendez-vous fictif à une connaissance : jeudi à 18 h, à la médiathèque. Tu souhaites savoir si cette heure lui convient."
+analogie_titre = "Comme une étiquette sur un colis"
+analogie = "Une étiquette aide le colis à arriver au bon endroit. Dans un message, un objet précis et un destinataire clair aident l’information à arriver à la bonne personne. Le texte donne ensuite le détail et l’action attendue."
+limite_analogie = "Un message peut demander une réponse ou ouvrir une discussion, alors qu’un colis ne répond pas. Le ton et les détails doivent aussi s’adapter à la relation et au sujet."
+notions = [
+  "Objet — quelques mots qui annoncent le sujet d’un courriel.",
+  "Information principale — fait nécessaire à la compréhension : quoi, quand, où.",
+  "Demande — question ou action que l’on propose à la personne."
+]
+demarche = [
+  "Commence par nommer le sujet ou la raison du message.",
+  "Place les informations utiles dans un ordre facile à suivre : quoi, quand, où.",
+  "Écris clairement ce que tu demandes ou proposes.",
+  "Relis en vérifiant le nom, la date, l’heure et le ton. Retire les détails qui n’aident pas."
+]
+exercice = "Écris deux ou trois phrases pour proposer à une personne de se retrouver mardi à 15 h devant la médiathèque. Demande-lui si cela lui convient. Tu peux répondre à l’écrit ou à voix haute."
+aide = "Tu peux t’appuyer sur ce début : « Bonjour, je te propose… Est-ce que… ? »"
+correction = [
+  "Exemple possible : « Bonjour, je te propose de nous retrouver mardi à 15 h devant la médiathèque. Est-ce que cela te convient ? À bientôt. »",
+  "D’autres formulations sont correctes si le jour, l’heure, le lieu et la question sont compréhensibles."
+]
+a_retenir = [
+  "Un message utile n’a pas besoin d’être long.",
+  "Des informations précises évitent plusieurs allers-retours.",
+  "La même idée peut être écrite de plusieurs façons."
+]
+transferer = "La trame peut servir pour un courriel, un texto, un message à un collègue ou une demande de rendez-vous. Pour des sujets sensibles, choisis un canal adapté et limite les informations personnelles."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — socle commun et cycles"
+url = "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"
+
+[[fiche]]
+id = "maths-lire-planning"
+titre = "Lire un planning et calculer une durée"
+matiere = "Mathématiques du quotidien"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 1
+minutes = 8
+resume = "Lire des heures et trouver le temps entre deux rendez-vous."
+objectif = "Calculer une durée en heures et en minutes, même quand elle passe par l’heure suivante."
+situation = "Un atelier commence à 8 h 35 et se termine à 10 h 05. Combien de temps dure-t-il ?"
+analogie_titre = "Comme avancer sur une ligne du temps"
+analogie = "Imagine une ligne sur laquelle les heures sont des repères. Pour mesurer la durée, pars de l’heure de départ et avance jusqu’à l’arrivée, en comptant les minutes parcourues."
+limite_analogie = "Une ligne dessinée peut sembler régulière, mais les heures se répètent après minuit et un planning peut changer de jour. Vérifie toujours la date et le fuseau si le contexte en dépend."
+notions = [
+  "Durée — temps écoulé entre un début et une fin.",
+  "Une heure — 60 minutes.",
+  "Horaire — moment affiché sur une horloge ou dans un planning."
+]
+demarche = [
+  "Écris l’heure de départ et celle d’arrivée, sans les confondre.",
+  "Avance du départ jusqu’à l’heure ronde suivante, puis jusqu’à la fin.",
+  "Additionne les minutes et transforme 60 minutes en une heure.",
+  "Vérifie que l’heure de fin est bien après l’heure de départ."
+]
+exercice = "Un rendez-vous commence à 14 h 20 et finit à 15 h 05. Quelle est sa durée ?"
+aide = "Compte d’abord de 14 h 20 à 15 h 00, puis de 15 h 00 à 15 h 05."
+correction = [
+  "De 14 h 20 à 15 h 00, il y a 40 minutes.",
+  "De 15 h 00 à 15 h 05, il y a 5 minutes.",
+  "40 + 5 = 45 minutes. Le rendez-vous dure 45 minutes."
+]
+a_retenir = [
+  "Une heure vaut 60 minutes, pas 100 minutes.",
+  "Découper le trajet en deux morceaux autour d’une heure ronde simplifie le calcul.",
+  "Vérifie la date si l’horaire passe à un autre jour."
+]
+transferer = "Tu peux utiliser cette méthode pour un trajet, une pause, un horaire de travail ou une durée de cuisson. Les horaires réels dépendent du planning concerné : la fiche n’en garantit aucun."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Éduscol — programme de mathématiques du cycle 2"
+url = "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"
+
+[[fiche]]
+id = "maths-budget"
+titre = "Additionner un petit budget et vérifier le reste"
+matiere = "Mathématiques et budget"
+matiere_id = "economie"
+domaine = "economie-finances"
+niveau = 1
+minutes = 8
+resume = "Additionner des prix et comparer une dépense à la somme disponible."
+objectif = "Calculer le total de quelques achats, puis trouver ce qu’il reste dans un budget fictif."
+situation = "Pour un goûter inventé, trois achats coûtent 12,50 €, 8,40 € et 4,10 €. Tu as prévu 30 €. Quel est le total ? Quelle somme reste-t-il ?"
+analogie_titre = "Comme une enveloppe avec une somme limitée"
+analogie = "Imagine que l’enveloppe contient 30 €. Chaque achat retire une partie de cette somme. Additionner les prix permet de savoir combien a été utilisé ; soustraire le total aide à trouver ce qui reste."
+limite_analogie = "Dans la vie, un budget peut comporter des dépenses oubliées, des frais variables ou des dates différentes. Cet exemple ne remplace pas un budget complet ni un conseil financier."
+notions = [
+  "Total — somme obtenue en réunissant plusieurs montants.",
+  "Reste — différence entre la somme de départ et ce qui a été dépensé.",
+  "Virgule décimale — elle sépare les euros et les centimes dans l’écriture d’un prix."
+]
+demarche = [
+  "Aligne les virgules des prix ou additionne d’abord les euros et les centimes.",
+  "Additionne les trois montants : 12,50 + 8,40 + 4,10.",
+  "Compare le total aux 30 € prévus.",
+  "Soustrais la dépense totale du budget pour trouver le reste, puis vérifie par addition."
+]
+exercice = "Tu as prévu 25 €. Deux achats fictifs coûtent 9,80 € et 6,75 €. Combien dépenses-tu ? Combien reste-t-il ?"
+aide = "Tu peux écrire 9,80 + 6,75, puis faire 25,00 moins le total."
+correction = [
+  "9,80 € + 6,75 € = 16,55 € dépensés.",
+  "25,00 € − 16,55 € = 8,45 € restants.",
+  "Vérification : 16,55 € + 8,45 € = 25,00 €."
+]
+a_retenir = [
+  "Pour additionner des prix, garde les euros sous les euros et les centimes sous les centimes.",
+  "Le reste se calcule en soustrayant la dépense du budget prévu.",
+  "Une estimation rapide peut aider à repérer une erreur de virgule."
+]
+transferer = "Cette compétence sert à lire un ticket, comparer quelques prix ou prévoir une dépense. Les tarifs et contrats réels peuvent comporter des conditions supplémentaires : vérifie toujours le document du fournisseur."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Éduscol — programmes et ressources de mathématiques"
+url = "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"
+
+[[fiche]]
+id = "maths-partager"
+titre = "Partager une quantité en parts égales"
+matiere = "Mathématiques du quotidien"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 1
+minutes = 7
+resume = "Comprendre la multiplication et la division avec des groupes de même taille."
+objectif = "Trouver combien d’objets placer dans chaque groupe quand le partage est égal."
+situation = "Une association prépare 24 livrets fictifs et les répartit à parts égales dans 4 pochettes. Combien de livrets vont dans chaque pochette ?"
+analogie_titre = "Comme répartir des objets dans des plateaux"
+analogie = "Si tu poses le même nombre d’objets dans chaque plateau, tu peux distribuer un par un ou chercher un nombre qui, répété quatre fois, donne 24. Les deux façons décrivent le même partage."
+limite_analogie = "Dans un partage réel, certains objets ne se divisent pas en morceaux égaux. Il faut alors annoncer le reste ou trouver une autre répartition ; on ne peut pas toujours l’ignorer."
+notions = [
+  "Multiplication — addition répétée de groupes identiques.",
+  "Division — opération qui partage une quantité ou cherche combien de groupes sont possibles.",
+  "Part égale — chaque groupe reçoit la même quantité."
+]
+demarche = [
+  "Compte le nombre total d’objets : ici, 24.",
+  "Compte le nombre de groupes : ici, 4 pochettes.",
+  "Cherche le nombre qui, multiplié par 4, donne 24.",
+  "Vérifie en recomposant le total avec 4 groupes."
+]
+exercice = "Répartis 18 bouteilles d’eau, de manière égale, dans 3 caisses. Combien y en a-t-il par caisse ?"
+aide = "Cherche un nombre qui, multiplié par 3, donne 18."
+correction = [
+  "18 ÷ 3 = 6.",
+  "Il y a 6 bouteilles par caisse.",
+  "Vérification : 6 + 6 + 6 = 18, ou 6 × 3 = 18."
+]
+a_retenir = [
+  "La division partage ou regroupe.",
+  "La multiplication peut vérifier un partage.",
+  "Quand il reste des objets, note le reste au lieu de le cacher."
+]
+transferer = "La méthode sert à répartir des équipes, du matériel, des portions ou des tâches. Dans la réalité, vérifie que les groupes doivent bien être égaux."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Éduscol — programme de mathématiques du cycle 2"
+url = "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"
+
+[[fiche]]
+id = "maths-fractions-recette"
+titre = "Comprendre une fraction avec une recette"
+matiere = "Mathématiques du quotidien"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 2
+minutes = 9
+resume = "Lire une fraction comme un nombre de parts égales."
+objectif = "Interpréter un demi, un quart et trois quarts d’une quantité."
+situation = "Une préparation fictive demande 600 g de farine. On veut préparer la moitié de cette quantité, puis les trois quarts."
+analogie_titre = "Comme découper une tarte en parts égales"
+analogie = "Le nombre du bas indique en combien de parts égales on partage l’ensemble. Le nombre du haut indique combien de parts on prend. Trois quarts, c’est trois parts quand l’ensemble est découpé en quatre parts égales."
+limite_analogie = "Les parts d’une tarte semblent faciles à voir, mais les fractions décrivent aussi des nombres, des durées ou des distances. Une fraction n’est pas toujours une part matérielle que l’on peut découper."
+notions = [
+  "Fraction — écriture qui exprime une ou plusieurs parts égales d’un tout.",
+  "Dénominateur — nombre du bas : il indique le nombre de parts égales dans le tout.",
+  "Numérateur — nombre du haut : il indique combien de ces parts on prend."
+]
+demarche = [
+  "Pour trouver la moitié, divise la quantité par 2 : 600 ÷ 2.",
+  "Pour trouver un quart, divise par 4 : 600 ÷ 4.",
+  "Pour trouver trois quarts, calcule un quart puis prends-en trois.",
+  "Vérifie que trois quarts sont plus grands qu’un quart et plus petits que la quantité entière."
+]
+exercice = "Une bouteille contient 800 mL. Combien font la moitié de son contenu ? Et un quart ?"
+aide = "Pour la moitié, divise par 2. Pour le quart, divise par 4."
+correction = [
+  "La moitié : 800 ÷ 2 = 400 mL.",
+  "Un quart : 800 ÷ 4 = 200 mL.",
+  "Vérification : deux quarts font la moitié, soit 400 mL."
+]
+a_retenir = [
+  "Pour calculer une part unitaire, divise le tout par le nombre de parts égales.",
+  "Pour plusieurs parts, multiplie la part unitaire par le nombre de parts prises.",
+  "Vérifie si le résultat est plus petit ou plus grand que l’ensemble, selon la fraction."
+]
+transferer = "Tu peux réutiliser les fractions pour une recette, un temps de trajet ou une quantité partagée. Pour modifier une recette réelle, vérifie aussi les autres ingrédients et les consignes de cuisson."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Éduscol — programme de mathématiques du cycle 2"
+url = "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"
+
+[[fiche]]
+id = "maths-pourcentage"
+titre = "Calculer une réduction de 20 %"
+matiere = "Mathématiques du quotidien"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 3
+minutes = 8
+resume = "Trouver le montant d’une réduction, puis le nouveau prix."
+objectif = "Calculer 20 % d’un prix en utilisant 10 % comme étape intermédiaire."
+situation = "Un article fictif coûte 80 €. Une étiquette annonce une réduction de 20 %. Combien économise-t-on ? Quel est le prix réduit ?"
+analogie_titre = "Comme colorier 20 cases sur une grille de 100"
+analogie = "Le symbole % signifie « pour cent », c’est-à-dire sur 100. Sur une grille de cent cases, 20 % correspondraient à 20 cases. Pour un prix de 80 €, 10 % vaut 8 €, donc 20 % vaut deux fois 8 €."
+limite_analogie = "Une grille aide à visualiser la proportion, mais un prix n’est pas composé de cent morceaux égaux. Les frais, les conditions de l’offre ou les prix de départ peuvent modifier une comparaison réelle."
+notions = [
+  "Pourcentage — manière d’exprimer une proportion sur 100.",
+  "10 % — un dixième de la quantité ; on peut donc diviser par 10.",
+  "Prix réduit — prix de départ moins le montant économisé."
+]
+demarche = [
+  "Trouve 10 % de 80 € : 80 ÷ 10 = 8 €.",
+  "Double ce montant pour obtenir 20 % : 8 × 2 = 16 €.",
+  "Soustrais la réduction du prix de départ : 80 − 16.",
+  "Vérifie que le prix réduit est bien inférieur au prix initial."
+]
+exercice = "Un sac fictif coûte 50 €. La réduction affichée est de 10 %. Quel est le montant économisé et quel est le prix après réduction ?"
+aide = "10 % signifie un dixième. Divise 50 par 10 avant de soustraire."
+correction = [
+  "10 % de 50 € = 50 ÷ 10 = 5 €.",
+  "Prix après réduction : 50 € − 5 € = 45 €.",
+  "Vérification : le prix réduit est inférieur de 5 € au prix de départ."
+]
+a_retenir = [
+  "Pour calculer 10 %, divise par 10.",
+  "Pour calculer 20 %, double 10 %.",
+  "Un pourcentage s’applique à une base : vérifie toujours de quel prix il s’agit."
+]
+transferer = "Cette méthode aide à estimer une remise ou une part d’un budget. Pour comparer des offres commerciales, regarde aussi la quantité, les frais et les conditions indiqués."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Éduscol — programmes et ressources de mathématiques"
+url = "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"
+
+[[fiche]]
+id = "maths-lire-graphique"
+titre = "Lire un tableau ou un graphique sans tirer de conclusion trop vite"
+matiere = "Mathématiques et données"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 3
+minutes = 9
+resume = "Repérer le titre, les unités, la valeur la plus élevée et la portée des données."
+objectif = "Extraire une information chiffrée et distinguer ce que les données montrent de ce qu’elles ne prouvent pas."
+situation = "Exemple entièrement fictif : un tableau indique le nombre de personnes présentes à un atelier sur trois jours : lundi 6, mardi 8, mercredi 5."
+analogie_titre = "Comme lire un panneau avant de prendre une route"
+analogie = "Le titre, les axes et les unités sont comme les indications d’un panneau : ils disent ce que l’on regarde et dans quelle mesure. Sans eux, on risque de comparer des nombres qui ne parlent pas de la même chose."
+limite_analogie = "Un panneau indique un chemin ; des données décrivent seulement les mesures recueillies. Elles ne disent pas toujours pourquoi un changement a eu lieu ni ce qui se passera ensuite."
+notions = [
+  "Titre — indique généralement le sujet des données.",
+  "Unité — précise ce que l’on compte ou mesure, par exemple des personnes ou des euros.",
+  "Tendance — évolution visible sur plusieurs mesures ; elle ne démontre pas à elle seule sa cause."
+]
+demarche = [
+  "Lis le titre et la période avant de regarder les chiffres.",
+  "Repère l’unité et les catégories comparées.",
+  "Lis les valeurs avec leurs intitulés ; compare seulement ce qui est comparable.",
+  "Sépare le constat (« mardi a la valeur la plus grande ») de l’explication (« pourquoi ? »)."
+]
+exercice = "Avec les trois nombres fictifs de la situation, quel jour a le plus de présences ? Combien y en a-t-il au total ? Peut-on conclure que les présences augmentent chaque jour ?"
+aide = "Compare 6, 8 et 5. Pour le total, additionne-les. Pour la dernière question, regarde si chaque valeur est plus grande que la précédente."
+correction = [
+  "Mardi a la valeur la plus élevée : 8 présences.",
+  "Total des trois jours : 6 + 8 + 5 = 19 présences.",
+  "Non, les nombres n’augmentent pas chaque jour : 6 devient 8 puis 5. Et trois journées fictives ne suffiraient pas à expliquer les causes d’une évolution réelle."
+]
+a_retenir = [
+  "Un nombre se lit avec son titre, sa période et son unité.",
+  "Un constat chiffré n’est pas encore une explication.",
+  "Un exemple fictif ne décrit pas une fréquentation réelle."
+]
+transferer = "La démarche sert à lire un graphique dans un journal, une facture, un rapport ou un tableau de travail. Pour une décision importante, consulte la source et la méthode de collecte des chiffres."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Éduscol — programme de mathématiques du cycle 2"
+url = "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"
+
+[[fiche]]
+id = "maths-surface"
+titre = "Mesurer une surface et distinguer aire et contour"
+matiere = "Mathématiques du quotidien"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 2
+minutes = 8
+resume = "Calculer la surface d’un rectangle et ne pas la confondre avec son bord."
+objectif = "Utiliser longueur × largeur pour trouver l’aire d’un rectangle."
+situation = "Une pièce rectangulaire fictive mesure 4 m de long sur 3 m de large. Quelle surface de sol faut-il couvrir ?"
+analogie_titre = "Comme compter les carreaux à l’intérieur d’un cadre"
+analogie = "Imagine des carreaux identiques qui remplissent le sol. Quatre rangées de trois carreaux font 12 carreaux : longueur × largeur permet de compter l’espace couvert."
+limite_analogie = "Un vrai sol n’est pas toujours un rectangle parfait et les murs, découpes ou ouvertures comptent pour la pose. Le calcul simplifié ne remplace pas une mesure précise du chantier."
+notions = [
+  "Aire — mesure de la surface à l’intérieur d’une forme, exprimée par exemple en m².",
+  "Périmètre — longueur du contour d’une forme, exprimée dans une unité de longueur comme le mètre.",
+  "Rectangle — forme avec quatre angles droits ; ses côtés opposés ont la même longueur."
+]
+demarche = [
+  "Repère les deux dimensions du rectangle : longueur et largeur.",
+  "Multiplie-les : 4 m × 3 m = 12 m².",
+  "Écris l’unité de surface : des mètres carrés.",
+  "Demande-toi si la question porte sur l’intérieur (aire) ou le tour (périmètre)."
+]
+exercice = "Un tapis rectangulaire fictif mesure 5 m sur 2 m. Quelle est son aire ?"
+aide = "Multiplie les deux mesures : 5 × 2. L’unité sera le mètre carré."
+correction = [
+  "5 m × 2 m = 10 m².",
+  "L’aire du tapis est de 10 mètres carrés. Cela mesure la surface couverte, pas la longueur de son contour."
+]
+a_retenir = [
+  "Aire d’un rectangle = longueur × largeur.",
+  "Le mètre mesure une longueur ; le mètre carré mesure une surface.",
+  "Aire et périmètre répondent à deux questions différentes."
+]
+transferer = "Ce calcul peut aider à estimer une surface de sol, de tissu ou de peinture. Pour acheter des matériaux, prends en compte les pertes, les formes particulières et les recommandations du fabricant."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Éduscol — programme de mathématiques du cycle 2"
+url = "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"
+
+[[fiche]]
+id = "sciences-demarche"
+titre = "Distinguer une observation d’une explication"
+matiere = "Sciences"
+matiere_id = "sciences"
+domaine = "sciences-techniques-environnement"
+niveau = 2
+minutes = 9
+resume = "Décrire ce qui a été observé, puis tester une explication possible."
+objectif = "Formuler une question et comparer deux conditions en ne changeant qu’un élément à la fois."
+situation = "Expérience fictive et sans danger : deux morceaux identiques de papier absorbant reçoivent chacun une petite quantité d’eau. On veut comparer deux marques."
+analogie_titre = "Comme tester une recette en ne changeant qu’un ingrédient"
+analogie = "Si tu changes le four, la quantité et les ingrédients en même temps, tu ne sais pas lequel a modifié le résultat. Pour comparer deux papiers, garde les conditions aussi semblables que possible et change seulement la marque."
+limite_analogie = "Une expérience de sciences demande aussi des mesures, des répétitions et une description précise. Une recette réussie une fois ne suffit pas à établir une règle générale."
+notions = [
+  "Observation — description de ce que l’on voit ou mesure, sans ajouter une cause supposée.",
+  "Hypothèse — explication possible qu’on peut mettre à l’épreuve.",
+  "Variable — élément qui peut changer, comme la marque, la quantité ou la durée."
+]
+demarche = [
+  "Pose une question précise : lequel des deux papiers absorbe le plus d’eau dans les mêmes conditions ?",
+  "Note ce qui restera pareil : taille des morceaux, quantité d’eau, durée et méthode de mesure.",
+  "Change uniquement la marque, puis observe ou mesure le résultat.",
+  "Répète si possible et décris ce que tu as vraiment mesuré, sans transformer une seule observation en règle universelle."
+]
+exercice = "Dans une comparaison, on utilise un papier plus grand, davantage d’eau et une durée plus longue pour l’un des échantillons. Peut-on attribuer le résultat à la seule marque ? Pourquoi ?"
+aide = "Liste les éléments qui n’étaient pas identiques."
+correction = [
+  "Non. La taille, la quantité d’eau et la durée changent en même temps que la marque.",
+  "On ne sait donc pas quel changement explique le résultat. Il faut garder ces conditions comparables et ne faire varier qu’un élément à la fois."
+]
+a_retenir = [
+  "Sépare ce que tu as vu de ce que tu penses que cela signifie.",
+  "Une comparaison est plus utile si les conditions sont équitables.",
+  "Une observation limitée ne prouve pas une règle valable dans toutes les situations."
+]
+transferer = "Cette façon de raisonner sert pour une expérience simple, un test de matériel ou une comparaison de méthodes. Pour les produits chimiques, la santé, l’électricité ou les outils, ne réalise pas d’essai sans consigne fiable et sécurité adaptée."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — programmes et enseignements"
+url = "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011"
+
+[[fiche]]
+id = "tech-kwh"
+titre = "Comprendre un kilowattheure"
+matiere = "Sciences et technologie"
+matiere_id = "sciences"
+domaine = "sciences-techniques-environnement"
+niveau = 3
+minutes = 9
+resume = "Relier une puissance à une durée pour comprendre une consommation d’électricité."
+objectif = "Utiliser la relation énergie consommée = puissance × durée dans un exemple simple."
+situation = "Un appareil fictif utilise une puissance moyenne de 1 000 watts pendant une heure. Quelle énergie cela représente-t-il ?"
+analogie_titre = "Comme le débit d’un robinet et le volume dans un seau"
+analogie = "Le débit dit combien d’eau passe chaque minute ; le volume total dépend aussi du temps pendant lequel le robinet coule. De façon comparable, la puissance indique un rythme d’utilisation de l’énergie et la durée contribue à la consommation totale."
+limite_analogie = "L’électricité n’est pas de l’eau, et cette comparaison n’explique pas son fonctionnement physique. La puissance réelle d’un appareil peut varier pendant l’usage : une étiquette ou un calcul simple donne un repère, pas toujours la consommation exacte du foyer."
+notions = [
+  "Watt (W) — unité de puissance.",
+  "Kilowatt (kW) — 1 000 watts.",
+  "Kilowattheure (kWh) — énergie consommée par une puissance d’un kilowatt utilisée pendant une heure."
+]
+demarche = [
+  "Convertis la puissance en kilowatts : 1 000 W = 1 kW.",
+  "Multiplie la puissance en kW par la durée en heures : 1 kW × 1 h = 1 kWh.",
+  "Pour 500 W pendant 2 h, convertis d’abord : 500 W = 0,5 kW.",
+  "Calcule 0,5 kW × 2 h = 1 kWh."
+]
+exercice = "Un appareil fictif de 500 W fonctionne pendant 2 heures à cette puissance. Quelle énergie cela représente-t-il ?"
+aide = "500 W correspond à 0,5 kW. Multiplie 0,5 par 2 heures."
+correction = [
+  "500 W = 0,5 kW.",
+  "0,5 kW × 2 h = 1 kWh.",
+  "L’exemple suppose une puissance constante ; un appareil réel peut fonctionner par cycles et consommer autrement."
+]
+a_retenir = [
+  "Le watt et le kilowatt décrivent une puissance ; le kilowattheure décrit une énergie.",
+  "1 kW pendant 1 h correspond à 1 kWh.",
+  "Le coût dépend aussi du tarif appliqué et des autres éléments de la facture ; aucun prix actuel n’est donné ici."
+]
+transferer = "Pour comprendre une étiquette d’énergie, compare la puissance indiquée et la durée d’utilisation. Pour ta consommation réelle, utilise la mesure du compteur et la facture de ton fournisseur, dont les tarifs et conditions peuvent changer."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "ADEME — comprendre et simuler la consommation électrique"
+url = "https://agirpourlatransition.ademe.fr/particuliers/evaluer-son-impact/calculer-impact-logement/simulez-votre-consommation-electrique-avec-wattris"
+
+[[fiche]]
+id = "geo-echelle-carte"
+titre = "Lire l’échelle d’une carte"
+matiere = "Géographie et espace"
+matiere_id = "geographie"
+domaine = "geographie"
+niveau = 2
+minutes = 8
+resume = "Passer d’une distance dessinée à une distance représentée."
+objectif = "Utiliser une échelle numérique simple et distinguer une distance en ligne droite d’un trajet."
+situation = "Sur une carte fictive à l’échelle 1 : 100 000, deux points sont séparés de 3,5 cm. Quelle est leur distance en ligne droite sur le terrain ?"
+analogie_titre = "Comme une maquette réduite"
+analogie = "Une maquette conserve une relation de taille avec l’objet réel. L’échelle d’une carte joue ce rôle : à l’échelle 1 : 100 000, un centimètre sur la carte représente 100 000 centimètres sur le terrain."
+limite_analogie = "Une carte simplifie le territoire et peut déformer les distances ou les formes. La distance droite entre deux points n’est pas forcément la distance à parcourir par une route ou un chemin."
+notions = [
+  "Échelle — rapport entre une distance dessinée et la distance représentée.",
+  "1 : 100 000 — 1 unité sur la carte représente 100 000 fois cette unité sur le terrain.",
+  "Ligne droite — distance directe entre deux points, sans suivre les routes."
+]
+demarche = [
+  "Lis le nombre de l’échelle : 1 cm représente 100 000 cm.",
+  "Convertis 100 000 cm en kilomètres : 100 000 cm = 1 000 m = 1 km.",
+  "Multiplie la distance sur la carte par la distance représentée : 3,5 cm représentent 3,5 km en ligne droite.",
+  "Pour un trajet, mesure le parcours sur les routes et tiens compte du réseau réel."
+]
+exercice = "Sur la même carte fictive, deux lieux sont séparés de 2 cm. Quelle distance en ligne droite cela représente-t-il ?"
+aide = "À cette échelle, 1 cm sur le papier représente 1 km sur le terrain."
+correction = [
+  "1 cm représente 1 km.",
+  "2 cm représentent donc 2 km en ligne droite.",
+  "Un itinéraire réel peut être plus long."
+]
+a_retenir = [
+  "Vérifie d’abord l’échelle de la carte.",
+  "Convertis les unités avant de comparer les distances.",
+  "Distance directe, distance routière et durée du trajet sont trois informations différentes."
+]
+transferer = "Cette lecture peut servir pour un plan de quartier, une carte de randonnée ou un itinéraire. Pour un déplacement réel, vérifie les travaux, l’accessibilité et les conditions du trajet avec une source à jour."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Éduscol — enseignements et compétences des cycles scolaires"
+url = "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"
+
+[[fiche]]
+id = "civ-verifier-information"
+titre = "Vérifier une information avant de la partager"
+matiere = "Citoyenneté et médias"
+matiere_id = "citoyennete"
+domaine = "citoyennete-medias"
+niveau = 2
+minutes = 9
+resume = "Identifier l’auteur, la date, la source et ce que l’information permet réellement de conclure."
+objectif = "Évaluer une affirmation et trouver une source indépendante avant de la transmettre."
+situation = "Message fictif : « Tout le monde reçoit 500 €. Donnez votre numéro de carte sur ce formulaire pour recevoir l’aide. » Cette annonce est inventée pour l’exercice."
+analogie_titre = "Comme lire l’étiquette d’un produit"
+analogie = "Avant d’utiliser un produit, on regarde ce qu’il contient et qui l’a fabriqué. Pour une information, regarde qui la publie, quand, sur quelles sources elle s’appuie et dans quel but."
+limite_analogie = "Une étiquette ne garantit pas toujours la qualité d’un produit, et une page officielle peut aussi être ancienne ou incomplète. Il faut comparer des sources adaptées au sujet et à ses conséquences."
+notions = [
+  "Source — personne, document ou organisme d’où vient une information.",
+  "Fait — affirmation vérifiable à partir d’éléments ; un fait peut rester incomplet ou être corrigé.",
+  "Opinion — jugement ou point de vue, qui ne se vérifie pas de la même manière qu’une date ou un montant."
+]
+demarche = [
+  "Repère l’auteur, la date et l’adresse du site où le message est publié.",
+  "Sépare l’affirmation vérifiable, l’opinion et la demande qui t’est faite.",
+  "Cherche la source d’origine par un chemin indépendant, par exemple en ouvrant toi-même le site officiel que tu connais.",
+  "Compare le contenu, la date et les conditions dans plusieurs sources adaptées. N’envoie pas de donnée bancaire via un lien non vérifié."
+]
+exercice = "Dans le message fictif, quelles informations manquent pour vérifier l’aide ? Quel détail constitue un risque particulier ?"
+aide = "Cherche un auteur, une date, un organisme identifiable et une source officielle. Observe aussi ce que le message demande au lecteur."
+correction = [
+  "Le message ne donne ni organisme vérifiable, ni source officielle, ni date, ni conditions.",
+  "Il demande un numéro de carte bancaire pour une promesse d’argent, ce qui doit rendre prudent.",
+  "Ne saisis pas ces informations depuis ce message. Recherche le service par un canal officiel trouvé séparément."
+]
+a_retenir = [
+  "Une répétition ou un ton pressant ne constitue pas une preuve.",
+  "Vérifie l’origine, la date et la source, puis compare.",
+  "Le niveau de vérification doit augmenter avec les conséquences possibles d’une erreur."
+]
+transferer = "La méthode s’applique à une rumeur, une offre, une image, un chiffre ou une annonce d’aide. En cas de risque financier ou de sécurité, demande conseil à un service officiel trouvé indépendamment."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "CLEMI — évaluer l’information"
+url = "https://www.clemi.fr/ressources/ressources-pedagogiques/evaluer-linformation"
+
+[[fiche.sources]]
+titre = "ANSSI — précautions face au hameçonnage"
+url = "https://anssi.gouv.fr/agence/cybersecurite/le-cybermois/cybermois-2022-tous-ensemble-face-aux-rancongiciels-et-au-hameconnage/"
+
+[[fiche]]
+id = "civ-lire-document"
+titre = "Lire un courrier ou une démarche étape par étape"
+matiere = "Citoyenneté et démarches"
+matiere_id = "citoyennete"
+domaine = "demarches-droits-travail"
+niveau = 2
+minutes = 8
+resume = "Repérer l’organisme, l’action demandée, la date et le moyen de réponse."
+objectif = "Extraire les informations utiles d’un document fictif sans supposer que l’exemple est une vraie procédure."
+situation = "Courrier d’entraînement fictif : « Pour confirmer votre présence à l’atelier, répondez avant le 12 mai par téléphone au numéro indiqué sur la convocation. » Ce document n’est pas une démarche réelle."
+analogie_titre = "Comme suivre un itinéraire avec des étapes"
+analogie = "Un itinéraire indique le point de départ, le chemin et la destination. Un document de démarche donne souvent un émetteur, une action à réaliser, une date limite et un canal de réponse."
+limite_analogie = "Une procédure administrative peut dépendre de la situation de la personne et changer avec le temps. Cette fiche apprend à repérer les éléments du document ; elle ne remplace jamais une source officielle à jour ni un accompagnement."
+notions = [
+  "Émetteur — organisme ou personne qui a envoyé le document.",
+  "Action demandée — tâche précise à réaliser ou information à fournir.",
+  "Échéance — date ou moment avant lequel une action doit être faite."
+]
+demarche = [
+  "Repère qui a envoyé le document et vérifie que tu t’attendais à le recevoir.",
+  "Entoure le verbe d’action : confirmer, envoyer, prendre rendez-vous, répondre.",
+  "Note la date limite et le canal demandé : courrier, téléphone, espace officiel.",
+  "Avant d’envoyer une pièce ou une information personnelle, vérifie l’organisme par un contact obtenu séparément."
+]
+exercice = "Dans le courrier fictif de la situation, quelle action est demandée, avant quelle date et par quel moyen ?"
+aide = "Repère le verbe « répondez », la date après « avant », et les mots qui suivent « par »."
+correction = [
+  "Action : confirmer sa présence à l’atelier en répondant.",
+  "Échéance de l’exemple : avant le 12 mai.",
+  "Canal indiqué dans cet exercice fictif : le numéro de téléphone inscrit sur la convocation. Dans une démarche réelle, il faut vérifier que le courrier est authentique et que l’année et les conditions sont bien précisées."
+]
+a_retenir = [
+  "Un courrier ne se résume pas à sa date : regarde aussi qui l’a envoyé et ce qui est demandé.",
+  "Une échéance dépend du contexte et peut avoir des conséquences ; vérifie l’année et les règles actuelles.",
+  "Ne transmets pas de document personnel à un contact que tu n’as pas vérifié."
+]
+transferer = "Cette méthode aide à lire une convocation, une facture ou un formulaire. Pour une décision juridique ou une aide financière, consulte une page officielle à jour ou une personne qualifiée ; cet exemple n’ouvre aucun droit."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Service-Public.fr — démarches et services en ligne officiels"
+url = "https://www.service-public.fr/"
+
+[[fiche.sources]]
+titre = "CNIL — minimisation et information des personnes"
+url = "https://www.cnil.fr/fr/passer-laction/rgpd-les-premieres-etapes"
+
+[[fiche]]
+id = "numerique-hameconnage"
+titre = "Repérer un message de hameçonnage"
+matiere = "Numérique et sécurité"
+matiere_id = "numerique"
+domaine = "numerique-ia"
+niveau = 2
+minutes = 8
+resume = "Prendre le temps de vérifier un message pressant avant de cliquer ou de répondre."
+objectif = "Savoir comment réagir à un courriel ou texto qui demande un code, un paiement ou des informations."
+situation = "Message fictif : « Votre colis est bloqué. Payez 1,20 € dans les 10 minutes avec ce lien. » L’exemple est inventé et ne décrit aucun transporteur."
+analogie_titre = "Comme demander un badge avant d’ouvrir une porte"
+analogie = "Une personne peut dire qu’elle vient d’un service connu. Avant de lui donner une clé, on vérifie son identité par un moyen fiable. Pour un message, vérifie l’expéditeur et la demande sans utiliser le lien reçu."
+limite_analogie = "Un message peut imiter très bien une identité et l’adresse d’expédition peut être trompeuse. Aucun indice isolé ne prouve à lui seul qu’un message est frauduleux ou authentique."
+notions = [
+  "Hameçonnage — tentative visant à pousser une personne à communiquer des informations ou à ouvrir un contenu dangereux.",
+  "Lien — adresse qui ouvre une page ; son apparence peut cacher sa destination réelle.",
+  "Canal indépendant — moyen de contacter un service sans reprendre le lien suspect reçu."
+]
+demarche = [
+  "Ne clique pas sous la pression et ne transmets aucun mot de passe, code de validation ou numéro de carte.",
+  "Ouvre séparément l’application ou le site officiel que tu utilises déjà, ou contacte le service avec un numéro vérifié.",
+  "Compare la demande avec ce que tu attendais : une urgence imposée ou un paiement inhabituel invite à la prudence.",
+  "Utilise les outils de signalement de ta messagerie ou les services officiels si le message est suspect."
+]
+exercice = "Le message fictif du colis demande un paiement dans les 10 minutes par un lien inconnu. Quelle première action prudente peux-tu faire ?"
+aide = "Tu peux vérifier le suivi par l’application ou le site du transporteur que tu connais, sans ouvrir le lien reçu."
+correction = [
+  "Ne clique pas sur le lien et ne paie pas depuis le message.",
+  "Si tu attends réellement un colis, vérifie le suivi par un canal indépendant connu.",
+  "Signale le message avec les outils de la messagerie ou les ressources officielles adaptées."
+]
+a_retenir = [
+  "L’urgence et les menaces servent parfois à pousser à l’action rapide.",
+  "Ne partage jamais un code de connexion parce qu’un message le demande.",
+  "Vérifie par un autre canal avant d’agir."
+]
+transferer = "Ces réflexes servent pour les courriels, SMS et appels inattendus. Les techniques changent ; consulte les recommandations récentes de l’ANSSI ou de Cybermalveillance.gouv.fr. Si un mot de passe a été partagé, change-le depuis le site officiel et demande rapidement de l’aide."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "ANSSI — hameçonnage et précautions élémentaires"
+url = "https://www.anssi.gouv.fr/particulier/principales-menaces/cybercriminalite/attaque-par-hameconnage-phishing//"
+
+[[fiche.sources]]
+titre = "Service-Public.fr — reconnaître et signaler le phishing"
+url = "https://www.service-public.fr/particuliers/vosdroits/F47157"
+
+[[fiche]]
+id = "numerique-proteger-donnees"
+titre = "Choisir quelles informations partager en ligne"
+matiere = "Numérique et vie privée"
+matiere_id = "numerique"
+domaine = "numerique-ia"
+niveau = 2
+minutes = 9
+resume = "Identifier une donnée personnelle et vérifier pourquoi un service la demande."
+objectif = "Limiter les informations partagées à ce qui est utile et choisir un destinataire fiable."
+situation = "Formulaire fictif pour recevoir le programme d’un atelier : il demande un nom, une adresse postale, un numéro de carte bancaire et des informations de santé."
+analogie_titre = "Comme ne donner que la clé nécessaire"
+analogie = "Si quelqu’un a besoin d’entrer dans une pièce, une clé de cette pièce suffit ; un trousseau complet donne plus d’accès que nécessaire. Avant de remplir un formulaire, demande-toi quelles informations sont vraiment utiles à cette démarche."
+limite_analogie = "Une donnée personnelle n’est pas littéralement une clé, et certaines informations peuvent être nécessaires selon le service. L’organisme doit expliquer son besoin, protéger les données et respecter les règles applicables."
+notions = [
+  "Donnée personnelle — information qui se rapporte à une personne identifiée ou identifiable, directement ou indirectement.",
+  "Minimisation — limiter les données utilisées à ce qui est nécessaire pour un but défini.",
+  "Donnée sensible — catégorie spéciale protégée par des règles renforcées, comme certaines données de santé ou opinions politiques."
+]
+demarche = [
+  "Cherche l’objectif du formulaire et l’identité de l’organisme.",
+  "Pour chaque champ, demande-toi : est-ce nécessaire pour cet objectif ? Est-ce facultatif ?",
+  "Vérifie qui recevra l’information et la notice de confidentialité.",
+  "Ne remplis pas un formulaire inattendu depuis un lien douteux. Tu peux demander pourquoi une donnée est nécessaire."
+]
+exercice = "Dans le formulaire fictif de la situation, quelles informations semblent les moins nécessaires pour envoyer le programme d’un atelier ? Quelle question pourrais-tu poser avant de continuer ?"
+aide = "Compare chaque champ à l’objectif affiché : recevoir un programme."
+correction = [
+  "Le numéro de carte bancaire et les informations de santé ne semblent pas utiles pour envoyer un programme. L’adresse postale peut aussi être inutile si le programme est envoyé par courriel.",
+  "On peut demander : « Pourquoi avez-vous besoin de cette donnée ? Est-elle obligatoire ? Qui la recevra et combien de temps sera-t-elle conservée ? »",
+  "La fiche est un exercice : les réponses dépendent du service réel et de sa finalité."
+]
+a_retenir = [
+  "Une information peut devenir personnelle même sans nom si elle permet de reconnaître quelqu’un.",
+  "Avant de partager, vérifie le but, le destinataire et le canal.",
+  "Ne transmets pas plus que nécessaire et évite de publier des informations sur d’autres personnes sans motif."
+]
+transferer = "La méthode s’applique aux formulaires, applications, photos, publications et outils d’IA. Les règles exactes dépendent du traitement ; lis l’information fournie et adresse une demande au responsable si tu veux comprendre l’usage."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "CNIL — identifier les données personnelles"
+url = "https://www.cnil.fr/fr/identifier-les-donnees-personnelles"
+
+[[fiche.sources]]
+titre = "CNIL — RGPD : les premières étapes"
+url = "https://www.cnil.fr/fr/passer-laction/rgpd-les-premieres-etapes"
+
+[[fiche]]
+id = "numerique-verifier-ia"
+titre = "Vérifier une réponse produite par une IA"
+matiere = "Numérique et intelligence artificielle"
+matiere_id = "numerique"
+domaine = "numerique-ia"
+niveau = 3
+minutes = 9
+resume = "Traiter une réponse automatique comme une proposition à vérifier, pas comme une preuve."
+objectif = "Vérifier l’origine, la date et le contexte d’un chiffre avant de le réutiliser."
+situation = "Une IA résume un sujet et annonce un chiffre. Tu veux le reprendre dans un message important : que vérifies-tu avant de le faire ?"
+analogie_titre = "Comme demander les notes d’un assistant"
+analogie = "Un assistant peut résumer vite un dossier ; avant de transmettre son résumé, tu regardes les documents utilisés et vérifies les passages importants. Une réponse d’IA mérite le même contrôle."
+limite_analogie = "Une IA n’est pas un collègue qui sait d’où viennent toutes ses phrases. Elle peut produire un texte fluide sans source fiable, mélanger des éléments ou inventer une référence."
+notions = [
+  "Modèle d’IA — système entraîné pour produire des réponses à partir d’instructions et de données.",
+  "Source — document d’origine permettant de vérifier une affirmation.",
+  "Hallucination — terme souvent utilisé quand un système produit une information fausse ou une référence inventée avec assurance."
+]
+demarche = [
+  "Repère l’affirmation précise : quel chiffre, quelle période, quel lieu ?",
+  "Demande une source, puis ouvre-la toi-même. Vérifie que la source existe et qu’elle dit bien cela.",
+  "Compare avec une source officielle ou indépendante pertinente, en gardant le contexte.",
+  "Si la réponse ne se vérifie pas, signale le doute ou ne la reprends pas comme certaine. Ne colle pas de données personnelles ou confidentielles dans un outil non approuvé."
+]
+exercice = "L’IA répond : « 72 % des habitants de la ville ont choisi ce projet », mais ne donne ni source, ni date, ni définition du mot « habitants ». Quelles questions faut-il résoudre avant de répéter ce chiffre ?"
+aide = "Demande : qui a mesuré, quand, sur quelle population et comment ?"
+correction = [
+  "Il faut identifier la source, la date, la méthode de mesure et le nombre de personnes interrogées.",
+  "Il faut clarifier si le chiffre porte sur tous les habitants, les personnes inscrites ou uniquement les personnes qui ont répondu.",
+  "Sans ces éléments, le chiffre n’est pas vérifié et ne doit pas être présenté comme une certitude."
+]
+a_retenir = [
+  "Une formulation convaincante n’est pas une preuve.",
+  "Vérifie la source directement, la date, les définitions et la méthode.",
+  "Protège les données personnelles et confidentielles quand tu utilises un outil."
+]
+transferer = "La méthode s’applique aux chiffres, citations, résumés, images et conseils produits par un outil d’IA. Pour une décision médicale, juridique, financière ou professionnelle importante, demande un avis humain qualifié et consulte des sources adaptées."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "CNIL — intelligence artificielle et données personnelles"
+url = "https://www.cnil.fr/fr/intelligence-artificielle"
+
+[[fiche.sources]]
+titre = "W3C — contenus utilisables pour des besoins cognitifs et d’apprentissage"
+url = "https://www.w3.org/TR/coga-usable/"
+
+[[fiche]]
+id = "langue-anglais-direction"
+titre = "Demander son chemin en anglais"
+matiere = "Langue étrangère : anglais"
+matiere_id = "langues"
+domaine = "langues-etrangeres"
+niveau = 1
+minutes = 7
+resume = "Utiliser quelques phrases courtes pour demander une direction et remercier."
+objectif = "Comprendre et réutiliser quatre expressions simples dans une situation de voyage."
+situation = "Tu es dans une gare et tu cherches la sortie. Tu peux demander : « Excuse me, where is the exit? »"
+analogie_titre = "Comme garder quelques outils dans sa poche"
+analogie = "On n’a pas besoin de connaître tout un dictionnaire pour commencer une conversation. Quelques expressions utiles sont comme de petits outils : choisis celui qui correspond à la situation et complète-le avec un mot connu."
+limite_analogie = "Une phrase apprise ne garantit pas que chacun la comprendra dans toutes les régions ou tous les contextes. L’accent, le bruit et les habitudes locales peuvent changer l’échange."
+notions = [
+  "Excuse me — formule polie pour attirer l’attention ou demander à passer.",
+  "Where is…? — « Où se trouve… ? ».",
+  "Could you…? — début d’une demande polie, comme « Pourriez-vous… ? »."
+]
+demarche = [
+  "Écoute ou lis l’expression entière avant de la répéter.",
+  "Remplace le lieu recherché : station (gare), exit (sortie), bus stop (arrêt de bus).",
+  "Ajoute « please » pour formuler une demande polie.",
+  "Termine par « Thank you » pour remercier. Tu peux aussi montrer une carte si les mots manquent."
+]
+exercice = "Complète et lis à voix haute, dans ta tête ou avec une personne, cette demande : « Excuse me, where is the ___, please? » Choisis : station, exit ou bus stop."
+aide = "La structure est la même ; seul le lieu recherché change."
+correction = [
+  "Exemple : « Excuse me, where is the station, please? » — « Excusez-moi, où se trouve la gare, s’il vous plaît ? »",
+  "Tu peux aussi demander : « Could you show me on the map, please? » — « Pourriez-vous me montrer sur la carte, s’il vous plaît ? »",
+  "Prononciation et formulation peuvent varier ; demander de répéter est normal."
+]
+a_retenir = [
+  "Excuse me attire poliment l’attention.",
+  "Where is…? demande où se trouve un lieu.",
+  "Une carte ou un geste peut compléter les mots."
+]
+transferer = "Tu peux remplacer le lieu par un autre nom connu et utiliser la même structure. Cette fiche est un petit point de départ ; elle ne couvre pas toute la langue anglaise."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — programmes et enseignements"
+url = "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011"
+
+[[fiche]]
+id = "arts-lire-image"
+titre = "Observer une image avant de l’interpréter"
+matiere = "Arts visuels et médias"
+matiere_id = "arts"
+domaine = "arts-culture"
+niveau = 2
+minutes = 8
+resume = "Séparer les éléments visibles, l’effet produit et l’interprétation personnelle."
+objectif = "Décrire une image avec des indices précis avant d’en déduire une intention."
+situation = "Image fictive : une affiche montre un vélo rouge au centre, une rue sombre à l’arrière-plan et le texte « Choisissez la liberté »."
+analogie_titre = "Comme un projecteur qui attire le regard"
+analogie = "La taille, le contraste et la place d’un élément peuvent guider le regard, comme un projecteur sur une scène. Repérer d’abord ce qui est visible aide à expliquer ensuite pourquoi un détail attire l’attention."
+limite_analogie = "Une image n’a pas toujours un seul projecteur ou une intention unique. Les personnes peuvent la lire différemment selon leur expérience et leur culture."
+notions = [
+  "Description — ce qui est effectivement visible ou écrit dans l’image.",
+  "Interprétation — idée que l’on construit à partir des indices visibles.",
+  "Cadrage — partie de la scène montrée, et partie laissée hors de l’image."
+]
+demarche = [
+  "Nomme trois détails visibles sans expliquer ce qu’ils signifient.",
+  "Observe ce qui est grand, coloré, centré ou répété.",
+  "Lis le texte et repère l’auteur, le contexte et le public visé si ces informations sont disponibles.",
+  "Propose une interprétation et indique les indices qui te l’ont suggérée."
+]
+exercice = "Dans l’affiche fictive, donne deux faits visibles et une interprétation possible. Quel détail de l’image soutient cette interprétation ?"
+aide = "Un fait visible peut être « le vélo est rouge et au centre ». Une interprétation est une idée que tu proposes, pas une observation directe."
+correction = [
+  "Faits visibles : le vélo est rouge, il est placé au centre ; une rue sombre apparaît derrière lui ; le texte dit « Choisissez la liberté ».",
+  "Interprétation possible : l’affiche associe le vélo à la liberté ou veut donner envie de le choisir. Le texte et la place centrale du vélo sont des indices.",
+  "Cette lecture est une hypothèse : il faudrait connaître l’auteur, le produit et le contexte pour aller plus loin."
+]
+a_retenir = [
+  "Décris d’abord ce que tu vois ; explique ensuite ce que tu en déduis.",
+  "Une image est cadrée : certaines choses sont montrées, d’autres restent hors champ.",
+  "Justifie une interprétation par des indices et laisse la place à d’autres lectures."
+]
+transferer = "Cette grille peut servir pour une affiche, une photographie, une publicité, une œuvre d’art ou une image partagée en ligne. Elle ne prouve pas à elle seule l’intention réelle de son auteur."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "CLEMI — ressources d’éducation aux médias et à l’image"
+url = "https://www.clemi.fr/ressources/ressources-pedagogiques/evaluer-linformation"
+
+[[fiche]]
+id = "arts-rythme-musique"
+titre = "Trouver la pulsation d’une musique"
+matiere = "Arts : musique"
+matiere_id = "arts"
+domaine = "arts-culture"
+niveau = 1
+minutes = 7
+resume = "Distinguer le battement régulier d’une musique des sons joués autour."
+objectif = "Repérer une pulsation et compter des temps dans un motif simple."
+situation = "Imagine un motif joué sur quatre temps : « fort, doux, doux, doux », puis répété. Il n’est pas nécessaire d’avoir un instrument pour lire l’exercice."
+analogie_titre = "Comme un pas régulier en marchant"
+analogie = "La pulsation ressemble à un pas régulier : elle donne un repère qui revient. Les sons ou silences placés entre les pas forment des rythmes plus variés."
+limite_analogie = "Toute musique ne suit pas une marche régulière. Les styles, les cultures et les interprétations peuvent utiliser des pulsations variables ou difficiles à compter."
+notions = [
+  "Pulsation — battement régulier qui sert de repère dans une musique.",
+  "Rythme — organisation des sons et des silences dans le temps.",
+  "Tempo — vitesse de la pulsation."
+]
+demarche = [
+  "Lis le motif en comptant lentement : 1, 2, 3, 4.",
+  "Repère le son qui revient au début du cycle.",
+  "Essaie de garder le même intervalle entre les nombres, même si le son change.",
+  "Recommence plus vite ou plus lentement : le motif peut garder le même ordre avec un autre tempo."
+]
+exercice = "Sur quatre temps réguliers, le motif est « frappe, silence, frappe, frappe ». Combien de sons entends-tu sur un cycle ? Où se trouvent-ils ?"
+aide = "Compte les temps et distingue le mot « silence » d’un son."
+correction = [
+  "Il y a trois sons sur quatre temps.",
+  "Ils se trouvent aux temps 1, 3 et 4 ; le deuxième temps est un silence.",
+  "Le comptage décrit cet exemple inventé, pas une règle pour toutes les musiques."
+]
+a_retenir = [
+  "La pulsation sert de repère régulier ; le rythme organise les sons et les silences.",
+  "Le tempo indique la vitesse de la pulsation.",
+  "On peut écouter, compter, taper doucement ou simplement lire le motif."
+]
+transferer = "Tu peux essayer cette idée en écoutant une musique qui te plaît, ou la remplacer par un mouvement discret. Rien n’oblige à produire un son : tu peux compter mentalement ou utiliser un support visuel."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — arts et enseignements scolaires"
+url = "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011"
+
+[[fiche]]
+id = "sante-lire-etiquette"
+titre = "Lire les repères d’une étiquette alimentaire"
+matiere = "Vie quotidienne et information alimentaire"
+matiere_id = "sante"
+domaine = "sante-securite-corps"
+niveau = 2
+minutes = 9
+resume = "Repérer la quantité, la liste des ingrédients, les allergènes et la date indiquée."
+objectif = "Savoir où chercher une information sur un emballage fictif, sans transformer une étiquette en diagnostic de santé."
+situation = "Exemple fictif : une boîte indique 125 g, une liste d’ingrédients, un mot mis en évidence pour signaler un allergène, et « à consommer de préférence avant le 30/11/2026 »."
+analogie_titre = "Comme une petite carte d’identité du produit"
+analogie = "Le nom indique ce qu’est le produit, la quantité précise ce qu’il contient, la liste décrit ses ingrédients et la date donne un repère de conservation. Cette carte aide à trouver l’information utile."
+limite_analogie = "Une étiquette ne permet pas de savoir si un produit convient à chaque personne. Les allergies et besoins de santé sont personnels : lis l’emballage réel et demande conseil à un professionnel si nécessaire."
+notions = [
+  "Liste des ingrédients — informations sur les ingrédients, généralement présentées selon les règles applicables au produit.",
+  "Allergène — substance susceptible de provoquer une réaction chez certaines personnes ; les règles prévoient une information particulière.",
+  "Date de durabilité minimale — formule « à consommer de préférence avant » ; elle concerne principalement la qualité. Une date limite de consommation indique un repère de sécurité et doit être respectée."
+]
+demarche = [
+  "Vérifie le nom du produit et la quantité nette.",
+  "Lis la liste des ingrédients et repère les allergènes mis en évidence.",
+  "Repère la formule exacte de la date : « à consommer de préférence avant » ou « à consommer jusqu’au ».",
+  "Respecte aussi les conditions de conservation indiquées sur l’emballage. En cas d’allergie, ne te fie pas à une fiche d’exercice : vérifie le produit réel."
+]
+exercice = "Dans l’exemple fictif, quelle quantité nette est indiquée ? Où chercher l’information sur les allergènes ? La date écrite est-elle présentée comme une date de durabilité minimale ou comme une date limite de consommation ?"
+aide = "Cherche les mots « 125 g », « allergènes » et « à consommer de préférence avant »."
+correction = [
+  "La quantité nette indiquée est 125 g.",
+  "L’information sur les allergènes se trouve dans la liste des ingrédients ou dans l’indication prévue sur l’emballage.",
+  "« À consommer de préférence avant » correspond à une date de durabilité minimale. Les conditions de stockage et l’état réel du produit restent importants."
+]
+a_retenir = [
+  "Lis l’emballage réel plutôt que de te fier à la mémoire ou à une image ancienne.",
+  "Ne confonds pas les deux formules de date.",
+  "Une étiquette informe ; elle ne remplace pas un avis médical ou une vérification liée à une allergie."
+]
+transferer = "Ces repères peuvent aider à comparer des produits ou à repérer une information. Les règles d’étiquetage peuvent évoluer ; en cas de doute, consulte une source officielle récente, le fabricant ou un professionnel de santé."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Commission européenne — informations alimentaires obligatoires"
+url = "https://food.ec.europa.eu/food-safety/labelling-and-nutrition/food-information-consumers-legislation/mandatory-food-information_en"
+
+[[fiche]]
+id = "apprendre-methode"
+titre = "Apprendre une notion à partir d’une situation connue"
+matiere = "Méthodes pour apprendre"
+matiere_id = "apprendre"
+domaine = "methodes-communication"
+niveau = 1
+minutes = 8
+resume = "Partir d’un geste connu, essayer une notion et vérifier si elle peut servir ailleurs."
+objectif = "Construire une courte séance d’apprentissage sans note ni test de niveau."
+situation = "Tu sais déjà lire un horaire de travail. Tu souhaites apprendre à calculer combien de temps sépare deux rendez-vous."
+analogie_titre = "Comme tracer un itinéraire depuis un lieu que tu connais"
+analogie = "Pour aller dans un endroit inconnu, on peut partir d’un point familier, suivre quelques étapes puis vérifier qu’on est arrivé. Pour apprendre, pars d’une situation comprise, ajoute une petite notion et essaie de la réutiliser."
+limite_analogie = "Apprendre n’est pas toujours un trajet en ligne droite. On peut revenir en arrière, essayer une autre explication, faire une pause ou choisir une activité différente."
+notions = [
+  "Objectif — ce que tu veux être capable de comprendre ou de faire.",
+  "Exemple guidé — démonstration découpée en étapes.",
+  "Transfert — réutilisation d’une notion dans une autre situation."
+]
+demarche = [
+  "Choisis un but très précis : par exemple, calculer la durée entre deux horaires.",
+  "Relie-le à une situation que tu connais déjà, comme ton planning.",
+  "Lis un exemple guidé, puis essaie une variante par écrit, à voix haute, avec un dessin ou un calcul mental.",
+  "Compare avec une correction, repère ce qui reste flou et choisis la prochaine petite étape."
+]
+exercice = "Choisis une notion parmi lire une consigne, calculer une durée ou repérer une source. Écris ou dis : 1) ce que tu veux savoir faire, 2) un exemple du quotidien, 3) comment tu vérifieras ton essai."
+aide = "Tu peux utiliser cette phrase : « À la fin, je veux pouvoir… Je peux m’entraîner avec… Je vérifierai en… »"
+correction = [
+  "Exemple : « Je veux calculer une durée. Je vais utiliser deux horaires de rendez-vous. Je vérifierai en additionnant la durée à l’heure de départ. »",
+  "Il n’existe pas une seule bonne façon de s’exercer. Choisis une forme qui te permet d’essayer puis de vérifier le résultat."
+]
+a_retenir = [
+  "Un objectif concret aide à savoir par où commencer.",
+  "Un exemple de la vie réelle peut servir de point d’appui.",
+  "Essayer, vérifier et réutiliser sont des possibilités ; tu peux en choisir une autre si elle te convient mieux."
+]
+transferer = "Cette petite méthode peut servir pour une compétence de travail, une démarche, un sujet de culture générale ou un loisir. La page ne suit pas ta progression et ne classe pas tes capacités."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "ANLCI — apprendre les compétences de base en situation de travail"
+url = "https://www.anlci.gouv.fr/app/uploads/2025/04/20250910_Prez-webinaire-AFEST.pdf"
+
+[[fiche.sources]]
+titre = "W3C — contenus utilisables pour des besoins cognitifs et d’apprentissage"
+url = "https://www.w3.org/TR/coga-usable/"
+
+
+[[fiche]]
+id = "numerique-ia-usages"
+titre = "Choisir un usage de l’IA et garder la main"
+matiere = "Numérique et intelligence artificielle"
+matiere_id = "numerique"
+domaine = "numerique-ia"
+niveau = 2
+minutes = 10
+resume = "Comparer plusieurs usages d’IA et décider ce qu’on peut leur confier sans abandonner la vérification."
+objectif = "Repérer si un outil génère, classe, recommande, prédit ou agit, puis adapter le contrôle au contexte."
+situation = "Une application suggère une vidéo, un outil résume une consigne, un service traduit un message et un logiciel classe des candidatures. Ces outils ne font pas le même travail et n’ont pas les mêmes conséquences."
+analogie_titre = "Comme choisir le bon outil dans une boîte à outils"
+analogie = "Un tournevis, une pince et un mètre servent à des tâches différentes. Pour un outil d’IA, commence par nommer le besoin : rédiger, résumer, traduire, reconnaître, recommander, classer, prévoir ou commander une action. Ensuite, demande-toi comment vérifier le résultat."
+limite_analogie = "Une IA n’est pas un outil mécanique dont le résultat serait toujours prévisible : elle peut se tromper, refléter des biais, changer selon les données et traiter des informations selon les règles du service. Les catégories se recoupent et cette carte n’énumère pas tous les usages."
+notions = [
+  "Générer — produire ou transformer du texte, une image, une voix, une vidéo ou du code.",
+  "Recommander ou classer — trier des contenus ou des personnes, puis en proposer certains avant d’autres.",
+  "Prédire ou aider à décider — estimer un résultat à partir de données ; une estimation n’est pas une certitude.",
+  "Automatiser — déclencher une action ou piloter un équipement, parfois avec une supervision humaine."
+]
+demarche = [
+  "Nomme la tâche exacte et le besoin : que veux-tu obtenir, et une IA est-elle nécessaire ?",
+  "Repère les données que l’outil demande. N’envoie pas d’informations personnelles, confidentielles ou professionnelles dans un service non approuvé.",
+  "Évalue les conséquences d’une erreur : une idée de brouillon n’a pas le même enjeu qu’une décision de santé, d’emploi, d’argent ou de droits.",
+  "Vérifie le résultat avec une source ou une personne compétente, garde une possibilité de correction et décide toi-même si tu peux t’y fier."
+]
+exercice = "Associe chaque exemple à un rôle possible : un assistant qui rédige un brouillon, une plateforme qui propose une chanson, un outil qui classe des dossiers, un programme qui estime la demande d’électricité. Quel contrôle prévoirais-tu ?"
+aide = "Plusieurs rôles peuvent coexister. Pour chaque cas, demande : qu’est-ce qui entre, qu’est-ce qui sort et qui vérifie avant une conséquence importante ?"
+correction = [
+  "Le brouillon mobilise une IA générative ; la chanson relève d’une recommandation ; le classement organise des dossiers ; l’estimation de demande relève d’une prédiction.",
+  "Les catégories peuvent se combiner : un système de recommandation peut aussi prédire ce qui intéressera une personne.",
+  "Il faut vérifier le contenu du brouillon, comprendre les critères de classement et comparer une prédiction à des données réelles. Plus l’effet sur les personnes est important, plus le contrôle humain, l’explication et le recours comptent."
+]
+a_retenir = [
+  "Commence par l’usage et ses conséquences, pas par l’étiquette « IA ».",
+  "Générer, recommander, classer, prédire et agir sont des rôles différents, qui peuvent se combiner.",
+  "Une réponse plausible n’est pas une preuve ; la personne ou l’organisation qui utilise l’outil reste responsable de ses vérifications."
+]
+transferer = "Cette grille peut servir pour un chatbot, une traduction, un filtre anti-spam, un moteur de recherche, un outil de recrutement, une caméra, un service de santé ou un équipement automatisé. Les règles et les risques dépendent du contexte ; cette fiche n’est ni un avis juridique ni une liste exhaustive."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "CNIL — intelligence artificielle et données personnelles"
+url = "https://www.cnil.fr/fr/intelligence-artificielle"
+
+[[fiche.sources]]
+titre = "Commission européenne — cadre réglementaire européen sur l’IA"
+url = "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+
+[[fiche]]
+id = "numerique-verifier-media"
+titre = "Vérifier une voix, une image ou une vidéo"
+matiere = "Numérique et information"
+matiere_id = "numerique"
+domaine = "numerique-ia"
+niveau = 3
+minutes = 9
+resume = "Ne pas prendre une ressemblance sonore ou visuelle pour une preuve d’identité ou de vérité."
+objectif = "Vérifier l’identité, l’origine, le contexte et la demande d’un média avant d’agir ou de le partager."
+situation = "Tu reçois un message vocal qui semble venir d’un proche : « J’ai changé de téléphone, j’ai un problème, envoie-moi de l’argent tout de suite et ne rappelle pas. » Une voix familière suffit-elle à confirmer qui parle ?"
+analogie_titre = "Comme vérifier la date et le verso d’une photo"
+analogie = "Une photo imprimée peut sembler authentique, mais son verso, sa date et la personne qui l’a envoyée aident à comprendre d’où elle vient. Pour un fichier audio ou vidéo, regarde aussi la source d’origine, le contexte et une confirmation obtenue séparément."
+limite_analogie = "Un fichier numérique peut être copié, recadré, monté ou synthétisé sans laisser de signe visible fiable. Une voix ou un visage ressemblant à quelqu’un, comme une petite anomalie visuelle, ne permet pas à lui seul de conclure. Les détecteurs automatiques peuvent aussi se tromper."
+notions = [
+  "Contenu synthétique — image, voix, vidéo ou texte produit ou modifié par un outil informatique, parfois à l’aide d’IA.",
+  "Usurpation — usage trompeur du nom, de l’image, de la voix ou du compte d’une autre personne ou organisation.",
+  "Vérification indépendante — confirmation obtenue par un contact ou une source choisis avant de recevoir le message suspect."
+]
+demarche = [
+  "Fais une pause. Ne paie pas, ne transfère pas et ne relaie pas le fichier tant que la demande n’est pas vérifiée.",
+  "Demande-toi qui affirme quoi, d’où vient le fichier, à quel moment et ce qu’on te demande de faire.",
+  "Rappelle la personne sur un numéro déjà enregistré ou utilise un autre moyen de contact connu ; ne rappelle pas le numéro ni le compte indiqué dans le message suspect.",
+  "Cherche la publication d’origine et une confirmation dans une source indépendante. Si le média reste incertain, présente-le comme non vérifié ou ne le partage pas."
+]
+exercice = "Un message vocal familier demande un virement urgent. Quelle vérification indépendante peux-tu faire avant toute action ?"
+aide = "Rappelle la personne au numéro que tu connaissais déjà, ou pose avec elle une question de vérification convenue à l’avance."
+correction = [
+  "Ne transfère pas d’argent sur la seule base de la voix, du visage ou d’une vidéo.",
+  "Contacte la personne par un numéro enregistré auparavant ou par un autre canal connu, sans utiliser les coordonnées de la demande reçue.",
+  "Si tu ne parviens pas à confirmer l’identité et le contexte, diffère l’action et demande conseil à une personne de confiance."
+]
+a_retenir = [
+  "Une voix, une image, une vidéo, un numéro affiché ou un ton familier ne prouvent pas une identité.",
+  "Vérifie séparément l’identité, le contexte et la demande ; l’urgence est une raison de ralentir, pas d’obéir plus vite.",
+  "Aucun indice visuel isolé ni détecteur d’IA ne fournit une garantie générale."
+]
+transferer = "La même méthode aide pour une vidéo d’actualité, une consigne professionnelle, un faux conseiller, une demande d’aide familiale ou une publicité. Elle ne permet pas d’authentifier un média à coup sûr : en cas d’incertitude, ne le présente pas comme certain et vérifie auprès d’une source ou d’un contact légitime."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 90
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — l’intelligence artificielle, menaces et opportunités"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/intelligence-artificielle-ia"
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — faux message de l’enfant et demande urgente"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroquerie-enfant-probleme-telephone-coucou-papa-maman"
+
+[[fiche]]
+id = "numerique-verifier-demande"
+titre = "Vérifier une demande urgente ou inhabituelle"
+matiere = "Numérique et sécurité"
+matiere_id = "numerique"
+domaine = "numerique-ia"
+niveau = 2
+minutes = 10
+resume = "Faire une pause et vérifier l’identité, le contexte et la demande par un canal indépendant."
+objectif = "Réagir à un courriel, SMS, appel, QR code ou message privé sans céder à la pression."
+situation = "Un appelant qui dit être de ta banque affirme qu’un paiement suspect vient d’avoir lieu. Il demande ton code reçu par SMS et te presse de transférer l’argent vers un « compte sécurisé »."
+analogie_titre = "Comme rappeler l’accueil avec un numéro déjà vérifié"
+analogie = "Dans un immeuble, on n’ouvre pas uniquement parce qu’une voix à l’interphone dit connaître le gardien. On peut raccrocher puis appeler l’accueil au numéro déjà affiché dans ses contacts fiables. Pour une demande numérique, choisis toi-même le canal de vérification."
+limite_analogie = "Un faux appel peut utiliser un numéro affiché qui semble officiel, des informations personnelles vraies ou une voix familière. Même un message bien écrit peut être frauduleux. L’apparence et le numéro ne suffisent pas à authentifier une demande."
+notions = [
+  "Hameçonnage — message, appel ou page qui cherche à obtenir des données, de l’argent ou l’accès à un compte.",
+  "Usurpation — personne qui se fait passer pour un proche, une banque, une administration, un fournisseur ou un service d’assistance.",
+  "Canal indépendant — numéro, application, site ou contact connu, choisi sans reprendre ceux fournis par la sollicitation douteuse."
+]
+demarche = [
+  "Mets fin à l’échange sans scanner le QR code, ouvrir le lien ni installer de logiciel à la demande de l’inconnu.",
+  "Vérifie l’identité par une coordonnée fiable déjà enregistrée : numéro au dos de la carte bancaire, application habituelle, site saisi toi-même ou proche joint sur son ancien numéro.",
+  "Vérifie le contexte : attendais-tu cet appel, ce colis, cette facture ou cette offre ? Confirme auprès de l’organisme ou du fournisseur à partir d’un canal distinct.",
+  "Examine la demande : ne donne jamais sous pression un mot de passe, un code de validation ou l’accès à distance ; une banque ne demande pas de déplacer l’argent vers un compte sûr.",
+  "Si tu ne peux pas vérifier, ne décide pas pendant l’échange. Note les faits et demande l’avis d’un proche ou d’un service officiel."
+]
+exercice = "Un faux support technique t’appelle après une alerte sur ton ordinateur. Il demande d’installer un outil et de partager ton écran. Quelle suite d’actions est la plus sûre ?"
+aide = "Le numéro affiché et le vocabulaire professionnel ne sont pas des preuves. Cherche un moyen de contacter le fabricant ou le service depuis un document ou un site déjà connu."
+correction = [
+  "Ne donne pas l’accès à distance, les mots de passe ou les codes ; ne paie pas pendant l’appel.",
+  "Raccroche, puis contacte le service par un canal que tu connaissais déjà. Une alerte peut aussi être vérifiée en ouvrant toi-même l’application ou le site officiel.",
+  "Si un accès a déjà été donné, déconnecte l’appareil d’Internet si c’est possible sans risque, conserve les éléments utiles et demande rapidement de l’aide à une personne compétente ou à 17Cyber."
+]
+a_retenir = [
+  "Une sollicitation peut arriver par courriel, SMS, téléphone, QR code, réseau social ou petite annonce.",
+  "Le prétexte peut être une urgence familiale ou professionnelle, un faux conseiller ou support, une livraison, un achat, un emploi, un placement ou une administration.",
+  "Les données volées, les messages très soignés et les contenus générés peuvent rendre l’imitation plus personnalisée ; toutes les fraudes ne reposent pas sur l’IA.",
+  "Vérifie toujours l’identité, le contexte et la demande avec un moyen indépendant avant de cliquer, transmettre, payer ou installer."
+]
+transferer = "Cette méthode vaut même si la technique change ou si l’appelant connaît déjà ton nom et des détails exacts. La liste de prétextes est illustrative, jamais complète : les vérifications par canal connu restent utiles pour les fraudes actuelles et futures."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 90
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — rapport d’activité et état de la menace 2025"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/rapport-activite-2025"
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — fraude au faux conseiller bancaire"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/fraude-faux-conseiller-bancaire"
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — hameçonnage : prévention et conduite à tenir"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing"
+
+[[fiche]]
+id = "numerique-reagir-fraude"
+titre = "Que faire après un clic, un code transmis ou un paiement ?"
+matiere = "Numérique et sécurité"
+matiere_id = "numerique"
+domaine = "numerique-ia"
+niveau = 2
+minutes = 10
+resume = "Agir vite et sans honte après une sollicitation suspecte, selon ce qui a été partagé."
+objectif = "Protéger un compte ou un moyen de paiement, conserver les preuves et contacter le bon service."
+situation = "Tu as ouvert un lien reçu par SMS, saisi un mot de passe et transmis un code. Tu viens ensuite de comprendre que le message était peut-être faux."
+analogie_titre = "Comme appeler la banque après la perte d’une carte"
+analogie = "Quand une carte est perdue, on appelle vite la banque avec le numéro officiel pour la bloquer. Après une fraude numérique, commence par protéger l’accès ou le moyen de paiement concerné avec les coordonnées officielles, puis garde les traces pour expliquer ce qui s’est passé."
+limite_analogie = "Une carte, un compte en ligne et une identité ne se bloquent pas de la même manière. Les actions exactes dépendent de ce qui a été transmis, du service concerné et de la situation ; cette fiche donne des premiers repères, pas un diagnostic personnalisé."
+notions = [
+  "Preuve — élément conservé qui aide à reconstituer les faits : message, date, adresse du site, reçu ou capture d’écran.",
+  "Opposition — demande faite à l’établissement financier pour empêcher l’utilisation d’un moyen de paiement.",
+  "Signalement — information adressée à une plateforme ou à un organisme compétent ; elle ne remplace pas nécessairement une plainte."
+]
+demarche = [
+  "Si de l’argent ou des données bancaires sont concernés, contacte immédiatement ta banque par son application ou le numéro officiel déjà connu ; demande les mesures adaptées et fais opposition si nécessaire.",
+  "Si un mot de passe a été saisi, change-le depuis le site ou l’application officielle, idéalement depuis un appareil sûr. Change aussi les autres comptes où le même mot de passe était utilisé, déconnecte les sessions ouvertes et active une authentification renforcée si possible.",
+  "Si un accès à distance ou un logiciel a été installé, n’utilise plus cet appareil pour saisir tes identifiants ; demande conseil à 17Cyber ou à une personne compétente.",
+  "Conserve le message, l’adresse, les captures d’écran, les reçus et les dates. Ne transfère pas le contenu douteux à d’autres personnes comme s’il était vérifié.",
+  "Préviens l’organisme ou la personne dont l’identité a été utilisée. Selon les faits, demande de l’aide à 17Cyber, signale le message et contacte la police ou la gendarmerie pour déposer plainte."
+]
+exercice = "Une page imitait ta banque et tu as saisi le numéro de ta carte, mais pas ton mot de passe. Quelle première personne ou quel service contacterais-tu, et par quel canal ?"
+aide = "Utilise l’application bancaire ou le numéro figurant sur ta carte, pas le lien ou le numéro de la page reçue."
+correction = [
+  "Contacte immédiatement ta banque depuis son application habituelle ou le numéro officiel au dos de ta carte afin qu’elle te dise comment bloquer ou surveiller les moyens de paiement.",
+  "Conserve le SMS, l’adresse de la page, les captures et l’heure de l’incident. Ne retourne pas sur la page douteuse.",
+  "Consulte les recommandations officielles et le diagnostic 17Cyber ; si de l’argent a été détourné ou une identité usurpée, demande conseil sur le dépôt de plainte."
+]
+a_retenir = [
+  "Ne te blâme pas : les messages sont conçus pour tromper et la rapidité de réaction aide à limiter les suites.",
+  "Banque ou service concerné d’abord, avec une coordonnée officielle indépendante.",
+  "Protège les comptes, conserve les preuves, alerte les personnes ou organismes concernés et demande un accompagnement officiel.",
+  "Un signalement, une opposition bancaire et une plainte sont des démarches différentes ; le service compétent peut t’orienter."
+]
+transferer = "Si l’incident concerne un emploi, une association ou une entreprise, préviens aussi sans délai le responsable informatique ou la personne chargée de la sécurité, sans effacer les traces ni minimiser la situation. Les démarches précises évoluent : suis les instructions actuelles de la banque, de 17Cyber et des autorités."
+revue_le = "2026-10-07"
+intervalle_revue_jours = 90
+
+[[fiche.sources]]
+titre = "17Cyber — diagnostic et orientation face à une cybermalveillance"
+url = "https://17cyber.gouv.fr/"
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — que faire en cas d’hameçonnage ?"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing"
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — que faire en cas d’usurpation d’identité ?"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/usurpation-identite-que-faire"
+
+[[fiche]]
+id = "recherche-lire-etude"
+titre = "Lire une étude sans confondre résultats et certitudes"
+matiere = "Méthodes de recherche et esprit critique"
+matiere_id = "recherche"
+domaine = "etudes-superieures-recherche"
+niveau = 4
+horizon_contenu = "Post-bac, licence, master et doctorat — selon la discipline"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Une relecture spécialisée et des essais avec des personnes apprenantes restent à effectuer avant toute diffusion publique."
+minutes = 15
+resume = "Examiner la question, les observations, la méthode et les limites d’une étude avant de reprendre sa conclusion."
+objectif = "Distinguer ce qui a été observé de ce qui est interprété, puis déterminer ce qu’une étude permet ou ne permet pas de conclure."
+situation = "Exemple entièrement fictif : une petite équipe compare un carnet papier et une application pour organiser des tâches. Après deux semaines, les volontaires qui ont choisi l’application déclarent en moyenne avoir terminé plus de tâches que ceux qui ont choisi le carnet. Peut-on conclure que l’application en est la cause ?"
+analogie_titre = "Comme tester deux façons d’organiser une semaine"
+analogie = "Imagine deux groupes qui essaient chacun une manière différente de préparer leur semaine. Pour comparer, il faut savoir qui a choisi chaque méthode, quelles tâches comptent, comment on mesure qu’elles sont terminées et si les semaines se ressemblent. Une étude doit rendre visibles les mêmes éléments : la question, les personnes ou phénomènes observés, la mesure et les conditions de comparaison."
+limite_analogie = "Une recherche peut porter sur des textes, des entretiens, une expérience en laboratoire, des archives, un modèle mathématique ou d’autres objets. Elle ne se réduit pas toujours à deux groupes comparables ; les disciplines ont plusieurs méthodes valables. L’image sert à poser des questions, pas à imposer une recette unique."
+notions = [
+  "Question de recherche — question précise à laquelle l’étude cherche à répondre.",
+  "Méthode — manière de choisir les observations ou données et de les analyser.",
+  "Résultat — constat rapporté à partir des observations ou de l’analyse.",
+  "Interprétation — explication proposée par les auteurs pour donner du sens aux résultats.",
+  "Limite — élément qui réduit la portée d’une conclusion ou laisse une autre explication possible.",
+  "Généralisation — extension d’un constat au-delà des personnes, documents ou situations étudiés ; elle doit être justifiée."
+]
+demarche = [
+  "Formule la question en une phrase : quel phénomène est étudié, auprès de qui ou à partir de quelles données, et dans quelles conditions ? Si tu ne peux pas répondre, lis le résumé et le début du texte pour retrouver le but annoncé.",
+  "Sépare trois colonnes dans tes notes : ce qui a été mesuré ou observé, ce que les auteurs en déduisent, et ce qui reste incertain. Un titre ou un résumé peut condenser le propos ; vérifie les données et le contexte avant de reprendre une affirmation.",
+  "Repère le type de publication : étude avec nouvelles données, synthèse de plusieurs travaux, article théorique ou autre forme. Les questions à poser changent selon son objectif ; toutes les publications ne décrivent pas une expérience avec des participants.",
+  "Examine la méthode adaptée à cette publication : comment les participants, documents ou travaux ont été choisis, comment les matériaux ont été analysés, quelles comparaisons ont été faites et quelles données manquent. Dans un travail qualitatif, regarde aussi comment les interprétations sont construites ; ne cherche pas forcément un pourcentage.",
+  "Vérifie si le résultat répond bien à la question initiale. Pour une étude quantitative, repère les tailles de groupe, les écarts et l’incertitude quand ces éléments sont pertinents ; une différence observée ne prouve pas à elle seule une cause.",
+  "Cherche les limites et les explications alternatives : choix des participants, mesure imprécise, durée courte, facteur extérieur, contexte très particulier ou données manquantes. Demande à quelles situations le résultat pourrait raisonnablement s’appliquer.",
+  "Avant une décision importante, compare l’étude à d’autres travaux pertinents, à une revue de littérature ou à une source de synthèse adaptée. L’évaluation par des pairs est un contrôle utile, pas une garantie qu’il n’y a ni erreur ni débat."
+]
+exercice = "Dans l’exemple fictif, les volontaires ont choisi eux-mêmes entre le carnet et l’application ; après deux semaines, l’équipe a recueilli leurs déclarations sur les tâches terminées. Quelle observation peut-elle rapporter ? Quelle conclusion causale ne peut-elle pas encore établir ? Cite deux informations supplémentaires à rechercher."
+aide = "Commence par séparer le résultat mesuré de l’explication « l’application a aidé ». Demande ensuite si les personnes des deux groupes se ressemblaient et si elles ont compris et déclaré les tâches de la même façon."
+correction = [
+  "Observation possible : dans ce petit groupe et pendant ces deux semaines, les personnes ayant choisi l’application ont déclaré avoir terminé en moyenne plus de tâches. Ce constat porte sur leurs déclarations et sur ce groupe précis.",
+  "On ne peut pas conclure que l’application a causé la différence : les personnes l’ont choisie elles-mêmes et peuvent différer par leur disponibilité, leur motivation ou le type de tâches.",
+  "À rechercher : combien de personnes ont participé et combien ont abandonné ; comment les tâches ont été définies et comptées ; si un groupe de comparaison existait ; si les résultats se maintiennent sur une période plus longue.",
+  "Une étude mieux contrôlée pourrait réduire certaines explications alternatives, mais elle devrait aussi respecter l’éthique, la vie privée et les limites du contexte. D’autres méthodes peuvent convenir à d’autres questions."
+]
+a_retenir = [
+  "Résultat observé, interprétation et conclusion ne sont pas la même chose.",
+  "La méthode doit être adaptée à la question et décrite avec assez de précision pour être examinée.",
+  "Une association ou une différence ne démontre pas automatiquement une relation de cause à effet.",
+  "Les limites ne rendent pas une étude inutile : elles précisent ce qu’elle apporte et ce qu’il reste à vérifier.",
+  "Une publication est une contribution à discuter avec d’autres travaux, pas une vérité définitive à elle seule."
+]
+transferer = "Cette grille peut aider à lire une étude en sciences, en santé, en économie ou en sciences sociales, mais les méthodes, critères de preuve et règles d’éthique varient selon les domaines. Pour une décision médicale, juridique ou financière, consulte des sources et personnes compétentes du domaine plutôt que de te fier à une seule étude."
+revue_le = "2026-10-08"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Carey, Steiner et Petri — Ten simple rules for reading a scientific paper, PLOS Computational Biology (2020)"
+url = "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008032"
+licence_source = "Creative Commons Attribution License (version non précisée sur la page consultée)"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Référence méthodologique uniquement ; aucun extrait, figure, exercice ni texte de la source n’est reproduit."
+
+
+[[fiche]]
+id = "maths-convertir-unites"
+titre = "Convertir des mesures sans changer leur quantité"
+matiere = "Mathématiques — mesures du quotidien"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 1
+horizon_contenu = "Repères de cycle 3 ; reprise possible à tout âge, sans parcours obligatoire"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Rédaction originale à partir de repères factuels ; vérification mathématique, relecture indépendante, contrôle des droits, accessibilité et essais apprenants restent à faire avant toute diffusion publique. Les licences des sources n’ont pas été vérifiées pour une réutilisation."
+minutes = 11
+resume = "Exprimer une même longueur, masse ou capacité dans une autre unité courante."
+objectif = "Convertir quelques mesures usuelles en identifiant le rapport entre les unités, puis vérifier que la quantité n’a pas changé."
+situation = "Une bande de tissu mesure 1 m 35 cm. Une étiquette doit indiquer sa longueur en centimètres. Quelle valeur écrire ?"
+analogie_titre = "Comme lire la même bande avec une autre graduation"
+analogie = "Une bande reste de la même longueur si l’on compte ses mètres ou ses centimètres. C’est comme décrire un trajet en kilomètres ou en mètres : l’unité change, pas le trajet. Pour une conversion simple, on s’appuie sur le nombre de petites unités qui composent la grande."
+limite_analogie = "La bande graduée illustre des unités de longueur, mais elle ne donne pas toutes les règles de conversion. La masse, la capacité, l’aire et le volume ont des unités différentes ; la température ou le passage d’une masse à un volume ne se convertissent pas avec le même simple facteur."
+notions = [
+  "Unité — repère choisi pour exprimer une mesure, comme le mètre ou le centimètre.",
+  "Conversion — écriture d’une même quantité avec une autre unité adaptée.",
+  "Longueur — mesure d’une distance ; 1 mètre (m) vaut 100 centimètres (cm).",
+  "Capacité — quantité qu’un récipient peut contenir ; 1 litre (L) vaut 1 000 millilitres (mL).",
+  "Masse — mesure exprimée ici en kilogrammes (kg) ou grammes (g) ; 1 kg vaut 1 000 g."
+]
+demarche = [
+  "Repère ce qui est mesuré : une longueur, une masse ou une capacité. Garde la même famille d’unités pendant la conversion.",
+  "Écris l’égalité de référence. Par exemple : 1 m = 100 cm, 1 kg = 1 000 g ou 1 L = 1 000 mL.",
+  "Demande-toi si tu passes vers une unité plus petite ou plus grande. Une même quantité s’écrit généralement avec un nombre plus grand en petites unités et un nombre plus petit en grandes unités.",
+  "Pour une bande de 1 m 35 cm, sépare les deux parties : 1 m vaut 100 cm, puis ajoute les 35 cm. On obtient 100 cm + 35 cm = 135 cm.",
+  "Additionne les parts converties, puis vérifie l’ordre de grandeur et l’unité écrite."
+]
+exercice = "Un récipient contient 2 L d’eau. On en verse 650 mL. Combien de millilitres restent-ils dans le récipient ?"
+aide = "Commence par exprimer les 2 L en millilitres en utilisant l’égalité 1 L = 1 000 mL. Ensuite, soustrais les 650 mL."
+correction = [
+  "2 L = 2 × 1 000 mL = 2 000 mL.",
+  "2 000 mL − 650 mL = 2 000 − 600 − 50 = 1 400 − 50 = 1 350 mL.",
+  "Il reste 1 350 mL. Vérification : 1 350 mL + 650 mL = 2 000 mL, soit 2 L."
+]
+a_retenir = [
+  "Une conversion change l’unité d’écriture, pas la quantité mesurée.",
+  "Écris le rapport entre les unités avant de calculer : par exemple, 1 m = 100 cm.",
+  "Vérifie que le résultat va dans le bon sens : une même longueur compte davantage de centimètres que de mètres.",
+  "N’efface jamais l’unité pendant un calcul de mesure."
+]
+transferer = "Ces repères servent à lire une longueur, une masse ou une capacité sur une étiquette, une recette fictive ou un plan. Pour d’autres grandeurs, comme une surface, un volume géométrique ou une température, vérifie la relation adaptée au lieu de reprendre automatiquement le facteur 10 ou 1 000."
+revue_le = "2026-10-08"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — programme de mathématiques du cycle 3, version publiée en janvier 2025"
+url = "https://www.education.gouv.fr/media/199172/download"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère de programme uniquement ; aucun texte, exemple, tableau, figure ou exercice de la source n’est repris."
+
+[[fiche.sources]]
+titre = "Bureau international des poids et mesures — The International System of Units"
+url = "https://www.bipm.org/en/measurement-units"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Référence institutionnelle pour vérifier les unités et symboles ; aucune expression ni illustration de la source n’est reprise."
+
+[[fiche]]
+id = "maths-moyenne"
+titre = "Comprendre une moyenne comme un partage égal"
+matiere = "Mathématiques — statistiques simples"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 1
+horizon_contenu = "Repères de cycle 4 ; notion reprise pas à pas, sans âge requis"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Rédaction et exemples originaux ; exactitude du calcul, interprétation statistique, relecture pédagogique indépendante, droits, accessibilité et essais apprenants restent à vérifier avant toute diffusion. La source sert de repère factuel et sa licence de réutilisation n’a pas été vérifiée."
+minutes = 10
+resume = "Additionner des valeurs, puis répartir le total également pour calculer leur moyenne."
+objectif = "Calculer et interpréter la moyenne arithmétique d’une petite série de valeurs compatibles."
+situation = "Dans un jeu fictif, les scores de quatre manches sont 1, 3, 6 et 10 points. Quel score par manche obtiendrait-on si les 20 points étaient répartis également ?"
+analogie_titre = "Comme partager une pile de jetons en parts égales"
+analogie = "Imagine que tu réunisses les points de plusieurs manches dans une seule pile, puis que tu les partages également entre les manches. La part de chaque manche après ce partage est la moyenne. La règle de calcul est donc : additionner les valeurs, puis diviser par leur nombre."
+limite_analogie = "Dans les données réelles, les scores ne sont pas déplacés : la moyenne résume la série, elle ne décrit pas forcément une valeur observée. Elle peut être influencée par une valeur très grande ou très petite et ne dit pas, à elle seule, comment les valeurs sont réparties."
+notions = [
+  "Série — liste des valeurs recueillies pour une même question ou mesure.",
+  "Moyenne arithmétique — somme des valeurs divisée par le nombre de valeurs.",
+  "Effectif — nombre de valeurs de la série.",
+  "Diviser (÷) — partager une quantité en parts égales ; 20 ÷ 4 cherche la taille de chacune des 4 parts d’un total de 20.",
+  "Valeur atypique — valeur éloignée de la plupart des autres, qui peut déplacer la moyenne."
+]
+demarche = [
+  "Vérifie que toutes les valeurs décrivent la même chose et sont exprimées dans la même unité.",
+  "Additionne les valeurs : 1 + 3 + 6 + 10 = 20 points.",
+  "Compte les valeurs : il y a 4 manches.",
+  "Divise le total par le nombre de valeurs : 20 ÷ 4 = 5. Le symbole ÷ signifie ici que l’on répartit les 20 points en 4 parts égales.",
+  "Interprète le résultat avec son unité : la moyenne est de 5 points par manche. Vérifie le partage : 5 + 5 + 5 + 5 = 20. Aucune manche n’a marqué exactement 5 points : c’est une moyenne, pas le récit d’une manche."
+]
+exercice = "Dans trois manches fictives, une joueuse marque 3, 6 et 9 points. Quelle est sa moyenne de points par manche ?"
+aide = "Additionne les trois scores, puis partage le total entre les trois manches : (3 + 6 + 9) ÷ 3."
+correction = [
+  "3 + 6 + 9 = 18 points au total.",
+  "Il y a 3 manches, donc 18 ÷ 3 = 6.",
+  "La moyenne est de 6 points par manche. Ici, ce score est aussi celui de la deuxième manche, mais ce n’est pas toujours le cas."
+]
+a_retenir = [
+  "Moyenne = somme des valeurs ÷ nombre de valeurs.",
+  "Le nombre de valeurs compte autant que leur total : n’oublie pas de compter les données.",
+  "La moyenne peut ne correspondre à aucune valeur réellement observée.",
+  "Une moyenne résume une série mais ne suffit pas toujours à décrire ses différences ou ses valeurs extrêmes."
+]
+transferer = "Une moyenne peut résumer de petites séries de durées, de distances ou de scores, si les valeurs mesurent bien la même chose. Pour comparer des groupes ou prendre une décision importante, examine aussi la taille des groupes, l’étendue des valeurs et le contexte ; une moyenne seule peut masquer des différences."
+revue_le = "2026-10-08"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — programme de mathématiques du cycle 4"
+url = "https://www.education.gouv.fr/sites/default/files/document/Annexe%202%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20pour%20le%20cycle%204-480716.pdf"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère de programme et vérification de la notion uniquement ; aucun texte, exemple, tableau, figure ou exercice de la source n’est repris."
+
+[[fiche]]
+id = "maths-estimer-calcul"
+titre = "Estimer un résultat pour vérifier un calcul"
+matiere = "Mathématiques — calcul et ordre de grandeur"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 1
+horizon_contenu = "Repères de cycle 3 et de collège ; reprise des bases possible à tout âge"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Rédaction et données fictives originales ; la démarche, les choix d’arrondi, la relecture pédagogique indépendante, les droits, l’accessibilité et les essais apprenants restent à vérifier avant toute diffusion. Les sources servent de repères factuels et leurs licences de réutilisation n’ont pas été vérifiées."
+minutes = 9
+resume = "Arrondir des nombres pour prévoir un résultat et repérer une erreur importante."
+objectif = "Construire une estimation simple, la comparer au calcul exact et décider si le résultat paraît cohérent."
+situation = "Une étagère fictive contient 48 livres sur une rangée et 37 sur une autre. Avant de recompter précisément, peux-tu prévoir si le total est proche de 85 ou de 150 ?"
+analogie_titre = "Comme compter des objets par paquets avant le compte exact"
+analogie = "Pour savoir rapidement combien de boutons se trouvent dans deux boîtes, tu peux penser à des paquets d’environ dix : 48 ressemble à 50 et 37 ressemble à 40. Cela donne une estimation rapide autour de 90 avant de recompter les objets un à un."
+limite_analogie = "Les paquets arrondis ne donnent pas le compte exact et peuvent ajouter ou retirer quelques objets. Une estimation sert à contrôler la vraisemblance ; si une quantité précise est nécessaire, il faut effectuer et vérifier le calcul exact."
+notions = [
+  "Estimation — résultat approché, utile pour se faire une idée ou contrôler un calcul.",
+  "Arrondir — remplacer un nombre par un nombre plus simple et proche, comme 48 par 50.",
+  "Ordre de grandeur — valeur approximative qui situe la taille d’un résultat.",
+  "≈ — symbole qui signifie « environ égal à », et non « exactement égal à »."
+]
+demarche = [
+  "Décide si une valeur approchée suffit ou si tu as besoin d’un résultat exact.",
+  "Remplace les nombres par des nombres faciles et proches : 48 devient environ 50 ; 37 devient environ 40.",
+  "Effectue le même calcul avec ces valeurs : 50 + 40 = 90. C’est l’estimation.",
+  "Calcule ensuite exactement si la situation l’exige : 48 + 37 = 85.",
+  "Compare les deux résultats : 85 est proche de 90. Si le calcul exact était 150, il faudrait revérifier les nombres ou l’opération."
+]
+exercice = "Deux boîtes fictives contiennent 26 et 41 fiches. Donne une estimation en arrondissant à la dizaine la plus proche, puis calcule le total exact."
+aide = "26 est plus proche de 30 que de 20 ; 41 est plus proche de 40 que de 50. Additionne d’abord les nombres arrondis."
+correction = [
+  "Estimation : 26 ≈ 30 et 41 ≈ 40, donc 30 + 40 = 70 fiches environ.",
+  "Calcul exact : 26 + 41 = 67 fiches.",
+  "67 est proche de 70 ; l’estimation était cohérente. L’estimation n’est pas le total exact."
+]
+a_retenir = [
+  "Arrondir facilite un calcul mental rapide, mais modifie un peu chaque nombre.",
+  "Une estimation se note comme une valeur approchée ; elle ne remplace pas un résultat exact quand celui-ci est demandé.",
+  "Si le résultat exact est très loin de l’estimation, vérifie les nombres, les unités et l’opération.",
+  "Selon la situation, plusieurs arrondis raisonnables peuvent donner des estimations légèrement différentes."
+]
+transferer = "Estimer aide à prévoir une quantité, à vérifier un ticket fictif, un temps annoncé ou un total calculé. Choisis l’approximation en fonction de la question : une idée générale tolère un arrondi, tandis qu’une mesure, un paiement ou une dose exige les précautions et la précision adaptées."
+revue_le = "2026-10-08"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Éduscol — mathématiques au quotidien, ressources cycles 3 et 4"
+url = "https://eduscol.education.gouv.fr/sites/default/files/document/ra16c3c4mathmathetquotidien600998pdf-77574.pdf"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère de programme et de vérification de la démarche uniquement ; aucun texte, exemple, tableau, figure ou exercice de la source n’est repris."
+
+[[fiche]]
+id = "info-ordinateur-fonctions"
+titre = "Comprendre les rôles d’un ordinateur"
+matiere = "Informatique et programmation"
+matiere_id = "informatique"
+domaine = "informatique-programmation"
+niveau = 1
+horizon_contenu = "Premières bases en informatique ; accessible sans équipement ni installation"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Proposition originale à relire : vérification technique indépendante, relecture pédagogique, droits des sources, accessibilité et essais apprenants restent à faire. Les liens servent de repères de périmètre ; leurs licences de réutilisation n’ont pas été vérifiées."
+minutes = 10
+resume = "Repérer les rôles du matériel, des logiciels, du processeur, de la mémoire, du stockage et des sorties."
+objectif = "Décrire le trajet simple d’une information depuis une action de la personne jusqu’à son affichage et son enregistrement."
+situation = "Tu saisis un court texte dans un éditeur, tu l’enregistres, puis tu le rouvres. Quels éléments de l’ordinateur participent à ces actions ?"
+analogie_titre = "Comme un atelier avec une table, des outils et une armoire"
+analogie = "Le clavier apporte une information dans l’atelier. Le processeur exécute les instructions des logiciels ; la mémoire vive est un espace de travail temporaire ; le stockage ressemble à une armoire où l’on garde un fichier enregistré ; l’écran montre un résultat. Le système d’exploitation coordonne une partie de ces échanges et permet aux applications d’utiliser le matériel."
+limite_analogie = "Un ordinateur ne comprend pas une consigne comme une personne : il exécute des instructions selon des règles précises. La mémoire vive et le stockage sont des circuits électroniques, pas une table ni une armoire, et la manière dont un logiciel enregistre un fichier peut varier."
+notions = [
+  "Matériel — parties physiques d’un système, comme un clavier, un écran ou un processeur.",
+  "Logiciel — ensemble d’instructions et de données permettant à l’ordinateur d’accomplir des tâches.",
+  "Système d’exploitation — logiciel de base qui coordonne notamment le matériel, les fichiers et le lancement d’applications.",
+  "Processeur — composant qui exécute des instructions et effectue des opérations.",
+  "Mémoire vive (RAM) — espace de travail temporaire utilisé pendant l’activité de l’ordinateur.",
+  "Stockage — support qui conserve normalement des fichiers après la fermeture d’un logiciel et l’arrêt de l’ordinateur.",
+  "Entrée et sortie — information reçue par le système ou résultat présenté, par exemple au clavier ou à l’écran."
+]
+demarche = [
+  "Repère d’abord la personne et l’action : ici, elle tape un texte avec le clavier.",
+  "Le logiciel d’édition reçoit les touches ; le système d’exploitation aide l’application à utiliser le matériel.",
+  "Le processeur exécute les instructions. La mémoire vive garde temporairement les éléments dont l’application a besoin pendant qu’elle fonctionne.",
+  "L’écran est une sortie : il présente le texte. Quand la personne choisit d’enregistrer, le logiciel demande au système de conserver le fichier sur un support de stockage.",
+  "Quand le fichier est rouvert, le stockage fournit ses données au logiciel. Si le fichier n’a pas été enregistré, les dernières modifications peuvent ne pas avoir été conservées."
+]
+exercice = "Associe chaque rôle à l’action correspondante : le clavier reçoit les touches, le processeur exécute des instructions, la mémoire vive soutient le travail en cours, le stockage garde un fichier enregistré et l’écran montre le texte. Quel élément correspond à chaque action ?"
+aide = "Cherche si l’élément reçoit une action, exécute des instructions, sert d’espace de travail temporaire, conserve des données ou présente un résultat."
+correction = [
+  "Le clavier est une entrée : il transmet les touches saisies.",
+  "Le processeur exécute les instructions du logiciel.",
+  "La mémoire vive soutient le travail en cours et son contenu peut disparaître à l’arrêt.",
+  "Le stockage conserve normalement le fichier enregistré.",
+  "L’écran est une sortie qui rend le texte visible."
+]
+a_retenir = [
+  "Un ordinateur associe du matériel et des logiciels qui coopèrent.",
+  "Mémoire vive et stockage ont des rôles différents : travail temporaire d’un côté, conservation d’un fichier enregistré de l’autre.",
+  "Le processeur exécute des instructions ; il ne devine pas l’intention de la personne.",
+  "Un service de stockage distant, un réglage de sauvegarde ou une application peut modifier l’endroit et la manière dont un fichier est conservé."
+]
+transferer = "Cette carte aide à comprendre un ordinateur, une tablette, une borne ou certains objets connectés. Elle simplifie les architectures réelles : plusieurs processeurs, mémoires et supports peuvent coopérer, et une application peut utiliser un service distant."
+revue_le = "2026-10-08"
+intervalle_revue_jours = 365
+
+[[fiche.sources]]
+titre = "Éduscol — Numérique et sciences informatiques : présentation des domaines étudiés"
+url = "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegnsi1-tpourquoi-choisir-nsi1243842pdf-89505.pdf"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère de périmètre pour l’architecture, les systèmes et la programmation ; aucun texte, exemple, schéma, tableau ou exercice de la source n’est repris. La ressource décrit un enseignement précis et ne vaut pas programme universel."
+
+[[fiche]]
+id = "prog-comparer-langages"
+titre = "Un même algorithme, plusieurs langages : Python et JavaScript"
+matiere = "Informatique et programmation"
+matiere_id = "informatique"
+domaine = "informatique-programmation"
+niveau = 1
+horizon_contenu = "Initiation aux idées de programmation ; aucun compte, outil ou téléchargement requis"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Exemples de code écrits pour cette fiche et non exécutés par la page ; vérification de la syntaxe dans les deux environnements, relecture informatique indépendante, accessibilité et essais apprenants restent à faire. Les sources sont des références factuelles à licence de réutilisation non vérifiée."
+minutes = 12
+resume = "Distinguer la logique d’un algorithme de la syntaxe particulière d’un langage de programmation."
+objectif = "Lire une petite répétition d’actions en Python et en JavaScript et expliquer ce qui reste identique et ce qui change."
+situation = "Tu veux afficher trois étapes fictives dans l’ordre. Tu peux d’abord décrire les actions en français, puis les exprimer avec la syntaxe d’un langage que l’ordinateur sait exécuter."
+analogie_titre = "Comme écrire une même recette avec deux systèmes de notation"
+analogie = "La liste des actions décrit ce qu’il faut faire ; le langage de programmation donne une façon très précise de l’écrire. Deux langages différents peuvent exprimer la même idée, comme deux notations peuvent décrire la même suite d’étapes. Ici, les deux programmes parcourent une liste et affichent chaque élément."
+limite_analogie = "Un langage de programmation n’est pas simplement une langue humaine traduite mot à mot. Ses symboles, règles et comportements sont formels ; le programme doit respecter exactement les conventions du langage et de l’environnement où il s’exécute. Deux programmes proches en apparence peuvent aussi avoir des effets différents."
+notions = [
+  "Algorithme — suite finie et organisée d’étapes permettant de résoudre une tâche ou de produire un résultat.",
+  "Programme — instructions écrites dans un langage que l’environnement informatique peut interpréter ou exécuter.",
+  "Langage de programmation — règles et mots-clés qui servent à décrire des opérations de façon précise.",
+  "Variable — nom associé à une valeur ou à un ensemble de données utilisé par un programme.",
+  "Liste — collection ordonnée de plusieurs éléments.",
+  "Boucle — instruction qui répète une action, par exemple une fois pour chaque élément d’une liste.",
+  "Syntaxe — règles d’écriture propres à un langage."
+]
+demarche = [
+  "Formule le résultat souhaité en mots simples : afficher chacune des trois étapes une fois et dans le bon ordre.",
+  "Repère les données : la liste appelée etapes contient trois textes ; le programme n’a pas besoin d’une information personnelle.",
+  "Repère la boucle : elle prend chaque texte l’un après l’autre et demande de l’afficher.",
+  "Compare la forme écrite en Python et celle écrite en JavaScript. Les délimitations et certaines commandes changent, mais l’idée de parcourir la liste reste la même.",
+  "Prévois un test : avec trois éléments, le programme doit afficher trois lignes, ni deux ni quatre."
+]
+exercice = "Imagine une liste fictive de deux mots : Lire, puis Vérifier. Avec la méthode des exemples, combien de lignes la boucle doit-elle afficher, et dans quel ordre ?"
+aide = "La boucle passe une fois sur chaque élément de la liste. Elle ne trie pas et n’ajoute pas de mot de son propre chef."
+correction = [
+  "Elle doit afficher deux lignes : d’abord Lire, puis Vérifier.",
+  "Le nombre de passages correspond au nombre d’éléments de la liste : deux.",
+  "La même intention peut être écrite dans plusieurs langages, mais le texte exact du code doit respecter la syntaxe de chacun."
+]
+a_retenir = [
+  "L’algorithme décrit l’idée et les étapes ; le langage fournit une syntaxe que l’ordinateur peut traiter.",
+  "Une boucle répète une instruction pour les éléments prévus ; vérifie combien de passages sont attendus.",
+  "Python et JavaScript sont deux langages distincts, parmi beaucoup d’autres ; un exemple ne résume ni leurs usages ni leurs limites.",
+  "Un extrait peut être lu sans l’exécuter. Avant de faire fonctionner un programme, il faut comprendre ses données, ses effets et son contexte."
+]
+transferer = "Cette distinction sert à discuter d’un besoin avec une personne qui programme, à comparer une explication et du code, ou à choisir une prochaine étape d’apprentissage. D’autres langages comme SQL, C, Java ou Rust ont des règles et usages différents ; ils ne sont pas couverts par cette courte fiche."
+revue_le = "2026-10-08"
+intervalle_revue_jours = 365
+
+[[fiche.exemples_code]]
+titre = "Parcourir une liste en Python"
+langage = "Python"
+contenu = """etapes = [\"Lire la consigne\", \"Choisir une méthode\", \"Vérifier le résultat\"]
+for etape in etapes:
+    print(etape)"""
+explication = "La variable etapes contient trois textes. La ligne for prend chaque texte à son tour, le nomme etape, puis print l’affiche. L’indentation indique quelles instructions appartiennent à la boucle."
+
+[[fiche.exemples_code]]
+titre = "Parcourir une liste en JavaScript"
+langage = "JavaScript"
+contenu = """const etapes = [\"Lire la consigne\", \"Choisir une méthode\", \"Vérifier le résultat\"];
+for (const etape of etapes) {
+  console.log(etape);
+}"""
+explication = "La liste contient les mêmes trois textes. La boucle for...of passe sur chaque élément et console.log l’affiche. Les accolades délimitent le corps de la boucle ; const déclare ici le nom de la liste."
+
+[[fiche.sources]]
+titre = "Éduscol — Numérique et sciences informatiques : algorithmique et langages"
+url = "https://eduscol.education.gouv.fr/sites/default/files/document/vademecum-sciences-numeriques-et-technologie-numerique-et-sciences-informatiques-101937.pdf"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère de programme et de périmètre uniquement ; aucun exemple de code, texte, tableau ou activité de la source n’est repris."
+
+[[fiche.sources]]
+titre = "Documentation officielle Python — More Control Flow Tools"
+url = "https://docs.python.org/3/tutorial/controlflow.html"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Vérification factuelle de la boucle Python montrée ; le code de la fiche est un exemple original et aucun extrait de la documentation n’est repris."
+
+[[fiche.sources]]
+titre = "MDN Web Docs — Loops and iteration"
+url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Vérification factuelle de la boucle JavaScript montrée ; le code de la fiche est un exemple original et aucun extrait de la documentation n’est repris."
+
+[[fiche]]
+id = "tech-circuit-ouvert-ferme"
+titre = "Comprendre un circuit électrique ouvert ou fermé"
+matiere = "Sciences et technologie"
+matiere_id = "sciences"
+domaine = "sciences-techniques-environnement"
+niveau = 1
+horizon_contenu = "Premières bases de sciences et technologie ; explication conceptuelle sans manipulation"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Proposition originale, strictement conceptuelle ; vérification scientifique et sécurité par une personne compétente, relecture pédagogique et accessibilité restent à faire. Aucun essai pratique ni apprenant n’est revendiqué. Les licences des sources n’ont pas été vérifiées pour une réutilisation."
+minutes = 10
+resume = "Repérer les éléments d’un circuit simple et comprendre pourquoi une coupure interrompt son fonctionnement."
+objectif = "Expliquer avec les mots source, conducteur, récepteur, interrupteur, circuit ouvert et circuit fermé."
+situation = "Dans un jeu imaginaire, une petite lampe alimentée par une pile ne s’allume pas quand l’interrupteur est ouvert. Que change la position de l’interrupteur ?"
+analogie_titre = "Comme un trajet en boucle qu’une barrière peut interrompre"
+analogie = "Imagine un petit train qui doit suivre une voie continue pour revenir à son point de départ. Une barrière levée laisse un passage ; une voie interrompue ne forme plus la boucle. Dans un circuit électrique simple, l’interrupteur peut ouvrir ou fermer le chemin parcouru par le courant."
+limite_analogie = "Le courant n’est pas un train et l’électricité n’est pas un véhicule sur une voie. L’image aide seulement à voir la continuité du circuit ; elle n’explique ni les charges électriques, ni la tension, ni les mesures physiques."
+notions = [
+  "Source — élément qui fournit de l’énergie électrique dans le modèle, par exemple une pile.",
+  "Conducteur — partie qui relie des éléments du circuit et permet le passage du courant dans les conditions prévues.",
+  "Récepteur — élément qui reçoit de l’énergie électrique et la transforme, par exemple en lumière.",
+  "Interrupteur — commande qui peut établir ou interrompre le chemin du courant.",
+  "Circuit fermé — boucle conductrice continue entre les bornes de la source, permettant au courant de circuler si les composants fonctionnent.",
+  "Circuit ouvert — chemin interrompu ; le courant ne circule pas dans cette boucle."
+]
+demarche = [
+  "Repère une source d’énergie, comme une pile, puis un récepteur, comme une lampe.",
+  "Suis mentalement les conducteurs : la boucle doit relier les éléments et revenir à l’autre borne de la source.",
+  "Si un interrupteur ouvre le chemin, le circuit est ouvert et le courant ne passe plus dans cette boucle.",
+  "Si l’interrupteur ferme le chemin, le circuit est fermé. La lampe peut alors s’allumer si la pile, la lampe et les contacts fonctionnent correctement.",
+  "Ne conclus pas qu’un objet est sans danger parce qu’il est petit : cette fiche décrit un modèle et ne donne pas de procédure de branchement."
+]
+exercice = "Dans le jouet fictif, l’interrupteur est fermé mais la lampe reste éteinte. Donne deux explications possibles, en plus d’un circuit ouvert."
+aide = "La boucle peut être fermée sans que chaque pièce fonctionne. Pense à la source et au récepteur eux-mêmes."
+correction = [
+  "La pile peut être déchargée ou mal reliée.",
+  "La lampe ou un conducteur peut être endommagé ; un contact peut aussi manquer.",
+  "Le modèle ne permet pas de diagnostiquer un appareil réel. Ne l’ouvre pas et ne touche pas à une installation électrique."
+]
+a_retenir = [
+  "Un circuit simple a besoin d’un chemin continu entre les bornes de la source pour que le courant circule.",
+  "Un interrupteur ouvert coupe le trajet ; un interrupteur fermé le rétablit si les autres éléments fonctionnent.",
+  "La lampe utilise l’énergie transférée dans le circuit ; le courant n’est pas une réserve que la lampe consomme comme un combustible."
+]
+transferer = "Ces mots aident à comprendre un dessin de circuit ou une explication scolaire. Cette fiche ne demande aucune manipulation : ne démonte pas un chargeur, une prise, un appareil branché ni une installation fixe. Pour un problème réel, cesse d’utiliser un équipement abîmé et sollicite une personne qualifiée ou un service approprié."
+revue_le = "2026-10-08"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — ressources d’accompagnement du programme de technologie au cycle 4"
+url = "https://eduscol.education.gouv.fr/5745/ressources-d-accompagnement-du-programme-de-technologie-au-cycle-4"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère institutionnel de périmètre et de programme ; aucun texte, schéma, exemple ou exercice de la page n’est repris."
+
+[[fiche.sources]]
+titre = "INRS — prévention du risque électrique"
+url = "https://www.inrs.fr/risques/electriques/prevention-risque-electrique.html"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Renvoi facultatif vers des informations de prévention ; aucune consigne, formulation, illustration ou procédure de la page n’est reprise."
+
+[[fiche]]
+id = "tech-electronique-capteur"
+titre = "Distinguer capteur, commande et action dans un objet électronique"
+matiere = "Sciences et technologie"
+matiere_id = "sciences"
+domaine = "sciences-techniques-environnement"
+niveau = 2
+horizon_contenu = "Technologie et systèmes techniques ; modèle explicatif sans montage"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Proposition originale de vulgarisation ; vérification technique indépendante, relecture pédagogique, limites et sécurité restent à contrôler. Aucun montage, essai matériel ou test apprenant n’est revendiqué. Les licences des sources n’ont pas été vérifiées pour une réutilisation."
+minutes = 11
+resume = "Suivre le trajet d’une information depuis un capteur jusqu’à une action commandée."
+objectif = "Décrire les rôles d’un capteur, d’une unité de commande et d’un actionneur dans un exemple fictif."
+situation = "Dans un couloir fictif, une lampe commandée s’allume lorsque la lumière ambiante passe sous un seuil choisi. Quels éléments peuvent mesurer, décider et agir ?"
+analogie_titre = "Comme une sonnette avec un détecteur et une commande"
+analogie = "Un détecteur repère un changement, une commande applique une règle, puis un actionneur réalise une action. Dans l’exemple, un capteur mesure la lumière, une unité de commande compare la mesure au seuil, et la lampe reçoit une commande d’allumage."
+limite_analogie = "Un capteur ne voit pas et ne comprend pas comme une personne : il répond à une grandeur physique selon ses caractéristiques. L’unité de commande applique des instructions, peut se tromper ou tomber en panne, et ne raisonne pas nécessairement comme une intelligence artificielle."
+notions = [
+  "Capteur — composant qui détecte ou mesure une grandeur, par exemple la lumière ou la température.",
+  "Signal — information représentée par une variation électrique ou une suite de données transmise entre composants.",
+  "Unité de commande — composant ou logiciel qui reçoit des données et applique une règle de fonctionnement.",
+  "Actionneur — élément qui réalise une action commandée, comme allumer une lampe ou faire tourner un moteur.",
+  "Seuil — valeur de référence à partir de laquelle une règle peut changer le comportement du système."
+]
+demarche = [
+  "Nomme l’information d’entrée : ici, la mesure de luminosité.",
+  "Repère le composant qui reçoit ou transforme cette information : le capteur.",
+  "Écris la règle en mots : si la mesure est inférieure au seuil, demander l’allumage ; sinon, ne pas le demander.",
+  "Repère la commande et la sortie : l’unité de commande applique la règle, puis l’actionneur ou le circuit de sortie commande la lampe.",
+  "Vérifie les limites : un mauvais réglage, une mesure imprécise, une panne ou une source d’énergie coupée peut empêcher le comportement attendu."
+]
+exercice = "Un dispositif fictif allume un témoin pendant dix secondes quand une personne appuie sur un bouton. Repère l’entrée, la règle de commande et la sortie."
+aide = "Le bouton fournit une entrée. Le programme applique une règle qui dépend de la durée. Le témoin lumineux est la sortie visible."
+correction = [
+  "Entrée : l’état du bouton, qui passe de relâché à appuyé.",
+  "Règle : lorsqu’un appui est détecté, commander l’allumage pendant dix secondes, puis arrêter la commande.",
+  "Sortie : le témoin lumineux, qui montre l’action demandée. Un vrai système comporte d’autres composants et contraintes que ce schéma simplifié."
+]
+a_retenir = [
+  "Un objet électronique peut recevoir une information, appliquer une règle et commander une sortie.",
+  "Énergie et information sont liées mais différentes : l’énergie permet le fonctionnement, tandis que le signal transporte une information.",
+  "Le capteur mesure seulement ce pour quoi il a été conçu ; il n’interprète pas librement la situation.",
+  "Un objet peut combiner une fonction électrique et une commande électronique ; les deux catégories ne s’excluent pas."
+]
+transferer = "Ce schéma permet de décrire un thermostat, un détecteur de présence, un feu commandé ou un appareil connecté à un niveau général. Il n’indique pas comment ouvrir, câbler, programmer ou réparer ces objets : ces tâches exigent le matériel, les compétences et les règles de sécurité adaptés."
+revue_le = "2026-10-08"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — programme et ressources de technologie au cycle 4"
+url = "https://eduscol.education.gouv.fr/5745/ressources-d-accompagnement-du-programme-de-technologie-au-cycle-4"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère de programme pour les systèmes techniques et les objets programmables ; aucun texte, exemple, image ou séquence de la source n’est repris."
+
+[[fiche]]
+id = "civ-choisir-source-publique"
+titre = "Choisir une source publique adaptée à sa question"
+matiere = "Citoyenneté et recherche d’information"
+matiere_id = "citoyennete"
+domaine = "citoyennete-medias"
+niveau = 2
+horizon_contenu = "Démarches, vie citoyenne et lecture critique ; références françaises modulables selon le sujet"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Proposition originale de littératie des sources ; vérification des périmètres et liens, relecture éditoriale, accessibilité et tests apprenants restent à faire. Les références sont facultatives et leurs licences de réutilisation ne sont pas déclarées vérifiées."
+minutes = 12
+resume = "Faire correspondre une question à une source, puis vérifier son responsable, sa date, son territoire et son rôle."
+objectif = "Choisir un point de départ public pertinent sans confondre texte juridique, démarche, statistique, explication et position éditoriale."
+situation = "Tu veux vérifier une démarche administrative ou une donnée sur une commune. Plusieurs pages donnent des informations différentes : laquelle examiner en premier et que contrôler avant de la reprendre ?"
+analogie_titre = "Comme choisir le bon guichet et lire l’étiquette d’un document"
+analogie = "Un guichet spécialisé est souvent le bon point de départ pour une question précise. De la même manière, une source publique a un rôle : une page de démarches, un texte juridique, un jeu de données ou une explication citoyenne ne répondent pas tous à la même question. Lire l’émetteur et la date aide à choisir."
+limite_analogie = "Un site officiel n’est pas un guichet qui garantit une réponse personnalisée : sa page peut être ancienne, limitée à un territoire ou simplifier une situation. Une statistique, un texte de loi et un commentaire éditorial demandent des vérifications différentes."
+notions = [
+  "Émetteur — organisme ou personne qui publie l’information et en répond.",
+  "Portée — sujet, public, territoire et période auxquels une information s’applique.",
+  "Source primaire — document ou donnée directement produit par l’organisme qui mène l’action ou publie la mesure.",
+  "Donnée publique — information produite ou détenue dans le cadre d’une mission publique ; son accès et sa réutilisation peuvent avoir des conditions propres au jeu de données.",
+  "Mise à jour — date indiquant quand une page ou un jeu de données a été révisé ; elle ne garantit pas à elle seule que tout le contenu est à jour."
+]
+demarche = [
+  "Formule ta question : cherches-tu une règle en vigueur, une démarche, une statistique, un service, une explication ou un avis ?",
+  "Choisis une famille de source adaptée. Pour les démarches administratives, Service-Public peut orienter ; pour lire le texte juridique, cherche la version applicable sur Légifrance ; pour les chiffres, consulte la définition et la période de l’organisme statistique concerné.",
+  "Vérifie qui publie la page, son rôle, son territoire et son public. Un organisme public, une autorité indépendante, un média, une association et une entreprise n’ont pas la même mission.",
+  "Regarde la date, la version et les liens vers le document, les données ou les textes cités. Pour un jeu de données, vérifie aussi la méthode, les unités, les champs manquants et la licence affichée pour ce jeu précis.",
+  "Sépare ce que la source établit de son explication ou de son commentaire. Si l’action a des conséquences importantes, confirme les conditions avec le service compétent ou une personne qualifiée."
+]
+exercice = "Une page anonyme décrit un droit sans date. Une fiche de Service-Public datée renvoie vers un texte sur Légifrance. Quelle page choisir comme premier repère et quelles vérifications faire avant d’agir ?"
+aide = "Un émetteur identifiable et une date sont utiles, mais demande aussi quel organisme est compétent, quelle version du texte s’applique et si la situation décrite correspond à la tienne."
+correction = [
+  "La fiche Service-Public est un meilleur point de départ que la page anonyme pour s’orienter, car son émetteur et sa date sont visibles et elle renvoie vers une source juridique.",
+  "Il faut encore vérifier la date et la portée de la fiche, la version en vigueur du texte sur Légifrance, le territoire et les conditions propres à la situation.",
+  "Une source officielle peut être incomplète ou mal interprétée ; pour une situation importante, contacter le service compétent ou demander un conseil approprié."
+]
+a_retenir = [
+  "Commence par la question à résoudre, pas par le premier résultat d’un moteur de recherche.",
+  "Identifie l’émetteur, sa mission, la date, le territoire, le public et le type de contenu.",
+  "Une explication administrative, un texte juridique, une statistique et une prise de position ne sont pas interchangeables.",
+  "L’accès public ne rend pas automatiquement toutes les données libres de réutilisation ; consulte la licence et les conditions du jeu concerné.",
+  "Une source officielle est un repère important, pas une garantie absolue qu’une page est actuelle ou suffisante pour chaque cas."
+]
+transferer = "Ce parcours peut servir pour un droit, une démarche, un indicateur statistique, une question de santé ou un choix de consommation. Les exemples de portails ci-dessous sont des portes d’entrée facultatives ; leurs périmètres évoluent et aucune source ne remplace une vérification adaptée au cas précis."
+revue_le = "2026-10-08"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Service-Public.fr — information officielle sur les droits et démarches"
+url = "https://www.service-public.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Exemple de portail d’information et d’orientation administrative ; aucun texte, fiche, illustration ou démarche du site n’est repris."
+
+[[fiche.sources]]
+titre = "Légifrance — diffusion du droit français"
+url = "https://www.legifrance.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Exemple de source pour retrouver des textes juridiques ; aucun extrait ni commentaire du site n’est repris."
+
+[[fiche.sources]]
+titre = "data.gouv.fr — plateforme de données publiques françaises"
+url = "https://www.data.gouv.fr/"
+licence_source = "Non vérifiée — les conditions varient selon les ressources ; aucune donnée réutilisée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Exemple de catalogue de données publiques ; aucune base, valeur, visualisation ou notice de jeu de données n’est reprise."
+
+[[fiche.sources]]
+titre = "INSEE — Institut national de la statistique et des études économiques"
+url = "https://www.insee.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Exemple de source statistique publique ; aucun chiffre, tableau, graphique ou texte de publication n’est repris."
+
+[[fiche.sources]]
+titre = "Vie-publique.fr — repères sur les institutions et politiques publiques"
+url = "https://www.vie-publique.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Exemple de ressource d’explication civique ; aucune formulation, analyse ou publication n’est reprise."

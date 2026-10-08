@@ -8,12 +8,13 @@
   <title>Documents — M.R.S.C</title>
   <link rel="stylesheet" href="assets/css/site.css">
   <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/navigation-parcours.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu principal</a>
   <header class="site-header">
     <div class="identity">
-      <a href="index.html" aria-label="M.R.S.C — Accueil">
+      <a href="index.html" data-site-home aria-label="M.R.S.C — Accueil">
         <img class="brand-logo" src="assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
       </a>
       <div class="brand-copy">
@@ -35,6 +36,7 @@
         <div class="nav-links" id="navigation-principale" data-primary-navigation>
           <a href="index.html">Accueil</a>
           <a href="ia-societe.html">IA &amp; société</a>
+          <a href="apprendre.html">Apprendre</a>
           <a href="simulateur.html">Simulateur</a>
           <a href="documents.html" aria-current="page">Documents</a>
           <a href="liens-utiles.html">Liens utiles</a>
@@ -42,6 +44,24 @@
           <a href="transparence.html">Transparence</a>
           <a href="nous-contacter.html">Nous contacter</a>
         </div>
+        <details class="display-settings" data-display-settings hidden>
+          <summary title="Options d’affichage">
+            Affichage <span class="display-settings-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="display-settings-panel">
+            <p class="display-settings-title"><strong>Ajuster la lisibilité</strong></p>
+            <div class="display-settings-row" role="group" aria-label="Taille du texte">
+              <button class="display-control" type="button" data-text-decrease aria-label="Réduire la taille du texte" title="Réduire le texte">A−</button>
+              <span class="display-text-level" data-text-size-level role="status" aria-live="polite" aria-atomic="true">100 %</span>
+              <button class="display-control" type="button" data-text-increase aria-label="Agrandir la taille du texte" title="Agrandir le texte">A+</button>
+            </div>
+            <div class="display-settings-actions">
+              <button class="display-control display-control-wide" type="button" data-contrast-toggle aria-pressed="false">Contraste renforcé</button>
+              <button class="display-control display-control-wide" type="button" data-spacing-toggle aria-pressed="false">Espacement du texte</button>
+            </div>
+            <p class="display-settings-note">Ces choix restent enregistrés sur cet appareil. Le zoom du navigateur reste disponible.</p>
+          </div>
+        </details>
       </div>
     </nav>
   </header>
@@ -143,11 +163,13 @@
           <ul>
             <li><a href="index.html">Accueil</a></li>
             <li><a href="ia-societe.html">IA &amp; société</a></li>
+            <li><a href="apprendre.html">Apprendre</a></li>
             <li><a href="simulateur.html">Simulateur</a></li>
             <li><a href="documents.html" aria-current="page">Documents</a></li>
             <li><a href="liens-utiles.html">Liens utiles</a></li>
             <li><a href="localisation.html">Localisation</a></li>
             <li><a href="transparence.html">Transparence</a></li>
+            <li><a href="confidentialite.html">Vie privée et données</a></li>
             <li><a href="nous-contacter.html">Nous contacter</a></li>
           </ul>
         </nav>
@@ -167,7 +189,7 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; <span data-year>2026</span> Mouvement Repr&eacute;sentatif de la Soci&eacute;t&eacute; Civile (M.R.S.C) — Tous droits r&eacute;serv&eacute;s.</p>
-        <p class="footer-legal"><a href="documents.html">Documents officiels</a> &middot; <a href="nous-contacter.html">Contact</a> &middot; <a href="transparence.html#licence">Licence</a> &middot; <a href="#contenu">Haut de page</a></p>
+        <p class="footer-legal"><a href="documents.html">Documents officiels</a> &middot; <a href="nous-contacter.html">Contact</a> &middot; <a href="transparence.html#licence">Licence</a> &middot; <a href="confidentialite.html">Vie privée</a> &middot; <a href="#contenu">Haut de page</a></p>
       </div>
     </div>
   </footer>

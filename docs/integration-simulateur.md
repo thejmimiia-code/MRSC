@@ -4,13 +4,14 @@ Ce document explique **comment l’outil fonctionne sur le site**, **comment le 
 
 ## L’essentiel en quelques lignes
 
-1. Le simulateur est chez lui dans **son dépôt** ; c’est là qu’il évolue. Le site M.R.S.C en
-   embarque une **copie datée**, qui lui permet de fonctionner seul (moteur inclus).
-2. La page `simulateur.html` connaît **deux sources** : la version en développement (projet en
-   ligne) et la copie embarquée. Elle affiche la première si elle est réellement fonctionnelle,
-   la seconde sinon. Un seul attribut à changer pour retirer ou forcer la version en ligne.
-3. Pour que la version en ligne prenne la main, son dépôt doit servir **`/` (la page du moteur)
-   et `/api/…` (son API de calcul)**. Le prompt prêt à coller pour cette session-là est dans
+1. Le simulateur évolue dans **son dépôt** et sa version publique est hébergée sur Render à
+   [`https://simulateur-macro-politique.onrender.com/`](https://simulateur-macro-politique.onrender.com/).
+   Le site M.R.S.C conserve aussi une **copie datée** du moteur et de sa page.
+2. `simulateur.html` connaît deux sources : la version Render, sélectionnée si la page et son
+   API répondent, puis la copie embarquée si l’hébergement du site exécute ses fonctions Python.
+   Sur un hébergement purement statique, la page donne un lien direct vers Render.
+3. L’application en ligne doit servir **`/` (la page interactive) et `/api/…` (son API de calcul)**
+   sur la même adresse. Les consignes de maintenance et de vérification figurent dans
    `docs/prompt-session-simulateur.md`.
 4. Rien n’est automatique ailleurs : pas de synchronisation de fichiers entre les deux dépôts,
    pas de mise à jour publiée sans décision humaine.
@@ -28,7 +29,7 @@ Il expose une page interactive et 12 routes HTTP (`/api/catalogue`, `/api/contex
 | Contrainte | Conséquence |
 |---|---|
 | Le moteur vit dans son dépôt, il ne faut pas le modifier | Le site en embarque une **copie datée** dans `simulateur/`, avec sa provenance et un script de mise à jour |
-| Le site est un site statique, sans build | La page du moteur est **générée une fois** en fichier HTML ; les routes deviennent des **fonctions** (`api/*.py`) |
+| Le site est publié sans étape de build ; certains hébergeurs peuvent exécuter Python | La page locale du moteur est **générée une fois** en fichier HTML ; les routes locales sont exposées par des **fonctions** (`api/*.py`) |
 
 ## 2. Architecture
 
@@ -41,8 +42,8 @@ site M.R.S.C
 │   ├── PROVENANCE.json          ← dépôt amont, révision, date de copie
 │   └── pont_api.py              ← AJOUT M.R.S.C : pont vers les fonctions serverless
 ├── api/
-│   ├── *.py                     ← 12 fonctions Vercel, une par route du moteur
-│   └── verifier-source.py       ← AJOUT M.R.S.C : la source distante est-elle utilisable ?
+│   ├── *.py                     ← fonctions Python locales, une par route du moteur
+│   └── verifier-source.py       ← AJOUT M.R.S.C : la source Render est-elle utilisable ?
 ├── outils/
 │   ├── mettre-a-jour-simulateur.py   ← rapatrie le moteur amont + régénère la page
 │   ├── construire-simulateur.py      ← génère simulateur/index.html depuis le moteur
@@ -56,7 +57,12 @@ site M.R.S.C
 
 ### Pourquoi `simulateur/index.html` est-il généré ?
 
-Le moteur sert sa page depuis la constante `HTML_PAGE` en y remplaçant le repère `===SCENARIOS_JSON===` par le catalogue des scénarios (`simulateur/dashboard.py`). `outils/construire-simulateur.py` fait la même substitution, une fois pour toutes : la page devient un fichier statique publiable, servi aussi bien par Vercel que par GitHub Pages, sans exécuter Python pour l’afficher.
+Le moteur sert sa page depuis la constante `HTML_PAGE` en y remplaçant le repère `===SCENARIOS_JSON===` par le catalogue des scénarios (`simulateur/dashboard.py`). `outils/construire-simulateur.py` fait la même substitution, une fois pour toutes, puis ajoute à la page publiée une barre de retour permanente vers `../index.html`, les réglages de texte/contraste/interligne et des adaptations responsives et clavier pour les tableaux larges. Le moteur amont reste inchangé ; la page devient un fichier statique publiable, servi aussi bien par Vercel que par GitHub Pages, sans exécuter Python pour l’afficher. Les préférences locales sont les mêmes que sur les pages M.R.S.C quand l’origine est la même ; le navigateur interdit leur partage automatique avec une source distante d’une autre origine.
+
+
+### Réglages d’affichage du simulateur
+
+Le générateur ajoute en plus des boutons A−/A+ (100, 125 et 150 %), contraste renforcé et espacement du texte ; la préférence se mémorise localement. Il ajoute des règles de reflow sous 640 px, élargit les cibles tactiles et rend les deux zones de tableaux focusables au clavier, nommées et annoncées. Ces ajouts et leur justification sont détaillés dans [`rd-affichage-adaptatif.md`](rd-affichage-adaptatif.md). Toute mise à jour du moteur doit être suivie d’une régénération et de `python3 outils/verifier-integration.py` pour garder la page publiée synchronisée.
 
 ### À quoi sert `simulateur/pont_api.py` ?
 
@@ -68,9 +74,10 @@ C’est aussi ce fichier qui place le cache des données publiques dans `/tmp` :
 
 | Où | Page de l’outil | Routes `/api/…` | Résultat |
 |---|---|---|---|
-| Vercel | `simulateur/index.html` (statique) | fonctions Python de `api/` | outil complet |
+| Render (application du dépôt du simulateur) | application interactive servie à `/` | API Python de la même application | version publique active : `https://simulateur-macro-politique.onrender.com/` |
+| Vercel (site M.R.S.C) | `simulateur/index.html` (copie générée) | fonctions Python de `api/` | le site privilégie Render si la sonde confirme la page et l’API ; sinon, la copie locale peut fonctionner |
 | Local (`outils/serveur-local.py`) | idem | moteur en interne (port + 1) et fonctions du site montées depuis `api/` | outil complet |
-| GitHub Pages | idem | absentes (pas d’exécution Python) | présentation seule ; l’avis « aperçu indisponible » remplace le cadre, avec le lien vers la version en ligne |
+| GitHub Pages (site M.R.S.C) | idem | absentes (pas d’exécution Python) | lien direct vers Render ; la copie locale ne peut pas calculer sur cet hébergement |
 
 Quelle que soit l’adresse, `assets/js/site.js` applique le même ordre de préférence (voir § 5).
 
@@ -98,7 +105,9 @@ Si le moteur ajoute une route (`/api/nouvelle`), `generer-fonctions-api.py` s’
 
 ## 4. Publier
 
-### Vercel (outil complet)
+### Vercel (site M.R.S.C avec fonctions locales facultatives)
+
+Vercel peut héberger **le site M.R.S.C** et les fonctions Python qui permettent à sa copie locale de calculer ; il ne s’agit pas de l’adresse publique active du simulateur, qui est sur Render.
 
 1. **Add New → Project** → importer `thejmimiia-code/MRSC`.
 2. Réglages : *Framework Preset* **Other**, *Build Command* **vide**, *Output Directory* **`.`**, *Install Command* **vide**.
@@ -109,7 +118,7 @@ Si le moteur ajoute une route (`/api/nouvelle`), `generer-fonctions-api.py` s’
 
 ### GitHub Pages (présentation seule)
 
-Le workflow publie `simulateur.html`, `simulateur/index.html` et `simulateur/PROVENANCE.json`. Les sources du moteur et les fonctions `api/` ne sont pas publiées : les Pages n’exécutent pas de Python, et l’avis « aperçu interactif indisponible » prend la place de l’outil.
+Le workflow `.github/workflows/deploy-pages.yml` publie les pages du site, la notice `confidentialite.html`, le catalogue et les fiches autonomes de `apprendre/`, `sitemap.xml`, `assets/` et `simulateur/index.html` avec sa provenance. Les sources Python du moteur, les fonctions `api/` et les documents de travail internes ne sont pas publiés. GitHub Pages n’exécute pas Python : le cadre local ne peut donc pas calculer ; la page de présentation propose un lien direct vers le simulateur hébergé sur Render. L’adresse publique du site M.R.S.C est [`https://thejmimiia-code.github.io/MRSC/`](https://thejmimiia-code.github.io/MRSC/) ; celle du simulateur est [`https://simulateur-macro-politique.onrender.com/`](https://simulateur-macro-politique.onrender.com/).
 
 ### Local
 
@@ -119,53 +128,48 @@ python3 outils/serveur-local.py --port 4173 --bind 0.0.0.0
 
 Ouvrir `http://localhost:4173/simulateur.html`. Le moteur démarre en interne sur le port suivant ; `--sans-moteur` sert uniquement les fichiers statiques.
 
-## 5. Rester à jour : source distante et veille
+## 5. Rester à jour : source Render et copie embarquée
 
-Le simulateur poursuit son développement dans son dépôt ; deux mécanismes évitent que le site prenne du retard.
+Le simulateur évolue dans son dépôt ; le site M.R.S.C sélectionne la version Render quand elle est vérifiée et garde une copie datée en repli.
 
-### La bascule automatique vers la version en développement
+### La sélection de la source
 
-La page `simulateur.html` porte une seule information de configuration :
+`simulateur.html` porte les deux adresses :
 
 ```html
 <div class="simulateur-cadre" data-simulateur-apercu
-     data-src="simulateur/"                                   <!-- copie embarquée -->
-     data-source-distante="https://…vercel.app/">             <!-- version en ligne -->
+     data-src="simulateur/"                                           <!-- copie embarquée -->
+     data-source-distante="https://simulateur-macro-politique.onrender.com/"> <!-- source Render -->
 ```
 
 À chaque visite, `assets/js/site.js` choisit dans cet ordre :
 
-1. **la version en développement** — mais seulement si la fonction `api/verifier-source` confirme,
-   côté serveur, que cette adresse sert *la page du moteur* **et** une *API de calcul* ;
-2. **la copie embarquée** du moteur, si sa propre API répond (`HEAD /api/scenarios`) ;
-3. à défaut (hébergement purement statique), l’**avis explicite** avec les liens, plutôt qu’un cadre vide.
+1. **la version Render**, si `api/verifier-source` confirme côté serveur que `/` sert la page
+   interactive et qu’au moins une API de calcul répond ;
+2. **la copie embarquée**, si l’API locale répond (`HEAD /api/scenarios`) ;
+3. à défaut, notamment sur un hébergement purement statique comme GitHub Pages, un avis explicite
+   avec un lien direct vers Render, plutôt qu’un cadre vide.
 
-La vérification est faite côté serveur pour une raison précise : le navigateur ne peut pas lire la réponse
-d’une autre origine. Sans elle, on afficherait comme « simulateur » une simple page de présentation — le piège
-exact dans lequel tombe un `<iframe>` posé sans contrôle. Elle décide donc de la bascule, et le site entier
-reste utilisable même si la source distante disparaît.
+La vérification de la source distante est faite côté serveur : le navigateur ne peut pas lire la réponse
+provenant d’une autre origine. Cela évite d’afficher une page de présentation comme si c’était le simulateur.
+Sur un hébergement statique, qui n’exécute pas cette fonction ni l’API locale, le lien direct reste disponible.
 
-Pour savoir où en est la version en ligne, une commande :
+Pour vérifier l’adresse Render depuis un environnement qui autorise les requêtes sortantes :
 
 ```sh
-python3 outils/verifier-source-distante.py          # même vérification que la fonction serveur
+python3 outils/verifier-source-distante.py          # même contrôle que la fonction du site
 python3 outils/verifier-source-distante.py --json
 ```
 
-Elle sort en code 0 si la source distante est fonctionnelle, 1 sinon (avec la raison). Le jour où elle le devient,
-**rien à changer** : la page bascule d’elle-même à la visite suivante. Pour rendre cette version utilisable,
-c’est côté dépôt du simulateur que cela se joue : `docs/prompt-session-simulateur.md` contient le prompt à
-coller dans cette session-là, avec le contrat attendu et la recette éprouvée. Si vous préférez forcer un choix, deux options :
-retirer `data-source-distante` (la copie embarquée est toujours utilisée), ou vider `data-src` (seule la version
-distante est proposée).
+Le code de sortie vaut 0 si la page et l’API sont reconnues, 1 sinon (avec la raison). La fonction du site attend actuellement au plus 8 secondes par requête ; un démarrage à froid Render plus long, un réseau filtré ou une panne transitoire peut donc entraîner le repli. Ce résultat ne prouve pas à lui seul que l’adresse est définitivement indisponible. Le lien direct est maintenu sur la page.
+Pour les consignes de maintenance de l’application amont, voir `docs/prompt-session-simulateur.md`.
+
+Pour forcer la copie locale sur un hébergement avec fonctions Python, retirer l’attribut `data-source-distante`.
+Ne pas vider `data-src` : il est nécessaire au chemin de repli.
 
 ### L’alerte de mise à jour du moteur embarqué
 
-La copie embarquée reste la valeur sûre : c’est elle qui calcule. Pour ne pas la laisser vieillir,
-`.github/workflows/maj-simulateur.yml` compare chaque lundi la révision copiée (`simulateur/PROVENANCE.json`)
-à la branche `main` du dépôt amont. S’il y a du retard, le job échoue et GitHub prévient par courriel
-(notification par défaut des exécutions planifiées). La veille **ne modifie rien**, ne publie rien et
-n’écrit nulle part : la mise à jour reste une décision humaine.
+La copie embarquée est le repli versionné du site et ne calcule que sur un hébergement qui exécute ses fonctions Python. Pour éviter qu’elle prenne du retard, `.github/workflows/maj-simulateur.yml` compare chaque lundi la révision copiée (`simulateur/PROVENANCE.json`) à la branche `main` du dépôt amont. S’il y a du retard, le job échoue et GitHub prévient par courriel (notification par défaut des exécutions planifiées). La veille **ne modifie rien**, ne publie rien et n’écrit nulle part : la mise à jour reste une décision humaine.
 
 ```sh
 python3 outils/verifier-maj-amont.py     # 0 : à jour · 1 : mise à jour disponible
@@ -176,20 +180,20 @@ python3 outils/mettre-a-jour-simulateur.py
 
 | Symptôme | Cause probable | Que faire |
 |---|---|---|
-| `404 NOT_FOUND` sur `/` | Le dépôt n’a pas d’`index.html` à sa racine, ou le projet déployé n’est pas ce dépôt | Voir `docs/diagnostic-404-vercel.md` |
-| La page s’affiche, mais « Aperçu interactif indisponible » | L’hébergeur n’exécute pas Python (GitHub Pages) ou les fonctions ne sont pas déployées | Vérifier `/api/scenarios` ; publier sur Vercel |
+| `404 NOT_FOUND` sur `/` dans un ancien déploiement Vercel | Le projet historique ne servait pas l’application ; ce n’est pas l’adresse publique active | Voir le diagnostic historique `docs/diagnostic-404-vercel.md` ; l’adresse active est celle de Render indiquée plus haut |
+| La page M.R.S.C affiche « aperçu intégré indisponible » | GitHub Pages n’exécute pas Python, ou les fonctions locales ne sont pas déployées | Ouvrir le lien Render affiché sur la page ; sur Vercel/local, vérifier `/api/scenarios` |
 | `/api/...` renvoie une erreur JSON `error` | La route a reçu des paramètres invalides (levier inconnu, corps vide) | Le message du moteur indique le paramètre attendu |
-| Réponse lente au premier appel | Démarrage à froid d’une fonction | Normal ; `maxDuration` est réglé à 60 s |
+| Réponse lente au premier appel | Démarrage à froid d’une fonction locale ou du service Render | Patienter puis réessayer ; un délai isolé ne suffit pas à conclure à une panne |
 | Les chiffres restent « référence datée » | Aucune connexion aux API publiques, repli assumé | Utiliser « Rafraîchir les données » dans l’outil (les valeurs sont alors collectées par le navigateur) |
-| La sonde `HEAD /api/scenarios` échoue | Le moteur n’est pas joignable : c’est elle qui décide d’afficher l’aperçu | Vérifier les journaux de la fonction, puis relancer `outils/verifier-integration.py` |
-| L’avis « aperçu interactif indisponible » s’affiche sur Vercel | Les fonctions Python ne sont pas déployées (mauvais projet, ou framework détecté qui les écrase) | Vérifier que `/api/scenarios` répond ; *Framework Preset* doit rester **Other** |
-| Le site affiche la copie embarquée alors que la version en ligne existe | `api/verifier-source` ne confirme pas la source : page absente, ou API de calcul non exposée | `python3 outils/verifier-source-distante.py` donne la raison exacte |
+| La sonde `HEAD /api/scenarios` échoue | L’API locale du site n’est pas joignable | Vérifier les journaux de la fonction, puis relancer `outils/verifier-integration.py` |
+| L’avis intégré apparaît sur le site M.R.S.C hébergé sur Vercel | Les fonctions Python du site ne sont pas déployées, ou le projet Vercel est mal configuré | Vérifier que `/api/scenarios` répond ; *Framework Preset* doit rester **Other** |
+| Le site affiche la copie embarquée plutôt que Render | La sonde `api/verifier-source` ne reconnaît pas la page ou son API, ou le service Render est encore en démarrage | `python3 outils/verifier-source-distante.py` donne le détail ; ouvrir l’adresse Render directement pour vérifier le service |
 
 ## 7. Ce qui n’est pas fait, volontairement
 
 - **Aucune modification du moteur** : il est copié tel quel ; les ajouts du site vivent dans `pont_api.py` et les outils.
 - **Aucun build JavaScript, aucune dépendance** : une page HTML générée, des fonctions Python en bibliothèque standard.
-- **Aucun suivi analytique** : le site ne dépose aucun cookie de mesure et le simulateur ne demande aucune donnée personnelle.
+- **Aucun suivi analytique observé** : le site ne dépose pas de cookie de mesure ; le simulateur ne demande ni compte ni identité. Les requêtes adressées à Render peuvent néanmoins inclure l’adresse IP et des données techniques ; voir `confidentialite.html`.
 - **Aucune publication des sources du moteur sur GitHub Pages** : seuls la page générée et le fichier de provenance sont copiés.
 - **Aucune mise à jour automatique** : la veille hebdomadaire alerte, elle ne publie pas ; le moteur copié ne bouge que sur décision humaine.
 

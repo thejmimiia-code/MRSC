@@ -1,20 +1,26 @@
 # M.R.S.C — site public
 
+> **Adresse publique durable du projet : [https://thejmimiia-code.github.io/MRSC/](https://thejmimiia-code.github.io/MRSC/)** — GitHub Pages est activé et HTTPS est imposé. L’adresse reste stable tant que le compte et le dépôt gardent ce nom. Les changements de cette branche seront visibles après intégration à `main` et publication.
+
 Reproduction statique des pages publiques de [www.mrsc.fr](https://www.mrsc.fr/) pour servir de base aux travaux de R&D, complétée par un outil citoyen : le simulateur macro-politique.
 
 ## Pages
 
-- `index.html` — accueil et présentation de l’association, avec l’IA & société en avant
-- `ia-societe.html` — première page de réflexion sur les usages, opportunités, risques et effets sociaux de l’intelligence artificielle
-- `simulateur.html` — présentation du simulateur macro-politique et aperçu embarqué de l’outil
+- `index.html` — accueil recentré sur la mission du M.R.S.C, les expériences de chacun, les apprentissages, le débat, les outils citoyens, les documents et le partage
+- `apprendre.html` — parcours d’apprentissage accessibles, repères par matière et difficulté, fiches autonomes et sources sans compte
+- `ia-societe.html` — réflexion sur les usages, effets sociaux et fraudes ; réflexes de vérification et liens vers les fiches pratiques
+- `simulateur.html` — présentation du simulateur macro-politique, accès à la version interactive hébergée sur Render et aperçu intégré lorsqu’il est disponible
 - `documents.html` — statuts, parution au Journal officiel, bulletins d’adhésion et de don
 - `liens-utiles.html` — ressources externes référencées sur le site d’origine
 - `localisation.html` — carte Google My Maps et repères affichés
 - `nous-contacter.html` — coordonnées de contact
 - `transparence.html` — projet, méthode, registre des sources page par page et licence d’utilisation
+- `confidentialite.html` — information publique sur les préférences locales, les contacts, l’hébergement et les services tiers
 - `404.html` — page d’erreur servie par les hébergeurs pour toute adresse inconnue
 
-La mise en page est responsive, les liens de navigation fonctionnent sans framework et le menu mobile est piloté par `assets/js/site.js`. La veille éditoriale se trouve dans `docs/veille-rd-mrsc.md` ; `docs/pistes-visuelles-ia.html` présente trois directions graphiques exploratoires, hors navigation publique.
+Le dépôt fournit également un [plan de site XML](sitemap.xml) pour les moteurs d’indexation et une veille éditoriale automatisée sur les fiches, les sources, les dates de revue et les lacunes de couverture. Le détail des traitements de données et les points juridiques à confirmer sont documentés dans [`docs/rd-confidentialite-rgpd.md`](docs/rd-confidentialite-rgpd.md).
+
+La mise en page est responsive, le menu s’adapte aux écrans étroits et des commandes précédent/suivant, accueil et dernière vue rejouent le parcours interne dans l’onglet, avec repli sur la navigation du navigateur si le stockage est bloqué. La suite des pages est conservée dans `sessionStorage` sans paramètres de requête ni données saisies ; la notice publique en détaille la portée. Le panneau « Affichage » propose trois tailles de texte, un contraste renforcé et l’espacement du texte ; ces préférences restent locales et ne remplacent pas le zoom du navigateur. Les règles communes de boutons, cartes, palette et de statut des contenus sont décrites dans [`docs/rd-coherence-visuelle-editoriale.md`](docs/rd-coherence-visuelle-editoriale.md) ; la R&D et la matrice d’essais multi-écrans figurent dans [`docs/rd-affichage-adaptatif.md`](docs/rd-affichage-adaptatif.md). La recherche sur les apprentissages figure dans `docs/rd-parcours-apprentissage.md` ; la veille sur l’IA et les fraudes, dans [`docs/rd-ia-usages-fraudes.md`](docs/rd-ia-usages-fraudes.md) ; `docs/pistes-visuelles-ia.html` présente trois directions graphiques exploratoires, hors navigation publique.
 
 ## Le simulateur macro-politique
 
@@ -23,7 +29,7 @@ Le site intègre le **simulateur macro-politique systémique** du projet *Démoc
 | Élément | Rôle |
 |---|---|
 | `simulateur/` | Moteur embarqué (Python), copié depuis son dépôt d’origine — voir `simulateur/PROVENANCE.json` |
-| `simulateur/index.html` | Page publiée du simulateur, **générée** depuis le moteur (`outils/construire-simulateur.py`) |
+| `simulateur/index.html` | Page publiée du simulateur, **générée** depuis le moteur ; le générateur ajoute le retour permanent vers le site, les commandes de parcours et les réglages d’affichage |
 | `api/*.py` | Fonctions serveur exposant les 12 routes du moteur (`/api/catalogue`, `/api/simuler`, `/api/bulles`…) |
 | `simulateur/pont_api.py` | Pont entre les routes déclarées et le gestionnaire HTTP du moteur (ajout propre au site) |
 | `simulateur.html` | Page du site : présentation, limites assumées, aperçu embarqué |
@@ -38,16 +44,16 @@ python3 outils/generer-fonctions-api.py     # (re)génère les fonctions api/*.p
 python3 outils/verifier-integration.py      # contrôle l’ensemble
 ```
 
-**Deux sources, une seule page.** Le simulateur se développe en continu dans son dépôt ; la page `simulateur.html` connaît donc les deux : la **version en développement** (le projet en ligne) et la **copie embarquée** du moteur. À chaque visite, le site interroge `api/verifier-source`, qui vérifie côté serveur que la version en ligne sert bien *la page du moteur et une API de calcul* : si oui, elle est affichée (toujours à jour) ; sinon, la copie embarquée prend le relais. Sans cette vérification, on afficherait comme simulateur une simple page de présentation. Deux commandes pour suivre le tout :
+**Deux sources, une seule page.** L’application interactive évolue dans son dépôt et est hébergée à l’adresse publique [https://simulateur-macro-politique.onrender.com/](https://simulateur-macro-politique.onrender.com/). La page `simulateur.html` privilégie cette version si la sonde confirme que la page et son API répondent ; si le site est hébergé sur un service compatible, la copie embarquée peut prendre le relais. Sur GitHub Pages, qui n’exécute pas Python, la page affiche un lien direct vers Render plutôt qu’un faux aperçu fonctionnel. L’adresse Render, et non l’ancienne adresse Vercel du simulateur, est la référence à utiliser.
 
 ```sh
-python3 outils/verifier-source-distante.py  # la version en ligne est-elle utilisable ? (0 = oui)
+python3 outils/verifier-source-distante.py  # contrôle la page Render et son API (0 = oui)
 python3 outils/verifier-maj-amont.py        # le moteur embarqué a-t-il pris du retard ? (1 = oui)
 ```
 
-Une veille hebdomadaire (`.github/workflows/maj-simulateur.yml`) échoue — et prévient par courriel — quand le moteur amont a bougé ; elle ne publie jamais rien à votre place. Pour rendre la version en ligne utilisable, le prompt à coller dans la session du dépôt du simulateur est dans [`docs/prompt-session-simulateur.md`](docs/prompt-session-simulateur.md).
+Une veille hebdomadaire (`.github/workflows/maj-simulateur.yml`) échoue — et prévient par courriel — quand le moteur amont a bougé ; elle ne publie jamais rien à votre place. Les consignes de maintenance et de vérification du service Render sont dans [`docs/prompt-session-simulateur.md`](docs/prompt-session-simulateur.md).
 
-L’outil interactif a besoin d’un hébergeur qui exécute du Python (Vercel, ou votre machine). Sur un hébergement purement statique (GitHub Pages), la page de présentation s’affiche et un avis remplace l’aperçu embarqué. Le détail de l’architecture, de la mise à jour et du dépannage est dans [`docs/integration-simulateur.md`](docs/integration-simulateur.md).
+Le site et sa copie embarquée peuvent être testés avec les fonctions Python sur Vercel ou en local. Sur l’adresse GitHub Pages, utilisez le lien Render affiché dans la page du simulateur. Le détail de l’architecture, de la mise à jour et du dépannage est dans [`docs/integration-simulateur.md`](docs/integration-simulateur.md).
 
 ## Lancer en local
 
@@ -63,13 +69,13 @@ Sans script, un simple serveur de fichiers fonctionne aussi (`python3 -m http.se
 
 ## Publication sur GitHub Pages
 
-Le workflow `.github/workflows/deploy-pages.yml` publie les pages HTML (dont `404.html`), `assets/` et la page du simulateur (`simulateur/index.html` et sa provenance) ; les documents de travail dans `docs/`, les outils de `outils/`, les sources Python du moteur et les fonctions `api/` ne sont pas copiés sur le site. Le déploiement est automatique à chaque push sur `main` (un lancement manuel reste possible depuis l’onglet **Actions** avec « Publish M.R.S.C site »). Prérequis : activer GitHub Pages dans **Settings → Pages → Build and deployment → Source → GitHub Actions**. L’adresse de projet attendue est `https://thejmimiia-code.github.io/MRSC/`.
+Le workflow `.github/workflows/deploy-pages.yml` valide le HTML, les liens locaux et la syntaxe JavaScript, puis publie les pages HTML (dont `404.html` et `confidentialite.html`), `assets/`, `sitemap.xml`, le catalogue et ses fiches autonomes ainsi que la page du simulateur (`simulateur/index.html` et sa provenance). Les documents de travail dans `docs/`, les outils de `outils/`, les sources Python du moteur et les fonctions `api/` ne sont pas copiés sur le site. Le déploiement est automatique à chaque push sur `main` (un lancement manuel reste possible depuis l’onglet **Actions** avec « Publish M.R.S.C site »). GitHub Pages est actuellement configuré en mode public avec HTTPS ; toute mise à jour de cette branche attend son intégration à `main` et une publication réussie.
 
-Les Pages ne savent pas exécuter Python : sur cette adresse, le simulateur se présente mais ne calcule pas. Pour l’outil interactif, utilisez Vercel ou un lancement local.
+GitHub Pages ne sait pas exécuter Python : la copie embarquée ne calcule pas à cette adresse. Pour utiliser l’outil interactif, ouvrez la version publique hébergée sur [Render](https://simulateur-macro-politique.onrender.com/).
 
-## Publication sur Vercel
+## Publication du site M.R.S.C sur Vercel (optionnelle)
 
-Le site est statique et son `index.html` est à la racine ; les fonctions Python de `api/` donnent vie au simulateur. Marche à suivre :
+Cette configuration concerne l’hébergement du **site M.R.S.C**, pas l’adresse publique active du simulateur, hébergé sur Render. Les fonctions Python de `api/` peuvent aussi faire fonctionner la copie embarquée du site si la source Render ne répond pas. Marche à suivre :
 
 1. Vercel → **Add New → Project** → importer `thejmimiia-code/MRSC`.
 2. Réglages : *Framework Preset* **Other**, *Build Command* **vide**, *Output Directory* **`.`**, *Install Command* **vide**.
@@ -82,7 +88,7 @@ Un déploiement peut être « Ready » tout en renvoyant `404 NOT_FOUND` sur `/`
 
 ## Contenu et ressources externes
 
-Le logo du site a été repris localement dans `assets/images/logo-mrsc.jpg`. Les pages existantes et leurs éléments visibles ont été reconstitués à partir du site public ; `ia-societe.html` est un premier contenu de R&D ajouté au site. Les documents PDF (statuts, bulletins et parution officielle) pointent vers leurs fichiers d’origine ; la carte de localisation est intégrée depuis Google My Maps. Ces ressources nécessitent donc encore une connexion à leurs services hébergeurs.
+Le logo du site a été repris localement dans `assets/images/logo-mrsc.jpg`. Les pages existantes et leurs éléments visibles ont été reconstitués à partir du site public ; `ia-societe.html` réunit désormais une première réflexion sur l’IA et un parcours de prévention des fraudes, complété par des fiches d’apprentissage autonomes. Ces contenus sont une première version à relire, non une liste exhaustive. Les documents PDF (statuts, bulletins et parution officielle) pointent vers leurs fichiers d’origine ; la carte de localisation est intégrée depuis Google My Maps. Ces ressources nécessitent donc encore une connexion à leurs services hébergeurs.
 
 Le moteur du simulateur vient du dépôt [thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple](https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple) et reste sous licence **MIT** ; sa révision copiée est enregistrée dans `simulateur/PROVENANCE.json`.
 

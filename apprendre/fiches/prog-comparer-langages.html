@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta name="mrsc-fiche-id" content="prog-comparer-langages">
+  <meta name="mrsc-matiere" content="informatique">
+  <meta name="mrsc-niveau" content="1">
+  <meta name="mrsc-revue" content="2026-10-08">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Distinguer la logique d’un algorithme de la syntaxe particulière d’un langage de programmation.">
+  <meta name="theme-color" content="#1d3268">
+  <title>Un même algorithme, plusieurs langages : Python et JavaScript — Fiche d’apprentissage | M.R.S.C</title>
+  <link rel="canonical" href="https://thejmimiia-code.github.io/MRSC/apprendre/fiches/prog-comparer-langages.html">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <script src="../../assets/js/site.js" defer></script>
+  <script src="../../assets/js/navigation-parcours.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+  <header class="site-header">
+    <div class="identity">
+      <a href="../../index.html" data-site-home aria-label="M.R.S.C — Accueil">
+        <img class="brand-logo" src="../../assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
+      </a>
+      <div class="brand-copy">
+        <p class="brand-kicker">Association loi 1901</p>
+        <p class="brand-name">Mouvement Représentatif de la Société Civile</p>
+        <p class="brand-tagline">La force citoyenne</p>
+      </div>
+      <a class="identity-contact" href="mailto:assomrsc@gmail.com" aria-label="Écrire à assomrsc@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg>
+        assomrsc@gmail.com
+      </a>
+    </div>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <div class="nav-inner">
+        <button class="nav-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="navigation-principale">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          Menu
+        </button>
+        <div class="nav-links" id="navigation-principale" data-primary-navigation>
+          <a href="../../index.html">Accueil</a>
+          <a href="../../ia-societe.html">IA &amp; société</a>
+          <a href="../../apprendre.html" aria-current="page">Apprendre</a>
+          <a href="../../simulateur.html">Simulateur</a>
+          <a href="../../documents.html">Documents</a>
+          <a href="../../liens-utiles.html">Liens utiles</a>
+          <a href="../../localisation.html">Localisation</a>
+          <a href="../../transparence.html">Transparence</a>
+          <a href="../../confidentialite.html">Vie privée et données</a>
+          <a href="../../nous-contacter.html">Nous contacter</a>
+        </div>
+        <details class="display-settings" data-display-settings hidden>
+          <summary title="Options d’affichage">Affichage <span class="display-settings-chevron" aria-hidden="true">⌄</span></summary>
+          <div class="display-settings-panel">
+            <p class="display-settings-title"><strong>Ajuster la lisibilité</strong></p>
+            <div class="display-settings-row" role="group" aria-label="Taille du texte">
+              <button class="display-control" type="button" data-text-decrease aria-label="Réduire la taille du texte" title="Réduire le texte">A−</button>
+              <span class="display-text-level" data-text-size-level role="status" aria-live="polite" aria-atomic="true">100 %</span>
+              <button class="display-control" type="button" data-text-increase aria-label="Agrandir la taille du texte" title="Agrandir le texte">A+</button>
+            </div>
+            <div class="display-settings-actions">
+              <button class="display-control display-control-wide" type="button" data-contrast-toggle aria-pressed="false">Contraste renforcé</button>
+              <button class="display-control display-control-wide" type="button" data-spacing-toggle aria-pressed="false">Espacement du texte</button>
+            </div>
+            <p class="display-settings-note">Ces choix restent enregistrés sur cet appareil. Le zoom du navigateur reste disponible.</p>
+          </div>
+        </details>
+      </div>
+    </nav>
+  </header>
+  <main id="contenu">
+    <section class="learning-lesson-hero">
+      <div class="container">
+        <nav class="learning-breadcrumb" aria-label="Fil d’Ariane"><a href="../../index.html">Accueil</a><span aria-hidden="true">›</span><a href="../../apprendre.html">Apprendre</a><span aria-hidden="true">›</span><span aria-current="page">Fiche</span></nav>
+        <p class="eyebrow">Fiche autonome · Informatique et programmation</p>
+        <h1>Un même algorithme, plusieurs langages : Python et JavaScript</h1>
+        <p class="learning-lesson-lead">Distinguer la logique d’un algorithme de la syntaxe particulière d’un langage de programmation.</p>
+        <div class="learning-lesson-meta" aria-label="Repères de la fiche"><span>Informatique et programmation</span><span>Repère 1 · reprendre les bases</span><span>12 minutes environ</span><span>Horizon du contenu : Initiation aux idées de programmation ; aucun compte, outil ou téléchargement requis</span><span>Statut éditorial : Prototype à relire</span></div>
+        <p class="learning-level-note"><strong>État éditorial :</strong> Exemples de code écrits pour cette fiche et non exécutés par la page ; vérification de la syntaxe dans les deux environnements, relecture informatique indépendante, accessibilité et essais apprenants restent à faire. Les sources sont des références factuelles à licence de réutilisation non vérifiée.</p>
+        <p class="learning-level-note"><strong>Repère, pas étiquette :</strong> On peut commencer ici sans test ni prérequis. Tu peux essayer la fiche sans prérequis, demander de l’aide ou choisir une autre matière.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container learning-article-layout">
+        <article class="learning-lesson-article">
+          <section aria-labelledby="objectif-fiche"><h2 id="objectif-fiche">Ce que tu vas essayer</h2><p>Lire une petite répétition d’actions en Python et en JavaScript et expliquer ce qui reste identique et ce qui change.</p></section>
+          <section aria-labelledby="situation-fiche"><h2 id="situation-fiche">Une situation de départ</h2><p class="learning-example">Tu veux afficher trois étapes fictives dans l’ordre. Tu peux d’abord décrire les actions en français, puis les exprimer avec la syntaxe d’un langage que l’ordinateur sait exécuter.</p></section>
+          <aside class="learning-analogy" data-analogie aria-labelledby="analogie-fiche"><p class="eyebrow">Analogie du quotidien</p><h2 id="analogie-fiche">Comme écrire une même recette avec deux systèmes de notation</h2><p>La liste des actions décrit ce qu’il faut faire ; le langage de programmation donne une façon très précise de l’écrire. Deux langages différents peuvent exprimer la même idée, comme deux notations peuvent décrire la même suite d’étapes. Ici, les deux programmes parcourent une liste et affichent chaque élément.</p><p class="learning-analogy-limit"><strong>Limite de l’image :</strong> Un langage de programmation n’est pas simplement une langue humaine traduite mot à mot. Ses symboles, règles et comportements sont formels ; le programme doit respecter exactement les conventions du langage et de l’environnement où il s’exécute. Deux programmes proches en apparence peuvent aussi avoir des effets différents.</p></aside>
+          <section aria-labelledby="notions-fiche"><h2 id="notions-fiche">Quelques mots utiles</h2><ul class="learning-vocabulary"><li><strong>Algorithme</strong> — suite finie et organisée d’étapes permettant de résoudre une tâche ou de produire un résultat.</li><li><strong>Programme</strong> — instructions écrites dans un langage que l’environnement informatique peut interpréter ou exécuter.</li><li><strong>Langage de programmation</strong> — règles et mots-clés qui servent à décrire des opérations de façon précise.</li><li><strong>Variable</strong> — nom associé à une valeur ou à un ensemble de données utilisé par un programme.</li><li><strong>Liste</strong> — collection ordonnée de plusieurs éléments.</li><li><strong>Boucle</strong> — instruction qui répète une action, par exemple une fois pour chaque élément d’une liste.</li><li><strong>Syntaxe</strong> — règles d’écriture propres à un langage.</li></ul></section>
+          <section aria-labelledby="methode-fiche"><h2 id="methode-fiche">Une méthode possible</h2><ol class="learning-steps"><li>Formule le résultat souhaité en mots simples : afficher chacune des trois étapes une fois et dans le bon ordre.</li><li>Repère les données : la liste appelée etapes contient trois textes ; le programme n’a pas besoin d’une information personnelle.</li><li>Repère la boucle : elle prend chaque texte l’un après l’autre et demande de l’afficher.</li><li>Compare la forme écrite en Python et celle écrite en JavaScript. Les délimitations et certaines commandes changent, mais l’idée de parcourir la liste reste la même.</li><li>Prévois un test : avec trois éléments, le programme doit afficher trois lignes, ni deux ni quatre.</li></ol></section>
+<section class="learning-code-examples" aria-labelledby="exemples-code-fiche"><h2 id="exemples-code-fiche">Lire les exemples, sans rien installer</h2><p>Ces extraits sont présentés comme du texte à examiner ; ils ne sont pas exécutés par cette page et aucun service externe n’est nécessaire.</p><div class="learning-code-grid" data-code-examples="prog-comparer-langages"><figure class="learning-code-sample"><figcaption>Parcourir une liste en Python <span>(Python)</span></figcaption><pre tabindex="0" role="region" aria-label="Extrait 1 — Python, Parcourir une liste en Python"><code>etapes = [&quot;Lire la consigne&quot;, &quot;Choisir une méthode&quot;, &quot;Vérifier le résultat&quot;]
+for etape in etapes:
+    print(etape)</code></pre><p>La variable etapes contient trois textes. La ligne for prend chaque texte à son tour, le nomme etape, puis print l’affiche. L’indentation indique quelles instructions appartiennent à la boucle.</p></figure><figure class="learning-code-sample"><figcaption>Parcourir une liste en JavaScript <span>(JavaScript)</span></figcaption><pre tabindex="0" role="region" aria-label="Extrait 2 — JavaScript, Parcourir une liste en JavaScript"><code>const etapes = [&quot;Lire la consigne&quot;, &quot;Choisir une méthode&quot;, &quot;Vérifier le résultat&quot;];
+for (const etape of etapes) {
+  console.log(etape);
+}</code></pre><p>La liste contient les mêmes trois textes. La boucle for...of passe sur chaque élément et console.log l’affiche. Les accolades délimitent le corps de la boucle ; const déclare ici le nom de la liste.</p></figure></div></section>
+          <section aria-labelledby="exercice-fiche"><h2 id="exercice-fiche">À toi d’essayer</h2><p>Imagine une liste fictive de deux mots : Lire, puis Vérifier. Avec la méthode des exemples, combien de lignes la boucle doit-elle afficher, et dans quel ordre ?</p><details class="learning-answer"><summary>Afficher une aide</summary><p>La boucle passe une fois sur chaque élément de la liste. Elle ne trie pas et n’ajoute pas de mot de son propre chef.</p></details><details class="learning-answer"><summary>Afficher une correction possible</summary><ol class="learning-answer-list"><li>Elle doit afficher deux lignes : d’abord Lire, puis Vérifier.</li><li>Le nombre de passages correspond au nombre d’éléments de la liste : deux.</li><li>La même intention peut être écrite dans plusieurs langages, mais le texte exact du code doit respecter la syntaxe de chacun.</li></ol><p>La correction montre un chemin possible. Pour un calcul, vérifie aussi chaque étape et le résultat.</p></details></section>
+          <section aria-labelledby="retenir-fiche"><h2 id="retenir-fiche">Pour retenir</h2><ul class="learning-takeaways"><li>L’algorithme décrit l’idée et les étapes ; le langage fournit une syntaxe que l’ordinateur peut traiter.</li><li>Une boucle répète une instruction pour les éléments prévus ; vérifie combien de passages sont attendus.</li><li>Python et JavaScript sont deux langages distincts, parmi beaucoup d’autres ; un exemple ne résume ni leurs usages ni leurs limites.</li><li>Un extrait peut être lu sans l’exécuter. Avant de faire fonctionner un programme, il faut comprendre ses données, ses effets et son contexte.</li></ul><p><strong>Et dans une autre situation :</strong> Cette distinction sert à discuter d’un besoin avec une personne qui programme, à comparer une explication et du code, ou à choisir une prochaine étape d’apprentissage. D’autres langages comme SQL, C, Java ou Rust ont des règles et usages différents ; ils ne sont pas couverts par cette courte fiche.</p></section>
+          <section class="learning-sources" aria-labelledby="sources-fiche"><h2 id="sources-fiche">Sources facultatives et limites</h2><p>Tu peux suivre cette fiche sans ouvrir ces liens : les notions, les exemples, la démarche, l’aide et la correction sont présentés sur cette page. Les sources facultatives servent à vérifier ou approfondir. Pour une décision ou une démarche réelle où les règles peuvent changer, vérifie les consignes actuelles d’un service compétent avant d’agir.</p><ul><li><a href="https://eduscol.education.gouv.fr/sites/default/files/document/vademecum-sciences-numeriques-et-technologie-numerique-et-sciences-informatiques-101937.pdf" target="_blank" rel="noopener noreferrer">Éduscol — Numérique et sciences informatiques : algorithmique et langages</a> — Droits examinés le 2026-10-08 : licence source non vérifiée. Mode d’utilisation : référence factuelle uniquement, sans reprise de contenu. Repère de programme et de périmètre uniquement ; aucun exemple de code, texte, tableau ou activité de la source n’est repris.</li><li><a href="https://docs.python.org/3/tutorial/controlflow.html" target="_blank" rel="noopener noreferrer">Documentation officielle Python — More Control Flow Tools</a> — Droits examinés le 2026-10-08 : licence source non vérifiée. Mode d’utilisation : référence factuelle uniquement, sans reprise de contenu. Vérification factuelle de la boucle Python montrée ; le code de la fiche est un exemple original et aucun extrait de la documentation n’est repris.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration" target="_blank" rel="noopener noreferrer">MDN Web Docs — Loops and iteration</a> — Droits examinés le 2026-10-08 : licence source non vérifiée. Mode d’utilisation : référence factuelle uniquement, sans reprise de contenu. Vérification factuelle de la boucle JavaScript montrée ; le code de la fiche est un exemple original et aucun extrait de la documentation n’est repris.</li></ul><p class="learning-review-note">Date du contrôle initial indiqué : 2026-10-08. Une relecture indépendante reste à faire ; cette date ne garantit pas l’actualité future.</p></section>
+        </article>
+        <aside class="learning-lesson-aside" aria-label="Poursuivre l’apprentissage"><p class="eyebrow">Tu choisis la suite</p><h2>Un autre point de départ ?</h2><p>Change de matière, de repère ou de format quand tu le souhaites. La page ne note pas et ne suit pas ta progression.</p><a class="button" href="../../apprendre.html">Parcourir toutes les fiches</a><p><a href="../../simulateur.html">Découvrir le simulateur M.R.S.C</a></p></aside>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img class="footer-logo" src="../../assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
+          <div><strong>Mouvement Représentatif de la Société Civile (M.R.S.C)</strong><p class="footer-tagline">La force citoyenne · Association loi 1901</p></div>
+        </div>
+        <nav class="footer-nav" aria-label="Navigation de pied de page">
+          <p class="footer-heading">Naviguer</p>
+          <ul>
+            <li><a href="../../index.html">Accueil</a></li>
+            <li><a href="../../ia-societe.html">IA &amp; société</a></li>
+            <li><a href="../../apprendre.html">Apprendre</a></li>
+            <li><a href="../../simulateur.html">Simulateur</a></li>
+            <li><a href="../../documents.html">Documents</a></li>
+            <li><a href="../../transparence.html">Transparence</a></li>
+            <li><a href="../../confidentialite.html">Vie privée et données</a></li>
+          </ul>
+        </nav>
+        <div class="footer-contact">
+          <p class="footer-heading">Nous contacter</p>
+          <address>995 route de Jarcieu<br>38270 Beaurepaire</address>
+          <a class="footer-mail" href="mailto:assomrsc@gmail.com">assomrsc@gmail.com</a>
+        </div>
+        <div class="footer-docs">
+          <p class="footer-heading">Documents</p>
+          <ul>
+            <li><a href="https://www.mrsc.fr/assets/nos-statuts-mrsc-du-02-10-2020.pdf" target="_blank" rel="noopener noreferrer">Nos statuts</a></li>
+            <li><a href="../../documents.html">Tous les documents</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span data-year>2026</span> Mouvement Représentatif de la Société Civile (M.R.S.C).</p>
+        <p class="footer-legal"><a href="../../confidentialite.html">Vie privée et données</a> &middot; <a href="../../nous-contacter.html">Contact</a> &middot; <a href="../../transparence.html#licence">Licence</a> &middot; <a href="#contenu">Haut de page</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

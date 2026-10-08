@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="L’intelligence artificielle transforme le travail, l’information, la santé et la vie quotidienne. Comprendre ses usages, ses bénéfices et ses risques avec le M.R.S.C.">
+  <meta name="description" content="Comprendre les usages de l’IA, ses effets sociaux et les fraudes par usurpation. Vérifier une demande urgente et savoir quoi faire grâce aux sources officielles et fiches pratiques M.R.S.C.">
   <meta name="theme-color" content="#1d3268">
   <title>IA &amp; société — M.R.S.C</title>
   <link rel="stylesheet" href="assets/css/site.css">
   <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/navigation-parcours.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu principal</a>
   <header class="site-header">
     <div class="identity">
-      <a href="index.html" aria-label="M.R.S.C — Accueil">
+      <a href="index.html" data-site-home aria-label="M.R.S.C — Accueil">
         <img class="brand-logo" src="assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
       </a>
       <div class="brand-copy">
@@ -35,6 +36,7 @@
         <div class="nav-links" id="navigation-principale" data-primary-navigation>
           <a href="index.html">Accueil</a>
           <a href="ia-societe.html" aria-current="page">IA &amp; société</a>
+          <a href="apprendre.html">Apprendre</a>
           <a href="simulateur.html">Simulateur</a>
           <a href="documents.html">Documents</a>
           <a href="liens-utiles.html">Liens utiles</a>
@@ -42,6 +44,24 @@
           <a href="transparence.html">Transparence</a>
           <a href="nous-contacter.html">Nous contacter</a>
         </div>
+        <details class="display-settings" data-display-settings hidden>
+          <summary title="Options d’affichage">
+            Affichage <span class="display-settings-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="display-settings-panel">
+            <p class="display-settings-title"><strong>Ajuster la lisibilité</strong></p>
+            <div class="display-settings-row" role="group" aria-label="Taille du texte">
+              <button class="display-control" type="button" data-text-decrease aria-label="Réduire la taille du texte" title="Réduire le texte">A−</button>
+              <span class="display-text-level" data-text-size-level role="status" aria-live="polite" aria-atomic="true">100 %</span>
+              <button class="display-control" type="button" data-text-increase aria-label="Agrandir la taille du texte" title="Agrandir le texte">A+</button>
+            </div>
+            <div class="display-settings-actions">
+              <button class="display-control display-control-wide" type="button" data-contrast-toggle aria-pressed="false">Contraste renforcé</button>
+              <button class="display-control display-control-wide" type="button" data-spacing-toggle aria-pressed="false">Espacement du texte</button>
+            </div>
+            <p class="display-settings-note">Ces choix restent enregistrés sur cet appareil. Le zoom du navigateur reste disponible.</p>
+          </div>
+        </details>
       </div>
     </nav>
   </header>
@@ -58,6 +78,7 @@
             <a class="button" href="#usages">Explorer les formes d’IA
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
             </a>
+            <a class="button button-secondary" href="#fraudes-ia">Fraudes et réflexes pratiques</a>
             <a class="button button-secondary" href="#questions">Les questions à poser</a>
           </div>
           <p class="ai-hero-footnote">Pas besoin d’être spécialiste pour participer à la discussion.</p>
@@ -210,11 +231,94 @@
         </div>
         <div class="ai-lives-grid">
           <article class="ai-life-card"><span>01 / TRAVAIL</span><h3>Métiers &amp; revenus</h3><p>Quelles tâches évoluent ? Qui bénéficie des gains de temps ? Quels besoins de formation et de protection apparaissent ?</p></article>
-          <article class="ai-life-card"><span>02 / APPRENTISSAGE</span><h3>École &amp; compétences</h3><p>Comment apprendre avec l’IA sans renoncer à comprendre, vérifier et développer son propre jugement ?</p></article>
+          <article class="ai-life-card"><span>02 / APPRENTISSAGE</span><h3>École &amp; compétences</h3><p>Comment apprendre avec l’IA sans renoncer à comprendre, vérifier et développer son propre jugement ?</p><a href="apprendre/fiches/numerique-verifier-ia.html">S’exercer à vérifier une réponse d’IA</a></article>
           <article class="ai-life-card"><span>03 / SOIN</span><h3>Santé &amp; accompagnement</h3><p>Où l’IA peut-elle aider, et qui vérifie une réponse quand une erreur peut avoir des conséquences ?</p></article>
           <article class="ai-life-card"><span>04 / INFORMATION</span><h3>Médias &amp; démocratie</h3><p>Comment reconnaître une source, comprendre les recommandations et signaler un contenu trompeur ?</p></article>
           <article class="ai-life-card"><span>05 / QUOTIDIEN</span><h3>Services &amp; droits</h3><p>Une décision automatisée est-elle compréhensible, contestable et supervisée par une personne ?</p></article>
           <article class="ai-life-card"><span>06 / TERRITOIRES</span><h3>Énergie &amp; environnement</h3><p>Quels sont les coûts matériels et énergétiques — et quels usages peuvent aider à mieux gérer les ressources ?</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section ai-fraud-section" id="fraudes-ia" aria-labelledby="fraudes-ia-title">
+      <div class="container">
+        <div class="ai-section-intro">
+          <p class="eyebrow">Sécurité du quotidien · repères qui s’adaptent</p>
+          <h2 id="fraudes-ia-title">Fraude : vérifier la demande, pas seulement l’apparence</h2>
+          <p>L’IA peut aider à rédiger des messages personnalisés, imiter une voix ou produire une image ou une vidéo. Mais les fraudes existaient avant l’IA, et un contenu suspect n’est pas forcément généré par elle. Les techniques changent ; aucune page ne peut dresser une liste exhaustive de tous les scénarios actuels et futurs.</p>
+        </div>
+
+        <div class="ai-fraud-callout">
+          <strong>Une ressemblance n’est pas une preuve.</strong>
+          <p>Un numéro affiché, un logo, une voix familière, un visage ou un message très soigné ne suffisent pas à authentifier l’émetteur. Les fautes, les défauts visuels et les détecteurs automatiques ne sont pas des tests infaillibles. Vérifie séparément l’identité, le contexte et la demande.</p>
+        </div>
+
+        <div class="ai-fraud-grid" aria-label="Exemples de mécanismes de fraude à connaître">
+          <article class="ai-fraud-card">
+            <span class="ai-fraud-label">Canaux possibles</span>
+            <h3>Où la sollicitation arrive</h3>
+            <p>Courriel, SMS, appel, message privé, petite annonce, publicité, site d’achat ou QR code. Le même scénario peut passer d’un canal à l’autre.</p>
+          </article>
+          <article class="ai-fraud-card">
+            <span class="ai-fraud-label">Identités imitées</span>
+            <h3>Qui prétend contacter</h3>
+            <p>Proche, collègue ou responsable, banque, administration, livreur, conseiller, support technique, recruteur ou vendeur.</p>
+          </article>
+          <article class="ai-fraud-card">
+            <span class="ai-fraud-label">Ce qui est recherché</span>
+            <h3>Ce qu’on veut te faire faire</h3>
+            <p>Cliquer ou scanner, donner un code ou un identifiant, installer un outil, partager un écran, payer, investir ou transférer de l’argent.</p>
+          </article>
+          <article class="ai-fraud-card">
+            <span class="ai-fraud-label">Prétextes changeants</span>
+            <h3>Ce qui pousse à agir</h3>
+            <p>Urgence familiale ou professionnelle, compte bloqué, livraison, remboursement, faux emploi, faux placement, achat jamais livré ou « compte sécurisé ».</p>
+          </article>
+          <article class="ai-fraud-card">
+            <span class="ai-fraud-label">Usurpation synthétique</span>
+            <h3>Texte, image, audio, vidéo</h3>
+            <p>Un contenu peut être fabriqué, modifié ou sorti de son contexte pour rendre l’imitation convaincante. Des données déjà exposées peuvent aussi personnaliser la sollicitation.</p>
+          </article>
+          <article class="ai-fraud-card">
+            <span class="ai-fraud-label">Pas toujours de l’IA</span>
+            <h3>Le mécanisme compte davantage</h3>
+            <p>Un fraudeur peut utiliser des outils ordinaires, des données volées ou un scénario manuel. Ne cherche pas à prouver qu’une IA est impliquée avant de te protéger.</p>
+          </article>
+        </div>
+
+        <div class="ai-fraud-response" aria-labelledby="ai-fraud-response-title">
+          <div>
+            <p class="eyebrow">Les réflexes qui restent utiles</p>
+            <h3 id="ai-fraud-response-title">Pause · vérification · protection · signalement</h3>
+          </div>
+          <ol class="ai-fraud-steps">
+            <li><strong>Fais une pause.</strong><span>Ne clique pas, ne scanne pas, ne réponds pas sous pression et ne transfère pas d’argent pendant l’échange.</span></li>
+            <li><strong>Vérifie par un canal indépendant.</strong><span>Utilise un numéro déjà connu, l’application habituelle ou un site ouvert toi-même. Pour un proche, rappelle son numéro enregistré avant l’incident.</span></li>
+            <li><strong>Ne livre aucun accès.</strong><span>Ne communique pas de mot de passe ou de code à usage unique ; n’installe pas de logiciel d’accès à distance et ne déplace pas d’argent vers un « compte sûr » sur demande.</span></li>
+            <li><strong>Agis et garde les traces.</strong><span>Si tu as payé ou transmis une donnée, contacte rapidement ta banque ou le service concerné par une coordonnée officielle ; conserve les messages et reçus, puis demande conseil à 17Cyber.</span></li>
+          </ol>
+          <p class="ai-fraud-reporting">Un signalement, une opposition bancaire et une plainte ne sont pas la même démarche. Selon le cas, les services officiels peuvent aussi orienter vers la police ou la gendarmerie, Signal Spam ou le 33700 pour les messages. Ne paie jamais une personne qui promet de récupérer l’argent contre des frais.</p>
+        </div>
+
+        <div class="ai-fraud-lessons" aria-labelledby="ai-fraud-lessons-title">
+          <div class="ai-section-intro ai-section-intro-compact">
+            <p class="eyebrow">Apprendre avec des situations concrètes</p>
+            <h3 id="ai-fraud-lessons-title">Fiches et exercices pour continuer</h3>
+            <p>Chaque fiche est autonome, sourcée et révisée régulièrement. Elles sont un début de parcours, pas une couverture complète des fraudes.</p>
+          </div>
+          <ul class="ai-fraud-lesson-list">
+            <li><a href="apprendre/fiches/numerique-ia-usages.html">Comprendre les usages de l’IA et garder la main</a><span>Génération, recommandation, classement, prédiction et action.</span></li>
+            <li><a href="apprendre/fiches/numerique-verifier-media.html">Vérifier une voix, une image ou une vidéo</a><span>Vérifier l’identité, la source, le contexte et la demande, sans « détecteur magique ».</span></li>
+            <li><a href="apprendre/fiches/numerique-verifier-demande.html">Vérifier une sollicitation urgente ou inhabituelle</a><span>Faux conseiller, support, proche, QR code, emploi, achat ou placement.</span></li>
+            <li><a href="apprendre/fiches/numerique-reagir-fraude.html">Que faire après un clic, un code transmis ou un paiement ?</a><span>Protéger les comptes, préserver les preuves et contacter les services adaptés.</span></li>
+            <li><a href="apprendre/fiches/numerique-hameconnage.html">Repérer un message de hameçonnage</a><span>Courriel, SMS et demandes de vérification par un autre canal.</span></li>
+          </ul>
+        </div>
+
+        <div class="ai-fraud-evidence">
+          <p><strong>Un repère récent, pas un indicateur de fraude à l’IA :</strong> dans l’enquête Ipsos bva pour Cybermalveillance.gouv.fr menée du 13 au 18 mai 2026 auprès de 2 000 personnes de 18 à 75 ans, 53 % disent avoir été confrontées à de l’hameçonnage au cours des douze mois précédents et 15 % à un faux conseiller bancaire. Ces résultats décrivent les réponses à cette enquête ; ils ne signifient pas que ces fraudes utilisaient l’IA.</p>
+          <p>Cybermalveillance.gouv.fr décrit aussi, dans son bilan 2025 publié en 2026, l’exploitation de données exposées, des messages d’hameçonnage plus variés et personnalisés et la progression de plusieurs fraudes financières. Ce constat justifie une veille des mécanismes et des conduites à tenir, plutôt qu’une prétention à tout reconnaître à l’œil.</p>
+          <p class="ai-fraud-review">Sources consultées le 7 octobre 2026. Révision éditoriale prévue au moins tous les trois mois et après toute alerte officielle importante. « Exponentiel » n’est pas présenté comme un fait chiffré sans indicateur défini : la veille suivra des sources, des mécanismes observés et leurs dates.</p>
         </div>
       </div>
     </section>
@@ -267,6 +371,12 @@
             <li><a href="https://www.who.int/news/item/18-01-2024-who-releases-ai-ethics-and-governance-guidance-for-large-multi-modal-models" target="_blank" rel="noopener noreferrer">Organisation mondiale de la Santé — IA générative et santé</a><span>Usages possibles et risques de réponses fausses, incomplètes ou biaisées dans le domaine de la santé.</span></li>
             <li><a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank" rel="noopener noreferrer">Agence internationale de l’énergie — Energy and AI, 2025</a><span>Demande d’électricité des centres de données et possibilités d’usage de l’IA dans le secteur énergétique.</span></li>
             <li><a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noopener noreferrer">Commission européenne — cadre réglementaire européen sur l’IA</a><span>Approche fondée sur le niveau de risque, usages interdits ou à haut risque et exigences de transparence.</span></li>
+            <li><a href="https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/rapport-activite-2025" target="_blank" rel="noopener noreferrer">Cybermalveillance.gouv.fr — rapport d’activité et état de la menace 2025, publié en 2026</a><span>Fuites de données, hameçonnage personnalisé, faux conseillers, placements et fraudes observées ; les tendances ne sont pas toutes attribuables à l’IA.</span></li>
+            <li><a href="https://www.cybermalveillance.gouv.fr/medias/2026/09/Deck-IPSOS-2026-1409-DEF.pdf" target="_blank" rel="noopener noreferrer">Ipsos bva pour Cybermalveillance.gouv.fr — baromètre de perception cyber 2026</a><span>Enquête en ligne du 13 au 18 mai 2026 auprès de 2 000 personnes de 18 à 75 ans ; résultats déclaratifs, non spécifiques aux fraudes utilisant l’IA.</span></li>
+            <li><a href="https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/intelligence-artificielle-ia" target="_blank" rel="noopener noreferrer">Cybermalveillance.gouv.fr — intelligence artificielle, entre menaces et opportunités</a><span>Repères sur les détournements possibles et les limites de l’attribution à l’IA.</span></li>
+            <li><a href="https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroquerie-enfant-probleme-telephone-coucou-papa-maman" target="_blank" rel="noopener noreferrer">Cybermalveillance.gouv.fr — faux message d’un enfant et demande urgente</a><span>Rappeler par un numéro déjà connu avant d’envoyer de l’argent.</span></li>
+            <li><a href="https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing" target="_blank" rel="noopener noreferrer">Cybermalveillance.gouv.fr — hameçonnage : se protéger et réagir</a><span>Vérification indépendante, opposition bancaire, conservation des preuves, changement de mot de passe et signalement.</span></li>
+            <li><a href="https://17cyber.gouv.fr/" target="_blank" rel="noopener noreferrer">17Cyber — diagnostic et orientation</a><span>Service public d’assistance et d’orientation en cas de cybermalveillance.</span></li>
           </ul>
           <p class="ai-source-caveat">Les chiffres cités ne sont pas directement comparables : ils ne portent ni sur le même pays, ni sur les mêmes usages, ni sur les mêmes populations.</p>
         </details>
@@ -294,6 +404,9 @@
         <li>Cadres &eacute;thiques : <a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics">UNESCO</a>, <a href="https://www.oecd.org/en/topics/ai-and-work.html">OCDE</a>, <a href="https://www.who.int/news/item/18-01-2024-who-releases-ai-ethics-and-governance-guidance-for-large-multi-modal-models">OMS</a>, <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai">cadre europ&eacute;en</a>, <a href="https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026">rapport s&eacute;curit&eacute; IA 2026</a>. <span class="trace-tag">Source externe</span></li>
         <li>Lecture crois&eacute;e : perception (m&eacute;fiance 56 %) &times; mesure (OIT) ; usages &times; garde-fous. <span class="trace-tag trace-tag-original">Original M.R.S.C</span></li>
         <li>4 formes d&rsquo;IA, 5 questions, m&eacute;thode en 5 &eacute;tapes : grille con&ccedil;ue par l&rsquo;outil. <span class="trace-tag trace-tag-original">Original M.R.S.C</span></li>
+        <li>Renvoi vers un exercice pour apprendre &agrave; v&eacute;rifier une r&eacute;ponse d&rsquo;IA : <a href="apprendre/fiches/numerique-verifier-ia.html">fiche d&rsquo;apprentissage</a>. <span class="trace-tag trace-tag-original">Original M.R.S.C</span></li>
+        <li>Pr&eacute;vention des fraudes : quatre nouvelles fiches sur les usages, les m&eacute;dias synth&eacute;tiques, les demandes urgentes et la r&eacute;action apr&egrave;s incident ; informations et liens officiels revus le 7 octobre 2026. Les cas list&eacute;s sont illustratifs, non exhaustifs et ne pr&eacute;disent pas toutes les menaces futures. <span class="trace-tag trace-tag-original">Original M.R.S.C</span></li>
+        <li>Les statistiques 2026 cit&eacute;es proviennent de l&rsquo;enqu&ecirc;te Ipsos bva pour Cybermalveillance.gouv.fr ; elles d&eacute;crivent les cybermalveillances d&eacute;clar&eacute;es, pas la part imputable &agrave; l&rsquo;IA. <span class="trace-tag">Source externe</span></li>
       </ul></div>
       <a class="button button-secondary" href="transparence.html">Voir la m&eacute;thode compl&egrave;te</a>
     </div></section>
@@ -314,11 +427,13 @@
           <ul>
             <li><a href="index.html">Accueil</a></li>
             <li><a href="ia-societe.html" aria-current="page">IA &amp; société</a></li>
+            <li><a href="apprendre.html">Apprendre</a></li>
             <li><a href="simulateur.html">Simulateur</a></li>
             <li><a href="documents.html">Documents</a></li>
             <li><a href="liens-utiles.html">Liens utiles</a></li>
             <li><a href="localisation.html">Localisation</a></li>
             <li><a href="transparence.html">Transparence</a></li>
+            <li><a href="confidentialite.html">Vie privée et données</a></li>
             <li><a href="nous-contacter.html">Nous contacter</a></li>
           </ul>
         </nav>
@@ -338,7 +453,7 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; <span data-year>2026</span> Mouvement Repr&eacute;sentatif de la Soci&eacute;t&eacute; Civile (M.R.S.C) — Tous droits r&eacute;serv&eacute;s.</p>
-        <p class="footer-legal"><a href="documents.html">Documents officiels</a> &middot; <a href="nous-contacter.html">Contact</a> &middot; <a href="transparence.html#licence">Licence</a> &middot; <a href="#contenu">Haut de page</a></p>
+        <p class="footer-legal"><a href="documents.html">Documents officiels</a> &middot; <a href="nous-contacter.html">Contact</a> &middot; <a href="transparence.html#licence">Licence</a> &middot; <a href="confidentialite.html">Vie privée</a> &middot; <a href="#contenu">Haut de page</a></p>
       </div>
     </div>
   </footer>

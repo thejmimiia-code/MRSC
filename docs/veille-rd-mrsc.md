@@ -1,6 +1,6 @@
 # Veille R&D — positionnement et expérience du site M.R.S.C
 
-**Veille effectuée le 5 octobre 2026.** Objectif : préparer des pistes, pas choisir la nouvelle identité du site.
+**Veille effectuée le 5 octobre 2026.** Objectif : préparer des pistes, pas choisir la nouvelle identité du site. La R&D consacrée à l’accessibilité et aux parcours d’apprentissage est suivie séparément dans [`rd-parcours-apprentissage.md`](rd-parcours-apprentissage.md).
 
 ## 1. Ce que les données françaises suggèrent
 

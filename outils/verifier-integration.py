@@ -23,6 +23,7 @@ import importlib.util
 import io
 import json
 import os
+import re
 import subprocess
 import sys
 import threading
@@ -58,6 +59,7 @@ ROUTES: tuple[str, ...] = charger_module(
 
 PAGES = (
     "index.html",
+    "apprendre.html",
     "ia-societe.html",
     "simulateur.html",
     "documents.html",
@@ -65,6 +67,7 @@ PAGES = (
     "localisation.html",
     "nous-contacter.html",
     "transparence.html",
+    "confidentialite.html",
     "404.html",
 )
 
@@ -97,6 +100,20 @@ def verifier(libelle: str, condition: bool, detail: str = "") -> None:
         echecs.append(libelle)
 
 
+def rapport_contraste(couleur_texte: str, couleur_fond: str) -> float:
+    """Calcule le rapport WCAG d’une paire hexadécimale sRGB opaque."""
+    def luminance(couleur: str) -> float:
+        valeurs = [int(couleur[index:index + 2], 16) / 255 for index in (1, 3, 5)]
+        composantes = [
+            valeur / 12.92 if valeur <= 0.04045 else ((valeur + 0.055) / 1.055) ** 2.4
+            for valeur in valeurs
+        ]
+        return 0.2126 * composantes[0] + 0.7152 * composantes[1] + 0.0722 * composantes[2]
+
+    claire, sombre = sorted((luminance(couleur_texte), luminance(couleur_fond)), reverse=True)
+    return (claire + 0.05) / (sombre + 0.05)
+
+
 def lancer(script: str, *arguments: str) -> tuple[int, str]:
     resultat = subprocess.run(
         [sys.executable, str(RACINE / "outils" / script), *arguments],
@@ -119,12 +136,25 @@ def fonctions_conformes() -> None:
     verifier("Fonctions api/ conformes au moteur", code == 0, sortie.splitlines()[-1] if sortie else "")
 
 
+def liens_et_scripts_statiques() -> None:
+    code, sortie = lancer("verifier-site-statique.py")
+    verifier("Liens locaux, ancres, repères HTML et syntaxe JavaScript", code == 0, sortie.splitlines()[-1] if sortie else "")
+
+
 def fichiers_du_site() -> None:
     for page in PAGES:
         chemin = RACINE / page
         verifier(f"Page présente : {page}", chemin.is_file() and chemin.stat().st_size > 500)
-    for ressource in ("assets/css/site.css", "assets/js/site.js", "assets/images/logo-mrsc.jpg"):
+    for ressource in ("assets/css/site.css", "assets/js/site.js", "assets/js/navigation-parcours.js", "assets/js/apprentissage.js", "assets/images/logo-mrsc.jpg"):
         verifier(f"Ressource présente : {ressource}", (RACINE / ressource).is_file())
+    pages_avec_parcours = [RACINE / page for page in PAGES]
+    pages_avec_parcours.append(RACINE / "simulateur" / "index.html")
+    pages_avec_parcours.extend(sorted((RACINE / "apprendre" / "fiches").glob("*.html")))
+    verifier(
+        "Les commandes de parcours sont intégrées au site, aux fiches et au simulateur",
+        all("navigation-parcours.js" in page.read_text(encoding="utf-8") for page in pages_avec_parcours if page.is_file()),
+        f"{len(pages_avec_parcours)} pages contrôlées",
+    )
     publiques = [page for page in PAGES if page != "404.html"]
     verifier(
         "Le simulateur est dans la navigation des pages",
@@ -132,13 +162,254 @@ def fichiers_du_site() -> None:
         f"{len(publiques)} pages publiques vérifiées",
     )
     verifier(
-        "La page d'accueil renvoie vers le simulateur",
-        'href="simulateur/"' in (RACINE / "index.html").read_text(encoding="utf-8"),
+        "La page d’apprentissage est dans la navigation des pages",
+        all('href="apprendre.html"' in (RACINE / page).read_text(encoding="utf-8") for page in publiques),
+        f"{len(publiques)} pages publiques vérifiées",
     )
     verifier(
-        "La page du simulateur est publiée",
-        (RACINE / "simulateur" / "index.html").is_file(),
+        "La notice vie privée est trouvable depuis chaque page publique",
+        all('href="confidentialite.html"' in (RACINE / page).read_text(encoding="utf-8") for page in publiques),
+        f"{len(publiques)} pages publiques vérifiées",
     )
+    vie_privee = (RACINE / "confidentialite.html").read_text(encoding="utf-8")
+    categories_rgpd = (
+        "localStorage",
+        "sessionStorage",
+        "parcours de navigation",
+        "adresse IP",
+        "Google My Maps",
+        "courriel",
+        "base juridique",
+        "durée de conservation",
+        "Render",
+    )
+    verifier(
+        "La notice distingue préférences locales, contact, hébergement et tiers",
+        all(terme.casefold() in vie_privee.casefold() for terme in categories_rgpd),
+        "9 catégories et réserves documentées",
+    )
+    localisation = (RACINE / "localisation.html").read_text(encoding="utf-8")
+    iframe_carte = re.search(r"<iframe\b[^>]*>", localisation, flags=re.IGNORECASE)
+    verifier(
+        "La carte Google n’est pas chargée avant une action explicite",
+        bool(iframe_carte)
+        and "data-map-src=" in iframe_carte.group(0)
+        and not re.search(r"(?:^|\s)src\s*=", iframe_carte.group(0), flags=re.IGNORECASE)
+        and 'data-map-load' in localisation,
+    )
+    verifier(
+        "Toutes les pages déclarent un viewport mobile sans bloquer le zoom",
+        all(
+            'name="viewport"' in (RACINE / page).read_text(encoding="utf-8")
+            and "user-scalable=no" not in (RACINE / page).read_text(encoding="utf-8").lower()
+            for page in PAGES
+        ),
+        f"{len(PAGES)} pages contrôlées",
+    )
+    attributs_affichage = (
+        'data-display-settings',
+        'data-text-decrease',
+        'data-text-increase',
+        'data-text-size-level',
+        'data-contrast-toggle',
+        'data-spacing-toggle',
+    )
+    verifier(
+        "Les réglages d’affichage complets sont présents sur toutes les pages publiques",
+        all(
+            all(attribut in (RACINE / page).read_text(encoding="utf-8") for attribut in attributs_affichage)
+            for page in PAGES
+        ),
+        f"{len(PAGES)} pages contrôlées, 404 comprise",
+    )
+    styles = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+    medias_adaptatifs = (
+        "@media (prefers-contrast: more)",
+        "@media (forced-colors: active)",
+        "@media (prefers-reduced-motion: reduce)",
+        "@media (prefers-reduced-transparency: reduce)",
+        "@media (orientation: landscape)",
+        "@media (any-pointer: coarse)",
+    )
+    verifier(
+        "Le CSS commun traite les principales préférences système et entrées",
+        all(regle in styles for regle in medias_adaptatifs),
+    )
+    verifier(
+        "Les tailles utilisateur incluent 125 % et 150 %",
+        "html.texte-agrandi" in styles and "html.texte-tres-agrandi" in styles,
+    )
+    verifier(
+        "Le mode d’espacement atteint les repères WCAG 1.4.12",
+        all(valeur in styles for valeur in ("line-height: 1.65", "margin-block-end: 2em", "letter-spacing: .12em", "word-spacing: .16em")),
+    )
+    parcours = (RACINE / "assets" / "js" / "navigation-parcours.js").read_text(encoding="utf-8")
+    verifier(
+        "La navigation permet retour, avance, accueil et reprise du dernier point",
+        all(marqueur in parcours for marqueur in ('"precedent"', '"suivant"', '"accueil"', '"dernier"', "sessionStorage")),
+    )
+    verifier(
+        "Le repli de navigation et les boutons ont une règle d’affichage dédiée",
+        ".site-journey-navigation" in styles and ".site-journey-button:disabled" in styles and "@media (max-width: 520px)" in styles,
+    )
+    bloc_racine = styles.split(":root", 1)[1].split("}", 1)[0] if ":root" in styles else ""
+    vert_marque = re.search(r"--green:\s*(#[0-9a-fA-F]{6})", bloc_racine)
+    ratio_vert = rapport_contraste(vert_marque.group(1), "#ffffff") if vert_marque else 0.0
+    verifier(
+        "Le vert de marque utilisé en texte atteint 4,5:1 sur blanc",
+        ratio_vert >= 4.5,
+        f"{ratio_vert:.2f}:1",
+    )
+    verifier(
+        "La page de transparence explique le défilement local du tableau large",
+        'class="table-scroll-hint"' in (RACINE / "transparence.html").read_text(encoding="utf-8"),
+    )
+    apprentissage = (RACINE / "apprendre.html").read_text(encoding="utf-8")
+    verifier(
+        "La page d’apprentissage propose quatre repères et plusieurs matières",
+        all(rep in apprentissage for rep in ("Reprendre les bases", "Consolider", "Raisonner", "Approfondir", "Mathématiques", "Numérique et intelligence artificielle")),
+    )
+    fiches = sorted((RACINE / "apprendre" / "fiches").glob("*.html"))
+    blocs_correction = sum(fiche.read_text(encoding="utf-8").count('<details class="learning-answer">') for fiche in fiches)
+    verifier(
+        "Les fiches autonomes proposent une aide et une correction progressives",
+        len(fiches) >= 1 and blocs_correction >= 2 * len(fiches),
+        f"{len(fiches)} fiches, {blocs_correction} blocs de correction",
+    )
+    fiches_autonomes = all(
+        '<aside class="learning-analogy"' in fiche.read_text(encoding="utf-8")
+        and "Limite de l’image" in fiche.read_text(encoding="utf-8")
+        and "Sources facultatives et limites" in fiche.read_text(encoding="utf-8")
+        and "Tu peux suivre cette fiche sans ouvrir ces liens" in fiche.read_text(encoding="utf-8")
+        for fiche in fiches
+    )
+    verifier(
+        "Chaque fiche autonome est autoportante, avec analogie, limite et sources facultatives",
+        len(fiches) >= 1 and fiches_autonomes,
+        f"{len(fiches)} fiche(s) contrôlée(s)",
+    )
+    verifier(
+        "La présentation d’EVA n’invente pas de fonctionnalités",
+        "Aucune fonction d’EVA n’est annoncée" in apprentissage,
+    )
+    accueil = (RACINE / "index.html").read_text(encoding="utf-8")
+    verifier(
+        "L’accueil exprime d’abord la mission du M.R.S.C et la valeur des expériences personnelles",
+        all(terme in accueil for terme in ("La force citoyenne", "expériences vécues", "statuts", "Créer du lien social")),
+    )
+    verifier(
+        "L’accueil relie apprentissages, débat, simulateur, documents et participation",
+        all(terme in accueil for terme in ('href="apprendre.html"', 'href="ia-societe.html"', 'href="simulateur.html"', 'href="documents.html"', 'href="nous-contacter.html"')),
+    )
+    partage = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+    verifier(
+        "Le partage de l’accueil propose une action et des replis accessibles",
+        'data-share-site' in accueil and 'data-share-fallback' in accueil
+        and "navigator.share" in partage and "navigator.clipboard" in partage,
+    )
+    verifier(
+        "Les boutons d’action et de parcours suivent les rayons et les couleurs du site",
+        "--button-radius: 9px" in styles
+        and "border-radius: var(--button-radius)" in styles
+        and ".site-journey-button[data-journey-action=\"accueil\"]" in styles,
+    )
+    pages_ui = [RACINE / page for page in PAGES] + sorted((RACINE / "apprendre" / "fiches").glob("*.html"))
+    classes_autorisees = {"button", "nav-toggle", "display-control"}
+    boutons_coherents = True
+    for page in pages_ui:
+        contenu = page.read_text(encoding="utf-8")
+        for attributs in re.findall(r"<button\b([^>]*)>", contenu, flags=re.IGNORECASE):
+            classe = re.search(r"\bclass=[\"']([^\"']+)[\"']", attributs, flags=re.IGNORECASE)
+            if not classe or not (classes_autorisees & set(classe.group(1).split())):
+                boutons_coherents = False
+                break
+        if not boutons_coherents:
+            break
+    verifier(
+        "Les boutons HTML des pages et fiches utilisent les composants de marque",
+        boutons_coherents and all(regle in styles for regle in (".button {", ".nav-toggle {", ".display-control {")),
+        f"{len(pages_ui)} pages inspectées",
+    )
+    simulateur_styles = (RACINE / "outils" / "construire-simulateur.py").read_text(encoding="utf-8")
+    verifier(
+        "Les commandes du simulateur reprennent les accents bleu, vert et or du M.R.S.C",
+        "--accent: #91b2e6" in simulateur_styles
+        and "--ambre: #f2c15f" in simulateur_styles
+        and "linear-gradient(135deg, #1d3268, #2958a2)" in simulateur_styles,
+    )
+    verifier(
+        "La R&D de cohérence visuelle et éditoriale est documentée",
+        (RACINE / "docs" / "rd-coherence-visuelle-editoriale.md").is_file(),
+    )
+    verifier(
+        "L’accueil conserve les documents officiels et le registre de traçabilité",
+        'class="trace-list"' in accueil and 'trace-panel' in accueil,
+    )
+    workflow_pages = (RACINE / ".github" / "workflows" / "deploy-pages.yml").read_text(encoding="utf-8")
+    verifier(
+        "La page d’apprentissage est incluse dans la publication GitHub Pages",
+        "cp index.html apprendre.html" in workflow_pages,
+    )
+    verifier(
+        "Les fiches autonomes et la notice vie privée sont publiées",
+        "confidentialite.html" in workflow_pages
+        and "cp -R apprendre/fiches _site/apprendre/fiches" in workflow_pages
+        and "sitemap.xml" in workflow_pages,
+    )
+    verifier(
+        "L’adresse publique permanente est mise en évidence dans le README",
+        "https://thejmimiia-code.github.io/MRSC/" in (RACINE / "README.md").read_text(encoding="utf-8"),
+    )
+    verifier(
+        "La page d’accueil renvoie vers la présentation du simulateur",
+        'href="simulateur.html"' in (RACINE / "index.html").read_text(encoding="utf-8"),
+    )
+    page_simulateur = RACINE / "simulateur" / "index.html"
+    verifier(
+        "La page du simulateur est publiée",
+        page_simulateur.is_file(),
+    )
+    if page_simulateur.is_file():
+        simulateur_html = page_simulateur.read_text(encoding="utf-8")
+        verifier(
+            "Le simulateur offre un retour permanent vers le site M.R.S.C",
+            'id="mrsc-retour-site"' in simulateur_html
+            and 'href="../index.html"' in simulateur_html
+            and 'href="../confidentialite.html"' in simulateur_html
+            and 'id="contenu-principal"' in simulateur_html
+            and 'class="sim-skip-link"' in simulateur_html
+            and "position: sticky" in simulateur_html,
+        )
+        verifier(
+            "Le simulateur propose les réglages texte, contraste et interligne",
+            all(
+                marqueur in simulateur_html
+                for marqueur in (
+                    'id="mrsc-display-controls"',
+                    'data-sim-text-decrease',
+                    'data-sim-text-increase',
+                    'data-sim-contrast',
+                    'data-sim-spacing',
+                    'mrsc-texte-niveau',
+                )
+            ),
+        )
+        verifier(
+            "Les tableaux larges du simulateur sont nommés, annoncés et accessibles au clavier",
+            simulateur_html.count('class="defilable mrsc-scroll-region" role="region" tabindex="0"') == 2
+            and simulateur_html.count('class="mrsc-scroll-hint"') == 2,
+        )
+        verifier(
+            "Le simulateur replie ses grilles et curseurs compacts sous 640 px",
+            "@media (max-width: 640px)" in simulateur_html
+            and ".leviers-grille.compacte" in simulateur_html
+            and "minmax(0, 1fr)" in simulateur_html,
+        )
+        verifier(
+            "Le simulateur prend en compte contraste forcé et mouvements réduits",
+            "@media (forced-colors: active)" in simulateur_html
+            and "@media (prefers-reduced-motion: reduce)" in simulateur_html,
+        )
 
 
 def demander(fichier: Path, chemin: str, methode: str, corps: bytes | None) -> tuple[int, bytes]:
@@ -254,6 +525,7 @@ def main() -> int:
     page_a_jour()
     fonctions_conformes()
     fichiers_du_site()
+    liens_et_scripts_statiques()
     # Le moteur écrit des tableaux de simulation : on garde la sortie du test lisible.
     with contextlib.redirect_stdout(io.StringIO()):
         routes_servies()

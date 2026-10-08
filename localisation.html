@@ -8,12 +8,13 @@
   <title>Localisation — M.R.S.C</title>
   <link rel="stylesheet" href="assets/css/site.css">
   <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/navigation-parcours.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu principal</a>
   <header class="site-header">
     <div class="identity">
-      <a href="index.html" aria-label="M.R.S.C — Accueil">
+      <a href="index.html" data-site-home aria-label="M.R.S.C — Accueil">
         <img class="brand-logo" src="assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
       </a>
       <div class="brand-copy">
@@ -35,6 +36,7 @@
         <div class="nav-links" id="navigation-principale" data-primary-navigation>
           <a href="index.html">Accueil</a>
           <a href="ia-societe.html">IA &amp; société</a>
+          <a href="apprendre.html">Apprendre</a>
           <a href="simulateur.html">Simulateur</a>
           <a href="documents.html">Documents</a>
           <a href="liens-utiles.html">Liens utiles</a>
@@ -42,6 +44,24 @@
           <a href="transparence.html">Transparence</a>
           <a href="nous-contacter.html">Nous contacter</a>
         </div>
+        <details class="display-settings" data-display-settings hidden>
+          <summary title="Options d’affichage">
+            Affichage <span class="display-settings-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="display-settings-panel">
+            <p class="display-settings-title"><strong>Ajuster la lisibilité</strong></p>
+            <div class="display-settings-row" role="group" aria-label="Taille du texte">
+              <button class="display-control" type="button" data-text-decrease aria-label="Réduire la taille du texte" title="Réduire le texte">A−</button>
+              <span class="display-text-level" data-text-size-level role="status" aria-live="polite" aria-atomic="true">100 %</span>
+              <button class="display-control" type="button" data-text-increase aria-label="Agrandir la taille du texte" title="Agrandir le texte">A+</button>
+            </div>
+            <div class="display-settings-actions">
+              <button class="display-control display-control-wide" type="button" data-contrast-toggle aria-pressed="false">Contraste renforcé</button>
+              <button class="display-control display-control-wide" type="button" data-spacing-toggle aria-pressed="false">Espacement du texte</button>
+            </div>
+            <p class="display-settings-note">Ces choix restent enregistrés sur cet appareil. Le zoom du navigateur reste disponible.</p>
+          </div>
+        </details>
       </div>
     </nav>
   </header>
@@ -58,12 +78,19 @@
     <section class="content-section">
       <div class="container map-layout">
         <figure class="map-card">
+          <div class="map-privacy-notice">
+            <p><strong>Carte fournie par Google My Maps.</strong> Elle n’est pas chargée automatiquement. Si vous choisissez de l’afficher, votre navigateur contacte Google, qui reçoit des données techniques de connexion (dont l’adresse IP) et peut appliquer ses propres règles de confidentialité.</p>
+            <button class="button button-secondary map-load-button" type="button" data-map-load aria-controls="carte-mrsc">Charger la carte Google dans cette page</button>
+            <p class="map-load-status" data-map-status role="status" aria-live="polite">La carte n’est pas chargée. Vous pouvez aussi ouvrir Google Maps dans un nouvel onglet.</p>
+          </div>
           <iframe
+            id="carte-mrsc"
             class="map-frame"
             title="Carte de l'association M.R.S.C — représentants et siège social"
-            src="https://www.google.com/maps/d/embed?mid=1dTEwwCHGfOHOujnofRVhdsW4NPU&amp;hl=fr&amp;ll=0%2C0&amp;z=5"
+            data-map-src="https://www.google.com/maps/d/embed?mid=1dTEwwCHGfOHOujnofRVhdsW4NPU&amp;hl=fr&amp;ll=0%2C0&amp;z=5"
             loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
+            referrerpolicy="no-referrer"
+            hidden
             allowfullscreen>
           </iframe>
           <figcaption class="map-caption">
@@ -76,8 +103,8 @@
           <p class="eyebrow">Carte de l’association</p>
           <h2>Les représentants du M.R.S.C</h2>
           <p>Cette carte laisse apparaître les lieux où se trouvent les représentants du M.R.S.C</p>
-          <a class="map-open" href="https://www.google.com/maps/d/embed?mid=1dTEwwCHGfOHOujnofRVhdsW4NPU&amp;hl=fr&amp;ll=0%2C0&amp;z=5#" target="_blank" rel="noopener noreferrer">
-            Ouvrir en plein écran pour afficher plus d'éléments
+          <a class="map-open" href="https://www.google.com/maps/d/embed?mid=1dTEwwCHGfOHOujnofRVhdsW4NPU&amp;hl=fr&amp;ll=0%2C0&amp;z=5#" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">
+            Ouvrir la carte sur Google (nouvel onglet)
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9"></path><path d="M18 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5"></path></svg>
           </a>
           <span class="map-legend-title">Calque sans titre</span>
@@ -103,7 +130,7 @@
     <section class="trace-section"><div class="container trace-panel"><div>
       <p class="eyebrow">Tra&ccedil;abilit&eacute;</p><h2>Sources &amp; tra&ccedil;abilit&eacute; de cette page</h2>
       <ul class="trace-list">
-        <li>Carte : <a href="https://www.google.com/maps/d/embed?mid=1dTEwwCHGfOHOujnofRVhdsW4NPU&amp;hl=fr&amp;ll=0%2C0&amp;z=5#">Google My Maps, embed officiel du 03/10/2020</a>. <span class="trace-tag">Source externe</span></li>
+        <li>Carte : Google My Maps, embed officiel du 03/10/2020. Elle n’est pas contactée avant l’action volontaire « Charger la carte » ; les informations du fournisseur et les limites sont indiquées ci-dessus. <span class="trace-tag">Source externe</span></li>
         <li>Codes postaux et si&egrave;ge : lieux de la carte. <span class="trace-tag">Source externe</span></li>
         <li>Mise en page et l&eacute;gendes : pr&eacute;sentation M.R.S.C. <span class="trace-tag trace-tag-original">Original M.R.S.C</span></li>
       </ul></div>
@@ -126,11 +153,13 @@
           <ul>
             <li><a href="index.html">Accueil</a></li>
             <li><a href="ia-societe.html">IA &amp; société</a></li>
+            <li><a href="apprendre.html">Apprendre</a></li>
             <li><a href="simulateur.html">Simulateur</a></li>
             <li><a href="documents.html">Documents</a></li>
             <li><a href="liens-utiles.html">Liens utiles</a></li>
             <li><a href="localisation.html" aria-current="page">Localisation</a></li>
             <li><a href="transparence.html">Transparence</a></li>
+            <li><a href="confidentialite.html">Vie privée et données</a></li>
             <li><a href="nous-contacter.html">Nous contacter</a></li>
           </ul>
         </nav>
@@ -150,7 +179,7 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; <span data-year>2026</span> Mouvement Repr&eacute;sentatif de la Soci&eacute;t&eacute; Civile (M.R.S.C) — Tous droits r&eacute;serv&eacute;s.</p>
-        <p class="footer-legal"><a href="documents.html">Documents officiels</a> &middot; <a href="nous-contacter.html">Contact</a> &middot; <a href="transparence.html#licence">Licence</a> &middot; <a href="#contenu">Haut de page</a></p>
+        <p class="footer-legal"><a href="documents.html">Documents officiels</a> &middot; <a href="nous-contacter.html">Contact</a> &middot; <a href="transparence.html#licence">Licence</a> &middot; <a href="confidentialite.html">Vie privée</a> &middot; <a href="#contenu">Haut de page</a></p>
       </div>
     </div>
   </footer>

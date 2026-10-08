@@ -1,10 +1,13 @@
-"""Fonction Vercel — la source distante du simulateur est-elle utilisable ?
+"""Fonction du site M.R.S.C — la source distante du simulateur est-elle utilisable ?
 
 Le site embarque une copie du moteur (« source locale »), mais le simulateur
-poursuit son développement dans son propre dépôt, où il est déployé sur Vercel
+poursuit son développement dans son propre dépôt, où il est hébergé sur Render
 (« source distante »). Cette fonction dit, côté serveur — donc sans les
 limitations du navigateur — si cette source distante est **réellement
 fonctionnelle** : page servie *et* API de calcul qui répond.
+
+Le site M.R.S.C peut être déployé sur Vercel : c'est l'hébergeur possible de
+cette fonction, pas l'adresse active du simulateur.
 
 C'est elle qui décide de la bascule : `assets/js/site.js` embarque la source
 distante quand elle répond « disponible », et retombe sinon sur la copie locale.
