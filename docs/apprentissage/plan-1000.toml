@@ -1,0 +1,175 @@
+# Allocation de travail vers un corpus d'environ 1 000 fiches autonomes.
+# Ce fichier planifie des quotas, pas 1 000 fiches rédigées ni une couverture exhaustive.
+# Le domaine dédié à l’informatique redistribue les cibles; les quotas restent des hypothèses.
+version = 1
+objectif_fiches = 1000
+
+[[domaine]]
+id = "langue-communication"
+quota = 100
+intention = "Lire, écrire, comprendre des documents et communiquer dans les situations personnelles, citoyennes et professionnelles."
+
+[[domaine]]
+id = "langues-etrangeres"
+quota = 45
+intention = "Développer des échanges utiles dans plusieurs langues, avec des parcours gradués et des ressources accessibles."
+
+[[domaine]]
+id = "mathematiques"
+quota = 110
+intention = "Renforcer calcul, mesure, proportion, géométrie, données, incertitude et raisonnement."
+
+[[domaine]]
+id = "economie-finances"
+quota = 75
+intention = "Comprendre budget, prix, revenus, banques, crédit, consommation, économie et travail sans conseil personnalisé."
+
+[[domaine]]
+id = "sciences-techniques-environnement"
+quota = 75
+intention = "Explorer vivant, matière, énergie, objets techniques, environnement, mesures et démarche scientifique."
+
+[[domaine]]
+id = "geographie"
+quota = 35
+intention = "Lire cartes, espaces, territoires, mobilités, paysages et enjeux d’aménagement."
+
+[[domaine]]
+id = "histoire-memoire"
+quota = 40
+intention = "Construire des repères chronologiques et examiner des traces, sources, mémoires et interprétations."
+
+[[domaine]]
+id = "citoyennete-medias"
+quota = 75
+intention = "Comprendre information, médias, institutions, participation, débats, sources et pluralité des points de vue."
+
+[[domaine]]
+id = "demarches-droits-travail"
+quota = 65
+intention = "Se repérer dans documents, droits, services, emploi, sécurité au travail et démarches courantes."
+
+[[domaine]]
+id = "numerique-ia"
+quota = 75
+intention = "Utiliser le numérique, protéger ses données, comprendre l’IA et réagir aux fraudes sans promettre de liste exhaustive."
+
+[[domaine]]
+id = "informatique-programmation"
+quota = 80
+intention = "Développer une progression distincte sur le fonctionnement des ordinateurs, l’algorithmique, plusieurs langages et les systèmes logiciels, sans réduire l’informatique au seul codage."
+
+
+[[domaine]]
+id = "arts-culture"
+quota = 45
+intention = "Observer, créer, interpréter, écouter, pratiquer et situer des œuvres et pratiques culturelles."
+
+[[domaine]]
+id = "sante-securite-corps"
+quota = 60
+intention = "Comprendre des repères de santé, d’alimentation, de corps, de mobilité et de sécurité avec expertise obligatoire pour les conduites à risque."
+
+[[domaine]]
+id = "methodes-communication"
+quota = 45
+intention = "Apprendre à apprendre, organiser une tâche, demander de l’aide, coopérer et transmettre une expérience."
+
+[[domaine]]
+id = "etudes-superieures-recherche"
+quota = 75
+intention = "Ouvrir des passerelles vers les spécialités post-bac, les méthodes, les champs ISCED-F et la recherche, sans prétendre couvrir toutes les sous-spécialités."
+
+[[horizon]]
+id = "bases-cp-cycle-2"
+quota = 180
+libelle = "Premières bases accessibles dès les repères du CP et du cycle 2"
+
+[[horizon]]
+id = "primaire-college"
+quota = 200
+libelle = "Consolidation, primaire et collège — sans en faire un parcours obligatoire"
+
+[[horizon]]
+id = "lycee-general-technologique-professionnel"
+quota = 180
+libelle = "Lycée général, technologique et professionnel"
+
+[[horizon]]
+id = "formation-professionnelle-vie-active"
+quota = 170
+libelle = "Formations professionnelles, métiers, reconversion et vie active"
+
+[[horizon]]
+id = "postbac-specialites"
+quota = 170
+libelle = "Post-bac, licence, master et spécialités"
+
+[[horizon]]
+id = "recherche-doctorat"
+quota = 100
+libelle = "Recherche avancée et doctorat"
+
+[[repere]]
+id = 1
+quota = 300
+libelle = "Reprendre les bases"
+
+[[repere]]
+id = 2
+quota = 300
+libelle = "Consolider"
+
+[[repere]]
+id = 3
+quota = 250
+libelle = "Raisonner"
+
+[[repere]]
+id = 4
+quota = 150
+libelle = "Approfondir et transférer"
+
+[[tranche]]
+numero = 1
+cible_cumulee = 100
+libelle = "Fondations valorisantes"
+intention = "Prioriser les savoirs immédiatement mobilisables en lecture, écriture, calcul, repérage, numérique et relations quotidiennes."
+
+[[tranche]]
+numero = 2
+cible_cumulee = 250
+libelle = "Autonomie dans la vie courante"
+intention = "Élargir vers démarches, budget, mobilité, santé préventive, droits d’usage et organisation personnelle."
+
+[[tranche]]
+numero = 3
+cible_cumulee = 500
+libelle = "Choix des matières et des parcours"
+intention = "Ouvrir des chemins en sciences, histoire, langues, arts, société et compétences professionnelles, sans cursus imposé."
+
+[[tranche]]
+numero = 4
+cible_cumulee = 750
+libelle = "Approfondissements et spécialités"
+intention = "Développer analyses, méthodes, pratique, projets et applications par domaine, après relecture adaptée."
+
+[[tranche]]
+numero = 5
+cible_cumulee = 1000
+libelle = "Champs avancés et entretien du corpus"
+intention = "Étendre progressivement les spécialités, la recherche, les passerelles et les contenus maintenus à jour ; conserver visibles les lacunes."
+
+[autonomie]
+lecon_autonome = true
+liens_externes_obligatoires = false
+comptes_externes_obligatoires = false
+ressources_chargees_depuis_un_tiers = false
+sections_minimales = ["objectif", "notions définies", "exemple original", "analogie et limites", "démarche", "exercice facultatif", "aide", "correction", "transfert", "sources attribuées"]
+
+[qualite]
+quotas_non_exhaustifs = true
+une_fiche_egale_un_objectif_distinct = true
+les_versions_et_traductions_ne_comptent_pas_comme_nouvelles_fiches = true
+publication_conditionnee_aux_relectures_et_aux_droits = true
+les_comptages_ne_sont_pas_un_score_de_qualite = true

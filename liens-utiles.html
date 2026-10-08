@@ -8,12 +8,14 @@
   <title>Liens utiles — M.R.S.C</title>
   <link rel="stylesheet" href="assets/css/site.css">
   <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/navigation-parcours.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu principal</a>
   <header class="site-header">
+    <p class="site-status-note" role="note">Version de recherche et développement (R&amp;D) — le site est en cours de développement.</p>
     <div class="identity">
-      <a href="index.html" aria-label="M.R.S.C — Accueil">
+      <a href="index.html" data-site-home aria-label="M.R.S.C — Accueil">
         <img class="brand-logo" src="assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
       </a>
       <div class="brand-copy">
@@ -35,6 +37,7 @@
         <div class="nav-links" id="navigation-principale" data-primary-navigation>
           <a href="index.html">Accueil</a>
           <a href="ia-societe.html">IA &amp; société</a>
+          <a href="apprendre.html">Apprendre</a>
           <a href="simulateur.html">Simulateur</a>
           <a href="documents.html">Documents</a>
           <a href="liens-utiles.html" aria-current="page">Liens utiles</a>
@@ -42,6 +45,24 @@
           <a href="transparence.html">Transparence</a>
           <a href="nous-contacter.html">Nous contacter</a>
         </div>
+        <details class="display-settings" data-display-settings hidden>
+          <summary title="Options d’affichage">
+            Affichage <span class="display-settings-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="display-settings-panel">
+            <p class="display-settings-title"><strong>Ajuster la lisibilité</strong></p>
+            <div class="display-settings-row" role="group" aria-label="Taille du texte">
+              <button class="display-control" type="button" data-text-decrease aria-label="Réduire la taille du texte" title="Réduire le texte">A−</button>
+              <span class="display-text-level" data-text-size-level role="status" aria-live="polite" aria-atomic="true">100 %</span>
+              <button class="display-control" type="button" data-text-increase aria-label="Agrandir la taille du texte" title="Agrandir le texte">A+</button>
+            </div>
+            <div class="display-settings-actions">
+              <button class="display-control display-control-wide" type="button" data-contrast-toggle aria-pressed="false">Contraste renforcé</button>
+              <button class="display-control display-control-wide" type="button" data-spacing-toggle aria-pressed="false">Espacement du texte</button>
+            </div>
+            <p class="display-settings-note">Ces choix restent enregistrés sur cet appareil. Le zoom du navigateur reste disponible.</p>
+          </div>
+        </details>
       </div>
     </nav>
   </header>
@@ -51,7 +72,8 @@
       <div class="container">
         <p class="eyebrow">M.R.S.C</p>
         <h1>Liens utiles</h1>
-        <p class="page-lead">Les ressources et associations citées par le M.R.S.C.</p>
+        <p class="page-lead">Une sélection éditoriale de services publics, de ressources institutionnelles, pédagogiques et associatives, classés par usage.</p>
+        <p class="resource-scope-note"><strong>Avant d’agir :</strong> vérifie l’émetteur, la date, le territoire et le type de document. Les démarches et données peuvent changer ; une page officielle ne répond pas automatiquement à chaque situation. Les nouveaux liens publics, citoyens, éducatifs et techniques ont été contrôlés sommairement le 8 octobre 2026 ; les références associatives plus anciennes ne font pas toutes l’objet de cette nouvelle revue. La sélection n’est ni exhaustive ni un soutien à toutes les analyses des sites cités. Les liens sont facultatifs ; aucun contenu tiers n’est repris ici et les conditions de réutilisation n’ont pas été contrôlées pour chaque ressource précise. Avant toute reprise, vérifie les conditions propres à la page, au document ou au jeu de données.</p>
       </div>
     </section>
 
@@ -72,30 +94,266 @@
               <span>Charte de l'environnement de 2004</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
             </a>
-            <a class="resource-link" href="http://www.vie-publique.fr/" target="_blank" rel="noopener noreferrer">
+            <a class="resource-link" href="https://www.vie-publique.fr/" target="_blank" rel="noopener noreferrer">
               <span>Vie-publique</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
             </a>
-            <a class="resource-link" href="http://www.legifrance.gouv.fr/" target="_blank" rel="noopener noreferrer">
+            <a class="resource-link" href="https://www.legifrance.gouv.fr/" target="_blank" rel="noopener noreferrer">
               <span>Legifrance</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
-            </a>
-            <a class="resource-link" href="http://www.transparency-france.org/" target="_blank" rel="noopener noreferrer">
-              <span>La transparence politique</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
             </a>
           </div>
         </section>
 
+        <section class="link-group" aria-labelledby="liens-services-publics">
+          <h2 id="liens-services-publics">Services publics, droits et démarches</h2>
+          <div class="link-grid">
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.service-public.gouv.fr/" target="_blank" rel="noopener noreferrer">
+                <span>Service-Public.fr</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Portail public</span> Repères sur les démarches, droits et services ; vérifie les conditions propres à ta situation.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.france-services.gouv.fr/" target="_blank" rel="noopener noreferrer">
+                <span>France services</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Accompagnement public</span> Trouver un espace d’accompagnement pour certaines démarches près de chez soi ; les services disponibles varient selon le lieu.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.defenseurdesdroits.fr/" target="_blank" rel="noopener noreferrer">
+                <span>Défenseur des droits</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Autorité indépendante</span> Informations et voies de recours dans le champ de ses missions ; consulter les critères de compétence et de saisine.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.impots.gouv.fr/" target="_blank" rel="noopener noreferrer">
+                <span>impots.gouv.fr</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Administration fiscale</span> Démarches et informations fiscales ; recontrôler dates, règles en vigueur et situation individuelle.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.elections.interieur.gouv.fr/" target="_blank" rel="noopener noreferrer">
+                <span>Élections — ministère de l’Intérieur</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Information électorale officielle</span> Inscription, procurations, modalités et résultats ; calendrier et informations à vérifier pour chaque scrutin.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="link-group" aria-labelledby="liens-donnees-publiques">
+          <h2 id="liens-donnees-publiques">Données publiques et statistiques</h2>
+          <div class="link-grid">
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.data.gouv.fr/" target="_blank" rel="noopener noreferrer">
+                <span>data.gouv.fr</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Portail de données publiques</span> Explorer les jeux de données diffusés par différents producteurs ; lire la licence, la date, la définition et le périmètre de chaque jeu.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.insee.fr/" target="_blank" rel="noopener noreferrer">
+                <span>INSEE</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Statistique publique</span> Définitions, séries et études sur la France ; vérifier champ, unité, période et méthode avant de comparer des chiffres.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://ec.europa.eu/eurostat/" target="_blank" rel="noopener noreferrer">
+                <span>Eurostat</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Statistique européenne</span> Données comparables entre pays selon des définitions données ; lire les métadonnées et les éventuelles révisions.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="link-group" aria-labelledby="liens-numerique-securite">
+          <h2 id="liens-numerique-securite">Numérique, cybersécurité et accessibilité</h2>
+          <div class="link-grid">
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.cnil.fr/" target="_blank" rel="noopener noreferrer">
+                <span>CNIL</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Autorité de protection des données</span> Repères sur les données personnelles et les droits ; les règles dépendent du contexte et du traitement.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://cyber.gouv.fr/" target="_blank" rel="noopener noreferrer">
+                <span>ANSSI</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Agence nationale</span> Recommandations et informations de cybersécurité, avec des contenus adaptés à différents publics et organisations.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.cybermalveillance.gouv.fr/" target="_blank" rel="noopener noreferrer">
+                <span>Cybermalveillance.gouv.fr</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Service d’assistance et prévention</span> Conseils et orientation face aux menaces numériques répertoriées ; une liste de menaces n’est jamais exhaustive.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://17cyber.gouv.fr/" target="_blank" rel="noopener noreferrer">
+                <span>17Cyber</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Orientation en ligne</span> Aide à l’orientation après un incident numérique ; en cas de danger immédiat, utiliser les services d’urgence adaptés.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.arcep.fr/" target="_blank" rel="noopener noreferrer">
+                <span>Arcep</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Autorité de régulation</span> Informations et données sur les communications électroniques, les postes et certains services numériques, selon ses compétences.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://accessibilite.numerique.gouv.fr/" target="_blank" rel="noopener noreferrer">
+                <span>Référentiel général d’amélioration de l’accessibilité (RGAA)</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Référentiel public</span> Méthode française d’évaluation de l’accessibilité numérique ; sa présence ne constitue pas, à elle seule, un audit de conformité.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="link-group" aria-labelledby="liens-energie-environnement">
+          <h2 id="liens-energie-environnement">Électricité, énergie et environnement</h2>
+          <div class="link-grid">
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.inrs.fr/risques/electriques/prevention-risque-electrique.html" target="_blank" rel="noopener noreferrer">
+                <span>INRS — prévention du risque électrique</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Prévention et santé au travail</span> Repères de prévention des risques professionnels ; ne remplace pas une formation ni les consignes adaptées à une installation.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.ademe.fr/" target="_blank" rel="noopener noreferrer">
+                <span>ADEME</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Agence publique</span> Ressources sur la transition écologique et l’énergie ; distinguer données, recommandations et estimations.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.energie-info.fr/" target="_blank" rel="noopener noreferrer">
+                <span>Énergie-Info — Médiateur national de l’énergie</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Information et médiation</span> Informations sur les contrats et litiges d’énergie, dans le champ de compétence du médiateur ; comparer les offres à la date de consultation.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.rte-france.com/eco2mix" target="_blank" rel="noopener noreferrer">
+                <span>RTE éCO2mix</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Données du système électrique</span> Indicateurs et visualisations fournis par le gestionnaire du réseau de transport ; consulter définitions, heures et périmètres.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.georisques.gouv.fr/" target="_blank" rel="noopener noreferrer">
+                <span>Géorisques</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Portail public</span> Informations sur les risques naturels, technologiques et miniers ; une carte générale ne remplace pas une expertise locale.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://meteofrance.com/" target="_blank" rel="noopener noreferrer">
+                <span>Météo-France</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Service météorologique national</span> Prévisions et vigilances évolutives ; consulter la mise à jour la plus récente et les consignes locales.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="link-group" aria-labelledby="liens-protection-consommateurs">
+          <h2 id="liens-protection-consommateurs">Protection des consommateurs</h2>
+          <div class="link-grid">
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.economie.gouv.fr/dgccrf" target="_blank" rel="noopener noreferrer">
+                <span>DGCCRF</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Administration de contrôle</span> Informations sur la concurrence, la consommation et la répression des fraudes ; une page d’information ne remplace pas l’examen d’un litige particulier.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://signal.conso.gouv.fr/" target="_blank" rel="noopener noreferrer">
+                <span>SignalConso</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Service public de signalement</span> Aide à signaler certains problèmes de consommation ; ce signalement ne garantit ni un remboursement, ni une réponse individuelle, ni la détection de toutes les anomalies.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="link-group" aria-labelledby="liens-apprendre-sante-travail">
+          <h2 id="liens-apprendre-sante-travail">Apprendre, santé et vie professionnelle</h2>
+          <div class="link-grid">
+            <div class="resource-entry">
+              <a class="resource-link" href="https://eduscol.education.gouv.fr/5823/programmes-et-ressources-en-numerique-et-sciences-informatiques-voie-g" target="_blank" rel="noopener noreferrer">
+                <span>Éduscol — NSI, programmes et ressources</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Ressources éducatives publiques</span> Ressources et programmes pour les personnels et la communauté éducative ; un programme scolaire n’est pas une limite d’apprentissage.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://docs.python.org/fr/3/tutorial/" target="_blank" rel="noopener noreferrer">
+                <span>Documentation Python — tutoriel en français</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Documentation technique</span> Référence pour le langage Python ; certaines parties supposent déjà des notions et ne sont pas une leçon autonome pour débuter.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/Loops" target="_blank" rel="noopener noreferrer">
+                <span>MDN — apprendre les boucles JavaScript (français)</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Documentation technique</span> Explication communautaire détaillée ; utile pour approfondir les boucles, pas nécessaire pour suivre les fiches M.R.S.C.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://docs.arduino.cc/language-reference/" target="_blank" rel="noopener noreferrer">
+                <span>Arduino — référence du langage et de l’API (anglais)</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Documentation technique d’une plateforme</span> Décrit l’API Arduino et les cartes compatibles ; ce n’est ni une référence universelle d’électronique ni un guide d’intervention sur une installation électrique.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.santepubliquefrance.fr/" target="_blank" rel="noopener noreferrer">
+                <span>Santé publique France</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Agence nationale de santé publique</span> Prévention, surveillance et information de santé publique ; ce portail ne remplace pas un avis médical individuel.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.ameli.fr/assure" target="_blank" rel="noopener noreferrer">
+                <span>ameli — Assurance Maladie</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Service public d’assurance maladie</span> Repères sur les droits, démarches et remboursements ; vérifier le cas individuel avec l’organisme concerné.</p>
+            </div>
+            <div class="resource-entry">
+              <a class="resource-link" href="https://www.francetravail.fr/" target="_blank" rel="noopener noreferrer">
+                <span>France Travail</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+              <p class="resource-note"><span class="trace-tag">Service public de l’emploi</span> Services et informations sur l’emploi, les métiers et les démarches ; règles d’accès et dispositifs à vérifier au moment d’usage.</p>
+            </div>
+          </div>
+        </section>
+
         <section class="link-group" aria-labelledby="liens-associations">
           <h2 id="liens-associations">Associations et initiatives</h2>
+          <p class="resource-note">Ces organisations publient sous leur propre responsabilité. Leurs analyses et campagnes ne sont ni des documents officiels ni des positions attribuées au M.R.S.C.</p>
           <div class="link-grid">
             <a class="resource-link" href="https://projetarcadie.com/" target="_blank" rel="noopener noreferrer">
               <span>Projet ARCADiE</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
             </a>
-            <a class="resource-link" href="http://asso.robinrichard.free.fr/index.php" target="_blank" rel="noopener noreferrer">
-              <span>Association Robin Richard</span>
+            <a class="resource-link" href="https://transparency-france.org/" target="_blank" rel="noopener noreferrer">
+              <span>Transparency International France — association anticorruption</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"></path></svg>
             </a>
             <a class="resource-link" href="http://www.fondation-nature-homme.org/" target="_blank" rel="noopener noreferrer">
@@ -110,7 +368,8 @@
         </section>
 
         <section class="link-group" aria-labelledby="liens-citoyens">
-          <h2 id="liens-citoyens">Consommation et défense des citoyens</h2>
+          <h2 id="liens-citoyens">Publications associatives et positions citoyennes</h2>
+          <p class="resource-note">Les organismes et éditeurs ci-dessous portent leurs propres analyses et orientations. Ce ne sont pas des sources administratives ; comparer leurs affirmations avec les textes, données et faits de référence.</p>
           <div class="link-grid">
             <a class="resource-link" href="http://www.60millions-mag.com/" target="_blank" rel="noopener noreferrer">
               <span>60 millions de consommateurs</span>
@@ -152,9 +411,10 @@
     <section class="trace-section"><div class="container trace-panel"><div>
       <p class="eyebrow">Tra&ccedil;abilit&eacute;</p><h2>Sources &amp; tra&ccedil;abilit&eacute; de cette page</h2>
       <ul class="trace-list">
-        <li>Chaque carte renvoie vers le site externe cit&eacute;. <span class="trace-tag">Source externe</span></li>
-        <li>S&eacute;lection et classement : choix &eacute;ditorial M.R.S.C. <span class="trace-tag trace-tag-original">Original M.R.S.C</span></li>
-        <li>Avertissement : contenus externes de leurs &eacute;diteurs. <span class="trace-tag trace-tag-original">Original M.R.S.C</span></li>
+        <li>Les cartes distinguent portails publics, autorités, données, documents pédagogiques, références techniques et publications associatives. <span class="trace-tag">Typologie éditoriale</span></li>
+        <li>Les nouvelles sources publiques, éducatives et techniques ont été contrôlées sommairement le 8 octobre 2026 ; les références associatives plus anciennes ne sont pas toutes revérifiées. <span class="trace-tag">Repère daté</span></li>
+        <li>Sélection et classement : choix éditorial M.R.S.C ; les conditions de réutilisation ne sont pas contrôlées pour chaque ressource et aucun contenu tiers n’est reproduit. <span class="trace-tag trace-tag-original">Original M.R.S.C</span></li>
+        <li>Les organisations citées publient sous leur responsabilité : leur présence n’en fait ni une position M.R.S.C ni un document officiel. <span class="trace-tag trace-tag-original">Distinction des sources</span></li>
       </ul></div>
       <a class="button button-secondary" href="transparence.html">Voir la m&eacute;thode compl&egrave;te</a>
     </div></section>
@@ -175,11 +435,13 @@
           <ul>
             <li><a href="index.html">Accueil</a></li>
             <li><a href="ia-societe.html">IA &amp; société</a></li>
+            <li><a href="apprendre.html">Apprendre</a></li>
             <li><a href="simulateur.html">Simulateur</a></li>
             <li><a href="documents.html">Documents</a></li>
             <li><a href="liens-utiles.html" aria-current="page">Liens utiles</a></li>
             <li><a href="localisation.html">Localisation</a></li>
             <li><a href="transparence.html">Transparence</a></li>
+            <li><a href="confidentialite.html">Vie privée et données</a></li>
             <li><a href="nous-contacter.html">Nous contacter</a></li>
           </ul>
         </nav>
@@ -199,7 +461,7 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; <span data-year>2026</span> Mouvement Repr&eacute;sentatif de la Soci&eacute;t&eacute; Civile (M.R.S.C) — Tous droits r&eacute;serv&eacute;s.</p>
-        <p class="footer-legal"><a href="documents.html">Documents officiels</a> &middot; <a href="nous-contacter.html">Contact</a> &middot; <a href="transparence.html#licence">Licence</a> &middot; <a href="#contenu">Haut de page</a></p>
+        <p class="footer-legal"><a href="documents.html">Documents officiels</a> &middot; <a href="nous-contacter.html">Contact</a> &middot; <a href="transparence.html#licence">Licence</a> &middot; <a href="confidentialite.html">Vie privée</a> &middot; <a href="#contenu">Haut de page</a></p>
       </div>
     </div>
   </footer>

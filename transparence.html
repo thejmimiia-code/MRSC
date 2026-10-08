@@ -8,12 +8,14 @@
   <title>Transparence — M.R.S.C</title>
   <link rel="stylesheet" href="assets/css/site.css">
   <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/navigation-parcours.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu principal</a>
   <header class="site-header">
+    <p class="site-status-note" role="note">Version de recherche et développement (R&amp;D) — le site est en cours de développement.</p>
     <div class="identity">
-      <a href="index.html" aria-label="M.R.S.C — Accueil">
+      <a href="index.html" data-site-home aria-label="M.R.S.C — Accueil">
         <img class="brand-logo" src="assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
       </a>
       <div class="brand-copy">
@@ -35,6 +37,7 @@
         <div class="nav-links" id="navigation-principale" data-primary-navigation>
           <a href="index.html">Accueil</a>
           <a href="ia-societe.html">IA &amp; société</a>
+          <a href="apprendre.html">Apprendre</a>
           <a href="simulateur.html">Simulateur</a>
           <a href="documents.html">Documents</a>
           <a href="liens-utiles.html">Liens utiles</a>
@@ -42,6 +45,24 @@
           <a href="transparence.html" aria-current="page">Transparence</a>
           <a href="nous-contacter.html">Nous contacter</a>
         </div>
+        <details class="display-settings" data-display-settings hidden>
+          <summary title="Options d’affichage">
+            Affichage <span class="display-settings-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="display-settings-panel">
+            <p class="display-settings-title"><strong>Ajuster la lisibilité</strong></p>
+            <div class="display-settings-row" role="group" aria-label="Taille du texte">
+              <button class="display-control" type="button" data-text-decrease aria-label="Réduire la taille du texte" title="Réduire le texte">A−</button>
+              <span class="display-text-level" data-text-size-level role="status" aria-live="polite" aria-atomic="true">100 %</span>
+              <button class="display-control" type="button" data-text-increase aria-label="Agrandir la taille du texte" title="Agrandir le texte">A+</button>
+            </div>
+            <div class="display-settings-actions">
+              <button class="display-control display-control-wide" type="button" data-contrast-toggle aria-pressed="false">Contraste renforcé</button>
+              <button class="display-control display-control-wide" type="button" data-spacing-toggle aria-pressed="false">Espacement du texte</button>
+            </div>
+            <p class="display-settings-note">Ces choix restent enregistrés sur cet appareil. Le zoom du navigateur reste disponible.</p>
+          </div>
+        </details>
       </div>
     </nav>
   </header>
@@ -57,7 +78,7 @@
 <div class="section-heading"><p class="eyebrow">Notre m&eacute;thode</p><h2>Quatre r&egrave;gles, appliqu&eacute;es partout</h2><p>Chaque page du site se termine par un encadr&eacute; "Sources &amp; tra&ccedil;abilit&eacute;" qui applique ces r&egrave;gles &agrave; son propre contenu.</p></div><div class="principle-grid"><article class="principle-card"><p class="eyebrow">01 / CITER</p><h3>Source explicite</h3><p>Chaque fait, chiffre ou document renvoie vers sa source : lien direct, &eacute;diteur nomm&eacute;, date quand elle est connue.</p></article><article class="principle-card"><p class="eyebrow">02 / RECOUPER</p><h3>Dynamiques crois&eacute;es</h3><p>Les constats importants sont lus au croisement de plusieurs sources (perception &times; mesure, usages &times; garde-fous).</p></article><article class="principle-card"><p class="eyebrow">03 / DISTINGUER</p><h3>Apports de l&rsquo;outil</h3><p>Ce que l&rsquo;outil produit lui-m&ecirc;me &mdash; grilles de lecture, questions, synth&egrave;ses &mdash; est &eacute;tiquet&eacute; "Original M.R.S.C".</p></article><article class="principle-card"><p class="eyebrow">04 / CORRIGER</p><h3>Audit permanent</h3><p>Une erreur, un lien mort, une source douteuse ? Signalez-le : tout est v&eacute;rifiable et corrigeable, rien n&rsquo;est fig&eacute;.</p></article></div>
     </div></section>
     <section class="section "><div class="container stack">
-<div class="section-heading"><p class="eyebrow">Registre de tra&ccedil;abilit&eacute;</p><h2 id="registre-title">D&rsquo;o&ugrave; vient chaque &eacute;l&eacute;ment du site</h2><p>L&rsquo;inventaire complet, page par page : &eacute;l&eacute;ments repris de sources externes et points pr&eacute;cis apport&eacute;s par l&rsquo;outil.</p></div><div class="table-scroll" role="region" aria-labelledby="registre-title" tabindex="0"><table class="trace-table" aria-labelledby="registre-title"><thead><tr><th scope="col">Page</th><th scope="col">&Eacute;l&eacute;ment</th><th scope="col">Source / recoupement</th><th scope="col">Nature</th></tr></thead><tbody>
+<div class="section-heading"><p class="eyebrow">Registre de tra&ccedil;abilit&eacute;</p><h2 id="registre-title">D&rsquo;o&ugrave; vient chaque &eacute;l&eacute;ment du site</h2><p>L&rsquo;inventaire complet, page par page : &eacute;l&eacute;ments repris de sources externes et points pr&eacute;cis apport&eacute;s par l&rsquo;outil.</p></div><p class="table-scroll-hint">Sur petit écran ou avec un fort zoom, faites défiler ce tableau horizontalement pour lire toutes ses colonnes.</p><div class="table-scroll" role="region" aria-labelledby="registre-title" tabindex="0"><table class="trace-table" aria-labelledby="registre-title"><thead><tr><th scope="col">Page</th><th scope="col">&Eacute;l&eacute;ment</th><th scope="col">Source / recoupement</th><th scope="col">Nature</th></tr></thead><tbody>
 <tr><th scope="row">IA &amp; soci&eacute;t&eacute;</th><td>33 % utilisateurs, 56 % m&eacute;fiants</td><td><a href="https://www.arcom.fr/sites/default/files/2025-03/Barometre-du-numerique-edition-2025.pdf">Barom&egrave;tre du num&eacute;rique 2025</a></td><td><span class="trace-tag">Source externe</span></td></tr>
 <tr><th scope="row">IA &amp; soci&eacute;t&eacute;</th><td>1 actif sur 4 expos&eacute; &agrave; l&rsquo;IA g&eacute;n&eacute;rative</td><td><a href="https://www.ilo.org/publications/generative-ai-and-jobs-2025-update">OIT Generative AI and Jobs 2025</a></td><td><span class="trace-tag">Source externe</span></td></tr>
 <tr><th scope="row">IA &amp; soci&eacute;t&eacute;</th><td>Demande &eacute;lectrique centres de donn&eacute;es &times;2 d&rsquo;ici 2030</td><td><a href="https://www.iea.org/reports/energy-and-ai/executive-summary">AIE Energy and AI 2025</a></td><td><span class="trace-tag">Source externe</span></td></tr>
@@ -65,9 +86,17 @@
 <tr><th scope="row">IA &amp; soci&eacute;t&eacute;</th><td>Principes &eacute;thiques</td><td><a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics">UNESCO</a>, <a href="https://www.oecd.org/en/topics/ai-and-work.html">OCDE</a>, <a href="https://www.who.int/news/item/18-01-2024-who-releases-ai-ethics-and-governance-guidance-for-large-multi-modal-models">OMS</a>, <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai">cadre europ&eacute;en</a></td><td><span class="trace-tag">Source externe</span></td></tr>
 <tr><th scope="row">IA &amp; soci&eacute;t&eacute;</th><td>Lecture crois&eacute;e m&eacute;fiance &times; exposition</td><td>Perception (Barom&egrave;tre) recoup&eacute;e avec mesure (OIT) ; usages &times; garde-fous</td><td><span class="trace-tag trace-tag-original">Original M.R.S.C</span></td></tr>
 <tr><th scope="row">IA &amp; soci&eacute;t&eacute;</th><td>4 formes d&rsquo;IA, 5 questions, m&eacute;thode en 5 &eacute;tapes</td><td>Grille de lecture con&ccedil;ue par le M.R.S.C</td><td><span class="trace-tag trace-tag-original">Original M.R.S.C</span></td></tr>
-<tr><th scope="row">Accueil</th><td>Pr&eacute;sentation, valeurs (art. 2 et 3)</td><td>Synth&egrave;se conforme aux <a href="https://www.mrsc.fr/assets/nos-statuts-mrsc-du-02-10-2020.pdf">statuts PDF</a></td><td><span class="trace-tag trace-tag-original">Original M.R.S.C</span></td></tr>
-<tr><th scope="row">Accueil</th><td>Bloc IA &amp; soci&eacute;t&eacute;</td><td>R&eacute;sum&eacute; de <a href="ia-societe.html">ia-societe.html et ses sources</a></td><td><span class="trace-tag trace-tag-original">Original M.R.S.C</span></td></tr>
-<tr><th scope="row">Accueil</th><td>Bulletin d&rsquo;adh&eacute;sion, encart Facebook</td><td>PDF officiel mrsc.fr ; mention informative sans lien externe</td><td><span class="trace-tag">Source externe</span></td></tr>
+<tr><th scope="row">Accueil</th><td>Objet, missions et fonctionnement associatif</td><td>Synth&egrave;se des <a href="https://www.mrsc.fr/assets/nos-statuts-mrsc-du-02-10-2020.pdf">statuts PDF</a> ; le texte statutaire fait foi</td><td><span class="trace-tag">Document officiel</span></td></tr>
+<tr><th scope="row">Accueil</th><td>Exp&eacute;riences personnelles comme point d&rsquo;appui pour apprendre</td><td>Principe p&eacute;dagogique &eacute;ditorial ; voir la page <a href="apprendre.html">Apprendre</a> ; distinct des statuts</td><td><span class="trace-tag trace-tag-original">Choix &eacute;ditorial</span></td></tr>
+<tr><th scope="row">Accueil</th><td>Portes d’entrée vers l’apprentissage autonome, le dossier IA, le simulateur et les documents</td><td>Liens vers les pages <a href="apprendre.html">Apprendre</a>, <a href="ia-societe.html">IA &amp; société</a>, <a href="simulateur.html">Simulateur</a> et <a href="documents.html">Documents</a></td><td><span class="trace-tag trace-tag-original">Organisation éditoriale</span></td></tr>
+<tr><th scope="row">Accueil</th><td>Partage de l’adresse publique</td><td>Menu de partage de l’appareil, copie locale ou lien courriel ; aucune plateforme imposée</td><td><span class="trace-tag trace-tag-original">Fonction du site</span></td></tr>
+<tr><th scope="row">Accueil</th><td>Statuts et bulletin d’adhésion</td><td><a href="https://www.mrsc.fr/assets/nos-statuts-mrsc-du-02-10-2020.pdf">Statuts PDF</a> et <a href="https://www.mrsc.fr/assets/bulletin-d-adh%C3%A9sion-m.r.s.c-2020.pdf">bulletin officiel</a></td><td><span class="trace-tag">Source externe</span></td></tr>
+<tr><th scope="row">Apprendre</th><td>Rep&egrave;res de cycles et progression</td><td><a href="https://www.education.gouv.fr/bo/15/Hebdo17/MENE1506516D.htm">Minist&egrave;re de l&rsquo;&Eacute;ducation nationale — socle commun</a> ; rep&egrave;re indicatif, pas une &eacute;quivalence de dipl&ocirc;me</td><td><span class="trace-tag">Source externe</span></td></tr>
+<tr><th scope="row">Apprendre</th><td>Comp&eacute;tences de base en contexte professionnel</td><td><a href="https://www.certificat-clea.fr/employeurs/le-socle/">R&eacute;f&eacute;rentiel Cl&eacute;A</a> ; th&egrave;mes de travail, sans pr&eacute;paration ni d&eacute;livrance de certification</td><td><span class="trace-tag">Source externe</span></td></tr>
+<tr><th scope="row">Apprendre</th><td>Adaptation aux besoins vari&eacute;s des adultes</td><td><a href="https://www.anlci.gouv.fr/comment-agir/je-me-forme/">ANLCI — accompagnement et formation</a></td><td><span class="trace-tag">Source externe</span></td></tr>
+<tr><th scope="row">Apprendre</th><td>Recommandations d&rsquo;accessibilit&eacute; num&eacute;rique</td><td><a href="https://www.w3.org/TR/WCAG22/">W3C — WCAG 2.2</a> ; v&eacute;rification humaine encore &agrave; mener</td><td><span class="trace-tag">Source externe</span></td></tr>
+<tr><th scope="row">Apprendre</th><td>Parcours gradu&eacute;, fiches et exercices fictifs</td><td>Conception &eacute;ditoriale et exemples du M.R.S.C</td><td><span class="trace-tag trace-tag-original">Original M.R.S.C</span></td></tr>
+<tr><th scope="row">Apprendre</th><td>Place r&eacute;serv&eacute;e &agrave; EVA</td><td>Int&eacute;gration &agrave; documenter ; aucune fonction n&rsquo;est attribu&eacute;e sans fiche de projet confirm&eacute;e</td><td><span class="trace-tag trace-tag-original">Original M.R.S.C</span></td></tr>
 <tr><th scope="row">Documents</th><td>Statuts, bulletins</td><td><a href="https://www.mrsc.fr/">PDF officiels mrsc.fr</a></td><td><span class="trace-tag">Source externe</span></td></tr>
 <tr><th scope="row">Documents</th><td>Parution Journal officiel</td><td><a href="https://www.journal-officiel.gouv.fr/publications/assoc/pdf/2016/0015/JOAFE_PDF_Unitaire_20160015_01361.pdf">PDF officiel</a></td><td><span class="trace-tag">Source externe</span></td></tr>
 <tr><th scope="row">Liens utiles</th><td>16 ressources externes</td><td>Sites cit&eacute;s &mdash; contenus de leurs &eacute;diteurs</td><td><span class="trace-tag">Source externe</span></td></tr>
@@ -111,11 +140,13 @@
           <ul>
             <li><a href="index.html">Accueil</a></li>
             <li><a href="ia-societe.html">IA &amp; société</a></li>
+            <li><a href="apprendre.html">Apprendre</a></li>
             <li><a href="simulateur.html">Simulateur</a></li>
             <li><a href="documents.html">Documents</a></li>
             <li><a href="liens-utiles.html">Liens utiles</a></li>
             <li><a href="localisation.html">Localisation</a></li>
             <li><a href="transparence.html" aria-current="page">Transparence</a></li>
+            <li><a href="confidentialite.html">Vie privée et données</a></li>
             <li><a href="nous-contacter.html">Nous contacter</a></li>
           </ul>
         </nav>
@@ -135,7 +166,7 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; <span data-year>2026</span> Mouvement Repr&eacute;sentatif de la Soci&eacute;t&eacute; Civile (M.R.S.C) — Tous droits r&eacute;serv&eacute;s.</p>
-        <p class="footer-legal"><a href="documents.html">Documents officiels</a> &middot; <a href="transparence.html#licence">Licence</a> &middot; <a href="nous-contacter.html">Contact</a> &middot; <a href="#contenu">Haut de page</a></p>
+        <p class="footer-legal"><a href="documents.html">Documents officiels</a> &middot; <a href="transparence.html#licence">Licence</a> &middot; <a href="confidentialite.html">Vie privée</a> &middot; <a href="nous-contacter.html">Contact</a> &middot; <a href="#contenu">Haut de page</a></p>
       </div>
     </div>
   </footer>

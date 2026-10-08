@@ -1,0 +1,110 @@
+name: Veille éditoriale des apprentissages
+
+on:
+  schedule:
+    - cron: "20 7 * * 1" # chaque lundi, 7 h 20 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "docs/apprentissage/**"
+      - "docs/rd-ia-usages-fraudes.md"
+      - "ia-societe.html"
+      - "outils/construire-apprentissages.py"
+      - "apprendre.html"
+      - "apprendre/fiches/**"
+      - ".github/workflows/veille-apprentissages.yml"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  veille:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Contrôler les fiches, le plan des 1 000 et les pages locales
+        id: verification
+        continue-on-error: true
+        run: |
+          python3 -m py_compile outils/construire-apprentissages.py outils/verifier-site-statique.py
+          python3 outils/construire-apprentissages.py --verifier --rapport "$RUNNER_TEMP/veille-apprentissages.md"
+          python3 outils/verifier-site-statique.py
+
+      - name: Ajouter le rapport au résumé de l’exécution
+        if: always()
+        run: |
+          {
+            echo "## Veille éditoriale des apprentissages"
+            echo
+            echo "Contrôle des métadonnées, analogies, sources déclarées, dates de revue, plan éditorial de 1 000 fiches, quotas et cohérence des sorties générées, y compris les lacunes IA/cyberfraudes."
+            echo
+            echo "La veille automatique vérifie les échéances et les liens déclarés, mais ne parcourt pas les sites externes et ne valide pas leur actualité : une revue humaine des sources officielles reste prévue au moins tous les 90 jours pour les fiches de sécurité numérique."
+            echo
+            if [ "${{ steps.verification.outcome }}" = "success" ]; then
+              echo "**Résultat technique : contrôles réussis.**"
+            else
+              echo "**Résultat technique : contrôle en échec — vérifier les erreurs ci-dessous et le rapport.**"
+            fi
+            echo
+            if [ -f "$RUNNER_TEMP/veille-apprentissages.md" ]; then
+              cat "$RUNNER_TEMP/veille-apprentissages.md"
+            else
+              echo "Le rapport n’a pas pu être créé. Vérifier la compilation et l’exécution du générateur."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Créer ou actualiser l’issue unique de suivi
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_TITLE: Veille éditoriale des apprentissages — lacunes et révisions
+        run: |
+          set -euo pipefail
+          rapport="$RUNNER_TEMP/veille-apprentissages-issue.md"
+          {
+            echo "<!-- Mise à jour automatique par .github/workflows/veille-apprentissages.yml -->"
+            echo
+            echo "Rapport généré le $(date -u +%F). [Consulter cette exécution]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)."
+            echo
+            if [ "${{ steps.verification.outcome }}" = "success" ]; then
+              echo "**Contrôle technique réussi.** Les lacunes listées sont des sujets de travail, pas un défaut de validation."
+            else
+              echo "**Le contrôle technique a échoué.** Corriger les erreurs de validation avant de traiter les évolutions éditoriales."
+            fi
+            echo
+            echo "---"
+            echo
+            if [ -f "$RUNNER_TEMP/veille-apprentissages.md" ]; then
+              cat "$RUNNER_TEMP/veille-apprentissages.md"
+            else
+              echo "Le rapport automatique est indisponible ; consulter le journal du workflow."
+            fi
+          } > "$rapport"
+
+          numero="$(gh issue list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state open \
+            --search 'in:title "Veille éditoriale des apprentissages"' \
+            --json number,title \
+            --limit 100 \
+            | python3 -c 'import json, os, sys; title=os.environ["ISSUE_TITLE"]; items=json.load(sys.stdin); print(next((item["number"] for item in items if item["title"] == title), ""))')"
+
+          if [ -n "$numero" ]; then
+            gh issue edit "$numero" --repo "$GITHUB_REPOSITORY" --body-file "$rapport"
+            echo "Issue de veille #$numero actualisée."
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$ISSUE_TITLE" --body-file "$rapport"
+          fi
+
+      - name: Échouer le workflow si la vérification a détecté un problème
+        if: steps.verification.outcome == 'failure'
+        run: exit 1

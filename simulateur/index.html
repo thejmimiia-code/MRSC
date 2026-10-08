@@ -5,6 +5,7 @@
   Moteur : https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple
   révision 8a4e5387 (2026-10-05), copiée le 2026-10-06.
   Source de la page : simulateur/interface.py, constante HTML_PAGE.
+  Navigation de retour vers le site : ajoutée par ce générateur.
 -->
 <html lang="fr">
 <head>
@@ -227,12 +228,445 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
 @media(max-width:640px){body{padding:10px}header.entete h1{font-size:1.15rem}
   .ruban-veille{position:static}.console-corps{grid-template-columns:1fr}
   .levier.compact{grid-template-columns:1fr 70px auto}}
+
+
+/* Intégration M.R.S.C : retour permanent et adaptations locales d’affichage. */
+:root {
+  --accent: #91b2e6;
+  --vert: #9bc77a;
+  --rouge: #ff9295;
+  --ambre: #f2c15f;
+  --violet: #b49bd8;
+  --rose: #e89ac8;
+}
+header.entete {
+  border-color: #344b79;
+  background: linear-gradient(135deg, #1d3268, #26375f);
+}
+header.entete .site-status-note {
+  margin: 0 0 .8rem;
+  padding: .5rem .8rem;
+  border: 1px solid #c88712;
+  border-radius: 9px;
+  background: #fff3d2;
+  color: #49320a;
+  font-size: .82rem;
+  font-weight: 730;
+  line-height: 1.4;
+}
+html.contraste-renforce header.entete .site-status-note {
+  border-color: var(--ambre);
+  background: var(--panel);
+  color: var(--texte);
+}
+button.primaire {
+  border-color: #456d29;
+  background: linear-gradient(135deg, #1d3268, #2958a2);
+  color: #fff;
+}
+.site-return-bar {
+  position: sticky;
+  z-index: 110;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+  min-height: 54px;
+  margin: -18px -18px 12px;
+  padding: 6px 18px;
+  border-bottom: 2px solid var(--ambre);
+  background: rgba(29, 50, 104, .98);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .24);
+  backdrop-filter: blur(12px);
+}
+.site-return-bar .site-journey-navigation {
+  position: static;
+  display: flex;
+  flex: 1 1 100%;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: .25rem .7rem;
+  min-height: 0;
+  margin: 0;
+  padding: .15rem 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.site-return-bar .site-journey-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+.site-return-bar .site-journey-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem;
+  min-width: 44px;
+  min-height: 44px;
+  padding: .4rem .65rem;
+  border: 1px solid rgba(255,255,255,.38);
+  border-radius: 9px;
+  background: #1d3268;
+  color: #fff;
+  font: inherit;
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.25;
+  cursor: pointer;
+}
+.site-return-bar .site-journey-button:hover:not(:disabled) {
+  border-color: var(--ambre);
+  background: #26375f;
+}
+.site-return-bar .site-journey-button[data-journey-action="accueil"] {
+  border-color: var(--ambre);
+  box-shadow: inset 0 -2px 0 var(--ambre);
+}
+.site-return-bar .site-journey-button:disabled {
+  border-color: #526384;
+  background: #17274d;
+  color: #d2d9e5;
+  cursor: not-allowed;
+}
+.site-return-bar .site-journey-button[data-journey-action="accueil"]:disabled { box-shadow: none; }
+.site-return-bar .site-journey-symbol { font-size: 1rem; }
+.site-return-bar .site-journey-status {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  color: var(--texte-dim);
+  font-size: .72rem;
+  line-height: 1.35;
+}
+.site-return-bar a {
+  display: inline-flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: .55rem;
+  min-height: 44px;
+  max-width: 100%;
+  padding: .45rem .8rem;
+  border: 1px solid rgba(255,255,255,.38);
+  border-radius: 9px;
+  background: #1d3268;
+  color: #fff;
+  font-size: .84rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.site-return-bar a:hover {
+  border-color: var(--ambre);
+  background: #26375f;
+  color: #fff;
+}
+.site-return-bar a:focus-visible,
+.site-return-bar .site-journey-button:focus-visible,
+.sim-display-button:focus-visible {
+  outline: 3px solid var(--ambre);
+  outline-offset: 3px;
+}
+.sim-skip-link {
+  position: absolute;
+  z-index: 1000;
+  top: .5rem;
+  left: .5rem;
+  transform: translateY(-180%);
+  padding: .65rem .9rem;
+  border: 2px solid var(--ambre);
+  border-radius: 8px;
+  background: #000;
+  color: #fff;
+  font-weight: 700;
+}
+.sim-skip-link:focus {
+  transform: translateY(0);
+}
+.site-return-arrow {
+  flex: 0 0 auto;
+  color: var(--ambre);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.sim-display-controls {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin-left: auto;
+}
+.sim-display-controls[hidden] {
+  display: none;
+}
+.sim-display-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: .4rem .65rem;
+  border: 1px solid rgba(255,255,255,.38);
+  border-radius: 9px;
+  background: #1d3268;
+  color: #fff;
+  font: inherit;
+  font-size: .78rem;
+  font-weight: 700;
+  line-height: 1.25;
+  cursor: pointer;
+}
+.sim-display-button:hover:not(:disabled) {
+  border-color: var(--ambre);
+  background: #26375f;
+}
+.sim-display-button:disabled {
+  border-color: #526384;
+  background: #17274d;
+  color: #d2d9e5;
+  cursor: not-allowed;
+}
+.sim-display-level {
+  min-width: 3.8rem;
+  color: var(--texte);
+  font-size: .8rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  text-align: center;
+}
+.mrsc-scroll-hint {
+  margin: 0 0 6px;
+  color: var(--texte-dim);
+  font-size: .78rem;
+  line-height: 1.5;
+}
+.mrsc-scroll-region:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.infobulle {
+  max-width: min(352px, calc(100vw - 16px));
+  max-height: min(60vh, 32rem);
+  overflow: auto;
+  overflow-wrap: anywhere;
+}
+html.texte-agrandi { font-size: 125%; }
+html.texte-tres-agrandi { font-size: 150%; }
+html.espacement-renforce body { line-height: 1.8; }
+html.espacement-renforce :is(h1, h2, h3, p, li, label, button, th, td, .aide, .nom, .desc, .libelle, .valeur, .ref, .pastille, .console-verdict, .console-titre) {
+  line-height: 1.65;
+  letter-spacing: .12em;
+  word-spacing: .16em;
+  overflow-wrap: anywhere;
+}
+html.espacement-renforce th,
+html.espacement-renforce td { white-space: normal; }
+html.espacement-renforce p { margin-block-end: 2em; }
+html.espacement-renforce :is(.pastille, .ruban-titre, .ruban-pop, .console-verdict, .levier .valeur, .bulle-bouton) {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html.contraste-renforce {
+  --bg: #000;
+  --panel: #070707;
+  --panel-2: #121212;
+  --border: #c8d4e5;
+  --texte: #fff;
+  --texte-dim: #f1f4f8;
+  --accent: #7dd3fc;
+  --vert: #86efac;
+  --rouge: #fca5a5;
+  --ambre: #fde68a;
+}
+html.contraste-renforce a { text-decoration: underline; text-underline-offset: .18em; }
+html.contraste-renforce :focus-visible { outline-width: 4px; }
+/* Le texte secondaire ne descend pas sous 12 px à la taille de base. */
+.metric .libelle,
+.infobulle,
+.levier .desc,
+.levier .source,
+.levier .bulle-bouton,
+.bulle-levier,
+.bulle-levier .bulle-titre,
+.pied,
+.provenance,
+.ruban-veille .ruban-titre,
+.ruban-strate,
+.ruban-pop,
+.ruban-veille button,
+.levier.compact .nom,
+.levier.compact .valeur,
+.puce-effect,
+.message-seuil .etiquette,
+.message-seuil .source,
+.graduations { font-size: .75rem; }
+/* Le ruban de veille reste visible sous la barre de retour quand elle tient sur une ligne. */
+.conteneur .ruban-veille { top: 54px; }
+@media (max-width: 640px) {
+  .site-return-bar {
+    justify-content: flex-start;
+    margin: -10px -10px 10px;
+    padding-inline: 10px;
+  }
+  .sim-display-controls {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+  .ruban-veille { top: 0; }
+  .ruban-veille .console-verdict {
+    flex: 1 1 100%;
+    max-width: 100%;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+  .ruban-pop { white-space: normal; }
+  .ruban-veille .ruban-actions { width: 100%; margin-left: 0; }
+  .ruban-veille button { min-height: 44px; }
+  .grille.domaines,
+  .leviers-grille,
+  .leviers-grille.compacte,
+  .console-corps { grid-template-columns: minmax(0, 1fr); }
+  .barre-leviers .recherche { flex: 1 1 100%; min-width: 0; min-height: 44px; }
+  .barre-leviers label { min-height: 44px; }
+  .levier.compact {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 10px;
+  }
+  .levier.compact > .nom { grid-column: 1; grid-row: 1; min-width: 0; overflow-wrap: anywhere; }
+  .levier.compact > input[type=range] { grid-column: 1 / -1; grid-row: 2; min-height: 44px; }
+  .levier.compact > .valeur { grid-column: 2; grid-row: 1; }
+  .levier.compact > .bascule { grid-column: 1; grid-row: 2; min-height: 44px; }
+  .levier.compact > .bulle-bouton { grid-column: 1 / -1; justify-self: start; min-height: 44px; }
+  .levier.compact > .puces,
+  .levier.compact > .bulle-levier { grid-column: 1 / -1; }
+  .strate { align-items: flex-start; flex-direction: column; gap: .3rem; }
+  .strate .valeurs { gap: 8px; }
+  .ligne-marge { align-items: flex-start; flex-direction: column; }
+  .ligne-marge .droite { white-space: normal; text-align: left; }
+  .delta-mesure { flex-wrap: wrap; }
+  .domaine .tete { align-items: flex-start; }
+  .domaine .indic { min-width: 0; overflow-wrap: anywhere; }
+  button { min-height: 44px; }
+}
+@media (max-width: 380px) {
+  header.entete { padding: 14px; }
+  section.bloc { padding: 12px; }
+  .pastille { white-space: normal; }
+  .ruban-strates { flex-wrap: wrap; }
+}
+@media (any-pointer: coarse) {
+  button,
+  .site-return-bar a,
+  .sim-display-button,
+  .levier .bulle-bouton,
+  .levier input[type=range] { min-height: 44px; }
+  .bascule input { width: 24px; height: 24px; }
+}
+@media (orientation: landscape) and (max-height: 520px) {
+  .ruban-veille { position: static; }
+}
+@media (prefers-contrast: more) {
+  :root {
+    --border: #aebbd0;
+    --texte-dim: #dbe6f5;
+    --accent: #7dd3fc;
+  }
+  a { text-decoration: underline; text-underline-offset: .18em; }
+  button:focus-visible, a:focus-visible { outline-width: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .site-return-bar { background: #1d3268; backdrop-filter: none; }
+}
+@media (forced-colors: active) {
+  :root {
+    color-scheme: light dark;
+    --bg: Canvas;
+    --panel: Canvas;
+    --panel-2: Canvas;
+    --border: CanvasText;
+    --texte: CanvasText;
+    --texte-dim: CanvasText;
+    --accent: LinkText;
+    --vert: CanvasText;
+    --rouge: CanvasText;
+    --ambre: CanvasText;
+  }
+  html.contraste-renforce {
+    --bg: Canvas;
+    --panel: Canvas;
+    --panel-2: Canvas;
+    --border: CanvasText;
+    --texte: CanvasText;
+    --texte-dim: CanvasText;
+    --accent: LinkText;
+    --vert: CanvasText;
+    --rouge: CanvasText;
+    --ambre: CanvasText;
+  }
+  :focus-visible { outline-color: Highlight !important; }
+  body, header.entete, section.bloc, .carte, .domaine, .famille,
+  .ruban-veille, .site-return-bar, .infobulle {
+    background: Canvas !important;
+    color: CanvasText !important;
+    border-color: CanvasText !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+  header.entete .site-status-note {
+    border-color: CanvasText !important;
+    background: Canvas !important;
+    color: CanvasText !important;
+  }
+  a { color: LinkText !important; }
+  button, .site-return-bar a, .site-return-bar .site-journey-button, .sim-display-button {
+    border: 1px solid ButtonText !important;
+    background: ButtonFace !important;
+    color: ButtonText !important;
+    box-shadow: none !important;
+  }
+  * { text-shadow: none !important; }
+}
 </style>
 </head>
 <body>
-<div class="conteneur">
+<a class="sim-skip-link" href="#contenu-principal">Aller au simulateur</a>
+<nav id="mrsc-retour-site" class="site-return-bar" aria-label="Navigation de retour, vie privée et réglages d’affichage">
+  <a href="../index.html" data-site-home><span class="site-return-arrow" aria-hidden="true">←</span>Retour au site M.R.S.C</a>
+  <a href="../confidentialite.html">Vie privée et données</a>
+  <div id="mrsc-display-controls" class="sim-display-controls" role="group" aria-label="Réglages d’affichage du simulateur" hidden>
+    <button class="sim-display-button" type="button" data-sim-text-decrease aria-label="Réduire la taille du texte">A−</button>
+    <span class="sim-display-level" data-sim-text-level role="status" aria-live="polite" aria-atomic="true">100 %</span>
+    <button class="sim-display-button" type="button" data-sim-text-increase aria-label="Agrandir la taille du texte">A+</button>
+    <button class="sim-display-button" type="button" data-sim-contrast aria-pressed="false">Contraste +</button>
+    <button class="sim-display-button" type="button" data-sim-spacing aria-pressed="false">Interligne +</button>
+  </div>
+</nav>
+
+<main class="conteneur" id="contenu-principal">
 
   <header class="entete">
+    <p class="site-status-note" role="note">Version de recherche et développement (R&amp;D) — le site est en cours de développement.</p>
     <h1>Simulateur Macro-Politique — Démocratie et politique, du peuple, pour le peuple, par le peuple</h1>
     <p>Choisissez vos politiques : le modèle à 5 échelons propage les effets, domaine par domaine, avec les données publiques réelles du jour.</p>
     <div class="barre-contexte">
@@ -325,7 +759,8 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
 
   <section class="bloc">
     <h2>Résultats année par année <span class="aide">tableau détaillé des 5 échelons</span></h2>
-    <div class="defilable"><table id="results-table"></table></div>
+    <p class="mrsc-scroll-hint" id="mrsc-hint-resultats">Sur petit écran ou avec un fort zoom, faites défiler ce tableau horizontalement pour lire toutes ses colonnes.</p>
+    <div class="defilable mrsc-scroll-region" role="region" tabindex="0" aria-label="Tableau des résultats année par année" aria-describedby="mrsc-hint-resultats"><table id="results-table"></table></div>
   </section>
 
   <section class="bloc">
@@ -340,7 +775,8 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
 
   <section class="bloc">
     <h2>Matrice croisée levier × domaine <span class="aide">effet marginal de chaque levier actif, calculé par le modèle (différences finies)</span></h2>
-    <div class="defilable"><table class="matrice" id="matrice-impacts"></table></div>
+    <p class="mrsc-scroll-hint" id="mrsc-hint-matrice">Sur petit écran ou avec un fort zoom, faites défiler la matrice horizontalement pour voir les colonnes de domaines.</p>
+    <div class="defilable mrsc-scroll-region" role="region" tabindex="0" aria-label="Matrice croisée des impacts par levier et domaine" aria-describedby="mrsc-hint-matrice"><table class="matrice" id="matrice-impacts"></table></div>
   </section>
 
   <section class="bloc">
@@ -356,7 +792,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
   <p class="pied">
     Projet citoyen open-source — « gouvernement du peuple, par le peuple et pour le peuple »
     (Constitution du 4 octobre 1958, article 2). Les chiffres publics sont cités avec leur source ;
-    les coefficients d'impact sont documentés dans chaque formule et modifiables.
+    les coefficients d'impact sont documentés dans chaque formule</main>difiables.
   </p>
 </div>
 
@@ -1540,5 +1976,95 @@ function telecharger(contenu, nom, type){
   activerExports();
 })();
 </script>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const controls = document.getElementById("mrsc-display-controls");
+  const decrease = document.querySelector("[data-sim-text-decrease]");
+  const increase = document.querySelector("[data-sim-text-increase]");
+  const levelOutput = document.querySelector("[data-sim-text-level]");
+  const contrastButton = document.querySelector("[data-sim-contrast]");
+  const spacingButton = document.querySelector("[data-sim-spacing]");
+  const keys = {
+    text: "mrsc-texte-niveau",
+    contrast: "mrsc-contraste-renforce",
+    spacing: "mrsc-espacement-renforce",
+  };
+  let level = 0;
+  let contrast = false;
+  let spacing = false;
+
+  const read = (key) => {
+    try { return window.localStorage.getItem(key); }
+    catch (error) { return null; }
+  };
+  const save = (key, value) => {
+    try { window.localStorage.setItem(key, value); }
+    catch (error) { /* Le choix reste actif pour la visite courante. */ }
+  };
+  const applyLevel = (value) => {
+    level = Math.max(0, Math.min(2, value));
+    root.classList.toggle("texte-agrandi", level === 1);
+    root.classList.toggle("texte-tres-agrandi", level === 2);
+    if (levelOutput) levelOutput.textContent = `${[100, 125, 150][level]} %`;
+    if (decrease) decrease.disabled = level === 0;
+    if (increase) increase.disabled = level === 2;
+  };
+  const applyContrast = (value) => {
+    contrast = Boolean(value);
+    root.classList.toggle("contraste-renforce", contrast);
+    if (contrastButton) {
+      contrastButton.setAttribute("aria-pressed", String(contrast));
+      contrastButton.setAttribute("aria-label", contrast
+        ? "Désactiver le contraste renforcé" : "Activer le contraste renforcé");
+    }
+  };
+  const applySpacing = (value) => {
+    spacing = Boolean(value);
+    root.classList.toggle("espacement-renforce", spacing);
+    if (spacingButton) {
+      spacingButton.setAttribute("aria-pressed", String(spacing));
+      spacingButton.setAttribute("aria-label", spacing
+        ? "Désactiver l’espacement renforcé" : "Activer l’espacement renforcé");
+    }
+  };
+  const load = () => {
+    const savedLevel = read(keys.text);
+    const legacy = read("mrsc-texte-agrandi");
+    const parsed = savedLevel === null
+      ? (legacy === "oui" ? 1 : 0)
+      : Number.parseInt(savedLevel, 10);
+    applyLevel(Number.isFinite(parsed) ? parsed : 0);
+    applyContrast(read(keys.contrast) === "oui");
+    applySpacing(read(keys.spacing) === "oui");
+  };
+
+  load();
+  if (controls) controls.hidden = false;
+  decrease?.addEventListener("click", () => {
+    applyLevel(level - 1);
+    save(keys.text, String(level));
+  });
+  increase?.addEventListener("click", () => {
+    applyLevel(level + 1);
+    save(keys.text, String(level));
+  });
+  contrastButton?.addEventListener("click", () => {
+    applyContrast(!contrast);
+    save(keys.contrast, contrast ? "oui" : "non");
+  });
+  spacingButton?.addEventListener("click", () => {
+    applySpacing(!spacing);
+    save(keys.spacing, spacing ? "oui" : "non");
+  });
+  window.addEventListener("storage", (event) => {
+    if (event.key === null || Object.values(keys).includes(event.key)
+        || event.key === "mrsc-texte-agrandi") load();
+  });
+})();
+</script>
+
+<script src="../assets/js/navigation-parcours.js" defer></script>
 </body>
 </html>

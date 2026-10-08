@@ -3,31 +3,151 @@
     element.textContent = String(new Date().getFullYear());
   });
 
+  const root = document.documentElement;
+  const settings = document.querySelector("[data-display-settings]");
+  const textDecrease = document.querySelector("[data-text-decrease]");
+  const textIncrease = document.querySelector("[data-text-increase]");
+  const textLevelOutput = document.querySelector("[data-text-size-level]");
+  const contrastToggle = document.querySelector("[data-contrast-toggle]");
+  const spacingToggle = document.querySelector("[data-spacing-toggle]");
+  const keys = {
+    text: "mrsc-texte-niveau",
+    contrast: "mrsc-contraste-renforce",
+    spacing: "mrsc-espacement-renforce",
+  };
+  let textLevel = 0;
+  let contrastEnabled = false;
+  let spacingEnabled = false;
+
+  const readPreference = (key) => {
+    try {
+      return window.localStorage.getItem(key);
+    } catch (erreur) {
+      return null;
+    }
+  };
+
+  const savePreference = (key, value) => {
+    try {
+      window.localStorage.setItem(key, value);
+    } catch (erreur) {
+      // Les contrôles restent utilisables pendant la visite si le stockage est bloqué.
+    }
+  };
+
+  const applyTextLevel = (level) => {
+    textLevel = Math.max(0, Math.min(2, level));
+    root.classList.toggle("texte-agrandi", textLevel === 1);
+    root.classList.toggle("texte-tres-agrandi", textLevel === 2);
+    if (textLevelOutput) textLevelOutput.textContent = `${[100, 125, 150][textLevel]} %`;
+    if (textDecrease) textDecrease.disabled = textLevel === 0;
+    if (textIncrease) textIncrease.disabled = textLevel === 2;
+  };
+
+  const applyContrast = (enabled) => {
+    contrastEnabled = Boolean(enabled);
+    root.classList.toggle("contraste-renforce", contrastEnabled);
+    if (contrastToggle) {
+      contrastToggle.setAttribute("aria-pressed", String(contrastEnabled));
+      contrastToggle.setAttribute(
+        "aria-label",
+        contrastEnabled ? "Désactiver le contraste renforcé" : "Activer le contraste renforcé"
+      );
+    }
+  };
+
+  const applySpacing = (enabled) => {
+    spacingEnabled = Boolean(enabled);
+    root.classList.toggle("espacement-renforce", spacingEnabled);
+    if (spacingToggle) {
+      spacingToggle.setAttribute("aria-pressed", String(spacingEnabled));
+      spacingToggle.setAttribute(
+        "aria-label",
+        spacingEnabled ? "Désactiver l’espacement renforcé" : "Activer l’espacement renforcé"
+      );
+    }
+  };
+
+  const loadPreferences = () => {
+    const storedTextLevel = readPreference(keys.text);
+    if (storedTextLevel === null) {
+      // Migration du réglage binaire A+/A− précédemment proposé sur le site.
+      textLevel = readPreference("mrsc-texte-agrandi") === "oui" ? 1 : 0;
+    } else {
+      const parsedLevel = Number.parseInt(storedTextLevel, 10);
+      textLevel = Number.isFinite(parsedLevel) ? parsedLevel : 0;
+    }
+    applyTextLevel(textLevel);
+    applyContrast(readPreference(keys.contrast) === "oui");
+    applySpacing(readPreference(keys.spacing) === "oui");
+  };
+
+  loadPreferences();
+
+  if (settings) {
+    settings.hidden = false;
+    textDecrease?.addEventListener("click", () => {
+      applyTextLevel(textLevel - 1);
+      savePreference(keys.text, String(textLevel));
+    });
+    textIncrease?.addEventListener("click", () => {
+      applyTextLevel(textLevel + 1);
+      savePreference(keys.text, String(textLevel));
+    });
+    contrastToggle?.addEventListener("click", () => {
+      applyContrast(!contrastEnabled);
+      savePreference(keys.contrast, contrastEnabled ? "oui" : "non");
+    });
+    spacingToggle?.addEventListener("click", () => {
+      applySpacing(!spacingEnabled);
+      savePreference(keys.spacing, spacingEnabled ? "oui" : "non");
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!settings.contains(event.target)) settings.open = false;
+    });
+  }
+
+  // L’iframe locale et les pages M.R.S.C partagent ces réglages sur le même domaine.
+  window.addEventListener("storage", (event) => {
+    if (event.key === null || Object.values(keys).includes(event.key) || event.key === "mrsc-texte-agrandi") {
+      loadPreferences();
+    }
+  });
+
   const toggle = document.querySelector("[data-menu-toggle]");
   const navigation = document.querySelector("[data-primary-navigation]");
 
-  if (!toggle || !navigation) return;
+  if (toggle && navigation) {
+    root.classList.add("has-js");
 
-  document.documentElement.classList.add("has-js");
+    const closeMenu = () => {
+      toggle.setAttribute("aria-expanded", "false");
+      navigation.classList.remove("is-open");
+    };
 
-  const closeMenu = () => {
-    toggle.setAttribute("aria-expanded", "false");
-    navigation.classList.remove("is-open");
-  };
+    toggle.addEventListener("click", () => {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!isOpen));
+      navigation.classList.toggle("is-open", !isOpen);
+    });
 
-  toggle.addEventListener("click", () => {
-    const isOpen = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!isOpen));
-    navigation.classList.toggle("is-open", !isOpen);
-  });
+    navigation.addEventListener("click", (event) => {
+      if (event.target.closest("a")) closeMenu();
+    });
 
-  navigation.addEventListener("click", (event) => {
-    if (event.target.closest("a")) closeMenu();
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeMenu();
-  });
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      const menuWasOpen = navigation.classList.contains("is-open");
+      closeMenu();
+      if (menuWasOpen) toggle.focus();
+      if (settings?.open) {
+        const focusInsideSettings = settings.contains(document.activeElement);
+        settings.open = false;
+        if (focusInsideSettings) settings.querySelector("summary")?.focus();
+      }
+    });
+  }
 })();
 
 /* Simulateur macro-politique : quelle source afficher ?
@@ -35,7 +155,7 @@
    Le simulateur se développe en continu dans son propre dépôt. Trois sources
    sont possibles, par ordre de préférence :
 
-   1. la *source distante* (version en développement), si le site est servi par
+   1. la *source distante* hébergée sur Render, si le site est servi par
       un hébergeur qui exécute du Python : `/api/verifier-source` l'a vérifiée
       côté serveur (page + API de calcul) et dit si elle est utilisable ;
    2. la *copie embarquée* du moteur dans ce dépôt, si sa propre API répond ;
@@ -76,13 +196,13 @@
     };
 
     const choisir = async () => {
-      // 1. La version en développement est-elle utilisable (vérifiée par le serveur) ?
+      // 1. La version Render est-elle utilisable (vérifiée par le serveur) ?
       if (sourceDistante) {
         try {
           const reponse = await repond("/api/verifier-source", "GET");
           const etat = await reponse.json();
           if (etat && etat.disponible === true) {
-            afficher(sourceDistante, "Source affichée : version en développement du simulateur.");
+            afficher(sourceDistante, "Source affichée : simulateur hébergé sur Render.");
             return;
           }
         } catch (erreur) {
@@ -130,4 +250,79 @@
       })
       .catch(() => undefined);
   }
+})();
+
+/* La carte Google est chargée seulement après une action explicite.
+   Sans clic, aucun iframe ni requête vers le fournisseur de la carte n'est créé. */
+(() => {
+  document.querySelectorAll("[data-map-load]").forEach((button) => {
+    const figure = button.closest("figure");
+    const iframe = figure?.querySelector("iframe[data-map-src]");
+    const status = figure?.querySelector("[data-map-status]");
+    if (!iframe) return;
+
+    button.addEventListener("click", () => {
+      if (!iframe.src) iframe.src = iframe.dataset.mapSrc;
+      iframe.hidden = false;
+      button.hidden = true;
+      if (status) {
+        status.textContent = "La carte Google est chargée. Le fournisseur a été contacté et peut recevoir des données techniques de connexion. Pour ne pas conserver la carte dans cette page, actualisez-la.";
+      }
+    }, { once: true });
+  });
+})();
+
+/* Partage facultatif de l’adresse publique, sans compte social imposé ni suivi. */
+(() => {
+  const button = document.querySelector("[data-share-site]");
+  if (!button) return;
+
+  const status = document.querySelector("[data-share-status]");
+  const fallback = document.querySelector("[data-share-fallback]");
+  const address = document.querySelector("[data-share-url]");
+  const publicUrl = "https://thejmimiia-code.github.io/MRSC/";
+  if (address) address.value = publicUrl;
+  button.hidden = false;
+
+  const announce = (message) => {
+    if (!status) return;
+    status.hidden = false;
+    status.textContent = message;
+  };
+
+  const selectAddress = () => {
+    if (fallback) fallback.hidden = false;
+    if (address) {
+      address.focus();
+      address.select();
+    }
+    announce("L’adresse publique est sélectionnée. Copiez-la avec le clavier ou les commandes de votre appareil.");
+  };
+
+  button.addEventListener("click", async () => {
+    if (typeof navigator.share === "function") {
+      try {
+        await navigator.share({
+          title: "M.R.S.C — La force citoyenne",
+          text: "Découvrir les ressources, les réflexions et les possibilités de participation du M.R.S.C.",
+          url: publicUrl,
+        });
+        announce("Le menu de partage de votre appareil a été ouvert.");
+        return;
+      } catch (error) {
+        if (error && error.name === "AbortError") {
+          announce("Le partage a été annulé.");
+          return;
+        }
+      }
+    }
+
+    try {
+      if (!window.isSecureContext || !navigator.clipboard?.writeText) throw new Error("Copie indisponible");
+      await navigator.clipboard.writeText(publicUrl);
+      announce("L’adresse publique du site a été copiée.");
+    } catch (error) {
+      selectAddress();
+    }
+  });
 })();

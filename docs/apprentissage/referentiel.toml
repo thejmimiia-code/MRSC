@@ -1,0 +1,665 @@
+# Cartographie éditoriale vivante : ce qui est publié et ce qui reste à couvrir.
+# Les statuts « actif » et « partiel » n'impliquent ni exhaustivité ni certification.
+
+[[domaine]]
+id = "langue-communication"
+titre = "Français, lecture, écriture et communication"
+intention = "Lire, comprendre, écrire et échanger dans des situations variées."
+
+[[domaine.sujet]]
+id = "comprendre-consignes"
+titre = "Lire une consigne et repérer une action"
+statut = "actif"
+fiches = ["fr-lire-consigne"]
+
+[[domaine.sujet]]
+id = "messages-courts"
+titre = "Écrire un message bref et clair"
+statut = "actif"
+fiches = ["fr-ecrire-message"]
+
+[[domaine.sujet]]
+id = "lire-textes-longs"
+titre = "Lire des textes plus longs, des formulaires et des documents"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "vocabulaire-grammaire"
+titre = "Vocabulaire, phrases, grammaire et orthographe en contexte"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "expression-orale"
+titre = "Prendre la parole, expliquer et dialoguer"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "argumentation"
+titre = "Résumer, argumenter et adapter le ton au destinataire"
+statut = "a-creer"
+fiches = []
+
+[[domaine]]
+id = "langues-etrangeres"
+titre = "Langues étrangères et interculturel"
+intention = "Commencer par des expressions réutilisables, puis développer l'écoute, la lecture et la compréhension des contextes culturels."
+
+[[domaine.sujet]]
+id = "anglais-directions"
+titre = "Demander une direction en anglais"
+statut = "partiel"
+fiches = ["langue-anglais-direction"]
+
+[[domaine.sujet]]
+id = "anglais-vie-quotidienne"
+titre = "Comprendre et échanger dans d’autres situations quotidiennes"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "autres-langues"
+titre = "Autres langues, langues régionales et français langue seconde"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "ecoute-prononciation"
+titre = "Écoute, prononciation et ressources audio accessibles"
+statut = "a-creer"
+fiches = []
+
+[[domaine]]
+id = "mathematiques"
+titre = "Mathématiques, mesures et données"
+intention = "Développer les nombres, le calcul, la géométrie, les mesures, les estimations, les proportions et la lecture de données, en gardant visibles l’incertitude et les lacunes."
+
+[[domaine.sujet]]
+id = "temps-planning"
+titre = "Lire des horaires et calculer une durée"
+statut = "actif"
+fiches = ["maths-lire-planning"]
+
+[[domaine.sujet]]
+id = "addition-budget"
+titre = "Additionner des montants et calculer un reste"
+statut = "actif"
+fiches = ["maths-budget"]
+
+[[domaine.sujet]]
+id = "multiplication-division"
+titre = "Multiplier, diviser et partager"
+statut = "actif"
+fiches = ["maths-partager"]
+
+[[domaine.sujet]]
+id = "fractions"
+titre = "Fractions et proportions simples"
+statut = "actif"
+fiches = ["maths-fractions-recette"]
+
+[[domaine.sujet]]
+id = "pourcentages"
+titre = "Pourcentages et remises"
+statut = "actif"
+fiches = ["maths-pourcentage"]
+
+[[domaine.sujet]]
+id = "tableaux-graphiques"
+titre = "Tableaux, graphiques et interprétation des données"
+statut = "partiel"
+fiches = ["maths-lire-graphique", "maths-moyenne"]
+
+[[domaine.sujet]]
+id = "geometrie-aire"
+titre = "Géométrie de base et mesure d’une surface"
+statut = "partiel"
+fiches = ["maths-surface"]
+
+[[domaine.sujet]]
+id = "mesures-conversions"
+titre = "Mesures, unités et conversions dans plusieurs domaines"
+statut = "partiel"
+fiches = ["maths-convertir-unites"]
+
+[[domaine.sujet]]
+id = "estimations-ordres-grandeur"
+titre = "Estimation, arrondis et vérification d’un ordre de grandeur"
+statut = "partiel"
+fiches = ["maths-estimer-calcul"]
+
+[[domaine.sujet]]
+id = "probabilites-incertitude"
+titre = "Probabilités, hasard et incertitude"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "algebre-equations"
+titre = "Algèbre, équations et raisonnement plus avancé"
+statut = "a-creer"
+fiches = []
+
+[[domaine]]
+id = "economie-finances"
+titre = "Budget, économie, consommation et travail"
+intention = "Comprendre les prix et les documents financiers usuels, sans donner de conseil personnalisé ni d’offre financière."
+
+[[domaine.sujet]]
+id = "budget-prix"
+titre = "Budget simple, addition et comparaison de prix"
+statut = "partiel"
+fiches = ["maths-budget", "maths-pourcentage"]
+
+[[domaine.sujet]]
+id = "factures-abonnements"
+titre = "Lire une facture, un abonnement et une échéance"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "banque-credit-interets"
+titre = "Compte bancaire, frais, crédit et intérêts"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "revenus-salaire-impots"
+titre = "Revenus, fiche de paie, prélèvements et impôts"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "consommation-contrats"
+titre = "Achats, contrats, garanties et recours du consommateur"
+statut = "a-creer"
+fiches = []
+
+[[domaine]]
+id = "sciences-techniques-environnement"
+titre = "Sciences, technologie et environnement"
+intention = "Observer, mesurer et expliquer le monde naturel et technique ; comprendre l’électricité et l’électronique sans inciter aux interventions à risque."
+
+[[domaine.sujet]]
+id = "demarche-scientifique"
+titre = "Observation, hypothèse et comparaison équitable"
+statut = "actif"
+fiches = ["sciences-demarche"]
+
+[[domaine.sujet]]
+id = "energie-electricite"
+titre = "Puissance, énergie et kilowattheure"
+statut = "partiel"
+fiches = ["tech-kwh"]
+
+[[domaine.sujet]]
+id = "circuits-electriques"
+titre = "Circuits électriques, composants et schémas simples"
+statut = "partiel"
+fiches = ["tech-circuit-ouvert-ferme"]
+
+[[domaine.sujet]]
+id = "systemes-electroniques"
+titre = "Systèmes électroniques, capteurs, signaux et actionneurs"
+statut = "partiel"
+fiches = ["tech-electronique-capteur"]
+
+[[domaine.sujet]]
+id = "securite-electricite"
+titre = "Sécurité électrique, protections et limites des interventions"
+statut = "revue-experte"
+fiches = []
+
+[[domaine.sujet]]
+id = "corps-biologie"
+titre = "Corps humain, vivant et biologie"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "chimie-matieres"
+titre = "Matière, mélanges et transformations chimiques"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "physique-technique"
+titre = "Forces, mouvement, chaleur, lumière, son et objets techniques"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "climat-ecologie"
+titre = "Climat, eau, déchets, biodiversité et ressources"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "securite-sciences"
+titre = "Risques, consignes et usages sûrs des outils et produits"
+statut = "a-creer"
+fiches = []
+
+[[domaine]]
+id = "geographie"
+titre = "Géographie, territoire et espace"
+intention = "Lire des cartes et comprendre comment les lieux, les distances et les activités se relient."
+
+[[domaine.sujet]]
+id = "echelle-carte"
+titre = "Lire une échelle et une distance sur une carte"
+statut = "partiel"
+fiches = ["geo-echelle-carte"]
+
+[[domaine.sujet]]
+id = "orientation-itineraires"
+titre = "S’orienter, lire un itinéraire et anticiper l’accessibilité"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "territoires-populations"
+titre = "Territoires, paysages, populations et mobilités"
+statut = "a-creer"
+fiches = []
+
+[[domaine]]
+id = "histoire-memoire"
+titre = "Histoire, chronologie et mémoire"
+intention = "Situer des faits dans le temps, lire des sources et comprendre qu’un récit dépend de son contexte."
+
+[[domaine.sujet]]
+id = "chronologie-reperes"
+titre = "Lire une frise, des dates et des périodes historiques"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "sources-temoignages"
+titre = "Comparer des sources, témoignages et points de vue"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "histoire-monde-france"
+titre = "Repères d’histoire de France et du monde"
+statut = "a-creer"
+fiches = []
+
+[[domaine]]
+id = "citoyennete-medias"
+titre = "Citoyenneté, médias et information"
+intention = "Vérifier les affirmations, comprendre les institutions et participer sans confondre fait, opinion et décision."
+
+[[domaine.sujet]]
+id = "verification-information"
+titre = "Vérifier l’auteur, la date, la source et l’affirmation"
+statut = "partiel"
+fiches = ["civ-verifier-information"]
+
+[[domaine.sujet]]
+id = "sources-publiques"
+titre = "Choisir une source publique selon la question et vérifier sa portée"
+statut = "partiel"
+fiches = ["civ-choisir-source-publique"]
+
+[[domaine.sujet]]
+id = "lecture-image-medias"
+titre = "Distinguer image, légende, montage et interprétation"
+statut = "partiel"
+fiches = ["arts-lire-image"]
+
+[[domaine.sujet]]
+id = "institutions-droits"
+titre = "Institutions françaises et européennes, droits et responsabilités"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "elections-participation"
+titre = "Élections, décisions publiques et participation citoyenne"
+statut = "a-creer"
+fiches = []
+
+[[domaine]]
+id = "demarches-droits-travail"
+titre = "Démarches, droits, sécurité et vie professionnelle"
+intention = "Lire un document et agir en sécurité ; les règles de droit et les dispositifs doivent être revus par des sources officielles."
+
+[[domaine.sujet]]
+id = "lire-demarche"
+titre = "Repérer l’émetteur, l’action et l’échéance d’un document"
+statut = "partiel"
+fiches = ["civ-lire-document"]
+
+[[domaine.sujet]]
+id = "services-publics"
+titre = "Trouver un service public et utiliser un formulaire numérique"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "droits-travail"
+titre = "Droits au travail, contrats, sécurité et interlocuteurs"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "organisation-travail"
+titre = "Planning, consignes, coopération et compétences de travail"
+statut = "partiel"
+fiches = ["maths-lire-planning", "fr-lire-consigne", "fr-ecrire-message"]
+
+[[domaine]]
+id = "numerique-ia"
+titre = "Numérique, données, cybersécurité et intelligence artificielle"
+intention = "Utiliser le numérique, protéger les données, comprendre l’IA et réagir aux fraudes ; les fondements de l’informatique et de la programmation disposent d’un domaine dédié."
+
+[[domaine.sujet]]
+id = "hameconnage"
+titre = "Reconnaître un message suspect et vérifier par un autre canal"
+statut = "partiel"
+fiches = ["numerique-hameconnage"]
+
+[[domaine.sujet]]
+id = "donnees-vie-privee"
+titre = "Données personnelles, vie privée et paramètres de partage"
+statut = "partiel"
+fiches = ["numerique-proteger-donnees"]
+
+[[domaine.sujet]]
+id = "ia-verification"
+titre = "Vérifier les réponses d’une IA et protéger ses informations"
+statut = "partiel"
+fiches = ["numerique-verifier-ia"]
+
+[[domaine.sujet]]
+id = "ia-usages-contextes"
+titre = "Comparer les usages de l’IA : génération, recommandation, classement, prévision et action"
+statut = "partiel"
+fiches = ["numerique-ia-usages"]
+
+[[domaine.sujet]]
+id = "media-synthetique-verifier"
+titre = "Vérifier l’origine, le contexte et la demande d’une image, d’une voix ou d’une vidéo"
+statut = "partiel"
+fiches = ["numerique-verifier-media"]
+
+[[domaine.sujet]]
+id = "usurpation-demande-urgente"
+titre = "Contrôler une identité usurpée et une sollicitation urgente par un canal indépendant"
+statut = "partiel"
+fiches = ["numerique-verifier-demande"]
+
+[[domaine.sujet]]
+id = "typologie-fraudes-numeriques"
+titre = "Hameçonnage, faux support ou conseiller, urgences, faux achats, emplois et placements"
+statut = "partiel"
+fiches = ["numerique-hameconnage", "numerique-verifier-demande"]
+
+[[domaine.sujet]]
+id = "reagir-fraude-numerique"
+titre = "Protéger ses comptes, conserver les preuves, contacter les services et signaler"
+statut = "partiel"
+fiches = ["numerique-reagir-fraude"]
+
+[[domaine.sujet]]
+id = "outils-fichiers-accessibilite"
+titre = "Fichiers, logiciels, comptes, accessibilité et sauvegardes"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "recherche-communication-numerique"
+titre = "Rechercher, communiquer et résoudre un problème numérique"
+statut = "a-creer"
+fiches = []
+
+[[domaine]]
+id = "informatique-programmation"
+titre = "Informatique, algorithmique et langages de programmation"
+intention = "Comprendre les fonctions d’un système informatique, représenter des informations, raisonner en algorithmes, lire et écrire des programmes et choisir des outils sans installer quoi que ce soit pour apprendre les bases."
+
+[[domaine.sujet]]
+id = "architecture-informatique"
+titre = "Matériel, logiciel, mémoire, stockage et rôles d’un ordinateur"
+statut = "partiel"
+fiches = ["info-ordinateur-fonctions"]
+
+[[domaine.sujet]]
+id = "algorithmique-bases"
+titre = "Décomposer un problème, suivre des étapes et répéter une action"
+statut = "partiel"
+fiches = ["prog-comparer-langages"]
+
+[[domaine.sujet]]
+id = "langages-programmation"
+titre = "Langages de programmation : syntaxe, usages et limites"
+statut = "partiel"
+fiches = ["prog-comparer-langages"]
+
+[[domaine.sujet]]
+id = "representation-donnees"
+titre = "Bits, nombres, textes, images et formats de données"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "systemes-exploitation"
+titre = "Systèmes d’exploitation, fichiers, permissions et processus"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "reseaux-protocoles"
+titre = "Réseaux, Internet, adressage, noms de domaine et protocoles"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "bases-donnees-web"
+titre = "Bases de données, requêtes, Web et échanges de données"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "tests-debogage"
+titre = "Tester, déboguer, documenter et faire évoluer un programme"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "genie-logiciel-droits"
+titre = "Conception logicielle, travail collectif, licences et code ouvert"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "systemes-embarques"
+titre = "Microcontrôleurs, objets connectés et systèmes embarqués"
+statut = "a-creer"
+fiches = []
+
+[[domaine]]
+id = "arts-culture"
+titre = "Arts, musique, création et culture"
+intention = "Observer et pratiquer des langages artistiques en tenant compte des contextes et des possibilités d’expression."
+
+[[domaine.sujet]]
+id = "observer-image"
+titre = "Décrire une image avant de l’interpréter"
+statut = "partiel"
+fiches = ["arts-lire-image"]
+
+[[domaine.sujet]]
+id = "pulsation-rythme"
+titre = "Pulsation, rythme et tempo"
+statut = "partiel"
+fiches = ["arts-rythme-musique"]
+
+[[domaine.sujet]]
+id = "pratiques-artistiques"
+titre = "Pratiques de création : dessin, musique, théâtre, danse et médias"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "histoire-culture"
+titre = "Patrimoine, œuvres, cultures et histoire des arts"
+statut = "a-creer"
+fiches = []
+
+[[domaine]]
+id = "sante-securite-corps"
+titre = "Santé, alimentation, corps et sécurité"
+intention = "Développer des repères d’information sans fournir de diagnostic, de traitement médical ni de conseil personnalisé."
+
+[[domaine.sujet]]
+id = "lire-etiquette"
+titre = "Repérer quantité, ingrédients, allergènes et dates sur une étiquette"
+statut = "partiel"
+fiches = ["sante-lire-etiquette"]
+
+[[domaine.sujet]]
+id = "sources-sante"
+titre = "Trouver une source de santé fiable et demander de l’aide"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "premiers-secours"
+titre = "Premiers secours et conduites à tenir"
+statut = "revue-experte"
+fiches = []
+
+[[domaine.sujet]]
+id = "activite-corps-securite"
+titre = "Activité physique, repos, mobilité et sécurité"
+statut = "revue-experte"
+fiches = []
+
+[[domaine]]
+id = "methodes-communication"
+titre = "Apprendre à apprendre, autonomie et relations"
+intention = "Proposer plusieurs façons de s’engager, comprendre, s’exercer et exprimer ce qui a été compris."
+
+[[domaine.sujet]]
+id = "apprendre-situation"
+titre = "Partir d’une situation connue, essayer et réutiliser"
+statut = "partiel"
+fiches = ["apprendre-methode"]
+
+[[domaine.sujet]]
+id = "choisir-formats"
+titre = "Choisir une forme de lecture, écoute, manipulation ou expression"
+statut = "partiel"
+fiches = ["apprendre-methode"]
+
+[[domaine.sujet]]
+id = "oral-cooperation"
+titre = "Écoute, coopération, désaccord et résolution de problème"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "autonomie-organisation"
+titre = "Planifier une tâche et demander de l’aide au bon moment"
+statut = "partiel"
+fiches = ["apprendre-methode", "maths-lire-planning"]
+
+[[domaine]]
+id = "etudes-superieures-recherche"
+titre = "Études supérieures, spécialités et recherche — post-bac au doctorat"
+intention = "Construire progressivement des passerelles des savoirs fondamentaux vers les méthodes, champs disciplinaires et spécialisations de l’enseignement supérieur et de la recherche. La carte s’appuie sur les 11 grands champs ISCED-F de l’UNESCO ; chaque ligne est une lacune de travail, pas un cours déjà disponible ni une liste exhaustive des spécialités."
+
+[[domaine.sujet]]
+id = "methodes-recherche-raisonnement"
+titre = "Question de recherche, hypothèses, modèles, preuves et limites"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "lire-publication-scientifique"
+titre = "Lire, résumer et examiner une publication scientifique sans la prendre pour une preuve définitive"
+statut = "partiel"
+fiches = ["recherche-lire-etude"]
+
+[[domaine.sujet]]
+id = "integrite-references-scientifiques"
+titre = "Intégrité de la recherche, citations, données, reproductibilité et science ouverte"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "methodes-universitaires"
+titre = "Méthodes de travail avancées : revue de littérature, écriture académique et présentation orale"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "iscdf-00-generique"
+titre = "ISCED-F 00 — programmes et qualifications génériques, interdisciplinarité et compétences transversales"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "iscdf-01-education"
+titre = "ISCED-F 01 — sciences de l’éducation, formation et recherche en pédagogie"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "iscdf-02-arts-humanites"
+titre = "ISCED-F 02 — arts, lettres, langues, philosophie et humanités"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "iscdf-03-sciences-sociales"
+titre = "ISCED-F 03 — sciences sociales, journalisme, information et communication"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "iscdf-04-gestion-droit"
+titre = "ISCED-F 04 — commerce, administration, gestion et droit"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "iscdf-05-sciences-naturelles"
+titre = "ISCED-F 05 — sciences naturelles, mathématiques et statistiques"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "iscdf-06-tic"
+titre = "ISCED-F 06 — technologies de l’information et de la communication"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "iscdf-07-ingenierie"
+titre = "ISCED-F 07 — ingénierie, industrie de transformation et construction"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "iscdf-08-agriculture"
+titre = "ISCED-F 08 — agriculture, foresterie, pêcheries et médecine vétérinaire"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "iscdf-09-sante-social"
+titre = "ISCED-F 09 — santé et protection sociale"
+statut = "a-creer"
+fiches = []
+
+[[domaine.sujet]]
+id = "iscdf-10-services"
+titre = "ISCED-F 10 — services, transport, tourisme, sécurité et services à la personne"
+statut = "a-creer"
+fiches = []

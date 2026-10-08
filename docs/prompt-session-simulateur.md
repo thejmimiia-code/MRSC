@@ -1,102 +1,54 @@
-# Prompt à coller dans la session du dépôt du simulateur
+# Consignes de maintenance du simulateur hébergé séparément
 
-Session à ouvrir sur `thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple`.
+Ce document s’adresse aux personnes qui travaillent dans le dépôt du simulateur :
+[`thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple`](https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple).
 
-**Le principe, en trois lignes.** Le simulateur est chez lui dans son dépôt : c'est là qu'il
-évolue. Son déploiement Vercel doit donc servir **le simulateur lui-même** (sa page *et* son
-API de calcul), et le site M.R.S.C s'y branche. Une seule source de vérité, aucune
-synchronisation à faire.
+## Adresse publique à utiliser
 
----
+L’adresse active communiquée pour le simulateur est :
+
+**<https://simulateur-macro-politique.onrender.com/>**
+
+Ne pas la remplacer par l’ancienne adresse Vercel du simulateur. Les mentions de Vercel dans le diagnostic `docs/diagnostic-404-vercel.md` sont historiques ; elles ne désignent pas l’hébergement actif de l’outil.
+
+Le site public M.R.S.C est <https://thejmimiia-code.github.io/MRSC/>. Depuis le simulateur, conserver un moyen visible de revenir au site M.R.S.C, y compris sur petit écran.
+
+## Contrat de fonctionnement
+
+1. `GET /` sert l’application interactive complète, et non une page de présentation.
+2. Les routes `/api/...` du moteur répondent à la même origine que la page. Celle-ci les appelle en chemins absolus : page et API doivent donc rester à la racine du même domaine.
+3. La page peut être intégrée dans un `<iframe>` du site M.R.S.C : ne pas envoyer d’en-tête `X-Frame-Options` ni de directive `Content-Security-Policy: frame-ancestors` qui en interdirait l’intégration.
+4. Préserver le retour visible vers le site M.R.S.C, l’usage au clavier, les commandes de parcours, l’adaptation aux petits écrans et les réglages de lisibilité/contraste.
+5. Distinguer les résultats du modèle des prévisions : expliquer les hypothèses et la provenance des données sans présenter les simulations comme des certitudes.
+
+Les routes connues comprennent `/api/catalogue`, `/api/contexte`, `/api/simuler`, `/api/bulles`, `/api/run`, `/api/scenarios`, `/api/export`, `/api/presets`, `/api/comparer`, `/api/bulle`, `/api/donnees` et `/api/proxy`. Vérifier le code du moteur pour repérer d’éventuelles routes plus récentes plutôt que de s’en tenir à cette liste.
+
+## Vérifications avant de déclarer un changement publié
+
+Depuis un réseau qui autorise les requêtes vers Render, vérifier au minimum :
+
+- que `GET https://simulateur-macro-politique.onrender.com/` retourne la vraie page interactive ;
+- que `/api/scenarios` et `/api/catalogue` retournent des réponses JSON valides ;
+- qu’une requête de simulation valide à `/api/simuler` produit un résultat ;
+- que l’application peut être affichée depuis la page `simulateur.html` du site M.R.S.C et que le lien de retour reste visible.
+
+Un service Render peut avoir besoin d’un démarrage à froid. Si le site M.R.S.C choisit sa copie embarquée après une sonde trop lente, le lien Render reste disponible sur `simulateur.html` ; un tel repli ne prouve pas à lui seul que l’adresse publique a changé.
+
+## Prompt à reprendre dans une session du dépôt du simulateur
 
 ```text
 Dépôt concerné : thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple
-Projet Vercel  : d-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple (équipe mrsc1)
+Adresse publique active à préserver : https://simulateur-macro-politique.onrender.com/
+Site M.R.S.C auquel l’outil est relié : https://thejmimiia-code.github.io/MRSC/
 
-Objectif : rendre le site Vercel de ce dépôt réellement fonctionnel, c'est-à-dire servir
-le simulateur (sa page ET son API de calcul), pour qu'il soit utilisable seul et affichable
-par le site du M.R.S.C.
+Maintiens l’application interactive et son API à la racine de cette adresse Render. Vérifie
+que GET / sert le véritable simulateur et que les routes /api/... requises répondent sur la
+même origine. Garde l’intégration en iframe possible, sans en-tête ni politique de sécurité
+qui la bloque. Conserve un lien de retour M.R.S.C visible, ainsi que l’accessibilité clavier,
+les commandes de parcours, l’adaptation mobile et les réglages de lisibilité. Ne présente pas
+les résultats du modèle comme des prévisions certaines.
 
-## Contrat attendu (3 points, c'est tout)
-
-1. `/` sert la page du simulateur — la vraie page interactive (constante `HTML_PAGE` de
-   `simulateur/interface.py`), pas une page de présentation.
-2. `/api/<route>` sert le moteur : les mêmes routes que `simulateur/dashboard.py`
-   (`/api/catalogue`, `/api/contexte`, `/api/simuler`, `/api/bulles`, `/api/run`,
-   `/api/scenarios`, `/api/export`, `/api/presets`, `/api/comparer`, `/api/bulle`,
-   `/api/donnees`, `/api/proxy`).
-3. La page reste affichable dans un cadre (`<iframe>`) : ne pas ajouter d'en-tête
-   `X-Frame-Options`, ni de `Content-Security-Policy: frame-ancestors`.
-
-La page appelle `/api/...` en chemin absolu : page et API doivent donc être sur la même
-adresse, à la racine du domaine. C'est le point à respecter avant tout le reste.
-
-## Situation actuelle (vérifiée, à ne pas refaire)
-
-    curl -sS -o /dev/null -w '%{http_code} /\n' https://d-mocratie-et-politique-du-peuple-p.vercel.app/
-    # 404 DEPLOYMENT_NOT_FOUND : aucun index.html sur la branche main
-    curl -sS -w '\n%{http_code}\n' https://d-mocratie-et-politique-du-peuple-p.vercel.app/api/scenarios
-    # 404 : aucune API exposée
-
-Le déploiement existe et réussit, mais la branche `main` ne contient ni page d'accueil ni
-fonctions : Vercel sert le dépôt tel quel, donc `/` ne trouve rien. Une branche non fusionnée
-(`arena/98dbb2a2-…`) ajoute des pages vitrines statiques (`index.html`, `docs/index.html`,
-`simulateur/index.html`…) : elles décrivent le projet mais ne contiennent aucun appel `/api/`,
-donc elles ne font pas fonctionner le simulateur. Ne pas partir de ces vitrines.
-
-## Recette éprouvée (à reprendre telle quelle)
-
-Le dépôt du site M.R.S.C contient une implémentation **déjà écrite et testée** de ce contrat.
-Elle ne modifie pas le moteur, et tout y est disponible à cette adresse :
-
-    git clone --depth 1 --branch arena/b8c7d198-mrsc \
-      https://github.com/thejmimiia-code/MRSC.git /tmp/mrsc
-
-    # (après fusion de la PR n° 5 de ce dépôt, la branche `main` convient : même contenu)
-
-Trois éléments à reprendre depuis ce clone :
-
-- `/tmp/mrsc/api/*.py` — un fichier par route, chacun exposant une classe `handler` dérivant
-  de `BaseHTTPRequestHandler` (le format reconnu par Vercel pour les fonctions Python fichier
-  par fichier) ;
-- `/tmp/mrsc/simulateur/pont_api.py` — réécrit le chemin reçu (Vercel transmet l'URL complète)
-  sur la route déclarée, puis délègue à `simulateur.dashboard.DashboardHandler` : aucune
-  logique n'est dupliquée. Ce fichier place aussi `SIMULATEUR_CACHE` dans `/tmp` : sur un
-  hébergeur à fonctions, le dossier du projet est en lecture seule, garder cette ligne ;
-- `/tmp/mrsc/outils/generer-fonctions-api.py` — régénère les fonctions en lisant les routes
-  réellement servies par `dashboard.py` (si une route est ajoutée au moteur, il le signale).
-
-Le plus simple ici : copier ces trois éléments dans ce dépôt, générer les fonctions, et
-écrire un `index.html` à la racine qui sert la page du moteur (même substitution que
-`dashboard.py` pour le repère `===SCENARIOS_JSON===`). Sinon, une variante à un seul fichier
-avec une réécriture `vercel.json` (`/api/:path*` → `api/index.py`) est possible, mais elle
-n'est pas testée : préférer la recette éprouvée.
-
-## Réglages Vercel
-
-- Framework Preset : **Other** · Build Command : **vide** · Output Directory : **`.`**
-- Install Command : vide — le moteur n'utilise que la bibliothèque standard Python, aucune
-  dépendance à installer, aucun `requirements.txt` à créer.
-- Security → Deployment Protection → Vercel Authentication : **Disabled**, sinon un visiteur
-  non connecté voit la page de connexion Vercel au lieu du simulateur.
-- Ne pas ajouter de `rewrites` attrape-tout : on veut de vrais fichiers, pas des 200 trompeurs.
-
-## Vérification attendue (avant de conclure)
-
-    curl -sS -o /dev/null -w '%{http_code} /\n' https://d-mocratie-et-politique-du-peuple-p.vercel.app/
-    # 200, et la page contient #console-pilotage
-    curl -sS https://d-mocratie-et-politique-du-peuple-p.vercel.app/api/scenarios
-    # {"scenarios": {...}}
-    curl -sS -X POST -H 'Content-Type: application/json' \
-      -d '{"parametres":{"tva_taux_normal":1.5},"horizon":5}' \
-      https://d-mocratie-et-politique-du-peuple-p.vercel.app/api/simuler
-    # une simulation complète en JSON
-
-## Côté site M.R.S.C : rien à faire
-
-Le site connaît déjà cette adresse (attribut `data-source-distante` de `simulateur.html`) et
-la vérifie à chaque visite : dès que la page et l'API répondent, il affiche cette version et
-laisse la copie embarquée de côté. Tant que ce n'est pas le cas, la copie embarquée continue
-de faire le calcul — le site reste utilisable. Aucune synchronisation, aucun échange de
-fichiers : c'est tout l'intérêt de servir le simulateur depuis son propre dépôt.
+Avant de conclure, teste la page, /api/scenarios, /api/catalogue, une simulation valide sur
+/api/simuler et l’intégration depuis simulateur.html du site M.R.S.C. Signale clairement tout
+test qui n’a pas pu être réalisé. N’utilise pas l’ancienne adresse Vercel du simulateur.
 ```

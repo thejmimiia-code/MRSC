@@ -24,6 +24,18 @@ jobs:
       - name: Check out the selected branch
         uses: actions/checkout@v4
 
+      - name: Set up Python for generated-page checks
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate generated pages, internal links and scripts
+        run: |
+          python3 -m py_compile outils/construire-apprentissages.py outils/construire-simulateur.py outils/verifier-site-statique.py
+          python3 outils/construire-apprentissages.py --verifier
+          python3 outils/construire-simulateur.py --verifier
+          python3 outils/verifier-site-statique.py
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
@@ -32,9 +44,11 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf _site
-          mkdir -p _site/simulateur
-          cp index.html ia-societe.html simulateur.html documents.html liens-utiles.html localisation.html nous-contacter.html transparence.html 404.html _site/
+          mkdir -p _site/simulateur _site/apprendre
+          cp index.html apprendre.html ia-societe.html simulateur.html documents.html liens-utiles.html localisation.html nous-contacter.html transparence.html confidentialite.html 404.html sitemap.xml _site/
           cp -R assets _site/assets
+          # Fiches autonomes publiques ; les sources TOML restent dans docs/.
+          cp -R apprendre/fiches _site/apprendre/fiches
           # Page publiée du simulateur (générée depuis le moteur) et sa provenance.
           # Les sources Python du moteur ne sont pas publiées sur les Pages.
           cp simulateur/index.html simulateur/PROVENANCE.json _site/simulateur/
