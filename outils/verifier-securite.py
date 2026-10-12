@@ -769,7 +769,11 @@ def main() -> int:
         test_patch_durabilite()
         test_liste_statique()
     except Exception as erreur:  # le script doit sortir en erreur lisible pour la CI
-        print(f"ÉCHEC {type(erreur).__name__}: {erreur}", file=sys.stderr)
+        message = f"ÉCHEC {type(erreur).__name__}: {erreur}"
+        if os.environ.get("GITHUB_ACTIONS") == "true":
+            annotation = message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+            print(f"::error title=Tests de sécurité::{annotation}", file=sys.stderr)
+        print(message, file=sys.stderr)
         return 1
     print("Tous les tests de sécurité ciblés passent.")
     return 0
