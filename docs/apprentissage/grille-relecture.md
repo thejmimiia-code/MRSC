@@ -1,14 +1,16 @@
 # Grille de relecture des ressources d’apprentissage
 
-**Version de travail — 8 octobre 2026.** Cette grille organise les revues de fond, de forme, de droits, d’accessibilité et de maintenance. Elle ne certifie pas une fiche et ne remplace ni l’expertise du domaine ni l’essai avec les personnes concernées. Un contrôle automatique réussi ne vaut pas approbation éditoriale.
+**Version de travail — 11 octobre 2026.** Cette grille organise les revues de fond, de forme, de droits, d’accessibilité et de maintenance. Elle ne certifie pas une fiche et ne remplace ni l’expertise du domaine ni l’essai avec les personnes concernées. Un contrôle automatique réussi ne vaut pas approbation éditoriale.
 
 ## Mode d’emploi
 
+- Avant de commencer, lire [`AGENTS.md`](../../AGENTS.md), le [manuel de R&D continue](../rd-innovation-continue.md) et activer les skills qui correspondent au domaine et au format; un contrôle de forme n’atteste pas une expertise.
 - Copier la grille par fiche ou version importante et consigner les constats utiles, pas un score.
 - Cocher une case uniquement si une personne a réellement examiné le point. Écrire « non applicable » avec une raison ; laisser vide ou marquer « à faire » si la preuve manque.
 - Distinguer les rôles de relecture — expertise du domaine, édition, accessibilité, personnes apprenantes, responsable de publication — sans publier de nom personnel par défaut.
 - Garder les notes de test volontaires minimales et non identifiantes. Ne demander ni récit de parcours scolaire, ni diagnostic, ni donnée financière ou de santé.
 - Un désaccord de fond, un doute de droit ou une erreur susceptible d’induire en erreur bloque la diffusion jusqu’à résolution.
+- Une revue interne de cohérence des 26 prototypes alors présents est consignée le 11 octobre 2026 dans [`revue-interne-prototypes-2026-10-11.md`](revue-interne-prototypes-2026-10-11.md). Elle n’est pas une validation spécialisée ni une autorisation de publication. Les huit fiches ajoutées dans le lot suivant et les dix fiches distinctes du lot courant ne sont pas couvertes par cette revue ; les 44 prototypes actuels restent à relire.
 
 ## 1. Besoin, public et périmètre
 
@@ -124,7 +126,96 @@ Pour chaque fiche, faire une relecture mathématique indépendante, vérifier la
 | `tech-electronique-capteur` | Revoir les termes capteur, grandeur physique, mesure, signal et incertitude ; préciser les limites de l’analogie et éviter de présenter un composant ou une sortie comme universels. Pas de branchement réel sans contexte ni contrôle spécialisé. |
 | `civ-choisir-source-publique` | Confirmer la portée et le rôle des portails cités, la distinction entre texte, démarche, donnée, explication et position, la date de consultation et le statut exact des licences. Garder chaque lien facultatif et éviter de présenter l’échantillon comme exhaustif. |
 
-Pour ces cinq dossiers comme pour les quatre prototypes antérieurs, remplir une trace de décision séparée ; une vérification de génération, de syntaxe ou de lien local ne remplace pas la relecture de domaine, l’examen des droits, les essais d’usage ou la revue de navigateur.
+## Dossier en cours — `econ-lire-facture`
+
+**Statut : prototype à relire ; ni une fiche validée ni un guide juridique ou financier personnalisé.** La page est centrée sur la lecture d’un exemple fictif. Elle ne prétend pas énumérer les mentions obligatoires d’une facture et ne traite pas les conditions de renouvellement/résiliation d’un abonnement ni les délais de contestation.
+
+| Contrôle à mener | Point d’attention |
+| --- | --- |
+| Calcul et vocabulaire | Refaire l’addition de l’exercice ; distinguer date d’émission, période éventuelle, échéance, montant restant à régler et preuve de paiement. |
+| Relecture spécialisée | Faire examiner le périmètre par une personne compétente en information du consommateur ; vérifier que les formulations ne deviennent pas un conseil sur un litige réel ou une interprétation du droit. |
+| Exemple et vie privée | Confirmer que les montants et documents sont fictifs et qu’aucune donnée personnelle ou référence réelle n’est demandée. |
+| Sources et droits | Confirmer la portée actuelle des portails Service-Public et DGCCRF cités ; les licences sont déclarées non vérifiées et aucun texte, exemple ou visuel source n’est repris. |
+| Usage et accessibilité | Faire relire par une personne éditoriale et des personnes apprenantes volontaires ; vérifier navigation clavier, zoom, petit écran et lecteur d’écran. Aucun test apprenant n’est revendiqué. |
+
+La couverture de `factures-abonnements` reste partielle : une seule fiche de repérage ne couvre ni tous les types de facture, ni les abonnements, les règles propres aux secteurs ou les recours.
+
+## Dossier en cours — `econ-comparer-prix-unitaires`
+
+**Statut : prototype à relire ; la comparaison ne constitue pas une recommandation d’achat.** Les montants et produits sont fictifs. Le calcul ramène des prix à une même quantité, mais ne compare pas la qualité, le besoin ni le gaspillage.
+
+| Contrôle à mener | Point d’attention |
+| --- | --- |
+| Relecture mathématique | Refaire les conversions et calculs : 250 g à 1,50 € donne 6,00 €/kg ; 500 g à 2,80 € donne 5,60 €/kg. Vérifier également l’exercice (3,00 € pour 500 g contre 5,50 € pour 1 kg). |
+| Relecture éditoriale | Vérifier la distinction entre prix du paquet et prix par kilogramme, et que la formulation ne transforme pas le prix unitaire en meilleur choix universel. |
+| Portée consommation | Confirmer que la fiche ne présente pas une règle d’affichage ou une pratique commerciale comme obligatoire ; les prix, lots et promotions réels varient. |
+| Sources et droits | Les liens DGCCRF et Éduscol sont facultatifs ; les licences sont indiquées comme non vérifiées. Aucun texte, exercice, exemple ni visuel de ces sources n’est repris. |
+| Usage et accessibilité | Faire relire le vocabulaire et les étapes, puis tester au clavier, au zoom, sur petit écran et avec un lecteur d’écran ; aucun essai apprenant n’est revendiqué. |
+
+## Dossiers en cours — sept prototypes de lecture, langues, repères et autonomie
+
+**Statut commun : prototypes à relire ; aucun n’est validé ni déclaré prêt à la diffusion.** Les exemples des fiches sont fictifs. Leur présence générée sur le site ne remplace pas les contrôles spécialisés, les vérifications de droits ni les essais avec des personnes concernées.
+
+| Fiche | Contrôles spécialisés et d’usage à mener |
+| --- | --- |
+| `fr-reperer-idee-texte` | Vérifier que l’idée principale et les détails sont distingués sans imposer un résumé unique ; contrôler que les réponses séparent texte explicite et déduction. Relire le vocabulaire avec des adultes qui reprennent la lecture. |
+| `langue-anglais-demander-aide` | Faire vérifier le naturel des expressions, les traductions et les registres par une personne compétente en anglais. Ne pas laisser entendre qu’un texte seul enseigne la prononciation ou garantit l’intercompréhension. |
+| `geo-points-cardinaux` | Contrôler les directions, l’usage de la flèche du nord et les limites d’un plan schématique ; la fiche ne donne aucun itinéraire réel et ne doit pas suggérer de sécurité ou d’accessibilité garanties. |
+| `histoire-lire-frise` | Refaire les dates et intervalles fictifs ; vérifier la distinction entre date, durée, échelle et causalité. Toute extension à des faits historiques réels nécessitera des sources contextualisées supplémentaires. |
+| `maths-probabilite-tirage` | Refaire les fractions et vérifier l’hypothèse d’équiprobabilité, le tirage avec remise et l’absence de prédiction certaine. Faire relire par une personne compétente en mathématiques. |
+| `numerique-organiser-fichiers` | Vérifier les termes fichier/dossier/extension/sauvegarde et que les conseils ne dépendent pas d’un système précis ; contrôler les mises en garde sur les données sensibles, le partage et le remplacement d’un original. |
+| `methodes-demander-clarification` | Vérifier que la reformulation reste respectueuse, laisse place à une correction et n’assimile pas une absence de réponse à un accord ; tester plusieurs modes de communication et contextes de travail. |
+
+## Dossiers en cours — huit prototypes de communication, sciences, histoire, informatique et arts
+
+**Statut commun : « Prototype à relire », non validé et non déclaré prêt à la diffusion.** Les exemples de ces fiches sont fictifs ou abstraits. Leur génération et leurs contrôles automatiques ne remplacent pas la revue spécialisée, l’examen des droits, les essais avec des personnes concernées et la vérification d’accessibilité.
+
+| Fiche | Contrôles spécialisés et d’usage à mener |
+| --- | --- |
+| `fr-preparer-explication-orale` | Vérifier le fil sujet/repères/vérification et le ton ; faire tester plusieurs modes de communication. Ne pas imposer une prise de parole publique ni présenter une préférence de communication comme universelle. |
+| `fr-argumenter-avec-exemple` | Contrôler la séparation entre proposition, raison, exemple et fait vérifiable ; s’assurer qu’un exemple fictif n’est pas érigé en preuve générale et que l’activité laisse une place au désaccord. |
+| `maths-equation-simple` | Refaire indépendamment les transformations et le contrôle de l’égalité ; vérifier que la règle est appliquée aux deux membres et que le périmètre reste limité à une équation à une étape. |
+| `sciences-meteo-climat` | Faire relire les définitions, les échelles temporelles et les limites par une personne compétente en climatologie ; vérifier qu’aucune journée isolée ne sert à inférer une tendance. |
+| `histoire-comparer-sources` | Confirmer que les documents sont fictifs, distinguer annonce et observation, et relire auteur, date, intention et limites sans hiérarchiser une source sur sa seule date. |
+| `info-bits-octets` | Vérifier le calcul 2 puissance n, la définition de l’octet et les limites relatives aux caractères, aux encodages et aux tailles de fichier. |
+| `prog-tester-exemples` | Retracer les trois cas de test, surtout la valeur limite zéro ; contrôler résultat attendu/résultat produit, correction et re-tests. Le pseudo-code doit rester non exécuté dans la fiche. |
+| `arts-composer-formes` | Faire relire la consigne avec plusieurs pratiques et capacités visuelles ; vérifier que la description verbale est possible, qu’aucune esthétique unique n’est imposée et qu’aucune œuvre n’est à recopier. |
+
+## Dossiers en cours — huit prototypes de français, mathématiques, sciences, géographie, Web, arts et recherche
+
+**Statut commun : « Prototype à relire », non validé et non déclaré prêt à la diffusion.** Les situations sont fictives ; aucune manipulation, navigation vers un site ou expérience réelle n’est demandée.
+
+| Fiche | Contrôles spécialisés et d’usage à mener |
+| --- | --- |
+| `fr-comprendre-mot-contexte` | Vérifier que les indices de contexte étayent un sens sans le présenter comme certain ; relire le vocabulaire avec des adultes qui reprennent la lecture. |
+| `maths-lire-echelle-graphique` | Refaire les lectures d’axes ; vérifier le pas, l’origine et la nuance sur les axes qui ne commencent pas à zéro. Tester la description sans graphique visuel. |
+| `sciences-calculer-vitesse-moyenne` | Refaire les divisions et unités ; relire la distinction entre vitesse moyenne et vitesse instantanée par une personne compétente en physique. |
+| `sciences-distinguer-melange-changement-etat` | Faire vérifier les termes fusion, dissolution et solution par une personne compétente en chimie ; veiller à ne pas suggérer de mélange réel ou d’expérience. |
+| `geo-decrire-paysage` | Contrôler naturel/aménagement/observation/interprétation ; vérifier que la description ne permet pas d’inférer population ou accessibilité. |
+| `info-lire-adresse-web` | Faire relire l’anatomie d’URL et les nuances de HTTPS par une personne compétente en Web et sécurité ; contrôler les conseils sur les paramètres et données sensibles. |
+| `arts-lire-cartel` | Confirmer que les noms et notices sont fictifs ; distinguer les champs documentaires d’une interprétation sans imposer de lecture artistique unique. |
+| `recherche-question-hypothese` | Faire relire la question, l’hypothèse, les variables et les limites par une personne compétente en méthodologie ; confirmer que l’exemple n’est pas présenté comme un protocole complet. |
+
+Pour les trente-quatre prototypes décrits avant le lot courant, consigner une trace de décision séparée ; une vérification de génération, de syntaxe ou de lien local ne remplace pas la relecture de domaine, l’examen des droits, les essais d’usage ou la revue de navigateur.
+
+## Dossiers en cours — dix prototypes de français, anglais, mathématiques, sciences, géographie, informatique et recherche
+
+**Statut commun : « Prototype à relire », non validé et non déclaré prêt à la diffusion.** Les exemples et lieux sont fictifs. Les contrôles automatiques de présence, de génération ou de structure ne remplacent ni une relecture de domaine, ni l’examen des sources et des droits, ni des essais avec des personnes concernées.
+
+| Fiche | Contrôles spécialisés et d’usage à mener |
+| --- | --- |
+| `fr-lire-ponctuation` | Vérifier les catégories de phrase et les nuances des trois signes présentés ; s’assurer que ponctuation, intonation et intention ne sont pas confondues. Faire relire avec des adultes qui reprennent la lecture. |
+| `langue-anglais-epeler` | Faire vérifier la grammaire, le naturel et le registre des demandes/réponses par une personne compétente en anglais. Contrôler la cohérence entre épellation écrite et absence d’enseignement audio ou de prononciation. |
+| `maths-lire-tableau-croise` | Refaire chaque lecture de ligne et de colonne ; confirmer les en-têtes et les deux cases corrigées. Tester la compréhension sans supposer qu’une orientation visuelle unique est accessible. |
+| `maths-reperer-angle-droit` | Vérifier la définition de 90 degrés, le rôle du sommet et la distinction entre comparaison visuelle et mesure exacte. Faire tester les descriptions par une personne compétente en géométrie et en accessibilité. |
+| `sciences-cycle-vie-plante` | Faire relire la germination, la croissance et la production de graines par une personne compétente en biologie ; contrôler les conditions de germination et le caractère simplifié du cycle, sans généraliser à toutes les plantes. |
+| `geo-lire-legende-carte` | Vérifier les associations symbole/catégorie et les limites relatives à la date, à l’orientation et à l’accessibilité. Confirmer qu’aucun trajet ou lieu réel n’est présenté comme à jour. |
+| `histoire-situer-siecle` | Refaire les bornes et exemples, notamment 1500/1501, 1900/1901 et 2026 ; confirmer l’absence d’année zéro dans la convention exposée et le périmètre limité aux années de l’ère commune. |
+| `info-systeme-exploitation` | Faire relire les rôles des applications et du système d’exploitation ; vérifier que ressources, permissions et fonctions ne sont pas présentées comme identiques sur tous les appareils. Aucun réglage réel ne doit être demandé. |
+| `numerique-formuler-recherche` | Vérifier les conseils de requête et de confidentialité, les précautions sur le classement des résultats et le renvoi vers la page d’origine. S’assurer qu’aucun moteur n’est présenté comme neutre ou doté d’une syntaxe universelle. |
+| `recherche-conserver-reference` | Vérifier la distinction entre référence, qualité d’une source, preuve et autorisation de réutilisation ; contrôler la notice et la date fictives. Faire relire le conseil de suivre le style exigé par une discipline ou un établissement, sans en imposer un comme universel. |
+
+Pour l’ensemble des quarante-quatre prototypes décrits ici, remplir une trace de décision séparée ; une vérification de génération, de syntaxe ou de lien local ne remplace pas la relecture de domaine, l’examen des droits, les essais d’usage ou la revue de navigateur.
 
 ### Trace de décision à compléter
 

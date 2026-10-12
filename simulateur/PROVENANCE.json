@@ -8,5 +8,10 @@
   "fichiers_ajoutes_par_le_site": [
     "pont_api.py"
   ],
+  "correctif_local": {
+    "fichier": "outils/patchs/simulateur-securite-mrsc.patch",
+    "sha256": "f1616c21e1552941c5b3c731e0404d7fa0c5c1c34c1a3b2e38077288a91e8698",
+    "etat": "appliqué"
+  },
   "procedure_de_mise_a_jour": "python3 outils/mettre-a-jour-simulateur.py, puis python3 outils/construire-simulateur.py"
 }

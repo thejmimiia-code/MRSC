@@ -10,7 +10,8 @@ Contrôles effectués :
 4. les pages du site, `404.html`, `assets/` et les liens de navigation sont
    présents ;
 5. la fonction `api/verifier-source.py` (source distante du simulateur) répond
-   correctement, sur une source simulée puis sur une source injoignable.
+   correctement, sur une source simulée puis sur une source injoignable ;
+6. les consignes, skills, portefeuille et veille R&D continue restent cohérents.
 
 Usage :
     python3 outils/verifier-integration.py
@@ -27,6 +28,7 @@ import re
 import subprocess
 import sys
 import threading
+import tomllib
 import urllib.error
 import urllib.request
 from http.server import ThreadingHTTPServer
@@ -60,6 +62,7 @@ ROUTES: tuple[str, ...] = charger_module(
 PAGES = (
     "index.html",
     "apprendre.html",
+    "anglais-aventure.html",
     "ia-societe.html",
     "simulateur.html",
     "documents.html",
@@ -144,12 +147,70 @@ def liens_et_scripts_statiques() -> None:
     verifier("Liens locaux, ancres, repères HTML et syntaxe JavaScript", code == 0, sortie.splitlines()[-1] if sortie else "")
 
 
+def recherche_developpement_continue() -> None:
+    code, sortie = lancer("verifier-rd-continue.py")
+    verifier(
+        "Consignes, skills, portefeuille et veille R&D continue",
+        code == 0,
+        sortie.splitlines()[-1] if sortie else "",
+    )
+
+
 def fichiers_du_site() -> None:
     for page in PAGES:
         chemin = RACINE / page
         verifier(f"Page présente : {page}", chemin.is_file() and chemin.stat().st_size > 500)
-    for ressource in ("assets/css/site.css", "assets/js/site.js", "assets/js/navigation-parcours.js", "assets/js/apprentissage.js", "assets/images/logo-mrsc.jpg"):
+    for ressource in ("assets/css/site.css", "assets/js/site.js", "assets/js/navigation-parcours.js", "assets/js/apprentissage.js", "assets/css/anglais-aventure.css", "assets/js/anglais-aventure-data.js", "assets/js/apprentissage-aventure-data.js", "assets/js/anglais-aventure.js", "assets/images/escales-anglais-hero.jpg", "assets/images/mondes-savoirs-hero.jpg", "assets/images/logo-mrsc.jpg"):
         verifier(f"Ressource présente : {ressource}", (RACINE / ressource).is_file())
+    catalogue_apprentissage = (RACINE / "apprendre.html").read_text(encoding="utf-8")
+    page_aventure = (RACINE / "anglais-aventure.html").read_text(encoding="utf-8")
+    donnees_apprentissage = (RACINE / "assets" / "js" / "apprentissage-aventure-data.js").read_text(encoding="utf-8")
+    serveur_local = (RACINE / "outils" / "serveur-local.py").read_text(encoding="utf-8")
+    publication = (RACINE / ".github" / "workflows" / "deploy-pages.yml").read_text(encoding="utf-8")
+    sitemap = (RACINE / "sitemap.xml").read_text(encoding="utf-8")
+    confidentialite = (RACINE / "confidentialite.html").read_text(encoding="utf-8")
+    verifier(
+        "Le jeu est relié au catalogue, au serveur local, au sitemap et à la publication",
+        'href="anglais-aventure.html"' in catalogue_apprentissage
+        and '"anglais-aventure.html"' in serveur_local
+        and "cp index.html apprendre.html anglais-aventure.html" in publication
+        and "/MRSC/anglais-aventure.html" in sitemap,
+    )
+    try:
+        sources_fiches = tomllib.loads((RACINE / "docs" / "apprentissage" / "catalogue.toml").read_text(encoding="utf-8"))["fiche"]
+        sources_domaines = tomllib.loads((RACINE / "docs" / "apprentissage" / "referentiel.toml").read_text(encoding="utf-8"))["domaine"]
+        bloc_atlas = re.search(r"globalThis\.MRSCApprentissageData = Object\.freeze\((\{.*\})\);", donnees_apprentissage, re.DOTALL)
+        atlas = json.loads(bloc_atlas.group(1)) if bloc_atlas else {}
+        atlas_ids = [fiche.get("id") for fiche in atlas.get("sheets", [])]
+        source_ids = [fiche.get("id") for fiche in sources_fiches]
+        atlas_domain_ids = [domaine.get("id") for domaine in atlas.get("domains", [])]
+        source_domain_ids = [domaine.get("id") for domaine in sources_domaines]
+        atlas_fiches_valides = (
+            atlas_ids == source_ids
+            and atlas_domain_ids == source_domain_ids
+            and atlas.get("sheetCount") == len(sources_fiches)
+            and atlas.get("domainCount") == len(sources_domaines)
+            and all((RACINE / fiche["url"]).is_file() for fiche in atlas.get("sheets", []))
+            and sum(bool(fiche.get("editorialStatus")) for fiche in atlas.get("sheets", [])) == atlas.get("prototypeCount")
+        )
+    except (OSError, KeyError, TypeError, tomllib.TOMLDecodeError, json.JSONDecodeError):
+        atlas_fiches_valides = False
+        atlas = {}
+    verifier(
+        "L’atlas inclut toutes les fiches, tous les domaines et les statuts éditoriaux du catalogue",
+        atlas_fiches_valides
+        and 'assets/js/apprentissage-aventure-data.js' in page_aventure
+        and 'id="learning-path-list"' in page_aventure,
+        f"{atlas.get('sheetCount', 0)} fiches · {atlas.get('domainCount', 0)} mondes · {atlas.get('prototypeCount', 0)} prototypes à relire",
+    )
+    verifier(
+        "La notice décrit le parcours local, sa suppression et l’absence de transmission des réponses libres",
+        all(terme in confidentialite for terme in ("mrsc-anglais-aventure-v1", "identifiants des fiches ajoutées", "saisies librement"))
+        and all(
+            libelle in page_aventure and libelle in confidentialite
+            for libelle in ("Effacer mon parcours local", "Effacer mon avancement local")
+        ),
+    )
     pages_avec_parcours = [RACINE / page for page in PAGES]
     pages_avec_parcours.append(RACINE / "simulateur" / "index.html")
     pages_avec_parcours.extend(sorted((RACINE / "apprendre" / "fiches").glob("*.html")))
@@ -483,6 +544,9 @@ def source_distante() -> None:
         def log_message(self, *arguments: object) -> None:  # noqa: N802 - API stdlib
             """Silencieux : c'est un serveur de test."""
 
+    ancienne_source = os.environ.get("SIMULATEUR_SOURCE_DISTANTE")
+    ancien_mode_test = os.environ.get("SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE")
+    os.environ["SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE"] = "1"
     with ThreadingHTTPServer(("127.0.0.1", 0), Stub) as stub:
         threading.Thread(target=stub.serve_forever, daemon=True).start()
         adresse = f"http://127.0.0.1:{stub.server_address[1]}/"
@@ -493,7 +557,8 @@ def source_distante() -> None:
         verifier(
             "Source distante fonctionnelle : la bascule est autorisée",
             statut == 200 and charge.get("disponible") is True and charge.get("page", {}).get("indice_simulateur"),
-            f"statut {statut}, disponible={charge.get('disponible')}",
+            f"statut {statut}, disponible={charge.get('disponible')}, "
+            f"page={charge.get('page')}, api={charge.get('api')}, message={charge.get('message')}",
         )
 
         stub.shutdown()
@@ -506,7 +571,14 @@ def source_distante() -> None:
         statut == 200 and charge.get("disponible") is False and bool(charge.get("message")),
         f"statut {statut}, disponible={charge.get('disponible')}",
     )
-    os.environ.pop("SIMULATEUR_SOURCE_DISTANTE", None)
+    if ancienne_source is None:
+        os.environ.pop("SIMULATEUR_SOURCE_DISTANTE", None)
+    else:
+        os.environ["SIMULATEUR_SOURCE_DISTANTE"] = ancienne_source
+    if ancien_mode_test is None:
+        os.environ.pop("SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE", None)
+    else:
+        os.environ["SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE"] = ancien_mode_test
 
 
 def _repondre_stub(soi) -> None:  # noqa: ANN001 - handler HTTP minimal
@@ -539,6 +611,7 @@ def main() -> int:
     fonctions_conformes()
     fichiers_du_site()
     liens_et_scripts_statiques()
+    recherche_developpement_continue()
     # Le moteur écrit des tableaux de simulation : on garde la sortie du test lisible.
     with contextlib.redirect_stdout(io.StringIO()):
         routes_servies()

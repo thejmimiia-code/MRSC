@@ -15,6 +15,7 @@ fiscalité ni tracking error.
 from __future__ import annotations
 
 import json
+import math
 import threading
 import urllib.error
 import urllib.parse
@@ -26,6 +27,34 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 FOURNISSEUR_COTATIONS = "Yahoo Finance (flux tiers; cours éventuellement différés)"
 DELAI_RESEAU_SECONDES = 7.0
+MAX_COTATION_RESPONSE_BYTES = 1_048_576
+
+
+class _SansRedirection(urllib.request.HTTPRedirectHandler):
+    """Ne suit pas une redirection du flux de marché vers une autre cible."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # noqa: ANN001
+        return None
+
+
+_OPENER = urllib.request.build_opener(_SansRedirection())
+
+
+def _lire_reponse_bornee(reponse) -> bytes:  # noqa: ANN001 - réponse urllib
+    """Lit au plus un Mio et rejette les longueurs annoncées invalides ou excessives."""
+    longueur_brute = reponse.headers.get("Content-Length")
+    if longueur_brute not in (None, ""):
+        try:
+            longueur = int(longueur_brute)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("longueur de réponse de marché invalide") from exc
+        if longueur < 0 or longueur > MAX_COTATION_RESPONSE_BYTES:
+            raise ValueError("réponse de marché trop volumineuse")
+    contenu = reponse.read(MAX_COTATION_RESPONSE_BYTES + 1)
+    if len(contenu) > MAX_COTATION_RESPONSE_BYTES:
+        raise ValueError("réponse de marché trop volumineuse")
+    return contenu
+
 
 # Sélection représentative, non exhaustive, des principales places et zones.
 # Les symboles sont des identifiants Yahoo Finance; les valeurs ne sont pas
@@ -184,15 +213,22 @@ def _lire_cotation(marche: dict[str, str], timeout: float = DELAI_RESEAU_SECONDE
         url,
         headers={"User-Agent": "Mozilla/5.0 (compatible; SimulateurCitoyen/1.0)"},
     )
-    with urllib.request.urlopen(requete, timeout=timeout) as reponse:
-        charge = json.loads(reponse.read().decode("utf-8"))
-
-    resultat = ((charge.get("chart") or {}).get("result") or [None])[0]
-    if not resultat:
-        detail = ((charge.get("chart") or {}).get("error") or {}).get("description")
-        raise ValueError(detail or "réponse de cotation vide")
-    meta = resultat.get("meta") or {}
-    cours = meta.get("regularMarketPrice")
+    with _OPENER.open(requete, timeout=timeout) as reponse:
+        brut = _lire_reponse_bornee(reponse)
+    charge = json.loads(brut.decode("utf-8"))
+    if not isinstance(charge, dict):
+        raise ValueError("format de réponse de cotation invalide")
+    chart = charge.get("chart")
+    if not isinstance(chart, dict):
+        raise ValueError("réponse de cotation sans enveloppe chart")
+    resultats = chart.get("result")
+    resultat = resultats[0] if isinstance(resultats, list) and resultats else None
+    if not isinstance(resultat, dict):
+        raise ValueError("réponse de cotation vide")
+    meta = resultat.get("meta")
+    if not isinstance(meta, dict):
+        raise ValueError("métadonnées de cotation absentes")
+    cours = _nombre(meta.get("regularMarketPrice"))
     instant_cours = _date_utc(meta.get("regularMarketTime"))
     if cours is None or instant_cours is None:
         raise ValueError("cours ou horodatage de marché absent")
@@ -200,7 +236,7 @@ def _lire_cotation(marche: dict[str, str], timeout: float = DELAI_RESEAU_SECONDE
     maintenant = datetime.now(UTC)
     observation = {
         **marche,
-        "cours": float(cours),
+        "cours": cours,
         "devise": meta.get("currency") or marche["devise"],
         "variation_jour": _nombre(meta.get("regularMarketChange")),
         "variation_jour_pct": _nombre(meta.get("regularMarketChangePercent")),
@@ -226,9 +262,9 @@ def _lire_cotation(marche: dict[str, str], timeout: float = DELAI_RESEAU_SECONDE
 def _nombre(valeur: Any) -> float | None:
     try:
         resultat = float(valeur)
-    except (TypeError, ValueError):
+    except (TypeError, ValueError, OverflowError):
         return None
-    return resultat if resultat == resultat else None
+    return resultat if math.isfinite(resultat) else None
 
 
 def obtenir_cotations(*, actualiser: bool = True, timeout: float = DELAI_RESEAU_SECONDES) -> dict[str, Any]:

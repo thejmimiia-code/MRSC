@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Un atlas d’apprentissage gratuit : 15 mondes, 70 fiches autonomes et des parcours libres, plus cinq missions d’anglais en 3D.">
+  <meta name="theme-color" content="#162f47">
+  <title>Les Mondes — aventure d’apprentissage libre | M.R.S.C</title>
+  <link rel="canonical" href="https://thejmimiia-code.github.io/MRSC/anglais-aventure.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Les Mondes — apprendre à son rythme">
+  <meta property="og:description" content="15 univers, 70 fiches, des parcours libres et cinq missions d’anglais en 3D. Sans compte, publicité, minuterie ni pénalité.">
+  <meta property="og:url" content="https://thejmimiia-code.github.io/MRSC/anglais-aventure.html">
+  <meta property="og:image" content="https://thejmimiia-code.github.io/MRSC/assets/images/mondes-savoirs-hero.jpg">
+  <meta property="og:image:alt" content="Un atlas imaginaire en trois dimensions réunissant des mondes de lecture, sciences, histoire, arts, numérique et exploration">
+  <link rel="preload" as="image" href="assets/images/mondes-savoirs-hero.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/anglais-aventure.css">
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/navigation-parcours.js" defer></script>
+  <script src="assets/js/anglais-aventure-data.js" defer></script>
+  <script src="assets/js/apprentissage-aventure-data.js" defer></script>
+  <script src="assets/js/anglais-aventure.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+  <header class="site-header">
+    <p class="site-status-note" role="note">Version de recherche et développement (R&amp;D) — le site est en cours de développement.</p>
+    <div class="identity">
+      <a href="index.html" data-site-home aria-label="M.R.S.C — Accueil">
+        <img class="brand-logo" src="assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
+      </a>
+      <div class="brand-copy">
+        <p class="brand-kicker">Association loi 1901</p>
+        <p class="brand-name">Mouvement Représentatif de la Société Civile</p>
+        <p class="brand-tagline">La force citoyenne</p>
+      </div>
+      <a class="identity-contact" href="mailto:assomrsc@gmail.com" aria-label="Écrire à assomrsc@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg>
+        assomrsc@gmail.com
+      </a>
+    </div>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <div class="nav-inner">
+        <button class="nav-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="navigation-principale">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          Menu
+        </button>
+        <div class="nav-links" id="navigation-principale" data-primary-navigation>
+          <a href="index.html">Accueil</a>
+          <a href="ia-societe.html">IA &amp; société</a>
+          <a href="apprendre.html" aria-current="page">Apprendre</a>
+          <a href="simulateur.html">Simulateur</a>
+          <a href="documents.html">Documents</a>
+          <a href="liens-utiles.html">Liens utiles</a>
+          <a href="localisation.html">Localisation</a>
+          <a href="transparence.html">Transparence</a>
+          <a href="confidentialite.html">Vie privée et données</a>
+          <a href="nous-contacter.html">Nous contacter</a>
+        </div>
+        <details class="display-settings" data-display-settings hidden>
+          <summary title="Options d’affichage">Affichage <span class="display-settings-chevron" aria-hidden="true">⌄</span></summary>
+          <div class="display-settings-panel">
+            <p class="display-settings-title"><strong>Ajuster la lisibilité</strong></p>
+            <div class="display-settings-row" role="group" aria-label="Taille du texte">
+              <button class="display-control" type="button" data-text-decrease aria-label="Réduire la taille du texte" title="Réduire le texte">A−</button>
+              <span class="display-text-level" data-text-size-level role="status" aria-live="polite" aria-atomic="true">100 %</span>
+              <button class="display-control" type="button" data-text-increase aria-label="Agrandir la taille du texte" title="Agrandir le texte">A+</button>
+            </div>
+            <div class="display-settings-actions">
+              <button class="display-control display-control-wide" type="button" data-contrast-toggle aria-pressed="false">Contraste renforcé</button>
+              <button class="display-control display-control-wide" type="button" data-spacing-toggle aria-pressed="false">Espacement du texte</button>
+            </div>
+            <p class="display-settings-note">Ces choix restent enregistrés sur cet appareil. Le zoom du navigateur reste disponible.</p>
+          </div>
+        </details>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenu">
+    <section class="adventure-hero" aria-labelledby="adventure-title">
+      <img class="adventure-hero-art" src="assets/images/mondes-savoirs-hero.jpg" alt="" width="1672" height="941" fetchpriority="high">
+      <div class="adventure-hero-shade" aria-hidden="true"></div>
+      <div class="container adventure-hero-content">
+        <nav class="adventure-breadcrumb" aria-label="Fil d’Ariane"><a href="index.html">Accueil</a><span aria-hidden="true">›</span><a href="apprendre.html">Apprendre</a><span aria-hidden="true">›</span><span aria-current="page">Les Mondes</span></nav>
+        <p class="adventure-kicker">APPRENDRE · EXPLORER · À SON RYTHME</p>
+        <h1 id="adventure-title">Les Mondes</h1>
+        <p class="adventure-hero-lead">Un atlas d’aventures pour découvrir les apprentissages du site : 15 univers, 70 fiches autonomes et un parcours que tu composes librement. Les Escales restent ouvertes pour pratiquer cinq conversations du quotidien en anglais, avec aides en français.</p>
+        <div class="hero-actions adventure-hero-actions">
+          <a class="button adventure-primary-button" href="#mondes">Explorer les 15 mondes</a>
+          <a class="button button-secondary adventure-secondary-button" href="#missions">Jouer une escale en anglais</a>
+        </div>
+        <ul class="adventure-promise-list" aria-label="Principes du jeu">
+          <li>Gratuit, sans publicité ni compte</li>
+          <li>Aucun ordre, score ou calendrier obligatoire</li>
+          <li>Pas de minuteur, pas de pénalité</li>
+          <li>Parcours facultatif et effaçable sur cet appareil</li>
+        </ul>
+        <p class="adventure-status-note">Le catalogue réunit 70 fiches dans 15 domaines : 44 prototypes restent à relire. Les parcours sont non certifiants ; les lacunes restent visibles. Les scènes 3D jouables du prototype sont encore les cinq Escales en anglais.</p>
+      </div>
+    </section>
+
+    <section class="section adventure-onboarding" aria-labelledby="adventure-how-title">
+      <div class="container adventure-onboarding-grid">
+        <div>
+          <p class="eyebrow">Choisir son aventure</p>
+          <h2 id="adventure-how-title">Explorer une fiche, composer un parcours ou dialoguer.</h2>
+          <p>Sur ordinateur, tablette ou mobile, choisis un univers, un repère ou un sujet. Tu peux ouvrir directement une fiche complète, sélectionner plusieurs fiches dans ton parcours local, puis revenir à l’atlas. Aucune étape n’est imposée et aucune progression scolaire n’est déduite.</p>
+        </div>
+        <aside class="adventure-onboarding-note" aria-label="Comment fonctionne le jeu">
+          <p><strong>L’atlas :</strong> 15 domaines relient toutes les fiches du catalogue. Les cartes marquées « Prototype à relire » gardent leur statut éditorial visible.</p>
+          <p><strong>Les Escales :</strong> cinq scènes anglaises proposent des dialogues à choix guidés et une phrase libre facultative. La phrase libre reste dans la page et n’est ni comprise, ni évaluée, ni enregistrée.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-muted adventure-atlas-section" id="mondes" aria-labelledby="atlas-title">
+      <div class="container">
+        <div class="section-heading adventure-section-heading">
+          <p class="eyebrow">Atlas des savoirs · accès libre</p>
+          <h2 id="atlas-title">Quinze mondes, toutes les fiches du catalogue.</h2>
+          <p>Explore les 70 fiches existantes, filtre par monde ou repère, et compose un parcours de formation personnel. Chaque carte ouvre la fiche complète avec sa leçon, sa méthode et son exercice. Les mondes ne sont pas des niveaux à débloquer.</p>
+        </div>
+        <div class="adventure-atlas-fallback" id="learning-atlas-fallback" role="note" hidden>
+          <p>L’atlas interactif n’a pas chargé ; les fiches restent accessibles dans le <a href="apprendre.html#catalogue-fiches">catalogue complet d’apprentissage</a>, avec les sujets à créer signalés séparément.</p>
+        </div>
+        <noscript>
+          <p class="adventure-noscript">L’atlas filtrable utilise JavaScript. Sans lui, les <a href="apprendre.html#catalogue-fiches">70 fiches d’apprentissage restent listées dans le catalogue statique</a> et les lacunes sont décrites dans la <a href="apprendre.html#couverture">carte des sujets à développer</a>.</p>
+        </noscript>
+        <div class="adventure-atlas-app" id="learning-atlas-app" hidden>
+          <div class="adventure-atlas-stats" aria-label="Contenu de l’atlas">
+            <div><strong id="atlas-sheet-count">70</strong><span>fiches référencées</span></div>
+            <div><strong id="atlas-world-count">15</strong><span>mondes thématiques</span></div>
+            <div><strong id="atlas-prototype-count">44</strong><span>prototypes à relire</span></div>
+          </div>
+
+          <section class="adventure-learning-routes" aria-labelledby="learning-routes-title">
+            <div class="adventure-subsection-heading">
+              <div><p class="eyebrow">Formations à la carte</p><h3 id="learning-routes-title">Choisis un repère pour commencer.</h3></div>
+              <p>Ces portes d’entrée filtrent les fiches ; elles ne forment pas un cursus obligatoire et ne certifient aucun niveau.</p>
+            </div>
+            <div class="adventure-learning-route-grid" id="learning-routes" role="group" aria-label="Choisir un repère de difficulté"></div>
+          </section>
+
+          <section class="adventure-learning-worlds" aria-labelledby="learning-worlds-title">
+            <div class="adventure-subsection-heading">
+              <div><p class="eyebrow">Carte des univers</p><h3 id="learning-worlds-title">Ouvre le monde qui t’intéresse.</h3></div>
+              <button class="button button-secondary" id="learning-show-all-worlds" type="button" aria-pressed="true">Voir tous les mondes</button>
+            </div>
+            <div class="adventure-learning-world-grid" id="learning-world-grid" role="group" aria-label="Choisir un monde thématique"></div>
+            <p class="adventure-atlas-note">Un monde peut contenir des fiches et des sujets encore à créer. <a href="apprendre.html#couverture">Voir la couverture et les lacunes du catalogue</a>.</p>
+          </section>
+
+          <div class="adventure-learning-workspace">
+            <section class="adventure-learning-library" aria-labelledby="learning-library-title">
+              <div class="adventure-subsection-heading adventure-library-heading">
+                <div><p class="eyebrow">Bibliothèque des quêtes</p><h3 id="learning-library-title" tabindex="-1">Choisis une fiche, pas une note.</h3></div>
+              </div>
+              <form class="adventure-learning-filters" id="learning-filters" role="search" aria-label="Filtrer les fiches des mondes">
+                <div><label for="learning-search">Rechercher un objectif</label><input id="learning-search" type="search" autocomplete="off" placeholder="Ex. budget, carte, message"></div>
+                <div><label for="learning-domain-filter">Monde</label><select id="learning-domain-filter"><option value="">Tous les mondes</option></select></div>
+                <div><label for="learning-level-filter">Repère</label><select id="learning-level-filter"><option value="">Tous les repères</option><option value="1">1 · Reprendre les bases</option><option value="2">2 · Consolider</option><option value="3">3 · Raisonner</option><option value="4">4 · Approfondir</option></select></div>
+                <div><label for="learning-status-filter">État éditorial</label><select id="learning-status-filter"><option value="">Tous les états</option><option value="initial">Fiche du catalogue</option><option value="prototype">Prototype à relire</option></select></div>
+                <button class="button button-secondary" id="learning-clear-filters" type="button">Effacer les filtres</button>
+              </form>
+              <p class="adventure-learning-result-count" id="learning-result-count" role="status" aria-live="polite" aria-atomic="true">Les fiches du catalogue se chargent…</p>
+              <p class="adventure-learning-no-results" id="learning-no-results" hidden>Aucune fiche ne correspond à ces critères. Essaie un autre mot ou efface les filtres.</p>
+              <ul class="adventure-learning-sheet-grid" id="learning-sheet-grid" aria-label="Fiches d’apprentissage des mondes"></ul>
+            </section>
+
+            <aside class="adventure-learning-path" aria-labelledby="learning-path-title">
+              <p class="eyebrow">Ton carnet local</p>
+              <h3 id="learning-path-title">Compose ton parcours.</h3>
+              <p>Ajoute, enlève ou réordonne les fiches qui t’intéressent. Ce parcours est facultatif, modifiable et enregistré uniquement sur cet appareil.</p>
+              <p class="adventure-learning-path-count" id="learning-path-count" role="status" aria-live="polite" aria-atomic="true">Aucune fiche ajoutée.</p>
+              <p id="learning-path-empty">Pour commencer, sélectionne « Ajouter à mon parcours » sur une fiche. Cela ne marque pas la fiche comme terminée.</p>
+              <ol class="adventure-learning-path-list" id="learning-path-list" aria-label="Fiches choisies pour ton parcours" tabindex="0"></ol>
+              <button class="button button-secondary" id="learning-path-clear" type="button">Effacer mon parcours local</button>
+              <p class="adventure-learning-path-privacy">Seuls les identifiants des fiches choisies sont gardés dans le stockage local. Aucun exercice, texte saisi, score ni résultat n’est conservé ou transmis.</p>
+            </aside>
+          </div>
+          <p class="adventure-atlas-editorial-note"><strong>Transparence :</strong> le catalogue contient des fiches complètes, pas de cours autonomes distincts ; les portes d’entrée regroupent ces fiches en parcours libres, sans cursus certifiant. 44 fiches portent le statut « Prototype à relire ». Les autres sont des entrées du corpus initial, sans validation indépendante revendiquée.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted adventure-missions-section" id="missions" aria-labelledby="missions-title">
+      <div class="container">
+        <div class="section-heading adventure-section-heading">
+          <p class="eyebrow">Anglais · cinq scènes 3D originales</p>
+          <h2 id="missions-title">Les Escales : des conversations du quotidien.</h2>
+          <p>Choisis n’importe quelle scène et change de niveau ou d’aide quand tu le souhaites. Les répliques sont en anglais ; les aides et les menus restent en français. Les repères CECRL décrivent des objectifs de communication, pas ta valeur ni tes capacités.</p>
+        </div>
+        <noscript>
+          <p class="adventure-noscript">Le jeu 3D demande JavaScript dans le navigateur. Tu peux déjà commencer l’anglais avec les <a href="apprendre.html">fiches autonomes</a>, dont <a href="apprendre/fiches/langue-anglais-direction.html">demander son chemin</a> et <a href="apprendre/fiches/langue-anglais-demander-aide.html">demander de l’aide</a>.</p>
+        </noscript>
+        <div class="adventure-app" id="adventure-app" hidden>
+          <div class="adventure-settings" role="group" aria-label="Choisir ses aides">
+            <div class="adventure-level-control">
+              <label for="help-level">Quelle aide te convient aujourd’hui ?</label>
+              <select id="help-level" name="niveau-aide">
+                <option value="discovery">Je découvre · pré-A1 / A1</option>
+                <option value="building">Je consolide · A2</option>
+                <option value="conversation">Je converse déjà · B1</option>
+              </select>
+              <p id="help-level-note" class="adventure-control-hint">Les traductions sont affichées d’emblée. Tu peux les masquer à tout moment.</p>
+            </div>
+            <div class="adventure-support-controls">
+              <button class="button button-secondary" id="translation-toggle" type="button" aria-expanded="true" aria-controls="mission-translation-area">Masquer les traductions</button>
+              <div class="adventure-voice-control" id="voice-control" hidden>
+                <label for="voice-accent">Voix anglaise à essayer</label>
+                <select id="voice-accent" name="accent">
+                  <option value="en-GB">Britannique · si disponible</option>
+                  <option value="en-US">Américain · si disponible</option>
+                </select>
+              </div>
+              <p id="audio-note" class="adventure-control-hint" role="status" aria-live="polite">L’écoute est facultative ; la disponibilité et le rendu dépendent des voix installées sur l’appareil.</p>
+            </div>
+          </div>
+
+          <div class="adventure-dashboard">
+            <div class="adventure-map-panel">
+              <div class="adventure-map-heading">
+                <div><p class="eyebrow">Tes destinations</p><h3>Les lieux sont tous ouverts.</h3></div>
+                <span class="adventure-map-mark" aria-hidden="true">✦</span>
+              </div>
+              <div class="adventure-quest-grid" id="mission-grid" role="group" aria-label="Choisir une mission"></div>
+            </div>
+            <aside class="adventure-progress-card" aria-labelledby="progress-title">
+              <p class="eyebrow">Ton carnet de voyage</p>
+              <h3 id="progress-title">Tu gardes le cap que tu veux.</h3>
+              <p class="adventure-progress-summary" id="progress-summary" role="status" aria-live="polite" aria-atomic="true">Ta progression reste facultative.</p>
+              <ul class="adventure-progress-list" id="progress-list"></ul>
+              <button class="button button-secondary adventure-reset-button" id="clear-progress" type="button">Effacer mon avancement local</button>
+              <p class="adventure-privacy-note">Dans les Escales d’anglais, seuls les identifiants des missions découvertes et ton choix d’aide peuvent être gardés localement. Les fiches ajoutées au parcours sont gérées séparément dans l’atlas. Tes réponses libres ne sont ni enregistrées, ni envoyées. Aucun compte, publicité, mesure d’audience ou suivi individuel.</p>
+              <p class="adventure-storage-note" id="storage-note" role="status" aria-live="polite" hidden></p>
+            </aside>
+          </div>
+
+          <section class="adventure-play-panel" id="play-panel" aria-labelledby="play-title" hidden>
+            <div class="adventure-play-toolbar">
+              <button class="button button-secondary" id="back-to-map" type="button">← Toutes les escales</button>
+              <span class="adventure-level-pill" id="active-level"></span>
+            </div>
+            <div id="mission-playthrough">
+              <div class="adventure-play-grid">
+                <figure class="adventure-scene" aria-labelledby="scene-caption">
+                  <div class="adventure-scene-frame">
+                    <canvas id="world-canvas" width="900" height="560" aria-hidden="true">Scène en trois dimensions ; les informations utiles sont décrites dans la mission.</canvas>
+                    <img id="world-fallback" src="assets/images/escales-anglais-hero.jpg" alt="" width="1672" height="941" hidden>
+                    <span class="scene-light scene-light-one" aria-hidden="true"></span>
+                    <span class="scene-light scene-light-two" aria-hidden="true"></span>
+                  </div>
+                  <figcaption id="scene-caption" class="adventure-scene-caption"></figcaption>
+                  <div class="adventure-scene-controls" id="scene-controls" role="group" aria-label="Regarder le décor en trois dimensions">
+                    <button class="button button-secondary" id="scene-left" type="button" aria-label="Tourner la vue vers la gauche">← <span>Tourner</span></button>
+                    <button class="button button-secondary" id="scene-reset" type="button">Vue de départ</button>
+                    <button class="button button-secondary" id="scene-right" type="button" aria-label="Tourner la vue vers la droite"><span>Tourner</span> →</button>
+                  </div>
+                  <p class="adventure-scene-note">Le décor est décoratif : toutes les actions se font avec les commandes texte, au clavier, au toucher ou avec un lecteur d’écran.</p>
+                </figure>
+
+                <article class="adventure-dialogue-card" id="mission-translation-area" aria-labelledby="play-title">
+                  <div class="adventure-dialogue-heading">
+                    <p class="eyebrow" id="mission-place"></p>
+                    <h3 id="play-title" tabindex="-1"></h3>
+                    <p id="mission-outcome" class="adventure-mission-outcome"></p>
+                  </div>
+                  <div class="adventure-turn-meter">
+                    <span id="turn-count" aria-live="polite" aria-atomic="true">Échange 1 sur 3</span>
+                    <progress id="turn-progress" max="3" value="1" aria-label="Progression dans les échanges"></progress>
+                  </div>
+                  <section class="adventure-character-line" aria-labelledby="character-name">
+                    <div class="adventure-character-avatar" aria-hidden="true">✦</div>
+                    <div class="adventure-character-copy">
+                      <p class="adventure-character-name" id="character-name"></p>
+                      <p class="adventure-line-english" id="dialogue-line" lang="en" tabindex="-1"></p>
+                      <p class="adventure-line-french phrase-translation" id="dialogue-translation" lang="fr" hidden></p>
+                    </div>
+                    <button class="button button-secondary adventure-listen-button" id="listen-dialogue" type="button" hidden>Écouter</button>
+                  </section>
+                  <section class="adventure-answer-area" aria-labelledby="reply-heading">
+                    <h4 id="reply-heading">À toi de répondre</h4>
+                    <p class="adventure-objective" id="turn-objective"></p>
+                    <ul class="adventure-answer-list" id="answer-options"></ul>
+                  </section>
+
+                  <details class="adventure-free-practice" id="free-practice">
+                    <summary>Je préfère essayer ma propre phrase</summary>
+                    <p>Écris en anglais si tu veux, ou passe cette étape. Le prototype ne comprend ni ne corrige ta phrase : elle n’est pas transmise au site ni gardée dans ta progression. Tu verras un exemple possible pour comparer, sans note.</p>
+                    <form id="free-answer-form">
+                      <label for="free-answer">Ta phrase en anglais (facultatif)</label>
+                      <textarea id="free-answer" name="reponse-libre" lang="en" maxlength="240" rows="2" autocomplete="off" required placeholder="Write a sentence…"></textarea>
+                      <button class="button button-secondary" type="submit">Comparer avec un exemple</button>
+                    </form>
+                    <div class="adventure-free-result" id="free-answer-result" role="region" aria-label="Comparer avec une phrase modèle" aria-live="polite" hidden>
+                      <p class="adventure-coach-label">Un exemple possible — pas une correction automatique</p>
+                      <p class="adventure-model-english" id="free-model-english" lang="en"></p>
+                      <p class="adventure-model-french phrase-translation" id="free-model-french" lang="fr" hidden></p>
+                      <p id="free-answer-note"></p>
+                      <button class="button" id="continue-after-free" type="button">Continuer le scénario, sans note</button>
+                    </div>
+                  </details>
+
+                  <section class="adventure-response" id="turn-feedback" aria-labelledby="turn-feedback-heading" role="region" aria-live="polite" hidden>
+                    <h4 id="turn-feedback-heading">L’échange continue</h4>
+                    <p class="adventure-coaching" id="feedback-text"></p>
+                    <p class="adventure-tip" id="micro-tip"></p>
+                    <div class="adventure-npc-reply">
+                      <p class="adventure-coach-label">La réponse du personnage</p>
+                      <p class="adventure-line-english" id="npc-reply" lang="en"></p>
+                      <p class="adventure-line-french phrase-translation" id="npc-reply-translation" lang="fr" hidden></p>
+                      <button class="button button-secondary adventure-listen-button" id="listen-reply" type="button" hidden>Écouter cette phrase</button>
+                    </div>
+                    <button class="button" id="continue-conversation" type="button">Continuer l’échange</button>
+                  </section>
+                </article>
+              </div>
+            </div>
+
+            <section class="adventure-finish" id="mission-finish" aria-labelledby="finish-title" hidden>
+              <p class="eyebrow">Une escale de plus dans ton carnet</p>
+              <h3 id="finish-title" tabindex="-1">Tu as mené la conversation à son terme.</h3>
+              <p id="finish-message"></p>
+              <details class="adventure-keepsake">
+                <summary>Garder quelques phrases utiles</summary>
+                <ul id="keepsake-list"></ul>
+              </details>
+              <div class="hero-actions adventure-finish-actions">
+                <button class="button" id="replay-mission" type="button">Refaire cette escale</button>
+                <button class="button button-secondary" id="finish-to-map" type="button">Choisir une autre destination</button>
+              </div>
+              <p class="adventure-progress-reminder">Cette fin n’est pas un résultat ou une certification : chaque scène est un petit exercice parmi d’autres. Tu peux t’arrêter ici, revenir plus tard ou recommencer.</p>
+            </section>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section adventure-learning-links" aria-labelledby="more-english-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Fiches d’anglais · format autonome</p>
+          <h2 id="more-english-title">Tu préfères étudier une phrase hors dialogue ?</h2>
+          <p>Ces trois fiches d’anglais restent autonomes : elles peuvent compléter une escale, la remplacer ou servir de seul point de départ.</p>
+        </div>
+        <div class="adventure-sheet-grid">
+          <article class="adventure-sheet-card"><span class="adventure-sheet-level">Pré-A1 · A1</span><h3>Demander son chemin</h3><p>Une première mission pour préciser une destination, demander un plan et vérifier une indication.</p><a class="button button-secondary" href="apprendre/fiches/langue-anglais-direction.html">Ouvrir la fiche</a></article>
+          <article class="adventure-sheet-card"><span class="adventure-sheet-level">Pré-A1 · A1</span><h3>Demander de l’aide</h3><p>Apprendre à demander une répétition ou une explication quand le message va trop vite.</p><a class="button button-secondary" href="apprendre/fiches/langue-anglais-demander-aide.html">Ouvrir la fiche</a></article>
+          <article class="adventure-sheet-card"><span class="adventure-sheet-level">Pré-A1 · A1</span><h3>Épeler un nom</h3><p>Essayer une courte question pour clarifier l’orthographe d’un nom fictif.</p><a class="button button-secondary" href="apprendre/fiches/langue-anglais-epeler.html">Ouvrir la fiche</a></article>
+        </div>
+        <p class="adventure-not-a-course"><strong>Vers la suite :</strong> l’ambition est de construire progressivement des conversations quotidiennes plus autonomes, jusqu’aux objectifs B2 à concevoir, en élargissant les thèmes et les actes de communication du CECRL. Les missions disponibles aujourd’hui s’arrêtent à un échange guidé B1 : elles ne couvrent pas l’ensemble des niveaux, des accents ou des situations de la vie réelle.</p>
+      </div>
+    </section>
+
+    <section class="trace-section" aria-labelledby="adventure-method-title">
+      <div class="container trace-panel adventure-method-panel">
+        <div>
+          <p class="eyebrow">Transparence de la R&amp;D</p>
+          <h2 id="adventure-method-title">Un jeu comme support, pas comme promesse de résultat.</h2>
+          <ul class="trace-list">
+            <li>Les Escales mobilisent la réception (lire ou écouter), la production (choisir ou essayer une phrase) et l’interaction. Les repères CECRL restent indicatifs : ils ne sont ni un test officiel ni une évaluation de ton niveau.</li>
+            <li>Les recherches sur les jeux en langue sont encourageantes pour certains apprentissages, notamment le vocabulaire, mais ne prouvent pas que cette maquette rende autonome en conversation.</li>
+            <li>Les dialogues, les lieux et l’illustration de ce prototype sont originaux. Aucun compte, aucune IA, aucun microphone ni téléchargement de contenu tiers n’est requis pour jouer.</li>
+          </ul>
+        </div>
+        <div class="hero-actions"><a class="button button-secondary" href="#feuille-route">Voir les prochaines étapes</a><a class="button button-secondary" href="transparence.html#rd-innovation">Voir la méthode de R&amp;D continue</a></div>
+      </div>
+    </section>
+
+    <section class="section adventure-roadmap" id="feuille-route" aria-labelledby="roadmap-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Feuille de route · sans promesse de calendrier</p>
+          <h2 id="roadmap-title">Un atlas complet à explorer, un contenu à faire relire.</h2>
+          <p>Les 70 fiches existantes sont maintenant reliées aux mondes. Les prochaines étapes portent sur leur qualité, l’accès réel et les sujets absents ; ajouter une carte ou un badge ne vaut pas validation d’un contenu.</p>
+        </div>
+        <ol class="adventure-roadmap-list">
+          <li><strong>Relire les contenus.</strong><span>Faire vérifier les cinq dialogues anglais et relire les 44 prototypes des fiches par des personnes compétentes ; maintenir visibles les thèmes encore à créer.</span></li>
+          <li><strong>Tester l’accès à l’atlas.</strong><span>Essayer recherche, filtres, parcours local, clavier, toucher, lecteur d’écran, zoom et contrastes sur plusieurs appareils.</span></li>
+          <li><strong>Créer des expériences dans d’autres mondes.</strong><span>Après relecture éditoriale, concevoir des activités originales pour d’autres matières sans recopier les fiches ni imposer un cursus.</span></li>
+          <li><strong>Examiner l’apprentissage réel.</strong><span>Avant d’annoncer un bénéfice, comparer des tâches concrètes et documenter les limites. L’autonomie conversationnelle et le transfert entre mondes restent des objectifs de recherche, pas des résultats acquis.</span></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img class="footer-logo" src="assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
+          <div><strong>Mouvement Représentatif de la Société Civile (M.R.S.C)</strong><p class="footer-tagline">La force citoyenne · Association loi 1901</p></div>
+        </div>
+        <nav class="footer-nav" aria-label="Navigation de pied de page">
+          <p class="footer-heading">Naviguer</p>
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="ia-societe.html">IA &amp; société</a></li>
+            <li><a href="apprendre.html">Apprendre</a></li>
+            <li><a href="simulateur.html">Simulateur</a></li>
+            <li><a href="documents.html">Documents</a></li>
+            <li><a href="transparence.html">Transparence</a></li>
+            <li><a href="confidentialite.html">Vie privée et données</a></li>
+          </ul>
+        </nav>
+        <div class="footer-contact">
+          <p class="footer-heading">Nous contacter</p>
+          <address>995 route de Jarcieu<br>38270 Beaurepaire</address>
+          <a class="footer-mail" href="mailto:assomrsc@gmail.com">assomrsc@gmail.com</a>
+        </div>
+        <div class="footer-docs">
+          <p class="footer-heading">Documents</p>
+          <ul>
+            <li><a href="https://www.mrsc.fr/assets/nos-statuts-mrsc-du-02-10-2020.pdf" target="_blank" rel="noopener noreferrer">Nos statuts</a></li>
+            <li><a href="documents.html">Tous les documents</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span data-year>2026</span> Mouvement Représentatif de la Société Civile (M.R.S.C).</p>
+        <p class="footer-legal"><a href="confidentialite.html">Vie privée et données</a> &middot; <a href="nous-contacter.html">Contact</a> &middot; <a href="transparence.html#licence">Licence</a> &middot; <a href="#contenu">Haut de page</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

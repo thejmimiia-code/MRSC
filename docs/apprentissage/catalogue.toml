@@ -1813,3 +1813,2011 @@ licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation d
 droits_controles_le = "2026-10-08"
 mode_utilisation = "reference-factuelle"
 utilisation = "Exemple de ressource d’explication civique ; aucune formulation, analyse ou publication n’est reprise."
+
+[[fiche]]
+id = "econ-lire-facture"
+titre = "Lire une facture et repérer une échéance"
+matiere = "Économie, budget et consommation"
+matiere_id = "economie"
+domaine = "economie-finances"
+niveau = 2
+horizon_contenu = "Repères de vie courante et de consommation ; les exemples sont fictifs et les portails cités concernent la France"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon autonome centré sur la lecture d’une facture fictive, sans interprétation juridique ni conseil financier personnalisé. La relecture par une personne compétente en consommation et par une personne éditoriale, la vérification des sources et droits, l’accessibilité et les essais apprenants restent à faire. La fiche ne décrit ni les mentions légalement obligatoires, ni les règles d’un abonnement, ni les délais de contestation."
+minutes = 10
+resume = "Repérer l’émetteur, les montants, le total et la date indiquée, sans confondre date d’émission, période et échéance."
+objectif = "Lire les repères d’une facture fictive, additionner ses lignes simples et distinguer la date d’émission de l’échéance affichée."
+situation = "Une facture fictive de réparation, datée du 6 septembre 2026, comporte deux lignes de 28 € et 12 €. Le total à régler indiqué est de 40 €, avec la mention « à régler avant le 20 septembre 2026 ». Que représentent les deux dates et comment vérifier le total ?"
+analogie_titre = "Comme un ticket détaillé, avec une date à surveiller"
+analogie = "Un ticket détaillé présente des lignes et un total : on peut regarder ce qui compose la somme. Une facture peut aussi indiquer qui l’a émise, ce qui est facturé, un total et, parfois, une période ou une échéance. Repérer chaque rubrique aide à lire le document dans le bon ordre."
+limite_analogie = "Un ticket de caisse et une facture ne sont pas le même document. Leur présentation varie selon le service et le contexte ; toutes les factures n’affichent pas les mêmes rubriques. L’analogie aide à relier des lignes à un total, mais ne permet pas de vérifier seule la conformité juridique, la réalisation d’un service ou le paiement."
+notions = [
+  "Émetteur — entreprise ou organisme qui a produit la facture.",
+  "Date d’émission — date à laquelle le document a été établi ; elle ne désigne pas forcément la période du service ni sa date de paiement.",
+  "Période facturée — période à laquelle une somme se rapporte, lorsqu’elle est indiquée ; certaines factures portent sur une opération ponctuelle.",
+  "Échéance — date limite de paiement indiquée sur le document, si une date est précisée ; les modalités peuvent aussi dépendre du contrat ou du moyen de paiement.",
+  "Montant total à régler — somme affichée comme restant due ; elle peut tenir compte d’ajustements ou de paiements déjà enregistrés, selon le document."
+]
+demarche = [
+  "Repère l’émetteur et l’objet de la facture. Garde pour toi les références, l’adresse et les autres informations personnelles qui peuvent apparaître sur un document réel.",
+  "Cherche la période ou l’opération facturée, si elle est indiquée. Ne suppose pas qu’une facture concerne forcément un mois entier ou un abonnement.",
+  "Distingue la date d’émission, la période de service éventuelle et la date d’échéance. Une date ne permet pas de déduire automatiquement les deux autres.",
+  "Lis les lignes et leurs montants. Dans un exemple simple, additionne les lignes concernées ; si le total diffère, cherche une remise, un paiement déjà reçu, une taxe ou une autre ligne affichée au lieu de deviner.",
+  "Repère le montant présenté comme restant à régler et tout statut de paiement explicite. Un montant dû n’indique pas à lui seul qu’un paiement a déjà été effectué.",
+  "Si une facture réelle est ambiguë ou inattendue, vérifie les informations auprès de l’émetteur par un moyen de contact connu. Pour un droit, un désaccord ou une échéance importante, consulte une source officielle à jour ou une personne compétente."
+]
+exercice = "Sur une facture simplifiée et fictive, une réparation coûte 28 € et une pièce coûte 12 €. Le document a été établi le 6 septembre 2026 ; il indique un total à régler de 40 € avant le 20 septembre 2026. Vérifie le total et nomme les deux dates. Le document indique-t-il que la somme a déjà été payée ?"
+aide = "Additionne les deux lignes. Cherche ensuite les mots « établi le » et « à régler avant » : ils ne décrivent pas le même moment."
+correction = [
+  "28 € + 12 € = 40 €. Dans cet exemple sans autre ligne, le total affiché est cohérent.",
+  "Le 6 septembre est la date d’établissement du document ; le 20 septembre est l’échéance affichée pour le règlement.",
+  "Non. La mention « total à régler » ne prouve pas que la somme a été payée. Il faudrait consulter un statut de paiement explicite ou une confirmation adaptée, sans partager publiquement les détails du document."
+]
+a_retenir = [
+  "Date d’émission, période facturée et échéance sont trois repères différents.",
+  "Les rubriques et leur présentation varient selon le type de facture ; l’absence d’une rubrique ne permet pas d’inventer l’information.",
+  "Une addition simple permet de vérifier certaines lignes, mais des remises, taxes, acomptes ou paiements déjà enregistrés peuvent modifier le total.",
+  "Une facture n’explique pas nécessairement toutes les conditions d’un contrat et ne confirme pas toujours un paiement déjà effectué.",
+  "Sur un document réel, protège les références et vérifie auprès d’un interlocuteur fiable si quelque chose est incertain."
+]
+transferer = "Ces repères peuvent aider à lire une facture de service ou le détail d’une période d’abonnement. Cette fiche est une première entrée : elle n’explique pas les mentions légalement obligatoires, le renouvellement ou la résiliation d’un abonnement, ni les délais et démarches de contestation. Ces éléments dépendent du document, du contrat et des règles à jour ; vérifie-les auprès d’un service officiel ou d’une personne compétente."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Service-Public.fr — information officielle sur les droits et démarches"
+url = "https://www.service-public.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail d’orientation documentaire cité comme point de départ pour rechercher des informations administratives actuelles ; aucun texte, formulaire, exemple ni visuel du site n’est repris."
+
+[[fiche.sources]]
+titre = "DGCCRF — information sur la consommation"
+url = "https://www.economie.gouv.fr/dgccrf"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail facultatif de repères sur la consommation ; aucun texte, procédure, exemple ni visuel du site n’est repris. Les montants et documents pédagogiques de la fiche sont fictifs."
+
+[[fiche]]
+id = "econ-comparer-prix-unitaires"
+titre = "Comparer deux prix à quantité égale"
+matiere = "Économie, budget et consommation"
+matiere_id = "economie"
+domaine = "economie-finances"
+niveau = 2
+horizon_contenu = "Comparaison de prix et proportionnalité simple ; exemples fictifs de consommation"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon autonome fondé sur des quantités et prix fictifs. Les calculs, la formulation du prix ramené à une unité commune, la relecture mathématique et éditoriale, les droits des sources, l’accessibilité et les essais apprenants restent à vérifier. Le résultat ne constitue pas une recommandation d’achat et ne tient pas compte de la qualité, du besoin, des promotions ou du gaspillage."
+minutes = 9
+resume = "Ramener des prix à la même unité pour comparer des quantités différentes, sans confondre coût du paquet et coût par unité."
+objectif = "Calculer un prix rapporté à une quantité commune et distinguer cette comparaison du montant réellement payé pour un paquet."
+situation = "Deux paquets fictifs du même produit pèsent 250 g et 500 g. Le premier coûte 1,50 €, le second 2,80 €. Si l’on compare le prix pour 1 kg, lequel a le prix unitaire le plus bas ?"
+analogie_titre = "Comme comparer deux longueurs de ruban au prix du mètre"
+analogie = "Si deux rouleaux de ruban ont des longueurs différentes, comparer seulement leur prix total ne suffit pas. On peut ramener chaque prix à un mètre, puis comparer. Pour des produits comparables vendus en quantités différentes, on peut faire la même opération avec une unité de masse ou de volume commune."
+limite_analogie = "Un produit n’est pas un simple ruban : sa composition, sa qualité, son utilité, sa conservation et la quantité réellement nécessaire comptent aussi. Le prix par unité compare un aspect chiffré, pas la valeur globale ni le meilleur choix pour une personne."
+notions = [
+  "Prix du paquet — somme affichée pour acheter le paquet entier.",
+  "Quantité — masse, volume ou nombre indiqué pour le produit ; il faut comparer des quantités de même nature.",
+  "Unité commune — même quantité de référence pour les deux prix, par exemple le kilogramme pour deux produits comparés en masse.",
+  "Prix unitaire — ici, prix calculé pour une unité commune ; il ne faut pas le confondre avec le prix du paquet.",
+  "Proportionnalité — relation où multiplier une quantité par un nombre multiplie aussi le prix correspondant, si le tarif reste le même."
+]
+demarche = [
+  "Vérifie que tu compares le même type de produit et la même grandeur : deux masses entre elles, deux volumes entre eux, par exemple.",
+  "Note le prix total de chaque paquet et sa quantité. Si les unités diffèrent, convertis-les avant de comparer : 1 kg correspond à 1 000 g.",
+  "Choisis une unité commune pratique, comme 1 kg. Calcule combien de paquets de chaque taille correspondraient à cette quantité.",
+  "Multiplie le prix de chaque paquet par ce nombre. Dans la situation de départ, 250 g à 1,50 € donnent 4 × 1,50 € = 6,00 €/kg ; 500 g à 2,80 € donnent 2 × 2,80 € = 5,60 €/kg.",
+  "Compare les deux prix obtenus pour 1 kg. Ici, 5,60 €/kg est inférieur à 6,00 €/kg ; c’est le prix par kilogramme le plus bas dans cet exemple.",
+  "Garde le prix total du paquet séparé du prix pour 1 kg : un paquet au prix unitaire plus bas peut demander une somme plus élevée à payer maintenant."
+]
+exercice = "Deux paquets fictifs du même produit sont proposés : 500 g pour 3,00 € et 1 kg pour 5,50 €. Calcule le prix de chaque option pour 1 kg. Laquelle a le prix unitaire le plus bas ? Laquelle demande la somme la plus faible pour prendre un paquet ?"
+aide = "Un kilogramme contient deux fois 500 g. Multiplie donc le prix du paquet de 500 g par deux ; le prix du paquet de 1 kg est déjà donné pour cette quantité."
+correction = [
+  "Pour 500 g à 3,00 €, le prix pour 1 kg est 2 × 3,00 € = 6,00 €/kg.",
+  "Pour 1 kg à 5,50 €, le prix pour 1 kg est 5,50 €/kg. À quantité égale, cette option a donc le prix unitaire le plus bas : 5,50 € contre 6,00 € par kilogramme.",
+  "Le paquet de 500 g demande la somme la plus faible à payer au moment de l’achat : 3,00 € contre 5,50 €. Le prix unitaire ne suffit pas à décider ce qui convient ; la quantité utile, la conservation, les autres caractéristiques et les conditions de l’offre comptent aussi."
+]
+a_retenir = [
+  "Pour comparer des formats différents, ramène leurs prix à la même unité de masse, de volume ou de nombre.",
+  "Vérifie les unités avant le calcul : grammes avec grammes, litres avec litres, sauf si tu les convertis correctement.",
+  "Le prix unitaire et le prix du paquet répondent à deux questions différentes.",
+  "Un prix ramené à une unité n’évalue ni la qualité, ni l’utilité, ni la quantité que tu pourras consommer.",
+  "Les promotions, les lots, les conditions particulières ou une quantité inutilisée peuvent changer la comparaison pratique."
+]
+transferer = "La même démarche peut comparer le prix par kilogramme, par litre ou par article lorsque les produits, les unités et les conditions sont vraiment comparables. Sur une étiquette réelle, vérifie le prix total, l’unité, la quantité et les conditions de l’offre ; un coût unitaire plus faible n’est pas à lui seul un conseil d’achat."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "DGCCRF — information sur la consommation"
+url = "https://www.economie.gouv.fr/dgccrf"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère facultatif vers des informations de consommation ; la fiche n’affirme aucune obligation d’affichage et ne reprend aucun texte, règle, exemple ni visuel du site."
+
+[[fiche.sources]]
+titre = "Éduscol — programmes et ressources de mathématiques au cycle 2"
+url = "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère général de programme pour le raisonnement mathématique ; aucun texte, exercice ou exemple de la source n’est repris. Les prix et quantités de la fiche sont fictifs."
+
+[[fiche]]
+id = "fr-reperer-idee-texte"
+titre = "Repérer l’idée principale et les informations utiles"
+matiere = "Français et communication"
+matiere_id = "francais"
+domaine = "langue-communication"
+niveau = 2
+horizon_contenu = "Compréhension de textes courts et repérage d’informations ; exemples fictifs"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon autonome avec un message entièrement fictif. La distinction entre idée principale, détail et information utile selon la question, la clarté du texte et les réponses restent à relire par une personne compétente en français et en formation d’adultes. Les textes et exercices sont originaux ; les sources, les droits, l’accessibilité et les essais apprenants restent à contrôler."
+minutes = 8
+resume = "Distinguer le sujet principal d’un texte des détails qui répondent à une question précise."
+objectif = "Résumer un court message fictif en une phrase et retrouver les informations utiles à une question donnée."
+situation = "Message fictif : « La permanence de réparation, prévue lundi, est déplacée au jeudi 14 mai, de 16 h à 18 h, dans la salle du centre. Les objets doivent être déposés avant 15 h 45. Les inscriptions déjà faites restent valables. » Tu veux savoir ce qui change et à quelle heure apporter un objet."
+analogie_titre = "Comme lire le titre d’un dossier, puis chercher la bonne pièce"
+analogie = "Le titre d’un dossier indique son sujet ; les pages à l’intérieur donnent les détails. De même, une idée principale aide à dire de quoi parle un texte, tandis que certains détails répondent à une question précise : quand, où, pour qui ou sous quelle condition."
+limite_analogie = "Un texte n’est pas toujours un dossier avec un seul titre. Il peut développer plusieurs idées importantes, et le détail utile dépend de la question que l’on se pose. Un résumé doit rester fidèle au texte, sans ajouter une interprétation comme si elle était écrite."
+notions = [
+  "Sujet — thème général dont parle un texte.",
+  "Idée principale — information centrale que le texte cherche surtout à communiquer dans le passage étudié.",
+  "Détail — élément qui précise, illustre ou limite l’information principale.",
+  "Information explicite — information écrite directement dans le texte.",
+  "Déduction — conclusion que l’on tire en reliant des indices ; elle doit être distinguée des mots réellement écrits."
+]
+demarche = [
+  "Lis le texte en entier une première fois pour comprendre la situation générale.",
+  "Demande-toi de quoi le passage parle principalement et quelle information nouvelle il apporte.",
+  "Résume cette idée avec tes mots, en une phrase courte. Vérifie que ta phrase ne change pas le sens du texte.",
+  "Relis la question. Repère les détails qui y répondent : une date, une heure, un lieu, une action ou une condition.",
+  "Sépare ce qui est écrit de ce que tu en déduis. Si un détail nécessaire manque, le texte ne permet peut-être pas de répondre à tout."
+]
+exercice = "Message fictif : « L’atelier de couture aura lieu samedi 20 juin, de 10 h à 11 h, dans la salle 4. Tu peux apporter un vêtement à réparer, mais ce n’est pas obligatoire. L’entrée est gratuite. » En une phrase, indique l’idée principale. Puis trouve l’heure et le lieu, et dis si apporter un vêtement est obligatoire."
+aide = "Repère d’abord ce qui est annoncé. Ensuite, cherche les mots qui répondent séparément à « quand ? », « où ? » et « faut-il apporter quelque chose ? »."
+correction = [
+  "Idée principale possible : un atelier de couture est organisé le samedi 20 juin.",
+  "Il a lieu de 10 h à 11 h, dans la salle 4.",
+  "Non. Le texte dit que l’on peut apporter un vêtement, mais que ce n’est pas obligatoire. D’autres résumés fidèles sont possibles s’ils gardent ces informations distinctes."
+]
+a_retenir = [
+  "L’idée principale résume le message ; les détails répondent à des questions précises.",
+  "La question aide à choisir les détails utiles, mais elle ne doit pas changer ce que dit le texte.",
+  "Une déduction n’est pas forcément écrite : présente-la comme une interprétation et vérifie ses indices.",
+  "Si le texte ne donne pas une information, mieux vaut le dire que la deviner."
+]
+transferer = "Cette démarche peut aider à lire une annonce, un courriel, une consigne ou une page d’information. Pour un formulaire, une décision juridique ou une démarche importante, cette fiche ne remplace pas la lecture de toutes les conditions ni une vérification auprès du service compétent."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — socle commun et apprentissages"
+url = "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère général sur les apprentissages et la compréhension ; aucune phrase, tâche, consigne ou activité du site n’est reprise."
+
+[[fiche]]
+id = "langue-anglais-demander-aide"
+titre = "Demander de l’aide ou une répétition en anglais"
+matiere = "Langue étrangère : anglais"
+matiere_id = "langues"
+domaine = "langues-etrangeres"
+niveau = 1
+horizon_contenu = "Premières expressions d’anglais dans des échanges simples ; traductions d’appui en français"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de langue à relire par une personne compétente en anglais et en pédagogie des langues. Vérifier le naturel des expressions, les traductions, le registre selon le contexte et les variantes possibles. La fiche n’inclut pas d’audio ni de garantie de prononciation ; les sources, les droits, l’accessibilité et les essais apprenants restent à contrôler."
+minutes = 7
+resume = "Utiliser quelques expressions courtes pour demander de l’aide, faire répéter ou ralentir un échange."
+objectif = "Choisir une formule anglaise simple qui correspond au besoin, puis vérifier qu’elle est comprise."
+situation = "Dans une situation fictive à l’accueil d’un lieu public, une personne te donne une indication trop rapidement. Tu veux demander qu’elle répète ou parle plus lentement."
+analogie_titre = "Comme choisir le bon bouton pour préciser son besoin"
+analogie = "Dans un échange, une phrase courte peut indiquer ce qui aiderait : recevoir de l’aide, entendre une répétition ou ralentir le débit. Choisir la phrase qui correspond à la difficulté évite de demander autre chose que ce dont on a besoin."
+limite_analogie = "Une conversation n’est pas un appareil qui répond toujours de la même manière. Le ton, l’accent, le bruit et le contexte comptent ; une personne peut demander une autre formulation, écrire le message ou utiliser un autre moyen de communication."
+notions = [
+  "Could you help me, please? — formule polie pour demander de l’aide : « Pouvez-vous m’aider, s’il vous plaît ? »",
+  "Could you say that again, please? — demande de répétition : « Pouvez-vous répéter, s’il vous plaît ? »",
+  "Could you speak more slowly, please? — demande de parler plus lentement : « Pouvez-vous parler plus lentement, s’il vous plaît ? »",
+  "I don’t understand. — « Je ne comprends pas. » Une phrase directe que l’on peut compléter par une demande précise.",
+  "Please — mot de politesse souvent employé dans une demande ; son usage dépend aussi de la phrase et du contexte."
+]
+demarche = [
+  "Repère ce qui bloque : tu as besoin d’aide, d’une répétition, d’un débit plus lent ou d’une explication différente ?",
+  "Choisis une expression qui nomme ce besoin. Pour demander une répétition : « Could you say that again, please? »",
+  "Pour ralentir : « Could you speak more slowly, please? » Pour demander de l’aide : « Could you help me, please? »",
+  "Écoute ou lis la réponse et vérifie si elle t’aide. Tu peux redemander, montrer l’endroit concerné ou écrire une question courte.",
+  "Termine l’échange par une formule adaptée, par exemple « Thank you » (« Merci »), si cela convient à la situation."
+]
+exercice = "Une personne te donne une consigne en anglais, mais tu n’as pas entendu la dernière partie. Choisis une phrase pour demander qu’elle répète, puis une autre pour demander un débit plus lent."
+aide = "Pour demander une répétition, repère le verbe « say » (dire) et l’expression « again » (encore). Pour ralentir, le mot « slowly » signifie « lentement »."
+correction = [
+  "Pour demander une répétition : « Could you say that again, please? »",
+  "Pour demander de parler plus lentement : « Could you speak more slowly, please? »",
+  "« Sorry, I don’t understand » (« Désolé·e, je ne comprends pas ») peut aussi expliquer la difficulté. Les expressions peuvent varier ; l’objectif est de rendre le besoin compréhensible, pas de réciter une formule unique."
+]
+a_retenir = [
+  "Choisis une formule qui correspond précisément à ce qui t’aiderait.",
+  "Tu peux demander une répétition, un débit plus lent ou une autre explication : ce ne sont pas la même demande.",
+  "Les traductions donnent un repère, mais la formulation et le registre peuvent varier selon la situation.",
+  "La fiche ne fournit pas d’audio : elle n’enseigne pas la prononciation à elle seule."
+]
+transferer = "Ces expressions peuvent servir dans un échange de voyage, de formation ou de service. Si l’information est importante, vérifie les détails par écrit ou auprès d’une personne qui peut confirmer ; une phrase apprise ne garantit pas que le message a été compris."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — programmes et enseignements"
+url = "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère général de programme pour l’apprentissage des langues ; aucune phrase, traduction, consigne ou activité de la source n’est reprise."
+
+[[fiche]]
+id = "geo-points-cardinaux"
+titre = "S’orienter avec les points cardinaux"
+matiere = "Géographie et espace"
+matiere_id = "geographie"
+domaine = "geographie"
+niveau = 1
+horizon_contenu = "Repères de direction sur un plan schématique ; situations fictives, sans itinéraire réel"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon autonome fondé sur un plan fictif et une flèche du nord explicitement indiquée. Faire vérifier les points cardinaux, l’orientation des plans et les limites d’usage par une personne compétente en géographie. Aucun trajet réel, conseil de sécurité ou garantie d’accessibilité n’est fourni ; droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Lire une flèche du nord et nommer une direction générale sur un plan simple."
+objectif = "Utiliser nord, est, sud et ouest pour décrire la direction entre deux repères sur un plan dont l’orientation est connue."
+situation = "Sur un plan fictif, une flèche indique le nord vers le haut de la page. La bibliothèque est au centre, le parc se trouve à l’ouest et l’arrêt de bus au sud. Dans quelle direction générale faut-il aller de la bibliothèque au parc, puis à l’arrêt ?"
+analogie_titre = "Comme se repérer sur un tapis dont un bord est marqué nord"
+analogie = "Si tu sais quel bord du tapis représente le nord, tu peux nommer les autres côtés et décrire une direction. Sur un plan, une flèche du nord joue ce rôle de repère avant de comparer la position de deux lieux."
+limite_analogie = "Un tapis reste immobile et plat ; le terrain réel comporte des rues, des obstacles, des pentes et des accès différents. Une direction cardinale ne décrit ni un itinéraire complet, ni sa distance, ni sa sécurité ou son accessibilité."
+notions = [
+  "Point cardinal — l’une des quatre directions principales : nord, est, sud ou ouest.",
+  "Flèche du nord — repère qui montre vers quelle direction le nord se trouve sur un plan.",
+  "Orientation — position d’un plan par rapport aux directions ou à un repère choisi.",
+  "Direction générale — indication d’ensemble entre deux lieux, sans décrire toutes les étapes du trajet."
+]
+demarche = [
+  "Cherche la flèche du nord ou la rose des vents. Sans ce repère, ne suppose pas que le haut de la page correspond au nord.",
+  "Repère le lieu de départ et celui d’arrivée.",
+  "Si le nord pointe vers le haut, le sud est vers le bas, l’est vers la droite et l’ouest vers la gauche. Si le plan est tourné, suis la flèche plutôt que les bords de l’écran.",
+  "Compare la position des deux lieux et nomme la direction générale : par exemple, le parc est à l’ouest de la bibliothèque.",
+  "Pour un déplacement réel, consulte un itinéraire récent et adapté au lieu ; cette fiche ne permet pas de choisir un trajet praticable ou sûr."
+]
+exercice = "Sur un plan fictif dont la flèche du nord pointe vers le haut, tu es à la bibliothèque. Le jardin est à l’est et le marché au sud. Dans quelle direction générale se trouve chacun ?"
+aide = "Commence par la flèche. Quand le nord pointe vers le haut, l’est est à droite et le sud en bas."
+correction = [
+  "Le jardin se trouve à l’est de la bibliothèque.",
+  "Le marché se trouve au sud de la bibliothèque.",
+  "Ces réponses indiquent une direction générale. Elles ne donnent ni les rues à suivre, ni une distance, ni les conditions d’accès."
+]
+a_retenir = [
+  "Trouve d’abord la flèche du nord ; l’orientation peut changer d’un plan à l’autre.",
+  "Les directions opposées sont nord/sud et est/ouest.",
+  "La direction générale entre deux repères n’est pas un itinéraire détaillé.",
+  "Pour une carte réelle, vérifie sa date, sa légende, son orientation et les informations utiles au déplacement."
+]
+transferer = "Ces repères aident à décrire la position relative de lieux sur un plan ou une carte. Pour se déplacer réellement, tenir compte des rues, des travaux, des accès, des préférences et des besoins du moment ; choisir un service cartographique ou demander une aide adaptée si nécessaire."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — socle commun et compétences"
+url = "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère général pour l’apprentissage des outils de représentation ; aucun texte, carte, exemple ou activité du site n’est repris."
+
+[[fiche]]
+id = "histoire-lire-frise"
+titre = "Lire une frise chronologique et ordonner des événements"
+matiere = "Histoire et chronologie"
+matiere_id = "histoire"
+domaine = "histoire-memoire"
+niveau = 1
+horizon_contenu = "Premiers repères de chronologie ; exemple de dates entièrement fictif et dans un même mois"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon autonome utilisant uniquement une séquence fictive de dates du même mois. Faire vérifier la distinction entre ordre chronologique, date et intervalle, ainsi que la lisibilité de l’échelle. La fiche ne donne aucun repère historique de fond et ne prétend pas représenter une chronologie exhaustive ; relectures, droits et essais apprenants restent à faire."
+minutes = 8
+resume = "Placer des événements dans l’ordre des dates et distinguer une date d’un intervalle."
+objectif = "Lire une frise simple, repérer ce qui arrive avant ou après et calculer le temps entre deux dates proches."
+situation = "Un jardin collectif fictif suit trois étapes : réunion de préparation le 6 mai, livraison des outils le 13 mai, puis ouverture au public le 20 mai. Quelle étape arrive en premier ? Combien de jours séparent la réunion de la livraison ?"
+analogie_titre = "Comme une règle posée le long du temps"
+analogie = "Une frise place des repères le long d’une ligne. Sur une règle, les marques les plus éloignées correspondent à une plus grande longueur ; sur une frise avec une échelle régulière, leur écart représente un temps plus long. Les dates permettent aussi de classer les événements."
+limite_analogie = "Une frise peut choisir seulement certains événements, et son échelle n’est pas toujours régulière. La place d’un événement sur la ligne ne prouve pas qu’il a causé celui qui vient ensuite ; les exemples de cette fiche ne sont pas des faits historiques."
+notions = [
+  "Chronologie — classement d’événements selon le moment où ils ont eu lieu.",
+  "Frise chronologique — représentation qui place des dates ou événements sur une ligne du temps.",
+  "Date — repère qui situe un jour, un mois et une année, selon le calendrier utilisé.",
+  "Intervalle — temps qui sépare deux dates ou deux événements ; ce n’est pas la durée de chaque événement.",
+  "Échelle — relation entre la distance représentée sur la ligne et le temps correspondant, lorsqu’elle est indiquée et régulière."
+]
+demarche = [
+  "Lis le titre, les dates et le sens de lecture de la frise. Vérifie la période représentée et l’unité utilisée.",
+  "Place chaque événement près de sa date, puis compare les dates pour trouver l’ordre.",
+  "Pour trouver un intervalle, compte le temps entre deux dates. Dans le même mois, du 6 au 13 mai, il s’écoule 7 jours.",
+  "Distingue la date de l’événement de sa durée : une date indique quand il arrive, tandis qu’une durée indique combien de temps il se poursuit.",
+  "Ne déduis pas une cause d’une simple succession. Pour étudier un fait historique réel, il faut aussi examiner les sources, le contexte et les interprétations."
+]
+exercice = "Une exposition fictive est préparée le 3 juin, installée le 10 juin et ouverte le 17 juin de la même année. Range ces événements du premier au dernier. Combien de jours séparent la préparation de l’installation ?"
+aide = "Les trois dates sont dans le même mois : compare les nombres 3, 10 et 17, puis calcule l’écart entre 3 et 10."
+correction = [
+  "Ordre chronologique : préparation le 3 juin, installation le 10 juin, ouverture le 17 juin.",
+  "Du 3 au 10 juin, il s’écoule 7 jours.",
+  "L’intervalle de sept jours ne dit pas combien de temps chaque étape dure et ne prouve pas qu’une étape a causé la suivante."
+]
+a_retenir = [
+  "La date sert à situer un événement ; l’intervalle mesure le temps entre deux repères.",
+  "Vérifie l’année, le mois, le calendrier et l’échelle quand tu lis une frise.",
+  "Une frise sélectionne et organise des informations ; elle n’est pas l’histoire entière.",
+  "Une succession d’événements ne suffit pas à établir un lien de cause à effet."
+]
+transferer = "La même lecture peut servir pour une chronologie de projet ou une frise historique. Pour les événements réels, consulte des sources datées et contextualisées ; cette fiche n’apporte pas elle-même de contenu historique ni d’interprétation sur une période."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — programmes et horaires de l’école élémentaire"
+url = "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère général de programmes pour situer l’apprentissage des dates et du temps ; aucun texte, frise, événement, exemple ou activité de la source n’est repris."
+
+[[fiche]]
+id = "maths-probabilite-tirage"
+titre = "Comprendre une chance dans un tirage simple"
+matiere = "Mathématiques du quotidien"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 2
+horizon_contenu = "Premiers repères sur les chances et le hasard ; exemples fictifs avec des possibilités également probables"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de probabilités limité à des tirages fictifs simples. Faire vérifier le dénombrement, l’hypothèse d’équiprobabilité et la différence entre tirage avec et sans remise par une personne compétente en mathématiques. La fiche rappelle qu’une probabilité ne garantit pas un résultat individuel ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 9
+resume = "Compter les possibilités d’un tirage simple et comprendre qu’une chance n’est pas une certitude."
+objectif = "Calculer une probabilité élémentaire lorsque chaque objet a la même chance d’être tiré."
+situation = "Un sac opaque contient quatre jetons : un jaune et trois verts. Pour cet exemple, on suppose que le mélange et le mode de tirage donnent à chaque jeton la même chance d’être choisi. On tire un jeton, puis on le remet dans le sac avant tout nouveau tirage. Quelle part des jetons est jaune ? Est-ce que cela garantit un jeton jaune au prochain tirage ?"
+analogie_titre = "Comme compter les tickets gagnants parmi des tickets de même format"
+analogie = "Si quatre tickets ont exactement la même chance d’être choisis et qu’un seul est jaune, on peut compter un cas jaune sur quatre cas possibles. Le comptage donne une chance théorique pour un tirage, pas la couleur qui sortira forcément."
+limite_analogie = "Le calcul suppose que chaque jeton a la même chance d’être choisi et que le mélange est impartial. Si les objets diffèrent, si le tirage est biaisé ou si l’on ne remet pas le jeton, les chances peuvent changer."
+notions = [
+  "Issue — résultat possible d’une expérience aléatoire, comme tirer un jeton jaune.",
+  "Événement — résultat ou ensemble de résultats qui t’intéresse.",
+  "Cas équiprobables — cas possibles qui ont tous la même chance de se produire.",
+  "Probabilité — mesure d’une chance ; dans un ensemble de cas équiprobables, elle se calcule en divisant les cas favorables par tous les cas possibles.",
+  "Tirage avec remise — objet remis dans l’ensemble avant un nouveau tirage ; la composition initiale est alors rétablie."
+]
+demarche = [
+  "Décris précisément l’expérience : quel objet est tiré, combien de fois et avec ou sans remise ?",
+  "Compte tous les résultats possibles. Vérifie que chaque objet a la même chance d’être tiré avant d’utiliser une simple fraction de comptage.",
+  "Compte les résultats favorables à l’événement demandé. Ici, un jeton jaune sur quatre jetons équiprobables donne 1/4.",
+  "Interprète la fraction comme une chance théorique pour un tirage, pas comme une promesse sur le prochain résultat.",
+  "Si l’objet n’est pas remis, recompte les possibilités restantes avant de calculer la chance d’un tirage suivant."
+]
+exercice = "Un sac fictif contient deux jetons rouges et deux bleus. On suppose que chaque jeton a la même chance d’être tiré et on en tire un. Quelle est la probabilité de tirer un jeton bleu ? Cette probabilité garantit-elle le résultat de ce tirage ?"
+aide = "Compte le nombre total de jetons, puis le nombre de jetons bleus. Les quatre jetons ont la même chance d’être choisis."
+correction = [
+  "Il y a quatre jetons en tout et deux jetons bleus : 2/4, ce qui équivaut à 1/2 ou une chance sur deux.",
+  "Non. Une chance sur deux décrit la probabilité théorique du tirage ; le résultat particulier peut être rouge ou bleu."
+]
+a_retenir = [
+  "Pour compter les chances, vérifie que les résultats considérés sont réellement équiprobables.",
+  "Dans un cas simple équiprobable, probabilité = cas favorables ÷ cas possibles.",
+  "Une probabilité décrit une chance, pas une certitude sur un résultat isolé.",
+  "Remettre ou non l’objet change la composition et peut changer les chances au tirage suivant."
+]
+transferer = "Cette démarche peut s’appliquer à un dé supposé équilibré ou à un jeu avec des secteurs identiques, si les hypothèses d’égalité des chances sont raisonnables. Elle ne permet pas de prédire sûrement un résultat ni de conclure qu’un objet réel est impartial sans vérification."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — programme de mathématiques du cycle 4"
+url = "https://www.education.gouv.fr/sites/default/files/document/Annexe%202%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20pour%20le%20cycle%204-480716.pdf"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère de programme pour les probabilités et le hasard ; aucun texte, exercice, exemple ou figure de la source n’est repris."
+
+[[fiche]]
+id = "numerique-organiser-fichiers"
+titre = "Nommer et retrouver ses fichiers sans exposer ses données"
+matiere = "Numérique et usages du quotidien"
+matiere_id = "numerique"
+domaine = "numerique-ia"
+niveau = 2
+horizon_contenu = "Organisation générale de fichiers, sans dépendre d’un appareil ou d’un logiciel précis"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon généraliste qui ne suppose ni système d’exploitation ni service de stockage particulier. Faire vérifier les termes fichier, dossier, extension, version et sauvegarde, ainsi que les conseils de confidentialité et leurs limites par une personne compétente en numérique. Les étapes varient selon les outils ; aucun fichier réel, partage ou suppression n’est demandé. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 9
+resume = "Choisir des noms compréhensibles, retrouver un document et éviter de partager des informations sensibles par erreur."
+objectif = "Créer une convention simple de nommage et retrouver un fichier sans modifier son format ni révéler de données personnelles."
+situation = "Dans un dossier fictif, tu vois « document.pdf », « document-final.pdf » et « document-final2.pdf ». Tu cherches le planning corrigé d’une réunion. Comment pourrais-tu nommer une nouvelle version pour la retrouver plus facilement, sans inscrire de renseignement personnel dans son nom ?"
+analogie_titre = "Comme classer des papiers dans des chemises étiquetées"
+analogie = "Une chemise marquée « planning réunion — octobre » est plus facile à retrouver qu’une chemise appelée « papier 2 ». Un nom de fichier peut aussi annoncer son sujet et, si nécessaire, sa date ou sa version. Un dossier joue le rôle d’un rangement pour des fichiers liés."
+limite_analogie = "Un ordinateur peut rechercher, trier, masquer ou partager des fichiers d’une manière qui dépend du logiciel et des réglages. Un nom clair ne remplace ni une sauvegarde, ni le contrôle des personnes qui ont accès au dossier."
+notions = [
+  "Fichier — document numérique enregistré, par exemple un texte, une image ou un PDF.",
+  "Dossier — emplacement qui rassemble des fichiers ou d’autres dossiers.",
+  "Nom de fichier — texte qui aide à reconnaître le contenu ; il peut contenir un sujet, une date ou une version utile.",
+  "Extension — partie finale du nom, souvent après un point, qui indique le format comme .pdf ; la renommer ne convertit pas le document.",
+  "Sauvegarde — copie conservée séparément pour pouvoir retrouver un document si l’original est perdu ou abîmé."
+]
+demarche = [
+  "Choisis un nom court qui décrit le contenu : par exemple « planning-reunion » plutôt que « document-final2 ».",
+  "Si plusieurs versions existent, ajoute une date ou un numéro cohérent, par exemple « planning-reunion-2026-10-v02 ». Évite « final-final » et vérifie quelle version est réellement la plus récente.",
+  "Range les fichiers liés dans un dossier au nom clair et garde une organisation simple que tu peux retrouver.",
+  "Préserve l’extension du fichier : renommer « rapport.pdf » en « rapport.docx » ne transforme pas son format.",
+  "Avant d’écraser ou de remplacer un document important, vérifie qu’une copie utile existe. Les options de sauvegarde varient selon l’appareil, l’organisation et les règles applicables.",
+  "Avant de partager un fichier ou son dossier, vérifie le destinataire, les droits d’accès et les informations personnelles contenues dans le nom ou le document."
+]
+exercice = "Tu crées la deuxième version d’un planning fictif de réunion prévu pour octobre 2026. Propose un nom qui indique le sujet, la période et la version, sans nom de personne ni adresse. Que faut-il éviter de modifier si tu veux garder le même format ?"
+aide = "Tu peux utiliser l’ordre « sujet-période-version », par exemple « planning-reunion-2026-10-v02 ». L’extension du format est différente du numéro de version."
+correction = [
+  "Exemple de nom : « planning-reunion-2026-10-v02 ». Une autre convention claire peut aussi convenir.",
+  "Garde l’extension qui indique le format, par exemple .pdf si le document est un PDF ; changer le texte de l’extension ne convertit pas le fichier.",
+  "Le nom et le rangement aident à retrouver le document, mais ne garantissent pas qu’il est sauvegardé ou que son partage est limité aux bonnes personnes."
+]
+a_retenir = [
+  "Un nom descriptif et une organisation constante facilitent la recherche.",
+  "Une date ou un numéro de version peut aider si plusieurs documents proches coexistent.",
+  "Ne confonds pas le nom du fichier, son extension et son format réel.",
+  "Une sauvegarde, une autorisation de partage et un nom clair sont trois choses différentes.",
+  "N’inscris pas de donnée sensible dans un nom de fichier et vérifie le contenu avant de le transmettre."
+]
+transferer = "La convention peut servir pour des courriels enregistrés, des photos, des documents de travail ou des projets partagés. Les menus et fonctions changent selon les outils ; si tu ne sais pas où un fichier est enregistré ou qui peut le voir, demande une vérification avant de le déplacer, supprimer ou partager."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — prévention et assistance face aux actes de cybermalveillance"
+url = "https://www.cybermalveillance.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail facultatif de repères de sécurité numérique ; aucun conseil, texte, exemple, capture d’écran ni procédure du site n’est repris. Les fonctions citées dans la fiche sont décrites à un niveau général, sans instruction propre à un appareil."
+
+[[fiche]]
+id = "methodes-demander-clarification"
+titre = "Reformuler une demande avant de commencer"
+matiere = "Méthodes pour apprendre"
+matiere_id = "apprendre"
+domaine = "methodes-communication"
+niveau = 1
+horizon_contenu = "Échanges en formation, en équipe ou dans une activité quotidienne ; scénario fictif"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon sur la clarification d’une demande, sans évaluer la personne ni supposer que toute question peut être posée sans risque. Faire relire la formulation, le ton et les exemples par des personnes ayant différentes expériences de communication et de travail. La fiche reconnaît plusieurs voies de confirmation ; l’accessibilité, les sources, les droits et les essais apprenants restent à contrôler."
+minutes = 8
+resume = "Vérifier les actions, l’ordre et les conditions d’une demande en la reformulant avec ses propres mots."
+objectif = "Repérer une information manquante, résumer une consigne et demander une confirmation avant d’agir."
+situation = "Dans un scénario fictif d’organisation d’un atelier, une personne dit : « Installe les chaises près de l’entrée, garde le passage libre, puis demande-moi avant de déplacer les tables. » Tu veux vérifier l’ordre et la limite avant de commencer."
+analogie_titre = "Comme relire une adresse avant d’envoyer un colis"
+analogie = "Avant d’envoyer un colis, relire l’adresse permet de repérer une erreur pendant qu’on peut encore la corriger. Reformuler une demande permet aussi de vérifier qu’on a compris l’action, l’ordre et la contrainte avant de commencer."
+limite_analogie = "Une demande humaine peut évoluer et la personne peut préciser autrement. Reformuler ne garantit pas que tout est compris et ne remplace pas une consigne écrite, une formation ou une règle de sécurité lorsque celles-ci sont nécessaires."
+notions = [
+  "Reformulation — dire avec ses propres mots ce que l’on pense avoir compris.",
+  "Clarification — question ou précision qui rend un élément moins ambigu.",
+  "Ordre — séquence dans laquelle les actions sont attendues, si un ordre est indiqué.",
+  "Condition — limite ou détail à respecter, comme « avant de déplacer les tables ».",
+  "Confirmation — réponse qui valide ou corrige la reformulation."
+]
+demarche = [
+  "Écoute ou lis la demande jusqu’au bout et repère les actions principales.",
+  "Note les éléments qui changent la manière d’agir : l’ordre, le lieu, l’heure, le résultat attendu ou une limite.",
+  "Reformule brièvement : « Si j’ai bien compris, je place les chaises près de l’entrée et je garde le passage libre. »",
+  "Pose une question précise sur ce qui manque : « Dois-je attendre ta confirmation avant de déplacer les tables ? »",
+  "Laisse à l’autre personne le temps de confirmer ou de corriger. Si l’échange oral n’est pas adapté, demande une autre forme de confirmation, par exemple un message écrit."
+]
+exercice = "Une personne te dit, dans un scénario fictif : « Prépare les affiches pour vendredi, mais attends mon accord avant de les envoyer. » Reformule les deux points à confirmer et pose une question qui permet de savoir quand tu peux les envoyer."
+aide = "Repère l’action, la date et la limite. Une phrase peut commencer par « Si j’ai bien compris… » ; ta question porte ensuite sur l’accord avant l’envoi."
+correction = [
+  "Reformulation possible : « Si j’ai bien compris, je prépare les affiches pour vendredi et je ne les envoie pas avant ton accord. »",
+  "Question possible : « Quand pourras-tu me confirmer que je peux les envoyer ? » ou « Dois-je attendre ton accord explicite avant l’envoi ? »",
+  "La personne peut préciser un autre délai ou une autre procédure. L’objectif est de vérifier la demande, pas de deviner ni de traiter une absence de réponse comme un accord."
+]
+a_retenir = [
+  "Une reformulation courte peut vérifier l’action, l’ordre, l’échéance et les limites.",
+  "Pose une question précise plutôt que de cacher une incertitude derrière un « d’accord ».",
+  "L’autre personne peut corriger ta reformulation : c’est une partie utile de la vérification.",
+  "Si une consigne de sécurité ou une règle officielle s’applique, ne la remplace pas par une simple reformulation."
+]
+transferer = "Cette méthode peut aider en formation, dans une activité associative ou dans un travail d’équipe. Selon le contexte, privilégie le moyen de communication adapté et demande une confirmation écrite si la décision ou la consigne doit être conservée. Si poser une question n’est pas possible ou sûr, cherche un interlocuteur ou un moyen de soutien approprié."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Certificat CléA — domaines du socle de compétences professionnelles"
+url = "https://www.certificat-clea.fr/employeurs/le-socle/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-08"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère général sur les compétences mobilisées en situation professionnelle ; aucun référentiel, exercice, formulation ou exemple du site n’est repris. M.R.S.C ne délivre pas le certificat CléA."
+
+[[fiche]]
+id = "fr-preparer-explication-orale"
+titre = "Préparer une explication courte"
+matiere = "Français et communication"
+matiere_id = "francais"
+domaine = "langue-communication"
+niveau = 1
+horizon_contenu = "Communication orale et modes d’expression au quotidien ; aucune prise de parole en public n’est imposée"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon autonome pour organiser une explication brève. Faire relire la progression, le vocabulaire et les exemples par des personnes ayant différentes expériences de communication. La fiche propose aussi des réponses écrites ou assistées et ne suppose pas que parler à voix haute soit possible ou souhaité ; accessibilité, sources, droits et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Organiser une explication en quelques idées et vérifier si le message est compris."
+objectif = "Préparer une explication courte avec un sujet, deux informations utiles et une vérification adaptée du message."
+situation = "Scénario fictif : une personne arrive à un atelier. Tu veux lui indiquer que l’accueil commence à 14 h, dans la salle 3, et qu’elle peut demander une autre façon de recevoir les consignes si besoin. Comment présenter ces informations sans tout mélanger ?"
+analogie_titre = "Comme poser trois panneaux sur un chemin"
+analogie = "Un panneau de départ annonce où l’on va ; quelques repères aident ensuite à suivre le chemin. Dans une explication, une phrase annonce le sujet et deux ou trois idées donnent les repères utiles."
+limite_analogie = "Une personne qui écoute peut interrompre, demander un exemple ou préférer un autre mode de communication. Une explication n’est pas un chemin à sens unique : on peut adapter le rythme, écrire, montrer ou utiliser une communication assistée."
+notions = [
+  "Sujet — ce dont l’explication va parler.",
+  "Idée principale — le message essentiel à retenir.",
+  "Repère — une information utile qui aide à comprendre ou à agir.",
+  "Vérification — une question ou une reformulation qui permet de voir si le message est clair, sans tester ni juger la personne.",
+  "Mode de communication — parole, texte, gestes, pictogrammes ou outil d’aide ; le choix dépend des personnes et de la situation."
+]
+demarche = [
+  "Demande-toi ce que la personne doit comprendre ou pouvoir faire après ton explication.",
+  "Annonce le sujet en une phrase courte.",
+  "Choisis deux ou trois informations utiles et place-les dans un ordre facile à suivre.",
+  "Prépare un exemple ou un repère concret si cela aide ; évite les détails qui ne répondent pas au besoin.",
+  "Choisis un mode adapté : parler, écrire, montrer ou proposer une autre forme de communication.",
+  "Laisse la personne reformuler, poser une question ou demander une autre explication."
+]
+exercice = "Dans ce scénario fictif, une rencontre commence à 10 h, dans la salle 2. L’entrée se fait par la porte côté jardin. Prépare une explication en une ou deux phrases ; tu peux l’écrire, la dire ou la décrire sous forme de pictogrammes. Ajoute une façon de vérifier que l’information est claire."
+aide = "Commence par le sujet, puis donne l’heure et le lieu. Une question ouverte comme « Quelle information veux-tu que je répète ? » laisse plusieurs réponses possibles."
+correction = [
+  "Exemple écrit possible : « La rencontre commence à 10 h dans la salle 2. L’entrée se fait par la porte côté jardin. Veux-tu que je reformule un de ces repères ? »",
+  "Une réponse orale, dessinée, gestuelle ou assistée peut convenir si elle transmet les mêmes informations et laisse une possibilité de clarification.",
+  "L’objectif est d’être compris, pas d’utiliser une formule unique ni d’obtenir une réponse particulière."
+]
+a_retenir = [
+  "Une explication courte peut suivre un ordre simple : sujet, repères utiles, vérification.",
+  "Le mode et le rythme de communication peuvent être adaptés aux personnes concernées.",
+  "Demander une clarification n’est pas un échec et ne prouve pas que l’explication était mauvaise.",
+  "Cette fiche ne remplace pas un interprète ou un moyen de communication adapté lorsqu’il est nécessaire."
+]
+transferer = "Cette démarche peut servir pour expliquer une consigne, présenter une activité ou transmettre un rendez-vous. Pour une information importante, demande un retour qui convient à la personne et confirme les détails par un support accessible si besoin."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — socle commun de connaissances, de compétences et de culture"
+url = "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère institutionnel général sur la communication et les apprentissages ; aucun texte, exemple, activité ou visuel n’est repris. La fiche reste une proposition à relire."
+
+[[fiche]]
+id = "fr-argumenter-avec-exemple"
+titre = "Présenter une idée avec une raison et un exemple"
+matiere = "Français et communication"
+matiere_id = "francais"
+domaine = "langue-communication"
+niveau = 2
+horizon_contenu = "Premiers repères d’argumentation et de communication ; les situations et opinions proposées sont fictives"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon autonome sur la structure d’un argument simple. Faire relire la distinction entre opinion, raison, exemple et fait, ainsi que le ton, par des personnes compétentes en français et en médiation. Un exemple fictif n’établit pas un fait général ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 9
+resume = "Relier une idée à une raison et à un exemple, sans présenter une préférence comme une vérité générale."
+objectif = "Formuler une proposition, l’expliquer par une raison et l’illustrer par un exemple clairement situé."
+situation = "Scénario fictif : un groupe choisit entre 14 h et 15 h pour une activité de 75 minutes dans une salle qui ferme à 16 h. Tu proposes 14 h. Comment expliquer ton choix sans prétendre que tout le monde a la même préférence ?"
+analogie_titre = "Comme donner l’adresse et un repère pour trouver le lieu"
+analogie = "Une adresse indique ce que l’on propose ; un repère aide à comprendre pourquoi cela peut convenir. Un exemple rend le repère concret. Dans un argument, l’idée, la raison et l’exemple jouent des rôles différents."
+limite_analogie = "Un argument n’est pas une adresse vérifiable d’un seul coup. Une raison peut être discutée, un exemple peut être particulier et plusieurs personnes peuvent tirer des conclusions différentes."
+notions = [
+  "Proposition — idée ou préférence que l’on présente.",
+  "Raison — explication qui répond à la question « pourquoi ? ».",
+  "Exemple — situation précise qui illustre une raison, sans prouver à elle seule une règle générale.",
+  "Fait vérifiable — affirmation que l’on peut confronter à des éléments ou à des sources ; il ne se confond pas avec un avis.",
+  "Nuance — précision qui indique une limite, une condition ou une autre possibilité."
+]
+demarche = [
+  "Énonce ton idée ou ta proposition sans la présenter comme un fait si c’est une préférence.",
+  "Ajoute une raison qui explique ce choix.",
+  "Donne un exemple concret et précise à quelle situation il correspond.",
+  "Vérifie si une phrase contient un fait vérifiable ; si oui, cherche une source ou formule-la avec prudence.",
+  "Ajoute une nuance si l’exemple ne vaut pas pour tout le monde, puis laisse la place à une autre proposition."
+]
+exercice = "Pour le scénario de l’activité de 75 minutes et de la salle qui ferme à 16 h, écris une proposition pour commencer à 14 h, une raison et un exemple fictif qui l’illustre. Termine par une phrase qui montre que d’autres personnes peuvent préférer 15 h."
+aide = "Tu peux compléter ces débuts : « Je propose… », « parce que… », « par exemple… », « cela peut différer si… »."
+correction = [
+  "Exemple possible : « Je propose 14 h parce qu’une activité de 75 minutes se terminerait à 15 h 15, avant la fermeture fictive de la salle à 16 h. Cela peut ne pas convenir à tout le monde ; nous pouvons comparer les deux horaires. »",
+  "La durée et le groupe sont fictifs. Dans une discussion réelle, vérifie les contraintes au lieu de traiter cet exemple comme un fait.",
+  "D’autres arguments sont possibles si l’idée, sa raison et l’exemple sont distincts et compréhensibles."
+]
+a_retenir = [
+  "Une proposition, une raison et un exemple n’ont pas le même rôle.",
+  "Un exemple illustre une idée mais ne suffit pas toujours à démontrer qu’elle est vraie en général.",
+  "Une préférence peut être exprimée clairement sans être présentée comme une vérité universelle.",
+  "Argumenter consiste à rendre son raisonnement compréhensible, pas à forcer l’accord."
+]
+transferer = "Cette structure peut aider à présenter un choix, une idée de projet ou un désaccord respectueux. Pour un sujet public, scientifique, juridique ou financier, vérifie les faits et les sources pertinentes ; un exemple personnel ne remplace pas cette vérification."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — socle commun de connaissances, de compétences et de culture"
+url = "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère général sur l’expression et l’argumentation ; la structure, le scénario, les formulations et les exemples de la fiche sont originaux et ne reprennent aucun contenu de la page."
+
+[[fiche]]
+id = "maths-equation-simple"
+titre = "Résoudre une équation simple en gardant l’égalité"
+matiere = "Mathématiques"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 2
+horizon_contenu = "Première équation à une étape de la forme x + a = b ; les nombres et exercices sont fictifs"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de mathématiques limité aux équations simples où l’inconnue est additionnée à un nombre positif. Faire refaire indépendamment les opérations, la vérification et l’analogie de balance ; ne pas laisser croire que cette fiche couvre l’algèbre. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Trouver un nombre inconnu dans une égalité simple et vérifier le résultat en le remplaçant."
+objectif = "Résoudre une équation de la forme x + a = b en soustrayant le même nombre des deux côtés, puis contrôler l’égalité."
+situation = "Une boîte contient un nombre inconnu de jetons. On en ajoute 5 et on en compte 13 au total. Combien y avait-il de jetons avant l’ajout ?"
+analogie_titre = "Comme garder une balance à niveau"
+analogie = "Si deux plateaux portent la même masse, retirer la même masse des deux côtés garde l’équilibre. Dans l’égalité x + 5 = 13, soustraire 5 aux deux membres permet d’isoler x sans changer l’égalité."
+limite_analogie = "Les nombres ne sont pas des objets sur une balance, et l’analogie ne montre pas toutes les règles de l’algèbre. Elle aide seulement à comprendre pourquoi on effectue la même opération des deux côtés."
+notions = [
+  "Équation — égalité qui contient une ou plusieurs valeurs inconnues.",
+  "Inconnue — valeur que l’on cherche ; elle peut être représentée par une lettre comme x.",
+  "Égalité — les deux côtés ont la même valeur.",
+  "Opération inverse — ici, soustraire 5 annule l’ajout de 5.",
+  "Vérification — remplacer l’inconnue trouvée dans l’équation de départ et contrôler les deux côtés."
+]
+demarche = [
+  "Repère l’inconnue et l’opération qui lui est appliquée : dans x + 5 = 13, on ajoute 5 à x.",
+  "Pour défaire l’ajout de 5, soustrais 5 au membre de gauche et aussi au membre de droite.",
+  "Calcule : x + 5 − 5 = 13 − 5, donc x = 8.",
+  "Remplace x par 8 dans l’égalité de départ : 8 + 5 = 13.",
+  "Vérifie que les deux côtés sont égaux ; si ce n’est pas le cas, reprends le calcul."
+]
+exercice = "Résous l’équation fictive x + 6 = 17. Écris l’opération effectuée sur les deux côtés, puis vérifie ta réponse dans l’équation de départ."
+aide = "L’opération contraire de « ajouter 6 » est « soustraire 6 ». Applique-la aux deux membres de l’égalité."
+correction = [
+  "On soustrait 6 des deux côtés : x + 6 − 6 = 17 − 6.",
+  "Il reste x = 11.",
+  "Vérification : 11 + 6 = 17. Les deux côtés valent 17, donc la solution est correcte."
+]
+a_retenir = [
+  "Pour garder une égalité vraie, effectue la même opération des deux côtés.",
+  "L’opération inverse aide à isoler l’inconnue dans cet exemple à une étape.",
+  "Remplacer la valeur trouvée dans l’égalité de départ permet de vérifier la réponse.",
+  "Cette fiche ne traite pas les équations à plusieurs étapes, les fractions, les nombres négatifs ni les systèmes d’équations."
+]
+transferer = "Cette première méthode peut servir à comprendre une valeur manquante dans un calcul. Pour une équation plus complexe, identifie chaque transformation et vérifie qu’elle conserve l’égalité ; cette fiche ne couvre pas les autres méthodes."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — ressources et programmes de mathématiques"
+url = "https://eduscol.education.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail institutionnel facultatif pour retrouver les programmes et ressources de mathématiques ; aucun exercice, texte, exemple ou visuel n’est repris."
+
+[[fiche]]
+id = "sciences-meteo-climat"
+titre = "Distinguer météo et climat"
+matiere = "Sciences, technologie et environnement"
+matiere_id = "sciences"
+domaine = "sciences-techniques-environnement"
+niveau = 2
+horizon_contenu = "Repères généraux sur les conditions météorologiques et les tendances climatiques ; aucun bulletin local ni scénario de projection"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de sciences limité à la différence d’échelle entre météo et climat. Faire vérifier les définitions, l’échelle temporelle, les exemples et les limites par une personne compétente en climatologie. La fiche ne tire aucune conclusion climatique d’un jour particulier et ne traite pas les causes ou les projections ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Séparer les conditions du temps à un moment donné des tendances observées sur une longue période."
+objectif = "Classer un exemple comme observation météorologique ou information climatique et expliquer la différence d’échelle."
+situation = "Exemples fictifs : un bulletin indique de la pluie mardi dans une ville ; un dossier compare les températures et les précipitations observées dans une région pendant plusieurs décennies. Ces deux informations parlent-elles du même type de période ?"
+analogie_titre = "Comme distinguer une photo d’un album suivi dans le temps"
+analogie = "La météo ressemble à une photo des conditions à un moment et dans un lieu : température, pluie, vent ou nuages. Le climat décrit des caractéristiques observées sur une longue période, comme des moyennes, des variations et certains extrêmes."
+limite_analogie = "Un album de photos peut être incomplet ou ne pas représenter toutes les saisons. Une étude climatique dépend de mesures, d’une période, d’un territoire et de méthodes précises ; une analogie ne remplace pas l’analyse des données."
+notions = [
+  "Météo — description ou prévision des conditions atmosphériques pour un lieu et une période proches.",
+  "Climat — caractéristiques statistiques des conditions météorologiques observées sur une longue période et dans un territoire défini.",
+  "Échelle temporelle — durée couverte par une observation ou une série de données.",
+  "Variabilité — changements des conditions d’une période à l’autre, qui peuvent exister au sein d’un climat.",
+  "Tendance — évolution observée dans une série assez longue ; elle ne se déduit pas d’une seule journée."
+]
+demarche = [
+  "Repère le lieu et la durée décrits : quelques heures, quelques jours ou une période longue.",
+  "Si l’énoncé concerne les conditions de demain ou de cette semaine, il relève de la météo.",
+  "S’il résume des observations sur de nombreuses années, il concerne le climat ou une série climatique.",
+  "Demande quelles variables sont étudiées : température, précipitations, vent, fréquence d’événements ou autres mesures.",
+  "Sépare une observation isolée d’une tendance ; cherche la période, le territoire et la méthode avant d’interpréter."
+]
+exercice = "Dans un exemple fictif, il a neigé mardi dans une ville. Un tableau présente aussi les températures de cette région sur plusieurs décennies. Quelle information concerne la météo et laquelle aide à étudier le climat ? Une journée enneigée suffit-elle à établir une tendance ?"
+aide = "Regarde d’abord la durée : un jour ou plusieurs décennies ? Puis demande-toi si l’information décrit une condition du moment ou une série d’observations."
+correction = [
+  "La neige de mardi est une observation météorologique locale et ponctuelle.",
+  "Le tableau qui suit les températures pendant plusieurs décennies peut contribuer à une étude du climat, en tenant compte de sa méthode et des autres mesures pertinentes.",
+  "Non. Un jour, qu’il fasse froid, chaud, sec ou humide, ne suffit pas à établir une tendance climatique."
+]
+a_retenir = [
+  "La météo décrit des conditions atmosphériques pour un moment ou une courte période ; le climat porte sur des caractéristiques à plus long terme.",
+  "Une tendance s’étudie à partir de séries, d’une période et d’un territoire définis.",
+  "La moyenne ne décrit pas à elle seule toutes les variations ou tous les événements extrêmes.",
+  "Cette fiche ne traite ni les causes du changement climatique, ni les projections, ni une prévision locale."
+]
+transferer = "Cette distinction peut aider à lire un bulletin météo, un graphique ou un article sur le climat. Pour une affirmation précise, examine les données, la période, le territoire et la source ; une journée inhabituelle ne confirme ni ne réfute à elle seule une tendance."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Météo-France — portail météorologique et climatique"
+url = "https://meteofrance.com/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail public facultatif pour rechercher des explications météorologiques et climatiques actuelles ; aucun texte, graphique, chiffre ou visuel n’est repris. La portée des pages précises reste à confirmer lors de la relecture."
+
+[[fiche.sources]]
+titre = "Groupe d’experts intergouvernemental sur l’évolution du climat — rapports et ressources"
+url = "https://www.ipcc.ch/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail de référence à consulter pour une relecture spécialisée ; aucun résumé, texte, figure, donnée ou conclusion d’un rapport n’est repris."
+
+[[fiche]]
+id = "histoire-comparer-sources"
+titre = "Comparer deux sources sur un même événement"
+matiere = "Histoire et chronologie"
+matiere_id = "histoire"
+domaine = "histoire-memoire"
+niveau = 2
+horizon_contenu = "Premiers repères d’analyse de sources avec des documents entièrement fictifs, sans événement historique réel"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de méthode historique utilisant deux documents inventés. Faire relire la distinction entre auteur, date, intention, observation et interprétation par une personne compétente en histoire et en éducation aux médias. Une date proche ne garantit pas à elle seule la fiabilité ; aucun fait historique réel n’est avancé. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 9
+resume = "Examiner qui a produit une source, quand, pour quel public et ce qu’elle permet réellement d’affirmer."
+objectif = "Comparer deux documents fictifs en distinguant leur auteur, leur date, leur intention et les éléments qu’ils décrivent."
+situation = "Deux documents fictifs parlent d’une réunion de quartier. Une affiche datée du 4 mai annonce un début à 18 h. Le lendemain, une participante note dans son carnet qu’elle est arrivée à 18 h 10 et que la discussion avait déjà commencé. Les documents donnent-ils exactement la même information ?"
+analogie_titre = "Comme regarder une place depuis deux fenêtres"
+analogie = "Deux fenêtres donnent des vues différentes du même endroit. De même, une affiche et le carnet d’une participante peuvent éclairer des aspects différents d’un événement : ce qui était prévu, ce qu’une personne a observé ou ce qu’elle a retenu."
+limite_analogie = "Une source n’est pas une fenêtre transparente. Son auteur choisit quoi noter, pour qui et à quel moment ; un souvenir peut aussi être incomplet. Il faut examiner le document et le contexte, pas seulement l’impression qu’il donne."
+notions = [
+  "Source — document, objet, témoignage ou trace qui apporte des informations sur un sujet.",
+  "Auteur ou producteur — personne ou organisme à l’origine de la source, s’il est connu.",
+  "Date — moment où le document a été produit ou où l’événement est décrit ; ces dates peuvent différer.",
+  "Point de vue — position et expérience depuis lesquelles une personne raconte ou décrit quelque chose.",
+  "Corroborer — comparer avec d’autres éléments indépendants pour examiner une affirmation.",
+  "Limite — question à laquelle une source ne peut pas répondre à elle seule."
+]
+demarche = [
+  "Décris chaque document : de quel type s’agit-il et qui l’a produit ?",
+  "Note sa date, son public visé et son but probable, en séparant ce qui est écrit de ce que tu supposes.",
+  "Relève exactement les affirmations ou observations de chaque source.",
+  "Compare les points communs et les différences ; vérifie si deux phrases parlent du même aspect ou du même moment.",
+  "Cherche ce que chaque document ne permet pas de savoir et quelles autres sources pourraient éclairer la question.",
+  "Présente une conclusion prudente, proportionnée aux éléments disponibles."
+]
+exercice = "Un avis fictif daté du 12 juin annonce une porte ouverte à 11 h. Une note de visite écrite le même jour dit : « Je suis entré vers 11 h 15 ; la présentation avait commencé. » Pour chaque document, indique qui parle, ce qui est annoncé ou observé et ce qu’on ne peut pas conclure à partir de ces seules lignes."
+aide = "L’avis renseigne sur ce qui était annoncé. La note décrit l’expérience d’une personne après son arrivée ; elle ne dit pas nécessairement à quelle heure la présentation a commencé."
+correction = [
+  "L’avis, daté du 12 juin, annonce une porte ouverte à 11 h ; il renseigne sur le programme prévu.",
+  "La note rapporte qu’une personne est arrivée vers 11 h 15 et a vu la présentation en cours ; elle ne donne pas l’heure exacte du début.",
+  "Les deux documents ne se contredisent pas forcément. Pour savoir ce qui s’est réellement passé et à quelle heure, il faudrait d’autres éléments."
+]
+a_retenir = [
+  "Une source informe sur certains aspects et laisse d’autres questions ouvertes.",
+  "L’auteur, la date, le destinataire et le but aident à comprendre un document sans garantir automatiquement sa fiabilité.",
+  "Deux témoignages différents ne signifient pas nécessairement qu’un seul est mensonger : ils peuvent porter sur des moments ou points de vue distincts.",
+  "Pour une conclusion historique, confronte des sources adaptées et garde visibles leurs limites."
+]
+transferer = "Ces questions peuvent aider à lire une archive, un témoignage, un article ou un document familial. Un souvenir mérite d’être examiné avec respect ; cette méthode n’autorise pas à invalider la parole d’une personne sans éléments ni contexte."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Archives nationales — ressources et fonds d’archives"
+url = "https://www.archives-nationales.culture.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail facultatif pour découvrir des sources d’archives et leurs contextes ; aucun document, extrait, image ou description du site n’est repris dans les exercices fictifs."
+
+[[fiche]]
+id = "info-bits-octets"
+titre = "Comprendre les bits et les octets"
+matiere = "Informatique et programmation"
+matiere_id = "informatique"
+domaine = "informatique-programmation"
+niveau = 2
+horizon_contenu = "Premiers repères de représentation de l’information numérique ; pas de conversion de fichiers ni de décodage de texte"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon informatique limité aux bits, aux octets et au nombre de motifs possibles. Faire vérifier les termes, les conventions d’unités et les limites sur les encodages par une personne compétente. La fiche ne déduit pas le contenu d’un vrai fichier et ne confond pas octet et caractère ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Découvrir qu’un bit a deux états et qu’un octet regroupe huit bits, sans supposer qu’il représente toujours une lettre."
+objectif = "Expliquer qu’un bit peut prendre deux valeurs et calculer le nombre de motifs possibles sur trois ou huit bits."
+situation = "Un objet numérique fictif stocke huit positions qui valent chacune 0 ou 1. Combien de motifs différents peut-on former ? Et ce motif indique-t-il à lui seul une lettre ?"
+analogie_titre = "Comme huit interrupteurs qui ont chacun deux positions"
+analogie = "Si chaque interrupteur peut être en position 0 ou 1, chaque nouvelle position double le nombre de configurations possibles. Huit positions binaires forment un octet, soit huit bits, et permettent 2 puissance 8 motifs."
+limite_analogie = "Un ordinateur ne contient pas forcément de petits interrupteurs visibles. Le motif ne dit pas à lui seul s’il représente un nombre, une partie d’image, un caractère ou autre chose : son interprétation dépend d’une convention et du contexte."
+notions = [
+  "Bit — unité d’information qui peut prendre deux valeurs, souvent notées 0 et 1.",
+  "Octet — groupe de huit bits ; le mot anglais byte désigne couramment cette unité dans les systèmes actuels.",
+  "Motif — suite précise de 0 et de 1 ; chaque position ajoute un choix possible.",
+  "Combinaisons — avec n bits, chaque position ayant deux valeurs, on peut former 2 puissance n motifs.",
+  "Encodage — règle qui associe des motifs à des nombres, caractères, couleurs ou autres informations.",
+  "Contexte — format et convention qui permettent d’interpréter un motif ; sans eux, il peut rester ambigu."
+]
+demarche = [
+  "Compte le nombre de positions binaires ; chacune peut être 0 ou 1.",
+  "Pour n positions, multiplie par 2 à chaque position : il y a 2 puissance n motifs possibles.",
+  "Pour trois bits : 2 × 2 × 2 = 8 motifs.",
+  "Pour un octet de huit bits : 2 puissance 8 = 256 motifs possibles.",
+  "Avant d’interpréter un motif comme une lettre ou un nombre, cherche l’encodage et le format qui lui donnent un sens."
+]
+exercice = "Combien de motifs de bits différents peut-on former avec trois positions ? Combien avec huit positions, c’est-à-dire un octet ? Un motif de huit bits correspond-il toujours à la même lettre ?"
+aide = "Chaque bit offre deux possibilités. Pour trois positions, calcule 2 × 2 × 2 ; pour huit, multiplie par 2 huit fois."
+correction = [
+  "Avec trois bits, on peut former 2 puissance 3 = 8 motifs.",
+  "Avec huit bits, il y a 2 puissance 8 = 256 motifs possibles.",
+  "Non. Un motif n’indique pas à lui seul une lettre : l’interprétation dépend d’un encodage et du contexte."
+]
+a_retenir = [
+  "Un bit a deux états possibles ; un octet regroupe huit bits.",
+  "Huit bits peuvent former 256 motifs distincts, car chaque position a deux choix.",
+  "Un motif n’est pas automatiquement un caractère ; il faut connaître la règle d’encodage.",
+  "Cette fiche n’explique ni les tailles réelles de fichiers, ni les préfixes décimaux/binaires, ni tous les formats de données."
+]
+transferer = "Ces repères aident à commencer la lecture d’une spécification ou d’un cours sur les données. Un fichier peut combiner métadonnées, encodage, compression et structure ; ne déduis pas son contenu de sa seule taille ou d’une suite de bits isolée."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "MDN — définition du byte et notions du Web"
+url = "https://developer.mozilla.org/fr/docs/Glossary/Byte"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Référence facultative à faire contrôler pour la définition technique ; aucun texte, exemple, tableau ou visuel n’est repris. La licence de la page n’est pas déclarée vérifiée."
+
+[[fiche]]
+id = "prog-tester-exemples"
+titre = "Tester un programme avec des cas simples"
+matiere = "Informatique et programmation"
+matiere_id = "informatique"
+domaine = "informatique-programmation"
+niveau = 2
+horizon_contenu = "Premiers tests de programme sur un pseudo-code fictif ; aucun code n’est exécuté dans la fiche"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de programmation présentant un seul défaut logique dans un pseudo-code fictif. Faire vérifier les cas de test, les résultats attendus et l’explication du seuil par une personne compétente ; vérifier également que l’exemple ne laisse pas croire que quelques tests prouvent l’absence d’erreurs. Aucun script n’est exécuté ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 9
+resume = "Comparer le résultat prévu et le résultat observé pour repérer un défaut simple, puis refaire les tests."
+objectif = "Construire trois cas de test, repérer une condition incorrecte à zéro et vérifier une correction sans exécuter de code."
+situation = "Un pseudo-programme doit afficher « positif » seulement si un nombre est supérieur à zéro ; sinon il doit afficher « non positif ». Il teste actuellement si le nombre est supérieur ou égal à zéro. Quel essai permet de repérer le problème ?"
+analogie_titre = "Comme essayer une serrure avec plusieurs clés connues"
+analogie = "On peut essayer une serrure avec une clé qui doit ouvrir, une qui ne doit pas ouvrir et une clé proche de la limite. Pour un programme, des entrées choisies permettent de comparer le résultat attendu au résultat produit."
+limite_analogie = "Quelques clés ne représentent pas toutes les clés possibles. De même, réussir quelques tests ne prouve pas qu’un programme est sans erreur, sûr ou adapté à tous les cas."
+notions = [
+  "Test — essai choisi pour vérifier un comportement prévu.",
+  "Cas de test — entrée, résultat attendu et résultat observé associés.",
+  "Valeur limite — entrée située sur une frontière importante, comme zéro pour la condition « supérieur à zéro ».",
+  "Défaut — différence entre le comportement attendu et celui que produit le programme.",
+  "Correction — modification proposée pour traiter le défaut ; elle doit être suivie de nouveaux tests."
+]
+demarche = [
+  "Réécris la règle attendue avec précision : positif signifie ici strictement supérieur à zéro.",
+  "Choisis un nombre positif, un nombre négatif et la valeur limite zéro.",
+  "Pour chaque entrée, note le résultat attendu puis suis la condition du pseudo-code pour obtenir le résultat produit.",
+  "Repère la première différence ; ici, vérifie si zéro est classé à tort comme positif.",
+  "Modifie la condition de « supérieur ou égal à zéro » vers « supérieur à zéro ».",
+  "Refais les trois essais pour vérifier la correction. Ces tests ne couvrent pas toutes les entrées possibles."
+]
+exercice = "Le pseudo-code affiche « positif » si n est supérieur ou égal à zéro, sinon « non positif ». La règle attendue est de réserver « positif » aux nombres strictement supérieurs à zéro. Complète les résultats attendus et produits pour 5, 0 et −2, puis propose une correction et refais les trois tests sur papier."
+aide = "Le nombre zéro est la frontière : il n’est pas strictement supérieur à zéro. Compare séparément ce que la règle demande et ce que la condition fait."
+correction = [
+  "Pour 5 : résultat attendu « positif » ; la condition actuelle l’affiche correctement.",
+  "Pour 0 : résultat attendu « non positif », mais la condition « supérieur ou égal à zéro » affiche « positif ». Ce cas révèle le défaut.",
+  "Pour −2 : résultat attendu et produit « non positif ».",
+  "Remplacer « supérieur ou égal à zéro » par « supérieur à zéro » corrige ce défaut dans l’exemple. Les trois cas doivent ensuite être rejoués ; d’autres tests pourraient encore être nécessaires."
+]
+a_retenir = [
+  "Un bon cas de test précise l’entrée, le résultat attendu et le résultat obtenu.",
+  "Tester une valeur limite aide à examiner les conditions et les seuils.",
+  "Après une modification, rejoue aussi les tests déjà réussis pour repérer une régression.",
+  "Quelques tests augmentent la confiance mais ne prouvent pas qu’il n’existe aucune erreur.",
+  "Le pseudo-code de cette fiche est fictif et n’est ni exécutable ni une vérification de sécurité."
+]
+transferer = "Cette démarche peut aider à examiner un petit algorithme ou à préparer des tests automatisés. Dans un logiciel réel, définis les attentes, couvre les cas pertinents et demande une revue adaptée au risque ; ne lance jamais un code inconnu uniquement pour vérifier ce qu’il fait."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Documentation Python — tests unitaires"
+url = "https://docs.python.org/fr/3/library/unittest.html"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Référence facultative pour approfondir les tests logiciels ; aucun code, exemple, texte ou activité de la documentation n’est repris. Le pseudo-code de la fiche est original et n’est pas exécuté."
+
+[[fiche]]
+id = "arts-composer-formes"
+titre = "Composer une image avec quelques formes"
+matiere = "Arts et culture"
+matiere_id = "arts"
+domaine = "arts-culture"
+niveau = 1
+horizon_contenu = "Premiers essais de composition visuelle abstraite, sans modèle à copier ni matériel imposé"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de pratique artistique autour de formes géométriques simples. Faire relire les propositions par des personnes ayant différentes pratiques et capacités visuelles ; aucune réponse esthétique unique n’est attendue. La fiche permet une description verbale ou un autre mode de création et ne demande pas de recopier une œuvre ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 10
+resume = "Déplacer quelques formes pour faire ressortir un élément, sans chercher une composition parfaite."
+objectif = "Comparer deux organisations de formes et décrire comment la taille, l’espace ou la position modifient l’attention."
+situation = "Tu veux créer une petite affiche fictive pour annoncer une rencontre. Tu disposes de trois formes abstraites — un cercle, un rectangle et un triangle — et d’un titre à placer. Tu peux décrire la composition à l’écrit au lieu de la dessiner."
+analogie_titre = "Comme disposer des objets sur une table"
+analogie = "Sur une table, un objet placé au centre ou séparé des autres attire parfois davantage l’attention. Dans une composition, la position, la taille, l’espace et le contraste peuvent aussi guider le regard."
+limite_analogie = "Les personnes ne regardent pas toutes une image de la même façon, et certains éléments attirent selon les habitudes ou les capacités visuelles. Une composition n’a pas une hiérarchie universelle ; demander une description ou une autre forme peut être utile."
+notions = [
+  "Composition — organisation d’éléments dans un espace.",
+  "Forme — contour géométrique ou libre qui constitue un élément visuel.",
+  "Contraste — différence perceptible entre des éléments, par exemple de taille, de forme ou de valeur claire/sombre.",
+  "Espace — distance ou zone libre entre les éléments ; il peut aider à les distinguer.",
+  "Hiérarchie visuelle — ordre dans lequel une composition peut attirer l’attention ; il dépend aussi de la personne qui la regarde."
+]
+demarche = [
+  "Choisis ce qui doit être remarqué en premier : ici, le titre de la rencontre fictive.",
+  "Place les trois formes autour du titre dans une première version, en laissant un espace entre certains éléments.",
+  "Crée une deuxième version en changeant une seule chose, par exemple la taille d’une forme ou sa distance au titre.",
+  "Compare les versions : qu’est-ce qui semble ressortir et pourquoi ? Décris-le en mots si tu préfères.",
+  "Vérifie qu’un contraste ne repose pas seulement sur la couleur ; la taille, la position ou une bordure peuvent aussi aider."
+]
+exercice = "Imagine deux compositions avec un cercle, un rectangle et un triangle. Dans la première, le titre est isolé et plus grand ; dans la seconde, les formes ont toutes la même taille et sont proches du titre. Laquelle semble mettre le titre en avant ? Tu peux répondre par une description, un croquis ou un autre moyen."
+aide = "Compare un seul indice à la fois : taille, distance, position ou différence de forme. Il n’y a pas de réponse esthétique obligatoire."
+correction = [
+  "Dans la première description, le titre a plus de chances d’être remarqué d’abord parce qu’il est plus grand et séparé des formes.",
+  "Cette réponse décrit un effet possible, pas une règle valable pour chaque personne ou chaque affiche.",
+  "Une autre composition peut aussi fonctionner si son intention est claire pour les personnes auxquelles elle s’adresse."
+]
+a_retenir = [
+  "La taille, la position, le contraste et l’espace peuvent modifier la manière dont une composition est perçue.",
+  "Changer un élément à la fois aide à comparer deux versions.",
+  "Les choix artistiques n’ont pas toujours une solution unique ; décrire une intention est aussi une façon de travailler.",
+  "Un contraste accessible ne devrait pas dépendre uniquement de la couleur.",
+  "Cette activité utilise des formes originales et ne demande pas de reproduire une œuvre protégée."
+]
+transferer = "Ces repères peuvent aider à préparer une affiche, une page ou une composition abstraite. Pour une création destinée à être lue par d’autres personnes, teste la compréhension et l’accessibilité auprès de personnes concernées ; cette fiche n’évalue ni le talent ni la valeur artistique."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — programmes et ressources pour les apprentissages artistiques"
+url = "https://www.education.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail institutionnel facultatif pour retrouver les programmes d’arts ; aucun texte, activité, exemple ou visuel n’est repris. Une relecture devra confirmer la page précise utile au sujet."
+
+[[fiche]]
+id = "fr-comprendre-mot-contexte"
+titre = "Comprendre un mot grâce à son contexte"
+matiere = "Français et communication"
+matiere_id = "francais"
+domaine = "langue-communication"
+niveau = 1
+horizon_contenu = "Premiers repères de vocabulaire en lecture ; les phrases et situations sont fictives"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de vocabulaire limité à quelques indices de contexte. Faire relire le choix des exemples, la clarté de l’explication et les mots retenus par des personnes compétentes en français et en formation de base. Le contexte suggère un sens sans toujours le prouver ; les sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 7
+resume = "Utiliser les mots autour d’un terme pour proposer son sens, puis vérifier cette interprétation."
+objectif = "Repérer des indices dans une phrase pour choisir entre deux sens possibles d’un mot courant."
+situation = "Phrase fictive : « Jo pose la feuille sur la table, puis écrit son prénom au recto. » Ici, que désigne probablement le mot « feuille » ? Quel indice t’aide ?"
+analogie_titre = "Comme utiliser les indices autour d’une empreinte"
+analogie = "Une empreinte seule peut laisser plusieurs possibilités. Les traces alentour aident à formuler une hypothèse. De même, les mots qui entourent un terme donnent des indices sur le sens employé dans la phrase."
+limite_analogie = "Les mots ne sont pas des traces toujours univoques : une phrase peut rester ambiguë, ironique ou incomplète. Le contexte suggère parfois un sens sans permettre de le confirmer ; il est alors utile de relire ou de consulter une définition."
+notions = [
+  "Sens — idée ou chose qu’un mot exprime dans un emploi donné.",
+  "Polysémie — fait qu’un même mot peut avoir plusieurs sens selon l’usage.",
+  "Contexte — mots, phrases et situation qui entourent un terme.",
+  "Indice — élément du texte qui aide à proposer un sens, sans toujours le démontrer.",
+  "Vérification — comparaison avec une autre phrase, une définition ou une personne compétente lorsque le sens reste incertain."
+]
+demarche = [
+  "Lis la phrase entière, puis relis-la en remplaçant le mot inconnu par un espace.",
+  "Cherche les mots qui décrivent une action, un objet ou une situation autour du terme.",
+  "Propose un sens qui rend la phrase cohérente, sans oublier qu’il peut y avoir plusieurs hypothèses.",
+  "Remplace le mot par ce sens et relis la phrase pour vérifier si elle reste compréhensible.",
+  "Si deux sens restent possibles, lis les phrases voisines ou cherche une définition adaptée au contexte."
+]
+exercice = "Dans la phrase fictive « La feuille jaune est tombée de la branche », que désigne probablement le mot « feuille » ? Cite l’indice qui t’aide, puis explique pourquoi une autre phrase pourrait lui donner un autre sens."
+aide = "Repère ce qui est tombé et d’où cela est tombé. Les mots « jaune » et « branche » donnent des indices sur le sens probable."
+correction = [
+  "Ici, « feuille » désigne probablement une partie de la plante : elle est jaune et tombe d’une branche.",
+  "Dans « Jo pose la feuille sur la table et écrit son prénom au recto », le contexte indique plutôt une feuille de papier.",
+  "Le mot seul ne suffit pas toujours : la phrase et la situation aident à choisir le sens."
+]
+a_retenir = [
+  "Un mot peut avoir plusieurs sens ; les mots qui l’entourent aident à comprendre celui qui convient.",
+  "Un indice permet de proposer une interprétation, mais pas toujours de la prouver.",
+  "Relis la phrase avec le sens choisi ; si elle reste ambiguë, cherche une autre information.",
+  "Un dictionnaire aide à vérifier un sens, mais il faut encore choisir la définition adaptée à la phrase."
+]
+transferer = "Cette démarche peut aider à lire un récit, une consigne ou un message. Pour un document important, ne devine pas le sens d’un mot déterminant : consulte le reste du texte ou demande une précision."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — socle commun de connaissances, de compétences et de culture"
+url = "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère institutionnel facultatif sur les apprentissages en lecture ; aucun texte, exemple ou exercice du site n’est repris."
+
+[[fiche]]
+id = "maths-lire-echelle-graphique"
+titre = "Lire les graduations d’un graphique"
+matiere = "Mathématiques"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 2
+horizon_contenu = "Lire un axe gradué dans un graphique simple ; les valeurs sont fictives et aucune image distante n’est requise"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de lecture graphique centré sur les graduations d’un axe. Faire vérifier les calculs, la description des échelles et la formulation sur les axes tronqués par une personne compétente en mathématiques et en lecture de données. Les exercices sont textuels ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Repérer l’unité et la valeur de chaque graduation avant de lire une barre ou un point."
+objectif = "Lire une valeur sur un axe régulièrement gradué et vérifier l’échelle avant de comparer des longueurs visuelles."
+situation = "Un graphique fictif présente des présences à un atelier. Son axe vertical est marqué 0, 5, 10, 15 et 20, avec des intervalles égaux. Une barre atteint la graduation 15. Combien de présences indique-t-elle ?"
+analogie_titre = "Comme lire les repères réguliers d’une règle"
+analogie = "Sur une règle, les traits et les nombres indiquent les distances représentées. Sur un graphique, les graduations d’un axe indiquent les valeurs associées aux positions des barres ou des points."
+limite_analogie = "Les axes d’un graphique ne commencent pas toujours à zéro et n’utilisent pas toujours une échelle linéaire. Un graphique peut aussi omettre des repères. Il faut lire l’axe réel au lieu de supposer qu’il fonctionne comme une règle ordinaire."
+notions = [
+  "Axe — ligne de repère qui porte des catégories ou des valeurs dans un graphique.",
+  "Graduation — trait ou repère associé à une valeur sur un axe.",
+  "Pas — différence entre deux graduations successives ; il peut être de 1, 5, 10 ou une autre valeur.",
+  "Origine — valeur à laquelle l’axe commence dans le graphique affiché ; elle n’est pas toujours zéro.",
+  "Unité — indication de ce que mesurent les nombres, par exemple des personnes, des minutes ou des euros."
+]
+demarche = [
+  "Lis le titre, les catégories et l’unité avant de comparer les marques du graphique.",
+  "Repère les valeurs écrites sur l’axe et compte l’intervalle entre deux graduations voisines.",
+  "Vérifie où commence l’axe ; ne suppose pas que la première valeur visible est zéro.",
+  "Aligne le sommet de la barre ou le point avec la graduation correspondante et lis sa valeur.",
+  "Avant de comparer deux barres, vérifie qu’elles partagent la même échelle et le même point de départ."
+]
+exercice = "Un graphique fictif a des graduations régulièrement espacées : 0, 2, 4, 6 et 8. Une barre atteint le repère 6. Quelle valeur lis-tu ? Si un autre graphique commence à 4 au lieu de 0, quel élément dois-tu regarder avant de comparer visuellement les barres ?"
+aide = "Dans le premier axe, chaque graduation ajoute 2. Pour le second, vérifie la valeur de départ et le pas : la longueur dessinée ne raconte pas toute l’échelle."
+correction = [
+  "La barre atteint la graduation 6 ; elle représente 6 dans l’unité du graphique.",
+  "Sur l’autre graphique, il faut lire la valeur de départ et les graduations avant de comparer la hauteur dessinée. Un axe qui commence à 4 peut amplifier visuellement une différence.",
+  "Les deux graphiques doivent aussi présenter une unité et une échelle comparables pour qu’une comparaison soit pertinente."
+]
+a_retenir = [
+  "Lis les valeurs des graduations et leur pas avant de lire une barre ou un point.",
+  "Vérifie le titre, l’unité et la valeur de départ de l’axe.",
+  "Une barre qui semble deux fois plus haute ne représente pas nécessairement deux fois la valeur si les axes diffèrent.",
+  "Un axe tronqué n’est pas automatiquement faux, mais il peut modifier l’impression visuelle ; signale ce choix au lieu de l’ignorer."
+]
+transferer = "Cette méthode aide à lire un graphique dans un rapport, un article ou un tableau de bord. Pour une comparaison importante, consulte aussi la source, la période, l’unité et la méthode de collecte des données."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — ressources et programmes de mathématiques"
+url = "https://eduscol.education.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail institutionnel facultatif pour rechercher des ressources de lecture de données ; aucun exercice, graphique, texte ou visuel n’est repris."
+
+[[fiche]]
+id = "sciences-calculer-vitesse-moyenne"
+titre = "Calculer une vitesse moyenne simple"
+matiere = "Sciences, technologie et environnement"
+matiere_id = "sciences"
+domaine = "sciences-techniques-environnement"
+niveau = 2
+horizon_contenu = "Relation distance-temps dans un exemple de mouvement fictif ; aucune consigne de déplacement réel"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de physique limité au calcul d’une vitesse moyenne constante sur la durée considérée. Faire vérifier les unités, l’interprétation de la moyenne et le périmètre par une personne compétente en physique. Le trajet est fictif et ne fournit aucun conseil de conduite ou de sécurité ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Diviser une distance par une durée pour exprimer une vitesse moyenne dans une unité cohérente."
+objectif = "Calculer une vitesse moyenne simple à partir d’une distance et d’une durée données dans des unités compatibles."
+situation = "Dans une simulation fictive, un petit robot parcourt 18 mètres en 3 secondes sur une piste. Quelle est sa vitesse moyenne pendant ce trajet ?"
+analogie_titre = "Comme compter la distance parcourue pendant chaque tranche de temps"
+analogie = "Si un robot avance à distance égale pendant chaque seconde, on peut compter combien de mètres il parcourt en une seconde. La vitesse moyenne résume la distance totale parcourue par unité de temps sur tout le trajet."
+limite_analogie = "Un déplacement réel peut accélérer, ralentir ou s’arrêter. Une vitesse moyenne ne dit pas à quelle vitesse l’objet allait à chaque instant ni comment il s’est déplacé entre le départ et l’arrivée."
+notions = [
+  "Distance — longueur totale du trajet considéré, exprimée ici en mètres.",
+  "Durée — temps écoulé pendant le trajet, exprimé ici en secondes.",
+  "Vitesse moyenne — distance totale divisée par la durée totale sur l’intervalle étudié.",
+  "Unité de vitesse — unité composée, par exemple mètres par seconde (m/s) ou kilomètres par heure (km/h).",
+  "Unités compatibles — distance et durée exprimées dans les unités correspondant à la vitesse recherchée."
+]
+demarche = [
+  "Repère la distance totale et la durée totale données dans le problème.",
+  "Vérifie les unités ; si la distance est en mètres et le temps en secondes, le résultat sera en mètres par seconde.",
+  "Divise la distance par la durée : vitesse moyenne = distance ÷ durée.",
+  "Dans le scénario, calcule 18 m ÷ 3 s = 6 m/s.",
+  "Contrôle l’ordre de grandeur en multipliant : 6 m/s pendant 3 s correspond à 18 m.",
+  "Interprète le résultat comme une moyenne sur le trajet, pas comme une vitesse constante à chaque instant."
+]
+exercice = "Dans une autre simulation fictive, un robot parcourt 24 mètres en 4 secondes. Calcule sa vitesse moyenne en mètres par seconde et vérifie le résultat en multipliant par la durée."
+aide = "Garde les mètres au numérateur et les secondes au dénominateur : divise 24 par 4, puis indique l’unité m/s."
+correction = [
+  "24 m ÷ 4 s = 6 m/s.",
+  "Vérification : 6 m/s × 4 s = 24 m.",
+  "La vitesse moyenne est de 6 mètres par seconde pour toute la durée indiquée. Le robot n’a pas nécessairement gardé cette vitesse à chaque instant."
+]
+a_retenir = [
+  "Pour une vitesse moyenne simple, divise la distance totale par la durée totale.",
+  "Les unités du résultat dépendent de celles de la distance et du temps.",
+  "Une vitesse moyenne ne donne pas la vitesse instantanée ni le détail du trajet.",
+  "Cette fiche ne traite pas des accélérations, des conversions entre m/s et km/h ni de la sécurité des déplacements réels."
+]
+transferer = "La relation peut aider à interpréter une simulation ou un énoncé de physique. Ne l’utilise pas seule pour prévoir la sécurité d’un déplacement réel : la trajectoire, les arrêts, les conditions et les règles applicables comptent aussi."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — ressources et programmes de sciences physiques"
+url = "https://eduscol.education.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail institutionnel facultatif pour retrouver des ressources de physique ; aucun texte, formule, exemple ou visuel n’est repris."
+
+[[fiche]]
+id = "sciences-distinguer-melange-changement-etat"
+titre = "Distinguer fusion et dissolution"
+matiere = "Sciences, technologie et environnement"
+matiere_id = "sciences"
+domaine = "sciences-techniques-environnement"
+niveau = 2
+horizon_contenu = "Premières descriptions de la fusion d’un solide et de la dissolution dans un liquide ; aucune manipulation n’est demandée"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de sciences limité à distinguer un changement d’état d’une dissolution simple. Faire relire les termes, les exemples et la précision du modèle par une personne compétente en chimie. La fiche ne propose aucun mélange ou essai réel et n’explique pas les transformations chimiques ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Reconnaître qu’un glaçon qui fond change d’état, tandis que du sucre dissous forme un mélange avec l’eau."
+objectif = "Classer deux descriptions fictives comme fusion ou dissolution et expliquer ce qui change dans chaque cas."
+situation = "Deux descriptions fictives : un glaçon devient de l’eau liquide dans une pièce ; du sucre est dissous dans un verre d’eau et n’est plus visible à l’œil nu. S’agit-il du même phénomène ?"
+analogie_titre = "Comme comparer un glaçon qui fond et une poudre dispersée"
+analogie = "Quand un glaçon fond, l’eau passe de l’état solide à l’état liquide. Quand du sucre se dissout dans l’eau, il se répartit dans le liquide et forme une solution, même s’il n’est plus visible en grains."
+limite_analogie = "Ces descriptions donnent un premier modèle, pas une observation complète des particules. La quantité, la température et la nature des substances peuvent compter ; certaines matières ne se dissolvent pas de la même manière. Aucun mélange réel n’est demandé ici."
+notions = [
+  "État physique — forme solide, liquide ou gazeuse d’une matière dans les conditions considérées.",
+  "Fusion — passage d’un solide à l’état liquide, comme la glace qui devient de l’eau liquide.",
+  "Dissolution — répartition d’une substance dans un liquide pour former une solution, lorsque cette substance peut s’y dissoudre.",
+  "Solution — mélange homogène à l’échelle observée, formé d’un liquide et d’une substance dissoute.",
+  "Observation — ce que l’on voit ou mesure ; une substance non visible n’a pas forcément disparu."
+]
+demarche = [
+  "Lis ce qui arrive à la matière : change-t-elle d’état, ou une substance se répartit-elle dans un liquide ?",
+  "Si un solide devient liquide, nomme le changement d’état : c’est une fusion dans l’exemple du glaçon.",
+  "Si une substance se répartit dans un liquide et forme une solution, décris une dissolution.",
+  "Distingue ce que l’on observe — par exemple, des grains qui ne sont plus visibles — de ce que l’on conclut sur la matière.",
+  "Précise les limites : toutes les substances ne se dissolvent pas dans tous les liquides et cette fiche n’explique pas les réactions chimiques."
+]
+exercice = "Classe chaque description fictive : A. un morceau de glace devient de l’eau liquide ; B. du sucre est réparti dans de l’eau et forme une solution. Laquelle décrit une fusion ? Laquelle décrit une dissolution ? Le sucre a-t-il simplement cessé d’exister parce qu’on ne le voit plus en grains ?"
+aide = "Cherche si la matière change d’état ou si elle se répartit dans un liquide. Une apparence différente ne prouve pas que la substance a disparu."
+correction = [
+  "A décrit une fusion : la glace passe de l’état solide à l’état liquide.",
+  "B décrit une dissolution : le sucre se répartit dans l’eau pour former une solution.",
+  "Non. Le fait de ne plus voir les grains ne suffit pas à conclure que le sucre a cessé d’exister. Cette fiche ne détaille pas son comportement moléculaire."
+]
+a_retenir = [
+  "La fusion est un changement d’état du solide vers le liquide.",
+  "La dissolution forme une solution lorsque la substance peut se répartir dans le liquide.",
+  "Une matière devenue invisible à l’œil nu n’est pas nécessairement absente.",
+  "Cette comparaison ne permet pas de reconnaître toutes les transformations chimiques ni de prévoir si deux substances peuvent être mélangées sans risque."
+]
+transferer = "Ces mots aident à décrire des phénomènes dans un cours de sciences. Ne mélange pas des produits réels pour vérifier une idée : cette fiche est une lecture de situations fictives, pas une consigne d’expérience."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — ressources et programmes de sciences et technologie"
+url = "https://eduscol.education.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail institutionnel facultatif pour retrouver des ressources de sciences ; aucun texte, expérience, exemple ou visuel n’est repris."
+
+[[fiche]]
+id = "geo-decrire-paysage"
+titre = "Décrire un paysage sans lui faire dire trop"
+matiere = "Géographie et espace"
+matiere_id = "geographie"
+domaine = "geographie"
+niveau = 1
+horizon_contenu = "Premiers repères pour décrire un paysage fictif et distinguer observation et interprétation"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de géographie utilisant une description écrite entièrement fictive. Faire vérifier la distinction entre éléments naturels, aménagements et interprétations par une personne compétente en géographie. Le texte ne permet pas de conclure sur la population, l’activité économique ou l’accessibilité du lieu ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Repérer des éléments naturels et aménagés dans un paysage, puis distinguer observation et hypothèse."
+objectif = "Décrire un paysage à partir d’indices visibles et nommer une information qui demanderait une autre source."
+situation = "Description fictive : une rivière traverse une vallée ; un pont la franchit ; des maisons sont regroupées près d’une route et des parcelles cultivées occupent une partie des pentes. Que peux-tu décrire directement ? Que ne peux-tu pas savoir avec cette seule description ?"
+analogie_titre = "Comme décrire une scène avant d’imaginer son histoire"
+analogie = "Une scène montre des éléments que l’on peut nommer : un chemin, des bâtiments, une rivière. On peut ensuite formuler des questions sur leur usage ou leur histoire, mais celles-ci demandent souvent d’autres informations."
+limite_analogie = "Un paysage ne se limite pas à ce qui est visible depuis un point de vue. Les usages, les habitants, les changements dans le temps et les accès peuvent être invisibles ou absents d’une description ; ne pas les déduire d’une image ou d’un seul texte."
+notions = [
+  "Paysage — partie d’un territoire perçue depuis un point de vue, avec des éléments naturels et aménagés.",
+  "Élément naturel — forme ou composant du milieu, comme une rivière ou une pente.",
+  "Aménagement — transformation ou équipement réalisé par des personnes, comme une route, un pont ou des parcelles cultivées.",
+  "Observation — élément explicitement visible ou décrit.",
+  "Interprétation — explication proposée à partir d’indices ; elle doit rester distinguée de l’observation."
+]
+demarche = [
+  "Lis ou observe la description sans expliquer tout de suite pourquoi les éléments se trouvent là.",
+  "Liste les éléments naturels décrits, puis les constructions et aménagements.",
+  "Relève les relations visibles : un pont franchit une rivière, une route passe près de maisons.",
+  "Écris ce qui est observé et ce que tu supposes dans des colonnes différentes.",
+  "Pour parler des habitants, des déplacements, des activités ou de l’évolution, cherche d’autres sources adaptées."
+]
+exercice = "Dans la description fictive, cite un élément naturel et deux aménagements. Peut-on savoir combien de personnes habitent les maisons, pourquoi elles ont été construites là ou si le pont est accessible à tout le monde ?"
+aide = "La rivière et la vallée sont décrites comme éléments naturels ; le pont, la route et les parcelles cultivées sont des aménagements. Cherche ensuite ce qui n’est pas indiqué."
+correction = [
+  "Élément naturel possible : la rivière ou la vallée.",
+  "Aménagements possibles : le pont, la route et les parcelles cultivées.",
+  "Non. La description ne donne ni le nombre d’habitants, ni la raison de l’emplacement, ni les conditions d’accessibilité. Il faudrait d’autres sources ou une observation adaptée."
+]
+a_retenir = [
+  "Décris d’abord les éléments naturels et les aménagements explicitement visibles.",
+  "Une relation visible entre deux lieux ne prouve pas pourquoi elle existe.",
+  "Une image ou une description ne renseigne pas à elle seule sur toute la population, les usages ou l’accessibilité.",
+  "Pour comparer des territoires, vérifie la date, l’échelle, la légende et la source des données."
+]
+transferer = "Cette méthode peut aider à lire une carte, une photo légendée ou une description de territoire. Les populations et leurs activités ne se déduisent pas d’un paysage seul ; utilise des données contextualisées et respecte les personnes concernées."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Institut national de l’information géographique et forestière — IGN"
+url = "https://www.ign.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail public facultatif pour rechercher des cartes et repères géographiques ; aucun fond de carte, texte, donnée ou visuel n’est repris dans la description fictive."
+
+[[fiche]]
+id = "info-lire-adresse-web"
+titre = "Repérer les parties d’une adresse Web"
+matiere = "Informatique et programmation"
+matiere_id = "informatique"
+domaine = "informatique-programmation"
+niveau = 2
+horizon_contenu = "Premiers repères sur le protocole, l’hôte, le chemin et le paramètre d’une adresse Web fictive"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon d’informatique limité à la lecture de quelques parties d’une URL. Faire vérifier le vocabulaire et les nuances concernant HTTPS, les noms d’hôte et les paramètres par une personne compétente en Web et en sécurité numérique. L’adresse d’exercice est fictive ; la fiche ne conseille pas de cliquer, de partager ou de saisir des données personnelles. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Reconnaître le schéma, l’hôte, le chemin et le paramètre dans une adresse fictive, sans confondre HTTPS et confiance."
+objectif = "Découper une adresse Web de démonstration en quelques parties et expliquer ce que le texte seul ne garantit pas."
+situation = "Adresse fictive : https://site-fictif.test/agenda?jour=mardi. Quels éléments indiquent le protocole, le nom d’hôte, le chemin et un paramètre ? L’adresse est-elle une preuve suffisante que le site est fiable ?"
+analogie_titre = "Comme lire les lignes d’adresse sur une enveloppe"
+analogie = "Une adresse postale sépare des informations comme la ville, la rue et le numéro. Une adresse Web sépare aussi des éléments qui aident le navigateur à trouver un hôte et une ressource."
+limite_analogie = "Internet n’est pas un service postal centralisé. Les règles techniques, les redirections, les paramètres et les certificats ajoutent des détails que l’adresse visible ne montre pas toujours. Une URL lisible ne prouve pas que son contenu est sûr ou exact."
+notions = [
+  "URL — adresse qui indique comment retrouver une ressource sur le Web.",
+  "Schéma — début de l’adresse, par exemple https, qui indique le protocole utilisé.",
+  "Hôte — nom du serveur ou domaine indiqué après le schéma et les séparateurs.",
+  "Chemin — partie qui suit l’hôte et désigne une ressource ou une route, comme /agenda.",
+  "Paramètre — information ajoutée après un point d’interrogation ; elle peut être transmise au site.",
+  "HTTPS — HTTP protégé par chiffrement pendant la connexion ; cette indication ne garantit pas à elle seule l’identité éditoriale, l’absence de fraude ou l’exactitude d’une page."
+]
+demarche = [
+  "Repère le schéma avant les deux-points : dans l’exemple, c’est https.",
+  "Après les deux barres obliques, lis l’hôte : site-fictif.test.",
+  "Après l’hôte et la barre oblique, repère le chemin : /agenda.",
+  "Après le point d’interrogation, repère un paramètre : jour=mardi. Il peut servir à transmettre une indication au site.",
+  "Ne saisis pas un mot de passe, un code ou une donnée personnelle dans une adresse si tu ne comprends pas pourquoi elle est demandée.",
+  "Pour juger une demande, vérifie l’identité et le contexte par un canal fiable ; HTTPS seul n’atteste pas que le site appartient à l’organisme attendu."
+]
+exercice = "Dans l’adresse fictive https://site-fictif.test/agenda?jour=mardi, indique le schéma, l’hôte, le chemin et le paramètre. Une adresse qui commence par https prouve-t-elle que le contenu est officiel ?"
+aide = "Lis l’adresse par étapes : avant ://, après :// jusqu’au prochain /, puis le chemin ; le point d’interrogation introduit le paramètre."
+correction = [
+  "Schéma : https. Hôte : site-fictif.test. Chemin : /agenda. Paramètre : jour=mardi.",
+  "Non. HTTPS protège la connexion vers l’hôte affiché, mais ne prouve pas que cet hôte est l’organisme que l’on cherche ni que son contenu est exact.",
+  "L’adresse est fictive ; aucun lien réel n’est à ouvrir."
+]
+a_retenir = [
+  "Une adresse Web contient plusieurs parties qui n’ont pas le même rôle.",
+  "Un paramètre peut transmettre une information au site ; évite d’y inclure des données personnelles ou secrètes.",
+  "HTTPS protège la connexion, mais ne garantit pas que le site soit honnête, officiel ou fiable.",
+  "Cette fiche n’explique pas les certificats, le DNS, les redirections ni toutes les formes d’URL."
+]
+transferer = "Cette lecture peut aider à comprendre un lien reçu ou une adresse copiée. Avant d’envoyer une donnée ou de répondre à une demande, vérifie l’hôte exact et confirme le contexte par une voie connue ; ne te fie pas au seul cadenas ou au préfixe HTTPS."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 90
+
+[[fiche.sources]]
+titre = "MDN — documentation Web et structure des URL"
+url = "https://developer.mozilla.org/fr/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_URL"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Référence documentaire facultative pour vérifier le vocabulaire du Web ; aucun texte, adresse, schéma ou exemple du site n’est repris."
+
+[[fiche]]
+id = "arts-lire-cartel"
+titre = "Lire une notice d’œuvre en séparant faits et interprétations"
+matiere = "Arts et culture"
+matiere_id = "arts"
+domaine = "arts-culture"
+niveau = 2
+horizon_contenu = "Premiers repères pour lire une notice de musée fictive, sans œuvre ni artiste réels"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de littératie artistique fondé sur une notice entièrement fictive. Faire vérifier les termes, la distinction entre données de notice et interprétation, et les formulations avec des personnes compétentes en arts et médiation culturelle. Les notices varient selon les institutions ; aucune œuvre réelle n’est décrite. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Repérer le titre, l’auteur, la date et la technique d’une notice, puis distinguer ces informations d’une interprétation."
+objectif = "Extraire les éléments explicitement donnés dans un cartel fictif et identifier une question qui reste ouverte."
+situation = "Cartel entièrement fictif — œuvre, nom, date et dimensions inventés : « Fenêtre de papier », Lina Morel, 2024, collage de papier et encre, 30 × 40 cm. Une phrase de médiation ajoute : « Les formes bleues peuvent évoquer une soirée calme. » Quelles informations décrivent l’objet et quelle phrase propose une interprétation ?"
+analogie_titre = "Comme lire l’étiquette et le commentaire d’un objet"
+analogie = "Une étiquette peut indiquer le nom, la date ou les matériaux d’un objet. Un commentaire propose ensuite une manière de le regarder. Séparer ces éléments aide à savoir ce qui est fourni par la notice et ce qui relève d’une interprétation."
+limite_analogie = "Une œuvre ne se résume pas à son étiquette, et le commentaire d’une institution n’est pas la seule lecture possible. Les notices peuvent être incomplètes, varier selon les lieux ou présenter des informations qui demandent une source complémentaire."
+notions = [
+  "Cartel ou notice — texte court qui accompagne une œuvre ou un objet exposé.",
+  "Titre — nom donné à l’œuvre, parfois attribué après sa création ou inconnu.",
+  "Attribution — nom de l’artiste ou de l’auteur lorsque l’institution peut le fournir ; elle peut rester incertaine.",
+  "Technique ou matériau — indication sur la manière ou les matières décrites dans la notice.",
+  "Interprétation — proposition de sens ou de lecture, qui doit être distinguée des informations factuelles de la notice."
+]
+demarche = [
+  "Repère les champs présentés : titre, auteur, date, technique, dimensions ou provenance, selon la notice.",
+  "Note uniquement les informations réellement écrites ; une rubrique absente ne peut pas être devinée.",
+  "Sépare les données de la notice du commentaire qui propose un sens ou une émotion.",
+  "Relis les mots de nuance comme « peut évoquer » : ils indiquent une interprétation possible, pas une conclusion obligatoire.",
+  "Si une date, une attribution ou une histoire est importante, cherche une autre source du musée ou demande une précision."
+]
+exercice = "Notice fictive : « Trois cercles », Samir Elan, 2021, impression sur papier. Le commentaire dit : « L’artiste a peut-être voulu représenter le passage des saisons. » Quelles informations la notice affirme-t-elle explicitement ? Le commentaire prouve-t-il l’intention de l’artiste ?"
+aide = "Le titre, le nom, la date et la technique apparaissent comme des champs de notice. Le mot « peut-être » signale une hypothèse dans le commentaire."
+correction = [
+  "La notice indique le titre « Trois cercles », le nom Samir Elan, la date 2021 et une impression sur papier.",
+  "Non. La phrase propose une interprétation et ne prouve pas l’intention de l’artiste.",
+  "Pour connaître une intention documentée, il faudrait une source complémentaire fiable ; une autre interprétation peut aussi être proposée et argumentée."
+]
+a_retenir = [
+  "Une notice donne des repères, mais pas nécessairement toute l’histoire d’une œuvre.",
+  "Distingue les informations explicitement attribuées de la lecture proposée dans un commentaire.",
+  "Une interprétation peut être intéressante sans être la seule possible ni une intention prouvée.",
+  "Cette fiche n’enseigne pas à reconnaître une œuvre réelle et ne demande pas d’en recopier une."
+]
+transferer = "Ces questions peuvent accompagner une visite ou la lecture d’une notice en ligne. Les informations de provenance, les droits des images et les interprétations doivent être vérifiés dans le contexte propre à l’œuvre ; aucune reproduction n’est incluse ici."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de la Culture — portail des arts et du patrimoine"
+url = "https://www.culture.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail public facultatif pour retrouver des ressources patrimoniales et artistiques ; aucun texte, cartel, image ou interprétation du site n’est repris."
+
+[[fiche]]
+id = "recherche-question-hypothese"
+titre = "Formuler une question et une hypothèse de recherche"
+matiere = "Recherche et esprit critique"
+matiere_id = "recherche"
+domaine = "etudes-superieures-recherche"
+niveau = 3
+horizon_contenu = "Premiers repères de conception d’une question de recherche ; l’exemple de la voiture-jouet est fictif"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de méthode de recherche centré sur une question et une hypothèse testables. Faire relire la terminologie, le modèle et les limites par une personne compétente en méthodologie et en sciences expérimentales. Aucun essai réel n’est demandé ; le sujet ne couvre pas les méthodes qualitatives, l’éthique de la recherche ni les plans d’étude avancés. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 10
+resume = "Transformer une curiosité en question délimitée, puis formuler une hypothèse qui peut être confrontée à des observations."
+objectif = "Distinguer une question de recherche d’une hypothèse et nommer une mesure et une condition à contrôler dans un exemple fictif."
+situation = "Scénario fictif : une équipe se demande si la hauteur de départ d’une voiture-jouet sur une rampe modifie la distance parcourue sur une piste horizontale. Quelle question pourrait-elle poser et quelle hypothèse provisoire pourrait-elle examiner ?"
+analogie_titre = "Comme poser une question précise avant d’ouvrir une enquête"
+analogie = "Une question précise délimite ce que l’on cherche à comprendre. Une hypothèse propose une réponse provisoire qui peut être confrontée à des observations. Elle aide à décider quelles informations seraient utiles, sans prédire à coup sûr ce qu’on découvrira."
+limite_analogie = "Toutes les recherches ne testent pas une hypothèse de cette manière. Une étude historique, qualitative, théorique ou exploratoire peut nécessiter d’autres questions et méthodes ; ce petit schéma ne constitue pas une recette universelle."
+notions = [
+  "Question de recherche — question délimitée à laquelle un travail cherche à répondre à partir d’éléments adaptés.",
+  "Hypothèse — réponse provisoire et examinable proposée avant ou pendant l’étude.",
+  "Variable — caractéristique qui peut changer ou prendre différentes valeurs dans un exemple.",
+  "Mesure — manière définie d’observer ou de quantifier un résultat.",
+  "Condition contrôlée — élément que l’on essaie de garder comparable pour interpréter une différence.",
+  "Résultat — ce qui est constaté après la collecte ou l’analyse ; il peut soutenir, nuancer ou contredire l’hypothèse."
+]
+demarche = [
+  "Transforme le sujet général en question délimitée : quelle variable change et quel résultat sera observé ?",
+  "Propose une hypothèse sous une forme qui peut être examinée : « Si…, alors… ».",
+  "Définis comment mesurer le résultat ; évite les termes vagues comme « mieux » sans indicateur.",
+  "Repère une condition importante à garder comparable, comme la même voiture, la même piste et la même façon de la relâcher.",
+  "Prévois plusieurs essais et des limites ; un seul résultat ne suffit pas toujours pour conclure.",
+  "Compare les observations à l’hypothèse et reste prêt à la modifier si les données ne la soutiennent pas."
+]
+exercice = "Pour la voiture-jouet fictive, écris une question précise sur la hauteur de départ et la distance parcourue. Ajoute une hypothèse qui commence par « Si la hauteur augmente… », une manière de mesurer la distance et deux conditions à garder comparables. Aucun essai réel n’est demandé."
+aide = "Une question demande ce que l’on cherche à savoir. L’hypothèse propose une réponse provisoire. La mesure précise ce qu’on observerait pour les comparer."
+correction = [
+  "Question possible : « Dans ce modèle fictif, la hauteur de départ de la voiture change-t-elle la distance qu’elle parcourt sur la piste horizontale ? »",
+  "Hypothèse possible : « Si la hauteur de départ augmente, alors la distance parcourue pourrait augmenter. » C’est une prédiction à examiner, pas un résultat établi.",
+  "Mesure possible : mesurer en centimètres la distance entre le point où la voiture quitte la rampe et son arrêt.",
+  "Conditions à comparer : utiliser la même voiture, la même piste et le même geste de relâchement ; répéter plusieurs essais. D’autres facteurs et les limites du modèle devraient aussi être examinés avant toute conclusion."
+]
+a_retenir = [
+  "Une question délimite ce que l’on cherche ; une hypothèse propose une réponse provisoire.",
+  "Définir une mesure aide à comprendre ce que signifie un résultat.",
+  "Des conditions comparables et des répétitions peuvent aider à examiner une hypothèse, sans supprimer toutes les limites.",
+  "Une hypothèse peut être nuancée ou contredite ; le but n’est pas de forcer les observations à la confirmer.",
+  "Les méthodes de recherche varient selon la question et la discipline ; ce schéma ne s’applique pas à toutes les recherches."
+]
+transferer = "Cette démarche peut aider à lire un protocole ou à préparer un petit projet d’étude. Pour une recherche impliquant des personnes, des animaux, des données personnelles ou un risque matériel, des règles d’éthique, de sécurité et d’expertise spécifiques sont nécessaires ; cette fiche ne les remplace pas."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Centre national de la recherche scientifique — ressources et actualités scientifiques"
+url = "https://www.cnrs.fr/fr"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail facultatif pour rechercher des ressources scientifiques et des informations sur la recherche ; aucun texte, protocole, résultat ou visuel n’est repris. La page précise et son adéquation méthodologique restent à vérifier."
+
+[[fiche]]
+id = "fr-lire-ponctuation"
+titre = "Lire la ponctuation pour comprendre une phrase"
+matiere = "Français et communication"
+matiere_id = "francais"
+domaine = "langue-communication"
+niveau = 1
+horizon_contenu = "Premiers repères sur le point, le point d’interrogation et le point d’exclamation ; exercices fictifs"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de français limité à trois signes de fin de phrase. Faire relire les exemples, les nuances d’intonation et la formulation avec des personnes compétentes en français et en formation de base. La ponctuation varie selon le texte et le registre ; cette fiche n’en présente pas toutes les règles. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 7
+resume = "Repérer quelques signes de fin de phrase et observer comment ils orientent la lecture."
+objectif = "Distinguer une phrase présentée comme une affirmation, une question ou une exclamation à partir de sa ponctuation."
+situation = "Trois messages fictifs : « La séance commence à 14 h. » ; « La séance commence à 14 h ? » ; « La séance commence à 14 h ! » Que suggère chaque signe final sur la manière de lire le message ?"
+analogie_titre = "Comme trois indications différentes à la fin d’un panneau"
+analogie = "Un signe placé à la fin d’une phrase peut indiquer si l’on donne une information, si l’on pose une question ou si l’on marque une émotion. Il aide la personne qui lit à repérer la forme de l’énoncé."
+limite_analogie = "Le signe n’explique pas à lui seul toute l’intention : un point d’exclamation peut exprimer plusieurs émotions, et l’ironie ou le contexte peuvent changer l’interprétation. La voix, la relation et les phrases précédentes comptent aussi."
+notions = [
+  "Point — marque souvent la fin d’une phrase déclarative.",
+  "Point d’interrogation — marque généralement une question directe.",
+  "Point d’exclamation — peut signaler une émotion, une insistance ou une interjection.",
+  "Phrase — ensemble de mots organisé pour transmettre un message ; la ponctuation en aide la lecture.",
+  "Intonation — variation de la voix à l’oral ; elle peut compléter la ponctuation écrite."
+]
+demarche = [
+  "Lis la phrase entière avant de décider ce qu’elle veut dire.",
+  "Repère le signe final : point, point d’interrogation ou point d’exclamation.",
+  "Demande-toi si le texte annonce une information, pose directement une question ou marque une émotion/insistance.",
+  "Relis les mots et le contexte : la ponctuation suggère une forme, mais ne donne pas toujours toute l’intention.",
+  "Si le message reste ambigu, demande une précision au lieu de deviner le ton."
+]
+exercice = "Associe chaque phrase fictive à une forme de lecture : A. « Le colis est arrivé. » B. « Le colis est arrivé ? » C. « Le colis est arrivé ! » Puis indique laquelle demande le plus clairement une réponse."
+aide = "Regarde le signe final avant de relire les mots. Le point d’interrogation indique le plus directement une question écrite."
+correction = [
+  "A est présentée comme une affirmation ; le point marque la fin de la phrase.",
+  "B est une question directe ; le point d’interrogation invite le plus clairement à répondre.",
+  "C exprime une exclamation ou une insistance possible. Le signe seul ne permet pas de savoir si la personne est contente, surprise ou contrariée."
+]
+a_retenir = [
+  "Le point, le point d’interrogation et le point d’exclamation n’orientent pas la lecture de la même façon.",
+  "La ponctuation aide à comprendre la forme écrite, mais ne suffit pas toujours à connaître l’intention ou l’émotion.",
+  "Le contexte et l’intonation peuvent compléter le signe final.",
+  "Cette fiche ne traite pas la virgule, les deux-points, les guillemets ni toutes les conventions typographiques."
+]
+transferer = "Ces repères peuvent aider à lire un message, une consigne ou un dialogue. Pour une demande importante ou un ton incertain, vérifie le sens avec la personne plutôt que d’interpréter un seul signe."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — socle commun de connaissances, de compétences et de culture"
+url = "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Repère institutionnel facultatif sur les apprentissages en français ; aucun texte, exemple ou exercice du site n’est repris."
+
+[[fiche]]
+id = "langue-anglais-epeler"
+titre = "Demander comment épeler un mot en anglais"
+matiere = "Langue étrangère : anglais"
+matiere_id = "langues"
+domaine = "langues-etrangeres"
+niveau = 1
+horizon_contenu = "Premières expressions écrites pour demander ou donner l’orthographe d’un nom fictif ; pas d’audio"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon d’anglais limité à deux demandes simples sur l’orthographe. Faire relire les expressions, traductions et registres par une personne compétente en anglais. La fiche ne fournit pas d’audio et ne garantit pas la prononciation ou la compréhension ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 7
+resume = "Utiliser une expression simple pour demander ou donner l’orthographe d’un nom."
+objectif = "Reconnaître une demande d’épellation en anglais et répondre avec les lettres d’un exemple fictif."
+situation = "Dans un scénario fictif d’inscription à un atelier, une personne ne comprend pas l’orthographe du nom inventé « Maya ». Quelle phrase simple peut-elle employer pour demander comment l’écrire ?"
+analogie_titre = "Comme demander les lettres d’un mot pour bien le recopier"
+analogie = "Si l’on veut noter un nom sans se tromper, demander ses lettres une par une peut aider. En anglais, une courte expression peut préciser que l’on demande l’orthographe, et non une traduction ou une répétition du message entier."
+limite_analogie = "Une question écrite ne fournit pas les sons des lettres et ne garantit pas que l’autre personne comprendra. Le nom peut aussi s’écrire de plusieurs façons ; vérifie-le par écrit si c’est important."
+notions = [
+  "Spell — verbe anglais qui signifie épeler ou donner l’orthographe d’un mot.",
+  "How do you spell…? — question courante pour demander comment écrire un mot ou un nom.",
+  "Could you spell that, please? — demande polie pour faire épeler un mot ou un nom.",
+  "Letter — lettre de l’alphabet ; son nom prononcé peut différer de sa forme écrite.",
+  "Check — vérifier l’orthographe après l’avoir entendue ou lue."
+]
+demarche = [
+  "Repère ce que tu veux connaître : l’orthographe d’un mot ou une répétition de toute l’indication.",
+  "Pour demander comment écrire un mot, tu peux dire : « How do you spell Maya? ».",
+  "Pour demander une épellation, tu peux dire : « Could you spell that, please? ».",
+  "Écris les lettres reçues dans l’ordre, puis relis-les ou demande une confirmation écrite si le nom doit être exact.",
+  "N’utilise cette question que si la personne souhaite ou doit donner cette information ; un nom réel n’est pas nécessaire pour s’exercer."
+]
+exercice = "Dans un exercice fictif, le nom inventé « Lila » s’écrit L-I-L-A. Complète l’échange : A. « How do you spell Lila? » B. « … » Puis indique ce que signifie la question A."
+aide = "La réponse peut commencer par le nom, puis présenter ses lettres dans l’ordre : L-I-L-A. « Spell » signifie ici « épeler »."
+correction = [
+  "Réponse possible : « Lila is spelled L-I-L-A. » (« Lila s’écrit L-I-L-A. »)",
+  "La question « How do you spell Lila? » demande comment écrire le nom Lila.",
+  "Les expressions peuvent varier selon le contexte ; la fiche ne fournit pas d’audio pour apprendre le nom prononcé des lettres."
+]
+a_retenir = [
+  "« How do you spell…? » demande l’orthographe d’un mot ou d’un nom.",
+  "« Could you spell that, please? » demande poliment une épellation.",
+  "Vérifie l’ordre des lettres, surtout si l’orthographe doit être exacte.",
+  "Cette fiche ne comprend ni écoute audio, ni transcription phonétique, ni enseignement de prononciation."
+]
+transferer = "Cette formule peut aider à demander l’orthographe d’un mot dans un échange en anglais. Pour un nom ou une information importante, vérifie les lettres dans un message écrit ou sur le document pertinent, avec l’accord de la personne."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — programmes et ressources pour les langues vivantes"
+url = "https://eduscol.education.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail institutionnel facultatif pour rechercher des ressources de langue ; aucun dialogue, phrase, traduction ou activité du site n’est repris."
+
+[[fiche]]
+id = "maths-lire-tableau-croise"
+titre = "Lire une information à l’intersection d’un tableau"
+matiere = "Mathématiques"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 1
+horizon_contenu = "Lire une table fictive à deux entrées en croisant une ligne et une colonne"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de lecture d’un tableau à double entrée. Faire vérifier la disposition, les intitulés et les réponses par une personne compétente en mathématiques et en littératie des données. La fiche ne couvre pas les tableaux complexes ni les données réelles ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 7
+resume = "Croiser un intitulé de ligne et un intitulé de colonne pour retrouver la bonne case."
+objectif = "Lire une valeur fictive dans un tableau à deux entrées sans confondre les lignes et les colonnes."
+situation = "Tableau fictif des salles d’un atelier : en colonnes, « Matin » et « Après-midi » ; en lignes, « Lundi » et « Mardi ». Lundi : salle A le matin, salle C l’après-midi. Mardi : salle B le matin, salle A l’après-midi. Quelle salle est prévue mardi après-midi ?"
+analogie_titre = "Comme choisir un casier à partir de deux repères"
+analogie = "Un casier peut être repéré par une rangée et une colonne. Dans un tableau à deux entrées, on utilise aussi deux intitulés pour trouver la case qui les croise."
+limite_analogie = "Un tableau ne contient que les informations qui y sont inscrites. Des lignes ou colonnes manquantes, une unité imprécise ou un titre incomplet peuvent rendre la lecture incertaine ; le tableau n’explique pas toujours comment les données ont été obtenues."
+notions = [
+  "Ligne — rangée d’informations, souvent nommée à gauche du tableau.",
+  "Colonne — série verticale d’informations, souvent nommée en haut du tableau.",
+  "En-tête — intitulé qui décrit une ligne ou une colonne.",
+  "Case — emplacement à l’intersection d’une ligne et d’une colonne.",
+  "Tableau à deux entrées — tableau où deux catégories servent ensemble à retrouver une information."
+]
+demarche = [
+  "Lis le titre pour comprendre ce que le tableau décrit.",
+  "Repère l’intitulé de la ligne qui correspond à ta première information.",
+  "Repère l’intitulé de la colonne qui correspond à la seconde information.",
+  "Suis la ligne et la colonne jusqu’à leur intersection, puis lis la case.",
+  "Vérifie les en-têtes et l’unité avant de reprendre la valeur."
+]
+exercice = "Avec le tableau fictif de la situation, quelle salle est prévue lundi après-midi ? Et quelle salle est prévue mardi matin ? Quelle case dois-tu lire pour répondre à chaque question ?"
+aide = "Pour « lundi après-midi », repère d’abord la ligne Lundi, puis la colonne Après-midi. Fais l’inverse pour Mardi matin, sans changer de case."
+correction = [
+  "Lundi après-midi : la case à l’intersection de la ligne Lundi et de la colonne Après-midi indique la salle C.",
+  "Mardi matin : la ligne Mardi croisée avec la colonne Matin indique la salle B.",
+  "La ligne et la colonne doivent toutes deux correspondre à la question ; lire une seule étiquette ne suffit pas."
+]
+a_retenir = [
+  "Lis le titre et les en-têtes avant de chercher une case.",
+  "Une valeur d’un tableau à deux entrées se trouve au croisement d’une ligne et d’une colonne.",
+  "Vérifie l’unité et la période si le tableau porte sur une mesure ou un horaire.",
+  "Un tableau organisé ne garantit pas que les données sont exactes ou complètes."
+]
+transferer = "Cette lecture sert pour un horaire, un tableau de présence ou un relevé simple. Pour une donnée qui a des conséquences, cherche aussi sa source, sa date et la méthode utilisée."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — ressources et programmes de mathématiques"
+url = "https://eduscol.education.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail institutionnel facultatif pour rechercher des ressources de lecture de données ; aucun tableau, exercice, exemple ou visuel n’est repris."
+
+[[fiche]]
+id = "maths-reperer-angle-droit"
+titre = "Repérer un angle droit"
+matiere = "Mathématiques"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 1
+horizon_contenu = "Reconnaître un angle droit dans des descriptions et formes simples ; aucune mesure avec outil n’est requise"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de géométrie centré sur l’angle droit. Faire vérifier les définitions, les exemples et les descriptions spatiales par une personne compétente en mathématiques et en accessibilité. La fiche n’enseigne pas la mesure de tous les angles ni les constructions géométriques ; sources, droits et essais apprenants restent à contrôler."
+minutes = 7
+resume = "Comparer un angle à un coin carré de référence pour repérer un angle droit."
+objectif = "Identifier un angle droit dans une forme décrite et expliquer le rôle de son sommet et de ses côtés."
+situation = "Un rectangle fictif a quatre coins identiques, comme les coins d’une feuille rectangulaire. Comment décrire l’angle formé par deux côtés qui se rejoignent à un coin ?"
+analogie_titre = "Comme le coin d’une feuille rectangulaire"
+analogie = "Le coin d’une feuille rectangulaire sert de repère familier : deux côtés s’y rejoignent en formant un angle droit. On peut comparer d’autres angles à ce coin sans mesurer immédiatement avec un instrument."
+limite_analogie = "Une feuille peut être pliée ou déformée ; son coin n’est un bon repère que si elle est bien rectangulaire. Comparer à l’œil donne une première idée, pas une mesure précise pour un travail qui exige de l’exactitude."
+notions = [
+  "Angle — ouverture formée par deux demi-droites ou segments qui partent d’un même point.",
+  "Sommet — point commun où les deux côtés de l’angle se rejoignent.",
+  "Côtés — lignes ou segments qui forment l’angle.",
+  "Angle droit — angle de 90 degrés, souvent représenté par un petit carré au sommet dans un schéma.",
+  "Repère — forme connue à laquelle on compare un angle pour l’identifier."
+]
+demarche = [
+  "Repère le sommet : le point où les deux côtés se rejoignent.",
+  "Observe l’ouverture entre les deux côtés, pas leur longueur.",
+  "Compare-la au coin d’une feuille rectangulaire tenue à plat ou à un autre angle droit connu.",
+  "Dans un schéma, cherche si un petit carré marque l’angle droit.",
+  "Pour un tracé exact, utilise un outil adapté et vérifie sa lecture ; une comparaison visuelle n’est qu’un repère."
+]
+exercice = "Dans une forme en L décrite comme deux segments qui se rejoignent exactement au coin d’une feuille rectangulaire, l’angle est-il droit ? Quelle partie forme le sommet ?"
+aide = "Le sommet est le point de rencontre. Compare l’ouverture au coin de la feuille, pas la taille des segments."
+correction = [
+  "Oui, si l’angle de la forme correspond au coin rectangulaire de référence, il s’agit d’un angle droit.",
+  "Le sommet est le point où les deux segments se rejoignent.",
+  "La comparaison aide à reconnaître la forme ; pour garantir une mesure exacte dans un plan, un instrument et une méthode adaptés peuvent être nécessaires."
+]
+a_retenir = [
+  "Un angle est formé par deux côtés qui ont un sommet commun.",
+  "Un angle droit mesure 90 degrés et peut être comparé au coin d’un rectangle.",
+  "L’ouverture compte, pas la longueur des côtés.",
+  "Une comparaison visuelle ne remplace pas une mesure précise lorsque celle-ci est nécessaire."
+]
+transferer = "Ce repère peut aider à décrire un rectangle, un carrelage ou un dessin géométrique. Cette fiche ne donne pas de plan de découpe ni de consigne d’utilisation d’outil ; pour un travail réel, choisis des outils adaptés et respecte les règles de sécurité."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — ressources et programmes de mathématiques"
+url = "https://eduscol.education.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail institutionnel facultatif pour retrouver des ressources de géométrie ; aucun exercice, schéma, texte ou visuel n’est repris."
+
+[[fiche]]
+id = "sciences-cycle-vie-plante"
+titre = "Repérer les grandes étapes de vie d’une plante à fleurs"
+matiere = "Sciences, technologie et environnement"
+matiere_id = "sciences"
+domaine = "sciences-techniques-environnement"
+niveau = 2
+horizon_contenu = "Premiers repères sur un cycle simple de plante à fleurs ; description fictive sans expérience ni conseil de culture"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de biologie limité à un cycle de vie simplifié pour certaines plantes à fleurs. Faire vérifier les termes, l’ordre des étapes et les limites par une personne compétente en biologie. Les cycles varient selon les espèces ; aucun essai de culture, ingestion ou conseil horticole n’est demandé. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Ordonner quelques étapes d’un cycle de plante à fleurs sans prétendre décrire toutes les plantes."
+objectif = "Placer graine, germination, jeune pousse et production de nouvelles graines dans un cycle fictif simple."
+situation = "Schéma verbal fictif d’une plante annuelle à fleurs : une graine germe, une jeune pousse grandit, la plante adulte produit des fleurs puis des graines. Quelles étapes se suivent et pourquoi parle-t-on de cycle ?"
+analogie_titre = "Comme une boucle de transformation avec de nouvelles graines"
+analogie = "Pour certaines plantes à fleurs, une graine peut donner une jeune plante qui grandit et produit de nouvelles graines. La suite peut recommencer avec ces graines, même si chaque plante et chaque environnement ont leurs particularités."
+limite_analogie = "Toutes les plantes ne suivent pas exactement ce schéma : certaines se reproduisent autrement ou vivent plusieurs années. Un schéma de cycle simplifie une diversité importante et n’indique pas à lui seul les conditions nécessaires à une espèce particulière."
+notions = [
+  "Graine — structure qui peut donner une nouvelle plante lorsque les conditions adaptées sont réunies.",
+  "Germination — début du développement d’une plante à partir d’une graine.",
+  "Jeune pousse — plante en croissance après les premières étapes de germination.",
+  "Plante adulte — étape où certaines plantes à fleurs peuvent produire fleurs puis graines.",
+  "Cycle de vie — suite d’étapes qui se répètent d’une génération à l’autre, avec des variations entre espèces."
+]
+demarche = [
+  "Lis le titre et vérifie de quelle plante ou de quel groupe parle le schéma.",
+  "Repère la première étape décrite : ici, la graine.",
+  "Suis les changements annoncés : germination, jeune pousse, plante adulte, fleurs et graines.",
+  "Replace les étapes dans l’ordre et explique comment de nouvelles graines peuvent relancer le cycle.",
+  "Note les limites : ce cycle simplifié ne décrit pas toutes les plantes ni toutes les conditions de croissance."
+]
+exercice = "Dans l’exemple fictif, remets en ordre : plante adulte qui produit des graines ; jeune pousse ; graine qui germe. Quelle étape peut recommencer le cycle ?"
+aide = "Commence par ce qui se trouve avant la jeune pousse, puis cherche ce que la plante adulte produit dans ce schéma."
+correction = [
+  "Ordre : une graine germe, devient une jeune pousse, puis une plante adulte qui produit des graines.",
+  "Les nouvelles graines peuvent initier un cycle suivant lorsque les conditions adaptées sont réunies.",
+  "Ce schéma concerne une plante à fleurs fictive et simplifiée ; il ne s’applique pas à toutes les formes de vie végétale."
+]
+a_retenir = [
+  "Un cycle de vie représente des étapes qui se suivent et peuvent recommencer.",
+  "Dans cet exemple, la germination précède la jeune pousse, puis la plante adulte produit de nouvelles graines.",
+  "Les cycles et modes de reproduction varient selon les espèces.",
+  "Cette fiche ne remplace pas une source de biologie consacrée à une plante précise et ne demande pas de manipulation."
+]
+transferer = "Un cycle simplifié aide à suivre les étapes d’un schéma de biologie. Pour comprendre une espèce réelle, vérifie son mode de reproduction, son environnement et la source scientifique ; ne généralise pas un exemple à toutes les plantes."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — ressources et programmes de sciences de la vie et de la Terre"
+url = "https://eduscol.education.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail institutionnel facultatif pour rechercher des ressources de biologie ; aucun texte, schéma, activité ou visuel n’est repris."
+
+[[fiche]]
+id = "geo-lire-legende-carte"
+titre = "Lire une légende sur une carte"
+matiere = "Géographie et espace"
+matiere_id = "geographie"
+domaine = "geographie"
+niveau = 1
+horizon_contenu = "Premiers repères de lecture d’une légende avec une carte fictive décrite en texte"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de géographie centré sur la légende d’une carte schématique. Faire vérifier les symboles, la distinction entre catégorie et élément représenté, et les limites d’inférence par une personne compétente en cartographie. La fiche ne fournit aucun itinéraire réel et n’évalue pas l’accessibilité du terrain. Sources, droits et essais apprenants restent à contrôler."
+minutes = 7
+resume = "Utiliser la légende pour associer un symbole à l’élément qu’il représente sur une carte."
+objectif = "Retrouver deux éléments sur une carte fictive en lisant d’abord la légende et les symboles correspondants."
+situation = "Carte fictive décrite en texte : la légende indique qu’une ligne bleue représente une rivière, une zone verte un parc et une ligne grise épaisse une route. Le plan montre ces trois signes. Que représente chacun ?"
+analogie_titre = "Comme le code des symboles sur une boîte de jeu"
+analogie = "Un mode d’emploi peut expliquer qu’un symbole représente une action ou un objet. Une légende fait pareil pour les signes d’une carte : elle indique comment lire les couleurs, formes et traits choisis."
+limite_analogie = "Les conventions varient selon les cartes et les producteurs. Une légende ne donne pas forcément toutes les informations utiles ; elle ne garantit ni que la carte est récente, ni que le lieu est accessible ou sûr."
+notions = [
+  "Carte — représentation simplifiée d’un espace selon une échelle et un objectif.",
+  "Légende — liste ou tableau qui explique les symboles de la carte.",
+  "Symbole — forme, couleur ou trait choisi pour représenter une catégorie d’élément.",
+  "Catégorie — type d’élément représenté, par exemple une route ou une zone verte.",
+  "Date et source — informations nécessaires pour situer la carte et savoir qui l’a produite."
+]
+demarche = [
+  "Lis le titre et repère le sujet et la zone couverts par la carte.",
+  "Cherche la légende avant d’interpréter les couleurs ou les traits.",
+  "Fais correspondre un symbole de la carte avec son explication dans la légende.",
+  "Vérifie si le signe représente un lieu, une ligne, une zone ou une autre catégorie.",
+  "Consulte aussi la date, l’échelle, l’orientation et la source ; la légende seule ne suffit pas pour choisir un trajet réel."
+]
+exercice = "La légende fictive indique : triangle noir = point de vue ; ligne bleue = rivière ; zone verte = parc. Sur le plan décrit, tu vois un triangle noir près d’une ligne bleue et d’une zone verte. Quels éléments sont représentés ? Que ne peux-tu pas conclure sur leur accessibilité ?"
+aide = "Associe chaque signe à l’entrée de la légende qui a la même forme ou couleur, puis nomme l’élément."
+correction = [
+  "Le triangle noir correspond à un point de vue, la ligne bleue à une rivière et la zone verte à un parc.",
+  "La carte et sa légende ne disent pas nécessairement si le point de vue, le parc ou le chemin pour les atteindre est accessible à une personne donnée.",
+  "Il faudrait une carte adaptée, des données à jour ou une information du gestionnaire pour vérifier les conditions réelles."
+]
+a_retenir = [
+  "La légende explique les symboles choisis pour une carte donnée.",
+  "Ne déduis pas le sens d’une couleur ou d’un trait sans lire cette légende.",
+  "La date, l’échelle, l’orientation et la source complètent la lecture.",
+  "Un symbole ne garantit ni l’état actuel du lieu, ni sa sécurité, ni son accessibilité."
+]
+transferer = "Ces repères peuvent aider à lire un plan de quartier, une carte thématique ou un schéma de territoire. Pour une sortie réelle, consulte des informations récentes et adaptées au besoin ; cette fiche ne donne aucun itinéraire."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Institut national de l’information géographique et forestière — IGN"
+url = "https://www.ign.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail public facultatif pour rechercher des repères cartographiques ; aucun fond de carte, légende, donnée ou visuel n’est repris."
+
+[[fiche]]
+id = "histoire-situer-siecle"
+titre = "Situer une année dans un siècle"
+matiere = "Histoire et chronologie"
+matiere_id = "histoire"
+domaine = "histoire-memoire"
+niveau = 2
+horizon_contenu = "Repérer le siècle correspondant à une année de l’ère commune ; aucune chronologie d’événements n’est proposée"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de chronologie limité au calcul du siècle d’une année positive de l’ère commune. Faire vérifier les bornes, les exemples et la formulation avec une personne compétente en histoire et en mathématiques. Les années avant notre ère et les calendriers non grégoriens ne sont pas traités. Sources, droits et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Associer une année de notre ère à son siècle en repérant les bornes de périodes de cent ans."
+objectif = "Trouver le siècle correspondant à une année comprise entre l’an 1 et l’an 9999 de l’ère commune, puis vérifier une borne."
+situation = "Une frise fictive porte l’année 1789. Dans quel siècle se situe-t-elle ? Comment vérifier les années qui ouvrent et terminent ce siècle ?"
+analogie_titre = "Comme ranger les années dans des boîtes de cent"
+analogie = "On peut ranger les années de notre ère dans des groupes de cent ans : les années 1 à 100 forment le premier siècle, les années 101 à 200 le deuxième, et ainsi de suite."
+limite_analogie = "Le comptage des siècles avant notre ère suit d’autres repères, et cette fiche ne les traite pas. Les calendriers et conventions historiques peuvent aussi varier ; les exercices portent uniquement sur les années de l’ère commune utilisées ici."
+notions = [
+  "Année — repère de temps utilisé dans le calendrier considéré.",
+  "Siècle — période de cent années ; le premier siècle de l’ère commune va de l’an 1 à l’an 100.",
+  "Borne — année qui marque le début ou la fin d’une période.",
+  "Ère commune — façon de numéroter les années à partir de l’an 1 dans le calendrier grégorien, sans année zéro dans cette suite.",
+  "Vérification — contrôle des bornes pour éviter de décaler le siècle d’une année."
+]
+demarche = [
+  "Repère l’année et vérifie qu’il s’agit d’une année de l’ère commune, sans notation avant notre ère.",
+  "Si l’année se termine par 00, elle termine un siècle : 1900 est la dernière année du XIXe siècle.",
+  "Si elle ne se termine pas par 00, prends les chiffres avant les deux derniers et ajoute 1 : 1789 donne 17 + 1 = XVIIIe siècle.",
+  "Pour une année de 1 à 100, le siècle est le Ier ; pour les années suivantes, vérifie les bornes si tu hésites.",
+  "Contrôle avec deux repères voisins : le XVIIIe siècle va de 1701 à 1800."
+]
+exercice = "Dans quel siècle se trouvent les années fictives de cette frise : 1500, 1501, 1900, 1901 et 2026 ? Pour l’une d’elles, donne les bornes du siècle pour vérifier."
+aide = "Les années qui se terminent par 00 ferment un siècle. L’année suivante commence le siècle d’après."
+correction = [
+  "1500 appartient au XVe siècle ; 1501 au XVIe.",
+  "1900 appartient au XIXe siècle ; 1901 au XXe.",
+  "2026 appartient au XXIe siècle : celui-ci commence en 2001 et se termine en 2100.",
+  "La règle ne traite ici que les années de l’ère commune ; elle ne s’applique pas directement aux dates avant notre ère."
+]
+a_retenir = [
+  "Un siècle contient cent années, mais son numéro augmente après l’année qui se termine par 00.",
+  "1789 est dans le XVIIIe siècle, qui va de 1701 à 1800.",
+  "1900 est la dernière année du XIXe siècle ; 1901 ouvre le XXe.",
+  "Cette méthode ne couvre pas les dates avant notre ère ni les autres calendriers."
+]
+transferer = "Ce repère peut aider à lire une frise ou un texte historique. Il indique une période, pas ce qui s’y est passé : vérifie les événements et les dates dans des sources historiques contextualisées."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — programmes et ressources d’histoire"
+url = "https://eduscol.education.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail institutionnel facultatif pour retrouver des repères de chronologie ; aucun texte, date d’événement, frise ou exercice n’est repris."
+
+[[fiche]]
+id = "info-systeme-exploitation"
+titre = "Comprendre le rôle d’un système d’exploitation"
+matiere = "Informatique et programmation"
+matiere_id = "informatique"
+domaine = "informatique-programmation"
+niveau = 2
+horizon_contenu = "Premiers repères sur le système d’exploitation et les applications ; aucune commande ni modification d’appareil n’est demandée"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon d’informatique limité au rôle général d’un système d’exploitation. Faire vérifier les définitions et les exemples par une personne compétente en systèmes, en tenant compte des différences entre appareils et environnements. La fiche ne donne ni commande, ni conseil de configuration, ni procédure d’accès ; sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Distinguer le logiciel système qui organise l’environnement de l’appareil des applications utilisées pour une tâche."
+objectif = "Classer quelques exemples fictifs comme système d’exploitation ou application et décrire leur rôle général."
+situation = "Sur un appareil fictif, tu ouvres un navigateur pour consulter une page et un éditeur pour rédiger un texte. Un logiciel système permet à ces applications d’utiliser l’écran, le clavier et le stockage. Quel élément correspond au système d’exploitation ?"
+analogie_titre = "Comme un régisseur qui coordonne une salle"
+analogie = "Un régisseur aide plusieurs équipes à utiliser une salle, ses équipements et les créneaux disponibles. Un système d’exploitation organise aussi des ressources de l’appareil et fournit des services aux applications."
+limite_analogie = "Un système d’exploitation n’est pas une personne qui décide librement. Il suit des règles et des programmes ; ses fonctions et ses réglages diffèrent selon l’appareil, la version et la configuration."
+notions = [
+  "Système d’exploitation — logiciel système qui fournit des fonctions de base et coordonne l’utilisation de ressources d’un appareil.",
+  "Application — logiciel conçu pour accomplir une tâche, par exemple écrire un texte ou consulter le Web.",
+  "Ressource — capacité utilisée par des logiciels, comme le processeur, la mémoire, le stockage ou un périphérique.",
+  "Fichier — données enregistrées auxquelles une application peut accéder selon les règles du système.",
+  "Permission — règle qui détermine si un compte ou un logiciel peut réaliser une action ou accéder à une ressource."
+]
+demarche = [
+  "Repère la tâche demandée : écrire, calculer, naviguer ou organiser des fichiers.",
+  "Identifie l’application qui sert directement à cette tâche.",
+  "Repère le logiciel système qui fournit l’environnement et coordonne l’accès aux ressources de l’appareil.",
+  "Distingue le nom d’une application de celui du système d’exploitation, même si les deux sont fournis ensemble.",
+  "Souviens-toi que les permissions et les fonctions varient ; ne change aucun réglage important sans comprendre son effet."
+]
+exercice = "Dans un appareil fictif, un navigateur affiche une page, un éditeur ouvre un document et un système d’exploitation fournit des services aux deux applications. Classe ces trois éléments et indique lequel coordonne l’environnement logiciel de l’appareil."
+aide = "Le navigateur et l’éditeur accomplissent directement des tâches. Le système d’exploitation fournit les fonctions de base utilisées par les applications."
+correction = [
+  "Le navigateur est une application de consultation du Web.",
+  "L’éditeur est une application utilisée pour créer ou modifier un document.",
+  "Le système d’exploitation coordonne l’environnement logiciel et l’accès à des ressources ; ce n’est ni le navigateur ni l’éditeur."
+]
+a_retenir = [
+  "Le système d’exploitation fournit des fonctions de base et coordonne des ressources de l’appareil.",
+  "Une application répond directement à une tâche ; elle s’appuie généralement sur l’environnement système.",
+  "Fichiers, comptes et permissions dépendent des logiciels et des réglages concernés.",
+  "Cette fiche ne décrit pas comment installer, mettre à jour, réparer ou modifier un système."
+]
+transferer = "Cette distinction peut aider à comprendre pourquoi plusieurs applications fonctionnent sur un même appareil. Pour une action réelle sur des comptes, permissions, mises à jour ou fichiers, consulte la documentation adaptée et les règles de l’organisation."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — ressources d’informatique et de numérique"
+url = "https://eduscol.education.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail institutionnel facultatif pour retrouver des ressources de culture numérique ; aucun texte, schéma, définition ou visuel n’est repris."
+
+[[fiche]]
+id = "numerique-formuler-recherche"
+titre = "Formuler une recherche sur le Web"
+matiere = "Numérique et information"
+matiere_id = "numerique"
+domaine = "numerique-ia"
+niveau = 1
+horizon_contenu = "Premiers repères pour choisir des mots de recherche et affiner une requête ; aucun moteur précis n’est privilégié"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de littératie numérique sur la formulation d’une recherche. Faire vérifier les conseils pour plusieurs moteurs et leurs évolutions par une personne compétente en information et en numérique. Les syntaxes de recherche varient ; la fiche ne demande aucune donnée personnelle et ne promet pas un classement neutre ou complet des résultats. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Choisir quelques mots utiles, observer les résultats et préciser la requête sans partager d’information personnelle."
+objectif = "Transformer une question fictive en requête de recherche courte, puis l’affiner à partir des résultats obtenus."
+situation = "Tu cherches des horaires fictifs pour un atelier gratuit de réparation de vélos dans une ville-exemple. Quels mots décrivent l’activité et l’information recherchée ? Comment éviter d’ajouter ton adresse ou ton nom ?"
+analogie_titre = "Comme demander un renseignement avec les mots importants"
+analogie = "Au guichet, nommer l’activité, le lieu et l’information voulue aide à orienter la question. Une requête Web utilise aussi des termes qui décrivent le besoin, puis peut être affinée selon les résultats."
+limite_analogie = "Un moteur de recherche ne pose pas de questions comme une personne et ses résultats dépendent de ses outils, de son index et parfois de réglages. La première page n’est pas forcément la meilleure réponse ni une liste complète."
+notions = [
+  "Requête — mots ou expression saisis pour chercher une information.",
+  "Mot-clé — terme important qui décrit le sujet, le lieu ou le type de réponse recherché.",
+  "Affiner — ajouter ou remplacer des termes pour rendre une recherche plus précise.",
+  "Résultat — page, document ou autre élément proposé par un moteur ; sa présence ne garantit pas sa pertinence.",
+  "Donnée personnelle — information qui se rapporte à une personne ; elle n’est généralement pas nécessaire pour formuler une recherche d’information générale."
+]
+demarche = [
+  "Écris la question en langage courant pour clarifier ce que tu veux savoir.",
+  "Garde deux ou trois mots qui décrivent le sujet et le type d’information attendu, par exemple activité, horaires, atelier.",
+  "Ajoute un lieu seulement s’il est nécessaire et ne saisis pas ton nom, ton adresse personnelle, un code ou une donnée sensible.",
+  "Observe les premiers résultats : leur titre, leur émetteur, leur date et leur portée.",
+  "Si la requête est trop large, ajoute un terme précis ; si elle ne donne rien, remplace un mot ou enlève une précision.",
+  "Vérifie l’information sur la page d’origine et auprès d’une source adaptée ; la position dans les résultats ne prouve pas la qualité."
+]
+exercice = "Pour l’atelier fictif de réparation de vélos, propose une requête de quatre à six mots qui cherche les horaires et le lieu. Puis indique un mot que tu pourrais ajouter pour préciser la recherche et une donnée personnelle à ne pas inclure."
+aide = "Tu peux commencer par « atelier réparation vélo horaires » puis ajouter une ville fictive ou le nom d’un organisme si cette précision est utile."
+correction = [
+  "Requête possible : « atelier réparation vélo horaires ville-exemple ».",
+  "On peut préciser « gratuit » si ce critère est utile, ou le nom d’un lieu public si on le connaît.",
+  "Il n’est pas nécessaire d’ajouter un nom, une adresse personnelle, un numéro de téléphone ou un code secret. Il faut ensuite vérifier la date et l’émetteur de la page trouvée."
+]
+a_retenir = [
+  "Une requête claire décrit le besoin avec quelques mots-clés utiles.",
+  "On peut l’affiner en ajoutant, remplaçant ou retirant un terme.",
+  "L’ordre des résultats ne prouve ni leur exactitude ni leur indépendance.",
+  "Ne partage pas une donnée personnelle quand elle n’est pas nécessaire à la recherche.",
+  "Les opérateurs et filtres changent selon les moteurs ; cette fiche ne promet pas une syntaxe universelle."
+]
+transferer = "Cette démarche peut aider à chercher un horaire, une ressource de cours ou une page institutionnelle. Pour une question importante, vérifie la page d’origine, sa date, son territoire et son émetteur au lieu de reprendre seulement l’extrait affiché dans les résultats."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 90
+
+[[fiche.sources]]
+titre = "CNIL — données personnelles et bons réflexes numériques"
+url = "https://www.cnil.fr/fr"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail public facultatif pour rechercher des repères sur les données personnelles ; aucun conseil, texte, capture ou exemple du site n’est repris."
+
+[[fiche]]
+id = "recherche-conserver-reference"
+titre = "Garder la trace d’une source pour la retrouver"
+matiere = "Recherche et esprit critique"
+matiere_id = "recherche"
+domaine = "etudes-superieures-recherche"
+niveau = 2
+horizon_contenu = "Premiers repères de prise de notes bibliographiques ; aucun style de citation institutionnel n’est imposé"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de méthode pour noter les informations nécessaires à retrouver une source et relier une affirmation à son origine. Faire vérifier les exemples, les champs utiles et les nuances des styles par une personne compétente en documentation et en intégrité de recherche. Les exigences de citation varient selon les disciplines ; les droits, sources, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Noter qui a publié une ressource, son titre, sa date et où la retrouver, puis préciser ce qu’elle aide à vérifier."
+objectif = "Créer une notice minimale pour une source fictive et distinguer la référence d’une preuve automatique."
+situation = "Tu lis une ressource fictive sur les jardins urbains et tu veux la retrouver plus tard. Quelles informations devrais-tu noter au-delà du seul titre ?"
+analogie_titre = "Comme noter l’adresse d’un livre avant de quitter la bibliothèque"
+analogie = "Si tu veux retrouver un livre, le titre seul peut être insuffisant. L’auteur, l’éditeur ou le lieu où tu l’as trouvé aident à le distinguer. Une référence de recherche rassemble aussi des repères pour retrouver et vérifier une source."
+limite_analogie = "Une référence indique où chercher ; elle ne garantit pas que la source est exacte, pertinente ou suffisante. Les disciplines et les publications utilisent des formats de citation différents, et un lien peut changer ou disparaître."
+notions = [
+  "Référence — ensemble de renseignements qui permettent d’identifier et de retrouver une source.",
+  "Auteur ou organisme — personne ou institution responsable de la publication, lorsqu’elle est indiquée.",
+  "Titre — nom de la page, du document ou de l’article.",
+  "Date — date de publication ou de mise à jour si elle est indiquée ; elle peut être absente.",
+  "URL et date de consultation — adresse Web et jour où une page en ligne a été consultée.",
+  "Lien affirmation-source — note qui précise quelle idée la ressource peut aider à vérifier et quelles sont ses limites."
+]
+demarche = [
+  "Note l’auteur ou l’organisme qui publie, sans le deviner si l’information manque.",
+  "Copie le titre exact et la date de publication ou de mise à jour lorsqu’elle est visible.",
+  "Pour une ressource en ligne, conserve son URL et la date où tu l’as consultée.",
+  "Ajoute une courte note : quelle affirmation cette source éclaire-t-elle et quelle question reste ouverte ?",
+  "Vérifie ensuite que la source est adaptée et assez récente pour la question ; une référence seule ne prouve pas une affirmation.",
+  "Suis le style de citation demandé par la discipline ou l’établissement quand un format précis est requis."
+]
+exercice = "Crée une référence minimale pour cette ressource entièrement fictive : organisme « Observatoire des jardins-exemple », titre « Espaces verts en ville », publiée en 2025, consultée le 11 octobre 2026 à l’adresse fictive https://exemple.test/jardins. Ajoute une note indiquant ce qu’il faudrait vérifier avant de reprendre une affirmation."
+aide = "Rassemble organisme, titre, date, adresse et date de consultation. Ensuite, écris une question que la ressource n’a pas forcément résolue."
+correction = [
+  "Exemple : Observatoire des jardins-exemple, « Espaces verts en ville », 2025, https://exemple.test/jardins, consultée le 11 octobre 2026. La référence est entièrement fictive.",
+  "Note possible : « À vérifier : quelles surfaces sont comptées, pour quel territoire et selon quelle méthode ? »",
+  "Le fait de consigner la source facilite sa vérification, mais ne confirme ni sa qualité, ni ses droits, ni la vérité de chaque affirmation."
+]
+a_retenir = [
+  "Consigne assez d’éléments pour distinguer et retrouver une source.",
+  "Relie une affirmation précise à la source qui peut l’étayer ; une bibliographie sans lien explicite peut être difficile à contrôler.",
+  "Une référence n’est ni une preuve automatique ni une permission de reproduire le contenu.",
+  "Les formats de citation varient ; vérifie les consignes de la discipline ou de l’établissement."
+]
+transferer = "Cette méthode peut servir à préparer une bibliographie ou un carnet de lecture. Pour une publication universitaire, respecte le style demandé, vérifie chaque référence et les règles d’intégrité de ton établissement ; cette fiche ne définit pas de format officiel."
+revue_le = "2026-10-11"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Office français de l’intégrité scientifique — ressources sur l’intégrité en recherche"
+url = "https://www.hceres.fr/fr/ofis"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-11"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail facultatif pour rechercher des ressources d’intégrité scientifique ; aucun guide, norme, texte ou exemple n’est repris et le lien précis reste à vérifier."

@@ -21,26 +21,26 @@ fiches = ["fr-ecrire-message"]
 [[domaine.sujet]]
 id = "lire-textes-longs"
 titre = "Lire des textes plus longs, des formulaires et des documents"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["fr-reperer-idee-texte"]
 
 [[domaine.sujet]]
 id = "vocabulaire-grammaire"
 titre = "Vocabulaire, phrases, grammaire et orthographe en contexte"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["fr-comprendre-mot-contexte", "fr-lire-ponctuation"]
 
 [[domaine.sujet]]
 id = "expression-orale"
 titre = "Prendre la parole, expliquer et dialoguer"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["fr-preparer-explication-orale"]
 
 [[domaine.sujet]]
 id = "argumentation"
 titre = "Résumer, argumenter et adapter le ton au destinataire"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["fr-argumenter-avec-exemple"]
 
 [[domaine]]
 id = "langues-etrangeres"
@@ -56,8 +56,8 @@ fiches = ["langue-anglais-direction"]
 [[domaine.sujet]]
 id = "anglais-vie-quotidienne"
 titre = "Comprendre et échanger dans d’autres situations quotidiennes"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["langue-anglais-demander-aide", "langue-anglais-epeler"]
 
 [[domaine.sujet]]
 id = "autres-langues"
@@ -110,13 +110,13 @@ fiches = ["maths-pourcentage"]
 id = "tableaux-graphiques"
 titre = "Tableaux, graphiques et interprétation des données"
 statut = "partiel"
-fiches = ["maths-lire-graphique", "maths-moyenne"]
+fiches = ["maths-lire-graphique", "maths-moyenne", "maths-lire-echelle-graphique", "maths-lire-tableau-croise"]
 
 [[domaine.sujet]]
 id = "geometrie-aire"
 titre = "Géométrie de base et mesure d’une surface"
 statut = "partiel"
-fiches = ["maths-surface"]
+fiches = ["maths-surface", "maths-reperer-angle-droit"]
 
 [[domaine.sujet]]
 id = "mesures-conversions"
@@ -133,14 +133,14 @@ fiches = ["maths-estimer-calcul"]
 [[domaine.sujet]]
 id = "probabilites-incertitude"
 titre = "Probabilités, hasard et incertitude"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["maths-probabilite-tirage"]
 
 [[domaine.sujet]]
 id = "algebre-equations"
 titre = "Algèbre, équations et raisonnement plus avancé"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["maths-equation-simple"]
 
 [[domaine]]
 id = "economie-finances"
@@ -151,13 +151,13 @@ intention = "Comprendre les prix et les documents financiers usuels, sans donner
 id = "budget-prix"
 titre = "Budget simple, addition et comparaison de prix"
 statut = "partiel"
-fiches = ["maths-budget", "maths-pourcentage"]
+fiches = ["maths-budget", "maths-pourcentage", "econ-comparer-prix-unitaires"]
 
 [[domaine.sujet]]
 id = "factures-abonnements"
 titre = "Lire une facture, un abonnement et une échéance"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["econ-lire-facture"]
 
 [[domaine.sujet]]
 id = "banque-credit-interets"
@@ -215,26 +215,26 @@ fiches = []
 [[domaine.sujet]]
 id = "corps-biologie"
 titre = "Corps humain, vivant et biologie"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["sciences-cycle-vie-plante"]
 
 [[domaine.sujet]]
 id = "chimie-matieres"
 titre = "Matière, mélanges et transformations chimiques"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["sciences-distinguer-melange-changement-etat"]
 
 [[domaine.sujet]]
 id = "physique-technique"
 titre = "Forces, mouvement, chaleur, lumière, son et objets techniques"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["sciences-calculer-vitesse-moyenne"]
 
 [[domaine.sujet]]
 id = "climat-ecologie"
 titre = "Climat, eau, déchets, biodiversité et ressources"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["sciences-meteo-climat"]
 
 [[domaine.sujet]]
 id = "securite-sciences"
@@ -256,14 +256,20 @@ fiches = ["geo-echelle-carte"]
 [[domaine.sujet]]
 id = "orientation-itineraires"
 titre = "S’orienter, lire un itinéraire et anticiper l’accessibilité"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["geo-points-cardinaux"]
 
 [[domaine.sujet]]
 id = "territoires-populations"
 titre = "Territoires, paysages, populations et mobilités"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["geo-decrire-paysage"]
+
+[[domaine.sujet]]
+id = "legende-symboles-cartes"
+titre = "Lire les symboles et la légende d’une carte"
+statut = "partiel"
+fiches = ["geo-lire-legende-carte"]
 
 [[domaine]]
 id = "histoire-memoire"
@@ -273,14 +279,14 @@ intention = "Situer des faits dans le temps, lire des sources et comprendre qu�
 [[domaine.sujet]]
 id = "chronologie-reperes"
 titre = "Lire une frise, des dates et des périodes historiques"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["histoire-lire-frise", "histoire-situer-siecle"]
 
 [[domaine.sujet]]
 id = "sources-temoignages"
 titre = "Comparer des sources, témoignages et points de vue"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["histoire-comparer-sources"]
 
 [[domaine.sujet]]
 id = "histoire-monde-france"
@@ -408,14 +414,14 @@ fiches = ["numerique-reagir-fraude"]
 [[domaine.sujet]]
 id = "outils-fichiers-accessibilite"
 titre = "Fichiers, logiciels, comptes, accessibilité et sauvegardes"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["numerique-organiser-fichiers"]
 
 [[domaine.sujet]]
 id = "recherche-communication-numerique"
 titre = "Rechercher, communiquer et résoudre un problème numérique"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["numerique-formuler-recherche"]
 
 [[domaine]]
 id = "informatique-programmation"
@@ -443,20 +449,20 @@ fiches = ["prog-comparer-langages"]
 [[domaine.sujet]]
 id = "representation-donnees"
 titre = "Bits, nombres, textes, images et formats de données"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["info-bits-octets"]
 
 [[domaine.sujet]]
 id = "systemes-exploitation"
 titre = "Systèmes d’exploitation, fichiers, permissions et processus"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["info-systeme-exploitation"]
 
 [[domaine.sujet]]
 id = "reseaux-protocoles"
 titre = "Réseaux, Internet, adressage, noms de domaine et protocoles"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["info-lire-adresse-web"]
 
 [[domaine.sujet]]
 id = "bases-donnees-web"
@@ -467,8 +473,8 @@ fiches = []
 [[domaine.sujet]]
 id = "tests-debogage"
 titre = "Tester, déboguer, documenter et faire évoluer un programme"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["prog-tester-exemples"]
 
 [[domaine.sujet]]
 id = "genie-logiciel-droits"
@@ -502,14 +508,14 @@ fiches = ["arts-rythme-musique"]
 [[domaine.sujet]]
 id = "pratiques-artistiques"
 titre = "Pratiques de création : dessin, musique, théâtre, danse et médias"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["arts-composer-formes"]
 
 [[domaine.sujet]]
 id = "histoire-culture"
 titre = "Patrimoine, œuvres, cultures et histoire des arts"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["arts-lire-cartel"]
 
 [[domaine]]
 id = "sante-securite-corps"
@@ -560,8 +566,8 @@ fiches = ["apprendre-methode"]
 [[domaine.sujet]]
 id = "oral-cooperation"
 titre = "Écoute, coopération, désaccord et résolution de problème"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["methodes-demander-clarification"]
 
 [[domaine.sujet]]
 id = "autonomie-organisation"
@@ -577,8 +583,8 @@ intention = "Construire progressivement des passerelles des savoirs fondamentaux
 [[domaine.sujet]]
 id = "methodes-recherche-raisonnement"
 titre = "Question de recherche, hypothèses, modèles, preuves et limites"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["recherche-question-hypothese"]
 
 [[domaine.sujet]]
 id = "lire-publication-scientifique"
@@ -589,8 +595,8 @@ fiches = ["recherche-lire-etude"]
 [[domaine.sujet]]
 id = "integrite-references-scientifiques"
 titre = "Intégrité de la recherche, citations, données, reproductibilité et science ouverte"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["recherche-conserver-reference"]
 
 [[domaine.sujet]]
 id = "methodes-universitaires"

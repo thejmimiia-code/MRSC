@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import html
+import json
 import re
 import sys
 import tomllib
@@ -32,6 +33,7 @@ DATA = ROOT / "docs" / "apprentissage"
 CATALOGUE = DATA / "catalogue.toml"
 REFERENTIEL = DATA / "referentiel.toml"
 PUBLIC_DIR = ROOT / "apprendre" / "fiches"
+AVENTURE_DATA_JS = ROOT / "assets" / "js" / "apprentissage-aventure-data.js"
 MATRIX = ROOT / "docs" / "couverture-savoirs-base.md"
 PLAN_1000 = DATA / "plan-1000.toml"
 ROADMAP_1000 = DATA / "objectif-1000.md"
@@ -42,6 +44,24 @@ NIVEAUX = {
     2: ("Consolider", "Relier des notions et s’entraîner dans de nouveaux exemples."),
     3: ("Raisonner", "Comparer, expliquer une démarche et examiner les limites."),
     4: ("Approfondir", "Transférer une notion et construire un raisonnement plus complet."),
+}
+# Les fiches peuvent préciser leur sous-matière sur la carte, tandis que le filtre
+# regroupe chaque identifiant une seule fois sous un libellé de domaine lisible.
+LIBELLES_FILTRE_MATIERE = {
+    "apprendre": "Méthodes pour apprendre",
+    "arts": "Arts et culture",
+    "citoyennete": "Citoyenneté et médias",
+    "economie": "Économie, budget et consommation",
+    "francais": "Français et communication",
+    "geographie": "Géographie et espace",
+    "histoire": "Histoire et chronologie",
+    "informatique": "Informatique et programmation",
+    "langues": "Langues étrangères",
+    "mathematiques": "Mathématiques",
+    "numerique": "Numérique et information",
+    "recherche": "Recherche et esprit critique",
+    "sante": "Santé et alimentation",
+    "sciences": "Sciences et technologie",
 }
 STATUTS = {
     "actif": "Fiche disponible",
@@ -308,7 +328,7 @@ def render_fiche(fiche: dict) -> str:
           <section aria-labelledby="retenir-fiche"><h2 id="retenir-fiche">Pour retenir</h2>{a_retenir}<p><strong>Et dans une autre situation :</strong> {e(fiche["transferer"])}</p></section>
           <section class="learning-sources" aria-labelledby="sources-fiche"><h2 id="sources-fiche">Sources facultatives et limites</h2><p>Tu peux suivre cette fiche sans ouvrir ces liens : les notions, les exemples, la démarche, l’aide et la correction sont présentés sur cette page. Les sources facultatives servent à vérifier ou approfondir. Pour une décision ou une démarche réelle où les règles peuvent changer, vérifie les consignes actuelles d’un service compétent avant d’agir.</p><ul>{sources}</ul>{note_revue}</section>
         </article>
-        <aside class="learning-lesson-aside" aria-label="Poursuivre l’apprentissage"><p class="eyebrow">Tu choisis la suite</p><h2>Un autre point de départ ?</h2><p>Change de matière, de repère ou de format quand tu le souhaites. La page ne note pas et ne suit pas ta progression.</p><a class="button" href="../../apprendre.html">Parcourir toutes les fiches</a><p><a href="../../simulateur.html">Découvrir le simulateur M.R.S.C</a></p></aside>
+        <aside class="learning-lesson-aside" aria-label="Poursuivre l’apprentissage"><p class="eyebrow">Tu choisis la suite</p><h2>Un autre point de départ ?</h2><p>Change de matière, de repère ou de format quand tu le souhaites. La page ne note pas et ne suit pas ta progression.</p><a class="button" href="../../anglais-aventure.html#mondes">Retour aux mondes et parcours</a><p><a href="../../apprendre.html#catalogue-fiches">Parcourir toutes les fiches</a></p><p><a href="../../simulateur.html">Découvrir le simulateur M.R.S.C</a></p></aside>
       </div>
     </section>'''
     return page_enveloppe(
@@ -329,7 +349,21 @@ def render_fiche(fiche: dict) -> str:
 
 
 def render_filters(fiches: list[dict]) -> str:
-    matieres = sorted({(fiche["matiere_id"], fiche["matiere"]) for fiche in fiches}, key=lambda item: item[1].casefold())
+    identifiants = {fiche["matiere_id"] for fiche in fiches}
+    libelles_fiche = {
+        identifiant: next(fiche["matiere"] for fiche in fiches if fiche["matiere_id"] == identifiant)
+        for identifiant in identifiants
+    }
+    matieres = sorted(
+        [
+            (
+                identifiant,
+                LIBELLES_FILTRE_MATIERE.get(identifiant, libelles_fiche[identifiant]),
+            )
+            for identifiant in identifiants
+        ],
+        key=lambda item: item[1].casefold(),
+    )
     options = '<option value="">Toutes les matières</option>' + "".join(
         f'<option value="{e(identifiant)}">{e(libelle)}</option>' for identifiant, libelle in matieres
     )
@@ -393,7 +427,7 @@ def render_coverage(domains: list[dict], fiches_by_id: dict[str, dict]) -> tuple
             )
         contenu_lignes = "".join(lignes)
         sorties.append(
-            f'<details class="learning-coverage-domain"><summary><span><strong>{e(domain["titre"])}</strong>'
+            f'<details class="learning-coverage-domain" id="couverture-domaine-{e(domain["id"])}"><summary><span><strong>{e(domain["titre"])}</strong>'
             f'<small>{e(titre_statut)}</small></span></summary>'
             f'<p>{e(domain["intention"])}</p><ul>{contenu_lignes}</ul></details>'
         )
@@ -419,10 +453,22 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
           <p class="learning-intro">Tu peux commencer par un sujet utile, sans compte, sans note et sans prérequis. Chaque fiche tient debout seule, part d’une situation concrète et utilise une analogie du quotidien pour éclairer la notion. L’explication, l’essai, l’aide et la correction sont sur le site M.R.S.C ; les liens de sources sont facultatifs.</p>
           <p class="learning-level-note"><strong>Cap visé :</strong> construire peu à peu des ressources des bases du CP jusqu’aux spécialités et à la recherche doctorale, dans les différentes matières. Le catalogue recense {resume_catalogue}. Il reste un premier ensemble incomplet ; la carte ci-dessous nomme les sujets qui restent à créer.</p>
           <p class="learning-level-note"><strong>Ambition éditoriale de long terme :</strong> viser {objectif_libelle} fiches autonomes, distinctes, relues et entretenues. Ce nombre est un objectif de travail, pas l’offre actuelle ni une promesse de couverture exhaustive.</p>
-          <div class="hero-actions"><a class="button" href="#catalogue-fiches">Choisir une fiche</a><a class="button button-secondary" href="#couverture">Voir les sujets à développer</a></div>
+          <div class="hero-actions"><a class="button" href="#catalogue-fiches">Choisir une fiche</a><a class="button button-secondary" href="anglais-aventure.html">Explorer l’aventure anglaise</a><a class="button button-secondary" href="#couverture">Voir les sujets à développer</a><a class="button button-secondary" href="transparence.html#rd-innovation">Comprendre la R&amp;D continue</a></div>
           <p class="learning-reassurance"><strong>Ton parcours ne te définit pas.</strong> Les repères de difficulté sont des indications, pas des niveaux à réussir. Tu peux avancer différemment en français, en mathématiques ou dans une autre matière.</p>
         </div>
         <aside class="learning-principles" aria-labelledby="principes-apprentissage"><p class="eyebrow">Une règle éditoriale durable</p><h2 id="principes-apprentissage">Partir du réel, puis revenir au réel.</h2><ul><li>Une analogie concrète dans chaque fiche, avec ses limites expliquées.</li><li>Des notions définies, une méthode découpée et un essai facultatif.</li><li>Des corrections masquées : tu les ouvres quand tu le souhaites.</li><li>Des repères par matière et difficulté, sans test ni étiquette.</li></ul></aside>
+      </div>
+    </section>'''
+    jeu_anglais = '''    <section class="section section-muted" id="aventure-anglais" aria-labelledby="titre-aventure-anglais">
+      <div class="container english-promo-panel">
+        <div class="english-promo-copy">
+          <p class="eyebrow">Aventure pédagogique · accès libre</p>
+          <h2 id="titre-aventure-anglais">Explorer les savoirs comme un monde ouvert.</h2>
+          <p><strong>Les Mondes</strong> relient les 70 fiches du catalogue à 15 univers thématiques. Choisis un repère, explore un monde ou compose ton parcours à partir des fiches ; 44 prototypes à relire restent identifiés. Les fiches complètes demeurent autonomes, à ouvrir quand tu le souhaites.</p>
+          <p>Il n’existe pas de cursus certifiant caché : aucune séquence n’est imposée. Le jeu propose aussi cinq missions d’anglais avec scènes 3D et répliques en anglais, tandis que menus et aides restent en français. Gratuit, sans compte, publicité, vies ni minuteur.</p>
+          <div class="hero-actions"><a class="button" href="anglais-aventure.html#mondes">Ouvrir les mondes et les parcours</a><a class="button button-secondary" href="anglais-aventure.html#missions">Jouer une escale en anglais</a></div>
+        </div>
+        <figure class="english-promo-art"><img src="assets/images/mondes-savoirs-hero.jpg" alt="Atlas imaginaire en trois dimensions reliant des mondes de lecture, sciences, histoire, arts, numérique et exploration" width="1672" height="941" loading="lazy"><figcaption>Un atlas original de mondes reliés ; les missions d’anglais possèdent en plus leurs propres décors jouables en 3D.</figcaption></figure>
       </div>
     </section>'''
     grille = f'''    <section class="section" id="catalogue-fiches" aria-labelledby="titre-catalogue-fiches">
@@ -468,7 +514,7 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
     </section>'''
     contribution = '''    <section class="section learning-feedback" aria-labelledby="titre-contribution"><div class="container"><div class="learning-feedback-panel"><div><p class="eyebrow">Améliorer les ressources</p><h2 id="titre-contribution">Une analogie ne fonctionne pas pour toi ?</h2><p>Tu peux proposer un autre exemple ou signaler un sujet manquant à <a href="mailto:assomrsc@gmail.com?subject=Ressources%20d%E2%80%99apprentissage">assomrsc@gmail.com</a>. N’envoie pas de donnée sensible ni de détail personnel : un message volontaire est transmis à l’adresse de contact et n’est pas anonyme. Aucune réponse immédiate n’est promise.</p></div><a class="button button-secondary" href="mailto:assomrsc@gmail.com?subject=Ressources%20d%E2%80%99apprentissage">Écrire au M.R.S.C</a></div></div></section>'''
     sources = '''    <section class="trace-section"><div class="container trace-panel"><div><p class="eyebrow">Sources et méthode</p><h2>Une première carte, à relire et à compléter</h2><ul class="trace-list"><li>Les repères de cycle sont des indications, non une orientation ou une certification : <a href="https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512" target="_blank" rel="noopener noreferrer">Ministère de l’Éducation nationale — socle commun</a>.</li><li>Les champs d’études et niveaux de programmes sont comparés à la classification internationale de l’<a href="https://isced.uis.unesco.org/about/" target="_blank" rel="noopener noreferrer">UNESCO UIS — ISCED/ISCED-F</a> ; ce repère n’est ni un diplôme M.R.S.C ni un classement des personnes.</li><li>Les apprentissages peuvent partir de situations concrètes et du travail : <a href="https://www.anlci.gouv.fr/nos-piliers/lillettrisme-au-travail/" target="_blank" rel="noopener noreferrer">ANLCI — compétences de base et travail</a>.</li><li>La clarté et l’accessibilité restent à tester avec des personnes concernées : <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">W3C — WCAG 2.2</a>.</li><li>La cartographie complète des domaines, des sujets commencés et des lacunes est suivie dans la veille éditoriale du dépôt.</li></ul></div><a class="button button-secondary" href="transparence.html">Voir la méthode et les sources</a></div></section>'''
-    contenu = hero + grille + how_to + domains_html + contexte + ecosysteme + contribution + sources
+    contenu = hero + jeu_anglais + grille + how_to + domains_html + contexte + ecosysteme + contribution + sources
     page = page_enveloppe(
         "Apprendre à son rythme — fiches autonomes | M.R.S.C",
         "Fiches d’apprentissage gratuites et autonomes, par matière et difficulté, avec des analogies du quotidien et une carte explicite des sujets à créer.",
@@ -558,11 +604,104 @@ def render_matrix(fiches: list[dict], domains: list[dict]) -> str:
     return "\n".join(output)
 
 
+def render_adventure_learning_data(fiches: list[dict], domains: list[dict]) -> str:
+    """Expose au jeu le catalogue complet sans recopier ses fiches à la main."""
+    fiches_jeu = []
+    for fiche in fiches:
+        niveau = fiche["niveau"]
+        fiches_jeu.append(
+            {
+                "id": fiche["id"],
+                "title": fiche["titre"],
+                "subject": fiche["matiere"],
+                "subjectId": fiche["matiere_id"],
+                "domainId": fiche["domaine"],
+                "level": niveau,
+                "levelName": NIVEAUX[niveau][0],
+                "minutes": fiche["minutes"],
+                "summary": fiche["resume"],
+                "objective": fiche["objectif"],
+                "situation": fiche["situation"],
+                "horizon": fiche.get("horizon_contenu", ""),
+                "editorialStatus": fiche.get("statut_editorial", ""),
+                "editorialNote": fiche.get("note_statut_editorial", ""),
+                "url": f'apprendre/fiches/{fiche["id"]}.html',
+            }
+        )
+
+    domaines_jeu = []
+    for domaine in domains:
+        sujets = [
+            {
+                "id": sujet["id"],
+                "title": sujet["titre"],
+                "status": sujet["statut"],
+                "statusLabel": STATUTS[sujet["statut"]],
+                "sheetIds": sujet.get("fiches", []),
+            }
+            for sujet in domaine.get("sujet", [])
+        ]
+        sheet_ids = [
+            fiche["id"] for fiche in fiches
+            if fiche["domaine"] == domaine["id"]
+        ]
+        comptes = Counter(sujet["status"] for sujet in sujets)
+        domaines_jeu.append(
+            {
+                "id": domaine["id"],
+                "title": domaine["titre"],
+                "intent": domaine["intention"],
+                "topics": sujets,
+                "sheetIds": sheet_ids,
+                "sheetCount": len(sheet_ids),
+                "topicCount": len(sujets),
+                "activeCount": comptes["actif"],
+                "partialCount": comptes["partiel"],
+                "futureCount": comptes["a-creer"] + comptes["revue-experte"],
+                "coverageUrl": f'apprendre.html#couverture-domaine-{domaine["id"]}',
+            }
+        )
+
+    prototypes = sum(bool(fiche.get("statut_editorial")) for fiche in fiches)
+    parcours = [
+        {
+            "level": niveau,
+            "title": NIVEAUX[niveau][0],
+            "description": NIVEAUX[niveau][1],
+            "sheetCount": sum(fiche["level"] == niveau for fiche in fiches_jeu),
+        }
+        for niveau in NIVEAUX
+    ]
+    donnees = {
+        "version": 1,
+        "sheetCount": len(fiches_jeu),
+        "domainCount": len(domaines_jeu),
+        "prototypeCount": prototypes,
+        "initialCount": len(fiches_jeu) - prototypes,
+        "sheets": fiches_jeu,
+        "domains": domaines_jeu,
+        "paths": parcours,
+    }
+    serialise = json.dumps(donnees, ensure_ascii=False, separators=(",", ":"))
+    # La sortie est un script externe autonome. Neutraliser les séquences qui
+    # pourraient être interprétées comme des balises ou séparateurs JS.
+    serialise = (
+        serialise.replace("<", "\\u003c")
+        .replace("\u2028", "\\u2028")
+        .replace("\u2029", "\\u2029")
+    )
+    return (
+        "/* Généré depuis docs/apprentissage/catalogue.toml et referentiel.toml. */\n"
+        f"globalThis.MRSCApprentissageData = Object.freeze({serialise});\n"
+    )
+
+
 def render_sitemap(fiches: list[dict]) -> str:
     """Déclare les pages publiques et fiches au moteur d’indexation."""
     pages = (
         "",
         "apprendre.html",
+        "anglais-aventure.html",
         "ia-societe.html",
         "simulateur.html",
         "simulateur/",
@@ -947,6 +1086,7 @@ def generer(fiches: list[dict], domains: list[dict], plan: dict) -> dict[Path, s
         MATRIX: render_matrix(fiches, domains),
         ROADMAP_1000: render_plan_1000(plan, fiches, domains),
         ROOT / "sitemap.xml": render_sitemap(fiches),
+        AVENTURE_DATA_JS: render_adventure_learning_data(fiches, domains),
     }
     for fiche in fiches:
         produits[PUBLIC_DIR / f'{fiche["id"]}.html'] = render_fiche(fiche)

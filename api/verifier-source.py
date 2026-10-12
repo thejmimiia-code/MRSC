@@ -15,11 +15,17 @@ Vérifier les deux aspects évite le piège classique : une page de présentatio
 statique s'affiche très bien… mais sans moteur pour calculer.
 
 Environnement :
-    SIMULATEUR_SOURCE_DISTANTE   force l'adresse à vérifier (utile aux tests et
-                                 aux déploiements de préproduction). Sans cette
-                                 variable, l'adresse est lue dans `simulateur.html`
-                                 (attribut `data-source-distante`) : une seule
-                                 source de vérité, partagée avec la page.
+    SIMULATEUR_SOURCE_DISTANTE                 force l'adresse à vérifier ;
+                                               seuls les hôtes HTTPS autorisés
+                                               sont appelés.
+    SIMULATEUR_SOURCE_DISTANTE_HOTES_AUTORISES hôtes HTTPS exacts additionnels,
+                                               séparés par des virgules, pour la
+                                               préproduction.
+    SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE     exception localhost réservée aux
+                                               tests ; ne pas définir en production.
+
+Sans surcharge, l'adresse vient de `simulateur.html` (`data-source-distante`) :
+une seule source de vérité, partagée avec la page.
 
 ⚠️ Fichier propre au site M.R.S.C (pas une route du moteur).
 """
@@ -32,6 +38,7 @@ import re
 import time
 import urllib.error
 import urllib.request
+from urllib.parse import urlsplit
 from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 
@@ -47,6 +54,51 @@ MARQUEURS_PAGE = ("console-pilotage", "Simulateur Macro-Politique", "leviers")
 ROUTES_API = (("/api/scenarios", ("scenarios",)), ("/api/catalogue", ("parametres", "domaines")))
 
 _cache: dict[str, tuple[float, dict[str, object]]] = {}
+HOTE_SOURCE_PRODUCTION = "simulateur-macro-politique.onrender.com"
+
+
+def _source_autorisee(source: str) -> bool:
+    """Refuse les cibles arbitraires (localhost, IP privées, ports et redirections).
+
+    Un hôte de préproduction peut être ajouté à la configuration de déploiement
+    via SIMULATEUR_SOURCE_DISTANTE_HOTES_AUTORISES. Les tests locaux doivent
+    s'activer explicitement avec SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE=1.
+    """
+    try:
+        cible = urlsplit(source)
+        hote = (cible.hostname or "").lower().rstrip(".")
+        port = cible.port
+    except ValueError:
+        return False
+    if not hote or cible.username or cible.password or cible.query or cible.fragment:
+        return False
+    if cible.path not in ("", "/"):
+        return False
+    if cible.scheme == "https":
+        if port not in (None, 443):
+            return False
+        supplementaires = {
+            valeur.strip().lower().rstrip(".")
+            for valeur in os.environ.get("SIMULATEUR_SOURCE_DISTANTE_HOTES_AUTORISES", "").split(",")
+            if valeur.strip()
+        }
+        return hote == HOTE_SOURCE_PRODUCTION or hote in supplementaires
+    return (
+        os.environ.get("SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE") == "1"
+        and cible.scheme == "http"
+        and hote in {"localhost", "127.0.0.1", "::1"}
+        and port is not None
+    )
+
+
+class _SansRedirection(urllib.request.HTTPRedirectHandler):
+    """N'autorise pas une source déclarée à rediriger vers une cible privée."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # noqa: ANN001
+        return None
+
+
+_OPENER = urllib.request.build_opener(_SansRedirection())
 
 
 def adresse_configurée() -> str:
@@ -65,7 +117,7 @@ def adresse_configurée() -> str:
 def _lire(url: str) -> tuple[int, bytes]:
     requete = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "*/*"})
     try:
-        with urllib.request.urlopen(requete, timeout=DELAI) as reponse:
+        with _OPENER.open(requete, timeout=DELAI) as reponse:
             return reponse.status, reponse.read(200_000)
     except urllib.error.HTTPError as erreur:
         return erreur.code, erreur.read(20_000)
@@ -89,7 +141,7 @@ def _indice_api(contenu: bytes, cles: tuple[str, ...]) -> bool:
 def verifier(source: str) -> dict[str, object]:
     """Interroge la source : page d'abord, API ensuite."""
     resultat: dict[str, object] = {
-        "source": source,
+        "source": "",
         "disponible": False,
         "page": {"statut": 0, "indice_simulateur": False},
         "api": {"route": "", "statut": 0, "indice_moteur": False},
@@ -98,8 +150,16 @@ def verifier(source: str) -> dict[str, object]:
     if not source:
         resultat["message"] = "Aucune source distante configurée (attribut data-source-distante)."
         return resultat
+    if not _source_autorisee(source):
+        resultat["message"] = "La source configurée n’est pas sur la liste des hôtes HTTPS autorisés."
+        return resultat
 
-    base = source if source.endswith("/") else source + "/"
+    # La validation a garanti l'absence d'identifiants, de chemin arbitraire et
+    # de port inhabituel : l'adresse peut être exposée sans révéler un secret.
+    cible = urlsplit(source)
+    port = f":{cible.port}" if cible.port is not None else ""
+    resultat["source"] = f"{cible.scheme}://{cible.hostname}{port}/"
+    base = resultat["source"]
     statut, contenu = _lire(base)
     indice = statut == 200 and _indice_page(contenu)
     resultat["page"] = {"statut": statut, "indice_simulateur": indice}
@@ -147,16 +207,21 @@ def etat(rafraichir: bool = False) -> dict[str, object]:
 
 
 class handler(BaseHTTPRequestHandler):  # noqa: N801 - nom attendu par Vercel
-    """GET /api/verifier-source[?refresh=1] → état de la source distante."""
+    """GET /api/verifier-source → état mis en cache de la source distante."""
+
+    server_version = "MRSC"
+    sys_version = ""
 
     def do_GET(self) -> None:  # noqa: N802 - API stdlib
-        rafraichir = "refresh=1" in (self.path or "")
-        charge = etat(rafraichir=rafraichir)
+        # Une query publique ne peut pas contourner le cache de cinq minutes
+        # pour déclencher des requêtes réseau répétées.
+        charge = etat()
         corps = json.dumps(charge, ensure_ascii=False, indent=2).encode("utf-8")
         self.send_response(200)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(corps)))
         self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
         self.end_headers()
         self.wfile.write(corps)
 
@@ -166,4 +231,6 @@ class handler(BaseHTTPRequestHandler):  # noqa: N801 - nom attendu par Vercel
         self.send_response(200)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(corps)))
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
         self.end_headers()

@@ -13,7 +13,7 @@ Trois responsabilités :
    L'aperçu couvre ainsi page, moteur et bascule, sur une seule adresse.
 
 Usage :
-    python3 outils/serveur-local.py [--port 4173] [--bind 0.0.0.0] [--sans-moteur]
+    python3 outils/serveur-local.py [--port 4173] [--bind 127.0.0.1] [--sans-moteur]
 """
 
 from __future__ import annotations
@@ -40,6 +40,14 @@ ROUTES_MOTEUR = (
     "comparer", "garde_fous", "presets", "bulles", "bulle", "lexique",
     "proxy", "run", "scenarios", "export",
 )
+MAX_REQUEST_BODY_BYTES = 1_048_576
+MAX_RELAY_RESPONSE_BYTES = 16_777_216
+FICHIERS_RACINE_PUBLICS = frozenset({
+    "index.html", "apprendre.html", "anglais-aventure.html", "ia-societe.html", "simulateur.html",
+    "documents.html", "liens-utiles.html", "localisation.html",
+    "nous-contacter.html", "transparence.html", "confidentialite.html",
+    "404.html", "sitemap.xml",
+})
 
 
 def dire(message: str) -> None:
@@ -47,8 +55,29 @@ def dire(message: str) -> None:
     print(message, flush=True)
 
 
+class ReponseTropVolumineuse(Exception):
+    """Réponse du moteur supérieure à la borne du relais local."""
+
+
+def lire_reponse_bornee(reponse) -> bytes:  # noqa: ANN001 - objet de réponse urllib
+    """Ne conserve jamais une réponse d'API supérieure à 16 Mio en mémoire."""
+    try:
+        longueur = int(reponse.headers.get("Content-Length", "0"))
+    except (TypeError, ValueError):
+        longueur = 0
+    if longueur > MAX_RELAY_RESPONSE_BYTES:
+        raise ReponseTropVolumineuse
+    contenu = reponse.read(MAX_RELAY_RESPONSE_BYTES + 1)
+    if len(contenu) > MAX_RELAY_RESPONSE_BYTES:
+        raise ReponseTropVolumineuse
+    return contenu
+
+
 class ServeurSite(SimpleHTTPRequestHandler):
-    """Fichiers statiques, dossier interdit, ``404.html``, relais ``/api/``."""
+    """Fichiers publics, dossier interdit, ``404.html``, relais ``/api/``."""
+
+    server_version = "MRSC"
+    sys_version = ""
 
     #: Adresse interne du moteur du simulateur (renseignée au démarrage).
     moteur: str | None = None
@@ -57,6 +86,37 @@ class ServeurSite(SimpleHTTPRequestHandler):
     fonctions_site: dict[str, str] = {}
 
     # ── Pages et ressources ────────────────────────────────────────────────
+    @staticmethod
+    def _chemin_public(chemin: Path) -> bool:
+        racine = RACINE.resolve()
+        try:
+            relatif = chemin.resolve().relative_to(racine)
+        except (OSError, ValueError):
+            return False
+        parties = relatif.parts
+        if any(partie.startswith(".") for partie in parties):
+            return False
+        if not parties:  # racine : l'index public sera servi par send_head()
+            return True
+        if len(parties) == 1 and parties[0] in FICHIERS_RACINE_PUBLICS:
+            return True
+        if len(parties) == 1 and parties[0] == "simulateur" and chemin.is_dir():
+            return True
+        if parties[0] == "assets":
+            return True
+        if len(parties) == 3 and parties[:2] == ("apprendre", "fiches"):
+            return parties[-1].endswith(".html")
+        if len(parties) == 2 and parties[0] == "simulateur":
+            return parties[1] in {"index.html", "PROVENANCE.json"}
+        return False
+
+    def send_head(self):  # noqa: ANN201 - signature de SimpleHTTPRequestHandler
+        chemin = Path(self.translate_path(self.path))
+        if not self._chemin_public(chemin):
+            self.send_error(404, "Not Found")
+            return None
+        return super().send_head()
+
     def list_directory(self, path):  # noqa: ARG002 — signature imposée par la classe parente
         """Aucun listing de dossier : on répond 404 (comme Vercel et GitHub Pages)."""
         self.send_error(404, "Not Found")
@@ -94,8 +154,29 @@ class ServeurSite(SimpleHTTPRequestHandler):
         return super().do_HEAD()
 
     def _relayer(self, methode: str) -> None:
-        longueur = int(self.headers.get("Content-Length") or 0)
+        if self.headers.get("Transfer-Encoding"):
+            self.close_connection = True
+            self._repondre_json(400, {"erreur": "Corps de requête non pris en charge."})
+            return
+        try:
+            longueur = int(self.headers.get("Content-Length") or 0)
+        except (TypeError, ValueError):
+            self.close_connection = True
+            self._repondre_json(400, {"erreur": "Longueur de requête invalide."})
+            return
+        if longueur < 0:
+            self.close_connection = True
+            self._repondre_json(400, {"erreur": "Longueur de requête invalide."})
+            return
+        if longueur > MAX_REQUEST_BODY_BYTES:
+            self.close_connection = True
+            self._repondre_json(413, {"erreur": "Corps de requête trop volumineux (limite : 1 Mio)."})
+            return
         corps = self.rfile.read(longueur) if longueur else None
+        if corps is not None and len(corps) != longueur:
+            self.close_connection = True
+            self._repondre_json(400, {"erreur": "Corps de requête incomplet."})
+            return
 
         chemin = self.path.split("?")[0]
         cible = next(
@@ -119,22 +200,30 @@ class ServeurSite(SimpleHTTPRequestHandler):
                 requete.add_header(entete, valeur)
         try:
             with urllib.request.urlopen(requete, timeout=180) as reponse:
-                contenu = reponse.read()
+                contenu = lire_reponse_bornee(reponse)
                 statut = reponse.status
                 type_mime = reponse.headers.get("Content-Type", "application/json; charset=utf-8")
+        except ReponseTropVolumineuse:
+            return self._repondre_json(502, {"erreur": "Réponse du moteur trop volumineuse."})
         except urllib.error.HTTPError as erreur:
-            contenu = erreur.read()
+            try:
+                contenu = lire_reponse_bornee(erreur)
+            except ReponseTropVolumineuse:
+                return self._repondre_json(502, {"erreur": "Réponse du moteur trop volumineuse."})
             statut = erreur.code
             type_mime = erreur.headers.get("Content-Type", "application/json; charset=utf-8")
-        except (urllib.error.URLError, OSError) as erreur:
+        except (urllib.error.URLError, OSError):
             return self._repondre_json(
-                502, {"erreur": f"Le moteur du simulateur n'a pas répondu : {erreur}"}
+                502, {"erreur": "Le moteur du simulateur n'a pas répondu."}
             )
 
         self.send_response(statut)
         self.send_header("Content-Type", type_mime)
         self.send_header("Content-Length", str(len(contenu)))
         self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        if getattr(self, "close_connection", False):
+            self.send_header("Connection", "close")
         self.end_headers()
         if methode != "HEAD":
             self.wfile.write(contenu)
@@ -144,6 +233,10 @@ class ServeurSite(SimpleHTTPRequestHandler):
         self.send_response(statut)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(contenu)))
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        if getattr(self, "close_connection", False):
+            self.send_header("Connection", "close")
         self.end_headers()
         if self.command != "HEAD":
             self.wfile.write(contenu)
@@ -192,7 +285,7 @@ def demarrer_moteur(port: int) -> ThreadingHTTPServer | None:
 def main() -> None:
     analyseur = argparse.ArgumentParser(description="Aperçu local du site M.R.S.C.")
     analyseur.add_argument("--port", type=int, default=4173, help="port d'écoute (4173 par défaut)")
-    analyseur.add_argument("--bind", default="0.0.0.0", help="adresse d'écoute (0.0.0.0 par défaut)")
+    analyseur.add_argument("--bind", default="127.0.0.1", help="adresse d'écoute locale (127.0.0.1 par défaut)")
     analyseur.add_argument("--sans-moteur", action="store_true", help="ne pas lancer l'API du simulateur")
     options = analyseur.parse_args()
 

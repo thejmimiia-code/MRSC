@@ -3,8 +3,10 @@
 
 Le moteur vit dans son propre dépôt ; le site en embarque une copie
 (`simulateur/`) pour que l'hébergement soit autonome (fonctions Vercel, aperçu
-local). Ce script rapatrie la version voulue, met à jour `PROVENANCE.json`,
-puis régénère la page publiée.
+local). Ce script rapatrie la version voulue dans un dossier temporaire, applique le
+correctif de sécurité versionné du site (ou constate qu’il est déjà amont),
+met à jour `PROVENANCE.json`, puis régénère la page publiée. Un conflit arrête
+la mise à jour avant de remplacer les fichiers du moteur.
 
 Usage :
     python3 outils/mettre-a-jour-simulateur.py [--revision <branche|étiquette|commit>]
@@ -19,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
 import shutil
 import subprocess
@@ -29,6 +32,7 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parent.parent
 DESTINATION = RACINE / "simulateur"
 PROVENANCE = DESTINATION / "PROVENANCE.json"
+CORRECTIF = RACINE / "outils" / "patchs" / "simulateur-securite-mrsc.patch"
 
 
 def git(*arguments: str, cwd: Path) -> str:
@@ -38,6 +42,47 @@ def git(*arguments: str, cwd: Path) -> str:
     if resultat.returncode != 0:
         raise SystemExit(f"git {' '.join(arguments)} a échoué :\n{resultat.stderr.strip()}")
     return resultat.stdout.strip()
+
+
+def appliquer_correctif(paquet_stage: Path) -> bool:
+    """Applique le patch dans une copie temporaire avant de toucher au dépôt.
+
+    Renvoie False si la version amont contient déjà l'intégralité du correctif.
+    Une application partielle ou un conflit bloque la mise à jour afin qu'un
+    changement de sécurité ne soit jamais perdu silencieusement.
+    """
+    if not CORRECTIF.is_file():
+        raise SystemExit(f"Correctif de sécurité manquant : {CORRECTIF}")
+
+    def lancer(*arguments: str) -> subprocess.CompletedProcess[str]:
+        return subprocess.run(
+            ["git", "apply", *arguments, str(CORRECTIF)],
+            cwd=paquet_stage.parent,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=60,
+        )
+
+    verification = lancer("--check")
+    if verification.returncode == 0:
+        application = lancer()
+        if application.returncode != 0:
+            raise SystemExit(
+                "Impossible d'appliquer le correctif de sécurité dans la copie temporaire :\n"
+                + application.stderr.strip()
+            )
+        return True
+
+    inverse = lancer("--reverse", "--check")
+    if inverse.returncode == 0:
+        print("Le correctif est déjà intégré à la révision amont.")
+        return False
+    raise SystemExit(
+        "Le correctif de sécurité n'est plus applicable à cette révision amont. "
+        "Aucun fichier du moteur local n'a été remplacé ; révisez le patch avant de continuer.\n"
+        + verification.stderr.strip()
+    )
 
 
 def main() -> int:
@@ -64,12 +109,22 @@ def main() -> int:
 
     ajoutes = set(provenance.get("fichiers_ajoutes_par_le_site", []))
     copiés, ignorés = [], []
-    for fichier in sorted(paquet.glob("*.py")):
-        if fichier.name in ajoutes:
-            ignorés.append(fichier.name)
-            continue
-        shutil.copy2(fichier, DESTINATION / fichier.name)
-        copiés.append(fichier.name)
+    staging_temp = tempfile.TemporaryDirectory(prefix="simulateur-correctif-")
+    paquet_stage = Path(staging_temp.name) / "simulateur"
+    paquet_stage.mkdir()
+    try:
+        for fichier in sorted(paquet.glob("*.py")):
+            if fichier.name in ajoutes:
+                ignorés.append(fichier.name)
+                continue
+            shutil.copy2(fichier, paquet_stage / fichier.name)
+        correctif_applique = appliquer_correctif(paquet_stage)
+        # Le dépôt courant n'est touché qu'après copie complète et patch valide.
+        for fichier in sorted(paquet_stage.glob("*.py")):
+            shutil.copy2(fichier, DESTINATION / fichier.name)
+            copiés.append(fichier.name)
+    finally:
+        staging_temp.cleanup()
 
     nouveaux = json.loads(PROVENANCE.read_text(encoding="utf-8"))
     nouveaux.update(
@@ -79,6 +134,11 @@ def main() -> int:
             "date_revision": git("log", "-1", "--format=%cI", cwd=source),
             "sujet": git("log", "-1", "--format=%s", cwd=source),
             "copie_le": dt.date.today().isoformat(),
+            "correctif_local": {
+                "fichier": str(CORRECTIF.relative_to(RACINE)),
+                "sha256": hashlib.sha256(CORRECTIF.read_bytes()).hexdigest(),
+                "etat": "appliqué" if correctif_applique else "déjà intégré à l’amont",
+            },
         }
     )
     PROVENANCE.write_text(

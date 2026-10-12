@@ -40,7 +40,9 @@ from __future__ import annotations
 import csv
 import io
 import json
+import math
 import os
+import re
 import time
 import urllib.error
 import urllib.parse
@@ -56,8 +58,20 @@ from typing import Any
 # ────────────────────────────────────────────────────────────────────────────
 
 USER_AGENT = "simulateur-macro-politique/2.0 (projet citoyen open-source)"
+MAX_SOURCE_RESPONSE_BYTES = 8_388_608
 CACHE_DIR = Path(os.environ.get("SIMULATEUR_CACHE", ".simulateur_cache"))
 CACHE_FICHIER = CACHE_DIR / "donnees_live.json"
+
+
+class _SansRedirection(urllib.request.HTTPRedirectHandler):
+    """Empêche une source déclarée de rediriger le moteur vers un hôte arbitraire."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # noqa: ANN001
+        return None
+
+
+_OPENER = urllib.request.build_opener(_SansRedirection())
+
 
 #: Fournisseurs écartés tant qu'une lecture a échoué récemment (anti-rafale).
 _BLACKLIST: dict[str, float] = {}
@@ -68,12 +82,86 @@ class ErreurSource(RuntimeError):
     """Erreur de lecture d'une source de données publiques."""
 
 
+def _periode_sure(valeur: Any) -> str | None:
+    """Garde les formes simples des périodes, sans balisage fournisseur."""
+    if valeur is None or isinstance(valeur, bool) or not isinstance(valeur, (str, int)):
+        return None
+    texte = str(valeur).strip()
+    if not texte or len(texte) > 48 or not re.fullmatch(r"[\w .:/+\-]+", texte):
+        return None
+    return texte
+
+
+def _plage_valeur_sure(indicateur: Indicateur, valeur: Any) -> bool:
+    """Rejette les valeurs non finies ou hors d'ordres de grandeur raisonnables."""
+    try:
+        nombre = float(valeur)
+    except (TypeError, ValueError, OverflowError):
+        return False
+    if not math.isfinite(nombre) or abs(nombre) > 1e12:
+        return False
+    unite = indicateur.unite.casefold()
+    if "personnes" in unite:
+        return 0 <= nombre <= 10_000_000_000
+    if "0-100" in unite:
+        return 0 <= nombre <= 100
+    if "%" in unite:
+        return -1_000 <= nombre <= 1_000
+    if "md€" in unite:
+        return abs(nombre) <= 10_000_000
+    if "$/baril" in unite or "€/mwh" in unite or "€/tco" in unite:
+        return 0 <= nombre <= 1_000_000
+    if "indice" in unite:
+        return 0 <= nombre <= 1_000_000
+    return abs(nombre) <= 1_000_000_000
+
+
+def _code_qualite_sure(valeur: Any) -> str | None:
+    """Limite un marqueur qualité externe à un code court et inerte."""
+    if not isinstance(valeur, str) or len(valeur) > 8:
+        return None
+    return valeur if re.fullmatch(r"[A-Za-z0-9_-]+", valeur) else None
+
+
+def _horodatage_sure(valeur: Any) -> str:
+    """Normalise l'horodatage de cache, sans recopier de texte non fiable."""
+    if not isinstance(valeur, str) or len(valeur) > 48:
+        return datetime.now(UTC).isoformat(timespec="seconds")
+    try:
+        instant = datetime.fromisoformat(valeur.replace("Z", "+00:00"))
+        if instant.tzinfo is None:
+            instant = instant.replace(tzinfo=UTC)
+        return instant.astimezone(UTC).isoformat(timespec="seconds")
+    except (ValueError, OverflowError, OSError):
+        return datetime.now(UTC).isoformat(timespec="seconds")
+
+
+def _lire_reponse_bornee(reponse) -> bytes:  # noqa: ANN001 - réponse urllib
+    """Lit au plus 8 Mio et refuse les longueurs annoncées invalides ou trop grandes."""
+    longueur_brute = reponse.headers.get("Content-Length")
+    if longueur_brute not in (None, ""):
+        try:
+            longueur = int(longueur_brute)
+        except (TypeError, ValueError) as exc:
+            raise ErreurSource("longueur de réponse source invalide") from exc
+        if longueur < 0:
+            raise ErreurSource("longueur de réponse source invalide")
+        if longueur > MAX_SOURCE_RESPONSE_BYTES:
+            raise ErreurSource("réponse source trop volumineuse")
+    contenu = reponse.read(MAX_SOURCE_RESPONSE_BYTES + 1)
+    if len(contenu) > MAX_SOURCE_RESPONSE_BYTES:
+        raise ErreurSource("réponse source trop volumineuse")
+    return contenu
+
+
 def _http_texte(url: str, timeout: float = 12.0, entetes: dict[str, str] | None = None) -> str:
-    """Lecture HTTP brute (stdlib uniquement, aucun téléchargement implicite)."""
+    """Lit une source avec taille bornée et sans suivre les redirections HTTP."""
     requete = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, **(entetes or {})})
     try:
-        with urllib.request.urlopen(requete, timeout=timeout) as reponse:
-            return reponse.read().decode("utf-8", errors="replace")
+        with _OPENER.open(requete, timeout=timeout) as reponse:
+            return _lire_reponse_bornee(reponse).decode("utf-8", errors="replace")
+    except ErreurSource:
+        raise
     except (TimeoutError, urllib.error.URLError, OSError) as exc:  # pragma: no cover - réseau
         raise ErreurSource(f"{type(exc).__name__}: {exc}") from exc
 
@@ -141,7 +229,7 @@ def qualite_eurostat(payload: Any, cle: str | None) -> str | None:
             statut = None
     else:
         statut = None
-    return str(statut) if statut not in (None, "") else None
+    return _code_qualite_sure(statut)
 
 
 _LIBELLES_QUALITE = {
@@ -159,11 +247,12 @@ _LIBELLES_QUALITE = {
 
 
 def libelle_qualite(code: str | None) -> str:
-    """Traduit les marqueurs connus en conservant le code source ailleurs."""
-    if not code:
+    """Traduit les marqueurs connus en conservant seulement un code inerte."""
+    code_sure = _code_qualite_sure(code)
+    if not code_sure:
         return "aucun marqueur fourni par la source"
-    libelle = _LIBELLES_QUALITE.get(code.lower())
-    return f"{libelle} (code {code})" if libelle else f"marqueur source {code}"
+    libelle = _LIBELLES_QUALITE.get(code_sure.lower())
+    return f"{libelle} (code {code_sure})" if libelle else f"marqueur source {code_sure}"
 
 
 def ad_sdmx(payload: Any, chemin: str | None = None) -> tuple[float | None, str | None]:
@@ -954,7 +1043,7 @@ def _lire_source(source: Source, timeout: float = 12.0) -> Lecture:
     if valeur is None:
         raise ErreurSource("aucune valeur retournée")
     return Lecture(
-        cle="", valeur=float(valeur), periode=periode, fournisseur=source.fournisseur,
+        cle="", valeur=float(valeur), periode=_periode_sure(periode), fournisseur=source.fournisseur,
         url=source.url, statut="live", qualite_code=qualite_code,
     )
 
@@ -976,8 +1065,16 @@ def interroger(cle: str, timeout: float = 12.0) -> Lecture:
             if "réseau" in str(exc) or "Name or service" in str(exc):
                 _BLACKLIST[source.fournisseur] = time.monotonic()
             continue
+        try:
+            valeur = float(lecture.valeur) * indicateur.conversion
+        except (TypeError, ValueError, OverflowError):
+            erreurs.append(f"{source.fournisseur} → valeur numérique illisible")
+            continue
+        if not _plage_valeur_sure(indicateur, valeur):
+            erreurs.append(f"{source.fournisseur} → valeur hors plage raisonnable")
+            continue
         lecture.cle = cle
-        lecture.valeur = round(lecture.valeur * indicateur.conversion, 6)
+        lecture.valeur = round(valeur, 6)
         return lecture
     if indicateur.reference is not None:
         valeur, periode, fournisseur, verifie = indicateur.reference
@@ -1037,12 +1134,46 @@ def charger_cache(chemin: Path | None = None) -> dict[str, Lecture]:
         charge = json.loads(chemin.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return {}
+    if not isinstance(charge, dict):
+        return {}
     lectures: dict[str, Lecture] = {}
-    for cle, brut in (charge.get("lectures") or {}).items():
-        try:
-            lectures[cle] = Lecture(**brut)
-        except TypeError:
+    cache = charge.get("lectures") or {}
+    if not isinstance(cache, dict):
+        return lectures
+    for cle, brut in cache.items():
+        if cle not in INDICATEURS or not isinstance(brut, dict):
             continue
+        # Supprime les valeurs navigateur écrites par les anciennes versions :
+        # elles pouvaient modifier le contexte partagé et leurs métadonnées
+        # n'étaient pas une source fiable.
+        if brut.get("detail") == "collecté par le navigateur de l'utilisateur":
+            continue
+        try:
+            lecture = Lecture(**brut)
+            valeur = float(lecture.valeur) if lecture.valeur is not None else None
+        except (TypeError, ValueError, OverflowError):
+            continue
+        if valeur is not None and not _plage_valeur_sure(INDICATEURS[cle], valeur):
+            continue
+        if lecture.statut not in {"live", "reference", "indisponible"}:
+            continue
+        if (lecture.statut == "indisponible") != (valeur is None):
+            continue
+        # Un cache ne peut pas introduire une nouvelle destination/provenance.
+        source = next(
+            (source for source in INDICATEURS[cle].sources if source.url == lecture.url),
+            None,
+        )
+        if source is None:
+            continue
+        lecture.cle = cle
+        lecture.valeur = valeur
+        lecture.periode = _periode_sure(lecture.periode)
+        lecture.qualite_code = _code_qualite_sure(lecture.qualite_code)
+        lecture.horodatage = _horodatage_sure(lecture.horodatage)
+        lecture.fournisseur = source.fournisseur
+        lecture.url = source.url
+        lectures[cle] = lecture
     return lectures
 
 
@@ -1240,12 +1371,15 @@ def construire_contexte(
             lecture.fournisseur if lecture_valide
             else (reference[2] if reference else "référence documentaire du projet")
         )
-        periode = lecture.periode if lecture_valide else (reference[1] if reference else None)
+        periode = (
+            _periode_sure(lecture.periode) if lecture_valide
+            else _periode_sure(reference[1] if reference else None)
+        )
         date_collecte = (
-            lecture.horodatage[:10] if lecture_valide
+            _horodatage_sure(lecture.horodatage)[:10] if lecture_valide
             else (reference[3] if reference else None)
         )
-        qualite_code = (
+        qualite_code = _code_qualite_sure(
             lecture.qualite_code if lecture_valide else indicateur.qualite_reference
         )
         url_source = (
@@ -1284,15 +1418,15 @@ def construire_contexte(
             # Les `Lecture` sont déjà converties dans l'unité canonique par
             # `interroger` (ou par le client avant son POST au serveur).
             valeur = lecture.valeur
-            periode = lecture.periode
-            date_collecte = lecture.horodatage[:10]
+            periode = _periode_sure(lecture.periode)
+            date_collecte = _horodatage_sure(lecture.horodatage)[:10]
             fournisseur = lecture.fournisseur
             statut = lecture.statut
-            qualite_code = lecture.qualite_code
+            qualite_code = _code_qualite_sure(lecture.qualite_code)
             url = lecture.url
         elif indicateur.reference is not None:
             valeur = indicateur.reference[0] * indicateur.conversion
-            periode = indicateur.reference[1]
+            periode = _periode_sure(indicateur.reference[1])
             date_collecte = indicateur.reference[3]
             fournisseur = indicateur.reference[2]
             statut = "reference"

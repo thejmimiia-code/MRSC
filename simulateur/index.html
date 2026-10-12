@@ -1159,6 +1159,9 @@ let BULLE_OUVERTE = null;
 let BULLES_DEMANDEES = new Set();
 //: Libellés des 20 domaines, repris du catalogue pour les bulles.
 let LIBELLES_DOMAINES = {};
+// Les lectures demandées par la personne restent dans cette page et sont
+// renvoyées uniquement avec ses propres calculs (jamais dans le cache partagé).
+let LECTURES_NAVIGATEUR = {};
 
 function fmt(valeur, precision){
   if (valeur === null || valeur === undefined || Number.isNaN(valeur)) return '—';
@@ -1171,7 +1174,8 @@ function couleurDelta(valeur){
 }
 function pastille(mode){
   const libelles = {live:'données live', reference:'référence datée du projet', mixte:'données mixtes'};
-  return `<span class="pastille ${mode}">${libelles[mode] || mode}</span>`;
+  const modeSecurise = Object.prototype.hasOwnProperty.call(libelles, mode) ? mode : 'reference';
+  return `<span class="pastille ${modeSecurise}">${libelles[modeSecurise]}</span>`;
 }
 
 /* ── Chargement du catalogue (leviers + domaines) ───────────────────────── */
@@ -1210,28 +1214,33 @@ function renderContexte(){
     ['Prélèvements obligatoires', fmt(c.prelevements_obligatoires_pct_pib, 1) + ' % PIB', ''],
   ];
   document.getElementById('grid-metrics').innerHTML = metriques.map(([libelle, valeur, sous]) =>
-    `<div class="carte metric"><div class="libelle">${libelle}</div>
-      <div class="valeur">${valeur}</div><div class="delta neutre">${sous}</div></div>`).join('');
+    `<div class="carte metric"><div class="libelle">${echapperTexte(libelle)}</div>
+      <div class="valeur">${echapperTexte(valeur)}</div><div class="delta neutre">${echapperTexte(sous)}</div></div>`).join('');
   const provenance = (CONTEXTE.contexte && CONTEXTE.contexte.provenance) || CONTEXTE.provenance || {};
   const lignes = Object.entries(provenance).map(([champ, info]) => {
     const statut = info.statut === 'live' ? '🟢 live' : (info.statut === 'reference' ? '🟠 référence' : '⚪ non collectée');
-    const periode = info.periode ? ` · période ${info.periode}` : '';
-    const collecte = info.date_collecte ? ` · collecté le ${info.date_collecte}` : '';
-    const qualite = info.qualite && info.qualite_code ? ` · qualité : ${info.qualite}` : '';
-    const frequence = info.frequence ? `<br><span class="texte-dim">Mise à jour : ${info.frequence}</span>` : '';
-    const note = info.note ? `<br><span class="texte-dim">${info.note}</span>` : '';
-    return `<div><b>${info.libelle}</b> : ${statut}${periode}${collecte}${qualite} · ${info.source}
-      ${info.url ? ` · <a href="${info.url}" target="_blank" rel="noopener">source</a>` : ''}
-      ${info.licence ? ` · <i>${info.licence}</i>` : ''}${frequence}${note}</div>`;
+    const periode = info.periode ? ` · période ${echapperTexte(info.periode)}` : '';
+    const collecte = info.date_collecte ? ` · collecté le ${echapperTexte(info.date_collecte)}` : '';
+    const qualite = info.qualite && info.qualite_code ? ` · qualité : ${echapperTexte(info.qualite)}` : '';
+    const url = urlHttps(info.url);
+    const frequence = info.frequence
+      ? `<br><span class="texte-dim">Mise à jour : ${echapperTexte(info.frequence)}</span>` : '';
+    const note = info.note
+      ? `<br><span class="texte-dim">${echapperTexte(info.note)}</span>` : '';
+    return `<div><b>${echapperTexte(info.libelle)}</b> : ${echapperTexte(statut)}${periode}${collecte}${qualite} · ${echapperTexte(info.source)}
+      ${url ? ` · <a href="${echapperAttribut(url)}" target="_blank" rel="noopener noreferrer">source</a>` : ''}
+      ${info.licence ? ` · <i>${echapperTexte(info.licence)}</i>` : ''}${frequence}${note}</div>`;
   }).join('');
   const complementaires = Object.values((CONTEXTE.contexte && CONTEXTE.contexte.series_complementaires) || {});
   const blocComplementaire = complementaires.length
     ? '<div style="margin-top:10px"><b>Séries complémentaires collectées</b> (non utilisées pour le calibrage,'
-      + ' conservées pour information) :<br>' + complementaires.map(info =>
-        `${info.libelle} : ${fmt(info.valeur, 2)} ${info.unite} (${info.periode || '—'}; collecté le ${info.date_collecte || '—'})`
-        + `${info.qualite_code ? ` · ${info.qualite}` : ''} · ${info.frequence || 'fréquence selon la source'}`
-        + `${info.url ? ` — <a href="${info.url}" target="_blank" rel="noopener">${info.fournisseur}</a>` : ` — ${info.fournisseur}`}`
-      ).join('<br>') + '</div>'
+      + ' conservées pour information) :<br>' + complementaires.map(info => {
+        const url = urlHttps(info.url);
+        return `${echapperTexte(info.libelle)} : ${fmt(info.valeur, 2)} ${echapperTexte(info.unite)} `
+          + `(${echapperTexte(info.periode || '—')}; collecté le ${echapperTexte(info.date_collecte || '—')})`
+          + `${info.qualite_code ? ` · ${echapperTexte(info.qualite)}` : ''} · ${echapperTexte(info.frequence || 'fréquence selon la source')}`
+          + `${url ? ` — <a href="${echapperAttribut(url)}" target="_blank" rel="noopener noreferrer">${echapperTexte(info.fournisseur)}</a>` : ` — ${echapperTexte(info.fournisseur)}`}`;
+      }).join('<br>') + '</div>'
     : '';
   document.getElementById('provenance').innerHTML = lignes + blocComplementaire
     + '<div style="margin-top:8px">Rappel : le mode « référence » signifie que le serveur n\'a pas pu (ou pas encore)'
@@ -1294,9 +1303,9 @@ function afficherNombre(valeur, precision, unite){
 function sourceObservatoire(info){
   if (!info) return '';
   const source = echapperTexte(info.source || info.libelle || 'Source publique');
-  const url = info.url || info.page_source;
-  const lien = url && String(url).startsWith('https://')
-    ? ` · <a href="${echapperTexte(url)}" target="_blank" rel="noopener">consulter</a>` : '';
+  const url = urlHttps(info.url || info.page_source);
+  const lien = url
+    ? ` · <a href="${echapperAttribut(url)}" target="_blank" rel="noopener">consulter</a>` : '';
   const periode = info.periode ? ` · période observée : ${echapperTexte(info.periode)}` : '';
   const publication = info.publication_le
     ? ` · publié le ${echapperTexte(info.publication_le)}` : '';
@@ -1882,18 +1891,72 @@ function extraireGenerique(adaptateur, charge, chemin){
   }
   return null;
 }
+const LIMITE_JSON_SOURCE_NAVIGATEUR = 8_388_608;
+const DELAI_SOURCE_NAVIGATEUR_MS = 8_000;
+const DELAI_COLLECTE_NAVIGATEUR_MS = 60_000;
+
+async function fetchJsonSourceBorne(url, options = {}, delaiMs = DELAI_SOURCE_NAVIGATEUR_MS){
+  const controleur = new AbortController();
+  const expiration = setTimeout(() => controleur.abort(), Math.max(1, delaiMs));
+  try{
+    const reponse = await fetch(url, {...options, redirect:'error', signal: controleur.signal});
+    if (!reponse.ok){
+      if (reponse.body) reponse.body.cancel().catch(() => {});
+      return {reponse, charge: null};
+    }
+    const longueur = Number(reponse.headers.get('Content-Length'));
+    if (Number.isFinite(longueur) && longueur > LIMITE_JSON_SOURCE_NAVIGATEUR){
+      if (reponse.body) reponse.body.cancel().catch(() => {});
+      throw new Error('Réponse de source supérieure à 8 Mio.');
+    }
+    if (!reponse.body || typeof reponse.body.getReader !== 'function'){
+      throw new Error('Lecture en flux bornée indisponible dans ce navigateur.');
+    }
+    const lecteur = reponse.body.getReader();
+    const morceaux = [];
+    let total = 0;
+    while (true){
+      const {done, value} = await lecteur.read();
+      if (done) break;
+      total += value.byteLength;
+      if (total > LIMITE_JSON_SOURCE_NAVIGATEUR){
+        await lecteur.cancel().catch(() => {});
+        throw new Error('Réponse de source supérieure à 8 Mio.');
+      }
+      morceaux.push(value);
+    }
+    const octets = new Uint8Array(total);
+    let position = 0;
+    for (const morceau of morceaux){
+      octets.set(morceau, position);
+      position += morceau.byteLength;
+    }
+    const charge = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(octets));
+    return {reponse, charge};
+  } finally{
+    clearTimeout(expiration);
+  }
+}
+
 async function rafraichirDonnees(){
   const bouton = document.getElementById('btn-rafraichir');
   bouton.disabled = true; bouton.textContent = 'Interrogation des API publiques…';
+  const echeance = Date.now() + DELAI_COLLECTE_NAVIGATEUR_MS;
   const spec = CONTEXTE.browser || {};
   const lectures = {};
   let succes = 0;
   for (const [cle, indicateur] of Object.entries(spec)){
+    if (Date.now() >= echeance) break;
     for (const source of indicateur.sources){
+      const restant = echeance - Date.now();
+      if (restant <= 0) break;
       try {
-        const reponse = await fetch(source.url, {mode:'cors'});
+        const resultatSource = await fetchJsonSourceBorne(
+          source.url, {mode:'cors'}, Math.min(DELAI_SOURCE_NAVIGATEUR_MS, restant)
+        );
+        const reponse = resultatSource.reponse;
         if (!reponse.ok) continue;
-        const charge = await reponse.json();
+        const charge = resultatSource.charge;
         const lecture = extraireGenerique(source.adaptateur, charge, source.chemin);
         if (!lecture || !Number.isFinite(lecture.valeur)) continue;
         // `interroger()` côté serveur renvoie déjà les unités canoniques ; ici,
@@ -1908,14 +1971,18 @@ async function rafraichirDonnees(){
         break;
       } catch (erreur) { /* source suivante */ }
     }
-    if (!lectures[cle] && indicateur.proxy_url){
+    if (!lectures[cle] && indicateur.proxy_url && Date.now() < echeance){
       // Repli même-origine : le serveur relaie les sources sans CORS
       // (Yahoo, Stooq, ICE/EEX). Le serveur n'accepte que les sources
       // déclarées au registre : ce n'est pas un proxy ouvert.
       try {
-        const reponse = await fetch(indicateur.proxy_url);
+        const restant = echeance - Date.now();
+        const resultatProxy = await fetchJsonSourceBorne(
+          indicateur.proxy_url, {}, Math.min(DELAI_SOURCE_NAVIGATEUR_MS, restant)
+        );
+        const reponse = resultatProxy.reponse;
         if (reponse.ok){
-          const charge = await reponse.json();
+          const charge = resultatProxy.charge;
           const lecture = charge.lecture;
           if (lecture && Number.isFinite(Number(lecture.valeur))){
             lectures[cle] = {cle: cle, valeur: Number(lecture.valeur), periode: lecture.periode,
@@ -1929,13 +1996,28 @@ async function rafraichirDonnees(){
       } catch (erreur) { /* le serveur garde ses valeurs */ }
     }
   }
+  let contexteNavigateurCharge = false;
   if (succes > 0){
     try {
-      await fetch('/api/donnees', {method:'POST', headers:{'Content-Type':'application/json'},
-                                   body: JSON.stringify({lectures: lectures})});
+      const reponse = await fetch('/api/donnees', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({lectures: lectures})
+      });
+      if (reponse.ok){
+        const charge = await reponse.json();
+        if (charge && charge.contexte && charge.lectures){
+          LECTURES_NAVIGATEUR = charge.lectures;
+          CONTEXTE.contexte = charge.contexte;
+          renderContexte();
+          contexteNavigateurCharge = true;
+        }
+      }
     } catch (erreur) { /* le serveur reste sur ses valeurs */ }
   }
-  await chargerContexte(false);
+  if (!contexteNavigateurCharge){
+    LECTURES_NAVIGATEUR = {};
+    await chargerContexte(false);
+  }
   await rafraichirMarches(true);
   bouton.disabled = false;
   bouton.textContent = succes > 0
@@ -2345,7 +2427,10 @@ async function chargerBulle(cle){
   if (Object.prototype.hasOwnProperty.call(BULLES, cle) || BULLES_DEMANDEES.has(cle)) return;
   BULLES_DEMANDEES.add(cle);
   try {
-    const reponse = await fetch(`/api/bulle?levier=${encodeURIComponent(cle)}&detail=complet`);
+    const reponse = await fetch(`/api/bulle?levier=${encodeURIComponent(cle)}&detail=complet`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({lectures: LECTURES_NAVIGATEUR})
+    });
     const donnees = await reponse.json();
     BULLES[cle] = (donnees && donnees.cle === cle) ? donnees : null;
   } catch (erreur){
@@ -2636,6 +2721,16 @@ async function chargerLexique(){
 
 function echapperAttribut(texte){
   return echapperTexte(texte || '').replace(/"/g, '&quot;');
+}
+
+function urlHttps(url){
+  try {
+    const analyse = new URL(String(url || ''), location.href);
+    if (analyse.protocol !== 'https:' || analyse.username || analyse.password) return '';
+    return analyse.href;
+  } catch (_erreur) {
+    return '';
+  }
 }
 
 function marquerUnTerme(trouve){
@@ -2977,7 +3072,8 @@ async function simuler(avecImpacts){
     const reponse = await fetch('/api/simuler', {
       method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({parametres: parametresEnvoyes, horizon: horizon,
-                            avec_impacts: !!avecImpacts, max_impacts: 16})
+                            avec_impacts: !!avecImpacts, max_impacts: 16,
+                            lectures: LECTURES_NAVIGATEUR})
     });
     const donnees = await reponse.json();
     if (donnees.error){ alert('Erreur de simulation : ' + donnees.error); return; }
@@ -3280,7 +3376,7 @@ async function majConseilTempsReel(parametresEnvoyes){
       method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({parametres: parametresEnvoyes, cle: cle,
                             avant: MOUVEMENT.avant, apres: apres,
-                            horizon: horizonCourant()})
+                            horizon: horizonCourant(), lectures: LECTURES_NAVIGATEUR})
     });
     const conseil = await reponse.json();
     // Le conseil affiché correspond au dernier mouvement réellement demandé.
@@ -3576,8 +3672,9 @@ function auditSourcesHtml(){
   const lignes = Object.keys(provenance).map(cle => {
     const fiche = provenance[cle];
     const valeur = contexte[cle];
-    const url = fiche.url
-      ? ` <a href="${echapperTexte(fiche.url)}" rel="noopener">consulter</a>` : '';
+    const urlSure = urlHttps(fiche.url);
+    const url = urlSure
+      ? ` <a href="${echapperAttribut(urlSure)}" rel="noopener noreferrer">consulter</a>` : '';
     return `<tr><td>${echapperTexte(fiche.libelle)}</td>
       <td class="chiffre">${valeur === null || valeur === undefined ? '—' : fmt(valeur, 2)} ${echapperTexte(fiche.unite || '')}</td>
       <td>${echapperTexte(fiche.periode || '—')}</td>
