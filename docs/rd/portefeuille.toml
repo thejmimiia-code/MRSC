@@ -1,0 +1,102 @@
+# Portefeuille vivant de recherche, d'innovation et d'entretien.
+# Le registre décrit des travaux, pas des résultats certifiés ni une couverture exhaustive.
+# La veille automatique vérifie sa structure et son échéance; elle ne lit pas les sources externes.
+
+[meta]
+version = 1
+derniere_revue = 2026-10-12
+cadence_revue_jours = 30
+source_cartographie = "docs/apprentissage/referentiel.toml"
+source_catalogue = "docs/apprentissage/catalogue.toml"
+regle = "Ne changer derniere_revue qu'après une revue réellement effectuée et résumée."
+
+[[initiative]]
+id = "relire-les-44-prototypes"
+titre = "Faire relire les 44 prototypes d'apprentissage"
+priorite = "P0"
+phase = "relecture"
+etat = "a-valider"
+domaines = ["langue-communication", "langues-etrangeres", "mathematiques", "economie-finances", "sciences-techniques-environnement", "geographie", "histoire-memoire", "citoyennete-medias", "numerique-ia", "informatique-programmation", "arts-culture", "methodes-communication", "etudes-superieures-recherche"]
+question = "Quels contenus sont exacts, utiles, accessibles, originaux et suffisamment délimités pour franchir leurs revues spécialisées?"
+preuves = ["docs/apprentissage/catalogue.toml", "docs/apprentissage/grille-relecture.md", "docs/apprentissage/revue-interne-prototypes-2026-10-11.md"]
+prochaine_action = "Organiser les relectures de domaine, de droits et d'accessibilité; conserver le statut Prototype à relire jusqu'à ce que chaque contrôle ait une preuve."
+criteres_sortie = ["Chaque fiche a une décision et une trace de revue adaptée au risque.", "Toute erreur importante, incertitude ou source manquante est corrigée ou affichée.", "Aucune revue interne n'est présentée comme validation indépendante."]
+skills = ["recherche-sources", "conception-pedagogique", "accessibilite-co-conception", "evaluation-maintenance"]
+
+[[initiative]]
+id = "co-conception-et-essais"
+titre = "Préparer des essais volontaires et accessibles"
+priorite = "P0"
+phase = "cadrage"
+etat = "a-cadrer"
+domaines = ["methodes-communication", "langue-communication", "numerique-ia"]
+question = "Les personnes comprennent-elles les consignes, repèrent-elles les aides et trouvent-elles les fiches ou fonctions visées sur différents appareils?"
+preuves = ["docs/rd-parcours-apprentissage.md", "docs/rd-affichage-adaptatif.md", "docs/apprentissage/grille-relecture.md", "docs/rd/protocole-essais-usage.md"]
+prochaine_action = "Faire relire le protocole d'essais par les rôles requis et confirmer le cadre de consentement, puis adapter quelques tâches et seulement ensuite proposer des essais volontaires minimisant les données."
+criteres_sortie = ["Tâches d'essai compréhensibles, option d'arrêt et solution de repli.", "Retours minimisés et non identifiants.", "Problèmes classés, corrigés et retestés sur clavier, mobile, zoom et technologies d'assistance pertinentes."]
+skills = ["conception-innovation", "accessibilite-co-conception", "evaluation-maintenance"]
+
+[[initiative]]
+id = "autres-langues-et-contextes"
+titre = "Étendre les langues et les contextes culturels"
+priorite = "P1"
+phase = "recherche"
+etat = "a-cadrer"
+domaines = ["langues-etrangeres", "langue-communication"]
+question = "Quelles langues, variétés, registres et situations manque-t-il, et quelles relectures locales sont nécessaires avant de les enseigner?"
+preuves = ["docs/apprentissage/referentiel.toml", "docs/rd-anglais-aventure.md", "docs/rd-parcours-apprentissage.md"]
+prochaine_action = "Cartographier besoins et contraintes de licence/audio; définir un modèle de fiche et de dialogue original avec validation compétente par langue et région."
+criteres_sortie = ["Variété linguistique, région et registre explicités.", "Traduction revue et scénario non présenté comme universel.", "Fiche jouable sans voix ou service tiers obligatoire."]
+skills = ["cartographie-connaissances", "recherche-sources", "conception-pedagogique", "localisation-culturelle", "conception-jeu"]
+
+[[initiative]]
+id = "mondes-3d-pluridisciplinaires"
+titre = "Concevoir les futurs mondes au-delà des Escales anglaises"
+priorite = "P1"
+phase = "conception"
+etat = "a-cadrer"
+domaines = ["sciences-techniques-environnement", "arts-culture", "geographie", "histoire-memoire", "informatique-programmation"]
+question = "Dans quels sujets l'espace interactif ou la simulation 3D apporte-t-il une compréhension que la fiche autonome ne donne pas déjà?"
+preuves = ["docs/rd-anglais-aventure.md", "docs/rd-innovation-continue.md", "docs/apprentissage/referentiel.toml"]
+prochaine_action = "Élaborer plusieurs concepts prototypes avec objectifs mesurables, équivalents 2D/texte, coût, performance, relecture de domaine et critères de retrait."
+criteres_sortie = ["Le choix 3D sert un objectif pédagogique explicite.", "Commandes clavier/toucher, mouvement réduit et alternative compréhensible.", "Décor, règles, personnages et textes originaux, sans promesse d'efficacité non testée."]
+skills = ["cartographie-connaissances", "conception-innovation", "conception-pedagogique", "conception-jeu", "accessibilite-co-conception", "integration-securite"]
+
+[[initiative]]
+id = "veille-savoirs-evolutifs"
+titre = "Entretenir les sources et sujets qui changent"
+priorite = "P0"
+phase = "maintien"
+etat = "en-cours"
+domaines = ["sante-securite-corps", "numerique-ia", "citoyennete-medias", "demarches-droits-travail", "economie-finances", "sciences-techniques-environnement"]
+question = "Quelles sources, règles, données et recommandations peuvent devenir obsolètes ou être mal appliquées hors de leur territoire?"
+preuves = ["docs/apprentissage/referentiel.toml", "docs/apprentissage/grille-relecture.md", ".github/workflows/veille-apprentissages.yml"]
+prochaine_action = "Vérifier les échéances et faire une lecture humaine directe des sources à risque; consigner chaque source consultée, sa date, son périmètre et la décision."
+criteres_sortie = ["Les liens et dates sont vérifiés sans présenter ce contrôle comme preuve d'exactitude.", "Les consignes locales ou évolutives sont datées et délimitées.", "Un contenu périmé peut être corrigé, suspendu ou retiré rapidement."]
+skills = ["recherche-sources", "cartographie-connaissances", "evaluation-maintenance"]
+
+[[initiative]]
+id = "optimisation-du-site"
+titre = "Améliorer clarté, performance et résilience du site"
+priorite = "P1"
+phase = "essai"
+etat = "a-tester"
+domaines = ["numerique-ia", "methodes-communication"]
+question = "Les pages restent-elles rapides, lisibles, robustes, accessibles et utilisables quand le stockage, le réseau ou une fonction optionnelle échoue?"
+preuves = ["docs/rd-affichage-adaptatif.md", "docs/rd-audit-securite-optimisation.md", "docs/rd-confidentialite-rgpd.md"]
+prochaine_action = "Réaliser des essais multi-écrans et clavier; comparer les tâches cibles, poids, erreurs et solutions de repli sans installer de mesure individuelle."
+criteres_sortie = ["Les principaux parcours sont testés sur des largeurs et technologies représentatives.", "Les améliorations ne retirent ni zoom, clavier, reflow ou contenu sans JavaScript.", "Aucune collecte ou dépendance tierce n'est ajoutée sans nécessité et information."]
+skills = ["conception-innovation", "accessibilite-co-conception", "integration-securite", "evaluation-maintenance"]
+
+[[initiative]]
+id = "coordination-de-tous-les-agents"
+titre = "Rendre les pratiques R&D réutilisables par chaque agent"
+priorite = "P0"
+phase = "mise-en-place"
+etat = "en-cours"
+domaines = []
+question = "Un agent qui rejoint le dépôt peut-il comprendre les sources de vérité, activer les skills adaptés, reprendre une piste et livrer une modification vérifiable sans inventer de validation?"
+preuves = ["AGENTS.md", "docs/rd-innovation-continue.md", "docs/rd/journal.md", ".agents/skills", ".github/ISSUE_TEMPLATE/proposition-rd.yml"]
+prochaine_action = "Après intégration dans main, demander à un second agent de reprendre une initiative avec le journal et le portefeuille, puis examiner le premier rapport GitHub planifié et corriger les manques."
+criteres_sortie = ["Les compétences spécialisées et livrables sont explicités.", "Une piste peut être reprise via son identifiant, son état, ses preuves et sa prochaine action.", "CI et veille vérifient la structure sans auto-publier ni certifier le contenu."]
+skills = ["cartographie-connaissances", "recherche-sources", "conception-innovation", "evaluation-maintenance"]

@@ -3188,3 +3188,30 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
   .resource-scope-note { border-left-width: 4px; border-left-style: solid; }
   .resource-note .trace-tag { border: 1px solid CanvasText; }
 }
+
+/* Porte d’entrée entre les fiches autonomes et le prototype d’aventure anglaise. */
+.english-promo-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+  gap: clamp(1.2rem, 4vw, 3rem);
+  align-items: center;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+.english-promo-copy h2 { max-width: 22ch; font-size: clamp(1.65rem, 3.2vw, 2.35rem); }
+.english-promo-copy > p:not(.eyebrow) { max-width: 68ch; color: #536078; }
+.english-promo-art { min-width: 0; margin: 0; }
+.english-promo-art img { width: 100%; aspect-ratio: 16 / 10; border-radius: 15px; object-fit: cover; object-position: 66% center; }
+.english-promo-art figcaption { margin-top: .5rem; color: var(--muted); font-size: .76rem; line-height: 1.45; }
+@media (max-width: 760px) {
+  .english-promo-panel { grid-template-columns: minmax(0, 1fr); }
+  .english-promo-panel .hero-actions { align-items: stretch; flex-direction: column; }
+  .english-promo-panel .hero-actions .button { width: 100%; }
+}
+@media (forced-colors: active) {
+  .english-promo-panel,.english-promo-art img { border: 1px solid CanvasText; background: Canvas; box-shadow: none; }
+  .english-promo-art img { display: none; }
+}

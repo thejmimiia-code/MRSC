@@ -1,6 +1,6 @@
 # Couverture des savoirs de base — carte éditoriale vivante
 
-**Dernière revue éditoriale déclarée : 2026-10-08.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
+**Dernière revue éditoriale déclarée : 2026-10-11.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
 
 L’objectif de couverture est de progresser des bases du CP vers les matières générales et professionnelles, les études supérieures, les spécialisations et la recherche doctorale. Cet objectif n’est pas l’état actuel du catalogue : les lacunes sont indiquées et la carte reste évolutive.
 
@@ -24,12 +24,12 @@ Lire, comprendre, écrire et échanger dans des situations variées.
 | --- | --- | --- |
 | Lire une consigne et repérer une action | Fiche disponible | [`fr-lire-consigne`](../apprendre/fiches/fr-lire-consigne.html) |
 | Écrire un message bref et clair | Fiche disponible | [`fr-ecrire-message`](../apprendre/fiches/fr-ecrire-message.html) |
-| Lire des textes plus longs, des formulaires et des documents | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Vocabulaire, phrases, grammaire et orthographe en contexte | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Prendre la parole, expliquer et dialoguer | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Résumer, argumenter et adapter le ton au destinataire | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Lire des textes plus longs, des formulaires et des documents | Début de couverture — à approfondir | [`fr-reperer-idee-texte`](../apprendre/fiches/fr-reperer-idee-texte.html) |
+| Vocabulaire, phrases, grammaire et orthographe en contexte | Début de couverture — à approfondir | [`fr-comprendre-mot-contexte`](../apprendre/fiches/fr-comprendre-mot-contexte.html)<br>[`fr-lire-ponctuation`](../apprendre/fiches/fr-lire-ponctuation.html) |
+| Prendre la parole, expliquer et dialoguer | Début de couverture — à approfondir | [`fr-preparer-explication-orale`](../apprendre/fiches/fr-preparer-explication-orale.html) |
+| Résumer, argumenter et adapter le ton au destinataire | Début de couverture — à approfondir | [`fr-argumenter-avec-exemple`](../apprendre/fiches/fr-argumenter-avec-exemple.html) |
 
-**Bilan indicatif :** 2 sujet(s) avec une fiche signalée comme disponible, 0 sujet(s) commencés mais incomplets, 4 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 6 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 2 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 6 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Langues étrangères et interculturel
 
@@ -38,11 +38,11 @@ Commencer par des expressions réutilisables, puis développer l'écoute, la lec
 | Sujet | Statut | Fiches de première version / suite à donner |
 | --- | --- | --- |
 | Demander une direction en anglais | Début de couverture — à approfondir | [`langue-anglais-direction`](../apprendre/fiches/langue-anglais-direction.html) |
-| Comprendre et échanger dans d’autres situations quotidiennes | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Comprendre et échanger dans d’autres situations quotidiennes | Début de couverture — à approfondir | [`langue-anglais-demander-aide`](../apprendre/fiches/langue-anglais-demander-aide.html)<br>[`langue-anglais-epeler`](../apprendre/fiches/langue-anglais-epeler.html) |
 | Autres langues, langues régionales et français langue seconde | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | Écoute, prononciation et ressources audio accessibles | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 1 sujet(s) commencés mais incomplets, 3 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 2 sujet(s) commencés mais incomplets, 2 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Mathématiques, mesures et données
 
@@ -55,14 +55,14 @@ Développer les nombres, le calcul, la géométrie, les mesures, les estimations
 | Multiplier, diviser et partager | Fiche disponible | [`maths-partager`](../apprendre/fiches/maths-partager.html) |
 | Fractions et proportions simples | Fiche disponible | [`maths-fractions-recette`](../apprendre/fiches/maths-fractions-recette.html) |
 | Pourcentages et remises | Fiche disponible | [`maths-pourcentage`](../apprendre/fiches/maths-pourcentage.html) |
-| Tableaux, graphiques et interprétation des données | Début de couverture — à approfondir | [`maths-lire-graphique`](../apprendre/fiches/maths-lire-graphique.html)<br>[`maths-moyenne`](../apprendre/fiches/maths-moyenne.html) |
-| Géométrie de base et mesure d’une surface | Début de couverture — à approfondir | [`maths-surface`](../apprendre/fiches/maths-surface.html) |
+| Tableaux, graphiques et interprétation des données | Début de couverture — à approfondir | [`maths-lire-graphique`](../apprendre/fiches/maths-lire-graphique.html)<br>[`maths-moyenne`](../apprendre/fiches/maths-moyenne.html)<br>[`maths-lire-echelle-graphique`](../apprendre/fiches/maths-lire-echelle-graphique.html)<br>[`maths-lire-tableau-croise`](../apprendre/fiches/maths-lire-tableau-croise.html) |
+| Géométrie de base et mesure d’une surface | Début de couverture — à approfondir | [`maths-surface`](../apprendre/fiches/maths-surface.html)<br>[`maths-reperer-angle-droit`](../apprendre/fiches/maths-reperer-angle-droit.html) |
 | Mesures, unités et conversions dans plusieurs domaines | Début de couverture — à approfondir | [`maths-convertir-unites`](../apprendre/fiches/maths-convertir-unites.html) |
 | Estimation, arrondis et vérification d’un ordre de grandeur | Début de couverture — à approfondir | [`maths-estimer-calcul`](../apprendre/fiches/maths-estimer-calcul.html) |
-| Probabilités, hasard et incertitude | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Algèbre, équations et raisonnement plus avancé | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Probabilités, hasard et incertitude | Début de couverture — à approfondir | [`maths-probabilite-tirage`](../apprendre/fiches/maths-probabilite-tirage.html) |
+| Algèbre, équations et raisonnement plus avancé | Début de couverture — à approfondir | [`maths-equation-simple`](../apprendre/fiches/maths-equation-simple.html) |
 
-**Bilan indicatif :** 5 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 2 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 11 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 5 sujet(s) avec une fiche signalée comme disponible, 6 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 11 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Budget, économie, consommation et travail
 
@@ -70,13 +70,13 @@ Comprendre les prix et les documents financiers usuels, sans donner de conseil p
 
 | Sujet | Statut | Fiches de première version / suite à donner |
 | --- | --- | --- |
-| Budget simple, addition et comparaison de prix | Début de couverture — à approfondir | [`maths-budget`](../apprendre/fiches/maths-budget.html)<br>[`maths-pourcentage`](../apprendre/fiches/maths-pourcentage.html) |
-| Lire une facture, un abonnement et une échéance | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Budget simple, addition et comparaison de prix | Début de couverture — à approfondir | [`maths-budget`](../apprendre/fiches/maths-budget.html)<br>[`maths-pourcentage`](../apprendre/fiches/maths-pourcentage.html)<br>[`econ-comparer-prix-unitaires`](../apprendre/fiches/econ-comparer-prix-unitaires.html) |
+| Lire une facture, un abonnement et une échéance | Début de couverture — à approfondir | [`econ-lire-facture`](../apprendre/fiches/econ-lire-facture.html) |
 | Compte bancaire, frais, crédit et intérêts | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | Revenus, fiche de paie, prélèvements et impôts | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | Achats, contrats, garanties et recours du consommateur | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 1 sujet(s) commencés mais incomplets, 4 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 5 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 2 sujet(s) commencés mais incomplets, 3 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 5 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Sciences, technologie et environnement
 
@@ -89,13 +89,13 @@ Observer, mesurer et expliquer le monde naturel et technique ; comprendre l’é
 | Circuits électriques, composants et schémas simples | Début de couverture — à approfondir | [`tech-circuit-ouvert-ferme`](../apprendre/fiches/tech-circuit-ouvert-ferme.html) |
 | Systèmes électroniques, capteurs, signaux et actionneurs | Début de couverture — à approfondir | [`tech-electronique-capteur`](../apprendre/fiches/tech-electronique-capteur.html) |
 | Sécurité électrique, protections et limites des interventions | À créer avec une relecture spécialisée | À cadrer avec une personne compétente, puis rechercher des sources officielles à jour. |
-| Corps humain, vivant et biologie | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Matière, mélanges et transformations chimiques | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Forces, mouvement, chaleur, lumière, son et objets techniques | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Climat, eau, déchets, biodiversité et ressources | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Corps humain, vivant et biologie | Début de couverture — à approfondir | [`sciences-cycle-vie-plante`](../apprendre/fiches/sciences-cycle-vie-plante.html) |
+| Matière, mélanges et transformations chimiques | Début de couverture — à approfondir | [`sciences-distinguer-melange-changement-etat`](../apprendre/fiches/sciences-distinguer-melange-changement-etat.html) |
+| Forces, mouvement, chaleur, lumière, son et objets techniques | Début de couverture — à approfondir | [`sciences-calculer-vitesse-moyenne`](../apprendre/fiches/sciences-calculer-vitesse-moyenne.html) |
+| Climat, eau, déchets, biodiversité et ressources | Début de couverture — à approfondir | [`sciences-meteo-climat`](../apprendre/fiches/sciences-meteo-climat.html) |
 | Risques, consignes et usages sûrs des outils et produits | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 
-**Bilan indicatif :** 1 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 5 sujet(s) à créer, 1 sujet(s) demandant une relecture spécialisée sur 10 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 1 sujet(s) avec une fiche signalée comme disponible, 7 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 1 sujet(s) demandant une relecture spécialisée sur 10 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Géographie, territoire et espace
 
@@ -104,10 +104,11 @@ Lire des cartes et comprendre comment les lieux, les distances et les activités
 | Sujet | Statut | Fiches de première version / suite à donner |
 | --- | --- | --- |
 | Lire une échelle et une distance sur une carte | Début de couverture — à approfondir | [`geo-echelle-carte`](../apprendre/fiches/geo-echelle-carte.html) |
-| S’orienter, lire un itinéraire et anticiper l’accessibilité | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Territoires, paysages, populations et mobilités | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| S’orienter, lire un itinéraire et anticiper l’accessibilité | Début de couverture — à approfondir | [`geo-points-cardinaux`](../apprendre/fiches/geo-points-cardinaux.html) |
+| Territoires, paysages, populations et mobilités | Début de couverture — à approfondir | [`geo-decrire-paysage`](../apprendre/fiches/geo-decrire-paysage.html) |
+| Lire les symboles et la légende d’une carte | Début de couverture — à approfondir | [`geo-lire-legende-carte`](../apprendre/fiches/geo-lire-legende-carte.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 1 sujet(s) commencés mais incomplets, 2 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 3 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Histoire, chronologie et mémoire
 
@@ -115,11 +116,11 @@ Situer des faits dans le temps, lire des sources et comprendre qu’un récit d�
 
 | Sujet | Statut | Fiches de première version / suite à donner |
 | --- | --- | --- |
-| Lire une frise, des dates et des périodes historiques | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Comparer des sources, témoignages et points de vue | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Lire une frise, des dates et des périodes historiques | Début de couverture — à approfondir | [`histoire-lire-frise`](../apprendre/fiches/histoire-lire-frise.html)<br>[`histoire-situer-siecle`](../apprendre/fiches/histoire-situer-siecle.html) |
+| Comparer des sources, témoignages et points de vue | Début de couverture — à approfondir | [`histoire-comparer-sources`](../apprendre/fiches/histoire-comparer-sources.html) |
 | Repères d’histoire de France et du monde | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 0 sujet(s) commencés mais incomplets, 3 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 3 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 2 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 3 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Citoyenneté, médias et information
 
@@ -162,10 +163,10 @@ Utiliser le numérique, protéger les données, comprendre l’IA et réagir aux
 | Contrôler une identité usurpée et une sollicitation urgente par un canal indépendant | Début de couverture — à approfondir | [`numerique-verifier-demande`](../apprendre/fiches/numerique-verifier-demande.html) |
 | Hameçonnage, faux support ou conseiller, urgences, faux achats, emplois et placements | Début de couverture — à approfondir | [`numerique-hameconnage`](../apprendre/fiches/numerique-hameconnage.html)<br>[`numerique-verifier-demande`](../apprendre/fiches/numerique-verifier-demande.html) |
 | Protéger ses comptes, conserver les preuves, contacter les services et signaler | Début de couverture — à approfondir | [`numerique-reagir-fraude`](../apprendre/fiches/numerique-reagir-fraude.html) |
-| Fichiers, logiciels, comptes, accessibilité et sauvegardes | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Rechercher, communiquer et résoudre un problème numérique | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Fichiers, logiciels, comptes, accessibilité et sauvegardes | Début de couverture — à approfondir | [`numerique-organiser-fichiers`](../apprendre/fiches/numerique-organiser-fichiers.html) |
+| Rechercher, communiquer et résoudre un problème numérique | Début de couverture — à approfondir | [`numerique-formuler-recherche`](../apprendre/fiches/numerique-formuler-recherche.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 8 sujet(s) commencés mais incomplets, 2 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 10 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 10 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 10 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Informatique, algorithmique et langages de programmation
 
@@ -176,15 +177,15 @@ Comprendre les fonctions d’un système informatique, représenter des informat
 | Matériel, logiciel, mémoire, stockage et rôles d’un ordinateur | Début de couverture — à approfondir | [`info-ordinateur-fonctions`](../apprendre/fiches/info-ordinateur-fonctions.html) |
 | Décomposer un problème, suivre des étapes et répéter une action | Début de couverture — à approfondir | [`prog-comparer-langages`](../apprendre/fiches/prog-comparer-langages.html) |
 | Langages de programmation : syntaxe, usages et limites | Début de couverture — à approfondir | [`prog-comparer-langages`](../apprendre/fiches/prog-comparer-langages.html) |
-| Bits, nombres, textes, images et formats de données | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Systèmes d’exploitation, fichiers, permissions et processus | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Réseaux, Internet, adressage, noms de domaine et protocoles | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Bits, nombres, textes, images et formats de données | Début de couverture — à approfondir | [`info-bits-octets`](../apprendre/fiches/info-bits-octets.html) |
+| Systèmes d’exploitation, fichiers, permissions et processus | Début de couverture — à approfondir | [`info-systeme-exploitation`](../apprendre/fiches/info-systeme-exploitation.html) |
+| Réseaux, Internet, adressage, noms de domaine et protocoles | Début de couverture — à approfondir | [`info-lire-adresse-web`](../apprendre/fiches/info-lire-adresse-web.html) |
 | Bases de données, requêtes, Web et échanges de données | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Tester, déboguer, documenter et faire évoluer un programme | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Tester, déboguer, documenter et faire évoluer un programme | Début de couverture — à approfondir | [`prog-tester-exemples`](../apprendre/fiches/prog-tester-exemples.html) |
 | Conception logicielle, travail collectif, licences et code ouvert | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | Microcontrôleurs, objets connectés et systèmes embarqués | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 7 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 10 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 7 sujet(s) commencés mais incomplets, 3 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 10 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Arts, musique, création et culture
 
@@ -194,10 +195,10 @@ Observer et pratiquer des langages artistiques en tenant compte des contextes et
 | --- | --- | --- |
 | Décrire une image avant de l’interpréter | Début de couverture — à approfondir | [`arts-lire-image`](../apprendre/fiches/arts-lire-image.html) |
 | Pulsation, rythme et tempo | Début de couverture — à approfondir | [`arts-rythme-musique`](../apprendre/fiches/arts-rythme-musique.html) |
-| Pratiques de création : dessin, musique, théâtre, danse et médias | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| Patrimoine, œuvres, cultures et histoire des arts | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Pratiques de création : dessin, musique, théâtre, danse et médias | Début de couverture — à approfondir | [`arts-composer-formes`](../apprendre/fiches/arts-composer-formes.html) |
+| Patrimoine, œuvres, cultures et histoire des arts | Début de couverture — à approfondir | [`arts-lire-cartel`](../apprendre/fiches/arts-lire-cartel.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 2 sujet(s) commencés mais incomplets, 2 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Santé, alimentation, corps et sécurité
 
@@ -220,10 +221,10 @@ Proposer plusieurs façons de s’engager, comprendre, s’exercer et exprimer c
 | --- | --- | --- |
 | Partir d’une situation connue, essayer et réutiliser | Début de couverture — à approfondir | [`apprendre-methode`](../apprendre/fiches/apprendre-methode.html) |
 | Choisir une forme de lecture, écoute, manipulation ou expression | Début de couverture — à approfondir | [`apprendre-methode`](../apprendre/fiches/apprendre-methode.html) |
-| Écoute, coopération, désaccord et résolution de problème | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Écoute, coopération, désaccord et résolution de problème | Début de couverture — à approfondir | [`methodes-demander-clarification`](../apprendre/fiches/methodes-demander-clarification.html) |
 | Planifier une tâche et demander de l’aide au bon moment | Début de couverture — à approfondir | [`apprendre-methode`](../apprendre/fiches/apprendre-methode.html)<br>[`maths-lire-planning`](../apprendre/fiches/maths-lire-planning.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Études supérieures, spécialités et recherche — post-bac au doctorat
 
@@ -231,9 +232,9 @@ Construire progressivement des passerelles des savoirs fondamentaux vers les mé
 
 | Sujet | Statut | Fiches de première version / suite à donner |
 | --- | --- | --- |
-| Question de recherche, hypothèses, modèles, preuves et limites | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Question de recherche, hypothèses, modèles, preuves et limites | Début de couverture — à approfondir | [`recherche-question-hypothese`](../apprendre/fiches/recherche-question-hypothese.html) |
 | Lire, résumer et examiner une publication scientifique sans la prendre pour une preuve définitive | Début de couverture — à approfondir | [`recherche-lire-etude`](../apprendre/fiches/recherche-lire-etude.html) |
-| Intégrité de la recherche, citations, données, reproductibilité et science ouverte | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Intégrité de la recherche, citations, données, reproductibilité et science ouverte | Début de couverture — à approfondir | [`recherche-conserver-reference`](../apprendre/fiches/recherche-conserver-reference.html) |
 | Méthodes de travail avancées : revue de littérature, écriture académique et présentation orale | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | ISCED-F 00 — programmes et qualifications génériques, interdisciplinarité et compétences transversales | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | ISCED-F 01 — sciences de l’éducation, formation et recherche en pédagogie | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
@@ -247,7 +248,7 @@ Construire progressivement des passerelles des savoirs fondamentaux vers les mé
 | ISCED-F 09 — santé et protection sociale | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | ISCED-F 10 — services, transport, tourisme, sécurité et services à la personne | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 1 sujet(s) commencés mais incomplets, 14 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 15 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 12 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 15 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ## Règles de suivi et de publication
 

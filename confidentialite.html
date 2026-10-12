@@ -72,7 +72,7 @@
       <div class="container">
         <p class="eyebrow">Transparence · protection des données</p>
         <h1>Vie privée et données personnelles</h1>
-        <p class="page-lead">Pas de compte ni de suivi de progression. Cela ne signifie pas qu’aucune donnée n’existe : le navigateur, l’hébergeur, un courriel volontaire ou un service tiers peuvent traiter des informations techniques ou personnelles.</p>
+        <p class="page-lead">Pas de compte, de suivi d’audience ni de profil nominatif. Le jeu « Les Mondes » peut garder sur cet appareil un parcours de fiches choisi et un carnet d’Escales facultatifs ; cela ne signifie pas qu’aucune donnée n’existe : le navigateur, l’hébergeur, un courriel volontaire ou un service tiers peuvent traiter des informations techniques ou personnelles.</p>
       </div>
     </section>
 
@@ -97,22 +97,23 @@
 
         <section aria-labelledby="privacy-not-collected-title">
           <h2 id="privacy-not-collected-title">Ce que le site ne demande pas</h2>
-          <p>Les pages publiques et les fiches fonctionnent sans création de compte. Le site ne comporte pas de formulaire de profil, d’évaluation ou de progression d’apprentissage. Les réponses aux exercices restent dans votre tête ou sur votre propre support : elles ne sont pas transmises par la fiche.</p>
+          <p>Les pages publiques et les fiches fonctionnent sans création de compte. Les fiches ne transmettent ni les réponses ni les corrections. Le jeu « Les Mondes » propose un parcours que vous composez vous-même ; il peut conserver localement les seuls identifiants des fiches ajoutées. Cela ne marque pas une fiche comme terminée et ne mesure aucun apprentissage.</p>
           <p>Dans le code examiné pour cette notice, aucun outil d’analyse d’audience, pixel publicitaire ou profilage n’a été repéré. Cette constatation devra être refaite si un service, un script, une vidéo ou une intégration externe est ajouté.</p>
           <p>Le site ne demande pas de renseignement sur la santé, le handicap, la situation financière, les opinions, les convictions, le parcours scolaire ou l’activité professionnelle. Évitez d’inclure ces détails dans un message libre, sauf nécessité réelle et après avoir vérifié le destinataire.</p>
         </section>
 
         <section aria-labelledby="privacy-preferences-title">
           <h2 id="privacy-preferences-title">Préférences enregistrées sur votre appareil</h2>
-          <p>Les boutons « Affichage » peuvent mémoriser le niveau d’agrandissement du texte, le contraste renforcé et l’espacement. Le navigateur conserve ces valeurs dans le <code>localStorage</code> du site, sous une origine propre à M.R.S.C. Elles servent uniquement à remettre en place les réglages choisis sur les pages du même site ; aucun compte ou identifiant de personne n’est créé.</p>
+          <p>Les boutons « Affichage » peuvent mémoriser le niveau d’agrandissement du texte, le contraste renforcé et l’espacement. Le jeu « Les Mondes » peut mémoriser, si vous composez un parcours ou terminez une Escale, la liste ordonnée des identifiants de fiches choisies, les missions terminées et le niveau d’aide, sous la clé <code>mrsc-anglais-aventure-v1</code>. Le navigateur garde ces valeurs dans son <code>localStorage</code>, sous une origine propre à M.R.S.C ; aucun compte ni identifiant de personne n’est créé.</p>
           <ul>
-            <li><strong>Catégories :</strong> choix de présentation (taille du texte, contraste et espacement), sans réponse d’exercice.</li>
-            <li><strong>Finalité :</strong> rendre l’affichage plus confortable et conserver le réglage entre les pages.</li>
-            <li><strong>Transmission :</strong> le code du site lit et écrit la préférence dans le navigateur ; il ne l’ajoute pas aux requêtes vers son serveur.</li>
-            <li><strong>Durée :</strong> jusqu’à l’effacement du stockage ou des données de navigation par la personne ; le site ne fixe pas actuellement de date d’expiration.</li>
-            <li><strong>Maîtrise :</strong> les réglages peuvent être effacés dans les paramètres du navigateur en supprimant les données du site. Si le stockage est bloqué, les commandes restent utilisables pendant la visite.</li>
+            <li><strong>Catégories :</strong> choix d’affichage ; dans le jeu, niveau d’aide, identifiants des Escales terminées et identifiants ordonnés des fiches ajoutées au parcours. Aucun texte libre, réponse, score ou résultat d’exercice.</li>
+            <li><strong>Finalité :</strong> remettre en place l’affichage et laisser la personne retrouver sur le même appareil son parcours de fiches choisi et son carnet d’Escales.</li>
+            <li><strong>Transmission :</strong> le code lit et écrit ces valeurs dans le navigateur ; il ne les ajoute pas aux requêtes vers le serveur M.R.S.C. Le jeu ne comporte ni compte, publicité, outil d’audience ou mesure individuelle.</li>
+            <li><strong>Durée :</strong> jusqu’à l’effacement manuel du stockage ou des données de navigation ; le site ne fixe actuellement pas de date d’expiration.</li>
+            <li><strong>Maîtrise :</strong> « Effacer mon parcours local » retire seulement les fiches choisies ; « Effacer mon avancement local » retire aussi le carnet d’Escales et les aides enregistrées. Les données peuvent également être effacées dans les réglages du navigateur. Si le stockage est bloqué, le jeu reste jouable pendant la visite.</li>
           </ul>
-          <p>La CNIL inclut l’accès au <code>localStorage</code> dans les technologies de lecture ou d’écriture sur le terminal. Elle indique que la personnalisation de la présentation peut être dispensée de consentement lorsqu’elle est intrinsèque et attendue du service. Les préférences proposées ici sont activées à la demande et limitées à la présentation ; leur qualification juridique doit néanmoins être confirmée par l’association. Elles sont décrites par transparence. Si un traceur non nécessaire est ajouté, l’information et le consentement requis devront être mis en place avant son activation.</p>
+          <p>Les phrases saisies librement dans l’exercice ne sont ni envoyées, ni mises dans le stockage local de progression ; elles restent dans la page jusqu’au changement d’étape et ne sont pas évaluées. La lecture vocale, si elle existe sur l’appareil, est déclenchée à la demande. Selon le navigateur ou l’appareil, une voix installée peut dépendre d’un service système ; aucune voix distante n’est appelée directement par le code du jeu.</p>
+          <p>La CNIL inclut l’accès au <code>localStorage</code> dans les technologies de lecture ou d’écriture sur le terminal. Elle indique que la personnalisation de la présentation peut être dispensée de consentement lorsqu’elle est intrinsèque et attendue du service. Les préférences sont activées à la demande ; le parcours local change lorsque la personne ajoute ou réordonne elle-même des fiches, et le carnet d’Escales lorsqu’une mission est terminée. La qualification juridique de ces écritures locales doit être confirmée par l’association. Elles sont décrites par transparence. Si un traceur non nécessaire est ajouté, l’information et le consentement requis devront être mis en place avant son activation.</p>
           <h3>Historique de navigation pour reprendre son parcours</h3>
           <p>Les commandes « Précédent », « Suivant », « Accueil » et « Dernière vue » peuvent utiliser le <code>sessionStorage</code> pour rejouer les étapes internes visitées dans l’onglet et retrouver le dernier point parcouru avant un retour à l’accueil. Le site conserve uniquement des chemins de pages et leurs fragments internes ; il n’enregistre pas les paramètres de requête, le texte saisi, les réponses aux exercices ni un profil d’apprentissage.</p>
           <ul>
@@ -164,18 +165,18 @@
 
         <section aria-labelledby="privacy-rights-title">
           <h2 id="privacy-rights-title">Vos choix et vos droits</h2>
-          <p>Vous pouvez effacer les préférences locales et l’historique de navigation de la session depuis les réglages du navigateur, ou fermer l’onglet. Pour poser une question, demander l’accès à des informations que l’association aurait reçues, ou demander leur rectification ou leur effacement lorsque le droit le prévoit, écrivez à <a href="mailto:assomrsc@gmail.com">assomrsc@gmail.com</a>. L’association devra vérifier la demande et répondre dans les délais légaux applicables.</p>
+          <p>Vous pouvez effacer le parcours de fiches avec « Effacer mon parcours local », ou l’ensemble des données du jeu avec « Effacer mon avancement local » dans « Les Mondes ». Vous pouvez aussi supprimer les préférences et l’historique de navigation dans les réglages du navigateur, ou fermer l’onglet. Pour poser une question, demander l’accès à des informations que l’association aurait reçues, ou demander leur rectification ou leur effacement lorsque le droit le prévoit, écrivez à <a href="mailto:assomrsc@gmail.com">assomrsc@gmail.com</a>. L’association devra vérifier la demande et répondre dans les délais légaux applicables.</p>
           <p>Les droits disponibles — par exemple accès, rectification, effacement, opposition ou limitation — dépendent de la donnée, de la finalité et de la base juridique. Une demande concernant des journaux conservés directement par un prestataire peut nécessiter de contacter aussi ce prestataire. Vous pouvez introduire une réclamation auprès de la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener noreferrer">CNIL</a>.</p>
         </section>
 
         <section class="privacy-review-note" aria-labelledby="privacy-update-title">
           <h2 id="privacy-update-title">Mise à jour et points à confirmer</h2>
-          <p>Notice mise à jour le <time datetime="2026-10-08">8 octobre 2026</time> après examen des pages et du code du dépôt. Elle doit être révisée si l’hébergement, les scripts, les formulaires, les services tiers ou les données traitées changent.</p>
+          <p>Notice mise à jour le <time datetime="2026-10-12">12 octobre 2026</time> après examen des pages et du code du dépôt. Elle doit être révisée si l’hébergement, les scripts, les formulaires, les services tiers ou les données traitées changent.</p>
           <ul>
             <li>Confirmer le responsable de traitement, la base juridique des courriels et la personne chargée des demandes de droits.</li>
             <li>Définir puis appliquer une durée de conservation des courriels reçus.</li>
             <li>Vérifier les conditions du compte Gmail de l’association et celles de l’hébergeur utilisé en production.</li>
-            <li>Faire valider la qualification des préférences <code>localStorage</code>, de l’historique <code>sessionStorage</code>, de la copie de l’adresse dans le presse-papiers et de la solution de chargement de la carte Google.</li>
+            <li>Faire valider la qualification des préférences et de la progression facultative dans <code>localStorage</code>, de l’historique <code>sessionStorage</code>, de la copie de l’adresse dans le presse-papiers et de la solution de chargement de la carte Google.</li>
             <li>Auditer les journaux, les durées, les sous-traitants et les requêtes de l’hébergement Render déjà utilisé ; mettre à jour cette page avant tout changement d’hébergeur ou l’ajout d’un outil d’audience, d’une vidéo intégrée, d’une newsletter, d’un compte ou d’un suivi pédagogique.</li>
           </ul>
           <p>Cette page est une information de transparence construite à partir du dépôt ; ce n’est pas un avis juridique ni une déclaration de conformité certifiée.</p>

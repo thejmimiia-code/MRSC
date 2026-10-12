@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://thejmimiia-code.github.io/MRSC/</loc></url>
   <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/anglais-aventure.html</loc></url>
   <url><loc>https://thejmimiia-code.github.io/MRSC/ia-societe.html</loc></url>
   <url><loc>https://thejmimiia-code.github.io/MRSC/simulateur.html</loc></url>
   <url><loc>https://thejmimiia-code.github.io/MRSC/simulateur/</loc></url>
@@ -46,4 +47,39 @@
   <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/tech-circuit-ouvert-ferme.html</loc></url>
   <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/tech-electronique-capteur.html</loc></url>
   <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-choisir-source-publique.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/econ-lire-facture.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/econ-comparer-prix-unitaires.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-reperer-idee-texte.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-anglais-demander-aide.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-points-cardinaux.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-lire-frise.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-probabilite-tirage.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-organiser-fichiers.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/methodes-demander-clarification.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-preparer-explication-orale.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-argumenter-avec-exemple.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-equation-simple.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-meteo-climat.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-comparer-sources.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-bits-octets.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/prog-tester-exemples.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/arts-composer-formes.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-comprendre-mot-contexte.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-lire-echelle-graphique.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-calculer-vitesse-moyenne.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-distinguer-melange-changement-etat.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-decrire-paysage.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-lire-adresse-web.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/arts-lire-cartel.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/recherche-question-hypothese.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-lire-ponctuation.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-anglais-epeler.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-lire-tableau-croise.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-reperer-angle-droit.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-cycle-vie-plante.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-lire-legende-carte.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-situer-siecle.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-systeme-exploitation.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-formuler-recherche.html</loc></url>
+  <url><loc>https://thejmimiia-code.github.io/MRSC/apprendre/fiches/recherche-conserver-reference.html</loc></url>
 </urlset>

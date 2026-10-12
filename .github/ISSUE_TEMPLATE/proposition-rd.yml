@@ -1,0 +1,72 @@
+name: Proposition de R&D
+title: "[R&D] "
+description: "La proposition sera examinée; elle ne sera pas ajoutée ou publiée automatiquement."
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Décrivez un sujet ou un besoin général, pas votre histoire personnelle. N'ajoutez pas de diagnostic, donnée de santé, identité, réponse d'exercice, information sur un mineur ou autre donnée personnelle.
+  - type: dropdown
+    id: nature
+    attributes:
+      label: Nature de la piste
+      description: Choisissez le type principal; les autres pourront être précisés plus bas.
+      options:
+        - Savoir ou domaine peu couvert
+        - Source, donnée ou règle à vérifier
+        - Idée de fiche, formation libre ou expérience de jeu
+        - Accessibilité, langue ou contexte culturel
+        - Problème du site, sécurité, confidentialité ou performance
+        - Évaluation ou retour d'usage
+        - Autre
+    validations:
+      required: true
+  - type: input
+    id: domaine
+    attributes:
+      label: Domaine et contexte
+      description: Matière, métier, langue, région, époque ou juridiction pertinente; indiquez « à préciser » si vous ne savez pas.
+      placeholder: "Ex. démarches en France, français oral, niveau d'introduction"
+    validations:
+      required: true
+  - type: textarea
+    id: besoin
+    attributes:
+      label: Question ou difficulté observée
+      description: Décrivez une tâche ou une lacune vérifiable, sans supposer une demande générale à partir d'une expérience individuelle.
+      placeholder: "Quelle question le site ou le jeu aiderait-il à comprendre ou à accomplir?"
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources et éléments de preuve
+      description: Pour chaque source connue, indiquez auteur/organisme, titre, date, URL et date de consultation. Précisez ce que la source ne permet pas de conclure.
+      placeholder: "Les liens ne sont pas automatiquement considérés comme vérifiés ni libres de droits."
+    validations:
+      required: false
+  - type: textarea
+    id: idee
+    attributes:
+      label: Piste de réponse et alternatives
+      description: Expliquez pourquoi une fiche, une activité, un monde, une visualisation ou une optimisation serait utile; indiquez aussi si améliorer l'existant suffit.
+    validations:
+      required: false
+  - type: textarea
+    id: risques
+    attributes:
+      label: Limites, risques et relectures nécessaires
+      description: Signalez controverses, actualisation, droits, accessibilité, sécurité des personnes ou expertise humaine nécessaire.
+    validations:
+      required: false
+  - type: checkboxes
+    id: confidentialite
+    attributes:
+      label: Confidentialité
+      options:
+        - label: Je n'ai inclus aucune donnée personnelle sensible ni réponse d'apprentissage.
+          required: true
+  - type: markdown
+    attributes:
+      value: |
+        Les pistes sont triées dans le [portefeuille R&D](https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/portefeuille.toml) et traitées par étapes. Une idée n'est pas une preuve; une fiche générée n'est pas validée; aucun contenu ne doit être publié avant les relectures adaptées.

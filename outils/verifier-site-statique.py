@@ -7,11 +7,13 @@ quelques relations d'accessibilité et la syntaxe JS disponible via Node.js.
 """
 from __future__ import annotations
 
+import json
 import re
 import shutil
 import subprocess
 import sys
 import tempfile
+import tomllib
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from html.parser import HTMLParser
@@ -23,6 +25,18 @@ PAGES = sorted(ROOT.glob("*.html"))
 PAGES.extend(sorted((ROOT / "apprendre" / "fiches").glob("*.html")))
 PAGES.append(ROOT / "simulateur" / "index.html")
 ERREURS: list[str] = []
+LOT_RECENT = (
+    "fr-lire-ponctuation",
+    "langue-anglais-epeler",
+    "maths-lire-tableau-croise",
+    "maths-reperer-angle-droit",
+    "sciences-cycle-vie-plante",
+    "geo-lire-legende-carte",
+    "histoire-situer-siecle",
+    "info-systeme-exploitation",
+    "numerique-formuler-recherche",
+    "recherche-conserver-reference",
+)
 
 
 @dataclass
@@ -140,6 +154,45 @@ class InspecteurDependances(HTMLParser):
 def signaler(message: str) -> None:
     ERREURS.append(message)
     print(f"ÉCHEC — {message}")
+
+
+def verifier_catalogue_apprentissage() -> None:
+    chemin = ROOT / "docs" / "apprentissage" / "catalogue.toml"
+    try:
+        catalogue = tomllib.loads(chemin.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, tomllib.TOMLDecodeError) as erreur:
+        signaler(f"docs/apprentissage/catalogue.toml : catalogue TOML illisible : {erreur}")
+        return
+    fiches = catalogue.get("fiche", [])
+    ids = [fiche.get("id", "") for fiche in fiches]
+    prototypes = [fiche for fiche in fiches if fiche.get("statut_editorial")]
+    doublons = sorted(ident for ident in set(ids) if ids.count(ident) > 1)
+    if len(fiches) != 70:
+        signaler(f"catalogue d’apprentissage : {len(fiches)} fiches au lieu de 70")
+    if doublons:
+        signaler("catalogue d’apprentissage : identifiants dupliqués : " + ", ".join(doublons))
+    if len(prototypes) != 44:
+        signaler(f"catalogue d’apprentissage : {len(prototypes)} prototypes au lieu de 44")
+    absents = sorted(set(LOT_RECENT) - set(ids))
+    if absents:
+        signaler("catalogue d’apprentissage : fiches du lot courant absentes : " + ", ".join(absents))
+    champs_requis = (
+        "titre", "resume", "objectif", "situation", "analogie_titre", "analogie",
+        "limite_analogie", "notions", "demarche", "exercice", "aide", "correction",
+        "a_retenir", "transferer", "sources",
+    )
+    par_id = {fiche.get("id"): fiche for fiche in fiches}
+    for identifiant in LOT_RECENT:
+        fiche = par_id.get(identifiant)
+        if fiche is None:
+            continue
+        if fiche.get("statut_editorial") != "Prototype à relire":
+            signaler(f"{identifiant} : statut attendu « Prototype à relire »")
+        manquants = [champ for champ in champs_requis if not fiche.get(champ)]
+        if manquants:
+            signaler(f"{identifiant} : champ(s) de fiche incomplet(s) : {', '.join(manquants)}")
+    if not ERREURS:
+        print("Catalogue d’apprentissage : 70 fiches sans doublon, 44 prototypes ; les 10 nouvelles fiches ont leurs champs structurels et restent à relire.")
 
 
 def analyser(chemin: Path) -> PageInfo:
@@ -276,7 +329,7 @@ def verifier_javascript(infos: dict[Path, PageInfo]) -> None:
 
 
 def verifier_dependances_apprentissage() -> None:
-    pages = [ROOT / "apprendre.html", *sorted((ROOT / "apprendre" / "fiches").glob("*.html"))]
+    pages = [ROOT / "apprendre.html", ROOT / "anglais-aventure.html", *sorted((ROOT / "apprendre" / "fiches").glob("*.html"))]
     avant = len(ERREURS)
     for chemin in pages:
         relatif = chemin.relative_to(ROOT).as_posix()
@@ -303,10 +356,136 @@ def verifier_dependances_apprentissage() -> None:
         print(f"Autonomie technique : aucun script, média ou style distant chargé automatiquement sur {len(pages)} pages d’apprentissage.")
 
 
+def verifier_aventure_anglais() -> None:
+    """Contrôle les limites visibles et la structure du prototype de dialogue."""
+    page = ROOT / "anglais-aventure.html"
+    donnees = ROOT / "assets" / "js" / "anglais-aventure-data.js"
+    donnees_atlas = ROOT / "assets" / "js" / "apprentissage-aventure-data.js"
+    script = ROOT / "assets" / "js" / "anglais-aventure.js"
+    avant = len(ERREURS)
+    try:
+        contenu_page = page.read_text(encoding="utf-8")
+        contenu_script = script.read_text(encoding="utf-8")
+        contenu_donnees_atlas = donnees_atlas.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as erreur:
+        signaler(f"prototype d’anglais : lecture impossible : {erreur}")
+        return
+    marqueurs = (
+        "Les Mondes", "Les Escales", "pré-A1", "A2", "B1", "sans publicité", "sans compte",
+        "Aucun ordre", "minuteur", "évaluation de ton niveau", "reste dans la page",
+        "stockage local", "aucun microphone", "réception", "production", "interaction",
+        "70 fiches", "15 domaines", "44 prototypes", "parcours de formation personnel",
+    )
+    absents = [marqueur for marqueur in marqueurs if marqueur.casefold() not in contenu_page.casefold()]
+    if absents:
+        signaler("anglais-aventure.html : transparence ou objectifs pédagogiques absents : " + ", ".join(absents))
+    appels_reseau = re.compile(r"\b(?:fetch|XMLHttpRequest|WebSocket|EventSource)\b")
+    if appels_reseau.search(contenu_script):
+        signaler("assets/js/anglais-aventure.js : appel réseau inattendu dans le jeu local")
+    if appels_reseau.search(contenu_donnees_atlas):
+        signaler("assets/js/apprentissage-aventure-data.js : appel réseau inattendu dans le catalogue local")
+    try:
+        motif_atlas = re.search(
+            r"globalThis\.MRSCApprentissageData = Object\.freeze\((\{.*\})\);\s*$",
+            contenu_donnees_atlas,
+            re.DOTALL,
+        )
+        atlas = json.loads(motif_atlas.group(1)) if motif_atlas else {}
+        fiches_sources = tomllib.loads((ROOT / "docs" / "apprentissage" / "catalogue.toml").read_text(encoding="utf-8"))["fiche"]
+        domaines_sources = tomllib.loads((ROOT / "docs" / "apprentissage" / "referentiel.toml").read_text(encoding="utf-8"))["domaine"]
+        ids_sources = [fiche["id"] for fiche in fiches_sources]
+        ids_atlas = [fiche.get("id") for fiche in atlas.get("sheets", [])]
+        domaines_atlas = [domaine.get("id") for domaine in atlas.get("domains", [])]
+        feuilles_par_domaine = {
+            domaine["id"]: [fiche["id"] for fiche in fiches_sources if fiche["domaine"] == domaine["id"]]
+            for domaine in domaines_sources
+        }
+        atlas_coherent = (
+            ids_atlas == ids_sources
+            and domaines_atlas == [domaine["id"] for domaine in domaines_sources]
+            and atlas.get("sheetCount") == len(fiches_sources)
+            and atlas.get("domainCount") == len(domaines_sources)
+            and sum(bool(fiche.get("statut_editorial")) for fiche in fiches_sources) == atlas.get("prototypeCount")
+            and all((ROOT / fiche.get("url", "")).is_file() for fiche in atlas.get("sheets", []))
+            and all(domaine.get("sheetIds") == feuilles_par_domaine[domaine["id"]] for domaine in atlas.get("domains", []))
+            and all(f'id="couverture-domaine-{domaine["id"]}"' in (ROOT / "apprendre.html").read_text(encoding="utf-8") for domaine in domaines_sources)
+            and 'assets/js/apprentissage-aventure-data.js' in contenu_page
+            and 'id="learning-path-list"' in contenu_page
+        )
+        if not atlas_coherent:
+            signaler("Les Mondes : fiches, domaines, états éditoriaux, liens et parcours ne correspondent pas aux sources du catalogue")
+    except (OSError, KeyError, TypeError, json.JSONDecodeError, tomllib.TOMLDecodeError) as erreur:
+        signaler(f"Les Mondes : données de l’atlas illisibles ou incohérentes : {erreur}")
+    node = shutil.which("node")
+    if node:
+        verification = r'''
+const fs = require("node:fs");
+const vm = require("node:vm");
+const assert = require("node:assert/strict");
+const context = {};
+vm.runInNewContext(fs.readFileSync(process.argv.at(-2), "utf8"), context);
+vm.runInNewContext(fs.readFileSync(process.argv.at(-1), "utf8"), context);
+const missions = context.MRSCEnglishAdventureData?.missions;
+const atlas = context.MRSCApprentissageData;
+assert.ok(Array.isArray(missions));
+assert.equal(missions.length, 5, "cinq escales originales attendues");
+assert.equal(new Set(missions.map((mission) => mission.id)).size, missions.length, "identifiants uniques");
+const levels = missions.map((mission) => mission.level).join(" ");
+for (const level of ["Pré-A1", "A1", "A2", "B1"]) assert.ok(levels.includes(level), `repère ${level} absent`);
+for (const mission of missions) {
+  assert.ok(mission.title && mission.brief && mission.outcome && mission.sceneDescription);
+  assert.equal(mission.turns.length, 3, `${mission.id}: trois échanges attendus`);
+  assert.ok(mission.keepsake.length >= 2, `${mission.id}: expressions à garder absentes`);
+  for (const turn of mission.turns) {
+    for (const field of ["english", "french", "objective", "modelEnglish", "modelFrench", "tip"]) assert.ok(turn[field], `${mission.id}: ${field} absent`);
+    assert.ok(turn.options.length >= 3, `${mission.id}: choix de réponse insuffisants`);
+    for (const option of turn.options) {
+      for (const field of ["english", "french", "feedback", "replyEnglish", "replyFrench"]) assert.ok(option[field], `${mission.id}: option sans ${field}`);
+    }
+  }
+}
+assert.ok(Array.isArray(atlas?.sheets) && Array.isArray(atlas?.domains) && Array.isArray(atlas?.paths));
+assert.equal(atlas.sheetCount, atlas.sheets.length);
+assert.equal(atlas.domainCount, atlas.domains.length);
+assert.equal(new Set(atlas.sheets.map((sheet) => sheet.id)).size, atlas.sheetCount);
+assert.equal(new Set(atlas.domains.map((domain) => domain.id)).size, atlas.domainCount);
+assert.equal(atlas.prototypeCount, atlas.sheets.filter((sheet) => sheet.editorialStatus).length);
+const mappedSheets = [];
+for (const domain of atlas.domains) for (const sheetId of domain.sheetIds) mappedSheets.push(sheetId);
+assert.equal(new Set(mappedSheets).size, atlas.sheetCount, "chaque fiche doit appartenir à un seul monde principal");
+const catalogueSheetIds = [];
+for (const sheet of atlas.sheets) catalogueSheetIds.push(sheet.id);
+assert.deepEqual([...mappedSheets].sort(), catalogueSheetIds.sort());
+const pathLevels = [];
+for (const path of atlas.paths) pathLevels.push(path.level);
+assert.deepEqual(pathLevels.sort(), [1, 2, 3, 4]);
+assert.equal(atlas.paths.reduce((total, path) => total + path.sheetCount, 0), atlas.sheetCount);
+for (const sheet of atlas.sheets) {
+  assert.ok(sheet.title && sheet.summary && sheet.objective && sheet.url);
+  assert.equal(sheet.url, `apprendre/fiches/${sheet.id}.html`);
+}
+console.log(`${missions.length} escales, ${missions.reduce((n, m) => n + m.turns.length, 0)} échanges et ${missions.reduce((n, m) => n + m.turns.reduce((k, t) => k + t.options.length, 0), 0)} réponses ; ${atlas.sheetCount} fiches dans ${atlas.domainCount} mondes, ${atlas.prototypeCount} à relire.`);
+'''
+        resultat = subprocess.run(
+            [node, "-e", verification, str(donnees), str(donnees_atlas)],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if resultat.returncode:
+            detail = (resultat.stderr or resultat.stdout).strip().splitlines()
+            signaler("données de l’aventure : contrôle des dialogues échoué : " + (detail[-1] if detail else "erreur inconnue"))
+        elif len(ERREURS) == avant:
+            print("Les Mondes : " + (resultat.stdout or "données cohérentes").strip())
+    elif len(ERREURS) == avant:
+        print("AVERTISSEMENT — Node.js absent : structure détaillée des dialogues non vérifiée.")
+
+
 def verifier_dossier_apprentissage() -> None:
     controles = {
         ROOT / "apprendre.html": (
-            "26 fiches et 9 prototypes à relire",
+            "26 fiches et 44 prototypes à relire",
             "Prototype à relire",
             "Ambition éditoriale de long terme",
             "1 000 fiches autonomes",
@@ -380,27 +559,402 @@ def verifier_dossier_apprentissage() -> None:
             "Choisir une source publique adaptée",
             "leurs licences de réutilisation ne sont pas déclarées vérifiées",
         ),
+        ROOT / "apprendre" / "fiches" / "econ-lire-facture.html": (
+            "Statut éditorial : Prototype à relire",
+            "Lire une facture et repérer une échéance",
+            "28 € + 12 € = 40 €",
+            "Le 6 septembre est la date d’établissement du document",
+            "le 20 septembre est l’échéance affichée",
+            "ne décrit ni les mentions légalement obligatoires",
+            "DGCCRF — information sur la consommation",
+            "licence source non vérifiée",
+        ),
+        ROOT / "apprendre" / "fiches" / "econ-comparer-prix-unitaires.html": (
+            "Statut éditorial : Prototype à relire",
+            "Comparer deux prix à quantité égale",
+            "4 × 1,50 € = 6,00 €/kg",
+            "2 × 2,80 € = 5,60 €/kg",
+            "ne constitue pas une recommandation d’achat",
+            "DGCCRF — information sur la consommation",
+            "licence source non vérifiée",
+        ),
+        ROOT / "apprendre" / "fiches" / "fr-reperer-idee-texte.html": (
+            "Statut éditorial : Prototype à relire",
+            "Repérer l’idée principale et les informations utiles",
+            "20 juin",
+            "sépare ce qui est écrit de ce que tu en déduis",
+            "licence source non vérifiée",
+        ),
+        ROOT / "apprendre" / "fiches" / "langue-anglais-demander-aide.html": (
+            "Statut éditorial : Prototype à relire",
+            "Demander de l’aide ou une répétition en anglais",
+            "Could you say that again, please?",
+            "Could you speak more slowly, please?",
+            "La fiche ne fournit pas d’audio",
+        ),
+        ROOT / "apprendre" / "fiches" / "geo-points-cardinaux.html": (
+            "Statut éditorial : Prototype à relire",
+            "S’orienter avec les points cardinaux",
+            "Le jardin se trouve à l’est",
+            "ni les rues à suivre",
+            "aucun trajet réel",
+        ),
+        ROOT / "apprendre" / "fiches" / "histoire-lire-frise.html": (
+            "Statut éditorial : Prototype à relire",
+            "Lire une frise chronologique et ordonner des événements",
+            "du 3 au 10 juin, il s’écoule 7 jours",
+            "ne prouve pas qu’une étape a causé la suivante",
+        ),
+        ROOT / "apprendre" / "fiches" / "maths-probabilite-tirage.html": (
+            "Statut éditorial : Prototype à relire",
+            "Comprendre une chance dans un tirage simple",
+            "1/4",
+            "2/4",
+            "probabilité ne garantit pas",
+            "on suppose que chaque jeton a la même chance d’être tiré",
+            "licence source non vérifiée",
+        ),
+        ROOT / "apprendre" / "fiches" / "numerique-organiser-fichiers.html": (
+            "Statut éditorial : Prototype à relire",
+            "Nommer et retrouver ses fichiers sans exposer ses données",
+            "planning-reunion-2026-10-v02",
+            "renommer ne convertit pas",
+            "aucun fichier réel, partage ou suppression n’est demandé",
+        ),
+        ROOT / "apprendre" / "fiches" / "methodes-demander-clarification.html": (
+            "Statut éditorial : Prototype à relire",
+            "Reformuler une demande avant de commencer",
+            "Si j’ai bien compris",
+            "traiter une absence de réponse comme un accord",
+        ),
+        ROOT / "apprendre" / "fiches" / "fr-preparer-explication-orale.html": (
+            "Statut éditorial : Prototype à relire",
+            "Préparer une explication courte",
+            "ne suppose pas que parler à voix haute soit possible ou souhaité",
+            "pictogrammes",
+        ),
+        ROOT / "apprendre" / "fiches" / "fr-argumenter-avec-exemple.html": (
+            "Statut éditorial : Prototype à relire",
+            "Présenter une idée avec une raison et un exemple",
+            "Un exemple illustre une idée",
+            "75 minutes se terminerait à 15 h 15",
+            "pas à forcer l’accord",
+        ),
+        ROOT / "apprendre" / "fiches" / "maths-equation-simple.html": (
+            "Statut éditorial : Prototype à relire",
+            "Résoudre une équation simple en gardant l’égalité",
+            "x = 8",
+            "ne traite pas les équations à plusieurs étapes",
+        ),
+        ROOT / "apprendre" / "fiches" / "sciences-meteo-climat.html": (
+            "Statut éditorial : Prototype à relire",
+            "Distinguer météo et climat",
+            "Une journée enneigée suffit-elle à établir une tendance",
+            "ne suffit pas à établir une tendance climatique",
+        ),
+        ROOT / "apprendre" / "fiches" / "histoire-comparer-sources.html": (
+            "Statut éditorial : Prototype à relire",
+            "Comparer deux sources sur un même événement",
+            "Les deux documents ne se contredisent pas forcément",
+            "documents inventés",
+        ),
+        ROOT / "apprendre" / "fiches" / "info-bits-octets.html": (
+            "Statut éditorial : Prototype à relire",
+            "Comprendre les bits et les octets",
+            "2 puissance 8 = 256 motifs possibles",
+            "n’indique pas à lui seul une lettre",
+        ),
+        ROOT / "apprendre" / "fiches" / "prog-tester-exemples.html": (
+            "Statut éditorial : Prototype à relire",
+            "Tester un programme avec des cas simples",
+            "Pour 0 : résultat attendu",
+            "pseudo-code de cette fiche est fictif",
+        ),
+        ROOT / "apprendre" / "fiches" / "arts-composer-formes.html": (
+            "Statut éditorial : Prototype à relire",
+            "Composer une image avec quelques formes",
+            "ne demande pas de reproduire une œuvre protégée",
+            "description verbale",
+        ),
+        ROOT / "apprendre" / "fiches" / "fr-comprendre-mot-contexte.html": (
+            "Statut éditorial : Prototype à relire",
+            "Comprendre un mot grâce à son contexte",
+            "Le contexte suggère parfois un sens sans permettre de le confirmer",
+            "la feuille jaune est tombée de la branche",
+        ),
+        ROOT / "apprendre" / "fiches" / "maths-lire-echelle-graphique.html": (
+            "Statut éditorial : Prototype à relire",
+            "Lire les graduations d’un graphique",
+            "graduations régulièrement espacées",
+            "un axe qui commence à 4 peut amplifier visuellement une différence",
+        ),
+        ROOT / "apprendre" / "fiches" / "sciences-calculer-vitesse-moyenne.html": (
+            "Statut éditorial : Prototype à relire",
+            "Calculer une vitesse moyenne simple",
+            "18 m ÷ 3 s = 6 m/s",
+            "ne dit pas à quelle vitesse l’objet allait à chaque instant",
+        ),
+        ROOT / "apprendre" / "fiches" / "sciences-distinguer-melange-changement-etat.html": (
+            "Statut éditorial : Prototype à relire",
+            "Distinguer fusion et dissolution",
+            "La fusion est un changement d’état",
+            "Aucun mélange réel n’est demandé",
+        ),
+        ROOT / "apprendre" / "fiches" / "geo-decrire-paysage.html": (
+            "Statut éditorial : Prototype à relire",
+            "Décrire un paysage sans lui faire dire trop",
+            "ne donne ni le nombre d’habitants",
+            "description écrite entièrement fictive",
+        ),
+        ROOT / "apprendre" / "fiches" / "info-lire-adresse-web.html": (
+            "Statut éditorial : Prototype à relire",
+            "Repérer les parties d’une adresse Web",
+            "https://site-fictif.test/agenda?jour=mardi",
+            "HTTPS seul n’atteste pas",
+            "Aucun lien réel n’est à ouvrir",
+        ),
+        ROOT / "apprendre" / "fiches" / "arts-lire-cartel.html": (
+            "Statut éditorial : Prototype à relire",
+            "Lire une notice d’œuvre en séparant faits et interprétations",
+            "La notice indique le titre",
+            "l’artiste",
+            "notice entièrement fictive",
+        ),
+        ROOT / "apprendre" / "fiches" / "recherche-question-hypothese.html": (
+            "Statut éditorial : Prototype à relire",
+            "Formuler une question et une hypothèse de recherche",
+            "une prédiction à examiner, pas un résultat établi",
+            "Aucun essai réel n’est demandé",
+        ),
+        ROOT / "apprendre" / "fiches" / "fr-lire-ponctuation.html": (
+            "Statut éditorial : Prototype à relire",
+            "Lire la ponctuation pour comprendre une phrase",
+            "le point d’interrogation invite le plus clairement à répondre",
+            "Le signe seul ne permet pas de savoir",
+            "ne traite pas la virgule",
+        ),
+        ROOT / "apprendre" / "fiches" / "langue-anglais-epeler.html": (
+            "Statut éditorial : Prototype à relire",
+            "Demander comment épeler un mot en anglais",
+            "How do you spell Maya?",
+            "Could you spell that, please?",
+            "ne fournit pas d’audio",
+        ),
+        ROOT / "apprendre" / "fiches" / "maths-lire-tableau-croise.html": (
+            "Statut éditorial : Prototype à relire",
+            "Lire une information à l’intersection d’un tableau",
+            "salle A l’après-midi",
+            "la ligne Mardi croisée avec la colonne Matin",
+            "Un tableau organisé ne garantit pas que les données sont exactes ou complètes",
+        ),
+        ROOT / "apprendre" / "fiches" / "maths-reperer-angle-droit.html": (
+            "Statut éditorial : Prototype à relire",
+            "Repérer un angle droit",
+            "angle de 90 degrés",
+            "L’ouverture compte, pas la longueur des côtés",
+            "une comparaison visuelle ne remplace pas une mesure précise",
+        ),
+        ROOT / "apprendre" / "fiches" / "sciences-cycle-vie-plante.html": (
+            "Statut éditorial : Prototype à relire",
+            "Repérer les grandes étapes de vie d’une plante à fleurs",
+            "une graine germe, devient une jeune pousse",
+            "Les cycles et modes de reproduction varient selon les espèces",
+            "ne s’applique pas à toutes les formes de vie végétale",
+        ),
+        ROOT / "apprendre" / "fiches" / "geo-lire-legende-carte.html": (
+            "Statut éditorial : Prototype à relire",
+            "Lire une légende sur une carte",
+            "La légende explique les symboles choisis pour une carte donnée",
+            "ne donne aucun itinéraire",
+            "ni sa sécurité, ni son accessibilité",
+        ),
+        ROOT / "apprendre" / "fiches" / "histoire-situer-siecle.html": (
+            "Statut éditorial : Prototype à relire",
+            "Situer une année dans un siècle",
+            "1789 est dans le XVIIIe siècle",
+            "1900 est la dernière année du XIXe siècle",
+            "ne couvre pas les dates avant notre ère",
+        ),
+        ROOT / "apprendre" / "fiches" / "info-systeme-exploitation.html": (
+            "Statut éditorial : Prototype à relire",
+            "Comprendre le rôle d’un système d’exploitation",
+            "Le système d’exploitation fournit des fonctions de base",
+            "ne décrit pas comment installer, mettre à jour, réparer ou modifier un système",
+        ),
+        ROOT / "apprendre" / "fiches" / "numerique-formuler-recherche.html": (
+            "Statut éditorial : Prototype à relire",
+            "Formuler une recherche sur le Web",
+            "L’ordre des résultats ne prouve ni leur exactitude ni leur indépendance",
+            "Ne partage pas une donnée personnelle",
+            "ne promet pas une syntaxe universelle",
+        ),
+        ROOT / "apprendre" / "fiches" / "recherche-conserver-reference.html": (
+            "Statut éditorial : Prototype à relire",
+            "Garder la trace d’une source pour la retrouver",
+            "Observatoire des jardins-exemple",
+            "une référence n’est ni une preuve automatique ni une permission de reproduire le contenu",
+            "cette fiche ne définit pas de format officiel",
+        ),
         ROOT / "docs" / "apprentissage" / "grille-relecture.md": (
             "Dossier en cours — `recherche-lire-etude`",
             "ne pas considérer comme validé ni prêt à la diffusion publique",
             "Dossiers en cours — prototypes de mathématiques",
             "Dossiers en cours — cinq prototypes informatique, techniques et civiques",
+            "Dossier en cours — `econ-lire-facture`",
+            "Dossier en cours — `econ-comparer-prix-unitaires`",
+            "Dossiers en cours — sept prototypes de lecture, langues, repères et autonomie",
+            "Dossiers en cours — huit prototypes de communication, sciences, histoire, informatique et arts",
+            "Dossiers en cours — huit prototypes de français, mathématiques, sciences, géographie, Web, arts et recherche",
+            "Dossiers en cours — dix prototypes de français, anglais, mathématiques, sciences, géographie, informatique et recherche",
+            "La couverture de `factures-abonnements` reste partielle",
+            "Pour l’ensemble des quarante-quatre prototypes décrits ici",
+            "Une revue interne de cohérence des 26 prototypes alors présents",
+            "Les huit fiches ajoutées dans le lot suivant et les dix fiches distinctes du lot courant ne sont pas couvertes par cette revue",
+            "fr-reperer-idee-texte",
+            "langue-anglais-demander-aide",
+            "geo-points-cardinaux",
+            "histoire-lire-frise",
+            "maths-probabilite-tirage",
+            "numerique-organiser-fichiers",
+            "methodes-demander-clarification",
+            "fr-preparer-explication-orale",
+            "fr-argumenter-avec-exemple",
+            "maths-equation-simple",
+            "sciences-meteo-climat",
+            "histoire-comparer-sources",
+            "info-bits-octets",
+            "prog-tester-exemples",
+            "arts-composer-formes",
+            "fr-comprendre-mot-contexte",
+            "maths-lire-echelle-graphique",
+            "sciences-calculer-vitesse-moyenne",
+            "sciences-distinguer-melange-changement-etat",
+            "geo-decrire-paysage",
+            "info-lire-adresse-web",
+            "arts-lire-cartel",
+            "recherche-question-hypothese",
+            "fr-lire-ponctuation",
+            "langue-anglais-epeler",
+            "maths-lire-tableau-croise",
+            "maths-reperer-angle-droit",
+            "sciences-cycle-vie-plante",
+            "geo-lire-legende-carte",
+            "histoire-situer-siecle",
+            "info-systeme-exploitation",
+            "numerique-formuler-recherche",
+            "recherche-conserver-reference",
             "prog-comparer-langages",
             "aucun essai apprenant ou contrôle visuel en vrai navigateur n’a encore été réalisé",
         ),
         ROOT / "docs" / "apprentissage" / "objectif-1000.md": (
             "1 000 fiches d’auto-apprentissage",
-            "cible, pas catalogue disponible",
+            "70 entrées",
+            "44 prototypes explicitement à relire",
+            "930 entrées",
             "aucun lien, compte ou service externe n’est requis",
         ),
         ROOT / "docs" / "rd-parcours-apprentissage.md": (
             "docs/apprentissage/grille-relecture.md",
             "la date de contrôle des droits, le mode d’utilisation et une description de cette utilisation",
-            "35 fiches suivies dans 15 domaines",
-            "9 fiches explicitement marquées",
+            "70 fiches suivies dans 15 domaines",
+            "44 prototypes explicitement à relire",
+            "33 fiches de développement produites en quatre lots de 7, 8, 8 et 10",
+            "ponctuation, épellation, géométrie, biologie, cartographie, repères historiques, systèmes d’exploitation et recherche documentaire",
+            "fr-reperer-idee-texte",
+            "langue-anglais-demander-aide",
+            "geo-points-cardinaux",
+            "histoire-lire-frise",
+            "maths-probabilite-tirage",
+            "numerique-organiser-fichiers",
+            "methodes-demander-clarification",
+            "fr-preparer-explication-orale",
+            "fr-argumenter-avec-exemple",
+            "maths-equation-simple",
+            "sciences-meteo-climat",
+            "histoire-comparer-sources",
+            "info-bits-octets",
+            "prog-tester-exemples",
+            "arts-composer-formes",
+            "fr-comprendre-mot-contexte",
+            "maths-lire-echelle-graphique",
+            "sciences-calculer-vitesse-moyenne",
+            "sciences-distinguer-melange-changement-etat",
+            "geo-decrire-paysage",
+            "info-lire-adresse-web",
+            "arts-lire-cartel",
+            "recherche-question-hypothese",
+            "fr-lire-ponctuation",
+            "langue-anglais-epeler",
+            "maths-lire-tableau-croise",
+            "maths-reperer-angle-droit",
+            "sciences-cycle-vie-plante",
+            "geo-lire-legende-carte",
+            "histoire-situer-siecle",
+            "info-systeme-exploitation",
+            "numerique-formuler-recherche",
+            "recherche-conserver-reference",
+            "econ-lire-facture",
+            "econ-comparer-prix-unitaires",
+            "le budget/prix comme les factures/abonnements sont partiels",
+            "Le premier lot de développement (sept fiches",
+            "Le lot de huit fiches de communication, sciences, histoire, informatique et arts",
+            "Le lot suivant de huit fiches",
+            "Les dix fiches du présent lot (`fr-lire-ponctuation`, `langue-anglais-epeler`, `maths-lire-tableau-croise`, `maths-reperer-angle-droit`, `sciences-cycle-vie-plante`, `geo-lire-legende-carte`, `histoire-situer-siecle`, `info-systeme-exploitation`, `numerique-formuler-recherche`, `recherche-conserver-reference`)",
             "Première couverture informatique, programmation, électricité et électronique",
             "docs/apprentissage/sources-utilite-publique.md",
             "les deux se sont terminées sans erreur et ont produit les mêmes trois lignes",
+        ),
+        ROOT / "docs" / "apprentissage" / "revue-interne-prototypes-2026-10-11.md": (
+            "relecture interne de cohérence menée par l’agent",
+            "les 26 fiches du catalogue",
+            "les 26 fiches restent des prototypes non validés",
+            "Les huit fiches ajoutées après cette relecture",
+            "fr-comprendre-mot-contexte",
+            "maths-lire-echelle-graphique",
+            "sciences-calculer-vitesse-moyenne",
+            "sciences-distinguer-melange-changement-etat",
+            "geo-decrire-paysage",
+            "info-lire-adresse-web",
+            "arts-lire-cartel",
+            "recherche-question-hypothese",
+            "Python et JavaScript ont été exécutés séparément",
+            "maths-probabilite-tirage",
+            "sciences-meteo-climat",
+            "arts-composer-formes",
+            "Les liens externes n’ont pas été visités ou vérifiés un à un",
+            "aucun droit de réutilisation n’est certifié",
+            "Les validations visuelles, clavier/lecteur d’écran et essais avec des personnes apprenantes n’ont pas été réalisés",
+            "recherche-lire-etude",
+            "maths-convertir-unites",
+            "maths-moyenne",
+            "maths-estimer-calcul",
+            "info-ordinateur-fonctions",
+            "prog-comparer-langages",
+            "tech-circuit-ouvert-ferme",
+            "tech-electronique-capteur",
+            "civ-choisir-source-publique",
+            "econ-lire-facture",
+            "econ-comparer-prix-unitaires",
+            "fr-reperer-idee-texte",
+            "langue-anglais-demander-aide",
+            "geo-points-cardinaux",
+            "histoire-lire-frise",
+            "maths-probabilite-tirage",
+            "numerique-organiser-fichiers",
+            "methodes-demander-clarification",
+            "fr-preparer-explication-orale",
+            "fr-argumenter-avec-exemple",
+            "maths-equation-simple",
+            "sciences-meteo-climat",
+            "histoire-comparer-sources",
+            "info-bits-octets",
+            "prog-tester-exemples",
+            "arts-composer-formes",
+        ),
+        ROOT / "docs" / "rd-coherence-visuelle-editoriale.md": (
+            "70 entrées au catalogue : 26 fiches du corpus initial et 44 prototypes explicitement à relire",
+            "33 fiches de développement réparties en quatre lots ouvrent des points d’entrée",
+            "70 pages générées, dont quarante-quatre prototypes à relire",
         ),
         ROOT / "docs" / "apprentissage" / "sources-utilite-publique.md": (
             "Consultation documentaire : 8 octobre 2026",
@@ -429,6 +983,16 @@ def verifier_dossier_apprentissage() -> None:
         absentes = [expression for expression in expressions if expression.casefold() not in contenu.casefold()]
         if absentes:
             signaler(f"{relatif} : état de relecture/droits absent : {'; '.join(absentes)}")
+    catalogue_path = ROOT / "apprendre.html"
+    if catalogue_path.is_file():
+        catalogue_html = catalogue_path.read_text(encoding="utf-8")
+        filtre = re.search(r'<select id="matiere-fiches"[^>]*>(.*?)</select>', catalogue_html, re.DOTALL)
+        if not filtre:
+            signaler("apprendre.html : filtre des matières absent")
+        else:
+            valeurs = re.findall(r'<option\s+value="([^"]*)">', filtre.group(1))
+            if len(valeurs) != len(set(valeurs)):
+                signaler("apprendre.html : une matière apparaît plusieurs fois dans le filtre")
     if not ERREURS:
         print("R&D apprentissages : objectif 1 000, autonomie, statut du prototype et grille de relecture vérifiés.")
 
@@ -492,6 +1056,77 @@ def verifier_espaces_finaux(fichiers: list[Path]) -> None:
         print(f"Espaces de fin de ligne : aucun espace final sur {len(fichiers)} pages HTML.")
 
 
+def verifier_collecte_navigateur_bornee() -> None:
+    chemin = ROOT / "simulateur" / "interface.py"
+    contenu = chemin.read_text(encoding="utf-8")
+    marqueurs = (
+        "const LIMITE_JSON_SOURCE_NAVIGATEUR = 8_388_608;",
+        "const DELAI_SOURCE_NAVIGATEUR_MS = 8_000;",
+        "const DELAI_COLLECTE_NAVIGATEUR_MS = 60_000;",
+        "async function fetchJsonSourceBorne(",
+        "new AbortController()",
+        "redirect:'error'",
+        "reponse.body.getReader()",
+        "await lecteur.cancel()",
+        "fetchJsonSourceBorne(\n          source.url",
+        "fetchJsonSourceBorne(\n          indicateur.proxy_url",
+    )
+    sans_fetch_direct_non_borne = (
+        "await fetch(source.url" not in contenu
+        and "await fetch(indicateur.proxy_url" not in contenu
+    )
+    if not all(marqueur in contenu for marqueur in marqueurs) or not sans_fetch_direct_non_borne:
+        signaler("simulateur/interface.py : collecte navigateur sans limites de taille/durée vérifiables")
+    else:
+        print("Collecte navigateur : redirections refusées, JSON plafonné à 8 Mio, 8 s par requête et 60 s par cycle.")
+
+
+def verifier_affichage_provenance_sans_injection() -> None:
+    interface = (ROOT / "simulateur" / "interface.py").read_text(encoding="utf-8")
+    donnees = (ROOT / "simulateur" / "donnees_live.py").read_text(encoding="utf-8")
+    marqueurs_interface = (
+        "${echapperTexte(sous)}",
+        "Object.prototype.hasOwnProperty.call(libelles, mode)",
+        "période ${echapperTexte(info.periode)}",
+        "collecté le ${echapperTexte(info.date_collecte)}",
+        "qualité : ${echapperTexte(info.qualite)}",
+    )
+    marqueurs_serveur = (
+        "def _periode_sure(valeur: Any)",
+        "def _code_qualite_sure(valeur: Any)",
+        "_horodatage_sure(lecture.horodatage)[:10]",
+    )
+    if not all(marqueur in interface for marqueur in marqueurs_interface) or not all(
+        marqueur in donnees for marqueur in marqueurs_serveur
+    ):
+        signaler("simulateur : provenance externe non neutralisée avant affichage HTML")
+    else:
+        print("Provenance externe : périodes, dates et qualités neutralisées côté serveur et échappées au rendu.")
+
+
+def verifier_limites_requetes_api() -> None:
+    dashboard = (ROOT / "simulateur" / "dashboard.py").read_text(encoding="utf-8")
+    wsgi = (ROOT / "simulateur" / "wsgi.py").read_text(encoding="utf-8")
+    marqueurs_dashboard = (
+        "MAX_REQUEST_TARGET_BYTES = 16_384",
+        "MAX_QUERY_FIELDS = 128",
+        "parse_qs(parsed.query, max_num_fields=MAX_QUERY_FIELDS)",
+        "len(cles_brutes) > MAX_BULLES_PAR_REQUETE",
+        "cles = list(dict.fromkeys(cles_brutes)) or None",
+        "raise RequetesBullesOccupees",
+    )
+    marqueurs_wsgi = (
+        "longueur_cible = len(chemin) + (1 + len(query) if query else 0)",
+        "longueur_cible > MAX_REQUEST_TARGET_BYTES",
+    )
+    if not all(marqueur in dashboard for marqueur in marqueurs_dashboard) or not all(
+        marqueur in wsgi for marqueur in marqueurs_wsgi
+    ):
+        signaler("simulateur : limites de cible HTTP ou calcul de bulles concurrent absents")
+    else:
+        print("API simulateur : cible limitée à 16 Kio, 128 champs et calculs de bulles sérialisés par processus.")
+
+
 def main() -> int:
     fichiers = [chemin for chemin in PAGES if chemin.is_file()]
     if not fichiers:
@@ -501,9 +1136,14 @@ def main() -> int:
     verifier_espaces_finaux(fichiers)
     verifier_liens(infos)
     verifier_dependances_apprentissage()
+    verifier_catalogue_apprentissage()
     verifier_dossier_apprentissage()
+    verifier_aventure_anglais()
     verifier_note_rnd()
     verifier_registres_sans_references_retirees()
+    verifier_collecte_navigateur_bornee()
+    verifier_affichage_provenance_sans_injection()
+    verifier_limites_requetes_api()
     verifier_sitemap()
     verifier_javascript(infos)
     print(f"Pages contrôlées : {len(fichiers)} (dont {len(list((ROOT / 'apprendre' / 'fiches').glob('*.html')))} fiches autonomes).")

@@ -66,7 +66,7 @@ import traceback
 from collections.abc import Callable
 from typing import Any
 
-from .dashboard import DashboardHandler
+from .dashboard import DashboardHandler, MAX_REQUEST_BODY_BYTES, MAX_REQUEST_TARGET_BYTES
 
 #: En-têtes que le serveur WSGI (ou le proxy devant lui) doit fixer lui-même.
 #: ``Connection`` doit disparaître : laisser « Connection: close » remonter
@@ -108,13 +108,19 @@ def _requete_brute(environ: dict[str, Any]) -> bytes:
     return entetes + b"\r\n\r\n" + _corps(environ)
 
 
+class _RequeteTropVolumineuse(Exception):
+    """Signal interne : le corps HTTP dépasse la limite de l'application."""
+
+
 def _corps(environ: dict[str, Any]) -> bytes:
     """Lit le corps de la requête dans ``wsgi.input``, sans jamais bloquer."""
     brut = environ.get("CONTENT_LENGTH") or environ.get("HTTP_CONTENT_LENGTH") or "0"
     try:
         longueur = max(0, int(brut))
-    except ValueError:
+    except (TypeError, ValueError):
         longueur = 0
+    if longueur > MAX_REQUEST_BODY_BYTES:
+        raise _RequeteTropVolumineuse
     if longueur == 0:
         return b""
     flux = environ.get("wsgi.input")
@@ -193,17 +199,41 @@ def creer_application() -> Callable[[dict[str, Any], Any], list[bytes]]:
     """Fabrique l'application WSGI (une seule instance suffit par processus)."""
 
     def application(environ: dict[str, Any], start_response: Any) -> list[bytes]:
-        requete = _RequeteWSGI(environ)
+        chemin = environ.get("PATH_INFO") or "/"
+        query = environ.get("QUERY_STRING") or ""
+        longueur_cible = len(chemin) + (1 + len(query) if query else 0)
+        if longueur_cible > MAX_REQUEST_TARGET_BYTES:
+            message = b"Cible de requete trop longue."
+            start_response("414 URI Too Long", [
+                ("Content-Type", "text/plain; charset=utf-8"),
+                ("Content-Length", str(len(message))),
+                ("Cache-Control", "no-store"),
+                ("X-Content-Type-Options", "nosniff"),
+            ])
+            return [message]
         try:
+            requete = _RequeteWSGI(environ)
             requete.handle_one_request()
+        except _RequeteTropVolumineuse:
+            message = b"Corps de requete trop volumineux (limite : 1 Mio)."
+            start_response("413 Payload Too Large", [
+                ("Content-Type", "text/plain; charset=utf-8"),
+                ("Content-Length", str(len(message))),
+                ("Cache-Control", "no-store"),
+                ("X-Content-Type-Options", "nosniff"),
+            ])
+            return [message]
         except Exception:  # noqa: BLE001 - on doit répondre, pas propager
             # Le serveur WSGI doit toujours recevoir une réponse ; sans quoi
             # l'hébergeur renvoie un 502 opaque. La trace part dans les
             # journaux de la plateforme, jamais dans la réponse.
             traceback.print_exc(file=sys.stderr)
-            start_response("500 Internal Server Error",
-                           [("Content-Type", "text/plain; charset=utf-8"),
-                            ("Content-Length", str(len(_MESSAGE_ERREUR)))])
+            start_response("500 Internal Server Error", [
+                ("Content-Type", "text/plain; charset=utf-8"),
+                ("Content-Length", str(len(_MESSAGE_ERREUR))),
+                ("Cache-Control", "no-store"),
+                ("X-Content-Type-Options", "nosniff"),
+            ])
             return [_MESSAGE_ERREUR]
 
         entetes = [(nom, valeur) for nom, valeur in requete._entetes

@@ -6,7 +6,8 @@ Ce document explique **comment l’outil fonctionne sur le site**, **comment le 
 
 1. Le simulateur évolue dans **son dépôt** et sa version publique est hébergée sur Render à
    [`https://simulateur-macro-politique.onrender.com/`](https://simulateur-macro-politique.onrender.com/).
-   Le site M.R.S.C conserve aussi une **copie datée** du moteur et de sa page.
+   Le site M.R.S.C conserve aussi une **copie datée** du moteur et de sa page, à laquelle
+   il applique un correctif de sécurité local versionné.
 2. `simulateur.html` connaît deux sources : la version Render, sélectionnée si la page et son
    API répondent, puis la copie embarquée si l’hébergement du site exécute ses fonctions Python.
    Sur un hébergement purement statique, la page donne un lien direct vers Render.
@@ -28,7 +29,7 @@ Il expose une page interactive et 16 routes HTTP (`/api/catalogue`, `/api/contex
 
 | Contrainte | Conséquence |
 |---|---|
-| Le moteur vit dans son dépôt, il ne faut pas le modifier | Le site en embarque une **copie datée** dans `simulateur/`, avec sa provenance et un script de mise à jour |
+| Le moteur amont doit rester identifiable et facile à mettre à jour | Le site en embarque une **copie datée** dans `simulateur/`, puis applique le patch versionné `outils/patchs/simulateur-securite-mrsc.patch` ; un échec d’application doit bloquer la mise à jour |
 | Le site est publié sans étape de build ; certains hébergeurs peuvent exécuter Python | La page locale du moteur est **générée une fois** en fichier HTML ; les routes locales sont exposées par des **fonctions** (`api/*.py`) |
 
 ## 2. Architecture
@@ -49,6 +50,7 @@ site M.R.S.C
 │   ├── construire-simulateur.py      ← génère simulateur/index.html depuis le moteur
 │   ├── generer-fonctions-api.py      ← génère api/*.py depuis les routes du moteur
 │   ├── verifier-integration.py       ← contrôle tout, sans navigateur
+│   ├── verifier-securite.py          ← tests HTTP/WSGI ciblés, sans réseau externe
 │   ├── verifier-source-distante.py   ← la version en ligne est-elle utilisable ?
 │   ├── verifier-maj-amont.py         ← le moteur embarqué a-t-il pris du retard ?
 │   └── serveur-local.py              ← aperçu local complet (site + API + bascule)
@@ -66,9 +68,9 @@ Le générateur ajoute en plus des boutons A−/A+ (100, 125 et 150 %), contrast
 
 ### À quoi sert `simulateur/pont_api.py` ?
 
-Le moteur route sur son propre `self.path` (`/api/catalogue`, `/api/simuler`…). Sur Vercel, chaque fichier de `api/` devient une route distincte : `FonctionAPI` réécrit le chemin reçu sur la route déclarée par la sous-classe, puis délègue au gestionnaire du moteur. Le comportement des routes est donc **exactement** celui du moteur, sans en modifier une ligne.
+Le moteur route sur son propre `self.path` (`/api/catalogue`, `/api/simuler`…). Sur Vercel, chaque fichier de `api/` devient une route distincte : `FonctionAPI` réécrit le chemin reçu sur la route déclarée par la sous-classe, puis délègue au gestionnaire. La copie locale conserve le comportement métier amont, mais le patch M.R.S.C borne les requêtes, retire les traces d’erreur des réponses, valide les provenances, rend les lectures navigateur propres à la requête et échappe les champs affichés. Ce patch ne s’applique pas au service Render hébergé dans l’autre dépôt.
 
-C’est aussi ce fichier qui place le cache des données publiques dans `/tmp` : sur un hébergeur à fonctions, le dossier du projet est en lecture seule.
+C’est aussi ce fichier qui place le cache des données publiques dans `/tmp` : sur un hébergeur à fonctions, le dossier du projet est en lecture seule. Les lectures `/api/proxy` sont gardées en cache 60 secondes ; si une collecte externe, un rafraîchissement des marchés ou le calcul d’un catalogue complet de bulles est déjà en cours, un nouvel appel coûteux reçoit rapidement HTTP 503 au lieu d’empiler des threads. Les cibles de requête sont limitées à 16 Kio et 128 champs ; les sélections de leviers en double sont dédupliquées. Les réponses des séries macro sont plafonnées à 8 Mio, celles des cotations à 1 Mio ; les deux clients refusent les redirections HTTP. En cas d’échec, le moteur essaie une autre source déclarée ou une référence datée. Ces limites restent propres à chaque processus, pas globales entre instances.
 
 ### Les trois modes d’exécution
 
@@ -91,13 +93,14 @@ python3 outils/mettre-a-jour-simulateur.py --revision <branche|étiquette|commit
 python3 outils/mettre-a-jour-simulateur.py --depuis /chemin/vers/un/clone   # sans réseau
 ```
 
-Le script copie les fichiers du paquet, **conserve** ceux listés dans `fichiers_ajoutes_par_le_site` (dont `pont_api.py`), met à jour `PROVENANCE.json`, puis régénère la page.
+Le script copie d’abord le paquet dans un dossier temporaire, **conserve** ceux listés dans `fichiers_ajoutes_par_le_site` (dont `pont_api.py`), vérifie que `outils/patchs/simulateur-securite-mrsc.patch` s’applique, puis seulement remplace la copie locale, met à jour `PROVENANCE.json` (y compris l’empreinte SHA-256 du patch) et régénère la page. En cas de conflit, il s’arrête avant de remplacer le moteur ; si l’amont contient déjà le patch complet, il le détecte. Vérifier le patch et l’intégration à chaque mise à jour amont ; le service Render doit être corrigé séparément dans son dépôt.
 
 Après toute mise à jour, et en cas de doute :
 
 ```sh
 python3 outils/generer-fonctions-api.py --verifier   # les routes exposées couvrent-elles le moteur ?
 python3 outils/construire-simulateur.py --verifier   # la page publiée est-elle à jour ?
+python3 outils/verifier-securite.py                  # régressions ciblées, sans réseau externe
 python3 outils/verifier-integration.py               # page, fonctions, et chaque route interrogée
 ```
 
@@ -114,7 +117,7 @@ Vercel peut héberger **le site M.R.S.C** et les fonctions Python qui permettent
 3. Vérifier après déploiement : `/` (accueil), `/simulateur.html` (présentation), `/simulateur/` (outil), `/api/scenarios` (JSON).
 4. **Security → Deployment Protection → Vercel Authentication : Disabled** — sinon un visiteur non connecté voit la page de connexion Vercel à la place du site.
 
-`vercel.json` fixe la durée maximale (60 s) et la mémoire (1 024 Mo) des fonctions : les routes les plus lourdes (`/api/bulles`, `/api/simuler`) ont besoin de quelques secondes à froid. Si l’offre refuse ces valeurs, retirez la clé `functions` : les valeurs par défaut suffisent en général. Aucune dépendance Python n’est à installer, et la version par défaut (3.12) convient au moteur (qui demande ≥ 3.11).
+`vercel.json` fixe la durée maximale (60 s) et la mémoire (1 024 Mo) des fonctions : les routes les plus lourdes (`/api/bulles`, `/api/simuler`) ont besoin de quelques secondes à froid. Il ajoute aussi des en-têtes de base (`nosniff`, HSTS, politique de référent, permissions, framing et CSP limitée). Cette CSP ne définit pas `script-src` : le moteur contient encore du JavaScript inline. Ne pas la présenter comme une protection XSS complète ni la transposer à Render sans test d’iframe. GitHub Pages n’applique pas cette configuration. Si l’offre refuse les paramètres `functions`, retirez-les : les valeurs par défaut suffisent en général. Aucune dépendance Python n’est à installer, et la version par défaut (3.12) convient au moteur (qui demande ≥ 3.11).
 
 ### GitHub Pages (présentation seule)
 
@@ -123,10 +126,10 @@ Le workflow `.github/workflows/deploy-pages.yml` publie les pages du site, la no
 ### Local
 
 ```sh
-python3 outils/serveur-local.py --port 4173 --bind 0.0.0.0
+python3 outils/serveur-local.py --port 4173
 ```
 
-Ouvrir `http://localhost:4173/simulateur.html`. Le moteur démarre en interne sur le port suivant ; `--sans-moteur` sert uniquement les fichiers statiques.
+Ouvrir `http://localhost:4173/simulateur.html`. Le serveur écoute sur `127.0.0.1` et ne sert que les fichiers destinés à la publication ; le moteur démarre en interne sur le port suivant. N’utilisez `--bind 0.0.0.0` que si un accès depuis le réseau est nécessaire et compris ; `--sans-moteur` sert uniquement les fichiers statiques.
 
 ## 5. Rester à jour : source Render et copie embarquée
 
@@ -152,7 +155,7 @@ Le simulateur évolue dans son dépôt ; le site M.R.S.C sélectionne la version
 
 La vérification de la source distante est faite côté serveur : le navigateur ne peut pas lire la réponse
 provenant d’une autre origine. Cela évite d’afficher une page de présentation comme si c’était le simulateur.
-Sur un hébergement statique, qui n’exécute pas cette fonction ni l’API locale, le lien direct reste disponible.
+La fonction n’appelle que l’hôte Render attendu ou un hôte HTTPS explicitement autorisé pour une préproduction ; elle refuse les identifiants, chemins arbitraires et redirections. L’exception localhost est réservée aux tests locaux par variable d’environnement. La query publique ne permet pas de contourner le cache de cinq minutes. Sur un hébergement statique, qui n’exécute pas cette fonction ni l’API locale, le lien direct reste disponible.
 
 Pour vérifier l’adresse Render depuis un environnement qui autorise les requêtes sortantes :
 

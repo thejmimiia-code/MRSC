@@ -1,0 +1,1471 @@
+diff --git a/simulateur/dashboard.py b/simulateur/dashboard.py
+index 6ee573d..dde97b2 100644
+--- a/simulateur/dashboard.py
++++ b/simulateur/dashboard.py
+@@ -34,9 +34,12 @@ import argparse
+ import csv as csv_mod
+ import json
+ import os
++import re
+ import sys
+ import traceback
+-from dataclasses import asdict
++from time import monotonic
++from dataclasses import asdict, replace
++from datetime import UTC, datetime
+ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+ from pathlib import Path
+ from threading import Lock
+@@ -51,11 +54,13 @@ from simulateur.conseil import conseil_mouvement
+ from simulateur.donnees_live import (
+     INDICATEURS,
+     Lecture,
++    _CORRESPONDANCE,
++    _plage_valeur_sure,
+     browser_payload,
+     charger_cache,
+     construire_contexte,
+     interroger,
+-    sauver_cache,
++    libelle_qualite,
+ )
+ from simulateur.interface import HTML_PAGE
+ from simulateur.lexique import lexique_public
+@@ -68,7 +73,7 @@ from simulateur.moteur_parametrique import (
+     simuler as simuler_parametrique,
+ )
+ from simulateur.observatoire import observatoire_public
+-from simulateur.parametres import PRESETS
++from simulateur.parametres import LEVIERS, PRESETS
+ from simulateur.seuils import bareme_public
+ 
+ #: Catalogue des scénarios historiques : clé → (fabrique de décisions, nom,
+@@ -147,6 +152,156 @@ SCENARIOS: dict[str, dict[str, Any]] = {
+ #: Référence de contexte réutilisée entre les requêtes (mise en cache mémoire).
+ _CONTEXTE_CACHE: dict[str, Any] = {"contexte": None}
+ 
++#: Limites applicatives des requêtes, communes au serveur HTTP et au pont WSGI.
++MAX_REQUEST_BODY_BYTES = 1_048_576
++MAX_REQUEST_TARGET_BYTES = 16_384
++MAX_QUERY_FIELDS = 128
++MAX_BULLES_PAR_REQUETE = len(LEVIERS)
++_CORPS_TROP_VOLUMINEUX = object()
++_CORPS_INVALIDE = object()
++
++
++def _analyser_cible_requete(
++    cible: str,
++) -> tuple[Any | None, dict[str, list[str]] | None, int]:
++    """Borne la cible HTTP avant de parser ses paramètres de requête."""
++    if len(cible) > MAX_REQUEST_TARGET_BYTES:
++        return None, None, 414
++    try:
++        parsed = urlparse(cible)
++        query = parse_qs(parsed.query, max_num_fields=MAX_QUERY_FIELDS)
++    except ValueError:
++        return None, None, 400
++    return parsed, query, 0
++
++
++def _plage_valeur_navigateur(indicateur, valeur: float) -> bool:
++    """Utilise la même plage de confiance que les lectures serveur et le cache."""
++    return _plage_valeur_sure(indicateur, valeur)
++
++
++def _texte_source_navigateur(valeur: Any, maximum: int = 48) -> str | None:
++    """Garde seulement les caractères de période utilisables sans balisage."""
++    if not isinstance(valeur, str):
++        return None
++    texte = valeur.strip()
++    if not texte or len(texte) > maximum or not re.fullmatch(r"[\w .:/+\-]+", texte):
++        return None
++    return texte
++
++
++def _lectures_navigateur_sures(lectures_brutes: Any) -> dict[str, Lecture]:
++    """Valide les mesures et reprend leur provenance depuis le registre local.
++
++    Ces données ne sont que des entrées de la requête qui les a envoyées : elles
++    ne sont jamais écrites dans le cache partagé et ne contaminent pas le
++    contexte servi aux autres visiteurs.
++    """
++    if not isinstance(lectures_brutes, dict):
++        return {}
++    resultat: dict[str, Lecture] = {}
++    for cle, brut in list(lectures_brutes.items())[:len(INDICATEURS)]:
++        indicateur = INDICATEURS.get(cle)
++        if indicateur is None or not isinstance(brut, dict):
++            continue
++        source = next(
++            (source for source in indicateur.sources if source.url == brut.get("url")),
++            None,
++        )
++        if source is None:
++            continue
++        try:
++            valeur = float(brut.get("valeur"))
++        except (TypeError, ValueError, OverflowError):
++            continue
++        if not _plage_valeur_navigateur(indicateur, valeur):
++            continue
++        periode = _texte_source_navigateur(brut.get("periode"))
++        code_brut = brut.get("qualite_code")
++        qualite = (
++            code_brut
++            if isinstance(code_brut, str)
++            and len(code_brut) <= 8
++            and re.fullmatch(r"[A-Za-z0-9_-]+", code_brut)
++            else None
++        )
++        statut = brut.get("statut")
++        if statut not in ("live", "reference"):
++            statut = "live"
++        resultat[cle] = Lecture(
++            cle=cle,
++            valeur=valeur,
++            periode=periode,
++            fournisseur=source.fournisseur,
++            url=source.url,
++            statut=statut,
++            detail="lecture navigateur — provenance déclarée au registre",
++            qualite_code=qualite,
++        )
++    return resultat
++
++
++def _contexte_avec_lectures_navigateur(lectures_brutes: Any):
++    """Construit un contexte isolé pour une requête, sans muter le cache partagé."""
++    lectures = _lectures_navigateur_sures(lectures_brutes)
++    if not lectures:
++        return _CONTEXTE_CACHE.get("contexte") or construire_contexte(lectures=charger_cache())
++
++    base = _CONTEXTE_CACHE.get("contexte")
++    if base is None:
++        # Pour un appel direct, rester sans réseau plutôt que de transformer
++        # une simulation en déclencheur de collecte externe.
++        base = construire_contexte(lectures=charger_cache())
++
++    correspondance = {
++        cle_indicateur: champ for champ, cle_indicateur in _CORRESPONDANCE.items()
++    }
++    valeurs: dict[str, float] = {}
++    provenance = {cle: dict(info) for cle, info in base.provenance.items()}
++    complementaires = {cle: dict(info) for cle, info in base.series_complementaires.items()}
++    maintenant = datetime.now(UTC).isoformat(timespec="seconds")
++
++    for cle, lecture in lectures.items():
++        indicateur = INDICATEURS[cle]
++        source = next(source for source in indicateur.sources if source.url == lecture.url)
++        detail = {
++            "libelle": indicateur.libelle,
++            "unite": indicateur.unite,
++            "categorie": indicateur.categorie,
++            "periode": lecture.periode,
++            "date_collecte": maintenant[:10],
++            "frequence": indicateur.frequence,
++            "source": source.fournisseur,
++            "fournisseur": source.fournisseur,
++            "statut": lecture.statut,
++            "qualite_code": lecture.qualite_code,
++            "qualite": libelle_qualite(lecture.qualite_code),
++            "detail": lecture.detail,
++            "url": source.url,
++            "licence": source.licence,
++            "note": indicateur.note,
++            "valeur": lecture.valeur,
++        }
++        champ = correspondance.get(cle)
++        if champ:
++            valeurs[champ] = lecture.valeur
++            provenance[champ] = {**provenance.get(champ, {}), **detail}
++        else:
++            complementaires[cle] = detail
++
++    statuts = {info.get("statut", "reference") for info in provenance.values()}
++    mode = "live" if statuts == {"live"} else (
++        "reference" if statuts == {"reference"} else "mixte"
++    )
++    return replace(
++        base,
++        horodatage=maintenant,
++        mode=mode,
++        provenance=provenance,
++        series_complementaires=complementaires,
++        **valeurs,
++    )
++
+ 
+ # ────────────────────────────────────────────────────────────────────────────
+ # Simulation historique (API d'origine, conservée à l'identique)
+@@ -163,8 +318,10 @@ def run_simulation_api(scenario: str) -> dict[str, Any]:
+             "nom": SCENARIOS[scenario]["nom"],
+             "resultats": [asdict(r) for r in resultats],
+         }
+-    except Exception as exc:  # pragma: no cover - garde-fou
+-        return {"error": str(exc), "traceback": traceback.format_exc()}
++    except Exception:  # pragma: no cover - garde-fou
++        if os.environ.get("SIMULATEUR_LOG_ERREURS"):
++            traceback.print_exc(file=sys.stderr)
++        return {"error": "Erreur interne du simulateur. Réessayez plus tard."}
+ 
+ 
+ def contexte_courant(rafraichir: bool = False):
+@@ -176,34 +333,104 @@ def contexte_courant(rafraichir: bool = False):
+ 
+ _CACHE_BULLES: dict[tuple, Any] = {}
+ _VERROU_BULLES = Lock()
++_BULLES_EN_COURS = False
++_CACHE_PROXY: dict[str, tuple[float, Lecture]] = {}
++_VERROU_PROXY = Lock()
++DUREE_CACHE_PROXY_SECONDES = 60.0
++_CACHE_MARCHES_API: tuple[float, dict[str, Any]] | None = None
++_VERROU_MARCHES_API = Lock()
++DUREE_CACHE_MARCHES_SECONDES = 60.0
++
++
++class RequetesExternesOccupees(RuntimeError):
++    """Aucune nouvelle collecte externe n'est lancée pendant une autre."""
++
++
++class RequetesBullesOccupees(RuntimeError):
++    """Le calcul du catalogue de bulles est déjà en cours dans ce processus."""
++
++
++def cotations_api(actualiser: bool = False) -> dict[str, Any]:
++    """Limite à un rafraîchissement des marchés par minute et processus."""
++    global _CACHE_MARCHES_API
++    if not actualiser:
++        return obtenir_cotations(actualiser=False)
++    maintenant = monotonic()
++    if (
++        _CACHE_MARCHES_API is not None
++        and maintenant - _CACHE_MARCHES_API[0] < DUREE_CACHE_MARCHES_SECONDES
++    ):
++        resultat = dict(_CACHE_MARCHES_API[1])
++        resultat["rafraichissement_limite"] = True
++        return resultat
++    if not _VERROU_MARCHES_API.acquire(blocking=False):
++        raise RequetesExternesOccupees
++    try:
++        maintenant = monotonic()
++        if (
++            _CACHE_MARCHES_API is not None
++            and maintenant - _CACHE_MARCHES_API[0] < DUREE_CACHE_MARCHES_SECONDES
++        ):
++            resultat = dict(_CACHE_MARCHES_API[1])
++            resultat["rafraichissement_limite"] = True
++            return resultat
++        resultat = obtenir_cotations(actualiser=True)
++        _CACHE_MARCHES_API = (monotonic(), resultat)
++        return resultat
++    finally:
++        _VERROU_MARCHES_API.release()
++
++
++def lecture_proxy(cle: str, timeout: float = 12.0) -> Lecture:
++    """Mémoïse 60 s les relais et refuse sans attendre une collecte concurrente."""
++    maintenant = monotonic()
++    entree = _CACHE_PROXY.get(cle)
++    if entree and maintenant - entree[0] < DUREE_CACHE_PROXY_SECONDES:
++        return entree[1]
++    if not _VERROU_PROXY.acquire(blocking=False):
++        raise RequetesExternesOccupees
++    try:
++        maintenant = monotonic()
++        entree = _CACHE_PROXY.get(cle)
++        if entree and maintenant - entree[0] < DUREE_CACHE_PROXY_SECONDES:
++            return entree[1]
++        lecture = interroger(cle, timeout=timeout)
++        if len(_CACHE_PROXY) >= 128:
++            _CACHE_PROXY.clear()
++        _CACHE_PROXY[cle] = (monotonic(), lecture)
++        return lecture
++    finally:
++        _VERROU_PROXY.release()
+ 
+ 
+ def catalogue_bulles(contexte, cles=None, avec_mesure: bool = True, detail: str = "resume"):
+-    """Catalogue de bulles **mémoïsé** : le calcul complet coûte plusieurs secondes.
++    """Catalogue de bulles mémoïsé, avec un seul calcul coûteux par processus.
+ 
+-    Mesuré sur ce dépôt : la construction des 101 bulles « détail complet »
+-    prenait environ 4,6 s et produisait 2,1 Mio de JSON. Le contenu ne dépend
+-    que du catalogue des leviers et du contexte « instant T » : il est donc
+-    identique d'une requête à l'autre tant que le contexte n'a pas changé. On le
+-    calcule une fois, puis on le ressert.
+-
+-    La clé de cache contient l'horodatage du contexte : un « Rafraîchir les
+-    données » change l'horodatage et invalide donc naturellement le cache. Un
+-    verrou évite que deux requêtes concurrentes ne calculent la même chose.
++    La construction des 101 bulles complètes prend plusieurs secondes. Un verrou
++    global protège le cache et refuse rapidement les nouveaux calculs parallèles
++    qui le manquent ; la réponse HTTP peut alors inviter à réessayer au lieu
++    d'accumuler des threads et de refaire le même travail.
+     """
++    global _BULLES_EN_COURS
+     cle_cache = (detail, avec_mesure, tuple(cles or ()), contexte.mode, contexte.horodatage)
+     with _VERROU_BULLES:
+         if cle_cache in _CACHE_BULLES:
+             return _CACHE_BULLES[cle_cache]
+-    resultat = bulles_catalogue(contexte, cles=cles, avec_mesure=avec_mesure, detail=detail)
+-    with _VERROU_BULLES:
+-        # Petit cache : au-delà de 6 entrées on repart de zéro (les variantes
+-        # « résumé / complet » et les sous-ensembles de leviers sont en nombre
+-        # fini, mais un usage soutenu ne doit pas faire croître la mémoire).
+-        if len(_CACHE_BULLES) >= 6:
+-            _CACHE_BULLES.clear()
+-        _CACHE_BULLES[cle_cache] = resultat
+-    return resultat
++        if _BULLES_EN_COURS:
++            raise RequetesBullesOccupees
++        _BULLES_EN_COURS = True
++    try:
++        resultat = bulles_catalogue(contexte, cles=cles, avec_mesure=avec_mesure, detail=detail)
++        with _VERROU_BULLES:
++            # Petit cache : au-delà de 6 entrées on repart de zéro afin de
++            # borner la mémoire des variantes « résumé / complet ».
++            if len(_CACHE_BULLES) >= 6:
++                _CACHE_BULLES.clear()
++            _CACHE_BULLES[cle_cache] = resultat
++        return resultat
++    finally:
++        with _VERROU_BULLES:
++            _BULLES_EN_COURS = False
+ 
+ 
+ def _avec_lecture(sortie) -> dict[str, Any]:
+@@ -222,39 +449,14 @@ def _avec_lecture(sortie) -> dict[str, Any]:
+     return charge
+ 
+ 
+-def enregistrer_donnees_navigateur(lectures_brutes: dict[str, Any]) -> dict[str, Any]:
+-    """Fusionne des valeurs collectées par le navigateur dans le cache local.
+-
+-    Le navigateur de l'utilisateur peut atteindre des API publiques même quand
+-    le serveur vit dans un environnement réseau fermé : ces valeurs sont donc
+-    écrites dans le cache puis utilisées pour recalibrer le contexte.
+-    """
+-    lectures = charger_cache()
+-    for cle, brut in (lectures_brutes or {}).items():
+-        if cle not in INDICATEURS or not isinstance(brut, dict):
+-            continue
+-        try:
+-            valeur = float(brut.get("valeur"))
+-        except (TypeError, ValueError):
+-            continue
+-        lectures[cle] = Lecture(
+-            cle=cle,
+-            valeur=valeur,
+-            periode=brut.get("periode"),
+-            fournisseur=brut.get("fournisseur") or "navigateur (API publique)",
+-            url=brut.get("url") or "",
+-            statut="live",
+-            detail="collecté par le navigateur de l'utilisateur",
+-            qualite_code=(str(brut["qualite_code"]) if brut.get("qualite_code") else None),
+-        )
+-    if lectures:
+-        try:
+-            sauver_cache(lectures)
+-        except OSError:
+-            pass
+-    _CONTEXTE_CACHE["contexte"] = construire_contexte(lectures)
+-    return {"contexte": _CONTEXTE_CACHE["contexte"].en_dict(),
+-            "lectures": sorted(lectures)}
++def enregistrer_donnees_navigateur(lectures_brutes: Any) -> dict[str, Any]:
++    """Renvoie un contexte propre à la requête, sans persister les lectures web."""
++    lectures = _lectures_navigateur_sures(lectures_brutes)
++    contexte = _contexte_avec_lectures_navigateur(lectures_brutes)
++    return {
++        "contexte": contexte.en_dict(),
++        "lectures": {cle: lecture.en_dict() for cle, lecture in lectures.items()},
++    }
+ 
+ 
+ def rapport_collecte() -> dict[str, Any]:
+@@ -281,6 +483,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
+ 
+     protocol_version = "HTTP/1.1"
+     server_version = "SimulateurMacroPolitique/2.0"
++    sys_version = ""
+     #: Vrai pendant une requête HEAD : on envoie les en-têtes (statut, type,
+     #: longueur) mais jamais le corps. Les sondes de disponibilité des aperçus
+     #: et des moniteurs utilisent HEAD ; sans cette prise en charge elles
+@@ -295,8 +498,21 @@ class DashboardHandler(BaseHTTPRequestHandler):
+     def _send_status(self, status: int) -> None:
+         self.send_response(status)
+         self.send_header("Content-Length", "0")
++        self.send_header("Cache-Control", "no-store")
++        self.send_header("X-Content-Type-Options", "nosniff")
++        if getattr(self, "close_connection", False):
++            self.send_header("Connection", "close")
+         self.end_headers()
+ 
++    def _erreur_interne(self) -> None:
++        """Journalise au besoin le détail côté serveur, jamais dans la réponse."""
++        if os.environ.get("SIMULATEUR_LOG_ERREURS"):
++            traceback.print_exc(file=sys.stderr)
++        self._send_json(
++            {"error": "Erreur interne du simulateur. Réessayez plus tard."},
++            status=500,
++        )
++
+     def _preparer_charge(self, charge: bytes) -> tuple[bytes, str | None]:
+         """Compresse la charge si le navigateur l'accepte (voir compression.py).
+ 
+@@ -315,6 +531,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
+         if encodage:
+             self.send_header("Content-Encoding", encodage)
+         self.send_header("Cache-Control", "no-store")
++        self.send_header("X-Content-Type-Options", "nosniff")
+         self.end_headers()
+         if not self._tete_seulement:
+             self.wfile.write(charge)
+@@ -329,6 +546,8 @@ class DashboardHandler(BaseHTTPRequestHandler):
+         self.send_header("Vary", EN_TETE_VARY)
+         if encodage:
+             self.send_header("Content-Encoding", encodage)
++        self.send_header("Cache-Control", "no-store")
++        self.send_header("X-Content-Type-Options", "nosniff")
+         self.end_headers()
+         if not self._tete_seulement:
+             self.wfile.write(charge)
+@@ -339,23 +558,53 @@ class DashboardHandler(BaseHTTPRequestHandler):
+         self.send_header("Content-Type", type_mime)
+         self.send_header("Content-Disposition", f'attachment; filename="{Path(chemin).name}"')
+         self.send_header("Content-Length", str(len(donnees)))
++        self.send_header("Cache-Control", "no-store")
++        self.send_header("X-Content-Type-Options", "nosniff")
+         self.end_headers()
+         if not self._tete_seulement:
+             self.wfile.write(donnees)
+ 
+     def _lire_corps(self) -> Any:
++        longueurs = self.headers.get_all("Content-Length", [])
++        if self.headers.get("Transfer-Encoding") or len(longueurs) > 1:
++            self.close_connection = True
++            self._send_json({"error": "Corps de requête non pris en charge."}, status=400)
++            return _CORPS_INVALIDE
+         try:
+-            longueur = int(self.headers.get("Content-Length", "0"))
+-        except ValueError:
+-            return None
+-        if longueur <= 0:
++            longueur = int(longueurs[0]) if longueurs else 0
++        except (TypeError, ValueError):
++            self.close_connection = True
++            self._send_json({"error": "Longueur de requête invalide."}, status=400)
++            return _CORPS_INVALIDE
++        if longueur < 0:
++            self.close_connection = True
++            self._send_json({"error": "Longueur de requête invalide."}, status=400)
++            return _CORPS_INVALIDE
++        if longueur > MAX_REQUEST_BODY_BYTES:
++            self.close_connection = True
++            self._send_json(
++                {"error": "Corps de requête trop volumineux (limite : 1 Mio)."},
++                status=413,
++            )
++            return _CORPS_TROP_VOLUMINEUX
++        if longueur == 0:
+             return None
+         brut = self.rfile.read(longueur)
++        if len(brut) != longueur:
++            self.close_connection = True
++            self._send_json({"error": "Corps de requête incomplet."}, status=400)
++            return _CORPS_INVALIDE
+         try:
+             return json.loads(brut.decode("utf-8"))
+         except (json.JSONDecodeError, UnicodeDecodeError):
+             return None
+ 
++    @staticmethod
++    def _contexte_requete(corps: Any):
++        if isinstance(corps, dict) and "lectures" in corps:
++            return _contexte_avec_lectures_navigateur(corps.get("lectures"))
++        return _CONTEXTE_CACHE.get("contexte") or construire_contexte(lectures=charger_cache())
++
+     @staticmethod
+     def _parametres_depuis_requete(corps: Any, query: dict[str, list[str]]) -> dict[str, float]:
+         if isinstance(corps, dict) and "parametres" in corps:
+@@ -383,9 +632,13 @@ class DashboardHandler(BaseHTTPRequestHandler):
+ 
+     # ── GET ────────────────────────────────────────────────────────────────
+     def do_GET(self) -> None:  # noqa: N802 - API stdlib
+-        parsed = urlparse(self.path)
++        parsed, query, erreur_cible = _analyser_cible_requete(self.path)
++        if erreur_cible:
++            message = "Cible de requête trop longue." if erreur_cible == 414 else "Paramètres de requête invalides ou trop nombreux."
++            self._send_json({"error": message}, status=erreur_cible)
++            return
++        assert parsed is not None and query is not None
+         chemin = parsed.path
+-        query = parse_qs(parsed.query)
+ 
+         if chemin in ("/", ""):
+             try:
+@@ -396,14 +649,19 @@ class DashboardHandler(BaseHTTPRequestHandler):
+                 )
+                 self._send_html(HTML_PAGE.replace("===SCENARIOS_JSON===", scenarios_json))
+             except Exception:
+-                self._send_json({"error": traceback.format_exc(), "route": chemin})
++                self._erreur_interne()
+ 
+         elif chemin == "/api/catalogue":
+             self._send_json(catalogue_complet())
+ 
+         elif chemin == "/api/contexte":
+-            rafraichir = query.get("refresh", ["0"])[0] in ("1", "true", "oui")
+-            contexte = contexte_courant(rafraichir=rafraichir)
++            # Une visite anonyme ne peut pas déclencher une collecte serveur
++            # séquentielle vers toutes les sources. Le rafraîchissement demandé
++            # par l'interface passe par le navigateur et reste propre à sa session.
++            contexte = _CONTEXTE_CACHE.get("contexte")
++            if contexte is None:
++                contexte = construire_contexte(lectures=charger_cache())
++                _CONTEXTE_CACHE["contexte"] = contexte
+             self._send_json({
+                 "contexte": contexte.en_dict(),
+                 "browser": browser_payload(),
+@@ -413,26 +671,29 @@ class DashboardHandler(BaseHTTPRequestHandler):
+ 
+         elif chemin == "/api/marches":
+             actualiser = query.get("refresh", ["0"])[0] in ("1", "true", "oui")
+-            self._send_json(obtenir_cotations(actualiser=actualiser))
++            try:
++                self._send_json(cotations_api(actualiser=actualiser))
++            except RequetesExternesOccupees:
++                self._send_json({"error": "Un rafraîchissement est déjà en cours. Réessayez plus tard."}, status=503)
+ 
+         elif chemin == "/api/simuler":
+             parametres = self._parametres_depuis_requete(None, query)
+             avec_impacts = query.get("impacts", ["1"])[0] not in ("0", "false", "non")
+             try:
+                 sortie = simuler_parametrique(
+-                    parametres, contexte_courant(), avec_impacts=avec_impacts
++                    parametres, self._contexte_requete(None), avec_impacts=avec_impacts
+                 )
+                 self._send_json(_avec_lecture(sortie))
+             except ValueError as exc:
+                 self._send_json({"error": str(exc)}, status=400)
+             except Exception:
+-                self._send_json({"error": traceback.format_exc()}, status=500)
++                self._erreur_interne()
+ 
+         elif chemin == "/api/comparer":
+             try:
+-                self._send_json(comparer(contexte=contexte_courant()))
++                self._send_json(comparer(contexte=self._contexte_requete(None)))
+             except Exception:
+-                self._send_json({"error": traceback.format_exc()}, status=500)
++                self._erreur_interne()
+ 
+         elif chemin == "/api/garde_fous":
+             # Barème complet (audit et traçabilité) : chaque seuil est livré
+@@ -440,7 +701,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
+             try:
+                 self._send_json(bareme_public())
+             except Exception:
+-                self._send_json({"error": traceback.format_exc()}, status=500)
++                self._erreur_interne()
+ 
+         elif chemin == "/api/bulles":
+             detail = query.get("detail", ["resume"])[0]
+@@ -448,16 +709,22 @@ class DashboardHandler(BaseHTTPRequestHandler):
+                 self._send_json({"error": f"détail inconnu : {detail}"}, status=400)
+                 return
+             avec_mesure = query.get("mesure", ["1"])[0] not in ("0", "false", "non")
+-            brutes = [cle for valeur in query.get("levier", []) for cle in valeur.split(",") if cle]
++            cles_brutes = [cle for valeur in query.get("levier", []) for cle in valeur.split(",") if cle]
++            if len(cles_brutes) > MAX_BULLES_PAR_REQUETE:
++                self._send_json({"error": "Trop de leviers demandés en une requête."}, status=400)
++                return
++            cles = list(dict.fromkeys(cles_brutes)) or None
+             try:
+                 self._send_json(catalogue_bulles(
+-                    contexte_courant(), cles=brutes or None,
++                    self._contexte_requete(None), cles=cles,
+                     avec_mesure=avec_mesure, detail=detail,
+                 ))
++            except RequetesBullesOccupees:
++                self._send_json({"error": "Un calcul de bulles est déjà en cours. Réessayez plus tard."}, status=503)
+             except ValueError as exc:
+                 self._send_json({"error": str(exc)}, status=400)
+             except Exception:
+-                self._send_json({"error": traceback.format_exc()}, status=500)
++                self._erreur_interne()
+ 
+         elif chemin == "/api/bulle":
+             cle = query.get("levier", [""])[0]
+@@ -468,12 +735,12 @@ class DashboardHandler(BaseHTTPRequestHandler):
+                 return
+             try:
+                 self._send_json(bulle_levier(
+-                    cle, contexte_courant(), avec_mesure=avec_mesure, detail=detail,
++                    cle, self._contexte_requete(None), avec_mesure=avec_mesure, detail=detail,
+                 ))
+             except ValueError as exc:
+                 self._send_json({"error": str(exc)}, status=400)
+             except Exception:
+-                self._send_json({"error": traceback.format_exc()}, status=500)
++                self._erreur_interne()
+ 
+         elif chemin == "/api/lexique":
+             # Lexique « compréhensible pour tous » : chaque terme technique
+@@ -493,16 +760,21 @@ class DashboardHandler(BaseHTTPRequestHandler):
+                 self._send_json({"error": f"indicateur inconnu : {cle}"}, status=400)
+                 return
+             try:
+-                lecture = interroger(cle, timeout=12.0)
++                lecture = lecture_proxy(cle, timeout=12.0)
++            except RequetesExternesOccupees:
++                self._send_json({"error": "Une lecture externe est déjà en cours. Réessayez plus tard."}, status=503)
++                return
+             except Exception:
+-                self._send_json({"error": traceback.format_exc()}, status=500)
++                self._erreur_interne()
+                 return
+             self._send_json({"lecture": lecture.en_dict(), "indicateur": cle})
+ 
+         # ── API historiques ───────────────────────────────────────────────
+         elif chemin == "/api/run":
+             scenario = query.get("scenario", ["mandature"])[0]
+-            self._send_json(run_simulation_api(scenario))
++            resultat = run_simulation_api(scenario)
++            statut = 200 if "error" not in resultat else (404 if scenario not in SCENARIOS else 500)
++            self._send_json(resultat, status=statut)
+ 
+         elif chemin == "/api/scenarios":
+             self._send_json({
+@@ -553,16 +825,23 @@ class DashboardHandler(BaseHTTPRequestHandler):
+                                    "application/json" if fmt == "json" else "text/csv")
+                 os.remove(chemin_fichier)
+             except Exception:
+-                self._send_json({"error": traceback.format_exc()}, status=500)
++                self._erreur_interne()
+ 
+         else:
+             self._send_status(404)
+ 
+     # ── POST ───────────────────────────────────────────────────────────────
+     def do_POST(self) -> None:  # noqa: N802 - API stdlib
+-        parsed = urlparse(self.path)
++        parsed, query, erreur_cible = _analyser_cible_requete(self.path)
++        if erreur_cible:
++            message = "Cible de requête trop longue." if erreur_cible == 414 else "Paramètres de requête invalides ou trop nombreux."
++            self._send_json({"error": message}, status=erreur_cible)
++            return
++        assert parsed is not None and query is not None
+         chemin = parsed.path
+         corps = self._lire_corps()
++        if corps is _CORPS_TROP_VOLUMINEUX or corps is _CORPS_INVALIDE:
++            return
+ 
+         if chemin == "/api/simuler":
+             if not isinstance(corps, dict):
+@@ -571,7 +850,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
+             try:
+                 sortie = simuler_parametrique(
+                     corps.get("parametres") or {},
+-                    contexte_courant(),
++                    self._contexte_requete(corps),
+                     horizon=int(corps.get("horizon", 5)),
+                     avec_impacts=bool(corps.get("avec_impacts", True)),
+                     max_leviers_impacts=int(corps.get("max_impacts", 16)),
+@@ -580,7 +859,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
+             except ValueError as exc:
+                 self._send_json({"error": str(exc)}, status=400)
+             except Exception:
+-                self._send_json({"error": traceback.format_exc()}, status=500)
++                self._erreur_interne()
+ 
+         elif chemin == "/api/donnees":
+             if not isinstance(corps, dict):
+@@ -589,7 +868,24 @@ class DashboardHandler(BaseHTTPRequestHandler):
+             try:
+                 self._send_json(enregistrer_donnees_navigateur(corps.get("lectures") or {}))
+             except Exception:
+-                self._send_json({"error": traceback.format_exc()}, status=500)
++                self._erreur_interne()
++
++        elif chemin == "/api/bulle":
++            cle = query.get("levier", [""])[0]
++            detail = query.get("detail", ["complet"])[0]
++            avec_mesure = query.get("mesure", ["1"])[0] not in ("0", "false", "non")
++            if not cle:
++                self._send_json({"error": "Paramètre `levier` requis."}, status=400)
++                return
++            try:
++                self._send_json(bulle_levier(
++                    cle, self._contexte_requete(corps),
++                    avec_mesure=avec_mesure, detail=detail,
++                ))
++            except ValueError as exc:
++                self._send_json({"error": str(exc)}, status=400)
++            except Exception:
++                self._erreur_interne()
+ 
+         elif chemin == "/api/conseil":
+             # Conseiller temps réel (« effet papillon ») : compare deux exécutions
+@@ -604,14 +900,14 @@ class DashboardHandler(BaseHTTPRequestHandler):
+                     str(corps["cle"]),
+                     float(corps.get("avant", 0.0)),
+                     float(corps.get("apres", corps.get("avant", 0.0))),
+-                    contexte_courant(),
++                    self._contexte_requete(corps),
+                     horizon=int(corps.get("horizon", 5)),
+                 )
+                 self._send_json(conseil)
+             except (TypeError, ValueError) as exc:
+                 self._send_json({"error": str(exc)}, status=400)
+             except Exception:
+-                self._send_json({"error": traceback.format_exc()}, status=500)
++                self._erreur_interne()
+ 
+         else:
+             self._send_status(405)
+@@ -621,7 +917,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
+ # Serveur
+ # ────────────────────────────────────────────────────────────────────────────
+ 
+-def create_server(host: str = "0.0.0.0", port: int = 8080) -> ThreadingHTTPServer:
++def create_server(host: str = "127.0.0.1", port: int = 8080) -> ThreadingHTTPServer:
+     """Crée le serveur HTTP du simulateur (multi-thread, HTTP/1.1)."""
+     serveur = ThreadingHTTPServer((host, port), DashboardHandler)
+     serveur.daemon_threads = True
+@@ -648,8 +944,11 @@ def main() -> None:
+     analyseur = argparse.ArgumentParser(
+         description="Simulateur macro-politique — serveur web interactif"
+     )
+-    analyseur.add_argument("--host", default=os.environ.get("HOST", "0.0.0.0"),
+-                           help="Adresse d'écoute (défaut : $HOST ou 0.0.0.0)")
++    hote_defaut = os.environ.get("HOST") or (
++        "0.0.0.0" if os.environ.get("PORT") else "127.0.0.1"
++    )
++    analyseur.add_argument("--host", default=hote_defaut,
++                           help="Adresse d'écoute (défaut : locale, ou $HOST / 0.0.0.0 si $PORT existe)")
+     analyseur.add_argument("--port", type=int, default=_port_defaut(),
+                            help="Port d'écoute (défaut : $PORT ou 8080)")
+     analyseur.add_argument("--rafraichir", action="store_true",
+diff --git a/simulateur/donnees_live.py b/simulateur/donnees_live.py
+index 7976c93..88941b9 100644
+--- a/simulateur/donnees_live.py
++++ b/simulateur/donnees_live.py
+@@ -40,7 +40,9 @@ from __future__ import annotations
+ import csv
+ import io
+ import json
++import math
+ import os
++import re
+ import time
+ import urllib.error
+ import urllib.parse
+@@ -56,9 +58,21 @@ from typing import Any
+ # ────────────────────────────────────────────────────────────────────────────
+ 
+ USER_AGENT = "simulateur-macro-politique/2.0 (projet citoyen open-source)"
++MAX_SOURCE_RESPONSE_BYTES = 8_388_608
+ CACHE_DIR = Path(os.environ.get("SIMULATEUR_CACHE", ".simulateur_cache"))
+ CACHE_FICHIER = CACHE_DIR / "donnees_live.json"
+ 
++
++class _SansRedirection(urllib.request.HTTPRedirectHandler):
++    """Empêche une source déclarée de rediriger le moteur vers un hôte arbitraire."""
++
++    def redirect_request(self, req, fp, code, msg, headers, newurl):  # noqa: ANN001
++        return None
++
++
++_OPENER = urllib.request.build_opener(_SansRedirection())
++
++
+ #: Fournisseurs écartés tant qu'une lecture a échoué récemment (anti-rafale).
+ _BLACKLIST: dict[str, float] = {}
+ DUREE_BLACKLIST_S = 300.0
+@@ -68,12 +82,86 @@ class ErreurSource(RuntimeError):
+     """Erreur de lecture d'une source de données publiques."""
+ 
+ 
++def _periode_sure(valeur: Any) -> str | None:
++    """Garde les formes simples des périodes, sans balisage fournisseur."""
++    if valeur is None or isinstance(valeur, bool) or not isinstance(valeur, (str, int)):
++        return None
++    texte = str(valeur).strip()
++    if not texte or len(texte) > 48 or not re.fullmatch(r"[\w .:/+\-]+", texte):
++        return None
++    return texte
++
++
++def _plage_valeur_sure(indicateur: Indicateur, valeur: Any) -> bool:
++    """Rejette les valeurs non finies ou hors d'ordres de grandeur raisonnables."""
++    try:
++        nombre = float(valeur)
++    except (TypeError, ValueError, OverflowError):
++        return False
++    if not math.isfinite(nombre) or abs(nombre) > 1e12:
++        return False
++    unite = indicateur.unite.casefold()
++    if "personnes" in unite:
++        return 0 <= nombre <= 10_000_000_000
++    if "0-100" in unite:
++        return 0 <= nombre <= 100
++    if "%" in unite:
++        return -1_000 <= nombre <= 1_000
++    if "md€" in unite:
++        return abs(nombre) <= 10_000_000
++    if "$/baril" in unite or "€/mwh" in unite or "€/tco" in unite:
++        return 0 <= nombre <= 1_000_000
++    if "indice" in unite:
++        return 0 <= nombre <= 1_000_000
++    return abs(nombre) <= 1_000_000_000
++
++
++def _code_qualite_sure(valeur: Any) -> str | None:
++    """Limite un marqueur qualité externe à un code court et inerte."""
++    if not isinstance(valeur, str) or len(valeur) > 8:
++        return None
++    return valeur if re.fullmatch(r"[A-Za-z0-9_-]+", valeur) else None
++
++
++def _horodatage_sure(valeur: Any) -> str:
++    """Normalise l'horodatage de cache, sans recopier de texte non fiable."""
++    if not isinstance(valeur, str) or len(valeur) > 48:
++        return datetime.now(UTC).isoformat(timespec="seconds")
++    try:
++        instant = datetime.fromisoformat(valeur.replace("Z", "+00:00"))
++        if instant.tzinfo is None:
++            instant = instant.replace(tzinfo=UTC)
++        return instant.astimezone(UTC).isoformat(timespec="seconds")
++    except (ValueError, OverflowError, OSError):
++        return datetime.now(UTC).isoformat(timespec="seconds")
++
++
++def _lire_reponse_bornee(reponse) -> bytes:  # noqa: ANN001 - réponse urllib
++    """Lit au plus 8 Mio et refuse les longueurs annoncées invalides ou trop grandes."""
++    longueur_brute = reponse.headers.get("Content-Length")
++    if longueur_brute not in (None, ""):
++        try:
++            longueur = int(longueur_brute)
++        except (TypeError, ValueError) as exc:
++            raise ErreurSource("longueur de réponse source invalide") from exc
++        if longueur < 0:
++            raise ErreurSource("longueur de réponse source invalide")
++        if longueur > MAX_SOURCE_RESPONSE_BYTES:
++            raise ErreurSource("réponse source trop volumineuse")
++    contenu = reponse.read(MAX_SOURCE_RESPONSE_BYTES + 1)
++    if len(contenu) > MAX_SOURCE_RESPONSE_BYTES:
++        raise ErreurSource("réponse source trop volumineuse")
++    return contenu
++
++
+ def _http_texte(url: str, timeout: float = 12.0, entetes: dict[str, str] | None = None) -> str:
+-    """Lecture HTTP brute (stdlib uniquement, aucun téléchargement implicite)."""
++    """Lit une source avec taille bornée et sans suivre les redirections HTTP."""
+     requete = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, **(entetes or {})})
+     try:
+-        with urllib.request.urlopen(requete, timeout=timeout) as reponse:
+-            return reponse.read().decode("utf-8", errors="replace")
++        with _OPENER.open(requete, timeout=timeout) as reponse:
++            return _lire_reponse_bornee(reponse).decode("utf-8", errors="replace")
++    except ErreurSource:
++        raise
+     except (TimeoutError, urllib.error.URLError, OSError) as exc:  # pragma: no cover - réseau
+         raise ErreurSource(f"{type(exc).__name__}: {exc}") from exc
+ 
+@@ -141,7 +229,7 @@ def qualite_eurostat(payload: Any, cle: str | None) -> str | None:
+             statut = None
+     else:
+         statut = None
+-    return str(statut) if statut not in (None, "") else None
++    return _code_qualite_sure(statut)
+ 
+ 
+ _LIBELLES_QUALITE = {
+@@ -159,11 +247,12 @@ _LIBELLES_QUALITE = {
+ 
+ 
+ def libelle_qualite(code: str | None) -> str:
+-    """Traduit les marqueurs connus en conservant le code source ailleurs."""
+-    if not code:
++    """Traduit les marqueurs connus en conservant seulement un code inerte."""
++    code_sure = _code_qualite_sure(code)
++    if not code_sure:
+         return "aucun marqueur fourni par la source"
+-    libelle = _LIBELLES_QUALITE.get(code.lower())
+-    return f"{libelle} (code {code})" if libelle else f"marqueur source {code}"
++    libelle = _LIBELLES_QUALITE.get(code_sure.lower())
++    return f"{libelle} (code {code_sure})" if libelle else f"marqueur source {code_sure}"
+ 
+ 
+ def ad_sdmx(payload: Any, chemin: str | None = None) -> tuple[float | None, str | None]:
+@@ -954,7 +1043,7 @@ def _lire_source(source: Source, timeout: float = 12.0) -> Lecture:
+     if valeur is None:
+         raise ErreurSource("aucune valeur retournée")
+     return Lecture(
+-        cle="", valeur=float(valeur), periode=periode, fournisseur=source.fournisseur,
++        cle="", valeur=float(valeur), periode=_periode_sure(periode), fournisseur=source.fournisseur,
+         url=source.url, statut="live", qualite_code=qualite_code,
+     )
+ 
+@@ -976,8 +1065,16 @@ def interroger(cle: str, timeout: float = 12.0) -> Lecture:
+             if "réseau" in str(exc) or "Name or service" in str(exc):
+                 _BLACKLIST[source.fournisseur] = time.monotonic()
+             continue
++        try:
++            valeur = float(lecture.valeur) * indicateur.conversion
++        except (TypeError, ValueError, OverflowError):
++            erreurs.append(f"{source.fournisseur} → valeur numérique illisible")
++            continue
++        if not _plage_valeur_sure(indicateur, valeur):
++            erreurs.append(f"{source.fournisseur} → valeur hors plage raisonnable")
++            continue
+         lecture.cle = cle
+-        lecture.valeur = round(lecture.valeur * indicateur.conversion, 6)
++        lecture.valeur = round(valeur, 6)
+         return lecture
+     if indicateur.reference is not None:
+         valeur, periode, fournisseur, verifie = indicateur.reference
+@@ -1037,12 +1134,46 @@ def charger_cache(chemin: Path | None = None) -> dict[str, Lecture]:
+         charge = json.loads(chemin.read_text(encoding="utf-8"))
+     except (json.JSONDecodeError, OSError):
+         return {}
++    if not isinstance(charge, dict):
++        return {}
+     lectures: dict[str, Lecture] = {}
+-    for cle, brut in (charge.get("lectures") or {}).items():
++    cache = charge.get("lectures") or {}
++    if not isinstance(cache, dict):
++        return lectures
++    for cle, brut in cache.items():
++        if cle not in INDICATEURS or not isinstance(brut, dict):
++            continue
++        # Supprime les valeurs navigateur écrites par les anciennes versions :
++        # elles pouvaient modifier le contexte partagé et leurs métadonnées
++        # n'étaient pas une source fiable.
++        if brut.get("detail") == "collecté par le navigateur de l'utilisateur":
++            continue
+         try:
+-            lectures[cle] = Lecture(**brut)
+-        except TypeError:
++            lecture = Lecture(**brut)
++            valeur = float(lecture.valeur) if lecture.valeur is not None else None
++        except (TypeError, ValueError, OverflowError):
++            continue
++        if valeur is not None and not _plage_valeur_sure(INDICATEURS[cle], valeur):
++            continue
++        if lecture.statut not in {"live", "reference", "indisponible"}:
+             continue
++        if (lecture.statut == "indisponible") != (valeur is None):
++            continue
++        # Un cache ne peut pas introduire une nouvelle destination/provenance.
++        source = next(
++            (source for source in INDICATEURS[cle].sources if source.url == lecture.url),
++            None,
++        )
++        if source is None:
++            continue
++        lecture.cle = cle
++        lecture.valeur = valeur
++        lecture.periode = _periode_sure(lecture.periode)
++        lecture.qualite_code = _code_qualite_sure(lecture.qualite_code)
++        lecture.horodatage = _horodatage_sure(lecture.horodatage)
++        lecture.fournisseur = source.fournisseur
++        lecture.url = source.url
++        lectures[cle] = lecture
+     return lectures
+ 
+ 
+@@ -1240,12 +1371,15 @@ def construire_contexte(
+             lecture.fournisseur if lecture_valide
+             else (reference[2] if reference else "référence documentaire du projet")
+         )
+-        periode = lecture.periode if lecture_valide else (reference[1] if reference else None)
++        periode = (
++            _periode_sure(lecture.periode) if lecture_valide
++            else _periode_sure(reference[1] if reference else None)
++        )
+         date_collecte = (
+-            lecture.horodatage[:10] if lecture_valide
++            _horodatage_sure(lecture.horodatage)[:10] if lecture_valide
+             else (reference[3] if reference else None)
+         )
+-        qualite_code = (
++        qualite_code = _code_qualite_sure(
+             lecture.qualite_code if lecture_valide else indicateur.qualite_reference
+         )
+         url_source = (
+@@ -1284,15 +1418,15 @@ def construire_contexte(
+             # Les `Lecture` sont déjà converties dans l'unité canonique par
+             # `interroger` (ou par le client avant son POST au serveur).
+             valeur = lecture.valeur
+-            periode = lecture.periode
+-            date_collecte = lecture.horodatage[:10]
++            periode = _periode_sure(lecture.periode)
++            date_collecte = _horodatage_sure(lecture.horodatage)[:10]
+             fournisseur = lecture.fournisseur
+             statut = lecture.statut
+-            qualite_code = lecture.qualite_code
++            qualite_code = _code_qualite_sure(lecture.qualite_code)
+             url = lecture.url
+         elif indicateur.reference is not None:
+             valeur = indicateur.reference[0] * indicateur.conversion
+-            periode = indicateur.reference[1]
++            periode = _periode_sure(indicateur.reference[1])
+             date_collecte = indicateur.reference[3]
+             fournisseur = indicateur.reference[2]
+             statut = "reference"
+diff --git a/simulateur/interface.py b/simulateur/interface.py
+index 51a063c..5e842c1 100644
+--- a/simulateur/interface.py
++++ b/simulateur/interface.py
+@@ -750,6 +750,9 @@ let BULLE_OUVERTE = null;
+ let BULLES_DEMANDEES = new Set();
+ //: Libellés des 20 domaines, repris du catalogue pour les bulles.
+ let LIBELLES_DOMAINES = {};
++// Les lectures demandées par la personne restent dans cette page et sont
++// renvoyées uniquement avec ses propres calculs (jamais dans le cache partagé).
++let LECTURES_NAVIGATEUR = {};
+ 
+ function fmt(valeur, precision){
+   if (valeur === null || valeur === undefined || Number.isNaN(valeur)) return '—';
+@@ -762,7 +765,8 @@ function couleurDelta(valeur){
+ }
+ function pastille(mode){
+   const libelles = {live:'données live', reference:'référence datée du projet', mixte:'données mixtes'};
+-  return `<span class="pastille ${mode}">${libelles[mode] || mode}</span>`;
++  const modeSecurise = Object.prototype.hasOwnProperty.call(libelles, mode) ? mode : 'reference';
++  return `<span class="pastille ${modeSecurise}">${libelles[modeSecurise]}</span>`;
+ }
+ 
+ /* ── Chargement du catalogue (leviers + domaines) ───────────────────────── */
+@@ -801,28 +805,33 @@ function renderContexte(){
+     ['Prélèvements obligatoires', fmt(c.prelevements_obligatoires_pct_pib, 1) + ' % PIB', ''],
+   ];
+   document.getElementById('grid-metrics').innerHTML = metriques.map(([libelle, valeur, sous]) =>
+-    `<div class="carte metric"><div class="libelle">${libelle}</div>
+-      <div class="valeur">${valeur}</div><div class="delta neutre">${sous}</div></div>`).join('');
++    `<div class="carte metric"><div class="libelle">${echapperTexte(libelle)}</div>
++      <div class="valeur">${echapperTexte(valeur)}</div><div class="delta neutre">${echapperTexte(sous)}</div></div>`).join('');
+   const provenance = (CONTEXTE.contexte && CONTEXTE.contexte.provenance) || CONTEXTE.provenance || {};
+   const lignes = Object.entries(provenance).map(([champ, info]) => {
+     const statut = info.statut === 'live' ? '🟢 live' : (info.statut === 'reference' ? '🟠 référence' : '⚪ non collectée');
+-    const periode = info.periode ? ` · période ${info.periode}` : '';
+-    const collecte = info.date_collecte ? ` · collecté le ${info.date_collecte}` : '';
+-    const qualite = info.qualite && info.qualite_code ? ` · qualité : ${info.qualite}` : '';
+-    const frequence = info.frequence ? `<br><span class="texte-dim">Mise à jour : ${info.frequence}</span>` : '';
+-    const note = info.note ? `<br><span class="texte-dim">${info.note}</span>` : '';
+-    return `<div><b>${info.libelle}</b> : ${statut}${periode}${collecte}${qualite} · ${info.source}
+-      ${info.url ? ` · <a href="${info.url}" target="_blank" rel="noopener">source</a>` : ''}
+-      ${info.licence ? ` · <i>${info.licence}</i>` : ''}${frequence}${note}</div>`;
++    const periode = info.periode ? ` · période ${echapperTexte(info.periode)}` : '';
++    const collecte = info.date_collecte ? ` · collecté le ${echapperTexte(info.date_collecte)}` : '';
++    const qualite = info.qualite && info.qualite_code ? ` · qualité : ${echapperTexte(info.qualite)}` : '';
++    const url = urlHttps(info.url);
++    const frequence = info.frequence
++      ? `<br><span class="texte-dim">Mise à jour : ${echapperTexte(info.frequence)}</span>` : '';
++    const note = info.note
++      ? `<br><span class="texte-dim">${echapperTexte(info.note)}</span>` : '';
++    return `<div><b>${echapperTexte(info.libelle)}</b> : ${echapperTexte(statut)}${periode}${collecte}${qualite} · ${echapperTexte(info.source)}
++      ${url ? ` · <a href="${echapperAttribut(url)}" target="_blank" rel="noopener noreferrer">source</a>` : ''}
++      ${info.licence ? ` · <i>${echapperTexte(info.licence)}</i>` : ''}${frequence}${note}</div>`;
+   }).join('');
+   const complementaires = Object.values((CONTEXTE.contexte && CONTEXTE.contexte.series_complementaires) || {});
+   const blocComplementaire = complementaires.length
+     ? '<div style="margin-top:10px"><b>Séries complémentaires collectées</b> (non utilisées pour le calibrage,'
+-      + ' conservées pour information) :<br>' + complementaires.map(info =>
+-        `${info.libelle} : ${fmt(info.valeur, 2)} ${info.unite} (${info.periode || '—'}; collecté le ${info.date_collecte || '—'})`
+-        + `${info.qualite_code ? ` · ${info.qualite}` : ''} · ${info.frequence || 'fréquence selon la source'}`
+-        + `${info.url ? ` — <a href="${info.url}" target="_blank" rel="noopener">${info.fournisseur}</a>` : ` — ${info.fournisseur}`}`
+-      ).join('<br>') + '</div>'
++      + ' conservées pour information) :<br>' + complementaires.map(info => {
++        const url = urlHttps(info.url);
++        return `${echapperTexte(info.libelle)} : ${fmt(info.valeur, 2)} ${echapperTexte(info.unite)} `
++          + `(${echapperTexte(info.periode || '—')}; collecté le ${echapperTexte(info.date_collecte || '—')})`
++          + `${info.qualite_code ? ` · ${echapperTexte(info.qualite)}` : ''} · ${echapperTexte(info.frequence || 'fréquence selon la source')}`
++          + `${url ? ` — <a href="${echapperAttribut(url)}" target="_blank" rel="noopener noreferrer">${echapperTexte(info.fournisseur)}</a>` : ` — ${echapperTexte(info.fournisseur)}`}`;
++      }).join('<br>') + '</div>'
+     : '';
+   document.getElementById('provenance').innerHTML = lignes + blocComplementaire
+     + '<div style="margin-top:8px">Rappel : le mode « référence » signifie que le serveur n\'a pas pu (ou pas encore)'
+@@ -885,9 +894,9 @@ function afficherNombre(valeur, precision, unite){
+ function sourceObservatoire(info){
+   if (!info) return '';
+   const source = echapperTexte(info.source || info.libelle || 'Source publique');
+-  const url = info.url || info.page_source;
+-  const lien = url && String(url).startsWith('https://')
+-    ? ` · <a href="${echapperTexte(url)}" target="_blank" rel="noopener">consulter</a>` : '';
++  const url = urlHttps(info.url || info.page_source);
++  const lien = url
++    ? ` · <a href="${echapperAttribut(url)}" target="_blank" rel="noopener">consulter</a>` : '';
+   const periode = info.periode ? ` · période observée : ${echapperTexte(info.periode)}` : '';
+   const publication = info.publication_le
+     ? ` · publié le ${echapperTexte(info.publication_le)}` : '';
+@@ -1473,18 +1482,72 @@ function extraireGenerique(adaptateur, charge, chemin){
+   }
+   return null;
+ }
++const LIMITE_JSON_SOURCE_NAVIGATEUR = 8_388_608;
++const DELAI_SOURCE_NAVIGATEUR_MS = 8_000;
++const DELAI_COLLECTE_NAVIGATEUR_MS = 60_000;
++
++async function fetchJsonSourceBorne(url, options = {}, delaiMs = DELAI_SOURCE_NAVIGATEUR_MS){
++  const controleur = new AbortController();
++  const expiration = setTimeout(() => controleur.abort(), Math.max(1, delaiMs));
++  try{
++    const reponse = await fetch(url, {...options, redirect:'error', signal: controleur.signal});
++    if (!reponse.ok){
++      if (reponse.body) reponse.body.cancel().catch(() => {});
++      return {reponse, charge: null};
++    }
++    const longueur = Number(reponse.headers.get('Content-Length'));
++    if (Number.isFinite(longueur) && longueur > LIMITE_JSON_SOURCE_NAVIGATEUR){
++      if (reponse.body) reponse.body.cancel().catch(() => {});
++      throw new Error('Réponse de source supérieure à 8 Mio.');
++    }
++    if (!reponse.body || typeof reponse.body.getReader !== 'function'){
++      throw new Error('Lecture en flux bornée indisponible dans ce navigateur.');
++    }
++    const lecteur = reponse.body.getReader();
++    const morceaux = [];
++    let total = 0;
++    while (true){
++      const {done, value} = await lecteur.read();
++      if (done) break;
++      total += value.byteLength;
++      if (total > LIMITE_JSON_SOURCE_NAVIGATEUR){
++        await lecteur.cancel().catch(() => {});
++        throw new Error('Réponse de source supérieure à 8 Mio.');
++      }
++      morceaux.push(value);
++    }
++    const octets = new Uint8Array(total);
++    let position = 0;
++    for (const morceau of morceaux){
++      octets.set(morceau, position);
++      position += morceau.byteLength;
++    }
++    const charge = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(octets));
++    return {reponse, charge};
++  } finally{
++    clearTimeout(expiration);
++  }
++}
++
+ async function rafraichirDonnees(){
+   const bouton = document.getElementById('btn-rafraichir');
+   bouton.disabled = true; bouton.textContent = 'Interrogation des API publiques…';
++  const echeance = Date.now() + DELAI_COLLECTE_NAVIGATEUR_MS;
+   const spec = CONTEXTE.browser || {};
+   const lectures = {};
+   let succes = 0;
+   for (const [cle, indicateur] of Object.entries(spec)){
++    if (Date.now() >= echeance) break;
+     for (const source of indicateur.sources){
++      const restant = echeance - Date.now();
++      if (restant <= 0) break;
+       try {
+-        const reponse = await fetch(source.url, {mode:'cors'});
++        const resultatSource = await fetchJsonSourceBorne(
++          source.url, {mode:'cors'}, Math.min(DELAI_SOURCE_NAVIGATEUR_MS, restant)
++        );
++        const reponse = resultatSource.reponse;
+         if (!reponse.ok) continue;
+-        const charge = await reponse.json();
++        const charge = resultatSource.charge;
+         const lecture = extraireGenerique(source.adaptateur, charge, source.chemin);
+         if (!lecture || !Number.isFinite(lecture.valeur)) continue;
+         // `interroger()` côté serveur renvoie déjà les unités canoniques ; ici,
+@@ -1499,14 +1562,18 @@ async function rafraichirDonnees(){
+         break;
+       } catch (erreur) { /* source suivante */ }
+     }
+-    if (!lectures[cle] && indicateur.proxy_url){
++    if (!lectures[cle] && indicateur.proxy_url && Date.now() < echeance){
+       // Repli même-origine : le serveur relaie les sources sans CORS
+       // (Yahoo, Stooq, ICE/EEX). Le serveur n'accepte que les sources
+       // déclarées au registre : ce n'est pas un proxy ouvert.
+       try {
+-        const reponse = await fetch(indicateur.proxy_url);
++        const restant = echeance - Date.now();
++        const resultatProxy = await fetchJsonSourceBorne(
++          indicateur.proxy_url, {}, Math.min(DELAI_SOURCE_NAVIGATEUR_MS, restant)
++        );
++        const reponse = resultatProxy.reponse;
+         if (reponse.ok){
+-          const charge = await reponse.json();
++          const charge = resultatProxy.charge;
+           const lecture = charge.lecture;
+           if (lecture && Number.isFinite(Number(lecture.valeur))){
+             lectures[cle] = {cle: cle, valeur: Number(lecture.valeur), periode: lecture.periode,
+@@ -1520,13 +1587,28 @@ async function rafraichirDonnees(){
+       } catch (erreur) { /* le serveur garde ses valeurs */ }
+     }
+   }
++  let contexteNavigateurCharge = false;
+   if (succes > 0){
+     try {
+-      await fetch('/api/donnees', {method:'POST', headers:{'Content-Type':'application/json'},
+-                                   body: JSON.stringify({lectures: lectures})});
++      const reponse = await fetch('/api/donnees', {
++        method:'POST', headers:{'Content-Type':'application/json'},
++        body: JSON.stringify({lectures: lectures})
++      });
++      if (reponse.ok){
++        const charge = await reponse.json();
++        if (charge && charge.contexte && charge.lectures){
++          LECTURES_NAVIGATEUR = charge.lectures;
++          CONTEXTE.contexte = charge.contexte;
++          renderContexte();
++          contexteNavigateurCharge = true;
++        }
++      }
+     } catch (erreur) { /* le serveur reste sur ses valeurs */ }
+   }
+-  await chargerContexte(false);
++  if (!contexteNavigateurCharge){
++    LECTURES_NAVIGATEUR = {};
++    await chargerContexte(false);
++  }
+   await rafraichirMarches(true);
+   bouton.disabled = false;
+   bouton.textContent = succes > 0
+@@ -1936,7 +2018,10 @@ async function chargerBulle(cle){
+   if (Object.prototype.hasOwnProperty.call(BULLES, cle) || BULLES_DEMANDEES.has(cle)) return;
+   BULLES_DEMANDEES.add(cle);
+   try {
+-    const reponse = await fetch(`/api/bulle?levier=${encodeURIComponent(cle)}&detail=complet`);
++    const reponse = await fetch(`/api/bulle?levier=${encodeURIComponent(cle)}&detail=complet`, {
++      method:'POST', headers:{'Content-Type':'application/json'},
++      body: JSON.stringify({lectures: LECTURES_NAVIGATEUR})
++    });
+     const donnees = await reponse.json();
+     BULLES[cle] = (donnees && donnees.cle === cle) ? donnees : null;
+   } catch (erreur){
+@@ -2229,6 +2314,16 @@ function echapperAttribut(texte){
+   return echapperTexte(texte || '').replace(/"/g, '&quot;');
+ }
+ 
++function urlHttps(url){
++  try {
++    const analyse = new URL(String(url || ''), location.href);
++    if (analyse.protocol !== 'https:' || analyse.username || analyse.password) return '';
++    return analyse.href;
++  } catch (_erreur) {
++    return '';
++  }
++}
++
+ function marquerUnTerme(trouve){
+   const cle = TABLE_TERMES[trouve.toLowerCase()];
+   const terme = cle ? LEXIQUE_PAR_CLE[cle] : null;
+@@ -2568,7 +2663,8 @@ async function simuler(avecImpacts){
+     const reponse = await fetch('/api/simuler', {
+       method:'POST', headers:{'Content-Type':'application/json'},
+       body: JSON.stringify({parametres: parametresEnvoyes, horizon: horizon,
+-                            avec_impacts: !!avecImpacts, max_impacts: 16})
++                            avec_impacts: !!avecImpacts, max_impacts: 16,
++                            lectures: LECTURES_NAVIGATEUR})
+     });
+     const donnees = await reponse.json();
+     if (donnees.error){ alert('Erreur de simulation : ' + donnees.error); return; }
+@@ -2871,7 +2967,7 @@ async function majConseilTempsReel(parametresEnvoyes){
+       method:'POST', headers:{'Content-Type':'application/json'},
+       body: JSON.stringify({parametres: parametresEnvoyes, cle: cle,
+                             avant: MOUVEMENT.avant, apres: apres,
+-                            horizon: horizonCourant()})
++                            horizon: horizonCourant(), lectures: LECTURES_NAVIGATEUR})
+     });
+     const conseil = await reponse.json();
+     // Le conseil affiché correspond au dernier mouvement réellement demandé.
+@@ -3167,8 +3263,9 @@ function auditSourcesHtml(){
+   const lignes = Object.keys(provenance).map(cle => {
+     const fiche = provenance[cle];
+     const valeur = contexte[cle];
+-    const url = fiche.url
+-      ? ` <a href="${echapperTexte(fiche.url)}" rel="noopener">consulter</a>` : '';
++    const urlSure = urlHttps(fiche.url);
++    const url = urlSure
++      ? ` <a href="${echapperAttribut(urlSure)}" rel="noopener noreferrer">consulter</a>` : '';
+     return `<tr><td>${echapperTexte(fiche.libelle)}</td>
+       <td class="chiffre">${valeur === null || valeur === undefined ? '—' : fmt(valeur, 2)} ${echapperTexte(fiche.unite || '')}</td>
+       <td>${echapperTexte(fiche.periode || '—')}</td>
+diff --git a/simulateur/marches.py b/simulateur/marches.py
+index ac6791d..4d5ba17 100644
+--- a/simulateur/marches.py
++++ b/simulateur/marches.py
+@@ -15,6 +15,7 @@ fiscalité ni tracking error.
+ from __future__ import annotations
+ 
+ import json
++import math
+ import threading
+ import urllib.error
+ import urllib.parse
+@@ -26,6 +27,34 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+ 
+ FOURNISSEUR_COTATIONS = "Yahoo Finance (flux tiers; cours éventuellement différés)"
+ DELAI_RESEAU_SECONDES = 7.0
++MAX_COTATION_RESPONSE_BYTES = 1_048_576
++
++
++class _SansRedirection(urllib.request.HTTPRedirectHandler):
++    """Ne suit pas une redirection du flux de marché vers une autre cible."""
++
++    def redirect_request(self, req, fp, code, msg, headers, newurl):  # noqa: ANN001
++        return None
++
++
++_OPENER = urllib.request.build_opener(_SansRedirection())
++
++
++def _lire_reponse_bornee(reponse) -> bytes:  # noqa: ANN001 - réponse urllib
++    """Lit au plus un Mio et rejette les longueurs annoncées invalides ou excessives."""
++    longueur_brute = reponse.headers.get("Content-Length")
++    if longueur_brute not in (None, ""):
++        try:
++            longueur = int(longueur_brute)
++        except (TypeError, ValueError) as exc:
++            raise ValueError("longueur de réponse de marché invalide") from exc
++        if longueur < 0 or longueur > MAX_COTATION_RESPONSE_BYTES:
++            raise ValueError("réponse de marché trop volumineuse")
++    contenu = reponse.read(MAX_COTATION_RESPONSE_BYTES + 1)
++    if len(contenu) > MAX_COTATION_RESPONSE_BYTES:
++        raise ValueError("réponse de marché trop volumineuse")
++    return contenu
++
+ 
+ # Sélection représentative, non exhaustive, des principales places et zones.
+ # Les symboles sont des identifiants Yahoo Finance; les valeurs ne sont pas
+@@ -184,15 +213,22 @@ def _lire_cotation(marche: dict[str, str], timeout: float = DELAI_RESEAU_SECONDE
+         url,
+         headers={"User-Agent": "Mozilla/5.0 (compatible; SimulateurCitoyen/1.0)"},
+     )
+-    with urllib.request.urlopen(requete, timeout=timeout) as reponse:
+-        charge = json.loads(reponse.read().decode("utf-8"))
+-
+-    resultat = ((charge.get("chart") or {}).get("result") or [None])[0]
+-    if not resultat:
+-        detail = ((charge.get("chart") or {}).get("error") or {}).get("description")
+-        raise ValueError(detail or "réponse de cotation vide")
+-    meta = resultat.get("meta") or {}
+-    cours = meta.get("regularMarketPrice")
++    with _OPENER.open(requete, timeout=timeout) as reponse:
++        brut = _lire_reponse_bornee(reponse)
++    charge = json.loads(brut.decode("utf-8"))
++    if not isinstance(charge, dict):
++        raise ValueError("format de réponse de cotation invalide")
++    chart = charge.get("chart")
++    if not isinstance(chart, dict):
++        raise ValueError("réponse de cotation sans enveloppe chart")
++    resultats = chart.get("result")
++    resultat = resultats[0] if isinstance(resultats, list) and resultats else None
++    if not isinstance(resultat, dict):
++        raise ValueError("réponse de cotation vide")
++    meta = resultat.get("meta")
++    if not isinstance(meta, dict):
++        raise ValueError("métadonnées de cotation absentes")
++    cours = _nombre(meta.get("regularMarketPrice"))
+     instant_cours = _date_utc(meta.get("regularMarketTime"))
+     if cours is None or instant_cours is None:
+         raise ValueError("cours ou horodatage de marché absent")
+@@ -200,7 +236,7 @@ def _lire_cotation(marche: dict[str, str], timeout: float = DELAI_RESEAU_SECONDE
+     maintenant = datetime.now(UTC)
+     observation = {
+         **marche,
+-        "cours": float(cours),
++        "cours": cours,
+         "devise": meta.get("currency") or marche["devise"],
+         "variation_jour": _nombre(meta.get("regularMarketChange")),
+         "variation_jour_pct": _nombre(meta.get("regularMarketChangePercent")),
+@@ -226,9 +262,9 @@ def _lire_cotation(marche: dict[str, str], timeout: float = DELAI_RESEAU_SECONDE
+ def _nombre(valeur: Any) -> float | None:
+     try:
+         resultat = float(valeur)
+-    except (TypeError, ValueError):
++    except (TypeError, ValueError, OverflowError):
+         return None
+-    return resultat if resultat == resultat else None
++    return resultat if math.isfinite(resultat) else None
+ 
+ 
+ def obtenir_cotations(*, actualiser: bool = True, timeout: float = DELAI_RESEAU_SECONDES) -> dict[str, Any]:
+diff --git a/simulateur/wsgi.py b/simulateur/wsgi.py
+index 47cedaa..0cf3a73 100644
+--- a/simulateur/wsgi.py
++++ b/simulateur/wsgi.py
+@@ -66,7 +66,7 @@ import traceback
+ from collections.abc import Callable
+ from typing import Any
+ 
+-from .dashboard import DashboardHandler
++from .dashboard import DashboardHandler, MAX_REQUEST_BODY_BYTES, MAX_REQUEST_TARGET_BYTES
+ 
+ #: En-têtes que le serveur WSGI (ou le proxy devant lui) doit fixer lui-même.
+ #: ``Connection`` doit disparaître : laisser « Connection: close » remonter
+@@ -108,13 +108,19 @@ def _requete_brute(environ: dict[str, Any]) -> bytes:
+     return entetes + b"\r\n\r\n" + _corps(environ)
+ 
+ 
++class _RequeteTropVolumineuse(Exception):
++    """Signal interne : le corps HTTP dépasse la limite de l'application."""
++
++
+ def _corps(environ: dict[str, Any]) -> bytes:
+     """Lit le corps de la requête dans ``wsgi.input``, sans jamais bloquer."""
+     brut = environ.get("CONTENT_LENGTH") or environ.get("HTTP_CONTENT_LENGTH") or "0"
+     try:
+         longueur = max(0, int(brut))
+-    except ValueError:
++    except (TypeError, ValueError):
+         longueur = 0
++    if longueur > MAX_REQUEST_BODY_BYTES:
++        raise _RequeteTropVolumineuse
+     if longueur == 0:
+         return b""
+     flux = environ.get("wsgi.input")
+@@ -193,17 +199,41 @@ def creer_application() -> Callable[[dict[str, Any], Any], list[bytes]]:
+     """Fabrique l'application WSGI (une seule instance suffit par processus)."""
+ 
+     def application(environ: dict[str, Any], start_response: Any) -> list[bytes]:
+-        requete = _RequeteWSGI(environ)
++        chemin = environ.get("PATH_INFO") or "/"
++        query = environ.get("QUERY_STRING") or ""
++        longueur_cible = len(chemin) + (1 + len(query) if query else 0)
++        if longueur_cible > MAX_REQUEST_TARGET_BYTES:
++            message = b"Cible de requete trop longue."
++            start_response("414 URI Too Long", [
++                ("Content-Type", "text/plain; charset=utf-8"),
++                ("Content-Length", str(len(message))),
++                ("Cache-Control", "no-store"),
++                ("X-Content-Type-Options", "nosniff"),
++            ])
++            return [message]
+         try:
++            requete = _RequeteWSGI(environ)
+             requete.handle_one_request()
++        except _RequeteTropVolumineuse:
++            message = b"Corps de requete trop volumineux (limite : 1 Mio)."
++            start_response("413 Payload Too Large", [
++                ("Content-Type", "text/plain; charset=utf-8"),
++                ("Content-Length", str(len(message))),
++                ("Cache-Control", "no-store"),
++                ("X-Content-Type-Options", "nosniff"),
++            ])
++            return [message]
+         except Exception:  # noqa: BLE001 - on doit répondre, pas propager
+             # Le serveur WSGI doit toujours recevoir une réponse ; sans quoi
+             # l'hébergeur renvoie un 502 opaque. La trace part dans les
+             # journaux de la plateforme, jamais dans la réponse.
+             traceback.print_exc(file=sys.stderr)
+-            start_response("500 Internal Server Error",
+-                           [("Content-Type", "text/plain; charset=utf-8"),
+-                            ("Content-Length", str(len(_MESSAGE_ERREUR)))])
++            start_response("500 Internal Server Error", [
++                ("Content-Type", "text/plain; charset=utf-8"),
++                ("Content-Length", str(len(_MESSAGE_ERREUR))),
++                ("Cache-Control", "no-store"),
++                ("X-Content-Type-Options", "nosniff"),
++            ])
+             return [_MESSAGE_ERREUR]
+ 
+         entetes = [(nom, valeur) for nom, valeur in requete._entetes

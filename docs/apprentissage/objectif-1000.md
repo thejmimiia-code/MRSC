@@ -1,8 +1,8 @@
 # Cap éditorial : viser 1 000 fiches d’auto-apprentissage
 
-**Plan de travail au 2026-10-08 — cible, pas catalogue disponible.**
+**Plan de travail au 2026-10-12 — cible, pas catalogue disponible.**
 
-L’ambition est de construire progressivement 1 000 fiches distinctes, autonomes et valorisantes. Le catalogue de travail compte actuellement 35 entrées : 26 entrées du corpus initial sans marqueur de prototype et 9 prototypes explicitement à relire. L’écart arithmétique à la cible est de 965 entrées ; le nombre de fiches ayant franchi tous les contrôles de publication n’est pas encore suivi.
+L’ambition est de construire progressivement 1 000 fiches distinctes, autonomes et valorisantes. Le catalogue de travail compte actuellement 70 entrées : 26 entrées du corpus initial sans marqueur de prototype et 44 prototypes explicitement à relire. L’écart arithmétique à la cible est de 930 entrées ; le nombre de fiches ayant franchi tous les contrôles de publication n’est pas encore suivi.
 
 Ces nombres décrivent le catalogue et un objectif de planification ; ils ne prouvent ni qu’une fiche a passé toutes les relectures, ni que les sujets proposés sont exhaustifs. L’absence de statut de prototype sur une fiche initiale ne vaut pas validation indépendante. Les versions, traductions et variantes d’un même objectif ne gonflent pas le compte.
 
@@ -12,22 +12,22 @@ Les quotas sont des hypothèses de travail à corriger selon les besoins signal�
 
 | Domaine | Cible | Entrées actuelles | Prototypes à relire | Écart brut |
 | --- | ---: | ---: | ---: | ---: |
-| Français, lecture, écriture et communication | 100 | 2 | 0 | 98 |
-| Langues étrangères et interculturel | 45 | 1 | 0 | 44 |
-| Mathématiques, mesures et données | 110 | 9 | 3 | 101 |
-| Budget, économie, consommation et travail | 75 | 1 | 0 | 74 |
-| Sciences, technologie et environnement | 75 | 4 | 2 | 71 |
-| Géographie, territoire et espace | 35 | 1 | 0 | 34 |
-| Histoire, chronologie et mémoire | 40 | 0 | 0 | 40 |
+| Français, lecture, écriture et communication | 100 | 7 | 5 | 93 |
+| Langues étrangères et interculturel | 45 | 3 | 2 | 42 |
+| Mathématiques, mesures et données | 110 | 14 | 8 | 96 |
+| Budget, économie, consommation et travail | 75 | 3 | 2 | 72 |
+| Sciences, technologie et environnement | 75 | 8 | 6 | 67 |
+| Géographie, territoire et espace | 35 | 4 | 3 | 31 |
+| Histoire, chronologie et mémoire | 40 | 3 | 3 | 37 |
 | Citoyenneté, médias et information | 75 | 2 | 1 | 73 |
 | Démarches, droits, sécurité et vie professionnelle | 65 | 1 | 0 | 64 |
-| Numérique, données, cybersécurité et intelligence artificielle | 75 | 7 | 0 | 68 |
-| Informatique, algorithmique et langages de programmation | 80 | 2 | 2 | 78 |
-| Arts, musique, création et culture | 45 | 2 | 0 | 43 |
+| Numérique, données, cybersécurité et intelligence artificielle | 75 | 9 | 2 | 66 |
+| Informatique, algorithmique et langages de programmation | 80 | 6 | 6 | 74 |
+| Arts, musique, création et culture | 45 | 4 | 2 | 41 |
 | Santé, alimentation, corps et sécurité | 60 | 1 | 0 | 59 |
-| Apprendre à apprendre, autonomie et relations | 45 | 1 | 0 | 44 |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | 75 | 1 | 1 | 74 |
-| **Total planifié** | **1 000** | **35** | **9** | **965** |
+| Apprendre à apprendre, autonomie et relations | 45 | 2 | 1 | 43 |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | 75 | 3 | 3 | 72 |
+| **Total planifié** | **1 000** | **70** | **44** | **930** |
 
 ## Horizon principal des contenus
 
