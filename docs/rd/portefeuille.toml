@@ -84,8 +84,8 @@ etat = "a-tester"
 domaines = ["numerique-ia", "methodes-communication"]
 question = "Les pages restent-elles rapides, lisibles, robustes, accessibles et utilisables quand le stockage, le réseau ou une fonction optionnelle échoue?"
 preuves = ["docs/rd-plan-global-consolidation.md", "docs/rd-affichage-adaptatif.md", "docs/rd-audit-securite-optimisation.md", "docs/rd-confidentialite-rgpd.md", "outils/verifier-integration.py", "outils/verifier-site-statique.py"]
-prochaine_action = "Faire une revue visuelle et au clavier de l’en-tête compactable et des parcours sur appareils réels (zoom, tactile, lecteur d’écran) ; noter les limites et défauts sans collecte d’usage avant de changer l’état de l’initiative."
-criteres_sortie = ["Les principaux parcours, l’en-tête compactable et la barre compacte sont testés sur des largeurs et technologies représentatives.", "Les améliorations ne retirent ni zoom, clavier, reflow ou contenu sans JavaScript.", "Aucune collecte ou dépendance tierce n'est ajoutée sans nécessité et information."]
+prochaine_action = "Faire une revue visuelle et au clavier du contrôle Parcours repliable et de l’en-tête compactable sur appareils réels (zoom, tactile, lecteur d’écran) ; vérifier la découvrabilité, le focus et les panneaux concurrents, sans collecte d’usage avant de changer l’état de l’initiative."
+criteres_sortie = ["Les principaux parcours, l’en-tête compactable et les commandes de parcours repliables sont testés sur des largeurs et technologies représentatives.", "Les améliorations ne retirent ni zoom, clavier, reflow ou contenu sans JavaScript.", "Aucune collecte ou dépendance tierce n'est ajoutée sans nécessité et information."]
 skills = ["conception-innovation", "accessibilite-co-conception", "integration-securite", "evaluation-maintenance"]
 
 [[initiative]]

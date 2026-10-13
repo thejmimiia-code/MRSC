@@ -7,15 +7,31 @@
   const currentUrl = new URL(window.location.href);
   const homeLink = document.querySelector("[data-site-home], .identity > a[href], #mrsc-retour-site a[href]");
   const header = document.querySelector(".site-header");
+  const navInner = header?.querySelector(".nav-inner");
   const returnBar = document.getElementById("mrsc-retour-site");
   const homeUrl = homeLink ? new URL(homeLink.href, currentUrl) : new URL("index.html", currentUrl);
   const homePath = normaliser(homeUrl);
   const basePath = homePath.endsWith("index.html")
     ? homePath.slice(0, -"index.html".length)
     : homePath;
+  let parentHasSiteHeader = false;
+  if (returnBar && window.parent !== window) {
+    try {
+      parentHasSiteHeader = Boolean(
+        window.parent.document.querySelector(".site-header .nav-inner [data-menu-toggle]")
+      );
+    } catch (error) {
+      parentHasSiteHeader = false;
+    }
+  }
 
   if (!homePath || !basePath) return;
-  if (document.querySelector("[data-site-journey]") || (!header && !returnBar)) return;
+  if (
+    document.querySelector("[data-site-journey]")
+    || (!header && !returnBar)
+    || (!returnBar && !navInner)
+    || parentHasSiteHeader
+  ) return;
 
   let stockageDisponible = true;
 
@@ -131,9 +147,31 @@
   limiterHistorique();
   enregistrer();
 
+  const parcours = document.createElement("details");
+  parcours.className = "site-journey-settings";
+  parcours.dataset.siteJourney = "";
+
+  const declencheur = document.createElement("summary");
+  declencheur.className = "site-journey-summary";
+  declencheur.textContent = "Parcours";
+  declencheur.title = "Afficher ou masquer les commandes de navigation du parcours";
+  declencheur.setAttribute("aria-label", "Afficher ou masquer les commandes de navigation du parcours");
+
+  const chevron = document.createElement("span");
+  chevron.className = "site-journey-chevron";
+  chevron.setAttribute("aria-hidden", "true");
+  chevron.textContent = "⌄";
+  declencheur.appendChild(chevron);
+
+  const panneau = document.createElement("div");
+  panneau.className = "site-journey-panel";
+  panneau.id = "site-journey-controls-panel";
+  panneau.dataset.siteJourneyPanel = "";
+  declencheur.setAttribute("aria-controls", panneau.id);
+  parcours.append(declencheur, panneau);
+
   const barre = document.createElement("div");
   barre.className = "site-journey-navigation";
-  barre.dataset.siteJourney = "";
   barre.setAttribute("role", "group");
   barre.setAttribute("aria-label", "Navigation des pages visitées dans cet onglet");
 
@@ -176,32 +214,53 @@
 
   contenuBarre.append(commandes, statut);
   barre.appendChild(contenuBarre);
+  panneau.appendChild(barre);
+
+  const menuToggle = document.querySelector("[data-menu-toggle]");
+  const navigation = document.querySelector("[data-primary-navigation]");
+  const displaySettings = document.querySelector("[data-display-settings]");
+  const headerCompactToggle = document.querySelector("[data-header-compact-toggle]");
+  const fermerMenu = () => {
+    if (!menuToggle || !navigation) return;
+    menuToggle.setAttribute("aria-expanded", "false");
+    navigation.classList.remove("is-open");
+  };
+
+  parcours.addEventListener("toggle", () => {
+    if (!parcours.open) return;
+    fermerMenu();
+    if (displaySettings) displaySettings.open = false;
+  });
+  displaySettings?.addEventListener("toggle", () => {
+    if (!displaySettings.open) return;
+    fermerMenu();
+    parcours.open = false;
+  });
+  menuToggle?.addEventListener("click", () => {
+    if (menuToggle.getAttribute("aria-expanded") !== "true") return;
+    parcours.open = false;
+    if (displaySettings) displaySettings.open = false;
+  });
+  headerCompactToggle?.addEventListener("click", () => {
+    parcours.open = false;
+  });
+  document.addEventListener("click", (event) => {
+    if (!parcours.contains(event.target)) parcours.open = false;
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !parcours.open) return;
+    const focusInside = parcours.contains(document.activeElement);
+    parcours.open = false;
+    if (focusInside) declencheur.focus();
+  });
+
   if (returnBar) {
     const displayControls = returnBar.querySelector("#mrsc-display-controls");
-    if (displayControls) returnBar.insertBefore(barre, displayControls);
-    else returnBar.appendChild(barre);
+    if (displayControls) returnBar.insertBefore(parcours, displayControls);
+    else returnBar.appendChild(parcours);
   } else {
-    header.after(barre);
-
-    const ajusterPositionSticky = () => {
-      const paysageCourt = window.matchMedia(
-        "(orientation: landscape) and (max-height: 560px) and (max-width: 920px)"
-      ).matches;
-      if (paysageCourt) {
-        barre.style.removeProperty("--journey-sticky-offset");
-        return;
-      }
-      const hauteur = Math.ceil(header.getBoundingClientRect().height);
-      barre.style.setProperty("--journey-sticky-offset", `${hauteur}px`);
-    };
-    ajusterPositionSticky();
-    window.addEventListener("resize", ajusterPositionSticky, { passive: true });
-    window.addEventListener("orientationchange", ajusterPositionSticky, { passive: true });
-    window.addEventListener("mrsc:header-layout-change", ajusterPositionSticky);
-    if ("ResizeObserver" in window) {
-      const observateur = new ResizeObserver(ajusterPositionSticky);
-      observateur.observe(header);
-    }
+    const displaySettingsInHeader = navInner.querySelector("[data-display-settings]");
+    navInner.insertBefore(parcours, displaySettingsInHeader);
   }
 
   function actualiser() {

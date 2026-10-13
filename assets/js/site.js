@@ -153,7 +153,6 @@
         headerCompactToggle.setAttribute("aria-label", description);
         headerCompactToggle.title = description;
         if (focusWouldBeHidden) headerCompactToggle.focus();
-        window.dispatchEvent(new Event("mrsc:header-layout-change"));
       };
 
       headerCompactToggle.hidden = false;

@@ -1,16 +1,18 @@
 # R&D — plan global de consolidation, optimisation et maintenance du site M.R.S.C
 
-**Revue du dépôt local : 12 octobre 2026.** Ce document organise les pistes déjà présentes dans le dépôt et la demande d’allègement de la barre de parcours. C’est un plan de travail, pas une certification de qualité, d’accessibilité, de sécurité ni un audit de l’hébergement en production. Les choix de publication restent humains.
+**Revue initiale du dépôt local : 12 octobre 2026. Mise à jour de décision : 13 octobre 2026.** Ce document organise les pistes déjà présentes dans le dépôt et la demande d’allègement de la barre de parcours. C’est un plan de travail, pas une certification de qualité, d’accessibilité, de sécurité ni un audit de l’hébergement en production. Les choix de publication restent humains.
+
+**Décision mise à jour le 13 octobre :** à la demande explicite du lecteur, les quatre commandes ne restent plus visibles pendant la lecture. Elles sont regroupées derrière une seule bascule native « Parcours » intégrée à la barre principale ; elles restent disponibles sur demande. Le simulateur autonome reçoit un contrôle équivalent dans sa barre de retour, tandis que l’iframe dans une page du site laisse la navigation au bandeau parent pour éviter un doublon. Cette décision remplace l’option initialement écartée ci-dessous ; la découvrabilité et le focus restent à tester avec des personnes.
 
 ## 1. Besoin, périmètre et décision de cette itération
 
 **Signal reçu :** le site doit rester complet, stable et fonctionnel, mieux réunir ses améliorations et éviter les doublons ou versions obsolètes ; la barre « Précédent / Suivant / Accueil / Dernière vue » est jugée trop volumineuse et insuffisamment intégrée visuellement.
 
-**Observation vérifiée dans le dépôt :** le script `assets/js/navigation-parcours.js` construit cette barre sur les pages du site et dans le simulateur autonome. Les styles du site laissaient les quatre boutons à 44 px, puis plaçaient un long statut sous les commandes sur les petits écrans. La copie du simulateur, qui ne charge pas la feuille CSS commune, possède un habillage complémentaire dans son générateur.
+**Observation vérifiée dans le dépôt :** lors de la revue du 12 octobre, `assets/js/navigation-parcours.js` insérait une barre sticky permanente sur les pages du site et dans le simulateur autonome. Depuis la mise à jour du 13 octobre, le script place les mêmes quatre commandes dans un `<details>` « Parcours » fermé par défaut ; le simulateur généré a un habillage dédié, car il ne charge pas la feuille CSS commune.
 
-**Hypothèse à tester :** une barre secondaire alignée sur le contenu, compacte sur une seule ligne lorsque l’espace le permet et adaptée aux petits écrans, peut libérer de la hauteur sans supprimer les quatre actions ni leurs noms accessibles.
+**Hypothèse de la première passe (12 octobre) :** une barre secondaire alignée sur le contenu, compacte sur une seule ligne lorsque l’espace le permet et adaptée aux petits écrans, peut réduire l’emprise visuelle sans supprimer les quatre actions ni leurs noms accessibles.
 
-**Décision réversible :** appliquer un style plus discret sur le site et dans le simulateur : boutons visuellement à 38 px sur pointeur fin, cibles de 44 px sur tactile et mobile, symboles décoratifs masqués sur très petit écran pour garder les libellés visibles, compteur d’étape court et barre alignée au contenu. Ne pas ajouter de stockage, requête réseau, dépendance ou fonction de suivi. Aucun fichier « ancien » n’est supprimé sur la seule base de son âge ou de son nom.
+**Décision initiale du 12 octobre, désormais supersédée :** appliquer un style plus discret sur le site et dans le simulateur : boutons visuellement à 38 px sur pointeur fin, cibles de 44 px sur tactile et mobile, symboles décoratifs masqués sur très petit écran pour garder les libellés visibles, compteur d’étape court et barre alignée au contenu. La mise à jour du 13 octobre conserve ces invariants dans un panneau fermé par défaut. Aucun stockage supplémentaire, requête réseau, dépendance ou fonction de suivi n’est ajouté. Aucun fichier « ancien » n’est supprimé sur la seule base de son âge ou de son nom.
 
 ## 2. Carte des sources de vérité et des sorties
 
@@ -46,8 +48,8 @@ Aucun rapport de couverture CSS/JavaScript ou rendu navigateur n’établit ici 
 | Option | Valeur possible | Risque / coût | Décision |
 | --- | --- | --- | --- |
 | A. Réduire les boutons et l’espace du statut, puis aligner la barre au contenu | Moins de hauteur ; actions immédiatement visibles ; code réversible et sans dépendance | Les libellés longs ne tiennent pas sur tout écran étroit ; demander une revue clavier/tactile et lecteur d’écran | **Prototype choisi** : libellés visibles dans les deux formats, symboles décoratifs masqués à très petite largeur ; cibles tactiles de 44 px. |
-| B. Replier les commandes dans un panneau `<details>` sur mobile | Gain de hauteur supplémentaire | Ajoute une action d’ouverture, réduit la découverte des commandes et demande une nouvelle interaction à tester | Écarté pour cette première passe ; à reconsidérer si la barre reste trop haute après essais. |
-| C. Déplacer les commandes dans la navigation principale | Une seule bande visuelle | Elle est déjà dense, passe en menu compact selon la largeur et mélangerait navigation de rubriques et historique de visite | Écarté : garder une barre secondaire visuellement apparentée mais distincte. |
+| B. Replier les commandes dans un panneau `<details>` du bandeau principal | Libère la hauteur de lecture ; une seule bascule révèle ou replie les quatre actions au besoin | Ajoute une action et peut réduire leur découverte ; exige de tester focus, clavier, zoom et compréhension | **Adopté le 13 octobre à la demande du lecteur** : panneau fermé par défaut et commande visible « Parcours » ; garder les quatre actions, leurs noms et leur état. |
+| C. Déplacer les quatre commandes directement dans la rangée des liens principaux | Une seule bande visuelle | Surcharge les liens de rubrique et confond la navigation du site avec l’historique de visite | Toujours écarté : seule la bascule Parcours rejoint le bandeau ; les quatre commandes s’ouvrent dans un panneau distinct. |
 | D. Remplacer la barre par l’historique natif du navigateur | Moins de code et moins de stockage applicatif | Fait perdre « Accueil » et « Dernière vue », et ne répond pas au parcours personnalisé demandé par le site | Écarté tant que ces deux actions font partie de la fonction. |
 
 ## 5. Plan global par priorité
@@ -61,8 +63,8 @@ Aucun rapport de couverture CSS/JavaScript ou rendu navigateur n’établit ici 
 
 ### P1 — interface, accessibilité et robustesse
 
-1. Tester la barre compacte après génération sur l’accueil, une page d’information, une fiche et le simulateur : clavier seul, focus, zoom, tailles 320/375/768/1024/1440 px, paysage court, pointeur fin et tactile.
-2. Rejouer Précédent/Suivant, retour à l’accueil, dernière vue, fragments d’ancre, retour du navigateur et session `sessionStorage` bloquée. Vérifier que les contrôles gardent un nom clair et que le message de repli est visible et annoncé.
+1. Tester le panneau Parcours fermé/ouvert sur l’accueil, une page d’information, une fiche et le simulateur : clavier seul, focus, Échap, clic extérieur, ouverture concurrente de Menu/Affichage, zoom, tailles 320/375/768/1024/1440 px, paysage court, pointeur fin et tactile.
+2. Rejouer Précédent/Suivant, retour à l’accueil, dernière vue, fragments d’ancre, retour du navigateur et session `sessionStorage` bloquée. Vérifier que les contrôles gardent un nom clair, que leur statut replié est annoncé et que le message de repli reste accessible dans le panneau.
 3. Si un problème réel apparaît, privilégier une correction ciblée avec repli plutôt que l’ajout d’une couche de framework.
 4. Maintenir un contrôle séparé du simulateur intégré et de sa version autonome ; les deux ne partagent pas toujours la même origine ni les mêmes styles.
 
