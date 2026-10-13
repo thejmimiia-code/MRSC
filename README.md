@@ -31,7 +31,7 @@ Les vérifications se lancent localement avec `python3 outils/verifier-rd-contin
 
 ## Le simulateur macro-politique
 
-Le site intègre le **simulateur macro-politique systémique** du projet *Démocratie et politique, du peuple, pour le peuple, par le peuple* : 5 échelons (local → européen → mondial → géopolitique), 93 leviers de politique publique, 20 domaines d’impact notés de 0 à 100, une console de veille des seuils tolérables, des données publiques (Eurostat, BCE, Banque mondiale, Frankfurter) et des exports JSON/CSV.
+Le site intègre le **simulateur macro-politique systémique** du projet *Démocratie et politique, du peuple, pour le peuple, par le peuple* : 5 échelons (local → national → européen → mondial → géopolitique), plus de 100 leviers de politique publique, 20 domaines d’impact notés de 0 à 100, 52 indicateurs de contexte sourcés, une console de veille des seuils tolérables et des exports JSON/CSV.
 
 | Élément | Rôle |
 |---|---|

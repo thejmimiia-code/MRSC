@@ -37,6 +37,9 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RACINE))
 from simulateur.dashboard import SCENARIOS as SCENARIOS_MOTEUR  # noqa: E402
+from simulateur.donnees_live import INDICATEURS as INDICATEURS_MOTEUR  # noqa: E402
+from simulateur.domaines import DOMAINES as DOMAINES_MOTEUR  # noqa: E402
+from simulateur.parametres import LEVIERS as LEVIERS_MOTEUR  # noqa: E402
 
 #: Sortie réelle : le moteur est bavard, ses impressions sont mises de côté.
 SORTIE = sys.stdout
@@ -616,6 +619,37 @@ def fichiers_du_site() -> None:
         bool(scenarios_annonces) and int(scenarios_annonces.group(1)) == len(SCENARIOS_MOTEUR),
         f"{len(SCENARIOS_MOTEUR)} scénarios présents",
     )
+    levier_annonce = re.search(
+        r"<dt>\s*100\+\s*</dt>\s*<dd>\s*leviers de politique publique réglables",
+        presentation_simulateur,
+        flags=re.IGNORECASE,
+    )
+    verifier(
+        "La présentation annonce prudemment plus de 100 leviers",
+        bool(levier_annonce) and len(LEVIERS_MOTEUR) > 100,
+        f"{len(LEVIERS_MOTEUR)} leviers dans la copie embarquée",
+    )
+    domaines_annonces = re.search(
+        r"<dt>\s*(\d+)\s*</dt>\s*<dd>\s*domaines d’impact notés de 0 à 100",
+        presentation_simulateur,
+        flags=re.IGNORECASE,
+    )
+    verifier(
+        "Le nombre annoncé de domaines correspond au moteur",
+        bool(domaines_annonces) and int(domaines_annonces.group(1)) == len(DOMAINES_MOTEUR),
+        f"{len(DOMAINES_MOTEUR)} domaines présents",
+    )
+    indicateurs_annonces = re.search(
+        r"<dt>\s*(\d+)\s*</dt>\s*<dd>\s*indicateurs de contexte référencés avec leur source et leur période",
+        presentation_simulateur,
+        flags=re.IGNORECASE,
+    )
+    verifier(
+        "Le nombre annoncé d’indicateurs correspond au registre de données",
+        bool(indicateurs_annonces)
+        and int(indicateurs_annonces.group(1)) == len(INDICATEURS_MOTEUR),
+        f"{len(INDICATEURS_MOTEUR)} indicateurs référencés",
+    )
     verifier(
         "La page du simulateur est publiée",
         page_simulateur.is_file(),
@@ -840,7 +874,7 @@ def _repondre_stub(soi) -> None:  # noqa: ANN001 - handler HTTP minimal
     if chemin in ("/", "/index.html"):
         corps = (
             "<!DOCTYPE html><html lang='fr'><head><title>Simulateur Macro-Politique</title></head>"
-            "<body><div id='console-pilotage'></div><p>93 leviers de politique publique</p></body></html>"
+            "<body><div id='console-pilotage'></div><p>leviers de politique publique</p></body></html>"
         ).encode("utf-8")
         type_mime = "text/html; charset=utf-8"
     elif chemin == "/api/scenarios":
