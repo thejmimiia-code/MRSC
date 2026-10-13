@@ -4,11 +4,13 @@
 
 **Mise à jour du 13 octobre 2026 :** la barre secondaire persistante décrite dans la revue initiale est remplacée par une seule bascule native « Parcours » dans le bandeau commun ; les quatre commandes sont dans un panneau fermé par défaut. Les analyses Chromium/axe précédentes portaient sur l’ancienne présentation et ne valident pas le nouveau panneau. Sa revue visuelle, au clavier et avec technologies d’assistance reste à faire.
 
+**Mise à jour du 13 octobre 2026 — accueil et ÉVA :** l’introduction a été reformulée avec des mots plus directs et une section présente les travaux de recherche sur ÉVA comme en cours. Le texte reçu dans le document Drive « Pour l’accueil du site du M.R.S.C » a servi de proposition éditoriale, pas de preuve technique ; les capacités, essais et résultats ne sont pas affirmés sans documentation. La rubrique devra être enrichie lorsque des éléments techniques validés pourront être publiés.
+
 ## 1. Intention et identité à faire apparaître
 
 Le site doit être d’abord reconnaissable comme celui du **Mouvement Représentatif de la Société Civile**, association loi 1901, et non comme une juxtaposition d’outils. Le fil de lecture retenu pour l’accueil est :
 
-> Faire société à partir des expériences, des compétences et des savoir-faire de chacune et chacun ; créer du lien, rendre les ressources compréhensibles, ouvrir des espaces d’information et de participation.
+> Le M.R.S.C. propose des fiches, un dossier sur l’IA et un simulateur pour mieux comprendre des sujets de société. Le site explique aussi comment poser une question ou proposer une idée, et présente séparément la recherche sur ÉVA en distinguant les objectifs des résultats documentés.
 
 La formulation de la mission est une synthèse des statuts disponibles dans le dépôt. Le texte statutaire reste la référence pour l’objet, les valeurs, le fonctionnement et l’adhésion.
 
@@ -19,7 +21,7 @@ Le site associe plusieurs portes d’entrée, sans imposer de parcours :
 3. **Examiner des hypothèses** — simulateur de politiques publiques, présenté comme un modèle exploratoire, jamais comme une prédiction certaine ou un verdict.
 4. **Prendre part et partager** — documents, contact, contributions volontaires et partage des ressources.
 
-Le site ne doit pas laisser entendre qu’une formation certifiante, une permanence, un compte ou une fonction d’EVA sont disponibles lorsqu’aucune description validée ne l’établit.
+Le site ne doit pas annoncer de fonction d’ÉVA comme disponible sans description et preuve validées. Les objectifs de recherche, les essais réalisés, les résultats et les fonctions réellement disponibles doivent être présentés séparément. Ne pas laisser entendre non plus qu’une formation certifiante, une permanence ou un compte existent si rien ne le confirme.
 
 ## 2. Statut des contenus et des affirmations
 
@@ -71,7 +73,7 @@ Une vraie commande HTML `<button>` reçoit les mêmes règles de police, curseur
 
 ## 4. Accueil : nouvel ordre de lecture
 
-L’accueil commence par la mission de l’association et la valeur des expériences personnelles. Il donne ensuite quatre portes d’entrée : apprentissages autonomes, IA & société, simulateur, informations et documents. La participation, la prise de parole, le partage et la traçabilité sont présentés avant le pied de page.
+L’accueil commence par une phrase simple sur ce que le visiteur peut trouver et faire : lire des fiches, s’informer sur l’IA, essayer le simulateur, poser une question ou proposer une idée. La mission de l’association est résumée avec des mots courants et reliée aux statuts officiels. Une section distincte présente la recherche en cours sur ÉVA : elle sépare les objectifs des essais, des résultats et des fonctions disponibles. Les documents, les sources, la participation et le contact restent accessibles depuis la page.
 
 La page distingue :
 
@@ -86,7 +88,7 @@ Le partage s’effectue à la demande par le menu natif de l’appareil, la copi
 
 | Surface | Vérification de cohérence à appliquer | État de cette itération |
 | --- | --- | --- |
-| Accueil | Mission avant les produits ; parcours variés ; liens vers apprendre, IA, simulateur, documents, sources, contact et partage ; distinction officiel/réflexion/modèle | Réorganisé ; partage natif avec repli courriel/copie ; couleurs des étiquettes de cartes et liens de la note du créateur renforcées ; mention sociale non souhaitée supprimée |
+| Accueil | Phrases courtes et concrètes ; liens directs vers les ressources ; distinction entre documents officiels, réflexions, outils et recherche ÉVA ; objectifs séparés des essais et résultats | Texte d’introduction simplifié ; section de recherche ÉVA ajoutée avec son statut en cours et ses limites ; sources et contact conservés ; relecture humaine de clarté encore utile |
 | Navigation, panneau Parcours et réglages | Même bleu nuit, contour, rayon et focus visible ; une bascule visible « Parcours » regroupe les quatre commandes dans un panneau fermé par défaut. Menu, Réduire/Agrandir, Parcours et Affichage partagent une barre d’outils centrée, une hauteur minimale de 44 px et les mêmes états actifs/hover | Barre commune réharmonisée sans retirer de commande ni de libellé ; liens de rubrique restent dans le menu séparé quand la navigation se replie. Les actions du panneau Parcours gardent 38 px au pointeur fin et au moins 44 px sur tactile. La matrice headless antérieure ne valide pas la nouvelle présentation ; revue visuelle, clavier et lecteur d’écran encore requis |
 | Apprendre | Recherche, filtres, cartes, étiquettes et liens de fiche ; source visible mais facultative ; repères non stigmatisants | 70 entrées au catalogue : 26 fiches du corpus initial et 44 prototypes explicitement à relire ; 33 fiches de développement réparties en quatre lots ouvrent des points d’entrée en français, langues, géographie, histoire, mathématiques, sciences, numérique, informatique, arts et recherche ; l’économie/consommation reste partielle ; objectif éditorial de 1 000 présenté comme cible, non comme offre actuelle ; couverture partielle |
 | Fiches autonomes | Explication complète sur la page ; horizon séparé de la difficulté ; statut éditorial, analogie et sa limite, aide/correction, sources facultatives et retour vers le site | 70 pages générées, dont quarante-quatre prototypes à relire ; contenu autoportant ; relecture spécialisée et essais apprenants en attente ; commandes et métadonnées statiquement contrôlées |
