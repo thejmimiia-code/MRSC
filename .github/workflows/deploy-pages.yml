@@ -48,7 +48,7 @@ jobs:
           set -euo pipefail
           rm -rf _site
           mkdir -p _site/simulateur _site/apprendre
-          cp index.html apprendre.html anglais-aventure.html ia-societe.html simulateur.html documents.html liens-utiles.html localisation.html nous-contacter.html transparence.html confidentialite.html 404.html sitemap.xml _site/
+          cp index.html apprendre.html anglais-aventure.html ia-societe.html simulateur.html documents.html liens-utiles.html localisation.html nous-contacter.html transparence.html confidentialite.html 404.html sitemap.xml llms.txt _site/
           cp -R assets _site/assets
           # Fiches autonomes publiques ; les sources TOML restent dans docs/.
           cp -R apprendre/fiches _site/apprendre/fiches

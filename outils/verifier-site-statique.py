@@ -21,6 +21,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
+SITE_URL = "https://thejmimiia-code.github.io/MRSC/"
 PAGES = sorted(ROOT.glob("*.html"))
 PAGES.extend(sorted((ROOT / "apprendre" / "fiches").glob("*.html")))
 PAGES.append(ROOT / "simulateur" / "index.html")
@@ -48,6 +49,12 @@ class PageInfo:
     relations: list[tuple[str, str, int]] = field(default_factory=list)
     langues: list[str] = field(default_factory=list)
     titres: int = 0
+    texte_titre: str = ""
+    descriptions: list[str] = field(default_factory=list)
+    canoniques: list[str] = field(default_factory=list)
+    directives_robots: list[str] = field(default_factory=list)
+    liens_decrits: list[str] = field(default_factory=list)
+    donnees_structurees: list[str] = field(default_factory=list)
     mains: int = 0
     scripts: list[tuple[str, str]] = field(default_factory=list)
     images_sans_alt: list[int] = field(default_factory=list)
@@ -62,6 +69,7 @@ class InspecteurHTML(HTMLParser):
         self.script_src = False
         self.script_lines: list[str] = []
         self.script_number = 0
+        self.titre_en_cours = False
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attributs = dict(attrs)
@@ -70,8 +78,23 @@ class InspecteurHTML(HTMLParser):
             langue = (attributs.get("lang") or "").strip()
             if langue:
                 self.info.langues.append(langue)
+        if tag == "meta":
+            nom = (attributs.get("name") or "").strip().casefold()
+            contenu = (attributs.get("content") or "").strip()
+            if nom == "description":
+                self.info.descriptions.append(contenu)
+            elif nom in {"robots", "googlebot", "bingbot"}:
+                self.info.directives_robots.append(contenu)
+        if tag == "link":
+            relations = set((attributs.get("rel") or "").casefold().split())
+            href = (attributs.get("href") or "").strip()
+            if "canonical" in relations:
+                self.info.canoniques.append(href)
+            if "describedby" in relations:
+                self.info.liens_decrits.append(href)
         if tag == "title":
             self.info.titres += 1
+            self.titre_en_cours = True
         if tag == "main":
             self.info.mains += 1
         identifiant = attributs.get("id")
@@ -93,18 +116,25 @@ class InspecteurHTML(HTMLParser):
                 self.info.references.append((attribut, valeur, ligne))
         if tag == "script":
             self.script_number += 1
-            self.script_type = (attributs.get("type") or "text/javascript").lower()
+            self.script_type = (attributs.get("type") or "text/javascript").lower().split(";", 1)[0].strip()
             self.script_src = bool(attributs.get("src"))
             self.script_lines = []
 
     def handle_data(self, data: str) -> None:
+        if self.titre_en_cours:
+            self.info.texte_titre += data
         if self.script_number and not self.script_src:
             self.script_lines.append(data)
 
     def handle_endtag(self, tag: str) -> None:
+        if tag == "title":
+            self.titre_en_cours = False
         if tag == "script" and self.script_number and not self.script_src:
+            contenu = "".join(self.script_lines)
             if self.script_type in ("text/javascript", "application/javascript", "module"):
-                self.info.scripts.append((f"{self.info.chemin.relative_to(ROOT)}:script-{self.script_number}", "".join(self.script_lines)))
+                self.info.scripts.append((f"{self.info.chemin.relative_to(ROOT)}:script-{self.script_number}", contenu))
+            elif self.script_type == "application/ld+json":
+                self.info.donnees_structurees.append(contenu)
             self.script_number = 0
             self.script_src = False
             self.script_lines = []
@@ -305,6 +335,170 @@ def verifier_sitemap() -> None:
     if absents:
         signaler("sitemap.xml omet des pages publiques : " + ", ".join(absents))
     print(f"Sitemap XML : {len(emplacements)} URL(s), {len(attendus)} page(s) publiques attendues.")
+
+
+def url_canonique_attendue(chemin: Path) -> str:
+    relatif = chemin.relative_to(ROOT).as_posix()
+    if relatif == "index.html":
+        return SITE_URL
+    if relatif == "simulateur/index.html":
+        return SITE_URL + "simulateur/"
+    return SITE_URL + relatif
+
+
+def directives_noindex(directives: list[str]) -> bool:
+    return any(
+        {"noindex", "none"}.intersection(
+            terme.strip() for terme in directive.casefold().split(",")
+        )
+        for directive in directives
+    )
+
+
+def verifier_metadonnees(infos: dict[Path, PageInfo]) -> None:
+    """Vérifie les repères d’indexation et les données structurées des pages publiques."""
+    publiques = [
+        (chemin, info)
+        for chemin, info in infos.items()
+        if chemin.name != "404.html"
+    ]
+    titres: list[str] = []
+    descriptions: list[str] = []
+    canoniques: list[str] = []
+    avant = len(ERREURS)
+    for chemin, info in publiques:
+        relatif = chemin.relative_to(ROOT).as_posix()
+        titre = info.texte_titre.strip()
+        description = info.descriptions[0].strip() if len(info.descriptions) == 1 else ""
+        canonique = info.canoniques[0].strip() if len(info.canoniques) == 1 else ""
+        if info.titres != 1 or not titre:
+            signaler(f"{relatif} : un titre HTML unique et non vide est requis")
+        else:
+            titres.append(titre.casefold())
+        if len(info.descriptions) != 1 or not description:
+            signaler(f"{relatif} : une description meta unique et non vide est requise")
+        else:
+            descriptions.append(" ".join(description.split()).casefold())
+        attendu = url_canonique_attendue(chemin)
+        if len(info.canoniques) != 1 or canonique != attendu:
+            signaler(f"{relatif} : canonique attendue {attendu!r}, reçue {info.canoniques!r}")
+        else:
+            canoniques.append(canonique)
+        if directives_noindex(info.directives_robots):
+            signaler(f"{relatif} : directive noindex inattendue sur une page publique")
+        for bloc in info.donnees_structurees:
+            try:
+                json.loads(bloc)
+            except json.JSONDecodeError as erreur:
+                signaler(f"{relatif} : données JSON-LD invalides : {erreur}")
+
+    for libelle, valeurs in (
+        ("titre HTML", titres),
+        ("description meta", descriptions),
+        ("URL canonique", canoniques),
+    ):
+        doublons = sorted({valeur for valeur in valeurs if valeurs.count(valeur) > 1})
+        if doublons:
+            signaler(f"pages publiques : {libelle} en double : " + "; ".join(doublons))
+
+    page_404 = infos.get(ROOT / "404.html")
+    if page_404 is None or not directives_noindex(page_404.directives_robots):
+        signaler("404.html : conserver une directive noindex explicite hors du sitemap")
+
+    accueil = infos.get(ROOT / "index.html")
+    if accueil is None:
+        signaler("index.html : page d’accueil absente de l’analyse des métadonnées")
+    else:
+        if accueil.liens_decrits != ["llms.txt"]:
+            signaler("index.html : un lien rel=describedby vers llms.txt est attendu")
+        if len(accueil.donnees_structurees) != 1:
+            signaler("index.html : un bloc JSON-LD unique est attendu")
+        else:
+            try:
+                donnees = json.loads(accueil.donnees_structurees[0])
+                graphe = donnees.get("@graph", []) if isinstance(donnees, dict) else []
+                par_type = {
+                    objet.get("@type"): objet
+                    for objet in graphe
+                    if isinstance(objet, dict) and isinstance(objet.get("@type"), str)
+                }
+                organisation = par_type.get("Organization", {})
+                site = par_type.get("WebSite", {})
+                page = par_type.get("WebPage", {})
+                description = accueil.descriptions[0] if len(accueil.descriptions) == 1 else ""
+                valide = (
+                    donnees.get("@context") == "https://schema.org"
+                    and organisation.get("name") == "Mouvement Représentatif de la Société Civile"
+                    and organisation.get("alternateName") == "M.R.S.C."
+                    and organisation.get("url") == SITE_URL
+                    and site.get("url") == SITE_URL
+                    and site.get("inLanguage") == "fr-FR"
+                    and site.get("publisher", {}).get("@id") == organisation.get("@id")
+                    and page.get("url") == SITE_URL
+                    and page.get("description") == description
+                    and page.get("isPartOf", {}).get("@id") == site.get("@id")
+                    and page.get("about", {}).get("@id") == organisation.get("@id")
+                )
+                if not valide:
+                    signaler("index.html : le JSON-LD doit décrire seulement l’organisation, le site et la page avec des données cohérentes")
+            except (json.JSONDecodeError, AttributeError, TypeError) as erreur:
+                signaler(f"index.html : structure JSON-LD inattendue : {erreur}")
+
+    if len(ERREURS) == avant:
+        print(
+            f"Métadonnées : {len(publiques)} pages avec titre, description et canonique uniques ; "
+            "aucune directive noindex inattendue ; JSON-LD d’accueil valide."
+        )
+
+
+def verifier_llms_txt() -> None:
+    """Vérifie le sommaire Markdown expérimental et ses liens locaux."""
+    avant = len(ERREURS)
+    chemin = ROOT / "llms.txt"
+    try:
+        contenu = chemin.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as erreur:
+        signaler(f"llms.txt : fichier absent ou illisible : {erreur}")
+        return
+    lignes = contenu.splitlines()
+    if not lignes or not lignes[0].startswith("# "):
+        signaler("llms.txt : un titre Markdown de niveau 1 est requis en première ligne")
+    if not any(ligne.startswith("> ") for ligne in lignes[1:]):
+        signaler("llms.txt : un résumé en citation Markdown est requis")
+    if not any(ligne.startswith("## ") for ligne in lignes[1:]):
+        signaler("llms.txt : au moins une section de liens est requise")
+
+    liens = re.findall(r"\[[^\]]+\]\((https?://[^)]+)\)", contenu)
+    if len(liens) < 8:
+        signaler(f"llms.txt : sommaire trop court ({len(liens)} liens trouvés)")
+    for url in liens:
+        parties = urlsplit(url)
+        if (
+            parties.scheme != "https"
+            or parties.netloc != "thejmimiia-code.github.io"
+            or not parties.path.startswith("/MRSC/")
+        ):
+            signaler(f"llms.txt : URL hors du site public : {url!r}")
+            continue
+        relatif = unquote(parties.path.removeprefix("/MRSC/"))
+        if not relatif:
+            relatif = "index.html"
+        elif relatif.endswith("/"):
+            relatif += "index.html"
+        cible = (ROOT / relatif).resolve()
+        try:
+            cible.relative_to(ROOT.resolve())
+        except ValueError:
+            signaler(f"llms.txt : chemin sortant du dépôt : {url!r}")
+            continue
+        if not cible.is_file():
+            signaler(f"llms.txt : page liée introuvable : {url!r}")
+            continue
+        if parties.fragment and cible.suffix.lower() in (".html", ".htm"):
+            if parties.fragment not in analyser(cible).ids:
+                signaler(f"llms.txt : ancre absente dans {cible.relative_to(ROOT)} : #{parties.fragment}")
+    if len(ERREURS) == avant:
+        print(f"llms.txt : structure Markdown et {len(liens)} liens internes vérifiés hors ligne.")
 
 
 def verifier_javascript(infos: dict[Path, PageInfo]) -> None:
@@ -1145,6 +1339,8 @@ def main() -> int:
     verifier_collecte_navigateur_bornee()
     verifier_affichage_provenance_sans_injection()
     verifier_limites_requetes_api()
+    verifier_metadonnees(infos)
+    verifier_llms_txt()
     verifier_sitemap()
     verifier_javascript(infos)
     print(f"Pages contrôlées : {len(fichiers)} (dont {len(list((ROOT / 'apprendre' / 'fiches').glob('*.html')))} fiches autonomes).")

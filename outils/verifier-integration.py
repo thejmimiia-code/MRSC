@@ -161,7 +161,7 @@ def fichiers_du_site() -> None:
     for page in PAGES:
         chemin = RACINE / page
         verifier(f"Page présente : {page}", chemin.is_file() and chemin.stat().st_size > 500)
-    for ressource in ("assets/css/site.css", "assets/js/site.js", "assets/js/navigation-parcours.js", "assets/js/apprentissage.js", "assets/css/anglais-aventure.css", "assets/js/anglais-aventure-data.js", "assets/js/apprentissage-aventure-data.js", "assets/js/anglais-aventure.js", "assets/images/escales-anglais-hero.jpg", "assets/images/mondes-savoirs-hero.jpg", "assets/images/logo-mrsc.jpg"):
+    for ressource in ("assets/css/site.css", "assets/js/site.js", "assets/js/navigation-parcours.js", "assets/js/apprentissage.js", "assets/css/anglais-aventure.css", "assets/js/anglais-aventure-data.js", "assets/js/apprentissage-aventure-data.js", "assets/js/anglais-aventure.js", "assets/images/escales-anglais-hero.jpg", "assets/images/mondes-savoirs-hero.jpg", "assets/images/logo-mrsc.jpg", "llms.txt"):
         verifier(f"Ressource présente : {ressource}", (RACINE / ressource).is_file())
     catalogue_apprentissage = (RACINE / "apprendre.html").read_text(encoding="utf-8")
     page_aventure = (RACINE / "anglais-aventure.html").read_text(encoding="utf-8")
@@ -169,6 +169,7 @@ def fichiers_du_site() -> None:
     serveur_local = (RACINE / "outils" / "serveur-local.py").read_text(encoding="utf-8")
     publication = (RACINE / ".github" / "workflows" / "deploy-pages.yml").read_text(encoding="utf-8")
     sitemap = (RACINE / "sitemap.xml").read_text(encoding="utf-8")
+    llms_txt = RACINE / "llms.txt"
     confidentialite = (RACINE / "confidentialite.html").read_text(encoding="utf-8")
     verifier(
         "Le jeu est relié au catalogue, au serveur local, au sitemap et à la publication",
@@ -176,6 +177,14 @@ def fichiers_du_site() -> None:
         and '"anglais-aventure.html"' in serveur_local
         and "cp index.html apprendre.html anglais-aventure.html" in publication
         and "/MRSC/anglais-aventure.html" in sitemap,
+    )
+    accueil = (RACINE / "index.html").read_text(encoding="utf-8")
+    verifier(
+        "Le sommaire llms.txt est lié depuis l’accueil, servi localement et publié",
+        llms_txt.is_file()
+        and '"llms.txt"' in serveur_local
+        and "llms.txt" in publication
+        and 'rel="describedby" href="llms.txt"' in accueil,
     )
     try:
         sources_fiches = tomllib.loads((RACINE / "docs" / "apprentissage" / "catalogue.toml").read_text(encoding="utf-8"))["fiche"]

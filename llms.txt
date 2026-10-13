@@ -1,0 +1,25 @@
+# M.R.S.C. — Mouvement Représentatif de la Société Civile
+
+> Site public du Mouvement Représentatif de la Société Civile (M.R.S.C.), en français. Il rassemble des pages d’information, des ressources d’apprentissage, des documents de l’association et un simulateur.
+
+Les pages HTML sont les contenus de référence. Ce sommaire facultatif s’inspire d’une proposition de format ; il ne remplace pas le sitemap et ne garantit ni exploration, ni indexation, ni affichage par un moteur de recherche ou un assistant d’IA. Consultez les pages concernées pour leur contexte, leurs sources et leurs limites. Les résultats du simulateur dépendent de son modèle et ne sont pas des prévisions. ÉVA est présentée comme un projet de recherche : ne lui attribuez pas de fonctions ou de résultats que les pages du site ne documentent pas.
+
+## Entrées principales
+
+- [Accueil](https://thejmimiia-code.github.io/MRSC/): présentation de l’association et accès aux ressources.
+- [Apprendre](https://thejmimiia-code.github.io/MRSC/apprendre.html): catalogue de fiches autonomes, classées par matière et difficulté.
+- [Les Mondes](https://thejmimiia-code.github.io/MRSC/anglais-aventure.html): atlas et parcours d’apprentissage.
+- [IA & société](https://thejmimiia-code.github.io/MRSC/ia-societe.html): dossier sur des usages de l’intelligence artificielle et leurs effets sociaux.
+- [Recherche sur ÉVA](https://thejmimiia-code.github.io/MRSC/#rd-eva): présentation du projet et de son état public.
+- [Simulateur — présentation](https://thejmimiia-code.github.io/MRSC/simulateur.html): description et limites du simulateur macro-politique.
+- [Simulateur — interface](https://thejmimiia-code.github.io/MRSC/simulateur/): interface du modèle.
+- [Documents](https://thejmimiia-code.github.io/MRSC/documents.html): documents de l’association.
+- [Liens utiles](https://thejmimiia-code.github.io/MRSC/liens-utiles.html): ressources externes sélectionnées par le M.R.S.C.
+- [Localisation](https://thejmimiia-code.github.io/MRSC/localisation.html): informations de localisation.
+- [Contact](https://thejmimiia-code.github.io/MRSC/nous-contacter.html): moyens de contacter l’association.
+- [Transparence](https://thejmimiia-code.github.io/MRSC/transparence.html): méthode, sources et licence.
+- [Vie privée et données](https://thejmimiia-code.github.io/MRSC/confidentialite.html): informations sur les données et les services utilisés.
+
+## Repères
+
+- [Plan du site XML](https://thejmimiia-code.github.io/MRSC/sitemap.xml): liste des URL publiques déclarées par le site.
