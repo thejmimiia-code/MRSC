@@ -226,6 +226,11 @@ html.contraste-renforce .site-status-note {
   color: var(--green);
 }
 
+.site-header.is-compact .site-status-note,
+.site-header.is-compact .identity {
+  display: none;
+}
+
 .main-nav {
   background: var(--navy);
 }
@@ -265,6 +270,35 @@ html.contraste-renforce .site-status-note {
 .nav-toggle svg {
   width: 20px;
   height: 20px;
+}
+
+.header-compact-toggle {
+  display: none;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  max-width: 9rem;
+  padding: .4rem .55rem;
+  border: 1px solid rgba(255,255,255,.45);
+  border-radius: var(--button-radius);
+  background: transparent;
+  color: var(--white);
+  font: inherit;
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  white-space: normal;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+
+.header-compact-toggle[hidden] { display: none !important; }
+.header-compact-toggle:hover {
+  border-color: rgba(255,255,255,.8);
+  background: rgba(255,255,255,.1);
 }
 
 .nav-links {
@@ -2609,7 +2643,7 @@ html.contraste-renforce {
 html.contraste-renforce main a:not(.button),
 html.contraste-renforce .site-footer a { text-decoration: underline; text-decoration-thickness: .12em; }
 html.contraste-renforce :focus-visible { outline-width: 4px; }
-html.contraste-renforce :is(button,.button,.display-control,.display-settings > summary) { border: 2px solid currentColor; }
+html.contraste-renforce :is(button,.button,.display-control,.display-settings > summary,.header-compact-toggle) { border: 2px solid currentColor; }
 
 .site-journey-navigation {
   position: sticky;
@@ -2696,8 +2730,9 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
 }
 
 @media (max-width: 1260px) {
-  .nav-inner { justify-content: space-between; min-height: 50px; }
+  .nav-inner { justify-content: space-between; min-height: 50px; gap: .35rem; }
   .has-js .nav-toggle { display: inline-flex; min-height: 48px; }
+  .has-js .header-compact-toggle:not([hidden]) { display: inline-flex; min-height: 44px; }
   .has-js .nav-links {
     position: absolute; z-index: 2; top: 100%; right: 0; left: 0;
     display: none; flex-direction: column; align-items: stretch; gap: 0;
@@ -2719,12 +2754,15 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   html { scroll-padding-top: 13rem; }
   .site-journey-navigation { top: var(--journey-sticky-offset, 134px); }
   .site-journey-inner { width: min(var(--content),calc(100% - 2rem)); }
+  .nav-inner { gap: .25rem; }
   .display-settings { margin-left: auto; }
   .display-settings-panel { max-height: calc(100vh - 1rem); overflow: auto; }
 }
 @media (max-width: 520px) {
   html { scroll-padding-top: 12rem; }
   .site-journey-navigation { top: var(--journey-sticky-offset, 126px); }
+  .nav-inner { flex-wrap: wrap; gap: .2rem; min-height: 48px; }
+  .header-compact-toggle { max-width: 7.25rem; padding-inline: .4rem; font-size: .74rem; }
   .site-journey-inner {
     flex-wrap: wrap;
     gap: .1rem .3rem;
@@ -2748,6 +2786,7 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   }
   .display-settings-panel { width: min(24rem,calc(100vw - 1rem)); }
 }
+html.entete-compacte { scroll-padding-top: 8rem; }
 @media (orientation: landscape) and (max-height: 560px) and (max-width: 920px) {
   .site-header { position: relative; }
   .site-journey-navigation { top: 0; }
@@ -2757,7 +2796,7 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   .display-settings-panel { max-height: calc(100vh - 1rem); }
 }
 @media (any-pointer: coarse) {
-  .display-settings > summary,.display-control,.button,.nav-toggle,.nav-links a,summary { min-height: 44px; }
+  .display-settings > summary,.display-control,.button,.nav-toggle,.header-compact-toggle,.nav-links a,summary { min-height: 44px; }
   .site-journey-button { min-width: 44px; min-height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2771,15 +2810,15 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   :root { --ink:#101828; --navy:#13244b; --blue:#174a87; --blue-soft:#e2eaf6; --green:#426b26; --gold:#835100; --red:#a3232c; --muted:#3e4a5d; --line:#8994a5; --paper:#fff; --shadow:none; }
   main a:not(.button),.site-footer a { text-decoration: underline; text-decoration-thickness: .12em; }
   button:focus-visible,a:focus-visible,summary:focus-visible { outline-width: 4px; }
-  :is(button,.button,.display-control,.display-settings > summary,.site-journey-button) { border: 2px solid currentColor; }
+  :is(button,.button,.display-control,.display-settings > summary,.header-compact-toggle,.site-journey-button) { border: 2px solid currentColor; }
 }
 @media (forced-colors: active) {
   :root { color-scheme: light dark; --ink:CanvasText; --navy:CanvasText; --blue:LinkText; --blue-soft:Canvas; --green:CanvasText; --gold:Highlight; --red:CanvasText; --muted:CanvasText; --line:CanvasText; --paper:Canvas; --white:Canvas; --shadow:none; }
   body,.site-header,.site-journey-navigation,.main-nav,.site-footer,.home-hero,.ai-hero,.learning-hero,.section,.page-banner,.display-settings-panel,.display-settings-row { background:Canvas !important; color:CanvasText !important; box-shadow:none !important; backdrop-filter:none !important; }
   .site-header,.site-journey-navigation,.main-nav,.site-footer,.display-settings-panel,.display-settings-row { border-color:CanvasText !important; }
   .nav-links a,main a:not(.button),.site-footer a { color:LinkText !important; }
-  .button,.display-settings > summary,.display-control,.nav-toggle,.site-journey-button,.skip-link { border:1px solid ButtonText !important; background:ButtonFace !important; color:ButtonText !important; box-shadow:none !important; }
-  .button:hover,.display-control:hover:not(:disabled),.site-journey-button:hover:not(:disabled) { background:Highlight !important; color:HighlightText !important; }
+  .button,.display-settings > summary,.display-control,.nav-toggle,.header-compact-toggle,.site-journey-button,.skip-link { border:1px solid ButtonText !important; background:ButtonFace !important; color:ButtonText !important; box-shadow:none !important; }
+  .button:hover,.display-control:hover:not(:disabled),.header-compact-toggle:hover,.site-journey-button:hover:not(:disabled) { background:Highlight !important; color:HighlightText !important; }
   * { text-shadow:none !important; }
 }
 

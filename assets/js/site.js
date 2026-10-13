@@ -117,6 +117,8 @@
 
   const toggle = document.querySelector("[data-menu-toggle]");
   const navigation = document.querySelector("[data-primary-navigation]");
+  const header = document.querySelector(".site-header");
+  const headerCompactToggle = document.querySelector("[data-header-compact-toggle]");
 
   if (toggle && navigation) {
     root.classList.add("has-js");
@@ -125,6 +127,54 @@
       toggle.setAttribute("aria-expanded", "false");
       navigation.classList.remove("is-open");
     };
+
+    if (header && headerCompactToggle) {
+      const compactViewport = typeof window.matchMedia === "function"
+        ? window.matchMedia(
+          "(max-width: 760px), (orientation: landscape) and (max-height: 560px) and (max-width: 920px)"
+        )
+        : null;
+      const headerDetails = [
+        header.querySelector("#site-header-status"),
+        header.querySelector("#site-header-identity"),
+      ];
+
+      const setHeaderCompact = (compact) => {
+        const focusWouldBeHidden = compact
+          && headerDetails.some((element) => element?.contains(document.activeElement));
+        header.classList.toggle("is-compact", compact);
+        root.classList.toggle("entete-compacte", compact);
+        headerCompactToggle.setAttribute("aria-expanded", String(!compact));
+        const label = compact ? "Agrandir" : "Réduire";
+        const description = compact
+          ? "Agrandir l’en-tête pour afficher le logo et les informations du M.R.S.C."
+          : "Réduire l’en-tête pour libérer de la place à l’écran.";
+        headerCompactToggle.textContent = label;
+        headerCompactToggle.setAttribute("aria-label", description);
+        headerCompactToggle.title = description;
+        if (focusWouldBeHidden) headerCompactToggle.focus();
+        window.dispatchEvent(new Event("mrsc:header-layout-change"));
+      };
+
+      headerCompactToggle.hidden = false;
+      setHeaderCompact(Boolean(compactViewport?.matches));
+      headerCompactToggle.addEventListener("click", () => {
+        closeMenu();
+        setHeaderCompact(!header.classList.contains("is-compact"));
+      });
+
+      if (compactViewport) {
+        const onViewportModeChange = () => {
+          closeMenu();
+          setHeaderCompact(compactViewport.matches);
+        };
+        if (typeof compactViewport.addEventListener === "function") {
+          compactViewport.addEventListener("change", onViewportModeChange);
+        } else {
+          compactViewport.addListener?.(onViewportModeChange);
+        }
+      }
+    }
 
     toggle.addEventListener("click", () => {
       const isOpen = toggle.getAttribute("aria-expanded") === "true";

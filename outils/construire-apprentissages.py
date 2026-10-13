@@ -109,8 +109,8 @@ def classes_entete(prefixe: str = "", page: str = "apprendre") -> str:
     )
     return f'''  <a class="skip-link" href="#contenu">Aller au contenu principal</a>
   <header class="site-header">
-    <p class="site-status-note" role="note">Version de recherche et développement (R&amp;D) — le site est en cours de développement.</p>
-    <div class="identity">
+    <p class="site-status-note" id="site-header-status" role="note">Version de recherche et développement (R&amp;D) — le site est en cours de développement.</p>
+    <div class="identity" id="site-header-identity">
       <a href="{prefixe}index.html" data-site-home aria-label="M.R.S.C — Accueil">
         <img class="brand-logo" src="{prefixe}assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
       </a>
@@ -130,6 +130,7 @@ def classes_entete(prefixe: str = "", page: str = "apprendre") -> str:
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
           Menu
         </button>
+        <button class="header-compact-toggle" type="button" data-header-compact-toggle aria-expanded="true" aria-controls="site-header-status site-header-identity" hidden>Réduire</button>
         <div class="nav-links" id="navigation-principale" data-primary-navigation>
 {navigation}
         </div>
