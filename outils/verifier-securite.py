@@ -424,12 +424,27 @@ def test_http_et_erreurs() -> None:
         verifier(statut == 200 and contexte_suivant["eur_usd"] != 1.2345,
                  "une lecture POST ne modifie pas le contexte servi au visiteur suivant")
 
-        statut, contenu, entetes = demander(
-            base + "/api/donnees", "POST",
-            b"x" * (dashboard.MAX_REQUEST_BODY_BYTES + 1),
+        connexion_trop_lourde = http.client.HTTPConnection(
+            "127.0.0.1", serveur.server_address[1], timeout=10
         )
+        try:
+            connexion_trop_lourde.putrequest("POST", "/api/donnees")
+            connexion_trop_lourde.putheader(
+                "Content-Length", str(dashboard.MAX_REQUEST_BODY_BYTES + 1)
+            )
+            connexion_trop_lourde.putheader("Connection", "close")
+            # Déclarer un corps trop grand sans l'envoyer teste le rejet immédiat
+            # et évite une course entre l'envoi d'un mégaoctet et la fermeture
+            # volontaire de la connexion par le serveur.
+            connexion_trop_lourde.endheaders()
+            reponse_trop_lourde = connexion_trop_lourde.getresponse()
+            statut = reponse_trop_lourde.status
+            contenu = reponse_trop_lourde.read()
+            entetes = dict(reponse_trop_lourde.getheaders())
+        finally:
+            connexion_trop_lourde.close()
         verifier(statut == 413 and b"trop volumineux" in contenu.lower(),
-                 "le serveur HTTP refuse un corps de plus de 1 Mio")
+                 "le serveur HTTP refuse immédiatement un corps déclaré supérieur à 1 Mio")
         verifier(entetes.get("X-Content-Type-Options") == "nosniff",
                  "les réponses API déclarent X-Content-Type-Options")
 
