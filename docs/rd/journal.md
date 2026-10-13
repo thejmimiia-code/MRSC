@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-13 — Accueil simplifié et espace de suivi pour ÉVA
+
+- **Initiative :** `documentation-rd-eva`, liée à `optimisation-du-site`.
+- **Signal :** le texte « Faire société à partir de ce que chacune et chacun apporte » a été jugé peu compréhensible. Demande d’employer des mots directs et de rendre visible le suivi continu du projet ÉVA. Le document Drive « Pour l’accueil du site du M.R.S.C » propose une piste de rédaction plus longue.
+- **Décision :** remplacer l’accroche abstraite et plusieurs textes de présentation par des phrases concrètes sur les ressources et les actions disponibles. Ajouter après la mission une section identifiée « Recherche et développement · ÉVA », avec un statut de recherche en cours et un engagement à distinguer objectifs, essais, résultats et limites. Le brouillon Drive est traité comme une proposition éditoriale, pas comme une preuve des capacités techniques d’ÉVA ; aucune fonction, mesure ni performance n’est annoncée.
+- **Changements et sources :** introduction, textes d’accueil et métadonnées dans `index.html` ; ligne de traçabilité renvoyant à `index.html#rd-eva` dans `transparence.html` ; règles de clarté et de statut dans `docs/rd-coherence-visuelle-editoriale.md` ; nouvelle initiative `documentation-rd-eva` dans `docs/rd/portefeuille.toml` ; assertions de l’accueil et du registre dans `outils/verifier-integration.py`.
+- **Contrôles réellement exécutés :** `python3 -m py_compile simulateur/*.py api/*.py outils/*.py`, `python3 outils/verifier-rd-continue.py`, `python3 outils/construire-apprentissages.py --verifier`, `python3 outils/construire-simulateur.py --verifier`, `python3 outils/verifier-site-statique.py`, `python3 outils/verifier-securite.py`, `python3 outils/verifier-integration.py`, `node --check assets/js/site.js`, `node --check assets/js/navigation-parcours.js` et `git diff --check` — tous réussis. Le registre compte désormais 9 initiatives ; l’intégration confirme la présence et le statut prudent de la rubrique ÉVA.
+- **Limites :** aucun rapport d’essai, dépôt technique ou mesure de performance d’ÉVA n’a été consulté ici ; seuls le signal de la personne et le brouillon Drive ont servi à formuler la présentation générale. La page et le vocabulaire n’ont pas été relus par des visiteurs ; aucun contrôle dans un navigateur graphique, au clavier réel ou avec un lecteur d’écran n’a été fait.
+- **Prochaine action :** recueillir auprès de l’équipe ÉVA les éléments techniques publiables (objectifs validés, essais datés, versions, résultats, échecs, limites, sources et droits), puis compléter la rubrique sans annoncer de fonction non démontrée.
+
 ## 2026-10-13 — Harmonisation visuelle des commandes du bandeau
 
 - **Initiative :** `optimisation-du-site`.

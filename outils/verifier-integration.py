@@ -496,8 +496,37 @@ def fichiers_du_site() -> None:
     )
     accueil = (RACINE / "index.html").read_text(encoding="utf-8")
     verifier(
-        "L’accueil exprime d’abord la mission du M.R.S.C et la valeur des expériences personnelles",
-        all(terme in accueil for terme in ("La force citoyenne", "expériences vécues", "statuts", "Créer du lien social")),
+        "L’accueil présente clairement ce que propose le M.R.S.C",
+        all(
+            terme in accueil
+            for terme in (
+                "Comprendre les sujets",
+                "des fiches",
+                "un dossier sur l’intelligence artificielle",
+                "un simulateur",
+                "poser une question",
+                "proposer une idée",
+            )
+        ),
+    )
+    verifier(
+        "L’accueil présente la recherche sur ÉVA comme un travail en cours, sans confondre objectifs et fonctions",
+        all(
+            terme in accueil
+            for terme in (
+                'id="rd-eva"',
+                "ÉVA signifie « Entité Virtuelle Autonome »",
+                "Recherche en cours",
+                "Une idée ou un objectif n’est pas une fonction déjà disponible.",
+                "href=\"transparence.html#rd-innovation\"",
+            )
+        ),
+    )
+    transparence = (RACINE / "transparence.html").read_text(encoding="utf-8")
+    verifier(
+        "Le registre renvoie vers la présentation d’ÉVA et distingue objectifs, essais et résultats",
+        'href="index.html#rd-eva"' in transparence
+        and "objectifs, essais, r&eacute;sultats et fonctions disponibles sont distingu&eacute;s" in transparence,
     )
     verifier(
         "L’accueil relie apprentissages, débat, simulateur, documents et participation",
