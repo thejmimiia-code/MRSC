@@ -999,10 +999,11 @@ def verifier_dossier_apprentissage() -> None:
 
 def verifier_note_rnd() -> None:
     """Vérifie que chaque page publique signale son statut de développement sans JavaScript."""
-    marqueur = (
-        '<p class="site-status-note" role="note">'
-        "Version de recherche et développement (R&amp;D) — le site est en cours de développement."
-        "</p>"
+    marqueur = re.compile(
+        r'<p\b(?=[^>]*\bclass="site-status-note")(?=[^>]*\brole="note")[^>]*>\s*'
+        r"Version de recherche et développement \(R&amp;D\) — le site est en cours de développement\."
+        r"\s*</p>",
+        flags=re.IGNORECASE | re.DOTALL,
     )
     avant = len(ERREURS)
     for chemin in PAGES:
@@ -1014,7 +1015,7 @@ def verifier_note_rnd() -> None:
         except (OSError, UnicodeError) as erreur:
             signaler(f"{chemin.relative_to(ROOT)} : lecture de la note R&D impossible : {erreur}")
             continue
-        if marqueur not in contenu:
+        if not marqueur.search(contenu):
             signaler(f"{chemin.relative_to(ROOT)} : note de version R&D absente de l’entête")
     if len(ERREURS) == avant:
         print(f"Note de version R&D : présente dans les {len(PAGES)} pages publiques, sans dépendre de JavaScript.")

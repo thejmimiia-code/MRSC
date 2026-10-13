@@ -197,6 +197,7 @@
     ajusterPositionSticky();
     window.addEventListener("resize", ajusterPositionSticky, { passive: true });
     window.addEventListener("orientationchange", ajusterPositionSticky, { passive: true });
+    window.addEventListener("mrsc:header-layout-change", ajusterPositionSticky);
     if ("ResizeObserver" in window) {
       const observateur = new ResizeObserver(ajusterPositionSticky);
       observateur.observe(header);

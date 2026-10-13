@@ -287,6 +287,27 @@ def fichiers_du_site() -> None:
         ),
         f"{len(PAGES)} pages contrôlées, 404 comprise",
     )
+    pages_avec_entete = [RACINE / page for page in PAGES] + sorted((RACINE / "apprendre" / "fiches").glob("*.html"))
+    controles_entete = ("data-menu-toggle", "data-header-compact-toggle", "data-display-settings")
+    entetes_adaptatives = True
+    for chemin in pages_avec_entete:
+        contenu = chemin.read_text(encoding="utf-8")
+        positions = [contenu.find(attribut) for attribut in controles_entete]
+        entetes_adaptatives = entetes_adaptatives and all(position >= 0 for position in positions)
+        entetes_adaptatives = entetes_adaptatives and positions[0] < positions[1] < positions[2]
+        entetes_adaptatives = entetes_adaptatives and all(
+            marqueur in contenu
+            for marqueur in (
+                'id="site-header-status"',
+                'id="site-header-identity"',
+                'aria-controls="site-header-status site-header-identity"',
+            )
+        )
+    verifier(
+        "Le bouton Réduire/Agrandir est placé entre Menu et Affichage sur les pages et fiches",
+        entetes_adaptatives,
+        f"{len(pages_avec_entete)} pages/fiches contrôlées",
+    )
     styles = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
     medias_adaptatifs = (
         "@media (prefers-contrast: more)",
@@ -309,6 +330,33 @@ def fichiers_du_site() -> None:
         all(valeur in styles for valeur in ("line-height: 1.65", "margin-block-end: 2em", "letter-spacing: .12em", "word-spacing: .16em")),
     )
     parcours = (RACINE / "assets" / "js" / "navigation-parcours.js").read_text(encoding="utf-8")
+    script_site = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+    verifier(
+        "L’en-tête se compacte automatiquement selon l’espace et garde un contrôle réversible",
+        all(
+            marqueur in styles
+            for marqueur in (
+                ".site-header.is-compact .site-status-note",
+                ".site-header.is-compact .identity",
+                ".header-compact-toggle[hidden]",
+                "@media (max-width: 1260px)",
+                "@media (max-width: 520px)",
+                "@media (orientation: landscape) and (max-height: 560px) and (max-width: 920px)",
+                "@media (any-pointer: coarse)",
+                "html.entete-compacte",
+            )
+        )
+        and "window.matchMedia" in script_site
+        and "(max-width: 760px)" in script_site
+        and "(orientation: landscape) and (max-height: 560px) and (max-width: 920px)" in script_site
+        and 'header.classList.toggle("is-compact", compact)' in script_site
+        and 'headerCompactToggle.setAttribute("aria-expanded", String(!compact))' in script_site
+        and 'headerCompactToggle.addEventListener("click"' in script_site
+        and "headerDetails.some(" in script_site
+        and "if (focusWouldBeHidden) headerCompactToggle.focus();" in script_site
+        and 'window.dispatchEvent(new Event("mrsc:header-layout-change"))' in script_site
+        and 'window.addEventListener("mrsc:header-layout-change", ajusterPositionSticky)' in parcours,
+    )
     verifier(
         "La navigation permet retour, avance, accueil et reprise du dernier point",
         all(marqueur in parcours for marqueur in ('"precedent"', '"suivant"', '"accueil"', '"dernier"', "sessionStorage")),
@@ -397,7 +445,7 @@ def fichiers_du_site() -> None:
         and ".site-journey-button[data-journey-action=\"accueil\"]" in styles,
     )
     pages_ui = [RACINE / page for page in PAGES] + sorted((RACINE / "apprendre" / "fiches").glob("*.html"))
-    classes_autorisees = {"button", "nav-toggle", "display-control"}
+    classes_autorisees = {"button", "nav-toggle", "display-control", "header-compact-toggle"}
     boutons_coherents = True
     for page in pages_ui:
         contenu = page.read_text(encoding="utf-8")
@@ -410,7 +458,7 @@ def fichiers_du_site() -> None:
             break
     verifier(
         "Les boutons HTML des pages et fiches utilisent les composants de marque",
-        boutons_coherents and all(regle in styles for regle in (".button {", ".nav-toggle {", ".display-control {")),
+        boutons_coherents and all(regle in styles for regle in (".button {", ".nav-toggle {", ".display-control {", ".header-compact-toggle {")),
         f"{len(pages_ui)} pages inspectées",
     )
     simulateur_styles = (RACINE / "outils" / "construire-simulateur.py").read_text(encoding="utf-8")
