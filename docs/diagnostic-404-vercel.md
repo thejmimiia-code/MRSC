@@ -100,7 +100,7 @@ Trois options, de la plus rapide à la plus complète :
    </head>
    <body>
      <h1>Simulateur macro-politique systémique</h1>
-     <p>Modèle gigogne à 5 échelons : 93 leviers croisables, 20 domaines d'impact, données publiques en direct.</p>
+     <p>Modèle gigogne à 5 échelons : plus de 100 leviers croisables, 20 domaines d'impact et données publiques documentées.</p>
      <ul>
        <li><a href="https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple">Code et documentation du projet</a></li>
        <li><a href="https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple/blob/main/docs/SIMULATEUR_PARAMETRABLE.md">Guide du simulateur paramétrable</a></li>
