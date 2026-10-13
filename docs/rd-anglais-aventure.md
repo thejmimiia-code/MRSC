@@ -4,7 +4,7 @@
 
 ## 1. Question de conception
 
-Comment rendre les ressources du site plus faciles à explorer sans imposer une matière, une méthode, un ordre, un rythme ou un profil ? L’atlas transforme les domaines et fiches existants en mondes et quêtes accessibles par recherche, repère de difficulté ou intérêt. La personne peut composer, réordonner et effacer un parcours local à partir de fiches complètes. Les Escales en anglais restent une zone interactive distincte : les explications sont en français et les répliques à pratiquer sont en anglais.
+Comment rendre les ressources du site plus faciles à explorer sans imposer une matière, une méthode, un ordre, un rythme ou un profil ? L’atlas transforme les domaines et fiches existants en mondes et quêtes accessibles par recherche, repère de difficulté ou intérêt. La personne peut composer, réordonner et effacer un parcours local à partir de fiches autonomes. Les Escales en anglais restent une zone interactive distincte : les explications sont en français et les répliques à pratiquer sont en anglais.
 
 Principes retenus : accès gratuit, aucun compte ni publicité, progression sans verrouillage, pas de vies, série obligatoire, pénalité, note ou compte à rebours ; aides disponibles ; repères présentés comme indications ; statut éditorial et lacunes visibles ; aucun service d’IA ni microphone.
 

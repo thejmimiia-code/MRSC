@@ -569,6 +569,7 @@ def verifier_aventure_anglais() -> None:
         "Aucun ordre", "minuteur", "évaluation de ton niveau", "reste dans la page",
         "stockage local", "aucun microphone", "réception", "production", "interaction",
         "70 fiches", "15 domaines", "44 prototypes", "parcours de formation personnel",
+        "fiches autonomes, pas des cours distincts", "sans validation indépendante revendiquée",
     )
     absents = [marqueur for marqueur in marqueurs if marqueur.casefold() not in contenu_page.casefold()]
     if absents:
@@ -679,7 +680,8 @@ console.log(`${missions.length} escales, ${missions.reduce((n, m) => n + m.turns
 def verifier_dossier_apprentissage() -> None:
     controles = {
         ROOT / "apprendre.html": (
-            "26 fiches et 44 prototypes à relire",
+            "70 entrées : 26 fiches du corpus initial et 44 prototypes explicitement à relire",
+            "La relecture indépendante de toutes les fiches du corpus initial n’est pas garantie",
             "Prototype à relire",
             "Ambition éditoriale de long terme",
             "1 000 fiches autonomes",
@@ -1146,7 +1148,8 @@ def verifier_dossier_apprentissage() -> None:
             "arts-composer-formes",
         ),
         ROOT / "docs" / "rd-coherence-visuelle-editoriale.md": (
-            "70 entrées au catalogue : 26 fiches du corpus initial et 44 prototypes explicitement à relire",
+            "70 entrées : 26 fiches du corpus initial et 44 prototypes explicitement à relire",
+            "la relecture indépendante de toutes les fiches initiales n’est pas garantie",
             "33 fiches de développement réparties en quatre lots ouvrent des points d’entrée",
             "70 pages générées, dont quarante-quatre prototypes à relire",
         ),
