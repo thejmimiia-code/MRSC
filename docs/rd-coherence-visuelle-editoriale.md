@@ -1,6 +1,6 @@
 # R&D — cohérence visuelle et éditoriale du site M.R.S.C
 
-**État au 11 octobre 2026 — revue de structure et harmonisation intégrées ; contrôle visuel en navigateur réel encore nécessaire.** Ce document fixe des règles de cohérence pour l’accueil, les pages d’information, l’apprentissage, l’IA & société, le simulateur et les fiches autonomes. Les pages et le catalogue passent les contrôles statiques ; aucune validation visuelle en navigateur réel ni validation par les membres de l’association n’est revendiquée.
+**État au 12 octobre 2026 — revue de structure et harmonisation intégrées ; barre de parcours resserrée ; matrice automatisée Chromium headless passée.** Ce document fixe des règles de cohérence pour l’accueil, les pages d’information, l’apprentissage, l’IA & société, le simulateur et les fiches autonomes. Les pages et le catalogue passent les contrôles statiques et quatre surfaces représentatives ne présentent pas de violation axe dans les états testés ; aucune validation visuelle humaine, avec lecteur d’écran ou par les membres de l’association n’est revendiquée.
 
 ## 1. Intention et identité à faire apparaître
 
@@ -84,13 +84,13 @@ Le partage s’effectue à la demande par le menu natif de l’appareil, la copi
 
 | Surface | Vérification de cohérence à appliquer | État de cette itération |
 | --- | --- | --- |
-| Accueil | Mission avant les produits ; parcours variés ; liens vers apprendre, IA, simulateur, documents, sources, contact et partage ; distinction officiel/réflexion/modèle | Réorganisé ; partage natif avec repli courriel/copie ; mention sociale non souhaitée supprimée |
-| Navigation, barre de parcours et réglages | Même bleu nuit, bleu, contours, rayon, taille minimale, focus visible et états désactivés | Boutons de parcours rapprochés du style d’action M.R.S.C ; menus et contrôles harmonisés |
+| Accueil | Mission avant les produits ; parcours variés ; liens vers apprendre, IA, simulateur, documents, sources, contact et partage ; distinction officiel/réflexion/modèle | Réorganisé ; partage natif avec repli courriel/copie ; couleurs des étiquettes de cartes et liens de la note du créateur renforcées ; mention sociale non souhaitée supprimée |
+| Navigation, barre de parcours et réglages | Même bleu nuit, bleu, contours, rayon, focus visible, états désactivés et cibles tactiles | Barre secondaire alignée au contenu ; boutons 38 px au pointeur fin, 44 px sur tactile/petit écran ; symboles décoratifs masqués à très petite largeur pour conserver les libellés visibles ; matrice headless responsive/navigation/focus réussie, revue visuelle et lecteur d’écran encore requis |
 | Apprendre | Recherche, filtres, cartes, étiquettes et liens de fiche ; source visible mais facultative ; repères non stigmatisants | 70 entrées au catalogue : 26 fiches du corpus initial et 44 prototypes explicitement à relire ; 33 fiches de développement réparties en quatre lots ouvrent des points d’entrée en français, langues, géographie, histoire, mathématiques, sciences, numérique, informatique, arts et recherche ; l’économie/consommation reste partielle ; objectif éditorial de 1 000 présenté comme cible, non comme offre actuelle ; couverture partielle |
 | Fiches autonomes | Explication complète sur la page ; horizon séparé de la difficulté ; statut éditorial, analogie et sa limite, aide/correction, sources facultatives et retour vers le site | 70 pages générées, dont quarante-quatre prototypes à relire ; contenu autoportant ; relecture spécialisée et essais apprenants en attente ; commandes et métadonnées statiquement contrôlées |
 | IA & société | Hero, cartes d’usages, risques et opportunités, alertes, sources, exercices et prise de contact | Palette commune maintenue ; statut des pistes et sources documenté |
 | Simulateur intégré | Actions vers l’outil, données, provenance, avertissements et limites | Contrôles vérifiés dans la page d’intégration ; essai visuel à poursuivre |
-| Simulateur autonome | Retour permanent, commandes, réglages, tableaux défilants, focus et états système | Générateur harmonisé avec les accents M.R.S.C ; page synchronisée et vérifiée par `--verifier` ; aucun essai visuel dans un navigateur réel documenté |
+| Simulateur autonome | Retour permanent, commandes, réglages, tableaux défilants, focus et états système | Générateur et patch local harmonisés ; page synchronisée ; les sept vues dynamiques et 36 régions d’audit ont été testées à 320 px sous Chromium headless avec zéro violation axe ; revue visuelle humaine et lecteur d’écran encore requis |
 | Documents et liens utiles | Cartes et sources faciles à distinguer ; ne pas surcharger en boutons | Composants communs maintenus ; sources publiques, institutionnelles, éducatives et associatives distinguées, avec registre daté des portées et droits de réutilisation dans `docs/apprentissage/sources-utilite-publique.md` |
 | Localisation et contact | Carte chargée sur action ; coordonnées lisibles ; actions explicites | Boutons et encarts relus ; chargement de carte conservé sur action seulement |
 | Transparence et confidentialité | Tableaux, aides de lecture, catégories, sources et limites ; lisibilité au zoom | Entrée obsolète supprimée du registre ; liens et contenus mis en cohérence |
@@ -114,7 +114,7 @@ La prise de parole publique doit s’appuyer sur des contenus identifiables : do
 
 ### Revue humaine requise
 
-Les validateurs statiques ne mesurent ni le rendu des boutons, ni les espacements, ni la hiérarchie visuelle réelle. Une passe de captures et de tests dans Chromium, Firefox et Safari/WebKit reste nécessaire aux largeurs 320, 375, 768, 1024, 1440 px, au zoom 200–400 %, au clavier et avec lecteur d’écran. Il faut contrôler particulièrement l’accueil, le catalogue, une fiche, le dossier IA, le simulateur autonome, le tableau de transparence et la page 404.
+La passe automatisée Chromium headless a couvert 29 vues responsives (accueil, transparence, fiche et simulateur) aux largeurs 320, 375, 768, 1024 et 1440 px avec des variantes tactiles et paysage court ; aucune largeur de page excédentaire ni violation axe n’a été signalée sur les quatre pages représentatives. La navigation réelle, le focus visible, `sessionStorage` bloqué et les sept vues du simulateur ont aussi été exercés. Cette mesure automatique ne valide pas la hiérarchie visuelle humaine, la perception des espacements ou la compréhensibilité des libellés. Une revue visuelle et un essai avec lecteur d’écran restent nécessaires, ainsi que des essais de zoom 200–400 % et une passe Firefox/Safari/WebKit. Contrôler particulièrement l’accueil, le catalogue, une fiche, le dossier IA, le simulateur autonome, le tableau de transparence et la page 404.
 
 Le CSS commun a fait l’objet d’une reconstruction après la perte d’une ancienne version de travail. La version actuelle est contrôlée techniquement mais ne peut pas être déclarée visuellement identique à toutes les personnalisations antérieures. Comparer les rendus avec l’identité de production et recueillir des retours de membres et de personnes apprenantes avant d’affirmer que la direction visuelle est définitive.
 
@@ -125,5 +125,6 @@ Le CSS commun a fait l’objet d’une reconstruction après la perte d’une an
 - Règles d’apprentissage : `docs/rd-parcours-apprentissage.md`.
 - Adaptation et essais d’accessibilité : `docs/rd-affichage-adaptatif.md`.
 - Suivi de la vie privée : `docs/rd-confidentialite-rgpd.md`.
+- Recherche en cours sur la direction artistique, le rendu visuel et le mouvement web : [`docs/rd/visuel-motion.md`](rd/visuel-motion.md). Elle complète le système visuel décrit ici ; les pistes ne sont pas encore sélectionnées ni intégrées.
 
 Étapes suivantes : faire valider la formulation de la mission et des modalités d’adhésion par les responsables ; recueillir les URL de comptes sociaux que l’association souhaite réellement rendre publics, s’il y en a ; mener les essais visuels et accessibilité multi-navigateurs ; puis corriger l’ensemble des pages à partir des captures et des retours, sans confondre validation automatisée et validation de design.

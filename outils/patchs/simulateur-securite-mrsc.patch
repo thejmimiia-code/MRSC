@@ -1015,10 +1015,123 @@ index 7976c93..88941b9 100644
              fournisseur = indicateur.reference[2]
              statut = "reference"
 diff --git a/simulateur/interface.py b/simulateur/interface.py
-index 51a063c..5e842c1 100644
+index 51a063c..b0858d3 100644
 --- a/simulateur/interface.py
 +++ b/simulateur/interface.py
-@@ -750,6 +750,9 @@ let BULLE_OUVERTE = null;
+@@ -84,11 +84,12 @@ section.bloc > h2 .aide{font-size:.75rem;color:var(--texte-dim);font-weight:400}
+ .metric .libelle{font-size:.74rem;color:var(--texte-dim);text-transform:uppercase;letter-spacing:.4px}
+ .metric .delta{font-size:.75rem;margin-top:2px}
+ .delta.hausse{color:var(--vert)} .delta.baisse{color:var(--rouge)} .delta.neutre{color:var(--texte-dim)}
+-.scenario-card{cursor:pointer;border-left:4px solid var(--accent);transition:.15s}
++button.scenario-card{display:block;width:100%;text-align:left;font:inherit;cursor:pointer;border-left:4px solid var(--accent);transition:.15s}
+ .scenario-card:hover{background:#22304f;transform:translateY(-2px)}
++.scenario-card:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+ .scenario-card.actif{box-shadow:0 0 0 2px var(--accent) inset;background:#22304f}
+-.scenario-card h3{font-size:.9rem;margin-bottom:3px}
+-.scenario-card p{font-size:.76rem;color:var(--texte-dim)}
++.scenario-card-title{display:block;font-size:.9rem;font-weight:650;margin-bottom:3px}
++.scenario-card-copy{display:block;font-size:.76rem;font-weight:400;line-height:1.45;color:var(--texte-dim)}
+ .strates-cascade{display:flex;flex-direction:column;gap:6px}
+ .strate{display:flex;justify-content:space-between;gap:14px;align-items:center;
+   background:var(--panel-2);border:1px solid var(--border);border-left-width:4px;border-radius:10px;
+@@ -98,14 +99,14 @@ section.bloc > h2 .aide{font-size:.75rem;color:var(--texte-dim);font-weight:400}
+ .strate .valeurs b{color:var(--texte)}
+ .leviers-grille{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+ .famille{background:var(--panel-2);border:1px solid var(--border);border-radius:11px;padding:12px}
+-.famille h3{font-size:.84rem;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:6px}
++.famille h3{font-size:.84rem;margin-bottom:8px;border-bottom:1px solid var(--border);border-left:3px solid var(--famille-accent,var(--accent));padding:0 0 6px 8px;color:var(--texte)}
+ .levier{margin-bottom:11px}
+ .levier .ligne{display:flex;justify-content:space-between;gap:8px;font-size:.79rem;align-items:baseline}
+ .levier .nom{font-weight:500}
+ .levier .valeur{color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+ .levier .desc{font-size:.7rem;color:var(--texte-dim);margin-top:2px}
+ .levier input[type=range]{width:100%;margin-top:5px;accent-color:var(--accent)}
+-.levier .source{font-size:.66rem;color:#7b8aa5;font-style:italic;margin-top:3px}
++.levier .source{font-size:.66rem;color:var(--texte-dim);font-style:italic;margin-top:3px}
+ .levier .ligne .bascule{margin-bottom:0}
+ /* Infobulle instantanée : tout réglage ou bouton annoté s'explique au survol
+    (et au focus clavier), sans jamais recouvrir les leviers durablement. */
+@@ -138,7 +139,7 @@ section.bloc > h2 .aide{font-size:.75rem;color:var(--texte-dim);font-weight:400}
+ .bulle-levier .bulle-alerte{color:#fca5a5}
+ .bulle-levier .bulle-alerte.vigilance{color:#fcd34d}
+ .bulle-levier .bulle-journal li{font-style:italic}
+-.bulle-levier .bulle-note{margin-top:8px;font-style:italic;color:#7b8aa5}
++.bulle-levier .bulle-note{margin-top:8px;font-style:italic;color:var(--texte-dim)}
+ .bulle-levier .bulle-chargement{font-style:italic}
+ .bascule{display:flex;align-items:center;gap:8px;font-size:.79rem;margin-bottom:9px}
+ .bascule input{width:18px;height:18px;accent-color:var(--vert)}
+@@ -158,6 +159,8 @@ th,td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--border);whi
+ th:first-child,td:first-child{text-align:left}
+ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background:var(--panel)}
+ .defilable{overflow:auto;max-height:430px;border-radius:9px;border:1px solid var(--border)}
++.audit-table-scroll{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;border-radius:9px}
++.audit-table-scroll:focus-visible,.tableau-strate:focus-visible,.journal:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+ .matrice td,.matrice th{text-align:center}
+ .matrice td.pos{background:rgba(34,197,94,.18);color:#bbf7d0}
+ .matrice td.neg{background:rgba(239,68,68,.16);color:#fecaca}
+@@ -179,7 +182,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+ .panneau-strate.actif{display:block}
+ .strate-intro{font-size:.78rem;color:var(--texte-dim);line-height:1.6;margin:2px 0 12px}
+ .strate-sous-titre{font-size:.84rem;margin:14px 0 7px;color:var(--texte)}
+-.tableau-strate{overflow:auto;max-height:430px;border:1px solid var(--border);border-radius:9px}
++.tableau-strate{max-width:100%;overflow:auto;max-height:430px;border:1px solid var(--border);border-radius:9px}
+ .tableau-strate table{min-width:600px}
+ .tableau-strate td.delta-pos{color:#86efac}.tableau-strate td.delta-neg{color:#fca5a5}
+ .note-source{font-size:.7rem;line-height:1.55;color:var(--texte-dim);margin:8px 0;padding:8px 10px;background:rgba(15,23,42,.7);border-left:3px solid var(--accent);border-radius:0 8px 8px 0}
+@@ -268,7 +271,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+ .message-seuil .tete{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+ .message-seuil .etiquette{font-size:.68rem;text-transform:uppercase;letter-spacing:.4px;font-weight:700}
+ .message-seuil p{color:var(--texte-dim);margin-top:3px}
+-.message-seuil .source{font-size:.66rem;color:#7b8aa5;font-style:italic;margin-top:3px;display:block}
++.message-seuil .source{font-size:.66rem;color:var(--texte-dim);font-style:italic;margin-top:3px;display:block}
+ .jauge{height:11px;border-radius:7px;background:#22304f;overflow:hidden;border:1px solid var(--border)}
+ .jauge > span{display:block;height:100%;transition:width .25s}
+ .graduations{display:flex;justify-content:space-between;font-size:.64rem;color:var(--texte-dim);margin-top:3px}
+@@ -291,7 +294,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+   border-color:var(--rouge)}
+ .cout-gain.neutre{background:rgba(147,163,189,.12);border-color:var(--border)}
+ .cout-gain .detail{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px;color:var(--texte-dim);font-size:.72rem}
+-.cout-gain .trace{margin-top:6px;font-size:.66rem;color:#7b8aa5;font-style:italic}
++.cout-gain .trace{margin-top:6px;font-size:.66rem;color:var(--texte-dim);font-style:italic}
+ /* Badge live sous le levier manipulé et puce du ruban : toujours visibles. */
+ .cout-live-zone{grid-column:1/-1}
+ .cout-live{margin-top:6px;border-radius:9px;padding:5px 10px;font-size:.76rem;font-weight:600;
+@@ -321,7 +324,8 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+ .audit th{color:var(--texte);font-size:.7rem;text-transform:uppercase;letter-spacing:.4px}
+ .audit td.chiffre{font-variant-numeric:tabular-nums;white-space:nowrap}
+ .audit .formule{font-family:ui-monospace,Consolas,monospace;font-size:.68rem;color:var(--texte)}
+-.audit .source-note{color:#7b8aa5}
++.audit .source-note{color:var(--texte-dim)}
++.audit-domain-title{display:inline-block;border-left:3px solid var(--audit-accent,var(--accent));padding-left:7px;color:var(--texte)}
+ /* ── Sommaire : lire la page dans l'ordre ──────────────────────────────────
+    La page est longue : ce bandeau dit où l'on est et dans quel ordre lire.
+    Il reprend la logique du parcours : comprendre, régler, mesurer, vérifier. */
+@@ -332,7 +336,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+   border:1px solid var(--border);border-radius:999px;padding:3px 10px;white-space:nowrap}
+ .sommaire a:hover{border-color:var(--accent);color:var(--texte)}
+ .sommaire a.actif{border-color:var(--accent);color:var(--accent);background:rgba(56,189,248,.12)}
+-.sommaire .etape{font-size:.66rem;color:#7b8aa5;padding:0 4px}
++.sommaire .etape{font-size:.66rem;color:var(--texte-dim);padding:0 4px}
+ /* ── Lecture en clair ─────────────────────────────────────────────────────
+    Les chiffres du moteur sont justes ; la section « lire le résultat » les
+    remet en phrases. Une ligne par question que l'on se pose vraiment. */
+@@ -377,6 +381,9 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+ .guide-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+ @media(max-width:640px){body{padding:10px}header.entete h1{font-size:1.15rem}
+   .ruban-veille{position:static}.console-corps{grid-template-columns:1fr}
++  .clair-lignes{grid-template-columns:minmax(0,1fr)}
++  .levier .ligne{flex-wrap:wrap}
++  .levier .ligne .nom{min-width:0;overflow-wrap:anywhere}
+   .levier.compact{grid-template-columns:1fr 70px auto}}
+ </style>
+ </head>
+@@ -578,4 +585,4 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+   <section class="bloc" id="section-journal">
+     <h2>Journal causal du moteur <span class="aide">rétroactions générées année par année</span></h2>
+-    <div class="journal" id="journal"></div>
++    <div class="journal mrsc-scroll-region" id="journal" role="region" tabindex="0" aria-label="Journal causal du moteur"></div>
+   </section>
+@@ -750,6 +757,9 @@ let BULLE_OUVERTE = null;
  let BULLES_DEMANDEES = new Set();
  //: Libellés des 20 domaines, repris du catalogue pour les bulles.
  let LIBELLES_DOMAINES = {};
@@ -1028,7 +1141,7 @@ index 51a063c..5e842c1 100644
  
  function fmt(valeur, precision){
    if (valeur === null || valeur === undefined || Number.isNaN(valeur)) return '—';
-@@ -762,7 +765,8 @@ function couleurDelta(valeur){
+@@ -762,7 +772,8 @@ function couleurDelta(valeur){
  }
  function pastille(mode){
    const libelles = {live:'données live', reference:'référence datée du projet', mixte:'données mixtes'};
@@ -1038,7 +1151,7 @@ index 51a063c..5e842c1 100644
  }
  
  /* ── Chargement du catalogue (leviers + domaines) ───────────────────────── */
-@@ -801,28 +805,33 @@ function renderContexte(){
+@@ -801,28 +812,33 @@ function renderContexte(){
      ['Prélèvements obligatoires', fmt(c.prelevements_obligatoires_pct_pib, 1) + ' % PIB', ''],
    ];
    document.getElementById('grid-metrics').innerHTML = metriques.map(([libelle, valeur, sous]) =>
@@ -1087,7 +1200,26 @@ index 51a063c..5e842c1 100644
      : '';
    document.getElementById('provenance').innerHTML = lignes + blocComplementaire
      + '<div style="margin-top:8px">Rappel : le mode « référence » signifie que le serveur n\'a pas pu (ou pas encore)'
-@@ -885,9 +894,9 @@ function afficherNombre(valeur, precision, unite){
+@@ -863,6 +879,18 @@ function rendreOngletStrate(cle, donnees){
+   panneau.innerHTML = contenuOngletStrate(cle, donnees) || '';
+   if (cle === 'menages') rendreResultatsMenage(donnees, ANNEE_MENAGE);
+   if (cle === 'boursier') renderResultatsBoursiers();
++  panneau.querySelectorAll('.tableau-strate').forEach((zone, index) => {
++    let titre = zone.previousElementSibling;
++    while (titre && !/^H[2-4]$/.test(titre.tagName)) titre = titre.previousElementSibling;
++    const libelleTitre = (titre?.textContent || '').replace(/\s+/g, ' ').trim();
++    const libelleOnglet = (document.getElementById(`tab-strate-${cle}`)?.textContent || cle)
++      .replace(/\s+/g, ' ').trim();
++    const libelle = libelleTitre || libelleOnglet;
++    zone.classList.add('mrsc-scroll-region');
++    zone.setAttribute('role', 'region');
++    zone.setAttribute('tabindex', '0');
++    zone.setAttribute('aria-label', `Tableau défilant ${index + 1}${libelle ? ` — ${libelle}` : ''}`);
++  });
+ }
+ function afficherOngletStrate(cle){
+   if (!CLES_ONGLETS_STRATE.includes(cle)) return;
+@@ -885,9 +913,9 @@ function afficherNombre(valeur, precision, unite){
  function sourceObservatoire(info){
    if (!info) return '';
    const source = echapperTexte(info.source || info.libelle || 'Source publique');
@@ -1100,7 +1232,7 @@ index 51a063c..5e842c1 100644
    const periode = info.periode ? ` · période observée : ${echapperTexte(info.periode)}` : '';
    const publication = info.publication_le
      ? ` · publié le ${echapperTexte(info.publication_le)}` : '';
-@@ -1473,18 +1482,72 @@ function extraireGenerique(adaptateur, charge, chemin){
+@@ -1473,18 +1501,72 @@ function extraireGenerique(adaptateur, charge, chemin){
    }
    return null;
  }
@@ -1175,7 +1307,7 @@ index 51a063c..5e842c1 100644
          const lecture = extraireGenerique(source.adaptateur, charge, source.chemin);
          if (!lecture || !Number.isFinite(lecture.valeur)) continue;
          // `interroger()` côté serveur renvoie déjà les unités canoniques ; ici,
-@@ -1499,14 +1562,18 @@ async function rafraichirDonnees(){
+@@ -1499,14 +1581,18 @@ async function rafraichirDonnees(){
          break;
        } catch (erreur) { /* source suivante */ }
      }
@@ -1197,7 +1329,7 @@ index 51a063c..5e842c1 100644
            const lecture = charge.lecture;
            if (lecture && Number.isFinite(Number(lecture.valeur))){
              lectures[cle] = {cle: cle, valeur: Number(lecture.valeur), periode: lecture.periode,
-@@ -1520,13 +1587,28 @@ async function rafraichirDonnees(){
+@@ -1520,13 +1606,28 @@ async function rafraichirDonnees(){
        } catch (erreur) { /* le serveur garde ses valeurs */ }
      }
    }
@@ -1229,7 +1361,7 @@ index 51a063c..5e842c1 100644
    await rafraichirMarches(true);
    bouton.disabled = false;
    bouton.textContent = succes > 0
-@@ -1936,7 +2018,10 @@ async function chargerBulle(cle){
+@@ -1936,7 +2037,10 @@ async function chargerBulle(cle){
    if (Object.prototype.hasOwnProperty.call(BULLES, cle) || BULLES_DEMANDEES.has(cle)) return;
    BULLES_DEMANDEES.add(cle);
    try {
@@ -1241,7 +1373,121 @@ index 51a063c..5e842c1 100644
      const donnees = await reponse.json();
      BULLES[cle] = (donnees && donnees.cle === cle) ? donnees : null;
    } catch (erreur){
-@@ -2229,6 +2314,16 @@ function echapperAttribut(texte){
+@@ -1968,6 +2072,10 @@ function pucesHtml(cle){
+   if (!effets.length) return '';
+   return '<div class="puces">' + effets.map(puceHtml).join('') + '</div>';
+ }
++function couleurHexSure(couleur, defaut = '#38bdf8'){
++  const valeur = typeof couleur === 'string' ? couleur.trim() : '';
++  return /^#[0-9a-f]{6}$/i.test(valeur) ? valeur : defaut;
++}
+ function renderLeviers(filtre){
+   const recherche = (filtre || '').toLowerCase();
+   const zones = CATALOGUE.parametres.familles.map(famille => {
+@@ -2015,7 +2123,7 @@ function renderLeviers(filtre){
+       </div>`;
+     }).join('');
+     return `<div class="famille${VUE_COMPACTE ? ' compacte' : ''}">
+-      <h3 style="color:${famille.couleur}">${famille.libelle}</h3>${contenu}</div>`;
++      <h3 style="--famille-accent:${couleurHexSure(famille.couleur)}">${echapperTexte(famille.libelle || famille.cle)}</h3>${contenu}</div>`;
+   }).join('');
+   document.getElementById('leviers-grille').innerHTML = zones
+     || '<div class="carte">Aucun levier ne correspond à cette recherche.</div>';
+@@ -2080,30 +2188,49 @@ function nombreLeviersActifs(){
+ /* ── Scénarios et préréglages ───────────────────────────────────────────── */
+ function renderScenarios(){
+   const grid = document.getElementById('scenario-grid');
+-  grid.innerHTML = '';
++  grid.replaceChildren();
+   Object.entries(SCENARIOS).forEach(([key, scenario]) => {
+-    const card = document.createElement('div');
++    const card = document.createElement('button');
++    card.type = 'button';
+     card.className = 'scenario-card carte';
+     card.style.borderLeftColor = scenario.couleur || '#38bdf8';
+     card.dataset.key = key;
++    card.dataset.cardType = 'scenario';
++    card.setAttribute('aria-pressed', 'false');
+     card.setAttribute('data-aide', `<b>${scenario.nom}</b>${scenario.description}`
+-      + '<br>Cliquez pour rejouer ce scénario historique du dépôt (moteur d\'origine).');
+-    card.innerHTML = `<h3>${scenario.nom}</h3><p>${scenario.description}</p>`;
+-    card.onclick = (ev) => runScenario(key, ev);
++      + '<br>Choisir ce scénario historique du dépôt.');
++    const title = document.createElement('span');
++    title.className = 'scenario-card-title';
++    title.textContent = scenario.nom;
++    const description = document.createElement('span');
++    description.className = 'scenario-card-copy';
++    description.textContent = scenario.description;
++    card.append(title, description);
++    card.addEventListener('click', (event) => runScenario(key, event));
+     grid.appendChild(card);
+   });
+ }
+ function renderPresets(){
+   const grid = document.getElementById('preset-grid');
+-  grid.innerHTML = '';
++  grid.replaceChildren();
+   Object.entries(CATALOGUE.parametres.presets).forEach(([key, preset]) => {
+-    const card = document.createElement('div');
++    const card = document.createElement('button');
++    card.type = 'button';
+     card.className = 'scenario-card carte';
+     card.style.borderLeftColor = preset.couleur || '#38bdf8';
++    card.dataset.key = key;
++    card.dataset.cardType = 'preset';
++    card.setAttribute('aria-pressed', 'false');
+     card.setAttribute('data-aide', `<b>${preset.libelle}</b>${preset.description}`
+-      + '<br>Cliquez pour charger ces réglages dans la console : chacun reste ensuite ajustable au curseur.');
+-    card.innerHTML = `<h3>${preset.libelle}</h3><p>${preset.description}</p>`;
+-    card.onclick = (ev) => chargerPreset(key, ev);
++      + '<br>Charger ces réglages, puis les ajuster au curseur.');
++    const title = document.createElement('span');
++    title.className = 'scenario-card-title';
++    title.textContent = preset.libelle;
++    const description = document.createElement('span');
++    description.className = 'scenario-card-copy';
++    description.textContent = preset.description;
++    card.append(title, description);
++    card.addEventListener('click', (event) => chargerPreset(key, event));
+     grid.appendChild(card);
+   });
+ }
+@@ -2121,22 +2248,23 @@ function chargerPreset(cle, ev){
+   simuler(true);
+ }
+ async function runScenario(scenario, ev){
+-  // Chemin « moteur d'origine » : les 9 scénarios du dépôt sont calculés par
+-  // les fabriques de scénarios, pas par le simulateur paramétrable. Le
+-  // bouton d'export reste celui de la dernière simulation paramétrique.
+-  const carte = ev?.target?.closest?.('.scenario-card')
+-    || document.querySelector(`.scenario-card[data-key="${scenario}"]`);
+-  if (carte) carte.classList.add('actif');
++  // Chemin « moteur d'origine » : les scénarios du dépôt sont calculés par
++  // les fabriques historiques, pas par le simulateur paramétrable.
++  marquerCarteActive(ev, scenario, '#scenario-grid');
+   const reponse = await fetch(`/api/run?scenario=${scenario}`);
+   const donnees = await reponse.json();
+   if (donnees.error){ alert('Erreur : ' + donnees.error); return; }
+   afficherScenarioHistorique(donnees);
+   activerExports();
+ }
+-function marquerCarteActive(ev, cle){
+-  document.querySelectorAll('.scenario-card').forEach(carte => carte.classList.remove('actif'));
+-  const carte = ev?.target?.closest?.('.scenario-card') || document.querySelector(`.scenario-card[data-key="${cle}"]`);
+-  if (carte) carte.classList.add('actif');
++function marquerCarteActive(ev, cle, grille = '#preset-grid'){
++  const carte = ev?.target?.closest?.(`${grille} .scenario-card`)
++    || document.querySelector(`${grille} .scenario-card[data-key="${cle}"]`);
++  document.querySelectorAll('.scenario-card').forEach(element => {
++    const active = element === carte;
++    element.classList.toggle('actif', active);
++    element.setAttribute('aria-pressed', String(active));
++  });
+ }
+ function afficherScenarioHistorique(donnees){
+   const final = donnees.resultats[donnees.resultats.length - 1];
+@@ -2229,6 +2357,16 @@ function echapperAttribut(texte){
    return echapperTexte(texte || '').replace(/"/g, '&quot;');
  }
  
@@ -1258,7 +1504,7 @@ index 51a063c..5e842c1 100644
  function marquerUnTerme(trouve){
    const cle = TABLE_TERMES[trouve.toLowerCase()];
    const terme = cle ? LEXIQUE_PAR_CLE[cle] : null;
-@@ -2568,7 +2663,8 @@ async function simuler(avecImpacts){
+@@ -2568,7 +2706,8 @@ async function simuler(avecImpacts){
      const reponse = await fetch('/api/simuler', {
        method:'POST', headers:{'Content-Type':'application/json'},
        body: JSON.stringify({parametres: parametresEnvoyes, horizon: horizon,
@@ -1268,7 +1514,7 @@ index 51a063c..5e842c1 100644
      });
      const donnees = await reponse.json();
      if (donnees.error){ alert('Erreur de simulation : ' + donnees.error); return; }
-@@ -2871,7 +2967,7 @@ async function majConseilTempsReel(parametresEnvoyes){
+@@ -2871,7 +3010,7 @@ async function majConseilTempsReel(parametresEnvoyes){
        method:'POST', headers:{'Content-Type':'application/json'},
        body: JSON.stringify({parametres: parametresEnvoyes, cle: cle,
                              avant: MOUVEMENT.avant, apres: apres,
@@ -1277,7 +1523,16 @@ index 51a063c..5e842c1 100644
      });
      const conseil = await reponse.json();
      // Le conseil affiché correspond au dernier mouvement réellement demandé.
-@@ -3167,8 +3263,9 @@ function auditSourcesHtml(){
+@@ -3161,14 +3300,18 @@ function echapperTexte(texte){
+     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+     .replace(/"/g, '&quot;');
+ }
++function tableauAuditDefilant(tableau, libelle){
++  return `<div class="audit-table-scroll mrsc-scroll-region" role="region" tabindex="0" aria-label="${echapperAttribut(libelle)}">${tableau}</div>`;
++}
+ function auditSourcesHtml(){
+   const contexte = (CONTEXTE && CONTEXTE.contexte) || {};
+   const provenance = contexte.provenance || {};
    const lignes = Object.keys(provenance).map(cle => {
      const fiche = provenance[cle];
      const valeur = contexte[cle];
@@ -1289,6 +1544,74 @@ index 51a063c..5e842c1 100644
      return `<tr><td>${echapperTexte(fiche.libelle)}</td>
        <td class="chiffre">${valeur === null || valeur === undefined ? '—' : fmt(valeur, 2)} ${echapperTexte(fiche.unite || '')}</td>
        <td>${echapperTexte(fiche.periode || '—')}</td>
+@@ -3176,30 +3319,34 @@ function auditSourcesHtml(){
+       <td class="source-note">${echapperTexte(fiche.source || '')}${url}</td>
+       <td class="source-note">${echapperTexte(fiche.licence || '')}</td></tr>`;
+   }).join('');
+-  return `<table><thead><tr><th>Grandeur d'entrée</th><th>Valeur retenue</th><th>Période</th>
+-    <th>Statut</th><th>Source</th><th>Licence</th></tr></thead><tbody>${lignes}</tbody></table>
+-    <div class="source-note" style="margin-top:6px">« live » = valeur relevée sur l'API publique
++  const tableau = `<table><thead><tr><th>Grandeur d'entrée</th><th>Valeur retenue</th><th>Période</th>
++    <th>Statut</th><th>Source</th><th>Licence</th></tr></thead><tbody>${lignes}</tbody></table>`;
++  const note = `<div class="source-note" style="margin-top:6px">« live » = valeur relevée sur l'API publique
+     officielle à l'instant T ; « référence » = valeur documentaire du dépôt (le serveur n'a pas
+     pu interroger l'API). Le bouton « Rafraîchir les données » relève les valeurs depuis votre
+     navigateur et les transmet au simulateur : le recoupement est toujours possible.</div>`;
++  return tableauAuditDefilant(tableau, 'Tableau des sources officielles, valeurs et périodes') + note;
+ }
+ function auditDomainesHtml(){
+   const domaines = (CATALOGUE && CATALOGUE.domaines) || [];
+   return domaines.map(domaine => {
++    const nom = String(domaine.libelle || 'Domaine');
+     const indicateurs = (domaine.indicateurs || []).map(indicateur =>
+       `<tr><td>${echapperTexte(indicateur.libelle)}</td>
+        <td class="formule">${echapperTexte(indicateur.formule)}</td>
+        <td class="chiffre">${echapperTexte(indicateur.unite || '')} (${indicateur.sens > 0 ? 'hausse = amélioration' : 'hausse = dégradation'})</td>
+        <td class="source-note">${echapperTexte(indicateur.source || '')}</td></tr>`).join('');
+-    return `<div style="margin-bottom:12px"><b style="color:${domaine.couleur}">${echapperTexte(domaine.libelle)}</b>
++    const tableau = `<table><thead><tr><th>Indicateur</th><th>Formule du score</th><th>Unité et sens</th>
++      <th>Source</th></tr></thead><tbody>${indicateurs}</tbody></table>`;
++    return `<div style="margin-bottom:12px"><b class="audit-domain-title" style="--audit-accent:${couleurHexSure(domaine.couleur)}">${echapperTexte(nom)}</b>
+       <span class="source-note">— ${echapperTexte(domaine.description || '')}</span>
+-      <table><thead><tr><th>Indicateur</th><th>Formule du score</th><th>Unité et sens</th>
+-      <th>Source</th></tr></thead><tbody>${indicateurs}</tbody></table></div>`;
++      ${tableauAuditDefilant(tableau, `Indicateurs de ${nom}`)}</div>`;
+   }).join('');
+ }
+ function auditLeviersHtml(){
+   const familles = ((CATALOGUE && CATALOGUE.parametres) || {}).familles || [];
+   return familles.map(famille => {
++    const nom = String(famille.libelle || famille.cle || 'Famille de leviers');
+     const leviers = (famille.leviers || []).map(levier => {
+       const effets = Object.entries(levier.effets_directs || {})
+         .map(([theme, coefficient]) => `${echapperTexte(theme)} ${coefficient > 0 ? '+' : ''}${fmt(coefficient, 2)}`)
+@@ -3209,10 +3356,11 @@ function auditLeviersHtml(){
+         <td>${effets}</td>
+         <td class="source-note">${echapperTexte(levier.source || '')}</td></tr>`;
+     }).join('');
+-    return `<div style="margin-bottom:12px"><b>${echapperTexte(famille.libelle || famille.cle)}</b>
+-      <table><thead><tr><th>Levier</th><th>Champ / ligne budgétaire</th>
++    const tableau = `<table><thead><tr><th>Levier</th><th>Champ / ligne budgétaire</th>
+       <th>Effets déclarés (thème, coefficient)</th><th>Source</th></tr></thead>
+-      <tbody>${leviers}</tbody></table></div>`;
++      <tbody>${leviers}</tbody></table>`;
++    return `<div style="margin-bottom:12px"><b class="audit-domain-title" style="--audit-accent:${couleurHexSure(famille.couleur)}">${echapperTexte(nom)}</b>
++      ${tableauAuditDefilant(tableau, `Leviers et effets déclarés — ${nom}`)}</div>`;
+   }).join('');
+ }
+ function auditGardeFousHtml(bareme){
+@@ -3227,9 +3375,10 @@ function auditGardeFousHtml(bareme){
+       <td class="chiffre">${echapperTexte(garde.unite || '')}</td>
+       <td class="source-note">${echapperTexte(garde.source || '')}</td></tr>`;
+   }).join('');
+-  return `<table><thead><tr><th>Grandeur surveillée</th><th>Strate</th>
++  const tableau = `<table><thead><tr><th>Grandeur surveillée</th><th>Strate</th>
+     <th>Seuils (valeur → niveau)</th><th>Unité</th><th>Source institutionnelle</th></tr></thead>
+     <tbody>${lignes}</tbody></table>`;
++  return tableauAuditDefilant(tableau, 'Tableau des garde-fous, seuils et sources institutionnelles');
+ }
+ function auditMethodesHtml(){
+   const nbLeviers = (((CATALOGUE || {}).parametres || {}).defauts
 diff --git a/simulateur/marches.py b/simulateur/marches.py
 index ac6791d..4d5ba17 100644
 --- a/simulateur/marches.py

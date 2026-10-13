@@ -3,10 +3,10 @@
 
 Le moteur vit dans son propre dépôt ; le site en embarque une copie
 (`simulateur/`) pour que l'hébergement soit autonome (fonctions Vercel, aperçu
-local). Ce script rapatrie la version voulue dans un dossier temporaire, applique le
-correctif de sécurité versionné du site (ou constate qu’il est déjà amont),
-met à jour `PROVENANCE.json`, puis régénère la page publiée. Un conflit arrête
-la mise à jour avant de remplacer les fichiers du moteur.
+local). Ce script rapatrie la version voulue dans un dossier temporaire, puis applique le
+correctif local versionné du site (sécurité et adaptations d’intégration/accessibilité)
+ou constate qu’il est déjà présent en amont. Il met à jour `PROVENANCE.json`, puis
+régénère la page publiée. Un conflit arrête la mise à jour avant de remplacer les fichiers du moteur.
 
 Usage :
     python3 outils/mettre-a-jour-simulateur.py [--revision <branche|étiquette|commit>]
@@ -52,7 +52,7 @@ def appliquer_correctif(paquet_stage: Path) -> bool:
     changement de sécurité ne soit jamais perdu silencieusement.
     """
     if not CORRECTIF.is_file():
-        raise SystemExit(f"Correctif de sécurité manquant : {CORRECTIF}")
+        raise SystemExit(f"Correctif local du site manquant : {CORRECTIF}")
 
     def lancer(*arguments: str) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
@@ -69,7 +69,7 @@ def appliquer_correctif(paquet_stage: Path) -> bool:
         application = lancer()
         if application.returncode != 0:
             raise SystemExit(
-                "Impossible d'appliquer le correctif de sécurité dans la copie temporaire :\n"
+                "Impossible d'appliquer le correctif local du site dans la copie temporaire :\n"
                 + application.stderr.strip()
             )
         return True
@@ -79,7 +79,7 @@ def appliquer_correctif(paquet_stage: Path) -> bool:
         print("Le correctif est déjà intégré à la révision amont.")
         return False
     raise SystemExit(
-        "Le correctif de sécurité n'est plus applicable à cette révision amont. "
+        "Le correctif local du site n'est plus applicable à cette révision amont. "
         "Aucun fichier du moteur local n'a été remplacé ; révisez le patch avant de continuer.\n"
         + verification.stderr.strip()
     )

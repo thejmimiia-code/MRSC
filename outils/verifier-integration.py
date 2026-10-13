@@ -36,6 +36,7 @@ from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RACINE))
+from simulateur.dashboard import SCENARIOS as SCENARIOS_MOTEUR  # noqa: E402
 
 #: Sortie réelle : le moteur est bavard, ses impressions sont mises de côté.
 SORTIE = sys.stdout
@@ -316,6 +317,24 @@ def fichiers_du_site() -> None:
         "Le repli de navigation et les boutons ont une règle d’affichage dédiée",
         ".site-journey-navigation" in styles and ".site-journey-button:disabled" in styles and "@media (max-width: 520px)" in styles,
     )
+    verifier(
+        "La barre de parcours est compacte, alignée au contenu et reste tactile sur mobile",
+        ".site-journey-inner" in styles
+        and "min-height: 38px" in styles
+        and "header.after(barre)" in parcours
+        and "header.getBoundingClientRect().height" in parcours
+        and ".site-journey-symbol { display: none; }" in styles
+        and "@media (any-pointer: coarse)" in styles
+        and ".site-journey-button { min-width: 44px; min-height: 44px; }" in styles,
+    )
+    verifier(
+        "Les boutons gardent leurs libellés et leur nom accessible sur petit écran",
+        'texte.className = "site-journey-label"' in parcours
+        and 'texte.textContent = libelle' in parcours
+        and 'bouton.setAttribute("aria-label", ariaLabel)' in parcours
+        and '.site-journey-symbol { display: none; }' in styles
+        and 'statut.textContent = stockageDisponible' in parcours,
+    )
     bloc_racine = styles.split(":root", 1)[1].split("}", 1)[0] if ":root" in styles else ""
     vert_marque = re.search(r"--green:\s*(#[0-9a-fA-F]{6})", bloc_racine)
     ratio_vert = rapport_contraste(vert_marque.group(1), "#ffffff") if vert_marque else 0.0
@@ -429,12 +448,24 @@ def fichiers_du_site() -> None:
         'href="simulateur.html"' in (RACINE / "index.html").read_text(encoding="utf-8"),
     )
     page_simulateur = RACINE / "simulateur" / "index.html"
+    presentation_simulateur = (RACINE / "simulateur.html").read_text(encoding="utf-8")
+    scenarios_annonces = re.search(
+        r"<dt>\s*(\d+)\s*</dt>\s*<dd>\s*scénarios types",
+        presentation_simulateur,
+        flags=re.IGNORECASE,
+    )
+    verifier(
+        "Le nombre annoncé de scénarios correspond au moteur",
+        bool(scenarios_annonces) and int(scenarios_annonces.group(1)) == len(SCENARIOS_MOTEUR),
+        f"{len(SCENARIOS_MOTEUR)} scénarios présents",
+    )
     verifier(
         "La page du simulateur est publiée",
         page_simulateur.is_file(),
     )
     if page_simulateur.is_file():
         simulateur_html = page_simulateur.read_text(encoding="utf-8")
+        simulateur_source = (RACINE / "simulateur" / "interface.py").read_text(encoding="utf-8")
         verifier(
             "Le simulateur offre un retour permanent vers le site M.R.S.C",
             'id="mrsc-retour-site"' in simulateur_html
@@ -443,6 +474,15 @@ def fichiers_du_site() -> None:
             and 'id="contenu-principal"' in simulateur_html
             and 'class="sim-skip-link"' in simulateur_html
             and "position: sticky" in simulateur_html,
+        )
+        verifier(
+            "La barre de parcours du simulateur est compacte et conserve les commandes tactiles",
+            'contenuBarre.className = "site-journey-inner"' in parcours
+            and ".site-return-bar .site-journey-inner" in simulateur_html
+            and ".site-return-bar .site-journey-button {" in simulateur_html
+            and "@media (max-width: 640px)" in simulateur_html
+            and ".site-return-bar .site-journey-symbol { display: none; }" in simulateur_html
+            and ".site-return-bar .site-journey-button { min-width: 44px; }" in simulateur_html,
         )
         verifier(
             "Le simulateur propose les réglages texte, contraste et interligne",
@@ -459,20 +499,63 @@ def fichiers_du_site() -> None:
             ),
         )
         verifier(
-            "Les tableaux larges du simulateur sont nommés, annoncés et accessibles au clavier",
+            "Les tableaux larges initiaux et le journal sont nommés, annoncés et accessibles au clavier",
             simulateur_html.count('class="defilable mrsc-scroll-region" role="region" tabindex="0"') == 2
-            and simulateur_html.count('class="mrsc-scroll-hint"') == 2,
+            and simulateur_html.count('class="mrsc-scroll-hint"') == 2
+            and 'class="journal mrsc-scroll-region" id="journal" role="region" tabindex="0" aria-label="Journal causal du moteur"' in simulateur_html
+            and ".journal:focus-visible" in simulateur_source,
+        )
+        verifier(
+            "Les tableaux des vues dynamiques sont défilables, focusables et nommés",
+            "panneau.querySelectorAll('.tableau-strate')" in simulateur_source
+            and "zone.classList.add('mrsc-scroll-region')" in simulateur_source
+            and "zone.setAttribute('role', 'region')" in simulateur_source
+            and "zone.setAttribute('tabindex', '0')" in simulateur_source
+            and "zone.setAttribute('aria-label'" in simulateur_source
+            and "const libelleOnglet = (document.getElementById(`tab-strate-${cle}`)?.textContent || cle)" in simulateur_source
+            and ".tableau-strate:focus-visible" in simulateur_source,
+        )
+        verifier(
+            "Les tableaux d’audit sont isolés du débordement de page et nommés",
+            "function tableauAuditDefilant(tableau, libelle)" in simulateur_source
+            and 'class="audit-table-scroll mrsc-scroll-region" role="region" tabindex="0" aria-label="${echapperAttribut(libelle)}"' in simulateur_source
+            and ".audit-table-scroll:focus-visible" in simulateur_source
+            and ".audit-table-scroll{width:100%;max-width:100%;overflow-x:auto" in simulateur_source,
+        )
+        verifier(
+            "Les textes secondaires et titres de familles du simulateur utilisent des couleurs lisibles",
+            "#7b8aa5" not in simulateur_source
+            and ".message-seuil .source{font-size:.66rem;color:var(--texte-dim)" in simulateur_source
+            and ".famille h3{font-size:.84rem" in simulateur_source
+            and "color:var(--texte)" in simulateur_source
+            and "function couleurHexSure(couleur" in simulateur_source
+            and "return /^#[0-9a-f]{6}$/i.test(valeur)" in simulateur_source
+            and 'style="--famille-accent:${couleurHexSure(famille.couleur)}"' in simulateur_source,
         )
         verifier(
             "Le simulateur replie ses grilles et curseurs compacts sous 640 px",
             "@media (max-width: 640px)" in simulateur_html
             and ".leviers-grille.compacte" in simulateur_html
-            and "minmax(0, 1fr)" in simulateur_html,
+            and "minmax(0, 1fr)" in simulateur_html
+            and ".clair-lignes{grid-template-columns:minmax(0,1fr)}" in simulateur_html
+            and ".levier .ligne{flex-wrap:wrap}" in simulateur_html,
         )
         verifier(
             "Le simulateur prend en compte contraste forcé et mouvements réduits",
             "@media (forced-colors: active)" in simulateur_html
             and "@media (prefers-reduced-motion: reduce)" in simulateur_html,
+        )
+        verifier(
+            "Les scénarios et préréglages du simulateur sont des boutons clavier avec état annoncé",
+            simulateur_html.count("const card = document.createElement('button');") == 2
+            and "card.dataset.cardType = 'scenario';" in simulateur_html
+            and "card.dataset.cardType = 'preset';" in simulateur_html
+            and simulateur_html.count("card.setAttribute('aria-pressed', 'false');") == 2
+            and "marquerCarteActive(ev, scenario, '#scenario-grid');" in simulateur_html
+            and "element.setAttribute('aria-pressed', String(active));" in simulateur_html
+            and "button.scenario-card" in simulateur_html
+            and ".scenario-card-title" in simulateur_html
+            and ".scenario-card-copy" in simulateur_html,
         )
 
 

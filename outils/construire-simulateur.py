@@ -7,8 +7,9 @@ le catalogue des scénarios (`simulateur/dashboard.py`). Ce script fait
 exactement la même substitution, mais une fois pour toutes : la page devient
 un fichier statique publiable (Vercel, GitHub Pages), sans build à chaque
 requête. Le générateur ajoute le retour permanent vers M.R.S.C, des réglages
-d’affichage et des adaptations responsives et accessibles aux tableaux ; le moteur
-amont reste inchangé.
+d’affichage et des adaptations responsives et accessibles aux tableaux. La copie
+locale reçoit aussi un correctif versionné pour la sécurité et les commandes de
+scénario/préréglage au clavier ; le dépôt amont n’est pas modifié.
 
 Usage :
     python3 outils/construire-simulateur.py [--verifier]
@@ -95,20 +96,27 @@ button.primaire {
   flex: 1 1 100%;
   align-items: center;
   justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: .25rem .7rem;
   min-height: 0;
   margin: 0;
-  padding: .15rem 0;
+  padding: 0;
   border: 0;
   background: transparent;
   box-shadow: none;
   backdrop-filter: none;
 }
-.site-return-bar .site-journey-controls {
+.site-return-bar .site-journey-inner {
   display: flex;
   flex-wrap: wrap;
-  gap: .35rem;
+  align-items: center;
+  gap: .25rem .7rem;
+  width: 100%;
+  min-height: 0;
+}
+.site-return-bar .site-journey-controls {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: .25rem;
   width: auto;
   margin: 0;
   padding: 0;
@@ -118,15 +126,15 @@ button.primaire {
   align-items: center;
   justify-content: center;
   gap: .3rem;
-  min-width: 44px;
-  min-height: 44px;
-  padding: .4rem .65rem;
+  min-width: 38px;
+  min-height: 38px;
+  padding: .35rem .55rem;
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
   background: #1d3268;
   color: #fff;
   font: inherit;
-  font-size: .8rem;
+  font-size: .76rem;
   font-weight: 700;
   line-height: 1.25;
   cursor: pointer;
@@ -146,14 +154,17 @@ button.primaire {
   cursor: not-allowed;
 }
 .site-return-bar .site-journey-button[data-journey-action="accueil"]:disabled { box-shadow: none; }
-.site-return-bar .site-journey-symbol { font-size: 1rem; }
+.site-return-bar .site-journey-symbol { font-size: .95rem; }
+.site-return-bar .site-journey-label { white-space: nowrap; }
 .site-return-bar .site-journey-status {
-  width: auto;
-  margin: 0;
-  padding: 0;
+  flex: 0 1 auto;
+  margin: 0 0 0 auto;
+  padding-left: .65rem;
+  border-left: 1px solid #526384;
   color: var(--texte-dim);
-  font-size: .72rem;
+  font-size: .7rem;
   line-height: 1.35;
+  white-space: nowrap;
 }
 .site-return-bar a {
   display: inline-flex;
@@ -327,6 +338,23 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
     margin: -10px -10px 10px;
     padding-inline: 10px;
   }
+  .site-return-bar .site-journey-inner { flex-wrap: wrap; gap: .1rem .2rem; }
+  .site-return-bar .site-journey-controls { flex-wrap: wrap; gap: .15rem; }
+  .site-return-bar .site-journey-button {
+    min-width: 44px;
+    min-height: 44px;
+    padding: .25rem .38rem;
+    font-size: .75rem;
+  }
+  .site-return-bar .site-journey-symbol { display: none; }
+  .site-return-bar .site-journey-status {
+    max-width: 6rem;
+    padding-left: .4rem;
+    font-size: .66rem;
+    text-align: right;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
   .sim-display-controls {
     flex: 1 1 100%;
     justify-content: flex-start;
@@ -381,6 +409,7 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
   .sim-display-button,
   .levier .bulle-bouton,
   .levier input[type=range] { min-height: 44px; }
+  .site-return-bar .site-journey-button { min-width: 44px; }
   .bascule input { width: 24px; height: 24px; }
 }
 @media (orientation: landscape) and (max-height: 520px) {
