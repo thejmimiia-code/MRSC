@@ -1,6 +1,6 @@
 # M.R.S.C — site public
 
-> **Adresse publique durable du projet : [https://thejmimiia-code.github.io/MRSC/](https://thejmimiia-code.github.io/MRSC/)** — GitHub Pages est activé et HTTPS est imposé. L’adresse reste stable tant que le compte et le dépôt gardent ce nom. Les changements de cette branche seront visibles après intégration à `main` et publication.
+> **Adresse actuellement publiée par GitHub Pages : [https://thejmimiia-code.github.io/MRSC/](https://thejmimiia-code.github.io/MRSC/).** Le domaine personnalisé souhaité, `www.mrsc.fr`, n’est pas encore configuré dans GitHub Pages. Lors de son raccordement, conserver `www.mrsc.fr` dans la barre d’adresse, sans redirection vers `github.io`, puis mettre à jour les canoniques et les consignes d’attribution après vérification du DNS et du HTTPS. Les changements de cette branche seront visibles après intégration à `main` et publication.
 
 Reproduction statique des pages publiques de [www.mrsc.fr](https://www.mrsc.fr/) pour servir de base aux travaux de R&D, complétée par un outil citoyen : le simulateur macro-politique.
 
@@ -97,7 +97,7 @@ Un déploiement peut être « Ready » tout en renvoyant `404 NOT_FOUND` sur `/`
 
 ## Contenu et ressources externes
 
-Le logo du site a été repris localement dans `assets/images/logo-mrsc.jpg`. Les pages existantes et leurs éléments visibles ont été reconstitués à partir du site public ; `ia-societe.html` réunit désormais une première réflexion sur l’IA et un parcours de prévention des fraudes, complété par des fiches d’apprentissage autonomes. Ces contenus sont une première version à relire, non une liste exhaustive. Les documents PDF (statuts, bulletins et parution officielle) pointent vers leurs fichiers d’origine ; la carte de localisation est intégrée depuis Google My Maps. Ces ressources nécessitent donc encore une connexion à leurs services hébergeurs.
+Le logo du site a été repris localement dans `assets/images/logo-mrsc.jpg`. Les pages existantes et leurs éléments visibles ont été reconstitués à partir du site public ; `ia-societe.html` réunit désormais une première réflexion sur l’IA et un parcours de prévention des fraudes, complété par des fiches d’apprentissage autonomes. Ces contenus sont une première version à relire, non une liste exhaustive. Les statuts et les bulletins d’adhésion et de don sont publiés en copies locales dans `assets/documents/` ; le document de parution au Journal officiel reste un lien externe vers sa source officielle. L’intégration de Google My Maps n’est chargée qu’après une action volontaire ; le lien du Journal officiel ne contacte sa source que si une personne l’ouvre.
 
 Le moteur du simulateur vient du dépôt [thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple](https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple) et reste sous licence **MIT** ; sa révision copiée est enregistrée dans `simulateur/PROVENANCE.json`.
 

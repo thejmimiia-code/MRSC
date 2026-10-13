@@ -440,19 +440,21 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
     by_id = {fiche["id"]: fiche for fiche in fiches}
     couverture, _ = render_coverage(domains, by_id)
     cartes = "\n".join(render_fiche_card(fiche) for fiche in fiches)
+    total_fiches = len(fiches)
     prototypes = sum(bool(fiche.get("statut_editorial")) for fiche in fiches)
-    fiches_sans_prototype = len(fiches) - prototypes
-    resume_catalogue = f'{fiches_sans_prototype} fiche{"s" if fiches_sans_prototype != 1 else ""}'
+    fiches_corpus_initial = total_fiches - prototypes
+    resume_catalogue = (
+        f"{total_fiches} entrées : {fiches_corpus_initial} fiches du corpus initial "
+        f"et {prototypes} prototypes explicitement à relire"
+    )
     objectif_libelle = f"{objectif_fiches:,}".replace(",", " ")
-    if prototypes:
-        resume_catalogue += f' et {prototypes} prototype{"s" if prototypes != 1 else ""} à relire'
     hero = f'''    <section class="learning-hero learning-catalogue-hero">
       <div class="container learning-hero-grid">
         <div class="learning-hero-copy">
           <p class="eyebrow">Apprendre · comprendre · pratiquer</p>
           <h1>Des fiches autonomes pour la vie d’aujourd’hui.</h1>
           <p class="learning-intro">Tu peux commencer par un sujet utile, sans compte, sans note et sans prérequis. Chaque fiche tient debout seule, part d’une situation concrète et utilise une analogie du quotidien pour éclairer la notion. L’explication, l’essai, l’aide et la correction sont sur le site M.R.S.C ; les liens de sources sont facultatifs.</p>
-          <p class="learning-level-note"><strong>Cap visé :</strong> construire peu à peu des ressources des bases du CP jusqu’aux spécialités et à la recherche doctorale, dans les différentes matières. Le catalogue recense {resume_catalogue}. Il reste un premier ensemble incomplet ; la carte ci-dessous nomme les sujets qui restent à créer.</p>
+          <p class="learning-level-note"><strong>Cap visé :</strong> construire peu à peu des ressources des bases du CP jusqu’aux spécialités et à la recherche doctorale, dans les différentes matières. Le catalogue compte {resume_catalogue}. La relecture indépendante de toutes les fiches du corpus initial n’est pas garantie. Le catalogue reste incomplet ; la carte ci-dessous nomme les sujets qui restent à créer.</p>
           <p class="learning-level-note"><strong>Ambition éditoriale de long terme :</strong> viser {objectif_libelle} fiches autonomes, distinctes, relues et entretenues. Ce nombre est un objectif de travail, pas l’offre actuelle ni une promesse de couverture exhaustive.</p>
           <div class="hero-actions"><a class="button" href="#catalogue-fiches">Choisir une fiche</a><a class="button button-secondary" href="anglais-aventure.html">Explorer l’aventure anglaise</a><a class="button button-secondary" href="#couverture">Voir les sujets à développer</a><a class="button button-secondary" href="transparence.html#rd-innovation">Comprendre la R&amp;D continue</a></div>
           <p class="learning-reassurance"><strong>Ton parcours ne te définit pas.</strong> Les repères de difficulté sont des indications, pas des niveaux à réussir. Tu peux avancer différemment en français, en mathématiques ou dans une autre matière.</p>
@@ -460,12 +462,12 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
         <aside class="learning-principles" aria-labelledby="principes-apprentissage"><p class="eyebrow">Une règle éditoriale durable</p><h2 id="principes-apprentissage">Partir du réel, puis revenir au réel.</h2><ul><li>Une analogie concrète dans chaque fiche, avec ses limites expliquées.</li><li>Des notions définies, une méthode découpée et un essai facultatif.</li><li>Des corrections masquées : tu les ouvres quand tu le souhaites.</li><li>Des repères par matière et difficulté, sans test ni étiquette.</li></ul></aside>
       </div>
     </section>'''
-    jeu_anglais = '''    <section class="section section-muted" id="aventure-anglais" aria-labelledby="titre-aventure-anglais">
+    jeu_anglais = f'''    <section class="section section-muted" id="aventure-anglais" aria-labelledby="titre-aventure-anglais">
       <div class="container english-promo-panel">
         <div class="english-promo-copy">
           <p class="eyebrow">Aventure pédagogique · accès libre</p>
           <h2 id="titre-aventure-anglais">Explorer les savoirs comme un monde ouvert.</h2>
-          <p><strong>Les Mondes</strong> relient les 70 fiches du catalogue à 15 univers thématiques. Choisis un repère, explore un monde ou compose ton parcours à partir des fiches ; 44 prototypes à relire restent identifiés. Les fiches complètes demeurent autonomes, à ouvrir quand tu le souhaites.</p>
+          <p><strong>Les Mondes</strong> relient les {total_fiches} fiches du catalogue à {len(domains)} univers thématiques. Choisis un repère, explore un monde ou compose ton parcours à partir des fiches ; {prototypes} prototypes à relire restent identifiés. Chaque fiche dispose d’une page autonome, à ouvrir quand tu le souhaites.</p>
           <p>Il n’existe pas de cursus certifiant caché : aucune séquence n’est imposée. Le jeu propose aussi cinq missions d’anglais avec scènes 3D et répliques en anglais, tandis que menus et aides restent en français. Gratuit, sans compte, publicité, vies ni minuteur.</p>
           <div class="hero-actions"><a class="button" href="anglais-aventure.html#mondes">Ouvrir les mondes et les parcours</a><a class="button button-secondary" href="anglais-aventure.html#missions">Jouer une escale en anglais</a></div>
         </div>
@@ -474,7 +476,7 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
     </section>'''
     grille = f'''    <section class="section" id="catalogue-fiches" aria-labelledby="titre-catalogue-fiches">
       <div class="container">
-        <div class="section-heading"><p class="eyebrow">Catalogue de départ · {resume_catalogue}</p><h2 id="titre-catalogue-fiches">Choisir une fiche selon son besoin</h2><p>Les exemples sont fictifs lorsqu’ils décrivent une situation. Chaque carte indique une source à consulter ; la fiche complète donne toutes ses sources, ses limites et sa date de revue. Une correction possible n’est pas une note : plusieurs chemins peuvent fonctionner.</p></div>
+        <div class="section-heading"><p class="eyebrow">Catalogue de départ · {total_fiches} entrées</p><h2 id="titre-catalogue-fiches">Choisir une fiche selon son besoin</h2><p>Les exemples sont fictifs lorsqu’ils décrivent une situation. Chaque carte indique une source à consulter ; la page dédiée précise ses sources, ses limites et sa date de revue. Une correction possible n’est pas une note : plusieurs chemins peuvent fonctionner.</p></div>
 {render_filters(fiches)}
         <p class="learning-filter-count" data-filter-count role="status" aria-live="polite" aria-atomic="true">{resume_catalogue}. Les filtres interactifs nécessitent JavaScript ; les liens restent accessibles ci-dessous.</p>
         <p class="learning-no-results" data-filter-empty hidden>Aucune entrée du catalogue ne correspond à ces critères. Essaie un autre mot ou efface les filtres.</p>

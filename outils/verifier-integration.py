@@ -31,6 +31,7 @@ import threading
 import tomllib
 import urllib.error
 import urllib.request
+from html import unescape
 from http.server import ThreadingHTTPServer
 from pathlib import Path
 
@@ -535,6 +536,47 @@ def fichiers_du_site() -> None:
         ),
     )
     transparence = (RACINE / "transparence.html").read_text(encoding="utf-8")
+    transparence_texte = unescape(transparence)
+    documents_html = (RACINE / "documents.html").read_text(encoding="utf-8")
+    fichiers_locaux_documents = (
+        "assets/documents/statuts-2020.pdf",
+        "assets/documents/bulletin-adhesion-2020.pdf",
+        "assets/documents/bulletin-don-2020.pdf",
+    )
+    ligne_copies_locales = re.search(
+        r'<tr><th scope="row">Documents</th><td>Statuts, bulletins d’adhésion et de don</td>.*?</tr>',
+        transparence,
+        flags=re.DOTALL,
+    )
+    ligne_journal_officiel = re.search(
+        r'<tr><th scope="row">Documents</th><td>Parution Journal officiel</td>.*?</tr>',
+        transparence,
+        flags=re.DOTALL,
+    )
+    url_journal_officiel = "https://www.journal-officiel.gouv.fr/publications/assoc/pdf/2016/0015/JOAFE_PDF_Unitaire_20160015_01361.pdf"
+    verifier(
+        "Les copies PDF locales et la source externe du Journal officiel sont distinguées",
+        all(f'href="{fichier}"' in documents_html for fichier in fichiers_locaux_documents)
+        and all(f'href="{fichier}"' in transparence for fichier in fichiers_locaux_documents)
+        and bool(ligne_copies_locales)
+        and "Documents officiels, copies locales" in unescape(ligne_copies_locales.group(0))
+        and bool(ligne_journal_officiel)
+        and url_journal_officiel in documents_html
+        and url_journal_officiel in transparence
+        and "Source externe" in unescape(ligne_journal_officiel.group(0)),
+    )
+    verifier(
+        "Les chiffres et le statut des fiches restent nuancés dans la page de transparence",
+        all(
+            terme in transparence_texte
+            for terme in (
+                "70 fiches dans 15 domaines",
+                "26 fiches du corpus initial",
+                "44 prototypes explicitement à relire",
+                "La relecture indépendante de toutes les fiches initiales n’est pas garantie",
+            )
+        ),
+    )
     verifier(
         "Le registre renvoie vers la présentation d’ÉVA et distingue objectifs, essais et résultats",
         'href="index.html#rd-eva"' in transparence
@@ -599,9 +641,21 @@ def fichiers_du_site() -> None:
         and "cp -R apprendre/fiches _site/apprendre/fiches" in workflow_pages
         and "sitemap.xml" in workflow_pages,
     )
+    readme = (RACINE / "README.md").read_text(encoding="utf-8")
     verifier(
-        "L’adresse publique permanente est mise en évidence dans le README",
-        "https://thejmimiia-code.github.io/MRSC/" in (RACINE / "README.md").read_text(encoding="utf-8"),
+        "Le README distingue l’adresse GitHub Pages actuelle du domaine personnalisé souhaité",
+        "Adresse actuellement publiée par GitHub Pages" in readme
+        and "https://thejmimiia-code.github.io/MRSC/" in readme
+        and "`www.mrsc.fr`" in readme
+        and "n’est pas encore configuré dans GitHub Pages" in readme
+        and "sans redirection vers `github.io`" in readme
+        and "Adresse publique durable du projet" not in readme,
+    )
+    verifier(
+        "Le README décrit correctement les copies PDF locales et le lien externe officiel",
+        "copies locales dans `assets/documents/`" in readme
+        and "reste un lien externe vers sa source officielle" in readme
+        and "L’intégration de Google My Maps n’est chargée qu’après une action volontaire" in readme,
     )
     verifier(
         "La page d’accueil renvoie vers la présentation du simulateur",
@@ -649,6 +703,11 @@ def fichiers_du_site() -> None:
         bool(indicateurs_annonces)
         and int(indicateurs_annonces.group(1)) == len(INDICATEURS_MOTEUR),
         f"{len(INDICATEURS_MOTEUR)} indicateurs référencés",
+    )
+    verifier(
+        "La page avertit qu’une copie embarquée peut différer de la version hébergée",
+        "La copie embarquée peut différer de la version hébergée" in presentation_simulateur
+        and 'data-simulateur-revision' in presentation_simulateur,
     )
     verifier(
         "La page du simulateur est publiée",
