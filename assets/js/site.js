@@ -15,7 +15,9 @@
     contrast: "mrsc-contraste-renforce",
     spacing: "mrsc-espacement-renforce",
   };
-  let textLevel = 0;
+  const textLevels = [50, 75, 100, 125, 150];
+  const legacyTextLevels = [100, 125, 150];
+  let textLevel = 100;
   let contrastEnabled = false;
   let spacingEnabled = false;
 
@@ -35,13 +37,24 @@
     }
   };
 
-  const applyTextLevel = (level) => {
-    textLevel = Math.max(0, Math.min(2, level));
-    root.classList.toggle("texte-agrandi", textLevel === 1);
-    root.classList.toggle("texte-tres-agrandi", textLevel === 2);
-    if (textLevelOutput) textLevelOutput.textContent = `${[100, 125, 150][textLevel]} %`;
-    if (textDecrease) textDecrease.disabled = textLevel === 0;
-    if (textIncrease) textIncrease.disabled = textLevel === 2;
+  const niveauTexteEnregistre = (value) => {
+    if (value === null) return null;
+    const stored = String(value).trim();
+    const parsed = Number(stored);
+    if (Number.isInteger(parsed) && textLevels.includes(parsed)) return parsed;
+    if (/^[0-2]$/.test(stored)) return legacyTextLevels[parsed];
+    return 100;
+  };
+
+  const applyTextLevel = (value) => {
+    textLevel = textLevels.includes(value) ? value : 100;
+    root.classList.toggle("texte-tres-reduit", textLevel === 50);
+    root.classList.toggle("texte-reduit", textLevel === 75);
+    root.classList.toggle("texte-agrandi", textLevel === 125);
+    root.classList.toggle("texte-tres-agrandi", textLevel === 150);
+    if (textLevelOutput) textLevelOutput.textContent = `${textLevel} %`;
+    if (textDecrease) textDecrease.disabled = textLevel === textLevels[0];
+    if (textIncrease) textIncrease.disabled = textLevel === textLevels[textLevels.length - 1];
   };
 
   const applyContrast = (enabled) => {
@@ -72,10 +85,9 @@
     const storedTextLevel = readPreference(keys.text);
     if (storedTextLevel === null) {
       // Migration du réglage binaire A+/A− précédemment proposé sur le site.
-      textLevel = readPreference("mrsc-texte-agrandi") === "oui" ? 1 : 0;
+      textLevel = readPreference("mrsc-texte-agrandi") === "oui" ? 125 : 100;
     } else {
-      const parsedLevel = Number.parseInt(storedTextLevel, 10);
-      textLevel = Number.isFinite(parsedLevel) ? parsedLevel : 0;
+      textLevel = niveauTexteEnregistre(storedTextLevel) ?? 100;
     }
     applyTextLevel(textLevel);
     applyContrast(readPreference(keys.contrast) === "oui");
@@ -87,11 +99,13 @@
   if (settings) {
     settings.hidden = false;
     textDecrease?.addEventListener("click", () => {
-      applyTextLevel(textLevel - 1);
+      const index = textLevels.indexOf(textLevel);
+      applyTextLevel(textLevels[Math.max(0, index - 1)]);
       savePreference(keys.text, String(textLevel));
     });
     textIncrease?.addEventListener("click", () => {
-      applyTextLevel(textLevel + 1);
+      const index = textLevels.indexOf(textLevel);
+      applyTextLevel(textLevels[Math.min(textLevels.length - 1, index + 1)]);
       savePreference(keys.text, String(textLevel));
     });
     contrastToggle?.addEventListener("click", () => {

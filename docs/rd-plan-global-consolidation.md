@@ -63,7 +63,7 @@ Aucun rapport de couverture CSS/JavaScript ou rendu navigateur n’établit ici 
 
 ### P1 — interface, accessibilité et robustesse
 
-1. Tester le panneau Parcours fermé/ouvert sur l’accueil, une page d’information, une fiche et le simulateur : clavier seul, focus, Échap, clic extérieur, ouverture concurrente de Menu/Affichage, zoom, tailles 320/375/768/1024/1440 px, paysage court, pointeur fin et tactile.
+1. Tester le panneau Parcours fermé/ouvert et le réglage Affichage sur l’accueil, une page d’information, une fiche et le simulateur : clavier seul, focus, Échap, clic extérieur, ouverture concurrente de Menu/Affichage, tailles de texte 50/75/100/125/150 %, zoom natif du navigateur, largeurs 320/375/768/1024/1440 px, paysage court, pointeur fin et tactile. Vérifier en particulier que la navigation de bureau passe en menu repliable à 125/150 % sans perte de libellés ni escalade en hauteur.
 2. Rejouer Précédent/Suivant, retour à l’accueil, dernière vue, fragments d’ancre, retour du navigateur et session `sessionStorage` bloquée. Vérifier que les contrôles gardent un nom clair, que leur statut replié est annoncé et que le message de repli reste accessible dans le panneau.
 3. Si un problème réel apparaît, privilégier une correction ciblée avec repli plutôt que l’ajout d’une couche de framework.
 4. Maintenir un contrôle séparé du simulateur intégré et de sa version autonome ; les deux ne partagent pas toujours la même origine ni les mêmes styles.

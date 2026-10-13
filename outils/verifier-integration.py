@@ -322,8 +322,18 @@ def fichiers_du_site() -> None:
         all(regle in styles for regle in medias_adaptatifs),
     )
     verifier(
-        "Les tailles utilisateur incluent 125 % et 150 %",
-        "html.texte-agrandi" in styles and "html.texte-tres-agrandi" in styles,
+        "Le CSS commun couvre les cinq niveaux de taille du texte de 50 % à 150 %",
+        all(
+            marqueur in styles
+            for marqueur in (
+                "html.texte-tres-reduit { font-size: 50%; }",
+                "html.texte-reduit { font-size: 75%; }",
+                "html.texte-agrandi { font-size: 125%; }",
+                "html.texte-tres-agrandi { font-size: 150%; }",
+                "font-size: max(12px,1em)",
+                ".display-settings-panel .display-control",
+            )
+        ),
     )
     verifier(
         "Le mode d’espacement atteint les repères WCAG 1.4.12",
@@ -331,6 +341,29 @@ def fichiers_du_site() -> None:
     )
     parcours = (RACINE / "assets" / "js" / "navigation-parcours.js").read_text(encoding="utf-8")
     script_site = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+    verifier(
+        "Le réglage mémorise les cinq paliers et conserve les préférences historiques",
+        "const textLevels = [50, 75, 100, 125, 150]" in script_site
+        and "const legacyTextLevels = [100, 125, 150]" in script_site
+        and "legacyTextLevels[parsed]" in script_site
+        and 'readPreference("mrsc-texte-agrandi") === "oui" ? 125 : 100' in script_site
+        and "savePreference(keys.text, String(textLevel))" in script_site,
+    )
+    verifier(
+        "La navigation de bureau se replie à 125/150 % sans masquer les libellés",
+        all(
+            marqueur in styles
+            for marqueur in (
+                "@media (min-width: 1261px)",
+                "html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-inner",
+                "html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-toggle",
+                "html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links.is-open { display: flex; }",
+                "min-height: 45px",
+                "padding: clamp(6px,.45rem,9px) clamp(8px,.65rem,14px)",
+                "white-space: normal",
+            )
+        ),
+    )
     verifier(
         "L’en-tête se compacte automatiquement selon l’espace et garde un contrôle réversible",
         all(
@@ -568,6 +601,16 @@ def fichiers_du_site() -> None:
                     'mrsc-texte-niveau',
                 )
             ),
+        )
+        verifier(
+            "Le simulateur autonome reprend les cinq paliers et leur reflow typographique",
+            "const textLevels = [50, 75, 100, 125, 150]" in simulateur_html
+            and "const legacyTextLevels = [100, 125, 150]" in simulateur_html
+            and "html.texte-tres-reduit { font-size: 50%; }" in simulateur_html
+            and "html.texte-reduit { font-size: 75%; }" in simulateur_html
+            and "font-size: max(12px,1em)" in simulateur_html
+            and "font-size: clamp(12px,1em,20px)" in simulateur_html
+            and "padding: clamp(6px,.4rem,8px) clamp(8px,.65rem,14px)" in simulateur_html,
         )
         verifier(
             "Les tableaux larges initiaux et le journal sont nommés, annoncés et accessibles au clavier",
