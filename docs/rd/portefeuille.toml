@@ -84,8 +84,8 @@ etat = "a-tester"
 domaines = ["numerique-ia", "methodes-communication"]
 question = "Les pages restent-elles rapides, lisibles, robustes, accessibles et utilisables quand le stockage, le réseau ou une fonction optionnelle échoue?"
 preuves = ["docs/rd-plan-global-consolidation.md", "docs/rd-affichage-adaptatif.md", "docs/rd-audit-securite-optimisation.md", "docs/rd-confidentialite-rgpd.md", "outils/verifier-integration.py", "outils/verifier-site-statique.py"]
-prochaine_action = "Faire une revue visuelle et au clavier du contrôle Parcours, des cinq paliers de texte (50–150 %) et du menu de bureau repliable à 125/150 % sur pages représentatives et appareils réels ; vérifier navigation, reflow, focus, tactile et lecteur d’écran, sans collecte d’usage avant de changer l’état de l’initiative."
-criteres_sortie = ["Les principaux parcours, les cinq paliers de texte, l’en-tête compactable et la navigation à 125/150 % sont testés sur des largeurs et technologies représentatives.", "Les améliorations ne retirent ni zoom natif, clavier, reflow ou contenu sans JavaScript.", "Aucune collecte ou dépendance tierce n'est ajoutée sans nécessité et information."]
+prochaine_action = "Faire une revue visuelle et au clavier de la barre harmonisée Menu/Réduire/Parcours/Affichage, du contrôle Parcours, des cinq paliers de texte (50–150 %) et du menu de bureau repliable à 125/150 % sur pages représentatives et appareils réels ; vérifier navigation, reflow, focus, tactile et lecteur d’écran, sans collecte d’usage avant de changer l’état de l’initiative."
+criteres_sortie = ["Les principaux parcours, la barre d’outils du bandeau, les cinq paliers de texte, l’en-tête compactable et la navigation à 125/150 % sont testés sur des largeurs et technologies représentatives.", "Les améliorations ne retirent ni zoom natif, clavier, reflow ou contenu sans JavaScript.", "Aucune collecte ou dépendance tierce n'est ajoutée sans nécessité et information."]
 skills = ["conception-innovation", "accessibilite-co-conception", "integration-securite", "evaluation-maintenance"]
 
 [[initiative]]
