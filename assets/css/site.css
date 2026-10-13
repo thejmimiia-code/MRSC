@@ -251,12 +251,13 @@ html.contraste-renforce .site-status-note {
   justify-content: center;
   gap: .6rem;
   min-height: 44px;
-  padding: .45rem .8rem;
+  padding: clamp(6px,.45rem,9px) clamp(8px,.8rem,16px);
   border: 1px solid rgba(255,255,255,.34);
   border-radius: var(--button-radius);
   background: transparent;
   color: var(--white);
   font: inherit;
+  font-size: clamp(12px,1rem,24px);
   font-weight: 700;
   cursor: pointer;
   transition: background .18s ease, border-color .18s ease;
@@ -280,13 +281,13 @@ html.contraste-renforce .site-status-note {
   min-width: 44px;
   min-height: 44px;
   max-width: 9rem;
-  padding: .4rem .55rem;
+  padding: clamp(6px,.4rem,8px) clamp(8px,.55rem,12px);
   border: 1px solid rgba(255,255,255,.45);
   border-radius: var(--button-radius);
   background: transparent;
   color: var(--white);
   font: inherit;
-  font-size: .8rem;
+  font-size: clamp(12px,.8rem,20px);
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
@@ -317,7 +318,7 @@ html.contraste-renforce .site-status-note {
   min-height: 54px;
   padding: .7rem .58rem;
   color: rgba(255, 255, 255, .86);
-  font-size: .84rem;
+  font-size: clamp(12px,.84rem,20px);
   font-weight: 650;
   text-decoration: none;
   transition: color .18s ease, background .18s ease;
@@ -2564,11 +2565,11 @@ html.contraste-renforce .resource-scope-note {
   gap: .3rem;
   min-width: 44px;
   min-height: 44px;
-  padding: .45rem .65rem;
+  padding: clamp(6px,.45rem,9px) clamp(8px,.65rem,14px);
   border: 1px solid rgba(255,255,255,.45);
   border-radius: 9px;
   color: var(--white);
-  font-size: .82rem;
+  font-size: clamp(12px,.82rem,20px);
   font-weight: 700;
   list-style: none;
   cursor: pointer;
@@ -2578,15 +2579,15 @@ html.contraste-renforce .resource-scope-note {
 .display-settings > summary::marker { content: ""; }
 .display-settings > summary:hover,
 .display-settings[open] > summary { background: rgba(255,255,255,.13); }
-.display-settings-chevron { font-size: 1rem; line-height: 1; }
+.display-settings-chevron { font-size: clamp(12px,1rem,20px); line-height: 1; }
 
 .display-settings-panel {
   position: absolute;
   z-index: 100;
   top: calc(100% + .55rem);
   right: 0;
-  width: min(24rem, calc(100vw - 2rem));
-  padding: 1rem;
+  width: min(clamp(320px,24rem,400px),calc(100vw - 2rem));
+  padding: clamp(12px,1rem,20px);
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--white);
@@ -2596,9 +2597,9 @@ html.contraste-renforce .resource-scope-note {
 
 .display-settings-title,
 .display-settings-note { margin: 0; }
-.display-settings-title { margin-bottom: .7rem; color: var(--navy); }
+.display-settings-title { margin-bottom: .7rem; color: var(--navy); font-size: clamp(14px,.95rem,18px); }
 .display-settings-row,
-.display-settings-actions { display: flex; align-items: center; gap: .5rem; }
+.display-settings-actions { display: flex; align-items: center; gap: clamp(6px,.5rem,12px); }
 .display-settings-row { justify-content: space-between; margin-bottom: .6rem; }
 .display-settings-actions { flex-direction: column; align-items: stretch; }
 .display-control {
@@ -2610,6 +2611,7 @@ html.contraste-renforce .resource-scope-note {
   background: var(--white);
   color: var(--navy);
   font: inherit;
+  font-size: clamp(14px,1rem,18px);
   font-weight: 700;
   cursor: pointer;
   transition: background .18s ease, border-color .18s ease;
@@ -2617,16 +2619,18 @@ html.contraste-renforce .resource-scope-note {
 .display-control:hover:not(:disabled) { background: var(--blue-soft); }
 .display-control:disabled { border-color: #d7ddea; background: #edf1f6; color: #536078; cursor: not-allowed; }
 .display-control-wide { width: 100%; text-align: left; }
-.display-text-level { min-width: 4rem; text-align: center; font-variant-numeric: tabular-nums; }
-.display-settings-note { margin-top: .75rem; color: var(--muted); font-size: .8rem; line-height: 1.45; }
+.display-text-level { min-width: 4.5ch; text-align: center; font-size: clamp(14px,.95rem,18px); font-variant-numeric: tabular-nums; }
+.display-settings-note { margin-top: .75rem; color: var(--muted); font-size: clamp(12px,.8rem,16px); line-height: 1.45; }
 .display-settings-panel :focus-visible { outline-color: var(--blue); }
 
+html.texte-tres-reduit { font-size: 50%; }
+html.texte-reduit { font-size: 75%; }
 html.texte-agrandi { font-size: 125%; }
 html.texte-tres-agrandi { font-size: 150%; }
-html.texte-agrandi body,
-html.texte-tres-agrandi body { font-size: 1rem; }
-html.texte-agrandi :is(button, input, select, textarea),
-html.texte-tres-agrandi :is(button, input, select, textarea) { font-size: 1em; }
+html:is(.texte-tres-reduit,.texte-reduit,.texte-agrandi,.texte-tres-agrandi) body { font-size: 1rem; }
+html:is(.texte-tres-reduit,.texte-reduit) :is(button,input,select,textarea) { font-size: max(12px,1em); }
+html:is(.texte-agrandi,.texte-tres-agrandi) :is(button,input,select,textarea) { font-size: clamp(12px,1em,20px); }
+html:is(.texte-tres-reduit,.texte-reduit,.texte-agrandi,.texte-tres-agrandi) .display-settings-panel .display-control { font-size: clamp(14px,1rem,18px); }
 
 html.espacement-renforce :is(main, .site-footer) :is(h1,h2,h3,p,li,dd,dt,figcaption,blockquote,address,th,td) {
   line-height: 1.65;
@@ -2660,12 +2664,12 @@ html.contraste-renforce :is(button,.button,.display-control,.display-settings > 
   gap: .3rem;
   min-width: 44px;
   min-height: 44px;
-  padding: .4rem .55rem;
+  padding: clamp(6px,.4rem,8px) clamp(8px,.55rem,12px);
   border: 1px solid rgba(255,255,255,.45);
   border-radius: var(--button-radius);
   background: transparent;
   color: var(--white);
-  font-size: .82rem;
+  font-size: clamp(12px,.82rem,20px);
   font-weight: 700;
   list-style: none;
   cursor: pointer;
@@ -2674,7 +2678,7 @@ html.contraste-renforce :is(button,.button,.display-control,.display-settings > 
 .site-journey-settings > summary::marker { content: ""; }
 .site-journey-settings > summary:hover,
 .site-journey-settings[open] > summary { background: rgba(255,255,255,.13); }
-.site-journey-chevron { font-size: 1rem; line-height: 1; transition: transform .18s ease; }
+.site-journey-chevron { font-size: clamp(12px,1rem,20px); line-height: 1; transition: transform .18s ease; }
 .site-journey-settings[open] .site-journey-chevron { transform: rotate(180deg); }
 .site-journey-panel {
   position: absolute;
@@ -2759,7 +2763,7 @@ html.contraste-renforce :is(button,.button,.display-control,.display-settings > 
   padding-left: .75rem;
   border-left: 1px solid var(--line);
   color: var(--muted);
-  font-size: .7rem;
+  font-size: clamp(11px,.7rem,16px);
   line-height: 1.35;
   white-space: nowrap;
 }
@@ -2796,12 +2800,12 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
 @media (max-width: 520px) {
   html { scroll-padding-top: 12rem; }
   .nav-inner { flex-wrap: wrap; gap: .15rem; min-height: 48px; width: calc(100% - 1rem); }
-  .nav-toggle { gap: .25rem; padding-inline: .35rem; font-size: .74rem; }
+  .nav-toggle { gap: .25rem; padding-inline: .35rem; font-size: clamp(12px,.74rem,18px); }
   .nav-toggle svg { width: 18px; height: 18px; }
-  .header-compact-toggle { max-width: 7.25rem; padding-inline: .4rem; font-size: .74rem; }
-  .site-journey-settings > summary { padding-inline: .38rem; font-size: .74rem; }
+  .header-compact-toggle { max-width: 7.25rem; padding-inline: .4rem; font-size: clamp(12px,.74rem,18px); }
+  .site-journey-settings > summary { padding-inline: .38rem; font-size: clamp(12px,.74rem,18px); }
   .display-settings { margin-left: 0; }
-  .display-settings > summary { gap: .2rem; padding-inline: .4rem; font-size: .74rem; }
+  .display-settings > summary { gap: .2rem; padding-inline: .4rem; font-size: clamp(12px,.74rem,18px); }
   .site-journey-inner { gap: .1rem .3rem; }
   .site-journey-controls { flex-wrap: wrap; gap: .15rem; }
   .site-journey-button {
@@ -2814,12 +2818,51 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   .site-journey-status {
     max-width: 100%;
     padding-left: .4rem;
-    font-size: .7rem;
+    font-size: clamp(11px,.7rem,16px);
     white-space: normal;
     overflow-wrap: anywhere;
   }
   .site-journey-panel { width: calc(100vw - 1rem); padding: .45rem; }
-  .display-settings-panel { width: min(24rem,calc(100vw - 1rem)); }
+  .display-settings-panel { width: min(clamp(320px,24rem,400px),calc(100vw - 1rem)); }
+}
+@media (min-width: 1261px) {
+  html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-inner {
+    justify-content: space-between;
+    min-height: 50px;
+    gap: .35rem;
+  }
+  html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-toggle {
+    display: inline-flex;
+    min-height: 48px;
+  }
+  html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links {
+    position: absolute;
+    z-index: 2;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    padding: .45rem 1rem .8rem;
+    background: var(--navy);
+    box-shadow: 0 12px 18px rgba(21,35,62,.15);
+  }
+  html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links.is-open { display: flex; }
+  html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links a {
+    width: min(var(--content),100%);
+    min-height: 45px;
+    margin-inline: auto;
+    padding-inline: .35rem;
+    white-space: normal;
+  }
+  html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links a::after {
+    right: auto;
+    left: .35rem;
+    width: 35px;
+  }
 }
 html.entete-compacte { scroll-padding-top: 8rem; }
 @media (orientation: landscape) and (max-height: 560px) and (max-width: 920px) {

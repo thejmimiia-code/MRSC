@@ -128,13 +128,13 @@ button.primaire {
   gap: .3rem;
   min-width: 38px;
   min-height: 38px;
-  padding: .35rem .55rem;
+  padding: clamp(6px,.35rem,8px) clamp(8px,.55rem,12px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
   background: #1d3268;
   color: #fff;
   font: inherit;
-  font-size: .76rem;
+  font-size: clamp(12px,.76rem,18px);
   font-weight: 700;
   line-height: 1.25;
   cursor: pointer;
@@ -162,7 +162,7 @@ button.primaire {
   padding-left: .65rem;
   border-left: 1px solid #526384;
   color: var(--texte-dim);
-  font-size: .7rem;
+  font-size: clamp(11px,.7rem,16px);
   line-height: 1.35;
   white-space: nowrap;
 }
@@ -174,12 +174,12 @@ button.primaire {
   gap: .3rem;
   min-width: 44px;
   min-height: 44px;
-  padding: .45rem .8rem;
+  padding: clamp(6px,.45rem,9px) clamp(8px,.8rem,16px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
   background: #1d3268;
   color: #fff;
-  font-size: .84rem;
+  font-size: clamp(12px,.84rem,20px);
   font-weight: 700;
   list-style: none;
   cursor: pointer;
@@ -188,7 +188,7 @@ button.primaire {
 .site-return-bar .site-journey-settings > summary::marker { content: ""; }
 .site-return-bar .site-journey-settings > summary:hover,
 .site-return-bar .site-journey-settings[open] > summary { border-color: var(--ambre); background: #26375f; }
-.site-return-bar .site-journey-chevron { font-size: 1rem; line-height: 1; transition: transform .18s ease; }
+.site-return-bar .site-journey-chevron { font-size: clamp(12px,1rem,20px); line-height: 1; transition: transform .18s ease; }
 .site-return-bar .site-journey-settings[open] .site-journey-chevron { transform: rotate(180deg); }
 .site-return-bar .site-journey-panel {
   position: absolute;
@@ -211,12 +211,12 @@ button.primaire {
   gap: .55rem;
   min-height: 44px;
   max-width: 100%;
-  padding: .45rem .8rem;
+  padding: clamp(6px,.45rem,9px) clamp(8px,.8rem,16px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
   background: #1d3268;
   color: #fff;
-  font-size: .84rem;
+  font-size: clamp(12px,.84rem,20px);
   font-weight: 700;
   line-height: 1.25;
   text-decoration: none;
@@ -273,13 +273,13 @@ button.primaire {
   justify-content: center;
   min-width: 44px;
   min-height: 44px;
-  padding: .4rem .65rem;
+  padding: clamp(6px,.4rem,8px) clamp(8px,.65rem,14px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
   background: #1d3268;
   color: #fff;
   font: inherit;
-  font-size: .78rem;
+  font-size: clamp(12px,.78rem,18px);
   font-weight: 700;
   line-height: 1.25;
   cursor: pointer;
@@ -297,7 +297,7 @@ button.primaire {
 .sim-display-level {
   min-width: 3.8rem;
   color: var(--texte);
-  font-size: .8rem;
+  font-size: clamp(12px,.8rem,18px);
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   text-align: center;
@@ -318,8 +318,13 @@ button.primaire {
   overflow: auto;
   overflow-wrap: anywhere;
 }
+html.texte-tres-reduit { font-size: 50%; }
+html.texte-reduit { font-size: 75%; }
 html.texte-agrandi { font-size: 125%; }
 html.texte-tres-agrandi { font-size: 150%; }
+html:is(.texte-tres-reduit,.texte-reduit) :is(button,input,select,textarea) { font-size: max(12px,1em); }
+html:is(.texte-agrandi,.texte-tres-agrandi) :is(button,input,select,textarea) { font-size: clamp(12px,1em,20px); }
+html:is(.texte-tres-reduit,.texte-reduit,.texte-agrandi,.texte-tres-agrandi) .sim-display-level { font-size: clamp(12px,.8rem,18px); }
 html.espacement-renforce body { line-height: 1.8; }
 html.espacement-renforce :is(h1, h2, h3, p, li, label, button, th, td, .aide, .nom, .desc, .libelle, .valeur, .ref, .pastille, .console-verdict, .console-titre) {
   line-height: 1.65;
@@ -377,20 +382,20 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
     padding-inline: 10px;
   }
   .site-return-bar .site-journey-panel { width: calc(100vw - 1rem); padding: .45rem; }
-  .site-return-bar .site-journey-settings > summary { padding-inline: .55rem; font-size: .78rem; }
+  .site-return-bar .site-journey-settings > summary { padding-inline: .55rem; font-size: clamp(12px,.78rem,18px); }
   .site-return-bar .site-journey-inner { flex-wrap: wrap; gap: .1rem .2rem; }
   .site-return-bar .site-journey-controls { flex-wrap: wrap; gap: .15rem; }
   .site-return-bar .site-journey-button {
     min-width: 44px;
     min-height: 44px;
-    padding: .25rem .38rem;
-    font-size: .75rem;
+    padding: clamp(6px,.25rem,8px) clamp(6px,.38rem,10px);
+    font-size: clamp(12px,.75rem,18px);
   }
   .site-return-bar .site-journey-symbol { display: none; }
   .site-return-bar .site-journey-status {
     max-width: 6rem;
     padding-left: .4rem;
-    font-size: .66rem;
+    font-size: clamp(11px,.66rem,14px);
     text-align: right;
     white-space: normal;
     overflow-wrap: anywhere;
@@ -555,7 +560,9 @@ SCRIPT_AFFICHAGE = r"""
     contrast: "mrsc-contraste-renforce",
     spacing: "mrsc-espacement-renforce",
   };
-  let level = 0;
+  const textLevels = [50, 75, 100, 125, 150];
+  const legacyTextLevels = [100, 125, 150];
+  let level = 100;
   let contrast = false;
   let spacing = false;
 
@@ -567,13 +574,23 @@ SCRIPT_AFFICHAGE = r"""
     try { window.localStorage.setItem(key, value); }
     catch (error) { /* Le choix reste actif pour la visite courante. */ }
   };
+  const niveauTexteEnregistre = (value) => {
+    if (value === null) return null;
+    const stored = String(value).trim();
+    const parsed = Number(stored);
+    if (Number.isInteger(parsed) && textLevels.includes(parsed)) return parsed;
+    if (/^[0-2]$/.test(stored)) return legacyTextLevels[parsed];
+    return 100;
+  };
   const applyLevel = (value) => {
-    level = Math.max(0, Math.min(2, value));
-    root.classList.toggle("texte-agrandi", level === 1);
-    root.classList.toggle("texte-tres-agrandi", level === 2);
-    if (levelOutput) levelOutput.textContent = `${[100, 125, 150][level]} %`;
-    if (decrease) decrease.disabled = level === 0;
-    if (increase) increase.disabled = level === 2;
+    level = textLevels.includes(value) ? value : 100;
+    root.classList.toggle("texte-tres-reduit", level === 50);
+    root.classList.toggle("texte-reduit", level === 75);
+    root.classList.toggle("texte-agrandi", level === 125);
+    root.classList.toggle("texte-tres-agrandi", level === 150);
+    if (levelOutput) levelOutput.textContent = `${level} %`;
+    if (decrease) decrease.disabled = level === textLevels[0];
+    if (increase) increase.disabled = level === textLevels[textLevels.length - 1];
   };
   const applyContrast = (value) => {
     contrast = Boolean(value);
@@ -597,9 +614,9 @@ SCRIPT_AFFICHAGE = r"""
     const savedLevel = read(keys.text);
     const legacy = read("mrsc-texte-agrandi");
     const parsed = savedLevel === null
-      ? (legacy === "oui" ? 1 : 0)
-      : Number.parseInt(savedLevel, 10);
-    applyLevel(Number.isFinite(parsed) ? parsed : 0);
+      ? (legacy === "oui" ? 125 : 100)
+      : niveauTexteEnregistre(savedLevel);
+    applyLevel(parsed ?? 100);
     applyContrast(read(keys.contrast) === "oui");
     applySpacing(read(keys.spacing) === "oui");
   };
@@ -607,11 +624,13 @@ SCRIPT_AFFICHAGE = r"""
   load();
   if (controls) controls.hidden = false;
   decrease?.addEventListener("click", () => {
-    applyLevel(level - 1);
+    const index = textLevels.indexOf(level);
+    applyLevel(textLevels[Math.max(0, index - 1)]);
     save(keys.text, String(level));
   });
   increase?.addEventListener("click", () => {
-    applyLevel(level + 1);
+    const index = textLevels.indexOf(level);
+    applyLevel(textLevels[Math.min(textLevels.length - 1, index + 1)]);
     save(keys.text, String(level));
   });
   contrastButton?.addEventListener("click", () => {
