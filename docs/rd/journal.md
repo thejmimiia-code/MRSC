@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-13 — Harmonisation visuelle des commandes du bandeau
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal :** la barre « Menu / Réduire / Parcours / Affichage » a été signalée comme visuellement dispersée et peu cohérente avec l’identité générale du site.
+- **Décision :** préserver l’ordre, les libellés, les commandes et le repli existants ; lorsque les liens principaux sont repliés, réunir les commandes visibles en un groupe centré. Uniformiser leur hauteur minimale (44 px), bord, rayon, fond discret, typographie, espacements et accent d’état doré. Ne pas confondre ce réglage avec une refonte globale de la navigation ni masquer de libellé.
+- **Changements et sources :** `assets/css/site.css` uniformise Menu, Réduire/Agrandir, Parcours et Affichage aux différents breakpoints ; `outils/verifier-integration.py` verrouille cette cohérence statique. `docs/rd-affichage-adaptatif.md`, `docs/rd-coherence-visuelle-editoriale.md` et le portefeuille décrivent le résultat et gardent la revue humaine à faire.
+- **Contrôles réellement exécutés :** `python3 -m py_compile simulateur/*.py api/*.py outils/*.py`, `python3 outils/verifier-rd-continue.py`, `python3 outils/construire-apprentissages.py --verifier`, `python3 outils/construire-simulateur.py --verifier`, `python3 outils/verifier-site-statique.py`, `python3 outils/verifier-securite.py`, `python3 outils/verifier-integration.py`, `node --check assets/js/site.js` et `git diff --check` — tous réussis. L’intégration contrôle 83 pages, 16 routes et les styles de la barre. Un premier lancement a échoué parce qu’une assertion CSS attendait l’ancien padding ; l’attendu a été aligné sur les nouvelles valeurs, puis l’intégration complète a réussi.
+- **Limites :** aucune capture ou inspection par navigateur graphique n’a été faite dans l’environnement ; aucun essai clavier, tactile, lecteur d’écran ou zoom sur appareil réel ne confirme la hiérarchie visuelle effective. Les assertions d’intégration vérifient les règles présentes, pas leur rendu humain.
+- **Prochaine action :** contrôler la barre sur un navigateur réel aux largeurs étroites et larges, puis à 50/100/125/150 %, et vérifier l’alignement, l’ordre de focus, le contraste des états et les retours à la ligne avant de modifier le statut `a-tester`.
+
 ## 2026-10-13 — Paliers de texte 50–150 % et navigation stable à fort agrandissement
 
 - **Initiative :** `optimisation-du-site`.

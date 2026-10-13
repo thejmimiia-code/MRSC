@@ -359,10 +359,28 @@ def fichiers_du_site() -> None:
                 "html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-toggle",
                 "html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links.is-open { display: flex; }",
                 "min-height: 45px",
-                "padding: clamp(6px,.45rem,9px) clamp(8px,.65rem,14px)",
+                "padding: clamp(6px,.4rem,8px) clamp(10px,.65rem,14px)",
                 "white-space: normal",
             )
         ),
+    )
+    verifier(
+        "La barre Menu/Réduire/Parcours/Affichage forme un groupe centré et cohérent",
+        ".nav-inner { justify-content: center; gap: clamp(6px,.5rem,10px); }" in styles
+        and all(
+            marqueur in styles
+            for marqueur in (
+                ".nav-toggle {",
+                ".header-compact-toggle {",
+                ".site-journey-settings > summary {",
+                ".display-settings > summary {",
+                "padding: clamp(6px,.4rem,8px) clamp(10px,.65rem,14px)",
+                "font-size: clamp(13px,.875rem,18px)",
+                "background: rgba(255,255,255,.055)",
+                "border-color: var(--gold)",
+            )
+        )
+        and styles.count("font-size: clamp(13px,.875rem,18px)") >= 4,
     )
     verifier(
         "L’en-tête se compacte automatiquement selon l’espace et garde un contrôle réversible",
