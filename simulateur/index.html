@@ -488,6 +488,44 @@ button.primaire {
   line-height: 1.35;
   white-space: nowrap;
 }
+.site-return-bar .site-journey-settings { position: static; flex: 0 0 auto; color: #fff; }
+.site-return-bar .site-journey-settings > summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem;
+  min-width: 44px;
+  min-height: 44px;
+  padding: .45rem .8rem;
+  border: 1px solid rgba(255,255,255,.38);
+  border-radius: 9px;
+  background: #1d3268;
+  color: #fff;
+  font-size: .84rem;
+  font-weight: 700;
+  list-style: none;
+  cursor: pointer;
+}
+.site-return-bar .site-journey-settings > summary::-webkit-details-marker { display: none; }
+.site-return-bar .site-journey-settings > summary::marker { content: ""; }
+.site-return-bar .site-journey-settings > summary:hover,
+.site-return-bar .site-journey-settings[open] > summary { border-color: var(--ambre); background: #26375f; }
+.site-return-bar .site-journey-chevron { font-size: 1rem; line-height: 1; transition: transform .18s ease; }
+.site-return-bar .site-journey-settings[open] .site-journey-chevron { transform: rotate(180deg); }
+.site-return-bar .site-journey-panel {
+  position: absolute;
+  z-index: 120;
+  top: calc(100% + .25rem);
+  right: 0;
+  width: min(38rem,calc(100vw - 2rem));
+  max-height: calc(100vh - 5rem);
+  overflow: auto;
+  padding: .55rem;
+  border: 1px solid #526384;
+  border-radius: 12px;
+  background: rgba(29,50,104,.98);
+  box-shadow: 0 8px 22px rgba(0,0,0,.24);
+}
 .site-return-bar a {
   display: inline-flex;
   flex: 0 1 auto;
@@ -660,6 +698,8 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
     margin: -10px -10px 10px;
     padding-inline: 10px;
   }
+  .site-return-bar .site-journey-panel { width: calc(100vw - 1rem); padding: .45rem; }
+  .site-return-bar .site-journey-settings > summary { padding-inline: .55rem; font-size: .78rem; }
   .site-return-bar .site-journey-inner { flex-wrap: wrap; gap: .1rem .2rem; }
   .site-return-bar .site-journey-controls { flex-wrap: wrap; gap: .15rem; }
   .site-return-bar .site-journey-button {
@@ -785,7 +825,7 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
   }
   :focus-visible { outline-color: Highlight !important; }
   body, header.entete, section.bloc, .carte, .domaine, .famille,
-  .ruban-veille, .site-return-bar, .infobulle {
+  .ruban-veille, .site-return-bar, .site-journey-panel, .infobulle {
     background: Canvas !important;
     color: CanvasText !important;
     border-color: CanvasText !important;
@@ -798,7 +838,7 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
     color: CanvasText !important;
   }
   a { color: LinkText !important; }
-  button, .site-return-bar a, .site-return-bar .site-journey-button, .sim-display-button {
+  button, .site-return-bar a, .site-return-bar .site-journey-settings > summary, .site-return-bar .site-journey-button, .sim-display-button {
     border: 1px solid ButtonText !important;
     background: ButtonFace !important;
     color: ButtonText !important;

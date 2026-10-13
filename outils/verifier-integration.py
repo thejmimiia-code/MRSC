@@ -353,24 +353,44 @@ def fichiers_du_site() -> None:
         and 'headerCompactToggle.setAttribute("aria-expanded", String(!compact))' in script_site
         and 'headerCompactToggle.addEventListener("click"' in script_site
         and "headerDetails.some(" in script_site
-        and "if (focusWouldBeHidden) headerCompactToggle.focus();" in script_site
-        and 'window.dispatchEvent(new Event("mrsc:header-layout-change"))' in script_site
-        and 'window.addEventListener("mrsc:header-layout-change", ajusterPositionSticky)' in parcours,
+        and "if (focusWouldBeHidden) headerCompactToggle.focus();" in script_site,
     )
     verifier(
         "La navigation permet retour, avance, accueil et reprise du dernier point",
         all(marqueur in parcours for marqueur in ('"precedent"', '"suivant"', '"accueil"', '"dernier"', "sessionStorage")),
     )
     verifier(
-        "Le repli de navigation et les boutons ont une règle d’affichage dédiée",
-        ".site-journey-navigation" in styles and ".site-journey-button:disabled" in styles and "@media (max-width: 520px)" in styles,
+        "Les quatre commandes sont regroupées derrière une seule bascule Parcours dans l’en-tête",
+        all(
+            marqueur in styles
+            for marqueur in (
+                ".site-journey-settings > summary",
+                ".site-journey-settings[open] > summary",
+                ".site-journey-panel[hidden]",
+                ".site-journey-button:disabled",
+            )
+        )
+        and 'document.createElement("details")' in parcours
+        and 'parcours.className = "site-journey-settings"' in parcours
+        and 'declencheur.textContent = "Parcours"' in parcours
+        and 'declencheur.setAttribute("aria-controls", panneau.id)' in parcours
+        and 'panneau.appendChild(barre)' in parcours
+        and 'navInner.insertBefore(parcours, displaySettingsInHeader)' in parcours
+        and "header.after(barre)" not in parcours,
     )
     verifier(
-        "La barre de parcours est compacte, alignée au contenu et reste tactile sur mobile",
+        "Le panneau Parcours se replie au clavier, à l’extérieur et à l’ouverture des autres menus",
+        'if (event.key !== "Escape" || !parcours.open) return;' in parcours
+        and 'if (focusInside) declencheur.focus();' in parcours
+        and 'if (!parcours.contains(event.target)) parcours.open = false;' in parcours
+        and 'parcours.addEventListener("toggle"' in parcours
+        and 'displaySettings?.addEventListener("toggle"' in parcours
+        and 'menuToggle?.addEventListener("click"' in parcours,
+    )
+    verifier(
+        "Les commandes Parcours restent compactes et tactiles sur mobile",
         ".site-journey-inner" in styles
         and "min-height: 38px" in styles
-        and "header.after(barre)" in parcours
-        and "header.getBoundingClientRect().height" in parcours
         and ".site-journey-symbol { display: none; }" in styles
         and "@media (any-pointer: coarse)" in styles
         and ".site-journey-button { min-width: 44px; min-height: 44px; }" in styles,
@@ -524,13 +544,16 @@ def fichiers_du_site() -> None:
             and "position: sticky" in simulateur_html,
         )
         verifier(
-            "La barre de parcours du simulateur est compacte et conserve les commandes tactiles",
+            "Le parcours du simulateur autonome est repliable et conserve les commandes tactiles",
             'contenuBarre.className = "site-journey-inner"' in parcours
+            and ".site-return-bar .site-journey-settings > summary {" in simulateur_html
+            and ".site-return-bar .site-journey-panel {" in simulateur_html
             and ".site-return-bar .site-journey-inner" in simulateur_html
             and ".site-return-bar .site-journey-button {" in simulateur_html
             and "@media (max-width: 640px)" in simulateur_html
             and ".site-return-bar .site-journey-symbol { display: none; }" in simulateur_html
-            and ".site-return-bar .site-journey-button { min-width: 44px; }" in simulateur_html,
+            and ".site-return-bar .site-journey-button { min-width: 44px; }" in simulateur_html
+            and "parentHasSiteHeader" in parcours,
         )
         verifier(
             "Le simulateur propose les réglages texte, contraste et interligne",
