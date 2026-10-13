@@ -183,7 +183,7 @@ def pied_de_page(prefixe: str = "") -> str:
         <div class="footer-docs">
           <p class="footer-heading">Documents</p>
           <ul>
-            <li><a href="https://www.mrsc.fr/assets/nos-statuts-mrsc-du-02-10-2020.pdf" target="_blank" rel="noopener noreferrer">Nos statuts</a></li>
+            <li><a href="{prefixe}assets/documents/statuts-2020.pdf" target="_blank" rel="noopener noreferrer">Nos statuts</a></li>
             <li><a href="{prefixe}documents.html">Tous les documents</a></li>
           </ul>
         </div>
