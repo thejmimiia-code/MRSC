@@ -75,8 +75,10 @@ Ce rapport consigne une revue transversale des affirmations répétées sur le s
 - `python3 outils/verifier-securite.py` — 60 contrôles ciblés réussis.
 - `python3 outils/verifier-integration.py` — tous les contrôles passent, y compris les assertions ajoutées et l’exercice local des 16 routes API. Les services externes de test sont remplacés par des réponses simulées ; ce n’est pas un test de Render en production.
 - `node --check assets/js/site.js`, `node --check assets/js/navigation-parcours.js` et `git diff --check` — réussis.
+- Après fusion du [PR #27](https://github.com/thejmimiia-code/MRSC/pull/27), les workflows de vérification ([run 38461428394](https://github.com/thejmimiia-code/MRSC/actions/runs/38461428394)), de veille éditoriale ([run 38461428457](https://github.com/thejmimiia-code/MRSC/actions/runs/38461428457)) et de publication Pages ([run 38461428409](https://github.com/thejmimiia-code/MRSC/actions/runs/38461428409)) ont réussi. Le job de publication GitHub Pages a terminé avec succès.
+- Le workflow Pages a aussi émis des avertissements non bloquants : plusieurs actions ciblent encore Node.js 20, forcé vers Node.js 24, et `ubuntu-latest` doit passer à Ubuntu 26 le 19 octobre 2026. Suivre les mises à jour d’actions et de runner séparément.
 
-Pendant l’édition, les premiers contrôles ont signalé, à juste titre, une sortie d’apprentissage non encore régénérée, puis des attentes de test trop liées à l’ancienne formulation. Le générateur et les assertions ont été ajustés ; toute la suite finale ci-dessus a ensuite réussi. Ces contrôles sont automatisés. Aucun examen humain, navigateur réel ou déploiement n’est revendiqué.
+Pendant l’édition, les premiers contrôles ont signalé, à juste titre, une sortie d’apprentissage non encore régénérée, puis des attentes de test trop liées à l’ancienne formulation. Le générateur et les assertions ont été ajustés ; toute la suite finale ci-dessus a ensuite réussi. Ces contrôles sont automatisés. La publication Pages a bien eu lieu, mais aucun examen humain ni vérification manuelle du site en navigateur réel n’est revendiqué.
 
 La comparaison amont a été faite sur le dépôt GitHub source et une copie clonée temporaire ; le test du patch dans les deux sens était non destructif. Aucun fichier du moteur local n’a été remplacé.
 
@@ -85,7 +87,7 @@ Cette revue ne comprend pas :
 - une expertise scientifique, juridique, pédagogique ou associative de chaque paragraphe ;
 - la visite et la validation directe de chaque URL de source externe ;
 - des essais volontaires, une relecture par lecteur d’écran ou une inspection visuelle humaine ;
-- une vérification du fonctionnement réel de Render, de l’adresse `www.mrsc.fr`, du DNS, du certificat HTTPS ou du déploiement GitHub Pages après les changements ;
+- une visite manuelle du site publié, du fonctionnement réel de Render, de l’adresse `www.mrsc.fr`, du DNS ou du certificat HTTPS ; le succès du workflow Pages ne vérifie pas ces réponses depuis un navigateur ni la configuration du domaine personnalisé ;
 - une validation indépendante des 70 fiches, ni l’affirmation que le catalogue couvre tous les besoins.
 
 Le plan détaillé et le brainstorming repris dans le [plan global de consolidation](../rd-plan-global-consolidation.md) sont le point de reprise. L’initiative `coherence-textes-publics` du portefeuille demeure **à valider humainement**.
