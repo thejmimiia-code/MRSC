@@ -1,6 +1,6 @@
 # Manuel de R&D continue — connaissances, site et jeu
 
-**Version de travail : 12 octobre 2026.** Ce manuel décrit une méthode reproductible pour tous les agents et contributeurs : explorer les besoins et les savoirs, étendre le catalogue, conceptualiser des expériences, les intégrer au site et au jeu, vérifier leur qualité, puis les entretenir.
+**Version de travail : 13 octobre 2026.** Ce manuel décrit une méthode reproductible pour tous les agents et contributeurs : explorer les besoins et les savoirs, étendre le catalogue, conceptualiser des expériences, les intégrer au site et au jeu, vérifier leur qualité, puis les entretenir.
 
 > **Ambition et limite.** « Les connaissances du monde » est un horizon ouvert : aucune équipe, base ou IA ne peut garantir un inventaire universel, neutre, complet et toujours à jour. Le but est d'élargir progressivement une carte plurielle et sourcée, d'expliciter ses absences et de relier chaque contenu à son contexte et à son niveau de preuve — pas d'afficher une exhaustivité fictive.
 
@@ -18,7 +18,7 @@ La R&D est un cycle de travail, pas un document ponctuel ni une génération aut
 8. **Décider et publier** — intégrer seulement après les contrôles requis, afficher le statut réel et expliquer les limites. Une piste non prête reste documentée, non présentée comme validée.
 9. **Observer et entretenir** — noter les retours utiles, liens qui changent, erreurs et effets inattendus; réviser, remplacer ou retirer un contenu si sa preuve, son utilité ou son droit d'usage n'est plus valable.
 
-Le portefeuille vivant est [`docs/rd/portefeuille.toml`](rd/portefeuille.toml); son gabarit de décision est [`docs/rd/gabarit-initiative.md`](rd/gabarit-initiative.md) et le [`journal`](rd/journal.md) conserve les décisions et relais importants. Les cartes de compétences opérationnelles résident sous [`.agents/skills/`](../.agents/skills/), et les consignes communes sont dans [`AGENTS.md`](../AGENTS.md). Le vérificateur [`outils/verifier-rd-continue.py`](../outils/verifier-rd-continue.py) contrôle leur cohérence et signale les revues échues. La veille GitHub planifiée fournit un rappel périodique; elle ne cherche pas sur le Web, ne juge pas les sources et ne publie aucun contenu à la place d'une personne.
+Le portefeuille vivant est [`docs/rd/portefeuille.toml`](rd/portefeuille.toml); son gabarit de décision est [`docs/rd/gabarit-initiative.md`](rd/gabarit-initiative.md) et le [`journal`](rd/journal.md) conserve les décisions et relais importants. Les cartes de compétences partagées et leur routeur résident sous [`.agents/skills/`](../.agents/skills/); le [dossier et les sources de la bibliothèque](rd/bibliotheque-skills.md) recensent les domaines et les limites de sélection. Les skills de projet Claude Code résident sous [`.claude/skills/`](../.claude/skills/) et renvoient, lorsque possible, vers ces cartes communes. Les consignes générales sont dans [`AGENTS.md`](../AGENTS.md). Le vérificateur [`outils/verifier-rd-continue.py`](../outils/verifier-rd-continue.py) contrôle leur cohérence et signale les revues échues. La veille GitHub planifiée fournit un rappel périodique; elle ne cherche pas sur le Web, ne juge pas les sources et ne publie aucun contenu à la place d'une personne.
 
 ## 2. Cartographier sans réduire le monde à une liste
 

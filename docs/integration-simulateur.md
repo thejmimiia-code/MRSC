@@ -7,7 +7,7 @@ Ce document explique **comment l’outil fonctionne sur le site**, **comment le 
 1. Le simulateur évolue dans **son dépôt** et sa version publique est hébergée sur Render à
    [`https://simulateur-macro-politique.onrender.com/`](https://simulateur-macro-politique.onrender.com/).
    Le site M.R.S.C conserve aussi une **copie datée** du moteur et de sa page, à laquelle
-   il applique un correctif de sécurité local versionné.
+   il applique un correctif local versionné de sécurité et d’intégration accessible.
 2. `simulateur.html` connaît deux sources : la version Render, sélectionnée si la page et son
    API répondent, puis la copie embarquée si l’hébergement du site exécute ses fonctions Python.
    Sur un hébergement purement statique, la page donne un lien direct vers Render.
@@ -29,7 +29,7 @@ Il expose une page interactive et 16 routes HTTP (`/api/catalogue`, `/api/contex
 
 | Contrainte | Conséquence |
 |---|---|
-| Le moteur amont doit rester identifiable et facile à mettre à jour | Le site en embarque une **copie datée** dans `simulateur/`, puis applique le patch versionné `outils/patchs/simulateur-securite-mrsc.patch` ; un échec d’application doit bloquer la mise à jour |
+| Le moteur amont doit rester identifiable et facile à mettre à jour | Le site en embarque une **copie datée** dans `simulateur/`, puis applique le correctif local versionné `outils/patchs/simulateur-securite-mrsc.patch` (sécurité et adaptations d’intégration/accessibilité) ; un échec d’application doit bloquer la mise à jour |
 | Le site est publié sans étape de build ; certains hébergeurs peuvent exécuter Python | La page locale du moteur est **générée une fois** en fichier HTML ; les routes locales sont exposées par des **fonctions** (`api/*.py`) |
 
 ## 2. Architecture
@@ -59,12 +59,12 @@ site M.R.S.C
 
 ### Pourquoi `simulateur/index.html` est-il généré ?
 
-Le moteur sert sa page depuis la constante `HTML_PAGE` en y remplaçant le repère `===SCENARIOS_JSON===` par le catalogue des scénarios (`simulateur/dashboard.py`). `outils/construire-simulateur.py` fait la même substitution, une fois pour toutes, puis ajoute à la page publiée une barre de retour permanente vers `../index.html`, les réglages de texte/contraste/interligne et des adaptations responsives et clavier pour les tableaux larges. Le moteur amont reste inchangé ; la page devient un fichier statique publiable, servi aussi bien par Vercel que par GitHub Pages, sans exécuter Python pour l’afficher. Les préférences locales sont les mêmes que sur les pages M.R.S.C quand l’origine est la même ; le navigateur interdit leur partage automatique avec une source distante d’une autre origine.
+Le moteur sert sa page depuis la constante `HTML_PAGE` en y remplaçant le repère `===SCENARIOS_JSON===` par le catalogue des scénarios (`simulateur/dashboard.py`). La copie locale de `simulateur/interface.py` reçoit aussi le correctif versionné du site : les choix de scénarios et de préréglages sont des boutons clavier natifs, avec un état `aria-pressed` synchronisé. `outils/construire-simulateur.py` effectue la substitution, puis ajoute à la page publiée une barre de retour permanente vers `../index.html`, les réglages de texte/contraste/interligne et des adaptations responsives et clavier pour les tableaux larges. La page devient ainsi un fichier statique publiable, servi par Vercel ou GitHub Pages, sans exécuter Python pour l’afficher ; les fonctions de calcul restent nécessaires à la copie locale. Le correctif ne modifie pas le dépôt amont ni son service Render. Les préférences locales sont les mêmes que sur les pages M.R.S.C quand l’origine est la même ; le navigateur interdit leur partage automatique avec une source distante d’une autre origine.
 
 
 ### Réglages d’affichage du simulateur
 
-Le générateur ajoute en plus des boutons A−/A+ (100, 125 et 150 %), contraste renforcé et espacement du texte ; la préférence se mémorise localement. Il ajoute des règles de reflow sous 640 px, élargit les cibles tactiles et rend les deux zones de tableaux focusables au clavier, nommées et annoncées. Ces ajouts et leur justification sont détaillés dans [`rd-affichage-adaptatif.md`](rd-affichage-adaptatif.md). Toute mise à jour du moteur doit être suivie d’une régénération et de `python3 outils/verifier-integration.py` pour garder la page publiée synchronisée.
+Le générateur ajoute des boutons A−/A+ (100, 125 et 150 %), contraste renforcé et espacement du texte ; la préférence se mémorise localement. Il ajoute des règles de reflow sous 640 px et conserve des cibles tactiles d’au moins 44 px. Les tableaux de résultats, les tableaux créés à la demande dans les sept vues par strate et ceux de l’audit sont contenus dans des régions horizontalement défilables, nommées et accessibles au clavier ; le journal causal l’est également. Les textes secondaires et titres de familles utilisent des couleurs lisibles indépendamment des accents décoratifs. Les scénarios historiques et préréglages sont des boutons natifs : ils reçoivent le focus, s’activent au clavier et annoncent leur état sélectionné. Ces ajouts et leur justification sont détaillés dans [`rd-affichage-adaptatif.md`](rd-affichage-adaptatif.md). Toute mise à jour du moteur doit être suivie d’une régénération, de `python3 outils/verifier-integration.py`, puis d’un contrôle réel du rendu responsive, du clavier et de l’accessibilité automatisée ; le vérificateur statique ne remplace pas ces essais.
 
 ### À quoi sert `simulateur/pont_api.py` ?
 
@@ -194,7 +194,7 @@ python3 outils/mettre-a-jour-simulateur.py
 
 ## 7. Ce qui n’est pas fait, volontairement
 
-- **Aucune modification du moteur** : il est copié tel quel ; les ajouts du site vivent dans `pont_api.py` et les outils.
+- **Aucune modification du dépôt amont** : la copie locale `simulateur/` reçoit un correctif versionné propre au site (sécurité, accessibilité des cartes de scénario et intégration) ; ce correctif ne s’applique pas à Render, qui reste à maintenir séparément.
 - **Aucun build JavaScript, aucune dépendance** : une page HTML générée, des fonctions Python en bibliothèque standard.
 - **Aucun suivi analytique observé** : le site ne dépose pas de cookie de mesure ; le simulateur ne demande ni compte ni identité. Les requêtes adressées à Render peuvent néanmoins inclure l’adresse IP et des données techniques ; voir `confidentialite.html`.
 - **Aucune publication des sources du moteur sur GitHub Pages** : seuls la page générée et le fichier de provenance sont copiés.

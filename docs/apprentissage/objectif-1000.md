@@ -1,6 +1,6 @@
 # Cap éditorial : viser 1 000 fiches d’auto-apprentissage
 
-**Plan de travail au 2026-10-12 — cible, pas catalogue disponible.**
+**Plan de travail au 2026-10-13 — cible, pas catalogue disponible.**
 
 L’ambition est de construire progressivement 1 000 fiches distinctes, autonomes et valorisantes. Le catalogue de travail compte actuellement 70 entrées : 26 entrées du corpus initial sans marqueur de prototype et 44 prototypes explicitement à relire. L’écart arithmétique à la cible est de 930 entrées ; le nombre de fiches ayant franchi tous les contrôles de publication n’est pas encore suivi.
 

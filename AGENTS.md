@@ -8,7 +8,7 @@ Faire évoluer le site par une R&D régulière, explicable et vérifiable : part
 
 ## Avant chaque tâche
 
-1. Lire ce fichier et [`docs/rd-innovation-continue.md`](docs/rd-innovation-continue.md). Ouvrir les `SKILL.md` pertinents sous [`.agents/skills/`](.agents/skills/) ; combiner plusieurs compétences si le sujet traverse plusieurs domaines.
+1. Lire ce fichier et [`docs/rd-innovation-continue.md`](docs/rd-innovation-continue.md). Commencer par [`orchestration-taches`](.agents/skills/orchestration-taches/SKILL.md), puis ouvrir une à trois cartes pertinentes sous [`.agents/skills/`](.agents/skills/) ; en combiner davantage seulement si la portée le justifie, pour éviter de charger toute la bibliothèque.
 2. Examiner l'état du dépôt, les modifications déjà présentes, les sources de vérité et les générateurs concernés. Préserver les changements des autres personnes et agents ; ne pas écraser ni régénérer sans vérifier le diff.
 3. Repérer le domaine, les sujets existants, leur statut et les lacunes dans `docs/apprentissage/referentiel.toml` et `docs/apprentissage/catalogue.toml`. Consulter `docs/rd/portefeuille.toml` avant d'ouvrir une piste déjà suivie.
 4. Distinguer le besoin observé, le fait sourcé, l'hypothèse de conception et la proposition. Ne pas fabriquer une demande d'usager, une citation, une expertise, un résultat d'essai ou une capacité du site.
@@ -26,17 +26,32 @@ Faire évoluer le site par une R&D régulière, explicable et vérifiable : part
 
 ## Compétences à activer
 
-Les skills sont des guides de méthode, pas des qualifications ni des services magiques. Sélectionner les cartes utiles à la tâche :
+Les skills sont des guides de méthode, pas des qualifications ni des services magiques. Commencer par le [routeur général](.agents/skills/orchestration-taches/SKILL.md), puis sélectionner les cartes réellement utiles à la tâche :
 
+**Ingénierie et usages transversaux :**
+- [Orchestration de tâche](.agents/skills/orchestration-taches/SKILL.md)
+- [Débogage méthodique](.agents/skills/debugging-methodique/SKILL.md)
+- [Stratégie de tests](.agents/skills/strategie-tests/SKILL.md)
+- [Revue contradictoire](.agents/skills/revue-contradictoire/SKILL.md)
+- [Analyse de données reproductible](.agents/skills/analyse-donnees-reproductible/SKILL.md)
+- [Documentation technique](.agents/skills/documentation-technique/SKILL.md)
+- [Curation sécurisée de skills](.agents/skills/curation-skills-securisee/SKILL.md)
+
+**Connaissances, création et intégration M.R.S.C. :**
 - [Cartographier les connaissances](.agents/skills/cartographie-connaissances/SKILL.md)
 - [Recherche documentaire et sources](.agents/skills/recherche-sources/SKILL.md)
 - [Cadrage et conceptualisation de l'innovation](.agents/skills/conception-innovation/SKILL.md)
 - [Concevoir un apprentissage](.agents/skills/conception-pedagogique/SKILL.md)
 - [Localiser sans universaliser](.agents/skills/localisation-culturelle/SKILL.md)
 - [Concevoir mondes, mécaniques et récits](.agents/skills/conception-jeu/SKILL.md)
+- [Direction artistique, rendu graphique et animation web](.agents/skills/direction-artistique-motion/SKILL.md)
 - [Accessibilité et co-conception](.agents/skills/accessibilite-co-conception/SKILL.md)
 - [Intégration web, données et sécurité](.agents/skills/integration-securite/SKILL.md)
 - [Évaluer, itérer et maintenir](.agents/skills/evaluation-maintenance/SKILL.md)
+
+L'[index de la bibliothèque](.agents/skills/README.md) et le [dossier de recherche sur les skills](docs/rd/bibliotheque-skills.md) décrivent la couverture, les sources externes et les limites.
+
+Pour Claude Code, le point d’entrée visuel du projet est [`.claude/skills/direction-artistique-motion/SKILL.md`](.claude/skills/direction-artistique-motion/SKILL.md) ; il renvoie vers la carte méthodologique partagée. Les références amont épinglées et licenciées [`frontend-design`](.claude/skills/frontend-design/) et [`motion-design`](.claude/skills/motion-design/) sont facultatives ; leurs fichiers de provenance et empreintes permettent l’audit, et les règles M.R.S.C. priment.
 
 ## Règles impératives
 

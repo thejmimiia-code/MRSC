@@ -83,10 +83,23 @@ phase = "essai"
 etat = "a-tester"
 domaines = ["numerique-ia", "methodes-communication"]
 question = "Les pages restent-elles rapides, lisibles, robustes, accessibles et utilisables quand le stockage, le réseau ou une fonction optionnelle échoue?"
-preuves = ["docs/rd-affichage-adaptatif.md", "docs/rd-audit-securite-optimisation.md", "docs/rd-confidentialite-rgpd.md"]
-prochaine_action = "Réaliser des essais multi-écrans et clavier; comparer les tâches cibles, poids, erreurs et solutions de repli sans installer de mesure individuelle."
-criteres_sortie = ["Les principaux parcours sont testés sur des largeurs et technologies représentatives.", "Les améliorations ne retirent ni zoom, clavier, reflow ou contenu sans JavaScript.", "Aucune collecte ou dépendance tierce n'est ajoutée sans nécessité et information."]
+preuves = ["docs/rd-plan-global-consolidation.md", "docs/rd-affichage-adaptatif.md", "docs/rd-audit-securite-optimisation.md", "docs/rd-confidentialite-rgpd.md", "outils/verifier-integration.py", "outils/verifier-site-statique.py"]
+prochaine_action = "Après les matrices automatisées Chromium et les contrôles axe consignés dans le journal, faire une revue visuelle et au clavier sur appareils réels (zoom, tactile, lecteur d’écran) ; noter les limites et défauts sans collecte d’usage avant de changer l’état de l’initiative."
+criteres_sortie = ["Les principaux parcours et la barre compacte sont testés sur des largeurs et technologies représentatives.", "Les améliorations ne retirent ni zoom, clavier, reflow ou contenu sans JavaScript.", "Aucune collecte ou dépendance tierce n'est ajoutée sans nécessité et information."]
 skills = ["conception-innovation", "accessibilite-co-conception", "integration-securite", "evaluation-maintenance"]
+
+[[initiative]]
+id = "direction-artistique-motion"
+titre = "Explorer une signature graphique et animée pour le site"
+priorite = "P1"
+phase = "recherche"
+etat = "en-cours"
+domaines = ["arts-culture", "methodes-communication", "numerique-ia"]
+question = "Quelle direction artistique et quels mouvements originaux, reliés aux contenus du M.R.S.C., donnent envie d'explorer et de revenir sans réduire la lisibilité, l'accessibilité, la liberté de parcours ou la sobriété?"
+preuves = ["docs/rd/visuel-motion.md", ".agents/skills/direction-artistique-motion/SKILL.md", ".claude/skills/direction-artistique-motion/SKILL.md", ".claude/skills/frontend-design/SOURCE.md", ".claude/skills/motion-design/SOURCE.md", "docs/rd-coherence-visuelle-editoriale.md", "docs/rd-affichage-adaptatif.md", "docs/pistes-visuelles-ia.html"]
+prochaine_action = "Préparer trois maquettes comparatives non publiées pour une surface pilote, puis demander au M.R.S.C. de choisir ou combiner une direction avant toute intégration; prévoir ensuite des essais accessibles sans télémétrie individuelle."
+criteres_sortie = ["Trois options graphiques réellement distinctes, liées au propos du M.R.S.C., avec droits et limites documentés.", "Une seule page prototype réversible est intégrée après sélection; les pages, contenus, fonctions et voies de repli existants sont préservés.", "La découverte est facultative et ne repose ni sur une progression forcée, ni sur des pénalités, ni sur des séries quotidiennes, ni sur un profil ou un suivi individuel.", "Les états clavier, mobile, mouvement réduit, texte équivalent et performance sont vérifiés; les contrôles automatisés restent distincts de la revue visuelle et des essais humains."]
+skills = ["direction-artistique-motion", "conception-innovation", "conception-pedagogique", "conception-jeu", "accessibilite-co-conception", "integration-securite", "recherche-sources", "evaluation-maintenance"]
 
 [[initiative]]
 id = "coordination-de-tous-les-agents"
@@ -96,7 +109,7 @@ phase = "mise-en-place"
 etat = "en-cours"
 domaines = []
 question = "Un agent qui rejoint le dépôt peut-il comprendre les sources de vérité, activer les skills adaptés, reprendre une piste et livrer une modification vérifiable sans inventer de validation?"
-preuves = ["AGENTS.md", "docs/rd-innovation-continue.md", "docs/rd/journal.md", ".agents/skills", ".github/ISSUE_TEMPLATE/proposition-rd.yml"]
+preuves = ["AGENTS.md", "docs/rd-innovation-continue.md", "docs/rd/journal.md", ".agents/skills", "docs/rd/bibliotheque-skills.md", ".github/ISSUE_TEMPLATE/proposition-rd.yml"]
 prochaine_action = "Après intégration dans main, demander à un second agent de reprendre une initiative avec le journal et le portefeuille, puis examiner le premier rapport GitHub planifié et corriger les manques."
 criteres_sortie = ["Les compétences spécialisées et livrables sont explicités.", "Une piste peut être reprise via son identifiant, son état, ses preuves et sa prochaine action.", "CI et veille vérifient la structure sans auto-publier ni certifier le contenu."]
 skills = ["cartographie-connaissances", "recherche-sources", "conception-innovation", "evaluation-maintenance"]

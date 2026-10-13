@@ -135,7 +135,10 @@
   barre.className = "site-journey-navigation";
   barre.dataset.siteJourney = "";
   barre.setAttribute("role", "group");
-  barre.setAttribute("aria-label", "Déplacements dans votre parcours sur le site");
+  barre.setAttribute("aria-label", "Navigation des pages visitées dans cet onglet");
+
+  const contenuBarre = document.createElement("div");
+  contenuBarre.className = "site-journey-inner";
 
   const commandes = document.createElement("div");
   commandes.className = "site-journey-controls";
@@ -152,6 +155,7 @@
     icone.setAttribute("aria-hidden", "true");
     icone.textContent = symbole;
     const texte = document.createElement("span");
+    texte.className = "site-journey-label";
     texte.textContent = libelle;
     bouton.append(icone, texte);
     commandes.appendChild(bouton);
@@ -170,15 +174,14 @@
   statut.setAttribute("aria-live", "polite");
   statut.setAttribute("aria-atomic", "true");
 
-  barre.append(commandes, statut);
+  contenuBarre.append(commandes, statut);
+  barre.appendChild(contenuBarre);
   if (returnBar) {
     const displayControls = returnBar.querySelector("#mrsc-display-controls");
     if (displayControls) returnBar.insertBefore(barre, displayControls);
     else returnBar.appendChild(barre);
   } else {
-    const primaryNav = header.querySelector(".main-nav");
-    if (primaryNav) primaryNav.after(barre);
-    else header.appendChild(barre);
+    header.after(barre);
 
     const ajusterPositionSticky = () => {
       const paysageCourt = window.matchMedia(
@@ -208,8 +211,8 @@
     const numero = etat.position + 1;
     const total = etat.etapes.length;
     statut.textContent = stockageDisponible
-      ? `Étape ${numero} sur ${total} dans cet onglet. « Dernière vue » reprend le dernier point visité avant l’accueil.`
-      : "La mémoire de parcours n’est pas disponible ; les commandes de navigation du navigateur restent utilisables.";
+      ? `Étape ${numero}/${total}`
+      : "Parcours local indisponible ; utilisez la navigation du navigateur.";
   }
 
   function naviguerVers(path, ajouterSiAbsent = false) {
