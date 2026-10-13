@@ -719,6 +719,7 @@ def test_liste_statique() -> None:
         RACINE / "assets" / "css" / "site.css",
         RACINE / "apprendre" / "fiches" / "arts-composer-formes.html",
         RACINE / "simulateur" / "index.html",
+        RACINE / "llms.txt",
     )
     interdits = (
         RACINE / "README.md",
@@ -757,10 +758,18 @@ def test_liste_statique() -> None:
     try:
         statut_accueil, accueil, _ = demander(base + "/")
         statut_sim, page_sim, _ = demander(base + "/simulateur/")
+        statut_llms, contenu_llms, entetes_llms = demander(base + "/llms.txt")
         statut_source, source, _ = demander(base + "/simulateur/dashboard.py")
         verifier(statut_accueil == statut_sim == 200 and b"M.R.S.C" in accueil
                  and b"console-pilotage" in page_sim,
                  "le serveur local sert l’accueil et la page intégrée du simulateur")
+        type_llms = next(
+            (valeur for nom, valeur in entetes_llms.items() if nom.casefold() == "content-type"),
+            "",
+        )
+        verifier(statut_llms == 200 and b"# M.R.S.C." in contenu_llms
+                 and "text/plain" in type_llms.casefold(),
+                 "le serveur local sert llms.txt comme texte brut")
         verifier(statut_source == 404 and b"from simulateur" not in source,
                  "une requête HTTP ne peut pas lire le code Python du moteur")
     finally:

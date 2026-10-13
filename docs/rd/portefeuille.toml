@@ -89,6 +89,19 @@ criteres_sortie = ["Les principaux parcours, la barre d’outils du bandeau, les
 skills = ["conception-innovation", "accessibilite-co-conception", "integration-securite", "evaluation-maintenance"]
 
 [[initiative]]
+id = "indexation-et-lecteurs-de-contenu"
+titre = "Améliorer l’indexabilité et la lecture machine du site"
+priorite = "P1"
+phase = "prototype"
+etat = "a-tester"
+domaines = ["numerique-ia", "methodes-communication"]
+question = "Quels repères vérifiables rendent les pages publiques plus faciles à découvrir et à interpréter sans promettre leur indexation, leur classement ou leur reprise par un système tiers?"
+preuves = ["sitemap.xml", "index.html", "simulateur/interface.py", "llms.txt", "outils/verifier-site-statique.py", "outils/serveur-local.py", ".github/workflows/deploy-pages.yml", "docs/rd/journal.md"]
+prochaine_action = "Après publication, faire vérifier le sitemap, quelques canoniques et les éventuelles erreurs d’exploration dans les outils pour webmasters administrés par l’association ; ne réexaminer robots.txt qu’après confirmation du domaine d’hébergement et de son chemin racine."
+criteres_sortie = ["Chaque page publique indexable a un titre, une description et une canonique cohérents avec le sitemap ; 404 reste hors index.", "Le JSON-LD ne décrit que l’organisation, le site et l’accueil avec des informations présentes sur la page.", "Le sommaire llms.txt reste explicitement facultatif, ses liens sont vérifiés et le fichier est publié sans dépendance tierce ni suivi.", "Les validations techniques sont distinguées des vérifications par un moteur et aucune garantie d’indexation ou de classement n’est annoncée."]
+skills = ["recherche-sources", "integration-securite", "strategie-tests", "documentation-technique", "evaluation-maintenance"]
+
+[[initiative]]
 id = "direction-artistique-motion"
 titre = "Explorer une signature graphique et animée pour le site"
 priorite = "P1"
