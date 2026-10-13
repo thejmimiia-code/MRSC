@@ -39,7 +39,7 @@ Les principes de clarté, d’exemples concrets, de hiérarchie et d’actions e
 
 Le souhait d’échanges sérieux peut devenir un avantage distinctif. Il vaut mieux qualifier **les comportements attendus**, pas les personnes selon leur diplôme, leur revenu, leur âge ou leur appartenance supposée. Une promesse d’entre-soi peut faire fuir précisément les personnes réfléchies et de bonne foi.
 
-Le site public actuel renvoie aux statuts, dont l’article 4 indique que toute personne partageant les valeurs, les principes et l’objet peut adhérer. Une nouvelle présentation doit donc rester cohérente avec cette ouverture, sauf décision statutaire distincte : [statuts du M.R.S.C](https://www.mrsc.fr/assets/nos-statuts-mrsc-du-02-10-2020.pdf).
+Le site public actuel renvoie aux statuts, dont l’article 4 indique que toute personne partageant les valeurs, les principes et l’objet peut adhérer. Une nouvelle présentation doit donc rester cohérente avec cette ouverture, sauf décision statutaire distincte : [statuts du M.R.S.C](../assets/documents/statuts-2020.pdf).
 
 Pour prévenir les comportements perturbateurs, mieux vaut publier une **charte de participation** et une procédure de modération : respect des personnes, désaccord argumenté, pas d’attaques ou de harcèlement, déclaration des conflits d’intérêts, règles de prise de parole et étapes graduées en cas d’abus. Cela signale un niveau d’exigence sans stigmatiser un profil de public.
 
