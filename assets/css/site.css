@@ -3379,3 +3379,162 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
   .english-promo-panel,.english-promo-art img { border: 1px solid CanvasText; background: Canvas; box-shadow: none; }
   .english-promo-art img { display: none; }
 }
+
+/* Personnalisation de la présentation : les préférences changent le CSS sans
+   modifier le contenu, la navigation ni les fonctions des pages. */
+.layout-settings {
+  position: static;
+  flex: 0 0 auto;
+  margin: 0;
+  color: var(--white);
+}
+.layout-settings[hidden],
+.layout-settings-panel[hidden] { display: none !important; }
+.layout-settings > summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px,.35rem,8px);
+  min-width: 44px;
+  min-height: 44px;
+  padding: clamp(6px,.4rem,8px) clamp(10px,.65rem,14px);
+  border: 1px solid rgba(255,255,255,.45);
+  border-radius: var(--button-radius);
+  background: rgba(255,255,255,.055);
+  color: var(--white);
+  font-size: clamp(13px,.875rem,18px);
+  font-weight: 700;
+  line-height: 1.2;
+  list-style: none;
+  cursor: pointer;
+}
+.layout-settings > summary::-webkit-details-marker { display: none; }
+.layout-settings > summary::marker { content: ""; }
+.layout-settings > summary:hover,
+.layout-settings[open] > summary {
+  border-color: var(--gold);
+  background: rgba(255,255,255,.13);
+}
+.layout-settings-chevron { font-size: clamp(13px,.875rem,18px); line-height: 1; }
+.layout-settings-panel {
+  position: absolute;
+  z-index: 102;
+  top: calc(100% + .55rem);
+  right: 0;
+  width: min(27rem,calc(100vw - 1rem));
+  max-height: min(34rem,calc(100vh - 1.5rem));
+  overflow: auto;
+  padding: clamp(12px,1rem,20px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+.layout-settings-title { margin: 0 0 .75rem; color: var(--navy); font-size: clamp(15px,1rem,19px); }
+.layout-settings-options { display: grid; gap: .5rem; margin: 0; padding: 0; border: 0; }
+.layout-settings-options legend { margin-bottom: .55rem; color: var(--navy); font-size: clamp(14px,.95rem,18px); font-weight: 750; }
+.layout-choice {
+  display: grid;
+  grid-template-columns: 20px minmax(0,1fr);
+  align-items: start;
+  gap: .65rem;
+  min-height: 44px;
+  padding: .65rem .72rem;
+  border: 1px solid #aebbd0;
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--ink);
+  cursor: pointer;
+}
+.layout-choice:hover { border-color: var(--blue); }
+.layout-choice.is-selected { border-color: var(--blue); background: var(--blue-soft); box-shadow: inset 0 0 0 1px var(--blue); }
+.layout-choice:focus-within { outline: 3px solid var(--blue); outline-offset: 2px; }
+.layout-choice input { width: 18px; height: 18px; margin: .18rem 0 0; accent-color: var(--blue); }
+.layout-choice-copy { display: block; min-width: 0; }
+.layout-choice-copy strong { display: block; color: var(--navy); font-size: .94rem; }
+.layout-choice-copy > span { display: block; margin-top: .1rem; color: var(--muted); font-size: .82rem; line-height: 1.42; }
+.layout-settings-status { min-height: 1.4em; margin: .65rem 0 0; color: var(--navy); font-size: .86rem; font-weight: 700; }
+.layout-settings-note { margin: .45rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.layout-settings-reset { width: 100%; margin-top: .75rem; }
+.layout-settings-panel :focus-visible { outline-color: var(--blue); }
+html.contraste-renforce .layout-settings-panel,
+html.contraste-renforce .layout-choice { border-color: currentColor; box-shadow: none; }
+html.contraste-renforce .layout-choice.is-selected { background: var(--blue-soft); }
+
+/* Lecture : largeur de lecture maîtrisée et composition en colonne. */
+html[data-layout="lecture"] { --content: 940px; }
+html[data-layout="lecture"] main :is(
+  .hero-grid,.mission-grid,.participation-grid,.join-panel,.document-grid,.link-grid,.contact-grid,.map-layout,
+  .home-action-grid,.home-voice-grid,.home-share-panel,.english-promo-panel,
+  .ai-feature-panel,.ai-hero-grid,.ai-metric-grid,.ai-forms-grid,.ai-balance-grid,.ai-lives-grid,
+  .ai-questions-layout,.ai-path-panel,.ai-path-steps,.ai-cta-panel,.principle-grid,.trace-panel,
+  .simulateur-intro,.simulateur-chiffres,.simulateur-promo-panel,.simulateur-duo,
+  .learning-hero-grid,.learning-work-panel,.learning-article-layout,.learning-catalogue-grid,
+  .learning-level-grid,.learning-ecosystem-grid,.learning-filters,.learning-feedback-panel,
+  .learning-code-grid,.learning-coverage-topic,.learning-home-panel,
+  .ai-fraud-grid,.ai-fraud-steps,.ai-fraud-lesson-list,
+  .adventure-onboarding-grid,.adventure-settings,.adventure-dashboard,.adventure-quest-grid,
+  .adventure-play-grid,.adventure-sheet-grid,.adventure-method-panel,.adventure-roadmap-list,.adventure-progress-list,
+  .adventure-learning-route-grid,.adventure-learning-world-grid,.adventure-learning-workspace,
+  .adventure-learning-filters,.adventure-learning-sheet-grid
+) { grid-template-columns: minmax(0,1fr); }
+html[data-layout="lecture"] .site-footer .footer-grid { grid-template-columns: minmax(0,1fr); }
+html[data-layout="lecture"] main :is(.learning-lesson-article,.learning-lesson-aside,.ai-section-intro,.ai-fraud-evidence,.ai-hero-copy) {
+  width: min(100%,78ch);
+  margin-inline: auto;
+}
+html[data-layout="lecture"] .adventure-progress-card { position: static; top: auto; }
+html[data-layout="lecture"] main :is(.section,.content-section,.learning-lesson-hero) {
+  padding-block: clamp(2.25rem,5vw,4rem);
+}
+
+/* Panorama composite : plus d’espace horizontal pour parcourir les collections de cartes. */
+html[data-layout="panorama"] { --content: 1480px; }
+html[data-layout="panorama"] main :is(
+  .document-grid,.link-grid,.home-action-grid,.home-voice-grid,
+  .ai-metric-grid,.ai-forms-grid,.ai-lives-grid,.ai-path-steps,.principle-grid,
+  .ai-fraud-grid,.ai-fraud-steps,.ai-fraud-lesson-list,
+  .learning-catalogue-grid,.learning-level-grid,.learning-ecosystem-grid,
+  .adventure-quest-grid,.adventure-sheet-grid,.adventure-roadmap-list,
+  .adventure-learning-route-grid,.adventure-learning-world-grid,.adventure-learning-sheet-grid
+) {
+  grid-template-columns: repeat(auto-fit,minmax(min(260px,100%),1fr));
+  gap: clamp(.75rem,1.35vw,1.35rem);
+}
+html[data-layout="panorama"] main :is(
+  .hero-grid,.mission-grid,.participation-grid,.join-panel,.contact-grid,.map-layout,.ai-feature-panel,.ai-hero-grid,.ai-cta-panel,
+  .learning-hero-grid,.learning-article-layout,.adventure-dashboard,.adventure-onboarding-grid,
+  .adventure-play-grid,.adventure-method-panel,.adventure-learning-workspace,.simulateur-intro
+) { gap: clamp(1.25rem,3vw,3rem); }
+
+@media (max-width: 760px) {
+  .layout-settings-panel { max-height: calc(100vh - 1rem); }
+}
+@media (max-width: 520px) {
+  .layout-settings { margin-left: 0; }
+  .layout-settings-panel { width: min(27rem,calc(100vw - 1rem)); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .layout-settings-panel { background: var(--white); backdrop-filter: none; }
+}
+@media (prefers-contrast: more) {
+  :is(.layout-settings > summary,.layout-settings-reset,.layout-choice) { border: 2px solid currentColor; }
+}
+@media (forced-colors: active) {
+  .layout-settings-panel,.layout-choice {
+    border-color: CanvasText !important;
+    background: Canvas !important;
+    color: CanvasText !important;
+    box-shadow: none !important;
+  }
+  .layout-settings-title,.layout-settings-options legend,.layout-settings-status,.layout-choice-copy strong,
+  .layout-choice-copy > span,.layout-settings-note { color: CanvasText !important; }
+  .layout-choice.is-selected { border-width: 2px; }
+  .layout-settings > summary,.layout-settings-reset {
+    border: 1px solid ButtonText !important;
+    background: ButtonFace !important;
+    color: ButtonText !important;
+    box-shadow: none !important;
+  }
+}
