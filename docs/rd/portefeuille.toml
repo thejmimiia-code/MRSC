@@ -83,8 +83,8 @@ phase = "essai"
 etat = "a-tester"
 domaines = ["numerique-ia", "methodes-communication"]
 question = "Les pages restent-elles rapides, lisibles, robustes, accessibles et utilisables quand le stockage, le réseau ou une fonction optionnelle échoue?"
-preuves = ["docs/rd-plan-global-consolidation.md", "docs/rd-affichage-adaptatif.md", "docs/rd-audit-securite-optimisation.md", "docs/rd-confidentialite-rgpd.md", "outils/verifier-integration.py", "outils/verifier-site-statique.py"]
-prochaine_action = "Faire une revue visuelle et au clavier de la barre harmonisée Menu/Réduire/Parcours/Affichage/Présentation, des panneaux repliables et des modes Équilibrée/Lecture/Panorama composite sur pages représentatives, fiches, aventure et simulateur ; vérifier navigation, reflow à 320 px, focus, tactile, stockage bloqué et lecteur d’écran, sans collecte d’usage avant de changer l’état de l’initiative."
+preuves = ["docs/rd-plan-global-consolidation.md", "docs/rd-affichage-adaptatif.md", "docs/rd-audit-securite-optimisation.md", "docs/rd-confidentialite-rgpd.md", "outils/verifier-integration.py", "outils/verifier-site-statique.py", "outils/test-experience.cjs"]
+prochaine_action = "Compléter les essais Chromium ciblés consignés dans la note d’affichage par une revue visuelle et au clavier de la barre harmonisée, des panneaux repliables et des trois modes sur pages représentatives, fiches, aventure et simulateur ; vérifier les autres breakpoints, le zoom natif, le tactile et le lecteur d’écran avant de réviser l’état de l’initiative, sans collecte d’usage."
 criteres_sortie = ["Les principaux parcours, la barre d’outils, les cinq paliers de texte, les trois mises en page, l’en-tête compactable et la navigation à 125/150 % sont testés sur des largeurs et technologies représentatives.", "Les améliorations ne retirent ni zoom natif, clavier, reflow ou contenu sans JavaScript.", "Aucune collecte ou dépendance tierce n'est ajoutée sans nécessité et information."]
 skills = ["conception-innovation", "accessibilite-co-conception", "integration-securite", "evaluation-maintenance"]
 
@@ -148,9 +148,9 @@ phase = "relecture"
 etat = "a-valider"
 domaines = ["methodes-communication", "citoyennete-medias", "numerique-ia"]
 question = "Les nombres, statuts éditoriaux, liens de sources et indications d’hébergement concordent-ils entre pages publiques, générateurs et sources de vérité, sans transformer un contrôle technique en validation humaine?"
-preuves = ["docs/rd/rapport-coherence-editoriale-2026-10-13.md", "docs/rd-plan-global-consolidation.md", "docs/rd-coherence-visuelle-editoriale.md", "index.html", "outils/verifier-integration.py", "outils/verifier-site-statique.py"]
-prochaine_action = "Faire relire humainement la présentation de l'association, les trois repères d'accueil et les formulations modifiées; traiter le domaine dans l'initiative raccordement-domaine-www; examiner le patch de sécurité avant toute mise à jour du moteur embarqué."
-criteres_sortie = ["Les chiffres visibles correspondent aux registres et leur portée est expliquée.", "Les copies locales sont distinguées des sources externes.", "Les états de relecture sont explicites et aucune validation non documentée n’est revendiquée.", "Les changements d’hébergement et de moteur sont précédés de preuves techniques et d’une revue humaine adaptées."]
+preuves = ["docs/rd/rapport-coherence-editoriale-2026-10-13.md", "docs/rd-plan-global-consolidation.md", "docs/rd-coherence-visuelle-editoriale.md", "docs/protocole-editorial.md", "docs/gabarits/contenu-editorial.md", "index.html", "outils/test_protocole_editorial.py", "outils/verifier-integration.py", "outils/verifier-site-statique.py"]
+prochaine_action = "Faire relire humainement la présentation de l'association, les trois repères d'accueil et les formulations modifiées; appliquer le protocole éditorial à des lots de pages et consigner les sources/relectures manquantes sans déclarer tout le site harmonisé; traiter le domaine dans l'initiative raccordement-domaine-www; examiner le patch de sécurité avant toute mise à jour du moteur embarqué."
+criteres_sortie = ["Les chiffres visibles correspondent aux registres et leur portée est expliquée.", "Les copies locales sont distinguées des sources externes.", "Les états de relecture sont explicites et aucune validation non documentée n’est revendiquée.", "Chaque lot éditorial suit la trame adaptée, relie les affirmations aux sources et affiche ses limites.", "Les changements d’hébergement et de moteur sont précédés de preuves techniques et d’une revue humaine adaptées."]
 skills = ["revue-contradictoire", "strategie-tests", "recherche-sources", "evaluation-maintenance"]
 
 [[initiative]]

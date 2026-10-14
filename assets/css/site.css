@@ -2559,7 +2559,8 @@ html.contraste-renforce .resource-scope-note {
 }
 
 .display-settings[hidden],
-.display-settings-panel[hidden] { display: none; }
+.display-settings-panel[hidden],
+.display-settings:not([open]) > .display-settings-panel { display: none !important; }
 
 .display-settings > summary {
   display: inline-flex;
@@ -2671,7 +2672,8 @@ html.contraste-renforce :is(button,.button,.display-control,.display-settings > 
   color: var(--white);
 }
 .site-journey-settings[hidden],
-.site-journey-panel[hidden] { display: none !important; }
+.site-journey-panel[hidden],
+.site-journey-settings:not([open]) > .site-journey-panel { display: none !important; }
 .site-journey-settings > summary {
   display: inline-flex;
   align-items: center;
@@ -3406,7 +3408,8 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
   color: var(--white);
 }
 .layout-settings[hidden],
-.layout-settings-panel[hidden] { display: none !important; }
+.layout-settings-panel[hidden],
+.layout-settings:not([open]) > .layout-settings-panel { display: none !important; }
 .layout-settings > summary {
   display: inline-flex;
   align-items: center;
@@ -3532,7 +3535,9 @@ html[data-layout="panorama"] main :is(
 ) { gap: clamp(1.25rem,3vw,3rem); }
 
 @media (max-width: 760px) {
-  .layout-settings-panel { max-height: calc(100vh - 1rem); }
+  /* Le panneau s’ouvre sous une barre parfois haute (150 % de texte, liens repliés) :
+     réserver aussi cette hauteur d’ancrage pour ne pas sortir du viewport. */
+  .layout-settings-panel { max-height: max(6rem,calc(100vh - 14rem)); }
 }
 @media (max-width: 520px) {
   .layout-settings { margin-left: 0; }

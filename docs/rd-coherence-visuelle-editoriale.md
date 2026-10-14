@@ -136,3 +136,9 @@ Le CSS commun a fait l’objet d’une reconstruction après la perte d’une an
 - Recherche en cours sur la direction artistique, le rendu visuel et le mouvement web : [`docs/rd/visuel-motion.md`](rd/visuel-motion.md). Elle complète le système visuel décrit ici ; les pistes ne sont pas encore sélectionnées ni intégrées.
 
 Étapes suivantes : faire valider la formulation de la mission et des modalités d’adhésion par les responsables ; recueillir les URL de comptes sociaux que l’association souhaite réellement rendre publics, s’il y en a ; mener les essais visuels et accessibilité multi-navigateurs ; puis corriger l’ensemble des pages à partir des captures et des retours, sans confondre validation automatisée et validation de design.
+
+## 9. Protocole éditorial permanent
+
+Les échanges de rédaction ont établi une ligne durable : partir des expériences et de ce que les ressources apportent, mettre les savoirs en commun et expliquer les propositions en mots courants. Cette ligne est formalisée dans [`docs/protocole-editorial.md`](protocole-editorial.md), avec un [`gabarit réutilisable`](gabarits/contenu-editorial.md), une méthode de recherche et de vérification, l’affichage traçable des sources, des activités ludiques facultatives et une liste de contrôle adaptée aux types de page. `AGENTS.md` et le README renvoient à cette référence ; `outils/test_protocole_editorial.py` en contrôle les fichiers, rubriques et raccords documentaires.
+
+Le protocole décrit une méthode commune, pas une mise en page unique imposée à chaque page. Il ne certifie pas les affirmations et ne transforme pas les pages existantes en contenus relus. L’harmonisation intégrale reste progressive : traiter les surfaces et lots du tableau ci-dessus, signaler les sources/relectures manquantes et ne modifier un statut qu’avec une preuve correspondante.

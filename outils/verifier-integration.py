@@ -459,6 +459,8 @@ def fichiers_du_site() -> None:
             for marqueur in (
                 ".layout-settings > summary {",
                 ".layout-settings-panel {",
+                ".layout-settings:not([open]) > .layout-settings-panel",
+                ".display-settings:not([open]) > .display-settings-panel",
                 ".layout-choice {",
                 'html[data-layout="lecture"] { --content: 940px; }',
                 'html[data-layout="panorama"] { --content: 1480px; }',
@@ -504,6 +506,7 @@ def fichiers_du_site() -> None:
                 ".site-journey-settings > summary",
                 ".site-journey-settings[open] > summary",
                 ".site-journey-panel[hidden]",
+                ".site-journey-settings:not([open]) > .site-journey-panel",
                 ".site-journey-button:disabled",
             )
         )
@@ -833,6 +836,7 @@ def fichiers_du_site() -> None:
             'contenuBarre.className = "site-journey-inner"' in parcours
             and ".site-return-bar .site-journey-settings > summary {" in simulateur_html
             and ".site-return-bar .site-journey-panel {" in simulateur_html
+            and ".site-return-bar .site-journey-settings:not([open]) > .site-journey-panel" in simulateur_html
             and ".site-return-bar .site-journey-inner" in simulateur_html
             and ".site-return-bar .site-journey-button {" in simulateur_html
             and "@media (max-width: 640px)" in simulateur_html
@@ -873,8 +877,12 @@ def fichiers_du_site() -> None:
                     'html[data-layout="lecture"] #contenu-principal { max-width: 1160px; }',
                     'html[data-layout="panorama"] #contenu-principal { max-width: 1800px; }',
                     '.site-return-bar .site-layout-panel {',
+                    '.site-return-bar .site-layout-settings:not([open]) > .site-layout-panel',
                     '.site-return-bar .site-layout-settings > summary {',
+                    'minmax(min(300px,100%),1fr)',
+                    '.message-seuil .source,',
                     '@media (forced-colors: active)',
+                    '.site-return-bar .site-layout-panel {\n    position: fixed;\n    top: .5rem;',
                 )
             )
             and 'layoutRadios.forEach((radio)' in simulateur_html
