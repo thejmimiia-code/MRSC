@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-14 — Largeur stable du bouton Agrandir/Réduire
+
+- **Initiative :** `optimisation-du-site`, maintenue à l’état `a-tester`.
+- **Signal et reproduction :** après la correction du retour compact, le bouton changeait encore visiblement de largeur quand son texte basculait. Le test Chromium ciblé a reproduit le cas à 720 px et échoué à 7/8 : cadre de 83,859 px avec « Agrandir », puis 77,266 px avec « Réduire ».
+- **Cause établie :** le bouton avait `flex: 0 1 auto`; sa largeur suivait le texte, et son cadre n’était pas réservé au libellé le plus large. Le code de redimensionnement réassignait également le même texte tant que la fenêtre continuait de rétrécir sous 520 px.
+- **Correction :** réserver une base fixe de 100 px CSS pour les deux libellés, borner cette base à la largeur du viewport moins 16 px aux tailles extrêmes, permettre le retour à la ligne dans le cadre et garder une hauteur minimale de 44 px. Le bouton Menu ne rétrécit plus; les autres contrôles de la barre gardent aussi leur largeur et passent à la ligne comme un groupe. `setHeaderCompact` devient idempotent et l’écouteur de réduction ne réapplique pas l’état si l’en-tête est déjà compact.
+- **Contrôles réellement exécutés :** `MRSC_BROWSER_NODE_MODULES=/tmp/mrsc-browser/node_modules node outils/test-experience.cjs` — **8/8 essais réussis** après correction, avec stabilité du cadre aux libellés Agrandir/Réduire à 720 et 500 px, aucune mutation du libellé à 480 → 460 px quand il est déjà compact, flex-shrink nul sur les contrôles visibles à 320 px et cadre/texte contenus à 240 et 70 px. `python3 -m py_compile simulateur/*.py api/*.py outils/*.py`, vérificateur R&D, générateurs apprentissages/simulateur en mode vérification, vérificateurs statique, sécurité et intégration, `node --check assets/js/site.js`, `node --check outils/test-experience.cjs` et `git diff --check` — réussis.
+- **Limites et suite :** ces mesures sont automatisées en Chromium headless. Aucune revue visuelle humaine après correction, aucun essai avec lecteur d’écran ou personne utilisatrice et aucune publication Pages à jour ne sont confirmés. Conserver `a-tester`; ouvrir l’aperçu local et vérifier visuellement la barre à 320/375/720 px, puis reprendre la matrice clavier, tactile, zoom natif et technologies d’assistance.
+
 ## 2026-10-14 — Essais Chromium des panneaux et du reflow mobile
 
 - **Initiative :** `optimisation-du-site`.

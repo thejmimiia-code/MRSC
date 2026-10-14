@@ -412,7 +412,7 @@ def fichiers_du_site() -> None:
         and all(
             marqueur in styles
             for marqueur in (
-                ".nav-toggle {",
+                ".nav-toggle {\n  display: none;\n  flex: 0 0 auto;",
                 ".header-compact-toggle {",
                 ".site-journey-settings > summary {",
                 ".display-settings > summary {",
@@ -479,10 +479,10 @@ def fichiers_du_site() -> None:
                 ".site-header.is-compact .site-status-note",
                 ".site-header.is-compact .identity",
                 ".header-compact-toggle[hidden]",
-                ".header-compact-toggle {\n  display: none;\n  flex: 0 1 auto;",
-                "max-width: min(9rem,calc(100vw - 1rem));",
+                ".header-compact-toggle {\n  --header-compact-width: 6.25rem;\n  display: none;\n  flex: 0 0 min(var(--header-compact-width),calc(100vw - 1rem));",
+                "width: min(var(--header-compact-width),calc(100vw - 1rem));",
+                "max-width: min(var(--header-compact-width),calc(100vw - 1rem));",
                 "overflow-wrap: anywhere;",
-                ".header-compact-toggle { max-width: min(7.25rem,calc(100vw - 1rem)); }",
                 "@media (max-width: 1260px)",
                 "@media (max-width: 520px)",
                 "@media (orientation: landscape) and (max-height: 560px) and (max-width: 920px)",
@@ -495,14 +495,20 @@ def fichiers_du_site() -> None:
         and "(max-width: 520px)" in script_site
         and "(orientation: landscape) and (max-height: 560px) and (max-width: 920px)" in script_site
         and 'header.classList.toggle("is-compact", compact)' in script_site
-        and 'headerCompactToggle.setAttribute("aria-expanded", String(!compact))' in script_site
+        and 'headerCompactToggle.setAttribute("aria-expanded", expanded)' in script_site
         and 'headerCompactToggle.addEventListener("click"' in script_site
         and "let previousViewportWidth = window.innerWidth;" in script_site
-        and "if (!widthIsShrinking || !narrowViewport.matches) return;" in script_site
+        and 'if (!widthIsShrinking || !narrowViewport.matches || header.classList.contains("is-compact")) return;' in script_site
+        and 'header.classList.contains("is-compact") === compact' in script_site
+        and "&& headerCompactToggle.textContent === label" in script_site
         and "setHeaderCompact(true);" in script_site
         and "headerDetails.some(" in script_site
         and "if (focusWouldBeHidden) headerCompactToggle.focus();" in script_site
         and "Mode compact réactivé au rétrécissement" in test_experience
+        and "MutationObserver" in test_experience
+        and "assert.equal(cadreAgrandir720, cadreReduire720" in test_experience
+        and "controlesBarre.every((element) => element.flexShrink === '0')" in test_experience
+        and "assert.equal(etat.cadreLargeur, 100" in test_experience
         and "assert.equal(etat.lignes, 1" in test_experience
         and "cadreEtTexte.lignesTexte.every" in test_experience
         and "cadreEtTexte.scrollWidth <= cadreEtTexte.largeur" in test_experience,

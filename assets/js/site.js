@@ -325,12 +325,20 @@
       ];
 
       const setHeaderCompact = (compact) => {
+        const label = compact ? "Agrandir" : "Réduire";
+        const expanded = String(!compact);
+        if (
+          header.classList.contains("is-compact") === compact
+          && root.classList.contains("entete-compacte") === compact
+          && headerCompactToggle.getAttribute("aria-expanded") === expanded
+          && headerCompactToggle.textContent === label
+        ) return;
+
         const focusWouldBeHidden = compact
           && headerDetails.some((element) => element?.contains(document.activeElement));
         header.classList.toggle("is-compact", compact);
         root.classList.toggle("entete-compacte", compact);
-        headerCompactToggle.setAttribute("aria-expanded", String(!compact));
-        const label = compact ? "Agrandir" : "Réduire";
+        headerCompactToggle.setAttribute("aria-expanded", expanded);
         const description = compact
           ? "Agrandir l’en-tête pour afficher le logo et les informations du M.R.S.C."
           : "Réduire l’en-tête pour libérer de la place à l’écran.";
@@ -363,15 +371,15 @@
         }
       }
 
-      // Sous 520 px, chaque réduction de la fenêtre réapplique le format
-      // compact, même si ce seuil était déjà franchi quand l’en-tête a été
-      // agrandi manuellement. Le bouton reste utilisable après le redimensionnement.
+      // Sous 520 px, une réduction de fenêtre rétablit le format compact après
+      // un agrandissement manuel. Une fois compact, ne pas réécrire son libellé
+      // à chaque pixel de redimensionnement.
       if (narrowViewport) {
         let previousViewportWidth = window.innerWidth;
         window.addEventListener("resize", () => {
           const widthIsShrinking = window.innerWidth < previousViewportWidth;
           previousViewportWidth = window.innerWidth;
-          if (!widthIsShrinking || !narrowViewport.matches) return;
+          if (!widthIsShrinking || !narrowViewport.matches || header.classList.contains("is-compact")) return;
           closeMenu();
           setHeaderCompact(true);
         });

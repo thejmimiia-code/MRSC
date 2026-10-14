@@ -311,23 +311,63 @@ async function main() {
     try {
       await ouvrirPageSite(page, 'index.html');
       const bouton = '[data-header-compact-toggle]';
+      const mesurerCadre = () => page.$eval(bouton, (element) => element.getBoundingClientRect().width);
       assert.equal(
         await page.$eval('.site-header', (element) => element.classList.contains('is-compact')),
         true,
         'à 720 px l’en-tête démarre compact'
       );
+      const cadreAgrandir720 = await mesurerCadre();
       await page.click(bouton);
       await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
+      const cadreReduire720 = await mesurerCadre();
+      assert.equal(cadreAgrandir720, cadreReduire720, 'le cadre ne doit pas changer quand le libellé bascule');
 
       await page.setViewport({ width: 500, height: 800, deviceScaleFactor: 1 });
       await page.waitForFunction(() => window.matchMedia('(max-width: 520px)').matches);
       await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
+      await page.waitForFunction(() => document.querySelector('[data-header-compact-toggle]')?.textContent.trim() === 'Agrandir');
+      const cadreAgrandir500 = await mesurerCadre();
       await page.click(bouton);
       await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
+      const cadreReduire500 = await mesurerCadre();
+      assert.equal(cadreAgrandir500, cadreReduire500, 'le cadre reste stable pendant la bascule à 500 px');
+
+      await page.setViewport({ width: 480, height: 800, deviceScaleFactor: 1 });
+      await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
+      await page.waitForFunction(() => document.querySelector('[data-header-compact-toggle]')?.textContent.trim() === 'Agrandir');
+      await page.evaluate(() => {
+        const boutonCompact = document.querySelector('[data-header-compact-toggle]');
+        window.__mutationsLibelleCompact = 0;
+        window.__observateurLibelleCompact = new MutationObserver((mutations) => {
+          window.__mutationsLibelleCompact += mutations.length;
+        });
+        window.__observateurLibelleCompact.observe(boutonCompact, { childList: true, characterData: true, subtree: true });
+      });
+      await page.setViewport({ width: 460, height: 800, deviceScaleFactor: 1 });
+      await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+      const mutationsAuRedimensionnement = await page.evaluate(() => {
+        window.__observateurLibelleCompact.disconnect();
+        return window.__mutationsLibelleCompact;
+      });
+      assert.equal(mutationsAuRedimensionnement, 0, 'un bouton déjà compact ne doit pas réécrire son libellé à chaque réduction');
+      const cadreAgrandir460 = await mesurerCadre();
+      await page.click(bouton);
+      await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
+      const cadreReduire460 = await mesurerCadre();
+      assert.equal(cadreAgrandir460, cadreReduire460, 'le cadre reste stable pendant la bascule à 460 px');
       await page.setViewport({ width: 320, height: 800, deviceScaleFactor: 1 });
       await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
       const largeur320 = await page.evaluate(() => ({ document: document.documentElement.scrollWidth, viewport: innerWidth }));
       assert.ok(largeur320.document <= largeur320.viewport + 1, JSON.stringify(largeur320));
+      const controlesBarre = await page.evaluate(() => Array.from(document.querySelectorAll(
+        '.nav-toggle, .header-compact-toggle, .site-journey-settings, .display-settings, .layout-settings'
+      )).filter((element) => !element.hidden && getComputedStyle(element).display !== 'none').map((element) => ({
+        controle: element.className,
+        flexShrink: getComputedStyle(element).flexShrink,
+      })));
+      assert.ok(controlesBarre.length >= 4, JSON.stringify(controlesBarre));
+      assert.ok(controlesBarre.every((element) => element.flexShrink === '0'), JSON.stringify(controlesBarre));
       await page.click(bouton);
       await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
       await page.setViewport({ width: 240, height: 800, deviceScaleFactor: 1 });
@@ -341,6 +381,7 @@ async function main() {
           hidden: element.hidden,
           left: rectangle.left,
           right: rectangle.right,
+          cadreLargeur: rectangle.width,
           width: element.clientWidth,
           scrollWidth: element.scrollWidth,
           lignes: texte.getClientRects().length,
@@ -354,6 +395,7 @@ async function main() {
       assert.equal(etat.hidden, false);
       assert.equal(etat.enteteCompacte, true);
       assert.equal(etat.identiteMasquee, true);
+      assert.equal(etat.cadreLargeur, 100, 'la largeur de base est réservée à l’avance pour les deux libellés');
       assert.equal(etat.whiteSpace, 'normal');
       assert.equal(etat.overflowWrap, 'anywhere');
       assert.equal(etat.lignes, 1, 'à 240 px CSS, le libellé tient naturellement sur une ligne');
@@ -372,6 +414,7 @@ async function main() {
           left: cadre.left,
           right: cadre.right,
           viewport: innerWidth,
+          cadreLargeur: cadre.width,
           largeur: element.clientWidth,
           scrollWidth: element.scrollWidth,
           hauteur: cadre.height,
@@ -381,6 +424,7 @@ async function main() {
         };
       });
       assert.ok(cadreEtTexte.left >= 0 && cadreEtTexte.right <= cadreEtTexte.viewport, JSON.stringify(cadreEtTexte));
+      assert.equal(cadreEtTexte.cadreLargeur, Math.min(100, cadreEtTexte.viewport - 16));
       assert.ok(cadreEtTexte.hauteur >= 44, JSON.stringify(cadreEtTexte));
       assert.ok(cadreEtTexte.scrollWidth <= cadreEtTexte.largeur, JSON.stringify(cadreEtTexte));
       assert.ok(cadreEtTexte.lignesTexte.length > 1, JSON.stringify(cadreEtTexte));
