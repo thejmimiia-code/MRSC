@@ -259,7 +259,7 @@ def fichiers_du_site() -> None:
         "courriel",
         "base juridique",
         "durée de conservation",
-        "Render",
+        "Vercel",
     )
     verifier(
         "La notice distingue préférences locales, contact, hébergement et tiers",
@@ -1037,8 +1037,25 @@ def routes_servies() -> None:
 
 
 def source_distante() -> None:
-    """Vérifie la fonction de bascule, face à une source simulée puis injoignable."""
+    """Vérifie la cible de production et la bascule, sans réseau externe."""
     from http.server import BaseHTTPRequestHandler
+
+    sonde = charger_module(RACINE / "api" / "verifier-source.py", "verifier_source_integration")
+    page_simulateur = (RACINE / "simulateur.html").read_text(encoding="utf-8")
+    source_attendue = "https://d-mocratie-et-politique-du-peuple-p.vercel.app/"
+    source_html = re.search(r'data-source-distante="([^"]+)"', page_simulateur)
+    verifier(
+        "La page et la sonde utilisent l’alias Vercel déclaré",
+        source_html is not None
+        and source_html.group(1) == source_attendue
+        and f'href="{source_attendue}"' in page_simulateur
+        and "simulateur-macro-politique.onrender.com" not in page_simulateur,
+    )
+    verifier(
+        "La sonde autorise l’alias Vercel déclaré",
+        sonde._source_autorisee(source_attendue)
+        and sonde._source_autorisee("https://simulateur-macro-politique.onrender.com/"),
+    )
 
     class Stub(BaseHTTPRequestHandler):
         """Fausse source distante, pour un contrôle sans réseau externe."""

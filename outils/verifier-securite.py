@@ -651,8 +651,18 @@ def test_source_distante() -> None:
 
     ancienne_source = os.environ.get("SIMULATEUR_SOURCE_DISTANTE")
     ancien_mode_test = os.environ.pop("SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE", None)
+    anciens_hotes = os.environ.pop("SIMULATEUR_SOURCE_DISTANTE_HOTES_AUTORISES", None)
     ancienne_lecture = module._lire
     try:
+        hote_vercel = "https://d-mocratie-et-politique-du-peuple-p.vercel.app/"
+        hote_render_historique = "https://simulateur-macro-politique.onrender.com/"
+        verifier(
+            module._source_autorisee(hote_vercel)
+            and module._source_autorisee(hote_render_historique)
+            and not module._source_autorisee("https://d-mocratie-et-politique-du-peuple-p.vercel.app.example.org/")
+            and not module._source_autorisee("https://d-mocratie-et-politique-du-peuple-p.vercel.app:444/"),
+            "les hôtes Vercel et Render exacts sont autorisés, pas les domaines voisins ni les ports non standard",
+        )
         os.environ["SIMULATEUR_SOURCE_DISTANTE"] = "http://127.0.0.1:9/"
         module._lire = lambda *_args, **_kwargs: (_ for _ in ()).throw(
             AssertionError("la sonde ne doit pas joindre localhost")
@@ -668,6 +678,8 @@ def test_source_distante() -> None:
             os.environ["SIMULATEUR_SOURCE_DISTANTE"] = ancienne_source
         if ancien_mode_test is not None:
             os.environ["SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE"] = ancien_mode_test
+        if anciens_hotes is not None:
+            os.environ["SIMULATEUR_SOURCE_DISTANTE_HOTES_AUTORISES"] = anciens_hotes
 
 
 def test_patch_durabilite() -> None:

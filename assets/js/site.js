@@ -426,7 +426,7 @@
    Le simulateur se développe en continu dans son propre dépôt. Trois sources
    sont possibles, par ordre de préférence :
 
-   1. la *source distante* hébergée sur Render, si le site est servi par
+   1. la *source distante* hébergée sur Vercel, si le site est servi par
       un hébergeur qui exécute du Python : `/api/verifier-source` l'a vérifiée
       côté serveur (page + API de calcul) et dit si elle est utilisable ;
    2. la *copie embarquée* du moteur dans ce dépôt, si sa propre API répond ;
@@ -467,13 +467,13 @@
     };
 
     const choisir = async () => {
-      // 1. La version Render est-elle utilisable (vérifiée par le serveur) ?
+      // 1. La version Vercel est-elle utilisable (vérifiée par le serveur) ?
       if (sourceDistante) {
         try {
           const reponse = await repond("/api/verifier-source", "GET");
           const etat = await reponse.json();
           if (etat && etat.disponible === true) {
-            afficher(sourceDistante, "Source affichée : simulateur hébergé sur Render.");
+            afficher(sourceDistante, "Source affichée : simulateur hébergé sur Vercel.");
             return;
           }
         } catch (erreur) {
