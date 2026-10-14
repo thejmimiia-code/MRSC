@@ -1,4 +1,14 @@
-# Diagnostic — erreur Vercel « 404 NOT_FOUND »
+# Diagnostic historique — erreur Vercel « 404 NOT_FOUND »
+
+> **Mise à jour du 15 octobre 2026 — le dépôt amont a changé depuis le diagnostic initial.**
+> Sa branche `main` contient aujourd’hui un `index.html` racine et une route API Python,
+> son champ `homepage` désigne `https://d-mocratie-et-politique-du-peuple-p.vercel.app/`,
+> et GitHub indique un déploiement *Production — success* pour le commit
+> `b7a2d7242f6d8f32efc4b86839baf969208d3a57` (PR amont [#53](https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple/pull/53)).
+> Ce statut n’est **pas** un test HTTP de l’alias, des API, des calculs ou de l’iframe ; aucun
+> accès direct à Vercel n’a été effectué depuis ce dépôt. Les résultats et recommandations
+> ci-dessous décrivent l’état constaté à l’époque et ne démontrent pas que l’adresse actuelle
+> renvoie encore une 404. Le lien M.R.S.C a depuis été mis à jour vers l’alias Vercel.
 
 **Signalement d'origine** (page d'erreur Vercel, bouton « Copy Debug Prompt ») :
 
@@ -8,10 +18,7 @@ Request ID: cdg1:cdg1::knh8m-1791313676874-74172451324a
 URL: https://d-mocratie-et-politique-du-peuple-pour-le-peup-git-ec5223-mrsc1.vercel.app/
 ```
 
-**En une phrase :** cette adresse n'appartient pas au site M.R.S.C. C'est un aperçu
-(« Preview ») du **dépôt du simulateur macro-politique**, et le 404 vient de ce que
-**ce dépôt ne contient aucun `index.html`** : Vercel sert le dépôt tel quel, donc `/`
-ne trouve aucun fichier à afficher. Le déploiement, lui, est bien « Ready ».
+**Constat historique en une phrase :** l’adresse signalée était un aperçu (« Preview ») du **dépôt du simulateur macro-politique**, distinct du site M.R.S.C. À la date du signalement, le dépôt déployé ne contenait pas de `index.html` racine ; la page Vercel était « Ready », mais `/` renvoyait 404. La présence ultérieure d’un `index.html` et d’un déploiement de production change ce diagnostic pour l’adresse publique actuelle.
 
 ---
 
@@ -41,14 +48,11 @@ gh pr view 16 -R thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peupl
 gh api repos/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple/deployments --jq '.[] | [.id, .environment, .ref] | @tsv'
 ```
 
-Le projet M.R.S.C (`assets/`, `index.html`, pages `.html`) n'a, lui, **aucun déploiement
-Vercel** : son historique d'hébergement est GitHub Pages (`github-pages` dans la liste des
-déploiements GitHub de `thejmimiia-code/MRSC`). Le 404 signalé ne peut donc pas venir
-du présent dépôt.
+Lors de la vérification initiale, le présent dépôt M.R.S.C était publié sur GitHub Pages et aucun déploiement Vercel n’apparaissait dans la liste GitHub consultée. Ce constat historique sert seulement à identifier l’origine de l’erreur signalée ; le projet Vercel M.R.S.C éventuel est distinct du projet amont du simulateur.
 
-## 2. Que sert réellement ce projet Vercel ?
+## 2. Que servait ce projet Vercel au moment du diagnostic initial ?
 
-Test sur le domaine public du même projet (production, sans protection) :
+Les résultats suivants sont ceux consignés lors du diagnostic initial ; ils ne sont pas des tests actuels :
 
 | Adresse testée | Réponse |
 |---|---|
@@ -60,17 +64,16 @@ curl -sS -o /dev/null -w '%{http_code} /\n' https://d-mocratie-et-politique-du-p
 curl -sS -o /dev/null -w '%{http_code} /outils/reglages_depot.html\n' https://d-mocratie-et-politique-du-peuple-p.vercel.app/outils/reglages_depot.html
 ```
 
-Ce que cela démontre :
+Ce que ces tests démontraient à cette date (pas l’état présent) :
 
 1. le déploiement **fonctionne** : il sert bien des fichiers du dépôt ;
 2. il n'y a **rien à afficher à la racine `/`**, faute d'`index.html` dans le dépôt ;
 3. ce n'est donc ni une panne Vercel, ni un déploiement supprimé, ni une adresse
    mal recopiée : c'est un dépôt déployé sans page d'accueil.
 
-Vérification complémentaire : `gh api repos/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple/git/trees/main?recursive=1`
-ne renvoie qu'un seul fichier `.html` (`outils/reglages_depot.html`) et **aucun `index.html`**.
+Vérification complémentaire consignée au moment du diagnostic : l’arbre `main` ne renvoyait qu'un fichier `.html` (`outils/reglages_depot.html`) et aucun `index.html`. Cette conclusion est dépassée : `main` contient maintenant un `index.html` racine et une route API Python. Aucun contrôle HTTP direct de l’alias actuel n’a été effectué depuis ce dépôt ; sa réponse doit encore être vérifiée dans un navigateur ou depuis un réseau autorisé.
 
-## 3. Deux causes distinctes, à ne pas confondre
+## 3. Deux causes distinctes relevées dans le diagnostic initial
 
 | # | Cause | Effet observé | Correctif |
 |---|---|---|---|
@@ -83,53 +86,21 @@ signifie que le déploiement existe mais que **le chemin demandé n'y existe pas
 
 ## 4. Correctifs
 
-### A. Pour le projet du simulateur (dépôt `…-par-le-peuple`)
+### A. Pour le projet amont du simulateur — recommandations historiques, désormais dépassées
 
-Trois options, de la plus rapide à la plus complète :
+Le diagnostic initial proposait soit une page racine, soit de publier le site M.R.S.C sur Vercel, et concluait alors qu’il ne fallait pas utiliser Vercel pour le simulateur. Cette conclusion est désormais dépassée. Depuis, le dépôt amont a évolué : la branche `main` contient la page `index.html` et une fonction `api/[...path].py`, et GitHub a signalé un déploiement *Production* réussi. L’adresse Vercel est désormais la cible déclarée par le dépôt et le lien par défaut de M.R.S.C.
 
-1. **Page d'accueil minimale (1 fichier, aucun build)** — déposer un `index.html` à la
-   racine de ce dépôt ; le 404 disparaît au déploiement suivant.
+Ne pas appliquer la recommandation historique « ne pas héberger le simulateur sur Vercel » ni recopier la page minimale ci-dessus comme solution actuelle. Il reste nécessaire de vérifier en HTTP la racine, `/api/scenarios`, `/api/catalogue`, une simulation, puis l’intégration iframe : un état de déploiement réussi n’établit pas ces résultats.
 
-   ```html
-   <!doctype html>
-   <html lang="fr">
-   <head>
-     <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <title>Simulateur macro-politique — Démocratie et politique du peuple</title>
-   </head>
-   <body>
-     <h1>Simulateur macro-politique systémique</h1>
-     <p>Modèle gigogne à 5 échelons : plus de 100 leviers croisables, 20 domaines d'impact et données publiques documentées.</p>
-     <ul>
-       <li><a href="https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple">Code et documentation du projet</a></li>
-       <li><a href="https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple/blob/main/docs/SIMULATEUR_PARAMETRABLE.md">Guide du simulateur paramétrable</a></li>
-     </ul>
-   </body>
-   </html>
-   ```
+Le lien Preview de PR #16 décrit dans la section 1 est une adresse d’aperçu d’une ancienne branche ; ne pas le confondre avec l’alias public déclaré `https://d-mocratie-et-politique-du-peuple-p.vercel.app/`.
 
-2. **Page du simulateur générée au build** — le simulateur produit son HTML dans
-   `simulateur/interface.py` (constante `HTML_PAGE`). Un script d'export (à ajouter dans
-   ce dépôt) peut écrire `public/index.html`, puis dans **Project Settings → Build & Development Settings** :
-   *Build Command* = ce script, *Output Directory* = `public`, *Framework Preset* = `Other`.
-   Attention : Vercel héberge des fichiers statiques ; le simulateur est un programme Python
-   (serveur local `simulateur/dashboard.py`, route `POST /api/donnees`) qui ne s'exécute pas
-   tel quel sur Vercel. La page s'afficherait, mais les fonctions serveur resteraient indisponibles.
+### A bis. Relation avec le site M.R.S.C
 
-3. **Ne pas héberger le simulateur sur Vercel** — c'est la conclusion déjà écrite dans ce
-   dépôt (`NOTE_POUR_CLAUDE.md`, `outils/details_depot.html` : « laisser vide : l'ancienne
-   adresse Vercel renvoie 404 »). Dans ce cas, supprimer le projet Vercel ou retirer le champ
-   *Website* du dépôt évite de partager une adresse qui ne peut pas fonctionner.
-
-### A bis. Depuis l'intégration du simulateur au site M.R.S.C
-
-Le site M.R.S.C embarque désormais le moteur du simulateur (copie datée dans `simulateur/`), sa page publiée (`simulateur/index.html`) et les fonctions `api/*.py` qui exposent ses 16 routes — voir `docs/integration-simulateur.md`. Conséquence pratique pour l'ancien projet : au lieu de bricoler une page d'accueil dans le dépôt du simulateur, il suffit de publier **ce** dépôt sur Vercel (l'outil y est complet et interactif), et de retirer du dépôt du simulateur le champ *Website* qui pointe vers l'adresse 404 — ou de le faire pointer vers la page du simulateur du site.
+Le site M.R.S.C embarque aussi une copie datée du moteur, une page publiée `simulateur/index.html` et des fonctions `api/*.py` — voir `docs/integration-simulateur.md`. Le projet Vercel éventuel de M.R.S.C est distinct de celui du dépôt amont : héberger le site M.R.S.C sur Vercel n’est pas nécessaire pour ouvrir le simulateur public, et GitHub Pages continue de proposer le lien externe direct.
 
 ### B. Pour publier le site M.R.S.C sur Vercel (dépôt MRSC, celui-ci)
 
-Le présent dépôt est un site statique dont `index.html` est bien à la racine : il s'affiche
-sans configuration. Marche à suivre :
+Le présent dépôt est un site statique dont `index.html` est bien à la racine : il peut être déployé séparément du projet amont du simulateur. Cette option n’est pas nécessaire pour ouvrir le simulateur public. Marche à suivre :
 
 1. Vercel → **Add New → Project** → importer `thejmimiia-code/MRSC`.
 2. Réglages (les valeurs par défaut conviennent, à confirmer) :
@@ -155,10 +126,7 @@ Le dépôt est déjà préparé pour cet hébergement :
 
 ## 5. Ce que je n'ai pas pu vérifier
 
-L'accès au tableau de bord Vercel (projet et équipe `mrsc1`) requiert une authentification ;
-les constats ci-dessus reposent donc sur des réponses HTTP publiques, sur les messages du bot
-Vercel dans GitHub et sur le contenu des dépôts. Les réglages exacts du projet (Build Command,
-Output Directory, Deployment Protection) sont à confirmer écran par écran :
+L'accès au tableau de bord Vercel (projet et équipe `mrsc1`) requiert une authentification. Les réponses HTTP citées dans les sections 2–3 sont celles du diagnostic initial, pas des contrôles de l’adresse actuelle. Les informations plus récentes proviennent des messages du bot Vercel, du statut de déploiement GitHub et du contenu du dépôt ; aucun test HTTP de l’alias actuel, de ses API ou de son iframe n’a été exécuté ici. Les réglages du projet (Build Command, Output Directory, Deployment Protection) sont à confirmer écran par écran :
 **Project → Settings → Build and Development Settings** et **Settings → Deployment Protection**.
 
 ## 6. Vérification après correction (à refaire à chaque mise en ligne)

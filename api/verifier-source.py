@@ -1,13 +1,14 @@
 """Fonction du site M.R.S.C — la source distante du simulateur est-elle utilisable ?
 
-Le site embarque une copie du moteur (« source locale »), mais le simulateur
-poursuit son développement dans son propre dépôt, où il est hébergé sur Render
-(« source distante »). Cette fonction dit, côté serveur — donc sans les
-limitations du navigateur — si cette source distante est **réellement
+Le site embarque une copie du moteur (« source locale »), tandis que le simulateur
+poursuit son développement dans son propre dépôt. Son adresse publique déclarée
+est aujourd’hui hébergée sur Vercel (« source distante ») ; l’ancienne adresse
+Render reste acceptée pour compatibilité. Cette fonction dit, côté serveur —
+donc sans les limitations du navigateur — si la source distante est **réellement
 fonctionnelle** : page servie *et* API de calcul qui répond.
 
-Le site M.R.S.C peut être déployé sur Vercel : c'est l'hébergeur possible de
-cette fonction, pas l'adresse active du simulateur.
+Le site M.R.S.C peut lui aussi être déployé sur Vercel : ce déploiement est
+distinct de celui du simulateur amont.
 
 C'est elle qui décide de la bascule : `assets/js/site.js` embarque la source
 distante quand elle répond « disponible », et retombe sinon sur la copie locale.
@@ -54,7 +55,10 @@ MARQUEURS_PAGE = ("console-pilotage", "Simulateur Macro-Politique", "leviers")
 ROUTES_API = (("/api/scenarios", ("scenarios",)), ("/api/catalogue", ("parametres", "domaines")))
 
 _cache: dict[str, tuple[float, dict[str, object]]] = {}
-HOTE_SOURCE_PRODUCTION = "simulateur-macro-politique.onrender.com"
+HOTES_SOURCE_PRODUCTION = frozenset({
+    "d-mocratie-et-politique-du-peuple-p.vercel.app",
+    "simulateur-macro-politique.onrender.com",  # ancien hôte, conservé comme repli explicite
+})
 
 
 def _source_autorisee(source: str) -> bool:
@@ -82,7 +86,7 @@ def _source_autorisee(source: str) -> bool:
             for valeur in os.environ.get("SIMULATEUR_SOURCE_DISTANTE_HOTES_AUTORISES", "").split(",")
             if valeur.strip()
         }
-        return hote == HOTE_SOURCE_PRODUCTION or hote in supplementaires
+        return hote in HOTES_SOURCE_PRODUCTION or hote in supplementaires
     return (
         os.environ.get("SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE") == "1"
         and cible.scheme == "http"

@@ -10,7 +10,7 @@ Reproduction statique des pages publiques de [www.mrsc.fr](https://www.mrsc.fr/)
 - `apprendre.html` — parcours d’apprentissage accessibles, repères par matière et difficulté, fiches autonomes et sources sans compte
 - `anglais-aventure.html` — « Les Mondes » : atlas des 70 fiches dans 15 domaines, parcours libres, plus cinq Escales d’anglais en 3D ; 44 prototypes restent à relire
 - `ia-societe.html` — réflexion sur les usages, effets sociaux et fraudes ; réflexes de vérification et liens vers les fiches pratiques
-- `simulateur.html` — présentation du simulateur macro-politique, accès à la version interactive hébergée sur Render et aperçu intégré lorsqu’il est disponible
+- `simulateur.html` — présentation du simulateur macro-politique, accès à la version interactive publiée sur Vercel et aperçu intégré lorsqu’il est disponible
 - `documents.html` — statuts, parution au Journal officiel, bulletins d’adhésion et de don
 - `liens-utiles.html` — ressources externes référencées sur le site d’origine
 - `localisation.html` — carte Google My Maps et repères affichés
@@ -43,7 +43,7 @@ Le site intègre le **simulateur macro-politique systémique** du projet *Démoc
 | `outils/verifier-integration.py` | Vérifie la page, les fonctions et chaque route, sans navigateur |
 | `outils/verifier-securite.py` | Tests HTTP/WSGI, bornes de requête et de sources, calculs concurrents, redirections, provenance/XSS, cache et whitelist statique |
 
-Le site embarque une copie datée du moteur amont et applique un **correctif local de sécurité et d’intégration accessible**, conservé dans `outils/patchs/simulateur-securite-mrsc.patch`. Les scénarios et préréglages du simulateur local sont de vrais boutons utilisables au clavier, avec état annoncé. Le script de mise à jour réapplique le correctif avant de régénérer la page ; il doit être revu à chaque évolution amont. Il ne modifie pas le service Render dans l’autre dépôt.
+Le site embarque une copie datée du moteur amont et applique un **correctif local de sécurité et d’intégration accessible**, conservé dans `outils/patchs/simulateur-securite-mrsc.patch`. Les scénarios et préréglages du simulateur local sont de vrais boutons utilisables au clavier, avec état annoncé. Le script de mise à jour réapplique le correctif avant de régénérer la page ; il doit être revu à chaque évolution amont. Il ne modifie pas le service publié dans l’autre dépôt.
 
 ```sh
 python3 outils/mettre-a-jour-simulateur.py  # rapatrie le moteur amont et régénère la page
@@ -53,16 +53,16 @@ python3 outils/verifier-securite.py         # tests ciblés HTTP/WSGI, cache, so
 python3 outils/verifier-integration.py      # contrôle l’ensemble
 ```
 
-**Deux sources, une seule page.** L’application interactive évolue dans son dépôt et est hébergée à l’adresse publique [https://simulateur-macro-politique.onrender.com/](https://simulateur-macro-politique.onrender.com/). La page `simulateur.html` privilégie cette version si la sonde confirme que la page et son API répondent ; si le site est hébergé sur un service compatible, la copie embarquée peut prendre le relais. Sur GitHub Pages, qui n’exécute pas Python, la page affiche un lien direct vers Render plutôt qu’un faux aperçu fonctionnel. L’adresse Render, et non l’ancienne adresse Vercel du simulateur, est la référence à utiliser.
+**Deux sources, une seule page.** Le dépôt amont identifie maintenant [Vercel](https://d-mocratie-et-politique-du-peuple-p.vercel.app/) comme adresse publique du simulateur ; sa branche `main` contient une page `index.html` et une fonction API, et GitHub a signalé un déploiement *Production* réussi le 14 octobre 2026 ([PR amont #53](https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple/pull/53)). Ces éléments ne constituent pas un test HTTP de l’adresse, de ses API ou de l’intégration dans un cadre. La page `simulateur.html` pointe désormais vers cette adresse, et la sonde autorise cet hôte. L’ancien hôte Render reste accepté par la sonde pour compatibilité, mais n’est plus la cible par défaut. Sur GitHub Pages, qui n’exécute pas Python, la page propose un lien direct vers Vercel plutôt qu’un faux aperçu fonctionnel.
 
 ```sh
-python3 outils/verifier-source-distante.py  # contrôle la page Render et son API (0 = oui)
+python3 outils/verifier-source-distante.py  # contrôle la source configurée et son API (0 = oui)
 python3 outils/verifier-maj-amont.py        # le moteur embarqué a-t-il pris du retard ? (1 = oui)
 ```
 
-Une veille hebdomadaire (`.github/workflows/maj-simulateur.yml`) échoue — et prévient par courriel — quand le moteur amont a bougé ; elle ne publie jamais rien à votre place. Les actions de workflow sont épinglées par SHA et `.github/workflows/verification.yml` exécute les contrôles sur les pull requests ; Dependabot surveille les mises à jour d’actions. Pour que le contrôle devienne réellement bloquant, les administrateurs doivent exiger le statut CI dans la protection de `main`. Les consignes de maintenance et de vérification du service Render sont dans [`docs/prompt-session-simulateur.md`](docs/prompt-session-simulateur.md).
+Une veille hebdomadaire (`.github/workflows/maj-simulateur.yml`) échoue — et prévient par courriel — quand le moteur amont a bougé ; elle ne publie jamais rien à votre place. Les actions de workflow sont épinglées par SHA et `.github/workflows/verification.yml` exécute les contrôles sur les pull requests ; Dependabot surveille les mises à jour d’actions. Pour que le contrôle devienne réellement bloquant, les administrateurs doivent exiger le statut CI dans la protection de `main`. Les consignes de maintenance et de vérification du service amont sont dans [`docs/prompt-session-simulateur.md`](docs/prompt-session-simulateur.md).
 
-Le site et sa copie embarquée peuvent être testés avec les fonctions Python sur Vercel ou en local. Sur l’adresse GitHub Pages, utilisez le lien Render affiché dans la page du simulateur. Le détail de l’architecture, de la mise à jour et du dépannage est dans [`docs/integration-simulateur.md`](docs/integration-simulateur.md) ; l’audit sécurité, ses limites et la feuille de route sont dans [`docs/rd-audit-securite-optimisation.md`](docs/rd-audit-securite-optimisation.md).
+Le site et sa copie embarquée peuvent être testés avec les fonctions Python sur Vercel ou en local. Sur l’adresse GitHub Pages, utilisez le lien Vercel affiché dans la page du simulateur. Le détail de l’architecture, de la mise à jour et du dépannage est dans [`docs/integration-simulateur.md`](docs/integration-simulateur.md) ; l’audit sécurité, ses limites et la feuille de route sont dans [`docs/rd-audit-securite-optimisation.md`](docs/rd-audit-securite-optimisation.md).
 
 ## Lancer en local
 
@@ -80,11 +80,11 @@ Puis ouvrir `http://localhost:4173`. Le serveur écoute uniquement sur `127.0.0.
 
 Le workflow `.github/workflows/deploy-pages.yml` valide le HTML, les liens locaux et la syntaxe JavaScript, puis publie les pages HTML (dont `404.html`, `confidentialite.html` et `anglais-aventure.html`), `assets/`, `sitemap.xml`, le catalogue et ses fiches autonomes ainsi que la page du simulateur (`simulateur/index.html` et sa provenance). Les documents de travail dans `docs/`, les outils de `outils/`, les sources Python du moteur et les fonctions `api/` ne sont pas copiés sur le site. Le déploiement est automatique à chaque push sur `main` (un lancement manuel reste possible depuis l’onglet **Actions** avec « Publish M.R.S.C site »). GitHub Pages est actuellement configuré en mode public avec HTTPS ; toute mise à jour de cette branche attend son intégration à `main` et une publication réussie.
 
-GitHub Pages ne sait pas exécuter Python : la copie embarquée ne calcule pas à cette adresse. Pour utiliser l’outil interactif, ouvrez la version publique hébergée sur [Render](https://simulateur-macro-politique.onrender.com/).
+GitHub Pages ne sait pas exécuter Python : la copie embarquée ne calcule pas à cette adresse. Pour utiliser l’outil interactif, ouvrez [la version publiée du simulateur sur Vercel](https://d-mocratie-et-politique-du-peuple-p.vercel.app/).
 
 ## Publication du site M.R.S.C sur Vercel (optionnelle)
 
-Cette configuration concerne l’hébergement du **site M.R.S.C**, pas l’adresse publique active du simulateur, hébergé sur Render. Les fonctions Python de `api/` peuvent aussi faire fonctionner la copie embarquée du site si la source Render ne répond pas. Marche à suivre :
+Cette configuration concerne l’hébergement du **site M.R.S.C** et reste distincte du déploiement Vercel du simulateur amont. Les fonctions Python de `api/` peuvent aussi faire fonctionner la copie embarquée du site si la source distante ne répond pas. Marche à suivre :
 
 1. Vercel → **Add New → Project** → importer `thejmimiia-code/MRSC`.
 2. Réglages : *Framework Preset* **Other**, *Build Command* **vide**, *Output Directory* **`.`**, *Install Command* **vide**.
@@ -93,7 +93,7 @@ Cette configuration concerne l’hébergement du **site M.R.S.C**, pas l’adres
 
 Fichiers prévus pour cet hébergement : `vercel.json` (mode statique explicite, en-têtes de sécurité, durée et mémoire des fonctions) et `.vercelignore` (même périmètre de publication que GitHub Pages, `api/` et `simulateur/` compris). Aucune dépendance Python n’est requise : le moteur n’utilise que la bibliothèque standard, et la version Python par défaut de Vercel (3.12) convient.
 
-Un déploiement peut être « Ready » tout en renvoyant `404 NOT_FOUND` sur `/` : cela arrive quand le dépôt déployé ne contient pas d’`index.html` à sa racine. Le diagnostic complet de ce cas, tel qu’il s’est présenté sur un autre projet de l’équipe `mrsc1`, est conservé dans [`docs/diagnostic-404-vercel.md`](docs/diagnostic-404-vercel.md).
+Un déploiement peut être « Ready » tout en renvoyant `404 NOT_FOUND` sur `/` si aucun `index.html` n’est publié à la racine. Le diagnostic [`docs/diagnostic-404-vercel.md`](docs/diagnostic-404-vercel.md) conserve l’observation initiale, mais le dépôt amont du simulateur contient désormais cette page et GitHub signale une publication *Production* réussie ; le domaine public n’a pas été contrôlé directement depuis ce dépôt.
 
 ## Contenu et ressources externes
 

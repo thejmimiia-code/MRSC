@@ -5,11 +5,13 @@ Ce document s’adresse aux personnes qui travaillent dans le dépôt du simulat
 
 ## Adresse publique à utiliser
 
-L’adresse active communiquée pour le simulateur est :
+L’adresse publique actuellement déclarée pour le simulateur est :
 
-**<https://simulateur-macro-politique.onrender.com/>**
+**<https://d-mocratie-et-politique-du-peuple-p.vercel.app/>**
 
-Ne pas la remplacer par l’ancienne adresse Vercel du simulateur. Les mentions de Vercel dans le diagnostic `docs/diagnostic-404-vercel.md` sont historiques ; elles ne désignent pas l’hébergement actif de l’outil.
+Le dépôt amont possède désormais un `index.html` à sa racine et une route API Python ; GitHub a signalé un déploiement *Production* réussi le 14 octobre 2026. Cela ne remplace pas un contrôle HTTP et fonctionnel de l’adresse publique. Le diagnostic [`docs/diagnostic-404-vercel.md`](diagnostic-404-vercel.md) décrit un état antérieur et doit se lire comme une trace historique.
+
+L’ancienne adresse Render n’est plus la cible par défaut du site M.R.S.C. Ne la rétablir comme adresse publique qu’après vérification effective et mise à jour cohérente du lien, de la sonde, de la notice de confidentialité et de la documentation.
 
 Le site public M.R.S.C est <https://thejmimiia-code.github.io/MRSC/>. Depuis le simulateur, conserver un moyen visible de revenir au site M.R.S.C, y compris sur petit écran.
 
@@ -25,23 +27,24 @@ Les routes connues comprennent `/api/catalogue`, `/api/contexte`, `/api/simuler`
 
 ## Vérifications avant de déclarer un changement publié
 
-Depuis un réseau qui autorise les requêtes vers Render, vérifier au minimum :
+Depuis un réseau qui autorise les requêtes vers Vercel, vérifier au minimum :
 
-- que `GET https://simulateur-macro-politique.onrender.com/` retourne la vraie page interactive ;
+- que `GET https://d-mocratie-et-politique-du-peuple-p.vercel.app/` retourne la vraie page interactive ;
 - que `/api/scenarios` et `/api/catalogue` retournent des réponses JSON valides ;
 - qu’une requête de simulation valide à `/api/simuler` produit un résultat ;
-- que l’application peut être affichée depuis la page `simulateur.html` du site M.R.S.C et que le lien de retour reste visible.
+- que l’application peut être affichée depuis la page `simulateur.html` du site M.R.S.C et que le lien de retour reste visible ;
+- qu’une fenêtre privée non connectée peut ouvrir la page sans écran de protection Vercel.
 
-Un service Render peut avoir besoin d’un démarrage à froid. Si le site M.R.S.C choisit sa copie embarquée après une sonde trop lente, le lien Render reste disponible sur `simulateur.html` ; un tel repli ne prouve pas à lui seul que l’adresse publique a changé.
+Un état *Production — success* dans GitHub prouve que le fournisseur a terminé le déploiement déclaré ; il ne prouve ni qu’une requête HTTP sur l’alias public réussit, ni que les API et le calcul fonctionnent, ni que l’iframe est autorisée. Si le site semble rester en chargement, relever le message visible et les erreurs réseau/console du navigateur avant de conclure à une cause.
 
 ## Prompt à reprendre dans une session du dépôt du simulateur
 
 ```text
 Dépôt concerné : thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple
-Adresse publique active à préserver : https://simulateur-macro-politique.onrender.com/
+Adresse publique à préserver : https://d-mocratie-et-politique-du-peuple-p.vercel.app/
 Site M.R.S.C auquel l’outil est relié : https://thejmimiia-code.github.io/MRSC/
 
-Maintiens l’application interactive et son API à la racine de cette adresse Render. Vérifie
+Maintiens l’application interactive et son API à la racine de cette adresse Vercel. Vérifie
 que GET / sert le véritable simulateur et que les routes /api/... requises répondent sur la
 même origine. Garde l’intégration en iframe possible, sans en-tête ni politique de sécurité
 qui la bloque. Conserve un lien de retour M.R.S.C visible, ainsi que l’accessibilité clavier,
@@ -50,5 +53,6 @@ les résultats du modèle comme des prévisions certaines.
 
 Avant de conclure, teste la page, /api/scenarios, /api/catalogue, une simulation valide sur
 /api/simuler et l’intégration depuis simulateur.html du site M.R.S.C. Signale clairement tout
-test qui n’a pas pu être réalisé. N’utilise pas l’ancienne adresse Vercel du simulateur.
+test qui n’a pas pu être réalisé. Ne déduis pas du seul statut de déploiement que l’URL, les
+routes, l’iframe ou les calculs ont été vérifiés.
 ```

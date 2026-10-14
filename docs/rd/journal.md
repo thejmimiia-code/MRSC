@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Migration de la cible déclarée du simulateur vers Vercel
+
+- **Initiative :** `coherence-textes-publics`, maintenue à l’état `a-valider`.
+- **Signal :** le lien de `simulateur.html`, la sonde et plusieurs consignes indiquaient encore Render alors que la personne a fourni l’alias Vercel du simulateur.
+- **Éléments GitHub consultés :** le dépôt amont déclare cet alias comme `homepageUrl`; sa branche `main` contient `index.html` et `api/[...path].py`. La PR amont #53 est fusionnée et GitHub signale un déploiement *Production — success* pour le commit `b7a2d7242f6d8f32efc4b86839baf969208d3a57`. L’observation 404 de `docs/diagnostic-404-vercel.md` correspond à un état précédent.
+- **Décision :** utiliser l’alias Vercel déclaré comme cible par défaut du site M.R.S.C ; conserver l’hôte Render dans la liste autorisée uniquement pour compatibilité, sans le présenter comme source actuellement vérifiée.
+- **Changements :** liens, aperçu, libellés, sonde et allowlist mis à jour ; README, guide d’intégration, prompt de maintenance, notice publique et inventaire de confidentialité actualisés. Le diagnostic 404 est conservé comme historique, avec un avertissement explicite sur son statut. La prochaine vérification humaine et le besoin de confirmer les informations de l’hébergeur sont ajoutés au portefeuille.
+- **Contrôles réellement exécutés :** compilation Python ; `node --check assets/js/site.js` ; `verifier-rd-continue.py` ; `construire-apprentissages.py --verifier` ; `construire-simulateur.py --verifier` ; `verifier-site-statique.py` (83 pages) ; `verifier-securite.py` (hôtes Vercel/Render exacts, domaines voisins, localhost et autres contrôles ciblés) ; `verifier-integration.py` (page, 16 routes API, cible déclarée et source simulée) — réussis. `git diff --check` — réussi après l’ajout de cette entrée.
+- **Limites et suite :** aucun accès HTTP direct à Vercel ou Render, aucun test des API, calculs, iframe ou navigateur public n’a été effectué. Le statut GitHub de déploiement ne prouve pas leur fonctionnement. Après publication, ouvrir l’alias puis `/api/scenarios` et `/api/catalogue`, effectuer un calcul et vérifier l’iframe depuis `simulateur.html`; si l’alias tourne encore en chargement, relever les erreurs console/réseau. L’association doit confirmer les informations de confidentialité propres au fournisseur. Aucune validation complète n’est revendiquée.
+
+
 ## 2026-10-14 — Largeur stable du bouton Agrandir/Réduire
 
 - **Initiative :** `optimisation-du-site`, maintenue à l’état `a-tester`.

@@ -23,7 +23,7 @@ L’inventaire ci-dessous provient des fichiers et des générateurs du dépôt.
 | Pages générales | 12 HTML à la racine (dont la 404), `assets/css/site.css`, `assets/js/site.js` et `assets/js/navigation-parcours.js` | Les styles et comportements communs restent centralisés. Les pages conservent un contenu lisible sans JavaScript. |
 | Fiches d’apprentissage | `docs/apprentissage/catalogue.toml` et `referentiel.toml` → générateur `outils/construire-apprentissages.py` → `apprendre.html`, 70 fiches et données d’atlas | Les pages publiées sont des sorties, pas des versions concurrentes. Modifier les TOML puis régénérer et vérifier ; ne pas éditer les sorties à la main. |
 | Les Mondes / Escales anglaises | Données et comportements locaux dans `assets/js/anglais-aventure-data.js`, `apprentissage-aventure-data.js`, `anglais-aventure.js` et `apprentissage.js` ; styles spécifiques dans `assets/css/anglais-aventure.css` | Le style de jeu reste séparé du style commun tant que la différence sert son interface ; vérifier les sources de génération avant toute édition des données produites. |
-| Simulateur | Moteur embarqué, provenance et correctif ; `outils/construire-simulateur.py` → `simulateur/index.html` ; routes `api/` ; page d’intégration `simulateur.html` ; service distant Render distinct | La page statique générée, l’intégration, la copie locale et le service distant ont des rôles de publication/repli différents. Les supprimer ou les fusionner sans plan de disponibilité ferait perdre une voie de fonctionnement. Le service distant n’est pas couvert par l’audit local. |
+| Simulateur | Moteur embarqué, provenance et correctif ; `outils/construire-simulateur.py` → `simulateur/index.html` ; routes `api/` ; page d’intégration `simulateur.html` ; application amont Vercel distincte | La page statique générée, l’intégration, la copie locale et l’application distante ont des rôles de publication/repli différents. Les supprimer ou les fusionner sans plan de disponibilité ferait perdre une voie de fonctionnement. L’application distante n’est pas couverte par l’audit local. |
 | R&D, contrôles et publication | `AGENTS.md`, `docs/rd-innovation-continue.md`, portefeuille/journal, vérificateurs et workflows | Ces éléments décrivent la méthode, les contrôles et les décisions ; ils se complètent et ne remplacent pas une validation humaine. |
 | Affirmations publiques récurrentes | Sources de vérité propres à chaque domaine (catalogue TOML, moteur/provenance, fichiers de documents, réglages GitHub Pages) ; pages, `README.md` et textes générés en sont les sorties | Garder une vérification automatique ciblée des chiffres et des liens à risque ; réserver l’interprétation, les statuts et le ton à une relecture éditoriale humaine. Ne pas créer un registre qui ferait passer l’absence de badge ou de test pour une validation. |
 
@@ -36,7 +36,7 @@ Le dépôt contient 12 pages HTML à la racine, 70 fiches autonomes et une page 
 - La recherche de noms de fichiers `old`, `backup`, `legacy`, `archive`, `copy`, `v1` ou `v2` n’a pas trouvé de copie de page ou de feuille de style explicitement archivée. Cette recherche par nom ne prouve pas qu’aucun code mort n’existe.
 - Le CSS commun et le CSS du jeu ont des périmètres différents ; leur coexistence n’est pas un doublon à retirer.
 - Les fiches HTML et les données d’atlas sont générées depuis le catalogue. Les supprimer ou les corriger directement casserait la synchronisation.
-- La page du simulateur, son moteur, son correctif, l’API locale et le service Render correspondent à des étapes ou modes d’hébergement distincts, et non à des copies interchangeables.
+- La page du simulateur, son moteur, son correctif, l’API locale et l’application amont publiée sur Vercel correspondent à des étapes ou modes d’hébergement distincts, et non à des copies interchangeables.
 - Les pages générales répètent une partie de la structure de navigation et de pied de page ; le générateur des fiches fournit déjà un point de centralisation pour celles-ci. Remplacer les pages statiques par un `fetch()` de fragments ferait dépendre la structure de JavaScript et dégraderait le repli sans script.
 - La clé historique `mrsc-texte-agrandi` est encore lue pour la migration d’une préférence. La retirer sans période de migration et test de reprise effacerait un choix déjà conservé dans certains navigateurs.
 
@@ -60,7 +60,7 @@ Aucun rapport de couverture CSS/JavaScript ou rendu navigateur n’établit ici 
 1. Garder les générateurs comme sources de vérité ; vérifier chaque sortie après modification.
 2. Conserver les contrôles statiques, de sécurité, d’intégration et de R&D dans la CI. La protection de branche GitHub doit toujours être configurée par un administrateur pour rendre la CI obligatoire.
 3. Ne pas qualifier le site de « complet » au sens universel : préserver les statuts éditoriaux, lacunes, provenances et limites visibles.
-4. Ne pas confondre l’audit du dépôt avec l’état du simulateur Render, de GitHub Pages, de Vercel ou des journaux des prestataires.
+4. Ne pas confondre l’audit du dépôt avec l’état de l’application Vercel amont du simulateur, de GitHub Pages, du projet Vercel M.R.S.C ou des journaux des prestataires.
 
 ### P1 — interface, accessibilité et robustesse
 
@@ -79,7 +79,7 @@ Aucun rapport de couverture CSS/JavaScript ou rendu navigateur n’établit ici 
 ### P2 — entretenir le contenu et le simulateur
 
 1. Maintenir le catalogue, la carte des lacunes, les fiches publiées et les données de jeu alignés à partir des TOML ; les prototypes restent à relire.
-2. À chaque mise à jour amont du simulateur, réexaminer provenance, patch M.R.S.C, générateur, page produite et routes. Vérifier séparément le service Render.
+2. À chaque mise à jour amont du simulateur, réexaminer provenance, patch M.R.S.C, générateur, page produite et routes. Vérifier séparément l’application Vercel amont et son intégration.
 3. Avant de prioriser des optimisations de poids ou de performance, établir une mesure locale reproductible puis une mesure sur appareils réels ; ne pas ajouter de télémétrie individuelle implicite.
 4. Retirer une sortie ou une clé de stockage seulement après un plan de migration, une vérification des liens et une période de retour arrière.
 
@@ -109,7 +109,7 @@ La modification de la barre ne sera considérée comme validée qu’après :
 - Des essais DOM simulés ont exercé les commandes d’affichage, le menu et son retour clavier Échap, le repli de la barre lorsque `sessionStorage` est bloqué, le partage de repli, les filtres des 70 fiches, les 15 mondes et le parcours local, une mission d’anglais jusqu’à sa fin avec repli 3D, le chargement volontaire de la carte, ainsi que le choix de source et les réglages du simulateur intégré et autonome. Les scénarios/préréglages ont aussi été activés et leur état annoncé vérifié après le retour réel de l’API locale.
 - La revue a révélé que les cartes de scénarios et préréglages du simulateur étaient des `<div>` cliquables, donc pas des commandes clavier natives. Elles ont été remplacées dans la source locale et le correctif versionné par des boutons avec `aria-pressed`, puis régénérées et retestées. La présentation annonçait aussi 9 scénarios alors que le moteur en expose 11 ; le chiffre est corrigé et le vérificateur empêche une nouvelle divergence. Aucun contenu ni parcours n’a été supprimé. L’initiative reste « à tester » pour les validations sur de vrais appareils.
 
-**Limites de la vérification fonctionnelle :** les essais DOM simulés ne calculent pas la mise en page CSS. La passe Chromium ci-dessous mesure le reflow et lance axe, mais ne remplace pas une inspection visuelle humaine, un essai avec lecteur d’écran, un test de zoom du navigateur, des essais volontaires ou la validation des hébergements en production. L’aperçu local ne prouve pas la disponibilité du service Render.
+**Limites de la vérification fonctionnelle :** les essais DOM simulés ne calculent pas la mise en page CSS. La passe Chromium ci-dessous mesure le reflow et lance axe, mais ne remplace pas une inspection visuelle humaine, un essai avec lecteur d’écran, un test de zoom du navigateur, des essais volontaires ou la validation des hébergements en production. L’aperçu local ne prouve pas la disponibilité de l’application Vercel amont.
 
 ### Contrôle responsive et axe en Chromium headless — 12 octobre 2026
 
@@ -153,7 +153,7 @@ La modification de la barre ne sera considérée comme validée qu’après :
 5. **P2 — optimisation :** réexaminer un registre généré de formulations communes uniquement si des divergences récurrentes sont observées ; ne pas centraliser les paragraphes qui ont des contextes différents.
 6. **P1 — chaîne CI (corrigée et vérifiée le 14 octobre) :** actions épinglées sur des versions Node.js 24 et runners fixés à `ubuntu-24.04`. Après fusion du PR #30, les contrôles de qualité, de veille éditoriale et de publication Pages ont tous réussi (runs `38553659447`, `38553659684`, `38553659541`) sans annotation; tester Ubuntu 26 séparément avant de changer de runner.
 
-Le [`rapport détaillé de cohérence éditoriale`](rd/rapport-coherence-editoriale-2026-10-13.md) conserve les preuves, méthodes et limites. Le workflow de publication GitHub Pages a réussi après la fusion du PR #27 ; cela ne remplace pas une vérification manuelle de la page dans un navigateur ni le contrôle de Render, du DNS ou du domaine `www.mrsc.fr`. Les tests automatiques ne valident pas les sources externes, le fond scientifique, la clarté auprès de visiteurs ou le rendu humain.
+Le [`rapport détaillé de cohérence éditoriale`](rd/rapport-coherence-editoriale-2026-10-13.md) conserve les preuves, méthodes et limites. Le workflow de publication GitHub Pages a réussi après la fusion du PR #27 ; cela ne remplace pas une vérification manuelle de la page dans un navigateur ni le contrôle de l’application Vercel amont, du DNS ou du domaine `www.mrsc.fr`. Les tests automatiques ne valident pas les sources externes, le fond scientifique, la clarté auprès de visiteurs ou le rendu humain.
 
 ## 8. Maintenance CI et blocage DNS — 14 octobre 2026
 
