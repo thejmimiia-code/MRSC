@@ -4,6 +4,30 @@
   });
 
   const root = document.documentElement;
+  const simulatorFrames = Array.from(document.querySelectorAll("[data-simulateur-apercu] iframe"));
+  const synchroniserSimulateurs = () => {
+    simulatorFrames.forEach((frame) => {
+      try {
+        if (frame.contentWindow.location.origin !== window.location.origin) return;
+        const simulatorRoot = frame.contentDocument?.documentElement;
+        if (!simulatorRoot) return;
+        [
+          "texte-tres-reduit",
+          "texte-reduit",
+          "texte-agrandi",
+          "texte-tres-agrandi",
+          "contraste-renforce",
+          "espacement-renforce",
+        ].forEach((classe) => {
+          simulatorRoot.classList.toggle(classe, root.classList.contains(classe));
+        });
+        simulatorRoot.dataset.layout = root.dataset.layout || "equilibree";
+      } catch (erreur) {
+        // Une page parente ne peut pas modifier une iframe d’une autre origine.
+      }
+    });
+  };
+  simulatorFrames.forEach((frame) => frame.addEventListener("load", synchroniserSimulateurs));
   const settings = document.querySelector("[data-display-settings]");
   const textDecrease = document.querySelector("[data-text-decrease]");
   const textIncrease = document.querySelector("[data-text-increase]");
@@ -55,6 +79,7 @@
     if (textLevelOutput) textLevelOutput.textContent = `${textLevel} %`;
     if (textDecrease) textDecrease.disabled = textLevel === textLevels[0];
     if (textIncrease) textIncrease.disabled = textLevel === textLevels[textLevels.length - 1];
+    synchroniserSimulateurs();
   };
 
   const applyContrast = (enabled) => {
@@ -67,6 +92,7 @@
         contrastEnabled ? "Désactiver le contraste renforcé" : "Activer le contraste renforcé"
       );
     }
+    synchroniserSimulateurs();
   };
 
   const applySpacing = (enabled) => {
@@ -79,6 +105,7 @@
         spacingEnabled ? "Désactiver l’espacement renforcé" : "Activer l’espacement renforcé"
       );
     }
+    synchroniserSimulateurs();
   };
 
   const loadPreferences = () => {
@@ -95,6 +122,145 @@
   };
 
   loadPreferences();
+
+  const layoutPreferenceKey = "mrsc-mise-en-page";
+  const layoutChoices = [
+    {
+      value: "equilibree",
+      label: "Équilibrée",
+      description: "La présentation de base, entre lecture et blocs visuels.",
+    },
+    {
+      value: "lecture",
+      label: "Lecture",
+      description: "Une colonne plus étroite et des blocs empilés pour suivre les textes.",
+    },
+    {
+      value: "panorama",
+      label: "Panorama composite",
+      description: "Une page plus large, avec un agencement de cartes en plusieurs colonnes.",
+    },
+  ];
+  const layoutSettings = settings ? document.createElement("details") : null;
+  const layoutInputs = [];
+  let layoutStatus = null;
+
+  const applyLayout = (value) => {
+    const selected = layoutChoices.find((choice) => choice.value === value)
+      || layoutChoices[0];
+    root.dataset.layout = selected.value;
+    synchroniserSimulateurs();
+    layoutInputs.forEach(({ input, label }) => {
+      input.checked = input.value === selected.value;
+      label.classList.toggle("is-selected", input.checked);
+    });
+    if (layoutStatus) {
+      layoutStatus.textContent = `Présentation « ${selected.label} » appliquée.`;
+    }
+  };
+
+  if (layoutSettings) {
+    layoutSettings.className = "layout-settings";
+    layoutSettings.dataset.siteLayoutSettings = "";
+
+    const summary = document.createElement("summary");
+    summary.className = "layout-settings-summary";
+    summary.title = "Ouvrir ou fermer les choix de présentation du site";
+    summary.setAttribute("aria-controls", "site-layout-settings-panel");
+    summary.append(document.createTextNode("Présentation"));
+
+    const chevron = document.createElement("span");
+    chevron.className = "layout-settings-chevron";
+    chevron.setAttribute("aria-hidden", "true");
+    chevron.textContent = "⌄";
+    summary.appendChild(chevron);
+
+    const panel = document.createElement("div");
+    panel.className = "layout-settings-panel";
+    panel.id = "site-layout-settings-panel";
+    panel.setAttribute("aria-label", "Personnaliser l’expérience de lecture");
+
+    const title = document.createElement("p");
+    title.className = "layout-settings-title";
+    const titleStrong = document.createElement("strong");
+    titleStrong.textContent = "Personnaliser l’expérience";
+    title.appendChild(titleStrong);
+
+    const options = document.createElement("fieldset");
+    options.className = "layout-settings-options";
+    const legend = document.createElement("legend");
+    legend.textContent = "Choisissez une mise en page";
+    options.appendChild(legend);
+
+    layoutChoices.forEach((choice) => {
+      const label = document.createElement("label");
+      label.className = "layout-choice";
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "mrsc-site-layout";
+      input.value = choice.value;
+      input.id = `site-layout-${choice.value}`;
+      input.addEventListener("change", () => {
+        if (!input.checked) return;
+        applyLayout(input.value);
+        savePreference(layoutPreferenceKey, input.value);
+      });
+
+      const copy = document.createElement("span");
+      copy.className = "layout-choice-copy";
+      const name = document.createElement("strong");
+      name.textContent = choice.label;
+      const description = document.createElement("span");
+      description.textContent = choice.description;
+      copy.append(name, description);
+      label.htmlFor = input.id;
+      label.append(input, copy);
+      options.appendChild(label);
+      layoutInputs.push({ input, label });
+    });
+
+    layoutStatus = document.createElement("p");
+    layoutStatus.className = "layout-settings-status";
+    layoutStatus.setAttribute("role", "status");
+    layoutStatus.setAttribute("aria-live", "polite");
+    layoutStatus.setAttribute("aria-atomic", "true");
+
+    const note = document.createElement("p");
+    note.className = "layout-settings-note";
+    note.textContent = "Le changement est immédiat, sans rechargement. Si le stockage local est autorisé, votre choix est mémorisé sur cet appareil.";
+
+    const reset = document.createElement("button");
+    reset.type = "button";
+    reset.className = "display-control display-control-wide layout-settings-reset";
+    reset.textContent = "Réinitialiser la présentation";
+    reset.addEventListener("click", () => {
+      applyLayout("equilibree");
+      savePreference(layoutPreferenceKey, "equilibree");
+    });
+
+    panel.append(title, options, layoutStatus, note, reset);
+    layoutSettings.append(summary, panel);
+    settings.insertAdjacentElement("afterend", layoutSettings);
+    applyLayout(readPreference(layoutPreferenceKey));
+
+    layoutSettings.addEventListener("toggle", () => {
+      if (!layoutSettings.open) return;
+      if (settings) settings.open = false;
+      const journeySettings = document.querySelector("[data-site-journey]");
+      if (journeySettings) journeySettings.open = false;
+      if (toggle && navigation) {
+        toggle.setAttribute("aria-expanded", "false");
+        navigation.classList.remove("is-open");
+      }
+    });
+
+    window.addEventListener("storage", (event) => {
+      if (event.key === null || event.key === layoutPreferenceKey) {
+        applyLayout(readPreference(layoutPreferenceKey));
+      }
+    });
+  }
 
   if (settings) {
     settings.hidden = false;
@@ -117,10 +283,12 @@
       savePreference(keys.spacing, spacingEnabled ? "oui" : "non");
     });
 
-    document.addEventListener("click", (event) => {
-      if (!settings.contains(event.target)) settings.open = false;
-    });
   }
+
+  document.addEventListener("click", (event) => {
+    if (settings && !settings.contains(event.target)) settings.open = false;
+    if (layoutSettings && !layoutSettings.contains(event.target)) layoutSettings.open = false;
+  });
 
   // L’iframe locale et les pages M.R.S.C partagent ces réglages sur le même domaine.
   window.addEventListener("storage", (event) => {
@@ -173,6 +341,10 @@
       setHeaderCompact(Boolean(compactViewport?.matches));
       headerCompactToggle.addEventListener("click", () => {
         closeMenu();
+        if (settings) settings.open = false;
+        if (layoutSettings) layoutSettings.open = false;
+        const journeySettings = document.querySelector("[data-site-journey]");
+        if (journeySettings) journeySettings.open = false;
         setHeaderCompact(!header.classList.contains("is-compact"));
       });
 
@@ -193,6 +365,12 @@
       const isOpen = toggle.getAttribute("aria-expanded") === "true";
       toggle.setAttribute("aria-expanded", String(!isOpen));
       navigation.classList.toggle("is-open", !isOpen);
+      if (!isOpen) {
+        if (settings) settings.open = false;
+        if (layoutSettings) layoutSettings.open = false;
+        const journeySettings = document.querySelector("[data-site-journey]");
+        if (journeySettings) journeySettings.open = false;
+      }
     });
 
     navigation.addEventListener("click", (event) => {
@@ -208,6 +386,11 @@
         const focusInsideSettings = settings.contains(document.activeElement);
         settings.open = false;
         if (focusInsideSettings) settings.querySelector("summary")?.focus();
+      }
+      if (layoutSettings?.open) {
+        const focusInsideLayoutSettings = layoutSettings.contains(document.activeElement);
+        layoutSettings.open = false;
+        if (focusInsideLayoutSettings) layoutSettings.querySelector("summary")?.focus();
       }
     });
   }

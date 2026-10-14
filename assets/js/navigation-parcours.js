@@ -219,6 +219,7 @@
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const navigation = document.querySelector("[data-primary-navigation]");
   const displaySettings = document.querySelector("[data-display-settings]");
+  const layoutSettings = document.querySelector("[data-site-layout-settings]");
   const headerCompactToggle = document.querySelector("[data-header-compact-toggle]");
   const fermerMenu = () => {
     if (!menuToggle || !navigation) return;
@@ -230,28 +231,48 @@
     if (!parcours.open) return;
     fermerMenu();
     if (displaySettings) displaySettings.open = false;
+    if (layoutSettings) layoutSettings.open = false;
   });
   displaySettings?.addEventListener("toggle", () => {
     if (!displaySettings.open) return;
     fermerMenu();
     parcours.open = false;
+    if (layoutSettings) layoutSettings.open = false;
+  });
+  layoutSettings?.addEventListener("toggle", () => {
+    if (!layoutSettings.open) return;
+    fermerMenu();
+    parcours.open = false;
+    if (displaySettings) displaySettings.open = false;
   });
   menuToggle?.addEventListener("click", () => {
     if (menuToggle.getAttribute("aria-expanded") !== "true") return;
     parcours.open = false;
     if (displaySettings) displaySettings.open = false;
+    if (layoutSettings) layoutSettings.open = false;
   });
   headerCompactToggle?.addEventListener("click", () => {
     parcours.open = false;
+    if (displaySettings) displaySettings.open = false;
+    if (layoutSettings) layoutSettings.open = false;
   });
   document.addEventListener("click", (event) => {
     if (!parcours.contains(event.target)) parcours.open = false;
+    if (layoutSettings && !layoutSettings.contains(event.target)) layoutSettings.open = false;
   });
   document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape" || !parcours.open) return;
-    const focusInside = parcours.contains(document.activeElement);
-    parcours.open = false;
-    if (focusInside) declencheur.focus();
+    if (event.key !== "Escape") return;
+    if (parcours.open) {
+      const focusInside = parcours.contains(document.activeElement);
+      parcours.open = false;
+      if (focusInside) declencheur.focus();
+      return;
+    }
+    if (layoutSettings?.open) {
+      const focusInside = layoutSettings.contains(document.activeElement);
+      layoutSettings.open = false;
+      if (focusInside) layoutSettings.querySelector("summary")?.focus();
+    }
   });
 
   if (returnBar) {

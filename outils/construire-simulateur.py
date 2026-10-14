@@ -204,6 +204,71 @@ button.primaire {
   background: rgba(29,50,104,.98);
   box-shadow: 0 8px 22px rgba(0,0,0,.24);
 }
+.site-return-bar .site-layout-settings { position: static; flex: 0 0 auto; color: #fff; }
+.site-return-bar .site-layout-settings > summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem;
+  min-width: 44px;
+  min-height: 44px;
+  padding: clamp(6px,.45rem,9px) clamp(8px,.8rem,16px);
+  border: 1px solid rgba(255,255,255,.38);
+  border-radius: 9px;
+  background: #1d3268;
+  color: #fff;
+  font-size: clamp(12px,.84rem,20px);
+  font-weight: 700;
+  line-height: 1.25;
+  list-style: none;
+  cursor: pointer;
+}
+.site-return-bar .site-layout-settings > summary::-webkit-details-marker { display: none; }
+.site-return-bar .site-layout-settings > summary::marker { content: ""; }
+.site-return-bar .site-layout-settings > summary:hover,
+.site-return-bar .site-layout-settings[open] > summary { border-color: var(--ambre); background: #26375f; }
+.site-return-bar .site-layout-chevron { margin-left: .25rem; font-size: 1rem; line-height: 1; }
+.site-return-bar .site-layout-panel {
+  position: absolute;
+  z-index: 121;
+  top: calc(100% + .25rem);
+  right: 0;
+  width: min(28rem,calc(100vw - 1rem));
+  max-height: min(34rem,calc(100vh - 1.5rem));
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid #526384;
+  border-radius: 12px;
+  background: rgba(13,21,38,.99);
+  color: var(--texte);
+  box-shadow: 0 12px 32px rgba(0,0,0,.4);
+}
+.site-layout-title { margin-bottom: .55rem; color: var(--texte); font-weight: 750; }
+.site-layout-options { display: grid; gap: .45rem; margin: 0; padding: 0; border: 0; }
+.site-layout-options legend { margin-bottom: .45rem; color: var(--texte); font-size: .86rem; font-weight: 700; }
+.site-layout-choice {
+  display: grid;
+  grid-template-columns: 20px minmax(0,1fr);
+  align-items: start;
+  gap: .6rem;
+  min-height: 44px;
+  padding: .6rem .7rem;
+  border: 1px solid #526384;
+  border-radius: 9px;
+  background: #131c2f;
+  color: var(--texte);
+  cursor: pointer;
+}
+.site-layout-choice.is-selected { border-color: var(--accent); background: #1a2540; box-shadow: inset 0 0 0 1px var(--accent); }
+.site-layout-choice:focus-within { outline: 3px solid var(--accent); outline-offset: 2px; }
+.site-layout-choice input { width: 18px; height: 18px; margin: .16rem 0 0; accent-color: var(--accent); }
+.site-layout-choice-copy { display: block; min-width: 0; }
+.site-layout-choice-copy strong { display: block; color: var(--texte); font-size: .87rem; }
+.site-layout-choice-copy > span { display: block; margin-top: .1rem; color: var(--texte-dim); font-size: .75rem; line-height: 1.4; }
+.site-layout-status { min-height: 1.35em; margin: .6rem 0 0; color: var(--texte); font-size: .8rem; font-weight: 700; }
+.site-layout-note { margin: .35rem 0 0; color: var(--texte-dim); font-size: .72rem; line-height: 1.45; }
+.site-return-bar .site-layout-reset { width: 100%; min-height: 44px; margin-top: .65rem; }
+.site-return-bar .site-layout-panel :focus-visible { outline-color: var(--accent); }
 .site-return-bar a {
   display: inline-flex;
   flex: 0 1 auto;
@@ -353,6 +418,23 @@ html.contraste-renforce {
 }
 html.contraste-renforce a { text-decoration: underline; text-underline-offset: .18em; }
 html.contraste-renforce :focus-visible { outline-width: 4px; }
+html.contraste-renforce .site-layout-choice { border-color: var(--border); }
+html.contraste-renforce .site-layout-choice.is-selected { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+
+/* Les mêmes choix de présentation restent disponibles dans l’interface sombre. */
+html[data-layout="lecture"] #contenu-principal { max-width: 1160px; }
+html[data-layout="lecture"] #contenu-principal :is(.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte,.console-corps,.clair-lignes) {
+  grid-template-columns: minmax(0,1fr);
+}
+html[data-layout="panorama"] #contenu-principal { max-width: 1800px; }
+html[data-layout="panorama"] #contenu-principal .grille.metrics { grid-template-columns: repeat(auto-fit,minmax(210px,1fr)); }
+html[data-layout="panorama"] #contenu-principal .grille.scenarios { grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); }
+html[data-layout="panorama"] #contenu-principal .grille.domaines { grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); }
+html[data-layout="panorama"] #contenu-principal .leviers-grille,
+html[data-layout="panorama"] #contenu-principal .leviers-grille.compacte { grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); }
+html[data-layout="panorama"] #contenu-principal .console-corps,
+html[data-layout="panorama"] #contenu-principal .clair-lignes { grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); }
+
 /* Le texte secondaire ne descend pas sous 12 px à la taille de base. */
 .metric .libelle,
 .infobulle,
@@ -382,7 +464,9 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
     padding-inline: 10px;
   }
   .site-return-bar .site-journey-panel { width: calc(100vw - 1rem); padding: .45rem; }
-  .site-return-bar .site-journey-settings > summary { padding-inline: .55rem; font-size: clamp(12px,.78rem,18px); }
+  .site-return-bar .site-journey-settings > summary,
+  .site-return-bar .site-layout-settings > summary { padding-inline: .55rem; font-size: clamp(12px,.78rem,18px); }
+  .site-return-bar .site-layout-panel { width: calc(100vw - 1rem); max-height: calc(100vh - 1rem); padding: .55rem; }
   .site-return-bar .site-journey-inner { flex-wrap: wrap; gap: .1rem .2rem; }
   .site-return-bar .site-journey-controls { flex-wrap: wrap; gap: .15rem; }
   .site-return-bar .site-journey-button {
@@ -452,6 +536,9 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
   button,
   .site-return-bar a,
   .sim-display-button,
+  .site-return-bar .site-layout-settings > summary,
+  .site-return-bar .site-layout-choice,
+  .site-return-bar .site-layout-reset,
   .levier .bulle-bouton,
   .levier input[type=range] { min-height: 44px; }
   .site-return-bar .site-journey-button { min-width: 44px; }
@@ -479,6 +566,7 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
 }
 @media (prefers-reduced-transparency: reduce) {
   .site-return-bar { background: #1d3268; backdrop-filter: none; }
+  .site-return-bar .site-layout-panel { background: #0d1526; backdrop-filter: none; }
 }
 @media (forced-colors: active) {
   :root {
@@ -508,7 +596,7 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
   }
   :focus-visible { outline-color: Highlight !important; }
   body, header.entete, section.bloc, .carte, .domaine, .famille,
-  .ruban-veille, .site-return-bar, .site-journey-panel, .infobulle {
+  .ruban-veille, .site-return-bar, .site-journey-panel, .site-layout-panel, .site-layout-choice, .infobulle {
     background: Canvas !important;
     color: CanvasText !important;
     border-color: CanvasText !important;
@@ -521,7 +609,9 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
     color: CanvasText !important;
   }
   a { color: LinkText !important; }
-  button, .site-return-bar a, .site-return-bar .site-journey-settings > summary, .site-return-bar .site-journey-button, .sim-display-button {
+  button, .site-return-bar a, .site-return-bar .site-journey-settings > summary,
+  .site-return-bar .site-layout-settings > summary, .site-return-bar .site-layout-reset,
+  .site-return-bar .site-journey-button, .sim-display-button {
     border: 1px solid ButtonText !important;
     background: ButtonFace !important;
     color: ButtonText !important;
@@ -533,7 +623,7 @@ html.contraste-renforce :focus-visible { outline-width: 4px; }
 LIEN_RETOUR = (
     "\n"
     '<a class="sim-skip-link" href="#contenu-principal">Aller au simulateur</a>\n'
-    '<nav id="mrsc-retour-site" class="site-return-bar" aria-label="Navigation de retour, vie privée et réglages d’affichage">\n'
+    '<nav id="mrsc-retour-site" class="site-return-bar" aria-label="Navigation de retour, vie privée et réglages d’affichage et de présentation">\n'
     '  <a href="../index.html" data-site-home><span class="site-return-arrow" aria-hidden="true">←</span>Retour au site M.R.S.C</a>\n'
     '  <a href="../confidentialite.html">Vie privée et données</a>\n'
     '  <div id="mrsc-display-controls" class="sim-display-controls" role="group" aria-label="Réglages d’affichage du simulateur" hidden>\n'
@@ -543,28 +633,61 @@ LIEN_RETOUR = (
     '    <button class="sim-display-button" type="button" data-sim-contrast aria-pressed="false">Contraste +</button>\n'
     '    <button class="sim-display-button" type="button" data-sim-spacing aria-pressed="false">Interligne +</button>\n'
     '  </div>\n'
+    '  <details class="site-layout-settings" data-site-layout-settings hidden>\n'
+    '    <summary aria-controls="site-layout-settings-panel" title="Ouvrir ou fermer les choix de présentation">Présentation <span class="site-layout-chevron" aria-hidden="true">⌄</span></summary>\n'
+    '    <div class="site-layout-panel" id="site-layout-settings-panel" aria-label="Personnaliser l’expérience de lecture">\n'
+    '      <p class="site-layout-title"><strong>Personnaliser l’expérience</strong></p>\n'
+    '      <fieldset class="site-layout-options"><legend>Choisissez une mise en page</legend>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="equilibree" data-site-layout-option><span class="site-layout-choice-copy"><strong>Équilibrée</strong><span>La présentation de base, entre lecture et blocs visuels.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="lecture" data-site-layout-option><span class="site-layout-choice-copy"><strong>Lecture</strong><span>Une colonne plus étroite et des blocs empilés pour suivre les textes.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="panorama" data-site-layout-option><span class="site-layout-choice-copy"><strong>Panorama composite</strong><span>Une page plus large, avec un agencement de cartes en plusieurs colonnes.</span></span></label>\n'
+    '      </fieldset>\n'
+    '      <p class="site-layout-status" data-site-layout-status role="status" aria-live="polite" aria-atomic="true"></p>\n'
+    '      <p class="site-layout-note">Le changement est immédiat, sans rechargement. Si le stockage local est autorisé, votre choix est mémorisé sur cet appareil.</p>\n'
+    '      <button class="sim-display-button site-layout-reset" type="button" data-site-layout-reset>Réinitialiser la présentation</button>\n'
+    '    </div>\n'
+    '  </details>\n'
     '</nav>\n'
 )
 SCRIPT_AFFICHAGE = r"""
 <script>
 (() => {
   const root = document.documentElement;
+  const parentHasSiteHeader = (() => {
+    if (window.parent === window) return false;
+    try {
+      return Boolean(window.parent.document.querySelector(".site-header .nav-inner [data-menu-toggle]"));
+    } catch (error) {
+      return false;
+    }
+  })();
   const controls = document.getElementById("mrsc-display-controls");
   const decrease = document.querySelector("[data-sim-text-decrease]");
   const increase = document.querySelector("[data-sim-text-increase]");
   const levelOutput = document.querySelector("[data-sim-text-level]");
   const contrastButton = document.querySelector("[data-sim-contrast]");
   const spacingButton = document.querySelector("[data-sim-spacing]");
+  const layoutSettings = document.querySelector("[data-site-layout-settings]");
+  const layoutRadios = Array.from(document.querySelectorAll("[data-site-layout-option]"));
+  const layoutStatus = document.querySelector("[data-site-layout-status]");
+  const layoutReset = document.querySelector("[data-site-layout-reset]");
   const keys = {
     text: "mrsc-texte-niveau",
     contrast: "mrsc-contraste-renforce",
     spacing: "mrsc-espacement-renforce",
+    layout: "mrsc-mise-en-page",
   };
   const textLevels = [50, 75, 100, 125, 150];
   const legacyTextLevels = [100, 125, 150];
+  const layoutLabels = new Map([
+    ["equilibree", "Équilibrée"],
+    ["lecture", "Lecture"],
+    ["panorama", "Panorama composite"],
+  ]);
   let level = 100;
   let contrast = false;
   let spacing = false;
+  let layout = "equilibree";
 
   const read = (key) => {
     try { return window.localStorage.getItem(key); }
@@ -610,6 +733,15 @@ SCRIPT_AFFICHAGE = r"""
         ? "Désactiver l’espacement renforcé" : "Activer l’espacement renforcé");
     }
   };
+  const applyLayout = (value) => {
+    layout = layoutLabels.has(value) ? value : "equilibree";
+    root.dataset.layout = layout;
+    layoutRadios.forEach((radio) => {
+      radio.checked = radio.value === layout;
+      radio.closest("label")?.classList.toggle("is-selected", radio.checked);
+    });
+    if (layoutStatus) layoutStatus.textContent = `Présentation « ${layoutLabels.get(layout)} » appliquée.`;
+  };
   const load = () => {
     const savedLevel = read(keys.text);
     const legacy = read("mrsc-texte-agrandi");
@@ -619,10 +751,12 @@ SCRIPT_AFFICHAGE = r"""
     applyLevel(parsed ?? 100);
     applyContrast(read(keys.contrast) === "oui");
     applySpacing(read(keys.spacing) === "oui");
+    applyLayout(read(keys.layout));
   };
 
   load();
-  if (controls) controls.hidden = false;
+  if (controls) controls.hidden = parentHasSiteHeader;
+  if (layoutSettings) layoutSettings.hidden = parentHasSiteHeader;
   decrease?.addEventListener("click", () => {
     const index = textLevels.indexOf(level);
     applyLevel(textLevels[Math.max(0, index - 1)]);
@@ -640,6 +774,26 @@ SCRIPT_AFFICHAGE = r"""
   spacingButton?.addEventListener("click", () => {
     applySpacing(!spacing);
     save(keys.spacing, spacing ? "oui" : "non");
+  });
+  layoutRadios.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      if (!radio.checked) return;
+      applyLayout(radio.value);
+      save(keys.layout, layout);
+    });
+  });
+  layoutReset?.addEventListener("click", () => {
+    applyLayout("equilibree");
+    save(keys.layout, layout);
+  });
+  layoutSettings?.addEventListener("toggle", () => {
+    if (layoutSettings.open) {
+      const journeySettings = document.querySelector("[data-site-journey]");
+      if (journeySettings) journeySettings.open = false;
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (layoutSettings && !layoutSettings.contains(event.target)) layoutSettings.open = false;
   });
   window.addEventListener("storage", (event) => {
     if (event.key === null || Object.values(keys).includes(event.key)
@@ -792,3 +946,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+it(main())

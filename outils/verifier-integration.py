@@ -306,8 +306,12 @@ def fichiers_du_site() -> None:
     for chemin in pages_avec_entete:
         contenu = chemin.read_text(encoding="utf-8")
         positions = [contenu.find(attribut) for attribut in controles_entete]
+        script_site_ref = os.path.relpath(RACINE / "assets" / "js" / "site.js", chemin.parent).replace(os.sep, "/")
+        feuille_site_ref = os.path.relpath(RACINE / "assets" / "css" / "site.css", chemin.parent).replace(os.sep, "/")
         entetes_adaptatives = entetes_adaptatives and all(position >= 0 for position in positions)
         entetes_adaptatives = entetes_adaptatives and positions[0] < positions[1] < positions[2]
+        entetes_adaptatives = entetes_adaptatives and f'<script src="{script_site_ref}" defer></script>' in contenu
+        entetes_adaptatives = entetes_adaptatives and f'<link rel="stylesheet" href="{feuille_site_ref}">' in contenu
         entetes_adaptatives = entetes_adaptatives and all(
             marqueur in contenu
             for marqueur in (
@@ -378,7 +382,7 @@ def fichiers_du_site() -> None:
         ),
     )
     verifier(
-        "La barre Menu/Réduire/Parcours/Affichage forme un groupe centré et cohérent",
+        "La barre Menu/Réduire/Parcours/Affichage/Présentation forme un groupe centré et cohérent",
         ".nav-inner { justify-content: center; gap: clamp(6px,.5rem,10px); }" in styles
         and all(
             marqueur in styles
@@ -387,13 +391,58 @@ def fichiers_du_site() -> None:
                 ".header-compact-toggle {",
                 ".site-journey-settings > summary {",
                 ".display-settings > summary {",
+                ".layout-settings > summary {",
                 "padding: clamp(6px,.4rem,8px) clamp(10px,.65rem,14px)",
                 "font-size: clamp(13px,.875rem,18px)",
                 "background: rgba(255,255,255,.055)",
                 "border-color: var(--gold)",
             )
         )
-        and styles.count("font-size: clamp(13px,.875rem,18px)") >= 4,
+        and styles.count("font-size: clamp(13px,.875rem,18px)") >= 5,
+    )
+    verifier(
+        "La personnalisation de présentation offre trois choix CSS immédiats sur le site",
+        all(
+            marqueur in script_site
+            for marqueur in (
+                'layoutSettings.className = "layout-settings"',
+                'layoutSettings.dataset.siteLayoutSettings = ""',
+                'layoutSettings.append(summary, panel)',
+                'settings.insertAdjacentElement("afterend", layoutSettings)',
+                'root.dataset.layout = selected.value',
+                'const layoutPreferenceKey = "mrsc-mise-en-page"',
+                'savePreference(layoutPreferenceKey, input.value)',
+                'savePreference(layoutPreferenceKey, "equilibree")',
+                'layoutSettings.querySelector("summary")?.focus()',
+                'layoutSettings.contains(event.target)',
+                'aria-live',
+            )
+        )
+        and all(option in script_site for option in ('"equilibree"', '"lecture"', '"panorama"'))
+        and all(label in script_site for label in ('label: "Équilibrée"', 'label: "Lecture"', 'label: "Panorama composite"'))
+        and all(
+            marqueur in script_site
+            for marqueur in (
+                '[data-simulateur-apercu] iframe',
+                'frame.contentWindow.location.origin !== window.location.origin',
+                'simulatorRoot.classList.toggle(classe, root.classList.contains(classe))',
+                'simulatorRoot.dataset.layout = root.dataset.layout || "equilibree"',
+                'frame.addEventListener("load", synchroniserSimulateurs)',
+            )
+        )
+        and all(
+            marqueur in styles
+            for marqueur in (
+                ".layout-settings > summary {",
+                ".layout-settings-panel {",
+                ".layout-choice {",
+                'html[data-layout="lecture"] { --content: 940px; }',
+                'html[data-layout="panorama"] { --content: 1480px; }',
+                '@media (forced-colors: active)',
+            )
+        )
+        and 'layoutSettings?.addEventListener("toggle"' in parcours
+        and 'layoutSettings.querySelector("summary")?.focus()' in parcours,
     )
     verifier(
         "L’en-tête se compacte automatiquement selon l’espace et garde un contrôle réversible",
@@ -444,11 +493,14 @@ def fichiers_du_site() -> None:
     )
     verifier(
         "Le panneau Parcours se replie au clavier, à l’extérieur et à l’ouverture des autres menus",
-        'if (event.key !== "Escape" || !parcours.open) return;' in parcours
+        'if (event.key !== "Escape") return;' in parcours
+        and 'if (parcours.open) {' in parcours
         and 'if (focusInside) declencheur.focus();' in parcours
+        and 'if (focusInside) layoutSettings.querySelector("summary")?.focus();' in parcours
         and 'if (!parcours.contains(event.target)) parcours.open = false;' in parcours
         and 'parcours.addEventListener("toggle"' in parcours
         and 'displaySettings?.addEventListener("toggle"' in parcours
+        and 'layoutSettings?.addEventListener("toggle"' in parcours
         and 'menuToggle?.addEventListener("click"' in parcours,
     )
     verifier(
@@ -750,6 +802,35 @@ def fichiers_du_site() -> None:
                     'mrsc-texte-niveau',
                 )
             ),
+        )
+        verifier(
+            "Le simulateur autonome propose les trois mises en page et partage le choix local du site",
+            all(
+                marqueur in simulateur_html
+                for marqueur in (
+                    'class="site-layout-settings" data-site-layout-settings hidden',
+                    'aria-controls="site-layout-settings-panel"',
+                    'value="equilibree" data-site-layout-option',
+                    'value="lecture" data-site-layout-option',
+                    'value="panorama" data-site-layout-option',
+                    '<strong>Panorama composite</strong><span>Une page plus large, avec un agencement de cartes en plusieurs colonnes.</span>',
+                    'data-site-layout-status role="status" aria-live="polite"',
+                    'data-site-layout-reset',
+                    'layout: "mrsc-mise-en-page"',
+                    'applyLayout(read(keys.layout))',
+                    'root.dataset.layout = layout',
+                    'html[data-layout="lecture"] #contenu-principal { max-width: 1160px; }',
+                    'html[data-layout="panorama"] #contenu-principal { max-width: 1800px; }',
+                    '.site-return-bar .site-layout-panel {',
+                    '.site-return-bar .site-layout-settings > summary {',
+                    '@media (forced-colors: active)',
+                )
+            )
+            and 'layoutRadios.forEach((radio)' in simulateur_html
+            and 'window.parent.document.querySelector(".site-header .nav-inner [data-menu-toggle]")' in simulateur_html
+            and 'controls.hidden = parentHasSiteHeader' in simulateur_html
+            and 'layoutSettings.hidden = parentHasSiteHeader' in simulateur_html
+            and 'layoutSettings?.addEventListener("toggle"' in simulateur_html,
         )
         verifier(
             "Le simulateur autonome reprend les cinq paliers et leur reflow typographique",
