@@ -29,7 +29,21 @@ jobs:
         run: python3 -m py_compile simulateur/*.py api/*.py outils/*.py
 
       - name: Vérifier les fiches d’apprentissage générées
-        run: python3 outils/construire-apprentissages.py --verifier
+        shell: bash
+        run: |
+          sortie="$RUNNER_TEMP/verification-apprentissages.log"
+          if python3 outils/construire-apprentissages.py --verifier >"$sortie" 2>&1; then
+            cat "$sortie"
+          else
+            statut=$?
+            cat "$sortie"
+            tail -n 12 "$sortie" | while IFS= read -r ligne; do
+              ligne="${ligne//'%'/'%25'}"
+              ligne="${ligne//$'\r'/'%0D'}"
+              printf '::error title=Vérification des fiches::%s\n' "$ligne"
+            done
+            exit "$statut"
+          fi
 
       - name: Vérifier la page générée du simulateur
         run: python3 outils/construire-simulateur.py --verifier

@@ -33,7 +33,21 @@ jobs:
         run: python3 -m py_compile simulateur/*.py api/*.py outils/*.py
 
       - name: Validate generated learning pages
-        run: python3 outils/construire-apprentissages.py --verifier
+        shell: bash
+        run: |
+          output="$RUNNER_TEMP/learning-pages-verification.log"
+          if python3 outils/construire-apprentissages.py --verifier >"$output" 2>&1; then
+            cat "$output"
+          else
+            status=$?
+            cat "$output"
+            tail -n 12 "$output" | while IFS= read -r line; do
+              line="${line//'%'/'%25'}"
+              line="${line//$'\r'/'%0D'}"
+              printf '::error title=Learning-pages verification::%s\n' "$line"
+            done
+            exit "$status"
+          fi
 
       - name: Validate the generated simulator page
         run: python3 outils/construire-simulateur.py --verifier
