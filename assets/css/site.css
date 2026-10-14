@@ -3255,6 +3255,10 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-hero-note { margin: 1rem 0 0; padding-top: .85rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .84rem; }
 .home-statut-card .eyebrow { color: var(--green); }
 .home-statut-card .button { margin-top: .6rem; }
+.home-association-intro { max-width: 78ch; margin-inline: auto; }
+.home-association-intro .hero-actions { margin-block: 1rem .65rem; }
+.home-association-themes-label { margin: clamp(2rem,4vw,3rem) 0 .85rem; color: var(--green); }
+.home-association-themes { margin-top: .85rem; }
 .home-action-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
 .home-action-card {
   --home-card-accent: var(--blue);

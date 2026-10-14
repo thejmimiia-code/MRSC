@@ -599,6 +599,23 @@ def fichiers_du_site() -> None:
         ),
     )
     verifier(
+        "L’accueil relie la présentation de l’association aux statuts et aux trois repères de réflexion",
+        all(
+            terme in accueil
+            for terme in (
+                "Nos expériences ont quelque chose à apporter.",
+                "a pour vocation de préserver, défendre et représenter les intérêts",
+                "Ses statuts placent au cœur de cette démarche le lien social",
+                "Partir de ce que nous vivons",
+                "Mettre les savoirs en commun",
+                "Rendre les propositions compréhensibles",
+                'href="assets/documents/statuts-2020.pdf"',
+                'href="documents.html">Découvrir l’association</a>',
+                'href="#actions">Explorer les ressources</a>',
+            )
+        ),
+    )
+    verifier(
         "L’accueil présente la recherche sur ÉVA comme un travail en cours, sans confondre objectifs et fonctions",
         all(
             terme in accueil

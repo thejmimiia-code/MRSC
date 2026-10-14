@@ -148,8 +148,8 @@ phase = "relecture"
 etat = "a-valider"
 domaines = ["methodes-communication", "citoyennete-medias", "numerique-ia"]
 question = "Les nombres, statuts éditoriaux, liens de sources et indications d’hébergement concordent-ils entre pages publiques, générateurs et sources de vérité, sans transformer un contrôle technique en validation humaine?"
-preuves = ["docs/rd/rapport-coherence-editoriale-2026-10-13.md", "docs/rd-plan-global-consolidation.md", "docs/rd-coherence-visuelle-editoriale.md", "outils/verifier-integration.py", "outils/verifier-site-statique.py"]
-prochaine_action = "Faire relire humainement les formulations modifiées; traiter le domaine dans l'initiative raccordement-domaine-www; examiner le patch de sécurité avant toute mise à jour du moteur embarqué."
+preuves = ["docs/rd/rapport-coherence-editoriale-2026-10-13.md", "docs/rd-plan-global-consolidation.md", "docs/rd-coherence-visuelle-editoriale.md", "index.html", "outils/verifier-integration.py", "outils/verifier-site-statique.py"]
+prochaine_action = "Faire relire humainement la présentation de l'association, les trois repères d'accueil et les formulations modifiées; traiter le domaine dans l'initiative raccordement-domaine-www; examiner le patch de sécurité avant toute mise à jour du moteur embarqué."
 criteres_sortie = ["Les chiffres visibles correspondent aux registres et leur portée est expliquée.", "Les copies locales sont distinguées des sources externes.", "Les états de relecture sont explicites et aucune validation non documentée n’est revendiquée.", "Les changements d’hébergement et de moteur sont précédés de preuves techniques et d’une revue humaine adaptées."]
 skills = ["revue-contradictoire", "strategie-tests", "recherche-sources", "evaluation-maintenance"]
 
