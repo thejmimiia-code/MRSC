@@ -18,6 +18,7 @@ ou l’actualité d’une source externe.
 from __future__ import annotations
 
 import argparse
+import difflib
 import html
 import json
 import re
@@ -1105,15 +1106,33 @@ def generer(fiches: list[dict], domains: list[dict], plan: dict) -> dict[Path, s
 
 def appliquer(produits: dict[Path, str], verifier: bool) -> None:
     changements = []
+    differences: list[str] = []
     for chemin, texte in produits.items():
         if verifier:
-            if not chemin.is_file() or chemin.read_text(encoding="utf-8") != texte:
+            if not chemin.is_file():
                 changements.append(str(chemin.relative_to(ROOT)))
+            else:
+                actuel = chemin.read_text(encoding="utf-8")
+                if actuel != texte:
+                    relatif = str(chemin.relative_to(ROOT))
+                    changements.append(relatif)
+                    if len(differences) < 12:
+                        extrait = list(difflib.unified_diff(
+                            actuel.splitlines(),
+                            texte.splitlines(),
+                            fromfile=f"présent : {relatif}",
+                            tofile=f"généré : {relatif}",
+                            lineterm="",
+                        ))
+                        differences.extend(extrait[: 12 - len(differences)])
         else:
             chemin.parent.mkdir(parents=True, exist_ok=True)
             chemin.write_text(texte, encoding="utf-8")
     if verifier and changements:
-        ERREURS.append("sorties générées absentes ou modifiées : " + ", ".join(changements))
+        message = "sorties générées absentes ou modifiées : " + ", ".join(changements)
+        if differences:
+            message += "\nDifférences partielles :\n" + "\n".join(differences)
+        ERREURS.append(message)
     elif not verifier:
         print(f"{len(produits)} fichier(s) généré(s) ou actualisé(s).")
 
