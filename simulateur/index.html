@@ -594,6 +594,8 @@ button.primaire {
 .site-layout-note { margin: .35rem 0 0; color: var(--texte-dim); font-size: .72rem; line-height: 1.45; }
 .site-return-bar .site-layout-reset { width: 100%; min-height: 44px; margin-top: .65rem; }
 .site-return-bar .site-layout-panel :focus-visible { outline-color: var(--accent); }
+.site-return-bar .site-journey-settings:not([open]) > .site-journey-panel,
+.site-return-bar .site-layout-settings:not([open]) > .site-layout-panel { display: none !important; }
 .site-return-bar a {
   display: inline-flex;
   flex: 0 1 auto;
@@ -716,7 +718,7 @@ html:is(.texte-tres-reduit,.texte-reduit) :is(button,input,select,textarea) { fo
 html:is(.texte-agrandi,.texte-tres-agrandi) :is(button,input,select,textarea) { font-size: clamp(12px,1em,20px); }
 html:is(.texte-tres-reduit,.texte-reduit,.texte-agrandi,.texte-tres-agrandi) .sim-display-level { font-size: clamp(12px,.8rem,18px); }
 html.espacement-renforce body { line-height: 1.8; }
-html.espacement-renforce :is(h1, h2, h3, p, li, label, button, th, td, .aide, .nom, .desc, .libelle, .valeur, .ref, .pastille, .console-verdict, .console-titre) {
+html.espacement-renforce :is(h1, h2, h3, p, li, label, button, th, td, .aide, .nom, .desc, .libelle, .valeur, .ref, .pastille, .console-verdict, .console-titre, .source, .droite, .puce-effect) {
   line-height: 1.65;
   letter-spacing: .12em;
   word-spacing: .16em;
@@ -725,7 +727,7 @@ html.espacement-renforce :is(h1, h2, h3, p, li, label, button, th, td, .aide, .n
 html.espacement-renforce th,
 html.espacement-renforce td { white-space: normal; }
 html.espacement-renforce p { margin-block-end: 2em; }
-html.espacement-renforce :is(.pastille, .ruban-titre, .ruban-pop, .console-verdict, .levier .valeur, .bulle-bouton) {
+html.espacement-renforce :is(.pastille, .ruban-titre, .ruban-pop, .console-verdict, .levier .valeur, .bulle-bouton, .source, .droite, .puce-effect) {
   white-space: normal;
   overflow-wrap: anywhere;
 }
@@ -758,7 +760,7 @@ html[data-layout="panorama"] #contenu-principal .grille.domaines { grid-template
 html[data-layout="panorama"] #contenu-principal .leviers-grille,
 html[data-layout="panorama"] #contenu-principal .leviers-grille.compacte { grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); }
 html[data-layout="panorama"] #contenu-principal .console-corps,
-html[data-layout="panorama"] #contenu-principal .clair-lignes { grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); }
+html[data-layout="panorama"] #contenu-principal .clair-lignes { grid-template-columns: repeat(auto-fit,minmax(min(300px,100%),1fr)); }
 
 /* Le texte secondaire ne descend pas sous 12 px à la taille de base. */
 .metric .libelle,
@@ -788,10 +790,30 @@ html[data-layout="panorama"] #contenu-principal .clair-lignes { grid-template-co
     margin: -10px -10px 10px;
     padding-inline: 10px;
   }
-  .site-return-bar .site-journey-panel { width: calc(100vw - 1rem); padding: .45rem; }
+  .site-return-bar .site-journey-panel {
+    position: fixed;
+    top: .5rem;
+    right: .5rem;
+    width: calc(100vw - 1rem);
+    max-height: calc(100vh - 1rem);
+    padding: .45rem;
+  }
   .site-return-bar .site-journey-settings > summary,
   .site-return-bar .site-layout-settings > summary { padding-inline: .55rem; font-size: clamp(12px,.78rem,18px); }
-  .site-return-bar .site-layout-panel { width: calc(100vw - 1rem); max-height: calc(100vh - 1rem); padding: .55rem; }
+  /* La barre sticky utilise backdrop-filter, qui forme un bloc contenant pour
+     les descendants fixes : fixer explicitement le panneau au coin du viewport
+     évite qu’il reste sous la très haute barre quand le texte est agrandi. */
+  .site-return-bar .site-layout-panel {
+    position: fixed;
+    top: .5rem;
+    right: .5rem;
+    width: calc(100vw - 1rem);
+    max-height: calc(100vh - 1rem);
+    padding: .55rem;
+  }
+  .puce-effect,
+  .message-seuil .source,
+  .ligne-marge .droite { white-space: normal; overflow-wrap: anywhere; }
   .site-return-bar .site-journey-inner { flex-wrap: wrap; gap: .1rem .2rem; }
   .site-return-bar .site-journey-controls { flex-wrap: wrap; gap: .15rem; }
   .site-return-bar .site-journey-button {
