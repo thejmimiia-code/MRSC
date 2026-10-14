@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-14 — Présentation de l’association et trois repères de réflexion sur l’accueil
+
+- **Initiative :** `coherence-textes-publics`.
+- **Signal et décision :** l’utilisateur a retrouvé et fourni une proposition de rédaction issue d’Arena, absente du dépôt. Il a choisi d’intégrer la présentation complète de l’association et les trois rubriques courtes, plutôt qu’une seule phrase de remplacement.
+- **Vérification de source :** extraction du PDF local `assets/documents/statuts-2020.pdf` : l’article 2 expose l’objet, le lien social et la mise en avant des compétences, expériences et savoir-faire ; l’article 3 demande le partage des savoirs et précise les réalités territoriales ; les articles 11.8 et 11.9 parlent de synthèses en mots courants, de compréhension et des étapes du travail participatif. Le lien PDF reste visible.
+- **Changements :** `index.html` remplace le résumé de la mission et la carte latérale par une présentation à mots simples, deux accès aux ressources, puis trois cartes « Partir de ce que nous vivons », « Mettre les savoirs en commun » et « Rendre les propositions compréhensibles ». `assets/css/site.css` borne la largeur du texte et réutilise les cartes existantes, qui se replient aux seuils mobiles. `outils/verifier-integration.py` contrôle la présence de la présentation, des trois rubriques et des liens.
+- **Contrôles exécutés :** `python3 outils/verifier-site-statique.py` (83 pages), `python3 outils/verifier-integration.py` (nouveau contrôle du texte d’accueil et 16 routes API), `python3 outils/verifier-rd-continue.py` et `git diff --check` — réussis.
+- **Limites :** c’est une rédaction du site fondée sur les statuts, pas la preuve d’une nouvelle décision collective de l’association. L’utilisateur a choisi la proposition ; aucune relecture indépendante par l’association, inspection navigateur ou validation par lecteur d’écran n’est revendiquée.
+- **Prochaine action :** faire relire les formulations par l’association avant de les présenter comme une position collective ; vérifier le rendu de la page d’accueil sur téléphone et au clavier.
+
 ## 2026-10-14 — Orientation des flèches des panneaux Affichage et Présentation
 
 - **Initiative :** `optimisation-du-site`.
