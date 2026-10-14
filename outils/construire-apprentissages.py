@@ -18,6 +18,7 @@ ou l’actualité d’une source externe.
 from __future__ import annotations
 
 import argparse
+import difflib
 import html
 import json
 import re
@@ -895,6 +896,11 @@ def render_rapport(fiches: list[dict], domains: list[dict]) -> str:
 
 def valider_plan_1000(plan: dict, fiches: list[dict], domains: list[dict]) -> None:
     erreurs: list[str] = []
+    date_plan = plan.get("date_plan")
+    if type(date_plan) is not date:
+        erreurs.append("date_plan doit être une date éditoriale explicite dans le TOML")
+    elif date_plan > date.today():
+        erreurs.append("date_plan ne peut pas se trouver dans le futur")
     objectif = plan.get("objectif_fiches")
     if not isinstance(objectif, int) or isinstance(objectif, bool) or objectif < 1:
         erreurs.append("objectif_fiches doit être un entier positif")
@@ -988,6 +994,8 @@ def valider_plan_1000(plan: dict, fiches: list[dict], domains: list[dict]) -> No
 
 def render_plan_1000(plan: dict, fiches: list[dict], domains: list[dict]) -> str:
     objectif = plan["objectif_fiches"]
+    date_plan = plan.get("date_plan")
+    date_plan_libelle = date_plan.isoformat() if type(date_plan) is date else "date à définir"
     objectif_libelle = f"{objectif:,}".replace(",", " ")
     total = len(fiches)
     prototypes = sum(bool(fiche.get("statut_editorial")) for fiche in fiches)
@@ -1002,7 +1010,7 @@ def render_plan_1000(plan: dict, fiches: list[dict], domains: list[dict]) -> str
     lignes = [
         f"# Cap éditorial : viser {objectif_libelle} fiches d’auto-apprentissage",
         "",
-        f"**Plan de travail au {date.today().isoformat()} — cible, pas catalogue disponible.**",
+        f"**Plan de travail au {date_plan_libelle} — cible, pas catalogue disponible.**",
         "",
         f"L’ambition est de construire progressivement {objectif_libelle} fiches distinctes, autonomes et valorisantes. Le catalogue de travail compte actuellement {total} entrées : {sans_marqueur} entrées du corpus initial sans marqueur de prototype et {prototypes_libelle} explicitement à relire. L’écart arithmétique à la cible est de {ecart_brut} entrées ; le nombre de fiches ayant franchi tous les contrôles de publication n’est pas encore suivi.",
         "",
@@ -1098,15 +1106,33 @@ def generer(fiches: list[dict], domains: list[dict], plan: dict) -> dict[Path, s
 
 def appliquer(produits: dict[Path, str], verifier: bool) -> None:
     changements = []
+    differences: list[str] = []
     for chemin, texte in produits.items():
         if verifier:
-            if not chemin.is_file() or chemin.read_text(encoding="utf-8") != texte:
+            if not chemin.is_file():
                 changements.append(str(chemin.relative_to(ROOT)))
+            else:
+                actuel = chemin.read_text(encoding="utf-8")
+                if actuel != texte:
+                    relatif = str(chemin.relative_to(ROOT))
+                    changements.append(relatif)
+                    if len(differences) < 12:
+                        extrait = list(difflib.unified_diff(
+                            actuel.splitlines(),
+                            texte.splitlines(),
+                            fromfile=f"présent : {relatif}",
+                            tofile=f"généré : {relatif}",
+                            lineterm="",
+                        ))
+                        differences.extend(extrait[: 12 - len(differences)])
         else:
             chemin.parent.mkdir(parents=True, exist_ok=True)
             chemin.write_text(texte, encoding="utf-8")
     if verifier and changements:
-        ERREURS.append("sorties générées absentes ou modifiées : " + ", ".join(changements))
+        message = "sorties générées absentes ou modifiées : " + ", ".join(changements)
+        if differences:
+            message += "\nDifférences partielles :\n" + "\n".join(differences)
+        ERREURS.append(message)
     elif not verifier:
         print(f"{len(produits)} fichier(s) généré(s) ou actualisé(s).")
 

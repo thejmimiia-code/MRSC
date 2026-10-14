@@ -105,6 +105,21 @@ def test_workflows_ci() -> None:
         ),
         "les actions GitHub sont épinglées sur des révisions immuables",
     )
+    workflows = sorted(repertoire.glob("*.yml"))
+    runners_par_fichier = {
+        chemin: [
+            ligne.split(":", 1)[1].strip()
+            for ligne in chemin.read_text(encoding="utf-8").splitlines()
+            if ligne.strip().startswith("runs-on:")
+        ]
+        for chemin in workflows
+    }
+    verifier(
+        bool(workflows)
+        and all(runners_par_fichier.values())
+        and all(runner == "ubuntu-24.04" for runners in runners_par_fichier.values() for runner in runners),
+        "les workflows pin un runner Ubuntu 24.04 au lieu de suivre la migration ubuntu-latest",
+    )
     ci = (repertoire / "verification.yml").read_text(encoding="utf-8")
     verifier(
         "pull_request:" in ci

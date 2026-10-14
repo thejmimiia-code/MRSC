@@ -2,6 +2,8 @@
 # Ce fichier planifie des quotas, pas 1 000 fiches rédigées ni une couverture exhaustive.
 # Le domaine dédié à l’informatique redistribue les cibles; les quotas restent des hypothèses.
 version = 1
+# Date éditoriale stable de cette version du plan; l’avancer seulement lors d’une révision explicite.
+date_plan = 2026-10-14
 objectif_fiches = 1000
 
 [[domaine]]
