@@ -149,6 +149,19 @@ etat = "a-valider"
 domaines = ["methodes-communication", "citoyennete-medias", "numerique-ia"]
 question = "Les nombres, statuts éditoriaux, liens de sources et indications d’hébergement concordent-ils entre pages publiques, générateurs et sources de vérité, sans transformer un contrôle technique en validation humaine?"
 preuves = ["docs/rd/rapport-coherence-editoriale-2026-10-13.md", "docs/rd-plan-global-consolidation.md", "docs/rd-coherence-visuelle-editoriale.md", "outils/verifier-integration.py", "outils/verifier-site-statique.py"]
-prochaine_action = "Faire relire humainement les formulations modifiées; confirmer séparément le DNS, le CNAME et le HTTPS de www.mrsc.fr avant de changer les canoniques; examiner le patch de sécurité avant toute mise à jour du moteur embarqué."
+prochaine_action = "Faire relire humainement les formulations modifiées; traiter le domaine dans l'initiative raccordement-domaine-www; examiner le patch de sécurité avant toute mise à jour du moteur embarqué."
 criteres_sortie = ["Les chiffres visibles correspondent aux registres et leur portée est expliquée.", "Les copies locales sont distinguées des sources externes.", "Les états de relecture sont explicites et aucune validation non documentée n’est revendiquée.", "Les changements d’hébergement et de moteur sont précédés de preuves techniques et d’une revue humaine adaptées."]
 skills = ["revue-contradictoire", "strategie-tests", "recherche-sources", "evaluation-maintenance"]
+
+[[initiative]]
+id = "raccordement-domaine-www"
+titre = "Raccorder www.mrsc.fr à GitHub Pages sans perdre le domaine visible"
+priorite = "P1"
+phase = "mise-en-place"
+etat = "bloquee"
+domaines = ["numerique-ia"]
+question = "Comment publier le site sur www.mrsc.fr, avec HTTPS et des URL canoniques cohérentes, sans redirection vers github.io?"
+preuves = ["README.md", "docs/rd-plan-global-consolidation.md", "docs/rd/journal.md", ".github/workflows/deploy-pages.yml", "outils/verifier-site-statique.py"]
+prochaine_action = "L’administrateur de la zone DNS doit remplacer l’enregistrement actuel de www (résolution IPv4 observée : 213.186.33.50) par un CNAME vers thejmimiia-code.github.io. Ne pas configurer le domaine dans Pages ni changer les canoniques avant la propagation et sa vérification."
+criteres_sortie = ["www.mrsc.fr résout par CNAME vers thejmimiia-code.github.io sans A/AAAA contradictoire.", "GitHub Pages déclare www.mrsc.fr comme CNAME personnalisé et confirme un certificat HTTPS actif.", "Canoniques, og:url, JSON-LD, sitemap et attribution utilisent www.mrsc.fr.", "Un contrôle navigateur confirme que l’adresse visible reste www.mrsc.fr et ne renvoie pas vers github.io."]
+skills = ["integration-securite", "strategie-tests", "documentation-technique"]

@@ -895,6 +895,11 @@ def render_rapport(fiches: list[dict], domains: list[dict]) -> str:
 
 def valider_plan_1000(plan: dict, fiches: list[dict], domains: list[dict]) -> None:
     erreurs: list[str] = []
+    date_plan = plan.get("date_plan")
+    if type(date_plan) is not date:
+        erreurs.append("date_plan doit être une date éditoriale explicite dans le TOML")
+    elif date_plan > date.today():
+        erreurs.append("date_plan ne peut pas se trouver dans le futur")
     objectif = plan.get("objectif_fiches")
     if not isinstance(objectif, int) or isinstance(objectif, bool) or objectif < 1:
         erreurs.append("objectif_fiches doit être un entier positif")
@@ -988,6 +993,8 @@ def valider_plan_1000(plan: dict, fiches: list[dict], domains: list[dict]) -> No
 
 def render_plan_1000(plan: dict, fiches: list[dict], domains: list[dict]) -> str:
     objectif = plan["objectif_fiches"]
+    date_plan = plan.get("date_plan")
+    date_plan_libelle = date_plan.isoformat() if type(date_plan) is date else "date à définir"
     objectif_libelle = f"{objectif:,}".replace(",", " ")
     total = len(fiches)
     prototypes = sum(bool(fiche.get("statut_editorial")) for fiche in fiches)
@@ -1002,7 +1009,7 @@ def render_plan_1000(plan: dict, fiches: list[dict], domains: list[dict]) -> str
     lignes = [
         f"# Cap éditorial : viser {objectif_libelle} fiches d’auto-apprentissage",
         "",
-        f"**Plan de travail au {date.today().isoformat()} — cible, pas catalogue disponible.**",
+        f"**Plan de travail au {date_plan_libelle} — cible, pas catalogue disponible.**",
         "",
         f"L’ambition est de construire progressivement {objectif_libelle} fiches distinctes, autonomes et valorisantes. Le catalogue de travail compte actuellement {total} entrées : {sans_marqueur} entrées du corpus initial sans marqueur de prototype et {prototypes_libelle} explicitement à relire. L’écart arithmétique à la cible est de {ecart_brut} entrées ; le nombre de fiches ayant franchi tous les contrôles de publication n’est pas encore suivi.",
         "",
