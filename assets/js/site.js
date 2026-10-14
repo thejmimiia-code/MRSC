@@ -316,6 +316,9 @@
           "(max-width: 760px), (orientation: landscape) and (max-height: 560px) and (max-width: 920px)"
         )
         : null;
+      const narrowViewport = typeof window.matchMedia === "function"
+        ? window.matchMedia("(max-width: 520px)")
+        : null;
       const headerDetails = [
         header.querySelector("#site-header-status"),
         header.querySelector("#site-header-identity"),
@@ -358,6 +361,20 @@
         } else {
           compactViewport.addListener?.(onViewportModeChange);
         }
+      }
+
+      // Sous 520 px, chaque réduction de la fenêtre réapplique le format
+      // compact, même si ce seuil était déjà franchi quand l’en-tête a été
+      // agrandi manuellement. Le bouton reste utilisable après le redimensionnement.
+      if (narrowViewport) {
+        let previousViewportWidth = window.innerWidth;
+        window.addEventListener("resize", () => {
+          const widthIsShrinking = window.innerWidth < previousViewportWidth;
+          previousViewportWidth = window.innerWidth;
+          if (!widthIsShrinking || !narrowViewport.matches) return;
+          closeMenu();
+          setHeaderCompact(true);
+        });
       }
     }
 

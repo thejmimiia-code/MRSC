@@ -306,6 +306,93 @@ async function main() {
     }
   });
 
+  await executer('Mode compact réactivé au rétrécissement et bouton Agrandir lisible en fenêtre étroite', async () => {
+    const page = await creerPage({ width: 720, height: 800 });
+    try {
+      await ouvrirPageSite(page, 'index.html');
+      const bouton = '[data-header-compact-toggle]';
+      assert.equal(
+        await page.$eval('.site-header', (element) => element.classList.contains('is-compact')),
+        true,
+        'à 720 px l’en-tête démarre compact'
+      );
+      await page.click(bouton);
+      await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
+
+      await page.setViewport({ width: 500, height: 800, deviceScaleFactor: 1 });
+      await page.waitForFunction(() => window.matchMedia('(max-width: 520px)').matches);
+      await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
+      await page.click(bouton);
+      await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
+      await page.setViewport({ width: 320, height: 800, deviceScaleFactor: 1 });
+      await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
+      const largeur320 = await page.evaluate(() => ({ document: document.documentElement.scrollWidth, viewport: innerWidth }));
+      assert.ok(largeur320.document <= largeur320.viewport + 1, JSON.stringify(largeur320));
+      await page.click(bouton);
+      await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
+      await page.setViewport({ width: 240, height: 800, deviceScaleFactor: 1 });
+      await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
+      const etat = await page.$eval(bouton, (element) => {
+        const rectangle = element.getBoundingClientRect();
+        const texte = document.createRange();
+        texte.selectNodeContents(element);
+        return {
+          label: element.textContent.trim(),
+          hidden: element.hidden,
+          left: rectangle.left,
+          right: rectangle.right,
+          width: element.clientWidth,
+          scrollWidth: element.scrollWidth,
+          lignes: texte.getClientRects().length,
+          whiteSpace: getComputedStyle(element).whiteSpace,
+          overflowWrap: getComputedStyle(element).overflowWrap,
+          enteteCompacte: document.querySelector('.site-header').classList.contains('is-compact'),
+          identiteMasquee: getComputedStyle(document.querySelector('.identity')).display === 'none',
+        };
+      });
+      assert.equal(etat.label, 'Agrandir');
+      assert.equal(etat.hidden, false);
+      assert.equal(etat.enteteCompacte, true);
+      assert.equal(etat.identiteMasquee, true);
+      assert.equal(etat.whiteSpace, 'normal');
+      assert.equal(etat.overflowWrap, 'anywhere');
+      assert.equal(etat.lignes, 1, 'à 240 px CSS, le libellé tient naturellement sur une ligne');
+      assert.ok(etat.width >= 44 && etat.scrollWidth <= etat.width, JSON.stringify(etat));
+      assert.ok(etat.left >= 0 && etat.right <= 240, JSON.stringify(etat));
+
+      await page.setViewport({ width: 70, height: 800, deviceScaleFactor: 1 });
+      const cadreEtTexte = await page.$eval(bouton, (element) => {
+        const cadre = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        const gaucheTexte = cadre.left + parseFloat(style.borderLeftWidth) + parseFloat(style.paddingLeft);
+        const droiteTexte = cadre.right - parseFloat(style.borderRightWidth) - parseFloat(style.paddingRight);
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        return {
+          left: cadre.left,
+          right: cadre.right,
+          viewport: innerWidth,
+          largeur: element.clientWidth,
+          scrollWidth: element.scrollWidth,
+          hauteur: cadre.height,
+          gaucheTexte,
+          droiteTexte,
+          lignesTexte: Array.from(range.getClientRects()).map((rect) => ({ left: rect.left, right: rect.right })),
+        };
+      });
+      assert.ok(cadreEtTexte.left >= 0 && cadreEtTexte.right <= cadreEtTexte.viewport, JSON.stringify(cadreEtTexte));
+      assert.ok(cadreEtTexte.hauteur >= 44, JSON.stringify(cadreEtTexte));
+      assert.ok(cadreEtTexte.scrollWidth <= cadreEtTexte.largeur, JSON.stringify(cadreEtTexte));
+      assert.ok(cadreEtTexte.lignesTexte.length > 1, JSON.stringify(cadreEtTexte));
+      assert.ok(
+        cadreEtTexte.lignesTexte.every((ligne) => ligne.left >= cadreEtTexte.gaucheTexte - 1 && ligne.right <= cadreEtTexte.droiteTexte + 1),
+        JSON.stringify(cadreEtTexte)
+      );
+    } finally {
+      await page.close();
+    }
+  });
+
   await executer('Panneaux Affichage et Présentation visibles aux largeurs 320 et 1440 px', async () => {
     const page = await creerPage({ width: 320, height: 800 });
     try {
