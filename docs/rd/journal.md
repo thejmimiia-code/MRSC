@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-14 — Délai de déploiement GitHub Pages après la nouvelle présentation
+
+- **Initiative :** `coherence-textes-publics`.
+- **Signal :** après la fusion de la PR #35, le contrôle qualité et la veille ont réussi, mais le job de publication Pages a échoué après 10 min 34 s dans l’étape `Deploy to GitHub Pages` (run `38593400963`). L’artefact statique avait été préparé et téléversé.
+- **Diagnostic et correction :** l’action épinglée `actions/deploy-pages` expose un paramètre `timeout`, fixé par défaut à 600 000 ms ; le journal d’actions indique que l’attente a expiré pendant le déploiement. Le workflow demande maintenant 1 200 000 ms (20 minutes), et le vérificateur d’intégration protège cette limite.
+- **Contrôles exécutés :** `python3 outils/verifier-integration.py`, `python3 outils/verifier-securite.py`, `python3 outils/verifier-site-statique.py`, `python3 outils/verifier-rd-continue.py` et `git diff --check` — réussis.
+- **Limites et suite :** le rejeu manuel et `workflow_dispatch` ont été refusés par les permissions GitHub de cette intégration (`actions:write`). Une fusion de cette correction déclenchera un nouvel essai par le push normal sur `main`; confirmer le statut Pages avant d’annoncer le contenu comme visible.
+
 ## 2026-10-14 — Présentation de l’association et trois repères de réflexion sur l’accueil
 
 - **Initiative :** `coherence-textes-publics`.
