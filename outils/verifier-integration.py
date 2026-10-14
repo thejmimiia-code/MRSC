@@ -382,6 +382,7 @@ def fichiers_du_site() -> None:
     )
     parcours = (RACINE / "assets" / "js" / "navigation-parcours.js").read_text(encoding="utf-8")
     script_site = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+    test_experience = (RACINE / "outils" / "test-experience.cjs").read_text(encoding="utf-8")
     verifier(
         "Le réglage mémorise les cinq paliers et conserve les préférences historiques",
         "const textLevels = [50, 75, 100, 125, 150]" in script_site
@@ -478,6 +479,10 @@ def fichiers_du_site() -> None:
                 ".site-header.is-compact .site-status-note",
                 ".site-header.is-compact .identity",
                 ".header-compact-toggle[hidden]",
+                ".header-compact-toggle {\n  display: none;\n  flex: 0 1 auto;",
+                "max-width: min(9rem,calc(100vw - 1rem));",
+                "overflow-wrap: anywhere;",
+                ".header-compact-toggle { max-width: min(7.25rem,calc(100vw - 1rem)); }",
                 "@media (max-width: 1260px)",
                 "@media (max-width: 520px)",
                 "@media (orientation: landscape) and (max-height: 560px) and (max-width: 920px)",
@@ -487,12 +492,20 @@ def fichiers_du_site() -> None:
         )
         and "window.matchMedia" in script_site
         and "(max-width: 760px)" in script_site
+        and "(max-width: 520px)" in script_site
         and "(orientation: landscape) and (max-height: 560px) and (max-width: 920px)" in script_site
         and 'header.classList.toggle("is-compact", compact)' in script_site
         and 'headerCompactToggle.setAttribute("aria-expanded", String(!compact))' in script_site
         and 'headerCompactToggle.addEventListener("click"' in script_site
+        and "let previousViewportWidth = window.innerWidth;" in script_site
+        and "if (!widthIsShrinking || !narrowViewport.matches) return;" in script_site
+        and "setHeaderCompact(true);" in script_site
         and "headerDetails.some(" in script_site
-        and "if (focusWouldBeHidden) headerCompactToggle.focus();" in script_site,
+        and "if (focusWouldBeHidden) headerCompactToggle.focus();" in script_site
+        and "Mode compact réactivé au rétrécissement" in test_experience
+        and "assert.equal(etat.lignes, 1" in test_experience
+        and "cadreEtTexte.lignesTexte.every" in test_experience
+        and "cadreEtTexte.scrollWidth <= cadreEtTexte.largeur" in test_experience,
     )
     verifier(
         "La navigation permet retour, avance, accueil et reprise du dernier point",

@@ -11,6 +11,15 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Contrôles complets exécutés après les changements :** compilation Python ; `verifier-rd-continue.py` ; générateur d’apprentissages en mode vérification ; générateur du simulateur puis `--verifier` ; site statique (83 pages) ; sécurité ; intégration (incluant les 16 routes API locales) ; 7 tests du protocole éditorial ; `node --check` des deux scripts du site et du nouveau harnais ; `git diff --check` — réussis. Le vérificateur statique et les tests de sécurité ont aussi été relancés séparément, avec succès.
 - **Limites et suite :** les sept essais couvrent des pages types et des interactions déterminées, pas les 83 pages à tous les breakpoints. Aucun Firefox/Safari, essai visuel humain, lecteur d’écran, appareil physique ou utilisation par des personnes n’est revendiqué ; la conformité WCAG reste à évaluer. Garder l’initiative `a-tester` et réaliser les vérifications humaines/technologies d’assistance décrites dans la matrice avant de réviser son statut.
 
+## 2026-10-14 — Recompactage de l’en-tête en fenêtre très étroite
+
+- **Initiative :** `optimisation-du-site`, maintenue à l’état `a-tester`.
+- **Signal rapporté en Chrome :** en réduisant fortement la largeur de la fenêtre, le bouton « Agrandir » présentait un défaut visuel et la personne souhaitait que le site revienne à sa forme compacte pour l’afficher à côté d’une autre fenêtre, sans le fermer.
+- **Diagnostic vérifié :** le mode compact initial se déclenche déjà sous 760 px. Mais après l’action volontaire « Agrandir », une réduction de 720 à 500 px conservait l’en-tête ouvert : le seuil 760 px était déjà franchi, donc son événement de changement ne se déclenchait pas une seconde fois. Le nouveau cas navigateur a échoué avant le correctif à l’attente du retour compact.
+- **Correction :** une écoute du redimensionnement active à 520 px ou moins replie de nouveau l’en-tête à chaque réduction de largeur ; le bouton reste utilisable après ce redimensionnement. Son cadre est borné à la largeur disponible et, si nécessaire, le libellé se replie à l’intérieur au lieu de sortir de la bordure.
+- **Contrôle navigateur :** le harnais Chromium headless exécute maintenant le parcours 720 → agrandissement manuel → 500 → 320 → 240 px, avec de nouveaux agrandissements entre les étapes ; il contrôle le repli des informations de marque, l’absence de débordement de document à 320 px, le libellé sur une ligne à 240 px et son maintien dans le cadre à 70 px. Résultat après correction : **8/8 essais**.
+- **Suite et limites :** code et affichage testés en Chromium headless ; le défaut visuel n’a pas encore été revérifié manuellement dans Chrome après le correctif. Conserver `a-tester` et demander une nouvelle vérification visuelle au même niveau de compression, puis poursuivre la revue clavier, tactile et lecteur d’écran. Aucun suivi d’usage n’est ajouté.
+
 ## 2026-10-14 — Protocole éditorial et contexte des échanges repris depuis Drive
 
 - **Initiative :** `coherence-textes-publics` ; articulation avec `optimisation-du-site`.

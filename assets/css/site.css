@@ -282,7 +282,7 @@ html.contraste-renforce .site-status-note {
   justify-content: center;
   min-width: 44px;
   min-height: 44px;
-  max-width: 9rem;
+  max-width: min(9rem,calc(100vw - 1rem));
   padding: clamp(6px,.4rem,8px) clamp(10px,.65rem,14px);
   border: 1px solid rgba(255,255,255,.45);
   border-radius: var(--button-radius);
@@ -294,6 +294,7 @@ html.contraste-renforce .site-status-note {
   line-height: 1.2;
   text-align: center;
   white-space: normal;
+  overflow-wrap: anywhere;
   cursor: pointer;
   transition: background .18s ease, border-color .18s ease;
 }
@@ -2830,7 +2831,7 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   .nav-inner { flex-wrap: wrap; gap: clamp(6px,.5rem,10px); min-height: 48px; width: calc(100% - 1rem); }
   .nav-toggle { gap: clamp(6px,.35rem,8px); }
   .nav-toggle svg { width: 18px; height: 18px; }
-  .header-compact-toggle { max-width: 7.25rem; }
+  .header-compact-toggle { max-width: min(7.25rem,calc(100vw - 1rem)); }
   .display-settings { margin-left: 0; }
   .site-journey-inner { gap: .1rem .3rem; }
   .site-journey-controls { flex-wrap: wrap; gap: .15rem; }
