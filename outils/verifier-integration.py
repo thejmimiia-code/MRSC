@@ -353,6 +353,18 @@ def fichiers_du_site() -> None:
         ),
     )
     verifier(
+        "Le panneau Affichage reste visible et défilable à largeur smartphone",
+        "@media (max-width: 760px) {\n  html { scroll-padding-top: 13rem; }\n  .nav-inner { gap: clamp(6px,.5rem,10px); }\n  .display-settings { position: static; margin-left: 0; }\n  .display-settings-panel {\n    left: 0;\n    right: auto;" in styles
+        and all(
+            marqueur in styles
+            for marqueur in (
+                "width: min(24rem,calc(100vw - 1rem));",
+                "max-height: min(32rem,calc(100dvh - 220px));",
+                ".display-settings-panel { width: min(clamp(320px,24rem,400px),calc(100vw - 1rem)); }",
+            )
+        ),
+    )
+    verifier(
         "Le mode d’espacement atteint les repères WCAG 1.4.12",
         all(valeur in styles for valeur in ("line-height: 1.65", "margin-block-end: 2em", "letter-spacing: .12em", "word-spacing: .16em")),
     )

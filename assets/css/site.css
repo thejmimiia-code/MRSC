@@ -2807,8 +2807,15 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
 @media (max-width: 760px) {
   html { scroll-padding-top: 13rem; }
   .nav-inner { gap: clamp(6px,.5rem,10px); }
-  .display-settings { margin-left: 0; }
-  .display-settings-panel { max-height: calc(100vh - 1rem); overflow: auto; }
+  .display-settings { position: static; margin-left: 0; }
+  .display-settings-panel {
+    left: 0;
+    right: auto;
+    width: min(24rem,calc(100vw - 1rem));
+    max-height: min(32rem,calc(100vh - 220px));
+    max-height: min(32rem,calc(100dvh - 220px));
+    overflow: auto;
+  }
 }
 @media (max-width: 520px) {
   html { scroll-padding-top: 12rem; }
