@@ -247,6 +247,7 @@ html.contraste-renforce .site-status-note {
 
 .nav-toggle {
   display: none;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
   gap: clamp(6px,.35rem,8px);
@@ -276,14 +277,16 @@ html.contraste-renforce .site-status-note {
 }
 
 .header-compact-toggle {
+  --header-compact-width: 6.25rem;
   display: none;
-  flex: 0 1 auto;
+  flex: 0 0 min(var(--header-compact-width),calc(100vw - 1rem));
   align-items: center;
   justify-content: center;
+  width: min(var(--header-compact-width),calc(100vw - 1rem));
   min-width: 44px;
   min-height: 44px;
-  max-width: min(9rem,calc(100vw - 1rem));
-  padding: clamp(6px,.4rem,8px) clamp(10px,.65rem,14px);
+  max-width: min(var(--header-compact-width),calc(100vw - 1rem));
+  padding: clamp(6px,.4rem,8px) clamp(4px,.375rem,6px);
   border: 1px solid rgba(255,255,255,.45);
   border-radius: var(--button-radius);
   background: rgba(255,255,255,.055);
@@ -2831,7 +2834,6 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   .nav-inner { flex-wrap: wrap; gap: clamp(6px,.5rem,10px); min-height: 48px; width: calc(100% - 1rem); }
   .nav-toggle { gap: clamp(6px,.35rem,8px); }
   .nav-toggle svg { width: 18px; height: 18px; }
-  .header-compact-toggle { max-width: min(7.25rem,calc(100vw - 1rem)); }
   .display-settings { margin-left: 0; }
   .site-journey-inner { gap: .1rem .3rem; }
   .site-journey-controls { flex-wrap: wrap; gap: .15rem; }
