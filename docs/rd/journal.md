@@ -5,10 +5,10 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 ## 2026-10-14 — Délai de déploiement GitHub Pages après la nouvelle présentation
 
 - **Initiative :** `coherence-textes-publics`.
-- **Signal :** après la fusion de la PR #35, le contrôle qualité et la veille ont réussi, mais le job de publication Pages a échoué après 10 min 34 s dans l’étape `Deploy to GitHub Pages` (run `38593400963`). L’artefact statique avait été préparé et téléversé.
-- **Diagnostic et correction :** l’action épinglée `actions/deploy-pages` expose un paramètre `timeout`, fixé par défaut à 600 000 ms ; le journal d’actions indique que l’attente a expiré pendant le déploiement. Le workflow demande maintenant 1 200 000 ms (20 minutes), et le vérificateur d’intégration protège cette limite.
-- **Contrôles exécutés :** `python3 outils/verifier-integration.py`, `python3 outils/verifier-securite.py`, `python3 outils/verifier-site-statique.py`, `python3 outils/verifier-rd-continue.py` et `git diff --check` — réussis.
-- **Limites et suite :** le rejeu manuel et `workflow_dispatch` ont été refusés par les permissions GitHub de cette intégration (`actions:write`). Une fusion de cette correction déclenchera un nouvel essai par le push normal sur `main`; confirmer le statut Pages avant d’annoncer le contenu comme visible.
+- **Signal :** après la fusion de la PR #35, le contrôle qualité et la veille ont réussi, mais la publication Pages a expiré pendant `Deploy to GitHub Pages` (run `38593400963`). Une nouvelle tentative après la PR #36 a échoué de la même façon après 10 min 55 s (run `38595622343`) ; les vérifications et le téléversement de l’artefact ont réussi.
+- **Diagnostic et correction :** le code de `actions/deploy-pages@v5.0.1` fixe `MAX_TIMEOUT` à 600 000 ms. La tentative de demander 20 minutes a été ramenée à ce maximum par l’action, avec un avertissement ; cette configuration sans effet a donc été retirée. La cause du déploiement qui reste en attente n’est pas établie.
+- **Contrôles exécutés :** vérificateurs locaux d’intégration, sécurité, pages statiques et continuité R&D réussis ; CI de la PR #36 réussie. Les deux exécutions de publication, elles, ont échoué au déploiement. La récupération des journaux d’exécution n’a pas abouti (EOF du serveur de résultats Actions).
+- **Limites et suite :** le rejeu manuel et `workflow_dispatch` sont refusés par les permissions GitHub de cette intégration (`actions:write`). La cause précise reste inconnue et la mise en ligne n’est pas confirmée ; vérifier le statut/service Pages et réessayer lorsqu’un rejeu ou une nouvelle publication est possible.
 
 ## 2026-10-14 — Présentation de l’association et trois repères de réflexion sur l’accueil
 
