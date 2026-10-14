@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: |
           output="$RUNNER_TEMP/learning-pages-verification.log"
-          if python3 outils/construire-apprentissages.py --verifier >"$output" 2>&1; then
+          if python3 outils/construire-apprentissages.py --verifier --rapport "$RUNNER_TEMP/veille-apprentissages.md" >"$output" 2>&1; then
             cat "$output"
           else
             status=$?

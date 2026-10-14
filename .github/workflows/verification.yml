@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           sortie="$RUNNER_TEMP/verification-apprentissages.log"
-          if python3 outils/construire-apprentissages.py --verifier >"$sortie" 2>&1; then
+          if python3 outils/construire-apprentissages.py --verifier --rapport "$RUNNER_TEMP/veille-apprentissages.md" >"$sortie" 2>&1; then
             cat "$sortie"
           else
             statut=$?
