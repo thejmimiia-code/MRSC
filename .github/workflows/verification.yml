@@ -28,12 +28,17 @@ jobs:
       - name: Compiler les modules Python
         run: python3 -m py_compile simulateur/*.py api/*.py outils/*.py
 
-      - name: Vérifier les contenus, pages et pratiques R&D
-        run: |
-          python3 outils/construire-apprentissages.py --verifier
-          python3 outils/construire-simulateur.py --verifier
-          python3 outils/verifier-rd-continue.py
-          python3 outils/verifier-site-statique.py
+      - name: Vérifier les fiches d’apprentissage générées
+        run: python3 outils/construire-apprentissages.py --verifier
+
+      - name: Vérifier la page générée du simulateur
+        run: python3 outils/construire-simulateur.py --verifier
+
+      - name: Vérifier le portefeuille et la continuité R&D
+        run: python3 outils/verifier-rd-continue.py
+
+      - name: Vérifier les pages, liens et scripts statiques
+        run: python3 outils/verifier-site-statique.py
 
       - name: Vérifier les frontières de sécurité
         run: python3 outils/verifier-securite.py

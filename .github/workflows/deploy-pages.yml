@@ -29,15 +29,26 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Validate generated pages, internal links and scripts
-        run: |
-          python3 -m py_compile simulateur/*.py api/*.py outils/*.py
-          python3 outils/construire-apprentissages.py --verifier
-          python3 outils/construire-simulateur.py --verifier
-          python3 outils/verifier-rd-continue.py
-          python3 outils/verifier-site-statique.py
-          python3 outils/verifier-securite.py
-          python3 outils/verifier-integration.py
+      - name: Compile the Python modules
+        run: python3 -m py_compile simulateur/*.py api/*.py outils/*.py
+
+      - name: Validate generated learning pages
+        run: python3 outils/construire-apprentissages.py --verifier
+
+      - name: Validate the generated simulator page
+        run: python3 outils/construire-simulateur.py --verifier
+
+      - name: Validate the R&D portfolio
+        run: python3 outils/verifier-rd-continue.py
+
+      - name: Validate static pages, links and scripts
+        run: python3 outils/verifier-site-statique.py
+
+      - name: Validate security boundaries
+        run: python3 outils/verifier-securite.py
+
+      - name: Validate site and simulator integration
+        run: python3 outils/verifier-integration.py
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
