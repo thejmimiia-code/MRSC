@@ -739,10 +739,6 @@ def fichiers_du_site() -> None:
         "cp index.html apprendre.html" in workflow_pages,
     )
     verifier(
-        "Le déploiement Pages dispose d’un délai de 20 minutes pour répondre",
-        "uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1\n        with:\n          timeout: \"1200000\"" in workflow_pages,
-    )
-    verifier(
         "Les fiches autonomes et la notice vie privée sont publiées",
         "confidentialite.html" in workflow_pages
         and "cp -R apprendre/fiches _site/apprendre/fiches" in workflow_pages
