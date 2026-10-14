@@ -522,6 +522,29 @@ def verifier_javascript(infos: dict[Path, PageInfo]) -> None:
     print(f"Contrôle JavaScript : {len(scripts)} fichier(s) et script(s) intégré(s).")
 
 
+def verifier_entrees_accueil() -> None:
+    """Chaque proposition de « Par où commencer ? » doit être un vrai lien."""
+    contenu = (ROOT / "index.html").read_text(encoding="utf-8")
+    liste = re.search(r'<ul\b[^>]*class="home-entry-list"[^>]*>(.*?)</ul>', contenu, re.DOTALL)
+    if liste is None:
+        signaler("index.html : liste des points d’entrée absente")
+        return
+    entrees = re.findall(r"<li\b[^>]*>(.*?)</li>", liste.group(1), re.DOTALL)
+    destinations = ("apprendre.html", "ia-societe.html", "simulateur.html", "#rd-eva")
+    if len(entrees) != len(destinations):
+        signaler("index.html : quatre propositions attendues dans Par où commencer")
+        return
+    avant = len(ERREURS)
+    for numero, (entree, destination) in enumerate(zip(entrees, destinations), start=1):
+        inspecteur = InspecteurHTML(ROOT / "index.html")
+        inspecteur.feed(entree)
+        liens = [url for attribut, url, _ in inspecteur.info.references if attribut == "href"]
+        if liens != [destination]:
+            signaler(f"index.html : proposition {numero} attendue avec un lien vers {destination}")
+    if len(ERREURS) == avant:
+        print("Accueil : les quatre propositions pointent vers leurs ressources respectives.")
+
+
 def verifier_dependances_apprentissage() -> None:
     pages = [ROOT / "apprendre.html", ROOT / "anglais-aventure.html", *sorted((ROOT / "apprendre" / "fiches").glob("*.html"))]
     avant = len(ERREURS)
@@ -1333,6 +1356,7 @@ def main() -> int:
     infos = {chemin: analyser(chemin) for chemin in fichiers}
     verifier_espaces_finaux(fichiers)
     verifier_liens(infos)
+    verifier_entrees_accueil()
     verifier_dependances_apprentissage()
     verifier_catalogue_apprentissage()
     verifier_dossier_apprentissage()
