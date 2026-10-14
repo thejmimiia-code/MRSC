@@ -326,6 +326,18 @@ def fichiers_du_site() -> None:
         f"{len(pages_avec_entete)} pages/fiches contrôlées",
     )
     styles = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+    verifier(
+        "Les flèches Affichage et Présentation changent de sens à l’ouverture",
+        all(
+            marqueur in styles
+            for marqueur in (
+                ".display-settings-chevron {\n  display: inline-block;",
+                ".display-settings[open] > summary .display-settings-chevron { transform: rotate(180deg); }",
+                ".layout-settings-chevron {\n  display: inline-block;",
+                ".layout-settings[open] > summary .layout-settings-chevron { transform: rotate(180deg); }",
+            )
+        ),
+    )
     medias_adaptatifs = (
         "@media (prefers-contrast: more)",
         "@media (forced-colors: active)",
@@ -685,6 +697,16 @@ def fichiers_du_site() -> None:
         "--accent: #91b2e6" in simulateur_styles
         and "--ambre: #f2c15f" in simulateur_styles
         and "linear-gradient(135deg, #1d3268, #2958a2)" in simulateur_styles,
+    )
+    verifier(
+        "Les flèches des panneaux du simulateur changent de sens à l’ouverture",
+        all(
+            marqueur in simulateur_styles
+            for marqueur in (
+                ".site-layout-chevron { display: inline-block;",
+                ".site-layout-settings[open] .site-layout-chevron { transform: rotate(180deg); }",
+            )
+        ),
     )
     verifier(
         "La R&D de cohérence visuelle et éditoriale est documentée",

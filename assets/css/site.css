@@ -2587,7 +2587,13 @@ html.contraste-renforce .resource-scope-note {
   border-color: var(--gold);
   background: rgba(255,255,255,.13);
 }
-.display-settings-chevron { font-size: clamp(13px,.875rem,18px); line-height: 1; }
+.display-settings-chevron {
+  display: inline-block;
+  font-size: clamp(13px,.875rem,18px);
+  line-height: 1;
+  transition: transform .18s ease;
+}
+.display-settings[open] > summary .display-settings-chevron { transform: rotate(180deg); }
 
 .display-settings-panel {
   position: absolute;
@@ -2691,7 +2697,7 @@ html.contraste-renforce :is(button,.button,.display-control,.display-settings > 
   border-color: var(--gold);
   background: rgba(255,255,255,.13);
 }
-.site-journey-chevron { font-size: clamp(13px,.875rem,18px); line-height: 1; transition: transform .18s ease; }
+.site-journey-chevron { display: inline-block; font-size: clamp(13px,.875rem,18px); line-height: 1; transition: transform .18s ease; }
 .site-journey-settings[open] .site-journey-chevron { transform: rotate(180deg); }
 .site-journey-panel {
   position: absolute;
@@ -3422,7 +3428,13 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
   border-color: var(--gold);
   background: rgba(255,255,255,.13);
 }
-.layout-settings-chevron { font-size: clamp(13px,.875rem,18px); line-height: 1; }
+.layout-settings-chevron {
+  display: inline-block;
+  font-size: clamp(13px,.875rem,18px);
+  line-height: 1;
+  transition: transform .18s ease;
+}
+.layout-settings[open] > summary .layout-settings-chevron { transform: rotate(180deg); }
 .layout-settings-panel {
   position: absolute;
   z-index: 102;
