@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-14 — Correction du panneau Affichage sur smartphone
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal :** retour signalant que le panneau « Affichage » peut se décaler à gauche et devenir partiellement invisible sur smartphone, en particulier lorsque le zoom modifie la largeur CSS. L’inspection des règles confirme le risque : le panneau presque aussi large que le viewport était aligné à droite d’un bouton qui peut se trouver près du bord gauche.
+- **Correction :** sous 760 px CSS, le bouton `details` cesse d’être le bloc de positionnement ; le panneau s’ancre au conteneur relatif de la barre, à gauche, garde une largeur bornée par le viewport et défile à l’intérieur si sa hauteur dépasse l’espace disponible. Le vérificateur d’intégration couvre explicitement cet ancrage et ces limites responsive.
+- **Contrôles exécutés :** compilation Python ; vérificateurs R&D, apprentissages (70 fiches), simulateur, site statique (83 pages), sécurité et intégration (82 pages/fiches) ; `node --check` des scripts du site ; `git diff --check` — tous réussis. Le contrôle d’intégration confirme en particulier l’ancrage et la largeur du panneau mobile.
+- **Limites :** le correctif est fondé sur les règles CSS et contrôles statiques ; il ne constitue pas une inspection dans un navigateur mobile. Après publication, vérifier l’ouverture du panneau sur un appareil réel, aux largeurs 320–430 px, en orientation paysage et avec zoom élevé.
+
 ## 2026-10-14 — Présentations personnalisables et Panorama composite
 
 - **Initiative :** `optimisation-du-site`.
