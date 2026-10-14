@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-14 — Orientation des flèches des panneaux Affichage et Présentation
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal :** retour indiquant que les flèches décoratives restent fixes quand « Affichage » ou « Présentation » s’ouvre.
+- **Diagnostic et correction :** les règles communes ne reliaient pas ces icônes à l’état natif `details[open]` ; de plus, les `span` en ligne doivent devenir transformables pour pivoter. Les chevrons sont maintenant `inline-block`, pivotent de 180° quand le panneau est ouvert et utilisent une transition courte. Le CSS généré du simulateur a été aligné, et la flèche « Parcours » reçoit également le comportement transformable déjà prévu.
+- **Contrôles exécutés :** `python3 outils/construire-simulateur.py --verifier`, `python3 outils/verifier-site-statique.py` (83 pages), `python3 outils/verifier-integration.py` (dont les nouveaux contrôles CSS et les 16 routes API), `node --check assets/js/site.js` et `git diff --check` — tous réussis.
+- **Limites :** aucun navigateur graphique n’est disponible ; ces assertions statiques ne confirment pas le rendu visuel sur smartphone. Une ouverture/fermeture réelle des panneaux reste à vérifier dans un navigateur.
+
 ## 2026-10-14 — Correction du panneau Affichage sur smartphone
 
 - **Initiative :** `optimisation-du-site`.

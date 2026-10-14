@@ -512,7 +512,7 @@ button.primaire {
 .site-return-bar .site-journey-settings > summary::marker { content: ""; }
 .site-return-bar .site-journey-settings > summary:hover,
 .site-return-bar .site-journey-settings[open] > summary { border-color: var(--ambre); background: #26375f; }
-.site-return-bar .site-journey-chevron { font-size: clamp(12px,1rem,20px); line-height: 1; transition: transform .18s ease; }
+.site-return-bar .site-journey-chevron { display: inline-block; font-size: clamp(12px,1rem,20px); line-height: 1; transition: transform .18s ease; }
 .site-return-bar .site-journey-settings[open] .site-journey-chevron { transform: rotate(180deg); }
 .site-return-bar .site-journey-panel {
   position: absolute;
@@ -551,7 +551,8 @@ button.primaire {
 .site-return-bar .site-layout-settings > summary::marker { content: ""; }
 .site-return-bar .site-layout-settings > summary:hover,
 .site-return-bar .site-layout-settings[open] > summary { border-color: var(--ambre); background: #26375f; }
-.site-return-bar .site-layout-chevron { margin-left: .25rem; font-size: 1rem; line-height: 1; }
+.site-return-bar .site-layout-chevron { display: inline-block; margin-left: .25rem; font-size: 1rem; line-height: 1; transition: transform .18s ease; }
+.site-return-bar .site-layout-settings[open] .site-layout-chevron { transform: rotate(180deg); }
 .site-return-bar .site-layout-panel {
   position: absolute;
   z-index: 121;
