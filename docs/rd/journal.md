@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Visuel d’accueil validé
+
+- **Initiative :** `coherence-textes-publics`.
+- **Signal :** la légende présentait encore le bandeau 3D comme une proposition à relire, alors qu’il a été validé.
+- **Décision :** retirer la mention « à relire / pas encore l’identité officielle ». Le visuel d’accueil `accueil-logo-mrsc-3d.jpg` est l’image retenue.
+- **Contrôles réellement exécutés :** `verifier-rd-continue.py` ; `verifier-site-statique.py` — réussis.
+- **Limites et suite :** l’en-tête compact conserve le logo plat, plus lisible en petit format.
+
 ## 2026-10-15 — Navigation sans retour à la ligne et prénom Éva
 
 - **Initiative :** `coherence-textes-publics`.
