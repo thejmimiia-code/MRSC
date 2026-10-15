@@ -3959,3 +3959,67 @@ licence_source = "Non vérifiée — les conditions varient selon les jeux ; auc
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Accueil consulté le 15 octobre 2026 comme exemple de catalogue de jeux de données distinct des pages qui les présentent. Aucun jeu, fichier, chiffre du bandeau ni visualisation n’est repris."
+
+[[fiche]]
+id = "prog-lire-licence-logiciel"
+titre = "Lire une licence avant de réutiliser un programme"
+matiere = "Informatique et programmation"
+matiere_id = "informatique"
+domaine = "informatique-programmation"
+niveau = 2
+horizon_contenu = "Premiers repères sur le code visible, la licence et l’attribution ; aucun conseil juridique personnalisé"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon pour distinguer le fait de voir un code et le droit de le réutiliser. Faire relire par une personne compétente en propriété intellectuelle du logiciel. L’exemple de notice est fictif ; la fiche ne choisit pas de licence pour un projet réel. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 9
+resume = "Repérer s’il existe une licence, ce qu’elle autorise de façon générale, et ce qu’il faut encore vérifier avant de copier un programme."
+objectif = "Dans un exemple fictif, séparer « le code est lisible », « une licence décrit des usages » et « je peux m’en attribuer la création »."
+situation = "Notice fictive jointe à un petit script « horloge-exemple » : « Vous pouvez copier et modifier ce script si vous indiquez « horloge-exemple » comme origine. Vous ne pouvez pas prétendre l’avoir créé. » Un camarade dit : « Puisque le fichier est public, on peut le coller dans notre projet sans rien écrire. » Que vérifier ?"
+analogie_titre = "Comme une recette affichée en vitrine, avec une étiquette d’usage"
+analogie = "Voir une recette collée sur une vitrine ne dit pas si on a le droit de la republier sous son nom. L’étiquette (sur place, à emporter, citer le restaurant) précise l’usage. Une licence joue un rôle comparable pour un programme : elle décrit des permissions et des limites, quand elle existe."
+limite_analogie = "Une recette n’est pas un logiciel : les règles de droit, les copies, les combinaisons de licences et les obligations de source sont spécifiques. Une étiquette de restaurant n’explique ni un contrat, ni un pays, ni une version de licence."
+notions = [
+  "Code source — forme du programme destinée à être lue et, souvent, modifiée par une personne.",
+  "Licence — texte qui indique ce que l’on peut faire du programme (copier, modifier, partager) et à quelles conditions.",
+  "Attribution — indiquer l’origine ou les auteurs demandés par la licence, sans s’en attribuer la création si c’est interdit.",
+  "Tous droits réservés — en l’absence d’autorisation, le simple fait qu’un fichier soit visible ne suffit pas à autoriser la copie.",
+  "Identifiant de licence — nom court parfois utilisé pour désigner un texte connu ; il faut encore lire le texte applicable."
+]
+demarche = [
+  "Cherche un fichier ou une notice de licence près du programme (LICENCE, README, en-tête de fichier).",
+  "Lis ce qui est autorisé, ce qui est interdit, et s’il faut citer une origine.",
+  "Sépare trois idées : voir le code ; avoir une permission écrite ; revendiquer la paternité.",
+  "Si la notice manque, est floue ou mélange plusieurs textes, ne copie pas : demande à une personne compétente ou laisse le fichier de côté.",
+  "Cette fiche n’identifie pas la licence d’un projet réel et ne remplace pas un conseil adapté."
+]
+exercice = "D’après la notice fictive de « horloge-exemple », laquelle de ces actions est cohérente avec le texte donné ? A) Coller le script dans un autre projet sans mentionner l’origine. B) Le modifier pour un usage interne en indiquant « horloge-exemple » comme origine. C) Dire que tu as créé le script toi-même."
+aide = "Relis les deux phrases de la notice : l’une parle de copier/modifier avec une origine, l’autre interdit de prétendre l’avoir créé."
+correction = [
+  "B est cohérente avec la notice fictive : copier ou modifier est mentionné, à condition d’indiquer l’origine « horloge-exemple ».",
+  "A oublie l’attribution demandée dans l’exemple. C contredit l’interdiction de s’en attribuer la création.",
+  "Même B resterait à vérifier dans un cas réel : version du texte, territoire, combinaisons avec d’autres programmes, et ce que « usage interne » recouvre. Cette notice n’est pas une licence connue."
+]
+a_retenir = [
+  "Un fichier public n’est pas automatiquement libre de copie.",
+  "On lit la licence avant de réutiliser, pas après.",
+  "Citer l’origine n’est pas la même chose que s’attribuer la création.",
+  "En cas de doute, on s’abstient plutôt que d’inventer une permission."
+]
+transferer = "Cette lecture peut servir avant d’emprunter un script, une bibliothèque ou un exemple trouvé en ligne. Pour publier un projet ou combiner plusieurs licences, consulte les textes applicables et, si besoin, une personne compétente ; cette fiche n’est pas un avis juridique."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Open Source Initiative — The Open Source Definition"
+url = "https://opensource.org/osd"
+licence_source = "Non vérifiée — lien documentaire ; aucun critère ni texte n’est repris"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 15 octobre 2026 pour situer l’idée qu’« open source » désigne des conditions de distribution, pas seulement l’accès au code. Aucune des dix critères n’est copiée ni enseignée comme règle universelle."
+
+[[fiche.sources]]
+titre = "SPDX License List"
+url = "https://spdx.org/licenses/"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche de licence n’est reprise"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Liste consultée le 15 octobre 2026 comme exemple d’identifiants courts de licences. Aucun identifiant, texte ni tableau n’est recopié dans la fiche."

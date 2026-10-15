@@ -182,10 +182,10 @@ Comprendre les fonctions d’un système informatique, représenter des informat
 | Réseaux, Internet, adressage, noms de domaine et protocoles | Début de couverture — à approfondir | [`info-lire-adresse-web`](../apprendre/fiches/info-lire-adresse-web.html) |
 | Bases de données, requêtes, Web et échanges de données | Début de couverture — à approfondir | [`info-table-requete-web`](../apprendre/fiches/info-table-requete-web.html) |
 | Tester, déboguer, documenter et faire évoluer un programme | Début de couverture — à approfondir | [`prog-tester-exemples`](../apprendre/fiches/prog-tester-exemples.html) |
-| Conception logicielle, travail collectif, licences et code ouvert | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Conception logicielle, travail collectif, licences et code ouvert | Début de couverture — à approfondir | [`prog-lire-licence-logiciel`](../apprendre/fiches/prog-lire-licence-logiciel.html) |
 | Microcontrôleurs, objets connectés et systèmes embarqués | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 8 sujet(s) commencés mais incomplets, 2 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 10 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 9 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 10 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Arts, musique, création et culture
 
