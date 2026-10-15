@@ -139,7 +139,7 @@ Utiliser le formulaire GitHub « Proposition de R&D » ou le courriel de contact
 
 ## 9. État actuel et limites assumées
 
-- L'atlas **Les Mondes** relie les 76 fiches à 15 domaines; 53 fiches portent le statut « Prototype à relire ». Consulter le référentiel pour les sujets actifs, partiels et à créer.
+- L'atlas **Les Mondes** relie les 76 fiches à 15 domaines; 54 fiches portent le statut « Prototype à relire ». Consulter le référentiel pour les sujets actifs, partiels et à créer.
 - Les quatre portes d'entrée sont des filtres, pas des cursus. Le dépôt ne contient pas de formation autonome distincte pour chaque domaine.
 - Les scènes 3D jouables sont actuellement les cinq Escales d'anglais; les autres domaines sont des fiches et un atlas, pas 15 mondes 3D achevés.
 - Aucune couverture complète des connaissances du monde, essai contrôlé d'efficacité, conformité universelle, validation de tous les droits ou validation de tous les contenus n'est revendiquée.

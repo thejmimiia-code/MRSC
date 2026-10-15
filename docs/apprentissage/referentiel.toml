@@ -291,8 +291,8 @@ fiches = ["histoire-comparer-sources"]
 [[domaine.sujet]]
 id = "histoire-monde-france"
 titre = "Repères d’histoire de France et du monde"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["histoire-reperer-echelle-france-monde"]
 
 [[domaine]]
 id = "citoyennete-medias"

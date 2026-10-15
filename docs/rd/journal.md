@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Échelle France / monde sur une frise fictive
+
+- **Initiative :** `relire-les-44-prototypes` (titre porté à 54 prototypes).
+- **Signal :** continuer et fusionner.
+- **Décision :** prototype `histoire-reperer-echelle-france-monde` (Frise-exemple, Val-exemple). Sujet `histoire-monde-france` passé à `partiel`. Aucune chronologie officielle.
+- **Contrôles réellement exécutés :** `construire-apprentissages.py --verifier` ; `verifier-site-statique.py` ; `verifier-rd-continue.py` ; `verifier-integration.py` ; `verifier-securite.py` — réussis.
+- **Limites et suite :** relecture historique humaine.
+
 ## 2026-10-15 — R&D, innovation et prospective : citation / résumé
 
 - **Initiative :** `prospective-apprentissages-2030` et `relire-les-44-prototypes` (titre porté à 53 prototypes).

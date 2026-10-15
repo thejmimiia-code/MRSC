@@ -4407,3 +4407,67 @@ licence_source = "Non vérifiée — lien documentaire ; aucune consigne n’est
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucune circulaire ni guide n’est recopié."
+
+
+[[fiche]]
+id = "histoire-reperer-echelle-france-monde"
+titre = "Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays"
+matiere = "Histoire et mémoire"
+matiere_id = "histoire"
+domaine = "histoire-memoire"
+niveau = 2
+horizon_contenu = "Lecture d’une frise fictive ; aucun récit national ni mondial n’est enseigné"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon valorisant : s’appuyer sur un lieu déjà connu. Faire relire par une personne compétente en histoire. Aucune chronologie officielle. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Sur une frise inventée, distinguer un événement localisé en France d’un événement qui nomme plusieurs pays."
+objectif = "Dans un exemple fictif, indiquer quelle carte parle d’un lieu de France et laquelle parle de plusieurs pays."
+situation = "Frise-exemple, année inventée 1920. Carte A : « Fête de village à Val-exemple (France) ». Carte B : « Exposition fictive réunissant plusieurs pays ». Quelle carte reste à l’échelle d’un lieu de France ?"
+analogie_titre = "Comme une photo de quartier et une photo de plusieurs drapeaux"
+analogie = "Une photo de ta rue montre un lieu proche. Une photo où plusieurs drapeaux apparaissent élargit le cadre. Sur une frise, un nom de village en France et une mention de plusieurs pays ne se lisent pas à la même échelle."
+limite_analogie = "Une photo n’est pas une source historique. Un événement local peut avoir des liens mondiaux, et l’inverse. Cette analogie n’enseigne ni dates réelles ni causes."
+notions = [
+  "Échelle locale — l’événement est situé dans un lieu nommé, ici un village de France fictif.",
+  "Échelle plus large — l’événement nomme plusieurs pays, sans détailler chacun.",
+  "Frise — suite de cartes datées ; la date seule ne dit pas l’échelle.",
+  "Exemple fictif — Val-exemple et l’exposition inventée ne sont pas des faits historiques."
+]
+demarche = [
+  "Lis les deux cartes sans te dire que tu « n’as pas d’histoire » : un lieu que tu peux imaginer compte déjà.",
+  "Repère le nom de lieu : Val-exemple (France).",
+  "Repère la mention « plusieurs pays » sur l’autre carte.",
+  "La date 1920 est la même : ce n’est pas elle qui décide de l’échelle.",
+  "Cette fiche n’enseigne pas une histoire de France ni du monde : elle t’aide à lire l’échelle d’une carte."
+]
+exercice = "Sur la Frise-exemple, que peux-tu conclure ? A) La carte A (Val-exemple, France) est à l’échelle d’un lieu ; la carte B nomme plusieurs pays. B) Les deux cartes racontent toute l’histoire de 1920. C) La date identique prouve que les deux événements ont la même ampleur."
+aide = "Cherche où ça se passe, pas seulement l’année."
+correction = [
+  "A est la réponse attendue : lieu de France vs plusieurs pays.",
+  "B promet une histoire complète que la frise n’offre pas. C confond date et échelle.",
+  "Même après A, un événement réel demanderait des sources. Cette fiche n’enseigne pas une histoire de France ni du monde."
+]
+a_retenir = [
+  "Un lieu que tu peux situer, même inventé, est déjà un point d’entrée.",
+  "La date ne dit pas à elle seule l’échelle.",
+  "Un village et plusieurs pays ne se lisent pas de la même façon.",
+  "Cette fiche n’enseigne pas une histoire de France ni du monde."
+]
+transferer = "Cette lecture peut servir devant une légende, un titre d’exposition ou une carte du temps. Pour un fait réel, vérifie des sources historiques ; cette fiche n’est ni un manuel ni une chronologie officielle."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Vie publique — les fiches sur les institutions et la citoyenneté"
+url = "https://www.vie-publique.fr/fiches"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail consulté le 15 octobre 2026 comme point d’entrée. Aucun récit historique n’est copié."
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — accueil"
+url = "https://www.education.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucun programme n’est repris"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucun programme d’histoire n’est recopié."
