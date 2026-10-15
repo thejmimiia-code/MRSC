@@ -531,8 +531,8 @@ fiches = ["sante-lire-etiquette"]
 [[domaine.sujet]]
 id = "sources-sante"
 titre = "Trouver une source de santé fiable et demander de l’aide"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["sante-reperer-source-publique"]
 
 [[domaine.sujet]]
 id = "premiers-secours"

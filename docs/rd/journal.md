@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — R&D, innovation et prospective : source de santé publique
+
+- **Initiative :** `prospective-apprentissages-2030` et `relire-les-44-prototypes` (titre porté à 55 prototypes).
+- **Signal :** continuer la R&D, l’innovation et la prospective, puis fusionner.
+- **Décision :** prototype `sante-reperer-source-publique` (Message-exemple, sirop miracle fictif). Aucun conseil médical. Sujet `sources-sante` passé à `partiel`. Note prospective : compteurs 81/55 ; identification visuelle locale (favicon) comme capacité sans regret ; piste Boussole vers cette fiche.
+- **Contrôles réellement exécutés :** `construire-apprentissages.py --verifier` ; `verifier-site-statique.py` ; `verifier-rd-continue.py` ; `verifier-integration.py` ; `verifier-securite.py` — réussis.
+- **Limites et suite :** relecture santé/médias ; l’initiative prospective reste `a-cadrer`.
+
 ## 2026-10-15 — Favicon au logo M.R.S.C.
 
 - **Initiative :** `coherence-textes-publics`.

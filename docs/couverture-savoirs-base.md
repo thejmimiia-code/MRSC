@@ -207,11 +207,11 @@ Développer des repères d’information sans fournir de diagnostic, de traiteme
 | Sujet | Statut | Fiches de première version / suite à donner |
 | --- | --- | --- |
 | Repérer quantité, ingrédients, allergènes et dates sur une étiquette | Début de couverture — à approfondir | [`sante-lire-etiquette`](../apprendre/fiches/sante-lire-etiquette.html) |
-| Trouver une source de santé fiable et demander de l’aide | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Trouver une source de santé fiable et demander de l’aide | Début de couverture — à approfondir | [`sante-reperer-source-publique`](../apprendre/fiches/sante-reperer-source-publique.html) |
 | Premiers secours et conduites à tenir | À créer avec une relecture spécialisée | À cadrer avec une personne compétente, puis rechercher des sources officielles à jour. |
 | Activité physique, repos, mobilité et sécurité | À créer avec une relecture spécialisée | À cadrer avec une personne compétente, puis rechercher des sources officielles à jour. |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 1 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 2 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 2 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 2 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Apprendre à apprendre, autonomie et relations
 
