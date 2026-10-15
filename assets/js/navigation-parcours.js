@@ -281,7 +281,11 @@
     else returnBar.appendChild(parcours);
   } else {
     const displaySettingsInHeader = navInner.querySelector("[data-display-settings]");
-    navInner.insertBefore(parcours, displaySettingsInHeader);
+    if (displaySettingsInHeader.parentNode !== navInner) {
+      displaySettingsInHeader.parentNode.insertBefore(parcours, displaySettingsInHeader);
+    } else {
+      navInner.insertBefore(parcours, displaySettingsInHeader);
+    }
   }
 
   function actualiser() {
