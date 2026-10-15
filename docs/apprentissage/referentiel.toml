@@ -174,8 +174,8 @@ fiches = []
 [[domaine.sujet]]
 id = "consommation-contrats"
 titre = "Achats, contrats, garanties et recours du consommateur"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["econ-lire-mention-garantie"]
 
 [[domaine]]
 id = "sciences-techniques-environnement"
