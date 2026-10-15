@@ -206,6 +206,9 @@ def page_enveloppe(titre: str, description: str, contenu: str, prefixe: str = ""
   <meta name="description" content="{e(description)}">
   <meta name="theme-color" content="#1d3268">
   <title>{e(titre)}</title>{canonical}
+  <link rel="icon" href="{prefixe}favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="{prefixe}assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="{prefixe}assets/images/apple-touch-icon.png">
   <link rel="stylesheet" href="{prefixe}assets/css/site.css">
   <script src="{prefixe}assets/js/site.js" defer></script>
   <script src="{prefixe}assets/js/navigation-parcours.js" defer></script>
