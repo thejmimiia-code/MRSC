@@ -693,6 +693,30 @@ def fichiers_du_site() -> None:
         ),
     )
     verifier(
+        "La prospective publique distingue scénarios, proposition et limites",
+        all(
+            terme in transparence_texte
+            for terme in (
+                'id="prospective-2030"',
+                "quatre situations possibles",
+                "sans probabilité ni prévision",
+                "décision ou position officielle de l’association",
+                "Aucun balayage externe récent",
+                "aucun atelier avec l’association ni test avec des personnes",
+                "concept candidat, non une fonction construite",
+                "Aucune fonction issue de la Boussole n’est intégrée au site.",
+                "Boussole des savoirs",
+                "Hypothèses, non validées",
+            )
+        )
+        and 'href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/prospective-2027-2030.md"' in transparence,
+    )
+    verifier(
+        "Les titres et le repère de statut de la note ressortent sur l’encadré bleu",
+        ".creator-note h3,\n.creator-note h4 { color: var(--white); }" in styles
+        and ".creator-note .eyebrow { color: #bae6fd; }" in styles,
+    )
+    verifier(
         "Le registre renvoie vers la présentation d’ÉVA et distingue objectifs, essais et résultats",
         'href="index.html#rd-eva"' in transparence
         and "objectifs, essais, r&eacute;sultats et fonctions disponibles sont distingu&eacute;s" in transparence,
