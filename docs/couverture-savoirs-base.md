@@ -235,7 +235,7 @@ Construire progressivement des passerelles des savoirs fondamentaux vers les mé
 | Question de recherche, hypothèses, modèles, preuves et limites | Début de couverture — à approfondir | [`recherche-question-hypothese`](../apprendre/fiches/recherche-question-hypothese.html) |
 | Lire, résumer et examiner une publication scientifique sans la prendre pour une preuve définitive | Début de couverture — à approfondir | [`recherche-lire-etude`](../apprendre/fiches/recherche-lire-etude.html) |
 | Intégrité de la recherche, citations, données, reproductibilité et science ouverte | Début de couverture — à approfondir | [`recherche-conserver-reference`](../apprendre/fiches/recherche-conserver-reference.html) |
-| Méthodes de travail avancées : revue de littérature, écriture académique et présentation orale | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Méthodes de travail avancées : revue de littérature, écriture académique et présentation orale | Début de couverture — à approfondir | [`recherche-distinguer-resume-citation`](../apprendre/fiches/recherche-distinguer-resume-citation.html) |
 | ISCED-F 00 — programmes et qualifications génériques, interdisciplinarité et compétences transversales | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | ISCED-F 01 — sciences de l’éducation, formation et recherche en pédagogie | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | ISCED-F 02 — arts, lettres, langues, philosophie et humanités | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
@@ -248,7 +248,7 @@ Construire progressivement des passerelles des savoirs fondamentaux vers les mé
 | ISCED-F 09 — santé et protection sociale | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | ISCED-F 10 — services, transport, tourisme, sécurité et services à la personne | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 12 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 15 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 11 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 15 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ## Règles de suivi et de publication
 

@@ -10,7 +10,7 @@
 - Distinguer les rôles de relecture — expertise du domaine, édition, accessibilité, personnes apprenantes, responsable de publication — sans publier de nom personnel par défaut.
 - Garder les notes de test volontaires minimales et non identifiantes. Ne demander ni récit de parcours scolaire, ni diagnostic, ni donnée financière ou de santé.
 - Un désaccord de fond, un doute de droit ou une erreur susceptible d’induire en erreur bloque la diffusion jusqu’à résolution.
-- Une revue interne de cohérence des 26 prototypes alors présents est consignée le 11 octobre 2026 dans [`revue-interne-prototypes-2026-10-11.md`](revue-interne-prototypes-2026-10-11.md). Elle n’est pas une validation spécialisée ni une autorisation de publication. Les huit fiches ajoutées dans le lot suivant, les dix fiches du lot suivant et les prototypes du 15 octobre 2026 ne sont pas couvertes par cette revue ; les 52 prototypes actuels restent à relire.
+- Une revue interne de cohérence des 26 prototypes alors présents est consignée le 11 octobre 2026 dans [`revue-interne-prototypes-2026-10-11.md`](revue-interne-prototypes-2026-10-11.md). Elle n’est pas une validation spécialisée ni une autorisation de publication. Les huit fiches ajoutées dans le lot suivant, les dix fiches du lot suivant et les prototypes du 15 octobre 2026 ne sont pas couvertes par cette revue ; les 53 prototypes actuels restent à relire.
 
 ## 1. Besoin, public et périmètre
 
@@ -247,7 +247,11 @@ Pour les trente-quatre prototypes décrits avant le lot courant, consigner une t
 
 **Statut : « Prototype à relire », non validé.** La fiche valorise un mot déjà connu sur une affiche bilingue fictive. Elle n’enseigne pas une langue entière. Faire relire (langues, FLE) ; revérifier culture.gouv.fr et education.gouv.fr ; ne copier aucun programme.
 
-Pour l’ensemble des cinquante-deux prototypes décrits ici, remplir une trace de décision séparée ; une vérification de génération, de syntaxe ou de lien local ne remplace pas la relecture de domaine, l’examen des droits, les essais d’usage ou la revue de navigateur.
+## Dossier en cours — `recherche-distinguer-resume-citation`
+
+**Statut : « Prototype à relire », non validé.** La fiche sépare citation et résumé sur une Carte-exemple. Elle n’est pas un cours universitaire. Faire relire (méthodologie) ; revérifier HAL et enseignementsup-recherche.gouv.fr ; ne copier aucun guide de style.
+
+Pour l’ensemble des cinquante-trois prototypes décrits ici, remplir une trace de décision séparée ; une vérification de génération, de syntaxe ou de lien local ne remplace pas la relecture de domaine, l’examen des droits, les essais d’usage ou la revue de navigateur.
 
 ### Trace de décision à compléter
 
