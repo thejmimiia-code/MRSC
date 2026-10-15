@@ -132,6 +132,7 @@ def classes_entete(prefixe: str = "", page: str = "apprendre") -> str:
           Menu
         </button>
         <button class="header-compact-toggle" type="button" data-header-compact-toggle aria-expanded="true" aria-controls="site-header-status site-header-identity" hidden>Réduire</button>
+        <a class="header-compact-brand" href="{prefixe}index.html" data-site-home aria-label="M.R.S.C — Accueil"><img src="{prefixe}assets/images/logo-mrsc.jpg" alt=""></a>
         <div class="nav-links" id="navigation-principale" data-primary-navigation>
 {navigation}
         </div>
