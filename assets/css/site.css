@@ -266,8 +266,8 @@ html.contraste-renforce .site-status-note {
 .header-compact-brand img {
   display: block;
   width: auto;
-  height: 48px;
-  max-width: 72px;
+  height: 100%;
+  max-width: 7.25rem;
   object-fit: contain;
   background: #fff;
   border-radius: 6px;
@@ -282,16 +282,18 @@ html.contraste-renforce .site-status-note {
   gap: .3rem;
   width: min(var(--content), calc(100% - 1rem));
   min-height: 0;
-  padding: .28rem .4rem .28rem 4.4rem;
+  padding: .28rem .4rem .28rem 7.6rem;
 }
 
 .site-header.is-compact .header-compact-brand {
   position: absolute;
-  left: .35rem;
-  top: 50%;
+  left: .3rem;
+  top: .22rem;
+  bottom: .22rem;
   z-index: 2;
   display: inline-flex;
-  transform: translateY(-50%);
+  align-items: stretch;
+  transform: none;
 }
 
 .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings, .site-journey-settings, .layout-settings) {
@@ -329,11 +331,7 @@ html.contraste-renforce .site-status-note {
   .site-header.is-compact .nav-inner {
     gap: .2rem;
     min-height: 0;
-    padding: .22rem .3rem .22rem 3.7rem;
-  }
-  .site-header.is-compact .header-compact-brand img {
-    height: 40px;
-    max-width: 60px;
+    padding: .22rem .3rem .22rem 7.2rem;
   }
 }
 
@@ -3037,7 +3035,20 @@ html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journ
   html.has-js .site-header.is-compact .nav-inner {
     min-height: 0;
     gap: .18rem;
+    padding-left: 7.2rem;
   }
+}
+
+html.has-js .site-header.is-compact .header-compact-brand {
+  top: .2rem;
+  bottom: .2rem;
+  transform: none;
+}
+
+html.has-js .site-header.is-compact .header-compact-brand img {
+  height: 100%;
+  width: auto;
+  max-width: 7.25rem;
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
