@@ -266,8 +266,8 @@ html.contraste-renforce .site-status-note {
 .header-compact-brand img {
   display: block;
   width: auto;
-  height: 3.15rem;
-  max-width: 5.2rem;
+  height: 3.5rem;
+  max-width: 5.6rem;
   object-fit: contain;
   background: #fff;
   border-radius: 6px;
@@ -275,31 +275,34 @@ html.contraste-renforce .site-status-note {
 
 .site-header.is-compact .nav-inner {
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
+  display: flow-root;
+  flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
-  gap: .3rem;
+  gap: .25rem;
   width: min(var(--content), calc(100% - 1rem));
   min-height: 0;
-  padding: .28rem .4rem .28rem 6.15rem;
+  padding: .28rem .4rem;
 }
 
 .site-header.is-compact .header-compact-brand {
-  position: absolute;
-  left: .4rem;
-  top: 50%;
+  position: static;
+  float: left;
+  left: auto;
+  top: auto;
   z-index: 1;
-  display: inline-flex;
+  display: block;
   align-items: center;
-  transform: translateY(-50%);
-  pointer-events: auto;
+  transform: none;
+  margin: 0 .55rem 0 0;
 }
 
 .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings, .site-journey-settings, .layout-settings) {
-  flex: 0 1 auto;
+  display: inline-flex;
+  flex: 0 0 auto;
   min-width: 0;
-  margin: 0;
+  margin: .1rem .18rem .1rem 0;
+  vertical-align: middle;
 }
 
 .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
@@ -327,12 +330,10 @@ html.contraste-renforce .site-status-note {
   max-width: none;
 }
 
-@media (max-width: 760px) {
-  .site-header.is-compact .nav-inner {
-    gap: .2rem;
-    min-height: 0;
-    padding: .22rem .3rem .22rem 6.15rem;
-  }
+.site-header.is-compact .nav-links:not(.is-open) {
+  position: absolute;
+  width: 100%;
+  left: 0;
 }
 
 .main-nav {
@@ -2950,6 +2951,7 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
 }
 @media (min-width: 1261px) {
   html.has-js:not(.texte-agrandi):not(.texte-tres-agrandi) .site-header.is-compact .nav-inner {
+    display: flow-root;
     flex-wrap: nowrap;
     align-items: center;
   }
@@ -3011,6 +3013,18 @@ html.entete-compacte { scroll-padding-top: 8rem; }
   .site-journey-button { min-width: 44px; min-height: 44px; }
 }
 
+html.has-js .site-header.is-compact .nav-inner {
+  display: flow-root;
+  min-height: 0;
+  padding: .28rem .4rem;
+}
+
+html.has-js .site-header.is-compact .nav-toggle,
+html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
+html.has-js .site-header.is-compact :is(.display-settings, .site-journey-settings, .layout-settings) {
+  display: inline-flex;
+}
+
 html.has-js .site-header.is-compact .nav-toggle,
 html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
 html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
@@ -3033,23 +3047,26 @@ html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journ
     font-size: .64rem;
   }
   html.has-js .site-header.is-compact .nav-inner {
+    display: flow-root;
     min-height: 0;
-    gap: .18rem;
-    padding-left: 6.15rem;
+    padding: .22rem .35rem;
   }
 }
 
 html.has-js .site-header.is-compact .header-compact-brand {
-  left: .4rem;
-  top: 50%;
+  float: left;
+  position: static;
+  left: auto;
+  top: auto;
   bottom: auto;
-  transform: translateY(-50%);
+  transform: none;
+  margin: 0 .55rem 0 0;
 }
 
 html.has-js .site-header.is-compact .header-compact-brand img {
-  height: 3.15rem;
+  height: 3.5rem;
   width: auto;
-  max-width: 5.2rem;
+  max-width: 5.6rem;
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
