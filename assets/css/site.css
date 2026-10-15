@@ -275,15 +275,43 @@ html.contraste-renforce .site-status-note {
 
 .site-header.is-compact .nav-inner {
   position: relative;
-  padding-inline-start: 4.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: .4rem;
+  width: min(var(--content), calc(100% - 1rem));
+  min-height: 52px;
+  padding: .4rem .55rem .45rem 4.35rem;
 }
 
 .site-header.is-compact .header-compact-brand {
   position: absolute;
-  left: .45rem;
-  top: .35rem;
+  left: .4rem;
+  top: 50%;
   z-index: 2;
   display: inline-flex;
+  transform: translateY(-50%);
+}
+
+.site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings, .site-journey-settings, .layout-settings) {
+  flex: 1 1 calc(33.333% - .4rem);
+  min-width: min(100%, 6.5rem);
+  margin: 0;
+}
+
+.site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+  width: 100%;
+  max-width: none;
+  min-height: 44px;
+  justify-content: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.site-header.is-compact .header-compact-toggle {
+  width: 100%;
+  max-width: none;
 }
 
 .main-nav {
@@ -2900,6 +2928,17 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   .display-settings-panel { width: min(clamp(320px,24rem,400px),calc(100vw - 1rem)); }
 }
 @media (min-width: 1261px) {
+  html.has-js:not(.texte-agrandi):not(.texte-tres-agrandi) .site-header.is-compact .nav-inner {
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  html.has-js:not(.texte-agrandi):not(.texte-tres-agrandi) .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings, .site-journey-settings, .layout-settings) {
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+  html.has-js:not(.texte-agrandi):not(.texte-tres-agrandi) .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+    width: auto;
+  }
   html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-inner {
     justify-content: center;
     min-height: 50px;

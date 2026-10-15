@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Ranger les boutons du mode réduit
+
+- **Initiative :** `coherence-textes-publics`.
+- **Signal :** en en-tête réduit, Menu, Agrandir, Parcours, Affichage et Présentation s’empilaient sans alignement.
+- **Décision :** logo à gauche ; les cinq commandes se rangent en rangées égales (trois puis deux), même hauteur, hors du flux du menu déroulant.
+- **Contrôles réellement exécutés :** `verifier-site-statique.py` ; `verifier-integration.py` — réussis.
+
 ## 2026-10-15 — Logo compact hors du groupe de boutons
 
 - **Initiative :** `coherence-textes-publics`.
