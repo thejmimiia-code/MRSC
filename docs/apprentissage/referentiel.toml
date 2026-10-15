@@ -320,8 +320,8 @@ fiches = ["arts-lire-image"]
 [[domaine.sujet]]
 id = "institutions-droits"
 titre = "Institutions françaises et européennes, droits et responsabilités"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["civ-reperer-echelle-institution"]
 
 [[domaine.sujet]]
 id = "elections-participation"

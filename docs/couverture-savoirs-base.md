@@ -131,10 +131,10 @@ Vérifier les affirmations, comprendre les institutions et participer sans confo
 | Vérifier l’auteur, la date, la source et l’affirmation | Début de couverture — à approfondir | [`civ-verifier-information`](../apprendre/fiches/civ-verifier-information.html) |
 | Choisir une source publique selon la question et vérifier sa portée | Début de couverture — à approfondir | [`civ-choisir-source-publique`](../apprendre/fiches/civ-choisir-source-publique.html) |
 | Distinguer image, légende, montage et interprétation | Début de couverture — à approfondir | [`arts-lire-image`](../apprendre/fiches/arts-lire-image.html) |
-| Institutions françaises et européennes, droits et responsabilités | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Institutions françaises et européennes, droits et responsabilités | Début de couverture — à approfondir | [`civ-reperer-echelle-institution`](../apprendre/fiches/civ-reperer-echelle-institution.html) |
 | Élections, décisions publiques et participation citoyenne | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 2 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 5 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 5 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Démarches, droits, sécurité et vie professionnelle
 
