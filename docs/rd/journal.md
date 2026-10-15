@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Visuel 3D à l’accueil et logo en en-tête réduit
+
+- **Initiative :** `coherence-textes-publics`.
+- **Signal :** en mode réduit, l’identité disparaît ; intégrer le visuel 3D choisi à l’accueil.
+- **Décision :** bandeau d’accueil avec `accueil-logo-mrsc-3d.jpg` (proposition R&D, légende explicite). En en-tête compact, garder un petit logo plat pour identifier l’onglet de navigation.
+- **Contrôles réellement exécutés :** `construire-apprentissages.py --verifier` ; `verifier-site-statique.py` ; `verifier-rd-continue.py` ; `verifier-integration.py` ; `verifier-securite.py` — réussis.
+- **Limites et suite :** le visuel 3D n’est pas l’identité officielle ; relecture humaine du cadrage.
+
 ## 2026-10-15 — R&D, innovation et prospective : source de santé publique
 
 - **Initiative :** `prospective-apprentissages-2030` et `relire-les-44-prototypes` (titre porté à 55 prototypes).

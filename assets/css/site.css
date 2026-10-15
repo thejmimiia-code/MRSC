@@ -231,6 +231,29 @@ html.contraste-renforce .site-status-note {
   display: none;
 }
 
+.header-compact-brand {
+  display: none;
+  flex: 0 0 auto;
+  align-items: center;
+  min-height: 44px;
+  margin-inline-end: .45rem;
+  text-decoration: none;
+}
+
+.header-compact-brand img {
+  display: block;
+  width: auto;
+  height: 36px;
+  max-width: 64px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.site-header.is-compact .header-compact-brand {
+  display: inline-flex;
+}
+
 .main-nav {
   background: var(--navy);
 }
@@ -3204,6 +3227,32 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 /* Accueil M.R.S.C : une hiérarchie commune entre mission, ressources et participation. */
 .home-hero-civic .hero-grid { align-items: center; }
 .home-hero-civic .hero-title { max-width: 20ch; }
+
+.home-hero-visual {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 clamp(1.4rem, 3vw, 2.2rem);
+  overflow: hidden;
+  border: 1px solid rgba(41, 88, 162, .12);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.home-hero-visual img {
+  display: block;
+  width: 100%;
+  max-height: min(42vh, 22rem);
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+.home-hero-visual figcaption {
+  margin: 0;
+  padding: .55rem 1rem .7rem;
+  color: var(--muted);
+  font-size: .86rem;
+}
 .home-hero-civic .hero-title span { color: var(--blue); }
 .home-hero-civic .home-hero-promise {
   margin-top: 1rem;
