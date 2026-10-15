@@ -35,7 +35,7 @@ Chaque fiche reçoit un horizon principal pour équilibrer le programme ; cela n
 
 | Horizon de contenu | Cible indicative |
 | --- | ---: |
-| Premières bases accessibles dès les repères du CP et du cycle 2 | 180 |
+| Premiers pas utiles, sans renvoyer à un niveau scolaire | 180 |
 | Consolidation, primaire et collège — sans en faire un parcours obligatoire | 200 |
 | Lycée général, technologique et professionnel | 180 |
 | Formations professionnelles, métiers, reconversion et vie active | 170 |
