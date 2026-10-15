@@ -62,8 +62,8 @@ fiches = ["langue-anglais-demander-aide", "langue-anglais-epeler"]
 [[domaine.sujet]]
 id = "autres-langues"
 titre = "Autres langues, langues régionales et français langue seconde"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["langue-reperer-mot-deja-connu"]
 
 [[domaine.sujet]]
 id = "ecoute-prononciation"

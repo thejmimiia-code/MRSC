@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Valoriser les langues déjà connues
+
+- **Initiative :** `coherence-textes-publics` et `relire-les-44-prototypes` (titre porté à 52 prototypes).
+- **Signal :** poursuivre le cycle et produire du contenu qui valorise l’apprentissage.
+- **Décision :** prototype `langue-reperer-mot-deja-connu` (Affiche-exemple Entrée/Entrada). S’appuyer sur un mot déjà familier. Sujet `autres-langues` passé à `partiel`.
+- **Contrôles réellement exécutés :** `construire-apprentissages.py --verifier` ; `verifier-site-statique.py` ; `verifier-rd-continue.py` ; `verifier-integration.py` ; `verifier-securite.py` — réussis.
+- **Limites et suite :** relecture langues/FLE ; pas d’audio. Écoute/prononciation reste `a-creer`.
+
 ## 2026-10-15 — Prototype intérêt / frais sur un crédit fictif
 
 - **Initiative :** `relire-les-44-prototypes` (titre porté à 51 prototypes).
