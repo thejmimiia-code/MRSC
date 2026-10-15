@@ -32,7 +32,7 @@ etat = "a-cadrer"
 domaines = ["methodes-communication", "langue-communication", "numerique-ia"]
 question = "Les personnes comprennent-elles les consignes, repèrent-elles les aides et trouvent-elles les fiches ou fonctions visées sur différents appareils?"
 preuves = ["docs/rd-parcours-apprentissage.md", "docs/rd-affichage-adaptatif.md", "docs/apprentissage/grille-relecture.md", "docs/rd/protocole-essais-usage.md"]
-prochaine_action = "Faire relire le protocole d'essais par les rôles requis et confirmer le cadre de consentement, puis adapter quelques tâches et seulement ensuite proposer des essais volontaires minimisant les données."
+prochaine_action = "Faire relire le protocole et les tâches candidates B1–B6 par les rôles requis (accessibilité, éditorial, confidentialité/droit) et confirmer consentement, conservation/suppression des notes et périmètre des volontaires. Ces tâches sont des brouillons non approuvés ; ne proposer aucune séance avant cette relecture. Ensuite seulement, adapter quelques tâches et préparer des essais volontaires minimisant les données."
 criteres_sortie = ["Tâches d'essai compréhensibles, option d'arrêt et solution de repli.", "Retours minimisés et non identifiants.", "Problèmes classés, corrigés et retestés sur clavier, mobile, zoom et technologies d'assistance pertinentes."]
 skills = ["conception-innovation", "accessibilite-co-conception", "evaluation-maintenance"]
 

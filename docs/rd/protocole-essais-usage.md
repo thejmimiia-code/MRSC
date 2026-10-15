@@ -51,6 +51,27 @@ Présenter une seule consigne à la fois. Ne pas fournir le chemin à suivre ni 
 
 A1–A8 sont des idées de tâche et ne sont pas des tests déjà réussis. Garder uniquement les tâches compatibles avec le contexte, l'accord et l'accessibilité de la personne.
 
+### Complément candidat — commandes de navigation et d’affichage
+
+Les commandes « Affichage », « Présentation », « Parcours » et « Réduire/Agrandir » ont évolué depuis la première version du protocole. Les tâches ci-dessous sont des **propositions à relire**, ajoutées pour mieux isoler leurs usages. Elles ne valent ni revue d’accessibilité, ni approbation du consentement, ni autorisation de recruter. Ne pas les administrer avant la relecture des rôles indiqués dans le portefeuille et la confirmation du cadre de consentement, de conservation et de suppression des notes.
+
+| ID | Consigne candidate à lire | Mise en place | Signal à observer, sans noter la personne |
+|---|---|---|---|
+| B1 | « Tu veux rendre le texte plus lisible pour toi. Peux-tu l’agrandir d’un cran, puis retrouver le réglage précédent ? » | Page publique, état initial noté dans un profil de démonstration. | La personne trouve « Affichage », repère le réglage, change puis restaure l’état de départ sans perdre la page ni confondre ce réglage avec le zoom natif. |
+| B2 | « Choisis “Panorama composite”, puis reviens à “Équilibrée”. » | Page éditoriale ou fiche; conserver la même page pendant la tâche. | La personne trouve « Présentation », comprend les libellés, observe la composition changer sans rechargement et revient à l’état de départ; le contenu et les commandes restent disponibles. |
+| B3 | « Réduis l’en-tête pour laisser davantage de place à la page, puis rouvre-le. » | Page publique en fenêtre assez large pour distinguer le contrôle manuel du repli automatique mobile. | Le contrôle « Réduire/Agrandir » est trouvé et réversible; le focus et les autres commandes ne disparaissent pas avec le contenu replié. |
+| B4 | « Au clavier seulement, ouvre “Affichage”, puis ferme-le avec Échap. Ouvre ensuite “Présentation” et ferme-le de la même façon. » | Clavier seul; repartir d’une page connue et vérifier le focus avant la tâche. | Les panneaux s’ouvrent et se ferment, le focus reste visible et revient au déclencheur après Échap; les panneaux exclusifs ne restent pas superposés. |
+| B5 (variation de B2) | « Choisis “Panorama composite”, puis reviens à “Équilibrée”. » | Répéter B2 sur une largeur étroite disponible (par exemple 320–375 px CSS) ou à fort zoom, sans demander à la personne de modifier les paramètres de son appareil. | « Présentation » reste atteignable dans le viewport; le panneau peut défiler à l’intérieur et la page ne force pas de défilement horizontal général. |
+| B6 | « Avec le mode d’accès que tu as choisi, ouvre “Présentation”, sélectionne “Lecture”, puis reviens à “Équilibrée”. » | Facultatif; uniquement si la personne souhaite utiliser son mode habituel, dont lecteur d’écran ou autre technologie d’assistance. | Les noms et états des commandes sont perceptibles par ce mode d’accès; aucune identité, limitation ou justification n’est demandée. |
+
+B1–B6 sont des consignes candidates, pas des résultats. Choisir seulement une ou deux tâches par séance selon l’accord et le confort de la personne; ne pas imposer de chronomètre, comparer les personnes ou interpréter une difficulté comme un manque de compétence. Répéter une tâche dans une autre largeur ou avec un autre mode d’accès est une observation de contexte, pas une mesure représentative.
+
+### Préparation technique et données pour cette série
+
+Avant une séance, noter la version du site, la page de départ, la largeur CSS approximative, le zoom et le mode d’entrée, sans identifiant ni profil de la personne. Revenir à un état de test connu au moyen d’un profil de démonstration ou d’une session dédiée. Ne pas effacer les préférences, l’historique ou les données du navigateur personnel d’une personne sans son accord explicite; ne pas lui demander d’ouvrir les outils de développement. Aucun enregistrement d’écran, de voix, aucune capture contenant des données personnelles et aucune mesure de temps ne sont prévus par défaut.
+
+Si l’essai exige de bloquer `localStorage`, `sessionStorage`, le réseau ou une fonction optionnelle, le faire comme contrôle technique séparé avec un profil de test — ne pas faire porter ce réglage à la personne volontaire. Consigner le comportement observé et son contexte, pas des réponses ni un historique de navigation. Le lien distant du simulateur constitue un essai distinct : ne pas le traiter comme disponible ou vérifié sur la seule base de son statut de publication.
+
 ## 5. Fiche de notes minimale
 
 Copier ce tableau pour chaque observation, sans nom ni données personnelles :
