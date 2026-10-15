@@ -3242,9 +3242,10 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-hero-visual img {
   display: block;
   width: 100%;
-  max-height: min(42vh, 22rem);
-  object-fit: cover;
-  object-position: center 42%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
 }
 
 .home-hero-visual figcaption {
@@ -3385,12 +3386,16 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
   .home-action-grid,.home-voice-grid { grid-template-columns: minmax(0,1fr); }
   .home-share-panel { grid-template-columns: minmax(0,1fr); }
   .home-join-actions { justify-items: start; }
+  .home-hero-visual { margin-inline: 0; }
+  .home-hero-visual img { width: 100%; height: auto; object-fit: contain; }
 }
 @media (max-width: 520px) {
   .home-hero-civic .hero-actions { align-items: stretch; }
   .home-hero-civic .hero-actions .button { width: 100%; }
   .home-join-actions { width: 100%; }
   .home-join-actions .button { width: 100%; }
+  .home-hero-visual { border-radius: 14px; }
+  .home-hero-visual img { width: 100%; height: auto; max-height: none; object-fit: contain; }
 }
 @media (forced-colors: active) {
   .home-hero-aside,.home-action-card,.home-voice-card,.home-share-panel,.home-share-fallback input {
