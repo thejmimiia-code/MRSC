@@ -46,6 +46,7 @@ LOT_RECENT = (
     "econ-distinguer-interet-frais",
     "langue-reperer-mot-deja-connu",
     "recherche-distinguer-resume-citation",
+    "histoire-reperer-echelle-france-monde",
 )
 
 
@@ -206,12 +207,12 @@ def verifier_catalogue_apprentissage() -> None:
     ids = [fiche.get("id", "") for fiche in fiches]
     prototypes = [fiche for fiche in fiches if fiche.get("statut_editorial")]
     doublons = sorted(ident for ident in set(ids) if ids.count(ident) > 1)
-    if len(fiches) != 79:
-        signaler(f"catalogue d’apprentissage : {len(fiches)} fiches au lieu de 79")
+    if len(fiches) != 80:
+        signaler(f"catalogue d’apprentissage : {len(fiches)} fiches au lieu de 80")
     if doublons:
         signaler("catalogue d’apprentissage : identifiants dupliqués : " + ", ".join(doublons))
-    if len(prototypes) != 53:
-        signaler(f"catalogue d’apprentissage : {len(prototypes)} prototypes au lieu de 53")
+    if len(prototypes) != 54:
+        signaler(f"catalogue d’apprentissage : {len(prototypes)} prototypes au lieu de 54")
     absents = sorted(set(LOT_RECENT) - set(ids))
     if absents:
         signaler("catalogue d’apprentissage : fiches du lot courant absentes : " + ", ".join(absents))
@@ -231,7 +232,7 @@ def verifier_catalogue_apprentissage() -> None:
         if manquants:
             signaler(f"{identifiant} : champ(s) de fiche incomplet(s) : {', '.join(manquants)}")
     if not ERREURS:
-        print("Catalogue d’apprentissage : 79 fiches sans doublon, 53 prototypes ; le lot courant et les fiches du 15 octobre 2026 ont leurs champs structurels et restent à relire.")
+        print("Catalogue d’apprentissage : 80 fiches sans doublon, 54 prototypes ; le lot courant et les fiches du 15 octobre 2026 ont leurs champs structurels et restent à relire.")
 
 
 def analyser(chemin: Path) -> PageInfo:
@@ -600,7 +601,7 @@ def verifier_aventure_anglais() -> None:
         "Les Mondes", "Les Escales", "pré-A1", "A2", "B1", "sans publicité", "sans compte",
         "Aucun ordre", "minuteur", "évaluation de ton niveau", "reste dans la page",
         "stockage local", "aucun microphone", "réception", "production", "interaction",
-        "79 fiches", "15 domaines", "53 prototypes", "parcours de formation personnel",
+        "80 fiches", "15 domaines", "54 prototypes", "parcours de formation personnel",
         "fiches autonomes, pas des cours distincts", "sans validation indépendante revendiquée",
     )
     absents = [marqueur for marqueur in marqueurs if marqueur.casefold() not in contenu_page.casefold()]
@@ -712,7 +713,7 @@ console.log(`${missions.length} escales, ${missions.reduce((n, m) => n + m.turns
 def verifier_dossier_apprentissage() -> None:
     controles = {
         ROOT / "apprendre.html": (
-            "79 entrées : 26 fiches du corpus initial et 53 prototypes explicitement à relire",
+            "80 entrées : 26 fiches du corpus initial et 54 prototypes explicitement à relire",
             "La relecture indépendante de toutes les fiches du corpus initial n’est pas garantie",
             "Prototype à relire",
             "Ambition éditoriale de long terme",
@@ -1086,6 +1087,13 @@ def verifier_dossier_apprentissage() -> None:
             "cette fiche n’est pas un cours universitaire",
             "hal.science",
         ),
+        ROOT / "apprendre" / "fiches" / "histoire-reperer-echelle-france-monde.html": (
+            "Statut éditorial : Prototype à relire",
+            "Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays",
+            "Frise-exemple",
+            "cette fiche n’enseigne pas une histoire de France ni du monde",
+            "vie-publique.fr/fiches",
+        ),
         ROOT / "docs" / "apprentissage" / "grille-relecture.md": (
             "Dossier en cours — `recherche-lire-etude`",
             "ne pas considérer comme validé ni prêt à la diffusion publique",
@@ -1098,7 +1106,7 @@ def verifier_dossier_apprentissage() -> None:
             "Dossiers en cours — huit prototypes de français, mathématiques, sciences, géographie, Web, arts et recherche",
             "Dossiers en cours — dix prototypes de français, anglais, mathématiques, sciences, géographie, informatique et recherche",
             "La couverture de `factures-abonnements` reste partielle",
-            "Pour l’ensemble des cinquante-trois prototypes décrits ici",
+            "Pour l’ensemble des cinquante-quatre prototypes décrits ici",
             "Une revue interne de cohérence des 26 prototypes alors présents",
             "Les huit fiches ajoutées dans le lot suivant, les dix fiches du lot suivant et les prototypes du 15 octobre 2026 ne sont pas couvertes par cette revue",
             "fr-reperer-idee-texte",
@@ -1139,16 +1147,16 @@ def verifier_dossier_apprentissage() -> None:
         ),
         ROOT / "docs" / "apprentissage" / "objectif-1000.md": (
             "1 000 fiches d’auto-apprentissage",
-            "79 entrées",
-            "53 prototypes explicitement à relire",
-            "921 entrées",
+            "80 entrées",
+            "54 prototypes explicitement à relire",
+            "920 entrées",
             "aucun lien, compte ou service externe n’est requis",
         ),
         ROOT / "docs" / "rd-parcours-apprentissage.md": (
             "docs/apprentissage/grille-relecture.md",
             "la date de contrôle des droits, le mode d’utilisation et une description de cette utilisation",
-            "79 fiches suivies dans 15 domaines",
-            "53 prototypes explicitement à relire",
+            "80 fiches suivies dans 15 domaines",
+            "54 prototypes explicitement à relire",
             "33 fiches de développement produites en quatre lots de 7, 8, 8 et 10",
             "ponctuation, épellation, géométrie, biologie, cartographie, repères historiques, systèmes d’exploitation et recherche documentaire",
             "fr-reperer-idee-texte",
@@ -1243,10 +1251,10 @@ def verifier_dossier_apprentissage() -> None:
             "arts-composer-formes",
         ),
         ROOT / "docs" / "rd-coherence-visuelle-editoriale.md": (
-            "79 entrées : 26 fiches du corpus initial et 53 prototypes explicitement à relire",
+            "80 entrées : 26 fiches du corpus initial et 54 prototypes explicitement à relire",
             "la relecture indépendante de toutes les fiches initiales n’est pas garantie",
             "33 fiches de développement réparties en quatre lots ouvrent des points d’entrée",
-            "79 pages générées, dont cinquante-trois prototypes à relire",
+            "80 pages générées, dont cinquante-quatre prototypes à relire",
         ),
         ROOT / "docs" / "apprentissage" / "sources-utilite-publique.md": (
             "Consultation documentaire : 8 octobre 2026",

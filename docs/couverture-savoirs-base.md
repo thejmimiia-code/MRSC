@@ -118,9 +118,9 @@ Situer des faits dans le temps, lire des sources et comprendre qu’un récit d�
 | --- | --- | --- |
 | Lire une frise, des dates et des périodes historiques | Début de couverture — à approfondir | [`histoire-lire-frise`](../apprendre/fiches/histoire-lire-frise.html)<br>[`histoire-situer-siecle`](../apprendre/fiches/histoire-situer-siecle.html) |
 | Comparer des sources, témoignages et points de vue | Début de couverture — à approfondir | [`histoire-comparer-sources`](../apprendre/fiches/histoire-comparer-sources.html) |
-| Repères d’histoire de France et du monde | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Repères d’histoire de France et du monde | Début de couverture — à approfondir | [`histoire-reperer-echelle-france-monde`](../apprendre/fiches/histoire-reperer-echelle-france-monde.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 2 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 3 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 3 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Citoyenneté, médias et information
 
