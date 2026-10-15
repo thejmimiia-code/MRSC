@@ -301,39 +301,39 @@ html.contraste-renforce .site-status-note {
 }
 
 .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+  flex: 0 0 auto;
   width: auto;
   max-width: none;
-  min-height: 34px;
-  padding: .22rem .55rem;
-  font-size: .75rem;
+  min-height: 0;
+  height: auto;
+  padding: .15rem .42rem;
+  font-size: .68rem;
+  line-height: 1.15;
   justify-content: center;
   box-sizing: border-box;
   white-space: nowrap;
 }
 
 .site-header.is-compact .nav-toggle svg {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
 }
 
 .site-header.is-compact .header-compact-toggle {
+  flex: 0 0 auto;
   width: auto;
   max-width: none;
 }
 
 @media (max-width: 760px) {
   .site-header.is-compact .nav-inner {
-    gap: .25rem;
-    padding: .28rem .35rem .28rem 3.1rem;
+    gap: .2rem;
+    min-height: 0;
+    padding: .22rem .3rem .22rem 2.85rem;
   }
   .site-header.is-compact .header-compact-brand img {
-    height: 24px;
-    max-width: 42px;
-  }
-  .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
-    min-height: 32px;
-    padding: .18rem .45rem;
-    font-size: .7rem;
+    height: 22px;
+    max-width: 38px;
   }
 }
 
@@ -3011,8 +3011,32 @@ html.entete-compacte { scroll-padding-top: 8rem; }
 @media (any-pointer: coarse) {
   .display-settings > summary,.display-control,.button,.nav-toggle,.header-compact-toggle,.nav-links a,summary { min-height: 44px; }
   .site-journey-button { min-width: 44px; min-height: 44px; }
-  .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
-    min-height: 32px;
+}
+
+html.has-js .site-header.is-compact .nav-toggle,
+html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
+html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+  min-height: 0;
+  height: auto;
+  padding: .12rem .4rem;
+  font-size: .68rem;
+  line-height: 1.15;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+}
+
+@media (max-width: 760px) {
+  html.has-js .site-header.is-compact .nav-toggle,
+  html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
+  html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+    min-height: 0;
+    padding: .1rem .32rem;
+    font-size: .64rem;
+  }
+  html.has-js .site-header.is-compact .nav-inner {
+    min-height: 0;
+    gap: .18rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {
