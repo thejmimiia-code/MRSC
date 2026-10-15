@@ -127,12 +127,12 @@ def classes_entete(prefixe: str = "", page: str = "apprendre") -> str:
     </div>
     <nav class="main-nav" aria-label="Navigation principale">
       <div class="nav-inner">
+        <a class="header-compact-brand" href="{prefixe}index.html" data-site-home aria-label="M.R.S.C — Accueil"><img src="{prefixe}assets/images/logo-mrsc.jpg" alt=""></a>
         <button class="nav-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="navigation-principale">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
           Menu
         </button>
         <button class="header-compact-toggle" type="button" data-header-compact-toggle aria-expanded="true" aria-controls="site-header-status site-header-identity" hidden>Réduire</button>
-        <a class="header-compact-brand" href="{prefixe}index.html" data-site-home aria-label="M.R.S.C — Accueil"><img src="{prefixe}assets/images/logo-mrsc.jpg" alt=""></a>
         <div class="nav-links" id="navigation-principale" data-primary-navigation>
 {navigation}
         </div>
