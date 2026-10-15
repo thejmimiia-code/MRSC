@@ -4023,3 +4023,68 @@ licence_source = "Non vérifiée — lien documentaire ; aucune fiche de licence
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Liste consultée le 15 octobre 2026 comme exemple d’identifiants courts de licences. Aucun identifiant, texte ni tableau n’est recopié dans la fiche."
+
+[[fiche]]
+id = "civ-reperer-echelle-institution"
+titre = "Repérer l’échelle d’une institution avant de chercher le bon service"
+matiere = "Citoyenneté et recherche d’information"
+matiere_id = "citoyennete"
+domaine = "citoyennete-medias"
+niveau = 2
+horizon_contenu = "Repères généraux sur les échelles publique en France ; les compétences exactes varient selon le sujet, le territoire et la date"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon pour distinguer commune, État et Union européenne sur des exemples fictifs d’orientation. Faire relire par une personne compétente en institutions. La fiche ne décrit aucune compétence juridique complète ni aucune démarche. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 9
+resume = "Avant de chercher un service, se demander à quelle échelle la question se pose : locale, nationale ou européenne."
+objectif = "Classer trois questions fictives selon l’échelle d’abord à explorer, sans conclure sur l’organisme compétent réel."
+situation = "Trois questions entièrement fictives : A) « Où se renseigner pour les horaires d’une médiathèque de quartier ? » B) « Où trouver une information générale sur un titre d’identité ? » C) « Où lire une information générale sur la monnaie unique européenne ? » Par quelle échelle commencer, avant de cliquer au hasard ?"
+analogie_titre = "Comme choisir l’étage d’un bâtiment avant le bureau"
+analogie = "Dans un grand bâtiment, on cherche d’abord l’étage (accueil de quartier, étage national, étage des règles partagées), puis le bureau. Les institutions publiques ont aussi des échelles différentes. Choisir l’étage évite de poser une question locale à un service qui traite un autre niveau."
+limite_analogie = "Un bâtiment a des étages stables ; les compétences publiques se chevauchent, changent et dépendent du territoire. L’Union européenne n’est pas « un étage au-dessus de la France » pour tout sujet. Cette analogie n’enseigne ni organigramme ni procédure."
+notions = [
+  "Échelle — niveau auquel une question se pose le plus souvent : locale, nationale, européenne ou autre.",
+  "Commune — collectivité de proximité ; beaucoup de services du quotidien s’y rattachent, sans que ce soit toujours le cas.",
+  "État — institutions nationales qui publient des règles et des informations valables, en principe, sur le territoire français concerné.",
+  "Union européenne — cadre commun à plusieurs pays pour certains sujets ; ce n’est pas l’interlocuteur de toutes les démarches quotidiennes.",
+  "Orientation — choisir par où commencer à chercher ; ce n’est pas désigner l’organisme qui tranchera le dossier."
+]
+demarche = [
+  "Formule la question en une phrase : quotidien de proximité, règle nationale, ou cadre partagé entre plusieurs pays ?",
+  "Propose une échelle de départ, puis cherche un point d’entrée officiel à cette échelle.",
+  "Vérifie l’émetteur, la date et le territoire de la page avant d’agir.",
+  "Si plusieurs échelles semblent concernées, note-le : il faudra confirmer, pas inventer un organigramme.",
+  "Pour une démarche réelle, utilise une source officielle à jour ou un accompagnement compétent ; cette fiche n’attribue aucune compétence."
+]
+exercice = "Pour les trois questions fictives A, B et C de la situation, quelle échelle explorer en premier ? Réponds par proximité / nationale / européenne, en une courte justification chacune."
+aide = "A parle d’un lieu de quartier. B parle d’un titre d’identité en général, pas d’un rendez-vous précis. C parle d’une monnaie utilisée dans plusieurs pays."
+correction = [
+  "A : commencer par une échelle de proximité (souvent communale pour une médiathèque de quartier), puis vérifier l’émetteur local. Ce n’est pas une preuve que la commune gère tous les lieux de lecture.",
+  "B : commencer par une information nationale sur les titres d’identité, par un portail public, sans confondre cela avec le lieu de rendez-vous qui dépend de la situation.",
+  "C : commencer par une information sur le cadre européen de la monnaie unique, distincte d’une banque ou d’un commerce local.",
+  "Dans les trois cas, l’échelle de départ n’identifie pas l’organisme qui traitera un dossier réel. Les compétences changent ; il faut une source à jour."
+]
+a_retenir = [
+  "On choisit d’abord une échelle, pas le premier lien.",
+  "Proximité, national et européen ne répondent pas aux mêmes questions.",
+  "Une échelle de départ n’est pas une compétence juridique.",
+  "Les organigrammes réels se vérifient sur des pages officielles datées."
+]
+transferer = "Cette lecture peut aider avant de chercher un contact public. Pour une démarche (identité, impôts, Europe, collectivité), consulte les pages officielles actuelles ou un accompagnement ; cette fiche n’ouvre aucun droit."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Vie publique — les fiches sur les institutions"
+url = "https://www.vie-publique.fr/fiches"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail consulté le 15 octobre 2026 : il présente des fiches thématiques sur les institutions de la République, les collectivités et l’Union européenne. Aucun contenu de fiche n’est copié."
+
+[[fiche.sources]]
+titre = "Service-Public — accueil d’information officielle sur les droits et démarches"
+url = "https://www.service-public.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Point d’entrée consulté le 15 octobre 2026 pour l’orientation administrative. Aucune fiche pratique n’est reprise."
