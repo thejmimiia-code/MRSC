@@ -76,16 +76,27 @@ p {
   word-break: normal;
   hyphens: none;
   text-wrap: pretty;
+  text-align: start;
 }
 
 main :is(h1, h2, h3) {
   text-wrap: balance;
   overflow-wrap: normal;
   hyphens: none;
+  text-align: start;
 }
 
 main p > strong:first-child {
   display: block;
+}
+
+main .phrase {
+  display: block;
+  text-align: start;
+}
+
+main .phrase + .phrase {
+  margin-top: .35em;
 }
 
 h1,
