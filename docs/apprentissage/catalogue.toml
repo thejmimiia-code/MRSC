@@ -3894,3 +3894,68 @@ licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation d
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Fiche réflexe consultée le 15 octobre 2026 pour rappeler de ne pas communiquer d’informations sensibles via un message et de vérifier un lien avant de cliquer. Aucun extrait n’est copié ; la fiche n’enseigne pas la procédure judiciaire ni le dépôt de plainte."
+
+[[fiche]]
+id = "info-table-requete-web"
+titre = "Distinguer une table, une requête et une page Web"
+matiere = "Informatique et programmation"
+matiere_id = "informatique"
+domaine = "informatique-programmation"
+niveau = 2
+horizon_contenu = "Premiers repères sur le stockage structuré et l’affichage Web ; aucun langage de requête ni aucun serveur n’est enseigné"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon d’informatique pour séparer une table de données, une question posée à ces données et une page qui affiche un résultat. Faire vérifier les termes par une personne compétente en bases de données et en Web. L’exemple est fictif ; la fiche n’enseigne ni SQL, ni API, ni configuration. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 9
+resume = "Repérer où les données sont rangées, quelle question on leur pose, et ce qu’une page Web montre — sans confondre les trois."
+objectif = "Nommer, dans un exemple fictif, la table, la requête et le résultat affiché, et dire ce que la page ne contient pas forcément."
+situation = "Club fictif « Atelier des cartes ». Un tableau interne liste prénom, jour et activité. Sur le site du club, une page affiche : « Mardi : 3 personnes en dessin ». D’où vient ce « 3 » ?"
+analogie_titre = "Comme un classeur, une question au secrétariat, et un tableau d’affichage"
+analogie = "Le classeur range les fiches. Une question au secrétariat (« qui vient mardi en dessin ? ») ne copie pas tout le classeur. Le tableau d’affichage montre un résumé utile, pas forcément toutes les fiches. Table, requête et page Web jouent des rôles comparables : ranger, demander, montrer."
+limite_analogie = "Une base réelle peut être répartie, protégée, mise à jour en continu. Une page Web peut cacher, filtrer, arrondir ou dater un résultat. Le secrétariat d’un club n’explique ni les droits d’accès, ni les formats d’échange, ni les pannes réseau."
+notions = [
+  "Table — ensemble de lignes décrites par les mêmes colonnes, par exemple prénom, jour, activité.",
+  "Requête — question précise posée aux données, avec un critère : un jour, une activité, un compte.",
+  "Résultat — lignes ou nombre obtenus après la question ; ce n’est pas automatiquement tout le contenu de la table.",
+  "Page Web — document affiché dans le navigateur ; elle peut montrer un résultat sans être le lieu de stockage.",
+  "Échange — le navigateur demande une ressource à un serveur ; la réponse peut être une page, pas la table entière."
+]
+demarche = [
+  "Repère d’abord ce qui est stocké : quelles colonnes, pour quel usage, dans l’exemple fictif.",
+  "Formule la question réellement posée : filtrer, compter, lister ? Ce n’est pas la même chose que « tout voir ».",
+  "Regarde ce que la page affiche : un nombre, une liste, une date ? Note ce qui n’apparaît pas (noms, autres jours, source).",
+  "Sépare les trois rôles : rangement, question, affichage. Une page à jour n’est pas une preuve que la table est complète.",
+  "Pour une donnée réelle, vérifie aussi l’émetteur, la date et les conditions d’accès ; cette fiche ne les enseigne pas."
+]
+exercice = "Dans la situation fictive, identifie : 1) un exemple de table, 2) une requête possible qui aboutit au « 3 », 3) ce que la page ne montre pas. La table inventée contient : Léa / mardi / dessin ; Noé / mardi / dessin ; Inès / mardi / dessin ; Paul / mercredi / théâtre."
+aide = "Le « 3 » correspond à un compte, pas à une liste de prénoms. Cherche le critère commun (jour et activité), puis ce qui reste dans la table hors de ce critère."
+correction = [
+  "Table fictive : quatre lignes avec les colonnes prénom, jour, activité.",
+  "Requête possible : compter les lignes dont le jour est mardi et l’activité est dessin. Le résultat numérique est 3.",
+  "La page montre ce nombre ; elle ne montre pas les prénoms, ni la ligne de mercredi, ni le classeur entier. D’autres requêtes donneraient un autre affichage.",
+  "L’exemple n’utilise aucun langage de requête réel. Sur un site, l’affichage peut aussi être ancien, arrondi ou limité par des droits d’accès."
+]
+a_retenir = [
+  "Ranger, demander et afficher sont trois opérations distinctes.",
+  "Une page Web n’est pas la base : elle en montre un extrait ou un résumé.",
+  "Changer la question change le résultat, même si la table reste la même.",
+  "Un chiffre affiché n’indique ni la qualité des données, ni qui a le droit de les voir."
+]
+transferer = "Cette distinction aide à lire un tableau de bord, un catalogue de données ou un résultat de recherche. Pour interroger une vraie base ou publier des données, il faut les outils, les droits et la documentation du jeu concerné ; cette fiche n’enseigne ni langage ni procédure."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "MDN Web Docs — La relation client-serveur"
+url = "https://developer.mozilla.org/fr/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview"
+licence_source = "Non vérifiée pour une réutilisation du texte — lien documentaire ; aucune citation copiée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 15 octobre 2026 pour situer l’idée qu’un navigateur envoie une requête et reçoit une réponse. Aucun extrait, exemple HTTP ni schéma n’est repris."
+
+[[fiche.sources]]
+titre = "data.gouv.fr — plateforme des données publiques françaises"
+url = "https://www.data.gouv.fr/"
+licence_source = "Non vérifiée — les conditions varient selon les jeux ; aucune donnée réutilisée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Accueil consulté le 15 octobre 2026 comme exemple de catalogue de jeux de données distinct des pages qui les présentent. Aucun jeu, fichier, chiffre du bandeau ni visualisation n’est repris."

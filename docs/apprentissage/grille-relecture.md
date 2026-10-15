@@ -10,7 +10,7 @@
 - Distinguer les rôles de relecture — expertise du domaine, édition, accessibilité, personnes apprenantes, responsable de publication — sans publier de nom personnel par défaut.
 - Garder les notes de test volontaires minimales et non identifiantes. Ne demander ni récit de parcours scolaire, ni diagnostic, ni donnée financière ou de santé.
 - Un désaccord de fond, un doute de droit ou une erreur susceptible d’induire en erreur bloque la diffusion jusqu’à résolution.
-- Une revue interne de cohérence des 26 prototypes alors présents est consignée le 11 octobre 2026 dans [`revue-interne-prototypes-2026-10-11.md`](revue-interne-prototypes-2026-10-11.md). Elle n’est pas une validation spécialisée ni une autorisation de publication. Les huit fiches ajoutées dans le lot suivant, les dix fiches du lot suivant et le prototype `civ-trouver-service-public` (15 octobre 2026) ne sont pas couvertes par cette revue ; les 45 prototypes actuels restent à relire.
+- Une revue interne de cohérence des 26 prototypes alors présents est consignée le 11 octobre 2026 dans [`revue-interne-prototypes-2026-10-11.md`](revue-interne-prototypes-2026-10-11.md). Elle n’est pas une validation spécialisée ni une autorisation de publication. Les huit fiches ajoutées dans le lot suivant, les dix fiches du lot suivant et les prototypes `civ-trouver-service-public` et `info-table-requete-web` (15 octobre 2026) ne sont pas couvertes par cette revue ; les 46 prototypes actuels restent à relire.
 
 ## 1. Besoin, public et périmètre
 
@@ -219,7 +219,11 @@ Pour les trente-quatre prototypes décrits avant le lot courant, consigner une t
 
 **Statut : « Prototype à relire », non validé.** La fiche enseigne une méthode d’orientation (question, point d’entrée officiel, lecture de l’adresse et des champs). Elle n’est pas une démarche réelle. Faire relire par une personne compétente en démarches administratives et en accessibilité ; revérifier Service-Public, France services et la fiche hameçonnage ; ne pas recopier de procédure, de délai ni de liste de pièces.
 
-Pour l’ensemble des quarante-cinq prototypes décrits ici, remplir une trace de décision séparée ; une vérification de génération, de syntaxe ou de lien local ne remplace pas la relecture de domaine, l’examen des droits, les essais d’usage ou la revue de navigateur.
+## Dossier en cours — `info-table-requete-web`
+
+**Statut : « Prototype à relire », non validé.** La fiche sépare table, requête et page Web sur un exemple de club fictif. Elle n’enseigne ni SQL ni HTTP. Faire relire par une personne compétente en bases de données et en Web ; revérifier MDN et data.gouv.fr ; confirmer qu’aucun extrait n’a été copié.
+
+Pour l’ensemble des quarante-six prototypes décrits ici, remplir une trace de décision séparée ; une vérification de génération, de syntaxe ou de lien local ne remplace pas la relecture de domaine, l’examen des droits, les essais d’usage ou la revue de navigateur.
 
 ### Trace de décision à compléter
 

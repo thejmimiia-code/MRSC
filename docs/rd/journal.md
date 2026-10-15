@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Prototype table / requête / page Web
+
+- **Initiative :** `relire-les-44-prototypes` (titre porté à 46 prototypes).
+- **Question :** comment distinguer un stockage structuré, une question posée aux données et un affichage Web, sans enseigner un langage de requête ?
+- **Base vérifiée :** le sujet `bases-donnees-web` était `a-creer`. Pages consultées le 15 octobre 2026 : MDN « relation client-serveur » (requête/réponse du navigateur) et l’accueil de data.gouv.fr (catalogue distinct des pages de présentation). Aucun extrait ni chiffre de bandeau n’est repris.
+- **Décision :** prototype `info-table-requete-web` avec club fictif « Atelier des cartes ». Sujet passé à `partiel`. Pas de SQL, pas d’API, pas de configuration.
+- **Contrôles réellement exécutés :** compilation Python ; `verifier-rd-continue.py` ; `construire-apprentissages.py` puis `--verifier` (72 fiches, 15 domaines) ; `construire-simulateur.py --verifier` ; `test_protocole_editorial.py` (7 tests) ; `verifier-site-statique.py` ; `verifier-securite.py` ; `verifier-integration.py` — réussis.
+- **Limites et suite :** à relire (bases de données, Web, accessibilité). Les sujets `genie-logiciel-droits` et `systemes-embarques` restent `a-creer`.
+
 ## 2026-10-15 — Prototype d’orientation vers un service public
 
 - **Initiative :** `relire-les-44-prototypes` (titre porté à 45 prototypes), en lien avec `veille-savoirs-evolutifs`.

@@ -12,14 +12,14 @@ regle = "Ne changer derniere_revue qu'après une revue réellement effectuée et
 
 [[initiative]]
 id = "relire-les-44-prototypes"
-titre = "Faire relire les 45 prototypes d'apprentissage"
+titre = "Faire relire les 46 prototypes d'apprentissage"
 priorite = "P0"
 phase = "relecture"
 etat = "a-valider"
 domaines = ["langue-communication", "langues-etrangeres", "mathematiques", "economie-finances", "sciences-techniques-environnement", "geographie", "histoire-memoire", "citoyennete-medias", "numerique-ia", "informatique-programmation", "arts-culture", "methodes-communication", "etudes-superieures-recherche"]
 question = "Quels contenus sont exacts, utiles, accessibles, originaux et suffisamment délimités pour franchir leurs revues spécialisées?"
 preuves = ["docs/apprentissage/catalogue.toml", "docs/apprentissage/grille-relecture.md", "docs/apprentissage/revue-interne-prototypes-2026-10-11.md"]
-prochaine_action = "Organiser les relectures de domaine, de droits et d'accessibilité des 45 prototypes, y compris civ-trouver-service-public ; conserver le statut Prototype à relire jusqu'à ce que chaque contrôle ait une preuve."
+prochaine_action = "Organiser les relectures de domaine, de droits et d'accessibilité des 46 prototypes, y compris civ-trouver-service-public et info-table-requete-web ; conserver le statut Prototype à relire jusqu'à ce que chaque contrôle ait une preuve."
 criteres_sortie = ["Chaque fiche a une décision et une trace de revue adaptée au risque.", "Toute erreur importante, incertitude ou source manquante est corrigée ou affichée.", "Aucune revue interne n'est présentée comme validation indépendante."]
 skills = ["recherche-sources", "conception-pedagogique", "accessibilite-co-conception", "evaluation-maintenance"]
 

@@ -732,9 +732,9 @@ def fichiers_du_site() -> None:
         all(
             terme in transparence_texte
             for terme in (
-                "71 fiches dans 15 domaines",
+                "72 fiches dans 15 domaines",
                 "26 fiches du corpus initial",
-                "45 prototypes explicitement à relire",
+                "46 prototypes explicitement à relire",
                 "La relecture indépendante de toutes les fiches initiales n’est pas garantie",
             )
         ),

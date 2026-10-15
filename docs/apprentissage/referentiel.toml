@@ -467,8 +467,8 @@ fiches = ["info-lire-adresse-web"]
 [[domaine.sujet]]
 id = "bases-donnees-web"
 titre = "Bases de données, requêtes, Web et échanges de données"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["info-table-requete-web"]
 
 [[domaine.sujet]]
 id = "tests-debogage"
