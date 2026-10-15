@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Une ligne compacte sur ordinateur
+
+- **Initiative :** `coherence-textes-publics`.
+- **Signal :** sur PC, Présentation tombait seul sous un logo trop haut.
+- **Décision :** logo à la hauteur des boutons ; une seule rangée (nowrap) sur grand écran, retour à la ligne seulement sous 760 px.
+- **Contrôles réellement exécutés :** `verifier-site-statique.py` ; `verifier-integration.py` — réussis.
+
 ## 2026-10-16 — Boutons à droite du logo, sans passage dessous
 
 - **Initiative :** `coherence-textes-publics`.

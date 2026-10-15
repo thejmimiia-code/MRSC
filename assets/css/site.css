@@ -266,42 +266,43 @@ html.contraste-renforce .site-status-note {
 .header-compact-brand img {
   display: block;
   width: auto;
-  height: 3.5rem;
-  max-width: 5.6rem;
+  height: 2rem;
+  max-width: 3.5rem;
   object-fit: contain;
   background: #fff;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .site-header.is-compact .nav-inner {
   position: relative;
-  display: flow-root;
+  display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
-  gap: .25rem;
+  gap: .35rem;
   width: min(var(--content), calc(100% - 1rem));
   min-height: 0;
-  padding: .28rem .4rem;
+  padding: .22rem .45rem;
 }
 
 .site-header.is-compact .header-compact-brand {
   position: static;
-  float: left;
+  float: none;
   left: auto;
   top: auto;
   z-index: 1;
-  display: block;
+  display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   transform: none;
-  margin: 0 .55rem 0 0;
+  margin: 0;
 }
 
 .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings, .site-journey-settings, .layout-settings) {
   display: inline-flex;
   flex: 0 0 auto;
   min-width: 0;
-  margin: .1rem .18rem .1rem 0;
+  margin: 0;
   vertical-align: middle;
 }
 
@@ -311,8 +312,8 @@ html.contraste-renforce .site-status-note {
   max-width: none;
   min-height: 0;
   height: auto;
-  padding: .15rem .42rem;
-  font-size: .68rem;
+  padding: .2rem .55rem;
+  font-size: .72rem;
   line-height: 1.15;
   justify-content: center;
   box-sizing: border-box;
@@ -332,8 +333,10 @@ html.contraste-renforce .site-status-note {
 
 .site-header.is-compact .nav-links:not(.is-open) {
   position: absolute;
-  width: 100%;
+  width: auto;
   left: 0;
+  flex: 0 0 0;
+  overflow: visible;
 }
 
 .main-nav {
@@ -2951,7 +2954,7 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
 }
 @media (min-width: 1261px) {
   html.has-js:not(.texte-agrandi):not(.texte-tres-agrandi) .site-header.is-compact .nav-inner {
-    display: flow-root;
+    display: flex;
     flex-wrap: nowrap;
     align-items: center;
   }
@@ -3014,9 +3017,11 @@ html.entete-compacte { scroll-padding-top: 8rem; }
 }
 
 html.has-js .site-header.is-compact .nav-inner {
-  display: flow-root;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
   min-height: 0;
-  padding: .28rem .4rem;
+  padding: .22rem .45rem;
 }
 
 html.has-js .site-header.is-compact .nav-toggle,
@@ -3030,8 +3035,8 @@ html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
 html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
   min-height: 0;
   height: auto;
-  padding: .12rem .4rem;
-  font-size: .68rem;
+  padding: .2rem .55rem;
+  font-size: .72rem;
   line-height: 1.15;
   flex: 0 0 auto;
   width: auto;
@@ -3043,30 +3048,36 @@ html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journ
   html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
   html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
     min-height: 0;
-    padding: .1rem .32rem;
-    font-size: .64rem;
+    padding: .12rem .4rem;
+    font-size: .68rem;
   }
   html.has-js .site-header.is-compact .nav-inner {
-    display: flow-root;
+    display: flex;
+    flex-wrap: wrap;
     min-height: 0;
     padding: .22rem .35rem;
+  }
+  html.has-js .site-header.is-compact .header-compact-brand img {
+    height: 1.85rem;
+    max-width: 3.2rem;
   }
 }
 
 html.has-js .site-header.is-compact .header-compact-brand {
-  float: left;
+  float: none;
   position: static;
   left: auto;
   top: auto;
   bottom: auto;
   transform: none;
-  margin: 0 .55rem 0 0;
+  margin: 0;
+  display: inline-flex;
 }
 
 html.has-js .site-header.is-compact .header-compact-brand img {
-  height: 3.5rem;
+  height: 2rem;
   width: auto;
-  max-width: 5.6rem;
+  max-width: 3.5rem;
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
