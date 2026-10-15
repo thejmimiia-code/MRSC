@@ -4471,3 +4471,67 @@ licence_source = "Non vérifiée — lien documentaire ; aucun programme n’est
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucun programme d’histoire n’est recopié."
+
+
+[[fiche]]
+id = "sante-reperer-source-publique"
+titre = "Repérer une source de santé publique avant d’agir"
+matiere = "Santé, sécurité et corps"
+matiere_id = "sante"
+domaine = "sante-securite-corps"
+niveau = 2
+horizon_contenu = "Lecture d’un message fictif ; aucun diagnostic, traitement ni consigne de soin n’est donné"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon pour distinguer un message pressant d’un point d’entrée public de santé. Faire relire par une personne compétente en éducation à la santé et en médias. Aucun conseil médical. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Comparer un message urgent et un portail public, sans diagnostiquer ni soigner."
+objectif = "Dans un exemple fictif, choisir par où commencer pour vérifier une information de santé, sans suivre le premier lien."
+situation = "Message-exemple : « Buvez ce sirop miracle dès ce soir, cliquez ici. » À côté, tu peux ouvrir toi-même un portail public d’information de santé. Par où commencer avant d’agir ?"
+analogie_titre = "Comme vérifier l’horaire d’une pharmacie de garde sur l’affiche officielle, pas sur un tract glissé sous la porte"
+analogie = "Un tract peut être pressant. L’affiche du service compétent, que tu vas lire toi-même, est un meilleur point de départ. Une information de santé se vérifie de la même façon : on ouvre un canal public, on lit l’émetteur et la date."
+limite_analogie = "Une pharmacie n’est pas un diagnostic. Un portail public oriente ; il ne te soigne pas et ne remplace pas un professionnel. Cette analogie n’indique aucun médicament."
+notions = [
+  "Source publique de santé — page d’un organisme public identifié, avec une date.",
+  "Message pressant — texte qui pousse à agir vite, souvent par un lien reçu.",
+  "Émetteur — qui publie l’information et en répond.",
+  "Limite — cette fiche n’est pas un conseil médical."
+]
+demarche = [
+  "Lis le message sans cliquer : que promet-il, avec quelle urgence ?",
+  "Ouvre un point d’entrée public par un favori ou le nom de l’organisme, pas par le lien reçu.",
+  "Vérifie l’émetteur et la date. Un symptôme réel se discute avec un professionnel compétent.",
+  "Ne communique pas de données de santé par un lien non vérifié.",
+  "Cette fiche n’est pas un conseil médical : elle n’indique ni traitement ni diagnostic."
+]
+exercice = "Dans la situation fictive, que ferais-tu en premier ? A) Cliquer sur le lien du sirop miracle. B) Ouvrir toi-même un portail public d’information de santé, puis chercher le sujet. C) Transmettre le message à tout le monde « pour prévenir »."
+aide = "Compare l’origine du lien (un message) et l’origine d’un site que tu ouvres toi-même."
+correction = [
+  "B est la réponse attendue pour cet entraînement : commencer par un canal public ouvert soi-même.",
+  "A suit un lien non vérifié. C relance un message dont l’émetteur n’est pas établi.",
+  "Même après B, un problème de santé réel se discute avec un professionnel. Cette fiche n’est pas un conseil médical."
+]
+a_retenir = [
+  "Ta prudence compte : tu n’as pas à suivre le premier lien.",
+  "On vérifie l’émetteur et la date avant d’agir.",
+  "Un message urgent n’est pas une source publique de santé.",
+  "Cette fiche n’est pas un conseil médical."
+]
+transferer = "Cette méthode peut servir avant de relayer une rumeur de santé. Pour une question réelle, consulte un professionnel et des pages officielles à jour ; cette fiche n’est ni un diagnostic ni un traitement."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 90
+
+[[fiche.sources]]
+titre = "Ministère de la Santé — accueil"
+url = "https://sante.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail consulté comme point d’entrée. Aucun contenu médical n’est copié."
+
+[[fiche.sources]]
+titre = "Santé publique France — accueil"
+url = "https://www.santepubliquefrance.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune consigne n’est reprise"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucune campagne ni fiche n’est reprise."
