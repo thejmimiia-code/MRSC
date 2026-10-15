@@ -22,6 +22,16 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Contrôles :** `python3 outils/verifier-rd-continue.py` et `git diff --check` — exécutés après ces modifications et réussis.
 - **Limites et suite :** les tâches sont des hypothèses de conception, pas des preuves d’utilisabilité, d’accessibilité ou de compréhension. Aucune personne n’a été recrutée ni testée. Faire relire le protocole et définir le cadre de données avant de préparer des essais volontaires; garder l’initiative `a-cadrer` jusque-là.
 
+## 2026-10-15 — Prospective et innovation pour l’apprentissage à l’horizon 2030
+
+- **Initiative :** `prospective-apprentissages-2030`, ajoutée au portefeuille à l’état `a-cadrer` et priorité `P1`.
+- **Question :** quelles capacités d’apprentissage et de délibération restent utiles sous plusieurs futurs plausibles de médiation numérique, continuité des services, langues et capacité de relecture ? L’horizon 2027–2030 sert à organiser une réflexion, pas à annoncer une prédiction.
+- **Base vérifiée dans le dépôt :** 70 fiches suivies dans 15 domaines, dont 44 prototypes à relire; cinq Escales d’anglais; réglages de présentation locaux; simulateur distant déclaré Vercel mais non vérifié directement. Un contrôle TOML ciblé confirme que les six fiches du parcours pilote existent et que leurs sujets sont tous au statut `partiel`. Les sources sont les registres et notes de R&D locales; aucune veille externe actuelle, enquête de besoin, atelier de l’association ou session de test n’a été menée dans cette passe.
+- **Options comparées :** Boussole des savoirs à partir des fiches existantes; passeport de traçabilité d’un résultat du simulateur; kit autonome/à imprimer; ne rien construire. La note propose une Boussole comme candidat au prototype papier uniquement, parce qu’elle peut réutiliser les identifiants et statuts déjà présents sans API, profil, IA ni nouvelle saisie. Le concept est rejetable si les filtres de l’atlas suffisent ou si les relations augmentent la confusion et la maintenance.
+- **Changements :** création de `docs/rd/prospective-2027-2030.md` avec quatre scénarios de stress sans probabilité, les incertitudes, les choix robustes, une route illustrative de vérification d’information et les portes d’approbation; ajout de l’initiative et de ses critères au `portefeuille.toml`. Aucun code public ni donnée pédagogique n’a changé.
+- **Contrôles réellement exécutés :** `python3 outils/verifier-rd-continue.py` (13 initiatives), `python3 outils/test_protocole_editorial.py` (7 tests), contrôle TOML des six fiches/statuts du parcours, vérification de 14 liens locaux dans la note et `git diff --check` — tous réussis après l’ajout de cette entrée.
+- **Limites et suite :** les scénarios sont hypothèses de conception, pas prévisions ni faits externes; le concept n’est ni construit, ni approuvé, ni testé. Faire relire l’angle par l’association, sélectionner ou écarter le pilote, puis consulter et recouper des sources externes primaires sur les axes retenus avant d’annoncer une tendance ou de passer au prototype.
+
 ## 2026-10-14 — Largeur stable du bouton Agrandir/Réduire
 
 - **Initiative :** `optimisation-du-site`, maintenue à l’état `a-tester`.

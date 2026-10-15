@@ -154,6 +154,19 @@ criteres_sortie = ["Les chiffres visibles correspondent aux registres et leur po
 skills = ["revue-contradictoire", "strategie-tests", "recherche-sources", "evaluation-maintenance"]
 
 [[initiative]]
+id = "prospective-apprentissages-2030"
+titre = "Éprouver des futurs possibles pour l’apprentissage et la délibération"
+priorite = "P1"
+phase = "conception"
+etat = "a-cadrer"
+domaines = ["citoyennete-medias", "numerique-ia", "methodes-communication", "langues-etrangeres"]
+question = "Quelles capacités du M.R.S.C. restent utiles sous plusieurs futurs plausibles de médiation numérique, de continuité des services, de langues et de capacité de relecture d’ici 2030?"
+preuves = ["docs/rd/prospective-2027-2030.md", "docs/apprentissage/catalogue.toml", "docs/apprentissage/referentiel.toml", "docs/rd-ia-usages-fraudes.md", "docs/rd-affichage-adaptatif.md", "docs/rd-confidentialite-rgpd.md"]
+prochaine_action = "Faire examiner le cadrage et le concept Boussole des savoirs par l’association; si l’angle est retenu, rechercher des sources primaires récentes pour les incertitudes choisies, puis décider si un prototype papier apporte plus que les filtres existants. Ne pas construire, tester auprès de personnes ou publier de tendance avant ces étapes."
+criteres_sortie = ["Faits du dépôt, hypothèses de scénario et preuves externes sont séparés; aucune probabilité ou tendance n’est inventée.", "L’association choisit un seul pilote borné ou l’option de ne rien construire.", "Le prototype éventuel réutilise le catalogue et le référentiel comme sources de vérité sans créer un doublon.", "Les limites éditoriales, l’alternative accessible, la confidentialité et la maintenance sont définies avant l’essai.", "Les critères d’arrêt et de décision sont fixés avant tout essai volontaire autorisé."]
+skills = ["conception-innovation", "cartographie-connaissances", "recherche-sources", "revue-contradictoire", "evaluation-maintenance"]
+
+[[initiative]]
 id = "raccordement-domaine-www"
 titre = "Raccorder www.mrsc.fr à GitHub Pages sans perdre le domaine visible"
 priorite = "P1"
