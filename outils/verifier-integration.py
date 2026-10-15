@@ -69,6 +69,7 @@ PAGES = (
     "apprendre.html",
     "anglais-aventure.html",
     "ia-societe.html",
+    "eva.html",
     "simulateur.html",
     "documents.html",
     "liens-utiles.html",
@@ -645,13 +646,59 @@ def fichiers_du_site() -> None:
                 'id="rd-eva"',
                 "ÉVA signifie « Entité Virtuelle Autonome »",
                 "Recherche en cours",
-                "Une idée ou un objectif n’est pas une fonction déjà disponible.",
+                "Matériel et financements nécessaires.",
+                "Le budget et les besoins précis restent à définir",
+                "Ce résumé n’est pas un appel aux dons",
+                "ne constitue pas une position officielle de l’association",
+                'href="eva.html"',
+                "proposition de présentation (à relire)",
                 "href=\"transparence.html#rd-innovation\"",
             )
         ),
     )
+    eva = (RACINE / "eva.html").read_text(encoding="utf-8")
+    eva_texte = unescape(eva)
+    verifier(
+        "La page ÉVA reste une proposition générale, non technique et non validée",
+        all(
+            terme in eva_texte
+            for terme in (
+                "proposition de rédaction préparée avec l’aide d’une IA",
+                "à relire et à valider avant toute communication officielle",
+                "Aucune conscience acquise n’est revendiquée",
+                "Cette proposition ne constitue pas une position officielle de l’association",
+                "la proposition prévoit du matériel adapté",
+                "des financements pour l’acquérir",
+                "ne publie pas de données personnelles",
+                "procédés internes détaillés",
+                "Cette proposition ne présente aucun budget",
+            )
+        )
+        and not re.search(r"\b\d+\s*(?:Go|To|jetons?|milliards?\s+de\s+paramètres)\b", eva_texte, re.IGNORECASE),
+    )
+    verifier(
+        "La page ÉVA est liée, indexée, publiée et servie en aperçu local",
+        'href="eva.html"' in accueil
+        and "/MRSC/eva.html" in sitemap
+        and "/MRSC/eva.html" in llms_txt.read_text(encoding="utf-8")
+        and "cp index.html apprendre.html anglais-aventure.html ia-societe.html eva.html simulateur.html" in publication
+        and '"eva.html"' in serveur_local,
+    )
     transparence = (RACINE / "transparence.html").read_text(encoding="utf-8")
     transparence_texte = unescape(transparence)
+    verifier(
+        "Le registre de transparence identifie ÉVA comme proposition IA à relire",
+        all(
+            terme in transparence_texte
+            for terme in (
+                "Proposition de présentation du projet, de ses limites et des moyens nécessaires",
+                "Texte préparé avec l’aide d’une IA et à relire",
+                "Besoins, budget et détails techniques non validés pour publication",
+                "Proposition à valider",
+            )
+        )
+        and 'href="eva.html"' in transparence,
+    )
     documents_html = (RACINE / "documents.html").read_text(encoding="utf-8")
     fichiers_locaux_documents = (
         "assets/documents/statuts-2020.pdf",

@@ -743,6 +743,7 @@ def test_liste_statique() -> None:
     specification.loader.exec_module(module)
     autorises = (
         RACINE / "index.html",
+        RACINE / "eva.html",
         RACINE / "assets" / "css" / "site.css",
         RACINE / "apprendre" / "fiches" / "arts-composer-formes.html",
         RACINE / "simulateur" / "index.html",
@@ -784,12 +785,13 @@ def test_liste_statique() -> None:
     base = f"http://127.0.0.1:{serveur.server_address[1]}"
     try:
         statut_accueil, accueil, _ = demander(base + "/")
+        statut_eva, page_eva, _ = demander(base + "/eva.html")
         statut_sim, page_sim, _ = demander(base + "/simulateur/")
         statut_llms, contenu_llms, entetes_llms = demander(base + "/llms.txt")
         statut_source, source, _ = demander(base + "/simulateur/dashboard.py")
-        verifier(statut_accueil == statut_sim == 200 and b"M.R.S.C" in accueil
-                 and b"console-pilotage" in page_sim,
-                 "le serveur local sert l’accueil et la page intégrée du simulateur")
+        verifier(statut_accueil == statut_eva == statut_sim == 200 and b"M.R.S.C" in accueil
+                 and b"\xc3\x89VA" in page_eva and b"console-pilotage" in page_sim,
+                 "le serveur local sert l’accueil, la page ÉVA et le simulateur")
         type_llms = next(
             (valeur for nom, valeur in entetes_llms.items() if nom.casefold() == "content-type"),
             "",
