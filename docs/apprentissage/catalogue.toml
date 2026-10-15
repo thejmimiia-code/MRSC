@@ -4215,3 +4215,67 @@ licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation d
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucune fiche électorale n’est reprise."
+
+
+[[fiche]]
+id = "econ-distinguer-interet-frais"
+titre = "Distinguer un intérêt d’un frais sur un crédit fictif"
+matiere = "Économie et budget"
+matiere_id = "economie"
+domaine = "economie-finances"
+niveau = 2
+horizon_contenu = "Lecture d’un tableau de montants fictifs ; les taux, contrats et droits réels se vérifient sur des pages officielles à jour et auprès d’un professionnel si besoin"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon pour séparer, sur un exemple inventé, une ligne « intérêt » d’une ligne « frais ». Faire relire par une personne compétente en éducation financière. Aucun conseil d’emprunt, de placement ni de comparaison d’offres. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Repérer, sur un tableau fictif, la ligne d’intérêt et la ligne de frais, sans choisir un crédit."
+objectif = "Dans un exemple inventé, distinguer un montant appelé intérêt d’un montant appelé frais de dossier."
+situation = "Notice fictive « Prêt-exemple » : somme 100 €. Ligne A : intérêt 5 €. Ligne B : frais de dossier 3 €. Quelle ligne nomme l’intérêt ?"
+analogie_titre = "Comme le loyer et les charges sur une quittance inventée"
+analogie = "Sur une quittance, le loyer et les charges sont deux lignes distinctes, même si tu paies un total. Sur un tableau de crédit fictif, l’intérêt et les frais sont aussi deux lignes : on les lit séparément avant d’additionner."
+limite_analogie = "Un crédit n’est pas un loyer. Les mots, les taux et les droits varient selon le contrat. Cette analogie n’explique ni un TAEG ni un choix d’emprunt."
+notions = [
+  "Intérêt — montant indiqué, dans cet exemple, comme le coût lié à l’usage de la somme pendant une période.",
+  "Frais — montant indiqué à part, ici un « frais de dossier », qui n’est pas la même ligne que l’intérêt.",
+  "Total — somme des lignes ; il ne dit pas à lui seul ce qu’est chaque ligne.",
+  "Exemple fictif — nombres inventés pour l’exercice, pas une offre réelle."
+]
+demarche = [
+  "Lis le tableau sans te précipiter sur le total.",
+  "Repère le mot « intérêt » et le mot « frais » sur des lignes séparées.",
+  "Note chaque montant à côté de son libellé : 5 € n’est pas 3 €.",
+  "N’utilise pas ce tableau pour décider d’emprunter : cette fiche n’est pas un conseil financier.",
+  "Pour un crédit réel, consulte des pages officielles à jour et, au besoin, un interlocuteur compétent."
+]
+exercice = "Sur la notice « Prêt-exemple », quelle ligne correspond à l’intérêt ? A) La ligne de 5 €. B) La ligne de 3 €. C) Seulement le total 8 €, sans lire les libellés."
+aide = "Cherche le mot écrit à côté de chaque montant, pas seulement le plus grand nombre."
+correction = [
+  "A est la réponse attendue pour cet entraînement : 5 € est libellé « intérêt ».",
+  "B est le frais de dossier (3 €). C ignore les libellés.",
+  "Le total 8 € n’explique pas la différence. Cette fiche n’indique pas si un prêt convient."
+]
+a_retenir = [
+  "Tes questions d’argent méritent une lecture ligne par ligne.",
+  "Intérêt et frais peuvent coexister sur un même document.",
+  "Le total ne remplace pas les libellés.",
+  "Cette fiche n’est pas un conseil financier."
+]
+transferer = "Cette lecture peut servir devant un tableau de montants. Pour un contrat réel, vérifie les pages officielles actuelles ; cette fiche n’est ni une offre ni un conseil d’emprunt."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Banque de France — accueil de l’institution"
+url = "https://www.banque-france.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche ni barème n’est repris"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page d’accueil consultée comme point d’entrée institutionnel. Aucun taux, comparateur ni conseil n’est copié."
+
+[[fiche.sources]]
+titre = "Service-Public — accueil d’information officielle sur les droits et démarches"
+url = "https://www.service-public.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucune fiche crédit n’est reprise."

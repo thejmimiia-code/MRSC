@@ -162,8 +162,8 @@ fiches = ["econ-lire-facture"]
 [[domaine.sujet]]
 id = "banque-credit-interets"
 titre = "Compte bancaire, frais, crédit et intérêts"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["econ-distinguer-interet-frais"]
 
 [[domaine.sujet]]
 id = "revenus-salaire-impots"
