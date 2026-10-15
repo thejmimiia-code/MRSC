@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Valoriser l’apprentissage et prototype d’information électorale
+
+- **Initiative :** `coherence-textes-publics` et `relire-les-44-prototypes` (titre porté à 50 prototypes).
+- **Signal :** la personne demande de valoriser l’apprentissage (après le retrait du CP) et de poursuivre la R&D.
+- **Décision :** l’accueil Apprendre part de ce que la personne vit déjà ; le repère 1 s’appelle « Premiers pas » et non « Reprendre les bases ». Ajouter le prototype `civ-reperer-info-electorale` (sujet élections, statut partiel), sans consigne de vote.
+- **Contrôles réellement exécutés :** à compléter après vérification.
+- **Limites et suite :** relecture humaine du ton et du prototype. Les droits du travail restent `a-creer`.
+
 ## 2026-10-15 — Retirer le repère « CP » des textes d’accueil de l’apprentissage
 
 - **Initiative :** `coherence-textes-publics`, maintenue à l’état `a-valider`.

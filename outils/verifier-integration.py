@@ -581,7 +581,7 @@ def fichiers_du_site() -> None:
     apprentissage = (RACINE / "apprendre.html").read_text(encoding="utf-8")
     verifier(
         "La page d’apprentissage propose quatre repères et plusieurs matières",
-        all(rep in apprentissage for rep in ("Reprendre les bases", "Consolider", "Raisonner", "Approfondir", "Mathématiques", "Numérique et intelligence artificielle")),
+        all(rep in apprentissage for rep in ("Premiers pas", "Consolider", "Raisonner", "Approfondir", "Mathématiques", "Numérique et intelligence artificielle")),
     )
     fiches = sorted((RACINE / "apprendre" / "fiches").glob("*.html"))
     blocs_correction = sum(fiche.read_text(encoding="utf-8").count('<details class="learning-answer">') for fiche in fiches)
@@ -732,9 +732,9 @@ def fichiers_du_site() -> None:
         all(
             terme in transparence_texte
             for terme in (
-                "75 fiches dans 15 domaines",
+                "76 fiches dans 15 domaines",
                 "26 fiches du corpus initial",
-                "49 prototypes explicitement à relire",
+                "50 prototypes explicitement à relire",
                 "La relecture indépendante de toutes les fiches initiales n’est pas garantie",
             )
         ),

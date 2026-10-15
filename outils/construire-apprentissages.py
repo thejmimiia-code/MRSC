@@ -41,7 +41,7 @@ ROADMAP_1000 = DATA / "objectif-1000.md"
 BASE_URL = "https://thejmimiia-code.github.io/MRSC/"
 
 NIVEAUX = {
-    1: ("Reprendre les bases", "On peut commencer ici sans test ni prérequis."),
+    1: ("Premiers pas", "Un point de départ ouvert : on peut commencer ici, avec ce que l’on sait déjà."),
     2: ("Consolider", "Relier des notions et s’entraîner dans de nouveaux exemples."),
     3: ("Raisonner", "Comparer, expliquer une démarche et examiner les limites."),
     4: ("Approfondir", "Transférer une notion et construire un raisonnement plus complet."),
@@ -371,7 +371,7 @@ def render_filters(fiches: list[dict]) -> str:
     return f'''      <form class="learning-filters" data-learning-filters aria-label="Filtrer les fiches d’apprentissage">
         <div class="learning-filter-field"><label for="recherche-fiches">Rechercher un sujet</label><input type="search" id="recherche-fiches" name="q" placeholder="Ex. budget, durée, image" data-filter-search></div>
         <div class="learning-filter-field"><label for="matiere-fiches">Matière</label><select id="matiere-fiches" name="matiere" data-filter-subject>{options}</select></div>
-        <div class="learning-filter-field"><label for="niveau-fiches">Repère de difficulté</label><select id="niveau-fiches" name="niveau" data-filter-level><option value="">Tous les repères</option><option value="1">1 — Reprendre les bases</option><option value="2">2 — Consolider</option><option value="3">3 — Raisonner</option><option value="4">4 — Approfondir</option></select></div>
+        <div class="learning-filter-field"><label for="niveau-fiches">Repère de difficulté</label><select id="niveau-fiches" name="niveau" data-filter-level><option value="">Tous les repères</option><option value="1">1 — Premiers pas</option><option value="2">2 — Consolider</option><option value="3">3 — Raisonner</option><option value="4">4 — Approfondir</option></select></div>
         <button class="button button-secondary learning-filter-reset" type="reset" data-filter-reset>Effacer les filtres</button>
       </form>'''
 
@@ -452,12 +452,12 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
       <div class="container learning-hero-grid">
         <div class="learning-hero-copy">
           <p class="eyebrow">Apprendre · comprendre · pratiquer</p>
-          <h1>Des fiches autonomes pour la vie d’aujourd’hui.</h1>
-          <p class="learning-intro">Tu peux commencer par un sujet utile, sans compte, sans note et sans prérequis. Chaque fiche tient debout seule, part d’une situation concrète et utilise une analogie du quotidien pour éclairer la notion. L’explication, l’essai, l’aide et la correction sont sur le site M.R.S.C ; les liens de sources sont facultatifs.</p>
-          <p class="learning-level-note"><strong>Cap visé :</strong> construire peu à peu des ressources utiles, des premiers pas jusqu’aux spécialités et à la recherche, dans les différentes matières. Chacun peut commencer où il en a besoin. Le catalogue compte {resume_catalogue}. La relecture indépendante de toutes les fiches du corpus initial n’est pas garantie. Le catalogue reste incomplet ; la carte ci-dessous nomme les sujets qui restent à créer.</p>
+          <h1>Apprendre à partir de ce que tu vis déjà.</h1>
+          <p class="learning-intro">Ce que tu sais déjà compte : un horaire, un message, un achat ou une question du quotidien peut ouvrir une notion. Choisis une fiche utile, essaie à ton rythme, sans compte ni note. Chaque page tient debout seule, avec une analogie, un essai facultatif, une aide et une correction ; les liens de sources sont facultatifs.</p>
+          <p class="learning-level-note"><strong>Ce que tu peux faire ici :</strong> découvrir des fiches concrètes, des premiers pas jusqu’aux spécialités et à la recherche. Chacun commence où c’est utile. Le catalogue compte {resume_catalogue}. La relecture indépendante de toutes les fiches du corpus initial n’est pas garantie. Les relectures se poursuivent ; la carte ci-dessous nomme les sujets encore à créer.</p>
           <p class="learning-level-note"><strong>Ambition éditoriale de long terme :</strong> viser {objectif_libelle} fiches autonomes, distinctes, relues et entretenues. Ce nombre est un objectif de travail, pas l’offre actuelle ni une promesse de couverture exhaustive.</p>
           <div class="hero-actions"><a class="button" href="#catalogue-fiches">Choisir une fiche</a><a class="button button-secondary" href="anglais-aventure.html">Explorer l’aventure anglaise</a><a class="button button-secondary" href="#couverture">Voir les sujets à développer</a><a class="button button-secondary" href="transparence.html#rd-innovation">Comprendre la R&amp;D continue</a></div>
-          <p class="learning-reassurance"><strong>Ton parcours ne te définit pas.</strong> Les repères de difficulté sont des indications, pas des niveaux à réussir. Tu peux avancer différemment en français, en mathématiques ou dans une autre matière.</p>
+          <p class="learning-reassurance"><strong>Ce que tu sais déjà compte.</strong> Les repères aident à choisir une fiche, pas à te classer. Tu peux avancer différemment selon les matières.</p>
         </div>
         <aside class="learning-principles" aria-labelledby="principes-apprentissage"><p class="eyebrow">Une règle éditoriale durable</p><h2 id="principes-apprentissage">Partir du réel, puis revenir au réel.</h2><ul><li>Une analogie concrète dans chaque fiche, avec ses limites expliquées.</li><li>Des notions définies, une méthode découpée et un essai facultatif.</li><li>Des corrections masquées : tu les ouvres quand tu le souhaites.</li><li>Des repères par matière et difficulté, sans test ni étiquette.</li></ul></aside>
       </div>
@@ -487,16 +487,16 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
     </section>'''
     domains_html = f'''    <section class="section section-muted" id="couverture" aria-labelledby="titre-couverture">
       <div class="container">
-        <div class="section-heading"><p class="eyebrow">Carte des apprentissages à construire</p><h2 id="titre-couverture">Ce catalogue a des trous, et nous les nommons.</h2><p>Les thèmes marqués « à créer » ne sont pas encore couverts par une fiche publique. « Partiel » signale qu’une première entrée existe mais qu’elle ne suffit pas à couvrir le sujet. Pour la santé, les premiers secours et les règles de droit, une relecture spécialisée est nécessaire avant publication.</p></div>
+        <div class="section-heading"><p class="eyebrow">Carte des apprentissages à construire</p><h2 id="titre-couverture">Nous agrandissons le catalogue, et nous nommons ce qui manque.</h2><p>Les thèmes marqués « à créer » n’ont pas encore de fiche publique. « Partiel » signale qu’une première entrée existe mais qu’elle ne suffit pas à couvrir le sujet. Pour la santé, les premiers secours et les règles de droit, une relecture spécialisée est nécessaire avant publication.</p></div>
         <div class="learning-coverage-list">{couverture}</div>
         <p class="learning-level-note"><strong>Comment lire la carte :</strong> « fiche disponible » signifie qu’une première fiche existe ; « début de couverture » indique un contenu incomplet ; « à créer » et « relecture spécialisée » désignent du travail restant. Aucun statut ne signifie que l’ensemble des savoirs est couvert.</p>
       </div>
     </section>'''
     how_to = '''    <section class="section" id="reperes" aria-labelledby="titre-reperes">
       <div class="container">
-        <div class="section-heading"><p class="eyebrow">Choisir son point de départ</p><h2 id="titre-reperes">Des repères de difficulté, jamais des étiquettes.</h2><p>Les cycles de l’école française inspirent certains repères ; ils ne mesurent ni la valeur ni les capacités d’une personne adulte. Le repère peut changer selon la matière.</p></div>
+        <div class="section-heading"><p class="eyebrow">Choisir son point de départ</p><h2 id="titre-reperes">Des repères pour choisir, jamais des étiquettes.</h2><p>Ces repères aident à trouver une fiche. Ils ne mesurent ni la valeur ni les capacités d’une personne. Le repère peut changer selon la matière.</p></div>
         <ol class="learning-level-grid">
-          <li><article class="learning-level-card"><span class="learning-level-number">Repère 1</span><p class="learning-school-reference">Départ libre</p><h3>Reprendre les bases</h3><p>Lire une consigne, repérer une information, compter et faire un premier calcul.</p></article></li>
+          <li><article class="learning-level-card"><span class="learning-level-number">Repère 1</span><p class="learning-school-reference">Départ libre</p><h3>Premiers pas</h3><p>Lire une consigne, repérer une information, compter et faire un premier calcul — à partir de ce que tu sais déjà.</p></article></li>
           <li><article class="learning-level-card"><span class="learning-level-number">Repère 2</span><p class="learning-school-reference">Consolider</p><h3>Relier des étapes</h3><p>Comprendre un document, combiner des calculs et s’exercer dans une situation familière.</p></article></li>
           <li><article class="learning-level-card"><span class="learning-level-number">Repère 3</span><p class="learning-school-reference">Raisonner</p><h3>Comparer et expliquer</h3><p>Examiner une source, lire des données et expliquer comment on arrive à une réponse.</p></article></li>
           <li><article class="learning-level-card"><span class="learning-level-number">Repère 4</span><p class="learning-school-reference">Approfondir</p><h3>Transférer et nuancer</h3><p>Réutiliser une notion dans un contexte nouveau, en tenant compte des limites et de l’incertitude.</p></article></li>

@@ -115,7 +115,7 @@ libelle = "Recherche avancée et doctorat"
 [[repere]]
 id = 1
 quota = 300
-libelle = "Reprendre les bases"
+libelle = "Premiers pas"
 
 [[repere]]
 id = 2
