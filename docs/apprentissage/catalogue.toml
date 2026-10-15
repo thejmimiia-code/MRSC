@@ -4088,3 +4088,67 @@ licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation d
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Point d’entrée consulté le 15 octobre 2026 pour l’orientation administrative. Aucune fiche pratique n’est reprise."
+
+[[fiche]]
+id = "econ-lire-mention-garantie"
+titre = "Lire une mention de garantie sur un ticket fictif"
+matiere = "Économie et consommation"
+matiere_id = "economie"
+domaine = "economie-finances"
+niveau = 2
+horizon_contenu = "Lecture d’un document d’achat fictif en France ; les durées, droits et recours réels dépendent du contrat, du produit et des règles en vigueur"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon de littératie de consommation : extraire vendeur, objet, prix, date et mention, sans enseigner le droit de la garantie. Faire relire par une personne compétente en droit de la consommation. L’exemple est fictif. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 9
+resume = "Repérer ce qu’un ticket fictif dit vraiment, et ce qu’une mention « garantie » ne prouve pas à elle seule."
+objectif = "Extraire les informations d’un ticket inventé et distinguer la mention écrite d’un droit automatique."
+situation = "Ticket d’entraînement entièrement fictif : « Magasin-exemple — Lampe de bureau 24,90 € — 3 mars 2026 — Garantie magasin 12 mois. Conservez ce ticket. » Ce document n’est pas une preuve d’achat réelle."
+analogie_titre = "Comme lire l’étiquette d’un colis avant d’ouvrir le carton"
+analogie = "L’étiquette dit qui envoie, quoi, et parfois une consigne. Elle ne dit pas si le contenu est intact ni quelles règles s’appliquent si le colis arrive abîmé. Un ticket d’achat porte des mentions utiles ; une phrase « garantie » n’épuise pas à elle seule les droits et devoirs."
+limite_analogie = "Un colis et un contrat de consommation n’obéissent pas aux mêmes règles. Les durées, interlocuteurs et recours changent selon le produit, le vendeur, le territoire et la date. Cette analogie n’enseigne aucune garantie légale."
+notions = [
+  "Vendeur — nom ou enseigne qui apparaît comme ayant vendu l’objet.",
+  "Objet et prix — ce qui a été acheté et le montant indiqué, dans l’exemple fictif.",
+  "Date — jour porté sur le document ; utile pour se repérer, pas une preuve à elle seule.",
+  "Mention de garantie — phrase écrite par le vendeur ou imprimée ; il faut la lire sans la confondre avec l’ensemble des règles applicables.",
+  "Recours public — canaux officiels d’information ou de signalement ; les consulter n’est pas obligatoire dans cet exercice."
+]
+demarche = [
+  "Repère le vendeur, l’objet, le prix et la date sur le document.",
+  "Lis la mention de garantie mot à mot : qui la propose, pour combien de temps, à quelle condition (« conservez ce ticket »).",
+  "Note ce qui manque : pièces, exclusions, contact, règles autres que cette phrase.",
+  "Sépare trois choses : ce que le ticket dit, ce qu’il ne dit pas, et ce qu’il faudrait vérifier sur une source officielle à jour pour un cas réel.",
+  "N’utilise pas cet exercice pour réclamer, chiffrer un remboursement ou choisir une procédure."
+]
+exercice = "Sur le ticket fictif, cite le vendeur, l’objet, le prix, la date et la durée indiquée. Quelle information importante la mention ne donne-t-elle pas ?"
+aide = "Les quatre premières réponses sont écrites en toutes lettres. Pour la dernière, demande-toi ce qu’il faudrait savoir pour agir : contact, exclusions, autres règles possibles."
+correction = [
+  "Vendeur : Magasin-exemple. Objet : lampe de bureau. Prix : 24,90 €. Date : 3 mars 2026. Durée indiquée : 12 mois, si l’on conserve le ticket.",
+  "La mention ne dit pas comment joindre le magasin, ce qui est exclu, ni quelles autres règles pourraient s’appliquer. Elle n’ouvre aucun droit réel.",
+  "Dans un cas réel, il faudrait une source officielle à jour ou un conseil adapté ; un ticket d’exercice ne suffit pas."
+]
+a_retenir = [
+  "On lit d’abord ce qui est écrit : vendeur, objet, prix, date, mention.",
+  "Une phrase « garantie » n’est pas à elle seule tout le droit applicable.",
+  "Ce qui manque sur le ticket compte autant que ce qui est imprimé.",
+  "Un exercice fictif n’autorise aucune réclamation."
+]
+transferer = "Cette lecture peut aider à relire un ticket, une facture ou un e-mail de confirmation. Pour un achat réel (garantie, rétractation, litige), consulte une page officielle actuelle ou un accompagnement compétent ; cette fiche n’est pas un conseil juridique."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "DGCCRF — accueil de la direction de la concurrence, de la consommation et de la répression des fraudes"
+url = "https://www.economie.gouv.fr/dgccrf"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche pratique n’est reprise"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page d’accueil consultée le 15 octobre 2026 comme point d’entrée vers l’information consommateur. Aucune enquête, durée légale ni conseil n’est recopié."
+
+[[fiche.sources]]
+titre = "SignalConso — service public d’information et de signalement pour les consommateurs"
+url = "https://signal.conso.gouv.fr/fr"
+licence_source = "Non vérifiée — lien documentaire ; aucun parcours de signalement n’est repris"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Accueil consulté le 15 octobre 2026 : le service se présente comme un canal pour s’informer ou signaler un problème. Aucune étape du formulaire n’est copiée ni enseignée."

@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Prototype lecture d’une mention de garantie
+
+- **Initiative :** `relire-les-44-prototypes` (titre porté à 49 prototypes).
+- **Question :** comment lire un ticket d’achat fictif (vendeur, objet, prix, date, mention) sans enseigner le droit de la garantie ?
+- **Base vérifiée :** le sujet `consommation-contrats` était `a-creer`. Pages consultées le 15 octobre 2026 : accueil DGCCRF et SignalConso. Aucune durée légale, enquête ni étape de formulaire n’est reprise.
+- **Décision :** prototype `econ-lire-mention-garantie`. Sujet passé à `partiel`.
+- **Contrôles réellement exécutés :** compilation Python ; `verifier-rd-continue.py` ; `construire-apprentissages.py` puis `--verifier` (75 fiches, 15 domaines) ; `construire-simulateur.py --verifier` ; `test_protocole_editorial.py` (7 tests) ; `verifier-site-statique.py` ; `verifier-securite.py` ; `verifier-integration.py` — réussis.
+- **Limites et suite :** à relire (consommation, accessibilité). Banque/crédit et impôts restent `a-creer`.
+
 ## 2026-10-15 — Prototype d’échelle d’institution
 
 - **Initiative :** `relire-les-44-prototypes` (titre porté à 48 prototypes).
