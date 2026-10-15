@@ -1,6 +1,6 @@
 # Couverture des savoirs de base — carte éditoriale vivante
 
-**Dernière revue éditoriale déclarée : 2026-10-11.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
+**Dernière revue éditoriale déclarée : 2026-10-15.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
 
 L’objectif de couverture est de progresser des bases du CP vers les matières générales et professionnelles, les études supérieures, les spécialisations et la recherche doctorale. Cet objectif n’est pas l’état actuel du catalogue : les lacunes sont indiquées et la carte reste évolutive.
 
@@ -143,11 +143,11 @@ Lire un document et agir en sécurité ; les règles de droit et les dispositifs
 | Sujet | Statut | Fiches de première version / suite à donner |
 | --- | --- | --- |
 | Repérer l’émetteur, l’action et l’échéance d’un document | Début de couverture — à approfondir | [`civ-lire-document`](../apprendre/fiches/civ-lire-document.html) |
-| Trouver un service public et utiliser un formulaire numérique | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Trouver un service public et utiliser un formulaire numérique | Début de couverture — à approfondir | [`civ-trouver-service-public`](../apprendre/fiches/civ-trouver-service-public.html) |
 | Droits au travail, contrats, sécurité et interlocuteurs | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | Planning, consignes, coopération et compétences de travail | Début de couverture — à approfondir | [`maths-lire-planning`](../apprendre/fiches/maths-lire-planning.html)<br>[`fr-lire-consigne`](../apprendre/fiches/fr-lire-consigne.html)<br>[`fr-ecrire-message`](../apprendre/fiches/fr-ecrire-message.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 2 sujet(s) commencés mais incomplets, 2 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Numérique, données, cybersécurité et intelligence artificielle
 

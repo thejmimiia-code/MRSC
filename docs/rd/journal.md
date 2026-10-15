@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Prototype d’orientation vers un service public
+
+- **Initiative :** `relire-les-44-prototypes` (titre porté à 45 prototypes), en lien avec `veille-savoirs-evolutifs`.
+- **Question :** comment aider à trouver un point d’entrée public et à préparer un formulaire, sans enseigner une procédure en vigueur ni un conseil juridique ?
+- **Base vérifiée :** le sujet `services-publics` du référentiel était `a-creer`. Les pages d’accueil de Service-Public (15 octobre 2026) et de France services (même jour) se présentent comme orientation / accompagnement ; la fiche hameçonnage de Cybermalveillance.gouv.fr a été lue pour le risque des liens reçus. Le site de la CNIL était en maintenance : aucune affirmation n’en est tirée.
+- **Décision :** publier un prototype autonome `civ-trouver-service-public` (exercice fictif, analogie du guichet, limites explicites). Passer le sujet à `partiel`. Ne pas recopier de démarche, délai, slogan ni statistique des sites consultés.
+- **Changements :** source TOML, référentiel, page générée, atlas, grille de relecture, compteurs 71/45, portefeuille.
+- **Contrôles réellement exécutés :** compilation Python ; `verifier-rd-continue.py` ; `construire-apprentissages.py` puis `--verifier` (71 fiches, 15 domaines) ; `construire-simulateur.py --verifier` ; `test_protocole_editorial.py` (7 tests) ; `verifier-site-statique.py` ; `verifier-securite.py` ; `verifier-integration.py` — réussis.
+- **Limites et suite :** prototype à relire ; pas d’essai avec des personnes ; les sources évoluent. Faire relire démarches et accessibilité. Le sujet `droits-travail` reste `a-creer`.
+
 ## 2026-10-15 — Proposition de présentation publique prudente pour ÉVA
 
 - **Initiative :** `documentation-rd-eva`, conservée à l’état `a-cadrer`.

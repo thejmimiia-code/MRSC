@@ -343,8 +343,8 @@ fiches = ["civ-lire-document"]
 [[domaine.sujet]]
 id = "services-publics"
 titre = "Trouver un service public et utiliser un formulaire numérique"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["civ-trouver-service-public"]
 
 [[domaine.sujet]]
 id = "droits-travail"

@@ -3821,3 +3821,76 @@ licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation d
 droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail facultatif pour rechercher des ressources d’intégrité scientifique ; aucun guide, norme, texte ou exemple n’est repris et le lien précis reste à vérifier."
+
+[[fiche]]
+id = "civ-trouver-service-public"
+titre = "Trouver un service public et préparer un formulaire"
+matiere = "Citoyenneté et démarches"
+matiere_id = "citoyennete"
+domaine = "demarches-droits-travail"
+niveau = 2
+horizon_contenu = "Orientation vers des services publics en France métropolitaine et outre-mer ; les organismes, sites et formulaires varient selon le territoire et la date"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Proposition originale de méthode pour s’orienter vers un service public et préparer un formulaire. Les pages officielles consultées le 15 octobre 2026 sont des portes d’entrée, pas des procédures à copier. Relecture de domaine, d’accessibilité et d’essais apprenants restantes. Cette fiche n’est ni un conseil juridique ni une démarche réelle."
+minutes = 10
+resume = "Partir de la question à traiter, choisir un point d’entrée officiel, vérifier l’adresse et les champs avant d’envoyer des informations."
+objectif = "Repérer un canal public adapté et préparer un formulaire fictif sans le confondre avec une procédure en vigueur."
+situation = "Situation d’entraînement entièrement fictive : tu veux signaler un changement d’adresse pour un atelier associatif inventé. Un message te propose un lien court « maj-adresse-officiel.exemple ». Par où commencer avant de cliquer ou de remplir un formulaire ?"
+analogie_titre = "Comme demander le bon guichet avant de poser un dossier sur le comptoir"
+analogie = "Dans un bâtiment public, on cherche d’abord le service compétent, puis on prépare les pièces demandées. En ligne, on cherche d’abord l’organisme et son site, puis on lit les champs du formulaire. Le guichet et le formulaire servent à transmettre une demande, pas à inventer la règle."
+limite_analogie = "Un site officiel n’est pas un guichet qui connaît ta situation. Les horaires, pièces, territoires et formulaires changent. Un accompagnement en personne, par exemple dans un point France services, n’est pas disponible partout de la même façon et ne remplace pas l’organisme compétent."
+notions = [
+  "Question de départ — ce que tu cherches à faire, et non le premier lien proposé.",
+  "Point d’entrée officiel — site ou accueil d’un organisme public identifié, utilisé pour s’orienter.",
+  "Adresse du site — texte affiché dans le navigateur ; un lien reçu par message peut mener ailleurs.",
+  "Formulaire — liste de champs à remplir ; seuls les champs demandés par l’organisme concerné sont utiles.",
+  "Accompagnement — aide humaine facultative pour réaliser une démarche, distincte de la décision de l’organisme."
+]
+demarche = [
+  "Écris en une phrase ce que tu veux faire, pour quel organisme si tu le connais, et dans quel territoire.",
+  "Ouvre un point d’entrée officiel par un favori ou une recherche du nom de l’organisme, plutôt que par un lien reçu.",
+  "Vérifie l’émetteur, la date de la page et l’adresse du site avant de cliquer sur « se connecter » ou « envoyer ».",
+  "Lis les champs du formulaire : note ce qui est demandé, ce qui est facultatif, et ce que tu n’as pas à fournir si ce n’est pas demandé.",
+  "Si tu hésites, arrête-toi : contacte l’organisme par un canal obtenu séparément, ou cherche un accompagnement public près de chez toi.",
+  "Ne traite jamais cet exercice comme une vraie démarche : les délais, pièces et droits dépendent de ta situation et des règles en vigueur."
+]
+exercice = "Dans la situation fictive, que ferais-tu en premier parmi ces trois actions, et pourquoi ? A) Cliquer sur le lien court du message. B) Ouvrir le site d’un portail public d’information sur les démarches, puis chercher le sujet. C) Envoyer ta pièce d’identité à l’adresse du message « pour gagner du temps »."
+aide = "Compare l’origine du lien (un message non vérifié) et l’origine d’un site que tu ouvres toi-même. Une pièce d’identité n’est demandée que par l’organisme compétent, dans son canal."
+correction = [
+  "Réponse attendue pour cet entraînement : B. Commencer par un point d’entrée public que tu ouvres toi-même permet de vérifier l’émetteur et le sujet.",
+  "A est risqué dans cet exemple fictif : un lien court masque l’adresse réelle. C n’est pas une étape de cette fiche : envoyer une pièce d’identité à un contact non vérifié n’est pas une façon de « gagner du temps ».",
+  "Même après B, il resterait à confirmer l’organisme compétent, la date de la page, le territoire et les champs vraiment demandés. Aucune de ces options n’accomplit une démarche réelle."
+]
+a_retenir = [
+  "On part de la question, pas du premier lien reçu.",
+  "Un portail public oriente ; il ne remplace pas l’organisme qui traite le dossier.",
+  "Avant d’envoyer des informations, on lit l’adresse du site et les champs demandés.",
+  "Un accompagnement humain peut aider à remplir ; il ne transforme pas un exercice en droit acquis."
+]
+transferer = "Cette méthode peut servir pour préparer une recherche d’information administrative, un formulaire en ligne ou une visite dans un lieu d’accueil. Pour une démarche réelle (identité, impôts, santé, logement, travail), utilise les pages officielles à jour ou un accompagnement compétent ; cette fiche n’ouvre aucun droit et ne décrit aucune procédure complète."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Service-Public — accueil d’information officielle sur les droits et démarches"
+url = "https://www.service-public.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Point d’entrée consulté le 15 octobre 2026 : le site se présente comme information et orientation administratives. Aucune fiche pratique, formulaire ni illustration n’est repris."
+
+[[fiche.sources]]
+titre = "France services — accueil du réseau d’accompagnement aux démarches"
+url = "https://www.france-services.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page d’accueil consultée le 15 octobre 2026 : le réseau se présente comme un accompagnement de proximité pour certaines démarches. Aucun chiffre, slogan, carte ni liste de partenaires n’est repris ; l’offre locale reste à vérifier sur le site."
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — hameçonnage : prévention et conduite à tenir"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Fiche réflexe consultée le 15 octobre 2026 pour rappeler de ne pas communiquer d’informations sensibles via un message et de vérifier un lien avant de cliquer. Aucun extrait n’est copié ; la fiche n’enseigne pas la procédure judiciaire ni le dépôt de plainte."

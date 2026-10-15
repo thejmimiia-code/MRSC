@@ -8,7 +8,7 @@ Reproduction statique des pages publiques de [www.mrsc.fr](https://www.mrsc.fr/)
 
 - `index.html` — accueil recentré sur la mission du M.R.S.C, les expériences de chacun, les apprentissages, le débat, les outils citoyens, les documents et le partage
 - `apprendre.html` — parcours d’apprentissage accessibles, repères par matière et difficulté, fiches autonomes et sources sans compte
-- `anglais-aventure.html` — « Les Mondes » : atlas des 70 fiches dans 15 domaines, parcours libres, plus cinq Escales d’anglais en 3D ; 44 prototypes restent à relire
+- `anglais-aventure.html` — « Les Mondes » : atlas des 71 fiches dans 15 domaines, parcours libres, plus cinq Escales d’anglais en 3D ; 45 prototypes restent à relire
 - `ia-societe.html` — réflexion sur les usages, effets sociaux et fraudes ; réflexes de vérification et liens vers les fiches pratiques
 - `simulateur.html` — présentation du simulateur macro-politique, accès à la version interactive publiée sur Vercel et aperçu intégré lorsqu’il est disponible
 - `documents.html` — statuts, parution au Journal officiel, bulletins d’adhésion et de don
