@@ -2,6 +2,34 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Prototype lecture d’une licence logicielle
+
+- **Initiative :** `relire-les-44-prototypes` (titre porté à 47 prototypes).
+- **Question :** comment aider à lire une notice de licence avant de réutiliser un programme, sans donner d’avis juridique ?
+- **Base vérifiée :** le sujet `genie-logiciel-droits` était `a-creer`. Pages consultées le 15 octobre 2026 : Open Source Definition (OSI) et SPDX License List. Aucun critère OSD ni identifiant SPDX n’est recopié.
+- **Décision :** prototype `prog-lire-licence-logiciel` avec notice fictive « horloge-exemple ». Sujet passé à `partiel`.
+- **Contrôles réellement exécutés :** compilation Python ; `verifier-rd-continue.py` ; `construire-apprentissages.py` puis `--verifier` (73 fiches, 15 domaines) ; `construire-simulateur.py --verifier` ; `test_protocole_editorial.py` (7 tests) ; `verifier-site-statique.py` ; `verifier-securite.py` ; `verifier-integration.py` — réussis.
+- **Limites et suite :** à relire (PI du logiciel, accessibilité). Le travail collectif et les licences copyleft ne sont pas couverts.
+
+## 2026-10-15 — Prototype table / requête / page Web
+
+- **Initiative :** `relire-les-44-prototypes` (titre porté à 46 prototypes).
+- **Question :** comment distinguer un stockage structuré, une question posée aux données et un affichage Web, sans enseigner un langage de requête ?
+- **Base vérifiée :** le sujet `bases-donnees-web` était `a-creer`. Pages consultées le 15 octobre 2026 : MDN « relation client-serveur » (requête/réponse du navigateur) et l’accueil de data.gouv.fr (catalogue distinct des pages de présentation). Aucun extrait ni chiffre de bandeau n’est repris.
+- **Décision :** prototype `info-table-requete-web` avec club fictif « Atelier des cartes ». Sujet passé à `partiel`. Pas de SQL, pas d’API, pas de configuration.
+- **Contrôles réellement exécutés :** compilation Python ; `verifier-rd-continue.py` ; `construire-apprentissages.py` puis `--verifier` (72 fiches, 15 domaines) ; `construire-simulateur.py --verifier` ; `test_protocole_editorial.py` (7 tests) ; `verifier-site-statique.py` ; `verifier-securite.py` ; `verifier-integration.py` — réussis.
+- **Limites et suite :** à relire (bases de données, Web, accessibilité). Les sujets `genie-logiciel-droits` et `systemes-embarques` restent `a-creer`.
+
+## 2026-10-15 — Prototype d’orientation vers un service public
+
+- **Initiative :** `relire-les-44-prototypes` (titre porté à 45 prototypes), en lien avec `veille-savoirs-evolutifs`.
+- **Question :** comment aider à trouver un point d’entrée public et à préparer un formulaire, sans enseigner une procédure en vigueur ni un conseil juridique ?
+- **Base vérifiée :** le sujet `services-publics` du référentiel était `a-creer`. Les pages d’accueil de Service-Public (15 octobre 2026) et de France services (même jour) se présentent comme orientation / accompagnement ; la fiche hameçonnage de Cybermalveillance.gouv.fr a été lue pour le risque des liens reçus. Le site de la CNIL était en maintenance : aucune affirmation n’en est tirée.
+- **Décision :** publier un prototype autonome `civ-trouver-service-public` (exercice fictif, analogie du guichet, limites explicites). Passer le sujet à `partiel`. Ne pas recopier de démarche, délai, slogan ni statistique des sites consultés.
+- **Changements :** source TOML, référentiel, page générée, atlas, grille de relecture, compteurs 71/45, portefeuille.
+- **Contrôles réellement exécutés :** compilation Python ; `verifier-rd-continue.py` ; `construire-apprentissages.py` puis `--verifier` (71 fiches, 15 domaines) ; `construire-simulateur.py --verifier` ; `test_protocole_editorial.py` (7 tests) ; `verifier-site-statique.py` ; `verifier-securite.py` ; `verifier-integration.py` — réussis.
+- **Limites et suite :** prototype à relire ; pas d’essai avec des personnes ; les sources évoluent. Faire relire démarches et accessibilité. Le sujet `droits-travail` reste `a-creer`.
+
 ## 2026-10-15 — Proposition de présentation publique prudente pour ÉVA
 
 - **Initiative :** `documentation-rd-eva`, conservée à l’état `a-cadrer`.

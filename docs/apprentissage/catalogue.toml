@@ -3821,3 +3821,205 @@ licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation d
 droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail facultatif pour rechercher des ressources d’intégrité scientifique ; aucun guide, norme, texte ou exemple n’est repris et le lien précis reste à vérifier."
+
+[[fiche]]
+id = "civ-trouver-service-public"
+titre = "Trouver un service public et préparer un formulaire"
+matiere = "Citoyenneté et démarches"
+matiere_id = "citoyennete"
+domaine = "demarches-droits-travail"
+niveau = 2
+horizon_contenu = "Orientation vers des services publics en France métropolitaine et outre-mer ; les organismes, sites et formulaires varient selon le territoire et la date"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Proposition originale de méthode pour s’orienter vers un service public et préparer un formulaire. Les pages officielles consultées le 15 octobre 2026 sont des portes d’entrée, pas des procédures à copier. Relecture de domaine, d’accessibilité et d’essais apprenants restantes. Cette fiche n’est ni un conseil juridique ni une démarche réelle."
+minutes = 10
+resume = "Partir de la question à traiter, choisir un point d’entrée officiel, vérifier l’adresse et les champs avant d’envoyer des informations."
+objectif = "Repérer un canal public adapté et préparer un formulaire fictif sans le confondre avec une procédure en vigueur."
+situation = "Situation d’entraînement entièrement fictive : tu veux signaler un changement d’adresse pour un atelier associatif inventé. Un message te propose un lien court « maj-adresse-officiel.exemple ». Par où commencer avant de cliquer ou de remplir un formulaire ?"
+analogie_titre = "Comme demander le bon guichet avant de poser un dossier sur le comptoir"
+analogie = "Dans un bâtiment public, on cherche d’abord le service compétent, puis on prépare les pièces demandées. En ligne, on cherche d’abord l’organisme et son site, puis on lit les champs du formulaire. Le guichet et le formulaire servent à transmettre une demande, pas à inventer la règle."
+limite_analogie = "Un site officiel n’est pas un guichet qui connaît ta situation. Les horaires, pièces, territoires et formulaires changent. Un accompagnement en personne, par exemple dans un point France services, n’est pas disponible partout de la même façon et ne remplace pas l’organisme compétent."
+notions = [
+  "Question de départ — ce que tu cherches à faire, et non le premier lien proposé.",
+  "Point d’entrée officiel — site ou accueil d’un organisme public identifié, utilisé pour s’orienter.",
+  "Adresse du site — texte affiché dans le navigateur ; un lien reçu par message peut mener ailleurs.",
+  "Formulaire — liste de champs à remplir ; seuls les champs demandés par l’organisme concerné sont utiles.",
+  "Accompagnement — aide humaine facultative pour réaliser une démarche, distincte de la décision de l’organisme."
+]
+demarche = [
+  "Écris en une phrase ce que tu veux faire, pour quel organisme si tu le connais, et dans quel territoire.",
+  "Ouvre un point d’entrée officiel par un favori ou une recherche du nom de l’organisme, plutôt que par un lien reçu.",
+  "Vérifie l’émetteur, la date de la page et l’adresse du site avant de cliquer sur « se connecter » ou « envoyer ».",
+  "Lis les champs du formulaire : note ce qui est demandé, ce qui est facultatif, et ce que tu n’as pas à fournir si ce n’est pas demandé.",
+  "Si tu hésites, arrête-toi : contacte l’organisme par un canal obtenu séparément, ou cherche un accompagnement public près de chez toi.",
+  "Ne traite jamais cet exercice comme une vraie démarche : les délais, pièces et droits dépendent de ta situation et des règles en vigueur."
+]
+exercice = "Dans la situation fictive, que ferais-tu en premier parmi ces trois actions, et pourquoi ? A) Cliquer sur le lien court du message. B) Ouvrir le site d’un portail public d’information sur les démarches, puis chercher le sujet. C) Envoyer ta pièce d’identité à l’adresse du message « pour gagner du temps »."
+aide = "Compare l’origine du lien (un message non vérifié) et l’origine d’un site que tu ouvres toi-même. Une pièce d’identité n’est demandée que par l’organisme compétent, dans son canal."
+correction = [
+  "Réponse attendue pour cet entraînement : B. Commencer par un point d’entrée public que tu ouvres toi-même permet de vérifier l’émetteur et le sujet.",
+  "A est risqué dans cet exemple fictif : un lien court masque l’adresse réelle. C n’est pas une étape de cette fiche : envoyer une pièce d’identité à un contact non vérifié n’est pas une façon de « gagner du temps ».",
+  "Même après B, il resterait à confirmer l’organisme compétent, la date de la page, le territoire et les champs vraiment demandés. Aucune de ces options n’accomplit une démarche réelle."
+]
+a_retenir = [
+  "On part de la question, pas du premier lien reçu.",
+  "Un portail public oriente ; il ne remplace pas l’organisme qui traite le dossier.",
+  "Avant d’envoyer des informations, on lit l’adresse du site et les champs demandés.",
+  "Un accompagnement humain peut aider à remplir ; il ne transforme pas un exercice en droit acquis."
+]
+transferer = "Cette méthode peut servir pour préparer une recherche d’information administrative, un formulaire en ligne ou une visite dans un lieu d’accueil. Pour une démarche réelle (identité, impôts, santé, logement, travail), utilise les pages officielles à jour ou un accompagnement compétent ; cette fiche n’ouvre aucun droit et ne décrit aucune procédure complète."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Service-Public — accueil d’information officielle sur les droits et démarches"
+url = "https://www.service-public.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Point d’entrée consulté le 15 octobre 2026 : le site se présente comme information et orientation administratives. Aucune fiche pratique, formulaire ni illustration n’est repris."
+
+[[fiche.sources]]
+titre = "France services — accueil du réseau d’accompagnement aux démarches"
+url = "https://www.france-services.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page d’accueil consultée le 15 octobre 2026 : le réseau se présente comme un accompagnement de proximité pour certaines démarches. Aucun chiffre, slogan, carte ni liste de partenaires n’est repris ; l’offre locale reste à vérifier sur le site."
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — hameçonnage : prévention et conduite à tenir"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Fiche réflexe consultée le 15 octobre 2026 pour rappeler de ne pas communiquer d’informations sensibles via un message et de vérifier un lien avant de cliquer. Aucun extrait n’est copié ; la fiche n’enseigne pas la procédure judiciaire ni le dépôt de plainte."
+
+[[fiche]]
+id = "info-table-requete-web"
+titre = "Distinguer une table, une requête et une page Web"
+matiere = "Informatique et programmation"
+matiere_id = "informatique"
+domaine = "informatique-programmation"
+niveau = 2
+horizon_contenu = "Premiers repères sur le stockage structuré et l’affichage Web ; aucun langage de requête ni aucun serveur n’est enseigné"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon d’informatique pour séparer une table de données, une question posée à ces données et une page qui affiche un résultat. Faire vérifier les termes par une personne compétente en bases de données et en Web. L’exemple est fictif ; la fiche n’enseigne ni SQL, ni API, ni configuration. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 9
+resume = "Repérer où les données sont rangées, quelle question on leur pose, et ce qu’une page Web montre — sans confondre les trois."
+objectif = "Nommer, dans un exemple fictif, la table, la requête et le résultat affiché, et dire ce que la page ne contient pas forcément."
+situation = "Club fictif « Atelier des cartes ». Un tableau interne liste prénom, jour et activité. Sur le site du club, une page affiche : « Mardi : 3 personnes en dessin ». D’où vient ce « 3 » ?"
+analogie_titre = "Comme un classeur, une question au secrétariat, et un tableau d’affichage"
+analogie = "Le classeur range les fiches. Une question au secrétariat (« qui vient mardi en dessin ? ») ne copie pas tout le classeur. Le tableau d’affichage montre un résumé utile, pas forcément toutes les fiches. Table, requête et page Web jouent des rôles comparables : ranger, demander, montrer."
+limite_analogie = "Une base réelle peut être répartie, protégée, mise à jour en continu. Une page Web peut cacher, filtrer, arrondir ou dater un résultat. Le secrétariat d’un club n’explique ni les droits d’accès, ni les formats d’échange, ni les pannes réseau."
+notions = [
+  "Table — ensemble de lignes décrites par les mêmes colonnes, par exemple prénom, jour, activité.",
+  "Requête — question précise posée aux données, avec un critère : un jour, une activité, un compte.",
+  "Résultat — lignes ou nombre obtenus après la question ; ce n’est pas automatiquement tout le contenu de la table.",
+  "Page Web — document affiché dans le navigateur ; elle peut montrer un résultat sans être le lieu de stockage.",
+  "Échange — le navigateur demande une ressource à un serveur ; la réponse peut être une page, pas la table entière."
+]
+demarche = [
+  "Repère d’abord ce qui est stocké : quelles colonnes, pour quel usage, dans l’exemple fictif.",
+  "Formule la question réellement posée : filtrer, compter, lister ? Ce n’est pas la même chose que « tout voir ».",
+  "Regarde ce que la page affiche : un nombre, une liste, une date ? Note ce qui n’apparaît pas (noms, autres jours, source).",
+  "Sépare les trois rôles : rangement, question, affichage. Une page à jour n’est pas une preuve que la table est complète.",
+  "Pour une donnée réelle, vérifie aussi l’émetteur, la date et les conditions d’accès ; cette fiche ne les enseigne pas."
+]
+exercice = "Dans la situation fictive, identifie : 1) un exemple de table, 2) une requête possible qui aboutit au « 3 », 3) ce que la page ne montre pas. La table inventée contient : Léa / mardi / dessin ; Noé / mardi / dessin ; Inès / mardi / dessin ; Paul / mercredi / théâtre."
+aide = "Le « 3 » correspond à un compte, pas à une liste de prénoms. Cherche le critère commun (jour et activité), puis ce qui reste dans la table hors de ce critère."
+correction = [
+  "Table fictive : quatre lignes avec les colonnes prénom, jour, activité.",
+  "Requête possible : compter les lignes dont le jour est mardi et l’activité est dessin. Le résultat numérique est 3.",
+  "La page montre ce nombre ; elle ne montre pas les prénoms, ni la ligne de mercredi, ni le classeur entier. D’autres requêtes donneraient un autre affichage.",
+  "L’exemple n’utilise aucun langage de requête réel. Sur un site, l’affichage peut aussi être ancien, arrondi ou limité par des droits d’accès."
+]
+a_retenir = [
+  "Ranger, demander et afficher sont trois opérations distinctes.",
+  "Une page Web n’est pas la base : elle en montre un extrait ou un résumé.",
+  "Changer la question change le résultat, même si la table reste la même.",
+  "Un chiffre affiché n’indique ni la qualité des données, ni qui a le droit de les voir."
+]
+transferer = "Cette distinction aide à lire un tableau de bord, un catalogue de données ou un résultat de recherche. Pour interroger une vraie base ou publier des données, il faut les outils, les droits et la documentation du jeu concerné ; cette fiche n’enseigne ni langage ni procédure."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "MDN Web Docs — La relation client-serveur"
+url = "https://developer.mozilla.org/fr/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview"
+licence_source = "Non vérifiée pour une réutilisation du texte — lien documentaire ; aucune citation copiée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 15 octobre 2026 pour situer l’idée qu’un navigateur envoie une requête et reçoit une réponse. Aucun extrait, exemple HTTP ni schéma n’est repris."
+
+[[fiche.sources]]
+titre = "data.gouv.fr — plateforme des données publiques françaises"
+url = "https://www.data.gouv.fr/"
+licence_source = "Non vérifiée — les conditions varient selon les jeux ; aucune donnée réutilisée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Accueil consulté le 15 octobre 2026 comme exemple de catalogue de jeux de données distinct des pages qui les présentent. Aucun jeu, fichier, chiffre du bandeau ni visualisation n’est repris."
+
+[[fiche]]
+id = "prog-lire-licence-logiciel"
+titre = "Lire une licence avant de réutiliser un programme"
+matiere = "Informatique et programmation"
+matiere_id = "informatique"
+domaine = "informatique-programmation"
+niveau = 2
+horizon_contenu = "Premiers repères sur le code visible, la licence et l’attribution ; aucun conseil juridique personnalisé"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon pour distinguer le fait de voir un code et le droit de le réutiliser. Faire relire par une personne compétente en propriété intellectuelle du logiciel. L’exemple de notice est fictif ; la fiche ne choisit pas de licence pour un projet réel. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 9
+resume = "Repérer s’il existe une licence, ce qu’elle autorise de façon générale, et ce qu’il faut encore vérifier avant de copier un programme."
+objectif = "Dans un exemple fictif, séparer « le code est lisible », « une licence décrit des usages » et « je peux m’en attribuer la création »."
+situation = "Notice fictive jointe à un petit script « horloge-exemple » : « Vous pouvez copier et modifier ce script si vous indiquez « horloge-exemple » comme origine. Vous ne pouvez pas prétendre l’avoir créé. » Un camarade dit : « Puisque le fichier est public, on peut le coller dans notre projet sans rien écrire. » Que vérifier ?"
+analogie_titre = "Comme une recette affichée en vitrine, avec une étiquette d’usage"
+analogie = "Voir une recette collée sur une vitrine ne dit pas si on a le droit de la republier sous son nom. L’étiquette (sur place, à emporter, citer le restaurant) précise l’usage. Une licence joue un rôle comparable pour un programme : elle décrit des permissions et des limites, quand elle existe."
+limite_analogie = "Une recette n’est pas un logiciel : les règles de droit, les copies, les combinaisons de licences et les obligations de source sont spécifiques. Une étiquette de restaurant n’explique ni un contrat, ni un pays, ni une version de licence."
+notions = [
+  "Code source — forme du programme destinée à être lue et, souvent, modifiée par une personne.",
+  "Licence — texte qui indique ce que l’on peut faire du programme (copier, modifier, partager) et à quelles conditions.",
+  "Attribution — indiquer l’origine ou les auteurs demandés par la licence, sans s’en attribuer la création si c’est interdit.",
+  "Tous droits réservés — en l’absence d’autorisation, le simple fait qu’un fichier soit visible ne suffit pas à autoriser la copie.",
+  "Identifiant de licence — nom court parfois utilisé pour désigner un texte connu ; il faut encore lire le texte applicable."
+]
+demarche = [
+  "Cherche un fichier ou une notice de licence près du programme (LICENCE, README, en-tête de fichier).",
+  "Lis ce qui est autorisé, ce qui est interdit, et s’il faut citer une origine.",
+  "Sépare trois idées : voir le code ; avoir une permission écrite ; revendiquer la paternité.",
+  "Si la notice manque, est floue ou mélange plusieurs textes, ne copie pas : demande à une personne compétente ou laisse le fichier de côté.",
+  "Cette fiche n’identifie pas la licence d’un projet réel et ne remplace pas un conseil adapté."
+]
+exercice = "D’après la notice fictive de « horloge-exemple », laquelle de ces actions est cohérente avec le texte donné ? A) Coller le script dans un autre projet sans mentionner l’origine. B) Le modifier pour un usage interne en indiquant « horloge-exemple » comme origine. C) Dire que tu as créé le script toi-même."
+aide = "Relis les deux phrases de la notice : l’une parle de copier/modifier avec une origine, l’autre interdit de prétendre l’avoir créé."
+correction = [
+  "B est cohérente avec la notice fictive : copier ou modifier est mentionné, à condition d’indiquer l’origine « horloge-exemple ».",
+  "A oublie l’attribution demandée dans l’exemple. C contredit l’interdiction de s’en attribuer la création.",
+  "Même B resterait à vérifier dans un cas réel : version du texte, territoire, combinaisons avec d’autres programmes, et ce que « usage interne » recouvre. Cette notice n’est pas une licence connue."
+]
+a_retenir = [
+  "Un fichier public n’est pas automatiquement libre de copie.",
+  "On lit la licence avant de réutiliser, pas après.",
+  "Citer l’origine n’est pas la même chose que s’attribuer la création.",
+  "En cas de doute, on s’abstient plutôt que d’inventer une permission."
+]
+transferer = "Cette lecture peut servir avant d’emprunter un script, une bibliothèque ou un exemple trouvé en ligne. Pour publier un projet ou combiner plusieurs licences, consulte les textes applicables et, si besoin, une personne compétente ; cette fiche n’est pas un avis juridique."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Open Source Initiative — The Open Source Definition"
+url = "https://opensource.org/osd"
+licence_source = "Non vérifiée — lien documentaire ; aucun critère ni texte n’est repris"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 15 octobre 2026 pour situer l’idée qu’« open source » désigne des conditions de distribution, pas seulement l’accès au code. Aucune des dix critères n’est copiée ni enseignée comme règle universelle."
+
+[[fiche.sources]]
+titre = "SPDX License List"
+url = "https://spdx.org/licenses/"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche de licence n’est reprise"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Liste consultée le 15 octobre 2026 comme exemple d’identifiants courts de licences. Aucun identifiant, texte ni tableau n’est recopié dans la fiche."

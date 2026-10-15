@@ -1,6 +1,6 @@
 # Couverture des savoirs de base — carte éditoriale vivante
 
-**Dernière revue éditoriale déclarée : 2026-10-11.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
+**Dernière revue éditoriale déclarée : 2026-10-15.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
 
 L’objectif de couverture est de progresser des bases du CP vers les matières générales et professionnelles, les études supérieures, les spécialisations et la recherche doctorale. Cet objectif n’est pas l’état actuel du catalogue : les lacunes sont indiquées et la carte reste évolutive.
 
@@ -143,11 +143,11 @@ Lire un document et agir en sécurité ; les règles de droit et les dispositifs
 | Sujet | Statut | Fiches de première version / suite à donner |
 | --- | --- | --- |
 | Repérer l’émetteur, l’action et l’échéance d’un document | Début de couverture — à approfondir | [`civ-lire-document`](../apprendre/fiches/civ-lire-document.html) |
-| Trouver un service public et utiliser un formulaire numérique | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Trouver un service public et utiliser un formulaire numérique | Début de couverture — à approfondir | [`civ-trouver-service-public`](../apprendre/fiches/civ-trouver-service-public.html) |
 | Droits au travail, contrats, sécurité et interlocuteurs | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | Planning, consignes, coopération et compétences de travail | Début de couverture — à approfondir | [`maths-lire-planning`](../apprendre/fiches/maths-lire-planning.html)<br>[`fr-lire-consigne`](../apprendre/fiches/fr-lire-consigne.html)<br>[`fr-ecrire-message`](../apprendre/fiches/fr-ecrire-message.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 2 sujet(s) commencés mais incomplets, 2 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Numérique, données, cybersécurité et intelligence artificielle
 
@@ -180,12 +180,12 @@ Comprendre les fonctions d’un système informatique, représenter des informat
 | Bits, nombres, textes, images et formats de données | Début de couverture — à approfondir | [`info-bits-octets`](../apprendre/fiches/info-bits-octets.html) |
 | Systèmes d’exploitation, fichiers, permissions et processus | Début de couverture — à approfondir | [`info-systeme-exploitation`](../apprendre/fiches/info-systeme-exploitation.html) |
 | Réseaux, Internet, adressage, noms de domaine et protocoles | Début de couverture — à approfondir | [`info-lire-adresse-web`](../apprendre/fiches/info-lire-adresse-web.html) |
-| Bases de données, requêtes, Web et échanges de données | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Bases de données, requêtes, Web et échanges de données | Début de couverture — à approfondir | [`info-table-requete-web`](../apprendre/fiches/info-table-requete-web.html) |
 | Tester, déboguer, documenter et faire évoluer un programme | Début de couverture — à approfondir | [`prog-tester-exemples`](../apprendre/fiches/prog-tester-exemples.html) |
-| Conception logicielle, travail collectif, licences et code ouvert | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Conception logicielle, travail collectif, licences et code ouvert | Début de couverture — à approfondir | [`prog-lire-licence-logiciel`](../apprendre/fiches/prog-lire-licence-logiciel.html) |
 | Microcontrôleurs, objets connectés et systèmes embarqués | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 7 sujet(s) commencés mais incomplets, 3 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 10 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 9 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 10 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Arts, musique, création et culture
 

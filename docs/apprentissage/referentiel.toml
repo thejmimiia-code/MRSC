@@ -343,8 +343,8 @@ fiches = ["civ-lire-document"]
 [[domaine.sujet]]
 id = "services-publics"
 titre = "Trouver un service public et utiliser un formulaire numérique"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["civ-trouver-service-public"]
 
 [[domaine.sujet]]
 id = "droits-travail"
@@ -467,8 +467,8 @@ fiches = ["info-lire-adresse-web"]
 [[domaine.sujet]]
 id = "bases-donnees-web"
 titre = "Bases de données, requêtes, Web et échanges de données"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["info-table-requete-web"]
 
 [[domaine.sujet]]
 id = "tests-debogage"
@@ -479,8 +479,8 @@ fiches = ["prog-tester-exemples"]
 [[domaine.sujet]]
 id = "genie-logiciel-droits"
 titre = "Conception logicielle, travail collectif, licences et code ouvert"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["prog-lire-licence-logiciel"]
 
 [[domaine.sujet]]
 id = "systemes-embarques"
