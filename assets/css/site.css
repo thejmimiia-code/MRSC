@@ -872,13 +872,12 @@ html.contraste-renforce .resource-scope-note {
 
 .contact-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(270px, .75fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.3rem;
   align-items: stretch;
 }
 
-.contact-card,
-.address-card {
+.contact-card {
   padding: clamp(1.6rem, 4vw, 2.5rem);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -886,8 +885,7 @@ html.contraste-renforce .resource-scope-note {
   box-shadow: 0 8px 28px rgba(26, 48, 91, .045);
 }
 
-.contact-card h2,
-.address-card h2 {
+.contact-card h2 {
   font-size: 1.5rem;
   letter-spacing: -.025em;
 }
@@ -914,23 +912,6 @@ html.contraste-renforce .resource-scope-note {
 .contact-signoff {
   margin: 0;
   color: var(--muted);
-}
-
-.address-card {
-  background: var(--navy);
-  color: var(--white);
-}
-
-.address-card h2 {
-  color: var(--white);
-}
-
-.address-card address {
-  color: rgba(255, 255, 255, .82);
-}
-
-.address-card .eyebrow {
-  color: #c4e1a6;
 }
 
 .map-layout {
