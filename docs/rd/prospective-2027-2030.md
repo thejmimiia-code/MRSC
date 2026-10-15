@@ -17,7 +17,7 @@ Le sujet prospectif n'est donc pas « quelle technologie gagnera ? », mais **qu
 
 | Point de départ | Élément observé dans les fichiers | Limite de ce constat |
 |---|---|---|
-| Corpus d'apprentissage | 70 fiches dans 15 domaines, dont 44 prototypes explicitement à relire; les statuts et lacunes sont portés par le catalogue et le référentiel. | Un compte de fiches ne mesure ni qualité, ni couverture suffisante, ni effet d'apprentissage. |
+| Corpus d'apprentissage | 79 fiches dans 15 domaines, dont 53 prototypes explicitement à relire; les statuts et lacunes sont portés par le catalogue et le référentiel. | Un compte de fiches ne mesure ni qualité, ni couverture suffisante, ni effet d'apprentissage. |
 | Usages de l'IA et information | Des ressources couvrent déjà la vérification d'une information, d'une réponse d'IA, d'un média et d'une demande inhabituelle. Elles sont présentées comme partielles. | La carte n'est pas une liste exhaustive des risques; elle ne prédit pas les fraudes futures. |
 | Interface et autonomie | Le site propose cinq niveaux de texte, trois présentations et des réglages locaux; les contenus centraux sont conçus pour rester accessibles sans compte obligatoire. | Le protocole d'essais d'usage reste à faire relire; aucune validation par des personnes n'est revendiquée. |
 | Services externes | Le site conserve une copie locale du simulateur et désigne Vercel pour la version distante. | Les réponses HTTP actuelles, l'API distante, l'iframe et les paramètres de confidentialité du fournisseur ne sont pas vérifiés ici. |
@@ -32,7 +32,7 @@ Les références de ces constats sont le [portefeuille R&D](portefeuille.toml), 
 |---|---|---|---|
 | Médiation par l'IA | Des fiches apprennent à vérifier des résultats et à garder la main; ÉVA n'a pas de capacité démontrée dans le dépôt. | Les outils futurs aideront-ils à retrouver des ressources, ou rendront-ils plus difficile de distinguer source, résumé, hypothèse et décision ? | Nouvelles fonctionnalités réellement documentées, changements de sources et retours généraux transmis volontairement. |
 | Continuité des services | Le simulateur a une version locale et une cible distante; plusieurs fournisseurs sont cités dans les inventaires. | Quelles fonctions seront encore disponibles, publiques et compatibles au moment où elles seront consultées ? | Version de la copie, tests directs de disponibilité avant publication, erreurs reproductibles et changements documentés d'hébergeur. |
-| Capacité de relecture | 44 prototypes sont à relire; les contenus à risque ont besoin de personnes compétentes. | Le volume de propositions et de contenus pourra-t-il être entretenu avec des rôles de relecture clairement attribués ? | Échéances de revue, sources à recontrôler, décisions de retrait ou de report; pas le nombre de clics. |
+| Capacité de relecture | 53 prototypes sont à relire; les contenus à risque ont besoin de personnes compétentes. | Le volume de propositions et de contenus pourra-t-il être entretenu avec des rôles de relecture clairement attribués ? | Échéances de revue, sources à recontrôler, décisions de retrait ou de report; pas le nombre de clics. |
 | Langues et contextes | Le français domine; les autres langues et variétés demandent des relectures locales. | Comment ouvrir des parcours plurilingues sans publier une traduction automatique comme ressource validée ? | Disponibilité de relectures par langue/région et propositions non identifiantes, sans déduire l'origine des visiteurs. |
 | Personnalisation et vie privée | Les préférences de lecture sont optionnelles et locales; l'association doit encore confirmer certains traitements et fournisseurs. | Comment adapter l'expérience sans compte, profil de compétence ou collecte individuelle implicite ? | Évolutions documentées des fonctions, du stockage ou des prestataires; revue du code et de la notice. |
 
@@ -66,6 +66,7 @@ Les outils et leurs sources changent d'un fournisseur à l'autre tandis que des 
 4. **Personnaliser à la demande, pas par profilage.** Maintenir des choix réversibles, locaux et compréhensibles; ne pas inférer une compétence, un handicap ou une préférence depuis un comportement.
 5. **Ouvrir par petites unités relues.** Ajouter une langue, un domaine ou une fonctionnalité avec les personnes compétentes, l'alternative accessible, une solution de repli et une condition de retrait définies avant publication.
 6. **Utiliser la maintenance comme signal.** Les dates de revue, versions et sources à confirmer sont plus utiles pour la décision que des métriques d'engagement individuelles.
+7. **Partir de ce que la personne sait déjà.** Une fiche peut nommer un geste déjà maîtrisé (un mot connu, une lecture ligne par ligne, une question déjà posée) sans le transformer en niveau scolaire ni en score. Cette capacité reste utile dans les quatre scénarios : elle n'exige ni assistant, ni profil, ni service distant.
 
 Ce sont des propositions de conception cohérentes avec les consignes actuelles du dépôt, pas des résultats démontrés auprès de visiteurs.
 
@@ -88,7 +89,7 @@ Ce sont des propositions de conception cohérentes avec les consignes actuelles 
 
 - **Entrée :** une question choisie parmi des formulations éditées; pas de champ libre.
 - **Repère de départ :** `civ-verifier-information` — sujet « Vérification de l’information », statut `partiel` dans le référentiel.
-- **Pistes facultatives :** source publique (`civ-choisir-source-publique`), comparaison historique (`histoire-comparer-sources`), réponse d'IA (`numerique-verifier-ia`), image/voix/vidéo (`numerique-verifier-media`) ou conservation de référence (`recherche-conserver-reference`). Le référentiel marque actuellement chacun des sujets correspondants `partiel`.
+- **Pistes facultatives :** source publique (`civ-choisir-source-publique`), comparaison historique (`histoire-comparer-sources`), réponse d'IA (`numerique-verifier-ia`), image/voix/vidéo (`numerique-verifier-media`), conservation de référence (`recherche-conserver-reference`) ou distinction résumé/citation (`recherche-distinguer-resume-citation`). Le référentiel marque actuellement chacun des sujets correspondants `partiel`.
 - **Affichage :** des lignes et boutons texte d'abord; une carte ou un graphe visuel peut compléter, jamais remplacer, la liste accessible. Chaque piste donne une raison simple d'ouvrir la fiche et une voie pour revenir à la question.
 - **Limite visible :** les statuts décrivent la couverture éditoriale des sujets, pas la fiabilité d'une source, la compétence de la personne ou le niveau atteint. Toutes les pistes restent partielles; aucune ne doit être appelée « parcours complet ».
 - **Dépendances :** lire les identifiants et statuts depuis le catalogue/référentiel déjà maintenu; aucun classement par IA, appel réseau, compte, profil, sauvegarde de choix ou score.

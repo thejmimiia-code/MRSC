@@ -601,8 +601,8 @@ fiches = ["recherche-conserver-reference"]
 [[domaine.sujet]]
 id = "methodes-universitaires"
 titre = "Méthodes de travail avancées : revue de littérature, écriture académique et présentation orale"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["recherche-distinguer-resume-citation"]
 
 [[domaine.sujet]]
 id = "iscdf-00-generique"

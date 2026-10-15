@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — R&D, innovation et prospective : citation / résumé
+
+- **Initiative :** `prospective-apprentissages-2030` et `relire-les-44-prototypes` (titre porté à 53 prototypes).
+- **Signal :** demander de faire la R&D, l’innovation et la prospective, puis fusionner.
+- **Décision :** prototype `recherche-distinguer-resume-citation` (Carte-exemple, jeu de billes fictif). Sujet `methodes-universitaires` passé à `partiel`. Actualiser les compteurs de la note prospective (79/53) et ajouter une capacité « sans regret » : partir de ce que la personne sait déjà. La Boussole reste un concept, non une fonction du site.
+- **Contrôles réellement exécutés :** `construire-apprentissages.py --verifier` ; `verifier-site-statique.py` ; `verifier-rd-continue.py` ; `verifier-integration.py` ; `verifier-securite.py` — réussis.
+- **Limites et suite :** relecture méthodologique ; aucun style de citation imposé. L’initiative prospective reste `a-cadrer` jusqu’à examen par l’association.
+
 ## 2026-10-15 — Valoriser les langues déjà connues
 
 - **Initiative :** `coherence-textes-publics` et `relire-les-44-prototypes` (titre porté à 52 prototypes).

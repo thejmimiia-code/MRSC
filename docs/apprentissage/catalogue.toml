@@ -4343,3 +4343,67 @@ licence_source = "Non vérifiée — lien documentaire ; aucune fiche FLE n’es
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucun programme ni ressource pédagogique n’est recopié."
+
+
+[[fiche]]
+id = "recherche-distinguer-resume-citation"
+titre = "Distinguer un résumé et une citation sur une fiche fictive"
+matiere = "Recherche et esprit critique"
+matiere_id = "recherche"
+domaine = "etudes-superieures-recherche"
+niveau = 3
+horizon_contenu = "Premiers repères d’écriture académique ; aucun style de citation institutionnel n’est enseigné"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon valorisant : s’appuyer sur une lecture déjà faite. Faire relire par une personne compétente en méthodologie et intégrité académique. Aucun diplôme ni cours universitaire. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Séparer, sur une carte inventée, une phrase entre guillemets d’un résumé en tes mots."
+objectif = "Dans un exemple fictif, indiquer laquelle des deux phrases est une citation et laquelle est un résumé."
+situation = "Carte-exemple « Observation d’un jeu de billes ». Phrase A, entre guillemets : « Les billes roulent plus loin sur le sol lisse. » Phrase B : D’après cette fiche, un sol lisse favoriserait la distance. Laquelle est la citation ?"
+analogie_titre = "Comme répéter les mots d’une personne ou raconter l’idée avec les tiens"
+analogie = "Si quelqu’un dit une phrase et que tu la recopies mot pour mot, c’est une citation. Si tu la racontes avec tes mots, c’est un résumé. Les deux peuvent être utiles ; ils ne se confondent pas."
+limite_analogie = "Une conversation n’est pas un article. Les règles de citation varient selon les disciplines. Cette analogie n’enseigne aucun style (APA, ISO, etc.)."
+notions = [
+  "Citation — reprise des mots tels qu’ils apparaissent, souvent entre guillemets, avec une source.",
+  "Résumé — reformulation avec tes mots, qui ne copie pas la phrase.",
+  "Source — origine de l’idée ou de la phrase, à garder même pour un résumé.",
+  "Exemple fictif — la Carte-exemple n’est pas une publication réelle."
+]
+demarche = [
+  "Lis les deux phrases sans te dire que tu « n’es pas à l’université » : tu sais déjà relire un texte.",
+  "Repère les guillemets et les mots identiques à la phrase A.",
+  "Vérifie si la phrase B change les mots tout en gardant une idée.",
+  "Garde la source dans les deux cas : citer ou résumer n’efface pas l’origine.",
+  "Cette fiche n’est pas un cours universitaire : elle t’aide à nommer deux gestes distincts."
+]
+exercice = "Sur la Carte-exemple, que peux-tu conclure ? A) A est une citation (guillemets, mots repris) ; B est un résumé. B) Les deux phrases sont des citations parce qu’elles parlent du même sujet. C) Un résumé remplace la source, donc B n’a plus besoin d’origine."
+aide = "Cherche les guillemets et compare les mots, pas seulement le thème."
+correction = [
+  "A est la réponse attendue : citation vs résumé.",
+  "B confond le thème et le type de phrase. C efface la source.",
+  "Même après A, un vrai travail citerait l’auteur, le titre et la date. Cette fiche n’est pas un cours universitaire."
+]
+a_retenir = [
+  "Ce que tu as déjà lu peut servir : tu n’as pas à tout réinventer.",
+  "Guillemets et mots repris signalent souvent une citation.",
+  "Un résumé change les mots, pas forcément l’idée.",
+  "Cette fiche n’est pas un cours universitaire."
+]
+transferer = "Cette distinction peut servir avant d’écrire un compte rendu. Pour un devoir réel, suis les consignes du lieu de formation ; cette fiche n’impose aucun style et n’est pas une certification."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "HAL — archive ouverte pluridisciplinaire"
+url = "https://hal.science/"
+licence_source = "Non vérifiée — lien documentaire ; aucun texte n’est repris"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail consulté comme point d’entrée vers des publications. Aucun article n’est copié."
+
+[[fiche.sources]]
+titre = "Ministère de l’Enseignement supérieur et de la Recherche — accueil"
+url = "https://www.enseignementsup-recherche.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune consigne n’est reprise"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucune circulaire ni guide n’est recopié."
