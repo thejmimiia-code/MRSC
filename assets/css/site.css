@@ -2390,6 +2390,9 @@ html.contraste-renforce .resource-scope-note {
   background: var(--navy);
   color: rgba(255, 255, 255, .88);
 }
+.creator-note h3,
+.creator-note h4 { color: var(--white); }
+.creator-note .eyebrow { color: #bae6fd; }
 .creator-note a:not(.button) {
   color: #bae6fd;
   text-decoration: underline;
