@@ -273,13 +273,17 @@ html.contraste-renforce .site-status-note {
   border-radius: 5px;
 }
 
+.header-compact-tools {
+  display: contents;
+}
+
 .site-header.is-compact .nav-inner {
   position: relative;
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
-  gap: .35rem;
+  gap: .4rem;
   width: min(var(--content), calc(100% - 1rem));
   min-height: 0;
   padding: .22rem .45rem;
@@ -294,8 +298,18 @@ html.contraste-renforce .site-status-note {
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
+  align-self: center;
   transform: none;
   margin: 0;
+}
+
+.site-header.is-compact .header-compact-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .28rem .32rem;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings, .site-journey-settings, .layout-settings) {
@@ -332,11 +346,7 @@ html.contraste-renforce .site-status-note {
 }
 
 .site-header.is-compact .nav-links:not(.is-open) {
-  position: absolute;
-  width: auto;
-  left: 0;
-  flex: 0 0 0;
-  overflow: visible;
+  display: none;
 }
 
 .main-nav {
@@ -3024,6 +3034,15 @@ html.has-js .site-header.is-compact .nav-inner {
   padding: .22rem .45rem;
 }
 
+html.has-js .site-header.is-compact .header-compact-tools {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: .28rem .32rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 html.has-js .site-header.is-compact .nav-toggle,
 html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
 html.has-js .site-header.is-compact :is(.display-settings, .site-journey-settings, .layout-settings) {
@@ -3062,25 +3081,33 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 
 @media (max-width: 760px) {
   html.has-js .site-header.is-compact .nav-inner {
-    display: flow-root;
-    flex-wrap: unset;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
     min-height: 0;
     padding: .22rem .35rem;
   }
   html.has-js .site-header.is-compact .header-compact-brand {
-    float: left;
-    display: block;
-    margin: 0 .4rem 0 0;
+    float: none;
+    display: inline-flex;
+    margin: 0;
+    align-self: center;
   }
   html.has-js .site-header.is-compact .header-compact-brand img {
-    height: 3.4rem;
-    max-width: 5.5rem;
+    height: 2.35rem;
+    max-width: 4.1rem;
+  }
+  html.has-js .site-header.is-compact .header-compact-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .22rem .28rem;
   }
   html.has-js .site-header.is-compact .nav-toggle,
   html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
   html.has-js .site-header.is-compact :is(.display-settings, .site-journey-settings, .layout-settings) {
     display: inline-flex;
-    margin: .08rem .14rem .08rem 0;
+    margin: 0;
     vertical-align: middle;
   }
   html.has-js .site-header.is-compact .nav-toggle,
