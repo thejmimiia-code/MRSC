@@ -2,7 +2,7 @@
 
 **Dernière revue éditoriale déclarée : 2026-10-15.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
 
-L’objectif de couverture est de progresser des bases du CP vers les matières générales et professionnelles, les études supérieures, les spécialisations et la recherche doctorale. Cet objectif n’est pas l’état actuel du catalogue : les lacunes sont indiquées et la carte reste évolutive.
+L’objectif de couverture est d’élargir progressivement des premiers pas utiles vers les matières générales et professionnelles, les études supérieures, les spécialisations et la recherche. Cet objectif n’est pas l’état actuel du catalogue : les lacunes sont indiquées et la carte reste évolutive.
 
 Les repères de difficulté servent à choisir un point de départ, jamais à classer les personnes. Une situation de travail, de famille, de loisir ou de vie citoyenne peut servir d’entrée. Chaque fiche publiée doit comporter une analogie concrète, son point de correspondance et la limite de l’image.
 

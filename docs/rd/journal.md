@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Retirer le repère « CP » des textes d’accueil de l’apprentissage
+
+- **Initiative :** `coherence-textes-publics`, maintenue à l’état `a-valider`.
+- **Signal :** la personne a vu sur le site la mention « des bases du CP jusqu’aux spécialités », jugée trop péjorative pour qui vient apprendre, et un compteur encore affiché à 73/47 (déploiement antérieur).
+- **Décision :** ne plus renvoyer le public vers un niveau scolaire (CP) dans le cap visé, la carte de couverture et l’horizon de planification. Formuler des « premiers pas utiles », et rappeler que chacun peut commencer où il en a besoin. Les compteurs publics restent ceux du catalogue généré (75 entrées, 49 prototypes).
+- **Changements :** générateur d’apprentissages, `plan-1000.toml`, carte générée, notice de parcours. Aucune fiche n’est présentée comme validée.
+- **Contrôles réellement exécutés :** `verifier-rd-continue.py` ; `construire-apprentissages.py --verifier` ; `test_protocole_editorial.py` ; `verifier-site-statique.py` ; `verifier-securite.py` ; `verifier-integration.py` — réussis.
+- **Limites et suite :** la page publique ne se met à jour qu’après fusion et publication Pages. Faire relire humainement le ton.
+
 ## 2026-10-15 — Prototype lecture d’une mention de garantie
 
 - **Initiative :** `relire-les-44-prototypes` (titre porté à 49 prototypes).
