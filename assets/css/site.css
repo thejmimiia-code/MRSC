@@ -258,10 +258,8 @@ html.contraste-renforce .site-status-note {
 
 .header-compact-brand {
   display: none;
-  flex: 0 0 auto;
   align-items: center;
   min-height: 44px;
-  margin-inline-end: .45rem;
   text-decoration: none;
 }
 
@@ -275,7 +273,16 @@ html.contraste-renforce .site-status-note {
   border-radius: 6px;
 }
 
+.site-header.is-compact .nav-inner {
+  position: relative;
+  padding-inline-start: 4.5rem;
+}
+
 .site-header.is-compact .header-compact-brand {
+  position: absolute;
+  left: .45rem;
+  top: .35rem;
+  z-index: 2;
   display: inline-flex;
 }
 
