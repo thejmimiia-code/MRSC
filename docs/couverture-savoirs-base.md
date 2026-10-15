@@ -72,11 +72,11 @@ Comprendre les prix et les documents financiers usuels, sans donner de conseil p
 | --- | --- | --- |
 | Budget simple, addition et comparaison de prix | Début de couverture — à approfondir | [`maths-budget`](../apprendre/fiches/maths-budget.html)<br>[`maths-pourcentage`](../apprendre/fiches/maths-pourcentage.html)<br>[`econ-comparer-prix-unitaires`](../apprendre/fiches/econ-comparer-prix-unitaires.html) |
 | Lire une facture, un abonnement et une échéance | Début de couverture — à approfondir | [`econ-lire-facture`](../apprendre/fiches/econ-lire-facture.html) |
-| Compte bancaire, frais, crédit et intérêts | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Compte bancaire, frais, crédit et intérêts | Début de couverture — à approfondir | [`econ-distinguer-interet-frais`](../apprendre/fiches/econ-distinguer-interet-frais.html) |
 | Revenus, fiche de paie, prélèvements et impôts | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | Achats, contrats, garanties et recours du consommateur | Début de couverture — à approfondir | [`econ-lire-mention-garantie`](../apprendre/fiches/econ-lire-mention-garantie.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 2 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 5 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 5 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Sciences, technologie et environnement
 

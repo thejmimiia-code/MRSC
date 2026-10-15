@@ -2,7 +2,7 @@
 
 **Plan de travail au 2026-10-14 — cible, pas catalogue disponible.**
 
-L’ambition est de construire progressivement 1 000 fiches distinctes, autonomes et valorisantes. Le catalogue de travail compte actuellement 76 entrées : 26 entrées du corpus initial sans marqueur de prototype et 50 prototypes explicitement à relire. L’écart arithmétique à la cible est de 924 entrées ; le nombre de fiches ayant franchi tous les contrôles de publication n’est pas encore suivi.
+L’ambition est de construire progressivement 1 000 fiches distinctes, autonomes et valorisantes. Le catalogue de travail compte actuellement 77 entrées : 26 entrées du corpus initial sans marqueur de prototype et 51 prototypes explicitement à relire. L’écart arithmétique à la cible est de 923 entrées ; le nombre de fiches ayant franchi tous les contrôles de publication n’est pas encore suivi.
 
 Ces nombres décrivent le catalogue et un objectif de planification ; ils ne prouvent ni qu’une fiche a passé toutes les relectures, ni que les sujets proposés sont exhaustifs. L’absence de statut de prototype sur une fiche initiale ne vaut pas validation indépendante. Les versions, traductions et variantes d’un même objectif ne gonflent pas le compte.
 
@@ -15,7 +15,7 @@ Les quotas sont des hypothèses de travail à corriger selon les besoins signal�
 | Français, lecture, écriture et communication | 100 | 7 | 5 | 93 |
 | Langues étrangères et interculturel | 45 | 3 | 2 | 42 |
 | Mathématiques, mesures et données | 110 | 14 | 8 | 96 |
-| Budget, économie, consommation et travail | 75 | 4 | 3 | 71 |
+| Budget, économie, consommation et travail | 75 | 5 | 4 | 70 |
 | Sciences, technologie et environnement | 75 | 8 | 6 | 67 |
 | Géographie, territoire et espace | 35 | 4 | 3 | 31 |
 | Histoire, chronologie et mémoire | 40 | 3 | 3 | 37 |
@@ -27,7 +27,7 @@ Les quotas sont des hypothèses de travail à corriger selon les besoins signal�
 | Santé, alimentation, corps et sécurité | 60 | 1 | 0 | 59 |
 | Apprendre à apprendre, autonomie et relations | 45 | 2 | 1 | 43 |
 | Études supérieures, spécialités et recherche — post-bac au doctorat | 75 | 3 | 3 | 72 |
-| **Total planifié** | **1 000** | **76** | **50** | **924** |
+| **Total planifié** | **1 000** | **77** | **51** | **923** |
 
 ## Horizon principal des contenus
 
