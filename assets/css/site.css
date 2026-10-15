@@ -259,18 +259,18 @@ html.contraste-renforce .site-status-note {
 .header-compact-brand {
   display: none;
   align-items: center;
-  min-height: 44px;
+  min-height: 32px;
   text-decoration: none;
 }
 
 .header-compact-brand img {
   display: block;
   width: auto;
-  height: 36px;
-  max-width: 64px;
+  height: 28px;
+  max-width: 48px;
   object-fit: contain;
   background: #fff;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .site-header.is-compact .nav-inner {
@@ -278,16 +278,16 @@ html.contraste-renforce .site-status-note {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: stretch;
-  gap: .4rem;
+  align-items: center;
+  gap: .3rem;
   width: min(var(--content), calc(100% - 1rem));
-  min-height: 52px;
-  padding: .4rem .55rem .45rem 4.35rem;
+  min-height: 40px;
+  padding: .3rem .4rem .3rem 3.4rem;
 }
 
 .site-header.is-compact .header-compact-brand {
   position: absolute;
-  left: .4rem;
+  left: .35rem;
   top: 50%;
   z-index: 2;
   display: inline-flex;
@@ -295,23 +295,46 @@ html.contraste-renforce .site-status-note {
 }
 
 .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings, .site-journey-settings, .layout-settings) {
-  flex: 1 1 calc(33.333% - .4rem);
-  min-width: min(100%, 6.5rem);
+  flex: 0 1 auto;
+  min-width: 0;
   margin: 0;
 }
 
 .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
-  width: 100%;
+  width: auto;
   max-width: none;
-  min-height: 44px;
+  min-height: 34px;
+  padding: .22rem .55rem;
+  font-size: .75rem;
   justify-content: center;
   box-sizing: border-box;
   white-space: nowrap;
 }
 
+.site-header.is-compact .nav-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
 .site-header.is-compact .header-compact-toggle {
-  width: 100%;
+  width: auto;
   max-width: none;
+}
+
+@media (max-width: 760px) {
+  .site-header.is-compact .nav-inner {
+    gap: .25rem;
+    padding: .28rem .35rem .28rem 3.1rem;
+  }
+  .site-header.is-compact .header-compact-brand img {
+    height: 24px;
+    max-width: 42px;
+  }
+  .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+    min-height: 32px;
+    padding: .18rem .45rem;
+    font-size: .7rem;
+  }
 }
 
 .main-nav {
@@ -2988,6 +3011,9 @@ html.entete-compacte { scroll-padding-top: 8rem; }
 @media (any-pointer: coarse) {
   .display-settings > summary,.display-control,.button,.nav-toggle,.header-compact-toggle,.nav-links a,summary { min-height: 44px; }
   .site-journey-button { min-width: 44px; min-height: 44px; }
+  .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+    min-height: 32px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
