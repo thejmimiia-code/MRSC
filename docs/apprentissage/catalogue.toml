@@ -4152,3 +4152,66 @@ licence_source = "Non vérifiée — lien documentaire ; aucun parcours de signa
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Accueil consulté le 15 octobre 2026 : le service se présente comme un canal pour s’informer ou signaler un problème. Aucune étape du formulaire n’est copiée ni enseignée."
+
+[[fiche]]
+id = "civ-reperer-info-electorale"
+titre = "Repérer une information électorale officielle"
+matiere = "Citoyenneté et médias"
+matiere_id = "citoyennete"
+domaine = "citoyennete-medias"
+niveau = 2
+horizon_contenu = "Lecture d’informations publiques en France ; les dates, listes et modalités d’une élection réelle se vérifient sur des pages officielles à jour"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon pour distinguer un message urgent d’une information publique sur une élection fictive. Faire relire par une personne compétente en institutions et en éducation aux médias. Aucune consigne de vote. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 8
+resume = "Comparer un message pressant et un point d’entrée public, sans indiquer pour qui voter."
+objectif = "Dans un exemple fictif, choisir par où commencer pour vérifier une information liée à une élection, sans confondre appel et source officielle."
+situation = "Message fictif : « Votez demain, cliquez ici pour votre bureau. » À côté, tu peux ouvrir toi-même un portail public d’information citoyenne. Par où commencer avant d’agir ?"
+analogie_titre = "Comme vérifier l’horaire d’un train sur le panneau de la gare, pas sur un tract glissé dans la main"
+analogie = "Un tract peut être pressant. Le panneau de la gare, affiché par l’organisme qui gère les horaires, est un meilleur point de départ pour vérifier. Une information électorale se vérifie de la même façon : on ouvre un canal public, on lit l’émetteur et la date."
+limite_analogie = "Une élection n’est pas un horaire de train. Les règles, dates et listes changent. Un portail public oriente ; il ne dit pas pour qui voter et ne remplace pas le service compétent."
+notions = [
+  "Information officielle — page ou document publié par un organisme public identifié, avec une date.",
+  "Appel — message qui pousse à agir vite, souvent par un lien reçu.",
+  "Émetteur — qui publie l’information et en répond.",
+  "Vérification — ouvrir soi-même un site connu ou un favori, plutôt que suivre le premier lien."
+]
+demarche = [
+  "Lis le message sans cliquer : que demande-t-il, avec quelle urgence ?",
+  "Ouvre un point d’entrée public par un favori ou le nom de l’organisme, pas par le lien reçu.",
+  "Vérifie l’émetteur et la date. Une élection réelle a des modalités propres au scrutin et au territoire.",
+  "Ne communique pas de pièce d’identité ni de code par un lien non vérifié.",
+  "Cette fiche n’indique ni pour qui voter, ni comment s’inscrire : pour une élection réelle, consulte les pages officielles à jour."
+]
+exercice = "Dans la situation fictive, que ferais-tu en premier ? A) Cliquer sur le lien du message. B) Ouvrir toi-même un portail public d’information, puis chercher le sujet. C) Transmettre le message à tout le monde « pour informer »."
+aide = "Compare l’origine du lien (un message) et l’origine d’un site que tu ouvres toi-même."
+correction = [
+  "B est la réponse attendue pour cet entraînement : commencer par un canal public ouvert soi-même.",
+  "A suit un lien non vérifié. C relance un message dont l’émetteur n’est pas établi.",
+  "Même après B, il resterait à lire la date, le territoire et le type de scrutin. Aucune de ces options n’est un vote."
+]
+a_retenir = [
+  "Tes questions sur la vie publique méritent une source identifiable.",
+  "On vérifie l’émetteur et la date avant d’agir.",
+  "Un message urgent n’est pas une information officielle.",
+  "Cette fiche n’indique pas pour qui voter."
+]
+transferer = "Cette méthode peut servir avant de relayer une rumeur sur un scrutin. Pour une élection réelle, utilise les pages officielles actuelles ; cette fiche n’ouvre aucun droit et n’est pas un conseil de vote."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Vie publique — les fiches sur les institutions et la citoyenneté"
+url = "https://www.vie-publique.fr/fiches"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail consulté le 15 octobre 2026 comme point d’entrée vers des fiches d’institutions et de citoyenneté. Aucun contenu n’est copié."
+
+[[fiche.sources]]
+titre = "Service-Public — accueil d’information officielle sur les droits et démarches"
+url = "https://www.service-public.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucune fiche électorale n’est reprise."

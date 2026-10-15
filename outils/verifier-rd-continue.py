@@ -217,7 +217,7 @@ def verifier_surface_publique(verificateur: Verificateur) -> None:
         and 'href="transparence.html#rd-innovation"' in aventure_text
         and 'href="transparence.html#rd-innovation"' in apprentissage_text
         and "Aucun site ne peut recenser tout le savoir du monde" in page_text
-        and "75 fiches" in page_text and "49 prototypes" in page_text
+        and "76 fiches" in page_text and "50 prototypes" in page_text
         and "blob/main/docs/rd/portefeuille.toml" in page_text
         and "blob/main/docs/rd/journal.md" in page_text
         and 'href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/protocole-essais-usage.md"' in page_text

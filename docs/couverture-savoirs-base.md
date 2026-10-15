@@ -132,9 +132,9 @@ Vérifier les affirmations, comprendre les institutions et participer sans confo
 | Choisir une source publique selon la question et vérifier sa portée | Début de couverture — à approfondir | [`civ-choisir-source-publique`](../apprendre/fiches/civ-choisir-source-publique.html) |
 | Distinguer image, légende, montage et interprétation | Début de couverture — à approfondir | [`arts-lire-image`](../apprendre/fiches/arts-lire-image.html) |
 | Institutions françaises et européennes, droits et responsabilités | Début de couverture — à approfondir | [`civ-reperer-echelle-institution`](../apprendre/fiches/civ-reperer-echelle-institution.html) |
-| Élections, décisions publiques et participation citoyenne | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Élections, décisions publiques et participation citoyenne | Début de couverture — à approfondir | [`civ-reperer-info-electorale`](../apprendre/fiches/civ-reperer-info-electorale.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 5 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 5 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 5 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Démarches, droits, sécurité et vie professionnelle
 

@@ -326,8 +326,8 @@ fiches = ["civ-reperer-echelle-institution"]
 [[domaine.sujet]]
 id = "elections-participation"
 titre = "Élections, décisions publiques et participation citoyenne"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["civ-reperer-info-electorale"]
 
 [[domaine]]
 id = "demarches-droits-travail"
