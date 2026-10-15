@@ -4279,3 +4279,67 @@ licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation d
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucune fiche crédit n’est reprise."
+
+
+[[fiche]]
+id = "langue-reperer-mot-deja-connu"
+titre = "Reconnaître un mot que tu connais déjà sur une affiche bilingue"
+matiere = "Langues et interculturel"
+matiere_id = "langues"
+domaine = "langues-etrangeres"
+niveau = 1
+horizon_contenu = "Lecture d’une affiche bilingue fictive ; aucune langue entière n’est enseignée, aucun audio n’est fourni"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon valorisant : s’appuyer sur un mot déjà connu. Faire relire par une personne compétente en langues et en FLE. Aucune prononciation n’est garantie. Sources, droits, accessibilité et essais apprenants restent à contrôler."
+minutes = 7
+resume = "Repérer, sur une affiche inventée, un mot que tu peux déjà connaître, sans apprendre toute une langue."
+objectif = "Dans un exemple fictif, relier un mot déjà familier à son voisin français sur la même affiche."
+situation = "Affiche-exemple à l’entrée d’une salle : « Entrée / Entrada » et « Sortie / Sortida ». Tu as déjà vu ou entendu « entrada ». Que peux-tu en déduire sans tout traduire ?"
+analogie_titre = "Comme reconnaître un visage dans une photo de groupe"
+analogie = "Dans une photo, tu n’as pas besoin de nommer tout le monde pour reconnaître une personne que tu connais déjà. Sur une affiche bilingue, un mot déjà familier peut t’orienter : tu le poses à côté du mot français de la même ligne."
+limite_analogie = "Un mot isolé n’est pas une langue. L’orthographe, le son et le sens peuvent changer selon le lieu. Cette analogie n’enseigne ni grammaire ni prononciation."
+notions = [
+  "Mot déjà connu — mot vu, entendu ou utilisé ailleurs, même sans « cours ».",
+  "Affiche bilingue — deux versions d’un même message, souvent ligne par ligne.",
+  "Voisinage — le mot français et l’autre mot de la même ligne se répondent.",
+  "Limite — un mot ne suffit pas pour comprendre tout le panneau ni pour parler."
+]
+demarche = [
+  "Lis l’affiche sans te dire que tu « n’as pas de langue » : ce que tu as déjà vu compte.",
+  "Repère un mot familier, ici « entrada ».",
+  "Lis le mot français de la même ligne : « Entrée ».",
+  "Vérifie l’autre paire (« Sortie / Sortida ») pour ne pas tout mélanger.",
+  "Cette fiche n’enseigne pas une langue entière : elle t’aide à partir de ce que tu sais déjà."
+]
+exercice = "Sur l’Affiche-exemple, que peux-tu conclure ? A) « Entrada » est sur la même ligne qu’« Entrée », donc c’est un bon point de départ pour le sens « entrée ». B) Il faut d’abord parler couramment les deux langues. C) Les deux lignes veulent forcément dire la même chose, donc on peut ignorer les mots."
+aide = "Garde la ligne : un mot connu + le mot français à côté. Tu n’as pas besoin de tout savoir."
+correction = [
+  "A est la réponse attendue : tu t’appuies sur un mot déjà connu et sur son voisinage.",
+  "B exige un niveau que la fiche ne demande pas. C efface les libellés.",
+  "Même après A, le son et l’usage réel restent à vérifier. Cette fiche n’enseigne pas une langue entière."
+]
+a_retenir = [
+  "Ce que tu connais déjà dans une autre langue, une langue régionale ou le français langue seconde compte.",
+  "Un mot familier peut ouvrir une ligne d’affiche.",
+  "Le voisinage (même ligne) aide plus que le hasard.",
+  "Cette fiche n’enseigne pas une langue entière."
+]
+transferer = "Cette lecture peut servir devant un panneau, un titre ou un menu bilingue. Pour apprendre réellement une langue, il faudra d’autres ressources, de l’écoute et de la pratique ; cette fiche n’est ni un cours ni une certification."
+revue_le = "2026-10-15"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Ministère de la Culture — accueil"
+url = "https://www.culture.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune page n’est reprise"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Portail consulté comme point d’entrée vers les politiques culturelles, y compris les langues. Aucun contenu n’est copié."
+
+[[fiche.sources]]
+titre = "Ministère de l’Éducation nationale — accueil"
+url = "https://www.education.gouv.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche FLE n’est reprise"
+droits_controles_le = "2026-10-15"
+mode_utilisation = "reference-factuelle"
+utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucun programme ni ressource pédagogique n’est recopié."

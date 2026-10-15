@@ -39,10 +39,10 @@ Commencer par des expressions réutilisables, puis développer l'écoute, la lec
 | --- | --- | --- |
 | Demander une direction en anglais | Début de couverture — à approfondir | [`langue-anglais-direction`](../apprendre/fiches/langue-anglais-direction.html) |
 | Comprendre et échanger dans d’autres situations quotidiennes | Début de couverture — à approfondir | [`langue-anglais-demander-aide`](../apprendre/fiches/langue-anglais-demander-aide.html)<br>[`langue-anglais-epeler`](../apprendre/fiches/langue-anglais-epeler.html) |
-| Autres langues, langues régionales et français langue seconde | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Autres langues, langues régionales et français langue seconde | Début de couverture — à approfondir | [`langue-reperer-mot-deja-connu`](../apprendre/fiches/langue-reperer-mot-deja-connu.html) |
 | Écoute, prononciation et ressources audio accessibles | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 2 sujet(s) commencés mais incomplets, 2 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Mathématiques, mesures et données
 
