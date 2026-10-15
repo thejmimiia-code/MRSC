@@ -122,8 +122,8 @@ phase = "cadrage"
 etat = "a-cadrer"
 domaines = ["numerique-ia"]
 question = "Comment présenter les travaux d’ÉVA en termes clairs, en séparant les objectifs des essais, des résultats et des capacités démontrées?"
-preuves = ["index.html", "transparence.html", "docs/rd-coherence-visuelle-editoriale.md"]
-prochaine_action = "Recueillir les éléments techniques que l’équipe ÉVA peut publier : objectifs validés, essais, versions, résultats, échecs, limites, sources et droits ; mettre ensuite à jour la rubrique sans annoncer de capacité non démontrée."
+preuves = ["index.html", "eva.html", "transparence.html", "docs/rd-coherence-visuelle-editoriale.md"]
+prochaine_action = "Faire relire par les personnes responsables d’ÉVA cette proposition générale; confirmer les besoins matériels et financiers ainsi que les éléments publiables; documenter ensuite les résultats et limites sans divulguer de données personnelles ni de procédés internes. Ne présenter aucun budget ni appel aux dons comme approuvé sans validation."
 criteres_sortie = ["Chaque capacité annoncée est liée à une démonstration datée et documentée.", "Les objectifs et hypothèses sont identifiés comme tels.", "Les résultats, échecs, limites et validations manquantes sont indiqués.", "La présentation reste compréhensible sans jargon et les éléments publiés sont autorisés."]
 skills = ["documentation-technique", "recherche-sources", "accessibilite-co-conception", "evaluation-maintenance"]
 

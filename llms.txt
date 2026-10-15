@@ -10,7 +10,7 @@ Les pages HTML sont les contenus de référence. Ce sommaire facultatif s’insp
 - [Apprendre](https://thejmimiia-code.github.io/MRSC/apprendre.html): catalogue de fiches autonomes, classées par matière et difficulté.
 - [Les Mondes](https://thejmimiia-code.github.io/MRSC/anglais-aventure.html): atlas et parcours d’apprentissage.
 - [IA & société](https://thejmimiia-code.github.io/MRSC/ia-societe.html): dossier sur des usages de l’intelligence artificielle et leurs effets sociaux.
-- [ÉVA, Entité Virtuelle Autonome](https://thejmimiia-code.github.io/MRSC/eva.html): projet de recherche sur une IA autonome — parcours, avancées, obstacles, besoins de souveraineté (page à relire).
+- [ÉVA, Entité Virtuelle Autonome](https://thejmimiia-code.github.io/MRSC/eva.html): proposition à relire sur le projet de recherche en IA, ses limites et le besoin général de matériel et de financements.
 - [Recherche sur ÉVA](https://thejmimiia-code.github.io/MRSC/#rd-eva): présentation du projet et de son état public.
 - [Simulateur — présentation](https://thejmimiia-code.github.io/MRSC/simulateur.html): description et limites du simulateur macro-politique.
 - [Simulateur — interface](https://thejmimiia-code.github.io/MRSC/simulateur/): interface du modèle.
