@@ -3043,26 +3043,6 @@ html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journ
   max-width: none;
 }
 
-@media (max-width: 760px) {
-  html.has-js .site-header.is-compact .nav-toggle,
-  html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
-  html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
-    min-height: 0;
-    padding: .12rem .4rem;
-    font-size: .68rem;
-  }
-  html.has-js .site-header.is-compact .nav-inner {
-    display: flex;
-    flex-wrap: wrap;
-    min-height: 0;
-    padding: .22rem .35rem;
-  }
-  html.has-js .site-header.is-compact .header-compact-brand img {
-    height: 1.85rem;
-    max-width: 3.2rem;
-  }
-}
-
 html.has-js .site-header.is-compact .header-compact-brand {
   float: none;
   position: static;
@@ -3078,6 +3058,38 @@ html.has-js .site-header.is-compact .header-compact-brand img {
   height: 2rem;
   width: auto;
   max-width: 3.5rem;
+}
+
+@media (max-width: 760px) {
+  html.has-js .site-header.is-compact .nav-inner {
+    display: flow-root;
+    flex-wrap: unset;
+    min-height: 0;
+    padding: .22rem .35rem;
+  }
+  html.has-js .site-header.is-compact .header-compact-brand {
+    float: left;
+    display: block;
+    margin: 0 .4rem 0 0;
+  }
+  html.has-js .site-header.is-compact .header-compact-brand img {
+    height: 3.4rem;
+    max-width: 5.5rem;
+  }
+  html.has-js .site-header.is-compact .nav-toggle,
+  html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
+  html.has-js .site-header.is-compact :is(.display-settings, .site-journey-settings, .layout-settings) {
+    display: inline-flex;
+    margin: .08rem .14rem .08rem 0;
+    vertical-align: middle;
+  }
+  html.has-js .site-header.is-compact .nav-toggle,
+  html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
+  html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+    min-height: 0;
+    padding: .14rem .42rem;
+    font-size: .68rem;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
