@@ -259,18 +259,18 @@ html.contraste-renforce .site-status-note {
 .header-compact-brand {
   display: none;
   align-items: center;
-  min-height: 32px;
+  min-height: 0;
   text-decoration: none;
 }
 
 .header-compact-brand img {
   display: block;
   width: auto;
-  height: 28px;
-  max-width: 48px;
+  height: 22px;
+  max-width: 38px;
   object-fit: contain;
   background: #fff;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .site-header.is-compact .nav-inner {
@@ -281,8 +281,8 @@ html.contraste-renforce .site-status-note {
   align-items: center;
   gap: .3rem;
   width: min(var(--content), calc(100% - 1rem));
-  min-height: 40px;
-  padding: .3rem .4rem .3rem 3.4rem;
+  min-height: 0;
+  padding: .22rem .4rem .22rem 2.7rem;
 }
 
 .site-header.is-compact .header-compact-brand {
@@ -329,11 +329,11 @@ html.contraste-renforce .site-status-note {
   .site-header.is-compact .nav-inner {
     gap: .2rem;
     min-height: 0;
-    padding: .22rem .3rem .22rem 2.85rem;
+    padding: .18rem .3rem .18rem 2.35rem;
   }
   .site-header.is-compact .header-compact-brand img {
-    height: 22px;
-    max-width: 38px;
+    height: 18px;
+    max-width: 32px;
   }
 }
 
