@@ -896,7 +896,7 @@ def page_complete() -> str:
     if 'class="site-status-note"' not in contenu:
         note_developpement = (
             '\n    <p class="site-status-note" role="note">'
-            "Version de recherche et développement (R&amp;D) — le site est en cours de développement."
+            "Version R&amp;D — le site est en cours de développement."
             "</p>"
         )
         contenu = (

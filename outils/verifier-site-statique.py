@@ -1221,7 +1221,7 @@ def verifier_note_rnd() -> None:
     """Vérifie que chaque page publique signale son statut de développement sans JavaScript."""
     marqueur = re.compile(
         r'<p\b(?=[^>]*\bclass="site-status-note")(?=[^>]*\brole="note")[^>]*>\s*'
-        r"Version de recherche et développement \(R&amp;D\) — le site est en cours de développement\."
+        r"Version R&amp;D — le site est en cours de développement\."
         r"\s*</p>",
         flags=re.IGNORECASE | re.DOTALL,
     )
