@@ -284,6 +284,7 @@ html.contraste-renforce .site-status-note {
   font-size: clamp(13px,.875rem,18px);
   font-weight: 700;
   line-height: 1.2;
+  white-space: nowrap;
   cursor: pointer;
   transition: background .18s ease, border-color .18s ease;
 }
@@ -319,7 +320,7 @@ html.contraste-renforce .site-status-note {
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
-  white-space: normal;
+  white-space: nowrap;
   overflow-wrap: anywhere;
   cursor: pointer;
   transition: background .18s ease, border-color .18s ease;
@@ -465,6 +466,7 @@ html.contraste-renforce .site-status-note {
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
   appearance: none;
   transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
@@ -2644,7 +2646,7 @@ html.contraste-renforce .resource-scope-note {
 }
 .display-control:hover:not(:disabled) { background: var(--blue-soft); }
 .display-control:disabled { border-color: #d7ddea; background: #edf1f6; color: #536078; cursor: not-allowed; }
-.display-control-wide { width: 100%; text-align: left; }
+.display-control-wide { width: 100%; text-align: left; white-space: nowrap; }
 .display-text-level { min-width: 4.5ch; text-align: center; font-size: clamp(14px,.95rem,18px); font-variant-numeric: tabular-nums; }
 .display-settings-note { margin-top: .75rem; color: var(--muted); font-size: clamp(12px,.8rem,16px); line-height: 1.45; }
 .display-settings-panel :focus-visible { outline-color: var(--blue); }
@@ -2766,6 +2768,7 @@ html.contraste-renforce :is(button,.button,.display-control,.display-settings > 
   font-size: .78rem;
   font-weight: 690;
   line-height: 1.25;
+  white-space: nowrap;
   cursor: pointer;
   appearance: none;
   transition: border-color .18s ease, background .18s ease, color .18s ease;
@@ -2816,7 +2819,7 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   .has-js .nav-links.is-open { display: flex; }
   .has-js .nav-links a {
     width: min(var(--content),100%); min-height: 45px; margin-inline: auto;
-    padding-inline: .35rem; white-space: normal;
+    padding-inline: .35rem; white-space: nowrap;
   }
   .has-js .nav-links a::after { right: auto; left: .35rem; width: 35px; }
   html:not(.has-js) .nav-inner { flex-wrap: wrap; justify-content: flex-start; padding-block: .2rem; }
@@ -2849,6 +2852,7 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
     min-height: 44px;
     padding: .25rem .38rem;
     font-size: .75rem;
+    white-space: nowrap;
   }
   .site-journey-symbol { display: none; }
   .site-journey-status {
@@ -2975,7 +2979,7 @@ html.entete-compacte { scroll-padding-top: 8rem; }
   border-radius:8px; background:var(--white); color:var(--ink); font:inherit;
 }
 .learning-filter-field :focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
-.learning-filter-reset { min-height:46px; white-space:normal; }
+.learning-filter-reset { min-height:46px; white-space:nowrap; }
 .learning-filter-count { margin:.4rem 0; color:var(--muted); font-size:.9rem; }
 .learning-no-results { padding:1rem; border:1px solid var(--line); border-radius:12px; background:var(--paper); }
 .learning-catalogue-grid {
@@ -3375,7 +3379,7 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-share-fallback input { width: 100%; min-width: 0; min-height: 44px; padding: .55rem .7rem; border: 1px solid #aebbd0; border-radius: var(--button-radius); background: var(--white); color: var(--ink); font: inherit; }
 .home-share-fallback input:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 .home-join-actions { display: grid; gap: .6rem; }
-.home-join-actions .button { white-space: normal; }
+.home-join-actions .button { white-space: nowrap; }
 html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,.home-share-panel) { border-color: currentColor; background: var(--white); box-shadow: none; }
 @media (max-width: 1000px) {
   .home-voice-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
@@ -3606,4 +3610,5 @@ html[data-layout="panorama"] main :is(
     color: ButtonText !important;
     box-shadow: none !important;
   }
+}
 }
