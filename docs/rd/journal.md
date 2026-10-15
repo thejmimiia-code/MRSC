@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-15 — Navigation sans retour à la ligne et prénom Éva
+
+- **Initiative :** `coherence-textes-publics`.
+- **Signal :** les libellés du menu (IA & société, Liens utiles, Nous contacter) se cassaient ; les phrases partaient en milieu de ligne ; préciser qu’ÉVA donne le prénom Éva.
+- **Décision :** `white-space: nowrap` sur les liens de navigation. Typographie : `text-wrap: pretty`, pas de césure au milieu des mots. Accueil et page ÉVA : l’acronyme Entité Virtuelle Autonome donne le prénom **Éva** à l’entité du projet.
+- **Contrôles réellement exécutés :** `verifier-site-statique.py` ; `verifier-integration.py` — réussis.
+- **Limites et suite :** le visuel 3D d’accueil est validé ; ne pas le modifier.
+
 ## 2026-10-15 — Visuel 3D à l’accueil et logo en en-tête réduit
 
 - **Initiative :** `coherence-textes-publics`.
