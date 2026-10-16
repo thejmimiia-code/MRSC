@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Six pistes d’animation (sortie du réalisme)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** même ambiance 80s, passer au dessin animé pour suivre les personnages ; style neuf, inspiré de plusieurs recettes qui tiennent ; 6 présentations.
+- **Décision :** réalisme écarté pour le casting. Six hybrides : encre chrome, argile lanterne, VHS aurore, vitrail nuit, riso boulevard, volume pinceau. À choisir ou fusionner (max deux) puis model sheets.
+- **Contrôles :** bible mise à jour ; six planches.
+
 ## 2026-10-16 — Bible Léna / Marc / Karim et vidéo 01
 
 - **Initiative :** `direction-artistique-motion`.

@@ -3,7 +3,24 @@
 **Statut :** à relire, à adapter. Aucune vidéo tournée.  
 **Règle d’or :** les **trois personnages principaux** ne changent **jamais**. Seuls les **figurants** et les **périodes** changent. Ils **vieillissent sans excès** (de ~17 ans en 1985 à ~58 ans aujourd’hui : mêmes traits, mêmes tics, pas de caricature de vieillesse).
 
-Style d’image : cinéma 80s (Amblin / *Retour vers le futur* / *Stranger Things* en **lumière**, pas en copies).
+**Image :** on **quitte le réalisme**. Trop instable pour garder Léna / Marc / Karim de 1985 à aujourd’hui.  
+**Animation** = mêmes masses (cheveux, vestes rouge / jean / bomber vert), mêmes tics, vieillir **sans recaster**.  
+Lumière 80s Amblin **conservée**. Le trait, lui, doit être **le nôtre**.
+
+### Six pistes de style (même scène : booth 1985) — aucune validée
+
+Hybrides, références de **méthode** pas de copies de films.
+
+| # | Nom de piste | Ingrédients qui « tiennent » | Pourquoi ça aiderait le fil | Fichier |
+|---|---|---|---|---|
+| 1 | **Encre chrome** | BD claire + affiche 80s + aplats teal/magenta | Silhouettes tampon, faciles à vieillir | [style-anim-01-encre-chrome.png](style-anim-01-encre-chrome.png) |
+| 2 | **Argile lanterne** | Volume handmade + lumière tungstène/néon | Matière unique, visages sculptés une fois | [style-anim-02-argile-lanterne.png](style-anim-02-argile-lanterne.png) |
+| 3 | **VHS aurore** | Model sheet cartoon 80s + scanlines + 8 couleurs | Cohérence type « série », décennies = dégradation VHS | [style-anim-03-vhs-aurora.png](style-anim-03-vhs-aurora.png) |
+| 4 | **Vitrail nuit** | Vitrail + poster d’aventure 80s | Chaque époque = une autre couleur de verre | [style-anim-04-vitrail-nuit.png](style-anim-04-vitrail-nuit.png) |
+| 5 | **Riso boulevard** | Risograph décalé + affiche FR + cadrage cinéma | Palette courte, visages comme des timbres | [style-anim-05-riso-boulevard.png](style-anim-05-riso-boulevard.png) |
+| 6 | **Volume pinceau** | 3D toon simplifié + shader peint | Le plus « grand film », vestes = ancre de casting | [style-anim-06-volume-pinceau.png](style-anim-06-volume-pinceau.png) |
+
+**À choisir (ou fusionner deux pistes, et seulement deux).** Ensuite : model sheets Léna / Marc / Karim de face, 3/4, dos, **avant** la vidéo 01.
 
 ---
 
