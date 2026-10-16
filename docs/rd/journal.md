@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Fusions de styles (quatre planches choisies)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** mélanger mots croisés, gouache fraîche, pixels visages, mains ; innover.
+- **Décision :** dix fusions F-01 à F-10. Trio Léna / Marc / Karim, France 1985. F-10 = tentative de look unique de film.
+- **Contrôles :** planches fusion-01 à 10.
+
 ## 2026-10-16 — Compilation Drive + X17
 
 - **Initiative :** `direction-artistique-motion`.

@@ -301,6 +301,21 @@ X16-06 (gouttes) : non livré ce tour.
 | X17-09 | VHS + rire | [style-x17-09-vhs-rire.png](style-x17-09-vhs-rire.png) |
 | X17-10 | Memphis + sommeil | [style-x17-10-memphis-sommeil.png](style-x17-10-memphis-sommeil.png) |
 
+### Fusions (sélection utilisateur : mots croisés + gouache + pixels + mains)
+
+| | Mix | Fichier |
+|---|---|---|
+| F-01 | Croisé + gouache | [fusion-01-croise-gouache.png](fusion-01-croise-gouache.png) |
+| F-02 | Pixels + trio | [fusion-02-pixels-trio.png](fusion-02-pixels-trio.png) |
+| F-03 | Pacte des mains | [fusion-03-pacte-mains.png](fusion-03-pacte-mains.png) |
+| F-04 | Tabac + carnet | [fusion-04-tabac-carnet.png](fusion-04-tabac-carnet.png) |
+| F-05 | Nuit néon | [fusion-05-nuit-neon.png](fusion-05-nuit-neon.png) |
+| F-06 | Carnet-grille | [fusion-06-carnet-grille.png](fusion-06-carnet-grille.png) |
+| F-07 | Flipper + pixels | [fusion-07-flipper-pixels.png](fusion-07-flipper-pixels.png) |
+| F-08 | Lettres vivantes | [fusion-08-lettres-vivantes.png](fusion-08-lettres-vivantes.png) |
+| F-09 | Verre + grille | [fusion-09-verre-grille.png](fusion-09-verre-grille.png) |
+| F-10 | Piste « un seul film » | [fusion-10-style-mrsc.png](fusion-10-style-mrsc.png) |
+
 ---
 
 ## 5. Suite de production
