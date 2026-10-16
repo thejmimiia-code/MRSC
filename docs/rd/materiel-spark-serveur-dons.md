@@ -57,17 +57,25 @@ Les premières sessions viseraient à documenter, **sans les confondre** :
 
 Aucune session, même sur Spark ou serveur, ne « prouve » une conscience. Une IA n’est pas un signataire de résultat.
 
-## 6. Cagnotte et transparence (mécanisme proposé)
+## 6. Cagnotte, adaptation réelle des achats, complément
 
 **Proposition à valider par l’association.** Tant qu’elle n’est pas validée, aucun don en ligne n’est ouvert depuis cette note.
 
-Piste de fonctionnement :
+Règle : **les achats suivent la capacité réelle des dons**, pas un catalogue idéal.
 
-1. Les personnes physiques et morales peuvent soutenir le projet via les **canaux déjà prévus** par l’association (bulletin de don, courriel `assomrsc@gmail.com`), puis, si l’association l’ouvre, une cagnotte identifiée.
-2. Le **total collecté** détermine le palier d’achat (compact type Spark, puis éventuellement serveur, plus fonctionnement).
-3. **Transparence aux donateurs :** publier, sans données personnelles non consenties, le total, le palier retenu, les factures ou libellés d’achat, le reste, et l’écart éventuel.
-4. Les personnes morales ne sont nommées que si elles l’acceptent.
-5. Un don n’achète ni résultat scientifique, ni mention publicitaire obligatoire, ni influence sur une « conscience » d’Éva.
+Cycle prévu, répétable :
+
+1. **Collecter** — personnes physiques et morales ; bulletin de don et `assomrsc@gmail.com` tant qu’une cagnotte n’est pas ouverte.
+2. **Faire le point** — publier le total et ce qu’il permet réellement (palier A / B / C, ou aucun achat encore).
+3. **Acheter seulement un palier couvert** — devis daté ; pas d’achat au-dessus du disponible, fonctionnement compris.
+4. **Si la somme ne permet pas le matériel** — les fonds restent affectés au projet Éva / calcul. Ils sont **conservés** et, le cas échéant, **placés selon les règles de l’association** (aucun rendement n’est promis ici). Un **appel complémentaire** ouvre une **nouvelle cagnotte** pour le même objet.
+5. **Recommencer** — cumul des cagnottes, nouveau point, mêmes règles de transparence.
+
+Transparence aux donateurs, sans donnée personnelle non consentie : totaux par cagnotte, cumul, palier ou report, libellés d’achat, reste, motif du complément.
+
+Les personnes morales ne sont nommées que si elles l’acceptent.
+
+Un don n’achète ni résultat scientifique, ni mention publicitaire obligatoire, ni « conscience » d’Éva.
 
 ## 7. Prochaine action
 
