@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Personnages-matériaux pour l’identité pédagogique
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** reprendre les matériaux du visuel d’accueil (verre, métal, arcs, cristal) pour des personnages uniques, vidéos de présentation et animations pédagogiques intuitives. Accueil 3D inchangé.
+- **Décision :** quatre guides proposés (Vertige, Ambre, Lame, Facette), distincts du logo et de Léna / Marc / Karim. Dix planches identite-01 à 10. Noms à valider.
+- **Contrôles :** planches identité.
+
 ## 2026-10-16 — Pistes nouvelles 11–20
 
 - **Initiative :** `direction-artistique-motion`.

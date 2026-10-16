@@ -363,6 +363,32 @@ Hors grille / gouache / pixels / mains.
 | N-19 | Acétate cours | [nouveau-19-acetate-cours.png](nouveau-19-acetate-cours.png) |
 | N-20 | Phalènes | [nouveau-20-phalenes.png](nouveau-20-phalenes.png) |
 
+### Identité matériaux (guides pédagogiques) — pas le logo qui marche
+
+Le visuel 3D d’accueil **n’est pas modifié**. On en tire **quatre êtres originaux** pour les vidéos, présentations et animations pédagogiques :
+
+| Nom proposé | Matière | Rôle intuitif |
+|---|---|---|
+| **Vertige** | Verre vert (arc) | Relier, ouvrir |
+| **Ambre** | Verre orange | Chaleur, attention |
+| **Lame** | Acier brossé doux | Tenir, clarifier |
+| **Facette** | Petite pyramide de verre | Pointer, éclairer |
+
+Ils **n’imitent pas** les lettres M.R.S.C. Léna / Marc / Karim restent l’histoire 1985 ; ces quatre-là sont le **guide** des présentations.
+
+| | Planche | Fichier |
+|---|---|---|
+| I-01 | Trio + Facette | [identite-01-trio-materiaux.png](identite-01-trio-materiaux.png) |
+| I-02 | Expliquer | [identite-02-expliquer.png](identite-02-expliquer.png) |
+| I-03 | Arcs vivants | [identite-03-arcs-vivants.png](identite-03-arcs-vivants.png) |
+| I-04 | Facette | [identite-04-facette.png](identite-04-facette.png) |
+| I-05 | Acier doux | [identite-05-acier-doux.png](identite-05-acier-doux.png) |
+| I-06 | Au zinc | [identite-06-zinc-materiaux.png](identite-06-zinc-materiaux.png) |
+| I-07 | Model sheet | [identite-07-model-sheet.png](identite-07-model-sheet.png) |
+| I-08 | Iconographie | [identite-08-iconographie.png](identite-08-iconographie.png) |
+| I-09 | Portrait Ambre | [identite-09-portrait-ambre.png](identite-09-portrait-ambre.png) |
+| I-10 | Accueil | [identite-10-accueil.png](identite-10-accueil.png) |
+
 ---
 
 ## 5. Suite de production
