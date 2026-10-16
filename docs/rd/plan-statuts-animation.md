@@ -40,19 +40,20 @@ On **part des années 80** : tout semble possible, la rue est pleine, on se parl
 Puis on **fait défiler les décennies** : la télé prend la table, les téléphones prennent les regards, les fenêtres s’allument **chacune pour soi**.  
 La **dégradation des relations** et le **nombrilisme** se voient dans la lumière et les gestes, pas dans un discours moralisateur.
 
-### Style visuel (premières scènes)
-**Ambiance 80s colorée**, **réaliste et animée à la fois** : matières photo, visages 3D de film, grain, néons teal / magenta / jaune.  
-Au fil des décennies, **les couleurs se fatiguent** (le 80s reste en fond de boutique, comme un souvenir).  
-Plus tard seulement : l’or du seuil M.R.S.C. et la table du partage.
+### Style visuel (premières scènes) — piste **Amblin / 80s cinéma**
+Référence de **lumière et de rythme**, pas de copies de films : *Retour vers le futur*, *Stranger Things*, cinéma d’aventure 80s (grain, anamorphique, néon, brume, vélos, diner, enseigne de cinéma).  
+Personnages **originaux**. Pas de DeLorean, pas d’Eleven, pas de logos de séries.
 
-### Planches « décennies » (essai visuel, 16 oct. 2026)
+Au fil des décennies, **la même ville** se décolore : le diner reste, l’aventure quitte la rue.
 
-- [decennies-01-annees-80.png](statuts-animation/decennies-01-annees-80.png) — tout est possible  
-- [decennies-02-annees-90.png](statuts-animation/decennies-02-annees-90.png) — on regarde ailleurs  
-- [decennies-03-annees-2010.png](statuts-animation/decennies-03-annees-2010.png) — proches et absents  
-- [decennies-04-annees-2020.png](statuts-animation/decennies-04-annees-2020.png) — chacun sa fenêtre  
+### Planches « Amblin » (essai, à adapter)
 
-À compléter ensuite (2000, 2015, etc.) selon ce qui accroche. Pas de logos de marques réelles.
+- [amblin-01-annees-80.png](statuts-animation/amblin-01-annees-80.png) — tout est possible  
+- [amblin-02-annees-90.png](statuts-animation/amblin-02-annees-90.png) — le mall, les écrans  
+- [amblin-03-annees-2010.png](statuts-animation/amblin-03-annees-2010.png) — LED, téléphones  
+- [amblin-04-annees-2020.png](statuts-animation/amblin-04-annees-2020.png) — lumières dans le brouillard, diner éteint  
+
+Anciennes planches « décennies » cartoon : archives.
 
 ### Écriture
 Voix off **tu**, proche, sans leçon.
