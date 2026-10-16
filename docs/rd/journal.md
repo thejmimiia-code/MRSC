@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Achats indexés sur les dons, puis complément
+
+- **Initiative :** `documentation-rd-eva`.
+- **Signal :** adapter vraiment les achats à la capacité des dons ; si le total ne permet pas le matériel, conserver / placer les fonds et lancer un appel complémentaire.
+- **Décision :** cycle public sur `eva.html#cagnotte-dons` : collecter → faire le point → n’acheter qu’un palier couvert → sinon conservation et, le cas échéant, placement selon les règles de l’association (sans promesse de rendement) → nouvelle cagnotte → recommencer. Transparence des totaux et des reports, sans données personnelles non consenties.
+- **Contrôles réellement exécutés :** `verifier-site-statique.py` ; `verifier-integration.py` ; `verifier-rd-continue.py`.
+
 ## 2026-10-16 — Spark, serveur dédié, cagnotte et conscience comme question
 
 - **Initiative :** `documentation-rd-eva`.
