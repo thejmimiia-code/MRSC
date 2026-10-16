@@ -253,6 +253,21 @@ Les vidéos **07+** : articles des statuts, **toujours** avec Léna / Marc / Kar
 | X14-09 | Onde + mobylette | [style-x14-09-onde-moto.png](style-x14-09-onde-moto.png) |
 | X14-10 | Disquette-vitrail | [style-x14-10-disquette-vitrail.png](style-x14-10-disquette-vitrail.png) |
 
+### Dix expériences 80s (X15)
+
+| | Mix | Fichier |
+|---|---|---|
+| X15-01 | CRT + stores | [style-x15-01-crt-stores.png](style-x15-01-crt-stores.png) |
+| X15-02 | Plastique K7 | [style-x15-02-plastique-k7.png](style-x15-02-plastique-k7.png) |
+| X15-03 | Rayures aérobic | [style-x15-03-rayures-aerobic.png](style-x15-03-rayures-aerobic.png) |
+| X15-04 | Polaroid ciel | [style-x15-04-polaroid-ciel.png](style-x15-04-polaroid-ciel.png) |
+| X15-05 | Pixels visages | [style-x15-05-pixels-visages.png](style-x15-05-pixels-visages.png) |
+| X15-06 | Égaliseur | [style-x15-06-egaliseur.png](style-x15-06-egaliseur.png) |
+| X15-07 | Bâtons fluo | [style-x15-07-batons-fluo.png](style-x15-07-batons-fluo.png) |
+| X15-08 | Catadioptres | [style-x15-08-catadioptres.png](style-x15-08-catadioptres.png) |
+| X15-09 | Antiope | [style-x15-09-antiope.png](style-x15-09-antiope.png) |
+| X15-10 | Chrome pluie | [style-x15-10-chrome-pluie.png](style-x15-10-chrome-pluie.png) |
+
 ---
 
 ## 5. Suite de production

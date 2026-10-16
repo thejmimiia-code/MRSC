@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Dix expériences 80s (X15)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** des choses intéressantes, encore ; codes 80s.
+- **Décision :** CRT-stores, plastique K7, aérobic, polaroid ciel, pixels visages, égaliseur, bâtons fluo, catadioptres, Antiope, chrome pluie. France.
+- **Contrôles :** planches X15.
+
 ## 2026-10-16 — Dix expériences 80s (X14)
 
 - **Initiative :** `direction-artistique-motion`.
