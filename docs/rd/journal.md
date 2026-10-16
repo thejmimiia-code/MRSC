@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Fil narratif entre les décennies
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** relier intelligemment les décennies par des histoires qui mènent à la conclusion M.R.S.C.
+- **Décision :** constantes = la bande de trois, le booth du diner, le carnet savoir-faire. Arc 1985 → 1994 → 2004 → 2014 → 2020 → la table revient. Les statuts = ce qui empêche la table de se vider. Quatre planches de liaison, scènes 2004 et 2020 encore à produire.
+- **Contrôles :** note mise à jour.
+
 ## 2026-10-16 — Style Amblin / 80s cinéma (BTTF, Stranger Things)
 
 - **Initiative :** `direction-artistique-motion`.

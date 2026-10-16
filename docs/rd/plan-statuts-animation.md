@@ -126,13 +126,33 @@ Mentions déjà vérifiées dans le dépôt (journal R&D, accueil, veille) :
 
 ## 4. Storyboard d’ouverture (avant l’article 1) puis article 1
 
-**Prologue — des années 80 au nombril** (montage, hors articles)
+**Prologue — un fil, pas un diaporama**
 
-1. **1980s.** Rue d’été, couleurs franches, on se parle, tout est possible.  
-2. **1990s.** La télé prend le salon. On est encore ensemble, on ne se regarde plus.  
-3. **2010s.** Trottoir, écouteurs, téléphones. On se frôle.  
-4. **2020s.** Immeuble la nuit : une lumière par fenêtre, plus de table commune.  
-5. **Coupe.** Une porte. Un rire. L’or du M.R.S.C. — *plus tard dans le récit*.
+On ne juxtapose pas des décennies. On **suit les mêmes gens** et **les mêmes objets**. Chaque époque **conséquence** de la précédente. La conclusion M.R.S.C. est **gagnée**, pas collée.
+
+### Les constantes (ce qui relie)
+
+| Constante | Rôle |
+|---|---|
+| **La bande de trois** | On les voit vieillir. Ce sont *nos* personnages, originaux. |
+| **Le booth du diner** | Même banquette, même ville. La lumière change, pas le lieu. |
+| **Le carnet « savoir-faire »** | Ouvert en 80, fermé en 90, au fond du sac en 2010, **rouvert** à la table M.R.S.C. |
+
+### Histoire progressive (premières scènes → conclusion)
+
+1. **1985 — La bande.** Ils se jurent de tout partager : tours de main, récits, idées. Le carnet s’ouvre. Tout est possible.  
+2. **1994 — Le regard ailleurs.** Ils sont encore là. La télé parle plus fort qu’eux. Le carnet se ferme sous un coude.  
+3. **2004 — Le fil se distend.** (scène à produire) Messages, forums : on « reste en contact » sans se voir. Un siège se libère pour de bon.  
+4. **2014 — Le siège vide.** Deux téléphones, un café froid. Amis sur l’écran, absents à table.  
+5. **2020 — Chacun sa fenêtre.** (scène à produire) L’un d’eux retrouve le carnet dans un carton. Page 1 : *on se parle*.  
+6. **Aujourd’hui — La table revient.** Pas un miracle : une **association**. Le carnet au centre, des visages **nouveaux**, le savoir-être et le partage. Le nom se dit : **M.R.S.C.** Comprendre le **fonctionnement** (les statuts, article après article) = **ce qui empêche la table de se vider à nouveau**.
+
+Planches de liaison :
+
+- [liaison-01-80-la-bande.png](statuts-animation/liaison-01-80-la-bande.png)  
+- [liaison-02-90-le-regard-ailleurs.png](statuts-animation/liaison-02-90-le-regard-ailleurs.png)  
+- [liaison-03-2010-le-siege-vide.png](statuts-animation/liaison-03-2010-le-siege-vide.png)  
+- [liaison-04-la-table-revient.png](statuts-animation/liaison-04-la-table-revient.png)
 
 **Texte dit (prologue) :**
 
