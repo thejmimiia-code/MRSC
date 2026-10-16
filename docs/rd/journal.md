@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Prologue en décennies, style 80s coloré
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** partir des années 80 (tout était possible), faire défiler les décennies, montrer la dégradation des relations et le nombrilisme ; ambiance 80s colorée, réaliste et animée ; adapter à mesure.
+- **Décision :** premières scènes = montage 80 / 90 / 2010 / 2020. Quatre planches d’essai. Le seuil M.R.S.C. vient après ce défilement. Pas de logos de marques.
+- **Contrôles :** note mise à jour.
+
 ## 2026-10-16 — Accroche humaniste du film des statuts
 
 - **Initiative :** `direction-artistique-motion`.

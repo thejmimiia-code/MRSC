@@ -35,8 +35,24 @@ Garde-fous : le [PDF des statuts](../../assets/documents/statuts-2020.pdf) **fai
 ### Type
 **Film humaniste 3D** (longue respiration, puis chapitres). Famille large. Pas un explainer. Pas un jingle associatif.
 
-### Style visuel
-Lumière de **grand film** : d’abord le **bleu froid des écrans**, puis l’**or** qui entre par une porte, puis le **soleil de table**. Matières (bois, pain, mains, papier). Caméra à hauteur d’humain. Larmes possibles, jamais de pathos publicitaire.
+### Accroche retenue pour les premières scènes (à adapter à mesure)
+On **part des années 80** : tout semble possible, la rue est pleine, on se parle.  
+Puis on **fait défiler les décennies** : la télé prend la table, les téléphones prennent les regards, les fenêtres s’allument **chacune pour soi**.  
+La **dégradation des relations** et le **nombrilisme** se voient dans la lumière et les gestes, pas dans un discours moralisateur.
+
+### Style visuel (premières scènes)
+**Ambiance 80s colorée**, **réaliste et animée à la fois** : matières photo, visages 3D de film, grain, néons teal / magenta / jaune.  
+Au fil des décennies, **les couleurs se fatiguent** (le 80s reste en fond de boutique, comme un souvenir).  
+Plus tard seulement : l’or du seuil M.R.S.C. et la table du partage.
+
+### Planches « décennies » (essai visuel, 16 oct. 2026)
+
+- [decennies-01-annees-80.png](statuts-animation/decennies-01-annees-80.png) — tout est possible  
+- [decennies-02-annees-90.png](statuts-animation/decennies-02-annees-90.png) — on regarde ailleurs  
+- [decennies-03-annees-2010.png](statuts-animation/decennies-03-annees-2010.png) — proches et absents  
+- [decennies-04-annees-2020.png](statuts-animation/decennies-04-annees-2020.png) — chacun sa fenêtre  
+
+À compléter ensuite (2000, 2015, etc.) selon ce qui accroche. Pas de logos de marques réelles.
 
 ### Écriture
 Voix off **tu**, proche, sans leçon.
@@ -109,13 +125,13 @@ Mentions déjà vérifiées dans le dépôt (journal R&D, accueil, veille) :
 
 ## 4. Storyboard d’ouverture (avant l’article 1) puis article 1
 
-**Prologue — le nombril, puis le seuil** (90 s, hors articles)
+**Prologue — des années 80 au nombril** (montage, hors articles)
 
-1. Appartement. Écrans. Silence.  
-2. Une notification de plus. On coupe le son.  
-3. Dans la rue : des gens se croisent sans se voir.  
-4. Une porte. Un rire. De la lumière **or**.  
-5. La main sur le chambranle. On entre.
+1. **1980s.** Rue d’été, couleurs franches, on se parle, tout est possible.  
+2. **1990s.** La télé prend le salon. On est encore ensemble, on ne se regarde plus.  
+3. **2010s.** Trottoir, écouteurs, téléphones. On se frôle.  
+4. **2020s.** Immeuble la nuit : une lumière par fenêtre, plus de table commune.  
+5. **Coupe.** Une porte. Un rire. L’or du M.R.S.C. — *plus tard dans le récit*.
 
 **Texte dit (prologue) :**
 
