@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Dix mixtes inédits pour trouver la touche
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** dix autres, mixtes jamais faits, France.
+- **Décision :** dix hybrides (émail-Minitel, pétanque-buvard, horaires-vitrail, camembert-VHS, chaîne-guirlande, acétate-anaglyphe, pomme d’amour, papier bible, gravier-aérographe, pastis-encre-argile).
+- **Contrôles :** planches ajoutées.
+
 ## 2026-10-16 — Dix planches France, plus de diner US
 
 - **Initiative :** `direction-artistique-motion`.

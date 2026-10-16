@@ -137,6 +137,21 @@ Les vidéos **07+** : articles des statuts, **toujours** avec Léna / Marc / Kar
 
 **Ce que la vidéo 01 ne fait pas :** pas de logo asso, pas de morale, pas de COVID, pas de statuts. Seulement **le pacte** et **la seconde** où Marc regarde ailleurs.
 
+### Dix mixtes inédits (France)
+
+| | Mix | Fichier |
+|---|---|---|
+| MF-01 | Émail + Minitel + aquarelle | [style-mixfr-01-email-minitel.png](style-mixfr-01-email-minitel.png) |
+| MF-02 | Pétanque + buvard + or | [style-mixfr-02-petanque-buvard.png](style-mixfr-02-petanque-buvard.png) |
+| MF-03 | Horaires + vitrail + craie | [style-mixfr-03-horaire-vitrail.png](style-mixfr-03-horaire-vitrail.png) |
+| MF-04 | Boîte + VHS + volume | [style-mixfr-04-boite-vhs.png](style-mixfr-04-boite-vhs.png) |
+| MF-05 | Chaîne vélo + guirlandes + lino | [style-mixfr-05-chaine-guirlande.png](style-mixfr-05-chaine-guirlande.png) |
+| MF-06 | Acétate + anaglyphe | [style-mixfr-06-acetate-anaglyphe.png](style-mixfr-06-acetate-anaglyphe.png) |
+| MF-07 | Pomme d’amour + fusain | [style-mixfr-07-pomme-d-amour.png](style-mixfr-07-pomme-d-amour.png) |
+| MF-08 | Papier bible + tampon | [style-mixfr-08-papier-bible.png](style-mixfr-08-papier-bible.png) |
+| MF-09 | Gravier + aérographe | [style-mixfr-09-gravier-aerographe.png](style-mixfr-09-gravier-aerographe.png) |
+| MF-10 | Pastis + encre + argile | [style-mixfr-10-pastis-encre-argile.png](style-mixfr-10-pastis-encre-argile.png) |
+
 ---
 
 ## 5. Suite de production
