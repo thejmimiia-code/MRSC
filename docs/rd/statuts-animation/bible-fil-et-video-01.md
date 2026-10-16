@@ -1,5 +1,7 @@
 # Bible — mêmes visages de A à Z, première vidéo
 
+**Éva (visuel verrouillé, 16 oct. 2026) :** plan [elle-06-atrium.png](elle-06-atrium.png) / [eva-choisie.png](eva-choisie.png). Visage unique, corps androïde blanc, atrium, tous les âges. Suites `eva-lock-01` à `06`.
+
 **Statut :** à relire, à adapter. Aucune vidéo tournée.  
 **Règle d’or :** les **trois personnages principaux** ne changent **jamais**. Seuls les **figurants** et les **périodes** changent. Ils **vieillissent sans excès** (de ~17 ans en 1985 à ~58 ans aujourd’hui : mêmes traits, mêmes tics, pas de caricature de vieillesse).
 

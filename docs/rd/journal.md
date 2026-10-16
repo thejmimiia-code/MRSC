@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Éva choisie : plan E-06 (atrium)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** « La sixième est bien » = `elle-06-atrium.png`.
+- **Décision :** visage et corps androïde blanc de E-06 verrouillés pour Éva (vidéos, pédagogie). Copie `eva-choisie.png`. Suites `eva-lock-01` à `06`. Accueil 3D inchangé. Pas enfantin. Tous les âges autour d’elle.
+- **Contrôles :** planches lock.
+
 ## 2026-10-16 — Personnages-matériaux pour l’identité pédagogique
 
 - **Initiative :** `direction-artistique-motion`.
