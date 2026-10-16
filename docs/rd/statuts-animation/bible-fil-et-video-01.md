@@ -152,6 +152,23 @@ Les vidéos **07+** : articles des statuts, **toujours** avec Léna / Marc / Kar
 | MF-09 | Gravier + aérographe | [style-mixfr-09-gravier-aerographe.png](style-mixfr-09-gravier-aerographe.png) |
 | MF-10 | Pastis + encre + argile | [style-mixfr-10-pastis-encre-argile.png](style-mixfr-10-pastis-encre-argile.png) |
 
+### Vingt mixtes (lot 1/2 livré)
+
+| | Mix | Fichier |
+|---|---|---|
+| M20-01 | Ticket + gouache | [style-m20-01-ticket-metro.png](style-m20-01-ticket-metro.png) |
+| M20-02 | Ardoise + néon | [style-m20-02-ardoise-neon.png](style-m20-02-ardoise-neon.png) |
+| M20-03 | Zinc + coloriage | [style-m20-03-zinc-coloriage.png](style-m20-03-zinc-coloriage.png) |
+| M20-04 | Isobares + argile | [style-m20-04-isobares-argile.png](style-m20-04-isobares-argile.png) |
+| M20-05 | Soudure + bois | [style-m20-05-soudure-bois.png](style-m20-05-soudure-bois.png) |
+| M20-06 | Timbre-poste | [style-m20-06-timbre-poste.png](style-m20-06-timbre-poste.png) |
+| M20-07 | Formica | [style-m20-07-formica.png](style-m20-07-formica.png) |
+| M20-08 | Flaque irisée | [style-m20-08-flaque-iris.png](style-m20-08-flaque-iris.png) |
+| M20-09 | Cire + encre | [style-m20-09-cire-encre.png](style-m20-09-cire-encre.png) |
+| M20-10 | Dynamo vélo | [style-m20-10-dynamos.png](style-m20-10-dynamos.png) |
+
+M20-11 à 20 (mots croisés, Super 8, carrelage, bakélite, brume-stickers, stylo-plume, contreplaqué, grattage, accordéon, Polaroid-cel) : **lot suivant**.
+
 ---
 
 ## 5. Suite de production
