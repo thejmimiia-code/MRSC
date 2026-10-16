@@ -348,6 +348,21 @@ Hors grille / gouache / pixels / mains.
 | N-09 | Ombres gélatine | [nouveau-09-ombres-gelatine.png](nouveau-09-ombres-gelatine.png) |
 | N-10 | Péniche brume | [nouveau-10-peniche-brume.png](nouveau-10-peniche-brume.png) |
 
+### Pistes nouvelles 11–20
+
+| | Mix | Fichier |
+|---|---|---|
+| N-11 | Timbres | [nouveau-11-timbres-rue.png](nouveau-11-timbres-rue.png) |
+| N-12 | Cadran bakélite | [nouveau-12-cadran-bakelite.png](nouveau-12-cadran-bakelite.png) |
+| N-13 | Flaque fusain | [nouveau-13-flaque-fusain.png](nouveau-13-flaque-fusain.png) |
+| N-14 | Buvard rose | [nouveau-14-buvard-rose.png](nouveau-14-buvard-rose.png) |
+| N-15 | Chambre à air | [nouveau-15-chambre-air.png](nouveau-15-chambre-air.png) |
+| N-16 | Sucre foire | [nouveau-16-sucre-foire.png](nouveau-16-sucre-foire.png) |
+| N-17 | Tableau de gare | [nouveau-17-tableau-gare.png](nouveau-17-tableau-gare.png) |
+| N-18 | Sable pétanque | [nouveau-18-sable-boules.png](nouveau-18-sable-boules.png) |
+| N-19 | Acétate cours | [nouveau-19-acetate-cours.png](nouveau-19-acetate-cours.png) |
+| N-20 | Phalènes | [nouveau-20-phalenes.png](nouveau-20-phalenes.png) |
+
 ---
 
 ## 5. Suite de production
