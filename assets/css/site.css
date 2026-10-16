@@ -90,12 +90,14 @@ main p > strong:first-child {
   display: block;
 }
 
-main .phrase {
+main .phrase,
+.site-footer .phrase {
   display: block;
   text-align: start;
 }
 
-main .phrase + .phrase {
+main .phrase + .phrase,
+.site-footer .phrase + .phrase {
   margin-top: .35em;
 }
 
