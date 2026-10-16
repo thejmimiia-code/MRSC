@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Seconds angles de présentation des statuts
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** les premières chartes mascottes n’étaient pas à la hauteur ; il faut l’angle, pas seulement le dessin.
+- **Décision :** quatre nouveaux angles (maison ouverte, table de fondation, assemblée en cercle, voyage dans le livre). Fil proposé : une personne arrive, chaque article est une pièce ou un geste, dans l’ordre. Anciennes planches archivées.
+- **Contrôles :** note mise à jour ; pas de page publique.
+
 ## 2026-10-16 — Plan films d’animation des statuts
 
 - **Initiative :** `direction-artistique-motion`.

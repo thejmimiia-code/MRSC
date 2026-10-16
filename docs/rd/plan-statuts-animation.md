@@ -6,7 +6,8 @@
 
 Cette note propose une **section publique du fonctionnement associatif** (accueil / Documents / page dédiée plus tard) illustrée par une **série de courts films 3D**, dans l’esprit d’un film familial lumineux, **voix française**, **sous-titres anglais optionnels**, **personnages originaux** (pas de personnages d’une marque tierce).
 
-Les quatre planches ci-dessous sont des **clés de style**, pas des photogrammes définitifs.
+Les premières planches « mascottes autour d’un livret » sont **écartées** : trop plates, trop « illustration de couverture ».  
+La question n’est plus seulement *à quoi ça ressemble*, mais **par quel récit on entre**.
 
 ---
 
@@ -27,25 +28,39 @@ Sons : ambiances douces (atelier, agora, papier, carnet), pas de musique sous li
 
 ---
 
-## 2. Quatre chartes visuelles (à choisir avant production)
+## 2. L’angle de présentation (avant le dessin)
 
-Personnages **uniques M.R.S.C.** — aucun n’imite une figure connue.
+Les statuts ne sont pas un catalogue à réciter.  
+Le fil retenu pour la série :
 
-| Id | Charte | Personnages | Ambiance | Forces | Risques |
-|---|---|---|---|---|---|
-| **A** | **Atelier des liens** | **Liane** (être de fils d’or et de vert) et **Atlas** (petit atlas aux quartiers inventés) | 3D ronde, lumière d’atelier, marine / or / vert feuille | Cohérent avec le lien social et les couleurs du site | Trop « studio » si on charge les décors |
-| **B** | **Agora lumineuse** | **Écho** (lanterne-oiseau de vitrail original) et **Place** (place publique vivante) | Nuit civique, lanternes, cercle de débat | Dit la représentation et l’assemblée | Trop magique si on oublie le texte juridique |
-| **C** | **Papier plié** | **Pli** (messager origami) et **Fil** (ruban découpé) | Stop-motion papier, tactile | Dit « document qui se déplie », économique à produire | Peut sembler enfantin pour les articles financiers |
-| **D** | **Carnet vivant** | **Clé** (clé parlante originale) et **Sentier** (chemin de pavés) | Aquarelle en volumes 3D, aube | Dit le parcours d’adhésion et de lecture | Moins « Disney 3D » que A |
+> **Une personne arrive. On lui ouvre la maison. Chaque article est une pièce, une décision, un geste. On avance dans l’ordre. Le PDF reste sur la table.**
 
-Fichiers de comparaison (générés le 16 oct. 2026, **non validés**) :
+Caméra : souvent **à hauteur d’épaule**, rarement un mascotte qui lit à voix haute.  
+Voix : une **voix off française** calme, comme on explique à quelqu’un qui entre, pas comme un cours.  
+Les personnages, s’il y en a, **servent le geste** (ouvrir, s’asseoir en cercle, signer, marcher dans le livre). Ils ne volent pas la vedette au texte.
 
-- [style-01-atelier-des-liens.png](statuts-animation/style-01-atelier-des-liens.png)
-- [style-02-agora-lumineuse.png](statuts-animation/style-02-agora-lumineuse.png)
-- [style-03-papier-plie.png](statuts-animation/style-03-papier-plie.png)
-- [style-04-carnet-vivant.png](statuts-animation/style-04-carnet-vivant.png)
+### Quatre angles neufs (planches du 16 oct. 2026, non validées)
 
-**Décision demandée à l’association :** retenir **une** charte (ou combiner A+C, etc.) **avant** tout storyboard définitif et toute image de production.
+| Id | Angle | Ce que raconte la caméra | Quand ça marche | Risque |
+|---|---|---|---|---|
+| **1. Maison ouverte** | On est le **nouveau venu**. Seuil, ronde intérieure, charte au centre. | L’association est un lieu qu’on **habite**, pas un PDF qu’on subit. | Si chaque article devient une **pièce** de la maison, dans l’ordre. | Transformer ça en visite immobilière. |
+| **2. Table de fondation** | Nuit, chêne, lampes, **mains** qui posent la plume. | Les statuts sont un **acte** : on constitue, on nomme, on s’engage. | Articles 1–2, ressources, dissolution : les gestes graves. | Trop solennel, trop « notaire ». |
+| **3. Assemblée en cercle** | Place, crépuscule, **cercle** d’âges différents, sphère de savoir au milieu. | On **décide ensemble**. Représenter, c’est s’asseoir, pas poser. | AG, bureau, adhésion, travail participatif (11.8–11.9). | Figurer des visages réels (à éviter). |
+| **4. Voyage dans le livre** | Le livre **devient paysage** ; un guide-lanterne original marche avec le visiteur. | On **entre dans le texte**, article après article, comme un chemin. | Toute la série, un sentier continu, jamais de saut. | Magie qui noie le juridique. |
+
+Planches :
+
+- [angle-01-maison-ouverte.png](statuts-animation/angle-01-maison-ouverte.png)
+- [angle-02-table-fondation.png](statuts-animation/angle-02-table-fondation.png)
+- [angle-03-assemblee-en-cercle.png](statuts-animation/angle-03-assemblee-en-cercle.png)
+- [angle-04-voyage-dans-le-livre.png](statuts-animation/angle-04-voyage-dans-le-livre.png)
+
+**Hypothèse de mixage (à trancher) :**  
+**1 + 4** pour le fil continu (on entre, on marche dans le livre-maison) ; **2** pour les articles d’acte ; **3** pour les articles d’assemblée. Une seule lumière (marine, or, aube) pour que ce soit **un** film, pas quatre clips.
+
+Anciennes planches mascottes (atelier, agora cartoon, papier, carnet) : **archives**, non proposées.
+
+**Décision demandée :** quel angle (ou quel mixage) est « à la hauteur » ; ensuite seulement, charte 3D définitive et storyboards de production.
 
 ---
 
@@ -84,52 +99,48 @@ Mentions déjà vérifiées dans le dépôt (journal R&D, accueil, veille) :
 
 ## 4. Storyboards — quatre lectures du **tout début** (épisode 1.1, article 1)
 
-Même récit, quatre mises en scène. Voix FR. Sous-titres EN optionnels.
+Même **texte dit**, quatre **caméras**. Voix FR. Sous-titres EN optionnels.
 
-**Texte dit (brouillon, à recoller au PDF dès transcription) :**
+**Texte dit (brouillon, à recoller au PDF) :**
 
-> « Voici le début des statuts.  
-> Une association se constitue.  
+> « Voici le début.  
+> Des personnes se constituent en association.  
 > Elle se nomme Mouvement Représentatif de la Société Civile.  
 > On dit aussi M.R.S.C.  
-> Le texte écrit dans le PDF reste la référence. »
+> Ce que vous voyez aide à comprendre.  
+> Le texte du PDF reste la référence. »
 
-**Sous-titres EN (option, hors VO) :**  
-« This is the beginning of the bylaws. An association is formed. Its name is… The PDF remains the reference. »
+### 4.1 — Maison ouverte (épaule du nouveau venu)
 
-### 4.A — Atelier des liens (Liane + Atlas)
+1. Rue inventée, fin de jour. Une porte s’entrouvre.  
+2. Caméra **par-dessus l’épaule**. On n’entre pas encore.  
+3. À l’intérieur : un cercle, un pupitre, le livret ouvert à **l’article 1**.  
+4. Quelqu’un dit le **nom**, sans crier.  
+5. On pose le pied sur le seuil. Freeze : « le PDF fait foi ».
 
-1. Fond crème. Un fil d’or se déroule → forme **Liane**.  
-2. Atlas pose un livret **STATUTS** sur la table.  
-3. La couverture s’ouvre : page 1, **Article 1**.  
-4. Les lettres du nom s’assemblent comme des ponts entre quartiers (rues **inventées**).  
-5. Liane noue un nœud simple : « nous existons ensemble ».  
-6. Carton final : lien vers le PDF.
+### 4.2 — Table de fondation (l’acte)
 
-### 4.B — Agora lumineuse (Écho + Place)
+1. Nuit. Gros plan **mains**, plume, papier.  
+2. On n’écrit pas encore. On **lit** la première ligne.  
+3. La plume pose le nom. Encre marine.  
+4. Un verre de thé, un silence.  
+5. On referme à la page 1 — la suite est un autre épisode.
 
-1. Nuit. Un cercle de lanternes.  
-2. Écho ouvre le livre au centre de **Place**.  
-3. Article 1 s’écrit en lumière autour de l’agora.  
-4. Silhouettes diverses s’approchent — **pas de visages identifiables**.  
-5. Le nom est **dit**, pas crié.  
-6. Le livre se referme ; le PDF apparaît en bas.
+### 4.3 — Assemblée en cercle (le « nous »)
 
-### 4.C — Papier plié (Pli + Fil)
+1. Crépuscule. Chaises en rond, vides d’abord.  
+2. Les gens s’assoient. Aucun visage vedette.  
+3. Au centre, le nom apparaît **une fois**, net.  
+4. Un enfant demande : « C’est qui ? » — réponse : le nom, rien de plus.  
+5. Le cercle reste. Carton PDF.
 
-1. Une feuille A4 se plie en livret.  
-2. Pli tire l’onglet « Article 1 ».  
-3. Fil souligne le nom, lettre à lettre.  
-4. Un tampon **loi 1901** (forme originale, pas un logo d’État).  
-5. Le livret se range dans une enveloppe « à relire sur le PDF ».
+### 4.4 — Voyage dans le livre (le chemin)
 
-### 4.D — Carnet vivant (Clé + Sentier)
-
-1. Aube. Sentier mène à une porte.  
-2. Clé tourne ; le carnet s’ouvre à la **première page**.  
-3. Une maison simple : « association ».  
-4. Le nom s’écrit à la main, puis se fige en capitales.  
-5. Sentier indique la page suivante — **on s’arrête** : l’épisode 1.2 viendra après.
+1. Un livre immense au sol. On est tout petit.  
+2. La première page se relève comme une colline : **Article 1**.  
+3. Le guide-lanterne (forme originale) n’explique pas : il **éclaire** le mot dénomination.  
+4. On marche jusqu’au bas de la page. On **s’arrête**.  
+5. La page 2 attend l’épisode suivant.
 
 ---
 
@@ -158,7 +169,7 @@ Proposition, **non construite** :
 
 ## 7. Suite demandée à l’association
 
-1. Choisir **A, B, C ou D** (ou un mélange nommé).  
+1. Choisir un **angle** (maison, table, cercle, voyage) ou le mixage 1+4 / 2 / 3.  
 2. Faire **transcrire** les statuts 2020 article par article.  
 3. Valider le **brouillon de VO** de l’épisode 1.1.  
 4. Alors seulement : images de production, puis épisode 1.2 (article 2), et ainsi de suite **jusqu’au dernier article**.
