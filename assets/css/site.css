@@ -3330,6 +3330,24 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .learning-breadcrumb { display:flex; flex-wrap:wrap; gap:.55rem; margin-bottom:1.35rem; color:var(--muted); font-size:.88rem; }
 .learning-lesson-lead { max-width:76ch; color:#46536b; font-size:1.1rem; }
 .learning-level-note { max-width:80ch; margin-top:1rem; font-size:.9rem; }
+.eva-listes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.4rem;
+}
+.eva-liste {
+  padding: 1.2rem 1.3rem 1.3rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+}
+.eva-liste h3 { font-size: 1.15rem; margin-bottom: .7rem; }
+.eva-liste ol { margin: 0; padding-left: 1.25rem; }
+.eva-liste li { margin: .4rem 0; }
+@media (max-width: 760px) {
+  .eva-listes-grid { grid-template-columns: minmax(0, 1fr); }
+}
 .learning-article-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(230px,300px); align-items:start; gap:clamp(1.5rem,4vw,3rem); }
 .learning-lesson-article { min-width:0; }
 .learning-lesson-article > section { margin-bottom:2.1rem; }
