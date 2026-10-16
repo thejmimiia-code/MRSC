@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Logo compact : plus de coupe en haut
+
+- **Initiative :** `coherence-textes-publics`.
+- **Signal :** en mode réduit, le haut du logo (barres de couleur) était coupé.
+- **Décision :** `object-fit: contain` et cadrage haut, sans recadrage `cover`.
+- **Contrôles réellement exécutés :** `verifier-site-statique.py` ; `verifier-integration.py`.
+
 ## 2026-10-16 — Cycle R&D : voisines, passeport simulateur, pied de page
 
 - **Initiative :** `prospective-apprentissages-2030` (lien `optimisation-du-site`).

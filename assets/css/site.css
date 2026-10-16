@@ -262,7 +262,7 @@ html.contraste-renforce .site-status-note {
   display: none;
   align-items: center;
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
   border-radius: var(--button-radius);
   background: #fff;
   text-decoration: none;
@@ -270,11 +270,11 @@ html.contraste-renforce .site-status-note {
 
 .header-compact-brand img {
   display: block;
-  width: 4.55rem;
-  height: 2.15rem;
-  max-width: none;
-  object-fit: cover;
-  object-position: center 42%;
+  width: auto;
+  height: 2.65rem;
+  max-width: 4.8rem;
+  object-fit: contain;
+  object-position: center top;
   background: #fff;
   border-radius: var(--button-radius);
 }
@@ -3080,11 +3080,11 @@ html.has-js .site-header.is-compact .header-compact-brand {
 }
 
 html.has-js .site-header.is-compact .header-compact-brand img {
-  width: 4.55rem;
-  height: 2.15rem;
-  max-width: none;
-  object-fit: cover;
-  object-position: center 42%;
+  width: auto;
+  height: 2.65rem;
+  max-width: 4.8rem;
+  object-fit: contain;
+  object-position: center top;
   border-radius: var(--button-radius);
 }
 
@@ -3103,11 +3103,11 @@ html.has-js .site-header.is-compact .header-compact-brand img {
     align-self: center;
   }
   html.has-js .site-header.is-compact .header-compact-brand img {
-    width: 4.9rem;
-    height: 2.35rem;
-    max-width: none;
-    object-fit: cover;
-    object-position: center 42%;
+    width: auto;
+    height: 2.8rem;
+    max-width: 5.1rem;
+    object-fit: contain;
+    object-position: center top;
   }
   html.has-js .site-header.is-compact .header-compact-tools {
     display: flex;
