@@ -48,6 +48,23 @@ Hybrides, références de **méthode** pas de copies de films.
 | V2-09 | Affiche Est | [style-v2-09-affiche-est.png](style-v2-09-affiche-est.png) |
 | V2-10 | Crayon test | [style-v2-10-crayon-test.png](style-v2-10-crayon-test.png) |
 
+**Décor : France seulement.** Plus de diner américain, mall, arcade US. Café zinc, brasserie, salle des fêtes, quai, tabac, bibliothèque, atelier vélo, fête foraine, cour de lycée, berge.
+
+### Dix planches France (1985)
+
+| | Lieu | Fichier |
+|---|---|---|
+| FR-01 | Terrasse de zinc | [style-fr-01-terrasse-zinc.png](style-fr-01-terrasse-zinc.png) |
+| FR-02 | Brasserie (linogravure) | [style-fr-02-brasserie-lino.png](style-fr-02-brasserie-lino.png) |
+| FR-03 | Salle des fêtes | [style-fr-03-salle-des-fetes.png](style-fr-03-salle-des-fetes.png) |
+| FR-04 | Quai | [style-fr-04-quai-rer.png](style-fr-04-quai-rer.png) |
+| FR-05 | Tabac / Minitel | [style-fr-05-tabac-minitel.png](style-fr-05-tabac-minitel.png) |
+| FR-06 | Bibliothèque | [style-fr-06-bibliotheque.png](style-fr-06-bibliotheque.png) |
+| FR-07 | Atelier vélo | [style-fr-07-atelier-velo.png](style-fr-07-atelier-velo.png) |
+| FR-08 | Fête foraine | [style-fr-08-fete-foraine.png](style-fr-08-fete-foraine.png) |
+| FR-09 | Cour de lycée | [style-fr-09-cour-lycee.png](style-fr-09-cour-lycee.png) |
+| FR-10 | Berge et platanes | [style-fr-10-berge-platanes.png](style-fr-10-berge-platanes.png) |
+
 ---
 
 ## 1. Casting verrouillé (à coller dans chaque plan)
@@ -106,7 +123,7 @@ Les vidéos **07+** : articles des statuts, **toujours** avec Léna / Marc / Kar
 
 **Durée visée :** 90–120 s. VO française. Sous-titres EN optionnels.
 
-**Lieu :** diner de l’oncle, ville inventée, été 1985, orage qui monte.
+**Lieu :** **France**, café zinc de l’oncle (pas un diner US), ville inventée, été 1985, orage qui monte. Textes à l’écran **en français**.
 
 **Objet :** le **premier vendredi**. On doit **aimer** ces trois-là avant de les perdre.
 
