@@ -238,6 +238,21 @@ Les vidéos **07+** : articles des statuts, **toujours** avec Léna / Marc / Kar
 | X13-09 | Tableau des départs | [style-x13-09-tableau-departs.png](style-x13-09-tableau-departs.png) |
 | X13-10 | Néon sur asphalte | [style-x13-10-neon-asphalte.png](style-x13-10-neon-asphalte.png) |
 
+### Dix expériences 80s (X14)
+
+| | Mix | Fichier |
+|---|---|---|
+| X14-01 | Memphis + zinc | [style-x14-01-memphis-zinc.png](style-x14-01-memphis-zinc.png) |
+| X14-02 | VHS + Walkman | [style-x14-02-vhs-walkman.png](style-x14-02-vhs-walkman.png) |
+| X14-03 | Lasers + damier | [style-x14-03-lasers-damier.png](style-x14-03-lasers-damier.png) |
+| X14-04 | LCD fluo | [style-x14-04-lcd-fluo.png](style-x14-04-lcd-fluo.png) |
+| X14-05 | Minitel + aérographe | [style-x14-05-minitel-aerographe.png](style-x14-05-minitel-aerographe.png) |
+| X14-06 | Enceinte + K7 | [style-x14-06-enceinte-k7.png](style-x14-06-enceinte-k7.png) |
+| X14-07 | Aérographe BD | [style-x14-07-aerographe-bd.png](style-x14-07-aerographe-bd.png) |
+| X14-08 | Cubes fluo | [style-x14-08-cubes-fluo.png](style-x14-08-cubes-fluo.png) |
+| X14-09 | Onde + mobylette | [style-x14-09-onde-moto.png](style-x14-09-onde-moto.png) |
+| X14-10 | Disquette-vitrail | [style-x14-10-disquette-vitrail.png](style-x14-10-disquette-vitrail.png) |
+
 ---
 
 ## 5. Suite de production
