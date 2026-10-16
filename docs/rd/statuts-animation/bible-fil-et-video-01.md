@@ -178,6 +178,21 @@ Les vidéos **07+** : articles des statuts, **toujours** avec Léna / Marc / Kar
 | M20-19 | Accordéon | [style-m20-19-accordeon.png](style-m20-19-accordeon.png) |
 | M20-20 | Polaroid + cel | [style-m20-20-polaroid-cel.png](style-m20-20-polaroid-cel.png) |
 
+### Dix expériences (X10)
+
+| | Mix | Fichier |
+|---|---|---|
+| X10-01 | Écailles de tickets | [style-x10-01-ecailles-tickets.png](style-x10-01-ecailles-tickets.png) |
+| X10-02 | Mire TV | [style-x10-02-mire-tv.png](style-x10-02-mire-tv.png) |
+| X10-03 | Parquet relief | [style-x10-03-parquet-relief.png](style-x10-03-parquet-relief.png) |
+| X10-04 | Bulles de limonade | [style-x10-04-bulles-limonade.png](style-x10-04-bulles-limonade.png) |
+| X10-05 | Chambre à air | [style-x10-05-chambre-air.png](style-x10-05-chambre-air.png) |
+| X10-06 | Tampon dateur | [style-x10-06-tampon-dateur.png](style-x10-06-tampon-dateur.png) |
+| X10-07 | Écorce + fresque | [style-x10-07-ecorce-fresque.png](style-x10-07-ecorce-fresque.png) |
+| X10-08 | Pluie sur zinc | [style-x10-08-pluie-zinc.png](style-x10-08-pluie-zinc.png) |
+| X10-09 | Équerre / compas | [style-x10-09-equerre.png](style-x10-09-equerre.png) |
+| X10-10 | Barbe à papa + lino | [style-x10-10-barbe-a-papa.png](style-x10-10-barbe-a-papa.png) |
+
 ---
 
 ## 5. Suite de production
