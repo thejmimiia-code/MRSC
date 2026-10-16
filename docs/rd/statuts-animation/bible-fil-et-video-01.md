@@ -22,6 +22,17 @@ Hybrides, références de **méthode** pas de copies de films.
 
 **À choisir (ou fusionner deux pistes, et seulement deux).** Ensuite : model sheets Léna / Marc / Karim de face, 3/4, dos, **avant** la vidéo 01.
 
+### Mix 3+6 et cinq inédits (même booth)
+
+| | Nom | Idée | Fichier |
+|---|---|---|---|
+| **Mix** | **VHS volume** | Cartoon 80s + 3D pinceau + scanlines | [style-mix-03-06-vhs-volume.png](style-mix-03-06-vhs-volume.png) |
+| **I1** | Litho néon | Affiche de concert en mouvement | [style-inedit-01-litho-neon.png](style-inedit-01-litho-neon.png) |
+| **I2** | Verre soda | Corps comme bouteilles de couleur | [style-inedit-02-verre-soda.png](style-inedit-02-verre-soda.png) |
+| **I3** | Mosaïque cassette | Monde en fenêtres de K7 | [style-inedit-03-mosaique-cassette.png](style-inedit-03-mosaique-cassette.png) |
+| **I4** | Rétroprojecteur | Calques feutre sur acétate | [style-inedit-04-retroprojecteur.png](style-inedit-04-retroprojecteur.png) |
+| **I5** | Radar diner | Balayage phosphore vert/magenta | [style-inedit-05-radar-diner.png](style-inedit-05-radar-diner.png) |
+
 ---
 
 ## 1. Casting verrouillé (à coller dans chaque plan)

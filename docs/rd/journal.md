@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Mix VHS+volume et cinq styles inédits
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** mixer la piste 3 et la 6, plus cinq inédits.
+- **Décision :** planche mix VHS volume ; inédits litho néon, verre soda, mosaïque cassette, rétroprojecteur, radar diner. Toujours le même booth, à choisir.
+- **Contrôles :** bible mise à jour.
+
 ## 2026-10-16 — Six pistes d’animation (sortie du réalisme)
 
 - **Initiative :** `direction-artistique-motion`.
