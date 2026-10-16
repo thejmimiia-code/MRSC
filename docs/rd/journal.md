@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Bible Léna / Marc / Karim et vidéo 01
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** mêmes personnages principaux de A à Z ; figurants et périodes seuls changent ; vieillir sans excès ; première vidéo ; histoire concrète sur toutes les périodes.
+- **Décision :** bible `docs/rd/statuts-animation/bible-fil-et-video-01.md`. Pacte du vendredi. Vidéos 01–06 puis statuts avec le même trio. Storyboard 01 : arrivée, booth, pacte, la seconde où Marc regarde l’arcade. Visages IA non figés.
+- **Contrôles :** note + bible.
+
 ## 2026-10-16 — Fil narratif entre les décennies
 
 - **Initiative :** `direction-artistique-motion`.

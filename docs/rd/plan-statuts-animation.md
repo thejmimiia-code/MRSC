@@ -87,7 +87,7 @@ Chaque article, plus tard : **une possibilité qui s’ouvre**, pas un alinéa r
 
 Les planches « maison / table notaire / agora magique / livre-paysage » restent des **outils de chapitre**, pas l’accroche.
 
-**Décision demandée :** cet arc (froid → seuil → table → portes) est-il **le** film ? Si oui, on fige ce style et on n’écrit l’épisode 1.1 (article 1) **qu’après**.
+**Décision demandée :** valider **Léna, Marc, Karim** et le **pacte du vendredi** (bible `statuts-animation/bible-fil-et-video-01.md`). La vidéo 01 se tourne **avant** toute autre. Les visages IA ne sont pas encore un casting figé : à verrouiller.
 
 ---
 
