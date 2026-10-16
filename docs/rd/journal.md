@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Plan films d’animation des statuts
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** expliquer le fonctionnement associatif par des films 3D, depuis le début des statuts, tous les articles, VO française, sous-titres anglais optionnels, quatre styles et personnages originaux.
+- **Décision :** note `docs/rd/plan-statuts-animation.md` et quatre planches de style (non validées). Le PDF des statuts fait foi. Aucune vidéo produite. Extraction automatique du PDF impossible ici ; transcription humaine requise avant tournage. Accueil 3D inchangé.
+- **Contrôles réellement exécutés :** rédaction documentaire ; pas de page publique nouvelle.
+
 ## 2026-10-16 — Achats indexés sur les dons, puis complément
 
 - **Initiative :** `documentation-rd-eva`.
