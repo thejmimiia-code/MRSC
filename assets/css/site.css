@@ -3270,6 +3270,28 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .learning-ecosystem-card h3 { margin-bottom:.5rem; }
 .learning-ecosystem-card a { font-weight:700; }
 .learning-ecosystem-card-pending { border-style:dashed; background:#f8f9fc; }
+.learning-voisines { margin-top: 1rem; }
+.learning-voisines ul { margin: .4rem 0 .8rem; padding-left: 1.1rem; }
+.learning-voisines li { margin: .35rem 0; }
+.learning-voisines small { display: block; color: var(--muted); font-size: .82rem; }
+.footer-rd { margin: .45rem 0 0; color: var(--muted); font-size: .85rem; }
+.simulateur-passeport {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .85rem 1.1rem;
+  margin: 1rem 0 1.2rem;
+}
+.simulateur-passeport > div {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+}
+.simulateur-passeport dt { color: var(--green); font-weight: 800; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; }
+.simulateur-passeport dd { margin: .35rem 0 0; }
+@media (max-width: 760px) {
+  .simulateur-passeport { grid-template-columns: minmax(0, 1fr); }
+}
 .learning-pending-note { font-size:.82rem !important; font-weight:700; }
 .learning-coverage-list { display:grid; gap:.7rem; }
 .learning-coverage-domain { border:1px solid var(--line); border-radius:14px; background:var(--white); }
@@ -3885,4 +3907,13 @@ html[data-layout="panorama"] main :is(
   }
   a { color: inherit; text-decoration: underline; }
   .phrase { display: block; }
+  html::after {
+    display: block;
+    margin: 1.2rem 0 0;
+    padding-top: .6rem;
+    border-top: 1px solid #333;
+    color: #333;
+    font-size: .85rem;
+    content: "Copie du site M.R.S.C. — " attr(data-print-url) " — à relire, pas une version certifiée.";
+  }
 }

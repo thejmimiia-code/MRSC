@@ -194,6 +194,7 @@ def pied_de_page(prefixe: str = "") -> str:
       <div class="footer-bottom">
         <p>&copy; <span data-year>2026</span> Mouvement Représentatif de la Société Civile (M.R.S.C).</p>
         <p class="footer-legal"><a href="{prefixe}confidentialite.html">Vie privée et données</a> &middot; <a href="{prefixe}nous-contacter.html">Contact</a> &middot; <a href="{prefixe}transparence.html#licence">Licence</a> &middot; <a href="#contenu">Haut de page</a></p>
+        <p class="footer-rd">Version R&amp;D : les pages portent leur statut. <a href="{prefixe}transparence.html#rd-innovation">Méthode</a> · <a href="{prefixe}apprendre.html#boussole-savoirs">Boussole des savoirs</a>. Une copie imprimée n’est pas une version certifiée.</p>
       </div>
     </div>
   </footer>'''
@@ -268,7 +269,37 @@ def exemples_code_html(exemples: list[dict], identifiant: str) -> str:
     )
 
 
-def render_fiche(fiche: dict) -> str:
+def render_voisines(fiche: dict, fiches: list[dict]) -> str:
+    """Autres fiches du même domaine, sans en faire un parcours."""
+    meme = [
+        autre for autre in fiches
+        if autre.get("matiere_id") == fiche.get("matiere_id") and autre.get("id") != fiche.get("id")
+    ]
+    meme.sort(key=lambda autre: (abs(int(autre.get("niveau", 0)) - int(fiche.get("niveau", 0))), autre.get("titre", "")))
+    choisies = meme[:3]
+    if not choisies:
+        return (
+            '<p><a href="../../apprendre.html#catalogue-fiches">Parcourir toutes les fiches</a></p>'
+            '<p><a href="../../simulateur.html">Découvrir le simulateur M.R.S.C</a></p>'
+        )
+    items = []
+    for autre in choisies:
+        statut = autre.get("statut_editorial") or "Fiche du corpus initial"
+        items.append(
+            f'<li><a href="{e(autre["id"])}.html">{e(autre["titre"])}</a>'
+            f"<small>{e(statut)}</small></li>"
+        )
+    return (
+        '<div class="learning-voisines">'
+        "<p><strong>Dans le même domaine</strong> — pistes facultatives, pas un cursus.</p>"
+        f'<ul>{"".join(items)}</ul>'
+        '<p><a href="../../apprendre.html#catalogue-fiches">Parcourir toutes les fiches</a></p>'
+        '<p><a href="../../simulateur.html">Découvrir le simulateur M.R.S.C</a></p>'
+        "</div>"
+    )
+
+
+def render_fiche(fiche: dict, fiches: list[dict] | None = None) -> str:
     titre, niveau_desc = NIVEAUX[fiche["niveau"]]
     meta = (
         f'<span>{e(fiche["matiere"])}</span>'
@@ -312,6 +343,7 @@ def render_fiche(fiche: dict) -> str:
         f'{note_source(source)}</li>'
         for source in fiche["sources"]
     )
+    voisines = render_voisines(fiche, fiches or [])
     contenu = f'''    <section class="learning-lesson-hero">
       <div class="container">
         <nav class="learning-breadcrumb" aria-label="Fil d’Ariane"><a href="../../index.html">Accueil</a><span aria-hidden="true">›</span><a href="../../apprendre.html">Apprendre</a><span aria-hidden="true">›</span><span aria-current="page">Fiche</span></nav>
@@ -335,7 +367,7 @@ def render_fiche(fiche: dict) -> str:
           <section aria-labelledby="retenir-fiche"><h2 id="retenir-fiche">Pour retenir</h2>{a_retenir}<p><strong>Et dans une autre situation :</strong> {e(fiche["transferer"])}</p></section>
           <section class="learning-sources" aria-labelledby="sources-fiche"><h2 id="sources-fiche">Sources facultatives et limites</h2><p>Tu peux suivre cette fiche sans ouvrir ces liens : les notions, les exemples, la démarche, l’aide et la correction sont présentés sur cette page. Les sources facultatives servent à vérifier ou approfondir. Pour une décision ou une démarche réelle où les règles peuvent changer, vérifie les consignes actuelles d’un service compétent avant d’agir.</p><ul>{sources}</ul>{note_revue}</section>
         </article>
-        <aside class="learning-lesson-aside" aria-label="Poursuivre l’apprentissage"><p class="eyebrow">Tu choisis la suite</p><h2>Un autre point de départ ?</h2><p>Change de matière, de repère ou de format quand tu le souhaites. La page ne note pas et ne suit pas ta progression.</p><a class="button" href="../../anglais-aventure.html#mondes">Retour aux mondes et parcours</a><p><a href="../../apprendre.html#catalogue-fiches">Parcourir toutes les fiches</a></p><p><a href="../../simulateur.html">Découvrir le simulateur M.R.S.C</a></p></aside>
+        <aside class="learning-lesson-aside" aria-label="Poursuivre l’apprentissage"><p class="eyebrow">Tu choisis la suite</p><h2>Un autre point de départ ?</h2><p>Change de matière, de repère ou de format quand tu le souhaites. La page ne note pas et ne suit pas ta progression.</p><a class="button" href="../../anglais-aventure.html#mondes">Retour aux mondes et parcours</a>{voisines}</aside>
       </div>
     </section>'''
     return page_enveloppe(
@@ -1153,7 +1185,7 @@ def generer(fiches: list[dict], domains: list[dict], plan: dict) -> dict[Path, s
         AVENTURE_DATA_JS: render_adventure_learning_data(fiches, domains),
     }
     for fiche in fiches:
-        produits[PUBLIC_DIR / f'{fiche["id"]}.html'] = render_fiche(fiche)
+        produits[PUBLIC_DIR / f'{fiche["id"]}.html'] = render_fiche(fiche, fiches)
     return produits
 
 

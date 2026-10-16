@@ -2,6 +2,7 @@
   document.querySelectorAll("[data-year]").forEach((element) => {
     element.textContent = String(new Date().getFullYear());
   });
+  document.documentElement.dataset.printUrl = window.location.href;
 
   const root = document.documentElement;
   const simulatorFrames = Array.from(document.querySelectorAll("[data-simulateur-apercu] iframe"));
