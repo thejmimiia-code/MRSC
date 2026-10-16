@@ -316,6 +316,21 @@ X16-06 (gouttes) : non livré ce tour.
 | F-09 | Verre + grille | [fusion-09-verre-grille.png](fusion-09-verre-grille.png) |
 | F-10 | Piste « un seul film » | [fusion-10-style-mrsc.png](fusion-10-style-mrsc.png) |
 
+### Fusions 11–20
+
+| | Mix | Fichier |
+|---|---|---|
+| F-11 | Confettis de lettres | [fusion-11-confettis-lettres.png](fusion-11-confettis-lettres.png) |
+| F-12 | Vitrine-grille | [fusion-12-vitrine-grille.png](fusion-12-vitrine-grille.png) |
+| F-13 | Encre → pixels | [fusion-13-encre-pixels.png](fusion-13-encre-pixels.png) |
+| F-14 | Cercles de table | [fusion-14-cercles-table.png](fusion-14-cercles-table.png) |
+| F-15 | Flipper-grille | [fusion-15-flipper-grille.png](fusion-15-flipper-grille.png) |
+| F-16 | Bus de nuit | [fusion-16-bus-nuit.png](fusion-16-bus-nuit.png) |
+| F-17 | Zinc en lettres | [fusion-17-zinc-lettres.png](fusion-17-zinc-lettres.png) |
+| F-18 | Parapluie-grille | [fusion-18-parapluie-grille.png](fusion-18-parapluie-grille.png) |
+| F-19 | Yeux-grille | [fusion-19-yeux-grille.png](fusion-19-yeux-grille.png) |
+| F-20 | Café dans le carnet | [fusion-20-cafe-dans-carnet.png](fusion-20-cafe-dans-carnet.png) |
+
 ---
 
 ## 5. Suite de production
