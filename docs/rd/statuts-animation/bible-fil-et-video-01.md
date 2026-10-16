@@ -223,6 +223,21 @@ Les vidéos **07+** : articles des statuts, **toujours** avec Léna / Marc / Kar
 | X12-09 | Roue de loterie | [style-x12-09-roue-loterie.png](style-x12-09-roue-loterie.png) |
 | X12-10 | Papillons de lampe | [style-x12-10-papillons-lampe.png](style-x12-10-papillons-lampe.png) |
 
+### Dix expériences (X13)
+
+| | Mix | Fichier |
+|---|---|---|
+| X13-01 | Fonds de bouteille | [style-x13-01-fonds-de-bouteille.png](style-x13-01-fonds-de-bouteille.png) |
+| X13-02 | Bitume + bonbon | [style-x13-02-bitume-bonbon.png](style-x13-02-bitume-bonbon.png) |
+| X13-03 | Carte de bal | [style-x13-03-carte-de-bal.png](style-x13-03-carte-de-bal.png) |
+| X13-04 | Bic rouge | [style-x13-04-bic-rouge.png](style-x13-04-bic-rouge.png) |
+| X13-05 | Rouille + chrome | [style-x13-05-rouille-chrome.png](style-x13-05-rouille-chrome.png) |
+| X13-06 | Ailes de libellule | [style-x13-06-ailes-libellule.png](style-x13-06-ailes-libellule.png) |
+| X13-07 | Empreintes | [style-x13-07-empreintes.png](style-x13-07-empreintes.png) |
+| X13-08 | Caramel | [style-x13-08-caramel.png](style-x13-08-caramel.png) |
+| X13-09 | Tableau des départs | [style-x13-09-tableau-departs.png](style-x13-09-tableau-departs.png) |
+| X13-10 | Néon sur asphalte | [style-x13-10-neon-asphalte.png](style-x13-10-neon-asphalte.png) |
+
 ---
 
 ## 5. Suite de production
