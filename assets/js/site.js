@@ -598,10 +598,10 @@
   });
 })();
 
-/* Chaque phrase de contenu commence en début de ligne. */
+/* Chaque phrase de contenu commence en début de ligne, sur toutes les mises en page. */
 (() => {
-  const racine = document.querySelector("main");
-  if (!racine) return;
+  const racines = [document.querySelector("main"), document.querySelector(".site-footer")].filter(Boolean);
+  if (!racines.length) return;
 
   const protections = [
     [/M\.R\.S\.C\./g, "¶MRSC¶"],
@@ -610,6 +610,10 @@
     [/\bex\./gi, "¶EX¶"],
     [/\bcf\./gi, "¶CF¶"],
     [/\bn°\./gi, "¶N¶"],
+    [/\bMme\./g, "¶MME¶"],
+    [/\bMlle\./g, "¶MLLE¶"],
+    [/\bDr\./g, "¶DR¶"],
+    [/\bM\.\s(?=[A-ZÉÈÊ])/g, "¶M¶ "],
   ];
 
   const proteger = (texte) => {
@@ -626,13 +630,20 @@
     .replaceAll("¶ETC¶", "etc.")
     .replaceAll("¶EX¶", "ex.")
     .replaceAll("¶CF¶", "cf.")
-    .replaceAll("¶N¶", "n°.");
+    .replaceAll("¶N¶", "n°.")
+    .replaceAll("¶MME¶", "Mme.")
+    .replaceAll("¶MLLE¶", "Mlle.")
+    .replaceAll("¶DR¶", "Dr.")
+    .replaceAll("¶M¶", "M.");
 
   const envelopperPhrases = (noeud) => {
     const brut = noeud.nodeValue;
     if (!brut || !/[.!?…]/.test(brut)) return;
     const protege = proteger(brut);
-    const morceaux = protege.split(/(?<=[.!?…]["»”’']*)\s+(?=\S)/).map((partie) => restaurer(partie).trim()).filter(Boolean);
+    const morceaux = protege
+      .split(/(?<=[.!?…]["»”’']*)\s+(?=\S)/)
+      .map((partie) => restaurer(partie).trim())
+      .filter(Boolean);
     if (morceaux.length < 2) return;
     const fragment = document.createDocumentFragment();
     morceaux.forEach((texte) => {
@@ -644,20 +655,22 @@
     noeud.parentNode.replaceChild(fragment, noeud);
   };
 
-  racine.querySelectorAll("p, li, dd").forEach((bloc) => {
-    if (bloc.closest("nav, pre, code, button, label, summary, figcaption")) return;
-    if (bloc.querySelector(".phrase")) return;
-    const parcours = document.createTreeWalker(bloc, NodeFilter.SHOW_TEXT, {
-      acceptNode(noeud) {
-        const parent = noeud.parentElement;
-        if (!parent) return NodeFilter.FILTER_REJECT;
-        if (parent.closest("a, button, code, pre, kbd, svg, label, .phrase")) return NodeFilter.FILTER_REJECT;
-        if (!noeud.nodeValue || !noeud.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-        return NodeFilter.FILTER_ACCEPT;
-      },
+  racines.forEach((racine) => {
+    racine.querySelectorAll("p, li, dd, dt, td, th, figcaption, blockquote, small").forEach((bloc) => {
+      if (bloc.closest("nav, pre, code, button, label, summary, form")) return;
+      if (bloc.querySelector(".phrase")) return;
+      const parcours = document.createTreeWalker(bloc, NodeFilter.SHOW_TEXT, {
+        acceptNode(noeud) {
+          const parent = noeud.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+          if (parent.closest("a, button, code, pre, kbd, svg, label, .phrase")) return NodeFilter.FILTER_REJECT;
+          if (!noeud.nodeValue || !noeud.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        },
+      });
+      const noeuds = [];
+      while (parcours.nextNode()) noeuds.push(parcours.currentNode);
+      noeuds.forEach(envelopperPhrases);
     });
-    const noeuds = [];
-    while (parcours.nextNode()) noeuds.push(parcours.currentNode);
-    noeuds.forEach(envelopperPhrases);
   });
 })();

@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Plan global : une phrase par ligne
+
+- **Initiative :** `coherence-textes-publics`.
+- **Signal :** après un point, la phrase suivante restait sur la même ligne ; ce n’est ni joli ni confortable à lire.
+- **Plan :**
+  1. Découper tout le contenu principal **et** le pied de page (`p`, listes, tableaux, légendes, citations, `small`).
+  2. Après `. ? ! …`, la phrase suivante commence **toujours en dessous**, alignée à gauche.
+  3. Ne pas casser les libellés de navigation, boutons, code, formulaires.
+  4. Protéger les abréviations (M.R.S.C., ÉVA, Mme, M., Dr, etc.).
+- **Décision :** le script et le CSS couvrent désormais ces blocs, pas seulement `p` / `li` / `dd`.
+- **Contrôles réellement exécutés :** `verifier-site-statique.py` ; `verifier-integration.py`.
+
 ## 2026-10-16 — Cadre du logo compact, même fichier
 
 - **Initiative :** `coherence-textes-publics`.
