@@ -167,7 +167,16 @@ Les vidéos **07+** : articles des statuts, **toujours** avec Léna / Marc / Kar
 | M20-09 | Cire + encre | [style-m20-09-cire-encre.png](style-m20-09-cire-encre.png) |
 | M20-10 | Dynamo vélo | [style-m20-10-dynamos.png](style-m20-10-dynamos.png) |
 
-M20-11 à 20 (mots croisés, Super 8, carrelage, bakélite, brume-stickers, stylo-plume, contreplaqué, grattage, accordéon, Polaroid-cel) : **lot suivant**.
+| M20-11 | Mots croisés + volume | [style-m20-11-mots-croises.png](style-m20-11-mots-croises.png) |
+| M20-12 | Super 8 | [style-m20-12-super8.png](style-m20-12-super8.png) |
+| M20-13 | Carrelage | [style-m20-13-carrelage.png](style-m20-13-carrelage.png) |
+| M20-14 | Bakélite + papier | [style-m20-14-bakelite.png](style-m20-14-bakelite.png) |
+| M20-15 | Brume + stickers | [style-m20-15-brume-stickers.png](style-m20-15-brume-stickers.png) |
+| M20-16 | Stylo-plume | [style-m20-16-stylo-plume.png](style-m20-16-stylo-plume.png) |
+| M20-17 | Contreplaqué + néon | [style-m20-17-contreplaque.png](style-m20-17-contreplaque.png) |
+| M20-18 | Grattage | [style-m20-18-grattage.png](style-m20-18-grattage.png) |
+| M20-19 | Accordéon | [style-m20-19-accordeon.png](style-m20-19-accordeon.png) |
+| M20-20 | Polaroid + cel | [style-m20-20-polaroid-cel.png](style-m20-20-polaroid-cel.png) |
 
 ---
 
