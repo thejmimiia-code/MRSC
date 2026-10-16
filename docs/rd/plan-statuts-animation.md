@@ -4,63 +4,73 @@
 **Statut :** proposition de R&D, **à relire**. Aucune vidéo n’est produite. Aucun devis, aucune cagnotte.  
 **Source qui fait foi :** [`assets/documents/statuts-2020.pdf`](../../assets/documents/statuts-2020.pdf). Les films, le site et cette note **ne remplacent pas** le PDF.
 
-Cette note propose une **section publique du fonctionnement associatif** (accueil / Documents / page dédiée plus tard) illustrée par une **série de courts films 3D**, dans l’esprit d’un film familial lumineux, **voix française**, **sous-titres anglais optionnels**, **personnages originaux** (pas de personnages d’une marque tierce).
+Cette note propose une **œuvre** : un **grand film 3D d’humanité** (puis découpé en épisodes article par article), **voix française**, **sous-titres anglais optionnels**, personnages **originaux**.
 
-Les premières planches « mascottes autour d’un livret » sont **écartées** : trop plates, trop « illustration de couverture ».  
-La question n’est plus seulement *à quoi ça ressemble*, mais **par quel récit on entre**.
-
----
-
-## 1. Intention
-
-Expliquer **comment l’association est constituée et comment elle fonctionne**, article après article, depuis **le tout début du document** (titre, constitution, dénomination), jusqu’au **dernier article**, sans saut.
-
-Chaque épisode :
-
-- correspond à **un article** (ou un alinéa long découpé, jamais fusionné avec le suivant) ;
-- dure environ **45 à 90 secondes** ;
-- ouvre sur le **numéro d’article** ;
-- ferme sur « Le texte des statuts PDF fait foi » ;
-- a une **piste audio FR**, des **sous-titres FR** toujours disponibles, des **sous-titres EN** **désactivés par défaut** (commande « English subtitles ») ;
-- a une **transcription** sous la vidéo et une **image fixe** si `prefers-reduced-motion`.
-
-Sons : ambiances douces (atelier, agora, papier, carnet), pas de musique sous licence tierce non clarifiée.
+Les mascottes, les visites de maison trop sages, le « guide qui lit le livret » : **écartés**.  
+On ne *présente* pas un PDF. On **fait revivre un « nous »**.
 
 ---
 
-## 2. L’angle de présentation (avant le dessin)
+## 1. Le cœur (pourquoi ce film existe)
 
-Les statuts ne sont pas un catalogue à réciter.  
-Le fil retenu pour la série :
+**Constat de récit** (intention de film, pas un constat scientifique publié ici) :  
+des années de distance, d’écrans, de peurs et de flux d’images ont **ramené beaucoup de gens vers eux-mêmes**. Le nombril. La méfiance. L’oubli du voisin.
 
-> **Une personne arrive. On lui ouvre la maison. Chaque article est une pièce, une décision, un geste. On avance dans l’ordre. Le PDF reste sur la table.**
+**Promesse du M.R.S.C. dans ce récit :**  
+faire **revivre la convivialité**, le **savoir-être**, le **partage des savoir-faire et des expériences**.  
+Découvrir l’association, **et tout ce qui s’ouvre** quand on prend le temps de comprendre **comment elle fonctionne** — et **pourquoi ça vaut le coup d’en être**.
 
-Caméra : souvent **à hauteur d’épaule**, rarement un mascotte qui lit à voix haute.  
-Voix : une **voix off française** calme, comme on explique à quelqu’un qui entre, pas comme un cours.  
-Les personnages, s’il y en a, **servent le geste** (ouvrir, s’asseoir en cercle, signer, marcher dans le livre). Ils ne volent pas la vedette au texte.
+Les statuts ne sont pas le sujet froid.  
+Ils sont **la carte du « comment on fait ensemble »**. Sans eux, la chaleur retombe en slogan. Avec eux, chaque possibilité a un **geste** : adhérer, décider, partager, représenter.
 
-### Quatre angles neufs (planches du 16 oct. 2026, non validées)
+Ce n’est **pas** un cours de droit.  
+C’est un film **riche en émotions et en humanité**, comme on en sort un peu changé.
 
-| Id | Angle | Ce que raconte la caméra | Quand ça marche | Risque |
-|---|---|---|---|---|
-| **1. Maison ouverte** | On est le **nouveau venu**. Seuil, ronde intérieure, charte au centre. | L’association est un lieu qu’on **habite**, pas un PDF qu’on subit. | Si chaque article devient une **pièce** de la maison, dans l’ordre. | Transformer ça en visite immobilière. |
-| **2. Table de fondation** | Nuit, chêne, lampes, **mains** qui posent la plume. | Les statuts sont un **acte** : on constitue, on nomme, on s’engage. | Articles 1–2, ressources, dissolution : les gestes graves. | Trop solennel, trop « notaire ». |
-| **3. Assemblée en cercle** | Place, crépuscule, **cercle** d’âges différents, sphère de savoir au milieu. | On **décide ensemble**. Représenter, c’est s’asseoir, pas poser. | AG, bureau, adhésion, travail participatif (11.8–11.9). | Figurer des visages réels (à éviter). |
-| **4. Voyage dans le livre** | Le livre **devient paysage** ; un guide-lanterne original marche avec le visiteur. | On **entre dans le texte**, article après article, comme un chemin. | Toute la série, un sentier continu, jamais de saut. | Magie qui noie le juridique. |
+Garde-fous : le [PDF des statuts](../../assets/documents/statuts-2020.pdf) **fait foi**. Pas de visages réels non consentis. Pas d’adresse physique. Pas d’appel aux dons dans le film. Le COVID et les médias sont le **climat de départ** du personnage, pas un pamphlet.
 
-Planches :
+---
 
-- [angle-01-maison-ouverte.png](statuts-animation/angle-01-maison-ouverte.png)
-- [angle-02-table-fondation.png](statuts-animation/angle-02-table-fondation.png)
-- [angle-03-assemblee-en-cercle.png](statuts-animation/angle-03-assemblee-en-cercle.png)
-- [angle-04-voyage-dans-le-livre.png](statuts-animation/angle-04-voyage-dans-le-livre.png)
+## 2. Accroche, type, style, écriture, émotion
 
-**Hypothèse de mixage (à trancher) :**  
-**1 + 4** pour le fil continu (on entre, on marche dans le livre-maison) ; **2** pour les articles d’acte ; **3** pour les articles d’assemblée. Une seule lumière (marine, or, aube) pour que ce soit **un** film, pas quatre clips.
+### Type
+**Film humaniste 3D** (longue respiration, puis chapitres). Famille large. Pas un explainer. Pas un jingle associatif.
 
-Anciennes planches mascottes (atelier, agora cartoon, papier, carnet) : **archives**, non proposées.
+### Style visuel
+Lumière de **grand film** : d’abord le **bleu froid des écrans**, puis l’**or** qui entre par une porte, puis le **soleil de table**. Matières (bois, pain, mains, papier). Caméra à hauteur d’humain. Larmes possibles, jamais de pathos publicitaire.
 
-**Décision demandée :** quel angle (ou quel mixage) est « à la hauteur » ; ensuite seulement, charte 3D définitive et storyboards de production.
+### Écriture
+Voix off **tu**, proche, sans leçon.
+
+> « On s’est habitués à rester seuls.  
+> Les nouvelles défilent. On se ferme.  
+> Et puis une porte. Des gens. Pas parfaits. Présents.  
+> Ils ont un nom : Mouvement Représentatif de la Société Civile.  
+> Ils ont une façon de faire. Elle est écrite.  
+> Si on la comprend, des possibles s’ouvrent.  
+> Y compris celui d’en être. »
+
+Chaque article, plus tard : **une possibilité qui s’ouvre**, pas un alinéa récité.
+
+### Arc émotionnel (toute la série)
+
+| Temps | Sentiment | Image |
+|---|---|---|
+| Départ | Solitude, saturation | Seul avec les écrans |
+| Accroche | Le premier **seuil** | Lumière chaude, rire au fond |
+| Cœur | Convivialité, savoir-être, mains qui transmettent | La table du partage |
+| Ouverture | Appartenir, **possibles** | Les portes qui s’ouvrent |
+| Chapitres | Comprendre le **fonctionnement** | Un article = une porte, dans l’ordre du PDF |
+
+### Planches d’accroche (16 oct. 2026, non validées)
+
+- [accroche-01-seul-avec-les-ecrans.png](statuts-animation/accroche-01-seul-avec-les-ecrans.png)
+- [accroche-02-le-seuil.png](statuts-animation/accroche-02-le-seuil.png)
+- [accroche-03-table-du-partage.png](statuts-animation/accroche-03-table-du-partage.png)
+- [accroche-04-les-portes-s-ouvrent.png](statuts-animation/accroche-04-les-portes-s-ouvrent.png)
+
+Les planches « maison / table notaire / agora magique / livre-paysage » restent des **outils de chapitre**, pas l’accroche.
+
+**Décision demandée :** cet arc (froid → seuil → table → portes) est-il **le** film ? Si oui, on fige ce style et on n’écrit l’épisode 1.1 (article 1) **qu’après**.
 
 ---
 
@@ -97,50 +107,32 @@ Mentions déjà vérifiées dans le dépôt (journal R&D, accueil, veille) :
 
 ---
 
-## 4. Storyboards — quatre lectures du **tout début** (épisode 1.1, article 1)
+## 4. Storyboard d’ouverture (avant l’article 1) puis article 1
 
-Même **texte dit**, quatre **caméras**. Voix FR. Sous-titres EN optionnels.
+**Prologue — le nombril, puis le seuil** (90 s, hors articles)
 
-**Texte dit (brouillon, à recoller au PDF) :**
+1. Appartement. Écrans. Silence.  
+2. Une notification de plus. On coupe le son.  
+3. Dans la rue : des gens se croisent sans se voir.  
+4. Une porte. Un rire. De la lumière **or**.  
+5. La main sur le chambranle. On entre.
 
-> « Voici le début.  
-> Des personnes se constituent en association.  
-> Elle se nomme Mouvement Représentatif de la Société Civile.  
-> On dit aussi M.R.S.C.  
-> Ce que vous voyez aide à comprendre.  
-> Le texte du PDF reste la référence. »
+**Texte dit (prologue) :**
 
-### 4.1 — Maison ouverte (épaule du nouveau venu)
+> « On s’est repliés.  
+> Les images du monde ont pris toute la place.  
+> Il reste une chose simple : se retrouver.  
+> Savoir être. Partager ce qu’on sait faire. Ce qu’on a vécu. »
 
-1. Rue inventée, fin de jour. Une porte s’entrouvre.  
-2. Caméra **par-dessus l’épaule**. On n’entre pas encore.  
-3. À l’intérieur : un cercle, un pupitre, le livret ouvert à **l’article 1**.  
-4. Quelqu’un dit le **nom**, sans crier.  
-5. On pose le pied sur le seuil. Freeze : « le PDF fait foi ».
+**Épisode 1.1 — on dit le nom** (article 1, à recoller au PDF)
 
-### 4.2 — Table de fondation (l’acte)
+1. Autour de la table, quelqu’un pose le livret.  
+2. On lit **ensemble** le premier article — pas un professeur, un voisin.  
+3. Le nom est **dit** : Mouvement Représentatif de la Société Civile.  
+4. Un regard : « C’est ça, le début. »  
+5. Carton discret : le PDF fait foi. La table reste.
 
-1. Nuit. Gros plan **mains**, plume, papier.  
-2. On n’écrit pas encore. On **lit** la première ligne.  
-3. La plume pose le nom. Encre marine.  
-4. Un verre de thé, un silence.  
-5. On referme à la page 1 — la suite est un autre épisode.
-
-### 4.3 — Assemblée en cercle (le « nous »)
-
-1. Crépuscule. Chaises en rond, vides d’abord.  
-2. Les gens s’assoient. Aucun visage vedette.  
-3. Au centre, le nom apparaît **une fois**, net.  
-4. Un enfant demande : « C’est qui ? » — réponse : le nom, rien de plus.  
-5. Le cercle reste. Carton PDF.
-
-### 4.4 — Voyage dans le livre (le chemin)
-
-1. Un livre immense au sol. On est tout petit.  
-2. La première page se relève comme une colline : **Article 1**.  
-3. Le guide-lanterne (forme originale) n’explique pas : il **éclaire** le mot dénomination.  
-4. On marche jusqu’au bas de la page. On **s’arrête**.  
-5. La page 2 attend l’épisode suivant.
+Chaque article suivant = **une porte de plus** qui s’ouvre sur un possible (adhérer, décider, transmettre…), **dans l’ordre**.
 
 ---
 
@@ -169,7 +161,7 @@ Proposition, **non construite** :
 
 ## 7. Suite demandée à l’association
 
-1. Choisir un **angle** (maison, table, cercle, voyage) ou le mixage 1+4 / 2 / 3.  
+1. Valider ou recaler l’arc **écrans → seuil → table → portes** (convivialité, savoir-être, savoir-faire, possibles de l’adhésion).  
 2. Faire **transcrire** les statuts 2020 article par article.  
 3. Valider le **brouillon de VO** de l’épisode 1.1.  
 4. Alors seulement : images de production, puis épisode 1.2 (article 2), et ainsi de suite **jusqu’au dernier article**.

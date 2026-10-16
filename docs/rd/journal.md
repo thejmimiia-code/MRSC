@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Accroche humaniste du film des statuts
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** partir du repli (écrans, distance) pour faire revivre convivialité, savoir-être, partage des savoir-faire et des expériences ; découvrir le M.R.S.C. et ce qui s’ouvre quand on comprend son fonctionnement.
+- **Décision :** le film est un récit humaniste 3D, pas un explainer. Arc : seul avec les écrans → le seuil → la table du partage → les portes. Les statuts = carte du « comment on fait ensemble ». Quatre planches d’accroche, non validées. COVID/médias = climat du personnage, pas un pamphlet public.
+- **Contrôles :** note mise à jour.
+
 ## 2026-10-16 — Seconds angles de présentation des statuts
 
 - **Initiative :** `direction-artistique-motion`.
