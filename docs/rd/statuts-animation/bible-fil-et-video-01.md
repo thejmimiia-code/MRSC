@@ -193,6 +193,21 @@ Les vidéos **07+** : articles des statuts, **toujours** avec Léna / Marc / Kar
 | X10-09 | Équerre / compas | [style-x10-09-equerre.png](style-x10-09-equerre.png) |
 | X10-10 | Barbe à papa + lino | [style-x10-10-barbe-a-papa.png](style-x10-10-barbe-a-papa.png) |
 
+### Dix expériences (X11)
+
+| | Mix | Fichier |
+|---|---|---|
+| X11-01 | Trichromie acétate | [style-x11-01-trichromie.png](style-x11-01-trichromie.png) |
+| X11-02 | Mie de pain | [style-x11-02-mie-de-pain.png](style-x11-02-mie-de-pain.png) |
+| X11-03 | Aiguillage | [style-x11-03-aiguillage.png](style-x11-03-aiguillage.png) |
+| X11-04 | Serpentins | [style-x11-04-serpentins.png](style-x11-04-serpentins.png) |
+| X11-05 | Fiches catalogue | [style-x11-05-fiches-catalogue.png](style-x11-05-fiches-catalogue.png) |
+| X11-06 | Traces de graisse | [style-x11-06-traces-graisse.png](style-x11-06-traces-graisse.png) |
+| X11-07 | Sable de pétanque | [style-x11-07-sable-petanque.png](style-x11-07-sable-petanque.png) |
+| X11-08 | Cahier Seyes | [style-x11-08-cahier-seyes.png](style-x11-08-cahier-seyes.png) |
+| X11-09 | Verre de bouteille | [style-x11-09-verre-bouteille.png](style-x11-09-verre-bouteille.png) |
+| X11-10 | Buée | [style-x11-10-buee.png](style-x11-10-buee.png) |
+
 ---
 
 ## 5. Suite de production
