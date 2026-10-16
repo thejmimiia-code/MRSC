@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Compilation Drive + X17
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** zipper toutes les planches sur Drive ; dix autres ; l’association sélectionnera pour des fusions.
+- **Décision :** zip JPG dans le dossier Drive « M.R.S.C. planches animation statuts ». Série X17 (80s + humanité). PNG originaux restent dans le dépôt ; le zip n’est pas versionné.
+- **Contrôles :** archive créée ; envoi Drive.
+
 ## 2026-10-16 — Expériences 80s, humanité et sensualité (X16)
 
 - **Initiative :** `direction-artistique-motion`.

@@ -286,6 +286,21 @@ Sensualité = chaleur, regards, mains, pluie, pas d’érotisme.
 
 X16-06 (gouttes) : non livré ce tour.
 
+### Dix expériences 80s + humanité (X17)
+
+| | Mix | Fichier |
+|---|---|---|
+| X17-01 | Walkman + peau | [style-x17-01-walkman-peau.png](style-x17-01-walkman-peau.png) |
+| X17-02 | Minitel + mains | [style-x17-02-minitel-mains.png](style-x17-02-minitel-mains.png) |
+| X17-03 | Fluo + souffle | [style-x17-03-fluo-souffle.png](style-x17-03-fluo-souffle.png) |
+| X17-04 | K7 + danse | [style-x17-04-k7-danse.png](style-x17-04-k7-danse.png) |
+| X17-05 | Aérographe joue | [style-x17-05-aerographe-joue.png](style-x17-05-aerographe-joue.png) |
+| X17-06 | Damier + pluie | [style-x17-06-damier-pluie.png](style-x17-06-damier-pluie.png) |
+| X17-07 | LCD + carnet | [style-x17-07-lcd-carnet.png](style-x17-07-lcd-carnet.png) |
+| X17-08 | Néon + épaules | [style-x17-08-neon-epaules.png](style-x17-08-neon-epaules.png) |
+| X17-09 | VHS + rire | [style-x17-09-vhs-rire.png](style-x17-09-vhs-rire.png) |
+| X17-10 | Memphis + sommeil | [style-x17-10-memphis-sommeil.png](style-x17-10-memphis-sommeil.png) |
+
 ---
 
 ## 5. Suite de production
