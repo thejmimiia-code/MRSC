@@ -122,8 +122,8 @@ phase = "cadrage"
 etat = "a-cadrer"
 domaines = ["numerique-ia"]
 question = "Comment présenter les travaux d’ÉVA en termes clairs, en séparant les objectifs des essais, des résultats et des capacités démontrées?"
-preuves = ["index.html", "eva.html", "transparence.html", "docs/rd/listes-eva-materiel.md", "docs/rd-coherence-visuelle-editoriale.md"]
-prochaine_action = "Faire relire les listes R&D et matériel (eva.html#listes-rd-eva) ; confirmer, corriger ou retirer des lignes ; ne chiffrer un budget que si l’association l’autorise. Ne présenter aucun achat, modèle ou don comme décidé."
+preuves = ["index.html", "eva.html", "transparence.html", "docs/rd/listes-eva-materiel.md", "docs/rd/materiel-spark-serveur-dons.md", "docs/rd-coherence-visuelle-editoriale.md"]
+prochaine_action = "Faire relire la piste Spark / serveur / cagnotte (eva.html#materiel-spark-serveur) ; n’ouvrir une cagnotte et n’acheter qu’après décision associative et devis daté. Ne pas présenter la conscience comme un résultat, ni un palier comme un achat déjà fait."
 criteres_sortie = ["Chaque capacité annoncée est liée à une démonstration datée et documentée.", "Les objectifs et hypothèses sont identifiés comme tels.", "Les résultats, échecs, limites et validations manquantes sont indiqués.", "La présentation reste compréhensible sans jargon et les éléments publiés sont autorisés."]
 skills = ["documentation-technique", "recherche-sources", "accessibilite-co-conception", "evaluation-maintenance"]
 

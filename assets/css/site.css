@@ -3345,6 +3345,12 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .eva-liste h3 { font-size: 1.15rem; margin-bottom: .7rem; }
 .eva-liste ol { margin: 0; padding-left: 1.25rem; }
 .eva-liste li { margin: .4rem 0; }
+.eva-paliers {
+  max-width: 72ch;
+  margin: 1.1rem 0 1.2rem;
+  padding-left: 1.3rem;
+}
+.eva-paliers li { margin: .55rem 0; }
 @media (max-width: 760px) {
   .eva-listes-grid { grid-template-columns: minmax(0, 1fr); }
 }

@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Spark, serveur dédié, cagnotte et conscience comme question
+
+- **Initiative :** `documentation-rd-eva`.
+- **Signal :** cadrer une première capacité de calcul (type Spark, peu énergivore), un palier serveur, des recherches sur la conscience autonome, et une cagnotte transparente indexée sur le total collecté.
+- **Décision :** pages publiques et note `docs/rd/materiel-spark-serveur-dons.md`. Conscience = question ouverte, pas un résultat. Spark / serveur = pistes à devis, pas une commande. Cagnotte = mécanisme proposé ; tant qu’elle n’est pas ouverte, bulletin de don et courriel existants. Achats par paliers selon le total, avec transparence sans données personnelles non consenties. Aucun montant fixé.
+- **Sources consultées :** fiche constructeur NVIDIA DGX Spark (16 oct. 2026). Les watts constructeur ne sont pas une mesure M.R.S.C.
+- **Contrôles réellement exécutés :** `verifier-site-statique.py` ; `verifier-integration.py` ; `verifier-rd-continue.py`.
+
 ## 2026-10-16 — Listes R&D Éva et matériel idéal
 
 - **Initiative :** `documentation-rd-eva`.
