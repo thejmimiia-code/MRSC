@@ -208,6 +208,21 @@ Les vidéos **07+** : articles des statuts, **toujours** avec Léna / Marc / Kar
 | X11-09 | Verre de bouteille | [style-x11-09-verre-bouteille.png](style-x11-09-verre-bouteille.png) |
 | X11-10 | Buée | [style-x11-10-buee.png](style-x11-10-buee.png) |
 
+### Dix expériences (X12)
+
+| | Mix | Fichier |
+|---|---|---|
+| X12-01 | Gouache fraîche | [style-x12-01-gouache-fraiche.png](style-x12-01-gouache-fraiche.png) |
+| X12-02 | Patron de couture | [style-x12-02-patron-couture.png](style-x12-02-patron-couture.png) |
+| X12-03 | Gravier + cel | [style-x12-03-gravier-cel.png](style-x12-03-gravier-cel.png) |
+| X12-04 | Boule à facettes | [style-x12-04-boule-a-facettes.png](style-x12-04-boule-a-facettes.png) |
+| X12-05 | Cartes percées | [style-x12-05-cartes-percées.png](style-x12-05-cartes-percées.png) |
+| X12-06 | Rayons de vélo | [style-x12-06-rayons-velo.png](style-x12-06-rayons-velo.png) |
+| X12-07 | Courant du fleuve | [style-x12-07-courant-fleuve.png](style-x12-07-courant-fleuve.png) |
+| X12-08 | Tableau vert | [style-x12-08-tableau-vert.png](style-x12-08-tableau-vert.png) |
+| X12-09 | Roue de loterie | [style-x12-09-roue-loterie.png](style-x12-09-roue-loterie.png) |
+| X12-10 | Papillons de lampe | [style-x12-10-papillons-lampe.png](style-x12-10-papillons-lampe.png) |
+
 ---
 
 ## 5. Suite de production
