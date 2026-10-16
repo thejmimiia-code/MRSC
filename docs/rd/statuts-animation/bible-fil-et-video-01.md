@@ -33,6 +33,21 @@ Hybrides, références de **méthode** pas de copies de films.
 | **I4** | Rétroprojecteur | Calques feutre sur acétate | [style-inedit-04-retroprojecteur.png](style-inedit-04-retroprojecteur.png) |
 | **I5** | Radar diner | Balayage phosphore vert/magenta | [style-inedit-05-radar-diner.png](style-inedit-05-radar-diner.png) |
 
+### Dix autres (variés)
+
+| | Nom | Fichier |
+|---|---|---|
+| V2-01 | Fusain | [style-v2-01-fusain.png](style-v2-01-fusain.png) |
+| V2-02 | Broderie | [style-v2-02-broderie.png](style-v2-02-broderie.png) |
+| V2-03 | UPA magenta | [style-v2-03-upa-magenta.png](style-v2-03-upa-magenta.png) |
+| V2-04 | Blacklight | [style-v2-04-blacklight.png](style-v2-04-blacklight.png) |
+| V2-05 | Comics dimanche | [style-v2-05-comics-dimanche.png](style-v2-05-comics-dimanche.png) |
+| V2-06 | Origami dur | [style-v2-06-origami-dur.png](style-v2-06-origami-dur.png) |
+| V2-07 | Synth UI | [style-v2-07-synth-ui.png](style-v2-07-synth-ui.png) |
+| V2-08 | Pare-brise | [style-v2-08-parebrise.png](style-v2-08-parebrise.png) |
+| V2-09 | Affiche Est | [style-v2-09-affiche-est.png](style-v2-09-affiche-est.png) |
+| V2-10 | Crayon test | [style-v2-10-crayon-test.png](style-v2-10-crayon-test.png) |
+
 ---
 
 ## 1. Casting verrouillé (à coller dans chaque plan)
