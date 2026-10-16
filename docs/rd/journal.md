@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Dix pistes totalement nouvelles
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** des essais totalement nouveaux, hors fusions grille/gouache/pixels.
+- **Décision :** tram-vitrail, cyanotype, laine, savon, Super 8, craie, émail, radar, ombres, péniche. France, Léna / Marc / Karim.
+- **Contrôles :** planches nouveau-01 à 10.
+
 ## 2026-10-16 — Fusions 11–20
 
 - **Initiative :** `direction-artistique-motion`.

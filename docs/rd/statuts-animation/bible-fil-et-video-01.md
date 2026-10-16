@@ -331,6 +331,23 @@ X16-06 (gouttes) : non livré ce tour.
 | F-19 | Yeux-grille | [fusion-19-yeux-grille.png](fusion-19-yeux-grille.png) |
 | F-20 | Café dans le carnet | [fusion-20-cafe-dans-carnet.png](fusion-20-cafe-dans-carnet.png) |
 
+### Pistes totalement nouvelles (N-01 à N-10)
+
+Hors grille / gouache / pixels / mains.
+
+| | Mix | Fichier |
+|---|---|---|
+| N-01 | Tram vitrail | [nouveau-01-tram-vitrail.png](nouveau-01-tram-vitrail.png) |
+| N-02 | Cyanotype | [nouveau-02-cyanotype.png](nouveau-02-cyanotype.png) |
+| N-03 | Laine feutrée | [nouveau-03-laine.png](nouveau-03-laine.png) |
+| N-04 | Savon sculpté | [nouveau-04-savon.png](nouveau-04-savon.png) |
+| N-05 | Super 8 campagne | [nouveau-05-super8-campagne.png](nouveau-05-super8-campagne.png) |
+| N-06 | Craie sur mur | [nouveau-06-craie-mur.png](nouveau-06-craie-mur.png) |
+| N-07 | Émail dimanche | [nouveau-07-email-dimanche.png](nouveau-07-email-dimanche.png) |
+| N-08 | Radar foire | [nouveau-08-radar-foire.png](nouveau-08-radar-foire.png) |
+| N-09 | Ombres gélatine | [nouveau-09-ombres-gelatine.png](nouveau-09-ombres-gelatine.png) |
+| N-10 | Péniche brume | [nouveau-10-peniche-brume.png](nouveau-10-peniche-brume.png) |
+
 ---
 
 ## 5. Suite de production
