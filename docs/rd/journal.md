@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Cycle R&D : boussole, impression, prospective
+
+- **Initiative :** `prospective-apprentissages-2030` (lien `optimisation-du-site`).
+- **Signal :** poursuivre R&D, prospective et innovation sur l’ensemble du site, sans inventer de validation.
+- **Décision :**
+  1. Prototype HTML de la **Boussole des savoirs** (dix questions du catalogue, statuts visibles) sur `apprendre.html`, entrée depuis l’accueil.
+  2. Feuille **d’impression** du site (en-tête et commandes masqués) comme premier pas du kit autonome.
+  3. Mise à jour de la note 2027–2030 : ces objets sont des prototypes à relire, pas des essais d’usage.
+- **Contrôles réellement exécutés :** `construire-apprentissages.py --verifier` ; `verifier-rd-continue.py` ; `verifier-site-statique.py` ; `verifier-integration.py` — réussis.
+
 ## 2026-10-16 — Plan global : une phrase par ligne
 
 - **Initiative :** `coherence-textes-publics`.
