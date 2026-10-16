@@ -260,17 +260,21 @@ html.contraste-renforce .site-status-note {
   display: none;
   align-items: center;
   min-height: 0;
+  overflow: hidden;
+  border-radius: var(--button-radius);
+  background: #fff;
   text-decoration: none;
 }
 
 .header-compact-brand img {
   display: block;
-  width: auto;
-  height: 2rem;
-  max-width: 3.5rem;
-  object-fit: contain;
+  width: 4.55rem;
+  height: 2.15rem;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 42%;
   background: #fff;
-  border-radius: 5px;
+  border-radius: var(--button-radius);
 }
 
 .header-compact-tools {
@@ -3074,9 +3078,12 @@ html.has-js .site-header.is-compact .header-compact-brand {
 }
 
 html.has-js .site-header.is-compact .header-compact-brand img {
-  height: 2rem;
-  width: auto;
-  max-width: 3.5rem;
+  width: 4.55rem;
+  height: 2.15rem;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 42%;
+  border-radius: var(--button-radius);
 }
 
 @media (max-width: 760px) {
@@ -3094,8 +3101,11 @@ html.has-js .site-header.is-compact .header-compact-brand img {
     align-self: center;
   }
   html.has-js .site-header.is-compact .header-compact-brand img {
+    width: 4.9rem;
     height: 2.35rem;
-    max-width: 4.1rem;
+    max-width: none;
+    object-fit: cover;
+    object-position: center 42%;
   }
   html.has-js .site-header.is-compact .header-compact-tools {
     display: flex;
