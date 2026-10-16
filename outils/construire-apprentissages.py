@@ -442,6 +442,53 @@ def render_coverage(domains: list[dict], fiches_by_id: dict[str, dict]) -> tuple
     return "\n".join(sorties), compte_rendus
 
 
+BOUSSOLE_SAVOIRS = (
+    ("fr-lire-consigne", "Comment lire une consigne sans rater une étape ?"),
+    ("apprendre-methode", "Comment partir de ce que je sais déjà pour comprendre une notion ?"),
+    ("civ-verifier-information", "Comment vérifier une information avant de la partager ?"),
+    ("numerique-hameconnage", "Comment repérer un message de hameçonnage ?"),
+    ("numerique-verifier-ia", "Comment vérifier une réponse produite par une IA ?"),
+    ("econ-lire-facture", "Comment lire une facture et repérer une échéance ?"),
+    ("sciences-demarche", "Comment distinguer une observation d’une explication ?"),
+    ("civ-trouver-service-public", "Comment trouver un service public pour une démarche ?"),
+    ("geo-points-cardinaux", "Comment s’orienter avec les points cardinaux ?"),
+    ("recherche-lire-etude", "Comment lire une étude sans tout prendre pour une certitude ?"),
+)
+
+
+def render_boussole(fiches: list[dict]) -> str:
+    """Point d’entrée par questions, sans cursus ni profil."""
+    by_id = {fiche["id"]: fiche for fiche in fiches}
+    items = []
+    for identifiant, question in BOUSSOLE_SAVOIRS:
+        fiche = by_id.get(identifiant)
+        if not fiche:
+            ERREURS.append(f"boussole : fiche inconnue {identifiant}")
+            continue
+        statut = fiche.get("statut_editorial") or "Fiche du corpus initial"
+        items.append(
+            "          <li>"
+            f"<a href=\"apprendre/fiches/{e(identifiant)}.html\">{e(question)}</a>"
+            f"<small>{e(fiche['titre'])} · {e(statut)}</small>"
+            "</li>"
+        )
+    liste = "\n".join(items)
+    return f'''    <section class="section" id="boussole-savoirs" aria-labelledby="titre-boussole-savoirs">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Boussole des savoirs · prototype d’orientation</p>
+          <h2 id="titre-boussole-savoirs">Partir d’une question, pas d’un cursus.</h2>
+          <p>Ces pistes mènent vers des fiches déjà publiées. Ce n’est ni un programme, ni une réponse complète, ni une validation. Le statut de chaque fiche reste affiché.</p>
+        </div>
+        <ol class="knowledge-compass">
+{liste}
+        </ol>
+        <p class="learning-level-note"><strong>Limite :</strong> dix questions seulement, choisies dans le catalogue actuel. D’autres sujets existent plus bas, y compris des prototypes à relire. Tu peux ignorer cette liste et filtrer le catalogue.</p>
+        <p><a class="button button-secondary" href="#catalogue-fiches">Voir toutes les fiches</a></p>
+      </div>
+    </section>'''
+
+
 def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: int) -> str:
     by_id = {fiche["id"]: fiche for fiche in fiches}
     couverture, _ = render_coverage(domains, by_id)
@@ -462,7 +509,7 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
           <p class="learning-intro">Ce que tu sais déjà compte : un horaire, un message, un achat ou une question du quotidien peut ouvrir une notion. Choisis une fiche utile, essaie à ton rythme, sans compte ni note. Chaque page tient debout seule, avec une analogie, un essai facultatif, une aide et une correction ; les liens de sources sont facultatifs.</p>
           <p class="learning-level-note"><strong>Ce que tu peux faire ici :</strong> découvrir des fiches concrètes, des premiers pas jusqu’aux spécialités et à la recherche. Chacun commence où c’est utile. Le catalogue compte {resume_catalogue}. La relecture indépendante de toutes les fiches du corpus initial n’est pas garantie. Les relectures se poursuivent ; la carte ci-dessous nomme les sujets encore à créer.</p>
           <p class="learning-level-note"><strong>Ambition éditoriale de long terme :</strong> viser {objectif_libelle} fiches autonomes, distinctes, relues et entretenues. Ce nombre est un objectif de travail, pas l’offre actuelle ni une promesse de couverture exhaustive.</p>
-          <div class="hero-actions"><a class="button" href="#catalogue-fiches">Choisir une fiche</a><a class="button button-secondary" href="anglais-aventure.html">Explorer l’aventure anglaise</a><a class="button button-secondary" href="#couverture">Voir les sujets à développer</a><a class="button button-secondary" href="transparence.html#rd-innovation">Comprendre la R&amp;D continue</a></div>
+          <div class="hero-actions"><a class="button" href="#boussole-savoirs">Partir d’une question</a><a class="button button-secondary" href="#catalogue-fiches">Choisir une fiche</a><a class="button button-secondary" href="anglais-aventure.html">Explorer l’aventure anglaise</a><a class="button button-secondary" href="#couverture">Voir les sujets à développer</a><a class="button button-secondary" href="transparence.html#rd-innovation">Comprendre la R&amp;D continue</a></div>
           <p class="learning-reassurance"><strong>Ce que tu sais déjà compte.</strong> Les repères aident à choisir une fiche, pas à te classer. Tu peux avancer différemment selon les matières.</p>
         </div>
         <aside class="learning-principles" aria-labelledby="principes-apprentissage"><p class="eyebrow">Une règle éditoriale durable</p><h2 id="principes-apprentissage">Partir du réel, puis revenir au réel.</h2><ul><li>Une analogie concrète dans chaque fiche, avec ses limites expliquées.</li><li>Des notions définies, une méthode découpée et un essai facultatif.</li><li>Des corrections masquées : tu les ouvres quand tu le souhaites.</li><li>Des repères par matière et difficulté, sans test ni étiquette.</li></ul></aside>
@@ -523,7 +570,7 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
     </section>'''
     contribution = '''    <section class="section learning-feedback" aria-labelledby="titre-contribution"><div class="container"><div class="learning-feedback-panel"><div><p class="eyebrow">Améliorer les ressources</p><h2 id="titre-contribution">Une analogie ne fonctionne pas pour toi ?</h2><p>Tu peux proposer un autre exemple ou signaler un sujet manquant à <a href="mailto:assomrsc@gmail.com?subject=Ressources%20d%E2%80%99apprentissage">assomrsc@gmail.com</a>. N’envoie pas de donnée sensible ni de détail personnel : un message volontaire est transmis à l’adresse de contact et n’est pas anonyme. Aucune réponse immédiate n’est promise.</p></div><a class="button button-secondary" href="mailto:assomrsc@gmail.com?subject=Ressources%20d%E2%80%99apprentissage">Écrire au M.R.S.C</a></div></div></section>'''
     sources = '''    <section class="trace-section"><div class="container trace-panel"><div><p class="eyebrow">Sources et méthode</p><h2>Une première carte, à relire et à compléter</h2><ul class="trace-list"><li>Les repères de cycle sont des indications, non une orientation ou une certification : <a href="https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512" target="_blank" rel="noopener noreferrer">Ministère de l’Éducation nationale — socle commun</a>.</li><li>Les champs d’études et niveaux de programmes sont comparés à la classification internationale de l’<a href="https://isced.uis.unesco.org/about/" target="_blank" rel="noopener noreferrer">UNESCO UIS — ISCED/ISCED-F</a> ; ce repère n’est ni un diplôme M.R.S.C ni un classement des personnes.</li><li>Les apprentissages peuvent partir de situations concrètes et du travail : <a href="https://www.anlci.gouv.fr/nos-piliers/lillettrisme-au-travail/" target="_blank" rel="noopener noreferrer">ANLCI — compétences de base et travail</a>.</li><li>La clarté et l’accessibilité restent à tester avec des personnes concernées : <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">W3C — WCAG 2.2</a>.</li><li>La cartographie complète des domaines, des sujets commencés et des lacunes est suivie dans la veille éditoriale du dépôt.</li></ul></div><a class="button button-secondary" href="transparence.html">Voir la méthode et les sources</a></div></section>'''
-    contenu = hero + jeu_anglais + grille + how_to + domains_html + contexte + ecosysteme + contribution + sources
+    contenu = hero + jeu_anglais + render_boussole(fiches) + grille + how_to + domains_html + contexte + ecosysteme + contribution + sources
     page = page_enveloppe(
         "Apprendre à son rythme — fiches autonomes | M.R.S.C",
         "Fiches d’apprentissage gratuites et autonomes, par matière et difficulté, avec des analogies du quotidien et une carte explicite des sujets à créer.",
