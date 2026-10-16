@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Expériences 80s, humanité et sensualité (X16)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** ajouter une part de sensualité et d’humanité.
+- **Décision :** chaleur des mains, veste partagée, bal maladroit, regards, bus, parapluie. Pas d’érotisme. Neuf planches (gouttes non livrées).
+- **Contrôles :** planches X16.
+
 ## 2026-10-16 — Dix expériences 80s (X15)
 
 - **Initiative :** `direction-artistique-motion`.

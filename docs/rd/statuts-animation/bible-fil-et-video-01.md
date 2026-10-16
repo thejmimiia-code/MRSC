@@ -268,6 +268,24 @@ Les vidéos **07+** : articles des statuts, **toujours** avec Léna / Marc / Kar
 | X15-09 | Antiope | [style-x15-09-antiope.png](style-x15-09-antiope.png) |
 | X15-10 | Chrome pluie | [style-x15-10-chrome-pluie.png](style-x15-10-chrome-pluie.png) |
 
+### Dix expériences 80s, humanité (X16)
+
+Sensualité = chaleur, regards, mains, pluie, pas d’érotisme.
+
+| | Mix | Fichier |
+|---|---|---|
+| X16-01 | Mains | [style-x16-01-mains.png](style-x16-01-mains.png) |
+| X16-02 | Veste partagée | [style-x16-02-veste-partagee.png](style-x16-02-veste-partagee.png) |
+| X16-03 | Bal maladroit | [style-x16-03-bal-maladroit.png](style-x16-03-bal-maladroit.png) |
+| X16-04 | Herbe et ciel | [style-x16-04-herbe-ciel.png](style-x16-04-herbe-ciel.png) |
+| X16-05 | Le regard | [style-x16-05-le-regard.png](style-x16-05-le-regard.png) |
+| X16-07 | Serviette | [style-x16-07-serviette.png](style-x16-07-serviette.png) |
+| X16-08 | Arrêt de bus | [style-x16-08-arret-bus.png](style-x16-08-arret-bus.png) |
+| X16-09 | Frites et rire | [style-x16-09-frites-rire.png](style-x16-09-frites-rire.png) |
+| X16-10 | Parapluie | [style-x16-10-parapluie.png](style-x16-10-parapluie.png) |
+
+X16-06 (gouttes) : non livré ce tour.
+
 ---
 
 ## 5. Suite de production
