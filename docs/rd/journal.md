@@ -2,6 +2,13 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-16 — Sigle moderne, sans drapeaux
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** le sceau d’E-06 est trop moyenâgeux ; les drapeaux font sectaire.
+- **Décision :** garder le visage E-06 ; hall sans bannières ; pas de sceau héraldique. Marque = arcs colorés contemporains ou barre LED. Planches `eva-moderne-01` à `05`. Accueil 3D inchangé.
+- **Contrôles :** planches modernes.
+
 ## 2026-10-16 — Éva choisie : plan E-06 (atrium)
 
 - **Initiative :** `direction-artistique-motion`.
