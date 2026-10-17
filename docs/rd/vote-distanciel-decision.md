@@ -46,8 +46,9 @@ A ou `aucun` sont des décisions valides. La recherche n’a pas à aboutir à u
 4. Une solution existante et une version précise sont désignées pour expertise ; aucune cryptographie locale n’est ajoutée.
 5. Le protocole du banc est relu en cryptographie, droit, protection des données, opérations et accessibilité.
 6. L’environnement est isolé, les données sont synthétiques et le plan de destruction est fixé avant l’exercice.
-7. Une condition d’arrêt entraîne réellement l’arrêt, sans compensation par un score global.
-8. Les six rôles du [`plan de revues`](vote-distanciel-revues.toml) ont examiné les artefacts relevant de leur responsabilité ; aucune disponibilité n’est supposée.
+7. Pour l’épreuve de corrélation, métrique, référence et seuil d’arrêt sont définis et datés par la revue humaine avant génération des données ; aucun seuil du dépôt ne vaut décision.
+8. Une condition d’arrêt entraîne réellement l’arrêt, sans compensation par un score global.
+9. Les six rôles du [`plan de revues`](vote-distanciel-revues.toml) ont examiné les artefacts relevant de leur responsabilité ; aucune disponibilité n’est supposée.
 
 Si une condition manque, la phase reste documentaire.
 

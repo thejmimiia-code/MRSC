@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Épreuve de corrélation rendue non exécutable
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** formaliser les vues et signaux d’une future épreuve synthétique sans produire de jeu, de code d’attaque ni de seuil numérique.
+- **Résultat :** quatre vues d’attaque, cinq signaux et cinq prérequis sont structurés ; `execution_autorisee = false`.
+- **Prospective :** la collusion émetteur–urne et la persistance dans les sauvegardes sont traitées comme des scénarios distincts, sans probabilité.
+- **Optimisation :** le contrôle refuse un seuil inventé, une autorisation prématurée et toute catégorie étrangère au modèle de données.
+- **Limite :** aucune épreuve n’a été exécutée et aucun niveau de corrélation n’est déclaré acceptable.
+- **Prochaine action :** faire préenregistrer métrique, référence, seuil et plan de destruction par les revues humaines compétentes.
+
 ## 2026-10-17 — Données du vote séparées avant toute collecte
 
 - **Initiative :** `vote-distanciel-verifiable`.

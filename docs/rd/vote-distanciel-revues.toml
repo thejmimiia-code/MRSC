@@ -52,7 +52,7 @@ statut = "a-attribuer"
 
 [[revue]]
 id = "modele-menaces"
-artefacts = ["docs/rd/vote-distanciel-menaces.toml", "docs/rd/vote-distanciel-donnees.toml", "docs/rd/vote-distanciel-vie-privee.md", "docs/rd/vote-distanciel-verifiable.md"]
+artefacts = ["docs/rd/vote-distanciel-menaces.toml", "docs/rd/vote-distanciel-donnees.toml", "docs/rd/vote-distanciel-vie-privee.md", "docs/rd/vote-distanciel-correlation.toml", "docs/rd/vote-distanciel-verifiable.md"]
 roles_requis = ["cryptographie-vote", "protection-donnees", "operations-securite", "accessibilite-usages"]
 question = "Les actifs, adversaires, coercition, métadonnées, pannes et conditions d'arrêt sont-ils suffisants pour le profil ?"
 condition_sortie = "Menaces manquantes ajoutées et objections non résolues maintenues comme blocages."
