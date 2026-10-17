@@ -156,6 +156,11 @@ class RegistreMenacesTests(unittest.TestCase):
         registre["projet"][0]["selection"] = True
         self.assertTrue(any("sans score ni sélection" in erreur for erreur in MODULE.verifier_sources(registre)))
 
+    def test_refuse_une_source_sans_preuves_a_chercher(self):
+        registre = copy.deepcopy(self.sources)
+        registre["projet"][0]["preuves_a_chercher"] = []
+        self.assertTrue(any("preuves_a_chercher" in erreur for erreur in MODULE.verifier_sources(registre)))
+
     def test_decision_courante_est_en_attente(self):
         self.assertEqual(MODULE.verifier_decision(self.decision), ("en attente", []))
 

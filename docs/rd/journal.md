@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Premiers écarts documentaires des candidats
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Recherche :** lecture à commit épinglé de la spécification et du guide outil Belenios, du modèle de confidentialité Helios et du fichier SECURITY ElectionGuard.
+- **Constats :** Belenios documente vérification et rôles mais nécessite d’expertiser publication d’identité/alias et récupération des justificatifs ; Helios annonce des métadonnées de vote et données d’identité incompatibles avec la minimisation tant qu’une configuration contraire n’est pas démontrée ; ElectionGuard est un SDK dont l’intégration complète et les versions restent à définir, son fichier SECURITY n’étant pas un audit.
+- **Décision :** aucun candidat ne franchit encore un critère bloquant, faute de preuves réunies ; cela n’est pas un verdict d’insécurité.
+- **Optimisation :** chaque source possède maintenant plusieurs points à résoudre et preuves à chercher ; un test refuse une liste de preuves vide.
+- **Limite :** auto-descriptions des projets, lecture partielle, aucun code exécuté, aucun audit indépendant recensé dans cette passe.
+- **Prochaine action :** attendre le profil et la voie B/C, puis rechercher spécifications, audits et configuration exacte seulement pour les candidats encore pertinents.
+
 ## 2026-10-17 — Sources candidates épinglées sans sélection
 
 - **Initiative :** `vote-distanciel-verifiable`.

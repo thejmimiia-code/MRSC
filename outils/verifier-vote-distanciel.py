@@ -191,10 +191,14 @@ def verifier_sources(registre: dict) -> list[str]:
         erreurs.append("relevé contenant exactement Belenios, Helios et ElectionGuard")
     champs = {
         "id", "depot", "url", "branche", "commit", "date_commit", "archive",
-        "licence_api", "derniere_release_github", "observation_readme", "limite", "statut",
+        "licence_api", "derniere_release_github", "observation_readme", "limite",
+        "points_a_resoudre", "preuves_a_chercher", "statut",
     }
     for index, projet in enumerate(projets, start=1):
-        vides = [champ for champ in champs if champ not in projet or projet.get(champ) in {None, ""}]
+        vides = [
+            champ for champ in champs
+            if champ not in projet or projet.get(champ) is None or projet.get(champ) == ""
+        ]
         if vides:
             erreurs.append(f"source {index} avec champs renseignés : {', '.join(sorted(vides))}")
         if not re.fullmatch(r"[0-9a-f]{40}", str(projet.get("commit", ""))):
@@ -203,6 +207,10 @@ def verifier_sources(registre: dict) -> list[str]:
             dt.datetime.fromisoformat(str(projet.get("date_commit", "")).replace("Z", "+00:00"))
         except ValueError:
             erreurs.append(f"source {projet.get('id', index)} avec date de commit ISO")
+        for champ_liste in ("points_a_resoudre", "preuves_a_chercher"):
+            valeurs = projet.get(champ_liste, [])
+            if not isinstance(valeurs, list) or len(valeurs) < 2 or any(not isinstance(v, str) or not v for v in valeurs):
+                erreurs.append(f"source {projet.get('id', index)} avec {champ_liste} explicites")
         if projet.get("statut") != "a-evaluer":
             erreurs.append(f"source {projet.get('id', index)} maintenue à évaluer")
         if projet.get("archive") is not False:
