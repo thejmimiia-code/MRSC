@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Vérificateur prospectif durci après fusion
+
+- **Initiative :** `prospective-apprentissages-2030`.
+- **Décision :** supprimer le nombre de domaines codé en dur et le recalculer depuis le catalogue ; couvrir le comptage de la Boussole par trois tests unitaires.
+- **Résultat :** le contrôle suit désormais cinq valeurs internes et refuse explicitement une section ou une liste absente.
+- **Limite :** les tests portent sur la synchronisation structurelle, pas sur la qualité des questions ni sur le choix prospectif.
+- **Prochaine action :** faire relire les six risques du pré-mortem et attribuer les rôles de décision.
+
 ## 2026-10-17 — Brief prospectif rendu vérifiable
 
 - **Initiative :** `prospective-apprentissages-2030`.

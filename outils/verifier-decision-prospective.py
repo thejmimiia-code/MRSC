@@ -40,12 +40,13 @@ def principal() -> int:
     initiatives = charger_toml(PORTEFEUILLE).get("initiative", [])
     fiches = len(catalogue)
     prototypes = sum(fiche.get("statut_editorial") == "Prototype à relire" for fiche in catalogue)
+    domaines = len({fiche.get("domaine") for fiche in catalogue if fiche.get("domaine")})
     total_initiatives = len(initiatives)
     p0 = sum(initiative.get("priorite") == "P0" for initiative in initiatives)
     questions = compter_questions_boussole(APPRENDRE.read_text(encoding="utf-8"))
 
     attentes = {
-        "fiches": rf"\| Fiches d'apprentissage publiées \| {fiches} dans 15 domaines \|",
+        "fiches et domaines": rf"\| Fiches d'apprentissage publiées \| {fiches} dans {domaines} domaines \|",
         "prototypes": rf"\| Fiches explicitement « prototypes à relire » \| \*\*{prototypes}\*\* \|",
         "initiatives": rf"\| Initiatives R&D suivies \| {total_initiatives}, dont {p0} en priorité P0 \|",
         "Boussole": rf"\| Boussole publiée \| {questions} questions statiques,",
@@ -54,14 +55,14 @@ def principal() -> int:
     if erreurs:
         print("Brief prospectif désynchronisé : " + ", ".join(erreurs), file=sys.stderr)
         print(
-            f"Valeurs calculées : {fiches} fiches, {prototypes} prototypes, "
+            f"Valeurs calculées : {fiches} fiches dans {domaines} domaines, {prototypes} prototypes, "
             f"{total_initiatives} initiatives dont {p0} P0, {questions} questions.",
             file=sys.stderr,
         )
         return 1
 
     print(
-        f"Brief prospectif synchronisé : {fiches} fiches, {prototypes} prototypes, "
+        f"Brief prospectif synchronisé : {fiches} fiches dans {domaines} domaines, {prototypes} prototypes, "
         f"{total_initiatives} initiatives dont {p0} P0, {questions} questions."
     )
     return 0
