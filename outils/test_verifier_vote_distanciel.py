@@ -24,6 +24,7 @@ SOURCES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-sources.toml"
 PROFILS_PATH = RACINE / "docs" / "rd" / "vote-distanciel-profils.toml"
 REVUES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-revues.toml"
 DONNEES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-donnees.toml"
+CORRELATION_PATH = RACINE / "docs" / "rd" / "vote-distanciel-correlation.toml"
 
 
 def table_decision(valeurs: list[str]) -> str:
@@ -55,6 +56,8 @@ class RegistreMenacesTests(unittest.TestCase):
             cls.revues = tomllib.load(fichier)
         with DONNEES_PATH.open("rb") as fichier:
             cls.donnees = tomllib.load(fichier)
+        with CORRELATION_PATH.open("rb") as fichier:
+            cls.correlation = tomllib.load(fichier)
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -165,6 +168,24 @@ class RegistreMenacesTests(unittest.TestCase):
         registre = copy.deepcopy(self.comparaison)
         registre["critere"][0]["bloquant"] = False
         self.assertTrue(any("maintenu bloquant" in erreur for erreur in MODULE.verifier_comparaison(registre)))
+
+    def test_epreuve_correlation_courante_reste_non_executable(self):
+        self.assertEqual(MODULE.verifier_correlation(self.correlation), [])
+
+    def test_refuse_un_seuil_de_correlation_invente(self):
+        registre = copy.deepcopy(self.correlation)
+        registre["meta"]["seuil_accepte"] = "0.42"
+        self.assertTrue(any("aucun seuil" in erreur for erreur in MODULE.verifier_correlation(registre)))
+
+    def test_refuse_l_autorisation_prematuree_de_l_epreuve(self):
+        registre = copy.deepcopy(self.correlation)
+        registre["meta"]["execution_autorisee"] = True
+        self.assertTrue(any("non exécutable" in erreur for erreur in MODULE.verifier_correlation(registre)))
+
+    def test_refuse_une_vue_qui_emploie_une_categorie_inconnue(self):
+        registre = copy.deepcopy(self.correlation)
+        registre["vue"][0]["categories"].append("adresse-ip-reelle")
+        self.assertTrue(any("catégorie inconnue" in erreur for erreur in MODULE.verifier_correlation(registre)))
 
     def test_modele_de_donnees_courant_separe_identite_et_bulletin(self):
         self.assertEqual(MODULE.verifier_donnees(self.donnees), [])

@@ -25,6 +25,7 @@ SOURCES = RACINE / "docs" / "rd" / "vote-distanciel-sources.toml"
 PROFILS = RACINE / "docs" / "rd" / "vote-distanciel-profils.toml"
 REVUES = RACINE / "docs" / "rd" / "vote-distanciel-revues.toml"
 DONNEES = RACINE / "docs" / "rd" / "vote-distanciel-donnees.toml"
+CORRELATION = RACINE / "docs" / "rd" / "vote-distanciel-correlation.toml"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -275,6 +276,53 @@ def verifier_donnees(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_correlation(registre: dict) -> list[str]:
+    """Vérifie que l'épreuve reste synthétique, non exécutable et sans seuil inventé."""
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "vote-distanciel-verifiable"
+        or meta.get("statut") != "a-faire-expertiser"
+        or meta.get("donnees") != "synthetiques-uniquement"
+        or meta.get("execution_autorisee") is not False
+    ):
+        erreurs.append("épreuve de corrélation synthétique, non exécutable et à expertiser")
+    if meta.get("seuil_accepte") != "a-definir-avant-exercice-par-revue-humaine":
+        erreurs.append("aucun seuil de corrélation inventé avant revue humaine")
+    if not meta.get("regle_arret"):
+        erreurs.append("épreuve de corrélation avec règle d’arrêt")
+
+    vues = registre.get("vue", [])
+    ids_vues = [vue.get("id") for vue in vues]
+    vues_requises = {"emetteur", "urne", "public", "collusion-emetteur-urne"}
+    if set(ids_vues) != vues_requises or len(ids_vues) != len(set(ids_vues)):
+        erreurs.append("exactement 4 vues d’attaque distinctes")
+    for vue in vues:
+        categories = vue.get("categories", [])
+        if not vue.get("acteur_projete") or not categories or not vue.get("contenu_interdit"):
+            erreurs.append(f"vue {vue.get('id', '?')} bornée par acteur, catégories et interdits")
+        if set(categories) - CATEGORIES_DONNEES:
+            erreurs.append(f"vue {vue.get('id', '?')} sans catégorie inconnue")
+
+    signaux = registre.get("signal", [])
+    ids_signaux = [signal.get("id") for signal in signaux]
+    if set(ids_signaux) != {"temps", "taille", "identifiant", "reseau", "sauvegarde"}:
+        erreurs.append("épreuve couvrant exactement les 5 signaux de corrélation")
+    if len(ids_signaux) != len(set(ids_signaux)):
+        erreurs.append("signaux de corrélation sans doublon")
+    for signal in signaux:
+        if not signal.get("variation_synthetique") or not signal.get("mesure_projetee"):
+            erreurs.append(f"signal {signal.get('id', '?')} avec variation et mesure projetées")
+
+    prerequis = registre.get("prerequis", [])
+    if len(prerequis) < 5 or len({item.get("id") for item in prerequis}) != len(prerequis):
+        erreurs.append("au moins 5 prérequis sans doublon")
+    for item in prerequis:
+        if item.get("statut") != "a-attribuer" or not item.get("preuve_attendue"):
+            erreurs.append(f"prérequis {item.get('id', '?')} maintenu à attribuer avec preuve")
+    return erreurs
+
+
 def verifier_revues(registre: dict) -> list[str]:
     erreurs: list[str] = []
     meta = registre.get("meta", {})
@@ -440,6 +488,10 @@ def principal() -> int:
         donnees = tomllib.load(fichier)
     manquants.extend(verifier_donnees(donnees))
 
+    with CORRELATION.open("rb") as fichier:
+        correlation = tomllib.load(fichier)
+    manquants.extend(verifier_correlation(correlation))
+
     with REVUES.open("rb") as fichier:
         revues = tomllib.load(fichier)
     manquants.extend(verifier_revues(revues))
@@ -471,7 +523,7 @@ def principal() -> int:
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
         "à expertiser, 18 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
-        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories et 6 liaisons interdites, "
+        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites et 5 signaux de corrélation, "
         f"6 rôles et 5 revues à attribuer, décision {etat_decision}, initiative P0 à cadrer, "
         "aucune identité ni bulletin réel autorisé."
     )
