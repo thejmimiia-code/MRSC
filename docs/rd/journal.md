@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Accessibilité : toutes les pages et les panneaux ouverts
+
+- **Initiative :** `optimisation-du-site` (P1, `a-tester`).
+- **Signal :** le premier balayage ne couvrait que huit pages au repos. Deux angles manquaient : les 81 fiches et pages secondaires, et les panneaux fermés par défaut, invisibles à axe tant qu'ils ne sont pas ouverts.
+- **Mesures :** `outils/verifier-accessibilite.cjs` rend le protocole reproductible. Mode `--etendu` : 96 pages × 360/1 280 px, **192 exécutions sans violation**. Mode par défaut : 12 pages × 2 largeurs et 13 états interactifs, **37 exécutions**. La page `simulateur.html` est chargée sans `networkidle0` (iframe et appels asynchrones), avec cinq secondes d'attente.
+- **Défaut trouvé par les états :** panneau « Affichage » déplié, les libellés de `A−`, `A+` et « Espacement du texte » ne reprenaient pas leur texte visible ; ce défaut était invisible tant que le panneau restait fermé.
+- **Décisions :** préfixer les libellés `A−`/`A+` dans les 94 pages et dans `outils/construire-apprentissages.py` ; laisser aux quatre boutons à bascule un nom stable et confier l'état à `aria-pressed` au lieu d'un libellé « activer/désactiver » qui doublait l'information ; régénérer le simulateur et revérifier les fiches générées.
+- **Preuve :** `docs/rd/accessibilite-2026-10-17.md`, mis à jour avec les trois passes.
+- **Contrôles réellement exécutés :** `outils/verifier-accessibilite.cjs` (37 exécutions), `--etendu` (192 exécutions), `verifier-integration.py`, `verifier-site-statique.py`, `verifier-rd-continue.py`, fiches et simulateur `--verifier`, `py_compile`, `test-experience.cjs` 8/8.
+- **Limites :** Chromium seulement ; pas de lecteur d'écran, pas de navigation clavier exhaustive, pas de revue experte ; seuls les états listés sont visités ; la version publiée n'est pas contrôlée.
+- **Prochaine action :** faire relire ces corrections par une personne compétente, si possible avec un utilisateur de lecteur d'écran, puis étendre le balayage aux formulaires en erreur et aux contenus repliés.
+
 ## 2026-10-17 — Noms accessibles et contrastes : balayage axe-core
 
 - **Initiative :** `optimisation-du-site` (P1, `a-tester`).

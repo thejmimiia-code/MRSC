@@ -743,9 +743,6 @@ SCRIPT_AFFICHAGE = r"""
     root.classList.toggle("contraste-renforce", contrast);
     if (contrastButton) {
       contrastButton.setAttribute("aria-pressed", String(contrast));
-      contrastButton.setAttribute("aria-label", contrast
-        ? "Contraste + — désactiver le contraste renforcé"
-        : "Contraste + — activer le contraste renforcé");
     }
   };
   const applySpacing = (value) => {
@@ -753,9 +750,6 @@ SCRIPT_AFFICHAGE = r"""
     root.classList.toggle("espacement-renforce", spacing);
     if (spacingButton) {
       spacingButton.setAttribute("aria-pressed", String(spacing));
-      spacingButton.setAttribute("aria-label", spacing
-        ? "Interligne + — désactiver l’espacement renforcé"
-        : "Interligne + — activer l’espacement renforcé");
     }
   };
   const applyLayout = (value) => {

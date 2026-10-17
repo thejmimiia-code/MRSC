@@ -1,22 +1,23 @@
-# Accessibilité : balayage automatique du 17 octobre 2026
+# Accessibilité : balayages automatiques du 17 octobre 2026
 
 Statut : **relevé technique par l'agent**, pas un audit d'accessibilité, pas une conformité RGAA ou WCAG, pas une validation par une personne experte ni par des personnes utilisatrices.
 
 ## Pourquoi
 
-L'initiative `optimisation-du-site` (P1, état `a-tester`) demandait de vérifier les pages types au clavier, au zoom et avec des technologies d'assistance. Les essais navigateur du dépôt couvrent le réflow, le zoom et les réglages d'affichage, mais aucun contrôle automatique ne portait sur les noms accessibles et les contrastes. Cette passe comble ce manque mesurable, sans prétendre remplacer une revue humaine.
+L'initiative `optimisation-du-site` (P1, état `a-tester`) demandait de vérifier les pages types au clavier, au zoom et avec des technologies d'assistance. Les essais navigateur du dépôt couvrent le réflow, le zoom et les réglages d'affichage, mais aucun contrôle automatique ne portait sur les noms accessibles et les contrastes. Ces passes comblent ce manque mesurable, sans prétendre remplacer une revue humaine.
 
 ## Méthode
 
 - Outil : `axe-core` 4.14.0, exécuté dans Chromium via Puppeteer, sur le site servi localement par `outils/serveur-local.py` (moteur désactivé).
-- Pages : accueil, apprendre, une fiche type (`apprendre/fiches/civ-verifier-information.html`), Les Mondes, transparence, simulateur (copie locale générée), ÉVA, documents.
-- Largeurs : 360 px et 1 280 px, soit 16 exécutions.
-- Le balayage intervient après chargement complet des scripts, donc sur les composants construits par JavaScript (cartes de mission, fiches d'apprentissage, commandes d'affichage).
+- Script reproductible : `outils/verifier-accessibilite.cjs`. Par défaut, il balaie 12 pages représentatives aux deux largeurs et 13 états interactifs ; avec `--etendu`, il balaie toutes les pages HTML du dépôt aux deux largeurs.
+- Dépendances installées hors dépôt : `puppeteer-core`, `@sparticuz/chromium` et `axe-core` (commandes en tête du script). Aucun paquet n'est ajouté au dépôt.
+- Largeurs : 360 px et 1 280 px.
+- Le balayage intervient après chargement des scripts, donc sur les composants construits par JavaScript (cartes de mission, fiches d'apprentissage, commandes d'affichage).
 - Aucune donnée personnelle, aucun réseau : tout est servi depuis le dépôt local.
 
-## Résultat avant correction
+## Premier balayage : pages types
 
-Deux règles seulement échouaient sur les 16 exécutions :
+Huit pages × deux largeurs, soit 16 exécutions. Deux règles seulement échouaient :
 
 | Règle | Nœuds | Cause mesurée |
 | --- | --- | --- |
@@ -25,35 +26,54 @@ Deux règles seulement échouaient sur les 16 exécutions :
 
 Aucune autre règle axe n'a échoué sur ces pages ; cela ne signifie pas que les autres critères sont satisfaits, seulement qu'axe n'a rien détecté parmi ceux qu'il sait tester.
 
-## Corrections apportées
+### Corrections
 
 - `assets/css/site.css` : `.footer-rd` passe à `rgba(255, 255, 255, .74)` (contraste calculé 9,3:1 sur `#121f43`) ; les liens de ce paragraphe passent à `#cfe0ff` (12,1:1) ; exception `forced-colors` pour que le texte redevienne `CanvasText` en mode contraste système ; utilitaire `.visually-hidden` ajouté.
-- `assets/js/site.js` et `outils/construire-simulateur.py` : les libellés accessibles des commandes d'affichage commencent désormais par leur texte visible (« Contraste + — … », « Interligne + — … », « A− — … », « A+ — … »).
+- `assets/js/site.js` et `outils/construire-simulateur.py` : les libellés accessibles des boutons `A−` et `A+` commencent par leur texte visible.
 - `assets/js/anglais-aventure.js` :
   - les boutons de mission ne posent plus d'`aria-label` : leur nom accessible est directement leur contenu visible (numéro, repère, titre, consigne, action) ;
   - les boutons de monde portent un glyphe `aria-hidden` et une mention masquée « Filtrer les fiches de ce monde. » ;
   - les boutons de parcours gardent un libellé explicite qui commence par leur texte visible.
 
-## Résultat après correction
+Après correction, ces 16 exécutions ne remontent plus aucune violation.
 
-Les 16 exécutions (8 pages × 2 largeurs) ne remontent plus aucune violation axe, y compris pour les deux règles ci-dessus.
+## Deuxième passe : toutes les pages
 
-Contrôles fonctionnels complémentaires exécutés le même jour :
+`outils/verifier-accessibilite.cjs --etendu` : 96 pages HTML × deux largeurs, soit **192 exécutions, aucune violation axe**.
 
-- `outils/test-experience.cjs` : 8/8 essais navigateur réussis ;
-- sonde locale sur Les Mondes : ouverture d'une escale, focus sur le titre, retour à la carte avec focus rendu au bouton d'origine, filtre par monde appliqué, nom accessible du bouton de mission cohérent (« 01 Pré-A1 · A1 La gare des marées … Choisir cette escale »).
+La page `simulateur.html` ne se stabilise pas sur `networkidle0` (iframe et appels asynchrones) ; le script y charge la page puis attend cinq secondes avant le balayage.
 
-## Limites
+## Troisième passe : états interactifs
+
+Le balayage au repos ne voit pas les panneaux fermés. Treize états ont donc été ouverts puis analysés sur les deux largeurs :
+
+- menu mobile ouvert ;
+- panneau « Affichage » déplié sur l'accueil ;
+- filtre actif sur Apprendre ;
+- mission ouverte dans Les Mondes, puis filtre par monde ;
+- commandes d'affichage rendues visibles dans le simulateur, puis texte agrandi.
+
+Ce balayage a révélé un défaut que les passes précédentes ne pouvaient pas voir : dans le panneau « Affichage » (fermé par défaut), les libellés de `A−`, `A+` et « Espacement du texte » ne contenaient pas leur texte visible.
+
+### Corrections
+
+- `A−` et `A+` reçoivent un libellé qui commence par le glyphe visible, dans les 94 pages qui portent l'en-tête et dans le générateur `outils/construire-apprentissages.py`.
+- Les quatre boutons à bascule (« Contraste renforcé », « Espacement du texte » sur le site ; « Contraste + », « Interligne + » dans le simulateur) ne modifient plus leur libellé à l'activation : leur nom reste celui affiché et `aria-pressed` porte l'état. Un libellé qui bascule entre « activer » et « désactiver » doublait cette information et créait le décalage.
+- `simulateur/index.html` a été régénéré ; les 81 fiches ont été vérifiées après modification du générateur.
+
+Après correction, les **37 exécutions** du script par défaut (24 pages + 13 états) ne remontent aucune violation.
+
+## Ce que ces mesures ne disent pas
 
 - axe ne couvre qu'une partie des critères WCAG ; l'absence de violation n'est ni une conformité ni une preuve d'utilisabilité.
 - Aucun essai avec lecteur d'écran, aucune navigation clavier exhaustive, aucune revue par une personne experte en accessibilité.
 - Chromium seulement ; Firefox et Safari ne sont pas testés.
-- Les états dynamiques ne sont balayés qu'au chargement et après les interactions de la sonde, pas pendant toute une session.
+- Seuls les états listés sont balayés, une fois ; une session complète, les formulaires en erreur, les contenus repliés des fiches et les missions jusqu'au bout ne le sont pas.
 - Les contrastes recalculés à la main portent sur le fond connu du pied de page ; un changement de thème ou de fond invaliderait ces valeurs.
-- Aucun contrôle de la version publiée sur GitHub Pages dans cette passe.
+- La version publiée sur GitHub Pages n'est pas contrôlée dans cette passe.
 
 ## Suite
 
 - Faire relire les corrections par une personne compétente en accessibilité et, si possible, par un utilisateur de lecteur d'écran.
-- Ajouter les états interactifs (menu ouvert, panneau de réglages, mission en cours) à un balayage ultérieur.
+- Élargir les états balayés (formulaires, contenus repliés, mission terminée) et refaire la mesure après toute modification des composants interactifs.
 - Ne pas modifier l'état de `optimisation-du-site` avant cette relecture : les preuves restent des mesures locales par l'agent.
