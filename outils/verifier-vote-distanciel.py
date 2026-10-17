@@ -13,6 +13,18 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parent.parent
 NOTE = RACINE / "docs" / "rd" / "vote-distanciel-verifiable.md"
 PORTEFEUILLE = RACINE / "docs" / "rd" / "portefeuille.toml"
+MENACES = RACINE / "docs" / "rd" / "vote-distanciel-menaces.toml"
+
+MENACES_REQUISES = {
+    "serveur-urne-compromis", "terminal-compromis", "coercition-domicile",
+    "correlation-metadonnees", "collusion-autorites", "perte-de-cles",
+    "deni-de-service", "emission-frauduleuse",
+    "logiciel-ou-dependance-compromis", "reidentification-future",
+}
+CHAMPS_MENACE = {
+    "id", "acteur", "actif", "scenario", "controle_propose",
+    "preuve_attendue", "risque_residuel", "condition_arret", "statut",
+}
 
 SECTIONS_REQUISES = [
     "## 1. Reformulation de l’objectif",
@@ -49,6 +61,22 @@ def principal() -> int:
         if element.casefold() not in texte_normalise
     )
 
+    with MENACES.open("rb") as fichier:
+        registre = tomllib.load(fichier)
+    menaces = registre.get("menace", [])
+    ids = [menace.get("id") for menace in menaces]
+    if set(ids) != MENACES_REQUISES or len(ids) != len(set(ids)):
+        manquants.append("registre contenant exactement les 10 menaces requises sans doublon")
+    for index, menace in enumerate(menaces, start=1):
+        champs_vides = [champ for champ in CHAMPS_MENACE if not menace.get(champ)]
+        if champs_vides:
+            manquants.append(f"menace {index} avec champs renseignés : {', '.join(sorted(champs_vides))}")
+        if menace.get("statut") != "a-expertiser":
+            manquants.append(f"menace {menace.get('id', index)} maintenue à l’état a-expertiser")
+    invariants = registre.get("invariant", [])
+    if len(invariants) < 7 or any(not item.get("preuve_attendue") for item in invariants):
+        manquants.append("au moins 7 invariants avec preuve attendue")
+
     with PORTEFEUILLE.open("rb") as fichier:
         initiatives = tomllib.load(fichier).get("initiative", [])
     votes = [item for item in initiatives if item.get("id") == "vote-distanciel-verifiable"]
@@ -71,8 +99,8 @@ def principal() -> int:
         return 1
 
     print(
-        "Cadrage du vote distanciel présent : 9 sections, initiative P0 à cadrer, "
-        "aucune identité ni bulletin réel autorisé."
+        "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
+        "à expertiser, initiative P0 à cadrer, aucune identité ni bulletin réel autorisé."
     )
     return 0
 

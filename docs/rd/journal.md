@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Modèle de menace du vote rendu reproductible
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** transformer la revue contradictoire en registre TOML maintenable plutôt qu’en liste implicite dans une architecture.
+- **Résultat :** 7 invariants et 10 menaces couvrent serveur, terminal, coercition, métadonnées, collusion, clés, disponibilité, émission, chaîne logicielle et réidentification. Chaque menace distingue contrôle proposé, preuve attendue, risque résiduel et condition d’arrêt ; toutes restent `a-expertiser`.
+- **Optimisation :** la CI refuse une menace absente, dupliquée, incomplète ou présentée prématurément comme maîtrisée.
+- **Limite :** ce registre est une auto-analyse de conception ; il n’est ni exhaustif, ni audité, ni validé par une personne spécialiste du vote ou de la cryptographie.
+- **Prochaine action :** faire critiquer le registre par les rôles juridique, cryptographique, protection des données, opérations et accessibilité avant tout choix d’outil.
+
 ## 2026-10-17 — Vote distanciel vérifiable cadré sans promesse absolue
 
 - **Initiative :** `vote-distanciel-verifiable`.
