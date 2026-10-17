@@ -20,6 +20,7 @@ CAS_PATH = RACINE / "docs" / "rd" / "vote-distanciel-cas-essai.toml"
 STATUTS_PATH = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 DECISION_PATH = RACINE / "docs" / "rd" / "vote-distanciel-decision.md"
 COMPARAISON_PATH = RACINE / "docs" / "rd" / "vote-distanciel-comparaison.toml"
+SOURCES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-sources.toml"
 
 
 def table_decision(valeurs: list[str]) -> str:
@@ -43,6 +44,8 @@ class RegistreMenacesTests(unittest.TestCase):
         cls.decision = DECISION_PATH.read_text(encoding="utf-8")
         with COMPARAISON_PATH.open("rb") as fichier:
             cls.comparaison = tomllib.load(fichier)
+        with SOURCES_PATH.open("rb") as fichier:
+            cls.sources = tomllib.load(fichier)
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -134,6 +137,29 @@ class RegistreMenacesTests(unittest.TestCase):
         registre = copy.deepcopy(self.comparaison)
         registre["critere"][0]["bloquant"] = False
         self.assertTrue(any("maintenu bloquant" in erreur for erreur in MODULE.verifier_comparaison(registre)))
+
+    def test_sources_courantes_sont_epinglees_sans_selection(self):
+        self.assertEqual(MODULE.verifier_sources(self.sources), [])
+
+    def test_refuse_un_commit_abrege(self):
+        registre = copy.deepcopy(self.sources)
+        registre["projet"][0]["commit"] = "8888045"
+        self.assertTrue(any("commit Git complet" in erreur for erreur in MODULE.verifier_sources(registre)))
+
+    def test_refuse_une_source_dite_evaluee(self):
+        registre = copy.deepcopy(self.sources)
+        registre["projet"][0]["statut"] = "selectionnee"
+        self.assertTrue(any("à évaluer" in erreur for erreur in MODULE.verifier_sources(registre)))
+
+    def test_refuse_une_selection_dans_le_releve(self):
+        registre = copy.deepcopy(self.sources)
+        registre["projet"][0]["selection"] = True
+        self.assertTrue(any("sans score ni sélection" in erreur for erreur in MODULE.verifier_sources(registre)))
+
+    def test_refuse_une_source_sans_preuves_a_chercher(self):
+        registre = copy.deepcopy(self.sources)
+        registre["projet"][0]["preuves_a_chercher"] = []
+        self.assertTrue(any("preuves_a_chercher" in erreur for erreur in MODULE.verifier_sources(registre)))
 
     def test_decision_courante_est_en_attente(self):
         self.assertEqual(MODULE.verifier_decision(self.decision), ("en attente", []))

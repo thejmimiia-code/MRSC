@@ -34,7 +34,7 @@ Puis choisir une voie :
 - **C — Expertiser l’auto-hébergement d’un logiciel existant.** Examiner compétences, clés, builds, mises à jour, reprise et exploitation.
 - **D — Construire un système.** Option bloquée à ce stade ; elle ne peut pas être choisie dans la trace.
 
-A ou `aucun` sont des décisions valides. La recherche n’a pas à aboutir à un outil. La grille [`vote-distanciel-comparaison.toml`](vote-distanciel-comparaison.toml) prépare quinze critères bloquants sans score, rang ni probabilité ; toutes les options restent `a-evaluer`.
+A ou `aucun` sont des décisions valides. La recherche n’a pas à aboutir à un outil. La grille [`vote-distanciel-comparaison.toml`](vote-distanciel-comparaison.toml) prépare quinze critères bloquants sans score, rang ni probabilité ; toutes les options restent `a-evaluer`. Le relevé [`vote-distanciel-sources.toml`](vote-distanciel-sources.toml) épingle les trois dépôts à des commits observés le 17 octobre 2026 ; les [`premiers écarts et inconnues`](vote-distanciel-premiers-ecarts.md) orientent les preuves à chercher sans constituer une évaluation.
 
 ## 3. Conditions cumulatives avant un banc synthétique
 
