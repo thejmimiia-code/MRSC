@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Chronologie de décision prospective contrôlée
+
+- **Initiative :** `prospective-apprentissages-2030`.
+- **Décision :** empêcher une trace où la décision précède le brief ou où le réexamen n’est pas postérieur à la décision.
+- **Résultat :** trois tests supplémentaires couvrent les deux chronologies impossibles et un cas valide ; la suite atteint 20 tests.
+- **Limite :** l’ordre des dates ne démontre ni qu’une réunion a eu lieu, ni que l’instance indiquée avait mandat, ni que le réexamen se tiendra.
+- **Prochaine action :** conserver la trace vide jusqu’à une décision humaine, puis renseigner une date de réexamen réellement convenue.
+
 ## 2026-10-17 — Décision et portefeuille rendus cohérents
 
 - **Initiative :** `prospective-apprentissages-2030`.

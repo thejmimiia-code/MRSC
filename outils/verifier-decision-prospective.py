@@ -52,7 +52,7 @@ def date_du_brief(markdown: str) -> dt.date:
     return date
 
 
-def etat_trace_decision(markdown: str) -> str:
+def etat_trace_decision(markdown: str, date_brief: dt.date | None = None) -> str:
     section = re.search(r"## 10\. Trace de décision(?P<contenu>.*?)(?:\n## |\Z)", markdown, re.S)
     if not section:
         raise ValueError("section de trace de décision introuvable")
@@ -74,10 +74,14 @@ def etat_trace_decision(markdown: str) -> str:
     if valeurs[0] not in {"A", "B", "C"}:
         raise ValueError("option retenue invalide : utiliser A, B ou C")
     try:
-        dt.date.fromisoformat(valeurs[1])
-        dt.date.fromisoformat(valeurs[4])
+        date_decision = dt.date.fromisoformat(valeurs[1])
+        date_reexamen = dt.date.fromisoformat(valeurs[4])
     except ValueError as erreur:
         raise ValueError("dates de décision attendues au format AAAA-MM-JJ") from erreur
+    if date_brief and date_decision < date_brief:
+        raise ValueError("date de décision antérieure à la date du brief")
+    if date_reexamen <= date_decision:
+        raise ValueError("date de réexamen attendue après la date de décision")
     return f"option {valeurs[0]} consignée"
 
 
@@ -115,7 +119,7 @@ def date_prochaine_revue(meta: dict) -> dt.date:
 def principal() -> int:
     brief = BRIEF.read_text(encoding="utf-8")
     date_reference = date_du_brief(brief)
-    decision = etat_trace_decision(brief)
+    decision = etat_trace_decision(brief, date_reference)
     catalogue = charger_toml(CATALOGUE).get("fiche", [])
     portefeuille = charger_toml(PORTEFEUILLE)
     initiatives = portefeuille.get("initiative", [])

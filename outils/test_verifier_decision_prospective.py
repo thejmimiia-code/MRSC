@@ -70,6 +70,23 @@ class CompterQuestionsBoussoleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "A, B ou C"):
             MODULE.etat_trace_decision(texte)
 
+    def test_refuse_decision_anterieure_au_brief(self):
+        texte = trace_decision(["B", "2026-10-16", "Conseil", "Aucune", "2027-01-31"])
+        with self.assertRaisesRegex(ValueError, "antérieure"):
+            MODULE.etat_trace_decision(texte, dt.date(2026, 10, 17))
+
+    def test_refuse_reexamen_le_jour_de_la_decision(self):
+        texte = trace_decision(["B", "2026-10-17", "Conseil", "Aucune", "2026-10-17"])
+        with self.assertRaisesRegex(ValueError, "après"):
+            MODULE.etat_trace_decision(texte, dt.date(2026, 10, 17))
+
+    def test_accepte_une_chronologie_coherente(self):
+        texte = trace_decision(["B", "2026-10-18", "Conseil", "Aucune", "2027-01-31"])
+        self.assertEqual(
+            MODULE.etat_trace_decision(texte, dt.date(2026, 10, 17)),
+            "option B consignée",
+        )
+
     def test_aligne_attente_et_initiative_a_cadrer(self):
         initiatives = [{"id": "prospective-apprentissages-2030", "etat": "a-cadrer"}]
         self.assertEqual(MODULE.verifier_etat_initiative("en attente", initiatives), "a-cadrer")
