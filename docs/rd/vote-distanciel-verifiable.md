@@ -28,6 +28,8 @@ L’association doit préciser, avec une relecture juridique compétente :
 
 Tant que ces réponses et la base juridique ne sont pas consignées, le travail reste documentaire et aucun bulletin réel ne doit être recueilli.
 
+Un premier relevé de la copie locale des statuts est consigné dans [`vote-distanciel-statuts.md`](vote-distanciel-statuts.md) et [`vote-distanciel-regles.toml`](vote-distanciel-regles.toml). Il montre qu’il n’existe pas un scrutin interne unique : Bureau exécutif, conseil d’éthique, assemblée territoriale, AGO, AGE et dissolution ont des règles différentes. Tous les relevés restent `a-faire-relire` ; ils ne sont pas encore des paramètres exécutables.
+
 ## 3. Propriétés à ne pas confondre
 
 | Propriété | Preuve attendue | Ce qu’elle ne garantit pas |

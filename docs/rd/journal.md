@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Directives statutaires relevées pour le vote distanciel
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Source :** copie locale `assets/documents/statuts-2020.pdf`, 25 pages, empreinte SHA-256 `938bd5b72d70ab4e3737f61b91818a6813b29cc5453da44c81d5b7f33ca143c3`. Extraction locale pypdf 6.1.1 ; le PDF chiffré a produit des avertissements d’objets, donc confrontation visuelle et relecture compétente encore requises.
+- **Constat :** les statuts admettent plusieurs consultations électroniques, dont une AGO numérique ouverte au moins sept jours, mais distinguent Bureau, conseil d’éthique, territoriale, AGO, AGE et dissolution. Quorum, majorité, procuration, secret, blanc, délai et départage ne sont pas uniformes.
+- **Décision :** ne pas créer une règle générique. Consigner 15 relevés `a-faire-relire`, leurs pages, portées et ambiguïtés ; lier leur empreinte au PDF source.
+- **Ambiguïtés bloquantes :** présence/réponse numérique, secret et voix prépondérante, procuration secrète, qualification des membres concernés, article 15 face à la dissolution, portée du blanc et version du règlement intérieur.
+- **Optimisation :** quatre tests supplémentaires refusent empreinte obsolète, règle absente ou statut prématurément validé.
+- **Prochaine action :** faire confirmer la version applicable et les profils par l’association et une personne compétente avant de choisir un seul type de scrutin pour un éventuel banc synthétique.
+
 ## 2026-10-17 — Options de vote et tests négatifs du registre
 
 - **Initiative :** `vote-distanciel-verifiable`.

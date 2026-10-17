@@ -6,6 +6,7 @@ Ce script ne teste aucune cryptographie et ne certifie aucun système de vote.
 
 from __future__ import annotations
 
+import hashlib
 import sys
 import tomllib
 from pathlib import Path
@@ -14,6 +15,8 @@ RACINE = Path(__file__).resolve().parent.parent
 NOTE = RACINE / "docs" / "rd" / "vote-distanciel-verifiable.md"
 PORTEFEUILLE = RACINE / "docs" / "rd" / "portefeuille.toml"
 MENACES = RACINE / "docs" / "rd" / "vote-distanciel-menaces.toml"
+REGLES = RACINE / "docs" / "rd" / "vote-distanciel-regles.toml"
+STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
     "serveur-urne-compromis", "terminal-compromis", "coercition-domicile",
@@ -26,6 +29,14 @@ CHAMPS_MENACE = {
     "preuve_attendue", "risque_residuel", "condition_arret", "statut",
 }
 CHAMPS_INVARIANT = {"id", "description", "preuve_attendue"}
+REGLES_REQUISES = {
+    "vote-concernes-impactes", "une-cotisation-une-voix", "bureau-electronique",
+    "bureau-procuration", "territorial-secret-blanc", "ago-corps-ordre-du-jour",
+    "ago-premiere-convocation", "ago-seconde-convocation", "ago-procuration",
+    "ago-secret", "ago-session-numerique", "age-premiere-convocation",
+    "age-procuration", "age-seconde-convocation", "dissolution-seuils",
+}
+CHAMPS_REGLE = {"id", "article", "pages", "portee", "releve", "ambiguite", "statut"}
 
 SECTIONS_REQUISES = [
     "## 1. Reformulation de l’objectif",
@@ -80,6 +91,28 @@ def verifier_registre(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_regles(registre: dict, empreinte_statuts: str) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if meta.get("source") != "assets/documents/statuts-2020.pdf":
+        erreurs.append("registre relié à la copie locale des statuts")
+    if meta.get("sha256") != empreinte_statuts:
+        erreurs.append("empreinte du PDF des statuts synchronisée")
+    if meta.get("statut") != "a-faire-relire":
+        erreurs.append("registre statutaire maintenu à faire relire")
+    regles = registre.get("regle", [])
+    ids = [regle.get("id") for regle in regles]
+    if set(ids) != REGLES_REQUISES or len(ids) != len(set(ids)):
+        erreurs.append("registre contenant exactement les 15 règles statutaires requises sans doublon")
+    for index, regle in enumerate(regles, start=1):
+        champs_vides = [champ for champ in CHAMPS_REGLE if not regle.get(champ)]
+        if champs_vides:
+            erreurs.append(f"règle {index} avec champs renseignés : {', '.join(sorted(champs_vides))}")
+        if regle.get("statut") != "a-faire-relire":
+            erreurs.append(f"règle {regle.get('id', index)} maintenue à faire relire")
+    return erreurs
+
+
 def principal() -> int:
     texte = NOTE.read_text(encoding="utf-8")
     texte_normalise = texte.casefold()
@@ -95,6 +128,11 @@ def principal() -> int:
     with MENACES.open("rb") as fichier:
         registre = tomllib.load(fichier)
     manquants.extend(verifier_registre(registre))
+
+    empreinte_statuts = hashlib.sha256(STATUTS.read_bytes()).hexdigest()
+    with REGLES.open("rb") as fichier:
+        regles = tomllib.load(fichier)
+    manquants.extend(verifier_regles(regles, empreinte_statuts))
 
     with PORTEFEUILLE.open("rb") as fichier:
         initiatives = tomllib.load(fichier).get("initiative", [])
@@ -119,7 +157,8 @@ def principal() -> int:
 
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
-        "à expertiser, initiative P0 à cadrer, aucune identité ni bulletin réel autorisé."
+        "à expertiser, 15 règles statutaires à relire, initiative P0 à cadrer, "
+        "aucune identité ni bulletin réel autorisé."
     )
     return 0
 
