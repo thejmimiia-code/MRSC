@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Assistance distinguée de la procuration et du choix
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** séparer assistance, support, procuration, recours et protection contre la coercition avant toute définition opérationnelle.
+- **Résultat :** six situations synthétiques et quatre séparations fonctionnelles bornent les actes permis, interdits, preuves et conditions d’arrêt.
+- **Prospective :** un canal d’aide peut devenir un canal de coercition, de délégation implicite ou de corrélation ; son existence n’est pas une garantie.
+- **Optimisation :** le contrôle refuse une assistance exécutable, l’absence de condition d’arrêt et la disparition de la frontière assistance–procuration.
+- **Limite :** aucune personne, assistance, procuration, contestation ou suspicion réelle n’est traitée.
+- **Prochaine action :** confronter ces frontières au profil statutaire choisi et aux revues juridique, accessibilité, données et cryptographie.
+
 ## 2026-10-17 — Accessibilité et repli examinés sans donnée de santé
 
 - **Initiative :** `vote-distanciel-verifiable`.

@@ -50,7 +50,8 @@ A ou `aucun` sont des décisions valides. La recherche n’a pas à aboutir à u
 8. Une condition d’arrêt entraîne réellement l’arrêt, sans compensation par un score global.
 9. Les réponses aux sept incidents de continuité sont relues ; aucune panne ne peut déclencher automatiquement une prolongation, une proclamation ou un abaissement des garanties.
 10. Les huit barrières d’accessibilité et les risques de chaque repli sont examinés sans donnée de santé ni affirmation de conformité prématurée.
-11. Les six rôles du [`plan de revues`](vote-distanciel-revues.toml) ont examiné les artefacts relevant de leur responsabilité ; aucune disponibilité n’est supposée.
+11. Assistance, support, procuration et recours sont séparés ; aucun aidant ou technicien ne peut voir, saisir, confirmer ou prouver un choix.
+12. Les six rôles du [`plan de revues`](vote-distanciel-revues.toml) ont examiné les artefacts relevant de leur responsabilité ; aucune disponibilité n’est supposée.
 
 Si une condition manque, la phase reste documentaire.
 
