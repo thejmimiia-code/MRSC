@@ -22,6 +22,7 @@ CAS_ESSAI = RACINE / "docs" / "rd" / "vote-distanciel-cas-essai.toml"
 DECISION = RACINE / "docs" / "rd" / "vote-distanciel-decision.md"
 COMPARAISON = RACINE / "docs" / "rd" / "vote-distanciel-comparaison.toml"
 SOURCES = RACINE / "docs" / "rd" / "vote-distanciel-sources.toml"
+PROFILS = RACINE / "docs" / "rd" / "vote-distanciel-profils.toml"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -46,6 +47,10 @@ CHAMPS_REGLE = {"id", "article", "pages", "portee", "releve", "ambiguite", "stat
 CHAMPS_CAS = {"id", "menaces", "alteration", "attendu", "condition_arret", "statut"}
 OPTIONS_COMPARAISON = {"A", "belenios", "helios", "electionguard"}
 CHAMPS_CRITERE = {"id", "famille", "bloquant", "question", "preuve_attendue"}
+PROFILS_REQUIS = {
+    "bureau-executif", "conseil-ethique", "territoriale-constitutive",
+    "ago-premiere", "ago-seconde", "age-premiere", "age-seconde", "dissolution",
+}
 
 SECTIONS_REQUISES = [
     "## 1. Reformulation de l’objectif",
@@ -119,6 +124,40 @@ def verifier_regles(registre: dict, empreinte_statuts: str) -> list[str]:
             erreurs.append(f"règle {index} avec champs renseignés : {', '.join(sorted(champs_vides))}")
         if regle.get("statut") != "a-faire-relire":
             erreurs.append(f"règle {regle.get('id', index)} maintenue à faire relire")
+    return erreurs
+
+
+def verifier_profils(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if meta.get("initiative") != "vote-distanciel-verifiable":
+        erreurs.append("profils reliés à l’initiative vote-distanciel-verifiable")
+    if meta.get("statut") != "a-faire-relire":
+        erreurs.append("profils maintenus à faire relire")
+    profils = registre.get("profil", [])
+    ids = [profil.get("id") for profil in profils]
+    if set(ids) != PROFILS_REQUIS or len(ids) != len(set(ids)):
+        erreurs.append("registre contenant exactement les 8 profils statutaires")
+    regles_couvertes: set[str] = set()
+    for index, profil in enumerate(profils, start=1):
+        if not profil.get("titre") or not profil.get("regles") or not profil.get("questions_bloquantes"):
+            erreurs.append(f"profil {profil.get('id', index)} avec titre, règles et questions bloquantes")
+        regles = set(profil.get("regles", []))
+        inconnues = regles - REGLES_REQUISES
+        if inconnues:
+            erreurs.append(f"profil {profil.get('id', index)} avec règles inconnues : {', '.join(sorted(inconnues))}")
+        regles_couvertes.update(regles)
+        statut_attendu = "bloque-interpretation" if profil.get("id") == "dissolution" else "a-faire-relire"
+        if profil.get("statut") != statut_attendu:
+            erreurs.append(f"profil {profil.get('id', index)} au statut {statut_attendu}")
+        champs_interdits = {"quorum", "majorite", "duree", "procurations", "secret"} & set(profil)
+        if champs_interdits:
+            erreurs.append(f"profil {profil.get('id', index)} non exécutable avant relecture")
+    # La règle du conseil d'éthique est consignée en référence libre car elle n'est
+    # pas encore structurée dans le registre des 15 règles ; toutes les autres le sont.
+    if not REGLES_REQUISES.issubset(regles_couvertes):
+        manquantes = REGLES_REQUISES - regles_couvertes
+        erreurs.append(f"règles statutaires non reliées aux profils : {', '.join(sorted(manquantes))}")
     return erreurs
 
 
@@ -287,6 +326,10 @@ def principal() -> int:
         regles = tomllib.load(fichier)
     manquants.extend(verifier_regles(regles, empreinte_statuts))
 
+    with PROFILS.open("rb") as fichier:
+        profils = tomllib.load(fichier)
+    manquants.extend(verifier_profils(profils))
+
     with CAS_ESSAI.open("rb") as fichier:
         cas_essai = tomllib.load(fichier)
     manquants.extend(verifier_cas_essai(cas_essai))
@@ -325,7 +368,7 @@ def principal() -> int:
 
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
-        "à expertiser, 15 règles statutaires à relire, 12 cas synthétiques à concevoir, "
+        "à expertiser, 15 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
         f"4 options et 15 critères sans score, 3 sources épinglées à évaluer, décision {etat_decision}, initiative P0 à cadrer, "
         "aucune identité ni bulletin réel autorisé."
     )

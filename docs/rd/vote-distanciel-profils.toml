@@ -1,0 +1,66 @@
+# Profils non exécutables dérivés du relevé statutaire.
+# Aucun nombre ci-dessous ne doit être injecté dans une urne avant relecture.
+[meta]
+version = 1
+date = 2026-10-17
+initiative = "vote-distanciel-verifiable"
+source_regles = "docs/rd/vote-distanciel-regles.toml"
+statut = "a-faire-relire"
+regle = "Un profil sert à préparer une décision humaine ; il n'est ni une configuration ni une interprétation juridique."
+
+[[profil]]
+id = "bureau-executif"
+titre = "Bureau exécutif"
+regles = ["vote-concernes-impactes", "bureau-electronique", "bureau-procuration"]
+questions_bloquantes = ["Comment qualifier présents et représentés dans une consultation différée ?", "Le scrutin doit-il être secret pour la décision envisagée ?", "Comment appliquer le départage sans contredire un secret éventuel ?"]
+statut = "a-faire-relire"
+
+[[profil]]
+id = "conseil-ethique"
+titre = "Conseil d’éthique"
+regles = ["vote-concernes-impactes"]
+references_supplementaires = ["Article 10.2.1, page 13 : consultation électronique, une procuration, majorité absolue et départage propre."]
+questions_bloquantes = ["Comment constituer et geler la liste des membres du conseil ?", "Comment représenter la règle de départage propre ?", "Le vote doit-il être secret pour le litige traité ?"]
+statut = "a-faire-relire"
+
+[[profil]]
+id = "territoriale-constitutive"
+titre = "Assemblée territoriale constitutive"
+regles = ["vote-concernes-impactes", "une-cotisation-une-voix", "territorial-secret-blanc"]
+questions_bloquantes = ["Une présence à distance satisfait-elle la notion de membre présent ?", "Comment figer les candidatures et organiser une reprise avec de nouveaux candidats ?", "Les procurations sont-elles exclues ou simplement non décrites ?"]
+statut = "a-faire-relire"
+
+[[profil]]
+id = "ago-premiere"
+titre = "AGO — première convocation"
+regles = ["vote-concernes-impactes", "une-cotisation-une-voix", "ago-corps-ordre-du-jour", "ago-premiere-convocation", "ago-procuration", "ago-secret", "ago-session-numerique"]
+questions_bloquantes = ["Qu’est-ce qu’une réponse transmise pour le quorum ?", "Quand et comment la demande de scrutin secret est-elle arrêtée ?", "Comment articuler voix prépondérante et scrutin secret ?", "Comment révoquer une procuration sans lier mandant et bulletin ?"]
+statut = "a-faire-relire"
+
+[[profil]]
+id = "ago-seconde"
+titre = "AGO — seconde convocation"
+regles = ["vote-concernes-impactes", "une-cotisation-une-voix", "ago-corps-ordre-du-jour", "ago-seconde-convocation", "ago-procuration", "ago-secret", "ago-session-numerique"]
+questions_bloquantes = ["Comment prouver le même ordre du jour ?", "La durée numérique minimale s’applique-t-elle identiquement à la seconde convocation ?", "Comment articuler départage, secret et faible participation ?"]
+statut = "a-faire-relire"
+
+[[profil]]
+id = "age-premiere"
+titre = "AGE — première convocation"
+regles = ["vote-concernes-impactes", "une-cotisation-une-voix", "age-premiere-convocation", "age-procuration"]
+questions_bloquantes = ["Comment prouver la demande de convocation sans publier les identités ?", "Quelle règle de secret s’applique ?", "Comment définir précisément le dénominateur du quorum ?"]
+statut = "a-faire-relire"
+
+[[profil]]
+id = "age-seconde"
+titre = "AGE — seconde convocation"
+regles = ["vote-concernes-impactes", "une-cotisation-une-voix", "age-procuration", "age-seconde-convocation"]
+questions_bloquantes = ["Comment prouver le même ordre du jour et le délai ?", "Comment interpréter et vérifier l’unanimité des présents et représentés ?", "Quelle règle de secret s’applique ?"]
+statut = "a-faire-relire"
+
+[[profil]]
+id = "dissolution"
+titre = "Dissolution"
+regles = ["vote-concernes-impactes", "une-cotisation-une-voix", "age-procuration", "age-seconde-convocation", "dissolution-seuils"]
+questions_bloquantes = ["Comment articuler les articles 15 et 19 ?", "Quels quorum, majorité, délai et procuration priment à chaque instance ?", "Le scrutin est-il secret et comment traiter les abstentions ou blancs ?"]
+statut = "bloque-interpretation"
