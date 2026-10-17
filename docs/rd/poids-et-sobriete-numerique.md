@@ -111,6 +111,23 @@ Les variantes ajoutent **1 553 Kio** au dépôt pour **787 Kio** d’images sour
 
 **Limites des essais :** Chromium sans interface fourni par `@sparticuz/chromium`, pas de Safari, Firefox, lecteur d’écran, appareil réel, réseau bridé ni mesure Lighthouse/CrUX. Les essais DOM et navigateur ne valent pas essai d’usage avec des personnes. Aucun test n’a été mené sur la production GitHub Pages ou Vercel.
 
+### 4.4 Ce que l’hébergement sert réellement (GitHub Pages, 17 octobre 2026)
+
+Une lecture des en-têtes a été faite depuis un runner GitHub, sur la version publiée (`https://thejmimiia-code.github.io/MRSC/`), avec `outils/verifier-publication.py` et un en-tête `Accept-Encoding: gzip, deflate, br`. Résultat daté, repris dans l’issue de suivi **#90** :
+
+| Constat | Valeur relevée | Conséquence |
+| --- | --- | --- |
+| Disponibilité | 18/18 fichiers en **200** | Aucune variante oubliée dans la publication `_site` |
+| Types d’images | `image/avif` et `image/webp` | GitHub Pages reconnaît les deux formats ; aucun `application/octet-stream` |
+| Types de texte | `text/html`, `text/css`, `application/javascript`, `application/xml` | Rien à corriger côté hébergement |
+| Compression | `Content-Encoding: gzip` sur les 9 fichiers texte ; aucune sur les images | Attendu : les images AVIF/WebP sont déjà compressées ; gzip sur 9 fichiers confirme que la négociation fonctionne |
+| Cache | `Cache-Control: max-age=600` sur tous les fichiers | Dix minutes : une revisite proche est peu coûteuse, une mise à jour se propage vite |
+| Octets servis | identiques aux tailles des variantes (ex. logo 800 AVIF : 53 242 octets) | Aucune transformation supplémentaire côté serveur |
+
+**Confrontation avec l’estimation hors ligne** : sur les fichiers texte contrôlés, la compression gzip niveau 9 du script et celle réellement servie par Pages diffèrent de **+0,7 % à +4,2 %** (accueil 7 169 octets estimés pour 7 247 servis ; feuille de style 20 494 pour 21 355 ; script principal 7 285 pour 7 339 ; catalogue 41 939 pour 43 426 ; atlas 9 649 pour 9 770). L’estimation est donc **légèrement sous** les octets servis, jamais au-dessus ; les images AVIF/WebP, déjà compressées, sont servies à l’octet près. Les budgets de 300 et 450 Kio gardent une marge suffisante pour ce biais, puisque la page la plus lourde est estimée à 333 Kio. Cette confrontation porte sur le **transfert** de fichiers contrôlés, pas sur le rendu ni sur le temps de chargement.
+
+**Ce que ces en-têtes ne prouvent pas :** ni la performance perçue, ni le comportement sur un appareil lent, ni la conformité RGESN, ni une empreinte carbone. Ils ne concernent pas Vercel : cette adresse héberge le simulateur du dépôt amont, pas les fichiers de ce dépôt. Le relevé est refait chaque mois, et à chaque modification du contrôleur ; il peut donc changer sans que cette note soit mise à jour.
+
 ## 7. Décisions et prochaines étapes
 
 **Décisions prises dans cette passe :**
@@ -122,7 +139,7 @@ Les variantes ajoutent **1 553 Kio** au dépôt pour **787 Kio** d’images sour
 
 **Prochaines actions, non exécutées ici :**
 
-1. Vérifier sur GitHub Pages les en-têtes réellement servis pour `.avif` et `.webp`, la compression et le cache, sans supposer que le serveur local les représente. `outils/verifier-publication.py` interroge une racine publiée et relève code, type MIME, encodage et cache ; il est conçu pour le poste d’un mainteneur ou pour le workflow `Vérifier les en-têtes servis par l’hébergement` (déclenchement manuel ou mensuel), car l’environnement d’écriture hors ligne n’accède pas au domaine public.
+1. ~~Vérifier sur GitHub Pages les en-têtes réellement servis pour `.avif` et `.webp`, la compression et le cache.~~ **Fait le 17 octobre 2026** (§4.4, issue #90) : types corrects, gzip sur les fichiers texte, cache de 600 secondes. Le relevé reste à refaire chaque mois via le workflow ; une régression de type MIME serait signalée dans l’issue de suivi.
 2. Faire une revue visuelle humaine des trois illustrations sur écran réel, à 100 % et à fort zoom.
 3. Mesurer sur appareil et réseau réels (LCP, CLS, octets transférés) avec un outil accepté par l’association ; ne pas convertir ces mesures en bilan carbone.
 4. Si un lecteur ancien ou un contexte à faible bande passante l’exige, tester une variante 1 000 px de l’image de secours et un chemin sans image décorative ; ne pas l’annoncer avant essai.
