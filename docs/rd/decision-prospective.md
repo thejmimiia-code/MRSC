@@ -16,7 +16,7 @@ La décision porte sur l'allocation du temps de relecture, pas sur l'ajout d'une
 | Fiches explicitement « prototypes à relire » | **55** | Statuts du catalogue |
 | Fiches dont la date de revue est échue | **0** | `python3 outils/construire-apprentissages.py --verifier` |
 | Prochaine revue du portefeuille R&D | **2026-11-12** | `docs/rd/portefeuille.toml` |
-| Initiatives R&D suivies | 14, dont 4 en priorité P0 | Portefeuille |
+| Initiatives R&D suivies | 15, dont 5 en priorité P0 | Portefeuille |
 | Boussole publiée | 10 questions statiques, liens édités à la main, aucune collecte | `apprendre.html#boussole-savoirs` |
 | Poids estimé de la page Apprendre | 159 Kio mobile / 309 Kio grand écran (gzip estimé) | `docs/rd/poids-pages.md` |
 | En-têtes servis par GitHub Pages | types AVIF/WebP corrects, gzip sur le texte, cache 600 s | Issue #90 |

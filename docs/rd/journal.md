@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Vote distanciel vérifiable cadré sans promesse absolue
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Besoin exprimé :** permettre un vote à distance secret, vérifiable et résistant au détournement, avec une analogie à la vérification publique de Bitcoin.
+- **Décision :** ne pas promettre « infalsifiable » ou « sécurisé en toutes circonstances », ne pas développer de cryptographie maison et ne pas recueillir de bulletin réel. Cadrer un vote vérifiable de bout en bout, séparant identité, justificatif anonyme, urne chiffrée, registre append-only, autorités de dépouillement à seuil et vérificateur indépendant.
+- **Recherche :** métadonnées GitHub consultées le 17 octobre 2026 pour Belenios (miroir AGPL-3.0), Helios (Apache-2.0) et ElectionGuard porté par Election Technology Initiative (MIT). Cette vérification ne vaut ni audit, ni sélection.
+- **Risques bloquants :** terminal compromis, coercition au domicile, corrélation par métadonnées, collusion, perte de clés, déni de service, droit applicable et accessibilité. Une blockchain publique ne résout pas ces risques et peut aggraver la réidentification.
+- **Résultat :** note de cadrage en neuf sections, initiative P0 à cadrer et contrôle CI des garde-fous.
+- **Prochaine action :** faire préciser le type de scrutin et les six décisions de gouvernance, puis obtenir des revues juridique, cryptographique, protection des données et accessibilité avant un éventuel banc d’essai entièrement synthétique.
+
 ## 2026-10-17 — Chronologie de décision prospective contrôlée
 
 - **Initiative :** `prospective-apprentissages-2030`.
