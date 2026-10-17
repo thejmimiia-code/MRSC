@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — PR #94 ouverte
+
+- **Initiatives :** `relire-les-44-prototypes`, `optimisation-du-site`.
+- **Décision :** ouvrir la PR #94 depuis `arena/26d57815-mrsc` sans la fusionner ; la demande portait sur une fusion de la PR #93, pas sur une autorisation permanente.
+- **Contrôles exécutés :** CI `qualite` réussie sur la PR (31 s) ; porte locale 11/11 ; axe 47/0 et 192/0 ; `test-experience.cjs` 8/8.
+- **Limites :** la CI ne lance pas les balayages navigateur (dépendances hors dépôt) ; la relecture des prototypes reste entièrement humaine.
+- **Prochaine action :** attendre une décision explicite de fusion, ou poursuivre sur les signalements par excès de la file de relecture.
+
 ## 2026-10-17 — File de relecture des 55 prototypes
 
 - **Initiative :** `relire-les-44-prototypes` (P0, `a-valider`).
