@@ -72,6 +72,8 @@ Les journaux techniques ne doivent contenir ni choix, ni justificatif brut, ni a
 | Faiblesse cryptographique | Bibliothèques éprouvées, paramètres versionnés, audit externe, migration prévue | Ne jamais inventer de primitive cryptographique dans le dépôt |
 | Réidentification future | Pas de bulletin en clair, rétention minimale, pas de chaîne publique contenant des identifiants | Le chiffrement permanent n’est pas une promesse de secret permanent |
 
+Le registre reproductible [`vote-distanciel-menaces.toml`](vote-distanciel-menaces.toml) détaille dix scénarios avec acteur, actif, contrôle proposé, preuve attendue, risque résiduel et condition d’arrêt. Tous restent `a-expertiser` : un contrôle décrit n’est pas un contrôle efficace démontré.
+
 ## 6. Choix technologique proposé
 
 Ne pas construire une cryptographie maison ni choisir une blockchain par analogie. Comparer d’abord des systèmes de vote vérifiable existants et maintenus :
