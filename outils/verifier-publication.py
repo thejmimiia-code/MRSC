@@ -6,6 +6,11 @@ fichier contrôlé : le code HTTP, le type MIME, l’encodage de transfert et la
 politique de cache. Il ne juge ni le rendu, ni la qualité des images, ni la
 performance réelle : il constate des en-têtes.
 
+Il envoie un en-tête Accept-Encoding (gzip, deflate, br) : sans lui, un hébergeur
+ne compresse pas et le contrôle conclurait à tort à l’absence de compression.
+Les octets relevés sont ceux annoncés par Content-Length, c’est-à-dire la taille
+transférée quand une compression est appliquée.
+
 Exemples :
     python3 outils/verifier-publication.py --base-url https://exemple.github.io/MRSC/
     python3 outils/verifier-publication.py --base-url http://127.0.0.1:8000/ --tentatives 1
@@ -48,6 +53,14 @@ CIBLES: tuple[tuple[str, tuple[str, ...], str], ...] = (
 )
 
 
+ENTETES_REQUETE = {
+    "User-Agent": "MRSC-verifier-publication/1",
+    # Sans cet en-tête, un hébergeur ne compresse pas et le contrôle conclurait
+    # à tort à l’absence de compression.
+    "Accept-Encoding": "gzip, deflate, br",
+}
+
+
 class Resultat:
     def __init__(self, chemin: str, url: str, description: str) -> None:
         self.chemin = chemin
@@ -57,52 +70,53 @@ class Resultat:
         self.type: str = ""
         self.encodage: str = ""
         self.cache: str = ""
+        self.octets: int | None = None
         self.erreur: str = ""
 
 
-def sonder(url: str, tentatives: int, attente: float) -> tuple[int | None, str, str, str, str]:
+def _releve(entetes, statut: int) -> tuple[int, str, str, str, str, int | None]:
+    longueur = entetes.get("Content-Length", "")
+    try:
+        octets = int(longueur) if longueur.strip() else None
+    except ValueError:
+        octets = None
+    return (
+        statut,
+        entetes.get_content_type(),
+        entetes.get("Content-Encoding", ""),
+        entetes.get("Cache-Control", ""),
+        "",
+        octets,
+    )
+
+
+def sonder(url: str, tentatives: int, attente: float) -> tuple[int | None, str, str, str, str, int | None]:
     derniere_erreur = ""
     for essai in range(1, max(1, tentatives) + 1):
-        requete = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "MRSC-verifier-publication/1"})
+        requete = urllib.request.Request(url, method="HEAD", headers=ENTETES_REQUETE)
         try:
             with urllib.request.urlopen(requete, timeout=20) as reponse:
-                entetes = reponse.headers
-                return (
-                    reponse.status,
-                    entetes.get_content_type(),
-                    entetes.get("Content-Encoding", ""),
-                    entetes.get("Cache-Control", ""),
-                    "",
-                )
+                return _releve(reponse.headers, reponse.status)
         except urllib.error.HTTPError as erreur:
             # Certains hébergeurs refusent HEAD : on retente en GET sans lire le corps.
             if erreur.code in (405, 501):
                 try:
-                    requete_get = urllib.request.Request(
-                        url, method="GET", headers={"User-Agent": "MRSC-verifier-publication/1"}
-                    )
+                    requete_get = urllib.request.Request(url, method="GET", headers=ENTETES_REQUETE)
                     with urllib.request.urlopen(requete_get, timeout=20) as reponse:
                         reponse.read(1)
-                        entetes = reponse.headers
-                        return (
-                            reponse.status,
-                            entetes.get_content_type(),
-                            entetes.get("Content-Encoding", ""),
-                            entetes.get("Cache-Control", ""),
-                            "",
-                        )
+                        return _releve(reponse.headers, reponse.status)
                 except (urllib.error.URLError, OSError) as nouvelle_erreur:
                     derniere_erreur = str(nouvelle_erreur)
             else:
                 derniere_erreur = f"HTTP {erreur.code}"
                 # Un 404 ne se corrige pas en attendant : inutile de réessayer.
                 if erreur.code in (400, 401, 403, 404, 410):
-                    return erreur.code, "", "", "", derniere_erreur
+                    return erreur.code, "", "", "", derniere_erreur, None
         except (urllib.error.URLError, OSError) as erreur:
             derniere_erreur = str(erreur)
         if essai < tentatives:
             time.sleep(attente)
-    return None, "", "", "", derniere_erreur or "aucune réponse"
+    return None, "", "", "", derniere_erreur or "aucune réponse", None
 
 
 def construire_url(base: str, chemin: str) -> str:
@@ -123,11 +137,12 @@ def main() -> int:
     for chemin, types_acceptes, description in CIBLES:
         url = construire_url(options.base_url, chemin)
         resultat = Resultat(chemin or "/", url, description)
-        statut, type_mime, encodage, cache, erreur = sonder(url, options.tentatives, options.attente)
+        statut, type_mime, encodage, cache, erreur, octets = sonder(url, options.tentatives, options.attente)
         resultat.statut = statut
         resultat.type = type_mime
         resultat.encodage = encodage
         resultat.cache = cache
+        resultat.octets = octets
         resultat.erreur = erreur
         if statut != 200:
             motif = f"HTTP {statut}" if statut else "injoignable"
@@ -138,14 +153,15 @@ def main() -> int:
         resultats.append(resultat)
 
     print(f"# En-têtes servis pour {options.base_url}\n")
-    print("| Fichier | Rôle | Statut | Type MIME | Encodage | Cache |")
-    print("| --- | --- | ---: | --- | --- | --- |")
+    print("| Fichier | Rôle | Statut | Type MIME | Encodage | Octets servis | Cache |")
+    print("| --- | --- | ---: | --- | --- | ---: | --- |")
     for resultat in resultats:
         statut = str(resultat.statut) if resultat.statut else "—"
         type_mime = resultat.type or "—"
+        octets = f"{resultat.octets:,}".replace(",", " ") if resultat.octets is not None else "—"
         print(
             f"| `{resultat.chemin}` | {resultat.description} | {statut} | "
-            f"{type_mime} | {resultat.encodage or '—'} | {resultat.cache or '—'} |"
+            f"{type_mime} | {resultat.encodage or '—'} | {octets} | {resultat.cache or '—'} |"
         )
 
     manquants = [a for a in anomalies if "injoignable" in a or "HTTP" in a]
@@ -159,7 +175,15 @@ def main() -> int:
         for anomalie in manquants:
             print(f"- {anomalie}", file=sys.stderr)
         return 1
+    compressés = sum(1 for resultat in resultats if resultat.encodage)
     print(f"\n{len(resultats)} fichiers contrôlés : tous répondent 200.")
+    if compressés:
+        print(f"Compression de transfert annoncée par l’hébergeur pour {compressés} fichier(s).")
+    else:
+        print(
+            "Aucune compression de transfert annoncée, malgré l’en-tête Accept-Encoding envoyé : "
+            "le serveur a répondu sans Content-Encoding."
+        )
     return 0
 
 
