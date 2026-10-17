@@ -30,6 +30,7 @@ CONTINUITE = RACINE / "docs" / "rd" / "vote-distanciel-continuite.toml"
 ACCESSIBILITE = RACINE / "docs" / "rd" / "vote-distanciel-accessibilite.toml"
 ASSISTANCE = RACINE / "docs" / "rd" / "vote-distanciel-assistance.toml"
 CLES = RACINE / "docs" / "rd" / "vote-distanciel-cles.toml"
+CHAINE_LOGICIELLE = RACINE / "docs" / "rd" / "vote-distanciel-chaine-logicielle.toml"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -500,6 +501,54 @@ def verifier_cles(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_chaine_logicielle(registre: dict) -> list[str]:
+    """Vérifie le plan de preuves de la chaîne logicielle sans construire de candidat."""
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "vote-distanciel-verifiable"
+        or meta.get("statut") != "a-faire-expertiser"
+        or meta.get("execution_autorisee") is not False
+        or meta.get("selection_effectuee") is not False
+    ):
+        erreurs.append("chaîne logicielle non exécutée, non sélectionnée et à expertiser")
+    if not meta.get("principe"):
+        erreurs.append("chaîne logicielle avec principe de traçabilité")
+
+    controles = registre.get("controle", [])
+    ids = [item.get("id") for item in controles]
+    requis = {
+        "source-epinglee", "dependances-fermees", "construction-reproductible",
+        "provenance-et-signatures", "analyse-des-ecarts", "mise-a-jour-gelee",
+        "retrait-et-verification-future",
+    }
+    if set(ids) != requis or len(ids) != len(set(ids)):
+        erreurs.append("exactement 7 contrôles de chaîne logicielle sans doublon")
+    for item in controles:
+        identifiant = item.get("id", "?")
+        champs = ("question", "preuve_attendue", "condition_arret")
+        if any(not item.get(champ) for champ in champs):
+            erreurs.append(f"contrôle {identifiant} avec question, preuve et arrêt")
+        if len(item.get("interdits", [])) < 3:
+            erreurs.append(f"contrôle {identifiant} avec au moins 3 pratiques interdites")
+        if item.get("statut") != "a-faire-expertiser":
+            erreurs.append(f"contrôle {identifiant} maintenu à faire expertiser")
+
+    portes = registre.get("porte", [])
+    if len(portes) != 1:
+        erreurs.append("exactement une porte bloquante avant banc")
+    else:
+        porte = portes[0]
+        if (
+            porte.get("id") != "avant-banc"
+            or set(porte.get("exigences", [])) != requis
+            or porte.get("decision") != "revue-humaine-requise"
+            or porte.get("statut") != "bloquante"
+        ):
+            erreurs.append("porte avant banc couvrant les 7 contrôles avec décision humaine")
+    return erreurs
+
+
 def verifier_revues(registre: dict) -> list[str]:
     erreurs: list[str] = []
     meta = registre.get("meta", {})
@@ -685,6 +734,10 @@ def principal() -> int:
         cles = tomllib.load(fichier)
     manquants.extend(verifier_cles(cles))
 
+    with CHAINE_LOGICIELLE.open("rb") as fichier:
+        chaine_logicielle = tomllib.load(fichier)
+    manquants.extend(verifier_chaine_logicielle(chaine_logicielle))
+
     with REVUES.open("rb") as fichier:
         revues = tomllib.load(fichier)
     manquants.extend(verifier_revues(revues))
@@ -716,7 +769,7 @@ def principal() -> int:
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
         "à expertiser, 18 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
-        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites, 5 signaux de corrélation, 7 incidents de continuité, 8 barrières d’accessibilité, 6 situations d’assistance et 6 phases de clés, "
+        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites, 5 signaux de corrélation, 7 incidents de continuité, 8 barrières d’accessibilité, 6 situations d’assistance, 6 phases de clés et 7 contrôles logiciels, "
         f"6 rôles et 5 revues à attribuer, décision {etat_decision}, initiative P0 à cadrer, "
         "aucune identité ni bulletin réel autorisé."
     )

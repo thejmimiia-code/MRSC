@@ -60,7 +60,7 @@ statut = "a-attribuer"
 
 [[revue]]
 id = "comparaison-candidats"
-artefacts = ["docs/rd/vote-distanciel-comparaison.toml", "docs/rd/vote-distanciel-sources.toml", "docs/rd/vote-distanciel-premiers-ecarts.md"]
+artefacts = ["docs/rd/vote-distanciel-comparaison.toml", "docs/rd/vote-distanciel-sources.toml", "docs/rd/vote-distanciel-premiers-ecarts.md", "docs/rd/vote-distanciel-chaine-logicielle.toml"]
 roles_requis = ["cryptographie-vote", "protection-donnees", "operations-securite", "accessibilite-usages", "juridique-statutaire"]
 question = "Les preuves exactes d'une version candidate satisfont-elles chaque critère bloquant sans score compensatoire ?"
 condition_sortie = "Chaque critère possède preuve, inconnu ou échec ; aucune inconnue n'est convertie en réussite."
