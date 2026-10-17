@@ -2,6 +2,30 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Date du brief rendue explicite et testable
+
+- **Initiative :** `prospective-apprentissages-2030`.
+- **Décision :** lire la date de référence dans l’en-tête du brief plutôt que la coder dans l’outil, et exiger que l’en-tête du tableau porte la même date.
+- **Résultat :** neuf tests couvrent maintenant aussi une date française valide, une divergence entre dates et un mois invalide.
+- **Limite :** une date cohérente ne rend pas les hypothèses prospectives vraies ; toute actualisation du brief doit rester une décision éditoriale consciente.
+- **Prochaine action :** soumettre le pré-mortem et les options A/B/C à l’association, sans modifier automatiquement la date de l’instantané.
+
+## 2026-10-17 — Échéances et poids ajoutés au garde-fou prospectif
+
+- **Initiatives :** `prospective-apprentissages-2030`, `poids-et-sobriete-numerique`.
+- **Décision :** étendre le contrôle du brief aux revues échues, à la prochaine revue du portefeuille et au poids local de `apprendre.html`, en conservant le 17 octobre 2026 comme date de référence explicite de l’instantané.
+- **Résultat :** sept lignes factuelles sont maintenant reliées à leurs sources ; six tests couvrent le comptage, les absences, l’arrondi et le calcul d’échéance.
+- **Limite :** les poids sont des estimations gzip locales et l’échéance ne prouve pas qu’une revue de fond a eu lieu.
+- **Prochaine action :** faire relire les risques et décider si le pilote Boussole mérite du temps face aux relectures sensibles.
+
+## 2026-10-17 — Vérificateur prospectif durci après fusion
+
+- **Initiative :** `prospective-apprentissages-2030`.
+- **Décision :** supprimer le nombre de domaines codé en dur et le recalculer depuis le catalogue ; couvrir le comptage de la Boussole par trois tests unitaires.
+- **Résultat :** le contrôle suit désormais cinq valeurs internes et refuse explicitement une section ou une liste absente.
+- **Limite :** les tests portent sur la synchronisation structurelle, pas sur la qualité des questions ni sur le choix prospectif.
+- **Prochaine action :** faire relire les six risques du pré-mortem et attribuer les rôles de décision.
+
 ## 2026-10-17 — Brief prospectif rendu vérifiable
 
 - **Initiative :** `prospective-apprentissages-2030`.
