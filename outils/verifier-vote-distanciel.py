@@ -26,6 +26,7 @@ PROFILS = RACINE / "docs" / "rd" / "vote-distanciel-profils.toml"
 REVUES = RACINE / "docs" / "rd" / "vote-distanciel-revues.toml"
 DONNEES = RACINE / "docs" / "rd" / "vote-distanciel-donnees.toml"
 CORRELATION = RACINE / "docs" / "rd" / "vote-distanciel-correlation.toml"
+CONTINUITE = RACINE / "docs" / "rd" / "vote-distanciel-continuite.toml"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -323,6 +324,44 @@ def verifier_correlation(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_continuite(registre: dict) -> list[str]:
+    """Vérifie les arrêts sûrs sans autoriser une procédure opérationnelle."""
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "vote-distanciel-verifiable"
+        or meta.get("statut") != "a-faire-relire"
+        or meta.get("donnees") != "synthetiques-uniquement"
+        or meta.get("execution_autorisee") is not False
+    ):
+        erreurs.append("continuité synthétique, non exécutable et à faire relire")
+    if not meta.get("principe"):
+        erreurs.append("continuité avec principe de non-dégradation")
+
+    incidents = registre.get("incident", [])
+    ids = [incident.get("id") for incident in incidents]
+    requis = {
+        "indisponibilite-avant-ouverture", "indisponibilite-pendant-ouverture",
+        "divergence-a-la-cloture", "preuves-indisponibles", "part-de-cle-indisponible",
+        "registre-eligibilite-indisponible", "suspicion-de-correlation-ou-fuite",
+    }
+    if set(ids) != requis or len(ids) != len(set(ids)):
+        erreurs.append("exactement 7 incidents de continuité sans doublon")
+    for incident in incidents:
+        identifiant = incident.get("id", "?")
+        champs = ("detection_projetee", "action_par_defaut", "preuve_attendue")
+        if any(not incident.get(champ) for champ in champs):
+            erreurs.append(f"incident {identifiant} détectable, borné et prouvable")
+        roles = set(incident.get("autorite_humaine_requise", []))
+        if "association-decisionnaire" not in roles or roles - ROLES_REVUE:
+            erreurs.append(f"incident {identifiant} soumis à une autorité humaine connue")
+        if len(incident.get("interdits", [])) < 3:
+            erreurs.append(f"incident {identifiant} avec au moins 3 contournements interdits")
+        if incident.get("statut") != "a-faire-relire":
+            erreurs.append(f"incident {identifiant} maintenu à faire relire")
+    return erreurs
+
+
 def verifier_revues(registre: dict) -> list[str]:
     erreurs: list[str] = []
     meta = registre.get("meta", {})
@@ -492,6 +531,10 @@ def principal() -> int:
         correlation = tomllib.load(fichier)
     manquants.extend(verifier_correlation(correlation))
 
+    with CONTINUITE.open("rb") as fichier:
+        continuite = tomllib.load(fichier)
+    manquants.extend(verifier_continuite(continuite))
+
     with REVUES.open("rb") as fichier:
         revues = tomllib.load(fichier)
     manquants.extend(verifier_revues(revues))
@@ -523,7 +566,7 @@ def principal() -> int:
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
         "à expertiser, 18 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
-        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites et 5 signaux de corrélation, "
+        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites, 5 signaux de corrélation et 7 incidents de continuité, "
         f"6 rôles et 5 revues à attribuer, décision {etat_decision}, initiative P0 à cadrer, "
         "aucune identité ni bulletin réel autorisé."
     )

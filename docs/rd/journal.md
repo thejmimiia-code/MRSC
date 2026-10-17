@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Continuité bornée par des arrêts sûrs
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** traiter sept incidents sans automatiser une décision associative ni dégrader les garanties sous prétexte de disponibilité.
+- **Résultat :** non-ouverture, gel, suspension ou non-proclamation sont les défauts projetés ; chaque incident exige l’association et les rôles compétents.
+- **Prospective :** l’indisponibilité d’une part de clé, du registre d’éligibilité ou des preuves est distinguée d’une fuite ou corrélation, sans probabilité.
+- **Optimisation :** le contrôle refuse la suppression d’un incident, un statut opérationnel prématuré et toute réponse sans autorité associative.
+- **Limite :** aucune procédure n’est approuvée ou utilisable pour un scrutin réel ; délais, canaux et compétences restent à faire relire.
+- **Prochaine action :** confronter ces arrêts aux statuts, à l’accessibilité, aux recours et aux capacités opérationnelles avant tout exercice synthétique.
+
 ## 2026-10-17 — Épreuve de corrélation rendue non exécutable
 
 - **Initiative :** `vote-distanciel-verifiable`.

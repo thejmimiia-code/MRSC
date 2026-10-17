@@ -68,7 +68,7 @@ statut = "a-attribuer"
 
 [[revue]]
 id = "protocole-banc"
-artefacts = ["docs/rd/vote-distanciel-protocole-banc.md", "docs/rd/vote-distanciel-cas-essai.toml"]
+artefacts = ["docs/rd/vote-distanciel-protocole-banc.md", "docs/rd/vote-distanciel-cas-essai.toml", "docs/rd/vote-distanciel-continuite.toml"]
 roles_requis = ["cryptographie-vote", "protection-donnees", "operations-securite", "accessibilite-usages"]
 question = "Le banc peut-il chercher les échecs sans identité, bulletin ou secret réel et sans surinterpréter un résultat ?"
 condition_sortie = "Cas, seuils d'arrêt, destruction et limites approuvés avant toute exécution."
