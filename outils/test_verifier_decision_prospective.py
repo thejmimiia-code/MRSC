@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Tests unitaires du comptage de la Boussole prospective."""
 
+import datetime as dt
 import importlib.util
 import unittest
 from pathlib import Path
@@ -29,6 +30,18 @@ class CompterQuestionsBoussoleTests(unittest.TestCase):
     def test_refuse_une_liste_absente(self):
         with self.assertRaisesRegex(ValueError, "knowledge-compass"):
             MODULE.compter_questions_boussole('<section id="boussole-savoirs"></section>')
+
+    def test_arrondit_les_poids_affiches(self):
+        tableau = "| `apprendre.html` | 158.8 | 308.6 | 619.5 |"
+        self.assertEqual(MODULE.poids_page(tableau, "apprendre.html"), (159, 309))
+
+    def test_calcule_la_revue_depuis_les_metadonnees(self):
+        meta = {"derniere_revue": dt.date(2026, 10, 13), "cadence_revue_jours": 30}
+        self.assertEqual(MODULE.date_prochaine_revue(meta), dt.date(2026, 11, 12))
+
+    def test_refuse_des_metadonnees_de_revue_incompletes(self):
+        with self.assertRaisesRegex(ValueError, "métadonnées"):
+            MODULE.date_prochaine_revue({"derniere_revue": dt.date(2026, 10, 13)})
 
 
 if __name__ == "__main__":
