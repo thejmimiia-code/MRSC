@@ -144,7 +144,22 @@ La proposition serait affaiblie ou rejetée si :
 | 5. Revoir et essayer | Relectures éditoriale, accessibilité, vie privée/droit et essai volontaire seulement s'il est utile et autorisé | Distinguer correction structurelle, compréhension, préférence et efficacité; conserver les limites. |
 | 6. Décider | Itérer, intégrer sous contrôle, conserver en prototype ou retirer | Laisser les validations manquantes et la prochaine revue visibles. |
 
-## 9. Sources de départ, limites et suite
+## 9. Prolongement mesuré — octobre 2026
+
+Une passe de mesure et d’optimisation a complété cette note le 17 octobre 2026. La méthode, les chiffres avant/après, les limites et les essais sont détaillés dans [`poids-et-sobriete-numerique.md`](poids-et-sobriete-numerique.md).
+
+- **Résultat local, à ne pas surinterpréter :** le poids compressé estimé des pages principales baisse de 33 à 72 % selon la page et le scénario, grâce à des variantes AVIF/WebP et au report du chargement de l’image de secours. Il s’agit d’une reconstruction hors ligne, pas d’une mesure réseau.
+- **Ce que cela change pour les scénarios :** le socle reste lisible et atteignable avec moins d’octets, ce qui renforce la réponse au « réseau intermittent » sans prouver la résilience réelle ni la disponibilité des hébergeurs.
+- **Ce que cela ne change pas :** le besoin de relecture humaine, de sources datées et de repli sans JavaScript. Une page légère peut rester fausse, incomplète ou inaccessible.
+- **Décision maintenue :** la sobriété est traitée comme un moyen de réduire une dépendance, jamais comme un indicateur de qualité éditoriale ou une preuve d’impact évité.
+
+**Prochaine action ajoutée :** vérifier les octets réellement servis et les types MIME sur GitHub Pages et Vercel, puis faire une revue visuelle humaine des images ; ne réviser l’état de l’initiative `poids-et-sobriete-numerique` qu’après ces contrôles.
+
+## 10. Décision attendue — octobre 2026
+
+Le [brief de décision](decision-prospective.md) présente trois options bornées : ne rien construire de plus, faire relire puis tester un pilote papier, ou ouvrir un pilote en ligne. Il précise désormais un pré-mortem : échecs observables, replis réversibles et portes humaines. **Aucune option n'est choisie par l'agent** : la décision revient à l'association, et le prototype actuel reste un prototype à relire.
+
+## 11. Sources de départ, limites et suite
 
 Les faits de départ sont issus des fichiers du dépôt :
 
@@ -156,18 +171,3 @@ Les faits de départ sont issus des fichiers du dépôt :
 Un premier relevé externe a été réalisé le 17 octobre 2026 sur quatre sources datées ([veille](veille-2026-10-17.md)) : il ne couvre ni l'accessibilité, ni le droit du travail, ni les langues, ni l'ensemble des politiques publiques. Les références externes des notes antérieures restent des repères documentaires à réouvrir avant toute affirmation nouvelle; elles ne suffisent pas à établir une tendance future. Aucune probabilité, préférence collective, expérience d'usager ou décision de l'association n'est inventée.
 
 **Prochaine action :** faire examiner le cadrage, le concept « Boussole des savoirs » et le [brief de décision](decision-prospective.md) par le M.R.S.C. L'initiative `prospective-apprentissages-2030` reste `a-cadrer` jusque-là.
-
-## 11. Décision attendue — octobre 2026
-
-Le [brief de décision](decision-prospective.md) présente trois options bornées : ne rien construire de plus, faire relire puis tester un pilote papier, ou ouvrir un pilote en ligne. Il précise les preuves manquantes, les critères d'arrêt et ce qui ferait changer la recommandation. **Aucune option n'est choisie par l'agent** : la décision revient à l'association, et le prototype actuel reste un prototype à relire.
-
-## 10. Prolongement mesuré — octobre 2026
-
-Une passe de mesure et d’optimisation a complété cette note le 17 octobre 2026. La méthode, les chiffres avant/après, les limites et les essais sont détaillés dans [`poids-et-sobriete-numerique.md`](poids-et-sobriete-numerique.md).
-
-- **Résultat local, à ne pas surinterpréter :** le poids compressé estimé des pages principales baisse de 33 à 72 % selon la page et le scénario, grâce à des variantes AVIF/WebP et au report du chargement de l’image de secours. Il s’agit d’une reconstruction hors ligne, pas d’une mesure réseau.
-- **Ce que cela change pour les scénarios :** le socle reste lisible et atteignable avec moins d’octets, ce qui renforce la réponse au « réseau intermittent » sans prouver la résilience réelle ni la disponibilité des hébergeurs.
-- **Ce que cela ne change pas :** le besoin de relecture humaine, de sources datées et de repli sans JavaScript. Une page légère peut rester fausse, incomplète ou inaccessible.
-- **Décision maintenue :** la sobriété est traitée comme un moyen de réduire une dépendance, jamais comme un indicateur de qualité éditoriale ou une preuve d’impact évité.
-
-**Prochaine action ajoutée :** vérifier les octets réellement servis et les types MIME sur GitHub Pages et Vercel, puis faire une revue visuelle humaine des images ; ne réviser l’état de l’initiative `poids-et-sobriete-numerique` qu’après ces contrôles.

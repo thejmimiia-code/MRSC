@@ -2,6 +2,53 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Reprise R&D, optimisation et pré-mortem prospectif
+
+- **Initiatives :** `relire-les-44-prototypes`, `optimisation-du-site`, `prospective-apprentissages-2030`.
+- **Décision :** intégrer sur la branche active la file de relecture générée et l’extension du balayage d’accessibilité ; ajouter au brief prospectif un pré-mortem sans choisir à la place de l’association.
+- **Résultat technique :** 55 prototypes ordonnés pour relecture ; 23 états interactifs couverts ; contraste du héros corrigé. Les contrôles automatiques ne valent ni relecture experte ni essai humain.
+- **Prospective :** six échecs possibles ont désormais un signal sans suivi individuel, un repli réversible et une porte humaine ; aucune probabilité n’est attribuée aux scénarios.
+- **Prochaine action :** attribuer les relectures des 9 domaines sensibles, puis faire trancher les options A/B/C par l’association.
+
+## 2026-10-17 — PR #94 ouverte
+
+- **Initiatives :** `relire-les-44-prototypes`, `optimisation-du-site`.
+- **Décision :** ouvrir la PR #94 depuis `arena/26d57815-mrsc` sans la fusionner ; la demande portait sur une fusion de la PR #93, pas sur une autorisation permanente.
+- **Contrôles exécutés :** CI `qualite` réussie sur la PR (31 s) ; porte locale 11/11 ; axe 47/0 et 192/0 ; `test-experience.cjs` 8/8.
+- **Limites :** la CI ne lance pas les balayages navigateur (dépendances hors dépôt) ; la relecture des prototypes reste entièrement humaine.
+- **Prochaine action :** attendre une décision explicite de fusion, ou poursuivre sur les signalements par excès de la file de relecture.
+
+## 2026-10-17 — File de relecture des 55 prototypes
+
+- **Initiative :** `relire-les-44-prototypes` (P0, `a-valider`).
+- **Signal :** la prochaine action de l'initiative P0 — organiser les relectures — restait une consigne sans support. Les 55 prototypes étaient listés dans le catalogue mais aucune vue ne les ordonnait pour une personne, et les domaines à relecture spécialisée (santé, droit, argent, politique publique) n'étaient pas distingués.
+- **Décision :** générer `docs/apprentissage/file-relecture.md` depuis le catalogue avec deux règles explicites — domaine déclaré, puis mots-clés dans les champs éditoriaux — sans jamais produire de note ni de validation. La sortie affiche les termes trouvés pour que le triage soit corrigeable, et rappelle qu'un prototype sans signal reste à relire.
+- **Résultat mesuré :** 55 prototypes, dont **9** dans des domaines à relecture spécialisée et **9** signalés par mots-clés hors de ces domaines ; 37 sans signal automatique ; 15 domaines. Les 55 liens vers les fiches résolvent.
+- **Outil :** `outils/file-relecture.py`, avec `--verifier` (échoue si le fichier diverge du catalogue) et `--sortie`. Aucun réseau, aucune donnée personnelle. Étape ajoutée au workflow de vérification.
+- **Contrôles réellement exécutés :** génération, `--verifier` (succès, puis échec provoqué et retour au vert après restauration), résolution des 55 liens, `verifier-rd-continue.py`, `verifier-site-statique.py`, `verifier-integration.py`, porte locale complète.
+- **Limites :** aucune relecture n'a eu lieu ; les motifs par mots-clés sont imparfaits (par exemple « service public » dans une fiche de mathématiques) ; le classement ne préjuge ni de la qualité ni de la difficulté ; aucun relecteur n'est identifié.
+- **Prochaine action :** répartir les 9 fiches des domaines sensibles, puis les 9 signalées par mots-clés, et corriger les signalements par excès au fil des relectures.
+
+## 2026-10-17 — PR #93 fusionnée et publication vérifiée
+
+- **Initiatives :** `prospective-apprentissages-2030`, `veille-savoirs-evolutifs`, `optimisation-du-site`.
+- **Décision :** fusion de la PR #93 (`16edfbf`) sur demande explicite de la personne utilisatrice, pour voir le résultat publié. Fusion par merge commit, sans écrasement d'historique.
+- **Contrôles exécutés :** workflow « Vérification du site M.R.S.C » réussi sur `main` (35 s) ; « Publish M.R.S.C site » réussi (40 s) ; « Veille éditoriale des apprentissages » réussie (22 s). Le contenu de la PR était déjà passé par la porte locale 10/10 et `test-experience.cjs` 8/8.
+- **Limites :** la réussite des workflows prouve que la publication a été acceptée, pas que le site publié soit conforme ni accessible ; aucun contrôle de la version en ligne (en-têtes, rendu, lecteur d'écran) n'est refait dans cette entrée.
+- **Prochaine action :** poursuivre les états interactifs non couverts (formulaires en erreur, mission terminée), puis faire relire l'accessibilité par une personne compétente.
+
+## 2026-10-17 — Accessibilité : recherche vide, aides et contraste du héros
+
+- **Initiative :** `optimisation-du-site` (P1, `a-tester`).
+- **Signal :** après fusion de la PR #93, les états restants étaient la recherche sans résultat, les aides dépliées des fiches, une réponse de mission choisie et les modes de contraste. Ils n'avaient jamais été balayés.
+- **Mesures :** le script passe à 23 états et 47 exécutions par défaut (24 pages + 23 états) ; le mode `--etendu` reste à 192 exécutions sur 96 pages. Les deux sont sans violation après correction.
+- **Défaut trouvé :** à 1 280 px seulement, le bouton secondaire du héros des Mondes affichait du blanc sur `rgba(11,33,51,.45)`, soit un fond effectif `#919ba3` et 2,82:1. À 360 px, le recadrage de l'image masquait le problème.
+- **Décision :** porter le fond du bouton à `rgba(11,33,51,.72)` (6,5:1 dans le pire cas sur fond blanc), le survol à `.9`, et les pastilles voisines à `.7`. Ne pas se fier à l'image derrière : la borne de calcul est le fond clair.
+- **Preuve :** `docs/rd/accessibilite-2026-10-17.md`, troisième passe mise à jour.
+- **Contrôles réellement exécutés :** `outils/verifier-accessibilite.cjs` 47/0 et `--etendu` 192/0 ; porte locale 10/10 ; `test-experience.cjs` 8/8.
+- **Limites :** les états de survol ne sont pas mesurés ; les images de fond ne sont pas analysées ; toujours aucun lecteur d'écran ni revue experte.
+- **Prochaine action :** faire relire ces corrections, puis couvrir les formulaires en erreur et une mission menée jusqu'au bout.
+
 ## 2026-10-17 — Accessibilité : toutes les pages et les panneaux ouverts
 
 - **Initiative :** `optimisation-du-site` (P1, `a-tester`).
