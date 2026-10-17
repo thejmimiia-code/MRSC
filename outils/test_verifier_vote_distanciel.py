@@ -18,6 +18,16 @@ REGISTRE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-menaces.toml"
 REGLES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-regles.toml"
 CAS_PATH = RACINE / "docs" / "rd" / "vote-distanciel-cas-essai.toml"
 STATUTS_PATH = RACINE / "assets" / "documents" / "statuts-2020.pdf"
+DECISION_PATH = RACINE / "docs" / "rd" / "vote-distanciel-decision.md"
+
+
+def table_decision(valeurs: list[str]) -> str:
+    champs = [
+        "Version des statuts confirmée", "Règlement intérieur vérifié",
+        "Profil retenu", "Option retenue", "Instance ou rôle décideur",
+        "Date de décision", "Date de réexamen", "Conditions ou objections",
+    ]
+    return "\n".join(f"| {champ} | {valeur} |" for champ, valeur in zip(champs, valeurs))
 
 
 class RegistreMenacesTests(unittest.TestCase):
@@ -29,6 +39,7 @@ class RegistreMenacesTests(unittest.TestCase):
             cls.regles = tomllib.load(fichier)
         with CAS_PATH.open("rb") as fichier:
             cls.cas = tomllib.load(fichier)
+        cls.decision = DECISION_PATH.read_text(encoding="utf-8")
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -102,6 +113,30 @@ class RegistreMenacesTests(unittest.TestCase):
         registre = copy.deepcopy(self.cas)
         registre["cas"][0]["menaces"].append("menace-inventee")
         self.assertTrue(any("inconnues" in erreur for erreur in MODULE.verifier_cas_essai(registre)))
+
+    def test_decision_courante_est_en_attente(self):
+        self.assertEqual(MODULE.verifier_decision(self.decision), ("en attente", []))
+
+    def test_refuse_une_decision_partielle(self):
+        etat, erreurs = MODULE.verifier_decision(table_decision(["oui", "", "", "", "", "", "", ""]))
+        self.assertEqual(etat, "invalide")
+        self.assertTrue(any("partielle" in erreur for erreur in erreurs))
+
+    def test_refuse_option_d(self):
+        valeurs = ["oui", "oui", "ago-premiere", "D", "Conseil", "2026-10-18", "2027-01-31", "Aucune"]
+        etat, erreurs = MODULE.verifier_decision(table_decision(valeurs))
+        self.assertEqual(etat, "invalide")
+        self.assertTrue(any("A, B ou C" in erreur for erreur in erreurs))
+
+    def test_refuse_dissolution_non_interpretee(self):
+        valeurs = ["oui", "oui", "dissolution", "B", "Conseil", "2026-10-18", "2027-01-31", "Aucune"]
+        etat, erreurs = MODULE.verifier_decision(table_decision(valeurs))
+        self.assertEqual(etat, "invalide")
+        self.assertTrue(any("dissolution" in erreur for erreur in erreurs))
+
+    def test_accepte_une_decision_complete_bornee(self):
+        valeurs = ["oui", "non applicable", "ago-premiere", "B", "Conseil", "2026-10-18", "2027-01-31", "Sous conditions"]
+        self.assertEqual(MODULE.verifier_decision(table_decision(valeurs)), ("décision consignée", []))
 
 
 if __name__ == "__main__":

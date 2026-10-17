@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Décision suivante du vote bornée et traçable
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision de méthode :** demander à l’association un profil statutaire et une voie A/B/C, sans autoriser de scrutin ni présélectionner un outil. D reste bloquée ; dissolution reste bloquée avant interprétation des articles 15 et 19.
+- **Résultat :** brief de décision avec conditions cumulatives, motifs d’arrêt et trace atomique de huit champs. Une trace vide signifie attente ; une trace partielle est refusée.
+- **Optimisation :** cinq tests couvrent attente, trace partielle, option D, dissolution non interprétée et décision complète bornée.
+- **Limite :** le contrôle vérifie une consignation, pas l’autorité de l’instance, la qualité de la relecture ou la légalité du choix.
+- **Prochaine action :** l’association confirme ou remplace la version statutaire, indique le règlement intérieur, puis choisit `aucun`/A ou un seul profil avec A, B ou C.
+
 ## 2026-10-17 — Banc synthétique du vote défini sans l’exécuter
 
 - **Initiative :** `vote-distanciel-verifiable`.
