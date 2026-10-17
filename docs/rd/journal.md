@@ -2,6 +2,40 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Vote distanciel vérifiable cadré sans promesse absolue
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Besoin exprimé :** permettre un vote à distance secret, vérifiable et résistant au détournement, avec une analogie à la vérification publique de Bitcoin.
+- **Décision :** ne pas promettre « infalsifiable » ou « sécurisé en toutes circonstances », ne pas développer de cryptographie maison et ne pas recueillir de bulletin réel. Cadrer un vote vérifiable de bout en bout, séparant identité, justificatif anonyme, urne chiffrée, registre append-only, autorités de dépouillement à seuil et vérificateur indépendant.
+- **Recherche :** métadonnées GitHub consultées le 17 octobre 2026 pour Belenios (miroir AGPL-3.0), Helios (Apache-2.0) et ElectionGuard porté par Election Technology Initiative (MIT). Cette vérification ne vaut ni audit, ni sélection.
+- **Risques bloquants :** terminal compromis, coercition au domicile, corrélation par métadonnées, collusion, perte de clés, déni de service, droit applicable et accessibilité. Une blockchain publique ne résout pas ces risques et peut aggraver la réidentification.
+- **Résultat :** note de cadrage en neuf sections, initiative P0 à cadrer et contrôle CI des garde-fous.
+- **Prochaine action :** faire préciser le type de scrutin et les six décisions de gouvernance, puis obtenir des revues juridique, cryptographique, protection des données et accessibilité avant un éventuel banc d’essai entièrement synthétique.
+
+## 2026-10-17 — Chronologie de décision prospective contrôlée
+
+- **Initiative :** `prospective-apprentissages-2030`.
+- **Décision :** empêcher une trace où la décision précède le brief ou où le réexamen n’est pas postérieur à la décision.
+- **Résultat :** trois tests supplémentaires couvrent les deux chronologies impossibles et un cas valide ; la suite atteint 20 tests.
+- **Limite :** l’ordre des dates ne démontre ni qu’une réunion a eu lieu, ni que l’instance indiquée avait mandat, ni que le réexamen se tiendra.
+- **Prochaine action :** conserver la trace vide jusqu’à une décision humaine, puis renseigner une date de réexamen réellement convenue.
+
+## 2026-10-17 — Décision et portefeuille rendus cohérents
+
+- **Initiative :** `prospective-apprentissages-2030`.
+- **Décision :** relier l’état de la trace au statut du portefeuille : une décision vide exige `a-cadrer`, tandis qu’une décision consignée exige une évolution d’état dans le même changement.
+- **Résultat :** quatre tests supplémentaires couvrent l’attente cohérente, les deux divergences et l’initiative absente ; le rapport affiche ensemble décision et état.
+- **Limite :** cette cohérence de gouvernance ne prouve ni l’autorité de la décision, ni l’utilité d’un pilote, ni un consensus.
+- **Prochaine action :** faire décider A/B/C par l’association puis modifier ensemble la trace, le portefeuille et le journal, ou conserver explicitement l’attente.
+
+## 2026-10-17 — Trace de décision prospective protégée
+
+- **Initiative :** `prospective-apprentissages-2030`.
+- **Décision :** distinguer automatiquement une décision en attente d’une trace complète et refuser les traces partielles, sans choisir d’option à la place de l’association.
+- **Résultat :** le vérificateur accepte cinq champs vides ou cinq champs renseignés, limite l’option à A/B/C, contrôle les deux dates ISO et produit une erreur concise plutôt qu’une trace Python.
+- **Limite :** une trace complète atteste une consignation, pas la qualité de la délibération ni l’autorité de la personne indiquée.
+- **Prochaine action :** l’association peut conserver la décision en attente ou remplir les cinq champs après délibération ; aucune option n’est présélectionnée.
+
 ## 2026-10-17 — Date du brief rendue explicite et testable
 
 - **Initiative :** `prospective-apprentissages-2030`.

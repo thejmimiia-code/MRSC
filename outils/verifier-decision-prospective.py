@@ -52,6 +52,54 @@ def date_du_brief(markdown: str) -> dt.date:
     return date
 
 
+def etat_trace_decision(markdown: str, date_brief: dt.date | None = None) -> str:
+    section = re.search(r"## 10\. Trace de décision(?P<contenu>.*?)(?:\n## |\Z)", markdown, re.S)
+    if not section:
+        raise ValueError("section de trace de décision introuvable")
+    champs = [
+        "Option retenue", "Date", "Personne ou instance qui décide",
+        "Conditions ajoutées", "Date de réexamen",
+    ]
+    valeurs: list[str] = []
+    for champ in champs:
+        ligne = re.search(rf"^\| {re.escape(champ)} \|(?P<valeur>.*?)\|\s*$", section.group("contenu"), re.M)
+        if not ligne:
+            raise ValueError(f"champ de décision absent : {champ}")
+        valeurs.append(ligne.group("valeur").strip())
+    remplis = sum(bool(valeur) for valeur in valeurs)
+    if remplis == 0:
+        return "en attente"
+    if remplis != len(valeurs):
+        raise ValueError(f"trace de décision partielle : {remplis}/{len(valeurs)} champs remplis")
+    if valeurs[0] not in {"A", "B", "C"}:
+        raise ValueError("option retenue invalide : utiliser A, B ou C")
+    try:
+        date_decision = dt.date.fromisoformat(valeurs[1])
+        date_reexamen = dt.date.fromisoformat(valeurs[4])
+    except ValueError as erreur:
+        raise ValueError("dates de décision attendues au format AAAA-MM-JJ") from erreur
+    if date_brief and date_decision < date_brief:
+        raise ValueError("date de décision antérieure à la date du brief")
+    if date_reexamen <= date_decision:
+        raise ValueError("date de réexamen attendue après la date de décision")
+    return f"option {valeurs[0]} consignée"
+
+
+def verifier_etat_initiative(decision: str, initiatives: list[dict]) -> str:
+    correspondances = [
+        initiative for initiative in initiatives
+        if initiative.get("id") == "prospective-apprentissages-2030"
+    ]
+    if len(correspondances) != 1:
+        raise ValueError("initiative prospective-apprentissages-2030 absente ou dupliquée")
+    etat = correspondances[0].get("etat")
+    if decision == "en attente" and etat != "a-cadrer":
+        raise ValueError("décision en attente mais initiative hors de l’état a-cadrer")
+    if decision != "en attente" and etat == "a-cadrer":
+        raise ValueError("décision consignée mais initiative encore dans l’état a-cadrer")
+    return str(etat)
+
+
 def poids_page(markdown: str, page: str) -> tuple[int, int]:
     motif = rf"^\| `{re.escape(page)}` \| ([0-9.]+) \| ([0-9.]+) \|"
     ligne = re.search(motif, markdown, re.M)
@@ -71,9 +119,11 @@ def date_prochaine_revue(meta: dict) -> dt.date:
 def principal() -> int:
     brief = BRIEF.read_text(encoding="utf-8")
     date_reference = date_du_brief(brief)
+    decision = etat_trace_decision(brief, date_reference)
     catalogue = charger_toml(CATALOGUE).get("fiche", [])
     portefeuille = charger_toml(PORTEFEUILLE)
     initiatives = portefeuille.get("initiative", [])
+    etat_initiative = verifier_etat_initiative(decision, initiatives)
     fiches = len(catalogue)
     prototypes = sum(fiche.get("statut_editorial") == "Prototype à relire" for fiche in catalogue)
     domaines = len({fiche.get("domaine") for fiche in catalogue if fiche.get("domaine")})
@@ -114,10 +164,15 @@ def principal() -> int:
         f"Brief prospectif synchronisé au {date_reference.isoformat()} : "
         f"{fiches} fiches dans {domaines} domaines, {prototypes} prototypes, "
         f"{total_initiatives} initiatives dont {p0} P0, {questions} questions, "
-        f"{echues} revue échue, poids {poids_mobile}/{poids_ecran} Kio."
+        f"{echues} revue échue, poids {poids_mobile}/{poids_ecran} Kio, "
+        f"décision {decision}, initiative {etat_initiative}."
     )
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(principal())
+    try:
+        sys.exit(principal())
+    except (OSError, ValueError, tomllib.TOMLDecodeError) as erreur:
+        print(f"Brief prospectif impossible à vérifier : {erreur}", file=sys.stderr)
+        sys.exit(1)
