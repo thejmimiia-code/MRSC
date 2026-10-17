@@ -1,0 +1,83 @@
+# Plan de revues par rôles — aucune personne n'est nommée ou réputée disponible.
+[meta]
+version = 1
+date = 2026-10-17
+initiative = "vote-distanciel-verifiable"
+statut = "a-attribuer"
+regle = "Une auto-relecture ou un contrôle automatique ne remplace aucun rôle requis."
+
+[[role]]
+id = "association-decisionnaire"
+responsabilite = "Confirmer les statuts applicables, choisir ou refuser un profil et autoriser chaque changement de phase."
+preuve_attendue = "Décision datée et procès-verbal, sans donnée personnelle publiée au-delà du nécessaire."
+statut = "a-attribuer"
+
+[[role]]
+id = "juridique-statutaire"
+responsabilite = "Interpréter statuts, règlement intérieur, procurations, quorum, secret, contestation et droit applicable."
+preuve_attendue = "Avis borné à une version des documents et à un profil précis."
+statut = "a-attribuer"
+
+[[role]]
+id = "cryptographie-vote"
+responsabilite = "Examiner protocole, hypothèses, preuves, coercition, vérifiabilité, clés et paramètres."
+preuve_attendue = "Rapport reliant chaque conclusion à la version et aux artefacts examinés."
+statut = "a-attribuer"
+
+[[role]]
+id = "protection-donnees"
+responsabilite = "Examiner identité, métadonnées, journaux, rétention, fournisseurs et droits des personnes."
+preuve_attendue = "Cartographie des flux, base applicable, minimisation et plan de suppression."
+statut = "a-attribuer"
+
+[[role]]
+id = "accessibilite-usages"
+responsabilite = "Examiner compréhension, clavier, zoom, lecteur d'écran, assistance, coercition et canaux de repli."
+preuve_attendue = "Revue compétente puis protocole d'essai volontaire autorisé, sans collecte superflue."
+statut = "a-attribuer"
+
+[[role]]
+id = "operations-securite"
+responsabilite = "Examiner déploiement, séparation des rôles, clés, builds, sauvegardes, reprise, incidents et destruction."
+preuve_attendue = "Procédures rejouées sur environnement synthétique et écarts consignés."
+statut = "a-attribuer"
+
+[[revue]]
+id = "source-statutaire"
+artefacts = ["assets/documents/statuts-2020.pdf", "docs/rd/vote-distanciel-regles.toml", "docs/rd/vote-distanciel-profils.toml"]
+roles_requis = ["association-decisionnaire", "juridique-statutaire"]
+question = "La bonne version est-elle utilisée et le profil choisi traduit-il les articles sans règle ajoutée ?"
+condition_sortie = "Version, règlement intérieur, ambiguïtés et profil confirmés dans une décision datée."
+statut = "a-attribuer"
+
+[[revue]]
+id = "modele-menaces"
+artefacts = ["docs/rd/vote-distanciel-menaces.toml", "docs/rd/vote-distanciel-donnees.toml", "docs/rd/vote-distanciel-vie-privee.md", "docs/rd/vote-distanciel-verifiable.md"]
+roles_requis = ["cryptographie-vote", "protection-donnees", "operations-securite", "accessibilite-usages"]
+question = "Les actifs, adversaires, coercition, métadonnées, pannes et conditions d'arrêt sont-ils suffisants pour le profil ?"
+condition_sortie = "Menaces manquantes ajoutées et objections non résolues maintenues comme blocages."
+statut = "a-attribuer"
+
+[[revue]]
+id = "comparaison-candidats"
+artefacts = ["docs/rd/vote-distanciel-comparaison.toml", "docs/rd/vote-distanciel-sources.toml", "docs/rd/vote-distanciel-premiers-ecarts.md"]
+roles_requis = ["cryptographie-vote", "protection-donnees", "operations-securite", "accessibilite-usages", "juridique-statutaire"]
+question = "Les preuves exactes d'une version candidate satisfont-elles chaque critère bloquant sans score compensatoire ?"
+condition_sortie = "Chaque critère possède preuve, inconnu ou échec ; aucune inconnue n'est convertie en réussite."
+statut = "a-attribuer"
+
+[[revue]]
+id = "protocole-banc"
+artefacts = ["docs/rd/vote-distanciel-protocole-banc.md", "docs/rd/vote-distanciel-cas-essai.toml"]
+roles_requis = ["cryptographie-vote", "protection-donnees", "operations-securite", "accessibilite-usages"]
+question = "Le banc peut-il chercher les échecs sans identité, bulletin ou secret réel et sans surinterpréter un résultat ?"
+condition_sortie = "Cas, seuils d'arrêt, destruction et limites approuvés avant toute exécution."
+statut = "a-attribuer"
+
+[[revue]]
+id = "decision-de-phase"
+artefacts = ["docs/rd/vote-distanciel-decision.md", "docs/rd/portefeuille.toml", "docs/rd/journal.md"]
+roles_requis = ["association-decisionnaire", "juridique-statutaire", "cryptographie-vote", "protection-donnees", "accessibilite-usages", "operations-securite"]
+question = "Les objections des rôles requis sont-elles visibles avant que l'association décide de poursuivre ou d'arrêter ?"
+condition_sortie = "Trace complète, conditions et objections consignées ; publication ou phase suivante autorisée séparément."
+statut = "a-attribuer"

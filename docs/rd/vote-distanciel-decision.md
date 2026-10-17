@@ -5,7 +5,7 @@
 ## 1. Ce qui est établi dans le dépôt
 
 - La copie locale des statuts comporte plusieurs profils de scrutin et non une règle unique.
-- Quinze relevés statutaires sont structurés, tous `a-faire-relire`.
+- Dix-huit relevés statutaires sont structurés, tous `a-faire-relire`.
 - Dix menaces et sept invariants sont documentés, tous `a-expertiser`.
 - Douze cas de banc synthétique sont décrits, tous `a-concevoir` et jamais exécutés.
 - Aucun bulletin réel, aucune identité réelle, aucune clé de production et aucun service de vote ne sont présents.
@@ -47,6 +47,7 @@ A ou `aucun` sont des décisions valides. La recherche n’a pas à aboutir à u
 5. Le protocole du banc est relu en cryptographie, droit, protection des données, opérations et accessibilité.
 6. L’environnement est isolé, les données sont synthétiques et le plan de destruction est fixé avant l’exercice.
 7. Une condition d’arrêt entraîne réellement l’arrêt, sans compensation par un score global.
+8. Les six rôles du [`plan de revues`](vote-distanciel-revues.toml) ont examiné les artefacts relevant de leur responsabilité ; aucune disponibilité n’est supposée.
 
 Si une condition manque, la phase reste documentaire.
 

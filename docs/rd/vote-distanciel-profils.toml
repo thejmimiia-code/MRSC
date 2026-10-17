@@ -18,29 +18,28 @@ statut = "a-faire-relire"
 [[profil]]
 id = "conseil-ethique"
 titre = "Conseil d’éthique"
-regles = ["vote-concernes-impactes"]
-references_supplementaires = ["Article 10.2.1, page 13 : consultation électronique, une procuration, majorité absolue et départage propre."]
+regles = ["vote-concernes-impactes", "conseil-ethique-electronique"]
 questions_bloquantes = ["Comment constituer et geler la liste des membres du conseil ?", "Comment représenter la règle de départage propre ?", "Le vote doit-il être secret pour le litige traité ?"]
 statut = "a-faire-relire"
 
 [[profil]]
 id = "territoriale-constitutive"
 titre = "Assemblée territoriale constitutive"
-regles = ["vote-concernes-impactes", "une-cotisation-une-voix", "territorial-secret-blanc"]
+regles = ["vote-concernes-impactes", "une-cotisation-une-voix", "territorial-secret-blanc", "phases-participatives"]
 questions_bloquantes = ["Une présence à distance satisfait-elle la notion de membre présent ?", "Comment figer les candidatures et organiser une reprise avec de nouveaux candidats ?", "Les procurations sont-elles exclues ou simplement non décrites ?"]
 statut = "a-faire-relire"
 
 [[profil]]
 id = "ago-premiere"
 titre = "AGO — première convocation"
-regles = ["vote-concernes-impactes", "une-cotisation-une-voix", "ago-corps-ordre-du-jour", "ago-premiere-convocation", "ago-procuration", "ago-secret", "ago-session-numerique"]
+regles = ["vote-concernes-impactes", "une-cotisation-une-voix", "ago-corps-ordre-du-jour", "ago-premiere-convocation", "ago-procuration", "ago-secret", "ago-session-numerique", "ago-proces-verbal"]
 questions_bloquantes = ["Qu’est-ce qu’une réponse transmise pour le quorum ?", "Quand et comment la demande de scrutin secret est-elle arrêtée ?", "Comment articuler voix prépondérante et scrutin secret ?", "Comment révoquer une procuration sans lier mandant et bulletin ?"]
 statut = "a-faire-relire"
 
 [[profil]]
 id = "ago-seconde"
 titre = "AGO — seconde convocation"
-regles = ["vote-concernes-impactes", "une-cotisation-une-voix", "ago-corps-ordre-du-jour", "ago-seconde-convocation", "ago-procuration", "ago-secret", "ago-session-numerique"]
+regles = ["vote-concernes-impactes", "une-cotisation-une-voix", "ago-corps-ordre-du-jour", "ago-seconde-convocation", "ago-procuration", "ago-secret", "ago-session-numerique", "ago-proces-verbal"]
 questions_bloquantes = ["Comment prouver le même ordre du jour ?", "La durée numérique minimale s’applique-t-elle identiquement à la seconde convocation ?", "Comment articuler départage, secret et faible participation ?"]
 statut = "a-faire-relire"
 
