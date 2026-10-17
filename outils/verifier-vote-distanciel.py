@@ -21,6 +21,7 @@ REGLES = RACINE / "docs" / "rd" / "vote-distanciel-regles.toml"
 CAS_ESSAI = RACINE / "docs" / "rd" / "vote-distanciel-cas-essai.toml"
 DECISION = RACINE / "docs" / "rd" / "vote-distanciel-decision.md"
 COMPARAISON = RACINE / "docs" / "rd" / "vote-distanciel-comparaison.toml"
+SOURCES = RACINE / "docs" / "rd" / "vote-distanciel-sources.toml"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -179,6 +180,39 @@ def verifier_comparaison(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_sources(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if meta.get("statut") != "releve-partiel-a-expertiser":
+        erreurs.append("relevé des sources maintenu partiel et à expertiser")
+    projets = registre.get("projet", [])
+    ids = [projet.get("id") for projet in projets]
+    if set(ids) != {"belenios", "helios", "electionguard"} or len(ids) != len(set(ids)):
+        erreurs.append("relevé contenant exactement Belenios, Helios et ElectionGuard")
+    champs = {
+        "id", "depot", "url", "branche", "commit", "date_commit", "archive",
+        "licence_api", "derniere_release_github", "observation_readme", "limite", "statut",
+    }
+    for index, projet in enumerate(projets, start=1):
+        vides = [champ for champ in champs if champ not in projet or projet.get(champ) in {None, ""}]
+        if vides:
+            erreurs.append(f"source {index} avec champs renseignés : {', '.join(sorted(vides))}")
+        if not re.fullmatch(r"[0-9a-f]{40}", str(projet.get("commit", ""))):
+            erreurs.append(f"source {projet.get('id', index)} avec commit Git complet")
+        try:
+            dt.datetime.fromisoformat(str(projet.get("date_commit", "")).replace("Z", "+00:00"))
+        except ValueError:
+            erreurs.append(f"source {projet.get('id', index)} avec date de commit ISO")
+        if projet.get("statut") != "a-evaluer":
+            erreurs.append(f"source {projet.get('id', index)} maintenue à évaluer")
+        if projet.get("archive") is not False:
+            erreurs.append(f"état d’archivage de {projet.get('id', index)} attendu explicitement faux au relevé")
+        champs_interdits = {"score", "note", "rang", "selection"} & set(projet)
+        if champs_interdits:
+            erreurs.append(f"source {projet.get('id', index)} sans score ni sélection")
+    return erreurs
+
+
 def verifier_decision(markdown: str) -> tuple[str, list[str]]:
     erreurs: list[str] = []
     champs = [
@@ -253,6 +287,10 @@ def principal() -> int:
         comparaison = tomllib.load(fichier)
     manquants.extend(verifier_comparaison(comparaison))
 
+    with SOURCES.open("rb") as fichier:
+        sources = tomllib.load(fichier)
+    manquants.extend(verifier_sources(sources))
+
     etat_decision, erreurs_decision = verifier_decision(DECISION.read_text(encoding="utf-8"))
     manquants.extend(erreurs_decision)
 
@@ -280,7 +318,7 @@ def principal() -> int:
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
         "à expertiser, 15 règles statutaires à relire, 12 cas synthétiques à concevoir, "
-        f"4 options et 15 critères sans score, décision {etat_decision}, initiative P0 à cadrer, "
+        f"4 options et 15 critères sans score, 3 sources épinglées à évaluer, décision {etat_decision}, initiative P0 à cadrer, "
         "aucune identité ni bulletin réel autorisé."
     )
     return 0

@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Sources candidates épinglées sans sélection
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Recherche :** API GitHub et README consultés le 17 octobre 2026 pour les dépôts de Belenios, Helios et ElectionGuard. Les commits par défaut sont épinglés, avec branche, date, licence API, archivage et dernière release GitHub observable.
+- **Constats limités :** Belenios se décrit comme système vérifiable avec rôles séparables et le dépôt GitHub comme miroir ; Helios se décrit comme système vérifiable de bout en bout dans un README bref ; ElectionGuard se décrit comme SDK/composants avec artefacts vérifiables, pas comme service complet M.R.S.C.
+- **Décision :** ne déduire aucune aptitude de ces auto-descriptions ; conserver les trois statuts `a-evaluer` et l’option A comme référence.
+- **Optimisation :** quatre tests refusent commit abrégé, source déclarée évaluée ou champ de sélection.
+- **Limite :** aucun protocole, audit indépendant, version déployable, dépendance, accessibilité ou adéquation statutaire n’a été évalué.
+- **Prochaine action :** après choix humain du profil et de la voie, réouvrir les spécifications et audits exacts du ou des candidats encore pertinents.
+
 ## 2026-10-17 — Comparaison du vote sans score ni classement
 
 - **Initiative :** `vote-distanciel-verifiable`.
