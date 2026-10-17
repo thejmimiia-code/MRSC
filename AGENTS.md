@@ -73,6 +73,8 @@ python3 outils/verifier-rd-continue.py
 python3 outils/construire-apprentissages.py --verifier
 python3 outils/construire-simulateur.py --verifier
 python3 outils/verifier-site-statique.py
+python3 outils/optimiser-images.py --verifier
+python3 outils/verifier-poids-pages.py
 python3 outils/verifier-securite.py
 python3 outils/verifier-integration.py
 ```

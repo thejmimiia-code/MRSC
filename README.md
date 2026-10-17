@@ -64,6 +64,18 @@ Une veille hebdomadaire (`.github/workflows/maj-simulateur.yml`) échoue — et 
 
 Le site et sa copie embarquée peuvent être testés avec les fonctions Python sur Vercel ou en local. Sur l’adresse GitHub Pages, utilisez le lien Vercel affiché dans la page du simulateur. Le détail de l’architecture, de la mise à jour et du dépannage est dans [`docs/integration-simulateur.md`](docs/integration-simulateur.md) ; l’audit sécurité, ses limites et la feuille de route sont dans [`docs/rd-audit-securite-optimisation.md`](docs/rd-audit-securite-optimisation.md).
 
+## Poids des pages, images et sobriété
+
+Trois grandes illustrations disposent désormais de variantes AVIF et WebP en deux largeurs (et 1 200 px pour l’atlas), servies par `<picture>` avec un repli JPEG. L’image de secours de la scène 3D n’est chargée que si le rendu WebGL échoue. Une mesure locale reconstruit le poids des 95 pages publiques et applique des budgets de travail ; elle ne remplace ni une mesure réseau, ni un bilan carbone, ni un audit RGESN.
+
+```sh
+python3 outils/optimiser-images.py --verifier        # manifeste, empreintes et tailles des variantes
+python3 outils/verifier-poids-pages.py              # poids estimé et budgets (95 pages)
+python3 outils/verifier-poids-pages.py --rapport docs/rd/poids-pages.md
+```
+
+La méthode, les chiffres avant/après, les limites et les prochaines vérifications sont dans [`docs/rd/poids-et-sobriete-numerique.md`](docs/rd/poids-et-sobriete-numerique.md). Les essais navigateur du dépôt (`outils/test-experience.cjs`) couvrent aussi le réflow à 320 px et le zoom à 150 %.
+
 ## Lancer en local
 
 Depuis la racine du dépôt :

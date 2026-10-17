@@ -84,7 +84,7 @@ etat = "a-tester"
 domaines = ["numerique-ia", "methodes-communication"]
 question = "Les pages restent-elles rapides, lisibles, robustes, accessibles et utilisables quand le stockage, le réseau ou une fonction optionnelle échoue?"
 preuves = ["docs/rd-plan-global-consolidation.md", "docs/rd-affichage-adaptatif.md", "docs/rd-audit-securite-optimisation.md", "docs/rd-confidentialite-rgpd.md", "outils/verifier-integration.py", "outils/verifier-site-statique.py", "outils/test-experience.cjs"]
-prochaine_action = "Le test Chromium 720 → 500 → 480 → 460 → 320 → 240 px passe et la publication Pages du merge commit 01bbed52e32aa5e9c28dd926fadf8c27050c81f7 a réussi. Faire la revue visuelle manuelle dans Chrome signalée par la personne utilisatrice ; contrôler Agrandir/Réduire, les autres breakpoints, les panneaux repliables, les trois modes, le zoom natif, le tactile et le lecteur d’écran sur pages types, fiches, aventure et simulateur avant de réviser l’état. L’URL publique est configurée, mais doit encore être vérifiée visuellement après propagation ; aucune collecte d’usage."
+prochaine_action = "Le test Chromium 720 → 500 → 480 → 460 → 320 → 240 px passe désormais 8/8 dans l’environnement local, y compris 320 px à 150 %, contraste et espacement renforcés, depuis la correction du réflow à 320 px et de la largeur stable du bouton compact. Faire la revue visuelle manuelle dans Chrome signalée par la personne utilisatrice ; contrôler les autres breakpoints, les panneaux repliables, les trois modes, le zoom natif, le tactile et le lecteur d’écran sur pages types, fiches, aventure et simulateur avant de réviser l’état. L’URL publique est configurée, mais doit encore être vérifiée visuellement après propagation ; aucune collecte d’usage."
 criteres_sortie = ["Les principaux parcours, la barre d’outils, les cinq paliers de texte, les trois mises en page, l’en-tête compactable et la navigation à 125/150 % sont testés sur des largeurs et technologies représentatives.", "Les améliorations ne retirent ni zoom natif, clavier, reflow ou contenu sans JavaScript.", "Aucune collecte ou dépendance tierce n'est ajoutée sans nécessité et information."]
 skills = ["conception-innovation", "accessibilite-co-conception", "integration-securite", "evaluation-maintenance"]
 
@@ -178,3 +178,16 @@ preuves = ["README.md", "docs/rd-plan-global-consolidation.md", "docs/rd/journal
 prochaine_action = "L’administrateur de la zone DNS doit remplacer l’enregistrement actuel de www (résolution IPv4 observée : 213.186.33.50) par un CNAME vers thejmimiia-code.github.io. Ne pas configurer le domaine dans Pages ni changer les canoniques avant la propagation et sa vérification."
 criteres_sortie = ["www.mrsc.fr résout par CNAME vers thejmimiia-code.github.io sans A/AAAA contradictoire.", "GitHub Pages déclare www.mrsc.fr comme CNAME personnalisé et confirme un certificat HTTPS actif.", "Canoniques, og:url, JSON-LD, sitemap et attribution utilisent www.mrsc.fr.", "Un contrôle navigateur confirme que l’adresse visible reste www.mrsc.fr et ne renvoie pas vers github.io."]
 skills = ["integration-securite", "strategie-tests", "documentation-technique"]
+
+[[initiative]]
+id = "poids-et-sobriete-numerique"
+titre = "Alléger les pages et documenter leur poids sans retirer d’accès"
+priorite = "P1"
+phase = "essai"
+etat = "a-tester"
+domaines = ["numerique-ia", "sciences-techniques-environnement", "methodes-communication"]
+question = "Quels octets peuvent être évités sans retirer de contenu, de repli sans JavaScript, d’accessibilité ni de qualité visuelle, et que peut-on réellement affirmer à partir d’une mesure locale ?"
+preuves = ["docs/rd/poids-et-sobriete-numerique.md", "docs/rd/poids-pages.md", "docs/rd/derives-images.json", "outils/optimiser-images.py", "outils/verifier-poids-pages.py", "index.html", "anglais-aventure.html", "apprendre.html", "assets/css/site.css", "outils/test-experience.cjs"]
+prochaine_action = "Vérifier sur GitHub Pages et Vercel les types MIME, la compression et le cache réellement servis pour .avif/.webp ; faire une revue visuelle humaine des trois illustrations et mesurer sur appareil/réseau réels (LCP, CLS, octets transférés) sans convertir ces mesures en bilan carbone. Ne pas présenter la passe comme un audit RGESN ni comme une preuve d’impact évité."
+criteres_sortie = ["Chaque grande image a des variantes AVIF/WebP dimensionnées avec un repli JPEG, et les tailles sont vérifiées hors ligne.", "Les pages publiques restent sous les budgets de travail sans retirer de contenu, de texte alternatif ni de repli sans JavaScript.", "Les types MIME, la compression et le cache sont vérifiés sur au moins un hébergement réel avant toute revendication de gain en production.", "La sélection des formats et le repli de la scène sont testés dans un navigateur, et les limites de la mesure sont publiées avec les chiffres.", "Le manifeste des variantes reste reproductible et aucune source n’est supprimée au profit d’un format unique."]
+skills = ["integration-securite", "strategie-tests", "analyse-donnees-reproductible", "recherche-sources", "evaluation-maintenance"]

@@ -750,13 +750,29 @@ def fichiers_du_site() -> None:
                 "décision ou position officielle de l’association",
                 "Aucun balayage externe récent",
                 "aucun atelier avec l’association ni test avec des personnes",
-                "concept candidat, non une fonction construite",
-                "Aucune fonction issue de la Boussole n’est intégrée au site.",
+                "premier prototype statique de dix questions est publié",
+                "pas un moteur de recommandation",
+                "n’a pas été évalué auprès de visiteurs",
                 "Boussole des savoirs",
                 "Hypothèses, non validées",
             )
         )
+        and 'href="apprendre.html#boussole-savoirs"' in transparence
         and 'href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/prospective-2027-2030.md"' in transparence,
+    )
+    verifier(
+        "La sobriété publique publie ses chiffres avec leurs limites",
+        all(
+            terme in transparence_texte
+            for terme in (
+                'id="poids-et-sobriete"',
+                "reconstruction hors ligne",
+                "ne mesurent ni le réseau, ni le rendu, ni un bilan carbone",
+                "RGESN 2024",
+                "brouillon",
+            )
+        )
+        and 'href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/poids-et-sobriete-numerique.md"' in transparence,
     )
     verifier(
         "Les titres et le repère de statut de la note ressortent sur l’encadré bleu",

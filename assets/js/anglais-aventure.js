@@ -1104,7 +1104,22 @@
     return Boolean(vertexBuffer);
   }
 
+  function chargerRepliScene() {
+    const picture = sceneFallback?.closest("picture");
+    if (!picture || picture.dataset.charge === "oui") return;
+    for (const source of picture.querySelectorAll("source[data-srcset]")) {
+      source.srcset = source.dataset.srcset;
+      source.removeAttribute("data-srcset");
+    }
+    if (sceneFallback.dataset.src) {
+      sceneFallback.src = sceneFallback.dataset.src;
+      sceneFallback.removeAttribute("data-src");
+    }
+    picture.dataset.charge = "oui";
+  }
+
   function useSceneFallback() {
+    chargerRepliScene();
     if (sceneCanvas) sceneCanvas.hidden = true;
     if (sceneFallback) sceneFallback.hidden = false;
     if (sceneControls) sceneControls.hidden = true;

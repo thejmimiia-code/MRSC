@@ -57,6 +57,12 @@ jobs:
       - name: Vérifier les pages, liens et scripts statiques
         run: python3 outils/verifier-site-statique.py
 
+      - name: Vérifier le manifeste des variantes d’images
+        run: python3 outils/optimiser-images.py --verifier
+
+      - name: Vérifier le poids estimé des pages
+        run: python3 outils/verifier-poids-pages.py
+
       - name: Vérifier les frontières de sécurité
         run: python3 outils/verifier-securite.py
 

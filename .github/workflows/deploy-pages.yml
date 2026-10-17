@@ -61,6 +61,12 @@ jobs:
       - name: Validate static pages, links and scripts
         run: python3 outils/verifier-site-statique.py
 
+      - name: Validate image variants
+        run: python3 outils/optimiser-images.py --verifier
+
+      - name: Validate estimated page weight
+        run: python3 outils/verifier-poids-pages.py
+
       - name: Validate security boundaries
         run: python3 outils/verifier-securite.py
 
