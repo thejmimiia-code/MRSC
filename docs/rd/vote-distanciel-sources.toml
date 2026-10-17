@@ -1,0 +1,53 @@
+# Relevé GitHub reproductible — métadonnées seulement, aucune évaluation de sécurité.
+[meta]
+version = 1
+date_consultation = 2026-10-17
+methode = "GitHub REST API via gh ; README du commit par défaut via média brut"
+statut = "releve-partiel-a-expertiser"
+limite = "Les dépôts et README sont des sources des projets sur eux-mêmes ; aucun audit indépendant n'est recensé ici."
+
+[[projet]]
+id = "belenios"
+depot = "glondu/belenios"
+url = "https://github.com/glondu/belenios"
+miroir = true
+source_amont_annoncee = "https://gitlab.com/vcast.vote/belenios"
+branche = "master"
+commit = "8888045a7650df5241a76ae75128ebde61e83904"
+date_commit = "2026-10-16T08:48:04Z"
+archive = false
+licence_api = "AGPL-3.0"
+derniere_release_github = "aucune release retournée par l'API"
+observation_readme = "Le README présente un outil en ligne vérifiable dérivé de Helios-C, avec administrateur, autorité d'identifiants, trustees et électeurs ; il indique que la séparation des rôles renforce la configuration."
+limite = "Miroir GitHub ; spécification, documentation amont, audits, version déployable et adéquation M.R.S.C. non examinés."
+statut = "a-evaluer"
+
+[[projet]]
+id = "helios"
+depot = "benadida/helios-server"
+url = "https://github.com/benadida/helios-server"
+miroir = false
+branche = "master"
+commit = "88621e3196961ec03fe54bbd3a1c2196e715e9a2"
+date_commit = "2026-08-15T20:15:23Z"
+archive = false
+licence_api = "Apache-2.0"
+derniere_release_github = "aucune release retournée par l'API"
+observation_readme = "Le README se décrit en une phrase comme système de vote vérifiable de bout en bout."
+limite = "README très bref ; protocole, déploiement, audits, menace de coercition, maintenance et adéquation M.R.S.C. non examinés."
+statut = "a-evaluer"
+
+[[projet]]
+id = "electionguard"
+depot = "Election-Tech-Initiative/electionguard"
+url = "https://github.com/Election-Tech-Initiative/electionguard"
+miroir = false
+branche = "main"
+commit = "c6786d8bab5c15f33181dadf91b919541aae0ffd"
+date_commit = "2026-06-10T16:03:47Z"
+archive = false
+licence_api = "MIT"
+derniere_release_github = "v2.1 publiée le 2024-08-15"
+observation_readme = "Le README présente un SDK et des composants de vérification, de chiffrement et de publication d'artefacts ; il ne se présente pas comme un service complet prêt pour un scrutin M.R.S.C."
+limite = "Dépôt vivant et composants liés ; architecture complète, audits, versions de chaque composant et adéquation M.R.S.C. non examinés."
+statut = "a-evaluer"
