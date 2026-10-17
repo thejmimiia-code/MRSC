@@ -13,6 +13,15 @@ MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)
 
 
+def trace_decision(valeurs: list[str]) -> str:
+    champs = [
+        "Option retenue", "Date", "Personne ou instance qui décide",
+        "Conditions ajoutées", "Date de réexamen",
+    ]
+    lignes = "\n".join(f"| {champ} | {valeur} |" for champ, valeur in zip(champs, valeurs))
+    return f"## 10. Trace de décision\n\n{lignes}\n"
+
+
 class CompterQuestionsBoussoleTests(unittest.TestCase):
     def test_compte_uniquement_les_elements_de_la_liste(self):
         html = '''
@@ -44,6 +53,22 @@ class CompterQuestionsBoussoleTests(unittest.TestCase):
         texte = "**Date : 17 octembre 2026.**\n| Valeur au 17 octembre 2026 |"
         with self.assertRaisesRegex(ValueError, "date française"):
             MODULE.date_du_brief(texte)
+
+    def test_reconnait_une_decision_en_attente(self):
+        self.assertEqual(MODULE.etat_trace_decision(trace_decision(["", "", "", "", ""])), "en attente")
+
+    def test_refuse_une_decision_partielle(self):
+        with self.assertRaisesRegex(ValueError, "partielle"):
+            MODULE.etat_trace_decision(trace_decision(["B", "2026-10-17", "", "", ""]))
+
+    def test_reconnait_une_decision_complete(self):
+        texte = trace_decision(["B", "2026-10-17", "Conseil", "Aucune", "2027-01-31"])
+        self.assertEqual(MODULE.etat_trace_decision(texte), "option B consignée")
+
+    def test_refuse_une_option_invalide(self):
+        texte = trace_decision(["D", "2026-10-17", "Conseil", "Aucune", "2027-01-31"])
+        with self.assertRaisesRegex(ValueError, "A, B ou C"):
+            MODULE.etat_trace_decision(texte)
 
     def test_arrondit_les_poids_affiches(self):
         tableau = "| `apprendre.html` | 158.8 | 308.6 | 619.5 |"

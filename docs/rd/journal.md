@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Trace de décision prospective protégée
+
+- **Initiative :** `prospective-apprentissages-2030`.
+- **Décision :** distinguer automatiquement une décision en attente d’une trace complète et refuser les traces partielles, sans choisir d’option à la place de l’association.
+- **Résultat :** le vérificateur accepte cinq champs vides ou cinq champs renseignés, limite l’option à A/B/C, contrôle les deux dates ISO et produit une erreur concise plutôt qu’une trace Python.
+- **Limite :** une trace complète atteste une consignation, pas la qualité de la délibération ni l’autorité de la personne indiquée.
+- **Prochaine action :** l’association peut conserver la décision en attente ou remplir les cinq champs après délibération ; aucune option n’est présélectionnée.
+
 ## 2026-10-17 — Date du brief rendue explicite et testable
 
 - **Initiative :** `prospective-apprentissages-2030`.
