@@ -48,6 +48,9 @@ jobs:
       - name: Vérifier la page générée du simulateur
         run: python3 outils/construire-simulateur.py --verifier
 
+      - name: Vérifier la file de relecture générée
+        run: python3 outils/file-relecture.py --verifier
+
       - name: Vérifier le portefeuille et la continuité R&D
         run: python3 outils/verifier-rd-continue.py
 
