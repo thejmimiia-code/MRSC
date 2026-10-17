@@ -25,6 +25,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: verifier-publication
@@ -64,3 +65,43 @@ jobs:
             fi
           } >> "$GITHUB_STEP_SUMMARY"
           exit "$statut"
+
+      - name: Publier le rapport dans une issue de suivi
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_TITLE: "En-têtes servis par l’hébergement — rapport"
+          BASE_URL: ${{ inputs.base-url || 'https://thejmimiia-code.github.io/MRSC/' }}
+        run: |
+          set -euo pipefail
+          rapport="$RUNNER_TEMP/entetes-publics.md"
+          corps="$RUNNER_TEMP/entetes-issue.md"
+          {
+            echo "Rapport automatique du $(date -u '+%Y-%m-%d %H:%M UTC') pour <$BASE_URL>."
+            echo
+            if [ -f "$rapport" ]; then
+              cat "$rapport"
+            else
+              echo "Le tableau est indisponible ; consulter le journal du run."
+            fi
+            echo
+            echo "---"
+            echo
+            echo "Ce rapport constate des en-têtes (code, type MIME, encodage, cache). Il ne mesure ni le rendu, ni la performance, ni une empreinte carbone."
+          } > "$corps"
+
+          numero="$(gh issue list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state open \
+            --search 'in:title "En-têtes servis par l’hébergement"' \
+            --json number,title \
+            --limit 100 \
+            | python3 -c 'import json, os, sys; titre=os.environ["ISSUE_TITLE"]; items=json.load(sys.stdin); print(next((item["number"] for item in items if item["title"] == titre), ""))')"
+
+          if [ -n "$numero" ]; then
+            gh issue edit "$numero" --repo "$GITHUB_REPOSITORY" --body-file "$corps"
+            echo "Issue #$numero actualisée."
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$ISSUE_TITLE" --body-file "$corps"
+          fi
