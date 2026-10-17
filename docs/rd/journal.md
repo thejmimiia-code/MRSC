@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Accessibilité et repli examinés sans donnée de santé
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** structurer huit barrières et le risque propre à chaque repli sans déclarer de conformité ni autoriser d’essai avec des personnes.
+- **Résultat :** clavier, lecteur d’écran, zoom, compréhension, temps, équipement, assistance et vérification indépendante sont reliés à une preuve projetée et à un repli à expertiser.
+- **Prospective :** un canal alternatif peut affaiblir secret, égalité ou vérifiabilité ; il n’est donc jamais présumé accessible par sa seule existence.
+- **Optimisation :** le contrôle refuse une conformité prématurée, une barrière supprimée et un repli dont le risque n’est pas documenté.
+- **Limite :** aucun diagnostic, justificatif de handicap, personne réelle ou résultat d’utilisabilité n’est collecté.
+- **Prochaine action :** faire examiner une version candidate précise par le rôle accessibilité avec les autres rôles avant tout essai autorisé.
+
 ## 2026-10-17 — Continuité bornée par des arrêts sûrs
 
 - **Initiative :** `vote-distanciel-verifiable`.
