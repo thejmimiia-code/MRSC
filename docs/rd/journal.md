@@ -2,6 +2,43 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Banc synthétique du vote défini sans l’exécuter
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** préparer un protocole capable d’invalider une solution candidate, sans développer d’urne ni utiliser de données réelles.
+- **Résultat :** 12 cas projetés couvrent les 10 menaces : altérations de bulletin, terminal, coercition, corrélation, seuil, clés, panne, émission, build, rétention et profil statutaire. Chaque cas précise altération, attendu et condition d’arrêt ; tous restent `a-concevoir`.
+- **Optimisation :** quatre tests supplémentaires refusent un cas dit réussi, une menace non couverte ou inconnue ; le contrôle exige des données synthétiques uniquement.
+- **Limite :** aucun cas n’a été exécuté ; ce protocole ne prouve aucune propriété cryptographique, juridique, opérationnelle ou d’accessibilité.
+- **Prochaine action :** faire expertiser le protocole et choisir un seul profil statutaire avant de sélectionner une solution candidate et sa version.
+
+## 2026-10-17 — Directives statutaires relevées pour le vote distanciel
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Source :** copie locale `assets/documents/statuts-2020.pdf`, 25 pages, empreinte SHA-256 `938bd5b72d70ab4e3737f61b91818a6813b29cc5453da44c81d5b7f33ca143c3`. Extraction locale pypdf 6.1.1 ; le PDF chiffré a produit des avertissements d’objets, donc confrontation visuelle et relecture compétente encore requises.
+- **Constat :** les statuts admettent plusieurs consultations électroniques, dont une AGO numérique ouverte au moins sept jours, mais distinguent Bureau, conseil d’éthique, territoriale, AGO, AGE et dissolution. Quorum, majorité, procuration, secret, blanc, délai et départage ne sont pas uniformes.
+- **Décision :** ne pas créer une règle générique. Consigner 15 relevés `a-faire-relire`, leurs pages, portées et ambiguïtés ; lier leur empreinte au PDF source.
+- **Ambiguïtés bloquantes :** présence/réponse numérique, secret et voix prépondérante, procuration secrète, qualification des membres concernés, article 15 face à la dissolution, portée du blanc et version du règlement intérieur.
+- **Optimisation :** quatre tests supplémentaires refusent empreinte obsolète, règle absente ou statut prématurément validé.
+- **Prochaine action :** faire confirmer la version applicable et les profils par l’association et une personne compétente avant de choisir un seul type de scrutin pour un éventuel banc synthétique.
+
+## 2026-10-17 — Options de vote et tests négatifs du registre
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Prospective :** quatre options sans probabilité sont comparées : ne pas voter à distance, service existant expertisé, logiciel existant auto-hébergé, nouveau système. L’option A reste le comparateur ; D est écartée à ce stade.
+- **Optimisation :** le validateur du registre est isolé et couvert par six tests, dont suppression d’une menace, preuve vide, faux statut maîtrisé, invariant dupliqué et registre détaché de l’initiative.
+- **Résultat :** le contrôle ne vérifie plus seulement le fichier nominal ; il démontre qu’il refuse plusieurs dégradations structurantes.
+- **Limite :** les tests vérifient un schéma documentaire, pas une propriété cryptographique, une résistance réelle ou la pertinence des options.
+- **Prochaine action :** définir avec l’association le type de scrutin et éliminer les options incompatibles avant toute comparaison technique approfondie.
+
+## 2026-10-17 — Modèle de menace du vote rendu reproductible
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** transformer la revue contradictoire en registre TOML maintenable plutôt qu’en liste implicite dans une architecture.
+- **Résultat :** 7 invariants et 10 menaces couvrent serveur, terminal, coercition, métadonnées, collusion, clés, disponibilité, émission, chaîne logicielle et réidentification. Chaque menace distingue contrôle proposé, preuve attendue, risque résiduel et condition d’arrêt ; toutes restent `a-expertiser`.
+- **Optimisation :** la CI refuse une menace absente, dupliquée, incomplète ou présentée prématurément comme maîtrisée.
+- **Limite :** ce registre est une auto-analyse de conception ; il n’est ni exhaustif, ni audité, ni validé par une personne spécialiste du vote ou de la cryptographie.
+- **Prochaine action :** faire critiquer le registre par les rôles juridique, cryptographique, protection des données, opérations et accessibilité avant tout choix d’outil.
+
 ## 2026-10-17 — Vote distanciel vérifiable cadré sans promesse absolue
 
 - **Initiative :** `vote-distanciel-verifiable`.
