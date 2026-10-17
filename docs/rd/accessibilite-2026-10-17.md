@@ -45,23 +45,26 @@ La page `simulateur.html` ne se stabilise pas sur `networkidle0` (iframe et appe
 
 ## Troisième passe : états interactifs
 
-Le balayage au repos ne voit pas les panneaux fermés. Treize états ont donc été ouverts puis analysés sur les deux largeurs :
+Le balayage au repos ne voit pas les panneaux fermés ni les composants qui apparaissent au clic. Vingt-trois états ont donc été ouverts puis analysés sur les deux largeurs :
 
 - menu mobile ouvert ;
-- panneau « Affichage » déplié sur l'accueil ;
-- filtre actif sur Apprendre ;
-- mission ouverte dans Les Mondes, puis filtre par monde ;
-- commandes d'affichage rendues visibles dans le simulateur, puis texte agrandi.
+- panneau « Affichage » déplié sur l'accueil, puis contraste renforcé activé ;
+- filtre actif sur Apprendre, puis recherche sans résultat ;
+- aides dépliées dans une fiche ;
+- mission ouverte dans Les Mondes, réponse choisie, puis filtre par monde ;
+- commandes d'affichage rendues visibles dans le simulateur, texte agrandi, puis contraste renforcé.
 
-Ce balayage a révélé un défaut que les passes précédentes ne pouvaient pas voir : dans le panneau « Affichage » (fermé par défaut), les libellés de `A−`, `A+` et « Espacement du texte » ne contenaient pas leur texte visible.
+Deux défauts que les passes précédentes ne pouvaient pas voir ont été trouvés.
 
-### Corrections
+1. **Panneau « Affichage » (fermé par défaut)** : les libellés de `A−`, `A+` et « Espacement du texte » ne contenaient pas leur texte visible.
+   - `A−` et `A+` reçoivent un libellé qui commence par le glyphe visible, dans les 94 pages qui portent l'en-tête et dans le générateur `outils/construire-apprentissages.py`.
+   - Les quatre boutons à bascule (« Contraste renforcé », « Espacement du texte » sur le site ; « Contraste + », « Interligne + » dans le simulateur) ne modifient plus leur libellé à l'activation : leur nom reste celui affiché et `aria-pressed` porte l'état. Un libellé qui bascule entre « activer » et « désactiver » doublait cette information et créait le décalage.
+   - `simulateur/index.html` a été régénéré ; les 81 fiches ont été vérifiées après modification du générateur.
+2. **Bouton secondaire du héros des Mondes, à 1 280 px** : texte blanc sur `rgba(11, 33, 51, .45)`, soit un fond effectif `#919ba3` et un contraste de 2,82:1 une fois la couche translucide composée sur du clair. À 360 px, le recadrage de l'image donnait un fond plus sombre : le défaut n'apparaissait qu'à une largeur.
+   - Le fond passe à `rgba(11, 33, 51, .72)` (6,5:1 dans le pire cas sur fond blanc) et le survol à `.9` ; les pastilles de la même zone passent à `.7`.
+   - Ce calcul reste une borne : l'image de fond n'est pas analysée, et le survol n'est pas mesuré par axe.
 
-- `A−` et `A+` reçoivent un libellé qui commence par le glyphe visible, dans les 94 pages qui portent l'en-tête et dans le générateur `outils/construire-apprentissages.py`.
-- Les quatre boutons à bascule (« Contraste renforcé », « Espacement du texte » sur le site ; « Contraste + », « Interligne + » dans le simulateur) ne modifient plus leur libellé à l'activation : leur nom reste celui affiché et `aria-pressed` porte l'état. Un libellé qui bascule entre « activer » et « désactiver » doublait cette information et créait le décalage.
-- `simulateur/index.html` a été régénéré ; les 81 fiches ont été vérifiées après modification du générateur.
-
-Après correction, les **37 exécutions** du script par défaut (24 pages + 13 états) ne remontent aucune violation.
+Après correction, les **47 exécutions** du script par défaut (24 pages + 23 états) ne remontent aucune violation.
 
 ## Ce que ces mesures ne disent pas
 
@@ -69,11 +72,11 @@ Après correction, les **37 exécutions** du script par défaut (24 pages + 13 �
 - Aucun essai avec lecteur d'écran, aucune navigation clavier exhaustive, aucune revue par une personne experte en accessibilité.
 - Chromium seulement ; Firefox et Safari ne sont pas testés.
 - Seuls les états listés sont balayés, une fois ; une session complète, les formulaires en erreur, les contenus repliés des fiches et les missions jusqu'au bout ne le sont pas.
-- Les contrastes recalculés à la main portent sur le fond connu du pied de page ; un changement de thème ou de fond invaliderait ces valeurs.
+- Les contrastes recalculés à la main portent sur le fond connu du pied de page ou sur une borne « fond blanc » ; les images de fond ne sont pas analysées, et les états de survol ne sont pas mesurés par axe.
 - La version publiée sur GitHub Pages n'est pas contrôlée dans cette passe.
 
 ## Suite
 
 - Faire relire les corrections par une personne compétente en accessibilité et, si possible, par un utilisateur de lecteur d'écran.
-- Élargir les états balayés (formulaires, contenus repliés, mission terminée) et refaire la mesure après toute modification des composants interactifs.
+- Élargir les états balayés (formulaires en erreur, mission terminée) et refaire la mesure après toute modification des composants interactifs.
 - Ne pas modifier l'état de `optimisation-du-site` avant cette relecture : les preuves restent des mesures locales par l'agent.

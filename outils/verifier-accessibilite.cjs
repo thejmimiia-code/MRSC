@@ -23,6 +23,11 @@
  *   --etendu          balaie toutes les pages HTML du dépôt aux deux largeurs
  *   --rapport <chemin> écrit le détail JSON des résultats
  *
+ * Variables :
+ *   MRSC_A11Y_BASE=https://exemple/   vise une version publiée au lieu du
+ *                                     serveur local (contrôle réseau explicite)
+ *   MRSC_A11Y_PORT                    port du serveur local (4176 par défaut)
+ *
  * Aucun réseau : le site est servi par `outils/serveur-local.py` sur la boucle
  * locale, avec le moteur désactivé.
  */
@@ -73,6 +78,7 @@ try {
 
 const ROOT = path.resolve(__dirname, '..');
 const PORT = Number(process.env.MRSC_A11Y_PORT || 4176);
+const BASE = (process.env.MRSC_A11Y_BASE || '').replace(/\/$/, '');
 const ETENDU = process.argv.includes('--etendu');
 const RAPPORT = (() => {
   const index = process.argv.indexOf('--rapport');
@@ -122,7 +128,7 @@ function resume(violations) {
 async function ouvrir(browser, largeur, chemin) {
   const page = await browser.newPage();
   await page.setViewport({ width: largeur, height: 900 });
-  const url = `http://127.0.0.1:${PORT}/${chemin}`;
+  const url = BASE ? `${BASE}/${chemin}` : `http://127.0.0.1:${PORT}/${chemin}`;
   if (chemin === 'simulateur.html') {
     // Cette page conserve une iframe et des appels asynchrones : `networkidle0`
     // n'est pas garanti, on laisse simplement les scripts se terminer.
@@ -153,12 +159,16 @@ function pagesEtendues() {
 }
 
 async function main() {
-  const serveur = spawn(
-    'python3',
-    ['outils/serveur-local.py', '--port', String(PORT), '--sans-moteur', '--bind', '127.0.0.1'],
-    { cwd: ROOT, stdio: 'ignore' }
-  );
-  await attendre(1500);
+  // `MRSC_A11Y_BASE` permet de viser la version publiée ; le serveur local
+  // reste le comportement par défaut, entièrement hors réseau.
+  const serveur = BASE
+    ? null
+    : spawn(
+      'python3',
+      ['outils/serveur-local.py', '--port', String(PORT), '--sans-moteur', '--bind', '127.0.0.1'],
+      { cwd: ROOT, stdio: 'ignore' }
+    );
+  if (serveur) await attendre(1500);
 
   const packDir = path.resolve(path.dirname(require.resolve('@sparticuz/chromium')), '..');
   const libs = await chromiumPackage.inflate(path.join(packDir, 'bin', 'al2023.tar.br'));
@@ -214,6 +224,10 @@ async function main() {
       });
       await attendre(250);
       enregistrer(`Accueil, panneau Affichage ouvert @${largeur}`, await analyser(page));
+      await page.evaluate(() => document.querySelector('[data-contrast-toggle]')?.click());
+      await attendre(300);
+      enregistrer(`Accueil, contraste renforcé @${largeur}`, await analyser(page));
+      await page.evaluate(() => document.querySelector('[data-contrast-toggle]')?.click());
       await page.close();
 
       const apprendre = await ouvrir(browser, largeur, 'apprendre.html');
@@ -221,12 +235,32 @@ async function main() {
       await apprendre.type('#learning-search', 'carte').catch(() => {});
       await attendre(400);
       enregistrer(`Apprendre, filtre actif @${largeur}`, await analyser(apprendre));
+      await apprendre.evaluate(() => {
+        const recherche = document.querySelector('#learning-search');
+        if (recherche) {
+          recherche.value = 'zzzzzz';
+          recherche.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      });
+      await attendre(400);
+      enregistrer(`Apprendre, aucun résultat @${largeur}`, await analyser(apprendre));
       await apprendre.close();
+
+      const fiche = await ouvrir(browser, largeur, 'apprendre/fiches/civ-verifier-information.html');
+      await fiche.evaluate(() => {
+        document.querySelectorAll('details.learning-answer').forEach((details) => { details.open = true; });
+      });
+      await attendre(300);
+      enregistrer(`Fiche, aides dépliées @${largeur}`, await analyser(fiche));
+      await fiche.close();
 
       const mondes = await ouvrir(browser, largeur, 'anglais-aventure.html');
       await mondes.click('[data-mission-id="gare"]');
       await attendre(600);
       enregistrer(`Mondes, mission ouverte @${largeur}`, await analyser(mondes));
+      await mondes.click('.adventure-answer-choice').catch(() => {});
+      await attendre(500);
+      enregistrer(`Mondes, réponse choisie @${largeur}`, await analyser(mondes));
       await mondes.evaluate(() => {
         const retour = document.querySelector('[data-return-map], #back-to-map, [data-action="retour-carte"]');
         if (retour) retour.click();
@@ -247,6 +281,9 @@ async function main() {
       await simulateur.evaluate(() => document.querySelector('[data-sim-text-increase]')?.click());
       await attendre(300);
       enregistrer(`Simulateur, texte agrandi @${largeur}`, await analyser(simulateur));
+      await simulateur.evaluate(() => document.querySelector('[data-sim-contrast]')?.click());
+      await attendre(300);
+      enregistrer(`Simulateur, contraste renforcé @${largeur}`, await analyser(simulateur));
       await simulateur.close();
     }
   }
@@ -264,7 +301,7 @@ async function main() {
   }
 
   await browser.close();
-  serveur.kill();
+  if (serveur) serveur.kill();
   process.exit(echecs.length ? 1 : 0);
 }
 
