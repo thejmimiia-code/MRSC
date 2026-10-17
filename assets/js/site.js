@@ -90,7 +90,9 @@
       contrastToggle.setAttribute("aria-pressed", String(contrastEnabled));
       contrastToggle.setAttribute(
         "aria-label",
-        contrastEnabled ? "Désactiver le contraste renforcé" : "Activer le contraste renforcé"
+        contrastEnabled
+          ? "Contraste + — désactiver le contraste renforcé"
+          : "Contraste + — activer le contraste renforcé"
       );
     }
     synchroniserSimulateurs();
@@ -103,7 +105,9 @@
       spacingToggle.setAttribute("aria-pressed", String(spacingEnabled));
       spacingToggle.setAttribute(
         "aria-label",
-        spacingEnabled ? "Désactiver l’espacement renforcé" : "Activer l’espacement renforcé"
+        spacingEnabled
+          ? "Interligne + — désactiver l’espacement renforcé"
+          : "Interligne + — activer l’espacement renforcé"
       );
     }
     synchroniserSimulateurs();

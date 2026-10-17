@@ -748,8 +748,9 @@ def fichiers_du_site() -> None:
                 "quatre situations possibles",
                 "sans probabilité ni prévision",
                 "décision ou position officielle de l’association",
-                "Aucun balayage externe récent",
-                "aucun atelier avec l’association ni test avec des personnes",
+                "Premier relevé externe (17 octobre 2026)",
+                "aucune hausse n’a été mesurée en France",
+                "ne remplace ni atelier avec l’association ni test avec des personnes",
                 "premier prototype statique de dix questions est publié",
                 "pas un moteur de recommandation",
                 "n’a pas été évalué auprès de visiteurs",
@@ -758,6 +759,8 @@ def fichiers_du_site() -> None:
             )
         )
         and 'href="apprendre.html#boussole-savoirs"' in transparence
+        and 'docs/rd/decision-prospective.md' in transparence
+        and 'docs/rd/veille-2026-10-17.md' in transparence
         and 'href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/prospective-2027-2030.md"' in transparence,
     )
     verifier(
@@ -773,6 +776,19 @@ def fichiers_du_site() -> None:
             )
         )
         and 'href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/poids-et-sobriete-numerique.md"' in transparence,
+    )
+    verifier(
+        "Le relevé d’accessibilité public distingue mesure automatique et validation humaine",
+        all(
+            terme in transparence_texte
+            for terme in (
+                'id="accessibilite-releve"',
+                "balayage axe-core 4.14.0",
+                "ne dit pas que le site est accessible",
+                "aucun essai avec un lecteur d’écran",
+            )
+        )
+        and 'docs/rd/accessibilite-2026-10-17.md' in transparence,
     )
     verifier(
         "Les titres et le repère de statut de la note ressortent sur l’encadré bleu",

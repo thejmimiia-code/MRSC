@@ -70,6 +70,18 @@ summary:focus-visible {
   outline-color: var(--white);
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 p {
   margin: 0 0 1rem;
   overflow-wrap: break-word;
@@ -3173,6 +3185,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
   body,.site-header,.site-journey-navigation,.site-journey-panel,.main-nav,.site-footer,.home-hero,.ai-hero,.learning-hero,.section,.page-banner,.display-settings-panel,.display-settings-row { background:Canvas !important; color:CanvasText !important; box-shadow:none !important; backdrop-filter:none !important; }
   .site-header,.site-journey-navigation,.site-journey-panel,.main-nav,.site-footer,.display-settings-panel,.display-settings-row { border-color:CanvasText !important; }
   .nav-links a,main a:not(.button),.site-footer a { color:LinkText !important; }
+  .site-footer .footer-rd { color:CanvasText !important; }
   .button,.display-settings > summary,.display-control,.nav-toggle,.header-compact-toggle,.site-journey-settings > summary,.site-journey-button,.skip-link { border:1px solid ButtonText !important; background:ButtonFace !important; color:ButtonText !important; box-shadow:none !important; }
   .button:hover,.display-control:hover:not(:disabled),.header-compact-toggle:hover,.site-journey-settings > summary:hover,.site-journey-button:hover:not(:disabled) { background:Highlight !important; color:HighlightText !important; }
   * { text-shadow:none !important; }
@@ -3299,7 +3312,8 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .learning-voisines ul { margin: .4rem 0 .8rem; padding-left: 1.1rem; }
 .learning-voisines li { margin: .35rem 0; }
 .learning-voisines small { display: block; color: var(--muted); font-size: .82rem; }
-.footer-rd { margin: .45rem 0 0; color: var(--muted); font-size: .85rem; }
+.footer-rd { margin: .45rem 0 0; color: rgba(255, 255, 255, .74); font-size: .85rem; }
+.site-footer .footer-rd a { color: #cfe0ff; }
 .simulateur-passeport {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
