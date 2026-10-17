@@ -76,7 +76,7 @@ statut = "a-attribuer"
 
 [[revue]]
 id = "decision-de-phase"
-artefacts = ["docs/rd/vote-distanciel-decision.md", "docs/rd/portefeuille.toml", "docs/rd/journal.md"]
+artefacts = ["docs/rd/vote-distanciel-decision.md", "docs/rd/vote-distanciel-resultats.toml", "docs/rd/portefeuille.toml", "docs/rd/journal.md"]
 roles_requis = ["association-decisionnaire", "juridique-statutaire", "cryptographie-vote", "protection-donnees", "accessibilite-usages", "operations-securite"]
 question = "Les objections des rôles requis sont-elles visibles avant que l'association décide de poursuivre ou d'arrêter ?"
 condition_sortie = "Trace complète, conditions et objections consignées ; publication ou phase suivante autorisée séparément."

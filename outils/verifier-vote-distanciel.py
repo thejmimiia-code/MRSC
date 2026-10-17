@@ -31,6 +31,7 @@ ACCESSIBILITE = RACINE / "docs" / "rd" / "vote-distanciel-accessibilite.toml"
 ASSISTANCE = RACINE / "docs" / "rd" / "vote-distanciel-assistance.toml"
 CLES = RACINE / "docs" / "rd" / "vote-distanciel-cles.toml"
 CHAINE_LOGICIELLE = RACINE / "docs" / "rd" / "vote-distanciel-chaine-logicielle.toml"
+RESULTATS = RACINE / "docs" / "rd" / "vote-distanciel-resultats.toml"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -549,6 +550,67 @@ def verifier_chaine_logicielle(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_resultats(registre: dict) -> list[str]:
+    """Vérifie que calcul, vérification, contestation et proclamation restent séparés."""
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "vote-distanciel-verifiable"
+        or meta.get("statut") != "a-faire-relire"
+        or meta.get("donnees") != "synthetiques-uniquement"
+        or meta.get("execution_autorisee") is not False
+        or meta.get("resultat_autorise") is not False
+    ):
+        erreurs.append("cycle des résultats synthétique, non exécutable et sans résultat autorisé")
+    if not meta.get("principe"):
+        erreurs.append("cycle des résultats avec principe de non-proclamation automatique")
+
+    etapes = registre.get("etape", [])
+    ids = [item.get("id") for item in etapes]
+    requis = {
+        "gel-du-tableau", "verification-cryptographique", "verification-statutaire",
+        "revue-des-incidents", "fenetre-de-contestation", "decision-de-proclamation",
+    }
+    if set(ids) != requis or len(ids) != len(set(ids)):
+        erreurs.append("exactement 6 étapes du résultat sans doublon")
+    for item in etapes:
+        identifiant = item.get("id", "?")
+        champs = ("entree_requise", "sortie_attendue", "preuve_attendue", "condition_arret")
+        if any(not item.get(champ) for champ in champs):
+            erreurs.append(f"étape {identifiant} avec entrée, sortie, preuve et arrêt")
+        if len(item.get("interdits", [])) < 3:
+            erreurs.append(f"étape {identifiant} avec au moins 3 pratiques interdites")
+        if item.get("statut") != "a-faire-relire":
+            erreurs.append(f"étape {identifiant} maintenue à faire relire")
+
+    publications = registre.get("publication", [])
+    if len(publications) != 1:
+        erreurs.append("exactement un paquet public minimal projeté")
+    else:
+        paquet = publications[0]
+        if (
+            paquet.get("id") != "paquet-public-minimal"
+            or len(paquet.get("contenu_projete", [])) < 6
+            or len(paquet.get("contenu_interdit", [])) < 6
+            or paquet.get("statut") != "a-faire-expertiser"
+        ):
+            erreurs.append("paquet public minimal complet et maintenu à expertiser")
+
+    portes = registre.get("porte", [])
+    if len(portes) != 1:
+        erreurs.append("exactement une porte bloquante avant proclamation")
+    else:
+        porte = portes[0]
+        if (
+            porte.get("id") != "avant-proclamation"
+            or set(porte.get("etapes", [])) != requis
+            or porte.get("decision") != "association-decisionnaire"
+            or porte.get("statut") != "bloquante"
+        ):
+            erreurs.append("porte avant proclamation couvrant les 6 étapes et la décision associative")
+    return erreurs
+
+
 def verifier_revues(registre: dict) -> list[str]:
     erreurs: list[str] = []
     meta = registre.get("meta", {})
@@ -738,6 +800,10 @@ def principal() -> int:
         chaine_logicielle = tomllib.load(fichier)
     manquants.extend(verifier_chaine_logicielle(chaine_logicielle))
 
+    with RESULTATS.open("rb") as fichier:
+        resultats = tomllib.load(fichier)
+    manquants.extend(verifier_resultats(resultats))
+
     with REVUES.open("rb") as fichier:
         revues = tomllib.load(fichier)
     manquants.extend(verifier_revues(revues))
@@ -769,7 +835,7 @@ def principal() -> int:
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
         "à expertiser, 18 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
-        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites, 5 signaux de corrélation, 7 incidents de continuité, 8 barrières d’accessibilité, 6 situations d’assistance, 6 phases de clés et 7 contrôles logiciels, "
+        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites, 5 signaux de corrélation, 7 incidents de continuité, 8 barrières d’accessibilité, 6 situations d’assistance, 6 phases de clés, 7 contrôles logiciels et 6 étapes de résultat, "
         f"6 rôles et 5 revues à attribuer, décision {etat_decision}, initiative P0 à cadrer, "
         "aucune identité ni bulletin réel autorisé."
     )
