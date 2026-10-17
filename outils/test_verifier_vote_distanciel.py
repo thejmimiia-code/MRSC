@@ -19,6 +19,7 @@ REGLES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-regles.toml"
 CAS_PATH = RACINE / "docs" / "rd" / "vote-distanciel-cas-essai.toml"
 STATUTS_PATH = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 DECISION_PATH = RACINE / "docs" / "rd" / "vote-distanciel-decision.md"
+COMPARAISON_PATH = RACINE / "docs" / "rd" / "vote-distanciel-comparaison.toml"
 
 
 def table_decision(valeurs: list[str]) -> str:
@@ -40,6 +41,8 @@ class RegistreMenacesTests(unittest.TestCase):
         with CAS_PATH.open("rb") as fichier:
             cls.cas = tomllib.load(fichier)
         cls.decision = DECISION_PATH.read_text(encoding="utf-8")
+        with COMPARAISON_PATH.open("rb") as fichier:
+            cls.comparaison = tomllib.load(fichier)
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -113,6 +116,24 @@ class RegistreMenacesTests(unittest.TestCase):
         registre = copy.deepcopy(self.cas)
         registre["cas"][0]["menaces"].append("menace-inventee")
         self.assertTrue(any("inconnues" in erreur for erreur in MODULE.verifier_cas_essai(registre)))
+
+    def test_comparaison_courante_est_sans_classement(self):
+        self.assertEqual(MODULE.verifier_comparaison(self.comparaison), [])
+
+    def test_refuse_une_option_absente(self):
+        registre = copy.deepcopy(self.comparaison)
+        registre["option"].pop()
+        self.assertTrue(any("ElectionGuard" in erreur for erreur in MODULE.verifier_comparaison(registre)))
+
+    def test_refuse_un_score(self):
+        registre = copy.deepcopy(self.comparaison)
+        registre["option"][0]["score"] = 100
+        self.assertTrue(any("sans score" in erreur for erreur in MODULE.verifier_comparaison(registre)))
+
+    def test_refuse_un_critere_non_bloquant(self):
+        registre = copy.deepcopy(self.comparaison)
+        registre["critere"][0]["bloquant"] = False
+        self.assertTrue(any("maintenu bloquant" in erreur for erreur in MODULE.verifier_comparaison(registre)))
 
     def test_decision_courante_est_en_attente(self):
         self.assertEqual(MODULE.verifier_decision(self.decision), ("en attente", []))

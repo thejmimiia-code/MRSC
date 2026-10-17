@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Comparaison du vote sans score ni classement
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** comparer l’option A et trois projets existants sans score compensatoire, rang ou probabilité ; une inconnue sur un critère bloquant empêche la sélection.
+- **Résultat :** grille TOML de 4 options et 15 critères couvrant statuts/droit, secret, vérifiabilité, coercition, clés, métadonnées, procurations, quorum, résilience, chaîne logicielle, accessibilité, réversibilité, maintenance, licence et audits. Toutes les options restent `a-evaluer`.
+- **Optimisation :** quatre tests refusent option absente, score ajouté et critère rendu non bloquant.
+- **Limite :** les licences sont des métadonnées observées ; aucune version, fonctionnalité, audit ou aptitude n’est évaluée dans cette passe.
+- **Prochaine action :** attendre le choix d’un profil et d’une voie A/B/C, puis faire remplir la grille par des rôles compétents avec des preuves exactes, sans total global.
+
 ## 2026-10-17 — Décision suivante du vote bornée et traçable
 
 - **Initiative :** `vote-distanciel-verifiable`.
