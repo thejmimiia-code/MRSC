@@ -6,7 +6,9 @@ Ce script ne teste aucune cryptographie et ne certifie aucun système de vote.
 
 from __future__ import annotations
 
+import datetime as dt
 import hashlib
+import re
 import sys
 import tomllib
 from pathlib import Path
@@ -17,6 +19,7 @@ PORTEFEUILLE = RACINE / "docs" / "rd" / "portefeuille.toml"
 MENACES = RACINE / "docs" / "rd" / "vote-distanciel-menaces.toml"
 REGLES = RACINE / "docs" / "rd" / "vote-distanciel-regles.toml"
 CAS_ESSAI = RACINE / "docs" / "rd" / "vote-distanciel-cas-essai.toml"
+DECISION = RACINE / "docs" / "rd" / "vote-distanciel-decision.md"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -143,6 +146,51 @@ def verifier_cas_essai(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_decision(markdown: str) -> tuple[str, list[str]]:
+    erreurs: list[str] = []
+    champs = [
+        "Version des statuts confirmée", "Règlement intérieur vérifié",
+        "Profil retenu", "Option retenue", "Instance ou rôle décideur",
+        "Date de décision", "Date de réexamen", "Conditions ou objections",
+    ]
+    valeurs: dict[str, str] = {}
+    for champ in champs:
+        ligne = re.search(rf"^\| {re.escape(champ)} \|(?P<valeur>.*?)\|\s*$", markdown, re.M)
+        if not ligne:
+            erreurs.append(f"champ de décision absent : {champ}")
+        else:
+            valeurs[champ] = ligne.group("valeur").strip()
+    if erreurs:
+        return "invalide", erreurs
+    remplis = sum(bool(valeur) for valeur in valeurs.values())
+    if remplis == 0:
+        return "en attente", []
+    if remplis != len(champs):
+        return "invalide", [f"trace de décision partielle : {remplis}/{len(champs)} champs remplis"]
+
+    profils = {
+        "bureau-executif", "conseil-ethique", "territoriale-constitutive",
+        "ago-premiere", "ago-seconde", "age-premiere", "age-seconde",
+        "dissolution", "aucun",
+    }
+    if valeurs["Profil retenu"] not in profils:
+        erreurs.append("profil retenu inconnu")
+    if valeurs["Option retenue"] not in {"A", "B", "C"}:
+        erreurs.append("option retenue invalide : A, B ou C uniquement")
+    if valeurs["Profil retenu"] == "dissolution":
+        erreurs.append("profil dissolution bloqué avant interprétation des articles 15 et 19")
+    if valeurs["Profil retenu"] == "aucun" and valeurs["Option retenue"] != "A":
+        erreurs.append("profil aucun compatible uniquement avec l’option A")
+    try:
+        date_decision = dt.date.fromisoformat(valeurs["Date de décision"])
+        date_reexamen = dt.date.fromisoformat(valeurs["Date de réexamen"])
+        if date_reexamen <= date_decision:
+            erreurs.append("date de réexamen attendue après la décision")
+    except ValueError:
+        erreurs.append("dates attendues au format AAAA-MM-JJ")
+    return ("décision consignée" if not erreurs else "invalide"), erreurs
+
+
 def principal() -> int:
     texte = NOTE.read_text(encoding="utf-8")
     texte_normalise = texte.casefold()
@@ -168,6 +216,9 @@ def principal() -> int:
         cas_essai = tomllib.load(fichier)
     manquants.extend(verifier_cas_essai(cas_essai))
 
+    etat_decision, erreurs_decision = verifier_decision(DECISION.read_text(encoding="utf-8"))
+    manquants.extend(erreurs_decision)
+
     with PORTEFEUILLE.open("rb") as fichier:
         initiatives = tomllib.load(fichier).get("initiative", [])
     votes = [item for item in initiatives if item.get("id") == "vote-distanciel-verifiable"]
@@ -191,8 +242,8 @@ def principal() -> int:
 
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
-        "à expertiser, 15 règles statutaires à relire, 12 cas synthétiques à concevoir, initiative P0 à cadrer, "
-        "aucune identité ni bulletin réel autorisé."
+        "à expertiser, 15 règles statutaires à relire, 12 cas synthétiques à concevoir, "
+        f"décision {etat_decision}, initiative P0 à cadrer, aucune identité ni bulletin réel autorisé."
     )
     return 0
 
