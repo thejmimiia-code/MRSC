@@ -1,0 +1,154 @@
+# Registre de travail — aucune menace n'est déclarée maîtrisée.
+# Ce fichier ne contient ni identité, ni bulletin, ni secret cryptographique.
+
+[meta]
+version = 1
+date = 2026-10-17
+initiative = "vote-distanciel-verifiable"
+statut = "a-expertiser"
+regle = "Un contrôle proposé reste à expertiser tant qu'une preuve indépendante adaptée n'est pas reliée."
+
+[[invariant]]
+id = "separation-identite-bulletin"
+description = "Aucun composant ni journal ne peut relier seul une identité, un justificatif anonyme et un bulletin."
+preuve_attendue = "Diagramme de flux, inspection des journaux et test de corrélation par une équipe indépendante."
+
+[[invariant]]
+id = "cle-a-seuil"
+description = "Aucune personne ni machine ne détient seule le moyen de déchiffrer le résultat."
+preuve_attendue = "Cérémonie de clés observée, parts distribuées et exercice documenté de récupération."
+
+[[invariant]]
+id = "verification-independante"
+description = "Les artefacts publics sont vérifiables hors ligne par au moins deux implémentations indépendantes."
+preuve_attendue = "Vecteurs de test communs et résultats reproductibles sans accès au serveur de l'urne."
+
+[[invariant]]
+id = "recu-non-revelateur"
+description = "Le reçu prouve l'inclusion sans révéler le choix ni permettre de le prouver à un tiers."
+preuve_attendue = "Analyse cryptographique et essais contradictoires d'achat de voix."
+
+[[invariant]]
+id = "repli-et-annulation"
+description = "Un canal de secours, une contestation et une annulation sont possibles sans décision automatique du logiciel."
+preuve_attendue = "Procédure adoptée, exercice de panne et autorité humaine identifiée."
+
+[[invariant]]
+id = "aucune-donnee-reelle-en-rd"
+description = "Les phases de recherche utilisent uniquement des identités et bulletins synthétiques."
+preuve_attendue = "Jeux de test générés, revue des journaux et absence de collecte publique."
+
+[[invariant]]
+id = "aucune-crypto-maison"
+description = "Le dépôt n'implémente aucune primitive cryptographique nouvelle."
+preuve_attendue = "Inventaire des bibliothèques, versions, paramètres et audits amont."
+
+[[menace]]
+id = "serveur-urne-compromis"
+acteur = "attaquant externe ou administrateur"
+actif = "bulletins chiffrés et registre"
+scenario = "Le serveur supprime, remplace, réordonne ou ajoute un bulletin."
+controle_propose = "Preuves de validité, reçu d'inclusion, registre append-only répliqué et vérificateur indépendant."
+preuve_attendue = "Tests de suppression, substitution, duplication et divergence entre miroirs."
+risque_residuel = "Le terminal peut chiffrer un autre choix avant le dépôt."
+condition_arret = "Une substitution reste possible sans alerte vérifiable."
+statut = "a-expertiser"
+
+[[menace]]
+id = "terminal-compromis"
+acteur = "logiciel malveillant sur l'appareil"
+actif = "intention de vote"
+scenario = "L'interface affiche un choix mais en chiffre un autre, ou révèle le choix."
+controle_propose = "Vérification sur second appareil, code de vérification distinct et canal papier de secours."
+preuve_attendue = "Prototype synthétique attaqué sur appareils séparés et analyse experte du protocole."
+risque_residuel = "Deux appareils peuvent être compromis ou contrôlés par un tiers."
+condition_arret = "Le scrutin distant devient l'unique canal ou le second appareil apprend le choix."
+statut = "a-expertiser"
+
+[[menace]]
+id = "coercition-domicile"
+acteur = "proche, employeur, acheteur de voix ou groupe organisé"
+actif = "liberté du vote"
+scenario = "Une personne impose un choix ou exige une preuve du vote."
+controle_propose = "Reçu non révélateur, possibilité encadrée de revoter et canal physique secret."
+preuve_attendue = "Revue juridique, analyse de coercition et essais d'usage autorisés."
+risque_residuel = "Aucun protocole ne contrôle entièrement l'environnement du domicile."
+condition_arret = "Le reçu permet de prouver le choix ou aucun canal secret n'existe."
+statut = "a-expertiser"
+
+[[menace]]
+id = "correlation-metadonnees"
+acteur = "opérateur de services, réseau ou observateur"
+actif = "anonymat entre identité et bulletin"
+scenario = "Les horaires, adresses réseau, tailles ou journaux relient émission du droit et dépôt."
+controle_propose = "Services séparés, minimisation des logs, lots, délais et couche réseau expertisée."
+preuve_attendue = "Test de corrélation sur trafic synthétique et inspection de tous les journaux."
+risque_residuel = "Un adversaire global peut observer plusieurs points du réseau."
+condition_arret = "Une corrélation réaliste dépasse le seuil défini avant l'essai."
+statut = "a-expertiser"
+
+[[menace]]
+id = "collusion-autorites"
+acteur = "sous-ensemble d'autorités de dépouillement"
+actif = "secret et résultat"
+scenario = "Des autorités combinent leurs parts, déchiffrent tôt ou publient un faux résultat."
+controle_propose = "Seuil multi-organisations, cérémonies publiques et preuves de déchiffrement."
+preuve_attendue = "Analyse du seuil, exercice avec autorité absente et vérification des preuves."
+risque_residuel = "Le nombre requis d'autorités peut colluder."
+condition_arret = "Une seule organisation contrôle le seuil effectif."
+statut = "a-expertiser"
+
+[[menace]]
+id = "perte-de-cles"
+acteur = "erreur, panne ou destruction"
+actif = "capacité de dépouillement"
+scenario = "Des parts deviennent indisponibles et empêchent le résultat ou la reprise."
+controle_propose = "Parts de secours scellées, rotation et exercice de récupération avant scrutin."
+preuve_attendue = "Récupération complète sur données synthétiques avec traces de cérémonie."
+risque_residuel = "Les sauvegardes augmentent la surface de compromission."
+condition_arret = "La récupération exige de reconstituer une clé complète sur une machine."
+statut = "a-expertiser"
+
+[[menace]]
+id = "deni-de-service"
+acteur = "attaquant, panne d'hébergeur ou rupture réseau"
+actif = "droit effectif de participer"
+scenario = "Le service est indisponible pendant une partie du scrutin."
+controle_propose = "Fenêtre suffisante, réplication, reprise, prolongation humaine et canal alternatif."
+preuve_attendue = "Exercices de panne, objectifs documentés et décision d'annulation simulée."
+risque_residuel = "Une rupture large peut rendre tous les canaux distants indisponibles."
+condition_arret = "Aucun canal alternatif accessible ou aucune règle de prolongation n'existe."
+statut = "a-expertiser"
+
+[[menace]]
+id = "emission-frauduleuse"
+acteur = "gestionnaire du corps électoral"
+actif = "éligibilité et unicité"
+scenario = "Des droits sont créés en trop, refusés ou réattribués."
+controle_propose = "Registre d'émission auditable, justificatifs anonymes et rapprochement de totaux sans lien individuel."
+preuve_attendue = "Audit des totaux, tests de doublon et procédure de recours."
+risque_residuel = "L'audit des totaux ne corrige pas une liste électorale injuste."
+condition_arret = "Aucun recours ne permet de corriger une omission avant clôture."
+statut = "a-expertiser"
+
+[[menace]]
+id = "logiciel-ou-dependance-compromis"
+acteur = "contributeur, fournisseur ou chaîne de construction"
+actif = "client, serveur et vérificateur"
+scenario = "Une mise à jour ou dépendance modifie le protocole ou exfiltre des données."
+controle_propose = "Versions épinglées, builds reproductibles, signatures, revue et diversité des vérificateurs."
+preuve_attendue = "Reconstruction indépendante et comparaison des artefacts signés."
+risque_residuel = "Plusieurs implémentations peuvent partager la même faiblesse conceptuelle."
+condition_arret = "L'artefact déployé ne peut pas être relié au code revu."
+statut = "a-expertiser"
+
+[[menace]]
+id = "reidentification-future"
+acteur = "détenteur futur des artefacts ou progrès cryptanalytique"
+actif = "secret durable du bulletin"
+scenario = "Des données permanentes sont recoupées ou déchiffrées après le scrutin."
+controle_propose = "Minimisation, suppression vérifiable des données transitoires et aucune identité dans le registre public."
+preuve_attendue = "Plan de rétention, inventaire des artefacts et exercice de destruction."
+risque_residuel = "Une preuve publique peut conserver des caractéristiques corrélables."
+condition_arret = "Une donnée non indispensable et corrélable doit être publiée durablement."
+statut = "a-expertiser"
