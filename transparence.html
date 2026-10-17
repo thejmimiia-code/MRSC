@@ -58,9 +58,9 @@
           <div class="display-settings-panel">
             <p class="display-settings-title"><strong>Ajuster la lisibilité</strong></p>
             <div class="display-settings-row" role="group" aria-label="Taille du texte">
-              <button class="display-control" type="button" data-text-decrease aria-label="Réduire la taille du texte" title="Réduire le texte">A−</button>
+              <button class="display-control" type="button" data-text-decrease aria-label="A− — réduire la taille du texte" title="Réduire le texte">A−</button>
               <span class="display-text-level" data-text-size-level role="status" aria-live="polite" aria-atomic="true">100 %</span>
-              <button class="display-control" type="button" data-text-increase aria-label="Agrandir la taille du texte" title="Agrandir le texte">A+</button>
+              <button class="display-control" type="button" data-text-increase aria-label="A+ — agrandir la taille du texte" title="Agrandir le texte">A+</button>
             </div>
             <div class="display-settings-actions">
               <button class="display-control display-control-wide" type="button" data-contrast-toggle aria-pressed="false">Contraste renforcé</button>
@@ -105,10 +105,12 @@
           <li><strong>Le réseau intermittent :</strong> les services distants sont fragiles, mais un socle de contenus relus permet de garder une voie de repli.</li>
           <li><strong>L’archipel opaque :</strong> services fragiles et provenance difficile à suivre; le scénario sert à éprouver les solutions de repli, pas à annoncer une tendance.</li>
         </ul>
+        <p><strong>Premier relevé externe (17 octobre 2026).</strong> Quatre sources datées nuancent ces scénarios sans les valider : l’usage hebdomadaire d’un chatbot pour s’informer reste minoritaire (10 %, et 1 % seulement en source principale) et aucune hausse n’a été mesurée en France sur un an ; 49 % des usagers ne parviennent pas à faire seuls leurs démarches en ligne ; la consommation électrique des centres de données a augmenté de 12 % en 2024 ; les obligations de transparence de l’article 50 du règlement européen s’appliquent depuis le 2 août 2026. Aucun de ces chiffres ne mesure l’usage du site.</p>
+        <p><a href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/veille-2026-10-17.md">Lire la veille externe datée</a> · <a href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/decision-prospective.md">Lire le brief de décision soumis à l’association</a>.</p>
         <h4>Un premier prototype statique, encore à relire</h4>
         <p>La « Boussole des savoirs » propose de partir d’une question choisie dans une liste et de mener vers des fiches déjà présentes, sans assistant automatique, profil personnel ni score. Un premier prototype statique de dix questions est publié sur <a href="apprendre.html#boussole-savoirs">la page Apprendre</a> depuis le 16 octobre 2026. C’est une liste de liens éditée à la main, pas un moteur de recommandation.</p>
         <p>Les fiches reliées existent dans le catalogue; leurs sujets sont actuellement marqués « partiel ». Ce statut décrit une couverture incomplète, pas une note de qualité ni une validation. La sélection des dix questions et l’ordre des pistes restent à relire par l’association.</p>
-        <p><strong>État et limites :</strong> cette note ne constitue ni une prévision, ni une décision ou position officielle de l’association. Aucun balayage externe récent n’a été mené pour cette partie; aucun atelier avec l’association ni test avec des personnes n’a été réalisé. Le prototype ne collecte aucune donnée et n’a pas été évalué auprès de visiteurs.</p>
+        <p><strong>État et limites :</strong> cette note ne constitue ni une prévision, ni une décision ou position officielle de l’association. Un relevé externe daté a été mené le 17 octobre 2026 ; il ne remplace ni atelier avec l’association ni test avec des personnes, et les options du brief de décision ne sont pas tranchées. Le prototype ne collecte aucune donnée et n’a pas été évalué auprès de visiteurs.</p>
         <p><a href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/prospective-2027-2030.md">Lire la note de prospective et son registre de travail</a>.</p>
       </div>
       <div class="creator-note">
@@ -117,6 +119,13 @@
         <p>Trois grandes illustrations ont été converties en variantes AVIF et WebP, avec un repli JPEG conservé. Dans une reconstruction hors ligne du poids des pages (compression gzip simulée), l’accueil passe d’environ 290 à 106 Kio sur petit écran, la page d’apprentissage de 459 à 159 Kio et l’atlas de 663 à 183 Kio. Sur grand écran, ces trois pages restent estimées sous 333 Kio.</p>
         <p>Ces chiffres ne mesurent ni le réseau, ni le rendu, ni un bilan carbone. Le site ne charge pas de police distante et ne lance aucun média automatiquement ; le repli sans JavaScript et le texte alternatif sont conservés. Les repères de travail sont le RGESN 2024, les Web Sustainability Guidelines du W3C (brouillon) et le Web Almanac 2025.</p>
         <p><a href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/poids-et-sobriete-numerique.md">Lire la méthode, les résultats et les limites de cette mesure</a>.</p>
+      </div>
+      <div class="creator-note">
+        <p class="eyebrow">Accessibilité · balayage local du 17 octobre 2026</p>
+        <h3 id="accessibilite-releve">Corriger ce qu’un contrôle automatique peut voir</h3>
+        <p>Un balayage axe-core 4.14.0 a été exécuté sur les 96 pages HTML du dépôt, à 360 et 1 280 px de large, puis sur treize états ouverts (menu, panneau d’affichage, filtres, mission, simulateur). Il avait relevé deux familles de problèmes : le contraste du paragraphe de pied de page et des libellés de boutons qui ne reprenaient pas leur texte visible. Après correction, plus aucune violation n’est détectée : 192 exécutions sur les pages (96 × 2 largeurs) et 37 sur les pages et les états du balayage par défaut.</p>
+        <p>Ce relevé ne dit pas que le site est accessible : axe ne teste qu’une partie des critères, aucun essai avec un lecteur d’écran ni revue par une personne experte n’a été mené, et les états interactifs ne sont pas balayés en continu.</p>
+        <p><a href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/accessibilite-2026-10-17.md">Lire la méthode, les corrections et les limites de ce relevé</a>.</p>
       </div>
     </div></section>
     <section class="section "><div class="container stack">

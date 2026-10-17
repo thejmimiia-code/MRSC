@@ -88,10 +88,6 @@
     root.classList.toggle("contraste-renforce", contrastEnabled);
     if (contrastToggle) {
       contrastToggle.setAttribute("aria-pressed", String(contrastEnabled));
-      contrastToggle.setAttribute(
-        "aria-label",
-        contrastEnabled ? "Désactiver le contraste renforcé" : "Activer le contraste renforcé"
-      );
     }
     synchroniserSimulateurs();
   };
@@ -101,10 +97,6 @@
     root.classList.toggle("espacement-renforce", spacingEnabled);
     if (spacingToggle) {
       spacingToggle.setAttribute("aria-pressed", String(spacingEnabled));
-      spacingToggle.setAttribute(
-        "aria-label",
-        spacingEnabled ? "Désactiver l’espacement renforcé" : "Activer l’espacement renforcé"
-      );
     }
     synchroniserSimulateurs();
   };

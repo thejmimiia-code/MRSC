@@ -650,9 +650,9 @@ LIEN_RETOUR = (
     '  <a href="../index.html" data-site-home><span class="site-return-arrow" aria-hidden="true">←</span>Retour au site M.R.S.C</a>\n'
     '  <a href="../confidentialite.html">Vie privée et données</a>\n'
     '  <div id="mrsc-display-controls" class="sim-display-controls" role="group" aria-label="Réglages d’affichage du simulateur" hidden>\n'
-    '    <button class="sim-display-button" type="button" data-sim-text-decrease aria-label="Réduire la taille du texte">A−</button>\n'
+    '    <button class="sim-display-button" type="button" data-sim-text-decrease aria-label="A− — réduire la taille du texte">A−</button>\n'
     '    <span class="sim-display-level" data-sim-text-level role="status" aria-live="polite" aria-atomic="true">100 %</span>\n'
-    '    <button class="sim-display-button" type="button" data-sim-text-increase aria-label="Agrandir la taille du texte">A+</button>\n'
+    '    <button class="sim-display-button" type="button" data-sim-text-increase aria-label="A+ — agrandir la taille du texte">A+</button>\n'
     '    <button class="sim-display-button" type="button" data-sim-contrast aria-pressed="false">Contraste +</button>\n'
     '    <button class="sim-display-button" type="button" data-sim-spacing aria-pressed="false">Interligne +</button>\n'
     '  </div>\n'
@@ -743,8 +743,6 @@ SCRIPT_AFFICHAGE = r"""
     root.classList.toggle("contraste-renforce", contrast);
     if (contrastButton) {
       contrastButton.setAttribute("aria-pressed", String(contrast));
-      contrastButton.setAttribute("aria-label", contrast
-        ? "Désactiver le contraste renforcé" : "Activer le contraste renforcé");
     }
   };
   const applySpacing = (value) => {
@@ -752,8 +750,6 @@ SCRIPT_AFFICHAGE = r"""
     root.classList.toggle("espacement-renforce", spacing);
     if (spacingButton) {
       spacingButton.setAttribute("aria-pressed", String(spacing));
-      spacingButton.setAttribute("aria-label", spacing
-        ? "Désactiver l’espacement renforcé" : "Activer l’espacement renforcé");
     }
   };
   const applyLayout = (value) => {
