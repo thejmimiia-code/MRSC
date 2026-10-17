@@ -24,6 +24,7 @@ COMPARAISON = RACINE / "docs" / "rd" / "vote-distanciel-comparaison.toml"
 SOURCES = RACINE / "docs" / "rd" / "vote-distanciel-sources.toml"
 PROFILS = RACINE / "docs" / "rd" / "vote-distanciel-profils.toml"
 REVUES = RACINE / "docs" / "rd" / "vote-distanciel-revues.toml"
+DONNEES = RACINE / "docs" / "rd" / "vote-distanciel-donnees.toml"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -60,6 +61,11 @@ ROLES_REVUE = {
 REVUES_REQUISES = {
     "source-statutaire", "modele-menaces", "comparaison-candidats",
     "protocole-banc", "decision-de-phase",
+}
+CATEGORIES_DONNEES = {
+    "identite-eligibilite", "justificatif-anonyme", "bulletin-chiffre",
+    "recu-inclusion", "preuves-publiques", "journal-emission", "journal-urne",
+    "registre-procurations",
 }
 
 SECTIONS_REQUISES = [
@@ -227,6 +233,48 @@ def verifier_comparaison(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_donnees(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if meta.get("initiative") != "vote-distanciel-verifiable" or meta.get("statut") != "a-faire-expertiser":
+        erreurs.append("modèle de données relié à l’initiative et maintenu à expertiser")
+    categories = registre.get("categorie", [])
+    ids = [categorie.get("id") for categorie in categories]
+    if set(ids) != CATEGORIES_DONNEES or len(ids) != len(set(ids)):
+        erreurs.append("modèle contenant exactement les 8 catégories de données")
+    champs = {
+        "id", "finalite_projetee", "detenteur_projete", "public",
+        "contenu_interdit", "retention", "statut",
+    }
+    for index, categorie in enumerate(categories, start=1):
+        vides = [
+            champ for champ in champs
+            if champ not in categorie or categorie.get(champ) is None or categorie.get(champ) == ""
+        ]
+        if vides:
+            erreurs.append(f"catégorie {index} avec champs renseignés : {', '.join(sorted(vides))}")
+        if categorie.get("statut") != "a-faire-expertiser":
+            erreurs.append(f"catégorie {categorie.get('id', index)} maintenue à expertiser")
+        interdits = categorie.get("contenu_interdit", [])
+        if not isinstance(interdits, list) or len(interdits) < 3:
+            erreurs.append(f"catégorie {categorie.get('id', index)} avec au moins 3 contenus interdits")
+    liaisons = registre.get("liaison_interdite", [])
+    paires: set[frozenset[str]] = set()
+    for index, liaison in enumerate(liaisons, start=1):
+        gauche, droite = liaison.get("gauche"), liaison.get("droite")
+        if gauche not in CATEGORIES_DONNEES or droite not in CATEGORIES_DONNEES or gauche == droite:
+            erreurs.append(f"liaison interdite {index} entre catégories distinctes connues")
+        if not liaison.get("raison"):
+            erreurs.append(f"liaison interdite {index} avec raison")
+        paires.add(frozenset((gauche, droite)))
+    if len(liaisons) < 6 or len(paires) != len(liaisons):
+        erreurs.append("au moins 6 liaisons interdites sans doublon")
+    paire_identite_bulletin = frozenset(("identite-eligibilite", "bulletin-chiffre"))
+    if paire_identite_bulletin not in paires:
+        erreurs.append("liaison identité–bulletin explicitement interdite")
+    return erreurs
+
+
 def verifier_revues(registre: dict) -> list[str]:
     erreurs: list[str] = []
     meta = registre.get("meta", {})
@@ -388,6 +436,10 @@ def principal() -> int:
         sources = tomllib.load(fichier)
     manquants.extend(verifier_sources(sources))
 
+    with DONNEES.open("rb") as fichier:
+        donnees = tomllib.load(fichier)
+    manquants.extend(verifier_donnees(donnees))
+
     with REVUES.open("rb") as fichier:
         revues = tomllib.load(fichier)
     manquants.extend(verifier_revues(revues))
@@ -419,7 +471,8 @@ def principal() -> int:
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
         "à expertiser, 18 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
-        f"4 options et 15 critères sans score, 3 sources à évaluer, 6 rôles et 5 revues à attribuer, décision {etat_decision}, initiative P0 à cadrer, "
+        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories et 6 liaisons interdites, "
+        f"6 rôles et 5 revues à attribuer, décision {etat_decision}, initiative P0 à cadrer, "
         "aucune identité ni bulletin réel autorisé."
     )
     return 0

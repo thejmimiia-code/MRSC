@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Données du vote séparées avant toute collecte
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** modéliser identité, justificatif, bulletin, reçu, preuves, journaux et procurations avant tout essai ; le chiffrement seul ne suffit pas à empêcher une corrélation.
+- **Résultat :** huit catégories projetées avec finalité, détenteur, rétention et contenus interdits ; six liaisons interdites, dont identité–bulletin et journal d’émission–journal d’urne. Aucun flux n’est autorisé.
+- **Prospective :** les preuves publiques durables et les journaux transitoires sont traités séparément pour éviter qu’un registre append-only conserve des métadonnées réidentifiantes.
+- **Optimisation :** trois tests supplémentaires refusent catégorie absente, suppression de l’interdiction identité–bulletin et statut prématurément expertisé.
+- **Limite :** ce modèle n’est ni une analyse d’impact, ni une base juridique, ni une garantie d’anonymat ; tous les détenteurs et durées sont des propositions.
+- **Prochaine action :** faire examiner les flux et le test de corrélation par les rôles protection des données, cryptographie et opérations avant tout banc synthétique.
+
 ## 2026-10-17 — Revues du vote séparées par rôle
 
 - **Initiative :** `vote-distanciel-verifiable`.
