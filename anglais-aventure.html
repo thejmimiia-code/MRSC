@@ -17,7 +17,7 @@
   <meta property="og:url" content="https://thejmimiia-code.github.io/MRSC/anglais-aventure.html">
   <meta property="og:image" content="https://thejmimiia-code.github.io/MRSC/assets/images/mondes-savoirs-hero.jpg">
   <meta property="og:image:alt" content="Un atlas imaginaire en trois dimensions réunissant des mondes de lecture, sciences, histoire, arts, numérique et exploration">
-  <link rel="preload" as="image" href="assets/images/mondes-savoirs-hero.jpg" fetchpriority="high">
+  <link rel="preload" as="image" type="image/avif" href="assets/images/mondes-savoirs-hero-800.avif" imagesrcset="assets/images/mondes-savoirs-hero-800.avif 800w, assets/images/mondes-savoirs-hero-1200.avif 1200w, assets/images/mondes-savoirs-hero-1672.avif 1672w" imagesizes="100vw" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/anglais-aventure.css">
   <script src="assets/js/site.js" defer></script>
@@ -87,7 +87,11 @@
 
   <main id="contenu">
     <section class="adventure-hero" aria-labelledby="adventure-title">
-      <img class="adventure-hero-art" src="assets/images/mondes-savoirs-hero.jpg" alt="" width="1672" height="941" fetchpriority="high">
+      <picture class="adventure-hero-picture">
+        <source type="image/avif" srcset="assets/images/mondes-savoirs-hero-800.avif 800w, assets/images/mondes-savoirs-hero-1200.avif 1200w, assets/images/mondes-savoirs-hero-1672.avif 1672w" sizes="100vw">
+        <source type="image/webp" srcset="assets/images/mondes-savoirs-hero-800.webp 800w, assets/images/mondes-savoirs-hero-1200.webp 1200w, assets/images/mondes-savoirs-hero-1672.webp 1672w" sizes="100vw">
+        <img class="adventure-hero-art" src="assets/images/mondes-savoirs-hero.jpg" alt="" width="1672" height="941" fetchpriority="high" decoding="async">
+      </picture>
       <div class="adventure-hero-shade" aria-hidden="true"></div>
       <div class="container adventure-hero-content">
         <nav class="adventure-breadcrumb" aria-label="Fil d’Ariane"><a href="index.html">Accueil</a><span aria-hidden="true">›</span><a href="apprendre.html">Apprendre</a><span aria-hidden="true">›</span><span aria-current="page">Les Mondes</span></nav>
@@ -255,7 +259,11 @@
                 <figure class="adventure-scene" aria-labelledby="scene-caption">
                   <div class="adventure-scene-frame">
                     <canvas id="world-canvas" width="900" height="560" aria-hidden="true">Scène en trois dimensions ; les informations utiles sont décrites dans la mission.</canvas>
-                    <img id="world-fallback" src="assets/images/escales-anglais-hero.jpg" alt="" width="1672" height="941" hidden>
+                    <picture id="world-fallback-picture">
+                      <source type="image/avif" data-srcset="assets/images/escales-anglais-hero-800.avif 800w, assets/images/escales-anglais-hero-1672.avif 1672w" sizes="(max-width: 900px) calc(100vw - 2rem), 800px">
+                      <source type="image/webp" data-srcset="assets/images/escales-anglais-hero-800.webp 800w, assets/images/escales-anglais-hero-1672.webp 1672w" sizes="(max-width: 900px) calc(100vw - 2rem), 800px">
+                      <img id="world-fallback" data-src="assets/images/escales-anglais-hero.jpg" alt="" width="1672" height="941" hidden decoding="async">
+                    </picture>
                     <span class="scene-light scene-light-one" aria-hidden="true"></span>
                     <span class="scene-light scene-light-two" aria-hidden="true"></span>
                   </div>

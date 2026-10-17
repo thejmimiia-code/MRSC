@@ -35,6 +35,7 @@ Les références de ces constats sont le [portefeuille R&D](portefeuille.toml), 
 | Capacité de relecture | 55 prototypes sont à relire; les contenus à risque ont besoin de personnes compétentes. | Le volume de propositions et de contenus pourra-t-il être entretenu avec des rôles de relecture clairement attribués ? | Échéances de revue, sources à recontrôler, décisions de retrait ou de report; pas le nombre de clics. |
 | Langues et contextes | Le français domine; les autres langues et variétés demandent des relectures locales. | Comment ouvrir des parcours plurilingues sans publier une traduction automatique comme ressource validée ? | Disponibilité de relectures par langue/région et propositions non identifiantes, sans déduire l'origine des visiteurs. |
 | Personnalisation et vie privée | Les préférences de lecture sont optionnelles et locales; l'association doit encore confirmer certains traitements et fournisseurs. | Comment adapter l'expérience sans compte, profil de compétence ou collecte individuelle implicite ? | Évolutions documentées des fonctions, du stockage ou des prestataires; revue du code et de la notice. |
+| Poids, terminaux et accès | Trois illustrations portaient l'essentiel du poids des pages principales; une mesure locale d'octobre 2026 a réduit de 33 à 72 % le poids compressé estimé de trois pages, sans mesure réseau ni sur appareil. | Les terminaux anciens, les forfaits limités et les réseaux lents resteront-ils une contrainte aussi forte, ou la sobriété des pages deviendra-t-elle un critère secondaire ? | Octets réellement servis, variantes disponibles, erreurs de chargement signalées volontairement; pas de profilage des connexions. |
 
 Ces signaux ne sont pas des indicateurs d'audience. Une absence de demandes ne prouve pas l'absence de besoin, et une disponibilité technique ne prouve pas la qualité d'une ressource.
 
@@ -68,6 +69,7 @@ Les outils et leurs sources changent d'un fournisseur à l'autre tandis que des 
 6. **Utiliser la maintenance comme signal.** Les dates de revue, versions et sources à confirmer sont plus utiles pour la décision que des métriques d'engagement individuelles.
 7. **Partir de ce que la personne sait déjà.** Une fiche peut nommer un geste déjà maîtrisé (un mot connu, une lecture ligne par ligne, une question déjà posée) sans le transformer en niveau scolaire ni en score. Cette capacité reste utile dans les quatre scénarios : elle n'exige ni assistant, ni profil, ni service distant.
 8. **Rester identifiable sans service tiers.** Une icône dérivée du logo, servie avec le site, aide à reconnaître un onglet, un favori ou un raccourci lorsque plusieurs services se ressemblent ou se coupent. Ce n'est pas une preuve de qualité du contenu.
+9. **Servir juste assez, sans dégrader.** Des images adaptées à la largeur et au format, un repli JPEG, aucune police distante et aucun média automatique réduisent la dépendance au débit et au matériel. Cette sobriété ne doit retirer ni texte alternatif, ni clavier, ni zoom, ni repli sans JavaScript; elle reste un choix de conception, pas une preuve d'impact environnemental.
 
 Ce sont des propositions de conception cohérentes avec les consignes actuelles du dépôt, pas des résultats démontrés auprès de visiteurs.
 
@@ -138,3 +140,14 @@ Les faits de départ sont issus des fichiers du dépôt :
 Cette première passe ne prétend pas avoir consulté les sources externes actuelles sur l'avenir de l'IA, les politiques publiques, l'accessibilité, le droit ou les infrastructures. Les références externes présentes dans les notes antérieures sont des repères documentaires à réouvrir avant toute affirmation nouvelle; elles ne suffisent pas à établir une tendance future. Aucune probabilité, préférence collective, expérience d'usager ou décision de l'association n'est inventée.
 
 **Prochaine action :** faire examiner le cadrage et le concept « Boussole des savoirs » par le M.R.S.C.; décider si un atelier de prospective et une recherche primaire complémentaire valent le coût avant de fabriquer le prototype. L'initiative `prospective-apprentissages-2030` reste `a-cadrer` jusque-là.
+
+## 10. Prolongement mesuré — octobre 2026
+
+Une passe de mesure et d’optimisation a complété cette note le 17 octobre 2026. La méthode, les chiffres avant/après, les limites et les essais sont détaillés dans [`poids-et-sobriete-numerique.md`](poids-et-sobriete-numerique.md).
+
+- **Résultat local, à ne pas surinterpréter :** le poids compressé estimé des pages principales baisse de 33 à 72 % selon la page et le scénario, grâce à des variantes AVIF/WebP et au report du chargement de l’image de secours. Il s’agit d’une reconstruction hors ligne, pas d’une mesure réseau.
+- **Ce que cela change pour les scénarios :** le socle reste lisible et atteignable avec moins d’octets, ce qui renforce la réponse au « réseau intermittent » sans prouver la résilience réelle ni la disponibilité des hébergeurs.
+- **Ce que cela ne change pas :** le besoin de relecture humaine, de sources datées et de repli sans JavaScript. Une page légère peut rester fausse, incomplète ou inaccessible.
+- **Décision maintenue :** la sobriété est traitée comme un moyen de réduire une dépendance, jamais comme un indicateur de qualité éditoriale ou une preuve d’impact évité.
+
+**Prochaine action ajoutée :** vérifier les octets réellement servis et les types MIME sur GitHub Pages et Vercel, puis faire une revue visuelle humaine des images ; ne réviser l’état de l’initiative `poids-et-sobriete-numerique` qu’après ces contrôles.

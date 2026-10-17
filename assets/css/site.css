@@ -346,9 +346,10 @@ html.contraste-renforce .site-status-note {
 }
 
 .site-header.is-compact .header-compact-toggle {
-  flex: 0 0 auto;
-  width: auto;
-  max-width: none;
+  flex: 0 0 min(var(--header-compact-width), calc(100vw - 1rem));
+  width: min(var(--header-compact-width), calc(100vw - 1rem));
+  min-width: 44px;
+  max-width: min(var(--header-compact-width), calc(100vw - 1rem));
 }
 
 .site-header.is-compact .nav-links:not(.is-open) {
@@ -666,6 +667,10 @@ html.contraste-renforce .site-status-note {
   grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
   gap: clamp(2rem, 6vw, 5rem);
   align-items: start;
+}
+
+.copy-block {
+  min-width: 0;
 }
 
 .copy-block p:last-child {
@@ -1471,6 +1476,18 @@ html.contraste-renforce .resource-scope-note {
   .identity,
   .nav-inner {
     width: calc(100% - 1.35rem);
+  }
+
+  .button {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .header-compact-toggle {
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .identity {
@@ -3068,6 +3085,14 @@ html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journ
   max-width: none;
 }
 
+html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]) {
+  flex: 0 0 min(var(--header-compact-width), calc(100vw - 1rem));
+  width: min(var(--header-compact-width), calc(100vw - 1rem));
+  max-width: min(var(--header-compact-width), calc(100vw - 1rem));
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 html.has-js .site-header.is-compact .header-compact-brand {
   float: none;
   position: static;
@@ -3538,6 +3563,9 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
   box-shadow: var(--shadow);
 }
 
+.home-hero-visual picture,
+.english-promo-art picture { display: contents; }
+
 .home-hero-visual img {
   display: block;
   width: 100%;
@@ -3939,5 +3967,21 @@ html[data-layout="panorama"] main :is(
     color: #333;
     font-size: .85rem;
     content: "Copie du site M.R.S.C. — " attr(data-print-url) " — à relire, pas une version certifiée.";
+  }
+}
+
+/* Dernière adaptation : une largeur inférieure au logo ne doit pas pousser
+   les commandes hors de l’écran. */
+@media (max-width: 240px) {
+  html.has-js .site-header.is-compact .header-compact-brand {
+    display: none;
+  }
+
+  html.has-js .site-header.is-compact .nav-inner {
+    flex-wrap: wrap;
+  }
+
+  html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]) {
+    min-height: 44px;
   }
 }
