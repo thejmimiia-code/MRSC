@@ -22,6 +22,7 @@ DECISION_PATH = RACINE / "docs" / "rd" / "vote-distanciel-decision.md"
 COMPARAISON_PATH = RACINE / "docs" / "rd" / "vote-distanciel-comparaison.toml"
 SOURCES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-sources.toml"
 PROFILS_PATH = RACINE / "docs" / "rd" / "vote-distanciel-profils.toml"
+REVUES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-revues.toml"
 
 
 def table_decision(valeurs: list[str]) -> str:
@@ -49,6 +50,8 @@ class RegistreMenacesTests(unittest.TestCase):
             cls.sources = tomllib.load(fichier)
         with PROFILS_PATH.open("rb") as fichier:
             cls.profils = tomllib.load(fichier)
+        with REVUES_PATH.open("rb") as fichier:
+            cls.revues = tomllib.load(fichier)
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -159,6 +162,25 @@ class RegistreMenacesTests(unittest.TestCase):
         registre = copy.deepcopy(self.comparaison)
         registre["critere"][0]["bloquant"] = False
         self.assertTrue(any("maintenu bloquant" in erreur for erreur in MODULE.verifier_comparaison(registre)))
+
+    def test_plan_de_revues_courant_est_a_attribuer(self):
+        self.assertEqual(MODULE.verifier_revues(self.revues), [])
+
+    def test_refuse_un_role_manquant(self):
+        registre = copy.deepcopy(self.revues)
+        registre["role"].pop()
+        self.assertTrue(any("6 rôles" in erreur for erreur in MODULE.verifier_revues(registre)))
+
+    def test_refuse_une_attribution_non_prouvee(self):
+        registre = copy.deepcopy(self.revues)
+        registre["role"][0]["statut"] = "attribue"
+        self.assertTrue(any("non attribué" in erreur for erreur in MODULE.verifier_revues(registre)))
+
+    def test_refuse_une_decision_sans_tous_les_roles(self):
+        registre = copy.deepcopy(self.revues)
+        decision = next(item for item in registre["revue"] if item["id"] == "decision-de-phase")
+        decision["roles_requis"].pop()
+        self.assertTrue(any("6 rôles" in erreur for erreur in MODULE.verifier_revues(registre)))
 
     def test_sources_courantes_sont_epinglees_sans_selection(self):
         self.assertEqual(MODULE.verifier_sources(self.sources), [])

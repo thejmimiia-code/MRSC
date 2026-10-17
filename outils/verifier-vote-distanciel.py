@@ -23,6 +23,7 @@ DECISION = RACINE / "docs" / "rd" / "vote-distanciel-decision.md"
 COMPARAISON = RACINE / "docs" / "rd" / "vote-distanciel-comparaison.toml"
 SOURCES = RACINE / "docs" / "rd" / "vote-distanciel-sources.toml"
 PROFILS = RACINE / "docs" / "rd" / "vote-distanciel-profils.toml"
+REVUES = RACINE / "docs" / "rd" / "vote-distanciel-revues.toml"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -51,6 +52,14 @@ CHAMPS_CRITERE = {"id", "famille", "bloquant", "question", "preuve_attendue"}
 PROFILS_REQUIS = {
     "bureau-executif", "conseil-ethique", "territoriale-constitutive",
     "ago-premiere", "ago-seconde", "age-premiere", "age-seconde", "dissolution",
+}
+ROLES_REVUE = {
+    "association-decisionnaire", "juridique-statutaire", "cryptographie-vote",
+    "protection-donnees", "accessibilite-usages", "operations-securite",
+}
+REVUES_REQUISES = {
+    "source-statutaire", "modele-menaces", "comparaison-candidats",
+    "protocole-banc", "decision-de-phase",
 }
 
 SECTIONS_REQUISES = [
@@ -218,6 +227,44 @@ def verifier_comparaison(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_revues(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if meta.get("initiative") != "vote-distanciel-verifiable" or meta.get("statut") != "a-attribuer":
+        erreurs.append("plan de revues relié à l’initiative et maintenu à attribuer")
+    roles = registre.get("role", [])
+    ids_roles = [role.get("id") for role in roles]
+    if set(ids_roles) != ROLES_REVUE or len(ids_roles) != len(set(ids_roles)):
+        erreurs.append("plan contenant exactement les 6 rôles de revue")
+    for role in roles:
+        if role.get("statut") != "a-attribuer" or not role.get("responsabilite") or not role.get("preuve_attendue"):
+            erreurs.append(f"rôle {role.get('id', '?')} non attribué avec responsabilité et preuve")
+        if any(champ in role for champ in ("nom", "courriel", "personne")):
+            erreurs.append(f"rôle {role.get('id', '?')} sans donnée personnelle")
+    revues = registre.get("revue", [])
+    ids_revues = [revue.get("id") for revue in revues]
+    if set(ids_revues) != REVUES_REQUISES or len(ids_revues) != len(set(ids_revues)):
+        erreurs.append("plan contenant exactement les 5 revues requises")
+    roles_couverts: set[str] = set()
+    for revue in revues:
+        requis = set(revue.get("roles_requis", []))
+        inconnus = requis - ROLES_REVUE
+        if inconnus:
+            erreurs.append(f"revue {revue.get('id', '?')} avec rôles inconnus")
+        roles_couverts.update(requis)
+        artefacts = revue.get("artefacts", [])
+        if not artefacts or any(not (RACINE / chemin).is_file() for chemin in artefacts):
+            erreurs.append(f"revue {revue.get('id', '?')} avec artefacts existants")
+        if revue.get("statut") != "a-attribuer" or not revue.get("question") or not revue.get("condition_sortie"):
+            erreurs.append(f"revue {revue.get('id', '?')} maintenue à attribuer et bornée")
+    if roles_couverts != ROLES_REVUE:
+        erreurs.append("les 6 rôles sont mobilisés par au moins une revue")
+    decision = next((revue for revue in revues if revue.get("id") == "decision-de-phase"), {})
+    if set(decision.get("roles_requis", [])) != ROLES_REVUE:
+        erreurs.append("décision de phase soumise aux 6 rôles")
+    return erreurs
+
+
 def verifier_sources(registre: dict) -> list[str]:
     erreurs: list[str] = []
     meta = registre.get("meta", {})
@@ -341,6 +388,10 @@ def principal() -> int:
         sources = tomllib.load(fichier)
     manquants.extend(verifier_sources(sources))
 
+    with REVUES.open("rb") as fichier:
+        revues = tomllib.load(fichier)
+    manquants.extend(verifier_revues(revues))
+
     etat_decision, erreurs_decision = verifier_decision(DECISION.read_text(encoding="utf-8"))
     manquants.extend(erreurs_decision)
 
@@ -368,7 +419,7 @@ def principal() -> int:
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
         "à expertiser, 18 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
-        f"4 options et 15 critères sans score, 3 sources épinglées à évaluer, décision {etat_decision}, initiative P0 à cadrer, "
+        f"4 options et 15 critères sans score, 3 sources à évaluer, 6 rôles et 5 revues à attribuer, décision {etat_decision}, initiative P0 à cadrer, "
         "aucune identité ni bulletin réel autorisé."
     )
     return 0
