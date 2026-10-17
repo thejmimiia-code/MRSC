@@ -16,6 +16,7 @@ SPEC.loader.exec_module(MODULE)
 RACINE = Path(__file__).parents[1]
 REGISTRE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-menaces.toml"
 REGLES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-regles.toml"
+CAS_PATH = RACINE / "docs" / "rd" / "vote-distanciel-cas-essai.toml"
 STATUTS_PATH = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 
@@ -26,6 +27,8 @@ class RegistreMenacesTests(unittest.TestCase):
             cls.registre = tomllib.load(fichier)
         with REGLES_PATH.open("rb") as fichier:
             cls.regles = tomllib.load(fichier)
+        with CAS_PATH.open("rb") as fichier:
+            cls.cas = tomllib.load(fichier)
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -80,6 +83,25 @@ class RegistreMenacesTests(unittest.TestCase):
             "à faire relire" in erreur
             for erreur in MODULE.verifier_regles(registre, self.empreinte_statuts)
         ))
+
+    def test_cas_synthetiques_couvrent_les_menaces(self):
+        self.assertEqual(MODULE.verifier_cas_essai(self.cas), [])
+
+    def test_refuse_un_cas_execute_sans_expertise(self):
+        registre = copy.deepcopy(self.cas)
+        registre["cas"][0]["statut"] = "reussi"
+        self.assertTrue(any("à concevoir" in erreur for erreur in MODULE.verifier_cas_essai(registre)))
+
+    def test_refuse_une_menace_non_couverte(self):
+        registre = copy.deepcopy(self.cas)
+        for item in registre["cas"]:
+            item["menaces"] = [m for m in item["menaces"] if m != "terminal-compromis"]
+        self.assertTrue(any("10 menaces" in erreur for erreur in MODULE.verifier_cas_essai(registre)))
+
+    def test_refuse_une_menace_inconnue(self):
+        registre = copy.deepcopy(self.cas)
+        registre["cas"][0]["menaces"].append("menace-inventee")
+        self.assertTrue(any("inconnues" in erreur for erreur in MODULE.verifier_cas_essai(registre)))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,103 @@
+# Cas projetés : aucun n'a été exécuté.
+[meta]
+version = 1
+date = 2026-10-17
+initiative = "vote-distanciel-verifiable"
+statut = "a-faire-expertiser"
+donnees = "synthetiques-uniquement"
+
+[[cas]]
+id = "suppression-bulletin"
+menaces = ["serveur-urne-compromis"]
+alteration = "Retirer un bulletin chiffré après émission du reçu."
+attendu = "Le reçu ou un miroir indépendant révèle l'absence et invalide le tableau."
+condition_arret = "La suppression n'est pas détectée par les vérificateurs."
+statut = "a-concevoir"
+
+[[cas]]
+id = "substitution-bulletin"
+menaces = ["serveur-urne-compromis", "terminal-compromis"]
+alteration = "Remplacer un bulletin ou simuler un chiffrement différent de l'intention synthétique."
+attendu = "La preuve, la vérification séparée ou l'inclusion attendue échoue."
+condition_arret = "La substitution produit un résultat accepté sans alerte."
+statut = "a-concevoir"
+
+[[cas]]
+id = "duplication-et-reordre"
+menaces = ["serveur-urne-compromis"]
+alteration = "Dupliquer un bulletin et réordonner le registre après clôture."
+attendu = "L'unicité et la chaîne d'engagement échouent de façon vérifiable."
+condition_arret = "Le résultat accepte la duplication ou un historique divergent."
+statut = "a-concevoir"
+
+[[cas]]
+id = "preuve-de-choix-a-un-tiers"
+menaces = ["coercition-domicile"]
+alteration = "Tenter d'utiliser le reçu et les artefacts publics pour démontrer un choix synthétique."
+attendu = "Le reçu ne permet pas de distinguer de façon transférable le choix effectué."
+condition_arret = "Un tiers peut vérifier le choix depuis les artefacts remis à l'électeur synthétique."
+statut = "a-concevoir"
+
+[[cas]]
+id = "correlation-temporelle"
+menaces = ["correlation-metadonnees", "reidentification-future"]
+alteration = "Comparer horaires, tailles et journaux synthétiques de l'émission et du dépôt."
+attendu = "Le taux de corrélation reste sous un seuil défini avant l'exercice ou le test bloque la solution."
+condition_arret = "Une corrélation exploitable est possible avec les journaux prévus."
+statut = "a-concevoir"
+
+[[cas]]
+id = "collusion-sous-seuil"
+menaces = ["collusion-autorites"]
+alteration = "Combiner moins de parts que le seuil annoncé."
+attendu = "Aucun résultat ni information sur un bulletin ne peut être déchiffré."
+condition_arret = "Le sous-ensemble reconstitue une information protégée."
+statut = "a-concevoir"
+
+[[cas]]
+id = "perte-part-cle"
+menaces = ["perte-de-cles", "collusion-autorites"]
+alteration = "Rendre une part indisponible puis exercer la récupération prévue."
+attendu = "Le résultat reste calculable selon le seuil sans assembler une clé complète sur une machine."
+condition_arret = "La reprise contourne le seuil ou dépend d'un secret unique."
+statut = "a-concevoir"
+
+[[cas]]
+id = "coupure-et-reprise"
+menaces = ["deni-de-service"]
+alteration = "Interrompre l'urne avant et pendant la clôture simulée."
+attendu = "Aucun bulletin accepté n'est perdu ; la reprise et la décision de prolongation sont traçables."
+condition_arret = "L'état diverge ou aucune procédure humaine ne permet d'annuler/prolonger."
+statut = "a-concevoir"
+
+[[cas]]
+id = "droit-duplique-ou-refuse"
+menaces = ["emission-frauduleuse"]
+alteration = "Émettre deux droits pour un identifiant synthétique et en omettre un autre."
+attendu = "Les totaux et recours détectent les anomalies sans relier le bulletin à l'identité synthétique."
+condition_arret = "L'anomalie reste invisible ou sa détection révèle un choix."
+statut = "a-concevoir"
+
+[[cas]]
+id = "artefact-non-reproductible"
+menaces = ["logiciel-ou-dependance-compromis"]
+alteration = "Construire depuis le code annoncé puis comparer à l'artefact candidat."
+attendu = "Les empreintes concordent ou l'écart bloque l'exercice."
+condition_arret = "L'artefact déployé ne peut pas être reproduit ou expliqué."
+statut = "a-concevoir"
+
+[[cas]]
+id = "retention-indue"
+menaces = ["reidentification-future", "correlation-metadonnees"]
+alteration = "Inventorier les données après la date de destruction simulée."
+attendu = "Seuls les artefacts publics indispensables subsistent."
+condition_arret = "Un journal, secret ou identifiant corrélable demeure sans justification."
+statut = "a-concevoir"
+
+[[cas]]
+id = "profil-statutaire-invalide"
+menaces = ["emission-frauduleuse", "deni-de-service"]
+alteration = "Dépasser le plafond de procuration, clôturer trop tôt ou utiliser un quorum d'un autre profil."
+attendu = "La configuration est refusée avant ouverture et l'écart est explicite."
+condition_arret = "Un paramètre contraire au profil statutaire relu peut être activé."
+statut = "a-concevoir"

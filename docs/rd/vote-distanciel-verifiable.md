@@ -110,6 +110,8 @@ Aucune option n’est « la plus sûre » hors contexte. L’option A n’est pa
 
 ### Phase 1 — banc d’essai fictif
 
+Le protocole préparatoire est décrit dans [`vote-distanciel-protocole-banc.md`](vote-distanciel-protocole-banc.md) et ses cas projetés dans [`vote-distanciel-cas-essai.toml`](vote-distanciel-cas-essai.toml). Tous restent à expertiser ou à concevoir ; aucun cas n’a été exécuté.
+
 - scrutin entièrement fictif, électeurs synthétiques, aucune identité réelle ;
 - deux implémentations indépendantes du vérificateur ;
 - tests de falsification, suppression, duplication, ordre, clôture, perte de clé et panne réseau ;

@@ -16,6 +16,7 @@ NOTE = RACINE / "docs" / "rd" / "vote-distanciel-verifiable.md"
 PORTEFEUILLE = RACINE / "docs" / "rd" / "portefeuille.toml"
 MENACES = RACINE / "docs" / "rd" / "vote-distanciel-menaces.toml"
 REGLES = RACINE / "docs" / "rd" / "vote-distanciel-regles.toml"
+CAS_ESSAI = RACINE / "docs" / "rd" / "vote-distanciel-cas-essai.toml"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -37,6 +38,7 @@ REGLES_REQUISES = {
     "age-procuration", "age-seconde-convocation", "dissolution-seuils",
 }
 CHAMPS_REGLE = {"id", "article", "pages", "portee", "releve", "ambiguite", "statut"}
+CHAMPS_CAS = {"id", "menaces", "alteration", "attendu", "condition_arret", "statut"}
 
 SECTIONS_REQUISES = [
     "## 1. Reformulation de l’objectif",
@@ -113,6 +115,34 @@ def verifier_regles(registre: dict, empreinte_statuts: str) -> list[str]:
     return erreurs
 
 
+def verifier_cas_essai(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if meta.get("initiative") != "vote-distanciel-verifiable":
+        erreurs.append("cas d’essai reliés à l’initiative vote-distanciel-verifiable")
+    if meta.get("statut") != "a-faire-expertiser" or meta.get("donnees") != "synthetiques-uniquement":
+        erreurs.append("cas maintenus à expertiser avec données synthétiques uniquement")
+    cas = registre.get("cas", [])
+    ids = [item.get("id") for item in cas]
+    if len(cas) < 12 or len(ids) != len(set(ids)):
+        erreurs.append("au moins 12 cas d’essai sans doublon")
+    couverture: set[str] = set()
+    for index, item in enumerate(cas, start=1):
+        champs_vides = [champ for champ in CHAMPS_CAS if not item.get(champ)]
+        if champs_vides:
+            erreurs.append(f"cas {index} avec champs renseignés : {', '.join(sorted(champs_vides))}")
+        if item.get("statut") != "a-concevoir":
+            erreurs.append(f"cas {item.get('id', index)} maintenu à concevoir")
+        menaces = set(item.get("menaces", []))
+        inconnues = menaces - MENACES_REQUISES
+        if inconnues:
+            erreurs.append(f"cas {item.get('id', index)} avec menaces inconnues : {', '.join(sorted(inconnues))}")
+        couverture.update(menaces)
+    if couverture != MENACES_REQUISES:
+        erreurs.append("les 10 menaces sont couvertes par au moins un cas projeté")
+    return erreurs
+
+
 def principal() -> int:
     texte = NOTE.read_text(encoding="utf-8")
     texte_normalise = texte.casefold()
@@ -133,6 +163,10 @@ def principal() -> int:
     with REGLES.open("rb") as fichier:
         regles = tomllib.load(fichier)
     manquants.extend(verifier_regles(regles, empreinte_statuts))
+
+    with CAS_ESSAI.open("rb") as fichier:
+        cas_essai = tomllib.load(fichier)
+    manquants.extend(verifier_cas_essai(cas_essai))
 
     with PORTEFEUILLE.open("rb") as fichier:
         initiatives = tomllib.load(fichier).get("initiative", [])
@@ -157,7 +191,7 @@ def principal() -> int:
 
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
-        "à expertiser, 15 règles statutaires à relire, initiative P0 à cadrer, "
+        "à expertiser, 15 règles statutaires à relire, 12 cas synthétiques à concevoir, initiative P0 à cadrer, "
         "aucune identité ni bulletin réel autorisé."
     )
     return 0

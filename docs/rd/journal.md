@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Banc synthétique du vote défini sans l’exécuter
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** préparer un protocole capable d’invalider une solution candidate, sans développer d’urne ni utiliser de données réelles.
+- **Résultat :** 12 cas projetés couvrent les 10 menaces : altérations de bulletin, terminal, coercition, corrélation, seuil, clés, panne, émission, build, rétention et profil statutaire. Chaque cas précise altération, attendu et condition d’arrêt ; tous restent `a-concevoir`.
+- **Optimisation :** quatre tests supplémentaires refusent un cas dit réussi, une menace non couverte ou inconnue ; le contrôle exige des données synthétiques uniquement.
+- **Limite :** aucun cas n’a été exécuté ; ce protocole ne prouve aucune propriété cryptographique, juridique, opérationnelle ou d’accessibilité.
+- **Prochaine action :** faire expertiser le protocole et choisir un seul profil statutaire avant de sélectionner une solution candidate et sa version.
+
 ## 2026-10-17 — Directives statutaires relevées pour le vote distanciel
 
 - **Initiative :** `vote-distanciel-verifiable`.
