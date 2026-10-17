@@ -26,6 +26,7 @@ REVUES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-revues.toml"
 DONNEES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-donnees.toml"
 CORRELATION_PATH = RACINE / "docs" / "rd" / "vote-distanciel-correlation.toml"
 CONTINUITE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-continuite.toml"
+ACCESSIBILITE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-accessibilite.toml"
 
 
 def table_decision(valeurs: list[str]) -> str:
@@ -61,6 +62,8 @@ class RegistreMenacesTests(unittest.TestCase):
             cls.correlation = tomllib.load(fichier)
         with CONTINUITE_PATH.open("rb") as fichier:
             cls.continuite = tomllib.load(fichier)
+        with ACCESSIBILITE_PATH.open("rb") as fichier:
+            cls.accessibilite = tomllib.load(fichier)
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -171,6 +174,24 @@ class RegistreMenacesTests(unittest.TestCase):
         registre = copy.deepcopy(self.comparaison)
         registre["critere"][0]["bloquant"] = False
         self.assertTrue(any("maintenu bloquant" in erreur for erreur in MODULE.verifier_comparaison(registre)))
+
+    def test_accessibilite_courante_ne_declare_aucune_conformite(self):
+        self.assertEqual(MODULE.verifier_accessibilite(self.accessibilite), [])
+
+    def test_refuse_une_conformite_accessibilite_prematuree(self):
+        registre = copy.deepcopy(self.accessibilite)
+        registre["meta"]["conformite_declaree"] = True
+        self.assertTrue(any("sans conformité" in erreur for erreur in MODULE.verifier_accessibilite(registre)))
+
+    def test_refuse_la_suppression_d_une_barriere(self):
+        registre = copy.deepcopy(self.accessibilite)
+        registre["barriere"].pop()
+        self.assertTrue(any("8 barrières" in erreur for erreur in MODULE.verifier_accessibilite(registre)))
+
+    def test_refuse_un_repli_sans_risque_documente(self):
+        registre = copy.deepcopy(self.accessibilite)
+        registre["barriere"][0]["risque_repli"] = ""
+        self.assertTrue(any("repli et risque" in erreur for erreur in MODULE.verifier_accessibilite(registre)))
 
     def test_continuite_courante_reste_non_executable(self):
         self.assertEqual(MODULE.verifier_continuite(self.continuite), [])

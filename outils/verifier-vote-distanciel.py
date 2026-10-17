@@ -27,6 +27,7 @@ REVUES = RACINE / "docs" / "rd" / "vote-distanciel-revues.toml"
 DONNEES = RACINE / "docs" / "rd" / "vote-distanciel-donnees.toml"
 CORRELATION = RACINE / "docs" / "rd" / "vote-distanciel-correlation.toml"
 CONTINUITE = RACINE / "docs" / "rd" / "vote-distanciel-continuite.toml"
+ACCESSIBILITE = RACINE / "docs" / "rd" / "vote-distanciel-accessibilite.toml"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -362,6 +363,52 @@ def verifier_continuite(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_accessibilite(registre: dict) -> list[str]:
+    """Vérifie que la revue d'accessibilité ne simule ni conformité ni personne réelle."""
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "vote-distanciel-verifiable"
+        or meta.get("statut") != "a-faire-expertiser"
+        or meta.get("donnees") != "profils-synthetiques-uniquement"
+        or meta.get("conformite_declaree") is not False
+        or meta.get("essai_avec_personnes_autorise") is not False
+    ):
+        erreurs.append("accessibilité synthétique, sans conformité déclarée ni essai avec personnes")
+    if not meta.get("principe"):
+        erreurs.append("accessibilité avec principe d’équivalence du repli")
+
+    barrieres = registre.get("barriere", [])
+    ids = [item.get("id") for item in barrieres]
+    requis = {
+        "navigation-clavier", "lecteur-ecran", "zoom-et-contrastes",
+        "comprehension-et-erreurs", "temps-et-fatigue",
+        "connexion-ou-equipement-limite", "assistance-humaine",
+        "verification-independante",
+    }
+    if set(ids) != requis or len(ids) != len(set(ids)):
+        erreurs.append("exactement 8 barrières d’accessibilité sans doublon")
+    for item in barrieres:
+        identifiant = item.get("id", "?")
+        champs = ("parcours_projete", "preuve_attendue", "repli_a_expertiser", "risque_repli")
+        if any(not item.get(champ) for champ in champs):
+            erreurs.append(f"barrière {identifiant} avec parcours, preuve, repli et risque")
+        if item.get("statut") != "a-faire-expertiser":
+            erreurs.append(f"barrière {identifiant} maintenue à faire expertiser")
+
+    garde_fous = registre.get("garde_fou", [])
+    ids_garde_fous = {item.get("id") for item in garde_fous}
+    requis_garde_fous = {
+        "aucune-donnee-de-sante", "equivalence-du-secret",
+        "equivalence-statutaire", "publication-humaine",
+    }
+    if ids_garde_fous != requis_garde_fous or len(garde_fous) != len(ids_garde_fous):
+        erreurs.append("exactement 4 garde-fous d’accessibilité sans doublon")
+    if any(not item.get("exigence") for item in garde_fous):
+        erreurs.append("garde-fous d’accessibilité avec exigences explicites")
+    return erreurs
+
+
 def verifier_revues(registre: dict) -> list[str]:
     erreurs: list[str] = []
     meta = registre.get("meta", {})
@@ -535,6 +582,10 @@ def principal() -> int:
         continuite = tomllib.load(fichier)
     manquants.extend(verifier_continuite(continuite))
 
+    with ACCESSIBILITE.open("rb") as fichier:
+        accessibilite = tomllib.load(fichier)
+    manquants.extend(verifier_accessibilite(accessibilite))
+
     with REVUES.open("rb") as fichier:
         revues = tomllib.load(fichier)
     manquants.extend(verifier_revues(revues))
@@ -566,7 +617,7 @@ def principal() -> int:
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
         "à expertiser, 18 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
-        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites, 5 signaux de corrélation et 7 incidents de continuité, "
+        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites, 5 signaux de corrélation, 7 incidents de continuité et 8 barrières d’accessibilité, "
         f"6 rôles et 5 revues à attribuer, décision {etat_decision}, initiative P0 à cadrer, "
         "aucune identité ni bulletin réel autorisé."
     )
