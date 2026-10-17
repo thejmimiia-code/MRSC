@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Reprise R&D, optimisation et pré-mortem prospectif
+
+- **Initiatives :** `relire-les-44-prototypes`, `optimisation-du-site`, `prospective-apprentissages-2030`.
+- **Décision :** intégrer sur la branche active la file de relecture générée et l’extension du balayage d’accessibilité ; ajouter au brief prospectif un pré-mortem sans choisir à la place de l’association.
+- **Résultat technique :** 55 prototypes ordonnés pour relecture ; 23 états interactifs couverts ; contraste du héros corrigé. Les contrôles automatiques ne valent ni relecture experte ni essai humain.
+- **Prospective :** six échecs possibles ont désormais un signal sans suivi individuel, un repli réversible et une porte humaine ; aucune probabilité n’est attribuée aux scénarios.
+- **Prochaine action :** attribuer les relectures des 9 domaines sensibles, puis faire trancher les options A/B/C par l’association.
+
 ## 2026-10-17 — PR #94 ouverte
 
 - **Initiatives :** `relire-les-44-prototypes`, `optimisation-du-site`.
