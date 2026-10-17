@@ -52,6 +52,35 @@ def date_du_brief(markdown: str) -> dt.date:
     return date
 
 
+def etat_trace_decision(markdown: str) -> str:
+    section = re.search(r"## 10\. Trace de décision(?P<contenu>.*?)(?:\n## |\Z)", markdown, re.S)
+    if not section:
+        raise ValueError("section de trace de décision introuvable")
+    champs = [
+        "Option retenue", "Date", "Personne ou instance qui décide",
+        "Conditions ajoutées", "Date de réexamen",
+    ]
+    valeurs: list[str] = []
+    for champ in champs:
+        ligne = re.search(rf"^\| {re.escape(champ)} \|(?P<valeur>.*?)\|\s*$", section.group("contenu"), re.M)
+        if not ligne:
+            raise ValueError(f"champ de décision absent : {champ}")
+        valeurs.append(ligne.group("valeur").strip())
+    remplis = sum(bool(valeur) for valeur in valeurs)
+    if remplis == 0:
+        return "en attente"
+    if remplis != len(valeurs):
+        raise ValueError(f"trace de décision partielle : {remplis}/{len(valeurs)} champs remplis")
+    if valeurs[0] not in {"A", "B", "C"}:
+        raise ValueError("option retenue invalide : utiliser A, B ou C")
+    try:
+        dt.date.fromisoformat(valeurs[1])
+        dt.date.fromisoformat(valeurs[4])
+    except ValueError as erreur:
+        raise ValueError("dates de décision attendues au format AAAA-MM-JJ") from erreur
+    return f"option {valeurs[0]} consignée"
+
+
 def poids_page(markdown: str, page: str) -> tuple[int, int]:
     motif = rf"^\| `{re.escape(page)}` \| ([0-9.]+) \| ([0-9.]+) \|"
     ligne = re.search(motif, markdown, re.M)
@@ -71,6 +100,7 @@ def date_prochaine_revue(meta: dict) -> dt.date:
 def principal() -> int:
     brief = BRIEF.read_text(encoding="utf-8")
     date_reference = date_du_brief(brief)
+    decision = etat_trace_decision(brief)
     catalogue = charger_toml(CATALOGUE).get("fiche", [])
     portefeuille = charger_toml(PORTEFEUILLE)
     initiatives = portefeuille.get("initiative", [])
@@ -114,10 +144,14 @@ def principal() -> int:
         f"Brief prospectif synchronisé au {date_reference.isoformat()} : "
         f"{fiches} fiches dans {domaines} domaines, {prototypes} prototypes, "
         f"{total_initiatives} initiatives dont {p0} P0, {questions} questions, "
-        f"{echues} revue échue, poids {poids_mobile}/{poids_ecran} Kio."
+        f"{echues} revue échue, poids {poids_mobile}/{poids_ecran} Kio, décision {decision}."
     )
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(principal())
+    try:
+        sys.exit(principal())
+    except (OSError, ValueError, tomllib.TOMLDecodeError) as erreur:
+        print(f"Brief prospectif impossible à vérifier : {erreur}", file=sys.stderr)
+        sys.exit(1)
