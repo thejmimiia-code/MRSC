@@ -29,6 +29,7 @@ CONTINUITE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-continuite.toml"
 ACCESSIBILITE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-accessibilite.toml"
 ASSISTANCE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-assistance.toml"
 CLES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-cles.toml"
+CHAINE_LOGICIELLE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-chaine-logicielle.toml"
 
 
 def table_decision(valeurs: list[str]) -> str:
@@ -70,6 +71,8 @@ class RegistreMenacesTests(unittest.TestCase):
             cls.assistance = tomllib.load(fichier)
         with CLES_PATH.open("rb") as fichier:
             cls.cles = tomllib.load(fichier)
+        with CHAINE_LOGICIELLE_PATH.open("rb") as fichier:
+            cls.chaine_logicielle = tomllib.load(fichier)
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -180,6 +183,24 @@ class RegistreMenacesTests(unittest.TestCase):
         registre = copy.deepcopy(self.comparaison)
         registre["critere"][0]["bloquant"] = False
         self.assertTrue(any("maintenu bloquant" in erreur for erreur in MODULE.verifier_comparaison(registre)))
+
+    def test_chaine_logicielle_courante_reste_non_executee(self):
+        self.assertEqual(MODULE.verifier_chaine_logicielle(self.chaine_logicielle), [])
+
+    def test_refuse_une_selection_logicielle_prematuree(self):
+        registre = copy.deepcopy(self.chaine_logicielle)
+        registre["meta"]["selection_effectuee"] = True
+        self.assertTrue(any("non sélectionnée" in erreur for erreur in MODULE.verifier_chaine_logicielle(registre)))
+
+    def test_refuse_la_suppression_du_controle_des_mises_a_jour(self):
+        registre = copy.deepcopy(self.chaine_logicielle)
+        registre["controle"] = [item for item in registre["controle"] if item["id"] != "mise-a-jour-gelee"]
+        self.assertTrue(any("7 contrôles" in erreur for erreur in MODULE.verifier_chaine_logicielle(registre)))
+
+    def test_refuse_une_porte_logicielle_partielle(self):
+        registre = copy.deepcopy(self.chaine_logicielle)
+        registre["porte"][0]["exigences"].pop()
+        self.assertTrue(any("porte avant banc" in erreur for erreur in MODULE.verifier_chaine_logicielle(registre)))
 
     def test_cycle_des_cles_courant_reste_synthetique(self):
         self.assertEqual(MODULE.verifier_cles(self.cles), [])
