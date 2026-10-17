@@ -37,10 +37,10 @@
 .adventure-hero-actions { margin-top: 1.3rem; }
 .adventure-primary-button { border-color: #f2c57c; background: #edaf57; color: #152d44; }
 .adventure-primary-button:hover { background: #ffd184; color: #152d44; }
-.adventure-secondary-button { border-color: rgba(255,255,255,.65); background: rgba(11,33,51,.45); color: #fff; }
-.adventure-secondary-button:hover { background: rgba(255,255,255,.14); color: #fff; }
+.adventure-secondary-button { border-color: rgba(255,255,255,.75); background: rgba(11,33,51,.72); color: #fff; }
+.adventure-secondary-button:hover { background: rgba(11,33,51,.9); color: #fff; }
 .adventure-promise-list { display: flex; flex-wrap: wrap; gap: .45rem .6rem; margin: 1.55rem 0 .6rem; padding: 0; list-style: none; }
-.adventure-promise-list li { padding: .35rem .65rem; border: 1px solid rgba(255,255,255,.28); border-radius: 99px; background: rgba(11,33,51,.52); color: #fff; font-size: .77rem; font-weight: 680; }
+.adventure-promise-list li { padding: .35rem .65rem; border: 1px solid rgba(255,255,255,.4); border-radius: 99px; background: rgba(11,33,51,.7); color: #fff; font-size: .77rem; font-weight: 680; }
 .adventure-status-note { max-width: 670px; margin: 1rem 0 0; color: rgba(255,255,255,.82); font-size: .84rem; }
 .adventure-hero a:focus-visible { outline-color: #ffe4a2; }
 
