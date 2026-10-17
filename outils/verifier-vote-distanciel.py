@@ -25,6 +25,7 @@ CHAMPS_MENACE = {
     "id", "acteur", "actif", "scenario", "controle_propose",
     "preuve_attendue", "risque_residuel", "condition_arret", "statut",
 }
+CHAMPS_INVARIANT = {"id", "description", "preuve_attendue"}
 
 SECTIONS_REQUISES = [
     "## 1. Reformulation de l’objectif",
@@ -49,6 +50,36 @@ GARDE_FOUS_REQUIS = [
 ]
 
 
+def verifier_registre(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if meta.get("initiative") != "vote-distanciel-verifiable":
+        erreurs.append("registre relié à l’initiative vote-distanciel-verifiable")
+    if meta.get("statut") != "a-expertiser":
+        erreurs.append("registre maintenu au statut a-expertiser")
+
+    menaces = registre.get("menace", [])
+    ids = [menace.get("id") for menace in menaces]
+    if set(ids) != MENACES_REQUISES or len(ids) != len(set(ids)):
+        erreurs.append("registre contenant exactement les 10 menaces requises sans doublon")
+    for index, menace in enumerate(menaces, start=1):
+        champs_vides = [champ for champ in CHAMPS_MENACE if not menace.get(champ)]
+        if champs_vides:
+            erreurs.append(f"menace {index} avec champs renseignés : {', '.join(sorted(champs_vides))}")
+        if menace.get("statut") != "a-expertiser":
+            erreurs.append(f"menace {menace.get('id', index)} maintenue à l’état a-expertiser")
+
+    invariants = registre.get("invariant", [])
+    ids_invariants = [item.get("id") for item in invariants]
+    if len(invariants) < 7 or len(ids_invariants) != len(set(ids_invariants)):
+        erreurs.append("au moins 7 invariants sans doublon")
+    for index, invariant in enumerate(invariants, start=1):
+        champs_vides = [champ for champ in CHAMPS_INVARIANT if not invariant.get(champ)]
+        if champs_vides:
+            erreurs.append(f"invariant {index} avec champs renseignés : {', '.join(sorted(champs_vides))}")
+    return erreurs
+
+
 def principal() -> int:
     texte = NOTE.read_text(encoding="utf-8")
     texte_normalise = texte.casefold()
@@ -63,19 +94,7 @@ def principal() -> int:
 
     with MENACES.open("rb") as fichier:
         registre = tomllib.load(fichier)
-    menaces = registre.get("menace", [])
-    ids = [menace.get("id") for menace in menaces]
-    if set(ids) != MENACES_REQUISES or len(ids) != len(set(ids)):
-        manquants.append("registre contenant exactement les 10 menaces requises sans doublon")
-    for index, menace in enumerate(menaces, start=1):
-        champs_vides = [champ for champ in CHAMPS_MENACE if not menace.get(champ)]
-        if champs_vides:
-            manquants.append(f"menace {index} avec champs renseignés : {', '.join(sorted(champs_vides))}")
-        if menace.get("statut") != "a-expertiser":
-            manquants.append(f"menace {menace.get('id', index)} maintenue à l’état a-expertiser")
-    invariants = registre.get("invariant", [])
-    if len(invariants) < 7 or any(not item.get("preuve_attendue") for item in invariants):
-        manquants.append("au moins 7 invariants avec preuve attendue")
+    manquants.extend(verifier_registre(registre))
 
     with PORTEFEUILLE.open("rb") as fichier:
         initiatives = tomllib.load(fichier).get("initiative", [])

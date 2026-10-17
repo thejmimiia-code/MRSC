@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Options de vote et tests négatifs du registre
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Prospective :** quatre options sans probabilité sont comparées : ne pas voter à distance, service existant expertisé, logiciel existant auto-hébergé, nouveau système. L’option A reste le comparateur ; D est écartée à ce stade.
+- **Optimisation :** le validateur du registre est isolé et couvert par six tests, dont suppression d’une menace, preuve vide, faux statut maîtrisé, invariant dupliqué et registre détaché de l’initiative.
+- **Résultat :** le contrôle ne vérifie plus seulement le fichier nominal ; il démontre qu’il refuse plusieurs dégradations structurantes.
+- **Limite :** les tests vérifient un schéma documentaire, pas une propriété cryptographique, une résistance réelle ou la pertinence des options.
+- **Prochaine action :** définir avec l’association le type de scrutin et éliminer les options incompatibles avant toute comparaison technique approfondie.
+
 ## 2026-10-17 — Modèle de menace du vote rendu reproductible
 
 - **Initiative :** `vote-distanciel-verifiable`.
