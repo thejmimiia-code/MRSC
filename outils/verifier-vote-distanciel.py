@@ -20,6 +20,7 @@ MENACES = RACINE / "docs" / "rd" / "vote-distanciel-menaces.toml"
 REGLES = RACINE / "docs" / "rd" / "vote-distanciel-regles.toml"
 CAS_ESSAI = RACINE / "docs" / "rd" / "vote-distanciel-cas-essai.toml"
 DECISION = RACINE / "docs" / "rd" / "vote-distanciel-decision.md"
+COMPARAISON = RACINE / "docs" / "rd" / "vote-distanciel-comparaison.toml"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -42,6 +43,8 @@ REGLES_REQUISES = {
 }
 CHAMPS_REGLE = {"id", "article", "pages", "portee", "releve", "ambiguite", "statut"}
 CHAMPS_CAS = {"id", "menaces", "alteration", "attendu", "condition_arret", "statut"}
+OPTIONS_COMPARAISON = {"A", "belenios", "helios", "electionguard"}
+CHAMPS_CRITERE = {"id", "famille", "bloquant", "question", "preuve_attendue"}
 
 SECTIONS_REQUISES = [
     "## 1. Reformulation de l’objectif",
@@ -146,6 +149,36 @@ def verifier_cas_essai(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_comparaison(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if meta.get("initiative") != "vote-distanciel-verifiable":
+        erreurs.append("comparaison reliée à l’initiative vote-distanciel-verifiable")
+    if meta.get("statut") != "a-faire-expertiser":
+        erreurs.append("comparaison maintenue à faire expertiser")
+    options = registre.get("option", [])
+    ids_options = [option.get("id") for option in options]
+    if set(ids_options) != OPTIONS_COMPARAISON or len(ids_options) != len(set(ids_options)):
+        erreurs.append("comparaison contenant A, Belenios, Helios et ElectionGuard sans doublon")
+    for option in options:
+        if option.get("statut") != "a-evaluer" or not option.get("limite") or not option.get("source"):
+            erreurs.append(f"option {option.get('id', '?')} non sélectionnée, sourcée et limitée")
+        champs_interdits = {"score", "note", "rang", "probabilite"} & set(option)
+        if champs_interdits:
+            erreurs.append(f"option {option.get('id', '?')} sans score, rang ni probabilité")
+    criteres = registre.get("critere", [])
+    ids_criteres = [critere.get("id") for critere in criteres]
+    if len(criteres) < 15 or len(ids_criteres) != len(set(ids_criteres)):
+        erreurs.append("au moins 15 critères sans doublon")
+    for index, critere in enumerate(criteres, start=1):
+        champs_vides = [champ for champ in CHAMPS_CRITERE if champ not in critere or critere.get(champ) in {None, ""}]
+        if champs_vides:
+            erreurs.append(f"critère {index} avec champs renseignés : {', '.join(sorted(champs_vides))}")
+        if critere.get("bloquant") is not True:
+            erreurs.append(f"critère {critere.get('id', index)} maintenu bloquant")
+    return erreurs
+
+
 def verifier_decision(markdown: str) -> tuple[str, list[str]]:
     erreurs: list[str] = []
     champs = [
@@ -216,6 +249,10 @@ def principal() -> int:
         cas_essai = tomllib.load(fichier)
     manquants.extend(verifier_cas_essai(cas_essai))
 
+    with COMPARAISON.open("rb") as fichier:
+        comparaison = tomllib.load(fichier)
+    manquants.extend(verifier_comparaison(comparaison))
+
     etat_decision, erreurs_decision = verifier_decision(DECISION.read_text(encoding="utf-8"))
     manquants.extend(erreurs_decision)
 
@@ -243,7 +280,8 @@ def principal() -> int:
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
         "à expertiser, 15 règles statutaires à relire, 12 cas synthétiques à concevoir, "
-        f"décision {etat_decision}, initiative P0 à cadrer, aucune identité ni bulletin réel autorisé."
+        f"4 options et 15 critères sans score, décision {etat_decision}, initiative P0 à cadrer, "
+        "aucune identité ni bulletin réel autorisé."
     )
     return 0
 
