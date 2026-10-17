@@ -21,6 +21,7 @@ STATUTS_PATH = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 DECISION_PATH = RACINE / "docs" / "rd" / "vote-distanciel-decision.md"
 COMPARAISON_PATH = RACINE / "docs" / "rd" / "vote-distanciel-comparaison.toml"
 SOURCES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-sources.toml"
+PROFILS_PATH = RACINE / "docs" / "rd" / "vote-distanciel-profils.toml"
 
 
 def table_decision(valeurs: list[str]) -> str:
@@ -46,6 +47,8 @@ class RegistreMenacesTests(unittest.TestCase):
             cls.comparaison = tomllib.load(fichier)
         with SOURCES_PATH.open("rb") as fichier:
             cls.sources = tomllib.load(fichier)
+        with PROFILS_PATH.open("rb") as fichier:
+            cls.profils = tomllib.load(fichier)
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -100,6 +103,25 @@ class RegistreMenacesTests(unittest.TestCase):
             "à faire relire" in erreur
             for erreur in MODULE.verifier_regles(registre, self.empreinte_statuts)
         ))
+
+    def test_profils_statutaires_courants_sont_non_executables(self):
+        self.assertEqual(MODULE.verifier_profils(self.profils), [])
+
+    def test_refuse_un_profil_manquant(self):
+        registre = copy.deepcopy(self.profils)
+        registre["profil"].pop()
+        self.assertTrue(any("8 profils" in erreur for erreur in MODULE.verifier_profils(registre)))
+
+    def test_refuse_un_parametre_executable_avant_relecture(self):
+        registre = copy.deepcopy(self.profils)
+        registre["profil"][0]["quorum"] = 25
+        self.assertTrue(any("non exécutable" in erreur for erreur in MODULE.verifier_profils(registre)))
+
+    def test_maintient_la_dissolution_bloquee(self):
+        registre = copy.deepcopy(self.profils)
+        dissolution = next(item for item in registre["profil"] if item["id"] == "dissolution")
+        dissolution["statut"] = "a-faire-relire"
+        self.assertTrue(any("bloque-interpretation" in erreur for erreur in MODULE.verifier_profils(registre)))
 
     def test_cas_synthetiques_couvrent_les_menaces(self):
         self.assertEqual(MODULE.verifier_cas_essai(self.cas), [])

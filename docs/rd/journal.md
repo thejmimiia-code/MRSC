@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Profils statutaires reliés sans devenir exécutables
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** relier les 15 relevés à 8 profils distincts sans encoder de quorum, majorité, délai, procuration ou secret directement utilisable par une urne.
+- **Résultat :** Bureau, conseil d’éthique, territoriale, deux AGO, deux AGE et dissolution disposent de règles sources et questions bloquantes ; dissolution reste `bloque-interpretation`.
+- **Optimisation :** quatre tests refusent profil absent, paramètre exécutable prématuré et déblocage de la dissolution.
+- **Limite :** cette cartographie n’est pas une interprétation des statuts ; le conseil d’éthique comporte encore une référence libre à structurer si ce profil est choisi.
+- **Prochaine action :** faire relire un seul profil choisi par l’association, puis seulement convertir ses règles confirmées en spécification de test, jamais directement en production.
+
 ## 2026-10-17 — Premiers écarts documentaires des candidats
 
 - **Initiative :** `vote-distanciel-verifiable`.

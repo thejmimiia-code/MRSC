@@ -27,6 +27,8 @@ L’association doit choisir **un seul profil** pour la prochaine étude, ou arr
 - `dissolution` — bloqué tant que l’articulation des articles 15 et 19 n’est pas relue ;
 - `aucun` — arrêt ou report de la recherche.
 
+Les huit profils sont reliés à leurs règles et questions bloquantes dans [`vote-distanciel-profils.toml`](vote-distanciel-profils.toml). Ils sont volontairement non exécutables : aucun quorum, seuil, délai ou plafond ne peut être injecté automatiquement avant relecture.
+
 Puis choisir une voie :
 
 - **A — Ne pas voter à distance.** Étudier seulement les alternatives accessibles et la participation à distance sans vote électronique.
