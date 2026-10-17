@@ -27,6 +27,8 @@ DONNEES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-donnees.toml"
 CORRELATION_PATH = RACINE / "docs" / "rd" / "vote-distanciel-correlation.toml"
 CONTINUITE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-continuite.toml"
 ACCESSIBILITE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-accessibilite.toml"
+ASSISTANCE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-assistance.toml"
+CLES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-cles.toml"
 
 
 def table_decision(valeurs: list[str]) -> str:
@@ -64,6 +66,10 @@ class RegistreMenacesTests(unittest.TestCase):
             cls.continuite = tomllib.load(fichier)
         with ACCESSIBILITE_PATH.open("rb") as fichier:
             cls.accessibilite = tomllib.load(fichier)
+        with ASSISTANCE_PATH.open("rb") as fichier:
+            cls.assistance = tomllib.load(fichier)
+        with CLES_PATH.open("rb") as fichier:
+            cls.cles = tomllib.load(fichier)
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -174,6 +180,42 @@ class RegistreMenacesTests(unittest.TestCase):
         registre = copy.deepcopy(self.comparaison)
         registre["critere"][0]["bloquant"] = False
         self.assertTrue(any("maintenu bloquant" in erreur for erreur in MODULE.verifier_comparaison(registre)))
+
+    def test_cycle_des_cles_courant_reste_synthetique(self):
+        self.assertEqual(MODULE.verifier_cles(self.cles), [])
+
+    def test_refuse_la_cryptographie_maison(self):
+        registre = copy.deepcopy(self.cles)
+        registre["meta"]["cryptographie_maison"] = True
+        self.assertTrue(any("sans cryptographie maison" in erreur for erreur in MODULE.verifier_cles(registre)))
+
+    def test_refuse_la_suppression_de_la_destruction_des_cles(self):
+        registre = copy.deepcopy(self.cles)
+        registre["phase"] = [item for item in registre["phase"] if item["id"] != "destruction-et-contestation"]
+        self.assertTrue(any("6 phases" in erreur for erreur in MODULE.verifier_cles(registre)))
+
+    def test_refuse_la_sauvegarde_de_plusieurs_parts(self):
+        registre = copy.deepcopy(self.cles)
+        registre["incompatibilite"] = registre["incompatibilite"][:-2] + registre["incompatibilite"][-1:]
+        self.assertTrue(any("centralisation" in erreur for erreur in MODULE.verifier_cles(registre)))
+
+    def test_assistance_courante_reste_separee_de_la_procuration(self):
+        self.assertEqual(MODULE.verifier_assistance(self.assistance), [])
+
+    def test_refuse_la_confusion_assistance_procuration(self):
+        registre = copy.deepcopy(self.assistance)
+        registre["separation"] = registre["separation"][1:]
+        self.assertTrue(any("assistance explicitement" in erreur for erreur in MODULE.verifier_assistance(registre)))
+
+    def test_refuse_une_situation_sans_condition_arret(self):
+        registre = copy.deepcopy(self.assistance)
+        registre["situation"][0]["condition_arret"] = ""
+        self.assertTrue(any("limite, preuve et arrêt" in erreur for erreur in MODULE.verifier_assistance(registre)))
+
+    def test_refuse_une_assistance_dite_operationnelle(self):
+        registre = copy.deepcopy(self.assistance)
+        registre["meta"]["execution_autorisee"] = True
+        self.assertTrue(any("non exécutable" in erreur for erreur in MODULE.verifier_assistance(registre)))
 
     def test_accessibilite_courante_ne_declare_aucune_conformite(self):
         self.assertEqual(MODULE.verifier_accessibilite(self.accessibilite), [])

@@ -28,6 +28,8 @@ DONNEES = RACINE / "docs" / "rd" / "vote-distanciel-donnees.toml"
 CORRELATION = RACINE / "docs" / "rd" / "vote-distanciel-correlation.toml"
 CONTINUITE = RACINE / "docs" / "rd" / "vote-distanciel-continuite.toml"
 ACCESSIBILITE = RACINE / "docs" / "rd" / "vote-distanciel-accessibilite.toml"
+ASSISTANCE = RACINE / "docs" / "rd" / "vote-distanciel-assistance.toml"
+CLES = RACINE / "docs" / "rd" / "vote-distanciel-cles.toml"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 MENACES_REQUISES = {
@@ -409,6 +411,95 @@ def verifier_accessibilite(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_assistance(registre: dict) -> list[str]:
+    """Vérifie les frontières entre aide, support, procuration et choix."""
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "vote-distanciel-verifiable"
+        or meta.get("statut") != "a-faire-relire"
+        or meta.get("donnees") != "synthetiques-uniquement"
+        or meta.get("execution_autorisee") is not False
+    ):
+        erreurs.append("assistance synthétique, non exécutable et à faire relire")
+    if not meta.get("principe"):
+        erreurs.append("assistance avec principe de séparation explicite")
+
+    situations = registre.get("situation", [])
+    ids = [item.get("id") for item in situations]
+    requis = {
+        "explication-generale", "aide-a-la-navigation", "support-technique",
+        "procuration-statutaire", "contestation-accessible", "suspicion-de-coercition",
+    }
+    if set(ids) != requis or len(ids) != len(set(ids)):
+        erreurs.append("exactement 6 situations d’assistance sans doublon")
+    for item in situations:
+        identifiant = item.get("id", "?")
+        champs = ("fonction", "autorise_projete", "preuve_attendue", "condition_arret")
+        if any(not item.get(champ) for champ in champs):
+            erreurs.append(f"situation {identifiant} avec fonction, limite, preuve et arrêt")
+        if len(item.get("interdit", [])) < 3:
+            erreurs.append(f"situation {identifiant} avec au moins 3 actes interdits")
+        if item.get("statut") != "a-faire-relire":
+            erreurs.append(f"situation {identifiant} maintenue à faire relire")
+
+    separations = registre.get("separation", [])
+    paires = [frozenset((item.get("gauche"), item.get("droite"))) for item in separations]
+    if len(separations) != 4 or len(set(paires)) != 4:
+        erreurs.append("exactement 4 séparations fonctionnelles sans doublon")
+    if any(None in paire or not item.get("raison") for paire, item in zip(paires, separations)):
+        erreurs.append("séparations fonctionnelles nommées et motivées")
+    paire_assistance_procuration = frozenset(("assistance", "procuration"))
+    if paire_assistance_procuration not in paires:
+        erreurs.append("assistance explicitement séparée de la procuration")
+    return erreurs
+
+
+def verifier_cles(registre: dict) -> list[str]:
+    """Vérifie que le cycle des clés reste synthétique et non exécutable."""
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "vote-distanciel-verifiable"
+        or meta.get("statut") != "a-faire-expertiser"
+        or meta.get("donnees") != "secrets-synthetiques-uniquement"
+        or meta.get("execution_autorisee") is not False
+        or meta.get("cryptographie_maison") is not False
+    ):
+        erreurs.append("cycle des clés synthétique, non exécutable et sans cryptographie maison")
+    if not meta.get("principe"):
+        erreurs.append("cycle des clés avec principe de séparation")
+
+    phases = registre.get("phase", [])
+    ids = [item.get("id") for item in phases]
+    requis = {
+        "designation-autorites", "generation-distribuee", "verification-avant-ouverture",
+        "conservation-temporaire", "depouillement-a-seuil", "destruction-et-contestation",
+    }
+    if set(ids) != requis or len(ids) != len(set(ids)):
+        erreurs.append("exactement 6 phases du cycle des clés sans doublon")
+    for item in phases:
+        identifiant = item.get("id", "?")
+        champs = ("entree_requise", "sortie_attendue", "preuve_attendue", "condition_arret")
+        if any(not item.get(champ) for champ in champs):
+            erreurs.append(f"phase {identifiant} avec entrée, sortie, preuve et arrêt")
+        if len(item.get("interdits", [])) < 3:
+            erreurs.append(f"phase {identifiant} avec au moins 3 actes interdits")
+        if item.get("statut") != "a-faire-expertiser":
+            erreurs.append(f"phase {identifiant} maintenue à faire expertiser")
+
+    incompatibilites = registre.get("incompatibilite", [])
+    paires = [frozenset((item.get("gauche"), item.get("droite"))) for item in incompatibilites]
+    if len(incompatibilites) != 5 or len(set(paires)) != 5:
+        erreurs.append("exactement 5 incompatibilités de rôles sans doublon")
+    if any(None in paire or not item.get("raison") for paire, item in zip(paires, incompatibilites)):
+        erreurs.append("incompatibilités de rôles nommées et motivées")
+    sauvegarde = frozenset(("sauvegarde-centralisee", "plusieurs-parts"))
+    if sauvegarde not in paires:
+        erreurs.append("centralisation de plusieurs parts explicitement interdite")
+    return erreurs
+
+
 def verifier_revues(registre: dict) -> list[str]:
     erreurs: list[str] = []
     meta = registre.get("meta", {})
@@ -586,6 +677,14 @@ def principal() -> int:
         accessibilite = tomllib.load(fichier)
     manquants.extend(verifier_accessibilite(accessibilite))
 
+    with ASSISTANCE.open("rb") as fichier:
+        assistance = tomllib.load(fichier)
+    manquants.extend(verifier_assistance(assistance))
+
+    with CLES.open("rb") as fichier:
+        cles = tomllib.load(fichier)
+    manquants.extend(verifier_cles(cles))
+
     with REVUES.open("rb") as fichier:
         revues = tomllib.load(fichier)
     manquants.extend(verifier_revues(revues))
@@ -617,7 +716,7 @@ def principal() -> int:
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
         "à expertiser, 18 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
-        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites, 5 signaux de corrélation, 7 incidents de continuité et 8 barrières d’accessibilité, "
+        f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites, 5 signaux de corrélation, 7 incidents de continuité, 8 barrières d’accessibilité, 6 situations d’assistance et 6 phases de clés, "
         f"6 rôles et 5 revues à attribuer, décision {etat_decision}, initiative P0 à cadrer, "
         "aucune identité ni bulletin réel autorisé."
     )

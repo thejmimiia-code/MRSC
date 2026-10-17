@@ -1,0 +1,83 @@
+# Frontières projetées : aucune assistance ou procuration réelle n'est autorisée.
+[meta]
+version = 1
+date = 2026-10-17
+initiative = "vote-distanciel-verifiable"
+statut = "a-faire-relire"
+donnees = "synthetiques-uniquement"
+execution_autorisee = false
+principe = "Assistance, procuration, support technique et décision de vote sont quatre fonctions distinctes."
+
+[[situation]]
+id = "explication-generale"
+fonction = "assistance"
+autorise_projete = "Expliquer avant le choix le parcours et les termes de façon identique à toute personne synthétique."
+interdit = ["recommander-un-choix", "demander-le-choix", "conserver-un-recu"]
+preuve_attendue = "Script neutre versionné et scénario contradictoire."
+condition_arret = "L'explication varie selon le choix ou révèle celui-ci."
+statut = "a-faire-relire"
+
+[[situation]]
+id = "aide-a-la-navigation"
+fonction = "assistance"
+autorise_projete = "Décrire les commandes et états sans voir, saisir ou confirmer le choix."
+interdit = ["prendre-le-controle-du-terminal", "observer-le-choix", "confirmer-a-la-place"]
+preuve_attendue = "Parcours synthétique séparant commandes, contenu du choix et confirmation."
+condition_arret = "L'aide nécessite l'accès au choix, au justificatif ou au reçu."
+statut = "a-faire-relire"
+
+[[situation]]
+id = "support-technique"
+fonction = "support"
+autorise_projete = "Diagnostiquer disponibilité et erreurs avec un journal minimisé sans identité ni bulletin."
+interdit = ["capture-du-bulletin", "export-du-terminal", "croisement-identite-recu"]
+preuve_attendue = "Journal synthétique et matrice des accès relus."
+condition_arret = "Le diagnostic exige une donnée interdite ou reconstitue une liaison."
+statut = "a-faire-relire"
+
+[[situation]]
+id = "procuration-statutaire"
+fonction = "procuration"
+autorise_projete = "Exercer une délégation uniquement selon le profil relu, son plafond et sa révocation."
+interdit = ["procuration-implicite", "depassement-du-plafond", "liaison-mandant-bulletin"]
+preuve_attendue = "Cas synthétique relié à la règle statutaire et registre séparé."
+condition_arret = "Le plafond, la validité, la révocation ou le secret ne peuvent être vérifiés séparément."
+statut = "a-faire-relire"
+
+[[situation]]
+id = "contestation-accessible"
+fonction = "recours"
+autorise_projete = "Signaler un échec d'accès ou d'inclusion sans transmettre le choix."
+interdit = ["dossier-identite-choix", "publication-du-recu", "preuve-de-vote-a-un-tiers"]
+preuve_attendue = "Dossier synthétique minimal et procédure de réponse attribuée."
+condition_arret = "Le recours exige ou rend possible la preuve du choix."
+statut = "a-faire-relire"
+
+[[situation]]
+id = "suspicion-de-coercition"
+fonction = "protection"
+autorise_projete = "Orienter vers un canal secret de secours défini et relu, sans interroger sur le choix."
+interdit = ["verification-du-choix", "confrontation-automatisee", "trace-nominative-publique"]
+preuve_attendue = "Scénario synthétique et procédure humaine confidentielle à expertiser."
+condition_arret = "Aucun canal secret n'existe ou la procédure augmente le risque pour la personne."
+statut = "a-faire-relire"
+
+[[separation]]
+gauche = "assistance"
+droite = "procuration"
+raison = "Aider à utiliser un canal ne confère pas le pouvoir de voter."
+
+[[separation]]
+gauche = "support"
+droite = "decision-de-vote"
+raison = "Le support ne doit ni voir ni influencer le choix."
+
+[[separation]]
+gauche = "registre-procurations"
+droite = "bulletin-chiffre"
+raison = "Contrôler la délégation ne doit pas relier mandant, mandataire et bulletin."
+
+[[separation]]
+gauche = "recours"
+droite = "preuve-transferable-du-choix"
+raison = "Contester ne doit jamais demander de prouver son choix."
