@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Brief prospectif rendu vérifiable
+
+- **Initiative :** `prospective-apprentissages-2030`.
+- **Décision :** contrôler automatiquement quatre faits internes du brief (fiches, prototypes, initiatives/P0, questions de la Boussole) au lieu de laisser vieillir un instantané silencieusement.
+- **Résultat :** `outils/verifier-decision-prospective.py` recalcule ces valeurs depuis le catalogue, le portefeuille et la page générée ; la CI échoue si le brief diverge.
+- **Limite :** ce contrôle ne valide ni les scénarios, ni la recommandation, ni le choix A/B/C, qui reste une décision de l’association.
+- **Prochaine action :** faire relire le pré-mortem et attribuer les rôles nécessaires avant tout pilote.
+
 ## 2026-10-17 — Reprise R&D, optimisation et pré-mortem prospectif
 
 - **Initiatives :** `relire-les-44-prototypes`, `optimisation-du-site`, `prospective-apprentissages-2030`.

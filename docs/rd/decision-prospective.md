@@ -22,7 +22,7 @@ La décision porte sur l'allocation du temps de relecture, pas sur l'ajout d'une
 | En-têtes servis par GitHub Pages | types AVIF/WebP corrects, gzip sur le texte, cache 600 s | Issue #90 |
 | Essais navigateur | 8/8, dont 320 px, zoom 150 %, contraste renforcé | `outils/test-experience.cjs` |
 
-Reproduire l'essentiel : `python3 outils/etat-rd.py`.
+Reproduire l'essentiel : `python3 outils/etat-rd.py`. Vérifier que les quatre nombres internes de ce tableau suivent encore leurs sources : `python3 outils/verifier-decision-prospective.py`. Ce contrôle de cohérence ne valide ni le cadrage ni une option.
 
 ## 3. Ce qui n'est pas établi
 
