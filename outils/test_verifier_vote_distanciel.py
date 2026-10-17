@@ -25,6 +25,7 @@ PROFILS_PATH = RACINE / "docs" / "rd" / "vote-distanciel-profils.toml"
 REVUES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-revues.toml"
 DONNEES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-donnees.toml"
 CORRELATION_PATH = RACINE / "docs" / "rd" / "vote-distanciel-correlation.toml"
+CONTINUITE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-continuite.toml"
 
 
 def table_decision(valeurs: list[str]) -> str:
@@ -58,6 +59,8 @@ class RegistreMenacesTests(unittest.TestCase):
             cls.donnees = tomllib.load(fichier)
         with CORRELATION_PATH.open("rb") as fichier:
             cls.correlation = tomllib.load(fichier)
+        with CONTINUITE_PATH.open("rb") as fichier:
+            cls.continuite = tomllib.load(fichier)
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -168,6 +171,24 @@ class RegistreMenacesTests(unittest.TestCase):
         registre = copy.deepcopy(self.comparaison)
         registre["critere"][0]["bloquant"] = False
         self.assertTrue(any("maintenu bloquant" in erreur for erreur in MODULE.verifier_comparaison(registre)))
+
+    def test_continuite_courante_reste_non_executable(self):
+        self.assertEqual(MODULE.verifier_continuite(self.continuite), [])
+
+    def test_refuse_un_incident_sans_decision_associative(self):
+        registre = copy.deepcopy(self.continuite)
+        registre["incident"][0]["autorite_humaine_requise"] = ["operations-securite"]
+        self.assertTrue(any("autorité humaine" in erreur for erreur in MODULE.verifier_continuite(registre)))
+
+    def test_refuse_un_abaissement_premature_des_garde_fous(self):
+        registre = copy.deepcopy(self.continuite)
+        registre["incident"][0]["statut"] = "operationnel"
+        self.assertTrue(any("maintenu à faire relire" in erreur for erreur in MODULE.verifier_continuite(registre)))
+
+    def test_refuse_un_incident_de_continuite_supprime(self):
+        registre = copy.deepcopy(self.continuite)
+        registre["incident"].pop()
+        self.assertTrue(any("7 incidents" in erreur for erreur in MODULE.verifier_continuite(registre)))
 
     def test_epreuve_correlation_courante_reste_non_executable(self):
         self.assertEqual(MODULE.verifier_correlation(self.correlation), [])
