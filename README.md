@@ -72,7 +72,10 @@ Trois grandes illustrations disposent désormais de variantes AVIF et WebP en de
 python3 outils/optimiser-images.py --verifier        # manifeste, empreintes et tailles des variantes
 python3 outils/verifier-poids-pages.py              # poids estimé et budgets (95 pages)
 python3 outils/verifier-poids-pages.py --rapport docs/rd/poids-pages.md
+python3 outils/verifier-publication.py --base-url https://thejmimiia-code.github.io/MRSC/
 ```
+
+Le dernier contrôle demande un accès réseau au site publié ; il relève les types MIME, l’encodage et le cache et ne juge ni le rendu ni la performance. Il peut aussi être lancé depuis l’onglet Actions (`Vérifier les en-têtes servis par l’hébergement`).
 
 La méthode, les chiffres avant/après, les limites et les prochaines vérifications sont dans [`docs/rd/poids-et-sobriete-numerique.md`](docs/rd/poids-et-sobriete-numerique.md). Les essais navigateur du dépôt (`outils/test-experience.cjs`) couvrent aussi le réflow à 320 px et le zoom à 150 %.
 

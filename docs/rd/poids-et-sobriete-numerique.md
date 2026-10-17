@@ -122,7 +122,7 @@ Les variantes ajoutent **1 553 Kio** au dépôt pour **787 Kio** d’images sour
 
 **Prochaines actions, non exécutées ici :**
 
-1. Vérifier sur GitHub Pages et Vercel les en-têtes réellement servis pour `.avif` et `.webp`, la compression (gzip/Brotli) et le cache, sans supposer que le serveur local les représente.
+1. Vérifier sur GitHub Pages les en-têtes réellement servis pour `.avif` et `.webp`, la compression et le cache, sans supposer que le serveur local les représente. `outils/verifier-publication.py` interroge une racine publiée et relève code, type MIME, encodage et cache ; il est conçu pour le poste d’un mainteneur ou pour le workflow `Vérifier les en-têtes servis par l’hébergement` (déclenchement manuel ou mensuel), car l’environnement d’écriture hors ligne n’accède pas au domaine public.
 2. Faire une revue visuelle humaine des trois illustrations sur écran réel, à 100 % et à fort zoom.
 3. Mesurer sur appareil et réseau réels (LCP, CLS, octets transférés) avec un outil accepté par l’association ; ne pas convertir ces mesures en bilan carbone.
 4. Si un lecteur ancien ou un contexte à faible bande passante l’exige, tester une variante 1 000 px de l’image de secours et un chemin sans image décorative ; ne pas l’annoncer avant essai.

@@ -1,0 +1,59 @@
+name: Vérifier les en-têtes servis par l’hébergement
+
+# Contrôle réseau volontairement séparé de la porte hors ligne :
+# il interroge le site publié, relève type MIME, encodage et cache,
+# et publie le tableau dans le résumé du run. Un échec signale un fichier
+# manquant ou injoignable, pas une qualité de rendu.
+
+on:
+  workflow_dispatch:
+    inputs:
+      base-url:
+        description: "Racine publiée à contrôler (terminée par /)"
+        required: false
+        default: "https://thejmimiia-code.github.io/MRSC/"
+        type: string
+  schedule:
+    - cron: "17 6 1 * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verifier-publication
+  cancel-in-progress: true
+
+jobs:
+  entetes:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Compile the checker
+        run: python3 -m py_compile outils/verifier-publication.py
+
+      - name: Read public headers
+        shell: bash
+        env:
+          BASE_URL: ${{ inputs.base-url || 'https://thejmimiia-code.github.io/MRSC/' }}
+        run: |
+          set -uo pipefail
+          rapport="$RUNNER_TEMP/entetes-publics.md"
+          python3 outils/verifier-publication.py --base-url "$BASE_URL" --tentatives 3 --attente 20 | tee "$rapport"
+          statut=${PIPESTATUS[0]}
+          {
+            echo "## En-têtes servis pour $BASE_URL"
+            echo
+            cat "$rapport"
+            if [ "$statut" -ne 0 ]; then
+              echo
+              echo "> Contrôle incomplet : au moins un fichier ne répond pas 200. Relancer après vérification de la publication."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$statut"
