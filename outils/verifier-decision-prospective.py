@@ -19,7 +19,11 @@ CATALOGUE = RACINE / "docs" / "apprentissage" / "catalogue.toml"
 PORTEFEUILLE = RACINE / "docs" / "rd" / "portefeuille.toml"
 APPRENDRE = RACINE / "apprendre.html"
 POIDS = RACINE / "docs" / "rd" / "poids-pages.md"
-DATE_REFERENCE = dt.date(2026, 10, 17)  # Date explicitement affichée par le brief.
+MOIS_FR = {
+    "janvier": 1, "février": 2, "mars": 3, "avril": 4,
+    "mai": 5, "juin": 6, "juillet": 7, "août": 8,
+    "septembre": 9, "octobre": 10, "novembre": 11, "décembre": 12,
+}
 
 
 def charger_toml(chemin: Path) -> dict:
@@ -35,6 +39,17 @@ def compter_questions_boussole(html: str) -> int:
     if not liste:
         raise ValueError("liste .knowledge-compass introuvable")
     return len(re.findall(r"<li\b", liste.group("contenu")))
+
+
+def date_du_brief(markdown: str) -> dt.date:
+    entete = re.search(r"\*\*Date : (\d{1,2}) ([a-zéû]+) (\d{4})\.", markdown)
+    if not entete or entete.group(2) not in MOIS_FR:
+        raise ValueError("date française du brief introuvable ou invalide")
+    date = dt.date(int(entete.group(3)), MOIS_FR[entete.group(2)], int(entete.group(1)))
+    libelle_tableau = f"Valeur au {entete.group(1)} {entete.group(2)} {entete.group(3)}"
+    if libelle_tableau not in markdown:
+        raise ValueError("date du tableau différente de la date du brief")
+    return date
 
 
 def poids_page(markdown: str, page: str) -> tuple[int, int]:
@@ -55,6 +70,7 @@ def date_prochaine_revue(meta: dict) -> dt.date:
 
 def principal() -> int:
     brief = BRIEF.read_text(encoding="utf-8")
+    date_reference = date_du_brief(brief)
     catalogue = charger_toml(CATALOGUE).get("fiche", [])
     portefeuille = charger_toml(PORTEFEUILLE)
     initiatives = portefeuille.get("initiative", [])
@@ -70,7 +86,7 @@ def principal() -> int:
         intervalle = fiche.get("intervalle_revue_jours")
         if revue and isinstance(intervalle, int):
             echeance = dt.date.fromisoformat(revue) + dt.timedelta(days=intervalle)
-            echues += echeance < DATE_REFERENCE
+            echues += echeance < date_reference
     prochaine_revue = date_prochaine_revue(portefeuille.get("meta", {}))
     poids_mobile, poids_ecran = poids_page(POIDS.read_text(encoding="utf-8"), "apprendre.html")
 
@@ -95,7 +111,8 @@ def principal() -> int:
         return 1
 
     print(
-        f"Brief prospectif synchronisé : {fiches} fiches dans {domaines} domaines, {prototypes} prototypes, "
+        f"Brief prospectif synchronisé au {date_reference.isoformat()} : "
+        f"{fiches} fiches dans {domaines} domaines, {prototypes} prototypes, "
         f"{total_initiatives} initiatives dont {p0} P0, {questions} questions, "
         f"{echues} revue échue, poids {poids_mobile}/{poids_ecran} Kio."
     )

@@ -22,7 +22,7 @@ La décision porte sur l'allocation du temps de relecture, pas sur l'ajout d'une
 | En-têtes servis par GitHub Pages | types AVIF/WebP corrects, gzip sur le texte, cache 600 s | Issue #90 |
 | Essais navigateur | 8/8, dont 320 px, zoom 150 %, contraste renforcé | `outils/test-experience.cjs` |
 
-Reproduire l'essentiel : `python3 outils/etat-rd.py`. Vérifier que sept repères internes de ce tableau suivent encore leurs sources (corpus, revues, portefeuille, Boussole et poids local) : `python3 outils/verifier-decision-prospective.py`. Les dates et échéances sont recalculées au **17 octobre 2026**, date affichée par ce brief, et non à la date d’exécution. Ce contrôle de cohérence ne valide ni le cadrage ni une option.
+Reproduire l'essentiel : `python3 outils/etat-rd.py`. Vérifier que sept repères internes de ce tableau suivent encore leurs sources (corpus, revues, portefeuille, Boussole et poids local) : `python3 outils/verifier-decision-prospective.py`. Les dates et échéances sont recalculées à la date lue dans l’en-tête — ici le **17 octobre 2026** — et le contrôle refuse une date différente dans le tableau. Elles ne dépendent pas de la date d’exécution. Ce contrôle de cohérence ne valide ni le cadrage ni une option.
 
 ## 3. Ce qui n'est pas établi
 

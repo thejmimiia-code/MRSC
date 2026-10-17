@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Date du brief rendue explicite et testable
+
+- **Initiative :** `prospective-apprentissages-2030`.
+- **Décision :** lire la date de référence dans l’en-tête du brief plutôt que la coder dans l’outil, et exiger que l’en-tête du tableau porte la même date.
+- **Résultat :** neuf tests couvrent maintenant aussi une date française valide, une divergence entre dates et un mois invalide.
+- **Limite :** une date cohérente ne rend pas les hypothèses prospectives vraies ; toute actualisation du brief doit rester une décision éditoriale consciente.
+- **Prochaine action :** soumettre le pré-mortem et les options A/B/C à l’association, sans modifier automatiquement la date de l’instantané.
+
 ## 2026-10-17 — Échéances et poids ajoutés au garde-fou prospectif
 
 - **Initiatives :** `prospective-apprentissages-2030`, `poids-et-sobriete-numerique`.

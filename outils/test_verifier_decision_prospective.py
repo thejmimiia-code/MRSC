@@ -31,6 +31,20 @@ class CompterQuestionsBoussoleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "knowledge-compass"):
             MODULE.compter_questions_boussole('<section id="boussole-savoirs"></section>')
 
+    def test_lit_la_date_du_brief_et_du_tableau(self):
+        texte = "**Date : 17 octobre 2026. Statut : brouillon.**\n| Fait | Valeur au 17 octobre 2026 |"
+        self.assertEqual(MODULE.date_du_brief(texte), dt.date(2026, 10, 17))
+
+    def test_refuse_deux_dates_differentes(self):
+        texte = "**Date : 17 octobre 2026. Statut : brouillon.**\n| Fait | Valeur au 18 octobre 2026 |"
+        with self.assertRaisesRegex(ValueError, "différente"):
+            MODULE.date_du_brief(texte)
+
+    def test_refuse_un_mois_inconnu(self):
+        texte = "**Date : 17 octembre 2026.**\n| Valeur au 17 octembre 2026 |"
+        with self.assertRaisesRegex(ValueError, "date française"):
+            MODULE.date_du_brief(texte)
+
     def test_arrondit_les_poids_affiches(self):
         tableau = "| `apprendre.html` | 158.8 | 308.6 | 619.5 |"
         self.assertEqual(MODULE.poids_page(tableau, "apprendre.html"), (159, 309))
