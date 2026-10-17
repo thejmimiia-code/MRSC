@@ -92,7 +92,7 @@ class RegistreMenacesTests(unittest.TestCase):
         registre = copy.deepcopy(self.regles)
         registre["regle"].pop()
         self.assertTrue(any(
-            "15 règles" in erreur
+            "18 règles" in erreur
             for erreur in MODULE.verifier_regles(registre, self.empreinte_statuts)
         ))
 

@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Trois directives statutaires manquantes structurées
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Constat :** le conseil d’éthique, les phases participatives préalables et le procès-verbal d’AGO figuraient dans la note humaine mais pas dans le registre structuré.
+- **Décision :** ajouter `conseil-ethique-electronique`, `phases-participatives` et `ago-proces-verbal`, puis les relier aux profils concernés sans créer de paramètre exécutable.
+- **Résultat :** 18 règles couvrent désormais les huit profils ; le conseil d’éthique n’utilise plus une référence libre hors registre.
+- **Limite :** les trois relevés restent `a-faire-relire`, comme les autres ; structurer un texte ne tranche pas sa portée juridique.
+- **Prochaine action :** faire relire le profil retenu article par article et vérifier le règlement intérieur avant toute spécification de test.
+
 ## 2026-10-17 — Profils statutaires reliés sans devenir exécutables
 
 - **Initiative :** `vote-distanciel-verifiable`.

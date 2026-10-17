@@ -42,6 +42,7 @@ REGLES_REQUISES = {
     "ago-premiere-convocation", "ago-seconde-convocation", "ago-procuration",
     "ago-secret", "ago-session-numerique", "age-premiere-convocation",
     "age-procuration", "age-seconde-convocation", "dissolution-seuils",
+    "conseil-ethique-electronique", "phases-participatives", "ago-proces-verbal",
 }
 CHAMPS_REGLE = {"id", "article", "pages", "portee", "releve", "ambiguite", "statut"}
 CHAMPS_CAS = {"id", "menaces", "alteration", "attendu", "condition_arret", "statut"}
@@ -117,7 +118,7 @@ def verifier_regles(registre: dict, empreinte_statuts: str) -> list[str]:
     regles = registre.get("regle", [])
     ids = [regle.get("id") for regle in regles]
     if set(ids) != REGLES_REQUISES or len(ids) != len(set(ids)):
-        erreurs.append("registre contenant exactement les 15 règles statutaires requises sans doublon")
+        erreurs.append("registre contenant exactement les 18 règles statutaires requises sans doublon")
     for index, regle in enumerate(regles, start=1):
         champs_vides = [champ for champ in CHAMPS_REGLE if not regle.get(champ)]
         if champs_vides:
@@ -153,8 +154,6 @@ def verifier_profils(registre: dict) -> list[str]:
         champs_interdits = {"quorum", "majorite", "duree", "procurations", "secret"} & set(profil)
         if champs_interdits:
             erreurs.append(f"profil {profil.get('id', index)} non exécutable avant relecture")
-    # La règle du conseil d'éthique est consignée en référence libre car elle n'est
-    # pas encore structurée dans le registre des 15 règles ; toutes les autres le sont.
     if not REGLES_REQUISES.issubset(regles_couvertes):
         manquantes = REGLES_REQUISES - regles_couvertes
         erreurs.append(f"règles statutaires non reliées aux profils : {', '.join(sorted(manquantes))}")
@@ -368,7 +367,7 @@ def principal() -> int:
 
     print(
         "Cadrage du vote distanciel présent : 9 sections, 7 invariants, 10 menaces "
-        "à expertiser, 15 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
+        "à expertiser, 18 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
         f"4 options et 15 critères sans score, 3 sources épinglées à évaluer, décision {etat_decision}, initiative P0 à cadrer, "
         "aucune identité ni bulletin réel autorisé."
     )

@@ -5,7 +5,7 @@
 ## 1. Ce qui est établi dans le dépôt
 
 - La copie locale des statuts comporte plusieurs profils de scrutin et non une règle unique.
-- Quinze relevés statutaires sont structurés, tous `a-faire-relire`.
+- Dix-huit relevés statutaires sont structurés, tous `a-faire-relire`.
 - Dix menaces et sept invariants sont documentés, tous `a-expertiser`.
 - Douze cas de banc synthétique sont décrits, tous `a-concevoir` et jamais exécutés.
 - Aucun bulletin réel, aucune identité réelle, aucune clé de production et aucun service de vote ne sont présents.

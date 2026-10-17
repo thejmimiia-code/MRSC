@@ -141,3 +141,30 @@ portee = "dissolution"
 releve = "Majorité des deux tiers ; quorum de 60 % en première instance et 30 % en seconde réunie dans le mois."
 ambiguite = "Articulation avec l'article 15, procuration et secret à interpréter."
 statut = "a-faire-relire"
+
+[[regle]]
+id = "conseil-ethique-electronique"
+article = "10.2.1"
+pages = [13]
+portee = "conseil d'éthique"
+releve = "Consultations électroniques admises ; une procuration maximum ; pouvoirs en blanc non pris en compte ; majorité absolue ; départage par le fondateur ou le membre le plus ancien."
+ambiguite = "Constitution du conseil, présence distante, secret et conflit d'intérêt à confirmer."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "phases-participatives"
+article = "11.9"
+pages = [20]
+portee = "fonctionnement participatif territorial"
+releve = "Le vote vient après information, compréhension, débat, analyse, proposition, contrôle d'éthique et synthèse."
+ambiguite = "Portée exacte au-delà des groupes et commissions territoriales à confirmer."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "ago-proces-verbal"
+article = "14"
+pages = [23]
+portee = "assemblée générale ordinaire"
+releve = "Un procès-verbal des séances est tenu et signé par le président ou le vice-président."
+ambiguite = "Contenu, publication, signature électronique et conservation à préciser."
+statut = "a-faire-relire"
