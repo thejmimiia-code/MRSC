@@ -52,7 +52,9 @@ A ou `aucun` sont des décisions valides. La recherche n’a pas à aboutir à u
 10. Les huit barrières d’accessibilité et les risques de chaque repli sont examinés sans donnée de santé ni affirmation de conformité prématurée.
 11. Assistance, support, procuration et recours sont séparés ; aucun aidant ou technicien ne peut voir, saisir, confirmer ou prouver un choix.
 12. Le cycle projeté des clés est relu de la désignation à la destruction ; aucune clé complète, sauvegarde commune ou cryptographie maison n’est admise.
-13. Les six rôles du [`plan de revues`](vote-distanciel-revues.toml) ont examiné les artefacts relevant de leur responsabilité ; aucune disponibilité n’est supposée.
+13. Les sept contrôles de chaîne logicielle sont documentés et la porte avant banc est levée par une revue humaine ; aucun audit d’une autre version n’est transposé.
+14. Gel, vérifications, incidents, contestations et décision associative sont clos avant toute proclamation ; un total calculé n’est jamais proclamé automatiquement.
+15. Les six rôles du [`plan de revues`](vote-distanciel-revues.toml) ont examiné les artefacts relevant de leur responsabilité ; aucune disponibilité n’est supposée.
 
 Si une condition manque, la phase reste documentaire.
 

@@ -2,6 +2,26 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Calcul, contestation et proclamation séparés
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** interdire qu’un total calculé devienne automatiquement un résultat associatif.
+- **Résultat :** six étapes cumulatives couvrent gel, vérifications cryptographique et statutaire, incidents, contestation et décision ; le paquet public minimal exclut identités, secrets et journaux.
+- **Prospective :** divergence de miroirs, disparition d’un vérificateur et recours exigeant une preuve du choix deviennent des arrêts distincts, sans probabilité.
+- **Optimisation :** le contrôle refuse un résultat préautorisé, la suppression de la contestation et une porte de proclamation partielle.
+- **Limite :** aucun résultat, recours, procès-verbal ou scrutin réel n’est produit.
+- **Prochaine action :** faire relire la chaîne complète par les six rôles après décision associative sur un profil et une option.
+
+## 2026-10-18 — Chaîne logicielle reliée à une porte humaine avant banc
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** exiger sept preuves cumulatives entre source épinglée, dépendances, construction, provenance, écarts, gel des mises à jour et vérification future.
+- **Résultat :** une porte bloquante couvre tous les contrôles ; aucun logiciel n’est sélectionné, construit ou exécuté.
+- **Prospective :** disparition du fournisseur, mise à jour silencieuse et audit d’une autre version sont traités comme des ruptures de preuve, sans probabilité.
+- **Optimisation :** le contrôle refuse une sélection prématurée, la suppression du gel des mises à jour et une porte partielle.
+- **Limite :** métadonnées et plans de preuves ne valent ni audit, ni reproductibilité constatée, ni sécurité.
+- **Prochaine action :** appliquer cette porte à une seule version candidate uniquement après choix associatif et attribution des revues.
+
 ## 2026-10-18 — Cycle projeté des clés borné de la désignation à la destruction
 
 - **Initiative :** `vote-distanciel-verifiable`.

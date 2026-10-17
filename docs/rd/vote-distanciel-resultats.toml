@@ -1,0 +1,76 @@
+# Cycle de résultat projeté : aucune proclamation ou contestation réelle n'est autorisée.
+[meta]
+version = 1
+date = 2026-10-18
+initiative = "vote-distanciel-verifiable"
+statut = "a-faire-relire"
+donnees = "synthetiques-uniquement"
+execution_autorisee = false
+resultat_autorise = false
+principe = "Un total calculé n'est pas un résultat proclamable tant que preuves, règles, incidents et décision humaine ne concordent pas."
+
+[[etape]]
+id = "gel-du-tableau"
+entree_requise = "Clôture décidée selon le profil relu et incidents de continuité résolus."
+sortie_attendue = "Empreinte synthétique du tableau et des artefacts, répliquée sur des miroirs indépendants."
+preuve_attendue = "Concordance hors ligne des empreintes et chronologie minimisée."
+condition_arret = "Le tableau change, diverge entre miroirs ou ne peut pas être exporté."
+interdits = ["ajout-apres-cloture", "miroir-unique", "horodatage-identifiant"]
+statut = "a-faire-relire"
+
+[[etape]]
+id = "verification-cryptographique"
+entree_requise = "Tableau gelé, parts synthétiques et vérificateurs indépendants disponibles."
+sortie_attendue = "Verdicts reproductibles sur inclusion, validité et dépouillement synthétique."
+preuve_attendue = "Deux rapports indépendants reliés aux mêmes empreintes."
+condition_arret = "Les vérificateurs divergent ou dépendent du serveur principal."
+interdits = ["validation-par-interface", "verificateur-serveur-seul", "ecart-compense"]
+statut = "a-faire-relire"
+
+[[etape]]
+id = "verification-statutaire"
+entree_requise = "Verdicts techniques disponibles et profil statutaire relu."
+sortie_attendue = "Application humaine documentée du quorum, blanc, majorité, unanimité ou départage applicables."
+preuve_attendue = "Matrice article-paramètre et calcul synthétique reproductible."
+condition_arret = "Une règle manque, reste ambiguë ou a changé après ouverture."
+interdits = ["profil-implicite", "regle-ajoutee-apres-coup", "dissolution-non-interpretee"]
+statut = "a-faire-relire"
+
+[[etape]]
+id = "revue-des-incidents"
+entree_requise = "Inventaire synthétique des interruptions, écarts, recours et alertes de confidentialité."
+sortie_attendue = "Décision humaine motivée : poursuivre l'examen, annuler ou demander expertise."
+preuve_attendue = "Procès-verbal synthétique sans identité ni choix individuel."
+condition_arret = "Un incident bloquant est ignoré, reclassé automatiquement ou compensé par un score."
+interdits = ["absence-egale-aucun-incident", "score-de-risque", "journal-identite-choix"]
+statut = "a-faire-relire"
+
+[[etape]]
+id = "fenetre-de-contestation"
+entree_requise = "Paquet de preuves exportable et canal de recours accessible sans preuve du choix."
+sortie_attendue = "Écarts synthétiques instruits, réponses attribuées et délai décidé selon les règles relues."
+preuve_attendue = "Registre minimal de recours synthétiques séparé des bulletins."
+condition_arret = "Contester exige identité, bulletin ou preuve transférable dans un même dossier."
+interdits = ["preuve-du-choix", "publication-du-recu", "delai-invente"]
+statut = "a-faire-relire"
+
+[[etape]]
+id = "decision-de-proclamation"
+entree_requise = "Vérifications, règles, incidents et contestations clos par les rôles humains requis."
+sortie_attendue = "Décision associative synthétique de proclamer, ne pas proclamer ou annuler."
+preuve_attendue = "Trace signée des rôles, version des preuves et motifs sans secret."
+condition_arret = "La proclamation est automatique ou précède une condition cumulative."
+interdits = ["proclamation-automatique", "resultat-partiel", "correction-manuelle-du-total"]
+statut = "a-faire-relire"
+
+[[publication]]
+id = "paquet-public-minimal"
+contenu_projete = ["configuration-figee", "tableau-chiffre", "preuves-de-validite", "parts-de-dechiffrement-verifiables", "total-synthetique", "rapports-des-verificateurs"]
+contenu_interdit = ["identite", "adresse-reseau", "justificatif-brut", "secret-de-cle", "choix-individuel", "journal-operationnel"]
+statut = "a-faire-expertiser"
+
+[[porte]]
+id = "avant-proclamation"
+etapes = ["gel-du-tableau", "verification-cryptographique", "verification-statutaire", "revue-des-incidents", "fenetre-de-contestation", "decision-de-proclamation"]
+decision = "association-decisionnaire"
+statut = "bloquante"
