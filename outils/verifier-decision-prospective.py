@@ -81,6 +81,21 @@ def etat_trace_decision(markdown: str) -> str:
     return f"option {valeurs[0]} consignée"
 
 
+def verifier_etat_initiative(decision: str, initiatives: list[dict]) -> str:
+    correspondances = [
+        initiative for initiative in initiatives
+        if initiative.get("id") == "prospective-apprentissages-2030"
+    ]
+    if len(correspondances) != 1:
+        raise ValueError("initiative prospective-apprentissages-2030 absente ou dupliquée")
+    etat = correspondances[0].get("etat")
+    if decision == "en attente" and etat != "a-cadrer":
+        raise ValueError("décision en attente mais initiative hors de l’état a-cadrer")
+    if decision != "en attente" and etat == "a-cadrer":
+        raise ValueError("décision consignée mais initiative encore dans l’état a-cadrer")
+    return str(etat)
+
+
 def poids_page(markdown: str, page: str) -> tuple[int, int]:
     motif = rf"^\| `{re.escape(page)}` \| ([0-9.]+) \| ([0-9.]+) \|"
     ligne = re.search(motif, markdown, re.M)
@@ -104,6 +119,7 @@ def principal() -> int:
     catalogue = charger_toml(CATALOGUE).get("fiche", [])
     portefeuille = charger_toml(PORTEFEUILLE)
     initiatives = portefeuille.get("initiative", [])
+    etat_initiative = verifier_etat_initiative(decision, initiatives)
     fiches = len(catalogue)
     prototypes = sum(fiche.get("statut_editorial") == "Prototype à relire" for fiche in catalogue)
     domaines = len({fiche.get("domaine") for fiche in catalogue if fiche.get("domaine")})
@@ -144,7 +160,8 @@ def principal() -> int:
         f"Brief prospectif synchronisé au {date_reference.isoformat()} : "
         f"{fiches} fiches dans {domaines} domaines, {prototypes} prototypes, "
         f"{total_initiatives} initiatives dont {p0} P0, {questions} questions, "
-        f"{echues} revue échue, poids {poids_mobile}/{poids_ecran} Kio, décision {decision}."
+        f"{echues} revue échue, poids {poids_mobile}/{poids_ecran} Kio, "
+        f"décision {decision}, initiative {etat_initiative}."
     )
     return 0
 

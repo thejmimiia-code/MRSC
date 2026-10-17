@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-17 — Décision et portefeuille rendus cohérents
+
+- **Initiative :** `prospective-apprentissages-2030`.
+- **Décision :** relier l’état de la trace au statut du portefeuille : une décision vide exige `a-cadrer`, tandis qu’une décision consignée exige une évolution d’état dans le même changement.
+- **Résultat :** quatre tests supplémentaires couvrent l’attente cohérente, les deux divergences et l’initiative absente ; le rapport affiche ensemble décision et état.
+- **Limite :** cette cohérence de gouvernance ne prouve ni l’autorité de la décision, ni l’utilité d’un pilote, ni un consensus.
+- **Prochaine action :** faire décider A/B/C par l’association puis modifier ensemble la trace, le portefeuille et le journal, ou conserver explicitement l’attente.
+
 ## 2026-10-17 — Trace de décision prospective protégée
 
 - **Initiative :** `prospective-apprentissages-2030`.
