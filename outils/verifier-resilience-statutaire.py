@@ -105,6 +105,20 @@ def verifier_matrice(matrice: dict) -> list[str]:
     dissolution = next((item for item in articles if item.get("id") == "article-19"), {})
     if dissolution.get("statut") != "bloque-interpretation-juridique":
         erreurs.append("dissolution maintenue bloquée pour interprétation juridique")
+
+    classements = matrice.get("classement", [])
+    articles_classes = [item.get("article") for item in classements]
+    if set(articles_classes) != set(ids) or len(articles_classes) != len(set(articles_classes)):
+        erreurs.append("classement normatif unique pour chacun des 20 groupes")
+    niveaux_permis = {"statuts", "reglement", "procedure", "mixte", "decision-prealable"}
+    for item in classements:
+        identifiant = item.get("article", "?")
+        if item.get("niveau") not in niveaux_permis or not item.get("justification"):
+            erreurs.append(f"classement {identifiant} avec niveau permis et justification")
+    for identifiant in ("article-9", "articles-10-4-10-7", "articles-17-18", "article-19"):
+        classement = next((item for item in classements if item.get("article") == identifiant), {})
+        if classement.get("niveau") != "decision-prealable":
+            erreurs.append(f"classement {identifiant} maintenu en décision préalable")
     return erreurs
 
 

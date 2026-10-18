@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Classement normatif proposé pour chaque groupe d’articles
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** distinguer ce qui relève des statuts, du règlement, d’une procédure, d’un niveau mixte ou d’une décision préalable.
+- **Résultat :** les vingt groupes possèdent un classement justifié ; l’article 9, le renouvellement des dirigeants, les articles 17–18 et la dissolution restent en décision préalable.
+- **Optimisation :** deux tests refusent un article non classé et le déclassement de la dissolution en simple procédure.
+- **Limite :** ce classement est une proposition documentaire ; seul un examen juridique et la décision associative peuvent arrêter le niveau normatif.
+- **Prochaine action :** rédiger le squelette du règlement uniquement pour les éléments classés `reglement` ou `mixte`, sans convertir les décisions préalables en règles.
+
 ## 2026-10-18 — Matrice de traçabilité des vingt groupes d’articles
 
 - **Initiative :** `resilience-statutaire-globale`.
