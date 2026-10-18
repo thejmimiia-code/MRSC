@@ -123,6 +123,15 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Limites :** identité prouvée au niveau des styles calculés dans l’environnement d’essai (police de repli), pas une relecture visuelle humaine ; résidu littéral motivé (ombres, halos et anneaux d’illustration, alphas ponctuels sur marine, impression). Aucune valeur sombre créée, rien d’activé.
 - **Prochaine action :** relecture visuelle humaine toujours prioritaire ; le re-prototype sombre borné peut désormais être tenté sur les seuls jetons, sans décision d’activation. État inchangé : `a-tester`.
 
+## 2026-10-18 — Re-prototype sombre borné après phase 2.5 : feuille principale débloquée, deux résidus à traiter
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal et demande :** le prérequis « phase 2.5 » étant rempli, re-prototyper la variante sombre sur les seuls jetons — toujours sans rien activer ni publier de valeur sombre.
+- **Résultat :** valeurs candidates du § 12 étendues mécaniquement aux 117 jetons et injectées uniquement dans la session du navigateur d’essai ; contraste mesuré élément par élément (fond effectif, pire cas des dégradés) avec témoin clair par le même banc. Feuille principale : en jetons seuls, 12 textes sous les repères sur 2 368 — uniquement les boutons pleins (2,13:1) ; avec la simulation libellée d’une scission de `--blue`, **0/2 368**. Les trois familles bloquantes du § 12 ont disparu sur ce périmètre ; neuf captures hors dépôt le montrent (accueil, catalogue, transparence, 320 px, simulateur témoin inchangé). Aventure : 439/1 338 textes sous les repères — littéraux des thématiques par monde, périmètre exclu de la phase 2.5. Détail au § 14 de [`inventaire-couleurs-jetons.md`](inventaire-couleurs-jetons.md).
+- **Décision :** ne rien activer. Deux bloqueurs résiduels avant toute phase 3 : scinder `--blue` (lien/focus contre surface du bouton plein — insoluble par une seule valeur, remède du même gabarit que la phase 2.5) et résorber les littéraux de l’aventure ou décider son exclusion explicitement. Déclenchement toujours entièrement ouvert.
+- **Limites :** mesures et captures d’un navigateur sans interface, police de repli ; dérivation des candidates mécanique (teintes vertes lisant olive, échelle des surfaces douces resserrée) ; survols non mesurés ; combinaison avec le contraste renforcé non prototypée ; aucune relecture visuelle humaine ni essai avec des personnes — requis avant toute décision d’activation.
+- **Prochaine action :** relecture visuelle humaine des captures ; si la variante est poursuivie, scission de `--blue` à valeurs claires identiques puis périmètre aventure, avant essais avec personnes concernées et décision séparée. État inchangé : `a-tester`.
+
 ## 2026-10-18 — Calcul, contestation et proclamation séparés
 
 - **Initiative :** `vote-distanciel-verifiable`.
