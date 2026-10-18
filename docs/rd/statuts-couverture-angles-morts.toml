@@ -1,0 +1,233 @@
+# Couverture croisée : mesure documentaire, jamais preuve d’étanchéité.
+[meta]
+version = 1
+date = 2026-10-18
+initiative = "resilience-statutaire-globale"
+statut = "a-faire-relire"
+exhaustif = false
+couverture_validee = false
+regle = "Une correspondance documentaire ne ferme pas un risque ; seule une preuve relue peut faire évoluer son statut."
+
+[[couverture]]
+risque = "captation-gouvernance"
+articles_reglement = [1, 2, 10, 11, 12, 17, 21, 23, 24, 25, 26, 27, 28, 73, 74, 77, 78, 79]
+invariants = ["competence-prealable", "separation-des-pouvoirs", "urgence-temporaire"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "influence-exterieure"
+articles_reglement = [11, 16, 28, 57, 58, 62, 71, 72]
+invariants = ["separation-des-pouvoirs", "preuve-proportionnee"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "manipulation-electorat"
+articles_reglement = [5, 6, 7, 8, 9, 10, 11, 12, 17]
+invariants = ["competence-prealable", "regle-non-retroactive", "recours-effectif"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "manipulation-information"
+articles_reglement = [13, 14, 15, 16, 17, 20, 62]
+invariants = ["regle-non-retroactive", "recours-effectif"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "manipulation-vote"
+articles_reglement = [17, 18, 19, 20, 39, 40, 41, 42, 47, 48, 49, 50, 51, 52, 53, 54]
+invariants = ["regle-non-retroactive", "preuve-proportionnee"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "conflit-interets"
+articles_reglement = [10, 11, 28, 30, 31, 56, 57, 65, 68]
+invariants = ["separation-des-pouvoirs", "recours-effectif"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "sanction-detournee"
+articles_reglement = [9, 64, 65, 66, 67, 68]
+invariants = ["droits-non-derogeables", "recours-effectif"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "captation-financiere"
+articles_reglement = [37, 55, 56, 57, 58, 59]
+invariants = ["competence-prealable", "separation-des-pouvoirs"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "captation-numerique"
+articles_reglement = [58, 61, 69, 70, 71, 72]
+invariants = ["separation-des-pouvoirs", "preuve-proportionnee"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "atteinte-donnees"
+articles_reglement = [8, 11, 50, 60, 61, 62, 63, 69, 70, 71]
+invariants = ["preuve-proportionnee", "droits-non-derogeables"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "blocage-sabotage"
+articles_reglement = [23, 26, 35, 58, 61, 69, 70, 71, 73, 74, 75, 77]
+invariants = ["urgence-temporaire", "competence-prealable"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "desaccord-interpretatif"
+articles_reglement = [1, 2, 3, 4, 17, 79, 80, 81, 82]
+invariants = ["competence-prealable", "regle-non-retroactive"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "crise-institutionnelle"
+articles_reglement = [61, 71, 73, 74, 75, 76, 77]
+invariants = ["urgence-temporaire", "aucune-souverainete-parallele"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "catastrophe-danger"
+articles_reglement = [63, 70, 73, 74, 75, 76, 77]
+invariants = ["droits-non-derogeables", "urgence-temporaire"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "rupture-succession"
+articles_reglement = [23, 25, 26, 27, 28, 58, 69, 74, 77]
+invariants = ["separation-des-pouvoirs", "urgence-temporaire"]
+statut = "documente-non-valide"
+
+[[couverture]]
+risque = "erreur-complexite"
+articles_reglement = [3, 4, 14, 16, 17, 20, 61, 72, 80, 81]
+invariants = ["preuve-proportionnee", "recours-effectif"]
+statut = "documente-non-valide"
+
+[[angle_mort]]
+id = "source-officielle-incomplete"
+gravite = "bloquant"
+observation = "Version déposée, récépissé, PV 2020 et éventuelles décisions postérieures absents."
+condition_sortie = "Réunir et comparer les originaux institutionnels."
+role_requis = "juridique-statutaire"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "charte-absente"
+gravite = "bloquant"
+observation = "La charte peut fonder une radiation mais n'est pas dans le dépôt."
+condition_sortie = "Identifier sa version, son adoption et sa portée ou retirer toute dépendance non fondée."
+role_requis = "juridique-statutaire"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "articles-17-18"
+gravite = "bloquant"
+observation = "La numérotation saute de 16 à 19."
+condition_sortie = "Comparer la copie déposée et le procès-verbal ; ne rien recréer par règlement."
+role_requis = "juridique-statutaire"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "age-dissolution"
+gravite = "bloquant"
+observation = "Les articles 15 et 19 portent des seuils et calendriers distincts."
+condition_sortie = "Obtenir un avis écrit et modifier les statuts si une simple interprétation ne suffit pas."
+role_requis = "juridique-statutaire"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "adoption-reglement"
+gravite = "bloquant"
+observation = "L'article 9 ne fixe pas explicitement compétence, quorum et majorité."
+condition_sortie = "Confirmer juridiquement la voie fondateur puis AGO et sa règle de vote."
+role_requis = "association-decisionnaire"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "renouvellement-dirigeants"
+gravite = "bloquant"
+observation = "Le passage des désignations initiales aux renouvellements est incomplet."
+condition_sortie = "Déterminer si une modification statutaire est nécessaire."
+role_requis = "juridique-statutaire"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "droits-non-derogeables-niveau"
+gravite = "important"
+observation = "Les garanties d'urgence sont proposées mais pas inscrites dans une norme adoptée."
+condition_sortie = "Choisir celles qui doivent figurer dans les statuts plutôt que dans le règlement."
+role_requis = "association-decisionnaire"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "recours-impartial"
+gravite = "important"
+observation = "Plusieurs recours sont prévus sans organe compétent définitivement établi."
+condition_sortie = "Cartographier chaque décision, première instance, recours, récusation et réparation."
+role_requis = "juridique-statutaire"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "succession-fondateur"
+gravite = "important"
+observation = "L'indisponibilité durable ou définitive n'a pas de mécanisme complet."
+condition_sortie = "Distinguer qualité historique, fonctions actives et suppléance collégiale."
+role_requis = "association-decisionnaire"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "preuve-efficacite"
+gravite = "important"
+observation = "Les contrôles sont décrits mais jamais exercés."
+condition_sortie = "Concevoir puis faire relire des exercices entièrement synthétiques."
+role_requis = "operations-securite"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "capacite-humaine"
+gravite = "important"
+observation = "Les six rôles restent non attribués."
+condition_sortie = "Attribuer compétences, indépendance, disponibilité et suppléance sans publier de données superflues."
+role_requis = "association-decisionnaire"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "droit-positif-actuel"
+gravite = "bloquant"
+observation = "La conformité au droit français consolidé n'a pas été vérifiée sur des sources officielles actuelles."
+condition_sortie = "Faire réaliser une revue juridique datée et bornée aux documents."
+role_requis = "juridique-statutaire"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "accessibilite-reelle"
+gravite = "important"
+observation = "Les barrières sont documentées sans essai volontaire ni revue compétente."
+condition_sortie = "Faire relire le protocole puis tester une version précise sans donnée de santé."
+role_requis = "accessibilite-usages"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "finance-fiscal-social"
+gravite = "important"
+observation = "L'objet permet ventes, salaires, biens et partenariats sans revue spécialisée complète."
+condition_sortie = "Faire examiner fiscalité, comptabilité, emploi, conventions et pouvoirs d'engagement."
+role_requis = "juridique-statutaire"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "assurance-responsabilite"
+gravite = "important"
+observation = "Responsabilités, assurances et protection des bénévoles ne sont pas cartographiées."
+condition_sortie = "Inventorier activités, risques, couvertures et exclusions avec un professionnel compétent."
+role_requis = "operations-securite"
+statut = "ouvert"
+
+[[angle_mort]]
+id = "dependance-personnes"
+gravite = "important"
+observation = "Fondateur, dirigeants et administrateurs peuvent devenir des points uniques."
+condition_sortie = "Définir suppléances, inventaire des accès, doubles contrôles et exercices de départ."
+role_requis = "association-decisionnaire"
+statut = "ouvert"

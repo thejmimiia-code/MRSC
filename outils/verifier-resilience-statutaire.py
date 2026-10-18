@@ -14,6 +14,7 @@ REGISTRE = RACINE / "docs" / "rd" / "statuts-risques.toml"
 MATRICE = RACINE / "docs" / "rd" / "statuts-matrice-tracabilite.toml"
 REGLEMENT = RACINE / "docs" / "rd" / "reglement-interieur-projet.md"
 FICHES = RACINE / "docs" / "rd" / "reglement-fiches-redaction.toml"
+COUVERTURE = RACINE / "docs" / "rd" / "statuts-couverture-angles-morts.toml"
 ROLES_REQUIS = {
     "association-decisionnaire", "juridique-statutaire", "cryptographie-vote",
     "protection-donnees", "accessibilite-usages", "operations-securite",
@@ -190,6 +191,42 @@ def verifier_fiches(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_couverture(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "resilience-statutaire-globale"
+        or meta.get("statut") != "a-faire-relire"
+        or meta.get("exhaustif") is not False
+        or meta.get("couverture_validee") is not False
+    ):
+        erreurs.append("couverture non exhaustive, non validée et à faire relire")
+    couvertures = registre.get("couverture", [])
+    ids = [item.get("risque") for item in couvertures]
+    if set(ids) != RISQUES_REQUIS or len(ids) != len(set(ids)):
+        erreurs.append("couverture unique des 16 familles de risques")
+    for item in couvertures:
+        identifiant = item.get("risque", "?")
+        if not item.get("articles_reglement") or set(item.get("invariants", [])) - INVARIANTS_REQUIS:
+            erreurs.append(f"couverture {identifiant} avec articles et invariants connus")
+        if item.get("statut") != "documente-non-valide":
+            erreurs.append(f"couverture {identifiant} maintenue documentée mais non validée")
+    angles = registre.get("angle_mort", [])
+    ids_angles = [item.get("id") for item in angles]
+    bloquants = {"source-officielle-incomplete", "charte-absente", "articles-17-18", "age-dissolution", "adoption-reglement", "renouvellement-dirigeants", "droit-positif-actuel"}
+    if len(angles) < 16 or len(ids_angles) != len(set(ids_angles)):
+        erreurs.append("au moins 16 angles morts ouverts sans doublon")
+    if not bloquants.issubset(set(ids_angles)):
+        erreurs.append("sept angles morts bloquants conservés")
+    for item in angles:
+        identifiant = item.get("id", "?")
+        if item.get("gravite") not in {"bloquant", "important"} or not item.get("observation") or not item.get("condition_sortie"):
+            erreurs.append(f"angle mort {identifiant} qualifié avec observation et sortie")
+        if item.get("role_requis") not in ROLES_REQUIS or item.get("statut") != "ouvert":
+            erreurs.append(f"angle mort {identifiant} ouvert et attribué à un rôle connu")
+    return erreurs
+
+
 def principal() -> int:
     with REGISTRE.open("rb") as fichier:
         registre = tomllib.load(fichier)
@@ -197,17 +234,19 @@ def principal() -> int:
         matrice = tomllib.load(fichier)
     with FICHES.open("rb") as fichier:
         fiches = tomllib.load(fichier)
+    with COUVERTURE.open("rb") as fichier:
+        couverture = tomllib.load(fichier)
     erreurs = (
         verifier(registre) + verifier_matrice(matrice)
         + verifier_reglement(REGLEMENT.read_text(encoding="utf-8"))
-        + verifier_fiches(fiches)
+        + verifier_fiches(fiches) + verifier_couverture(couverture)
     )
     if erreurs:
         print("Registre de résilience incomplet :", file=sys.stderr)
         for erreur in erreurs:
             print(f"- {erreur}", file=sys.stderr)
         return 1
-    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles, 82 articles de règlement projetés, 19 fiches de rédaction et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
+    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles, 82 articles de règlement projetés, 19 fiches de rédaction, 16 angles morts au moins et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
     return 0
 
 

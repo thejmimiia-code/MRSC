@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Couverture croisée et angles morts maintenus ouverts
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** rechercher les trous entre risques, invariants, articles du règlement, preuves et rôles plutôt que déclarer la couverture complète.
+- **Résultat :** les seize familles de risques sont reliées aux clauses candidates et invariants ; seize angles morts bloquants ou importants possèdent une condition de sortie et un rôle requis.
+- **Optimisation :** le contrôle refuse une famille non couverte, un angle mort fermé sans preuve, un rôle inconnu et toute prétention de couverture validée ou exhaustive.
+- **Limite :** une liaison documentaire n’établit pas l’efficacité ; de nouveaux angles morts peuvent apparaître lors des revues et exercices.
+- **Prochaine action :** fermer uniquement les angles pour lesquels la preuve attendue est produite et relue, en commençant par les sources officielles et décisions juridiques préalables.
+
 ## 2026-10-18 — Fiches de rédaction bornées pour les dix-neuf titres
 
 - **Initiative :** `resilience-statutaire-globale`.
