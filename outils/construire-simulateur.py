@@ -249,7 +249,7 @@ button.primaire {
 .site-layout-options legend { margin-bottom: .45rem; color: var(--texte); font-size: .86rem; font-weight: 700; }
 .site-layout-choice {
   display: grid;
-  grid-template-columns: 20px minmax(0,1fr);
+  grid-template-columns: 20px 54px minmax(0,1fr);
   align-items: start;
   gap: .6rem;
   min-height: 44px;
@@ -260,6 +260,32 @@ button.primaire {
   color: var(--texte);
   cursor: pointer;
 }
+.site-layout-preview {
+  display: grid;
+  gap: 3px;
+  width: 54px;
+  height: 42px;
+  margin-top: .1rem;
+  padding: 5px;
+  border: 1px solid #526384;
+  border-radius: 7px;
+  background: #0d1526;
+}
+.site-layout-preview > span { display: block; min-width: 0; min-height: 0; border-radius: 2px; background: #5b74a6; }
+.site-layout-choice.is-selected .site-layout-preview { border-color: var(--accent); }
+.site-layout-choice.is-selected .site-layout-preview > span { background: var(--accent); }
+.site-layout-preview[data-preview="equilibree"] { grid-template-columns: 1.4fr 1fr; grid-template-rows: 1.3fr 1fr 1fr; }
+.site-layout-preview[data-preview="equilibree"] > span:nth-child(1) { grid-row: span 3; }
+.site-layout-preview[data-preview="equilibree"] > span:nth-child(n+5) { display: none; }
+.site-layout-preview[data-preview="lecture"] { grid-template-columns: minmax(0,1fr); grid-template-rows: repeat(4,1fr); padding-inline: 14px; }
+.site-layout-preview[data-preview="lecture"] > span:nth-child(n+5) { display: none; }
+.site-layout-preview[data-preview="vitrine"] { grid-template-columns: minmax(0,1fr); grid-template-rows: 2.2fr .8fr .8fr; }
+.site-layout-preview[data-preview="vitrine"] > span:nth-child(n+4) { display: none; }
+.site-layout-preview[data-preview="mosaique"] { grid-template-columns: repeat(3,1fr); grid-template-rows: 1.4fr 1fr; }
+.site-layout-preview[data-preview="mosaique"] > span:nth-child(1) { grid-column: span 2; }
+.site-layout-preview[data-preview="panorama"] { grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,1fr); }
+.site-layout-preview[data-preview="compacte"] { grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,1fr); gap: 2px; padding: 3px; }
+.site-layout-hint { font-weight: 650; }
 .site-layout-choice.is-selected { border-color: var(--accent); background: #1a2540; box-shadow: inset 0 0 0 1px var(--accent); }
 .site-layout-choice:focus-within { outline: 3px solid var(--accent); outline-offset: 2px; }
 .site-layout-choice input { width: 18px; height: 18px; margin: .16rem 0 0; accent-color: var(--accent); }
@@ -437,6 +463,45 @@ html[data-layout="panorama"] #contenu-principal .leviers-grille,
 html[data-layout="panorama"] #contenu-principal .leviers-grille.compacte { grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); }
 html[data-layout="panorama"] #contenu-principal .console-corps,
 html[data-layout="panorama"] #contenu-principal .clair-lignes { grid-template-columns: repeat(auto-fit,minmax(min(300px,100%),1fr)); }
+/* Vitrine : de grandes tuiles et plus d’air, sans masquer ni réordonner. */
+html[data-layout="vitrine"] #contenu-principal { max-width: 1320px; }
+html[data-layout="vitrine"] #contenu-principal :is(.grille.metrics,.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte) {
+  grid-template-columns: repeat(auto-fit,minmax(min(340px,100%),1fr));
+  gap: 18px;
+}
+html[data-layout="vitrine"] #contenu-principal .console-corps,
+html[data-layout="vitrine"] #contenu-principal .clair-lignes { grid-template-columns: repeat(auto-fit,minmax(min(360px,100%),1fr)); gap: 18px; }
+/* Mosaïque : portées double largeur à partir de deux colonnes, flux non dense. */
+html[data-layout="mosaique"] #contenu-principal { max-width: 1600px; }
+html[data-layout="mosaique"] #contenu-principal .grille.metrics { grid-template-columns: repeat(auto-fit,minmax(min(210px,100%),1fr)); }
+@media (min-width: 641px) {
+  html[data-layout="mosaique"] #contenu-principal :is(.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte) {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+  html[data-layout="mosaique"] #contenu-principal :is(.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte) > :nth-child(7n+1),
+  html[data-layout="mosaique"] #contenu-principal :is(.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte) > :nth-child(7n+4) { grid-column: span 2; }
+}
+@media (min-width: 1025px) {
+  html[data-layout="mosaique"] #contenu-principal :is(.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte) {
+    grid-template-columns: repeat(4,minmax(0,1fr));
+  }
+}
+/* En pistes étroites (Panorama, Compacte), la ligne d’un levier reprend le
+   repli déjà prévu par le moteur sous 640 px : retour à la ligne et noms
+   cassables, au lieu de pousser le bouton de détail hors de la carte. */
+html:is([data-layout="panorama"],[data-layout="compacte"]) #contenu-principal .levier .bulle-bouton { white-space: normal; }
+html:is([data-layout="panorama"],[data-layout="compacte"]) #contenu-principal .levier .ligne { flex-wrap: wrap; }
+html:is([data-layout="panorama"],[data-layout="compacte"]) #contenu-principal .levier .ligne .nom { min-width: 0; overflow-wrap: anywhere; }
+/* Les noms de fichiers sources sans espace doivent pouvoir se couper. */
+html:is([data-layout="vitrine"],[data-layout="mosaique"],[data-layout="panorama"],[data-layout="compacte"]) #contenu-principal .levier .source { overflow-wrap: anywhere; }
+/* Compacte : pistes et écarts resserrés ; texte et cibles inchangés. */
+html[data-layout="compacte"] #contenu-principal { max-width: 1800px; }
+html[data-layout="compacte"] #contenu-principal :is(.grille.metrics,.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte) {
+  grid-template-columns: repeat(auto-fit,minmax(min(200px,100%),1fr));
+  gap: 8px;
+}
+html[data-layout="compacte"] #contenu-principal .console-corps,
+html[data-layout="compacte"] #contenu-principal .clair-lignes { grid-template-columns: repeat(auto-fit,minmax(min(240px,100%),1fr)); gap: 8px; }
 
 /* Le texte secondaire ne descend pas sous 12 px à la taille de base. */
 .metric .libelle,
@@ -661,9 +726,12 @@ LIEN_RETOUR = (
     '    <div class="site-layout-panel" id="site-layout-settings-panel" aria-label="Personnaliser l’expérience de lecture">\n'
     '      <p class="site-layout-title"><strong>Personnaliser l’expérience</strong></p>\n'
     '      <fieldset class="site-layout-options"><legend>Choisissez une mise en page</legend>\n'
-    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="equilibree" data-site-layout-option><span class="site-layout-choice-copy"><strong>Équilibrée</strong><span>La présentation de base, entre lecture et blocs visuels.</span></span></label>\n'
-    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="lecture" data-site-layout-option><span class="site-layout-choice-copy"><strong>Lecture</strong><span>Une colonne plus étroite et des blocs empilés pour suivre les textes.</span></span></label>\n'
-    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="panorama" data-site-layout-option><span class="site-layout-choice-copy"><strong>Panorama composite</strong><span>Une page plus large, avec un agencement de cartes en plusieurs colonnes.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="equilibree" data-site-layout-option><span class="site-layout-preview" data-preview="equilibree" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="site-layout-choice-copy"><strong>Équilibrée</strong><span>La présentation de base, entre lecture et blocs visuels.</span><span class="site-layout-hint">Le réglage par défaut du site.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="lecture" data-site-layout-option><span class="site-layout-preview" data-preview="lecture" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="site-layout-choice-copy"><strong>Lecture</strong><span>Une colonne plus étroite et des blocs empilés pour suivre les textes.</span><span class="site-layout-hint">Idéal pour : les fiches et les textes suivis.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="vitrine" data-site-layout-option><span class="site-layout-preview" data-preview="vitrine" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="site-layout-choice-copy"><strong>Vitrine</strong><span>De grands titres, beaucoup d’air et une idée à la fois, comme une page de présentation.</span><span class="site-layout-hint">Idéal pour : découvrir l’accueil, le dossier IA ou ÉVA.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="mosaique" data-site-layout-option><span class="site-layout-preview" data-preview="mosaique" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="site-layout-choice-copy"><strong>Mosaïque</strong><span>Des tuiles de tailles variées ; certaines cartes de chaque collection sont mises en avant, dans le même ordre.</span><span class="site-layout-hint">Idéal pour : explorer les fiches, les Mondes, les liens et les documents.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="panorama" data-site-layout-option><span class="site-layout-preview" data-preview="panorama" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="site-layout-choice-copy"><strong>Panorama composite</strong><span>Une page plus large, avec un agencement de cartes en plusieurs colonnes.</span><span class="site-layout-hint">Idéal pour : les grands écrans.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="compacte" data-site-layout-option><span class="site-layout-preview" data-preview="compacte" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="site-layout-choice-copy"><strong>Compacte</strong><span>Des blocs resserrés pour voir davantage de cartes sans faire défiler longtemps.</span><span class="site-layout-hint">Idéal pour : comparer et balayer un catalogue ou un registre.</span></span></label>\n'
     '      </fieldset>\n'
     '      <p class="site-layout-status" data-site-layout-status role="status" aria-live="polite" aria-atomic="true"></p>\n'
     '      <p class="site-layout-note">Le changement est immédiat, sans rechargement. Si le stockage local est autorisé, votre choix est mémorisé sur cet appareil.</p>\n'
@@ -705,7 +773,10 @@ SCRIPT_AFFICHAGE = r"""
   const layoutLabels = new Map([
     ["equilibree", "Équilibrée"],
     ["lecture", "Lecture"],
+    ["vitrine", "Vitrine"],
+    ["mosaique", "Mosaïque"],
     ["panorama", "Panorama composite"],
+    ["compacte", "Compacte"],
   ]);
   let level = 100;
   let contrast = false;

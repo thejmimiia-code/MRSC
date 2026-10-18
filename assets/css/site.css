@@ -2998,6 +2998,11 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   .display-settings-panel { width: min(clamp(320px,24rem,400px),calc(100vw - 1rem)); }
 }
 @media (min-width: 1261px) {
+  /* Au-delà du seuil de repli du menu, la rangée peut dépasser la colonne de
+     contenu (pages à dix liens, polices larges) : elle utilise alors toute la
+     largeur disponible et, si cela ne suffit toujours pas, passe sur deux
+     lignes au lieu de tronquer le premier et le dernier élément. */
+  .nav-inner { flex-wrap: wrap; width: min(100% - 2rem, 104rem); }
   html.has-js:not(.texte-agrandi):not(.texte-tres-agrandi) .site-header.is-compact .nav-inner {
     display: flex;
     flex-wrap: nowrap;
@@ -3844,7 +3849,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
 .layout-settings-options legend { margin-bottom: .55rem; color: var(--navy); font-size: clamp(14px,.95rem,18px); font-weight: 750; }
 .layout-choice {
   display: grid;
-  grid-template-columns: 20px minmax(0,1fr);
+  grid-template-columns: 20px 54px minmax(0,1fr);
   align-items: start;
   gap: .65rem;
   min-height: 44px;
@@ -3855,6 +3860,33 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
   color: var(--ink);
   cursor: pointer;
 }
+/* Mini-aperçu schématique : il montre la composition, il ne la remplace pas. */
+.layout-choice-preview {
+  display: grid;
+  gap: 3px;
+  width: 54px;
+  height: 42px;
+  margin-top: .1rem;
+  padding: 5px;
+  border: 1px solid #aebbd0;
+  border-radius: 7px;
+  background: var(--paper);
+}
+.layout-choice-preview > span { display: block; min-width: 0; min-height: 0; border-radius: 2px; background: #8fa8c9; }
+.layout-choice.is-selected .layout-choice-preview { border-color: var(--blue); background: var(--white); }
+.layout-choice.is-selected .layout-choice-preview > span { background: var(--blue); }
+.layout-choice-preview[data-preview="equilibree"] { grid-template-columns: 1.4fr 1fr; grid-template-rows: 1.3fr 1fr 1fr; }
+.layout-choice-preview[data-preview="equilibree"] > span:nth-child(1) { grid-row: span 3; }
+.layout-choice-preview[data-preview="equilibree"] > span:nth-child(n+5) { display: none; }
+.layout-choice-preview[data-preview="lecture"] { grid-template-columns: minmax(0,1fr); grid-template-rows: repeat(4,1fr); padding-inline: 14px; }
+.layout-choice-preview[data-preview="lecture"] > span:nth-child(n+5) { display: none; }
+.layout-choice-preview[data-preview="vitrine"] { grid-template-columns: minmax(0,1fr); grid-template-rows: 2.2fr .8fr .8fr; }
+.layout-choice-preview[data-preview="vitrine"] > span:nth-child(n+4) { display: none; }
+.layout-choice-preview[data-preview="mosaique"] { grid-template-columns: repeat(3,1fr); grid-template-rows: 1.4fr 1fr; }
+.layout-choice-preview[data-preview="mosaique"] > span:nth-child(1) { grid-column: span 2; }
+.layout-choice-preview[data-preview="panorama"] { grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,1fr); }
+.layout-choice-preview[data-preview="compacte"] { grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,1fr); gap: 2px; padding: 3px; }
+.layout-choice-hint { font-weight: 650; }
 .layout-choice:hover { border-color: var(--blue); }
 .layout-choice.is-selected { border-color: var(--blue); background: var(--blue-soft); box-shadow: inset 0 0 0 1px var(--blue); }
 .layout-choice:focus-within { outline: 3px solid var(--blue); outline-offset: 2px; }
@@ -3901,8 +3933,8 @@ html[data-layout="lecture"] main :is(.section,.content-section,.learning-lesson-
 html[data-layout="panorama"] { --content: 1480px; }
 html[data-layout="panorama"] main :is(
   .document-grid,.link-grid,.home-action-grid,.home-voice-grid,
-  .ai-metric-grid,.ai-forms-grid,.ai-lives-grid,.ai-path-steps,.principle-grid,
-  .ai-fraud-grid,.ai-fraud-steps,.ai-fraud-lesson-list,
+  .ai-metric-grid,.ai-forms-grid,.ai-lives-grid,.principle-grid,
+  .ai-fraud-grid,.ai-fraud-lesson-list,
   .learning-catalogue-grid,.learning-level-grid,.learning-ecosystem-grid,
   .adventure-quest-grid,.adventure-sheet-grid,.adventure-roadmap-list,
   .adventure-learning-route-grid,.adventure-learning-world-grid,.adventure-learning-sheet-grid
@@ -3915,6 +3947,136 @@ html[data-layout="panorama"] main :is(
   .learning-hero-grid,.learning-article-layout,.adventure-dashboard,.adventure-onboarding-grid,
   .adventure-play-grid,.adventure-method-panel,.adventure-learning-workspace,.simulateur-intro
 ) { gap: clamp(1.25rem,3vw,3rem); }
+
+/* Vitrine : rythme lent, grandes zones et une idée à la fois. Le blanc sert de
+   socle aux titres et aux visuels ; les collections deviennent de grandes
+   tuiles. Aucun contenu n’est masqué, centré de force ni réordonné. */
+html[data-layout="vitrine"] { --content: 1240px; --radius: 26px; --shadow: 0 24px 70px rgba(26,48,91,.11); }
+html[data-layout="vitrine"] main :is(.section,.content-section,.learning-lesson-hero) {
+  padding-block: clamp(4.5rem,9vw,8rem);
+}
+/* Planchers volontairement proches de la base : à 320 px, un mot long de
+   titre (« Transparence, ») doit encore tenir dans le conteneur. */
+html[data-layout="vitrine"] main h1 { font-size: clamp(2.4rem,7.5vw,5.6rem); }
+html[data-layout="vitrine"] main h2 { font-size: clamp(1.75rem,4.2vw,3.2rem); }
+html[data-layout="vitrine"] main .section-heading { max-width: 860px; margin-bottom: 2.75rem; }
+html[data-layout="vitrine"] main :is(.home-hero-visual,.english-promo-art img) { border-radius: 26px; }
+html[data-layout="vitrine"] main :is(
+  .document-grid,.link-grid,.home-action-grid,.home-voice-grid,
+  .ai-metric-grid,.ai-forms-grid,.ai-lives-grid,.principle-grid,
+  .ai-fraud-grid,.ai-fraud-lesson-list,
+  .learning-catalogue-grid,.learning-level-grid,.learning-ecosystem-grid,.knowledge-compass,
+  .adventure-quest-grid,.adventure-sheet-grid,.adventure-roadmap-list,
+  .adventure-learning-route-grid,.adventure-learning-world-grid,.adventure-learning-sheet-grid
+) {
+  grid-template-columns: repeat(auto-fit,minmax(min(340px,100%),1fr));
+  gap: clamp(1.25rem,2.5vw,2rem);
+}
+html[data-layout="vitrine"] main :is(
+  .document-card,.home-action-card,.home-voice-card,.values-card,.scope-card,.quote-card,
+  .ai-metric-card,.ai-form-card,.ai-life-card,.ai-fraud-card,.principle-card,
+  .learning-catalogue-card,.learning-level-card,.learning-ecosystem-card,
+  .adventure-sheet-card,.contact-card
+) {
+  padding: clamp(1.6rem,3vw,2.2rem);
+  border-radius: 24px;
+}
+
+/* Mosaïque : tuiles de tailles variées, à tuile dominante, sans flux dense :
+   l’ordre visuel suit toujours l’ordre du document, ligne par ligne.
+   Les portées double largeur n’apparaissent qu’à partir de deux colonnes,
+   pour ne jamais créer de colonne implicite sur petit écran.
+   Les listes d’étapes ordonnées (.ai-path-steps, .ai-fraud-steps) sont
+   exclues des listes « collections » de Panorama, Vitrine, Mosaïque et
+   Compacte : une suite numérotée ne doit pas paraître hiérarchisée, et leur
+   placement explicite créerait une colonne implicite en piste unique. */
+html[data-layout="mosaique"] { --content: 1380px; }
+html[data-layout="mosaique"] main :is(
+  .document-card,.home-action-card,.home-voice-card,.values-card,.scope-card,.quote-card,
+  .ai-metric-card,.ai-form-card,.ai-life-card,.ai-fraud-card,.principle-card,
+  .learning-catalogue-card,.learning-level-card,.learning-ecosystem-card,
+  .adventure-sheet-card,.contact-card
+) { border-radius: 18px; }
+@media (min-width: 601px) {
+  html[data-layout="mosaique"] main :is(
+    .document-grid,.link-grid,.home-action-grid,.home-voice-grid,
+    .ai-metric-grid,.ai-forms-grid,.ai-lives-grid,.principle-grid,
+    .ai-fraud-grid,.ai-fraud-lesson-list,
+    .learning-catalogue-grid,.learning-level-grid,.learning-ecosystem-grid,.knowledge-compass,
+    .adventure-quest-grid,.adventure-sheet-grid,.adventure-roadmap-list,
+    .adventure-learning-route-grid,.adventure-learning-world-grid,.adventure-learning-sheet-grid
+  ) {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: .85rem;
+  }
+  html[data-layout="mosaique"] main :is(
+    .document-grid,.link-grid,.home-action-grid,.home-voice-grid,
+    .ai-metric-grid,.ai-forms-grid,.ai-lives-grid,.principle-grid,
+    .ai-fraud-grid,.ai-fraud-lesson-list,
+    .learning-catalogue-grid,.learning-level-grid,.learning-ecosystem-grid,.knowledge-compass,
+    .adventure-quest-grid,.adventure-sheet-grid,.adventure-roadmap-list,
+    .adventure-learning-route-grid,.adventure-learning-world-grid,.adventure-learning-sheet-grid
+  ) > :nth-child(7n+1),
+  html[data-layout="mosaique"] main :is(
+    .document-grid,.link-grid,.home-action-grid,.home-voice-grid,
+    .ai-metric-grid,.ai-forms-grid,.ai-lives-grid,.principle-grid,
+    .ai-fraud-grid,.ai-fraud-lesson-list,
+    .learning-catalogue-grid,.learning-level-grid,.learning-ecosystem-grid,.knowledge-compass,
+    .adventure-quest-grid,.adventure-sheet-grid,.adventure-roadmap-list,
+    .adventure-learning-route-grid,.adventure-learning-world-grid,.adventure-learning-sheet-grid
+  ) > :nth-child(7n+4) { grid-column: span 2; }
+}
+@media (min-width: 981px) {
+  html[data-layout="mosaique"] main :is(
+    .document-grid,.link-grid,.home-action-grid,.home-voice-grid,
+    .ai-metric-grid,.ai-forms-grid,.ai-lives-grid,.principle-grid,
+    .ai-fraud-grid,.ai-fraud-lesson-list,
+    .learning-catalogue-grid,.learning-level-grid,.learning-ecosystem-grid,.knowledge-compass,
+    .adventure-quest-grid,.adventure-sheet-grid,.adventure-roadmap-list,
+    .adventure-learning-route-grid,.adventure-learning-world-grid,.adventure-learning-sheet-grid
+  ) { grid-template-columns: repeat(4,minmax(0,1fr)); }
+}
+
+/* En pistes étroites, un nom de domaine long doit pouvoir se couper pour
+   ne pas pousser son icône hors de la carte (Mosaïque et Compacte). */
+html:is([data-layout="mosaique"],[data-layout="compacte"]) main .resource-link > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Compacte : densité resserrée pour balayer et comparer. Seuls les espaces
+   et les pistes changent : ni la taille du texte (réglage « Affichage »),
+   ni celle des zones tactiles des commandes ne sont réduites. */
+html[data-layout="compacte"] { --content: 1480px; --radius: 12px; --shadow: 0 4px 14px rgba(26,48,91,.06); }
+html[data-layout="compacte"] main :is(.section,.content-section,.learning-lesson-hero) {
+  padding-block: clamp(1.75rem,3.5vw,2.75rem);
+}
+html[data-layout="compacte"] main :is(.home-hero,.learning-hero,.ai-hero,.page-banner) {
+  padding-block: clamp(1.75rem,4vw,3rem);
+}
+html[data-layout="compacte"] .home-hero-visual img { max-height: 300px; }
+html[data-layout="compacte"] main .section-heading { margin-bottom: 1.1rem; }
+html[data-layout="compacte"] main :is(
+  .document-grid,.link-grid,.home-action-grid,.home-voice-grid,
+  .ai-metric-grid,.ai-forms-grid,.ai-lives-grid,.principle-grid,
+  .ai-fraud-grid,.ai-fraud-lesson-list,
+  .learning-catalogue-grid,.learning-level-grid,.learning-ecosystem-grid,.knowledge-compass,
+  .adventure-quest-grid,.adventure-sheet-grid,.adventure-roadmap-list,
+  .adventure-learning-route-grid,.adventure-learning-world-grid,.adventure-learning-sheet-grid
+) {
+  grid-template-columns: repeat(auto-fit,minmax(min(215px,100%),1fr));
+  gap: .65rem;
+}
+html[data-layout="compacte"] main :is(
+  .document-card,.home-action-card,.home-voice-card,.values-card,.scope-card,.quote-card,
+  .ai-metric-card,.ai-form-card,.ai-life-card,.ai-fraud-card,.principle-card,
+  .learning-catalogue-card,.learning-level-card,.learning-ecosystem-card,
+  .adventure-sheet-card,.contact-card
+) {
+  min-height: 0;
+  padding: .85rem;
+  border-radius: 12px;
+}
 
 @media (max-width: 760px) {
   /* Le panneau s’ouvre sous une barre parfois haute (150 % de texte, liens repliés) :
@@ -3940,6 +4102,8 @@ html[data-layout="panorama"] main :is(
   }
   .layout-settings-title,.layout-settings-options legend,.layout-settings-status,.layout-choice-copy strong,
   .layout-choice-copy > span,.layout-settings-note { color: CanvasText !important; }
+  .layout-choice-preview { border-color: CanvasText !important; background: Canvas !important; }
+  .layout-choice-preview > span { background: CanvasText !important; }
   .layout-choice.is-selected { border-width: 2px; }
   .layout-settings > summary,.layout-settings-reset {
     border: 1px solid ButtonText !important;
