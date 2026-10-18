@@ -420,7 +420,7 @@ def fichiers_du_site() -> None:
                 ".layout-settings > summary {",
                 "padding: clamp(6px,.4rem,8px) clamp(10px,.65rem,14px)",
                 "font-size: clamp(13px,.875rem,18px)",
-                "background: rgba(255,255,255,.055)",
+                "background: var(--on-navy-fill)",
                 "border-color: var(--gold)",
             )
         )
@@ -460,6 +460,29 @@ def fichiers_du_site() -> None:
         and styles.count("#2958a2") == 1
         and (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8").count("#1d3268") == 0
         and (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8").count("#647086") == 0,
+    )
+    verifier(
+        "Les jetons à double rôle sont scindés et les surfaces littérales passent par des jetons (phase 2.5)",
+        all(
+            jeton in styles
+            for jeton in (
+                "--navy-ink: #1d3268;",
+                "--navy-ink: #13244b;",
+                "--navy-ink:#13244b;",
+                "--navy-ink:CanvasText;",
+                "--surface:Canvas;",
+                "--on-navy:Canvas;",
+                "--surface-header: rgba(255, 255, 255, .97);",
+                "--navy-deep: #121f43;",
+                "--code-surface: #121b2e;",
+                "background: var(--surface-header);",
+            )
+        )
+        and styles.count("var(--white)") == 0
+        and styles.count("var(--navy)") == 13
+        and styles.count("rgba(255, 255, 255, .97)") == 1
+        and styles.count("#121f43") == 1
+        and (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8").count("var(--navy)") == 1,
     )
     verifier(
         "La personnalisation de présentation offre six choix CSS immédiats sur le site",
@@ -839,7 +862,7 @@ def fichiers_du_site() -> None:
     )
     verifier(
         "Les titres et le repère de statut de la note ressortent sur l’encadré bleu",
-        ".creator-note h3,\n.creator-note h4 { color: var(--white); }" in styles
+        ".creator-note h3,\n.creator-note h4 { color: var(--on-navy); }" in styles
         and ".creator-note .eyebrow { color: var(--on-navy-sky); }" in styles,
     )
     verifier(
