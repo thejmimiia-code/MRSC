@@ -2998,6 +2998,11 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   .display-settings-panel { width: min(clamp(320px,24rem,400px),calc(100vw - 1rem)); }
 }
 @media (min-width: 1261px) {
+  /* Au-delà du seuil de repli du menu, la rangée peut dépasser la colonne de
+     contenu (pages à dix liens, polices larges) : elle utilise alors toute la
+     largeur disponible et, si cela ne suffit toujours pas, passe sur deux
+     lignes au lieu de tronquer le premier et le dernier élément. */
+  .nav-inner { flex-wrap: wrap; width: min(100% - 2rem, 104rem); }
   html.has-js:not(.texte-agrandi):not(.texte-tres-agrandi) .site-header.is-compact .nav-inner {
     display: flex;
     flex-wrap: nowrap;

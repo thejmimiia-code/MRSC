@@ -427,6 +427,11 @@ def fichiers_du_site() -> None:
         and styles.count("font-size: clamp(13px,.875rem,18px)") >= 5,
     )
     verifier(
+        "La rangée de navigation passe sur deux lignes au lieu de tronquer ses extrémités au-delà du seuil de repli",
+        ".nav-inner { flex-wrap: wrap; width: min(100% - 2rem, 104rem); }" in styles
+        and ".site-header.is-compact .nav-inner" in styles,
+    )
+    verifier(
         "La personnalisation de présentation offre six choix CSS immédiats sur le site",
         all(
             marqueur in script_site
