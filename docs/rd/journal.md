@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Plan global de résilience et prévention des détournements
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** cartographier les dynamiques croisées des statuts, les captations internes ou externes, les crises et les erreurs avant de rédiger le règlement intérieur.
+- **Résultat :** seize familles de scénarios, cinq niveaux de continuité, vingt-et-un chapitres de règlement, cinq portes de décision et une feuille de route consolidée.
+- **Revue contradictoire :** le plan traite également les abus possibles des mécanismes de protection eux-mêmes : urgence prolongée, conseil d’éthique capturé, contrôle centralisé et recours supprimé.
+- **Limite :** aucun texte ne peut être exhaustif ou étanche ; le plan ne modifie pas les statuts, ne crée aucun pouvoir public et reste à relire juridiquement et démocratiquement.
+- **Prochaine action :** réunir les documents absents, produire la matrice article–compétence–preuve–recours et faire distinguer ce qui relève des statuts, du règlement ou d’une procédure.
+
 ## 2026-10-18 — Pré-vérification juridique complète des statuts
 
 - **Initiative :** `vote-distanciel-verifiable`.
