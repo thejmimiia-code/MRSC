@@ -13,6 +13,11 @@ RACINE = Path(__file__).resolve().parent.parent
 REGISTRE = RACINE / "docs" / "rd" / "statuts-risques.toml"
 MATRICE = RACINE / "docs" / "rd" / "statuts-matrice-tracabilite.toml"
 REGLEMENT = RACINE / "docs" / "rd" / "reglement-interieur-projet.md"
+FICHES = RACINE / "docs" / "rd" / "reglement-fiches-redaction.toml"
+ROLES_REQUIS = {
+    "association-decisionnaire", "juridique-statutaire", "cryptographie-vote",
+    "protection-donnees", "accessibilite-usages", "operations-securite",
+}
 RISQUES_REQUIS = {
     "captation-gouvernance", "influence-exterieure", "manipulation-electorat",
     "manipulation-information", "manipulation-vote", "conflit-interets",
@@ -154,18 +159,55 @@ def verifier_reglement(markdown: str) -> list[str]:
     return erreurs
 
 
+def verifier_fiches(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "resilience-statutaire-globale"
+        or meta.get("statut") != "a-faire-relire"
+        or meta.get("adoption") is not False
+        or meta.get("effet_juridique") is not False
+    ):
+        erreurs.append("fiches non adoptées, sans effet juridique et à faire relire")
+    fiches = registre.get("fiche", [])
+    ids = [fiche.get("id") for fiche in fiches]
+    titres = [fiche.get("titre") for fiche in fiches]
+    titres_requis = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX"}
+    if len(fiches) != 19 or len(ids) != len(set(ids)) or set(titres) != titres_requis:
+        erreurs.append("exactement 19 fiches et titres sans doublon")
+    for fiche in fiches:
+        identifiant = fiche.get("id", "?")
+        champs = ("sources", "objectif", "a_rediger", "interdit", "preuve_attendue", "roles_requis")
+        if any(not fiche.get(champ) for champ in champs):
+            erreurs.append(f"fiche {identifiant} avec source, objectif, limites, preuve et rôles")
+        roles = set(fiche.get("roles_requis", []))
+        if roles - ROLES_REQUIS or "juridique-statutaire" not in roles and identifiant in {
+            "hierarchie-definitions", "age-dissolution", "discipline-recours", "adoption-revision"
+        }:
+            erreurs.append(f"fiche {identifiant} avec rôles connus et revue juridique requise")
+        if fiche.get("statut") != "a-faire-relire":
+            erreurs.append(f"fiche {identifiant} maintenue à faire relire")
+    return erreurs
+
+
 def principal() -> int:
     with REGISTRE.open("rb") as fichier:
         registre = tomllib.load(fichier)
     with MATRICE.open("rb") as fichier:
         matrice = tomllib.load(fichier)
-    erreurs = verifier(registre) + verifier_matrice(matrice) + verifier_reglement(REGLEMENT.read_text(encoding="utf-8"))
+    with FICHES.open("rb") as fichier:
+        fiches = tomllib.load(fichier)
+    erreurs = (
+        verifier(registre) + verifier_matrice(matrice)
+        + verifier_reglement(REGLEMENT.read_text(encoding="utf-8"))
+        + verifier_fiches(fiches)
+    )
     if erreurs:
         print("Registre de résilience incomplet :", file=sys.stderr)
         for erreur in erreurs:
             print(f"- {erreur}", file=sys.stderr)
         return 1
-    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles, 82 articles de règlement projetés et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
+    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles, 82 articles de règlement projetés, 19 fiches de rédaction et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
     return 0
 
 

@@ -12,6 +12,7 @@ SCRIPT = RACINE / "outils" / "verifier-resilience-statutaire.py"
 REGISTRE = RACINE / "docs" / "rd" / "statuts-risques.toml"
 MATRICE = RACINE / "docs" / "rd" / "statuts-matrice-tracabilite.toml"
 REGLEMENT = RACINE / "docs" / "rd" / "reglement-interieur-projet.md"
+FICHES = RACINE / "docs" / "rd" / "reglement-fiches-redaction.toml"
 spec = importlib.util.spec_from_file_location("verifier_resilience_statutaire", SCRIPT)
 MODULE = importlib.util.module_from_spec(spec)
 assert spec and spec.loader
@@ -26,11 +27,24 @@ class ResilienceStatutaireTests(unittest.TestCase):
         with MATRICE.open("rb") as fichier:
             cls.matrice = tomllib.load(fichier)
         cls.reglement = REGLEMENT.read_text(encoding="utf-8")
+        with FICHES.open("rb") as fichier:
+            cls.fiches = tomllib.load(fichier)
 
     def test_registre_courant_est_coherent(self):
         self.assertEqual(MODULE.verifier(self.registre), [])
         self.assertEqual(MODULE.verifier_matrice(self.matrice), [])
         self.assertEqual(MODULE.verifier_reglement(self.reglement), [])
+        self.assertEqual(MODULE.verifier_fiches(self.fiches), [])
+
+    def test_refuse_une_fiche_de_redaction_supprimee(self):
+        fiches = copy.deepcopy(self.fiches)
+        fiches["fiche"].pop()
+        self.assertTrue(any("19 fiches" in erreur for erreur in MODULE.verifier_fiches(fiches)))
+
+    def test_refuse_une_fiche_dite_adoptee(self):
+        fiches = copy.deepcopy(self.fiches)
+        fiches["meta"]["adoption"] = True
+        self.assertTrue(any("non adoptées" in erreur for erreur in MODULE.verifier_fiches(fiches)))
 
     def test_refuse_un_projet_presente_comme_adopte(self):
         projet = self.reglement.replace("Ce document n’est pas un règlement en vigueur", "Ce règlement est adopté")

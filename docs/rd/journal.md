@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Fiches de rédaction bornées pour les dix-neuf titres
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** préparer la rédaction titre par titre sans transformer le squelette en règlement adopté.
+- **Résultat :** dix-neuf fiches relient sources statutaires, objectif, contenu à rédiger, interdit, preuve attendue et rôles humains requis.
+- **Optimisation :** le contrôle refuse une fiche supprimée, un statut prématuré, un rôle inconnu et toute adoption ou effet juridique déclaré.
+- **Limite :** ces fiches autorisent seulement une future rédaction candidate ; elles ne résolvent aucune décision préalable et ne prouvent pas l’efficacité des contrôles.
+- **Prochaine action :** faire examiner les fiches par les rôles requis, puis rédiger par lots réversibles en conservant chaque blocage.
+
 ## 2026-10-18 — Squelette non adopté du règlement intérieur
 
 - **Initiative :** `resilience-statutaire-globale`.
