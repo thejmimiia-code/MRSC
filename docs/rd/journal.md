@@ -80,6 +80,16 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Limites :** identité prouvée au niveau des styles calculés dans l’environnement d’essai (police de repli), pas une relecture visuelle humaine ; états de survol garantis par l’égalité des valeurs des jetons, non photographiés.
 - **Prochaine action :** relecture visuelle humaine toujours prioritaire ; ensuite phase 2 (feuille de l’aventure, habillage du simulateur via son générateur), la variante sombre restant subordonnée à un prototype borné et à une décision séparée. État inchangé : `a-tester`.
 
+## 2026-10-18 — Jetons de rôle, phase 2 : aventure et habillage du simulateur
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal et demande :** exécuter la phase 2 du plan de l’inventaire des couleurs, toujours sans changer le rendu.
+- **Résultat :** feuille de l’aventure — 77 littéraux remplacés sur 69 lignes : 54 par des jetons communs du site non redéfinis en contraste renforcé (`--text-soft`, `--surface`, `--on-navy`…), 23 par quatre jetons locaux `--mondes-*` définis en tête de feuille. Habillage du simulateur — 31 littéraux remplacés dans le seul générateur `outils/construire-simulateur.py`, quatre jetons préfixés `--mrsc-*` sans collision avec le moteur, page autonome régénérée et vérifiée. Verrous du vérificateur d’intégration mis à jour (dégradé du bouton principal) et contrôle de phase 2 ajouté. Détail au § 10 de [`inventaire-couleurs-jetons.md`](inventaire-couleurs-jetons.md).
+- **Décision d’ensemble gelé :** vingt-trois littéraux de l’aventure égaux aux jetons d’origine du site (bleu marine, encre, gris, bleu, vert) restent écrits en dur : ces jetons sont redéfinis en contraste renforcé, donc les brancher changerait le rendu de ce seul mode. Même arbitrage ouvert que les libellés de cartes d’accueil de la phase 1 — choix de conception à décider explicitement, avec captures.
+- **Preuve d’identité :** styles calculés photographiés avant/après sur 9 pages types × 2 largeurs, contraste renforcé compris pour l’accueil, l’aventure et le simulateur — 41 940 éléments, 0 différence. Essais navigateur 8/8, porte complète du dépôt réussie.
+- **Limites :** identité prouvée au niveau des styles calculés dans l’environnement d’essai (police de repli), pas une relecture visuelle humaine ; les thématiques couleur par monde de l’aventure et les valeurs ponctuelles restent littérales, à dessein.
+- **Prochaine action :** relecture visuelle humaine toujours prioritaire. La phase 3 (variante sombre) reste subordonnée à un prototype borné, à ses mesures de contraste et à une décision séparée ; l’arbitrage « ensemble gelé » peut être tranché à cette occasion. État inchangé : `a-tester`.
+
 ## 2026-10-18 — Calcul, contestation et proclamation séparés
 
 - **Initiative :** `vote-distanciel-verifiable`.

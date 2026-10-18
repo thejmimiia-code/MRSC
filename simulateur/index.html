@@ -371,10 +371,17 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
   --ambre: #f2c15f;
   --violet: #b49bd8;
   --rose: #e89ac8;
+  /* Habillage M.R.S.C (phase 2, 18 octobre 2026) : valeurs identiques aux
+     littéraux remplacés ; préfixe dédié, sans collision avec les jetons du
+     moteur. Voir docs/rd/inventaire-couleurs-jetons.md. */
+  --mrsc-marine: #1d3268;
+  --mrsc-marine-2: #26375f;
+  --mrsc-bordure: #526384;
+  --mrsc-sur-marine: #fff;
 }
 header.entete {
   border-color: #344b79;
-  background: linear-gradient(135deg, #1d3268, #26375f);
+  background: linear-gradient(135deg, var(--mrsc-marine), var(--mrsc-marine-2));
 }
 header.entete .site-status-note {
   margin: 0 0 .8rem;
@@ -394,8 +401,8 @@ html.contraste-renforce header.entete .site-status-note {
 }
 button.primaire {
   border-color: #456d29;
-  background: linear-gradient(135deg, #1d3268, #2958a2);
-  color: #fff;
+  background: linear-gradient(135deg, var(--mrsc-marine), #2958a2);
+  color: var(--mrsc-sur-marine);
 }
 .site-return-bar {
   position: sticky;
@@ -455,8 +462,8 @@ button.primaire {
   padding: clamp(6px,.35rem,8px) clamp(8px,.55rem,12px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
-  background: #1d3268;
-  color: #fff;
+  background: var(--mrsc-marine);
+  color: var(--mrsc-sur-marine);
   font: inherit;
   font-size: clamp(12px,.76rem,18px);
   font-weight: 700;
@@ -465,14 +472,14 @@ button.primaire {
 }
 .site-return-bar .site-journey-button:hover:not(:disabled) {
   border-color: var(--ambre);
-  background: #26375f;
+  background: var(--mrsc-marine-2);
 }
 .site-return-bar .site-journey-button[data-journey-action="accueil"] {
   border-color: var(--ambre);
   box-shadow: inset 0 -2px 0 var(--ambre);
 }
 .site-return-bar .site-journey-button:disabled {
-  border-color: #526384;
+  border-color: var(--mrsc-bordure);
   background: #17274d;
   color: #d2d9e5;
   cursor: not-allowed;
@@ -484,13 +491,13 @@ button.primaire {
   flex: 0 1 auto;
   margin: 0 0 0 auto;
   padding-left: .65rem;
-  border-left: 1px solid #526384;
+  border-left: 1px solid var(--mrsc-bordure);
   color: var(--texte-dim);
   font-size: clamp(11px,.7rem,16px);
   line-height: 1.35;
   white-space: nowrap;
 }
-.site-return-bar .site-journey-settings { position: static; flex: 0 0 auto; color: #fff; }
+.site-return-bar .site-journey-settings { position: static; flex: 0 0 auto; color: var(--mrsc-sur-marine); }
 .site-return-bar .site-journey-settings > summary {
   display: inline-flex;
   align-items: center;
@@ -501,8 +508,8 @@ button.primaire {
   padding: clamp(6px,.45rem,9px) clamp(8px,.8rem,16px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
-  background: #1d3268;
-  color: #fff;
+  background: var(--mrsc-marine);
+  color: var(--mrsc-sur-marine);
   font-size: clamp(12px,.84rem,20px);
   font-weight: 700;
   list-style: none;
@@ -511,7 +518,7 @@ button.primaire {
 .site-return-bar .site-journey-settings > summary::-webkit-details-marker { display: none; }
 .site-return-bar .site-journey-settings > summary::marker { content: ""; }
 .site-return-bar .site-journey-settings > summary:hover,
-.site-return-bar .site-journey-settings[open] > summary { border-color: var(--ambre); background: #26375f; }
+.site-return-bar .site-journey-settings[open] > summary { border-color: var(--ambre); background: var(--mrsc-marine-2); }
 .site-return-bar .site-journey-chevron { display: inline-block; font-size: clamp(12px,1rem,20px); line-height: 1; transition: transform .18s ease; }
 .site-return-bar .site-journey-settings[open] .site-journey-chevron { transform: rotate(180deg); }
 .site-return-bar .site-journey-panel {
@@ -523,12 +530,12 @@ button.primaire {
   max-height: calc(100vh - 5rem);
   overflow: auto;
   padding: .55rem;
-  border: 1px solid #526384;
+  border: 1px solid var(--mrsc-bordure);
   border-radius: 12px;
   background: rgba(29,50,104,.98);
   box-shadow: 0 8px 22px rgba(0,0,0,.24);
 }
-.site-return-bar .site-layout-settings { position: static; flex: 0 0 auto; color: #fff; }
+.site-return-bar .site-layout-settings { position: static; flex: 0 0 auto; color: var(--mrsc-sur-marine); }
 .site-return-bar .site-layout-settings > summary {
   display: inline-flex;
   align-items: center;
@@ -539,8 +546,8 @@ button.primaire {
   padding: clamp(6px,.45rem,9px) clamp(8px,.8rem,16px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
-  background: #1d3268;
-  color: #fff;
+  background: var(--mrsc-marine);
+  color: var(--mrsc-sur-marine);
   font-size: clamp(12px,.84rem,20px);
   font-weight: 700;
   line-height: 1.25;
@@ -550,7 +557,7 @@ button.primaire {
 .site-return-bar .site-layout-settings > summary::-webkit-details-marker { display: none; }
 .site-return-bar .site-layout-settings > summary::marker { content: ""; }
 .site-return-bar .site-layout-settings > summary:hover,
-.site-return-bar .site-layout-settings[open] > summary { border-color: var(--ambre); background: #26375f; }
+.site-return-bar .site-layout-settings[open] > summary { border-color: var(--ambre); background: var(--mrsc-marine-2); }
 .site-return-bar .site-layout-chevron { display: inline-block; margin-left: .25rem; font-size: 1rem; line-height: 1; transition: transform .18s ease; }
 .site-return-bar .site-layout-settings[open] .site-layout-chevron { transform: rotate(180deg); }
 .site-return-bar .site-layout-panel {
@@ -562,7 +569,7 @@ button.primaire {
   max-height: min(34rem,calc(100vh - 1.5rem));
   overflow: auto;
   padding: 12px;
-  border: 1px solid #526384;
+  border: 1px solid var(--mrsc-bordure);
   border-radius: 12px;
   background: rgba(13,21,38,.99);
   color: var(--texte);
@@ -578,7 +585,7 @@ button.primaire {
   gap: .6rem;
   min-height: 44px;
   padding: .6rem .7rem;
-  border: 1px solid #526384;
+  border: 1px solid var(--mrsc-bordure);
   border-radius: 9px;
   background: #131c2f;
   color: var(--texte);
@@ -591,7 +598,7 @@ button.primaire {
   height: 42px;
   margin-top: .1rem;
   padding: 5px;
-  border: 1px solid #526384;
+  border: 1px solid var(--mrsc-bordure);
   border-radius: 7px;
   background: #0d1526;
 }
@@ -632,8 +639,8 @@ button.primaire {
   padding: clamp(6px,.45rem,9px) clamp(8px,.8rem,16px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
-  background: #1d3268;
-  color: #fff;
+  background: var(--mrsc-marine);
+  color: var(--mrsc-sur-marine);
   font-size: clamp(12px,.84rem,20px);
   font-weight: 700;
   line-height: 1.25;
@@ -642,8 +649,8 @@ button.primaire {
 }
 .site-return-bar a:hover {
   border-color: var(--ambre);
-  background: #26375f;
-  color: #fff;
+  background: var(--mrsc-marine-2);
+  color: var(--mrsc-sur-marine);
 }
 .site-return-bar a:focus-visible,
 .site-return-bar .site-journey-button:focus-visible,
@@ -661,7 +668,7 @@ button.primaire {
   border: 2px solid var(--ambre);
   border-radius: 8px;
   background: #000;
-  color: #fff;
+  color: var(--mrsc-sur-marine);
   font-weight: 700;
 }
 .sim-skip-link:focus {
@@ -694,8 +701,8 @@ button.primaire {
   padding: clamp(6px,.4rem,8px) clamp(8px,.65rem,14px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
-  background: #1d3268;
-  color: #fff;
+  background: var(--mrsc-marine);
+  color: var(--mrsc-sur-marine);
   font: inherit;
   font-size: clamp(12px,.78rem,18px);
   font-weight: 700;
@@ -704,10 +711,10 @@ button.primaire {
 }
 .sim-display-button:hover:not(:disabled) {
   border-color: var(--ambre);
-  background: #26375f;
+  background: var(--mrsc-marine-2);
 }
 .sim-display-button:disabled {
-  border-color: #526384;
+  border-color: var(--mrsc-bordure);
   background: #17274d;
   color: #d2d9e5;
   cursor: not-allowed;
@@ -977,7 +984,7 @@ html[data-layout="compacte"] #contenu-principal .clair-lignes { grid-template-co
   }
 }
 @media (prefers-reduced-transparency: reduce) {
-  .site-return-bar { background: #1d3268; backdrop-filter: none; }
+  .site-return-bar { background: var(--mrsc-marine); backdrop-filter: none; }
   .site-return-bar .site-layout-panel { background: #0d1526; backdrop-filter: none; }
 }
 @media (forced-colors: active) {

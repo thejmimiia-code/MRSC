@@ -872,7 +872,19 @@ def fichiers_du_site() -> None:
         "Les commandes du simulateur reprennent les accents bleu, vert et or du M.R.S.C",
         "--accent: #91b2e6" in simulateur_styles
         and "--ambre: #f2c15f" in simulateur_styles
-        and "linear-gradient(135deg, #1d3268, #2958a2)" in simulateur_styles,
+        and "linear-gradient(135deg, var(--mrsc-marine), #2958a2)" in simulateur_styles,
+    )
+    verifier(
+        "Les Mondes et l’habillage du simulateur utilisent les jetons de rôle (phase 2)",
+        all(
+            jeton in (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8")
+            for jeton in ("--mondes-bordure: #dce3ec;", "var(--text-soft)", "var(--surface)", "var(--on-navy)")
+        )
+        and all(
+            jeton in simulateur_styles
+            for jeton in ("--mrsc-marine: #1d3268;", "--mrsc-bordure: #526384;", "--mrsc-sur-marine: #fff;")
+        )
+        and simulateur_styles.count("#526384") == 1,
     )
     verifier(
         "Les flèches des panneaux du simulateur changent de sens à l’ouverture",
