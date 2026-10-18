@@ -61,6 +61,16 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Limites :** inventaire statique (ni couleurs d’images, ni contextes d’empilement réels) ; aucun essai avec des personnes ; le thème sombre reste différé et non promis.
 - **Prochaine action :** phase 1 de tokenisation par rôle dans `assets/css/site.css`, à valeurs identiques en thème clair et avec captures avant/après ; garder l’initiative à l’état `a-tester`, la relecture visuelle humaine des présentations et de l’en-tête restant prioritaire.
 
+## 2026-10-18 — Jetons de rôle, phase 1 : 84 littéraux remplacés à valeurs identiques
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal et demande :** exécuter la phase 1 du plan de l’inventaire des couleurs du même jour, sans changer le rendu.
+- **Résultat :** dix-huit jetons de rôle ajoutés au `:root` de `assets/css/site.css` (textes secondaires, surfaces, fonds teintés, bordures, textes sur fond marine) et 84 littéraux remplacés sur 72 lignes, plan à blanc relu ligne par ligne avant application. Le blanc littéral est réparti selon son rôle vérifié (`--surface` pour les fonds clairs, `--on-navy` pour le chiffre blanc sur pastille marine) ; un anneau décoratif au rôle ambigu reste littéral. Détail, résidu et points ouverts au § 9 de [`inventaire-couleurs-jetons.md`](inventaire-couleurs-jetons.md).
+- **Preuve d’identité :** styles calculés porteurs de couleur photographiés avant/après dans un navigateur sans interface sur 8 pages types × 2 largeurs, plus l’accueil en contraste renforcé — 16 582 éléments, 0 différence. Essais navigateur 8/8 et porte complète du dépôt réussis ; assertion verrouillée `#bae6fd` mise à jour et nouveau contrôle d’intégration sur les jetons.
+- **Décisions et restes :** les quatre libellés de cartes d’accueil restent des littéraux (arbitrage ouvert, car les aligner changerait le rendu du contraste renforcé) ; les usages existants de `var(--white)` ne sont pas encore scindés ; 104 occurrences hexadécimales ponctuelles et les 103 `rgba()` restent littéraux. Aucune valeur sombre créée.
+- **Limites :** identité prouvée au niveau des styles calculés dans l’environnement d’essai (police de repli), pas une relecture visuelle humaine ; états de survol garantis par l’égalité des valeurs des jetons, non photographiés.
+- **Prochaine action :** relecture visuelle humaine toujours prioritaire ; ensuite phase 2 (feuille de l’aventure, habillage du simulateur via son générateur), la variante sombre restant subordonnée à un prototype borné et à une décision séparée. État inchangé : `a-tester`.
+
 ## 2026-10-18 — Calcul, contestation et proclamation séparés
 
 - **Initiative :** `vote-distanciel-verifiable`.
