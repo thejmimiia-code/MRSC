@@ -12,6 +12,7 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parent.parent
 REGISTRE = RACINE / "docs" / "rd" / "statuts-risques.toml"
 MATRICE = RACINE / "docs" / "rd" / "statuts-matrice-tracabilite.toml"
+REGLEMENT = RACINE / "docs" / "rd" / "reglement-interieur-projet.md"
 RISQUES_REQUIS = {
     "captation-gouvernance", "influence-exterieure", "manipulation-electorat",
     "manipulation-information", "manipulation-vote", "conflit-interets",
@@ -122,18 +123,49 @@ def verifier_matrice(matrice: dict) -> list[str]:
     return erreurs
 
 
+def verifier_reglement(markdown: str) -> list[str]:
+    erreurs: list[str] = []
+    if "Statut : `a-rediger-et-faire-relire`" not in markdown or "Ce document n’est pas un règlement en vigueur" not in markdown:
+        erreurs.append("projet de règlement explicitement non adopté et à faire relire")
+    articles = [ligne for ligne in markdown.splitlines() if ligne.startswith("### Article RI-")]
+    numeros = []
+    for ligne in articles:
+        try:
+            numeros.append(int(ligne.split("RI-", 1)[1].split(" ", 1)[0]))
+        except (ValueError, IndexError):
+            erreurs.append("numérotation lisible des articles du projet")
+    if numeros != list(range(1, 83)):
+        erreurs.append("exactement 82 articles de travail numérotés sans lacune")
+    blocages = (
+        "compétence, quorum et majorité d’adoption",
+        "transition entre désignations initiales",
+        "absence des articles 17 et 18",
+        "articulation juridique des articles 15 et 19",
+        "existence, adoption et portée de la charte",
+    )
+    if any(texte not in markdown for texte in blocages):
+        erreurs.append("cinq décisions préalables visibles avant rédaction")
+    interdictions = (
+        "Aucune violence", "Aucune cryptographie maison", "modification statutaire provisoire",
+        "Il ne crée aucun droit, pouvoir, sanction",
+    )
+    if any(texte not in markdown for texte in interdictions):
+        erreurs.append("garde-fous contre pouvoir, violence et improvisation technique")
+    return erreurs
+
+
 def principal() -> int:
     with REGISTRE.open("rb") as fichier:
         registre = tomllib.load(fichier)
     with MATRICE.open("rb") as fichier:
         matrice = tomllib.load(fichier)
-    erreurs = verifier(registre) + verifier_matrice(matrice)
+    erreurs = verifier(registre) + verifier_matrice(matrice) + verifier_reglement(REGLEMENT.read_text(encoding="utf-8"))
     if erreurs:
         print("Registre de résilience incomplet :", file=sys.stderr)
         for erreur in erreurs:
             print(f"- {erreur}", file=sys.stderr)
         return 1
-    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
+    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles, 82 articles de règlement projetés et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
     return 0
 
 

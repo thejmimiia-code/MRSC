@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Squelette non adopté du règlement intérieur
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** organiser les modalités candidates sans transformer les cinq décisions préalables en règles ni présenter le projet comme adopté.
+- **Résultat :** dix-neuf titres et quatre-vingt-deux articles de travail couvrent adhésion, organes, votes, finances, données, discipline, sécurité et continuité.
+- **Optimisation :** le vérificateur refuse un projet présenté comme adopté, une lacune de numérotation et la disparition des garde-fous essentiels.
+- **Limite :** aucun article ne produit d’effet ; compétence d’adoption, renouvellement des dirigeants, articles 17–18, dissolution et charte restent à trancher.
+- **Prochaine action :** faire relire le squelette, puis rédiger des clauses candidates uniquement lorsque source, compétence, preuve et recours sont confirmés.
+
 ## 2026-10-18 — Classement normatif proposé pour chaque groupe d’articles
 
 - **Initiative :** `resilience-statutaire-globale`.

@@ -11,6 +11,7 @@ RACINE = Path(__file__).resolve().parent.parent
 SCRIPT = RACINE / "outils" / "verifier-resilience-statutaire.py"
 REGISTRE = RACINE / "docs" / "rd" / "statuts-risques.toml"
 MATRICE = RACINE / "docs" / "rd" / "statuts-matrice-tracabilite.toml"
+REGLEMENT = RACINE / "docs" / "rd" / "reglement-interieur-projet.md"
 spec = importlib.util.spec_from_file_location("verifier_resilience_statutaire", SCRIPT)
 MODULE = importlib.util.module_from_spec(spec)
 assert spec and spec.loader
@@ -24,10 +25,20 @@ class ResilienceStatutaireTests(unittest.TestCase):
             cls.registre = tomllib.load(fichier)
         with MATRICE.open("rb") as fichier:
             cls.matrice = tomllib.load(fichier)
+        cls.reglement = REGLEMENT.read_text(encoding="utf-8")
 
     def test_registre_courant_est_coherent(self):
         self.assertEqual(MODULE.verifier(self.registre), [])
         self.assertEqual(MODULE.verifier_matrice(self.matrice), [])
+        self.assertEqual(MODULE.verifier_reglement(self.reglement), [])
+
+    def test_refuse_un_projet_presente_comme_adopte(self):
+        projet = self.reglement.replace("Ce document n’est pas un règlement en vigueur", "Ce règlement est adopté")
+        self.assertTrue(any("non adopté" in erreur for erreur in MODULE.verifier_reglement(projet)))
+
+    def test_refuse_un_article_de_reglement_supprime(self):
+        projet = self.reglement.replace("### Article RI-82 — Entrée en vigueur et dispositions transitoires", "### Annexe supprimée")
+        self.assertTrue(any("82 articles" in erreur for erreur in MODULE.verifier_reglement(projet)))
 
     def test_refuse_un_groupe_d_articles_supprime(self):
         matrice = copy.deepcopy(self.matrice)
