@@ -57,7 +57,7 @@ Chaque choix affiche désormais un **mini-aperçu schématique** de 54 × 42 px 
 
 ## 6. Options écartées ou différées
 
-- **Mode sombre complet** — différé. `assets/css/site.css` contient 197 occurrences de couleurs hexadécimales, dont de nombreux fonds de cartes codés en dur ; sans inventaire de jetons ni captures multi-navigateurs, un thème sombre risquerait des textes sous 4,5:1 (la réserve du § 6 de [`rd-affichage-adaptatif.md`](../rd-affichage-adaptatif.md) reste valable). Prochaine étape possible : inventaire par rôles (fond, surface, texte, accent), prototype borné, mesures de contraste, puis décision.
+- **Mode sombre complet** — différé. `assets/css/site.css` contient 91 valeurs hexadécimales distinctes hors définitions, dont de nombreux fonds de cartes codés en dur ; sans tokenisation par rôle ni captures complètes, un thème sombre risquerait des textes sous 4,5:1 (la réserve du § 6 de [`rd-affichage-adaptatif.md`](../rd-affichage-adaptatif.md) reste valable). Étape réalisée le même jour : l’[inventaire par rôles](inventaire-couleurs-jetons.md) (fond, surface, texte, accent) et ses mesures de contraste de référence, sans modifier aucune valeur ; restent la tokenisation à valeurs identiques, un prototype borné, puis une décision après relecture humaine.
 - **Étagères horizontales** — écarté (reflow, contenus hors écran, voir § 2).
 - **Surfaces translucides décoratives** — écarté (contraste, `prefers-reduced-transparency`).
 - **Palette recalculée automatiquement selon l’environnement de la personne** — écarté (palette et contrastes vérifiés du site ; personnalisation par profil contraire aux garde-fous).
