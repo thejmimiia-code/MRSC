@@ -99,6 +99,21 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Limites :** identité prouvée au niveau des styles calculés dans l’environnement d’essai (police de repli), pas une relecture visuelle humaine ; les thématiques couleur par monde de l’aventure et les valeurs ponctuelles restent littérales, à dessein.
 - **Prochaine action :** relecture visuelle humaine toujours prioritaire. La phase 3 (variante sombre) reste subordonnée à un prototype borné, à ses mesures de contraste et à une décision séparée ; l’arbitrage « ensemble gelé » peut être tranché à cette occasion. État inchangé : `a-tester`.
 
+## 2026-10-18 — Arbitrage de l’ensemble gelé : les couleurs de marque suivent le contraste renforcé
+
+- **Initiative :** `optimisation-du-site`.
+- **Décision :** brancher sur leurs jetons les littéraux laissés en suspens aux phases 1–2 : les quatre libellés de cartes d’accueil (vert et bleu sur leurs jetons d’origine ; or et rouge sur deux nouveaux jetons d’accent-texte `--gold-ink`/`--red-ink`, les accents de base étant trop clairs pour du texte) et les vingt-trois littéraux de l’aventure égaux aux jetons d’origine du site. Tous les usages ont été relus avant remplacement : éléments foncés sur fonds clairs uniquement.
+- **Preuve :** photographie des styles calculés avant/après (24 contextes, 41 940 éléments) — thème par défaut strictement inchangé (0 différence) ; en contraste renforcé, 106 éléments prennent la valeur renforcée de leur jeton, avec des contrastes tous en hausse (gris secondaire 5,00 → 8,97:1 ; bleu 6,97 → 8,88:1 ; marine 12,29 → 15,20:1 ; avatar 9,75 → 12,05:1). Essais navigateur 8/8, porte complète réussie, contrôle d’intégration dédié. Détail au § 11 de [`inventaire-couleurs-jetons.md`](inventaire-couleurs-jetons.md).
+- **Limites :** mesures dans l’environnement d’essai (police de repli) ; relecture visuelle humaine toujours due. État inchangé : `a-tester`.
+
+## 2026-10-18 — Prototype sombre borné et non activé : faisabilité partielle
+
+- **Initiative :** `optimisation-du-site`.
+- **Démarche :** valeurs sombres candidates pour les seuls jetons de rôle, calculées puis injectées uniquement dans la session du navigateur d’essai — aucun fichier du dépôt ne les contient, rien n’est activé ni publié. Quatre captures (accueil, catalogue, aventure) conservées hors dépôt.
+- **Résultat :** les contrastes calculés sont satisfaisants (textes entre 7,56:1 et 15,64:1 sur les fonds de référence), et les zones peintes par les jetons rendent correctement. Mais la variante n’est **pas activable en l’état** : surfaces claires littérales hors jetons (en-tête `rgba(255,255,255,.97)`, dégradés et voiles des sections, panneaux) rendant illisibles les textes éclaircis ; jetons à double rôle (`--navy` en titres quasi illisibles, `--white`) ; composants mixtes texte-en-jeton sur fond littéral.
+- **Décision :** ne rien activer. Si la variante sombre est poursuivie, prérequis « phase 2.5 » : résorber les surfaces littérales et scinder les jetons à double rôle — toujours à valeurs identiques en thème clair — puis re-prototyper et décider séparément du déclenchement. Détail et valeurs candidates au § 12 de [`inventaire-couleurs-jetons.md`](inventaire-couleurs-jetons.md).
+- **Prochaine action :** relecture visuelle humaine des présentations, de l’en-tête et des captures du prototype ; aucune promesse de thème sombre. État inchangé : `a-tester`.
+
 ## 2026-10-18 — Calcul, contestation et proclamation séparés
 
 - **Initiative :** `vote-distanciel-verifiable`.
