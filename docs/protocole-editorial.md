@@ -47,7 +47,7 @@ Réutiliser les composants communs définis dans `assets/css/site.css` et les so
 - Respecter les composants, générateurs et règles propres aux fiches, pages d’information et simulateur ; ne pas modifier à la main une sortie générée.
 - Préserver le contenu, les commandes, les réglages d’affichage, le zoom natif, le clavier et les solutions de repli sans JavaScript.
 - Concevoir le reflow pour les téléphones et les agrandissements : aucun texte ou contrôle ne doit être rendu inaccessible par une colonne fixe, un panneau hors écran ou un défilement horizontal non signalé.
-- Les modes « Équilibrée », « Lecture » et « Panorama composite » réorganisent la présentation ; ils ne suppriment ni ne réécrivent le contenu.
+- Les modes « Équilibrée », « Lecture », « Vitrine », « Mosaïque », « Panorama composite » et « Compacte » réorganisent la présentation ; ils ne suppriment, ne réordonnent ni ne réécrivent le contenu (voir [`rd/presentations-personnalisees.md`](rd/presentations-personnalisees.md)).
 - Employer des titres hiérarchisés, des libellés de liens explicites, des listes et tableaux uniquement lorsqu’ils aident réellement la lecture. Ne pas transmettre une information par la couleur seule.
 
 La même logique éditoriale n’autorise pas à fusionner des pages dont les tâches diffèrent. Une activité ludique, une commande ou une carte n’est ajoutée que si elle aide la compréhension ou l’action proposée.

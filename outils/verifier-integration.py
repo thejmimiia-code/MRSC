@@ -427,7 +427,7 @@ def fichiers_du_site() -> None:
         and styles.count("font-size: clamp(13px,.875rem,18px)") >= 5,
     )
     verifier(
-        "La personnalisation de présentation offre trois choix CSS immédiats sur le site",
+        "La personnalisation de présentation offre six choix CSS immédiats sur le site",
         all(
             marqueur in script_site
             for marqueur in (
@@ -444,8 +444,10 @@ def fichiers_du_site() -> None:
                 'aria-live',
             )
         )
-        and all(option in script_site for option in ('"equilibree"', '"lecture"', '"panorama"'))
-        and all(label in script_site for label in ('label: "Équilibrée"', 'label: "Lecture"', 'label: "Panorama composite"'))
+        and all(option in script_site for option in ('"equilibree"', '"lecture"', '"vitrine"', '"mosaique"', '"panorama"', '"compacte"'))
+        and all(label in script_site for label in ('label: "Équilibrée"', 'label: "Lecture"', 'label: "Vitrine"', 'label: "Mosaïque"', 'label: "Panorama composite"', 'label: "Compacte"'))
+        and 'preview.dataset.preview = choice.value' in script_site
+        and 'layout-choice-hint' in script_site
         and all(
             marqueur in script_site
             for marqueur in (
@@ -464,8 +466,18 @@ def fichiers_du_site() -> None:
                 ".layout-settings:not([open]) > .layout-settings-panel",
                 ".display-settings:not([open]) > .display-settings-panel",
                 ".layout-choice {",
+                'grid-template-columns: 20px 54px minmax(0,1fr)',
+                ".layout-choice-preview {",
+                '.layout-choice-preview[data-preview="mosaique"] > span:nth-child(1) { grid-column: span 2; }',
                 'html[data-layout="lecture"] { --content: 940px; }',
+                'html[data-layout="vitrine"] { --content: 1240px; --radius: 26px;',
+                'html[data-layout="mosaique"] { --content: 1380px; }',
+                'grid-template-columns: repeat(4,minmax(0,1fr)); }',
+                ') > :nth-child(7n+1),',
                 'html[data-layout="panorama"] { --content: 1480px; }',
+                'html[data-layout="compacte"] { --content: 1480px; --radius: 12px;',
+                'repeat(auto-fit,minmax(min(340px,100%),1fr))',
+                'repeat(auto-fit,minmax(min(215px,100%),1fr))',
                 '@media (forced-colors: active)',
             )
         )
@@ -981,7 +993,7 @@ def fichiers_du_site() -> None:
             ),
         )
         verifier(
-            "Le simulateur autonome propose les trois mises en page et partage le choix local du site",
+            "Le simulateur autonome propose les six mises en page et partage le choix local du site",
             all(
                 marqueur in simulateur_html
                 for marqueur in (
@@ -989,7 +1001,11 @@ def fichiers_du_site() -> None:
                     'aria-controls="site-layout-settings-panel"',
                     'value="equilibree" data-site-layout-option',
                     'value="lecture" data-site-layout-option',
+                    'value="vitrine" data-site-layout-option',
+                    'value="mosaique" data-site-layout-option',
                     'value="panorama" data-site-layout-option',
+                    'value="compacte" data-site-layout-option',
+                    'class="site-layout-preview" data-preview="mosaique"',
                     '<strong>Panorama composite</strong><span>Une page plus large, avec un agencement de cartes en plusieurs colonnes.</span>',
                     'data-site-layout-status role="status" aria-live="polite"',
                     'data-site-layout-reset',
@@ -997,7 +1013,10 @@ def fichiers_du_site() -> None:
                     'applyLayout(read(keys.layout))',
                     'root.dataset.layout = layout',
                     'html[data-layout="lecture"] #contenu-principal { max-width: 1160px; }',
+                    'html[data-layout="vitrine"] #contenu-principal { max-width: 1320px; }',
+                    'html[data-layout="mosaique"] #contenu-principal { max-width: 1600px; }',
                     'html[data-layout="panorama"] #contenu-principal { max-width: 1800px; }',
+                    'html[data-layout="compacte"] #contenu-principal { max-width: 1800px; }',
                     '.site-return-bar .site-layout-panel {',
                     '.site-return-bar .site-layout-settings:not([open]) > .site-layout-panel',
                     '.site-return-bar .site-layout-settings > summary {',

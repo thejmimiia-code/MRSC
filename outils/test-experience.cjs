@@ -259,6 +259,28 @@ async function main() {
       await page.waitForFunction(() => document.documentElement.dataset.layout === 'panorama');
       await ouvrirPageSite(page, 'apprendre.html');
       await ouvrirPanneau(page);
+
+      // Les trois présentations ajoutées le 18 octobre 2026 s’appliquent
+      // sans rechargement, sans perdre le texte et sans débordement général.
+      const contenuCatalogue = await page.$eval('main', (element) => element.innerText);
+      const libellesNeufs = { vitrine: 'Vitrine', mosaique: 'Mosaïque', compacte: 'Compacte' };
+      for (const [valeur, libelle] of Object.entries(libellesNeufs)) {
+        await page.click(`[data-site-layout-settings] input[name="mrsc-site-layout"][value="${valeur}"]`);
+        await page.waitForFunction((attendue) => document.documentElement.dataset.layout === attendue, {}, valeur);
+        const etatMode = await page.evaluate(() => ({
+          choix: localStorage.getItem('mrsc-mise-en-page'),
+          annonces: document.querySelector('[data-site-layout-settings] [role="status"]')?.textContent,
+          debordement: document.documentElement.scrollWidth - window.innerWidth,
+          apercu: Boolean(document.querySelector(`.layout-choice-preview[data-preview="${document.documentElement.dataset.layout}"]`)),
+          navigations: performance.getEntriesByType('navigation').length,
+        }));
+        assert.equal(etatMode.choix, valeur);
+        assert.match(etatMode.annonces, new RegExp(libelle));
+        assert.ok(etatMode.debordement <= 1, `débordement horizontal en « ${libelle} » : ${etatMode.debordement}px`);
+        assert.equal(etatMode.apercu, true, `mini-aperçu absent pour « ${libelle} »`);
+        assert.equal(await page.$eval('main', (element) => element.innerText), contenuCatalogue);
+      }
+
       await page.click('.layout-settings-reset');
       await page.waitForFunction(() => document.documentElement.dataset.layout === 'equilibree');
       assert.equal(await page.evaluate(() => localStorage.getItem('mrsc-mise-en-page')), 'equilibree');
