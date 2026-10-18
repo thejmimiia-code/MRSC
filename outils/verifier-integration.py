@@ -432,6 +432,23 @@ def fichiers_du_site() -> None:
         and ".site-header.is-compact .nav-inner" in styles,
     )
     verifier(
+        "Les couleurs répétées à rôle clair passent par des jetons de même valeur (phase 1)",
+        all(
+            jeton in styles
+            for jeton in (
+                "--text-soft: #536078;",
+                "--surface: #fff;",
+                "--surface-soft: #f8f9fc;",
+                "--tint-blue: #edf1f6;",
+                "--border-strong: #aebbd0;",
+                "--on-navy-sky: #bae6fd;",
+            )
+        )
+        and styles.count("#536078") == 1
+        and styles.count("#bae6fd") == 1
+        and styles.count("#aebbd0") == 1,
+    )
+    verifier(
         "La personnalisation de présentation offre six choix CSS immédiats sur le site",
         all(
             marqueur in script_site
@@ -810,7 +827,7 @@ def fichiers_du_site() -> None:
     verifier(
         "Les titres et le repère de statut de la note ressortent sur l’encadré bleu",
         ".creator-note h3,\n.creator-note h4 { color: var(--white); }" in styles
-        and ".creator-note .eyebrow { color: #bae6fd; }" in styles,
+        and ".creator-note .eyebrow { color: var(--on-navy-sky); }" in styles,
     )
     verifier(
         "Le registre renvoie vers la présentation d’ÉVA et distingue objectifs, essais et résultats",
