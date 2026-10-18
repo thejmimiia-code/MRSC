@@ -10,7 +10,7 @@
   ],
   "correctif_local": {
     "fichier": "outils/patchs/simulateur-securite-mrsc.patch",
-    "sha256": "119ae4a1fcf4ba9540a3073c84616132b21bab54004f8f378e22f0b4311194bf",
+    "sha256": "2d8b04808a6f557c9358c5e3435866e318383ef7b5ce011d492fece1555bf794",
     "etat": "appliqué"
   },
   "procedure_de_mise_a_jour": "python3 outils/mettre-a-jour-simulateur.py, puis python3 outils/construire-simulateur.py"
