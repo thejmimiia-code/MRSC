@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Registre contrôlable des risques statutaires
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** transformer le brainstorming global en registre structuré sans score, probabilité ni prétention d’exhaustivité.
+- **Résultat :** huit invariants, seize familles de risques et trois portes bloquantes relient scénarios, actifs, contrôles et conditions d’arrêt.
+- **Optimisation :** un vérificateur et cinq tests empêchent suppression silencieuse, validation prématurée, porte indicative et promesse d’exhaustivité.
+- **Limite :** la structure améliore la couverture documentaire mais ne prouve ni efficacité des contrôles, ni légalité, ni absence de scénario inconnu.
+- **Prochaine action :** attribuer les revues, réunir les documents absents et convertir chaque contrôle retenu en clause ou procédure reliée à sa source statutaire.
+
 ## 2026-10-18 — Plan global de résilience et prévention des détournements
 
 - **Initiative :** `vote-distanciel-verifiable`.
