@@ -39,6 +39,16 @@ class ResilienceStatutaireTests(unittest.TestCase):
         next(item for item in matrice["article"] if item["id"] == "article-19")["statut"] = "valide"
         self.assertTrue(any("dissolution" in erreur for erreur in MODULE.verifier_matrice(matrice)))
 
+    def test_refuse_un_article_sans_classement_normatif(self):
+        matrice = copy.deepcopy(self.matrice)
+        matrice["classement"].pop()
+        self.assertTrue(any("classement normatif" in erreur for erreur in MODULE.verifier_matrice(matrice)))
+
+    def test_refuse_de_classer_la_dissolution_comme_simple_procedure(self):
+        matrice = copy.deepcopy(self.matrice)
+        next(item for item in matrice["classement"] if item["article"] == "article-19")["niveau"] = "procedure"
+        self.assertTrue(any("article-19" in erreur for erreur in MODULE.verifier_matrice(matrice)))
+
     def test_refuse_une_pretention_d_exhaustivite(self):
         registre = copy.deepcopy(self.registre)
         registre["meta"]["exhaustif"] = True

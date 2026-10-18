@@ -227,3 +227,104 @@ recours = "contestation-juridique-et-controle-des-liquidateurs"
 urgence = "aucune-dissolution-provisoire-ou-automatique"
 point_a_trancher = "Portée spéciale par rapport à l'article 15, seconde instance, blancs, abstentions et procurations."
 statut = "bloque-interpretation-juridique"
+
+# Classement projeté du niveau normatif — à confirmer juridiquement.
+[[classement]]
+article = "article-1"
+niveau = "statuts"
+justification = "Constitution, identité et qualité fondatrice relèvent du pacte constitutif."
+
+[[classement]]
+article = "articles-1-2-1-3"
+niveau = "mixte"
+justification = "Durée, siège et compétence de transfert restent statutaires ; formalités et publication relèvent d'une procédure."
+
+[[classement]]
+article = "article-2"
+niveau = "statuts"
+justification = "L'objet borne la capacité associative ; budgets et modalités d'exécution relèvent ensuite des procédures."
+
+[[classement]]
+article = "article-3"
+niveau = "mixte"
+justification = "Valeurs et droit de vote restent statutaires ; qualification, récusation et recours doivent être détaillés au règlement."
+
+[[classement]]
+article = "articles-4-5"
+niveau = "mixte"
+justification = "Qualités et droits essentiels restent statutaires ; admission, registre, gel et correction relèvent du règlement et des procédures."
+
+[[classement]]
+article = "articles-6-8"
+niveau = "mixte"
+justification = "Principes financiers et compétences restent statutaires ; contrôles, pièces, seuils et circuits relèvent du règlement et des procédures."
+
+[[classement]]
+article = "article-9"
+niveau = "decision-prealable"
+justification = "La procédure d'adoption n'est pas écrite ; un avis doit déterminer si le règlement suffit ou si les statuts doivent être complétés."
+
+[[classement]]
+article = "article-10-1"
+niveau = "mixte"
+justification = "Composition, pouvoirs et règles de vote restent statutaires ; convocations, mandats, intérims et urgence doivent être détaillés sans étendre les pouvoirs."
+
+[[classement]]
+article = "articles-10-2-10-3"
+niveau = "mixte"
+justification = "Fonctions du fondateur, des cofondateurs et du conseil restent statutaires ; saisine, tirage, contradictoire et fin de mission relèvent du règlement."
+
+[[classement]]
+article = "articles-10-4-10-7"
+niveau = "decision-prealable"
+justification = "Le passage des désignations initiales aux élections ultérieures peut nécessiter une clarification statutaire avant toute modalité réglementaire."
+
+[[classement]]
+article = "articles-11-11-5"
+niveau = "mixte"
+justification = "Organes et mandats territoriaux restent statutaires ; rattachement, chevauchement, finances et intérims relèvent du règlement."
+
+[[classement]]
+article = "article-11-6"
+niveau = "mixte"
+justification = "Secret, présence et effet du blanc restent statutaires ; candidatures, reprises, preuve et recours relèvent du règlement."
+
+[[classement]]
+article = "articles-11-7-11-9"
+niveau = "mixte"
+justification = "Ordre participatif et organes restent statutaires ; délais, formats, objections et productions relèvent du règlement et des procédures."
+
+[[classement]]
+article = "article-12"
+niveau = "mixte"
+justification = "Causes de perte de qualité et organe restent statutaires ; contradictoire, proportionnalité, recours et données relèvent du règlement."
+
+[[classement]]
+article = "article-13"
+niveau = "mixte"
+justification = "Catégories de ressources et responsabilité restent statutaires ; budget, comptes, conventions et contrôles relèvent du règlement."
+
+[[classement]]
+article = "article-14"
+niveau = "mixte"
+justification = "Corps, quorum, majorité, procuration et compétences restent statutaires ; définitions et déroulement doivent être précisés au règlement."
+
+[[classement]]
+article = "article-15"
+niveau = "mixte"
+justification = "Compétences, quorums et majorités restent statutaires ; preuves, convocations, recours et modalités numériques relèvent du règlement."
+
+[[classement]]
+article = "article-16"
+niveau = "procedure"
+justification = "La compétence statutaire existe ; délais, pièces, dépôts, récépissés et conservation sont des modalités actualisables."
+
+[[classement]]
+article = "articles-17-18"
+niveau = "decision-prealable"
+justification = "Aucun niveau ne peut être attribué avant comparaison avec la version déposée et le procès-verbal."
+
+[[classement]]
+article = "article-19"
+niveau = "decision-prealable"
+justification = "L'articulation avec l'article 15 doit être tranchée juridiquement ; le règlement ne peut choisir ou réécrire les seuils."
