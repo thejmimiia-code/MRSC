@@ -11,6 +11,7 @@ from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
 REGISTRE = RACINE / "docs" / "rd" / "statuts-risques.toml"
+MATRICE = RACINE / "docs" / "rd" / "statuts-matrice-tracabilite.toml"
 RISQUES_REQUIS = {
     "captation-gouvernance", "influence-exterieure", "manipulation-electorat",
     "manipulation-information", "manipulation-vote", "conflit-interets",
@@ -78,16 +79,47 @@ def verifier(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_matrice(matrice: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = matrice.get("meta", {})
+    if (
+        meta.get("initiative") != "resilience-statutaire-globale"
+        or meta.get("source") != "assets/documents/statuts-2020.pdf"
+        or meta.get("statut") != "a-faire-relire"
+    ):
+        erreurs.append("matrice reliée aux statuts et maintenue à faire relire")
+    articles = matrice.get("article", [])
+    ids = [item.get("id") for item in articles]
+    if len(articles) != 20 or len(ids) != len(set(ids)):
+        erreurs.append("exactement 20 groupes d’articles sans doublon")
+    champs = {"id", "pages", "objet", "competence", "preuve", "recours", "urgence", "point_a_trancher", "statut"}
+    for item in articles:
+        identifiant = item.get("id", "?")
+        if any(champ not in item or item.get(champ) is None or item.get(champ) == "" for champ in champs):
+            erreurs.append(f"article {identifiant} avec traçabilité complète")
+        if item.get("statut") not in {"a-faire-relire", "bloque-verification-source", "bloque-interpretation-juridique"}:
+            erreurs.append(f"article {identifiant} sans validation prématurée")
+    absents = next((item for item in articles if item.get("id") == "articles-17-18"), {})
+    if absents.get("statut") != "bloque-verification-source" or absents.get("pages") != []:
+        erreurs.append("articles 17 et 18 maintenus bloqués sans page inventée")
+    dissolution = next((item for item in articles if item.get("id") == "article-19"), {})
+    if dissolution.get("statut") != "bloque-interpretation-juridique":
+        erreurs.append("dissolution maintenue bloquée pour interprétation juridique")
+    return erreurs
+
+
 def principal() -> int:
     with REGISTRE.open("rb") as fichier:
         registre = tomllib.load(fichier)
-    erreurs = verifier(registre)
+    with MATRICE.open("rb") as fichier:
+        matrice = tomllib.load(fichier)
+    erreurs = verifier(registre) + verifier_matrice(matrice)
     if erreurs:
         print("Registre de résilience incomplet :", file=sys.stderr)
         for erreur in erreurs:
             print(f"- {erreur}", file=sys.stderr)
         return 1
-    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
+    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
     return 0
 
 

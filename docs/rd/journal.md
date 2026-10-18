@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Matrice de traçabilité des vingt groupes d’articles
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** relier chaque partie des statuts à son objet, sa compétence, sa preuve, son recours, sa règle d’urgence et son point restant à trancher.
+- **Résultat :** vingt groupes couvrent les pages 3 à 25 ; les articles 17–18 restent sans page inventée et la dissolution reste bloquée pour interprétation juridique.
+- **Optimisation :** le vérificateur contrôle désormais la présence des vingt groupes, les champs de traçabilité et les deux blocages de source/interprétation.
+- **Limite :** la matrice est une lecture de travail, pas une norme adoptée ni une interprétation juridique opposable.
+- **Prochaine action :** faire relire chaque ligne, puis distinguer les clauses relevant des statuts, du règlement intérieur ou d’une procédure opérationnelle.
+
 ## 2026-10-18 — Registre contrôlable des risques statutaires
 
 - **Initiative :** `resilience-statutaire-globale`.
