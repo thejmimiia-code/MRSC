@@ -44,7 +44,7 @@ statut = "a-attribuer"
 
 [[revue]]
 id = "source-statutaire"
-artefacts = ["assets/documents/statuts-2020.pdf", "docs/rd/statuts-revue-juridique.md", "docs/rd/statuts-plan-global-resilience.md", "docs/rd/statuts-risques.toml", "docs/rd/statuts-matrice-tracabilite.toml", "docs/rd/reglement-interieur-projet.md", "docs/rd/reglement-fiches-redaction.toml", "docs/rd/statuts-couverture-angles-morts.toml", "docs/rd/statuts-variantes-consolidation.toml", "docs/rd/vote-distanciel-regles.toml", "docs/rd/vote-distanciel-profils.toml"]
+artefacts = ["assets/documents/statuts-2020.pdf", "docs/rd/statuts-revue-juridique.md", "docs/rd/statuts-plan-global-resilience.md", "docs/rd/statuts-risques.toml", "docs/rd/statuts-matrice-tracabilite.toml", "docs/rd/reglement-interieur-projet.md", "docs/rd/reglement-fiches-redaction.toml", "docs/rd/statuts-couverture-angles-morts.toml", "docs/rd/statuts-variantes-consolidation.toml", "docs/rd/statuts-mouture-globale-candidate.md", "docs/rd/vote-distanciel-regles.toml", "docs/rd/vote-distanciel-profils.toml"]
 roles_requis = ["association-decisionnaire", "juridique-statutaire"]
 question = "La bonne version est-elle utilisée et le profil choisi traduit-il les articles sans règle ajoutée ?"
 condition_sortie = "Version, règlement intérieur, ambiguïtés et profil confirmés dans une décision datée."

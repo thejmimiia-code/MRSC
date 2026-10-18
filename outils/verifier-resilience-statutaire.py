@@ -16,6 +16,7 @@ REGLEMENT = RACINE / "docs" / "rd" / "reglement-interieur-projet.md"
 FICHES = RACINE / "docs" / "rd" / "reglement-fiches-redaction.toml"
 COUVERTURE = RACINE / "docs" / "rd" / "statuts-couverture-angles-morts.toml"
 VARIANTES = RACINE / "docs" / "rd" / "statuts-variantes-consolidation.toml"
+MOUTURE = RACINE / "docs" / "rd" / "statuts-mouture-globale-candidate.md"
 ROLES_REQUIS = {
     "association-decisionnaire", "juridique-statutaire", "cryptographie-vote",
     "protection-donnees", "accessibilite-usages", "operations-securite",
@@ -261,6 +262,33 @@ def verifier_variantes(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_mouture(markdown: str) -> list[str]:
+    erreurs: list[str] = []
+    if "Statut : architecture candidate à faire relire et arbitrer. Aucun texte n’est adopté." not in markdown:
+        erreurs.append("mouture globale explicitement candidate et non adoptée")
+    niveaux = ("Niveau A — Statuts", "Niveau B — Règlement intérieur", "Niveau C — Procédures")
+    if any(niveau not in markdown for niveau in niveaux):
+        erreurs.append("séparation explicite entre statuts, règlement et procédures")
+    modifications = [ligne for ligne in markdown.splitlines() if ligne.startswith("### Modification S")]
+    numeros = []
+    for ligne in modifications:
+        try:
+            numeros.append(int(ligne.split("Modification S", 1)[1].split(" ", 1)[0]))
+        except (ValueError, IndexError):
+            erreurs.append("numérotation lisible des modifications candidates")
+    if numeros != list(range(1, 10)):
+        erreurs.append("exactement 9 modifications statutaires candidates sans lacune")
+    garde_fous = (
+        "gardien de l’intention, pas organe souverain",
+        "Aucune procédure ne peut créer une compétence, changer un seuil ou supprimer un recours",
+        "aucune urgence ne crée une souveraineté ou un pouvoir permanent",
+        "Une faille ne justifie une modification statutaire que si elle touche",
+    )
+    if any(texte not in markdown for texte in garde_fous):
+        erreurs.append("garde-fous de subsidiarité, urgence et non-souveraineté")
+    return erreurs
+
+
 def principal() -> int:
     with REGISTRE.open("rb") as fichier:
         registre = tomllib.load(fichier)
@@ -277,13 +305,14 @@ def principal() -> int:
         + verifier_reglement(REGLEMENT.read_text(encoding="utf-8"))
         + verifier_fiches(fiches) + verifier_couverture(couverture)
         + verifier_variantes(variantes)
+        + verifier_mouture(MOUTURE.read_text(encoding="utf-8"))
     )
     if erreurs:
         print("Registre de résilience incomplet :", file=sys.stderr)
         for erreur in erreurs:
             print(f"- {erreur}", file=sys.stderr)
         return 1
-    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles, 82 articles de règlement projetés, 19 fiches de rédaction, 16 angles morts au moins, 15 arbitrages et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
+    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles, 82 articles de règlement projetés, 19 fiches de rédaction, 16 angles morts au moins, 15 arbitrages, 9 modifications candidates et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
     return 0
 
 

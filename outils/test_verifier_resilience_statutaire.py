@@ -15,6 +15,7 @@ REGLEMENT = RACINE / "docs" / "rd" / "reglement-interieur-projet.md"
 FICHES = RACINE / "docs" / "rd" / "reglement-fiches-redaction.toml"
 COUVERTURE = RACINE / "docs" / "rd" / "statuts-couverture-angles-morts.toml"
 VARIANTES = RACINE / "docs" / "rd" / "statuts-variantes-consolidation.toml"
+MOUTURE = RACINE / "docs" / "rd" / "statuts-mouture-globale-candidate.md"
 spec = importlib.util.spec_from_file_location("verifier_resilience_statutaire", SCRIPT)
 MODULE = importlib.util.module_from_spec(spec)
 assert spec and spec.loader
@@ -35,6 +36,7 @@ class ResilienceStatutaireTests(unittest.TestCase):
             cls.couverture = tomllib.load(fichier)
         with VARIANTES.open("rb") as fichier:
             cls.variantes = tomllib.load(fichier)
+        cls.mouture = MOUTURE.read_text(encoding="utf-8")
 
     def test_registre_courant_est_coherent(self):
         self.assertEqual(MODULE.verifier(self.registre), [])
@@ -43,6 +45,15 @@ class ResilienceStatutaireTests(unittest.TestCase):
         self.assertEqual(MODULE.verifier_fiches(self.fiches), [])
         self.assertEqual(MODULE.verifier_couverture(self.couverture), [])
         self.assertEqual(MODULE.verifier_variantes(self.variantes), [])
+        self.assertEqual(MODULE.verifier_mouture(self.mouture), [])
+
+    def test_refuse_une_mouture_presentee_comme_adoptee(self):
+        mouture = self.mouture.replace("Aucun texte n’est adopté", "Le texte est adopté")
+        self.assertTrue(any("non adoptée" in erreur for erreur in MODULE.verifier_mouture(mouture)))
+
+    def test_refuse_une_modification_statutaire_candidate_supprimee(self):
+        mouture = self.mouture.replace("### Modification S9 — Hiérarchie et non-détournement", "### Annexe supprimée")
+        self.assertTrue(any("9 modifications" in erreur for erreur in MODULE.verifier_mouture(mouture)))
 
     def test_refuse_une_variante_selectionnee_sans_arbitrage(self):
         variantes = copy.deepcopy(self.variantes)

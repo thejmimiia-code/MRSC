@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Mouture globale candidate à trois niveaux
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** consolider les arbitrages en une architecture où les statuts gardent le pouvoir et les droits, le règlement précise les modalités durables et les procédures portent l’exécution révisable.
+- **Résultat :** neuf modifications statutaires minimales candidates, vingt-cinq domaines réglementaires, une couche procédurale et un chemin d’adoption séparé.
+- **Équilibre :** le fondateur reste gardien de l’intention sans devenir souverain ; l’assemblée décide dans ses compétences ; le Bureau exécute ; éthique, contrôle et recours restent bornés.
+- **Limite :** la mouture n’est pas adoptée et ne garantit pas toutes les circonstances ; chaque modification reste soumise aux sources officielles, à l’avis juridique et à la décision compétente.
+- **Prochaine action :** confronter les neuf modifications à un test de nécessité, puis préparer un tableau statuts actuels / rédaction candidate / justification / effet / risque.
+
 ## 2026-10-18 — Variantes pour préserver la vision sans captation
 
 - **Initiative :** `resilience-statutaire-globale`.
