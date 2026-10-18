@@ -22,6 +22,8 @@
   --text-soft: #536078;
   --text-soft-2: #4f5d72;
   --text-soft-3: #46536b;
+  --gold-ink: #835100;
+  --red-ink: #a3232c;
   --surface: #fff;
   --surface-soft: #f8f9fc;
   --surface-soft-2: #f6f8fb;
@@ -3679,10 +3681,10 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
   background: var(--white);
   box-shadow: 0 8px 25px rgba(26,48,91,.045);
 }
-.home-action-learning { --home-card-accent: var(--green); --home-card-kicker: #456d29; }
-.home-action-debate { --home-card-accent: var(--blue); --home-card-kicker: #2958a2; }
-.home-action-simulator { --home-card-accent: var(--gold); --home-card-kicker: #835100; }
-.home-action-information { --home-card-accent: var(--red); --home-card-kicker: #a3232c; }
+.home-action-learning { --home-card-accent: var(--green); --home-card-kicker: var(--green); }
+.home-action-debate { --home-card-accent: var(--blue); --home-card-kicker: var(--blue); }
+.home-action-simulator { --home-card-accent: var(--gold); --home-card-kicker: var(--gold-ink); }
+.home-action-information { --home-card-accent: var(--red); --home-card-kicker: var(--red-ink); }
 .home-action-kicker { margin-bottom: .55rem; color: var(--home-card-kicker,var(--ink)); font-size: .73rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .home-action-card h3 { margin-bottom: .65rem; font-size: clamp(1.15rem,2vw,1.4rem); }
 .home-action-card > p:not(.home-action-kicker) { color: var(--text-soft-2); font-size: .94rem; }

@@ -449,6 +449,19 @@ def fichiers_du_site() -> None:
         and styles.count("#aebbd0") == 1,
     )
     verifier(
+        "L’ensemble gelé est branché sur les jetons : libellés d’accueil et couleurs de l’aventure suivent le contraste renforcé",
+        "--gold-ink: #835100;" in styles
+        and "--red-ink: #a3232c;" in styles
+        and "--home-card-kicker: var(--green)" in styles
+        and "--home-card-kicker: var(--blue)" in styles
+        and "--home-card-kicker: var(--gold-ink)" in styles
+        and "--home-card-kicker: var(--red-ink)" in styles
+        and styles.count("#456d29") == 1
+        and styles.count("#2958a2") == 1
+        and (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8").count("#1d3268") == 0
+        and (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8").count("#647086") == 0,
+    )
+    verifier(
         "La personnalisation de présentation offre six choix CSS immédiats sur le site",
         all(
             marqueur in script_site
