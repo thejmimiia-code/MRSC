@@ -1,0 +1,211 @@
+# Registre prospectif : aucune probabilité, validation ou exhaustivité n'est déclarée.
+[meta]
+version = 1
+date = 2026-10-18
+initiative = "resilience-statutaire-globale"
+statut = "a-faire-relire"
+probabilites = false
+exhaustif = false
+regle = "Toute inconnue importante reste bloquante ; aucun score ne compense une atteinte aux droits ou aux statuts."
+
+[[invariant]]
+id = "droits-non-derogeables"
+exigence = "Aucune urgence ne permet violence, contrainte, discrimination, sanction sans défense ou suppression du droit de quitter l'association."
+preuve_attendue = "Clauses statutaires relues et tests contradictoires du règlement."
+
+[[invariant]]
+id = "competence-prealable"
+exigence = "Toute décision est prise par un organe compétent selon une règle publiée avant son déclenchement."
+preuve_attendue = "Matrice article–compétence–procédure–preuve–recours."
+
+[[invariant]]
+id = "separation-des-pouvoirs"
+exigence = "Aucun acteur ne propose, autorise, exécute, contrôle et juge seul la même décision."
+preuve_attendue = "Matrice des incompatibilités et suppléances."
+
+[[invariant]]
+id = "regle-non-retroactive"
+exigence = "Corps électoral, quorum, majorité, secret et recours sont figés avant la décision."
+preuve_attendue = "Versions datées et journal des changements."
+
+[[invariant]]
+id = "recours-effectif"
+exigence = "Toute exclusion, sanction ou décision contestable possède une voie impartiale, accessible et bornée."
+preuve_attendue = "Scénarios de recours synthétiques et décisions motivées fictives."
+
+[[invariant]]
+id = "urgence-temporaire"
+exigence = "Tout pouvoir exceptionnel expire automatiquement et vise le retour aux organes ordinaires."
+preuve_attendue = "Déclencheur, durée, réexamen, extinction et contrôle après coup."
+
+[[invariant]]
+id = "preuve-proportionnee"
+exigence = "La preuve d'une décision ne collecte ni ne publie plus de données que nécessaire."
+preuve_attendue = "Inventaire des données, accès, rétention et suppression."
+
+[[invariant]]
+id = "aucune-souverainete-parallele"
+exigence = "L'association ne crée ni police, justice coercitive, force armée ni pouvoir imposé à des tiers."
+preuve_attendue = "Interdictions explicites dans les clauses de continuité."
+
+[[risque]]
+id = "captation-gouvernance"
+domaine = "gouvernance"
+scenarios = ["adhesions-coordonnees", "ordre-du-jour-controle", "remplacements-provisoires-repetes", "urgence-prolongee"]
+actifs = ["legitimite", "representation", "objet-associatif"]
+controles = ["gel-du-corps-electoral", "duree-maximale-des-interims", "convocation-verifiable", "controle-contradictoire"]
+condition_arret = "Un même groupe peut modifier simultanément électorat, règle et contrôle."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "influence-exterieure"
+domaine = "independance"
+scenarios = ["financement-conditionne", "faux-membres", "pression-fournisseur", "interets-caches"]
+actifs = ["independance", "information", "decisions"]
+controles = ["declaration-des-interets", "conventions-tracees", "separation-fournisseur-decision", "pluralite-des-sources"]
+condition_arret = "Un tiers peut imposer une décision sans mandat visible."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "manipulation-electorat"
+domaine = "adhesion-vote"
+scenarios = ["exclusion-ciblee", "inclusion-tardive", "cotisation-selective", "double-voix-personne-morale"]
+actifs = ["droit-de-vote", "quorum", "egalite"]
+controles = ["criteres-ecrits", "liste-gelee", "fenetre-de-correction", "recours-distinct"]
+condition_arret = "La liste peut changer après convocation sans contrôle."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "manipulation-information"
+domaine = "deliberation"
+scenarios = ["documents-tardifs", "synthese-biaisee", "objection-supprimee", "texte-modifie"]
+actifs = ["consentement-eclaire", "debat", "ordre-du-jour"]
+controles = ["versionnage", "delai-minimal", "objections-jointes", "nouvelle-convocation-si-changement"]
+condition_arret = "Une modification substantielle n'est pas portée à tous les membres habilités."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "manipulation-vote"
+domaine = "scrutin"
+scenarios = ["mauvais-profil", "procuration-dupliquee", "bulletin-modifie", "proclamation-anticipee"]
+actifs = ["secret", "integrite", "resultat"]
+controles = ["profils-distincts", "configuration-figee", "verification-independante", "contestation"]
+condition_arret = "Une altération ou divergence peut être acceptée silencieusement."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "conflit-interets"
+domaine = "ethique"
+scenarios = ["decideur-beneficiaire", "instruction-de-sa-propre-plainte", "depense-auto-controlee", "proche-dans-organe-recours"]
+actifs = ["impartialite", "confiance", "equite"]
+controles = ["declaration", "recusation", "suppleance", "controle-independant"]
+condition_arret = "La personne intéressée contrôle la décision et son recours."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "sanction-detournee"
+domaine = "discipline"
+scenarios = ["grief-vague", "charte-non-adoptee", "exclusion-avant-vote", "dossier-divulgue"]
+actifs = ["droits-defense", "adhesion", "confidentialite"]
+controles = ["griefs-precis", "contradictoire", "decision-motivee", "recours"]
+condition_arret = "Une sanction produit effet sans défense ou règle préexistante."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "captation-financiere"
+domaine = "finances"
+scenarios = ["compte-controle-seul", "faux-fournisseur", "depense-fractionnee", "don-conditionne"]
+actifs = ["fonds", "biens", "independance"]
+controles = ["double-autorisation", "rapprochement", "inventaire", "conventions-liees"]
+condition_arret = "Une personne engage, paie et contrôle seule une dépense significative."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "captation-numerique"
+domaine = "actifs-numeriques"
+scenarios = ["domaine-personnel", "administrateur-unique", "rancongiciel", "sauvegarde-unique"]
+actifs = ["domaine", "courriels", "archives", "code"]
+controles = ["propriete-associative", "deux-administrateurs", "export-hors-fournisseur", "restauration-testee"]
+condition_arret = "Un départ ou fournisseur peut rendre les actifs irrécupérables."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "atteinte-donnees"
+domaine = "vie-privee"
+scenarios = ["liste-divulguee", "journaux-croises", "collecte-excessive", "sauvegarde-oubliee"]
+actifs = ["identites", "opinions", "journaux"]
+controles = ["minimisation", "separation", "acces-par-role", "suppression-verifiee"]
+condition_arret = "Une identité peut être reliée à une opinion ou un bulletin."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "blocage-sabotage"
+domaine = "continuite"
+scenarios = ["dirigeant-injoignable", "archives-detruites", "banque-indisponible", "demission-coordonnee"]
+actifs = ["continuite", "preuves", "paiements-essentiels"]
+controles = ["suppleances", "copies-authentifiees", "canaux-alternatifs", "reconstitution"]
+condition_arret = "La continuité exige un pouvoir illimité ou une décision irréversible."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "desaccord-interpretatif"
+domaine = "normes"
+scenarios = ["articles-concurrents", "intention-contre-texte", "coutume-invoquee", "reglement-contradictoire"]
+actifs = ["securite-juridique", "previsibilite", "egalite"]
+controles = ["hierarchie-documentaire", "matrice-article-regle", "avis-competent", "suspension-decision-irreversible"]
+condition_arret = "L'outil ou l'exécutant choisit seul entre deux règles."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "crise-institutionnelle"
+domaine = "contexte-exterieur"
+scenarios = ["formalites-indisponibles", "communications-coupees", "banque-inaccessible", "conflit-de-normes-allegue"]
+actifs = ["existence-associative", "archives", "droits"]
+controles = ["faits-observables", "mesures-temporaires", "aucune-souverainete-parallele", "retour-au-droit-effectif"]
+condition_arret = "La continuité devient un prétexte à coercition ou pouvoir sur des tiers."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "catastrophe-danger"
+domaine = "securite-personnes"
+scenarios = ["incendie", "inondation", "epidemie", "menace-directe"]
+actifs = ["personnes", "biens", "donnees"]
+controles = ["priorite-aux-personnes", "secours-competents", "gel-decisions-non-essentielles", "communication-minimale"]
+condition_arret = "Une procédure associative retarde la mise en sécurité."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "rupture-succession"
+domaine = "transmission"
+scenarios = ["fondateur-indisponible", "cofondateurs-absents", "memoire-orale-perdue", "succession-contestee"]
+actifs = ["continuite", "intention", "legitimite"]
+controles = ["qualite-historique-distinguee", "suppleance-collegiale", "archives", "aucune-succession-privee"]
+condition_arret = "Une prérogative est transmise automatiquement sans base statutaire."
+statut = "a-faire-relire"
+
+[[risque]]
+id = "erreur-complexite"
+domaine = "qualite"
+scenarios = ["mauvais-calcul", "formulaire-ambigu", "delai-oublie", "surcharge-benevoles"]
+actifs = ["exactitude", "accessibilite", "maintenabilite"]
+controles = ["double-controle", "simulation", "langage-clair", "arret-plutot-qu-improvisation"]
+condition_arret = "La règle ne peut être expliquée ou rejouée indépendamment."
+statut = "a-faire-relire"
+
+[[porte]]
+id = "avant-redaction-reglement"
+exigences = ["version-deposee", "proces-verbal-2020", "charte-identifiee", "articles-17-18-clarifies", "articles-15-19-relus", "matrice-competences"]
+decision = "revue-juridique-et-associative"
+statut = "bloquante"
+
+[[porte]]
+id = "avant-adoption-reglement"
+exigences = ["projet-complet", "matrice-tracabilite", "revue-contradictoire", "majorite-et-quorum-confirmes", "objections-visibles"]
+decision = "fondateur-puis-ago-selon-competence-confirmee"
+statut = "bloquante"
+
+[[porte]]
+id = "avant-operation-sensible"
+exigences = ["roles-attribues", "delegations", "formation", "exercices-synthetiques", "recours-operationnel", "plan-retour-normal"]
+decision = "autorisation-associative-distincte"
+statut = "bloquante"

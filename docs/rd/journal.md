@@ -2,6 +2,33 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Registre contrôlable des risques statutaires
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** transformer le brainstorming global en registre structuré sans score, probabilité ni prétention d’exhaustivité.
+- **Résultat :** huit invariants, seize familles de risques et trois portes bloquantes relient scénarios, actifs, contrôles et conditions d’arrêt.
+- **Optimisation :** un vérificateur et cinq tests empêchent suppression silencieuse, validation prématurée, porte indicative et promesse d’exhaustivité.
+- **Limite :** la structure améliore la couverture documentaire mais ne prouve ni efficacité des contrôles, ni légalité, ni absence de scénario inconnu.
+- **Prochaine action :** attribuer les revues, réunir les documents absents et convertir chaque contrôle retenu en clause ou procédure reliée à sa source statutaire.
+
+## 2026-10-18 — Plan global de résilience et prévention des détournements
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** cartographier les dynamiques croisées des statuts, les captations internes ou externes, les crises et les erreurs avant de rédiger le règlement intérieur.
+- **Résultat :** seize familles de scénarios, cinq niveaux de continuité, vingt-et-un chapitres de règlement, cinq portes de décision et une feuille de route consolidée.
+- **Revue contradictoire :** le plan traite également les abus possibles des mécanismes de protection eux-mêmes : urgence prolongée, conseil d’éthique capturé, contrôle centralisé et recours supprimé.
+- **Limite :** aucun texte ne peut être exhaustif ou étanche ; le plan ne modifie pas les statuts, ne crée aucun pouvoir public et reste à relire juridiquement et démocratiquement.
+- **Prochaine action :** réunir les documents absents, produire la matrice article–compétence–preuve–recours et faire distinguer ce qui relève des statuts, du règlement ou d’une procédure.
+
+## 2026-10-18 — Pré-vérification juridique complète des statuts
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** relire les 25 pages article par article avant de poursuivre le QCM et la rédaction du règlement intérieur.
+- **Résultat :** une note de cohérence interne recense les questions de gouvernance, corps électoral, finances, sanctions, assemblées et dissolution ; les orientations déjà données par le fondateur sont séparées des règles actuellement écrites.
+- **Revue contradictoire :** une seconde passe a recherché conflits de compétence, définitions absentes, règles spéciales et procédures sans recours ; aucun sous-agent indépendant n’était disponible.
+- **Limite :** cette pré-vérification n’est ni un avis juridique ni une validation ; le droit positif actuel et la version déposée restent à confronter à des sources officielles et à une personne compétente.
+- **Prochaine action :** obtenir les documents absents, faire répondre un relecteur juridique aux douze questions bornées, puis reprendre le QCM sur la majorité d’adoption du règlement.
+
 ## 2026-10-18 — Six présentations par intention derrière « Présentation »
 
 - **Initiative :** `optimisation-du-site` (avec la carte `direction-artistique-motion`).
