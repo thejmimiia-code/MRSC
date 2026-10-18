@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Variantes pour préserver la vision sans captation
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** comparer plusieurs solutions pour chaque point sensible au lieu d’imposer immédiatement une rédaction unique.
+- **Résultat :** quinze arbitrages documentent variantes, avantages, risques et niveau normatif ; une candidate de travail est indiquée sans sélection.
+- **Prospective :** chaque variante est examinée contre deux dérives opposées : captation par une minorité et concentration au profit des organes en place.
+- **Optimisation :** le contrôle refuse une variante déclarée sélectionnée, la suppression d’un arbitrage ou une candidate inexistante.
+- **Limite :** les candidates expriment une hypothèse de consolidation, pas l’intention juridiquement opposable de l’auteur ni une décision de l’association.
+- **Prochaine action :** soumettre les quinze arbitrages au fondateur, à la revue juridique et à l’organe compétent avant toute intégration dans les statuts ou le règlement.
+
 ## 2026-10-18 — Couverture croisée et angles morts maintenus ouverts
 
 - **Initiative :** `resilience-statutaire-globale`.

@@ -1,0 +1,458 @@
+# Variantes de consolidation : aucune option n’est sélectionnée ni validée.
+[meta]
+version = 1
+date = 2026-10-18
+initiative = "resilience-statutaire-globale"
+statut = "a-arbitrer"
+selection_effectuee = false
+regle = "La variante candidate sert au débat ; elle ne devient une règle qu’après compétence, preuve, relecture et décision."
+
+[[arbitrage]]
+id = "interpretation-fidele"
+question = "Préserver l'intention globale sans donner à une seule personne le pouvoir d'imposer toute interprétation."
+candidate = "double-trace"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "fondateur-seul"
+description = "Le fondateur tranche l'intention."
+avantage = "Rapide et fidèle à l'auteur."
+risque = "Concentration du pouvoir et contestation future."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "assemblee-seule"
+description = "L'assemblée tranche toute interprétation."
+avantage = "Légitimité collective."
+risque = "Une majorité circonstancielle peut réécrire l'intention."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "double-trace"
+description = "Le fondateur produit une déclaration d'intention ; une revue juridique vérifie la compatibilité ; l'assemblée statue si une règle doit changer."
+avantage = "Sépare intention, droit et décision collective."
+risque = "Procédure plus longue ; désaccord possible maintenu visible."
+niveau = "mixte"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "adoption-reglement"
+question = "Adopter le règlement sans qu'une minorité ni un organe exécutif puisse l'imposer."
+candidate = "fondateur-ago"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "bureau"
+description = "Adoption par le Bureau exécutif."
+avantage = "Rapide."
+risque = "Le Bureau fixerait ses propres limites."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "ago"
+description = "Adoption directe en AGO."
+avantage = "Participation collective."
+risque = "Projet pouvant diverger de l'intention avant vote."
+niveau = "decision-prealable"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "fondateur-ago"
+description = "Validation préalable de conformité par le fondateur, puis adoption par AGO selon majorité juridiquement confirmée."
+avantage = "Double légitimité d'intention et collective."
+risque = "Prévoir désaccord, indisponibilité et délai de réponse."
+niveau = "decision-prealable"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "modification-reglement"
+question = "Empêcher des modifications opportunistes après adoption."
+candidate = "deux-lectures"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "majorite-ordinaire"
+description = "Modification en une AGO à la majorité ordinaire applicable."
+avantage = "Souple."
+risque = "Capture ponctuelle possible."
+niveau = "reglement"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "majorite-renforcee"
+description = "Majorité renforcée pour toute modification."
+avantage = "Stabilité."
+risque = "Minorité de blocage durable."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "deux-lectures"
+description = "Deux lectures séparées, texte comparé, objections publiées, puis majorité confirmée juridiquement."
+avantage = "Réduit surprise et précipitation sans veto permanent."
+risque = "Plus lent en cas de correction urgente."
+niveau = "mixte"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "membres-concernes"
+question = "Déterminer les votants concernés ou impactés sans exclusion stratégique."
+candidate = "criteres-recours"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "bureau-decide"
+description = "Le Bureau arrête seul la liste."
+avantage = "Simple."
+risque = "Manipulation du corps électoral."
+niveau = "reglement"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "auto-declaration"
+description = "Chaque membre se déclare concerné."
+avantage = "Ouvert."
+risque = "Afflux stratégique ou doubles intérêts."
+niveau = "reglement"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "criteres-recours"
+description = "Critères publiés avant convocation, proposition contrôlée, liste gelée et recours devant une fonction distincte."
+avantage = "Prévisible, traçable et contestable."
+risque = "Cas limites nécessitant une décision motivée."
+niveau = "mixte"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "protection-captation"
+question = "Empêcher une prise de contrôle rapide sans fermer arbitrairement l'adhésion."
+candidate = "delais-structurels"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "anciennete-vote"
+description = "Réserver certains votes selon ancienneté."
+avantage = "Freine une adhésion coordonnée."
+risque = "Peut créer des catégories de membres contraires aux statuts."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "discretion-admission"
+description = "Permettre au Bureau de refuser sans motif."
+avantage = "Filtre rapide."
+risque = "Arbitraire, discrimination et captation par l'organe en place."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "delais-structurels"
+description = "Geler la liste avant convocation, imposer information et deux lectures pour changements fondamentaux, tracer les adhésions sans profilage."
+avantage = "Protège la procédure plutôt qu'un groupe en place."
+risque = "N'empêche pas une majorité durablement hostile."
+niveau = "mixte"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "urgence"
+question = "Maintenir l'association sans transformer l'urgence en pouvoir permanent."
+candidate = "activation-collegiale"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "fondateur-seul"
+description = "Activation et conduite par le fondateur seul."
+avantage = "Réactivité."
+risque = "Point unique et absence de contrôle."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "bureau-seul"
+description = "Activation par le Bureau."
+avantage = "Collégialité existante."
+risque = "Le Bureau peut bénéficier de l'urgence."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "activation-collegiale"
+description = "Initiative possible du fondateur ou Bureau, confirmation par plusieurs fonctions distinctes, durée courte, pouvoirs listés, extinction et ratification."
+avantage = "Évite l'inaction et l'auto-prolongation."
+risque = "Il faut prévoir l'indisponibilité simultanée."
+niveau = "mixte"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "succession-fondateur"
+question = "Préserver la vision sans transmettre un pouvoir comme un bien privé."
+candidate = "gardiennage-collegial"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "heritier-designe"
+description = "Transmission à une personne désignée."
+avantage = "Continuité personnelle."
+risque = "Base statutaire incertaine et pouvoir privé."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "bureau-absorbe"
+description = "Le Bureau reprend toutes les prérogatives."
+avantage = "Continuité immédiate."
+risque = "Concentration et changement de l'équilibre initial."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "gardiennage-collegial"
+description = "Déclaration d'intention archivée ; suppléance collégiale temporaire ; compétences essentielles renvoyées à une décision statutaire."
+avantage = "Préserve la mémoire sans créer d'héritier souverain."
+risque = "Exige une modification statutaire claire."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "renouvellement-dirigeants"
+question = "Organiser les renouvellements après les désignations de lancement."
+candidate = "election-ago"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "cooptation"
+description = "Les dirigeants sortants choisissent leurs remplaçants."
+avantage = "Continuité."
+risque = "Reproduction d'un groupe fermé."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "election-ago"
+description = "Candidatures ouvertes selon critères statutaires, information, vote en AGO et transition documentée."
+avantage = "Légitimité collective et renouvellement."
+risque = "Préciser corps, majorité et révocation dans les statuts."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "tirage-au-sort"
+description = "Tirage parmi volontaires."
+avantage = "Réduit les campagnes de pouvoir."
+risque = "Compétences et responsabilité potentiellement insuffisantes."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "conseil-ethique"
+question = "Empêcher capture, partialité ou permanence du conseil d'éthique."
+candidate = "composition-mixte"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "designation-fondateur"
+description = "Composition entièrement désignée par le fondateur."
+avantage = "Cohérence de valeurs."
+risque = "Partialité réelle ou perçue."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "election"
+description = "Composition entièrement élue."
+avantage = "Légitimité collective."
+risque = "Politisation et capture majoritaire."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "composition-mixte"
+description = "Conserver la moitié désignée et la moitié tirée au sort, ajouter récusation, contradictoire, objet borné, fin automatique et trace du tirage."
+avantage = "Respecte l'architecture actuelle avec contrepoids."
+risque = "Cas de nombre impair et recours à préciser."
+niveau = "mixte"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "discipline"
+question = "Sanctionner les atteintes réelles sans utiliser la radiation contre une opposition."
+candidate = "quatre-fonctions"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "bureau-complet"
+description = "Le Bureau reçoit, instruit, décide et traite le recours."
+avantage = "Simple."
+risque = "Confusion des rôles."
+niveau = "reglement"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "conseil-ethique"
+description = "Tout dossier est transféré au conseil d'éthique."
+avantage = "Regard spécialisé."
+risque = "Surcharge et compétence statutaire à confirmer."
+niveau = "decision-prealable"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "quatre-fonctions"
+description = "Séparer signalement, instruction, décision et recours ; récusation ; motivation ; mesure provisoire réexaminée."
+avantage = "Réduit sanction politique et erreur."
+risque = "Demande des personnes disponibles et indépendantes."
+niveau = "mixte"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "dissolution"
+question = "Rendre impossible une dissolution opportuniste ou une lecture choisie selon le résultat désiré."
+candidate = "clarification-statutaire"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "article-19-seul"
+description = "Considérer l'article 19 comme règle spéciale complète."
+avantage = "Lecture simple."
+risque = "Conclusion juridique non encore établie."
+niveau = "decision-prealable"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "cumul-15-19"
+description = "Appliquer cumulativement les exigences les plus fortes."
+avantage = "Prudence apparente."
+risque = "Peut créer une règle non écrite et une minorité de blocage."
+niveau = "decision-prealable"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "clarification-statutaire"
+description = "Faire relire puis, si nécessaire, modifier explicitement les statuts pour fixer procédure, seuils, délais, blancs et procurations."
+avantage = "Opposabilité et prévisibilité maximales."
+risque = "Procédure plus lourde avant toute dissolution."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "minorite-blocage"
+question = "Éviter qu'une minorité empêche indéfiniment une décision ordinaire tout en protégeant les droits."
+candidate = "convocations-graduees"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "quorum-fort-toujours"
+description = "Maintenir le même quorum à chaque convocation."
+avantage = "Forte participation."
+risque = "Boycott transformé en veto."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "aucun-quorum"
+description = "Supprimer les quorums."
+avantage = "Décisions possibles."
+risque = "Petite minorité pouvant décider seule."
+niveau = "statuts"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "convocations-graduees"
+description = "Conserver les mécanismes statutaires de seconde convocation, avec même ordre du jour, information renforcée et interdiction de changer la règle."
+avantage = "Équilibre déjà présent dans les statuts."
+risque = "Décisions fondamentales doivent garder leurs protections propres."
+niveau = "mixte"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "finances"
+question = "Empêcher captation financière sans paralyser les dépenses nécessaires."
+candidate = "seuils-separes"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "signature-unique"
+description = "Une fonction engage et paie seule."
+avantage = "Rapide."
+risque = "Fraude et erreur sans contrôle."
+niveau = "reglement"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "unanimite-tout"
+description = "Toute dépense exige unanimité."
+avantage = "Contrôle maximal."
+risque = "Paralysie par une personne."
+niveau = "reglement"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "seuils-separes"
+description = "Budget approuvé, pouvoirs par seuil, séparation engagement/paiement/contrôle, urgence plafonnée et ratifiée."
+avantage = "Proportionné au risque."
+risque = "Seuils et compte unique à faire expertiser."
+niveau = "mixte"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "actifs-numeriques"
+question = "Éviter qu'une personne ou un fournisseur emporte les moyens de l'association."
+candidate = "controle-associatif-redondant"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "administrateur-principal"
+description = "Un administrateur conserve tous les accès."
+avantage = "Simple."
+risque = "Point unique et captation."
+niveau = "procedure"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "prestataire"
+description = "Le fournisseur gère entièrement les accès."
+avantage = "Compétence externe."
+risque = "Dépendance et perte de réversibilité."
+niveau = "procedure"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "controle-associatif-redondant"
+description = "Comptes au nom de l'association, deux rôles, récupération, inventaire, export, révocation et restauration testée."
+avantage = "Continuité et contrôle partagé."
+risque = "Collusion ou perte simultanée restent possibles."
+niveau = "procedure"
+statut = "non-selectionnee"
+
+[[arbitrage]]
+id = "revision-periodique"
+question = "Corriger les failles découvertes sans réécriture opportuniste permanente."
+candidate = "revue-declencheurs"
+statut = "a-arbitrer"
+
+[[arbitrage.variante]]
+id = "date-fixe"
+description = "Révision complète à date fixe."
+avantage = "Prévisible."
+risque = "Révision artificielle sans signal ou trop tardive après incident."
+niveau = "reglement"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "incident-seul"
+description = "Réviser seulement après incident."
+avantage = "Effort ciblé."
+risque = "Prévention insuffisante."
+niveau = "reglement"
+statut = "non-selectionnee"
+
+[[arbitrage.variante]]
+id = "revue-declencheurs"
+description = "Revue périodique légère et revue complète après changement de droit, incident, évolution statutaire, technologie ou fournisseur."
+avantage = "Entretien proportionné et traçable."
+risque = "Nécessite responsables et calendrier."
+niveau = "reglement"
+statut = "non-selectionnee"

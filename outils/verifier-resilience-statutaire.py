@@ -15,6 +15,7 @@ MATRICE = RACINE / "docs" / "rd" / "statuts-matrice-tracabilite.toml"
 REGLEMENT = RACINE / "docs" / "rd" / "reglement-interieur-projet.md"
 FICHES = RACINE / "docs" / "rd" / "reglement-fiches-redaction.toml"
 COUVERTURE = RACINE / "docs" / "rd" / "statuts-couverture-angles-morts.toml"
+VARIANTES = RACINE / "docs" / "rd" / "statuts-variantes-consolidation.toml"
 ROLES_REQUIS = {
     "association-decisionnaire", "juridique-statutaire", "cryptographie-vote",
     "protection-donnees", "accessibilite-usages", "operations-securite",
@@ -227,6 +228,39 @@ def verifier_couverture(registre: dict) -> list[str]:
     return erreurs
 
 
+def verifier_variantes(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "resilience-statutaire-globale"
+        or meta.get("statut") != "a-arbitrer"
+        or meta.get("selection_effectuee") is not False
+    ):
+        erreurs.append("variantes à arbitrer sans sélection effectuée")
+    arbitrages = registre.get("arbitrage", [])
+    ids = [item.get("id") for item in arbitrages]
+    if len(arbitrages) != 15 or len(ids) != len(set(ids)):
+        erreurs.append("exactement 15 arbitrages sans doublon")
+    niveaux = {"statuts", "reglement", "procedure", "mixte", "decision-prealable"}
+    for item in arbitrages:
+        identifiant = item.get("id", "?")
+        variantes = item.get("variante", [])
+        ids_variantes = [variante.get("id") for variante in variantes]
+        if not item.get("question") or len(variantes) < 2 or len(ids_variantes) != len(set(ids_variantes)):
+            erreurs.append(f"arbitrage {identifiant} avec question et variantes distinctes")
+        if item.get("candidate") not in ids_variantes:
+            erreurs.append(f"arbitrage {identifiant} avec candidate existante")
+        if item.get("statut") != "a-arbitrer":
+            erreurs.append(f"arbitrage {identifiant} maintenu à arbitrer")
+        for variante in variantes:
+            variante_id = variante.get("id", "?")
+            if any(not variante.get(champ) for champ in ("description", "avantage", "risque")):
+                erreurs.append(f"variante {identifiant}/{variante_id} avec description, avantage et risque")
+            if variante.get("niveau") not in niveaux or variante.get("statut") != "non-selectionnee":
+                erreurs.append(f"variante {identifiant}/{variante_id} non sélectionnée avec niveau connu")
+    return erreurs
+
+
 def principal() -> int:
     with REGISTRE.open("rb") as fichier:
         registre = tomllib.load(fichier)
@@ -236,17 +270,20 @@ def principal() -> int:
         fiches = tomllib.load(fichier)
     with COUVERTURE.open("rb") as fichier:
         couverture = tomllib.load(fichier)
+    with VARIANTES.open("rb") as fichier:
+        variantes = tomllib.load(fichier)
     erreurs = (
         verifier(registre) + verifier_matrice(matrice)
         + verifier_reglement(REGLEMENT.read_text(encoding="utf-8"))
         + verifier_fiches(fiches) + verifier_couverture(couverture)
+        + verifier_variantes(variantes)
     )
     if erreurs:
         print("Registre de résilience incomplet :", file=sys.stderr)
         for erreur in erreurs:
             print(f"- {erreur}", file=sys.stderr)
         return 1
-    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles, 82 articles de règlement projetés, 19 fiches de rédaction, 16 angles morts au moins et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
+    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles, 82 articles de règlement projetés, 19 fiches de rédaction, 16 angles morts au moins, 15 arbitrages et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
     return 0
 
 

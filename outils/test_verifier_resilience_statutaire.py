@@ -14,6 +14,7 @@ MATRICE = RACINE / "docs" / "rd" / "statuts-matrice-tracabilite.toml"
 REGLEMENT = RACINE / "docs" / "rd" / "reglement-interieur-projet.md"
 FICHES = RACINE / "docs" / "rd" / "reglement-fiches-redaction.toml"
 COUVERTURE = RACINE / "docs" / "rd" / "statuts-couverture-angles-morts.toml"
+VARIANTES = RACINE / "docs" / "rd" / "statuts-variantes-consolidation.toml"
 spec = importlib.util.spec_from_file_location("verifier_resilience_statutaire", SCRIPT)
 MODULE = importlib.util.module_from_spec(spec)
 assert spec and spec.loader
@@ -32,6 +33,8 @@ class ResilienceStatutaireTests(unittest.TestCase):
             cls.fiches = tomllib.load(fichier)
         with COUVERTURE.open("rb") as fichier:
             cls.couverture = tomllib.load(fichier)
+        with VARIANTES.open("rb") as fichier:
+            cls.variantes = tomllib.load(fichier)
 
     def test_registre_courant_est_coherent(self):
         self.assertEqual(MODULE.verifier(self.registre), [])
@@ -39,6 +42,17 @@ class ResilienceStatutaireTests(unittest.TestCase):
         self.assertEqual(MODULE.verifier_reglement(self.reglement), [])
         self.assertEqual(MODULE.verifier_fiches(self.fiches), [])
         self.assertEqual(MODULE.verifier_couverture(self.couverture), [])
+        self.assertEqual(MODULE.verifier_variantes(self.variantes), [])
+
+    def test_refuse_une_variante_selectionnee_sans_arbitrage(self):
+        variantes = copy.deepcopy(self.variantes)
+        variantes["arbitrage"][0]["variante"][0]["statut"] = "selectionnee"
+        self.assertTrue(any("non sélectionnée" in erreur for erreur in MODULE.verifier_variantes(variantes)))
+
+    def test_refuse_la_suppression_d_un_arbitrage(self):
+        variantes = copy.deepcopy(self.variantes)
+        variantes["arbitrage"].pop()
+        self.assertTrue(any("15 arbitrages" in erreur for erreur in MODULE.verifier_variantes(variantes)))
 
     def test_refuse_de_fermer_un_angle_mort_sans_preuve(self):
         couverture = copy.deepcopy(self.couverture)
