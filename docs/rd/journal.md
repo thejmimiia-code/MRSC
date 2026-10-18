@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Pré-vérification juridique complète des statuts
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** relire les 25 pages article par article avant de poursuivre le QCM et la rédaction du règlement intérieur.
+- **Résultat :** une note de cohérence interne recense les questions de gouvernance, corps électoral, finances, sanctions, assemblées et dissolution ; les orientations déjà données par le fondateur sont séparées des règles actuellement écrites.
+- **Revue contradictoire :** une seconde passe a recherché conflits de compétence, définitions absentes, règles spéciales et procédures sans recours ; aucun sous-agent indépendant n’était disponible.
+- **Limite :** cette pré-vérification n’est ni un avis juridique ni une validation ; le droit positif actuel et la version déposée restent à confronter à des sources officielles et à une personne compétente.
+- **Prochaine action :** obtenir les documents absents, faire répondre un relecteur juridique aux douze questions bornées, puis reprendre le QCM sur la majorité d’adoption du règlement.
+
 ## 2026-10-18 — Calcul, contestation et proclamation séparés
 
 - **Initiative :** `vote-distanciel-verifiable`.

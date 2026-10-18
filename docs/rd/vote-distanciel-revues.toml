@@ -44,7 +44,7 @@ statut = "a-attribuer"
 
 [[revue]]
 id = "source-statutaire"
-artefacts = ["assets/documents/statuts-2020.pdf", "docs/rd/vote-distanciel-regles.toml", "docs/rd/vote-distanciel-profils.toml"]
+artefacts = ["assets/documents/statuts-2020.pdf", "docs/rd/statuts-revue-juridique.md", "docs/rd/vote-distanciel-regles.toml", "docs/rd/vote-distanciel-profils.toml"]
 roles_requis = ["association-decisionnaire", "juridique-statutaire"]
 question = "La bonne version est-elle utilisée et le profil choisi traduit-il les articles sans règle ajoutée ?"
 condition_sortie = "Version, règlement intérieur, ambiguïtés et profil confirmés dans une décision datée."
