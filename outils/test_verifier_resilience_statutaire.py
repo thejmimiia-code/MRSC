@@ -10,6 +10,7 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parent.parent
 SCRIPT = RACINE / "outils" / "verifier-resilience-statutaire.py"
 REGISTRE = RACINE / "docs" / "rd" / "statuts-risques.toml"
+MATRICE = RACINE / "docs" / "rd" / "statuts-matrice-tracabilite.toml"
 spec = importlib.util.spec_from_file_location("verifier_resilience_statutaire", SCRIPT)
 MODULE = importlib.util.module_from_spec(spec)
 assert spec and spec.loader
@@ -21,9 +22,22 @@ class ResilienceStatutaireTests(unittest.TestCase):
     def setUpClass(cls):
         with REGISTRE.open("rb") as fichier:
             cls.registre = tomllib.load(fichier)
+        with MATRICE.open("rb") as fichier:
+            cls.matrice = tomllib.load(fichier)
 
     def test_registre_courant_est_coherent(self):
         self.assertEqual(MODULE.verifier(self.registre), [])
+        self.assertEqual(MODULE.verifier_matrice(self.matrice), [])
+
+    def test_refuse_un_groupe_d_articles_supprime(self):
+        matrice = copy.deepcopy(self.matrice)
+        matrice["article"].pop()
+        self.assertTrue(any("20 groupes" in erreur for erreur in MODULE.verifier_matrice(matrice)))
+
+    def test_maintient_la_dissolution_bloquee(self):
+        matrice = copy.deepcopy(self.matrice)
+        next(item for item in matrice["article"] if item["id"] == "article-19")["statut"] = "valide"
+        self.assertTrue(any("dissolution" in erreur for erreur in MODULE.verifier_matrice(matrice)))
 
     def test_refuse_une_pretention_d_exhaustivite(self):
         registre = copy.deepcopy(self.registre)
