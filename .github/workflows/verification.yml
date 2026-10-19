@@ -54,6 +54,16 @@ jobs:
       - name: Vérifier le portefeuille et la continuité R&D
         run: python3 outils/verifier-rd-continue.py
 
+      - name: Vérifier les faits internes du brief prospectif
+        run: |
+          python3 outils/test_verifier_decision_prospective.py
+          python3 outils/verifier-decision-prospective.py
+
+      - name: Vérifier les garde-fous du vote distanciel
+        run: |
+          python3 outils/test_verifier_vote_distanciel.py
+          python3 outils/verifier-vote-distanciel.py
+
       - name: Vérifier le protocole éditorial commun
         run: python3 outils/test_protocole_editorial.py
 

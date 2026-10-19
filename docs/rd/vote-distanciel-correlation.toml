@@ -1,0 +1,84 @@
+# Plan d'épreuve uniquement : aucun jeu de données ni seuil n'est fourni.
+[meta]
+version = 1
+date = 2026-10-17
+initiative = "vote-distanciel-verifiable"
+statut = "a-faire-expertiser"
+donnees = "synthetiques-uniquement"
+execution_autorisee = false
+seuil_accepte = "a-definir-avant-exercice-par-revue-humaine"
+regle_arret = "Toute liaison exploitable selon le seuil préenregistré bloque le candidat."
+
+[[vue]]
+id = "emetteur"
+categories = ["identite-eligibilite", "journal-emission"]
+acteur_projete = "registre-eligibilite-separe"
+contenu_interdit = ["bulletin-chiffre", "recu-inclusion", "journal-urne"]
+
+[[vue]]
+id = "urne"
+categories = ["justificatif-anonyme", "bulletin-chiffre", "journal-urne"]
+acteur_projete = "operateur-urne-separe"
+contenu_interdit = ["identite-eligibilite", "journal-emission", "registre-procurations"]
+
+[[vue]]
+id = "public"
+categories = ["bulletin-chiffre", "preuves-publiques"]
+acteur_projete = "observateur-synthetique"
+contenu_interdit = ["identite-eligibilite", "journal-emission", "journal-urne"]
+
+[[vue]]
+id = "collusion-emetteur-urne"
+categories = ["identite-eligibilite", "journal-emission", "justificatif-anonyme", "bulletin-chiffre", "journal-urne"]
+acteur_projete = "equipe-attaque-distincte"
+contenu_interdit = ["donnee-reelle", "secret-non-prevu", "oracle-externe"]
+
+[[signal]]
+id = "temps"
+variation_synthetique = "Faire varier délai, précision, lotissement et ordre des événements."
+mesure_projetee = "Comparer avantage de liaison à une référence préenregistrée."
+
+[[signal]]
+id = "taille"
+variation_synthetique = "Faire varier tailles et bourrage selon des paramètres publiés avant l'essai."
+mesure_projetee = "Mesurer si une taille singularise un dépôt synthétique."
+
+[[signal]]
+id = "identifiant"
+variation_synthetique = "Rechercher réutilisation, préfixe, ordre ou encodage commun entre services."
+mesure_projetee = "Compter les correspondances déterministes ou quasi déterministes."
+
+[[signal]]
+id = "reseau"
+variation_synthetique = "Simuler uniquement des métadonnées réseau factices et documentées."
+mesure_projetee = "Évaluer l'avantage apporté par ces métadonnées sans adresse réelle."
+
+[[signal]]
+id = "sauvegarde"
+variation_synthetique = "Inventorier copies, instantanés et journaux factices après destruction simulée."
+mesure_projetee = "Vérifier qu'aucune copie ne restaure une liaison interdite."
+
+[[prerequis]]
+id = "seuil-preenregistre"
+preuve_attendue = "Définition humaine datée de la métrique, de la référence, du seuil et des intervalles avant génération."
+statut = "a-attribuer"
+
+[[prerequis]]
+id = "generateurs-reproductibles"
+preuve_attendue = "Spécification et graine publiques ne contenant aucune donnée personnelle."
+statut = "a-attribuer"
+
+[[prerequis]]
+id = "vues-validees"
+preuve_attendue = "Revue protection des données et opérations confirmant que chaque équipe ne reçoit que sa vue."
+statut = "a-attribuer"
+
+[[prerequis]]
+id = "attaque-independante"
+preuve_attendue = "Protocole figé et équipe distincte de l'équipe candidate, sans accès supplémentaire."
+statut = "a-attribuer"
+
+[[prerequis]]
+id = "destruction-verifiable"
+preuve_attendue = "Inventaire avant et après suppression de tout artefact synthétique transitoire."
+statut = "a-attribuer"

@@ -1,0 +1,170 @@
+# Relevé structuré des statuts — à faire relire, non exécutable.
+[meta]
+version = 1
+date_releve = 2026-10-17
+source = "assets/documents/statuts-2020.pdf"
+sha256 = "938bd5b72d70ab4e3737f61b91818a6813b29cc5453da44c81d5b7f33ca143c3"
+statut = "a-faire-relire"
+regle = "Ne pas transformer ces relevés en paramètres exécutables avant confirmation juridique, associative et documentaire."
+
+[[regle]]
+id = "vote-concernes-impactes"
+article = "3 et 5"
+pages = [7, 9]
+portee = "tous votes concernés"
+releve = "Seuls les membres concernés ou impactés votent ; conflit d'intérêt personnel exclu."
+ambiguite = "Qualification, recours et date de gel non définis dans le relevé."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "une-cotisation-une-voix"
+article = "4"
+pages = [8]
+portee = "adhésion de personne morale"
+releve = "Une personne physique, une cotisation, une voix."
+ambiguite = "Articulation exacte avec la représentation d'une personne morale à confirmer."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "bureau-electronique"
+article = "10.1"
+pages = [11]
+portee = "bureau exécutif"
+releve = "Consultation électronique admise ; majorité absolue des présents et représentés ; départage président ; procès-verbal."
+ambiguite = "Secret et définition de la présence à distance non précisés ici."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "bureau-procuration"
+article = "10.1"
+pages = [11]
+portee = "bureau exécutif"
+releve = "Une procuration maximum par membre ; pouvoirs en blanc non pris en compte."
+ambiguite = "Révocation et articulation avec un vote direct non détaillées."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "territorial-secret-blanc"
+article = "11.6"
+pages = [18]
+portee = "constitution d'une assemblée territoriale"
+releve = "Vote des membres présents à bulletin secret ; blanc majoritaire entraînant reprise avec de nouveaux candidats."
+ambiguite = "Présence distante et extension à d'autres scrutins non établies."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "ago-corps-ordre-du-jour"
+article = "14"
+pages = [22, 23]
+portee = "assemblée générale ordinaire"
+releve = "Membres à jour de cotisation ; convocation ; seules les questions à l'ordre du jour sont traitées."
+ambiguite = "Date de gel du corps électoral et modification d'une question non détaillées."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "ago-premiere-convocation"
+article = "14"
+pages = [22, 23]
+portee = "AGO première convocation"
+releve = "Quorum de 25 % ; majorité absolue des présents et représentés ; voix du président prépondérante en cas d'égalité."
+ambiguite = "Dénominateur exact et articulation départage-secret à confirmer."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "ago-seconde-convocation"
+article = "14"
+pages = [22, 23]
+portee = "AGO seconde convocation"
+releve = "Même ordre du jour, sept jours d'intervalle, délibération quel que soit le nombre de membres présents."
+ambiguite = "Calcul des représentés et maintien exact de la majorité à confirmer."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "ago-procuration"
+article = "14"
+pages = [23]
+portee = "assemblée générale ordinaire"
+releve = "Deux pouvoirs maximum par membre ; pouvoirs en blanc non pris en compte."
+ambiguite = "Révocation, substitution et secret du mandant non détaillés."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "ago-secret"
+article = "14"
+pages = [23]
+portee = "assemblée générale ordinaire"
+releve = "Scrutin secret sur demande du président ou de la majorité des présents ou représentés."
+ambiguite = "Moment et procédure de la demande à fixer avant réception de bulletins."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "ago-session-numerique"
+article = "14"
+pages = [23]
+portee = "assemblée générale ordinaire"
+releve = "Session numérique ouverte au moins sept jours ; réponses transmises comptées dans le quorum."
+ambiguite = "Définition d'une réponse transmise et traitement d'une réponse vide à confirmer."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "age-premiere-convocation"
+article = "15"
+pages = [23, 24]
+portee = "AGE première convocation"
+releve = "Demande du fondateur ou de 51 % des membres ; quorum 51 % ; majorité absolue des présents et représentés."
+ambiguite = "Preuve de la demande et dénominateur exact à confirmer."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "age-procuration"
+article = "15"
+pages = [24]
+portee = "assemblée générale extraordinaire"
+releve = "Une procuration maximum par membre ; pouvoirs en blanc non pris en compte."
+ambiguite = "Révocation, substitution et secret non détaillés."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "age-seconde-convocation"
+article = "15"
+pages = [24]
+portee = "AGE seconde convocation"
+releve = "Même ordre du jour, quinze jours d'intervalle, sans minimum de présents, décision à l'unanimité."
+ambiguite = "Articulation avec les règles spéciales de dissolution à confirmer."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "dissolution-seuils"
+article = "19"
+pages = [25]
+portee = "dissolution"
+releve = "Majorité des deux tiers ; quorum de 60 % en première instance et 30 % en seconde réunie dans le mois."
+ambiguite = "Articulation avec l'article 15, procuration et secret à interpréter."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "conseil-ethique-electronique"
+article = "10.2.1"
+pages = [13]
+portee = "conseil d'éthique"
+releve = "Consultations électroniques admises ; une procuration maximum ; pouvoirs en blanc non pris en compte ; majorité absolue ; départage par le fondateur ou le membre le plus ancien."
+ambiguite = "Constitution du conseil, présence distante, secret et conflit d'intérêt à confirmer."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "phases-participatives"
+article = "11.9"
+pages = [20]
+portee = "fonctionnement participatif territorial"
+releve = "Le vote vient après information, compréhension, débat, analyse, proposition, contrôle d'éthique et synthèse."
+ambiguite = "Portée exacte au-delà des groupes et commissions territoriales à confirmer."
+statut = "a-faire-relire"
+
+[[regle]]
+id = "ago-proces-verbal"
+article = "14"
+pages = [23]
+portee = "assemblée générale ordinaire"
+releve = "Un procès-verbal des séances est tenu et signé par le président ou le vice-président."
+ambiguite = "Contenu, publication, signature électronique et conservation à préciser."
+statut = "a-faire-relire"

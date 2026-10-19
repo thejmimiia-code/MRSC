@@ -1,0 +1,71 @@
+# Plan de preuves projeté : aucun logiciel candidat n'est construit ou exécuté.
+[meta]
+version = 1
+date = 2026-10-18
+initiative = "vote-distanciel-verifiable"
+statut = "a-faire-expertiser"
+execution_autorisee = false
+selection_effectuee = false
+principe = "Toute preuve doit relier une version source précise à l'artefact réellement évalué, sans confiance implicite dans le dépôt ou le fournisseur."
+
+[[controle]]
+id = "source-epinglee"
+question = "Le code candidat est-il identifié par dépôt, commit complet, licence et état des sous-modules ?"
+preuve_attendue = "Manifeste daté et empreintes vérifiées depuis deux canaux indépendants."
+condition_arret = "La source précise ou sa licence ne peut pas être établie."
+interdits = ["branche-flottante", "archive-sans-empreinte", "version-latest"]
+statut = "a-faire-expertiser"
+
+[[controle]]
+id = "dependances-fermees"
+question = "Les dépendances directes, transitives, outils et images de construction sont-ils épinglés ?"
+preuve_attendue = "Fichiers de verrouillage, inventaire des composants et résolution hors réseau documentée."
+condition_arret = "Une construction télécharge un composant mutable ou non inventorié."
+interdits = ["version-flottante", "script-distant", "registre-non-epingle"]
+statut = "a-faire-expertiser"
+
+[[controle]]
+id = "construction-reproductible"
+question = "Deux environnements indépendants produisent-ils des artefacts identiques ou des écarts entièrement expliqués ?"
+preuve_attendue = "Instructions, environnements figés, empreintes et rapport des différences."
+condition_arret = "L'artefact évalué ne peut pas être relié de façon reproductible au code annoncé."
+interdits = ["artefact-fournisseur-seul", "correction-binaire", "ecart-ignore"]
+statut = "a-faire-expertiser"
+
+[[controle]]
+id = "provenance-et-signatures"
+question = "La provenance des sources, dépendances et artefacts peut-elle être vérifiée hors de l'interface du fournisseur ?"
+preuve_attendue = "Attestations, signatures, identités de rôles et politique de rotation à expertiser."
+condition_arret = "Une signature est acceptée sans relier sa clé à un rôle et à une version."
+interdits = ["signature-auto-declaree", "cle-unique-indefinie", "preuve-hebergee-seulement"]
+statut = "a-faire-expertiser"
+
+[[controle]]
+id = "analyse-des-ecarts"
+question = "Les vulnérabilités, correctifs locaux et différences avec la version auditée sont-ils explicités ?"
+preuve_attendue = "Inventaire borné, dates, périmètres et revue compétente de chaque écart."
+condition_arret = "Un audit d'une autre version est transposé sans analyse."
+interdits = ["audit-par-analogie", "absence-egale-securite", "score-global"]
+statut = "a-faire-expertiser"
+
+[[controle]]
+id = "mise-a-jour-gelee"
+question = "Toute mise à jour après gel déclenche-t-elle une nouvelle construction, vérification et décision humaine ?"
+preuve_attendue = "Procédure de gel, journal synthétique de changement et exercice de refus."
+condition_arret = "Un composant peut se mettre à jour silencieusement avant ou pendant l'exercice."
+interdits = ["mise-a-jour-automatique", "correctif-sans-revue", "image-mutable"]
+statut = "a-faire-expertiser"
+
+[[controle]]
+id = "retrait-et-verification-future"
+question = "Les preuves restent-elles vérifiables si le dépôt, le fournisseur ou une infrastructure disparaît ?"
+preuve_attendue = "Paquet exportable, dépendances permises, documentation et vérification hors ligne."
+condition_arret = "La vérification dépend d'un service unique ou d'un secret fournisseur."
+interdits = ["url-seule", "api-obligatoire", "secret-fournisseur"]
+statut = "a-faire-expertiser"
+
+[[porte]]
+id = "avant-banc"
+exigences = ["source-epinglee", "dependances-fermees", "construction-reproductible", "provenance-et-signatures", "analyse-des-ecarts", "mise-a-jour-gelee", "retrait-et-verification-future"]
+decision = "revue-humaine-requise"
+statut = "bloquante"

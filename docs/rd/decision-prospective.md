@@ -16,13 +16,13 @@ La décision porte sur l'allocation du temps de relecture, pas sur l'ajout d'une
 | Fiches explicitement « prototypes à relire » | **55** | Statuts du catalogue |
 | Fiches dont la date de revue est échue | **0** | `python3 outils/construire-apprentissages.py --verifier` |
 | Prochaine revue du portefeuille R&D | **2026-11-12** | `docs/rd/portefeuille.toml` |
-| Initiatives R&D suivies | 14, dont 4 en priorité P0 | Portefeuille |
+| Initiatives R&D suivies | 15, dont 5 en priorité P0 | Portefeuille |
 | Boussole publiée | 10 questions statiques, liens édités à la main, aucune collecte | `apprendre.html#boussole-savoirs` |
 | Poids estimé de la page Apprendre | 159 Kio mobile / 309 Kio grand écran (gzip estimé) | `docs/rd/poids-pages.md` |
 | En-têtes servis par GitHub Pages | types AVIF/WebP corrects, gzip sur le texte, cache 600 s | Issue #90 |
 | Essais navigateur | 8/8, dont 320 px, zoom 150 %, contraste renforcé | `outils/test-experience.cjs` |
 
-Reproduire l'essentiel : `python3 outils/etat-rd.py`.
+Reproduire l'essentiel : `python3 outils/etat-rd.py`. Vérifier que sept repères internes de ce tableau suivent encore leurs sources (corpus, revues, portefeuille, Boussole et poids local) : `python3 outils/verifier-decision-prospective.py`. Les dates et échéances sont recalculées à la date lue dans l’en-tête — ici le **17 octobre 2026** — et le contrôle refuse une date différente dans le tableau. Elles ne dépendent pas de la date d’exécution. Le même outil accepte une trace entièrement vide (« en attente ») ou entièrement renseignée, mais refuse une décision partielle, une option autre que A/B/C et des dates non normalisées. Pour une trace complète, la décision ne peut pas précéder le brief et le réexamen doit être postérieur à la décision. Il exige aussi que « en attente » corresponde à l’état `a-cadrer` du portefeuille, et qu’une décision consignée fasse évoluer cet état dans le même changement. Ce contrôle de cohérence ne valide ni le cadrage ni une option.
 
 ## 3. Ce qui n'est pas établi
 
@@ -71,7 +71,22 @@ Conditions minimales avant toute séance :
 - Un retrait supplémentaire du canal humain dans les services publics renforcerait l'intérêt d'un parcours **imprimable et autonome**, pas nécessairement d'un parcours en ligne.
 - Une obligation juridique nouvelle sur l'étiquetage des contenus générés pourrait déplacer l'effort vers la traçabilité des pages existantes.
 
-## 8. Questions à trancher par l'association
+## 8. Pré-mortem du pilote — avant toute décision
+
+Cette revue contradictoire n'attribue aucune probabilité aux scénarios. Elle cherche les façons dont chaque option pourrait échouer, le signal observable et la réponse la plus réversible.
+
+| Échec possible | Signal à vérifier sans suivi individuel | Réponse réversible | Porte humaine |
+| --- | --- | --- | --- |
+| La Boussole duplique la recherche et les filtres | Les mêmes trois tâches sont réalisables aussi clairement depuis l'atlas lors d'une comparaison préparée | Retirer le pilote et conserver les liens éditoriaux utiles dans les fiches | Relecture éditoriale de la comparaison |
+| Le mot « partiel » est compris comme une note de qualité | Pendant un éventuel essai autorisé, plus de deux personnes sur cinq l'interprètent comme « peu fiable » ou comme un niveau personnel | Reformuler la légende avant tout nouvel essai ; ne pas modifier les statuts sources | Relecture pédagogique et accessibilité cognitive |
+| Les relations entre fiches deviennent une seconde source de vérité | Un identifiant, statut ou lien diffère du catalogue ou du référentiel | Bloquer la publication ; générer depuis les sources existantes ou supprimer la relation | Revue de maintenance du catalogue |
+| Une fonction distante devient nécessaire au parcours | Le cœur de la tâche échoue sans réseau, stockage ou script optionnel | Revenir à la liste statique imprimable ; aucune synchronisation ni compte | Revue technique et confidentialité |
+| La relecture disponible est absorbée par le pilote | Les 9 prototypes des domaines sensibles n'ont pas de rôle de relecture attribué | Revenir à l'option A et consacrer le temps aux contenus à risque | Arbitrage explicite de l'association |
+| Un pilote en ligne collecte plus que nécessaire | Le protocole demande clics, chemins ou durées sans décision qu'ils permettraient de prendre | Ne pas instrumenter ; tester sur papier ou ne rien construire | Revue confidentialité/droit préalable |
+
+**Règle de décision proposée :** une option n'est pas retenue parce qu'elle cumule le plus de fonctions, mais parce qu'elle répond à une question encore ouverte avec le moins de dépendances, de collecte et de maintenance. En l'absence des rôles de relecture requis, l'option A reste le repli prévu au 31 janvier 2027.
+
+## 9. Questions à trancher par l'association
 
 1. Qui peut relire les 10 questions et les 3 fiches reliées, et à quelle date ?
 2. Le pilote papier est-il acceptable, ou faut-il attendre une relecture experte complète ?
@@ -79,7 +94,7 @@ Conditions minimales avant toute séance :
 4. La Boussole doit-elle rester visible sur `apprendre.html` en attendant la décision ?
 5. Qui décide, et comment la décision sera-t-elle consignée dans le journal ?
 
-## 9. Trace de décision
+## 10. Trace de décision
 
 | Champ | À remplir par l'association |
 | --- | --- |

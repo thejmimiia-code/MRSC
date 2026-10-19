@@ -1,0 +1,330 @@
+# Matrice de travail : ne remplace ni le PDF, ni une interprétation juridique.
+[meta]
+version = 1
+date = 2026-10-18
+initiative = "resilience-statutaire-globale"
+source = "assets/documents/statuts-2020.pdf"
+sha256 = "938bd5b72d70ab4e3737f61b91818a6813b29cc5453da44c81d5b7f33ca143c3"
+statut = "a-faire-relire"
+regle = "Toute modalité ajoutée doit citer sa source, rester dans la compétence attribuée et prévoir preuve, recours et fin des pouvoirs temporaires."
+
+[[article]]
+id = "article-1"
+pages = [3, 4]
+objet = "Constitution, dénomination et adhésion aux statuts"
+competence = "assemblee-extraordinaire-pour-modification"
+preuve = "version déposée, récépissé et procès-verbal d'adoption"
+recours = "contestation-documentaire-puis-instance-competente"
+urgence = "aucune-modification-provisoire"
+point_a_trancher = "Concordance des personnes et mentions avec la version déclarée."
+statut = "a-faire-relire"
+
+[[article]]
+id = "articles-1-2-1-3"
+pages = [4]
+objet = "Durée et siège"
+competence = "bureau-executif-pour-transfert-du-siege"
+preuve = "décision datée et formalité déclarative"
+recours = "controle-par-les-membres-et-voie-juridique-competente"
+urgence = "adresse-temporaire-sans-modification-silencieuse"
+point_a_trancher = "Procédure de publication et mise à jour de la copie publique."
+statut = "a-faire-relire"
+
+[[article]]
+id = "article-2"
+pages = [5, 6]
+objet = "Objet et activités"
+competence = "organes-selon-acte-et-assemblee-extraordinaire-pour-modification"
+preuve = "mandat, budget, convention et décision de l'organe compétent"
+recours = "signalement-conflit-interets-et-controle-associatif"
+urgence = "aucune-extension-irréversible-de-l-objet"
+point_a_trancher = "Répartition des pouvoirs pour actes économiques, immobiliers et alliances."
+statut = "a-faire-relire"
+
+[[article]]
+id = "article-3"
+pages = [7, 8]
+objet = "Valeurs, membres concernés et conflits d'intérêts"
+competence = "organe-deliberant-avec-recusation"
+preuve = "liste des habilités figée et déclaration de conflit minimisée"
+recours = "contestation-de-l-eligibilite-par-instance-distincte"
+urgence = "aucune-suppression-du-contradictoire"
+point_a_trancher = "Critères et autorité déterminant les membres impactés ou concernés."
+statut = "a-faire-relire"
+
+[[article]]
+id = "articles-4-5"
+pages = [8, 9]
+objet = "Adhésion, personnes morales et droit de vote"
+competence = "bureau-pour-admission-selon-regles-et-organe-de-recours"
+preuve = "adhésion, cotisation et qualité à une date de gel"
+recours = "correction-du-registre-et-contestation-d-un-refus"
+urgence = "aucune-admission-ou-exclusion-opportuniste"
+point_a_trancher = "Articulation personne morale, personne physique, cotisation et voix."
+statut = "a-faire-relire"
+
+[[article]]
+id = "articles-6-8"
+pages = [9]
+objet = "Compte unique, cotisation, rémunérations et remboursements"
+competence = "bureau-et-fonctions-financieres-sous-controle-de-l-assemblee"
+preuve = "budget, pièces, rapprochement, délégations et comptes rendus"
+recours = "alerte-financiere-recusation-et-controle-externe-si-requis"
+urgence = "paiements-indispensables-bornes-et-ratifies"
+point_a_trancher = "Compte unique, fonds territoriaux et définition du salaire médian de référence."
+statut = "a-faire-relire"
+
+[[article]]
+id = "article-9"
+pages = [10]
+objet = "Règlement intérieur"
+competence = "a-confirmer-proposition-fondateur-puis-ago"
+preuve = "projet versionné, convocation, vote et procès-verbal"
+recours = "contestation-de-conformite-aux-statuts"
+urgence = "aucune-modification-du-reglement-par-urgence"
+point_a_trancher = "Compétence, quorum, majorité, entrée en vigueur et modification."
+statut = "a-faire-relire"
+
+[[article]]
+id = "article-10-1"
+pages = [10, 11, 12]
+objet = "Bureau exécutif, consultations, procurations, vacance et urgence"
+competence = "bureau-executif-dans-les-mandats-valides"
+preuve = "convocation, présences, pouvoirs, vote et procès-verbal"
+recours = "controle-associatif-recusation-et-ratification-des-urgences"
+urgence = "unanimite-bornee-puis-ratification-a-definir"
+point_a_trancher = "Quorum, portée des mandats, durée des intérims et critères d'urgence."
+statut = "a-faire-relire"
+
+[[article]]
+id = "articles-10-2-10-3"
+pages = [12, 13, 14]
+objet = "Fondateur, conseil d'éthique et cofondateurs"
+competence = "fondateur-pour-initiative-et-conseil-pour-litige-borne"
+preuve = "saisine, composition, tirage, délibération et fin de mission"
+recours = "recusation-contradictoire-et-reexamen-a-definir"
+urgence = "aucune-perennisation-du-conseil-temporaire"
+point_a_trancher = "Succession, indisponibilité, saisine, impartialité et portée des décisions."
+statut = "a-faire-relire"
+
+[[article]]
+id = "articles-10-4-10-7"
+pages = [14, 15]
+objet = "Président, vice-président, secrétaire et trésorier"
+competence = "fonctions-nommees-ou-elues-selon-phase-a-clarifier"
+preuve = "élection ou désignation, mandat, délégation et inventaire des accès"
+recours = "controle-par-organe-competent-et-revocation-a-definir"
+urgence = "suppleance-limitee-sans-transfert-general"
+point_a_trancher = "Élection après lancement, renouvellement, révocation et séparation financière."
+statut = "a-faire-relire"
+
+[[article]]
+id = "articles-11-11-5"
+pages = [16, 17]
+objet = "Territoires et fonctions territoriales"
+competence = "assemblee-territoriale-et-bureau-dans-leurs-attributions"
+preuve = "rattachement, élection, mandat, comptes et remontées"
+recours = "contestation-du-rattachement-ou-de-l-election"
+urgence = "interim-territorial-borne"
+point_a_trancher = "Délimitation, chevauchement, autonomie et fonds compatibles avec le compte unique."
+statut = "a-faire-relire"
+
+[[article]]
+id = "article-11-6"
+pages = [18, 19]
+objet = "Assemblée territoriale, élections secrètes et vote blanc"
+competence = "membres-presents-de-l-assemblee-territoriale"
+preuve = "liste des présents, candidatures, bulletin secret, décompte et procès-verbal"
+recours = "contestation-electorale-territoriale-a-definir"
+urgence = "aucune-election-sans-secret-ni-nouveaux-candidats-requis"
+point_a_trancher = "Présence distante, blanc majoritaire, reprises et absence de candidats."
+statut = "a-faire-relire"
+
+[[article]]
+id = "articles-11-7-11-9"
+pages = [19, 20]
+objet = "Commissions et phases participatives"
+competence = "assemblees-et-commissions-dans-leur-mandat"
+preuve = "candidatures, productions, synthèse et ordre des phases"
+recours = "objection-jointe-a-la-synthese-et-contestation-du-processus"
+urgence = "aucun-vote-court-circuitant-information-et-debat"
+point_a_trancher = "Critères de compétence, contrôle éthique et délai entre phases."
+statut = "a-faire-relire"
+
+[[article]]
+id = "article-12"
+pages = [21]
+objet = "Perte de qualité et radiation"
+competence = "bureau-executif-avec-garanties-contradictoires"
+preuve = "griefs, notification, observations, décision motivée et date d'effet"
+recours = "instance-impartiale-a-definir"
+urgence = "suspension-exceptionnelle-bornee-sans-radiation-automatique"
+point_a_trancher = "Charte applicable, impartialité, proportionnalité et recours."
+statut = "a-faire-relire"
+
+[[article]]
+id = "article-13"
+pages = [21]
+objet = "Ressources et responsabilité avant validation de l'assemblée"
+competence = "bureau-pour-gestion-et-assemblee-pour-validation-a-preciser"
+preuve = "comptes, inventaire, rapports et décision d'assemblée"
+recours = "controle-financier-et-traitement-des-conventions-liees"
+urgence = "depenses-essentielles-seulement-selon-limites"
+point_a_trancher = "Approbation des comptes, quitus, refus et activités économiques."
+statut = "a-faire-relire"
+
+[[article]]
+id = "article-14"
+pages = [22, 23]
+objet = "Assemblée générale ordinaire"
+competence = "membres-a-jour-presents-et-representes"
+preuve = "convocation, ordre du jour, liste gelée, quorum, décompte et procès-verbal"
+recours = "contestation-avant-proclamation-et-organe-a-definir"
+urgence = "report-ou-annulation-sans-changement-retroactif"
+point_a_trancher = "Réponse numérique, majorité absolue, blancs, secret, départage et procurations."
+statut = "a-faire-relire"
+
+[[article]]
+id = "article-15"
+pages = [23, 24]
+objet = "Assemblée générale extraordinaire"
+competence = "membres-presents-et-representes-apres-saisine-valide"
+preuve = "demande, convocation, ordre du jour, quorum, pouvoirs, vote et procès-verbal"
+recours = "contestation-de-la-convocation-du-quorum-ou-du-resultat"
+urgence = "aucune-modification-statutaire-provisoire"
+point_a_trancher = "Unanimité de seconde convocation, secret et articulation avec la dissolution."
+statut = "a-faire-relire"
+
+[[article]]
+id = "article-16"
+pages = [24]
+objet = "Formalités déclaratives"
+competence = "president-ou-mandataire-regulier"
+preuve = "dossier, dépôt, récépissé et registre des modifications"
+recours = "correction-de-formalite-et-controle-de-la-decision-source"
+urgence = "conservation-des-actes-si-service-indisponible"
+point_a_trancher = "Références légales, délais et formalités actuelles."
+statut = "a-faire-relire"
+
+[[article]]
+id = "articles-17-18"
+pages = []
+objet = "Numéros absents de la copie"
+competence = "aucune-presumee"
+preuve = "comparaison avec version déposée et procès-verbal de 2020"
+recours = "correction-par-procedure-statutaire-si-omission"
+urgence = "aucun-contenu-recree-par-reglement"
+point_a_trancher = "Numérotation volontaire ou contenu manquant."
+statut = "bloque-verification-source"
+
+[[article]]
+id = "article-19"
+pages = [25]
+objet = "Dissolution, liquidateurs et dévolution"
+competence = "assemblee-generale-extraordinaire"
+preuve = "convocation, quorums, majorité, pouvoirs, procès-verbal et opérations de liquidation"
+recours = "contestation-juridique-et-controle-des-liquidateurs"
+urgence = "aucune-dissolution-provisoire-ou-automatique"
+point_a_trancher = "Portée spéciale par rapport à l'article 15, seconde instance, blancs, abstentions et procurations."
+statut = "bloque-interpretation-juridique"
+
+# Classement projeté du niveau normatif — à confirmer juridiquement.
+[[classement]]
+article = "article-1"
+niveau = "statuts"
+justification = "Constitution, identité et qualité fondatrice relèvent du pacte constitutif."
+
+[[classement]]
+article = "articles-1-2-1-3"
+niveau = "mixte"
+justification = "Durée, siège et compétence de transfert restent statutaires ; formalités et publication relèvent d'une procédure."
+
+[[classement]]
+article = "article-2"
+niveau = "statuts"
+justification = "L'objet borne la capacité associative ; budgets et modalités d'exécution relèvent ensuite des procédures."
+
+[[classement]]
+article = "article-3"
+niveau = "mixte"
+justification = "Valeurs et droit de vote restent statutaires ; qualification, récusation et recours doivent être détaillés au règlement."
+
+[[classement]]
+article = "articles-4-5"
+niveau = "mixte"
+justification = "Qualités et droits essentiels restent statutaires ; admission, registre, gel et correction relèvent du règlement et des procédures."
+
+[[classement]]
+article = "articles-6-8"
+niveau = "mixte"
+justification = "Principes financiers et compétences restent statutaires ; contrôles, pièces, seuils et circuits relèvent du règlement et des procédures."
+
+[[classement]]
+article = "article-9"
+niveau = "decision-prealable"
+justification = "La procédure d'adoption n'est pas écrite ; un avis doit déterminer si le règlement suffit ou si les statuts doivent être complétés."
+
+[[classement]]
+article = "article-10-1"
+niveau = "mixte"
+justification = "Composition, pouvoirs et règles de vote restent statutaires ; convocations, mandats, intérims et urgence doivent être détaillés sans étendre les pouvoirs."
+
+[[classement]]
+article = "articles-10-2-10-3"
+niveau = "mixte"
+justification = "Fonctions du fondateur, des cofondateurs et du conseil restent statutaires ; saisine, tirage, contradictoire et fin de mission relèvent du règlement."
+
+[[classement]]
+article = "articles-10-4-10-7"
+niveau = "decision-prealable"
+justification = "Le passage des désignations initiales aux élections ultérieures peut nécessiter une clarification statutaire avant toute modalité réglementaire."
+
+[[classement]]
+article = "articles-11-11-5"
+niveau = "mixte"
+justification = "Organes et mandats territoriaux restent statutaires ; rattachement, chevauchement, finances et intérims relèvent du règlement."
+
+[[classement]]
+article = "article-11-6"
+niveau = "mixte"
+justification = "Secret, présence et effet du blanc restent statutaires ; candidatures, reprises, preuve et recours relèvent du règlement."
+
+[[classement]]
+article = "articles-11-7-11-9"
+niveau = "mixte"
+justification = "Ordre participatif et organes restent statutaires ; délais, formats, objections et productions relèvent du règlement et des procédures."
+
+[[classement]]
+article = "article-12"
+niveau = "mixte"
+justification = "Causes de perte de qualité et organe restent statutaires ; contradictoire, proportionnalité, recours et données relèvent du règlement."
+
+[[classement]]
+article = "article-13"
+niveau = "mixte"
+justification = "Catégories de ressources et responsabilité restent statutaires ; budget, comptes, conventions et contrôles relèvent du règlement."
+
+[[classement]]
+article = "article-14"
+niveau = "mixte"
+justification = "Corps, quorum, majorité, procuration et compétences restent statutaires ; définitions et déroulement doivent être précisés au règlement."
+
+[[classement]]
+article = "article-15"
+niveau = "mixte"
+justification = "Compétences, quorums et majorités restent statutaires ; preuves, convocations, recours et modalités numériques relèvent du règlement."
+
+[[classement]]
+article = "article-16"
+niveau = "procedure"
+justification = "La compétence statutaire existe ; délais, pièces, dépôts, récépissés et conservation sont des modalités actualisables."
+
+[[classement]]
+article = "articles-17-18"
+niveau = "decision-prealable"
+justification = "Aucun niveau ne peut être attribué avant comparaison avec la version déposée et le procès-verbal."
+
+[[classement]]
+article = "article-19"
+niveau = "decision-prealable"
+justification = "L'articulation avec l'article 15 doit être tranchée juridiquement ; le règlement ne peut choisir ou réécrire les seuils."
