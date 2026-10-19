@@ -1,0 +1,61 @@
+name: Audit des branches et des fusions
+
+# Contrôle volontairement séparé de la porte de vérification : il a besoin de
+# l'historique complet et de toutes les branches (dépôt lourd, ~1,3 Go), alors
+# que la porte des propositions reste légère. Il répond à une seule question :
+# supprimer une branche distante ferait-il perdre du contenu ?
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Filet de sécurité mensuel : signale toute branche qui porterait un contenu
+    # unique, donc non récupérable après suppression.
+    - cron: "41 5 2 * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: audit-branches
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Récupérer tout l'historique et toutes les branches
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Récupérer les branches distantes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*' --tags
+
+      - name: Installer Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Auditer les branches et l'état des fusions
+        shell: bash
+        run: |
+          set -uo pipefail
+          rapport="$RUNNER_TEMP/audit-branches.log"
+          python3 outils/verifier-fusions.py --branches | tee "$rapport"
+          statut=${PIPESTATUS[0]}
+          {
+            echo "## Audit des branches et des fusions"
+            echo
+            echo '```'
+            cat "$rapport"
+            echo '```'
+            if [ "$statut" -ne 0 ]; then
+              echo
+              echo "> Au moins une branche porte un contenu absent des autres références : ne pas la supprimer avant de l'avoir récupéré."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$statut"

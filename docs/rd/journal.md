@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-19 — Fusionner et importer sans perte : contrôle ajouté et branches absorbées supprimées
+
+- **Initiative :** `coordination-de-tous-les-agents`.
+- **Signal :** exigence que toute fusion ou import se fasse sans perte de contenu et sans laisser d'erreur ouverte.
+- **Constat :** après la vague de fusions, cinq branches distantes subsistaient sans proposition ouverte. Leur contenu était absorbé par `main`, mais rien ne le prouvait, et rien n'empêchait qu'une branche portant un travail unique soit supprimée par inadvertance.
+- **Décision :** écrire le critère de non-perte au lieu de l'estimer. Une branche est supprimable si **tous ses blobs restent atteignables depuis les autres références** ; l'outil `outils/verifier-fusions.py` le calcule et refuse de déclarer supprimable une branche qui porte un contenu unique. Il contrôle aussi, hors ligne, l'absence de fusion inachevée, de fichier non fusionné, de marqueur de conflit, de sauvegarde `.orig`/`.rej`, et l'ordre antichronologique du journal.
+- **Résultat :** les cinq branches (`arena/1630fc34`, `arena/5570078e`, `arena/7d6aa1e7`, `arena/a708368f`, `arena/cd07d282`) ont été vérifiées « supprimable sans perte » puis supprimées ; il ne reste que `main`. Les 505 planches de `arena/cd07d282` restent récupérables : l'archive de l'étiquette a été re-vérifiée après suppression, 507 fichiers conformes.
+- **Outillage :** `verifier-fusions.py` entre dans la porte de vérification et dans `AGENTS.md`, qui gagne une section « Fusionner et importer sans perte » ; un workflow `audit-branches.yml` relit les branches une fois par mois et à la demande.
+- **Limite :** le contrôle de suppression porte sur l'accessibilité des objets, pas sur leur intérêt ; une branche peut être « supprimable sans perte » et contenir un travail que personne n'a relu. La décision éditoriale reste humaine.
+- **Contrôles réellement exécutés :** audit des cinq branches avant suppression ; cas d'échec simulés (contenu unique sur une branche, marqueur de conflit, fichier `.orig` suivi) tous refusés ; après suppression, audit sans branche hors `main` et `sha256sum -c` sur l'archive (507 conformes) ; porte de vérification complète.
+- **Prochaine action :** lancer `audit-branches.yml` à la demande avant toute nouvelle suppression, et ne jamais résoudre un conflit en écartant un côté sans avoir comparé les deux.
+
 ## 2026-10-19 — La lecture des en-têtes suit la publication au lieu de la précéder
 
 - **Initiative :** `optimisation-du-site`.

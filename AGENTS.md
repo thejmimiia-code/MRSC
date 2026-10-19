@@ -53,6 +53,18 @@ L'[index de la bibliothèque](.agents/skills/README.md) et le [dossier de recher
 
 Pour Claude Code, le point d’entrée visuel du projet est [`.claude/skills/direction-artistique-motion/SKILL.md`](.claude/skills/direction-artistique-motion/SKILL.md) ; il renvoie vers la carte méthodologique partagée. Les références amont épinglées et licenciées [`frontend-design`](.claude/skills/frontend-design/) et [`motion-design`](.claude/skills/motion-design/) sont facultatives ; leurs fichiers de provenance et empreintes permettent l’audit, et les règles M.R.S.C. priment.
 
+## Fusionner et importer sans perte
+
+Une fusion ou une suppression de branche ne doit laisser ni contenu perdu, ni erreur ouverte.
+
+- **Avant de fusionner :** lancer la porte de vérification sur la branche fusionnée, pas seulement sur la branche source. Un conflit se résout en comparant les deux versions, jamais en gardant un seul côté sans avoir lu l'autre.
+- **Avant d'importer un travail venu d'ailleurs :** vérifier qu'il n'écrase pas un travail plus récent. Comparer avec `git diff <ref> main` et lire chaque ligne que le passage à `main` supprimerait.
+- **Avant de supprimer une branche :** `python3 outils/verifier-fusions.py --branches` doit répondre « supprimable sans perte » pour cette branche. Critère : tous ses blobs restent atteignables depuis les autres références (main, étiquettes).
+- **Après une fusion :** constater que les workflows de `main` sont verts (vérification, publication, en-têtes, veille) avant de passer à autre chose ; une publication qui échoue est une erreur laissée ouverte.
+- **Après une résolution de conflit :** vérifier l'ordre du journal de R&D, l'absence de marqueurs de conflit et de fichiers `.orig`/`.rej` ; la porte les contrôle désormais.
+
+`outils/verifier-fusions.py` vérifie hors ligne : aucune fusion en cours, aucun fichier non fusionné dans l'index, aucun marqueur de conflit, aucune sauvegarde de fusion suivie, journal antichronologique et sans titre en double. Avec `--branches`, il audite les branches distantes et refuse de déclarer supprimable une branche qui porte un contenu unique.
+
 ## Règles impératives
 
 - Ne jamais annoncer que le corpus contient « tout le savoir mondial », qu'une fiche est validée parce qu'elle existe, ou qu'un jeu garantit un niveau ou un résultat.
@@ -74,6 +86,7 @@ python3 outils/construire-apprentissages.py --verifier
 python3 outils/construire-simulateur.py --verifier
 python3 outils/verifier-site-statique.py
 python3 outils/verifier-publication-locale.py
+python3 outils/verifier-fusions.py
 python3 outils/optimiser-images.py --verifier
 python3 outils/verifier-poids-pages.py
 python3 outils/verifier-planches-statuts.py
