@@ -79,7 +79,7 @@ La proposition #85 a fait entrer **505 PNG (1 291 Mo)** sous `docs/rd/statuts-an
 - **proposition #130** — seules les douze planches citées par le plan restent dans l'arbre, les 493 autres sont archivées dans l'étiquette `planches-statuts-animation-2026-10`, et `.gitignore` empêche le retour de PNG dans le dossier ;
 - **proposition #132** — l'encodage WebP qualité 82 s'est révélé **avec perte** (1 058 000 à 1 077 000 pixels modifiés par planche, sur 1 081 344). La conversion a été refaite en **WebP sans perte**, écart pixel mesuré **0** sur les douze planches, pour 14,7 Mo au lieu de 31,4 Mo de PNG. Un manifeste SHA-256 des **507 fichiers d'origine** a été produit (`ARCHIVE-planches-2026-10.sha256`), et `outils/verifier-planches-statuts.py` refuse désormais une planche citée absente, une référence sans fichier ni archive, un PNG réintroduit dans l'arbre ou un manifeste incomplet.
 
-Résultat : l'arbre tombe à **23,6 Mo et 363 fichiers**, sans perte de contenu, les originaux restant accessibles octet pour octet dans l'étiquette. Voir [`archives-et-poids-du-depot.md`](archives-et-poids-du-depot.md) pour les chiffres, la procédure de récupération et la réécriture d'historique qui reste à décider par la personne qui administre le dépôt.
+Résultat : l'arbre tombe à **23,6 Mo et 365 fichiers**, sans perte de contenu, les originaux restant accessibles octet pour octet dans l'étiquette. Voir [`archives-et-poids-du-depot.md`](archives-et-poids-du-depot.md) pour les chiffres, la procédure de récupération et la réécriture d'historique qui reste à décider par la personne qui administre le dépôt.
 
 ## Contrôles exécutés
 

@@ -40,7 +40,7 @@ compare -metric AE /tmp/orig.png docs/rd/statuts-animation/amblin-01-annees-80.w
 |---|---|---|
 | Arbre de `main` | 1 299,7 Mo | **23,6 Mo** |
 | dont `docs/rd/statuts-animation/` | 1 290,9 Mo (505 PNG) | 15,6 Mo (12 WebP sans perte, la bible, une référence, le manifeste) |
-| Fichiers suivis | 853 | 363 |
+| Fichiers suivis | 853 | 365 (au 19 octobre 2026) |
 | Taille du dépôt GitHub | 1 323 547 Ko | **inchangée** tant que l’historique n’est pas réécrit |
 
 Commandes utilisées :
