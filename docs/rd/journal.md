@@ -12,6 +12,19 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Contrôles réellement exécutés :** mesure des arbres avant et après (`git ls-tree -rl`), conversion et vérification des dimensions (`identify`), `verifier-site-statique`, `verifier-rd-continue`, `verifier-securite`, `verifier-poids-pages`, `optimiser-images --verifier`.
 - **Prochaine action :** télécharger l'archive de l'étiquette, puis réécrire l'historique (`git filter-repo`) avec l'accord explicite de la personne qui administre le dépôt ; ne plus committer de PNG hors des étiquettes d'archive.
 
+## 2026-10-19 — Fusions du 19 octobre : point, contrôle d'intégrité et liens de la bible
+
+- **Initiatives :** `direction-artistique-motion`, `relire-les-44-prototypes`, `optimisation-du-site`, `prospective-apprentissages-2030`, `vote-distanciel-verifiable`.
+- **Signal :** six propositions de fusion étaient ouvertes sur `main` et toutes en conflit. Le clone local était tronqué à `c67a941`, ce qui masquait la divergence réelle et faisait passer `main` pour un ancêtre direct des six branches : sans remise en profondeur, aucune mesure de conflit n'est fiable.
+- **Décision :** faire le point avant toute fusion, puis distinguer apport nouveau et travail déjà intégré. Une seule proposition apportait encore quelque chose, la #85, plan d’animation des statuts, 60 commits et 583 lignes de fond. Les cinq autres avaient été écrites sur une version antérieure des mêmes fichiers, et `main` avait depuis intégré un travail équivalent ou plus abouti. Preuve directe : résoudre leurs conflits avec le contenu de `main` redonne un arbre strictement identique à celui de `main`.
+- **Résultat :** les six propositions ont été fusionnées par la personne responsable du dépôt, puis l’ordre du journal rétabli dans la proposition #129 et le poids des planches traité dans la proposition #130, qui ne garde dans l’arbre que les douze planches citées par le plan, en WebP, et archive les 493 autres dans l’étiquette `planches-statuts-animation-2026-10`. Le point d’analyse est dans [`docs/rd/fusions-du-19-octobre-2026.md`](fusions-du-19-octobre-2026.md) ; le poids, dans [`docs/rd/archives-et-poids-du-depot.md`](archives-et-poids-du-depot.md).
+- **Contrôle d’intégrité :** aucune perte de contenu. Les entrées du journal correspondent, corps compris, à l’ensemble des entrées des six propositions ; `verifier_registre`, `verifier_sources`, `verifier_chaine_logicielle`, `verifier_resultats` et `verifier_revues` sont présents ; `etat_trace_decision` garde sa signature étendue ; `vote-distanciel-sources.toml` a conservé `points_a_resoudre` et `preuves_a_chercher`.
+- **Une coquille corrigée :** la ligne « **Contrôles réellement exécutés :** » de l’entrée « Plan films d’animation des statuts » avait perdu une lettre, « **Contr ôles réellement exécutés :** » ; la ligne est rétablie. C’est la seule ligne du journal modifiée par cette passe.
+- **Liens de la bible :** le retrait des planches de l’arbre a rendu non résolus les 193 liens d’image de `docs/rd/statuts-animation/bible-fil-et-video-01.md`, que la porte du dépôt ne contrôle pas. Le plan avait reçu une mention d’archive, la bible non : une mention identique y a été ajoutée, qui indique où sont les planches et que les liens désignent les versions archivées.
+- **Contrôles réellement exécutés :** `py_compile` ; `verifier-rd-continue.py` ; `construire-apprentissages.py --verifier` ; `construire-simulateur.py --verifier` ; `verifier-site-statique.py` ; `optimiser-images.py --verifier` ; `verifier-poids-pages.py` ; `verifier-securite.py` ; `verifier-integration.py` ; `verifier-decision-prospective.py` ; `verifier-vote-distanciel.py` ; `test_verifier_vote_distanciel.py` ; `test_verifier_decision_prospective.py` ; `file-relecture.py --verifier` ; `verifier-resilience-statutaire.py` et son test. Les quinze commandes réussissent.
+- **Limite :** ce relevé ne juge pas le fond des propositions, dont les planches restent « à relire ». La porte de vérification ne contrôle pas les liens d’image des documents de `docs/rd/` : les 193 liens n’ont été trouvés qu’en comparant chaque lien à l’arbre. Un contrôle automatique de ce type reste à écrire. La réécriture d’historique qui retirerait les 1,29 Go du référentiel reste à décider par la personne qui administre le dépôt.
+- **Prochaine action :** écrire un contrôle des liens d’image de `docs/rd/`, puis décider du sort de l’historique.
+
 ## 2026-10-19 — Ménage des propositions de fusion et des branches résiduelles
 
 - **Initiative :** `coordination-de-tous-les-agents`.
@@ -732,7 +745,7 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Initiative :** `direction-artistique-motion`.
 - **Signal :** expliquer le fonctionnement associatif par des films 3D, depuis le début des statuts, tous les articles, VO française, sous-titres anglais optionnels, quatre styles et personnages originaux.
 - **Décision :** note `docs/rd/plan-statuts-animation.md` et quatre planches de style (non validées). Le PDF des statuts fait foi. Aucune vidéo produite. Extraction automatique du PDF impossible ici ; transcription humaine requise avant tournage. Accueil 3D inchangé.
-- **Contr ôles réellement exécutés :** rédaction documentaire ; pas de page publique nouvelle.
+- **Contrôles réellement exécutés :** rédaction documentaire ; pas de page publique nouvelle.
 ## 2026-10-16 — Achats indexés sur les dons, puis complément
 
 - **Initiative :** `documentation-rd-eva`.
