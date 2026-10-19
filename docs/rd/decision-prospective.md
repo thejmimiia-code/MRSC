@@ -16,13 +16,13 @@ La décision porte sur l'allocation du temps de relecture, pas sur l'ajout d'une
 | Fiches explicitement « prototypes à relire » | **55** | Statuts du catalogue |
 | Fiches dont la date de revue est échue | **0** | `python3 outils/construire-apprentissages.py --verifier` |
 | Prochaine revue du portefeuille R&D | **2026-11-12** | `docs/rd/portefeuille.toml` |
-| Initiatives R&D suivies | 14, dont 4 en priorité P0 | Portefeuille |
+| Initiatives R&D suivies | 15, dont 5 en priorité P0 | Portefeuille |
 | Boussole publiée | 10 questions statiques, liens édités à la main, aucune collecte | `apprendre.html#boussole-savoirs` |
 | Poids estimé de la page Apprendre | 159 Kio mobile / 309 Kio grand écran (gzip estimé) | `docs/rd/poids-pages.md` |
 | En-têtes servis par GitHub Pages | types AVIF/WebP corrects, gzip sur le texte, cache 600 s | Issue #90 |
 | Essais navigateur | 8/8, dont 320 px, zoom 150 %, contraste renforcé | `outils/test-experience.cjs` |
 
-Reproduire l'essentiel : `python3 outils/etat-rd.py`. Vérifier que sept repères internes de ce tableau suivent encore leurs sources (corpus, revues, portefeuille, Boussole et poids local) : `python3 outils/verifier-decision-prospective.py`. Les dates et échéances sont recalculées à la date lue dans l’en-tête — ici le **17 octobre 2026** — et le contrôle refuse une date différente dans le tableau. Elles ne dépendent pas de la date d’exécution. Le même outil accepte une trace entièrement vide (« en attente ») ou entièrement renseignée, mais refuse une décision partielle, une option autre que A/B/C et des dates non normalisées. Ce contrôle de cohérence ne valide ni le cadrage ni une option.
+Reproduire l'essentiel : `python3 outils/etat-rd.py`. Vérifier que sept repères internes de ce tableau suivent encore leurs sources (corpus, revues, portefeuille, Boussole et poids local) : `python3 outils/verifier-decision-prospective.py`. Les dates et échéances sont recalculées à la date lue dans l’en-tête — ici le **17 octobre 2026** — et le contrôle refuse une date différente dans le tableau. Elles ne dépendent pas de la date d’exécution. Le même outil accepte une trace entièrement vide (« en attente ») ou entièrement renseignée, mais refuse une décision partielle, une option autre que A/B/C et des dates non normalisées. Pour une trace complète, la décision ne peut pas précéder le brief et le réexamen doit être postérieur à la décision. Il exige aussi que « en attente » corresponde à l’état `a-cadrer` du portefeuille, et qu’une décision consignée fasse évoluer cet état dans le même changement. Ce contrôle de cohérence ne valide ni le cadrage ni une option.
 
 ## 3. Ce qui n'est pas établi
 

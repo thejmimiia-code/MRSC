@@ -447,7 +447,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
       <button class="discret" id="btn-console-details" onclick="basculerDetailsConsole()" data-aide="<b>Détail des seuils</b>Replie ou déplie le corps de la console de veille pour libérer l'écran : le verdict et les cinq strates restent affichés.">Masquer le détail des seuils</button>
       <button class="discret" id="btn-densite" onclick="basculerDensite()" data-aide="<b>Vue compacte</b>Une ligne par levier : le catalogue tient à l'écran, tous réglables en direct.">Vue compacte</button>
       <button class="primaire" onclick="allerAuxLeviers()" data-aide="<b>Régler les leviers</b>Fait défiler jusqu'à la grille des paramètres, où chaque geste relance la simulation en direct.">Régler les leviers</button>
-      <button class="discret" onclick="allerAudit()" data-aide="<b>Audit &amp; traçabilité</b>Toutes les sources officielles, chaque formule, chaque seuil et la méthode des dynamiques croisées : le simulateur à livre ouvert, pas une boîte noire.">🔍 Audit &amp; sources</button>
+      <button class="discret" onclick="allerAudit()" data-aide="<b>Audit &amp; traçabilité</b>Toutes les sources officielles, chaque formule, chaque seuil et la méthode des dynamiques croisées : le simulateur à livre ouvert.">🔍 Audit &amp; sources</button>
     </span>
   </div>
 
@@ -595,7 +595,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
   </section>
 
   <section class="bloc audit" id="section-audit">
-    <h2>🔍 Audit &amp; traçabilité — à livre ouvert <span class="aide">pas de boîte noire : chaque chiffre, chaque formule, chaque seuil et chaque dynamique croisée est vérifiable à la source</span></h2>
+    <h2>🔍 Audit &amp; traçabilité — à livre ouvert <span class="aide">chaque chiffre, chaque formule, chaque seuil et chaque dynamique croisée est vérifiable à la source</span></h2>
     <p class="aide" style="margin-bottom:10px">
       Ce simulateur est un <b>modèle, pas une prophétie</b> : il rend explicites toutes ses
       hypothèses. Vous trouverez ici, de façon permanente et auditable : les sources officielles

@@ -1,0 +1,89 @@
+# Cérémonies projetées : aucune clé réelle ou primitive cryptographique n'est fournie.
+[meta]
+version = 1
+date = 2026-10-18
+initiative = "vote-distanciel-verifiable"
+statut = "a-faire-expertiser"
+donnees = "secrets-synthetiques-uniquement"
+execution_autorisee = false
+cryptographie_maison = false
+principe = "Aucune personne, machine, sauvegarde ou fournisseur ne doit pouvoir reconstituer seul le secret de dépouillement."
+
+[[phase]]
+id = "designation-autorites"
+entree_requise = "Profil statutaire et solution existante choisis puis relus."
+sortie_attendue = "Rôles indépendants, incompatibilités et remplaçants projetés documentés sans identité personnelle."
+preuve_attendue = "Matrice de rôles synthétique approuvée par les revues compétentes."
+condition_arret = "Une autorité unique contrôle désignation, génération et dépouillement."
+interdits = ["nom-reel", "role-auto-attribue", "fournisseur-seul"]
+statut = "a-faire-expertiser"
+
+[[phase]]
+id = "generation-distribuee"
+entree_requise = "Version et protocole existants épinglés, environnement synthétique isolé."
+sortie_attendue = "Clé publique d'exercice et parts synthétiques sans secret complet assemblé."
+preuve_attendue = "Transcription vérifiable de la cérémonie et empreintes des outils."
+condition_arret = "Une clé complète apparaît sur une machine ou dans un journal."
+interdits = ["generateur-maison", "secret-complet", "graine-de-production"]
+statut = "a-faire-expertiser"
+
+[[phase]]
+id = "verification-avant-ouverture"
+entree_requise = "Parts synthétiques remises par canaux séparés et clé publique publiée dans le banc isolé."
+sortie_attendue = "Concordance vérifiée entre configuration figée, clé publique et autorités projetées."
+preuve_attendue = "Deux vérifications indépendantes et manifeste signé de l'exercice."
+condition_arret = "Une divergence est corrigée manuellement ou ignorée."
+interdits = ["remplacement-silencieux", "validation-par-interface", "ouverture-malgre-ecart"]
+statut = "a-faire-expertiser"
+
+[[phase]]
+id = "conservation-temporaire"
+entree_requise = "Plan de durée, accès et perte défini avant la génération."
+sortie_attendue = "Parts synthétiques séparées, inventoriées et indisponibles aux services d'identité et d'urne."
+preuve_attendue = "Matrice d'accès et exercice de perte d'une part sans copie improvisée."
+condition_arret = "Une sauvegarde centralise plusieurs parts ou un opérateur peut les exporter."
+interdits = ["sauvegarde-commune", "copie-au-cas-ou", "acces-urne-ou-identite"]
+statut = "a-faire-expertiser"
+
+[[phase]]
+id = "depouillement-a-seuil"
+entree_requise = "Clôture humaine, tableau figé et preuves d'inclusion vérifiables."
+sortie_attendue = "Parts de déchiffrement vérifiables sans révélation d'une clé complète."
+preuve_attendue = "Résultat synthétique reproductible par deux vérificateurs indépendants."
+condition_arret = "Le seuil est abaissé, une part est remplacée ou le tableau change après clôture."
+interdits = ["abaissement-du-seuil", "cle-de-secours-unique", "modification-du-tableau"]
+statut = "a-faire-expertiser"
+
+[[phase]]
+id = "destruction-et-contestation"
+entree_requise = "Résultat synthétique vérifié, durée de contestation simulée terminée."
+sortie_attendue = "Secrets et copies transitoires détruits ; seules les preuves publiques prévues subsistent."
+preuve_attendue = "Inventaire avant/après et échec documenté de récupération des secrets synthétiques."
+condition_arret = "Une part, une sauvegarde ou un secret de session demeure sans justification."
+interdits = ["secret-dans-preuve-publique", "retention-indefinie", "destruction-non-verifiee"]
+statut = "a-faire-expertiser"
+
+[[incompatibilite]]
+gauche = "registre-eligibilite"
+droite = "autorite-dechiffrement"
+raison = "Empêcher qu'une même fonction rapproche identité et dépouillement."
+
+[[incompatibilite]]
+gauche = "operateur-urne"
+droite = "quorum-complet-de-dechiffrement"
+raison = "Empêcher le serveur d'urne de contrôler seul le résultat."
+
+[[incompatibilite]]
+gauche = "fournisseur"
+droite = "ensemble-des-autorites"
+raison = "Éviter une indépendance seulement nominale vis-à-vis du fournisseur."
+
+[[incompatibilite]]
+gauche = "sauvegarde-centralisee"
+droite = "plusieurs-parts"
+raison = "Une sauvegarde commune annule la séparation du seuil."
+
+[[incompatibilite]]
+gauche = "publication-resultat"
+droite = "modification-des-preuves"
+raison = "La proclamation ne doit pas permettre de réécrire le tableau ou les preuves."

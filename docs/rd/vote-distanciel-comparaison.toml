@@ -1,0 +1,147 @@
+# Grille sans score ni classement — aucune solution n'est sélectionnée.
+[meta]
+version = 1
+date = 2026-10-17
+initiative = "vote-distanciel-verifiable"
+statut = "a-faire-expertiser"
+regle = "Une inconnue sur un critère bloquant empêche la sélection ; aucun total ne compense un défaut."
+
+[[option]]
+id = "A"
+titre = "Ne pas voter à distance"
+type = "reference"
+statut = "a-evaluer"
+source = "docs/rd/vote-distanciel-verifiable.md"
+limite = "Peut créer des obstacles de déplacement, délai ou accessibilité si les alternatives sont insuffisantes."
+
+[[option]]
+id = "belenios"
+titre = "Belenios"
+type = "logiciel-existant"
+statut = "a-evaluer"
+source = "https://github.com/glondu/belenios"
+licence_observee = "AGPL-3.0"
+limite = "Métadonnées du miroir consultées ; protocole, version, audits, exploitation et adéquation statutaire non évalués."
+
+[[option]]
+id = "helios"
+titre = "Helios"
+type = "logiciel-existant"
+statut = "a-evaluer"
+source = "https://github.com/benadida/helios-server"
+licence_observee = "Apache-2.0"
+limite = "Métadonnées du dépôt consultées ; protocole, version, audits, exploitation et adéquation statutaire non évalués."
+
+[[option]]
+id = "electionguard"
+titre = "ElectionGuard"
+type = "composants-existants"
+statut = "a-evaluer"
+source = "https://github.com/Election-Tech-Initiative/electionguard"
+licence_observee = "MIT"
+limite = "Métadonnées du dépôt consultées ; il ne constitue pas à lui seul un service de scrutin évalué pour le M.R.S.C."
+
+[[critere]]
+id = "statuts-et-droit"
+famille = "gouvernance"
+bloquant = true
+question = "La solution permet-elle le profil statutaire choisi sans interprétation cachée et avec une base juridique relue ?"
+preuve_attendue = "Avis compétent, matrice article-paramètre et décision associative datée."
+
+[[critere]]
+id = "separation-identite-bulletin"
+famille = "secret"
+bloquant = true
+question = "Identité, droit anonyme et bulletin sont-ils séparés jusque dans les journaux et sauvegardes ?"
+preuve_attendue = "Diagramme de flux, configuration et test de corrélation indépendant."
+
+[[critere]]
+id = "verifiabilite-individuelle"
+famille = "integrite"
+bloquant = true
+question = "Une personne peut-elle vérifier l'inclusion sans révéler ou prouver son choix ?"
+preuve_attendue = "Spécification, vecteurs de test et analyse de reçu non transférable."
+
+[[critere]]
+id = "verifiabilite-universelle"
+famille = "integrite"
+bloquant = true
+question = "Un tiers peut-il vérifier le dépouillement hors ligne sans faire confiance au serveur principal ?"
+preuve_attendue = "Artefacts exportables et deux vérificateurs indépendants."
+
+[[critere]]
+id = "coercition"
+famille = "liberte-du-vote"
+bloquant = true
+question = "Le protocole limite-t-il la preuve de choix et prévoit-il un canal secret de secours ?"
+preuve_attendue = "Analyse spécialisée, revue juridique et scénario d'usage contradictoire."
+
+[[critere]]
+id = "cles-a-seuil"
+famille = "operations"
+bloquant = true
+question = "Le dépouillement exige-t-il plusieurs autorités réellement indépendantes ?"
+preuve_attendue = "Cérémonie observée, seuil documenté et exercice sous le seuil."
+
+[[critere]]
+id = "metadonnees-et-retention"
+famille = "vie-privee"
+bloquant = true
+question = "Les métadonnées sont-elles minimisées, testées et supprimées selon un plan vérifiable ?"
+preuve_attendue = "Inventaire des journaux, test de corrélation et exercice de destruction."
+
+[[critere]]
+id = "procurations"
+famille = "statuts"
+bloquant = true
+question = "Les procurations du profil choisi sont-elles plafonnées, révocables et compatibles avec le secret ?"
+preuve_attendue = "Cas d'essai statutaire relu et journal de délégation séparé du bulletin."
+
+[[critere]]
+id = "quorum-blanc-departage"
+famille = "statuts"
+bloquant = true
+question = "Quorum, blanc, majorité, unanimité et départage sont-ils figés avant ouverture ?"
+preuve_attendue = "Profil relu, engagement de configuration et tests de limites."
+
+[[critere]]
+id = "disponibilite-reprise-annulation"
+famille = "resilience"
+bloquant = true
+question = "Panne, reprise, prolongation, contestation et annulation ont-elles une procédure humaine ?"
+preuve_attendue = "Exercice de panne et procès-verbal synthétique de décision."
+
+[[critere]]
+id = "chaine-logicielle"
+famille = "securite"
+bloquant = true
+question = "Le code revu peut-il être relié à l'artefact déployé et aux dépendances épinglées ?"
+preuve_attendue = "Build reproductible, signatures et inventaire des composants."
+
+[[critere]]
+id = "accessibilite-et-repli"
+famille = "accessibilite"
+bloquant = true
+question = "Le parcours et son canal alternatif sont-ils utilisables avec les besoins et technologies pertinents ?"
+preuve_attendue = "Revue compétente et essais autorisés, clavier, zoom, lecteur d'écran et assistance."
+
+[[critere]]
+id = "export-et-reversibilite"
+famille = "maintenance"
+bloquant = true
+question = "Toutes les preuves restent-elles vérifiables après retrait du fournisseur ou du serveur ?"
+preuve_attendue = "Export complet, vérification hors ligne et exercice de restauration."
+
+[[critere]]
+id = "maintenance-et-incidents"
+famille = "maintenance"
+bloquant = true
+question = "Versions, correctifs, incidents, durée de support et procédure de retrait sont-ils attribués ?"
+preuve_attendue = "Politique de maintenance, rôle responsable et exercice de retrait."
+
+[[critere]]
+id = "licence-et-audits"
+famille = "preuve"
+bloquant = true
+question = "Licence, versions et audits indépendants couvrent-ils réellement les composants utilisés ?"
+preuve_attendue = "Textes de licence, versions, rapports relus et écarts consignés."

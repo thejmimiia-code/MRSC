@@ -70,6 +70,41 @@ class CompterQuestionsBoussoleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "A, B ou C"):
             MODULE.etat_trace_decision(texte)
 
+    def test_refuse_decision_anterieure_au_brief(self):
+        texte = trace_decision(["B", "2026-10-16", "Conseil", "Aucune", "2027-01-31"])
+        with self.assertRaisesRegex(ValueError, "antérieure"):
+            MODULE.etat_trace_decision(texte, dt.date(2026, 10, 17))
+
+    def test_refuse_reexamen_le_jour_de_la_decision(self):
+        texte = trace_decision(["B", "2026-10-17", "Conseil", "Aucune", "2026-10-17"])
+        with self.assertRaisesRegex(ValueError, "après"):
+            MODULE.etat_trace_decision(texte, dt.date(2026, 10, 17))
+
+    def test_accepte_une_chronologie_coherente(self):
+        texte = trace_decision(["B", "2026-10-18", "Conseil", "Aucune", "2027-01-31"])
+        self.assertEqual(
+            MODULE.etat_trace_decision(texte, dt.date(2026, 10, 17)),
+            "option B consignée",
+        )
+
+    def test_aligne_attente_et_initiative_a_cadrer(self):
+        initiatives = [{"id": "prospective-apprentissages-2030", "etat": "a-cadrer"}]
+        self.assertEqual(MODULE.verifier_etat_initiative("en attente", initiatives), "a-cadrer")
+
+    def test_refuse_attente_avec_initiative_avancee(self):
+        initiatives = [{"id": "prospective-apprentissages-2030", "etat": "en-cours"}]
+        with self.assertRaisesRegex(ValueError, "décision en attente"):
+            MODULE.verifier_etat_initiative("en attente", initiatives)
+
+    def test_refuse_decision_avec_initiative_a_cadrer(self):
+        initiatives = [{"id": "prospective-apprentissages-2030", "etat": "a-cadrer"}]
+        with self.assertRaisesRegex(ValueError, "encore"):
+            MODULE.verifier_etat_initiative("option B consignée", initiatives)
+
+    def test_refuse_initiative_absente(self):
+        with self.assertRaisesRegex(ValueError, "absente"):
+            MODULE.verifier_etat_initiative("en attente", [])
+
     def test_arrondit_les_poids_affiches(self):
         tableau = "| `apprendre.html` | 158.8 | 308.6 | 619.5 |"
         self.assertEqual(MODULE.poids_page(tableau, "apprendre.html"), (159, 309))
