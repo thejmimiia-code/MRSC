@@ -14,7 +14,10 @@ réel, puis contrôle, sans réseau :
 2. que chaque source copiée existe dans le dépôt ;
 3. que chaque page publiée a ses liens `href`/`src` vers un fichier publié ;
 4. que les `url()` des feuilles de style publiées pointent vers un fichier publié ;
-5. que chaque adresse du `sitemap.xml` correspond à une page publiée.
+5. que chaque adresse du `sitemap.xml` correspond à une page publiée ;
+6. que la liste blanche de l'aperçu local (`outils/serveur-local.py`) est
+   exactement celle des fichiers racine publiés — deux listes qui divergent
+   produisent un aperçu qui ne ressemble pas au site.
 
 Usage :
     python3 outils/verifier-publication-locale.py
@@ -34,6 +37,7 @@ from urllib.parse import unquote
 
 RACINE = Path(__file__).resolve().parent.parent
 WORKFLOW = RACINE / ".github" / "workflows" / "deploy-pages.yml"
+SERVEUR = RACINE / "outils" / "serveur-local.py"
 ETAPE = "Prepare public site files"
 SITE_URL = "https://thejmimiia-code.github.io/MRSC/"
 EXTERNES = ("http://", "https://", "mailto:", "tel:", "data:", "javascript:", "#")
@@ -88,6 +92,15 @@ def perimetre() -> tuple[dict[str, Path], list[str]]:
             else:
                 publies[posixpath.join(prefixe, chemin.name) if prefixe else chemin.name] = chemin
     return publies, erreurs
+
+
+def liste_apercu_local() -> set[str]:
+    """Fichiers racine servis par l'aperçu local, lus dans son code."""
+    if not SERVEUR.is_file():
+        return set()
+    texte = SERVEUR.read_text(encoding="utf-8")
+    bloc = re.search(r"FICHIERS_RACINE_PUBLICS\s*=\s*frozenset\(\{(.*?)\}\)", texte, re.S)
+    return set(re.findall(r'"([^"]+)"', bloc.group(1))) if bloc else set()
 
 
 def resoudre(base: str, reference: str) -> str | None:
@@ -161,6 +174,22 @@ def main() -> int:
             f"par exemple {pages_concernees[0]}"
         )
 
+    attendus_racine = {chemin for chemin in publies if "/" not in chemin}
+    apercu = liste_apercu_local()
+    if not apercu:
+        erreurs.append("liste blanche de l'aperçu local illisible dans outils/serveur-local.py")
+    else:
+        manquants_apercu = sorted(attendus_racine - apercu)
+        superflus_apercu = sorted(apercu - attendus_racine)
+        if manquants_apercu:
+            erreurs.append(
+                "aperçu local : fichiers publiés non servis — " + ", ".join(manquants_apercu)
+            )
+        if superflus_apercu:
+            erreurs.append(
+                "aperçu local : fichiers servis mais non publiés — " + ", ".join(superflus_apercu)
+            )
+
     if "sitemap.xml" in publies:
         arbre = ET.fromstring(publies["sitemap.xml"].read_text(encoding="utf-8"))
         namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
@@ -185,7 +214,8 @@ def main() -> int:
     pages = sum(1 for chemin in publies if chemin.endswith(".html"))
     print(
         f"OK — périmètre publié complet : {len(publies)} fichiers, {pages} pages, "
-        f"{references} références internes toutes résolues dans le site publié."
+        f"{references} références internes toutes résolues dans le site publié, "
+        f"aperçu local aligné sur {len(attendus_racine)} fichiers racine."
     )
     return 0
 

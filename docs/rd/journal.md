@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-19 — L'aperçu local avait sa propre liste de fichiers et divergeait du site
+
+- **Initiatives :** `optimisation-du-site`, `coherence-textes-publics`.
+- **Signal :** vérification générale de l'état du dépôt et de l'aperçu local avant de conclure que tout est en ordre.
+- **Constat :** `outils/serveur-local.py` portait sa **propre liste blanche** de fichiers racine (`FICHIERS_RACINE_PUBLICS`). Elle avait la même lacune que le workflow de publication : le favicon en était absent. L'aperçu local renvoyait donc 404 sur `favicon.ico` alors que le dépôt et le site publié le servent. Deux listes écrites à la main pour la même chose finissent toujours par diverger.
+- **Décision :** ne pas se contenter de corriger la liste ; rendre la divergence impossible à ignorer. Le vérificateur de publication lit désormais la liste blanche de l'aperçu dans le code du serveur et la compare à l'ensemble des fichiers racine réellement publiés.
+- **Résultat :** `favicon.ico` servi par l'aperçu ; 136 URL du site servies en local contrôlées, toutes en 200, favicon et routes `/api/…` comprises ; l'alignement des deux listes est vérifié à chaque proposition.
+- **Limite :** l'aperçu local reproduit les listes de publication, pas les en-têtes d'un hébergeur ; il ne remplace ni le contrôle réseau de `verifier-publication.py` ni un essai sur le site publié.
+- **Contrôles réellement exécutés :** `verifier-publication-locale` (133 fichiers, 95 pages, 4 512 références, 16 fichiers racine alignés) et son cas d'échec simulé ; balayage d'accessibilité axe-core **192 exécutions, 0 violation** sur toutes les pages aux deux largeurs ; **8/8 essais navigateur** ; 136 URL locales en 200 ; porte de vérification complète.
+- **Prochaine action :** conserver la règle — toute liste qui décrit le site publié doit être comparée à celle du workflow de publication, jamais maintenue à la main en parallèle.
+
 ## 2026-10-19 — Fusionner et importer sans perte : contrôle ajouté et branches absorbées supprimées
 
 - **Initiative :** `coordination-de-tous-les-agents`.

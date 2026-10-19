@@ -46,7 +46,7 @@ FICHIERS_RACINE_PUBLICS = frozenset({
     "index.html", "apprendre.html", "anglais-aventure.html", "ia-societe.html", "eva.html", "simulateur.html",
     "documents.html", "liens-utiles.html", "localisation.html",
     "nous-contacter.html", "transparence.html", "confidentialite.html",
-    "404.html", "sitemap.xml", "llms.txt",
+    "404.html", "sitemap.xml", "llms.txt", "favicon.ico",
 })
 
 
