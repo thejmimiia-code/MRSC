@@ -7,7 +7,9 @@ Vérifie, sans réseau et sans dépendance externe :
 2. qu'aucune autre référence `statuts-animation/…` du dépôt ne pointe vers un
    fichier absent (hors archive) ;
 3. qu'aucun PNG n'est suivi dans `docs/rd/statuts-animation/` ;
-4. que le manifeste d'empreintes de l'archive décrit bien 507 fichiers.
+4. que les liens d'image des documents `docs/rd/*.md` désignent un fichier
+   présent, ou à défaut une planche figurant au manifeste de l'archive ;
+5. que le manifeste d'empreintes de l'archive décrit bien 507 fichiers.
 
 Usage :
     python3 outils/verifier-planches-statuts.py [--verifier]
@@ -50,6 +52,22 @@ def references_planches() -> list[tuple[Path, str]]:
     return trouves
 
 
+def liens_images_docs() -> list[tuple[Path, str, bool]]:
+    """Liens d'image des documents de `docs/rd/` : (fichier, cible, existe)."""
+    trouves: list[tuple[Path, str, bool]] = []
+    for fichier in sorted((RACINE / "docs" / "rd").rglob("*.md")):
+        try:
+            texte = fichier.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        for cible in re.findall(r"\]\(([^)\s]+\.(?:png|jpe?g|webp))\)", texte):
+            if "://" in cible:
+                continue
+            chemin = (fichier.parent / cible).resolve()
+            trouves.append((fichier, cible, chemin.is_file()))
+    return trouves
+
+
 def main() -> int:
     erreurs: list[str] = []
 
@@ -76,6 +94,16 @@ def main() -> int:
         if (DOSSIER / nom).exists() or nom in archivees:
             continue
         erreurs.append(f"référence sans fichier ni archive : {fichier.relative_to(RACINE)} → statuts-animation/{nom}")
+
+    liens = liens_images_docs()
+    archives_docs = 0
+    for fichier, cible, existe in liens:
+        if existe:
+            continue
+        if Path(cible).name in archivees:
+            archives_docs += 1
+            continue
+        erreurs.append(f"lien d'image non résolu : {fichier.relative_to(RACINE)} → {cible}")
 
     suivis = subprocess.run(
         ["git", "ls-files", "docs/rd/statuts-animation"],
@@ -108,6 +136,7 @@ def main() -> int:
     print(
         f"OK — planches des statuts : {len(citees)} planches citées présentes, "
         f"aucune référence cassée, aucun PNG suivi, {len(archivees)} fichiers archivés, "
+        f"{len(liens)} liens d'image contrôlés dont {archives_docs} vers l'archive, "
         f"manifeste de {FICHIERS_ARCHIVES} empreintes conforme."
     )
     return 0

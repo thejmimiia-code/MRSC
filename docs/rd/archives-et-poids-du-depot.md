@@ -15,6 +15,7 @@ La fusion de la PR #85, le 19 octobre 2026, a fait entrer **505 PNG (1 290,9 Mo)
 - **Les 493 autres planches** et les douze originaux PNG sont **archivés hors de l’arbre**, dans la version étiquetée [`planches-statuts-animation-2026-10`](https://github.com/thejmimiia-code/MRSC/releases/tag/planches-statuts-animation-2026-10), qui pointe sur l’état du dépôt **avant** ce retrait.
 - `docs/rd/statuts-animation/` contient la [bible du film](statuts-animation/bible-fil-et-video-01.md), la référence `eva-reference.jpg`, les douze WebP sans perte et le manifeste `ARCHIVE-planches-2026-10.sha256`.
 - `.gitignore` ignore les `*.png` de ce dossier, pour qu’une planche ne revienne pas par inadvertance.
+- [`outils/verifier-planches-statuts.py`](../outils/verifier-planches-statuts.py) contrôle les liens, l’absence de PNG suivi et le manifeste ; il tourne dans la CI à chaque proposition.
 
 ## Fidélité des douze planches conservées
 
@@ -63,6 +64,8 @@ sha256sum -c ARCHIVE-planches-2026-10.sha256 --quiet   # aucun message = tout es
 ```
 
 Résultat obtenu le 19 octobre 2026 : **507 fichiers conformes, aucun écart**.
+
+Le même outil contrôle les **liens d'image de tous les documents `docs/rd/*.md`** : 205 liens recensés au 19 octobre 2026, dont 193 vers des planches archivées (la [bible du film](statuts-animation/bible-fil-et-video-01.md)) et 12 vers les planches conservées. Un lien vers un fichier ni présent ni archivé fait échouer le contrôle, ce qui interdit qu'un retrait casse silencieusement une référence.
 
 ## Récupérer les originaux
 
