@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-19 — Ménage des propositions de fusion et des branches résiduelles
+
+- **Initiative :** `coordination-de-tous-les-agents`.
+- **Signal :** aucune proposition de fusion n'était plus ouverte, mais deux branches distantes restaient en attente et le dépôt s'était alourdi de 1,29 Go de planches apportées par la PR #85.
+- **Décision :** reprendre le travail R&D resté sur `arena/1f836c07-mrsc` (fiches de rédaction, angles morts, variantes, mouture globale) après remise du journal en ordre antichronologique ; supprimer `arena/7d6aa1e7-mrsc`, qui ne portait qu'un doublon de la fusion #85, une note d'état devenue fausse et le retrait de treize lignes de contrôles du vérificateur de vote distanciel.
+- **Résultat :** `main` réunit les quatre documents statutaires et leurs contrôles (19 fiches, 16 angles morts, 15 arbitrages, 9 modifications candidates) ; il ne reste plus qu'une branche de travail, celle de la session en cours.
+- **Limite :** les planches restent « à relire » et le fond statutaire n'est ni adopté ni validé ; le sort des 506 PNG sous `docs/rd/statuts-animation/` (1,29 Go, non publiés) n'est pas tranché ici et pèse sur le clonage du dépôt.
+- **Contrôles réellement exécutés :** `py_compile`, `verifier-rd-continue`, `construire-apprentissages --verifier`, `construire-simulateur --verifier`, `verifier-site-statique`, `optimiser-images --verifier`, `verifier-poids-pages`, `verifier-securite`, `verifier-integration`, `verifier-decision-prospective`, `verifier-vote-distanciel`, `test_verifier_vote_distanciel`, `test_verifier_decision_prospective`, `file-relecture --verifier`, `verifier-resilience-statutaire`, `test_verifier_resilience_statutaire` — tous réussis.
+- **Prochaine action :** décider du sort des planches (retrait de l'arbre avec hébergement externe, ou purge d'historique) avant d'ajouter de nouvelles images au dépôt.
+
 ## 2026-10-18 — Mouture globale candidate à trois niveaux
 
 - **Initiative :** `resilience-statutaire-globale`.
