@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-19 — Planches des statuts sorties de l'arbre, originales archivées
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** les 505 planches entrées avec la PR #85 pesaient 1 290,9 Mo et n'étaient ni publiées ni validées ; le dépôt dépassait le seuil d'alerte de GitHub et chaque clone téléchargeait 1,3 Go.
+- **Décision :** conserver dans l'arbre les douze planches réellement citées par le plan, converties en WebP qualité 82 (1,4 Mo) ; archiver les 493 autres et les originaux PNG dans l'étiquette `planches-statuts-animation-2026-10`, qui fige l'état du dépôt avant retrait ; documenter la procédure dans `docs/rd/archives-et-poids-du-depot.md` ; ignorer les futurs `*.png` de ce dossier.
+- **Résultat :** arbre de `main` ramené de 1 299,7 Mo à 10,3 Mo et de 853 à 361 fichiers ; `docs/rd/statuts-animation/` de 1 290,9 Mo à 1,6 Mo. Le site publié n'est pas concerné, `docs/` restant exclu de Pages et de Vercel.
+- **Limite :** l'historique Git conserve les 1,29 Go, donc le clonage reste à 1,3 Go tant que `main` n'est pas réécrit ; la fidélité visuelle des douze WebP n'a pas été contrôlée à l'œil, et les planches restent « à relire ».
+- **Contrôles réellement exécutés :** mesure des arbres avant et après (`git ls-tree -rl`), conversion et vérification des dimensions (`identify`), `verifier-site-statique`, `verifier-rd-continue`, `verifier-securite`, `verifier-poids-pages`, `optimiser-images --verifier`.
+- **Prochaine action :** télécharger l'archive de l'étiquette, puis réécrire l'historique (`git filter-repo`) avec l'accord explicite de la personne qui administre le dépôt ; ne plus committer de PNG hors des étiquettes d'archive.
+
 ## 2026-10-19 — Ménage des propositions de fusion et des branches résiduelles
 
 - **Initiative :** `coordination-de-tous-les-agents`.

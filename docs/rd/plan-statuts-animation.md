@@ -2,6 +2,7 @@
 
 **Date :** 16 octobre 2026.  
 **Statut :** proposition de R&D, **à relire**. Aucune vidéo n’est produite. Aucun devis, aucune cagnotte.  
+**Planches :** seules les douze planches citées ci-dessous restent dans le dépôt, en WebP compact. Les 493 autres planches d’exploration sont archivées dans la version étiquetée [`planches-statuts-animation-2026-10`](https://github.com/thejmimiia-code/MRSC/releases/tag/planches-statuts-animation-2026-10) ; voir [`archives-et-poids-du-depot.md`](archives-et-poids-du-depot.md) pour la récupération.  
 **Source qui fait foi :** [`assets/documents/statuts-2020.pdf`](../../assets/documents/statuts-2020.pdf). Les films, le site et cette note **ne remplacent pas** le PDF.
 
 Cette note propose une **œuvre** : un **grand film 3D d’humanité** (puis découpé en épisodes article par article), **voix française**, **sous-titres anglais optionnels**, personnages **originaux**.
@@ -48,10 +49,10 @@ Au fil des décennies, **la même ville** se décolore : le diner reste, l’ave
 
 ### Planches « Amblin » (essai, à adapter)
 
-- [amblin-01-annees-80.png](statuts-animation/amblin-01-annees-80.png) — tout est possible  
-- [amblin-02-annees-90.png](statuts-animation/amblin-02-annees-90.png) — le mall, les écrans  
-- [amblin-03-annees-2010.png](statuts-animation/amblin-03-annees-2010.png) — LED, téléphones  
-- [amblin-04-annees-2020.png](statuts-animation/amblin-04-annees-2020.png) — lumières dans le brouillard, diner éteint  
+- [amblin-01-annees-80.webp](statuts-animation/amblin-01-annees-80.webp) — tout est possible  
+- [amblin-02-annees-90.webp](statuts-animation/amblin-02-annees-90.webp) — le mall, les écrans  
+- [amblin-03-annees-2010.webp](statuts-animation/amblin-03-annees-2010.webp) — LED, téléphones  
+- [amblin-04-annees-2020.webp](statuts-animation/amblin-04-annees-2020.webp) — lumières dans le brouillard, diner éteint  
 
 Anciennes planches « décennies » cartoon : archives.
 
@@ -80,10 +81,10 @@ Chaque article, plus tard : **une possibilité qui s’ouvre**, pas un alinéa r
 
 ### Planches d’accroche (16 oct. 2026, non validées)
 
-- [accroche-01-seul-avec-les-ecrans.png](statuts-animation/accroche-01-seul-avec-les-ecrans.png)
-- [accroche-02-le-seuil.png](statuts-animation/accroche-02-le-seuil.png)
-- [accroche-03-table-du-partage.png](statuts-animation/accroche-03-table-du-partage.png)
-- [accroche-04-les-portes-s-ouvrent.png](statuts-animation/accroche-04-les-portes-s-ouvrent.png)
+- [accroche-01-seul-avec-les-ecrans.webp](statuts-animation/accroche-01-seul-avec-les-ecrans.webp)
+- [accroche-02-le-seuil.webp](statuts-animation/accroche-02-le-seuil.webp)
+- [accroche-03-table-du-partage.webp](statuts-animation/accroche-03-table-du-partage.webp)
+- [accroche-04-les-portes-s-ouvrent.webp](statuts-animation/accroche-04-les-portes-s-ouvrent.webp)
 
 Les planches « maison / table notaire / agora magique / livre-paysage » restent des **outils de chapitre**, pas l’accroche.
 
@@ -149,10 +150,10 @@ On ne juxtapose pas des décennies. On **suit les mêmes gens** et **les mêmes 
 
 Planches de liaison :
 
-- [liaison-01-80-la-bande.png](statuts-animation/liaison-01-80-la-bande.png)  
-- [liaison-02-90-le-regard-ailleurs.png](statuts-animation/liaison-02-90-le-regard-ailleurs.png)  
-- [liaison-03-2010-le-siege-vide.png](statuts-animation/liaison-03-2010-le-siege-vide.png)  
-- [liaison-04-la-table-revient.png](statuts-animation/liaison-04-la-table-revient.png)
+- [liaison-01-80-la-bande.webp](statuts-animation/liaison-01-80-la-bande.webp)  
+- [liaison-02-90-le-regard-ailleurs.webp](statuts-animation/liaison-02-90-le-regard-ailleurs.webp)  
+- [liaison-03-2010-le-siege-vide.webp](statuts-animation/liaison-03-2010-le-siege-vide.webp)  
+- [liaison-04-la-table-revient.webp](statuts-animation/liaison-04-la-table-revient.webp)
 
 **Texte dit (prologue) :**
 

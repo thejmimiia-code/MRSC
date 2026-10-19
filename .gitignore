@@ -23,3 +23,6 @@ __pycache__/
 # counterproductive to check this file into the repository.
 # Details at https://github.com/github/pages-gem/issues/768
 Gemfile.lock
+
+# Planches d'exploration : archivées dans les versions étiquetées, pas dans l'arbre
+docs/rd/statuts-animation/*.png
