@@ -1015,10 +1015,10 @@ index 7976c93..88941b9 100644
              fournisseur = indicateur.reference[2]
              statut = "reference"
 diff --git a/simulateur/interface.py b/simulateur/interface.py
-index 51a063c..b0858d3 100644
+index eeb27be..82f1659 100644
 --- a/simulateur/interface.py
 +++ b/simulateur/interface.py
-@@ -84,11 +84,12 @@ section.bloc > h2 .aide{font-size:.75rem;color:var(--texte-dim);font-weight:400}
+@@ -86,11 +86,12 @@ section.bloc > h2 .aide{font-size:.75rem;color:var(--texte-dim);font-weight:400}
  .metric .libelle{font-size:.74rem;color:var(--texte-dim);text-transform:uppercase;letter-spacing:.4px}
  .metric .delta{font-size:.75rem;margin-top:2px}
  .delta.hausse{color:var(--vert)} .delta.baisse{color:var(--rouge)} .delta.neutre{color:var(--texte-dim)}
@@ -1034,7 +1034,7 @@ index 51a063c..b0858d3 100644
  .strates-cascade{display:flex;flex-direction:column;gap:6px}
  .strate{display:flex;justify-content:space-between;gap:14px;align-items:center;
    background:var(--panel-2);border:1px solid var(--border);border-left-width:4px;border-radius:10px;
-@@ -98,14 +99,14 @@ section.bloc > h2 .aide{font-size:.75rem;color:var(--texte-dim);font-weight:400}
+@@ -100,14 +101,14 @@ section.bloc > h2 .aide{font-size:.75rem;color:var(--texte-dim);font-weight:400}
  .strate .valeurs b{color:var(--texte)}
  .leviers-grille{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
  .famille{background:var(--panel-2);border:1px solid var(--border);border-radius:11px;padding:12px}
@@ -1051,7 +1051,7 @@ index 51a063c..b0858d3 100644
  .levier .ligne .bascule{margin-bottom:0}
  /* Infobulle instantanée : tout réglage ou bouton annoté s'explique au survol
     (et au focus clavier), sans jamais recouvrir les leviers durablement. */
-@@ -138,7 +139,7 @@ section.bloc > h2 .aide{font-size:.75rem;color:var(--texte-dim);font-weight:400}
+@@ -140,7 +141,7 @@ section.bloc > h2 .aide{font-size:.75rem;color:var(--texte-dim);font-weight:400}
  .bulle-levier .bulle-alerte{color:#fca5a5}
  .bulle-levier .bulle-alerte.vigilance{color:#fcd34d}
  .bulle-levier .bulle-journal li{font-style:italic}
@@ -1060,7 +1060,7 @@ index 51a063c..b0858d3 100644
  .bulle-levier .bulle-chargement{font-style:italic}
  .bascule{display:flex;align-items:center;gap:8px;font-size:.79rem;margin-bottom:9px}
  .bascule input{width:18px;height:18px;accent-color:var(--vert)}
-@@ -158,6 +159,8 @@ th,td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--border);whi
+@@ -160,6 +161,8 @@ th,td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--border);whi
  th:first-child,td:first-child{text-align:left}
  thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background:var(--panel)}
  .defilable{overflow:auto;max-height:430px;border-radius:9px;border:1px solid var(--border)}
@@ -1069,7 +1069,7 @@ index 51a063c..b0858d3 100644
  .matrice td,.matrice th{text-align:center}
  .matrice td.pos{background:rgba(34,197,94,.18);color:#bbf7d0}
  .matrice td.neg{background:rgba(239,68,68,.16);color:#fecaca}
-@@ -179,7 +182,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+@@ -181,7 +184,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
  .panneau-strate.actif{display:block}
  .strate-intro{font-size:.78rem;color:var(--texte-dim);line-height:1.6;margin:2px 0 12px}
  .strate-sous-titre{font-size:.84rem;margin:14px 0 7px;color:var(--texte)}
@@ -1078,7 +1078,7 @@ index 51a063c..b0858d3 100644
  .tableau-strate table{min-width:600px}
  .tableau-strate td.delta-pos{color:#86efac}.tableau-strate td.delta-neg{color:#fca5a5}
  .note-source{font-size:.7rem;line-height:1.55;color:var(--texte-dim);margin:8px 0;padding:8px 10px;background:rgba(15,23,42,.7);border-left:3px solid var(--accent);border-radius:0 8px 8px 0}
-@@ -268,7 +271,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+@@ -270,7 +273,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
  .message-seuil .tete{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
  .message-seuil .etiquette{font-size:.68rem;text-transform:uppercase;letter-spacing:.4px;font-weight:700}
  .message-seuil p{color:var(--texte-dim);margin-top:3px}
@@ -1087,7 +1087,7 @@ index 51a063c..b0858d3 100644
  .jauge{height:11px;border-radius:7px;background:#22304f;overflow:hidden;border:1px solid var(--border)}
  .jauge > span{display:block;height:100%;transition:width .25s}
  .graduations{display:flex;justify-content:space-between;font-size:.64rem;color:var(--texte-dim);margin-top:3px}
-@@ -291,7 +294,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+@@ -293,7 +296,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
    border-color:var(--rouge)}
  .cout-gain.neutre{background:rgba(147,163,189,.12);border-color:var(--border)}
  .cout-gain .detail{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px;color:var(--texte-dim);font-size:.72rem}
@@ -1096,7 +1096,7 @@ index 51a063c..b0858d3 100644
  /* Badge live sous le levier manipulé et puce du ruban : toujours visibles. */
  .cout-live-zone{grid-column:1/-1}
  .cout-live{margin-top:6px;border-radius:9px;padding:5px 10px;font-size:.76rem;font-weight:600;
-@@ -321,7 +324,8 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+@@ -323,7 +326,8 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
  .audit th{color:var(--texte);font-size:.7rem;text-transform:uppercase;letter-spacing:.4px}
  .audit td.chiffre{font-variant-numeric:tabular-nums;white-space:nowrap}
  .audit .formule{font-family:ui-monospace,Consolas,monospace;font-size:.68rem;color:var(--texte)}
@@ -1106,7 +1106,7 @@ index 51a063c..b0858d3 100644
  /* ── Sommaire : lire la page dans l'ordre ──────────────────────────────────
     La page est longue : ce bandeau dit où l'on est et dans quel ordre lire.
     Il reprend la logique du parcours : comprendre, régler, mesurer, vérifier. */
-@@ -332,7 +336,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+@@ -334,7 +338,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
    border:1px solid var(--border);border-radius:999px;padding:3px 10px;white-space:nowrap}
  .sommaire a:hover{border-color:var(--accent);color:var(--texte)}
  .sommaire a.actif{border-color:var(--accent);color:var(--accent);background:rgba(56,189,248,.12)}
@@ -1115,7 +1115,7 @@ index 51a063c..b0858d3 100644
  /* ── Lecture en clair ─────────────────────────────────────────────────────
     Les chiffres du moteur sont justes ; la section « lire le résultat » les
     remet en phrases. Une ligne par question que l'on se pose vraiment. */
-@@ -377,6 +381,9 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+@@ -379,6 +383,9 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
  .guide-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
  @media(max-width:640px){body{padding:10px}header.entete h1{font-size:1.15rem}
    .ruban-veille{position:static}.console-corps{grid-template-columns:1fr}
@@ -1125,13 +1125,34 @@ index 51a063c..b0858d3 100644
    .levier.compact{grid-template-columns:1fr 70px auto}}
  </style>
  </head>
-@@ -578,4 +585,4 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+@@ -440,7 +447,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+       <button class="discret" id="btn-console-details" onclick="basculerDetailsConsole()" data-aide="<b>Détail des seuils</b>Replie ou déplie le corps de la console de veille pour libérer l'écran : le verdict et les cinq strates restent affichés.">Masquer le détail des seuils</button>
+       <button class="discret" id="btn-densite" onclick="basculerDensite()" data-aide="<b>Vue compacte</b>Une ligne par levier : le catalogue tient à l'écran, tous réglables en direct.">Vue compacte</button>
+       <button class="primaire" onclick="allerAuxLeviers()" data-aide="<b>Régler les leviers</b>Fait défiler jusqu'à la grille des paramètres, où chaque geste relance la simulation en direct.">Régler les leviers</button>
+-      <button class="discret" onclick="allerAudit()" data-aide="<b>Audit &amp; traçabilité</b>Toutes les sources officielles, chaque formule, chaque seuil et la méthode des dynamiques croisées : le simulateur à livre ouvert, pas une boîte noire.">🔍 Audit &amp; sources</button>
++      <button class="discret" onclick="allerAudit()" data-aide="<b>Audit &amp; traçabilité</b>Toutes les sources officielles, chaque formule, chaque seuil et la méthode des dynamiques croisées : le simulateur à livre ouvert.">🔍 Audit &amp; sources</button>
+     </span>
+   </div>
+ 
+@@ -579,7 +586,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+ 
    <section class="bloc" id="section-journal">
      <h2>Journal causal du moteur <span class="aide">rétroactions générées année par année</span></h2>
 -    <div class="journal" id="journal"></div>
 +    <div class="journal mrsc-scroll-region" id="journal" role="region" tabindex="0" aria-label="Journal causal du moteur"></div>
    </section>
-@@ -750,6 +757,9 @@ let BULLE_OUVERTE = null;
+ 
+   <section class="bloc" id="section-provenance">
+@@ -588,7 +595,7 @@ thead th{color:var(--texte-dim);font-weight:600;position:sticky;top:0;background
+   </section>
+ 
+   <section class="bloc audit" id="section-audit">
+-    <h2>🔍 Audit &amp; traçabilité — à livre ouvert <span class="aide">pas de boîte noire : chaque chiffre, chaque formule, chaque seuil et chaque dynamique croisée est vérifiable à la source</span></h2>
++    <h2>🔍 Audit &amp; traçabilité — à livre ouvert <span class="aide">chaque chiffre, chaque formule, chaque seuil et chaque dynamique croisée est vérifiable à la source</span></h2>
+     <p class="aide" style="margin-bottom:10px">
+       Ce simulateur est un <b>modèle, pas une prophétie</b> : il rend explicites toutes ses
+       hypothèses. Vous trouverez ici, de façon permanente et auditable : les sources officielles
+@@ -752,6 +759,9 @@ let BULLE_OUVERTE = null;
  let BULLES_DEMANDEES = new Set();
  //: Libellés des 20 domaines, repris du catalogue pour les bulles.
  let LIBELLES_DOMAINES = {};
@@ -1141,7 +1162,7 @@ index 51a063c..b0858d3 100644
  
  function fmt(valeur, precision){
    if (valeur === null || valeur === undefined || Number.isNaN(valeur)) return '—';
-@@ -762,7 +772,8 @@ function couleurDelta(valeur){
+@@ -764,7 +774,8 @@ function couleurDelta(valeur){
  }
  function pastille(mode){
    const libelles = {live:'données live', reference:'référence datée du projet', mixte:'données mixtes'};
@@ -1151,7 +1172,7 @@ index 51a063c..b0858d3 100644
  }
  
  /* ── Chargement du catalogue (leviers + domaines) ───────────────────────── */
-@@ -801,28 +812,33 @@ function renderContexte(){
+@@ -803,28 +814,33 @@ function renderContexte(){
      ['Prélèvements obligatoires', fmt(c.prelevements_obligatoires_pct_pib, 1) + ' % PIB', ''],
    ];
    document.getElementById('grid-metrics').innerHTML = metriques.map(([libelle, valeur, sous]) =>
@@ -1200,7 +1221,7 @@ index 51a063c..b0858d3 100644
      : '';
    document.getElementById('provenance').innerHTML = lignes + blocComplementaire
      + '<div style="margin-top:8px">Rappel : le mode « référence » signifie que le serveur n\'a pas pu (ou pas encore)'
-@@ -863,6 +879,18 @@ function rendreOngletStrate(cle, donnees){
+@@ -865,6 +881,18 @@ function rendreOngletStrate(cle, donnees){
    panneau.innerHTML = contenuOngletStrate(cle, donnees) || '';
    if (cle === 'menages') rendreResultatsMenage(donnees, ANNEE_MENAGE);
    if (cle === 'boursier') renderResultatsBoursiers();
@@ -1219,7 +1240,7 @@ index 51a063c..b0858d3 100644
  }
  function afficherOngletStrate(cle){
    if (!CLES_ONGLETS_STRATE.includes(cle)) return;
-@@ -885,9 +913,9 @@ function afficherNombre(valeur, precision, unite){
+@@ -887,9 +915,9 @@ function afficherNombre(valeur, precision, unite){
  function sourceObservatoire(info){
    if (!info) return '';
    const source = echapperTexte(info.source || info.libelle || 'Source publique');
@@ -1232,7 +1253,7 @@ index 51a063c..b0858d3 100644
    const periode = info.periode ? ` · période observée : ${echapperTexte(info.periode)}` : '';
    const publication = info.publication_le
      ? ` · publié le ${echapperTexte(info.publication_le)}` : '';
-@@ -1473,18 +1501,72 @@ function extraireGenerique(adaptateur, charge, chemin){
+@@ -1475,18 +1503,72 @@ function extraireGenerique(adaptateur, charge, chemin){
    }
    return null;
  }
@@ -1307,7 +1328,7 @@ index 51a063c..b0858d3 100644
          const lecture = extraireGenerique(source.adaptateur, charge, source.chemin);
          if (!lecture || !Number.isFinite(lecture.valeur)) continue;
          // `interroger()` côté serveur renvoie déjà les unités canoniques ; ici,
-@@ -1499,14 +1581,18 @@ async function rafraichirDonnees(){
+@@ -1501,14 +1583,18 @@ async function rafraichirDonnees(){
          break;
        } catch (erreur) { /* source suivante */ }
      }
@@ -1329,7 +1350,7 @@ index 51a063c..b0858d3 100644
            const lecture = charge.lecture;
            if (lecture && Number.isFinite(Number(lecture.valeur))){
              lectures[cle] = {cle: cle, valeur: Number(lecture.valeur), periode: lecture.periode,
-@@ -1520,13 +1606,28 @@ async function rafraichirDonnees(){
+@@ -1522,13 +1608,28 @@ async function rafraichirDonnees(){
        } catch (erreur) { /* le serveur garde ses valeurs */ }
      }
    }
@@ -1361,7 +1382,7 @@ index 51a063c..b0858d3 100644
    await rafraichirMarches(true);
    bouton.disabled = false;
    bouton.textContent = succes > 0
-@@ -1936,7 +2037,10 @@ async function chargerBulle(cle){
+@@ -1938,7 +2039,10 @@ async function chargerBulle(cle){
    if (Object.prototype.hasOwnProperty.call(BULLES, cle) || BULLES_DEMANDEES.has(cle)) return;
    BULLES_DEMANDEES.add(cle);
    try {
@@ -1373,7 +1394,7 @@ index 51a063c..b0858d3 100644
      const donnees = await reponse.json();
      BULLES[cle] = (donnees && donnees.cle === cle) ? donnees : null;
    } catch (erreur){
-@@ -1968,6 +2072,10 @@ function pucesHtml(cle){
+@@ -1970,6 +2074,10 @@ function pucesHtml(cle){
    if (!effets.length) return '';
    return '<div class="puces">' + effets.map(puceHtml).join('') + '</div>';
  }
@@ -1384,7 +1405,7 @@ index 51a063c..b0858d3 100644
  function renderLeviers(filtre){
    const recherche = (filtre || '').toLowerCase();
    const zones = CATALOGUE.parametres.familles.map(famille => {
-@@ -2015,7 +2123,7 @@ function renderLeviers(filtre){
+@@ -2017,7 +2125,7 @@ function renderLeviers(filtre){
        </div>`;
      }).join('');
      return `<div class="famille${VUE_COMPACTE ? ' compacte' : ''}">
@@ -1393,7 +1414,7 @@ index 51a063c..b0858d3 100644
    }).join('');
    document.getElementById('leviers-grille').innerHTML = zones
      || '<div class="carte">Aucun levier ne correspond à cette recherche.</div>';
-@@ -2080,30 +2188,49 @@ function nombreLeviersActifs(){
+@@ -2082,30 +2190,49 @@ function nombreLeviersActifs(){
  /* ── Scénarios et préréglages ───────────────────────────────────────────── */
  function renderScenarios(){
    const grid = document.getElementById('scenario-grid');
@@ -1453,7 +1474,7 @@ index 51a063c..b0858d3 100644
      grid.appendChild(card);
    });
  }
-@@ -2121,22 +2248,23 @@ function chargerPreset(cle, ev){
+@@ -2123,22 +2250,23 @@ function chargerPreset(cle, ev){
    simuler(true);
  }
  async function runScenario(scenario, ev){
@@ -1487,7 +1508,7 @@ index 51a063c..b0858d3 100644
  }
  function afficherScenarioHistorique(donnees){
    const final = donnees.resultats[donnees.resultats.length - 1];
-@@ -2229,6 +2357,16 @@ function echapperAttribut(texte){
+@@ -2231,6 +2359,16 @@ function echapperAttribut(texte){
    return echapperTexte(texte || '').replace(/"/g, '&quot;');
  }
  
@@ -1504,7 +1525,7 @@ index 51a063c..b0858d3 100644
  function marquerUnTerme(trouve){
    const cle = TABLE_TERMES[trouve.toLowerCase()];
    const terme = cle ? LEXIQUE_PAR_CLE[cle] : null;
-@@ -2568,7 +2706,8 @@ async function simuler(avecImpacts){
+@@ -2570,7 +2708,8 @@ async function simuler(avecImpacts){
      const reponse = await fetch('/api/simuler', {
        method:'POST', headers:{'Content-Type':'application/json'},
        body: JSON.stringify({parametres: parametresEnvoyes, horizon: horizon,
@@ -1514,7 +1535,7 @@ index 51a063c..b0858d3 100644
      });
      const donnees = await reponse.json();
      if (donnees.error){ alert('Erreur de simulation : ' + donnees.error); return; }
-@@ -2871,7 +3010,7 @@ async function majConseilTempsReel(parametresEnvoyes){
+@@ -2873,7 +3012,7 @@ async function majConseilTempsReel(parametresEnvoyes){
        method:'POST', headers:{'Content-Type':'application/json'},
        body: JSON.stringify({parametres: parametresEnvoyes, cle: cle,
                              avant: MOUVEMENT.avant, apres: apres,
@@ -1523,7 +1544,7 @@ index 51a063c..b0858d3 100644
      });
      const conseil = await reponse.json();
      // Le conseil affiché correspond au dernier mouvement réellement demandé.
-@@ -3161,14 +3300,18 @@ function echapperTexte(texte){
+@@ -3163,14 +3302,18 @@ function echapperTexte(texte){
      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
      .replace(/"/g, '&quot;');
  }
@@ -1544,7 +1565,7 @@ index 51a063c..b0858d3 100644
      return `<tr><td>${echapperTexte(fiche.libelle)}</td>
        <td class="chiffre">${valeur === null || valeur === undefined ? '—' : fmt(valeur, 2)} ${echapperTexte(fiche.unite || '')}</td>
        <td>${echapperTexte(fiche.periode || '—')}</td>
-@@ -3176,30 +3319,34 @@ function auditSourcesHtml(){
+@@ -3178,30 +3321,34 @@ function auditSourcesHtml(){
        <td class="source-note">${echapperTexte(fiche.source || '')}${url}</td>
        <td class="source-note">${echapperTexte(fiche.licence || '')}</td></tr>`;
    }).join('');
@@ -1585,7 +1606,7 @@ index 51a063c..b0858d3 100644
      const leviers = (famille.leviers || []).map(levier => {
        const effets = Object.entries(levier.effets_directs || {})
          .map(([theme, coefficient]) => `${echapperTexte(theme)} ${coefficient > 0 ? '+' : ''}${fmt(coefficient, 2)}`)
-@@ -3209,10 +3356,11 @@ function auditLeviersHtml(){
+@@ -3211,10 +3358,11 @@ function auditLeviersHtml(){
          <td>${effets}</td>
          <td class="source-note">${echapperTexte(levier.source || '')}</td></tr>`;
      }).join('');
@@ -1600,7 +1621,7 @@ index 51a063c..b0858d3 100644
    }).join('');
  }
  function auditGardeFousHtml(bareme){
-@@ -3227,9 +3375,10 @@ function auditGardeFousHtml(bareme){
+@@ -3229,9 +3377,10 @@ function auditGardeFousHtml(bareme){
        <td class="chiffre">${echapperTexte(garde.unite || '')}</td>
        <td class="source-note">${echapperTexte(garde.source || '')}</td></tr>`;
    }).join('');

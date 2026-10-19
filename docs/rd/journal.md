@@ -2,6 +2,146 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-18 — Squelette non adopté du règlement intérieur
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** organiser les modalités candidates sans transformer les cinq décisions préalables en règles ni présenter le projet comme adopté.
+- **Résultat :** dix-neuf titres et quatre-vingt-deux articles de travail couvrent adhésion, organes, votes, finances, données, discipline, sécurité et continuité.
+- **Optimisation :** le vérificateur refuse un projet présenté comme adopté, une lacune de numérotation et la disparition des garde-fous essentiels.
+- **Limite :** aucun article ne produit d’effet ; compétence d’adoption, renouvellement des dirigeants, articles 17–18, dissolution et charte restent à trancher.
+- **Prochaine action :** faire relire le squelette, puis rédiger des clauses candidates uniquement lorsque source, compétence, preuve et recours sont confirmés.
+
+## 2026-10-18 — Classement normatif proposé pour chaque groupe d’articles
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** distinguer ce qui relève des statuts, du règlement, d’une procédure, d’un niveau mixte ou d’une décision préalable.
+- **Résultat :** les vingt groupes possèdent un classement justifié ; l’article 9, le renouvellement des dirigeants, les articles 17–18 et la dissolution restent en décision préalable.
+- **Optimisation :** deux tests refusent un article non classé et le déclassement de la dissolution en simple procédure.
+- **Limite :** ce classement est une proposition documentaire ; seul un examen juridique et la décision associative peuvent arrêter le niveau normatif.
+- **Prochaine action :** rédiger le squelette du règlement uniquement pour les éléments classés `reglement` ou `mixte`, sans convertir les décisions préalables en règles.
+
+## 2026-10-18 — Matrice de traçabilité des vingt groupes d’articles
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** relier chaque partie des statuts à son objet, sa compétence, sa preuve, son recours, sa règle d’urgence et son point restant à trancher.
+- **Résultat :** vingt groupes couvrent les pages 3 à 25 ; les articles 17–18 restent sans page inventée et la dissolution reste bloquée pour interprétation juridique.
+- **Optimisation :** le vérificateur contrôle désormais la présence des vingt groupes, les champs de traçabilité et les deux blocages de source/interprétation.
+- **Limite :** la matrice est une lecture de travail, pas une norme adoptée ni une interprétation juridique opposable.
+- **Prochaine action :** faire relire chaque ligne, puis distinguer les clauses relevant des statuts, du règlement intérieur ou d’une procédure opérationnelle.
+
+## 2026-10-18 — Registre contrôlable des risques statutaires
+
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** transformer le brainstorming global en registre structuré sans score, probabilité ni prétention d’exhaustivité.
+- **Résultat :** huit invariants, seize familles de risques et trois portes bloquantes relient scénarios, actifs, contrôles et conditions d’arrêt.
+- **Optimisation :** un vérificateur et cinq tests empêchent suppression silencieuse, validation prématurée, porte indicative et promesse d’exhaustivité.
+- **Limite :** la structure améliore la couverture documentaire mais ne prouve ni efficacité des contrôles, ni légalité, ni absence de scénario inconnu.
+- **Prochaine action :** attribuer les revues, réunir les documents absents et convertir chaque contrôle retenu en clause ou procédure reliée à sa source statutaire.
+
+## 2026-10-18 — Plan global de résilience et prévention des détournements
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** cartographier les dynamiques croisées des statuts, les captations internes ou externes, les crises et les erreurs avant de rédiger le règlement intérieur.
+- **Résultat :** seize familles de scénarios, cinq niveaux de continuité, vingt-et-un chapitres de règlement, cinq portes de décision et une feuille de route consolidée.
+- **Revue contradictoire :** le plan traite également les abus possibles des mécanismes de protection eux-mêmes : urgence prolongée, conseil d’éthique capturé, contrôle centralisé et recours supprimé.
+- **Limite :** aucun texte ne peut être exhaustif ou étanche ; le plan ne modifie pas les statuts, ne crée aucun pouvoir public et reste à relire juridiquement et démocratiquement.
+- **Prochaine action :** réunir les documents absents, produire la matrice article–compétence–preuve–recours et faire distinguer ce qui relève des statuts, du règlement ou d’une procédure.
+
+## 2026-10-18 — Pré-vérification juridique complète des statuts
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** relire les 25 pages article par article avant de poursuivre le QCM et la rédaction du règlement intérieur.
+- **Résultat :** une note de cohérence interne recense les questions de gouvernance, corps électoral, finances, sanctions, assemblées et dissolution ; les orientations déjà données par le fondateur sont séparées des règles actuellement écrites.
+- **Revue contradictoire :** une seconde passe a recherché conflits de compétence, définitions absentes, règles spéciales et procédures sans recours ; aucun sous-agent indépendant n’était disponible.
+- **Limite :** cette pré-vérification n’est ni un avis juridique ni une validation ; le droit positif actuel et la version déposée restent à confronter à des sources officielles et à une personne compétente.
+- **Prochaine action :** obtenir les documents absents, faire répondre un relecteur juridique aux douze questions bornées, puis reprendre le QCM sur la majorité d’adoption du règlement.
+
+## 2026-10-18 — Six présentations par intention derrière « Présentation »
+
+- **Initiative :** `optimisation-du-site` (avec la carte `direction-artistique-motion`).
+- **Signal et demande :** produire d’autres personnalisations de présentation via le bouton prévu, avec des compositions pertinentes qui donnent envie de profiter des contenus.
+- **Décision :** ajouter trois rythmes CSS aux trois choix existants — « Vitrine » (aéré, grands titres, grandes tuiles), « Mosaïque » (tuiles variées sans flux dense ni réordonnancement) et « Compacte » (dense, pour balayer et comparer) — plus un mini-aperçu schématique et une ligne « Idéal pour : … » par choix, sur le site et dans le simulateur autonome généré. « Équilibrée » reste le défaut ; contenu, ordre de lecture et fonctions inchangés. Étude, motifs retenus ou écartés et arbitrages dans [`presentations-personnalisees.md`](presentations-personnalisees.md).
+- **Options écartées ou différées :** mode sombre complet (197 couleurs hexadécimales sans inventaire de jetons), rangées horizontales de découverte personnalisée (reflow et profil), surfaces translucides décoratives (contraste), palette recalculée automatiquement selon l’environnement de la personne (palette vérifiée), colonnes magazine pour le texte courant et animations au défilement.
+- **Défauts observés et corrections pendant l’intégration :** titres Vitrine trop grands à 320 px (17 puis 15 px de débordement mesurés, planchers abaissés) ; bouton long d’aside de fiche (élargissement des boutons retiré) ; nom de domaine incassable en pistes étroites (coupe autorisée) ; bouton « interactions » et sources sans espace du simulateur en pistes de 200 px (repli du moteur appliqué) ; débordement préexistant de Panorama sur les étapes « IA & société » à 320 px (listes d’étapes exclues des collections). Un débordement d’en-tête de 59 px à 1 440 px dans le navigateur sans interface des essais est identique dans les six modes et sur le commit de départ : préexistant, à requalifier dans un navigateur graphique.
+- **Requalification et correctif d’en-tête (même jour) :** la rangée de navigation (neuf ou dix liens + Parcours/Affichage/Présentation) mesure ~1 350 à ~1 565 px sans repli possible dans un conteneur limité à la colonne de contenu (1 160 px) : débordement mesuré de 1 280 px à ~1 600 px de fenêtre (3 à 139 px selon page et largeur), susceptible de tronquer les extrémités selon les polices réelles ou de nouvelles entrées de menu. Correctif CSS : au-delà du seuil de repli (1 261 px), la rangée utilise toute la fenêtre (plafond 104 rem) et peut passer sur deux lignes plutôt que de tronquer ; en-tête compact et modes 125/150 % inchangés par spécificité supérieure. Preuves dans l’environnement d’essai : débordement nul de 1 280 à 1 920 px sur l’accueil (neuf liens) et le catalogue (dix liens), captures d’en-tête à 1 440 et 1 920 px sans élément tronqué, essais navigateur 8/8, assertion ajoutée au vérificateur d’intégration. Relecture visuelle humaine toujours due ; statut inchangé `a-tester`.
+- **Contrôles réellement exécutés :** porte complète du dépôt (`py_compile`, vérificateurs R&D, apprentissages, simulateur régénéré, site statique, images, poids, sécurité, intégration étendue aux six choix, `node --check`, `git diff --check`) ; `outils/test-experience.cjs` dans un navigateur sans interface : 8/8, y compris la boucle Vitrine/Mosaïque/Compacte sur le catalogue ; matrice ponctuelle hors dépôt de 144 cas (8 pages × 3 largeurs × 6 modes) sans débordement imputable aux modes après corrections. Détail et limites dans la note R&D.
+- **Limites :** aucun essai avec des personnes, aucun lecteur d’écran, aucun autre moteur de navigateur, aucune relecture visuelle humaine ni vérification après publication ; l’utilité et la compréhension des libellés/aperçus restent des hypothèses (tâche candidate B7 à relire).
+- **Prochaine action :** revue visuelle humaine des six présentations (accueil, catalogue, fiche, dossier IA, simulateur) et de l’en-tête corrigé dans un navigateur graphique, puis essais volontaires seulement après relecture du protocole ; garder l’initiative à l’état `a-tester`.
+
+## 2026-10-18 — Inventaire des couleurs et plan de jetons (aucune valeur modifiée)
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal et demande :** suite des présentations et du correctif d’en-tête du même jour — réaliser l’inventaire de couleurs que le § 6 de [`rd-affichage-adaptatif.md`](../rd-affichage-adaptatif.md) pose comme préalable à toute variante sombre.
+- **Résultat :** [`inventaire-couleurs-jetons.md`](inventaire-couleurs-jetons.md). Feuille principale : 188 occurrences hexadécimales hors définitions initiales (91 valeurs distinctes) et 103 fonctions couleur ; feuille de l’aventure : 231 occurrences (131 distinctes), sans `:root` propre ; habillage du simulateur : 66 occurrences ; pages et 81 fiches sans couleur propre hors métadonnée `theme-color`. Hors périmètre « thème » : palette sombre propre du moteur du simulateur (déjà en variables dans la page générée) et palettes des scènes illustrées de l’aventure (190 littéraux de dessin). Lecture par rôles : grappe de textes secondaires « ardoise » (8 valeurs voisines, 28 occurrences) parallèle à `--muted`, fonds teintés par famille (20 valeurs, 36 occurrences), bordures, accents texte foncés ; contrastes de référence du thème clair tous au-dessus de 4,5:1 sur blanc (plus faible : `--muted` à 5,00:1). Deux blocs de contraste renforcé redéfinissent déjà les onze jetons : le mécanisme de variante par jetons existe.
+- **Décision :** aucune valeur de couleur ni aucun fichier de style ou de code modifié dans cette passe. Plan en trois phases proposé dans la note : tokenisation par rôle à valeurs strictement identiques dans la feuille principale, puis aventure et habillage du simulateur via son générateur, variante sombre seulement après prototype borné, captures et relecture humaine — décision séparée, non prise.
+- **Points relevés pour la phase 1 :** `--white` à double rôle (fond clair et premier plan sur fond marine) à scinder ; quatre libellés de cartes d’accueil en littéraux qui ne suivent pas le contraste renforcé ; une valeur verrouillée par le vérificateur d’intégration (`#bae6fd`) ; base d’ombre `rgba(26,48,91)` distincte de `--navy`.
+- **Contrôles réellement exécutés :** comptages et grappes produits par script éphémère (méthode décrite dans la note), calculs de contraste selon la formule de luminance relative, puis vérificateurs documentaires et d’intégration du dépôt. Aucun rendu modifié, donc aucun essai navigateur à refaire pour cette passe.
+- **Limites :** inventaire statique (ni couleurs d’images, ni contextes d’empilement réels) ; aucun essai avec des personnes ; le thème sombre reste différé et non promis.
+- **Prochaine action :** phase 1 de tokenisation par rôle dans `assets/css/site.css`, à valeurs identiques en thème clair et avec captures avant/après ; garder l’initiative à l’état `a-tester`, la relecture visuelle humaine des présentations et de l’en-tête restant prioritaire.
+
+## 2026-10-18 — Jetons de rôle, phase 1 : 84 littéraux remplacés à valeurs identiques
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal et demande :** exécuter la phase 1 du plan de l’inventaire des couleurs du même jour, sans changer le rendu.
+- **Résultat :** dix-huit jetons de rôle ajoutés au `:root` de `assets/css/site.css` (textes secondaires, surfaces, fonds teintés, bordures, textes sur fond marine) et 84 littéraux remplacés sur 72 lignes, plan à blanc relu ligne par ligne avant application. Le blanc littéral est réparti selon son rôle vérifié (`--surface` pour les fonds clairs, `--on-navy` pour le chiffre blanc sur pastille marine) ; un anneau décoratif au rôle ambigu reste littéral. Détail, résidu et points ouverts au § 9 de [`inventaire-couleurs-jetons.md`](inventaire-couleurs-jetons.md).
+- **Preuve d’identité :** styles calculés porteurs de couleur photographiés avant/après dans un navigateur sans interface sur 8 pages types × 2 largeurs, plus l’accueil en contraste renforcé — 16 582 éléments, 0 différence. Essais navigateur 8/8 et porte complète du dépôt réussis ; assertion verrouillée `#bae6fd` mise à jour et nouveau contrôle d’intégration sur les jetons.
+- **Décisions et restes :** les quatre libellés de cartes d’accueil restent des littéraux (arbitrage ouvert, car les aligner changerait le rendu du contraste renforcé) ; les usages existants de `var(--white)` ne sont pas encore scindés ; 104 occurrences hexadécimales ponctuelles et les 103 `rgba()` restent littéraux. Aucune valeur sombre créée.
+- **Limites :** identité prouvée au niveau des styles calculés dans l’environnement d’essai (police de repli), pas une relecture visuelle humaine ; états de survol garantis par l’égalité des valeurs des jetons, non photographiés.
+- **Prochaine action :** relecture visuelle humaine toujours prioritaire ; ensuite phase 2 (feuille de l’aventure, habillage du simulateur via son générateur), la variante sombre restant subordonnée à un prototype borné et à une décision séparée. État inchangé : `a-tester`.
+
+## 2026-10-18 — Jetons de rôle, phase 2 : aventure et habillage du simulateur
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal et demande :** exécuter la phase 2 du plan de l’inventaire des couleurs, toujours sans changer le rendu.
+- **Résultat :** feuille de l’aventure — 77 littéraux remplacés sur 69 lignes : 54 par des jetons communs du site non redéfinis en contraste renforcé (`--text-soft`, `--surface`, `--on-navy`…), 23 par quatre jetons locaux `--mondes-*` définis en tête de feuille. Habillage du simulateur — 31 littéraux remplacés dans le seul générateur `outils/construire-simulateur.py`, quatre jetons préfixés `--mrsc-*` sans collision avec le moteur, page autonome régénérée et vérifiée. Verrous du vérificateur d’intégration mis à jour (dégradé du bouton principal) et contrôle de phase 2 ajouté. Détail au § 10 de [`inventaire-couleurs-jetons.md`](inventaire-couleurs-jetons.md).
+- **Décision d’ensemble gelé :** vingt-trois littéraux de l’aventure égaux aux jetons d’origine du site (bleu marine, encre, gris, bleu, vert) restent écrits en dur : ces jetons sont redéfinis en contraste renforcé, donc les brancher changerait le rendu de ce seul mode. Même arbitrage ouvert que les libellés de cartes d’accueil de la phase 1 — choix de conception à décider explicitement, avec captures.
+- **Preuve d’identité :** styles calculés photographiés avant/après sur 9 pages types × 2 largeurs, contraste renforcé compris pour l’accueil, l’aventure et le simulateur — 41 940 éléments, 0 différence. Essais navigateur 8/8, porte complète du dépôt réussie.
+- **Limites :** identité prouvée au niveau des styles calculés dans l’environnement d’essai (police de repli), pas une relecture visuelle humaine ; les thématiques couleur par monde de l’aventure et les valeurs ponctuelles restent littérales, à dessein.
+- **Prochaine action :** relecture visuelle humaine toujours prioritaire. La phase 3 (variante sombre) reste subordonnée à un prototype borné, à ses mesures de contraste et à une décision séparée ; l’arbitrage « ensemble gelé » peut être tranché à cette occasion. État inchangé : `a-tester`.
+
+## 2026-10-18 — Arbitrage de l’ensemble gelé : les couleurs de marque suivent le contraste renforcé
+
+- **Initiative :** `optimisation-du-site`.
+- **Décision :** brancher sur leurs jetons les littéraux laissés en suspens aux phases 1–2 : les quatre libellés de cartes d’accueil (vert et bleu sur leurs jetons d’origine ; or et rouge sur deux nouveaux jetons d’accent-texte `--gold-ink`/`--red-ink`, les accents de base étant trop clairs pour du texte) et les vingt-trois littéraux de l’aventure égaux aux jetons d’origine du site. Tous les usages ont été relus avant remplacement : éléments foncés sur fonds clairs uniquement.
+- **Preuve :** photographie des styles calculés avant/après (24 contextes, 41 940 éléments) — thème par défaut strictement inchangé (0 différence) ; en contraste renforcé, 106 éléments prennent la valeur renforcée de leur jeton, avec des contrastes tous en hausse (gris secondaire 5,00 → 8,97:1 ; bleu 6,97 → 8,88:1 ; marine 12,29 → 15,20:1 ; avatar 9,75 → 12,05:1). Essais navigateur 8/8, porte complète réussie, contrôle d’intégration dédié. Détail au § 11 de [`inventaire-couleurs-jetons.md`](inventaire-couleurs-jetons.md).
+- **Limites :** mesures dans l’environnement d’essai (police de repli) ; relecture visuelle humaine toujours due. État inchangé : `a-tester`.
+
+## 2026-10-18 — Prototype sombre borné et non activé : faisabilité partielle
+
+- **Initiative :** `optimisation-du-site`.
+- **Démarche :** valeurs sombres candidates pour les seuls jetons de rôle, calculées puis injectées uniquement dans la session du navigateur d’essai — aucun fichier du dépôt ne les contient, rien n’est activé ni publié. Quatre captures (accueil, catalogue, aventure) conservées hors dépôt.
+- **Résultat :** les contrastes calculés sont satisfaisants (textes entre 7,56:1 et 15,64:1 sur les fonds de référence), et les zones peintes par les jetons rendent correctement. Mais la variante n’est **pas activable en l’état** : surfaces claires littérales hors jetons (en-tête `rgba(255,255,255,.97)`, dégradés et voiles des sections, panneaux) rendant illisibles les textes éclaircis ; jetons à double rôle (`--navy` en titres quasi illisibles, `--white`) ; composants mixtes texte-en-jeton sur fond littéral.
+- **Décision :** ne rien activer. Si la variante sombre est poursuivie, prérequis « phase 2.5 » : résorber les surfaces littérales et scinder les jetons à double rôle — toujours à valeurs identiques en thème clair — puis re-prototyper et décider séparément du déclenchement. Détail et valeurs candidates au § 12 de [`inventaire-couleurs-jetons.md`](inventaire-couleurs-jetons.md).
+- **Prochaine action :** relecture visuelle humaine des présentations, de l’en-tête et des captures du prototype ; aucune promesse de thème sombre. État inchangé : `a-tester`.
+
+## 2026-10-18 — Jetons de rôle, phase 2.5 : scission des doubles rôles et surfaces littérales résorbées
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal et demande :** exécuter le prérequis « phase 2.5 » issu du prototype sombre borné du même jour, sans changer le rendu ni activer quoi que ce soit.
+- **Résultat :** dans `assets/css/site.css`, 234 remplacements à valeurs identiques, plan à blanc relu ligne par ligne : les 78 usages de `var(--white)` répartis par rôle réel (`--surface` ×49, `--on-navy` ×27, `--on-accent` ×2 pour le bouton plein), les 46 premiers plans `var(--navy)` vers le nouveau `--navy-ink` (13 fonds marine conservés), et 110 littéraux — en-tête translucide `--surface-header`, arrêts des dégradés de héros et de sections, voiles, pied et héros sombres, bloc de code, bannière d’état, bordures et encres ponctuelles — vers 77 jetons de rôle. `--navy-ink` est redéfini comme `--navy` en contraste renforcé (classe et préférence système) et en couleurs forcées ; `--surface`, `--on-navy` et `--on-accent` y reçoivent le miroir `Canvas` que `--white` portait. Aventure : 11 premiers plans vers `--navy-ink` (fond d’avatar conservé) ; page 404 et page de pistes alignées. `--white` demeure défini comme alias hérité, sans aucun usage. Détail au § 13 de [`inventaire-couleurs-jetons.md`](inventaire-couleurs-jetons.md).
+- **Preuve d’identité :** styles calculés photographiés avant/après sur 26 contextes (9 pages types × 2 largeurs ; contraste renforcé sur l’accueil, l’aventure et le simulateur ; couleurs forcées émulées sur l’accueil et l’aventure) — 26 734 éléments, 0 différence. Un premier passage relevait 120 valeurs transitoires pendant les transitions déclenchées par l’ajout de la classe de contraste ; banc corrigé (transitions neutralisées des deux côtés) et captures rejouées. Essais navigateur 8/8, porte complète du dépôt réussie, contrôle d’intégration « phase 2.5 » ajouté et deux verrous mis à jour.
+- **Limites :** identité prouvée au niveau des styles calculés dans l’environnement d’essai (police de repli), pas une relecture visuelle humaine ; résidu littéral motivé (ombres, halos et anneaux d’illustration, alphas ponctuels sur marine, impression). Aucune valeur sombre créée, rien d’activé.
+- **Prochaine action :** relecture visuelle humaine toujours prioritaire ; le re-prototype sombre borné peut désormais être tenté sur les seuls jetons, sans décision d’activation. État inchangé : `a-tester`.
+
+## 2026-10-18 — Re-prototype sombre borné après phase 2.5 : feuille principale débloquée, deux résidus à traiter
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal et demande :** le prérequis « phase 2.5 » étant rempli, re-prototyper la variante sombre sur les seuls jetons — toujours sans rien activer ni publier de valeur sombre.
+- **Résultat :** valeurs candidates du § 12 étendues mécaniquement aux 117 jetons et injectées uniquement dans la session du navigateur d’essai ; contraste mesuré élément par élément (fond effectif, pire cas des dégradés) avec témoin clair par le même banc. Feuille principale : en jetons seuls, 12 textes sous les repères sur 2 368 — uniquement les boutons pleins (2,13:1) ; avec la simulation libellée d’une scission de `--blue`, **0/2 368**. Les trois familles bloquantes du § 12 ont disparu sur ce périmètre ; neuf captures hors dépôt le montrent (accueil, catalogue, transparence, 320 px, simulateur témoin inchangé). Aventure : 439/1 338 textes sous les repères — littéraux des thématiques par monde, périmètre exclu de la phase 2.5. Détail au § 14 de [`inventaire-couleurs-jetons.md`](inventaire-couleurs-jetons.md).
+- **Décision :** ne rien activer. Deux bloqueurs résiduels avant toute phase 3 : scinder `--blue` (lien/focus contre surface du bouton plein — insoluble par une seule valeur, remède du même gabarit que la phase 2.5) et résorber les littéraux de l’aventure ou décider son exclusion explicitement. Déclenchement toujours entièrement ouvert.
+- **Limites :** mesures et captures d’un navigateur sans interface, police de repli ; dérivation des candidates mécanique (teintes vertes lisant olive, échelle des surfaces douces resserrée) ; survols non mesurés ; combinaison avec le contraste renforcé non prototypée ; aucune relecture visuelle humaine ni essai avec des personnes — requis avant toute décision d’activation.
+- **Prochaine action :** relecture visuelle humaine des captures ; si la variante est poursuivie, scission de `--blue` à valeurs claires identiques puis périmètre aventure, avant essais avec personnes concernées et décision séparée. État inchangé : `a-tester`.
+
+## 2026-10-18 — Calcul, contestation et proclamation séparés
+
+- **Initiative :** `vote-distanciel-verifiable`.
+- **Décision :** interdire qu’un total calculé devienne automatiquement un résultat associatif.
+- **Résultat :** six étapes cumulatives couvrent gel, vérifications cryptographique et statutaire, incidents, contestation et décision ; le paquet public minimal exclut identités, secrets et journaux.
+- **Prospective :** divergence de miroirs, disparition d’un vérificateur et recours exigeant une preuve du choix deviennent des arrêts distincts, sans probabilité.
+- **Optimisation :** le contrôle refuse un résultat préautorisé, la suppression de la contestation et une porte de proclamation partielle.
+- **Limite :** aucun résultat, recours, procès-verbal ou scrutin réel n’est produit.
+- **Prochaine action :** faire relire la chaîne complète par les six rôles après décision associative sur un profil et une option.
+
 ## 2026-10-18 — Chaîne logicielle reliée à une porte humaine avant banc
 
 - **Initiative :** `vote-distanciel-verifiable`.

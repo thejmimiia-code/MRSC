@@ -420,14 +420,72 @@ def fichiers_du_site() -> None:
                 ".layout-settings > summary {",
                 "padding: clamp(6px,.4rem,8px) clamp(10px,.65rem,14px)",
                 "font-size: clamp(13px,.875rem,18px)",
-                "background: rgba(255,255,255,.055)",
+                "background: var(--on-navy-fill)",
                 "border-color: var(--gold)",
             )
         )
         and styles.count("font-size: clamp(13px,.875rem,18px)") >= 5,
     )
     verifier(
-        "La personnalisation de présentation offre trois choix CSS immédiats sur le site",
+        "La rangée de navigation passe sur deux lignes au lieu de tronquer ses extrémités au-delà du seuil de repli",
+        ".nav-inner { flex-wrap: wrap; width: min(100% - 2rem, 104rem); }" in styles
+        and ".site-header.is-compact .nav-inner" in styles,
+    )
+    verifier(
+        "Les couleurs répétées à rôle clair passent par des jetons de même valeur (phase 1)",
+        all(
+            jeton in styles
+            for jeton in (
+                "--text-soft: #536078;",
+                "--surface: #fff;",
+                "--surface-soft: #f8f9fc;",
+                "--tint-blue: #edf1f6;",
+                "--border-strong: #aebbd0;",
+                "--on-navy-sky: #bae6fd;",
+            )
+        )
+        and styles.count("#536078") == 1
+        and styles.count("#bae6fd") == 1
+        and styles.count("#aebbd0") == 1,
+    )
+    verifier(
+        "L’ensemble gelé est branché sur les jetons : libellés d’accueil et couleurs de l’aventure suivent le contraste renforcé",
+        "--gold-ink: #835100;" in styles
+        and "--red-ink: #a3232c;" in styles
+        and "--home-card-kicker: var(--green)" in styles
+        and "--home-card-kicker: var(--blue)" in styles
+        and "--home-card-kicker: var(--gold-ink)" in styles
+        and "--home-card-kicker: var(--red-ink)" in styles
+        and styles.count("#456d29") == 1
+        and styles.count("#2958a2") == 1
+        and (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8").count("#1d3268") == 0
+        and (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8").count("#647086") == 0,
+    )
+    verifier(
+        "Les jetons à double rôle sont scindés et les surfaces littérales passent par des jetons (phase 2.5)",
+        all(
+            jeton in styles
+            for jeton in (
+                "--navy-ink: #1d3268;",
+                "--navy-ink: #13244b;",
+                "--navy-ink:#13244b;",
+                "--navy-ink:CanvasText;",
+                "--surface:Canvas;",
+                "--on-navy:Canvas;",
+                "--surface-header: rgba(255, 255, 255, .97);",
+                "--navy-deep: #121f43;",
+                "--code-surface: #121b2e;",
+                "background: var(--surface-header);",
+            )
+        )
+        and styles.count("var(--white)") == 0
+        and styles.count("var(--navy)") == 13
+        and styles.count("rgba(255, 255, 255, .97)") == 1
+        and styles.count("#121f43") == 1
+        and (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8").count("var(--navy)") == 1,
+    )
+    verifier(
+        "La personnalisation de présentation offre six choix CSS immédiats sur le site",
         all(
             marqueur in script_site
             for marqueur in (
@@ -444,8 +502,10 @@ def fichiers_du_site() -> None:
                 'aria-live',
             )
         )
-        and all(option in script_site for option in ('"equilibree"', '"lecture"', '"panorama"'))
-        and all(label in script_site for label in ('label: "Équilibrée"', 'label: "Lecture"', 'label: "Panorama composite"'))
+        and all(option in script_site for option in ('"equilibree"', '"lecture"', '"vitrine"', '"mosaique"', '"panorama"', '"compacte"'))
+        and all(label in script_site for label in ('label: "Équilibrée"', 'label: "Lecture"', 'label: "Vitrine"', 'label: "Mosaïque"', 'label: "Panorama composite"', 'label: "Compacte"'))
+        and 'preview.dataset.preview = choice.value' in script_site
+        and 'layout-choice-hint' in script_site
         and all(
             marqueur in script_site
             for marqueur in (
@@ -464,8 +524,18 @@ def fichiers_du_site() -> None:
                 ".layout-settings:not([open]) > .layout-settings-panel",
                 ".display-settings:not([open]) > .display-settings-panel",
                 ".layout-choice {",
+                'grid-template-columns: 20px 54px minmax(0,1fr)',
+                ".layout-choice-preview {",
+                '.layout-choice-preview[data-preview="mosaique"] > span:nth-child(1) { grid-column: span 2; }',
                 'html[data-layout="lecture"] { --content: 940px; }',
+                'html[data-layout="vitrine"] { --content: 1240px; --radius: 26px;',
+                'html[data-layout="mosaique"] { --content: 1380px; }',
+                'grid-template-columns: repeat(4,minmax(0,1fr)); }',
+                ') > :nth-child(7n+1),',
                 'html[data-layout="panorama"] { --content: 1480px; }',
+                'html[data-layout="compacte"] { --content: 1480px; --radius: 12px;',
+                'repeat(auto-fit,minmax(min(340px,100%),1fr))',
+                'repeat(auto-fit,minmax(min(215px,100%),1fr))',
                 '@media (forced-colors: active)',
             )
         )
@@ -792,8 +862,8 @@ def fichiers_du_site() -> None:
     )
     verifier(
         "Les titres et le repère de statut de la note ressortent sur l’encadré bleu",
-        ".creator-note h3,\n.creator-note h4 { color: var(--white); }" in styles
-        and ".creator-note .eyebrow { color: #bae6fd; }" in styles,
+        ".creator-note h3,\n.creator-note h4 { color: var(--on-navy); }" in styles
+        and ".creator-note .eyebrow { color: var(--on-navy-sky); }" in styles,
     )
     verifier(
         "Le registre renvoie vers la présentation d’ÉVA et distingue objectifs, essais et résultats",
@@ -838,7 +908,19 @@ def fichiers_du_site() -> None:
         "Les commandes du simulateur reprennent les accents bleu, vert et or du M.R.S.C",
         "--accent: #91b2e6" in simulateur_styles
         and "--ambre: #f2c15f" in simulateur_styles
-        and "linear-gradient(135deg, #1d3268, #2958a2)" in simulateur_styles,
+        and "linear-gradient(135deg, var(--mrsc-marine), #2958a2)" in simulateur_styles,
+    )
+    verifier(
+        "Les Mondes et l’habillage du simulateur utilisent les jetons de rôle (phase 2)",
+        all(
+            jeton in (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8")
+            for jeton in ("--mondes-bordure: #dce3ec;", "var(--text-soft)", "var(--surface)", "var(--on-navy)")
+        )
+        and all(
+            jeton in simulateur_styles
+            for jeton in ("--mrsc-marine: #1d3268;", "--mrsc-bordure: #526384;", "--mrsc-sur-marine: #fff;")
+        )
+        and simulateur_styles.count("#526384") == 1,
     )
     verifier(
         "Les flèches des panneaux du simulateur changent de sens à l’ouverture",
@@ -981,7 +1063,7 @@ def fichiers_du_site() -> None:
             ),
         )
         verifier(
-            "Le simulateur autonome propose les trois mises en page et partage le choix local du site",
+            "Le simulateur autonome propose les six mises en page et partage le choix local du site",
             all(
                 marqueur in simulateur_html
                 for marqueur in (
@@ -989,7 +1071,11 @@ def fichiers_du_site() -> None:
                     'aria-controls="site-layout-settings-panel"',
                     'value="equilibree" data-site-layout-option',
                     'value="lecture" data-site-layout-option',
+                    'value="vitrine" data-site-layout-option',
+                    'value="mosaique" data-site-layout-option',
                     'value="panorama" data-site-layout-option',
+                    'value="compacte" data-site-layout-option',
+                    'class="site-layout-preview" data-preview="mosaique"',
                     '<strong>Panorama composite</strong><span>Une page plus large, avec un agencement de cartes en plusieurs colonnes.</span>',
                     'data-site-layout-status role="status" aria-live="polite"',
                     'data-site-layout-reset',
@@ -997,7 +1083,10 @@ def fichiers_du_site() -> None:
                     'applyLayout(read(keys.layout))',
                     'root.dataset.layout = layout',
                     'html[data-layout="lecture"] #contenu-principal { max-width: 1160px; }',
+                    'html[data-layout="vitrine"] #contenu-principal { max-width: 1320px; }',
+                    'html[data-layout="mosaique"] #contenu-principal { max-width: 1600px; }',
                     'html[data-layout="panorama"] #contenu-principal { max-width: 1800px; }',
+                    'html[data-layout="compacte"] #contenu-principal { max-width: 1800px; }',
                     '.site-return-bar .site-layout-panel {',
                     '.site-return-bar .site-layout-settings:not([open]) > .site-layout-panel',
                     '.site-return-bar .site-layout-settings > summary {',
