@@ -48,6 +48,9 @@ jobs:
       - name: Vérifier la page générée du simulateur
         run: python3 outils/construire-simulateur.py --verifier
 
+      - name: Vérifier qu'aucune fusion n'est restée inachevée
+        run: python3 outils/verifier-fusions.py
+
       - name: Vérifier la file de relecture générée
         run: python3 outils/file-relecture.py --verifier
 
