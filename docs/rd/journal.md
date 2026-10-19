@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-19 — L'icône 192 px branchée sur les 94 pages, plus aucune ressource orpheline
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal :** finir le ménage sans rien perdre et sans laisser de ressource livrée pour rien. `assets/images/favicon-192.png` était la seule ressource encore servie sans être citée par aucune page.
+- **Constat :** l'icône 192 px a une empreinte et des dimensions distinctes de `favicon-32.png` et d'`apple-touch-icon.png` : ce n'était pas un doublon, donc la supprimer aurait été une perte. Elle restait pourtant inutilisée, téléchargée sans jamais servir.
+- **Décision :** la brancher plutôt que la supprimer — une balise `icon` 192×192 déclarée après celle de 32 px, sur les treize pages racine et dans le gabarit des fiches, puis génération des 81 fiches par leur générateur (aucune retouche à la main). L'icône entre aussi dans la liste des ressources contrôlées par `verifier-integration.py`.
+- **Résultat :** plus aucune ressource orpheline ; les navigateurs à forte densité et Android disposent d'une icône de bonne taille ; 4 606 références internes vérifiées, toutes résolues.
+- **Limite :** aucun manifeste d'application web n'est ajouté : l'icône sert d'icône d'onglet et de raccourci, pas d'installation PWA. Les effets visuels n'ont pas été comparés à l'œil sur un écran haute densité.
+- **Contrôles réellement exécutés :** `construire-apprentissages --verifier` (81 fiches synchronisées), `verifier-publication-locale` (131 fichiers, 95 pages, 4 606 références, 16 fichiers racine), `verifier-site-statique`, `verifier-poids-pages`, `verifier-integration` (icône servie), `verifier-securite`, `optimiser-images --verifier`, `verifier-planches-statuts`, `verifier-fusions`, `verifier-rd-continue`, `py_compile`.
+- **Prochaine action :** si une installation PWA devient utile, ajouter alors un manifeste et des icônes 512 px, avec la même règle : aucune ressource livrée sans être citée.
+
 ## 2026-10-19 — Doublons inutiles retirés du dépôt, rien d'autre en attente
 
 - **Initiative :** `optimisation-du-site`.

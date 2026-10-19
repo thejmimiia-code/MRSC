@@ -110,3 +110,4 @@ Ne pas committer de nouvelles planches PNG dans le dépôt. Les déposer dans un
 - La conversion sans perte préserve les pixels, pas la compression d’origine : les fichiers `.webp` conservés ne sont pas octet pour octet les `.png` archivés, même si l’image est identique.
 - Le compte de fichiers et le poids « après » sont ceux de l’arbre fusionné le 19 octobre 2026 ; ils sont à recalculer avec les commandes ci-dessus si l’arbre évolue.
 - Les planches restent « à relire » : aucune n’est validée, et ce document ne dit rien de leur intérêt artistique.
+- `assets/images/favicon-192.png`, un temps livré sans être cité, est désormais déclaré comme icône 192×192 sur les 94 pages : plus aucune ressource du dossier `assets/` n’est orpheline.
