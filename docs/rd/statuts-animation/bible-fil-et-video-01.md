@@ -1,5 +1,7 @@
 # Bible — mêmes visages de A à Z, première vidéo
 
+**Planches :** les planches citées dans cette bible ne sont plus dans l'arbre du dépôt. Elles sont archivées dans la version étiquetée [`planches-statuts-animation-2026-10`](https://github.com/thejmimiia-code/MRSC/releases/tag/planches-statuts-animation-2026-10), qui pointe sur l'état du dépôt avant leur retrait ; voir [`archives-et-poids-du-depot.md`](../archives-et-poids-du-depot.md) pour la récupération. **Les liens d'image ci-dessous sont donc volontairement non résolus dans un clone courant** : ils désignent les planches archivées, à lire dans la version étiquetée. Le plan [`plan-statuts-animation.md`](../plan-statuts-animation.md) ne cite que douze planches, celles-là restent dans l'arbre en WebP compact.
+
 **Éva (visuel verrouillé, 16 oct. 2026) :** plan [elle-06-atrium.png](elle-06-atrium.png) / [eva-choisie.png](eva-choisie.png). Visage unique, corps androïde blanc, atrium, tous les âges. Suites `eva-lock-01` à `06`.
 
 **Statut :** à relire, à adapter. Aucune vidéo tournée.  
