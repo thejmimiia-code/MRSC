@@ -144,7 +144,6 @@
       button.className = "button adventure-quest-card";
       button.dataset.missionId = mission.id;
       button.dataset.completed = "false";
-      button.setAttribute("aria-label", `${mission.title}. Repère ${mission.level}. ${mission.brief} Choisir cette escale.`);
 
       const top = makeElement("span", "adventure-quest-top");
       top.append(
@@ -281,7 +280,9 @@
       add.dataset.pathToggle = sheet.id;
       add.setAttribute(
         "aria-label",
-        `${state.learningPath.includes(sheet.id) ? "Retirer" : "Ajouter"} « ${sheet.title} » ${state.learningPath.includes(sheet.id) ? "du" : "à mon"} parcours libre`,
+        state.learningPath.includes(sheet.id)
+          ? `Retirer du parcours : « ${sheet.title} »`
+          : `Ajouter à mon parcours : « ${sheet.title} »`,
       );
       actions.append(enter, add);
       card.append(meta, badge, heading, summary, objective);
@@ -357,12 +358,14 @@
         choose.className = "adventure-learning-world-button";
         choose.dataset.worldId = domain.id;
         choose.setAttribute("aria-pressed", "false");
-        choose.setAttribute("aria-label", `${domain.title} : ${domain.sheetCount} fiches, ${domain.futureCount} sujets à créer ou faire relire. Filtrer les fiches de ce monde.`);
+        const glyph = makeElement("span", "adventure-learning-world-glyph", glyphs[index % glyphs.length]);
+        glyph.setAttribute("aria-hidden", "true");
         choose.append(
-          makeElement("span", "adventure-learning-world-glyph", glyphs[index % glyphs.length]),
+          glyph,
           makeElement("span", "adventure-learning-world-title", domain.title),
           makeElement("span", "adventure-learning-world-intent", domain.intent),
           makeElement("span", "adventure-learning-world-count", `${domain.sheetCount} fiche${domain.sheetCount === 1 ? "" : "s"} · ${domain.futureCount} sujet${domain.futureCount === 1 ? "" : "s"} à développer`),
+          makeElement("span", "visually-hidden", "Filtrer les fiches de ce monde."),
         );
         choose.addEventListener("click", () => {
           if (learningDomainFilter) learningDomainFilter.value = domain.id;
@@ -1104,7 +1107,22 @@
     return Boolean(vertexBuffer);
   }
 
+  function chargerRepliScene() {
+    const picture = sceneFallback?.closest("picture");
+    if (!picture || picture.dataset.charge === "oui") return;
+    for (const source of picture.querySelectorAll("source[data-srcset]")) {
+      source.srcset = source.dataset.srcset;
+      source.removeAttribute("data-srcset");
+    }
+    if (sceneFallback.dataset.src) {
+      sceneFallback.src = sceneFallback.dataset.src;
+      sceneFallback.removeAttribute("data-src");
+    }
+    picture.dataset.charge = "oui";
+  }
+
   function useSceneFallback() {
+    chargerRepliScene();
     if (sceneCanvas) sceneCanvas.hidden = true;
     if (sceneFallback) sceneFallback.hidden = false;
     if (sceneControls) sceneControls.hidden = true;

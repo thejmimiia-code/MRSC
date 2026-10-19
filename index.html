@@ -108,9 +108,9 @@
           <div class="display-settings-panel">
             <p class="display-settings-title"><strong>Ajuster la lisibilité</strong></p>
             <div class="display-settings-row" role="group" aria-label="Taille du texte">
-              <button class="display-control" type="button" data-text-decrease aria-label="Réduire la taille du texte" title="Réduire le texte">A−</button>
+              <button class="display-control" type="button" data-text-decrease aria-label="A− — réduire la taille du texte" title="Réduire le texte">A−</button>
               <span class="display-text-level" data-text-size-level role="status" aria-live="polite" aria-atomic="true">100 %</span>
-              <button class="display-control" type="button" data-text-increase aria-label="Agrandir la taille du texte" title="Agrandir le texte">A+</button>
+              <button class="display-control" type="button" data-text-increase aria-label="A+ — agrandir la taille du texte" title="Agrandir le texte">A+</button>
             </div>
             <div class="display-settings-actions">
               <button class="display-control display-control-wide" type="button" data-contrast-toggle aria-pressed="false">Contraste renforcé</button>
@@ -128,7 +128,11 @@
     <section class="home-hero home-hero-civic" aria-labelledby="home-title">
       <div class="container">
         <figure class="home-hero-visual">
-          <img src="assets/images/accueil-logo-mrsc-3d.jpg" width="1400" height="788" alt="Logo M.R.S.C. — Mouvement Représentatif de la Société Civile.">
+          <picture>
+            <source type="image/avif" srcset="assets/images/accueil-logo-mrsc-3d-800.avif 800w, assets/images/accueil-logo-mrsc-3d-1400.avif 1400w" sizes="(max-width: 1200px) calc(100vw - 3rem), 1160px">
+            <source type="image/webp" srcset="assets/images/accueil-logo-mrsc-3d-800.webp 800w, assets/images/accueil-logo-mrsc-3d-1400.webp 1400w" sizes="(max-width: 1200px) calc(100vw - 3rem), 1160px">
+            <img src="assets/images/accueil-logo-mrsc-3d.jpg" width="1400" height="933" alt="Logo M.R.S.C. — Mouvement Représentatif de la Société Civile." fetchpriority="high" decoding="async">
+          </picture>
         </figure>
         <div class="hero-grid">
         <div class="hero-copy">

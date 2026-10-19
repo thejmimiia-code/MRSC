@@ -1,6 +1,6 @@
 # Prospective R&D et innovation — apprendre, vérifier, délibérer (2027–2030)
 
-**Note de travail datée du 15 octobre 2026. État : scénarios exploratoires et concept candidat, non validés.** Cette note n'est ni une prévision, ni une étude de marché, ni une promesse de produit. Elle part des sources déjà présentes dans le dépôt et de questions de conception. Aucun balayage externe d'actualité, atelier avec l'association, test avec des personnes ou avis expert n'a été réalisé dans cette passe. Les futurs décrits ci-dessous sont des situations possibles conçues pour éprouver les choix du projet ; aucune probabilité ne leur est attribuée.
+**Note de travail datée du 15 octobre 2026, complétée le 17 octobre 2026. État : scénarios exploratoires et concept candidat, non validés.** Cette note n'est ni une prévision, ni une étude de marché, ni une promesse de produit. Elle part des sources du dépôt et d'un premier relevé externe daté ([veille du 17 octobre 2026](veille-2026-10-17.md)). Aucun atelier avec l'association, test avec des personnes ou avis expert n'a été réalisé. Les futurs décrits ci-dessous sont des situations possibles conçues pour éprouver les choix du projet ; aucune probabilité ne leur est attribuée, et les chiffres externes cités ne sont pas transposés au site.
 
 ## 1. Question de prospective et périmètre
 
@@ -35,8 +35,24 @@ Les références de ces constats sont le [portefeuille R&D](portefeuille.toml), 
 | Capacité de relecture | 55 prototypes sont à relire; les contenus à risque ont besoin de personnes compétentes. | Le volume de propositions et de contenus pourra-t-il être entretenu avec des rôles de relecture clairement attribués ? | Échéances de revue, sources à recontrôler, décisions de retrait ou de report; pas le nombre de clics. |
 | Langues et contextes | Le français domine; les autres langues et variétés demandent des relectures locales. | Comment ouvrir des parcours plurilingues sans publier une traduction automatique comme ressource validée ? | Disponibilité de relectures par langue/région et propositions non identifiantes, sans déduire l'origine des visiteurs. |
 | Personnalisation et vie privée | Les préférences de lecture sont optionnelles et locales; l'association doit encore confirmer certains traitements et fournisseurs. | Comment adapter l'expérience sans compte, profil de compétence ou collecte individuelle implicite ? | Évolutions documentées des fonctions, du stockage ou des prestataires; revue du code et de la notice. |
+| Poids, terminaux et accès | Trois illustrations portaient l'essentiel du poids des pages principales; une mesure locale d'octobre 2026 a réduit de 33 à 72 % le poids compressé estimé de trois pages, sans mesure réseau ni sur appareil. | Les terminaux anciens, les forfaits limités et les réseaux lents resteront-ils une contrainte aussi forte, ou la sobriété des pages deviendra-t-elle un critère secondaire ? | Octets réellement servis, variantes disponibles, erreurs de chargement signalées volontairement; pas de profilage des connexions. |
 
 Ces signaux ne sont pas des indicateurs d'audience. Une absence de demandes ne prouve pas l'absence de besoin, et une disponibilité technique ne prouve pas la qualité d'une ressource.
+
+### 3 bis. Signaux externes vérifiés le 17 octobre 2026
+
+Quatre sources publiées en 2026 ont été consultées et consignées dans [`veille-2026-10-17.md`](veille-2026-10-17.md). Elles ne tranchent aucune question à la place de l'association ; elles déplacent l'attention.
+
+| Incertitude | Signal daté | Ce que cela change dans cette note | Ce que cela ne permet pas de conclure |
+|---|---|---|---|
+| Médiation par l'IA | Reuters Institute, 16 juin 2026 : 10 % des personnes interrogées utilisent un chatbot pour s'informer chaque semaine (7 % en 2025), 1 % en font leur source principale ; **pas de hausse mesurée en France** ; 20 % font confiance à ces réponses contre 37 % à l'information en général. | Le scénario B reste possible, mais une bascule rapide n'est pas étayée. La demande d'**évaluation de source** (33 % des utilisateurs de chatbots) compte plus que le volume d'usage. | Rien sur les visiteurs du site, ni sur l'effet des fiches. |
+| Continuité des services | Défenseur des droits, 9 avril 2026 : 61 % des personnes déclarent des difficultés administratives en 2024 (39 % en 2016) ; 49 % seulement font seules leurs démarches en ligne ; 55 % téléphonent et 33 % se déplacent en cas de problème. | Le scénario C n'est pas seulement une panne technique : le retrait du canal humain est documenté. Le repli non numérique devient une exigence de conception, pas un supplément. | Le site n'est pas un service public et ne peut pas porter cet accompagnement seul. |
+| Poids et énergie | Arcep, 21 mai 2026 : consommation électrique des centres de données +12 % en 2024, émissions associées +23 % ; 46 % des émissions du numérique en France en 2022 (périmètre ADEME-Arcep élargi). | La sobriété des pages reste un choix mesurable localement ; elle réduit une dépendance, elle ne compense pas la croissance des usages. | Aucune conversion des octets évités en émissions évitées. |
+| Traçabilité et provenance | Commission européenne, page mise à jour le 12 octobre 2026 : obligations de transparence de l'article 50 applicables depuis le 2 août 2026 (marquage, étiquetage des hypertrucages et de certains textes). | Les statuts affichés et la mention d'une rédaction assistée par IA vont dans le bon sens, sans constituer une conformité vérifiée. | Le site n'a pas été audité ; l'association n'a pas de revue juridique sur ce point. |
+| Langues et contextes | Aucun signal externe nouveau vérifié dans cette passe. | L'incertitude reste ouverte, sans induction d'actualité. | Rien. |
+| Capacité de relecture | Signal interne seulement : 55 prototypes à relire (voir §2). | La contrainte reste interne ; aucune source externe ne mesure la capacité de relecture du M.R.S.C. | Rien. |
+
+**Lecture :** ces signaux renforcent trois décisions « sans regret » (rester identifiable et lisible sans service tiers, prévoir un chemin non numérique, ne pas présenter une réponse fluide comme une source) et n'en ajoutent aucune qui dépende d'une prévision. Ils sont datés : une veille ultérieure peut les contredire.
 
 ## 4. Quatre futurs pour éprouver les choix
 
@@ -48,11 +64,11 @@ Les ressources externes restent accessibles et les personnes responsables peuven
 
 ### B. L'assistant fluide, preuves contestées — services disponibles, traçabilité fragile
 
-Des outils de synthèse ou d'assistance peuvent devenir une voie parmi d'autres pour consulter l'information, alors que le lien entre affirmation, source, date et relecture est difficile à suivre. C'est une hypothèse de scénario, pas une évolution mesurée dans ce travail; l'IA n'est qu'une manifestation possible de ce contexte. Le risque pour le site serait de présenter une réponse fluide comme une source ou une validation. **Réponse robuste :** relier chaque affirmation importante à une source vérifiable, séparer fait, exemple, interprétation et proposition, maintenir une rédaction humaine pour les contenus publics et permettre de continuer sans assistant.
+Des outils de synthèse ou d'assistance peuvent devenir une voie parmi d'autres pour consulter l'information, alors que le lien entre affirmation, source, date et relecture est difficile à suivre. C'est une hypothèse de scénario, pas une évolution mesurée dans ce travail; l'IA n'est qu'une manifestation possible de ce contexte. Le relevé du 17 octobre 2026 la nuance : usage mondial encore minoritaire (10 % par semaine), 1 % seulement en source principale, et **aucune hausse mesurée en France** sur un an. Le risque pour le site serait de présenter une réponse fluide comme une source ou une validation. **Réponse robuste :** relier chaque affirmation importante à une source vérifiable, séparer fait, exemple, interprétation et proposition, maintenir une rédaction humaine pour les contenus publics et permettre de continuer sans assistant.
 
 ### C. Le réseau intermittent — services fragiles, contenus principalement relus
 
-Une page distante, une API ou un média tiers devient indisponible, lent ou soumis à une nouvelle condition d'accès. Le risque est qu'une fonctionnalité optionnelle bloque le cœur de la ressource. **Réponse robuste :** conserver un parcours local ou imprimable, indiquer la date/version d'une copie, isoler les fonctions distantes et afficher un repli compréhensible plutôt qu'un chargement infini.
+Une page distante, une API ou un média tiers devient indisponible, lent ou soumis à une nouvelle condition d'accès. Le risque est qu'une fonctionnalité optionnelle bloque le cœur de la ressource. Le Défenseur des droits documente en 2026 un phénomène voisin dans les services publics : moins d'un usager sur deux y parvient seul en ligne, et les contournements téléphoniques ou physiques deviennent la norme en cas de difficulté. **Réponse robuste :** conserver un parcours local ou imprimable, indiquer la date/version d'une copie, isoler les fonctions distantes et afficher un repli compréhensible plutôt qu'un chargement infini.
 
 ### D. L'archipel opaque — services fragiles, médiation automatisée forte
 
@@ -68,6 +84,8 @@ Les outils et leurs sources changent d'un fournisseur à l'autre tandis que des 
 6. **Utiliser la maintenance comme signal.** Les dates de revue, versions et sources à confirmer sont plus utiles pour la décision que des métriques d'engagement individuelles.
 7. **Partir de ce que la personne sait déjà.** Une fiche peut nommer un geste déjà maîtrisé (un mot connu, une lecture ligne par ligne, une question déjà posée) sans le transformer en niveau scolaire ni en score. Cette capacité reste utile dans les quatre scénarios : elle n'exige ni assistant, ni profil, ni service distant.
 8. **Rester identifiable sans service tiers.** Une icône dérivée du logo, servie avec le site, aide à reconnaître un onglet, un favori ou un raccourci lorsque plusieurs services se ressemblent ou se coupent. Ce n'est pas une preuve de qualité du contenu.
+9. **Servir juste assez, sans dégrader.** Des images adaptées à la largeur et au format, un repli JPEG, aucune police distante et aucun média automatique réduisent la dépendance au débit et au matériel. Cette sobriété ne doit retirer ni texte alternatif, ni clavier, ni zoom, ni repli sans JavaScript; elle reste un choix de conception, pas une preuve d'impact environnemental.
+10. **Ne jamais faire dépendre l'essentiel d'un seul canal.** Une fiche doit rester consultable et imprimable si le service distant tombe, si le compte est refusé ou si la personne n'est pas à l'aise avec le formulaire en ligne. Ce n'est pas un accompagnement humain — le M.R.S.C. n'en a pas les moyens démontrés — mais un chemin de repli explicite, avec une adresse et un contact réels.
 
 Ce sont des propositions de conception cohérentes avec les consignes actuelles du dépôt, pas des résultats démontrés auprès de visiteurs.
 
@@ -126,7 +144,22 @@ La proposition serait affaiblie ou rejetée si :
 | 5. Revoir et essayer | Relectures éditoriale, accessibilité, vie privée/droit et essai volontaire seulement s'il est utile et autorisé | Distinguer correction structurelle, compréhension, préférence et efficacité; conserver les limites. |
 | 6. Décider | Itérer, intégrer sous contrôle, conserver en prototype ou retirer | Laisser les validations manquantes et la prochaine revue visibles. |
 
-## 9. Sources de départ, limites et suite
+## 9. Prolongement mesuré — octobre 2026
+
+Une passe de mesure et d’optimisation a complété cette note le 17 octobre 2026. La méthode, les chiffres avant/après, les limites et les essais sont détaillés dans [`poids-et-sobriete-numerique.md`](poids-et-sobriete-numerique.md).
+
+- **Résultat local, à ne pas surinterpréter :** le poids compressé estimé des pages principales baisse de 33 à 72 % selon la page et le scénario, grâce à des variantes AVIF/WebP et au report du chargement de l’image de secours. Il s’agit d’une reconstruction hors ligne, pas d’une mesure réseau.
+- **Ce que cela change pour les scénarios :** le socle reste lisible et atteignable avec moins d’octets, ce qui renforce la réponse au « réseau intermittent » sans prouver la résilience réelle ni la disponibilité des hébergeurs.
+- **Ce que cela ne change pas :** le besoin de relecture humaine, de sources datées et de repli sans JavaScript. Une page légère peut rester fausse, incomplète ou inaccessible.
+- **Décision maintenue :** la sobriété est traitée comme un moyen de réduire une dépendance, jamais comme un indicateur de qualité éditoriale ou une preuve d’impact évité.
+
+**Prochaine action ajoutée :** vérifier les octets réellement servis et les types MIME sur GitHub Pages et Vercel, puis faire une revue visuelle humaine des images ; ne réviser l’état de l’initiative `poids-et-sobriete-numerique` qu’après ces contrôles.
+
+## 10. Décision attendue — octobre 2026
+
+Le [brief de décision](decision-prospective.md) présente trois options bornées : ne rien construire de plus, faire relire puis tester un pilote papier, ou ouvrir un pilote en ligne. Il précise désormais un pré-mortem : échecs observables, replis réversibles et portes humaines. **Aucune option n'est choisie par l'agent** : la décision revient à l'association, et le prototype actuel reste un prototype à relire.
+
+## 11. Sources de départ, limites et suite
 
 Les faits de départ sont issus des fichiers du dépôt :
 
@@ -135,6 +168,6 @@ Les faits de départ sont issus des fichiers du dépôt :
 - [`docs/rd-affichage-adaptatif.md`](../rd-affichage-adaptatif.md) et [`docs/rd-confidentialite-rgpd.md`](../rd-confidentialite-rgpd.md) — contrôles existants, stockage, dépendances et validations encore ouvertes;
 - [`docs/rd/protocole-essais-usage.md`](protocole-essais-usage.md) et [`portefeuille.toml`](portefeuille.toml) — état du protocole et initiatives en cours.
 
-Cette première passe ne prétend pas avoir consulté les sources externes actuelles sur l'avenir de l'IA, les politiques publiques, l'accessibilité, le droit ou les infrastructures. Les références externes présentes dans les notes antérieures sont des repères documentaires à réouvrir avant toute affirmation nouvelle; elles ne suffisent pas à établir une tendance future. Aucune probabilité, préférence collective, expérience d'usager ou décision de l'association n'est inventée.
+Un premier relevé externe a été réalisé le 17 octobre 2026 sur quatre sources datées ([veille](veille-2026-10-17.md)) : il ne couvre ni l'accessibilité, ni le droit du travail, ni les langues, ni l'ensemble des politiques publiques. Les références externes des notes antérieures restent des repères documentaires à réouvrir avant toute affirmation nouvelle; elles ne suffisent pas à établir une tendance future. Aucune probabilité, préférence collective, expérience d'usager ou décision de l'association n'est inventée.
 
-**Prochaine action :** faire examiner le cadrage et le concept « Boussole des savoirs » par le M.R.S.C.; décider si un atelier de prospective et une recherche primaire complémentaire valent le coût avant de fabriquer le prototype. L'initiative `prospective-apprentissages-2030` reste `a-cadrer` jusque-là.
+**Prochaine action :** faire examiner le cadrage, le concept « Boussole des savoirs » et le [brief de décision](decision-prospective.md) par le M.R.S.C. L'initiative `prospective-apprentissages-2030` reste `a-cadrer` jusque-là.

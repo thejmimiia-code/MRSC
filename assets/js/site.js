@@ -88,10 +88,6 @@
     root.classList.toggle("contraste-renforce", contrastEnabled);
     if (contrastToggle) {
       contrastToggle.setAttribute("aria-pressed", String(contrastEnabled));
-      contrastToggle.setAttribute(
-        "aria-label",
-        contrastEnabled ? "Désactiver le contraste renforcé" : "Activer le contraste renforcé"
-      );
     }
     synchroniserSimulateurs();
   };
@@ -101,10 +97,6 @@
     root.classList.toggle("espacement-renforce", spacingEnabled);
     if (spacingToggle) {
       spacingToggle.setAttribute("aria-pressed", String(spacingEnabled));
-      spacingToggle.setAttribute(
-        "aria-label",
-        spacingEnabled ? "Désactiver l’espacement renforcé" : "Activer l’espacement renforcé"
-      );
     }
     synchroniserSimulateurs();
   };
@@ -125,21 +117,45 @@
   loadPreferences();
 
   const layoutPreferenceKey = "mrsc-mise-en-page";
+  // Six présentations CSS, classées par intention. Elles réorganisent les
+  // blocs sans jamais supprimer, réordonner ni réécrire le contenu.
+  // Étude et arbitrages : docs/rd/presentations-personnalisees.md.
   const layoutChoices = [
     {
       value: "equilibree",
       label: "Équilibrée",
       description: "La présentation de base, entre lecture et blocs visuels.",
+      hint: "Le réglage par défaut du site.",
     },
     {
       value: "lecture",
       label: "Lecture",
       description: "Une colonne plus étroite et des blocs empilés pour suivre les textes.",
+      hint: "Idéal pour : les fiches et les textes suivis.",
+    },
+    {
+      value: "vitrine",
+      label: "Vitrine",
+      description: "De grands titres, beaucoup d’air et une idée à la fois, comme une page de présentation.",
+      hint: "Idéal pour : découvrir l’accueil, le dossier IA ou ÉVA.",
+    },
+    {
+      value: "mosaique",
+      label: "Mosaïque",
+      description: "Des tuiles de tailles variées ; certaines cartes de chaque collection sont mises en avant, dans le même ordre.",
+      hint: "Idéal pour : explorer les fiches, les Mondes, les liens et les documents.",
     },
     {
       value: "panorama",
       label: "Panorama composite",
       description: "Une page plus large, avec un agencement de cartes en plusieurs colonnes.",
+      hint: "Idéal pour : les grands écrans.",
+    },
+    {
+      value: "compacte",
+      label: "Compacte",
+      description: "Des blocs resserrés pour voir davantage de cartes sans faire défiler longtemps.",
+      hint: "Idéal pour : comparer et balayer un catalogue ou un registre.",
     },
   ];
   const layoutSettings = settings ? document.createElement("details") : null;
@@ -208,15 +224,28 @@
         savePreference(layoutPreferenceKey, input.value);
       });
 
+      // Mini-aperçu schématique et décoratif : le nom et la description
+      // restent l’information complète pour les technologies d’assistance.
+      const preview = document.createElement("span");
+      preview.className = "layout-choice-preview";
+      preview.dataset.preview = choice.value;
+      preview.setAttribute("aria-hidden", "true");
+      for (let bloc = 0; bloc < 6; bloc += 1) {
+        preview.appendChild(document.createElement("span"));
+      }
+
       const copy = document.createElement("span");
       copy.className = "layout-choice-copy";
       const name = document.createElement("strong");
       name.textContent = choice.label;
       const description = document.createElement("span");
       description.textContent = choice.description;
-      copy.append(name, description);
+      const hint = document.createElement("span");
+      hint.className = "layout-choice-hint";
+      hint.textContent = choice.hint;
+      copy.append(name, description, hint);
       label.htmlFor = input.id;
-      label.append(input, copy);
+      label.append(input, preview, copy);
       options.appendChild(label);
       layoutInputs.push({ input, label });
     });

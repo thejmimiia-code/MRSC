@@ -1,0 +1,107 @@
+name: Vérifier les en-têtes servis par l’hébergement
+
+# Contrôle réseau volontairement séparé de la porte hors ligne :
+# il interroge le site publié, relève type MIME, encodage et cache,
+# et publie le tableau dans le résumé du run. Un échec signale un fichier
+# manquant ou injoignable, pas une qualité de rendu.
+
+on:
+  # Un changement du contrôleur ou de ses cibles relance la lecture des en-têtes
+  # sur la version publiée, sans attendre la revue mensuelle.
+  push:
+    branches: [main]
+    paths:
+      - "outils/verifier-publication.py"
+      - ".github/workflows/verifier-publication.yml"
+  workflow_dispatch:
+    inputs:
+      base-url:
+        description: "Racine publiée à contrôler (terminée par /)"
+        required: false
+        default: "https://thejmimiia-code.github.io/MRSC/"
+        type: string
+  schedule:
+    - cron: "17 6 1 * *"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: verifier-publication
+  cancel-in-progress: true
+
+jobs:
+  entetes:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Compile the checker
+        run: python3 -m py_compile outils/verifier-publication.py
+
+      - name: Read public headers
+        shell: bash
+        env:
+          BASE_URL: ${{ inputs.base-url || 'https://thejmimiia-code.github.io/MRSC/' }}
+        run: |
+          set -uo pipefail
+          rapport="$RUNNER_TEMP/entetes-publics.md"
+          python3 outils/verifier-publication.py --base-url "$BASE_URL" --tentatives 3 --attente 20 | tee "$rapport"
+          statut=${PIPESTATUS[0]}
+          {
+            echo "## En-têtes servis pour $BASE_URL"
+            echo
+            cat "$rapport"
+            if [ "$statut" -ne 0 ]; then
+              echo
+              echo "> Contrôle incomplet : au moins un fichier ne répond pas 200. Relancer après vérification de la publication."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$statut"
+
+      - name: Publier le rapport dans une issue de suivi
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_TITLE: "En-têtes servis par l’hébergement — rapport"
+          BASE_URL: ${{ inputs.base-url || 'https://thejmimiia-code.github.io/MRSC/' }}
+        run: |
+          set -euo pipefail
+          rapport="$RUNNER_TEMP/entetes-publics.md"
+          corps="$RUNNER_TEMP/entetes-issue.md"
+          {
+            echo "Rapport automatique du $(date -u '+%Y-%m-%d %H:%M UTC') pour <$BASE_URL>."
+            echo
+            if [ -f "$rapport" ]; then
+              cat "$rapport"
+            else
+              echo "Le tableau est indisponible ; consulter le journal du run."
+            fi
+            echo
+            echo "---"
+            echo
+            echo "Ce rapport constate des en-têtes (code, type MIME, encodage, cache). Il ne mesure ni le rendu, ni la performance, ni une empreinte carbone."
+          } > "$corps"
+
+          numero="$(gh issue list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state open \
+            --search 'in:title "En-têtes servis par l’hébergement"' \
+            --json number,title \
+            --limit 100 \
+            | python3 -c 'import json, os, sys; titre=os.environ["ISSUE_TITLE"]; items=json.load(sys.stdin); print(next((item["number"] for item in items if item["title"] == titre), ""))')"
+
+          if [ -n "$numero" ]; then
+            gh issue edit "$numero" --repo "$GITHUB_REPOSITORY" --body-file "$corps"
+            echo "Issue #$numero actualisée."
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$ISSUE_TITLE" --body-file "$corps"
+          fi

@@ -47,10 +47,17 @@ CSS_RETOUR = """
   --ambre: #f2c15f;
   --violet: #b49bd8;
   --rose: #e89ac8;
+  /* Habillage M.R.S.C (phase 2, 18 octobre 2026) : valeurs identiques aux
+     littéraux remplacés ; préfixe dédié, sans collision avec les jetons du
+     moteur. Voir docs/rd/inventaire-couleurs-jetons.md. */
+  --mrsc-marine: #1d3268;
+  --mrsc-marine-2: #26375f;
+  --mrsc-bordure: #526384;
+  --mrsc-sur-marine: #fff;
 }
 header.entete {
   border-color: #344b79;
-  background: linear-gradient(135deg, #1d3268, #26375f);
+  background: linear-gradient(135deg, var(--mrsc-marine), var(--mrsc-marine-2));
 }
 header.entete .site-status-note {
   margin: 0 0 .8rem;
@@ -70,8 +77,8 @@ html.contraste-renforce header.entete .site-status-note {
 }
 button.primaire {
   border-color: #456d29;
-  background: linear-gradient(135deg, #1d3268, #2958a2);
-  color: #fff;
+  background: linear-gradient(135deg, var(--mrsc-marine), #2958a2);
+  color: var(--mrsc-sur-marine);
 }
 .site-return-bar {
   position: sticky;
@@ -131,8 +138,8 @@ button.primaire {
   padding: clamp(6px,.35rem,8px) clamp(8px,.55rem,12px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
-  background: #1d3268;
-  color: #fff;
+  background: var(--mrsc-marine);
+  color: var(--mrsc-sur-marine);
   font: inherit;
   font-size: clamp(12px,.76rem,18px);
   font-weight: 700;
@@ -141,14 +148,14 @@ button.primaire {
 }
 .site-return-bar .site-journey-button:hover:not(:disabled) {
   border-color: var(--ambre);
-  background: #26375f;
+  background: var(--mrsc-marine-2);
 }
 .site-return-bar .site-journey-button[data-journey-action="accueil"] {
   border-color: var(--ambre);
   box-shadow: inset 0 -2px 0 var(--ambre);
 }
 .site-return-bar .site-journey-button:disabled {
-  border-color: #526384;
+  border-color: var(--mrsc-bordure);
   background: #17274d;
   color: #d2d9e5;
   cursor: not-allowed;
@@ -160,13 +167,13 @@ button.primaire {
   flex: 0 1 auto;
   margin: 0 0 0 auto;
   padding-left: .65rem;
-  border-left: 1px solid #526384;
+  border-left: 1px solid var(--mrsc-bordure);
   color: var(--texte-dim);
   font-size: clamp(11px,.7rem,16px);
   line-height: 1.35;
   white-space: nowrap;
 }
-.site-return-bar .site-journey-settings { position: static; flex: 0 0 auto; color: #fff; }
+.site-return-bar .site-journey-settings { position: static; flex: 0 0 auto; color: var(--mrsc-sur-marine); }
 .site-return-bar .site-journey-settings > summary {
   display: inline-flex;
   align-items: center;
@@ -177,8 +184,8 @@ button.primaire {
   padding: clamp(6px,.45rem,9px) clamp(8px,.8rem,16px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
-  background: #1d3268;
-  color: #fff;
+  background: var(--mrsc-marine);
+  color: var(--mrsc-sur-marine);
   font-size: clamp(12px,.84rem,20px);
   font-weight: 700;
   list-style: none;
@@ -187,7 +194,7 @@ button.primaire {
 .site-return-bar .site-journey-settings > summary::-webkit-details-marker { display: none; }
 .site-return-bar .site-journey-settings > summary::marker { content: ""; }
 .site-return-bar .site-journey-settings > summary:hover,
-.site-return-bar .site-journey-settings[open] > summary { border-color: var(--ambre); background: #26375f; }
+.site-return-bar .site-journey-settings[open] > summary { border-color: var(--ambre); background: var(--mrsc-marine-2); }
 .site-return-bar .site-journey-chevron { display: inline-block; font-size: clamp(12px,1rem,20px); line-height: 1; transition: transform .18s ease; }
 .site-return-bar .site-journey-settings[open] .site-journey-chevron { transform: rotate(180deg); }
 .site-return-bar .site-journey-panel {
@@ -199,12 +206,12 @@ button.primaire {
   max-height: calc(100vh - 5rem);
   overflow: auto;
   padding: .55rem;
-  border: 1px solid #526384;
+  border: 1px solid var(--mrsc-bordure);
   border-radius: 12px;
   background: rgba(29,50,104,.98);
   box-shadow: 0 8px 22px rgba(0,0,0,.24);
 }
-.site-return-bar .site-layout-settings { position: static; flex: 0 0 auto; color: #fff; }
+.site-return-bar .site-layout-settings { position: static; flex: 0 0 auto; color: var(--mrsc-sur-marine); }
 .site-return-bar .site-layout-settings > summary {
   display: inline-flex;
   align-items: center;
@@ -215,8 +222,8 @@ button.primaire {
   padding: clamp(6px,.45rem,9px) clamp(8px,.8rem,16px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
-  background: #1d3268;
-  color: #fff;
+  background: var(--mrsc-marine);
+  color: var(--mrsc-sur-marine);
   font-size: clamp(12px,.84rem,20px);
   font-weight: 700;
   line-height: 1.25;
@@ -226,7 +233,7 @@ button.primaire {
 .site-return-bar .site-layout-settings > summary::-webkit-details-marker { display: none; }
 .site-return-bar .site-layout-settings > summary::marker { content: ""; }
 .site-return-bar .site-layout-settings > summary:hover,
-.site-return-bar .site-layout-settings[open] > summary { border-color: var(--ambre); background: #26375f; }
+.site-return-bar .site-layout-settings[open] > summary { border-color: var(--ambre); background: var(--mrsc-marine-2); }
 .site-return-bar .site-layout-chevron { display: inline-block; margin-left: .25rem; font-size: 1rem; line-height: 1; transition: transform .18s ease; }
 .site-return-bar .site-layout-settings[open] .site-layout-chevron { transform: rotate(180deg); }
 .site-return-bar .site-layout-panel {
@@ -238,7 +245,7 @@ button.primaire {
   max-height: min(34rem,calc(100vh - 1.5rem));
   overflow: auto;
   padding: 12px;
-  border: 1px solid #526384;
+  border: 1px solid var(--mrsc-bordure);
   border-radius: 12px;
   background: rgba(13,21,38,.99);
   color: var(--texte);
@@ -249,17 +256,43 @@ button.primaire {
 .site-layout-options legend { margin-bottom: .45rem; color: var(--texte); font-size: .86rem; font-weight: 700; }
 .site-layout-choice {
   display: grid;
-  grid-template-columns: 20px minmax(0,1fr);
+  grid-template-columns: 20px 54px minmax(0,1fr);
   align-items: start;
   gap: .6rem;
   min-height: 44px;
   padding: .6rem .7rem;
-  border: 1px solid #526384;
+  border: 1px solid var(--mrsc-bordure);
   border-radius: 9px;
   background: #131c2f;
   color: var(--texte);
   cursor: pointer;
 }
+.site-layout-preview {
+  display: grid;
+  gap: 3px;
+  width: 54px;
+  height: 42px;
+  margin-top: .1rem;
+  padding: 5px;
+  border: 1px solid var(--mrsc-bordure);
+  border-radius: 7px;
+  background: #0d1526;
+}
+.site-layout-preview > span { display: block; min-width: 0; min-height: 0; border-radius: 2px; background: #5b74a6; }
+.site-layout-choice.is-selected .site-layout-preview { border-color: var(--accent); }
+.site-layout-choice.is-selected .site-layout-preview > span { background: var(--accent); }
+.site-layout-preview[data-preview="equilibree"] { grid-template-columns: 1.4fr 1fr; grid-template-rows: 1.3fr 1fr 1fr; }
+.site-layout-preview[data-preview="equilibree"] > span:nth-child(1) { grid-row: span 3; }
+.site-layout-preview[data-preview="equilibree"] > span:nth-child(n+5) { display: none; }
+.site-layout-preview[data-preview="lecture"] { grid-template-columns: minmax(0,1fr); grid-template-rows: repeat(4,1fr); padding-inline: 14px; }
+.site-layout-preview[data-preview="lecture"] > span:nth-child(n+5) { display: none; }
+.site-layout-preview[data-preview="vitrine"] { grid-template-columns: minmax(0,1fr); grid-template-rows: 2.2fr .8fr .8fr; }
+.site-layout-preview[data-preview="vitrine"] > span:nth-child(n+4) { display: none; }
+.site-layout-preview[data-preview="mosaique"] { grid-template-columns: repeat(3,1fr); grid-template-rows: 1.4fr 1fr; }
+.site-layout-preview[data-preview="mosaique"] > span:nth-child(1) { grid-column: span 2; }
+.site-layout-preview[data-preview="panorama"] { grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,1fr); }
+.site-layout-preview[data-preview="compacte"] { grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,1fr); gap: 2px; padding: 3px; }
+.site-layout-hint { font-weight: 650; }
 .site-layout-choice.is-selected { border-color: var(--accent); background: #1a2540; box-shadow: inset 0 0 0 1px var(--accent); }
 .site-layout-choice:focus-within { outline: 3px solid var(--accent); outline-offset: 2px; }
 .site-layout-choice input { width: 18px; height: 18px; margin: .16rem 0 0; accent-color: var(--accent); }
@@ -282,8 +315,8 @@ button.primaire {
   padding: clamp(6px,.45rem,9px) clamp(8px,.8rem,16px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
-  background: #1d3268;
-  color: #fff;
+  background: var(--mrsc-marine);
+  color: var(--mrsc-sur-marine);
   font-size: clamp(12px,.84rem,20px);
   font-weight: 700;
   line-height: 1.25;
@@ -292,8 +325,8 @@ button.primaire {
 }
 .site-return-bar a:hover {
   border-color: var(--ambre);
-  background: #26375f;
-  color: #fff;
+  background: var(--mrsc-marine-2);
+  color: var(--mrsc-sur-marine);
 }
 .site-return-bar a:focus-visible,
 .site-return-bar .site-journey-button:focus-visible,
@@ -311,7 +344,7 @@ button.primaire {
   border: 2px solid var(--ambre);
   border-radius: 8px;
   background: #000;
-  color: #fff;
+  color: var(--mrsc-sur-marine);
   font-weight: 700;
 }
 .sim-skip-link:focus {
@@ -344,8 +377,8 @@ button.primaire {
   padding: clamp(6px,.4rem,8px) clamp(8px,.65rem,14px);
   border: 1px solid rgba(255,255,255,.38);
   border-radius: 9px;
-  background: #1d3268;
-  color: #fff;
+  background: var(--mrsc-marine);
+  color: var(--mrsc-sur-marine);
   font: inherit;
   font-size: clamp(12px,.78rem,18px);
   font-weight: 700;
@@ -354,10 +387,10 @@ button.primaire {
 }
 .sim-display-button:hover:not(:disabled) {
   border-color: var(--ambre);
-  background: #26375f;
+  background: var(--mrsc-marine-2);
 }
 .sim-display-button:disabled {
-  border-color: #526384;
+  border-color: var(--mrsc-bordure);
   background: #17274d;
   color: #d2d9e5;
   cursor: not-allowed;
@@ -437,6 +470,45 @@ html[data-layout="panorama"] #contenu-principal .leviers-grille,
 html[data-layout="panorama"] #contenu-principal .leviers-grille.compacte { grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); }
 html[data-layout="panorama"] #contenu-principal .console-corps,
 html[data-layout="panorama"] #contenu-principal .clair-lignes { grid-template-columns: repeat(auto-fit,minmax(min(300px,100%),1fr)); }
+/* Vitrine : de grandes tuiles et plus d’air, sans masquer ni réordonner. */
+html[data-layout="vitrine"] #contenu-principal { max-width: 1320px; }
+html[data-layout="vitrine"] #contenu-principal :is(.grille.metrics,.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte) {
+  grid-template-columns: repeat(auto-fit,minmax(min(340px,100%),1fr));
+  gap: 18px;
+}
+html[data-layout="vitrine"] #contenu-principal .console-corps,
+html[data-layout="vitrine"] #contenu-principal .clair-lignes { grid-template-columns: repeat(auto-fit,minmax(min(360px,100%),1fr)); gap: 18px; }
+/* Mosaïque : portées double largeur à partir de deux colonnes, flux non dense. */
+html[data-layout="mosaique"] #contenu-principal { max-width: 1600px; }
+html[data-layout="mosaique"] #contenu-principal .grille.metrics { grid-template-columns: repeat(auto-fit,minmax(min(210px,100%),1fr)); }
+@media (min-width: 641px) {
+  html[data-layout="mosaique"] #contenu-principal :is(.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte) {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+  html[data-layout="mosaique"] #contenu-principal :is(.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte) > :nth-child(7n+1),
+  html[data-layout="mosaique"] #contenu-principal :is(.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte) > :nth-child(7n+4) { grid-column: span 2; }
+}
+@media (min-width: 1025px) {
+  html[data-layout="mosaique"] #contenu-principal :is(.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte) {
+    grid-template-columns: repeat(4,minmax(0,1fr));
+  }
+}
+/* En pistes étroites (Panorama, Compacte), la ligne d’un levier reprend le
+   repli déjà prévu par le moteur sous 640 px : retour à la ligne et noms
+   cassables, au lieu de pousser le bouton de détail hors de la carte. */
+html:is([data-layout="panorama"],[data-layout="compacte"]) #contenu-principal .levier .bulle-bouton { white-space: normal; }
+html:is([data-layout="panorama"],[data-layout="compacte"]) #contenu-principal .levier .ligne { flex-wrap: wrap; }
+html:is([data-layout="panorama"],[data-layout="compacte"]) #contenu-principal .levier .ligne .nom { min-width: 0; overflow-wrap: anywhere; }
+/* Les noms de fichiers sources sans espace doivent pouvoir se couper. */
+html:is([data-layout="vitrine"],[data-layout="mosaique"],[data-layout="panorama"],[data-layout="compacte"]) #contenu-principal .levier .source { overflow-wrap: anywhere; }
+/* Compacte : pistes et écarts resserrés ; texte et cibles inchangés. */
+html[data-layout="compacte"] #contenu-principal { max-width: 1800px; }
+html[data-layout="compacte"] #contenu-principal :is(.grille.metrics,.grille.scenarios,.grille.domaines,.leviers-grille,.leviers-grille.compacte) {
+  grid-template-columns: repeat(auto-fit,minmax(min(200px,100%),1fr));
+  gap: 8px;
+}
+html[data-layout="compacte"] #contenu-principal .console-corps,
+html[data-layout="compacte"] #contenu-principal .clair-lignes { grid-template-columns: repeat(auto-fit,minmax(min(240px,100%),1fr)); gap: 8px; }
 
 /* Le texte secondaire ne descend pas sous 12 px à la taille de base. */
 .metric .libelle,
@@ -588,7 +660,7 @@ html[data-layout="panorama"] #contenu-principal .clair-lignes { grid-template-co
   }
 }
 @media (prefers-reduced-transparency: reduce) {
-  .site-return-bar { background: #1d3268; backdrop-filter: none; }
+  .site-return-bar { background: var(--mrsc-marine); backdrop-filter: none; }
   .site-return-bar .site-layout-panel { background: #0d1526; backdrop-filter: none; }
 }
 @media (forced-colors: active) {
@@ -650,9 +722,9 @@ LIEN_RETOUR = (
     '  <a href="../index.html" data-site-home><span class="site-return-arrow" aria-hidden="true">←</span>Retour au site M.R.S.C</a>\n'
     '  <a href="../confidentialite.html">Vie privée et données</a>\n'
     '  <div id="mrsc-display-controls" class="sim-display-controls" role="group" aria-label="Réglages d’affichage du simulateur" hidden>\n'
-    '    <button class="sim-display-button" type="button" data-sim-text-decrease aria-label="Réduire la taille du texte">A−</button>\n'
+    '    <button class="sim-display-button" type="button" data-sim-text-decrease aria-label="A− — réduire la taille du texte">A−</button>\n'
     '    <span class="sim-display-level" data-sim-text-level role="status" aria-live="polite" aria-atomic="true">100 %</span>\n'
-    '    <button class="sim-display-button" type="button" data-sim-text-increase aria-label="Agrandir la taille du texte">A+</button>\n'
+    '    <button class="sim-display-button" type="button" data-sim-text-increase aria-label="A+ — agrandir la taille du texte">A+</button>\n'
     '    <button class="sim-display-button" type="button" data-sim-contrast aria-pressed="false">Contraste +</button>\n'
     '    <button class="sim-display-button" type="button" data-sim-spacing aria-pressed="false">Interligne +</button>\n'
     '  </div>\n'
@@ -661,9 +733,12 @@ LIEN_RETOUR = (
     '    <div class="site-layout-panel" id="site-layout-settings-panel" aria-label="Personnaliser l’expérience de lecture">\n'
     '      <p class="site-layout-title"><strong>Personnaliser l’expérience</strong></p>\n'
     '      <fieldset class="site-layout-options"><legend>Choisissez une mise en page</legend>\n'
-    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="equilibree" data-site-layout-option><span class="site-layout-choice-copy"><strong>Équilibrée</strong><span>La présentation de base, entre lecture et blocs visuels.</span></span></label>\n'
-    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="lecture" data-site-layout-option><span class="site-layout-choice-copy"><strong>Lecture</strong><span>Une colonne plus étroite et des blocs empilés pour suivre les textes.</span></span></label>\n'
-    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="panorama" data-site-layout-option><span class="site-layout-choice-copy"><strong>Panorama composite</strong><span>Une page plus large, avec un agencement de cartes en plusieurs colonnes.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="equilibree" data-site-layout-option><span class="site-layout-preview" data-preview="equilibree" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="site-layout-choice-copy"><strong>Équilibrée</strong><span>La présentation de base, entre lecture et blocs visuels.</span><span class="site-layout-hint">Le réglage par défaut du site.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="lecture" data-site-layout-option><span class="site-layout-preview" data-preview="lecture" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="site-layout-choice-copy"><strong>Lecture</strong><span>Une colonne plus étroite et des blocs empilés pour suivre les textes.</span><span class="site-layout-hint">Idéal pour : les fiches et les textes suivis.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="vitrine" data-site-layout-option><span class="site-layout-preview" data-preview="vitrine" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="site-layout-choice-copy"><strong>Vitrine</strong><span>De grands titres, beaucoup d’air et une idée à la fois, comme une page de présentation.</span><span class="site-layout-hint">Idéal pour : découvrir l’accueil, le dossier IA ou ÉVA.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="mosaique" data-site-layout-option><span class="site-layout-preview" data-preview="mosaique" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="site-layout-choice-copy"><strong>Mosaïque</strong><span>Des tuiles de tailles variées ; certaines cartes de chaque collection sont mises en avant, dans le même ordre.</span><span class="site-layout-hint">Idéal pour : explorer les fiches, les Mondes, les liens et les documents.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="panorama" data-site-layout-option><span class="site-layout-preview" data-preview="panorama" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="site-layout-choice-copy"><strong>Panorama composite</strong><span>Une page plus large, avec un agencement de cartes en plusieurs colonnes.</span><span class="site-layout-hint">Idéal pour : les grands écrans.</span></span></label>\n'
+    '        <label class="site-layout-choice"><input type="radio" name="mrsc-site-layout" value="compacte" data-site-layout-option><span class="site-layout-preview" data-preview="compacte" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><span class="site-layout-choice-copy"><strong>Compacte</strong><span>Des blocs resserrés pour voir davantage de cartes sans faire défiler longtemps.</span><span class="site-layout-hint">Idéal pour : comparer et balayer un catalogue ou un registre.</span></span></label>\n'
     '      </fieldset>\n'
     '      <p class="site-layout-status" data-site-layout-status role="status" aria-live="polite" aria-atomic="true"></p>\n'
     '      <p class="site-layout-note">Le changement est immédiat, sans rechargement. Si le stockage local est autorisé, votre choix est mémorisé sur cet appareil.</p>\n'
@@ -705,7 +780,10 @@ SCRIPT_AFFICHAGE = r"""
   const layoutLabels = new Map([
     ["equilibree", "Équilibrée"],
     ["lecture", "Lecture"],
+    ["vitrine", "Vitrine"],
+    ["mosaique", "Mosaïque"],
     ["panorama", "Panorama composite"],
+    ["compacte", "Compacte"],
   ]);
   let level = 100;
   let contrast = false;
@@ -743,8 +821,6 @@ SCRIPT_AFFICHAGE = r"""
     root.classList.toggle("contraste-renforce", contrast);
     if (contrastButton) {
       contrastButton.setAttribute("aria-pressed", String(contrast));
-      contrastButton.setAttribute("aria-label", contrast
-        ? "Désactiver le contraste renforcé" : "Activer le contraste renforcé");
     }
   };
   const applySpacing = (value) => {
@@ -752,8 +828,6 @@ SCRIPT_AFFICHAGE = r"""
     root.classList.toggle("espacement-renforce", spacing);
     if (spacingButton) {
       spacingButton.setAttribute("aria-pressed", String(spacing));
-      spacingButton.setAttribute("aria-label", spacing
-        ? "Désactiver l’espacement renforcé" : "Activer l’espacement renforcé");
     }
   };
   const applyLayout = (value) => {

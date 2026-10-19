@@ -48,14 +48,33 @@ jobs:
       - name: Vérifier la page générée du simulateur
         run: python3 outils/construire-simulateur.py --verifier
 
+      - name: Vérifier la file de relecture générée
+        run: python3 outils/file-relecture.py --verifier
+
       - name: Vérifier le portefeuille et la continuité R&D
         run: python3 outils/verifier-rd-continue.py
+
+      - name: Vérifier les faits internes du brief prospectif
+        run: |
+          python3 outils/test_verifier_decision_prospective.py
+          python3 outils/verifier-decision-prospective.py
+
+      - name: Vérifier les garde-fous du vote distanciel
+        run: |
+          python3 outils/test_verifier_vote_distanciel.py
+          python3 outils/verifier-vote-distanciel.py
 
       - name: Vérifier le protocole éditorial commun
         run: python3 outils/test_protocole_editorial.py
 
       - name: Vérifier les pages, liens et scripts statiques
         run: python3 outils/verifier-site-statique.py
+
+      - name: Vérifier le manifeste des variantes d’images
+        run: python3 outils/optimiser-images.py --verifier
+
+      - name: Vérifier le poids estimé des pages
+        run: python3 outils/verifier-poids-pages.py
 
       - name: Vérifier les frontières de sécurité
         run: python3 outils/verifier-securite.py

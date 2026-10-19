@@ -290,6 +290,8 @@ def main() -> None:
     options = analyseur.parse_args()
 
     mimetypes.add_type("image/jpeg", ".jpg")
+    mimetypes.add_type("image/webp", ".webp")
+    mimetypes.add_type("image/avif", ".avif")
 
     moteur = None
     serveurs_fonctions: list[ThreadingHTTPServer] = []
