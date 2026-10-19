@@ -8,7 +8,7 @@ Contrôles effectués :
 3. **chaque fonction sert bien sa route** : le gestionnaire de `api/*.py` est
    monté dans un serveur local, comme le fait Vercel, puis interrogé ;
 4. les pages du site, `404.html`, `assets/` et les liens de navigation sont
-   présents ;
+   présents, et aucune ressource publiée de `assets/` n'est orpheline ;
 5. la fonction `api/verifier-source.py` (source distante du simulateur) répond
    correctement, sur une source simulée puis sur une source injoignable ;
 6. les consignes, skills, portefeuille et veille R&D continue restent cohérents.
@@ -1173,6 +1173,53 @@ def fichiers_du_site() -> None:
         )
 
 
+#: Suffixes de fichiers publiés dont le contenu peut citer une ressource.
+TEXTES_CITANTS = frozenset({".html", ".css", ".js", ".xml", ".txt", ".json", ".webmanifest"})
+
+
+def ressources_citees() -> None:
+    """Aucune ressource de `assets/` n'est publiée sans être citée par une page, un script ou un style.
+
+    Le périmètre vient de l'étape de préparation du site (même source que
+    `verifier-publication-locale.py`), pour ne pas juger un fichier qui n'est
+    jamais livré. Une ressource est réputée citée dès que son chemin publié ou
+    son nom de fichier apparaît dans un autre fichier publié : c'est plus
+    permissif qu'une résolution d'URL, mais suffisant pour attraper le cas
+    réel — un fichier livré que plus rien n'appelle.
+    """
+    publication = charger_module(RACINE / "outils" / "verifier-publication-locale.py", "publication_locale")
+    publies, erreurs = publication.perimetre()
+    verifier(
+        "Périmètre publié lisible pour traquer les ressources orphelines",
+        bool(publies) and not erreurs,
+        "; ".join(erreurs[:3]) if erreurs else f"{len(publies)} fichiers publiés",
+    )
+    if not publies:
+        return
+    citants = {
+        chemin: source.read_text(encoding="utf-8", errors="ignore")
+        for chemin, source in publies.items()
+        if source.suffix.lower() in TEXTES_CITANTS
+    }
+    orphelines = [
+        chemin
+        for chemin, source in sorted(publies.items())
+        if chemin.startswith("assets/")
+        and source.is_file()
+        and not any(
+            chemin in texte or source.name in texte
+            for autre, texte in citants.items()
+            if autre != chemin
+        )
+    ]
+    ressources = [chemin for chemin in publies if chemin.startswith("assets/")]
+    verifier(
+        "Chaque ressource de assets/ est citée par une page, un script ou un style",
+        not orphelines,
+        f"{len(ressources)} ressources publiées, orphelines : {', '.join(orphelines)}" if orphelines else f"{len(ressources)} ressources publiées, aucune orpheline",
+    )
+
+
 def demander(fichier: Path, chemin: str, methode: str, corps: bytes | None) -> tuple[int, bytes]:
     """Monte une fonction de api/ comme Vercel, l'interroge, puis l'arrête."""
     module = charger_module(fichier, f"api_{fichier.stem}_{methode}")
@@ -1324,6 +1371,7 @@ def main() -> int:
     page_a_jour()
     fonctions_conformes()
     fichiers_du_site()
+    ressources_citees()
     liens_et_scripts_statiques()
     recherche_developpement_continue()
     # Le moteur écrit des tableaux de simulation : on garde la sortie du test lisible.

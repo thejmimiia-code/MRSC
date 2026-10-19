@@ -62,6 +62,7 @@ Une fusion ou une suppression de branche ne doit laisser ni contenu perdu, ni er
 - **Avant de supprimer une branche :** `python3 outils/verifier-fusions.py --branches` doit répondre « supprimable sans perte » pour cette branche. Critère : tous ses blobs restent atteignables depuis les autres références (main, étiquettes).
 - **Après une fusion :** constater que les workflows de `main` sont verts (vérification, publication, en-têtes, veille) avant de passer à autre chose ; une publication qui échoue est une erreur laissée ouverte.
 - **Après une résolution de conflit :** vérifier l'ordre du journal de R&D, l'absence de marqueurs de conflit et de fichiers `.orig`/`.rej` ; la porte les contrôle désormais.
+- **Aucune ressource orpheline :** un fichier de `assets/` publié mais cité par aucune page, aucun script ni aucun style est soit cité, soit retiré (et archivé s'il est distinct). `verifier-integration.py` le refuse désormais.
 
 `outils/verifier-fusions.py` vérifie hors ligne : aucune fusion en cours, aucun fichier non fusionné dans l'index, aucun marqueur de conflit, aucune sauvegarde de fusion suivie, journal antichronologique et sans titre en double. Avec `--branches`, il audite les branches distantes et refuse de déclarer supprimable une branche qui porte un contenu unique.
 

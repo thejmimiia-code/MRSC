@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-19 — Une ressource livrée sans être citée fait désormais échouer la porte
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal :** `favicon-192.png` n'avait été trouvée orpheline qu'à la main, après coup. Rien n'empêchait la même dérive de revenir au prochain ajout d'image.
+- **Constat :** `verifier-integration.py` contrôlait qu'une liste fixe de ressources était **présente**, jamais qu'un fichier publié de `assets/` était **cité**.
+- **Décision :** ajouter le contrôle inverse, dans l'outil existant plutôt que dans un nouveau script. Le périmètre publié est emprunté à `verifier-publication-locale.py` (l'étape de préparation du site), donc un fichier jamais livré n'est pas jugé. Une ressource est citée si son chemin publié ou son nom apparaît dans un autre fichier publié.
+- **Preuve que le contrôle mord :** un fichier témoin ajouté dans `assets/images/` fait échouer le contrôle avec son chemin exact, puis la suppression du témoin le fait repasser au vert. Le témoin n'est pas resté dans le dépôt.
+- **Résultat :** 32 ressources publiées, aucune orpheline ; 131 fichiers publiés lus. La règle est inscrite dans `AGENTS.md`, section « Fusionner et importer sans perte ».
+- **Limite :** le contrôle compare des noms et des chemins dans du texte, pas des URL résolues ; une ressource citée uniquement via un chemin construit dynamiquement passerait pour citée par chance, et une ressource citée par un fichier non publié serait signalée à tort (cas inexistant aujourd'hui).
+- **Contrôles réellement exécutés :** `verifier-integration.py` complet (tous les contrôles passent), plus la démonstration d'échec ci-dessus.
+- **Prochaine action :** étendre le contrôle aux fichiers de `docs/` servis par le site si un jour ce périmètre s'ouvre.
+
 ## 2026-10-19 — L'icône 192 px branchée sur les 94 pages, plus aucune ressource orpheline
 
 - **Initiative :** `optimisation-du-site`.
