@@ -70,6 +70,9 @@ jobs:
       - name: Vérifier les pages, liens et scripts statiques
         run: python3 outils/verifier-site-statique.py
 
+      - name: Vérifier que le site publié ne manque d’aucun fichier
+        run: python3 outils/verifier-publication-locale.py
+
       - name: Vérifier le manifeste des variantes d’images
         run: python3 outils/optimiser-images.py --verifier
 

@@ -49,6 +49,7 @@ CIBLES: tuple[tuple[str, tuple[str, ...], str], ...] = (
     ("assets/images/mondes-savoirs-hero-800.webp", ("image/webp",), "Atlas 800 px, WebP"),
     ("assets/images/escales-anglais-hero-800.avif", ("image/avif",), "Secours de scène 800 px, AVIF"),
     ("assets/images/escales-anglais-hero-800.webp", ("image/webp",), "Secours de scène 800 px, WebP"),
+    ("favicon.ico", ("image/x-icon", "image/vnd.microsoft.icon", "application/octet-stream"), "Favicon"),
     ("sitemap.xml", ("application/xml", "text/xml"), "Sitemap"),
 )
 

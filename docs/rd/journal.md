@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-19 — Le site publié manquait d'un fichier : le favicon
+
+- **Initiatives :** `optimisation-du-site`, `coherence-textes-publics`.
+- **Signal :** exigence que le contenu complet du dépôt se retrouve sur le site publié. Le dépôt contient 95 pages et leurs ressources ; encore faut-il que la copie de publication les emporte toutes.
+- **Constat :** le workflow `deploy-pages.yml` ne publie qu'une liste explicite. Arrêté le 15 octobre 2026 avec le favicon (proposition #57), celui-ci n'a jamais été ajouté à cette liste. Les 94 pages du site demandaient donc `/MRSC/favicon.ico` et recevaient une erreur : onglet sans icône, et un fichier du dépôt absent du site. Aucun contrôle ne pouvait le voir, car `verifier-site-statique.py` valide les liens dans le dépôt, où le favicon existe.
+- **Décision :** reconstruire localement le périmètre publié à partir du workflow lui-même, puis vérifier que tout ce que les pages demandent y figure ; publier `favicon.ico` ; rendre le contrôle permanent.
+- **Outil :** `outils/verifier-publication-locale.py` relit la liste de copie, reconstitue les 133 fichiers publiés et contrôle 4 512 références internes, les `url()` des feuilles de style et les 94 adresses du sitemap. Il refuse aussi toute page publique du dépôt absente de la liste de copie.
+- **Résultat :** le périmètre publié est complet ; les 95 pages du site ont leurs ressources, favicon compris. Le contrôle tourne à chaque proposition et avant chaque publication.
+- **Limite :** le contrôle porte sur la liste de copie, pas sur ce que GitHub sert réellement : un hébergeur peut encore modifier en-têtes, types MIME ou compression. `verifier-publication.py` reste le contrôle réseau, et il inclut désormais le favicon.
+- **Contrôles réellement exécutés :** cas d'échec simulés (favicon retiré de la liste, page ajoutée sans publication) puis `verifier-publication-locale`, `verifier-site-statique`, `verifier-poids-pages`, `verifier-securite`, `verifier-integration`, `verifier-planches-statuts` et la porte complète.
+- **Prochaine action :** vérifier le favicon servi sur le site après la publication, via `outils/verifier-publication.py --base-url https://thejmimiia-code.github.io/MRSC/`.
+
 ## 2026-10-19 — Planches conservées sans perte et archive scellée
 
 - **Initiative :** `direction-artistique-motion`.
