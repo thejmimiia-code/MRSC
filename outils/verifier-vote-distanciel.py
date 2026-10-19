@@ -749,6 +749,19 @@ def principal() -> int:
 
     with MENACES.open("rb") as fichier:
         registre = tomllib.load(fichier)
+    menaces = registre.get("menace", [])
+    ids = [menace.get("id") for menace in menaces]
+    if set(ids) != MENACES_REQUISES or len(ids) != len(set(ids)):
+        manquants.append("registre contenant exactement les 10 menaces requises sans doublon")
+    for index, menace in enumerate(menaces, start=1):
+        champs_vides = [champ for champ in CHAMPS_MENACE if not menace.get(champ)]
+        if champs_vides:
+            manquants.append(f"menace {index} avec champs renseignés : {', '.join(sorted(champs_vides))}")
+        if menace.get("statut") != "a-expertiser":
+            manquants.append(f"menace {menace.get('id', index)} maintenue à l’état a-expertiser")
+    invariants = registre.get("invariant", [])
+    if len(invariants) < 7 or any(not item.get("preuve_attendue") for item in invariants):
+        manquants.append("au moins 7 invariants avec preuve attendue")
     manquants.extend(verifier_registre(registre))
 
     empreinte_statuts = hashlib.sha256(STATUTS.read_bytes()).hexdigest()
