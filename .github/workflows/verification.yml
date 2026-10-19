@@ -76,6 +76,9 @@ jobs:
       - name: Vérifier le poids estimé des pages
         run: python3 outils/verifier-poids-pages.py
 
+      - name: Vérifier les planches des statuts et leur archive
+        run: python3 outils/verifier-planches-statuts.py
+
       - name: Vérifier les frontières de sécurité
         run: python3 outils/verifier-securite.py
 

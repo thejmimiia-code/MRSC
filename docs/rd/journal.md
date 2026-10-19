@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-19 — Planches conservées sans perte et archive scellée
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** exigence explicite de ne rien perdre, ni en qualité ni en fonction, après la sortie des planches de l'arbre.
+- **Décision :** mesurer l'écart de chaque conversion au lieu de le supposer ; remplacer les douze WebP qualité 82, qui modifiaient plus d'un million de pixels par planche, par des **WebP sans perte** (écart pixel nul) ; sceller l'archive d'un manifeste SHA-256 des 507 fichiers d'origine, vérifiable en une commande ; ajouter `outils/verifier-planches-statuts.py` à la porte de vérification.
+- **Résultat :** les douze planches de l'arbre sont identiques aux PNG d'origine (AE = 0) pour 14,7 Mo au lieu de 31,4 Mo ; l'archive est vérifiée conforme sur ses 507 fichiers ; le vérificateur refuse une planche citée absente, un PNG réintroduit ou un manifeste incomplet.
+- **Limite :** la conversion préserve les pixels, pas les octets : les `.webp` conservés ne sont pas identiques fichier par fichier aux `.png` archivés, et les planches restent « à relire ».
+- **Contrôles réellement exécutés :** `compare -metric AE` sur les douze planches (0 après conversion), `sha256sum -c` sur l'archive extraite (507 conformes), `verifier-planches-statuts` et ses trois cas d'échec simulés, puis la porte de vérification complète.
+- **Prochaine action :** conserver cette règle pour toute nouvelle planche — archive étiquetée, manifeste d'empreintes, et WebP sans perte dans l'arbre.
+
 ## 2026-10-19 — Planches des statuts sorties de l'arbre, originales archivées
 
 - **Initiative :** `direction-artistique-motion`.

@@ -2,7 +2,7 @@
 
 **Date :** 16 octobre 2026.  
 **Statut :** proposition de R&D, **à relire**. Aucune vidéo n’est produite. Aucun devis, aucune cagnotte.  
-**Planches :** seules les douze planches citées ci-dessous restent dans le dépôt, en WebP compact. Les 493 autres planches d’exploration sont archivées dans la version étiquetée [`planches-statuts-animation-2026-10`](https://github.com/thejmimiia-code/MRSC/releases/tag/planches-statuts-animation-2026-10) ; voir [`archives-et-poids-du-depot.md`](archives-et-poids-du-depot.md) pour la récupération.  
+**Planches :** seules les douze planches citées ci-dessous restent dans le dépôt, en WebP **sans perte** (écart pixel mesuré : 0 par rapport aux PNG d’origine). Les 493 autres planches d’exploration sont archivées dans la version étiquetée [`planches-statuts-animation-2026-10`](https://github.com/thejmimiia-code/MRSC/releases/tag/planches-statuts-animation-2026-10) ; leur intégrité est vérifiable avec le manifeste `statuts-animation/ARCHIVE-planches-2026-10.sha256` ; voir [`archives-et-poids-du-depot.md`](archives-et-poids-du-depot.md) pour la récupération et le contrôle.  
 **Source qui fait foi :** [`assets/documents/statuts-2020.pdf`](../../assets/documents/statuts-2020.pdf). Les films, le site et cette note **ne remplacent pas** le PDF.
 
 Cette note propose une **œuvre** : un **grand film 3D d’humanité** (puis découpé en épisodes article par article), **voix française**, **sous-titres anglais optionnels**, personnages **originaux**.
