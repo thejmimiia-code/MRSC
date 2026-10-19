@@ -13,6 +13,14 @@ RACINE = Path(__file__).resolve().parent.parent
 REGISTRE = RACINE / "docs" / "rd" / "statuts-risques.toml"
 MATRICE = RACINE / "docs" / "rd" / "statuts-matrice-tracabilite.toml"
 REGLEMENT = RACINE / "docs" / "rd" / "reglement-interieur-projet.md"
+FICHES = RACINE / "docs" / "rd" / "reglement-fiches-redaction.toml"
+COUVERTURE = RACINE / "docs" / "rd" / "statuts-couverture-angles-morts.toml"
+VARIANTES = RACINE / "docs" / "rd" / "statuts-variantes-consolidation.toml"
+MOUTURE = RACINE / "docs" / "rd" / "statuts-mouture-globale-candidate.md"
+ROLES_REQUIS = {
+    "association-decisionnaire", "juridique-statutaire", "cryptographie-vote",
+    "protection-donnees", "accessibilite-usages", "operations-securite",
+}
 RISQUES_REQUIS = {
     "captation-gouvernance", "influence-exterieure", "manipulation-electorat",
     "manipulation-information", "manipulation-vote", "conflit-interets",
@@ -154,18 +162,157 @@ def verifier_reglement(markdown: str) -> list[str]:
     return erreurs
 
 
+def verifier_fiches(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "resilience-statutaire-globale"
+        or meta.get("statut") != "a-faire-relire"
+        or meta.get("adoption") is not False
+        or meta.get("effet_juridique") is not False
+    ):
+        erreurs.append("fiches non adoptées, sans effet juridique et à faire relire")
+    fiches = registre.get("fiche", [])
+    ids = [fiche.get("id") for fiche in fiches]
+    titres = [fiche.get("titre") for fiche in fiches]
+    titres_requis = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX"}
+    if len(fiches) != 19 or len(ids) != len(set(ids)) or set(titres) != titres_requis:
+        erreurs.append("exactement 19 fiches et titres sans doublon")
+    for fiche in fiches:
+        identifiant = fiche.get("id", "?")
+        champs = ("sources", "objectif", "a_rediger", "interdit", "preuve_attendue", "roles_requis")
+        if any(not fiche.get(champ) for champ in champs):
+            erreurs.append(f"fiche {identifiant} avec source, objectif, limites, preuve et rôles")
+        roles = set(fiche.get("roles_requis", []))
+        if roles - ROLES_REQUIS or "juridique-statutaire" not in roles and identifiant in {
+            "hierarchie-definitions", "age-dissolution", "discipline-recours", "adoption-revision"
+        }:
+            erreurs.append(f"fiche {identifiant} avec rôles connus et revue juridique requise")
+        if fiche.get("statut") != "a-faire-relire":
+            erreurs.append(f"fiche {identifiant} maintenue à faire relire")
+    return erreurs
+
+
+def verifier_couverture(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "resilience-statutaire-globale"
+        or meta.get("statut") != "a-faire-relire"
+        or meta.get("exhaustif") is not False
+        or meta.get("couverture_validee") is not False
+    ):
+        erreurs.append("couverture non exhaustive, non validée et à faire relire")
+    couvertures = registre.get("couverture", [])
+    ids = [item.get("risque") for item in couvertures]
+    if set(ids) != RISQUES_REQUIS or len(ids) != len(set(ids)):
+        erreurs.append("couverture unique des 16 familles de risques")
+    for item in couvertures:
+        identifiant = item.get("risque", "?")
+        if not item.get("articles_reglement") or set(item.get("invariants", [])) - INVARIANTS_REQUIS:
+            erreurs.append(f"couverture {identifiant} avec articles et invariants connus")
+        if item.get("statut") != "documente-non-valide":
+            erreurs.append(f"couverture {identifiant} maintenue documentée mais non validée")
+    angles = registre.get("angle_mort", [])
+    ids_angles = [item.get("id") for item in angles]
+    bloquants = {"source-officielle-incomplete", "charte-absente", "articles-17-18", "age-dissolution", "adoption-reglement", "renouvellement-dirigeants", "droit-positif-actuel"}
+    if len(angles) < 16 or len(ids_angles) != len(set(ids_angles)):
+        erreurs.append("au moins 16 angles morts ouverts sans doublon")
+    if not bloquants.issubset(set(ids_angles)):
+        erreurs.append("sept angles morts bloquants conservés")
+    for item in angles:
+        identifiant = item.get("id", "?")
+        if item.get("gravite") not in {"bloquant", "important"} or not item.get("observation") or not item.get("condition_sortie"):
+            erreurs.append(f"angle mort {identifiant} qualifié avec observation et sortie")
+        if item.get("role_requis") not in ROLES_REQUIS or item.get("statut") != "ouvert":
+            erreurs.append(f"angle mort {identifiant} ouvert et attribué à un rôle connu")
+    return erreurs
+
+
+def verifier_variantes(registre: dict) -> list[str]:
+    erreurs: list[str] = []
+    meta = registre.get("meta", {})
+    if (
+        meta.get("initiative") != "resilience-statutaire-globale"
+        or meta.get("statut") != "a-arbitrer"
+        or meta.get("selection_effectuee") is not False
+    ):
+        erreurs.append("variantes à arbitrer sans sélection effectuée")
+    arbitrages = registre.get("arbitrage", [])
+    ids = [item.get("id") for item in arbitrages]
+    if len(arbitrages) != 15 or len(ids) != len(set(ids)):
+        erreurs.append("exactement 15 arbitrages sans doublon")
+    niveaux = {"statuts", "reglement", "procedure", "mixte", "decision-prealable"}
+    for item in arbitrages:
+        identifiant = item.get("id", "?")
+        variantes = item.get("variante", [])
+        ids_variantes = [variante.get("id") for variante in variantes]
+        if not item.get("question") or len(variantes) < 2 or len(ids_variantes) != len(set(ids_variantes)):
+            erreurs.append(f"arbitrage {identifiant} avec question et variantes distinctes")
+        if item.get("candidate") not in ids_variantes:
+            erreurs.append(f"arbitrage {identifiant} avec candidate existante")
+        if item.get("statut") != "a-arbitrer":
+            erreurs.append(f"arbitrage {identifiant} maintenu à arbitrer")
+        for variante in variantes:
+            variante_id = variante.get("id", "?")
+            if any(not variante.get(champ) for champ in ("description", "avantage", "risque")):
+                erreurs.append(f"variante {identifiant}/{variante_id} avec description, avantage et risque")
+            if variante.get("niveau") not in niveaux or variante.get("statut") != "non-selectionnee":
+                erreurs.append(f"variante {identifiant}/{variante_id} non sélectionnée avec niveau connu")
+    return erreurs
+
+
+def verifier_mouture(markdown: str) -> list[str]:
+    erreurs: list[str] = []
+    if "Statut : architecture candidate à faire relire et arbitrer. Aucun texte n’est adopté." not in markdown:
+        erreurs.append("mouture globale explicitement candidate et non adoptée")
+    niveaux = ("Niveau A — Statuts", "Niveau B — Règlement intérieur", "Niveau C — Procédures")
+    if any(niveau not in markdown for niveau in niveaux):
+        erreurs.append("séparation explicite entre statuts, règlement et procédures")
+    modifications = [ligne for ligne in markdown.splitlines() if ligne.startswith("### Modification S")]
+    numeros = []
+    for ligne in modifications:
+        try:
+            numeros.append(int(ligne.split("Modification S", 1)[1].split(" ", 1)[0]))
+        except (ValueError, IndexError):
+            erreurs.append("numérotation lisible des modifications candidates")
+    if numeros != list(range(1, 10)):
+        erreurs.append("exactement 9 modifications statutaires candidates sans lacune")
+    garde_fous = (
+        "gardien de l’intention, pas organe souverain",
+        "Aucune procédure ne peut créer une compétence, changer un seuil ou supprimer un recours",
+        "aucune urgence ne crée une souveraineté ou un pouvoir permanent",
+        "Une faille ne justifie une modification statutaire que si elle touche",
+    )
+    if any(texte not in markdown for texte in garde_fous):
+        erreurs.append("garde-fous de subsidiarité, urgence et non-souveraineté")
+    return erreurs
+
+
 def principal() -> int:
     with REGISTRE.open("rb") as fichier:
         registre = tomllib.load(fichier)
     with MATRICE.open("rb") as fichier:
         matrice = tomllib.load(fichier)
-    erreurs = verifier(registre) + verifier_matrice(matrice) + verifier_reglement(REGLEMENT.read_text(encoding="utf-8"))
+    with FICHES.open("rb") as fichier:
+        fiches = tomllib.load(fichier)
+    with COUVERTURE.open("rb") as fichier:
+        couverture = tomllib.load(fichier)
+    with VARIANTES.open("rb") as fichier:
+        variantes = tomllib.load(fichier)
+    erreurs = (
+        verifier(registre) + verifier_matrice(matrice)
+        + verifier_reglement(REGLEMENT.read_text(encoding="utf-8"))
+        + verifier_fiches(fiches) + verifier_couverture(couverture)
+        + verifier_variantes(variantes)
+        + verifier_mouture(MOUTURE.read_text(encoding="utf-8"))
+    )
     if erreurs:
         print("Registre de résilience incomplet :", file=sys.stderr)
         for erreur in erreurs:
             print(f"- {erreur}", file=sys.stderr)
         return 1
-    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles, 82 articles de règlement projetés et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
+    print("Résilience statutaire cadrée : 8 invariants, 16 familles de risques, 20 groupes d’articles, 82 articles de règlement projetés, 19 fiches de rédaction, 16 angles morts au moins, 15 arbitrages, 9 modifications candidates et 3 portes bloquantes ; aucune validation ou exhaustivité déclarée.")
     return 0
 
 

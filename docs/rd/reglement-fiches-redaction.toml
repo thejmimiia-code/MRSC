@@ -1,0 +1,218 @@
+# Fiches de rédaction par titre : propositions non validées.
+[meta]
+version = 1
+date = 2026-10-18
+initiative = "resilience-statutaire-globale"
+statut = "a-faire-relire"
+adoption = false
+effet_juridique = false
+regle = "Une fiche autorise la rédaction d’une clause candidate, jamais son adoption ou son exécution."
+
+[[fiche]]
+id = "hierarchie-definitions"
+titre = "I"
+sources = ["articles-1", "article-2", "article-9"]
+objectif = "Définir la portée et empêcher une norme inférieure de modifier les statuts."
+a_rediger = "Documenter hiérarchie, versions, définitions et suspension en cas de conflit."
+interdit = "Créer une compétence, modifier un seuil ou rendre une règle rétroactive."
+preuve_attendue = "Historique, autorité d'adoption et matrice de compatibilité."
+roles_requis = ["juridique-statutaire", "association-decisionnaire"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "adhesion-registre"
+titre = "II"
+sources = ["articles-4-5", "article-7"]
+objectif = "Rendre l'adhésion et la qualité à jour prévisibles sans manipuler l'électorat."
+a_rediger = "Préciser demande, preuve, date d'effet, correction et registre minimisé."
+interdit = "Profilage politique, donnée de santé, admission ou refus opportuniste."
+preuve_attendue = "Journal des changements et recours synthétique."
+roles_requis = ["juridique-statutaire", "protection-donnees"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "electorat-conflits"
+titre = "III"
+sources = ["article-3", "article-5"]
+objectif = "Qualifier les membres concernés et traiter les conflits d'intérêts."
+a_rediger = "Fixer critères, autorité de proposition, gel, récusation et recours."
+interdit = "Laisser une personne intéressée définir seule son électorat ou sa récusation."
+preuve_attendue = "Liste synthétique gelée, motifs et décision de recours."
+roles_requis = ["juridique-statutaire", "association-decisionnaire"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "convocations-information"
+titre = "IV"
+sources = ["article-10-1", "article-14", "article-15"]
+objectif = "Garantir information utile, ordre du jour stable et accès équitable."
+a_rediger = "Définir canaux, délais, preuve d'envoi, versions et objections."
+interdit = "Modifier substantiellement le texte sans nouvelle information."
+preuve_attendue = "Paquet de convocation synthétique horodaté et accessible."
+roles_requis = ["juridique-statutaire", "accessibilite-usages"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "deliberations-communes"
+titre = "V"
+sources = ["article-3", "article-11-9", "article-14"]
+objectif = "Fixer les préconditions et preuves communes à toute délibération."
+a_rediger = "Définir présence, représentation, blanc, nul, abstention et procès-verbal."
+interdit = "Changer le dénominateur ou le secret après ouverture."
+preuve_attendue = "Calculs limites et procès-verbal synthétique contradictoire."
+roles_requis = ["juridique-statutaire", "operations-securite"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "bureau-executif"
+titre = "VI"
+sources = ["article-10-1"]
+objectif = "Détailler le fonctionnement du Bureau sans étendre ses pouvoirs."
+a_rediger = "Préciser convocation, mandats, vacance, urgence et ratification."
+interdit = "Intérim indéfini, urgence auto-déclarée ou compétence d'assemblée captée."
+preuve_attendue = "Registre de délégations et exercice d'urgence réversible."
+roles_requis = ["association-decisionnaire", "juridique-statutaire"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "fondateur-dirigeants"
+titre = "VII"
+sources = ["articles-10-2-10-7"]
+objectif = "Distinguer qualité historique, mandat actif, délégation et succession fonctionnelle."
+a_rediger = "Documenter initiative, indisponibilité, délégations et contrôles."
+interdit = "Succession privée automatique ou renouvellement inventé par règlement."
+preuve_attendue = "Mandats, accès, délégations et constat d'indisponibilité synthétiques."
+roles_requis = ["association-decisionnaire", "juridique-statutaire"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "conseil-ethique"
+titre = "VIII"
+sources = ["article-10-2-1"]
+objectif = "Garantir une mission temporaire, impartiale et contradictoire."
+a_rediger = "Définir saisine, composition, tirage, récusation, décision et fin."
+interdit = "Conseil permanent, proche jugeant seul ou dossier secret à la défense."
+preuve_attendue = "Transcription de tirage et dossier contradictoire synthétique."
+roles_requis = ["juridique-statutaire", "protection-donnees"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "territoires-commissions"
+titre = "IX"
+sources = ["articles-11-11-9"]
+objectif = "Rendre rattachement, autonomie, élections et phases participatives contrôlables."
+a_rediger = "Définir territoire, reconnaissance, évolution, élections, fonds et synthèses."
+interdit = "Tutelle arbitraire, caisse invisible ou vote avant information."
+preuve_attendue = "Carte synthétique, comptes territoriaux et procès-verbal électoral."
+roles_requis = ["association-decisionnaire", "operations-securite"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "ago"
+titre = "X"
+sources = ["article-14"]
+objectif = "Appliquer chaque convocation d'AGO sans transposer une autre règle."
+a_rediger = "Détailler preuve du quorum, session numérique, seconde convocation et recours."
+interdit = "Présumer qu'ouverture de message vaut réponse ou identifier un vote secret."
+preuve_attendue = "Cas limites de quorum et concordance des ordres du jour."
+roles_requis = ["juridique-statutaire", "cryptographie-vote", "accessibilite-usages"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "age-dissolution"
+titre = "XI"
+sources = ["article-15", "article-19"]
+objectif = "Préserver les compétences renforcées et suspendre la dissolution avant avis."
+a_rediger = "Détailler seulement preuves et convocations après interprétation juridique."
+interdit = "Choisir par règlement entre seuils statutaires ou dissoudre provisoirement."
+preuve_attendue = "Avis écrit, profils distincts et calculs synthétiques."
+roles_requis = ["juridique-statutaire", "association-decisionnaire"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "procurations"
+titre = "XII"
+sources = ["article-10-1", "article-10-2-1", "article-14", "article-15"]
+objectif = "Contrôler création, plafond, révocation et secret selon le profil."
+a_rediger = "Définir mandat, acceptation, durée, concurrence et registre séparé."
+interdit = "Pouvoir en blanc, dépassement ou liaison mandant–bulletin."
+preuve_attendue = "Registre synthétique et tests de doublon/révocation."
+roles_requis = ["juridique-statutaire", "protection-donnees"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "scrutins-electroniques"
+titre = "XIII"
+sources = ["article-10-1", "article-14"]
+objectif = "Permettre uniquement des modalités expertisées et fidèles au profil."
+a_rediger = "Séparer identité, urne, vérification, dépouillement et contestation."
+interdit = "Cryptographie maison, preuve transférable ou outil sélectionné sans revue."
+preuve_attendue = "Banc synthétique, preuves exportées et rapports indépendants."
+roles_requis = ["cryptographie-vote", "protection-donnees", "operations-securite"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "finances-actifs"
+titre = "XIV"
+sources = ["articles-6-8", "article-13"]
+objectif = "Protéger fonds, biens, conventions et actifs numériques."
+a_rediger = "Définir budget, seuils, pièces, doubles contrôles, inventaire et comptes."
+interdit = "Engager, payer et contrôler seul ou accepter un pouvoir par financement."
+preuve_attendue = "Rapprochement et exercice synthétique de récupération d'actifs."
+roles_requis = ["operations-securite", "association-decisionnaire"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "donnees-archives"
+titre = "XV"
+sources = ["article-10-1", "article-11-4", "article-14"]
+objectif = "Conserver les preuves nécessaires sans surveillance excessive."
+a_rediger = "Définir finalité, accès, durée, versions, sauvegarde et suppression."
+interdit = "Croiser identité et opinion ou maintenir une archive secrète concurrente."
+preuve_attendue = "Inventaire, test de restauration et suppression vérifiée."
+roles_requis = ["protection-donnees", "operations-securite"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "discipline-recours"
+titre = "XVI"
+sources = ["article-12"]
+objectif = "Garantir grief préalable, défense, proportionnalité et recours."
+a_rediger = "Définir signalement, instruction séparée, provisoire, décision et réparation."
+interdit = "Radiation avant défense ou pour modifier un scrutin."
+preuve_attendue = "Dossier synthétique à charge/décharge et décision motivée."
+roles_requis = ["juridique-statutaire", "protection-donnees"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "securite-numerique"
+titre = "XVII"
+sources = ["article-13", "article-16"]
+objectif = "Préserver les moyens numériques sans dépendance personnelle ou unique."
+a_rediger = "Inventorier accès, sauvegardes, fournisseurs, chaîne logicielle et retrait."
+interdit = "Administrateur unique, domaine personnel ou mise à jour silencieuse."
+preuve_attendue = "Exercice de révocation, export et restauration."
+roles_requis = ["operations-securite", "protection-donnees"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "continuite-exceptionnelle"
+titre = "XVIII"
+sources = ["article-3", "article-10-1"]
+objectif = "Maintenir seulement les fonctions essentielles et restaurer les organes ordinaires."
+a_rediger = "Définir niveaux, activation, pouvoirs permis, interdits et extinction."
+interdit = "Police privée, coercition, pouvoir indéfini ou modification statutaire d'urgence."
+preuve_attendue = "Exercice synthétique de crise avec retour au normal."
+roles_requis = ["association-decisionnaire", "juridique-statutaire", "operations-securite"]
+statut = "a-faire-relire"
+
+[[fiche]]
+id = "adoption-revision"
+titre = "XIX"
+sources = ["article-9", "article-14"]
+objectif = "Rendre adoption, modification et entrée en vigueur régulières et traçables."
+a_rediger = "Définir seulement après avis : compétence, quorum, majorité, publication et revue."
+interdit = "Présenter le projet comme adopté ou produire un effet rétroactif défavorable."
+preuve_attendue = "Avis juridique, convocation, vote et procès-verbal."
+roles_requis = ["association-decisionnaire", "juridique-statutaire"]
+statut = "a-faire-relire"
