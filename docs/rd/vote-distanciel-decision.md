@@ -5,7 +5,7 @@
 ## 1. Ce qui est établi dans le dépôt
 
 - La copie locale des statuts comporte plusieurs profils de scrutin et non une règle unique.
-- Quinze relevés statutaires sont structurés, tous `a-faire-relire`.
+- Dix-huit relevés statutaires sont structurés, tous `a-faire-relire`.
 - Dix menaces et sept invariants sont documentés, tous `a-expertiser`.
 - Douze cas de banc synthétique sont décrits, tous `a-concevoir` et jamais exécutés.
 - Aucun bulletin réel, aucune identité réelle, aucune clé de production et aucun service de vote ne sont présents.
@@ -27,6 +27,8 @@ L’association doit choisir **un seul profil** pour la prochaine étude, ou arr
 - `dissolution` — bloqué tant que l’articulation des articles 15 et 19 n’est pas relue ;
 - `aucun` — arrêt ou report de la recherche.
 
+Les huit profils sont reliés à leurs règles et questions bloquantes dans [`vote-distanciel-profils.toml`](vote-distanciel-profils.toml). Ils sont volontairement non exécutables : aucun quorum, seuil, délai ou plafond ne peut être injecté automatiquement avant relecture.
+
 Puis choisir une voie :
 
 - **A — Ne pas voter à distance.** Étudier seulement les alternatives accessibles et la participation à distance sans vote électronique.
@@ -34,7 +36,7 @@ Puis choisir une voie :
 - **C — Expertiser l’auto-hébergement d’un logiciel existant.** Examiner compétences, clés, builds, mises à jour, reprise et exploitation.
 - **D — Construire un système.** Option bloquée à ce stade ; elle ne peut pas être choisie dans la trace.
 
-A ou `aucun` sont des décisions valides. La recherche n’a pas à aboutir à un outil. La grille [`vote-distanciel-comparaison.toml`](vote-distanciel-comparaison.toml) prépare quinze critères bloquants sans score, rang ni probabilité ; toutes les options restent `a-evaluer`. Le relevé [`vote-distanciel-sources.toml`](vote-distanciel-sources.toml) épingle les trois dépôts à des commits observés le 17 octobre 2026 ; il ne constitue pas une évaluation.
+A ou `aucun` sont des décisions valides. La recherche n’a pas à aboutir à un outil. La grille [`vote-distanciel-comparaison.toml`](vote-distanciel-comparaison.toml) prépare quinze critères bloquants sans score, rang ni probabilité ; toutes les options restent `a-evaluer`. Le relevé [`vote-distanciel-sources.toml`](vote-distanciel-sources.toml) épingle les trois dépôts à des commits observés le 17 octobre 2026 ; les [`premiers écarts et inconnues`](vote-distanciel-premiers-ecarts.md) orientent les preuves à chercher sans constituer une évaluation.
 
 ## 3. Conditions cumulatives avant un banc synthétique
 
@@ -44,7 +46,15 @@ A ou `aucun` sont des décisions valides. La recherche n’a pas à aboutir à u
 4. Une solution existante et une version précise sont désignées pour expertise ; aucune cryptographie locale n’est ajoutée.
 5. Le protocole du banc est relu en cryptographie, droit, protection des données, opérations et accessibilité.
 6. L’environnement est isolé, les données sont synthétiques et le plan de destruction est fixé avant l’exercice.
-7. Une condition d’arrêt entraîne réellement l’arrêt, sans compensation par un score global.
+7. Pour l’épreuve de corrélation, métrique, référence et seuil d’arrêt sont définis et datés par la revue humaine avant génération des données ; aucun seuil du dépôt ne vaut décision.
+8. Une condition d’arrêt entraîne réellement l’arrêt, sans compensation par un score global.
+9. Les réponses aux sept incidents de continuité sont relues ; aucune panne ne peut déclencher automatiquement une prolongation, une proclamation ou un abaissement des garanties.
+10. Les huit barrières d’accessibilité et les risques de chaque repli sont examinés sans donnée de santé ni affirmation de conformité prématurée.
+11. Assistance, support, procuration et recours sont séparés ; aucun aidant ou technicien ne peut voir, saisir, confirmer ou prouver un choix.
+12. Le cycle projeté des clés est relu de la désignation à la destruction ; aucune clé complète, sauvegarde commune ou cryptographie maison n’est admise.
+13. Les sept contrôles de chaîne logicielle sont documentés et la porte avant banc est levée par une revue humaine ; aucun audit d’une autre version n’est transposé.
+14. Gel, vérifications, incidents, contestations et décision associative sont clos avant toute proclamation ; un total calculé n’est jamais proclamé automatiquement.
+15. Les six rôles du [`plan de revues`](vote-distanciel-revues.toml) ont examiné les artefacts relevant de leur responsabilité ; aucune disponibilité n’est supposée.
 
 Si une condition manque, la phase reste documentaire.
 

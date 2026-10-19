@@ -1,0 +1,90 @@
+# Questions de revue uniquement : aucune conformité ni utilisabilité n'est déclarée.
+[meta]
+version = 1
+date = 2026-10-17
+initiative = "vote-distanciel-verifiable"
+statut = "a-faire-expertiser"
+donnees = "profils-synthetiques-uniquement"
+conformite_declaree = false
+essai_avec_personnes_autorise = false
+principe = "Le canal de repli ne doit être ni moins secret, ni moins statutaire, ni plus traçant que le canal principal."
+
+[[barriere]]
+id = "navigation-clavier"
+parcours_projete = "Recevoir un droit synthétique, parcourir, confirmer et vérifier sans dispositif de pointage."
+preuve_attendue = "Ordre de focus, absence de piège et actions disponibles au clavier sur version figée."
+repli_a_expertiser = "Canal non numérique accessible sans justification médicale."
+risque_repli = "Assistance pouvant observer ou influencer le choix."
+statut = "a-faire-expertiser"
+
+[[barriere]]
+id = "lecteur-ecran"
+parcours_projete = "Comprendre question, choix, erreurs, confirmation et reçu avec restitution non visuelle."
+preuve_attendue = "Structure, noms accessibles, annonces d'erreur et vérification du reçu sur version figée."
+repli_a_expertiser = "Canal non numérique conservant autonomie et secret."
+risque_repli = "Lecture par un tiers transformant l'assistance en divulgation."
+statut = "a-faire-expertiser"
+
+[[barriere]]
+id = "zoom-et-contrastes"
+parcours_projete = "Utiliser toutes les étapes avec agrandissement et réglages de contraste sans perte d'information."
+preuve_attendue = "Revue compétente de la version figée, sans affirmation de conformité globale."
+repli_a_expertiser = "Support lisible adaptable sans bulletin distinctif."
+risque_repli = "Format spécial permettant d'identifier la personne ou son bulletin."
+statut = "a-faire-expertiser"
+
+[[barriere]]
+id = "comprehension-et-erreurs"
+parcours_projete = "Distinguer sélection, blanc, confirmation, correction et inclusion avec langage explicite."
+preuve_attendue = "Relecture en langage clair et scénarios synthétiques d'erreur récupérable."
+repli_a_expertiser = "Médiation neutre décrite avant l'ouverture."
+risque_repli = "Médiateur orientant le choix ou conservant une preuve."
+statut = "a-faire-expertiser"
+
+[[barriere]]
+id = "temps-et-fatigue"
+parcours_projete = "Interrompre et reprendre sans perdre un bulletin accepté ni relier identité et brouillon."
+preuve_attendue = "Comportement documenté des délais, sessions et reprises sur données synthétiques."
+repli_a_expertiser = "Fenêtre et rendez-vous alternatifs décidés conformément au profil relu."
+risque_repli = "Prolongation individuelle révélant une situation personnelle ou modifiant l'égalité."
+statut = "a-faire-expertiser"
+
+[[barriere]]
+id = "connexion-ou-equipement-limite"
+parcours_projete = "Achever ou abandonner proprement avec coupures, faible débit et équipement non récent."
+preuve_attendue = "Essais synthétiques bornés sur configurations explicitement inventoriées."
+repli_a_expertiser = "Canal hors ligne ou présentiel avec preuve équivalente et décision associative."
+risque_repli = "Canal dégradé moins vérifiable ou disponible seulement à certains groupes."
+statut = "a-faire-expertiser"
+
+[[barriere]]
+id = "assistance-humaine"
+parcours_projete = "Demander une aide technique sans que l'aidant apprenne ou puisse prouver le choix."
+preuve_attendue = "Protocole de rôle, limites de l'assistance et scénario contradictoire."
+repli_a_expertiser = "Assistance choisie ou neutre compatible avec les règles de procuration relues."
+risque_repli = "Confusion entre assistance, procuration et coercition."
+statut = "a-faire-expertiser"
+
+[[barriere]]
+id = "verification-independante"
+parcours_projete = "Vérifier l'inclusion et comprendre un échec sans dépendre du même canal inaccessible."
+preuve_attendue = "Au moins une méthode de vérification distincte examinée par le rôle accessibilité."
+repli_a_expertiser = "Contestation accessible ne demandant pas de divulguer le choix."
+risque_repli = "Réclamation contenant identité, reçu et choix dans un même dossier."
+statut = "a-faire-expertiser"
+
+[[garde_fou]]
+id = "aucune-donnee-de-sante"
+exigence = "Aucun diagnostic, justificatif de handicap ou motif personnel n'est collecté pour accéder au repli."
+
+[[garde_fou]]
+id = "equivalence-du-secret"
+exigence = "Le repli ne produit aucun marquage de bulletin, journal nominatif de choix ou reçu transférable."
+
+[[garde_fou]]
+id = "equivalence-statutaire"
+exigence = "Le repli reste dans le même profil relu et ne crée pas une catégorie de voix distincte."
+
+[[garde_fou]]
+id = "publication-humaine"
+exigence = "Toute conclusion d'accessibilité est réservée à une revue humaine compétente sur une version précise."

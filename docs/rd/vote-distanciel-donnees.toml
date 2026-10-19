@@ -1,0 +1,109 @@
+# Modèle de données projeté — aucun traitement réel n'est autorisé.
+[meta]
+version = 1
+date = 2026-10-17
+initiative = "vote-distanciel-verifiable"
+statut = "a-faire-expertiser"
+regle = "Aucune catégorie ne peut être collectée avant choix du profil, base applicable, minimisation, durée et responsable."
+
+[[categorie]]
+id = "identite-eligibilite"
+finalite_projetee = "Vérifier une fois l'habilitation selon le profil statutaire relu."
+detenteur_projete = "registre-eligibilite-separe"
+public = false
+contenu_interdit = ["choix", "bulletin-chiffre", "recu", "heure-depot-precise", "adresse-reseau-depot"]
+retention = "a-definir-avant-essai"
+statut = "a-faire-expertiser"
+
+[[categorie]]
+id = "justificatif-anonyme"
+finalite_projetee = "Prouver un droit à usage unique sans transmettre l'identité à l'urne."
+detenteur_projete = "personne-synthetique-puis-urne"
+public = false
+contenu_interdit = ["nom", "courriel", "numero-adherent", "identifiant-registre"]
+retention = "detruire-ou-invalider-apres-usage-selon-protocole-expertise"
+statut = "a-faire-expertiser"
+
+[[categorie]]
+id = "bulletin-chiffre"
+finalite_projetee = "Permettre inclusion et dépouillement vérifiables sans bulletin en clair."
+detenteur_projete = "urne-et-tableau-public"
+public = true
+contenu_interdit = ["identite", "courriel", "adresse-reseau", "justificatif-brut", "choix-en-clair"]
+retention = "a-definir-selon-secret-durable-et-contestation"
+statut = "a-faire-expertiser"
+
+[[categorie]]
+id = "recu-inclusion"
+finalite_projetee = "Vérifier l'inclusion sans révéler ni prouver le choix à un tiers."
+detenteur_projete = "personne-synthetique"
+public = false
+contenu_interdit = ["choix", "identite", "preuve-transferable-du-choix"]
+retention = "jusqu-a-fin-contestation-puis-a-definir"
+statut = "a-faire-expertiser"
+
+[[categorie]]
+id = "preuves-publiques"
+finalite_projetee = "Permettre la vérification universelle et hors ligne du dépouillement."
+detenteur_projete = "miroirs-publics"
+public = true
+contenu_interdit = ["identite", "courriel", "adresse-reseau", "choix-individuel", "secret-de-cle"]
+retention = "a-definir-avant-publication-irreversible"
+statut = "a-faire-expertiser"
+
+[[categorie]]
+id = "journal-emission"
+finalite_projetee = "Détecter droits manquants ou dupliqués sans connaître le bulletin."
+detenteur_projete = "registre-eligibilite-separe"
+public = false
+contenu_interdit = ["bulletin", "recu", "heure-depot", "adresse-reseau-depot"]
+retention = "minimale-jusqu-a-fin-recours-puis-destruction"
+statut = "a-faire-expertiser"
+
+[[categorie]]
+id = "journal-urne"
+finalite_projetee = "Diagnostiquer disponibilité et intégrité sans journaliser l'identité."
+detenteur_projete = "operateur-urne-separe"
+public = false
+contenu_interdit = ["nom", "courriel", "numero-adherent", "justificatif-brut", "choix", "adresse-reseau-si-evitable"]
+retention = "minimale-et-fixee-avant-ouverture"
+statut = "a-faire-expertiser"
+
+[[categorie]]
+id = "registre-procurations"
+finalite_projetee = "Contrôler plafond, validité et révocation selon le profil statutaire."
+detenteur_projete = "autorite-statutaire-separee"
+public = false
+contenu_interdit = ["choix-mandant", "choix-mandataire", "bulletin", "recu"]
+retention = "jusqu-a-fin-recours-puis-destruction-ou-archivage-legal-expertise"
+statut = "a-faire-expertiser"
+
+[[liaison_interdite]]
+gauche = "identite-eligibilite"
+droite = "bulletin-chiffre"
+raison = "Empêcher le lien identité–bulletin."
+
+[[liaison_interdite]]
+gauche = "journal-emission"
+droite = "journal-urne"
+raison = "Empêcher la corrélation directe des horaires et identifiants."
+
+[[liaison_interdite]]
+gauche = "identite-eligibilite"
+droite = "recu-inclusion"
+raison = "Empêcher qu'un reçu public ou sa fuite révèle qui a voté."
+
+[[liaison_interdite]]
+gauche = "registre-procurations"
+droite = "bulletin-chiffre"
+raison = "Préserver le secret des choix du mandant et du mandataire."
+
+[[liaison_interdite]]
+gauche = "justificatif-anonyme"
+droite = "identite-eligibilite"
+raison = "L'émetteur ne doit pas pouvoir reconstruire le justificatif utilisé à partir de l'identité."
+
+[[liaison_interdite]]
+gauche = "preuves-publiques"
+droite = "journal-urne"
+raison = "Éviter l'enrichissement public par des métadonnées opérationnelles."
