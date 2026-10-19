@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — Réécriture d'historique mesurée : elle coûterait l'archive, et ne ferait pas maigrir GitHub
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal :** la demande « `--force` sur `main` » pour supprimer les 1,3 Go de l'historique. Avant d'exécuter, l'opération a été mesurée sur un clone miroir complet plutôt que sur la foi de la procédure ancienne.
+- **Constat :** trois essais reproductibles, `git-filter-repo` 2.47.0. (A) purger `main` seule en gardant l'étiquette : **1,27 Gio → 1,27 Gio**, gain nul, l'étiquette référençant les mêmes objets. (B) purger toutes les références : **1,27 Gio → 22 Mio**, mais l'étiquette ne garde plus que trois icônes : les **505 planches sont effacées**, c'est-à-dire exactement la perte que l'archive existait pour empêcher. (C) sur GitHub, chaque proposition de fusion depuis la #85 conserve une référence `refs/pull/<n>/head` qui atteint encore les 506 objets PNG ; ces références ne se réécrivent pas par un `push --force`, donc la taille annoncée ne baisserait pas sans un passage du support. Dans les deux premiers cas, l'arbre de `main` ressort **identique bit à bit** (`8283543`) : la réécriture ne fait perdre aucun fichier de `main`, seulement l'archive.
+- **Décision :** ne pas réécrire. La procédure du dossier d'archive est corrigée : l'export vérifié de l'étiquette passe **avant** toute réécriture, et la conservation de l'étiquette est posée comme condition, pas comme formalité. La suppression de l'étiquette qui figurait dans l'ancienne procédure est explicitement signalée comme la perte.
+- **Résultat :** `docs/rd/archives-et-poids-du-depot.md` porte les trois scénarios chiffrés, la décision et la procédure conditionnelle ; l'archive reste intacte et **507 empreintes ont été revérifiées depuis l'étiquette seule** avant et après la mesure.
+- **Limite :** l'archive ne peut pas être déposée en ressource de version depuis la session : `uploads.github.com` est injoignable (`SSL_ERROR_SYSCALL`), et l'espace de travail est plafonné à ~128 Mo pour un fichier de 1,3 Go. Une copie hors GitHub reste donc à faire par la personne qui administre le dépôt si la réécriture est un jour décidée.
+- **Contrôles réellement exécutés :** clone miroir complet (394 commits), `git archive` de l'étiquette + `sha256sum -c` sur 507 fichiers, deux exécutions de `git filter-repo` sur des copies, tailles avant/après `git gc --prune=now`, comparaison des arbres, audit des références `refs/pull/*`, puis la porte habituelle.
+- **Prochaine action :** aucune tant que le coût réel (perte de l'archive contre un gain nul côté GitHub) n'est pas accepté explicitement.
+
 ## 2026-10-19 — Une ressource livrée sans être citée fait désormais échouer la porte
 
 - **Initiative :** `optimisation-du-site`.

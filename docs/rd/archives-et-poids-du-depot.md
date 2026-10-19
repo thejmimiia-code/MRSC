@@ -82,11 +82,36 @@ et se télécharge entière via « Download ZIP » de la version publiée (le fi
 
 ## Ce qui reste à faire : réécrire l’historique
 
-Retirer les fichiers de l’arbre **ne réduit pas le clonage** : les 1,29 Go restent dans l’historique, accessibles par l’étiquette. Seule une réécriture d’historique les enlève. Elle n’a **pas** été faite ici : elle exige un `--force` sur `main`, opération hors du périmètre de la session d’agent et destructive pour les clones existants.
+Retirer les fichiers de l’arbre **ne réduit pas le clonage** : les 1,29 Go restent dans l’historique, accessibles par l’étiquette. Seule une réécriture d’historique les enlève. Elle n’a **pas** été faite, et la mesure du 20 octobre 2026 explique pourquoi.
 
-Procédure pour la personne qui administre le dépôt, **après avoir téléchargé l’archive ci-dessus et vérifié son manifeste** :
+## Réécriture d’historique : mesurée, non faite
+
+Mesures faites sur un clone miroir complet du dépôt (`git clone --mirror`, 1,27 Gio, 394 commits, **506 objets PNG dont 1 286 Mo**), avec `git-filter-repo` 2.47.0. Les trois essais ci-dessous sont reproductibles ; l’arbre de `main` en sort **identique bit à bit** (`82835438df49031c6003a465a339a486274ce380`) dans les deux premiers cas.
+
+| Scénario | Taille après | Arbre de `main` | Archive |
+|---|---|---|---|
+| Référence | 1,27 Gio | intact | 505 planches + 2 fichiers |
+| A — purger `main` seule, étiquette gardée | **1,27 Gio** | identique | intacte |
+| B — purger toutes les références | **22 Mio** | identique | **505 planches effacées** |
+| C — même chose côté GitHub | inchangée | identique | effacée |
+
+- **A ne sert à rien** : l’étiquette référence les mêmes objets, donc les 1,29 Go restent dans le dépôt. Le gain est nul, la fragilité non.
+- **B fait gagner 1,25 Gio**, mais la réécriture retire aussi les planches de l’étiquette, qui ne garde plus que les trois icônes du site. Autrement dit : le gain se paie exactement par la perte que tout ce dossier cherchait à éviter. `git filter-repo` peut se limiter à `main` (`--refs main`, c’est le scénario A), mais l’étiquette garde alors les mêmes objets et le gain est nul ; dès qu’on lève la limite, l’étiquette est réécrite comme le reste.
+- **C explique le reste** : sur GitHub, chaque proposition de fusion fusionnée depuis la #85 garde une référence `refs/pull/<n>/head` qui atteint encore les 506 objets PNG, et ces références **ne se réécrivent pas par un `push --force`**. Tant qu’elles existent, la taille annoncée par GitHub ne baisse pas, même après une `main` purgée et une étiquette supprimée. Seul un passage du support GitHub (ramassage des objets inaccessibles) changerait le chiffre.
+
+**Décision :** la réécriture n’est pas lancée. Elle ne rendrait pas le dépôt plus léger côté GitHub avant une intervention du support, et elle détruirait l’unique copie des 505 planches.
+
+## Si la réécriture est décidée quand même
+
+Elle reste possible, mais dans cet ordre, et **aucune étape ne se saute** :
 
 ```sh
+# 1. Copier l’archive hors de GitHub et noter son empreinte (1,3 Go).
+git archive --format=tar planches-statuts-animation-2026-10 -o planches-statuts-animation-2026-10.tar
+sha256sum planches-statuts-animation-2026-10.tar > planches-statuts-animation-2026-10.tar.sha256
+# 2. Stocker ce fichier ailleurs, puis le RELIRE et vérifier son empreinte :
+sha256sum -c planches-statuts-animation-2026-10.tar.sha256
+# 3. Seulement alors, réécrire et pousser :
 git clone --mirror https://github.com/thejmimiia-code/MRSC.git mrsc-mirror.git
 cd mrsc-mirror.git
 git filter-repo --force --invert-paths --path-glob 'docs/rd/statuts-animation/*.png'
@@ -97,7 +122,8 @@ git push origin --delete planches-statuts-animation-2026-10
 Points d’attention :
 
 - `git filter-repo` réécrit tous les commits concernés ; les anciens identifiants de commit disparaissent, les propositions de fusion déjà fusionnées gardent leur trace mais leurs diffs ne se rejouent plus ;
-- l’étiquette d’archive est le dernier endroit où les planches sont accessibles : **la télécharger et vérifier le manifeste avant** toute réécriture ;
+- l’étiquette d’archive est **la seule copie** des planches : l’étape 2 est ce qui empêche la perte, pas une formalité ;
+- la taille GitHub ne baissera probablement qu’après un ticket au support pour les références de propositions de fusion (voir C) ;
 - prévenir les personnes qui auraient un clone, puisqu’elles devront le refaire ;
 - vérifier ensuite `gh api repos/thejmimiia-code/MRSC --jq '.size'` et contacter le support GitHub seulement si la taille ne baisse pas après quelques jours.
 
