@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-19 — La lecture des en-têtes suit la publication au lieu de la précéder
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal :** après la fusion du correctif du favicon, `Vérifier les en-têtes servis par l'hébergement` a échoué sur `main` alors que le fichier était correct.
+- **Constat :** ce contrôle était déclenché sur `push` vers `main`, en même temps que la publication. Il interrogeait donc l'ancienne version du site — celle qui n'avait pas encore le favicon — pendant que la nouvelle se déployait. L'échec était un artefact de course, pas un défaut du site.
+- **Décision :** déclencher la lecture des en-têtes à la fin de la publication (`workflow_run` sur « Publish M.R.S.C site »), pour interroger la version réellement servie. Le déclenchement manuel et la revue mensuelle restent en place.
+- **Résultat :** plus de faux échec ; le contrôle porte sur l'état publié, et il intègre désormais le favicon.
+- **Limite :** la lecture dépend du bon déroulement de la publication ; si celle-ci échoue, les en-têtes ne sont pas relus — ce qui est le comportement attendu, mais laisse le dernier relevé en place.
+- **Contrôles réellement exécutés :** fusion du correctif, publication Pages réussie, puis lecture des en-têtes déclenchée par la publication.
+- **Prochaine action :** consulter le rapport d'en-têtes dans l'issue de suivi pour confirmer que `favicon.ico` répond bien en 200 avec un type d'image.
+
 ## 2026-10-19 — Le site publié manquait d'un fichier : le favicon
 
 - **Initiatives :** `optimisation-du-site`, `coherence-textes-publics`.

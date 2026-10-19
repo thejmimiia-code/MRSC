@@ -6,13 +6,14 @@ name: Vérifier les en-têtes servis par l’hébergement
 # manquant ou injoignable, pas une qualité de rendu.
 
 on:
-  # Un changement du contrôleur ou de ses cibles relance la lecture des en-têtes
-  # sur la version publiée, sans attendre la revue mensuelle.
-  push:
-    branches: [main]
-    paths:
-      - "outils/verifier-publication.py"
-      - ".github/workflows/verifier-publication.yml"
+  # La lecture suit la publication : elle interroge la version réellement servie,
+  # sans courir contre le déploiement. Chaque poussée sur `main` publie le site,
+  # donc un changement du contrôleur ou de ses cibles relance bien la lecture.
+  # (Un déclenchement sur `push` échouait à tort : il interrogeait l'ancienne
+  # version du site pendant que la nouvelle se déployait.)
+  workflow_run:
+    workflows: ["Publish M.R.S.C site"]
+    types: [completed]
   workflow_dispatch:
     inputs:
       base-url:
