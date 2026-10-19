@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-19 — Doublons inutiles retirés du dépôt, rien d'autre en attente
+
+- **Initiative :** `optimisation-du-site`.
+- **Signal :** demande de ne plus rien laisser en attente, de fusionner ce qui reste et de supprimer les doublons inutiles.
+- **Constat :** aucune proposition de fusion n'était ouverte et aucune branche distante ne subsistait hors `main`. Deux fichiers sans usage subsistaient en revanche dans l'arbre : `assets/images/favicon.ico`, **octet pour octet identique** à `favicon.ico` et cité par aucune page, et `assets/documents/.gitkeep`, marqueur de dossier vide alors que trois PDF y sont versionnés.
+- **Décision :** retirer ces deux fichiers, sans toucher à `assets/images/favicon-192.png`, qui n'est pas un doublon (empreinte et dimensions distinctes) mais une ressource encore non branchée : la supprimer serait une perte, pas un ménage.
+- **Résultat :** deux fichiers en moins, 15 Ko et un marqueur ; périmètre publié ramené à 132 fichiers, 95 pages, 4 512 références internes toujours résolues.
+- **Limite :** `favicon-192.png` reste livré sans être cité ; le brancher demanderait de modifier les 94 pages pour un manifeste d'icônes, décision éditoriale non prise ici.
+- **Contrôles réellement exécutés :** recherche d'occurrences du doublon dans toutes les pages, scripts, feuilles de style et documents (aucune) ; `verifier-site-statique`, `verifier-publication-locale`, `verifier-poids-pages`, `verifier-planches-statuts`, `verifier-fusions`, `verifier-integration`, `verifier-securite`, `optimiser-images --verifier`, `verifier-rd-continue`, `py_compile` — tous réussis.
+- **Prochaine action :** décider, avec la personne responsable, si `favicon-192.png` sert à un manifeste d'icônes ou retourne dans l'archive.
+
 ## 2026-10-19 — L'aperçu local avait sa propre liste de fichiers et divergeait du site
 
 - **Initiatives :** `optimisation-du-site`, `coherence-textes-publics`.
