@@ -47,13 +47,15 @@ La ligne « **Contrôles réellement exécutés :** rédaction documentaire… �
 
 ### L'ordre du journal
 
-La résolution du conflit de la proposition #85 avait placé les 29 entrées du 2026-10-16 en tête du journal, au-dessus des entrées du 2026-10-18 et du 2026-10-17, rompant l'ordre antichronologique. **Cet ordre a été rétabli en amont**, dans la fusion de la proposition #129, par la personne responsable du dépôt. La présente passe s'est limitée à le vérifier sur l'ensemble des entrées et à conserver les deux entrées du 2026-10-19 — celle du ménage des propositions et celle du présent relevé.
+La résolution du conflit de la proposition #85 avait placé les 29 entrées du 2026-10-16 en tête du journal, au-dessus des entrées du 2026-10-18 et du 2026-10-17, rompant l'ordre antichronologique. **Cet ordre a été rétabli en amont**, dans la fusion de la proposition #129, par la personne responsable du dépôt. La présente passe s'est limitée à le vérifier sur l'ensemble des entrées et à conserver les entrées du 2026-10-19 — celles du ménage des propositions, du retrait des planches, du contrôle des liens et du présent relevé.
 
 ### Les liens de la bible du film
 
-Le retrait des planches de l'arbre a rendu **non résolus les 193 liens d'image** de [`statuts-animation/bible-fil-et-video-01.md`](statuts-animation/bible-fil-et-video-01.md), qui ne sont pas vérifiés par la porte du dépôt. Le plan [`plan-statuts-animation.md`](plan-statuts-animation.md) avait reçu une mention d'archive ; la bible, non. Une mention d'archive identique y a été ajoutée, qui indique où sont les planches et que les liens ci-dessous désignent les versions archivées.
+Le retrait des planches de l'arbre a rendu **non résolus les 193 liens d'image** de [`statuts-animation/bible-fil-et-video-01.md`](statuts-animation/bible-fil-et-video-01.md), qui n'étaient vérifiés par aucun contrôle. Le plan [`plan-statuts-animation.md`](plan-statuts-animation.md) avait reçu une mention d'archive ; la bible, non. Une mention d'archive identique y a été ajoutée, qui indique où sont les planches et que les liens ci-dessous désignent les versions archivées.
 
-Commande de contrôle :
+Le manque a ensuite été comblé en amont, dans la proposition #133 : `outils/verifier-planches-statuts.py` contrôle désormais **les 205 liens d'image des documents de `docs/rd/`**, et un lien vers un fichier ni présent dans l'arbre ni inscrit au manifeste fait échouer la porte. Les 193 liens de la bible sont acceptés explicitement, parce qu'ils désignent des planches archivées. Un lien cassé ne peut plus passer sans bruit.
+
+Commande de contrôle, avant l'automatisation de la proposition #133 :
 
 ```sh
 python3 - <<'PY'
@@ -67,6 +69,8 @@ for d in ("docs/rd/statuts-animation/bible-fil-et-video-01.md", "docs/rd/plan-st
     print(d, len(liens), "liens,", len(casses), "non résolus")
 PY
 ```
+
+Les « non résolus » de la bible sont les liens vers les planches archivées : ils ne le sont plus au sens du contrôle, qui les reconnaît maintenant grâce au manifeste.
 
 ## Le poids des planches
 
@@ -105,6 +109,6 @@ Les seize commandes réussissent. Le poids des pages reste sous budget : 95 page
 
 - Ce relevé ne dit pas si le fond des propositions est juste : les planches restent « à relire » et le plan d'animation une proposition, pas une décision.
 - La relecture humaine, la validation des sources et l'arbitrage éditorial ne sont pas faits ici.
-- `outils/verifier-planches-statuts.py` contrôle les citations du plan et l'intégrité de l'archive, mais il ne lit que `plan-statuts-animation.md` : **les 193 liens d'image de la bible restent hors de tout contrôle automatique**. Ils ont été trouvés en comparant chaque lien à l'arbre ; la mention d'archive ajoutée dans la bible est donc la seule chose qui les explique dans un clone courant. Étendre le vérificateur à la bible est la suite naturelle.
+- Le contrôle des liens d'image, longtemps absent, existe désormais (proposition #133) : `outils/verifier-planches-statuts.py` couvre les 205 liens d'image de `docs/rd/` et tolère les 193 liens de la bible parce qu'ils sont au manifeste. Ce qu'il ne vérifie pas : qu'un lien autorisé pointe encore vers le bon fichier, seulement qu'un fichier de ce nom existe. Une renumérotation des planches archivées passerait le contrôle.
 - Aucun mesurage réseau, aucune mesure de temps de clonage, aucun contrôle du temps de déploiement n'a été réalisé.
 - Les 507 empreintes du manifeste ont été produites à partir de l'étiquette ; l'absence d'écart constatée vaut pour les fichiers présents dans l'étiquette au moment de la mesure, pas pour l'intégrité de l'étiquette elle-même, qui n'a pas été vérifiée comme objet signé.
