@@ -2,208 +2,43 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
-## 2026-10-16 — Sigle moderne, sans drapeaux
+## 2026-10-18 — Mouture globale candidate à trois niveaux
 
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** le sceau d’E-06 est trop moyenâgeux ; les drapeaux font sectaire.
-- **Décision :** garder le visage E-06 ; hall sans bannières ; pas de sceau héraldique. Marque = arcs colorés contemporains ou barre LED. Planches `eva-moderne-01` à `05`. Accueil 3D inchangé.
-- **Contrôles :** planches modernes.
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** consolider les arbitrages en une architecture où les statuts gardent le pouvoir et les droits, le règlement précise les modalités durables et les procédures portent l’exécution révisable.
+- **Résultat :** neuf modifications statutaires minimales candidates, vingt-cinq domaines réglementaires, une couche procédurale et un chemin d’adoption séparé.
+- **Équilibre :** le fondateur reste gardien de l’intention sans devenir souverain ; l’assemblée décide dans ses compétences ; le Bureau exécute ; éthique, contrôle et recours restent bornés.
+- **Limite :** la mouture n’est pas adoptée et ne garantit pas toutes les circonstances ; chaque modification reste soumise aux sources officielles, à l’avis juridique et à la décision compétente.
+- **Prochaine action :** confronter les neuf modifications à un test de nécessité, puis préparer un tableau statuts actuels / rédaction candidate / justification / effet / risque.
 
-## 2026-10-16 — Éva choisie : plan E-06 (atrium)
+## 2026-10-18 — Variantes pour préserver la vision sans captation
 
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** « La sixième est bien » = `elle-06-atrium.png`.
-- **Décision :** visage et corps androïde blanc de E-06 verrouillés pour Éva (vidéos, pédagogie). Copie `eva-choisie.png`. Suites `eva-lock-01` à `06`. Accueil 3D inchangé. Pas enfantin. Tous les âges autour d’elle.
-- **Contrôles :** planches lock.
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** comparer plusieurs solutions pour chaque point sensible au lieu d’imposer immédiatement une rédaction unique.
+- **Résultat :** quinze arbitrages documentent variantes, avantages, risques et niveau normatif ; une candidate de travail est indiquée sans sélection.
+- **Prospective :** chaque variante est examinée contre deux dérives opposées : captation par une minorité et concentration au profit des organes en place.
+- **Optimisation :** le contrôle refuse une variante déclarée sélectionnée, la suppression d’un arbitrage ou une candidate inexistante.
+- **Limite :** les candidates expriment une hypothèse de consolidation, pas l’intention juridiquement opposable de l’auteur ni une décision de l’association.
+- **Prochaine action :** soumettre les quinze arbitrages au fondateur, à la revue juridique et à l’organe compétent avant toute intégration dans les statuts ou le règlement.
 
-## 2026-10-16 — Personnages-matériaux pour l’identité pédagogique
+## 2026-10-18 — Couverture croisée et angles morts maintenus ouverts
 
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** reprendre les matériaux du visuel d’accueil (verre, métal, arcs, cristal) pour des personnages uniques, vidéos de présentation et animations pédagogiques intuitives. Accueil 3D inchangé.
-- **Décision :** quatre guides proposés (Vertige, Ambre, Lame, Facette), distincts du logo et de Léna / Marc / Karim. Dix planches identite-01 à 10. Noms à valider.
-- **Contrôles :** planches identité.
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** rechercher les trous entre risques, invariants, articles du règlement, preuves et rôles plutôt que déclarer la couverture complète.
+- **Résultat :** les seize familles de risques sont reliées aux clauses candidates et invariants ; seize angles morts bloquants ou importants possèdent une condition de sortie et un rôle requis.
+- **Optimisation :** le contrôle refuse une famille non couverte, un angle mort fermé sans preuve, un rôle inconnu et toute prétention de couverture validée ou exhaustive.
+- **Limite :** une liaison documentaire n’établit pas l’efficacité ; de nouveaux angles morts peuvent apparaître lors des revues et exercices.
+- **Prochaine action :** fermer uniquement les angles pour lesquels la preuve attendue est produite et relue, en commençant par les sources officielles et décisions juridiques préalables.
 
-## 2026-10-16 — Pistes nouvelles 11–20
+## 2026-10-18 — Fiches de rédaction bornées pour les dix-neuf titres
 
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** encore des pistes totalement nouvelles.
-- **Décision :** timbres, bakélite, flaque, buvard, chambre à air, sucre, gare, pétanque, acétate, phalènes.
-- **Contrôles :** planches nouveau-11 à 20.
+- **Initiative :** `resilience-statutaire-globale`.
+- **Décision :** préparer la rédaction titre par titre sans transformer le squelette en règlement adopté.
+- **Résultat :** dix-neuf fiches relient sources statutaires, objectif, contenu à rédiger, interdit, preuve attendue et rôles humains requis.
+- **Optimisation :** le contrôle refuse une fiche supprimée, un statut prématuré, un rôle inconnu et toute adoption ou effet juridique déclaré.
+- **Limite :** ces fiches autorisent seulement une future rédaction candidate ; elles ne résolvent aucune décision préalable et ne prouvent pas l’efficacité des contrôles.
+- **Prochaine action :** faire examiner les fiches par les rôles requis, puis rédiger par lots réversibles en conservant chaque blocage.
 
-## 2026-10-16 — Dix pistes totalement nouvelles
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** des essais totalement nouveaux, hors fusions grille/gouache/pixels.
-- **Décision :** tram-vitrail, cyanotype, laine, savon, Super 8, craie, émail, radar, ombres, péniche. France, Léna / Marc / Karim.
-- **Contrôles :** planches nouveau-01 à 10.
-
-## 2026-10-16 — Fusions 11–20
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** encore des fusions (grille, gouache, pixels, mains).
-- **Décision :** F-11 à F-20. France, Léna / Marc / Karim.
-- **Contrôles :** planches fusion-11 à 20.
-
-## 2026-10-16 — Fusions de styles (quatre planches choisies)
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** mélanger mots croisés, gouache fraîche, pixels visages, mains ; innover.
-- **Décision :** dix fusions F-01 à F-10. Trio Léna / Marc / Karim, France 1985. F-10 = tentative de look unique de film.
-- **Contrôles :** planches fusion-01 à 10.
-
-## 2026-10-16 — Compilation Drive + X17
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** zipper toutes les planches sur Drive ; dix autres ; l’association sélectionnera pour des fusions.
-- **Décision :** zip JPG dans le dossier Drive « M.R.S.C. planches animation statuts ». Série X17 (80s + humanité). PNG originaux restent dans le dépôt ; le zip n’est pas versionné.
-- **Contrôles :** archive créée ; envoi Drive.
-
-## 2026-10-16 — Expériences 80s, humanité et sensualité (X16)
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** ajouter une part de sensualité et d’humanité.
-- **Décision :** chaleur des mains, veste partagée, bal maladroit, regards, bus, parapluie. Pas d’érotisme. Neuf planches (gouttes non livrées).
-- **Contrôles :** planches X16.
-
-## 2026-10-16 — Dix expériences 80s (X15)
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** des choses intéressantes, encore ; codes 80s.
-- **Décision :** CRT-stores, plastique K7, aérobic, polaroid ciel, pixels visages, égaliseur, bâtons fluo, catadioptres, Antiope, chrome pluie. France.
-- **Contrôles :** planches X15.
-
-## 2026-10-16 — Dix expériences 80s (X14)
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** innover absolument et tenir les codes 80s.
-- **Décision :** Memphis-zinc, VHS-Walkman, lasers-damier, LCD fluo, Minitel-aérographe, enceinte-K7, aérographe BD, cubes fluo, onde-mobylette, disquette-vitrail. France, fluo teal/magenta, pas de logos de marques.
-- **Contrôles :** planches X14.
-
-## 2026-10-16 — Dix expériences de style (X13)
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** dix autres.
-- **Décision :** fonds de bouteille, bitume-bonbon, carte de bal, bic rouge, rouille-chrome, libellule, empreintes, caramel, tableau départs, néon asphalte. France.
-- **Contrôles :** planches X13.
-
-## 2026-10-16 — Dix expériences de style (X12)
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** dix autres innovants.
-- **Décision :** gouache fraîche, patron, gravier-cel, boule à facettes, cartes percées, rayons, courant, tableau vert, roue, papillons. France.
-- **Contrôles :** planches X12.
-
-## 2026-10-16 — Dix expériences de style (X11)
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** continuer la R&D jusqu’au style unique ; dix autres.
-- **Décision :** trichromie, mie de pain, aiguillage, serpentins, fiches, graisse, sable pétanque, cahier Seyes, verre, buée. France.
-- **Contrôles :** planches X11.
-
-## 2026-10-16 — Dix expériences de style (X10)
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** innover ; un style déjà repéré dans la série précédente (non nommé) ; dix autres.
-- **Décision :** expériences tickets, mire TV, parquet, limonade, chambre à air, tampon, écorce, pluie zinc, équerre, barbe à papa. France.
-- **Contrôles :** planches X10.
-
-## 2026-10-16 — Vingt mixtes, lot 2/2
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** dix autres.
-- **Décision :** M20-11 à 20 livrés.
-- **Contrôles :** planches ajoutées.
-
-## 2026-10-16 — Vingt mixtes, premier lot de dix
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** vingt autres mixtes.
-- **Décision :** dix livrés (ticket, ardoise, zinc-coloriage, isobares, soudure, timbre, formica, flaque, cire, dynamo). Dix suivants au tour d’après (plafond d’images).
-- **Contrôles :** planches M20-01 à 10.
-
-## 2026-10-16 — Dix mixtes inédits pour trouver la touche
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** dix autres, mixtes jamais faits, France.
-- **Décision :** dix hybrides (émail-Minitel, pétanque-buvard, horaires-vitrail, camembert-VHS, chaîne-guirlande, acétate-anaglyphe, pomme d’amour, papier bible, gravier-aérographe, pastis-encre-argile).
-- **Contrôles :** planches ajoutées.
-
-## 2026-10-16 — Dix planches France, plus de diner US
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** dix autres styles ; tout en français ; décors en France.
-- **Décision :** zinc, brasserie, salle des fêtes, quai, tabac, bibliothèque, atelier vélo, fête foraine, lycée, berge. Diner américain écarté. Textes français.
-- **Contrôles :** bible mise à jour.
-
-## 2026-10-16 — Dix styles d’animation supplémentaires
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** dix autres, variés.
-- **Décision :** fusain, broderie, UPA magenta, blacklight, comics dimanche, origami dur, synth UI, pare-brise, affiche Est, crayon test. Toujours le booth, à choisir.
-- **Contrôles :** bible mise à jour.
-
-## 2026-10-16 — Mix VHS+volume et cinq styles inédits
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** mixer la piste 3 et la 6, plus cinq inédits.
-- **Décision :** planche mix VHS volume ; inédits litho néon, verre soda, mosaïque cassette, rétroprojecteur, radar diner. Toujours le même booth, à choisir.
-- **Contrôles :** bible mise à jour.
-
-## 2026-10-16 — Six pistes d’animation (sortie du réalisme)
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** même ambiance 80s, passer au dessin animé pour suivre les personnages ; style neuf, inspiré de plusieurs recettes qui tiennent ; 6 présentations.
-- **Décision :** réalisme écarté pour le casting. Six hybrides : encre chrome, argile lanterne, VHS aurore, vitrail nuit, riso boulevard, volume pinceau. À choisir ou fusionner (max deux) puis model sheets.
-- **Contrôles :** bible mise à jour ; six planches.
-
-## 2026-10-16 — Bible Léna / Marc / Karim et vidéo 01
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** mêmes personnages principaux de A à Z ; figurants et périodes seuls changent ; vieillir sans excès ; première vidéo ; histoire concrète sur toutes les périodes.
-- **Décision :** bible `docs/rd/statuts-animation/bible-fil-et-video-01.md`. Pacte du vendredi. Vidéos 01–06 puis statuts avec le même trio. Storyboard 01 : arrivée, booth, pacte, la seconde où Marc regarde l’arcade. Visages IA non figés.
-- **Contrôles :** note + bible.
-
-## 2026-10-16 — Fil narratif entre les décennies
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** relier intelligemment les décennies par des histoires qui mènent à la conclusion M.R.S.C.
-- **Décision :** constantes = la bande de trois, le booth du diner, le carnet savoir-faire. Arc 1985 → 1994 → 2004 → 2014 → 2020 → la table revient. Les statuts = ce qui empêche la table de se vider. Quatre planches de liaison, scènes 2004 et 2020 encore à produire.
-- **Contrôles :** note mise à jour.
-
-## 2026-10-16 — Style Amblin / 80s cinéma (BTTF, Stranger Things)
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** revoir le style vers Retour vers le futur, Stranger Things, etc.
-- **Décision :** piste lumière 80s cinéma (néon, grain, brume, diner, vélos), personnages originaux, pas de copies de films. Quatre planches amblin 80/90/2010/2020. À adapter à mesure.
-- **Contrôles :** note mise à jour.
-
-## 2026-10-16 — Prologue en décennies, style 80s coloré
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** partir des années 80 (tout était possible), faire défiler les décennies, montrer la dégradation des relations et le nombrilisme ; ambiance 80s colorée, réaliste et animée ; adapter à mesure.
-- **Décision :** premières scènes = montage 80 / 90 / 2010 / 2020. Quatre planches d’essai. Le seuil M.R.S.C. vient après ce défilement. Pas de logos de marques.
-- **Contrôles :** note mise à jour.
-
-## 2026-10-16 — Accroche humaniste du film des statuts
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** partir du repli (écrans, distance) pour faire revivre convivialité, savoir-être, partage des savoir-faire et des expériences ; découvrir le M.R.S.C. et ce qui s’ouvre quand on comprend son fonctionnement.
-- **Décision :** le film est un récit humaniste 3D, pas un explainer. Arc : seul avec les écrans → le seuil → la table du partage → les portes. Les statuts = carte du « comment on fait ensemble ». Quatre planches d’accroche, non validées. COVID/médias = climat du personnage, pas un pamphlet public.
-- **Contrôles :** note mise à jour.
-
-## 2026-10-16 — Seconds angles de présentation des statuts
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** les premières chartes mascottes n’étaient pas à la hauteur ; il faut l’angle, pas seulement le dessin.
-- **Décision :** quatre nouveaux angles (maison ouverte, table de fondation, assemblée en cercle, voyage dans le livre). Fil proposé : une personne arrive, chaque article est une pièce ou un geste, dans l’ordre. Anciennes planches archivées.
-- **Contrôles :** note mise à jour ; pas de page publique.
-
-## 2026-10-16 — Plan films d’animation des statuts
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** expliquer le fonctionnement associatif par des films 3D, depuis le début des statuts, tous les articles, VO française, sous-titres anglais optionnels, quatre styles et personnages originaux.
-- **Décision :** note `docs/rd/plan-statuts-animation.md` et quatre planches de style (non validées). Le PDF des statuts fait foi. Aucune vidéo produite. Extraction automatique du PDF impossible ici ; transcription humaine requise avant tournage. Accueil 3D inchangé.
-- **Contr ôles réellement exécutés :** rédaction documentaire ; pas de page publique nouvelle.
 ## 2026-10-18 — Squelette non adopté du règlement intérieur
 
 - **Initiative :** `resilience-statutaire-globale`.
@@ -676,6 +511,208 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Suite donnée le même jour :** `outils/verifier-publication.py` et le workflow « Vérifier les en-têtes servis par l’hébergement » relèvent désormais code, type MIME, encodage, octets et cache sur la version publiée. Relevé réel du 17 octobre 2026 (issue #90) : 18/18 fichiers en 200, `image/avif` et `image/webp` correctement typés, gzip sur les 9 fichiers texte et aucun sur les images (attendu), `Cache-Control: max-age=600`. L’estimation hors ligne reste à +0,7–4,2 % sous les octets servis pour les fichiers texte (gzip 9 estimé contre gzip de Pages), et identique à l’octet pour les images déjà compressées. Le relevé reste hors de la porte hors ligne et ne vaut ni pour Vercel, qui héberge le simulateur du dépôt amont, ni comme mesure de performance.
 - **Prochaine action :** faire relire les illustrations par une personne, mesurer sur appareil et réseau réels, puis seulement réviser l’état de `poids-et-sobriete-numerique` et la date de revue du portefeuille.
 
+## 2026-10-16 — Sigle moderne, sans drapeaux
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** le sceau d’E-06 est trop moyenâgeux ; les drapeaux font sectaire.
+- **Décision :** garder le visage E-06 ; hall sans bannières ; pas de sceau héraldique. Marque = arcs colorés contemporains ou barre LED. Planches `eva-moderne-01` à `05`. Accueil 3D inchangé.
+- **Contrôles :** planches modernes.
+
+## 2026-10-16 — Éva choisie : plan E-06 (atrium)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** « La sixième est bien » = `elle-06-atrium.png`.
+- **Décision :** visage et corps androïde blanc de E-06 verrouillés pour Éva (vidéos, pédagogie). Copie `eva-choisie.png`. Suites `eva-lock-01` à `06`. Accueil 3D inchangé. Pas enfantin. Tous les âges autour d’elle.
+- **Contrôles :** planches lock.
+
+## 2026-10-16 — Personnages-matériaux pour l’identité pédagogique
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** reprendre les matériaux du visuel d’accueil (verre, métal, arcs, cristal) pour des personnages uniques, vidéos de présentation et animations pédagogiques intuitives. Accueil 3D inchangé.
+- **Décision :** quatre guides proposés (Vertige, Ambre, Lame, Facette), distincts du logo et de Léna / Marc / Karim. Dix planches identite-01 à 10. Noms à valider.
+- **Contrôles :** planches identité.
+
+## 2026-10-16 — Pistes nouvelles 11–20
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** encore des pistes totalement nouvelles.
+- **Décision :** timbres, bakélite, flaque, buvard, chambre à air, sucre, gare, pétanque, acétate, phalènes.
+- **Contrôles :** planches nouveau-11 à 20.
+
+## 2026-10-16 — Dix pistes totalement nouvelles
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** des essais totalement nouveaux, hors fusions grille/gouache/pixels.
+- **Décision :** tram-vitrail, cyanotype, laine, savon, Super 8, craie, émail, radar, ombres, péniche. France, Léna / Marc / Karim.
+- **Contrôles :** planches nouveau-01 à 10.
+
+## 2026-10-16 — Fusions 11–20
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** encore des fusions (grille, gouache, pixels, mains).
+- **Décision :** F-11 à F-20. France, Léna / Marc / Karim.
+- **Contrôles :** planches fusion-11 à 20.
+
+## 2026-10-16 — Fusions de styles (quatre planches choisies)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** mélanger mots croisés, gouache fraîche, pixels visages, mains ; innover.
+- **Décision :** dix fusions F-01 à F-10. Trio Léna / Marc / Karim, France 1985. F-10 = tentative de look unique de film.
+- **Contrôles :** planches fusion-01 à 10.
+
+## 2026-10-16 — Compilation Drive + X17
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** zipper toutes les planches sur Drive ; dix autres ; l’association sélectionnera pour des fusions.
+- **Décision :** zip JPG dans le dossier Drive « M.R.S.C. planches animation statuts ». Série X17 (80s + humanité). PNG originaux restent dans le dépôt ; le zip n’est pas versionné.
+- **Contrôles :** archive créée ; envoi Drive.
+
+## 2026-10-16 — Expériences 80s, humanité et sensualité (X16)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** ajouter une part de sensualité et d’humanité.
+- **Décision :** chaleur des mains, veste partagée, bal maladroit, regards, bus, parapluie. Pas d’érotisme. Neuf planches (gouttes non livrées).
+- **Contrôles :** planches X16.
+
+## 2026-10-16 — Dix expériences 80s (X15)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** des choses intéressantes, encore ; codes 80s.
+- **Décision :** CRT-stores, plastique K7, aérobic, polaroid ciel, pixels visages, égaliseur, bâtons fluo, catadioptres, Antiope, chrome pluie. France.
+- **Contrôles :** planches X15.
+
+## 2026-10-16 — Dix expériences 80s (X14)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** innover absolument et tenir les codes 80s.
+- **Décision :** Memphis-zinc, VHS-Walkman, lasers-damier, LCD fluo, Minitel-aérographe, enceinte-K7, aérographe BD, cubes fluo, onde-mobylette, disquette-vitrail. France, fluo teal/magenta, pas de logos de marques.
+- **Contrôles :** planches X14.
+
+## 2026-10-16 — Dix expériences de style (X13)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** dix autres.
+- **Décision :** fonds de bouteille, bitume-bonbon, carte de bal, bic rouge, rouille-chrome, libellule, empreintes, caramel, tableau départs, néon asphalte. France.
+- **Contrôles :** planches X13.
+
+## 2026-10-16 — Dix expériences de style (X12)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** dix autres innovants.
+- **Décision :** gouache fraîche, patron, gravier-cel, boule à facettes, cartes percées, rayons, courant, tableau vert, roue, papillons. France.
+- **Contrôles :** planches X12.
+
+## 2026-10-16 — Dix expériences de style (X11)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** continuer la R&D jusqu’au style unique ; dix autres.
+- **Décision :** trichromie, mie de pain, aiguillage, serpentins, fiches, graisse, sable pétanque, cahier Seyes, verre, buée. France.
+- **Contrôles :** planches X11.
+
+## 2026-10-16 — Dix expériences de style (X10)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** innover ; un style déjà repéré dans la série précédente (non nommé) ; dix autres.
+- **Décision :** expériences tickets, mire TV, parquet, limonade, chambre à air, tampon, écorce, pluie zinc, équerre, barbe à papa. France.
+- **Contrôles :** planches X10.
+
+## 2026-10-16 — Vingt mixtes, lot 2/2
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** dix autres.
+- **Décision :** M20-11 à 20 livrés.
+- **Contrôles :** planches ajoutées.
+
+## 2026-10-16 — Vingt mixtes, premier lot de dix
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** vingt autres mixtes.
+- **Décision :** dix livrés (ticket, ardoise, zinc-coloriage, isobares, soudure, timbre, formica, flaque, cire, dynamo). Dix suivants au tour d’après (plafond d’images).
+- **Contrôles :** planches M20-01 à 10.
+
+## 2026-10-16 — Dix mixtes inédits pour trouver la touche
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** dix autres, mixtes jamais faits, France.
+- **Décision :** dix hybrides (émail-Minitel, pétanque-buvard, horaires-vitrail, camembert-VHS, chaîne-guirlande, acétate-anaglyphe, pomme d’amour, papier bible, gravier-aérographe, pastis-encre-argile).
+- **Contrôles :** planches ajoutées.
+
+## 2026-10-16 — Dix planches France, plus de diner US
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** dix autres styles ; tout en français ; décors en France.
+- **Décision :** zinc, brasserie, salle des fêtes, quai, tabac, bibliothèque, atelier vélo, fête foraine, lycée, berge. Diner américain écarté. Textes français.
+- **Contrôles :** bible mise à jour.
+
+## 2026-10-16 — Dix styles d’animation supplémentaires
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** dix autres, variés.
+- **Décision :** fusain, broderie, UPA magenta, blacklight, comics dimanche, origami dur, synth UI, pare-brise, affiche Est, crayon test. Toujours le booth, à choisir.
+- **Contrôles :** bible mise à jour.
+
+## 2026-10-16 — Mix VHS+volume et cinq styles inédits
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** mixer la piste 3 et la 6, plus cinq inédits.
+- **Décision :** planche mix VHS volume ; inédits litho néon, verre soda, mosaïque cassette, rétroprojecteur, radar diner. Toujours le même booth, à choisir.
+- **Contrôles :** bible mise à jour.
+
+## 2026-10-16 — Six pistes d’animation (sortie du réalisme)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** même ambiance 80s, passer au dessin animé pour suivre les personnages ; style neuf, inspiré de plusieurs recettes qui tiennent ; 6 présentations.
+- **Décision :** réalisme écarté pour le casting. Six hybrides : encre chrome, argile lanterne, VHS aurore, vitrail nuit, riso boulevard, volume pinceau. À choisir ou fusionner (max deux) puis model sheets.
+- **Contrôles :** bible mise à jour ; six planches.
+
+## 2026-10-16 — Bible Léna / Marc / Karim et vidéo 01
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** mêmes personnages principaux de A à Z ; figurants et périodes seuls changent ; vieillir sans excès ; première vidéo ; histoire concrète sur toutes les périodes.
+- **Décision :** bible `docs/rd/statuts-animation/bible-fil-et-video-01.md`. Pacte du vendredi. Vidéos 01–06 puis statuts avec le même trio. Storyboard 01 : arrivée, booth, pacte, la seconde où Marc regarde l’arcade. Visages IA non figés.
+- **Contrôles :** note + bible.
+
+## 2026-10-16 — Fil narratif entre les décennies
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** relier intelligemment les décennies par des histoires qui mènent à la conclusion M.R.S.C.
+- **Décision :** constantes = la bande de trois, le booth du diner, le carnet savoir-faire. Arc 1985 → 1994 → 2004 → 2014 → 2020 → la table revient. Les statuts = ce qui empêche la table de se vider. Quatre planches de liaison, scènes 2004 et 2020 encore à produire.
+- **Contrôles :** note mise à jour.
+
+## 2026-10-16 — Style Amblin / 80s cinéma (BTTF, Stranger Things)
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** revoir le style vers Retour vers le futur, Stranger Things, etc.
+- **Décision :** piste lumière 80s cinéma (néon, grain, brume, diner, vélos), personnages originaux, pas de copies de films. Quatre planches amblin 80/90/2010/2020. À adapter à mesure.
+- **Contrôles :** note mise à jour.
+
+## 2026-10-16 — Prologue en décennies, style 80s coloré
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** partir des années 80 (tout était possible), faire défiler les décennies, montrer la dégradation des relations et le nombrilisme ; ambiance 80s colorée, réaliste et animée ; adapter à mesure.
+- **Décision :** premières scènes = montage 80 / 90 / 2010 / 2020. Quatre planches d’essai. Le seuil M.R.S.C. vient après ce défilement. Pas de logos de marques.
+- **Contrôles :** note mise à jour.
+
+## 2026-10-16 — Accroche humaniste du film des statuts
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** partir du repli (écrans, distance) pour faire revivre convivialité, savoir-être, partage des savoir-faire et des expériences ; découvrir le M.R.S.C. et ce qui s’ouvre quand on comprend son fonctionnement.
+- **Décision :** le film est un récit humaniste 3D, pas un explainer. Arc : seul avec les écrans → le seuil → la table du partage → les portes. Les statuts = carte du « comment on fait ensemble ». Quatre planches d’accroche, non validées. COVID/médias = climat du personnage, pas un pamphlet public.
+- **Contrôles :** note mise à jour.
+
+## 2026-10-16 — Seconds angles de présentation des statuts
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** les premières chartes mascottes n’étaient pas à la hauteur ; il faut l’angle, pas seulement le dessin.
+- **Décision :** quatre nouveaux angles (maison ouverte, table de fondation, assemblée en cercle, voyage dans le livre). Fil proposé : une personne arrive, chaque article est une pièce ou un geste, dans l’ordre. Anciennes planches archivées.
+- **Contrôles :** note mise à jour ; pas de page publique.
+
+## 2026-10-16 — Plan films d’animation des statuts
+
+- **Initiative :** `direction-artistique-motion`.
+- **Signal :** expliquer le fonctionnement associatif par des films 3D, depuis le début des statuts, tous les articles, VO française, sous-titres anglais optionnels, quatre styles et personnages originaux.
+- **Décision :** note `docs/rd/plan-statuts-animation.md` et quatre planches de style (non validées). Le PDF des statuts fait foi. Aucune vidéo produite. Extraction automatique du PDF impossible ici ; transcription humaine requise avant tournage. Accueil 3D inchangé.
+- **Contr ôles réellement exécutés :** rédaction documentaire ; pas de page publique nouvelle.
 ## 2026-10-16 — Achats indexés sur les dons, puis complément
 
 - **Initiative :** `documentation-rd-eva`.
