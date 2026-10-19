@@ -28,6 +28,8 @@ L’association doit préciser, avec une relecture juridique compétente :
 
 Tant que ces réponses et la base juridique ne sont pas consignées, le travail reste documentaire et aucun bulletin réel ne doit être recueilli.
 
+Un premier relevé de la copie locale des statuts est consigné dans [`vote-distanciel-statuts.md`](vote-distanciel-statuts.md) et [`vote-distanciel-regles.toml`](vote-distanciel-regles.toml). Il montre qu’il n’existe pas un scrutin interne unique : Bureau exécutif, conseil d’éthique, assemblée territoriale, AGO, AGE et dissolution ont des règles différentes. Tous les relevés restent `a-faire-relire` ; ils ne sont pas encore des paramètres exécutables.
+
 ## 3. Propriétés à ne pas confondre
 
 | Propriété | Preuve attendue | Ce qu’elle ne garantit pas |
@@ -84,6 +86,17 @@ Ne pas construire une cryptographie maison ni choisir une blockchain par analogi
 
 Ces références prouvent seulement l’existence de projets et leurs métadonnées publiques observées. Elles ne prouvent pas qu’ils conviennent au droit, au type de scrutin, aux menaces ou aux moyens du M.R.S.C. Une comparaison doit examiner protocole, version, audits indépendants, modèle de menace, accessibilité, coercition, opérations de clés, maintenance et licence.
 
+### Options prospectives à comparer — sans probabilité
+
+| Option | Valeur possible | Risque dominant | Condition minimale | Décision actuelle |
+| --- | --- | --- | --- | --- |
+| **A — Ne pas voter à distance** | Préserver un secret contrôlé dans un lieu ou par correspondance selon le cadre applicable | Exclusion par déplacement, délai ou accessibilité si les alternatives sont mal conçues | Étudier les obstacles réels et les aménagements possibles | Option de référence, toujours conservée |
+| **B — Service existant expertisé** | Réutiliser un protocole, des opérations et des vérificateurs entretenus | Dépendance au fournisseur, métadonnées et adéquation juridique inconnue | Audits relus, contrat, localisation, export des preuves, réversibilité et canal de secours | À étudier, aucun fournisseur sélectionné |
+| **C — Logiciel existant auto-hébergé** | Garder la maîtrise de l’exploitation et des artefacts | Charge opérationnelle, clés, mises à jour, disponibilité et erreurs d’administration | Équipe compétente distincte, builds reproductibles, cérémonies et exercices de panne | À étudier sur données synthétiques uniquement |
+| **D — Construire un nouveau système** | Adapter exactement un besoin démontré | Failles de protocole ou d’implémentation, maintenance durable impossible | Besoin non couvert prouvé, équipe cryptographique spécialisée et audits multiples | Écartée à ce stade |
+
+Aucune option n’est « la plus sûre » hors contexte. L’option A n’est pas un échec technologique ; elle reste le comparateur obligatoire. Les options B et C ne deviennent candidates qu’après le cadrage juridique et le modèle de menace. L’option D reste écartée tant qu’une lacune irréductible des solutions existantes n’est pas démontrée.
+
 ## 7. Phases et portes de décision
 
 ### Phase 0 — cadrage, aucune donnée réelle
@@ -96,6 +109,8 @@ Ces références prouvent seulement l’existence de projets et leurs métadonn�
 **Sortie :** décision humaine de poursuivre ou d’arrêter. Par défaut : arrêt.
 
 ### Phase 1 — banc d’essai fictif
+
+Le protocole préparatoire est décrit dans [`vote-distanciel-protocole-banc.md`](vote-distanciel-protocole-banc.md) et ses cas projetés dans [`vote-distanciel-cas-essai.toml`](vote-distanciel-cas-essai.toml). Tous restent à expertiser ou à concevoir ; aucun cas n’a été exécuté.
 
 - scrutin entièrement fictif, électeurs synthétiques, aucune identité réelle ;
 - deux implémentations indépendantes du vérificateur ;

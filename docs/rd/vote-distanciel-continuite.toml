@@ -1,0 +1,72 @@
+# Modèle de continuité projeté : aucune procédure n'est autorisée pour un scrutin réel.
+[meta]
+version = 1
+date = 2026-10-17
+initiative = "vote-distanciel-verifiable"
+statut = "a-faire-relire"
+donnees = "synthetiques-uniquement"
+execution_autorisee = false
+principe = "Une panne ne réduit jamais le secret, la vérifiabilité, l'accessibilité ni les exigences statutaires."
+
+[[incident]]
+id = "indisponibilite-avant-ouverture"
+detection_projetee = "Le contrôle indépendant ne peut pas joindre l'urne ou vérifier sa configuration avant l'ouverture synthétique."
+autorite_humaine_requise = ["association-decisionnaire", "operations-securite"]
+action_par_defaut = "ne-pas-ouvrir"
+preuve_attendue = "Trace synthétique de non-ouverture et information accessible sur le canal séparé."
+interdits = ["ouverture-automatique", "abaissement-des-controles", "collecte-hors-protocole"]
+statut = "a-faire-relire"
+
+[[incident]]
+id = "indisponibilite-pendant-ouverture"
+detection_projetee = "Les sondes indépendantes observent une interruption ou des réponses divergentes pendant la fenêtre synthétique."
+autorite_humaine_requise = ["association-decisionnaire", "operations-securite", "juridique-statutaire"]
+action_par_defaut = "geler-et-evaluer-annulation-ou-prolongation"
+preuve_attendue = "Chronologie synthétique, état des bulletins acceptés et décision humaine motivée."
+interdits = ["prolongation-automatique", "perte-silencieuse", "rejeu-non-detecte"]
+statut = "a-faire-relire"
+
+[[incident]]
+id = "divergence-a-la-cloture"
+detection_projetee = "Les miroirs, reçus ou totaux synthétiques ne concordent pas à la clôture."
+autorite_humaine_requise = ["association-decisionnaire", "cryptographie-vote", "operations-securite"]
+action_par_defaut = "ne-pas-proclamer"
+preuve_attendue = "Exports contradictoires conservés sans identité et rapport d'écart reproductible."
+interdits = ["choix-arbitraire-d-un-miroir", "correction-manuelle", "proclamation-partielle"]
+statut = "a-faire-relire"
+
+[[incident]]
+id = "preuves-indisponibles"
+detection_projetee = "Le paquet de vérification complet ou un vérificateur indépendant manque."
+autorite_humaine_requise = ["association-decisionnaire", "cryptographie-vote"]
+action_par_defaut = "ne-pas-proclamer"
+preuve_attendue = "Inventaire des artefacts absents et échec reproductible hors ligne."
+interdits = ["validation-par-interface", "confiance-au-fournisseur", "score-compensatoire"]
+statut = "a-faire-relire"
+
+[[incident]]
+id = "part-de-cle-indisponible"
+detection_projetee = "Le seuil projeté ne peut pas être atteint avec les autorités synthétiques disponibles."
+autorite_humaine_requise = ["association-decisionnaire", "cryptographie-vote", "operations-securite"]
+action_par_defaut = "ne-pas-contourner-le-seuil"
+preuve_attendue = "Échec contrôlé sans reconstruction d'un secret unique ni transfert de part."
+interdits = ["cle-de-secours-unique", "copie-de-part", "abaissement-du-seuil"]
+statut = "a-faire-relire"
+
+[[incident]]
+id = "registre-eligibilite-indisponible"
+detection_projetee = "Le droit synthétique ne peut pas être confirmé sans reconnecter identité et urne."
+autorite_humaine_requise = ["association-decisionnaire", "juridique-statutaire", "protection-donnees"]
+action_par_defaut = "suspendre-emission-sans-ouvrir-de-liaison"
+preuve_attendue = "Refus synthétique traçable sans divulgation à l'urne et voie de recours accessible."
+interdits = ["liste-identites-vers-urne", "emission-sans-controle", "journalisation-excessive"]
+statut = "a-faire-relire"
+
+[[incident]]
+id = "suspicion-de-correlation-ou-fuite"
+detection_projetee = "Un test, une alerte ou un signalement indique qu'une liaison interdite pourrait être reconstruite."
+autorite_humaine_requise = ["association-decisionnaire", "protection-donnees", "cryptographie-vote", "operations-securite"]
+action_par_defaut = "arreter-et-preserver-sans-enrichir"
+preuve_attendue = "Gel des traitements, inventaire minimal des artefacts et décision de notification expertisée."
+interdits = ["poursuite-du-vote", "croisement-des-journaux", "copie-au-cas-ou"]
+statut = "a-faire-relire"
