@@ -70,7 +70,12 @@ PY
 
 ## Le poids des planches
 
-La proposition #85 a fait entrer **505 PNG (1 291 Mo)** sous `docs/rd/statuts-animation/`, faisant passer l'arbre de `main` de 8,6 Mo à 1 300 Mo. La question a été reprise et tranchée en amont dans la proposition #130 : seules les douze planches citées par le plan restent dans l'arbre, en WebP qualité 82, les 493 autres sont archivées dans l'étiquette `planches-statuts-animation-2026-10`, et l'arbre tombe à 10,3 Mo. Voir [`archives-et-poids-du-depot.md`](archives-et-poids-du-depot.md) pour les chiffres, la procédure de récupération et la réécriture d'historique qui reste à décider par la personne qui administre le dépôt.
+La proposition #85 a fait entrer **505 PNG (1 291 Mo)** sous `docs/rd/statuts-animation/`, faisant passer l'arbre de `main` de 8,8 Mo à 1 299,7 Mo. La question a été reprise et tranchée en amont, en deux temps :
+
+- **proposition #130** — seules les douze planches citées par le plan restent dans l'arbre, les 493 autres sont archivées dans l'étiquette `planches-statuts-animation-2026-10`, et `.gitignore` empêche le retour de PNG dans le dossier ;
+- **proposition #132** — l'encodage WebP qualité 82 s'est révélé **avec perte** (1 058 000 à 1 077 000 pixels modifiés par planche, sur 1 081 344). La conversion a été refaite en **WebP sans perte**, écart pixel mesuré **0** sur les douze planches, pour 14,7 Mo au lieu de 31,4 Mo de PNG. Un manifeste SHA-256 des **507 fichiers d'origine** a été produit (`ARCHIVE-planches-2026-10.sha256`), et `outils/verifier-planches-statuts.py` refuse désormais une planche citée absente, une référence sans fichier ni archive, un PNG réintroduit dans l'arbre ou un manifeste incomplet.
+
+Résultat : l'arbre tombe à **23,6 Mo et 363 fichiers**, sans perte de contenu, les originaux restant accessibles octet pour octet dans l'étiquette. Voir [`archives-et-poids-du-depot.md`](archives-et-poids-du-depot.md) pour les chiffres, la procédure de récupération et la réécriture d'historique qui reste à décider par la personne qui administre le dépôt.
 
 ## Contrôles exécutés
 
@@ -82,6 +87,7 @@ python3 outils/construire-simulateur.py --verifier
 python3 outils/verifier-site-statique.py
 python3 outils/optimiser-images.py --verifier
 python3 outils/verifier-poids-pages.py
+python3 outils/verifier-planches-statuts.py
 python3 outils/verifier-securite.py
 python3 outils/verifier-integration.py
 python3 outils/verifier-decision-prospective.py
@@ -93,11 +99,12 @@ python3 outils/verifier-resilience-statutaire.py
 python3 outils/test_verifier_resilience_statutaire.py
 ```
 
-Les quinze commandes réussissent. Le poids des pages reste sous budget : 95 pages, dont `simulateur/index.html` à 72,7 Kio. `verifier-publication.py` n'a pas été exécuté : il exige une URL publiée et mesure l'hébergement, pas le dépôt.
+Les seize commandes réussissent. Le poids des pages reste sous budget : 95 pages, dont `simulateur/index.html` à 72,7 Kio. `verifier-publication.py` n'a pas été exécuté : il exige une URL publiée et mesure l'hébergement, pas le dépôt.
 
 ## Limites
 
 - Ce relevé ne dit pas si le fond des propositions est juste : les planches restent « à relire » et le plan d'animation une proposition, pas une décision.
 - La relecture humaine, la validation des sources et l'arbitrage éditorial ne sont pas faits ici.
-- La porte de vérification du dépôt ne contrôle pas les liens d'image des documents de `docs/rd/` : les 193 liens de la bible n'ont été trouvés qu'en comparant chaque lien à l'arbre. Un contrôle automatique de ce type reste à écrire.
+- `outils/verifier-planches-statuts.py` contrôle les citations du plan et l'intégrité de l'archive, mais il ne lit que `plan-statuts-animation.md` : **les 193 liens d'image de la bible restent hors de tout contrôle automatique**. Ils ont été trouvés en comparant chaque lien à l'arbre ; la mention d'archive ajoutée dans la bible est donc la seule chose qui les explique dans un clone courant. Étendre le vérificateur à la bible est la suite naturelle.
 - Aucun mesurage réseau, aucune mesure de temps de clonage, aucun contrôle du temps de déploiement n'a été réalisé.
+- Les 507 empreintes du manifeste ont été produites à partir de l'étiquette ; l'absence d'écart constatée vaut pour les fichiers présents dans l'étiquette au moment de la mesure, pas pour l'intégrité de l'étiquette elle-même, qui n'a pas été vérifiée comme objet signé.
