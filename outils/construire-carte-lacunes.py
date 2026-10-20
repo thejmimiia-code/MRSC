@@ -33,6 +33,7 @@ CATALOGUE = RACINE / "docs" / "apprentissage" / "catalogue.toml"
 REFERENTIEL = RACINE / "docs" / "apprentissage" / "referentiel.toml"
 PORTEFEUILLE = RACINE / "docs" / "rd" / "portefeuille.toml"
 SORTIE = RACINE / "docs" / "rd" / "carte-lacunes.md"
+DOSSIER_CARTES = RACINE / "docs" / "rd"
 
 #: Domaines dont les contenus exigent, selon AGENTS.md, une relecture par une
 #: personne compétente avant diffusion publique.
@@ -70,7 +71,7 @@ def construire(fiches: list[dict], domaines: list[dict], revue: str) -> str:
     ids_fiches = {fiche["id"] for fiche in fiches}
     prototypes = sum(1 for fiche in fiches if fiche.get("statut_editorial"))
     totaux = {statut: 0 for statut in ORDRE_STATUTS}
-    sans_fiche: list[tuple[str, str, str, str]] = []
+    sans_fiche: list[tuple[str, str, str, str, str]] = []
     references_absentes: list[str] = []
     par_domaine: list[dict] = []
     for domaine in domaines:
@@ -86,7 +87,16 @@ def construire(fiches: list[dict], domaines: list[dict], revue: str) -> str:
                     references_absentes.append(f"{sujet['id']} → {reference}")
             if not fiches_sujet:
                 sans += 1
-                sans_fiche.append((domaine["titre"], sujet["titre"], statut, exigence(domaine["id"], statut)))
+                carte = DOSSIER_CARTES / f"sujet-{sujet['id']}.md"
+                sans_fiche.append(
+                    (
+                        domaine["titre"],
+                        sujet["titre"],
+                        statut,
+                        exigence(domaine["id"], statut),
+                        f"[carte de sujet]({carte.name})" if carte.is_file() else "—",
+                    )
+                )
         par_domaine.append({"titre": domaine["titre"], "sujets": len(domaine.get("sujet", [])), "compte": compte, "sans": sans})
 
     total_sujets = sum(totaux.values())
@@ -113,6 +123,7 @@ def construire(fiches: list[dict], domaines: list[dict], revue: str) -> str:
     textes.append(ligne(["Fiches publiées", str(len(fiches))]))
     textes.append(ligne(["dont prototypes à relire", str(prototypes)]))
     textes.append(ligne(["Sujets sans aucune fiche", str(len(sans_fiche))]))
+    textes.append(ligne(["dont ouverts par une carte de sujet", str(sum(1 for bloc in sans_fiche if bloc[4] != "—"))]))
     if references_absentes:
         textes.append(ligne(["Références de fiches introuvables", str(len(references_absentes))]))
     textes.append("")
@@ -140,10 +151,10 @@ def construire(fiches: list[dict], domaines: list[dict], revue: str) -> str:
     textes.append("")
     textes.append("Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Les 72 sujets `partiel` ont déjà au moins une fiche : leur manque est à qualifier sujet par sujet, il n'est pas listé ici.")
     textes.append("")
-    textes.append(ligne(["Domaine", "Sujet", "Statut", "Exigence de preuve avant publication"]))
-    textes.append(ligne(["---", "---", "---", "---"]))
-    for titre_domaine, titre_sujet, statut, exigence_sujet in sans_fiche:
-        textes.append(ligne([titre_domaine, titre_sujet, f"`{statut}`", exigence_sujet]))
+    textes.append(ligne(["Domaine", "Sujet", "Statut", "Exigence de preuve avant publication", "Travail ouvert"]))
+    textes.append(ligne(["---", "---", "---", "---", "---"]))
+    for titre_domaine, titre_sujet, statut, exigence_sujet, carte_sujet in sans_fiche:
+        textes.append(ligne([titre_domaine, titre_sujet, f"`{statut}`", exigence_sujet, carte_sujet]))
     textes.append("")
     textes.append("## 4. Ce que cette carte ne dit pas")
     textes.append("")

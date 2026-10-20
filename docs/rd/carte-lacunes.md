@@ -17,6 +17,7 @@
 | Fiches publiées | 81 |
 | dont prototypes à relire | 55 |
 | Sujets sans aucune fiche | 19 |
+| dont ouverts par une carte de sujet | 1 |
 
 ## 2. Répartition par domaine
 
@@ -42,27 +43,27 @@
 
 Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Les 72 sujets `partiel` ont déjà au moins une fiche : leur manque est à qualifier sujet par sujet, il n'est pas listé ici.
 
-| Domaine | Sujet | Statut | Exigence de preuve avant publication |
-| --- | --- | --- | --- |
-| Langues étrangères et interculturel | Écoute, prononciation et ressources audio accessibles | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Budget, économie, consommation et travail | Revenus, fiche de paie, prélèvements et impôts | `a-creer` | Relecture par une personne compétente en argent, budget et finances, puis sources primaires datées |
-| Sciences, technologie et environnement | Sécurité électrique, protections et limites des interventions | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées |
-| Sciences, technologie et environnement | Risques, consignes et usages sûrs des outils et produits | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Démarches, droits, sécurité et vie professionnelle | Droits au travail, contrats, sécurité et interlocuteurs | `a-creer` | Relecture par une personne compétente en droit, démarches et travail, puis sources primaires datées |
-| Informatique, algorithmique et langages de programmation | Microcontrôleurs, objets connectés et systèmes embarqués | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Santé, alimentation, corps et sécurité | Premiers secours et conduites à tenir | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées |
-| Santé, alimentation, corps et sécurité | Activité physique, repos, mobilité et sécurité | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 00 — programmes et qualifications génériques, interdisciplinarité et compétences transversales | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 01 — sciences de l’éducation, formation et recherche en pédagogie | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 02 — arts, lettres, langues, philosophie et humanités | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 03 — sciences sociales, journalisme, information et communication | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 04 — commerce, administration, gestion et droit | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 05 — sciences naturelles, mathématiques et statistiques | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 06 — technologies de l’information et de la communication | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 07 — ingénierie, industrie de transformation et construction | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 08 — agriculture, foresterie, pêcheries et médecine vétérinaire | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 09 — santé et protection sociale | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 10 — services, transport, tourisme, sécurité et services à la personne | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité |
+| Domaine | Sujet | Statut | Exigence de preuve avant publication | Travail ouvert |
+| --- | --- | --- | --- | --- |
+| Langues étrangères et interculturel | Écoute, prononciation et ressources audio accessibles | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | [carte de sujet](sujet-ecoute-prononciation.md) |
+| Budget, économie, consommation et travail | Revenus, fiche de paie, prélèvements et impôts | `a-creer` | Relecture par une personne compétente en argent, budget et finances, puis sources primaires datées | — |
+| Sciences, technologie et environnement | Sécurité électrique, protections et limites des interventions | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées | — |
+| Sciences, technologie et environnement | Risques, consignes et usages sûrs des outils et produits | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Démarches, droits, sécurité et vie professionnelle | Droits au travail, contrats, sécurité et interlocuteurs | `a-creer` | Relecture par une personne compétente en droit, démarches et travail, puis sources primaires datées | — |
+| Informatique, algorithmique et langages de programmation | Microcontrôleurs, objets connectés et systèmes embarqués | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Santé, alimentation, corps et sécurité | Premiers secours et conduites à tenir | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées | — |
+| Santé, alimentation, corps et sécurité | Activité physique, repos, mobilité et sécurité | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées | — |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 00 — programmes et qualifications génériques, interdisciplinarité et compétences transversales | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 01 — sciences de l’éducation, formation et recherche en pédagogie | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 02 — arts, lettres, langues, philosophie et humanités | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 03 — sciences sociales, journalisme, information et communication | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 04 — commerce, administration, gestion et droit | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 05 — sciences naturelles, mathématiques et statistiques | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 06 — technologies de l’information et de la communication | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 07 — ingénierie, industrie de transformation et construction | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 08 — agriculture, foresterie, pêcheries et médecine vétérinaire | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 09 — santé et protection sociale | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 10 — services, transport, tourisme, sécurité et services à la personne | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
 
 ## 4. Ce que cette carte ne dit pas
 
