@@ -32,7 +32,28 @@ ASSISTANCE = RACINE / "docs" / "rd" / "vote-distanciel-assistance.toml"
 CLES = RACINE / "docs" / "rd" / "vote-distanciel-cles.toml"
 CHAINE_LOGICIELLE = RACINE / "docs" / "rd" / "vote-distanciel-chaine-logicielle.toml"
 RESULTATS = RACINE / "docs" / "rd" / "vote-distanciel-resultats.toml"
+DOSSIER = RACINE / "docs" / "rd" / "vote-distanciel-dossier-deliberation.md"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
+
+SECTIONS_DOSSIER = [
+    "## 1. À quoi sert ce dossier",
+    "## 2. Ce qui est établi, ce qui ne l’est pas",
+    "## 3. Les huit profils, un par un",
+    "## 4. Trois voies ouvertes, une voie bloquée",
+    "## 5. Les huit ambiguïtés à trancher",
+    "## 6. La question de l’emplacement d’un éventuel système",
+    "## 7. Les quinze conditions cumulatives",
+    "## 8. Trace de décision à remplir",
+    "## 9. Déroulé proposé d’une séance",
+    "## 10. Registre des objections",
+    "## 11. Ce que ce dossier ne fait pas",
+    "## 12. Sources internes",
+]
+# Formules interdites : elles promettraient une propriété que rien dans le dépôt n'établit.
+FORMULES_INTERDITES_DOSSIER = [
+    "super sécurisé", "inviolable", "infalsifiable", "totalement sûr",
+    "100 % sécurisé", "sécurité garantie",
+]
 
 MENACES_REQUISES = {
     "serveur-urne-compromis", "terminal-compromis", "coercition-domicile",
@@ -735,6 +756,113 @@ def verifier_decision(markdown: str) -> tuple[str, list[str]]:
     return ("décision consignée" if not erreurs else "invalide"), erreurs
 
 
+def extraire_section(markdown: str, titre: str) -> str:
+    """Retourne le texte d'une section de niveau 2, sans son titre."""
+    index = markdown.find(titre)
+    if index < 0:
+        return ""
+    debut = index + len(titre)
+    suivant = markdown.find("\n## ", debut)
+    return markdown[debut: suivant if suivant >= 0 else len(markdown)]
+
+
+def lignes_tableau(section: str) -> list[str]:
+    return [
+        ligne for ligne in section.splitlines()
+        if ligne.startswith("|") and not re.match(r"^\|\s*-", ligne)
+    ]
+
+
+def verifier_dossier(
+    markdown: str,
+    profils: dict,
+    regles: dict,
+    menaces: dict,
+    cas_essai: dict,
+    revues: dict,
+    comparaison: dict,
+) -> list[str]:
+    """Vérifie que le dossier de délibération reste fidèle aux registres, sans rien décider."""
+    erreurs: list[str] = []
+    for titre in SECTIONS_DOSSIER:
+        if titre not in markdown:
+            erreurs.append(f"section de dossier absente : {titre}")
+
+    texte_normalise = markdown.casefold()
+    for formule in FORMULES_INTERDITES_DOSSIER:
+        if formule in texte_normalise:
+            erreurs.append(f"formule de promesse interdite dans le dossier : {formule!r}")
+
+    compte_profils = len(profils.get("profil", []))
+    compte_regles = len(regles.get("regle", []))
+    compte_menaces = len(menaces.get("menace", []))
+    compte_cas = len(cas_essai.get("cas", []))
+    compte_criteres = len(comparaison.get("critere", []))
+    compte_roles = len(revues.get("role", []))
+    compte_revues = len(revues.get("revue", []))
+    attendus = [
+        (f"{compte_profils} profils", "nombre de profils"),
+        (f"{compte_regles} relevés", "nombre de règles relevées"),
+        (f"{compte_menaces} menaces", "nombre de menaces"),
+        (f"{compte_cas} cas", "nombre de cas d’essai"),
+        (f"{compte_criteres} critères bloquants", "nombre de critères"),
+        (f"{compte_roles} rôles et {compte_revues} revues", "nombre de rôles et de revues"),
+    ]
+    for expression, libelle in attendus:
+        if expression not in markdown:
+            erreurs.append(f"dossier incohérent avec le registre : {libelle} attendu « {expression} »")
+
+    section_profils = extraire_section(markdown, "## 3. Les huit profils, un par un")
+    section_synthese = extraire_section(section_profils, "### 3.9 Tableau de synthèse — sans classement")
+    for profil in profils.get("profil", []):
+        identifiant = profil.get("id", "")
+        statut = profil.get("statut", "")
+        if f"`{identifiant}`" not in section_profils:
+            erreurs.append(f"profil de dossier absent : {identifiant}")
+            continue
+        motif = rf"^\| `{re.escape(identifiant)}` \|.*\| `{re.escape(statut)}` \|\s*$"
+        if not re.search(motif, section_synthese, re.M):
+            erreurs.append(f"statut du profil {identifiant} non repris à l’identique dans la synthèse")
+
+    if "`aucun`" not in markdown:
+        erreurs.append("possibilité de ne retenir aucun profil absente du dossier")
+
+    for voie, intitule in (("A", "Ne pas voter à distance"), ("B", "Expertiser un service existant"), ("C", "Auto-héberger un logiciel existant")):
+        if f"### Voie {voie} — {intitule}" not in markdown:
+            erreurs.append(f"voie {voie} absente ou renommée dans le dossier")
+    if "### Voie D — Construire un système" not in markdown or "bloquée" not in extraire_section(markdown, "### Voie D — Construire un système"):
+        erreurs.append("voie D non présentée comme bloquée")
+
+    ambiguites = [
+        ligne for ligne in lignes_tableau(extraire_section(markdown, "## 5. Les huit ambiguïtés à trancher"))
+        if re.match(r"^\|\s*\d+\s*\|", ligne)
+    ]
+    if len(ambiguites) != 8:
+        erreurs.append(f"huit ambiguïtés attendues dans le dossier : {len(ambiguites)} ligne(s) numérotée(s)")
+
+    conditions = [
+        ligne for ligne in lignes_tableau(extraire_section(markdown, "## 7. Les quinze conditions cumulatives"))
+        if re.match(r"^\|\s*\d+\s*\|", ligne)
+    ]
+    if len(conditions) != 15:
+        erreurs.append(f"quinze conditions attendues dans le dossier : {len(conditions)} ligne(s) numérotée(s)")
+
+    objections = lignes_tableau(extraire_section(markdown, "## 10. Registre des objections"))
+    if len(objections) < 2:
+        erreurs.append("registre des objections absent : en-tête de tableau attendu")
+
+    if "Seul le tableau du §6" not in markdown:
+        erreurs.append("renvoi au tableau de décision faisant foi absent")
+
+    section_trace = extraire_section(markdown, "## 8. Trace de décision à remplir")
+    if re.search(
+        r"Profil retenu\s*\|\s*`?(?:bureau-executif|conseil-ethique|territoriale-constitutive|ago-|age-|dissolution|aucun)",
+        section_trace,
+    ):
+        erreurs.append("le dossier ne doit pas présélectionner un profil : la décision reste en attente")
+    return erreurs
+
+
 def principal() -> int:
     texte = NOTE.read_text(encoding="utf-8")
     texte_normalise = texte.casefold()
@@ -824,6 +952,12 @@ def principal() -> int:
     etat_decision, erreurs_decision = verifier_decision(DECISION.read_text(encoding="utf-8"))
     manquants.extend(erreurs_decision)
 
+    dossier = DOSSIER.read_text(encoding="utf-8") if DOSSIER.is_file() else ""
+    if not dossier:
+        manquants.append("dossier de délibération présent")
+    else:
+        manquants.extend(verifier_dossier(dossier, profils, regles, registre, cas_essai, revues, comparaison))
+
     with PORTEFEUILLE.open("rb") as fichier:
         initiatives = tomllib.load(fichier).get("initiative", [])
     votes = [item for item in initiatives if item.get("id") == "vote-distanciel-verifiable"]
@@ -850,6 +984,7 @@ def principal() -> int:
         "à expertiser, 18 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
         f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites, 5 signaux de corrélation, 7 incidents de continuité, 8 barrières d’accessibilité, 6 situations d’assistance, 6 phases de clés, 7 contrôles logiciels et 6 étapes de résultat, "
         f"6 rôles et 5 revues à attribuer, décision {etat_decision}, initiative P0 à cadrer, "
+        "dossier de délibération cohérent avec les registres, "
         "aucune identité ni bulletin réel autorisé."
     )
     return 0

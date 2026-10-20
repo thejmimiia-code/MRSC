@@ -31,6 +31,7 @@ ASSISTANCE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-assistance.toml"
 CLES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-cles.toml"
 CHAINE_LOGICIELLE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-chaine-logicielle.toml"
 RESULTATS_PATH = RACINE / "docs" / "rd" / "vote-distanciel-resultats.toml"
+DOSSIER_PATH = RACINE / "docs" / "rd" / "vote-distanciel-dossier-deliberation.md"
 
 
 def table_decision(valeurs: list[str]) -> str:
@@ -76,6 +77,7 @@ class RegistreMenacesTests(unittest.TestCase):
             cls.chaine_logicielle = tomllib.load(fichier)
         with RESULTATS_PATH.open("rb") as fichier:
             cls.resultats = tomllib.load(fichier)
+        cls.dossier = DOSSIER_PATH.read_text(encoding="utf-8")
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -399,6 +401,85 @@ class RegistreMenacesTests(unittest.TestCase):
     def test_accepte_une_decision_complete_bornee(self):
         valeurs = ["oui", "non applicable", "ago-premiere", "B", "Conseil", "2026-10-18", "2027-01-31", "Sous conditions"]
         self.assertEqual(MODULE.verifier_decision(table_decision(valeurs)), ("décision consignée", []))
+
+
+class DossierDeliberationTests(unittest.TestCase):
+    """Le dossier de délibération ne doit ni dériver des registres ni décider à leur place."""
+
+    @classmethod
+    def setUpClass(cls):
+        for nom, chemin in (
+            ("registre", REGISTRE_PATH),
+            ("regles", REGLES_PATH),
+            ("cas", CAS_PATH),
+            ("profils", PROFILS_PATH),
+            ("revues", REVUES_PATH),
+            ("comparaison", COMPARAISON_PATH),
+        ):
+            with chemin.open("rb") as fichier:
+                setattr(cls, nom, tomllib.load(fichier))
+        cls.dossier = DOSSIER_PATH.read_text(encoding="utf-8")
+
+    def verifier(self, markdown, profils=None, regles=None, revues=None, comparaison=None):
+        return MODULE.verifier_dossier(
+            markdown,
+            profils if profils is not None else self.profils,
+            regles if regles is not None else self.regles,
+            self.registre,
+            self.cas,
+            revues if revues is not None else self.revues,
+            comparaison if comparaison is not None else self.comparaison,
+        )
+
+    def test_dossier_courant_est_coherent(self):
+        self.assertEqual(self.verifier(self.dossier), [])
+
+    def test_refuse_un_profil_absent(self):
+        erreurs = self.verifier(self.dossier.replace("`ago-seconde`", "`ago-bis`"))
+        self.assertTrue(any("profil de dossier absent" in erreur for erreur in erreurs))
+
+    def test_refuse_un_statut_de_profil_divergent(self):
+        profils = copy.deepcopy(self.profils)
+        profils["profil"][0]["statut"] = "valide"
+        erreurs = self.verifier(self.dossier, profils=profils)
+        self.assertTrue(any("statut du profil bureau-executif" in erreur for erreur in erreurs))
+
+    def test_refuse_un_compte_des_menaces_perime(self):
+        erreurs = self.verifier(self.dossier.replace("10 menaces", "9 menaces"))
+        self.assertTrue(any("nombre de menaces" in erreur for erreur in erreurs))
+
+    def test_refuse_une_ambiguite_effacee(self):
+        dossier = self.dossier.replace("| 8 | La copie locale des statuts", "| 8 bis | La copie locale des statuts")
+        erreurs = self.verifier(dossier)
+        self.assertTrue(any("huit ambiguïtés" in erreur for erreur in erreurs))
+
+    def test_refuse_une_condition_effacee(self):
+        dossier = self.dossier.replace("| 15 | Six rôles ont examiné", "| 15 bis | Six rôles ont examiné")
+        erreurs = self.verifier(dossier)
+        self.assertTrue(any("quinze conditions" in erreur for erreur in erreurs))
+
+    def test_refuse_une_voie_d_non_bloquee(self):
+        dossier = self.dossier.replace("### Voie D — Construire un système\n\n- **Statut : bloquée.**", "### Voie D — Construire un système\n\n- **Statut : envisageable.**")
+        erreurs = self.verifier(dossier)
+        self.assertTrue(any("voie D" in erreur for erreur in erreurs))
+
+    def test_refuse_une_formule_de_promesse(self):
+        erreurs = self.verifier(self.dossier + "\nUn système super sécurisé.\n")
+        self.assertTrue(any("formule de promesse interdite" in erreur for erreur in erreurs))
+
+    def test_refuse_un_profil_presélectionne(self):
+        dossier = self.dossier.replace("| Profil retenu | | Un identifiant", "| Profil retenu | `ago-premiere` | Un identifiant")
+        erreurs = self.verifier(dossier)
+        self.assertTrue(any("présélectionner un profil" in erreur for erreur in erreurs))
+
+    def test_refuse_une_section_manquante(self):
+        erreurs = self.verifier(self.dossier.replace("## 12. Sources internes", "## 12. Annexe"))
+        self.assertTrue(any("section de dossier absente" in erreur for erreur in erreurs))
+
+    def test_refuse_une_decision_inscrite_par_le_dossier(self):
+        dossier = self.dossier.replace("**Seul le tableau du §6", "Le tableau du §6")
+        erreurs = self.verifier(dossier)
+        self.assertTrue(any("tableau de décision" in erreur for erreur in erreurs))
 
 
 if __name__ == "__main__":
