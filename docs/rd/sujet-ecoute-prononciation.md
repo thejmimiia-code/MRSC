@@ -1,6 +1,6 @@
 # Carte de sujet — Écoute, prononciation et ressources audio accessibles
 
-**Statut : à documenter.** Cette carte ouvre un sujet du référentiel qui n'a encore **aucune fiche**. Elle ne contient aucune fiche, aucun audio et aucune promesse d'efficacité. Elle rassemble ce que trois sources consultées permettent d'affirmer, ce qu'elles ne permettent pas, et la forme que pourrait prendre un premier contenu.
+**Statut : à documenter.** Cette carte a ouvert un sujet du référentiel qui n'avait **aucune fiche** ; une première fiche existe désormais à l'état de prototype. Elle ne contient aucune fiche, aucun audio et aucune promesse d'efficacité. Elle rassemble ce que trois sources consultées permettent d'affirmer, ce qu'elles ne permettent pas, et la forme que pourrait prendre un premier contenu.
 
 **Date de consultation des sources : 20 octobre 2026.** Rédigée par un agent, sans relecture experte ni essai avec des personnes.
 
@@ -91,8 +91,8 @@ Même recommandation ; page « Understanding SC 1.4.2 », consultée le 20 octob
 
 | Élément | État |
 | --- | --- |
-| Statut du sujet | `a-creer` — inchangé par cette carte |
-| Contenu publié | **aucun** |
+| Statut du sujet | `partiel` depuis le 20 octobre 2026 |
+| Contenu publié | **une fiche**, `langue-anglais-prononcer-ed`, au statut « Prototype à relire » |
 | Relecture experte | **non faite** ; à faire par une personne compétente en didactique des langues et en accessibilité |
 | Essai avec des personnes | **aucun** |
 | Relecture à prévoir | à la prochaine revue de portefeuille, au plus tard le 19 novembre 2026 |
@@ -105,7 +105,16 @@ Même recommandation ; page « Understanding SC 1.4.2 », consultée le 20 octob
 4. Aucun enregistrement de voix d'apprenant n'est collecté, et aucune correction automatique n'est promise.
 5. Les limites sont écrites dans la fiche : absence d'audio, variété non universelle, aucun effet d'apprentissage mesuré.
 
-## 9. Ce qui reste à faire, dans l'ordre
+## 9. Première fiche produite
+
+Le 20 octobre 2026, un premier point a été traité : **la fin -ed des verbes anglais**, dans `apprendre/fiches/langue-anglais-prononcer-ed.html`.
+
+- **Ce qui est couvert :** les trois prononciations /t/, /d/ et /ɪd/ ; la règle du dernier *son* et non de la dernière lettre ; le fait que seul /ɪd/ ajoute une syllabe ; un exercice écrit de classement.
+- **Ce qui n'est pas couvert :** aucun son n'est diffusé, aucune prononciation n'est écoutée ni corrigée. La fiche aide à **décider** comment se prononce une forme, pas à l'entendre ni à l'évaluer.
+- **Sources :** Britannica Dictionary (règle et exemples) et la page « compétence phonologique » du CEFR (intelligibilité avant accent), consultées le 20 octobre 2026.
+- **Statut :** « Prototype à relire ». Une personne compétente en didactique de l'anglais doit vérifier les exemples et la progression ; aucune validation n'est revendiquée.
+
+## 10. Ce qui reste à faire, dans l'ordre
 
 1. Lire l'échelle de phonologie du *Companion Volume* 2020 et en extraire uniquement les descripteurs utilisables en autonomie.
 2. Choisir **un** point de prononciation précis (par exemple un contraste de voyelles), écrire la fiche, la garder en « Prototype à relire ».

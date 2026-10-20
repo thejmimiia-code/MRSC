@@ -21,6 +21,12 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
+
+#: Quelques nombres écrits en lettres dans les documents rédigés à la main.
+NOMBRES_EN_LETTRES = {
+    55: "cinquante-cinq", 56: "cinquante-six", 57: "cinquante-sept",
+    80: "quatre-vingts", 81: "quatre-vingt-un", 82: "quatre-vingt-deux",
+}
 SITE_URL = "https://thejmimiia-code.github.io/MRSC/"
 PAGES = sorted(ROOT.glob("*.html"))
 PAGES.extend(sorted((ROOT / "apprendre" / "fiches").glob("*.html")))
@@ -197,6 +203,21 @@ def signaler(message: str) -> None:
     print(f"ÉCHEC — {message}")
 
 
+def totaux_catalogue() -> tuple[int, int, int]:
+    """Nombre de fiches, de fiches initiales et de prototypes, relus depuis le catalogue.
+
+    Ces trois nombres ne sont jamais recopiés : un ajout de fiche doit faire
+    évoluer les pages et les contrôles ensemble, pas seulement la source.
+    """
+    try:
+        catalogue = tomllib.loads((ROOT / "docs" / "apprentissage" / "catalogue.toml").read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, tomllib.TOMLDecodeError):
+        return 0, 0, 0
+    fiches = catalogue.get("fiche", [])
+    prototypes = sum(1 for fiche in fiches if fiche.get("statut_editorial"))
+    return len(fiches), len(fiches) - prototypes, prototypes
+
+
 def verifier_catalogue_apprentissage() -> None:
     chemin = ROOT / "docs" / "apprentissage" / "catalogue.toml"
     try:
@@ -208,12 +229,18 @@ def verifier_catalogue_apprentissage() -> None:
     ids = [fiche.get("id", "") for fiche in fiches]
     prototypes = [fiche for fiche in fiches if fiche.get("statut_editorial")]
     doublons = sorted(ident for ident in set(ids) if ids.count(ident) > 1)
-    if len(fiches) != 81:
-        signaler(f"catalogue d’apprentissage : {len(fiches)} fiches au lieu de 81")
+    if not fiches:
+        signaler("catalogue d’apprentissage : aucune fiche")
     if doublons:
         signaler("catalogue d’apprentissage : identifiants dupliqués : " + ", ".join(doublons))
-    if len(prototypes) != 55:
-        signaler(f"catalogue d’apprentissage : {len(prototypes)} prototypes au lieu de 55")
+    pages_generees = sorted((ROOT / "apprendre" / "fiches").glob("*.html"))
+    if len(pages_generees) != len(fiches):
+        signaler(
+            f"apprendre/fiches : {len(pages_generees)} pages générées pour {len(fiches)} fiches du catalogue"
+        )
+    sans_trace = [fiche.get("id", "?") for fiche in prototypes if not fiche.get("note_statut_editorial")]
+    if sans_trace:
+        signaler("catalogue d’apprentissage : prototypes sans note de statut : " + ", ".join(sans_trace))
     absents = sorted(set(LOT_RECENT) - set(ids))
     if absents:
         signaler("catalogue d’apprentissage : fiches du lot courant absentes : " + ", ".join(absents))
@@ -233,7 +260,10 @@ def verifier_catalogue_apprentissage() -> None:
         if manquants:
             signaler(f"{identifiant} : champ(s) de fiche incomplet(s) : {', '.join(manquants)}")
     if not ERREURS:
-        print("Catalogue d’apprentissage : 81 fiches sans doublon, 55 prototypes ; le lot courant et les fiches du 15 octobre 2026 ont leurs champs structurels et restent à relire.")
+        print(
+            f"Catalogue d’apprentissage : {len(fiches)} fiches sans doublon, {len(prototypes)} prototypes ; "
+            "le lot courant et les fiches du 15 octobre 2026 ont leurs champs structurels et restent à relire."
+        )
 
 
 def analyser(chemin: Path) -> PageInfo:
@@ -602,7 +632,8 @@ def verifier_aventure_anglais() -> None:
         "Les Mondes", "Les Escales", "pré-A1", "A2", "B1", "sans publicité", "sans compte",
         "Aucun ordre", "minuteur", "évaluation de ton niveau", "reste dans la page",
         "stockage local", "aucun microphone", "réception", "production", "interaction",
-        "81 fiches", "15 domaines", "55 prototypes", "parcours de formation personnel",
+        f"{totaux_catalogue()[0]} fiches", "15 domaines", f"{totaux_catalogue()[2]} prototypes",
+        "parcours de formation personnel",
         "fiches autonomes, pas des cours distincts", "sans validation indépendante revendiquée",
     )
     absents = [marqueur for marqueur in marqueurs if marqueur.casefold() not in contenu_page.casefold()]
@@ -714,7 +745,7 @@ console.log(`${missions.length} escales, ${missions.reduce((n, m) => n + m.turns
 def verifier_dossier_apprentissage() -> None:
     controles = {
         ROOT / "apprendre.html": (
-            "81 entrées : 26 fiches du corpus initial et 55 prototypes explicitement à relire",
+            f"{totaux_catalogue()[0]} entrées : {totaux_catalogue()[1]} fiches du corpus initial et {totaux_catalogue()[2]} prototypes explicitement à relire",
             "La relecture indépendante de toutes les fiches du corpus initial n’est pas garantie",
             "Prototype à relire",
             "Ambition éditoriale de long terme",
@@ -1155,16 +1186,16 @@ def verifier_dossier_apprentissage() -> None:
         ),
         ROOT / "docs" / "apprentissage" / "objectif-1000.md": (
             "1 000 fiches d’auto-apprentissage",
-            "81 entrées",
-            "55 prototypes explicitement à relire",
-            "919 entrées",
+            f"{totaux_catalogue()[0]} entrées",
+            f"{totaux_catalogue()[2]} prototypes explicitement à relire",
+            f"{1000 - totaux_catalogue()[0]} entrées",
             "aucun lien, compte ou service externe n’est requis",
         ),
         ROOT / "docs" / "rd-parcours-apprentissage.md": (
             "docs/apprentissage/grille-relecture.md",
             "la date de contrôle des droits, le mode d’utilisation et une description de cette utilisation",
-            "81 fiches suivies dans 15 domaines",
-            "55 prototypes explicitement à relire",
+            f"{totaux_catalogue()[0]} fiches suivies dans 15 domaines",
+            f"{totaux_catalogue()[2]} prototypes explicitement à relire",
             "33 fiches de développement produites en quatre lots de 7, 8, 8 et 10",
             "ponctuation, épellation, géométrie, biologie, cartographie, repères historiques, systèmes d’exploitation et recherche documentaire",
             "fr-reperer-idee-texte",
@@ -1259,10 +1290,10 @@ def verifier_dossier_apprentissage() -> None:
             "arts-composer-formes",
         ),
         ROOT / "docs" / "rd-coherence-visuelle-editoriale.md": (
-            "81 entrées : 26 fiches du corpus initial et 55 prototypes explicitement à relire",
+            f"{totaux_catalogue()[0]} entrées : {totaux_catalogue()[1]} fiches du corpus initial et {totaux_catalogue()[2]} prototypes explicitement à relire",
             "la relecture indépendante de toutes les fiches initiales n’est pas garantie",
             "33 fiches de développement réparties en quatre lots ouvrent des points d’entrée",
-            "81 pages générées, dont cinquante-cinq prototypes à relire",
+            f"{totaux_catalogue()[0]} pages générées, dont {NOMBRES_EN_LETTRES.get(totaux_catalogue()[2], totaux_catalogue()[2])} prototypes à relire",
         ),
         ROOT / "docs" / "apprentissage" / "sources-utilite-publique.md": (
             "Consultation documentaire : 8 octobre 2026",

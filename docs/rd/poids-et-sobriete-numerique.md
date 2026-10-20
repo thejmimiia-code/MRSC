@@ -35,7 +35,7 @@ python3 outils/verifier-poids-pages.py --rapport docs/rd/poids-pages.md
 
 Le script :
 
-1. parcourt les 95 pages publiques (13 pages d’information à la racine, dont l’accueil et la page 404, 81 fiches et la page du simulateur) ;
+1. parcourt les 96 pages publiques (13 pages d’information à la racine, dont l’accueil et la page 404, 82 fiches et la page du simulateur) ;
 2. additionne le HTML, les feuilles de style locales, les scripts locaux et l’image retenue pour chaque emplacement ;
 3. compresse chaque fichier avec gzip niveau 9 pour approcher le transfert ;
 4. estime deux scénarios : le plus petit candidat `srcset` (mobile ou petit écran) et le plus grand (grand écran à forte densité) ;
@@ -57,7 +57,7 @@ Mesure du 17 octobre 2026, avant et après la conversion des trois grandes illus
 | `ia-societe.html`, `transparence.html`, fiches types | 52–59 | 52–59 | inchangé | 52–59 | 52–59 | inchangé |
 | `simulateur/index.html` | 71,4 | 71,4 | inchangé | 71,4 | 71,4 | inchangé |
 
-Le détail page par page est régénéré dans [`poids-pages.md`](poids-pages.md). Les 95 pages restent sous les budgets de travail après la passe.
+Le détail page par page est régénéré dans [`poids-pages.md`](poids-pages.md). Les 96 pages restent sous les budgets de travail après la passe.
 
 ### 4.2 Images : formats et qualité
 
@@ -103,7 +103,7 @@ Les variantes ajoutent **1 553 Kio** au dépôt pour **787 Kio** d’images sour
 | Contrôle | Commande | Résultat |
 | --- | --- | --- |
 | Génération et manifeste d’images | `python3 outils/optimiser-images.py --verifier` | 3 sources, 14 variantes, manifeste et empreintes cohérents |
-| Poids des pages | `python3 outils/verifier-poids-pages.py` | 95 pages sous 300 Kio mobile et 450 Kio grand écran (gzip estimé) |
+| Poids des pages | `python3 outils/verifier-poids-pages.py` | 96 pages sous 300 Kio mobile et 450 Kio grand écran (gzip estimé) |
 | Essais navigateur | `MRSC_BROWSER_NODE_MODULES=… node outils/test-experience.cjs` | **8/8** essais réussis (Chromium sans interface, 320 → 240 px, 150 %, contraste et espacement) |
 | Sélection des formats | sonde Puppeteer locale | AVIF sélectionné ; à 390 px, variante 800 ; à 768 px et 2×, variante 1 400 ; à 1 440 px, variante pleine largeur |
 | Repli de la scène | sonde avec WebGL désactivé et clic sur une mission | image de secours chargée seulement à ce moment, AVIF 800 px, canvas masqué, aucun débordement |

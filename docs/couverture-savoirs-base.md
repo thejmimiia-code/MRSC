@@ -1,6 +1,6 @@
 # Couverture des savoirs de base — carte éditoriale vivante
 
-**Dernière revue éditoriale déclarée : 2026-10-15.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
+**Dernière revue éditoriale déclarée : 2026-10-20.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
 
 L’objectif de couverture est d’élargir progressivement des premiers pas utiles vers les matières générales et professionnelles, les études supérieures, les spécialisations et la recherche. Cet objectif n’est pas l’état actuel du catalogue : les lacunes sont indiquées et la carte reste évolutive.
 
@@ -40,9 +40,9 @@ Commencer par des expressions réutilisables, puis développer l'écoute, la lec
 | Demander une direction en anglais | Début de couverture — à approfondir | [`langue-anglais-direction`](../apprendre/fiches/langue-anglais-direction.html) |
 | Comprendre et échanger dans d’autres situations quotidiennes | Début de couverture — à approfondir | [`langue-anglais-demander-aide`](../apprendre/fiches/langue-anglais-demander-aide.html)<br>[`langue-anglais-epeler`](../apprendre/fiches/langue-anglais-epeler.html) |
 | Autres langues, langues régionales et français langue seconde | Début de couverture — à approfondir | [`langue-reperer-mot-deja-connu`](../apprendre/fiches/langue-reperer-mot-deja-connu.html) |
-| Écoute, prononciation et ressources audio accessibles | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| Écoute, prononciation et ressources audio accessibles | Début de couverture — à approfondir | [`langue-anglais-prononcer-ed`](../apprendre/fiches/langue-anglais-prononcer-ed.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Mathématiques, mesures et données
 

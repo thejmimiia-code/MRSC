@@ -10,21 +10,22 @@
 | --- | ---: |
 | Sujets du référentiel | 99 |
 | dont `actif` | 8 |
-| dont `partiel` | 72 |
-| dont `a-creer` | 16 |
+| dont `partiel` | 73 |
+| dont `a-creer` | 15 |
 | dont `revue-experte` | 3 |
 | Domaines | 15 |
-| Fiches publiées | 81 |
-| dont prototypes à relire | 55 |
-| Sujets sans aucune fiche | 19 |
-| dont ouverts par une carte de sujet | 1 |
+| Fiches publiées | 82 |
+| dont prototypes à relire | 56 |
+| Sujets sans aucune fiche | 18 |
+| Sujets ouverts par une carte de sujet | 1 |
+| Lesquels | `ecoute-prononciation` |
 
 ## 2. Répartition par domaine
 
 | Domaine | Sujets | actif | partiel | à créer | revue experte | sans fiche |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Français, lecture, écriture et communication | 6 | 2 | 4 | 0 | 0 | 0 |
-| Langues étrangères et interculturel | 4 | 0 | 3 | 1 | 0 | 1 |
+| Langues étrangères et interculturel | 4 | 0 | 4 | 0 | 0 | 0 |
 | Mathématiques, mesures et données | 11 | 5 | 6 | 0 | 0 | 0 |
 | Budget, économie, consommation et travail | 5 | 0 | 4 | 1 | 0 | 1 |
 | Sciences, technologie et environnement | 10 | 1 | 7 | 1 | 1 | 2 |
@@ -39,13 +40,12 @@
 | Apprendre à apprendre, autonomie et relations | 4 | 0 | 4 | 0 | 0 | 0 |
 | Études supérieures, spécialités et recherche — post-bac au doctorat | 15 | 0 | 4 | 11 | 0 | 11 |
 
-## 3. Les 19 sujets sans aucune fiche
+## 3. Les 18 sujets sans aucune fiche
 
 Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Les 72 sujets `partiel` ont déjà au moins une fiche : leur manque est à qualifier sujet par sujet, il n'est pas listé ici.
 
 | Domaine | Sujet | Statut | Exigence de preuve avant publication | Travail ouvert |
 | --- | --- | --- | --- | --- |
-| Langues étrangères et interculturel | Écoute, prononciation et ressources audio accessibles | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | [carte de sujet](sujet-ecoute-prononciation.md) |
 | Budget, économie, consommation et travail | Revenus, fiche de paie, prélèvements et impôts | `a-creer` | Relecture par une personne compétente en argent, budget et finances, puis sources primaires datées | — |
 | Sciences, technologie et environnement | Sécurité électrique, protections et limites des interventions | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées | — |
 | Sciences, technologie et environnement | Risques, consignes et usages sûrs des outils et produits | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |

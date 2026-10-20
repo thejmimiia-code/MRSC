@@ -66,11 +66,11 @@ Le site et sa copie embarquée peuvent être testés avec les fonctions Python s
 
 ## Poids des pages, images et sobriété
 
-Trois grandes illustrations disposent désormais de variantes AVIF et WebP en deux largeurs (et 1 200 px pour l’atlas), servies par `<picture>` avec un repli JPEG. L’image de secours de la scène 3D n’est chargée que si le rendu WebGL échoue. Une mesure locale reconstruit le poids des 95 pages publiques et applique des budgets de travail ; elle ne remplace ni une mesure réseau, ni un bilan carbone, ni un audit RGESN.
+Trois grandes illustrations disposent désormais de variantes AVIF et WebP en deux largeurs (et 1 200 px pour l’atlas), servies par `<picture>` avec un repli JPEG. L’image de secours de la scène 3D n’est chargée que si le rendu WebGL échoue. Une mesure locale reconstruit le poids des 96 pages publiques et applique des budgets de travail ; elle ne remplace ni une mesure réseau, ni un bilan carbone, ni un audit RGESN.
 
 ```sh
 python3 outils/optimiser-images.py --verifier        # manifeste, empreintes et tailles des variantes
-python3 outils/verifier-poids-pages.py              # poids estimé et budgets (95 pages)
+python3 outils/verifier-poids-pages.py              # poids estimé et budgets (96 pages)
 python3 outils/verifier-poids-pages.py --rapport docs/rd/poids-pages.md
 python3 outils/verifier-publication.py --base-url https://thejmimiia-code.github.io/MRSC/
 ```

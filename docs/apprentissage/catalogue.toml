@@ -4535,3 +4535,67 @@ licence_source = "Non vérifiée — lien documentaire ; aucune consigne n’est
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucune campagne ni fiche n’est reprise."
+
+[[fiche]]
+id = "langue-anglais-prononcer-ed"
+titre = "Prononcer la fin -ed des verbes anglais"
+matiere = "Langue étrangère : anglais"
+matiere_id = "langues"
+domaine = "langues-etrangeres"
+niveau = 2
+horizon_contenu = "Premiers repères de prononciation de l’anglais ; fiche sans audio, les exemples sont écrits et fictifs"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon écrit à partir de deux sources consultées le 20 octobre 2026 (Britannica Dictionary, Conseil de l’Europe). Aucun audio n’est fourni : la fiche ne fait pas entendre les sons. Relecture par une personne compétente en didactique de l’anglais et en phonétique, contrôle des droits, accessibilité et essais apprenants restent à faire."
+minutes = 10
+resume = "Choisir entre /t/, /d/ et /ɪd/ à partir du dernier son du verbe, jamais de sa dernière lettre."
+objectif = "Dans des exemples écrits, décider comment se prononce la fin -ed, et repérer le seul cas qui ajoute une syllabe."
+situation = "Trois formes écrites : « worked », « played », « wanted ». Toutes finissent par les lettres -ed, mais elles ne se prononcent pas de la même façon. Une seule ajoute une syllabe. Laquelle, et pourquoi ?"
+analogie_titre = "Comme une perle qui prend la couleur de sa voisine"
+analogie = "Imagine un collier : la perle -ed prend la « couleur » du dernier son du verbe. Après un son qui fait vibrer la gorge, elle est voisée ; après un son qui ne la fait pas vibrer, elle est sourde. Une seule exception : si le dernier son est déjà /t/ ou /d/, on ne peut pas coller deux fois le même son, alors une petite voyelle se glisse entre les deux."
+limite_analogie = "La comparaison aide à retenir la logique, mais elle ne dit pas quels sons sont voisés : il faut le vérifier en posant la main sur la gorge. Et la « couleur » se lit sur le dernier son, jamais sur la dernière lettre — « danced » se termine par le son /s/, donc par /t/, même si l’on écrit « ce »."
+notions = [
+  "Son voisé — son prononcé avec vibration des cordes vocales, comme /d/, /z/, /m/, /v/ ou une voyelle.",
+  "Son sourd — son prononcé sans vibration des cordes vocales, comme /t/, /s/, /f/, /k/, /p/, /ʃ/.",
+  "Syllabe — groupe de sons prononcé d’un seul souffle : « wanted » en compte deux, « worked » une seule.",
+  "La fin -ed n’est pas une lettre ajoutée qu’on lirait telle quelle : le dernier son du verbe décide."
+]
+demarche = [
+  "Dis le verbe sans -ed et arrête-toi sur son dernier son, pas sur sa dernière lettre.",
+  "Pose la main sur la gorge : si ça vibre, le son est voisé ; sinon, il est sourd.",
+  "Si le dernier son est /t/ ou /d/, la fin -ed se prononce /ɪd/ et ajoute une syllabe.",
+  "Sinon, si le dernier son est sourd, la fin -ed se prononce /t/.",
+  "Sinon, avec un son voisé ou une voyelle, la fin -ed se prononce /d/."
+]
+exercice = "Classe ces six formes dans trois colonnes — /t/, /d/, /ɪd/ : « watched », « played », « needed », « laughed », « cleaned », « started ». Pour chaque forme, dis aussi si elle garde le même nombre de syllabes que le verbe de départ."
+aide = "Cherche le dernier son, pas la dernière lettre : « watched » finit par le son /tʃ/, « cleaned » par /n/, « laughed » par /f/. Deux formes seulement ajoutent une syllabe."
+correction = [
+  "« watched » → /t/ (dernier son /tʃ/, sourd) et « laughed » → /t/ (dernier son /f/, sourd) : même nombre de syllabes.",
+  "« played » → /d/ (dernier son /eɪ/, une voyelle) et « cleaned » → /d/ (dernier son /n/, voisé) : même nombre de syllabes.",
+  "« needed » → /ɪd/ et « started » → /ɪd/ (derniers sons /d/ et /t/) : une syllabe de plus.",
+  "Dans la situation de départ : « worked » se termine par /t/ et garde une syllabe ; « wanted » se termine par /ɪd/ et en compte deux."
+]
+a_retenir = [
+  "Trois prononciations possibles pour -ed : /t/, /d/ et /ɪd/.",
+  "C’est le dernier son qui décide, jamais la dernière lettre.",
+  "Seul /ɪd/ ajoute une syllabe.",
+  "Cette fiche ne fournit aucun audio : elle aide à décider, pas à écouter."
+]
+transferer = "La même logique de voisement revient dans d’autres fins de mot en anglais, par exemple le -s du pluriel ou de la troisième personne (/s/ après un son sourd, /z/ après un son voisé, /ɪz/ après un son sifflant). À vérifier avec le même geste, et surtout en écoutant une personne qui parle anglais : aucune fiche écrite ne remplace un modèle sonore."
+revue_le = "2026-10-20"
+intervalle_revue_jours = 90
+
+[[fiche.sources]]
+titre = "Britannica Dictionary — « Pronunciation of -ed Endings on Verbs »"
+url = "https://www.britannica.com/dictionary/eb/qa/Pronunciation-of-ed-Endings-on-Verbs"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Règle des trois prononciations et exemples consultés le 20 octobre 2026. Les phrases de la fiche sont originales ; aucun texte de la source n’est reproduit."
+
+[[fiche.sources]]
+titre = "Conseil de l’Europe — CEFR, compétence phonologique"
+url = "https://www.coe.int/en/web/common-european-framework-reference-languages/phonological-competence"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Principe d’intelligibilité prioritaire sur l’accent et place de la phonologie, consultés le 20 octobre 2026. Aucun descripteur n’est reproduit."

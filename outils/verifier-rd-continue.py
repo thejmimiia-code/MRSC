@@ -229,6 +229,18 @@ def verifier_carte_lacunes(verificateur: Verificateur) -> None:
     )
 
 
+def _totaux_catalogue() -> tuple[int, int, int]:
+    """Fiches, fiches initiales et prototypes, relus depuis le catalogue (jamais recopiés)."""
+    try:
+        catalogue = tomllib.loads((ROOT / "docs" / "apprentissage" / "catalogue.toml").read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, tomllib.TOMLDecodeError):
+        return 0, 0, 0
+    fiches = catalogue.get("fiche", [])
+    prototypes = sum(1 for fiche in fiches if fiche.get("statut_editorial"))
+    return len(fiches), len(fiches) - prototypes, prototypes
+
+
+
 def verifier_surface_publique(verificateur: Verificateur) -> None:
     page = ROOT / "transparence.html"
     aventure = ROOT / "anglais-aventure.html"
@@ -242,7 +254,8 @@ def verifier_surface_publique(verificateur: Verificateur) -> None:
         and 'href="transparence.html#rd-innovation"' in aventure_text
         and 'href="transparence.html#rd-innovation"' in apprentissage_text
         and "Aucun site ne peut recenser tout le savoir du monde" in page_text
-        and "81 fiches" in page_text and "55 prototypes" in page_text
+        and f"{_totaux_catalogue()[0]} fiches" in page_text
+        and f"{_totaux_catalogue()[2]} prototypes" in page_text
         and "blob/main/docs/rd/portefeuille.toml" in page_text
         and "blob/main/docs/rd/journal.md" in page_text
         and 'href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/protocole-essais-usage.md"' in page_text

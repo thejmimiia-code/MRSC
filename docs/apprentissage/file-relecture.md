@@ -8,10 +8,10 @@ Deux règles explicites servent au tri. La première reprend le domaine déclar�
 
 | Indicateur | Valeur |
 | --- | --- |
-| Prototypes (statut « Prototype à relire ») | 55 |
+| Prototypes (statut « Prototype à relire ») | 56 |
 | Dont domaines à relecture spécialisée (règle 1) | 9 |
 | Dont hors domaines sensibles mais signalés par mots-clés (règle 2) | 9 |
-| Sans aucun signal automatique | 37 |
+| Sans aucun signal automatique | 38 |
 | Domaines concernés | 15 |
 
 ## Répartition par domaine
@@ -25,9 +25,9 @@ Deux règles explicites servent au tri. La première reprend le domaine déclar�
 | Budget, économie, consommation et travail | 4 | 4 | 0 |
 | Études supérieures, spécialités et recherche — post-bac au doctorat | 4 | 0 | 2 |
 | Histoire, chronologie et mémoire | 4 | 0 | 1 |
+| Langues étrangères et interculturel | 4 | 0 | 0 |
 | Citoyenneté, médias et information | 3 | 3 | 0 |
 | Géographie, territoire et espace | 3 | 0 | 0 |
-| Langues étrangères et interculturel | 3 | 0 | 0 |
 | Arts, musique, création et culture | 2 | 0 | 0 |
 | Numérique, données, cybersécurité et intelligence artificielle | 2 | 0 | 2 |
 | Démarches, droits, sécurité et vie professionnelle | 1 | 1 | 0 |
@@ -90,11 +90,12 @@ Tri : domaines à relecture spécialisée d’abord, puis fiches signalées par 
 | 48 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 2 | — | — |
 | 49 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 2 | 2 | — | — |
 | 50 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | — | — |
-| 51 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 1 | 2 | — | — |
-| 52 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
-| 53 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 2 | 2 | — | — |
-| 54 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 1 | 2 | — | — |
-| 55 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 1 | 3 | — | — |
+| 51 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 2 | 2 | — | — |
+| 52 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 1 | 2 | — | — |
+| 53 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
+| 54 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 2 | 2 | — | — |
+| 55 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 1 | 2 | — | — |
+| 56 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 1 | 3 | — | — |
 
 ## Ce que cette file ne remplace pas
 
