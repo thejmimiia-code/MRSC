@@ -67,6 +67,11 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit "$statut"
 
+      # Une seule issue de suivi, volontairement laissée ouverte : elle est
+      # réécrite à chaque mesure au lieu d’être recréée. La fermer ne
+      # l’archiverait pas, elle ferait ouvrir une nouvelle issue au passage
+      # suivant. La date de chaque mesure reste notée en bas du corps, pour
+      # qu’on puisse dire depuis quand un état est stable.
       - name: Publier le rapport dans une issue de suivi
         if: always()
         shell: bash
@@ -89,7 +94,9 @@ jobs:
             echo
             echo "---"
             echo
-            echo "Ce rapport constate des en-têtes (code, type MIME, encodage, cache). Il ne mesure ni le rendu, ni la performance, ni une empreinte carbone."
+            echo "Ce rapport constate des en-têtes (code, type MIME, encodage, cache). Il ne mesure ni le rendu, ni la performance, ni une empreinte carbone. La politique de cache \`max-age=600\` est imposée par GitHub Pages et n’est pas réglable depuis le dépôt : la relever ne suffit pas à la corriger."
+            echo
+            echo "Le relevé est conservé dans le dépôt (\`docs/rd/en-tetes-servis-AAAA-MM-JJ.toml\`) et revérifié hors ligne à chaque porte par \`outils/verifier-fichiers-servis.py\` : un binaire servi doit faire exactement la taille du fichier du dépôt, un texte servi doit arriver compressé plus petit."
           } > "$corps"
 
           numero="$(gh issue list \
@@ -101,8 +108,25 @@ jobs:
             | python3 -c 'import json, os, sys; titre=os.environ["ISSUE_TITLE"]; items=json.load(sys.stdin); print(next((item["number"] for item in items if item["title"] == titre), ""))')"
 
           if [ -n "$numero" ]; then
+            historique="$RUNNER_TEMP/entetes-historique.md"
+            gh issue view "$numero" --repo "$GITHUB_REPOSITORY" --json body --jq .body \
+              | grep -o 'Rapport automatique du [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}' \
+              | sed 's/^Rapport automatique du //' \
+              | sort -u | tail -n 11 > "$historique" || true
+            if [ -s "$historique" ]; then
+              {
+                echo
+                echo "<details><summary>Mesures déjà consignées dans cette issue</summary>"
+                echo
+                echo "Mesures précédentes, de la plus ancienne à la plus récente :"
+                echo
+                sed 's/^/- /' "$historique"
+                echo
+                echo "</details>"
+              } >> "$corps"
+            fi
             gh issue edit "$numero" --repo "$GITHUB_REPOSITORY" --body-file "$corps"
-            echo "Issue #$numero actualisée."
+            echo "Issue #$numero actualisée (issue de suivi unique, laissée ouverte)."
           else
             gh issue create --repo "$GITHUB_REPOSITORY" --title "$ISSUE_TITLE" --body-file "$corps"
           fi

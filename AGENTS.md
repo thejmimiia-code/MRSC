@@ -97,6 +97,8 @@ python3 outils/construire-apprentissages.py --verifier
 python3 outils/construire-simulateur.py --verifier
 python3 outils/verifier-site-statique.py
 python3 outils/verifier-publication-locale.py
+python3 outils/test_fichiers_servis.py
+python3 outils/verifier-fichiers-servis.py
 python3 outils/verifier-fusions.py
 python3 outils/optimiser-images.py --verifier
 python3 outils/verifier-poids-pages.py

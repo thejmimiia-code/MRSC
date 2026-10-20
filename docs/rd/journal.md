@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — Un rapport d’en-têtes devient une mesure revérifiable
+
+- **Initiative :** `optimisation-du-site` (P1), avec `indexation-et-lecteurs-de-contenu`. Demande reçue : l’adresse de l’issue #90 seule, ouverte automatiquement par le contrôle mensuel de publication.
+- **Ce que le rapport disait, et ce qu’il vaut :** 23 cibles contrôlées le 20 octobre 2026 à 14:03 UTC, toutes en 200, types MIME conformes aux cibles de `outils/verifier-publication.py`, 11 fichiers compressés, `Cache: max-age=600` partout. Comparaison faite hors ligne avec le dépôt : les **12 binaires** sont servis dans la taille exacte du fichier local, donc la version publiée est bien celle du dépôt ; les 11 textes arrivent compressés, donc plus petits que leur version locale. Aucun défaut mécanique.
+- **Fait constaté qui ne se corrige pas :** `max-age=600` est la politique de GitHub Pages pour tous les fichiers et ne se règle pas depuis le dépôt. Le noter comme défaut créerait une dette impossible à rembourser ; il est donc écrit comme une contrainte de l’hébergement, dans l’issue comme dans la page de transparence.
+- **Décision sur l’issue :** #90 reste ouverte et devient l’**issue de suivi unique** de ce contrôle — elle est réécrite à chaque mesure au lieu d’être recréée, et son corps rappelle désormais les mesures déjà consignées. La fermer n’archiverait rien : le passage suivant en ouvrirait une autre.
+- **Ce qui reste vrai désormais sans réseau :** le relevé du jour est conservé dans `docs/rd/en-tetes-servis-2026-10-20.toml`, et `outils/verifier-fichiers-servis.py` le confronte aux fichiers à chaque porte. Un binaire dont la taille ne correspond plus fait échouer le contrôle avec la consigne « refaire la mesure » ; un texte servi non compressé ou plus gros que sa version locale aussi ; une cible de la sonde ajoutée sans relevé également. `outils/test_fichiers_servis.py` porte 21 tests, dont des cas négatifs : taille changée, encodage absent, cible oubliée, date future, outil inconnu.
+- **Portée limitée, écrite dans le relevé :** le contrôle compare des tailles, pas des contenus ; il ne mesure ni le rendu, ni la vitesse réelle, ni l’empreinte du réseau, et il ne juge pas la qualité des images. Il ne remplace ni le contrôle réseau mensuel, ni une relecture.
+- **Prochaine action :** refaire la mesure réseau après tout changement d’image ou de cible et mettre le relevé daté à jour dans le même lot ; si le contrôle hors ligne échoue un jour, c’est le relevé qui est périmé, pas le site.
+
 ## 2026-10-20 — Les avancées entrent dans le portefeuille et dans la prospective
 
 - **Initiative :** `coordination-de-tous-les-agents` (P0), avec `relire-les-44-prototypes` et `prospective-apprentissages-2030`. Demande reçue : « intégrer les avancées et les innovations tout en continuant la R&D et la prospection ».

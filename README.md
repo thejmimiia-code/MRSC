@@ -73,9 +73,13 @@ python3 outils/optimiser-images.py --verifier        # manifeste, empreintes et 
 python3 outils/verifier-poids-pages.py              # poids estimé et budgets (97 pages)
 python3 outils/verifier-poids-pages.py --rapport docs/rd/poids-pages.md
 python3 outils/verifier-publication.py --base-url https://thejmimiia-code.github.io/MRSC/
+python3 outils/test_fichiers_servis.py            # tests du relevé d’en-têtes conservé
+python3 outils/verifier-fichiers-servis.py        # le relevé daté tient-il encore ? (sans réseau)
 ```
 
-Le dernier contrôle demande un accès réseau au site publié ; il relève les types MIME, l’encodage et le cache et ne juge ni le rendu ni la performance. Il tourne aussi depuis l’onglet Actions (`Vérifier les en-têtes servis par l’hébergement`), le 1er du mois et à chaque modification du contrôleur ou de ses cibles ; le tableau est repris dans une issue de suivi, sans constituer un audit.
+Le contrôle réseau demande un accès au site publié ; il relève les types MIME, l’encodage et le cache et ne juge ni le rendu ni la performance. Il tourne aussi depuis l’onglet Actions (`Vérifier les en-têtes servis par l’hébergement`), le 1er du mois et à chaque modification du contrôleur ou de ses cibles ; le tableau est repris dans une issue de suivi unique, réécrite à chaque mesure et laissée ouverte, sans constituer un audit.
+
+Le relevé du 20 octobre 2026 est conservé dans [`docs/rd/en-tetes-servis-2026-10-20.toml`](docs/rd/en-tetes-servis-2026-10-20.toml) et revérifié sans réseau à chaque porte : chaque image et chaque icône doit arriver dans la taille exacte du fichier du dépôt — la version publiée est alors bien celle du dépôt —, et chaque page ou feuille de style doit arriver compressée, donc plus petite que sa version locale. Un binaire modifié depuis la mesure fait échouer le contrôle : c’est le relevé qui est périmé, pas le site, et il faut refaire la mesure. Cette comparaison porte sur des tailles, pas sur des contenus ; la durée de cache de dix minutes est imposée par GitHub Pages et ne se règle pas depuis le dépôt.
 
 La méthode, les chiffres avant/après, les limites et les prochaines vérifications sont dans [`docs/rd/poids-et-sobriete-numerique.md`](docs/rd/poids-et-sobriete-numerique.md). Les essais navigateur du dépôt (`outils/test-experience.cjs`) couvrent aussi le réflow à 320 px et le zoom à 150 %.
 

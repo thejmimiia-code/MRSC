@@ -108,3 +108,19 @@ controle = "python3 outils/test_avancees.py && python3 outils/construire-avancee
 limite = "Le registre vérifie la forme et la traçabilité, pas la vérité de l'avancée : une limite mal choisie passe le contrôle. C'est une mémoire disciplinée, pas une expertise."
 suite = "Relire ce registre à chaque revue du portefeuille et y verser les avancées du lot suivant, en supprimant celles qui seraient devenues fausses."
 initiatives = ["coordination-de-tous-les-agents"]
+
+[[avancee]]
+id = "mesure-servie-reverifiee"
+date = 2026-10-20
+titre = "Ce que l'hébergement sert est mesuré, puis revérifié hors ligne"
+constat = "Un rapport d'en-têtes arrivait chaque mois dans une issue, était lu une fois, puis ne prouvait plus rien : rien ne signalait qu'une image avait changé depuis la mesure, ni qu'une cible de la sonde avait disparu du relevé."
+changement = "Le relevé est désormais un fichier daté du dépôt, confronté aux fichiers à chaque porte sans réseau : une image ou une icône doit faire exactement la taille du fichier du dépôt, une page ou une feuille de style doit arriver compressée et plus petite, et le relevé doit couvrir exactement les cibles de la sonde — ni plus, ni moins."
+preuves = [
+  "docs/rd/en-tetes-servis-2026-10-20.toml",
+  "outils/verifier-fichiers-servis.py",
+  "outils/test_fichiers_servis.py",
+]
+controle = "python3 outils/test_fichiers_servis.py && python3 outils/verifier-fichiers-servis.py"
+limite = "Le contrôle compare des tailles, pas du contenu : une image servie à l'identique peut être inadaptée, et une page compressée peut être fausse. Il ne mesure ni le rendu, ni la vitesse réelle, ni l'empreinte du réseau ; la durée de cache de dix minutes vient de GitHub Pages et ne se règle pas depuis le dépôt."
+suite = "Refaire la mesure réseau après tout changement d'image ou de cible, mettre à jour le relevé daté dans le même lot, et laisser l'issue de suivi ouverte comme journal de mesures."
+initiatives = ["optimisation-du-site", "indexation-et-lecteurs-de-contenu"]

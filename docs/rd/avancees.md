@@ -10,14 +10,36 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 6 |
+| Avancées consignées | 7 |
 | Période couverte | du 2026-10-20 au 2026-10-20 |
-| Contrôles exécutables cités | 6 |
-| Initiatives du portefeuille concernées | 4 |
+| Contrôles exécutables cités | 8 |
+| Initiatives du portefeuille concernées | 6 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
 
 ## 2. Les avancées
+
+### `mesure-servie-reverifiee` — Ce que l'hébergement sert est mesuré, puis revérifié hors ligne
+
+*Consignée le 2026-10-20.*
+
+**Constat.** Un rapport d'en-têtes arrivait chaque mois dans une issue, était lu une fois, puis ne prouvait plus rien : rien ne signalait qu'une image avait changé depuis la mesure, ni qu'une cible de la sonde avait disparu du relevé.
+
+**Ce que cela change.** Le relevé est désormais un fichier daté du dépôt, confronté aux fichiers à chaque porte sans réseau : une image ou une icône doit faire exactement la taille du fichier du dépôt, une page ou une feuille de style doit arriver compressée et plus petite, et le relevé doit couvrir exactement les cibles de la sonde — ni plus, ni moins.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/en-tetes-servis-2026-10-20.toml`
+- `outils/verifier-fichiers-servis.py`
+- `outils/test_fichiers_servis.py`
+
+**Contrôle qui la maintient :** `python3 outils/test_fichiers_servis.py && python3 outils/verifier-fichiers-servis.py`
+
+**Limite — ce que cela ne prouve pas.** Le contrôle compare des tailles, pas du contenu : une image servie à l'identique peut être inadaptée, et une page compressée peut être fausse. Il ne mesure ni le rendu, ni la vitesse réelle, ni l'empreinte du réseau ; la durée de cache de dix minutes vient de GitHub Pages et ne se règle pas depuis le dépôt.
+
+**Suite.** Refaire la mesure réseau après tout changement d'image ou de cible, mettre à jour le relevé daté dans le même lot, et laisser l'issue de suivi ouverte comme journal de mesures.
+
+Initiatives liées : `optimisation-du-site`, `indexation-et-lecteurs-de-contenu`.
 
 ### `page-ouverte-avant-citation` — Aucune page n'est citée sans avoir été ouverte
 

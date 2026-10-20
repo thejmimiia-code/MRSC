@@ -1,0 +1,226 @@
+# Relevé des en-têtes servis par l'hébergement — 20 octobre 2026.
+#
+# Ce fichier est la trace lisible d'une mesure réseau réelle (rapport automatique
+# publié dans l'issue #90). Il n'est pas un audit de performance : il constate un
+# code, un type MIME, un encodage, un nombre d'octets et une durée de cache.
+#
+# Les fichiers binaires doivent être servis OCTET POUR OCTET : c'est ce qui prouve
+# que la version publiée est exactement celle du dépôt, sans recompression ni
+# corruption. Les fichiers texte, eux, arrivent compressés : seul le rapport
+# « servi < local » est vérifiable, pas la taille exacte, puisqu'un contenu
+# publié change à chaque correction de fiche.
+
+[meta]
+version = 1
+mesure_le = 2026-10-20
+base_url = "https://thejmimiia-code.github.io/MRSC/"
+rapport = "https://github.com/thejmimiia-code/MRSC/issues/90"
+outil = "outils/verifier-publication.py"
+regle = "Un binaire servi doit faire exactement la taille du fichier du dépôt ; un texte servi doit être plus petit que sa version locale et annoncé compressé."
+
+[[fichier]]
+chemin = "index.html"
+url = "/"
+nature = "texte"
+type_mime = "text/html"
+encodage = "gzip"
+octets_servis = 7269
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "apprendre.html"
+url = "apprendre.html"
+nature = "texte"
+type_mime = "text/html"
+encodage = "gzip"
+octets_servis = 44850
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "anglais-aventure.html"
+url = "anglais-aventure.html"
+nature = "texte"
+type_mime = "text/html"
+encodage = "gzip"
+octets_servis = 9790
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "transparence.html"
+url = "transparence.html"
+nature = "texte"
+type_mime = "text/html"
+encodage = "gzip"
+octets_servis = 12123
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/css/site.css"
+url = "assets/css/site.css"
+nature = "texte"
+type_mime = "text/css"
+encodage = "gzip"
+octets_servis = 24310
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/css/anglais-aventure.css"
+url = "assets/css/anglais-aventure.css"
+nature = "texte"
+type_mime = "text/css"
+encodage = "gzip"
+octets_servis = 7928
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/js/site.js"
+url = "assets/js/site.js"
+nature = "texte"
+type_mime = "application/javascript"
+encodage = "gzip"
+octets_servis = 7862
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/js/anglais-aventure.js"
+url = "assets/js/anglais-aventure.js"
+nature = "texte"
+type_mime = "application/javascript"
+encodage = "gzip"
+octets_servis = 15129
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/images/accueil-logo-mrsc-3d-800.avif"
+url = "assets/images/accueil-logo-mrsc-3d-800.avif"
+nature = "binaire"
+type_mime = "image/avif"
+encodage = "aucun"
+octets_servis = 53242
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/images/accueil-logo-mrsc-3d-1400.avif"
+url = "assets/images/accueil-logo-mrsc-3d-1400.avif"
+nature = "binaire"
+type_mime = "image/avif"
+encodage = "aucun"
+octets_servis = 116654
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/images/accueil-logo-mrsc-3d-800.webp"
+url = "assets/images/accueil-logo-mrsc-3d-800.webp"
+nature = "binaire"
+type_mime = "image/webp"
+encodage = "aucun"
+octets_servis = 68978
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/images/mondes-savoirs-hero-800.avif"
+url = "assets/images/mondes-savoirs-hero-800.avif"
+nature = "binaire"
+type_mime = "image/avif"
+encodage = "aucun"
+octets_servis = 71576
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/images/mondes-savoirs-hero-1200.avif"
+url = "assets/images/mondes-savoirs-hero-1200.avif"
+nature = "binaire"
+type_mime = "image/avif"
+encodage = "aucun"
+octets_servis = 140256
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/images/mondes-savoirs-hero-1672.avif"
+url = "assets/images/mondes-savoirs-hero-1672.avif"
+nature = "binaire"
+type_mime = "image/avif"
+encodage = "aucun"
+octets_servis = 224902
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/images/mondes-savoirs-hero-800.webp"
+url = "assets/images/mondes-savoirs-hero-800.webp"
+nature = "binaire"
+type_mime = "image/webp"
+encodage = "aucun"
+octets_servis = 77800
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/images/escales-anglais-hero-800.avif"
+url = "assets/images/escales-anglais-hero-800.avif"
+nature = "binaire"
+type_mime = "image/avif"
+encodage = "aucun"
+octets_servis = 30671
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/images/escales-anglais-hero-800.webp"
+url = "assets/images/escales-anglais-hero-800.webp"
+nature = "binaire"
+type_mime = "image/webp"
+encodage = "aucun"
+octets_servis = 35886
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "favicon.ico"
+url = "favicon.ico"
+nature = "texte"
+type_mime = "image/vnd.microsoft.icon"
+encodage = "gzip"
+octets_servis = 4670
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/images/favicon-32.png"
+url = "assets/images/favicon-32.png"
+nature = "binaire"
+type_mime = "image/png"
+encodage = "aucun"
+octets_servis = 4906
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/images/favicon-192.png"
+url = "assets/images/favicon-192.png"
+nature = "binaire"
+type_mime = "image/png"
+encodage = "aucun"
+octets_servis = 30370
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "assets/images/apple-touch-icon.png"
+url = "assets/images/apple-touch-icon.png"
+nature = "binaire"
+type_mime = "image/png"
+encodage = "aucun"
+octets_servis = 27700
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "llms.txt"
+url = "llms.txt"
+nature = "texte"
+type_mime = "text/plain"
+encodage = "gzip"
+octets_servis = 1167
+cache = "max-age=600"
+
+[[fichier]]
+chemin = "sitemap.xml"
+url = "sitemap.xml"
+nature = "texte"
+type_mime = "application/xml"
+encodage = "gzip"
+octets_servis = 1273
+cache = "max-age=600"

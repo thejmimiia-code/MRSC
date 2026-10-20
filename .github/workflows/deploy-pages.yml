@@ -74,6 +74,11 @@ jobs:
       - name: Validate the published file set
         run: python3 outils/verifier-publication-locale.py
 
+      - name: Validate the recorded served-file measurement
+        run: |
+          python3 outils/test_fichiers_servis.py
+          python3 outils/verifier-fichiers-servis.py
+
       - name: Validate image variants
         run: python3 outils/optimiser-images.py --verifier
 
