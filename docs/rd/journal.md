@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — Quatre fiches de plus confrontées à une page ouverte
+
+- **Initiative :** `relire-les-44-prototypes` (P0), suite directe du lot précédent (14 constats).
+- **Pages ouvertes, lues et confrontées avant inscription :** Météo-France, « Quelle différence entre météo et climat ? » (`sciences-meteo-climat` : météo à un instant et un lieu, climat en moyenne sur plusieurs décennies, référence de 30 ans, une vague de froid ne dit rien de la tendance) ; Cybermalveillance.gouv.fr, « Pourquoi et comment bien gérer ses sauvegardes ? » (`numerique-organiser-fichiers` : copies sur des supports différents, identifier et choisir les données, planifier) ; Éduscol, progression du vivant au cycle 2 (`sciences-cycle-vie-plante` : de la graine à la plante, de la fleur au fruit contenant des graines, diversité des cycles) ; Éduscol, « Qu'est-ce que la matière ? (2) » et « L'eau, un bien commun à préserver » (`sciences-distinguer-melange-changement-etat` : d'un côté la fonte et la conservation de la masse, de l'autre la dissolution, la solubilité et la prudence avant de mélanger des produits domestiques).
+- **Deux refus assumés :** une page IGN sur la lecture de carte répond en 403 et n'a pas pu être lue ; elle n'a donc pas été citée. Une page de présentation de HAL sur les citations s'est révélée décrire une fonctionnalité ; la documentation sur la notice a été préférée.
+- **Résultat mesuré :** **57 prototypes, 17 contrôles, 0 échec mécanique, 10 constats**, 12 fiches citant au moins une page précise ouverte et datée, 137 sources déclarées.
+- **Ce que cela ne dit pas :** le registre `relectures.toml` reste vide. Une page qui étaye une phrase ne vaut ni expertise de domaine, ni contrôle des droits, ni essai d'usage.
+- **Prochaine action :** les 10 constats restants sont des portails assumés (`arts-*`, `geo-*`, `histoire-comparer-sources`, `histoire-situer-siecle`, `info-systeme-exploitation`, `maths-*`) ; les traiter demande une page qui étaye vraiment l'affirmation, ou une décision humaine de garder le portail.
+
 ## 2026-10-20 — Les constats traités : huit pages précises, quatorze portails assumés
 
 - **Initiative :** `relire-les-44-prototypes` (P0). Suite du lot précédent, qui laissait 19 constats de sources.

@@ -17,8 +17,8 @@
 | Fiches sans aucun échec mécanique | 57 |
 | Fiches avec au moins un échec | 0 |
 | Échecs mécaniques au total | 0 |
-| Fiches avec un constat à trancher par une personne | 14 |
-| Constats nommés (ni échecs, ni validations) | 14 |
+| Fiches avec un constat à trancher par une personne | 10 |
+| Constats nommés (ni échecs, ni validations) | 10 |
 
 ### Constats nommés, à trancher par une personne
 
@@ -26,7 +26,7 @@ Ces contrôles ont vu un fait exact que la machine ne peut pas juger. Rien n'est
 
 | Constat | Fiches concernées | Nombre |
 | --- | --- | ---: |
-| Au moins une source pointe une page précise, pas seulement un portail | arts-composer-formes, arts-lire-cartel, geo-decrire-paysage, geo-lire-legende-carte, histoire-comparer-sources, histoire-situer-siecle, info-systeme-exploitation, maths-equation-simple, maths-lire-echelle-graphique, maths-lire-tableau-croise, numerique-organiser-fichiers, sciences-cycle-vie-plante, sciences-distinguer-melange-changement-etat, sciences-meteo-climat | 14 |
+| Au moins une source pointe une page précise, pas seulement un portail | arts-composer-formes, arts-lire-cartel, geo-decrire-paysage, geo-lire-legende-carte, histoire-comparer-sources, histoire-situer-siecle, info-systeme-exploitation, maths-equation-simple, maths-lire-echelle-graphique, maths-lire-tableau-croise | 10 |
 
 Pour la ligne « page précise » : ces fiches ne citent que des portails (racine d'un site) et l'annoncent dans le champ `utilisation` — la machine vérifie cette phrase, pas sa pertinence. Sans page précise, la question 1 du §4 ne peut pas être tranchée en l'état : il faut soit ajouter une page consultée et vérifiée, soit garder le portail en connaissance de cause.
 
@@ -34,8 +34,8 @@ Pour la ligne « page précise » : ces fiches ne citent que des portails (racin
 
 | Fait mesuré | Valeur |
 | --- | ---: |
-| Sources déclarées au total | 94 |
-| dont licence déclarée « non vérifiée » | 93 |
+| Sources déclarées au total | 99 |
+| dont licence déclarée « non vérifiée » | 98 |
 | Fiches sans aucune source | 0 |
 | Prochaine revue la plus proche | 2027-01-09 (info-lire-adresse-web) |
 | Fiches dont la revue de contenu est échue | 0 |
@@ -95,12 +95,12 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 17 | 0 | 0 | — |
 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 17 | 0 | 0 | — |
-| [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
+| [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 17 | 0 | 0 | — |
 | [Repérer une source de santé publique avant d’agir](fiches/sante-reperer-source-publique.html) | Santé, alimentation, corps et sécurité | 17 | 0 | 0 | — |
 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 17 | 0 | 0 | — |
-| [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
-| [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
-| [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (2 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
+| [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 17 | 0 | 0 | — |
+| [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 17 | 0 | 0 | — |
+| [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 17 | 0 | 0 | — |
 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 17 | 0 | 0 | — |
 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 17 | 0 | 0 | — |
 

@@ -2283,6 +2283,14 @@ revue_le = "2026-10-11"
 intervalle_revue_jours = 180
 
 [[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — « Pourquoi et comment bien gérer ses sauvegardes ? »"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/bonnes-pratiques/sauvegardes"
+licence_source = "Non vérifiée — page consultée ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 20 octobre 2026 : la sauvegarde consiste à conserver des copies sur des supports différents de l’appareil, à identifier où sont les données, à choisir ce qui doit être sauvegardé et à planifier la fréquence. Aucun conseil, texte ni visuel de la page n’est reproduit ; la fiche ne décrit aucune manipulation."
+
+[[fiche.sources]]
 titre = "Cybermalveillance.gouv.fr — prévention et assistance face aux actes de cybermalveillance"
 url = "https://www.cybermalveillance.gouv.fr/"
 licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
@@ -2570,6 +2578,14 @@ licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation d
 droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail public facultatif pour rechercher des explications météorologiques et climatiques actuelles ; aucun texte, graphique, chiffre ou visuel n’est repris. La portée des pages précises reste à confirmer lors de la relecture."
+
+[[fiche.sources]]
+titre = "Météo-France — « Quelle différence entre météo et climat ? »"
+url = "https://meteofrance.com/meteo-a-z/quelle-difference-entre-meteo-et-climat"
+licence_source = "Non vérifiée — page consultée ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 20 octobre 2026 : la météo décrit le temps à un instant et à un endroit donné, le climat est une moyenne des conditions météorologiques sur plusieurs décennies, avec des périodes de référence de 30 ans ; une vague de froid ne renseigne pas sur la tendance. Aucun texte, chiffre ni visuel de la page n’est reproduit."
 
 [[fiche.sources]]
 titre = "Groupe d’experts intergouvernemental sur l’évolution du climat — rapports et ressources"
@@ -3034,6 +3050,22 @@ a_retenir = [
 transferer = "Ces mots aident à décrire des phénomènes dans un cours de sciences. Ne mélange pas des produits réels pour vérifier une idée : cette fiche est une lecture de situations fictives, pas une consigne d’expérience."
 revue_le = "2026-10-11"
 intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — « Qu’est-ce que la matière ? (2) » : états de la matière et changements d’état (évaluation cycle 2)"
+url = "https://eduscol.education.fr/document/15199/download"
+licence_source = "Non vérifiée — document ministériel consulté ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Document consulté le 20 octobre 2026 : il décrit le passage de l’eau liquide à la glace, la fonte d’un glaçon et la conservation de la masse pendant ces changements d’état. Il étaye la partie « fusion » de la fiche ; il ne traite pas la dissolution. Aucun texte, schéma ni exemple du document n’est reproduit."
+
+[[fiche.sources]]
+titre = "Éduscol — « L’eau, un bien commun à préserver » : les solides et l’eau, dissolution et solubilité"
+url = "https://eduscol.education.gouv.fr/sites/default/files/document/ra22c3sciencestechnogriesppreservereaupdf-95295.pdf"
+licence_source = "Non vérifiée — document ministériel consulté ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Document consulté le 20 octobre 2026 : il traite de la dissolution, de la solubilité de certains solides dans l’eau et de la prudence nécessaire avant de mélanger des produits domestiques. Il étaye la partie « dissolution » et la limite écrite dans la fiche ; il ne traite pas la fusion. Aucun texte, protocole ni exemple du document n’est reproduit."
 
 [[fiche.sources]]
 titre = "Éduscol — ressources et programmes de sciences et technologie"
@@ -3560,6 +3592,14 @@ a_retenir = [
 transferer = "Un cycle simplifié aide à suivre les étapes d’un schéma de biologie. Pour comprendre une espèce réelle, vérifie son mode de reproduction, son environnement et la source scientifique ; ne généralise pas un exemple à toutes les plantes."
 revue_le = "2026-10-11"
 intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — « Proposition de progression pour chaque attendu de fin de cycle 2 : le vivant »"
+url = "https://eduscol.education.gouv.fr/sites/default/files/document/ra23c2progressionintercyclesvivantpdf-100509.pdf"
+licence_source = "Non vérifiée — page consultée ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Document consulté le 20 octobre 2026 : il identifie les étapes clés du cycle d’un végétal — de la graine à la plante, de la fleur au fruit contenant une ou des graines — et rappelle la diversité des cycles de vie selon les espèces. Aucun schéma, texte ni exemple du document n’est reproduit."
 
 [[fiche.sources]]
 titre = "Éduscol — ressources et programmes de sciences de la vie et de la Terre"

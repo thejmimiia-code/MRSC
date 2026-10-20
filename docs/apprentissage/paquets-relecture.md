@@ -44,7 +44,7 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | 15 | [Présenter une idée avec une raison et un exemple](fiches/fr-argumenter-avec-exemple.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 16 | [Repérer l’idée principale et les informations utiles](fiches/fr-reperer-idee-texte.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 17 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 18 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 18 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
 | 19 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 20 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 21 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
@@ -79,9 +79,9 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | 50 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
 | 51 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 52 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 53 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 54 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 55 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 53 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 54 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
+| 55 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
 | 56 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
 | 57 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
 
@@ -955,13 +955,14 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | données personnelles : données personnelles |
 | Fiche publiée | [lire la fiche](fiches/numerique-organiser-fichiers.html) |
-| Contrôles automatiques | 16/17 — aucun défaut mécanique détecté ; constat à trancher par une personne : 1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
 | Source | Licence déclarée | Mode | Droits contrôlés le |
 | --- | --- | --- | --- |
+| [Cybermalveillance.gouv.fr — « Pourquoi et comment bien gérer ses sauvegardes ? »](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/bonnes-pratiques/sauvegardes) | Non vérifiée — page consultée ; aucune réutilisation déclarée | reference-factuelle | 2026-10-20 |
 | [Cybermalveillance.gouv.fr — prévention et assistance face aux actes de cybermalveillance](https://www.cybermalveillance.gouv.fr/) | Non vérifiée — lien documentaire ; aucune réutilisation déclarée | reference-factuelle | 2026-10-08 |
 
 **Ce que la fiche dit déjà de ses limites**
@@ -970,8 +971,8 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 
 **Points à trancher par une personne**
 
-- [ ] Ouvrir les 1 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
-- [ ] Trancher les droits : 1 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
+- [ ] Ouvrir les 2 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
+- [ ] Trancher les droits : 2 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
 - [ ] Vérifier l’exemple et la correction : aucun exemple ne doit induire en erreur si l’énoncé est mal lu.
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
