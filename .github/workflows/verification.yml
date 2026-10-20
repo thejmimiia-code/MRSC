@@ -89,6 +89,14 @@ jobs:
       - name: Vérifier que le site publié ne manque d’aucun fichier
         run: python3 outils/verifier-publication-locale.py
 
+      # Le relevé d’en-têtes est fait en réseau, hors de cette porte : ici on
+      # confronte seulement ce relevé aux fichiers du dépôt. Un binaire dont la
+      # taille ne correspond plus signale une mesure devenue fausse, à refaire.
+      - name: Vérifier le relevé des fichiers réellement servis
+        run: |
+          python3 outils/test_fichiers_servis.py
+          python3 outils/verifier-fichiers-servis.py
+
       - name: Vérifier le manifeste des variantes d’images
         run: python3 outils/optimiser-images.py --verifier
 
