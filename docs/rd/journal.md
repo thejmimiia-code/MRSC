@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — Les constats traités : huit pages précises, quatorze portails assumés
+
+- **Initiative :** `relire-les-44-prototypes` (P0). Suite du lot précédent, qui laissait 19 constats de sources.
+- **Ce qui a été fait, fiche par fiche, en ouvrant réellement la page avant de l'inscrire :** cinq fiches qui ne déclaraient pas leur portail ont reçu une page précise — Service-Public F2451 « Crédit à la consommation : règles du contrat » (`econ-distinguer-interet-frais`), data.gouv.fr « Licences de réutilisation » (`civ-choisir-source-publique`), Conseil de l'Europe « Le plurilinguisme dans la classe » (`langue-reperer-mot-deja-connu`), HAL « Visualisation d'un dépôt » (`recherche-distinguer-resume-citation`), Santé publique France « Qui sommes-nous ? » (`sante-reperer-source-publique`). Avec les trois du lot précédent, **huit fiches** citent désormais une page ouverte et datée.
+- **Nouveau contrôle, dans le même contrôle `precision` :** quand toutes les sources sont des racines, la machine vérifie maintenant que chaque déclaration d'utilisation dit qu'il s'agit d'un portail, d'un point d'entrée ou d'une page d'accueil. Une racine présentée comme une page consultée devient donc un **échec** (« laisse croire à une page précise »), et non plus un simple constat. Un test négatif couvre ce cas ; l'ensemble monte à 29 tests.
+- **Résultat mesuré :** **57 prototypes, 17 contrôles, 0 échec mécanique, 14 constats** — tous des portails assumés par écrit, dans quatorze fiches (`arts-composer-formes`, `arts-lire-cartel`, `geo-decrire-paysage`, `geo-lire-legende-carte`, `histoire-comparer-sources`, `histoire-situer-siecle`, `info-systeme-exploitation`, `maths-equation-simple`, `maths-lire-echelle-graphique`, `maths-lire-tableau-croise`, `numerique-organiser-fichiers`, `sciences-cycle-vie-plante`, `sciences-distinguer-melange-changement-etat`, `sciences-meteo-climat`). 132 sources déclarées.
+- **Ce que ces ajouts ne sont pas :** une relecture consignée. Le registre `relectures.toml` reste vide ; aucun statut ne change. Une page qui étaye une affirmation ne dit rien des droits, de l'analogie ni de l'usage réel.
+- **Prochaine action :** la question 1 du §4 redevient répondable sur 43 fiches ; commencer les relectures par les paquets de priorité 1, en demandant un verdict en clair à une personne, et non une validation globale.
+
 ## 2026-10-20 — Trois états au lieu de deux : un constat n'est pas un défaut
 
 - **Initiative :** `relire-les-44-prototypes` (P0). Suite directe de l'audit à 16 contrôles : le 17ᵉ contrôle, ajouté dans la même journée, a révélé 22 fiches dont toutes les sources sont des portails.

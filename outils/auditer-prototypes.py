@@ -57,6 +57,12 @@ LONGUEUR_LIMITE_MIN = 120
 # confronter. Le fait se nomme, la décision revient à une personne.
 ETAT_A_VERIFIER = "a-verifier"
 
+# Un portail doit être annoncé comme tel dans la déclaration d'utilisation : c'est
+# la seule partie du constat qui soit mécaniquement vérifiable. Sans cette phrase,
+# la fiche laisse croire qu'elle cite une page consultée alors qu'elle cite une
+# racine de site.
+MOTS_PORTAIL = ("portail", "point d'entrée", "page d'accueil")
+
 # Les questions qu'aucun script ne peut trancher. Elles sont affichées telles
 # quelles, à côté des contrôles automatiques, pour que la frontière soit lisible.
 HUMAIN_ONLY = (
@@ -318,12 +324,29 @@ def controler(fiche: dict, fiches: dict[str, dict], references: dict[str, list[s
             f"{len(sources) - len(portails)}/{len(sources)} source(s) précise(s)",
         )
     else:
-        ajouter(
-            "precision",
-            "Au moins une source pointe une page précise, pas seulement un portail",
-            ETAT_A_VERIFIER,
-            f"{len(portails)} portail(s) seulement : rien à confronter, à trancher par une personne",
-        )
+        non_declares = [
+            str(source.get("url", ""))
+            for source in portails
+            if not any(
+                mot in str(source.get("utilisation", "")).casefold().replace("\u2019", "'")
+                for mot in MOTS_PORTAIL
+            )
+        ]
+        if non_declares:
+            ajouter(
+                "precision",
+                "Au moins une source pointe une page précise, pas seulement un portail",
+                "a-corriger",
+                f"{len(portails)} portail(s) sans page précise, et non annoncé(s) comme portail : "
+                f"{', '.join(non_declares)}",
+            )
+        else:
+            ajouter(
+                "precision",
+                "Au moins une source pointe une page précise, pas seulement un portail",
+                ETAT_A_VERIFIER,
+                f"{len(portails)} portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne",
+            )
 
     # 15. Page publiée
     page = PAGES / f"{identifiant}.html"
@@ -432,10 +455,10 @@ def construire(audits: list[dict], titres: dict[str, str], aujourdhui: date) -> 
             lignes.append(ligne([libelle, ", ".join(sorted(concernees)), str(len(concernees))]))
         lignes.append("")
         lignes.append(
-            "Pour la ligne « page précise » : ces fiches ne citent que des portails (racine d'un site). "
-            "Elles déclarent souvent ce choix dans `utilisation`. Sans page précise, la question 1 du §4 "
-            "ne peut pas être tranchée en l'état : il faut soit ajouter une page consultée et vérifiée, "
-            "soit assumer le portail par écrit dans la fiche."
+            "Pour la ligne « page précise » : ces fiches ne citent que des portails (racine d'un site) et "
+            "l'annoncent dans le champ `utilisation` — la machine vérifie cette phrase, pas sa pertinence. "
+            "Sans page précise, la question 1 du §4 ne peut pas être tranchée en l'état : il faut soit ajouter "
+            "une page consultée et vérifiée, soit garder le portail en connaissance de cause."
         )
         lignes.append("")
 

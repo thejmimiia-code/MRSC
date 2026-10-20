@@ -42,11 +42,11 @@ Tri : domaines à relecture spécialisée d’abord, puis fiches signalées par 
 | ---: | --- | --- | ---: | ---: | --- | --- |
 | 1 | [Repérer l’échelle d’une institution avant de chercher le bon service](fiches/civ-reperer-echelle-institution.html) | Citoyenneté, médias et information | 2 | 2 | politique publique, médias et information | droit et démarches : juridique ; politique publique : collectivité |
 | 2 | [Repérer une information électorale officielle](fiches/civ-reperer-info-electorale.html) | Citoyenneté, médias et information | 2 | 2 | politique publique, médias et information | politique publique : scrutin, vote, élection |
-| 3 | [Distinguer un intérêt d’un frais sur un crédit fictif](fiches/econ-distinguer-interet-frais.html) | Budget, économie, consommation et travail | 2 | 2 | argent, budget et finances | argent : crédit, prêt |
-| 4 | [Lire une mention de garantie sur un ticket fictif](fiches/econ-lire-mention-garantie.html) | Budget, économie, consommation et travail | 2 | 2 | argent, budget et finances | droit et démarches : juridique, litige, recours |
-| 5 | [Repérer une source de santé publique avant d’agir](fiches/sante-reperer-source-publique.html) | Santé, alimentation, corps et sécurité | 2 | 2 | santé et sécurité | santé : diagnostic, symptôme, traitement |
-| 6 | [Trouver un service public et préparer un formulaire](fiches/civ-trouver-service-public.html) | Démarches, droits, sécurité et vie professionnelle | 2 | 3 | droit, démarches et travail | politique publique : service public |
-| 7 | [Choisir une source publique adaptée à sa question](fiches/civ-choisir-source-publique.html) | Citoyenneté, médias et information | 2 | 5 | politique publique, médias et information | droit et démarches : juridique |
+| 3 | [Lire une mention de garantie sur un ticket fictif](fiches/econ-lire-mention-garantie.html) | Budget, économie, consommation et travail | 2 | 2 | argent, budget et finances | droit et démarches : juridique, litige, recours |
+| 4 | [Trouver un service public et préparer un formulaire](fiches/civ-trouver-service-public.html) | Démarches, droits, sécurité et vie professionnelle | 2 | 3 | droit, démarches et travail | politique publique : service public |
+| 5 | [Distinguer un intérêt d’un frais sur un crédit fictif](fiches/econ-distinguer-interet-frais.html) | Budget, économie, consommation et travail | 2 | 3 | argent, budget et finances | argent : crédit, prêt |
+| 6 | [Repérer une source de santé publique avant d’agir](fiches/sante-reperer-source-publique.html) | Santé, alimentation, corps et sécurité | 2 | 3 | santé et sécurité | santé : diagnostic, symptôme, traitement |
+| 7 | [Choisir une source publique adaptée à sa question](fiches/civ-choisir-source-publique.html) | Citoyenneté, médias et information | 2 | 6 | politique publique, médias et information | droit et démarches : juridique |
 | 8 | [Comparer deux prix à quantité égale](fiches/econ-comparer-prix-unitaires.html) | Budget, économie, consommation et travail | 2 | 2 | argent, budget et finances | — |
 | 9 | [Lire une facture et repérer une échéance](fiches/econ-lire-facture.html) | Budget, économie, consommation et travail | 2 | 2 | argent, budget et finances | — |
 | 10 | [Formuler une question et une hypothèse de recherche](fiches/recherche-question-hypothese.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | — | argent : prêt ; données personnelles : données personnelles |
@@ -84,18 +84,18 @@ Tri : domaines à relecture spécialisée d’abord, puis fiches signalées par 
 | 42 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 2 | 1 | — | — |
 | 43 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 2 | 1 | — | — |
 | 44 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 2 | 1 | — | — |
-| 45 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 2 | — | — |
-| 46 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 2 | 2 | — | — |
-| 47 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | — | — |
-| 48 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 1 | 2 | — | — |
-| 49 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 2 | 2 | — | — |
-| 50 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 1 | 2 | — | — |
-| 51 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
-| 52 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
-| 53 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 2 | 2 | — | — |
-| 54 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 2 | 2 | — | — |
-| 55 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 1 | 2 | — | — |
-| 56 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 1 | 3 | — | — |
+| 45 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 2 | 2 | — | — |
+| 46 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | — | — |
+| 47 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 1 | 2 | — | — |
+| 48 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 2 | 2 | — | — |
+| 49 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
+| 50 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
+| 51 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 2 | 2 | — | — |
+| 52 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 2 | 2 | — | — |
+| 53 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 1 | 2 | — | — |
+| 54 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 3 | — | — |
+| 55 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 1 | 3 | — | — |
+| 56 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 1 | 3 | — | — |
 | 57 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 2 | 6 | — | — |
 
 ## Ce que cette file ne remplace pas
