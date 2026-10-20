@@ -2,6 +2,20 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — Paquets de relecture prêts pour les 18 prototypes prioritaires
+
+- **Initiative :** `relire-les-44-prototypes` (P0), la seule dont le blocage est **humain**.
+- **Signal :** l'agent ne peut pas relire à la place d'une personne compétente, mais il pouvait rendre la relecture moins coûteuse. La file existante disait **quoi** relire ; elle ne rassemblait pas ce qu'il faut avoir sous les yeux pour trancher.
+- **Travail livré :** `outils/construire-paquets-relecture.py` génère `docs/apprentissage/paquets-relecture.md` — **56 prototypes** au tableau de suivi, **18 paquets détaillés** (priorités 1 et 2), et un paquet à la demande par `--fiche <identifiant>`.
+- **Contenu d'un paquet :** domaine, horizon, termes repérés, **sources telles qu'enregistrées** (titre, URL, licence déclarée, mode d'utilisation, date de contrôle des droits), **limites que la fiche affirme déjà**, questions à trancher par une personne — dont le décompte réel des licences « non vérifiée » — et une **trace de décision** à remplir (décision, date, rôle, objections, points bloquants, suite).
+- **Aucun tri inventé :** le classement importe directement les deux règles de `outils/file-relecture.py` (domaine sensible, mots-clés) au lieu d'en recopier un second. Répartition mesurée : **9** priorités 1, **9** priorités 2, **38** sans signal automatique — un prototype sans signal reste à relire.
+- **Garde-fou :** `verifier-rd-continue.py` régénère les paquets en mémoire et refuse un fichier divergent. Test négatif exécuté : une ligne du tableau modifiée à la main fait échouer la porte (`exit 1`), la régénération la remet au vert.
+- **Renvoi documentaire :** la grille de relecture pointe désormais vers les paquets depuis son mode d'emploi, sans retirer ses questions communes.
+- **Résultat :** une séance de relecture peut commencer sans chercher les sources ni les droits ; le temps humain passe sur le fond, pas sur la collecte.
+- **Limite :** un paquet ne relit rien, ne vérifie aucun contenu de source et n'attribue aucune note. Les droits restent « non vérifiés » tant qu'une personne ne l'a pas tranché ; le document le dit à chaque fiche.
+- **Contrôles réellement exécutés :** génération puis `--verifier`, `--fiche sante-reperer-source-publique`, test négatif de divergence, `verifier-rd-continue.py`, `verifier-decision-prospective.py`, puis la porte complète.
+- **Prochaine action :** faire relire le paquet `sante-reperer-source-publique` par une personne compétente en santé publique, puis celui de `civ-choisir-source-publique` ; consigner chaque trace de décision dans la fiche concernée.
+
 ## 2026-10-20 — Première fiche prototype tirée d'un sujet ouvert, sans audio
 
 - **Initiative :** `cartographier-les-lacunes` (sujet `ecoute-prononciation`), avec `relire-les-44-prototypes` pour la relecture à venir.
