@@ -69,7 +69,7 @@ fiches = ["langue-reperer-mot-deja-connu"]
 id = "ecoute-prononciation"
 titre = "Écoute, prononciation et ressources audio accessibles"
 statut = "partiel"
-fiches = ["langue-anglais-prononcer-ed"]
+fiches = ["langue-anglais-prononcer-ed", "langue-anglais-prononcer-th"]
 
 [[domaine]]
 id = "mathematiques"

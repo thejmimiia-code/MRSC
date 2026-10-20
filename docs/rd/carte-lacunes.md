@@ -14,8 +14,8 @@
 | dont `a-creer` | 15 |
 | dont `revue-experte` | 3 |
 | Domaines | 15 |
-| Fiches publiées | 82 |
-| dont prototypes à relire | 56 |
+| Fiches publiées | 83 |
+| dont prototypes à relire | 57 |
 | Sujets sans aucune fiche | 18 |
 | Sujets ouverts par une carte de sujet | 1 |
 | Lesquels | `ecoute-prononciation` |
@@ -42,7 +42,7 @@
 
 ## 3. Les 18 sujets sans aucune fiche
 
-Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Les 72 sujets `partiel` ont déjà au moins une fiche : leur manque est à qualifier sujet par sujet, il n'est pas listé ici.
+Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Les 73 sujets `partiel` ont déjà au moins une fiche : leur manque est à qualifier sujet par sujet, il n'est pas listé ici.
 
 | Domaine | Sujet | Statut | Exigence de preuve avant publication | Travail ouvert |
 | --- | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Le
 ## 4. Ce que cette carte ne dit pas
 
 - Elle ne dit pas qu'un sujet absent du référentiel n'existe pas : le référentiel est une carte de travail, pas un inventaire du savoir.
-- Elle ne dit rien de la qualité des 81 fiches publiées ni de l'exactitude de leur contenu.
+- Elle ne dit rien de la qualité des 83 fiches publiées ni de l'exactitude de leur contenu.
 - Elle ne fournit aucune source : chaque sujet ouvert doit encore être documenté auprès de sources primaires, avec leur date, leur périmètre et leurs droits.
 - Elle ne hiérarchise pas les domaines : un domaine à onze sujets à créer n'est pas « plus important » qu'un domaine à un sujet.
 - Elle applique l'exigence de preuve du domaine déclaré : un sujet de santé rangé sous « études supérieures » (ISCED-F 09) reçoit l'exigence générale. Ce classement est à corriger au cas par cas, pas à lire comme une règle de risque.

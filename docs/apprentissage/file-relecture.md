@@ -8,10 +8,10 @@ Deux règles explicites servent au tri. La première reprend le domaine déclar�
 
 | Indicateur | Valeur |
 | --- | --- |
-| Prototypes (statut « Prototype à relire ») | 56 |
+| Prototypes (statut « Prototype à relire ») | 57 |
 | Dont domaines à relecture spécialisée (règle 1) | 9 |
 | Dont hors domaines sensibles mais signalés par mots-clés (règle 2) | 9 |
-| Sans aucun signal automatique | 38 |
+| Sans aucun signal automatique | 39 |
 | Domaines concernés | 15 |
 
 ## Répartition par domaine
@@ -22,10 +22,10 @@ Deux règles explicites servent au tri. La première reprend le domaine déclar�
 | Mathématiques, mesures et données | 8 | 0 | 0 |
 | Sciences, technologie et environnement | 6 | 0 | 0 |
 | Français, lecture, écriture et communication | 5 | 0 | 2 |
+| Langues étrangères et interculturel | 5 | 0 | 0 |
 | Budget, économie, consommation et travail | 4 | 4 | 0 |
 | Études supérieures, spécialités et recherche — post-bac au doctorat | 4 | 0 | 2 |
 | Histoire, chronologie et mémoire | 4 | 0 | 1 |
-| Langues étrangères et interculturel | 4 | 0 | 0 |
 | Citoyenneté, médias et information | 3 | 3 | 0 |
 | Géographie, territoire et espace | 3 | 0 | 0 |
 | Arts, musique, création et culture | 2 | 0 | 0 |
@@ -96,6 +96,7 @@ Tri : domaines à relecture spécialisée d’abord, puis fiches signalées par 
 | 54 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 2 | 2 | — | — |
 | 55 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 1 | 2 | — | — |
 | 56 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 1 | 3 | — | — |
+| 57 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 2 | 6 | — | — |
 
 ## Ce que cette file ne remplace pas
 

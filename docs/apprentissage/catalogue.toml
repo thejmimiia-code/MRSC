@@ -4599,3 +4599,99 @@ licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est re
 droits_controles_le = "2026-10-20"
 mode_utilisation = "reference-factuelle"
 utilisation = "Principe d’intelligibilité prioritaire sur l’accent et place de la phonologie, consultés le 20 octobre 2026. Aucun descripteur n’est reproduit."
+
+[[fiche]]
+id = "langue-anglais-prononcer-th"
+titre = "Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?"
+matiere = "Langue étrangère : anglais"
+matiere_id = "langues"
+domaine = "langues-etrangeres"
+niveau = 2
+horizon_contenu = "Premiers repères de prononciation de l’anglais ; fiche sans audio, transcriptions relevées dans un dictionnaire le 20 octobre 2026"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon écrit à partir de pages de Cambridge Dictionary et de l’échelle de phonologie du Companion Volume 2020 du Conseil de l’Europe, consultées le 20 octobre 2026. Aucun audio n’est fourni : la fiche ne fait pas entendre les sons. Relecture par une personne compétente en didactique de l’anglais et en phonétique, vérification des droits, contrôle d’accessibilité et essais avec des personnes apprenantes restent à faire."
+minutes = 12
+resume = "Devant un mot qui contient « th », retrouver dans un dictionnaire s’il se prononce /θ/ ou /ð/, et savoir lequel des deux fait vibrer la gorge."
+objectif = "Dans une entrée de dictionnaire, repérer la transcription entre barres obliques, reconnaître les symboles /θ/ et /ð/ et décider lequel des deux se prononce avec vibration."
+situation = "« think » et « this » commencent par les mêmes deux lettres. Un dictionnaire donne /θɪŋk/ pour l’un et /ðɪs/ pour l’autre. Les lettres se ressemblent ; les symboles, non. Comment savoir, devant un mot nouveau, lequel des deux sons attendre ?"
+analogie_titre = "Comme deux portes qui se ressemblent"
+analogie = "Deux portes ont la même poignée, mais l’une est vitrée et l’autre pleine. Ici, « th » est la poignée : les mots s’écrivent presque pareil. Ce qui change se passe derrière : avec /θ/, l’air passe seul ; avec /ð/, la gorge vibre en même temps."
+limite_analogie = "L’image ne dit pas quel mot prend quelle porte, et elle ne remplace pas un modèle sonore : elle aide seulement à distinguer deux gestes, pas à les entendre. Deux mots qui s’écrivent presque pareil peuvent aussi changer de sens, comme « breath » et « breathe »."
+notions = [
+  "/θ/ — consonne sourde : l’air passe entre la langue et les dents sans que la gorge vibre. Le dictionnaire Cambridge associe ce symbole au mot « think ».",
+  "/ð/ — consonne voisée : le même passage d’air, mais la gorge vibre en même temps. Le dictionnaire Cambridge associe ce symbole au mot « this ».",
+  "Transcription — la prononciation écrite entre barres obliques, par exemple /breθ/. Elle décrit des sons, pas des lettres.",
+  "« th » n’est pas un son unique : les mêmes deux lettres servent à deux sons différents, et seule la transcription du dictionnaire dit lequel."
+]
+demarche = [
+  "Cherche le mot dans un dictionnaire qui donne la transcription entre barres obliques.",
+  "Regarde le symbole qui suit « th » dans cette transcription : θ (thêta) ou ð (eth).",
+  "Si c’est /θ/, laisse l’air passer sans faire vibrer la gorge ; si c’est /ð/, ajoute la vibration.",
+  "Pose la main sur la gorge : la vibration confirme lequel des deux gestes tu fais.",
+  "Si le dictionnaire donne une transcription britannique et une américaine, lis celle de la variété que tu travailles et ne les mélange pas."
+]
+exercice = "Voici six mots avec la transcription qu’un dictionnaire donne : « three » /θriː/, « mother » /ˈmʌð.ər/, « breath » /breθ/, « breathe » /briːð/, « think » /θɪŋk/, « this » /ðɪs/. Classe-les en deux colonnes, /θ/ et /ð/. Puis réponds : entre « breath » et « breathe », lequel se termine par un son qui fait vibrer la gorge ?"
+aide = "Le symbole à regarder est celui qui suit immédiatement « th » dans la transcription. θ a la forme d’un cercle traversé par un trait ; ð a la forme d’un d barré. Deux paires se ressemblent beaucoup : « breath » et « breathe », « think » et « this »."
+correction = [
+  "/θ/ : « three » /θriː/, « breath » /breθ/, « think » /θɪŋk/.",
+  "/ð/ : « mother » /ˈmʌð.ər/, « breathe » /briːð/, « this » /ðɪs/.",
+  "« breathe » se termine par /ð/, le son voisé ; « breath » se termine par /θ/, le son sourd. Les deux mots s’écrivent presque pareil et ne se prononcent pas pareil.",
+  "Dans « mother », le « th » n’est pas au début du mot : le symbole se trouve au milieu de la transcription."
+]
+a_retenir = [
+  "Les lettres « th » peuvent noter deux sons différents : /θ/ et /ð/.",
+  "/θ/ est sourd, /ð/ est voisé : la différence se sent avec la main sur la gorge.",
+  "Devant un mot inconnu, c’est la transcription du dictionnaire qui tranche, pas l’orthographe seule.",
+  "Cette fiche ne fournit aucun audio : elle aide à lire une transcription, pas à entendre un son."
+]
+transferer = "La même lecture des symboles sert pour les autres consonnes : beaucoup de dictionnaires donnent la transcription, et la page « Pronunciation symbols » de Cambridge place chaque symbole à côté d’un mot exemple. À vérifier ensuite en écoutant une personne qui parle anglais : aucune fiche écrite ne remplace un modèle sonore, et la variété écoutée (britannique, américaine, autre) doit être nommée."
+revue_le = "2026-10-20"
+intervalle_revue_jours = 90
+
+[[fiche.sources]]
+titre = "Cambridge Dictionary — « Pronunciation symbols »"
+url = "https://dictionary.cambridge.org/help/phonetics.html"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Symboles /θ/ (exemple « think ») et /ð/ (exemple « this »), et explication de la transcription entre barres obliques, consultés le 20 octobre 2026. Aucun texte de la page n’est reproduit."
+
+[[fiche.sources]]
+titre = "Cambridge Dictionary — entrée « three »"
+url = "https://dictionary.cambridge.org/dictionary/english/three"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Transcription /θriː/ relevée le 20 octobre 2026. Aucune définition n’est reprise."
+
+[[fiche.sources]]
+titre = "Cambridge Dictionary — entrée « mother »"
+url = "https://dictionary.cambridge.org/dictionary/english/mother"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Transcription /ˈmʌð.ər/ relevée le 20 octobre 2026. Aucune définition n’est reprise."
+
+[[fiche.sources]]
+titre = "Cambridge Dictionary — entrée « breath »"
+url = "https://dictionary.cambridge.org/dictionary/english/breath"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Transcription /breθ/ relevée le 20 octobre 2026. Aucune définition n’est reprise."
+
+[[fiche.sources]]
+titre = "Cambridge Dictionary — entrée « breathe »"
+url = "https://dictionary.cambridge.org/dictionary/english/breathe"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Transcription /briːð/ relevée le 20 octobre 2026. Aucune définition n’est reprise."
+
+[[fiche.sources]]
+titre = "Conseil de l’Europe — CEFR, échelle de contrôle phonologique (chapitre 5 du Companion Volume)"
+url = "https://rm.coe.int/chapter-5-communicative-language-competences/1680a084c3"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Échelle de contrôle phonologique lue le 20 octobre 2026 : trois sous-échelles (contrôle global, articulation des sons, traits prosodiques) et priorité donnée à l’intelligibilité sur l’accent. Aucun descripteur n’est reproduit dans la fiche."

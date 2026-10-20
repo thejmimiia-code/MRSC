@@ -12,8 +12,8 @@ La décision porte sur l'allocation du temps de relecture, pas sur l'ajout d'une
 
 | Fait vérifiable | Valeur au 20 octobre 2026 | Où le vérifier |
 | --- | --- | --- |
-| Fiches d'apprentissage publiées | 82 dans 15 domaines | `docs/apprentissage/catalogue.toml` |
-| Fiches explicitement « prototypes à relire » | **56** | Statuts du catalogue |
+| Fiches d'apprentissage publiées | 83 dans 15 domaines | `docs/apprentissage/catalogue.toml` |
+| Fiches explicitement « prototypes à relire » | **57** | Statuts du catalogue |
 | Fiches dont la date de revue est échue | **0** | `python3 outils/construire-apprentissages.py --verifier` |
 | Prochaine revue du portefeuille R&D | **2026-11-19** | `docs/rd/portefeuille.toml` |
 | Initiatives R&D suivies | 16, dont 5 en priorité P0 | Portefeuille |
