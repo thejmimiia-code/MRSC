@@ -79,6 +79,8 @@ Une fusion ou une suppression de branche ne doit laisser ni contenu perdu, ni er
 - **Automatiser tout ce qui est mécanique, jamais ce qui demande un jugement.** `outils/auditer-prototypes.py` exécute 17 contrôles objectifs par fiche (champs, HTTPS et métadonnées de droits, dates, doublons, longueur des phrases, typographie, page générée, existence d'une page de source précise) et publie `docs/apprentissage/audit-automatique.md`. Un audit vert ne vaut **ni relecture ni validation** : il dit seulement qu'aucun défaut mécaniquement détectable ne subsiste. Ne jamais présenter ce vert comme une approbation.
 - **Un constat n'est pas un défaut.** Trois états existent : `ok`, `à corriger` (le fait est faux et réparable sans jugement) et `constat` (la machine voit un fait exact qu'elle ne peut pas juger — par exemple une fiche qui ne cite qu'un portail, donc sans page à confronter). Un constat se nomme dans l'audit et dans la page publique ; il ne se présente jamais comme une faute, et il ne s'efface pas tout seul : une personne doit soit ajouter une page précise réellement consultée, soit assumer le portail par écrit dans la fiche.
 - **Consigner une avancée, pas seulement une décision.** `docs/rd/avancees.toml` retient ce qu'un lot a appris de durable ; `outils/construire-avancees.py` produit `docs/rd/avancees.md`. Une entrée exige au moins deux preuves locales qui existent, un contrôle exécutable, une limite écrite d'au moins 120 caractères, une suite et une initiative du portefeuille — sinon c'est une note de journal. Le registre ne certifie rien : il rend l'apprentissage reprenable, limites comprises.
+- **Consigner une source refusée dans un registre relié au catalogue, jamais la citer en façade.** Quand une page répond `403`, exige un compte ou ne dit pas ce qu'on croyait après lecture, elle est inscrite dans `docs/apprentissage/sources-refusees.toml` (`python3 outils/construire-sources-refusees.py`), qui vérifie l'absence de cette URL dans le catalogue actif et l'existence de la source de remplacement.
+- **Toute confrontation mécanique reste un indice non certifiant.** `docs/rd/confrontations-sources.toml` (`python3 outils/confronter-sources.py`) confronte une affirmation à sa source par ancres courtes (1 à 5 mots, sans recopier d'extrait sous droits), interdit tout état de validation, exige d'écrire un faux positif et un faux négatif par fiche, et reste hors de la porte de publication (`deploy-pages.yml`).
 - **Ne jamais écrire une relecture à la place d'une personne.** `docs/apprentissage/relectures.toml` est le registre des relectures humaines ; il démarre vide et un agent ne doit ni le pré-remplir, ni changer un statut vers « Relu — relecture consignée » sans une entrée réelle. `outils/registre-relecture.py --modele <fiche>` imprime le bloc à faire remplir par la personne qui a relu.
 
 ## Livraison d'une tâche
@@ -91,6 +93,10 @@ python3 outils/verifier-rd-continue.py
 python3 outils/construire-carte-lacunes.py --verifier
 python3 outils/auditer-prototypes.py --verifier
 python3 outils/construire-paquets-relecture.py --verifier
+python3 outils/test_sources_refusees.py
+python3 outils/construire-sources-refusees.py --verifier
+python3 outils/test_confronter_sources.py
+python3 outils/confronter-sources.py --verifier
 python3 outils/test_registre_relecture.py
 python3 outils/registre-relecture.py
 python3 outils/construire-apprentissages.py --verifier

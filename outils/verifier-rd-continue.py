@@ -309,6 +309,42 @@ def verifier_avancees(verificateur: Verificateur) -> None:
     )
 
 
+def verifier_sources_refusees(verificateur: Verificateur) -> None:
+    """Le registre des sources refusées doit rester valide, non cité dans le catalogue et synchronisé."""
+    generateur = ROOT / "outils" / "construire-sources-refusees.py"
+    sortie = ROOT / "docs" / "apprentissage" / "sources-refusees.md"
+    if not generateur.is_file() or not sortie.is_file():
+        verificateur.verifier("Registre des sources refusées présent et régénérable", False, "générateur ou sortie absent")
+        return
+    try:
+        specification = importlib.util.spec_from_file_location("sources_refusees", generateur)
+        module = importlib.util.module_from_spec(specification)
+        specification.loader.exec_module(module)
+        registre = module.charger()
+        fiches_urls = module.index_catalogue()
+        aujourdhui = dt.date.today()
+        erreurs = module.valider(registre, aujourdhui, fiches_urls)
+        attendu = module.construire(registre)
+        chiffres = module.resumer(registre)
+    except Exception as erreur:  # noqa: BLE001 - un générateur cassé doit être signalé, pas masqué
+        verificateur.verifier("Registre des sources refusées présent et régénérable", False, str(erreur))
+        return
+    verificateur.verifier(
+        "Sources refusées traçables : motif, date, limite et absence du catalogue actif",
+        not erreurs,
+        f"{chiffres['nombre']} refus sur {len(chiffres['fiches'])} fiche(s)" if not erreurs else " ; ".join(erreurs[:3]),
+    )
+    actuel = sortie.read_text(encoding="utf-8")
+    verificateur.verifier(
+        "Sources refusées synchronisées avec leur registre",
+        actuel == attendu,
+        f"{chiffres['nombre']} refus documenté(s)"
+        if actuel == attendu
+        else "régénérer avec python3 outils/construire-sources-refusees.py",
+    )
+
+
+
 def verifier_audit_automatique(verificateur: Verificateur) -> None:
     """L'audit mécanique doit rester la sortie du catalogue, pas une copie à la main."""
     generateur = ROOT / "outils" / "auditer-prototypes.py"
@@ -431,6 +467,8 @@ def verifier_surface_publique(verificateur: Verificateur) -> None:
         and "blob/main/docs/rd/portefeuille.toml" in page_text
         and "blob/main/docs/rd/journal.md" in page_text
         and "blob/main/docs/rd/avancees.md" in page_text
+        and "blob/main/docs/apprentissage/sources-refusees.md" in page_text
+        and "blob/main/docs/rd/confrontations-sources.md" in page_text
         and 'href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/protocole-essais-usage.md"' in page_text
         and "issues/new?template=proposition-rd.yml" in page_text,
     )
@@ -477,6 +515,7 @@ def main() -> int:
     skills = verifier_skills(verificateur)
     verifier_portefeuille(verificateur, skills)
     verifier_avancees(verificateur)
+    verifier_sources_refusees(verificateur)
     verifier_carte_lacunes(verificateur)
     verifier_paquets_relecture(verificateur)
     verifier_audit_automatique(verificateur)

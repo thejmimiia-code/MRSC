@@ -2523,6 +2523,14 @@ droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail institutionnel facultatif pour retrouver les programmes et ressources de mathématiques ; aucun exercice, texte, exemple ou visuel n’est repris."
 
+[[fiche.sources]]
+titre = "Éduscol — « Résolution d’équations du premier degré à une inconnue » (groupes à effectif réduit)"
+url = "https://eduscol.education.fr/document/59725/download"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Document consulté le 20 octobre 2026 : il rappelle la résolution des équations du type a + x = b en additionnant ou soustrayant un même nombre aux deux membres de l’égalité, la vérification d’une solution par remplacement et l’image mentale de l’équilibre d’une balance de Roberval. Il vise la seconde professionnelle et couvre aussi ax = b ; aucun exercice ni texte du document n’est reproduit."
+
 [[fiche]]
 id = "sciences-meteo-climat"
 titre = "Distinguer météo et climat"
@@ -2938,6 +2946,14 @@ droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail institutionnel facultatif pour rechercher des ressources de lecture de données ; aucun exercice, graphique, texte ou visuel n’est repris."
 
+[[fiche.sources]]
+titre = "Éduscol — « Séquence - Organisation et gestion de données - séance 3 : Résoudre des problèmes en prélevant des informations dans des diagrammes »"
+url = "https://eduscol.education.fr/document/58959/download"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Document consulté le 20 octobre 2026 : il décrit la lecture d’un diagramme en bâtons gradué de 5 en 5 en identifiant les grandeurs sur les axes et en les mettant en relation pour lire les bâtons. Il n’aborde pas les axes tronqués, qui restent un repère de prudence de la fiche ; aucun diagramme, chiffre ni texte du document n’est reproduit."
+
 [[fiche]]
 id = "sciences-calculer-vitesse-moyenne"
 titre = "Calculer une vitesse moyenne simple"
@@ -3245,6 +3261,14 @@ droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail public facultatif pour retrouver des ressources patrimoniales et artistiques ; aucun texte, cartel, image ou interprétation du site n’est repris."
 
+[[fiche.sources]]
+titre = "Ministère de la Culture — « Rédiger des cartels »"
+url = "https://www.culture.gouv.fr/thematiques/photographie/gerer-un-fonds-photographique/rediger-des-cartels"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 20 octobre 2026 : elle distingue les informations d’un cartel simple (auteur, titre, technique ou matériaux utilisés, date de création, lieu de conservation, dimensions, numéro d’inventaire) des cartels développés avec commentaire proposant une aide à l’interprétation. Elle porte sur les fonds photographiques ; aucun texte, cartel ni exemple de la page n’est reproduit."
+
 [[fiche]]
 id = "recherche-question-hypothese"
 titre = "Formuler une question et une hypothèse de recherche"
@@ -3481,6 +3505,14 @@ droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail institutionnel facultatif pour rechercher des ressources de lecture de données ; aucun tableau, exercice, exemple ou visuel n’est repris."
 
+[[fiche.sources]]
+titre = "Éduscol — « Séquence - Organisation et gestion de données - séance 2 : Organiser des données dans un tableau à double entrée »"
+url = "https://eduscol.education.fr/document/58956/download"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Document consulté le 20 octobre 2026 : il définit le tableau à double entrée comme l’organisation de données en croisant deux types d’informations, avec titres des lignes et des colonnes et placement d’une valeur à leur intersection. Aucun tableau, énoncé ni texte du document n’est reproduit ; l’exemple des salles est fictif."
+
 [[fiche]]
 id = "maths-reperer-angle-droit"
 titre = "Repérer un angle droit"
@@ -3665,6 +3697,14 @@ droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail public facultatif pour rechercher des repères cartographiques ; aucun fond de carte, légende, donnée ou visuel n’est repris."
 
+[[fiche.sources]]
+titre = "Éduscol — « Pratiquer différents langages en histoire et en géographie : Réaliser des productions graphiques et cartographiques »"
+url = "https://eduscol.education.fr/document/16807/download"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Document consulté le 20 octobre 2026 : il rappelle les invariants d’une carte (titre, échelle, orientation, légende), le rôle des figurés (points, lignes, surfaces) et la nécessité de se référer à la légende pour comprendre les phénomènes représentés. Il ne traite pas l’accessibilité physique d’un terrain réel ; aucun texte ni croquis du document n’est reproduit."
+
 [[fiche]]
 id = "histoire-situer-siecle"
 titre = "Situer une année dans un siècle"
@@ -3777,6 +3817,14 @@ licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation d
 droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail institutionnel facultatif pour retrouver des ressources de culture numérique ; aucun texte, schéma, définition ou visuel n’est repris."
+
+[[fiche.sources]]
+titre = "Éduscol — « Systèmes de type UNIX : structures de données et algorithmes » (NSI première)"
+url = "https://eduscol.education.fr/document/30046/download"
+licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Document consulté le 20 octobre 2026 : il décrit le rôle d’un système d’exploitation comme interface entre le matériel et l’utilisateur ou les applications, le partage des ressources (processeur, mémoire, fichiers) et le contrôle des droits d’accès. Il porte sur les mécanismes internes d’UNIX en première NSI, que la fiche n’aborde pas ; aucun schéma ni texte n’est reproduit."
 
 [[fiche]]
 id = "numerique-formuler-recherche"

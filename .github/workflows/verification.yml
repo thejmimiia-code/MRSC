@@ -61,6 +61,10 @@ jobs:
           python3 outils/construire-paquets-relecture.py --verifier
           python3 outils/test_registre_relecture.py
           python3 outils/registre-relecture.py
+          python3 outils/test_sources_refusees.py
+          python3 outils/construire-sources-refusees.py --verifier
+          python3 outils/test_confronter_sources.py
+          python3 outils/confronter-sources.py --verifier
 
       - name: Vérifier les avancées R&D consignées
         run: |
