@@ -241,6 +241,33 @@ def _totaux_catalogue() -> tuple[int, int, int]:
 
 
 
+def verifier_paquets_relecture(verificateur: Verificateur) -> None:
+    """Les paquets de relecture doivent rester la sortie du catalogue, jamais une copie à la main."""
+    generateur = ROOT / "outils" / "construire-paquets-relecture.py"
+    sortie = ROOT / "docs" / "apprentissage" / "paquets-relecture.md"
+    if not generateur.is_file() or not sortie.is_file():
+        verificateur.verifier("Paquets de relecture présents et régénérables", False, "générateur ou sortie absent")
+        return
+    try:
+        specification = importlib.util.spec_from_file_location("paquets_relecture", generateur)
+        module = importlib.util.module_from_spec(specification)
+        specification.loader.exec_module(module)
+        elements, titres = module.enrichir(module.charger_module_file_relecture())
+        attendu = module.construire(elements, titres)
+    except Exception as erreur:  # noqa: BLE001 - un générateur cassé doit être signalé, pas masqué
+        verificateur.verifier("Paquets de relecture présents et régénérables", False, str(erreur))
+        return
+    actuel = sortie.read_text(encoding="utf-8")
+    prioritaires = sum(1 for element in elements if element["rang"] <= 2)
+    verificateur.verifier(
+        "Paquets de relecture synchronisés avec le catalogue",
+        actuel == attendu,
+        f"{len(elements)} prototypes, {prioritaires} paquets détaillés"
+        if actuel == attendu
+        else "régénérer avec python3 outils/construire-paquets-relecture.py",
+    )
+
+
 def verifier_surface_publique(verificateur: Verificateur) -> None:
     page = ROOT / "transparence.html"
     aventure = ROOT / "anglais-aventure.html"
@@ -289,6 +316,7 @@ def main() -> int:
     skills = verifier_skills(verificateur)
     verifier_portefeuille(verificateur, skills)
     verifier_carte_lacunes(verificateur)
+    verifier_paquets_relecture(verificateur)
     verifier_surface_publique(verificateur)
     verifier_veille(verificateur)
     if verificateur.alertes:
