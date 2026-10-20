@@ -84,6 +84,7 @@ Pour un changement de contenu ou d'outil, lancer les contrôles appropriés. Por
 ```sh
 python3 -m py_compile simulateur/*.py api/*.py outils/*.py
 python3 outils/verifier-rd-continue.py
+python3 outils/construire-carte-lacunes.py --verifier
 python3 outils/construire-apprentissages.py --verifier
 python3 outils/construire-simulateur.py --verifier
 python3 outils/verifier-site-statique.py

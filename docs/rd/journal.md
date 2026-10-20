@@ -2,6 +2,19 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — Revue de portefeuille et carte des lacunes générée
+
+- **Initiative :** `cartographier-les-lacunes` (nouvelle, P1), plus `veille-savoirs-evolutifs` et `poids-et-sobriete-numerique` mis à jour.
+- **Signal :** poursuivre la R&D, l'innovation et la prospective là où le dépôt le permet sans inventer de source. Le portefeuille comptait 15 initiatives, toutes tournées vers des travaux humains en attente (relectures, choix de charte, décision de scrutin) : aucune ne rendait lisible **ce qui manque au catalogue**.
+- **Constat mesuré :** le référentiel contient **99 sujets** — 8 `actif`, 72 `partiel`, 16 `a-creer`, 3 `revue-experte` — répartis dans 15 domaines, pour 81 fiches dont 55 prototypes. **19 sujets n'ont aucune fiche**, dont **11 relèvent des seuls ISCED-F** du domaine « études supérieures » et 3 exigent une relecture experte (sécurité électrique, premiers secours, activité physique). Ces chiffres étaient dispersés entre deux fichiers et un rapport de générateur ; rien ne les rendait consultables ensemble.
+- **Décision :** `outils/construire-carte-lacunes.py` génère `docs/rd/carte-lacunes.md` depuis `referentiel.toml`, `catalogue.toml` et la date de revue du portefeuille — donc sans aucun chiffre recopié à la main. La carte donne la répartition par domaine, la liste des 19 sujets sans fiche et, pour chacun, l'exigence de preuve avant publication (relecture experte pour les domaines sensibles d'`AGENTS.md` et pour tout statut `revue-experte`).
+- **Garde-fou :** `verifier-rd-continue.py` régénère la carte en mémoire et refuse un fichier divergent. Test négatif exécuté : un total modifié à la main dans la carte fait échouer la porte (`exit 1`), la régénération la remet au vert.
+- **Revue de portefeuille réellement effectuée :** les 16 initiatives ont été relues (preuves présentes, phases et états valides, chiffres cités conformes) ; deux actions périmées corrigées ; `derniere_revue` passe de `2026-10-13` à `2026-10-20`, prochaine revue avant le 2026-11-19.
+- **Résultat :** 16 initiatives dont une nouvelle, une carte de 19 sujets ouverts avec leur exigence de preuve, et deux points de divergence fermés (sonde de production à 23 cibles, chiffres publics recalculés).
+- **Limite :** la carte ne recherche aucune source et ne dit rien de la qualité des fiches existantes. Un sujet absent du référentiel reste invisible : elle décrit une carte de travail, pas un inventaire du savoir. L'exigence de preuve suit le domaine déclaré, donc un sujet de santé rangé sous « études supérieures » (ISCED-F 09) reçoit l'exigence générale.
+- **Contrôles réellement exécutés :** `construire-carte-lacunes.py` (génération puis `--verifier`), test négatif de divergence, `verifier-rd-continue.py` (16 initiatives, carte synchronisée, revue au 2026-10-20), plus la porte complète.
+- **Prochaine action :** ouvrir **un seul** sujet sans fiche du domaine « langues étrangères » (`Écoute, prononciation et ressources audio accessibles`), écrire sa carte de sujet, puis chercher des sources primaires datées ; laisser le sujet ouvert si aucune source accessible ne le documente.
+
 ## 2026-10-20 — La sonde de production couvre enfin les ressources que les pages demandent
 
 - **Initiative :** `coherence-textes-publics`.

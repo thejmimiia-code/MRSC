@@ -15,6 +15,7 @@ from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
 BRIEF = RACINE / "docs" / "rd" / "decision-prospective.md"
+REFERENTIEL = RACINE / "docs" / "apprentissage" / "referentiel.toml"
 CATALOGUE = RACINE / "docs" / "apprentissage" / "catalogue.toml"
 PORTEFEUILLE = RACINE / "docs" / "rd" / "portefeuille.toml"
 APPRENDRE = RACINE / "apprendre.html"
@@ -124,6 +125,12 @@ def principal() -> int:
     portefeuille = charger_toml(PORTEFEUILLE)
     initiatives = portefeuille.get("initiative", [])
     etat_initiative = verifier_etat_initiative(decision, initiatives)
+    referentiel = charger_toml(REFERENTIEL)
+    sujets_sans_fiche = [
+        sujet for domaine in referentiel.get("domaine", []) for sujet in domaine.get("sujet", [])
+        if not (sujet.get("fiches") or [])
+    ]
+    sujets_sans_fiche_experts = sum(sujet.get("statut") == "revue-experte" for sujet in sujets_sans_fiche)
     fiches = len(catalogue)
     prototypes = sum(fiche.get("statut_editorial") == "Prototype à relire" for fiche in catalogue)
     domaines = len({fiche.get("domaine") for fiche in catalogue if fiche.get("domaine")})
@@ -146,6 +153,7 @@ def principal() -> int:
         "initiatives": rf"\| Initiatives R&D suivies \| {total_initiatives}, dont {p0} en priorité P0 \|",
         "revues échues": rf"\| Fiches dont la date de revue est échue \| \*\*{echues}\*\* \|",
         "prochaine revue": rf"\| Prochaine revue du portefeuille R&D \| \*\*{prochaine_revue.isoformat()}\*\* \|",
+        "sujets sans fiche": rf"\| Sujets du référentiel sans aucune fiche \| \*\*{len(sujets_sans_fiche)}\*\*, dont \*\*{sujets_sans_fiche_experts}\*\* à relecture experte \|",
         "Boussole": rf"\| Boussole publiée \| {questions} questions statiques,",
         "poids Apprendre": rf"\| Poids estimé de la page Apprendre \| {poids_mobile} Kio mobile / {poids_ecran} Kio grand écran",
     }

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import importlib.util
 import re
 import sys
 import tomllib
@@ -204,6 +205,30 @@ def verifier_portefeuille(verificateur: Verificateur, skill_slugs: set[str]) -> 
         verificateur.lignes.append(ligne)
 
 
+def verifier_carte_lacunes(verificateur: Verificateur) -> None:
+    """La carte des lacunes doit rester la sortie du référentiel, jamais une copie à la main."""
+    generateur = ROOT / "outils" / "construire-carte-lacunes.py"
+    carte = ROOT / "docs" / "rd" / "carte-lacunes.md"
+    if not generateur.is_file() or not carte.is_file():
+        verificateur.verifier("Carte des lacunes présente et régénérable", False, "générateur ou sortie absent")
+        return
+    try:
+        specification = importlib.util.spec_from_file_location("carte_lacunes", generateur)
+        module = importlib.util.module_from_spec(specification)
+        specification.loader.exec_module(module)
+        fiches, domaines, revue = module.charger()
+        attendu = module.construire(fiches, domaines, revue)
+    except Exception as erreur:  # noqa: BLE001 - un générateur cassé doit être signalé, pas masqué
+        verificateur.verifier("Carte des lacunes présente et régénérable", False, str(erreur))
+        return
+    actuel = carte.read_text(encoding="utf-8")
+    verificateur.verifier(
+        "Carte des lacunes synchronisée avec le référentiel",
+        actuel == attendu,
+        f"référence du {revue}" if actuel == attendu else "régénérer avec python3 outils/construire-carte-lacunes.py",
+    )
+
+
 def verifier_surface_publique(verificateur: Verificateur) -> None:
     page = ROOT / "transparence.html"
     aventure = ROOT / "anglais-aventure.html"
@@ -250,6 +275,7 @@ def main() -> int:
     verificateur = Verificateur()
     skills = verifier_skills(verificateur)
     verifier_portefeuille(verificateur, skills)
+    verifier_carte_lacunes(verificateur)
     verifier_surface_publique(verificateur)
     verifier_veille(verificateur)
     if verificateur.alertes:

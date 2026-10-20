@@ -4,7 +4,7 @@
 
 [meta]
 version = 1
-derniere_revue = 2026-10-13
+derniere_revue = 2026-10-20
 cadence_revue_jours = 30
 source_cartographie = "docs/apprentissage/referentiel.toml"
 source_catalogue = "docs/apprentissage/catalogue.toml"
@@ -201,6 +201,19 @@ etat = "a-tester"
 domaines = ["numerique-ia", "sciences-techniques-environnement", "methodes-communication"]
 question = "Quels octets peuvent être évités sans retirer de contenu, de repli sans JavaScript, d’accessibilité ni de qualité visuelle, et que peut-on réellement affirmer à partir d’une mesure locale ?"
 preuves = ["docs/rd/poids-et-sobriete-numerique.md", "docs/rd/poids-pages.md", "docs/rd/derives-images.json", "outils/optimiser-images.py", "outils/verifier-poids-pages.py", "index.html", "anglais-aventure.html", "apprendre.html", "assets/css/site.css", "outils/test-experience.cjs"]
-prochaine_action = "Les en-têtes de GitHub Pages ont été relevés le 17 octobre 2026 (issue #90) : types AVIF/WebP corrects, gzip sur les fichiers texte, cache de 600 secondes ; le workflow mensuel refait ce relevé et ne couvre pas Vercel, qui héberge le simulateur du dépôt amont. Faire maintenant relire les trois illustrations par une personne et mesurer sur appareil et réseau réels (LCP, CLS, octets transférés) sans convertir ces mesures en bilan carbone. Ne pas présenter la passe comme un audit RGESN ni comme une preuve d’impact évité."
+prochaine_action = "Les en-têtes de GitHub Pages ont été relevés le 17 octobre 2026 (issue #90) : types AVIF/WebP corrects, gzip sur les fichiers texte, cache de 600 secondes ; la sonde couvre depuis le 20 octobre 2026 vingt-trois fichiers, icônes PNG et llms.txt compris, et le relevé du 20 octobre les donne tous en 200 avec leur type attendu. Le workflow mensuel refait ce relevé et ne couvre pas Vercel, qui héberge le simulateur du dépôt amont. Faire maintenant relire les trois illustrations par une personne et mesurer sur appareil et réseau réels (LCP, CLS, octets transférés) sans convertir ces mesures en bilan carbone. Ne pas présenter la passe comme un audit RGESN ni comme une preuve d’impact évité."
 criteres_sortie = ["Chaque grande image a des variantes AVIF/WebP dimensionnées avec un repli JPEG, et les tailles sont vérifiées hors ligne.", "Les pages publiques restent sous les budgets de travail sans retirer de contenu, de texte alternatif ni de repli sans JavaScript.", "Les types MIME, la compression et le cache sont vérifiés sur au moins un hébergement réel avant toute revendication de gain en production.", "Le relevé d’en-têtes reste hors de la porte hors ligne et est refait après une modification du contrôleur ou du site.", "La sélection des formats et le repli de la scène sont testés dans un navigateur, et les limites de la mesure sont publiées avec les chiffres.", "Le manifeste des variantes reste reproductible et aucune source n’est supprimée au profit d’un format unique."]
 skills = ["integration-securite", "strategie-tests", "analyse-donnees-reproductible", "recherche-sources", "evaluation-maintenance"]
+
+[[initiative]]
+id = "cartographier-les-lacunes"
+titre = "Rendre visibles les sujets sans fiche et leurs exigences de preuve"
+priorite = "P1"
+phase = "veille"
+etat = "en-cours"
+domaines = ["langues-etrangeres", "economie-finances", "sciences-techniques-environnement", "demarches-droits-travail", "informatique-programmation", "etudes-superieures-recherche", "sante-securite-corps"]
+question = "Quels sujets du référentiel n'ont encore aucune fiche, et quelle preuve faut-il avant d'en publier une sans transformer une case vide en contenu réputé validé ?"
+preuves = ["docs/rd/carte-lacunes.md", "outils/construire-carte-lacunes.py", "docs/apprentissage/referentiel.toml", "docs/apprentissage/catalogue.toml", "docs/apprentissage/file-relecture.md", "docs/rd-innovation-continue.md"]
+prochaine_action = "Choisir un seul sujet parmi les dix-neuf sans fiche de `docs/rd/carte-lacunes.md`, en commencer par un dont le domaine n'exige pas de relecture spécialisée, écrire sa carte de sujet, puis rechercher des sources primaires datées avant toute rédaction. Si aucune source primaire accessible ne documente le sujet, le laisser ouvert et le consigner comme tel : ne jamais remplir une lacune par une affirmation non traçable. Régénérer la carte après chaque modification du référentiel."
+criteres_sortie = ["Chaque sujet sans fiche porte une exigence de preuve explicite selon son domaine et son statut.", "Un sujet n'est documenté qu'avec des sources primaires datées, ou reste ouvert sans contenu inventé.", "Aucun sujet du référentiel ne disparaît sans trace lors d'une modification de la carte.", "La carte reste générée depuis le référentiel, jamais recopiée à la main."]
+skills = ["cartographie-connaissances", "recherche-sources", "conception-pedagogique", "evaluation-maintenance"]
