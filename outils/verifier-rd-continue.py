@@ -298,7 +298,8 @@ def verifier_audit_automatique(verificateur: Verificateur) -> None:
     verificateur.verifier(
         "Audit automatique synchronisé avec le catalogue",
         actuel == attendu,
-        f"{chiffres['fiches']} prototypes, {chiffres['controles']} contrôles par fiche, {chiffres['echecs']} échec(s)"
+        f"{chiffres['fiches']} prototypes, {chiffres['controles']} contrôles par fiche, "
+        f"{chiffres['echecs']} échec(s), {chiffres.get('constats', 0)} constat(s)"
         if actuel == attendu
         else "régénérer avec python3 outils/auditer-prototypes.py",
     )
@@ -366,6 +367,12 @@ def etat_audit_automatique() -> str:
         return (
             f"les {chiffres['fiches']} prototypes sont soumis aux {chiffres['controles']} contrôles automatiques du dépôt"
             f" ({chiffres['echecs']} défaut(s) mécanique(s) à corriger)"
+        )
+    if chiffres.get("constats"):
+        return (
+            f"les {chiffres['fiches']} prototypes sont soumis aux {chiffres['controles']} contrôles automatiques du dépôt"
+            f" ({chiffres['constats']} constat{'s' if chiffres['constats'] > 1 else ''}"
+            " de sources à trancher par une personne)"
         )
     return (
         f"les {chiffres['fiches']} prototypes sont soumis aux {chiffres['controles']} contrôles automatiques du dépôt"

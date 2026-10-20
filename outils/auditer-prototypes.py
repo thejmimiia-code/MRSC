@@ -28,6 +28,7 @@ import sys
 import tomllib
 from datetime import date
 from pathlib import Path
+from urllib.parse import urlparse
 
 RACINE = Path(__file__).resolve().parent.parent
 
@@ -49,6 +50,12 @@ CHAMPS_REQUIS = (
 MODES = ("reference-factuelle", "reutilisation-sous-licence", "permission-expressee", "permission-expresse")
 LONGUEUR_PHRASE_MAX = 45
 LONGUEUR_LIMITE_MIN = 120
+
+# Troisième état possible d'un contrôle : la machine constate un fait exact, mais
+# ce fait n'est pas un défaut mécanique — elle ne peut pas décider s'il est
+# acceptable. Ici : une fiche qui ne cite que des portails n'offre aucune page à
+# confronter. Le fait se nomme, la décision revient à une personne.
+ETAT_A_VERIFIER = "a-verifier"
 
 # Les questions qu'aucun script ne peut trancher. Elles sont affichées telles
 # quelles, à côté des contrôles automatiques, pour que la frontière soit lisible.
@@ -286,7 +293,39 @@ def controler(fiche: dict, fiches: dict[str, dict], references: dict[str, list[s
         " ; ".join(problemes) if problemes else f"{len(sources)} source(s), dates de contrôle au plus tard le {aujourdhui.isoformat()}",
     )
 
-    # 14. Page publiée
+    # 14. Sources confrontables : une page d'accueil ne permet de vérifier aucune
+    # affirmation. Citer un portail n'est pas une faute — beaucoup de fiches
+    # l'assument et l'écrivent — mais il n'y a alors rien à confronter : le fait
+    # est nommé, la décision (garder le portail ou viser une page) revient à une
+    # personne. C'est donc un constat, pas un échec mécanique.
+    portails = []
+    for source in sources:
+        adresse = urlparse(str(source.get("url", "")))
+        if adresse.path in ("", "/"):
+            portails.append(source)
+    if not sources:
+        ajouter(
+            "precision",
+            "Au moins une source pointe une page précise, pas seulement un portail",
+            ETAT_A_VERIFIER,
+            "aucune source déclarée : rien à confronter",
+        )
+    elif len(portails) < len(sources):
+        ajouter(
+            "precision",
+            "Au moins une source pointe une page précise, pas seulement un portail",
+            "ok",
+            f"{len(sources) - len(portails)}/{len(sources)} source(s) précise(s)",
+        )
+    else:
+        ajouter(
+            "precision",
+            "Au moins une source pointe une page précise, pas seulement un portail",
+            ETAT_A_VERIFIER,
+            f"{len(portails)} portail(s) seulement : rien à confronter, à trancher par une personne",
+        )
+
+    # 15. Page publiée
     page = PAGES / f"{identifiant}.html"
     if not page.is_file():
         ajouter("page", "La page générée existe et affiche le statut", "a-corriger", "page absente")
@@ -310,7 +349,8 @@ def auditer(fiches: list[dict], references: dict[str, list[str]], aujourdhui: da
             continue
         resultats = controler(fiche, par_id, references, aujourdhui)
         echecs = [resultat for resultat in resultats if resultat["etat"] == "a-corriger"]
-        audits.append({"fiche": fiche, "resultats": resultats, "echecs": echecs})
+        constats = [resultat for resultat in resultats if resultat["etat"] == ETAT_A_VERIFIER]
+        audits.append({"fiche": fiche, "resultats": resultats, "echecs": echecs, "constats": constats})
     audits.sort(key=lambda audit: (-len(audit["echecs"]), audit["fiche"]["domain" if False else "domaine"], audit["fiche"]["id"]))
     return audits
 
@@ -322,6 +362,8 @@ def resume(audits: list[dict]) -> dict[str, int]:
         "sans_echec": sum(1 for audit in audits if not audit["echecs"]),
         "avec_echec": sum(1 for audit in audits if audit["echecs"]),
         "echecs": sum(len(audit["echecs"]) for audit in audits),
+        "fiches_a_verifier": sum(1 for audit in audits if audit["constats"]),
+        "constats": sum(len(audit["constats"]) for audit in audits),
     }
 
 
@@ -332,12 +374,17 @@ def construire(audits: list[dict], titres: dict[str, str], aujourdhui: date) -> 
         "",
         "**Document de travail généré.** Il exécute, fiche par fiche, les contrôles qu'un programme peut "
         "réellement trancher : présence et forme des champs, adresses et métadonnées de droits, dates de revue, "
-        "référencement, doublons exacts, longueur des phrases, typographie, page générée. Il ne lit aucune source, "
-        "ne juge aucune formulation et ne relit rien.",
+        "référencement, doublons exacts, longueur des phrases, typographie, page générée, existence d'une page "
+        "de source précise. Il ne lit aucune source, ne juge aucune formulation et ne relit rien.",
         "",
         "**Ce que veut dire « tout est vert » :** aucun défaut mécaniquement détectable n'a été trouvé. "
         "Ce n'est ni une relecture, ni une validation, ni une autorisation de publication. La relecture humaine "
         "se consigne dans [`relectures.toml`](relectures.toml) et se contrôle avec `python3 outils/registre-relecture.py`.",
+        "",
+        "**Trois états, pas deux.** Un contrôle est `ok`, `à corriger` — le fait est faux et réparable sans "
+        "jugement — ou `constat` : la machine voit un fait exact, mais elle ne peut pas dire s'il est "
+        "acceptable. Un constat n'est pas un défaut : il se nomme ici pour qu'une personne tranche, et il "
+        "n'empêche pas la page publique de dire la vérité, à condition qu'elle le dise.",
         "",
         f"**Date de l'audit :** {aujourdhui.isoformat()}.",
         "",
@@ -350,6 +397,8 @@ def construire(audits: list[dict], titres: dict[str, str], aujourdhui: date) -> 
         ligne(["Fiches sans aucun échec mécanique", str(chiffres["sans_echec"])]),
         ligne(["Fiches avec au moins un échec", str(chiffres["avec_echec"])]),
         ligne(["Échecs mécaniques au total", str(chiffres["echecs"])]),
+        ligne(["Fiches avec un constat à trancher par une personne", str(chiffres["fiches_a_verifier"])]),
+        ligne(["Constats nommés (ni échecs, ni validations)", str(chiffres["constats"])]),
         "",
     ]
     if chiffres["echecs"]:
@@ -363,6 +412,31 @@ def construire(audits: list[dict], titres: dict[str, str], aujourdhui: date) -> 
         lignes.append(ligne(["---", "---", "---:"]))
         for libelle, concernées in sorted(par_controle.items(), key=lambda paire: -len(paire[1])):
             lignes.append(ligne([libelle, ", ".join(sorted(concernées)), str(len(concernées))]))
+        lignes.append("")
+
+    if chiffres["constats"]:
+        par_constat: dict[str, list[str]] = {}
+        for audit in audits:
+            for constat in audit["constats"]:
+                par_constat.setdefault(constat["libelle"], []).append(audit["fiche"]["id"])
+        lignes.append("### Constats nommés, à trancher par une personne")
+        lignes.append("")
+        lignes.append(
+            "Ces contrôles ont vu un fait exact que la machine ne peut pas juger. Rien n'est cassé : "
+            "la fiche dit ce qu'elle fait, et une personne doit décider si cela suffit."
+        )
+        lignes.append("")
+        lignes.append(ligne(["Constat", "Fiches concernées", "Nombre"]))
+        lignes.append(ligne(["---", "---", "---:"]))
+        for libelle, concernees in sorted(par_constat.items(), key=lambda paire: -len(paire[1])):
+            lignes.append(ligne([libelle, ", ".join(sorted(concernees)), str(len(concernees))]))
+        lignes.append("")
+        lignes.append(
+            "Pour la ligne « page précise » : ces fiches ne citent que des portails (racine d'un site). "
+            "Elles déclarent souvent ce choix dans `utilisation`. Sans page précise, la question 1 du §4 "
+            "ne peut pas être tranchée en l'état : il faut soit ajouter une page consultée et vérifiée, "
+            "soit assumer le portail par écrit dans la fiche."
+        )
         lignes.append("")
 
     lignes.append("## 2. Ce que la machine a vu, sans le juger")
@@ -403,19 +477,21 @@ def construire(audits: list[dict], titres: dict[str, str], aujourdhui: date) -> 
     lignes.append("")
     lignes.append("## 3. Détail par fiche")
     lignes.append("")
-    lignes.append(ligne(["Fiche", "Domaine", "Contrôles passés", "À corriger", "Détail des échecs"]))
-    lignes.append(ligne(["---", "---", "---:", "---:", "---"]))
+    lignes.append(ligne(["Fiche", "Domaine", "Contrôles passés", "À corriger", "Constats", "Détail des échecs et des constats"]))
+    lignes.append(ligne(["---", "---", "---:", "---:", "---:", "---"]))
     for audit in audits:
         fiche = audit["fiche"]
         total = len(audit["resultats"])
-        detail = " ; ".join(f"{echec['libelle']} ({echec['detail']})" for echec in audit["echecs"]) or "—"
+        details = [f"à corriger : {echec['libelle']} ({echec['detail']})" for echec in audit["echecs"]]
+        details += [f"constat : {constat['libelle']} ({constat['detail']})" for constat in audit["constats"]]
         lignes.append(
             ligne([
                 f"[{fiche['titre']}](fiches/{fiche['id']}.html)",
                 titres.get(fiche["domaine"], fiche["domaine"]),
-                str(total - len(audit["echecs"])),
+                str(total - len(audit["echecs"]) - len(audit["constats"])),
                 str(len(audit["echecs"])),
-                detail,
+                str(len(audit["constats"])),
+                " ; ".join(details) or "—",
             ])
         )
     lignes.append("")
@@ -427,11 +503,18 @@ def construire(audits: list[dict], titres: dict[str, str], aujourdhui: date) -> 
     for question in HUMAIN_ONLY:
         lignes.append(f"- {question}")
     lignes.append("")
+    lignes.append(
+        "Quand un constat « page précise » figure ci-dessus, la première de ces questions ne peut pas être "
+        "tranchée : il n'y a pas de page à confronter. Le portail peut rester, mais alors la fiche l'assume "
+        "par écrit, et cette limite se dit dans la page publique."
+    )
+    lignes.append("")
     lignes.append("## 5. Comment s'en servir")
     lignes.append("")
     lignes.append("1. Corriger d'abord les échecs mécaniques : ils sont objectifs et souvent automatiques à réparer.")
-    lignes.append("2. Une fois une fiche sans échec, ouvrir son paquet de relecture (`python3 outils/construire-paquets-relecture.py --fiche <identifiant>`) : il ne reste que les questions du §4.")
-    lignes.append("3. Consigner la relecture humaine dans `relectures.toml` (`--modele`), puis lancer `python3 outils/registre-relecture.py`.")
+    lignes.append("2. Trancher les constats : soit ajouter une page précise réellement consultée, soit assumer le portail par écrit dans la fiche. Un constat ne bloque pas, mais il ne s'efface pas tout seul.")
+    lignes.append("3. Une fois une fiche sans échec, ouvrir son paquet de relecture (`python3 outils/construire-paquets-relecture.py --fiche <identifiant>`) : il ne reste que les questions du §4.")
+    lignes.append("4. Consigner la relecture humaine dans `relectures.toml` (`--modele`), puis lancer `python3 outils/registre-relecture.py`.")
     lignes.append("")
     lignes.append("Régénérer avec `python3 outils/auditer-prototypes.py` ; vérifier avec `--verifier`.")
     lignes.append("")
@@ -462,24 +545,31 @@ def main() -> int:
         audit = trouves[0]
         print(f"# {audit['fiche']['id']} — {audit['fiche']['titre']}")
         for resultat in audit["resultats"]:
-            marque = {"ok": "OK  ", "a-corriger": "À CORRIGER"}.get(resultat["etat"], resultat["etat"].upper())
+            marque = {
+                "ok": "OK  ",
+                "a-corriger": "À CORRIGER",
+                ETAT_A_VERIFIER: "CONSTAT",
+            }.get(resultat["etat"], resultat["etat"].upper())
             print(f"{marque:11} {resultat['libelle']} — {resultat['detail']}")
         print(f"\nReste à trancher par une personne : {len(HUMAIN_ONLY)} questions (voir l'audit complet).")
         return 0
 
     contenu = construire(audits, titres, aujourdhui)
     sortie = analysis.sortie if analysis.sortie.is_absolute() else RACINE / analysis.sortie
+    # Une sortie écrite hors du dépôt (--sortie /tmp/…) reste un cas normal.
+    nom_sortie = str(sortie.relative_to(RACINE)) if sortie.is_relative_to(RACINE) else str(sortie)
     if analysis.verifier:
         if not sortie.exists():
-            print(f"{sortie.relative_to(RACINE)} absent : lancez le script sans --verifier.", file=sys.stderr)
+            print(f"{nom_sortie} absent : lancez le script sans --verifier.", file=sys.stderr)
             return 1
         if sortie.read_text(encoding="utf-8") != contenu:
-            print(f"{sortie.relative_to(RACINE)} a divergé du catalogue : régénérez-le.", file=sys.stderr)
+            print(f"{nom_sortie} a divergé du catalogue : régénérez-le.", file=sys.stderr)
             return 1
         chiffres = resume(audits)
         print(
-            f"L'audit automatique est à jour ({sortie.relative_to(RACINE)}) : "
-            f"{chiffres['fiches']} prototypes, {chiffres['sans_echec']} sans échec mécanique, {chiffres['echecs']} échec(s)."
+            f"L'audit automatique est à jour ({nom_sortie}) : "
+            f"{chiffres['fiches']} prototypes, {chiffres['sans_echec']} sans échec mécanique, "
+            f"{chiffres['echecs']} échec(s), {chiffres['constats']} constat(s) à trancher."
         )
         return 0
 
@@ -487,7 +577,7 @@ def main() -> int:
     sortie.write_text(contenu, encoding="utf-8")
     chiffres = resume(audits)
     print(
-        f"{sortie.relative_to(RACINE)} écrit : {len(contenu)} caractères — "
+        f"{nom_sortie} écrit : {len(contenu)} caractères — "
         f"{chiffres['fiches']} prototypes, {chiffres['sans_echec']} sans échec, {chiffres['echecs']} échec(s)."
     )
     return 0

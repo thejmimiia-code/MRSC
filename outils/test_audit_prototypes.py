@@ -190,6 +190,48 @@ class AuditMord(unittest.TestCase):
         self.assertEqual(etats(fiche)["sources_dates"], "a-corriger")
 
 
+class ConstatNEstPasUnEchec(unittest.TestCase):
+    """Un portail seul n'est pas une faute : c'est un fait que la machine nomme."""
+
+    def test_portail_seul_donne_un_constat(self):
+        fiche = fiche_valide()
+        fiche["sources"][0]["url"] = "https://exemple.org/"
+        self.assertEqual(etats(fiche)["precision"], MODULE.ETAT_A_VERIFIER)
+
+    def test_racine_avec_parametre_reste_un_portail(self):
+        fiche = fiche_valide()
+        fiche["sources"][0]["url"] = "https://exemple.org/?q=1"
+        self.assertEqual(etats(fiche)["precision"], MODULE.ETAT_A_VERIFIER)
+
+    def test_un_portail_plus_une_page_precise_passe(self):
+        fiche = fiche_valide()
+        second = copy.deepcopy(fiche["sources"][0])
+        second["url"] = "https://exemple.org/"
+        second["titre"] = "Portail de test"
+        fiche["sources"].append(second)
+        self.assertEqual(etats(fiche)["precision"], "ok")
+
+    def test_le_constat_n_entre_pas_dans_les_echecs(self):
+        fiche = fiche_valide()
+        fiche["sources"][0]["url"] = "https://exemple.org/"
+        audits = MODULE.auditer([fiche], {"demo-fiche": ["methodes-communication"]}, AUJOURDHUI, seulement_prototypes=False)
+        # Seule la page générée manque hors dépôt : le constat, lui, n'est pas un échec.
+        self.assertEqual([echec["cle"] for echec in audits[0]["echecs"]], ["page"])
+        self.assertEqual([constat["cle"] for constat in audits[0]["constats"]], ["precision"])
+        chiffres = MODULE.resume(audits)
+        self.assertEqual((chiffres["echecs"], chiffres["constats"], chiffres["fiches_a_verifier"]), (1, 1, 1))
+
+    def test_le_document_nomme_les_constats_sans_les_appeler_defauts(self):
+        fiche = fiche_valide()
+        fiche["sources"][0]["url"] = "https://exemple.org/"
+        audits = MODULE.auditer([fiche], {"demo-fiche": ["methodes-communication"]}, AUJOURDHUI, seulement_prototypes=False)
+        contenu = MODULE.construire(audits, {"methodes-communication": "Méthodes"}, AUJOURDHUI)
+        self.assertIn("Constats nommés, à trancher par une personne", contenu)
+        self.assertIn("Un constat n'est pas un défaut", contenu)
+        self.assertIn("| Fiches avec au moins un échec | 1 |", contenu)  # seule la page manque ici
+        self.assertIn("| Constats nommés (ni échecs, ni validations) | 1 |", contenu)
+
+
 class DocumentGenere(unittest.TestCase):
     def test_audit_reel_du_depot_est_coherent(self):
         fiches, titres, references = MODULE.charger()

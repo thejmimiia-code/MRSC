@@ -65,7 +65,7 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | 36 | [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 37 | [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 38 | [Demander de l’aide ou une répétition en anglais](fiches/langue-anglais-demander-aide.html) | Langues étrangères et interculturel | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 39 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 39 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
 | 40 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-20 | aucune |
 | 41 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 3 | 6 | 6 non vérifiée(s) | 2026-10-20 | aucune |
 | 42 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
@@ -76,9 +76,9 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | 47 | [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 48 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
 | 49 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 50 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 50 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
 | 51 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 52 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 52 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
 | 53 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 54 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 55 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
@@ -97,7 +97,7 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | Priorité de tri | 1 — domaine à relecture spécialisée — politique publique, médias et information |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/civ-choisir-source-publique.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 16/17 — aucun défaut mécanique détecté ; constat à trancher par une personne : 5 portail(s) seulement : rien à confronter, à trancher par une personne |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -151,7 +151,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — politique publique, médias et information |
 | Termes repérés | droit et démarches : juridique ; politique publique : collectivité |
 | Fiche publiée | [lire la fiche](fiches/civ-reperer-echelle-institution.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -202,7 +202,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — politique publique, médias et information |
 | Termes repérés | politique publique : scrutin, vote, élection |
 | Fiche publiée | [lire la fiche](fiches/civ-reperer-info-electorale.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -253,7 +253,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — droit, démarches et travail |
 | Termes repérés | politique publique : service public |
 | Fiche publiée | [lire la fiche](fiches/civ-trouver-service-public.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -305,7 +305,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | — |
 | Fiche publiée | [lire la fiche](fiches/econ-comparer-prix-unitaires.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -356,7 +356,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | argent : crédit, prêt |
 | Fiche publiée | [lire la fiche](fiches/econ-distinguer-interet-frais.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 16/17 — aucun défaut mécanique détecté ; constat à trancher par une personne : 2 portail(s) seulement : rien à confronter, à trancher par une personne |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -407,7 +407,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | — |
 | Fiche publiée | [lire la fiche](fiches/econ-lire-facture.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -458,7 +458,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | droit et démarches : juridique, litige, recours |
 | Fiche publiée | [lire la fiche](fiches/econ-lire-mention-garantie.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -509,7 +509,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — santé et sécurité |
 | Termes repérés | santé : diagnostic, symptôme, traitement |
 | Fiche publiée | [lire la fiche](fiches/sante-reperer-source-publique.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 16/17 — aucun défaut mécanique détecté ; constat à trancher par une personne : 2 portail(s) seulement : rien à confronter, à trancher par une personne |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -560,7 +560,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/recherche-lire-etude.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -608,7 +608,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | argent : prêt ; données personnelles : données personnelles |
 | Fiche publiée | [lire la fiche](fiches/recherche-question-hypothese.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -657,7 +657,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : succession |
 | Fiche publiée | [lire la fiche](fiches/histoire-lire-frise.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -706,7 +706,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | données personnelles : donnée personnelle, données personnelles, mot de passe |
 | Fiche publiée | [lire la fiche](fiches/info-lire-adresse-web.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -755,7 +755,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/prog-lire-licence-logiciel.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -805,7 +805,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/fr-argumenter-avec-exemple.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -854,7 +854,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/fr-reperer-idee-texte.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -903,7 +903,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | données personnelles : donnée personnelle |
 | Fiche publiée | [lire la fiche](fiches/numerique-formuler-recherche.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -952,7 +952,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | données personnelles : données personnelles |
 | Fiche publiée | [lire la fiche](fiches/numerique-organiser-fichiers.html) |
-| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
+| Contrôles automatiques | 16/17 — aucun défaut mécanique détecté ; constat à trancher par une personne : 1 portail(s) seulement : rien à confronter, à trancher par une personne |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**

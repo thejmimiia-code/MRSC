@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — Trois états au lieu de deux : un constat n'est pas un défaut
+
+- **Initiative :** `relire-les-44-prototypes` (P0). Suite directe de l'audit à 16 contrôles : le 17ᵉ contrôle, ajouté dans la même journée, a révélé 22 fiches dont toutes les sources sont des portails.
+- **Ce que la mesure disait :** sur 57 prototypes, **22 ne citaient aucune page précise** — seulement des racines de sites (`eduscol.education.fr/`, `service-public.gouv.fr`, `data.gouv.fr`…). Sans page, aucune affirmation ne peut être confrontée : la question 1 (« la source dit-elle ce que la fiche affirme ? ») devenait impossible à trancher.
+- **Décision :** ne pas transformer cela en 22 échecs. Citer un portail n'est pas mécaniquement faux, et beaucoup de fiches l'assument déjà par écrit (« portail facultatif pour rechercher… »). Le contrôle rend donc un **constat** : la machine nomme le fait, elle ne le juge pas. Trois états désormais — `ok`, `à corriger`, `constat` — et un constat n'entre ni dans les échecs, ni dans les verts.
+- **Effet sur la chaîne :** l'audit compte séparément échecs et constats ; chaque paquet de relecture affiche « aucun défaut mécanique détecté ; constat à trancher par une personne : … » ; la phrase publique est recalculée depuis l'audit et nomme les constats ; `AGENTS.md` et la grille de relecture distinguent les deux restes.
+- **Relecture humaine commencée, sur des vérifications réelles :** trois pages précises ont été ouvertes et confrontées au contenu de la fiche, puis ajoutées au catalogue avec leur date de consultation — Cambridge Dictionary, entrée « spell » (`langue-anglais-epeler` : « How do you spell…? », verbe `spell`, A2) ; Éduscol, « Déterminer une vitesse » (`sciences-calculer-vitesse-moyenne` : vitesse = distance ÷ durée, 400 m en 170 s = 2,35 m/s) ; Éduscol, « Espace et géométrie au cycle 3 : les angles » (`maths-reperer-angle-droit` : sommet, côté, angle droit à 90°).
+- **Résultat mesuré :** **57 prototypes, 17 contrôles, 0 échec mécanique, 19 constats** ; 89 sources déclarées dont 88 en licence « non vérifiée » ; 0 relecture humaine consignée.
+- **Ce que ces trois ajouts ne sont pas :** une relecture consignée. Un agent a trouvé une page publique qui étaye une affirmation ; il n'a ni expertise de domaine, ni mandat de publication. Le registre `relectures.toml` reste vide, et les 19 constats restent à trancher — page précise à ajouter, ou portail assumé par écrit.
+- **Prochaine action :** traiter les 19 constats un par un, en commençant par ceux qui n'annoncent pas leur portail (`civ-choisir-source-publique`, `info-table-requete-web`), et continuer la relecture humaine là où une page publique suffit à confronter la fiche.
+
 ## 2026-10-20 — Ce qui est mécanique est automatisé : 16 contrôles par fiche
 
 - **Initiative :** `relire-les-44-prototypes` (P0). Demande reçue : « on ne peut pas automatiser toutes ces tâches ? » — la réponse honnête est : **tout ce qui ne demande pas de jugement, oui**.
