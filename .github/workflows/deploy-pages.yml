@@ -52,6 +52,11 @@ jobs:
       - name: Validate the generated simulator page
         run: python3 outils/construire-simulateur.py --verifier
 
+      - name: Validate the reusable R&D advances
+        run: |
+          python3 outils/test_avancees.py
+          python3 outils/construire-avancees.py --verifier
+
       - name: Validate the R&D portfolio
         run: python3 outils/verifier-rd-continue.py
 

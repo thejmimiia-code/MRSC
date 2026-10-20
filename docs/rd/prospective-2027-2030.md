@@ -155,6 +155,27 @@ Une passe de mesure et d’optimisation a complété cette note le 17 octobre 20
 
 **Prochaine action ajoutée :** vérifier les octets réellement servis et les types MIME sur GitHub Pages et Vercel, puis faire une revue visuelle humaine des images ; ne réviser l’état de l’initiative `poids-et-sobriete-numerique` qu’après ces contrôles.
 
+## 9 bis. Prolongement R&D — les avancées d'octobre entrent dans la note
+
+Une journée de travail sur les sources des prototypes (20 octobre 2026) a produit six **avancées réutilisables**, désormais consignées et vérifiées dans [`avancees.toml`](avancees.toml) et [`avancees.md`](avancees.md). Elles ne sont pas des résultats d'usage ; elles changent la manière de travailler et, par conséquent, trois questions prospectives.
+
+| Avancée | Ce qu'elle déplace dans cette note |
+|---|---|
+| Un contrôle automatique a trois états (`ok`, `à corriger`, `constat`) | Le scénario B décrivait le risque de confondre un vert technique et une validation. Le dépôt sait maintenant nommer un reste sans le traiter comme un défaut : la traçabilité n'est plus binaire. |
+| Une source-racine doit s'annoncer comme portail | La « réponse robuste » du scénario B supposait un lien entre affirmation et source. On sait mesurer un lien faible : une racine de site annoncée comme page lue devient une erreur vérifiable. |
+| Aucune page n'est citée sans avoir été ouverte | Douze fiches ont été traitées en ouvrant la page ; deux pages ont été refusées après lecture. La preuve documentaire redevient un acte daté, pas une capture de recherche. |
+| Une source illisible se refuse et se consigne | Le scénario D (archipel opaque) devient partiellement observable : 403, paywall et page qui ne dit pas ce qu'on croyait sont désormais des faits consignés, pas des oublis. |
+| La phrase publique se recalcule | Le scénario A reposait sur l'idée que l'état affiché suit l'état réel. C'est maintenant une porte de vérification, pas une intention. |
+| Une avancée sans preuve, contrôle et limite n'est pas une avancée | La « capacité de relecture » ne dépend plus seulement d'une personne disponible : ce qui a été appris se transmet avec sa preuve et sa limite. |
+
+**Trois questions prospectives ajoutées** — formulées à partir de ces avancées internes, sans aucune source externe nouvelle, et donc sans conclusion de tendance :
+
+1. **Peut-on confronter une affirmation à la page qui est censée l'étayer sans lire à la place d'une personne ?** Ni cette note, ni le dépôt ne le savent. La piste est ouverte dans l'initiative `confronter-une-affirmation-a-sa-source`, avec l'exigence de mesurer d'abord les faux positifs et les faux négatifs sur trois fiches. Un indice daté ne sera jamais publié comme validation.
+2. **Que devient une fiche quand sa source se ferme ?** Une page en 403 ou passée derrière un paiement ne disparaît pas du catalogue : elle devient une question de maintenance et, peut-être, de retrait. L'initiative `sources-fermees-et-registre-des-refus` doit rendre ces refus visibles sans les confondre avec des erreurs de contenu.
+3. **Combien de temps un constat reste-t-il vrai ?** Un constat de source-portail est juste tant que la fiche ne cite pas de page ; il devient faux dès qu'une page lue est ajoutée, et la machine le voit. Ce cycle court — quelques heures entre deux mesures — interroge la cadence de revue du portefeuille, fixée à 30 jours.
+
+**Ce que ce prolongement ne prouve pas :** aucune de ces six avancées n'a été éprouvée par une personne extérieure, aucune ne vaut relecture éditoriale, et les questions ajoutées restent des hypothèses de travail. Le registre des relectures humaines est toujours vide.
+
 ## 10. Décision attendue — octobre 2026
 
 Le [brief de décision](decision-prospective.md) présente trois options bornées : ne rien construire de plus, faire relire puis tester un pilote papier, ou ouvrir un pilote en ligne. Il précise désormais un pré-mortem : échecs observables, replis réversibles et portes humaines. **Aucune option n'est choisie par l'agent** : la décision revient à l'association, et le prototype actuel reste un prototype à relire.
@@ -167,6 +188,7 @@ Les faits de départ sont issus des fichiers du dépôt :
 - [`docs/rd-parcours-apprentissage.md`](../rd-parcours-apprentissage.md) et [`docs/rd-ia-usages-fraudes.md`](../rd-ia-usages-fraudes.md) — objectifs, recherches documentaires antérieures et limites de couverture;
 - [`docs/rd-affichage-adaptatif.md`](../rd-affichage-adaptatif.md) et [`docs/rd-confidentialite-rgpd.md`](../rd-confidentialite-rgpd.md) — contrôles existants, stockage, dépendances et validations encore ouvertes;
 - [`docs/rd/protocole-essais-usage.md`](protocole-essais-usage.md) et [`portefeuille.toml`](portefeuille.toml) — état du protocole et initiatives en cours.
+- [`docs/rd/avancees.toml`](avancees.toml) et [`avancees.md`](avancees.md) — avancées réutilisables du 20 octobre 2026, avec preuve, contrôle et limite.
 
 Un premier relevé externe a été réalisé le 17 octobre 2026 sur quatre sources datées ([veille](veille-2026-10-17.md)) : il ne couvre ni l'accessibilité, ni le droit du travail, ni les langues, ni l'ensemble des politiques publiques. Les références externes des notes antérieures restent des repères documentaires à réouvrir avant toute affirmation nouvelle; elles ne suffisent pas à établir une tendance future. Aucune probabilité, préférence collective, expérience d'usager ou décision de l'association n'est inventée.
 
