@@ -21,8 +21,13 @@ on:
         required: false
         default: "https://thejmimiia-code.github.io/MRSC/"
         type: string
+  # Quotidien plutôt que mensuel : une dépublication du site (source Pages
+  # désactivée, site dépublié, dépôt repassé en privé) se voit alors en moins
+  # d'un jour. Le 20 octobre 2026, le site a répondu 404 « There isn't a GitHub
+  # Pages site here » sans qu'aucune mesure ne le signale avant une lecture
+  # manuelle.
   schedule:
-    - cron: "17 6 1 * *"
+    - cron: "17 6 * * *"
 
 permissions:
   contents: read
