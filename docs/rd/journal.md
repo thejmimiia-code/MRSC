@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — Le site a cessé de répondre, puis est revenu : surveillance quotidienne
+
+- **Initiative :** `optimisation-du-site` (P1), avec `indexation-et-lecteurs-de-contenu`.
+- **Symptôme constaté par une personne, pas par un contrôle :** l’adresse publique répondait `404 « There isn’t a GitHub Pages site here »`, alors que le dernier déploiement (`c46c1ac`, 16:05 UTC) était vert et que le contrôle d’en-têtes de 16:06 relevait 23/23 en 200. Côté API, la configuration Pages était intacte (`build_type: workflow`, `https_enforced: true`, dépôt public, non archivé) : rien dans le dépôt n’était cassé.
+- **Ce qui a été fait, dans l’ordre des droits réellement disponibles :** `workflow_dispatch` et `run rerun` sont refusés au jeton de la session (403 *Resource not accessible by integration*), et `PUT /repos/…/pages` aussi (403). Un commit vide poussé sur `main` via la PR #159 a donc déclenché `Publish M.R.S.C site` : déploiement recréé à 16:39, contrôle d’en-têtes relancé à 16:40, **23 fichiers sur 23 en 200**.
+- **Ce qui reste incertain, et qui est dit comme tel :** la cause de la coupure n’est pas établie. Le jeton ne donne pas accès au journal d’audit du compte, et les journaux de l’exécution de 16:04 ne sont pas téléchargeables depuis cet environnement. On sait seulement que la reproduction par commit vide a suffi, et que le contenu publié est bien celui du dépôt (12 binaires servis octet pour octet).
+- **Écart corrigé durablement :** le contrôle réseau était mensuel (`17 6 1 * *`). Une dépublication pouvait donc passer inaperçue près d’un mois. Il devient **quotidien** (`17 6 * * *`) : la sonde interroge les 23 cibles, échoue si l’une ne répond pas 200, et réécrit l’issue de suivi #90 avec la date de mesure. Le README et le commentaire du workflow disent ce déclenchement.
+- **Ce que ce contrôle ne voit toujours pas :** qu’un contenu publié soit faux, mal rendu ou illisible ; qu’une page soit retirée volontairement ; ni qu’un cache de navigateur serve une version ancienne. Un site qui répond 200 n’est pas un site relu.
+- **Prochaine action :** après la première exécution quotidienne, vérifier que l’issue #90 porte bien deux dates distinctes et non un doublon ; si une coupure se reproduit, faire ouvrir le journal d’audit du compte GitHub, seule source qui nomme l’auteur du changement de réglage.
+
 ## 2026-10-20 — Un rapport d’en-têtes devient une mesure revérifiable
 
 - **Initiative :** `optimisation-du-site` (P1), avec `indexation-et-lecteurs-de-contenu`. Demande reçue : l’adresse de l’issue #90 seule, ouverte automatiquement par le contrôle mensuel de publication.
