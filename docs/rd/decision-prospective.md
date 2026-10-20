@@ -12,14 +12,14 @@ La décision porte sur l'allocation du temps de relecture, pas sur l'ajout d'une
 
 | Fait vérifiable | Valeur au 20 octobre 2026 | Où le vérifier |
 | --- | --- | --- |
-| Fiches d'apprentissage publiées | 81 dans 15 domaines | `docs/apprentissage/catalogue.toml` |
-| Fiches explicitement « prototypes à relire » | **55** | Statuts du catalogue |
+| Fiches d'apprentissage publiées | 82 dans 15 domaines | `docs/apprentissage/catalogue.toml` |
+| Fiches explicitement « prototypes à relire » | **56** | Statuts du catalogue |
 | Fiches dont la date de revue est échue | **0** | `python3 outils/construire-apprentissages.py --verifier` |
 | Prochaine revue du portefeuille R&D | **2026-11-19** | `docs/rd/portefeuille.toml` |
 | Initiatives R&D suivies | 16, dont 5 en priorité P0 | Portefeuille |
-| Sujets du référentiel sans aucune fiche | **19**, dont **3** à relecture experte | `docs/rd/carte-lacunes.md` |
+| Sujets du référentiel sans aucune fiche | **18**, dont **3** à relecture experte | `docs/rd/carte-lacunes.md` |
 | Boussole publiée | 10 questions statiques, liens édités à la main, aucune collecte | `apprendre.html#boussole-savoirs` |
-| Poids estimé de la page Apprendre | 159 Kio mobile / 309 Kio grand écran (gzip estimé) | `docs/rd/poids-pages.md` |
+| Poids estimé de la page Apprendre | 163 Kio mobile / 312 Kio grand écran (gzip estimé) | `docs/rd/poids-pages.md` |
 | En-têtes servis par GitHub Pages | types AVIF/WebP corrects, gzip sur le texte, cache 600 s | Issue #90 |
 | Essais navigateur | 8/8, dont 320 px, zoom 150 %, contraste renforcé | `outils/test-experience.cjs` |
 

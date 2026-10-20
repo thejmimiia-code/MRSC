@@ -74,10 +74,13 @@ def construire(fiches: list[dict], domaines: list[dict], revue: str) -> str:
     sans_fiche: list[tuple[str, str, str, str, str]] = []
     references_absentes: list[str] = []
     par_domaine: list[dict] = []
+    sujets_avec_carte: list[str] = []
     for domaine in domaines:
         compte = {statut: 0 for statut in ORDRE_STATUTS}
         sans = 0
         for sujet in domaine.get("sujet", []):
+            if (DOSSIER_CARTES / f"sujet-{sujet['id']}.md").is_file():
+                sujets_avec_carte.append(sujet["id"])
             statut = sujet.get("statut", "inconnu")
             compte[statut] = compte.get(statut, 0) + 1
             totaux[statut] = totaux.get(statut, 0) + 1
@@ -123,7 +126,9 @@ def construire(fiches: list[dict], domaines: list[dict], revue: str) -> str:
     textes.append(ligne(["Fiches publiées", str(len(fiches))]))
     textes.append(ligne(["dont prototypes à relire", str(prototypes)]))
     textes.append(ligne(["Sujets sans aucune fiche", str(len(sans_fiche))]))
-    textes.append(ligne(["dont ouverts par une carte de sujet", str(sum(1 for bloc in sans_fiche if bloc[4] != "—"))]))
+    textes.append(ligne(["Sujets ouverts par une carte de sujet", str(len(sujets_avec_carte))]))
+    if sujets_avec_carte:
+        textes.append(ligne(["Lesquels", ", ".join(f"`{sujet}`" for sujet in sujets_avec_carte)]))
     if references_absentes:
         textes.append(ligne(["Références de fiches introuvables", str(len(references_absentes))]))
     textes.append("")

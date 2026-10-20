@@ -212,6 +212,25 @@ def chiffres_publics_coherents() -> None:
         )
 
 
+def _chiffres_du_catalogue() -> tuple[str, str, str]:
+    """Trois phrases de la page de transparence, calculées depuis le catalogue.
+
+    Le libellé est cherché tel qu'il doit apparaître ; les nombres, eux, ne sont
+    jamais recopiés dans le contrôle.
+    """
+    try:
+        fiches = tomllib.loads((RACINE / "docs" / "apprentissage" / "catalogue.toml").read_text(encoding="utf-8"))["fiche"]
+    except (OSError, KeyError, tomllib.TOMLDecodeError):
+        return ("fiches illisibles", "", "")
+    total = len(fiches)
+    prototypes = sum(1 for fiche in fiches if fiche.get("statut_editorial"))
+    return (
+        f"{total} fiches dans 15 domaines",
+        f"{total - prototypes} fiches du corpus initial",
+        f"{prototypes} prototypes explicitement à relire",
+    )
+
+
 def fichiers_du_site() -> None:
     for page in PAGES:
         chemin = RACINE / page
@@ -852,9 +871,7 @@ def fichiers_du_site() -> None:
         all(
             terme in transparence_texte
             for terme in (
-                "81 fiches dans 15 domaines",
-                "26 fiches du corpus initial",
-                "55 prototypes explicitement à relire",
+                *_chiffres_du_catalogue(),
                 "La relecture indépendante de toutes les fiches initiales n’est pas garantie",
             )
         ),
