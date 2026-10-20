@@ -62,6 +62,11 @@ jobs:
           python3 outils/test_registre_relecture.py
           python3 outils/registre-relecture.py
 
+      - name: Vérifier les avancées R&D consignées
+        run: |
+          python3 outils/test_avancees.py
+          python3 outils/construire-avancees.py --verifier
+
       - name: Vérifier le portefeuille et la continuité R&D
         run: python3 outils/verifier-rd-continue.py
 

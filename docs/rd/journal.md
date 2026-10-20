@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — Les avancées entrent dans le portefeuille et dans la prospective
+
+- **Initiative :** `coordination-de-tous-les-agents` (P0), avec `relire-les-44-prototypes` et `prospective-apprentissages-2030`. Demande reçue : « intégrer les avancées et les innovations tout en continuant la R&D et la prospection ».
+- **Revue du portefeuille réellement effectuée ce jour :** `derniere_revue` reste au 2026-10-20 après vérification des 18 initiatives — deux ajoutées, une mise à jour. Ce n'est pas une date de convenance : les preuves citées ont été ouvertes une par une.
+- **Ce qui est intégré, et comment cela reste vrai :** un registre `docs/rd/avancees.toml` et son document généré `docs/rd/avancees.md` retiennent **six avancées** — trois états de contrôle, portail déclaré ou erreur, page ouverte avant citation, refus de source illisible, phrase publique recalculée, registre lui-même vérifié. Chaque entrée porte au moins deux preuves locales existantes, un contrôle exécutable, une limite d'au moins 120 caractères, une suite et une initiative du portefeuille ; `outils/construire-avancees.py` refuse une entrée non traçable et `outils/test_avancees.py` (14 tests) vérifie que chaque exigence mord.
+- **Deux pistes de R&D ouvertes, pas résolues :** `confronter-une-affirmation-a-sa-source` (P0, recherche) demande si l'on peut vérifier mécaniquement qu'une page contient bien la phrase qu'une fiche lui attribue, en mesurant d'abord les faux positifs et les faux négatifs sur trois fiches ; `sources-fermees-et-registre-des-refus` (P1, veille) traite les pages en 403, paywall ou disparues, pour qu'un refus laisse une trace au lieu d'un oubli.
+- **Prolongement prospectif :** la note 2027–2030 reçoit un § 9 bis qui relie chaque avancée à un scénario déjà écrit et ajoute trois questions — confronter une affirmation à sa page, ce que devient une fiche quand sa source se ferme, et combien de temps un constat reste vrai. Aucune source externe nouvelle : ce sont des hypothèses internes, présentées comme telles.
+- **Surface publique et garde-fous :** `transparence.html` cite le registre des avancées et rappelle qu'il ne certifie rien ; `verifier-rd-continue.py` contrôle la traçabilité et la synchronisation du document ; `verification.yml` et `deploy-pages.yml` exécutent les deux commandes ; `AGENTS.md` porte la règle.
+- **Ce que cela ne dit pas :** aucune avancée n'a été éprouvée par une personne extérieure, le registre des relectures humaines reste vide, et les dix constats de sources restent à trancher.
+- **Prochaine action :** relire le registre à chaque revue du portefeuille, retirer une entrée devenue fausse, et éprouver la piste de confrontation sur trois fiches avant toute automatisation.
+
 ## 2026-10-20 — Quatre fiches de plus confrontées à une page ouverte
 
 - **Initiative :** `relire-les-44-prototypes` (P0), suite directe du lot précédent (14 constats).

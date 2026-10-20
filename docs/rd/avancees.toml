@@ -1,0 +1,110 @@
+# Registre des avancées réutilisables de la R&D.
+#
+# Une « avancée » est un apprentissage du projet qui change durablement la façon
+# de travailler — pas une fonctionnalité, pas un chiffre de communication. Chaque
+# entrée dit ce qui a été constaté, ce que cela change, comment cela reste vrai
+# (preuves locales + contrôle exécutable), ce que cela ne prouve pas, et ce qui
+# reste à faire.
+#
+# Ce registre ne certifie rien : il rend une décision réutilisable par un autre
+# agent. Une avancée sans limite écrite n'est pas une avancée, c'est une croyance.
+
+[meta]
+version = 1
+derniere_revue = 2026-10-20
+regle = "Une entrée n'entre ici qu'avec une preuve locale, un contrôle exécutable et une limite écrite ; sinon elle reste une note de journal."
+
+[[avancee]]
+id = "trois-etats-de-controle"
+date = 2026-10-20
+titre = "Un contrôle automatique a trois états, pas deux"
+constat = "Un même contrôle peut rencontrer trois situations distinctes : le fait est conforme, le fait est faux et réparable sans jugement, ou le fait est exact mais la machine ne sait pas s'il est acceptable. Traiter la troisième comme un échec fabrique de faux défauts ; la traiter comme un vert efface un reste réel."
+changement = "L'audit automatique des prototypes ne compte plus seulement échecs et réussites : il nomme des constats, hors échecs et hors verts, et chaque interface qui reprend l'audit (paquets de relecture, phrase publique) reprend les trois états."
+preuves = [
+  "outils/auditer-prototypes.py",
+  "outils/test_audit_prototypes.py",
+  "docs/apprentissage/audit-automatique.md",
+]
+controle = "python3 outils/test_audit_prototypes.py && python3 outils/auditer-prototypes.py --verifier"
+limite = "Ce partage ne dit rien de la valeur d'une fiche : il déplace seulement la frontière entre ce qu'un script tranche et ce qu'une personne doit trancher. Un constat nommé n'est ni une relecture ni une validation."
+suite = "Éprouver le même partage sur d'autres contrôles à venir : avant d'ajouter un contrôle, se demander s'il peut produire un constat plutôt qu'un échec."
+initiatives = ["relire-les-44-prototypes"]
+
+[[avancee]]
+id = "portail-declare-ou-erreur"
+date = 2026-10-20
+titre = "Une source-racine doit s'annoncer comme portail"
+constat = "Une fiche qui ne cite que la racine d'un site n'offre aucune page à confronter. Ce n'est pas mécaniquement faux, mais une racine présentée comme une page consultée laisse croire à une vérification qui n'a pas eu lieu."
+changement = "Le contrôle de précision des sources distingue deux cas : racine annoncée par écrit comme portail, point d'entrée ou page d'accueil — constat ; racine présentée comme une page lue — échec. La discipline est vérifiable, pas déclarative."
+preuves = [
+  "outils/auditer-prototypes.py",
+  "outils/test_audit_prototypes.py",
+  "docs/apprentissage/catalogue.toml",
+]
+controle = "python3 outils/auditer-prototypes.py --verifier"
+limite = "La machine vérifie la présence de la phrase, pas sa sincérité ni la pertinence du portail. Elle ne dit pas si le portail suffit à étayer l'affirmation de la fiche."
+suite = "Quand une page précise remplace un portail, consigner ce qu'elle étaye et ce qu'elle n'étaye pas, comme pour les douze fiches déjà traitées."
+initiatives = ["relire-les-44-prototypes", "veille-savoirs-evolutifs"]
+
+[[avancee]]
+id = "page-ouverte-avant-citation"
+date = 2026-10-20
+titre = "Aucune page n'est citée sans avoir été ouverte"
+constat = "Chercher une page qui « a l'air » de répondre ne suffit pas : il faut l'ouvrir, y lire la phrase qui étaye l'affirmation, et noter ce qu'elle n'étaye pas. Douze fiches ont été traitées ainsi ; deux pages ont été refusées après lecture."
+changement = "Le catalogue porte, pour chaque page ajoutée, la date de consultation et une phrase qui sépare ce que la page étaye de ce qu'elle n'étaye pas — par exemple un document sur les changements d'état qui ne parle pas de dissolution."
+preuves = [
+  "docs/apprentissage/catalogue.toml",
+  "docs/apprentissage/audit-automatique.md",
+  "docs/apprentissage/paquets-relecture.md",
+]
+controle = "python3 outils/auditer-prototypes.py --verifier && python3 outils/construire-paquets-relecture.py --verifier"
+limite = "Une page qui étaye une phrase ne vaut ni expertise de domaine, ni contrôle des droits, ni essai d'usage réel ; le registre des relectures humaines reste vide."
+suite = "Poursuivre fiche par fiche sur les constats restants, en préférant une page réellement lue à un portail de plus."
+initiatives = ["relire-les-44-prototypes"]
+
+[[avancee]]
+id = "refus-de-source-illisible"
+date = 2026-10-20
+titre = "Une source illisible se refuse et se consigne"
+constat = "Certaines pages utiles en apparence ne peuvent pas être lues : une page de l'IGN sur la lecture de carte répond 403, une page de présentation de HAL décrivait une fonctionnalité au lieu du mécanisme cherché. Les citer aurait fait baisser un compteur sans rien prouver."
+changement = "Le refus devient une information du projet : la page écartée et sa raison sont écrites, et une autre page est cherchée quand elle existe. Un chiffre qui baisse sans explication est désormais un signal d'alerte, pas un progrès."
+preuves = [
+  "docs/rd/journal.md",
+  "docs/apprentissage/audit-automatique.md",
+]
+controle = "python3 outils/verifier-rd-continue.py"
+limite = "Un refus consigné ne vaut pas preuve d'exhaustivité : d'autres pages accessibles peuvent exister et n'ont pas été cherchées."
+suite = "Tenir une liste des sources refusées et de leur motif, pour éviter de les rechercher deux fois et pour documenter les angles morts."
+initiatives = ["veille-savoirs-evolutifs", "relire-les-44-prototypes"]
+
+[[avancee]]
+id = "phrase-publique-recalculee"
+date = 2026-10-20
+titre = "La phrase publique se recalcule, elle ne se recopie pas"
+constat = "Une phrase écrite à la main dans une page publique vieillit au premier changement de mesure. Les nombres de l'audit ont changé trois fois en une journée."
+changement = "La porte de vérification recalcule l'état depuis le catalogue et exige que la page de transparence contienne exactement la phrase dérivée : échecs, constats, nombre de contrôles et nombre de relectures consignées."
+preuves = [
+  "outils/verifier-rd-continue.py",
+  "transparence.html",
+  "docs/apprentissage/audit-automatique.md",
+]
+controle = "python3 outils/verifier-rd-continue.py"
+limite = "La phrase reste vraie sur ce que la machine mesure ; elle ne dit rien de la qualité des fiches et ne remplace aucune relecture."
+suite = "Étendre le même principe à toute affirmation publique qui reprend un chiffre du dépôt."
+initiatives = ["coherence-textes-publics", "coordination-de-tous-les-agents"]
+
+[[avancee]]
+id = "registre-des-avancees-verifie"
+date = 2026-10-20
+titre = "Une avancée sans preuve, contrôle et limite n'est pas une avancée"
+constat = "Les leçons d'un lot se perdent entre deux agents : elles restent dans un journal daté, mêlées à la chronologie, sans contrôle qui empêche de les déformer plus tard."
+changement = "Ce registre est généré et vérifié : chaque entrée exige une preuve locale qui existe, un contrôle exécutable, une limite écrite, une suite et une initiative du portefeuille. Le fichier publié est comparé à la source par la porte de vérification."
+preuves = [
+  "docs/rd/avancees.toml",
+  "outils/construire-avancees.py",
+  "outils/test_avancees.py",
+]
+controle = "python3 outils/test_avancees.py && python3 outils/construire-avancees.py --verifier"
+limite = "Le registre vérifie la forme et la traçabilité, pas la vérité de l'avancée : une limite mal choisie passe le contrôle. C'est une mémoire disciplinée, pas une expertise."
+suite = "Relire ce registre à chaque revue du portefeuille et y verser les avancées du lot suivant, en supprimant celles qui seraient devenues fausses."
+initiatives = ["coordination-de-tous-les-agents"]
