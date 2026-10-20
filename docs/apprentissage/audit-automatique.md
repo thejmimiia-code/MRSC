@@ -17,8 +17,8 @@
 | Fiches sans aucun échec mécanique | 57 |
 | Fiches avec au moins un échec | 0 |
 | Échecs mécaniques au total | 0 |
-| Fiches avec un constat à trancher par une personne | 10 |
-| Constats nommés (ni échecs, ni validations) | 10 |
+| Fiches avec un constat à trancher par une personne | 4 |
+| Constats nommés (ni échecs, ni validations) | 4 |
 
 ### Constats nommés, à trancher par une personne
 
@@ -26,7 +26,7 @@ Ces contrôles ont vu un fait exact que la machine ne peut pas juger. Rien n'est
 
 | Constat | Fiches concernées | Nombre |
 | --- | --- | ---: |
-| Au moins une source pointe une page précise, pas seulement un portail | arts-composer-formes, arts-lire-cartel, geo-decrire-paysage, geo-lire-legende-carte, histoire-comparer-sources, histoire-situer-siecle, info-systeme-exploitation, maths-equation-simple, maths-lire-echelle-graphique, maths-lire-tableau-croise | 10 |
+| Au moins une source pointe une page précise, pas seulement un portail | arts-composer-formes, geo-decrire-paysage, histoire-comparer-sources, histoire-situer-siecle | 4 |
 
 Pour la ligne « page précise » : ces fiches ne citent que des portails (racine d'un site) et l'annoncent dans le champ `utilisation` — la machine vérifie cette phrase, pas sa pertinence. Sans page précise, la question 1 du §4 ne peut pas être tranchée en l'état : il faut soit ajouter une page consultée et vérifiée, soit garder le portail en connaissance de cause.
 
@@ -34,8 +34,8 @@ Pour la ligne « page précise » : ces fiches ne citent que des portails (racin
 
 | Fait mesuré | Valeur |
 | --- | ---: |
-| Sources déclarées au total | 99 |
-| dont licence déclarée « non vérifiée » | 98 |
+| Sources déclarées au total | 105 |
+| dont licence déclarée « non vérifiée » | 104 |
 | Fiches sans aucune source | 0 |
 | Prochaine revue la plus proche | 2027-01-09 (info-lire-adresse-web) |
 | Fiches dont la revue de contenu est échue | 0 |
@@ -47,7 +47,7 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | Fiche | Domaine | Contrôles passés | À corriger | Constats | Détail des échecs et des constats |
 | --- | --- | ---: | ---: | ---: | --- |
 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
-| [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
+| [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 17 | 0 | 0 | — |
 | [Choisir une source publique adaptée à sa question](fiches/civ-choisir-source-publique.html) | Citoyenneté, médias et information | 17 | 0 | 0 | — |
 | [Repérer l’échelle d’une institution avant de chercher le bon service](fiches/civ-reperer-echelle-institution.html) | Citoyenneté, médias et information | 17 | 0 | 0 | — |
 | [Repérer une information électorale officielle](fiches/civ-reperer-info-electorale.html) | Citoyenneté, médias et information | 17 | 0 | 0 | — |
@@ -61,7 +61,7 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Lire une étude sans confondre résultats et certitudes](fiches/recherche-lire-etude.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
 | [Formuler une question et une hypothèse de recherche](fiches/recherche-question-hypothese.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
-| [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
+| [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 17 | 0 | 0 | — |
 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 17 | 0 | 0 | — |
 | [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
 | [Lire une frise chronologique et ordonner des événements](fiches/histoire-lire-frise.html) | Histoire, chronologie et mémoire | 17 | 0 | 0 | — |
@@ -70,7 +70,7 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Repérer les parties d’une adresse Web](fiches/info-lire-adresse-web.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
-| [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
+| [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Lire une licence avant de réutiliser un programme](fiches/prog-lire-licence-logiciel.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
@@ -86,10 +86,10 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 17 | 0 | 0 | — |
 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 17 | 0 | 0 | — |
 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
-| [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
+| [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
-| [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
-| [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
+| [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
+| [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |

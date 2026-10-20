@@ -10,14 +10,37 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 7 |
+| Avancées consignées | 9 |
 | Période couverte | du 2026-10-20 au 2026-10-20 |
-| Contrôles exécutables cités | 8 |
-| Initiatives du portefeuille concernées | 6 |
+| Contrôles exécutables cités | 12 |
+| Initiatives du portefeuille concernées | 9 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
 
 ## 2. Les avancées
+
+### `indice-de-confrontation-non-certifiant` — Confronter une affirmation par ancres donne un indice et ses angles morts, jamais une validation
+
+*Consignée le 2026-10-20.*
+
+**Constat.** Chercher des mots-clés d'une fiche dans sa page source détecte utilement la présence des termes attendus, mais échoue dès qu'une négation inverse le sens (mentions interdites sur Service-Public F2451) ou qu'un PDF coupe un mot dans une formule (« dur é e »).
+
+**Ce que cela change.** Le prototype `docs/rd/confrontations-sources.toml` borne chaque ancre à cinq mots sans recopier d'extrait sous droits, interdit tout état de validation, exige l'écriture explicite d'un faux positif et d'un faux négatif par fiche, et reste hors de la porte de publication.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/confrontations-sources.toml`
+- `docs/rd/confrontations-sources.md`
+- `outils/confronter-sources.py`
+- `outils/test_confronter_sources.py`
+
+**Contrôle qui la maintient :** `python3 outils/test_confronter_sources.py && python3 outils/confronter-sources.py --verifier`
+
+**Limite — ce que cela ne prouve pas.** Un indice concordant ne prouve jamais que la fiche dit vrai ni qu'elle respecte la portée de la source ; un constat d'ancre absente ou de page inaccessible ne prouve jamais que la fiche est fausse.
+
+**Suite.** Mesurer les faux positifs et faux négatifs avec une personne relectrice avant d'envisager d'étendre l'échantillon au-delà des cinq fiches du prototype.
+
+Initiatives liées : `confronter-une-affirmation-a-sa-source`, `relire-les-44-prototypes`, `prospective-apprentissages-2030`.
 
 ### `mesure-servie-reverifiee` — Ce que l'hébergement sert est mesuré, puis revérifié hors ligne
 
@@ -149,6 +172,29 @@ Initiatives liées : `veille-savoirs-evolutifs`, `relire-les-44-prototypes`.
 **Suite.** Relire ce registre à chaque revue du portefeuille et y verser les avancées du lot suivant, en supprimant celles qui seraient devenues fausses.
 
 Initiatives liées : `coordination-de-tous-les-agents`.
+
+### `registre-des-refus-verifie` — Une source refusée entre dans un registre relié au catalogue, pas seulement dans le journal
+
+*Consignée le 2026-10-20.*
+
+**Constat.** Noter un refus de source dans le seul journal chronologique n'empêche pas un lot suivant de retenter la même page en 403 ou hors périmètre, ni de l'inscrire par inadvertance dans le catalogue.
+
+**Ce que cela change.** Le registre `docs/apprentissage/sources-refusees.toml` et son générateur vérifient que chaque refus porte sa date, son motif et sa limite, qu'aucune URL refusée n'est citée comme source active du catalogue, et qu'un refus dit remplacé pointe une URL réellement présente sur la fiche.
+
+**Preuves dans le dépôt :**
+
+- `docs/apprentissage/sources-refusees.toml`
+- `docs/apprentissage/sources-refusees.md`
+- `outils/construire-sources-refusees.py`
+- `outils/test_sources_refusees.py`
+
+**Contrôle qui la maintient :** `python3 outils/test_sources_refusees.py && python3 outils/construire-sources-refusees.py --verifier`
+
+**Limite — ce que cela ne prouve pas.** Ce registre ne recense que les pages effectivement tentées puis écartées par un agent ou une personne : il ne prouve ni l'exhaustivité des recherches documentaires, ni la validité de la source de remplacement.
+
+**Suite.** Consigner chaque nouveau refus (403, accès payant, page retirée ou hors sujet après lecture) dans ce registre au moment où il survient.
+
+Initiatives liées : `sources-fermees-et-registre-des-refus`, `relire-les-44-prototypes`, `veille-savoirs-evolutifs`.
 
 ### `trois-etats-de-controle` — Un contrôle automatique a trois états, pas deux
 

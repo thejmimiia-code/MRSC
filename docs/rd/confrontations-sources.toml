@@ -1,0 +1,86 @@
+# Prototype borné de confrontation d'affirmations aux pages sources déclarées.
+#
+# Ce fichier ne stocke aucun extrait sous droits et ne valide aucune fiche.
+# Il associe à une affirmation courte de la fiche (rédigée par le projet) une
+# liste d'ancres lexicales brèves (1 à 5 mots), consigne le résultat du relevé
+# daté comme un simple indice ou constat, et documente pour chaque cas les faux
+# positifs et les faux négatifs observés ou possibles.
+#
+# Tant que le taux d'erreur n'est pas mesuré sur un échantillon relu par une
+# personne, ce dispositif reste hors de la porte de publication.
+
+[meta]
+version = 1
+derniere_revue = 2026-10-20
+source_catalogue = "docs/apprentissage/catalogue.toml"
+regle = "Une confrontation produit un indice daté ou un constat, jamais une validation ni une conclusion automatique sur la vérité d'une fiche ; aucune ancre ne dépasse 5 mots."
+
+[[confrontation]]
+id = "meteo-climat-reference-30-ans"
+fiche = "sciences-meteo-climat"
+url_source = "https://meteofrance.com/meteo-a-z/quelle-difference-entre-meteo-et-climat"
+affirmation_fiche = "La météo décrit le temps à un instant et un endroit donnés ; le climat repose sur des moyennes sur plusieurs décennies, avec une période de référence de 30 ans, et une vague de froid isolée ne suffit pas à infirmer la tendance climatique."
+ancres_attendues = ["instant", "endroit", "moyenne", "décennies", "30 ans", "vague de froid"]
+ancres_reperees = ["instant", "endroit", "moyenne", "décennies", "30 ans", "vague de froid"]
+ancres_absentes = []
+date_releve = 2026-10-20
+etat_releve = "indice-concordant"
+faux_positif_possible = "La présence simultanée de « 30 ans », « moyenne » et « vague de froid » dans la page ne prouve pas le sens de la relation : un texte qui contesterait la normale de 30 ans contiendrait exactement les mêmes ancres."
+faux_negatif_possible = "Si Météo-France remplace « 30 ans » par « trente années » ou déplace ce repère dans un schéma illustré, l'ancre disparaît du texte brut alors que l'affirmation reste étayée."
+limite = "Cet indice confirme uniquement que les six repères lexicaux figuraient dans la page ouverte le 20 octobre 2026 ; il ne vérifie ni la justesse pédagogique de la fiche ni l'absence de contresens."
+
+[[confrontation]]
+id = "vitesse-moyenne-quotient-unites"
+fiche = "sciences-calculer-vitesse-moyenne"
+url_source = "https://eduscol.education.fr/document/16837/download"
+affirmation_fiche = "La vitesse moyenne relie la distance parcourue et la durée du parcours par une division, et s'exprime notamment en m/s ou en km/h."
+ancres_attendues = ["vitesse", "distance", "durée", "m/s", "km/h", "400"]
+ancres_reperees = ["vitesse", "distance", "durée", "m/s", "km/h", "400"]
+ancres_absentes = []
+date_releve = 2026-10-20
+etat_releve = "indice-concordant"
+faux_positif_possible = "Le même document Éduscol cite aussi la formule d'énergie « E = P × t » (grandeur produit) pour la opposer à la vitesse : repérer « distance » et « durée » dans le corps du texte ne prouve pas que la fiche utilise la bonne opération."
+faux_negatif_possible = "Faux négatif observé le 20 octobre 2026 lors de l'extraction du PDF : dans l'équation mise en forme, le mot « durée » est découpé en « dur é e » et « distance parcourue » est collé en « distanceparcourue ». Chercher la formule exacte échoue sur le PDF alors qu'elle y figure."
+limite = "L'indice porte sur des mots isolés présents dans le PDF du 20 octobre 2026 ; la coupure des formules mathématiques lors de l'extraction montre qu'une absence d'ancre dans un PDF ne permet jamais de conclure que la fiche est fausse."
+
+[[confrontation]]
+id = "credit-conso-taux-frais-taeg"
+fiche = "econ-distinguer-interet-frais"
+url_source = "https://www.service-public.gouv.fr/particuliers/vosdroits/F2451"
+affirmation_fiche = "Pour comparer le coût d'un crédit à la consommation, on distingue le taux débiteur, les frais compris dans le coût total du crédit et le taux annuel effectif global."
+ancres_attendues = ["taux débiteur", "frais", "coût total du crédit", "taux annuel effectif global"]
+ancres_reperees = ["taux débiteur", "frais", "coût total du crédit", "taux annuel effectif global"]
+ancres_absentes = []
+date_releve = 2026-10-20
+etat_releve = "indice-concordant"
+faux_positif_possible = "Faux positif observé sur cette même page le 20 octobre 2026 : la fiche F2451 contient les mots « améliore la situation financière ou le budget de l'emprunteur » et « substitut d'épargne » dans la liste de ce qu'il est interdit d'écrire dans une publicité. Un contrôle par mots-clés qui ignorerait la négation « Il est interdit » validerait à tort une affirmation illégale."
+faux_negatif_possible = "Une mise à jour éditoriale de Service-Public.fr qui emploierait l'abréviation « TAEG » au lieu de la forme développée « taux annuel effectif global » ferait disparaître l'ancre sans changement du droit applicable."
+limite = "Cet indice ne vaut ni validation juridique ni conseil financier : la présence des termes réglementaires dans la fiche F2451 ne prouve pas que l'exemple chiffré fictif de la fiche M.R.S.C. est exact."
+
+[[confrontation]]
+id = "melange-changement-etat-perimetre-scinde"
+fiche = "sciences-distinguer-melange-changement-etat"
+url_source = "https://eduscol.education.fr/document/15199/download"
+affirmation_fiche = "La fusion est un changement d'état d'une même substance avec conservation de la masse, tandis que la dissolution disperse un solide soluble dans l'eau."
+ancres_attendues = ["glace", "fonte", "masse", "dissolution"]
+ancres_reperees = ["glace", "fonte", "masse"]
+ancres_absentes = ["dissolution"]
+date_releve = 2026-10-20
+etat_releve = "constat-couverture-partielle"
+faux_positif_possible = "Le mot « eau » figure dans les deux documents Éduscol de la fiche : l'utiliser comme seule ancre donnerait un indice concordant trompeur sur un document qui ne parle pourtant pas de dissolution."
+faux_negatif_possible = "Cas réel de faux négatif de périmètre observé le 20 octobre 2026 : l'ancre « dissolution » est absente du document 15199 parce que la fiche répartit son étayage entre deux sources complémentaires (le document 15199 pour la fusion et le document 95295 pour la dissolution)."
+limite = "Un constat de couverture partielle sur une source isolée ne signale pas une erreur de la fiche : il rappelle qu'une affirmation composée peut reposer sur plusieurs sources distinctes du catalogue."
+
+[[confrontation]]
+id = "angle-droit-sommet-90-degres"
+fiche = "maths-reperer-angle-droit"
+url_source = "https://eduscol.education.fr/document/36614/download"
+affirmation_fiche = "Un angle se repère par son sommet et ses côtés ; l'angle droit mesure 90°."
+ancres_attendues = ["sommet", "côté", "angle droit", "90°"]
+ancres_reperees = ["sommet", "côté", "angle droit", "90°"]
+ancres_absentes = []
+date_releve = 2026-10-20
+etat_releve = "indice-concordant"
+faux_positif_possible = "Dans le tableau de la ressource Éduscol, « 90° » apparaît trois fois : « de 0° à 90° » (angle aigu), « 90° » (angle droit) et « de 90° à 180° » (angle obtus). Une fiche qui écrirait par erreur qu'un angle obtus vaut 90° passerait quand même le test d'ancre."
+faux_negatif_possible = "Selon l'outil d'extraction PDF, le symbole degré est parfois converti en formule LaTeX (« 90^{\\circ} ») ou en lettre « o » en exposant, faisant échouer la recherche littérale de « 90° »."
+limite = "Cet indice vérifie uniquement la présence du vocabulaire de base dans le document Éduscol du 20 octobre 2026 ; il ne contrôle ni la clarté de l'exercice ni l'accessibilité sans figure géométrique."
