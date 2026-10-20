@@ -26,6 +26,7 @@ import argparse
 import importlib.util
 import sys
 import tomllib
+from datetime import date
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
@@ -72,6 +73,40 @@ def ligne(cellules: list[str]) -> str:
     return "| " + " | ".join(cellules) + " |"
 
 
+def charger_module_audit():
+    """Charge `outils/auditer-prototypes.py` pour ne pas recopier ses contrôles ici."""
+    chemin = RACINE / "outils" / "auditer-prototypes.py"
+    specification = importlib.util.spec_from_file_location("audit_prototypes", chemin)
+    module = importlib.util.module_from_spec(specification)
+    specification.loader.exec_module(module)
+    return module
+
+
+def etats_automatiques() -> dict[str, str]:
+    """Résumé, par fiche, des contrôles mécaniques déjà passés.
+
+    Le détail vit dans `docs/apprentissage/audit-automatique.md` ; ici on
+    reprend seulement le compte, pour qu'une personne voie d'un coup d'œil ce
+    qui est déjà vérifié et ce qui reste de son ressort.
+    """
+    try:
+        module = charger_module_audit()
+        fiches, _, references = module.charger()
+        audits = module.auditer(fiches, references, date.today())
+    except Exception:  # noqa: BLE001 - un audit cassé ne doit pas casser les paquets
+        return {}
+    etats: dict[str, str] = {}
+    for audit in audits:
+        total = len(audit["resultats"])
+        echecs = len(audit["echecs"])
+        if echecs:
+            detail = " ; ".join(echec["detail"] for echec in audit["echecs"])
+            etats[audit["fiche"]["id"]] = f"{total - echecs}/{total} — à corriger : {detail}"
+        else:
+            etats[audit["fiche"]["id"]] = f"{total}/{total} — aucun défaut mécanique détecté"
+    return etats
+
+
 def dernieres_relectures() -> dict[str, dict]:
     """Dernière relecture consignée par fiche, lue dans le registre humain.
 
@@ -97,7 +132,8 @@ def dernieres_relectures() -> dict[str, dict]:
     return dernieres
 
 
-def paquet(item: dict, titres: dict[str, str], relecture: dict | None = None) -> list[str]:
+def paquet(item: dict, titres: dict[str, str], relecture: dict | None = None, automatiques: dict[str, str] | None = None) -> list[str]:
+    automatiques = automatiques or {}
     fiche = item["fiche"]
     lignes = [
         f"### `{fiche['id']}` — {fiche['titre']}",
@@ -110,6 +146,7 @@ def paquet(item: dict, titres: dict[str, str], relecture: dict | None = None) ->
         ligne(["Priorité de tri", f"{item['rang']} — {item['motif_rang']}"]),
         ligne(["Termes repérés", " ; ".join(item["motifs"]) if item["motifs"] else "—"]),
         ligne(["Fiche publiée", f"[lire la fiche](fiches/{fiche['id']}.html)"]),
+        ligne(["Contrôles automatiques", automatiques.get(fiche["id"], "non exécutés — voir [l'audit automatique](audit-automatique.md)")]),
         ligne(["Relecture consignée",
               f"{relecture.get('date')} — {relecture.get('verdict')}" if relecture else "aucune à ce jour"]),
         "",
@@ -192,8 +229,9 @@ def paquet(item: dict, titres: dict[str, str], relecture: dict | None = None) ->
     return lignes
 
 
-def construire(elements: list[dict], titres: dict[str, str], detail: int = 2, dernieres: dict[str, dict] | None = None) -> str:
+def construire(elements: list[dict], titres: dict[str, str], detail: int = 2, dernieres: dict[str, dict] | None = None, automatiques: dict[str, str] | None = None) -> str:
     dernieres = dernieres or {}
+    automatiques = automatiques or {}
     par_rang = {rang: sum(1 for item in elements if item["rang"] == rang) for rang in (1, 2, 3)}
     retenus = [item for item in elements if item["rang"] <= detail]
     lignes: list[str] = []
@@ -266,7 +304,7 @@ def construire(elements: list[dict], titres: dict[str, str], detail: int = 2, de
     lignes.append("## 3. Paquets détaillés")
     lignes.append("")
     for item in retenus:
-        lignes.extend(paquet(item, titres, dernieres.get(item["fiche"]["id"])))
+        lignes.extend(paquet(item, titres, dernieres.get(item["fiche"]["id"]), automatiques))
     lignes.append("## 4. Ce que ces paquets ne font pas")
     lignes.append("")
     lignes.append("- Ils ne remplacent ni la [grille de relecture](grille-relecture.md) ni l’expertise du domaine : les questions communes y restent.")
@@ -296,10 +334,10 @@ def main() -> int:
         if not trouves:
             print(f"Fiche inconnue ou non prototype : {arguments.fiche}", file=sys.stderr)
             return 2
-        print("\n".join(paquet(trouves[0], titres)))
+        print("\n".join(paquet(trouves[0], titres, dernieres_relectures().get(arguments.fiche), etats_automatiques())))
         return 0
 
-    contenu = construire(elements, titres, dernieres=dernieres_relectures())
+    contenu = construire(elements, titres, dernieres=dernieres_relectures(), automatiques=etats_automatiques())
     if arguments.verifier:
         if not sortie.exists():
             print(f"{sortie.relative_to(RACINE)} absent : lancez le script sans --verifier.", file=sys.stderr)

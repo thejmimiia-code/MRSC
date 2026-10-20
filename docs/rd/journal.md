@@ -2,6 +2,19 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — Ce qui est mécanique est automatisé : 16 contrôles par fiche
+
+- **Initiative :** `relire-les-44-prototypes` (P0). Demande reçue : « on ne peut pas automatiser toutes ces tâches ? » — la réponse honnête est : **tout ce qui ne demande pas de jugement, oui**.
+- **Frontière posée noir sur blanc :** six questions restent humaines (la source dit-elle ce que la fiche affirme ; les exemples sont-ils exacts ; les droits permettent-ils ; l'analogie éclaire-t-elle sans stigmatiser ; une personne réelle peut-elle s'en servir ; l'association autorise-t-elle la publication). Tout le reste est mécanisable.
+- **Travail livré :** `outils/auditer-prototypes.py` exécute **16 contrôles objectifs** sur chaque fiche — champs requis et listes non vides, slug et repère, statut et note, HTTPS et unicité des sources, métadonnées de droits complètes et cohérentes, reprise explicitement écartée, dates réelles non futures, intervalle de revue, limite d'analogie suffisante, aide et correction développées, doublons exacts entre fiches, longueur des phrases, typographie française, longueurs de titre et de résumé, page générée à jour.
+- **Sortie :** `docs/apprentissage/audit-automatique.md` — état d'ensemble, faits mesurés (86 sources déclarées, dont **85 en licence « non vérifiée »** ; 0 fiche sans source ; 0 revue échue ; prochaine échéance 2027-01-09), détail par fiche, puis les six questions humaines et l'ordre de travail.
+- **Résultat mesuré :** **57 prototypes, 16 contrôles, 0 échec mécanique**. Ce que cela veut dire : rien de mécaniquement faux ne subsiste. Ce que cela ne veut pas dire : aucune fiche n'est relue — le registre reste vide.
+- **Deux vrais défauts trouvés par l'outil, puis corrigés ou écartés :** une alerte de date sur les 57 fiches venait d'une confusion entre `revue_le` lu comme chaîne et comme date (corrigée dans l'outil) ; une alerte de typographie venait de « comme .pdf », une extension citée et non une faute — le motif a été resserré, avec un test dédié.
+- **Chaîne :** chaque paquet de relecture affiche désormais `Contrôles automatiques : 16/16` ; la transparence publique dit l'état réel, et la porte **recalcule la phrase** depuis l'audit ; `verification.yml`, `deploy-pages.yml` et `AGENTS.md` exécutent l'audit et ses tests.
+- **Tests :** `outils/test_audit_prototypes.py`, **23 tests** — un par contrôle qui doit mordre (une fiche abîmée exprès fait échouer le bon contrôle), plus deux tests qui vérifient que le document ne prétend jamais une validation.
+- **Limite :** l'audit ne lit aucune source, ne vérifie aucune affirmation, ne juge aucune formulation. Il ne remplace personne et ne débloque aucune publication.
+- **Prochaine action :** la relecture humaine commence maintenant là où elle a de la valeur — ouvrir les 85 sources en licence non vérifiée et trancher, fiche par fiche, en commençant par les 9 paquets de priorité 1.
+
 ## 2026-10-20 — Le statut « relu » cesse d'être une opinion : registre vérifié
 
 - **Initiative :** `relire-les-44-prototypes` (P0) — le blocage humain, attaqué par le côté outillage.

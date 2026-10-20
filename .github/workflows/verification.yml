@@ -54,8 +54,10 @@ jobs:
       - name: Vérifier la file de relecture générée
         run: python3 outils/file-relecture.py --verifier
 
-      - name: Vérifier le registre des relectures humaines
+      - name: Vérifier les contrôles automatiques et le registre des relectures
         run: |
+          python3 outils/test_audit_prototypes.py
+          python3 outils/auditer-prototypes.py --verifier
           python3 outils/construire-paquets-relecture.py --verifier
           python3 outils/test_registre_relecture.py
           python3 outils/registre-relecture.py

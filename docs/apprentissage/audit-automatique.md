@@ -1,0 +1,110 @@
+# Audit automatique des prototypes
+
+**Document de travail généré.** Il exécute, fiche par fiche, les contrôles qu'un programme peut réellement trancher : présence et forme des champs, adresses et métadonnées de droits, dates de revue, référencement, doublons exacts, longueur des phrases, typographie, page générée. Il ne lit aucune source, ne juge aucune formulation et ne relit rien.
+
+**Ce que veut dire « tout est vert » :** aucun défaut mécaniquement détectable n'a été trouvé. Ce n'est ni une relecture, ni une validation, ni une autorisation de publication. La relecture humaine se consigne dans [`relectures.toml`](relectures.toml) et se contrôle avec `python3 outils/registre-relecture.py`.
+
+**Date de l'audit :** 2026-10-20.
+
+## 1. État d'ensemble
+
+| Mesure | Valeur |
+| --- | ---: |
+| Prototypes audités | 57 |
+| Contrôles automatiques par fiche | 16 |
+| Fiches sans aucun échec mécanique | 57 |
+| Fiches avec au moins un échec | 0 |
+| Échecs mécaniques au total | 0 |
+
+## 2. Ce que la machine a vu, sans le juger
+
+| Fait mesuré | Valeur |
+| --- | ---: |
+| Sources déclarées au total | 86 |
+| dont licence déclarée « non vérifiée » | 85 |
+| Fiches sans aucune source | 0 |
+| Prochaine revue la plus proche | 2027-01-09 (info-lire-adresse-web) |
+| Fiches dont la revue de contenu est échue | 0 |
+
+Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **déjà fait** et ce qui **reste à faire par une personne** : ouvrir les sources, vérifier les exemples, trancher les droits, éprouver l'analogie et l'usage réel.
+
+## 3. Détail par fiche
+
+| Fiche | Domaine | Contrôles passés | À corriger | Détail des échecs |
+| --- | --- | ---: | ---: | --- |
+| [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 16 | 0 | — |
+| [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 16 | 0 | — |
+| [Choisir une source publique adaptée à sa question](fiches/civ-choisir-source-publique.html) | Citoyenneté, médias et information | 16 | 0 | — |
+| [Repérer l’échelle d’une institution avant de chercher le bon service](fiches/civ-reperer-echelle-institution.html) | Citoyenneté, médias et information | 16 | 0 | — |
+| [Repérer une information électorale officielle](fiches/civ-reperer-info-electorale.html) | Citoyenneté, médias et information | 16 | 0 | — |
+| [Trouver un service public et préparer un formulaire](fiches/civ-trouver-service-public.html) | Démarches, droits, sécurité et vie professionnelle | 16 | 0 | — |
+| [Comparer deux prix à quantité égale](fiches/econ-comparer-prix-unitaires.html) | Budget, économie, consommation et travail | 16 | 0 | — |
+| [Distinguer un intérêt d’un frais sur un crédit fictif](fiches/econ-distinguer-interet-frais.html) | Budget, économie, consommation et travail | 16 | 0 | — |
+| [Lire une facture et repérer une échéance](fiches/econ-lire-facture.html) | Budget, économie, consommation et travail | 16 | 0 | — |
+| [Lire une mention de garantie sur un ticket fictif](fiches/econ-lire-mention-garantie.html) | Budget, économie, consommation et travail | 16 | 0 | — |
+| [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 16 | 0 | — |
+| [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 16 | 0 | — |
+| [Lire une étude sans confondre résultats et certitudes](fiches/recherche-lire-etude.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 16 | 0 | — |
+| [Formuler une question et une hypothèse de recherche](fiches/recherche-question-hypothese.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 16 | 0 | — |
+| [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 16 | 0 | — |
+| [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 16 | 0 | — |
+| [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 16 | 0 | — |
+| [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 16 | 0 | — |
+| [Lire une frise chronologique et ordonner des événements](fiches/histoire-lire-frise.html) | Histoire, chronologie et mémoire | 16 | 0 | — |
+| [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 16 | 0 | — |
+| [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 16 | 0 | — |
+| [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 16 | 0 | — |
+| [Repérer les parties d’une adresse Web](fiches/info-lire-adresse-web.html) | Informatique, algorithmique et langages de programmation | 16 | 0 | — |
+| [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 16 | 0 | — |
+| [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 16 | 0 | — |
+| [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 16 | 0 | — |
+| [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 16 | 0 | — |
+| [Lire une licence avant de réutiliser un programme](fiches/prog-lire-licence-logiciel.html) | Informatique, algorithmique et langages de programmation | 16 | 0 | — |
+| [Tester un programme avec des cas simples](fiches/prog-tester-exemples.html) | Informatique, algorithmique et langages de programmation | 16 | 0 | — |
+| [Présenter une idée avec une raison et un exemple](fiches/fr-argumenter-avec-exemple.html) | Français, lecture, écriture et communication | 16 | 0 | — |
+| [Comprendre un mot grâce à son contexte](fiches/fr-comprendre-mot-contexte.html) | Français, lecture, écriture et communication | 16 | 0 | — |
+| [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 16 | 0 | — |
+| [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 16 | 0 | — |
+| [Repérer l’idée principale et les informations utiles](fiches/fr-reperer-idee-texte.html) | Français, lecture, écriture et communication | 16 | 0 | — |
+| [Demander de l’aide ou une répétition en anglais](fiches/langue-anglais-demander-aide.html) | Langues étrangères et interculturel | 16 | 0 | — |
+| [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 16 | 0 | — |
+| [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 16 | 0 | — |
+| [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 16 | 0 | — |
+| [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 16 | 0 | — |
+| [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 16 | 0 | — |
+| [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 16 | 0 | — |
+| [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 16 | 0 | — |
+| [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 16 | 0 | — |
+| [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 16 | 0 | — |
+| [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 16 | 0 | — |
+| [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 16 | 0 | — |
+| [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 16 | 0 | — |
+| [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 16 | 0 | — |
+| [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 16 | 0 | — |
+| [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 16 | 0 | — |
+| [Repérer une source de santé publique avant d’agir](fiches/sante-reperer-source-publique.html) | Santé, alimentation, corps et sécurité | 16 | 0 | — |
+| [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 16 | 0 | — |
+| [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 16 | 0 | — |
+| [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 16 | 0 | — |
+| [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 16 | 0 | — |
+| [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 16 | 0 | — |
+| [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 16 | 0 | — |
+
+## 4. Ce qu'aucun script ne peut faire
+
+Ces questions restent entières, même quand tous les contrôles ci-dessus sont verts :
+
+- La source dit-elle réellement ce que la fiche affirme, dans sa version consultée ?
+- Les exemples et corrections sont-ils exacts pour la variété, le niveau et le public visés ?
+- Les droits permettent-ils ce qui est fait du document (citation, reprise, renvoi) ?
+- L'analogie éclaire-t-elle sans stigmatiser ni induire en erreur ?
+- Une personne réelle peut-elle s'en servir — au clavier, au lecteur d'écran, à fort zoom, sans audio ?
+- L'association autorise-t-elle la publication, et sous quelle responsabilité éditoriale ?
+
+## 5. Comment s'en servir
+
+1. Corriger d'abord les échecs mécaniques : ils sont objectifs et souvent automatiques à réparer.
+2. Une fois une fiche sans échec, ouvrir son paquet de relecture (`python3 outils/construire-paquets-relecture.py --fiche <identifiant>`) : il ne reste que les questions du §4.
+3. Consigner la relecture humaine dans `relectures.toml` (`--modele`), puis lancer `python3 outils/registre-relecture.py`.
+
+Régénérer avec `python3 outils/auditer-prototypes.py` ; vérifier avec `--verifier`.

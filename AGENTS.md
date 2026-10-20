@@ -76,6 +76,7 @@ Une fusion ou une suppression de branche ne doit laisser ni contenu perdu, ni er
 - Aucune collecte de récit personnel, santé, identité, réponse d'exercice ou donnée de test non nécessaire. Pas de télémétrie individuelle implicite.
 - Ne pas ajouter publicité, compte obligatoire, pénalité, minuterie obligatoire ou parcours forcé. Ne pas charger de média distant sans action explicite et examen de confidentialité/accessibilité.
 - Laisser la publication et les décisions éditoriales à une validation humaine. Une IA n'est pas un relecteur expert, un testeur représentatif ou un signataire de licence.
+- **Automatiser tout ce qui est mécanique, jamais ce qui demande un jugement.** `outils/auditer-prototypes.py` exécute 16 contrôles objectifs par fiche (champs, HTTPS et métadonnées de droits, dates, doublons, longueur des phrases, typographie, page générée) et publie `docs/apprentissage/audit-automatique.md`. Un audit vert ne vaut **ni relecture ni validation** : il dit seulement qu'aucun défaut mécaniquement détectable ne subsiste. Ne jamais présenter ce vert comme une approbation.
 - **Ne jamais écrire une relecture à la place d'une personne.** `docs/apprentissage/relectures.toml` est le registre des relectures humaines ; il démarre vide et un agent ne doit ni le pré-remplir, ni changer un statut vers « Relu — relecture consignée » sans une entrée réelle. `outils/registre-relecture.py --modele <fiche>` imprime le bloc à faire remplir par la personne qui a relu.
 
 ## Livraison d'une tâche
@@ -86,6 +87,7 @@ Pour un changement de contenu ou d'outil, lancer les contrôles appropriés. Por
 python3 -m py_compile simulateur/*.py api/*.py outils/*.py
 python3 outils/verifier-rd-continue.py
 python3 outils/construire-carte-lacunes.py --verifier
+python3 outils/auditer-prototypes.py --verifier
 python3 outils/construire-paquets-relecture.py --verifier
 python3 outils/test_registre_relecture.py
 python3 outils/registre-relecture.py
