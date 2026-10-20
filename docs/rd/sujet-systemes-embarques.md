@@ -1,6 +1,6 @@
 # Carte de sujet — Microcontrôleurs, objets connectés et systèmes embarqués
 
-**Statut : à documenter.** Cette carte ouvre un sujet du référentiel qui n'a **aucune fiche** (`informatique-programmation` → `systemes-embarques`, `statut = a-creer`). Elle ne contient aucune fiche, aucun programme exécutable sur matériel et aucune promesse de sécurité. Elle rassemble ce que trois sources institutionnelles ouvertes et lues le 20 octobre 2026 permettent d'affirmer, ce qu'elles ne permettent pas, et la forme que pourrait prendre un premier prototype écrit.
+**Statut : à documenter.** Cette carte a ouvert un sujet du référentiel qui n'avait **aucune fiche** (`informatique-programmation` → `systemes-embarques`) ; une première fiche existe désormais à l'état de prototype (`info-objet-connecte-local-distant`). Elle ne contient aucun programme exécutable sur matériel et aucune promesse de sécurité. Elle rassemble ce que trois sources institutionnelles ouvertes et lues le 20 octobre 2026 permettent d'affirmer, ce qu'elles ne permettent pas, et ce que couvre le premier prototype écrit.
 
 **Date de consultation des sources : 20 octobre 2026.** Rédigée par un agent, sans relecture experte ni essai avec des personnes.
 
@@ -8,7 +8,7 @@
 
 | Dimension | Contenu |
 | --- | --- |
-| Sujet du référentiel | Informatique, algorithmique et langages de programmation → « Microcontrôleurs, objets connectés et systèmes embarqués » (`statut = a-creer`) |
+| Sujet du référentiel | Informatique, algorithmique et langages de programmation → « Microcontrôleurs, objets connectés et systèmes embarqués » (`statut = partiel` depuis le 20 octobre 2026) |
 | Ce dont il s'agit | Comprendre comment un programme enfoui dans un objet relie des mesures physiques (capteurs), une règle de décision (algorithme), une interface (IHM) et une action matérielle (actionneur), ainsi que ce que change l'ajout d'une liaison réseau (collecte, commande à distance, mise à jour, exposition aux pannes et aux attaques). |
 | Ce dont il ne s'agit pas | Ni un guide de câblage électrique ou d'intervention sur le secteur, ni un manuel de sécurisation industrielle certifiée, ni un banc de programmation nécessitant d'acheter une carte électronique. |
 
@@ -36,7 +36,7 @@ Aucun de ces éléments ne prouve un besoin mesuré chez les visiteurs du M.R.S.
 
 | Sujet voisin | Lien |
 | --- | --- |
-| `sci-capteur-signal-actionneur` (fiche existante, `sciences-techniques-environnement`) | Pose déjà la chaîne capteur → signal → actionneur côté sciences ; une fiche informatique devra se concentrer sur le programme embarqué, l'IHM et la connexion réseau sans dupliquer cette fiche. |
+| `tech-electronique-capteur` (fiche existante, `sciences-techniques-environnement`) | Pose déjà la chaîne capteur → commande → actionneur côté technologie ; la fiche informatique se concentre sur le programme embarqué local, l'IHM et la liaison réseau sans dupliquer cette fiche. |
 | `info-entree-traitement-sortie` et `info-condition-si-sinon` (fiches existantes) | Fournissent le modèle entrée → traitement → sortie et le branchement conditionnel utilisés par un algorithme de contrôle. |
 | `info-systeme-exploitation` et `info-adresse-ip-dns` (fiches existantes) | Éclairent la différence entre un système complet et un micrologiciel contraint, ainsi que la liaison réseau d'un objet connecté. |
 | `securite-electricite` (`revue-experte`, sans fiche) | Frontière stricte : aucune manipulation électrique réelle ne doit être proposée dans `systemes-embarques`. |
@@ -82,10 +82,25 @@ Guide technique de l'Agence nationale de la sécurité des systèmes d'informati
 | Distinguer dans un objet décrit par écrit ce qui relève du capteur, de la règle programmée, de l'actionneur, de l'IHM et de la liaison réseau éventuelle | Fiche autonome, texte d'abord, sans matériel ni simulateur externe | Utilisable hors ligne, au clavier et avec un lecteur d'écran ; évite toute manipulation électrique. |
 | Identifier ce qui continue ou cesse de fonctionner si la liaison réseau tombe (commande distante vs règle locale) | Exercice écrit de comparaison sur un cas fictif (ex. programmateur d'arrosage ou de chauffage fictif) | Rend concret l'écart entre automatisme embarqué local et dépendance à un service distant. |
 
-**Garde-fou vis-à-vis de `sci-capteur-signal-actionneur` :** avant de rédiger une fiche, vérifier phrase par phrase qu'elle ne répète pas la fiche de sciences existante, mais porte spécifiquement sur la **règle logicielle embarquée, l'IHM et l'écart entre fonctionnement local et objet connecté**.
+**Garde-fou vis-à-vis de `tech-electronique-capteur` :** vérifier phrase par phrase que la fiche informatique ne répète pas la fiche de technologie existante, mais porte spécifiquement sur la **règle logicielle embarquée, l'IHM et l'écart entre fonctionnement local et objet connecté**.
 
 ## 7. Statut et entretien
 
-- **Statut du sujet dans `referentiel.toml` :** reste `a-creer` tant qu'aucune fiche n'est rédigée et inscrite au catalogue.
-- **Exigence avant publication d'une fiche :** sources primaires datées (présentes ci-dessus), rédaction au statut « Prototype à relire », contrôle mécanique (`auditer-prototypes.py`), puis relecture éditoriale et contrôle d'accessibilité.
-- **Prochaine action :** rédiger une première fiche prototype centrée sur la distinction entre automatisme embarqué local, interface homme-machine et liaison réseau d'un objet connecté (en vérifiant l'absence de doublon avec `sci-capteur-signal-actionneur`), ou faire d'abord relire cette carte de sujet.
+| Élément | État |
+| --- | --- |
+| Statut du sujet | `partiel` depuis le 20 octobre 2026 |
+| Contenu publié | **une fiche**, `info-objet-connecte-local-distant`, au statut « Prototype à relire » |
+| Relecture experte | **non faite** ; à faire par une personne compétente en informatique ou en systèmes embarqués |
+| Essai avec des personnes | **aucun** |
+| Relecture à prévoir | au plus tard le 18 janvier 2027 (intervalle de 90 jours) |
+
+## 8. Première fiche produite : `info-objet-connecte-local-distant`
+
+Le 20 octobre 2026, un premier point a été traité : **distinguer le programme embarqué local de la liaison réseau d'un objet connecté**, dans `apprendre/fiches/info-objet-connecte-local-distant.html`.
+
+- **Ce qui est couvert :** la différence entre un système informatique embarqué (qui exécute un programme local sur place) et un objet connecté (qui y ajoute une interface de communication réseau) ; la distinction entre une IHM placée sur l'appareil (bouton, voyant) et une IHM déportée (application mobile, serveur) ; un exercice écrit sur une prise programmable fictive permettant d'identifier ce qui continue ou s'arrête lorsque la connexion Internet est coupée ; la vigilance sur les données transmises et les mises à jour.
+- **Ce qui n'est pas couvert :** aucun câblage électrique, aucun code de microcontrôleur spécifique et aucun réglage de pare-feu ou de réseau domestique.
+- **Non-duplication vérifiée :** contrairement à `tech-electronique-capteur` (centrée sur la chaîne physique capteur → seuil → actionneur d'un éclairage automatique), `info-objet-connecte-local-distant` porte sur le partage entre exécution locale et liaison réseau, ainsi que sur les conséquences d'une coupure réseau.
+- **Sources :** programme de SNT de seconde (`23494`), activité pédagogique Éduscol (`23560`) et guide `ANSSI-PA-087`, ouverts et lus le 20 octobre 2026.
+- **Statut :** « Prototype à relire » (17/17 contrôles mécaniques `ok` dans `auditer-prototypes.py`). Relecture humaine et essais d'usage restent à réaliser.
+

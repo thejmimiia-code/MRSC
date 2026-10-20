@@ -12,9 +12,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Prototypes audités | 57 |
+| Prototypes audités | 58 |
 | Contrôles automatiques par fiche | 17 |
-| Fiches sans aucun échec mécanique | 57 |
+| Fiches sans aucun échec mécanique | 58 |
 | Fiches avec au moins un échec | 0 |
 | Échecs mécaniques au total | 0 |
 | Fiches avec un constat à trancher par une personne | 1 |
@@ -34,8 +34,8 @@ Pour la ligne « page précise » : ces fiches ne citent que des portails (racin
 
 | Fait mesuré | Valeur |
 | --- | ---: |
-| Sources déclarées au total | 108 |
-| dont licence déclarée « non vérifiée » | 107 |
+| Sources déclarées au total | 111 |
+| dont licence déclarée « non vérifiée » | 109 |
 | Fiches sans aucune source | 0 |
 | Prochaine revue la plus proche | 2027-01-09 (info-lire-adresse-web) |
 | Fiches dont la revue de contenu est échue | 0 |
@@ -69,6 +69,7 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 17 | 0 | 0 | — |
 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Repérer les parties d’une adresse Web](fiches/info-lire-adresse-web.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
+| [Distinguer programme embarqué local et liaison réseau d’un objet connecté](fiches/info-objet-connecte-local-distant.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |

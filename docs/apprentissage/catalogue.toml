@@ -4871,3 +4871,77 @@ licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est re
 droits_controles_le = "2026-10-20"
 mode_utilisation = "reference-factuelle"
 utilisation = "Échelle de contrôle phonologique lue le 20 octobre 2026 : trois sous-échelles (contrôle global, articulation des sons, traits prosodiques) et priorité donnée à l’intelligibilité sur l’accent. Aucun descripteur n’est reproduit dans la fiche."
+
+[[fiche]]
+id = "info-objet-connecte-local-distant"
+titre = "Distinguer programme embarqué local et liaison réseau d’un objet connecté"
+matiere = "Informatique et programmation"
+matiere_id = "informatique"
+domaine = "informatique-programmation"
+niveau = 2
+horizon_contenu = "Premiers repères sur l’informatique embarquée et les objets connectés ; fiche conceptuelle sans montage ni configuration réseau"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Brouillon écrit à partir du programme et de la ressource SNT de seconde sur l’informatique embarquée et les objets connectés (Éduscol, 2019) ainsi que du guide ANSSI-PA-087 sur la sécurité des systèmes d’objets connectés (2021), consultés le 20 octobre 2026. Aucun montage électrique, câblage ni réglage réseau n’est demandé. Relecture par une personne compétente en informatique ou systèmes embarqués, vérification des droits, contrôle d’accessibilité et essais avec des personnes apprenantes restent à faire."
+minutes = 10
+resume = "Dans un objet connecté décrit par écrit, séparer ce que le programme embarqué exécute sur place de ce qui dépend d’une liaison réseau, et prévoir ce qui change si le réseau est coupé."
+objectif = "À partir de la fiche descriptive d’un objet informatisé, classer ses fonctions entre programme embarqué local, interface sur l’appareil et échange réseau avec un service ou un téléphone."
+situation = "Un programmateur d’arrosage fictif possède un bouton « Marche », un voyant, une horloge interne et une liaison sans fil vers une application mobile. Si la boxe Internet du logement est éteinte, quelles actions restent possibles sur place et lesquelles s’arrêtent ?"
+analogie_titre = "Comme un guichet muni d’un registre sur place et d’un téléphone"
+analogie = "Un guichet qui garde son registre papier sur place peut encore noter une entrée ou répondre à un visiteur présent, même si la ligne téléphonique avec le bureau central est coupée. En revanche, il ne peut plus envoyer son relevé à distance ni recevoir une consigne téléphonique."
+limite_analogie = "Un système informatique embarqué n’est pas une personne qui improvise en cas de coupure. S’il a été conçu pour attendre obligatoirement la réponse d’un serveur distant avant d’agir, même une fonction simple sur place peut se bloquer lorsque la liaison réseau disparaît."
+notions = [
+  "Système informatique embarqué — ensemble matériel et logiciel intégré dans un objet pour exécuter sur place une tâche précise, en lisant des capteurs et en pilotant des actionneurs.",
+  "Objet connecté — objet doté d’un système embarqué et d’une interface de communication qui lui permet d’échanger des données avec d’autres appareils ou avec un service sur un réseau.",
+  "Interface homme-machine (IHM) — moyens par lesquels une personne consulte l’état de l’objet ou lui donne une consigne, sur l’appareil lui-même (bouton, voyant, écran) ou à distance via une application.",
+  "Traitement local — règle exécutée directement par le programme interne de l’objet, sans passer par un serveur distant.",
+  "Échange réseau — envoi de relevés, réception d’une commande à distance ou téléchargement d’une mise à jour par une liaison filaire ou sans fil."
+]
+demarche = [
+  "Repère d’abord ce qui se trouve sur l’appareil lui-même : capteurs, actionneurs, programme interne, boutons et voyants.",
+  "Note les actions qui n’utilisent que ces éléments présents sur place : elles relèvent du fonctionnement local.",
+  "Repère ensuite ce qui suppose un autre appareil ou un serveur : consulter un historique sur téléphone, commander à distance ou recevoir une alerte hors du logement.",
+  "Demande-toi ce qui se passe si la liaison réseau est coupée : l’objet garde-t-il un bouton ou un réglage utilisable sur place ?",
+  "Regarde enfin quelles données quittent l’objet vers le réseau : même des horaires ou des mesures régulières peuvent révéler la présence ou les habitudes des personnes."
+]
+exercice = "Une prise programmable fictive propose quatre fonctions. 1) Couper le courant quand son bouton physique est pressé. 2) Suivre un horaire déjà enregistré dans sa mémoire interne. 3) Afficher la consommation sur un téléphone hors du domicile. 4) Recevoir une nouvelle consigne envoyée depuis un serveur distant. Classe ces quatre fonctions entre fonctionnement local et liaison réseau, puis indique lesquelles continuent si la liaison Internet est coupée."
+aide = "Demande-toi pour chaque fonction si l’information doit franchir le réseau jusqu’à un téléphone ou un serveur, ou si tout est déjà présent dans le boîtier de la prise."
+correction = [
+  "Fonctionnement local dans l’appareil : 1) couper le courant avec le bouton physique et 2) suivre l’horaire déjà enregistré dans la mémoire interne.",
+  "Fonctions dépendantes de la liaison réseau : 3) envoyer la consommation vers un téléphone hors du domicile et 4) recevoir une nouvelle consigne depuis un serveur distant.",
+  "Si la liaison Internet est coupée mais que la prise reste alimentée, les fonctions 1 et 2 peuvent continuer sur place, tandis que les fonctions 3 et 4 sont indisponibles jusqu’au retour de la liaison.",
+  "Ce classement dépend de la conception réelle de l’appareil : certains modèles refusent aussi un réglage si aucun bouton local n’a été prévu."
+]
+a_retenir = [
+  "Tout objet connecté contient un système embarqué, mais un système embarqué peut fonctionner sans être connecté à un réseau.",
+  "Séparer le programme local de la liaison réseau permet de prévoir ce qui continue à fonctionner sur place en cas de panne de connexion.",
+  "Une interface homme-machine peut être placée sur l’objet (bouton, voyant) ou déportée sur un autre terminal (application, page web).",
+  "Les données transmises sur le réseau et les mises à jour logicielles engagent la sécurité et la vie privée, même pour un objet du quotidien."
+]
+transferer = "Avant d’utiliser ou de choisir un appareil connecté (thermostat, serrure, prise, capteur), vérifie s’il conserve une commande locale sans réseau et quelles données il transmet à un service externe. Cette fiche ne donne aucune consigne de branchement électrique ni de configuration de pare-feu : pour une installation réelle, reporte-toi à la notice du fabricant et aux recommandations de sécurité."
+revue_le = "2026-10-20"
+intervalle_revue_jours = 90
+
+[[fiche.sources]]
+titre = "Éduscol — Programme de sciences numériques et technologie de seconde générale et technologique (BO spécial n° 1 du 22 janvier 2019)"
+url = "https://eduscol.education.fr/document/23494/download"
+licence_source = "Non vérifiée — texte réglementaire consulté ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Section « Informatique embarquée et objets connectés » lue le 20 octobre 2026 : définition d’un système informatique embarqué, rôle de l’interface homme-machine (IHM) sur l’objet ou déportée, et interaction avec des capteurs et actionneurs. Aucun extrait ni schéma du programme n’est reproduit."
+
+[[fiche.sources]]
+titre = "Éduscol — « SNT seconde : Informatique embarquée et objets connectés — Activité 2 : Impact et importance de l’informatisation des objets »"
+url = "https://eduscol.education.fr/document/23560/download"
+licence_source = "Non vérifiée — document ministériel consulté ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Ressource pédagogique consultée le 20 octobre 2026 : distinction entre l’objet simplement informatisé et l’objet connecté qui ajoute une interface de communication réseau. Aucun exercice ni texte de la ressource n’est repris."
+
+[[fiche.sources]]
+titre = "ANSSI — « Recommandations relatives à la sécurité des (systèmes d’)objets connectés » (ANSSI-PA-087)"
+url = "https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-securite_des_systemes_objets_connectes_iot-v1.0.pdf"
+licence_source = "Licence Ouverte v2.0 (Etalab) mentionnée en page 2 du guide ; utilisée ici en simple référence factuelle sans reprise"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Guide consulté le 20 octobre 2026 : architecture d’un système d’objets connectés (capteurs/actionneurs, passerelles, système d’information et terminaux) et rappel que des données apparemment anodines peuvent révéler des habitudes de vie. Aucun schéma ni recommandation textuelle n’est reproduit."
+

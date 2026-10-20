@@ -127,3 +127,18 @@ faux_positif_possible = "Les mots « observation », « hypothèses » et « int
 faux_negatif_possible = "La fiche distingue « élément naturel » et « aménagement », tandis que le document Éduscol 16804 emploie « objets », « ensembles » et « formes d'organisation » : chercher « aménagement » produirait un faux négatif lexical."
 limite = "Cet indice ne valide ni la description fictive de vallée ni la réserve sur l'accessibilité du pont, qui relèvent du choix éditorial de la fiche."
 
+[[confrontation]]
+id = "objet-connecte-local-distant-snt-23494"
+fiche = "info-objet-connecte-local-distant"
+url_source = "https://eduscol.education.fr/document/23494/download"
+affirmation_fiche = "Un système informatique embarqué exécute des algorithmes de contrôle reliant capteurs, interface homme-machine (IHM) sur l'objet ou déportée et actionneurs, tandis que la connexion réseau expose aussi aux enjeux de sûreté et de sécurité."
+ancres_attendues = ["informatique embarquée", "objets connectés", "capteurs", "actionneurs", "interface homme-machine", "sûreté", "sécurité"]
+ancres_reperees = ["informatique embarquée", "objets connectés", "capteurs", "actionneurs", "interface homme-machine", "sûreté", "sécurité"]
+ancres_absentes = []
+date_releve = 2026-10-20
+etat_releve = "indice-concordant"
+faux_positif_possible = "Le programme de SNT regroupe sept thématiques dans un même PDF : les mots « réseau », « données » ou « sécurité » apparaissent aussi dans les chapitres sur Internet ou les réseaux sociaux sans concerner le programme embarqué d'un objet."
+faux_negatif_possible = "La fiche oppose « fonctionnement local » et « liaison réseau » en cas de coupure d'Internet, tandis que le programme officiel parle de « système informatique embarqué », de « réseau local » et d'IHM « sur l'objet ou déportée »."
+limite = "Cet indice vérifie l'alignement terminologique avec le programme de SNT de seconde au 20 octobre 2026 ; il ne prouve pas que l'exercice de la prise programmable fictive a été relu par une personne compétente en systèmes embarqués."
+
+

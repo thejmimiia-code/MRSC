@@ -485,8 +485,8 @@ fiches = ["prog-lire-licence-logiciel"]
 [[domaine.sujet]]
 id = "systemes-embarques"
 titre = "Microcontrôleurs, objets connectés et systèmes embarqués"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["info-objet-connecte-local-distant"]
 
 [[domaine]]
 id = "arts-culture"

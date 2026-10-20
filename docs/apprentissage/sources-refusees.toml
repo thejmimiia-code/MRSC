@@ -91,3 +91,15 @@ motif = "Ouverte et lue intégralement (4 parties) le 20 octobre 2026 : la resso
 decision = "portail-conserve"
 limite = "Refuser cette page maintient volontairement la fiche arts-composer-formes en constat (portail seul assumé par écrit) plutôt que d'y attacher une citation de façade qui ne couvre pas son affirmation principale."
 
+[[refus]]
+id = "eduscol-referentiel-h092c-tronque"
+fiche = "arts-composer-formes"
+titre_pressenti = "Éduscol — Référentiel du baccalauréat professionnel « Artisanat et métiers d'art, option communication visuelle plurimédia » (annexe 1, PDF)"
+url = "https://referentiels-professionnels.eduscol.education.fr/h092/h092c.pdf"
+date = 2026-10-20
+categorie_motif = "extraction-incomplete"
+motif = "Ouvert le 20 octobre 2026 (fragments 0, 1, 4, 5, 6 et 7 sur 8) : le sommaire du référentiel annonce bien la section « S 2.4 – Composition texte/image, mise en page(s) », mais l'extraction s'arrête à la page 30 (table S 1.2) avant d'atteindre le tableau détaillé de la section S 2.4. Conformément à la règle interdisant de citer un passage qui n'a pas pu être lu directement, ce PDF n'est pas retenu."
+decision = "portail-conserve"
+limite = "Ce refus ne met pas en cause le référentiel officiel ; il documente une limite matérielle d'extraction à 30 pages sur un PDF long, afin de ne jamais citer un tableau sur la seule foi d'un extrait de moteur de recherche."
+
+

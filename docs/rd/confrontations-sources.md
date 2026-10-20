@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Confrontations documentées | 8 |
-| Fiches distinctes couvertes | 8 |
-| Indice concordant (`indice-concordant`) | 7 |
+| Confrontations documentées | 9 |
+| Fiches distinctes couvertes | 9 |
+| Indice concordant (`indice-concordant`) | 8 |
 | Constat de couverture partielle (`constat-couverture-partielle`) | 1 |
 
 Aucun des états ci-dessus n'est une validation éditoriale ni un verdict d'erreur contre la fiche.
@@ -90,6 +90,18 @@ Aucun des états ci-dessus n'est une validation éditoriale ni un verdict d'erre
 - **Faux positif documenté :** La présence simultanée de « 30 ans », « moyenne » et « vague de froid » dans la page ne prouve pas le sens de la relation : un texte qui contesterait la normale de 30 ans contiendrait exactement les mêmes ancres.
 - **Faux négatif documenté :** Si Météo-France remplace « 30 ans » par « trente années » ou déplace ce repère dans un schéma illustré, l'ancre disparaît du texte brut alors que l'affirmation reste étayée.
 - **Limite :** Cet indice confirme uniquement que les six repères lexicaux figuraient dans la page ouverte le 20 octobre 2026 ; il ne vérifie ni la justesse pédagogique de la fiche ni l'absence de contresens.
+
+### `objet-connecte-local-distant-snt-23494` (`info-objet-connecte-local-distant`)
+
+- **Source confrontée :** `https://eduscol.education.fr/document/23494/download`
+- **Affirmation de la fiche (texte M.R.S.C.) :** Un système informatique embarqué exécute des algorithmes de contrôle reliant capteurs, interface homme-machine (IHM) sur l'objet ou déportée et actionneurs, tandis que la connexion réseau expose aussi aux enjeux de sûreté et de sécurité.
+- **Ancres cherchées (7) :** `informatique embarquée`, `objets connectés`, `capteurs`, `actionneurs`, `interface homme-machine`, `sûreté`, `sécurité`
+- **Ancres repérées :** `informatique embarquée`, `objets connectés`, `capteurs`, `actionneurs`, `interface homme-machine`, `sûreté`, `sécurité`
+- **Ancres absentes :** aucune
+- **État du relevé (2026-10-20) :** `indice-concordant` — Indice concordant — toutes les ancres figuraient dans la page à la date du relevé (ne vaut pas validation)
+- **Faux positif documenté :** Le programme de SNT regroupe sept thématiques dans un même PDF : les mots « réseau », « données » ou « sécurité » apparaissent aussi dans les chapitres sur Internet ou les réseaux sociaux sans concerner le programme embarqué d'un objet.
+- **Faux négatif documenté :** La fiche oppose « fonctionnement local » et « liaison réseau » en cas de coupure d'Internet, tandis que le programme officiel parle de « système informatique embarqué », de « réseau local » et d'IHM « sur l'objet ou déportée ».
+- **Limite :** Cet indice vérifie l'alignement terminologique avec le programme de SNT de seconde au 20 octobre 2026 ; il ne prouve pas que l'exercice de la prise programmable fictive a été relu par une personne compétente en systèmes embarqués.
 
 ### `situer-siecle-bornes-sans-an-zero` (`histoire-situer-siecle`)
 

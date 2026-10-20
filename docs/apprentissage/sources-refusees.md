@@ -10,11 +10,12 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Sources refusées consignées | 6 |
+| Sources refusées consignées | 7 |
 | Fiches du catalogue concernées | 5 |
 | Refus suivis d'une page de remplacement ouverte et lue | 5 |
 | Motif : Accès refusé (HTTP 403) | 3 |
 | Motif : Contenu hors du périmètre cherché après lecture | 3 |
+| Motif : Document trop long ou tronqué avant le passage cherché | 1 |
 
 Un refus consigné ne valide jamais la fiche associée : le statut éditorial dépend uniquement du registre des relectures humaines (`docs/apprentissage/relectures.toml`).
 
@@ -29,6 +30,16 @@ Un refus consigné ne valide jamais la fiche associée : le statut éditorial d�
 - **Motif constaté :** Ouverte et lue intégralement (4 parties) le 20 octobre 2026 : la ressource définit les notions de forme, d'espace et de support aux cycles 2 et 3, mais n'énonce ni la hiérarchie visuelle par taille, distance et isolement autour d'un titre, ni la règle d'accessibilité sur le contraste ne reposant pas sur la seule couleur.
 - **Décision retenue :** Portail conservé par écrit en l'attente d'une page précise (`portail-conserve`)
 - **Limite — ce que ce refus ne dit pas :** Refuser cette page maintient volontairement la fiche arts-composer-formes en constat (portail seul assumé par écrit) plutôt que d'y attacher une citation de façade qui ne couvre pas son affirmation principale.
+
+### `eduscol-referentiel-h092c-tronque` — Éduscol — Référentiel du baccalauréat professionnel « Artisanat et métiers d'art, option communication visuelle plurimédia » (annexe 1, PDF)
+
+- **Fiche concernée :** `arts-composer-formes`
+- **Adresse écartée :** `https://referentiels-professionnels.eduscol.education.fr/h092/h092c.pdf`
+- **Date de la tentative :** 2026-10-20
+- **Catégorie de refus :** Document trop long ou tronqué avant le passage cherché (`extraction-incomplete`)
+- **Motif constaté :** Ouvert le 20 octobre 2026 (fragments 0, 1, 4, 5, 6 et 7 sur 8) : le sommaire du référentiel annonce bien la section « S 2.4 – Composition texte/image, mise en page(s) », mais l'extraction s'arrête à la page 30 (table S 1.2) avant d'atteindre le tableau détaillé de la section S 2.4. Conformément à la règle interdisant de citer un passage qui n'a pas pu être lu directement, ce PDF n'est pas retenu.
+- **Décision retenue :** Portail conservé par écrit en l'attente d'une page précise (`portail-conserve`)
+- **Limite — ce que ce refus ne dit pas :** Ce refus ne met pas en cause le référentiel officiel ; il documente une limite matérielle d'extraction à 30 pages sur un PDF long, afin de ne jamais citer un tableau sur la seule foi d'un extrait de moteur de recherche.
 
 ### `eduscol-se-reperer-temps-hors-perimetre` — Éduscol — « Se repérer dans le temps : construire des repères historiques » (PDF)
 
