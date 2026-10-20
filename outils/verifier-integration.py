@@ -9,6 +9,8 @@ Contrôles effectués :
    monté dans un serveur local, comme le fait Vercel, puis interrogé ;
 4. les pages du site, `404.html`, `assets/` et les liens de navigation sont
    présents, et aucune ressource publiée de `assets/` n'est orpheline ;
+5. les nombres annoncés en prose sur les pages publiques correspondent au
+   catalogue et au nombre réel de pages du dépôt ;
 5. la fonction `api/verifier-source.py` (source distante du simulateur) répond
    correctement, sur une source simulée puis sur une source injoignable ;
 6. les consignes, skills, portefeuille et veille R&D continue restent cohérents.
@@ -160,6 +162,54 @@ def recherche_developpement_continue() -> None:
         code == 0,
         sortie.splitlines()[-1] if sortie else "",
     )
+
+
+def chiffres_publics_coherents() -> None:
+    """Les nombres annoncés en prose sur les pages publiques suivent leur source de vérité.
+
+    Rien ne reliait jusqu'ici « 81 fiches dans 15 domaines » écrit dans une page au
+    contenu réel de `catalogue.toml` : le catalogue pouvait grandir et la page
+    continuer d'afficher l'ancien total sans qu'aucun contrôle ne bronche. Les
+    nombres sont recalculés depuis les fichiers de référence, jamais recopiés.
+    """
+    try:
+        fiches = tomllib.loads((RACINE / "docs" / "apprentissage" / "catalogue.toml").read_text(encoding="utf-8"))["fiche"]
+        domaines = tomllib.loads((RACINE / "docs" / "apprentissage" / "referentiel.toml").read_text(encoding="utf-8"))["domaine"]
+    except (OSError, KeyError, tomllib.TOMLDecodeError) as erreur:
+        verifier("Catalogue d’apprentissage lisible pour recalculer les nombres publics", False, str(erreur))
+        return
+    total = len(fiches)
+    prototypes = sum(1 for fiche in fiches if fiche.get("statut_editorial") == "Prototype à relire")
+    initiales = total - prototypes
+    nb_domaines = len(domaines)
+    pages_html = [chemin for chemin in RACINE.rglob("*.html") if ".git" not in chemin.parts]
+    attendus = {
+        "apprendre.html": (
+            f"{total} fiches",
+            f"{initiales} fiches",
+            f"{prototypes} prototypes",
+            f"{nb_domaines} univers",
+        ),
+        "transparence.html": (
+            f"{total} fiches dans {nb_domaines} domaines",
+            f"{initiales} fiches du corpus initial",
+            f"{prototypes} prototypes explicitement à relire",
+            f"{len(pages_html)} pages HTML du dépôt",
+        ),
+        "anglais-aventure.html": (
+            f"{total} fiches",
+            f"{prototypes} prototypes",
+            f"{nb_domaines} mondes",
+        ),
+    }
+    for page, nombres in attendus.items():
+        texte = unescape((RACINE / page).read_text(encoding="utf-8"))
+        absents = [nombre for nombre in nombres if nombre not in texte]
+        verifier(
+            f"Les nombres annoncés dans {page} correspondent au catalogue et au dépôt",
+            not absents,
+            ", ".join(absents) if absents else f"{total} fiches · {initiales} initiales · {prototypes} prototypes · {nb_domaines} domaines · {len(pages_html)} pages HTML",
+        )
 
 
 def fichiers_du_site() -> None:
@@ -1371,6 +1421,7 @@ def main() -> int:
     page_a_jour()
     fonctions_conformes()
     fichiers_du_site()
+    chiffres_publics_coherents()
     ressources_citees()
     liens_et_scripts_statiques()
     recherche_developpement_continue()
