@@ -40,7 +40,7 @@ Commencer par des expressions réutilisables, puis développer l'écoute, la lec
 | Demander une direction en anglais | Début de couverture — à approfondir | [`langue-anglais-direction`](../apprendre/fiches/langue-anglais-direction.html) |
 | Comprendre et échanger dans d’autres situations quotidiennes | Début de couverture — à approfondir | [`langue-anglais-demander-aide`](../apprendre/fiches/langue-anglais-demander-aide.html)<br>[`langue-anglais-epeler`](../apprendre/fiches/langue-anglais-epeler.html) |
 | Autres langues, langues régionales et français langue seconde | Début de couverture — à approfondir | [`langue-reperer-mot-deja-connu`](../apprendre/fiches/langue-reperer-mot-deja-connu.html) |
-| Écoute, prononciation et ressources audio accessibles | Début de couverture — à approfondir | [`langue-anglais-prononcer-ed`](../apprendre/fiches/langue-anglais-prononcer-ed.html) |
+| Écoute, prononciation et ressources audio accessibles | Début de couverture — à approfondir | [`langue-anglais-prononcer-ed`](../apprendre/fiches/langue-anglais-prononcer-ed.html)<br>[`langue-anglais-prononcer-th`](../apprendre/fiches/langue-anglais-prononcer-th.html) |
 
 **Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 

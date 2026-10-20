@@ -16,7 +16,7 @@ Limites : un inventaire statique ne voit ni les couleurs des images, ni celles c
 | `assets/css/anglais-aventure.css` | 231 / 131 | 35 (31 distinctes) |
 | `outils/construire-simulateur.py` (habillage de la page autonome) | 66 / 33 | 11 (5 distinctes) |
 | `outils/construire-apprentissages.py` | 1 / 1 | 0 |
-| Pages HTML et 81 fiches | métadonnée `theme-color` `#1d3268` (= `--navy`) ; aucune couleur propre — les fiches chargent `site.css` | 0 |
+| Pages HTML et 83 fiches | métadonnée `theme-color` `#1d3268` (= `--navy`) ; aucune couleur propre — les fiches chargent `site.css` | 0 |
 | Scripts du site (`site.js`, `navigation-parcours.js`, `apprentissage.js`, fichiers de données) | 0 | 0 |
 
 **Hors périmètre « thème d’interface »** (inventoriés pour ne pas les confondre avec les couleurs d’interface) :

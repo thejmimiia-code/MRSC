@@ -154,7 +154,10 @@ def construire(fiches: list[dict], domaines: list[dict], revue: str) -> str:
     textes.append("")
     textes.append(f"## 3. Les {len(sans_fiche)} sujets sans aucune fiche")
     textes.append("")
-    textes.append("Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Les 72 sujets `partiel` ont déjà au moins une fiche : leur manque est à qualifier sujet par sujet, il n'est pas listé ici.")
+    textes.append(
+        f"Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Les {totaux.get('partiel', 0)} sujets `partiel` "
+        "ont déjà au moins une fiche : leur manque est à qualifier sujet par sujet, il n'est pas listé ici."
+    )
     textes.append("")
     textes.append(ligne(["Domaine", "Sujet", "Statut", "Exigence de preuve avant publication", "Travail ouvert"]))
     textes.append(ligne(["---", "---", "---", "---", "---"]))
@@ -164,7 +167,7 @@ def construire(fiches: list[dict], domaines: list[dict], revue: str) -> str:
     textes.append("## 4. Ce que cette carte ne dit pas")
     textes.append("")
     textes.append("- Elle ne dit pas qu'un sujet absent du référentiel n'existe pas : le référentiel est une carte de travail, pas un inventaire du savoir.")
-    textes.append("- Elle ne dit rien de la qualité des 81 fiches publiées ni de l'exactitude de leur contenu.")
+    textes.append(f"- Elle ne dit rien de la qualité des {len(fiches)} fiches publiées ni de l'exactitude de leur contenu.")
     textes.append("- Elle ne fournit aucune source : chaque sujet ouvert doit encore être documenté auprès de sources primaires, avec leur date, leur périmètre et leurs droits.")
     textes.append("- Elle ne hiérarchise pas les domaines : un domaine à onze sujets à créer n'est pas « plus important » qu'un domaine à un sujet.")
     textes.append("- Elle applique l'exigence de preuve du domaine déclaré : un sujet de santé rangé sous « études supérieures » (ISCED-F 09) reçoit l'exigence générale. Ce classement est à corriger au cas par cas, pas à lire comme une règle de risque.")

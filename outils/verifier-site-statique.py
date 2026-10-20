@@ -743,7 +743,44 @@ console.log(`${missions.length} escales, ${missions.reduce((n, m) => n + m.turns
 
 
 def verifier_dossier_apprentissage() -> None:
+    total, initiales, prototypes = totaux_catalogue()
+    pages_publiques = len([
+        chemin for chemin in ROOT.rglob("*.html")
+        if ".git" not in chemin.parts and chemin.name != "404.html"
+    ])
     controles = {
+        ROOT / "README.md": (
+            f"{total} fiches dans 15 domaines",
+            f"{prototypes} prototypes",
+            f"budgets ({pages_publiques} pages)",
+        ),
+        ROOT / "docs" / "apprentissage" / "grille-relecture.md": (
+            f"range les {prototypes} prototypes par domaine",
+            "ne vaut pas validation",
+        ),
+        ROOT / "docs" / "rd-innovation-continue.md": (
+            f"relie les {total} fiches à 15 domaines; {prototypes} fiches portent le statut « Prototype à relire »",
+        ),
+        ROOT / "docs" / "rd-anglais-aventure.md": (
+            f"Le jeu relie les **{total} fiches** du catalogue",
+            f"(26 fiches du corpus initial et {prototypes} prototypes à relire)",
+        ),
+        ROOT / "docs" / "rd" / "prospective-2027-2030.md": (
+            f"{total} fiches dans 15 domaines, dont {prototypes} prototypes explicitement à relire",
+            f"{prototypes} prototypes sont à relire",
+        ),
+        ROOT / "docs" / "rd" / "poids-et-sobriete-numerique.md": (
+            f"parcourt les {pages_publiques} pages publiques",
+            f"{total} fiches et la page du simulateur",
+            f"Les {pages_publiques} pages restent sous les budgets",
+        ),
+        ROOT / "docs" / "rd" / "inventaire-couleurs-jetons.md": (
+            f"Pages HTML et {total} fiches",
+        ),
+        ROOT / "docs" / "rd" / "portefeuille.toml": (
+            f"Faire relire les {prototypes} prototypes d'apprentissage",
+            f"répartir les {prototypes} prototypes",
+        ),
         ROOT / "apprendre.html": (
             f"{totaux_catalogue()[0]} entrées : {totaux_catalogue()[1]} fiches du corpus initial et {totaux_catalogue()[2]} prototypes explicitement à relire",
             "La relecture indépendante de toutes les fiches du corpus initial n’est pas garantie",

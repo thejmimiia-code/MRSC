@@ -92,7 +92,7 @@ Même recommandation ; page « Understanding SC 1.4.2 », consultée le 20 octob
 | Élément | État |
 | --- | --- |
 | Statut du sujet | `partiel` depuis le 20 octobre 2026 |
-| Contenu publié | **une fiche**, `langue-anglais-prononcer-ed`, au statut « Prototype à relire » |
+| Contenu publié | **deux fiches**, `langue-anglais-prononcer-ed` et `langue-anglais-prononcer-th`, au statut « Prototype à relire » |
 | Relecture experte | **non faite** ; à faire par une personne compétente en didactique des langues et en accessibilité |
 | Essai avec des personnes | **aucun** |
 | Relecture à prévoir | à la prochaine revue de portefeuille, au plus tard le 19 novembre 2026 |
@@ -114,11 +114,36 @@ Le 20 octobre 2026, un premier point a été traité : **la fin -ed des verbes a
 - **Sources :** Britannica Dictionary (règle et exemples) et la page « compétence phonologique » du CEFR (intelligibilité avant accent), consultées le 20 octobre 2026.
 - **Statut :** « Prototype à relire ». Une personne compétente en didactique de l'anglais doit vérifier les exemples et la progression ; aucune validation n'est revendiquée.
 
-## 10. Ce qui reste à faire, dans l'ordre
+## 10. Deuxième fiche produite : lire « th » dans un dictionnaire
 
-1. Lire l'échelle de phonologie du *Companion Volume* 2020 et en extraire uniquement les descripteurs utilisables en autonomie.
-2. Choisir **un** point de prononciation précis (par exemple un contraste de voyelles), écrire la fiche, la garder en « Prototype à relire ».
-3. Faire relire par une personne compétente ; consigner les objections.
+Le 20 octobre 2026, le point suivant a été traité : **le choix entre /θ/ et /ð/**, dans `apprendre/fiches/langue-anglais-prononcer-th.html`.
+
+- **Ce qui est couvert :** les deux symboles et leur différence de voisement ; le fait que les seules lettres « th » ne suffisent pas à décider ; la lecture de la transcription entre barres obliques ; six exemples dont la transcription a été relevée dans Cambridge Dictionary ; un exercice de classement et une paire proche (« breath » / « breathe »).
+- **Ce qui n'est pas couvert :** aucun son n'est diffusé ; la fiche ne donne **pas** de règle complète de répartition de « th » selon la position dans le mot, ni les exceptions, ni les variétés où la prononciation change. Devant un mot nouveau, elle renvoie au dictionnaire, mot par mot.
+- **Sources :** Cambridge Dictionary, page « Pronunciation symbols » et quatre entrées (« three », « mother », « breath », « breathe »), consultées le 20 octobre 2026, plus l'échelle de phonologie du §11.
+- **Statut :** « Prototype à relire ». Relecture par une personne compétente en didactique de l'anglais et en phonétique : **non faite** ; aucune validation n'est revendiquée.
+
+## 11. L'échelle de phonologie du Companion Volume 2020, lue au texte
+
+La source qui manquait au §5.1 a été lue directement le 20 octobre 2026 : Conseil de l'Europe, *Common European Framework of Reference for Languages: Learning, teaching, assessment — Companion Volume*, 2020, chapitre 5 « The CEFR illustrative descriptor scales: communicative language competences », échelle « Phonological control » (p. 133-135 du volume imprimé).
+<https://rm.coe.int/chapter-5-communicative-language-competences/1680a084c3>
+
+**Ce que le texte établit :**
+
+- l'échelle se présente en **trois colonnes** — contrôle phonologique global, articulation des sons, traits prosodiques (accent, rythme, intonation, débit et découpage de la parole) — et non en une note unique ;
+- les descripteurs vont de A1 à C2 et prennent l'**intelligibilité** pour critère : un accent d'origine n'est pas un défaut en soi, seule la compréhension par l'autre est évaluée ;
+- presque tous supposent **un interlocuteur** : « provided the interlocutor makes an effort to understand specific sounds » (A2, articulation), « interlocutors used to dealing with speakers of the language group » (A1, contrôle global), « they can usually self-correct if they noticeably mispronounce a sound » (C1, articulation) ;
+- **un seul descripteur décrit une action vérifiable sans auditeur**, en articulation, niveau B2 : « Can generalise from their repertoire to predict the phonological features of most unfamiliar words (e.g. word stress) with reasonable accuracy (e.g. while reading). »
+
+**Ce que cela change pour la conception :** une fiche entièrement écrite ne peut viser honnêtement que ce dernier type d'action — *prédire depuis l'écrit, puis vérifier dans un dictionnaire*. Elle ne peut pas revendiquer de développer l'articulation ni la prosodie, que l'échelle fait dépendre d'un auditeur ou d'une auto-écoute. C'est la règle que suivent les deux fiches existantes.
+
+**Ce que l'échelle ne fournit pas :** ni progression, ni contenu, ni ordre d'enseignement, ni critère pour choisir les sons à traiter. C'est un instrument d'évaluation par autrui, pas un programme. Les descripteurs cités le sont en citation courte et attribuée ; l'échelle n'est pas reproduite.
+
+## 12. Ce qui reste à faire, dans l'ordre
+
+1. ~~Lire l'échelle de phonologie du *Companion Volume* 2020 et en extraire uniquement les descripteurs utilisables en autonomie.~~ Fait le 20 octobre 2026 (§11).
+2. Faire relire **les deux fiches** par une personne compétente en didactique de l'anglais et en phonétique ; consigner les objections, y compris sur les transcriptions relevées.
+3. Après relecture seulement, décider si un troisième point est utile — un accent de mot, par exemple — en restant dans les actions vérifiables à l'écrit.
 4. Seulement ensuite, décider s'il faut un audio, et sous quelles conditions de droits.
 
 Régénérer la [carte des lacunes](carte-lacunes.md) après toute modification du référentiel ; cette carte y apparaît comme travail ouvert sur le sujet `ecoute-prononciation`.
