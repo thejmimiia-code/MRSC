@@ -2,6 +2,19 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — Premier sujet ouvert par une carte de sujet, sources vérifiées
+
+- **Initiative :** `cartographier-les-lacunes`.
+- **Signal :** après la carte des 19 sujets sans fiche, en ouvrir **un seul** plutôt que d'en annoncer dix-neuf. Choix : `ecoute-prononciation` (« Écoute, prononciation et ressources audio accessibles », domaine langues étrangères, statut `a-creer`), parce qu'il est le seul du lot à ne dépendre d'aucune relecture spécialisée tout en touchant un point d'accessibilité mesurable.
+- **Travail livré :** `docs/rd/sujet-ecoute-prononciation.md`, carte de sujet complète (identité, besoin, portée, relations, preuve, forme d'apprentissage, statut, entretien, critères de passage à une fiche). **Aucune fiche n'est créée** et le statut du référentiel reste `a-creer`.
+- **Sources consultées et vérifiées une par une** (pages ouvertes le 20 octobre 2026, jamais citées de mémoire) : Conseil de l'Europe, page « Phonological competence » du CEFR — trois sous-échelles, phonologie rarement enseignée explicitement, intelligibilité prioritaire sur l'accent ; W3C, WCAG 2.2, compréhension du critère **1.2.1** — alternative obligatoire pour l'audio seul préenregistré ; W3C, WCAG 2.2, critère **1.4.2** — audio de plus de trois secondes arrêtable, démarrage automatique déconseillé. Chaque source est accompagnée de ce qu'elle **ne** prouve pas.
+- **Ce qui n'a pas été fait, volontairement :** le *Companion Volume* 2020 lui-même n'a pas été ouvert, donc ses descripteurs ne sont pas cités ; aucune source n'a été lue intégralement ; aucune synthèse vocale n'a été produite, faute de droits et de décision associative.
+- **Garde-fou ajouté :** la carte des lacunes signale désormais les sujets ouverts par une carte de sujet (« dont ouverts par une carte de sujet : 1 »), toujours générée depuis le référentiel et le contenu réel du dossier — aucun état recopié à la main.
+- **Contraintes de conception retenues :** la fiche restera utilisable **sans audio** ; un audio éventuel serait déclenché par une action volontaire, arrêtable et doublé d'une alternative textuelle ; aucune voix d'apprenant collectée, aucune correction automatique promise.
+- **Limite :** aucune observation d'usage, aucune relecture experte, aucun essai avec des personnes. Une carte de sujet n'est pas un contenu validé ; elle rend une décision possible, pas la décision.
+- **Contrôles réellement exécutés :** `construire-carte-lacunes.py` puis `--verifier`, `verifier-rd-continue.py` (carte synchronisée, preuve présente), et la porte complète.
+- **Prochaine action :** lire l'échelle de phonologie du *Companion Volume* 2020 depuis le texte, choisir un seul point de prononciation, rédiger une fiche candidate en « Prototype à relire », puis la faire relire par une personne compétente.
+
 ## 2026-10-20 — Revue de portefeuille et carte des lacunes générée
 
 - **Initiative :** `cartographier-les-lacunes` (nouvelle, P1), plus `veille-savoirs-evolutifs` et `poids-et-sobriete-numerique` mis à jour.
