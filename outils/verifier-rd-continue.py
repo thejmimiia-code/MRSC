@@ -258,7 +258,9 @@ def verifier_paquets_relecture(verificateur: Verificateur) -> None:
         module = importlib.util.module_from_spec(specification)
         specification.loader.exec_module(module)
         elements, titres = module.enrichir(module.charger_module_file_relecture())
-        attendu = module.construire(elements, titres, dernieres=module.dernieres_relectures())
+        attendu = module.construire(
+            elements, titres, dernieres=module.dernieres_relectures(), automatiques=module.etats_automatiques()
+        )
     except Exception as erreur:  # noqa: BLE001 - un générateur cassé doit être signalé, pas masqué
         verificateur.verifier("Paquets de relecture présents et régénérables", False, str(erreur))
         return
@@ -270,6 +272,35 @@ def verifier_paquets_relecture(verificateur: Verificateur) -> None:
         f"{len(elements)} prototypes, {prioritaires} paquets détaillés"
         if actuel == attendu
         else "régénérer avec python3 outils/construire-paquets-relecture.py",
+    )
+
+
+def verifier_audit_automatique(verificateur: Verificateur) -> None:
+    """L'audit mécanique doit rester la sortie du catalogue, pas une copie à la main."""
+    generateur = ROOT / "outils" / "auditer-prototypes.py"
+    sortie = ROOT / "docs" / "apprentissage" / "audit-automatique.md"
+    if not generateur.is_file() or not sortie.is_file():
+        verificateur.verifier("Audit automatique présent et régénérable", False, "générateur ou sortie absent")
+        return
+    try:
+        specification = importlib.util.spec_from_file_location("audit_prototypes", generateur)
+        module = importlib.util.module_from_spec(specification)
+        specification.loader.exec_module(module)
+        fiches, titres, references = module.charger()
+        aujourdhui = dt.date.today()
+        audits = module.auditer(fiches, references, aujourdhui)
+        attendu = module.construire(audits, titres, aujourdhui)
+        chiffres = module.resume(audits)
+    except Exception as erreur:  # noqa: BLE001 - un générateur cassé doit être signalé, pas masqué
+        verificateur.verifier("Audit automatique présent et régénérable", False, str(erreur))
+        return
+    actuel = sortie.read_text(encoding="utf-8")
+    verificateur.verifier(
+        "Audit automatique synchronisé avec le catalogue",
+        actuel == attendu,
+        f"{chiffres['fiches']} prototypes, {chiffres['controles']} contrôles par fiche, {chiffres['echecs']} échec(s)"
+        if actuel == attendu
+        else "régénérer avec python3 outils/auditer-prototypes.py",
     )
 
 
@@ -320,6 +351,27 @@ def etat_registre_relecture() -> tuple[int, str]:
     return nombre, f"{nombre} relecture(s) humaine(s) consignée(s) dans le"
 
 
+def etat_audit_automatique() -> str:
+    """Phrase publique dérivée de l'audit mécanique, jamais recopiée à la main."""
+    try:
+        specification = importlib.util.spec_from_file_location("audit_prototypes", ROOT / "outils" / "auditer-prototypes.py")
+        module = importlib.util.module_from_spec(specification)
+        specification.loader.exec_module(module)
+        fiches, _, references = module.charger()
+        audits = module.auditer(fiches, references, dt.date.today())
+        chiffres = module.resume(audits)
+    except Exception:  # noqa: BLE001 - un audit cassé ne doit pas masquer son état
+        return "audit automatique indisponible"
+    if chiffres["echecs"]:
+        return (
+            f"les {chiffres['fiches']} prototypes sont soumis aux {chiffres['controles']} contrôles automatiques du dépôt"
+            f" ({chiffres['echecs']} défaut(s) mécanique(s) à corriger)"
+        )
+    return (
+        f"les {chiffres['fiches']} prototypes sont soumis aux {chiffres['controles']} contrôles automatiques du dépôt"
+    )
+
+
 def verifier_surface_publique(verificateur: Verificateur) -> None:
     page = ROOT / "transparence.html"
     aventure = ROOT / "anglais-aventure.html"
@@ -340,8 +392,14 @@ def verifier_surface_publique(verificateur: Verificateur) -> None:
         and 'href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/protocole-essais-usage.md"' in page_text
         and "issues/new?template=proposition-rd.yml" in page_text,
     )
-    _, phrase_registre = etat_registre_relecture()
     page_lisible = html_module.unescape(page_text)
+    phrase_audit = etat_audit_automatique()
+    verificateur.verifier(
+        "La transparence dit l'état réel des contrôles automatiques",
+        phrase_audit in page_lisible,
+        phrase_audit,
+    )
+    _, phrase_registre = etat_registre_relecture()
     verificateur.verifier(
         "La transparence dit l'état réel du registre de relecture",
         phrase_registre in page_lisible
@@ -378,6 +436,7 @@ def main() -> int:
     verifier_portefeuille(verificateur, skills)
     verifier_carte_lacunes(verificateur)
     verifier_paquets_relecture(verificateur)
+    verifier_audit_automatique(verificateur)
     verifier_registre_relecture(verificateur)
     verifier_surface_publique(verificateur)
     verifier_veille(verificateur)

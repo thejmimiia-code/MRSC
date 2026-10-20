@@ -97,6 +97,7 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | Priorité de tri | 1 — domaine à relecture spécialisée — politique publique, médias et information |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/civ-choisir-source-publique.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -150,6 +151,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — politique publique, médias et information |
 | Termes repérés | droit et démarches : juridique ; politique publique : collectivité |
 | Fiche publiée | [lire la fiche](fiches/civ-reperer-echelle-institution.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -200,6 +202,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — politique publique, médias et information |
 | Termes repérés | politique publique : scrutin, vote, élection |
 | Fiche publiée | [lire la fiche](fiches/civ-reperer-info-electorale.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -250,6 +253,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — droit, démarches et travail |
 | Termes repérés | politique publique : service public |
 | Fiche publiée | [lire la fiche](fiches/civ-trouver-service-public.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -301,6 +305,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | — |
 | Fiche publiée | [lire la fiche](fiches/econ-comparer-prix-unitaires.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -351,6 +356,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | argent : crédit, prêt |
 | Fiche publiée | [lire la fiche](fiches/econ-distinguer-interet-frais.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -401,6 +407,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | — |
 | Fiche publiée | [lire la fiche](fiches/econ-lire-facture.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -451,6 +458,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | droit et démarches : juridique, litige, recours |
 | Fiche publiée | [lire la fiche](fiches/econ-lire-mention-garantie.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -501,6 +509,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — santé et sécurité |
 | Termes repérés | santé : diagnostic, symptôme, traitement |
 | Fiche publiée | [lire la fiche](fiches/sante-reperer-source-publique.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -551,6 +560,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/recherche-lire-etude.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -598,6 +608,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | argent : prêt ; données personnelles : données personnelles |
 | Fiche publiée | [lire la fiche](fiches/recherche-question-hypothese.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -646,6 +657,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : succession |
 | Fiche publiée | [lire la fiche](fiches/histoire-lire-frise.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -694,6 +706,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | données personnelles : donnée personnelle, données personnelles, mot de passe |
 | Fiche publiée | [lire la fiche](fiches/info-lire-adresse-web.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -742,6 +755,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/prog-lire-licence-logiciel.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -791,6 +805,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/fr-argumenter-avec-exemple.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -839,6 +854,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/fr-reperer-idee-texte.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -887,6 +903,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | données personnelles : donnée personnelle |
 | Fiche publiée | [lire la fiche](fiches/numerique-formuler-recherche.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -935,6 +952,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | données personnelles : données personnelles |
 | Fiche publiée | [lire la fiche](fiches/numerique-organiser-fichiers.html) |
+| Contrôles automatiques | 16/16 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
