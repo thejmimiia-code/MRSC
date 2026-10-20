@@ -64,6 +64,8 @@ jobs:
         run: |
           python3 outils/auditer-prototypes.py --verifier
           python3 outils/registre-relecture.py
+          python3 outils/test_sources_refusees.py
+          python3 outils/construire-sources-refusees.py --verifier
 
       - name: Validate the editorial protocol
         run: python3 outils/test_protocole_editorial.py

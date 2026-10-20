@@ -124,3 +124,38 @@ controle = "python3 outils/test_fichiers_servis.py && python3 outils/verifier-fi
 limite = "Le contrôle compare des tailles, pas du contenu : une image servie à l'identique peut être inadaptée, et une page compressée peut être fausse. Il ne mesure ni le rendu, ni la vitesse réelle, ni l'empreinte du réseau ; la durée de cache de dix minutes vient de GitHub Pages et ne se règle pas depuis le dépôt."
 suite = "Refaire la mesure réseau après tout changement d'image ou de cible, mettre à jour le relevé daté dans le même lot, et laisser l'issue de suivi ouverte comme journal de mesures."
 initiatives = ["optimisation-du-site", "indexation-et-lecteurs-de-contenu"]
+
+[[avancee]]
+id = "registre-des-refus-verifie"
+date = 2026-10-20
+titre = "Une source refusée entre dans un registre relié au catalogue, pas seulement dans le journal"
+constat = "Noter un refus de source dans le seul journal chronologique n'empêche pas un lot suivant de retenter la même page en 403 ou hors périmètre, ni de l'inscrire par inadvertance dans le catalogue."
+changement = "Le registre `docs/apprentissage/sources-refusees.toml` et son générateur vérifient que chaque refus porte sa date, son motif et sa limite, qu'aucune URL refusée n'est citée comme source active du catalogue, et qu'un refus dit remplacé pointe une URL réellement présente sur la fiche."
+preuves = [
+  "docs/apprentissage/sources-refusees.toml",
+  "docs/apprentissage/sources-refusees.md",
+  "outils/construire-sources-refusees.py",
+  "outils/test_sources_refusees.py",
+]
+controle = "python3 outils/test_sources_refusees.py && python3 outils/construire-sources-refusees.py --verifier"
+limite = "Ce registre ne recense que les pages effectivement tentées puis écartées par un agent ou une personne : il ne prouve ni l'exhaustivité des recherches documentaires, ni la validité de la source de remplacement."
+suite = "Consigner chaque nouveau refus (403, accès payant, page retirée ou hors sujet après lecture) dans ce registre au moment où il survient."
+initiatives = ["sources-fermees-et-registre-des-refus", "relire-les-44-prototypes", "veille-savoirs-evolutifs"]
+
+[[avancee]]
+id = "indice-de-confrontation-non-certifiant"
+date = 2026-10-20
+titre = "Confronter une affirmation par ancres donne un indice et ses angles morts, jamais une validation"
+constat = "Chercher des mots-clés d'une fiche dans sa page source détecte utilement la présence des termes attendus, mais échoue dès qu'une négation inverse le sens (mentions interdites sur Service-Public F2451) ou qu'un PDF coupe un mot dans une formule (« dur é e »)."
+changement = "Le prototype `docs/rd/confrontations-sources.toml` borne chaque ancre à cinq mots sans recopier d'extrait sous droits, interdit tout état de validation, exige l'écriture explicite d'un faux positif et d'un faux négatif par fiche, et reste hors de la porte de publication."
+preuves = [
+  "docs/rd/confrontations-sources.toml",
+  "docs/rd/confrontations-sources.md",
+  "outils/confronter-sources.py",
+  "outils/test_confronter_sources.py",
+]
+controle = "python3 outils/test_confronter_sources.py && python3 outils/confronter-sources.py --verifier"
+limite = "Un indice concordant ne prouve jamais que la fiche dit vrai ni qu'elle respecte la portée de la source ; un constat d'ancre absente ou de page inaccessible ne prouve jamais que la fiche est fausse."
+suite = "Mesurer les faux positifs et faux négatifs avec une personne relectrice avant d'envisager d'étendre l'échantillon au-delà des cinq fiches du prototype."
+initiatives = ["confronter-une-affirmation-a-sa-source", "relire-les-44-prototypes", "prospective-apprentissages-2030"]
+
