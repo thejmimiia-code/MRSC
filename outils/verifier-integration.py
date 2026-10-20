@@ -38,6 +38,10 @@ from http.server import ThreadingHTTPServer
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
+
+# Statuts éditoriaux : définitions partagées, jamais recopiées en chaîne locale.
+sys.path.insert(0, str(RACINE / "outils"))
+from statuts_editoriaux import PROTOTYPE, RELU, est_prototype, est_relue, porte_un_statut  # noqa: E402
 sys.path.insert(0, str(RACINE))
 from simulateur.dashboard import SCENARIOS as SCENARIOS_MOTEUR  # noqa: E402
 from simulateur.donnees_live import INDICATEURS as INDICATEURS_MOTEUR  # noqa: E402
@@ -223,7 +227,7 @@ def _chiffres_du_catalogue() -> tuple[str, str, str]:
     except (OSError, KeyError, tomllib.TOMLDecodeError):
         return ("fiches illisibles", "", "")
     total = len(fiches)
-    prototypes = sum(1 for fiche in fiches if fiche.get("statut_editorial"))
+    prototypes = sum(1 for fiche in fiches if est_prototype(fiche))
     return (
         f"{total} fiches dans 15 domaines",
         f"{total - prototypes} fiches du corpus initial",

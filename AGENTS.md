@@ -76,6 +76,7 @@ Une fusion ou une suppression de branche ne doit laisser ni contenu perdu, ni er
 - Aucune collecte de récit personnel, santé, identité, réponse d'exercice ou donnée de test non nécessaire. Pas de télémétrie individuelle implicite.
 - Ne pas ajouter publicité, compte obligatoire, pénalité, minuterie obligatoire ou parcours forcé. Ne pas charger de média distant sans action explicite et examen de confidentialité/accessibilité.
 - Laisser la publication et les décisions éditoriales à une validation humaine. Une IA n'est pas un relecteur expert, un testeur représentatif ou un signataire de licence.
+- **Ne jamais écrire une relecture à la place d'une personne.** `docs/apprentissage/relectures.toml` est le registre des relectures humaines ; il démarre vide et un agent ne doit ni le pré-remplir, ni changer un statut vers « Relu — relecture consignée » sans une entrée réelle. `outils/registre-relecture.py --modele <fiche>` imprime le bloc à faire remplir par la personne qui a relu.
 
 ## Livraison d'une tâche
 
@@ -86,6 +87,8 @@ python3 -m py_compile simulateur/*.py api/*.py outils/*.py
 python3 outils/verifier-rd-continue.py
 python3 outils/construire-carte-lacunes.py --verifier
 python3 outils/construire-paquets-relecture.py --verifier
+python3 outils/test_registre_relecture.py
+python3 outils/registre-relecture.py
 python3 outils/construire-apprentissages.py --verifier
 python3 outils/construire-simulateur.py --verifier
 python3 outils/verifier-site-statique.py

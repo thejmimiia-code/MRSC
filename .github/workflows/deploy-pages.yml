@@ -55,6 +55,9 @@ jobs:
       - name: Validate the R&D portfolio
         run: python3 outils/verifier-rd-continue.py
 
+      - name: Validate the human review register
+        run: python3 outils/registre-relecture.py
+
       - name: Validate the editorial protocol
         run: python3 outils/test_protocole_editorial.py
 

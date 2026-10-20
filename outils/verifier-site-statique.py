@@ -22,6 +22,10 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 
+# Statuts éditoriaux : définitions partagées, jamais recopiées en chaîne locale.
+sys.path.insert(0, str(ROOT / "outils"))
+from statuts_editoriaux import PROTOTYPE, RELU, est_prototype, est_relue, porte_un_statut  # noqa: E402
+
 #: Quelques nombres écrits en lettres dans les documents rédigés à la main.
 NOMBRES_EN_LETTRES = {
     55: "cinquante-cinq", 56: "cinquante-six", 57: "cinquante-sept",
@@ -214,7 +218,7 @@ def totaux_catalogue() -> tuple[int, int, int]:
     except (OSError, UnicodeError, tomllib.TOMLDecodeError):
         return 0, 0, 0
     fiches = catalogue.get("fiche", [])
-    prototypes = sum(1 for fiche in fiches if fiche.get("statut_editorial"))
+    prototypes = sum(1 for fiche in fiches if est_prototype(fiche))
     return len(fiches), len(fiches) - prototypes, prototypes
 
 
@@ -227,7 +231,7 @@ def verifier_catalogue_apprentissage() -> None:
         return
     fiches = catalogue.get("fiche", [])
     ids = [fiche.get("id", "") for fiche in fiches]
-    prototypes = [fiche for fiche in fiches if fiche.get("statut_editorial")]
+    prototypes = [fiche for fiche in fiches if est_prototype(fiche)]
     doublons = sorted(ident for ident in set(ids) if ids.count(ident) > 1)
     if not fiches:
         signaler("catalogue d’apprentissage : aucune fiche")
@@ -665,7 +669,7 @@ def verifier_aventure_anglais() -> None:
             and domaines_atlas == [domaine["id"] for domaine in domaines_sources]
             and atlas.get("sheetCount") == len(fiches_sources)
             and atlas.get("domainCount") == len(domaines_sources)
-            and sum(bool(fiche.get("statut_editorial")) for fiche in fiches_sources) == atlas.get("prototypeCount")
+            and sum(1 for fiche in fiches_sources if est_prototype(fiche)) == atlas.get("prototypeCount")
             and all((ROOT / fiche.get("url", "")).is_file() for fiche in atlas.get("sheets", []))
             and all(domaine.get("sheetIds") == feuilles_par_domaine[domaine["id"]] for domaine in atlas.get("domains", []))
             and all(f'id="couverture-domaine-{domaine["id"]}"' in (ROOT / "apprendre.html").read_text(encoding="utf-8") for domaine in domaines_sources)
@@ -748,15 +752,12 @@ def verifier_dossier_apprentissage() -> None:
         chemin for chemin in ROOT.rglob("*.html")
         if ".git" not in chemin.parts and chemin.name != "404.html"
     ])
+    pages_depot = len([chemin for chemin in ROOT.rglob("*.html") if ".git" not in chemin.parts])
     controles = {
         ROOT / "README.md": (
             f"{total} fiches dans 15 domaines",
             f"{prototypes} prototypes",
             f"budgets ({pages_publiques} pages)",
-        ),
-        ROOT / "docs" / "apprentissage" / "grille-relecture.md": (
-            f"range les {prototypes} prototypes par domaine",
-            "ne vaut pas validation",
         ),
         ROOT / "docs" / "rd-innovation-continue.md": (
             f"relie les {total} fiches à 15 domaines; {prototypes} fiches portent le statut « Prototype à relire »",
@@ -773,6 +774,13 @@ def verifier_dossier_apprentissage() -> None:
             f"parcourt les {pages_publiques} pages publiques",
             f"{total} fiches et la page du simulateur",
             f"Les {pages_publiques} pages restent sous les budgets",
+        ),
+        ROOT / "transparence.html": (
+            f"axe-core 4.14.0 a été exécuté sur les {pages_depot} pages HTML du dépôt",
+            f"{pages_depot * 2} exécutions sur les pages ({pages_depot} × 2 largeurs)",
+        ),
+        ROOT / "docs" / "rd" / "accessibilite-2026-10-17.md": (
+            f"{pages_depot} pages HTML × deux largeurs, soit **{pages_depot * 2} exécutions, aucune violation axe**",
         ),
         ROOT / "docs" / "rd" / "inventaire-couleurs-jetons.md": (
             f"Pages HTML et {total} fiches",
@@ -1182,7 +1190,11 @@ def verifier_dossier_apprentissage() -> None:
             "Dossiers en cours — huit prototypes de français, mathématiques, sciences, géographie, Web, arts et recherche",
             "Dossiers en cours — dix prototypes de français, anglais, mathématiques, sciences, géographie, informatique et recherche",
             "La couverture de `factures-abonnements` reste partielle",
-            "Pour l’ensemble des cinquante-cinq prototypes décrits ici",
+            f"Pour l’ensemble des {NOMBRES_EN_LETTRES.get(totaux_catalogue()[2], totaux_catalogue()[2])} prototypes décrits ici",
+            "consigner une trace de décision séparée dans",
+            f"range les {totaux_catalogue()[2]} prototypes par domaine",
+            "python3 outils/registre-relecture.py",
+            "un statut ne se déclare pas",
             "Une revue interne de cohérence des 26 prototypes alors présents",
             "Les huit fiches ajoutées dans le lot suivant, les dix fiches du lot suivant et les prototypes du 15 octobre 2026 ne sont pas couvertes par cette revue",
             "fr-reperer-idee-texte",

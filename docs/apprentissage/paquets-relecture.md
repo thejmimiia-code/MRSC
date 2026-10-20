@@ -4,6 +4,14 @@
 
 Le tri reprend les deux règles de la [file de relecture](file-relecture.md) : domaine à relecture spécialisée, puis mots-clés repérés dans les champs éditoriaux. Ces signaux restent une heuristique, corrigeable par une personne.
 
+## 0. Comment enregistrer une relecture, en trois gestes
+
+1. Ouvrir le paquet de la fiche, lire ses sources et ses limites, puis trancher avec la [grille de relecture](grille-relecture.md).
+2. Coller le bloc `[[relecture]]` du paquet à la fin de [`relectures.toml`](relectures.toml) et le compléter (date réelle, rôle, périmètre, verdict, objections).
+3. Lancer `python3 outils/registre-relecture.py`. Le contrôle refuse une date future, un verdict inconnu, un verdict négatif sans objection, et tout statut du catalogue qui ne correspondrait pas au registre.
+
+Un verdict « conforme » fait passer la fiche au statut « Relu — relecture consignée » — à condition de le faire dans `catalogue.toml`, sinon le contrôle échoue. Ni le script ni ce document ne relisent : ils enregistrent.
+
 ## 1. Ordre de passage proposé
 
 | Priorité | Signification | Prototypes |
@@ -17,65 +25,65 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 
 ## 2. Tableau de suivi
 
-| # | Fiche | Domaine | Priorité | Sources | Droits déclarés | Revue prévue le |
-| ---: | --- | --- | ---: | ---: | --- | --- |
-| 1 | [Choisir une source publique adaptée à sa question](fiches/civ-choisir-source-publique.html) | Citoyenneté, médias et information | 1 | 5 | 5 non vérifiée(s) | 2026-10-08 |
-| 2 | [Repérer l’échelle d’une institution avant de chercher le bon service](fiches/civ-reperer-echelle-institution.html) | Citoyenneté, médias et information | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 |
-| 3 | [Repérer une information électorale officielle](fiches/civ-reperer-info-electorale.html) | Citoyenneté, médias et information | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 |
-| 4 | [Trouver un service public et préparer un formulaire](fiches/civ-trouver-service-public.html) | Démarches, droits, sécurité et vie professionnelle | 1 | 3 | 3 non vérifiée(s) | 2026-10-15 |
-| 5 | [Comparer deux prix à quantité égale](fiches/econ-comparer-prix-unitaires.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-11 |
-| 6 | [Distinguer un intérêt d’un frais sur un crédit fictif](fiches/econ-distinguer-interet-frais.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 |
-| 7 | [Lire une facture et repérer une échéance](fiches/econ-lire-facture.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-11 |
-| 8 | [Lire une mention de garantie sur un ticket fictif](fiches/econ-lire-mention-garantie.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 |
-| 9 | [Repérer une source de santé publique avant d’agir](fiches/sante-reperer-source-publique.html) | Santé, alimentation, corps et sécurité | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 |
-| 10 | [Lire une étude sans confondre résultats et certitudes](fiches/recherche-lire-etude.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | aucune à vérifier | 2026-10-08 |
-| 11 | [Formuler une question et une hypothèse de recherche](fiches/recherche-question-hypothese.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 12 | [Lire une frise chronologique et ordonner des événements](fiches/histoire-lire-frise.html) | Histoire, chronologie et mémoire | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 13 | [Repérer les parties d’une adresse Web](fiches/info-lire-adresse-web.html) | Informatique, algorithmique et langages de programmation | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 14 | [Lire une licence avant de réutiliser un programme](fiches/prog-lire-licence-logiciel.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | 2 non vérifiée(s) | 2026-10-15 |
-| 15 | [Présenter une idée avec une raison et un exemple](fiches/fr-argumenter-avec-exemple.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 16 | [Repérer l’idée principale et les informations utiles](fiches/fr-reperer-idee-texte.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 17 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 18 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 19 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 20 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 21 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 22 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 |
-| 23 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 24 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 25 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 26 | [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 27 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 |
-| 28 | [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 29 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 30 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 |
-| 31 | [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 32 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 |
-| 33 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 3 | 3 | 3 non vérifiée(s) | 2026-10-08 |
-| 34 | [Tester un programme avec des cas simples](fiches/prog-tester-exemples.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 35 | [Comprendre un mot grâce à son contexte](fiches/fr-comprendre-mot-contexte.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 36 | [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 37 | [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 38 | [Demander de l’aide ou une répétition en anglais](fiches/langue-anglais-demander-aide.html) | Langues étrangères et interculturel | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 39 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 40 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-20 |
-| 41 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 3 | 6 | 6 non vérifiée(s) | 2026-10-20 |
-| 42 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 |
-| 43 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 |
-| 44 | [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 45 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 |
-| 46 | [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 47 | [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 48 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 |
-| 49 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 50 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 51 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 52 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 53 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 54 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 |
-| 55 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 |
-| 56 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 |
-| 57 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 |
+| # | Fiche | Domaine | Priorité | Sources | Droits déclarés | Revue prévue le | Relecture consignée |
+| ---: | --- | --- | ---: | ---: | --- | --- | --- |
+| 1 | [Choisir une source publique adaptée à sa question](fiches/civ-choisir-source-publique.html) | Citoyenneté, médias et information | 1 | 5 | 5 non vérifiée(s) | 2026-10-08 | aucune |
+| 2 | [Repérer l’échelle d’une institution avant de chercher le bon service](fiches/civ-reperer-echelle-institution.html) | Citoyenneté, médias et information | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 3 | [Repérer une information électorale officielle](fiches/civ-reperer-info-electorale.html) | Citoyenneté, médias et information | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 4 | [Trouver un service public et préparer un formulaire](fiches/civ-trouver-service-public.html) | Démarches, droits, sécurité et vie professionnelle | 1 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
+| 5 | [Comparer deux prix à quantité égale](fiches/econ-comparer-prix-unitaires.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 6 | [Distinguer un intérêt d’un frais sur un crédit fictif](fiches/econ-distinguer-interet-frais.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 7 | [Lire une facture et repérer une échéance](fiches/econ-lire-facture.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 8 | [Lire une mention de garantie sur un ticket fictif](fiches/econ-lire-mention-garantie.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 9 | [Repérer une source de santé publique avant d’agir](fiches/sante-reperer-source-publique.html) | Santé, alimentation, corps et sécurité | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 10 | [Lire une étude sans confondre résultats et certitudes](fiches/recherche-lire-etude.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | aucune à vérifier | 2026-10-08 | aucune |
+| 11 | [Formuler une question et une hypothèse de recherche](fiches/recherche-question-hypothese.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 12 | [Lire une frise chronologique et ordonner des événements](fiches/histoire-lire-frise.html) | Histoire, chronologie et mémoire | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 13 | [Repérer les parties d’une adresse Web](fiches/info-lire-adresse-web.html) | Informatique, algorithmique et langages de programmation | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 14 | [Lire une licence avant de réutiliser un programme](fiches/prog-lire-licence-logiciel.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 15 | [Présenter une idée avec une raison et un exemple](fiches/fr-argumenter-avec-exemple.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 16 | [Repérer l’idée principale et les informations utiles](fiches/fr-reperer-idee-texte.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 17 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 18 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 19 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 20 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 21 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 22 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 23 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 24 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 25 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 26 | [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 27 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 28 | [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 29 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 30 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 31 | [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 32 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 33 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 3 | 3 | 3 non vérifiée(s) | 2026-10-08 | aucune |
+| 34 | [Tester un programme avec des cas simples](fiches/prog-tester-exemples.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 35 | [Comprendre un mot grâce à son contexte](fiches/fr-comprendre-mot-contexte.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 36 | [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 37 | [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 38 | [Demander de l’aide ou une répétition en anglais](fiches/langue-anglais-demander-aide.html) | Langues étrangères et interculturel | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 39 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 40 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-20 | aucune |
+| 41 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 3 | 6 | 6 non vérifiée(s) | 2026-10-20 | aucune |
+| 42 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 43 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
+| 44 | [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 45 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 46 | [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 47 | [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 48 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 49 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 50 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 51 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 52 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 53 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 54 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 55 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 56 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
+| 57 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
 
 ## 3. Paquets détaillés
 
@@ -89,6 +97,7 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | Priorité de tri | 1 — domaine à relecture spécialisée — politique publique, médias et information |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/civ-choisir-source-publique.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -113,17 +122,23 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 - [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : civ-choisir-source-publique
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "civ-choisir-source-publique"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `civ-reperer-echelle-institution` — Repérer l’échelle d’une institution avant de chercher le bon service
 
@@ -135,6 +150,7 @@ suite        :
 | Priorité de tri | 1 — domaine à relecture spécialisée — politique publique, médias et information |
 | Termes repérés | droit et démarches : juridique ; politique publique : collectivité |
 | Fiche publiée | [lire la fiche](fiches/civ-reperer-echelle-institution.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -156,17 +172,23 @@ suite        :
 - [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : civ-reperer-echelle-institution
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "civ-reperer-echelle-institution"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `civ-reperer-info-electorale` — Repérer une information électorale officielle
 
@@ -178,6 +200,7 @@ suite        :
 | Priorité de tri | 1 — domaine à relecture spécialisée — politique publique, médias et information |
 | Termes repérés | politique publique : scrutin, vote, élection |
 | Fiche publiée | [lire la fiche](fiches/civ-reperer-info-electorale.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -199,17 +222,23 @@ suite        :
 - [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : civ-reperer-info-electorale
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "civ-reperer-info-electorale"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `civ-trouver-service-public` — Trouver un service public et préparer un formulaire
 
@@ -221,6 +250,7 @@ suite        :
 | Priorité de tri | 1 — domaine à relecture spécialisée — droit, démarches et travail |
 | Termes repérés | politique publique : service public |
 | Fiche publiée | [lire la fiche](fiches/civ-trouver-service-public.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -243,17 +273,23 @@ suite        :
 - [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : civ-trouver-service-public
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "civ-trouver-service-public"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `econ-comparer-prix-unitaires` — Comparer deux prix à quantité égale
 
@@ -265,6 +301,7 @@ suite        :
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | — |
 | Fiche publiée | [lire la fiche](fiches/econ-comparer-prix-unitaires.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -286,17 +323,23 @@ suite        :
 - [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : econ-comparer-prix-unitaires
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "econ-comparer-prix-unitaires"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `econ-distinguer-interet-frais` — Distinguer un intérêt d’un frais sur un crédit fictif
 
@@ -308,6 +351,7 @@ suite        :
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | argent : crédit, prêt |
 | Fiche publiée | [lire la fiche](fiches/econ-distinguer-interet-frais.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -329,17 +373,23 @@ suite        :
 - [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : econ-distinguer-interet-frais
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "econ-distinguer-interet-frais"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `econ-lire-facture` — Lire une facture et repérer une échéance
 
@@ -351,6 +401,7 @@ suite        :
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | — |
 | Fiche publiée | [lire la fiche](fiches/econ-lire-facture.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -372,17 +423,23 @@ suite        :
 - [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : econ-lire-facture
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "econ-lire-facture"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `econ-lire-mention-garantie` — Lire une mention de garantie sur un ticket fictif
 
@@ -394,6 +451,7 @@ suite        :
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | droit et démarches : juridique, litige, recours |
 | Fiche publiée | [lire la fiche](fiches/econ-lire-mention-garantie.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -415,17 +473,23 @@ suite        :
 - [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : econ-lire-mention-garantie
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "econ-lire-mention-garantie"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `sante-reperer-source-publique` — Repérer une source de santé publique avant d’agir
 
@@ -437,6 +501,7 @@ suite        :
 | Priorité de tri | 1 — domaine à relecture spécialisée — santé et sécurité |
 | Termes repérés | santé : diagnostic, symptôme, traitement |
 | Fiche publiée | [lire la fiche](fiches/sante-reperer-source-publique.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -458,17 +523,23 @@ suite        :
 - [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : sante-reperer-source-publique
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "sante-reperer-source-publique"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `recherche-lire-etude` — Lire une étude sans confondre résultats et certitudes
 
@@ -480,6 +551,7 @@ suite        :
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/recherche-lire-etude.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -498,17 +570,23 @@ suite        :
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : recherche-lire-etude
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "recherche-lire-etude"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `recherche-question-hypothese` — Formuler une question et une hypothèse de recherche
 
@@ -520,6 +598,7 @@ suite        :
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | argent : prêt ; données personnelles : données personnelles |
 | Fiche publiée | [lire la fiche](fiches/recherche-question-hypothese.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -539,17 +618,23 @@ suite        :
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : recherche-question-hypothese
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "recherche-question-hypothese"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `histoire-lire-frise` — Lire une frise chronologique et ordonner des événements
 
@@ -561,6 +646,7 @@ suite        :
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : succession |
 | Fiche publiée | [lire la fiche](fiches/histoire-lire-frise.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -580,17 +666,23 @@ suite        :
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : histoire-lire-frise
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "histoire-lire-frise"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `info-lire-adresse-web` — Repérer les parties d’une adresse Web
 
@@ -602,6 +694,7 @@ suite        :
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | données personnelles : donnée personnelle, données personnelles, mot de passe |
 | Fiche publiée | [lire la fiche](fiches/info-lire-adresse-web.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -621,17 +714,23 @@ suite        :
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : info-lire-adresse-web
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "info-lire-adresse-web"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `prog-lire-licence-logiciel` — Lire une licence avant de réutiliser un programme
 
@@ -643,6 +742,7 @@ suite        :
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/prog-lire-licence-logiciel.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -663,17 +763,23 @@ suite        :
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : prog-lire-licence-logiciel
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "prog-lire-licence-logiciel"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `fr-argumenter-avec-exemple` — Présenter une idée avec une raison et un exemple
 
@@ -685,6 +791,7 @@ suite        :
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/fr-argumenter-avec-exemple.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -704,17 +811,23 @@ suite        :
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : fr-argumenter-avec-exemple
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "fr-argumenter-avec-exemple"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `fr-reperer-idee-texte` — Repérer l’idée principale et les informations utiles
 
@@ -726,6 +839,7 @@ suite        :
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/fr-reperer-idee-texte.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -745,17 +859,23 @@ suite        :
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : fr-reperer-idee-texte
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "fr-reperer-idee-texte"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `numerique-formuler-recherche` — Formuler une recherche sur le Web
 
@@ -767,6 +887,7 @@ suite        :
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | données personnelles : donnée personnelle |
 | Fiche publiée | [lire la fiche](fiches/numerique-formuler-recherche.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -786,17 +907,23 @@ suite        :
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : numerique-formuler-recherche
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "numerique-formuler-recherche"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ### `numerique-organiser-fichiers` — Nommer et retrouver ses fichiers sans exposer ses données
 
@@ -808,6 +935,7 @@ suite        :
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | données personnelles : données personnelles |
 | Fiche publiée | [lire la fiche](fiches/numerique-organiser-fichiers.html) |
+| Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
 
@@ -827,17 +955,23 @@ suite        :
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
 
-**Trace de décision à remplir**
+**Relecture à consigner dans `relectures.toml`**
 
-```text
-fiche        : numerique-organiser-fichiers
-décision     : à publier / à corriger puis relire / à retirer
-date         : AAAA-MM-JJ
-rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication
-objections   : 
-points bloquants : 
-suite        : 
+```toml
+[[relecture]]
+fiche = "numerique-organiser-fichiers"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
 ```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
 
 ## 4. Ce que ces paquets ne font pas
 
@@ -845,5 +979,6 @@ suite        :
 - Ils ne vérifient aucun contenu de source et ne disent pas qu’une licence est valide ; ils montrent seulement ce qui est déclaré.
 - Ils n’attribuent aucune note, aucun score et aucun ordre de valeur entre fiches.
 - Ils n’autorisent aucune publication : la décision reste celle de l’association.
+- Ils ne remplacent pas le registre : la seule trace opposable est l’entrée de `relectures.toml` vérifiée par `outils/registre-relecture.py`.
 
 Régénérer avec `python3 outils/construire-paquets-relecture.py` ; vérifier avec `--verifier`.
