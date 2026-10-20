@@ -33,6 +33,10 @@ import tomllib
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
+
+# Statuts éditoriaux : définitions partagées, jamais recopiées en chaîne locale.
+sys.path.insert(0, str(RACINE / "outils"))
+from statuts_editoriaux import PROTOTYPE, RELU, est_prototype, est_relue, porte_un_statut  # noqa: E402
 CATALOGUE = RACINE / "docs" / "apprentissage" / "catalogue.toml"
 REFERENTIEL = RACINE / "docs" / "apprentissage" / "referentiel.toml"
 SORTIE = RACINE / "docs" / "apprentissage" / "file-relecture.md"
@@ -117,7 +121,7 @@ def ligne_tableau(cellules: list[str]) -> str:
 
 
 def construire(fiches: list[dict], titres: dict[str, str]) -> str:
-    prototypes = [fiche for fiche in fiches if fiche.get("statut_editorial")]
+    prototypes = [fiche for fiche in fiches if est_prototype(fiche)]
     enrichis = []
     for fiche in prototypes:
         famille = DOMAINES_SENSIBLES.get(fiche["domaine"])

@@ -29,6 +29,10 @@ import tomllib
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
+
+# Statuts éditoriaux : définitions partagées, jamais recopiées en chaîne locale.
+sys.path.insert(0, str(RACINE / "outils"))
+from statuts_editoriaux import PROTOTYPE, RELU, est_prototype, est_relue, porte_un_statut  # noqa: E402
 CATALOGUE = RACINE / "docs" / "apprentissage" / "catalogue.toml"
 REFERENTIEL = RACINE / "docs" / "apprentissage" / "referentiel.toml"
 PORTEFEUILLE = RACINE / "docs" / "rd" / "portefeuille.toml"
@@ -69,7 +73,7 @@ def ligne(cellules: list[str]) -> str:
 
 def construire(fiches: list[dict], domaines: list[dict], revue: str) -> str:
     ids_fiches = {fiche["id"] for fiche in fiches}
-    prototypes = sum(1 for fiche in fiches if fiche.get("statut_editorial"))
+    prototypes = sum(1 for fiche in fiches if est_prototype(fiche))
     totaux = {statut: 0 for statut in ORDRE_STATUTS}
     sans_fiche: list[tuple[str, str, str, str, str]] = []
     references_absentes: list[str] = []

@@ -30,6 +30,10 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
+
+# Statuts éditoriaux : définitions partagées, jamais recopiées en chaîne locale.
+sys.path.insert(0, str(ROOT / "outils"))
+from statuts_editoriaux import PROTOTYPE, RELU, est_prototype, est_relue, porte_un_statut  # noqa: E402
 DATA = ROOT / "docs" / "apprentissage"
 CATALOGUE = DATA / "catalogue.toml"
 REFERENTIEL = DATA / "referentiel.toml"
@@ -527,7 +531,7 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
     couverture, _ = render_coverage(domains, by_id)
     cartes = "\n".join(render_fiche_card(fiche) for fiche in fiches)
     total_fiches = len(fiches)
-    prototypes = sum(bool(fiche.get("statut_editorial")) for fiche in fiches)
+    prototypes = sum(1 for fiche in fiches if est_prototype(fiche))
     fiches_corpus_initial = total_fiches - prototypes
     resume_catalogue = (
         f"{total_fiches} entrées : {fiches_corpus_initial} fiches du corpus initial "
@@ -751,7 +755,7 @@ def render_adventure_learning_data(fiches: list[dict], domains: list[dict]) -> s
             }
         )
 
-    prototypes = sum(bool(fiche.get("statut_editorial")) for fiche in fiches)
+    prototypes = sum(1 for fiche in fiches if est_prototype(fiche))
     parcours = [
         {
             "level": niveau,
@@ -856,6 +860,12 @@ def valider_sources(fiches: list[dict], domains: list[dict]) -> None:
             erreurs.append(f'analogie ou limite manquante pour {fiche["id"]}')
         if not fiche.get("sources"):
             erreurs.append(f'aucune source déclarée pour {fiche["id"]}')
+        statut_editorial = fiche.get("statut_editorial")
+        if statut_editorial is not None and statut_editorial not in (PROTOTYPE, RELU):
+            erreurs.append(
+                f'statut éditorial inconnu pour {fiche["id"]} : {statut_editorial} — '
+                f'attendu « {PROTOTYPE} » ou « {RELU} »'
+            )
         if fiche.get("statut_editorial") and not fiche.get("note_statut_editorial"):
             erreurs.append(f'statut éditorial sans explication pour {fiche["id"]}')
         if fiche.get("note_statut_editorial") and not fiche.get("statut_editorial"):
@@ -1084,13 +1094,13 @@ def render_plan_1000(plan: dict, fiches: list[dict], domains: list[dict]) -> str
     date_plan_libelle = date_plan.isoformat() if type(date_plan) is date else "date à définir"
     objectif_libelle = f"{objectif:,}".replace(",", " ")
     total = len(fiches)
-    prototypes = sum(bool(fiche.get("statut_editorial")) for fiche in fiches)
+    prototypes = sum(1 for fiche in fiches if est_prototype(fiche))
     prototypes_libelle = f'{prototypes} prototype{"s" if prototypes != 1 else ""}'
-    sans_marqueur = total - prototypes
+    sans_marqueur = total - sum(1 for fiche in fiches if porte_un_statut(fiche))
     ecart_brut = max(0, objectif - total)
     fiches_par_domaine = Counter(fiche["domaine"] for fiche in fiches)
     prototypes_par_domaine = Counter(
-        fiche["domaine"] for fiche in fiches if fiche.get("statut_editorial")
+        fiche["domaine"] for fiche in fiches if est_prototype(fiche)
     )
     domaines = {domaine["id"]: domaine for domaine in domains}
     lignes = [

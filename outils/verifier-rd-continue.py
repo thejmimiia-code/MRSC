@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import html as html_module
 import importlib.util
 import re
 import sys
@@ -17,6 +18,10 @@ import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+
+# Statuts éditoriaux : définitions partagées, jamais recopiées en chaîne locale.
+sys.path.insert(0, str(ROOT / "outils"))
+from statuts_editoriaux import PROTOTYPE, RELU, est_prototype, est_relue, porte_un_statut  # noqa: E402
 SKILLS_ROOT = ROOT / ".agents" / "skills"
 TITRES_SKILL = (
     "## Quand l’activer",
@@ -236,7 +241,7 @@ def _totaux_catalogue() -> tuple[int, int, int]:
     except (OSError, UnicodeError, tomllib.TOMLDecodeError):
         return 0, 0, 0
     fiches = catalogue.get("fiche", [])
-    prototypes = sum(1 for fiche in fiches if fiche.get("statut_editorial"))
+    prototypes = sum(1 for fiche in fiches if est_prototype(fiche))
     return len(fiches), len(fiches) - prototypes, prototypes
 
 
@@ -253,7 +258,7 @@ def verifier_paquets_relecture(verificateur: Verificateur) -> None:
         module = importlib.util.module_from_spec(specification)
         specification.loader.exec_module(module)
         elements, titres = module.enrichir(module.charger_module_file_relecture())
-        attendu = module.construire(elements, titres)
+        attendu = module.construire(elements, titres, dernieres=module.dernieres_relectures())
     except Exception as erreur:  # noqa: BLE001 - un générateur cassé doit être signalé, pas masqué
         verificateur.verifier("Paquets de relecture présents et régénérables", False, str(erreur))
         return
@@ -266,6 +271,53 @@ def verifier_paquets_relecture(verificateur: Verificateur) -> None:
         if actuel == attendu
         else "régénérer avec python3 outils/construire-paquets-relecture.py",
     )
+
+
+def verifier_registre_relecture(verificateur: Verificateur) -> None:
+    """Le registre humain doit rester cohérent avec le catalogue, sans être pré-rempli."""
+    script = ROOT / "outils" / "registre-relecture.py"
+    if not script.is_file():
+        verificateur.verifier("Registre de relecture présent et vérifiable", False, "outils/registre-relecture.py absent")
+        return
+    try:
+        specification = importlib.util.spec_from_file_location("registre_relecture", script)
+        module = importlib.util.module_from_spec(specification)
+        specification.loader.exec_module(module)
+    except Exception as erreur:  # noqa: BLE001 - un contrôle cassé doit être signalé, pas masqué
+        verificateur.verifier("Registre de relecture présent et vérifiable", False, str(erreur))
+        return
+    erreurs: list[str] = []
+    entrees = module.charger_registre(erreurs)
+    fiches = module.charger_catalogue()
+    aujourdhui = dt.date.today()
+    for index, entree in enumerate(entrees, start=1):
+        module.controler_entree(index, entree, fiches, aujourdhui, erreurs)
+    dernieres = module.controler_coherence(entrees, fiches, erreurs)
+    verificateur.verifier(
+        "Registre de relecture cohérent avec le catalogue",
+        not erreurs,
+        f"{len(dernieres)} relecture(s) consignée(s), {sum(1 for fiche in fiches.values() if est_prototype(fiche))} prototype(s) en attente"
+        if not erreurs
+        else " ; ".join(erreurs[:3]),
+    )
+
+
+def etat_registre_relecture() -> tuple[int, str]:
+    """Nombre de relectures consignées et phrase que la page publique doit employer.
+
+    La phrase dépend du registre : ajouter une relecture sans mettre la page à
+    jour fait échouer la porte, plutôt que de laisser une affirmation périmée.
+    """
+    chemin = ROOT / "docs" / "apprentissage" / "relectures.toml"
+    try:
+        with chemin.open("rb") as fichier:
+            entrees = tomllib.load(fichier).get("relecture", [])
+    except (OSError, tomllib.TOMLDecodeError):
+        entrees = []
+    nombre = len(entrees)
+    if nombre == 0:
+        return 0, "Aucune relecture humaine n’est consignée à ce jour dans le"
+    return nombre, f"{nombre} relecture(s) humaine(s) consignée(s) dans le"
 
 
 def verifier_surface_publique(verificateur: Verificateur) -> None:
@@ -287,6 +339,15 @@ def verifier_surface_publique(verificateur: Verificateur) -> None:
         and "blob/main/docs/rd/journal.md" in page_text
         and 'href="https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/protocole-essais-usage.md"' in page_text
         and "issues/new?template=proposition-rd.yml" in page_text,
+    )
+    _, phrase_registre = etat_registre_relecture()
+    page_lisible = html_module.unescape(page_text)
+    verificateur.verifier(
+        "La transparence dit l'état réel du registre de relecture",
+        phrase_registre in page_lisible
+        and "blob/main/docs/apprentissage/relectures.toml" in page_text
+        and "refuse un statut qui ne correspondrait pas au registre" in page_lisible,
+        phrase_registre,
     )
 
 
@@ -317,6 +378,7 @@ def main() -> int:
     verifier_portefeuille(verificateur, skills)
     verifier_carte_lacunes(verificateur)
     verifier_paquets_relecture(verificateur)
+    verifier_registre_relecture(verificateur)
     verifier_surface_publique(verificateur)
     verifier_veille(verificateur)
     if verificateur.alertes:

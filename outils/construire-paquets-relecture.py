@@ -25,10 +25,12 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import sys
+import tomllib
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
 SORTIE = RACINE / "docs" / "apprentissage" / "paquets-relecture.md"
+REGISTRE = RACINE / "docs" / "apprentissage" / "relectures.toml"
 
 
 def charger_module_file_relecture():
@@ -70,7 +72,32 @@ def ligne(cellules: list[str]) -> str:
     return "| " + " | ".join(cellules) + " |"
 
 
-def paquet(item: dict, titres: dict[str, str]) -> list[str]:
+def dernieres_relectures() -> dict[str, dict]:
+    """Dernière relecture consignée par fiche, lue dans le registre humain.
+
+    Un registre absent ou vide n'est pas une erreur ici : le contrôle de
+    cohérence appartient à `outils/registre-relecture.py`.
+    """
+    try:
+        with REGISTRE.open("rb") as fichier:
+            entrees = tomllib.load(fichier).get("relecture", [])
+    except (OSError, tomllib.TOMLDecodeError):
+        return {}
+    dernieres: dict[str, dict] = {}
+    for entree in entrees:
+        if not isinstance(entree, dict):
+            continue
+        identifiant = entree.get("fiche")
+        date_entree = entree.get("date")
+        if not isinstance(identifiant, str) or date_entree is None:
+            continue
+        actuelle = dernieres.get(identifiant)
+        if actuelle is None or str(date_entree) > str(actuelle.get("date")):
+            dernieres[identifiant] = entree
+    return dernieres
+
+
+def paquet(item: dict, titres: dict[str, str], relecture: dict | None = None) -> list[str]:
     fiche = item["fiche"]
     lignes = [
         f"### `{fiche['id']}` — {fiche['titre']}",
@@ -83,6 +110,8 @@ def paquet(item: dict, titres: dict[str, str]) -> list[str]:
         ligne(["Priorité de tri", f"{item['rang']} — {item['motif_rang']}"]),
         ligne(["Termes repérés", " ; ".join(item["motifs"]) if item["motifs"] else "—"]),
         ligne(["Fiche publiée", f"[lire la fiche](fiches/{fiche['id']}.html)"]),
+        ligne(["Relecture consignée",
+              f"{relecture.get('date')} — {relecture.get('verdict')}" if relecture else "aucune à ce jour"]),
         "",
         "**Sources enregistrées dans le catalogue**",
         "",
@@ -138,22 +167,33 @@ def paquet(item: dict, titres: dict[str, str]) -> list[str]:
         )
     lignes.append("- [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.")
     lignes.append("")
-    lignes.append("**Trace de décision à remplir**")
+    lignes.append("**Relecture à consigner dans `relectures.toml`**")
     lignes.append("")
-    lignes.append("```text")
-    lignes.append(f"fiche        : {fiche['id']}")
-    lignes.append("décision     : à publier / à corriger puis relire / à retirer")
-    lignes.append("date         : AAAA-MM-JJ")
-    lignes.append("rôle du relecteur : expertise du domaine / édition / accessibilité / personnes apprenantes / publication")
-    lignes.append("objections   : ")
-    lignes.append("points bloquants : ")
-    lignes.append("suite        : ")
+    lignes.append("```toml")
+    lignes.append("[[relecture]]")
+    lignes.append(f'fiche = "{fiche["id"]}"')
+    lignes.append("date = AAAA-MM-JJ")
+    lignes.append('role = "expertise du domaine — préciser lequel"')
+    lignes.append('perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]')
+    lignes.append('verdict = "conforme"          # conforme | a-corriger | insuffisant')
+    lignes.append("sources_ouvertes = []")
+    lignes.append("droits_verifies_le = AAAA-MM-JJ")
+    lignes.append("objections = []")
+    lignes.append("points_bloquants = []")
+    lignes.append('suite = "ce qui est décidé ensuite, et par qui"')
     lignes.append("```")
+    lignes.append("")
+    lignes.append(
+        "Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au "
+        "statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et "
+        "exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association."
+    )
     lignes.append("")
     return lignes
 
 
-def construire(elements: list[dict], titres: dict[str, str], detail: int = 2) -> str:
+def construire(elements: list[dict], titres: dict[str, str], detail: int = 2, dernieres: dict[str, dict] | None = None) -> str:
+    dernieres = dernieres or {}
     par_rang = {rang: sum(1 for item in elements if item["rang"] == rang) for rang in (1, 2, 3)}
     retenus = [item for item in elements if item["rang"] <= detail]
     lignes: list[str] = []
@@ -172,6 +212,17 @@ def construire(elements: list[dict], titres: dict[str, str], detail: int = 2) ->
         "heuristique, corrigeable par une personne."
     )
     lignes.append("")
+    lignes.append("## 0. Comment enregistrer une relecture, en trois gestes")
+    lignes.append("")
+    lignes.append("1. Ouvrir le paquet de la fiche, lire ses sources et ses limites, puis trancher avec la [grille de relecture](grille-relecture.md).")
+    lignes.append("2. Coller le bloc `[[relecture]]` du paquet à la fin de [`relectures.toml`](relectures.toml) et le compléter (date réelle, rôle, périmètre, verdict, objections).")
+    lignes.append("3. Lancer `python3 outils/registre-relecture.py`. Le contrôle refuse une date future, un verdict inconnu, un verdict négatif sans objection, et tout statut du catalogue qui ne correspondrait pas au registre.")
+    lignes.append("")
+    lignes.append(
+        "Un verdict « conforme » fait passer la fiche au statut « Relu — relecture consignée » — à condition de le faire "
+        "dans `catalogue.toml`, sinon le contrôle échoue. Ni le script ni ce document ne relisent : ils enregistrent."
+    )
+    lignes.append("")
     lignes.append("## 1. Ordre de passage proposé")
     lignes.append("")
     lignes.append(ligne(["Priorité", "Signification", "Prototypes"]))
@@ -185,8 +236,8 @@ def construire(elements: list[dict], titres: dict[str, str], detail: int = 2) ->
     lignes.append("")
     lignes.append("## 2. Tableau de suivi")
     lignes.append("")
-    lignes.append(ligne(["#", "Fiche", "Domaine", "Priorité", "Sources", "Droits déclarés", "Revue prévue le"]))
-    lignes.append(ligne(["---:", "---", "---", "---:", "---:", "---", "---"]))
+    lignes.append(ligne(["#", "Fiche", "Domaine", "Priorité", "Sources", "Droits déclarés", "Revue prévue le", "Relecture consignée"]))
+    lignes.append(ligne(["---:", "---", "---", "---:", "---:", "---", "---", "---"]))
     for index, item in enumerate(elements, start=1):
         fiche = item["fiche"]
         non_verifiees = sum(
@@ -203,6 +254,11 @@ def construire(elements: list[dict], titres: dict[str, str], detail: int = 2) ->
                     str(len(item["sources"])),
                     droits,
                     str(fiche.get("revue_le", "—")),
+                    (
+                        f"{dernieres[fiche['id']].get('date')} — {dernieres[fiche['id']].get('verdict')}"
+                        if fiche["id"] in dernieres
+                        else "aucune"
+                    ),
                 ]
             )
         )
@@ -210,13 +266,14 @@ def construire(elements: list[dict], titres: dict[str, str], detail: int = 2) ->
     lignes.append("## 3. Paquets détaillés")
     lignes.append("")
     for item in retenus:
-        lignes.extend(paquet(item, titres))
+        lignes.extend(paquet(item, titres, dernieres.get(item["fiche"]["id"])))
     lignes.append("## 4. Ce que ces paquets ne font pas")
     lignes.append("")
     lignes.append("- Ils ne remplacent ni la [grille de relecture](grille-relecture.md) ni l’expertise du domaine : les questions communes y restent.")
     lignes.append("- Ils ne vérifient aucun contenu de source et ne disent pas qu’une licence est valide ; ils montrent seulement ce qui est déclaré.")
     lignes.append("- Ils n’attribuent aucune note, aucun score et aucun ordre de valeur entre fiches.")
     lignes.append("- Ils n’autorisent aucune publication : la décision reste celle de l’association.")
+    lignes.append("- Ils ne remplacent pas le registre : la seule trace opposable est l’entrée de `relectures.toml` vérifiée par `outils/registre-relecture.py`.")
     lignes.append("")
     lignes.append("Régénérer avec `python3 outils/construire-paquets-relecture.py` ; vérifier avec `--verifier`.")
     lignes.append("")
@@ -242,7 +299,7 @@ def main() -> int:
         print("\n".join(paquet(trouves[0], titres)))
         return 0
 
-    contenu = construire(elements, titres)
+    contenu = construire(elements, titres, dernieres=dernieres_relectures())
     if arguments.verifier:
         if not sortie.exists():
             print(f"{sortie.relative_to(RACINE)} absent : lancez le script sans --verifier.", file=sys.stderr)

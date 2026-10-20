@@ -1,0 +1,46 @@
+# Registre des relectures humaines du catalogue d'apprentissage
+#
+# Ce fichier est le SEUL endroit où une relecture humaine est consignée. Il ne
+# contient aujourd'hui aucune entrée : aucune fiche n'a été relue par une
+# personne compétente à ce jour, et ce fichier ne doit jamais être pré-rempli
+# par un agent.
+#
+# Qui écrit ici ? Une personne qui a réellement relu une fiche. Elle part du
+# paquet de relecture correspondant (`docs/apprentissage/paquets-relecture.md`),
+# puis ajoute un bloc `[[relecture]]` et lance :
+#
+#     python3 outils/registre-relecture.py
+#
+# Le contrôle refuse un registre incohérent avec le catalogue, et
+# `python3 outils/registre-relecture.py --modele <identifiant>` imprime un bloc
+# prêt à compléter.
+#
+# Règles, volontairement strictes :
+#
+# - aucun nom de personne : seulement un rôle et, si utile, un type
+#   d'organisation (« relecture par une association de patients », etc.) ;
+# - `verdict = "conforme"` n'autorise aucune publication : il exige seulement
+#   que la fiche passe au statut « Relu — relecture consignée » dans
+#   `catalogue.toml`, avec la note correspondante. La décision de publier
+#   reste celle de l'association ;
+# - un verdict « a-corriger » ou « insuffisant » laisse la fiche au statut
+#   « Prototype à relire » et exige au moins une objection écrite ;
+# - toute date est une date réelle, jamais future ;
+# - une relecture ne se déclare pas : elle se date, se périme et se reprend.
+
+version = 1
+
+# Modèle d'une entrée, à décommenter et compléter (ou à obtenir par
+# `--modele <identifiant>`). Les crochets indiquent ce qu'il faut remplacer.
+#
+# [[relecture]]
+# fiche = "identifiant-de-la-fiche"
+# date = 2026-11-05
+# role = "expertise du domaine — préciser lequel"
+# perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+# verdict = "conforme"          # conforme | a-corriger | insuffisant
+# sources_ouvertes = ["https://exemple.org/page-consultee"]
+# droits_verifies_le = 2026-11-05
+# objections = []
+# points_bloquants = []
+# suite = "ce qui est décidé ensuite, et par qui"

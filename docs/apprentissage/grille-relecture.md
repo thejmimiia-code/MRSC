@@ -10,8 +10,9 @@
 - Distinguer les rôles de relecture — expertise du domaine, édition, accessibilité, personnes apprenantes, responsable de publication — sans publier de nom personnel par défaut.
 - Garder les notes de test volontaires minimales et non identifiantes. Ne demander ni récit de parcours scolaire, ni diagnostic, ni donnée financière ou de santé.
 - Un désaccord de fond, un doute de droit ou une erreur susceptible d’induire en erreur bloque la diffusion jusqu’à résolution.
-- Une revue interne de cohérence des 26 prototypes alors présents est consignée le 11 octobre 2026 dans [`revue-interne-prototypes-2026-10-11.md`](revue-interne-prototypes-2026-10-11.md). Elle n’est pas une validation spécialisée ni une autorisation de publication. Les huit fiches ajoutées dans le lot suivant, les dix fiches du lot suivant et les prototypes du 15 octobre 2026 ne sont pas couvertes par cette revue ; les 55 prototypes actuels restent à relire.
+- Une revue interne de cohérence des 26 prototypes alors présents est consignée le 11 octobre 2026 dans [`revue-interne-prototypes-2026-10-11.md`](revue-interne-prototypes-2026-10-11.md). Elle n’est pas une validation spécialisée ni une autorisation de publication. Les huit fiches ajoutées dans le lot suivant, les dix fiches du lot suivant et les prototypes du 15 octobre 2026 ne sont pas couvertes par cette revue ; les 57 prototypes actuels restent à relire.
 - Pour organiser ces relectures, la [file de relecture](file-relecture.md) générée par `python3 outils/file-relecture.py` range les 57 prototypes par domaine et signale les sujets à relecture spécialisée. C’est une liste de travail issue du catalogue, pas une évaluation : ses signaux par mots-clés doivent être corrigés par une personne.
+- Pour enregistrer une relecture, une seule voie : une entrée datée dans [`relectures.toml`](relectures.toml), vérifiée par `python3 outils/registre-relecture.py`. Le registre ne contient aujourd’hui aucune entrée, et un agent ne doit jamais en écrire une.
 - Pour préparer une séance de relecture, les [paquets de relecture](paquets-relecture.md) générés par `python3 outils/construire-paquets-relecture.py` rassemblent pour chaque prototype prioritaire ses sources enregistrées, les droits déclarés, les limites déjà écrites et une trace de décision à remplir. Ils ne remplacent aucune des questions communes ci-dessous.
 
 ## 1. Besoin, public et périmètre
@@ -261,16 +262,34 @@ Pour les trente-quatre prototypes décrits avant le lot courant, consigner une t
 
 **Statut : « Prototype à relire », non validé.** La fiche distingue un message urgent d’un portail public de santé. Elle n’est pas un conseil médical. Faire relire (éducation à la santé, médias) ; revérifier sante.gouv.fr et Santé publique France ; ne copier aucune consigne de soin.
 
-Pour l’ensemble des cinquante-cinq prototypes décrits ici, remplir une trace de décision séparée ; une vérification de génération, de syntaxe ou de lien local ne remplace pas la relecture de domaine, l’examen des droits, les essais d’usage ou la revue de navigateur.
+Pour l’ensemble des cinquante-sept prototypes décrits ici, consigner une trace de décision séparée dans [`relectures.toml`](relectures.toml), au format vérifié ci-dessous ; une vérification de génération, de syntaxe ou de lien local ne remplace pas la relecture de domaine, l’examen des droits, les essais d’usage ou la revue de navigateur.
 
-### Trace de décision à compléter
+### Trace de décision — un seul format
 
-- Identifiant et version de la fiche :
-- Date de revue :
-- Rôles consultés (sans nom public par défaut) :
-- Sources et licences revérifiées :
-- Constats à corriger :
-- Changements apportés et vérifiés :
-- Éléments restant incertains :
-- Décision : `à corriger` / `en attente de revue` / `en attente de test` / `prête à soumettre à validation` / `publiée` / `suspendue`.
-- Date de prochaine revue et responsable de suivi :
+La trace d'une relecture n'est plus un texte libre : c'est une entrée de [`relectures.toml`](relectures.toml), contrôlée par `python3 outils/registre-relecture.py`. Les questions ci-dessous restent celles de la grille ; elles trouvent leur place dans les champs du bloc.
+
+| Question de la grille | Champ du registre |
+| --- | --- |
+| Quelle fiche, quelle date réelle ? | `fiche`, `date` |
+| Quels rôles ont relu (sans nom public) ? | `role` |
+| Quels points ont été examinés ? | `perimetre` |
+| Quels constats restent à corriger ? | `objections` |
+| Qu'est-ce qui bloque encore ? | `points_bloquants` |
+| Les sources ont-elles été ouvertes, les droits tranchés ? | `sources_ouvertes`, `droits_verifies_le` |
+| Quelle décision, et quelle suite ? | `verdict`, `suite` |
+
+```toml
+[[relecture]]
+fiche = "identifiant-de-la-fiche"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = ["https://exemple.org/page-consultee"]
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
+```
+
+Le contrôle refuse une date future, un verdict inconnu, un verdict « à corriger » ou « insuffisant » sans objection, et tout statut du catalogue qui ne correspondrait pas au registre : une fiche « Relu — relecture consignée » sans relecture conforme échoue, une fiche « Prototype à relire » avec une relecture conforme échoue aussi. Il ne juge ni la qualité de la relecture ni son auteur ; il empêche seulement un statut de bouger sans trace, ou une trace d'exister sans effet. Un statut ne se déclare pas : il se date, il se périme et il se reprend.
