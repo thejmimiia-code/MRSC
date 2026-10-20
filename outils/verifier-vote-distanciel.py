@@ -33,6 +33,7 @@ CLES = RACINE / "docs" / "rd" / "vote-distanciel-cles.toml"
 CHAINE_LOGICIELLE = RACINE / "docs" / "rd" / "vote-distanciel-chaine-logicielle.toml"
 RESULTATS = RACINE / "docs" / "rd" / "vote-distanciel-resultats.toml"
 DOSSIER = RACINE / "docs" / "rd" / "vote-distanciel-dossier-deliberation.md"
+CONVOCATION = RACINE / "docs" / "rd" / "vote-distanciel-convocation.md"
 STATUTS = RACINE / "assets" / "documents" / "statuts-2020.pdf"
 
 SECTIONS_DOSSIER = [
@@ -863,6 +864,42 @@ def verifier_dossier(
     return erreurs
 
 
+def verifier_convocation(markdown: str, profils: dict) -> list[str]:
+    """Vérifie que la convocation prépare la séance sans décider ni promettre à sa place."""
+    erreurs: list[str] = []
+    texte_normalise = markdown.casefold()
+    for formule in FORMULES_INTERDITES_DOSSIER:
+        if formule in texte_normalise:
+            erreurs.append(f"formule de promesse interdite dans la convocation : {formule!r}")
+
+    for profil in profils.get("profil", []):
+        if f"`{profil.get('id', '')}`" not in markdown:
+            erreurs.append(f"profil absent de la convocation : {profil.get('id', '')}")
+
+    ambiguites = [
+        ligne for ligne in lignes_tableau(extraire_section(markdown, "## 3. Les huit ambiguïtés à trancher"))
+        if re.match(r"^\|\s*\d+\s*\|", ligne)
+    ]
+    if len(ambiguites) != 8:
+        erreurs.append(f"huit ambiguïtés attendues dans la convocation : {len(ambiguites)} ligne(s) numérotée(s)")
+
+    garde_fous = [
+        "ne décide rien", "aucune identité", "aucun bulletin",
+        "vote-distanciel-dossier-deliberation.md", "vote-distanciel-decision.md",
+    ]
+    for element in garde_fous:
+        if element not in texte_normalise:
+            erreurs.append(f"mention obligatoire absente de la convocation : {element!r}")
+
+    if "`aucun`" not in markdown:
+        erreurs.append("possibilité de ne retenir aucun profil absente de la convocation")
+    if "voie d" not in texte_normalise or "bloquée" not in extraire_section(markdown, "## 4. Les trois voies, en trois phrases"):
+        erreurs.append("voie D non présentée comme bloquée dans la convocation")
+    if re.search(r"Profil retenu\s*\|\s*`?(?:bureau-executif|conseil-ethique|territoriale-constitutive|ago-|age-|dissolution|aucun)", markdown):
+        erreurs.append("la convocation ne doit pas présélectionner un profil")
+    return erreurs
+
+
 def principal() -> int:
     texte = NOTE.read_text(encoding="utf-8")
     texte_normalise = texte.casefold()
@@ -958,6 +995,12 @@ def principal() -> int:
     else:
         manquants.extend(verifier_dossier(dossier, profils, regles, registre, cas_essai, revues, comparaison))
 
+    convocation = CONVOCATION.read_text(encoding="utf-8") if CONVOCATION.is_file() else ""
+    if not convocation:
+        manquants.append("document de convocation présent")
+    else:
+        manquants.extend(verifier_convocation(convocation, profils))
+
     with PORTEFEUILLE.open("rb") as fichier:
         initiatives = tomllib.load(fichier).get("initiative", [])
     votes = [item for item in initiatives if item.get("id") == "vote-distanciel-verifiable"]
@@ -984,7 +1027,7 @@ def principal() -> int:
         "à expertiser, 18 règles et 8 profils statutaires à relire, 12 cas synthétiques à concevoir, "
         f"4 options et 15 critères sans score, 3 sources à évaluer, 8 catégories, 6 liaisons interdites, 5 signaux de corrélation, 7 incidents de continuité, 8 barrières d’accessibilité, 6 situations d’assistance, 6 phases de clés, 7 contrôles logiciels et 6 étapes de résultat, "
         f"6 rôles et 5 revues à attribuer, décision {etat_decision}, initiative P0 à cadrer, "
-        "dossier de délibération cohérent avec les registres, "
+        "dossier de délibération cohérent avec les registres, convocation sans présélection, "
         "aucune identité ni bulletin réel autorisé."
     )
     return 0

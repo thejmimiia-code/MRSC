@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — Une convocation courte, sans le dossier entier
+
+- **Initiative :** `vote-distanciel-verifiable` (P0). Suite directe du dossier de délibération fusionné par la PR #162.
+- **Besoin de départ, non inventé :** le dossier fait douze sections ; le faire lire intégralement avant une séance décourage, et une convocation qui demande une heure de lecture la veille ne fait venir personne. Il fallait donc un document de préparation séparé, court, sans le contenu qui appartient à la séance.
+- **Livrable :** [`vote-distanciel-convocation.md`](vote-distanciel-convocation.md), six sections et deux tableaux — vingt minutes de lecture : ce qui est demandé avant la séance, les huit profils en une ligne (corps électoral, quorum, majorité, procuration, secret, statut), les huit ambiguïtés avec « ce qui reste bloqué » et « qui peut trancher », les trois voies en trois phrases, ce qui ne sera pas demandé ce jour-là, et les deux issues acceptables (décider ou reporter).
+- **Ce qui a été retiré du dossier, volontairement :** le détail des quinze conditions cumulatives, le déroulé en sept étapes, les sources internes, l’analyse du dépôt privé et le registre des objections. Un document de convocation qui contiendrait tout ne serait plus une convocation.
+- **Ce qui a été conservé, volontairement :** les statuts de chaque profil issus du registre, la mention que `dissolution` ne peut pas être retenu, le fait que `ago-premiere` est le seul profil à décrire une session numérique sans que cela suffise à le choisir, et l’avertissement que le tableau ne classe rien.
+- **Contrôle ajouté :** `verifier_convocation` refuse une convocation qui oublie un profil du registre, efface une ambiguïté, emploie une formule de promesse, oublie « aucune identité » ou « aucun bulletin », ne renvoie pas au dossier et à la trace de décision, omet la possibilité de `aucun`, cesse de présenter la voie D comme bloquée, ou présélectionne un profil. La suite passe de 79 à **86 tests**.
+- **Limite :** le contrôle vérifie une forme et une cohérence documentaire. Il ne dit rien de la clarté réelle du document pour une personne qui le lit pour la première fois — cela demande un essai de lecture, qui n’a pas eu lieu.
+- **Prochaine action :** faire lire la convocation par une personne extérieure au chantier avant de l’envoyer, puis tenir la séance. Aucune identité ni aucun bulletin réel ne doivent être recueillis.
+
 ## 2026-10-20 — Un dossier de délibération remplace une fonction de vote refusée
 
 - **Initiative :** `vote-distanciel-verifiable` (P0), avec `relire-les-44-prototypes` pour la méthode de traçabilité.

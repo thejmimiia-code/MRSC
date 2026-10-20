@@ -12,7 +12,7 @@ Trois résultats sont attendus, à consigner ensemble :
 2. choisir un profil de scrutin — `aucun` est une réponse valide — et une voie A, B ou C ;
 3. remplir la trace de huit champs du §6 de [`vote-distanciel-decision.md`](vote-distanciel-decision.md) et désigner les rôles du [`plan de revues`](vote-distanciel-revues.toml).
 
-Durée indicative : 60 à 90 minutes, hors vérification documentaire préalable. Aucune donnée personnelle n’est nécessaire pour délibérer, seulement des règles et des rôles.
+Durée indicative : 60 à 90 minutes, hors vérification documentaire préalable. Une version courte destinée à la convocation — les huit profils et les huit ambiguïtés seulement — existe dans [`vote-distanciel-convocation.md`](vote-distanciel-convocation.md) ; elle ne remplace pas ce dossier pour la séance elle-même. Aucune donnée personnelle n’est nécessaire pour délibérer, seulement des règles et des rôles.
 
 Ce que ce dossier n’est pas : un avis juridique, une comparaison de logiciels, une autorisation technique, ni une promesse de sécurité. Il ne modifie aucun statut et ne crée aucune compétence.
 

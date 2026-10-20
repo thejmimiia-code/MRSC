@@ -32,6 +32,7 @@ CLES_PATH = RACINE / "docs" / "rd" / "vote-distanciel-cles.toml"
 CHAINE_LOGICIELLE_PATH = RACINE / "docs" / "rd" / "vote-distanciel-chaine-logicielle.toml"
 RESULTATS_PATH = RACINE / "docs" / "rd" / "vote-distanciel-resultats.toml"
 DOSSIER_PATH = RACINE / "docs" / "rd" / "vote-distanciel-dossier-deliberation.md"
+CONVOCATION_PATH = RACINE / "docs" / "rd" / "vote-distanciel-convocation.md"
 
 
 def table_decision(valeurs: list[str]) -> str:
@@ -78,6 +79,7 @@ class RegistreMenacesTests(unittest.TestCase):
         with RESULTATS_PATH.open("rb") as fichier:
             cls.resultats = tomllib.load(fichier)
         cls.dossier = DOSSIER_PATH.read_text(encoding="utf-8")
+        cls.convocation = CONVOCATION_PATH.read_text(encoding="utf-8")
         cls.empreinte_statuts = hashlib.sha256(STATUTS_PATH.read_bytes()).hexdigest()
 
     def test_registre_courant_est_coherent(self):
@@ -419,6 +421,7 @@ class DossierDeliberationTests(unittest.TestCase):
             with chemin.open("rb") as fichier:
                 setattr(cls, nom, tomllib.load(fichier))
         cls.dossier = DOSSIER_PATH.read_text(encoding="utf-8")
+        cls.convocation = CONVOCATION_PATH.read_text(encoding="utf-8")
 
     def verifier(self, markdown, profils=None, regles=None, revues=None, comparaison=None):
         return MODULE.verifier_dossier(
@@ -480,6 +483,46 @@ class DossierDeliberationTests(unittest.TestCase):
         dossier = self.dossier.replace("**Seul le tableau du §6", "Le tableau du §6")
         erreurs = self.verifier(dossier)
         self.assertTrue(any("tableau de décision" in erreur for erreur in erreurs))
+
+
+class ConvocationTests(unittest.TestCase):
+    """La convocation prépare la séance : elle ne décide rien et ne promet rien."""
+
+    @classmethod
+    def setUpClass(cls):
+        with PROFILS_PATH.open("rb") as fichier:
+            cls.profils = tomllib.load(fichier)
+        cls.convocation = CONVOCATION_PATH.read_text(encoding="utf-8")
+
+    def test_convocation_courante_est_coherente(self):
+        self.assertEqual(MODULE.verifier_convocation(self.convocation, self.profils), [])
+
+    def test_refuse_un_profil_absent(self):
+        erreurs = MODULE.verifier_convocation(self.convocation.replace("`age-seconde`", "`age-bis`"), self.profils)
+        self.assertTrue(any("profil absent de la convocation" in erreur for erreur in erreurs))
+
+    def test_refuse_une_ambiguite_effacee(self):
+        convocation = self.convocation.replace("| 8 | La copie locale", "| 8 bis | La copie locale")
+        erreurs = MODULE.verifier_convocation(convocation, self.profils)
+        self.assertTrue(any("huit ambiguïtés" in erreur for erreur in erreurs))
+
+    def test_refuse_une_formule_de_promesse(self):
+        erreurs = MODULE.verifier_convocation(self.convocation + "\nUn vote inviolable.\n", self.profils)
+        self.assertTrue(any("formule de promesse interdite" in erreur for erreur in erreurs))
+
+    def test_refuse_une_convocation_qui_presélectionne(self):
+        convocation = self.convocation + "\n| Profil retenu | `ago-premiere` |\n"
+        erreurs = MODULE.verifier_convocation(convocation, self.profils)
+        self.assertTrue(any("présélectionner un profil" in erreur for erreur in erreurs))
+
+    def test_refuse_une_convocation_qui_oublie_la_voie_d(self):
+        convocation = self.convocation.replace("La voie D — construire un système — est bloquée", "Une quatrième voie existe")
+        erreurs = MODULE.verifier_convocation(convocation, self.profils)
+        self.assertTrue(any("voie D" in erreur for erreur in erreurs))
+
+    def test_refuse_une_convocation_sans_garde_fou(self):
+        erreurs = MODULE.verifier_convocation(self.convocation.replace("aucun bulletin", "un bulletin"), self.profils)
+        self.assertTrue(any("aucun bulletin" in erreur for erreur in erreurs))
 
 
 if __name__ == "__main__":
