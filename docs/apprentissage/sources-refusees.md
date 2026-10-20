@@ -10,15 +10,36 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Sources refusées consignées | 3 |
-| Fiches du catalogue concernées | 2 |
-| Refus suivis d'une page de remplacement ouverte et lue | 3 |
-| Motif : Accès refusé (HTTP 403) | 2 |
-| Motif : Contenu hors du périmètre cherché après lecture | 1 |
+| Sources refusées consignées | 6 |
+| Fiches du catalogue concernées | 5 |
+| Refus suivis d'une page de remplacement ouverte et lue | 5 |
+| Motif : Accès refusé (HTTP 403) | 3 |
+| Motif : Contenu hors du périmètre cherché après lecture | 3 |
 
 Un refus consigné ne valide jamais la fiche associée : le statut éditorial dépend uniquement du registre des relectures humaines (`docs/apprentissage/relectures.toml`).
 
 ## 2. Détail des refus consignés
+
+### `eduscol-lexique-arts-plastiques-hors-perimetre` — Éduscol — « Lexique pour les arts plastiques : Les éléments du langage plastique » (PDF)
+
+- **Fiche concernée :** `arts-composer-formes`
+- **Adresse écartée :** `https://eduscol.education.fr/document/14122/download`
+- **Date de la tentative :** 2026-10-20
+- **Catégorie de refus :** Contenu hors du périmètre cherché après lecture (`hors-perimetre`)
+- **Motif constaté :** Ouverte et lue intégralement (4 parties) le 20 octobre 2026 : la ressource définit les notions de forme, d'espace et de support aux cycles 2 et 3, mais n'énonce ni la hiérarchie visuelle par taille, distance et isolement autour d'un titre, ni la règle d'accessibilité sur le contraste ne reposant pas sur la seule couleur.
+- **Décision retenue :** Portail conservé par écrit en l'attente d'une page précise (`portail-conserve`)
+- **Limite — ce que ce refus ne dit pas :** Refuser cette page maintient volontairement la fiche arts-composer-formes en constat (portail seul assumé par écrit) plutôt que d'y attacher une citation de façade qui ne couvre pas son affirmation principale.
+
+### `eduscol-se-reperer-temps-hors-perimetre` — Éduscol — « Se repérer dans le temps : construire des repères historiques » (PDF)
+
+- **Fiche concernée :** `histoire-situer-siecle`
+- **Adresse écartée :** `https://eduscol.education.fr/document/16789/download`
+- **Date de la tentative :** 2026-10-20
+- **Catégorie de refus :** Contenu hors du périmètre cherché après lecture (`hors-perimetre`)
+- **Motif constaté :** Ouverte et lue intégralement (3 parties) le 20 octobre 2026 : la ressource mentionne le lexique « année, décennie, siècle » mais n'énonce ni l'absence d'année zéro ni les bornes arithmétiques d'un siècle (an 1 à an 100, 1901 à 2000).
+- **Décision retenue :** Remplacée par une autre page ouverte et lue (`remplacee`)
+- **Source de remplacement dans le catalogue :** `https://promenade.imcce.fr/fr/pages2/277.html`
+- **Limite — ce que ce refus ne dit pas :** La fiche Éduscol 16789 reste pertinente pour la didactique du temps historique aux cycles 3 et 4 ; elle est refusée ici uniquement parce qu'elle n'étaye pas la règle de bornage arithmétique des siècles enseignée par la fiche.
 
 ### `hal-citations-fonctionnalite-non-active` — HAL — « Les citations dans HAL »
 
@@ -41,6 +62,17 @@ Un refus consigné ne valide jamais la fiche associée : le statut éditorial d�
 - **Décision retenue :** Remplacée par une autre page ouverte et lue (`remplacee`)
 - **Source de remplacement dans le catalogue :** `https://eduscol.education.fr/document/16807/download`
 - **Limite — ce que ce refus ne dit pas :** Ce refus constate seulement l'impossibilité d'ouvrir le PDF à la date du relevé ; il ne dit rien de l'exactitude ni de la licence du livret de l'IGN, dont le portail reste cité comme point d'entrée.
+
+### `ign-livret-decouvrez-monde-cartes-paysage-403` — IGN — « Découvrez le monde des cartes » (livret pédagogique PDF)
+
+- **Fiche concernée :** `geo-decrire-paysage`
+- **Adresse écartée :** `https://www.ign.fr/publications-de-l-ign/institut/Ressources_pedagogiques/livret_decouvrez_LMDC.pdf`
+- **Date de la tentative :** 2026-10-20
+- **Catégorie de refus :** Accès refusé (HTTP 403) (`acces-refuse-403`)
+- **Motif constaté :** Tentée le 20 octobre 2026 pour la lecture de paysage : le téléchargement direct du livret PDF renvoie une erreur HTTP 403. Conformément à la règle interdisant de citer une page non ouverte, cette adresse est écartée.
+- **Décision retenue :** Remplacée par une autre page ouverte et lue (`remplacee`)
+- **Source de remplacement dans le catalogue :** `https://eduscol.education.fr/document/16804/download`
+- **Limite — ce que ce refus ne dit pas :** Ce refus constate uniquement le blocage HTTP 403 lors de la consultation ; la ressource Éduscol de remplacement (document 16804) couvre la démarche de description géographique mais pas la vallée fictive de la fiche.
 
 ### `ign-mag-lire-carte-cinq-etapes-403` — IGN — « Apprendre à lire une carte en cinq étapes »
 

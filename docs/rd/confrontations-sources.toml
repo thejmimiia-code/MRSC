@@ -84,3 +84,46 @@ etat_releve = "indice-concordant"
 faux_positif_possible = "Dans le tableau de la ressource Éduscol, « 90° » apparaît trois fois : « de 0° à 90° » (angle aigu), « 90° » (angle droit) et « de 90° à 180° » (angle obtus). Une fiche qui écrirait par erreur qu'un angle obtus vaut 90° passerait quand même le test d'ancre."
 faux_negatif_possible = "Selon l'outil d'extraction PDF, le symbole degré est parfois converti en formule LaTeX (« 90^{\\circ} ») ou en lettre « o » en exposant, faisant échouer la recherche littérale de « 90° »."
 limite = "Cet indice vérifie uniquement la présence du vocabulaire de base dans le document Éduscol du 20 octobre 2026 ; il ne contrôle ni la clarté de l'exercice ni l'accessibilité sans figure géométrique."
+
+[[confrontation]]
+id = "situer-siecle-bornes-sans-an-zero"
+fiche = "histoire-situer-siecle"
+url_source = "https://promenade.imcce.fr/fr/pages2/277.html"
+affirmation_fiche = "Dans l'ère commune sans année zéro pour les historiens, le Ier siècle va de l'an 1 à l'an 100, le XXe de 1901 à 2000 et le XXIe commence en 2001."
+ancres_attendues = ["1 avant J.-C.", "an 1", "an 100", "1901", "2000", "2001"]
+ancres_reperees = ["1 avant J.-C.", "an 1", "an 100", "1901", "2000", "2001"]
+ancres_absentes = []
+date_releve = 2026-10-20
+etat_releve = "indice-concordant"
+faux_positif_possible = "La même page de l'IMCCE présente aussi la notation algébrique des astronomes (Cassini, 1740) où l'an 1 avant J.-C. est appelé « année 0 » : la présence simultanée de « an 1 » et « année 0 » ne permet pas à un automate de savoir laquelle des deux conventions la fiche retient."
+faux_negatif_possible = "La source de l'IMCCE écrit « XXème siècle » et « XXIème siècle » alors que la fiche M.R.S.C. typographie « XXe siècle » et « XXIe siècle » : une ancre portant sur « XXe siècle » échouerait sur cette variante orthographique."
+limite = "Cet indice vérifie la présence des bornes chronologiques de référence sur la page de l'IMCCE au 20 octobre 2026 ; il ne valide ni l'astuce mentale d'ajout de 1 au nombre de centaines ni l'exercice de la fiche."
+
+[[confrontation]]
+id = "comparer-sources-auteur-contexte-point-de-vue"
+fiche = "histoire-comparer-sources"
+url_source = "https://cache.media.eduscol.education.fr/file/HG_Competences/11/4/RA16_C3C4_HIGE_Analyser_comprendre_document_819114.pdf"
+affirmation_fiche = "Analyser deux documents demande d'identifier l'auteur, le contexte et les destinataires, puis de confronter des points de vue toujours partiels pour repérer informations complémentaires ou contradictoires."
+ancres_attendues = ["auteur", "contexte", "destinataires", "point de vue", "partiel", "contradictoires"]
+ancres_reperees = ["auteur", "contexte", "destinataires", "point de vue", "partiel", "contradictoires"]
+ancres_absentes = []
+date_releve = 2026-10-20
+etat_releve = "indice-concordant"
+faux_positif_possible = "Ces termes méthodologiques généraux figurent dans la plupart des guides d'analyse documentaire ; leur présence ne prouve pas que la source couvre le cas précis d'une affiche et d'un carnet de notes fictifs."
+faux_negatif_possible = "La fiche emploie le verbe « corroborer » dans ses notions, tandis que la ressource Éduscol parle de « croiser » et « confronter » les supports : chercher « corroborer » produirait un constat d'ancre absente."
+limite = "Cet indice ne remplace pas une relecture par une personne compétente en histoire et en éducation aux médias pour vérifier la formulation de l'exercice et de ses limites."
+
+[[confrontation]]
+id = "decrire-paysage-observation-ensembles-hypotheses"
+fiche = "geo-decrire-paysage"
+url_source = "https://eduscol.education.fr/document/16804/download"
+affirmation_fiche = "Décrire un paysage complète l'observation en identifiant les objets et les ensembles visibles avant de formuler des hypothèses ou de confronter d'autres documents pour interpréter."
+ancres_attendues = ["observation", "objets", "ensembles", "hypothèses", "visible", "interprétation"]
+ancres_reperees = ["observation", "objets", "ensembles", "hypothèses", "visible", "interprétation"]
+ancres_absentes = []
+date_releve = 2026-10-20
+etat_releve = "indice-concordant"
+faux_positif_possible = "Les mots « observation », « hypothèses » et « interprétation » apparaissent dans des contextes historiques comme géographiques au sein du même document : leur seule présence ne prouve pas que le passage porte sur un paysage."
+faux_negatif_possible = "La fiche distingue « élément naturel » et « aménagement », tandis que le document Éduscol 16804 emploie « objets », « ensembles » et « formes d'organisation » : chercher « aménagement » produirait un faux négatif lexical."
+limite = "Cet indice ne valide ni la description fictive de vallée ni la réserve sur l'accessibilité du pont, qui relèvent du choix éditorial de la fiche."
+
