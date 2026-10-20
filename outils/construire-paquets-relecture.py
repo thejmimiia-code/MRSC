@@ -99,9 +99,16 @@ def etats_automatiques() -> dict[str, str]:
     for audit in audits:
         total = len(audit["resultats"])
         echecs = len(audit["echecs"])
+        constats = len(audit.get("constats") or [])
         if echecs:
             detail = " ; ".join(echec["detail"] for echec in audit["echecs"])
-            etats[audit["fiche"]["id"]] = f"{total - echecs}/{total} — à corriger : {detail}"
+            etats[audit["fiche"]["id"]] = f"{total - echecs - constats}/{total} — à corriger : {detail}"
+        elif constats:
+            detail = " ; ".join(constat["detail"] for constat in audit["constats"])
+            etats[audit["fiche"]["id"]] = (
+                f"{total - constats}/{total} — aucun défaut mécanique détecté ; "
+                f"constat à trancher par une personne : {detail}"
+            )
         else:
             etats[audit["fiche"]["id"]] = f"{total}/{total} — aucun défaut mécanique détecté"
     return etats

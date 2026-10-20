@@ -2964,6 +2964,14 @@ revue_le = "2026-10-11"
 intervalle_revue_jours = 180
 
 [[fiche.sources]]
+titre = "Éduscol — « Déterminer une vitesse », matière, mouvement, énergie, information (cycles 2 et 3)"
+url = "https://eduscol.education.fr/document/16837/download"
+licence_source = "Non vérifiée — document ministériel consulté ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Relation « vitesse = distance parcourue ÷ durée de parcours » et exemple 400 m en 170 s donnant 2,35 m/s, consultés le 20 octobre 2026. Aucun texte, protocole ni exemple du document n’est reproduit."
+
+[[fiche.sources]]
 titre = "Éduscol — ressources et programmes de sciences physiques"
 url = "https://eduscol.education.fr/"
 licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
@@ -3369,6 +3377,14 @@ droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail institutionnel facultatif pour rechercher des ressources de langue ; aucun dialogue, phrase, traduction ou activité du site n’est repris."
 
+[[fiche.sources]]
+titre = "Cambridge Dictionary — entrée « spell »"
+url = "https://dictionary.cambridge.org/dictionary/english/spell"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est reprise"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Sens du verbe « spell » et forme interrogative « How do you spell…? », consultés le 20 octobre 2026. Aucune définition ni aucun exemple du dictionnaire n’est reproduit ; les phrases de la fiche sont originales."
+
 [[fiche]]
 id = "maths-lire-tableau-croise"
 titre = "Lire une information à l’intersection d’un tableau"
@@ -3472,6 +3488,14 @@ a_retenir = [
 transferer = "Ce repère peut aider à décrire un rectangle, un carrelage ou un dessin géométrique. Cette fiche ne donne pas de plan de découpe ni de consigne d’utilisation d’outil ; pour un travail réel, choisis des outils adaptés et respecte les règles de sécurité."
 revue_le = "2026-10-11"
 intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Éduscol — « Espace et géométrie au cycle 3 : les angles »"
+url = "https://eduscol.education.fr/document/36614/download"
+licence_source = "Non vérifiée — document ministériel consulté ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Vocabulaire de l’angle (sommet, côté) et mesure de l’angle droit à 90°, consultés le 20 octobre 2026. Aucun schéma, tableau ni texte du document n’est repris."
 
 [[fiche.sources]]
 titre = "Éduscol — ressources et programmes de mathématiques"
