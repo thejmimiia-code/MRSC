@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-20 — La sonde de production couvre enfin les ressources que les pages demandent
+
+- **Initiative :** `coherence-textes-publics`.
+- **Signal :** la revue de cohérence cherchait une divergence entre ce que le site demande et ce qui est contrôlé. Elle en a trouvé une : la sonde d'en-têtes vérifiait 19 fichiers, mais aucune des trois icônes PNG ni `llms.txt`, pourtant demandés par les 94 pages depuis l'ajout de l'icône 192 px.
+- **Constat :** `outils/verifier-publication.py` liste ses cibles à la main (`CIBLES`). Une ressource ajoutée aux pages n'y entre pas d'elle-même : une icône publiée avec un mauvais type MIME ou un 404 serait passée inaperçue jusqu'à ce qu'un navigateur la réclame.
+- **Décision :** ajouter les quatre cibles manquantes — `favicon-32.png`, `favicon-192.png`, `apple-touch-icon.png` (`image/png`) et `llms.txt` (`text/plain`). La sonde passe de 19 à 23 fichiers.
+- **Preuve exécutée localement :** `python3 outils/verifier-publication.py --base-url http://127.0.0.1:4180/` → **23 fichiers contrôlés, tous 200**, types MIME conformes (dont `image/png` pour les deux icônes et `text/plain` pour `llms.txt`). L'absence de `Content-Encoding` signalée sur ce passage est normale : le serveur local n'est pas un replica de production.
+- **Limite :** la confirmation en production viendra du prochain passage du workflow de vérification de publication, qui met à jour l'issue #90 ; elle n'a pas pu être forcée depuis la session.
+- **Contrôles réellement exécutés :** sonde locale sur 23 cibles, plus la porte complète (seize contrôles et `py_compile`).
+
 ## 2026-10-20 — Les chiffres publics sont recalculés, plus recopiés
 
 - **Initiative :** `coherence-textes-publics`.

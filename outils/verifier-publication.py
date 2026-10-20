@@ -50,6 +50,10 @@ CIBLES: tuple[tuple[str, tuple[str, ...], str], ...] = (
     ("assets/images/escales-anglais-hero-800.avif", ("image/avif",), "Secours de scène 800 px, AVIF"),
     ("assets/images/escales-anglais-hero-800.webp", ("image/webp",), "Secours de scène 800 px, WebP"),
     ("favicon.ico", ("image/x-icon", "image/vnd.microsoft.icon", "application/octet-stream"), "Favicon"),
+    ("assets/images/favicon-32.png", ("image/png",), "Icône 32 px"),
+    ("assets/images/favicon-192.png", ("image/png",), "Icône 192 px"),
+    ("assets/images/apple-touch-icon.png", ("image/png",), "Icône Apple Touch"),
+    ("llms.txt", ("text/plain",), "Sommaire pour lecteurs automatiques"),
     ("sitemap.xml", ("application/xml", "text/xml"), "Sitemap"),
 )
 
