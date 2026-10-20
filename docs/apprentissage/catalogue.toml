@@ -2661,6 +2661,14 @@ droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail facultatif pour découvrir des sources d’archives et leurs contextes ; aucun document, extrait, image ou description du site n’est repris dans les exercices fictifs."
 
+[[fiche.sources]]
+titre = "Éduscol — Histoire-géographie cycles 3 et 4 : Analyser et comprendre un document (PDF)"
+url = "https://cache.media.eduscol.education.fr/file/HG_Competences/11/4/RA16_C3C4_HIGE_Analyser_comprendre_document_819114.pdf"
+licence_source = "Non vérifiée — ressource institutionnelle du ministère de l’Éducation nationale ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Consultée le 20 octobre 2026 pour vérifier la démarche d’identification de l’auteur, de la nature, de la date, du contexte et des destinataires d’un document, le caractère toujours partiel d’un point de vue et la confrontation de supports complémentaires ou contradictoires ; les deux documents fictifs de la fiche sont originaux et aucun extrait n’est reproduit."
+
 [[fiche]]
 id = "info-bits-octets"
 titre = "Comprendre les bits et les octets"
@@ -3146,6 +3154,14 @@ licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation d
 droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail public facultatif pour rechercher des cartes et repères géographiques ; aucun fond de carte, texte, donnée ou visuel n’est repris dans la description fictive."
+
+[[fiche.sources]]
+titre = "Éduscol — Pratiquer différents langages en histoire et en géographie : Écrire et pratiquer l’oral (PDF)"
+url = "https://eduscol.education.fr/document/16804/download"
+licence_source = "Non vérifiée — ressource institutionnelle du ministère de l’Éducation nationale ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Consultée le 20 octobre 2026 pour vérifier que décrire complète l’observation par l’identification des objets et la distinction d’ensembles visibles avant de formuler des hypothèses et de confronter des documents complémentaires pour interpréter ; la description de vallée fictive et la réserve d’accessibilité relèvent de la fiche et aucun texte n’est reproduit."
 
 [[fiche]]
 id = "info-lire-adresse-web"
@@ -3761,6 +3777,14 @@ licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation d
 droits_controles_le = "2026-10-11"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail institutionnel facultatif pour retrouver des repères de chronologie ; aucun texte, date d’événement, frise ou exercice n’est repris."
+
+[[fiche.sources]]
+titre = "IMCCE / Observatoire de Paris — Comprendre : Chronologie, ères et calendriers"
+url = "https://promenade.imcce.fr/fr/pages2/277.html"
+licence_source = "Non vérifiée — ressource institutionnelle de l’IMCCE / Observatoire de Paris ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Consultée le 20 octobre 2026 pour vérifier l’absence d’année zéro dans la numérotation des historiens (1 avant J.-C. précède l’an 1) et les bornes des siècles (Ier siècle de l’an 1 à l’an 100, XXe de 1901 à 2000, XXIe à partir de 2001) ; l’astuce de calcul et les années d’exercice relèvent de la fiche et aucun texte n’est reproduit."
 
 [[fiche]]
 id = "info-systeme-exploitation"

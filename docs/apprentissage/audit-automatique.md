@@ -17,8 +17,8 @@
 | Fiches sans aucun échec mécanique | 57 |
 | Fiches avec au moins un échec | 0 |
 | Échecs mécaniques au total | 0 |
-| Fiches avec un constat à trancher par une personne | 4 |
-| Constats nommés (ni échecs, ni validations) | 4 |
+| Fiches avec un constat à trancher par une personne | 1 |
+| Constats nommés (ni échecs, ni validations) | 1 |
 
 ### Constats nommés, à trancher par une personne
 
@@ -26,7 +26,7 @@ Ces contrôles ont vu un fait exact que la machine ne peut pas juger. Rien n'est
 
 | Constat | Fiches concernées | Nombre |
 | --- | --- | ---: |
-| Au moins une source pointe une page précise, pas seulement un portail | arts-composer-formes, geo-decrire-paysage, histoire-comparer-sources, histoire-situer-siecle | 4 |
+| Au moins une source pointe une page précise, pas seulement un portail | arts-composer-formes | 1 |
 
 Pour la ligne « page précise » : ces fiches ne citent que des portails (racine d'un site) et l'annoncent dans le champ `utilisation` — la machine vérifie cette phrase, pas sa pertinence. Sans page précise, la question 1 du §4 ne peut pas être tranchée en l'état : il faut soit ajouter une page consultée et vérifiée, soit garder le portail en connaissance de cause.
 
@@ -34,8 +34,8 @@ Pour la ligne « page précise » : ces fiches ne citent que des portails (racin
 
 | Fait mesuré | Valeur |
 | --- | ---: |
-| Sources déclarées au total | 105 |
-| dont licence déclarée « non vérifiée » | 104 |
+| Sources déclarées au total | 108 |
+| dont licence déclarée « non vérifiée » | 107 |
 | Fiches sans aucune source | 0 |
 | Prochaine revue la plus proche | 2027-01-09 (info-lire-adresse-web) |
 | Fiches dont la revue de contenu est échue | 0 |
@@ -60,13 +60,13 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
 | [Lire une étude sans confondre résultats et certitudes](fiches/recherche-lire-etude.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
 | [Formuler une question et une hypothèse de recherche](fiches/recherche-question-hypothese.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
-| [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
+| [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 17 | 0 | 0 | — |
 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 17 | 0 | 0 | — |
 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 17 | 0 | 0 | — |
-| [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
+| [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 17 | 0 | 0 | — |
 | [Lire une frise chronologique et ordonner des événements](fiches/histoire-lire-frise.html) | Histoire, chronologie et mémoire | 17 | 0 | 0 | — |
 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 17 | 0 | 0 | — |
-| [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
+| [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 17 | 0 | 0 | — |
 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Repérer les parties d’une adresse Web](fiches/info-lire-adresse-web.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |

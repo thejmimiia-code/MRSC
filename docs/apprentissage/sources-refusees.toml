@@ -55,3 +55,39 @@ motif = "Tentée le 20 octobre 2026 : le téléchargement direct du livret PDF r
 decision = "remplacee"
 url_remplacement = "https://eduscol.education.fr/document/16807/download"
 limite = "Ce refus constate seulement l'impossibilité d'ouvrir le PDF à la date du relevé ; il ne dit rien de l'exactitude ni de la licence du livret de l'IGN, dont le portail reste cité comme point d'entrée."
+
+[[refus]]
+id = "ign-livret-decouvrez-monde-cartes-paysage-403"
+fiche = "geo-decrire-paysage"
+titre_pressenti = "IGN — « Découvrez le monde des cartes » (livret pédagogique PDF)"
+url = "https://www.ign.fr/publications-de-l-ign/institut/Ressources_pedagogiques/livret_decouvrez_LMDC.pdf"
+date = 2026-10-20
+categorie_motif = "acces-refuse-403"
+motif = "Tentée le 20 octobre 2026 pour la lecture de paysage : le téléchargement direct du livret PDF renvoie une erreur HTTP 403. Conformément à la règle interdisant de citer une page non ouverte, cette adresse est écartée."
+decision = "remplacee"
+url_remplacement = "https://eduscol.education.fr/document/16804/download"
+limite = "Ce refus constate uniquement le blocage HTTP 403 lors de la consultation ; la ressource Éduscol de remplacement (document 16804) couvre la démarche de description géographique mais pas la vallée fictive de la fiche."
+
+[[refus]]
+id = "eduscol-se-reperer-temps-hors-perimetre"
+fiche = "histoire-situer-siecle"
+titre_pressenti = "Éduscol — « Se repérer dans le temps : construire des repères historiques » (PDF)"
+url = "https://eduscol.education.fr/document/16789/download"
+date = 2026-10-20
+categorie_motif = "hors-perimetre"
+motif = "Ouverte et lue intégralement (3 parties) le 20 octobre 2026 : la ressource mentionne le lexique « année, décennie, siècle » mais n'énonce ni l'absence d'année zéro ni les bornes arithmétiques d'un siècle (an 1 à an 100, 1901 à 2000)."
+decision = "remplacee"
+url_remplacement = "https://promenade.imcce.fr/fr/pages2/277.html"
+limite = "La fiche Éduscol 16789 reste pertinente pour la didactique du temps historique aux cycles 3 et 4 ; elle est refusée ici uniquement parce qu'elle n'étaye pas la règle de bornage arithmétique des siècles enseignée par la fiche."
+
+[[refus]]
+id = "eduscol-lexique-arts-plastiques-hors-perimetre"
+fiche = "arts-composer-formes"
+titre_pressenti = "Éduscol — « Lexique pour les arts plastiques : Les éléments du langage plastique » (PDF)"
+url = "https://eduscol.education.fr/document/14122/download"
+date = 2026-10-20
+categorie_motif = "hors-perimetre"
+motif = "Ouverte et lue intégralement (4 parties) le 20 octobre 2026 : la ressource définit les notions de forme, d'espace et de support aux cycles 2 et 3, mais n'énonce ni la hiérarchie visuelle par taille, distance et isolement autour d'un titre, ni la règle d'accessibilité sur le contraste ne reposant pas sur la seule couleur."
+decision = "portail-conserve"
+limite = "Refuser cette page maintient volontairement la fiche arts-composer-formes en constat (portail seul assumé par écrit) plutôt que d'y attacher une citation de façade qui ne couvre pas son affirmation principale."
+
