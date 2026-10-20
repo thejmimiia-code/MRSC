@@ -1807,6 +1807,14 @@ mode_utilisation = "reference-factuelle"
 utilisation = "Exemple de source statistique publique ; aucun chiffre, tableau, graphique ou texte de publication n’est repris."
 
 [[fiche.sources]]
+titre = "data.gouv.fr — « Licences de réutilisation »"
+url = "https://www.data.gouv.fr/pages/legal/licences"
+licence_source = "Non vérifiée — page consultée ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Liste des licences que les administrations peuvent utiliser pour la réutilisation de leurs informations publiques, consultée le 20 octobre 2026 : elle montre qu’un accès public ne vaut pas autorisation de réutilisation et qu’il faut vérifier la licence du jeu concerné. Aucun texte ni tableau de la page n’est reproduit."
+
+[[fiche.sources]]
 titre = "Vie-publique.fr — repères sur les institutions et politiques publiques"
 url = "https://www.vie-publique.fr/"
 licence_source = "Non vérifiée — lien documentaire ; aucune réutilisation déclarée"
@@ -4304,6 +4312,14 @@ droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucune fiche crédit n’est reprise."
 
+[[fiche.sources]]
+titre = "Service-Public.fr — « Crédit à la consommation : règles du contrat » (F2451)"
+url = "https://www.service-public.gouv.fr/particuliers/vosdroits/F2451"
+licence_source = "Non vérifiée — page consultée ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page vérifiée le 7 août 2024 et consultée le 20 octobre 2026 : elle distingue le taux débiteur, les frais compris dans le coût total du crédit et le taux annuel effectif global. Aucun montant, exemple ni texte de la page n’est repris : les nombres de la fiche sont inventés et la fiche ne conseille aucun crédit."
+
 
 [[fiche]]
 id = "langue-reperer-mot-deja-connu"
@@ -4368,6 +4384,14 @@ droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucun programme ni ressource pédagogique n’est recopié."
 
+[[fiche.sources]]
+titre = "Conseil de l’Europe — CECR, « Le plurilinguisme dans la classe »"
+url = "https://www.coe.int/fr/web/common-european-framework-reference-languages/plurilingualism-in-the-classroom"
+licence_source = "Non vérifiée — page consultée ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Définition du répertoire plurilingue — les apprenants puisent dans les ressources de leurs répertoires linguistiques et culturels — consultée le 20 octobre 2026. Aucune formulation de la page n’est reprise ; l’affiche et les exemples de la fiche sont inventés."
+
 
 [[fiche]]
 id = "recherche-distinguer-resume-citation"
@@ -4431,6 +4455,14 @@ licence_source = "Non vérifiée — lien documentaire ; aucune consigne n’est
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Point d’entrée consulté le 15 octobre 2026. Aucune circulaire ni guide n’est recopié."
+
+[[fiche.sources]]
+titre = "HAL — documentation, « Visualisation d’un dépôt »"
+url = "https://doc.hal.science/visualisation-dun-depot/"
+licence_source = "Non vérifiée — page consultée ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Description des blocs d’une notice HAL, où « Résumé » et « Citer » sont deux champs distincts, consultée le 20 octobre 2026. Aucun texte de la page n’est reproduit ; la carte-exemple de la fiche est inventée."
 
 
 [[fiche]]
@@ -4551,6 +4583,14 @@ licence_source = "Non vérifiée — lien documentaire ; aucune fiche n’est re
 droits_controles_le = "2026-10-15"
 mode_utilisation = "reference-factuelle"
 utilisation = "Portail consulté comme point d’entrée. Aucun contenu médical n’est copié."
+
+[[fiche.sources]]
+titre = "Santé publique France — « Qui sommes-nous ? »"
+url = "https://www.santepubliquefrance.fr/a-propos/sante-publique-france-qui-sommes-nous"
+licence_source = "Non vérifiée — page consultée ; aucune réutilisation déclarée"
+droits_controles_le = "2026-10-20"
+mode_utilisation = "reference-factuelle"
+utilisation = "Statut d’établissement public sous tutelle du ministère chargé de la Santé et missions de l’agence, page mise à jour le 16 juillet 2025 et consultée le 20 octobre 2026. Aucun contenu médical n’est repris : la fiche ne pose aucun diagnostic et ne donne aucun conseil de santé."
 
 [[fiche.sources]]
 titre = "Santé publique France — accueil"

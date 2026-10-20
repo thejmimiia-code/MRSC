@@ -193,14 +193,22 @@ class AuditMord(unittest.TestCase):
 class ConstatNEstPasUnEchec(unittest.TestCase):
     """Un portail seul n'est pas une faute : c'est un fait que la machine nomme."""
 
-    def test_portail_seul_donne_un_constat(self):
+    def test_portail_assume_donne_un_constat(self):
         fiche = fiche_valide()
         fiche["sources"][0]["url"] = "https://exemple.org/"
+        fiche["sources"][0]["utilisation"] = "Portail facultatif ; aucun texte n’est reproduit."
         self.assertEqual(etats(fiche)["precision"], MODULE.ETAT_A_VERIFIER)
+
+    def test_portail_non_declare_est_une_erreur(self):
+        fiche = fiche_valide()
+        fiche["sources"][0]["url"] = "https://exemple.org/"
+        # « Règle consultée » laisse croire à une page précise : c'est faux.
+        self.assertEqual(etats(fiche)["precision"], "a-corriger")
 
     def test_racine_avec_parametre_reste_un_portail(self):
         fiche = fiche_valide()
         fiche["sources"][0]["url"] = "https://exemple.org/?q=1"
+        fiche["sources"][0]["utilisation"] = "Point d’entrée consulté ; aucun contenu n’est copié."
         self.assertEqual(etats(fiche)["precision"], MODULE.ETAT_A_VERIFIER)
 
     def test_un_portail_plus_une_page_precise_passe(self):
@@ -214,6 +222,7 @@ class ConstatNEstPasUnEchec(unittest.TestCase):
     def test_le_constat_n_entre_pas_dans_les_echecs(self):
         fiche = fiche_valide()
         fiche["sources"][0]["url"] = "https://exemple.org/"
+        fiche["sources"][0]["utilisation"] = "Portail facultatif ; aucun texte n’est reproduit."
         audits = MODULE.auditer([fiche], {"demo-fiche": ["methodes-communication"]}, AUJOURDHUI, seulement_prototypes=False)
         # Seule la page générée manque hors dépôt : le constat, lui, n'est pas un échec.
         self.assertEqual([echec["cle"] for echec in audits[0]["echecs"]], ["page"])
@@ -224,6 +233,7 @@ class ConstatNEstPasUnEchec(unittest.TestCase):
     def test_le_document_nomme_les_constats_sans_les_appeler_defauts(self):
         fiche = fiche_valide()
         fiche["sources"][0]["url"] = "https://exemple.org/"
+        fiche["sources"][0]["utilisation"] = "Portail facultatif ; aucun texte n’est reproduit."
         audits = MODULE.auditer([fiche], {"demo-fiche": ["methodes-communication"]}, AUJOURDHUI, seulement_prototypes=False)
         contenu = MODULE.construire(audits, {"methodes-communication": "Méthodes"}, AUJOURDHUI)
         self.assertIn("Constats nommés, à trancher par une personne", contenu)

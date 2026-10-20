@@ -27,15 +27,15 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 
 | # | Fiche | Domaine | Priorité | Sources | Droits déclarés | Revue prévue le | Relecture consignée |
 | ---: | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | [Choisir une source publique adaptée à sa question](fiches/civ-choisir-source-publique.html) | Citoyenneté, médias et information | 1 | 5 | 5 non vérifiée(s) | 2026-10-08 | aucune |
+| 1 | [Choisir une source publique adaptée à sa question](fiches/civ-choisir-source-publique.html) | Citoyenneté, médias et information | 1 | 6 | 6 non vérifiée(s) | 2026-10-08 | aucune |
 | 2 | [Repérer l’échelle d’une institution avant de chercher le bon service](fiches/civ-reperer-echelle-institution.html) | Citoyenneté, médias et information | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
 | 3 | [Repérer une information électorale officielle](fiches/civ-reperer-info-electorale.html) | Citoyenneté, médias et information | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
 | 4 | [Trouver un service public et préparer un formulaire](fiches/civ-trouver-service-public.html) | Démarches, droits, sécurité et vie professionnelle | 1 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
 | 5 | [Comparer deux prix à quantité égale](fiches/econ-comparer-prix-unitaires.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 6 | [Distinguer un intérêt d’un frais sur un crédit fictif](fiches/econ-distinguer-interet-frais.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 6 | [Distinguer un intérêt d’un frais sur un crédit fictif](fiches/econ-distinguer-interet-frais.html) | Budget, économie, consommation et travail | 1 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
 | 7 | [Lire une facture et repérer une échéance](fiches/econ-lire-facture.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
 | 8 | [Lire une mention de garantie sur un ticket fictif](fiches/econ-lire-mention-garantie.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
-| 9 | [Repérer une source de santé publique avant d’agir](fiches/sante-reperer-source-publique.html) | Santé, alimentation, corps et sécurité | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 9 | [Repérer une source de santé publique avant d’agir](fiches/sante-reperer-source-publique.html) | Santé, alimentation, corps et sécurité | 1 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
 | 10 | [Lire une étude sans confondre résultats et certitudes](fiches/recherche-lire-etude.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | aucune à vérifier | 2026-10-08 | aucune |
 | 11 | [Formuler une question et une hypothèse de recherche](fiches/recherche-question-hypothese.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 12 | [Lire une frise chronologique et ordonner des événements](fiches/histoire-lire-frise.html) | Histoire, chronologie et mémoire | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
@@ -48,7 +48,7 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | 19 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 20 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 21 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 22 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 22 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
 | 23 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 24 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 25 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
@@ -68,7 +68,7 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | 39 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
 | 40 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-20 | aucune |
 | 41 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 3 | 6 | 6 non vérifiée(s) | 2026-10-20 | aucune |
-| 42 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 42 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
 | 43 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
 | 44 | [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 45 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
@@ -97,7 +97,7 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | Priorité de tri | 1 — domaine à relecture spécialisée — politique publique, médias et information |
 | Termes repérés | droit et démarches : juridique |
 | Fiche publiée | [lire la fiche](fiches/civ-choisir-source-publique.html) |
-| Contrôles automatiques | 16/17 — aucun défaut mécanique détecté ; constat à trancher par une personne : 5 portail(s) seulement : rien à confronter, à trancher par une personne |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -108,6 +108,7 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | [Légifrance — diffusion du droit français](https://www.legifrance.gouv.fr/) | Non vérifiée — lien documentaire ; aucune réutilisation déclarée | reference-factuelle | 2026-10-08 |
 | [data.gouv.fr — plateforme de données publiques françaises](https://www.data.gouv.fr/) | Non vérifiée — les conditions varient selon les ressources ; aucune donnée réutilisée | reference-factuelle | 2026-10-08 |
 | [INSEE — Institut national de la statistique et des études économiques](https://www.insee.fr/) | Non vérifiée — lien documentaire ; aucune réutilisation déclarée | reference-factuelle | 2026-10-08 |
+| [data.gouv.fr — « Licences de réutilisation »](https://www.data.gouv.fr/pages/legal/licences) | Non vérifiée — page consultée ; aucune réutilisation déclarée | reference-factuelle | 2026-10-20 |
 | [Vie-publique.fr — repères sur les institutions et politiques publiques](https://www.vie-publique.fr/) | Non vérifiée — lien documentaire ; aucune réutilisation déclarée | reference-factuelle | 2026-10-08 |
 
 **Ce que la fiche dit déjà de ses limites**
@@ -116,8 +117,8 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 
 **Points à trancher par une personne**
 
-- [ ] Ouvrir les 5 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
-- [ ] Trancher les droits : 5 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
+- [ ] Ouvrir les 6 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
+- [ ] Trancher les droits : 6 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
 - [ ] Vérifier l’exemple et la correction : aucun exemple ne doit induire en erreur si l’énoncé est mal lu.
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
@@ -356,7 +357,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — argent, budget et finances |
 | Termes repérés | argent : crédit, prêt |
 | Fiche publiée | [lire la fiche](fiches/econ-distinguer-interet-frais.html) |
-| Contrôles automatiques | 16/17 — aucun défaut mécanique détecté ; constat à trancher par une personne : 2 portail(s) seulement : rien à confronter, à trancher par une personne |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -365,6 +366,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | --- | --- | --- | --- |
 | [Banque de France — accueil de l’institution](https://www.banque-france.fr/) | Non vérifiée — lien documentaire ; aucune fiche ni barème n’est repris | reference-factuelle | 2026-10-15 |
 | [Service-Public — accueil d’information officielle sur les droits et démarches](https://www.service-public.gouv.fr/) | Non vérifiée — lien documentaire ; aucune réutilisation déclarée | reference-factuelle | 2026-10-15 |
+| [Service-Public.fr — « Crédit à la consommation : règles du contrat » (F2451)](https://www.service-public.gouv.fr/particuliers/vosdroits/F2451) | Non vérifiée — page consultée ; aucune réutilisation déclarée | reference-factuelle | 2026-10-20 |
 
 **Ce que la fiche dit déjà de ses limites**
 
@@ -372,8 +374,8 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 
 **Points à trancher par une personne**
 
-- [ ] Ouvrir les 2 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
-- [ ] Trancher les droits : 2 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
+- [ ] Ouvrir les 3 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
+- [ ] Trancher les droits : 3 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
 - [ ] Vérifier l’exemple et la correction : aucun exemple ne doit induire en erreur si l’énoncé est mal lu.
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
@@ -509,7 +511,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 1 — domaine à relecture spécialisée — santé et sécurité |
 | Termes repérés | santé : diagnostic, symptôme, traitement |
 | Fiche publiée | [lire la fiche](fiches/sante-reperer-source-publique.html) |
-| Contrôles automatiques | 16/17 — aucun défaut mécanique détecté ; constat à trancher par une personne : 2 portail(s) seulement : rien à confronter, à trancher par une personne |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
@@ -517,6 +519,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Source | Licence déclarée | Mode | Droits contrôlés le |
 | --- | --- | --- | --- |
 | [Ministère de la Santé — accueil](https://sante.gouv.fr/) | Non vérifiée — lien documentaire ; aucune fiche n’est reprise | reference-factuelle | 2026-10-15 |
+| [Santé publique France — « Qui sommes-nous ? »](https://www.santepubliquefrance.fr/a-propos/sante-publique-france-qui-sommes-nous) | Non vérifiée — page consultée ; aucune réutilisation déclarée | reference-factuelle | 2026-10-20 |
 | [Santé publique France — accueil](https://www.santepubliquefrance.fr/) | Non vérifiée — lien documentaire ; aucune consigne n’est reprise | reference-factuelle | 2026-10-15 |
 
 **Ce que la fiche dit déjà de ses limites**
@@ -525,8 +528,8 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 
 **Points à trancher par une personne**
 
-- [ ] Ouvrir les 2 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
-- [ ] Trancher les droits : 2 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
+- [ ] Ouvrir les 3 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
+- [ ] Trancher les droits : 3 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
 - [ ] Vérifier l’exemple et la correction : aucun exemple ne doit induire en erreur si l’énoncé est mal lu.
 - [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
 - [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
@@ -952,7 +955,7 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 | Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
 | Termes repérés | données personnelles : données personnelles |
 | Fiche publiée | [lire la fiche](fiches/numerique-organiser-fichiers.html) |
-| Contrôles automatiques | 16/17 — aucun défaut mécanique détecté ; constat à trancher par une personne : 1 portail(s) seulement : rien à confronter, à trancher par une personne |
+| Contrôles automatiques | 16/17 — aucun défaut mécanique détecté ; constat à trancher par une personne : 1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne |
 | Relecture consignée | aucune à ce jour |
 
 **Sources enregistrées dans le catalogue**
