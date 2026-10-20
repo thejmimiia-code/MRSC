@@ -17,8 +17,8 @@
 | Fiches publiées | 83 |
 | dont prototypes à relire | 57 |
 | Sujets sans aucune fiche | 18 |
-| Sujets ouverts par une carte de sujet | 1 |
-| Lesquels | `ecoute-prononciation` |
+| Sujets ouverts par une carte de sujet | 2 |
+| Lesquels | `ecoute-prononciation`, `systemes-embarques` |
 
 ## 2. Répartition par domaine
 
@@ -50,7 +50,7 @@ Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Le
 | Sciences, technologie et environnement | Sécurité électrique, protections et limites des interventions | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées | — |
 | Sciences, technologie et environnement | Risques, consignes et usages sûrs des outils et produits | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
 | Démarches, droits, sécurité et vie professionnelle | Droits au travail, contrats, sécurité et interlocuteurs | `a-creer` | Relecture par une personne compétente en droit, démarches et travail, puis sources primaires datées | — |
-| Informatique, algorithmique et langages de programmation | Microcontrôleurs, objets connectés et systèmes embarqués | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
+| Informatique, algorithmique et langages de programmation | Microcontrôleurs, objets connectés et systèmes embarqués | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | [carte de sujet](sujet-systemes-embarques.md) |
 | Santé, alimentation, corps et sécurité | Premiers secours et conduites à tenir | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées | — |
 | Santé, alimentation, corps et sécurité | Activité physique, repos, mobilité et sécurité | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées | — |
 | Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 00 — programmes et qualifications génériques, interdisciplinarité et compétences transversales | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |

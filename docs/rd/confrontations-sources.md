@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Confrontations documentées | 5 |
-| Fiches distinctes couvertes | 5 |
-| Indice concordant (`indice-concordant`) | 4 |
+| Confrontations documentées | 8 |
+| Fiches distinctes couvertes | 8 |
+| Indice concordant (`indice-concordant`) | 7 |
 | Constat de couverture partielle (`constat-couverture-partielle`) | 1 |
 
 Aucun des états ci-dessus n'est une validation éditoriale ni un verdict d'erreur contre la fiche.
@@ -31,6 +31,18 @@ Aucun des états ci-dessus n'est une validation éditoriale ni un verdict d'erre
 - **Faux négatif documenté :** Selon l'outil d'extraction PDF, le symbole degré est parfois converti en formule LaTeX (« 90^{\circ} ») ou en lettre « o » en exposant, faisant échouer la recherche littérale de « 90° ».
 - **Limite :** Cet indice vérifie uniquement la présence du vocabulaire de base dans le document Éduscol du 20 octobre 2026 ; il ne contrôle ni la clarté de l'exercice ni l'accessibilité sans figure géométrique.
 
+### `comparer-sources-auteur-contexte-point-de-vue` (`histoire-comparer-sources`)
+
+- **Source confrontée :** `https://cache.media.eduscol.education.fr/file/HG_Competences/11/4/RA16_C3C4_HIGE_Analyser_comprendre_document_819114.pdf`
+- **Affirmation de la fiche (texte M.R.S.C.) :** Analyser deux documents demande d'identifier l'auteur, le contexte et les destinataires, puis de confronter des points de vue toujours partiels pour repérer informations complémentaires ou contradictoires.
+- **Ancres cherchées (6) :** `auteur`, `contexte`, `destinataires`, `point de vue`, `partiel`, `contradictoires`
+- **Ancres repérées :** `auteur`, `contexte`, `destinataires`, `point de vue`, `partiel`, `contradictoires`
+- **Ancres absentes :** aucune
+- **État du relevé (2026-10-20) :** `indice-concordant` — Indice concordant — toutes les ancres figuraient dans la page à la date du relevé (ne vaut pas validation)
+- **Faux positif documenté :** Ces termes méthodologiques généraux figurent dans la plupart des guides d'analyse documentaire ; leur présence ne prouve pas que la source couvre le cas précis d'une affiche et d'un carnet de notes fictifs.
+- **Faux négatif documenté :** La fiche emploie le verbe « corroborer » dans ses notions, tandis que la ressource Éduscol parle de « croiser » et « confronter » les supports : chercher « corroborer » produirait un constat d'ancre absente.
+- **Limite :** Cet indice ne remplace pas une relecture par une personne compétente en histoire et en éducation aux médias pour vérifier la formulation de l'exercice et de ses limites.
+
 ### `credit-conso-taux-frais-taeg` (`econ-distinguer-interet-frais`)
 
 - **Source confrontée :** `https://www.service-public.gouv.fr/particuliers/vosdroits/F2451`
@@ -42,6 +54,18 @@ Aucun des états ci-dessus n'est une validation éditoriale ni un verdict d'erre
 - **Faux positif documenté :** Faux positif observé sur cette même page le 20 octobre 2026 : la fiche F2451 contient les mots « améliore la situation financière ou le budget de l'emprunteur » et « substitut d'épargne » dans la liste de ce qu'il est interdit d'écrire dans une publicité. Un contrôle par mots-clés qui ignorerait la négation « Il est interdit » validerait à tort une affirmation illégale.
 - **Faux négatif documenté :** Une mise à jour éditoriale de Service-Public.fr qui emploierait l'abréviation « TAEG » au lieu de la forme développée « taux annuel effectif global » ferait disparaître l'ancre sans changement du droit applicable.
 - **Limite :** Cet indice ne vaut ni validation juridique ni conseil financier : la présence des termes réglementaires dans la fiche F2451 ne prouve pas que l'exemple chiffré fictif de la fiche M.R.S.C. est exact.
+
+### `decrire-paysage-observation-ensembles-hypotheses` (`geo-decrire-paysage`)
+
+- **Source confrontée :** `https://eduscol.education.fr/document/16804/download`
+- **Affirmation de la fiche (texte M.R.S.C.) :** Décrire un paysage complète l'observation en identifiant les objets et les ensembles visibles avant de formuler des hypothèses ou de confronter d'autres documents pour interpréter.
+- **Ancres cherchées (6) :** `observation`, `objets`, `ensembles`, `hypothèses`, `visible`, `interprétation`
+- **Ancres repérées :** `observation`, `objets`, `ensembles`, `hypothèses`, `visible`, `interprétation`
+- **Ancres absentes :** aucune
+- **État du relevé (2026-10-20) :** `indice-concordant` — Indice concordant — toutes les ancres figuraient dans la page à la date du relevé (ne vaut pas validation)
+- **Faux positif documenté :** Les mots « observation », « hypothèses » et « interprétation » apparaissent dans des contextes historiques comme géographiques au sein du même document : leur seule présence ne prouve pas que le passage porte sur un paysage.
+- **Faux négatif documenté :** La fiche distingue « élément naturel » et « aménagement », tandis que le document Éduscol 16804 emploie « objets », « ensembles » et « formes d'organisation » : chercher « aménagement » produirait un faux négatif lexical.
+- **Limite :** Cet indice ne valide ni la description fictive de vallée ni la réserve sur l'accessibilité du pont, qui relèvent du choix éditorial de la fiche.
 
 ### `melange-changement-etat-perimetre-scinde` (`sciences-distinguer-melange-changement-etat`)
 
@@ -66,6 +90,18 @@ Aucun des états ci-dessus n'est une validation éditoriale ni un verdict d'erre
 - **Faux positif documenté :** La présence simultanée de « 30 ans », « moyenne » et « vague de froid » dans la page ne prouve pas le sens de la relation : un texte qui contesterait la normale de 30 ans contiendrait exactement les mêmes ancres.
 - **Faux négatif documenté :** Si Météo-France remplace « 30 ans » par « trente années » ou déplace ce repère dans un schéma illustré, l'ancre disparaît du texte brut alors que l'affirmation reste étayée.
 - **Limite :** Cet indice confirme uniquement que les six repères lexicaux figuraient dans la page ouverte le 20 octobre 2026 ; il ne vérifie ni la justesse pédagogique de la fiche ni l'absence de contresens.
+
+### `situer-siecle-bornes-sans-an-zero` (`histoire-situer-siecle`)
+
+- **Source confrontée :** `https://promenade.imcce.fr/fr/pages2/277.html`
+- **Affirmation de la fiche (texte M.R.S.C.) :** Dans l'ère commune sans année zéro pour les historiens, le Ier siècle va de l'an 1 à l'an 100, le XXe de 1901 à 2000 et le XXIe commence en 2001.
+- **Ancres cherchées (6) :** `1 avant J.-C.`, `an 1`, `an 100`, `1901`, `2000`, `2001`
+- **Ancres repérées :** `1 avant J.-C.`, `an 1`, `an 100`, `1901`, `2000`, `2001`
+- **Ancres absentes :** aucune
+- **État du relevé (2026-10-20) :** `indice-concordant` — Indice concordant — toutes les ancres figuraient dans la page à la date du relevé (ne vaut pas validation)
+- **Faux positif documenté :** La même page de l'IMCCE présente aussi la notation algébrique des astronomes (Cassini, 1740) où l'an 1 avant J.-C. est appelé « année 0 » : la présence simultanée de « an 1 » et « année 0 » ne permet pas à un automate de savoir laquelle des deux conventions la fiche retient.
+- **Faux négatif documenté :** La source de l'IMCCE écrit « XXème siècle » et « XXIème siècle » alors que la fiche M.R.S.C. typographie « XXe siècle » et « XXIe siècle » : une ancre portant sur « XXe siècle » échouerait sur cette variante orthographique.
+- **Limite :** Cet indice vérifie la présence des bornes chronologiques de référence sur la page de l'IMCCE au 20 octobre 2026 ; il ne valide ni l'astuce mentale d'ajout de 1 au nombre de centaines ni l'exercice de la fiche.
 
 ### `vitesse-moyenne-quotient-unites` (`sciences-calculer-vitesse-moyenne`)
 
