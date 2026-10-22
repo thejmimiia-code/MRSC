@@ -6,7 +6,7 @@
 
 **Trois états, pas deux.** Un contrôle est `ok`, `à corriger` — le fait est faux et réparable sans jugement — ou `constat` : la machine voit un fait exact, mais elle ne peut pas dire s'il est acceptable. Un constat n'est pas un défaut : il se nomme ici pour qu'une personne tranche, et il n'empêche pas la page publique de dire la vérité, à condition qu'elle le dise.
 
-**Date de l'audit :** 2026-10-20.
+**Date de l'audit :** 2026-10-22.
 
 ## 1. État d'ensemble
 
