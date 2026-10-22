@@ -28,11 +28,12 @@ interface), page par page, format par format.
 | Grands écrans | 1920, 2 560, 3 440 (ultra-large), 3 840 (4K) |
 | Densités | 1×, 2×, 3× |
 | Présentations du site | Équilibrée, Lecture, Vitrine, Mosaïque, Panorama composite, Compacte |
-| Tailles de texte | 50 %, 75 %, 100 %, 125 %, 150 % |
+| Tailles de texte | 75 %, 85 %, 100 %, 115 %, 130 % |
 | Réglages | contraste renforcé, espacement renforcé |
 
 Soit **247 mesures** pour la matrice écran seule et **910 mesures** pour les
-mêmes pages croisées avec les six présentations et les quatre réglages.
+mêmes pages croisées avec les six présentations et les quatre réglages — portées
+à **1 157 mesures** après le changement d'échelle de texte du § 6.
 
 ## 3. Ce que la mesure a trouvé
 
@@ -59,7 +60,8 @@ Chaque ligne a été constatée, corrigée, puis remesurée.
   image agrandie, aucun texte rogné.
 - **Six présentations × sept formats : aucun défaut.**
 - **Texte à 150 % × sept formats : aucun défaut.**
-- **Texte à 50 % :** voir § 6.
+- **Tous les crans de texte (75 à 130 %) et les six présentations : aucun
+  défaut** sur les 1 157 mesures de la passe finale.
 
 Le critère de netteté reste celui du § 4.2 quater de
 [poids-et-sobriete-numerique.md](poids-et-sobriete-numerique.md) : la source
@@ -83,24 +85,54 @@ valeurs suivies de `!important`, et il ne reconnaissait pas `min-height: 0`
 écrit sans unité, c'est-à-dire précisément la forme qui annule une cible.
 Corrigées, puis remutées.
 
-## 6. Ce qui n'est pas couvert
+## 6. L'échelle de texte a changé le 22 octobre 2026
 
-- **Réglage « texte 50 % ».** À 50 %, le corps de texte fait 8 px et les liens
-  du texte 14 px de haut. C'est la définition du réglage, pas un défaut de mise
-  en page : la personne qui le choisit demande plus petit. Les **commandes**
-  gardent une cible de 24 px, comme les champs de formulaire gardaient déjà un
-  plancher de 12 px. Aucun débordement n'apparaît à cette taille.
+L'ancienne échelle offrait 50, 75, 100, 125 et 150 %. Le cran 50 % donnait
+**8 px de corps** et 14 px pour les liens du texte : illisible, même choisi
+volontairement. La personne responsable du site a retenu de **relever les
+crans** plutôt que de poser un plancher qui aurait rendu deux crans identiques.
+
+| Avant | Après | Corps |
+| --- | --- | ---: |
+| 50 % | **75 %** | 12 px |
+| 75 % | **85 %** | 13,6 px |
+| 100 % | 100 % | 16 px |
+| 125 % | **115 %** | 18,4 px |
+| 150 % | **130 %** | 20,8 px |
+
+Deux conséquences traitées :
+
+1. **Migration.** La clé de stockage passe de `mrsc-texte-niveau` à
+   `mrsc-texte-cran` : les anciennes valeurs sont ambiguës avec les nouvelles
+   (75 y signifiait « réduit », c'est maintenant le minimum). Une table de
+   correspondance reprend le choix une seule fois — 50 → 75, 75 → 85, 125 → 115,
+   150 → 130, crans indexés 0/1/2 → 100/115/130, ancien réglage binaire → 115 %.
+   Vérifié dans le navigateur sur les cinq cas, y compris la réécriture de la
+   nouvelle clé.
+2. **Plancher des petites tailles.** `166` déclarations en `rem`, `3` en `em` et
+   la balise `<small>` sont désormais écrites `max(12px, …)` : au cran 75 %, un
+   `.82rem` vaudrait 9,84 px. Le plancher ne change rien à 100 % ni au-delà, et
+   garantit 12 px minimum partout. Mesure : plus aucun texte sous 12 px sur les
+   13 pages au cran 75 %.
+
+Le simulateur embarque la même échelle et la même clé, sinon il serait retombé à
+100 % en lisant une valeur qu'il ne connaît pas ; sa page a été régénérée.
+
+## 7. Ce qui n'est pas couvert
 - **Police réelle.** La mesure utilise les polices installées dans
   l'environnement de mesure ; une police de substitution peut changer les
   retours à la ligne de quelques pixels.
 - **Zoom du navigateur.** Le zoom est approché par une fenêtre plus étroite.
   C'est équivalent pour la mise en page, pas pour la netteté des images.
+- **Recouvrement avec le réglage de texte.** Le plancher de 12 px ne s'applique
+  qu'aux tailles déclarées par la feuille ; un agrandissement du texte par le
+  navigateur reste hors de son contrôle.
 - **Appareils physiques.** Aucun téléphone ni portable Retina réel n'a été
   utilisé : les formats sont émulés. Les captures produites pendant la mesure
   ont été relues, mais elles ne remplacent pas un contrôle à l'œil sur
   l'appareil.
 
-## 7. Refaire la mesure
+## 8. Refaire la mesure
 
 Le protocole complet est dans `outils/auditer-affichages.mjs` (facultatif, hors
 CI : il demande Chromium). Il rend un tableau par page et par format, avec les

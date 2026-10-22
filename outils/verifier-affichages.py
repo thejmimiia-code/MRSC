@@ -31,6 +31,21 @@ PLANCHER_TEXTE_REM = 0.75  # 12 px à 16 px de base
 PLANCHER_CIBLE_PX = 24  # WCAG 2.2, 2.5.8
 
 
+CRAN_LE_PLUS_REDUIT = 0.75  # le plus petit réglage de taille de texte du site
+
+
+def plancher_au_dessus_du_seuil(plancher: str) -> bool:
+    """Le plancher tient-il 12 px au cran de texte le plus réduit ?"""
+    try:
+        if plancher.endswith("px"):
+            return float(plancher.removesuffix("px")) >= 12
+        if plancher.endswith("rem"):
+            return float(plancher.removesuffix("rem")) * 16 * CRAN_LE_PLUS_REDUIT >= 12
+    except ValueError:
+        return True
+    return True
+
+
 def numero_ligne(texte: str, position: int) -> int:
     return texte.count("\n", 0, position) + 1
 
@@ -54,7 +69,30 @@ def controler_tailles_de_texte() -> list[str]:
         for correspondance in re.finditer(r"font-size:\s*([^;{}]+);", texte):
             # `!important` ne doit pas soustraire une valeur au contrôle.
             valeur = correspondance.group(1).replace("!important", "").strip()
-            if "clamp(" in valeur or "var(" in valeur or "calc(" in valeur:
+            # `max(12px, .75rem)` accroche la taille à un plancher : c'est le
+            # seul cas de fonction accepté, et il faut que le plancher tienne.
+            if valeur.startswith("max("):
+                plancher = valeur[4:].split(",")[0].strip()
+                if plancher_au_dessus_du_seuil(plancher):
+                    continue
+                ligne = numero_ligne(texte, correspondance.start())
+                erreurs.append(
+                    f"{feuille.name}:{ligne} — plancher « {valeur} » inférieur à 12 px"
+                )
+                continue
+            # `clamp(min, …)` : c'est le premier argument qui fixe le plancher.
+            # Il se juge au cran de texte le plus réduit du site (75 %), où 1rem
+            # vaut 12 px : un minimum de .75rem y tombe à 9 px.
+            if valeur.startswith("clamp("):
+                plancher = valeur[6:].split(",")[0].strip()
+                if not plancher_au_dessus_du_seuil(plancher):
+                    ligne = numero_ligne(texte, correspondance.start())
+                    erreurs.append(
+                        f"{feuille.name}:{ligne} — clamp « {valeur} » descend sous "
+                        f"12 px au cran de texte le plus réduit"
+                    )
+                continue
+            if "var(" in valeur or "calc(" in valeur:
                 continue
             rem = taille_rem(valeur)
             px = None

@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-22 — L’échelle de texte relevée, et les petites tailles accrochées à 12 px
+
+- **Initiative :** `poids-et-sobriete-numerique`. Suite directe de la mesure d’affichage : le réglage « texte 50 % » donnait 8 px de corps.
+- **Décision :** la personne responsable du site a écarté le statu quo et le simple plancher — qui aurait rendu deux crans identiques — et retenu de **relever l’échelle** : 50/75/100/125/150 % devient **75/85/100/115/130 %**.
+- **Migration.** La clé passe de `mrsc-texte-niveau` à `mrsc-texte-cran`, parce que les anciennes valeurs sont ambiguës avec les nouvelles (75 y signifiait « réduit », c’est désormais le minimum). Une table reprend le choix une seule fois : 50 → 75, 75 → 85, 125 → 115, 150 → 130, 100 inchangé, crans indexés 0/1/2 → 100/115/130, ancien réglage binaire → 115 %. Les cinq cas ont été vérifiés dans le navigateur, y compris la réécriture de la nouvelle clé.
+- **Simulateur.** Il lit la même clé : sans changement, il serait retombé à 100 % devant une valeur inconnue. Son échelle et sa migration ont été modifiées à l’identique dans `outils/construire-simulateur.py`, et `simulateur/index.html` régénéré.
+- **Effet de bord trouvé par la mesure, pas par la lecture :** à 75 %, un `.82rem` vaut 9,84 px. J’ai d’abord cru qu’il suffisait d’accrocher les tailles sous `.8rem` ; la mesure a montré 563 éléments encore sous 12 px. **166 déclarations en `rem`, 3 en `em` et la balise `<small>`** sont donc écrites `max(12px, …)`, sans effet à 100 % ni au-delà. Un dernier `clamp(11px, …)` traînait : relevé.
+- **Résultat mesuré :** plus aucun texte sous 12 px sur les 13 pages au cran 75 % ; **1 157 mesures, 0 défaut**, crans 75 et 130 % et six présentations comprises.
+- **Garde-fou corrigé deux fois par l’expérience :** le contrôle ignorait `max()` et `clamp()`, puis jugeait un `clamp(2.7rem, …)` comme un plancher à 43 px alors qu’il s’agissait de rem. Il évalue maintenant chaque plancher au cran de texte le plus réduit. Trois mutations — plancher `max()` à 10 px, `clamp` à 10 px, taille en `rem` sans plancher — sont détectées.
+- **Prochaine action :** constater les nouveaux crans sur un appareil réel, et vérifier qu’aucun texte ne reste illisible en contraste renforcé au cran 75 %.
+
 ## 2026-10-22 — Les formats d’affichage, mesurés dans un navigateur
 
 - **Initiative :** `poids-et-sobriete-numerique`. Demande de la personne utilisatrice : « il faut optimiser les affichages pour tous les formats d’affichage ».

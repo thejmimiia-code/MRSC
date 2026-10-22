@@ -35,13 +35,21 @@
   const textLevelOutput = document.querySelector("[data-text-size-level]");
   const contrastToggle = document.querySelector("[data-contrast-toggle]");
   const spacingToggle = document.querySelector("[data-spacing-toggle]");
+  // Les crans sont resserrés : 50/75/100/125/150 donnaient 8 px de corps au
+  // plus petit cran, illisible. L'échelle va de 75 à 130 %. La clé de stockage
+  // change avec l'échelle : les anciennes valeurs (75 signifiait « réduit »)
+  // sont ambiguës avec les nouvelles (75 est le nouveau minimum), d'où une
+  // migration explicite depuis l'ancienne clé à la première visite.
   const keys = {
-    text: "mrsc-texte-niveau",
+    text: "mrsc-texte-cran",
     contrast: "mrsc-contraste-renforce",
     spacing: "mrsc-espacement-renforce",
   };
-  const textLevels = [50, 75, 100, 125, 150];
-  const legacyTextLevels = [100, 125, 150];
+  const textLevels = [75, 85, 100, 115, 130];
+  // Ancienne échelle en pourcentage, puis anciens crans indexés 0/1/2.
+  const anciensCrans = { 50: 75, 75: 85, 100: 100, 125: 115, 150: 130 };
+  const anciensIndexes = [100, 115, 130];
+  const ANCIENNE_CLE = "mrsc-texte-niveau";
   let textLevel = 100;
   let contrastEnabled = false;
   let spacingEnabled = false;
@@ -67,16 +75,26 @@
     const stored = String(value).trim();
     const parsed = Number(stored);
     if (Number.isInteger(parsed) && textLevels.includes(parsed)) return parsed;
-    if (/^[0-2]$/.test(stored)) return legacyTextLevels[parsed];
-    return 100;
+    return null;
+  };
+
+  // Reprise d'une préférence enregistrée avant le changement d'échelle.
+  const niveauTexteMigre = () => {
+    const ancien = readPreference(ANCIENNE_CLE);
+    if (ancien !== null) {
+      const stored = String(ancien).trim();
+      if (/^[0-2]$/.test(stored)) return anciensIndexes[Number(stored)];
+      return anciensCrans[Number(stored)] ?? 100;
+    }
+    return readPreference("mrsc-texte-agrandi") === "oui" ? 115 : 100;
   };
 
   const applyTextLevel = (value) => {
     textLevel = textLevels.includes(value) ? value : 100;
-    root.classList.toggle("texte-tres-reduit", textLevel === 50);
-    root.classList.toggle("texte-reduit", textLevel === 75);
-    root.classList.toggle("texte-agrandi", textLevel === 125);
-    root.classList.toggle("texte-tres-agrandi", textLevel === 150);
+    root.classList.toggle("texte-tres-reduit", textLevel === 75);
+    root.classList.toggle("texte-reduit", textLevel === 85);
+    root.classList.toggle("texte-agrandi", textLevel === 115);
+    root.classList.toggle("texte-tres-agrandi", textLevel === 130);
     if (textLevelOutput) textLevelOutput.textContent = `${textLevel} %`;
     if (textDecrease) textDecrease.disabled = textLevel === textLevels[0];
     if (textIncrease) textIncrease.disabled = textLevel === textLevels[textLevels.length - 1];
@@ -104,8 +122,10 @@
   const loadPreferences = () => {
     const storedTextLevel = readPreference(keys.text);
     if (storedTextLevel === null) {
-      // Migration du réglage binaire A+/A− précédemment proposé sur le site.
-      textLevel = readPreference("mrsc-texte-agrandi") === "oui" ? 125 : 100;
+      textLevel = niveauTexteMigre();
+      // La nouvelle échelle est écrite tout de suite : la migration n'a lieu
+      // qu'une fois, et le simulateur lit la même clé.
+      savePreference(keys.text, String(textLevel));
     } else {
       textLevel = niveauTexteEnregistre(storedTextLevel) ?? 100;
     }
@@ -322,7 +342,12 @@
 
   // L’iframe locale et les pages M.R.S.C partagent ces réglages sur le même domaine.
   window.addEventListener("storage", (event) => {
-    if (event.key === null || Object.values(keys).includes(event.key) || event.key === "mrsc-texte-agrandi") {
+    if (
+      event.key === null ||
+      Object.values(keys).includes(event.key) ||
+      event.key === ANCIENNE_CLE ||
+      event.key === "mrsc-texte-agrandi"
+    ) {
       loadPreferences();
     }
   });

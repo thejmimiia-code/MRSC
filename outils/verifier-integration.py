@@ -492,14 +492,14 @@ def fichiers_du_site() -> None:
         all(regle in styles for regle in medias_adaptatifs),
     )
     verifier(
-        "Le CSS commun couvre les cinq niveaux de taille du texte de 50 % à 150 %",
+        "Le CSS commun couvre les cinq niveaux de taille du texte de 75 % à 130 %",
         all(
             marqueur in styles
             for marqueur in (
-                "html.texte-tres-reduit { font-size: 50%; }",
-                "html.texte-reduit { font-size: 75%; }",
-                "html.texte-agrandi { font-size: 125%; }",
-                "html.texte-tres-agrandi { font-size: 150%; }",
+                "html.texte-tres-reduit { font-size: 75%; }",
+                "html.texte-reduit { font-size: 85%; }",
+                "html.texte-agrandi { font-size: 115%; }",
+                "html.texte-tres-agrandi { font-size: 130%; }",
                 "font-size: max(12px,1em)",
                 ".display-settings-panel .display-control",
             )
@@ -526,14 +526,14 @@ def fichiers_du_site() -> None:
     test_experience = (RACINE / "outils" / "test-experience.cjs").read_text(encoding="utf-8")
     verifier(
         "Le réglage mémorise les cinq paliers et conserve les préférences historiques",
-        "const textLevels = [50, 75, 100, 125, 150]" in script_site
-        and "const legacyTextLevels = [100, 125, 150]" in script_site
-        and "legacyTextLevels[parsed]" in script_site
-        and 'readPreference("mrsc-texte-agrandi") === "oui" ? 125 : 100' in script_site
+        "const textLevels = [75, 85, 100, 115, 130]" in script_site
+        and "const anciensCrans = { 50: 75, 75: 85, 100: 100, 125: 115, 150: 130 }" in script_site
+        and "const anciensIndexes = [100, 115, 130]" in script_site
+        and 'readPreference("mrsc-texte-agrandi") === "oui" ? 115 : 100' in script_site
         and "savePreference(keys.text, String(textLevel))" in script_site,
     )
     verifier(
-        "La navigation de bureau se replie à 125/150 % sans masquer les libellés",
+        "La navigation de bureau se replie à 115/130 % sans masquer les libellés",
         all(
             marqueur in styles
             for marqueur in (
@@ -1303,10 +1303,10 @@ def fichiers_du_site() -> None:
         )
         verifier(
             "Le simulateur autonome reprend les cinq paliers et leur reflow typographique",
-            "const textLevels = [50, 75, 100, 125, 150]" in simulateur_html
-            and "const legacyTextLevels = [100, 125, 150]" in simulateur_html
-            and "html.texte-tres-reduit { font-size: 50%; }" in simulateur_html
-            and "html.texte-reduit { font-size: 75%; }" in simulateur_html
+            "const textLevels = [75, 85, 100, 115, 130]" in simulateur_html
+            and "const anciensCrans = { 50: 75, 75: 85, 100: 100, 125: 115, 150: 130 }" in simulateur_html
+            and "html.texte-tres-reduit { font-size: 75%; }" in simulateur_html
+            and "html.texte-reduit { font-size: 85%; }" in simulateur_html
             and "font-size: max(12px,1em)" in simulateur_html
             and "font-size: clamp(12px,1em,20px)" in simulateur_html
             and "padding: clamp(6px,.4rem,8px) clamp(8px,.65rem,14px)" in simulateur_html,

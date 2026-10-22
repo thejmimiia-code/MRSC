@@ -66,7 +66,7 @@ header.entete .site-status-note {
   border-radius: 9px;
   background: #fff3d2;
   color: #49320a;
-  font-size: .82rem;
+  font-size: max(12px, .82rem);
   font-weight: 730;
   line-height: 1.4;
 }
@@ -161,7 +161,7 @@ button.primaire {
   cursor: not-allowed;
 }
 .site-return-bar .site-journey-button[data-journey-action="accueil"]:disabled { box-shadow: none; }
-.site-return-bar .site-journey-symbol { font-size: .95rem; }
+.site-return-bar .site-journey-symbol { font-size: max(12px, .95rem); }
 .site-return-bar .site-journey-label { white-space: nowrap; }
 .site-return-bar .site-journey-status {
   flex: 0 1 auto;
@@ -169,7 +169,7 @@ button.primaire {
   padding-left: .65rem;
   border-left: 1px solid var(--mrsc-bordure);
   color: var(--texte-dim);
-  font-size: clamp(11px,.7rem,16px);
+  font-size: clamp(12px,.7rem,16px);
   line-height: 1.35;
   white-space: nowrap;
 }
@@ -253,7 +253,7 @@ button.primaire {
 }
 .site-layout-title { margin-bottom: .55rem; color: var(--texte); font-weight: 750; }
 .site-layout-options { display: grid; gap: .45rem; margin: 0; padding: 0; border: 0; }
-.site-layout-options legend { margin-bottom: .45rem; color: var(--texte); font-size: .86rem; font-weight: 700; }
+.site-layout-options legend { margin-bottom: .45rem; color: var(--texte); font-size: max(12px, .86rem); font-weight: 700; }
 .site-layout-choice {
   display: grid;
   grid-template-columns: 20px 54px minmax(0,1fr);
@@ -297,10 +297,10 @@ button.primaire {
 .site-layout-choice:focus-within { outline: 3px solid var(--accent); outline-offset: 2px; }
 .site-layout-choice input { width: 18px; height: 18px; margin: .16rem 0 0; accent-color: var(--accent); }
 .site-layout-choice-copy { display: block; min-width: 0; }
-.site-layout-choice-copy strong { display: block; color: var(--texte); font-size: .87rem; }
-.site-layout-choice-copy > span { display: block; margin-top: .1rem; color: var(--texte-dim); font-size: .75rem; line-height: 1.4; }
-.site-layout-status { min-height: 1.35em; margin: .6rem 0 0; color: var(--texte); font-size: .8rem; font-weight: 700; }
-.site-layout-note { margin: .35rem 0 0; color: var(--texte-dim); font-size: .72rem; line-height: 1.45; }
+.site-layout-choice-copy strong { display: block; color: var(--texte); font-size: max(12px, .87rem); }
+.site-layout-choice-copy > span { display: block; margin-top: .1rem; color: var(--texte-dim); font-size: max(12px, .75rem); line-height: 1.4; }
+.site-layout-status { min-height: 1.35em; margin: .6rem 0 0; color: var(--texte); font-size: max(12px, .8rem); font-weight: 700; }
+.site-layout-note { margin: .35rem 0 0; color: var(--texte-dim); font-size: max(12px, .72rem); line-height: 1.45; }
 .site-return-bar .site-layout-reset { width: 100%; min-height: 44px; margin-top: .65rem; }
 .site-return-bar .site-layout-panel :focus-visible { outline-color: var(--accent); }
 .site-return-bar .site-journey-settings:not([open]) > .site-journey-panel,
@@ -353,7 +353,7 @@ button.primaire {
 .site-return-arrow {
   flex: 0 0 auto;
   color: var(--ambre);
-  font-size: 1.15rem;
+  font-size: max(12px, 1.15rem);
   line-height: 1;
 }
 .sim-display-controls {
@@ -406,7 +406,7 @@ button.primaire {
 .mrsc-scroll-hint {
   margin: 0 0 6px;
   color: var(--texte-dim);
-  font-size: .78rem;
+  font-size: max(12px, .78rem);
   line-height: 1.5;
 }
 .mrsc-scroll-region:focus-visible {
@@ -419,10 +419,10 @@ button.primaire {
   overflow: auto;
   overflow-wrap: anywhere;
 }
-html.texte-tres-reduit { font-size: 50%; }
-html.texte-reduit { font-size: 75%; }
-html.texte-agrandi { font-size: 125%; }
-html.texte-tres-agrandi { font-size: 150%; }
+html.texte-tres-reduit { font-size: 75%; }
+html.texte-reduit { font-size: 85%; }
+html.texte-agrandi { font-size: 115%; }
+html.texte-tres-agrandi { font-size: 130%; }
 html:is(.texte-tres-reduit,.texte-reduit) :is(button,input,select,textarea) { font-size: max(12px,1em); }
 html:is(.texte-agrandi,.texte-tres-agrandi) :is(button,input,select,textarea) { font-size: clamp(12px,1em,20px); }
 html:is(.texte-tres-reduit,.texte-reduit,.texte-agrandi,.texte-tres-agrandi) .sim-display-level { font-size: clamp(12px,.8rem,18px); }
@@ -529,7 +529,7 @@ html[data-layout="compacte"] #contenu-principal .clair-lignes { grid-template-co
 .puce-effect,
 .message-seuil .etiquette,
 .message-seuil .source,
-.graduations { font-size: .75rem; }
+.graduations { font-size: max(12px, .75rem); }
 /* Le ruban de veille reste visible sous la barre de retour quand elle tient sur une ligne. */
 .conteneur .ruban-veille { top: 54px; }
 @media (max-width: 640px) {
@@ -574,7 +574,7 @@ html[data-layout="compacte"] #contenu-principal .clair-lignes { grid-template-co
   .site-return-bar .site-journey-status {
     max-width: 6rem;
     padding-left: .4rem;
-    font-size: clamp(11px,.66rem,14px);
+    font-size: clamp(12px,.66rem,14px);
     text-align: right;
     white-space: normal;
     overflow-wrap: anywhere;
@@ -770,13 +770,17 @@ SCRIPT_AFFICHAGE = r"""
   const layoutStatus = document.querySelector("[data-site-layout-status]");
   const layoutReset = document.querySelector("[data-site-layout-reset]");
   const keys = {
-    text: "mrsc-texte-niveau",
+    text: "mrsc-texte-cran",
     contrast: "mrsc-contraste-renforce",
     spacing: "mrsc-espacement-renforce",
     layout: "mrsc-mise-en-page",
   };
-  const textLevels = [50, 75, 100, 125, 150];
-  const legacyTextLevels = [100, 125, 150];
+  // Même échelle que le site : 50 % donnait 8 px de corps, illisible.
+  // L'ancienne clé est migrée à la première visite, puis la nouvelle est écrite.
+  const textLevels = [75, 85, 100, 115, 130];
+  const anciensCrans = { 50: 75, 75: 85, 100: 100, 125: 115, 150: 130 };
+  const anciensIndexes = [100, 115, 130];
+  const ANCIENNE_CLE = "mrsc-texte-niveau";
   const layoutLabels = new Map([
     ["equilibree", "Équilibrée"],
     ["lecture", "Lecture"],
@@ -803,15 +807,23 @@ SCRIPT_AFFICHAGE = r"""
     const stored = String(value).trim();
     const parsed = Number(stored);
     if (Number.isInteger(parsed) && textLevels.includes(parsed)) return parsed;
-    if (/^[0-2]$/.test(stored)) return legacyTextLevels[parsed];
-    return 100;
+    return null;
+  };
+  const niveauTexteMigre = () => {
+    const ancien = read(ANCIENNE_CLE);
+    if (ancien !== null) {
+      const stored = String(ancien).trim();
+      if (/^[0-2]$/.test(stored)) return anciensIndexes[Number(stored)];
+      return anciensCrans[Number(stored)] ?? 100;
+    }
+    return read("mrsc-texte-agrandi") === "oui" ? 115 : 100;
   };
   const applyLevel = (value) => {
     level = textLevels.includes(value) ? value : 100;
-    root.classList.toggle("texte-tres-reduit", level === 50);
-    root.classList.toggle("texte-reduit", level === 75);
-    root.classList.toggle("texte-agrandi", level === 125);
-    root.classList.toggle("texte-tres-agrandi", level === 150);
+    root.classList.toggle("texte-tres-reduit", level === 75);
+    root.classList.toggle("texte-reduit", level === 85);
+    root.classList.toggle("texte-agrandi", level === 115);
+    root.classList.toggle("texte-tres-agrandi", level === 130);
     if (levelOutput) levelOutput.textContent = `${level} %`;
     if (decrease) decrease.disabled = level === textLevels[0];
     if (increase) increase.disabled = level === textLevels[textLevels.length - 1];
@@ -841,11 +853,10 @@ SCRIPT_AFFICHAGE = r"""
   };
   const load = () => {
     const savedLevel = read(keys.text);
-    const legacy = read("mrsc-texte-agrandi");
-    const parsed = savedLevel === null
-      ? (legacy === "oui" ? 125 : 100)
-      : niveauTexteEnregistre(savedLevel);
-    applyLevel(parsed ?? 100);
+    const parsed = savedLevel === null ? niveauTexteMigre() : niveauTexteEnregistre(savedLevel);
+    const niveau = parsed ?? 100;
+    applyLevel(niveau);
+    if (savedLevel === null) save(keys.text, String(niveau));
     applyContrast(read(keys.contrast) === "oui");
     applySpacing(read(keys.spacing) === "oui");
     applyLayout(read(keys.layout));
