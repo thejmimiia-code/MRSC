@@ -4,15 +4,15 @@
 
 **À quoi cela sert :** un autre agent reprend le projet sans avoir à reconstituer l'histoire. Chaque entrée dit aussi ce qu'elle ne prouve pas, pour qu'une avancée ne se transforme pas en argument d'autorité.
 
-**Date de génération :** 2026-10-22.
+**Date du registre :** 2026-10-20 — dernière revue consignée dans `avancees.toml`. Cette sortie ne dépend pas du jour où elle est régénérée.
 
 ## 1. Vue d'ensemble
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 10 |
-| Période couverte | du 2026-10-20 au 2026-10-20 |
-| Contrôles exécutables cités | 13 |
+| Avancées consignées | 11 |
+| Période couverte | du 2026-10-20 au 2026-10-22 |
+| Contrôles exécutables cités | 14 |
 | Initiatives du portefeuille concernées | 10 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -241,6 +241,30 @@ Initiatives liées : `sources-fermees-et-registre-des-refus`, `relire-les-44-pro
 **Suite.** Éprouver le même partage sur d'autres contrôles à venir : avant d'ajouter un contrôle, se demander s'il peut produire un constat plutôt qu'un échec.
 
 Initiatives liées : `relire-les-44-prototypes`.
+
+### `sortie-commitee-sans-horloge` — Une sortie commitée ne se date pas avec l'horloge
+
+*Consignée le 2026-10-22.*
+
+**Constat.** Deux fichiers générés et commités portaient la date du jour de leur génération. Comparés octet par octet par une porte CI, ils divergeaient dès le lendemain sans qu'aucun contenu ait changé : la porte « qualite » et la publication du site échouaient, et régénérer réparait le jour même en re-cassant le suivant.
+
+**Ce que cela change.** L'horodatage des sorties vient désormais des registres — `meta.derniere_revue` pour les avancées, la plus récente `revue_le` du catalogue pour l'audit — et non de `date.today()`. La validation, elle, continue de juger les dates au jour réel. Un contrôle rejoue toutes les portes CI qui comparent un fichier généré avec une horloge déplacée de +37 et +400 jours, et prouve par mutation qu'il détecte bien un générateur fautif.
+
+**Preuves dans le dépôt :**
+
+- `outils/construire-avancees.py`
+- `outils/auditer-prototypes.py`
+- `outils/test_reproductibilite_artefacts.py`
+- `docs/rd/avancees.md`
+- `docs/apprentissage/audit-automatique.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_reproductibilite_artefacts.py && python3 outils/verifier-rd-continue.py`
+
+**Limite — ce que cela ne prouve pas.** Le contrôle prouve qu'une sortie est stable, jamais qu'une date est juste : la véracité d'une date de revue reste une relecture humaine. Il ne couvre pas non plus les scripts d'un futur lot, ni les rapports non commités de la veille, qui restent hors du périmètre comparé.
+
+**Suite.** Étendre la règle au prochain générateur ajouté : si sa sortie est commitée puis comparée, son horodatage doit venir d'une donnée du dépôt et une entrée doit être ajoutée aux portes rejouées.
+
+Initiatives liées : `optimisation-du-site`, `coordination-de-tous-les-agents`.
 
 ## 3. Ce que ce registre ne dit pas
 
