@@ -4,7 +4,7 @@
 
 **À quoi cela sert :** un autre agent reprend le projet sans avoir à reconstituer l'histoire. Chaque entrée dit aussi ce qu'elle ne prouve pas, pour qu'une avancée ne se transforme pas en argument d'autorité.
 
-**Date de génération :** 2026-10-20.
+**Date de génération :** 2026-10-22.
 
 ## 1. Vue d'ensemble
 

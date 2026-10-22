@@ -10,7 +10,8 @@ Contrôles effectués :
 4. les pages du site, `404.html`, `assets/` et les liens de navigation sont
    présents, et aucune ressource publiée de `assets/` n'est orpheline ;
 5. les nombres annoncés en prose sur les pages publiques correspondent au
-   catalogue et au nombre réel de pages du dépôt ;
+   catalogue et au nombre réel de pages du dépôt, y compris les repères
+   chiffrés de l’ouverture de l’accueil ;
 5. la fonction `api/verifier-source.py` (source distante du simulateur) répond
    correctement, sur une source simulée puis sur une source injoignable ;
 6. les consignes, skills, portefeuille et veille R&D continue restent cohérents.
@@ -47,6 +48,7 @@ from simulateur.dashboard import SCENARIOS as SCENARIOS_MOTEUR  # noqa: E402
 from simulateur.donnees_live import INDICATEURS as INDICATEURS_MOTEUR  # noqa: E402
 from simulateur.domaines import DOMAINES as DOMAINES_MOTEUR  # noqa: E402
 from simulateur.parametres import LEVIERS as LEVIERS_MOTEUR  # noqa: E402
+from simulateur.seuils import LIBELLES_STRATES  # noqa: E402
 
 #: Sortie réelle : le moteur est bavard, ses impressions sont mises de côté.
 SORTIE = sys.stdout
@@ -214,6 +216,71 @@ def chiffres_publics_coherents() -> None:
             not absents,
             ", ".join(absents) if absents else f"{total} fiches · {initiales} initiales · {prototypes} prototypes · {nb_domaines} domaines · {len(pages_html)} pages HTML",
         )
+
+
+def chiffres_accueil_coherents() -> None:
+    """Les repères chiffrés de l’ouverture de l’accueil suivent leurs registres.
+
+    L’ouverture nomme l’échelle réelle des ressources plutôt qu’une liste
+    générale. Ces nombres ne sont jamais recopiés : le total de fiches vient de
+    `catalogue.toml`, la répartition du statut éditorial partagé, les leviers,
+    échelons et domaines d’impact du moteur du simulateur, et l’absence de
+    compte ou de mesure d’audience de la notice vie privée publiée.
+    """
+    try:
+        fiches = tomllib.loads((RACINE / "docs" / "apprentissage" / "catalogue.toml").read_text(encoding="utf-8"))["fiche"]
+        domaines = tomllib.loads((RACINE / "docs" / "apprentissage" / "referentiel.toml").read_text(encoding="utf-8"))["domaine"]
+    except (OSError, KeyError, tomllib.TOMLDecodeError) as erreur:
+        verifier("Catalogue lisible pour contrôler les repères de l’accueil", False, str(erreur))
+        return
+    total = len(fiches)
+    prototypes = sum(1 for fiche in fiches if est_prototype(fiche))
+    initiales = total - prototypes
+    accueil = unescape((RACINE / "index.html").read_text(encoding="utf-8"))
+
+    if not re.search(r'<dl class="home-hero-facts">', accueil):
+        verifier("L’ouverture de l’accueil affiche des repères chiffrés", False, "bloc « home-hero-facts » absent")
+        return
+
+    def repere(motif: str, groupe: int = 0) -> str:
+        trouve = re.search(motif, accueil, flags=re.DOTALL)
+        return re.sub(r"\s+", " ", trouve.group(groupe)) if trouve else ""
+
+    fiches_dd = repere(r"<dd>\s*fiches au catalogue[^<]*</dd>")
+    total_affiche = repere(r"<dt>\s*(\d+)\s*</dt>\s*<dd>\s*fiches au catalogue", 1)
+    verifier(
+        "L’accueil annonce le nombre réel de fiches et leur répartition par statut",
+        total_affiche.isdigit()
+        and int(total_affiche) == total
+        and f"dans {len(domaines)} domaines" in fiches_dd
+        and f"{initiales} fiches du corpus initial" in fiches_dd
+        and f"{prototypes} prototypes" in fiches_dd
+        and "à relire" in fiches_dd,
+        f"{total} fiches · {initiales} du corpus initial · {prototypes} prototypes · {len(domaines)} domaines",
+    )
+
+    leviers_affiches = repere(r"<dt>\s*(\d+)\+\s*</dt>\s*<dd>\s*leviers réglables dans le simulateur", 1)
+    simulateur_dd = repere(r"<dd>\s*leviers réglables dans le simulateur[^<]*</dd>")
+    verifier(
+        "L’accueil annonce prudemment les leviers, échelons et domaines d’impact du simulateur",
+        leviers_affiches.isdigit()
+        and len(LEVIERS_MOTEUR) > int(leviers_affiches)
+        and f"{len(LIBELLES_STRATES)} échelons" in simulateur_dd
+        and f"{len(DOMAINES_MOTEUR)} domaines d’impact" in simulateur_dd,
+        f"{len(LEVIERS_MOTEUR)} leviers · {len(LIBELLES_STRATES)} échelons · {len(DOMAINES_MOTEUR)} domaines d’impact",
+    )
+
+    confidentialite = unescape((RACINE / "confidentialite.html").read_text(encoding="utf-8"))
+    acces_dd = repere(r"<dt>\s*0\s*</dt>\s*<dd>\s*compte à créer[^<]*</dd>")
+    verifier(
+        "L’accueil n’annonce ni compte, ni abonnement, ni mesure d’audience tant que la notice vie privée le confirme",
+        "compte à créer" in acces_dd
+        and "abonnement" in acces_dd
+        and "mesure d’audience" in acces_dd
+        and "Pas de compte, de suivi d’audience ni de profil nominatif" in confidentialite
+        and "aucun outil d’analyse d’audience" in confidentialite,
+        "repère d’accès et notice vie privée concordants" if acces_dd else "repère « compte à créer » absent",
+    )
 
 
 def _chiffres_du_catalogue() -> tuple[str, str, str]:
@@ -761,6 +828,30 @@ def fichiers_du_site() -> None:
                 "un simulateur",
                 "poser une question",
                 "proposer une idée",
+            )
+        ),
+    )
+    verifier(
+        "L’ouverture de l’accueil dit ce que chaque ressource permet de faire, sans formule générale",
+        all(
+            terme in accueil
+            for terme in (
+                "trois ressources consultables sans compte",
+                "des fiches</strong> pour apprendre une notion",
+                "séparer les usages documentés des questions à débattre",
+                "un simulateur</strong> pour comparer les effets de décisions de politique publique",
+                "Chaque page indique ses sources, ses limites et son statut",
+                "Le simulateur ne prédit rien",
+            )
+        )
+        # Formules jugées évasives par la personne utilisatrice le 22 octobre 2026 :
+        # elles n’annonçaient ni contenu, ni échelle, ni preuve.
+        and not any(
+            formule in accueil
+            for formule in (
+                "Choisissez ce qui vous intéresse. Aucun parcours n’est imposé.",
+                "Sur ce site, vous trouverez des fiches",
+                "Aucun ordre n’est imposé.",
             )
         ),
     )
@@ -1443,6 +1534,7 @@ def main() -> int:
     fonctions_conformes()
     fichiers_du_site()
     chiffres_publics_coherents()
+    chiffres_accueil_coherents()
     ressources_citees()
     liens_et_scripts_statiques()
     recherche_developpement_continue()
