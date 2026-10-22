@@ -822,7 +822,8 @@ def fichiers_du_site() -> None:
         all(
             terme in accueil
             for terme in (
-                "Comprendre les sujets",
+                "Apprendre, vérifier et débattre",
+                "des sujets qui nous concernent",
                 "des fiches",
                 "un dossier sur l’intelligence artificielle",
                 "un simulateur",
@@ -830,6 +831,42 @@ def fichiers_du_site() -> None:
                 "proposer une idée",
             )
         ),
+    )
+    titre_page = re.search(r"<title>([^<]*)</title>", accueil)
+    partage = re.search(r'<meta property="og:title" content="([^"]*)"', accueil)
+    formule_h1 = re.search(r'<h1 class="hero-title"[^>]*>(.*?)</h1>', accueil, re.DOTALL)
+    bloc_jsonld = re.search(r'<script type="application/ld\+json">(.*?)</script>', accueil, re.DOTALL)
+    noms_jsonld: dict[str, str] = {}
+    if bloc_jsonld:
+        with contextlib.suppress(json.JSONDecodeError, AttributeError, TypeError, KeyError):
+            graphe = json.loads(bloc_jsonld.group(1)).get("@graph", [])
+            noms_jsonld = {
+                objet.get("@type"): objet.get("name")
+                for objet in graphe
+                if isinstance(objet, dict) and isinstance(objet.get("@type"), str)
+            }
+    texte_h1 = re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", "", formule_h1.group(1)))).strip() if formule_h1 else ""
+    titre = titre_page.group(1).strip() if titre_page else ""
+    # Un contrôle qui échoue doit nommer la pièce en cause, pas annoncer l’inverse.
+    desalignes: list[str] = []
+    if not texte_h1:
+        desalignes.append("H1 absent")
+    if not titre:
+        desalignes.append("titre absent")
+    elif texte_h1 and texte_h1.rstrip(".") not in titre:
+        desalignes.append("formule du H1 absente du titre")
+    if partage is None or partage.group(1).strip() != titre:
+        desalignes.append("og:title différent du titre")
+    if noms_jsonld.get("WebSite") != titre:
+        desalignes.append("JSON-LD WebSite différent du titre")
+    if noms_jsonld.get("WebPage") != titre:
+        desalignes.append("JSON-LD WebPage différent du titre")
+    verifier(
+        "Le titre de l’accueil, son partage et ses données structurées portent la formule du H1",
+        not desalignes,
+        " ; ".join(desalignes)
+        if desalignes
+        else f"H1 « {texte_h1} » · titre, og:title et JSON-LD WebSite/WebPage alignés sur « {titre} »",
     )
     verifier(
         "L’ouverture de l’accueil dit ce que chaque ressource permet de faire, sans formule générale",
