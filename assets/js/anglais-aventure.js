@@ -1175,7 +1175,17 @@
     if (!gl || !sceneCanvas || !shaderProgram) return;
     const bounds = sceneCanvas.getBoundingClientRect();
     if (!bounds.width || !bounds.height) return;
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+    // Le décor est dessiné une fois par monde, pas à chaque image : rendre à la
+    // densité réelle de l'écran ne coûte donc rien en continu. L'ancien plafond
+    // de 1,5 faisait agrandir le tampon par le CSS sur tout écran à 2× ou 3×,
+    // ce qui rendait les arêtes des décors floues. Le budget de pixels protège
+    // les appareils modestes sur un écran très large, sans jamais descendre
+    // sous 1 (un tampon plus petit que la zone d'affichage serait toujours flou).
+    const densite = Math.min(window.devicePixelRatio || 1, 2);
+    const pixelsDisponibles = 4_000_000;
+    const surfaceCss = bounds.width * bounds.height;
+    const densiteMax = Math.sqrt(pixelsDisponibles / surfaceCss);
+    const pixelRatio = Math.max(1, Math.min(densite, densiteMax));
     const width = Math.max(1, Math.round(bounds.width * pixelRatio));
     const height = Math.max(1, Math.round(bounds.height * pixelRatio));
     if (sceneCanvas.width !== width || sceneCanvas.height !== height) {

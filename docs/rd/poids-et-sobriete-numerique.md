@@ -84,6 +84,24 @@ Le PSNR n’est ni une mesure perceptuelle ni une preuve d’absence d’artefac
 
 Ces contrôles ont été faits par l’agent, pas par un panel humain ni avec un outil perceptuel (SSIM, VMAF, Butteraugli). Ils ne remplacent pas une revue visuelle humaine sur écran réel, en particulier pour les dégradés de ciel et les zones sombres.
 
+### 4.2 bis — Le vrai plafond de netteté était le choix de variante, pas la compression (22 octobre 2026)
+
+La revue visuelle humaine demandée au § 6 a eu lieu : la qualité des illustrations des mondes a été jugée insuffisante. La mesure a écarté deux fausses pistes avant d’en trouver deux vraies.
+
+**Écartées.** La compression n’est pas en cause : en sRGB, l’AVIF q60 pleine largeur de `mondes-savoirs-hero` mesure **36,4 dB** de PSNR, comme l’indiquait déjà ce document ; un calcul direct redevient absurde (12,7 dB) pour la raison déjà connue — le décodeur renvoie du YCbCr. Régénérer l’illustration ne pouvait pas aider non plus : le générateur d’images disponible ici plafonne à **1 376 × 768 px**, soit moins que le master actuel de 1 672 × 941 — une régénération aurait donc *dégradé* la résolution.
+
+**Trouvées.** Deux défauts réels, mesurables, tous deux dans la façon de servir l’image :
+
+1. **Le héros des mondes déclarait `sizes="100vw"` alors qu’il est posé plus large que l’écran.** Le CSS lui impose `object-fit: cover` dans une boîte de 180vw de haut : sur un téléphone de 390 px, l’image est mise en page sur ≈ 1 247 px de large, puis rognée. En déclarant 100vw, le navigateur croyait n’avoir que 390 px à couvrir et choisissait la variante **800 px**. Résultat : un agrandissement d’environ **3,1×** en pixels d’appareil à 2×. La déclaration devient `(max-width: 430px) 150vw, (max-width: 700px) 105vw, 100vw`, ce qui fait choisir la variante **1 200 px** et ramène l’agrandissement à ≈ **2,1×**, soit un tiers de netteté gagné.
+
+2. **Le décor 3D des cinq missions plafonnait la densité à 1,5.** Le tampon du canvas était rendu à `min(devicePixelRatio, 1.5)` puis agrandi par le CSS sur tout écran à 2× ou 3× : arêtes floues, précisément sur les appareils où l’on regarde le plus ces décors. Le plafond passe à 2, borné par un budget de 4 Mpx pour les appareils modestes. Ce rendu n’a lieu qu’une fois par monde, pas à chaque image : le coût reste ponctuel.
+
+**Le compromis de poids est explicite.** La déclaration honnête serait ≈ 320vw (la largeur réellement mise en page). Elle aurait fait choisir la variante 1 672 px et porté la page à ≈ **322 Kio** de mobile, au-dessus du budget de travail de 300 Kio. La valeur retenue, 150vw, garde la page à ≈ **240 Kio** (mesuré par gzip sur les fichiers réellement choisis) en abandonnant une partie du gain possible.
+
+**Ce que cela ne règle pas.** Le master reste 1 672 × 941. Sur un écran à 2× (portable Retina), il est affiché sur jusqu’à 2 880 px d’appareil : l’agrandissement résiduel est de **1,7×**, et il faudrait une source de 2 560 à 2 880 px pour le supprimer. Aucun traitement local ne crée ce détail — un agrandissement Lanczos produit un fichier plus gros, pas une image plus nette, et n’a donc pas été retenu. **La netteté complète dépend d’une illustration source plus grande**, que ce dépôt ne contient pas.
+
+Un troisième point, relevé en passant : `outils/verifier-poids-pages.py` annonce dans sa docstring retenir le candidat « selon `sizes` » mais ne lit pas cet attribut — il prend le plus petit et le plus grand candidat du `srcset`. Ses chiffres restent des majorants prudents, mais ils ne reflètent pas le choix réel du navigateur ; le calcul ci-dessus a donc été fait à la main, avec les mêmes fichiers.
+
 ### 4.3 Stockage du dépôt
 
 Les variantes ajoutent **1 553 Kio** au dépôt pour **787 Kio** d’images sources. Le dépôt grossit donc, alors que chaque visite transfère moins. C’est un compromis assumé : les sources restent la référence et le repli JPEG ; les variantes sont générées et vérifiées par [`outils/optimiser-images.py`](../../outils/optimiser-images.py), avec un manifeste d’empreintes [`derives-images.json`](derives-images.json).
