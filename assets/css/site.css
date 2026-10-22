@@ -3709,6 +3709,23 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
   font-size: .86rem;
 }
 .home-hero-civic .hero-title span { color: var(--blue); }
+/* Repères chiffrés de l’ouverture : les nombres viennent du catalogue et du
+   moteur du simulateur, jamais recopiés à la main (voir verifier-integration.py). */
+.home-hero-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(min(190px,100%),1fr));
+  gap: .7rem;
+  max-width: 660px;
+  margin: 1.3rem 0 0;
+}
+.home-hero-facts > div {
+  padding: .85rem .95rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+.home-hero-facts dt { color: var(--navy-ink); font-size: 1.6rem; font-weight: 800; line-height: 1; }
+.home-hero-facts dd { margin: .4rem 0 0; color: var(--muted); font-size: .82rem; line-height: 1.45; }
 .home-hero-civic .home-hero-promise {
   margin-top: 1rem;
   padding: .9rem 1rem;
@@ -3830,7 +3847,7 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-share-fallback input:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 .home-join-actions { display: grid; gap: .6rem; }
 .home-join-actions .button { white-space: nowrap; }
-html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,.home-share-panel) { border-color: currentColor; background: var(--surface); box-shadow: none; }
+html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,.home-share-panel,.home-hero-facts > div) { border-color: currentColor; background: var(--surface); box-shadow: none; }
 @media (max-width: 1000px) {
   .home-voice-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
 }
@@ -3852,7 +3869,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
   .home-hero-visual img { width: 100%; height: auto; max-height: none; object-fit: contain; }
 }
 @media (forced-colors: active) {
-  .home-hero-aside,.home-action-card,.home-voice-card,.home-share-panel,.home-share-fallback input {
+  .home-hero-aside,.home-action-card,.home-voice-card,.home-share-panel,.home-share-fallback input,.home-hero-facts > div {
     border-color: CanvasText !important;
     background: Canvas !important;
     color: CanvasText !important;
@@ -4017,7 +4034,7 @@ html[data-layout="lecture"] main :is(
   .home-action-grid,.home-voice-grid,.home-share-panel,.english-promo-panel,
   .ai-feature-panel,.ai-hero-grid,.ai-metric-grid,.ai-forms-grid,.ai-balance-grid,.ai-lives-grid,
   .ai-questions-layout,.ai-path-panel,.ai-path-steps,.ai-cta-panel,.principle-grid,.trace-panel,
-  .simulateur-intro,.simulateur-chiffres,.simulateur-promo-panel,.simulateur-duo,
+  .simulateur-intro,.simulateur-chiffres,.simulateur-promo-panel,.simulateur-duo,.home-hero-facts,
   .learning-hero-grid,.learning-work-panel,.learning-article-layout,.learning-catalogue-grid,
   .learning-level-grid,.learning-ecosystem-grid,.learning-filters,.learning-feedback-panel,
   .learning-code-grid,.learning-coverage-topic,.learning-home-panel,
