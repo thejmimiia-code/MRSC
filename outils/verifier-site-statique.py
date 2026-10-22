@@ -28,8 +28,9 @@ from statuts_editoriaux import PROTOTYPE, RELU, est_prototype, est_relue, porte_
 
 #: Quelques nombres écrits en lettres dans les documents rédigés à la main.
 NOMBRES_EN_LETTRES = {
-    55: "cinquante-cinq", 56: "cinquante-six", 57: "cinquante-sept",
+    55: "cinquante-cinq", 56: "cinquante-six", 57: "cinquante-sept", 58: "cinquante-huit",
     80: "quatre-vingts", 81: "quatre-vingt-un", 82: "quatre-vingt-deux",
+    83: "quatre-vingt-trois", 84: "quatre-vingt-quatre",
 }
 SITE_URL = "https://thejmimiia-code.github.io/MRSC/"
 PAGES = sorted(ROOT.glob("*.html"))

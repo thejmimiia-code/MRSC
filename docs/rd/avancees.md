@@ -10,14 +10,38 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 9 |
+| Avancées consignées | 10 |
 | Période couverte | du 2026-10-20 au 2026-10-20 |
-| Contrôles exécutables cités | 12 |
-| Initiatives du portefeuille concernées | 9 |
+| Contrôles exécutables cités | 13 |
+| Initiatives du portefeuille concernées | 10 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
 
 ## 2. Les avancées
+
+### `carte-de-sujet-avant-premiere-fiche` — Ouvrir une carte de sujet avant la première fiche évite le doublon et le hors-périmètre
+
+*Consignée le 2026-10-20.*
+
+**Constat.** Créer directement une fiche sur un sujet vide (`a-creer`) expose à répéter une fiche voisine déjà présente dans un autre domaine (`tech-electronique-capteur` pour les systèmes embarqués) ou à déborder sur un sujet exigeant une relecture experte préalable (`premiers-secours` ou `securite-electricite`).
+
+**Ce que cela change.** Chaque sujet sans fiche travaillé passe d'abord par une carte `docs/rd/sujet-<id>.md` reliée à `docs/rd/carte-lacunes.md`, qui fixe les sources primaires lues, ce qu'elles ne prouvent pas et la frontière phrase par phrase avec les fiches voisines avant toute rédaction dans `catalogue.toml`.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/carte-lacunes.md`
+- `docs/rd/sujet-ecoute-prononciation.md`
+- `docs/rd/sujet-systemes-embarques.md`
+- `docs/rd/sujet-securite-sciences.md`
+- `outils/construire-carte-lacunes.py`
+
+**Contrôle qui la maintient :** `python3 outils/construire-carte-lacunes.py --verifier && python3 outils/auditer-prototypes.py --verifier`
+
+**Limite — ce que cela ne prouve pas.** Une carte de sujet et une fiche prototype conforme aux contrôles mécaniques ne remplacent ni la relecture par une personne compétente du domaine, ni l'essai avec des personnes apprenantes.
+
+**Suite.** Faire relire `info-objet-connecte-local-distant` et décider, à partir de `docs/rd/sujet-securite-sciences.md`, s'il faut rédiger un premier prototype sur la lecture complète d'une étiquette CLP.
+
+Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 
 ### `indice-de-confrontation-non-certifiant` — Confronter une affirmation par ancres donne un indice et ses angles morts, jamais une validation
 
@@ -38,7 +62,7 @@ Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. 
 
 **Limite — ce que cela ne prouve pas.** Un indice concordant ne prouve jamais que la fiche dit vrai ni qu'elle respecte la portée de la source ; un constat d'ancre absente ou de page inaccessible ne prouve jamais que la fiche est fausse.
 
-**Suite.** Mesurer les faux positifs et faux négatifs avec une personne relectrice avant d'envisager d'étendre l'échantillon au-delà des cinq fiches du prototype.
+**Suite.** Mesurer les faux positifs et faux négatifs avec une personne relectrice avant d'envisager d'étendre l'échantillon au-delà des neuf fiches du prototype.
 
 Initiatives liées : `confronter-une-affirmation-a-sa-source`, `relire-les-44-prototypes`, `prospective-apprentissages-2030`.
 
@@ -68,7 +92,7 @@ Initiatives liées : `optimisation-du-site`, `indexation-et-lecteurs-de-contenu`
 
 *Consignée le 2026-10-20.*
 
-**Constat.** Chercher une page qui « a l'air » de répondre ne suffit pas : il faut l'ouvrir, y lire la phrase qui étaye l'affirmation, et noter ce qu'elle n'étaye pas. Douze fiches ont été traitées ainsi ; deux pages ont été refusées après lecture.
+**Constat.** Chercher une page qui « a l'air » de répondre ne suffit pas : il faut l'ouvrir, y lire la phrase qui étaye l'affirmation, et noter ce qu'elle n'étaye pas. Vingt-deux fiches ont été traitées ainsi ; sept pages ont été refusées après tentative ou lecture.
 
 **Ce que cela change.** Le catalogue porte, pour chaque page ajoutée, la date de consultation et une phrase qui sépare ce que la page étaye de ce qu'elle n'étaye pas — par exemple un document sur les changements d'état qui ne parle pas de dissolution.
 
@@ -82,7 +106,7 @@ Initiatives liées : `optimisation-du-site`, `indexation-et-lecteurs-de-contenu`
 
 **Limite — ce que cela ne prouve pas.** Une page qui étaye une phrase ne vaut ni expertise de domaine, ni contrôle des droits, ni essai d'usage réel ; le registre des relectures humaines reste vide.
 
-**Suite.** Poursuivre fiche par fiche sur les constats restants, en préférant une page réellement lue à un portail de plus.
+**Suite.** Poursuivre fiche par fiche sur le constat restant (`arts-composer-formes`), en préférant une page réellement lue à un portail de plus.
 
 Initiatives liées : `relire-les-44-prototypes`.
 

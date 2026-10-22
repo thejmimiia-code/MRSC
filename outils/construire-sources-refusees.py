@@ -53,6 +53,7 @@ CATEGORIES = {
     "acces-payant": "Accès payant ou réservé aux abonnés",
     "page-introuvable": "Page introuvable ou retirée (HTTP 404/410)",
     "hors-perimetre": "Contenu hors du périmètre cherché après lecture",
+    "extraction-incomplete": "Document trop long ou tronqué avant le passage cherché",
     "portail-sans-page": "Racine ou portail sans page précise à confronter",
 }
 DECISIONS = {

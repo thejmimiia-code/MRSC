@@ -17,11 +17,11 @@ Un verdict « conforme » fait passer la fiche au statut « Relu — relecture c
 | Priorité | Signification | Prototypes |
 | ---: | --- | ---: |
 | 1 | domaine exigeant une personne compétente du domaine | 9 |
-| 2 | hors domaine sensible, mais mots-clés à vérifier | 9 |
+| 2 | hors domaine sensible, mais mots-clés à vérifier | 10 |
 | 3 | aucun signal automatique — reste à relire | 39 |
-|  | **Total des prototypes** | **57** |
+|  | **Total des prototypes** | **58** |
 
-Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres prototypes apparaissent dans le tableau et se détaillent avec `--fiche <identifiant>`.
+Les 19 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres prototypes apparaissent dans le tableau et se détaillent avec `--fiche <identifiant>`.
 
 ## 2. Tableau de suivi
 
@@ -40,50 +40,51 @@ Les 18 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | 11 | [Formuler une question et une hypothèse de recherche](fiches/recherche-question-hypothese.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 12 | [Lire une frise chronologique et ordonner des événements](fiches/histoire-lire-frise.html) | Histoire, chronologie et mémoire | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 13 | [Repérer les parties d’une adresse Web](fiches/info-lire-adresse-web.html) | Informatique, algorithmique et langages de programmation | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 14 | [Lire une licence avant de réutiliser un programme](fiches/prog-lire-licence-logiciel.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
-| 15 | [Présenter une idée avec une raison et un exemple](fiches/fr-argumenter-avec-exemple.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 16 | [Repérer l’idée principale et les informations utiles](fiches/fr-reperer-idee-texte.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 17 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 18 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 19 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 20 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 21 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 22 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
-| 23 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 24 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 25 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 26 | [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 27 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
-| 28 | [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 29 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 30 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
-| 31 | [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 32 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
-| 33 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 3 | 3 | 3 non vérifiée(s) | 2026-10-08 | aucune |
-| 34 | [Tester un programme avec des cas simples](fiches/prog-tester-exemples.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 35 | [Comprendre un mot grâce à son contexte](fiches/fr-comprendre-mot-contexte.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 36 | [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 37 | [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 38 | [Demander de l’aide ou une répétition en anglais](fiches/langue-anglais-demander-aide.html) | Langues étrangères et interculturel | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 39 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 40 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-20 | aucune |
-| 41 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 3 | 6 | 6 non vérifiée(s) | 2026-10-20 | aucune |
-| 42 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
-| 43 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
-| 44 | [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 45 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
-| 46 | [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 47 | [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 48 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
-| 49 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 50 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 51 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 52 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 53 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 54 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
-| 55 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
-| 56 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
-| 57 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 14 | [Distinguer programme embarqué local et liaison réseau d’un objet connecté](fiches/info-objet-connecte-local-distant.html) | Informatique, algorithmique et langages de programmation | 2 | 3 | 2 non vérifiée(s) | 2026-10-20 | aucune |
+| 15 | [Lire une licence avant de réutiliser un programme](fiches/prog-lire-licence-logiciel.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 16 | [Présenter une idée avec une raison et un exemple](fiches/fr-argumenter-avec-exemple.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 17 | [Repérer l’idée principale et les informations utiles](fiches/fr-reperer-idee-texte.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 18 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 19 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 20 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 21 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 22 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 23 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
+| 24 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 25 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 26 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 27 | [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 28 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 29 | [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 30 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 31 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 32 | [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 33 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 34 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 3 | 3 | 3 non vérifiée(s) | 2026-10-08 | aucune |
+| 35 | [Tester un programme avec des cas simples](fiches/prog-tester-exemples.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 36 | [Comprendre un mot grâce à son contexte](fiches/fr-comprendre-mot-contexte.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 37 | [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 38 | [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 39 | [Demander de l’aide ou une répétition en anglais](fiches/langue-anglais-demander-aide.html) | Langues étrangères et interculturel | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 40 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 41 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-20 | aucune |
+| 42 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 3 | 6 | 6 non vérifiée(s) | 2026-10-20 | aucune |
+| 43 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
+| 44 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
+| 45 | [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 46 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 47 | [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 48 | [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 49 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 50 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 51 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 52 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 53 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 54 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 55 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
+| 56 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
+| 57 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
+| 58 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
 
 ## 3. Paquets détaillés
 
@@ -735,6 +736,57 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 ```toml
 [[relecture]]
 fiche = "info-lire-adresse-web"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
+```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+
+### `info-objet-connecte-local-distant` — Distinguer programme embarqué local et liaison réseau d’un objet connecté
+
+| Élément | Valeur |
+| --- | --- |
+| Domaine | Informatique, algorithmique et langages de programmation |
+| Repère de difficulté | 2 |
+| Horizon du contenu | Premiers repères sur l’informatique embarquée et les objets connectés ; fiche conceptuelle sans montage ni configuration réseau |
+| Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
+| Termes repérés | santé : traitement |
+| Fiche publiée | [lire la fiche](fiches/info-objet-connecte-local-distant.html) |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
+| Relecture consignée | aucune à ce jour |
+
+**Sources enregistrées dans le catalogue**
+
+| Source | Licence déclarée | Mode | Droits contrôlés le |
+| --- | --- | --- | --- |
+| [Éduscol — Programme de sciences numériques et technologie de seconde générale et technologique (BO spécial n° 1 du 22 janvier 2019)](https://eduscol.education.fr/document/23494/download) | Non vérifiée — texte réglementaire consulté ; aucune réutilisation déclarée | reference-factuelle | 2026-10-20 |
+| [Éduscol — « SNT seconde : Informatique embarquée et objets connectés — Activité 2 : Impact et importance de l’informatisation des objets »](https://eduscol.education.fr/document/23560/download) | Non vérifiée — document ministériel consulté ; aucune réutilisation déclarée | reference-factuelle | 2026-10-20 |
+| [ANSSI — « Recommandations relatives à la sécurité des (systèmes d’)objets connectés » (ANSSI-PA-087)](https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-securite_des_systemes_objets_connectes_iot-v1.0.pdf) | Licence Ouverte v2.0 (Etalab) mentionnée en page 2 du guide ; utilisée ici en simple référence factuelle sans reprise | reference-factuelle | 2026-10-20 |
+
+**Ce que la fiche dit déjà de ses limites**
+
+> Un système informatique embarqué n’est pas une personne qui improvise en cas de coupure. S’il a été conçu pour attendre obligatoirement la réponse d’un serveur distant avant d’agir, même une fonction simple sur place peut se bloquer lorsque la liaison réseau disparaît.
+
+**Points à trancher par une personne**
+
+- [ ] Ouvrir les 3 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
+- [ ] Trancher les droits : 2 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
+- [ ] Vérifier l’exemple et la correction : aucun exemple ne doit induire en erreur si l’énoncé est mal lu.
+- [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
+- [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
+
+**Relecture à consigner dans `relectures.toml`**
+
+```toml
+[[relecture]]
+fiche = "info-objet-connecte-local-distant"
 date = AAAA-MM-JJ
 role = "expertise du domaine — préciser lequel"
 perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]

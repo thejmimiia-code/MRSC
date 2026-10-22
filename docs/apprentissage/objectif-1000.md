@@ -2,7 +2,7 @@
 
 **Plan de travail au 2026-10-14 — cible, pas catalogue disponible.**
 
-L’ambition est de construire progressivement 1 000 fiches distinctes, autonomes et valorisantes. Le catalogue de travail compte actuellement 83 entrées : 26 entrées du corpus initial sans marqueur de prototype et 57 prototypes explicitement à relire. L’écart arithmétique à la cible est de 917 entrées ; le nombre de fiches ayant franchi tous les contrôles de publication n’est pas encore suivi.
+L’ambition est de construire progressivement 1 000 fiches distinctes, autonomes et valorisantes. Le catalogue de travail compte actuellement 84 entrées : 26 entrées du corpus initial sans marqueur de prototype et 58 prototypes explicitement à relire. L’écart arithmétique à la cible est de 916 entrées ; le nombre de fiches ayant franchi tous les contrôles de publication n’est pas encore suivi.
 
 Ces nombres décrivent le catalogue et un objectif de planification ; ils ne prouvent ni qu’une fiche a passé toutes les relectures, ni que les sujets proposés sont exhaustifs. L’absence de statut de prototype sur une fiche initiale ne vaut pas validation indépendante. Les versions, traductions et variantes d’un même objectif ne gonflent pas le compte.
 
@@ -22,12 +22,12 @@ Les quotas sont des hypothèses de travail à corriger selon les besoins signal�
 | Citoyenneté, médias et information | 75 | 4 | 3 | 71 |
 | Démarches, droits, sécurité et vie professionnelle | 65 | 2 | 1 | 63 |
 | Numérique, données, cybersécurité et intelligence artificielle | 75 | 9 | 2 | 66 |
-| Informatique, algorithmique et langages de programmation | 80 | 8 | 8 | 72 |
+| Informatique, algorithmique et langages de programmation | 80 | 9 | 9 | 71 |
 | Arts, musique, création et culture | 45 | 4 | 2 | 41 |
 | Santé, alimentation, corps et sécurité | 60 | 2 | 1 | 58 |
 | Apprendre à apprendre, autonomie et relations | 45 | 2 | 1 | 43 |
 | Études supérieures, spécialités et recherche — post-bac au doctorat | 75 | 4 | 4 | 71 |
-| **Total planifié** | **1 000** | **83** | **57** | **917** |
+| **Total planifié** | **1 000** | **84** | **58** | **916** |
 
 ## Horizon principal des contenus
 

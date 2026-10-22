@@ -79,6 +79,13 @@ class TestSourcesRefusees(unittest.TestCase):
         self.assertIn("Un refus consigné ne valide jamais la fiche associée", markdown)
         self.assertIn("Ce qu'il ne prouve pas", markdown)
 
+    def test_categorie_extraction_incomplete_acceptee(self) -> None:
+        categories = {entree["categorie_motif"] for entree in self.registre["refus"]}
+        self.assertIn("extraction-incomplete", categories)
+        erreurs = MODULE.valider(self.registre, self.aujourdhui, self.fiches_urls)
+        self.assertEqual(erreurs, [])
+
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -8,7 +8,7 @@ Reproduction statique des pages publiques de [www.mrsc.fr](https://www.mrsc.fr/)
 
 - `index.html` — accueil recentré sur la mission du M.R.S.C, les expériences de chacun, les apprentissages, le débat, les outils citoyens, les documents et le partage
 - `apprendre.html` — parcours d’apprentissage accessibles, repères par matière et difficulté, fiches autonomes et sources sans compte
-- `anglais-aventure.html` — « Les Mondes » : atlas des 83 fiches dans 15 domaines, parcours libres, plus cinq Escales d’anglais en 3D ; 57 prototypes restent à relire
+- `anglais-aventure.html` — « Les Mondes » : atlas des 84 fiches dans 15 domaines, parcours libres, plus cinq Escales d’anglais en 3D ; 58 prototypes restent à relire
 - `ia-societe.html` — réflexion sur les usages, effets sociaux et fraudes ; réflexes de vérification et liens vers les fiches pratiques
 - `simulateur.html` — présentation du simulateur macro-politique, accès à la version interactive publiée sur Vercel et aperçu intégré lorsqu’il est disponible
 - `documents.html` — statuts, parution au Journal officiel, bulletins d’adhésion et de don
@@ -70,7 +70,7 @@ Trois grandes illustrations disposent désormais de variantes AVIF et WebP en de
 
 ```sh
 python3 outils/optimiser-images.py --verifier        # manifeste, empreintes et tailles des variantes
-python3 outils/verifier-poids-pages.py              # poids estimé et budgets (97 pages)
+python3 outils/verifier-poids-pages.py              # poids estimé et budgets (98 pages)
 python3 outils/verifier-poids-pages.py --rapport docs/rd/poids-pages.md
 python3 outils/verifier-publication.py --base-url https://thejmimiia-code.github.io/MRSC/
 python3 outils/test_fichiers_servis.py            # tests du relevé d’en-têtes conservé

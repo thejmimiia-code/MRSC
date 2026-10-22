@@ -39,7 +39,7 @@ Après correction, ces 16 exécutions ne remontent plus aucune violation.
 
 ## Deuxième passe : toutes les pages
 
-`outils/verifier-accessibilite.cjs --etendu` : 98 pages HTML × deux largeurs, soit **196 exécutions, aucune violation axe** (relevé rejoué le 20 octobre 2026, ainsi que le balayage par défaut : 47 exécutions, aucune violation).
+`outils/verifier-accessibilite.cjs --etendu` : 99 pages HTML × deux largeurs, soit **198 exécutions, aucune violation axe** (relevé rejoué le 20 octobre 2026, ainsi que le balayage par défaut : 47 exécutions, aucune violation).
 
 La page `simulateur.html` ne se stabilise pas sur `networkidle0` (iframe et appels asynchrones) ; le script y charge la page puis attend cinq secondes avant le balayage.
 
