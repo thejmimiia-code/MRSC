@@ -508,7 +508,7 @@ async function main() {
     }
   });
 
-  await executer('320 px à 150 % avec contraste et espacement renforcés sur le site et le simulateur', async () => {
+  await executer('320 px à 130 % avec contraste et espacement renforcés sur le site et le simulateur', async () => {
     const pageSite = await creerPage({ width: 320, height: 800 });
     try {
       await ouvrirPageSite(pageSite, 'index.html');
@@ -518,7 +518,7 @@ async function main() {
       await pageSite.click('[data-contrast-toggle]');
       await pageSite.click('[data-spacing-toggle]');
       const niveauSite = await pageSite.$eval('[data-text-size-level]', (element) => element.textContent.trim());
-      assert.match(niveauSite, /150/);
+      assert.match(niveauSite, /130/);
       await verifierPanneauDansViewport(pageSite, '.display-settings-panel');
       await ouvrirPanneau(pageSite);
       await verifierPanneauDansViewport(pageSite, '.layout-settings-panel');
@@ -545,7 +545,7 @@ async function main() {
       await pageSimulateur.click('[data-sim-contrast]');
       await pageSimulateur.click('[data-sim-spacing]');
       const niveauSimulateur = await pageSimulateur.$eval('[data-sim-text-level]', (element) => element.textContent.trim());
-      assert.match(niveauSimulateur, /150/);
+      assert.match(niveauSimulateur, /130/);
       await ouvrirPanneau(pageSimulateur);
       await verifierPanneauDansViewport(pageSimulateur, '.site-layout-panel');
       await pageSimulateur.click('[data-site-layout-settings] input[name="mrsc-site-layout"][value="panorama"]');

@@ -146,3 +146,9 @@ jobs:
 
       - name: Vérifier les budgets d’affichage des titres et du H1
         run: python3 outils/verifier-budgets-visuels.py
+
+      # Les appuis de la mesure d'affichage (planchers de texte et de cible,
+      # plafonds d'image par densité, mesure de lecture) : la mesure complète
+      # demande un navigateur, ces règles-ci se vérifient partout.
+      - name: Vérifier les garde-fous des formats d’affichage
+        run: python3 outils/verifier-affichages.py
