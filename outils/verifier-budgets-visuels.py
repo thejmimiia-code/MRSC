@@ -259,13 +259,18 @@ HEROS_MONDES = {
     # Téléphones : bandeau plein cadre au ratio naturel, donc la source requise
     # vaut la largeur de l'écran en pixels d'appareil.
     "paliers_mobiles": ((320, 3), (360, 3), (390, 3), (393, 3), (430, 3)),
-    # Grands écrans : `cover` plein cadre, donc la source requise vaut la largeur
-    # de l'écran en pixels d'appareil dès que la boîte est plus large que haute.
-    "paliers_bureau": ((768, 2), (1024, 2), (1440, 2), (1920, 1), (2560, 1)),
-    # Facteurs d'agrandissement constatés le 22 octobre 2026 avec un master de
-    # 1 672 px. Plafonds de non-régression : ils peuvent baisser, jamais monter.
-    # Les supprimer demande une illustration source d'au moins 2 880 px de large.
-    "plafonds_bureau": {768: 1.25, 1024: 1.55, 1440: 1.75, 1920: 1.20, 2560: 1.55},
+    # Écrans larges, avec et sans haute densité. Le mode attendu est déduit des
+    # règles CSS : panneau contenu en haute densité (2× et plus) et au-delà de
+    # 1 680 px en 1×, plein cadre ailleurs.
+    "paliers_larges": (
+        (768, 2), (834, 2), (1024, 2), (1280, 2), (1440, 2), (1728, 2),
+        (768, 1), (1024, 1), (1440, 1), (1680, 1), (1920, 1), (2560, 1),
+    ),
+    # Largeurs d'affichage maximales des panneaux, lues dans le CSS et vérifiées
+    # à l'exécution : 836 px = la moitié du master de 1 672 px, donc 1:1 à 2×.
+    "panneau_dense": 836,
+    "panneau_un_x": 1672,
+    "seuil_panneau_un_x": 1680,
 }
 
 
@@ -301,6 +306,36 @@ def largeurs_servies(html: str, motif: str) -> list[int]:
     return sorted(largeurs)
 
 
+def bloc_media_motif(css: str, motif: str) -> str:
+    """Contenu du premier bloc `@media` dont la condition contient le motif."""
+    ouverture = re.search(rf"@media[^{{]*{re.escape(motif)}[^{{]*\{{", css)
+    if not ouverture:
+        raise Echec(f"bloc @media contenant « {motif} » introuvable")
+    profondeur = 1
+    index = ouverture.end()
+    while index < len(css) and profondeur:
+        if css[index] == "{":
+            profondeur += 1
+        elif css[index] == "}":
+            profondeur -= 1
+        index += 1
+    return css[ouverture.end() : index - 1]
+
+
+def source_requise(largeur: int, densite: float, panneau_max: int | None) -> float:
+    """Pixels de source nécessaires pour cet écran.
+
+    En panneau, l'image est affichée à sa largeur contenue : le besoin vaut la
+    largeur d'affichage en pixels d'appareil. En plein cadre, `object-fit:
+    cover` impose de couvrir la boîte entière : le besoin vaut le plus grand des
+    deux côtés, converti en largeur de source équivalente.
+    """
+    if panneau_max is not None:
+        return min(largeur, panneau_max) * densite
+    hauteur = min(HEROS_MONDES["hauteur_max_px"], HEROS_MONDES["hauteur_vw"] * largeur)
+    return max(largeur, hauteur * HEROS_MONDES["ratio"]) * densite
+
+
 def verifier_heros_mondes(css: str) -> list[str]:
     """Aucun pixel étiré sur téléphone, et agrandissement desktop non aggravé."""
     css_aventure = (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8")
@@ -326,6 +361,41 @@ def verifier_heros_mondes(css: str) -> list[str]:
                 "haute, et la source nécessaire dépasse largement les variantes servies."
             )
 
+    # Panneau contenu : écrans denses (2× et plus) et très grands écrans 1×.
+    dense = declarations(bloc_media_motif(css_aventure, "min-resolution: 2dppx"), ".adventure-hero")
+    large = declarations(bloc_media_motif(css_aventure, "max-resolution: 1.99dppx"), ".adventure-hero")
+    if f"--hero-art-max: {HEROS_MONDES['panneau_dense']}px" not in dense:
+        raise Echec(
+            f"le panneau des écrans denses doit fixer `--hero-art-max: {HEROS_MONDES['panneau_dense']}px` "
+            "(la moitié du master), sinon l'image reste étirée à 2×."
+        )
+    if f"--hero-art-max: {HEROS_MONDES['panneau_un_x']}px" not in large:
+        raise Echec(
+            f"le panneau des très grands écrans doit fixer `--hero-art-max: {HEROS_MONDES['panneau_un_x']}px`, "
+            "sinon l'image est étirée au-delà de la largeur du master en 1×."
+        )
+    # Les valeurs seules ne suffisent pas : il faut que la règle qui les applique
+    # existe. Sans ce `max-width`, le panneau retombe en pleine largeur et l'image
+    # est de nouveau étirée à 2× — une mutation l'a montré.
+    application = next(
+        (
+            regle.group(1)
+            for regle in re.finditer(r"\.adventure-hero-art\s*\{([^}]*)\}", css_aventure)
+            if "max-width: var(--hero-art-max" in re.sub(r"\s+", " ", regle.group(1))
+        ),
+        "",
+    )
+    if not application:
+        raise Echec(
+            "aucune règle `.adventure-hero-art` n'applique `max-width: var(--hero-art-max…)` : "
+            "le panneau serait pleine largeur malgré les valeurs déclarées."
+        )
+    if "position: static" not in re.sub(r"\s+", " ", application):
+        raise Echec(
+            "la règle du panneau doit aussi passer `.adventure-hero-art` en `position: static`, "
+            "sinon l'image reste une image de fond plein cadre."
+        )
+
     html = (RACINE / HEROS_MONDES["page"]).read_text(encoding="utf-8")
     if 'sizes="100vw"' not in html:
         raise Echec(
@@ -337,39 +407,62 @@ def verifier_heros_mondes(css: str) -> list[str]:
         raise Echec("aucune largeur de srcset trouvée pour l'illustration des mondes")
     servie = max(largeurs)
 
-    for largeur, densite in HEROS_MONDES["paliers_mobiles"]:
-        requise = largeur * densite
-        if requise > servie:
-            raise Echec(
-                f"téléphone {largeur}px à {densite}× : {requise}px de source nécessaires, "
-                f"la plus grande variante servie en fait {servie}. L'image serait agrandie "
-                f"{requise / servie:.2f}×, donc visiblement floue."
-            )
-
-    aggravations: list[str] = []
-    facteurs: list[tuple[int, float]] = []
-    for largeur, densite in HEROS_MONDES["paliers_bureau"]:
-        hauteur = min(HEROS_MONDES["hauteur_max_px"], HEROS_MONDES["hauteur_vw"] * largeur)
-        requise = max(largeur, hauteur * HEROS_MONDES["ratio"]) * densite
-        facteur = requise / servie
-        facteurs.append((largeur, facteur))
-        plafond = HEROS_MONDES["plafonds_bureau"][largeur]
-        if facteur > plafond + 1e-9:
-            aggravations.append(f"{largeur}px : {facteur:.2f}× pour un plafond de {plafond:.2f}×")
-    if aggravations:
+    # Une variante plus large que le srcset ne sert à rien : le navigateur ne la
+    # verra jamais. Ce contrôle se déclenche le jour où un master plus large est
+    # déposé — il rappelle qu'il faut alors compléter les `srcset` et relever les
+    # largeurs de panneau, au lieu de croire la netteté réglée.
+    nom_base = Path(HEROS_MONDES["motif_srcset"]).name
+    sur_disque = sorted(
+        largeur
+        for fichier in (RACINE / "assets" / "images").glob(f"{nom_base}-*.avif")
+        if (trouve := re.fullmatch(rf"{re.escape(nom_base)}-(\d+)\.avif", fichier.name))
+        and (largeur := int(trouve.group(1)))
+    )
+    if sur_disque and sur_disque[-1] > servie:
         raise Echec(
-            "agrandissement de l'illustration des mondes aggravé sur grand écran : "
-            + " ; ".join(aggravations)
-            + ". Seule une illustration source plus large peut le réduire."
+            f"une variante {sur_disque[-1]}px existe sur le disque mais les `srcset` s'arrêtent à "
+            f"{servie}px : elle ne sera jamais servie. Ajouter les largeurs manquantes aux `srcset` "
+            "de anglais-aventure.html et apprendre.html, puis relever les largeurs de panneau dans "
+            "outils/verifier-budgets-visuels.py."
         )
 
+    def verifier_palier(largeur: int, densite: float, panneau_max: int | None, contexte: str) -> float:
+        requise = source_requise(largeur, densite, panneau_max)
+        if requise > servie:
+            raise Echec(
+                f"{contexte} {largeur}px à {densite}× : {requise:.0f}px de source nécessaires pour "
+                f"{servie}px disponibles — l'image serait agrandie {requise / servie:.2f}×, donc "
+                "visiblement floue. Réduire la largeur d'affichage, ou fournir un master plus large."
+            )
+        return requise / servie
+
+    facteurs: list[tuple[str, float]] = []
+    for largeur, densite in HEROS_MONDES["paliers_mobiles"]:
+        # Bandeau au ratio naturel : l'image occupe toute la largeur, donc la
+        # source requise vaut la largeur de l'écran en pixels d'appareil.
+        facteurs.append(
+            (f"{largeur}px×{densite}", verifier_palier(largeur, densite, largeur, "téléphone"))
+        )
+
+    for largeur, densite in HEROS_MONDES["paliers_larges"]:
+        panneau_max: int | None = None
+        if densite >= 2:
+            panneau_max = HEROS_MONDES["panneau_dense"]
+        elif largeur >= HEROS_MONDES["seuil_panneau_un_x"]:
+            panneau_max = HEROS_MONDES["panneau_un_x"]
+        contexte = "panneau" if panneau_max is not None else "plein cadre"
+        facteurs.append(
+            (f"{largeur}px×{densite} {contexte}", verifier_palier(largeur, densite, panneau_max, contexte))
+        )
+
+    pire = max(facteurs, key=lambda item: item[1])
     return [
-        "OK     Héros des mondes : bandeau au ratio naturel sous 700 px, aucun agrandissement "
-        f"sur les téléphones testés ({', '.join(str(largeur) for largeur, _ in HEROS_MONDES['paliers_mobiles'])} px à 3×), "
-        f"variantes jusqu'à {servie} px.",
-        "       Grand écran, agrandissement résiduel assumé : "
-        + ", ".join(f"{largeur}px {facteur:.2f}×" for largeur, facteur in facteurs)
-        + ". Un master d'au moins 2 880 px le supprimerait ; aucun fichier du dépôt ne le permet aujourd'hui.",
+        "OK     Héros des mondes : aucun agrandissement sur les "
+        f"{len(facteurs)} combinaisons écran × densité testées, de 320 px à 3× à 2 560 px à 1×. "
+        f"Plus grande source requise : {pire[1] * servie:.0f}px pour {servie}px servis ({pire[0]}).",
+        "       Bandeau au ratio naturel sous 700 px, panneau contenu à 2× et au-delà de "
+        f"{HEROS_MONDES['seuil_panneau_un_x']} px en 1×, plein cadre ailleurs. "
+        "Un master plus large permettra de relever les largeurs de panneau sans toucher au code.",
     ]
 
 

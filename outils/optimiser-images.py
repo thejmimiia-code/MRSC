@@ -94,6 +94,28 @@ def lire_dimensions(chemin: Path) -> tuple[int, int]:
     return int(largeur), int(hauteur)
 
 
+PALIERS_UTILES = (2560, 2880)
+
+
+def largeurs_effectives(source: Path, largeurs_declarees: tuple[int, ...]) -> list[int]:
+    """Largeurs à produire pour une source, sans jamais agrandir.
+
+    Une variante plus large que sa source n'ajoute aucun détail : elle produit un
+    fichier plus lourd pour une image plus molle. On ne garde donc que les
+    largeurs déclarées qui tiennent dans la source, auxquelles s'ajoutent la
+    largeur native et les paliers utiles (2 560 px pour un écran de 1 280 px à
+    2×, 2 880 px pour un écran de 1 440 px à 2×) quand la source les permet.
+
+    Conséquence pratique : remplacer un master par une version plus large suffit
+    à faire produire les grandes variantes manquantes, sans toucher au code.
+    """
+    largeur_source, _ = lire_dimensions(source)
+    largeurs = {largeur for largeur in largeurs_declarees if largeur <= largeur_source}
+    largeurs.add(largeur_source)
+    largeurs.update(palier for palier in PALIERS_UTILES if palier <= largeur_source)
+    return sorted(largeurs)
+
+
 def construire_manifeste(regenerer: bool = False) -> dict:
     commande = outil_imagemagick()
     if not commande:
@@ -104,7 +126,7 @@ def construire_manifeste(regenerer: bool = False) -> dict:
         if not source.is_file():
             raise FileNotFoundError(f"source absente : {source.relative_to(ROOT)}")
         variants = []
-        for largeur in source_config["largeurs"]:
+        for largeur in largeurs_effectives(source, source_config["largeurs"]):
             for format_image, qualite in source_config["qualites"].items():
                 destination = chemin_variante(source, largeur, format_image)
                 if regenerer or not destination.is_file():
@@ -187,7 +209,7 @@ def verifier() -> int:
         config = attendues[nom]
         attendues_variantes = {
             (largeur, format_image)
-            for largeur in config["largeurs"]
+            for largeur in largeurs_effectives(source, config["largeurs"])
             for format_image in config["qualites"]
         }
         presentes = set()

@@ -396,6 +396,38 @@ html.contraste-renforce .adventure-promise-list li { border-color: CanvasText; b
   .adventure-scene-controls { justify-content: stretch; }
   .adventure-scene-controls .button { flex: 1 1 auto; }
 }
+/* Écrans où le plein cadre étirerait l'illustration. Une image de 1 672 px de
+   large ne peut pas couvrir 1 440 px CSS à 2× (2 880 px d'appareil) : le
+   navigateur l'agrandit alors de 1,72×, ce qui se voit. Dans ces cas — haute
+   densité (2× et plus) et très grands écrans 1× — l'illustration redevient un
+   panneau centré, affiché au plus à la moitié de la largeur du master quand
+   l'écran est dense, et le texte passe dessous. Ailleurs, le plein cadre est
+   conservé : il n'étire rien. */
+@media (min-width: 701px) and (min-resolution: 2dppx) {
+  .adventure-hero { --hero-art-max: 836px; }
+}
+@media (min-width: 1680px) and (max-resolution: 1.99dppx) {
+  .adventure-hero { --hero-art-max: 1672px; }
+}
+@media (min-width: 701px) and (min-resolution: 2dppx),
+       (min-width: 1680px) and (max-resolution: 1.99dppx) {
+  .adventure-hero { display: block; min-height: 0; padding-block: 1.5rem 3.5rem; }
+  .adventure-hero-art {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    width: 100%;
+    max-width: var(--hero-art-max, 836px);
+    height: auto;
+    margin-inline: auto;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 18px;
+  }
+  .adventure-hero-shade { display: none; }
+  .adventure-hero-content { padding-block: 1.8rem 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .adventure-quest-card,.adventure-learning-route { transition: none; }
   .adventure-quest-card:hover,.adventure-learning-route:hover { transform: none; }

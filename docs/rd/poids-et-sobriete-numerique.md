@@ -121,11 +121,39 @@ Le signalement a été reformulé : « les images qui ne sont pas au bon ratio, 
 
 Autrement dit : plus **aucun agrandissement** sur les cinq largeurs de téléphone testées, alors que le facteur atteignait 3,1×. Le poids ne bouge pas sur les téléphones courants (1 200 px, ≈ 240 Kio de page) ; seuls les très grands téléphones à 3× (430 px) passent à la variante 1 672 px, soit ≈ 322 Kio, au-dessus du budget de travail de 300 Kio — conséquence assumée et mesurée, pas subie.
 
+**Mise à jour du même jour :** la géométrie décrite ci-dessous a été remplacée quelques heures plus tard par la géométrie hybride du § 4.2 quater, qui supprime l’agrandissement résiduel sur grand écran au lieu de l’assumer. Les chiffres restent exacts pour la version alors livrée.
+
 **Ce qui reste, et qui ne se règle pas ici.** Sur grand écran, le héros reste une image plein cadre : la source nécessaire vaut la largeur de l’écran en pixels d’appareil. Avec un master de 1 672 px, l’agrandissement résiduel est de **1,15× à 1 920 px (1×)**, **1,53× à 1 024 px (2×)**, **1,72× à 1 440 px (2×)** et **1,53× à 2 560 px (1×)**. Pour l’annuler il faudrait une illustration d’au moins **2 880 px** de large. Aucun fichier du dépôt ne le permet, et un agrandissement logiciel (Lanczos) produirait un fichier plus lourd sans créer un seul détail : il n’a pas été fait.
 
 **Garde-fou ajouté.** `outils/verifier-budgets-visuels.py` vérifie désormais quatre choses : que le bandeau mobile est bien en place (règle `.adventure-hero-art` en `position: static` et `height: auto`, voile masqué, `min-height: 0` aux deux paliers), que `sizes` reste exact, qu’aucun palier de téléphone testé ne réclame plus que la plus grande variante servie, et que les facteurs de grand écran ne dépassent pas les valeurs constatées. Trois mutations volontaires — retour au `cover`, rétablissement de la boîte à 180vw, retrait de la variante 1 672 px — ont été détectées avec un message nommant la cause.
 
 **Limites.** Aucun navigateur n’a été lancé : la géométrie est vérifiée par calcul et par lecture du CSS, pas par rendu. Le bandeau mobile change la composition (texte sous l’image, voile supprimé) et n’a pas été vu par une personne ; c’est le premier point à regarder sur téléphone.
+
+### 4.2 quater — Géométrie hybride et procédure d’arrivée d’un master plus large (22 octobre 2026)
+
+La régénération des illustrations a été **écartée sur mesure** : le générateur disponible ici plafonne à environ 1,05 million de pixels, soit 1 376×768 en 16:9, contre 1 573 000 px pour le master actuel de 1 672×941. Refaire les images les aurait **réduites de 33 %**. La personne responsable du site fournira donc un master d’au moins 2 880 px, et a retenu une géométrie hybride en attendant.
+
+**La géométrie hybride.** Le plein cadre — celui qui donne sa composition au héros — n’est conservé que là où il n’étire rien :
+
+| Contexte | Traitement | Source nécessaire |
+| --- | --- | --- |
+| ≤ 700 px (téléphone, tablette étroite) | bandeau au ratio naturel, texte dessous | largeur de l’écran × densité |
+| 701 à 1 679 px en 1× | plein cadre `cover` | ≤ 1 672 px |
+| 701 px et plus en 2× ou 3× | panneau contenu, plafond **836 px** | 1 672 px au plus |
+| 1 680 px et plus en 1× | panneau contenu, plafond **1 672 px** | 1 672 px au plus |
+
+Résultat vérifié : **aucun agrandissement** sur les 17 combinaisons écran × densité testées, de 320 px à 3× à 2 560 px à 1×. Le 1,72× qui subsistait sur un portable Retina a disparu — au prix d’un panneau centré plutôt que d’un fond pleine largeur sur ces écrans.
+
+**Procédure quand le master arrive** (aucune modification de code n’est nécessaire avant l’étape 4) :
+
+1. déposer le fichier en remplacement de `assets/images/mondes-savoirs-hero.jpg`, largeur ≥ 2 880 px, ratio 16:9, sans texte incrusté ;
+2. lancer `python3 outils/optimiser-images.py` : le script ne produit jamais de variante plus large que la source, et ajoute désormais automatiquement la largeur native et les paliers 2 560 et 2 880 px ;
+3. vérifier le manifeste avec `python3 outils/optimiser-images.py --verifier` ;
+4. compléter les `srcset` et `imagesrcset` de `anglais-aventure.html` et `apprendre.html` avec les nouvelles largeurs — la porte échoue tant que ce n’est pas fait, avec un message explicite ;
+5. relever `--hero-art-max: 836px` (2×) et `--hero-art-max: 1672px` (1× très large) dans `anglais-aventure.css` et dans `outils/verifier-budgets-visuels.py` : avec un master de 2 880 px, le panneau peut passer à 1 440 px, ce qui rend le plein cadre inutile ;
+6. refaire la mesure complète et consigner le nouveau poids.
+
+**Ce qui reste vrai en attendant.** Le master de 1 672 px suffit désormais à tous les cas, mais un panneau de 836 px est plus petit qu’un fond pleine largeur : la composition change sur Retina. Aucun navigateur n’a été lancé ici, donc ce basculement n’a pas été vu.
 
 ### 4.3 Stockage du dépôt
 
