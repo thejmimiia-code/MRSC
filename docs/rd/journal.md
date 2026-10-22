@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-22 — Une porte de CI dépendait d’un binaire absent
+
+- **Initiative :** `optimisation-du-site`. La CI a rejeté le lot sur l’étape « Vérifier le manifeste des variantes d’images », alors que la même commande passait en local sur le même commit.
+- **Cause, établie par expérience :** la vérification du manifeste lisait les dimensions des sources avec ImageMagick, que le runner n’installe pas. L’ancien script, relancé sans cet outil, lève `RuntimeError: ImageMagick est requis pour mesurer les variantes générées`. La génération a besoin d’ImageMagick ; la **vérification**, non : elle ne fait que confronter des fichiers à un manifeste.
+- **Correctif :** les dimensions se lisent désormais dans l’en-tête du fichier pour JPEG, PNG et WebP ; ImageMagick ne sert plus que de repli, pour un format non reconnu et pour l’encodage. La lecture produit les mêmes valeurs que l’outil externe sur les 14 fichiers non AVIF du dossier d’images ; les 7 AVIF ne sont pas décodés à la main et passent par le repli.
+- **Garde-fou :** `outils/test_manifeste_sans_imagemagick.py`, six tests, exécuté dans la même étape de CI. Il vérifie aussi le plafonnement des variantes à la largeur native et que les paliers 2 560 et 2 880 px apparaissent quand la source les permet. Mutation de contrôle — rétablir la dépendance à ImageMagick — détectée, trois erreurs, puis restauration vérifiée.
+- **Défaut de diagnostic corrigé au passage :** l’échec ne remontait que « exit code 1 », sans le message du script. L’étape relaie maintenant les lignes fautives en annotations `::error`, comme le fait déjà l’étape des fiches d’apprentissage. C’est ce qui manquait pour identifier le problème sans rejouer la CI à l’aveugle.
+- **Contrôles réellement exécutés :** les 21 étapes de `verification.yml` — 32 commandes `python3` — rejouées en local, 0 échec ; `optimiser-images.py --verifier` avec et sans ImageMagick ; les six nouveaux tests avec et sans ImageMagick ; une mutation ; `git diff --check`.
+- **Rectification de décompte :** les entrées précédentes annonçaient « 33 étapes de `verification.yml` ». Le workflow compte **21 étapes**, dont 31 commandes `python3` avant ce lot et 32 après. Le chiffre de 33 venait du découpage du script de rejeu local, pas du workflow. Le décompte utile est celui des commandes.
+- **Limite :** la cause a été reproduite localement en retirant ImageMagick du `PATH`, pas observée sur le runner lui-même, dont les journaux ne sont pas téléchargeables depuis cet environnement. La correction est donc validée par équivalence d’environnement, pas par lecture du journal de la CI.
+
 ## 2026-10-22 — Géométrie hybride du héros et pipeline prêt pour un master plus large
 
 - **Initiatives :** `poids-et-sobriete-numerique` et `optimisation-du-site`. Suite du signalement sur la netteté des illustrations ; la personne utilisatrice a tranché : elle fournira un master d’au moins 2 880 px et retient la géométrie hybride.
