@@ -80,10 +80,60 @@ def outil_imagemagick() -> list[str] | None:
     return None
 
 
+def dimensions_sans_dependance(chemin: Path) -> tuple[int, int] | None:
+    """Dimensions lues dans l'en-tête du fichier, sans ImageMagick.
+
+    La vérification du manifeste tourne en CI, où ImageMagick n'est pas garanti :
+    elle ne peut donc pas dépendre d'un binaire externe. Les formats des sources
+    du dépôt (JPEG, PNG, WebP) se lisent directement. Renvoie None pour un format
+    inconnu, à charge de l'appelant d'utiliser un outil externe.
+    """
+    donnees = chemin.read_bytes()
+    if donnees[:2] == b"\xff\xd8":  # JPEG : chercher un marqueur SOF
+        index = 2
+        while index + 9 < len(donnees):
+            if donnees[index] != 0xFF:
+                index += 1
+                continue
+            marqueur = donnees[index + 1]
+            if marqueur in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+                hauteur = int.from_bytes(donnees[index + 5 : index + 7], "big")
+                largeur = int.from_bytes(donnees[index + 7 : index + 9], "big")
+                return largeur, hauteur
+            if marqueur in (0xD8, 0xD9) or 0xD0 <= marqueur <= 0xD7:
+                index += 2
+                continue
+            index += 2 + int.from_bytes(donnees[index + 2 : index + 4], "big")
+        return None
+    if donnees[:8] == b"\x89PNG\r\n\x1a\n":
+        return int.from_bytes(donnees[16:20], "big"), int.from_bytes(donnees[20:24], "big")
+    if donnees[:4] == b"RIFF" and donnees[8:12] == b"WEBP":
+        type_bloc = donnees[12:16]
+        if type_bloc == b"VP8X":
+            return (
+                int.from_bytes(donnees[24:27], "little") + 1,
+                int.from_bytes(donnees[27:30], "little") + 1,
+            )
+        if type_bloc == b"VP8 ":
+            return (
+                int.from_bytes(donnees[26:28], "little") & 0x3FFF,
+                int.from_bytes(donnees[28:30], "little") & 0x3FFF,
+            )
+        if type_bloc == b"VP8L":
+            bits = int.from_bytes(donnees[21:25], "little")
+            return (bits & 0x3FFF) + 1, ((bits >> 14) & 0x3FFF) + 1
+    return None
+
+
 def lire_dimensions(chemin: Path) -> tuple[int, int]:
+    dimensions = dimensions_sans_dependance(chemin)
+    if dimensions is not None:
+        return dimensions
     commande = outil_imagemagick()
     if not commande:
-        raise RuntimeError("ImageMagick est requis pour mesurer les variantes générées")
+        raise RuntimeError(
+            f"{chemin.name} : dimensions illisibles sans ImageMagick (format non reconnu)"
+        )
     resultat = subprocess.run(
         [*commande, str(chemin), "-format", "%w %h", "info:"],
         check=True,
@@ -92,6 +142,28 @@ def lire_dimensions(chemin: Path) -> tuple[int, int]:
     )
     largeur, hauteur = resultat.stdout.split()
     return int(largeur), int(hauteur)
+
+
+PALIERS_UTILES = (2560, 2880)
+
+
+def largeurs_effectives(source: Path, largeurs_declarees: tuple[int, ...]) -> list[int]:
+    """Largeurs à produire pour une source, sans jamais agrandir.
+
+    Une variante plus large que sa source n'ajoute aucun détail : elle produit un
+    fichier plus lourd pour une image plus molle. On ne garde donc que les
+    largeurs déclarées qui tiennent dans la source, auxquelles s'ajoutent la
+    largeur native et les paliers utiles (2 560 px pour un écran de 1 280 px à
+    2×, 2 880 px pour un écran de 1 440 px à 2×) quand la source les permet.
+
+    Conséquence pratique : remplacer un master par une version plus large suffit
+    à faire produire les grandes variantes manquantes, sans toucher au code.
+    """
+    largeur_source, _ = lire_dimensions(source)
+    largeurs = {largeur for largeur in largeurs_declarees if largeur <= largeur_source}
+    largeurs.add(largeur_source)
+    largeurs.update(palier for palier in PALIERS_UTILES if palier <= largeur_source)
+    return sorted(largeurs)
 
 
 def construire_manifeste(regenerer: bool = False) -> dict:
@@ -104,7 +176,7 @@ def construire_manifeste(regenerer: bool = False) -> dict:
         if not source.is_file():
             raise FileNotFoundError(f"source absente : {source.relative_to(ROOT)}")
         variants = []
-        for largeur in source_config["largeurs"]:
+        for largeur in largeurs_effectives(source, source_config["largeurs"]):
             for format_image, qualite in source_config["qualites"].items():
                 destination = chemin_variante(source, largeur, format_image)
                 if regenerer or not destination.is_file():
@@ -187,7 +259,7 @@ def verifier() -> int:
         config = attendues[nom]
         attendues_variantes = {
             (largeur, format_image)
-            for largeur in config["largeurs"]
+            for largeur in largeurs_effectives(source, config["largeurs"])
             for format_image in config["qualites"]
         }
         presentes = set()

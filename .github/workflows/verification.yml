@@ -101,8 +101,27 @@ jobs:
           python3 outils/test_fichiers_servis.py
           python3 outils/verifier-fichiers-servis.py
 
+      # Le script écrit ses refus sur la sortie d’erreur : sans ce relais, un
+      # échec n’affichait que « exit code 1 » dans l’onglet des vérifications,
+      # ce qui interdisait de savoir quel fichier ou quelle largeur posait
+      # problème. Chaque ligne fautive est donc remontée en annotation.
       - name: Vérifier le manifeste des variantes d’images
-        run: python3 outils/optimiser-images.py --verifier
+        shell: bash
+        run: |
+          python3 outils/test_manifeste_sans_imagemagick.py
+          sortie="$RUNNER_TEMP/manifeste-images.log"
+          if python3 outils/optimiser-images.py --verifier >"$sortie" 2>&1; then
+            cat "$sortie"
+          else
+            statut=$?
+            cat "$sortie"
+            tail -n 12 "$sortie" | while IFS= read -r ligne; do
+              ligne="${ligne//'%'/'%25'}"
+              ligne="${ligne//$'\r'/'%0D'}"
+              printf '::error title=Manifeste des variantes::%s\n' "$ligne"
+            done
+            exit "$statut"
+          fi
 
       - name: Vérifier le poids estimé des pages
         run: python3 outils/verifier-poids-pages.py

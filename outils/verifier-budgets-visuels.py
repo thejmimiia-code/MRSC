@@ -6,7 +6,9 @@ Ce contrôle existe pour deux risques qu’aucun test du dépôt ne voyait :
   1. un `<title>` trop long, tronqué dans les résultats de recherche — le titre
      de l’accueil fait 73 caractères depuis qu’il reprend la formule du H1, et
      cette longueur a été acceptée par une personne, pas mesurée comme idéale ;
-  2. un H1 qui déborde ou s’allonge sans que personne ne le remarque à 320 px.
+  2. un H1 qui déborde ou s’allonge sans que personne ne le remarque à 320 px ;
+  3. une illustration servie dans une variante trop petite pour la place qu’elle occupe,
+     donc agrandie par le navigateur — celle des mondes l’était de 3,1× sur téléphone.
 
 Il lit les valeurs réellement écrites dans `assets/css/site.css` — plancher du
 `clamp()` de `h1`, largeur du conteneur, marge étroite, `max-width` du titre de
@@ -242,12 +244,235 @@ def verifier_modes(css: str) -> list[str]:
     ]
 
 
+# --- Héros des mondes : géométrie et netteté --------------------------------
+# Le 22 octobre 2026, l'illustration des mondes a été signalée comme pixelisée.
+# La cause n'était pas la compression (36,4 dB de PSNR) mais la géométrie : en
+# `object-fit: cover` dans une boîte de 150 à 180vw de haut, il aurait fallu une
+# source de plus de 3 700 px de large à 3×, qu'aucune variante ne fournissait.
+# Sous 700 px, le héros est donc devenu un bandeau au ratio naturel de l'image.
+HEROS_MONDES = {
+    "page": "anglais-aventure.html",
+    "motif_srcset": "assets/images/mondes-savoirs-hero",
+    "ratio": 1672 / 941,
+    "hauteur_max_px": 720,
+    "hauteur_vw": 0.76,
+    # Téléphones : bandeau plein cadre au ratio naturel, donc la source requise
+    # vaut la largeur de l'écran en pixels d'appareil.
+    "paliers_mobiles": ((320, 3), (360, 3), (390, 3), (393, 3), (430, 3)),
+    # Écrans larges, avec et sans haute densité. Le mode attendu est déduit des
+    # règles CSS : panneau contenu en haute densité (2× et plus) et au-delà de
+    # 1 680 px en 1×, plein cadre ailleurs.
+    "paliers_larges": (
+        (768, 2), (834, 2), (1024, 2), (1280, 2), (1440, 2), (1728, 2),
+        (768, 1), (1024, 1), (1440, 1), (1680, 1), (1920, 1), (2560, 1),
+    ),
+    # Largeurs d'affichage maximales des panneaux, lues dans le CSS et vérifiées
+    # à l'exécution : 836 px = la moitié du master de 1 672 px, donc 1:1 à 2×.
+    "panneau_dense": 836,
+    "panneau_un_x": 1672,
+    "seuil_panneau_un_x": 1680,
+}
+
+
+def bloc_media(css: str, largeur_max: int) -> str:
+    """Contenu du premier bloc `@media (max-width: <largeur_max>px)`, accolades comprises."""
+    ouverture = re.search(rf"@media\s*\(max-width:\s*{largeur_max}px\)\s*\{{", css)
+    if not ouverture:
+        raise Echec(f"bloc @media (max-width: {largeur_max}px) introuvable")
+    profondeur = 1
+    index = ouverture.end()
+    while index < len(css) and profondeur:
+        if css[index] == "{":
+            profondeur += 1
+        elif css[index] == "}":
+            profondeur -= 1
+        index += 1
+    return css[ouverture.end() : index - 1]
+
+
+def declarations(bloc: str, selecteur: str) -> str:
+    """Déclarations d'une règle, espaces normalisés. Vide si la règle est absente."""
+    regle = re.search(rf"{re.escape(selecteur)}\s*\{{([^}}]*)\}}", bloc)
+    return re.sub(r"\s+", " ", regle.group(1)) if regle else ""
+
+
+def largeurs_servies(html: str, motif: str) -> list[int]:
+    """Largeurs déclarées dans les `srcset` qui servent cette image."""
+    largeurs: set[int] = set()
+    for attribut in re.findall(r'(?:data-)?(?:image)?srcset="([^"]+)"', html):
+        if motif not in attribut:
+            continue
+        largeurs.update(int(valeur) for valeur in re.findall(r"\s(\d+)w", attribut))
+    return sorted(largeurs)
+
+
+def bloc_media_motif(css: str, motif: str) -> str:
+    """Contenu du premier bloc `@media` dont la condition contient le motif."""
+    ouverture = re.search(rf"@media[^{{]*{re.escape(motif)}[^{{]*\{{", css)
+    if not ouverture:
+        raise Echec(f"bloc @media contenant « {motif} » introuvable")
+    profondeur = 1
+    index = ouverture.end()
+    while index < len(css) and profondeur:
+        if css[index] == "{":
+            profondeur += 1
+        elif css[index] == "}":
+            profondeur -= 1
+        index += 1
+    return css[ouverture.end() : index - 1]
+
+
+def source_requise(largeur: int, densite: float, panneau_max: int | None) -> float:
+    """Pixels de source nécessaires pour cet écran.
+
+    En panneau, l'image est affichée à sa largeur contenue : le besoin vaut la
+    largeur d'affichage en pixels d'appareil. En plein cadre, `object-fit:
+    cover` impose de couvrir la boîte entière : le besoin vaut le plus grand des
+    deux côtés, converti en largeur de source équivalente.
+    """
+    if panneau_max is not None:
+        return min(largeur, panneau_max) * densite
+    hauteur = min(HEROS_MONDES["hauteur_max_px"], HEROS_MONDES["hauteur_vw"] * largeur)
+    return max(largeur, hauteur * HEROS_MONDES["ratio"]) * densite
+
+
+def verifier_heros_mondes(css: str) -> list[str]:
+    """Aucun pixel étiré sur téléphone, et agrandissement desktop non aggravé."""
+    css_aventure = (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8")
+    etroit = bloc_media(css_aventure, 700)
+    tres_etroit = bloc_media(css_aventure, 430)
+
+    attendus = (
+        ("max-width: 700px", ".adventure-hero-art", ("position: static", "height: auto", "object-fit: contain")),
+        ("max-width: 700px", ".adventure-hero-shade", ("display: none",)),
+        ("max-width: 700px", ".adventure-hero", ("min-height: 0",)),
+        ("max-width: 430px", ".adventure-hero", ("min-height: 0",)),
+    )
+    for bloc_nom, selecteur, morceaux in attendus:
+        bloc = etroit if bloc_nom == "max-width: 700px" else tres_etroit
+        regle = declarations(bloc, selecteur)
+        if not regle:
+            raise Echec(f"{bloc_nom} : la règle `{selecteur}` est absente du bloc")
+        manquants = [morceau for morceau in morceaux if morceau not in regle]
+        if manquants:
+            raise Echec(
+                f"{bloc_nom} : `{selecteur}` doit porter {', '.join(manquants)}. "
+                "Sans cela, l'illustration redevient une image de fond étirée dans une boîte "
+                "haute, et la source nécessaire dépasse largement les variantes servies."
+            )
+
+    # Panneau contenu : écrans denses (2× et plus) et très grands écrans 1×.
+    dense = declarations(bloc_media_motif(css_aventure, "min-resolution: 2dppx"), ".adventure-hero")
+    large = declarations(bloc_media_motif(css_aventure, "max-resolution: 1.99dppx"), ".adventure-hero")
+    if f"--hero-art-max: {HEROS_MONDES['panneau_dense']}px" not in dense:
+        raise Echec(
+            f"le panneau des écrans denses doit fixer `--hero-art-max: {HEROS_MONDES['panneau_dense']}px` "
+            "(la moitié du master), sinon l'image reste étirée à 2×."
+        )
+    if f"--hero-art-max: {HEROS_MONDES['panneau_un_x']}px" not in large:
+        raise Echec(
+            f"le panneau des très grands écrans doit fixer `--hero-art-max: {HEROS_MONDES['panneau_un_x']}px`, "
+            "sinon l'image est étirée au-delà de la largeur du master en 1×."
+        )
+    # Les valeurs seules ne suffisent pas : il faut que la règle qui les applique
+    # existe. Sans ce `max-width`, le panneau retombe en pleine largeur et l'image
+    # est de nouveau étirée à 2× — une mutation l'a montré.
+    application = next(
+        (
+            regle.group(1)
+            for regle in re.finditer(r"\.adventure-hero-art\s*\{([^}]*)\}", css_aventure)
+            if "max-width: var(--hero-art-max" in re.sub(r"\s+", " ", regle.group(1))
+        ),
+        "",
+    )
+    if not application:
+        raise Echec(
+            "aucune règle `.adventure-hero-art` n'applique `max-width: var(--hero-art-max…)` : "
+            "le panneau serait pleine largeur malgré les valeurs déclarées."
+        )
+    if "position: static" not in re.sub(r"\s+", " ", application):
+        raise Echec(
+            "la règle du panneau doit aussi passer `.adventure-hero-art` en `position: static`, "
+            "sinon l'image reste une image de fond plein cadre."
+        )
+
+    html = (RACINE / HEROS_MONDES["page"]).read_text(encoding="utf-8")
+    if 'sizes="100vw"' not in html:
+        raise Echec(
+            "Le héros des mondes ne déclare plus `sizes=\"100vw\"` : une valeur inférieure "
+            "à la largeur réelle ferait choisir une variante trop petite, donc un agrandissement."
+        )
+    largeurs = largeurs_servies(html, HEROS_MONDES["motif_srcset"])
+    if not largeurs:
+        raise Echec("aucune largeur de srcset trouvée pour l'illustration des mondes")
+    servie = max(largeurs)
+
+    # Une variante plus large que le srcset ne sert à rien : le navigateur ne la
+    # verra jamais. Ce contrôle se déclenche le jour où un master plus large est
+    # déposé — il rappelle qu'il faut alors compléter les `srcset` et relever les
+    # largeurs de panneau, au lieu de croire la netteté réglée.
+    nom_base = Path(HEROS_MONDES["motif_srcset"]).name
+    sur_disque = sorted(
+        largeur
+        for fichier in (RACINE / "assets" / "images").glob(f"{nom_base}-*.avif")
+        if (trouve := re.fullmatch(rf"{re.escape(nom_base)}-(\d+)\.avif", fichier.name))
+        and (largeur := int(trouve.group(1)))
+    )
+    if sur_disque and sur_disque[-1] > servie:
+        raise Echec(
+            f"une variante {sur_disque[-1]}px existe sur le disque mais les `srcset` s'arrêtent à "
+            f"{servie}px : elle ne sera jamais servie. Ajouter les largeurs manquantes aux `srcset` "
+            "de anglais-aventure.html et apprendre.html, puis relever les largeurs de panneau dans "
+            "outils/verifier-budgets-visuels.py."
+        )
+
+    def verifier_palier(largeur: int, densite: float, panneau_max: int | None, contexte: str) -> float:
+        requise = source_requise(largeur, densite, panneau_max)
+        if requise > servie:
+            raise Echec(
+                f"{contexte} {largeur}px à {densite}× : {requise:.0f}px de source nécessaires pour "
+                f"{servie}px disponibles — l'image serait agrandie {requise / servie:.2f}×, donc "
+                "visiblement floue. Réduire la largeur d'affichage, ou fournir un master plus large."
+            )
+        return requise / servie
+
+    facteurs: list[tuple[str, float]] = []
+    for largeur, densite in HEROS_MONDES["paliers_mobiles"]:
+        # Bandeau au ratio naturel : l'image occupe toute la largeur, donc la
+        # source requise vaut la largeur de l'écran en pixels d'appareil.
+        facteurs.append(
+            (f"{largeur}px×{densite}", verifier_palier(largeur, densite, largeur, "téléphone"))
+        )
+
+    for largeur, densite in HEROS_MONDES["paliers_larges"]:
+        panneau_max: int | None = None
+        if densite >= 2:
+            panneau_max = HEROS_MONDES["panneau_dense"]
+        elif largeur >= HEROS_MONDES["seuil_panneau_un_x"]:
+            panneau_max = HEROS_MONDES["panneau_un_x"]
+        contexte = "panneau" if panneau_max is not None else "plein cadre"
+        facteurs.append(
+            (f"{largeur}px×{densite} {contexte}", verifier_palier(largeur, densite, panneau_max, contexte))
+        )
+
+    pire = max(facteurs, key=lambda item: item[1])
+    return [
+        "OK     Héros des mondes : aucun agrandissement sur les "
+        f"{len(facteurs)} combinaisons écran × densité testées, de 320 px à 3× à 2 560 px à 1×. "
+        f"Plus grande source requise : {pire[1] * servie:.0f}px pour {servie}px servis ({pire[0]}).",
+        "       Bandeau au ratio naturel sous 700 px, panneau contenu à 2× et au-delà de "
+        f"{HEROS_MONDES['seuil_panneau_un_x']} px en 1×, plein cadre ailleurs. "
+        "Un master plus large permettra de relever les largeurs de panneau sans toucher au code.",
+    ]
+
+
 def main() -> int:
     css = lire_css()
     try:
         lignes = verifier_titres(titres_des_pages())
         lignes += verifier_h1_accueil(css)
         lignes += verifier_modes(css)
+        lignes += verifier_heros_mondes(css)
     except Echec as erreur:
         print(f"ÉCHEC — {erreur}", file=sys.stderr)
         return 1
