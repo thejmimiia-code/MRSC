@@ -287,9 +287,12 @@ def verifier_avancees(verificateur: Verificateur) -> None:
         module = importlib.util.module_from_spec(specification)
         specification.loader.exec_module(module)
         registre = module.charger()
-        aujourdhui = dt.date.today()
-        erreurs = module.valider(registre, aujourdhui)
-        attendu = module.construire(registre, aujourdhui)
+        # La traçabilité se juge au jour réel (une date future est une erreur) ;
+        # la sortie comparée au fichier commité est horodatée depuis le registre,
+        # exactement comme le fait le générateur. Sinon cette porte échoue le
+        # lendemain d'une régénération, sans qu'aucun contenu ait changé.
+        erreurs = module.valider(registre, dt.date.today())
+        attendu = module.construire(registre, module.date_de_reference(registre))
         chiffres = module.resumer(registre)
     except Exception as erreur:  # noqa: BLE001 - un générateur cassé doit être signalé, pas masqué
         verificateur.verifier("Registre des avancées présent et régénérable", False, str(erreur))
@@ -357,9 +360,10 @@ def verifier_audit_automatique(verificateur: Verificateur) -> None:
         module = importlib.util.module_from_spec(specification)
         specification.loader.exec_module(module)
         fiches, titres, references = module.charger()
-        aujourdhui = dt.date.today()
-        audits = module.auditer(fiches, references, aujourdhui)
-        attendu = module.construire(audits, titres, aujourdhui)
+        # Même règle que pour les avancées : l'analyse au jour réel, l'horodatage
+        # de la sortie comparée au fichier commité depuis le catalogue.
+        audits = module.auditer(fiches, references, dt.date.today())
+        attendu = module.construire(audits, titres, module.date_de_reference(fiches))
         chiffres = module.resume(audits)
     except Exception as erreur:  # noqa: BLE001 - un générateur cassé doit être signalé, pas masqué
         verificateur.verifier("Audit automatique présent et régénérable", False, str(erreur))

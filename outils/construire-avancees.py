@@ -108,7 +108,28 @@ def resumer(registre: dict) -> dict[str, object]:
     }
 
 
-def construire(registre: dict, aujourdhui: date) -> str:
+def date_de_reference(registre: dict) -> date:
+    """Date qui horodate la sortie : elle vient du registre, jamais de l'horloge.
+
+    Une sortie commitée puis comparée octet par octet par une porte CI ne doit
+    pas dépendre du jour où on la régénère, sinon la porte échoue le lendemain
+    sans qu'aucun contenu ait changé. La référence est la dernière revue
+    consignée par le registre lui-même.
+    """
+    meta = registre.get("meta")
+    revue = meta.get("derniere_revue") if isinstance(meta, dict) else None
+    if isinstance(revue, date):
+        return revue
+    derniere = resumer(registre)["derniere"]
+    if isinstance(derniere, date):
+        return derniere
+    raise ValueError(
+        "aucune date exploitable dans le registre : renseigner `meta.derniere_revue` "
+        "ou la date d'une avancée pour horodater la sortie"
+    )
+
+
+def construire(registre: dict, reference: date) -> str:
     chiffres = resumer(registre)
     lignes: list[str] = [
         "# Avancées réutilisables de la R&D",
@@ -121,7 +142,8 @@ def construire(registre: dict, aujourdhui: date) -> str:
         "Chaque entrée dit aussi ce qu'elle ne prouve pas, pour qu'une avancée ne se transforme pas en argument "
         "d'autorité.",
         "",
-        f"**Date de génération :** {aujourdhui.isoformat()}.",
+        f"**Date du registre :** {reference.isoformat()} — dernière revue consignée dans `avancees.toml`. "
+        "Cette sortie ne dépend pas du jour où elle est régénérée.",
         "",
         "## 1. Vue d'ensemble",
         "",
@@ -141,7 +163,7 @@ def construire(registre: dict, aujourdhui: date) -> str:
     lignes.append("")
     lignes.append("## 2. Les avancées")
     lignes.append("")
-    for avancee in sorted(registre.get("avancee", []), key=lambda a: (a.get("date") or aujourdhui, a.get("id", ""))):
+    for avancee in sorted(registre.get("avancee", []), key=lambda a: (a.get("date") or reference, a.get("id", ""))):
         lignes.append(f"### `{avancee['id']}` — {avancee['titre']}")
         lignes.append("")
         lignes.append(f"*Consignée le {avancee['date'].isoformat()}.*")
@@ -194,6 +216,9 @@ def main() -> int:
         print(f"Registre des avancées illisible : {erreur}", file=sys.stderr)
         return 2
 
+    # La validation juge les dates au jour réel : une avancée datée dans le
+    # futur est une erreur. La sortie, elle, est horodatée depuis le registre,
+    # pour rester identique quel que soit le jour où on la régénère.
     aujourdhui = date.today()
     erreurs = valider(registre, aujourdhui)
     if erreurs:
@@ -202,7 +227,13 @@ def main() -> int:
             print(f"  - {erreur}", file=sys.stderr)
         return 1
 
-    contenu = construire(registre, aujourdhui)
+    try:
+        reference = date_de_reference(registre)
+    except ValueError as erreur:
+        print(f"Registre sans date exploitable : {erreur}", file=sys.stderr)
+        return 2
+
+    contenu = construire(registre, reference)
     sortie = arguments.sortie if arguments.sortie.is_absolute() else RACINE / arguments.sortie
     nom = str(sortie.relative_to(RACINE)) if sortie.is_relative_to(RACINE) else str(sortie)
     if arguments.verifier:

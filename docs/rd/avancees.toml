@@ -177,4 +177,20 @@ limite = "Une carte de sujet et une fiche prototype conforme aux contrôles méc
 suite = "Faire relire `info-objet-connecte-local-distant` et décider, à partir de `docs/rd/sujet-securite-sciences.md`, s'il faut rédiger un premier prototype sur la lecture complète d'une étiquette CLP."
 initiatives = ["cartographier-les-lacunes", "relire-les-44-prototypes"]
 
-
+[[avancee]]
+id = "sortie-commitee-sans-horloge"
+date = 2026-10-22
+titre = "Une sortie commitée ne se date pas avec l'horloge"
+constat = "Deux fichiers générés et commités portaient la date du jour de leur génération. Comparés octet par octet par une porte CI, ils divergeaient dès le lendemain sans qu'aucun contenu ait changé : la porte « qualite » et la publication du site échouaient, et régénérer réparait le jour même en re-cassant le suivant."
+changement = "L'horodatage des sorties vient désormais des registres — `meta.derniere_revue` pour les avancées, la plus récente `revue_le` du catalogue pour l'audit — et non de `date.today()`. La validation, elle, continue de juger les dates au jour réel. Un contrôle rejoue toutes les portes CI qui comparent un fichier généré avec une horloge déplacée de +37 et +400 jours, et prouve par mutation qu'il détecte bien un générateur fautif."
+preuves = [
+  "outils/construire-avancees.py",
+  "outils/auditer-prototypes.py",
+  "outils/test_reproductibilite_artefacts.py",
+  "docs/rd/avancees.md",
+  "docs/apprentissage/audit-automatique.md",
+]
+controle = "python3 outils/test_reproductibilite_artefacts.py && python3 outils/verifier-rd-continue.py"
+limite = "Le contrôle prouve qu'une sortie est stable, jamais qu'une date est juste : la véracité d'une date de revue reste une relecture humaine. Il ne couvre pas non plus les scripts d'un futur lot, ni les rapports non commités de la veille, qui restent hors du périmètre comparé."
+suite = "Étendre la règle au prochain générateur ajouté : si sa sortie est commitée puis comparée, son horodatage doit venir d'une donnée du dépôt et une entrée doit être ajoutée aux portes rejouées."
+initiatives = ["optimisation-du-site", "coordination-de-tous-les-agents"]

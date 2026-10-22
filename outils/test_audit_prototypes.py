@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import copy
 import importlib.util
+import re
 import sys
 import unittest
 from datetime import date
@@ -248,9 +249,31 @@ class DocumentGenere(unittest.TestCase):
         audits = MODULE.auditer(fiches, references, date.today())
         self.assertTrue(audits, "aucun prototype audité")
         self.assertEqual(len({audit["fiche"]["id"] for audit in audits}), len(audits), "fiche auditée deux fois")
-        contenu = MODULE.construire(audits, titres, date.today())
+        contenu = MODULE.construire(audits, titres, MODULE.date_de_reference(fiches))
         self.assertIn("Ce qu'aucun script ne peut faire", contenu)
         self.assertIn("ni une relecture, ni une validation", contenu)
+
+    def test_l_horodatage_vient_du_catalogue_et_non_du_jour(self):
+        """La sortie commitée ne doit pas bouger quand le calendrier avance.
+
+        Une porte CI compare ce fichier octet par octet : si l'horodatage venait
+        du jour d'exécution, la porte échouerait le lendemain sans qu'aucun
+        contenu ait changé. L'analyse, elle, reste menée au jour réel.
+        """
+        fiches, titres, references = MODULE.charger()
+        reference = MODULE.date_de_reference(fiches)
+        audits = MODULE.auditer(fiches, references, date.today())
+        ligne_horodatage = MODULE.construire(audits, titres, reference).splitlines()[8]
+        self.assertTrue(ligne_horodatage.startswith(f"**Date de référence :** {reference.isoformat()}"))
+        self.assertEqual(re.findall(r"\d{4}-\d{2}-\d{2}", ligne_horodatage), [reference.isoformat()])
+        # Le compteur d'échéances suit la même règle : il est figé sur la
+        # référence passée, pas sur le jour réel. Preuve que c'est bien ce
+        # paramètre qui le pilote — avec une référence lointaine, des revues
+        # deviennent dues, alors qu'aujourd'hui aucune ne l'est.
+        ligne_echeance = "| Fiches dont la revue de contenu est échue à la date de référence | 0 |"
+        self.assertIn(ligne_echeance, MODULE.construire(audits, titres, reference))
+        lointaine = MODULE.construire(audits, titres, reference.replace(year=reference.year + 2))
+        self.assertNotIn(ligne_echeance, lointaine)
 
     def test_le_document_ne_pretend_jamais_une_validation(self):
         fiches, titres, references = MODULE.charger()

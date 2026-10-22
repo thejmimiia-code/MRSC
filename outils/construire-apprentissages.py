@@ -993,7 +993,7 @@ def render_rapport(fiches: list[dict], domains: list[dict]) -> str:
 def valider_plan_1000(plan: dict, fiches: list[dict], domains: list[dict]) -> None:
     erreurs: list[str] = []
     date_plan = plan.get("date_plan")
-    if type(date_plan) is not date:
+    if not isinstance(date_plan, date):
         erreurs.append("date_plan doit être une date éditoriale explicite dans le TOML")
     elif date_plan > date.today():
         erreurs.append("date_plan ne peut pas se trouver dans le futur")
@@ -1091,7 +1091,10 @@ def valider_plan_1000(plan: dict, fiches: list[dict], domains: list[dict]) -> No
 def render_plan_1000(plan: dict, fiches: list[dict], domains: list[dict]) -> str:
     objectif = plan["objectif_fiches"]
     date_plan = plan.get("date_plan")
-    date_plan_libelle = date_plan.isoformat() if type(date_plan) is date else "date à définir"
+    # isinstance et non `type(...) is date` : un contrôle d'identité exacte
+    # rendrait ce générateur impossible à tester sous horloge déplacée, et il
+    # n'apporte rien ici — tomllib ne produit que de vraies dates.
+    date_plan_libelle = date_plan.isoformat() if isinstance(date_plan, date) else "date à définir"
     objectif_libelle = f"{objectif:,}".replace(",", " ")
     total = len(fiches)
     prototypes = sum(1 for fiche in fiches if est_prototype(fiche))

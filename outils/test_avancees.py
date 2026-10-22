@@ -11,10 +11,11 @@ from __future__ import annotations
 
 import copy
 import importlib.util
+import re
 import sys
 import tempfile
 import unittest
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
@@ -118,15 +119,34 @@ class LeDocumentNeCertifieRien(unittest.TestCase):
     def test_le_registre_reel_du_depot_est_traçable(self):
         registre = MODULE.charger()
         self.assertEqual(MODULE.valider(registre, date.today()), [])
-        contenu = MODULE.construire(registre, date.today())
+        contenu = MODULE.construire(registre, MODULE.date_de_reference(registre))
         self.assertIn("ne certifie rien", contenu)
         self.assertIn("## 2. Les avancées", contenu)
 
     def test_fichier_du_depot_synchronise(self):
         registre = MODULE.charger()
-        attendu = MODULE.construire(registre, date.today())
+        attendu = MODULE.construire(registre, MODULE.date_de_reference(registre))
         actuel = (RACINE / "docs" / "rd" / "avancees.md").read_text(encoding="utf-8")
         self.assertEqual(actuel, attendu, "régénérer avec python3 outils/construire-avancees.py")
+
+    def test_l_horodatage_vient_du_registre_et_non_du_jour(self):
+        """La sortie ne doit pas bouger quand le calendrier avance.
+
+        Sans cette règle, la porte CI qui compare le fichier commité octet par
+        octet échoue le lendemain d'une régénération, alors qu'aucun contenu n'a
+        changé — c'est exactement la panne qui a bloqué la publication du site.
+        """
+        registre = MODULE.charger()
+        reference = MODULE.date_de_reference(registre)
+        self.assertEqual(reference, registre["meta"]["derniere_revue"])
+        ligne_horodatage = MODULE.construire(registre, reference).splitlines()[6]
+        self.assertTrue(ligne_horodatage.startswith(f"**Date du registre :** {reference.isoformat()}"))
+        # Toute autre date sur cette ligne serait un calendrier qui s'y glisse.
+        dates = re.findall(r"\d{4}-\d{2}-\d{2}", ligne_horodatage)
+        self.assertEqual(dates, [reference.isoformat()])
+        for decalage in (1, 37, 400):
+            decalee = (reference + timedelta(days=decalage)).isoformat()
+            self.assertNotIn(decalee, ligne_horodatage)
 
     def test_sortie_hors_depot(self):
         with tempfile.TemporaryDirectory() as dossier:

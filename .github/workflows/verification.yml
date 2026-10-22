@@ -115,3 +115,15 @@ jobs:
 
       - name: Vérifier l’intégration des routes et du site
         run: python3 outils/verifier-integration.py
+
+      # Nés de la panne du 22 octobre 2026 : deux sorties commitées portaient la
+      # date du jour de leur génération et faisaient échouer cette porte, puis la
+      # publication du site, dès le lendemain. Le premier contrôle rejoue toutes
+      # les portes qui comparent un fichier généré avec une horloge déplacée de
+      # +37 et +400 jours ; le second mesure ce qu’aucun test ne voyait — la
+      # longueur des titres de page et le rendu étroit du H1 de l’accueil.
+      - name: Vérifier la reproductibilité des sorties générées
+        run: python3 outils/test_reproductibilite_artefacts.py
+
+      - name: Vérifier les budgets d’affichage des titres et du H1
+        run: python3 outils/verifier-budgets-visuels.py

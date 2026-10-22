@@ -6,7 +6,7 @@
 
 **Trois états, pas deux.** Un contrôle est `ok`, `à corriger` — le fait est faux et réparable sans jugement — ou `constat` : la machine voit un fait exact, mais elle ne peut pas dire s'il est acceptable. Un constat n'est pas un défaut : il se nomme ici pour qu'une personne tranche, et il n'empêche pas la page publique de dire la vérité, à condition qu'elle le dise.
 
-**Date de l'audit :** 2026-10-22.
+**Date de référence :** 2026-10-20 — dernière revue de contenu consignée au catalogue. Les contrôles, eux, sont exécutés au jour de lancement ; cette sortie ne dépend pas de ce jour.
 
 ## 1. État d'ensemble
 
@@ -38,7 +38,7 @@ Pour la ligne « page précise » : ces fiches ne citent que des portails (racin
 | dont licence déclarée « non vérifiée » | 109 |
 | Fiches sans aucune source | 0 |
 | Prochaine revue la plus proche | 2027-01-09 (info-lire-adresse-web) |
-| Fiches dont la revue de contenu est échue | 0 |
+| Fiches dont la revue de contenu est échue à la date de référence | 0 |
 
 Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **déjà fait** et ce qui **reste à faire par une personne** : ouvrir les sources, vérifier les exemples, trancher les droits, éprouver l'analogie et l'usage réel.
 

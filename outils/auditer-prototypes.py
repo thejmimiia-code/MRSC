@@ -390,7 +390,28 @@ def resume(audits: list[dict]) -> dict[str, int]:
     }
 
 
-def construire(audits: list[dict], titres: dict[str, str], aujourdhui: date) -> str:
+def date_de_reference(fiches: list[dict]) -> date:
+    """Date qui horodate la sortie : la dernière revue consignée au catalogue.
+
+    L'analyse, elle, reste menée au jour réel (`auditer()` reçoit `date.today()`) :
+    repérer une date de revue ou de droits postérieure à aujourd'hui est un
+    contrôle utile. Mais la sortie est commitée puis comparée octet par octet par
+    une porte CI ; si elle dépendait du jour d'exécution, la porte échouerait le
+    lendemain sans qu'aucun contenu ait changé.
+    """
+    revues: list[date] = []
+    for fiche in fiches:
+        brute = fiche.get("revue_le")
+        try:
+            revues.append(brute if isinstance(brute, date) else date.fromisoformat(str(brute)))
+        except (TypeError, ValueError):
+            continue
+    if not revues:
+        raise ValueError("aucune date de revue exploitable dans le catalogue pour horodater la sortie")
+    return max(revues)
+
+
+def construire(audits: list[dict], titres: dict[str, str], reference: date) -> str:
     chiffres = resume(audits)
     lignes: list[str] = [
         "# Audit automatique des prototypes",
@@ -409,7 +430,8 @@ def construire(audits: list[dict], titres: dict[str, str], aujourdhui: date) -> 
         "acceptable. Un constat n'est pas un défaut : il se nomme ici pour qu'une personne tranche, et il "
         "n'empêche pas la page publique de dire la vérité, à condition qu'elle le dise.",
         "",
-        f"**Date de l'audit :** {aujourdhui.isoformat()}.",
+        f"**Date de référence :** {reference.isoformat()} — dernière revue de contenu consignée au catalogue. "
+        "Les contrôles, eux, sont exécutés au jour de lancement ; cette sortie ne dépend pas de ce jour.",
         "",
         "## 1. État d'ensemble",
         "",
@@ -490,7 +512,7 @@ def construire(audits: list[dict], titres: dict[str, str], aujourdhui: date) -> 
     lignes.append(ligne(["Fiches sans aucune source", str(len(fiches_sans_source))]))
     if echeances:
         lignes.append(ligne(["Prochaine revue la plus proche", f"{echeances[0][0].isoformat()} ({echeances[0][1]})"]))
-        lignes.append(ligne(["Fiches dont la revue de contenu est échue", str(sum(1 for echeance, _ in echeances if echeance < aujourdhui))]))
+        lignes.append(ligne(["Fiches dont la revue de contenu est échue à la date de référence", str(sum(1 for echeance, _ in echeances if echeance < reference))]))
     lignes.append("")
     lignes.append(
         "Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **déjà fait** et ce qui "
@@ -577,7 +599,15 @@ def main() -> int:
         print(f"\nReste à trancher par une personne : {len(HUMAIN_ONLY)} questions (voir l'audit complet).")
         return 0
 
-    contenu = construire(audits, titres, aujourdhui)
+    # L'analyse ci-dessus est menée au jour réel ; la sortie écrite dans le dépôt
+    # est horodatée depuis le catalogue, pour rester reproductible.
+    try:
+        reference = date_de_reference(fiches)
+    except ValueError as erreur:
+        print(f"Catalogue sans date de référence : {erreur}", file=sys.stderr)
+        return 2
+
+    contenu = construire(audits, titres, reference)
     sortie = analysis.sortie if analysis.sortie.is_absolute() else RACINE / analysis.sortie
     # Une sortie écrite hors du dépôt (--sortie /tmp/…) reste un cas normal.
     nom_sortie = str(sortie.relative_to(RACINE)) if sortie.is_relative_to(RACINE) else str(sortie)
