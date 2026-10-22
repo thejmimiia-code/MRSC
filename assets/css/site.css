@@ -351,7 +351,7 @@ html.contraste-renforce .site-status-note {
 
 .brand-kicker {
   color: var(--green);
-  font-size: .72rem;
+  font-size: .75rem;
   font-weight: 800;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -450,10 +450,10 @@ html.contraste-renforce .site-status-note {
   flex: 0 0 auto;
   width: auto;
   max-width: none;
-  min-height: 0;
+  min-height: 24px;
   height: auto;
   padding: .2rem .55rem;
-  font-size: .72rem;
+  font-size: .75rem;
   line-height: 1.15;
   justify-content: center;
   box-sizing: border-box;
@@ -567,6 +567,7 @@ html.contraste-renforce .site-status-note {
 .nav-links a {
   position: relative;
   display: inline-flex;
+  min-height: 24px;
   flex: 0 0 auto;
   align-items: center;
   min-height: 54px;
@@ -836,6 +837,7 @@ html.contraste-renforce .site-status-note {
 .statute-link {
   display: inline-flex;
   align-items: center;
+  min-height: 24px;
   gap: .35rem;
   font-size: .9rem;
   font-weight: 700;
@@ -1402,7 +1404,7 @@ html.contraste-renforce .resource-scope-note {
   }
 
   .map-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .map-info {
@@ -1460,7 +1462,7 @@ html.contraste-renforce .resource-scope-note {
   }
 
   .brand-kicker {
-    font-size: .62rem;
+    font-size: .75rem;
   }
 
   .nav-inner {
@@ -1532,7 +1534,7 @@ html.contraste-renforce .resource-scope-note {
   .mission-grid,
   .participation-grid,
   .contact-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .hero-grid {
@@ -1556,7 +1558,7 @@ html.contraste-renforce .resource-scope-note {
   }
 
   .join-panel {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: .2rem;
   }
 
@@ -1566,7 +1568,7 @@ html.contraste-renforce .resource-scope-note {
   }
 
   .document-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .document-card {
@@ -1627,7 +1629,7 @@ html.contraste-renforce .resource-scope-note {
 
   .brand-tagline {
     max-width: 225px;
-    font-size: .7rem;
+    font-size: .75rem;
   }
 
   .brand-kicker {
@@ -1660,11 +1662,11 @@ html.contraste-renforce .resource-scope-note {
   }
 
   .link-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .footer-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.6rem;
   }
 
@@ -1993,7 +1995,7 @@ html.contraste-renforce .resource-scope-note {
 .ai-constellation-core small {
   margin-top: .5rem;
   color: var(--text-soft-8);
-  font-size: .67rem;
+  font-size: .75rem;
   font-weight: 700;
   line-height: 1.25;
 }
@@ -2184,7 +2186,7 @@ html.contraste-renforce .resource-scope-note {
   border-radius: 7px;
   background: var(--blue-soft);
   color: var(--text-soft-10);
-  font-size: .74rem;
+  font-size: .75rem;
   font-weight: 700;
 }
 
@@ -2290,7 +2292,7 @@ html.contraste-renforce .resource-scope-note {
   display: block;
   margin-bottom: .7rem;
   color: var(--blue);
-  font-size: .72rem;
+  font-size: .75rem;
   font-weight: 830;
   letter-spacing: .1em;
 }
@@ -2493,7 +2495,7 @@ html.contraste-renforce .resource-scope-note {
   }
 
   .ai-path-panel {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -2502,7 +2504,7 @@ html.contraste-renforce .resource-scope-note {
   .ai-hero-grid,
   .ai-questions-layout,
   .ai-cta-panel {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .ai-feature-panel {
@@ -2526,7 +2528,7 @@ html.contraste-renforce .resource-scope-note {
   }
 
   .ai-balance-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .ai-lives-grid {
@@ -2549,7 +2551,7 @@ html.contraste-renforce .resource-scope-note {
 
   .ai-feature-node {
     padding: .36rem .52rem;
-    font-size: .7rem;
+    font-size: .75rem;
   }
 
   .ai-feature-core {
@@ -2584,21 +2586,21 @@ html.contraste-renforce .resource-scope-note {
   }
 
   .ai-constellation-core small {
-    font-size: .59rem;
+    font-size: .75rem;
   }
 
   .ai-node {
     padding: .36rem .52rem;
-    font-size: .7rem;
+    font-size: .75rem;
   }
 
-  .ai-node-info { left: 17%; }
-  .ai-node-services { left: 83%; }
+  .ai-node-info { left: 23%; }
+  .ai-node-services { left: 77%; }
 
   .ai-metric-grid,
   .ai-forms-grid,
   .ai-lives-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .ai-metric-card {
@@ -2689,7 +2691,7 @@ html.contraste-renforce .resource-scope-note {
 .trace-panel h2 { font-size: clamp(1.4rem, 2.5vw, 1.9rem); }
 .trace-list { display: grid; gap: .8rem; margin: 1rem 0 0; padding-left: 1.2rem; font-size: .9rem; color: var(--muted); }
 .trace-list li::marker { color: var(--green); }
-.trace-tag { display: inline-block; padding: .15rem .5rem; border-radius: 6px; background: var(--blue-soft); color: var(--navy-ink); font-size: .73rem; font-weight: 750; }
+.trace-tag { display: inline-block; padding: .15rem .5rem; border-radius: 6px; background: var(--blue-soft); color: var(--navy-ink); font-size: .75rem; font-weight: 750; }
 .trace-tag-original { background: var(--tint-green-2); color: var(--green-ink); }
 /* Simulateur macro-politique — page d'intégration et encart d'accueil */
 .simulateur-intro {
@@ -3200,10 +3202,10 @@ html.has-js .site-header.is-compact :is(.display-settings, .site-journey-setting
 html.has-js .site-header.is-compact .nav-toggle,
 html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
 html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
-  min-height: 0;
+  min-height: 24px;
   height: auto;
   padding: .2rem .55rem;
-  font-size: .72rem;
+  font-size: .75rem;
   line-height: 1.15;
   flex: 0 0 auto;
   width: auto;
@@ -3272,12 +3274,17 @@ html.has-js .site-header.is-compact .header-compact-brand img {
     margin: 0;
     vertical-align: middle;
   }
+  /* En-tête compact : les commandes gardaient 20 px de haut et 10,9 px de
+     texte, alors que le mode « Compacte » promet explicitement de ne réduire
+     « ni la taille du texte, ni celle des zones tactiles ». 24 px est le
+     minimum de la cible tactile (WCAG 2.2, 2.5.8) et 12 px le plancher de
+     lisibilité tenu par le reste de la feuille. */
   html.has-js .site-header.is-compact .nav-toggle,
   html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
   html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
-    min-height: 0;
-    padding: .14rem .42rem;
-    font-size: .68rem;
+    min-height: 24px;
+    padding: .2rem .5rem;
+    font-size: .75rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3365,7 +3372,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .learning-lesson-meta { display:flex; flex-wrap:wrap; gap:.35rem; margin-bottom:.35rem; }
 .learning-lesson-meta span {
   display:inline-block; padding:.2rem .45rem; border-radius:999px; background:var(--tint-blue-8);
-  color:var(--text-soft-14); font-size:.72rem; font-weight:700; line-height:1.4;
+  color:var(--text-soft-14); font-size: .75rem; font-weight:700; line-height:1.4;
 }
 .learning-card-analogy { margin-top:auto; padding-top:.5rem; color:var(--text-soft-15); font-size:.87rem; }
 .learning-card-link { align-self:flex-start; font-weight:750; }
@@ -3567,7 +3574,7 @@ html.contraste-renforce :is(.learning-analogy,.learning-coverage-topic,.learning
 @media (max-width: 520px) {
   .learning-catalogue-card { min-height:0; }
   .learning-lesson-meta { gap:.25rem; }
-  .learning-lesson-meta span { font-size:.68rem; }
+  .learning-lesson-meta span { font-size: .75rem; }
 }
 @media (forced-colors: active) {
   .learning-analogy,.learning-example,.learning-lesson-aside,.learning-sources,.learning-catalogue-card,.learning-level-card,.learning-coverage-topic,.learning-coverage-domain,.learning-answer,.learning-filters,.learning-ecosystem-card,.learning-code-sample {
@@ -3605,7 +3612,7 @@ html.contraste-renforce :is(.privacy-summary,.privacy-review-note) { border-colo
 .ai-fraud-card { padding:1.25rem; border:1px solid var(--line); border-radius:16px; background:var(--surface); box-shadow:0 8px 26px rgba(26,48,91,.045); }
 .ai-fraud-card h3 { margin-block:.4rem .55rem; font-size:1.12rem; }
 .ai-fraud-card p { margin:0; color:var(--text-soft-2); font-size:.94rem; }
-.ai-fraud-label { color:var(--green); font-size:.72rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.ai-fraud-label { color:var(--green); font-size: .75rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
 .ai-fraud-response { padding:clamp(1.3rem,4vw,2.2rem); border:1px solid var(--border-soft-4); border-radius:22px; background:var(--surface); }
 .ai-fraud-response > div:first-child h3 { max-width:34ch; font-size:clamp(1.35rem,2.8vw,1.9rem); }
 .ai-fraud-steps { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.85rem; margin:1.25rem 0; padding:0; list-style:none; counter-reset:reflexe; }
@@ -3682,6 +3689,9 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-hero-visual {
   position: relative;
   z-index: 1;
+  /* Les mises en page larges (Compacte, Panorama) portent le conteneur à
+     1 480 px : l'illustration de 1 400 px y était étirée de 1,06×. */
+  max-width: min(100%, 1400px);
   margin: 0 0 clamp(1.4rem, 3vw, 2.2rem);
   overflow: hidden;
   border: 1px solid var(--border-blue-soft);
@@ -3756,7 +3766,7 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
   border-radius: 9px;
   background: var(--blue-soft);
   color: var(--navy-ink);
-  font-size: .72rem;
+  font-size: .75rem;
   font-weight: 800;
 }
 .home-entry-list strong,.home-entry-list small { display: block; }
@@ -3787,13 +3797,14 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-action-debate { --home-card-accent: var(--blue); --home-card-kicker: var(--blue); }
 .home-action-simulator { --home-card-accent: var(--gold); --home-card-kicker: var(--gold-ink); }
 .home-action-information { --home-card-accent: var(--red); --home-card-kicker: var(--red-ink); }
-.home-action-kicker { margin-bottom: .55rem; color: var(--home-card-kicker,var(--ink)); font-size: .73rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.home-action-kicker { margin-bottom: .55rem; color: var(--home-card-kicker,var(--ink)); font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .home-action-card h3 { margin-bottom: .65rem; font-size: clamp(1.15rem,2vw,1.4rem); }
 .home-action-card > p:not(.home-action-kicker) { color: var(--text-soft-2); font-size: .94rem; }
 .home-action-card .home-action-note { display: inline-block; align-self: flex-start; margin-top: .1rem; padding: .28rem .55rem; border-radius: 6px; background: var(--paper); color: var(--navy-ink); font-size: .76rem; font-weight: 650; }
 .home-action-link {
   display: flex;
   align-items: center;
+  min-height: 24px;
   justify-content: space-between;
   gap: .7rem;
   margin-top: auto;
@@ -3899,6 +3910,15 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
 .english-promo-copy h2 { max-width: 22ch; font-size: clamp(1.65rem, 3.2vw, 2.35rem); }
 .english-promo-copy > p:not(.eyebrow) { max-width: 68ch; color: var(--text-soft); }
 .english-promo-art { min-width: 0; margin: 0; }
+/* La déclaration `sizes` de cette illustration annonce 520 px au-delà de
+   760 px, mais les mises en page Lecture, Mosaïque, Panorama et Compacte
+   élargissent la colonne : l'image montait à 874 px et le navigateur, trompé
+   par la déclaration, servait une variante de 1 200 px — 1,46× d'agrandissement.
+   Le plafond rend la déclaration vraie dans toutes les présentations. */
+@media (min-width: 761px) {
+  .english-promo-art { width: min(100%, 520px); }
+  .english-promo-panel { justify-items: start; }
+}
 .english-promo-art img { width: 100%; aspect-ratio: 16 / 10; border-radius: 15px; object-fit: cover; object-position: 66% center; }
 .english-promo-art figcaption { margin-top: .5rem; color: var(--muted); font-size: .76rem; line-height: 1.45; }
 @media (max-width: 760px) {
@@ -4237,6 +4257,128 @@ html[data-layout="compacte"] main :is(
     box-shadow: none !important;
   }
 }
+}
+
+/* ---------------------------------------------------------------------------
+   Formats d'affichage : mesure de lecture, tokens insécables, cibles tactiles
+   et plafonds d'image par densité.
+
+   Ces règles viennent après les variantes de mise en page pour s'appliquer quel
+   que soit le mode choisi (Panorama, Vitrine, Mosaïque, Compacte, Lecture) et
+   quelle que soit la taille de texte réglée.
+   --------------------------------------------------------------------------- */
+
+/* Mesure de lecture. Sur un écran large, un paragraphe pleine largeur montait à
+   150 caractères par ligne, très au-delà des 45 à 75 qui se lisent d'un trait.
+   `ch` suit la taille de police : le plafond reste juste quand le texte est
+   agrandi. Les blocs déjà plus étroits ne changent pas. */
+main .container p { max-width: 72ch; }
+
+/* Tokens insécables. Une adresse web ou un identifiant long ne se coupe pas :
+   il élargissait sa piste de grille et faisait défiler la page entière à
+   280 px. `anywhere` autorise la césure et, surtout, entre dans le calcul de la
+   largeur minimale, ce que `break-word` ne fait pas. */
+main { overflow-wrap: break-word; }
+main :is(code, kbd, samp, .resource-link > span, .erreur-liens a, .trace-list a) {
+  overflow-wrap: anywhere;
+}
+main :is(.trace-list li, .erreur-liens li, .resource-entry, .resource-link) { min-width: 0; }
+.table-scroll { min-width: 0; }
+
+/* Boutons pleine largeur : sous 420 px, un intitulé en `nowrap` débordait de la
+   page plutôt que de passer à la ligne. */
+@media (max-width: 420px) {
+  .home-join-actions .button, .hero-actions .button { white-space: normal; }
+}
+
+/* Bouton plus large que sa carte. Dans la colonne étroite de « mission », la
+   carte fait 260 px et l'intitulé « Voir notre méthode de R&D » en `nowrap`
+   268 px : les 8 derniers pixels étaient rognés par l'`overflow: hidden` de la
+   carte. L'intitulé passe à la ligne plutôt que d'être coupé. */
+.home-eva-status .button { max-width: 100%; white-space: normal; }
+
+/* Cible tactile d'au moins 24 px (WCAG 2.2, 2.5.8). Le contact de pied de page
+   mesurait 23,6 px de haut, et les liens de source des cartes de mesure 17 px.
+   Les liens réellement insérés dans une phrase restent hors de ce plancher :
+   WCAG les exempte, et les étirer casserait le fil du texte. */
+.identity-contact { min-height: 24px; }
+main .ai-metric-card a { min-height: 24px; }
+
+/* Plafonds d'image par densité. L'illustration d'accueil mesure 1 400 px de
+   large, le logo 234 px : affichés plus larges que leur source en pixels
+   d'appareil, ils sont agrandis par le navigateur. On plafonne donc l'affichage
+   à la source divisée par la densité. À 1×, rien ne change. */
+@media (min-resolution: 2dppx) {
+  .home-hero-visual { max-width: 700px; margin-inline: auto; }
+}
+@media (min-resolution: 2.5dppx) {
+  .home-hero-visual { max-width: 560px; }
+}
+@media (min-resolution: 3dppx) {
+  .home-hero-visual { max-width: 466px; }
+  .brand-logo, .footer-logo,
+  html.has-js .site-header.is-compact .header-compact-brand img { max-width: 78px; }
+}
+@media (min-resolution: 3.5dppx) {
+  .home-hero-visual { max-width: 400px; }
+  .brand-logo, .footer-logo,
+  html.has-js .site-header.is-compact .header-compact-brand img { max-width: 66px; }
+}
+
+/* Réglage « texte 50 % » : la taille du texte est le choix de la personne,
+   on n'y touche pas — 50 % de 16 px font 8 px, c'est la définition du réglage.
+   Les commandes, elles, gardent une cible de 24 px, comme les champs de
+   formulaire gardent déjà un plancher de 12 px plus haut dans la feuille. */
+html:is(.texte-tres-reduit,.texte-reduit) :is(button, summary, .button, .display-control, .nav-links a, .header-compact-brand) {
+  min-height: 24px;
+}
+
+/* Constellations de l'accueil du dossier IA : les pastilles sont placées en
+   pourcentage dans un cercle. Avec un texte agrandi, la pastille de gauche
+   sortait de l'écran (position -16 px à 280 px). On les rapproche du centre et
+   on borne leur largeur sous 380 px. */
+@media (max-width: 380px) {
+  .ai-node { max-width: 52%; }
+  .ai-node-info { left: 26%; }
+  .ai-node-services { left: 74%; }
+}
+
+/* Titres aux formats très étroits. Un mot de 40 px de corps (« Transparence, »)
+   mesure 301 px et ne tenait pas dans 258 px : la page entière défilait
+   latéralement. On réduit d'abord le corps, et la césure ne sert que de dernier
+   recours pour un mot plus long encore. */
+main :is(h1, h2, h3) { overflow-wrap: break-word; }
+/* Texte agrandi et en-tête compact : les commandes ne tiennent plus sur une
+   seule ligne (à 280 px, le sélecteur de présentation sortait de 35 px). Elles
+   passent à la ligne plutôt que de déborder. */
+html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .site-header .nav-inner,
+html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .site-header .header-compact-tools {
+  flex-wrap: wrap;
+  row-gap: .25rem;
+}
+
+/* Texte agrandi et formats étroits : à 150 %, une seule syllabe peut dépasser
+   la largeur disponible. `anywhere` autorise la césure ET fait entrer cette
+   césure dans le calcul de largeur minimale, sans quoi une piste de grille
+   s'élargit et la page entière défile. */
+html.has-js:is(.texte-agrandi,.texte-tres-agrandi) main,
+html:is(.texte-agrandi,.texte-tres-agrandi) main :is(h1, h2, h3, p, li, span, summary, a, strong, em, .eyebrow) {
+  overflow-wrap: anywhere;
+}
+html:is(.texte-agrandi,.texte-tres-agrandi) .eyebrow { flex-wrap: wrap; }
+html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1rem); }
+
+@media (max-width: 340px) {
+  /* La liste nomme les héros un par un : chacun de leurs sélecteurs porte une
+     classe et l'emporterait sur un `main h1` générique. */
+  main :is(h1, h2),
+  .ai-hero h1, .home-hero h1, .page-banner h1,
+  .learning-hero h1, .learning-hero-copy h1, .learning-lesson-hero h1,
+  .adventure-hero h1, .english-promo-copy h1,
+  html[data-layout="vitrine"] main h1 {
+    font-size: clamp(1.75rem, 11vw, 2.4rem);
+    letter-spacing: -.02em;
+  }
 }
 
 @media print {
