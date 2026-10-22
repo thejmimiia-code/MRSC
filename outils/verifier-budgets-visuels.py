@@ -6,7 +6,9 @@ Ce contrôle existe pour deux risques qu’aucun test du dépôt ne voyait :
   1. un `<title>` trop long, tronqué dans les résultats de recherche — le titre
      de l’accueil fait 73 caractères depuis qu’il reprend la formule du H1, et
      cette longueur a été acceptée par une personne, pas mesurée comme idéale ;
-  2. un H1 qui déborde ou s’allonge sans que personne ne le remarque à 320 px.
+  2. un H1 qui déborde ou s’allonge sans que personne ne le remarque à 320 px ;
+  3. une illustration servie dans une variante trop petite pour la place qu’elle occupe,
+     donc agrandie par le navigateur — celle des mondes l’était de 3,1× sur téléphone.
 
 Il lit les valeurs réellement écrites dans `assets/css/site.css` — plancher du
 `clamp()` de `h1`, largeur du conteneur, marge étroite, `max-width` du titre de
@@ -242,12 +244,142 @@ def verifier_modes(css: str) -> list[str]:
     ]
 
 
+# --- Héros des mondes : géométrie et netteté --------------------------------
+# Le 22 octobre 2026, l'illustration des mondes a été signalée comme pixelisée.
+# La cause n'était pas la compression (36,4 dB de PSNR) mais la géométrie : en
+# `object-fit: cover` dans une boîte de 150 à 180vw de haut, il aurait fallu une
+# source de plus de 3 700 px de large à 3×, qu'aucune variante ne fournissait.
+# Sous 700 px, le héros est donc devenu un bandeau au ratio naturel de l'image.
+HEROS_MONDES = {
+    "page": "anglais-aventure.html",
+    "motif_srcset": "assets/images/mondes-savoirs-hero",
+    "ratio": 1672 / 941,
+    "hauteur_max_px": 720,
+    "hauteur_vw": 0.76,
+    # Téléphones : bandeau plein cadre au ratio naturel, donc la source requise
+    # vaut la largeur de l'écran en pixels d'appareil.
+    "paliers_mobiles": ((320, 3), (360, 3), (390, 3), (393, 3), (430, 3)),
+    # Grands écrans : `cover` plein cadre, donc la source requise vaut la largeur
+    # de l'écran en pixels d'appareil dès que la boîte est plus large que haute.
+    "paliers_bureau": ((768, 2), (1024, 2), (1440, 2), (1920, 1), (2560, 1)),
+    # Facteurs d'agrandissement constatés le 22 octobre 2026 avec un master de
+    # 1 672 px. Plafonds de non-régression : ils peuvent baisser, jamais monter.
+    # Les supprimer demande une illustration source d'au moins 2 880 px de large.
+    "plafonds_bureau": {768: 1.25, 1024: 1.55, 1440: 1.75, 1920: 1.20, 2560: 1.55},
+}
+
+
+def bloc_media(css: str, largeur_max: int) -> str:
+    """Contenu du premier bloc `@media (max-width: <largeur_max>px)`, accolades comprises."""
+    ouverture = re.search(rf"@media\s*\(max-width:\s*{largeur_max}px\)\s*\{{", css)
+    if not ouverture:
+        raise Echec(f"bloc @media (max-width: {largeur_max}px) introuvable")
+    profondeur = 1
+    index = ouverture.end()
+    while index < len(css) and profondeur:
+        if css[index] == "{":
+            profondeur += 1
+        elif css[index] == "}":
+            profondeur -= 1
+        index += 1
+    return css[ouverture.end() : index - 1]
+
+
+def declarations(bloc: str, selecteur: str) -> str:
+    """Déclarations d'une règle, espaces normalisés. Vide si la règle est absente."""
+    regle = re.search(rf"{re.escape(selecteur)}\s*\{{([^}}]*)\}}", bloc)
+    return re.sub(r"\s+", " ", regle.group(1)) if regle else ""
+
+
+def largeurs_servies(html: str, motif: str) -> list[int]:
+    """Largeurs déclarées dans les `srcset` qui servent cette image."""
+    largeurs: set[int] = set()
+    for attribut in re.findall(r'(?:data-)?(?:image)?srcset="([^"]+)"', html):
+        if motif not in attribut:
+            continue
+        largeurs.update(int(valeur) for valeur in re.findall(r"\s(\d+)w", attribut))
+    return sorted(largeurs)
+
+
+def verifier_heros_mondes(css: str) -> list[str]:
+    """Aucun pixel étiré sur téléphone, et agrandissement desktop non aggravé."""
+    css_aventure = (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8")
+    etroit = bloc_media(css_aventure, 700)
+    tres_etroit = bloc_media(css_aventure, 430)
+
+    attendus = (
+        ("max-width: 700px", ".adventure-hero-art", ("position: static", "height: auto", "object-fit: contain")),
+        ("max-width: 700px", ".adventure-hero-shade", ("display: none",)),
+        ("max-width: 700px", ".adventure-hero", ("min-height: 0",)),
+        ("max-width: 430px", ".adventure-hero", ("min-height: 0",)),
+    )
+    for bloc_nom, selecteur, morceaux in attendus:
+        bloc = etroit if bloc_nom == "max-width: 700px" else tres_etroit
+        regle = declarations(bloc, selecteur)
+        if not regle:
+            raise Echec(f"{bloc_nom} : la règle `{selecteur}` est absente du bloc")
+        manquants = [morceau for morceau in morceaux if morceau not in regle]
+        if manquants:
+            raise Echec(
+                f"{bloc_nom} : `{selecteur}` doit porter {', '.join(manquants)}. "
+                "Sans cela, l'illustration redevient une image de fond étirée dans une boîte "
+                "haute, et la source nécessaire dépasse largement les variantes servies."
+            )
+
+    html = (RACINE / HEROS_MONDES["page"]).read_text(encoding="utf-8")
+    if 'sizes="100vw"' not in html:
+        raise Echec(
+            "Le héros des mondes ne déclare plus `sizes=\"100vw\"` : une valeur inférieure "
+            "à la largeur réelle ferait choisir une variante trop petite, donc un agrandissement."
+        )
+    largeurs = largeurs_servies(html, HEROS_MONDES["motif_srcset"])
+    if not largeurs:
+        raise Echec("aucune largeur de srcset trouvée pour l'illustration des mondes")
+    servie = max(largeurs)
+
+    for largeur, densite in HEROS_MONDES["paliers_mobiles"]:
+        requise = largeur * densite
+        if requise > servie:
+            raise Echec(
+                f"téléphone {largeur}px à {densite}× : {requise}px de source nécessaires, "
+                f"la plus grande variante servie en fait {servie}. L'image serait agrandie "
+                f"{requise / servie:.2f}×, donc visiblement floue."
+            )
+
+    aggravations: list[str] = []
+    facteurs: list[tuple[int, float]] = []
+    for largeur, densite in HEROS_MONDES["paliers_bureau"]:
+        hauteur = min(HEROS_MONDES["hauteur_max_px"], HEROS_MONDES["hauteur_vw"] * largeur)
+        requise = max(largeur, hauteur * HEROS_MONDES["ratio"]) * densite
+        facteur = requise / servie
+        facteurs.append((largeur, facteur))
+        plafond = HEROS_MONDES["plafonds_bureau"][largeur]
+        if facteur > plafond + 1e-9:
+            aggravations.append(f"{largeur}px : {facteur:.2f}× pour un plafond de {plafond:.2f}×")
+    if aggravations:
+        raise Echec(
+            "agrandissement de l'illustration des mondes aggravé sur grand écran : "
+            + " ; ".join(aggravations)
+            + ". Seule une illustration source plus large peut le réduire."
+        )
+
+    return [
+        "OK     Héros des mondes : bandeau au ratio naturel sous 700 px, aucun agrandissement "
+        f"sur les téléphones testés ({', '.join(str(largeur) for largeur, _ in HEROS_MONDES['paliers_mobiles'])} px à 3×), "
+        f"variantes jusqu'à {servie} px.",
+        "       Grand écran, agrandissement résiduel assumé : "
+        + ", ".join(f"{largeur}px {facteur:.2f}×" for largeur, facteur in facteurs)
+        + ". Un master d'au moins 2 880 px le supprimerait ; aucun fichier du dépôt ne le permet aujourd'hui.",
+    ]
+
+
 def main() -> int:
     css = lire_css()
     try:
         lignes = verifier_titres(titres_des_pages())
         lignes += verifier_h1_accueil(css)
         lignes += verifier_modes(css)
+        lignes += verifier_heros_mondes(css)
     except Echec as erreur:
         print(f"ÉCHEC — {erreur}", file=sys.stderr)
         return 1

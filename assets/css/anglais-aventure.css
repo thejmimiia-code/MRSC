@@ -345,9 +345,24 @@ html.contraste-renforce .adventure-promise-list li { border-color: CanvasText; b
   .adventure-learning-sheet-grid { grid-template-columns: minmax(0, 1fr); }
   .adventure-learning-filters > button { grid-column: 1 / -1; justify-self: start; }
   .adventure-subsection-heading { align-items: start; flex-direction: column; }
-  .adventure-hero { min-height: 630px; min-height: min(720px, 150vw); padding-block: 2.5rem; }
-  .adventure-hero-art { object-position: 64% center; }
-  .adventure-hero-shade { background: linear-gradient(90deg, rgba(8,26,43,.94), rgba(8,26,43,.72) 70%, rgba(8,26,43,.4)), linear-gradient(0deg, rgba(8,26,43,.4), transparent 50%); }
+  /* Sous 700 px, le héros devient un bandeau au ratio naturel de l'illustration
+     (16/9) et le texte passe dessous, sur le fond bleu nuit. Avant, l'image
+     remplissait une boîte de 150 à 180vw de haut en object-fit: cover : il
+     aurait fallu une source de plus de 3 700 px de large à 3×, qu'aucune
+     variante ne fournissait, d'où un agrandissement visible. Un bandeau plein
+     cadre ne demande que la largeur de l'écran, que les variantes couvrent. */
+  .adventure-hero { display: block; min-height: 0; padding-block: 0 2.5rem; }
+  .adventure-hero-art {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+  .adventure-hero-shade { display: none; }
+  .adventure-hero-content { padding-block: 1.8rem 0; }
   .adventure-breadcrumb { margin-bottom: 2.2rem; }
   .adventure-hero-actions { flex-direction: column; align-items: stretch; }
   .adventure-hero-actions .button { width: 100%; }
@@ -375,7 +390,7 @@ html.contraste-renforce .adventure-promise-list li { border-color: CanvasText; b
   .adventure-learning-sheet-actions { flex-direction: column; }
   .adventure-learning-sheet-actions .button { width: 100%; }
   .adventure-learning-path-controls .button { flex: 1 1 auto; }
-  .adventure-hero { min-height: 650px; min-height: 180vw; }
+  .adventure-hero { min-height: 0; }
   .adventure-promise-list { align-items: flex-start; flex-direction: column; }
   .adventure-play-toolbar { align-items: flex-start; flex-direction: column; }
   .adventure-scene-controls { justify-content: stretch; }

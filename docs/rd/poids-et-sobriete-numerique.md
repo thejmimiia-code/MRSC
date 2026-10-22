@@ -86,6 +86,8 @@ Ces contrôles ont été faits par l’agent, pas par un panel humain ni avec un
 
 ### 4.2 bis — Le vrai plafond de netteté était le choix de variante, pas la compression (22 octobre 2026)
 
+**Mise à jour du même jour :** la déclaration `150vw` décrite ci-dessous a été abandonnée quelques heures plus tard. Le héros est devenu un bandeau au ratio naturel sous 700 px (§ 4.2 ter), ce qui supprime l’agrandissement sur téléphone *sans* dépasser le budget : le compromis de poids raconté plus bas n’a donc plus lieu d’être.
+
 La revue visuelle humaine demandée au § 6 a eu lieu : la qualité des illustrations des mondes a été jugée insuffisante. La mesure a écarté deux fausses pistes avant d’en trouver deux vraies.
 
 **Écartées.** La compression n’est pas en cause : en sRGB, l’AVIF q60 pleine largeur de `mondes-savoirs-hero` mesure **36,4 dB** de PSNR, comme l’indiquait déjà ce document ; un calcul direct redevient absurde (12,7 dB) pour la raison déjà connue — le décodeur renvoie du YCbCr. Régénérer l’illustration ne pouvait pas aider non plus : le générateur d’images disponible ici plafonne à **1 376 × 768 px**, soit moins que le master actuel de 1 672 × 941 — une régénération aurait donc *dégradé* la résolution.
@@ -101,6 +103,29 @@ La revue visuelle humaine demandée au § 6 a eu lieu : la qualité des illustra
 **Ce que cela ne règle pas.** Le master reste 1 672 × 941. Sur un écran à 2× (portable Retina), il est affiché sur jusqu’à 2 880 px d’appareil : l’agrandissement résiduel est de **1,7×**, et il faudrait une source de 2 560 à 2 880 px pour le supprimer. Aucun traitement local ne crée ce détail — un agrandissement Lanczos produit un fichier plus gros, pas une image plus nette, et n’a donc pas été retenu. **La netteté complète dépend d’une illustration source plus grande**, que ce dépôt ne contient pas.
 
 Un troisième point, relevé en passant : `outils/verifier-poids-pages.py` annonce dans sa docstring retenir le candidat « selon `sizes` » mais ne lit pas cet attribut — il prend le plus petit et le plus grand candidat du `srcset`. Ses chiffres restent des majorants prudents, mais ils ne reflètent pas le choix réel du navigateur ; le calcul ci-dessus a donc été fait à la main, avec les mêmes fichiers.
+
+### 4.2 ter — La bonne réponse était la géométrie, pas la déclaration `sizes` (22 octobre 2026)
+
+Le signalement a été reformulé : « les images qui ne sont pas au bon ratio, il ne faut pas voir les pixels ». La mesure a montré que le défaut n’était pas la déclaration `sizes` (corrigée au § 4.2 bis) mais la **géométrie du héros sur téléphone**.
+
+**Le calcul qui tranche.** Le héros imposait `object-fit: cover` dans une boîte de 150 à 180vw de haut. Sur un téléphone de 390 px élargi à 3×, remplir cette boîte demande **3 742 px** de source ; à 430 px, **4 126 px**. Il aurait donc fallu une illustration de plus de 4 000 px de large pour un simple téléphone — aucune variante réaliste ne l’aurait fournie, et le master lui-même (1 672 px) en était très loin.
+
+**La décision.** Sous 700 px, le héros n’est plus une image de fond recadrée : c’est un **bandeau au ratio naturel de l’illustration** (16/9), et le texte passe dessous sur le fond bleu nuit. La source nécessaire devient la largeur de l’écran :
+
+| Écran | Source nécessaire avant (cover) | Après (bandeau) | Variante choisie |
+| --- | ---: | ---: | --- |
+| 320 px @3× | 3 072 px | **960 px** | 1 200 px |
+| 360 px @3× | 3 456 px | **1 080 px** | 1 200 px |
+| 390 px @3× | 3 742 px | **1 170 px** | 1 200 px |
+| 430 px @3× | 4 126 px | **1 290 px** | 1 672 px |
+
+Autrement dit : plus **aucun agrandissement** sur les cinq largeurs de téléphone testées, alors que le facteur atteignait 3,1×. Le poids ne bouge pas sur les téléphones courants (1 200 px, ≈ 240 Kio de page) ; seuls les très grands téléphones à 3× (430 px) passent à la variante 1 672 px, soit ≈ 322 Kio, au-dessus du budget de travail de 300 Kio — conséquence assumée et mesurée, pas subie.
+
+**Ce qui reste, et qui ne se règle pas ici.** Sur grand écran, le héros reste une image plein cadre : la source nécessaire vaut la largeur de l’écran en pixels d’appareil. Avec un master de 1 672 px, l’agrandissement résiduel est de **1,15× à 1 920 px (1×)**, **1,53× à 1 024 px (2×)**, **1,72× à 1 440 px (2×)** et **1,53× à 2 560 px (1×)**. Pour l’annuler il faudrait une illustration d’au moins **2 880 px** de large. Aucun fichier du dépôt ne le permet, et un agrandissement logiciel (Lanczos) produirait un fichier plus lourd sans créer un seul détail : il n’a pas été fait.
+
+**Garde-fou ajouté.** `outils/verifier-budgets-visuels.py` vérifie désormais quatre choses : que le bandeau mobile est bien en place (règle `.adventure-hero-art` en `position: static` et `height: auto`, voile masqué, `min-height: 0` aux deux paliers), que `sizes` reste exact, qu’aucun palier de téléphone testé ne réclame plus que la plus grande variante servie, et que les facteurs de grand écran ne dépassent pas les valeurs constatées. Trois mutations volontaires — retour au `cover`, rétablissement de la boîte à 180vw, retrait de la variante 1 672 px — ont été détectées avec un message nommant la cause.
+
+**Limites.** Aucun navigateur n’a été lancé : la géométrie est vérifiée par calcul et par lecture du CSS, pas par rendu. Le bandeau mobile change la composition (texte sous l’image, voile supprimé) et n’a pas été vu par une personne ; c’est le premier point à regarder sur téléphone.
 
 ### 4.3 Stockage du dépôt
 
