@@ -768,19 +768,24 @@
     const morceaux = protege
       .split(/(?<=[.!?…]["»”’']*)\s+(?=\S)/)
       .map((partie) => restaurer(partie).trim())
-      .filter(Boolean)
-      // Une ponctuation seule n'est pas une phrase : après un lien, le point
-      // final formait un fragment « . » qui, mis en bloc, s'affichait sur sa
-      // propre ligne (pied de page, 23 octobre 2026). Il rejoint la phrase qui
-      // le précède.
-      .reduce((liste, morceau) => {
-        if (/[\p{L}\p{N}]/u.test(morceau) || liste.length === 0) liste.push(morceau);
-        else liste[liste.length - 1] += morceau;
-        return liste;
-      }, []);
-    if (morceaux.length < 2) return;
+      .filter(Boolean);
+    // Une ponctuation seule n'est pas une phrase : après un lien, le point final
+    // formait un fragment « . » qui, mis en bloc, s'affichait sur sa propre
+    // ligne (23 octobre 2026). Il rejoint la phrase qui le précède. S'il ouvre le
+    // texte, il appartient au contenu en ligne qui précède ce nœud : on ne
+    // découpe pas, plutôt que d'accrocher un point devant la phrase suivante.
+    const phrases = [];
+    for (const morceau of morceaux) {
+      if (!/[\p{L}\p{N}]/u.test(morceau)) {
+        if (!phrases.length) return;
+        phrases[phrases.length - 1] += morceau;
+        continue;
+      }
+      phrases.push(morceau);
+    }
+    if (phrases.length < 2) return;
     const fragment = document.createDocumentFragment();
-    morceaux.forEach((texte) => {
+    phrases.forEach((texte) => {
       const phrase = document.createElement("span");
       phrase.className = "phrase";
       phrase.textContent = texte;

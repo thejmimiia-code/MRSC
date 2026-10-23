@@ -356,10 +356,13 @@ Limite : ces mesures sont des captures de Chromium sans interface ; le rendu sur
 un téléphone réel reste à constater, en particulier les ombres du panneau.
 
 
-## 6 septies. Le pied de page, remis d'aplomb (23 octobre 2026)
+## 6 septies. Le pied de page, remis d'aplomb puis centré (23 octobre 2026)
 
-Signalement avec capture : « le bas de page est mal présenté, c'est
-anarchique ». La mesure a confirmé un défaut mécanique, pas seulement un avis.
+Deux signalements, deux passages. Le premier, avec capture : « le bas de page
+est mal présenté, c'est anarchique ». Le second, après publication : « l'affichage
+devrait être centré ! Ce serait plus joli ! ».
+
+### Premier passage : le point orphelin
 
 - **La cause n'était pas une règle de style mais un script.** Le module de
   `site.js` qui met chaque phrase de contenu en début de ligne s'appliquait aussi
@@ -372,48 +375,80 @@ anarchique ». La mesure a confirmé un défaut mécanique, pas seulement un avi
   découpage — des mentions légales se lisent d'un tenant — et la règle de
   découpage elle-même apprend qu'un morceau sans lettre ni chiffre n'est pas une
   phrase : il rejoint celle qui le précède.
+- **Cas limite, trouvé après la publication.** Un texte qui *commence* par la
+  ponctuation du lien qui le précède — `Voir <a>la page</a>. Une seconde phrase` —
+  n'a pas de phrase précédente à l'intérieur du nœud : la règle y accrochait
+  d'abord le point devant la phrase suivante (« .Une seconde phrase »). Ce nœud
+  n'est donc plus découpé du tout ; trois cas rejoués dans le navigateur : lien
+  suivi d'un point (un seul bloc, intact), sigle `M.R.S.C.` (deux blocs justes),
+  deux phrases ordinaires (trois blocs justes).
 - **Les séparateurs « · » de la liste légale pouvaient finir une ligne.** La
-  liste est passée en `<ul>` avec une règle verticale portée par l'élément
-  (`border-left`), qui ne se détache jamais de son lien ; sous 520 px, la règle
-  disparaît pour ne pas ouvrir une ligne. 97 pages et le générateur de fiches
-  sont alignés, et le contrôle vérifie que chaque page porte bien la liste. Le
-  séparateur de la note de version, lui, est devenu insécable : à 130 % avec
-  espacement renforcé, il commençait sinon la ligne.
-- **Le bloc du bas était un flux**, pas une composition : droits à gauche, liens
-  à droite, note de version se cassant où elle pouvait. Il devient une grille de
-  deux rangées — droits et liens sur la première, note de version sur la seconde
-  derrière un filet — qui passe à une colonne sous 1 120 px. Le seuil est mesuré :
-  la mention tient sur une ligne à partir de 1 130 px de fenêtre (553 px de
-  texte + 477 px de liens + 24 px d'écart) ; en dessous, deux colonnes
-  écrasaient la mention sur trois lignes à 768 px.
+  liste est passée en `<ul>`, 97 pages et le générateur de fiches alignés, et le
+  séparateur de la note de version est devenu insécable.
 - **La colonne « Naviguer »** (dix liens) faisait le double des autres, avec un
   grand vide sous le logo. Au-delà de 1 040 px, elle passe en deux colonnes de
-  libellés insécables, et le pied de page descend de 549 à **377 px** à 1 440 px.
+  libellés insécables.
+
+### Deuxième passage : une seule colonne, centrée
+
+- **Le bloc du bas devient une colonne centrée.** `grid-template-columns:
+  minmax(0, 1fr)`, `justify-items: center`, `text-align: center`, `gap: .55rem` :
+  les droits, puis les liens légaux, puis la note de version derrière son filet.
+  C'est le centrage demandé, et il ne dépend plus de la largeur : la composition
+  ne change pas d'allure d'un écran à l'autre.
+- **Plus aucun filet vertical dans la liste légale.** Le séparateur `border-left`
+  ne se détachait pas de son lien, mais il ouvrait la rangée quand elle se
+  repliait, et le bloc se lisait en barres. Seuls les écarts séparent désormais
+  les entrées ; la liste reste une `<ul>` sans puce.
+- **Le repli de la liste est décidé, pas subi.** À 390 px, quatre entrées
+  tenaient sur la première ligne et « Haut de page » retombait seule en dessous.
+  Trois entrées mesurent 252 px, quatre 331 px : la liste est bornée à 320 px
+  (`max-width: 20rem`) sous 520 px, ce qui donne partout le même repli, trois
+  entrées puis deux. À 130 % de texte, la même borne produit deux puis deux puis
+  une, sans débordement.
+- **Ce que le centrage coûte.** Le bloc du bas passe de deux rangées à trois :
+  130 px au lieu de 82 px à partir de 768 px, soit 425 px de pied de page à
+  1 440 px contre 377 px. C'est le prix du centrage — l'alternative, garder
+  droits et liens côte à côte, laissait un grand vide au milieu.
+- **Un piège de maintenance.** Une première tentative avait supprimé, avec le
+  bloc média du pied de page, un `@media (max-width: 920px)` entier et ses règles
+  sans rapport : il en restait un débordement horizontal de 3 px à 320 px
+  (`article.scope-card` finissait à x = 323). La bissection par échange de
+  fichiers — CSS seul, JS seul, les deux — a désigné la feuille de style. Le bloc
+  final ne contient plus que des règles de pied de page, et un `}` orphelin qui
+  traînait après le bloc `forced-colors` a été retiré (accolades équilibrées,
+  1 161 / 1 161).
 
 Mesure après correction (Chromium sans interface, `index.html`) :
 
-| Profil | Droits | Liens légaux | Note de version | Débordement |
-| --- | --- | --- | --- | --- |
-| 320 × 640 | 2 lignes | 3 lignes | 3 lignes | 0 |
-| 390 × 800 | 2 lignes | 3 lignes | 3 lignes | 0 |
-| 768 × 900 | 1 ligne | 1 ligne | 2 lignes | 0 |
-| 1 024 × 800 | 1 ligne | 1 ligne | 1 ligne | 0 |
-| 1 160 × 900 | 1 ligne | 1 ligne | 1 ligne | 0 |
-| 1 440 × 900 | 1 ligne | 1 ligne | 1 ligne | 0 |
-| 1 920 × 1 080 | 1 ligne | 1 ligne | 1 ligne | 0 |
+| Profil | Droits | Liens légaux | Note de version | Écart de centrage | Débordement |
+| --- | --- | --- | --- | --- | --- |
+| 320 × 640 | 2 lignes | 2 rangées (3 + 2) | 3 lignes | 0 px | 0 |
+| 390 × 800 | 2 lignes | 2 rangées (3 + 2) | 3 lignes | 0 px | 0 |
+| 768 × 900 | 1 ligne | 1 rangée | 2 lignes | 0 px | 0 |
+| 1 024 × 800 | 1 ligne | 1 rangée | 2 lignes | 0 px | 0 |
+| 1 160 × 900 | 1 ligne | 1 rangée | 2 lignes | 0 px | 0 |
+| 1 440 × 900 | 1 ligne | 1 rangée | 2 lignes | 0 px | 0 |
+| 1 920 × 1 080 | 1 ligne | 1 rangée | 2 lignes | 0 px | 0 |
 
-Aucun chevauchement entre les trois blocs à aucun profil, aucun débordement
-horizontal, y compris à 130 % de texte avec contraste et espacement renforcés.
-Le pied de page mesure 377 px à 1 440 px (549 px avant) et 755 px à 768 px.
+L'écart de centrage est la distance entre le milieu de chaque bloc et le milieu du
+bloc du bas : nul partout. Aucune puce, aucun filet vertical, aucun bloc de
+ponctuation seule ; aucun débordement horizontal, y compris à 130 % de texte avec
+contraste et espacement renforcés, et sur six autres pages (accueil, apprendre,
+documents, transparence, 404, deux fiches) aux largeurs 320 à 1 920 px. Hauteur du
+pied de page : 1 038 px à 320, 994 px à 390, 759 px à 768, 425 px au-delà de
+1 160 px.
 
-Garde-fou : 13ᵉ contrôle `controler_pied_de_page` — découpage absent du pied de
-page, ponctuation seule rattachée, grille à deux rangées, liste légale sur toutes
-les pages. **Quatre mutations rejouées, quatre détectées** : découpage réactivé
-sur le pied de page, règle de ponctuation retirée, grille redevenue un flux,
-liste remise en paragraphe sur une page.
+Garde-fou : 13ᵉ contrôle `controler_pied_de_page`, étendu au centrage — découpage
+absent du pied de page, ponctuation seule rattachée (et nœud non découpé quand
+elle ouvre le texte), colonne centrée, liste légale sans puce ni filet, borne de
+repli sur téléphone, liste présente sur toutes les pages. **Cinq mutations
+rejouées, cinq détectées** : `justify-items` retiré, liste réalignée à gauche,
+borne de téléphone supprimée, filet vertical rétabli, retour à l'ancienne règle
+de ponctuation.
 
 Limite : la mesure est celle d'un Chromium sans interface ; le rendu des filets
-et des séparateurs sur un écran à très forte densité reste à constater.
+sur un écran à très forte densité reste à constater.
 
 ## 7. Ce qui n'est pas couvert
 
