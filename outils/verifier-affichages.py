@@ -249,6 +249,124 @@ def controler_cesure() -> list[str]:
     return erreurs
 
 
+def controler_densite_du_rendu_3d() -> list[str]:
+    """Les décors 3D doivent se dessiner au pixel de l'écran, sans plafond.
+
+    Le 22 octobre 2026, un décor plafonnait la densité à `min(devicePixelRatio,
+    2)` : sur un téléphone à 3×, un tampon de 642 px était étiré sur 964 px de
+    dalle, d'où un flou de 1,5×. Le 23 octobre, le héros des Mondes est devenu
+    lui aussi un décor vectoriel : les deux fichiers sont donc soumis aux mêmes
+    règles, sinon le second pourrait réintroduire ce que le premier a corrigé.
+    """
+    erreurs: list[str] = []
+    for nom in ("anglais-aventure.js", "decor-atlas.js"):
+        source = (RACINE / "assets" / "js" / nom).read_text(encoding="utf-8")
+        plafond = re.search(
+            r"Math\.min\(\s*(?:window\.)?devicePixelRatio(?:\s*\|\|\s*[\d.]+)?\s*,\s*([\d.]+)\s*\)",
+            source,
+        )
+        if plafond:
+            ligne = numero_ligne(source, plafond.start())
+            erreurs.append(
+                f"{nom}:{ligne} — la densité est plafonnée à {plafond.group(1)}× : "
+                "au-delà, le tampon est étiré et le décor devient flou"
+            )
+        densite = re.search(r"DENSITE_MAX\s*=\s*([\d.]+)", source)
+        if not densite or float(densite.group(1)) < 3:
+            erreurs.append(
+                f"{nom} — `DENSITE_MAX` doit valoir au moins 3 : en dessous, "
+                "un écran de téléphone à 3× affiche un rendu agrandi"
+            )
+        budget = re.search(r"BUDGET_PIXELS\s*=\s*([\d_]+)", source)
+        if not budget or int(budget.group(1).replace("_", "")) < 6_000_000:
+            erreurs.append(
+                f"{nom} — `BUDGET_PIXELS` doit rester à 6 Mpx au moins : "
+                "un budget plus bas rabote la densité sur les grands écrans denses"
+            )
+    return erreurs
+
+
+def controler_decor_du_heros() -> list[str]:
+    """Le héros des Mondes doit garder son décor vectoriel **et** son repli.
+
+    Le canvas remplace une image : s'il disparaît du document, ou si le repli
+    cesse d'être fourni, la page se retrouve soit sans illustration, soit avec
+    une image que rien n'affiche. Les deux sont vérifiés ensemble parce que
+    c'est cet équilibre qui rend le remplacement sûr.
+    """
+    erreurs: list[str] = []
+    html = (RACINE / "anglais-aventure.html").read_text(encoding="utf-8")
+    if "data-decor-atlas" not in html:
+        erreurs.append(
+            "anglais-aventure.html — le canvas `data-decor-atlas` du héros a disparu : "
+            "l'illustration redeviendrait une image à résolution finie"
+        )
+    if not re.search(r'<canvas[^>]*data-decor-atlas[^>]*role="img"[^>]*aria-label="[^"]{20,}"', html):
+        erreurs.append(
+            "anglais-aventure.html — le canvas du héros doit porter `role=\"img\"` et un "
+            "`aria-label` descriptif, sinon le décor n'est annoncé par aucune aide technique"
+        )
+    if not re.search(r'<img[^>]*class="adventure-hero-art"[^>]*data-src="assets/images/', html):
+        erreurs.append(
+            "anglais-aventure.html — le repli `data-src` du héros est absent : sans WebGL, "
+            "la page n'aurait aucune illustration"
+        )
+    source = (RACINE / "assets" / "js" / "decor-atlas.js").read_text(encoding="utf-8")
+    for morceau, message in (
+        ("webglcontextlost", "la perte de contexte WebGL doit basculer sur le repli"),
+        ("data-srcset", "le repli doit rester différé (`data-srcset`) pour ne pas être téléchargé à chaque visite"),
+    ):
+        if morceau not in source:
+            erreurs.append(f"decor-atlas.js — {message}")
+    # Le chargement du repli doit se trouver dans la fonction d'échec, pas
+    # seulement quelque part dans le fichier : c'est là qu'il sert.
+    echec = re.search(r"const echouer = \(\) => \{(.*?)\n  \};", source, re.S)
+    if not echec:
+        erreurs.append("decor-atlas.js — la fonction d'échec `echouer` est introuvable")
+    elif "image.dataset.src" not in echec.group(1) or "image.src =" not in echec.group(1):
+        erreurs.append(
+            "decor-atlas.js — la fonction d'échec ne charge plus le repli : sans WebGL, "
+            "le héros resterait vide"
+        )
+    # Limite assumée, et mesurée : ce contrôle lit le code source, il ne
+    # l'exécute pas. Une sortie ajoutée après `if (!image) return;`, ou une
+    # condition rendue toujours fausse, neutralise le repli en laissant tous les
+    # appels en place — deux mutations l'ont vérifié. C'est la mesure navigateur
+    # (WebGL désactivé, repli chargé) qui prouve le comportement, pas cette porte.
+    # Le présent contrôle garantit seulement que le mécanisme n'a pas été retiré.
+    return erreurs
+
+
+QUALITE_MINIMALE = {"avif": 78, "webp": 88}
+
+
+def controler_qualite_d_encodage() -> list[str]:
+    """Les variantes se servent en 1:1 : leur compression doit donc être haute.
+
+    En qualité 60, l'AVIF du héros mesurait 31,9 dB à 800 px (32,8 dB en q72,
+    33,2 dB en q78) : le flou de compression, superposé à un affichage 1:1 sur
+    téléphone, se lit comme du pixel. Ce plancher interdit de redescendre la
+    qualité pour gagner du poids sans assumer la perte de netteté.
+    """
+    chemin = RACINE / "outils" / "optimiser-images.py"
+    source = chemin.read_text(encoding="utf-8")
+    erreurs: list[str] = []
+    blocs = re.findall(r'"qualites"\s*:\s*\{([^}]*)\}', source)
+    if not blocs:
+        return ["optimiser-images.py — aucune déclaration `\"qualites\"` trouvée"]
+    for bloc in blocs:
+        for format_image, minimum in QUALITE_MINIMALE.items():
+            trouve = re.search(rf'"{format_image}"\s*:\s*(\d+)', bloc)
+            if not trouve:
+                erreurs.append(f"optimiser-images.py — qualité {format_image} absente de « {bloc.strip()} »")
+            elif int(trouve.group(1)) < minimum:
+                erreurs.append(
+                    f"optimiser-images.py — {format_image} en qualité {trouve.group(1)}, "
+                    f"sous le plancher {minimum} : les variantes servies en 1:1 deviendraient floues"
+                )
+    return erreurs
+
+
 CONTROLES = (
     ("tailles de texte", controler_tailles_de_texte),
     ("cibles tactiles", controler_cibles_tactiles),
@@ -257,6 +375,9 @@ CONTROLES = (
     ("plafonds d'images par densité", controler_plafonds_d_images),
     ("pistes de grille", controler_pistes_de_grille),
     ("césure des mots longs", controler_cesure),
+    ("densité du rendu 3D", controler_densite_du_rendu_3d),
+    ("décor du héros et son repli", controler_decor_du_heros),
+    ("qualité d'encodage des images", controler_qualite_d_encodage),
 )
 
 

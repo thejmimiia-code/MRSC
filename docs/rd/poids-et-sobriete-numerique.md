@@ -61,7 +61,7 @@ Le détail page par page est régénéré dans [`poids-pages.md`](poids-pages.md
 
 ### 4.2 Images : formats et qualité
 
-Trois images représentaient l’essentiel du poids : `accueil-logo-mrsc-3d.jpg` (236,0 Kio), `mondes-savoirs-hero.jpg` (370,7 Kio) et `escales-anglais-hero.jpg` (180,5 Kio). Chacune a reçu des variantes AVIF (qualité 60) et WebP (qualité 80), en 800 px et à sa largeur d’origine (1 400 px ou 1 672 px) ; une variante 1 200 px a été ajoutée pour l’atlas, affiché dans une colonne plus étroite.
+Trois images représentaient l’essentiel du poids : `accueil-logo-mrsc-3d.jpg` (236,0 Kio), `mondes-savoirs-hero.jpg` (370,7 Kio) et `escales-anglais-hero.jpg` (180,5 Kio). Chacune a reçu des variantes AVIF (qualité 60) et WebP (qualité 80) — **portées à 78 et 88 le 23 octobre 2026, voir le § 4.2 quinquies** —, en 800 px et à sa largeur d’origine (1 400 px ou 1 672 px) ; une variante 1 200 px a été ajoutée pour l’atlas, affiché dans une colonne plus étroite.
 
 | Image | JPEG source | AVIF 800 px | WebP 800 px | AVIF pleine largeur | WebP pleine largeur |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -131,7 +131,21 @@ Autrement dit : plus **aucun agrandissement** sur les cinq largeurs de télépho
 
 ### 4.2 quater — Géométrie hybride et procédure d’arrivée d’un master plus large (22 octobre 2026)
 
-La régénération des illustrations a été **écartée sur mesure** : le générateur disponible ici plafonne à environ 1,05 million de pixels, soit 1 376×768 en 16:9, contre 1 573 000 px pour le master actuel de 1 672×941. Refaire les images les aurait **réduites de 33 %**. La personne responsable du site fournira donc un master d’au moins 2 880 px, et a retenu une géométrie hybride en attendant.
+**Rectification du 23 octobre 2026 — une attribution fausse.** Ce paragraphe disait d’abord que « la personne responsable du site fournira donc un master d’au moins 2 880 px ». C’est faux et cela a été corrigé : **les trois illustrations ont été créées par l’agent**, de A à Z, dans ce dépôt. Il n’existe aucun master externe à attendre, et personne n’a à en fournir un.
+
+Ce que la mesure dit, en revanche, reste vrai et change la conclusion. Le générateur d’images disponible ici plafonne à **1,06 Mpx quel que soit le ratio** — mesuré deux fois le 23 octobre 2026 : 1 376×768 en 16:9, 1 264×848 en 3:2. Or le master actuel fait 1 672×941, soit 1,57 Mpx. **Régénérer ne peut donc pas augmenter la résolution : cela la réduirait de 15 % en linéaire.**
+
+Cette perte n’est pas théorique. Test d’aller-retour sur `mondes-savoirs-hero` (descendre à N px, remonter à 1 672, mesurer le PSNR) contre un **témoin agrandi** depuis 1 376 px :
+
+| Fichier | en dessous de 1 200 px | 1 300 px | 1 376 px |
+| --- | ---: | ---: | ---: |
+| master actuel (1 672 px) | 32,5 dB | 33,7 dB | 34,6 dB |
+| génération native (1 376 px) | 34,0 dB | 35,4 dB | — |
+| agrandissement 1 672 ← 1 376 (témoin) | 37,4 dB | 38,7 dB | 40,1 dB |
+
+Plus le PSNR d’aller-retour est **bas**, plus l’image contient de détail au-dessus du seuil. Le master actuel porte donc du détail réel jusqu’à ≈ 1 600 px, nettement au-delà de ce qu’un agrandissement depuis 1 376 px produirait — et un peu au-delà de ce que le générateur sait produire aujourd’hui. Le contrôle visuel à 300 % le confirme : les pierres et les toits du master gardent des arêtes que la version passerelle a perdues.
+
+**Conséquence assumée :** l’illustration actuelle est conservée, et le plafond de netteté reste **1 672 px**, qui est exactement le besoin maximal du site. Aucun master n’est attendu de quiconque. La géométrie hybride retenue le 22 octobre 2026 tient toujours, mais pour une autre raison que celle qui avait été écrite : elle sert à ne jamais agrandir un fichier de 1 672 px, pas à patienter jusqu’à un fichier plus grand.
 
 **La géométrie hybride.** Le plein cadre — celui qui donne sa composition au héros — n’est conservé que là où il n’étire rien :
 
@@ -144,7 +158,7 @@ La régénération des illustrations a été **écartée sur mesure** : le gén�
 
 Résultat vérifié : **aucun agrandissement** sur les 17 combinaisons écran × densité testées, de 320 px à 3× à 2 560 px à 1×. Le 1,72× qui subsistait sur un portable Retina a disparu — au prix d’un panneau centré plutôt que d’un fond pleine largeur sur ces écrans.
 
-**Procédure quand le master arrive** (aucune modification de code n’est nécessaire avant l’étape 4) :
+**Procédure si un générateur capable de ≥ 2 880 px devient disponible** (ce n’est pas une tâche en attente de qui que ce soit ; aucune modification de code n’est nécessaire avant l’étape 4) :
 
 1. déposer le fichier en remplacement de `assets/images/mondes-savoirs-hero.jpg`, largeur ≥ 2 880 px, ratio 16:9, sans texte incrusté ;
 2. lancer `python3 outils/optimiser-images.py` : le script ne produit jamais de variante plus large que la source, et ajoute désormais automatiquement la largeur native et les paliers 2 560 et 2 880 px ;
@@ -154,6 +168,89 @@ Résultat vérifié : **aucun agrandissement** sur les 17 combinaisons écran ×
 6. refaire la mesure complète et consigner le nouveau poids.
 
 **Ce qui reste vrai en attendant.** Le master de 1 672 px suffit désormais à tous les cas, mais un panneau de 836 px est plus petit qu’un fond pleine largeur : la composition change sur Retina. Aucun navigateur n’a été lancé ici, donc ce basculement n’a pas été vu.
+
+### 4.2 quinquies — « La version smartphone est pixélisée » : la mesure a démenti l'agrandissement (23 octobre 2026)
+
+Le signalement ne portait plus sur un cadrage mais sur la netteté perçue sur téléphone. Trois hypothèses ont été mesurées ; **deux étaient fausses**, et la vraie cause n'était pas celle qu'on croyait.
+
+**Première fausse piste : le `srcset` ne tiendrait pas compte de la densité.** Une première sonde lisait `naturalWidth` et en concluait qu'à 390 px de large et 3× le navigateur ne servait que 390 pixels de source pour 1 170 nécessaires. C'était un **artefact de mesure** : pour une image choisie par descripteurs `w`, `naturalWidth` est rapporté *après* correction de densité (`1200 / 3,08 ≈ 390`). La mesure correcte recharge le fichier choisi hors `srcset` et lit sa largeur réelle. Refaites sur **42 combinaisons** page × écran × densité (320 px à 2× jusqu'à 2 560 px à 1×, `anglais-aventure.html`, `index.html`, `apprendre.html`) :
+
+| Page | Exemple de profil | Fichier servi | Besoin réel | Verdict |
+| --- | --- | ---: | ---: | --- |
+| `anglais-aventure.html` | 390 px @3× | 1 200 px | 1 170 px | 1:1, aucun agrandissement |
+| `anglais-aventure.html` | 430 px @3× | 1 672 px | 1 290 px | marge |
+| `anglais-aventure.html` | 1 920 px @2× | 1 672 px | 1 672 px | exact |
+| `anglais-aventure.html` | 1 920 px @3× | 1 672 px | 1 671 px | exact (panneau réduit à 557 px) |
+| `index.html` | 390 px @3× | 1 400 px | 1 099 px | marge |
+| `apprendre.html` | 1 920 px @3× | 1 672 px | 1 491 px | marge |
+
+**Aucun déficit sur les 42 profils.** La géométrie hybride du § 4.2 quater fait donc ce qu'elle annonce : le navigateur ne reçoit jamais moins de pixels qu'il n'en affiche. L'agrandissement n'était pas la cause du flou.
+
+**Deuxième fausse piste, partiellement vraie : le tampon du décor 3D.** Le plafond `min(devicePixelRatio, 2)` du § 4.2 bis bridait encore les téléphones à 3×. Mesuré après ouverture d'une mission, tampon contre dalle :
+
+| Écran | Avant | Après | Écart |
+| --- | --- | --- | --- |
+| 390 px @3× | 642 × 402 | 964 × 602 | 322 px de flou en moins |
+| 430 px @3× | 722 × 452 | 1 084 × 677 | 362 px |
+| 820 px @2× | 1 435 × 897 | 1 435 × 897 | déjà exact |
+
+Le plafond passe à **4×** et le budget de tampon de 4 à **6 Mpx** (`DENSITE_MAX = 4`, `BUDGET_PIXELS = 6_000_000`). Le rendu est un rendu vectoriel WebGL : capturé à 3× après clic sur une mission, il montre des arêtes franches et des diagonales sans escalier.
+
+**Cause réelle et corrigée : la qualité d'encodage.** L'AVIF était encodé en **qualité 60**. Comparé à la source ramenée à 800 px, après normalisation sRGB :
+
+| Qualité AVIF | PSNR | Poids (800 px) | Lecture à 200 % |
+| --- | ---: | ---: | --- |
+| 60 | 31,9 dB | 69,9 Kio | rambardes du pont et feuillages fondus, aplatissement des pages de livres |
+| 72 | 32,8 dB | 90,4 Kio | détails revenus, feuillages encore mous |
+| **78** | **33,2 dB** | **104,9 Kio** | **retenu : rambardes, tuiles et feuillage distincts** |
+| 82 | 33,5 dB | 119,3 Kio | gain non perceptible au-delà |
+
+Le déficit était donc visible **parce que l'image est servie en 1:1** : à l'échelle exacte du pixel, un bloc de compression de 8 × 8 px se lit directement comme du pixel. Qualités portées à **AVIF 78 et WebP 88** (le WebP reste un repli ; au-delà de 88, la variante 1 672 px dépasserait son JPEG source, ce que l'outil refuse — et il a raison : un dérivé plus lourd que sa source n'a pas de sens).
+
+**Poids après la passe** (gzip estimé, `outils/verifier-poids-pages.py`) : `anglais-aventure.html` 227,6 Kio mobile / 415,9 Kio grand écran, `apprendre.html` 202,8 / 391,1, `index.html` 140,4 / 238,7. Les 98 pages restent sous 300 Kio et 450 Kio. Le total des variantes passe de 1 553 à **2 199 Kio** dans le dépôt, pour des fichiers servis plus lourds de 20 à 35 % sur les images — le prix explicite de la netteté.
+
+**Garde-fous ajoutés** (`outils/verifier-affichages.py`, joués en CI) :
+
+- `DENSITE_MAX ≥ 3`, `BUDGET_PIXELS ≥ 6 Mpx`, et **aucun `Math.min(devicePixelRatio, N)`** dans `anglais-aventure.js` — le plafond exact qui avait produit le flou ;
+- qualité d'encodage **AVIF ≥ 78 et WebP ≥ 88** dans `outils/optimiser-images.py`, avec la ligne fautive nommée.
+
+Trois mutations volontaires ont été rejouées : `DENSITE_MAX = 2`, retour du plafond `Math.min(window.devicePixelRatio || 1, 2)`, et retour aux qualités 60/80. Les trois sont détectées avec un message qui nomme la cause ; les fichiers ont été restaurés à l'identique (`diff` vide).
+
+**Conséquence sur le relevé des fichiers servis.** Neuf variantes ont changé d'octets ; le relevé réseau du 20 octobre (`docs/rd/en-tetes-servis-2026-10-20.toml`) ne peut donc plus être vérifié avant que la version modifiée soit publiée. Plutôt que d'y inscrire des tailles que personne n'a mesurées, les neuf entrées portent `perime_le = 2026-10-23` : `outils/verifier-fichiers-servis.py` les déclare « relevé périmé, mesure à refaire après publication » au lieu de les faire passer pour concordantes. Le mécanisme est borné par des tests (28 au total) : un binaire modifié **sans** marqueur échoue toujours, un marqueur antérieur à la mesure, dans le futur, mal daté ou posé sur un texte échoue, et un marqueur **oublié** sur un fichier revenu concordant échoue aussi — il n'existe pas pour laisser dormir un chiffre faux.
+
+**Limite qui subsiste, énoncée telle quelle.** Le master reste 1 672 × 941, et c’est aussi le besoin maximal du site : tout ce qui précède est du 1:1. Le générateur d’images disponible plafonne à 1,06 Mpx, donc en dessous du fichier existant (§ 4.2 quater) : aucune régénération ne peut augmenter la netteté aujourd’hui, et rien n’est attendu de personne. Aucune revue humaine n'a eu lieu sur ce correctif : la mesure est celle d'un Chromium sans interface, pas d'un téléphone réel.
+
+### 4.2 sexies — Le héros des Mondes n'est plus une image (23 octobre 2026)
+
+**La décision.** Devant l'impossibilité d'obtenir une illustration plus grande — les trois illustrations sont un travail de l'agent, et le générateur disponible plafonne à 1,06 Mpx, sous le fichier existant de 1,57 Mpx (§ 4.2 quater) — la personne responsable du site a choisi de **remplacer le héros par un décor 3D vectoriel**, dans le langage graphique déjà employé par les cinq scènes de mission. Une image a une résolution finie ; une géométrie n'en a pas.
+
+**Ce qui a été fait.** `assets/js/decor-atlas.js` construit un archipel de savoirs — bibliothèque à colonnes et livres-monuments, pont de pierre vers l'observatoire, serre, phare, îlots et récifs — et le dessine dans un `<canvas>` WebGL, à la densité exacte de l'écran. Le fichier pèse **15 Kio** non compressé, contre 300 Kio pour la variante 1 672 px qu'il remplace.
+
+**Trois décisions de conception, chacune née d'un défaut constaté au rendu :**
+
+1. **Fond de ciel calculé, pas posé dans le monde.** Un panneau plat placé derrière la scène laissait voir son arête comme une diagonale dès que la caméra pique, et les triangles se disputaient la profondeur (visible sur une première capture). Le fond est désormais construit pour la caméra : quadrilatère perpendiculaire à l'axe de vue, dessiné avant tout le reste, sans test ni écriture de profondeur.
+2. **Champ horizontal constant.** Avec un champ vertical fixe, un cadre 4:3 ou un bandeau de téléphone recadraient les îles latérales. Le champ horizontal est figé et le champ vertical s'en déduit : la composition ne dépend plus de la hauteur de la boîte.
+3. **Cadrage calculé.** La caméra se place à la distance qui fait tenir dans le cadre la totalité des sommets visibles, projetés dans son propre repère : `max(|droite|/tan(champ/2) + profondeur)`. La mer, immense, et les nuages, lointains, sont exclus de ce calcul — les inclure reculait la caméra jusqu'à rendre les îles minuscules, ce qui est arrivé deux fois avant d'être corrigé. En plein cadre, le décor est décalé à droite parce que le texte occupe la gauche ; en bandeau et en panneau, le texte passe dessous et le décor est centré.
+
+**Mesuré dans le navigateur (8 profils d'écran × densité) :**
+
+| Écran | Tampon du canvas | Besoin réel | Verdict |
+| --- | ---: | ---: | --- |
+| 390 px @3× | 1 170 × 658 | 1 170 × 658 | 1:1 |
+| 430 px @3× | 1 290 × 726 | 1 290 × 726 | 1:1 |
+| 1 280 px @2× | 1 672 × 941 | 1 672 × 941 | 1:1 |
+| 1 920 px @1× | 1 672 × 941 | 1 672 × 941 | 1:1 |
+| 1 024 px @1× | 1 024 × 755 | 1 024 × 755 | 1:1 |
+
+**Zéro agrandissement sur les huit profils**, de 360 px à 2× à 1 920 px à 1×, et aucun débordement latéral. Le 1:1 n'est plus une limite qu'on atteint : il est la définition même du rendu.
+
+**Le repli.** Le `<picture>` d'origine reste dans le document, mais son `src` et ses `srcset` sont désormais **différés** (`data-src`, `data-srcset`) : l'image n'est demandée que si WebGL est absent, refusé ou perdu (`webglcontextlost`). Mesure avec WebGL désactivé : les huit profils affichent l'image, correctement choisie par le `srcset` (1 200 px à 390 px @3×, 1 672 px au-delà), et sans débordement. **Mesure avec WebGL actif : aucune requête vers `mondes-savoirs-hero-*`.** Le préchargement de l'image a été retiré de l'en-tête pour la même raison.
+
+**Poids.** `anglais-aventure.html` passe de 227,6 à **132,9 Kio mobile** (gzip estimé), soit 95 Kio de moins sur la page d'entrée des Mondes. Le pire cas — WebGL indisponible, donc l'image de repli en plus — est de 268,3 Kio mobile et 535,5 Kio grand écran : il **dépasse le budget de 450 Kio** sur grand écran, et c'est assumé explicitement, puisqu'il ne se produit que sur un appareil incapable d'afficher le décor. Le compteur ne pouvait pas le dire avant ce lot : `outils/verifier-poids-pages.py` ignorait `data-srcset` et sous-comptait donc déjà le repli de la scène des missions. Il distingue désormais **transfert typique** et **pire cas**, et affiche les deux.
+
+**Garde-fous** (`outils/verifier-affichages.py`, 10 contrôles) : `DENSITE_MAX >= 3` et `BUDGET_PIXELS >= 6 Mpx` dans **les deux** fichiers de rendu, aucun `Math.min(devicePixelRatio, N)`, présence du canvas avec `role="img"` et `aria-label`, présence du repli différé, et chargement du repli dans la fonction d'échec. Quatre mutations rejouées : plafond de densité à 2 dans `decor-atlas.js`, canvas retiré du document, `role`/`aria-label` retirés, chargement du repli déplacé hors de la fonction d'échec — les quatre sont détectées. **Deux mutations ne le sont pas** : une sortie ajoutée après `if (!image) return;` et une condition rendue toujours fausse neutralisent le repli en laissant tous les appels en place. C'est une limite du contrôle statique, écrite dans le code ; le comportement est prouvé par la mesure navigateur ci-dessus, pas par cette porte.
+
+**Ce qui reste.** Le décor est un rendu : il n'a pas le grain d'une illustration peinte. C'est un changement de style assumé, pas une amélioration de l'ancien. Aucune revue humaine sur appareil réel n'a eu lieu — la mesure est celle d'un Chromium sans interface, à 1×, 2× et 3×. Et la composition n'a été vérifiée que sur les quatre mises en page du héros ; les autres pages ne changent pas.
 
 ### 4.3 Stockage du dépôt
 

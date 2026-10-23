@@ -33,10 +33,21 @@
 }
 .adventure-hero-picture { display: contents; }
 .adventure-hero-art { object-fit: cover; object-position: center 57%; }
+/* Le décor vectoriel occupe la place de l'image, avec le même ratio (1 672 /
+   941). Sans ce ratio, un canvas en `height: auto` prendrait la hauteur de son
+   tampon, qui change avec la largeur : le bandeau sauterait à chaque rendu. */
+.adventure-hero-canvas { aspect-ratio: 1672 / 941; background: #a8d8e4; }
 .adventure-hero-shade {
   z-index: 0;
   background: linear-gradient(90deg, rgba(8, 26, 43, .94) 0%, rgba(8, 26, 43, .83) 35%, rgba(8, 26, 43, .38) 62%, rgba(8, 26, 43, .05) 100%), linear-gradient(0deg, rgba(8, 26, 43, .36), transparent 45%);
   pointer-events: none;
+}
+/* Quand le décor vectoriel est actif, il est cadré à droite : le voile doit donc
+   s'effacer plus tôt, sinon il assombrit les îles au lieu de protéger le texte.
+   L'image de repli garde le voile d'origine, plus couvrant, car elle est pleine
+   largeur et lumineuse sous le titre. */
+.adventure-hero-canvas:not([hidden]) ~ .adventure-hero-shade {
+  background: linear-gradient(90deg, rgba(8, 26, 43, .95) 0%, rgba(8, 26, 43, .86) 28%, rgba(8, 26, 43, .34) 46%, rgba(8, 26, 43, .04) 62%, transparent 100%), linear-gradient(0deg, rgba(8, 26, 43, .42), transparent 42%);
 }
 .adventure-hero-content { position: relative; z-index: 1; }
 .adventure-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; margin-bottom: 2.8rem; color: rgba(255,255,255,.85); font-size: max(12px, .88rem); }

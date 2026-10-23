@@ -34,24 +34,30 @@ MANIFESTE = ROOT / "docs" / "rd" / "derives-images.json"
 VERSION = 1
 
 # Largeurs réellement utiles : 800 px couvre un téléphone en 2× ou un écran
-# étroit en 1× ; la largeur d’origine couvre les grands écrans. Les qualités
-# ont été retenues après comparaison PSNR et contrôle visuel à 800 px
-# (voir docs/rd/poids-et-sobriete-numerique.md).
+# étroit en 1× ; la largeur d’origine couvre les grands écrans.
+# Qualités : 78 en AVIF, 88 en WebP. Le 23 octobre 2026, la qualité 60 a été
+# mise en cause sur téléphone : l’image est servie au pixel de l’écran, donc un
+# bloc de compression se lit comme du pixel. À 800 px, l’AVIF passe de 31,9 dB
+# (q60) à 33,2 dB (q78) pour 35 Kio de plus ; au-delà, le gain n’est plus
+# perceptible. Le WebP ne monte pas plus haut : en 1 672 px, la qualité 90
+# dépasserait son JPEG source, et un dérivé plus lourd que sa source n’a pas de
+# sens. Plancher vérifié en CI par outils/verifier-affichages.py.
+# Voir docs/rd/poids-et-sobriete-numerique.md.
 SOURCES = (
     {
         "fichier": "accueil-logo-mrsc-3d.jpg",
         "largeurs": (800, 1400),
-        "qualites": {"avif": 60, "webp": 80},
+        "qualites": {"avif": 78, "webp": 88},
     },
     {
         "fichier": "mondes-savoirs-hero.jpg",
         "largeurs": (800, 1200, 1672),
-        "qualites": {"avif": 60, "webp": 80},
+        "qualites": {"avif": 78, "webp": 88},
     },
     {
         "fichier": "escales-anglais-hero.jpg",
         "largeurs": (800, 1672),
-        "qualites": {"avif": 60, "webp": 80},
+        "qualites": {"avif": 78, "webp": 88},
     },
 )
 

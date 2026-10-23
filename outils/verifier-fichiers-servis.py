@@ -15,7 +15,13 @@ Ce que cela prouve, et rien de plus :
   locale — le nombre exact ne peut pas être vérifié durablement, un contenu
   publié changeant à chaque correction ;
 - le relevé doit couvrir exactement les cibles de la sonde réseau : une cible
-  ajoutée sans mesure, ou mesurée puis retirée, fait échouer le contrôle.
+  ajoutée sans mesure, ou mesurée puis retirée, fait échouer le contrôle ;
+- un binaire modifié **après** le relevé peut porter `perime_le = AAAA-MM-JJ`
+  (la date de la modification). Le contrôle le déclare alors « relevé périmé »
+  au lieu de faire échouer : aucune mesure réseau n'est possible avant que la
+  version modifiée soit publiée, et l'inventer serait pire que l'absence. Dès
+  que la mesure est refaite, le marqueur doit disparaître, sinon le contrôle
+  échoue — il n'existe pas pour laisser un relevé faux dormir.
 
 Ce script ne mesure ni le rendu, ni la performance, ni une empreinte carbone, et
 il ne dit rien de la qualité des contenus.
@@ -111,11 +117,44 @@ def valider(registre: dict, racine: Path = RACINE, cibles: set[str] | None = Non
         if not isinstance(servi, int) or isinstance(servi, bool) or servi <= 0:
             erreurs.append(f"{etiquette} : octets_servis n'est pas un entier positif")
             continue
+        perime = entree.get("perime_le")
+        if perime is not None:
+            if nature != "binaire":
+                erreurs.append(
+                    f"{etiquette} : `perime_le` ne s'applique qu'aux binaires — un texte servi "
+                    "n'est pas comparé à l'octet"
+                )
+            elif not isinstance(perime, date):
+                erreurs.append(f"{etiquette} : `perime_le` doit être une date TOML (AAAA-MM-JJ)")
+            elif perime <= mesure:
+                erreurs.append(
+                    f"{etiquette} : `perime_le` ({perime.isoformat()}) n'est pas postérieure à "
+                    f"la mesure ({mesure.isoformat()}) — la péremption suit la modification, pas la mesure"
+                )
+            elif perime > aujourdhui:
+                erreurs.append(f"{etiquette} : `perime_le` est dans le futur ({perime.isoformat()})")
+
         if nature == "binaire":
             if servi != taille:
+                if isinstance(perime, date) and mesure < perime <= aujourdhui:
+                    # Le fichier a changé depuis le relevé, et la date le dit : le
+                    # contrôle ne peut pas prouver ce qu'il ne mesure pas. Il le
+                    # déclare au lieu de l'inventer, et exige la mesure après
+                    # publication.
+                    avertissements.append(
+                        f"{etiquette} : relevé périmé depuis le {perime.isoformat()} "
+                        f"({taille} octets dans le dépôt, {servi} annoncés servis) — "
+                        "mesure réseau à refaire après publication, puis retirer `perime_le`"
+                    )
+                else:
+                    erreurs.append(
+                        f"{etiquette} : {taille} octets dans le dépôt mais {servi} annoncés servis — "
+                        "le fichier a changé depuis le relevé, refaire la mesure"
+                    )
+            elif isinstance(perime, date):
                 erreurs.append(
-                    f"{etiquette} : {taille} octets dans le dépôt mais {servi} annoncés servis — "
-                    "le fichier a changé depuis le relevé, refaire la mesure"
+                    f"{etiquette} : marqué `perime_le` alors que le fichier concorde de nouveau — "
+                    "la mesure a été refaite, retirer le marqueur"
                 )
             if str(entree.get("encodage", "")) != "aucun":
                 erreurs.append(f"{etiquette} : un binaire servi sans compression doit porter encodage = \"aucun\"")
@@ -167,12 +206,19 @@ def main() -> int:
             print(f"  - {erreur}", file=sys.stderr)
         return 1
     fichiers = registre.get("fichier") or []
-    binaires = sum(1 for entree in fichiers if entree.get("nature") == "binaire")
-    textes = len(fichiers) - binaires
-    print(
+    perimes = [entree for entree in fichiers if entree.get("perime_le")]
+    binaires = sum(1 for entree in fichiers if entree.get("nature") == "binaire") - len(perimes)
+    textes = len(fichiers) - binaires - len(perimes)
+    constat = (
         f"Relevé {nom} concordant : {len(fichiers)} fichiers, dont {binaires} binaires servis octet pour octet "
         f"et {textes} textes compressés — mesure du {registre['meta']['mesure_le'].isoformat()}."
     )
+    if perimes:
+        constat += (
+            f" {len(perimes)} binaires modifiés depuis (qualité d'encodage relevée le 23 octobre 2026) "
+            "attendent une mesure réseau après publication."
+        )
+    print(constat)
     for avertissement in avertissements:
         print(f"  · {avertissement}")
     return 0
