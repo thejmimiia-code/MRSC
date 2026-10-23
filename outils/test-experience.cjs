@@ -173,8 +173,19 @@ async function ouvrirPanneau(page) {
   // il faut l'ouvrir avant de pouvoir atteindre « Présentation ».
   await ouvrirPersonnalisation(page);
   const ouvert = await page.$eval('[data-site-layout-settings]', (element) => element.open);
-  if (!ouvert) await page.click('[data-site-layout-settings] > summary');
-  await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === true);
+  if (ouvert) return;
+  const resume = '[data-site-layout-settings] > summary';
+  await page.click(resume);
+  try {
+    await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === true, { timeout: 2000 });
+  } catch (_erreur) {
+    // Sur le simulateur, la barre de retour est collante : au clic suivant, un
+    // élément peut recouvrir le résumé et avaler le clic. L'activation au
+    // clavier vise le contrôle, pas ses coordonnées.
+    await page.focus(resume);
+    await page.keyboard.press('Enter');
+    await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === true);
+  }
 }
 
 async function verifierPanneauDansViewport(page, selecteur) {

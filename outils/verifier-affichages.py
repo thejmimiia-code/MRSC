@@ -618,6 +618,67 @@ def controler_habillage_du_panneau() -> list[str]:
     return erreurs
 
 
+
+def controler_pied_de_page() -> list[str]:
+    """Le bas de page se lit en deux rangées, sans ponctuation orpheline.
+
+    Le 23 octobre 2026, la personne responsable du site a signalé un pied de page
+    « anarchique » : le script qui met chaque phrase en début de ligne découpait
+    aussi le pied de page, si bien qu'un point final isolé après un lien formait
+    une ligne à lui seul ; et le bloc du bas mêlait droits, liens légaux et note
+    de version dans un flux qui se cassait au hasard. Trois pièces doivent
+    rester : plus de découpage dans le pied de page, une ponctuation seule
+    rattachée à sa phrase, et une grille de deux rangées.
+    """
+    erreurs: list[str] = []
+    script = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+
+    # 1. Le découpage en phrases ne s'applique qu'au contenu principal.
+    if '.site-footer' in script.split("Chaque phrase de contenu")[1].split("})();")[0]:
+        erreurs.append(
+            "site.js — le découpage en phrases s'applique de nouveau au pied de page : "
+            "ses mentions légales se retrouvent coupées en blocs"
+        )
+    # 2. Une ponctuation seule rejoint la phrase précédente au lieu de former un bloc.
+    if "\u0070{L}\u0070{N}" not in script and r"\p{L}\p{N}" not in script:
+        erreurs.append(
+            "site.js — le découpage ne vérifie plus qu'un morceau contient une lettre ou un "
+            "chiffre : un point final isolé après un lien redevient une ligne à lui seul"
+        )
+
+    texte = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+    # Recherche ciblée : après un bloc média, le balayage générique `regles()`
+    # démarre sur une accolade fermante et manque la règle suivante.
+    bas = re.search(r"\.footer-bottom\s*\{([^}]*)\}", texte)
+    if not bas or "display: grid" not in bas.group(1) or "grid-template-columns" not in bas.group(1):
+        erreurs.append(
+            "site.css — le bas de page n'est plus une grille à deux rangées : droits et "
+            "liens se répartissent au hasard et la note de version se casse"
+        )
+    legal = re.search(r"\.footer-legal\s*\{([^}]*)\}", texte)
+    if not legal or "list-style: none" not in legal.group(1):
+        erreurs.append(
+            "site.css — les liens légaux ne sont plus une liste mise en forme "
+            "(.footer-legal { list-style: none }) : les séparateurs « · » peuvent "
+            "rester seuls en fin de ligne"
+        )
+
+    # 3. Les pages portent la liste, pas la suite de liens séparés par des points.
+    pages = sorted(chemin for chemin in RACINE.glob("*.html"))
+    fautives = []
+    for page in pages:
+        contenu = page.read_text(encoding="utf-8")
+        if '<ul class="footer-legal">' not in contenu:
+            fautives.append(page.name)
+    if fautives:
+        erreurs.append(
+            f"{len(fautives)} page(s) n'ont pas la liste légale en pied de page "
+            f"({', '.join(fautives[:3])}…) : les séparateurs peuvent s'y retrouver "
+            "orphelins en fin de ligne"
+        )
+    return erreurs
+
+
 CONTROLES = (
     ("tailles de texte", controler_tailles_de_texte),
     ("cibles tactiles", controler_cibles_tactiles),
@@ -631,6 +692,7 @@ CONTROLES = (
     ("décor du héros et son repli", controler_decor_du_heros),
     ("qualité d'encodage des images", controler_qualite_d_encodage),
     ("habillage du panneau", controler_habillage_du_panneau),
+    ("pied de page", controler_pied_de_page),
 )
 
 
