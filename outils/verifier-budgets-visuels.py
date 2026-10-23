@@ -432,7 +432,7 @@ def verifier_heros_mondes(css: str) -> list[str]:
             raise Echec(
                 f"{contexte} {largeur}px à {densite}× : {requise:.0f}px de source nécessaires pour "
                 f"{servie}px disponibles — l'image serait agrandie {requise / servie:.2f}×, donc "
-                "visiblement floue. Réduire la largeur d'affichage, ou fournir un master plus large."
+                "visiblement floue. Réduire la largeur d'affichage : aucune illustration plus large n'est disponible (le générateur d'images plafonne à 1,06 Mpx, sous le master de 1,67 Mpx)."
             )
         return requise / servie
 
@@ -462,7 +462,7 @@ def verifier_heros_mondes(css: str) -> list[str]:
         f"Plus grande source requise : {pire[1] * servie:.0f}px pour {servie}px servis ({pire[0]}).",
         "       Bandeau au ratio naturel sous 700 px, panneau contenu à 2× et au-delà de "
         f"{HEROS_MONDES['seuil_panneau_un_x']} px en 1×, plein cadre ailleurs. "
-        "Un master plus large permettra de relever les largeurs de panneau sans toucher au code.",
+        "Le générateur d'images plafonnant à 1,06 Mpx, sous les 1,67 Mpx du master, ces largeurs sont le maximum atteignable aujourd'hui.",
     ]
 
 

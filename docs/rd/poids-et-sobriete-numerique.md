@@ -131,7 +131,21 @@ Autrement dit : plus **aucun agrandissement** sur les cinq largeurs de télépho
 
 ### 4.2 quater — Géométrie hybride et procédure d’arrivée d’un master plus large (22 octobre 2026)
 
-La régénération des illustrations a été **écartée sur mesure** : le générateur disponible ici plafonne à environ 1,05 million de pixels, soit 1 376×768 en 16:9, contre 1 573 000 px pour le master actuel de 1 672×941. Refaire les images les aurait **réduites de 33 %**. La personne responsable du site fournira donc un master d’au moins 2 880 px, et a retenu une géométrie hybride en attendant.
+**Rectification du 23 octobre 2026 — une attribution fausse.** Ce paragraphe disait d’abord que « la personne responsable du site fournira donc un master d’au moins 2 880 px ». C’est faux et cela a été corrigé : **les trois illustrations ont été créées par l’agent**, de A à Z, dans ce dépôt. Il n’existe aucun master externe à attendre, et personne n’a à en fournir un.
+
+Ce que la mesure dit, en revanche, reste vrai et change la conclusion. Le générateur d’images disponible ici plafonne à **1,06 Mpx quel que soit le ratio** — mesuré deux fois le 23 octobre 2026 : 1 376×768 en 16:9, 1 264×848 en 3:2. Or le master actuel fait 1 672×941, soit 1,57 Mpx. **Régénérer ne peut donc pas augmenter la résolution : cela la réduirait de 15 % en linéaire.**
+
+Cette perte n’est pas théorique. Test d’aller-retour sur `mondes-savoirs-hero` (descendre à N px, remonter à 1 672, mesurer le PSNR) contre un **témoin agrandi** depuis 1 376 px :
+
+| Fichier | en dessous de 1 200 px | 1 300 px | 1 376 px |
+| --- | ---: | ---: | ---: |
+| master actuel (1 672 px) | 32,5 dB | 33,7 dB | 34,6 dB |
+| génération native (1 376 px) | 34,0 dB | 35,4 dB | — |
+| agrandissement 1 672 ← 1 376 (témoin) | 37,4 dB | 38,7 dB | 40,1 dB |
+
+Plus le PSNR d’aller-retour est **bas**, plus l’image contient de détail au-dessus du seuil. Le master actuel porte donc du détail réel jusqu’à ≈ 1 600 px, nettement au-delà de ce qu’un agrandissement depuis 1 376 px produirait — et un peu au-delà de ce que le générateur sait produire aujourd’hui. Le contrôle visuel à 300 % le confirme : les pierres et les toits du master gardent des arêtes que la version passerelle a perdues.
+
+**Conséquence assumée :** l’illustration actuelle est conservée, et le plafond de netteté reste **1 672 px**, qui est exactement le besoin maximal du site. Aucun master n’est attendu de quiconque. La géométrie hybride retenue le 22 octobre 2026 tient toujours, mais pour une autre raison que celle qui avait été écrite : elle sert à ne jamais agrandir un fichier de 1 672 px, pas à patienter jusqu’à un fichier plus grand.
 
 **La géométrie hybride.** Le plein cadre — celui qui donne sa composition au héros — n’est conservé que là où il n’étire rien :
 
@@ -144,7 +158,7 @@ La régénération des illustrations a été **écartée sur mesure** : le gén�
 
 Résultat vérifié : **aucun agrandissement** sur les 17 combinaisons écran × densité testées, de 320 px à 3× à 2 560 px à 1×. Le 1,72× qui subsistait sur un portable Retina a disparu — au prix d’un panneau centré plutôt que d’un fond pleine largeur sur ces écrans.
 
-**Procédure quand le master arrive** (aucune modification de code n’est nécessaire avant l’étape 4) :
+**Procédure si un générateur capable de ≥ 2 880 px devient disponible** (ce n’est pas une tâche en attente de qui que ce soit ; aucune modification de code n’est nécessaire avant l’étape 4) :
 
 1. déposer le fichier en remplacement de `assets/images/mondes-savoirs-hero.jpg`, largeur ≥ 2 880 px, ratio 16:9, sans texte incrusté ;
 2. lancer `python3 outils/optimiser-images.py` : le script ne produit jamais de variante plus large que la source, et ajoute désormais automatiquement la largeur native et les paliers 2 560 et 2 880 px ;
@@ -204,7 +218,7 @@ Trois mutations volontaires ont été rejouées : `DENSITE_MAX = 2`, retour du p
 
 **Conséquence sur le relevé des fichiers servis.** Neuf variantes ont changé d'octets ; le relevé réseau du 20 octobre (`docs/rd/en-tetes-servis-2026-10-20.toml`) ne peut donc plus être vérifié avant que la version modifiée soit publiée. Plutôt que d'y inscrire des tailles que personne n'a mesurées, les neuf entrées portent `perime_le = 2026-10-23` : `outils/verifier-fichiers-servis.py` les déclare « relevé périmé, mesure à refaire après publication » au lieu de les faire passer pour concordantes. Le mécanisme est borné par des tests (28 au total) : un binaire modifié **sans** marqueur échoue toujours, un marqueur antérieur à la mesure, dans le futur, mal daté ou posé sur un texte échoue, et un marqueur **oublié** sur un fichier revenu concordant échoue aussi — il n'existe pas pour laisser dormir un chiffre faux.
 
-**Limite qui subsiste, énoncée telle quelle.** Le master reste 1 672 × 941. Tout ce qui précède est au mieux du 1:1 ; au-delà (un master de 2 880 px, voir la procédure du § 4.2 quater), il n'y a pas de détail supplémentaire à servir. Aucune revue humaine n'a eu lieu sur ce correctif : la mesure est celle d'un Chromium sans interface, pas d'un téléphone réel.
+**Limite qui subsiste, énoncée telle quelle.** Le master reste 1 672 × 941, et c’est aussi le besoin maximal du site : tout ce qui précède est du 1:1. Le générateur d’images disponible plafonne à 1,06 Mpx, donc en dessous du fichier existant (§ 4.2 quater) : aucune régénération ne peut augmenter la netteté aujourd’hui, et rien n’est attendu de personne. Aucune revue humaine n'a eu lieu sur ce correctif : la mesure est celle d'un Chromium sans interface, pas d'un téléphone réel.
 
 ### 4.3 Stockage du dépôt
 
