@@ -1389,22 +1389,23 @@ html.contraste-renforce .resource-scope-note {
   }
 }
 
-/* Le bas de page se lisait comme un flux : la mention de droits partait à
-   gauche, les liens légaux à droite, et la note de version se cassait sur une
-   troisième ligne, un point orphelin compris. Deux rangées décidées : les
-   droits et les liens sur la première, la note de version sur la seconde,
-   séparée par un filet. */
+/* Le bas de page est centré : les droits, puis les liens légaux, puis la note
+   de version derrière un filet. Trois blocs de longueurs très différentes
+   laissaient de grands trous quand l'un partait à gauche et l'autre à droite ;
+   centrés sur une seule colonne, ils composent un bloc unique à toutes les
+   largeurs. */
 .footer-bottom {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: baseline;
-  gap: .7rem 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: .55rem;
   margin-top: .2rem;
-  padding-top: 1.1rem;
+  padding-top: 1.2rem;
   border-top: 1px solid rgba(255, 255, 255, .15);
   color: rgba(255, 255, 255, .62);
   font-size: max(12px, .79rem);
   line-height: 1.5;
+  text-align: center;
 }
 
 .footer-bottom p {
@@ -1412,20 +1413,18 @@ html.contraste-renforce .resource-scope-note {
 }
 
 .footer-bottom > p:first-of-type {
-  grid-column: 1;
-  grid-row: 1;
   text-wrap: pretty;
 }
 
+/* Les liens légaux restent une liste, mais sans puce ni filet : seuls les
+   écarts séparent les entrées. Un séparateur vertical pouvait ouvrir une ligne
+   quand la rangée se repliait et se lisait alors comme une barre orpheline. */
 .footer-legal {
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: end;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  gap: .15rem .8rem;
+  gap: .3rem 1.1rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1436,13 +1435,6 @@ html.contraste-renforce .resource-scope-note {
   align-items: center;
 }
 
-/* Le séparateur est une règle verticale portée par l'élément, pas un « · » qui
-   pouvait rester seul en fin de ligne : il ne se détache jamais de son lien. */
-.footer-legal li + li {
-  padding-left: .8rem;
-  border-left: 1px solid rgba(255, 255, 255, .22);
-}
-
 .footer-legal a {
   color: var(--on-navy-text-soft);
   text-decoration: none;
@@ -1450,9 +1442,9 @@ html.contraste-renforce .resource-scope-note {
 }
 
 .footer-rd {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  padding-top: .75rem;
+  width: 100%;
+  max-width: 72ch;
+  padding-top: .8rem;
   border-top: 1px solid rgba(255, 255, 255, .1);
   text-wrap: pretty;
 }
@@ -1656,42 +1648,15 @@ html.contraste-renforce .resource-scope-note {
   }
 }
 
-/* Le bas de page passe sur une seule colonne dès que les quatre liens légaux ne
-   tiennent plus à côté des droits : à 768 px, la colonne des liens prenait
-   l'essentiel de la largeur et la mention de droits se cassait sur trois
-   lignes. Le seuil est mesuré, pas deviné : 553 px pour la mention sur une
-   ligne, 477 px pour les quatre liens, 24 px d'écart, soit 1 054 px utiles et
-   donc un écran de 1 102 px au moins. Mesuré : une seule ligne de droits à
-   partir de 1 130 px, deux lignes en dessous. */
-@media (max-width: 1120px) {
-  .footer-bottom {
-    grid-template-columns: minmax(0, 1fr);
-    gap: .5rem;
-  }
-
-  .footer-legal {
-    grid-column: 1;
-    grid-row: 2;
-    justify-self: start;
-    justify-content: flex-start;
-    gap: .25rem .7rem;
-  }
-
-  .footer-rd {
-    grid-row: 3;
-  }
-}
-
 @media (max-width: 520px) {
-  /* La liste légale se replie sur deux lignes : un filet vertical en tête de
-     ligne se lirait comme une barre orpheline. L'écart suffit alors à séparer. */
-  .footer-legal li + li {
-    padding-left: 0;
-    border-left: 0;
-  }
-
+  /* Sur téléphone, la liste légale se replie sur deux lignes. La largeur est
+     bornée pour que le repli soit toujours le même — trois entrées, puis deux —
+     au lieu de laisser cinq entrées tenir sur une ligne à 390 px et une seule
+     retomber seule en dessous. Mesuré : 252 px pour trois entrées, 331 px pour
+     quatre ; la borne de 320 px tombe entre les deux. */
   .footer-legal {
     gap: .3rem .9rem;
+    max-width: 20rem;
   }
 
   .container,
@@ -4364,7 +4329,6 @@ html[data-layout="compacte"] main :is(
     color: ButtonText !important;
     box-shadow: none !important;
   }
-}
 }
 
 /* ---------------------------------------------------------------------------

@@ -2,6 +2,20 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-23 — Le bas du pied de page centré
+
+- **Initiative :** `optimisation-du-site`. Deuxième capture, avec un point encore visible sous la note de version et une demande : « l’affichage devrait être centré ! Ce serait plus joli ! ».
+- **Vérification d’abord :** la capture précédait la publication (feuille de style mise en cache 600 s) : sur le code publié, ni puce, ni point orphelin, ni filet. Rien n’a été « recorrigé » à l’aveugle.
+- **Vrai cas limite trouvé :** un texte qui *commence* par la ponctuation d’un lien précédent — `Voir <a>la page</a>. Une phrase` — n’avait pas de phrase précédente dans son nœud. La règle n’accroche plus le point à la phrase suivante (« .Une phrase ») : ce nœud n’est plus découpé du tout. Trois cas rejoués dans Chromium.
+- **Décision :** le bloc du bas devient une seule colonne centrée (droits, liens légaux, note de version derrière son filet), à toutes les largeurs ; plus aucun filet vertical dans la liste légale ; le repli de la liste sur téléphone est borné à 320 px pour donner toujours trois entrées puis deux.
+- **Piège évité :** une première tentative avait supprimé avec le bloc média du pied de page un `@media (max-width: 920px)` entier et laissé 3 px de débordement à 320 px ; bissection CSS / JS, puis retrait du seul bloc devenu inutile. Un `}` orphelin après `forced-colors` a aussi été retiré.
+- **Résultat mesuré :** écart de centrage nul sur les trois blocs à 320, 390, 768, 1 024, 1 160, 1 440 et 1 920 px ; aucun débordement à aucune largeur, ni à 130 % de texte, ni sur six autres pages ; aucune puce ni bloc de ponctuation. Le pied de page passe de 377 à **425 px** à 1 440 px (bloc du bas sur trois lignes au lieu de deux) et de 1 035 à 1 038 px à 320 px.
+- **Garde-fou :** `controler_pied_de_page` est étendu au centrage, à l’absence de filet vertical et à la borne de repli. **Cinq mutations rejouées, cinq détectées** ; les 13 contrôles d’affichage passent.
+- **Essais navigateur :** `test-experience.cjs` à **8/8**.
+- **Protocole :** § 6 septies de [`formats-affichage.md`](formats-affichage.md) réécrit ; poids du pire cas ramené à 276,2 Kio mobile et 543,4 Kio grand écran.
+- **Limite :** mesure d’un Chromium sans interface ; le rendu des filets reste à constater sur un écran très dense.
+- **Prochaine action :** revue visuelle sur téléphone réel, puis décor vectoriel du héros pour `apprendre.html` et l’accueil.
+
 ## 2026-10-23 — Le pied de page remis d’aplomb
 
 - **Initiative :** `optimisation-du-site`. Signalement avec capture : « le bas de page est mal présenté, c’est anarchique ».

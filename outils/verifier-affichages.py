@@ -620,15 +620,16 @@ def controler_habillage_du_panneau() -> list[str]:
 
 
 def controler_pied_de_page() -> list[str]:
-    """Le bas de page se lit en deux rangées, sans ponctuation orpheline.
+    """Le bas de page se lit centré, sur une colonne, sans ponctuation orpheline.
 
     Le 23 octobre 2026, la personne responsable du site a signalé un pied de page
     « anarchique » : le script qui met chaque phrase en début de ligne découpait
     aussi le pied de page, si bien qu'un point final isolé après un lien formait
     une ligne à lui seul ; et le bloc du bas mêlait droits, liens légaux et note
-    de version dans un flux qui se cassait au hasard. Trois pièces doivent
-    rester : plus de découpage dans le pied de page, une ponctuation seule
-    rattachée à sa phrase, et une grille de deux rangées.
+    de version dans un flux qui se cassait au hasard. Elle a ensuite demandé que
+    ce bas de page soit centré. Quatre pièces doivent rester : plus de découpage
+    dans le pied de page, une ponctuation seule rattachée à sa phrase, une seule
+    colonne centrée, et une liste légale sans puce ni filet.
     """
     erreurs: list[str] = []
     script = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
@@ -645,22 +646,52 @@ def controler_pied_de_page() -> list[str]:
             "site.js — le découpage ne vérifie plus qu'un morceau contient une lettre ou un "
             "chiffre : un point final isolé après un lien redevient une ligne à lui seul"
         )
+    # 2 bis. Une ponctuation qui ouvre le texte appartient au lien qui précède : on
+    # ne découpe pas, sinon elle s'affiche collée devant la phrase suivante.
+    if "if (!phrases.length) return;" not in script:
+        erreurs.append(
+            "site.js — un texte qui commence par une ponctuation est de nouveau découpé : "
+            "le point du lien précédent s'affiche collé devant la phrase suivante"
+        )
 
     texte = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
     # Recherche ciblée : après un bloc média, le balayage générique `regles()`
     # démarre sur une accolade fermante et manque la règle suivante.
     bas = re.search(r"\.footer-bottom\s*\{([^}]*)\}", texte)
-    if not bas or "display: grid" not in bas.group(1) or "grid-template-columns" not in bas.group(1):
+    manquants = [
+        declaration
+        for declaration in (
+            "display: grid",
+            "grid-template-columns: minmax(0, 1fr)",
+            "justify-items: center",
+            "text-align: center",
+        )
+        if not bas or declaration not in bas.group(1)
+    ]
+    if manquants:
         erreurs.append(
-            "site.css — le bas de page n'est plus une grille à deux rangées : droits et "
-            "liens se répartissent au hasard et la note de version se casse"
+            "site.css — le bas de page n'est plus une colonne centrée "
+            f"({', '.join(manquants)} manquant) : droits, liens et note de version "
+            "se répartissent gauche et droite et laissent des trous"
         )
     legal = re.search(r"\.footer-legal\s*\{([^}]*)\}", texte)
-    if not legal or "list-style: none" not in legal.group(1):
+    if not legal or "list-style: none" not in legal.group(1) or "justify-content: center" not in legal.group(1):
         erreurs.append(
-            "site.css — les liens légaux ne sont plus une liste mise en forme "
-            "(.footer-legal { list-style: none }) : les séparateurs « · » peuvent "
-            "rester seuls en fin de ligne"
+            "site.css — les liens légaux ne sont plus une liste centrée sans puce "
+            "(.footer-legal { list-style: none; justify-content: center }) : une puce "
+            "ou un alignement à gauche casse le bloc"
+        )
+    if re.search(r"\.footer-legal li \+ li\s*\{[^}]*border-left", texte):
+        erreurs.append(
+            "site.css — un filet vertical sépare de nouveau les liens légaux : quand la "
+            "rangée se replie, il ouvre la ligne et se lit comme une barre orpheline"
+        )
+    telephone = re.search(r"@media \(max-width: 520px\) \{(.*?)\n\}", texte, re.S)
+    if not telephone or "max-width: 20rem" not in telephone.group(1):
+        erreurs.append(
+            "site.css — la liste légale n'est plus bornée sur téléphone "
+            "(@media (max-width: 520px) { .footer-legal { max-width: 20rem } }) : "
+            "à 390 px quatre entrées tiennent sur une ligne et la cinquième retombe seule"
         )
 
     # 3. Les pages portent la liste, pas la suite de liens séparés par des points.
