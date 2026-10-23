@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-23 — L’illustration d’« Apprendre » n’est plus agrandie
+
+- **Initiative :** `optimisation-du-site`. Signalement avec capture : « l’image dans le menu apprendre est moche, on voit les pixels ».
+- **Cause trouvée, mécanique :** l’attribut `height="941"` du HTML servait de hauteur. `aspect-ratio` ne calcule une dimension que si l’autre est automatique : la boîte mesurait **497 × 941 px** au lieu de 497 × 311, et l’image 16/9 était étirée **2,1 fois** pour la couvrir. Le défaut ne venait donc pas de l’encodage.
+- **Décision :** `height: auto` sur `.english-promo-art img` ; `aspect-ratio` reprend la main et `object-fit: cover` recadre au lieu d’étirer.
+- **Résultat mesuré :** boîte 328 × 205 à 390 px, 497 × 311 au-delà de 760 px ; la variante servie couvre toujours au moins le pixel de l’écran (marge de 1,19× à 1,97× selon le profil, 1,44× avant correction tombait à 0,47× sur écran 2×), aucun débordement horizontal.
+- **Garde-fou :** nouveau 14ᵉ contrôle `controler_illustrations` (`height: auto`, `aspect-ratio`, `object-fit`, les deux `sizes`, dimensions intrinsèques, plafond de 520 px). **Six mutations rejouées, six détectées** — dont une d’abord passée inaperçue (`sizes` faussé sur une seule des deux sources), corrigée en comparant le nombre d’occurrences.
+- **Protocole :** § 6 ter bis de [`formats-affichage.md`](formats-affichage.md).
+- **Limite :** mesure d’un Chromium sans interface sur `apprendre.html` ; les autres illustrations n’utilisent pas `aspect-ratio` et ne portent pas ce défaut.
+- **Prochaine action :** décor vectoriel du héros pour `apprendre.html` et l’accueil.
+
 ## 2026-10-23 — Le texte du bas de page vraiment centré
 
 - **Initiative :** `optimisation-du-site`. Troisième retour, capture à l’appui : « l’affichage est pas top là en bas de page, c’est pas vraiment équilibré ».

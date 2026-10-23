@@ -3994,7 +3994,12 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
   .english-promo-art { width: min(100%, 520px); }
   .english-promo-panel { justify-items: start; }
 }
-.english-promo-art img { width: 100%; aspect-ratio: 16 / 10; border-radius: 15px; object-fit: cover; object-position: 66% center; }
+/* `height: auto` n'est pas décoratif : l'attribut `height` du HTML s'applique
+   comme une hauteur de 941 px, et `aspect-ratio` ne joue que sur une dimension
+   automatique. Sans cette ligne, la boîte mesurait 497 × 941 px et l'image,
+   étirée de 2,1 fois pour la couvrir, montrait ses pixels (constaté le
+   23 octobre 2026). */
+.english-promo-art img { width: 100%; height: auto; aspect-ratio: 16 / 10; border-radius: 15px; object-fit: cover; object-position: 66% center; }
 .english-promo-art figcaption { margin-top: .5rem; color: var(--muted); font-size: max(12px, .76rem); line-height: 1.45; }
 @media (max-width: 760px) {
   .english-promo-panel { grid-template-columns: minmax(0, 1fr); }

@@ -243,6 +243,61 @@ def controler_plafonds_d_images() -> list[str]:
     return erreurs
 
 
+def controler_illustrations() -> list[str]:
+    """Une illustration ne doit jamais être agrandie au-delà de sa source.
+
+    Le 23 octobre 2026, l'illustration de la section « Aventure pédagogique »
+    s'affichait sur 497 × 941 px : `aspect-ratio` ne fixe une dimension que si
+    l'autre est automatique, et l'attribut `height="941"` du HTML tenait lieu de
+    hauteur. L'image était donc étirée de 2,1 fois pour couvrir sa boîte, d'où
+    des pixels visibles. Deux pièces doivent rester : la hauteur automatique
+    dans la feuille et une déclaration `sizes` qui dit la vérité sur la largeur.
+    """
+    erreurs: list[str] = []
+    site = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+    regle = re.search(r"\.english-promo-art img\s*\{([^}]*)\}", site)
+    if not regle:
+        erreurs.append("site.css — la règle .english-promo-art img est introuvable")
+    else:
+        contenu = regle.group(1)
+        for declaration, message in (
+            ("height: auto", "sans `height: auto`, l'attribut height du HTML fige la hauteur "
+                             "et l'image est étirée 2,1 fois pour couvrir sa boîte"),
+            ("aspect-ratio", "sans `aspect-ratio`, la boîte suit la hauteur de la source et "
+                             "le bandeau change de hauteur selon la variante servie"),
+            ("object-fit: cover", "sans `object-fit`, la déformation remplacerait le recadrage"),
+        ):
+            if declaration not in contenu:
+                erreurs.append(f"site.css — .english-promo-art img : {declaration} manquant ; {message}")
+    page = (RACINE / "apprendre.html").read_text(encoding="utf-8")
+    figure = re.search(r'<figure class="english-promo-art">(.*?)</figure>', page, re.S)
+    if not figure:
+        erreurs.append("apprendre.html — la figure .english-promo-art est introuvable")
+    else:
+        bloc = figure.group(1)
+        attendu = 'sizes="(max-width: 760px) calc(100vw - 4rem), 520px"'
+        declarees = re.findall(r"sizes=\"([^\"]*)\"", bloc)
+        # Les deux sources (AVIF et WebP) portent la même déclaration : une seule
+        # occurrence laisserait l'autre format annoncer une autre largeur, et le
+        # navigateur choisirait une variante trop petite pour ce format.
+        if len(declarees) != 2 or set(declarees) != {"(max-width: 760px) calc(100vw - 4rem), 520px"}:
+            erreurs.append(
+                "apprendre.html — les deux sources de l'illustration doivent déclarer "
+                "`(max-width: 760px) calc(100vw - 4rem), 520px` : " + attendu
+            )
+        if not re.search(r'<img[^>]*width="1672"[^>]*height="941"', bloc):
+            erreurs.append(
+                "apprendre.html — les dimensions intrinsèques de l'illustration (1672 × 941) "
+                "ont disparu : la place ne serait plus réservée avant chargement"
+            )
+    # Le plafond de 520 px rend la déclaration `sizes` vraie dans toutes les
+    # présentations ; sans lui, la colonne s'élargit et la variante choisie
+    # devient trop petite pour la place occupée.
+    if "width: min(100%, 520px)" not in site:
+        erreurs.append("site.css — le plafond de 520 px de .english-promo-art a disparu")
+    return erreurs
+
+
 def controler_pistes_de_grille() -> list[str]:
     """`1fr` vaut `minmax(auto, 1fr)` : la largeur minimale du contenu peut
     élargir la piste et faire défiler la page. `minmax(0, 1fr)` l'empêche."""
@@ -728,6 +783,7 @@ CONTROLES = (
     ("panneau du menu", controler_panneau_du_menu),
     ("mesure de lecture", controler_mesure_de_lecture),
     ("plafonds d'images par densité", controler_plafonds_d_images),
+    ("illustrations non agrandies", controler_illustrations),
     ("pistes de grille", controler_pistes_de_grille),
     ("césure des mots longs", controler_cesure),
     ("densité du rendu 3D", controler_densite_du_rendu_3d),
