@@ -169,13 +169,17 @@ Quatre défauts sont sortis de la mesure, dont un bloquant.
 | --- | --- | --- |
 | Liens inatteignables en paysage | panneau de **472 px** commençant à 49 px, donc bas à **522 px** pour un écran de 390 px ; `overflow: visible` | plafond `calc(100dvh - var(--hauteur-entete))` + `overflow-y: auto` |
 | Contenu sorti par le haut | `justify-content: center` sur un conteneur défilable : « Accueil » à **y = 10** pour un panneau à 51 | `justify-content: safe center` (repli `flex-start`) |
-| Commandes de 24 px | cinq boutons de 24 px de haut, empilés en deux ou trois rangées irrégulières | **44 px** dans toute la portée compacte, grille `auto-fit` sous 520 px |
+| Commandes de 24 px | cinq boutons de 24 px de haut, empilés en deux ou trois rangées irrégulières | **36 px** dans toute la portée compacte, grille `auto-fit` sous 520 px |
 | Libellés coupés | « Parcour / s », « Affichag / e », « Présent / ation » (`overflow-wrap: anywhere`) | deux colonnes pleines, `overflow-wrap: normal`, « Présentation » sur toute la largeur |
 
 - **Le plancher tactile du site ne change pas** : `PLANCHER_CIBLE_PX` reste à
   24 px (WCAG 2.2, 2.5.8) pour les liens et les autres cibles. Les cinq commandes
-  de l'en-tête compact ont leur propre plancher, `PLANCHER_COMMANDES_ENTETE_PX = 44`,
-  parce qu'elles se touchent au pouce sans visée.
+  de l'en-tête compact ont leur propre plancher, `PLANCHER_COMMANDES_ENTETE_PX = 36`,
+  parce qu'elles se touchent au pouce sans visée. Ce plancher a d'abord été posé
+  à 44 px le même jour ; sur retour d'usage (« les boutons sont trop gros »), il
+  est redescendu à 36 px : la grille de trois rangées pesait alors 149 px d'en-tête
+  à 320 px de large, contre 122 px. À 36 px, le bouton garde 12 px de marge autour
+  d'un libellé de 12 px et reste très au-dessus du minimum WCAG.
 - **La hauteur de l'en-tête est mesurée, pas supposée.** Elle varie avec le logo,
   le cran de texte (217 px à 320 px et 130 %) et le mode compact. `site.js`
   publie `--hauteur-entete` au chargement puis sur chaque `ResizeObserver` :
@@ -193,14 +197,14 @@ Mesure après correction (Chromium sans interface, panneau ouvert) :
 
 | Profil | Panneau (x, y, l, h) | Bas ≤ écran | Commandes |
 | --- | --- | --- | --- |
-| 320 × 568 @2 | 0, 149, 320, 411 | 560 ≤ 568 | 2 + 2 + 1 pleine largeur, 44 px |
-| 390 × 780 @3 | 0, 149, 390, 472 | 621 ≤ 780 | 44 px, libellés entiers |
-| 430 × 900 @3 | 0, 149, 430, 472 | 621 ≤ 900 | 44 px |
-| 844 × 390 @3 (paysage) | 0, 51, 844, 331 | 382 ≤ 390 | une rangée, 44 px |
-| 768 × 1024 @2 | 8, 192, 752, 472 | 664 ≤ 1024 | cinq boutons de 44 px |
+| 320 × 568 @2 | 0, 122, 320, 411 | 560 ≤ 568 | 2 + 2 + 1 pleine largeur, 36 px |
+| 390 × 780 @3 | 0, 122, 390, 472 | 621 ≤ 780 | 36 px, libellés entiers |
+| 430 × 900 @3 | 0, 122, 430, 472 | 621 ≤ 900 | 36 px |
+| 844 × 390 @3 (paysage) | 0, 49, 844, 331 | 380 ≤ 390 | une rangée, 36 px |
+| 768 × 1024 @2 | 8, 192, 752, 472 | 664 ≤ 1024 | cinq boutons de 44 px (en-tête non compact) |
 
 Aucun débordement horizontal, aucun lien hors du cadre, aucune commande sous
-44 px, à tous les crans de texte (100 % et 130 %).
+36 px dans la portée compacte, à tous les crans de texte (100 % et 130 %).
 
 Le garde-fou `controler_panneau_du_menu` (11ᵉ contrôle de
 [`verifier-affichages.py`](../../outils/verifier-affichages.py)) exige, dans une

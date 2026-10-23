@@ -33,7 +33,9 @@ PLANCHER_CIBLE_PX = 24  # WCAG 2.2, 2.5.8
 
 # Les cinq commandes de l'en-tête compact sont plus exigeantes : elles se
 # touchent au pouce, sans visée, et se serraient à 24 px sur téléphone.
-PLANCHER_COMMANDES_ENTETE_PX = 44
+# 36 px est le compromis retenu le 23 octobre 2026 après un premier passage
+# à 44 px, jugé trop lourd sur téléphone (149 px d'en-tête à 320 px de large).
+PLANCHER_COMMANDES_ENTETE_PX = 36
 
 
 CRAN_LE_PLUS_REDUIT = 0.75  # le plus petit réglage de taille de texte du site
@@ -161,7 +163,7 @@ def controler_cibles_tactiles() -> list[str]:
 
 
 def controler_en_tete_compact() -> list[str]:
-    """L'en-tête compact ne doit pas rapetisser ses commandes sous 44 px."""
+    """L'en-tête compact ne doit pas rapetisser ses commandes sous 36 px."""
     texte = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
     # Seules les règles qui visent les commandes elles-mêmes comptent : le
     # conteneur de l'en-tête, lui, a le droit d'avoir min-height: 0. La dernière
@@ -441,10 +443,21 @@ def controler_panneau_du_menu() -> list[str]:
         if "display: grid" in corps
         and "repeat(auto-fit, minmax(min(100px, 100%), 1fr))" in corps
     ]
+    derniere = [
+        corps for corps in blocs_de(
+            texte, "html.has-js .site-header.is-compact .layout-settings"
+        )
+        if "grid-column: 1 / -1" in corps
+    ]
     if not grille:
         erreurs.append(
-            "site.css — les commandes de l'en-tête compact ne sont plus en grille de "
-            "deux colonnes sous 520 px : elles se cassent en mots (« Parcour/s »)"
+            "site.css — les commandes de l'en-tête compact ne sont plus en grille "
+            "sous 520 px : elles se cassent en mots (« Parcour/s »)"
+        )
+    if not derniere:
+        erreurs.append(
+            "site.css — la dernière commande de l'en-tête compact n'occupe plus toute "
+            "la largeur : un trou se rouvre sous un nombre impair de commandes"
         )
     return erreurs
 
