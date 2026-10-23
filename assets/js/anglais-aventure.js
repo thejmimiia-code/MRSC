@@ -1176,13 +1176,19 @@
     const bounds = sceneCanvas.getBoundingClientRect();
     if (!bounds.width || !bounds.height) return;
     // Le décor est dessiné une fois par monde, pas à chaque image : rendre à la
-    // densité réelle de l'écran ne coûte donc rien en continu. L'ancien plafond
-    // de 1,5 faisait agrandir le tampon par le CSS sur tout écran à 2× ou 3×,
-    // ce qui rendait les arêtes des décors floues. Le budget de pixels protège
-    // les appareils modestes sur un écran très large, sans jamais descendre
-    // sous 1 (un tampon plus petit que la zone d'affichage serait toujours flou).
-    const densite = Math.min(window.devicePixelRatio || 1, 2);
-    const pixelsDisponibles = 4_000_000;
+    // densité réelle de l'écran ne coûte donc rien en continu. Le budget de
+    // pixels est le seul plafond, et il ne descend jamais sous 1 (un tampon
+    // plus petit que la zone d'affichage serait toujours flou).
+    //
+    // Un plafond fixe à 2 subsistait : sur un téléphone à 3×, le tampon était
+    // étiré de 1,5× par le CSS. Les arêtes des décors devenaient molles, et
+    // c'est exactement ce qui se voit le plus sur un petit écran. La densité
+    // suit donc l'écran jusqu'à 4, valeur au-delà de laquelle aucun appareil
+    // courant n'affiche d'utilité supplémentaire.
+    const DENSITE_MAX = 4;
+    const BUDGET_PIXELS = 6_000_000;
+    const densite = Math.min(window.devicePixelRatio || 1, DENSITE_MAX);
+    const pixelsDisponibles = BUDGET_PIXELS;
     const surfaceCss = bounds.width * bounds.height;
     const densiteMax = Math.sqrt(pixelsDisponibles / surfaceCss);
     const pixelRatio = Math.max(1, Math.min(densite, densiteMax));

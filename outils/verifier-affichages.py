@@ -249,6 +249,74 @@ def controler_cesure() -> list[str]:
     return erreurs
 
 
+def controler_densite_du_rendu_3d() -> list[str]:
+    """Le décor 3D doit se dessiner au pixel de l'écran, sans plafond de densité.
+
+    Le 22 octobre 2026, le tampon était plafonné à `min(devicePixelRatio, 2)` :
+    sur un téléphone à 3×, un tampon de 642 px était étiré sur 964 px de dalle,
+    d'où un flou de 1,5×. Retirer ce plafond a suffi à retrouver du 1:1 ; ce
+    contrôle empêche qu'on le réintroduise pour économiser du calcul.
+    """
+    source = (RACINE / "assets" / "js" / "anglais-aventure.js").read_text(encoding="utf-8")
+    erreurs: list[str] = []
+
+    plafond = re.search(
+        r"Math\.min\(\s*(?:window\.)?devicePixelRatio(?:\s*\|\|\s*[\d.]+)?\s*,\s*([\d.]+)\s*\)",
+        source,
+    )
+    if plafond:
+        ligne = numero_ligne(source, plafond.start())
+        erreurs.append(
+            f"anglais-aventure.js:{ligne} — la densité est plafonnée à {plafond.group(1)}× : "
+            "au-delà, le tampon est étiré et le décor devient flou"
+        )
+
+    densite = re.search(r"DENSITE_MAX\s*=\s*([\d.]+)", source)
+    if not densite or float(densite.group(1)) < 3:
+        erreurs.append(
+            "anglais-aventure.js — `DENSITE_MAX` doit valoir au moins 3 : en dessous, "
+            "un écran de téléphone à 3× affiche un rendu agrandi"
+        )
+
+    budget = re.search(r"BUDGET_PIXELS\s*=\s*([\d_]+)", source)
+    if not budget or int(budget.group(1).replace("_", "")) < 6_000_000:
+        erreurs.append(
+            "anglais-aventure.js — `BUDGET_PIXELS` doit rester à 6 Mpx au moins : "
+            "un budget plus bas rabote la densité sur les grands écrans denses"
+        )
+    return erreurs
+
+
+QUALITE_MINIMALE = {"avif": 78, "webp": 88}
+
+
+def controler_qualite_d_encodage() -> list[str]:
+    """Les variantes se servent en 1:1 : leur compression doit donc être haute.
+
+    En qualité 60, l'AVIF du héros mesurait 31,9 dB à 800 px (32,8 dB en q72,
+    33,2 dB en q78) : le flou de compression, superposé à un affichage 1:1 sur
+    téléphone, se lit comme du pixel. Ce plancher interdit de redescendre la
+    qualité pour gagner du poids sans assumer la perte de netteté.
+    """
+    chemin = RACINE / "outils" / "optimiser-images.py"
+    source = chemin.read_text(encoding="utf-8")
+    erreurs: list[str] = []
+    blocs = re.findall(r'"qualites"\s*:\s*\{([^}]*)\}', source)
+    if not blocs:
+        return ["optimiser-images.py — aucune déclaration `\"qualites\"` trouvée"]
+    for bloc in blocs:
+        for format_image, minimum in QUALITE_MINIMALE.items():
+            trouve = re.search(rf'"{format_image}"\s*:\s*(\d+)', bloc)
+            if not trouve:
+                erreurs.append(f"optimiser-images.py — qualité {format_image} absente de « {bloc.strip()} »")
+            elif int(trouve.group(1)) < minimum:
+                erreurs.append(
+                    f"optimiser-images.py — {format_image} en qualité {trouve.group(1)}, "
+                    f"sous le plancher {minimum} : les variantes servies en 1:1 deviendraient floues"
+                )
+    return erreurs
+
+
 CONTROLES = (
     ("tailles de texte", controler_tailles_de_texte),
     ("cibles tactiles", controler_cibles_tactiles),
@@ -257,6 +325,8 @@ CONTROLES = (
     ("plafonds d'images par densité", controler_plafonds_d_images),
     ("pistes de grille", controler_pistes_de_grille),
     ("césure des mots longs", controler_cesure),
+    ("densité du rendu 3D", controler_densite_du_rendu_3d),
+    ("qualité d'encodage des images", controler_qualite_d_encodage),
 )
 
 

@@ -61,7 +61,7 @@ Le détail page par page est régénéré dans [`poids-pages.md`](poids-pages.md
 
 ### 4.2 Images : formats et qualité
 
-Trois images représentaient l’essentiel du poids : `accueil-logo-mrsc-3d.jpg` (236,0 Kio), `mondes-savoirs-hero.jpg` (370,7 Kio) et `escales-anglais-hero.jpg` (180,5 Kio). Chacune a reçu des variantes AVIF (qualité 60) et WebP (qualité 80), en 800 px et à sa largeur d’origine (1 400 px ou 1 672 px) ; une variante 1 200 px a été ajoutée pour l’atlas, affiché dans une colonne plus étroite.
+Trois images représentaient l’essentiel du poids : `accueil-logo-mrsc-3d.jpg` (236,0 Kio), `mondes-savoirs-hero.jpg` (370,7 Kio) et `escales-anglais-hero.jpg` (180,5 Kio). Chacune a reçu des variantes AVIF (qualité 60) et WebP (qualité 80) — **portées à 78 et 88 le 23 octobre 2026, voir le § 4.2 quinquies** —, en 800 px et à sa largeur d’origine (1 400 px ou 1 672 px) ; une variante 1 200 px a été ajoutée pour l’atlas, affiché dans une colonne plus étroite.
 
 | Image | JPEG source | AVIF 800 px | WebP 800 px | AVIF pleine largeur | WebP pleine largeur |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -154,6 +154,55 @@ Résultat vérifié : **aucun agrandissement** sur les 17 combinaisons écran ×
 6. refaire la mesure complète et consigner le nouveau poids.
 
 **Ce qui reste vrai en attendant.** Le master de 1 672 px suffit désormais à tous les cas, mais un panneau de 836 px est plus petit qu’un fond pleine largeur : la composition change sur Retina. Aucun navigateur n’a été lancé ici, donc ce basculement n’a pas été vu.
+
+### 4.2 quinquies — « La version smartphone est pixélisée » : la mesure a démenti l'agrandissement (23 octobre 2026)
+
+Le signalement ne portait plus sur un cadrage mais sur la netteté perçue sur téléphone. Trois hypothèses ont été mesurées ; **deux étaient fausses**, et la vraie cause n'était pas celle qu'on croyait.
+
+**Première fausse piste : le `srcset` ne tiendrait pas compte de la densité.** Une première sonde lisait `naturalWidth` et en concluait qu'à 390 px de large et 3× le navigateur ne servait que 390 pixels de source pour 1 170 nécessaires. C'était un **artefact de mesure** : pour une image choisie par descripteurs `w`, `naturalWidth` est rapporté *après* correction de densité (`1200 / 3,08 ≈ 390`). La mesure correcte recharge le fichier choisi hors `srcset` et lit sa largeur réelle. Refaites sur **42 combinaisons** page × écran × densité (320 px à 2× jusqu'à 2 560 px à 1×, `anglais-aventure.html`, `index.html`, `apprendre.html`) :
+
+| Page | Exemple de profil | Fichier servi | Besoin réel | Verdict |
+| --- | --- | ---: | ---: | --- |
+| `anglais-aventure.html` | 390 px @3× | 1 200 px | 1 170 px | 1:1, aucun agrandissement |
+| `anglais-aventure.html` | 430 px @3× | 1 672 px | 1 290 px | marge |
+| `anglais-aventure.html` | 1 920 px @2× | 1 672 px | 1 672 px | exact |
+| `anglais-aventure.html` | 1 920 px @3× | 1 672 px | 1 671 px | exact (panneau réduit à 557 px) |
+| `index.html` | 390 px @3× | 1 400 px | 1 099 px | marge |
+| `apprendre.html` | 1 920 px @3× | 1 672 px | 1 491 px | marge |
+
+**Aucun déficit sur les 42 profils.** La géométrie hybride du § 4.2 quater fait donc ce qu'elle annonce : le navigateur ne reçoit jamais moins de pixels qu'il n'en affiche. L'agrandissement n'était pas la cause du flou.
+
+**Deuxième fausse piste, partiellement vraie : le tampon du décor 3D.** Le plafond `min(devicePixelRatio, 2)` du § 4.2 bis bridait encore les téléphones à 3×. Mesuré après ouverture d'une mission, tampon contre dalle :
+
+| Écran | Avant | Après | Écart |
+| --- | --- | --- | --- |
+| 390 px @3× | 642 × 402 | 964 × 602 | 322 px de flou en moins |
+| 430 px @3× | 722 × 452 | 1 084 × 677 | 362 px |
+| 820 px @2× | 1 435 × 897 | 1 435 × 897 | déjà exact |
+
+Le plafond passe à **4×** et le budget de tampon de 4 à **6 Mpx** (`DENSITE_MAX = 4`, `BUDGET_PIXELS = 6_000_000`). Le rendu est un rendu vectoriel WebGL : capturé à 3× après clic sur une mission, il montre des arêtes franches et des diagonales sans escalier.
+
+**Cause réelle et corrigée : la qualité d'encodage.** L'AVIF était encodé en **qualité 60**. Comparé à la source ramenée à 800 px, après normalisation sRGB :
+
+| Qualité AVIF | PSNR | Poids (800 px) | Lecture à 200 % |
+| --- | ---: | ---: | --- |
+| 60 | 31,9 dB | 69,9 Kio | rambardes du pont et feuillages fondus, aplatissement des pages de livres |
+| 72 | 32,8 dB | 90,4 Kio | détails revenus, feuillages encore mous |
+| **78** | **33,2 dB** | **104,9 Kio** | **retenu : rambardes, tuiles et feuillage distincts** |
+| 82 | 33,5 dB | 119,3 Kio | gain non perceptible au-delà |
+
+Le déficit était donc visible **parce que l'image est servie en 1:1** : à l'échelle exacte du pixel, un bloc de compression de 8 × 8 px se lit directement comme du pixel. Qualités portées à **AVIF 78 et WebP 88** (le WebP reste un repli ; au-delà de 88, la variante 1 672 px dépasserait son JPEG source, ce que l'outil refuse — et il a raison : un dérivé plus lourd que sa source n'a pas de sens).
+
+**Poids après la passe** (gzip estimé, `outils/verifier-poids-pages.py`) : `anglais-aventure.html` 227,6 Kio mobile / 415,9 Kio grand écran, `apprendre.html` 202,8 / 391,1, `index.html` 140,4 / 238,7. Les 98 pages restent sous 300 Kio et 450 Kio. Le total des variantes passe de 1 553 à **2 199 Kio** dans le dépôt, pour des fichiers servis plus lourds de 20 à 35 % sur les images — le prix explicite de la netteté.
+
+**Garde-fous ajoutés** (`outils/verifier-affichages.py`, joués en CI) :
+
+- `DENSITE_MAX ≥ 3`, `BUDGET_PIXELS ≥ 6 Mpx`, et **aucun `Math.min(devicePixelRatio, N)`** dans `anglais-aventure.js` — le plafond exact qui avait produit le flou ;
+- qualité d'encodage **AVIF ≥ 78 et WebP ≥ 88** dans `outils/optimiser-images.py`, avec la ligne fautive nommée.
+
+Trois mutations volontaires ont été rejouées : `DENSITE_MAX = 2`, retour du plafond `Math.min(window.devicePixelRatio || 1, 2)`, et retour aux qualités 60/80. Les trois sont détectées avec un message qui nomme la cause ; les fichiers ont été restaurés à l'identique (`diff` vide).
+
+**Limite qui subsiste, énoncée telle quelle.** Le master reste 1 672 × 941. Tout ce qui précède est au mieux du 1:1 ; au-delà (un master de 2 880 px, voir la procédure du § 4.2 quater), il n'y a pas de détail supplémentaire à servir. Aucune revue humaine n'a eu lieu sur ce correctif : la mesure est celle d'un Chromium sans interface, pas d'un téléphone réel.
 
 ### 4.3 Stockage du dépôt
 

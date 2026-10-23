@@ -72,7 +72,8 @@ doit fournir au moins autant de pixels que l'écran en affiche.
 `outils/verifier-affichages.py` vérifie que les règles sur lesquelles repose
 cette mesure sont toujours présentes : plancher de texte, plancher de cible,
 mesure de lecture, plafonds d'image par densité, pistes de grille sans `1fr`
-nue, césure des mots longs, en-tête compact non rapetissé.
+nue, césure des mots longs, en-tête compact non rapetissé, densité du rendu 3D
+et qualité d'encodage des images (voir § 6 bis).
 
 Il ne remplace pas la mesure : il constate que ses appuis n'ont pas été
 retirés. **Sept mutations** — texte à `.72rem`, contact ramené à 23 px,
@@ -117,6 +118,26 @@ Deux conséquences traitées :
 
 Le simulateur embarque la même échelle et la même clé, sinon il serait retombé à
 100 % en lisant une valeur qu'il ne connaît pas ; sa page a été régénérée.
+
+## 6 bis. Netteté : le rendu 3D et l'encodage (23 octobre 2026)
+
+Deux garde-fous nés du signalement « la version smartphone est pixelisée ». La
+mesure complète est au § 4.2 quinquies de
+[`poids-et-sobriete-numerique.md`](poids-et-sobriete-numerique.md) ; ici, seule
+la règle vérifiée est rappelée.
+
+- **Densité du rendu 3D.** `assets/js/anglais-aventure.js` doit garder
+  `DENSITE_MAX >= 3` et `BUDGET_PIXELS >= 6_000_000`, et ne doit contenir
+  **aucun** `Math.min(devicePixelRatio, N)`. Ce plafond était la cause du flou
+  du décor : tampon de 642 px étiré sur 964 px de dalle à 3×.
+- **Qualité d'encodage.** `outils/optimiser-images.py` doit garder AVIF ≥ 78 et
+  WebP ≥ 88. Les images étant servies au pixel de l'écran, une qualité basse se
+  lit directement comme du pixel : la q60 mesurait 31,9 dB à 800 px, contre
+  33,2 dB en q78.
+
+Trois mutations — `DENSITE_MAX = 2`, plafond `Math.min(window.devicePixelRatio
+|| 1, 2)` réintroduit, qualités 60/80 rétablies — sont détectées avec la ligne
+fautive nommée.
 
 ## 7. Ce qui n'est pas couvert
 - **Police réelle.** La mesure utilise les polices installées dans

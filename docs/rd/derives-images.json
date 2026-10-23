@@ -12,32 +12,32 @@
           "largeur": 800,
           "hauteur": 533,
           "format": "avif",
-          "qualite": 60,
-          "octets": 53242
+          "qualite": 78,
+          "octets": 80647
         },
         {
           "fichier": "assets/images/accueil-logo-mrsc-3d-800.webp",
           "largeur": 800,
           "hauteur": 533,
           "format": "webp",
-          "qualite": 80,
-          "octets": 68978
+          "qualite": 88,
+          "octets": 94676
         },
         {
           "fichier": "assets/images/accueil-logo-mrsc-3d-1400.avif",
           "largeur": 1400,
           "hauteur": 933,
           "format": "avif",
-          "qualite": 60,
-          "octets": 116654
+          "qualite": 78,
+          "octets": 181299
         },
         {
           "fichier": "assets/images/accueil-logo-mrsc-3d-1400.webp",
           "largeur": 1400,
           "hauteur": 933,
           "format": "webp",
-          "qualite": 80,
-          "octets": 158766
+          "qualite": 88,
+          "octets": 215546
         }
       ]
     },
@@ -51,48 +51,48 @@
           "largeur": 800,
           "hauteur": 450,
           "format": "avif",
-          "qualite": 60,
-          "octets": 71576
+          "qualite": 78,
+          "octets": 107416
         },
         {
           "fichier": "assets/images/mondes-savoirs-hero-800.webp",
           "largeur": 800,
           "hauteur": 450,
           "format": "webp",
-          "qualite": 80,
-          "octets": 77800
+          "qualite": 88,
+          "octets": 106544
         },
         {
           "fichier": "assets/images/mondes-savoirs-hero-1200.avif",
           "largeur": 1200,
           "hauteur": 675,
           "format": "avif",
-          "qualite": 60,
-          "octets": 140256
+          "qualite": 78,
+          "octets": 209073
         },
         {
           "fichier": "assets/images/mondes-savoirs-hero-1200.webp",
           "largeur": 1200,
           "hauteur": 675,
           "format": "webp",
-          "qualite": 80,
-          "octets": 155236
+          "qualite": 88,
+          "octets": 216870
         },
         {
           "fichier": "assets/images/mondes-savoirs-hero-1672.avif",
           "largeur": 1672,
           "hauteur": 941,
           "format": "avif",
-          "qualite": 60,
-          "octets": 224902
+          "qualite": 78,
+          "octets": 300156
         },
         {
           "fichier": "assets/images/mondes-savoirs-hero-1672.webp",
           "largeur": 1672,
           "hauteur": 941,
           "format": "webp",
-          "qualite": 80,
-          "octets": 258484
+          "qualite": 88,
+          "octets": 352616
         }
       ]
     },
@@ -106,32 +106,32 @@
           "largeur": 800,
           "hauteur": 450,
           "format": "avif",
-          "qualite": 60,
-          "octets": 30671
+          "qualite": 78,
+          "octets": 48138
         },
         {
           "fichier": "assets/images/escales-anglais-hero-800.webp",
           "largeur": 800,
           "hauteur": 450,
           "format": "webp",
-          "qualite": 80,
-          "octets": 35886
+          "qualite": 88,
+          "octets": 51736
         },
         {
           "fichier": "assets/images/escales-anglais-hero-1672.avif",
           "largeur": 1672,
           "hauteur": 941,
           "format": "avif",
-          "qualite": 60,
-          "octets": 88686
+          "qualite": 78,
+          "octets": 128984
         },
         {
           "fichier": "assets/images/escales-anglais-hero-1672.webp",
           "largeur": 1672,
           "hauteur": 941,
           "format": "webp",
-          "qualite": 80,
-          "octets": 109586
+          "qualite": 88,
+          "octets": 157814
         }
       ]
     }
