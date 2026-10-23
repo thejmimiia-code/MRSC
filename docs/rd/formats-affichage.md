@@ -563,6 +563,38 @@ Limite : la mesure porte sur la géométrie de la commande, pas sur le son. Une
 voix absente, une prononciation fautive ou une pause qui ne reprend pas restent
 possibles et ne se voient qu'à l'oreille.
 
+## 6 nonies. Cibles de 24 px et focus non masqué (23 octobre 2026)
+
+Deux critères WCAG 2.2 de niveau AA entreront dans le RGAA 5 ; ils se mesurent,
+eux, dans un navigateur. `outils/auditer-criteres-22.mjs` les relève hors CI.
+
+- **Taille des cibles (2.5.8).** Le relevé couvre **5 654 cibles conformes** sur
+  98 pages aux deux largeurs, plus **900 en ligne** (liens dans une phrase) et
+  **2 304 espacées** (exception de proximité), donc **0 à corriger**. Avant
+  correction, 12 défauts réels subsistaient, tous dans le pied de page à 390 px :
+  les liens légaux mesuraient 19 px de haut et se touchaient.
+- **Correction.** `.footer-legal a` passe en `inline-flex` avec
+  `min-height: 24px`; l'écart vertical du bloc tombe de 0,3 rem à zéro pour que
+  la hauteur gagnée ne se voie pas. Mesuré : liens à 24 px (25 px à 130 %),
+  centrage inchangé à 0 px, pied de page 430 px à 1 440 px contre 425 avant.
+- **Focus non masqué (2.4.11).** Pour chaque cible de l'échantillon, le script
+  fait défiler en `instant`, porte le focus, puis teste cinq points du rectangle
+  contre `elementFromPoint`. **825 éléments testés, 0 entièrement masqué.**
+- **Deux pièges de mesure, mesurés et corrigés dans l'outil.** Un défilement
+  animé n'a pas fini au moment de la mesure et produit de faux « hors écran » :
+  le défilement est forcé en `instant` et la feuille reçoit
+  `scroll-behavior: auto`. Et le contenu d'un `<details>` refermé garde une
+  boîte non nulle dans Chromium : il a produit 50 fausses alertes avant filtrage
+  par `checkVisibility` et par `details:not([open])`.
+
+Garde-fou : `.footer-legal a` entre dans les `CIBLES` vérifiées par
+`verifier-affichages.py` (plancher de 24 px) ; retirer `min-height` fait échouer
+le contrôle. Le contrôle de lecture à voix haute exige désormais
+`checkVisibility` et `innerText` : les deux sont nécessaires, aucun ne suffit.
+
+Limite : la mesure porte sur une géométrie et un échantillon (60 cibles par page,
+huit pages), pas sur la difficulté réelle à viser ni sur un audit complet.
+
 ## 7. Ce qui n'est pas couvert
 
 - **Police réelle.** La mesure utilise les polices installées dans

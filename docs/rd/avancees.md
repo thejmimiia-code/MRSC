@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 12 |
+| Avancées consignées | 13 |
 | Période couverte | du 2026-10-20 au 2026-10-23 |
 | Contrôles exécutables cités | 17 |
 | Initiatives du portefeuille concernées | 11 |
@@ -265,6 +265,30 @@ Initiatives liées : `relire-les-44-prototypes`.
 **Suite.** Étendre la règle au prochain générateur ajouté : si sa sortie est commitée puis comparée, son horodatage doit venir d'une donnée du dépôt et une entrée doit être ajoutée aux portes rejouées.
 
 Initiatives liées : `optimisation-du-site`, `coordination-de-tous-les-agents`.
+
+### `boite-non-nulle-nest-pas-affichee` — Une boîte non nulle ne prouve pas qu'un élément est affiché
+
+*Consignée le 2026-10-23.*
+
+**Constat.** Un balayage de la taille des cibles a signalé 50 liens de 15 px sur `apprendre.html`. Ils étaient dans des `<details>` refermés : Chromium leur donne une boîte non nulle, un texte vide et une position, alors que personne ne les voit et qu'aucun clavier ne les atteint. Le même angle mort menaçait la lecture à voix haute livrée la veille, dont le filtre reposait sur `getClientRects` seul.
+
+**Ce que cela change.** Quatre cas ont été mesurés et séparés : `display:none` donne un texte mais pas de boîte, `visibility:hidden` et un `<details>` refermé donnent une boîte mais pas de texte, `aria-hidden` est visible pour l'œil et doit être écarté à part. Toute liste d'éléments « affichés » du dépôt — lecture à voix haute, audit des cibles, échantillon de focus — vérifie désormais `checkVisibility({ checkVisibilityCSS: true, contentVisibilityAuto: true })`, garde `getClientRects` et `innerText` en secours, et écarte `details:not([open])` explicitement.
+
+**Preuves dans le dépôt :**
+
+- `assets/js/site.js`
+- `outils/auditer-criteres-22.mjs`
+- `outils/verifier-affichages.py`
+- `outils/test-experience.cjs`
+- `docs/rd/inclusion-criteres-wcag-22.md`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && node outils/test-experience.cjs`
+
+**Limite — ce que cela ne prouve pas.** Ces trois signaux décrivent un rendu dans Chromium, pas la perception : un contenu à contraste insuffisant, hors cadre après défilement ou recouvert par un bandeau reste « affiché » pour la mesure. Le cas d'un contenu animé, d'un iframe ou d'un canvas n'est pas couvert, et aucun de ces tests ne remplace une passe au clavier avec un lecteur d'écran.
+
+**Suite.** Reprendre ce filtre pour tout futur balayage d'éléments interactifs, et vérifier qu'aucun script du dépôt ne conclut « visible » à partir d'une seule mesure de boîte.
+
+Initiatives liées : `optimisation-du-site`, `ecouter-la-page`.
 
 ### `ecouter-sans-promettre-une-conformite` — Une aide d'inclusion se mesure sur ce qu'elle n'envoie pas, pas sur ce qu'elle déclare
 

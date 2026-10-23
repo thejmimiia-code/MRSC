@@ -155,6 +155,10 @@ CIBLES = (
     ("site.css", ".statute-link"),
     ("site.css", ".home-action-link"),
     ("anglais-aventure.css", ".adventure-breadcrumb a"),
+    # Ajouté le 24 octobre 2026 : à 390 px, les liens légaux du pied de page
+    # faisaient 19 px de haut et se touchaient — seuls écarts réels du balayage
+    # WCAG 2.2 (2.5.8) sur les 98 pages.
+    ("site.css", ".footer-legal a"),
 )
 
 
@@ -700,8 +704,13 @@ def controler_lecture_a_voix_haute() -> list[str]:
                                   "anglaise serait prononcée avec la voix française"),
         ("pagehide", "quitter la page ne coupe plus la voix"),
         ("aria-live", "l'état de la lecture n'est plus annoncé aux aides techniques"),
-        ("if (!element.getClientRects().length) return false", "les contenus repliés ou masqués "
-                                                                "ne sont plus écartés de la lecture"),
+        ("checkVisibility", "la visibilité n'est plus vérifiée : le contenu d'un `<details>` "
+                            "refermé garde une boîte dans Chromium et serait lu quand même"),
+        ("element.checkVisibility({ checkVisibilityCSS: true, contentVisibilityAuto: true })",
+         "la vérification de visibilité n'active plus `checkVisibilityCSS` : un contenu "
+         "masqué par le style passerait"),
+        ("element.innerText", "le texte lu ne suit plus la mise en page : deux phrases séparées "
+                              "par un élément mis en bloc s'entendraient collées"),
     ):
         if morceau not in corps:
             erreurs.append(f"site.js — {message}")
