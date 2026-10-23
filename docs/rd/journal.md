@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-23 — Les commandes du menu redescendent à 36 px
+
+- **Initiative :** `optimisation-du-site`. Retour d’usage sur la PR #173 : « il faut réduire pour avoir un entre-deux, là les boutons sont trop gros », capture à l’appui.
+- **Mesure du reproche :** à 44 px, la grille de trois rangées portait l’en-tête à **149 px** sur les trois profils de téléphone (320, 390, 430 px), soit près d’un quart de l’écran de 640 px. Les commandes faisaient 141 px de large à 390 px.
+- **Décision :** `PLANCHER_COMMANDES_ENTETE_PX` passe de 44 à **36 px**, plus les écarts resserrés (`.3rem` → `.22rem`) et le rembourrage réduit (`.25rem .2rem` → `.18rem .2rem`). À 36 px, le bouton garde 12 px au-dessus et au-dessous d’un libellé de 12 px, et reste **12 px au-dessus du minimum WCAG** (24 px, 2.5.8) : ce n’est pas un retour au plancher qui posait problème.
+- **Résultat mesuré (Chromium sans interface, panneau ouvert) :** en-tête de **149 → 122 px** à 320, 390 et 430 px ; commandes à 36 px sur les trois profils et en paysage 844 × 390 (en-tête 51 → 49 px) ; la tablette de 768 px garde ses 44 px, son en-tête n’étant pas compact. Panneau ouvert : bas à 560 px pour 568, 621 px pour 780, 380 px pour 390 — aucun dépassement, aucun libellé coupé, aucun débordement horizontal, à 100 % et 130 % de texte.
+- **Garde-fous :** le plancher du contrôle `controler_en_tete_compact` suit (`PLANCHER_COMMANDES_ENTETE_PX = 36`), les trois déclarations de la feuille sont ajustées à la source, et les planchers des essais navigateur (36 px de hauteur, 36 px de largeur) suivent. Un contrôle reste capable de refuser un retour discret aux 24 px d’origine.
+- **Contrôles réellement exécutés :** `verifier-affichages.py` (11/11), `test-experience.cjs` (**8/8**), `verifier-integration.py`, plus la matrice de mesure à 320, 390, 430, 844 × 390 et 768 px.
+- **Protocole :** § 6 quater de [`formats-affichage.md`](formats-affichage.md).
+- **Limite :** mesure d’un Chromium sans interface ; le choix de 36 px est un compromis validé par la mesure, pas par une revue sur appareil réel.
+- **Prochaine action :** faire confirmer le rendu sur téléphone réel, puis étendre le décor vectoriel du héros à `apprendre.html` et à l’accueil.
+
 ## 2026-10-23 — Le menu du téléphone : quatre défauts mesurés, dont un bloquant
 
 - **Initiative :** `optimisation-du-site`. Demande de revoir « l'affichage des boutons dans le menu en mode smartphone ».
