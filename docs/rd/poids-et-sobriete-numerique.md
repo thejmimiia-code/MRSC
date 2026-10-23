@@ -202,6 +202,8 @@ Le déficit était donc visible **parce que l'image est servie en 1:1** : à l'�
 
 Trois mutations volontaires ont été rejouées : `DENSITE_MAX = 2`, retour du plafond `Math.min(window.devicePixelRatio || 1, 2)`, et retour aux qualités 60/80. Les trois sont détectées avec un message qui nomme la cause ; les fichiers ont été restaurés à l'identique (`diff` vide).
 
+**Conséquence sur le relevé des fichiers servis.** Neuf variantes ont changé d'octets ; le relevé réseau du 20 octobre (`docs/rd/en-tetes-servis-2026-10-20.toml`) ne peut donc plus être vérifié avant que la version modifiée soit publiée. Plutôt que d'y inscrire des tailles que personne n'a mesurées, les neuf entrées portent `perime_le = 2026-10-23` : `outils/verifier-fichiers-servis.py` les déclare « relevé périmé, mesure à refaire après publication » au lieu de les faire passer pour concordantes. Le mécanisme est borné par des tests (28 au total) : un binaire modifié **sans** marqueur échoue toujours, un marqueur antérieur à la mesure, dans le futur, mal daté ou posé sur un texte échoue, et un marqueur **oublié** sur un fichier revenu concordant échoue aussi — il n'existe pas pour laisser dormir un chiffre faux.
+
 **Limite qui subsiste, énoncée telle quelle.** Le master reste 1 672 × 941. Tout ce qui précède est au mieux du 1:1 ; au-delà (un master de 2 880 px, voir la procédure du § 4.2 quater), il n'y a pas de détail supplémentaire à servir. Aucune revue humaine n'a eu lieu sur ce correctif : la mesure est celle d'un Chromium sans interface, pas d'un téléphone réel.
 
 ### 4.3 Stockage du dépôt

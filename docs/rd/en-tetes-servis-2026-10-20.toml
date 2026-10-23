@@ -10,6 +10,15 @@
 # « servi < local » est vérifiable, pas la taille exacte, puisqu'un contenu
 # publié change à chaque correction de fiche.
 
+# Les neuf variantes AVIF et WebP marquées `perime_le = 2026-10-23` ont changé
+# après la mesure : la qualité d'encodage est passée à AVIF 78 et WebP 88 ce
+# jour-là (voir docs/rd/poids-et-sobriete-numerique.md, § 4.2 quinquies). Leur
+# taille servie ne peut pas être re-mesurée avant que la version modifiée soit
+# publiée ; `outils/verifier-fichiers-servis.py` la déclare donc périmée au lieu
+# d'accepter un chiffre inventé. Mesure à refaire après publication, puis retirer
+# les marqueurs — le contrôle échoue tant qu'ils restent sur un fichier qui
+# concorde de nouveau.
+
 [meta]
 version = 1
 mesure_le = 2026-10-20
@@ -97,6 +106,7 @@ nature = "binaire"
 type_mime = "image/avif"
 encodage = "aucun"
 octets_servis = 53242
+perime_le = 2026-10-23
 cache = "max-age=600"
 
 [[fichier]]
@@ -106,6 +116,7 @@ nature = "binaire"
 type_mime = "image/avif"
 encodage = "aucun"
 octets_servis = 116654
+perime_le = 2026-10-23
 cache = "max-age=600"
 
 [[fichier]]
@@ -115,6 +126,7 @@ nature = "binaire"
 type_mime = "image/webp"
 encodage = "aucun"
 octets_servis = 68978
+perime_le = 2026-10-23
 cache = "max-age=600"
 
 [[fichier]]
@@ -124,6 +136,7 @@ nature = "binaire"
 type_mime = "image/avif"
 encodage = "aucun"
 octets_servis = 71576
+perime_le = 2026-10-23
 cache = "max-age=600"
 
 [[fichier]]
@@ -133,6 +146,7 @@ nature = "binaire"
 type_mime = "image/avif"
 encodage = "aucun"
 octets_servis = 140256
+perime_le = 2026-10-23
 cache = "max-age=600"
 
 [[fichier]]
@@ -142,6 +156,7 @@ nature = "binaire"
 type_mime = "image/avif"
 encodage = "aucun"
 octets_servis = 224902
+perime_le = 2026-10-23
 cache = "max-age=600"
 
 [[fichier]]
@@ -151,6 +166,7 @@ nature = "binaire"
 type_mime = "image/webp"
 encodage = "aucun"
 octets_servis = 77800
+perime_le = 2026-10-23
 cache = "max-age=600"
 
 [[fichier]]
@@ -160,6 +176,7 @@ nature = "binaire"
 type_mime = "image/avif"
 encodage = "aucun"
 octets_servis = 30671
+perime_le = 2026-10-23
 cache = "max-age=600"
 
 [[fichier]]
@@ -169,6 +186,7 @@ nature = "binaire"
 type_mime = "image/webp"
 encodage = "aucun"
 octets_servis = 35886
+perime_le = 2026-10-23
 cache = "max-age=600"
 
 [[fichier]]
