@@ -723,7 +723,9 @@
 
 /* Chaque phrase de contenu commence en début de ligne, sur toutes les mises en page. */
 (() => {
-  const racines = [document.querySelector("main"), document.querySelector(".site-footer")].filter(Boolean);
+  // Seul le contenu principal est découpé : le pied de page porte des mentions
+  // légales, qui se lisent d'un tenant et non phrase par phrase.
+  const racines = [document.querySelector("main")].filter(Boolean);
   if (!racines.length) return;
 
   const protections = [
@@ -766,7 +768,16 @@
     const morceaux = protege
       .split(/(?<=[.!?…]["»”’']*)\s+(?=\S)/)
       .map((partie) => restaurer(partie).trim())
-      .filter(Boolean);
+      .filter(Boolean)
+      // Une ponctuation seule n'est pas une phrase : après un lien, le point
+      // final formait un fragment « . » qui, mis en bloc, s'affichait sur sa
+      // propre ligne (pied de page, 23 octobre 2026). Il rejoint la phrase qui
+      // le précède.
+      .reduce((liste, morceau) => {
+        if (/[\p{L}\p{N}]/u.test(morceau) || liste.length === 0) liste.push(morceau);
+        else liste[liste.length - 1] += morceau;
+        return liste;
+      }, []);
     if (morceaux.length < 2) return;
     const fragment = document.createDocumentFragment();
     morceaux.forEach((texte) => {

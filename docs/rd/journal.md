@@ -2,6 +2,20 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-23 — Le pied de page remis d’aplomb
+
+- **Initiative :** `optimisation-du-site`. Signalement avec capture : « le bas de page est mal présenté, c’est anarchique ».
+- **Cause trouvée, mécanique :** ce n’était pas une règle de style mais le script de `site.js` qui met chaque phrase en début de ligne. Il s’appliquait aussi au pied de page et ne savait pas qu’un point peut suivre un lien : « Boussole des savoirs. Une copie… » produisait un fragment « . » seul, affiché en bloc sur sa propre ligne (mesuré à y = 9 852).
+- **Décision :** le pied de page sort du périmètre du découpage, et la règle apprend qu’un morceau sans lettre ni chiffre rejoint la phrase précédente — la correction vaut donc aussi pour le contenu principal.
+- **Liste légale :** les liens passent en `<ul>` avec séparateur vertical porté par l’élément, qui ne peut pas rester seul en fin de ligne ; sous 520 px la règle s’efface. 97 pages et le générateur `construire-apprentissages.py` sont alignés. Le séparateur de la note de version devient insécable : à 130 % avec espacement renforcé, il commençait la ligne.
+- **Composition :** le bloc du bas était un flux (droits à gauche, liens à droite, note se cassant au hasard). Il devient une grille de deux rangées, une colonne sous 1 120 px — seuil mesuré, la mention ne tient sur une ligne qu’à partir de 1 130 px. La colonne « Naviguer », deux fois plus haute que les autres, passe en deux colonnes au-delà de 1 040 px.
+- **Résultat mesuré :** une ligne par bloc à partir de 768 px, aucun chevauchement ni débordement de 320 à 1 920 px, y compris à 130 % avec contraste et espacement renforcés. Le pied de page passe de 549 à **377 px** à 1 440 px.
+- **Garde-fou :** 13ᵉ contrôle `controler_pied_de_page` (périmètre du découpage, ponctuation rattachée, grille, liste sur les 97 pages). **Quatre mutations rejouées, quatre détectées.**
+- **Essais navigateur :** `ouvrirPanneau` devient robuste au clic recouvert par la barre collante du simulateur (bascule au clavier) ; trois passes consécutives à **8/8**.
+- **Protocole :** § 6 septies de [`formats-affichage.md`](formats-affichage.md).
+- **Limite :** mesure d’un Chromium sans interface ; les filets et séparateurs restent à constater sur un écran très dense.
+- **Prochaine action :** revue visuelle sur téléphone réel, puis décor vectoriel du héros pour `apprendre.html` et l’accueil.
+
 ## 2026-10-23 — Le panneau « Personnalisation » repris pour la qualité d’affichage
 
 - **Initiative :** `optimisation-du-site`. Retour d’usage après la fusion : « c’est un affichage de haute qualité qu’il faut, pas un truc de basse qualité ».
