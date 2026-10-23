@@ -159,6 +159,55 @@ Deux conséquences pour cette porte :
 Détail des mesures, des quatre mutations détectées et des deux qui ne le sont pas :
 § 4.2 sexies de [`poids-et-sobriete-numerique.md`](poids-et-sobriete-numerique.md).
 
+## 6 ter bis. L'illustration d'« Apprendre » n'est plus agrandie (23 octobre 2026)
+
+Signalement, capture en main : « l'image dans le menu apprendre est moche, on voit
+les pixels ». La mesure a confirmé un défaut net, pas une question de goût.
+
+- **La cause : l'attribut `height` du HTML servait de hauteur.** L'illustration
+  porte `width="1672" height="941"` pour réserver sa place, et la feuille
+  déclarait `aspect-ratio: 16 / 10` avec `object-fit: cover`. Or `aspect-ratio`
+  ne calcule une dimension que si l'autre est **automatique** : avec une hauteur
+  imposée de 941 px, la boîte mesurait **497 × 941 px** au lieu de 497 × 311, et
+  l'image — un 16/9 — était étirée **2,1 fois** pour la couvrir. Les pixels
+  venaient de là, pas de l'encodage.
+- **La correction tient en une déclaration** : `height: auto` sur
+  `.english-promo-art img`. `aspect-ratio` reprend la main, la boîte retrouve
+  497 × 311 px, et `object-fit: cover` recadre au lieu d'étirer.
+- **Ce que la densité garantit ensuite.** Mesure après correction, source
+  réellement servie comparée aux pixels d'appareil nécessaires :
+
+| Profil | Boîte | Variante servie | Besoin en pixels | Marge |
+| --- | --- | --- | --- | --- |
+| 390 px à 3× | 328 × 205 | 1 200 px | 984 px | 1,22× |
+| 390 px à 2× | 328 × 205 | 800 px | 656 px | 1,22× |
+| 576 px à 2× | 504 × 315 | 1 200 px | 1 008 px | 1,19× |
+| 768 px à 2× | 305 × 190 | 1 200 px | 610 px | 1,97× |
+| 1 024 px à 2× | 414 × 259 | 1 200 px | 828 px | 1,45× |
+| 1 280 px à 2× | 497 × 311 | 1 200 px | 994 px | 1,21× |
+| 1 440 px à 2× | 497 × 311 | 1 200 px | 994 px | 1,21× |
+| 1 440 px à 1× | 497 × 311 | 800 px | 497 px | 1,61× |
+
+Aucun profil ne descend sous 1× : l'image est toujours servie au moins au pixel
+de l'écran, et aucun débordement horizontal n'apparaît à aucune largeur.
+
+- **Garde-fou : 14ᵉ contrôle `controler_illustrations`.** Il exige `height: auto`,
+  `aspect-ratio` et `object-fit: cover` sur la règle, les deux déclarations
+  `sizes` à `520 px` au-delà de 760 px (une seule occurrence laisserait l'autre
+  format annoncer une autre largeur), les dimensions intrinsèques `1672 × 941`
+  dans la page, et le plafond de 520 px qui rend la déclaration `sizes` vraie
+  dans toutes les présentations. **Six mutations rejouées, six détectées** :
+  `height: auto` retiré, `aspect-ratio` retiré, `object-fit` retiré, plafond
+  retiré, `sizes` faussé sur une seule source, dimensions intrinsèques retirées.
+- **Une mutation qui a d'abord échappé au contrôle** : `sizes` faussé sur une
+  seule des deux sources passait, parce que le contrôle cherchait la bonne
+  déclaration *quelque part* dans la figure. Il compare désormais le nombre
+  d'occurrences (deux) et l'ensemble des valeurs.
+
+Limite : la mesure est celle d'un Chromium sans interface, sur `apprendre.html`
+seulement ; les autres illustrations n'ont pas de `aspect-ratio` et ne sont pas
+concernées par ce défaut précis.
+
 ## 6 quater. Le menu du téléphone : cinq commandes, deux rangées, un panneau borné (23 octobre 2026)
 
 Le menu ouvert en mode smartphone a été mesuré page par page, panneau ouvert, à
