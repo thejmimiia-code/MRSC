@@ -169,25 +169,29 @@ Quatre défauts sont sortis de la mesure, dont un bloquant.
 | --- | --- | --- |
 | Liens inatteignables en paysage | panneau de **472 px** commençant à 49 px, donc bas à **522 px** pour un écran de 390 px ; `overflow: visible` | plafond `calc(100dvh - var(--hauteur-entete))` + `overflow-y: auto` |
 | Contenu sorti par le haut | `justify-content: center` sur un conteneur défilable : « Accueil » à **y = 10** pour un panneau à 51 | `justify-content: safe center` (repli `flex-start`) |
-| Commandes de 24 px | cinq boutons de 24 px de haut, empilés en deux ou trois rangées irrégulières | **36 px** dans toute la portée compacte, grille `auto-fit` sous 520 px |
+| Commandes de 24 px | cinq boutons de 24 px de haut, empilés en deux ou trois rangées irrégulières | **32 px** sur téléphone, **36 px** sur les autres formats compacts, deux colonnes pleines |
 | Libellés coupés | « Parcour / s », « Affichag / e », « Présent / ation » (`overflow-wrap: anywhere`) | deux colonnes pleines, `overflow-wrap: normal`, « Présentation » sur toute la largeur |
 
 - **Le plancher tactile du site ne change pas** : `PLANCHER_CIBLE_PX` reste à
   24 px (WCAG 2.2, 2.5.8) pour les liens et les autres cibles. Les cinq commandes
-  de l'en-tête compact ont leur propre plancher, `PLANCHER_COMMANDES_ENTETE_PX = 36`,
-  parce qu'elles se touchent au pouce sans visée. Ce plancher a d'abord été posé
-  à 44 px le même jour ; sur retour d'usage (« les boutons sont trop gros »), il
-  est redescendu à 36 px : la grille de trois rangées pesait alors 149 px d'en-tête
-  à 320 px de large, contre 122 px. À 36 px, le bouton garde 12 px de marge autour
-  d'un libellé de 12 px et reste très au-dessus du minimum WCAG.
+  de l'en-tête compact ont leur propre plancher, `PLANCHER_COMMANDES_ENTETE_PX = 32`,
+  parce qu'elles se touchent au pouce sans visée. Trois passages le même jour :
+  44 px d'abord, jugés trop lourds (149 px d'en-tête sur un écran de 640), puis
+  36 px, puis **32 px sur téléphone** sur nouvelle demande — les autres formats
+  compacts (paysage court, tablette compacte) restent à 36 px. À 32 px, le bouton
+  garde 10 px au-dessus et au-dessous d'un libellé de 12 px, et **8 px au-dessus
+  du minimum WCAG** : le plancher du contrôle est 32 px, donc un retour aux 24 px
+  d'origine échoue.
 - **La hauteur de l'en-tête est mesurée, pas supposée.** Elle varie avec le logo,
   le cran de texte (217 px à 320 px et 130 %) et le mode compact. `site.js`
   publie `--hauteur-entete` au chargement puis sur chaque `ResizeObserver` :
   une constante en `rem` laissait le panneau déborder de 47 px au cran 130 %.
-- **La grille se replie au lieu de déborder.** `repeat(auto-fit, minmax(min(100px, 100%), 1fr))` :
-  deux colonnes dès que la place le permet, une seule sous 100 px de colonne. Sous
-  300 px de fenêtre, l'en-tête prend toute la largeur, sans quoi « Agrandir »
-  (43,6 px de texte) ne tenait pas dans une colonne de 42,8 px.
+- **Deux colonnes, pas davantage.** `auto-fit` en ouvrait trois à 430 px et
+  quatre à 520 px : la cinquième commande laissait alors un trou à côté
+  d'« Affichage ». La grille est fixée à `repeat(2, minmax(0, 1fr))`, avec un
+  repli explicite à une colonne sous 300 px, et l'en-tête y prend toute la largeur
+  (sans quoi « Agrandir », 43,6 px de texte, ne tenait pas dans une colonne de
+  42,8 px).
 - **Le panneau rejoint les bords** : sa largeur explicite annulait l'étirement
   par `left`/`right`, et il s'arrêtait 16 px avant le bord droit ; il s'arrêtait
   aussi à 8 ou 24 px des côtés à cause de la gouttière de `.nav-inner`, désormais
@@ -197,26 +201,97 @@ Mesure après correction (Chromium sans interface, panneau ouvert) :
 
 | Profil | Panneau (x, y, l, h) | Bas ≤ écran | Commandes |
 | --- | --- | --- | --- |
-| 320 × 568 @2 | 0, 122, 320, 411 | 560 ≤ 568 | 2 + 2 + 1 pleine largeur, 36 px |
-| 390 × 780 @3 | 0, 122, 390, 472 | 621 ≤ 780 | 36 px, libellés entiers |
-| 430 × 900 @3 | 0, 122, 430, 472 | 621 ≤ 900 | 36 px |
+| 320 × 568 @2 | 0, 110, 320, 427 | 537 ≤ 568 | 2 + 2 + 1 pleine largeur, 32 px |
+| 390 × 780 @3 | 0, 110, 390, 427 | 537 ≤ 780 | 32 px, libellés entiers |
+| 430 × 900 @3 | 0, 110, 430, 427 | 537 ≤ 900 | 32 px |
 | 844 × 390 @3 (paysage) | 0, 49, 844, 331 | 380 ≤ 390 | une rangée, 36 px |
 | 768 × 1024 @2 | 8, 192, 752, 472 | 664 ≤ 1024 | cinq boutons de 44 px (en-tête non compact) |
 
 Aucun débordement horizontal, aucun lien hors du cadre, aucune commande sous
-36 px dans la portée compacte, à tous les crans de texte (100 % et 130 %).
+32 px sur téléphone ni sous 36 px ailleurs en compact, à tous les crans de texte
+(100 % et 130 %). L'en-tête passe de 149 px (44 px) à 122 px (36 px) puis
+**110 px** (32 px) sur les trois profils de téléphone.
 
 Le garde-fou `controler_panneau_du_menu` (11ᵉ contrôle de
 [`verifier-affichages.py`](../../outils/verifier-affichages.py)) exige, dans une
 même règle, le défilement interne, le plafond en `dvh` et le centrage `safe`, la
 publication de `--hauteur-entete` (avec mesure initiale et `ResizeObserver`) et
-la grille `auto-fit`. Sept mutations rejouées : défilement retiré, plafond
-remplacé par une constante, `safe center` retiré, grille à une colonne,
-publication renommée, `ResizeObserver` retiré, mesure initiale retirée — les sept
-sont détectées, fichiers restaurés à l'identique.
+la grille à deux colonnes, la dernière commande en pleine largeur et le repli à
+une colonne sous 300 px. Mutations rejouées : défilement retiré, plafond remplacé
+par une constante, `safe center` retiré, grille sans repli, dernière commande non
+pleine largeur, publication renommée, `ResizeObserver` retiré, mesure initiale
+retirée, commande ramenée à 24 px puis à 20 px — **toutes détectées**, fichiers
+restaurés à l'identique.
 
 Limite : la mesure est celle d'un Chromium sans interface, pas d'un téléphone
 réel ; les captures ont été relues à 320, 390 et 844 px.
+
+## 6 quinquies. Deux commandes au lieu de cinq : « Personnalisation » (23 octobre 2026)
+
+Demande : « un second menu regroupe les commandes liées pour ne laisser que deux
+boutons ». L'en-tête compact portait cinq commandes (« Menu », « Agrandir »,
+« Parcours », « Affichage », « Présentation ») réparties en deux ou trois
+rangées. Les quatre commandes de réglage sont désormais réunies dans un panneau
+« Personnalisation » ; l'en-tête n'en montre plus que deux.
+
+- **Aucune des 98 pages n'est modifiée.** `assets/js/site.js` crée le panneau et
+  y déplace les trois blocs de réglage au chargement ; `navigation-parcours.js`
+  insère « Parcours » devant « Affichage », donc dans le panneau. Le HTML statique
+  reste inchangé, et `has-js` empêche le panneau de clignoter sans JavaScript.
+- **Le panneau est une liste de lignes**, pas un vol de commandes : chaque
+  réglage fait 36 px de haut sur toute la largeur utile, avec un chevron à
+  droite ; les panneaux ouverts restent dans le flux (`position: static`), bordés
+  à gauche au lieu de flotter au-dessus.
+- **La spécificité est le piège.** Les règles de l'en-tête compact
+  (`html.has-js .site-header.is-compact …`) portent plus de classes que les
+  règles du panneau : écrites sans préfixe, elles restaient sans effet et les
+  réglages revenaient côte à côte, un panneau ouvert se posant à **x = 370 px
+  pour une ligne de 350 px**. Les règles du panneau sont donc écrites
+  `html.has-js .site-header .customize-settings-panel …` et déclarées après.
+- **Échap ferme par étages.** Un premier Échap referme le réglage ouvert
+  (« Présentation », « Affichage »…) et laisse le panneau ouvert ; un second
+  referme le panneau et rend le focus à sa commande. Sans cela, Échap aurait fait
+  disparaître le panneau sous les doigts de qui ferme un seul réglage.
+- **« Agrandir » ne referme pas son propre panneau.** Le bouton vit dans le
+  panneau : le refermer au clic rendait « Réduire » inatteignable. Mesuré comme
+  réversible à 320, 390, 720 et 1 440 px.
+- **Le panneau ne déborde plus de l'écran.** Sous 760 px et en paysage court, il
+  se cale sous l'en-tête à la largeur de l'écran ; au-delà, il reste ancré sous
+  son bouton. Sur tablette et sur ordinateur, « Agrandir/Réduire » figure en
+  première ligne du panneau et fonctionne dans les deux sens.
+
+Mesure après correction (Chromium sans interface, panneau ouvert, puis réglages
+ouverts) :
+
+| Profil | En-tête | Commandes | Panneau (x, y, l, h) | Débordement |
+| --- | --- | --- | --- | --- |
+| 320 × 568 | **90 px** | 145 / 145 px, 32 px | 8, 99, 304, 188 | 0 |
+| 390 × 780 | 90 px | 180 / 180 px, 32 px | 8, 99, 374, 188 | 0 |
+| 430 × 900 | 90 px | 200 / 200 px, 32 px | 8, 99, 414, 188 | 0 |
+| 520 × 900 | 90 px | 245 / 245 px, 32 px | 8, 99, 504, 188 | 0 |
+| 844 × 390 (paysage) | 49 px | 80 / 151 px, 36 px | 8, 58, 828, 188 | 0 |
+| 768 × 1024 | 194 px | 92 / 161 px, 44 px | 162, 200, 352, 147 | 0 |
+| 1 280 × 900 | 198 px | 161 px, 44 px | 912, 202, 352, 147 | 0 |
+| 1 440 × 900 | 198 px | 161 px, 44 px | 1 072, 202, 352, 147 | 0 |
+
+Quatre lignes de réglage de 36 px, aucune sous 32 px, aucun élément hors du
+panneau, aucun débordement horizontal ; à 130 % de texte, le panneau atteint
+379 px de haut à 320 × 568 et reste sous le bas de l'écran (499 ≤ 568).
+
+Les garde-fous de `controler_panneau_du_menu` exigent désormais : le panneau
+créé en JavaScript avec son identifiant `#site-customize-panel`, le déplacement
+des **trois** blocs de réglage (sinon une commande reste dans l'en-tête), les
+lignes `display: flex; width: 100%` préfixées `html.has-js .site-header`, les
+panneaux imbriqués `position: static`, le panneau ancré et défilant, et la grille
+à deux colonnes avec son repli à une colonne. Mutations rejouées : préfixe de
+spécificité retiré, `position: static` retiré, `layoutSettings` laissé dans
+l'en-tête, `overflow: auto` retiré, grille ramenée à une colonne —
+**toutes détectées**, fichier restauré à l'identique. Les 8 essais navigateur de
+`test-experience.cjs` couvrent la bascule réversible, la fermeture par étages et
+les deux commandes à 32 px à 320, 500 et 720 px.
+
+Limite : la mesure est celle d'un Chromium sans interface ; le panneau est
+positionné par rapport à l'en-tête, dont il suit la hauteur mesurée.
 
 ## 7. Ce qui n'est pas couvert
 - **Police réelle.** La mesure utilise les polices installées dans
