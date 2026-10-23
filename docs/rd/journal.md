@@ -2,6 +2,20 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-23 — Le panneau « Personnalisation » repris pour la qualité d’affichage
+
+- **Initiative :** `optimisation-du-site`. Retour d’usage après la fusion : « c’est un affichage de haute qualité qu’il faut, pas un truc de basse qualité ».
+- **Quatre défauts vus à la capture, aucun à la lecture :** quatre lignes grises interchangeables sans repère et un « Agrandir » centré au milieu de lignes alignées à gauche ; un compteur « 100 % » hérité du blanc de la barre marine, donc **invisible à 1:1** sur le fond blanc ; le texte des cartes de présentation à **4,36:1** sur le fond d’une carte sélectionnée, sous le seuil AA ; un chevron de police (« ⌄ ») dont le dessin variait selon la machine, à côté d’un hamburger SVG.
+- **Décision :** les icônes et les chevrons sont des **masques SVG** (`mask:` + `font-size: 0`), une épaisseur de trait unique (2) et une grille de 24 px partagée avec le hamburger. Une icône par ligne, l’habillage des lignes étendu au bouton d’en-tête, filet de séparation, ombre à trois couches et apparition de 160 ms supprimée sous `prefers-reduced-motion`. Le texte des cartes passe à `--text-soft` (**5,58:1**), et le compteur devient un contrôle segmenté `A− · 100 % · A+` de 44 px.
+- **Panneaux ouverts remis en page pour 350 px :** parcours en deux colonnes avec l’étape sur sa propre ligne (le « Étape 1/1 » ne se colle plus au bord derrière un filet) ; cartes de présentation à 40 px d’aperçu et rembourrage réduit ; contenu aligné sous le libellé (retrait de 28,6 px).
+- **Une piste essayée puis retirée :** replier les descriptions des présentations non choisies sur téléphone. Cela ramenait le panneau de 1 114 à 724 px, mais retirait l’information qui permet de choisir (« Mosaïque », « Panorama composite » ne se devinent pas à leur nom). La liste complète est conservée ; c’est le panneau qui défile, dans son plafond en `dvh`.
+- **Garde-fou :** 12ᵉ contrôle `controler_habillage_du_panneau` — masque du chevron avec `font-size: 0`, au moins trois icônes de réglage, couleur propre du compteur, `--text-soft` sur les cartes. **Quatre mutations rejouées, quatre détectées**, fichier restauré à l’identique. L’essai navigateur vérifie que chaque réglage porte un masque non vide ; **8/8**.
+- **Résultat mesuré :** les trois panneaux ouverts sur neuf profils de 320 px à 1 440 px — bas toujours dans l’écran (528 ≤ 568 à 320 px, 772 ≤ 780 à 390 px), **0 px de débordement** partout, aucun texte sous son seuil de contraste à 130 % avec contraste renforcé.
+- **Coût :** `anglais-aventure.html` passe de 272,1 à **275,1 Kio mobile** en pire cas (542,3 Kio grand écran), toujours au-dessus du budget de 450 assumé pour un appareil sans WebGL.
+- **Protocole :** § 6 sexies de [`formats-affichage.md`](formats-affichage.md).
+- **Limite :** captures de Chromium sans interface ; le rendu sur téléphone réel, ombres comprises, reste à constater.
+- **Prochaine action :** revue visuelle sur téléphone réel, puis décor vectoriel du héros pour `apprendre.html` et l’accueil.
+
 ## 2026-10-23 — Deux commandes au lieu de cinq : le panneau « Personnalisation »
 
 - **Initiative :** `optimisation-du-site`. Demande : un second menu regroupe les commandes liées pour ne laisser que deux boutons dans l’en-tête.

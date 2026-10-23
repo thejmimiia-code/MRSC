@@ -293,7 +293,69 @@ les deux commandes à 32 px à 320, 500 et 720 px.
 Limite : la mesure est celle d'un Chromium sans interface ; le panneau est
 positionné par rapport à l'en-tête, dont il suit la hauteur mesurée.
 
-## 7. Ce qui n'est pas couvert
+## 6 sexies. Finitions du panneau : la qualité se mesure aussi à l'écran (23 octobre 2026)
+
+Retour d'usage après la fusion : « c'est un affichage de haute qualité qu'il faut,
+pas un truc de basse qualité ». Le panneau fonctionnait, mais quatre défauts se
+voyaient à la capture, aucun à la lecture du code.
+
+| Défaut | Mesure avant | Correction |
+| --- | --- | --- |
+| Quatre lignes grises identiques | aucun repère visuel ; « Agrandir » centré au milieu de lignes alignées à gauche | une icône par ligne (masque SVG, 19 px) et l'habillage des lignes appliqué au bouton d'en-tête |
+| Compteur de taille invisible | « 100 % » hérité du blanc de la barre marine : **1:1** sur le fond blanc du panneau | couleur propre au panneau, contrôle segmenté `A− · 100 % · A+` |
+| Texte des cartes sous le seuil AA | 12,16 px de `--muted` sur le fond bleu clair d'une carte sélectionnée : **4,36:1** | `--text-soft` : **5,58:1** |
+| Chevron dépendant de la machine | glyphe « ⌄ » en police ; sa forme variait et il jurait avec le hamburger SVG | masque SVG partagé par les quatre panneaux du site, même épaisseur de trait (2) que le hamburger |
+
+- **Les icônes sont des masques, pas des glyphes** : `background-color:
+  currentColor` et `mask:` sur le `::before` du résumé. Le dessin est identique
+  sur toutes les machines et net à 4×, là où un caractère dépend de la police de
+  substitution. Les quatre tracés (agrandir/réduire, parcours, affichage,
+  présentation) partagent la même grille de 24 px et la même épaisseur.
+- **Le panneau est redessiné, pas seulement recoloré** : rayon de 16 px, ombre à
+  trois couches, apparition de 160 ms (supprimée sous `prefers-reduced-motion`),
+  lignes de 44 px sur fond transparent qui se teintent au survol et à
+  l'ouverture, filet entre le réglage d'en-tête et les trois préférences.
+- **Chaque panneau ouvert a été remis en page pour 350 px** : le compteur
+  devient un contrôle segmenté de 44 px de haut ; le parcours passe en deux
+  colonnes (« Précédent / Suivant », « Accueil / Dernière vue ») avec l'étape sur
+  sa propre ligne, au lieu d'un « Étape 1/1 » collé au bord droit derrière un
+  filet ; les cartes de présentation passent de 20 px à 40 px d'aperçu et de
+  0,65 rem à 0,45 rem de rembourrage ; le contenu ouvert s'aligne sous le
+  libellé (retrait de 28,6 px), plus sous l'icône.
+- **Un garde-fou plutôt qu'une promesse** : `controler_habillage_du_panneau`
+  (12ᵉ contrôle de `verifier-affichages.py`) exige le masque du chevron avec
+  `font-size: 0`, au moins trois icônes de réglage, la couleur propre du compteur
+  et `--text-soft` sur le texte des cartes. **Quatre mutations rejouées, quatre
+  détectées** : glyphe rendu au chevron, icône retirée, couleur du compteur
+  retirée, contraste des cartes ramené à `--muted`.
+- **Un essai de plus, réellement mesuré** : `test-experience.cjs` vérifie que
+  chaque réglage porte bien un masque non vide (`maskImage !== 'none'`) ; **8/8**.
+
+Mesure après finitions (Chromium sans interface, chaque réglage ouvert tour à
+tour, panneau borné et défilant) :
+
+| Profil | Affichage | Parcours | Présentation | Débordement |
+| --- | --- | --- | --- | --- |
+| 320 × 568 | panneau 434 px, bas 528 ≤ 568 | 312 px, bas 408 | 462 px, bas 560 | 0 |
+| 360 × 740 | 416 px, bas 510 | 312 px, bas 408 | 634 px, bas 732 | 0 |
+| 390 × 780 | 416 px, bas 476 | 312 px, bas 371 | 712 px, bas 772 | 0 |
+| 430 × 900 | 416 px, bas 472 | 312 px, bas 370 | 832 px, bas 892 | 0 |
+| 520 × 900 | 416 px, bas 476 | 312 px, bas 371 | 832 px, bas 892 | 0 |
+| 844 × 390 (paysage) | 325 px, bas 379 | 325 px, bas 381 | 325 px, bas 382 | 0 |
+| 768 × 1 024 | 436 px, bas 630 | 331 px, bas 528 | 814 px, bas 1 012 | 0 |
+| 1 280 × 900 | 436 px, bas 632 | 331 px, bas 530 | 686 px, bas 887 | 0 |
+| 1 440 × 900 | 436 px, bas 634 | 331 px, bas 531 | 686 px, bas 887 | 0 |
+
+Le panneau ne sort jamais du cadre et aucun élément ne déborde de sa boîte
+(`0 px` partout) ; quand la présentation ouverte dépasse la hauteur restante,
+c'est le panneau qui défile, comme prévu par son plafond en `dvh`. À 130 % de
+texte avec contraste renforcé, le balayage ne relève plus aucun texte sous son
+seuil de contraste.
+
+Limite : ces mesures sont des captures de Chromium sans interface ; le rendu sur
+un téléphone réel reste à constater, en particulier les ombres du panneau.
+
+
 - **Police réelle.** La mesure utilise les polices installées dans
   l'environnement de mesure ; une police de substitution peut changer les
   retours à la ligne de quelques pixels.

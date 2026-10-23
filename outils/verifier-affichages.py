@@ -549,6 +549,75 @@ def controler_panneau_du_menu() -> list[str]:
     return erreurs
 
 
+
+def controler_habillage_du_panneau() -> list[str]:
+    """L'habillage du panneau « Personnalisation » doit rester dessiné, pas deviné.
+
+    Trois défauts ont été vus à l'écran, pas à la lecture, dans la première
+    version du panneau : un glyphe « ⌄ » dont le dessin dépendait de la police de
+    substitution de la machine, quatre lignes grises identiques sans repère
+    visuel (dont un bouton « Agrandir » centré au milieu des autres), et surtout
+    un compteur de taille de texte en blanc sur blanc — 1:1 de contraste, donc
+    invisible. Ce contrôle fixe les quatre décisions qui les corrigent.
+    """
+    erreurs: list[str] = []
+    texte = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+    regles_css = regles(texte)
+
+    # 1. Les chevrons sont des masques, pas des glyphes. `font-size: 0` est ce qui
+    #    empêche le caractère d'origine de s'afficher sous le masque.
+    chevrons = [
+        corps for selecteur, corps in regles_css
+        if ".customize-settings-chevron" in selecteur
+        and "mask:" in corps
+        and "font-size: 0" in corps
+    ]
+    if not chevrons:
+        erreurs.append(
+            "site.css — le chevron du panneau « Personnalisation » n'est plus un masque "
+            "SVG (mask: … et font-size: 0) : son dessin dépend de la police de la machine"
+        )
+    # 2. Chaque réglage porte une icône, dessinée en masque sur son résumé.
+    icones = [
+        corps for selecteur, corps in regles_css
+        if ".customize-settings-panel" in selecteur
+        and "> summary::before" in selecteur.replace(") > summary::before", ") > summary::before")
+        and "mask:" in corps
+    ]
+    if len(icones) < 3:
+        erreurs.append(
+            f"site.css — {len(icones)} icône(s) seulement sur les réglages du panneau "
+            "(trois attendues, une par réglage) : les lignes redeviennent des libellés "
+            "gris interchangeables"
+        )
+    # 3. Le compteur de taille de texte est lisible sur le fond du panneau : dans
+    #    l'en-tête, il héritait du blanc de la barre marine.
+    compteur = [
+        corps for selecteur, corps in regles_css
+        if ".display-text-level" in selecteur and ".customize-settings-panel" in selecteur
+        and "color: var(--navy-ink)" in corps
+    ]
+    if not compteur:
+        erreurs.append(
+            "site.css — le compteur de taille de texte du panneau n'a plus de couleur "
+            "propre (color: var(--navy-ink)) : il redevient blanc sur blanc, donc "
+            "invisible (1:1 de contraste)"
+        )
+    # 4. Le texte des cartes de présentation tient 4,5:1 sur le fond bleu clair de la
+    #    carte sélectionnée : --muted n'y donnait que 4,36:1.
+    for selecteur in (".layout-choice-copy > span", ".layout-choice-hint"):
+        lisibles = [
+            corps for nom_regle, corps in regles_css
+            if selecteur in nom_regle and "color: var(--text-soft)" in corps
+        ]
+        if not lisibles:
+            erreurs.append(
+                f"site.css — {selecteur} n'utilise plus --text-soft : --muted ne donne "
+                "que 4,36:1 sur le fond d'une carte sélectionnée, sous le seuil AA de 4,5:1"
+            )
+    return erreurs
+
+
 CONTROLES = (
     ("tailles de texte", controler_tailles_de_texte),
     ("cibles tactiles", controler_cibles_tactiles),
@@ -561,6 +630,7 @@ CONTROLES = (
     ("densité du rendu 3D", controler_densite_du_rendu_3d),
     ("décor du héros et son repli", controler_decor_du_heros),
     ("qualité d'encodage des images", controler_qualite_d_encodage),
+    ("habillage du panneau", controler_habillage_du_panneau),
 )
 
 

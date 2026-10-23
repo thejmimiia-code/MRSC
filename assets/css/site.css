@@ -4037,14 +4037,17 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
 .layout-choice-preview[data-preview="mosaique"] > span:nth-child(1) { grid-column: span 2; }
 .layout-choice-preview[data-preview="panorama"] { grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,1fr); }
 .layout-choice-preview[data-preview="compacte"] { grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,1fr); gap: 2px; padding: 3px; }
-.layout-choice-hint { font-weight: 650; }
+.layout-choice-hint { font-weight: 650; color: var(--text-soft); }
 .layout-choice:hover { border-color: var(--blue); }
 .layout-choice.is-selected { border-color: var(--blue); background: var(--blue-soft); box-shadow: inset 0 0 0 1px var(--blue); }
 .layout-choice:focus-within { outline: 3px solid var(--blue); outline-offset: 2px; }
 .layout-choice input { width: 18px; height: 18px; margin: .18rem 0 0; accent-color: var(--blue); }
 .layout-choice-copy { display: block; min-width: 0; }
 .layout-choice-copy strong { display: block; color: var(--navy-ink); font-size: max(12px, .94rem); }
-.layout-choice-copy > span { display: block; margin-top: .1rem; color: var(--muted); font-size: max(12px, .82rem); line-height: 1.42; }
+/* --muted (#647086) tombe à 4,36:1 sur le fond bleu clair d'une carte
+   sélectionnée : sous le seuil AA de 4,5:1 pour un texte de 12 px. La teinte
+   voisine --text-soft donne 5,58:1 sans contraster davantage sur fond blanc. */
+.layout-choice-copy > span { display: block; margin-top: .1rem; color: var(--text-soft); font-size: max(12px, .82rem); line-height: 1.42; }
 .layout-settings-status { min-height: 1.4em; margin: .65rem 0 0; color: var(--navy-ink); font-size: max(12px, .86rem); font-weight: 700; }
 .layout-settings-note { margin: .45rem 0 0; color: var(--muted); font-size: max(12px, .78rem); line-height: 1.45; }
 .layout-settings-reset { width: 100%; margin-top: .75rem; }
@@ -4593,7 +4596,12 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
    Les sélecteurs portent `html.has-js .site-header` à dessein : les règles de
    l'en-tête compact (`html.has-js .site-header.is-compact …`, cinq classes) les
    écraseraient sinon, et les réglages resteraient côte à côte au lieu de
-   s'empiler. */
+   s'empiler.
+
+   Les icônes et les chevrons sont des masques SVG, pas des glyphes de police :
+   le dessin est identique partout et net à toute densité d'écran, alors qu'un
+   caractère comme « ⌄ » dépend de la police de substitution de la machine. */
+
 .customize-settings {
   position: relative;
   flex: 0 0 auto;
@@ -4624,6 +4632,7 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
   overflow-wrap: normal;
   hyphens: none;
   text-align: center;
+  transition: background-color .15s ease, border-color .15s ease;
 }
 .customize-settings > summary::-webkit-details-marker { display: none; }
 .customize-settings > summary::marker { content: ""; }
@@ -4632,10 +4641,27 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
   border-color: var(--gold);
   background: var(--on-navy-fill-strong);
 }
+.customize-settings > summary:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Chevrons : un même dessin partagé par les quatre panneaux du site. La taille
+   du glyphe est annulée (`font-size: 0`) pour que le caractère d'origine ne
+   s'affiche plus sous le masque. */
+.display-settings-chevron,
+.layout-settings-chevron,
+.site-journey-chevron,
 .customize-settings-chevron {
   display: inline-block;
-  font-size: clamp(13px, .875rem, 18px);
-  line-height: 1;
+  flex: 0 0 auto;
+  width: 13px;
+  height: 13px;
+  font-size: 0;
+  line-height: 0;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9.5l6 5.5 6-5.5'/%3E%3C/svg%3E") center / 13px 13px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9.5l6 5.5 6-5.5'/%3E%3C/svg%3E") center / 13px 13px no-repeat;
   transition: transform .18s ease;
 }
 .customize-settings[open] > summary .customize-settings-chevron { transform: rotate(180deg); }
@@ -4643,19 +4669,28 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
 .customize-settings-panel {
   position: absolute;
   z-index: 100;
-  top: calc(100% + .55rem);
+  top: calc(100% + .5rem);
   right: 0;
   width: min(clamp(300px, 22rem, 380px), calc(100vw - 1rem));
   max-height: calc(100vh - var(--hauteur-entete, 5rem) - 1rem);
   max-height: calc(100dvh - var(--hauteur-entete, 5rem) - 1rem);
   overflow: auto;
   overscroll-behavior: contain;
-  padding: clamp(10px, .7rem, 16px);
-  border: 1px solid var(--line);
-  border-radius: 14px;
+  padding: .45rem;
+  border: 1px solid rgba(29, 50, 104, .12);
+  border-radius: 16px;
   background: var(--surface);
   color: var(--ink);
-  box-shadow: var(--shadow);
+  box-shadow:
+    0 24px 48px -24px rgba(16, 36, 74, .34),
+    0 10px 20px -12px rgba(16, 36, 74, .18),
+    0 1px 2px rgba(16, 36, 74, .08);
+  animation: panneau-personnalisation .16s ease-out both;
+}
+
+@keyframes panneau-personnalisation {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: none; }
 }
 
 /* Les réglages deviennent des lignes du panneau : leurs résumés prennent toute
@@ -4666,31 +4701,7 @@ html.has-js .site-header .customize-settings-panel .site-journey-settings {
   position: static;
   display: block;
   width: 100%;
-  margin: 0 0 .3rem;
-}
-
-html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]) {
-  display: flex;
-  width: 100%;
-  min-width: 0;
-  max-width: none;
-  min-height: 36px;
-  margin: 0 0 .3rem;
-  justify-content: center;
-  /* Le bouton gardait ses couleurs d'en-tête (texte blanc) sur le fond clair du
-     panneau : invisible. Il prend l'habillage des autres lignes. */
-  padding: .35rem .6rem;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--paper);
-  color: var(--navy-ink);
-  font-size: max(12px, .85rem);
-  font-weight: 700;
-}
-html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]):hover,
-html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]):focus-visible {
-  border-color: var(--blue);
-  background: var(--surface);
+  margin: 0 0 .12rem;
 }
 
 html.has-js .site-header .customize-settings-panel :is(
@@ -4700,30 +4711,138 @@ html.has-js .site-header .customize-settings-panel :is(
 ) {
   display: flex;
   width: 100%;
-  min-height: 36px;
+  min-height: 44px;
   margin: 0;
-  padding: .35rem .6rem;
+  padding: .45rem .55rem;
   align-items: center;
-  justify-content: space-between;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--paper);
+  gap: .6rem;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background: transparent;
   color: var(--navy-ink);
-  font-size: max(12px, .85rem);
+  font-size: max(13px, .86rem);
+  font-weight: 650;
+  letter-spacing: .005em;
   text-align: left;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
 }
+
+/* L'icône de chaque ligne : un masque, teinté par `currentColor`. */
+html.has-js .site-header .customize-settings-panel :is(
+  .display-settings,
+  .layout-settings,
+  .site-journey-settings
+) > summary::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 19px;
+  height: 19px;
+  background-color: currentColor;
+  opacity: .78;
+  transition: opacity .15s ease;
+}
+html.has-js .site-header .customize-settings-panel .site-journey-settings > summary::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='6' cy='19' r='2.6'/%3E%3Cpath d='M8.6 19h8.4a3.5 3.5 0 0 0 0-7h-10a3.5 3.5 0 0 1 0-7h8'/%3E%3Ccircle cx='18' cy='5' r='2.6'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='6' cy='19' r='2.6'/%3E%3Cpath d='M8.6 19h8.4a3.5 3.5 0 0 0 0-7h-10a3.5 3.5 0 0 1 0-7h8'/%3E%3Ccircle cx='18' cy='5' r='2.6'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+}
+html.has-js .site-header .customize-settings-panel .display-settings > summary::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z'/%3E%3Ccircle cx='12' cy='12' r='3.1'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z'/%3E%3Ccircle cx='12' cy='12' r='3.1'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+}
+html.has-js .site-header .customize-settings-panel .layout-settings > summary::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.2' y='4' width='17.6' height='16' rx='2.6'/%3E%3Cpath d='M3.2 9.6h17.6'/%3E%3Cpath d='M9.6 9.6V20'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.2' y='4' width='17.6' height='16' rx='2.6'/%3E%3Cpath d='M3.2 9.6h17.6'/%3E%3Cpath d='M9.6 9.6V20'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+}
+
+html.has-js .site-header .customize-settings-panel :is(
+  .display-settings,
+  .layout-settings,
+  .site-journey-settings
+) > summary > :is(.display-settings-chevron, .layout-settings-chevron, .site-journey-chevron) {
+  margin-left: auto;
+  color: var(--muted);
+}
+
 html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings) > summary:hover,
 html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings)[open] > summary {
-  border-color: var(--blue);
-  background: var(--surface);
+  background: var(--blue-soft);
 }
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings) > summary:hover::before,
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings)[open] > summary::before {
+  opacity: 1;
+}
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings)[open] > summary {
+  color: var(--blue);
+}
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings) > summary:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  background: var(--blue-soft);
+}
+
+/* « Agrandir / Réduire » prend exactement l'habillage d'une ligne : c'est la
+   première du panneau, et non un bouton centré à part. Comme le libellé est
+   réécrit par `site.js`, l'icône est un masque et non un élément du DOM. */
+html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]) {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  min-height: 44px;
+  margin: 0 0 .12rem;
+  padding: .45rem .55rem;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .6rem;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--navy-ink);
+  font-size: max(13px, .86rem);
+  font-weight: 650;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden])::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 19px;
+  height: 19px;
+  background-color: currentColor;
+  opacity: .78;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 4H4v5'/%3E%3Cpath d='M15 4h5v5'/%3E%3Cpath d='M15 20h5v-5'/%3E%3Cpath d='M9 20H4v-5'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 4H4v5'/%3E%3Cpath d='M15 4h5v5'/%3E%3Cpath d='M15 20h5v-5'/%3E%3Cpath d='M9 20H4v-5'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+}
+/* En-tête déjà agrandi : le bouton propose de le réduire, l'icône suit. */
+html.has-js:not(.entete-compacte) .site-header .customize-settings-panel .header-compact-toggle:not([hidden])::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9h5V4'/%3E%3Cpath d='M20 9h-5V4'/%3E%3Cpath d='M20 15h-5v5'/%3E%3Cpath d='M4 15h5v5'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9h5V4'/%3E%3Cpath d='M20 9h-5V4'/%3E%3Cpath d='M20 15h-5v5'/%3E%3Cpath d='M4 15h5v5'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+}
+html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]):hover {
+  background: var(--blue-soft);
+}
+html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]):focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  background: var(--blue-soft);
+}
+
+/* Un filet sépare le réglage d'en-tête des trois réglages de préférence. */
+html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]) + .site-journey-settings {
+  margin-top: .3rem;
+  padding-top: .3rem;
+  border-top: 1px solid var(--line);
+}
+
 html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, .layout-settings-panel, .site-journey-panel) {
   position: static;
   width: 100%;
   max-width: none;
   max-height: none;
-  margin: .35rem 0 .5rem;
-  padding: 0 0 .2rem .6rem;
+  margin: .3rem 0 .4rem;
+  padding: .1rem 0 .1rem .55rem;
   border: 0;
   border-left: 2px solid var(--line);
   border-radius: 0;
@@ -4731,6 +4850,33 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
   box-shadow: none;
   color: inherit;
   overflow: visible;
+}
+
+@media (max-width: 520px) {
+  .customize-settings-panel {
+    padding: .35rem;
+    border-radius: 14px;
+  }
+  html.has-js .site-header .customize-settings-panel :is(
+    .display-settings > summary,
+    .layout-settings > summary,
+    .site-journey-settings > summary
+  ),
+  html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]) {
+    min-height: 40px;
+    padding: .35rem .5rem;
+    gap: .5rem;
+    font-size: 13px;
+  }
+  html.has-js .site-header .customize-settings-panel :is(
+    .display-settings,
+    .layout-settings,
+    .site-journey-settings
+  ) > summary::before,
+  html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden])::before {
+    width: 17px;
+    height: 17px;
+  }
 }
 
 /* Sur téléphone et en paysage court, le panneau se cale sous l'en-tête à la
@@ -4751,4 +4897,199 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
     right: .5rem;
     width: auto;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .customize-settings-panel { animation: none; }
+  .display-settings-chevron,
+  .layout-settings-chevron,
+  .site-journey-chevron,
+  .customize-settings-chevron { transition: none; }
+}
+
+/* --- Les réglages, une fois dans le panneau ---------------------------------
+   Les trois panneaux de réglage ont été dessinés pour flotter dans l'en-tête,
+   seuls et larges de 38 rem. Replacés dans un panneau de 350 px, ils gardaient
+   des défauts visibles à la mesure : un compteur « 100 % » en blanc sur blanc
+   dans le panneau Affichage (1:1 de contraste, donc invisible), un bouton
+   « Étiquette 1/1 » collé au bord droit derrière un filet, des cartes de
+   présentation très hautes, et un contenu décalé sous l'icône plutôt que sous
+   le libellé. Cette section reprend leur mise en forme dans ce cadre étroit. */
+
+/* Le contenu d'un réglage ouvert s'aligne sur son libellé, pas sur son icône :
+   l'icône fait 19 px et l'écart 9,6 px, d'où un retrait de 28,6 px. */
+html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, .layout-settings-panel, .site-journey-panel) {
+  padding-left: 1.8rem;
+  border-left-color: var(--border-soft-2);
+}
+
+/* Les titres de section deviennent des étiquettes discrètes : dans un panneau
+   étroit, un gros titre en gras concurrence les lignes du menu. */
+html.has-js .site-header .customize-settings-panel :is(.display-settings-title, .layout-settings-title, .site-journey-title) {
+  margin: 0 0 .45rem;
+  color: var(--text-soft);
+  font-size: max(12px, .72rem);
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+/* --- Affichage : un compteur lisible et un contrôle segmenté -------------- */
+html.has-js .site-header .customize-settings-panel .display-settings-row {
+  width: fit-content;
+  margin: 0 0 .55rem;
+  gap: 0;
+  justify-content: flex-start;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--button-radius);
+  background: var(--surface);
+}
+html.has-js .site-header .customize-settings-panel .display-settings-row .display-control {
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+html.has-js .site-header .customize-settings-panel .display-settings-row .display-control:first-of-type {
+  border-right: 1px solid var(--border-strong);
+}
+html.has-js .site-header .customize-settings-panel .display-settings-row .display-control:last-of-type {
+  border-left: 1px solid var(--border-strong);
+}
+html.has-js .site-header .customize-settings-panel .display-settings-row .display-control:hover {
+  background: var(--blue-soft);
+}
+html.has-js .site-header .customize-settings-panel .display-settings-row .display-control:focus-visible {
+  outline-offset: -3px;
+}
+html.has-js .site-header .customize-settings-panel .display-text-level {
+  display: flex;
+  min-width: 5.4ch;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 .35rem;
+  color: var(--navy-ink);
+  font-size: max(13px, .85rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Les deux bascules pleine largeur : fond papier, état enfoncé visible. */
+html.has-js .site-header .customize-settings-panel .display-settings-actions {
+  gap: .3rem;
+}
+html.has-js .site-header .customize-settings-panel .display-settings-actions .display-control {
+  justify-content: center;
+  border-color: var(--border-soft-2);
+  background: var(--paper);
+  font-size: max(13px, .85rem);
+  font-weight: 650;
+  text-align: center;
+}
+html.has-js .site-header .customize-settings-panel .display-settings-actions .display-control:hover {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+}
+html.has-js .site-header .customize-settings-panel .display-settings-actions .display-control[aria-pressed="true"] {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: var(--on-navy);
+}
+html.has-js .site-header .customize-settings-panel .display-settings-note {
+  margin: .55rem 0 0;
+  font-size: max(12px, .76rem);
+  line-height: 1.45;
+}
+
+/* --- Parcours : deux colonnes de boutons, l'étape sur sa propre ligne ------ */
+html.has-js .site-header .customize-settings-panel .site-journey-inner {
+  gap: .4rem;
+}
+html.has-js .site-header .customize-settings-panel .site-journey-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .3rem;
+  width: 100%;
+}
+html.has-js .site-header .customize-settings-panel .site-journey-button {
+  width: 100%;
+  min-height: 40px;
+  white-space: normal;
+  font-size: max(12px, .78rem);
+}
+html.has-js .site-header .customize-settings-panel .site-journey-status {
+  order: 1;
+  width: 100%;
+  margin: .1rem 0 0;
+  padding: 0;
+  border: 0;
+  color: var(--text-soft);
+  font-size: max(12px, .74rem);
+  line-height: 1.4;
+  text-align: left;
+  white-space: normal;
+}
+
+/* --- Présentation : des cartes plus compactes pour tenir dans le panneau --- */
+html.has-js .site-header .customize-settings-panel .layout-settings-options {
+  gap: .3rem;
+}
+html.has-js .site-header .customize-settings-panel .layout-choice {
+  grid-template-columns: 18px 40px minmax(0, 1fr);
+  gap: .45rem;
+  padding: .45rem .5rem;
+  align-items: start;
+}
+html.has-js .site-header .customize-settings-panel .layout-choice input {
+  width: 16px;
+  height: 16px;
+  margin-top: .15rem;
+}
+html.has-js .site-header .customize-settings-panel .layout-choice-preview {
+  width: 40px;
+  height: 30px;
+}
+html.has-js .site-header .customize-settings-panel .layout-choice-copy strong {
+  font-size: max(13px, .86rem);
+}
+html.has-js .site-header .customize-settings-panel .layout-choice-copy > span {
+  margin-top: .05rem;
+  font-size: max(12px, .76rem);
+  line-height: 1.38;
+}
+html.has-js .site-header .customize-settings-panel .layout-settings-status {
+  margin: .45rem 0 0;
+  font-size: max(12px, .8rem);
+}
+html.has-js .site-header .customize-settings-panel .layout-settings-note {
+  margin: .3rem 0 0;
+  font-size: max(12px, .74rem);
+  line-height: 1.4;
+}
+html.has-js .site-header .customize-settings-panel .layout-settings-reset {
+  min-height: 40px;
+  margin-top: .45rem;
+  font-size: max(13px, .82rem);
+}
+
+/* --- L'en-tête compact, fini au pixel ---------------------------------------
+   À 3×, trois défauts se voyaient encore sur téléphone : le chevron de
+   « Personnalisation » était un caractère de la police (dessin mou, différent
+   selon la machine) alors que le hamburger voisin est un SVG ; les trois icônes
+   du panneau avaient trois épaisseurs de trait (2,4 / 1,7 / 2) ; et l'icône du
+   hamburger changeait de taille entre l'en-tête compact (14 px) et le panneau
+   (19 px). Un seul jeu de tracés, une seule épaisseur, deux tailles décidées. */
+.nav-toggle svg {
+  flex: 0 0 auto;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+html.has-js .site-header.is-compact .nav-toggle svg {
+  width: 16px;
+  height: 16px;
 }

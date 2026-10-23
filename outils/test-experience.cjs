@@ -452,6 +452,22 @@ async function main() {
         `les quatre réglages doivent être dans le panneau : ${JSON.stringify(mesureLignes)}`
       );
       assert.ok(mesureLignes.every((ligne) => ligne.hauteur >= 32), JSON.stringify(mesureLignes));
+      // Chaque réglage porte un repère visuel dessiné : une icône en masque, pas
+      // un glyphe de police dont le rendu dépend de la machine.
+      const icones = await page.evaluate(() => {
+        const panneau = document.querySelector('.customize-settings-panel');
+        return Array.from(panneau.querySelectorAll(':scope > details > summary, :scope > button'))
+          .filter((element) => element.getBoundingClientRect().height > 0)
+          .map((element) => ({
+            libelle: (element.textContent || '').trim().slice(0, 18),
+            masque: getComputedStyle(element, '::before').maskImage || getComputedStyle(element, '::before').webkitMaskImage,
+          }));
+      });
+      assert.equal(icones.length, 4, JSON.stringify(icones));
+      assert.ok(
+        icones.every((icone) => icone.masque && icone.masque !== 'none'),
+        `chaque réglage doit porter une icône : ${JSON.stringify(icones)}`
+      );
       assert.ok(mesureLignes.every((ligne) => ligne.dansPanneau), JSON.stringify(mesureLignes));
       assert.ok(
         mesureLignes.every((ligne) => ligne.largeur >= largeurInterieure - 2),
