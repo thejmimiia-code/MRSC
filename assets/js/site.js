@@ -315,6 +315,284 @@
     });
   }
 
+  // --- Écouter la page -------------------------------------------------------
+  // Lecture à voix haute du contenu principal, pour qui lit difficilement, voit
+  // peu ou se fatigue. Trois principes : rien n'est lu sans un geste explicite,
+  // la voix est celle de l'appareil et rien n'est envoyé à un service distant,
+  // et le bloc lu reste marqué à l'écran pour pouvoir suivre. La commande vit
+  // dans « Personnalisation » : l'en-tête compact garde deux boutons.
+  const syntheseVocaleDisponible = "speechSynthesis" in window
+    && typeof window.SpeechSynthesisUtterance === "function";
+  const SELECTEUR_LECTURE = "h1,h2,h3,h4,h5,h6,p,li,blockquote,figcaption,summary,td,th,dd,dt";
+  const LONGUEUR_MAX_SEGMENT = 220;
+
+  const normaliserTexte = (texte) => (texte || "").replace(/\s+/g, " ").trim();
+
+  // Un segment trop long est coupé à la fin d'une phrase : certains moteurs
+  // interrompent une énonciation au bout d'une quinzaine de secondes.
+  const decouperSegment = (texte) => {
+    if (texte.length <= LONGUEUR_MAX_SEGMENT) return [texte];
+    const segments = [];
+    let reste = texte;
+    while (reste.length > LONGUEUR_MAX_SEGMENT) {
+      let coupe = reste.lastIndexOf(" ", LONGUEUR_MAX_SEGMENT);
+      const ponctuation = Math.max(
+        reste.lastIndexOf(". ", LONGUEUR_MAX_SEGMENT),
+        reste.lastIndexOf("? ", LONGUEUR_MAX_SEGMENT),
+        reste.lastIndexOf("! ", LONGUEUR_MAX_SEGMENT),
+        reste.lastIndexOf("; ", LONGUEUR_MAX_SEGMENT),
+      );
+      if (ponctuation > LONGUEUR_MAX_SEGMENT / 3) coupe = ponctuation + 1;
+      if (coupe <= 0) coupe = LONGUEUR_MAX_SEGMENT;
+      segments.push(reste.slice(0, coupe).trim());
+      reste = reste.slice(coupe).trim();
+    }
+    if (reste) segments.push(reste);
+    return segments;
+  };
+
+  // Un bloc qui ne finit pas par une ponctuation s'entendrait collé au suivant.
+  const ponctuer = (texte) => (/[.!?…:;»)]$/.test(texte) ? texte : `${texte}.`);
+
+  // La langue se lit sur l'élément ou son plus proche ancêtre : une réplique
+  // anglaise des Mondes porte `lang="en"` et doit être prononcée en anglais.
+  const langueDe = (element) => {
+    const porteur = element.closest("[lang]");
+    return (porteur && porteur.getAttribute("lang")) || document.documentElement.lang || "fr";
+  };
+
+  // `innerText` plutôt que `textContent` : il rend les sauts de ligne et les
+  // espaces de la mise en page, sans quoi deux phrases séparées par un élément
+  // mis en bloc s'entendraient collées (« librement.Les Escales »).
+  const texteLisible = (element) => {
+    const brut = typeof element.innerText === "string" ? element.innerText : element.textContent;
+    return normaliserTexte(brut);
+  };
+
+  const blocsLisibles = () => {
+    const racine = document.querySelector("main") || document.body;
+    return Array.from(racine.querySelectorAll(SELECTEUR_LECTURE))
+      .filter((element) => {
+        // `getClientRects` vide couvre d'un coup `hidden`, `display: none` et un
+        // `<details>` refermé : rien de ce qui n'est pas à l'écran n'est lu.
+        if (!element.getClientRects().length) return false;
+        if (element.closest("[aria-hidden='true'], .visually-hidden, script, style, nav, footer")) return false;
+        // Un bloc qui en contient d'autres est écarté : sinon son texte serait lu
+        // deux fois (une liste qui contient des paragraphes, par exemple).
+        if (element.querySelector(SELECTEUR_LECTURE)) return false;
+        return texteLisible(element).length > 0;
+      });
+  };
+
+  const construireLectureVocale = () => {
+    const bloc = document.createElement("div");
+    bloc.className = "read-aloud";
+    bloc.dataset.readAloud = "";
+    if (!syntheseVocaleDisponible) {
+      // Sans voix de synthèse, la commande serait un bouton mort : on n'affiche
+      // rien plutôt que de promettre une lecture impossible sur cet appareil.
+      return null;
+    }
+
+    const titre = document.createElement("p");
+    titre.className = "read-aloud-title";
+    const titreFort = document.createElement("strong");
+    titreFort.textContent = "Écouter la page";
+    titre.append(titreFort);
+
+    const commandes = document.createElement("div");
+    commandes.className = "read-aloud-controls";
+    const boutonLecture = document.createElement("button");
+    boutonLecture.type = "button";
+    boutonLecture.className = "display-control display-control-wide";
+    boutonLecture.dataset.readAloudToggle = "";
+    boutonLecture.textContent = "Lire à voix haute";
+    const boutonPause = document.createElement("button");
+    boutonPause.type = "button";
+    boutonPause.className = "display-control";
+    boutonPause.dataset.readAloudPause = "";
+    boutonPause.textContent = "Pause";
+    boutonPause.setAttribute("aria-pressed", "false");
+    boutonPause.hidden = true;
+    commandes.append(boutonLecture, boutonPause);
+
+    const etat = document.createElement("p");
+    etat.className = "read-aloud-status";
+    etat.dataset.readAloudStatus = "";
+    etat.setAttribute("role", "status");
+    etat.setAttribute("aria-live", "polite");
+
+    const note = document.createElement("p");
+    note.className = "read-aloud-note";
+    note.textContent = "La voix est celle de l’appareil : elle peut varier, manquer ou mal prononcer un mot. Rien n’est envoyé à un service distant. Cette lecture ne remplace pas un lecteur d’écran.";
+
+    let enLecture = false;
+    let enPause = false;
+    let file = [];
+    let index = 0;
+    let blocMarque = null;
+
+    const annoncer = (message) => {
+      if (etat.textContent === message) {
+        etat.textContent = "";
+      }
+      etat.textContent = message;
+    };
+
+    const demarquer = () => {
+      if (blocMarque) blocMarque.classList.remove("lecture-en-cours");
+      blocMarque = null;
+    };
+
+    const marquer = (element) => {
+      demarquer();
+      if (!element) return;
+      blocMarque = element;
+      element.classList.add("lecture-en-cours");
+      if (typeof element.scrollIntoView !== "function") return;
+      const cadre = element.getBoundingClientRect();
+      const mouvementReduit = typeof window.matchMedia === "function"
+        && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      // On ne fait défiler que si le bloc lu n'est pas déjà visible : suivre la
+      // lecture sans imposer un défilement à chaque phrase.
+      if (cadre.top < 0 || cadre.bottom > window.innerHeight) {
+        element.scrollIntoView({ block: "center", behavior: mouvementReduit ? "auto" : "smooth" });
+      }
+    };
+
+    const arreter = (motif) => {
+      enLecture = false;
+      enPause = false;
+      file = [];
+      index = 0;
+      try {
+        window.speechSynthesis.cancel();
+      } catch (erreur) {
+        // Un moteur absent ou bloqué ne doit pas laisser la commande bloquée.
+      }
+      demarquer();
+      boutonLecture.textContent = "Lire à voix haute";
+      boutonLecture.removeAttribute("aria-label");
+      boutonPause.hidden = true;
+      boutonPause.textContent = "Pause";
+      boutonPause.setAttribute("aria-pressed", "false");
+      if (motif === "erreur") {
+        annoncer("La lecture s’est arrêtée : la voix de cet appareil n’a pas répondu.");
+      } else if (motif === "fin") {
+        annoncer("Lecture terminée.");
+      } else {
+        annoncer("Lecture arrêtée.");
+      }
+    };
+
+    const lire = () => {
+      if (!enLecture) return;
+      if (index >= file.length) {
+        arreter("fin");
+        return;
+      }
+      const segment = file[index];
+      index += 1;
+      marquer(segment.bloc);
+      const enonce = new window.SpeechSynthesisUtterance(segment.texte);
+      enonce.lang = segment.langue;
+      enonce.rate = 1;
+      enonce.onend = () => {
+        if (enLecture && !enPause) lire();
+      };
+      enonce.onerror = (evenement) => {
+        // Un arrêt volontaire interrompt l'énonciation en cours : Chromium le
+        // signale comme une erreur. Ce n'est pas une panne, il ne faut pas
+        // l'annoncer comme telle.
+        const cause = evenement && evenement.error;
+        if (!enLecture || cause === "interrupted" || cause === "canceled") return;
+        arreter("erreur");
+      };
+      window.speechSynthesis.speak(enonce);
+    };
+
+    const demarrer = () => {
+      const blocs = blocsLisibles();
+      file = [];
+      blocs.forEach((element) => {
+        decouperSegment(ponctuer(texteLisible(element)))
+          .forEach((texte) => file.push({ texte, bloc: element, langue: langueDe(element) }));
+      });
+      if (!file.length) {
+        annoncer("Aucun texte à lire sur cette page.");
+        return;
+      }
+      try {
+        window.speechSynthesis.cancel();
+      } catch (erreur) {
+        // Rien à annuler : le moteur repart de zéro.
+      }
+      enLecture = true;
+      enPause = false;
+      index = 0;
+      // Libellé court : « Arrêter la lecture » et « Reprendre » côte à côte
+      // débordaient du panneau sous 360 px. Le nom accessible reste complet.
+      boutonLecture.textContent = "Arrêter";
+      // Le nom accessible contient le texte visible, comme l'exige la règle
+      // `label-content-name-mismatch` d'axe.
+      boutonLecture.setAttribute("aria-label", "Arrêter la lecture à voix haute");
+      boutonPause.hidden = false;
+      boutonPause.textContent = "Pause";
+      boutonPause.setAttribute("aria-pressed", "false");
+      annoncer("Lecture à voix haute commencée.");
+      // `cancel()` puis `speak()` dans le même tour est parfois ignoré par
+      // Chromium : la première énonciation part au tour suivant.
+      setTimeout(() => {
+        if (enLecture && !enPause) lire();
+      }, 0);
+    };
+
+    boutonLecture.addEventListener("click", () => {
+      if (enLecture) {
+        arreter("arret");
+      } else {
+        demarrer();
+      }
+    });
+
+    boutonPause.addEventListener("click", () => {
+      if (!enLecture) return;
+      if (enPause) {
+        try {
+          window.speechSynthesis.resume();
+        } catch (erreur) {
+          // Le moteur reprend au prochain segment de toute façon.
+        }
+        enPause = false;
+        boutonPause.textContent = "Pause";
+        boutonPause.setAttribute("aria-pressed", "false");
+        annoncer("Lecture reprise.");
+        // Si le moteur a terminé le segment pendant la pause, la file doit
+        // repartir ; sinon, `resume()` suffit et relancer lirait deux fois.
+        if (!window.speechSynthesis.speaking && !window.speechSynthesis.pending) lire();
+      } else {
+        try {
+          window.speechSynthesis.pause();
+        } catch (erreur) {
+          // Sans pause possible, le bouton reste sans effet visible.
+        }
+        enPause = true;
+        boutonPause.textContent = "Reprendre";
+        boutonPause.setAttribute("aria-pressed", "true");
+        annoncer("Lecture en pause.");
+      }
+    });
+
+    // Quitter la page ou la mettre en arrière-plan coupe la voix : une lecture
+    // qui continue sur une autre page serait impossible à arrêter.
+    window.addEventListener("pagehide", () => {
+      if (enLecture) arreter("arret");
+    });
+
+    bloc.append(titre, commandes, etat, note);
+    return bloc;
+  };
+
   if (settings) {
     settings.hidden = false;
     textDecrease?.addEventListener("click", () => {
@@ -403,7 +681,10 @@
       personnalisation.append(resume, panneauPersonnalisation);
       // Ordre voulu : agrandir/réduire, parcours (inséré ensuite par
       // navigation-parcours.js devant l'affichage), affichage, présentation.
-      [headerCompactToggle, settings, layoutSettings].forEach((element) => {
+      const lectureVocale = construireLectureVocale();
+      // L'écoute vient en dernier : elle ne fait pas partie des réglages de
+      // présentation, et l'intercaler coupait le groupe en deux.
+      [headerCompactToggle, settings, layoutSettings, lectureVocale].forEach((element) => {
         if (element) panneauPersonnalisation.append(element);
       });
       outilsEntete.append(personnalisation);

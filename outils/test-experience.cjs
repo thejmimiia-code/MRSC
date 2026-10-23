@@ -433,7 +433,8 @@ async function main() {
       );
 
       // Clavier : Entrée ouvre le panneau ; les quatre réglages y sont des lignes
-      // pleine largeur, contenues dans le cadre.
+      // pleine largeur, contenues dans le cadre, plus la commande « Écouter la
+      // page » ajoutée le 23 octobre 2026 (cinq blocs, dont quatre réglages).
       await page.focus('.customize-settings > summary');
       await page.keyboard.press('Enter');
       await page.waitForFunction(() => document.querySelector('[data-customize-settings]')?.open === true);
@@ -459,8 +460,13 @@ async function main() {
       const largeurInterieure = lignes[lignes.length - 1].interieur;
       assert.equal(
         mesureLignes.length,
-        4,
-        `les quatre réglages doivent être dans le panneau : ${JSON.stringify(mesureLignes)}`
+        5,
+        `les quatre réglages et la lecture à voix haute doivent être dans le panneau : ${JSON.stringify(mesureLignes)}`
+      );
+      assert.equal(
+        mesureLignes.filter((ligne) => ligne.nom.includes('read-aloud')).length,
+        1,
+        'la commande « Écouter la page » doit être présente une seule fois'
       );
       assert.ok(mesureLignes.every((ligne) => ligne.hauteur >= 32), JSON.stringify(mesureLignes));
       // Chaque réglage porte un repère visuel dessiné : une icône en masque, pas
@@ -594,7 +600,8 @@ async function main() {
           };
         });
         assert.ok(etat.gauche >= -1 && etat.droite <= etat.viewport + 1, `${largeur}px : ${JSON.stringify(etat)}`);
-        assert.ok(etat.lignes.length === 4, `${largeur}px : ${JSON.stringify(etat.lignes)}`);
+        // Quatre réglages et la lecture à voix haute, ajoutée le 23 octobre 2026.
+        assert.ok(etat.lignes.length === 5, `${largeur}px : ${JSON.stringify(etat.lignes)}`);
         assert.ok(
           etat.lignes.every((ligne) => ligne.left >= etat.gauche - 1 && ligne.right <= etat.droite + 1),
           `${largeur}px : une ligne sort du panneau ${JSON.stringify(etat.lignes)}`
@@ -826,6 +833,138 @@ async function main() {
       await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === false);
       await page.waitForFunction(() => getComputedStyle(document.querySelector('.site-layout-chevron')).transform === 'none');
       await verifierPanneauReplie(page, '.site-layout-panel');
+    } finally {
+      await page.close();
+    }
+  });
+
+  await executer('Lecture à voix haute : commande unique, arrêt net, rien envoyé', async () => {
+    const page = await creerPage({ width: 390, height: 820 });
+    try {
+      await ouvrirPageSite(page, 'apprendre/fiches/fr-lire-consigne.html');
+      // La synthèse vocale du navigateur est remplacée par un double : l'essai
+      // vérifie l'enchaînement, la langue et les libellés, pas la voix réelle,
+      // qu'aucun banc sans interface ne peut écouter.
+      await page.evaluate(() => {
+        window.__lus = [];
+        const fausse = {
+          speaking: false,
+          pending: false,
+          speak(e) {
+            window.__lus.push({ texte: e.text, langue: e.lang });
+            window.__courante = e;
+            setTimeout(() => e.onend && e.onend(), 0);
+          },
+          cancel() {
+            window.__annulations = (window.__annulations || 0) + 1;
+            // Chromium signale une annulation volontaire par un `onerror`
+            // « interrupted » : le double fait de même, pour vérifier que ce
+            // n'est pas annoncé comme une panne.
+            const courante = window.__courante;
+            window.__courante = null;
+            if (courante) setTimeout(() => courante.onerror && courante.onerror({ error: 'interrupted' }), 0);
+          },
+          pause() { window.__pauses = (window.__pauses || 0) + 1; },
+          resume() { window.__reprises = (window.__reprises || 0) + 1; },
+        };
+        Object.defineProperty(window, 'speechSynthesis', { value: fausse, configurable: true });
+      });
+
+      const avant = await page.evaluate(() => ({
+        requetes: performance.getEntriesByType('resource').length,
+        lus: window.__lus.length,
+      }));
+      assert.equal(avant.lus, 0, 'rien ne doit être lu sans un geste explicite');
+
+      await ouvrirPersonnalisation(page);
+      const commande = await page.$eval('[data-read-aloud-toggle]', (element) => element.textContent.trim());
+      assert.equal(commande, 'Lire à voix haute');
+
+      await page.click('[data-read-aloud-toggle]');
+      await page.waitForFunction(() => window.__lus.length > 5, { timeout: 15000 });
+      const pendant = await page.evaluate(() => ({
+        commande: document.querySelector('[data-read-aloud-toggle]').textContent.trim(),
+        nomComplet: document.querySelector('[data-read-aloud-toggle]').getAttribute('aria-label'),
+        largeurs: [...document.querySelectorAll('[data-read-aloud] button')]
+          .filter((bouton) => !bouton.hidden)
+          .map((bouton) => Math.round(bouton.getBoundingClientRect().height)),
+        pause: document.querySelector('[data-read-aloud-pause]').hidden,
+        marques: document.querySelectorAll('.lecture-en-cours').length,
+        statut: document.querySelector('[data-read-aloud-status]').textContent,
+      }));
+      assert.equal(pendant.commande, 'Arrêter');
+      assert.equal(pendant.nomComplet, 'Arrêter la lecture à voix haute');
+      // Le texte visible doit rester contenu dans le nom accessible.
+      assert.ok(pendant.nomComplet.includes(pendant.commande));
+      assert.ok(
+        pendant.largeurs.every((largeur) => largeur >= 32),
+        `les deux commandes de lecture doivent rester cliquables : ${JSON.stringify(pendant.largeurs)}`
+      );
+      assert.equal(pendant.pause, false, 'la pause doit apparaître pendant la lecture');
+      assert.equal(pendant.marques, 1, 'un seul bloc en cours de lecture doit être marqué');
+      assert.match(pendant.statut, /Lecture à voix haute commencée/);
+
+      await page.waitForFunction(() => document.querySelector('[data-read-aloud-status]').textContent.includes('terminée'), { timeout: 60000 });
+      const apres = await page.evaluate(() => ({
+        commande: document.querySelector('[data-read-aloud-toggle]').textContent.trim(),
+        pause: document.querySelector('[data-read-aloud-pause]').hidden,
+        marques: document.querySelectorAll('.lecture-en-cours').length,
+        total: window.__lus.length,
+        langues: [...new Set(window.__lus.map((entree) => entree.langue))],
+        colles: window.__lus.filter((entree) => /[a-zà-ÿ]\.[A-ZÀ-Ý]/.test(entree.texte)).length,
+        requetes: performance.getEntriesByType('resource').length,
+        premier: window.__lus[0].texte,
+      }));
+      assert.equal(apres.commande, 'Lire à voix haute');
+      assert.equal(apres.pause, true, 'la commande de pause disparaît quand la lecture est finie');
+      assert.equal(apres.marques, 0, 'plus aucun bloc ne reste marqué');
+      assert.ok(apres.total > 10, `la fiche doit produire plusieurs segments : ${apres.total}`);
+      assert.deepEqual(apres.langues, ['fr']);
+      assert.equal(apres.colles, 0, 'deux phrases mises en blocs ne doivent pas s’entendre collées');
+      assert.equal(apres.requetes, avant.requetes, 'la lecture ne doit émettre aucune requête réseau');
+      assert.ok(apres.premier.length > 0);
+
+      // Arrêt net : le bouton coupe la voix et remet la commande à zéro.
+      await page.click('[data-read-aloud-toggle]');
+      await page.waitForFunction(() => document.querySelector('[data-read-aloud-status]').textContent.includes('commencée'), { timeout: 15000 });
+      await page.click('[data-read-aloud-toggle]');
+      await page.waitForFunction(() => document.querySelector('[data-read-aloud-status]').textContent.includes('arrêtée'), { timeout: 15000 });
+      const arret = await page.evaluate(() => ({
+        annulations: window.__annulations,
+        marques: document.querySelectorAll('.lecture-en-cours').length,
+        commande: document.querySelector('[data-read-aloud-toggle]').textContent.trim(),
+        statut: document.querySelector('[data-read-aloud-status]').textContent,
+      }));
+      assert.ok(arret.annulations >= 1, 'arrêter doit annuler la synthèse en cours');
+      assert.equal(arret.marques, 0);
+      assert.equal(arret.commande, 'Lire à voix haute');
+      // L'annulation déclenche un `onerror` « interrupted » : ce n'est pas une
+      // panne, l'état ne doit pas basculer sur le message d'échec.
+      assert.equal(arret.statut, 'Lecture arrêtée.');
+
+      // La langue des répliques anglaises des Mondes est respectée.
+      await ouvrirPageSite(page, 'anglais-aventure.html');
+      await page.waitForSelector('[data-mission-id="gare"]');
+      await page.click('[data-mission-id="gare"]');
+      await page.waitForFunction(() => document.querySelector('#dialogue-line')?.textContent.trim().length > 0);
+      await page.evaluate(() => {
+        window.__lus = [];
+        const fausse = {
+          speak(e) {
+            window.__lus.push({ texte: e.text, langue: e.lang });
+            setTimeout(() => e.onend && e.onend(), 0);
+          },
+          cancel() {}, pause() {}, resume() {},
+        };
+        Object.defineProperty(window, 'speechSynthesis', { value: fausse, configurable: true });
+      });
+      await ouvrirPersonnalisation(page);
+      await page.click('[data-read-aloud-toggle]');
+      await page.waitForFunction(() => window.__lus.some((entree) => entree.langue === 'en'), { timeout: 60000 });
+      const anglais = await page.evaluate(() => window.__lus.filter((entree) => entree.langue === 'en'));
+      assert.ok(anglais.length >= 1);
+      assert.match(anglais[0].texte, /^[A-Za-z]/);
+      await page.click('[data-read-aloud-toggle]');
     } finally {
       await page.close();
     }

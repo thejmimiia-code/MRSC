@@ -526,6 +526,43 @@ paragraphes retiré, puis remplacé par un alignement à gauche.
 Limite : la mesure est celle d'un Chromium sans interface ; le rendu des filets
 sur un écran à très forte densité reste à constater.
 
+## 6 octies. « Écouter la page » : une commande qui tient dans le panneau (23 octobre 2026)
+
+Le lot d'inclusion ajoute une commande de lecture à voix haute, en dernier dans
+le panneau « Personnalisation ». Ce qui suit ne juge pas la voix — aucun banc
+sans interface ne peut l'écouter — mais vérifie que la commande s'affiche sans
+casser la mise en page, aux largeurs et aux crans de texte les plus serrés.
+
+- **Ce qui était faux au premier jet.** « Arrêter la lecture » et « Reprendre »
+  ne tenaient pas côte à côte dans 328 px : le second sortait du cadre. Un
+  `flex-wrap` ne suffisait pas, car le bouton principal réclamait toute la ligne
+  par sa base `auto` et repoussait la pause en dessous, seule sur sa ligne.
+- **Correction mesurée.** Libellés courts (« Arrêter »), nom accessible complet
+  conservé (`aria-label`), puis `flex: 1 1 0` sur le bouton principal et
+  `flex: 0 0 auto` sur la pause. À 320 px et 130 % : bouton principal
+  125 × 53 px, pause 148 × 53 px, les deux dans le panneau, débordement 0 px.
+- **Ordre dans le panneau.** Intercalée entre « Affichage » et « Présentation »,
+  la commande coupait le groupe des réglages en deux ; une capture l'a montré.
+  Elle passe après « Présentation ». L'en-tête compact garde deux boutons.
+- **Matrice relevée** (Chromium sans interface, 100 % et 130 %) : 320 × 568,
+  390 × 780, 430 × 900, 667 × 375, 844 × 390, 768 × 1 024, 1 440 × 900 —
+  panneau entièrement dans l'écran, contenu dans le panneau, `overflow-y: auto`,
+  aucun débordement horizontal, aucune capture de texte hors cadre.
+- **Contraste du bloc marqué.** Le bloc en cours de lecture reçoit un contour de
+  3 px (`outline`, jamais `box-shadow` seul) et `Highlight` en mode contraste
+  forcé : l'information reste perceptible quand les couleurs sont imposées.
+
+Garde-fou : 15ᵉ contrôle `controler_lecture_a_voix_haute`. **Sept mutations
+rejouées, sept détectées** : langue du bloc ignorée, arrêt sans annulation,
+contenus masqués lus, `fetch` ajouté, marque visuelle supprimée, commande
+construite mais jamais ajoutée au panneau. Les quatre premières versions du
+contrôle étaient trop permissives — elles cherchaient une sous-chaîne au lieu de
+l'appel réel, ou acceptaient un `outline` présent ailleurs dans la feuille.
+
+Limite : la mesure porte sur la géométrie de la commande, pas sur le son. Une
+voix absente, une prononciation fautive ou une pause qui ne reprend pas restent
+possibles et ne se voient qu'à l'oreille.
+
 ## 7. Ce qui n'est pas couvert
 
 - **Police réelle.** La mesure utilise les polices installées dans

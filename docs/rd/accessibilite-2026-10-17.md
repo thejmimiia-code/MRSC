@@ -66,6 +66,8 @@ Deux défauts que les passes précédentes ne pouvaient pas voir ont été trouv
 
 Après correction, les **47 exécutions** du script par défaut (24 pages + 23 états) ne remontent aucune violation.
 
+**Mise à jour du 23 octobre 2026 :** le lot « Écouter la page » ajoute deux états au balayage par défaut (panneau « Personnalisation » ouvert, à 360 et 1 280 px), soit **49 exécutions, 0 violation**. Ce chiffre ne vaut pas audit : il ne dit rien de la qualité de la lecture à voix haute ni du rendu sonore, que cette page ne mesure pas. Voir [`inclusion-lecture-vocale.md`](inclusion-lecture-vocale.md).
+
 ## Ce que ces mesures ne disent pas
 
 - axe ne couvre qu'une partie des critères WCAG ; l'absence de violation n'est ni une conformité ni une preuve d'utilisabilité.
