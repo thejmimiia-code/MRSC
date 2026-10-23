@@ -715,15 +715,17 @@ def fichiers_du_site() -> None:
         and "setHeaderCompact(true);" in script_site
         and "headerDetails.some(" in script_site
         and "if (focusWouldBeHidden) headerCompactToggle.focus();" in script_site
-        and "Mode compact réactivé au rétrécissement" in test_experience
-        and "MutationObserver" in test_experience
-        and "assert.equal(cadreAgrandir720, cadreReduire720" in test_experience
-        and "controlesBarre.every((element) => element.flexShrink === '0')" in test_experience
-        and "chaque commande occupe une demi-largeur de la grille" in test_experience
-        and "le cadre compact revient identique après un aller-retour" in test_experience
-        and "assert.equal(etat.lignes, 1" in test_experience
-        and "cadreEtTexte.lignesTexte.every" in test_experience
-        and "cadreEtTexte.scrollWidth <= cadreEtTexte.largeur" in test_experience,
+        and "En-tête compact : deux commandes, réglages groupés et bascule réversible" in test_experience
+        and "les deux commandes gardent leur libellé entier" in test_experience
+        and "l’en-tête doit garder deux commandes" in test_experience
+        and "etat.lignes.every((ligne) => ligne.hauteur >= 32)" in test_experience
+        and "le panneau ne doit pas se refermer sur son propre bouton" in test_experience
+        and "le premier Échap ne referme que le réglage ouvert" in test_experience
+        and "le focus revient sur la commande « Personnalisation »" in test_experience
+        and "les quatre réglages doivent être dans le panneau" in test_experience
+        and "mesureLignes.every((ligne) => ligne.hauteur >= 32)" in test_experience
+        and "etat.lignes.every((ligne) => ligne.left >= etat.gauche - 1" in test_experience
+        and "le cadre de la commande ne change pas quand le libellé bascule" in test_experience,
     )
     verifier(
         "La navigation permet retour, avance, accueil et reprise du dernier point",

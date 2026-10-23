@@ -446,7 +446,7 @@ html.contraste-renforce .site-status-note {
   vertical-align: middle;
 }
 
-.site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+.site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings > summary, .site-journey-settings > summary, .layout-settings > summary, .customize-settings > summary) {
   flex: 0 0 auto;
   width: auto;
   max-width: none;
@@ -3201,7 +3201,7 @@ html.has-js .site-header.is-compact :is(.display-settings, .site-journey-setting
 
 html.has-js .site-header.is-compact .nav-toggle,
 html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
-html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary, .customize-settings > summary) {
   min-height: 36px;
   height: auto;
   padding: .2rem .55rem;
@@ -3287,7 +3287,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
      bien au-dessus du minimum WCAG et se touche sans visée. */
   html.has-js .site-header.is-compact .nav-toggle,
   html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
-  html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+  html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary, .customize-settings > summary) {
     min-height: 36px;
     padding: .2rem .5rem;
     font-size: max(12px, .75rem);
@@ -4522,7 +4522,14 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
     gap: .22rem;
-    flex: 1 1 auto;
+    /* Deux commandes seulement, Menu et Personnalisation : la grille les partage
+       en deux colonnes égales sous le logo, ce qui laisse le libellé entier à
+       320 px. */
+  }
+  /* `.is-compact .nav-inner` impose `nowrap` : sans cette règle, la rangée des
+     commandes débordait de 63 px au lieu de passer sous le logo. */
+  html.has-js .site-header.is-compact .nav-inner {
+    flex-wrap: wrap;
     /* Sous 210 px de large, la grille passe sur sa propre rangée plutôt que de
        comprimer les commandes à côté du logo (à 70 px, elles tombaient à 42 px
        et le libellé débordait). */
@@ -4534,22 +4541,13 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
      autres formats compacts (paysage, tablette) gardent 36 px. */
   html.has-js .site-header.is-compact .nav-toggle,
   html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
-  html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+  html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary, .customize-settings > summary) {
     min-height: 32px;
     padding-block: .12rem;
   }
-  /* La dernière commande occupe toute la largeur restante, pour ne pas laisser
-     de trou sous un nombre impair de commandes. */
-  html.has-js .site-header.is-compact :is(.display-settings, .site-journey-settings) {
-    display: grid;
-  }
-  html.has-js .site-header.is-compact .layout-settings {
-    display: grid;
-    grid-column: 1 / -1;
-  }
   html.has-js .site-header.is-compact .nav-toggle,
   html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
-  html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+  html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary, .customize-settings > summary) {
     display: inline-flex;
     width: 100%;
     min-width: 0;
@@ -4580,5 +4578,177 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
      de 19 px et le libellé débordait de son cadre. */
   html.has-js .site-header.is-compact .header-compact-tools {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --- « Personnalisation » : un seul bouton pour les quatre réglages ---------
+   Le 23 octobre 2026, l'en-tête compact empilait cinq commandes (Menu,
+   Agrandir, Parcours, Affichage, Présentation) : deux rangées puis une
+   troisième à demi pleine, et un en-tête de 110 px sur un écran de 640.
+   Les quatre réglages sont désormais réunis derrière un seul bouton, laissant
+   exactement deux commandes visibles : « Menu » et « Personnalisation ».
+   Le panneau est créé et peuplé par `assets/js/site.js`, ce qui évite de
+   modifier les 98 pages statiques.
+
+   Les sélecteurs portent `html.has-js .site-header` à dessein : les règles de
+   l'en-tête compact (`html.has-js .site-header.is-compact …`, cinq classes) les
+   écraseraient sinon, et les réglages resteraient côte à côte au lieu de
+   s'empiler. */
+.customize-settings {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0;
+  color: var(--on-navy);
+}
+
+.customize-settings:not([open]) > .customize-settings-panel { display: none !important; }
+
+.customize-settings > summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, .35rem, 8px);
+  min-width: 44px;
+  min-height: 44px;
+  padding: clamp(6px, .4rem, 8px) clamp(10px, .6rem, 14px);
+  border: 1px solid var(--on-navy-border);
+  border-radius: var(--button-radius);
+  background: var(--on-navy-fill);
+  color: var(--on-navy);
+  font-size: clamp(12px, .8rem, 18px);
+  font-weight: 700;
+  line-height: 1.2;
+  list-style: none;
+  cursor: pointer;
+  white-space: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+  text-align: center;
+}
+.customize-settings > summary::-webkit-details-marker { display: none; }
+.customize-settings > summary::marker { content: ""; }
+.customize-settings > summary:hover,
+.customize-settings[open] > summary {
+  border-color: var(--gold);
+  background: var(--on-navy-fill-strong);
+}
+.customize-settings-chevron {
+  display: inline-block;
+  font-size: clamp(13px, .875rem, 18px);
+  line-height: 1;
+  transition: transform .18s ease;
+}
+.customize-settings[open] > summary .customize-settings-chevron { transform: rotate(180deg); }
+
+.customize-settings-panel {
+  position: absolute;
+  z-index: 100;
+  top: calc(100% + .55rem);
+  right: 0;
+  width: min(clamp(300px, 22rem, 380px), calc(100vw - 1rem));
+  max-height: calc(100vh - var(--hauteur-entete, 5rem) - 1rem);
+  max-height: calc(100dvh - var(--hauteur-entete, 5rem) - 1rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: clamp(10px, .7rem, 16px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+/* Les réglages deviennent des lignes du panneau : leurs résumés prennent toute
+   la largeur, leurs panneaux s'ouvrent dans le flux au lieu de flotter. */
+html.has-js .site-header .customize-settings-panel .display-settings,
+html.has-js .site-header .customize-settings-panel .layout-settings,
+html.has-js .site-header .customize-settings-panel .site-journey-settings {
+  position: static;
+  display: block;
+  width: 100%;
+  margin: 0 0 .3rem;
+}
+
+html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]) {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  min-height: 36px;
+  margin: 0 0 .3rem;
+  justify-content: center;
+  /* Le bouton gardait ses couleurs d'en-tête (texte blanc) sur le fond clair du
+     panneau : invisible. Il prend l'habillage des autres lignes. */
+  padding: .35rem .6rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--navy-ink);
+  font-size: max(12px, .85rem);
+  font-weight: 700;
+}
+html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]):hover,
+html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]):focus-visible {
+  border-color: var(--blue);
+  background: var(--surface);
+}
+
+html.has-js .site-header .customize-settings-panel :is(
+  .display-settings > summary,
+  .layout-settings > summary,
+  .site-journey-settings > summary
+) {
+  display: flex;
+  width: 100%;
+  min-height: 36px;
+  margin: 0;
+  padding: .35rem .6rem;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--navy-ink);
+  font-size: max(12px, .85rem);
+  text-align: left;
+}
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings) > summary:hover,
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings)[open] > summary {
+  border-color: var(--blue);
+  background: var(--surface);
+}
+html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, .layout-settings-panel, .site-journey-panel) {
+  position: static;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  margin: .35rem 0 .5rem;
+  padding: 0 0 .2rem .6rem;
+  border: 0;
+  border-left: 2px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  overflow: visible;
+}
+
+/* Sur téléphone et en paysage court, le panneau se cale sous l'en-tête à la
+   largeur de l'écran : ancré à son bouton, il déborderait par la gauche. */
+@media (max-width: 760px) {
+  .customize-settings-panel {
+    position: fixed;
+    left: .5rem;
+    right: .5rem;
+    width: auto;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 920px) {
+  .customize-settings-panel {
+    position: fixed;
+    left: .5rem;
+    right: .5rem;
+    width: auto;
   }
 }

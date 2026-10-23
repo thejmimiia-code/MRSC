@@ -156,7 +156,22 @@ async function ouvrirSimulateur(page) {
   }, { timeout: 15000 });
 }
 
+async function ouvrirPersonnalisation(page) {
+  const etat = await page.evaluate(() => {
+    const panneau = document.querySelector('[data-customize-settings]');
+    return { present: Boolean(panneau), ouvert: panneau?.open === true };
+  });
+  // Certaines pages (simulateur) n'ont pas d'en-tête compact : leurs réglages
+  // sont directement accessibles, sans panneau intermédiaire.
+  if (!etat.present || etat.ouvert) return;
+  await page.click('.customize-settings > summary');
+  await page.waitForFunction(() => document.querySelector('[data-customize-settings]')?.open === true);
+}
+
 async function ouvrirPanneau(page) {
+  // Les réglages sont désormais des lignes du panneau « Personnalisation » :
+  // il faut l'ouvrir avant de pouvoir atteindre « Présentation ».
+  await ouvrirPersonnalisation(page);
   const ouvert = await page.$eval('[data-site-layout-settings]', (element) => element.open);
   if (!ouvert) await page.click('[data-site-layout-settings] > summary');
   await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === true);
@@ -165,6 +180,27 @@ async function ouvrirPanneau(page) {
 async function verifierPanneauDansViewport(page, selecteur) {
   const mesure = await page.$eval(selecteur, (element) => {
     const rectangle = element.getBoundingClientRect();
+    // Un réglage ouvert vit désormais dans le panneau « Personnalisation », qui
+    // défile : sa hauteur totale peut dépasser l'écran, et c'est le défilement qui
+    // le rend atteignable. Ce qui doit tenir, c'est sa largeur et son entrée en
+    // haut, plus un conteneur qui défile vraiment.
+    let defilant = null;
+    for (let parent = element.parentElement; parent; parent = parent.parentElement) {
+      const style = getComputedStyle(parent);
+      if (
+        /(auto|scroll)/.test(style.overflowY)
+        && parent.scrollHeight > parent.clientHeight + 1
+      ) {
+        const cadre = parent.getBoundingClientRect();
+        defilant = {
+          left: cadre.left,
+          right: cadre.right,
+          top: cadre.top,
+          bottom: cadre.bottom,
+        };
+        break;
+      }
+    }
     return {
       left: rectangle.left,
       right: rectangle.right,
@@ -174,19 +210,36 @@ async function verifierPanneauDansViewport(page, selecteur) {
       height: rectangle.height,
       viewportWidth: window.innerWidth,
       viewportHeight: window.innerHeight,
+      defilant,
     };
   });
   assert.ok(mesure.width > 0 && mesure.height > 0, `${selecteur} doit être visible`);
   assert.ok(mesure.left >= -1, `${selecteur} sort à gauche : ${JSON.stringify(mesure)}`);
   assert.ok(mesure.right <= mesure.viewportWidth + 1, `${selecteur} sort à droite : ${JSON.stringify(mesure)}`);
   assert.ok(mesure.top >= -1, `${selecteur} sort en haut : ${JSON.stringify(mesure)}`);
-  assert.ok(mesure.bottom <= mesure.viewportHeight + 1, `${selecteur} sort en bas : ${JSON.stringify(mesure)}`);
+  if (mesure.defilant) {
+    assert.ok(mesure.bottom > mesure.top, `${selecteur} : hauteur nulle`);
+    assert.ok(
+      mesure.defilant.top >= -1 && mesure.defilant.bottom <= mesure.viewportHeight + 1,
+      `${selecteur} : son panneau défilable sort de l'écran ${JSON.stringify(mesure.defilant)}`
+    );
+    assert.ok(
+      mesure.top <= mesure.defilant.bottom + 1,
+      `${selecteur} commence sous le panneau qui doit le faire défiler : ${JSON.stringify(mesure)}`
+    );
+  } else {
+    assert.ok(mesure.bottom <= mesure.viewportHeight + 1, `${selecteur} sort en bas : ${JSON.stringify(mesure)}`);
+  }
   const auPremierPlan = await page.$eval(selecteur, (element) => {
     const rectangle = element.getBoundingClientRect();
-    const cible = document.elementFromPoint(rectangle.left + rectangle.width / 2, rectangle.top + rectangle.height / 2);
-    return Boolean(cible && (cible === element || element.contains(cible)));
+    const x = Math.min(Math.max(rectangle.left + rectangle.width / 2, 0), window.innerWidth - 1);
+    const y = Math.min(Math.max(rectangle.top + 4, 0), window.innerHeight - 1);
+    const cible = document.elementFromPoint(x, y);
+    return Boolean(
+      cible && (cible === element || element.contains(cible) || cible.contains(element))
+    );
   });
-  assert.equal(auPremierPlan, true, `${selecteur} doit rester au premier plan, sans être masqué par son ancêtre ou un autre panneau`);
+  assert.equal(auPremierPlan, true, `${selecteur} doit rester au premier plan, sans être masqué par un ancêtre ou un autre panneau`);
 }
 
 async function verifierPanneauReplie(page, selecteur) {
@@ -231,6 +284,7 @@ async function main() {
       const contenuAvant = await page.$eval('main', (element) => element.innerText);
       const navigationsAvant = await page.evaluate(() => performance.getEntriesByType('navigation').length);
 
+      await ouvrirPersonnalisation(page);
       await page.click('[data-display-settings] > summary');
       await page.click('[data-text-increase]');
       await page.click('[data-contrast-toggle]');
@@ -293,6 +347,7 @@ async function main() {
     const page = await creerPage({ width: 1280, height: 900 });
     try {
       await ouvrirPageSite(page, 'index.html');
+      await ouvrirPersonnalisation(page);
       const summary = '[data-site-layout-settings] > summary';
       await page.focus(summary);
       await page.keyboard.press('Enter');
@@ -328,169 +383,201 @@ async function main() {
     }
   });
 
-  await executer('Mode compact réactivé au rétrécissement et bouton Agrandir lisible en fenêtre étroite', async () => {
+  await executer('En-tête compact : deux commandes, réglages groupés et bascule réversible', async () => {
     const page = await creerPage({ width: 720, height: 800 });
     try {
       await ouvrirPageSite(page, 'index.html');
-      const bouton = '[data-header-compact-toggle]';
-      const mesurerCadre = () => page.$eval(bouton, (element) => element.getBoundingClientRect().width);
+      const bascule = '[data-header-compact-toggle]';
+      const etatEntete = () => page.evaluate(() => {
+        const rect = (element) => element.getBoundingClientRect();
+        const outils = document.querySelector('.header-compact-tools');
+        return {
+          compact: document.querySelector('.site-header').classList.contains('is-compact'),
+          commandes: Array.from(outils.children)
+            .filter((element) => rect(element).height > 0)
+            .map((element) => ({
+              texte: (element.textContent || '').trim().replace(/\s+/g, ' '),
+              largeur: Math.round(rect(element).width),
+              hauteur: Math.round(rect(element).height),
+              panneau: element.matches('[data-customize-settings]'),
+            })),
+        };
+      });
+
+      assert.equal((await etatEntete()).compact, true, 'à 720 px l’en-tête démarre compact');
+      const entete = await etatEntete();
+      // Une seule commande de réglage : « Personnalisation ». « Réduire », « Parcours »,
+      // « Affichage » et « Présentation » en sont devenus les lignes.
       assert.equal(
-        await page.$eval('.site-header', (element) => element.classList.contains('is-compact')),
+        entete.commandes.length,
+        2,
+        `l’en-tête doit garder deux commandes : ${JSON.stringify(entete.commandes)}`
+      );
+      assert.match(entete.commandes[0].texte, /^Menu$/);
+      assert.match(entete.commandes[1].texte, /^Personnalisation/);
+      assert.equal(entete.commandes[1].panneau, true, 'la seconde commande est le panneau Personnalisation');
+      assert.ok(
+        entete.commandes.every((commande) => commande.hauteur >= 32),
+        JSON.stringify(entete.commandes)
+      );
+
+      // Clavier : Entrée ouvre le panneau ; les quatre réglages y sont des lignes
+      // pleine largeur, contenues dans le cadre.
+      await page.focus('.customize-settings > summary');
+      await page.keyboard.press('Enter');
+      await page.waitForFunction(() => document.querySelector('[data-customize-settings]')?.open === true);
+      const lignes = await page.evaluate(() => {
+        const panneau = document.querySelector('.customize-settings-panel');
+        const cadre = panneau.getBoundingClientRect();
+        const style = getComputedStyle(panneau);
+        const interieur = cadre.width - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+        return Array.from(panneau.children)
+          .filter((element) => element.getBoundingClientRect().height > 0)
+          .map((element) => {
+            const boite = element.getBoundingClientRect();
+            return {
+              nom: (typeof element.className === 'string' ? element.className : element.tagName) || element.tagName,
+              hauteur: Math.round(boite.height),
+              largeur: Math.round(boite.width),
+              dansPanneau: boite.left >= cadre.left - 1 && boite.right <= cadre.right + 1,
+            };
+          })
+          .concat([{ interieur: Math.round(interieur) }]);
+      });
+      const mesureLignes = lignes.slice(0, -1);
+      const largeurInterieure = lignes[lignes.length - 1].interieur;
+      assert.equal(
+        mesureLignes.length,
+        4,
+        `les quatre réglages doivent être dans le panneau : ${JSON.stringify(mesureLignes)}`
+      );
+      assert.ok(mesureLignes.every((ligne) => ligne.hauteur >= 32), JSON.stringify(mesureLignes));
+      assert.ok(mesureLignes.every((ligne) => ligne.dansPanneau), JSON.stringify(mesureLignes));
+      assert.ok(
+        mesureLignes.every((ligne) => ligne.largeur >= largeurInterieure - 2),
+        `${JSON.stringify(mesureLignes)} pour ${largeurInterieure}px utiles : un réglage n'occupe plus la ligne entière`
+      );
+
+      // « Agrandir » bascule l'en-tête sans refermer le panneau : sinon « Réduire »
+      // deviendrait inatteignable, le bouton vivant dans ce panneau.
+      const largeurAvant = await page.$eval(bascule, (element) => Math.round(element.getBoundingClientRect().width));
+      await page.click(bascule);
+      await page.waitForFunction(() => !document.querySelector('.site-header').classList.contains('is-compact'));
+      assert.equal(
+        await page.evaluate(() => document.querySelector('[data-customize-settings]')?.open),
         true,
-        'à 720 px l’en-tête démarre compact'
+        'le panneau ne doit pas se refermer sur son propre bouton'
       );
-      const cadreAgrandir720 = await mesurerCadre();
-      await page.click(bouton);
-      await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
-      const cadreReduire720 = await mesurerCadre();
-      assert.equal(cadreAgrandir720, cadreReduire720, 'le cadre ne doit pas changer quand le libellé bascule');
-
-      await page.setViewport({ width: 500, height: 800, deviceScaleFactor: 1 });
-      await page.waitForFunction(() => window.matchMedia('(max-width: 520px)').matches);
-      await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
-      await page.waitForFunction(() => document.querySelector('[data-header-compact-toggle]')?.textContent.trim() === 'Agrandir');
-      // Sous 520 px, l'en-tête compact range ses cinq commandes dans une grille de
-      // deux colonnes : leur largeur vient de la colonne, jamais du libellé. La
-      // bascule change donc légitimement de disposition (c'est le sens même
-      // d'« Agrandir ») ; ce qui doit rester stable, c'est le retour à la grille,
-      // et l'égalité des deux commandes de la première rangée.
-      const cadreAgrandir500 = await mesurerCadre();
-      const largeursRangee1 = await page.evaluate(() => {
-        const mesurer = (selecteur) => document.querySelector(selecteur).getBoundingClientRect().width;
-        return [mesurer('.nav-toggle'), mesurer('[data-header-compact-toggle]')];
-      });
+      assert.equal(await page.$eval(bascule, (element) => element.textContent.trim()), 'Réduire');
       assert.equal(
-        Math.round(largeursRangee1[0]),
-        Math.round(largeursRangee1[1]),
-        'les deux commandes de la première rangée partagent la même largeur'
+        await page.$eval(bascule, (element) => Math.round(element.getBoundingClientRect().width)),
+        largeurAvant,
+        'le cadre de la commande ne change pas quand le libellé bascule'
       );
-      await page.click(bouton);
-      await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
-      await page.click(bouton);
-      await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'));
-      await page.waitForFunction(() => document.querySelector('[data-header-compact-toggle]')?.textContent.trim() === 'Agrandir');
-      const cadreReduire500 = await mesurerCadre();
-      assert.equal(cadreAgrandir500, cadreReduire500, 'le cadre compact revient identique après un aller-retour');
+      await page.click(bascule);
+      await page.waitForFunction(() => document.querySelector('.site-header').classList.contains('is-compact'));
+      assert.equal(await page.$eval(bascule, (element) => element.textContent.trim()), 'Agrandir');
 
-      await page.setViewport({ width: 480, height: 800, deviceScaleFactor: 1 });
+      // Échap referme d'abord le réglage ouvert, puis le panneau.
+      await page.click('[data-site-layout-settings] > summary');
+      await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === true);
+      await page.keyboard.press('Escape');
+      await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === false);
+      assert.equal(
+        await page.evaluate(() => document.querySelector('[data-customize-settings]')?.open),
+        true,
+        'le premier Échap ne referme que le réglage ouvert'
+      );
+      await page.keyboard.press('Escape');
+      await page.waitForFunction(() => document.querySelector('[data-customize-settings]')?.open === false);
+      assert.equal(
+        await page.evaluate(() => document.activeElement?.matches('.customize-settings > summary')),
+        true,
+        'le focus revient sur la commande « Personnalisation »'
+      );
+
+      // Sous 520 px, les deux commandes partagent la grille à parts égales : 32 px
+      // de haut, même largeur, quel que soit le libellé.
+      await page.setViewport({ width: 500, height: 800, deviceScaleFactor: 1 });
       await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
-      await page.waitForFunction(() => document.querySelector('[data-header-compact-toggle]')?.textContent.trim() === 'Agrandir');
-      await page.evaluate(() => {
-        const boutonCompact = document.querySelector('[data-header-compact-toggle]');
-        window.__mutationsLibelleCompact = 0;
-        window.__observateurLibelleCompact = new MutationObserver((mutations) => {
-          window.__mutationsLibelleCompact += mutations.length;
-        });
-        window.__observateurLibelleCompact.observe(boutonCompact, { childList: true, characterData: true, subtree: true });
+      await page.waitForFunction(
+        () => document.querySelector('[data-header-compact-toggle]')?.textContent.trim() === 'Agrandir'
+      );
+      const rangee = await page.evaluate(() => {
+        const rect = (selecteur) => document.querySelector(selecteur).getBoundingClientRect();
+        return ['.nav-toggle', '.customize-settings > summary'].map((selecteur) => ({
+          largeur: Math.round(rect(selecteur).width),
+          hauteur: Math.round(rect(selecteur).height),
+        }));
       });
-      await page.setViewport({ width: 460, height: 800, deviceScaleFactor: 1 });
-      await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-      const mutationsAuRedimensionnement = await page.evaluate(() => {
-        window.__observateurLibelleCompact.disconnect();
-        return window.__mutationsLibelleCompact;
-      });
-      assert.equal(mutationsAuRedimensionnement, 0, 'un bouton déjà compact ne doit pas réécrire son libellé à chaque réduction');
-      const cadreAgrandir460 = await mesurerCadre();
-      await page.click(bouton);
-      await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
-      await page.click(bouton);
-      await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'));
-      await page.waitForFunction(() => document.querySelector('[data-header-compact-toggle]')?.textContent.trim() === 'Agrandir');
-      const cadreReduire460 = await mesurerCadre();
-      assert.equal(cadreAgrandir460, cadreReduire460, 'le cadre compact revient identique après un aller-retour à 460 px');
+      assert.equal(rangee[0].largeur, rangee[1].largeur, JSON.stringify(rangee));
+      assert.equal(rangee[0].hauteur, 32, JSON.stringify(rangee));
+      assert.equal(rangee[1].hauteur, 32, JSON.stringify(rangee));
+
+      // À 320 px, les deux libellés tiennent entiers dans leur bouton : aucune
+      // commande n'est rognée, et les deux gardent la même largeur.
       await page.setViewport({ width: 320, height: 800, deviceScaleFactor: 1 });
       await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
-      const largeur320 = await page.evaluate(() => ({ document: document.documentElement.scrollWidth, viewport: innerWidth }));
-      assert.ok(largeur320.document <= largeur320.viewport + 1, JSON.stringify(largeur320));
-      const controlesBarre = await page.evaluate(() => Array.from(document.querySelectorAll(
-        '.nav-toggle, .header-compact-toggle, .site-journey-settings, .display-settings, .layout-settings'
-      )).filter((element) => !element.hidden && getComputedStyle(element).display !== 'none').map((element) => ({
-        controle: element.className,
-        flexShrink: getComputedStyle(element).flexShrink,
-      })));
-      assert.ok(controlesBarre.length >= 4, JSON.stringify(controlesBarre));
-      assert.ok(controlesBarre.every((element) => element.flexShrink === '0'), JSON.stringify(controlesBarre));
-      await page.click(bouton);
-      await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
-      await page.setViewport({ width: 240, height: 800, deviceScaleFactor: 1 });
-      await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
-      const etat = await page.$eval(bouton, (element) => {
-        const rectangle = element.getBoundingClientRect();
-        const texte = document.createRange();
-        texte.selectNodeContents(element);
-        return {
-          label: element.textContent.trim(),
-          hidden: element.hidden,
-          left: rectangle.left,
-          right: rectangle.right,
-          cadreLargeur: rectangle.width,
-          width: element.clientWidth,
-          scrollWidth: element.scrollWidth,
-          lignes: texte.getClientRects().length,
-          whiteSpace: getComputedStyle(element).whiteSpace,
-          overflowWrap: getComputedStyle(element).overflowWrap,
-          enteteCompacte: document.querySelector('.site-header').classList.contains('is-compact'),
-          identiteMasquee: getComputedStyle(document.querySelector('.identity')).display === 'none',
+      const commandes320 = await page.evaluate(() => {
+        const mesurer = (selecteur) => {
+          const element = document.querySelector(selecteur);
+          const cadre = element.getBoundingClientRect();
+          return {
+            largeur: Math.round(cadre.width),
+            hauteur: Math.round(cadre.height),
+            scrollWidth: element.scrollWidth,
+            clientWidth: element.clientWidth,
+          };
         };
+        return ['.nav-toggle', '.customize-settings > summary'].map(mesurer);
       });
-      assert.equal(etat.label, 'Agrandir');
-      assert.equal(etat.hidden, false);
-      assert.equal(etat.enteteCompacte, true);
-      assert.equal(etat.identiteMasquee, true);
-      // Sous 520 px, la grille de l'en-tête compact fixe la largeur des commandes
-      // (deux colonnes pleines) : « Agrandir » et « Réduire » occupent la même
-      // cellule, donc la bascule de libellé ne peut plus déplacer le cadre.
-      const largeurMenue240 = await page.$eval('.nav-toggle', (element) => element.getBoundingClientRect().width);
-      assert.equal(
-        Math.round(etat.cadreLargeur),
-        Math.round(largeurMenue240),
-        'chaque commande occupe une demi-largeur de la grille, indépendamment de son libellé'
-      );
-      assert.equal(etat.whiteSpace, 'normal');
-      assert.equal(etat.overflowWrap, 'normal', 'les libellés ne se coupent plus en plein mot');
-      assert.equal(etat.lignes, 1, 'à 240 px CSS, le libellé tient naturellement sur une ligne');
-      assert.ok(etat.width >= 32 && etat.scrollWidth <= etat.width, JSON.stringify(etat));
-      assert.ok(etat.left >= 0 && etat.right <= 240, JSON.stringify(etat));
-
-      await page.setViewport({ width: 70, height: 800, deviceScaleFactor: 1 });
-      const cadreEtTexte = await page.$eval(bouton, (element) => {
-        const cadre = element.getBoundingClientRect();
-        const style = getComputedStyle(element);
-        const gaucheTexte = cadre.left + parseFloat(style.borderLeftWidth) + parseFloat(style.paddingLeft);
-        const droiteTexte = cadre.right - parseFloat(style.borderRightWidth) - parseFloat(style.paddingRight);
-        const range = document.createRange();
-        range.selectNodeContents(element);
-        return {
-          left: cadre.left,
-          right: cadre.right,
-          viewport: innerWidth,
-          cadreLargeur: cadre.width,
-          largeur: element.clientWidth,
-          scrollWidth: element.scrollWidth,
-          hauteur: cadre.height,
-          gaucheTexte,
-          droiteTexte,
-          lignesTexte: Array.from(range.getClientRects()).map((rect) => ({ left: rect.left, right: rect.right })),
-          largeurOutils: document.querySelector('.header-compact-tools').getBoundingClientRect().width,
-        };
-      });
-      assert.ok(cadreEtTexte.left >= 0 && cadreEtTexte.right <= cadreEtTexte.viewport, JSON.stringify(cadreEtTexte));
-      // Grille `auto-fit` : la commande remplit sa colonne, et la colonne se réduit
-      // avec la fenêtre au lieu de forcer un débordement (à 70 px, une colonne).
-      assert.equal(
-        Math.round(cadreEtTexte.cadreLargeur),
-        Math.round(cadreEtTexte.largeurOutils),
-        JSON.stringify(cadreEtTexte)
-      );
-      assert.ok(cadreEtTexte.hauteur >= 32, JSON.stringify(cadreEtTexte));
-      assert.ok(cadreEtTexte.scrollWidth <= cadreEtTexte.largeur, JSON.stringify(cadreEtTexte));
-      // Le libellé doit tenir dans le cadre : replié si besoin, sur une ligne quand
-      // la place suffit. Ce qui compte, c'est qu'aucune ligne ne sorte.
-      assert.ok(cadreEtTexte.lignesTexte.length >= 1, JSON.stringify(cadreEtTexte));
       assert.ok(
-        cadreEtTexte.lignesTexte.every((ligne) => ligne.left >= cadreEtTexte.gaucheTexte - 1 && ligne.right <= cadreEtTexte.droiteTexte + 1),
-        JSON.stringify(cadreEtTexte)
+        commandes320.every((commande) => commande.scrollWidth <= commande.clientWidth + 1),
+        `les deux commandes gardent leur libellé entier à 320 px : ${JSON.stringify(commandes320)}`
       );
+      assert.ok(commandes320.every((commande) => commande.hauteur === 32), JSON.stringify(commandes320));
+      assert.equal(commandes320[0].largeur, commandes320[1].largeur, JSON.stringify(commandes320));
+
+      // Jusqu'à 240 px, le panneau reste dans l'écran et ses lignes restent dans
+      // le panneau, sans débordement horizontal de la page.
+      for (const largeur of [240]) {
+        await page.setViewport({ width: largeur, height: 800, deviceScaleFactor: 1 });
+        await ouvrirPersonnalisation(page);
+        const etat = await page.evaluate(() => {
+          const panneau = document.querySelector('.customize-settings-panel');
+          const cadre = panneau.getBoundingClientRect();
+          const debordement = document.documentElement.scrollWidth - document.documentElement.clientWidth;
+          const lignes = Array.from(panneau.children)
+            .filter((element) => element.getBoundingClientRect().height > 0)
+            .map((element) => {
+              const boite = element.getBoundingClientRect();
+              return {
+                nom: typeof element.className === 'string' ? element.className : element.tagName,
+                left: Math.round(boite.left),
+                right: Math.round(boite.right),
+                hauteur: Math.round(boite.height),
+              };
+            });
+          return {
+            viewport: window.innerWidth,
+            gauche: Math.round(cadre.left),
+            droite: Math.round(cadre.right),
+            debordement,
+            lignes,
+          };
+        });
+        assert.ok(etat.gauche >= -1 && etat.droite <= etat.viewport + 1, `${largeur}px : ${JSON.stringify(etat)}`);
+        assert.ok(etat.lignes.length === 4, `${largeur}px : ${JSON.stringify(etat.lignes)}`);
+        assert.ok(
+          etat.lignes.every((ligne) => ligne.left >= etat.gauche - 1 && ligne.right <= etat.droite + 1),
+          `${largeur}px : une ligne sort du panneau ${JSON.stringify(etat.lignes)}`
+        );
+        assert.ok(
+          etat.lignes.every((ligne) => ligne.hauteur >= 32),
+          `${largeur}px : une ligne descend sous 32 px ${JSON.stringify(etat.lignes)}`
+        );
+        assert.ok(etat.debordement <= 1, `${largeur}px : débordement de ${etat.debordement}px`);
+      }
     } finally {
       await page.close();
     }
@@ -524,6 +611,7 @@ async function main() {
           );
           if (width !== 320) continue;
 
+          await ouvrirPersonnalisation(page);
           await page.click('[data-display-settings] > summary');
           await page.waitForFunction(() => document.querySelector('[data-display-settings]')?.open === true);
           await verifierPanneauDansViewport(page, '.display-settings-panel');
@@ -535,6 +623,7 @@ async function main() {
       await ouvrirPageSite(page, 'index.html');
       const paysage = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth }));
       assert.ok(paysage.document <= paysage.viewport + 1, `débordement en paysage court : ${JSON.stringify(paysage)}`);
+      await ouvrirPersonnalisation(page);
       await page.click('[data-display-settings] > summary');
       await page.waitForFunction(() => document.querySelector('[data-display-settings]')?.open === true);
       await verifierPanneauDansViewport(page, '.display-settings-panel');
@@ -549,6 +638,7 @@ async function main() {
     const pageSite = await creerPage({ width: 320, height: 800 });
     try {
       await ouvrirPageSite(pageSite, 'index.html');
+      await ouvrirPersonnalisation(pageSite);
       await pageSite.click('[data-display-settings] > summary');
       await pageSite.click('[data-text-increase]');
       await pageSite.click('[data-text-increase]');
@@ -747,6 +837,7 @@ async function main() {
       assert.equal(controlesMasques.affichage, true);
       assert.equal(controlesMasques.presentation, true);
 
+      await ouvrirPersonnalisation(page);
       await page.click('[data-display-settings] > summary');
       await page.click('[data-text-increase]');
       await page.click('[data-contrast-toggle]');

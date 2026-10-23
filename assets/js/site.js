@@ -179,6 +179,9 @@
     },
   ];
   const layoutSettings = settings ? document.createElement("details") : null;
+  // Panneau « Personnalisation » : déclaré ici pour que les gestionnaires de clic
+  // et de clavier, plus bas, puissent le fermer.
+  let personnalisation = null;
   const layoutInputs = [];
   let layoutStatus = null;
 
@@ -338,6 +341,7 @@
   document.addEventListener("click", (event) => {
     if (settings && !settings.contains(event.target)) settings.open = false;
     if (layoutSettings && !layoutSettings.contains(event.target)) layoutSettings.open = false;
+    if (personnalisation && !personnalisation.contains(event.target)) personnalisation.open = false;
   });
 
   // L’iframe locale et les pages M.R.S.C partagent ces réglages sur le même domaine.
@@ -369,6 +373,40 @@
       };
       publierHauteurEntete();
       new ResizeObserver(publierHauteurEntete).observe(header);
+    }
+
+    // Un seul bouton « Personnalisation » regroupe les commandes de préférence :
+    // taille de l'en-tête, parcours, affichage et présentation. L'en-tête ne garde
+    // ainsi que « Menu » et « Personnalisation ». Le déplacement se fait ici plutôt
+    // que dans les 98 pages statiques : une seule source à tenir.
+    const outilsEntete = header ? header.querySelector(".header-compact-tools") : null;
+    if (outilsEntete && headerCompactToggle && settings) {
+      personnalisation = document.createElement("details");
+      personnalisation.className = "customize-settings";
+      personnalisation.dataset.customizeSettings = "";
+
+      const resume = document.createElement("summary");
+      resume.className = "customize-settings-summary";
+      resume.title = "Personnalisation : taille de l’en-tête, parcours, affichage et présentation";
+      resume.textContent = "Personnalisation";
+      const chevronPersonnalisation = document.createElement("span");
+      chevronPersonnalisation.className = "customize-settings-chevron";
+      chevronPersonnalisation.setAttribute("aria-hidden", "true");
+      chevronPersonnalisation.textContent = "⌄";
+      resume.append(" ", chevronPersonnalisation);
+
+      const panneauPersonnalisation = document.createElement("div");
+      panneauPersonnalisation.className = "customize-settings-panel";
+      panneauPersonnalisation.id = "site-customize-panel";
+      resume.setAttribute("aria-controls", panneauPersonnalisation.id);
+
+      personnalisation.append(resume, panneauPersonnalisation);
+      // Ordre voulu : agrandir/réduire, parcours (inséré ensuite par
+      // navigation-parcours.js devant l'affichage), affichage, présentation.
+      [headerCompactToggle, settings, layoutSettings].forEach((element) => {
+        if (element) panneauPersonnalisation.append(element);
+      });
+      outilsEntete.append(personnalisation);
     }
 
     const closeMenu = () => {
@@ -418,6 +456,9 @@
       setHeaderCompact(Boolean(compactViewport?.matches));
       headerCompactToggle.addEventListener("click", () => {
         closeMenu();
+        // Ne pas fermer « Personnalisation » : le bouton est dans son panneau, et
+        // le refermer rendrait « Réduire » inatteignable une fois l'en-tête
+        // agrandi.
         if (settings) settings.open = false;
         if (layoutSettings) layoutSettings.open = false;
         const journeySettings = document.querySelector("[data-site-journey]");
@@ -468,11 +509,27 @@
       if (event.target.closest("a")) closeMenu();
     });
 
+    // Échap referme d'abord le réglage ouvert dans « Personnalisation » : le
+    // panneau ne doit pas disparaître sous les doigts de qui ferme un seul
+    // réglage. Le drapeau est posé en phase de capture, donc avant que les
+    // réglages ne se referment eux-mêmes et ne vident `details[open]`.
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || !personnalisation?.open) return;
+      if (personnalisation.querySelector(".customize-settings-panel details[open]")) {
+        event.mrscEchapImbrique = true;
+      }
+    }, true);
+
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape") return;
       const menuWasOpen = navigation.classList.contains("is-open");
       closeMenu();
       if (menuWasOpen) toggle.focus();
+      if (personnalisation?.open && !event.mrscEchapImbrique) {
+        const focusDansPersonnalisation = personnalisation.contains(document.activeElement);
+        personnalisation.open = false;
+        if (focusDansPersonnalisation) personnalisation.querySelector("summary")?.focus();
+      }
       if (settings?.open) {
         const focusInsideSettings = settings.contains(document.activeElement);
         settings.open = false;

@@ -127,6 +127,18 @@ def blocs_de(texte: str, selecteur: str) -> list[str]:
     return [correspondance.group(1) for correspondance in motif.finditer(texte)]
 
 
+def regles(texte: str) -> list[tuple[str, str]]:
+    """Toutes les règles (sélecteur, corps), y compris dans un bloc média.
+
+    `blocs_de` exige un sélecteur exact ; ici les sélecteurs s'étalent sur
+    plusieurs lignes (`:is(` + une liste), d'où cette recherche par fragment.
+    """
+    return [
+        (correspondance.group(1).strip(), correspondance.group(2))
+        for correspondance in re.finditer(r"([^{}]+)\{([^}]*)\}", texte)
+    ]
+
+
 def hauteur_minimale_effective(blocs: list[str]) -> float | None:
     """Valeur de min-height qui l'emporte : la dernière déclarée."""
     valeur = None
@@ -435,38 +447,99 @@ def controler_panneau_du_menu() -> list[str]:
             "site.js — --hauteur-entete n'est pas mesuré au chargement : le premier "
             "affichage garderait la valeur de repli de la feuille de style"
         )
-    # Les cinq commandes de l'en-tête compact se répartissent en deux colonnes
-    # pleines sous 520 px : deux commandes, puis les réglages.
-    grille = [
-        corps for corps in blocs_de(
-            texte, "html.has-js .site-header.is-compact .header-compact-tools"
+    # Un seul bouton de préférence : les quatre réglages sont réunis dans un
+    # panneau construit en JavaScript (aucune des 98 pages n'est modifiée) et
+    # l'en-tête compact ne montre plus que « Menu » et « Personnalisation ».
+    if "customize-settings" not in script:
+        erreurs.append(
+            "site.js — les réglages ne sont plus réunis derrière « Personnalisation » : "
+            "l'en-tête compact réaffiche quatre commandes"
         )
-        if "display: grid" in corps
-        and "repeat(2, minmax(0, 1fr))" in corps
+    else:
+        if "#site-customize-panel" not in script and "site-customize-panel" not in script:
+            erreurs.append(
+                "site.js — le panneau de « Personnalisation » a perdu son identifiant "
+                "#site-customize-panel : le résumé ne décrit plus la zone qu'il ouvre "
+                "(aria-controls)"
+            )
+        # Le déplacement doit se faire sur les trois éléments, sinon un réglage
+        # reste dans l'en-tête et une troisième commande réapparaît.
+        deplacement = re.search(
+            r"\[([^\]]*)\]\.forEach\(\s*\(element\)\s*=>\s*\{[^}]*panneauPersonnalisation\.append\(element\)",
+            script,
+        )
+        attendus = ("headerCompactToggle", "settings", "layoutSettings")
+        manquants = [
+            variable for variable in attendus
+            if not deplacement or variable not in deplacement.group(1)
+        ]
+        if manquants:
+            erreurs.append(
+                "site.js — le panneau de « Personnalisation » ne déplace plus les quatre "
+                "réglages : " + ", ".join(manquants) + " reste dans l'en-tête"
+            )
+    # Dans le panneau, chaque réglage est une ligne pleine largeur. Le préfixe
+    # `html.has-js .site-header` n'est pas décoratif : les règles de l'en-tête
+    # compact (`html.has-js .site-header.is-compact …`) portent plus de classes et
+    # remettent les réglages côte à côte si on les cible avec un sélecteur plus
+    # faible.
+    lignes = [
+        corps for selecteur, corps in regles(texte)
+        if ".customize-settings-panel" in selecteur
+        and "> summary" in selecteur
+        and selecteur.startswith("html.has-js .site-header .customize-settings-panel")
+        and "display: flex" in corps
+        and "width: 100%" in corps
     ]
-    derniere = [
-        corps for corps in blocs_de(
-            texte, "html.has-js .site-header.is-compact .layout-settings"
+    if not lignes:
+        erreurs.append(
+            "site.css — les réglages du panneau « Personnalisation » ne sont plus des "
+            "lignes pleine largeur (html.has-js .site-header .customize-settings-panel "
+            ":is(...) { display: flex; width: 100% }) : un réglage réapparaît sur deux "
+            "lignes ou déborde de son cadre"
         )
-        if "grid-column: 1 / -1" in corps
+    # Un panneau de réglage ouvert reste dans le flux : en `position: static`, il
+    # est contenu par la ligne qui le porte. Flottant, il sortait du panneau
+    # (mesuré à x = 370 px pour 350 px de ligne).
+    imbriques = [
+        corps for selecteur, corps in regles(texte)
+        if ".customize-settings-panel" in selecteur
+        and "display-settings-panel" in selecteur
+        and "position: static" in corps
+    ]
+    if not imbriques:
+        erreurs.append(
+            "site.css — les panneaux de réglage redeviennent flottants dans "
+            "« Personnalisation » (position: static) : ouverts, ils débordent de la ligne "
+            "qui les porte"
+        )
+    panneau = [
+        corps for corps in blocs_de(texte, ".customize-settings-panel")
+        if "position: absolute" in corps and "right: 0" in corps and "overflow: auto" in corps
+    ]
+    if not panneau:
+        erreurs.append(
+            "site.css — le panneau « Personnalisation » n'est plus ancré sous son bouton "
+            "avec un défilement interne (position: absolute; right: 0; overflow: auto)"
+        )
+    # Deux commandes, deux colonnes égales : c'est la grille qui empêche le
+    # libellé de se casser (« Parcour/s ») et qui laisse 32 px de haut à chaque
+    # bouton. Une seule colonne sous 300 px, sinon deux colonnes de 19 px
+    # débordent de leur cadre.
+    grille = [
+        corps for selecteur, corps in regles(texte)
+        if ".header-compact-tools" in selecteur and "display: grid" in corps
+        and "repeat(2, minmax(0, 1fr))" in corps
     ]
     if not grille:
         erreurs.append(
-            "site.css — les commandes de l'en-tête compact ne sont plus en grille "
-            "sous 520 px : elles se cassent en mots (« Parcour/s »)"
+            "site.css — les deux commandes de l'en-tête compact ne sont plus en grille "
+            "(repeat(2, minmax(0, 1fr))) sous 520 px : leurs largeurs divergent"
         )
-    if not derniere:
-        erreurs.append(
-            "site.css — la dernière commande de l'en-tête compact n'occupe plus toute "
-            "la largeur : un trou se rouvre sous un nombre impair de commandes"
-        )
-    # Sous 300 px, une seule colonne : deux colonnes de 19 px laissaient le libellé
-    # déborder de son cadre.
     une_colonne = [
-        corps for corps in blocs_de(
-            texte, "html.has-js .site-header.is-compact .header-compact-tools"
-        )
-        if "grid-template-columns: minmax(0, 1fr)" in corps
+        corps for selecteur, corps in regles(texte)
+        if ".header-compact-tools" in selecteur
+        and "grid-template-columns: minmax(0, 1fr)" in corps
     ]
     if not une_colonne:
         erreurs.append(

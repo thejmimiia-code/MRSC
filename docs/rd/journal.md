@@ -2,6 +2,21 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-23 — Deux commandes au lieu de cinq : le panneau « Personnalisation »
+
+- **Initiative :** `optimisation-du-site`. Demande : un second menu regroupe les commandes liées pour ne laisser que deux boutons dans l’en-tête.
+- **Décision :** les quatre commandes de réglage (« Agrandir/Réduire », « Parcours », « Affichage », « Présentation ») sont réunies dans un panneau `details` nommé **« Personnalisation »**, créé par `assets/js/site.js` et peuplé par déplacement des blocs existants. L’en-tête compact ne montre plus que « Menu » et « Personnalisation » ; **aucune des 98 pages statiques n’est modifiée**.
+- **Défaut de spécificité, trouvé à la mesure :** les règles du panneau, écrites avec deux classes, perdaient contre `html.has-js .site-header.is-compact …` qui en porte cinq : les réglages revenaient côte à côte et un panneau ouvert se posait à **x = 370 px pour une ligne de 350 px**. Les règles sont réécrites `html.has-js .site-header .customize-settings-panel …`, après les règles compactes.
+- **Impasse corrigée :** « Agrandir » fermait son propre panneau ; une fois l’en-tête agrandi, « Réduire » devenait inatteignable. Le clic ne ferme plus le panneau, et la bascule est mesurée réversible à 320, 390, 720 et 1 440 px.
+- **Échap par étages :** un premier Échap referme le réglage ouvert, un second le panneau, avec retour du focus sur « Personnalisation ». Le drapeau est posé en phase de capture, sinon les réglages se referment avant qu’on puisse savoir qu’ils étaient ouverts.
+- **Deuxième impasse corrigée :** une fois les réglages dans un panneau qui défile, leurs panneaux ouverts ne peuvent plus être bornés à l’écran ; le test navigateur exige désormais soit la contenance, soit un conteneur qui défile réellement, au lieu d’exiger les deux.
+- **Résultat mesuré (Chromium sans interface, panneau ouvert) :** en-tête **90 px** à 320, 390, 430 et 520 px (contre 110 px avant regroupement), commandes 145/145 à 320 et 180/180 à 390, **32 px** de haut ; panneau de 304 à 504 px de large, bas à 287 px, aucun débordement horizontal ; paysage 844 × 390 : en-tête 49 px, 80 / 151 px ; 768 × 1 024 : 194 px, 92 / 161 px ; 1 280 et 1 440 px : 198 px, 161 px, panneau ancré de 352 px. Quatre lignes de 36 px dans le panneau, à 130 % de texte aussi (379 px de haut à 320 × 568, bas à 499 ≤ 568).
+- **Garde-fous :** `controler_panneau_du_menu` exige le panneau créé en JavaScript, le déplacement des **trois** blocs, les lignes préfixées `html.has-js .site-header`, les panneaux imbriqués `position: static`, le panneau ancré et défilant, la grille à deux colonnes et son repli. Cinq mutations rejouées — préfixe de spécificité retiré, `position: static` retiré, `layoutSettings` laissé dans l’en-tête, `overflow: auto` retiré, grille à une colonne — **toutes détectées**, fichiers restaurés.
+- **Essais navigateur :** le test de l’en-tête compact est réécrit (il décrivait cinq commandes) ; les autres ouvrent le panneau comme le ferait une personne. **8/8.**
+- **Protocole :** § 6 quinquies de [`formats-affichage.md`](formats-affichage.md).
+- **Limite :** mesure d’un Chromium sans interface ; le panneau suit `--hauteur-entete`, dont dépend son ancrage.
+- **Prochaine action :** revue visuelle sur téléphone réel, puis décor vectoriel du héros pour `apprendre.html` et l’accueil.
+
 ## 2026-10-23 — Sur téléphone, les commandes du menu passent à 32 px
 
 - **Initiative :** `optimisation-du-site`. Troisième passage du même jour, sur demande : « modifie la taille des boutons du menu smartphone », précisée « smartphones en mode comprimé ».

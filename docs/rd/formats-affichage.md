@@ -226,6 +226,73 @@ restaurés à l'identique.
 Limite : la mesure est celle d'un Chromium sans interface, pas d'un téléphone
 réel ; les captures ont été relues à 320, 390 et 844 px.
 
+## 6 quinquies. Deux commandes au lieu de cinq : « Personnalisation » (23 octobre 2026)
+
+Demande : « un second menu regroupe les commandes liées pour ne laisser que deux
+boutons ». L'en-tête compact portait cinq commandes (« Menu », « Agrandir »,
+« Parcours », « Affichage », « Présentation ») réparties en deux ou trois
+rangées. Les quatre commandes de réglage sont désormais réunies dans un panneau
+« Personnalisation » ; l'en-tête n'en montre plus que deux.
+
+- **Aucune des 98 pages n'est modifiée.** `assets/js/site.js` crée le panneau et
+  y déplace les trois blocs de réglage au chargement ; `navigation-parcours.js`
+  insère « Parcours » devant « Affichage », donc dans le panneau. Le HTML statique
+  reste inchangé, et `has-js` empêche le panneau de clignoter sans JavaScript.
+- **Le panneau est une liste de lignes**, pas un vol de commandes : chaque
+  réglage fait 36 px de haut sur toute la largeur utile, avec un chevron à
+  droite ; les panneaux ouverts restent dans le flux (`position: static`), bordés
+  à gauche au lieu de flotter au-dessus.
+- **La spécificité est le piège.** Les règles de l'en-tête compact
+  (`html.has-js .site-header.is-compact …`) portent plus de classes que les
+  règles du panneau : écrites sans préfixe, elles restaient sans effet et les
+  réglages revenaient côte à côte, un panneau ouvert se posant à **x = 370 px
+  pour une ligne de 350 px**. Les règles du panneau sont donc écrites
+  `html.has-js .site-header .customize-settings-panel …` et déclarées après.
+- **Échap ferme par étages.** Un premier Échap referme le réglage ouvert
+  (« Présentation », « Affichage »…) et laisse le panneau ouvert ; un second
+  referme le panneau et rend le focus à sa commande. Sans cela, Échap aurait fait
+  disparaître le panneau sous les doigts de qui ferme un seul réglage.
+- **« Agrandir » ne referme pas son propre panneau.** Le bouton vit dans le
+  panneau : le refermer au clic rendait « Réduire » inatteignable. Mesuré comme
+  réversible à 320, 390, 720 et 1 440 px.
+- **Le panneau ne déborde plus de l'écran.** Sous 760 px et en paysage court, il
+  se cale sous l'en-tête à la largeur de l'écran ; au-delà, il reste ancré sous
+  son bouton. Sur tablette et sur ordinateur, « Agrandir/Réduire » figure en
+  première ligne du panneau et fonctionne dans les deux sens.
+
+Mesure après correction (Chromium sans interface, panneau ouvert, puis réglages
+ouverts) :
+
+| Profil | En-tête | Commandes | Panneau (x, y, l, h) | Débordement |
+| --- | --- | --- | --- | --- |
+| 320 × 568 | **90 px** | 145 / 145 px, 32 px | 8, 99, 304, 188 | 0 |
+| 390 × 780 | 90 px | 180 / 180 px, 32 px | 8, 99, 374, 188 | 0 |
+| 430 × 900 | 90 px | 200 / 200 px, 32 px | 8, 99, 414, 188 | 0 |
+| 520 × 900 | 90 px | 245 / 245 px, 32 px | 8, 99, 504, 188 | 0 |
+| 844 × 390 (paysage) | 49 px | 80 / 151 px, 36 px | 8, 58, 828, 188 | 0 |
+| 768 × 1024 | 194 px | 92 / 161 px, 44 px | 162, 200, 352, 147 | 0 |
+| 1 280 × 900 | 198 px | 161 px, 44 px | 912, 202, 352, 147 | 0 |
+| 1 440 × 900 | 198 px | 161 px, 44 px | 1 072, 202, 352, 147 | 0 |
+
+Quatre lignes de réglage de 36 px, aucune sous 32 px, aucun élément hors du
+panneau, aucun débordement horizontal ; à 130 % de texte, le panneau atteint
+379 px de haut à 320 × 568 et reste sous le bas de l'écran (499 ≤ 568).
+
+Les garde-fous de `controler_panneau_du_menu` exigent désormais : le panneau
+créé en JavaScript avec son identifiant `#site-customize-panel`, le déplacement
+des **trois** blocs de réglage (sinon une commande reste dans l'en-tête), les
+lignes `display: flex; width: 100%` préfixées `html.has-js .site-header`, les
+panneaux imbriqués `position: static`, le panneau ancré et défilant, et la grille
+à deux colonnes avec son repli à une colonne. Mutations rejouées : préfixe de
+spécificité retiré, `position: static` retiré, `layoutSettings` laissé dans
+l'en-tête, `overflow: auto` retiré, grille ramenée à une colonne —
+**toutes détectées**, fichier restauré à l'identique. Les 8 essais navigateur de
+`test-experience.cjs` couvrent la bascule réversible, la fermeture par étages et
+les deux commandes à 32 px à 320, 500 et 720 px.
+
+Limite : la mesure est celle d'un Chromium sans interface ; le panneau est
+positionné par rapport à l'en-tête, dont il suit la hauteur mesurée.
+
 ## 7. Ce qui n'est pas couvert
 - **Police réelle.** La mesure utilise les polices installées dans
   l'environnement de mesure ; une police de substitution peut changer les
