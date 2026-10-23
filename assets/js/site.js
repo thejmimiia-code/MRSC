@@ -360,6 +360,17 @@
   if (toggle && navigation) {
     root.classList.add("has-js");
 
+    // La hauteur de l'en-tête dépend du logo, du cran de texte et du mode
+    // compact : le panneau du menu s'y accroche pour ne jamais dépasser le bas
+    // de l'écran, même en paysage ou en texte très agrandi.
+    if (header && typeof ResizeObserver === "function") {
+      const publierHauteurEntete = () => {
+        root.style.setProperty("--hauteur-entete", `${Math.round(header.getBoundingClientRect().height)}px`);
+      };
+      publierHauteurEntete();
+      new ResizeObserver(publierHauteurEntete).observe(header);
+    }
+
     const closeMenu = () => {
       toggle.setAttribute("aria-expanded", "false");
       navigation.classList.remove("is-open");

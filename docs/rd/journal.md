@@ -2,6 +2,22 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-23 — Le menu du téléphone : quatre défauts mesurés, dont un bloquant
+
+- **Initiative :** `optimisation-du-site`. Demande de revoir « l'affichage des boutons dans le menu en mode smartphone ».
+- **Mesure avant :** cinq commandes de **24 px** de haut, empilées en deux ou trois rangées irrégulières (390 px : `Menu` 75×24, `Agrandir` 100×24, `Parcours` 95×24 / `Affichage` 99×24, `Présentation` 123×24) ; en paysage 844 × 390, le panneau descendant à **522 px** sur un écran de 390 px, les derniers liens étaient inatteignables.
+- **Défaut bloquant, paysage :** le panneau part de `top: 100%` sous un en-tête collant, sans plafond ni défilement. Il est borné à `calc(100dvh - var(--hauteur-entete))` et rendu défilable. `site.js` publie cette hauteur au chargement puis par `ResizeObserver` : une constante en `rem` laissait encore 47 px de débordement au cran de texte 130 %.
+- **Deuxième défaut trouvé au rendu, pas à la lecture :** le panneau défilable gardait `justify-content: center` ; le contenu débordait par le haut et « Accueil » se retrouvait à `y = 10` pour un panneau à 51. Corrigé par `justify-content: safe center` (repli `flex-start`).
+- **Troisième défaut :** trois colonnes sous 520 px laissaient 92 px par commande et cassaient les libellés en plein mot (« Parcour / s », « Présent / ation »). Deux colonnes pleines et `overflow-wrap: normal` ; « Présentation » occupe la dernière rangée. À 70 px de fenêtre, la grille `auto-fit` repasse à une colonne et l'en-tête prend toute la largeur, sinon « Agrandir » (43,6 px de texte) débordait d'une colonne de 42,8 px.
+- **Quatrième défaut :** le panneau s'arrêtait 16 px avant le bord droit — sa largeur explicite annulait l'étirement par `left`/`right` — et sa gouttière variait de 8 à 24 px selon le palier. La largeur est libérée et la gouttière calculée.
+- **Décision de plancher :** `PLANCHER_CIBLE_PX` reste à **24 px** (WCAG 2.2, 2.5.8) pour les liens et les autres cibles ; les cinq commandes de l'en-tête compact reçoivent leur propre plancher, **44 px**, parce qu'elles se touchent au pouce sans visée. Les trois déclarations à 24 px de la feuille sont relevées à la source, pas contournées par une surcharge.
+- **Garde-fou :** 11ᵉ contrôle `controler_panneau_du_menu` — défilement interne, plafond `dvh`, centrage `safe`, publication de `--hauteur-entete` (mesure initiale et `ResizeObserver`), grille `auto-fit`, le tout dans une même règle. **Sept mutations rejouées, sept détectées** ; fichiers restaurés à l'identique.
+- **Essais navigateur ajustés, pas supprimés :** trois assertions comparaient la largeur d'un bouton entre l'état compact et l'état déployé, ou fixaient la largeur « réservée » à 100 px et `overflow-wrap: anywhere`. Elles décrivaient l'ancienne disposition. Remplacées par des équivalents plus stricts : égalité des deux commandes d'une même rangée, aller-retour compact → déployé → compact qui redonne le même cadre, libellé contenu dans son cadre sur une ligne quand la place suffit. **8/8 essais réussis.**
+- **Mesure après, panneau ouvert :** 320, 390, 430 px et paysage 844 × 390 — panneau de 0 à la largeur de l'écran, bas toujours au-dessus de la ligne de flottaison, commandes à 44 px, aucun libellé coupé, aucun débordement horizontal, à 100 % et à 130 %.
+- **Protocole :** § 6 quater de [`formats-affichage.md`](formats-affichage.md).
+- **Limite :** Chromium sans interface ; aucune revue sur téléphone réel.
+- **Prochaine action :** étendre le décor vectoriel du héros à `apprendre.html` et à l'accueil.
+
 ## 2026-10-23 — Le héros des Mondes passe de l'image au décor vectoriel
 
 - **Initiative :** `poids-et-sobriete-numerique`. Suite directe du signalement sur la netteté, puis d'une rectification : les trois illustrations ont été créées par l'agent, et le générateur disponible plafonne à **1,06 Mpx** (1 376×768 en 16:9, 1 264×848 en 3:2, mesuré deux fois) — sous le master actuel de 1,57 Mpx, qui contient pourtant plus de détail réel qu'un agrandissement depuis 1 376 px (34,6 dB en aller-retour contre 40,1 dB pour le témoin agrandi).

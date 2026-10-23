@@ -450,7 +450,7 @@ html.contraste-renforce .site-status-note {
   flex: 0 0 auto;
   width: auto;
   max-width: none;
-  min-height: 24px;
+  min-height: 44px;
   height: auto;
   padding: .2rem .55rem;
   font-size: max(12px, .75rem);
@@ -3202,7 +3202,7 @@ html.has-js .site-header.is-compact :is(.display-settings, .site-journey-setting
 html.has-js .site-header.is-compact .nav-toggle,
 html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
 html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
-  min-height: 24px;
+  min-height: 44px;
   height: auto;
   padding: .2rem .55rem;
   font-size: max(12px, .75rem);
@@ -3278,11 +3278,14 @@ html.has-js .site-header.is-compact .header-compact-brand img {
      texte, alors que le mode « Compacte » promet explicitement de ne réduire
      « ni la taille du texte, ni celle des zones tactiles ». 24 px est le
      minimum de la cible tactile (WCAG 2.2, 2.5.8) et 12 px le plancher de
-     lisibilité tenu par le reste de la feuille. */
+     lisibilité tenu par le reste de la feuille.
+     Relevé le 23 octobre 2026 : 24 px reste le minimum WCAG, mais c'est une
+     cible trop petite pour les cinq commandes de l'en-tête sur téléphone. Elles
+     passent à 44 px partout où l'en-tête est compact. */
   html.has-js .site-header.is-compact .nav-toggle,
   html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
   html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
-    min-height: 24px;
+    min-height: 44px;
     padding: .2rem .5rem;
     font-size: max(12px, .75rem);
   }
@@ -4439,5 +4442,124 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
 
   html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]) {
     min-height: 44px;
+  }
+}
+
+/* --- Commandes de l'en-tête compact sur téléphone ---------------------------
+   Trois défauts mesurés le 23 octobre 2026 dans le menu en mode smartphone :
+
+   1. les cinq commandes tombaient à 24 px de haut — le plancher de la cible
+      tactile, pas une taille confortable — et, sous 520 px, s'empilaient en
+      deux ou trois rangées irrégulières, avec un trou sous le logo et un bord
+      droit en escalier ;
+   2. le panneau du menu, ancré à `.nav-inner`, s'arrêtait à 8 ou 24 px des
+      bords alors que la barre qu'il prolonge est pleine largeur ;
+   3. en paysage (844 × 390), le panneau descendait à 522 px : les derniers
+      liens étaient hors de l'écran et inatteignables.
+
+   Ces règles sont en fin de feuille à dessein : les blocs de l'en-tête compact
+   plus haut dans le fichier les écraseraient autrement. Les commandes passent à
+   44 px partout où l'en-tête est compact, la grille remplace l'empilement sous
+   520 px, et le panneau rejoint les bords en restant borné à la hauteur de
+   l'écran, donc défilable. */
+@media (max-width: 1260px) {
+  /* Sous 1260 px, le panneau du menu est en position absolue sous l'en-tête
+     collant : sans plafond, il débordait sous la ligne de flottaison dès que
+     l'écran était court (844 × 390 : bas du panneau à 522 px pour 390 px de
+     haut). Il est borné à la place restante et devient défilable. */
+  .has-js .nav-links {
+    /* `.nav-links` porte une largeur explicite : sans cela, l'étirement par
+       `left`/`right` est ignoré. */
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    max-height: calc(100vh - var(--hauteur-entete, 5rem) - .5rem);
+    max-height: calc(100dvh - var(--hauteur-entete, 5rem) - .5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* Le panneau centre ses liens. Dès qu'il devient défilable, ce centrage
+       poussait le premier lien au-dessus du bord haut : en paysage, « Accueil »
+       était hors d'atteinte, même en remontant. `safe` aligne alors depuis le
+       début, et `flex-start` sert de repli aux navigateurs sans `safe`. */
+    justify-content: flex-start;
+    justify-content: safe center;
+  }
+}
+
+@media (max-width: 760px), (orientation: landscape) and (max-height: 560px) and (max-width: 920px) {
+  .has-js .nav-links {
+    /* La gouttière de `.nav-inner` vaut 8, 16 ou 24 px selon le palier : la
+       deviner produisait un débordement de 16 px hors écran en paysage. Elle se
+       calcule ici : moitié de l'écart entre la fenêtre et le conteneur. */
+    left: calc((100vw - 100%) / -2);
+    right: calc((100vw - 100%) / -2);
+  }
+  html.has-js .site-header.is-compact .nav-toggle,
+  html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
+  html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+    padding: .3rem .6rem;
+    font-size: max(12px, .8rem);
+    line-height: 1.15;
+    text-align: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .has-js .nav-links {
+    left: calc((100vw - 100%) / -2);
+    right: calc((100vw - 100%) / -2);
+    max-height: calc(100vh - var(--hauteur-entete, 7rem) - .5rem);
+    max-height: calc(100dvh - var(--hauteur-entete, 7rem) - .5rem);
+  }
+  html.has-js .site-header.is-compact .header-compact-tools {
+    display: grid;
+    /* `auto-fit` sous 100 px de colonne repasse à une seule colonne : à 70 px de
+       fenêtre, deux colonnes donnaient des boutons de 19 px. */
+    grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));
+    align-items: stretch;
+    gap: .3rem;
+    flex: 1 1 auto;
+    /* Sous 210 px de large, la grille passe sur sa propre rangée plutôt que de
+       comprimer les commandes à côté du logo (à 70 px, elles tombaient à 42 px
+       et le libellé débordait). */
+    min-width: min(100%, 210px);
+  }
+  /* La dernière commande occupe toute la largeur restante, pour ne pas laisser
+     de trou sous un nombre impair de commandes. */
+  html.has-js .site-header.is-compact :is(.display-settings, .site-journey-settings) {
+    display: grid;
+  }
+  html.has-js .site-header.is-compact .layout-settings {
+    display: grid;
+    grid-column: 1 / -1;
+  }
+  html.has-js .site-header.is-compact .nav-toggle,
+  html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
+  html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+    display: inline-flex;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    align-items: center;
+    justify-content: center;
+    padding: .25rem .2rem;
+    /* 12 px de base : à 70 px de fenêtre, la colonne ne fait que 43 px et
+       « Agrandir » en .75rem débordait de son cadre. */
+    font-size: max(12px, .75rem);
+    white-space: normal;
+    overflow-wrap: normal;
+    hyphens: none;
+  }
+  html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]) {
+    flex: 0 0 auto;
+  }
+}
+
+/* Sous 300 px de fenêtre, la gouttière de l'en-tête ne laisse plus la place
+   d'écrire « Agrandir » dans une colonne : l'en-tête prend toute la largeur. */
+@media (max-width: 300px) {
+  html.has-js .site-header.is-compact .nav-inner {
+    width: 100%;
+    padding-inline: max(2px, .2rem);
   }
 }

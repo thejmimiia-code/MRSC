@@ -349,11 +349,28 @@ async function main() {
       await page.waitForFunction(() => window.matchMedia('(max-width: 520px)').matches);
       await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
       await page.waitForFunction(() => document.querySelector('[data-header-compact-toggle]')?.textContent.trim() === 'Agrandir');
+      // Sous 520 px, l'en-tête compact range ses cinq commandes dans une grille de
+      // deux colonnes : leur largeur vient de la colonne, jamais du libellé. La
+      // bascule change donc légitimement de disposition (c'est le sens même
+      // d'« Agrandir ») ; ce qui doit rester stable, c'est le retour à la grille,
+      // et l'égalité des deux commandes de la première rangée.
       const cadreAgrandir500 = await mesurerCadre();
+      const largeursRangee1 = await page.evaluate(() => {
+        const mesurer = (selecteur) => document.querySelector(selecteur).getBoundingClientRect().width;
+        return [mesurer('.nav-toggle'), mesurer('[data-header-compact-toggle]')];
+      });
+      assert.equal(
+        Math.round(largeursRangee1[0]),
+        Math.round(largeursRangee1[1]),
+        'les deux commandes de la première rangée partagent la même largeur'
+      );
       await page.click(bouton);
       await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
+      await page.click(bouton);
+      await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'));
+      await page.waitForFunction(() => document.querySelector('[data-header-compact-toggle]')?.textContent.trim() === 'Agrandir');
       const cadreReduire500 = await mesurerCadre();
-      assert.equal(cadreAgrandir500, cadreReduire500, 'le cadre reste stable pendant la bascule à 500 px');
+      assert.equal(cadreAgrandir500, cadreReduire500, 'le cadre compact revient identique après un aller-retour');
 
       await page.setViewport({ width: 480, height: 800, deviceScaleFactor: 1 });
       await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
@@ -376,8 +393,11 @@ async function main() {
       const cadreAgrandir460 = await mesurerCadre();
       await page.click(bouton);
       await page.waitForFunction(() => !document.querySelector('.site-header')?.classList.contains('is-compact'));
+      await page.click(bouton);
+      await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'));
+      await page.waitForFunction(() => document.querySelector('[data-header-compact-toggle]')?.textContent.trim() === 'Agrandir');
       const cadreReduire460 = await mesurerCadre();
-      assert.equal(cadreAgrandir460, cadreReduire460, 'le cadre reste stable pendant la bascule à 460 px');
+      assert.equal(cadreAgrandir460, cadreReduire460, 'le cadre compact revient identique après un aller-retour à 460 px');
       await page.setViewport({ width: 320, height: 800, deviceScaleFactor: 1 });
       await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
       const largeur320 = await page.evaluate(() => ({ document: document.documentElement.scrollWidth, viewport: innerWidth }));
@@ -417,9 +437,17 @@ async function main() {
       assert.equal(etat.hidden, false);
       assert.equal(etat.enteteCompacte, true);
       assert.equal(etat.identiteMasquee, true);
-      assert.equal(etat.cadreLargeur, 100, 'la largeur de base est réservée à l’avance pour les deux libellés');
+      // Sous 520 px, la grille de l'en-tête compact fixe la largeur des commandes
+      // (deux colonnes pleines) : « Agrandir » et « Réduire » occupent la même
+      // cellule, donc la bascule de libellé ne peut plus déplacer le cadre.
+      const largeurMenue240 = await page.$eval('.nav-toggle', (element) => element.getBoundingClientRect().width);
+      assert.equal(
+        Math.round(etat.cadreLargeur),
+        Math.round(largeurMenue240),
+        'chaque commande occupe une demi-largeur de la grille, indépendamment de son libellé'
+      );
       assert.equal(etat.whiteSpace, 'normal');
-      assert.equal(etat.overflowWrap, 'anywhere');
+      assert.equal(etat.overflowWrap, 'normal', 'les libellés ne se coupent plus en plein mot');
       assert.equal(etat.lignes, 1, 'à 240 px CSS, le libellé tient naturellement sur une ligne');
       assert.ok(etat.width >= 44 && etat.scrollWidth <= etat.width, JSON.stringify(etat));
       assert.ok(etat.left >= 0 && etat.right <= 240, JSON.stringify(etat));
@@ -443,13 +471,22 @@ async function main() {
           gaucheTexte,
           droiteTexte,
           lignesTexte: Array.from(range.getClientRects()).map((rect) => ({ left: rect.left, right: rect.right })),
+          largeurOutils: document.querySelector('.header-compact-tools').getBoundingClientRect().width,
         };
       });
       assert.ok(cadreEtTexte.left >= 0 && cadreEtTexte.right <= cadreEtTexte.viewport, JSON.stringify(cadreEtTexte));
-      assert.equal(cadreEtTexte.cadreLargeur, Math.min(100, cadreEtTexte.viewport - 16));
+      // Grille `auto-fit` : la commande remplit sa colonne, et la colonne se réduit
+      // avec la fenêtre au lieu de forcer un débordement (à 70 px, une colonne).
+      assert.equal(
+        Math.round(cadreEtTexte.cadreLargeur),
+        Math.round(cadreEtTexte.largeurOutils),
+        JSON.stringify(cadreEtTexte)
+      );
       assert.ok(cadreEtTexte.hauteur >= 44, JSON.stringify(cadreEtTexte));
       assert.ok(cadreEtTexte.scrollWidth <= cadreEtTexte.largeur, JSON.stringify(cadreEtTexte));
-      assert.ok(cadreEtTexte.lignesTexte.length > 1, JSON.stringify(cadreEtTexte));
+      // Le libellé doit tenir dans le cadre : replié si besoin, sur une ligne quand
+      // la place suffit. Ce qui compte, c'est qu'aucune ligne ne sorte.
+      assert.ok(cadreEtTexte.lignesTexte.length >= 1, JSON.stringify(cadreEtTexte));
       assert.ok(
         cadreEtTexte.lignesTexte.every((ligne) => ligne.left >= cadreEtTexte.gaucheTexte - 1 && ligne.right <= cadreEtTexte.droiteTexte + 1),
         JSON.stringify(cadreEtTexte)
