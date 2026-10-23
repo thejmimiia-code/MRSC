@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-23 — Le texte du bas de page vraiment centré
+
+- **Initiative :** `optimisation-du-site`. Troisième retour, capture à l’appui : « l’affichage est pas top là en bas de page, c’est pas vraiment équilibré ».
+- **Cause trouvée :** le centrage publié ne portait que sur les boîtes. Une règle globale alignant tous les paragraphes sur `start` s’applique directement aux paragraphes du pied de page et gagne sur le `text-align: center` hérité ; les droits et les liens, tenant sur une ligne, paraissaient centrés, mais la note de version restait collée à gauche.
+- **Décision :** centrage explicite des paragraphes du bas de page (`.footer-bottom p { text-align: center }`), et non plus confiance dans l’héritage.
+- **Mesure refaite :** l’écart est désormais calculé sur le milieu de chaque *ligne de texte*, pas sur celui de la boîte. Résultat : **0 px** sur toutes les lignes, à 320, 390, 576, 720 et 1 440 px, sur quatre pages, à 100 % et à 130 % de texte, sans débordement.
+- **Piège de garde-fou :** le premier jet du contrôle a échoué alors que la règle était juste — le commentaire CSS citait une accolade et l’expression régulière `[^}]*` s’arrêtait dessus. Commentaire réécrit sans accolades.
+- **Garde-fou :** `controler_pied_de_page` vérifie maintenant le centrage explicite des paragraphes ; **sept mutations rejouées, sept détectées** ; les 13 contrôles d’affichage passent.
+- **Protocole :** § 6 septies de [`formats-affichage.md`](formats-affichage.md), « Troisième passage : le texte lui-même ».
+- **Limite :** mesure d’un Chromium sans interface ; reste à constater sur un écran réel, à fort grossissement.
+- **Prochaine action :** revue visuelle sur téléphone réel, puis décor vectoriel du héros pour `apprendre.html` et l’accueil.
+
 ## 2026-10-23 — Le bas du pied de page centré
 
 - **Initiative :** `optimisation-du-site`. Deuxième capture, avec un point encore visible sous la note de version et une demande : « l’affichage devrait être centré ! Ce serait plus joli ! ».

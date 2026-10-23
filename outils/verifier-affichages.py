@@ -674,6 +674,17 @@ def controler_pied_de_page() -> list[str]:
             f"({', '.join(manquants)} manquant) : droits, liens et note de version "
             "se répartissent gauche et droite et laissent des trous"
         )
+    # La règle globale `p { text-align: start }` s'applique directement aux
+    # paragraphes du pied de page et gagne sur l'héritage : sans un centrage
+    # explicite, les droits et la note de version restent alignés à gauche dans
+    # un bloc centré (constaté le 23 octobre 2026, capture à l'appui).
+    paragraphes = re.search(r"\.footer-bottom p\s*\{([^}]*)\}", texte)
+    if not paragraphes or "text-align: center" not in paragraphes.group(1):
+        erreurs.append(
+            "site.css — les paragraphes du bas de page ne sont pas centrés "
+            "(.footer-bottom p { text-align: center }) : la règle globale "
+            "`p { text-align: start }` les réaligne à gauche dans un bloc centré"
+        )
     legal = re.search(r"\.footer-legal\s*\{([^}]*)\}", texte)
     if not legal or "list-style: none" not in legal.group(1) or "justify-content: center" not in legal.group(1):
         erreurs.append(
