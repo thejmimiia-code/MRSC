@@ -439,13 +439,40 @@ documents, transparence, 404, deux fiches) aux largeurs 320 à 1 920 px. Hauteur
 pied de page : 1 038 px à 320, 994 px à 390, 759 px à 768, 425 px au-delà de
 1 160 px.
 
+### Troisième passage : le texte lui-même, pas seulement sa boîte
+
+Le centrage publié ne tenait pas : sur une capture suivante, les droits et les
+liens légaux se lisaient bien au centre, mais la note de version restait collée
+au bord gauche.
+
+- **La cause est une règle globale.** Le paragraphe est aligné par une règle
+  `p` générale sur `text-align: start`. Elle s'applique directement à l'élément
+  et gagne sur le `text-align: center` hérité du bloc : les deux premiers blocs
+  paraissaient centrés parce qu'ils tiennent sur une ligne et que leur boîte est
+  réduite à cette ligne, tandis que la note, elle, s'étend sur la largeur
+  maximale et laissait voir son alignement à gauche. Un `text-align: center`
+  explicite sur les paragraphes du bas de page suffit.
+- **Ce que la mesure avait manqué.** Elle comparait les milieux des *boîtes* :
+  zéro partout, et pourtant le texte n'était pas centré. La mesure compare
+  maintenant le milieu de chaque *ligne de texte* à celui du bloc — c'est la
+  seule mesure qui décrit ce que l'œil voit.
+- **Après correction :** écart de 0 px sur chaque ligne des droits et de la note,
+  à 320, 390, 576, 720, 1 440, sur quatre pages, à 100 % et à 130 % de texte ;
+  aucun débordement.
+- **Un piège de garde-fou.** La première version du contrôle a échoué alors que
+  la règle était bonne : le commentaire CSS citait lui-même une accolade, et
+  l'expression régulière `[^}]*` s'arrêtait sur elle. Le commentaire a été
+  réécrit sans accolades — les contrôles de ce fichier découpent les règles à
+  l'accolade fermante.
+
 Garde-fou : 13ᵉ contrôle `controler_pied_de_page`, étendu au centrage — découpage
 absent du pied de page, ponctuation seule rattachée (et nœud non découpé quand
-elle ouvre le texte), colonne centrée, liste légale sans puce ni filet, borne de
-repli sur téléphone, liste présente sur toutes les pages. **Cinq mutations
-rejouées, cinq détectées** : `justify-items` retiré, liste réalignée à gauche,
-borne de téléphone supprimée, filet vertical rétabli, retour à l'ancienne règle
-de ponctuation.
+elle ouvre le texte), colonne centrée, **paragraphes du bas de page explicitement
+centrés**, liste légale sans puce ni filet, borne de repli sur téléphone, liste
+présente sur toutes les pages. **Sept mutations rejouées, sept détectées** :
+`justify-items` retiré, liste réalignée à gauche, borne de téléphone supprimée,
+filet vertical rétabli, retour à l'ancienne règle de ponctuation, centrage des
+paragraphes retiré, puis remplacé par un alignement à gauche.
 
 Limite : la mesure est celle d'un Chromium sans interface ; le rendu des filets
 sur un écran à très forte densité reste à constater.

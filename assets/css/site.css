@@ -1410,6 +1410,11 @@ html.contraste-renforce .resource-scope-note {
 
 .footer-bottom p {
   margin: 0;
+  /* La règle globale qui fixe l'alignement des paragraphes s'applique ici
+     directement et gagne sur l'héritage : sans cette ligne, les droits et la
+     note de version restaient alignés à gauche dans un bloc centré, et le bas
+     de page se lisait de travers. */
+  text-align: center;
 }
 
 .footer-bottom > p:first-of-type {
