@@ -4,11 +4,13 @@ Estimation hors ligne : HTML, CSS, JavaScript et image retenue pour chaque page,
 
 Budget de travail : 300 Kio (mobile) et 450 Kio (grand écran) compressés.
 
+Le budget porte sur le **transfert typique**. Les images de repli marquées `data-srcset` ou `data-src` ne sont demandées que si le rendu 3D du navigateur est indisponible ; elles sont comptées à part et signalées en fin de contrôle, au lieu d’être ignorées.
+
 | Page | Mobile (Kio gzip) | Grand écran (Kio gzip) | Brut maximal (Kio) |
 | --- | ---: | ---: | ---: |
-| `anglais-aventure.html` | 227.6 | 415.9 | 768.3 |
 | `apprendre.html` | 202.8 | 391.1 | 732.3 |
 | `index.html` | 140.4 | 238.7 | 399.9 |
+| `anglais-aventure.html` | 132.9 | 132.9 | 907.2 |
 | `simulateur/index.html` | 72.9 | 72.9 | 272.5 |
 | `transparence.html` | 65.8 | 65.8 | 232.4 |
 | `ia-societe.html` | 65.4 | 65.4 | 233.0 |

@@ -18,7 +18,6 @@
   <meta property="og:url" content="https://thejmimiia-code.github.io/MRSC/anglais-aventure.html">
   <meta property="og:image" content="https://thejmimiia-code.github.io/MRSC/assets/images/mondes-savoirs-hero.jpg">
   <meta property="og:image:alt" content="Un atlas imaginaire en trois dimensions réunissant des mondes de lecture, sciences, histoire, arts, numérique et exploration">
-  <link rel="preload" as="image" type="image/avif" href="assets/images/mondes-savoirs-hero-800.avif" imagesrcset="assets/images/mondes-savoirs-hero-800.avif 800w, assets/images/mondes-savoirs-hero-1200.avif 1200w, assets/images/mondes-savoirs-hero-1672.avif 1672w" imagesizes="100vw" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/anglais-aventure.css">
   <script src="assets/js/site.js" defer></script>
@@ -26,6 +25,7 @@
   <script src="assets/js/anglais-aventure-data.js" defer></script>
   <script src="assets/js/apprentissage-aventure-data.js" defer></script>
   <script src="assets/js/anglais-aventure.js" defer></script>
+  <script src="assets/js/decor-atlas.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu principal</a>
@@ -89,10 +89,11 @@
   <main id="contenu">
     <section class="adventure-hero" aria-labelledby="adventure-title">
       <picture class="adventure-hero-picture">
-        <source type="image/avif" srcset="assets/images/mondes-savoirs-hero-800.avif 800w, assets/images/mondes-savoirs-hero-1200.avif 1200w, assets/images/mondes-savoirs-hero-1672.avif 1672w" sizes="100vw">
-        <source type="image/webp" srcset="assets/images/mondes-savoirs-hero-800.webp 800w, assets/images/mondes-savoirs-hero-1200.webp 1200w, assets/images/mondes-savoirs-hero-1672.webp 1672w" sizes="100vw">
-        <img class="adventure-hero-art" src="assets/images/mondes-savoirs-hero.jpg" alt="" width="1672" height="941" fetchpriority="high" decoding="async">
+        <source type="image/avif" data-srcset="assets/images/mondes-savoirs-hero-800.avif 800w, assets/images/mondes-savoirs-hero-1200.avif 1200w, assets/images/mondes-savoirs-hero-1672.avif 1672w" sizes="100vw">
+        <source type="image/webp" data-srcset="assets/images/mondes-savoirs-hero-800.webp 800w, assets/images/mondes-savoirs-hero-1200.webp 1200w, assets/images/mondes-savoirs-hero-1672.webp 1672w" sizes="100vw">
+        <img class="adventure-hero-art" data-src="assets/images/mondes-savoirs-hero.jpg" alt="" width="1672" height="941" decoding="async">
       </picture>
+      <canvas class="adventure-hero-art adventure-hero-canvas" data-decor-atlas width="1672" height="941" role="img" aria-label="Archipel imaginaire en trois dimensions : une bibliothèque de livres-monuments sur son île, reliée par un pont de pierre à un observatoire, une serre et un phare" hidden></canvas>
       <div class="adventure-hero-shade" aria-hidden="true"></div>
       <div class="container adventure-hero-content">
         <nav class="adventure-breadcrumb" aria-label="Fil d’Ariane"><a href="index.html">Accueil</a><span aria-hidden="true">›</span><a href="apprendre.html">Apprendre</a><span aria-hidden="true">›</span><span aria-current="page">Les Mondes</span></nav>

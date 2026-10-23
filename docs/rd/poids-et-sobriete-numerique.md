@@ -220,6 +220,38 @@ Trois mutations volontaires ont été rejouées : `DENSITE_MAX = 2`, retour du p
 
 **Limite qui subsiste, énoncée telle quelle.** Le master reste 1 672 × 941, et c’est aussi le besoin maximal du site : tout ce qui précède est du 1:1. Le générateur d’images disponible plafonne à 1,06 Mpx, donc en dessous du fichier existant (§ 4.2 quater) : aucune régénération ne peut augmenter la netteté aujourd’hui, et rien n’est attendu de personne. Aucune revue humaine n'a eu lieu sur ce correctif : la mesure est celle d'un Chromium sans interface, pas d'un téléphone réel.
 
+### 4.2 sexies — Le héros des Mondes n'est plus une image (23 octobre 2026)
+
+**La décision.** Devant l'impossibilité d'obtenir une illustration plus grande — les trois illustrations sont un travail de l'agent, et le générateur disponible plafonne à 1,06 Mpx, sous le fichier existant de 1,57 Mpx (§ 4.2 quater) — la personne responsable du site a choisi de **remplacer le héros par un décor 3D vectoriel**, dans le langage graphique déjà employé par les cinq scènes de mission. Une image a une résolution finie ; une géométrie n'en a pas.
+
+**Ce qui a été fait.** `assets/js/decor-atlas.js` construit un archipel de savoirs — bibliothèque à colonnes et livres-monuments, pont de pierre vers l'observatoire, serre, phare, îlots et récifs — et le dessine dans un `<canvas>` WebGL, à la densité exacte de l'écran. Le fichier pèse **15 Kio** non compressé, contre 300 Kio pour la variante 1 672 px qu'il remplace.
+
+**Trois décisions de conception, chacune née d'un défaut constaté au rendu :**
+
+1. **Fond de ciel calculé, pas posé dans le monde.** Un panneau plat placé derrière la scène laissait voir son arête comme une diagonale dès que la caméra pique, et les triangles se disputaient la profondeur (visible sur une première capture). Le fond est désormais construit pour la caméra : quadrilatère perpendiculaire à l'axe de vue, dessiné avant tout le reste, sans test ni écriture de profondeur.
+2. **Champ horizontal constant.** Avec un champ vertical fixe, un cadre 4:3 ou un bandeau de téléphone recadraient les îles latérales. Le champ horizontal est figé et le champ vertical s'en déduit : la composition ne dépend plus de la hauteur de la boîte.
+3. **Cadrage calculé.** La caméra se place à la distance qui fait tenir dans le cadre la totalité des sommets visibles, projetés dans son propre repère : `max(|droite|/tan(champ/2) + profondeur)`. La mer, immense, et les nuages, lointains, sont exclus de ce calcul — les inclure reculait la caméra jusqu'à rendre les îles minuscules, ce qui est arrivé deux fois avant d'être corrigé. En plein cadre, le décor est décalé à droite parce que le texte occupe la gauche ; en bandeau et en panneau, le texte passe dessous et le décor est centré.
+
+**Mesuré dans le navigateur (8 profils d'écran × densité) :**
+
+| Écran | Tampon du canvas | Besoin réel | Verdict |
+| --- | ---: | ---: | --- |
+| 390 px @3× | 1 170 × 658 | 1 170 × 658 | 1:1 |
+| 430 px @3× | 1 290 × 726 | 1 290 × 726 | 1:1 |
+| 1 280 px @2× | 1 672 × 941 | 1 672 × 941 | 1:1 |
+| 1 920 px @1× | 1 672 × 941 | 1 672 × 941 | 1:1 |
+| 1 024 px @1× | 1 024 × 755 | 1 024 × 755 | 1:1 |
+
+**Zéro agrandissement sur les huit profils**, de 360 px à 2× à 1 920 px à 1×, et aucun débordement latéral. Le 1:1 n'est plus une limite qu'on atteint : il est la définition même du rendu.
+
+**Le repli.** Le `<picture>` d'origine reste dans le document, mais son `src` et ses `srcset` sont désormais **différés** (`data-src`, `data-srcset`) : l'image n'est demandée que si WebGL est absent, refusé ou perdu (`webglcontextlost`). Mesure avec WebGL désactivé : les huit profils affichent l'image, correctement choisie par le `srcset` (1 200 px à 390 px @3×, 1 672 px au-delà), et sans débordement. **Mesure avec WebGL actif : aucune requête vers `mondes-savoirs-hero-*`.** Le préchargement de l'image a été retiré de l'en-tête pour la même raison.
+
+**Poids.** `anglais-aventure.html` passe de 227,6 à **132,9 Kio mobile** (gzip estimé), soit 95 Kio de moins sur la page d'entrée des Mondes. Le pire cas — WebGL indisponible, donc l'image de repli en plus — est de 268,3 Kio mobile et 535,5 Kio grand écran : il **dépasse le budget de 450 Kio** sur grand écran, et c'est assumé explicitement, puisqu'il ne se produit que sur un appareil incapable d'afficher le décor. Le compteur ne pouvait pas le dire avant ce lot : `outils/verifier-poids-pages.py` ignorait `data-srcset` et sous-comptait donc déjà le repli de la scène des missions. Il distingue désormais **transfert typique** et **pire cas**, et affiche les deux.
+
+**Garde-fous** (`outils/verifier-affichages.py`, 10 contrôles) : `DENSITE_MAX >= 3` et `BUDGET_PIXELS >= 6 Mpx` dans **les deux** fichiers de rendu, aucun `Math.min(devicePixelRatio, N)`, présence du canvas avec `role="img"` et `aria-label`, présence du repli différé, et chargement du repli dans la fonction d'échec. Quatre mutations rejouées : plafond de densité à 2 dans `decor-atlas.js`, canvas retiré du document, `role`/`aria-label` retirés, chargement du repli déplacé hors de la fonction d'échec — les quatre sont détectées. **Deux mutations ne le sont pas** : une sortie ajoutée après `if (!image) return;` et une condition rendue toujours fausse neutralisent le repli en laissant tous les appels en place. C'est une limite du contrôle statique, écrite dans le code ; le comportement est prouvé par la mesure navigateur ci-dessus, pas par cette porte.
+
+**Ce qui reste.** Le décor est un rendu : il n'a pas le grain d'une illustration peinte. C'est un changement de style assumé, pas une amélioration de l'ancien. Aucune revue humaine sur appareil réel n'a eu lieu — la mesure est celle d'un Chromium sans interface, à 1×, 2× et 3×. Et la composition n'a été vérifiée que sur les quatre mises en page du héros ; les autres pages ne changent pas.
+
 ### 4.3 Stockage du dépôt
 
 Les variantes ajoutent **1 553 Kio** au dépôt pour **787 Kio** d’images sources. Le dépôt grossit donc, alors que chaque visite transfère moins. C’est un compromis assumé : les sources restent la référence et le repli JPEG ; les variantes sont générées et vérifiées par [`outils/optimiser-images.py`](../../outils/optimiser-images.py), avec un manifeste d’empreintes [`derives-images.json`](derives-images.json).

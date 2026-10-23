@@ -44,6 +44,9 @@ class SlotImage:
     """Une image affichée une fois, avec ses candidats srcset locaux."""
 
     candidats: list[tuple[int | None, Path]] = field(default_factory=list)
+    # Ressources seulement demandées si le repli est nécessaire : elles ne
+    # comptent pas dans le transfert typique, mais dans le pire cas.
+    differes: list[tuple[int | None, Path]] = field(default_factory=list)
     externe: bool = False
     repli_differe: bool = False
 
@@ -71,7 +74,7 @@ class ExtracteurRessources(HTMLParser):
             return None
         return cible
 
-    def ajouter_candidats(self, slot: SlotImage, valeur: str) -> None:
+    def ajouter_candidats(self, slot: SlotImage, valeur: str, differes: bool = False) -> None:
         for candidat in valeur.split(","):
             morceaux = candidat.strip().split()
             if not morceaux:
@@ -82,7 +85,7 @@ class ExtracteurRessources(HTMLParser):
                 largeur = int(morceaux[1][:-1])
             cible = self.resoudre(url)
             if cible:
-                slot.candidats.append((largeur, cible))
+                (slot.differes if differes else slot.candidats).append((largeur, cible))
             elif url.startswith(("http://", "https://", "//")):
                 slot.externe = True
                 self.externes.add(url)
@@ -104,16 +107,29 @@ class ExtracteurRessources(HTMLParser):
             self.courante = SlotImage()
             self.pictures.append(self.courante)
         elif tag == "source":
+            # `data-srcset` est une source différée : le navigateur ne la demande
+            # que si le repli est nécessaire (WebGL absent, par exemple). Elle
+            # compte quand même dans le poids estimé, parce qu'elle peut être
+            # téléchargée : sous-compter une ressource conditionnelle ferait
+            # croire à une page plus légère qu'elle ne peut l'être.
             if self.courante is not None and attributs.get("srcset"):
                 self.ajouter_candidats(self.courante, attributs["srcset"])
+            if self.courante is not None and attributs.get("data-srcset"):
+                self.ajouter_candidats(self.courante, attributs["data-srcset"], differes=True)
         elif tag == "img":
             slot = self.courante if self.courante is not None else SlotImage()
             if attributs.get("srcset"):
                 self.ajouter_candidats(slot, attributs["srcset"])
+            if attributs.get("data-srcset"):
+                self.ajouter_candidats(slot, attributs["data-srcset"], differes=True)
             if attributs.get("src"):
                 cible = self.resoudre(attributs["src"])
                 if cible:
                     slot.candidats.append((None, cible))
+            if attributs.get("data-src"):
+                cible = self.resoudre(attributs["data-src"])
+                if cible:
+                    slot.differes.append((None, cible))
             if attributs.get("data-src") or attributs.get("data-srcset"):
                 slot.repli_differe = True
             self.images.append(slot)
@@ -150,6 +166,8 @@ def mesurer(page: Path) -> dict:
     extracteur.close()
     mobile: set[Path] = set(extracteur.styles) | set(extracteur.scripts)
     bureau: set[Path] = set(extracteur.styles) | set(extracteur.scripts)
+    mobile_pire: set[Path] = set(mobile)
+    bureau_pire: set[Path] = set(bureau)
     for slot in extracteur.images:
         petit = choisir(slot, plus_petit=True)
         grand = choisir(slot, plus_petit=False)
@@ -157,16 +175,26 @@ def mesurer(page: Path) -> dict:
             mobile.add(petit)
         if grand:
             bureau.add(grand)
+        deferes = slot.differes
+        if deferes:
+            def choisir_dans(pool, plus_petit):
+                with_width = [(largeur, chemin) for largeur, chemin in pool if largeur is not None]
+                retenus = with_width or pool
+                clef = lambda item: item[0] if item[0] is not None else 0
+                return (min if plus_petit else max)(retenus, key=clef)[1]
+            mobile_pire.add(choisir_dans(deferes, True))
+            bureau_pire.add(choisir_dans(deferes, False))
     html = page.stat().st_size
     gzip_html = compresser(page)
     poids = {}
-    for nom, fichiers in (("mobile", mobile), ("bureau", bureau)):
+    for nom, fichiers in (("mobile", mobile), ("bureau", bureau), ("mobile_pire", mobile_pire), ("bureau_pire", bureau_pire)):
         brut = html + sum(chemin.stat().st_size for chemin in fichiers)
         compresse = gzip_html + sum(compresser(chemin) for chemin in fichiers)
         poids[nom] = {"brut": brut, "gzip": compresse, "fichiers": fichiers}
     return {
         "page": page.relative_to(ROOT).as_posix(),
         "poids": poids,
+        "differes": sorted({chemin.relative_to(ROOT).as_posix() for slot in extracteur.images for _, chemin in slot.differes}),
         "manquantes": extracteur.manquantes,
         "externes": extracteur.externes,
         "picture_sans_source": extracteur.picture_sans_source,
@@ -196,6 +224,11 @@ def rapport_markdown(pages: list[dict], budget_mobile: int, budget_desktop: int)
         "",
         f"Budget de travail : {budget_mobile} Kio (mobile) et {budget_desktop} Kio (grand écran) compressés.",
         "",
+        "Le budget porte sur le **transfert typique**. Les images de repli marquées "
+        "`data-srcset` ou `data-src` ne sont demandées que si le rendu 3D du "
+        "navigateur est indisponible ; elles sont comptées à part et signalées "
+        "en fin de contrôle, au lieu d’être ignorées.",
+        "",
         "| Page | Mobile (Kio gzip) | Grand écran (Kio gzip) | Brut maximal (Kio) |",
         "| --- | ---: | ---: | ---: |",
     ]
@@ -221,6 +254,12 @@ def main() -> int:
     pages = [mesurer(page) for page in PAGES]
     erreurs = controler_pictures(pages)
     depassements = []
+    # Le budget porte sur le transfert typique. Les ressources différées — les
+    # images de repli, demandées seulement si WebGL est absent — sont mesurées
+    # à part et affichées : une page peut légitimement dépasser le budget dans ce
+    # cas-là, puisque le repli remplace un rendu qui ne fonctionne pas. Les
+    # ignorer aurait été plus flatteur et moins vrai.
+    pire_cas: list[tuple[str, float, float]] = []
     for mesure in pages:
         mobile = mesure["poids"]["mobile"]["gzip"] / 1024
         bureau = mesure["poids"]["bureau"]["gzip"] / 1024
@@ -228,6 +267,12 @@ def main() -> int:
             depassements.append(f"{mesure['page']} : {mobile:.1f} Kio mobile > {options.budget_mobile} Kio")
         if bureau > options.budget_desktop:
             depassements.append(f"{mesure['page']} : {bureau:.1f} Kio grand écran > {options.budget_desktop} Kio")
+        if mesure["differes"]:
+            pire_cas.append((
+                mesure["page"],
+                mesure["poids"]["mobile_pire"]["gzip"] / 1024,
+                mesure["poids"]["bureau_pire"]["gzip"] / 1024,
+            ))
     erreurs.extend(depassements)
 
     if options.rapport:
@@ -253,6 +298,12 @@ def main() -> int:
         f"Poids des pages : {len(pages)} pages sous les budgets de travail "
         f"({options.budget_mobile} Kio mobile, {options.budget_desktop} Kio grand écran, gzip estimé)."
     )
+    for page, mobile, bureau in sorted(pire_cas, key=lambda item: item[2], reverse=True)[:3]:
+        print(
+            f"  · {page} : replis différés compris, le pire cas serait de "
+            f"{mobile:.1f} Kio mobile et {bureau:.1f} Kio grand écran "
+            "(images demandées seulement si le rendu 3D est indisponible)."
+        )
     return 0
 
 

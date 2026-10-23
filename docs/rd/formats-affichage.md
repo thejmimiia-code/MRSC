@@ -72,8 +72,9 @@ doit fournir au moins autant de pixels que l'écran en affiche.
 `outils/verifier-affichages.py` vérifie que les règles sur lesquelles repose
 cette mesure sont toujours présentes : plancher de texte, plancher de cible,
 mesure de lecture, plafonds d'image par densité, pistes de grille sans `1fr`
-nue, césure des mots longs, en-tête compact non rapetissé, densité du rendu 3D
-et qualité d'encodage des images (voir § 6 bis).
+nue, césure des mots longs, en-tête compact non rapetissé, densité du rendu 3D,
+qualité d'encodage des images (voir § 6 bis) et décor du héros avec son repli
+(voir § 6 ter).
 
 Il ne remplace pas la mesure : il constate que ses appuis n'ont pas été
 retirés. **Sept mutations** — texte à `.72rem`, contact ramené à 23 px,
@@ -138,6 +139,25 @@ la règle vérifiée est rappelée.
 Trois mutations — `DENSITE_MAX = 2`, plafond `Math.min(window.devicePixelRatio
 || 1, 2)` réintroduit, qualités 60/80 rétablies — sont détectées avec la ligne
 fautive nommée.
+
+## 6 ter. Le héros des Mondes est devenu un décor vectoriel (23 octobre 2026)
+
+Le héros de `anglais-aventure.html` n'est plus une image mais un `<canvas>` WebGL
+(`assets/js/decor-atlas.js`). Une image a une résolution finie ; un rendu n'en a
+pas. Mesure sur huit profils : **tampon égal au besoin en pixels d'appareil**, de
+360 px à 2× à 1 920 px à 1×, donc aucun agrandissement possible.
+
+Deux conséquences pour cette porte :
+
+- la règle de densité (`DENSITE_MAX >= 3`, `BUDGET_PIXELS >= 6 Mpx`, aucun
+  `Math.min(devicePixelRatio, N)`) s'applique désormais aux **deux** fichiers de
+  rendu, `anglais-aventure.js` et `decor-atlas.js` ;
+- un contrôle vérifie que le canvas est présent et décrit pour les aides
+  techniques (`role="img"`, `aria-label`), que le repli image existe et reste
+  différé, et que la fonction d'échec le charge.
+
+Détail des mesures, des quatre mutations détectées et des deux qui ne le sont pas :
+§ 4.2 sexies de [`poids-et-sobriete-numerique.md`](poids-et-sobriete-numerique.md).
 
 ## 7. Ce qui n'est pas couvert
 - **Police réelle.** La mesure utilise les polices installées dans
