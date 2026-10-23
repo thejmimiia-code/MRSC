@@ -2962,6 +2962,30 @@ html.contraste-renforce .resource-scope-note {
 .display-settings-note { margin-top: .75rem; color: var(--muted); font-size: clamp(12px,.8rem,16px); line-height: 1.45; }
 .display-settings-panel :focus-visible { outline-color: var(--blue); }
 
+/* « Écouter la page » : la lecture à voix haute vit dans le panneau de
+   personnalisation, séparée des réglages d'affichage par un filet. Le bloc en
+   cours de lecture est marqué par un contour, jamais par un changement de
+   taille : rien ne bouge sous les yeux de la personne qui suit. */
+.read-aloud {
+  margin-top: .8rem;
+  padding-top: .85rem;
+  border-top: 1px solid var(--line);
+}
+.read-aloud-title { margin: 0 0 .55rem; color: var(--navy-ink); font-size: clamp(14px,.95rem,18px); }
+.read-aloud-controls { display: flex; flex-wrap: wrap; align-items: stretch; gap: .5rem; }
+/* Base à zéro : le bouton principal prend la place restante au lieu de réclamer
+   toute la ligne et de renvoyer « Pause » à la ligne suivante. Son libellé peut
+   se replier, celui de la pause non. */
+.read-aloud-controls .display-control-wide { flex: 1 1 0; min-width: 0; white-space: normal; }
+.read-aloud-controls [data-read-aloud-pause] { flex: 0 0 auto; }
+.read-aloud-status { margin: .5rem 0 0; color: var(--text-soft); font-size: clamp(12px,.8rem,16px); }
+.read-aloud-status:empty { display: none; }
+.read-aloud-note { margin: .55rem 0 0; color: var(--muted); font-size: clamp(12px,.78rem,16px); line-height: 1.45; }
+.lecture-en-cours { outline: 3px solid var(--blue); outline-offset: 4px; border-radius: 4px; }
+@media (forced-colors: active) {
+  .lecture-en-cours { outline-color: Highlight; }
+}
+
 html.texte-tres-reduit { font-size: 75%; }
 html.texte-reduit { font-size: 85%; }
 html.texte-agrandi { font-size: 115%; }

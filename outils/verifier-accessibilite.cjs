@@ -228,6 +228,16 @@ async function main() {
       await attendre(300);
       enregistrer(`Accueil, contraste renforcé @${largeur}`, await analyser(page));
       await page.evaluate(() => document.querySelector('[data-contrast-toggle]')?.click());
+      // « Écouter la page » (23 octobre 2026) : commande de lecture à voix haute,
+      // avec son état, son bouton de pause et son bloc en cours de lecture.
+      await page.evaluate(() => {
+        const personnalisation = document.querySelector('[data-customize-settings]');
+        if (personnalisation) personnalisation.open = true;
+        const affichage = document.querySelector('[data-display-settings]');
+        if (affichage) affichage.open = true;
+      });
+      await attendre(250);
+      enregistrer(`Accueil, lecture à voix haute @${largeur}`, await analyser(page));
       await page.close();
 
       const apprendre = await ouvrir(browser, largeur, 'apprendre.html');

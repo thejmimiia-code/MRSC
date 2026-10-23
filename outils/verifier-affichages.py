@@ -674,6 +674,89 @@ def controler_habillage_du_panneau() -> list[str]:
 
 
 
+def controler_lecture_a_voix_haute() -> list[str]:
+    """« Écouter la page » doit rester une lecture locale, à la demande.
+
+    Ajoutée le 23 octobre 2026 pour l'inclusion : une personne qui lit
+    difficilement, voit peu ou se fatigue peut écouter le contenu principal.
+    Quatre garanties sont vérifiables dans le code : aucune lecture sans geste,
+    aucune requête réseau, la langue de chaque bloc respectée, et un arrêt qui
+    annule vraiment la voix. Ce contrôle lit la source ; c'est l'essai navigateur
+    de `test-experience.cjs` qui prouve l'enchaînement.
+    """
+    erreurs: list[str] = []
+    script = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+    # Le module va du commentaire de section jusqu'au bloc de réglages qui suit :
+    # les fonctions de collecte sont déclarées avant la commande elle-même.
+    depart = script.find("--- Écouter la page")
+    index = script.find("construireLectureVocale")
+    if index < 0 or depart < 0:
+        return ["site.js — la commande « Écouter la page » a disparu du panneau de personnalisation"]
+    corps = script[depart:index + 12000]
+    for morceau, message in (
+        ("speechSynthesis", "la synthèse vocale de l'appareil n'est plus utilisée"),
+        ("speechSynthesis.cancel()", "la lecture ne peut plus être arrêtée net"),
+        ("closest(\"[lang]\")", "la langue du bloc n'est plus respectée : une réplique "
+                                  "anglaise serait prononcée avec la voix française"),
+        ("pagehide", "quitter la page ne coupe plus la voix"),
+        ("aria-live", "l'état de la lecture n'est plus annoncé aux aides techniques"),
+        ("if (!element.getClientRects().length) return false", "les contenus repliés ou masqués "
+                                                                "ne sont plus écartés de la lecture"),
+    ):
+        if morceau not in corps:
+            erreurs.append(f"site.js — {message}")
+    # Aucun envoi réseau : ni requête, ni service tiers, ni clé.
+    for interdit in ("fetch(", "XMLHttpRequest", "speechsynthesis-api", "api.openai", "https://api."):
+        if interdit in corps:
+            erreurs.append(
+                f"site.js — la lecture à voix haute contient « {interdit} » : le texte ne doit "
+                "jamais quitter l'appareil"
+            )
+    # La commande vit dans le panneau, pas dans l'en-tête : celui-ci garde deux boutons.
+    # La commande doit être *ajoutée* à la liste des blocs du panneau, et non
+    # seulement construite : une fonction jamais appelée ne s'affiche nulle part.
+    if not re.search(r"\[headerCompactToggle, settings, layoutSettings, lectureVocale\]", script):
+        erreurs.append(
+            "site.js — la lecture à voix haute n'est plus placée dans le panneau Personnalisation : "
+            "la commande est construite mais jamais affichée"
+        )
+    # Le nom accessible doit contenir le texte visible, sinon axe le signale
+    # (`label-content-name-mismatch`) et une personne qui dicte à la voix ne
+    # retrouve plus le bouton qu'elle voit.
+    for texte, nom in re.findall(
+        r'boutonLecture\.textContent = "([^"]+)"[\s\S]{0,400}?'
+        r'boutonLecture\.setAttribute\("aria-label", "([^"]+)"\)',
+        corps,
+    ):
+        if texte not in nom:
+            erreurs.append(
+                f'site.js — le nom accessible « {nom} » ne reprend pas le texte visible '
+                f'« {texte} » : une commande dictée à la voix ne serait pas reconnue'
+            )
+    # L'arrêt doit annuler la voix dans sa propre fonction, pas seulement au
+    # démarrage : une commande qui n'arrête rien laisse parler l'appareil.
+    arret = re.search(r"const arreter = \(motif\) => \{(.*?)\n    \};", corps, re.S)
+    if not arret or "speechSynthesis.cancel()" not in arret.group(1):
+        erreurs.append(
+            "site.js — la fonction d'arrêt n'annule plus la synthèse : le bouton « Arrêter » "
+            "laisserait l'appareil parler"
+        )
+    css = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+    for declaration in (".lecture-en-cours", "outline"):
+        if declaration not in css:
+            erreurs.append(
+                "site.css — le bloc en cours de lecture n'est plus marqué : la personne qui suit "
+                "des yeux perd le fil"
+            )
+            break
+    if not re.search(r"\.lecture-en-cours\s*\{[^}]*outline:\s*3px", css):
+        erreurs.append(
+            "site.css — le bloc en cours de lecture n'a plus de contour visible "
+            "(.lecture-en-cours { outline: 3px … })"
+        )
+    return erreurs
+
+
 def controler_pied_de_page() -> list[str]:
     """Le bas de page se lit centré, sur une colonne, sans ponctuation orpheline.
 
@@ -791,6 +874,7 @@ CONTROLES = (
     ("qualité d'encodage des images", controler_qualite_d_encodage),
     ("habillage du panneau", controler_habillage_du_panneau),
     ("pied de page", controler_pied_de_page),
+    ("lecture à voix haute", controler_lecture_a_voix_haute),
 )
 
 

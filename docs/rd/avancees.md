@@ -10,10 +10,10 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 11 |
-| Période couverte | du 2026-10-20 au 2026-10-22 |
-| Contrôles exécutables cités | 14 |
-| Initiatives du portefeuille concernées | 10 |
+| Avancées consignées | 12 |
+| Période couverte | du 2026-10-20 au 2026-10-23 |
+| Contrôles exécutables cités | 17 |
+| Initiatives du portefeuille concernées | 11 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
 
@@ -265,6 +265,30 @@ Initiatives liées : `relire-les-44-prototypes`.
 **Suite.** Étendre la règle au prochain générateur ajouté : si sa sortie est commitée puis comparée, son horodatage doit venir d'une donnée du dépôt et une entrée doit être ajoutée aux portes rejouées.
 
 Initiatives liées : `optimisation-du-site`, `coordination-de-tous-les-agents`.
+
+### `ecouter-sans-promettre-une-conformite` — Une aide d'inclusion se mesure sur ce qu'elle n'envoie pas, pas sur ce qu'elle déclare
+
+*Consignée le 2026-10-23.*
+
+**Constat.** Une lecture à voix haute pouvait sembler une simple fonctionnalité de confort. Trois vérifications en ont fait une décision de conception : le texte lu ne doit jamais quitter l'appareil, la commande ne doit pas exister sur un appareil sans voix, et le résultat ne doit jamais être présenté comme une conformité. Un service public a d'ailleurs été mis en demeure en juin 2026 pour avoir déclaré « totalement conforme » un espace mesuré à 42,11 %.
+
+**Ce que cela change.** Toute aide d'accessibilité ajoutée au site est désormais instruite comme une option comparée de la note prospective, avec sa source externe, son coût, son repli et ses limites publiées à côté de la commande. Trois garanties sont vérifiables dans le code plutôt que dans une intention : aucune création de la commande sans moteur de synthèse, aucun envoi réseau dans le module, et langue de chaque bloc respectée. Le contrôle statique refuse un `fetch`, un appel à un service de synthèse et une commande construite mais jamais ajoutée au panneau.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/inclusion-lecture-vocale.md`
+- `assets/js/site.js`
+- `outils/verifier-affichages.py`
+- `outils/test-experience.cjs`
+- `outils/verifier-accessibilite.cjs`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && node outils/test-experience.cjs && node outils/verifier-accessibilite.cjs`
+
+**Limite — ce que cela ne prouve pas.** Aucune voix réelle n'a été écoutée, aucun lecteur d'écran n'a été utilisé et aucune personne n'a essayé la commande : le banc remplace `speechSynthesis` par un double qui enregistre les énoncés. La limite affichée sous le bouton dit seulement ce que le dispositif ne peut pas garantir ; elle ne prouve aucune amélioration de compréhension, et les chiffres d'effet cités viennent d'études scolaires anglophones.
+
+**Suite.** Faire écouter la fonction à une personne qui lit difficilement et à une personne utilisant un lecteur d'écran, puis consigner les mots mal prononcés ; retirer le lot si la voix perd le fil ou si un bloc est lu deux fois.
+
+Initiatives liées : `ecouter-la-page`.
 
 ## 3. Ce que ce registre ne dit pas
 
