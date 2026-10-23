@@ -942,6 +942,58 @@ async function main() {
       // panne, l'état ne doit pas basculer sur le message d'échec.
       assert.equal(arret.statut, 'Lecture arrêtée.');
 
+      // Un contenu replié n'est pas lu : sur `apprendre.html`, la liste de
+      // couverture vit dans quinze `<details>` fermés. Leur contenu garde une
+      // boîte dans Chromium, d'où la vérification explicite de visibilité.
+      await ouvrirPageSite(page, 'apprendre.html');
+      await page.evaluate(() => {
+        window.__lus = [];
+        const fausse = {
+          speak(e) {
+            window.__lus.push(e.text);
+            setTimeout(() => e.onend && e.onend(), 0);
+          },
+          cancel() {}, pause() {}, resume() {},
+        };
+        Object.defineProperty(window, 'speechSynthesis', { value: fausse, configurable: true });
+      });
+      await ouvrirPersonnalisation(page);
+      const lireTout = async (ouvrir) => {
+        await page.evaluate((ouvert) => {
+          document.querySelectorAll('details.learning-coverage-domain').forEach((details) => {
+            details.open = ouvert;
+          });
+          window.__lus = [];
+          document.querySelector('[data-read-aloud-status]').textContent = '';
+          const commande = document.querySelector('[data-read-aloud-toggle]');
+          if (commande.textContent.trim() !== 'Lire à voix haute') commande.click();
+          commande.click();
+        }, ouvrir);
+        await page.waitForFunction(
+          () => document.querySelector('[data-read-aloud-status]').textContent.includes('terminée'),
+          { timeout: 120000 },
+        );
+        return page.evaluate(() => ({
+          total: window.__lus.length,
+          repliees: window.__lus.filter((texte) => /^Fiche\(s\)/.test(texte)).length,
+        }));
+      };
+      const listeFermee = await lireTout(false);
+      assert.equal(listeFermee.repliees, 0, `un contenu replié ne doit pas être lu : ${listeFermee.total} segments`);
+      assert.ok(listeFermee.total > 100, `la page doit produire une longue lecture : ${listeFermee.total}`);
+      const ouverts = await lireTout(true);
+      assert.ok(
+        ouverts.repliees >= 20,
+        `une fois la liste ouverte, ses liens doivent être lus : ${JSON.stringify(ouverts)}`,
+      );
+      await page.evaluate(() => {
+        const commande = document.querySelector('[data-read-aloud-toggle]');
+        if (commande.textContent.trim() === 'Arrêter') commande.click();
+        document.querySelectorAll('details.learning-coverage-domain').forEach((details) => {
+          details.open = false;
+        });
+      });
+
       // La langue des répliques anglaises des Mondes est respectée.
       await ouvrirPageSite(page, 'anglais-aventure.html');
       await page.waitForSelector('[data-mission-id="gare"]');

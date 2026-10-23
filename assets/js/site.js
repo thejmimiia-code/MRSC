@@ -369,18 +369,32 @@
     return normaliserTexte(brut);
   };
 
+  // Quatre façons d'être invisible, mesurées dans Chromium le 24 octobre 2026 :
+  //   display: none        → texte lisible, boîte vide ;
+  //   visibility: hidden   → boîte non vide, texte vide ;
+  //   <details> refermé    → boîte non vide, texte vide ;
+  //   aria-hidden="true"   → visible pour l'œil, à écarter à la main.
+  // Une seule de ces mesures ne suffit donc pas : `checkVisibility` tranche les
+  // trois cas visuels d'un coup, `getClientRects` et `innerText` restent en
+  // secours pour les moteurs qui ne l'ont pas.
+  const estAffiche = (element) => {
+    if (typeof element.checkVisibility === "function"
+      && !element.checkVisibility({ checkVisibilityCSS: true, contentVisibilityAuto: true })) {
+      return false;
+    }
+    if (!element.getClientRects().length) return false;
+    return normaliserTexte(texteLisible(element)).length > 0;
+  };
+
   const blocsLisibles = () => {
     const racine = document.querySelector("main") || document.body;
     return Array.from(racine.querySelectorAll(SELECTEUR_LECTURE))
       .filter((element) => {
-        // `getClientRects` vide couvre d'un coup `hidden`, `display: none` et un
-        // `<details>` refermé : rien de ce qui n'est pas à l'écran n'est lu.
-        if (!element.getClientRects().length) return false;
+        if (!estAffiche(element)) return false;
         if (element.closest("[aria-hidden='true'], .visually-hidden, script, style, nav, footer")) return false;
         // Un bloc qui en contient d'autres est écarté : sinon son texte serait lu
         // deux fois (une liste qui contient des paragraphes, par exemple).
-        if (element.querySelector(SELECTEUR_LECTURE)) return false;
-        return texteLisible(element).length > 0;
+        return !element.querySelector(SELECTEUR_LECTURE);
       });
   };
 

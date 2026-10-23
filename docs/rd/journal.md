@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-23 — Les critères WCAG 2.2 mesurés avant le RGAA 5
+
+- **Initiative :** `optimisation-du-site` et `ecouter-la-page`. Le RGAA 5, aligné sur WCAG 2.2, est annoncé pour la fin 2026 : deux critères AA n'existaient pas dans la version travaillée jusqu'ici — taille des cibles (`2.5.8`) et focus non masqué (`2.4.11`).
+- **Outil :** `outils/auditer-criteres-22.mjs`, hors CI (il demande Chromium). Trois états : conforme, exception prévue par le critère, à corriger. Il relève toutes les cibles d'une page, écarte celles qui sont dans une phrase et celles qui sont assez espacées, puis porte le focus sur un échantillon pour vérifier qu'aucun bandeau collant ne le recouvre entièrement.
+- **Résultat, site entier :** 98 pages × 390 et 1 280 px — **5 654 cibles conformes, 900 en ligne (exception), 2 304 espacées (exception), 0 à corriger**. Focus : **825 éléments testés sur huit pages, 0 entièrement masqué**.
+- **Avant correction, 12 défauts réels**, tous dans le pied de page à 390 px : « Contact » 49 × 19, « Haut de page » 86 × 19, « Licence » 48 × 19. Les liens légaux passent à 24 px de haut (`inline-flex` + `min-height`), l'écart vertical du bloc reprenant la hauteur gagnée : pied de page à **430 px** à 1 440 px (425 avant), écart de centrage **0 px** sur chaque ligne, aucun débordement. `.footer-legal a` entre dans les `CIBLES` du contrôle statique ; `min-height` retiré ⇒ contrôle en échec.
+- **Défaut trouvé dans le lot de la veille :** le premier balayage signalait 50 cibles de 15 px sur `apprendre.html`. C'étaient des liens dans des `<details>` **fermés** : Chromium leur donne une boîte non nulle. La lecture à voix haute livrée le 23 octobre s'appuyait sur `getClientRects`, insuffisant pour ce cas ; elle aurait pu lire un contenu que personne ne voit. Quatre cas mesurés : `display:none` (texte présent, boîte vide), `visibility:hidden` (texte vide, boîte non vide), `<details>` fermé (texte vide, boîte non vide), `aria-hidden` (visible pour l'œil). Aucune mesure seule ne suffit : le filtre vérifie désormais `checkVisibility`, garde `getClientRects` et `innerText` en secours et écarte `aria-hidden` à part.
+- **Essai navigateur ajouté :** sur `apprendre.html`, la liste de couverture n'est pas lue quand elle est fermée (449 segments, 0 « Fiche(s) ») et l'est quand elle est ouverte (564 segments, 82). **9/9 essais**.
+- **Protocole :** § 6 nonies de [`formats-affichage.md`](formats-affichage.md) ; note [`inclusion-criteres-wcag-22.md`](inclusion-criteres-wcag-22.md).
+- **Limite :** deux critères mesurés ne font pas un audit ; une géométrie ne dit rien de la difficulté réelle à viser une cible ; l'échantillon de focus s'arrête à 60 cibles par page et à huit pages ; aucune personne n'a relu ces critères.
+- **Prochaine action :** rejouer la mesure à la publication du RGAA 5, puis faire relire les deux critères par un rôle accessibilité.
+
 ## 2026-10-23 — « Écouter la page » : l’inclusion comme recherche, pas comme conformité
 
 - **Initiative :** `ecouter-la-page` (nouvelle, `prototype` / `a-valider`). Demande : « continue la R et D, l’innovation et la prospective pour que le site soit inclusif ».

@@ -1429,7 +1429,9 @@ html.contraste-renforce .resource-scope-note {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: .3rem 1.1rem;
+  /* L'écart vertical passe de 0,3 rem à zéro : la hauteur gagnée par les cibles
+     de 24 px (ci-dessous) est reprise ici, le bloc du bas ne grandit pas. */
+  gap: 0 1.1rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1440,7 +1442,13 @@ html.contraste-renforce .resource-scope-note {
   align-items: center;
 }
 
+/* Cible d'au moins 24 px de haut (WCAG 2.2, 2.5.8) : un lien de 19 px de haut,
+   posé sur deux lignes à 390 px, se rate au doigt. La largeur reste celle du
+   texte ; seules les zones de contact verticales changent. */
 .footer-legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   color: var(--on-navy-text-soft);
   text-decoration: none;
   white-space: nowrap;
