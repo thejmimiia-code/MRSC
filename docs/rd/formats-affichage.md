@@ -159,6 +159,61 @@ Deux conséquences pour cette porte :
 Détail des mesures, des quatre mutations détectées et des deux qui ne le sont pas :
 § 4.2 sexies de [`poids-et-sobriete-numerique.md`](poids-et-sobriete-numerique.md).
 
+## 6 quater. Le menu du téléphone : cinq commandes, deux rangées, un panneau borné (23 octobre 2026)
+
+Le menu ouvert en mode smartphone a été mesuré page par page, panneau ouvert, à
+320, 360, 390 et 430 px, puis en paysage (844 × 390) et sur tablette (768 × 1024).
+Quatre défauts sont sortis de la mesure, dont un bloquant.
+
+| Défaut | Mesure avant | Correction |
+| --- | --- | --- |
+| Liens inatteignables en paysage | panneau de **472 px** commençant à 49 px, donc bas à **522 px** pour un écran de 390 px ; `overflow: visible` | plafond `calc(100dvh - var(--hauteur-entete))` + `overflow-y: auto` |
+| Contenu sorti par le haut | `justify-content: center` sur un conteneur défilable : « Accueil » à **y = 10** pour un panneau à 51 | `justify-content: safe center` (repli `flex-start`) |
+| Commandes de 24 px | cinq boutons de 24 px de haut, empilés en deux ou trois rangées irrégulières | **44 px** dans toute la portée compacte, grille `auto-fit` sous 520 px |
+| Libellés coupés | « Parcour / s », « Affichag / e », « Présent / ation » (`overflow-wrap: anywhere`) | deux colonnes pleines, `overflow-wrap: normal`, « Présentation » sur toute la largeur |
+
+- **Le plancher tactile du site ne change pas** : `PLANCHER_CIBLE_PX` reste à
+  24 px (WCAG 2.2, 2.5.8) pour les liens et les autres cibles. Les cinq commandes
+  de l'en-tête compact ont leur propre plancher, `PLANCHER_COMMANDES_ENTETE_PX = 44`,
+  parce qu'elles se touchent au pouce sans visée.
+- **La hauteur de l'en-tête est mesurée, pas supposée.** Elle varie avec le logo,
+  le cran de texte (217 px à 320 px et 130 %) et le mode compact. `site.js`
+  publie `--hauteur-entete` au chargement puis sur chaque `ResizeObserver` :
+  une constante en `rem` laissait le panneau déborder de 47 px au cran 130 %.
+- **La grille se replie au lieu de déborder.** `repeat(auto-fit, minmax(min(100px, 100%), 1fr))` :
+  deux colonnes dès que la place le permet, une seule sous 100 px de colonne. Sous
+  300 px de fenêtre, l'en-tête prend toute la largeur, sans quoi « Agrandir »
+  (43,6 px de texte) ne tenait pas dans une colonne de 42,8 px.
+- **Le panneau rejoint les bords** : sa largeur explicite annulait l'étirement
+  par `left`/`right`, et il s'arrêtait 16 px avant le bord droit ; il s'arrêtait
+  aussi à 8 ou 24 px des côtés à cause de la gouttière de `.nav-inner`, désormais
+  calculée (`calc((100vw - 100%) / -2)`) au lieu d'être devinée.
+
+Mesure après correction (Chromium sans interface, panneau ouvert) :
+
+| Profil | Panneau (x, y, l, h) | Bas ≤ écran | Commandes |
+| --- | --- | --- | --- |
+| 320 × 568 @2 | 0, 149, 320, 411 | 560 ≤ 568 | 2 + 2 + 1 pleine largeur, 44 px |
+| 390 × 780 @3 | 0, 149, 390, 472 | 621 ≤ 780 | 44 px, libellés entiers |
+| 430 × 900 @3 | 0, 149, 430, 472 | 621 ≤ 900 | 44 px |
+| 844 × 390 @3 (paysage) | 0, 51, 844, 331 | 382 ≤ 390 | une rangée, 44 px |
+| 768 × 1024 @2 | 8, 192, 752, 472 | 664 ≤ 1024 | cinq boutons de 44 px |
+
+Aucun débordement horizontal, aucun lien hors du cadre, aucune commande sous
+44 px, à tous les crans de texte (100 % et 130 %).
+
+Le garde-fou `controler_panneau_du_menu` (11ᵉ contrôle de
+[`verifier-affichages.py`](../../outils/verifier-affichages.py)) exige, dans une
+même règle, le défilement interne, le plafond en `dvh` et le centrage `safe`, la
+publication de `--hauteur-entete` (avec mesure initiale et `ResizeObserver`) et
+la grille `auto-fit`. Sept mutations rejouées : défilement retiré, plafond
+remplacé par une constante, `safe center` retiré, grille à une colonne,
+publication renommée, `ResizeObserver` retiré, mesure initiale retirée — les sept
+sont détectées, fichiers restaurés à l'identique.
+
+Limite : la mesure est celle d'un Chromium sans interface, pas d'un téléphone
+réel ; les captures ont été relues à 320, 390 et 844 px.
+
 ## 7. Ce qui n'est pas couvert
 - **Police réelle.** La mesure utilise les polices installées dans
   l'environnement de mesure ; une police de substitution peut changer les

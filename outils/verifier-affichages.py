@@ -31,6 +31,11 @@ PLANCHER_TEXTE_REM = 0.75  # 12 px à 16 px de base
 PLANCHER_CIBLE_PX = 24  # WCAG 2.2, 2.5.8
 
 
+# Les cinq commandes de l'en-tête compact sont plus exigeantes : elles se
+# touchent au pouce, sans visée, et se serraient à 24 px sur téléphone.
+PLANCHER_COMMANDES_ENTETE_PX = 44
+
+
 CRAN_LE_PLUS_REDUIT = 0.75  # le plus petit réglage de taille de texte du site
 
 
@@ -156,7 +161,7 @@ def controler_cibles_tactiles() -> list[str]:
 
 
 def controler_en_tete_compact() -> list[str]:
-    """L'en-tête compact ne doit pas rapetisser ses commandes sous 24 px."""
+    """L'en-tête compact ne doit pas rapetisser ses commandes sous 44 px."""
     texte = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
     # Seules les règles qui visent les commandes elles-mêmes comptent : le
     # conteneur de l'en-tête, lui, a le droit d'avoir min-height: 0. La dernière
@@ -179,11 +184,11 @@ def controler_en_tete_compact() -> list[str]:
             hauteur = float(valeur.group(1))
             if (valeur.group(2) or "") == "rem":
                 hauteur *= 16
-            if hauteur < PLANCHER_CIBLE_PX:
+            if hauteur < PLANCHER_COMMANDES_ENTETE_PX:
                 ligne = numero_ligne(texte, correspondance.start())
                 erreurs.append(
                     f"site.css:{ligne} — commande de l'en-tête compact ramenée à "
-                    f"min-height: {hauteur:g}px au lieu de {PLANCHER_CIBLE_PX}px"
+                    f"min-height: {hauteur:g}px au lieu de {PLANCHER_COMMANDES_ENTETE_PX}px"
                 )
     if vues == 0:
         erreurs.append("site.css — aucune min-height déclarée sur les commandes de l'en-tête compact")
@@ -367,10 +372,88 @@ def controler_qualite_d_encodage() -> list[str]:
     return erreurs
 
 
+def controler_panneau_du_menu() -> list[str]:
+    """Le panneau du menu doit rester atteignable sur un écran court.
+
+    Le 23 octobre 2026, en paysage sur téléphone (844 × 390), le panneau partait
+    de `top: 100%` sans plafond : il descendait à 522 px sur un écran de 390 px,
+    et les derniers liens étaient hors d'atteinte. Trois protections doivent
+    rester dans la même règle, faute de quoi le défaut revient silencieusement :
+    un plafond mesuré, un défilement interne et un centrage qui ne pousse rien
+    hors du cadre.
+    """
+    erreurs: list[str] = []
+    texte = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+    panneaux = [
+        corps for corps in blocs_de(texte, ".has-js .nav-links")
+        if "overflow-y: auto" in corps
+    ]
+    if not panneaux:
+        erreurs.append(
+            "site.css — le panneau du menu n'a plus de défilement interne "
+            "(overflow-y: auto) : sur un écran court, ses derniers liens sortent de l'écran"
+        )
+    else:
+        # Une seule règle doit réunir les trois protections : réparties sur deux
+        # blocs, l'une des deux peut disparaître sans que l'autre s'en aperçoive.
+        proteges = [
+            corps for corps in panneaux
+            if "100dvh - var(--hauteur-entete" in corps
+            and "justify-content: safe center" in corps
+        ]
+        if not proteges:
+            corps = "\n".join(panneaux)
+            if "100dvh - var(--hauteur-entete" not in corps:
+                erreurs.append(
+                    "site.css — le panneau du menu n'est plus plafonné à la place "
+                    "restante sous l'en-tête (calc(100dvh - var(--hauteur-entete)))"
+                )
+            if "justify-content: safe center" not in corps:
+                erreurs.append(
+                    "site.css — le panneau défilable centre de nouveau ses liens : le "
+                    "premier lien sort par le haut et devient inatteignable "
+                    "(justify-content: safe center)"
+                )
+    # La hauteur de l'en-tête varie (logo, cran de texte, paysage) : elle doit être
+    # mesurée, pas devinée par une constante.
+    script = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+    if "--hauteur-entete" not in script:
+        erreurs.append(
+            "site.js — la hauteur de l'en-tête n'est plus publiée dans --hauteur-entete : "
+            "le plafond du panneau ne suit plus le cran de texte ni le mode compact"
+        )
+    elif ".observe(header)" not in script:
+        erreurs.append(
+            "site.js — --hauteur-entete n'est plus remis à jour (ResizeObserver absent) : "
+            "il se figerait à la hauteur du premier rendu"
+        )
+    elif "publierHauteurEntete();" not in script:
+        erreurs.append(
+            "site.js — --hauteur-entete n'est pas mesuré au chargement : le premier "
+            "affichage garderait la valeur de repli de la feuille de style"
+        )
+    # Les cinq commandes de l'en-tête compact se répartissent en deux colonnes
+    # pleines sous 520 px : deux commandes, puis les réglages.
+    grille = [
+        corps for corps in blocs_de(
+            texte, "html.has-js .site-header.is-compact .header-compact-tools"
+        )
+        if "display: grid" in corps
+        and "repeat(auto-fit, minmax(min(100px, 100%), 1fr))" in corps
+    ]
+    if not grille:
+        erreurs.append(
+            "site.css — les commandes de l'en-tête compact ne sont plus en grille de "
+            "deux colonnes sous 520 px : elles se cassent en mots (« Parcour/s »)"
+        )
+    return erreurs
+
+
 CONTROLES = (
     ("tailles de texte", controler_tailles_de_texte),
     ("cibles tactiles", controler_cibles_tactiles),
     ("en-tête compact", controler_en_tete_compact),
+    ("panneau du menu", controler_panneau_du_menu),
     ("mesure de lecture", controler_mesure_de_lecture),
     ("plafonds d'images par densité", controler_plafonds_d_images),
     ("pistes de grille", controler_pistes_de_grille),
@@ -402,6 +485,7 @@ def main() -> int:
     print(
         f"\nAffichage : les {len(CONTROLES)} garde-fous des formats d’écran sont en place "
         f"(texte ≥ {PLANCHER_TEXTE_REM}rem, cibles ≥ {PLANCHER_CIBLE_PX}px, "
+        f"commandes d’en-tête ≥ {PLANCHER_COMMANDES_ENTETE_PX}px, "
         "plafonds d’image par densité, mesure de lecture)."
     )
     return 0

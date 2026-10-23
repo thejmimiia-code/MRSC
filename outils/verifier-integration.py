@@ -719,7 +719,8 @@ def fichiers_du_site() -> None:
         and "MutationObserver" in test_experience
         and "assert.equal(cadreAgrandir720, cadreReduire720" in test_experience
         and "controlesBarre.every((element) => element.flexShrink === '0')" in test_experience
-        and "assert.equal(etat.cadreLargeur, 100" in test_experience
+        and "chaque commande occupe une demi-largeur de la grille" in test_experience
+        and "le cadre compact revient identique après un aller-retour" in test_experience
         and "assert.equal(etat.lignes, 1" in test_experience
         and "cadreEtTexte.lignesTexte.every" in test_experience
         and "cadreEtTexte.scrollWidth <= cadreEtTexte.largeur" in test_experience,
