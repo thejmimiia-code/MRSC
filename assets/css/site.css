@@ -4516,9 +4516,10 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
   }
   html.has-js .site-header.is-compact .header-compact-tools {
     display: grid;
-    /* `auto-fit` sous 100 px de colonne repasse à une seule colonne : à 70 px de
-       fenêtre, deux colonnes donnaient des boutons de 19 px. */
-    grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));
+    /* Deux colonnes, pas davantage : `auto-fit` en ouvrait trois à 430 px et
+       quatre à 520 px, et la cinquième commande laissait un trou à côté
+       d'« Affichage ». Une seule colonne sous 300 px (voir plus bas). */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
     gap: .22rem;
     flex: 1 1 auto;
@@ -4526,6 +4527,16 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
        comprimer les commandes à côté du logo (à 70 px, elles tombaient à 42 px
        et le libellé débordait). */
     min-width: min(100%, 210px);
+  }
+  /* Sur téléphone, les cinq commandes passent à 32 px : 44 px pesaient 149 px
+     d'en-tête, 36 px encore 122 px. À 32 px il reste 10 px au-dessus et
+     au-dessous d'un libellé de 12 px, et 8 px au-dessus du minimum WCAG. Les
+     autres formats compacts (paysage, tablette) gardent 36 px. */
+  html.has-js .site-header.is-compact .nav-toggle,
+  html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
+  html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
+    min-height: 32px;
+    padding-block: .12rem;
   }
   /* La dernière commande occupe toute la largeur restante, pour ne pas laisser
      de trou sous un nombre impair de commandes. */
@@ -4564,5 +4575,10 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
   html.has-js .site-header.is-compact .nav-inner {
     width: 100%;
     padding-inline: max(2px, .2rem);
+  }
+  /* Une seule colonne : à 70 px de fenêtre, deux colonnes donnaient des boutons
+     de 19 px et le libellé débordait de son cadre. */
+  html.has-js .site-header.is-compact .header-compact-tools {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

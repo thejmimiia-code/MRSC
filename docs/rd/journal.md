@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-23 — Sur téléphone, les commandes du menu passent à 32 px
+
+- **Initiative :** `optimisation-du-site`. Troisième passage du même jour, sur demande : « modifie la taille des boutons du menu smartphone », précisée « smartphones en mode comprimé ».
+- **Périmètre retenu :** les cinq commandes de l’en-tête compact **sur téléphone** (≤ 520 px). Les autres formats compacts — paysage court et tablette compacte — gardent 36 px, et la tablette non compacte ses 44 px.
+- **Décision :** `PLANCHER_COMMANDES_ENTETE_PX` passe de 36 à **32 px**, valeur plancher du contrôle : 32 px laisse 10 px au-dessus et au-dessous d’un libellé de 12 px et reste **8 px au-dessus du minimum WCAG** (24 px, 2.5.8). Le plancher de contrôle empêche un retour discret aux 24 px d’origine.
+- **Défaut trouvé en route :** la grille `auto-fit` ouvrait trois colonnes à 430 px et quatre à 520 px ; la cinquième commande laissait alors un trou à côté d’« Affichage ». La grille est fixée à **deux colonnes** (`repeat(2, minmax(0, 1fr))`), avec un repli explicite à une colonne sous 300 px — sans lui, deux colonnes de 19 px à 70 px de fenêtre.
+- **Résultat mesuré (Chromium sans interface, panneau ouvert) :** en-tête **149 → 122 → 110 px** à 320, 360, 390, 430 et 520 px ; commandes à 32 px ; panneau bas à 537 px pour 568, et toujours sous la ligne de flottaison ; aucun libellé coupé, aucun débordement horizontal, à 100 % comme à 130 % de texte (l’en-tête y mesure 114 à 178 px selon la largeur).
+- **Garde-fous :** le contrôle de la grille exige désormais deux colonnes, la dernière commande en pleine largeur (`grid-column: 1 / -1`) **et** le repli à une colonne du palier 300 px. Mutations rejouées : commande à 24 px, commande à 20 px, grille sans repli, dernière commande non pleine largeur — toutes détectées, fichiers restaurés à l’identique. Les essais navigateur passent leurs planchers à 32 px et restent **8/8**.
+- **Protocole :** § 6 quater de [`formats-affichage.md`](formats-affichage.md).
+- **Limite :** mesure d’un Chromium sans interface ; 32 px reste au-dessus du minimum, mais le rendu n’a pas été revu sur un téléphone réel.
+- **Prochaine action :** faire confirmer le rendu sur téléphone réel ; si 32 px est encore trop massif, le palier suivant est 28 px — toujours au-dessus de 24 px.
+
 ## 2026-10-23 — Les commandes du menu redescendent à 36 px
 
 - **Initiative :** `optimisation-du-site`. Retour d’usage sur la PR #173 : « il faut réduire pour avoir un entre-deux, là les boutons sont trop gros », capture à l’appui.

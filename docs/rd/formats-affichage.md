@@ -169,25 +169,29 @@ Quatre défauts sont sortis de la mesure, dont un bloquant.
 | --- | --- | --- |
 | Liens inatteignables en paysage | panneau de **472 px** commençant à 49 px, donc bas à **522 px** pour un écran de 390 px ; `overflow: visible` | plafond `calc(100dvh - var(--hauteur-entete))` + `overflow-y: auto` |
 | Contenu sorti par le haut | `justify-content: center` sur un conteneur défilable : « Accueil » à **y = 10** pour un panneau à 51 | `justify-content: safe center` (repli `flex-start`) |
-| Commandes de 24 px | cinq boutons de 24 px de haut, empilés en deux ou trois rangées irrégulières | **36 px** dans toute la portée compacte, grille `auto-fit` sous 520 px |
+| Commandes de 24 px | cinq boutons de 24 px de haut, empilés en deux ou trois rangées irrégulières | **32 px** sur téléphone, **36 px** sur les autres formats compacts, deux colonnes pleines |
 | Libellés coupés | « Parcour / s », « Affichag / e », « Présent / ation » (`overflow-wrap: anywhere`) | deux colonnes pleines, `overflow-wrap: normal`, « Présentation » sur toute la largeur |
 
 - **Le plancher tactile du site ne change pas** : `PLANCHER_CIBLE_PX` reste à
   24 px (WCAG 2.2, 2.5.8) pour les liens et les autres cibles. Les cinq commandes
-  de l'en-tête compact ont leur propre plancher, `PLANCHER_COMMANDES_ENTETE_PX = 36`,
-  parce qu'elles se touchent au pouce sans visée. Ce plancher a d'abord été posé
-  à 44 px le même jour ; sur retour d'usage (« les boutons sont trop gros »), il
-  est redescendu à 36 px : la grille de trois rangées pesait alors 149 px d'en-tête
-  à 320 px de large, contre 122 px. À 36 px, le bouton garde 12 px de marge autour
-  d'un libellé de 12 px et reste très au-dessus du minimum WCAG.
+  de l'en-tête compact ont leur propre plancher, `PLANCHER_COMMANDES_ENTETE_PX = 32`,
+  parce qu'elles se touchent au pouce sans visée. Trois passages le même jour :
+  44 px d'abord, jugés trop lourds (149 px d'en-tête sur un écran de 640), puis
+  36 px, puis **32 px sur téléphone** sur nouvelle demande — les autres formats
+  compacts (paysage court, tablette compacte) restent à 36 px. À 32 px, le bouton
+  garde 10 px au-dessus et au-dessous d'un libellé de 12 px, et **8 px au-dessus
+  du minimum WCAG** : le plancher du contrôle est 32 px, donc un retour aux 24 px
+  d'origine échoue.
 - **La hauteur de l'en-tête est mesurée, pas supposée.** Elle varie avec le logo,
   le cran de texte (217 px à 320 px et 130 %) et le mode compact. `site.js`
   publie `--hauteur-entete` au chargement puis sur chaque `ResizeObserver` :
   une constante en `rem` laissait le panneau déborder de 47 px au cran 130 %.
-- **La grille se replie au lieu de déborder.** `repeat(auto-fit, minmax(min(100px, 100%), 1fr))` :
-  deux colonnes dès que la place le permet, une seule sous 100 px de colonne. Sous
-  300 px de fenêtre, l'en-tête prend toute la largeur, sans quoi « Agrandir »
-  (43,6 px de texte) ne tenait pas dans une colonne de 42,8 px.
+- **Deux colonnes, pas davantage.** `auto-fit` en ouvrait trois à 430 px et
+  quatre à 520 px : la cinquième commande laissait alors un trou à côté
+  d'« Affichage ». La grille est fixée à `repeat(2, minmax(0, 1fr))`, avec un
+  repli explicite à une colonne sous 300 px, et l'en-tête y prend toute la largeur
+  (sans quoi « Agrandir », 43,6 px de texte, ne tenait pas dans une colonne de
+  42,8 px).
 - **Le panneau rejoint les bords** : sa largeur explicite annulait l'étirement
   par `left`/`right`, et il s'arrêtait 16 px avant le bord droit ; il s'arrêtait
   aussi à 8 ou 24 px des côtés à cause de la gouttière de `.nav-inner`, désormais
@@ -197,23 +201,27 @@ Mesure après correction (Chromium sans interface, panneau ouvert) :
 
 | Profil | Panneau (x, y, l, h) | Bas ≤ écran | Commandes |
 | --- | --- | --- | --- |
-| 320 × 568 @2 | 0, 122, 320, 411 | 560 ≤ 568 | 2 + 2 + 1 pleine largeur, 36 px |
-| 390 × 780 @3 | 0, 122, 390, 472 | 621 ≤ 780 | 36 px, libellés entiers |
-| 430 × 900 @3 | 0, 122, 430, 472 | 621 ≤ 900 | 36 px |
+| 320 × 568 @2 | 0, 110, 320, 427 | 537 ≤ 568 | 2 + 2 + 1 pleine largeur, 32 px |
+| 390 × 780 @3 | 0, 110, 390, 427 | 537 ≤ 780 | 32 px, libellés entiers |
+| 430 × 900 @3 | 0, 110, 430, 427 | 537 ≤ 900 | 32 px |
 | 844 × 390 @3 (paysage) | 0, 49, 844, 331 | 380 ≤ 390 | une rangée, 36 px |
 | 768 × 1024 @2 | 8, 192, 752, 472 | 664 ≤ 1024 | cinq boutons de 44 px (en-tête non compact) |
 
 Aucun débordement horizontal, aucun lien hors du cadre, aucune commande sous
-36 px dans la portée compacte, à tous les crans de texte (100 % et 130 %).
+32 px sur téléphone ni sous 36 px ailleurs en compact, à tous les crans de texte
+(100 % et 130 %). L'en-tête passe de 149 px (44 px) à 122 px (36 px) puis
+**110 px** (32 px) sur les trois profils de téléphone.
 
 Le garde-fou `controler_panneau_du_menu` (11ᵉ contrôle de
 [`verifier-affichages.py`](../../outils/verifier-affichages.py)) exige, dans une
 même règle, le défilement interne, le plafond en `dvh` et le centrage `safe`, la
 publication de `--hauteur-entete` (avec mesure initiale et `ResizeObserver`) et
-la grille `auto-fit`. Sept mutations rejouées : défilement retiré, plafond
-remplacé par une constante, `safe center` retiré, grille à une colonne,
-publication renommée, `ResizeObserver` retiré, mesure initiale retirée — les sept
-sont détectées, fichiers restaurés à l'identique.
+la grille à deux colonnes, la dernière commande en pleine largeur et le repli à
+une colonne sous 300 px. Mutations rejouées : défilement retiré, plafond remplacé
+par une constante, `safe center` retiré, grille sans repli, dernière commande non
+pleine largeur, publication renommée, `ResizeObserver` retiré, mesure initiale
+retirée, commande ramenée à 24 px puis à 20 px — **toutes détectées**, fichiers
+restaurés à l'identique.
 
 Limite : la mesure est celle d'un Chromium sans interface, pas d'un téléphone
 réel ; les captures ont été relues à 320, 390 et 844 px.

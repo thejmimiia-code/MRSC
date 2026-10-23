@@ -449,7 +449,7 @@ async function main() {
       assert.equal(etat.whiteSpace, 'normal');
       assert.equal(etat.overflowWrap, 'normal', 'les libellés ne se coupent plus en plein mot');
       assert.equal(etat.lignes, 1, 'à 240 px CSS, le libellé tient naturellement sur une ligne');
-      assert.ok(etat.width >= 36 && etat.scrollWidth <= etat.width, JSON.stringify(etat));
+      assert.ok(etat.width >= 32 && etat.scrollWidth <= etat.width, JSON.stringify(etat));
       assert.ok(etat.left >= 0 && etat.right <= 240, JSON.stringify(etat));
 
       await page.setViewport({ width: 70, height: 800, deviceScaleFactor: 1 });
@@ -482,7 +482,7 @@ async function main() {
         Math.round(cadreEtTexte.largeurOutils),
         JSON.stringify(cadreEtTexte)
       );
-      assert.ok(cadreEtTexte.hauteur >= 36, JSON.stringify(cadreEtTexte));
+      assert.ok(cadreEtTexte.hauteur >= 32, JSON.stringify(cadreEtTexte));
       assert.ok(cadreEtTexte.scrollWidth <= cadreEtTexte.largeur, JSON.stringify(cadreEtTexte));
       // Le libellé doit tenir dans le cadre : replié si besoin, sur une ligne quand
       // la place suffit. Ce qui compte, c'est qu'aucune ligne ne sorte.

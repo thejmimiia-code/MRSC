@@ -33,9 +33,10 @@ PLANCHER_CIBLE_PX = 24  # WCAG 2.2, 2.5.8
 
 # Les cinq commandes de l'en-tête compact sont plus exigeantes : elles se
 # touchent au pouce, sans visée, et se serraient à 24 px sur téléphone.
-# 36 px est le compromis retenu le 23 octobre 2026 après un premier passage
-# à 44 px, jugé trop lourd sur téléphone (149 px d'en-tête à 320 px de large).
-PLANCHER_COMMANDES_ENTETE_PX = 36
+# Le 23 octobre 2026, deux passages : 44 px d'abord (trop lourd : 149 px
+# d'en-tête sur téléphone), puis 32 px sur téléphone, 36 px ailleurs en compact.
+# Le plancher du contrôle vaut 32 px : c'est le minimum admis, pas la règle.
+PLANCHER_COMMANDES_ENTETE_PX = 32
 
 
 CRAN_LE_PLUS_REDUIT = 0.75  # le plus petit réglage de taille de texte du site
@@ -163,7 +164,7 @@ def controler_cibles_tactiles() -> list[str]:
 
 
 def controler_en_tete_compact() -> list[str]:
-    """L'en-tête compact ne doit pas rapetisser ses commandes sous 36 px."""
+    """L'en-tête compact ne doit pas rapetisser ses commandes sous 32 px."""
     texte = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
     # Seules les règles qui visent les commandes elles-mêmes comptent : le
     # conteneur de l'en-tête, lui, a le droit d'avoir min-height: 0. La dernière
@@ -441,7 +442,7 @@ def controler_panneau_du_menu() -> list[str]:
             texte, "html.has-js .site-header.is-compact .header-compact-tools"
         )
         if "display: grid" in corps
-        and "repeat(auto-fit, minmax(min(100px, 100%), 1fr))" in corps
+        and "repeat(2, minmax(0, 1fr))" in corps
     ]
     derniere = [
         corps for corps in blocs_de(
@@ -458,6 +459,19 @@ def controler_panneau_du_menu() -> list[str]:
         erreurs.append(
             "site.css — la dernière commande de l'en-tête compact n'occupe plus toute "
             "la largeur : un trou se rouvre sous un nombre impair de commandes"
+        )
+    # Sous 300 px, une seule colonne : deux colonnes de 19 px laissaient le libellé
+    # déborder de son cadre.
+    une_colonne = [
+        corps for corps in blocs_de(
+            texte, "html.has-js .site-header.is-compact .header-compact-tools"
+        )
+        if "grid-template-columns: minmax(0, 1fr)" in corps
+    ]
+    if not une_colonne:
+        erreurs.append(
+            "site.css — le repli à une colonne sous 300 px a disparu : les commandes "
+            "se compriment sous 50 px de large"
         )
     return erreurs
 
