@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-24 — Passer de la parallaxe à une scène réellement 3D
+
+- **Demande :** « il faut se débrouiller pour avoir de la 3D ». Ajout à l'atelier d'une scène WebGL de vrais volumes, sans prétendre avoir modélisé EVA.
+- **Choix :** moteur Three.js local et différé ; géométries originales de bureau, lampe, carnet et tasse. Palette cuivre/crème/rose, caméra manuelle ou animée. Écart du mannequin générique et du seul CSS comme réponse finale.
+- **Preuves :** 240 configurations sans débordement global, contrôles de caméra, pause, mouvement réduit, fermeture/réouverture et repli WebGL réussis. Statique, publication et intégration réussis. [Dossier, provenance et limites](atelier-vraie-3d-2026-10-24.md).
+- **Limites :** moteur de 670 681 octets bruts chargé après clic, densité plafonnée à 2× ; pas de performance GPU réelle mesurée ni de personnage articulé. Ce décor est une preuve technique, pas EVA en 3D achevée.
+- **Suite :** modèle GLB/glTF fidèle et articulé, droits vérifiés, validation face/profil/dos puis animations. Aucun modèle externe ou service de génération de personnage revendiqué.
+
 ## 2026-10-24 — Atelier public de mouvement 2,5D pour EVA
 
 - **Demande explicite :** tester des animations 2D simulant la 3D à partir de la palette de la planche EVA fournie, depuis Personnalisation. Page `animations.html`, sans appliquer ce style au reste du site ni modifier les logos.
