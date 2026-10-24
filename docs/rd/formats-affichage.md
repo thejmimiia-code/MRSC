@@ -74,7 +74,7 @@ cette mesure sont toujours présentes : plancher de texte, plancher de cible,
 mesure de lecture, plafonds d'image par densité, pistes de grille sans `1fr`
 nue, césure des mots longs, en-tête compact non rapetissé, densité du rendu 3D,
 qualité d'encodage des images (voir § 6 bis), décor du héros avec son repli
-(voir § 6 ter) et espacement du texte (voir § 6 decies).
+(voir § 6 ter) et espacement du texte (voir § 6 duodecies).
 
 Il ne remplace pas la mesure : il constate que ses appuis n'ont pas été
 retirés. **Sept mutations** — texte à `.72rem`, contact ramené à 23 px,
@@ -761,7 +761,7 @@ réel n'a été utilisé : les profils sont émulés dans un Chromium sans inter
   ont été relues, mais elles ne remplacent pas un contrôle à l'œil sur
   l'appareil.
 
-## 6 decies. Espacement du texte : ce que le critère 1.4.12 casse (24 octobre 2026)
+## 6 duodecies. Espacement du texte : ce que le critère 1.4.12 casse (24 octobre 2026)
 
 Le critère `1.4.12` (AA depuis WCAG 2.1) ne demande pas d'afficher un texte
 espacé : il demande de supporter qu'une personne impose elle-même **interligne
@@ -815,16 +815,62 @@ hors de portée. Une ellipse assortie d'un moyen de révéler le texte est admis
 par le critère : le dépôt n'en utilise aucune. Et rien ici ne remplace une
 lecture par une personne qui a réellement besoin de cet espacement.
 
+## 6 terdecies. « La passe clavier s'arrête après 60 à 90 tabulations » (24 octobre 2026)
+
+Ce défaut était noté dans la file sans avoir été reproduit. Il l'est : sur
+`index.html`, la tabulation s'arrête après la dernière entrée du pied de page,
+puis le focus passe dans les commandes du navigateur et la page ne répond plus.
+Le nombre d'arrêts avant cet arrêt correspond exactement au nombre de commandes
+**visibles** de la page — 60 sur l'accueil, 90 sur `transparence.html`, 37 sur
+une fiche — et non à un plafond caché.
+
+`outils/auditer-criteres-22.mjs --clavier` tranche en mesurant le critère `2.1.1`
+(niveau A) sur deux propriétés : chaque commande visible reçoit le focus **une
+fois**, et le parcours ne revient jamais sur un élément déjà vu, ce qui
+signalerait un piège au clavier.
+
+| Mesure | Portée | Résultat |
+| --- | --- | --- |
+| Commandes atteintes | `index.html`, `apprendre.html`, `anglais-aventure.html`, `transparence.html`, `ia-societe.html`, une fiche — 390 et 1 280 px | **0 commande oubliée**, aucune boucle : la passe se termine à la fin du document |
+| Passe complète | 98 pages × 390 et 1 280 px, 24 oct. 2026 (relevé : [`audit-clavier-2026-10-24.json`](audit-clavier-2026-10-24.json)) | **8 050 commandes visibles, 594 désactivées écartées, 0 jamais atteinte, 0 retour en arrière** |
+
+**Conclusion : ce n'est pas un piège, c'est la fin de la page.** Le navigateur
+sort ensuite le focus vers ses propres commandes — un comportement qu'une page
+ne peut pas changer, et que rien dans le site ne provoque.
+
+Deux pièges de mesure sont apparus en construisant cette passe, tous deux
+mesurés :
+
+1. **Le plafond de boucle.** Sur `anglais-aventure.html`, 331 commandes visibles
+   demandent 450 tabulations : la boucle plafonnée à `total + 5` s'arrêtait avant
+   la fin et faisait passer les onze derniers liens du pied de page pour
+   inaccessibles, sur `apprendre.html` aussi. La boucle ne s'arrête plus que sur
+   la fin du document ou un retour en arrière.
+2. **Le bouton désactivé.** Les deux boutons d'export du simulateur sont
+   visibles mais désactivés tant qu'aucune analyse n'a tourné : ils ne sont donc
+   pas tabulables, et ce n'est pas un oubli. Ils sont désormais écartés **et
+   comptés** — 594 sur le site.
+
+Deux mutations jouées, deux détectées : `tabindex="-1"` posé sur le lien
+« Nos statuts » ⇒ « commande jamais atteinte » ; un gestionnaire qui renvoie le
+focus au premier lien depuis « Boussole des savoirs » ⇒ « retour au tour 62 ».
+
+Limite : cette passe ne teste que la tabulation depuis le haut de page, panneaux
+fermés. Le menu mobile ouvert, le panneau de personnalisation ouvert, les
+raccourcis clavier, l'ordre logique de lecture et l'usage d'un lecteur d'écran ne
+sont pas couverts ; un élément peut aussi être atteint et rester inutilisable.
+
 ## 8. Refaire la mesure
 
 Le protocole complet est dans `outils/auditer-affichages.mjs` (facultatif, hors
 CI : il demande Chromium). Il rend un tableau par page et par format, avec les
 mêmes seuils que ceux décrits ici.
 
-Les trois critères WCAG se rejouent avec `outils/auditer-criteres-22.mjs`, qui a
-besoin d'un serveur local sur son port (`python3 -m http.server 4187`). Une passe
+Les critères WCAG se rejouent avec `outils/auditer-criteres-22.mjs`, qui a besoin
+d'un serveur local sur son port (`python3 -m http.server 4187`). Une passe
 complète — 98 pages × 390 et 1 280 px, taille des cibles, focus et espacement
 compris — dure une vingtaine de minutes ; `--sans-focus` ne mesure que la taille
-des cibles et l'espacement, `--sans-espacement` retire l'espacement, et
-`--pages` limite le périmètre. Le script écrit son relevé en JSON, comme
+des cibles et l'espacement, `--sans-espacement` retire l'espacement, `--clavier`
+ajoute la passe de tabulation (environ huit minutes de plus) et `--pages` limite
+le périmètre. Le script écrit son relevé en JSON, comme
 [`audit-criteres-22-2026-10-24.json`](audit-criteres-22-2026-10-24.json).

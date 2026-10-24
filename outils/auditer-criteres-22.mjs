@@ -14,7 +14,11 @@
  *     que son rectangle n'est pas entièrement recouvert par un bandeau collant ;
  *   - 1.4.12 : imposer l'espacement du critère (interligne 1,5, interlettrage
  *     0,12 em, espacement des mots 0,16 em, 2 em après chaque paragraphe) et
- *     chercher ce qui disparaît : défilement horizontal et texte rogné.
+ *     chercher ce qui disparaît : défilement horizontal et texte rogné ;
+ *   - 2.1.1 (avec `--clavier`) : tabuler depuis le début de la page jusqu'à la
+ *     fin du document, et vérifier deux choses — chaque commande visible reçoit
+ *     le focus une fois, et le parcours ne revient jamais en arrière, ce qui
+ *     signalerait un piège au clavier.
  *
  * Ce qu'il ne sait pas : l'espacement est vérifié comme une géométrie — un
  * texte rogné par un ancêtre en `overflow: hidden`, ou une page qui se met à
@@ -38,6 +42,7 @@
  *   node outils/auditer-criteres-22.mjs --largeurs 390,1280
  *   node outils/auditer-criteres-22.mjs --pages index.html apprendre.html
  *   node outils/auditer-criteres-22.mjs --focus 80      # plafond explicite
+ *   node outils/auditer-criteres-22.mjs --clavier      # ajoute la passe au clavier
  *   node outils/auditer-criteres-22.mjs --json rapport.json
  *
  * Prérequis : Chromium et puppeteer-core hors du dépôt (voir
@@ -287,6 +292,80 @@ async function mesurerEspacement(page) {
   return resultat;
 }
 
+const LISTE_TABULABLE = 'a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])';
+
+// Repérage des commandes visibles, exécuté dans la page. Même filtre que la
+// lecture à voix haute : `getBoundingClientRect` seul laisse passer le contenu
+// d'un `<details>` refermé, que Chromium dote d'une boîte non nulle.
+const COMMANDES_VISIBLES = (selecteur) => {
+  const tous = [...document.querySelectorAll(selecteur)];
+  const desactivees = tous.filter((element) => element.disabled || element.closest('[inert]'));
+  const visibles = tous.filter((element) => {
+    const boite = element.getBoundingClientRect();
+    if (!boite.width || !boite.height) return false;
+    if (typeof element.checkVisibility === 'function'
+      && !element.checkVisibility({ checkVisibilityCSS: true, contentVisibilityAuto: true })) return false;
+    if (element.closest('details:not([open])')) return false;
+    // Un bouton désactivé est visible et hors de l'ordre de tabulation : c'est
+    // son état, pas un oubli. Le 24 octobre 2026, les deux boutons d'export du
+    // simulateur, désactivés tant qu'aucune analyse n'a tourné, passaient sinon
+    // pour des commandes inaccessibles. Le compte est publié à part.
+    return !element.disabled && !element.closest('[inert]');
+  });
+  window.__mrscCommandes = visibles;
+  window.__mrscVues = new WeakSet();
+  return { total: visibles.length, desactivees: desactivees.length };
+};
+
+const ETAT_DU_FOCUS = () => {
+  const actif = document.activeElement;
+  if (!actif || actif === document.body || actif === document.documentElement) return 'corps';
+  if (window.__mrscVues.has(actif)) return 'revu';
+  window.__mrscVues.add(actif);
+  return 'nouveau';
+};
+
+const COMMANDES_OUBLIEES = () => window.__mrscCommandes
+  .filter((element) => !window.__mrscVues.has(element))
+  .map((element) => ({
+    balise: element.tagName.toLowerCase(),
+    texte: (element.getAttribute('aria-label') || element.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 40),
+  }));
+
+// Passe au clavier du critère 2.1.1, mesurée le 24 octobre 2026 pour trancher
+// un défaut rapporté : « la passe clavier s'arrête après 60 à 90 tabulations ».
+// Sur six pages, aucune commande visible n'était sautée et aucun retour en
+// arrière n'apparaissait : la passe s'arrêtait à la fin du document, au nombre
+// exact de commandes de la page (60 sur l'accueil, 90 sur la transparence).
+// Ce n'était donc pas un piège, mais la fin de la page — un comportement du
+// navigateur, qui envoie ensuite le focus dans ses propres commandes.
+async function mesurerClavierSur(page) {
+  const { total, desactivees } = await page.evaluate(COMMANDES_VISIBLES, LISTE_TABULABLE);
+  const piege = null;
+  // Le nombre d'arrêts peut dépasser le nombre de commandes repérées au départ :
+  // sur `anglais-aventure.html`, 331 commandes visibles demandent 450
+  // tabulations. Plafonner à `total + 5` coupait la passe et faisait passer les
+  // dernières commandes pour inaccessibles — mesuré le 24 octobre 2026. La
+  // boucle ne s'arrête donc que sur la fin du document ou un retour en arrière.
+  for (let tour = 1; tour <= Math.max(total * 3, 200); tour += 1) {
+    await page.keyboard.press('Tab');
+    const etat = await page.evaluate(ETAT_DU_FOCUS);
+    if (etat === 'corps') break;
+    if (etat === 'revu') {
+      const commande = await page.evaluate(() => {
+        const actif = document.activeElement;
+        return {
+          balise: actif.tagName.toLowerCase(),
+          texte: (actif.getAttribute('aria-label') || actif.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 40),
+        };
+      });
+      return { total, desactivees, inaccessibles: [], piege: { tour, ...commande } };
+    }
+  }
+  const inaccessibles = await page.evaluate(COMMANDES_OUBLIEES);
+  return { total, desactivees, inaccessibles, piege };
+}
+
 async function main() {
   const arguments_ = process.argv.slice(2);
   const option = (nom, defaut) => {
@@ -304,6 +383,7 @@ async function main() {
   const maximumFocus = Number(option('focus', '500'));
   const mesurerLeFocus = !arguments_.includes('--sans-focus') && maximumFocus > 0;
   const mesurerEspacementActif = !arguments_.includes('--sans-espacement');
+  const mesurerClavier = arguments_.includes('--clavier');
 
   const { puppeteer, chromium } = modules();
   const navigateur = await puppeteer.launch({
@@ -319,6 +399,7 @@ async function main() {
     cibles: { conformes: 0, enLigne: 0, espacees: 0, aCorriger: [] },
     focus: { testees: 0, total: 0, coupees: [], masques: [] },
     espacement: { pages: 0, debordements: [], rognes: [] },
+    clavier: { pages: 0, elements: 0, desactivees: 0, inaccessibles: [], pieges: [] },
   };
   for (const page of pages) {
     for (const largeur of largeurs) {
@@ -350,6 +431,18 @@ async function main() {
         }
         if (espacement.nombreRognes) {
           bilan.espacement.rognes.push({ page, largeur, nombre: espacement.nombreRognes, exemples: espacement.rognes.slice(0, 3) });
+        }
+      }
+      if (mesurerClavier) {
+        const clavier = await mesurerClavierSur(onglet);
+        bilan.clavier.pages += 1;
+        bilan.clavier.elements += clavier.total;
+        bilan.clavier.desactivees += clavier.desactivees;
+        if (clavier.inaccessibles.length) {
+          bilan.clavier.inaccessibles.push({ page, largeur, elements: clavier.inaccessibles });
+        }
+        if (clavier.piege) {
+          bilan.clavier.pieges.push({ page, largeur, ...clavier.piege });
         }
       }
       if (mesurerLeFocus) {
@@ -416,6 +509,21 @@ async function main() {
     }
   } else {
     console.log('2.4.11 — non mesuré : le focus a été désactivé (--sans-focus) ou le plafond vaut 0.');
+  }
+  if (mesurerClavier) {
+    const { clavier } = bilan;
+    console.log(`2.1.1 — clavier : ${clavier.pages} relevés, ${clavier.elements} commandes visibles, `
+      + `${clavier.desactivees} désactivées écartées, `
+      + `${clavier.inaccessibles.length} page(s) avec une commande jamais atteinte, `
+      + `${clavier.pieges.length} page(s) avec un retour en arrière.`);
+    for (const oubli of clavier.inaccessibles.slice(0, 10)) {
+      console.log(`  oubliée — ${oubli.page} @${oubli.largeur} : ${oubli.elements.map((element) => `${element.balise} « ${element.texte} »`).join(' ; ')}`);
+    }
+    for (const piege of clavier.pieges.slice(0, 10)) {
+      console.log(`  piège — ${piege.page} @${piege.largeur} : retour au tour ${piege.tour} sur ${piege.balise} « ${piege.texte} »`);
+    }
+  } else {
+    console.log('2.1.1 — non mesuré : la passe au clavier s\u2019active avec --clavier.');
   }
   console.log('Rappel : ces critères ne disent rien de la compréhension ni de l\u2019usage réel.');
 

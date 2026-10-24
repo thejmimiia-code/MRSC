@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 16 |
+| Avancées consignées | 17 |
 | Période couverte | du 2026-10-20 au 2026-10-24 |
-| Contrôles exécutables cités | 20 |
+| Contrôles exécutables cités | 21 |
 | Initiatives du portefeuille concernées | 11 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -383,6 +383,30 @@ Initiatives liées : `optimisation-du-site`, `ecouter-la-page`.
 **Limite — ce que cela ne prouve pas.** Le gain porte sur la netteté et le transfert, pas sur le goût : les deux tracés ont un langage plat, sans grain ni profondeur de champ, et une personne peut regretter la photo. La mesure vient d'un Chromium sans interface ; aucun appareil réel n'a été utilisé, et la composition n'a été relue qu'en capture à 390, 768 et 1 440 px.
 
 **Suite.** Faire regarder les deux tracés par une personne extérieure au lot et consigner son verdict ; si elle préfère la photo, le dire sur la page plutôt que de renverser la décision en silence.
+
+Initiatives liées : `optimisation-du-site`.
+
+### `une-passe-clavier-qui-sarrete-nest-pas-un-piege` — Une passe clavier qui s'arrête n'est pas forcément un piège
+
+*Consignée le 2026-10-24.*
+
+**Constat.** Un défaut noté affirmait que la tabulation s'arrêtait après 60 à 90 appuis. Reproduit, il correspond exactement au nombre de commandes visibles de la page : 60 sur l'accueil, 90 sur la page de transparence, 37 sur une fiche. Rien n'était sauté — le focus quitte simplement le document pour les commandes du navigateur, ce qu'une page ne peut pas empêcher.
+
+**Ce que cela change.** `outils/auditer-criteres-22.mjs --clavier` exerce le critère 2.1.1 sur deux propriétés vérifiables : chaque commande visible reçoit le focus une fois, et le parcours ne revient jamais sur un élément déjà vu, ce qui signalerait un piège. La boucle ne s'arrête que sur la fin du document ou un retour en arrière, et les commandes désactivées sont écartées puis comptées. Deux mutations — un `tabindex="-1"` et un renvoi de focus en tête — sont détectées.
+
+**Preuves dans le dépôt :**
+
+- `outils/auditer-criteres-22.mjs`
+- `docs/rd/audit-clavier-2026-10-24.json`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/inclusion-criteres-wcag-22.md`
+- `transparence.html`
+
+**Contrôle qui la maintient :** `node outils/auditer-criteres-22.mjs --clavier`
+
+**Limite — ce que cela ne prouve pas.** La passe ne teste que la tabulation depuis le haut de page, panneaux fermés : menu mobile ouvert, panneau de personnalisation ouvert, raccourcis clavier, ordre logique de lecture et usage d'un lecteur d'écran ne sont pas couverts. Une commande atteinte peut rester inutilisable, et l'absence de retour en arrière ne prouve pas un ordre compréhensible.
+
+**Suite.** Rejouer la passe avec le menu et le panneau ouverts, puis faire relire l'ordre de tabulation par une personne qui navigue au clavier sans souris.
 
 Initiatives liées : `optimisation-du-site`.
 

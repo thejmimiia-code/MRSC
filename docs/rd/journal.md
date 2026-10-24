@@ -2,6 +2,20 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-24 — « La passe clavier s'arrête » : la fin du document, pas un piège
+
+- **Initiative :** `optimisation-du-site`. Le défaut était noté sans avoir été reproduit : « la passe clavier s'arrête après 60 à 90 tabulations ».
+- **Reproduction :** sur l'accueil, la tabulation s'arrête après la dernière entrée du pied de page, puis le focus passe dans les commandes du navigateur. Le nombre d'arrêts correspond exactement au nombre de commandes **visibles** de la page — 60 sur l'accueil, 90 sur `transparence.html`, 37 sur une fiche. Rien n'était sauté : le décompte des 26 éléments « manquants » ne trouvait que des commandes invisibles, dans le panneau fermé ou dans l'en-tête compact masqué.
+- **Mesure :** `outils/auditer-criteres-22.mjs --clavier` exerce le critère `2.1.1` sur deux propriétés — chaque commande visible reçoit le focus **une fois**, le parcours **ne revient jamais** sur un élément déjà vu. Site entier, 98 pages × 390 et 1 280 px : **8 050 commandes visibles, 594 désactivées écartées, 0 jamais atteinte, 0 retour en arrière**.
+- **Conclusion :** ce n'est pas un piège au clavier, c'est la fin de la page ; le navigateur sort ensuite le focus vers ses propres commandes, ce qu'une page ne peut pas changer. Le défaut est fermé par la mesure, pas par une correction de code — et la mesure reste, pour attraper un vrai piège si un jour il apparaît.
+- **Deux pièges de la mesure, trouvés en la construisant :**
+  1. La boucle plafonnée à « nombre de commandes + 5 » s'arrêtait avant la fin : sur `anglais-avenventure.html`, 331 commandes visibles demandent 450 tabulations, et les onze derniers liens du pied de page passaient pour inaccessibles — sur `apprendre.html` aussi.
+  2. Les deux boutons d'export du simulateur, visibles mais **désactivés** tant qu'aucune analyse n'a tourné, passaient pour des commandes oubliées. Ils sont désormais écartés **et comptés** (594).
+- **Mutations :** `tabindex="-1"` posé sur « Nos statuts » ⇒ « commande jamais atteinte » ; un gestionnaire renvoyant le focus au premier lien depuis « Boussole des savoirs » ⇒ « retour au tour 62 ». **2 sur 2 détectées.**
+- **Protocole :** § 6 terdecies de [`formats-affichage.md`](formats-affichage.md) ; relevé [`audit-clavier-2026-10-24.json`](audit-clavier-2026-10-24.json) ; note [`inclusion-criteres-wcag-22.md`](inclusion-criteres-wcag-22.md).
+- **Limite :** la passe ne teste que la tabulation depuis le haut de page, panneaux fermés. Menu mobile ouvert, panneau de personnalisation ouvert, raccourcis clavier, ordre logique de lecture et lecteur d'écran ne sont pas couverts ; une commande atteinte peut rester inutilisable.
+- **Prochaine action :** rejouer la passe au clavier avec le menu et le panneau ouverts, puis faire relire l'ordre de tabulation par une personne qui navigue au clavier sans souris.
+
 ## 2026-10-24 — L'espacement du texte casse la mise en page avant de la rendre lisible
 
 - **Initiative :** `optimisation-du-site`. Après la taille des cibles et le focus, un troisième critère se mesure : **espacement du texte** (`1.4.12`, niveau AA depuis WCAG 2.1). Il ne demande pas d'afficher un texte espacé, mais de supporter qu'une personne impose elle-même interligne 1,5, interlettrage 0,12 em, espacement des mots 0,16 em et 2 em après chaque paragraphe — sans perte de contenu ni de fonction.
