@@ -34,8 +34,8 @@ Pour la ligne « page précise » : ces fiches ne citent que des portails (racin
 
 | Fait mesuré | Valeur |
 | --- | ---: |
-| Sources déclarées au total | 112 |
-| dont licence déclarée « non vérifiée » | 110 |
+| Sources déclarées au total | 113 |
+| dont licence déclarée « non vérifiée » | 111 |
 | Fiches sans aucune source | 0 |
 | Prochaine revue la plus proche | 2027-01-09 (info-lire-adresse-web) |
 | Fiches dont la revue de contenu est échue à la date de référence | 0 |
