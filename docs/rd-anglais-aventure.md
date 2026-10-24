@@ -1,6 +1,6 @@
 # R&D — « Les Mondes », un atlas d’apprentissage et des Escales en 3D
 
-**Recherche initiale sur l’anglais : 11 octobre 2026 · prototype élargi : 12 octobre 2026.** Le jeu relie les **84 fiches** du catalogue — réparties dans **15 domaines** — à un atlas de mondes et à un parcours de formation que la personne compose elle-même. Les fiches demeurent des ressources complètes et autonomes, ouvertes dans leur page dédiée ; l’atlas ne recopie pas leur leçon. **58 entrées portent le statut « Prototype à relire »** et restent identifiées comme telles. L’expérience comprend aussi cinq dialogues anglais en 3D. Aucun cursus certifiant ni effet d’apprentissage n’est revendiqué.
+**Recherche initiale sur l’anglais : 11 octobre 2026 · prototype élargi : 12 octobre 2026.** Le jeu relie les **85 fiches** du catalogue — réparties dans **15 domaines** — à un atlas de mondes et à un parcours de formation que la personne compose elle-même. Les fiches demeurent des ressources complètes et autonomes, ouvertes dans leur page dédiée ; l’atlas ne recopie pas leur leçon. **59 entrées portent le statut « Prototype à relire »** et restent identifiées comme telles. L’expérience comprend aussi cinq dialogues anglais en 3D. Aucun cursus certifiant ni effet d’apprentissage n’est revendiqué.
 
 ## 1. Question de conception
 
@@ -19,7 +19,7 @@ Principes retenus : accès gratuit, aucun compte ni publicité, progression sans
 
 ## 3. Atlas des savoirs et scènes interactives
 
-La section **Les Mondes** réunit les 84 entrées du catalogue (26 fiches du corpus initial et 58 prototypes à relire), organisées en 15 mondes issus directement du référentiel éditorial. Les cartes affichent matière, domaine, repère 1 à 4, durée indicative, objectif et statut éditorial. La recherche porte sur les objectifs et situations ; filtres par monde, repère et statut permettent d’ouvrir les fiches publiques correspondantes. Les lacunes et sujets à relire restent accessibles depuis chaque monde. Le fichier du jeu est généré depuis les sources TOML du catalogue : il n’y a pas de deuxième saisie manuelle des 84 fiches.
+La section **Les Mondes** réunit les 85 entrées du catalogue (26 fiches du corpus initial et 59 prototypes à relire), organisées en 15 mondes issus directement du référentiel éditorial. Les cartes affichent matière, domaine, repère 1 à 4, durée indicative, objectif et statut éditorial. La recherche porte sur les objectifs et situations ; filtres par monde, repère et statut permettent d’ouvrir les fiches publiques correspondantes. Les lacunes et sujets à relire restent accessibles depuis chaque monde. Le fichier du jeu est généré depuis les sources TOML du catalogue : il n’y a pas de deuxième saisie manuelle des 85 fiches.
 
 Quatre **portes de formation libres** filtrent les fiches par repère : reprendre les bases, consolider, raisonner et approfondir. Elles ne constituent pas une progression obligatoire ni une certification. Un constructeur de parcours permet d’ajouter, retirer et réordonner des fiches. Seuls les identifiants choisis sont mémorisés localement ; la fiche elle-même reste la source complète de l’exercice et l’atlas ne déduit pas qu’elle a été terminée.
 

@@ -777,14 +777,16 @@ def verifier_dossier_apprentissage() -> None:
             f"Les {pages_publiques} pages restent sous les budgets",
         ),
         ROOT / "transparence.html": (
-            f"axe-core 4.14.0 a été exécuté sur les {pages_depot} pages HTML du dépôt",
-            f"{pages_depot * 2} exécutions sur les pages ({pages_depot} × 2 largeurs)",
+            "axe-core 4.14.0 a été exécuté sur les 99 pages HTML du dépôt",
+            "198 exécutions sur les pages (99 × 2 largeurs)",
         ),
+        # Relevé historique du 20 octobre : ne pas inventer une mesure
+        # supplémentaire quand le catalogue reçoit une nouvelle fiche.
         ROOT / "docs" / "rd" / "accessibilite-2026-10-17.md": (
-            f"{pages_depot} pages HTML × deux largeurs, soit **{pages_depot * 2} exécutions, aucune violation axe**",
+            "99 pages HTML × deux largeurs, soit **198 exécutions, aucune violation axe**",
         ),
         ROOT / "docs" / "rd" / "inventaire-couleurs-jetons.md": (
-            f"Pages HTML et {total} fiches",
+            "Pages HTML et 84 fiches",
         ),
         ROOT / "docs" / "rd" / "portefeuille.toml": (
             f"Faire relire les {prototypes} prototypes d'apprentissage",

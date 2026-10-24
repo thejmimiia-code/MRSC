@@ -1,6 +1,6 @@
 # Couverture des savoirs de base — carte éditoriale vivante
 
-**Dernière revue éditoriale déclarée : 2026-10-20.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
+**Dernière revue éditoriale déclarée : 2026-10-24.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
 
 L’objectif de couverture est d’élargir progressivement des premiers pas utiles vers les matières générales et professionnelles, les études supérieures, les spécialisations et la recherche. Cet objectif n’est pas l’état actuel du catalogue : les lacunes sont indiquées et la carte reste évolutive.
 
@@ -55,7 +55,7 @@ Développer les nombres, le calcul, la géométrie, les mesures, les estimations
 | Multiplier, diviser et partager | Fiche disponible | [`maths-partager`](../apprendre/fiches/maths-partager.html) |
 | Fractions et proportions simples | Fiche disponible | [`maths-fractions-recette`](../apprendre/fiches/maths-fractions-recette.html) |
 | Pourcentages et remises | Fiche disponible | [`maths-pourcentage`](../apprendre/fiches/maths-pourcentage.html) |
-| Tableaux, graphiques et interprétation des données | Début de couverture — à approfondir | [`maths-lire-graphique`](../apprendre/fiches/maths-lire-graphique.html)<br>[`maths-moyenne`](../apprendre/fiches/maths-moyenne.html)<br>[`maths-lire-echelle-graphique`](../apprendre/fiches/maths-lire-echelle-graphique.html)<br>[`maths-lire-tableau-croise`](../apprendre/fiches/maths-lire-tableau-croise.html) |
+| Tableaux, graphiques et interprétation des données | Début de couverture — à approfondir | [`maths-lire-graphique`](../apprendre/fiches/maths-lire-graphique.html)<br>[`maths-moyenne`](../apprendre/fiches/maths-moyenne.html)<br>[`maths-lire-echelle-graphique`](../apprendre/fiches/maths-lire-echelle-graphique.html)<br>[`maths-lire-tableau-croise`](../apprendre/fiches/maths-lire-tableau-croise.html)<br>[`maths-moyenne-mediane`](../apprendre/fiches/maths-moyenne-mediane.html) |
 | Géométrie de base et mesure d’une surface | Début de couverture — à approfondir | [`maths-surface`](../apprendre/fiches/maths-surface.html)<br>[`maths-reperer-angle-droit`](../apprendre/fiches/maths-reperer-angle-droit.html) |
 | Mesures, unités et conversions dans plusieurs domaines | Début de couverture — à approfondir | [`maths-convertir-unites`](../apprendre/fiches/maths-convertir-unites.html) |
 | Estimation, arrondis et vérification d’un ordre de grandeur | Début de couverture — à approfondir | [`maths-estimer-calcul`](../apprendre/fiches/maths-estimer-calcul.html) |

@@ -200,7 +200,7 @@ def chiffres_publics_coherents() -> None:
             f"{total} fiches dans {nb_domaines} domaines",
             f"{initiales} fiches du corpus initial",
             f"{prototypes} prototypes explicitement à relire",
-            f"{len(pages_html)} pages HTML du dépôt",
+            f"Périmètre actuel : {len(pages_html)} pages HTML du dépôt.",
         ),
         "anglais-aventure.html": (
             f"{total} fiches",

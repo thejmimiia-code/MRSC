@@ -1,0 +1,2310 @@
+{
+  "perimetre": "Deux fiches, main seulement, aide/correction ouvertes, densité 2. Géométrie et présence du statut ; ni lecteur d’écran ni compréhension.",
+  "releves": [
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 320,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 390,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 768,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 100,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 115,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "equilibree",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "lecture",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "vitrine",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "mosaique",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "panorama",
+      "renforce": true,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": false,
+      "erreurs": []
+    },
+    {
+      "id": "maths-moyenne-mediane",
+      "largeur": 1280,
+      "texte": 130,
+      "disposition": "compacte",
+      "renforce": true,
+      "erreurs": []
+    }
+  ],
+  "erreurs": []
+}

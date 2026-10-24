@@ -14,8 +14,8 @@
 | dont `a-creer` | 14 |
 | dont `revue-experte` | 3 |
 | Domaines | 15 |
-| Fiches publiées | 84 |
-| dont prototypes à relire | 58 |
+| Fiches publiées | 85 |
+| dont prototypes à relire | 59 |
 | Sujets sans aucune fiche | 17 |
 | Sujets ouverts par une carte de sujet | 3 |
 | Lesquels | `ecoute-prononciation`, `securite-sciences`, `systemes-embarques` |
@@ -67,7 +67,7 @@ Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Le
 ## 4. Ce que cette carte ne dit pas
 
 - Elle ne dit pas qu'un sujet absent du référentiel n'existe pas : le référentiel est une carte de travail, pas un inventaire du savoir.
-- Elle ne dit rien de la qualité des 84 fiches publiées ni de l'exactitude de leur contenu.
+- Elle ne dit rien de la qualité des 85 fiches publiées ni de l'exactitude de leur contenu.
 - Elle ne fournit aucune source : chaque sujet ouvert doit encore être documenté auprès de sources primaires, avec leur date, leur périmètre et leurs droits.
 - Elle ne hiérarchise pas les domaines : un domaine à onze sujets à créer n'est pas « plus important » qu'un domaine à un sujet.
 - Elle applique l'exigence de preuve du domaine déclaré : un sujet de santé rangé sous « études supérieures » (ISCED-F 09) reçoit l'exigence générale. Ce classement est à corriger au cas par cas, pas à lire comme une règle de risque.

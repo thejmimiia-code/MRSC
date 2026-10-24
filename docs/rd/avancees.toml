@@ -11,7 +11,7 @@
 
 [meta]
 version = 1
-derniere_revue = 2026-10-20
+derniere_revue = 2026-10-24
 regle = "Une entrée n'entre ici qu'avec une preuve locale, un contrôle exécutable et une limite écrite ; sinon elle reste une note de journal."
 
 [[avancee]]
@@ -278,3 +278,15 @@ controle = "python3 outils/verifier-affichages.py && node outils/auditer-critere
 limite = "La mesure voit un débordement et un rognage, pas une perte de sens : un chevauchement partiel, une coupure de mot, un texte masqué par un `clip-path` sans `overflow` ou déplacé hors du champ visible sans déborder lui échappent. Aucune personne n'a relu ce critère, et rien ne prouve qu'une personne qui a besoin de cet espacement lit mieux la page : c'est une géométrie, pas un usage."
 suite = "Faire lire la page à une personne qui agrandit l'interlettrage, puis étendre la mesure au zoom 200 % et au critère 1.4.10 (redistribution du contenu), qui n'ont jamais été éprouvés ici."
 initiatives = ["optimisation-du-site"]
+
+[[avancee]]
+id = "reponse-chiffree-reliee-au-test"
+date = 2026-10-24
+titre = "Vérifier le résultat écrit dans la fiche, pas seulement un calcul parallèle"
+constat = "Un test peut recalculer une moyenne exacte sans repérer une réponse fausse écrite dans le catalogue. L'ajout d'une fiche faisait aussi croître les totaux attendus d'anciens relevés axe, comme si une nouvelle page avait été mesurée automatiquement."
+changement = "Les exemples du lot moyenne/médiane sont reliés à leurs passages de correction dans le catalogue. Deux mutations des réponses doivent échouer. Les compteurs courants sont distingués des anciens relevés d'accessibilité, conservés à leur périmètre daté."
+preuves = ["outils/test_exemples_statistiques.py", "docs/apprentissage/catalogue.toml", "docs/rd/lot-statistiques-2026-10-24.md", "outils/verifier-site-statique.py"]
+controle = "python3 outils/test_exemples_statistiques.py && python3 outils/verifier-site-statique.py"
+limite = "Les contrôles portent sur des passages identifiés et des calculs finis : ils ne comprennent pas la totalité du texte, ne prouvent pas l'efficacité d'une analogie et ne remplacent aucune relecture mathématique ou pédagogique indépendante."
+suite = "Faire relire les deux fiches et leurs tâches candidates, puis étendre les assertions aux prochains exemples sans transformer une correction automatique en promesse de compréhension."
+initiatives = ["relire-les-44-prototypes", "co-conception-et-essais"]

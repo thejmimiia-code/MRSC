@@ -12,8 +12,8 @@ La décision porte sur l'allocation du temps de relecture, pas sur l'ajout d'une
 
 | Fait vérifiable | Valeur au 20 octobre 2026 | Où le vérifier |
 | --- | --- | --- |
-| Fiches d'apprentissage publiées | 84 dans 15 domaines | `docs/apprentissage/catalogue.toml` |
-| Fiches explicitement « prototypes à relire » | **58** | Statuts du catalogue |
+| Fiches d'apprentissage publiées | 85 dans 15 domaines | `docs/apprentissage/catalogue.toml` |
+| Fiches explicitement « prototypes à relire » | **59** | Statuts du catalogue |
 | Fiches dont la date de revue est échue | **0** | `python3 outils/construire-apprentissages.py --verifier` |
 | Prochaine revue du portefeuille R&D | **2026-11-19** | `docs/rd/portefeuille.toml` |
 | Initiatives R&D suivies | 19, dont 6 en priorité P0 | Portefeuille |
@@ -37,7 +37,7 @@ Reproduire l'essentiel : `python3 outils/etat-rd.py`. Vérifier que huit repère
 
 | | Option A — Ne rien construire de plus | Option B — Relire, puis pilote papier | Option C — Pilote en ligne |
 | --- | --- | --- | --- |
-| **Contenu** | Garder la Boussole telle quelle, sans la promouvoir. Consacrer le temps disponible à la relecture des 58 prototypes. | Faire relire les 10 questions et 3 fiches reliées, puis tester la Boussole sur papier avec 5 personnes volontaires, sans compte ni collecte. | Ouvrir un parcours mesuré (temps, clics, chemins), avec consentement, journal minimal et suppression planifiée. |
+| **Contenu** | Garder la Boussole telle quelle, sans la promouvoir. Consacrer le temps disponible à la relecture des 59 prototypes. | Faire relire les 10 questions et 3 fiches reliées, puis tester la Boussole sur papier avec 5 personnes volontaires, sans compte ni collecte. | Ouvrir un parcours mesuré (temps, clics, chemins), avec consentement, journal minimal et suppression planifiée. |
 | **Coût** | Nul en développement ; concentré sur la relecture. | Faible : une relecture éditoriale, une impression, une séance. | Moyen : instrumentation, notice de confidentialité, analyse, correctifs. |
 | **Risque principal** | Laisser une fonction visible que personne n'a validée. | Confondre une séance de 5 personnes avec une preuve d'utilité. | Collecter des données personnelles pour un bénéfice non démontré. |
 | **Preuve apportée** | Aucune nouvelle ; le corpus reste le seul actif. | Des obstacles concrets, des formulations incomprises, des questions de méthode. | Des comportements agrégés, mais pas nécessairement une amélioration de la compréhension. |

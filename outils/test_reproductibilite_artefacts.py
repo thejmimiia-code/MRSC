@@ -34,6 +34,7 @@ import importlib.util
 import io
 import sys
 import tempfile
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -184,21 +185,26 @@ class AucuneSortieNeDependDuCalendrier(unittest.TestCase):
             lancer_porte(script, arguments, 400)
         self.assertEqual(avant, empreintes(), "un mode --verifier a modifié un artefact du dépôt")
 
-    def test_les_deux_horodatages_en_cause_ne_portent_pas_le_jour_reel(self):
+    def test_les_deux_horodatages_viennent_des_sources_editoriales(self):
         """Contrôle direct sur les deux fichiers qui ont cassé la publication."""
+        registre = tomllib.loads((RACINE / "docs/rd/avancees.toml").read_text(encoding="utf-8"))
+        catalogue = tomllib.loads((RACINE / "docs/apprentissage/catalogue.toml").read_text(encoding="utf-8"))
         attendus = {
-            "docs/rd/avancees.md": "**Date du registre :**",
-            "docs/apprentissage/audit-automatique.md": "**Date de référence :**",
+            "docs/rd/avancees.md": ("**Date du registre :**", str(registre["meta"]["derniere_revue"])),
+            "docs/apprentissage/audit-automatique.md": ("**Date de référence :**", max(str(f["revue_le"]) for f in catalogue["fiche"])),
         }
-        for relatif, etiquette in attendus.items():
+        for relatif, (etiquette, date_source) in attendus.items():
             lignes = (RACINE / relatif).read_text(encoding="utf-8").splitlines()
             horodatees = [ligne for ligne in lignes if ligne.startswith(etiquette)]
             with self.subTest(fichier=relatif):
                 self.assertEqual(len(horodatees), 1, f"étiquette « {etiquette} » absente ou dupliquée")
-                self.assertNotIn(
-                    dt.date.today().isoformat(),
-                    horodatees[0],
-                    "l'horodatage porte le jour d'exécution : la porte CI échouera demain",
+                # Une revue réellement faite aujourd'hui peut légitimement
+                # porter la date du jour. C'est sa provenance qui compte ; la
+                # stabilité sous horloge décalée est testée séparément.
+                self.assertEqual(
+                    horodatees[0][len(etiquette):].strip()[:10],
+                    date_source,
+                    "l'horodatage ne correspond pas à la source éditoriale",
                 )
 
 

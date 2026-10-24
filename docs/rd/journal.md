@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-24 — Comparer les résumés sans inventer les données absentes
+
+- **Initiatives :** `relire-les-44-prototypes` et `co-conception-et-essais`. Lot de contenu délimité : une nouvelle fiche `maths-moyenne-mediane`, une fiche `maths-moyenne` enrichie par la différence entre zéro et absence. Catalogue : 85 fiches, dont 59 prototypes à relire ; aucun nouveau sujet déclaré complet.
+- **Recherche :** documentation Python 3.14.0, sections mean et median réellement lues. Formules et conventions explicites ; aucune efficacité pédagogique déduite de cette référence technique. Exercices fictifs originaux et droits de reprise non vérifiés, sans extrait repris.
+- **Conception :** une valeur change entre deux séries pour comparer le partage et la position. Pas d'animation ni de tableau de bord qui remplacerait l'explication. [Dossier du lot](lot-statistiques-2026-10-24.md) : hypothèse, options écartées, registre des affirmations et tâche d'essai à faire approuver.
+- **Contrôles :** six tests numériques et éditoriaux ciblés, dont deux mutations de réponses détectées ; audit des 59 prototypes sans échec mécanique (un constat documentaire préexistant reste ouvert). Passe de rendu ciblée : 288 relevés, 0 échec. Publication locale, génération, poids, statuts et sources déclarées contrôlés.
+- **Angle mort corrigé :** les garde-fous demandaient que les anciens relevés axe augmentent automatiquement avec le nombre de fiches. Les chiffres historiques sont désormais séparés du compte courant : ajouter une page ne signifie pas l'avoir auditée.
+- **Limites :** aucune relecture humaine ajoutée, une seule source documentaire pour la nouvelle fiche, aucun essai de compréhension, aucun taux RGAA/WCAG. La passe navigateur porte sur la géométrie du contenu et non une validation d'accessibilité complète.
+- **Suite :** obtenir une relecture mathématique et pédagogique, puis éprouver les confusions tri/doublons/zéro avec un protocole approuvé. Aborder ensuite les groupes de tailles différentes, sans gonfler le catalogue par des doublons.
+
 ## 2026-10-24 — Le cache peut désynchroniser le dessin et ses pastilles
 
 - **Initiative :** `optimisation-du-site`. La capture smartphone fournie après la fusion #188 montre les nouveaux points SVG et la nouvelle légende, mais les anciennes positions CSS des pastilles et du cœur. Les mesures précédentes utilisaient un contexte navigateur neuf et ne couvraient pas ce mélange.
