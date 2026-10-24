@@ -310,7 +310,7 @@ Initiatives liées : `optimisation-du-site`, `ecouter-la-page`.
 
 **Limite — ce que cela ne prouve pas.** Aucune voix réelle n'a été écoutée, aucun lecteur d'écran n'a été utilisé et aucune personne n'a essayé la commande : le banc remplace `speechSynthesis` par un double qui enregistre les énoncés. La limite affichée sous le bouton dit seulement ce que le dispositif ne peut pas garantir ; elle ne prouve aucune amélioration de compréhension, et les chiffres d'effet cités viennent d'études scolaires anglophones.
 
-**Suite.** Faire écouter la fonction à une personne qui lit difficilement et à une personne utilisant un lecteur d'écran, puis consigner les mots mal prononcés ; retirer le lot si la voix perd le fil ou si un bloc est lu deux fois.
+**Suite.** Faire écouter la fonction à une personne qui lit difficilement et à une personne utilisant un lecteur d'écran, puis consigner les mots mal prononcés et le cran de vitesse qui lui convient ; retirer le lot si la voix perd le fil ou si un bloc est lu deux fois.
 
 Initiatives liées : `ecouter-la-page`.
 

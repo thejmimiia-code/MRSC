@@ -2981,11 +2981,34 @@ html.contraste-renforce .resource-scope-note {
 }
 .read-aloud-title { margin: 0 0 .55rem; color: var(--navy-ink); font-size: clamp(14px,.95rem,18px); }
 .read-aloud-controls { display: flex; flex-wrap: wrap; align-items: stretch; gap: .5rem; }
-/* Base à zéro : le bouton principal prend la place restante au lieu de réclamer
-   toute la ligne et de renvoyer « Pause » à la ligne suivante. Son libellé peut
-   se replier, celui de la pause non. */
-.read-aloud-controls .display-control-wide { flex: 1 1 0; min-width: 0; white-space: normal; }
-.read-aloud-controls [data-read-aloud-pause] { flex: 0 0 auto; }
+/* Trois commandes et un choix de vitesse : le bouton principal occupe sa ligne,
+   « Pause » et « Reculer » se partagent la suivante quand la place le permet et
+   passent l'un sous l'autre sinon. Aucun libellé n'est tronqué. */
+.read-aloud-controls .display-control-wide { flex: 1 1 100%; min-width: 0; white-space: normal; }
+.read-aloud-controls [data-read-aloud-pause],
+.read-aloud-controls [data-read-aloud-back] { flex: 1 1 auto; min-width: 0; white-space: normal; }
+.read-aloud-speed {
+  display: flex;
+  flex: 1 1 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  margin-top: .1rem;
+  color: var(--muted);
+  font-size: clamp(12px,.85rem,17px);
+  font-weight: 700;
+}
+.read-aloud-speed select {
+  min-height: 44px;
+  padding: .35rem .55rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--button-radius);
+  background: var(--surface);
+  color: var(--navy-ink);
+  font: inherit;
+  font-size: clamp(14px,.95rem,18px);
+  font-weight: 700;
+}
 .read-aloud-status { margin: .5rem 0 0; color: var(--text-soft); font-size: clamp(12px,.8rem,16px); }
 .read-aloud-status:empty { display: none; }
 .read-aloud-note { margin: .55rem 0 0; color: var(--muted); font-size: clamp(12px,.78rem,16px); line-height: 1.45; }

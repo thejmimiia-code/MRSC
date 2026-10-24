@@ -595,6 +595,55 @@ le contrôle. Le contrôle de lecture à voix haute exige désormais
 Limite : la mesure porte sur une géométrie et un échantillon (60 cibles par page,
 huit pages), pas sur la difficulté réelle à viser ni sur un audit complet.
 
+## 6 decies. Reculer et choisir son débit : deux gestes de plus dans le panneau (23 octobre 2026)
+
+Un seul bouton « Lire à voix haute » ne laissait que deux issues : tout écouter
+ou tout arrêter. Deux gestes manquaient, et ils se mesurent comme le premier :
+dans le panneau, aux largeurs et aux crans de texte les plus serrés.
+
+- **Ce que la page savait déjà faire, et pas encore montrer.** La lecture
+  découpait la page en passages et savait où elle en était ; elle ne permettait
+  ni de revenir en arrière ni de changer de rythme. Le lot ajoute un bouton
+  « Reculer » et un sélecteur à quatre crans (0,75 / 1 / 1,25 / 1,5), le
+  changement s'appliquant au passage suivant sans repartir du début.
+- **Mise en page retenue.** Le groupe des commandes passe à quatre éléments :
+  « Arrêter » 283 × 53 px, « Pause » 127 × 53, « Reculer » 145 × 53 et le
+  sélecteur 153 × 44. Mesuré à 320 px et 130 % : les quatre tiennent dans le
+  panneau, **débordement 0 px** ; contrôle répété à 390 px et 1 440 px, à 100 %
+  comme à 130 %. « Arrêter » occupe la ligne pleine, les deux autres commandes
+  se partagent la suivante, le sélecteur prend la troisième avec sa légende
+  (« Vitesse de lecture »), hors de la cible tactile.
+- **Le sélecteur garde une cible de 44 px** (`min-height`) : le gain de place ne
+  se paie pas en précision. À 320 px et 130 %, aucune ligne de texte n'est
+  tronquée ; la dernière ligne du panneau s'arrête sur une ligne pleine, sans
+  coupure de mot.
+- **Mémoire locale, une clé de plus.** `mrsc-lecture-vitesse` retient le cran
+  choisi ; rien d'autre n'est écrit, aucun texte lu ni position de lecture. La
+  page Vie privée nomme la clé, la note sous les commandes le dit en une phrase.
+- **Le défaut qui a failli passer.** `speechSynthesis.cancel()` peut rappeler le
+  rappel de fin d'une énonciation annulée. Sans jeton de génération, « Reculer »
+  ou un changement de vitesse rejouait **deux** passages : 7 énonciations au
+  lieu de 6, mesuré. Un compteur incrémenté à chaque démarrage et à chaque arrêt
+  est comparé dans la fin **et** dans l'erreur ; l'essai navigateur simule
+  exprès ce rappel fantôme.
+
+Garde-fou : 15ᵉ contrôle `controler_lecture_a_voix_haute`, désormais **quatorze
+mutations rejouées, quatorze détectées**. Sept concernent le premier lot (langue
+du bloc ignorée, arrêt sans annulation, contenus masqués lus, `fetch` ajouté,
+marque visuelle supprimée, commande construite mais jamais ajoutée au panneau,
+nom accessible sans le texte visible) ; sept visent le second : vitesses
+supprimées, débit ignoré, jeton de génération retiré des deux rappels puis d'un
+seul, retour arrière retiré, vitesse non conservée, cible du sélecteur abaissée
+de 44 à 24 px. Trois faiblesses du contrôle ont été trouvées en le mutant : il
+cherchait `"data.readAloudBack"` là où le code lit `dataset.readAloudBack`,
+bornait le module par un nombre de caractères — un ajout de fonction faisait
+croire à une disparition — et se contentait de constater une `min-height` sans
+comparer sa valeur.
+
+Limite : la mesure porte sur la géométrie et sur un double de la synthèse, pas
+sur le son. Aucun débit réel n'a été écouté, et personne n'a encore essayé ces
+deux gestes ; le cran qui convient à une personne ne se déduit d'aucune mesure.
+
 ## 7. Ce qui n'est pas couvert
 
 - **Police réelle.** La mesure utilise les polices installées dans

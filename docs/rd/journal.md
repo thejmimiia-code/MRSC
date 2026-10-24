@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-23 — « Écouter la page » : reculer et choisir sa vitesse
+
+- **Initiative :** `ecouter-la-page`. Deux gestes manquaient pour écouter vraiment : reprendre le passage qu'on vient de perdre, et choisir un débit qui convient.
+- **Décision instruite :** les travaux sur le débit de parole ne montrent pas d'effet uniforme d'une vitesse donnée ; l'étude sur l'aphasie (25 adultes, 113/154/200 mots par minute) ne trouve pas d'écart significatif de compréhension **entre vitesses** mais conclut à la nécessité de respecter les préférences individuelles, et une étude de 1997 où l'auditeur contrôle le débit trouve un gain. Conclusion retenue : donner le choix, sans promettre un gain.
+- **Ce qui est livré :** bouton « Reculer » (rejoue le passage précédent), sélecteur à quatre crans (0,75 / 1 / 1,25 / 1,5), application immédiate en reprenant le passage courant, clé `mrsc-lecture-vitesse` pour la mémoire locale. La note sous les commandes dit désormais que la vitesse reste sur l'appareil ; la page Vie privée nomme la clé.
+- **Piège évité, mesuré :** `cancel()` peut rappeler `onend` d'une énonciation annulée. Sans jeton de génération, « Reculer » ou un changement de vitesse rejouait **deux** passages au lieu d'un (constaté : 7 énonciations au lieu de 6). Le jeton est vérifié dans les deux rappels ; l'essai navigateur simule ce rappel tardif et échoue si le jeton manque.
+- **Mesures :** à 320 px et 130 %, les quatre commandes tiennent dans le panneau (283, 127, 145 et 153 px de large ; 53, 53, 53 et 44 px de haut), débordement 0 px ; même résultat à 390 et 1 440 px, à 100 % comme à 130 %. **14 mutations rejouées, 14 détectées** sur le contrôle statique ; **9/9 essais navigateur** ; axe 49 exécutions, 0 violation.
+- **Protocole :** § 6 decies de [`formats-affichage.md`](formats-affichage.md).
+- **Limite :** le banc remplace la synthèse par un double ; aucun débit réel n'a été écouté, et personne n'a encore essayé ces deux gestes.
+- **Prochaine action :** faire écouter la fonction par une personne qui lit difficilement et par une personne sous lecteur d'écran, en notant le cran de vitesse qui lui convient.
+
 ## 2026-10-23 — Les critères WCAG 2.2 mesurés avant le RGAA 5
 
 - **Initiative :** `optimisation-du-site` et `ecouter-la-page`. Le RGAA 5, aligné sur WCAG 2.2, est annoncé pour la fin 2026 : deux critères AA n'existaient pas dans la version travaillée jusqu'ici — taille des cibles (`2.5.8`) et focus non masqué (`2.4.11`).

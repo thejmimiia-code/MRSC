@@ -851,7 +851,7 @@ async function main() {
           speaking: false,
           pending: false,
           speak(e) {
-            window.__lus.push({ texte: e.text, langue: e.lang });
+            window.__lus.push({ texte: e.text, langue: e.lang, debit: e.rate });
             window.__courante = e;
             setTimeout(() => e.onend && e.onend(), 0);
           },
@@ -941,6 +941,113 @@ async function main() {
       // L'annulation déclenche un `onerror` « interrupted » : ce n'est pas une
       // panne, l'état ne doit pas basculer sur le message d'échec.
       assert.equal(arret.statut, 'Lecture arrêtée.');
+
+      // Vitesse et retour en arrière : deux gestes qui manquaient à une personne
+      // qui perd le fil. Le débit change sans relire tout depuis le début, et
+      // « Reculer » rejoue le passage précédent une seule fois.
+      await ouvrirPageSite(page, 'index.html');
+      await page.evaluate(() => {
+        window.__lus = [];
+        const fausse = {
+          speaking: false,
+          pending: false,
+          speak(e) {
+            window.__lus.push({ texte: e.text, debit: e.rate });
+            window.__courante = e;
+          },
+          cancel() {
+            window.__annul = (window.__annul || 0) + 1;
+            // Chromium peut rappeler `onend` d'une énonciation annulée. Le jeton
+            // de génération doit empêcher cette relance fantôme de dédoubler la
+            // lecture ; le double le fait donc exprès.
+            const fantome = window.__courante;
+            window.__courante = null;
+            if (fantome && fantome.onend) setTimeout(() => fantome.onend(), 0);
+          },
+          pause() { window.__pauses = (window.__pauses || 0) + 1; },
+          resume() { window.__reprises = (window.__reprises || 0) + 1; },
+        };
+        Object.defineProperty(window, 'speechSynthesis', { value: fausse, configurable: true });
+      });
+      await ouvrirPersonnalisation(page);
+      const vitesses = await page.$$eval('[data-read-aloud-speed] option', (options) => options.map((o) => o.value));
+      assert.deepEqual(vitesses, ['0.75', '1', '1.25', '1.5']);
+      const avantVitesse = await page.$eval('[data-read-aloud-speed]', (select) => select.value);
+      assert.equal(avantVitesse, '1', 'le débit de départ doit être celui de l\u2019appareil');
+
+      await page.click('[data-read-aloud-toggle]');
+      await page.waitForFunction(() => window.__lus.length > 0);
+      assert.equal((await page.evaluate(() => window.__lus[0].debit)), 1);
+
+      await page.select('[data-read-aloud-speed]', '1.5');
+      await page.waitForFunction(() => window.__lus.some((entree) => entree.debit === 1.5), { timeout: 5000 });
+      const apresVitesse = await page.evaluate(() => ({
+        stockage: localStorage.getItem('mrsc-lecture-vitesse'),
+        statut: document.querySelector('[data-read-aloud-status]').textContent,
+        debitCourant: window.__lus[window.__lus.length - 1].debit,
+      }));
+      assert.equal(apresVitesse.stockage, '1.5', 'la vitesse doit être conservée sur l\u2019appareil');
+      assert.equal(apresVitesse.debitCourant, 1.5, 'le nouveau débit doit s\u2019appliquer aussitôt');
+      assert.match(apresVitesse.statut, /Vitesse de lecture : très rapide/);
+
+      // La relance ne doit pas dédoubler la file : une seule énonciation pour
+      // le passage courant, pas deux. On avance d'abord de deux passages, sinon
+      // « Reculer » serait au tout début de la page et n'aurait rien à relire.
+      await page.evaluate(async () => {
+        for (let passage = 0; passage < 2; passage += 1) {
+          window.__courante.onend();
+          await new Promise((suite) => setTimeout(suite, 40));
+        }
+      });
+      const avantRecul = await page.evaluate(() => window.__lus.length);
+      await page.click('[data-read-aloud-back]');
+      await page.waitForFunction(
+        (avant) => window.__lus.length > avant,
+        { timeout: 5000 },
+        avantRecul,
+      );
+      await new Promise((suite) => setTimeout(suite, 250));
+      const recul = await page.evaluate(() => ({
+        total: window.__lus.length,
+        dernier: window.__lus[window.__lus.length - 1].texte,
+        avantDernier: window.__lus[window.__lus.length - 2] ? window.__lus[window.__lus.length - 2].texte : null,
+        statut: document.querySelector('[data-read-aloud-status]').textContent,
+      }));
+      // Un passage précédent est rejoué une fois : le total augmente d'un seul.
+      assert.equal(recul.total, avantRecul + 1, `reculer doit rejouer un seul passage : ${JSON.stringify(recul)}`);
+      assert.match(recul.statut, /Passage précédent/);
+      assert.ok(recul.dernier && recul.dernier.length > 0);
+      await page.evaluate(() => document.querySelector('[data-read-aloud-toggle]').click());
+
+      // Les quatre commandes tiennent dans le panneau, à 390 px comme à 130 %.
+      await ouvrirPersonnalisation(page);
+      await page.evaluate(() => {
+        document.querySelector('[data-read-aloud-toggle]').click();
+      });
+      await new Promise((suite) => setTimeout(suite, 150));
+      const dansLePanneau = await page.evaluate(() => {
+        const cadre = document.querySelector('[data-read-aloud]').getBoundingClientRect();
+        return [...document.querySelectorAll('[data-read-aloud] button, [data-read-aloud] select')]
+          .filter((element) => !element.hidden)
+          .map((element) => {
+            const boite = element.getBoundingClientRect();
+            return {
+              quoi: element.tagName.toLowerCase(),
+              gauche: Math.round(boite.left),
+              droite: Math.round(boite.right),
+              dedans: boite.left >= cadre.left - 1 && boite.right <= cadre.right + 1,
+              hauteur: Math.round(boite.height),
+            };
+          });
+      });
+      assert.equal(dansLePanneau.length, 4, JSON.stringify(dansLePanneau));
+      assert.ok(dansLePanneau.every((commande) => commande.dedans), JSON.stringify(dansLePanneau));
+      assert.ok(dansLePanneau.every((commande) => commande.hauteur >= 44), JSON.stringify(dansLePanneau));
+      await page.evaluate(() => {
+        const commande = document.querySelector('[data-read-aloud-toggle]');
+        if (commande.textContent.trim() === 'Arrêter') commande.click();
+        localStorage.removeItem('mrsc-lecture-vitesse');
+      });
 
       // Un contenu replié n'est pas lu : sur `apprendre.html`, la liste de
       // couverture vit dans quinze `<details>` fermés. Leur contenu garde une

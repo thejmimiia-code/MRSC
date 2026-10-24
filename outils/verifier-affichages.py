@@ -691,12 +691,16 @@ def controler_lecture_a_voix_haute() -> list[str]:
     erreurs: list[str] = []
     script = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
     # Le module va du commentaire de section jusqu'au bloc de réglages qui suit :
-    # les fonctions de collecte sont déclarées avant la commande elle-même.
+    # les fonctions de collecte sont déclarées avant la commande elle-même. On
+    # délimite par la fin réelle du module plutôt que par un nombre de
+    # caractères : un ajout de fonction décalait la fenêtre et faisait croire à
+    # une disparition.
     depart = script.find("--- Écouter la page")
     index = script.find("construireLectureVocale")
-    if index < 0 or depart < 0:
+    fin = script.find("\n  if (settings) {", index if index >= 0 else 0)
+    if index < 0 or depart < 0 or fin < 0:
         return ["site.js — la commande « Écouter la page » a disparu du panneau de personnalisation"]
-    corps = script[depart:index + 12000]
+    corps = script[depart:fin]
     for morceau, message in (
         ("speechSynthesis", "la synthèse vocale de l'appareil n'est plus utilisée"),
         ("speechSynthesis.cancel()", "la lecture ne peut plus être arrêtée net"),
@@ -711,6 +715,12 @@ def controler_lecture_a_voix_haute() -> list[str]:
          "masqué par le style passerait"),
         ("element.innerText", "le texte lu ne suit plus la mise en page : deux phrases séparées "
                               "par un élément mis en bloc s'entendraient collées"),
+        ("const VITESSES = [0.75, 1, 1.25, 1.5]", "les vitesses de lecture ont disparu : une "
+                                                  "personne qui lit lentement ne peut plus ralentir la voix"),
+        ("enonce.rate = vitesse", "le débit choisi n'est plus appliqué à la lecture"),
+
+        ("readAloudBack", "le retour au passage précédent a disparu"),
+        ("savePreference(CLE_VITESSE", "la vitesse choisie n'est plus conservée sur l'appareil"),
     ):
         if morceau not in corps:
             erreurs.append(f"site.js — {message}")
@@ -742,6 +752,13 @@ def controler_lecture_a_voix_haute() -> list[str]:
                 f'site.js — le nom accessible « {nom} » ne reprend pas le texte visible '
                 f'« {texte} » : une commande dictée à la voix ne serait pas reconnue'
             )
+    # Le jeton de génération doit être vérifié dans les deux rappels : sans lui,
+    # une énonciation annulée relance la file et la lecture se dédouble.
+    if corps.count("if (jeton !== generation) return;") < 2:
+        erreurs.append(
+            "site.js — le jeton de génération manque dans au moins un rappel : une énonciation "
+            "annulée peut relancer la file et la lecture se dédoubler"
+        )
     # L'arrêt doit annuler la voix dans sa propre fonction, pas seulement au
     # démarrage : une commande qui n'arrête rien laisse parler l'appareil.
     arret = re.search(r"const arreter = \(motif\) => \{(.*?)\n    \};", corps, re.S)
@@ -758,6 +775,16 @@ def controler_lecture_a_voix_haute() -> list[str]:
                 "des yeux perd le fil"
             )
             break
+    # La valeur compte, pas seulement sa présence : 24 px passerait la recherche
+    # de texte tout en cassant la cible tactile.
+    selecteur_vitesse = re.search(
+        r"\.read-aloud-speed\s+select\s*\{[^}]*min-height:\s*([0-9.]+)px", css
+    )
+    if not selecteur_vitesse or float(selecteur_vitesse.group(1)) < 44:
+        erreurs.append(
+            "site.css — le sélecteur de vitesse doit garder une cible de 44 px : "
+            f"valeur trouvée {selecteur_vitesse.group(1) if selecteur_vitesse else 'aucune'}"
+        )
     if not re.search(r"\.lecture-en-cours\s*\{[^}]*outline:\s*3px", css):
         erreurs.append(
             "site.css — le bloc en cours de lecture n'a plus de contour visible "
