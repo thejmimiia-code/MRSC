@@ -38,6 +38,11 @@ jobs:
           python3 outils/test_modele_eva.py
           python3 outils/test_references_eva.py
 
+      - name: Vérifier les composants CPU du lancement EVA local
+        run: |
+          python3 -m pip install numpy==1.26.4 scipy==1.11.4 scikit-image==0.22.0 trimesh==4.0.5 xatlas==0.0.9 Pillow==11.3.0
+          python3 outils/test_eva_local.py
+
       - name: Vérifier les exemples de moyenne et médiane
         run: python3 outils/test_exemples_statistiques.py
 
@@ -165,6 +170,14 @@ jobs:
       # demande un navigateur, ces règles-ci se vérifient partout.
       - name: Vérifier les garde-fous des formats d’affichage
         run: python3 outils/verifier-affichages.py
+
+  eva-lanceur-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Vérifier le lanceur Windows sans génération GPU
+        shell: pwsh
+        run: ./outils/eva-local/Test-Lanceur.ps1
 
   graphismes:
     runs-on: ubuntu-24.04

@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-24 — Préparer un essai réel sur la RTX 2070 Super
+
+- **Accès matériel précisé :** Windows 11 x64, RTX 2070 Super 8 Go, 64 Go de RAM. Identifiants de machine et de produit volontairement non recopiés. Aucun accès distant au PC acquis.
+- **Correction de recherche :** la licence Hunyuan3D 2 consultée exclut l'UE ; moteur non proposé à l'installation en France. TripoSR retenu pour un essai réversible : amont MIT, environ 6 Go de VRAM annoncés, aucune garantie de réalisme de personnage.
+- **Préparation :** lanceur Windows natif, source à commit/SHA contrôlés, venv séparé, chargement de poids `weights_only=True`, extraction CPU sans compilation CUDA, UV/texture et GLB texturé non riggé. Paquet construit hors Git, sans poids ou ancien modèle rejeté.
+- **Preuves :** neuf tests CPU/contrats, dont cuisson avec champ neural simulé et rechargement GLB ; archive officielle contrôlée et réemploi du cache vérifié. Vérifications Windows sans GPU ajoutées à la CI, pas assimilées à une inférence sur le PC. [Dossier et limites](eva-calcul-local-windows-2026-10-24.md).
+- **Suite :** exécution volontaire du paquet sur le PC utilisateur, puis examen du maillage effectif avant topologie/rig. Aucun nouveau personnage réaliste fini, installation Windows ou calcul TripoSR réel exécuté depuis ce sandbox.
+
 ## 2026-10-24 — Rejet du mannequin et reprise vers le réalisme
 
 - **Correction utilisateur :** le GLB procédural est trop laid et trop éloigné d'EVA. La validité du fichier et du rig ne satisfait pas la demande ; modèle retiré de la présentation principale et conservé comme archive repliée explicitement rejetée.

@@ -1,0 +1,16 @@
+# Python 3.11 x64. PyTorch CUDA est installé séparément par Lancer-Eva.ps1.
+# Versions directes épinglées ; dépendances transitives consignées par pip freeze.
+numpy==1.26.4
+Pillow==11.3.0
+omegaconf==2.3.0
+einops==0.7.0
+transformers==4.35.0
+huggingface-hub==0.17.3
+trimesh==4.0.5
+rembg==2.0.57
+onnxruntime==1.17.3
+scipy==1.11.4
+scikit-image==0.22.0
+xatlas==0.0.9
+imageio==2.34.0
+tqdm==4.66.5
