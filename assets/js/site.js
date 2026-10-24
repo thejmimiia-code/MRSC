@@ -325,6 +325,10 @@
     && typeof window.SpeechSynthesisUtterance === "function";
   const SELECTEUR_LECTURE = "h1,h2,h3,h4,h5,h6,p,li,blockquote,figcaption,summary,td,th,dd,dt";
   const LONGUEUR_MAX_SEGMENT = 220;
+  // Débits proposés, du plus lent au plus rapide. 1 correspond au débit par
+  // défaut de l'appareil : le site n'impose pas un rythme unique.
+  const VITESSES = [0.75, 1, 1.25, 1.5];
+  const CLE_VITESSE = "mrsc-lecture-vitesse";
 
   const normaliserTexte = (texte) => (texte || "").replace(/\s+/g, " ").trim();
 
@@ -398,6 +402,11 @@
       });
   };
 
+  const vitesseEnregistree = () => {
+    const valeur = Number(readPreference(CLE_VITESSE));
+    return VITESSES.includes(valeur) ? valeur : 1;
+  };
+
   const construireLectureVocale = () => {
     const bloc = document.createElement("div");
     bloc.className = "read-aloud";
@@ -428,7 +437,35 @@
     boutonPause.textContent = "Pause";
     boutonPause.setAttribute("aria-pressed", "false");
     boutonPause.hidden = true;
-    commandes.append(boutonLecture, boutonPause);
+
+    // « Reculer » relit le passage précédent : c'est le geste qu'on fait quand
+    // on a perdu le fil, et il vaut mieux que recommencer depuis le début.
+    const boutonReculer = document.createElement("button");
+    boutonReculer.type = "button";
+    boutonReculer.className = "display-control";
+    boutonReculer.dataset.readAloudBack = "";
+    boutonReculer.textContent = "Reculer";
+    boutonReculer.setAttribute("aria-label", "Reculer au passage précédent");
+    boutonReculer.hidden = true;
+
+    const ligneVitesse = document.createElement("label");
+    ligneVitesse.className = "read-aloud-speed";
+    const etiquetteVitesse = document.createElement("span");
+    etiquetteVitesse.textContent = "Vitesse";
+    const choixVitesse = document.createElement("select");
+    choixVitesse.dataset.readAloudSpeed = "";
+    choixVitesse.setAttribute("aria-label", "Vitesse de lecture");
+    const libellesVitesse = { 0.75: "Lente", 1: "Normale", 1.25: "Rapide", 1.5: "Très rapide" };
+    VITESSES.forEach((valeur) => {
+      const option = document.createElement("option");
+      option.value = String(valeur);
+      option.textContent = libellesVitesse[valeur];
+      choixVitesse.append(option);
+    });
+    choixVitesse.value = String(vitesseEnregistree());
+    ligneVitesse.append(etiquetteVitesse, choixVitesse);
+
+    commandes.append(boutonLecture, boutonPause, boutonReculer, ligneVitesse);
 
     const etat = document.createElement("p");
     etat.className = "read-aloud-status";
@@ -438,13 +475,18 @@
 
     const note = document.createElement("p");
     note.className = "read-aloud-note";
-    note.textContent = "La voix est celle de l’appareil : elle peut varier, manquer ou mal prononcer un mot. Rien n’est envoyé à un service distant. Cette lecture ne remplace pas un lecteur d’écran.";
+    note.textContent = "La voix est celle de l’appareil : elle peut varier, manquer ou mal prononcer un mot. Rien n’est envoyé à un service distant. La vitesse choisie reste sur cet appareil. Cette lecture ne remplace pas un lecteur d’écran.";
 
     let enLecture = false;
     let enPause = false;
     let file = [];
     let index = 0;
     let blocMarque = null;
+    let vitesse = vitesseEnregistree();
+    // Chaque énonciation porte le numéro de sa génération. Une énonciation
+    // annulée peut rappeler `onend` ou `onerror` après coup : sans ce jeton,
+    // « Reculer » ou un changement de vitesse relancerait deux lectures.
+    let generation = 0;
 
     const annoncer = (message) => {
       if (etat.textContent === message) {
@@ -484,12 +526,14 @@
       } catch (erreur) {
         // Un moteur absent ou bloqué ne doit pas laisser la commande bloquée.
       }
+      generation += 1;
       demarquer();
       boutonLecture.textContent = "Lire à voix haute";
       boutonLecture.removeAttribute("aria-label");
       boutonPause.hidden = true;
       boutonPause.textContent = "Pause";
       boutonPause.setAttribute("aria-pressed", "false");
+      boutonReculer.hidden = true;
       if (motif === "erreur") {
         annoncer("La lecture s’est arrêtée : la voix de cet appareil n’a pas répondu.");
       } else if (motif === "fin") {
@@ -508,13 +552,16 @@
       const segment = file[index];
       index += 1;
       marquer(segment.bloc);
+      const jeton = generation;
       const enonce = new window.SpeechSynthesisUtterance(segment.texte);
       enonce.lang = segment.langue;
-      enonce.rate = 1;
+      enonce.rate = vitesse;
       enonce.onend = () => {
+        if (jeton !== generation) return;
         if (enLecture && !enPause) lire();
       };
       enonce.onerror = (evenement) => {
+        if (jeton !== generation) return;
         // Un arrêt volontaire interrompt l'énonciation en cours : Chromium le
         // signale comme une erreur. Ce n'est pas une panne, il ne faut pas
         // l'annoncer comme telle.
@@ -541,6 +588,7 @@
       } catch (erreur) {
         // Rien à annuler : le moteur repart de zéro.
       }
+      generation += 1;
       enLecture = true;
       enPause = false;
       index = 0;
@@ -553,6 +601,7 @@
       boutonPause.hidden = false;
       boutonPause.textContent = "Pause";
       boutonPause.setAttribute("aria-pressed", "false");
+      boutonReculer.hidden = false;
       annoncer("Lecture à voix haute commencée.");
       // `cancel()` puis `speak()` dans le même tour est parfois ignoré par
       // Chromium : la première énonciation part au tour suivant.
@@ -567,6 +616,53 @@
       } else {
         demarrer();
       }
+    });
+
+    const relancer = () => {
+      generation += 1;
+      enPause = false;
+      boutonPause.textContent = "Pause";
+      boutonPause.setAttribute("aria-pressed", "false");
+      try {
+        window.speechSynthesis.cancel();
+      } catch (erreur) {
+        // Un moteur absent ne doit pas bloquer la relance.
+      }
+      // Même précaution qu'au démarrage : `cancel()` puis `speak()` dans le
+      // même tour peut être perdu.
+      setTimeout(() => {
+        if (enLecture && !enPause) lire();
+      }, 0);
+    };
+
+    boutonReculer.addEventListener("click", () => {
+      if (!enLecture) return;
+      // `index` désigne le segment suivant : le segment courant est `index - 1`
+      // et le précédent `index - 2`. Au tout début, il n'y a rien à relire.
+      if (index <= 1) {
+        annoncer("Début de la page.");
+        return;
+      }
+      index -= 2;
+      relancer();
+      annoncer("Passage précédent.");
+    });
+
+    choixVitesse.addEventListener("change", () => {
+      const valeur = Number(choixVitesse.value);
+      if (!VITESSES.includes(valeur)) return;
+      vitesse = valeur;
+      savePreference(CLE_VITESSE, String(valeur));
+      const libelle = libellesVitesse[valeur];
+      if (!enLecture) {
+        annoncer(`Vitesse de lecture : ${libelle.toLowerCase()}.`);
+        return;
+      }
+      // Le débit d'une énonciation ne se modifie pas en cours de route : on
+      // reprend le passage courant à la nouvelle vitesse.
+      index = Math.max(0, index - 1);
+      relancer();
+      annoncer(`Vitesse de lecture : ${libelle.toLowerCase()}.`);
     });
 
     boutonPause.addEventListener("click", () => {
