@@ -452,7 +452,12 @@ def fichiers_du_site() -> None:
         entetes_adaptatives = entetes_adaptatives and all(position >= 0 for position in positions)
         entetes_adaptatives = entetes_adaptatives and positions[0] < positions[1] < positions[2]
         entetes_adaptatives = entetes_adaptatives and f'<script src="{script_site_ref}" defer></script>' in contenu
-        entetes_adaptatives = entetes_adaptatives and f'<link rel="stylesheet" href="{feuille_site_ref}">' in contenu
+        # L'URL peut porter l'empreinte de contenu (page IA). Sa fraîcheur
+        # est vérifiée séparément par versionner-css-ia.py --verifier.
+        entetes_adaptatives = entetes_adaptatives and bool(re.search(
+            rf'<link rel="stylesheet" href="{re.escape(feuille_site_ref)}(?:\?v=[a-f0-9]{{16}})?">',
+            contenu,
+        ))
         entetes_adaptatives = entetes_adaptatives and all(
             marqueur in contenu
             for marqueur in (
