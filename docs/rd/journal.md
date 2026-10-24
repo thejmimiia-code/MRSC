@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-24 — Réunir des groupes sans donner le même poids à leurs moyennes
+
+- **Initiative :** `relire-les-44-prototypes`. Enrichissement de `maths-moyenne`, sans nouvelle fiche ni changement de statut : 85 fiches, 59 prototypes.
+- **Besoin éditorial :** la suite du lot précédent identifiait le piège des effectifs différents. Ce n'est pas un retour d'usager ni une difficulté mesurée auprès de personnes.
+- **Choix :** exercice supplémentaire dans la fiche existante, plutôt qu'une nouvelle fiche redondante ou une formule isolée. Reconstituer les totaux avant de nommer la pondération ; durée indicative portée de 10 à 14 minutes, non mesurée en séance.
+- **Source consultée :** documentation Python 3.14.0, section `fmean` et poids. Exemple original, calcul contrôlé ; référence technique et non pédagogique. Aucune reprise de texte ni exercice.
+- **Preuves :** huit tests ciblés, dont une mutation de la moyenne globale. [Dossier du complément](groupes-statistiques-2026-10-24.md). Le statut reste « Prototype à relire » ; aucune relecture indépendante réalisée.
+- **Suite :** faire relire la charge de la fiche et l'explication du poids ; si l'enchaînement zéro/absence/groupes est trop dense lors d'un essai approuvé, découper l'activité sans multiplier des fiches quasi identiques.
+
 ## 2026-10-24 — Comparer les résumés sans inventer les données absentes
 
 - **Initiatives :** `relire-les-44-prototypes` et `co-conception-et-essais`. Lot de contenu délimité : une nouvelle fiche `maths-moyenne-mediane`, une fiche `maths-moyenne` enrichie par la différence entre zéro et absence. Catalogue : 85 fiches, dont 59 prototypes à relire ; aucun nouveau sujet déclaré complet.
