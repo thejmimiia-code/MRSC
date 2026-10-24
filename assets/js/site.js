@@ -348,8 +348,29 @@
       );
       if (ponctuation > LONGUEUR_MAX_SEGMENT / 3) coupe = ponctuation + 1;
       if (coupe <= 0) coupe = LONGUEUR_MAX_SEGMENT;
-      segments.push(reste.slice(0, coupe).trim());
+      // Une coupe tombe le plus souvent sur une espace, donc au milieu d'une
+      // phrase : le morceau se terminait sur un mot nu. Mesuré le 24 octobre
+      // 2026 sur les 98 pages du site : 41 segments sur 5 485 finissaient sans
+      // ponctuation. Un moteur de synthèse enchaîne alors le morceau suivant
+      // comme un mot de plus, sans respiration. La virgule dit la continuation
+      // sans inventer une phrase qui n'existe pas ; un point, lui, couperait
+      // le propos en deux.
+      let morceau = reste.slice(0, coupe).trim();
       reste = reste.slice(coupe).trim();
+      if (reste && !/[.!?…:;»),]$/.test(morceau)) {
+        // La virgule compte dans la limite : si le morceau l'atteint déjà, le
+        // dernier mot repasse au morceau suivant plutôt que de dépasser la
+        // longueur qu'un moteur interrompt en pleine phrase.
+        if (morceau.length >= LONGUEUR_MAX_SEGMENT) {
+          const espace = morceau.lastIndexOf(" ");
+          if (espace > LONGUEUR_MAX_SEGMENT / 3) {
+            reste = `${morceau.slice(espace).trim()} ${reste}`;
+            morceau = morceau.slice(0, espace).trimEnd();
+          }
+        }
+        morceau += ",";
+      }
+      segments.push(morceau);
     }
     if (reste) segments.push(reste);
     return segments;

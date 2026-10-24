@@ -847,6 +847,36 @@ def controler_lecture_a_voix_haute() -> list[str]:
             "site.js — le jeton de génération manque dans au moins un rappel : une énonciation "
             "annulée peut relancer la file et la lecture se dédoubler"
         )
+    # Un morceau de phrase ne doit pas s'entendre fini. Mesuré le 24 octobre
+    # 2026 sur les 98 pages du site : 46 segments sur 6 462 se terminaient sur
+    # un mot nu, que le moteur enchaînait au suivant comme un mot de plus. La
+    # règle doit rester dans `decouperSegment`, conditionnée à la présence d'une
+    # suite (sinon le dernier morceau d'un passage finirait par une virgule), et
+    # la virgule doit compter dans la longueur maximale.
+    decoupe = re.search(r"const decouperSegment = \(texte\) => \{(.*?)\n  \};", corps, re.S)
+    if not decoupe:
+        erreurs.append("site.js — la fonction de découpage en segments a disparu")
+    else:
+        corps_decoupe = decoupe.group(1)
+        # La ligne réelle, pas une sous-chaîne : la première version cherchait
+        # `morceau += ","` n'importe où, et une virgule mise en commentaire
+        # passait le contrôle en laissant le défaut intact.
+        if not re.search(r'(?m)^\s+morceau \+= ",";$', corps_decoupe):
+            erreurs.append(
+                "site.js — un morceau coupé au milieu d'une phrase ne reçoit plus de virgule : "
+                "le moteur enchaînerait le morceau suivant comme un mot de plus"
+            )
+        if "if (reste && " not in corps_decoupe:
+            erreurs.append(
+                "site.js — la virgule de continuation n'est plus conditionnée à la présence "
+                "d'une suite : le dernier morceau d'un passage finirait par une virgule"
+            )
+        if "morceau.length >= LONGUEUR_MAX_SEGMENT" not in corps_decoupe:
+            erreurs.append(
+                "site.js — la virgule n'est plus décomptée de la longueur maximale : "
+                "un segment peut dépasser la limite qu'un moteur interrompt"
+            )
+
     # L'arrêt doit annuler la voix dans sa propre fonction, pas seulement au
     # démarrage : une commande qui n'arrête rien laisse parler l'appareil.
     arret = re.search(r"const arreter = \(motif\) => \{(.*?)\n    \};", corps, re.S)

@@ -568,8 +568,8 @@ possibles et ne se voient qu'à l'oreille.
 Deux critères WCAG 2.2 de niveau AA entreront dans le RGAA 5 ; ils se mesurent,
 eux, dans un navigateur. `outils/auditer-criteres-22.mjs` les relève hors CI.
 
-- **Taille des cibles (2.5.8).** Le relevé couvre **5 654 cibles conformes** sur
-  98 pages aux deux largeurs, plus **900 en ligne** (liens dans une phrase) et
+- **Taille des cibles (2.5.8).** Le relevé couvre **5 655 cibles conformes** sur
+  98 pages aux deux largeurs, plus **901 en ligne** (liens dans une phrase) et
   **2 304 espacées** (exception de proximité), donc **0 à corriger**. Avant
   correction, 12 défauts réels subsistaient, tous dans le pied de page à 390 px :
   les liens légaux mesuraient 19 px de haut et se touchaient.
@@ -577,9 +577,15 @@ eux, dans un navigateur. `outils/auditer-criteres-22.mjs` les relève hors CI.
   `min-height: 24px`; l'écart vertical du bloc tombe de 0,3 rem à zéro pour que
   la hauteur gagnée ne se voie pas. Mesuré : liens à 24 px (25 px à 130 %),
   centrage inchangé à 0 px, pied de page 430 px à 1 440 px contre 425 avant.
-- **Focus non masqué (2.4.11).** Pour chaque cible de l'échantillon, le script
-  fait défiler en `instant`, porte le focus, puis teste cinq points du rectangle
-  contre `elementFromPoint`. **825 éléments testés, 0 entièrement masqué.**
+- **Focus non masqué (2.4.11).** Pour chaque cible atteignable, le script fait
+  défiler en `instant`, porte le focus, puis teste cinq points du rectangle
+  contre `elementFromPoint`. **8 856 éléments testés sur 98 pages, 0 entièrement
+  masqué, 0 page coupée** (24 octobre 2026). Le plafond de 60 cibles et les huit
+  pages du premier essai coupaient la passe en silence : `anglais-aventure.html`
+  en compte 448, dont 60 seulement étaient portées au focus. Le plafond passe à
+  500 — au-delà du maximum observé — et le bilan déclare désormais les pages
+  coupées. Une page qui ne se charge pas est comptée comme un échec, et non
+  comme « zéro défaut » : c'était un second piège du même outil.
 - **Deux pièges de mesure, mesurés et corrigés dans l'outil.** Un défilement
   animé n'a pas fini au moment de la mesure et produit de faux « hors écran » :
   le défilement est forcé en `instant` et la feuille reçoit
@@ -592,8 +598,11 @@ Garde-fou : `.footer-legal a` entre dans les `CIBLES` vérifiées par
 le contrôle. Le contrôle de lecture à voix haute exige désormais
 `checkVisibility` et `innerText` : les deux sont nécessaires, aucun ne suffit.
 
-Limite : la mesure porte sur une géométrie et un échantillon (60 cibles par page,
-huit pages), pas sur la difficulté réelle à viser ni sur un audit complet.
+Limite : la mesure porte sur une géométrie, pas sur la difficulté réelle à viser
+ni sur un audit complet ; la passe du focus couvre désormais toutes les cibles
+des 98 pages (8 856 éléments), mais cinq points par élément ne disent rien de la
+lisibilité du contour, et le recouvrement n'est testé qu'après un défilement que
+la mesure provoque elle-même.
 
 ## 6 decies. Reculer et choisir son débit : deux gestes de plus dans le panneau (23 octobre 2026)
 
@@ -627,8 +636,20 @@ dans le panneau, aux largeurs et aux crans de texte les plus serrés.
   est comparé dans la fin **et** dans l'erreur ; l'essai navigateur simule
   exprès ce rappel fantôme.
 
-Garde-fou : 15ᵉ contrôle `controler_lecture_a_voix_haute`, désormais **quatorze
-mutations rejouées, quatorze détectées**. Sept concernent le premier lot (langue
+- **Une coupe ne doit pas s'entendre finie (24 octobre 2026).** Les blocs longs
+  sont découpés en morceaux de 220 caractères ; la coupe tombait sur une espace,
+  donc au milieu d'une phrase, et le morceau se terminait sur un mot nu. Mesuré
+  sur les **98 pages** du site, en attendant la fin réelle de chaque lecture :
+  **46 segments sur 6 462** dans ce cas. Un moteur de synthèse enchaîne alors le
+  morceau suivant comme un mot de plus, sans respiration. Chaque morceau coupé
+  reçoit désormais une **virgule** — elle dit la continuation, là où un point
+  inventerait une phrase qui n'existe pas — et cette virgule compte dans la
+  limite : si le morceau fait déjà 220 caractères, son dernier mot repasse au
+  morceau suivant. Après correction, **0 segment sur 6 462** finit sur un mot nu,
+  et aucun ne dépasse 220 caractères.
+
+Garde-fou : 15ᵉ contrôle `controler_lecture_a_voix_haute`, désormais **dix-sept
+mutations rejouées, dix-sept détectées**. Sept concernent le premier lot (langue
 du bloc ignorée, arrêt sans annulation, contenus masqués lus, `fetch` ajouté,
 marque visuelle supprimée, commande construite mais jamais ajoutée au panneau,
 nom accessible sans le texte visible) ; sept visent le second : vitesses
@@ -745,3 +766,10 @@ réel n'a été utilisé : les profils sont émulés dans un Chromium sans inter
 Le protocole complet est dans `outils/auditer-affichages.mjs` (facultatif, hors
 CI : il demande Chromium). Il rend un tableau par page et par format, avec les
 mêmes seuils que ceux décrits ici.
+
+Les deux critères WCAG 2.2 se rejouent avec `outils/auditer-criteres-22.mjs`,
+qui a besoin d'un serveur local sur son port (`python3 -m http.server 4187`).
+Une passe complète — 98 pages × 390 et 1 280 px, focus compris — dure une
+vingtaine de minutes ; `--sans-focus` ne mesure que la taille des cibles et
+`--pages` limite le périmètre. Le script écrit son relevé en JSON, comme
+[`audit-criteres-22-2026-10-24.json`](audit-criteres-22-2026-10-24.json).
