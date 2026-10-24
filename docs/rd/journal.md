@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-24 — Le cache peut désynchroniser le dessin et ses pastilles
+
+- **Initiative :** `optimisation-du-site`. La capture smartphone fournie après la fusion #188 montre les nouveaux points SVG et la nouvelle légende, mais les anciennes positions CSS des pastilles et du cœur. Les mesures précédentes utilisaient un contexte navigateur neuf et ne couvraient pas ce mélange.
+- **Reproduction :** servir le HTML courant avec le CSS du commit `f3c4ddf` reproduit les décalages ; un test pérenne rejoue les seules anciennes règles géométriques. Cela étaye l'explication sans prétendre lire le cache du téléphone.
+- **Correction :** l'URL du CSS de `ia-societe.html` porte désormais une empreinte SHA-256 de son contenu. Une nouvelle réponse HTML demande donc une autre URL que celle du CSS antérieur. `versionner-css-ia.py --verifier` refuse une empreinte absente ou périmée ; son mode sans option la synchronise après modification de la feuille.
+- **Contrôles :** 12 cas navigateur (320/390/768 px, présentations équilibrée/compacte, texte 130 %, densité 2), anciens décalages détectés et nouvelles ancres alignées. Relevé : [audit-cache-css-ia-2026-10-24.json](audit-cache-css-ia-2026-10-24.json). Test exécuté avec le CSS historique entier puis avec la fixture ciblée. Passe complète IA rejouée avec la nouvelle URL : 1 260 relevés, 0 échec. Tests Python de l'empreinte, site statique et périmètre publié également vérifiés ; contrôle et simulation ajoutés à la CI.
+- **Limite :** cette correction cible la page IA. Elle ne force pas le renouvellement d'un document HTML lui-même conservé en cache et ne prouve pas l'état du cache de l'appareil de l'utilisateur. Les autres pages n'ont pas encore d'URL CSS versionnée.
+- **Suite :** vérifier après publication le rendu sur le téléphone concerné, puis étudier le versionnement des ressources sur l'ensemble des pages générées.
+
 ## 2026-10-24 — Restaurer l'identité, puis mesurer les alignements
 
 - **Initiative :** `optimisation-du-site`. Les héros vectoriels ont été rejetés : la netteté n'autorise pas à réinterpréter l'identité. Les cinq fichiers d'accueil antérieurs sont récupérés depuis le parent de leur suppression, sans réencodage ; Apprendre retrouve son illustration antérieure et son générateur est synchronisé.
