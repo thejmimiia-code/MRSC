@@ -818,6 +818,11 @@
       [headerCompactToggle, settings, layoutSettings, lectureVocale].forEach((element) => {
         if (element) panneauPersonnalisation.append(element);
       });
+      const atelier = document.createElement("a");
+      atelier.href = new URL("../../animations.html", document.querySelector('script[src*="assets/js/site.js"]').src).href;
+      atelier.textContent = "Atelier animations 2,5D";
+      atelier.className = "animation-lab-link";
+      panneauPersonnalisation.append(atelier);
       outilsEntete.append(personnalisation);
     }
 

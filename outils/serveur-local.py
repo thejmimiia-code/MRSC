@@ -43,7 +43,7 @@ ROUTES_MOTEUR = (
 MAX_REQUEST_BODY_BYTES = 1_048_576
 MAX_RELAY_RESPONSE_BYTES = 16_777_216
 FICHIERS_RACINE_PUBLICS = frozenset({
-    "index.html", "apprendre.html", "anglais-aventure.html", "ia-societe.html", "eva.html", "simulateur.html",
+    "index.html", "apprendre.html", "anglais-aventure.html", "ia-societe.html", "eva.html", "animations.html", "simulateur.html",
     "documents.html", "liens-utiles.html", "localisation.html",
     "nous-contacter.html", "transparence.html", "confidentialite.html",
     "404.html", "sitemap.xml", "llms.txt", "favicon.ico",
