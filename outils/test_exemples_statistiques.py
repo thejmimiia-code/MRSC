@@ -80,6 +80,30 @@ class ExemplesStatistiques(unittest.TestCase):
         finally:
             fiche['correction'] = original
 
+    def test_groupes_effectifs_differents(self):
+        fiche = FICHES['maths-moyenne']
+        texte = ' '.join(fiche['correction'])
+        self.assertIn('2 manches de moyenne exacte 3 points', fiche['exercice'])
+        self.assertIn('6 manches de moyenne exacte 7 points', fiche['exercice'])
+        self.assertEqual(statistics.mean([3, 3] + [7]*6), 6)
+        self.assertIn('48 ÷ 8 = 6 points par manche', texte)
+        self.assertNotEqual(statistics.mean([3, 7]), 6)
+        self.assertIn('moyennes arrondies', texte)
+        self.assertIn('Sans les effectifs', texte)
+        self.assertIn('groupes sans manche en commun', texte)
+        for n in (1, 2, 7):
+            self.assertEqual(statistics.mean([3]*n + [7]*n), 5)
+
+    def test_mutation_moyenne_globale(self):
+        fiche = FICHES['maths-moyenne']
+        original = fiche['correction'][:]
+        try:
+            fiche['correction'] = [s.replace('48 ÷ 8 = 6', '48 ÷ 8 = 5') for s in original]
+            with self.assertRaises(AssertionError):
+                self.test_groupes_effectifs_differents()
+        finally:
+            fiche['correction'] = original
+
     def test_statut_non_valide(self):
         for id in ['maths-moyenne', 'maths-moyenne-mediane']:
             self.assertEqual(FICHES[id]['statut_editorial'], 'Prototype à relire')
