@@ -1,0 +1,32 @@
+{
+  "pages": 98,
+  "largeurs": [
+    390,
+    1280
+  ],
+  "echecs": [],
+  "cibles": {
+    "conformes": 5655,
+    "enLigne": 901,
+    "espacees": 2304,
+    "aCorriger": []
+  },
+  "focus": {
+    "testees": 0,
+    "total": 0,
+    "coupees": [],
+    "masques": []
+  },
+  "espacement": {
+    "pages": 0,
+    "debordements": [],
+    "rognes": []
+  },
+  "clavier": {
+    "pages": 196,
+    "elements": 8050,
+    "desactivees": 594,
+    "inaccessibles": [],
+    "pieges": []
+  }
+}

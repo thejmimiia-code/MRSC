@@ -284,3 +284,21 @@ controle = "python3 outils/verifier-affichages.py && node outils/auditer-critere
 limite = "La mesure voit un débordement et un rognage, pas une perte de sens : un chevauchement partiel, une coupure de mot, un texte masqué par un `clip-path` sans `overflow` ou déplacé hors du champ visible sans déborder lui échappent. Aucune personne n'a relu ce critère, et rien ne prouve qu'une personne qui a besoin de cet espacement lit mieux la page : c'est une géométrie, pas un usage."
 suite = "Faire lire la page à une personne qui agrandit l'interlettrage, puis étendre la mesure au zoom 200 % et au critère 1.4.10 (redistribution du contenu), qui n'ont jamais été éprouvés ici."
 initiatives = ["optimisation-du-site"]
+
+[[avancee]]
+id = "une-passe-clavier-qui-sarrete-nest-pas-un-piege"
+date = 2026-10-24
+titre = "Une passe clavier qui s'arrête n'est pas forcément un piège"
+constat = "Un défaut noté affirmait que la tabulation s'arrêtait après 60 à 90 appuis. Reproduit, il correspond exactement au nombre de commandes visibles de la page : 60 sur l'accueil, 90 sur la page de transparence, 37 sur une fiche. Rien n'était sauté — le focus quitte simplement le document pour les commandes du navigateur, ce qu'une page ne peut pas empêcher."
+changement = "`outils/auditer-criteres-22.mjs --clavier` exerce le critère 2.1.1 sur deux propriétés vérifiables : chaque commande visible reçoit le focus une fois, et le parcours ne revient jamais sur un élément déjà vu, ce qui signalerait un piège. La boucle ne s'arrête que sur la fin du document ou un retour en arrière, et les commandes désactivées sont écartées puis comptées. Deux mutations — un `tabindex=\"-1\"` et un renvoi de focus en tête — sont détectées."
+preuves = [
+  "outils/auditer-criteres-22.mjs",
+  "docs/rd/audit-clavier-2026-10-24.json",
+  "docs/rd/formats-affichage.md",
+  "docs/rd/inclusion-criteres-wcag-22.md",
+  "transparence.html",
+]
+controle = "node outils/auditer-criteres-22.mjs --clavier"
+limite = "La passe ne teste que la tabulation depuis le haut de page, panneaux fermés : menu mobile ouvert, panneau de personnalisation ouvert, raccourcis clavier, ordre logique de lecture et usage d'un lecteur d'écran ne sont pas couverts. Une commande atteinte peut rester inutilisable, et l'absence de retour en arrière ne prouve pas un ordre compréhensible."
+suite = "Rejouer la passe avec le menu et le panneau ouverts, puis faire relire l'ordre de tabulation par une personne qui navigue au clavier sans souris."
+initiatives = ["optimisation-du-site"]
