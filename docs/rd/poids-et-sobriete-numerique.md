@@ -35,7 +35,7 @@ python3 outils/verifier-poids-pages.py --rapport docs/rd/poids-pages.md
 
 Le script :
 
-1. parcourt les 98 pages publiques (13 pages d’information à la racine, dont l’accueil et la page 404, 84 fiches et la page du simulateur) ;
+1. parcourt les 99 pages publiques (13 pages d’information à la racine, dont l’accueil et la page 404, 85 fiches et la page du simulateur) ;
 2. additionne le HTML, les feuilles de style locales, les scripts locaux et l’image retenue pour chaque emplacement ;
 3. compresse chaque fichier avec gzip niveau 9 pour approcher le transfert ;
 4. estime deux scénarios : le plus petit candidat `srcset` (mobile ou petit écran) et le plus grand (grand écran à forte densité) ;
@@ -57,7 +57,7 @@ Mesure du 17 octobre 2026, avant et après la conversion des trois grandes illus
 | `ia-societe.html`, `transparence.html`, fiches types | 52–59 | 52–59 | inchangé | 52–59 | 52–59 | inchangé |
 | `simulateur/index.html` | 71,4 | 71,4 | inchangé | 71,4 | 71,4 | inchangé |
 
-Le détail page par page est régénéré dans [`poids-pages.md`](poids-pages.md). Les 98 pages restent sous les budgets de travail après la passe.
+Le détail page par page est régénéré dans [`poids-pages.md`](poids-pages.md). Les 99 pages restent sous les budgets de travail après la passe du 24 octobre 2026.
 
 ### 4.2 Images : formats et qualité
 

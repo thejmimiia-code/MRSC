@@ -10,8 +10,8 @@
 - Distinguer les rôles de relecture — expertise du domaine, édition, accessibilité, personnes apprenantes, responsable de publication — sans publier de nom personnel par défaut.
 - Garder les notes de test volontaires minimales et non identifiantes. Ne demander ni récit de parcours scolaire, ni diagnostic, ni donnée financière ou de santé.
 - Un désaccord de fond, un doute de droit ou une erreur susceptible d’induire en erreur bloque la diffusion jusqu’à résolution.
-- Une revue interne de cohérence des 26 prototypes alors présents est consignée le 11 octobre 2026 dans [`revue-interne-prototypes-2026-10-11.md`](revue-interne-prototypes-2026-10-11.md). Elle n’est pas une validation spécialisée ni une autorisation de publication. Les huit fiches ajoutées dans le lot suivant, les dix fiches du lot suivant et les prototypes du 15 octobre 2026 ne sont pas couvertes par cette revue ; les 58 prototypes actuels restent à relire.
-- Pour organiser ces relectures, la [file de relecture](file-relecture.md) générée par `python3 outils/file-relecture.py` range les 58 prototypes par domaine et signale les sujets à relecture spécialisée. C’est une liste de travail issue du catalogue, pas une évaluation : ses signaux par mots-clés doivent être corrigés par une personne.
+- Une revue interne de cohérence des 26 prototypes alors présents est consignée le 11 octobre 2026 dans [`revue-interne-prototypes-2026-10-11.md`](revue-interne-prototypes-2026-10-11.md). Elle n’est pas une validation spécialisée ni une autorisation de publication. Les huit fiches ajoutées dans le lot suivant, les dix fiches du lot suivant et les prototypes du 15 octobre 2026 ne sont pas couvertes par cette revue ; les 59 prototypes actuels restent à relire.
+- Pour organiser ces relectures, la [file de relecture](file-relecture.md) générée par `python3 outils/file-relecture.py` range les 59 prototypes par domaine et signale les sujets à relecture spécialisée. C’est une liste de travail issue du catalogue, pas une évaluation : ses signaux par mots-clés doivent être corrigés par une personne.
 - Avant d’ouvrir une fiche, lire son constat mécanique dans l’[audit automatique](audit-automatique.md) (`python3 outils/auditer-prototypes.py --fiche <identifiant>`) : les 17 contrôles objectifs sont déjà passés, et un échec se corrige sans expertise. Le vert ne dispense d’aucune question ci-dessous.
 - Distinguer deux sortes de restes : l’**échec** (faux, réparable sans jugement) et le **constat** (fait exact que la machine ne peut pas juger). Le constat le plus fréquent est la source-portail : la fiche ne cite que la racine d’un site, donc aucune page précise n’est confrontable. Trancher veut dire : ajouter une page réellement consultée et vérifiée, ou écrire dans la fiche que le portail est un point d’entrée assumé — puis vérifier que la question 1 ci-dessous reste répondable.
 - Pour enregistrer une relecture, une seule voie : une entrée datée dans [`relectures.toml`](relectures.toml), vérifiée par `python3 outils/registre-relecture.py`. Le registre ne contient aujourd’hui aucune entrée, et un agent ne doit jamais en écrire une.
@@ -268,7 +268,7 @@ Pour les trente-quatre prototypes décrits avant le lot courant, consigner une t
 
 **Statut : « Prototype à relire », non validé.** La fiche sépare le programme embarqué exécuté sur place, l’interface homme-machine et la liaison réseau d’un objet connecté fictif (programmateur d’arrosage, prise programmable), sans aucun montage ni réglage réseau. Faire relire par une personne compétente en informatique ou systèmes embarqués ; revérifier le programme et l’activité SNT de seconde (Éduscol `23494` et `23560`) ainsi que le guide `ANSSI-PA-087`.
 
-Pour l’ensemble des cinquante-huit prototypes décrits ici, consigner une trace de décision séparée dans [`relectures.toml`](relectures.toml), au format vérifié ci-dessous ; une vérification de génération, de syntaxe ou de lien local ne remplace pas la relecture de domaine, l’examen des droits, les essais d’usage ou la revue de navigateur.
+Pour l’ensemble des 59 prototypes décrits ici, consigner une trace de décision séparée dans [`relectures.toml`](relectures.toml), au format vérifié ci-dessous ; une vérification de génération, de syntaxe ou de lien local ne remplace pas la relecture de domaine, l’examen des droits, les essais d’usage ou la revue de navigateur.
 
 ### Trace de décision — un seul format
 
@@ -299,3 +299,18 @@ suite = "ce qui est décidé ensuite, et par qui"
 ```
 
 Le contrôle refuse une date future, un verdict inconnu, un verdict « à corriger » ou « insuffisant » sans objection, et tout statut du catalogue qui ne correspondrait pas au registre : une fiche « Relu — relecture consignée » sans relecture conforme échoue, une fiche « Prototype à relire » avec une relecture conforme échoue aussi. Il ne juge ni la qualité de la relecture ni son auteur ; il empêche seulement un statut de bouger sans trace, ou une trace d'exister sans effet. Un statut ne se déclare pas : il se date, il se périme et il se reprend.
+
+
+## Lot du 24 octobre 2026 — moyenne, médiane et valeur absente
+
+- `maths-moyenne-mediane` : vérifier tri et doublons, définition au cas pair,
+  distinction « au moins la moitié » / « strictement la moitié », résultats des
+  exercices et absence de conclusion sur une population réelle.
+- `maths-moyenne` : vérifier qu'un zéro observé reste dans l'effectif, qu'aucune
+  donnée absente n'est remplacée arbitrairement et que la moyenne partielle est
+  annoncée avec son effectif.
+- Six tests ciblés et 288 relevés géométriques ne constituent pas une relecture.
+  Les deux fiches restent à relire ; demander un avis mathématique et pédagogique
+  indépendant avant de conclure sur la qualité de l'explication.
+- Dossier : [lot statistiques](../rd/lot-statistiques-2026-10-24.md). La tâche
+  d'essai demeure une proposition à approuver, pas une séance réalisée.

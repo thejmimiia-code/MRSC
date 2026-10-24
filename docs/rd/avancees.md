@@ -4,16 +4,16 @@
 
 **À quoi cela sert :** un autre agent reprend le projet sans avoir à reconstituer l'histoire. Chaque entrée dit aussi ce qu'elle ne prouve pas, pour qu'une avancée ne se transforme pas en argument d'autorité.
 
-**Date du registre :** 2026-10-20 — dernière revue consignée dans `avancees.toml`. Cette sortie ne dépend pas du jour où elle est régénérée.
+**Date du registre :** 2026-10-24 — dernière revue consignée dans `avancees.toml`. Cette sortie ne dépend pas du jour où elle est régénérée.
 
 ## 1. Vue d'ensemble
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 16 |
+| Avancées consignées | 17 |
 | Période couverte | du 2026-10-20 au 2026-10-24 |
-| Contrôles exécutables cités | 20 |
-| Initiatives du portefeuille concernées | 11 |
+| Contrôles exécutables cités | 22 |
+| Initiatives du portefeuille concernées | 12 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
 
@@ -313,6 +313,29 @@ Initiatives liées : `optimisation-du-site`, `ecouter-la-page`.
 **Suite.** Faire écouter la fonction à une personne qui lit difficilement et à une personne utilisant un lecteur d'écran, puis consigner les mots mal prononcés et le cran de vitesse qui lui convient ; retirer le lot si la voix perd le fil ou si un bloc est lu deux fois.
 
 Initiatives liées : `ecouter-la-page`.
+
+### `reponse-chiffree-reliee-au-test` — Vérifier le résultat écrit dans la fiche, pas seulement un calcul parallèle
+
+*Consignée le 2026-10-24.*
+
+**Constat.** Un test peut recalculer une moyenne exacte sans repérer une réponse fausse écrite dans le catalogue. L'ajout d'une fiche faisait aussi croître les totaux attendus d'anciens relevés axe, comme si une nouvelle page avait été mesurée automatiquement.
+
+**Ce que cela change.** Les exemples du lot moyenne/médiane sont reliés à leurs passages de correction dans le catalogue. Deux mutations des réponses doivent échouer. Les compteurs courants sont distingués des anciens relevés d'accessibilité, conservés à leur périmètre daté.
+
+**Preuves dans le dépôt :**
+
+- `outils/test_exemples_statistiques.py`
+- `docs/apprentissage/catalogue.toml`
+- `docs/rd/lot-statistiques-2026-10-24.md`
+- `outils/verifier-site-statique.py`
+
+**Contrôle qui la maintient :** `python3 outils/test_exemples_statistiques.py && python3 outils/verifier-site-statique.py`
+
+**Limite — ce que cela ne prouve pas.** Les contrôles portent sur des passages identifiés et des calculs finis : ils ne comprennent pas la totalité du texte, ne prouvent pas l'efficacité d'une analogie et ne remplacent aucune relecture mathématique ou pédagogique indépendante.
+
+**Suite.** Faire relire les deux fiches et leurs tâches candidates, puis étendre les assertions aux prochains exemples sans transformer une correction automatique en promesse de compréhension.
+
+Initiatives liées : `relire-les-44-prototypes`, `co-conception-et-essais`.
 
 ### `un-espacement-impose-casse-la-page` — Un espacement imposé casse la page avant de la rendre lisible
 

@@ -1352,7 +1352,7 @@ domaine = "mathematiques"
 niveau = 1
 horizon_contenu = "Repères de cycle 4 ; notion reprise pas à pas, sans âge requis"
 statut_editorial = "Prototype à relire"
-note_statut_editorial = "Rédaction et exemples originaux ; exactitude du calcul, interprétation statistique, relecture pédagogique indépendante, droits, accessibilité et essais apprenants restent à vérifier avant toute diffusion. La source sert de repère factuel et sa licence de réutilisation n’a pas été vérifiée."
+note_statut_editorial = "Rédaction et exemples originaux ; calculs des exemples contrôlés automatiquement le 24 octobre 2026 ; interprétation statistique, relecture pédagogique indépendante, droits, accessibilité et essais apprenants restent à vérifier avant toute diffusion. La source sert de repère factuel et sa licence de réutilisation n’a pas été vérifiée."
 minutes = 10
 resume = "Additionner des valeurs, puis répartir le total également pour calculer leur moyenne."
 objectif = "Calculer et interpréter la moyenne arithmétique d’une petite série de valeurs compatibles."
@@ -1374,12 +1374,15 @@ demarche = [
   "Divise le total par le nombre de valeurs : 20 ÷ 4 = 5. Le symbole ÷ signifie ici que l’on répartit les 20 points en 4 parts égales.",
   "Interprète le résultat avec son unité : la moyenne est de 5 points par manche. Vérifie le partage : 5 + 5 + 5 + 5 = 20. Aucune manche n’a marqué exactement 5 points : c’est une moyenne, pas le récit d’une manche."
 ]
-exercice = "Dans trois manches fictives, une joueuse marque 3, 6 et 9 points. Quelle est sa moyenne de points par manche ?"
+exercice = "Dans trois manches fictives, une joueuse marque 3, 6 et 9 points. Quelle est sa moyenne de points par manche ? Puis compare deux relevés fictifs : A contient 0, 4, 8 points ; B contient une valeur manquante, 4, 8 points. Peut-on traiter la valeur manquante comme un zéro ?"
 aide = "Additionne les trois scores, puis partage le total entre les trois manches : (3 + 6 + 9) ÷ 3."
 correction = [
   "3 + 6 + 9 = 18 points au total.",
   "Il y a 3 manches, donc 18 ÷ 3 = 6.",
-  "La moyenne est de 6 points par manche. Ici, ce score est aussi celui de la deuxième manche, mais ce n’est pas toujours le cas."
+  "La moyenne est de 6 points par manche. Ici, ce score est aussi celui de la deuxième manche, mais ce n’est pas toujours le cas.",
+  "Relevé A : zéro est un score connu. (0 + 4 + 8) ÷ 3 = 4 : moyenne 4 points sur 3 manches.",
+  "Relevé B : seuls deux scores sont connus. (4 + 8) ÷ 2 = 6 : moyenne 6 points sur les 2 manches renseignées. La moyenne des 3 manches reste inconnue.",
+  "Remplacer sans justification une valeur absente par zéro inventerait un résultat. Annonce le nombre de valeurs connues et la valeur manquante."
 ]
 a_retenir = [
   "Moyenne = somme des valeurs ÷ nombre de valeurs.",
@@ -1388,7 +1391,7 @@ a_retenir = [
   "Une moyenne résume une série mais ne suffit pas toujours à décrire ses différences ou ses valeurs extrêmes."
 ]
 transferer = "Une moyenne peut résumer de petites séries de durées, de distances ou de scores, si les valeurs mesurent bien la même chose. Pour comparer des groupes ou prendre une décision importante, examine aussi la taille des groupes, l’étendue des valeurs et le contexte ; une moyenne seule peut masquer des différences."
-revue_le = "2026-10-08"
+revue_le = "2026-10-24"
 intervalle_revue_jours = 365
 
 [[fiche.sources]]
@@ -4945,3 +4948,59 @@ droits_controles_le = "2026-10-20"
 mode_utilisation = "reference-factuelle"
 utilisation = "Guide consulté le 20 octobre 2026 : architecture d’un système d’objets connectés (capteurs/actionneurs, passerelles, système d’information et terminaux) et rappel que des données apparemment anodines peuvent révéler des habitudes de vie. Aucun schéma ni recommandation textuelle n’est reproduit."
 
+[[fiche]]
+id = "maths-moyenne-mediane"
+titre = "Moyenne et médiane : deux façons de résumer une série"
+matiere = "Mathématiques — statistiques simples"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 2
+horizon_contenu = "Après le calcul d’une moyenne ; petites séries numériques, sans logiciel ni connaissances de programmation"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 24 octobre 2026. Les définitions sont confrontées à la documentation du module statistics de Python 3.14.0, sections mean et median, réellement consultées. Les exemples fictifs sont originaux et leurs résultats sont contrôlés automatiquement. Ce contrôle ne remplace ni une relecture mathématique et pédagogique indépendante, ni un essai d’accessibilité ou de compréhension avec des personnes."
+minutes = 12
+resume = "Comparer un partage égal et la position centrale pour comprendre ce qu’un chiffre résume — et ce qu’il cache."
+objectif = "Calculer une moyenne et une médiane sur une petite série, puis expliquer pourquoi elles peuvent différer."
+situation = "Cinq durées d’attente fictives, en minutes : 20, 4, 2, 5, 4. Une personne annonce « 7 minutes en moyenne », une autre « la médiane est 4 minutes ». Les deux résultats peuvent-ils être justes ? Prérequis : savoir additionner et diviser ; la fiche sur la moyenne peut servir de point de départ."
+analogie_titre = "Comme des cartes rangées sur une table"
+analogie = "Écris une durée sur chaque carte et range les cartes de la plus petite à la plus grande. La médiane cherche le milieu de cette rangée. La moyenne fait autre chose : elle répartit également le total écrit sur les cartes."
+limite_analogie = "Ranger les cartes ne modifie aucune attente vécue. Si deux cartes occupent le milieu, on calcule ici la moyenne de leurs deux nombres. Le résultat peut ne figurer sur aucune carte. Les durées sont fictives : elles ne prévoient pas une prochaine attente."
+notions = [
+  "Série ordonnée — valeurs rangées de la plus petite à la plus grande, en conservant chaque répétition.",
+  "Moyenne arithmétique — somme des valeurs divisée par leur nombre.",
+  "Médiane — valeur centrale d’une série ordonnée ; avec un nombre pair de valeurs, on utilise ici la moyenne des deux valeurs centrales.",
+  "Valeur extrême — valeur située à une extrémité de la série ; une valeur élevée n’est pas forcément une erreur."
+]
+demarche = [
+  "Vérifie l’unité et compte les observations : cinq durées en minutes. Une donnée manquante n’est pas un zéro et doit être signalée.",
+  "Range sans supprimer les doublons : 2, 4, 4, 5, 20. Les deux durées égales à 4 correspondent à deux observations.",
+  "Calcule le partage égal : (2 + 4 + 4 + 5 + 20) ÷ 5 = 35 ÷ 5 = 7 minutes de moyenne.",
+  "Repère le milieu : parmi cinq valeurs, la troisième est 4. La médiane vaut 4 minutes. Au moins la moitié des valeurs est inférieure ou égale à 4, et au moins la moitié est supérieure ou égale à 4.",
+  "Compare : les 20 minutes augmentent la moyenne. Les deux résumés répondent à des questions différentes ; aucun ne raconte les cinq attentes à lui seul.",
+  "Pour un effectif pair, prends les deux valeurs centrales après tri. Avec 2, 4, 8, 14, la médiane vaut (4 + 8) ÷ 2 = 6 minutes. Ce n’est ni la moyenne des deux extrêmes, ni obligatoirement une durée observée."
+]
+exercice = "À ton rythme, à l’écrit ou à voix haute : A) trie 9, 3, 5, 1, 2 puis calcule moyenne et médiane. B) remplace seulement 9 par 29 : qu’est-ce qui change ? C) pour 1, 2, 8, 15, trouve la médiane. Toutes les valeurs sont des durées fictives en minutes."
+aide = "Pour A, conserve les cinq valeurs et cherche la troisième après tri. Pour B, compare les sommes mais aussi les positions. Pour C, il y a quatre valeurs : prends les deuxième et troisième, pas les deux extrêmes."
+correction = [
+  "A — Série ordonnée : 1, 2, 3, 5, 9. La somme vaut 20 et 20 ÷ 5 = 4 : moyenne 4 minutes. La troisième valeur est 3 : médiane 3 minutes.",
+  "B — Série ordonnée : 1, 2, 3, 5, 29. La somme vaut 40 et 40 ÷ 5 = 8 : moyenne 8 minutes. La médiane reste 3 minutes. Dans cet exemple, changer la valeur la plus grande ne change pas la position centrale.",
+  "C — Les valeurs centrales sont 2 et 8. Leur moyenne vaut (2 + 8) ÷ 2 = 5 : médiane 5 minutes. Aucune attente de cette série ne dure exactement 5 minutes.",
+  "Pièges à éviter : prendre le milieu avant de trier, supprimer un doublon ou choisir les extrêmes. La médiane peut changer si une modification déplace les valeurs centrales ; elle n’est pas toujours constante."
+]
+a_retenir = [
+  "La moyenne utilise le total ; la médiane utilise les positions après tri.",
+  "Conserve les répétitions et annonce l’effectif, l’unité et les données manquantes.",
+  "Avec des valeurs répétées, « moitié » ne veut pas dire exactement la moitié strictement plus petite.",
+  "Une moyenne et une médiane différentes ne prouvent ni une erreur ni une manipulation."
+]
+transferer = "Devant une durée moyenne affichée, cherche combien de mesures ont été faites, sur quelle période et pour quel groupe. Si une médiane est donnée, demande aussi comment les autres durées sont réparties. Ces deux nombres ne suffisent pas à prévoir le cas d’une personne. Aucun choix médical, financier ou juridique ne se déduit de cet exercice."
+revue_le = "2026-10-24"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Python Software Foundation — statistics, documentation Python 3.14.0, sections mean et median"
+url = "https://github.com/python/cpython/blob/v3.14.0/Doc/library/statistics.rst"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-10-24"
+mode_utilisation = "reference-factuelle"
+utilisation = "Sections mean et median ouvertes et lues le 24 octobre 2026 : somme divisée par l’effectif, sensibilité de la moyenne aux valeurs éloignées, valeur centrale pour un effectif impair et moyenne des deux centrales pour un effectif pair. Documentation technique, pas preuve d’efficacité pédagogique ; exemples et formulation M.R.S.C. originaux. Aucun texte ni exercice de la source n’est reproduit."

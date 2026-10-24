@@ -6,15 +6,15 @@
 
 **Trois états, pas deux.** Un contrôle est `ok`, `à corriger` — le fait est faux et réparable sans jugement — ou `constat` : la machine voit un fait exact, mais elle ne peut pas dire s'il est acceptable. Un constat n'est pas un défaut : il se nomme ici pour qu'une personne tranche, et il n'empêche pas la page publique de dire la vérité, à condition qu'elle le dise.
 
-**Date de référence :** 2026-10-20 — dernière revue de contenu consignée au catalogue. Les contrôles, eux, sont exécutés au jour de lancement ; cette sortie ne dépend pas de ce jour.
+**Date de référence :** 2026-10-24 — dernière revue de contenu consignée au catalogue. Les contrôles, eux, sont exécutés au jour de lancement ; cette sortie ne dépend pas de ce jour.
 
 ## 1. État d'ensemble
 
 | Mesure | Valeur |
 | --- | ---: |
-| Prototypes audités | 58 |
+| Prototypes audités | 59 |
 | Contrôles automatiques par fiche | 17 |
-| Fiches sans aucun échec mécanique | 58 |
+| Fiches sans aucun échec mécanique | 59 |
 | Fiches avec au moins un échec | 0 |
 | Échecs mécaniques au total | 0 |
 | Fiches avec un constat à trancher par une personne | 1 |
@@ -34,8 +34,8 @@ Pour la ligne « page précise » : ces fiches ne citent que des portails (racin
 
 | Fait mesuré | Valeur |
 | --- | ---: |
-| Sources déclarées au total | 111 |
-| dont licence déclarée « non vérifiée » | 109 |
+| Sources déclarées au total | 112 |
+| dont licence déclarée « non vérifiée » | 110 |
 | Fiches sans aucune source | 0 |
 | Prochaine revue la plus proche | 2027-01-09 (info-lire-adresse-web) |
 | Fiches dont la revue de contenu est échue à la date de référence | 0 |
@@ -92,6 +92,7 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
+| [Moyenne et médiane : deux façons de résumer une série](fiches/maths-moyenne-mediane.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 17 | 0 | 0 | — |
