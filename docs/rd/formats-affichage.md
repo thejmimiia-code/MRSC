@@ -644,6 +644,87 @@ Limite : la mesure porte sur la géométrie et sur un double de la synthèse, pa
 sur le son. Aucun débit réel n'a été écouté, et personne n'a encore essayé ces
 deux gestes ; le cran qui convient à une personne ne se déduit d'aucune mesure.
 
+## 6 undecies. Les deux derniers héros passent en géométrie (24 octobre 2026)
+
+Il restait deux illustrations bitmap dans le site : l'emblème de l'accueil et
+l'atlas de `apprendre.html`. Le héros des Mondes était déjà un rendu 3D (§ 6 ter),
+l'illustration d'« Apprendre » avait été désétirée (§ 6 ter bis) ; ces deux-là
+n'avaient reçu qu'un correctif de variante. Elles deviennent des tracés SVG.
+
+- **Ce que la mesure disait.** À 390 px et 3×, la boîte de l'emblème mesure
+  366 × 202 px : l'écran demande 1 098 pixels de large, la source en fournissait
+  1 400, donc le rendu était net à 1,3× et interpolé au-delà. Fournir une source
+  plus large repousse la limite sans la supprimer — chaque écran plus dense la
+  ramène. Un tracé, lui, se rastérise à la densité de l'écran.
+- **Ce qui est livré.** `assets/images/accueil-embleme-mrsc.svg` (4 518 octets,
+  1 292 compressés) reprend le langage de l'ancienne image — quatre arcs vert,
+  or, ardoise et encre, joyau de verre facetté, sigle et mention — en dégradés,
+  facettes et une ombre douce. `assets/images/atlas-savoirs.svg` (8 700 octets,
+  2 203 compressés) remplace l'atlas : trois îles — bibliothèque, observatoire,
+  phare — reliées par des chemins pointillés au-dessus d'un livre ouvert.
+- **Ce que la mesure navigateur donne.** Quatre profils, deux pages :
+
+| Page | Profil | Boîte | `viewBox` | Écart de ratio | Débordement |
+| --- | --- | --- | --- | ---: | ---: |
+| Accueil | 320 px @3× | 296 × 163 | 1 200 × 660 | 0,0022 | 0 px |
+| Accueil | 390 px @3× | 366 × 202 | 1 200 × 660 | 0,0063 | 0 px |
+| Accueil | 768 px @2× | 718 × 395 | 1 200 × 660 | 0,0005 | 0 px |
+| Accueil | 1 440 px @1×, 2× et 3× | 1 158 × 637 | 1 200 × 660 | 0,0003 | 0 px |
+| Apprendre | 320 px @3× | 258 × 161 | 1 600 × 1 000 | 0,0025 | 0 px |
+| Apprendre | 390 px @3× | 328 × 205 | 1 600 × 1 000 | 0,0000 | 0 px |
+| Apprendre | 768 px @2× | 305 × 190 | 1 600 × 1 000 | 0,0053 | 0 px |
+| Apprendre | 1 440 px @1×, 2× et 3× | 497 × 311 | 1 600 × 1 000 | 0,0019 | 0 px |
+
+L'écart de ratio reste sous 0,007 : `object-fit` ne recadre donc pas un dessin
+dont la composition est centrée, et la place est réservée avant chargement par
+les dimensions intrinsèques.
+
+- **Un plafond de densité n'a plus de sens sur un tracé.** Les quatre paliers
+  `min-resolution` (2, 2,5, 3 et 3,5 dppx) réduisaient l'emblème à 700, 560, 466
+  puis 400 px : ils existaient uniquement pour ne pas étirer un bitmap de
+  1 400 px. Depuis le passage au tracé, ils rapetissaient le dessin de moitié sur
+  un écran 2× — mesuré : 698 px de large à 768 px @2× contre 1 158 px à
+  1 440 px @2×. Ils sont retirés ; l'emblème occupe désormais toute la largeur de
+  sa colonne à toutes les densités (1 158 px @1×, @2× et @3×, soit 1 158 unités
+  de tracé pour 2 316 pixels d'appareil à 2×, sans interpolation). Les logos
+  d'en-tête et de pied de page, qui restent des images, gardent leurs paliers de
+  78 et 66 px.
+
+- **Poids.** L'accueil passe de 153,5 à **75,9 Kio** en mobile comme en grand
+  écran (251,8 Kio avant, sur grand écran) ; `apprendre.html` de 216,0 à
+  **113,1 Kio** mobile et de 404,2 à 113,1 Kio grand écran, alors qu'elle était
+  signalée « proche du budget ». Les cinq fichiers de l'ancienne image de
+  l'accueil (813 782 octets) sont retirés du dépôt ; le manifeste de variantes,
+  le générateur, le relevé d'en-têtes et la sonde de publication sont mis à jour
+  en conséquence.
+
+Garde-fou : le 7ᵉ contrôle `controler_illustrations` a été réécrit et renommé
+« illustrations non agrandies, héros vectoriels ». Il exige, pour chacune des
+deux figures, un seul `<img>`, pointant sur le bon SVG, avec un texte alternatif,
+des dimensions intrinsèques égales à celles du fichier ; et, pour chaque SVG, un
+`viewBox`, un `<title>`, l'absence de `<image>`, de `data:image/` et de
+`<foreignObject>`, un poids sous 40 000 octets, et des attributs `width`/`height`
+cohérents avec le HTML. Le ratio de la feuille est lu **dans la règle de la
+figure** et comparé à celui du tracé. **Neuf mutations rejouées, neuf détectées** :
+retour à un `<picture>` avec `srcset`, `src` faux, `alt` retiré, dimensions HTML
+faussées, image base64 agrégée dans le SVG, ratio de la feuille passé à 16/9,
+dimensions du SVG faussées, `title` retiré, `height: auto` retiré.
+
+Le contrôle des plafonds de densité (6ᵉ) change de règle en même temps : il
+refusait qu'un palier manque, il refuse désormais qu'un palier **s'applique à un
+héros vectoriel**, et vérifie que les logos gardent les leurs. Deux mutations
+rejouées, deux détectées : `max-width: 466px` réintroduit sur `.home-hero-visual`
+dans le bloc `3dppx`, et bloc `3dppx` des logos supprimé.
+
+La première version du contrôle lisait le ratio **n'importe où** dans la feuille :
+elle validait donc un ratio appartenant à une autre règle. C'est la mutation
+« ratio passé à 16/9 » qui l'a montré.
+
+Limite : le rendu est net, pas nécessairement plus beau. Les deux tracés ont un
+langage plat, sans grain ni profondeur de champ ; une personne peut préférer
+l'ancienne image, et ce choix ne se tranche pas par une mesure. Aucun appareil
+réel n'a été utilisé : les profils sont émulés dans un Chromium sans interface.
+
 ## 7. Ce qui n'est pas couvert
 
 - **Police réelle.** La mesure utilise les polices installées dans

@@ -306,7 +306,7 @@ def fichiers_du_site() -> None:
     for page in PAGES:
         chemin = RACINE / page
         verifier(f"Page présente : {page}", chemin.is_file() and chemin.stat().st_size > 500)
-    for ressource in ("assets/css/site.css", "assets/js/site.js", "assets/js/navigation-parcours.js", "assets/js/apprentissage.js", "assets/css/anglais-aventure.css", "assets/js/anglais-aventure-data.js", "assets/js/apprentissage-aventure-data.js", "assets/js/anglais-aventure.js", "assets/images/escales-anglais-hero.jpg", "assets/images/mondes-savoirs-hero.jpg", "assets/images/logo-mrsc.jpg", "assets/images/accueil-logo-mrsc-3d.jpg", "assets/images/favicon-32.png", "assets/images/favicon-192.png", "assets/images/apple-touch-icon.png", "favicon.ico", "llms.txt"):
+    for ressource in ("assets/css/site.css", "assets/js/site.js", "assets/js/navigation-parcours.js", "assets/js/apprentissage.js", "assets/css/anglais-aventure.css", "assets/js/anglais-aventure-data.js", "assets/js/apprentissage-aventure-data.js", "assets/js/anglais-aventure.js", "assets/images/escales-anglais-hero.jpg", "assets/images/mondes-savoirs-hero.jpg", "assets/images/logo-mrsc.jpg", "assets/images/accueil-embleme-mrsc.svg", "assets/images/atlas-savoirs.svg", "assets/images/favicon-32.png", "assets/images/favicon-192.png", "assets/images/apple-touch-icon.png", "favicon.ico", "llms.txt"):
         verifier(f"Ressource présente : {ressource}", (RACINE / ressource).is_file())
     catalogue_apprentissage = (RACINE / "apprendre.html").read_text(encoding="utf-8")
     page_aventure = (RACINE / "anglais-aventure.html").read_text(encoding="utf-8")

@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-24 — Les deux derniers héros cessent d'être des images
+
+- **Initiative :** `optimisation-du-site`. L'emblème de l'accueil et l'atlas de la page d'apprentissage étaient les deux dernières illustrations bitmap du site ; le héros des Mondes et le décor des missions sont déjà des rendus.
+- **Constat mesuré :** à 390 px et 3×, la boîte de l'emblème mesure 366 × 202 px, donc l'écran demande 1 098 pixels de large quand la source en fournit 1 400 — net à 1,3×, interpolé au-delà. Agrandir la source repousse la limite sans la supprimer, chaque écran plus dense la ramenant.
+- **Décision :** remplacer les deux photos par des tracés SVG, dans le langage graphique déjà employé par le site. `accueil-embleme-mrsc.svg` (4 518 octets) reprend les quatre arcs, le joyau de verre et le sigle ; `atlas-savoirs.svg` (8 700 octets) reprend les trois îles reliées au-dessus d'un livre ouvert. Aucune image agrégée, aucun HTML étranger dans les tracés.
+- **Effet mesuré :** accueil 153,5 → **75,9 Kio** (mobile et grand écran), `apprendre.html` 216,0 → **113,1 Kio** mobile et 404,2 → 113,1 Kio grand écran, laquelle était signalée proche du budget de 450 Kio. Cinq fichiers retirés (813 782 octets) ; manifeste, générateur de variantes, relevé d'en-têtes et sonde de publication mis à jour.
+- **Contrôle :** le 7ᵉ contrôle de `verifier-affichages.py` est réécrit — un seul tracé par figure, dimensions intrinsèques exactes, `viewBox`, `title`, pas de `<image>` ni de `data:image/`, poids borné, et ratio de la feuille lu **dans la règle de la figure** puis comparé à celui du tracé. **Neuf mutations rejouées, neuf détectées.** La version initiale validait un ratio trouvé ailleurs dans la feuille ; c'est la mutation « 16/9 » qui l'a révélé.
+- **Protocole :** § 6 undecies de [`formats-affichage.md`](formats-affichage.md) ; § 4.2 septies de [`poids-et-sobriete-numerique.md`](poids-et-sobriete-numerique.md).
+- **Limite :** le rendu est net, pas nécessairement plus beau — les tracés sont plats, sans grain ni profondeur de champ, et une personne peut préférer l'ancienne image. Mesure dans un Chromium sans interface seulement ; aucun appareil réel, et la composition n'a été relue qu'en capture à 390, 768 et 1 440 px.
+- **Prochaine action :** faire regarder les deux tracés par une personne extérieure au lot, consigner son verdict, et retirer le dernier repli bitmap de l'accueil si la réponse est positive.
+
 ## 2026-10-23 — « Écouter la page » : reculer et choisir sa vitesse
 
 - **Initiative :** `ecouter-la-page`. Deux gestes manquaient pour écouter vraiment : reprendre le passage qu'on vient de perdre, et choisir un débit qui convient.

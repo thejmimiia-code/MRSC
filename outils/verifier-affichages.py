@@ -225,15 +225,39 @@ def controler_mesure_de_lecture() -> list[str]:
 
 
 def controler_plafonds_d_images() -> list[str]:
-    """Chaque héros garde ses paliers de densité, sinon l'image est étirée."""
+    """Un plafond de densité ne se justifie que pour une source à résolution finie.
+
+    Le 24 octobre 2026, l'emblème de l'accueil est devenu un tracé SVG. Les
+    quatre paliers `min-resolution` qui le réduisaient (700, 560, 466 puis
+    400 px) n'existaient que pour ne pas étirer un bitmap de 1 400 px : depuis,
+    ils rapetissaient le dessin de moitié sur un écran 2×. Ils sont retirés, et
+    ce contrôle refuse désormais qu'un plafond de densité revienne sur un héros
+    vectoriel. Les logos d'en-tête et de pied de page, eux, restent des images :
+    leurs paliers doivent rester, et le repli bitmap du héros des Mondes garde
+    les siens.
+    """
     erreurs: list[str] = []
     site = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
     for seuil in ("2dppx", "2.5dppx", "3dppx", "3.5dppx"):
-        motif = rf"@media\s*\(min-resolution:\s*{re.escape(seuil)}\)\s*\{{[^}}]*home-hero-visual[^}}]*max-width"
-        if not re.search(motif, site):
+        bloc = re.search(rf"@media\s*\(min-resolution:\s*{re.escape(seuil)}\)\s*\{{", site)
+        if not bloc:
+            continue
+        profondeur, index = 1, bloc.end()
+        while index < len(site) and profondeur:
+            if site[index] == "{":
+                profondeur += 1
+            elif site[index] == "}":
+                profondeur -= 1
+            index += 1
+        corps = site[bloc.end(): index - 1]
+        if "home-hero-visual" in corps:
             erreurs.append(
-                f"site.css — palier {seuil} absent ou incomplet pour .home-hero-visual"
+                f"site.css — un plafond `{seuil}` s'applique encore à .home-hero-visual : "
+                "l'emblème est vectoriel, le plafond ne protège plus rien et rapetisse le dessin"
             )
+    for seuil in ("3dppx", "3.5dppx"):
+        if not re.search(rf"@media\s*\(min-resolution:\s*{re.escape(seuil)}\)[^@]*max-width:\s*\d+px", site):
+            erreurs.append(f"site.css — les logos perdent leur plafond de densité {seuil}")
     aventures = (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8")
     for plafond in ("836px", "668px", "557px", "477px"):
         if f"--hero-art-max: {plafond}" not in aventures:
@@ -242,23 +266,31 @@ def controler_plafonds_d_images() -> list[str]:
             )
     if "max-width: min(100%, 1400px)" not in site:
         erreurs.append(
-            "site.css — .home-hero-visual n'est plus plafonné à la largeur de sa source (1400px)"
+            "site.css — .home-hero-visual n'est plus borné à la largeur de la colonne (1400px)"
         )
     return erreurs
 
 
 def controler_illustrations() -> list[str]:
-    """Une illustration ne doit jamais être agrandie au-delà de sa source.
+    """Un héros ne doit jamais être agrandi : il est vectoriel ou servi à sa taille.
 
     Le 23 octobre 2026, l'illustration de la section « Aventure pédagogique »
     s'affichait sur 497 × 941 px : `aspect-ratio` ne fixe une dimension que si
     l'autre est automatique, et l'attribut `height="941"` du HTML tenait lieu de
     hauteur. L'image était donc étirée de 2,1 fois pour couvrir sa boîte, d'où
-    des pixels visibles. Deux pièces doivent rester : la hauteur automatique
-    dans la feuille et une déclaration `sizes` qui dit la vérité sur la largeur.
+    des pixels visibles.
+
+    Le 24 octobre 2026, les deux héros encore bitmap — l'emblème de l'accueil et
+    l'atlas d'`apprendre.html` — passent en géométrie (SVG). Une image a une
+    résolution finie ; un tracé n'en a pas. Ce contrôle exige donc : un SVG en
+    place de la photo, des dimensions intrinsèques qui correspondent au fichier,
+    un texte alternatif, une légende conservée, aucun pixel agrégé dans le SVG
+    (pas de `<image>`, pas de `data:image/…`), et le ratio de la feuille égal au
+    ratio du tracé — sinon la boîte réintroduit l'étirement par `object-fit`.
     """
     erreurs: list[str] = []
     site = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+
     regle = re.search(r"\.english-promo-art img\s*\{([^}]*)\}", site)
     if not regle:
         erreurs.append("site.css — la règle .english-promo-art img est introuvable")
@@ -266,37 +298,93 @@ def controler_illustrations() -> list[str]:
         contenu = regle.group(1)
         for declaration, message in (
             ("height: auto", "sans `height: auto`, l'attribut height du HTML fige la hauteur "
-                             "et l'image est étirée 2,1 fois pour couvrir sa boîte"),
+                             "et l'image est étirée pour couvrir sa boîte"),
             ("aspect-ratio", "sans `aspect-ratio`, la boîte suit la hauteur de la source et "
                              "le bandeau change de hauteur selon la variante servie"),
             ("object-fit: cover", "sans `object-fit`, la déformation remplacerait le recadrage"),
         ):
             if declaration not in contenu:
                 erreurs.append(f"site.css — .english-promo-art img : {declaration} manquant ; {message}")
-    page = (RACINE / "apprendre.html").read_text(encoding="utf-8")
-    figure = re.search(r'<figure class="english-promo-art">(.*?)</figure>', page, re.S)
-    if not figure:
-        erreurs.append("apprendre.html — la figure .english-promo-art est introuvable")
+
+    attends = (
+        # page, figure, fichier SVG, largeur, hauteur
+        ("index.html", "home-hero-visual", "accueil-embleme-mrsc.svg", 1200, 660),
+        ("apprendre.html", "english-promo-art", "atlas-savoirs.svg", 1600, 1000),
+    )
+    for page, figure, fichier, largeur, hauteur in attends:
+        texte = (RACINE / page).read_text(encoding="utf-8")
+        bloc = re.search(rf'<figure class="{figure}"[^>]*>(.*?)</figure>', texte, re.S)
+        if not bloc:
+            erreurs.append(f"{page} — la figure .{figure} est introuvable")
+            continue
+        corps = bloc.group(1)
+        if "<picture" in corps or "srcset=" in corps:
+            erreurs.append(
+                f"{page} — la figure .{figure} sert encore un bitmap en plusieurs variantes : "
+                "le héros doit être un seul tracé vectoriel"
+            )
+        image = re.search(r"<img[^>]*>", corps)
+        if not image:
+            erreurs.append(f"{page} — la figure .{figure} n'a plus d'image")
+            continue
+        balise = image.group(0)
+        if f'src="assets/images/{fichier}"' not in balise:
+            erreurs.append(f"{page} — la figure .{figure} ne pointe plus sur {fichier}")
+        if not re.search(r'alt="[^"]+"', balise):
+            erreurs.append(f"{page} — l'illustration vectorielle a perdu son texte alternatif")
+        if not re.search(rf'width="{largeur}"', balise) or not re.search(rf'height="{hauteur}"', balise):
+            erreurs.append(
+                f"{page} — les dimensions intrinsèques de {fichier} doivent rester "
+                f"{largeur} × {hauteur} : la place est réservée avant chargement, "
+                "et un rapport différent déforme le tracé"
+            )
+        fichier_svg = RACINE / "assets" / "images" / fichier
+        if not fichier_svg.is_file():
+            erreurs.append(f"assets/images/{fichier} — fichier absent")
+            continue
+        svg = fichier_svg.read_text(encoding="utf-8")
+        if not svg.lstrip().startswith("<svg"):
+            erreurs.append(f"{fichier} — ne commence pas par un élément <svg>")
+        if "viewBox=" not in svg:
+            erreurs.append(f"{fichier} — pas de viewBox : le tracé ne suivrait pas la boîte")
+        if "<title" not in svg:
+            erreurs.append(f"{fichier} — pas de titre : un SVG ouvert seul resterait muet")
+        for interdit, raison in (
+            ("<image", "un pixel agrégé rendrait le tracé dépendant d'une résolution"),
+            ("data:image/", "une image encodée en base64 revient à un bitmap"),
+            ("<foreignObject", "du HTML étranger échapperait au contrôle du tracé"),
+        ):
+            if interdit in svg:
+                erreurs.append(f"{fichier} — contient {interdit} ; {raison}")
+        poids = fichier_svg.stat().st_size
+        if poids > 40_000:
+            erreurs.append(f"{fichier} — {poids} octets : le tracé dépasse le budget de 40 000 octets")
+        if not re.search(rf'width="{largeur}"[^>]*height="{hauteur}"', svg):
+            erreurs.append(
+                f"{fichier} — les attributs width/height du SVG ne valent plus "
+                f"{largeur} × {hauteur} : le HTML et le tracé se contrediraient"
+            )
+
+    # Le ratio de la feuille doit égaler celui du tracé, sinon `object-fit` recadre
+    # un dessin qui n'est plus une photo : le sujet peut sortir du cadre. Le ratio
+    # est lu **dans la règle de la figure**, pas ailleurs dans la feuille : la
+    # première version cherchait le motif n'importe où et validait un ratio qui
+    # appartenait à une autre règle.
+    corps = re.search(r"\.english-promo-art img\s*\{([^}]*)\}", site)
+    if corps is None:
+        erreurs.append("site.css — la règle .english-promo-art img a disparu")
     else:
-        bloc = figure.group(1)
-        attendu = 'sizes="(max-width: 760px) calc(100vw - 4rem), 520px"'
-        declarees = re.findall(r"sizes=\"([^\"]*)\"", bloc)
-        # Les deux sources (AVIF et WebP) portent la même déclaration : une seule
-        # occurrence laisserait l'autre format annoncer une autre largeur, et le
-        # navigateur choisirait une variante trop petite pour ce format.
-        if len(declarees) != 2 or set(declarees) != {"(max-width: 760px) calc(100vw - 4rem), 520px"}:
-            erreurs.append(
-                "apprendre.html — les deux sources de l'illustration doivent déclarer "
-                "`(max-width: 760px) calc(100vw - 4rem), 520px` : " + attendu
-            )
-        if not re.search(r'<img[^>]*width="1672"[^>]*height="941"', bloc):
-            erreurs.append(
-                "apprendre.html — les dimensions intrinsèques de l'illustration (1672 × 941) "
-                "ont disparu : la place ne serait plus réservée avant chargement"
-            )
-    # Le plafond de 520 px rend la déclaration `sizes` vraie dans toutes les
-    # présentations ; sans lui, la colonne s'élargit et la variante choisie
-    # devient trop petite pour la place occupée.
+        ratio = re.search(r"aspect-ratio:\s*([\d.]+)\s*/\s*([\d.]+)", corps.group(1))
+        if ratio is None:
+            erreurs.append("site.css — .english-promo-art img n'a plus de ratio explicite")
+        else:
+            attendu = 1600 / 1000
+            obtenu = float(ratio.group(1)) / float(ratio.group(2))
+            if abs(obtenu - attendu) > 1e-6:
+                erreurs.append(
+                    f"site.css — aspect-ratio {ratio.group(1)} / {ratio.group(2)} ne correspond plus "
+                    f"au tracé 1600 × 1000 ({attendu:.3f}) : le dessin serait recadré"
+                )
     if "width: min(100%, 520px)" not in site:
         erreurs.append("site.css — le plafond de 520 px de .english-promo-art a disparu")
     return erreurs
@@ -902,7 +990,7 @@ CONTROLES = (
     ("panneau du menu", controler_panneau_du_menu),
     ("mesure de lecture", controler_mesure_de_lecture),
     ("plafonds d'images par densité", controler_plafonds_d_images),
-    ("illustrations non agrandies", controler_illustrations),
+    ("illustrations non agrandies, héros vectoriels", controler_illustrations),
     ("pistes de grille", controler_pistes_de_grille),
     ("césure des mots longs", controler_cesure),
     ("densité du rendu 3D", controler_densite_du_rendu_3d),

@@ -65,7 +65,7 @@ Trois images représentaient l’essentiel du poids : `accueil-logo-mrsc-3d.jpg`
 
 | Image | JPEG source | AVIF 800 px | WebP 800 px | AVIF pleine largeur | WebP pleine largeur |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `accueil-logo-mrsc-3d` | 236,0 Kio | 52,0 Kio | 67,4 Kio | 113,9 Kio (1 400) | 155,0 Kio (1 400) |
+| `accueil-logo-mrsc-3d` (retiré le 24 octobre 2026, § 4.2 septies) | 236,0 Kio | 52,0 Kio | 67,4 Kio | 113,9 Kio (1 400) | 155,0 Kio (1 400) |
 | `mondes-savoirs-hero` | 370,7 Kio | 69,9 Kio | 76,0 Kio | 219,6 Kio (1 672) | 252,4 Kio (1 672) |
 | `escales-anglais-hero` | 180,5 Kio | 30,0 Kio | 35,0 Kio | 86,6 Kio (1 672) | 107,0 Kio (1 672) |
 
@@ -251,6 +251,58 @@ Trois mutations volontaires ont été rejouées : `DENSITE_MAX = 2`, retour du p
 **Garde-fous** (`outils/verifier-affichages.py`, 10 contrôles) : `DENSITE_MAX >= 3` et `BUDGET_PIXELS >= 6 Mpx` dans **les deux** fichiers de rendu, aucun `Math.min(devicePixelRatio, N)`, présence du canvas avec `role="img"` et `aria-label`, présence du repli différé, et chargement du repli dans la fonction d'échec. Quatre mutations rejouées : plafond de densité à 2 dans `decor-atlas.js`, canvas retiré du document, `role`/`aria-label` retirés, chargement du repli déplacé hors de la fonction d'échec — les quatre sont détectées. **Deux mutations ne le sont pas** : une sortie ajoutée après `if (!image) return;` et une condition rendue toujours fausse neutralisent le repli en laissant tous les appels en place. C'est une limite du contrôle statique, écrite dans le code ; le comportement est prouvé par la mesure navigateur ci-dessus, pas par cette porte.
 
 **Ce qui reste.** Le décor est un rendu : il n'a pas le grain d'une illustration peinte. C'est un changement de style assumé, pas une amélioration de l'ancien. Aucune revue humaine sur appareil réel n'a eu lieu — la mesure est celle d'un Chromium sans interface, à 1×, 2× et 3×. Et la composition n'a été vérifiée que sur les quatre mises en page du héros ; les autres pages ne changent pas.
+
+### 4.2 septies — Les deux derniers héros passent en géométrie (24 octobre 2026)
+
+**La décision, déjà prise, restait à appliquer.** Le héros des Mondes était un
+rendu 3D (§ 4.2 sexies) ; l'emblème de l'accueil et l'atlas de `apprendre.html`
+restaient des images. Une image a une résolution finie : sur un écran à 3×, la
+boîte de 366 px de l'accueil demandait 1 098 pixels de large pour une source qui
+en fournissait 1 400 — net à 1,3× seulement, puis interpolé. Les deux héros sont
+désormais des tracés SVG.
+
+**Ce qui a été fait.** `assets/images/accueil-embleme-mrsc.svg` (4 518 octets,
+1 292 compressés) reprend le langage de l'ancienne image — quatre arcs vert, or,
+ardoise et encre, un joyau de verre facetté, le sigle au galet — mais en
+géométrie : dégradés, facettes et ombre douce sont des tracés, pas des pixels.
+`assets/images/atlas-savoirs.svg` (8 700 octets, 2 203 compressés) remplace
+l'atlas : trois îles — bibliothèque, observatoire, phare — reliées par des
+chemins pointillés au-dessus d'un livre ouvert.
+
+**Poids mesuré** (`outils/verifier-poids-pages.py`, gzip estimé, avant → après) :
+
+| Page | Mobile | Grand écran |
+| --- | ---: | ---: |
+| `index.html` | 153,5 → **75,9 Kio** | 251,8 → **75,9 Kio** |
+| `apprendre.html` | 216,0 → **113,1 Kio** | 404,2 → **113,1 Kio** |
+
+`apprendre.html` était signalée « proche du budget » à 404 Kio sur 450 ; elle
+passe à 113 Kio. Les cinq fichiers retirés — le JPEG et ses quatre variantes de
+l'accueil — pesaient 813 782 octets ; le dépôt perd donc environ 800 Kio.
+
+**Netteté, sans promesse en l'air.** Mesuré dans un Chromium sans interface, la
+boîte rendue vaut 366 × 202 px à 390 px, 698 × 384 à 768 px et 1 158 × 639 à
+1 440 px, pour un `viewBox` de 1 200 × 660 : le rapport de la boîte ne s'écarte
+jamais de celui du tracé de plus de 0,0063, donc `object-fit` ne recadre ni
+n'étire. À 390 px et 3×, l'écran demande 1 098 pixels de large pour un tracé de
+1 200 unités : chaque pixel d'appareil est couvert par moins d'une unité de
+tracé, et un tracé se rastérise à la densité de l'écran, pas à celle de sa
+source. C'est la différence avec l'image précédente, qui interpolait au-delà de
+1 400 px.
+
+**Un effet de bord, mesuré puis assumé.** Quatre paliers `min-resolution`
+réduisaient l'emblème à 700, 560, 466 et 400 px pour ne jamais étirer un bitmap
+de 1 400 px. Ils rapetissaient désormais le tracé de moitié sur un écran à haute
+densité : 698 px de large à 768 px @2×, contre 1 158 px à 1 440 px @2×. Ils sont
+retirés ; les logos, qui restent des images, gardent les leurs (78 px à 3 dppx,
+66 px à 3,5 dppx). `outils/verifier-affichages.py` refuse maintenant qu'un plafond
+de densité revienne sur un héros vectoriel.
+
+**Ce qui reste à vérifier humainement.** Le rendu est net, pas forcément plus
+beau : les deux tracés ont un langage plat, sans grain ni profondeur de champ,
+et deux personnes peuvent préférer l'ancienne image. La composition du joyau et
+de l'atlas n'a été relue qu'en capture, à 390, 768 et 1 440 px ; aucune revue
+sur appareil réel n'a eu lieu.
 
 ### 4.3 Stockage du dépôt
 

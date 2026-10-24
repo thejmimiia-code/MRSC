@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 13 |
-| Période couverte | du 2026-10-20 au 2026-10-23 |
-| Contrôles exécutables cités | 17 |
+| Avancées consignées | 14 |
+| Période couverte | du 2026-10-20 au 2026-10-24 |
+| Contrôles exécutables cités | 18 |
 | Initiatives du portefeuille concernées | 11 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -313,6 +313,30 @@ Initiatives liées : `optimisation-du-site`, `ecouter-la-page`.
 **Suite.** Faire écouter la fonction à une personne qui lit difficilement et à une personne utilisant un lecteur d'écran, puis consigner les mots mal prononcés et le cran de vitesse qui lui convient ; retirer le lot si la voix perd le fil ou si un bloc est lu deux fois.
 
 Initiatives liées : `ecouter-la-page`.
+
+### `un-trace-remplace-une-photo-de-logo` — Un tracé remplace une photo quand la netteté est la seule exigence
+
+*Consignée le 2026-10-24.*
+
+**Constat.** Les deux derniers héros du site étaient encore des photos : l'emblème de l'accueil (1 400 px) et l'atlas de `apprendre.html` (1 672 px). À 390 px et 3×, la boîte de 366 px de l'accueil demandait 1 098 pixels de large ; la source en fournissait 1 400, donc la netteté plafonnait à 1,3× et le reste était interpolé. Aggrandir la source ne règle rien durablement : chaque écran plus dense repousse la limite.
+
+**Ce que cela change.** Les deux héros sont des tracés SVG de 4 518 et 8 700 octets (1 292 et 2 203 compressés), dessinés à la densité de l'écran. Les cinq fichiers de l'ancienne image de l'accueil (813 782 octets) sont retirés du dépôt. Le contrôle `controler_illustrations` exige désormais un seul tracé par figure, des dimensions intrinsèques égales à celles du fichier, un `viewBox`, un `title`, l'absence de `<image>`, de `data:image/` et de `<foreignObject>`, un ratio de feuille lu **dans la règle de la figure** et égal à celui du tracé, et un poids sous 40 000 octets.
+
+**Preuves dans le dépôt :**
+
+- `assets/images/accueil-embleme-mrsc.svg`
+- `assets/images/atlas-savoirs.svg`
+- `outils/verifier-affichages.py`
+- `outils/verifier-poids-pages.py`
+- `docs/rd/poids-et-sobriete-numerique.md`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && python3 outils/verifier-poids-pages.py`
+
+**Limite — ce que cela ne prouve pas.** Le gain porte sur la netteté et le transfert, pas sur le goût : les deux tracés ont un langage plat, sans grain ni profondeur de champ, et une personne peut regretter la photo. La mesure vient d'un Chromium sans interface ; aucun appareil réel n'a été utilisé, et la composition n'a été relue qu'en capture à 390, 768 et 1 440 px.
+
+**Suite.** Faire regarder les deux tracés par une personne extérieure au lot et consigner son verdict ; si elle préfère la photo, le dire sur la page plutôt que de renverser la décision en silence.
+
+Initiatives liées : `optimisation-du-site`.
 
 ## 3. Ce que ce registre ne dit pas
 
