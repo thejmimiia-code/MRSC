@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-24 — Restaurer l'identité, puis mesurer les alignements
+
+- **Initiative :** `optimisation-du-site`. Les héros vectoriels ont été rejetés : la netteté n'autorise pas à réinterpréter l'identité. Les cinq fichiers d'accueil antérieurs sont récupérés depuis le parent de leur suppression, sans réencodage ; Apprendre retrouve son illustration antérieure et son générateur est synchronisé.
+- **Décision :** direction photographique et documentaire, illustration minimale, aucun redessin du logo officiel. [Ligne graphique](ligne-graphique.md) : les images restaurées restent des synthèses existantes, pas des photographies documentaires ; la migration de tout le site n'est pas achevée.
+- **Cause rectifiée :** les pastilles IA avaient déjà `translate(-50%, -50%)`. Le décalage venait des dérogations mobiles à leurs positions, sans changement des points SVG. Coordonnées unifiées, cœur proportionné et question déplacée dans la légende pour ne pas sortir du disque au cran 130 %.
+- **Mesure :** 3 780 relevés finaux, 0 échec sur les trois visuels ; sept largeurs, cinq crans, six présentations, trois modes et densités 1/2. Les deux images ont été validées puis les 1 260 relevés IA rejoués après la dernière correction. 420 relevés enregistrent le masquage volontaire de l'illustration Apprendre en couleurs forcées. Voir [le relevé](audit-graphismes-2026-10-24.json).
+- **Contrôles :** proportions et pixels réellement décodés, densité, cadre horizontal, ancres à 2 pixels, chevauchements et débordement du texte des pastilles. Trois mutations exécutées et détectées (distorsion, densité, ancre). Captures 320/390/1280 au cran 130 %, densité 2 ; revue des captures accueil et IA sur smartphone simulé.
+- **Porte continue :** job `graphismes` ajouté au workflow de vérification, avec relevés et captures conservés même en échec. Les contrôles locaux d'affichage, d'intégration, de publication locale, de variantes, de génération et du site statique passent.
+- **Limites :** contrôle ciblé, Chromium seulement, pas de contraste sur les pixels, pas de vérification humaine sur téléphone ni de validation de tous les visuels. Source d'accueil limitée à 1400 px : plafond 700 CSS px pour la densité 2, sans agrandissement artificiel.
+- **Suite :** inventorier les autres visuels, étendre la passe aux densités supérieures et mesurer le contraste ; faire relire la direction graphique, sans annoncer une conformité RGAA/WCAG.
+
 ## 2026-10-24 — L'espacement du texte casse la mise en page avant de la rendre lisible
 
 - **Initiative :** `optimisation-du-site`. Après la taille des cibles et le focus, un troisième critère se mesure : **espacement du texte** (`1.4.12`, niveau AA depuis WCAG 2.1). Il ne demande pas d'afficher un texte espacé, mais de supporter qu'une personne impose elle-même interligne 1,5, interlettrage 0,12 em, espacement des mots 0,16 em et 2 em après chaque paragraphe — sans perte de contenu ni de fonction.

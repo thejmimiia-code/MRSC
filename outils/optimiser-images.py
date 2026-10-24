@@ -44,6 +44,8 @@ VERSION = 1
 # sens. Plancher vérifié en CI par outils/verifier-affichages.py.
 # Voir docs/rd/poids-et-sobriete-numerique.md.
 SOURCES = (
+    {"fichier": "accueil-logo-mrsc-3d.jpg", "largeurs": (800, 1400),
+     "qualites": {"avif": 78, "webp": 88}},
     {
         "fichier": "mondes-savoirs-hero.jpg",
         "largeurs": (800, 1200, 1672),

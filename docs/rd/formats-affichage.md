@@ -677,6 +677,8 @@ n'avaient reçu qu'un correctif de variante. Elles deviennent des tracés SVG.
   1 400, donc le rendu était net à 1,3× et interpolé au-delà. Fournir une source
   plus large repousse la limite sans la supprimer — chaque écran plus dense la
   ramène. Un tracé, lui, se rastérise à la densité de l'écran.
+> **Décision retirée le 24 octobre 2026 après rejet des visuels.** Les chiffres de cette section décrivent la version abandonnée. Voir [la ligne graphique et le protocole de restauration](ligne-graphique.md).
+
 - **Ce qui est livré.** `assets/images/accueil-embleme-mrsc.svg` (4 518 octets,
   1 292 compressés) reprend le langage de l'ancienne image — quatre arcs vert,
   or, ardoise et encre, joyau de verre facetté, sigle et mention — en dégradés,
@@ -828,3 +830,11 @@ compris — dure une vingtaine de minutes ; `--sans-focus` ne mesure que la tail
 des cibles et l'espacement, `--sans-espacement` retire l'espacement, et
 `--pages` limite le périmètre. Le script écrit son relevé en JSON, comme
 [`audit-criteres-22-2026-10-24.json`](audit-criteres-22-2026-10-24.json).
+
+## Contrôle graphique après restauration — 24 octobre 2026
+
+Les deux images antérieures sont restaurées, sans redessin ni agrandissement.
+La méthode, les seuils, la matrice de 3 780 relevés et les limites sont décrits
+ dans [ligne-graphique.md](ligne-graphique.md). Le résultat reproductible est
+conservé dans [audit-graphismes-2026-10-24.json](audit-graphismes-2026-10-24.json).
+Ce contrôle ciblé ne remplace pas une vérification de tous les visuels du site.
