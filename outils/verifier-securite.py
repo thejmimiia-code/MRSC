@@ -114,13 +114,21 @@ def test_workflows_ci() -> None:
         ]
         for chemin in workflows
     }
+    ci = (repertoire / "verification.yml").read_text(encoding="utf-8")
+    # Exception ciblée pour le lanceur natif : pas d'autorisation générale
+    # de Windows sur les autres jobs, ni de label *-latest mouvant.
     verifier(
         bool(workflows)
         and all(runners_par_fichier.values())
-        and all(runner == "ubuntu-24.04" for runners in runners_par_fichier.values() for runner in runners),
-        "les workflows pin un runner Ubuntu 24.04 au lieu de suivre la migration ubuntu-latest",
+        and all(
+            runner == "ubuntu-24.04"
+            or (chemin.name == "verification.yml" and runner == "windows-2022")
+            for chemin, runners in runners_par_fichier.items() for runner in runners
+        )
+        and sum(runner == "windows-2022" for runners in runners_par_fichier.values() for runner in runners) == 1
+        and "\n  eva-lanceur-windows:\n    runs-on: windows-2022\n" in ci,
+        "les runners restent épinglés à Ubuntu 24.04, sauf le seul test du lanceur EVA sous Windows 2022",
     )
-    ci = (repertoire / "verification.yml").read_text(encoding="utf-8")
     verifier(
         "pull_request:" in ci
         and "python3 outils/verifier-securite.py" in ci
