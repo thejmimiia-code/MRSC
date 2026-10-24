@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atelier expérimental : animations 2D en relief simulé, palette cuivre et rose, commandes de pause et de mouvement réduit.">
+  <meta name="theme-color" content="#1d3268">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-192.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <title>Atelier animations 2,5D — M.R.S.C</title>
+  <link rel="canonical" href="https://thejmimiia-code.github.io/MRSC/animations.html">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/navigation-parcours.js" defer></script>
+<link rel="stylesheet" href="assets/css/animations.css">
+<script src="assets/js/animations.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+  <header class="site-header">
+    <p class="site-status-note" id="site-header-status" role="note">Version R&amp;D — le site est en cours de développement.</p>
+    <div class="identity" id="site-header-identity">
+      <a href="index.html" data-site-home aria-label="M.R.S.C — Accueil">
+        <img class="brand-logo" src="assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
+      </a>
+      <div class="brand-copy">
+        <p class="brand-kicker">Association loi 1901</p>
+        <p class="brand-name">Mouvement Représentatif de la Société Civile</p>
+        <p class="brand-tagline">La force citoyenne</p>
+      </div>
+      <a class="identity-contact" href="mailto:assomrsc@gmail.com" aria-label="Écrire à assomrsc@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg>
+        assomrsc@gmail.com
+      </a>
+    </div>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <div class="nav-inner">
+        <a class="header-compact-brand" href="index.html" data-site-home aria-label="M.R.S.C — Accueil"><img src="assets/images/logo-mrsc.jpg" alt=""></a>
+        <div class="header-compact-tools">
+        <button class="nav-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="navigation-principale">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          Menu
+        </button>
+        <button class="header-compact-toggle" type="button" data-header-compact-toggle aria-expanded="true" aria-controls="site-header-status site-header-identity" hidden>Réduire</button><div class="nav-links" id="navigation-principale" data-primary-navigation>
+          <a href="index.html">Accueil</a>
+          <a href="ia-societe.html">IA &amp; société</a>
+          <a href="apprendre.html">Apprendre</a>
+          <a href="simulateur.html">Simulateur</a>
+          <a href="documents.html">Documents</a>
+          <a href="liens-utiles.html">Liens utiles</a>
+          <a href="localisation.html">Localisation</a>
+          <a href="transparence.html">Transparence</a>
+          <a href="nous-contacter.html">Nous contacter</a>
+        </div>
+        <details class="display-settings" data-display-settings hidden>
+          <summary title="Options d’affichage">
+            Affichage <span class="display-settings-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="display-settings-panel">
+            <p class="display-settings-title"><strong>Ajuster la lisibilité</strong></p>
+            <div class="display-settings-row" role="group" aria-label="Taille du texte">
+              <button class="display-control" type="button" data-text-decrease aria-label="A− — réduire la taille du texte" title="Réduire le texte">A−</button>
+              <span class="display-text-level" data-text-size-level role="status" aria-live="polite" aria-atomic="true">100 %</span>
+              <button class="display-control" type="button" data-text-increase aria-label="A+ — agrandir la taille du texte" title="Agrandir le texte">A+</button>
+            </div>
+            <div class="display-settings-actions">
+              <button class="display-control display-control-wide" type="button" data-contrast-toggle aria-pressed="false">Contraste renforcé</button>
+              <button class="display-control display-control-wide" type="button" data-spacing-toggle aria-pressed="false">Espacement du texte</button>
+            </div>
+            <p class="display-settings-note">Ces choix restent enregistrés sur cet appareil. Le zoom du navigateur reste disponible.</p>
+          </div>
+        </details>
+      </div>
+      </div>
+    </nav>
+  </header>
+
+<main id="contenu" class="animation-lab">
+<section class="lab-intro"><p class="lab-eyebrow">ATELIER VISUEL / PROTOTYPE 01</p><h1>Du dessin au relief.</h1><p class="lab-lead">Une scène 2D. Une profondeur simulée. Une direction chaleureuse, entre cuivre patiné et rose néon.</p><p>Une page d’essai indépendante : aucun changement de style n’est appliqué au reste du site. Le portrait est extrait de votre référence, sans redessiner les logos officiels.</p></section>
+<section class="lab-console" aria-labelledby="reglages"><h2 id="reglages">Le mouvement, à votre rythme</h2><div class="lab-controls"><button id="lab-play" type="button" aria-pressed="false">Lancer les animations</button><button id="lab-reset" type="button">Réinitialiser</button><label>Intensité <input id="lab-strength" type="range" min="0" max="100" value="50"><output id="lab-value">50 %</output></label><label><input id="lab-static" type="checkbox"> Mode immobile</label></div><p id="lab-status" role="status">Scène immobile. Lancez les animations pour tester.</p></section>
+<section class="lab-stage-section"><div><p class="lab-eyebrow">01 / PORTRAIT EN PLANS</p><h2>Présence, sans surenchère.</h2><p>Décor, portrait et lumière se décalent à des vitesses différentes : c’est la parallaxe. Une petite rotation de l’ensemble renforce le relief.</p><p>Survolez la scène ou utilisez ce curseur, disponible aussi au clavier et sur écran tactile.</p><label>Point de vue <input id="lab-angle" type="range" min="-100" max="100" value="0"></label></div><div class="lab-perspective"><div class="lab-scene" id="lab-scene" role="img" aria-label="Portrait d’EVA dans un décor brun, avec enseigne rose et éclairage cuivre. Relief simulé en plans superposés."><div class="lab-wall"></div><span class="lab-neon" aria-hidden="true">EVA</span><div class="lab-portrait"><img src="assets/images/animation/eva-reference.webp" width="246" height="482" alt=""></div><div class="lab-desk" aria-hidden="true">ATELIER / 1980</div><span class="lab-caption" aria-hidden="true">2D → 2,5D</span></div></div></section>
+<section class="lab-studies" aria-label="Deux autres études"><article><p class="lab-eyebrow">02 / OBJET ÉDITORIAL</p><h2>Le dossier en perspective</h2><div class="lab-object-stage" aria-hidden="true"><div class="lab-dossier"><span>RECHERCHE &amp; CRÉATION</span><strong>EVA</strong><span>Étude de mouvement<br>Édition 01 — cuivre / crème</span></div></div><p>Une surface plane pivote lentement. Ombre et tranche renforcent le relief : ce n’est pas une rotation 360° du personnage.</p></article><article><p class="lab-eyebrow">03 / LUMIÈRE &amp; MATIÈRE</p><h2>Une signature lumineuse</h2><div class="lab-light-stage" aria-hidden="true"><div class="lab-light">EVA<span>EXPLORER · COMPRENDRE · CRÉER</span></div></div><p>Une lumière glisse sur le lettrage, sans clignotement. Aucun flash, aucun son, aucun défilement forcé.</p></article></section>
+<section class="lab-notes"><p class="lab-eyebrow">DIRECTION CHROMATIQUE</p><h2>Une palette, quatre rôles.</h2><div class="lab-palette"><span style="--swatch:#211713">Brun nuit<br>#211713 · fond</span><span style="--swatch:#b77750">Cuivre<br>#B77750 · matière</span><span style="--swatch:#f4e6ce">Crème<br>#F4E6CE · texte</span><span style="--swatch:#ed97ac">Rose<br>#ED97AC · accent</span></div><h3>À décider après vos essais</h3><p>Profondeur discrète ou marquée ? Rythme lent ou scène immobile ? Rose ponctuel ou cuivre dominant ? Aucun choix n’est enregistré ni envoyé.</p><h3>Ce qui est animé, et ce qui ne l’est pas</h3><p>Ces études utilisent des plans HTML/CSS, pas un modèle 3D. Le portrait reste une image plane : EVA ne parle pas, ne marche pas et ne change pas d’expression. Des gestes naturels nécessiteront des poses ou des calques articulés créés et validés séparément.</p><p>Le portrait est un recadrage de 246 × 482 pixels de votre image fournie, sans suréchantillonnage. Sa netteté reste limitée au zoom et sur écran haute densité ; ce n’est pas un master de production. Textes, dossier et éclairages CSS restent indépendants de cette résolution.</p><p>Lecture arrêtée au départ, pause quand l’onglet est masqué, mode immobile et préférence système de réduction des mouvements respectés. Ces précautions ne valent pas conformité RGAA/WCAG.</p><a href="eva.html">Revenir au projet ÉVA</a><noscript><p>Sans JavaScript, les études restent visibles et immobiles.</p></noscript></section>
+</main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img class="footer-logo" src="assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
+          <div>
+            <strong>Mouvement Représentatif de la Société Civile (M.R.S.C)</strong>
+            <p class="footer-tagline">La force citoyenne · Association loi 1901</p>
+          </div>
+        </div>
+        <nav class="footer-nav" aria-label="Navigation de pied de page">
+          <p class="footer-heading">Naviguer</p>
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="ia-societe.html">IA &amp; société</a></li>
+            <li><a href="apprendre.html">Apprendre</a></li>
+            <li><a href="simulateur.html">Simulateur</a></li>
+            <li><a href="documents.html">Documents</a></li>
+            <li><a href="liens-utiles.html">Liens utiles</a></li>
+            <li><a href="localisation.html">Localisation</a></li>
+            <li><a href="transparence.html">Transparence</a></li>
+            <li><a href="confidentialite.html">Vie privée et données</a></li>
+            <li><a href="nous-contacter.html">Nous contacter</a></li>
+          </ul>
+        </nav>
+        <div class="footer-contact">
+          <p class="footer-heading">Nous contacter</p>
+          <a class="footer-mail" href="mailto:assomrsc@gmail.com">assomrsc@gmail.com</a>
+        </div>
+        <div class="footer-docs">
+          <p class="footer-heading">Documents</p>
+          <ul>
+            <li><a href="assets/documents/statuts-2020.pdf" target="_blank" rel="noopener noreferrer">Nos statuts</a></li>
+            <li><a href="assets/documents/bulletin-adhesion-2020.pdf" target="_blank" rel="noopener noreferrer">Bulletin d&rsquo;adh&eacute;sion</a></li>
+            <li><a href="documents.html">Tous les documents</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span data-year>2026</span> Mouvement Repr&eacute;sentatif de la Soci&eacute;t&eacute; Civile (M.R.S.C) — Tous droits r&eacute;serv&eacute;s.</p>
+        <ul class="footer-legal">
+          <li><a href="documents.html">Documents officiels</a></li>
+          <li><a href="nous-contacter.html">Contact</a></li>
+          <li><a href="transparence.html#licence">Licence</a></li>
+          <li><a href="confidentialite.html">Vie privée</a></li>
+          <li><a href="#contenu">Haut de page</a></li>
+        </ul>
+        <p class="footer-rd">Version R&amp;D : les pages portent leur statut. <a href="transparence.html#rd-innovation">Méthode</a>&nbsp;·&nbsp;<a href="apprendre.html#boussole-savoirs">Boussole des savoirs</a>. Une copie imprimée n’est pas une version certifiée.</p>
+
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

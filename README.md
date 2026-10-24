@@ -70,7 +70,7 @@ Trois grandes illustrations disposent désormais de variantes AVIF et WebP en de
 
 ```sh
 python3 outils/optimiser-images.py --verifier        # manifeste, empreintes et tailles des variantes
-python3 outils/verifier-poids-pages.py              # poids estimé et budgets (99 pages)
+python3 outils/verifier-poids-pages.py              # poids estimé et budgets (100 pages)
 python3 outils/verifier-poids-pages.py --rapport docs/rd/poids-pages.md
 python3 outils/verifier-publication.py --base-url https://thejmimiia-code.github.io/MRSC/
 python3 outils/test_fichiers_servis.py            # tests du relevé d’en-têtes conservé

@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-24 — Atelier public de mouvement 2,5D pour EVA
+
+- **Demande explicite :** tester des animations 2D simulant la 3D à partir de la palette de la planche EVA fournie, depuis Personnalisation. Page `animations.html`, sans appliquer ce style au reste du site ni modifier les logos.
+- **Prototype :** portrait en plans, dossier en perspective, lumière mobile ; pause, intensité, point de vue clavier/tactile, mode immobile et préférence système prioritaire. Aucun personnage articulé revendiqué.
+- **Preuves :** 240 configurations de réflow, commandes et transformation du dossier testées ; statique, publication et intégration réussies. [Dossier et limites](atelier-animations-2026-10-24.md).
+- **Limite majeure :** portrait recadré dans la référence, 246 × 482 pixels, pas de master haute définition ni promesse de netteté à 2×. Aucune validation esthétique humaine, lecteur d'écran ou conformité revendiquée.
+- **Suite :** faire choisir le rythme, le relief et la palette avant de produire des poses/calques haute définition. Direction expérimentale, pas nouvelle charte validée.
+
 ## 2026-10-24 — Réunir des groupes sans donner le même poids à leurs moyennes
 
 - **Initiative :** `relire-les-44-prototypes`. Enrichissement de `maths-moyenne`, sans nouvelle fiche ni changement de statut : 85 fiches, 59 prototypes.
