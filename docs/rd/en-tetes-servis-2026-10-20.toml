@@ -100,36 +100,6 @@ octets_servis = 15129
 cache = "max-age=600"
 
 [[fichier]]
-chemin = "assets/images/accueil-logo-mrsc-3d-800.avif"
-url = "assets/images/accueil-logo-mrsc-3d-800.avif"
-nature = "binaire"
-type_mime = "image/avif"
-encodage = "aucun"
-octets_servis = 53242
-perime_le = 2026-10-23
-cache = "max-age=600"
-
-[[fichier]]
-chemin = "assets/images/accueil-logo-mrsc-3d-1400.avif"
-url = "assets/images/accueil-logo-mrsc-3d-1400.avif"
-nature = "binaire"
-type_mime = "image/avif"
-encodage = "aucun"
-octets_servis = 116654
-perime_le = 2026-10-23
-cache = "max-age=600"
-
-[[fichier]]
-chemin = "assets/images/accueil-logo-mrsc-3d-800.webp"
-url = "assets/images/accueil-logo-mrsc-3d-800.webp"
-nature = "binaire"
-type_mime = "image/webp"
-encodage = "aucun"
-octets_servis = 68978
-perime_le = 2026-10-23
-cache = "max-age=600"
-
-[[fichier]]
 chemin = "assets/images/mondes-savoirs-hero-800.avif"
 url = "assets/images/mondes-savoirs-hero-800.avif"
 nature = "binaire"

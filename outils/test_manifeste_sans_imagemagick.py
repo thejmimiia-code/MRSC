@@ -52,7 +52,6 @@ class LectureSansDependance(unittest.TestCase):
         attendues = {
             "mondes-savoirs-hero.jpg": (1672, 941),
             "escales-anglais-hero.jpg": (1672, 941),
-            "accueil-logo-mrsc-3d.jpg": (1400, 933),
         }
         for nom, dimensions in attendues.items():
             with self.subTest(nom=nom):

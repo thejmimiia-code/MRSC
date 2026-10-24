@@ -4447,23 +4447,21 @@ main a { min-height: 24px; }
 .identity-contact { min-height: 24px; }
 main .ai-metric-card a { min-height: 24px; }
 
-/* Plafonds d'image par densité. L'illustration d'accueil mesure 1 400 px de
-   large, le logo 234 px : affichés plus larges que leur source en pixels
-   d'appareil, ils sont agrandis par le navigateur. On plafonne donc l'affichage
-   à la source divisée par la densité. À 1×, rien ne change. */
-@media (min-resolution: 2dppx) {
-  .home-hero-visual { max-width: 700px; margin-inline: auto; }
-}
-@media (min-resolution: 2.5dppx) {
-  .home-hero-visual { max-width: 560px; }
-}
+/* Plafonds d'image par densité — pour les images seulement. Le logo mesure
+   234 px, le favicon 192 : affichés plus larges que leur source en pixels
+   d'appareil, ils seraient agrandis par le navigateur. On plafonne donc leur
+   affichage à la source divisée par la densité.
+   L'emblème de l'accueil, lui, n'a plus de plafond de densité depuis le
+   24 octobre 2026 : il est vectoriel. Les quatre paliers qui le réduisaient
+   (700, 560, 466 et 400 px) ne protégeaient plus rien — ils n'existaient que
+   pour ne pas étirer un bitmap de 1 400 px — et ils rapetissaient le dessin de
+   moitié sur un écran 2×, qui le montre désormais sur toute la largeur de la
+   colonne, comme à 1×. */
 @media (min-resolution: 3dppx) {
-  .home-hero-visual { max-width: 466px; }
   .brand-logo, .footer-logo,
   html.has-js .site-header.is-compact .header-compact-brand img { max-width: 78px; }
 }
 @media (min-resolution: 3.5dppx) {
-  .home-hero-visual { max-width: 400px; }
   .brand-logo, .footer-logo,
   html.has-js .site-header.is-compact .header-compact-brand img { max-width: 66px; }
 }
