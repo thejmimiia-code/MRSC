@@ -16,5 +16,10 @@
     "total": 8856,
     "coupees": [],
     "masques": []
+  },
+  "espacement": {
+    "pages": 196,
+    "debordements": [],
+    "rognes": []
   }
 }

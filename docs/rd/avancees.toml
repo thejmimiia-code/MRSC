@@ -264,3 +264,23 @@ controle = "python3 outils/verifier-affichages.py && node outils/test-experience
 limite = "Ces trois signaux décrivent un rendu dans Chromium, pas la perception : un contenu à contraste insuffisant, hors cadre après défilement ou recouvert par un bandeau reste « affiché » pour la mesure. Le cas d'un contenu animé, d'un iframe ou d'un canvas n'est pas couvert, et aucun de ces tests ne remplace une passe au clavier avec un lecteur d'écran."
 suite = "Reprendre ce filtre pour tout futur balayage d'éléments interactifs, et vérifier qu'aucun script du dépôt ne conclut « visible » à partir d'une seule mesure de boîte."
 initiatives = ["optimisation-du-site", "ecouter-la-page"]
+
+[[avancee]]
+id = "un-espacement-impose-casse-la-page"
+date = 2026-10-24
+titre = "Un espacement imposé casse la page avant de la rendre lisible"
+constat = "Le critère WCAG 1.4.12 ne demande pas d'afficher un texte espacé, mais de supporter qu'une personne impose interligne 1,5, interlettrage 0,12 em, espacement des mots 0,16 em et 2 em après chaque paragraphe. Appliqué aux 98 pages, il a sorti la barre de navigation du cadre de 47 à 56 px entre 1 261 et 1 366 px — « Nous contacter » finissait hors de la fenêtre — et fait déborder les 84 fiches de 22 px à 1 280 px. Aucun des deux défauts ne se voyait sans imposer cet espacement."
+changement = "`outils/auditer-criteres-22.mjs` applique les quatre valeurs du critère en `!important`, puis cherche deux pertes : une page qui se met à défiler horizontalement et un texte rogné par un ancêtre en `overflow: hidden` ou `clip`, nœud de texte par nœud de texte. Deux corrections sont livrées : `flex-wrap: wrap` sur `.nav-links`, qui laisse la ligne unique tant qu'elle tient, et `white-space: normal` sur le seul bouton de la colonne latérale d'une fiche. Un seizième contrôle de `verifier-affichages.py` refuse le retour en arrière."
+preuves = [
+  "outils/auditer-criteres-22.mjs",
+  "outils/verifier-affichages.py",
+  "assets/css/site.css",
+  "docs/rd/formats-affichage.md",
+  "docs/rd/inclusion-criteres-wcag-22.md",
+  "docs/rd/audit-criteres-22-2026-10-24.json",
+  "transparence.html",
+]
+controle = "python3 outils/verifier-affichages.py && node outils/auditer-criteres-22.mjs"
+limite = "La mesure voit un débordement et un rognage, pas une perte de sens : un chevauchement partiel, une coupure de mot, un texte masqué par un `clip-path` sans `overflow` ou déplacé hors du champ visible sans déborder lui échappent. Aucune personne n'a relu ce critère, et rien ne prouve qu'une personne qui a besoin de cet espacement lit mieux la page : c'est une géométrie, pas un usage."
+suite = "Faire lire la page à une personne qui agrandit l'interlettrage, puis étendre la mesure au zoom 200 % et au critère 1.4.10 (redistribution du contenu), qui n'ont jamais été éprouvés ici."
+initiatives = ["optimisation-du-site"]

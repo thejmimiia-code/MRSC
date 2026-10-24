@@ -10,15 +10,15 @@
 
 ## Signal et question
 
-Le référentiel français en vigueur en 2026 est le RGAA 4.1.2, aligné sur WCAG 2.1 AA. Une version 5 est annoncée pour la fin 2026 et intégrera **WCAG 2.2**, dont deux critères de niveau AA qui n'existaient pas dans la version précédente : la taille des cibles (`2.5.8`) et le focus non masqué (`2.4.11`). Le site a été travaillé jusqu'ici sur WCAG 2.1 : rien ne dit qu'il tienne ces deux-là.
+Le référentiel français en vigueur en 2026 est le RGAA 4.1.2, aligné sur WCAG 2.1 AA. Une version 5 est annoncée pour la fin 2026 et intégrera **WCAG 2.2**, dont deux critères de niveau AA qui n'existaient pas dans la version précédente : la taille des cibles (`2.5.8`) et le focus non masqué (`2.4.11`). Le site a été travaillé jusqu'ici sur WCAG 2.1 : rien ne dit qu'il tienne ces deux-là. Un troisième critère, lui aussi AA mais présent depuis WCAG 2.1, n'avait jamais été mesuré : l'**espacement du texte** (`1.4.12`). Il ne demande pas d'afficher un texte espacé, mais de supporter qu'une personne impose elle-même interligne 1,5, interlettrage 0,12 em, espacement des mots 0,16 em et 2 em après chaque paragraphe, sans perte de contenu ni de fonction.
 
-**Question posée :** que produit une mesure honnête de ces deux critères sur les 98 pages du site, et que faut-il corriger avant que la norme ne change — sans transformer un chiffre en promesse de conformité ?
+**Question posée :** que produit une mesure honnête de ces trois critères sur les 98 pages du site, et que faut-il corriger avant que la norme ne change — sans transformer un chiffre en promesse de conformité ?
 
 ## État existant et limites
 
 - **Déjà disponible :** planchers de cible à 24 px sur cinq familles de commandes (`outils/verifier-affichages.py`, `CIBLES`), plancher de 32 px sur les commandes d'en-tête, focus visible vérifié sur neuf pages, `scroll-padding-top` pour les ancres.
-- **Ce qui manquait :** aucune mesure de **toutes** les cibles d'une page, aucune mesure du recouvrement du focus par les bandeaux collants, et un contrôle statique qui ne voyait que les sélecteurs nommés à la main.
-- **Incertitudes :** ces deux critères ne disent rien de la compréhension, de la fatigue, ni de l'usage réel d'un doigt ou d'un lecteur d'écran ; ils se mesurent sur une géométrie, pas sur une expérience.
+- **Ce qui manquait :** aucune mesure de **toutes** les cibles d'une page, aucune mesure du recouvrement du focus par les bandeaux collants, aucun essai de la mise en page sous un espacement imposé, et un contrôle statique qui ne voyait que les sélecteurs nommés à la main. Le réglage « espacement renforcé » du panneau appliquait déjà l'interligne et l'interlettrage du critère, mais rien ne prouvait que la page y survivait : c'était une intention, pas une mesure.
+- **Incertitudes :** ces trois critères ne disent rien de la compréhension, de la fatigue, ni de l'usage réel d'un doigt ou d'un lecteur d'écran ; ils se mesurent sur une géométrie, pas sur une expérience.
 
 ## Sources externes consultées le 23 octobre 2026
 
@@ -43,6 +43,7 @@ Le référentiel français en vigueur en 2026 est le RGAA 4.1.2, aligné sur WCA
 - **Outil :** `outils/auditer-criteres-22.mjs`, hors CI parce qu'il demande Chromium (même famille que `auditer-affichages.mjs`). Il rend trois états : conforme, exception prévue par le critère, à corriger.
 - **Taille des cibles :** relève toutes les cibles interactives, écarte celles qui sont dans une phrase (exception « en ligne ») et celles qui sont assez espacées (cercle de 24 px sans recoupement), puis liste le reste.
 - **Focus non masqué :** porte le focus sur **chaque cible atteignable** de chaque page, fait défiler en `instant`, puis teste cinq points du rectangle contre `elementFromPoint`.
+- **Espacement du texte :** applique l'interligne 1,5, l'interlettrage 0,12 em, l'espacement des mots 0,16 em et 2 em après chaque paragraphe en `!important`, puis cherche deux pertes — une page qui se met à défiler horizontalement, un texte rogné par un ancêtre en `overflow: hidden` ou `clip`. Le texte est cherché par nœud : un `overflow` sur un bloc décoratif ne rogne aucun texte.
 - **Correction apportée :** les liens légaux du pied de page passaient de 19 px à **24 px** de haut (`min-height` + `inline-flex`), l'écart vertical du bloc reprenant la hauteur gagnée pour que le pied de page ne grandisse pas.
 
 ## Vérifications et résultat
@@ -54,6 +55,10 @@ Le référentiel français en vigueur en 2026 est le RGAA 4.1.2, aligné sur WCA
 | Focus non masqué | 98 pages × deux largeurs, **aucun plafond atteint** (8 856 cibles au total, la plus longue page en compte 448), 24 oct. 2026 | **8 856 éléments testés, 0 entièrement masqué, 0 page coupée.** | — |
 | Pied de page après correction | Chromium, 390 et 1 440 px, 100 % et 130 % | Liens à 24 px (25 px à 130 %) ; écart de centrage **0 px** sur chaque ligne ; débordement 0 ; pied de page **430 px** à 1 440 px (425 avant). | — |
 | Garde-fou statique | `python3 outils/verifier-affichages.py` | `.footer-legal a` entre dans `CIBLES` : `min-height` retiré ⇒ **contrôle en échec**. | — |
+| Espacement du texte (1.4.12), avant correction | `node outils/auditer-criteres-22.mjs`, 98 pages × deux largeurs, 24 oct. 2026 | **84 pages en débordement de 22 px à 1 280 px** (les 84 fiches, bouton « Retour aux mondes et parcours » de la colonne latérale, 361 px dans une colonne de 300 px) et **barre de navigation hors cadre de 47 à 56 px entre 1 261 et 1 366 px**. | Corrigés. |
+| Espacement du texte (1.4.12), après correction | même script, **196 relevés** (98 pages × 390 et 1 280 px), 24 oct. 2026 | **0 page en défilement horizontal, 0 texte rogné.** Les 84 fiches repassées une à une aux deux largeurs : 0 débordement. | — |
+| Espacement du texte, effet visible | Chromium, 1 261 à 1 366 px, 24 oct. 2026 | La barre de navigation passe sur **deux lignes centrées** (dix entrées, puis « Nous contacter ») au lieu de sortir de l'écran ; aucune entrée supprimée ni raccourcie. Panneau mobile ouvert à 390 px : 10 entrées, **1 colonne**, 0 débordement, avec et sans l'espacement. | — |
+| Garde-fou de l'espacement | `python3 outils/verifier-affichages.py`, 16ᵉ contrôle | `flex-wrap` retiré de `.nav-links` ⇒ **échec** ; `white-space: normal` retiré du bouton de la colonne latérale ⇒ **échec** ; interlettrage ramené à 0,06 em ⇒ **échec** ; interligne ramené à 1,3 ⇒ **échec**. | — |
 | Lecture à voix haute, contenu replié | `node outils/test-experience.cjs` | La liste de couverture d'`apprendre.html` n'est **pas** lue quand elle est fermée (449 segments, 0 « Fiche(s) ») et l'est quand elle est ouverte (564 segments, 82). | — |
 
 **Défaut trouvé dans le lot précédent.** En mesurant les cibles, le script a buté sur un contenu de `<details>` refermé qui gardait une boîte non nulle : 50 fausses alertes sur `apprendre.html`. Le même piège menaçait la lecture à voix haute livrée le 23 octobre : son filtre s'appuyait sur `getClientRects`, insuffisant pour un `<details>` fermé. La mesure des quatre cas a été refaite :
@@ -70,15 +75,16 @@ Aucune de ces trois mesures ne suffit seule. Le filtre de la lecture à voix hau
 ## Décision et entretien
 
 - **Décision :** `continuer` — mesure publiée, correction livrée, aucune conformité revendiquée.
-- **Fichiers touchés :** `outils/auditer-criteres-22.mjs` (nouveau), `assets/css/site.css` (`.footer-legal`), `assets/js/site.js` (`estAffiche`), `outils/verifier-affichages.py` (`CIBLES`, contrôle de lecture), `outils/test-experience.cjs` (essai « contenu replié »), `docs/rd/formats-affichage.md`, `docs/rd/journal.md`, `docs/rd/avancees.toml`, `transparence.html`.
+- **Fichiers touchés :** `outils/auditer-criteres-22.mjs` (nouveau), `assets/css/site.css` (`.footer-legal`, `.nav-links`, `.learning-lesson-aside .button`), `assets/js/site.js` (`estAffiche`), `outils/verifier-affichages.py` (`CIBLES`, contrôle de lecture, contrôle d'espacement), `outils/test-experience.cjs` (essai « contenu replié »), `docs/rd/formats-affichage.md`, `docs/rd/journal.md`, `docs/rd/avancees.toml`, `transparence.html`.
 - **Commandes :** `node outils/auditer-criteres-22.mjs` · `python3 outils/verifier-affichages.py` · `node outils/test-experience.cjs`.
-- **Prochaine action :** rejouer la mesure à la publication du RGAA 5, puis faire relire les deux critères par un rôle accessibilité ; la passe complète du focus dure une vingtaine de minutes et peut donc être rejouée à chaque changement de mise en page.
+- **Prochaine action :** rejouer la mesure à la publication du RGAA 5, puis faire relire les trois critères par un rôle accessibilité ; la passe complète — cibles, focus et espacement — dure une vingtaine de minutes et peut donc être rejouée à chaque changement de mise en page.
 - **Indicateur de maintenance :** si un sélecteur de cible change (`.footer-legal a`, `.nav-links a`, `.statute-link`, `.home-action-link`, `.identity-contact`), le contrôle statique échoue ; si un bandeau collant est ajouté, la mesure de focus doit être rejouée.
 - **Données personnelles :** `aucune`.
 
 ## Ce que ce lot ne prouve pas
 
-1. **Aucune conformité.** Ni WCAG 2.2, ni RGAA 4.1.2 ou 5. Deux critères mesurés ne font pas un audit de 106.
+1. **Aucune conformité.** Ni WCAG 2.2, ni RGAA 4.1.2 ou 5. Trois critères mesurés ne font pas un audit : le RGAA 4.1.2 en compte 106.
 2. **Une géométrie n'est pas un usage.** Une cible de 24 px reste petite pour une main tremblante ; l'exception d'espacement dispense d'agrandir des liens qui restent difficiles à viser.
 3. **La mesure du focus n'est plus un échantillon, mais elle reste une géométrie.** Le 24 octobre 2026, le plafond de 60 cibles et les huit pages ont été levés : 8 856 éléments portés au focus sur les 98 pages, aux deux largeurs, dont les 448 des Escales et les 329 d'`apprendre.html`. Un élément peut toujours être recouvert par un bandeau après un défilement que la mesure n'a pas provoqué, et cinq points ne disent rien de la lisibilité du contour de focus.
-4. **Aucune personne n'a relu ces deux critères**, et l'outil lui-même n'est pas audité.
+4. **Aucune personne n'a relu ces trois critères**, et l'outil lui-même n'est pas audité.
+5. **L'espacement mesuré n'est pas l'espacement vécu.** Le critère exige qu'aucun contenu ni aucune fonction ne disparaisse ; la mesure voit un débordement et un rognage, pas un chevauchement partiel, une coupure de mot ni un texte déplacé hors du champ visible sans déborder. Et rien ne prouve qu'une personne qui a besoin de cet espacement lit mieux la page : seule une lecture par cette personne le dirait.

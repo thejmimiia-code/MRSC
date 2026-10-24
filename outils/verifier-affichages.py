@@ -911,6 +911,80 @@ def controler_lecture_a_voix_haute() -> list[str]:
     return erreurs
 
 
+def controler_espacement_du_texte() -> list[str]:
+    """L'espacement du critère WCAG 1.4.12 ne doit pas casser la mise en page.
+
+    Mesuré le 24 octobre 2026 : à interlettrage 0,12 em et espacement des mots
+    0,16 em, les sept entrées de navigation demandaient 47 px de plus que
+    l'écran à 1 280 px. La barre sortait du cadre des deux côtés et « Nous
+    contacter » finissait hors de la fenêtre, sans que la page signale de
+    défilement horizontal — le défaut était donc invisible aux contrôles de
+    débordement. `flex-wrap` sur `.nav-links` le corrige : la ligne reste
+    unique tant qu'elle suffit, et passe à la ligne seulement quand elle ne
+    suffit plus. Ce contrôle lit la source ; c'est
+    `outils/auditer-criteres-22.mjs` qui mesure les 98 pages.
+    """
+    erreurs: list[str] = []
+    feuille = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+
+    blocs = blocs_de(feuille, ".nav-links")
+    if not blocs:
+        erreurs.append("site.css — la règle .nav-links a disparu")
+    elif not any(re.search(r"flex-wrap:\s*wrap", corps) for corps in blocs):
+        erreurs.append(
+            "site.css — .nav-links n'a plus flex-wrap: wrap : avec l'espacement du "
+            "critère 1.4.12, la barre de navigation déborde de 47 px à 1 280 px et "
+            "« Nous contacter » sort de la fenêtre"
+        )
+
+    # Le bouton de la colonne latérale d'une fiche : 230 à 300 px de large, un
+    # libellé de 361 px sous l'espacement du critère. Sans cette règle, les 84
+    # fiches débordent de 22 px à 1 280 px.
+    boutons = [corps for selecteur, corps in regles(feuille)
+               if ".learning-lesson-aside .button" in selecteur]
+    if not boutons:
+        erreurs.append(
+            "site.css — la règle .learning-lesson-aside .button a disparu : son libellé "
+            "« Retour aux mondes et parcours » déborderait de 22 px sur les 84 fiches "
+            "dès que l'espacement du critère 1.4.12 est appliqué"
+        )
+    elif not any(re.search(r"white-space:\s*normal", corps) for corps in boutons):
+        erreurs.append(
+            "site.css — .learning-lesson-aside .button n'autorise plus le retour à la "
+            "ligne : le libellé déborderait de 22 px sous l'espacement du critère 1.4.12"
+        )
+
+    regle = [corps for selecteur, corps in regles(feuille) if "espacement-renforce" in selecteur]
+    if not regle:
+        erreurs.append("site.css — le réglage « espacement renforcé » a disparu")
+        return erreurs
+    corps = " ".join(regle)
+
+    def valeur(propriete: str) -> float | None:
+        trouve = re.search(propriete + r":\s*([0-9.]+)", corps)
+        return float(trouve.group(1)) if trouve else None
+
+    interligne = valeur("line-height")
+    interlettrage = valeur("letter-spacing")
+    espacement_mots = valeur("word-spacing")
+    if interligne is None or interligne < 1.5:
+        erreurs.append(
+            f"site.css — l'interligne du réglage d'espacement vaut {interligne} : le "
+            "critère 1.4.12 en demande 1,5"
+        )
+    if interlettrage is None or interlettrage < 0.12:
+        erreurs.append(
+            f"site.css — l'interlettrage du réglage d'espacement vaut {interlettrage} em : "
+            "le critère 1.4.12 en demande 0,12 em"
+        )
+    if espacement_mots is None or espacement_mots < 0.16:
+        erreurs.append(
+            f"site.css — l'espacement des mots du réglage vaut {espacement_mots} em : "
+            "le critère 1.4.12 en demande 0,16 em"
+        )
+    return erreurs
+
+
 def controler_pied_de_page() -> list[str]:
     """Le bas de page se lit centré, sur une colonne, sans ponctuation orpheline.
 
@@ -1029,6 +1103,7 @@ CONTROLES = (
     ("habillage du panneau", controler_habillage_du_panneau),
     ("pied de page", controler_pied_de_page),
     ("lecture à voix haute", controler_lecture_a_voix_haute),
+    ("espacement du texte (WCAG 1.4.12)", controler_espacement_du_texte),
 )
 
 
