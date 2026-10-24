@@ -175,8 +175,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Vérifier le lanceur Windows sans génération GPU
+      - name: Vérifier les appels natifs PowerShell 7 sans GPU
         shell: pwsh
+        run: ./outils/eva-local/Test-Lanceur.ps1
+      - name: Vérifier Windows PowerShell 5.1 utilisé par le double-clic
+        shell: powershell
         run: ./outils/eva-local/Test-Lanceur.ps1
 
   graphismes:
