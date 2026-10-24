@@ -1,0 +1,154 @@
+{
+  "version": "caec7b83462c0d6d",
+  "resultats": [
+    {
+      "cas": "ancienne-url",
+      "largeur": 320,
+      "disposition": "equilibree",
+      "texte": 130,
+      "ecartMax": 35.03906285635288,
+      "requetes": [
+        ""
+      ]
+    },
+    {
+      "cas": "ancienne-url",
+      "largeur": 320,
+      "disposition": "compacte",
+      "texte": 130,
+      "ecartMax": 35.03906285635288,
+      "requetes": [
+        ""
+      ]
+    },
+    {
+      "cas": "ancienne-url",
+      "largeur": 390,
+      "disposition": "equilibree",
+      "texte": 130,
+      "ecartMax": 44.76722626749668,
+      "requetes": [
+        ""
+      ]
+    },
+    {
+      "cas": "ancienne-url",
+      "largeur": 390,
+      "disposition": "compacte",
+      "texte": 130,
+      "ecartMax": 44.76722626749668,
+      "requetes": [
+        ""
+      ]
+    },
+    {
+      "cas": "ancienne-url",
+      "largeur": 768,
+      "disposition": "equilibree",
+      "texte": 130,
+      "ecartMax": 59.86945507487803,
+      "requetes": [
+        ""
+      ]
+    },
+    {
+      "cas": "ancienne-url",
+      "largeur": 768,
+      "disposition": "compacte",
+      "texte": 130,
+      "ecartMax": 59.86945507487803,
+      "requetes": [
+        ""
+      ]
+    },
+    {
+      "cas": "url-versionnee",
+      "largeur": 320,
+      "disposition": "equilibree",
+      "texte": 130,
+      "ecartMax": 0.018984032481149136,
+      "requetes": [
+        "?v=caec7b83462c0d6d"
+      ]
+    },
+    {
+      "cas": "url-versionnee",
+      "largeur": 320,
+      "disposition": "compacte",
+      "texte": 130,
+      "ecartMax": 0.018984032481149136,
+      "requetes": [
+        "?v=caec7b83462c0d6d"
+      ]
+    },
+    {
+      "cas": "url-versionnee",
+      "largeur": 390,
+      "disposition": "equilibree",
+      "texte": 130,
+      "ecartMax": 0.01581288416446712,
+      "requetes": [
+        "?v=caec7b83462c0d6d"
+      ]
+    },
+    {
+      "cas": "url-versionnee",
+      "largeur": 390,
+      "disposition": "compacte",
+      "texte": 130,
+      "ecartMax": 0.01581288416446712,
+      "requetes": [
+        "?v=caec7b83462c0d6d"
+      ]
+    },
+    {
+      "cas": "url-versionnee",
+      "largeur": 768,
+      "disposition": "equilibree",
+      "texte": 130,
+      "ecartMax": 0.015104667508656739,
+      "requetes": [
+        "?v=caec7b83462c0d6d"
+      ]
+    },
+    {
+      "cas": "url-versionnee",
+      "largeur": 768,
+      "disposition": "compacte",
+      "texte": 130,
+      "ecartMax": 0.015104667508656739,
+      "requetes": [
+        "?v=caec7b83462c0d6d"
+      ]
+    }
+  ],
+  "verification_complete": {
+    "outil": "outils/verifier-graphismes.cjs",
+    "page": "ia-societe.html",
+    "releves": 1260,
+    "echecs": 0,
+    "ecart_max_px": 0.0210517544729364,
+    "largeurs": [
+      320,
+      360,
+      390,
+      768,
+      1024,
+      1280,
+      1440
+    ],
+    "crans": [
+      75,
+      85,
+      100,
+      115,
+      130
+    ],
+    "presentations": 6,
+    "modes": 3,
+    "densites": [
+      1,
+      2
+    ]
+  }
+}

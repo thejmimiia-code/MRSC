@@ -44,3 +44,17 @@ MRSC_BROWSER_NODE_MODULES=/tmp/mrsc-browser/node_modules \
 Ce contrôle ne mesure **pas** le contraste pixel par pixel, les artefacts de compression, le sens d'un recadrage, l'ensemble des SVG/canvas/décors du site, ni les navigateurs autres que Chromium. Les crans de texte ne sont pas le zoom du navigateur. Les densités supérieures à 2, le téléphone réel, le lecteur d'écran et la lecture par une personne extérieure restent à vérifier. La netteté perçue n'est pas démontrée par la densité seule.
 
 Avant de déclarer la ligne graphique appliquée partout : inventorier les autres visuels, distinguer documents/photographies/synthèses, vérifier provenance et droits, étendre les contrôles et faire relire les rendus réels. Aucun taux de conformité RGAA/WCAG n'est déduit de cette passe.
+
+## Correctif de chargement après la capture smartphone
+
+La capture reçue après la PR #188 révèle un angle mort : nouveau HTML et ancien
+CSS peuvent coexister. Le mélange est reproduit avec le CSS de `f3c4ddf`, puis
+avec les anciennes règles de positionnement dans `test-cache-css-ia.cjs`.
+La page IA appelle désormais `site.css?v=<empreinte>` ; après tout changement
+CSS, lancer `python3 outils/versionner-css-ia.py`. Le mode `--verifier` est
+bloquant en CI si la référence ne correspond plus au contenu de la feuille.
+
+Le test simule une ancienne réponse à l'URL non versionnée ; il vérifie que la
+nouvelle URL charge les règles cohérentes avec le dessin. Ce n'est pas une
+inspection du cache réel du téléphone. Il couvre 12 cas, dont la présentation
+compacte à 320 px et texte 130 %. Voir le [relevé cache](audit-cache-css-ia-2026-10-24.json).

@@ -25,6 +25,11 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Vérifier la version du CSS de la page IA
+        run: |
+          python3 outils/test_version_css_ia.py
+          python3 outils/versionner-css-ia.py --verifier
+
       - name: Compiler les modules Python
         run: python3 -m py_compile simulateur/*.py api/*.py outils/*.py
 
@@ -172,6 +177,7 @@ jobs:
           python3 -m http.server 4181 --bind 0.0.0.0 >"$RUNNER_TEMP/serveur-graphismes.log" 2>&1 &
           serveur=$!
           trap 'kill "$serveur"' EXIT
+          node outils/test-cache-css-ia.cjs
           node outils/verifier-graphismes.cjs
           for mutation in distorsion densite ancre; do
             set +e
