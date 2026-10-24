@@ -553,9 +553,16 @@ html.contraste-renforce .site-status-note {
   background: var(--on-navy-fill-strong);
 }
 
+/* Les sept entrées de navigation tiennent sur une ligne à l'espacement
+   normal. Avec l'espacement du critère WCAG 1.4.12 (interlettrage 0,12 em,
+   espacement des mots 0,16 em), elles réclamaient 47 px de plus que l'écran à
+   1 280 px : la barre sortait du cadre des deux côtés et « Nous contacter »
+   finissait hors de la fenêtre. `flex-wrap` ne change rien tant que la ligne
+   suffit ; elle passe à la ligne quand elle ne suffit plus. */
 .nav-links {
   display: flex;
   flex: 1 1 auto;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: .2rem;
@@ -3178,7 +3185,7 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   .has-js .header-compact-toggle:not([hidden]) { display: inline-flex; min-height: 44px; }
   .has-js .nav-links {
     position: absolute; z-index: 2; top: 100%; right: 0; left: 0;
-    display: none; flex-direction: column; align-items: stretch; gap: 0;
+    display: none; flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 0;
     width: 100%; padding: .45rem 1rem .8rem; background: var(--navy);
     box-shadow: 0 12px 18px rgba(21,35,62,.15);
   }
@@ -3679,6 +3686,12 @@ html.contraste-renforce .learning-code-sample { border:2px solid currentColor; }
 .learning-lesson-aside { position:sticky; top:calc(170px + 1rem); padding:1.2rem; border:1px solid var(--line); border-radius:16px; background:var(--surface-soft); }
 .learning-lesson-aside h2 { font-size: max(12px, 1.45rem); }
 .learning-lesson-aside p { color:var(--text-soft); font-size: max(12px, .9rem); }
+/* La colonne de droite d'une fiche fait 230 à 300 px. Le libellé « Retour aux
+   mondes et parcours » y tient à l'espacement normal ; avec l'interlettrage de
+   0,12 em du critère WCAG 1.4.12, il réclame 361 px et dépassait la page de
+   22 px sur les 84 fiches, à 1 280 px. Le bouton garde son `nowrap` partout
+   ailleurs : ici seulement, un libellé trop long passe à la ligne. */
+.learning-lesson-aside .button { max-width:100%; white-space:normal; }
 .learning-lesson-aside > p:last-child { margin-bottom:0; }
 .learning-coverage-domain:focus-within,.learning-answer:focus-within { border-color:var(--blue); }
 html.contraste-renforce :is(.learning-analogy,.learning-coverage-topic,.learning-lesson-aside,.learning-catalogue-card,.learning-coverage-domain,.learning-filters) { border-color:currentColor; background:var(--surface); }

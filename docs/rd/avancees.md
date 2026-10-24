@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 15 |
+| Avancées consignées | 16 |
 | Période couverte | du 2026-10-20 au 2026-10-24 |
-| Contrôles exécutables cités | 19 |
+| Contrôles exécutables cités | 20 |
 | Initiatives du portefeuille concernées | 11 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -313,6 +313,32 @@ Initiatives liées : `optimisation-du-site`, `ecouter-la-page`.
 **Suite.** Faire écouter la fonction à une personne qui lit difficilement et à une personne utilisant un lecteur d'écran, puis consigner les mots mal prononcés et le cran de vitesse qui lui convient ; retirer le lot si la voix perd le fil ou si un bloc est lu deux fois.
 
 Initiatives liées : `ecouter-la-page`.
+
+### `un-espacement-impose-casse-la-page` — Un espacement imposé casse la page avant de la rendre lisible
+
+*Consignée le 2026-10-24.*
+
+**Constat.** Le critère WCAG 1.4.12 ne demande pas d'afficher un texte espacé, mais de supporter qu'une personne impose interligne 1,5, interlettrage 0,12 em, espacement des mots 0,16 em et 2 em après chaque paragraphe. Appliqué aux 98 pages, il a sorti la barre de navigation du cadre de 47 à 56 px entre 1 261 et 1 366 px — « Nous contacter » finissait hors de la fenêtre — et fait déborder les 84 fiches de 22 px à 1 280 px. Aucun des deux défauts ne se voyait sans imposer cet espacement.
+
+**Ce que cela change.** `outils/auditer-criteres-22.mjs` applique les quatre valeurs du critère en `!important`, puis cherche deux pertes : une page qui se met à défiler horizontalement et un texte rogné par un ancêtre en `overflow: hidden` ou `clip`, nœud de texte par nœud de texte. Deux corrections sont livrées : `flex-wrap: wrap` sur `.nav-links`, qui laisse la ligne unique tant qu'elle tient, et `white-space: normal` sur le seul bouton de la colonne latérale d'une fiche. Un seizième contrôle de `verifier-affichages.py` refuse le retour en arrière.
+
+**Preuves dans le dépôt :**
+
+- `outils/auditer-criteres-22.mjs`
+- `outils/verifier-affichages.py`
+- `assets/css/site.css`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/inclusion-criteres-wcag-22.md`
+- `docs/rd/audit-criteres-22-2026-10-24.json`
+- `transparence.html`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && node outils/auditer-criteres-22.mjs`
+
+**Limite — ce que cela ne prouve pas.** La mesure voit un débordement et un rognage, pas une perte de sens : un chevauchement partiel, une coupure de mot, un texte masqué par un `clip-path` sans `overflow` ou déplacé hors du champ visible sans déborder lui échappent. Aucune personne n'a relu ce critère, et rien ne prouve qu'une personne qui a besoin de cet espacement lit mieux la page : c'est une géométrie, pas un usage.
+
+**Suite.** Faire lire la page à une personne qui agrandit l'interlettrage, puis étendre la mesure au zoom 200 % et au critère 1.4.10 (redistribution du contenu), qui n'ont jamais été éprouvés ici.
+
+Initiatives liées : `optimisation-du-site`.
 
 ### `un-total-sans-son-manque` — Un total de mesure doit dire ce qu'il n'a pas mesuré
 

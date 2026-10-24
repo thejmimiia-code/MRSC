@@ -11,9 +11,16 @@
  *     dans une phrase (exception « en ligne ») et celles qui sont assez
  *     espacées (exception « espacement »), puis lister le reste ;
  *   - 2.4.11 : porter le focus sur chaque élément atteignable, puis vérifier
- *     que son rectangle n'est pas entièrement recouvert par un bandeau collant.
+ *     que son rectangle n'est pas entièrement recouvert par un bandeau collant ;
+ *   - 1.4.12 : imposer l'espacement du critère (interligne 1,5, interlettrage
+ *     0,12 em, espacement des mots 0,16 em, 2 em après chaque paragraphe) et
+ *     chercher ce qui disparaît : défilement horizontal et texte rogné.
  *
- * Ce qu'il ne sait pas : une cible peut être petite et facile à viser sur un
+ * Ce qu'il ne sait pas : l'espacement est vérifié comme une géométrie — un
+ * texte rogné par un ancêtre en `overflow: hidden`, ou une page qui se met à
+ * défiler horizontalement. Une perte de sens, un chevauchement partiel ou une
+ * coupure de mot restent hors de portée. Et une cible peut être petite et
+ * facile à viser sur un
  * appareil donné, une personne peut se servir d'un lecteur d'écran ou d'un
  * clavier seul, et aucun de ces deux critères ne mesure la compréhension.
  *
@@ -190,6 +197,96 @@ async function mesurerFocus(page, maximum) {
   return { testees: Math.min(total, maximum), total, masques };
 }
 
+const STYLE_ESPACEMENT = `
+  * {
+    line-height: 1.5 !important;
+    letter-spacing: 0.12em !important;
+    word-spacing: 0.16em !important;
+  }
+  p { margin-block-end: 2em !important; }
+`;
+
+// Le texte est cherché par nœud, pas par élément : un `overflow: hidden` sur un
+// conteneur décoratif ne rogne aucun texte, alors qu'un titre coupé en deux est
+// une perte de contenu. Les nœuds volontairement masqués (`visually-hidden`)
+// sont écartés : leur découpe est le procédé, pas un défaut.
+const MESURER_ESPACEMENT = () => {
+  const doc = document.documentElement;
+  const visible = (element) => {
+    if (!element || !element.getBoundingClientRect().width) return false;
+    if (typeof element.checkVisibility === 'function'
+      && !element.checkVisibility({ checkVisibilityCSS: true, contentVisibilityAuto: true })) return false;
+    return true;
+  };
+  const volontairementMasque = (element) => {
+    let noeud = element;
+    while (noeud && noeud !== document.body) {
+      const classe = typeof noeud.className === 'string' ? noeud.className : '';
+      if (/(^|\s)(visually-hidden|sr-only)(\s|$)/.test(classe)) return true;
+      const style = getComputedStyle(noeud);
+      if (style.clipPath && style.clipPath !== 'none' && /inset\(\s*50%/.test(style.clipPath)) return true;
+      noeud = noeud.parentElement;
+    }
+    return false;
+  };
+  const rognes = [];
+  const parcours = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  let noeud;
+  while ((noeud = parcours.nextNode())) {
+    const texte = (noeud.textContent || '').trim();
+    if (texte.length < 2) continue;
+    const parent = noeud.parentElement;
+    if (!parent || volontairementMasque(parent) || !visible(parent)) continue;
+    const range = document.createRange();
+    range.selectNodeContents(noeud);
+    const rects = [...range.getClientRects()].filter((r) => r.width > 0 && r.height > 0);
+    if (!rects.length) continue;
+    let ancetre = parent;
+    let rogneur = null;
+    while (ancetre && ancetre !== document.body) {
+      const style = getComputedStyle(ancetre);
+      if (['hidden', 'clip', 'auto', 'scroll'].includes(style.overflowX)
+        || ['hidden', 'clip', 'auto', 'scroll'].includes(style.overflowY)) {
+        // Un conteneur qui défile volontairement (tableau, bloc de code) n'est
+        // pas un rognage : son contenu reste atteignable.
+        if (style.overflowX === 'auto' || style.overflowX === 'scroll'
+          || style.overflowY === 'auto' || style.overflowY === 'scroll') break;
+        rogneur = ancetre;
+        break;
+      }
+      ancetre = ancetre.parentElement;
+    }
+    if (!rogneur) continue;
+    const cadre = rogneur.getBoundingClientRect();
+    const coupe = rects.some((r) => r.right > cadre.right + 2 || r.bottom > cadre.bottom + 2);
+    if (coupe) {
+      rognes.push({
+        texte: texte.replace(/\s+/g, ' ').slice(0, 50),
+        balise: parent.tagName.toLowerCase(),
+        rogneur: `${rogneur.tagName.toLowerCase()}.${(typeof rogneur.className === 'string' ? rogneur.className : '').split(' ')[0] || ''}`.slice(0, 40),
+      });
+    }
+  }
+  return {
+    debordement: Math.max(0, doc.scrollWidth - doc.clientWidth),
+    rognes: rognes.slice(0, 12),
+    nombreRognes: rognes.length,
+  };
+};
+
+async function mesurerEspacement(page) {
+  await page.evaluate((style) => {
+    const element = document.createElement('style');
+    element.id = 'mrsc-espacement-critere';
+    element.textContent = style;
+    document.head.append(element);
+  }, STYLE_ESPACEMENT);
+  await new Promise((suite) => setTimeout(suite, 120));
+  const resultat = await page.evaluate(MESURER_ESPACEMENT);
+  await page.evaluate(() => document.getElementById('mrsc-espacement-critere')?.remove());
+  return resultat;
+}
+
 async function main() {
   const arguments_ = process.argv.slice(2);
   const option = (nom, defaut) => {
@@ -206,6 +303,7 @@ async function main() {
   // plafond n'est plus qu'une garde-fou contre une page aberrante.
   const maximumFocus = Number(option('focus', '500'));
   const mesurerLeFocus = !arguments_.includes('--sans-focus') && maximumFocus > 0;
+  const mesurerEspacementActif = !arguments_.includes('--sans-espacement');
 
   const { puppeteer, chromium } = modules();
   const navigateur = await puppeteer.launch({
@@ -220,6 +318,7 @@ async function main() {
     echecs: [],
     cibles: { conformes: 0, enLigne: 0, espacees: 0, aCorriger: [] },
     focus: { testees: 0, total: 0, coupees: [], masques: [] },
+    espacement: { pages: 0, debordements: [], rognes: [] },
   };
   for (const page of pages) {
     for (const largeur of largeurs) {
@@ -243,6 +342,16 @@ async function main() {
       bilan.cibles.enLigne += cibles.enLigne.length;
       bilan.cibles.espacees += cibles.espacees.length;
       for (const cible of cibles.aCorriger) bilan.cibles.aCorriger.push({ page, largeur, ...cible });
+      if (mesurerEspacementActif) {
+        const espacement = await mesurerEspacement(onglet);
+        bilan.espacement.pages += 1;
+        if (espacement.debordement > 1) {
+          bilan.espacement.debordements.push({ page, largeur, pixels: espacement.debordement });
+        }
+        if (espacement.nombreRognes) {
+          bilan.espacement.rognes.push({ page, largeur, nombre: espacement.nombreRognes, exemples: espacement.rognes.slice(0, 3) });
+        }
+      }
       if (mesurerLeFocus) {
         const focus = await mesurerFocus(onglet, maximumFocus);
         bilan.focus.testees += focus.testees;
@@ -281,6 +390,21 @@ async function main() {
         + `${cible.largeur}×${cible.hauteur} « ${cible.texte} »`);
     }
   }
+  if (mesurerEspacementActif) {
+    const { espacement } = bilan;
+    console.log(`1.4.12 — espacement du texte : ${espacement.pages} relevés, `
+      + `${espacement.debordements.length} page(s) qui défilent horizontalement, `
+      + `${espacement.rognes.length} page(s) avec du texte rogné.`);
+    for (const debordement of espacement.debordements.slice(0, 10)) {
+      console.log(`  déborde — ${debordement.page} @${debordement.largeur} : ${debordement.pixels} px`);
+    }
+    for (const rogne of espacement.rognes.slice(0, 10)) {
+      console.log(`  rogné — ${rogne.page} @${rogne.largeur} : ${rogne.nombre} texte(s), `
+        + rogne.exemples.map((exemple) => `${exemple.balise} « ${exemple.texte} » dans ${exemple.rogneur}`).join(' ; '));
+    }
+  } else {
+    console.log('1.4.12 — non mesuré : l\u2019espacement a été désactivé (--sans-espacement).');
+  }
   if (mesurerLeFocus) {
     console.log(`2.4.11 — focus : ${focus.testees} éléments testés sur ${focus.total} atteignables, `
       + `${focus.masques.length} entièrement masqués, ${focus.coupees.length} page(s) coupée(s) par le plafond.`);
@@ -293,7 +417,7 @@ async function main() {
   } else {
     console.log('2.4.11 — non mesuré : le focus a été désactivé (--sans-focus) ou le plafond vaut 0.');
   }
-  console.log('Rappel : ces deux critères ne disent rien de la compréhension ni de l\u2019usage réel.');
+  console.log('Rappel : ces critères ne disent rien de la compréhension ni de l\u2019usage réel.');
 
   if (json) {
     await writeFile(json, `${JSON.stringify(bilan, null, 2)}\n`, 'utf8');

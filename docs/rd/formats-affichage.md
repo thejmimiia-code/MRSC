@@ -73,8 +73,8 @@ doit fournir au moins autant de pixels que l'écran en affiche.
 cette mesure sont toujours présentes : plancher de texte, plancher de cible,
 mesure de lecture, plafonds d'image par densité, pistes de grille sans `1fr`
 nue, césure des mots longs, en-tête compact non rapetissé, densité du rendu 3D,
-qualité d'encodage des images (voir § 6 bis) et décor du héros avec son repli
-(voir § 6 ter).
+qualité d'encodage des images (voir § 6 bis), décor du héros avec son repli
+(voir § 6 ter) et espacement du texte (voir § 6 decies).
 
 Il ne remplace pas la mesure : il constate que ses appuis n'ont pas été
 retirés. **Sept mutations** — texte à `.72rem`, contact ramené à 23 px,
@@ -761,15 +761,70 @@ réel n'a été utilisé : les profils sont émulés dans un Chromium sans inter
   ont été relues, mais elles ne remplacent pas un contrôle à l'œil sur
   l'appareil.
 
+## 6 decies. Espacement du texte : ce que le critère 1.4.12 casse (24 octobre 2026)
+
+Le critère `1.4.12` (AA depuis WCAG 2.1) ne demande pas d'afficher un texte
+espacé : il demande de supporter qu'une personne impose elle-même **interligne
+1,5**, **interlettrage 0,12 em**, **espacement des mots 0,16 em** et **2 em après
+chaque paragraphe**, sans perte de contenu ni de fonction. C'est le seul des
+critères mesurés ici qui éprouve la mise en page plutôt que des éléments.
+
+`outils/auditer-criteres-22.mjs` applique ces quatre valeurs en `!important`
+après chargement, puis cherche deux pertes : une page qui se met à défiler
+horizontalement, et un texte rogné par un ancêtre en `overflow: hidden` ou
+`clip`. Le texte est cherché **par nœud** : un `overflow` sur un bloc décoratif ne
+roge aucun texte, alors qu'un titre coupé en deux est une perte de contenu. Un
+conteneur qui défile volontairement (`auto`, `scroll`) n'est pas compté.
+
+Mesure du 24 octobre 2026, 98 pages × 390 et 1 280 px, soit 196 relevés :
+
+| Défaut | Où | Amplitude | Correction |
+| --- | --- | --- | --- |
+| Barre de navigation hors cadre | toutes les pages, 1 261 à 1 366 px | **47 à 56 px**, « Nous contacter » hors de la fenêtre | `flex-wrap: wrap` sur `.nav-links` (la ligne reste unique tant qu'elle tient) |
+| Bouton de la colonne latérale hors page | **84 fiches**, 1 280 px | **22 px** | `white-space: normal` sur `.learning-lesson-aside .button`, `nowrap` conservé partout ailleurs |
+
+Ce que la correction change à l'œil : entre 1 261 et 1 366 px, sous l'espacement
+du critère, la barre de navigation occupe **deux lignes centrées** — les dix
+entrées, puis « Nous contacter » — au lieu de déborder. Aucune entrée n'est
+supprimée, raccourcie ni masquée, et le repli n'apparaît que dans cette bande de
+largeur, sous cet espacement : ailleurs, la ligne reste unique. Sur téléphone, le
+panneau ouvert garde ses dix entrées sur une seule colonne (`flex-wrap: nowrap`
+en colonne), mesuré à 390 px avec et sans l'espacement du critère.
+
+**Piège de mesure.** La page ne signalait aucun défilement horizontal quand la
+barre sortait du cadre : le débordement partait des deux côtés d'un conteneur
+centré, et `scrollWidth − clientWidth` restait nul. Un contrôle de débordement
+seul aurait conclu « rien à signaler ». C'est la position réelle de chaque
+élément, puis le cadre de chaque nœud de texte, qui ont montré les deux défauts.
+
+Après correction : **0 débordement sur 196 relevés, 0 texte rogné** ; les 84
+fiches ont été repassées une à une aux deux largeurs, 0 débordement. La taille
+des cibles (5 655 conformes) et le focus (8 856 éléments testés) sont inchangés.
+
+Garde-fou : le **16ᵉ** contrôle de `verifier-affichages.py` exige `flex-wrap` sur
+`.nav-links`, `white-space: normal` sur le bouton de la colonne latérale et les
+trois valeurs d'espacement du réglage « espacement renforcé » (interligne ≥ 1,5 ;
+interlettrage ≥ 0,12 em ; espacement des mots ≥ 0,16 em). Trois mutations jouées,
+trois détectées : retrait de `flex-wrap`, interlettrage ramené à 0,06 em,
+interligne ramené à 1,3.
+
+Limite : la mesure voit un rognage et un débordement, pas une perte de sens. Un
+chevauchement partiel, une coupure de mot, un texte masqué par un `clip-path`
+sans `overflow`, un contenu déplacé hors du champ visible sans déborder restent
+hors de portée. Une ellipse assortie d'un moyen de révéler le texte est admise
+par le critère : le dépôt n'en utilise aucune. Et rien ici ne remplace une
+lecture par une personne qui a réellement besoin de cet espacement.
+
 ## 8. Refaire la mesure
 
 Le protocole complet est dans `outils/auditer-affichages.mjs` (facultatif, hors
 CI : il demande Chromium). Il rend un tableau par page et par format, avec les
 mêmes seuils que ceux décrits ici.
 
-Les deux critères WCAG 2.2 se rejouent avec `outils/auditer-criteres-22.mjs`,
-qui a besoin d'un serveur local sur son port (`python3 -m http.server 4187`).
-Une passe complète — 98 pages × 390 et 1 280 px, focus compris — dure une
-vingtaine de minutes ; `--sans-focus` ne mesure que la taille des cibles et
+Les trois critères WCAG se rejouent avec `outils/auditer-criteres-22.mjs`, qui a
+besoin d'un serveur local sur son port (`python3 -m http.server 4187`). Une passe
+complète — 98 pages × 390 et 1 280 px, taille des cibles, focus et espacement
+compris — dure une vingtaine de minutes ; `--sans-focus` ne mesure que la taille
+des cibles et l'espacement, `--sans-espacement` retire l'espacement, et
 `--pages` limite le périmètre. Le script écrit son relevé en JSON, comme
 [`audit-criteres-22-2026-10-24.json`](audit-criteres-22-2026-10-24.json).
