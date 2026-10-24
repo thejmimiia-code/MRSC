@@ -369,3 +369,12 @@ Une lecture des en-têtes a été faite depuis un runner GitHub, sur la version 
 ## 8. Lien avec la prospective 2027–2030
 
 Cette passe renforce une décision « sans regret » de la [note de prospective](prospective-2027-2030.md) : un socle léger, autonome et lisible reste utile dans les quatre futurs décrits (services stables, traçabilité fragile, réseau intermittent, archipel opaque). Elle ne prouve pas que ces futurs se réaliseront et ne remplace pas les arbitrages de l’association.
+
+## Restauration du 24 octobre 2026 — décision graphique révisée
+
+Les deux tracés SVG évoqués plus haut ont été rejetés et retirés. Les images
+antérieures sont restaurées, y compris les cinq fichiers de l'accueil. Les
+anciens gains de transfert des SVG ne décrivent donc plus la version courante.
+Après restauration, `verifier-poids-pages.py` estime l'accueil à 154,4 Kio mobile
+et 252,8 Kio grand écran, Apprendre à 216,9 et 405,2 Kio. Il s'agit de gzip estimé,
+pas de transfert réel ni de bilan carbone. Voir [ligne-graphique.md](ligne-graphique.md).

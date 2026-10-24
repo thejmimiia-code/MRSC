@@ -3,6 +3,45 @@
   "outil": "outils/optimiser-images.py",
   "sources": [
     {
+      "source": "assets/images/accueil-logo-mrsc-3d.jpg",
+      "octets_source": 241614,
+      "sha256_source": "0fecbaaefc1d895da9410c93d39740274f72ff0104179c5133fd4ce637fac7a8",
+      "variantes": [
+        {
+          "fichier": "assets/images/accueil-logo-mrsc-3d-800.avif",
+          "largeur": 800,
+          "hauteur": 533,
+          "format": "avif",
+          "qualite": 78,
+          "octets": 80647
+        },
+        {
+          "fichier": "assets/images/accueil-logo-mrsc-3d-800.webp",
+          "largeur": 800,
+          "hauteur": 533,
+          "format": "webp",
+          "qualite": 88,
+          "octets": 94676
+        },
+        {
+          "fichier": "assets/images/accueil-logo-mrsc-3d-1400.avif",
+          "largeur": 1400,
+          "hauteur": 933,
+          "format": "avif",
+          "qualite": 78,
+          "octets": 181299
+        },
+        {
+          "fichier": "assets/images/accueil-logo-mrsc-3d-1400.webp",
+          "largeur": 1400,
+          "hauteur": 933,
+          "format": "webp",
+          "qualite": 88,
+          "octets": 215546
+        }
+      ]
+    },
+    {
       "source": "assets/images/mondes-savoirs-hero.jpg",
       "octets_source": 379631,
       "sha256_source": "7748e302ba132181e91ff8966a188a8351c2c125f4c9a1dcec11ded3754c4066",

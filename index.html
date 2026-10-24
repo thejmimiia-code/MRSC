@@ -129,7 +129,11 @@
     <section class="home-hero home-hero-civic" aria-labelledby="home-title">
       <div class="container">
         <figure class="home-hero-visual">
-          <img src="assets/images/accueil-embleme-mrsc.svg" width="1200" height="660" alt="Emblème du M.R.S.C. : quatre arcs de couleur devant un joyau de verre facetté, au-dessus du sigle M.R.S.C." fetchpriority="high" decoding="async">
+          <picture>
+            <source type="image/avif" srcset="assets/images/accueil-logo-mrsc-3d-800.avif 800w, assets/images/accueil-logo-mrsc-3d-1400.avif 1400w" sizes="(max-width: 748px) calc(100vw - 24px), 700px">
+            <source type="image/webp" srcset="assets/images/accueil-logo-mrsc-3d-800.webp 800w, assets/images/accueil-logo-mrsc-3d-1400.webp 1400w" sizes="(max-width: 748px) calc(100vw - 24px), 700px">
+            <img src="assets/images/accueil-logo-mrsc-3d.jpg" width="1400" height="933" alt="Logo M.R.S.C. — Mouvement Représentatif de la Société Civile." fetchpriority="high" decoding="async">
+          </picture>
         </figure>
         <div class="hero-grid">
         <div class="hero-copy">

@@ -2052,14 +2052,15 @@ html.contraste-renforce .resource-scope-note {
 
 .ai-constellation-core {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 142px;
-  height: 142px;
+  width: min(112px, 34%);
+  height: auto;
+  aspect-ratio: 1;
   border: 1px solid rgba(255, 255, 255, .32);
   border-radius: 50%;
   background: var(--surface);
@@ -2100,31 +2101,31 @@ html.contraste-renforce .resource-scope-note {
 }
 
 .ai-node-work {
-  top: 20.6%;
+  top: 17%;
   left: 22.4%;
   border-color: rgba(118, 181, 68, .75);
 }
 
 .ai-node-health {
-  top: 20.6%;
+  top: 17%;
   left: 78.4%;
   border-color: rgba(231, 161, 38, .8);
 }
 
 .ai-node-info {
-  top: 63%;
-  left: 12.4%;
+  top: 75%;
+  left: 26%;
   border-color: rgba(229, 80, 88, .8);
 }
 
 .ai-node-services {
-  top: 68.6%;
-  left: 87.2%;
+  top: 75%;
+  left: 74%;
   border-color: rgba(118, 181, 68, .75);
 }
 
 .ai-node-place {
-  top: 86.8%;
+  top: 92%;
   left: 49.6%;
   border-color: rgba(231, 161, 38, .8);
 }
@@ -2661,8 +2662,7 @@ html.contraste-renforce .resource-scope-note {
   }
 
   .ai-constellation-core {
-    width: 112px;
-    height: 112px;
+    width: min(112px, 34%);
   }
 
   .ai-constellation-core > span {
@@ -2677,9 +2677,6 @@ html.contraste-renforce .resource-scope-note {
     padding: .36rem .52rem;
     font-size: max(12px, .75rem);
   }
-
-  .ai-node-info { left: 23%; }
-  .ai-node-services { left: 77%; }
 
   .ai-metric-grid,
   .ai-forms-grid,
@@ -3832,10 +3829,10 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-hero-visual {
   position: relative;
   z-index: 1;
-  /* Les mises en page larges (Compacte, Panorama) portent le conteneur à
-     1 480 px : l'illustration de 1 400 px y était étirée de 1,06×. */
-  max-width: min(100%, 1400px);
-  margin: 0 0 clamp(1.4rem, 3vw, 2.2rem);
+  /* Source 1400 px : plafond 700 CSS px pour conserver une densité 2,
+     sans agrandissement artificiel ni rognage du logo restauré. */
+  max-width: min(100%, 700px);
+  margin: 0 auto clamp(1.4rem, 3vw, 2.2rem);
   overflow: hidden;
   border: 1px solid var(--border-blue-soft);
   border-radius: 22px;
@@ -4011,7 +4008,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
   .home-action-grid,.home-voice-grid { grid-template-columns: minmax(0,1fr); }
   .home-share-panel { grid-template-columns: minmax(0,1fr); }
   .home-join-actions { justify-items: start; }
-  .home-hero-visual { margin-inline: 0; }
+  .home-hero-visual { margin-inline: auto; }
   .home-hero-visual img { width: 100%; height: auto; object-fit: contain; }
 }
 @media (max-width: 520px) {
@@ -4067,7 +4064,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
    automatique. Sans cette ligne, la boîte mesurait 497 × 941 px et l'image,
    étirée de 2,1 fois pour la couvrir, montrait ses pixels (constaté le
    23 octobre 2026). */
-.english-promo-art img { width: 100%; height: auto; aspect-ratio: 16 / 10; border-radius: 15px; object-fit: cover; object-position: 66% center; }
+.english-promo-art img { width: 100%; height: auto; aspect-ratio: 1672 / 941; border-radius: 15px; object-fit: contain; object-position: center; }
 .english-promo-art figcaption { margin-top: .5rem; color: var(--muted); font-size: max(12px, .76rem); line-height: 1.45; }
 @media (max-width: 760px) {
   .english-promo-panel { grid-template-columns: minmax(0, 1fr); }
@@ -4350,7 +4347,7 @@ html[data-layout="compacte"] main :is(.section,.content-section,.learning-lesson
 html[data-layout="compacte"] main :is(.home-hero,.learning-hero,.ai-hero,.page-banner) {
   padding-block: clamp(1.75rem,4vw,3rem);
 }
-html[data-layout="compacte"] .home-hero-visual img { max-height: 300px; }
+html[data-layout="compacte"] .home-hero-visual img { max-height: none; }
 html[data-layout="compacte"] main .section-heading { margin-bottom: 1.1rem; }
 html[data-layout="compacte"] main :is(
   .document-grid,.link-grid,.home-action-grid,.home-voice-grid,
@@ -4498,8 +4495,6 @@ html:is(.texte-tres-reduit,.texte-reduit) :is(button, summary, .button, .display
    on borne leur largeur sous 380 px. */
 @media (max-width: 380px) {
   .ai-node { max-width: 52%; }
-  .ai-node-info { left: 26%; }
-  .ai-node-services { left: 74%; }
 }
 
 /* Titres aux formats très étroits. Un mot de 40 px de corps (« Transparence, »)

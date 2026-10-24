@@ -362,27 +362,27 @@ Initiatives liées : `optimisation-du-site`.
 
 Initiatives liées : `optimisation-du-site`, `ecouter-la-page`.
 
-### `un-trace-remplace-une-photo-de-logo` — Un tracé remplace une photo quand la netteté est la seule exigence
+### `un-trace-remplace-une-photo-de-logo` — Restaurer une identité refusée plutôt que défendre son remplacement
 
 *Consignée le 2026-10-24.*
 
-**Constat.** Les deux derniers héros du site étaient encore des photos : l'emblème de l'accueil (1 400 px) et l'atlas de `apprendre.html` (1 672 px). À 390 px et 3×, la boîte de 366 px de l'accueil demandait 1 098 pixels de large ; la source en fournissait 1 400, donc la netteté plafonnait à 1,3× et le reste était interpolé. Aggrandir la source ne règle rien durablement : chaque écran plus dense repousse la limite.
+**Constat.** Les tracés SVG introduits le 24 octobre ont été rejetés : leur netteté ne justifiait pas une réinterprétation de l'identité. Sur la page IA, des règles mobiles déplaçaient les pastilles mais pas les extrémités des rayons.
 
-**Ce que cela change.** Les deux héros sont des tracés SVG de 4 518 et 8 700 octets (1 292 et 2 203 compressés), dessinés à la densité de l'écran. Les cinq fichiers de l'ancienne image de l'accueil (813 782 octets) sont retirés du dépôt. Le contrôle `controler_illustrations` exige désormais un seul tracé par figure, des dimensions intrinsèques égales à celles du fichier, un `viewBox`, un `title`, l'absence de `<image>`, de `data:image/` et de `<foreignObject>`, un ratio de feuille lu **dans la règle de la figure** et égal à celui du tracé, et un poids sous 40 000 octets.
+**Ce que cela change.** Les images antérieures de l'accueil et d'Apprendre sont restaurées avec leurs variantes et proportions. L'accueil est plafonné à 700 CSS px pour sa source de 1400 px à densité 2. La constellation utilise des ancres identiques sur téléphone et bureau, vérifiées dans un navigateur.
 
 **Preuves dans le dépôt :**
 
-- `assets/images/accueil-embleme-mrsc.svg`
-- `assets/images/atlas-savoirs.svg`
-- `outils/verifier-affichages.py`
-- `outils/verifier-poids-pages.py`
-- `docs/rd/poids-et-sobriete-numerique.md`
+- `assets/images/accueil-logo-mrsc-3d.jpg`
+- `assets/images/mondes-savoirs-hero.jpg`
+- `outils/verifier-graphismes.cjs`
+- `docs/rd/ligne-graphique.md`
+- `docs/rd/audit-graphismes-2026-10-24.json`
 
-**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && python3 outils/verifier-poids-pages.py`
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && node outils/verifier-graphismes.cjs`
 
-**Limite — ce que cela ne prouve pas.** Le gain porte sur la netteté et le transfert, pas sur le goût : les deux tracés ont un langage plat, sans grain ni profondeur de champ, et une personne peut regretter la photo. La mesure vient d'un Chromium sans interface ; aucun appareil réel n'a été utilisé, et la composition n'a été relue qu'en capture à 390, 768 et 1 440 px.
+**Limite — ce que cela ne prouve pas.** Trois visuels seulement, Chromium, densités 1 et 2 : ni validation de tout le site, ni contraste mesuré sur les pixels des images, ni avis humain sur téléphone. Les illustrations restaurées ne sont pas des photographies documentaires.
 
-**Suite.** Faire regarder les deux tracés par une personne extérieure au lot et consigner son verdict ; si elle préfère la photo, le dire sur la page plutôt que de renverser la décision en silence.
+**Suite.** Étendre le contrôle aux autres visuels et aux densités supérieures, mesurer le contraste et faire relire la direction photographique.
 
 Initiatives liées : `optimisation-du-site`.
 

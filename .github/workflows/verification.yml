@@ -152,3 +152,38 @@ jobs:
       # demande un navigateur, ces règles-ci se vérifient partout.
       - name: Vérifier les garde-fous des formats d’affichage
         run: python3 outils/verifier-affichages.py
+
+  graphismes:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Installer le navigateur de mesure
+        run: npm install --prefix "$RUNNER_TEMP/mrsc-browser" puppeteer-core@25.16.0 @sparticuz/chromium@153.0.0
+      - name: Mesurer les trois visuels dans les modes couverts
+        env:
+          MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
+          MRSC_GRAPHISMES_JSON: ${{ runner.temp }}/graphismes/releve.json
+          MRSC_CAPTURES: ${{ runner.temp }}/graphismes/captures
+        run: |
+          python3 -m http.server 4181 --bind 0.0.0.0 >"$RUNNER_TEMP/serveur-graphismes.log" 2>&1 &
+          serveur=$!
+          trap 'kill "$serveur"' EXIT
+          node outils/verifier-graphismes.cjs
+          for mutation in distorsion densite ancre; do
+            set +e
+            MRSC_MUTATION="$mutation" MRSC_GRAPHISMES_JSON="$RUNNER_TEMP/graphismes/mutation-$mutation.json" node outils/verifier-graphismes.cjs
+            statut=$?
+            set -e
+            test "$statut" -eq 1
+          done
+      - name: Conserver les mesures et captures même en échec
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: mesures-graphismes
+          path: ${{ runner.temp }}/graphismes
+          retention-days: 14
