@@ -17,10 +17,20 @@
  * appareil donné, une personne peut se servir d'un lecteur d'écran ou d'un
  * clavier seul, et aucun de ces deux critères ne mesure la compréhension.
  *
+ * Depuis le 24 octobre 2026, le focus est mesuré sur **toutes** les pages, sans
+ * plafond pratique : le plafond de 60 éléments par page, hérité d'un premier
+ * essai, coupait la passe sur les pages longues — `anglais-avenventure.html`
+ * compte 448 cibles à 1 280 px, dont seules 60 étaient portées au focus. Le
+ * plafond par défaut passe à 500, au-delà du maximum observé (448), et le bilan
+ * dit désormais combien de pages ont été coupées et combien de cibles sont
+ * passées sous le focus. Une passe complète dure une vingtaine de minutes.
+ *
  * Usage :
- *   node outils/auditer-criteres-22.mjs                 # pages publiques
+ *   node outils/auditer-criteres-22.mjs                 # toutes les pages, focus compris
+ *   node outils/auditer-criteres-22.mjs --sans-focus    # seulement la taille des cibles
  *   node outils/auditer-criteres-22.mjs --largeurs 390,1280
  *   node outils/auditer-criteres-22.mjs --pages index.html apprendre.html
+ *   node outils/auditer-criteres-22.mjs --focus 80      # plafond explicite
  *   node outils/auditer-criteres-22.mjs --json rapport.json
  *
  * Prérequis : Chromium et puppeteer-core hors du dépôt (voir
@@ -192,7 +202,10 @@ async function main() {
     : null;
   const pages = pagesOption && pagesOption.length ? pagesOption : await pagesPubliques();
   const json = option('json', '');
-  const maximumFocus = Number(option('focus', '60'));
+  // 500 couvre la page la plus longue du site (448 cibles à 1 280 px) : le
+  // plafond n'est plus qu'une garde-fou contre une page aberrante.
+  const maximumFocus = Number(option('focus', '500'));
+  const mesurerLeFocus = !arguments_.includes('--sans-focus') && maximumFocus > 0;
 
   const { puppeteer, chromium } = modules();
   const navigateur = await puppeteer.launch({
@@ -201,7 +214,13 @@ async function main() {
     headless: 'shell',
   });
 
-  const bilan = { pages: pages.length, largeurs, cibles: { conformes: 0, enLigne: 0, espacees: 0, aCorriger: [] }, focus: { testees: 0, masques: [] } };
+  const bilan = {
+    pages: pages.length,
+    largeurs,
+    echecs: [],
+    cibles: { conformes: 0, enLigne: 0, espacees: 0, aCorriger: [] },
+    focus: { testees: 0, total: 0, coupees: [], masques: [] },
+  };
   for (const page of pages) {
     for (const largeur of largeurs) {
       const onglet = await navigateur.newPage();
@@ -212,6 +231,10 @@ async function main() {
         // Le défilement animé fausse la mesure de recouvrement.
         await onglet.addStyleTag({ content: 'html{scroll-behavior:auto !important}' }).catch(() => {});
       } catch (erreur) {
+        // Un échec de chargement ne doit pas se lire « 0 défaut ». Mesuré le
+        // 24 octobre 2026 : sans serveur local, le script rendait 0 cible et
+        // 0 élément testé, ce qui se confond avec une page parfaite.
+        bilan.echecs.push({ page, largeur, message: String(erreur.message || erreur).slice(0, 120) });
         await onglet.close();
         continue;
       }
@@ -220,9 +243,13 @@ async function main() {
       bilan.cibles.enLigne += cibles.enLigne.length;
       bilan.cibles.espacees += cibles.espacees.length;
       for (const cible of cibles.aCorriger) bilan.cibles.aCorriger.push({ page, largeur, ...cible });
-      if (pagesOption) {
+      if (mesurerLeFocus) {
         const focus = await mesurerFocus(onglet, maximumFocus);
         bilan.focus.testees += focus.testees;
+        bilan.focus.total += focus.total;
+        // Une page coupée est déclarée : un échantillon tronqué en silence
+        // laissait croire que tout avait été mesuré.
+        if (focus.total > focus.testees) bilan.focus.coupees.push({ page, largeur, testees: focus.testees, total: focus.total });
         // Le défilement reste à la position atteinte : la page suivante repart
         // de son propre chargement.
         for (const masque of focus.masques) bilan.focus.masques.push({ page, largeur, ...masque });
@@ -234,6 +261,18 @@ async function main() {
 
   const { cibles, focus } = bilan;
   console.log(`Pages mesurées : ${bilan.pages} × ${largeurs.join(' et ')} px.`);
+  if (bilan.echecs.length) {
+    console.log(`Chargements en échec : ${bilan.echecs.length} relevé(s) — aucune conclusion ne peut en sortir.`);
+    for (const echec of bilan.echecs.slice(0, 10)) {
+      console.log(`  échec — ${echec.page} @${echec.largeur} : ${echec.message}`);
+    }
+    if (bilan.echecs.length === bilan.pages * largeurs.length) {
+      console.error('Toutes les pages ont échoué : lancer d\u2019abord un serveur local sur le port '
+        + `${PORT} (python3 -m http.server ${PORT}).`);
+      process.exitCode = 1;
+      return;
+    }
+  }
   console.log(`2.5.8 — cibles : ${cibles.conformes} conformes, ${cibles.enLigne} en ligne (exception), `
     + `${cibles.espacees} espacées (exception), ${cibles.aCorriger.length} à corriger.`);
   if (cibles.aCorriger.length) {
@@ -242,13 +281,17 @@ async function main() {
         + `${cible.largeur}×${cible.hauteur} « ${cible.texte} »`);
     }
   }
-  if (pagesOption) {
-    console.log(`2.4.11 — focus : ${focus.testees} éléments testés, ${focus.masques.length} entièrement masqués.`);
+  if (mesurerLeFocus) {
+    console.log(`2.4.11 — focus : ${focus.testees} éléments testés sur ${focus.total} atteignables, `
+      + `${focus.masques.length} entièrement masqués, ${focus.coupees.length} page(s) coupée(s) par le plafond.`);
+    for (const coupee of focus.coupees.slice(0, 10)) {
+      console.log(`  coupée — ${coupee.page} @${coupee.largeur} : ${coupee.testees} testés sur ${coupee.total}`);
+    }
     for (const masque of focus.masques.slice(0, 20)) {
       console.log(`  masqué — ${masque.page} @${masque.largeur} : ${masque.balise} « ${masque.texte} » ${JSON.stringify(masque.points)}`);
     }
   } else {
-    console.log('2.4.11 — non mesuré : relancer avec --pages pour l\u2019échantillon de focus (coûteux).');
+    console.log('2.4.11 — non mesuré : le focus a été désactivé (--sans-focus) ou le plafond vaut 0.');
   }
   console.log('Rappel : ces deux critères ne disent rien de la compréhension ni de l\u2019usage réel.');
 

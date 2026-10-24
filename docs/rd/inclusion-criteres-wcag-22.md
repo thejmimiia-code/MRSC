@@ -42,16 +42,16 @@ Le référentiel français en vigueur en 2026 est le RGAA 4.1.2, aligné sur WCA
 
 - **Outil :** `outils/auditer-criteres-22.mjs`, hors CI parce qu'il demande Chromium (même famille que `auditer-affichages.mjs`). Il rend trois états : conforme, exception prévue par le critère, à corriger.
 - **Taille des cibles :** relève toutes les cibles interactives, écarte celles qui sont dans une phrase (exception « en ligne ») et celles qui sont assez espacées (cercle de 24 px sans recoupement), puis liste le reste.
-- **Focus non masqué :** porte le focus sur chaque cible (60 par page dans l'échantillon), fait défiler en `instant`, puis teste cinq points du rectangle contre `elementFromPoint`.
+- **Focus non masqué :** porte le focus sur **chaque cible atteignable** de chaque page, fait défiler en `instant`, puis teste cinq points du rectangle contre `elementFromPoint`.
 - **Correction apportée :** les liens légaux du pied de page passaient de 19 px à **24 px** de haut (`min-height` + `inline-flex`), l'écart vertical du bloc reprenant la hauteur gagnée pour que le pied de page ne grandisse pas.
 
 ## Vérifications et résultat
 
 | Contrôle | Méthode, date | Résultat | À corriger |
 | --- | --- | --- | --- |
-| Taille des cibles, site entier | `node outils/auditer-criteres-22.mjs`, 98 pages × 390 et 1 280 px, 24 oct. 2026 | **5 654 conformes, 900 en ligne (exception), 2 304 espacées (exception), 0 à corriger.** | — |
+| Taille des cibles, site entier | `node outils/auditer-criteres-22.mjs`, 98 pages × 390 et 1 280 px, 24 oct. 2026 (relevé conservé : [`audit-criteres-22-2026-10-24.json`](audit-criteres-22-2026-10-24.json)) | **5 655 conformes, 901 en ligne (exception), 2 304 espacées (exception), 0 à corriger.** | — |
 | Avant correction | même script sur 10 pages | **12 défauts réels**, tous dans le pied de page à 390 px : « Contact » 49 × 19, « Haut de page » 86 × 19, « Licence » 48 × 19. | Corrigés. |
-| Focus non masqué | `--pages` sur huit pages × deux largeurs, 60 cibles par page, 24 oct. 2026 | **825 éléments testés, 0 entièrement masqué.** | — |
+| Focus non masqué | 98 pages × deux largeurs, **aucun plafond atteint** (8 856 cibles au total, la plus longue page en compte 448), 24 oct. 2026 | **8 856 éléments testés, 0 entièrement masqué, 0 page coupée.** | — |
 | Pied de page après correction | Chromium, 390 et 1 440 px, 100 % et 130 % | Liens à 24 px (25 px à 130 %) ; écart de centrage **0 px** sur chaque ligne ; débordement 0 ; pied de page **430 px** à 1 440 px (425 avant). | — |
 | Garde-fou statique | `python3 outils/verifier-affichages.py` | `.footer-legal a` entre dans `CIBLES` : `min-height` retiré ⇒ **contrôle en échec**. | — |
 | Lecture à voix haute, contenu replié | `node outils/test-experience.cjs` | La liste de couverture d'`apprendre.html` n'est **pas** lue quand elle est fermée (449 segments, 0 « Fiche(s) ») et l'est quand elle est ouverte (564 segments, 82). | — |
@@ -72,7 +72,7 @@ Aucune de ces trois mesures ne suffit seule. Le filtre de la lecture à voix hau
 - **Décision :** `continuer` — mesure publiée, correction livrée, aucune conformité revendiquée.
 - **Fichiers touchés :** `outils/auditer-criteres-22.mjs` (nouveau), `assets/css/site.css` (`.footer-legal`), `assets/js/site.js` (`estAffiche`), `outils/verifier-affichages.py` (`CIBLES`, contrôle de lecture), `outils/test-experience.cjs` (essai « contenu replié »), `docs/rd/formats-affichage.md`, `docs/rd/journal.md`, `docs/rd/avancees.toml`, `transparence.html`.
 - **Commandes :** `node outils/auditer-criteres-22.mjs` · `python3 outils/verifier-affichages.py` · `node outils/test-experience.cjs`.
-- **Prochaine action :** rejouer la mesure à la publication du RGAA 5, puis faire relire les deux critères par un rôle accessibilité ; étendre l'échantillon de focus aux 84 fiches si le coût reste supportable.
+- **Prochaine action :** rejouer la mesure à la publication du RGAA 5, puis faire relire les deux critères par un rôle accessibilité ; la passe complète du focus dure une vingtaine de minutes et peut donc être rejouée à chaque changement de mise en page.
 - **Indicateur de maintenance :** si un sélecteur de cible change (`.footer-legal a`, `.nav-links a`, `.statute-link`, `.home-action-link`, `.identity-contact`), le contrôle statique échoue ; si un bandeau collant est ajouté, la mesure de focus doit être rejouée.
 - **Données personnelles :** `aucune`.
 
@@ -80,5 +80,5 @@ Aucune de ces trois mesures ne suffit seule. Le filtre de la lecture à voix hau
 
 1. **Aucune conformité.** Ni WCAG 2.2, ni RGAA 4.1.2 ou 5. Deux critères mesurés ne font pas un audit de 106.
 2. **Une géométrie n'est pas un usage.** Une cible de 24 px reste petite pour une main tremblante ; l'exception d'espacement dispense d'agrandir des liens qui restent difficiles à viser.
-3. **La mesure du focus est un échantillon.** 60 cibles par page sur huit pages, pas les 414 d'`apprendre.html` ni les 438 des Escales.
+3. **La mesure du focus n'est plus un échantillon, mais elle reste une géométrie.** Le 24 octobre 2026, le plafond de 60 cibles et les huit pages ont été levés : 8 856 éléments portés au focus sur les 98 pages, aux deux largeurs, dont les 448 des Escales et les 329 d'`apprendre.html`. Un élément peut toujours être recouvert par un bandeau après un défilement que la mesure n'a pas provoqué, et cinq points ne disent rien de la lisibilité du contour de focus.
 4. **Aucune personne n'a relu ces deux critères**, et l'outil lui-même n'est pas audité.

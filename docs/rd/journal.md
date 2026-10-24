@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-24 — Ce que la lecture laissait entendre, et ce que la mesure cachait
+
+- **Initiative :** `ecouter-la-page` et `optimisation-du-site`. Deux passations différées du lot « écouter la page » : un défaut d'écoute et un angle mort de mesure.
+- **Défaut mesuré, plus large que noté :** trois segments d'`anglais-avenventure.html` avaient été signalés sans ponctuation finale. La mesure, refaite sur les 98 pages en attendant la fin réelle de chaque lecture, en trouve **46 sur 6 462**. Un bloc long est découpé en morceaux de 220 caractères ; la coupe tombait sur une espace, donc au milieu d'une phrase, et le morceau finissait sur un mot nu que le moteur enchaîne au suivant comme un mot de plus.
+- **Correction :** chaque morceau coupé reçoit une virgule — elle dit la continuation, là où un point inventerait une phrase — et cette virgule compte dans la limite : à 220 caractères, le dernier mot repasse au morceau suivant. Après : **0 segment sur 6 462** sans ponctuation finale, aucun au-delà de 220 caractères. Trois mutations statiques rejouées, trois détectées ; la première, « virgule mise en commentaire », a échappé au contrôle, qui cherchait une sous-chaîne : il compare désormais la ligne réelle.
+- **Angle mort de mesure :** le relevé WCAG 2.2 annonçait « 825 éléments testés » alors que le site compte 8 856 cibles ; le plafond de 60 par page et l'échantillon de huit pages coupaient la passe en silence. Pire, lancé sans serveur local, le même outil rendait « 0 cible, 0 masquée » — indiscernable d'une page parfaite.
+- **Correction :** plafond porté à 500 (le maximum observé est 448), focus mesuré sur les 98 pages aux deux largeurs, pages coupées et cibles non testées déclarées, chargement en échec compté comme un échec. Résultat : **8 856 éléments testés sur 8 856 atteignables, 0 entièrement masqué, 0 page coupée**. Cibles : 5 655 conformes, 901 en ligne, 2 304 espacées, 0 à corriger. Relevé conservé dans [`audit-criteres-22-2026-10-24.json`](audit-criteres-22-2026-10-24.json).
+- **Écart assumé :** +2 cibles par rapport au relevé du 23 octobre (5 654 / 900), sans effet sur la conclusion ; l'origine n'a pas été isolée et n'est pas attribuée.
+- **Limite :** aucun son réel n'a été écouté — la virgule est vérifiée comme chaîne, pas à l'oreille ; et la passe de focus reste une géométrie de cinq points, sans lecteur d'écran ni appareil réel.
+- **Prochaine action :** faire écouter une page longue par une personne qui lit difficilement, en notant si les reprises après une virgule s'entendent naturellement ; rejouer la passe de focus à chaque changement de mise en page.
+
 ## 2026-10-24 — Les deux derniers héros cessent d'être des images
 
 - **Initiative :** `optimisation-du-site`. L'emblème de l'accueil et l'atlas de la page d'apprentissage étaient les deux dernières illustrations bitmap du site ; le héros des Mondes et le décor des missions sont déjà des rendus.

@@ -1101,6 +1101,53 @@ async function main() {
         });
       });
 
+      // Un morceau coupé au milieu d'une phrase ne doit pas s'entendre fini.
+      // Le 24 octobre 2026, la mesure sur les 98 pages a trouvé 46 segments qui
+      // finissaient sur un mot nu : le moteur les enchaînait au suivant comme un
+      // mot de plus. `transparence.html` est prise ici parce qu'elle contient de
+      // longs paragraphes, donc des coupes : sans elles, l'essai ne prouverait
+      // rien et passerait à vide.
+      await ouvrirPageSite(page, 'transparence.html');
+      await page.evaluate(() => {
+        window.__lus = [];
+        const fausse = {
+          speaking: false,
+          pending: false,
+          speak(e) {
+            window.__lus.push(e.text);
+            setTimeout(() => e.onend && e.onend(), 0);
+          },
+          cancel() {}, pause() {}, resume() {},
+        };
+        Object.defineProperty(window, 'speechSynthesis', { value: fausse, configurable: true });
+      });
+      await ouvrirPersonnalisation(page);
+      await page.click('[data-read-aloud-toggle]');
+      await page.waitForFunction(
+        () => document.querySelector('[data-read-aloud-status]').textContent.includes('terminée'),
+        { timeout: 120000 },
+      );
+      const coupe = await page.evaluate(() => {
+        const lus = window.__lus;
+        return {
+          total: lus.length,
+          nus: lus.filter((texte) => /[A-Za-zÀ-ÿ0-9]$/.test(texte.trim())).slice(0, 3),
+          trop: lus.filter((texte) => texte.length > 220).length,
+          continuations: lus.filter((texte) => /,$/.test(texte.trim())).length,
+          longueurMax: Math.max(...lus.map((texte) => texte.length)),
+        };
+      });
+      assert.equal(
+        coupe.nus.length,
+        0,
+        `un segment ne doit pas s'arrêter sur un mot nu : ${JSON.stringify(coupe)}`,
+      );
+      assert.ok(
+        coupe.continuations >= 5,
+        `la page longue doit produire des continuations : ${JSON.stringify(coupe)}`,
+      );
+      assert.equal(coupe.trop, 0, `aucun segment ne doit dépasser 220 caractères : ${JSON.stringify(coupe)}`);
+
       // La langue des répliques anglaises des Mondes est respectée.
       await ouvrirPageSite(page, 'anglais-aventure.html');
       await page.waitForSelector('[data-mission-id="gare"]');

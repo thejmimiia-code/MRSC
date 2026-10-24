@@ -1,0 +1,20 @@
+{
+  "pages": 98,
+  "largeurs": [
+    390,
+    1280
+  ],
+  "echecs": [],
+  "cibles": {
+    "conformes": 5655,
+    "enLigne": 901,
+    "espacees": 2304,
+    "aCorriger": []
+  },
+  "focus": {
+    "testees": 8856,
+    "total": 8856,
+    "coupees": [],
+    "masques": []
+  }
+}

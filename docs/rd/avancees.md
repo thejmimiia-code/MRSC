@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 14 |
+| Avancées consignées | 15 |
 | Période couverte | du 2026-10-20 au 2026-10-24 |
-| Contrôles exécutables cités | 18 |
+| Contrôles exécutables cités | 19 |
 | Initiatives du portefeuille concernées | 11 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -313,6 +313,28 @@ Initiatives liées : `optimisation-du-site`, `ecouter-la-page`.
 **Suite.** Faire écouter la fonction à une personne qui lit difficilement et à une personne utilisant un lecteur d'écran, puis consigner les mots mal prononcés et le cran de vitesse qui lui convient ; retirer le lot si la voix perd le fil ou si un bloc est lu deux fois.
 
 Initiatives liées : `ecouter-la-page`.
+
+### `un-total-sans-son-manque` — Un total de mesure doit dire ce qu'il n'a pas mesuré
+
+*Consignée le 2026-10-24.*
+
+**Constat.** Le relevé WCAG 2.2 publiait « 825 éléments testés, 0 entièrement masqué » alors que le site compte 8 856 cibles atteignables : le plafond de 60 par page et les huit pages de l'échantillon coupaient la passe sans que le chiffre le dise. `anglais-aventure.html` en compte 448, dont 60 seulement étaient portées au focus. Le même outil, lancé sans serveur local, rendait « 0 cible, 0 masquée » — indiscernable d'une page parfaite.
+
+**Ce que cela change.** Le plafond passe à 500, au-delà du maximum observé, le focus est mesuré sur les 98 pages aux deux largeurs, le bilan publie les pages coupées et les cibles non testées, et un chargement en échec est compté comme un échec — avec sortie en erreur si toutes les pages échouent. Résultat du 24 octobre 2026 : 8 856 éléments testés sur 8 856 atteignables, 0 masqué, 0 page coupée ; relevé conservé dans `docs/rd/audit-criteres-22-2026-10-24.json`.
+
+**Preuves dans le dépôt :**
+
+- `outils/auditer-criteres-22.mjs`
+- `docs/rd/audit-criteres-22-2026-10-24.json`
+- `docs/rd/inclusion-criteres-wcag-22.md`
+
+**Contrôle qui la maintient :** `node outils/auditer-criteres-22.mjs --sans-focus && python3 outils/verifier-rd-continue.py`
+
+**Limite — ce que cela ne prouve pas.** Le chiffre est plus honnête, pas plus concluant : cinq points par élément ne disent rien de la lisibilité du contour de focus, le recouvrement n'est testé qu'après un défilement que la mesure provoque elle-même, et un bandeau qui apparaît au clavier réel n'est pas reproduit. Aucun lecteur d'écran ni appareil réel n'a servi à cette passe.
+
+**Suite.** Appliquer la même règle aux autres mesures du dépôt : tout script qui publie un total doit publier aussi ce qu'il a écarté, et refuser de rendre « zéro » quand il n'a rien pu charger.
+
+Initiatives liées : `optimisation-du-site`, `ecouter-la-page`.
 
 ### `un-trace-remplace-une-photo-de-logo` — Un tracé remplace une photo quand la netteté est la seule exigence
 
