@@ -33,8 +33,10 @@ jobs:
       - name: Compiler les modules Python
         run: python3 -m py_compile simulateur/*.py api/*.py outils/*.py
 
-      - name: Vérifier le GLB articulé EVA
-        run: python3 outils/test_modele_eva.py
+      - name: Vérifier le modèle archivé et les références EVA
+        run: |
+          python3 outils/test_modele_eva.py
+          python3 outils/test_references_eva.py
 
       - name: Vérifier les exemples de moyenne et médiane
         run: python3 outils/test_exemples_statistiques.py

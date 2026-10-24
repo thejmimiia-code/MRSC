@@ -2,7 +2,7 @@
 
 Date : 24 octobre 2026. Fichier : `eva-etude-01.glb` (glTF 2.0 binaire autonome, unité mètre).
 
-**Prototype stylisé à valider, pas reproduction fidèle ni personnage de production.**
+**Prototype rejeté par l’utilisateur pour son apparence trop rudimentaire et éloignée d’EVA. Conservé comme archive technique, pas comme direction artistique acceptable ni personnage de production.**
 
 ## Création et contenu
 

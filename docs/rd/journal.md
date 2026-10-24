@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-24 — Rejet du mannequin et reprise vers le réalisme
+
+- **Correction utilisateur :** le GLB procédural est trop laid et trop éloigné d'EVA. La validité du fichier et du rig ne satisfait pas la demande ; modèle retiré de la présentation principale et conservé comme archive repliée explicitement rejetée.
+- **Travail réel :** trois nouvelles images de référence face/profil/dos, générées à partir de la planche et d'une même face de départ. PNG natifs 848 × 1264, aperçus WebP sans agrandissement, dimensions et empreintes consignées. Ni modèle 3D ni triplet calibré : divergences de pose, coiffure et accessoires signalées sur la page.
+- **Recherche :** README/pipeline Hunyuan3D 2.1 lus à révision épinglée. Exigences GPU incompatibles avec ce sandbox sans GPU et doté d'environ 3,8 Gio de RAM ; génération du maillage non exécutée. Aucun envoi à un service de reconstruction 3D, crédit acheté ou résultat 3D fictif.
+- **Contrôles :** deux tests d'intégrité des références, lecteur archivé rejoué sur 240 configurations, statique/publication/budgets réussis. [Dossier de reprise](eva-realisme-reprise-2026-10-24.md).
+- **Suite et blocage :** aligner/corriger les références puis obtenir une exécution réelle de reconstruction, retouche et rig. Aucun nouveau GLB réaliste finalisé livré ; ne pas remplacer ce résultat par une image ou un script en annonçant que la demande est achevée.
+
 ## 2026-10-24 — Premier personnage GLB réellement articulé
 
 - **Demande :** modéliser et articuler le personnage avec coiffure, vêtements, textures et animations compatibles, au-delà du décor WebGL.

@@ -1,0 +1,32 @@
+{
+  "statut": "Images IA de travail, pas vues calibr\u00e9es ni mod\u00e8le 3D ; coh\u00e9rence \u00e0 corriger avant reconstruction multivue.",
+  "images": [
+    {
+      "fichier": "assets/images/eva-references/eva-dos-reference.png",
+      "largeur": 848,
+      "hauteur": 1264,
+      "octets": 1675338,
+      "sha256": "d8f6474e90bf075d0b68c38f35d600e5bf4e45f94607e2cc007e7a4b91ce6b31",
+      "apercu": "assets/images/eva-references/eva-dos-reference.webp",
+      "octets_apercu": 54298
+    },
+    {
+      "fichier": "assets/images/eva-references/eva-face-reference.png",
+      "largeur": 848,
+      "hauteur": 1264,
+      "octets": 1493297,
+      "sha256": "255ace5cf2d2957a7a7ddff616898f948b9c1f5c5ede54e3f5ac51f7fbccfa57",
+      "apercu": "assets/images/eva-references/eva-face-reference.webp",
+      "octets_apercu": 58130
+    },
+    {
+      "fichier": "assets/images/eva-references/eva-profil-reference.png",
+      "largeur": 848,
+      "hauteur": 1264,
+      "octets": 1446693,
+      "sha256": "f485f9d090f74183c2d0bc27d3dfeac3ec7000514ec57cfa77ab214c2552dce2",
+      "apercu": "assets/images/eva-references/eva-profil-reference.webp",
+      "octets_apercu": 37706
+    }
+  ]
+}
