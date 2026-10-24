@@ -1,0 +1,19 @@
+{
+  "configurationsSansDebordementGlobal": 240,
+  "deformations": [
+    {
+      "clip": "Respiration",
+      "deplacementMaxEchantillonne": 0.006222136099309563
+    },
+    {
+      "clip": "Salut",
+      "deplacementMaxEchantillonne": 0.8702424964716126
+    },
+    {
+      "clip": "Marche_sur_place",
+      "deplacementMaxEchantillonne": 0.2419735104400463
+    }
+  ],
+  "commandes": "chargement différé, mouvement effectif du rendu et pause, mouvement réduit, rotation manuelle, fermeture/réouverture, replis WebGL indisponible et GLB absent : réussis",
+  "limites": "Rendu logiciel Chromium, pas validation artistique ou de déformations naturelles ; pas audit complet accessibilité."
+}

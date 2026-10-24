@@ -2,6 +2,14 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-24 — Premier personnage GLB réellement articulé
+
+- **Demande :** modéliser et articuler le personnage avec coiffure, vêtements, textures et animations compatibles, au-delà du décor WebGL.
+- **Réalisation :** GLB original de 3 205 048 octets, 41 os, 11 maillages/matériaux, 63 436 triangles, trois textures 512² embarquées et trois clips (respiration, salut, marche sur place). Sources de géométrie, exporteur et notice de provenance conservés. Inspection et lecture facultative dans l'atelier.
+- **Preuves :** validateur glTF sans erreur/avertissement, quatre tests structurels et 240 configurations navigateur ; déformations de sommets, mouvement effectif à l'écran et pause, replis GLB/WebGL vérifiés. [Dossier et critique visuelle](eva-personnage-glb-2026-10-24.md), rapports liés et tests ajoutés à la CI.
+- **Décision :** ébauche technique, pas une EVA de production ni une ressemblance fidèle validée. Visage, mains, coiffure et déformations restent simplifiés ; pas d'expressions faciales, de simulation physique ou d'essai d'import Blender/moteur de jeu revendiqués.
+- **Suite :** reprendre la sculpture et la topologie vers la référence, valider face/profil/dos puis améliorer poids, contacts et expressions. Aucune conformité RGAA/WCAG ou validation artistique indépendante.
+
 ## 2026-10-24 — Passer de la parallaxe à une scène réellement 3D
 
 - **Demande :** « il faut se débrouiller pour avoir de la 3D ». Ajout à l'atelier d'une scène WebGL de vrais volumes, sans prétendre avoir modélisé EVA.

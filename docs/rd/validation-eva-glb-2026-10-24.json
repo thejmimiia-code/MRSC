@@ -1,0 +1,14 @@
+{
+  "statut": "Contrôle structurel glTF uniquement, pas validation esthétique, de mouvement naturel ou de compatibilité universelle.",
+  "sha256": "5dea1f5c7aa65be38b6c1cc77a04cd4161fa258d0551a81e1bfc0e40f1014d12",
+  "octets": 3205048,
+  "validatorVersion": "2.0.0-dev.3.10",
+  "issues": {
+    "numErrors": 0,
+    "numWarnings": 0,
+    "numInfos": 0,
+    "numHints": 0,
+    "messages": [],
+    "truncated": false
+  }
+}

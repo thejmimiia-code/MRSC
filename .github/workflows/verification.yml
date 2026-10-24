@@ -33,6 +33,9 @@ jobs:
       - name: Compiler les modules Python
         run: python3 -m py_compile simulateur/*.py api/*.py outils/*.py
 
+      - name: Vérifier le GLB articulé EVA
+        run: python3 outils/test_modele_eva.py
+
       - name: Vérifier les exemples de moyenne et médiane
         run: python3 outils/test_exemples_statistiques.py
 
@@ -170,7 +173,7 @@ jobs:
         with:
           node-version: '22'
       - name: Installer le navigateur de mesure
-        run: npm install --prefix "$RUNNER_TEMP/mrsc-browser" puppeteer-core@25.16.0 @sparticuz/chromium@153.0.0
+        run: npm install --prefix "$RUNNER_TEMP/mrsc-browser" puppeteer-core@25.16.0 @sparticuz/chromium@153.0.0 gltf-validator@2.0.0-dev.3.10
       - name: Mesurer les trois visuels dans les modes couverts
         env:
           MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
@@ -182,6 +185,8 @@ jobs:
           trap 'kill "$serveur"' EXIT
           MRSC_FICHES_JSON="$RUNNER_TEMP/graphismes/fiches-statistiques.json" node outils/verifier-fiches-statistiques.cjs
           node outils/test-cache-css-ia.cjs
+          MRSC_VALIDATOR_NODE_MODULES="$MRSC_BROWSER_NODE_MODULES" MRSC_EVA_VALIDATION="$RUNNER_TEMP/graphismes/eva-glb.json" node outils/valider-eva-glb.cjs
+          MRSC_EVA_RAPPORT="$RUNNER_TEMP/graphismes/eva-personnage.json" MRSC_EVA_CAPTURES="$RUNNER_TEMP/graphismes/captures-eva" node outils/test-eva-personnage.cjs
           node outils/verifier-graphismes.cjs
           for mutation in distorsion densite ancre; do
             set +e

@@ -1381,7 +1381,7 @@ def fichiers_du_site() -> None:
 
 
 #: Suffixes de fichiers publiés dont le contenu peut citer une ressource.
-TEXTES_CITANTS = frozenset({".html", ".css", ".js", ".xml", ".txt", ".json", ".webmanifest"})
+TEXTES_CITANTS = frozenset({".html", ".css", ".js", ".mjs", ".xml", ".txt", ".json", ".webmanifest"})
 
 
 def ressources_citees() -> None:
