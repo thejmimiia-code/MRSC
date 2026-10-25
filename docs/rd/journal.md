@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-25 — La mention d'impression du pied de page prend sa propre ligne
+
+- **Initiative :** présentation du pied de page. Signalement avec capture : « la phrase commence juste derrière le point et se retrouve coupée, visuellement c'est moche ».
+- **Cause :** la phrase « Une copie imprimée n'est pas une version certifiée » suivait « Boussole des savoirs » dans le même paragraphe centré. Le retour à la ligne tombait donc au milieu d'elle, et le point précédent semblait l'introduire.
+- **Petite décision, conséquence de lecture :** la mention devient un `<span class="footer-rd-print">` en `display: block` et `text-align: start`, et le paragraphe n'est plus borné à 72 ch dans le bas de page : la ligne démarre au bord gauche du conteneur, à l'aplomb du reste du site. La note de version au-dessus garde le centrage demandé le 23 octobre. Sans CSS, le `<span>` redevient en ligne : aucune page ne dépend de la feuille de style pour rester lisible.
+- **Deux endroits à la fois :** les 13 pages racine et le générateur de fiches (`outils/construire-apprentissages.py`) portent le même pied de page ; les 85 fiches sont régénérées, et la porte vérifie que les deux restent d'accord.
+- **Contrôles exécutés :** `verifier-affichages.py` étendu (règle CSS, `max-width: none`, présence du `<span>` sur 98 pages), avec deux mutations rejouées et détectées — `<span>` retiré d'`index.html`, puis `display: block` et `text-align: start` retirés de la règle. `construire-apprentissages.py --verifier` : sorties synchronisées.
+- **Constat voisin, non corrigé :** la règle `@media print` masque `.site-footer` en entier. Une copie papier ne porte donc ni les droits, ni la licence, ni cette phrase — alors que c'est précisément le cas qu'elle décrit. À trancher : soit la mention et la licence s'impriment, soit on assume que le papier ne porte rien du site.
+- **Limite :** aucune mesure au navigateur dans cet environnement (Chromium indisponible) ; le rendu réel reste à constater, notamment le voisinage d'une ligne centrée et d'une ligne calée à gauche.
+- **Suite :** regarder le pied de page sur écran large et sur téléphone ; si le mélange centré/à gauche ne convient pas, la variante tient en une règle (centrer `.footer-rd-print` ou aligner toute la note à gauche).
+
 ## 2026-10-25 — Le site est revenu, mais il publiait la racine du dépôt
 
 - **Initiative :** publication GitHub Pages. Après le 404 du matin (site Pages absent, Actions arrêté par la facturation), le site répond de nouveau ; la source Pages a été réglée sur « Deploy from a branch ».

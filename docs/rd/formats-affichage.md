@@ -526,6 +526,47 @@ paragraphes retiré, puis remplacé par un alignement à gauche.
 Limite : la mesure est celle d'un Chromium sans interface ; le rendu des filets
 sur un écran à très forte densité reste à constater.
 
+### Quatrième passage : la mention d'impression sur sa propre ligne (25 octobre 2026)
+
+Signalement, capture à l'appui : « la phrase commence juste derrière le point et
+se retrouve coupée » — la mention « Une copie imprimée n'est pas une version
+certifiée » s'affichait au milieu d'une ligne centrée, coupée après « Une copie
+imprimée ».
+
+- **La cause est la phrase elle-même, pas son alignement.** Elle était écrite à
+  la suite de « Boussole des savoirs », dans le même paragraphe : le retour à la
+  ligne du centrage tombait donc au milieu d'elle, et le point de la phrase
+  précédente semblait l'introduire.
+- **Deux corrections liées.** La mention devient un `<span class="footer-rd-print">`
+  en `display: block` avec `text-align: start`, et le paragraphe cesse d'être
+  borné à 72 ch dans le bas de page (`.footer-bottom .footer-rd { max-width: none }`) :
+  la ligne démarre au bord gauche du conteneur, à l'aplomb du reste du site,
+  tandis que la note de version au-dessus garde son centrage.
+- **Le balisage se dégrade proprement.** Sans la feuille de style, le `<span>`
+  reste en ligne et la phrase redevient celle d'avant, avec une espace devant
+  elle : aucune page ne dépend du CSS pour rester lisible.
+- **Le filet du bloc s'élargit.** Il suivait les 72 ch du paragraphe ; il couvre
+  maintenant la largeur du conteneur, comme celui du bloc du bas au-dessus de
+  lui. C'est un effet de bord assumé du `max-width: none`.
+- **Ce que cette mention ne fait pas.** Elle ne s'imprime pas : la règle
+  `@media print` masque `.site-footer` en entier. Une copie papier ne porte donc
+  ni les droits, ni la licence, ni cette phrase. Le constat est consigné ici ; il
+  n'est pas corrigé dans ce passage.
+
+Garde-fou : le 13ᵉ contrôle est étendu — la règle `.footer-rd-print` doit porter
+`display: block` et `text-align: start`, le paragraphe du bas de page doit
+conserver `max-width: none`, et **les 13 pages racine comme les 85 fiches**
+doivent porter le `<span>`. Le générateur de fiches et les pages racine sont donc
+tenus ensemble : un seul des deux mis à jour fait échouer la porte. **Deux
+mutations rejouées, deux détectées** : `<span>` retiré d'`index.html`, puis
+`display: block` et `text-align: start` retirés de la règle CSS.
+
+Limite : aucune mesure au navigateur cette fois — Chromium n'était pas
+disponible dans l'environnement de travail. Le raisonnement porte sur la cascade
+(`.footer-bottom .footer-rd` l'emporte par spécificité sur `.footer-rd`) ; le
+rendu réel reste à constater sur écran, notamment le voisinage d'une ligne
+centrée et d'une ligne calée à gauche.
+
 ## 6 octies. « Écouter la page » : une commande qui tient dans le panneau (23 octobre 2026)
 
 Le lot d'inclusion ajoute une commande de lecture à voix haute, en dernier dans

@@ -1469,6 +1469,20 @@ html.contraste-renforce .resource-scope-note {
   text-wrap: pretty;
 }
 
+/* La mention d'impression ouvre sa propre ligne, calée à gauche du conteneur.
+   Collée après le point, elle commençait au milieu d'une ligne centrée et se
+   coupait en deux au mauvais endroit (signalé le 25 octobre 2026). Le reste du
+   bas de page garde le centrage demandé le 23 octobre 2026. */
+.footer-bottom .footer-rd {
+  max-width: none;
+}
+
+.footer-rd-print {
+  display: block;
+  margin-top: .3rem;
+  text-align: start;
+}
+
 @media (max-width: 920px) {
   .identity-contact {
     display: none;
