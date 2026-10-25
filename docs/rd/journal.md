@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-25 — Le site publié répond 404 : deux causes de compte, pas de contenu
+
+- **Symptôme :** `https://thejmimiia-code.github.io/MRSC/` renvoie `404 — There isn't a GitHub Pages site here` ; le run « Vérifier les en-têtes servis par l’hébergement » du 25 octobre à 18 h 14 échoue, comme les trois autres workflows de `main`.
+- **Diagnostic :** aucun job n’a démarré. L’annotation du run `40220299672` est « The job was not started because recent account payments have failed or your spending limit needs to be increased », et `GET /repos/…/pages` répond `404 Not Found` alors que `has_pages` vaut `false`. Les workflows de `main` étaient verts le 24 octobre à 17 h 28 : la défaillance vient du compte, pas d’une régression du dépôt.
+- **Ce qui a été écarté, avec preuve locale :** `outils/verifier-publication-locale.py` (136 fichiers, 99 pages, 4 802 références internes résolues), `outils/verifier-site-statique.py` (liens, ancres, scripts, 98 URL du plan de site) et `outils/serveur-local.py` servi sur `0.0.0.0:4173` (accueil, CSS, fiche, `404.html`, `/api/catalogue` en 200). Le contenu publié n’est donc pas la cause ; l’aperçu local reste la seule copie consultable en attendant.
+- **Correctif dans le dépôt :** l’étape `configure-pages` du workflow de publication reçoit `enablement: true` (et le `token` du workflow). Sans cette option, une publication sur un dépôt dont Pages n’est pas activé échoue au lieu de créer le site ; c’est un mode de panne silencieux, qui ne se voit qu’en interrogeant l’adresse publique.
+- **Ce qui reste hors dépôt, et ne peut pas être fait ici :** régler la facturation ou relever la limite de dépense Actions, puis relancer « Publish M.R.S.C site ». Le jeton disponible sur le dépôt n’a ni le droit de lire la configuration Pages ni celui de créer le site (403 `Resource not accessible by integration`) ; aucune correction de code ne rétablit l’adresse à elle seule.
+- **Contrôles exécutés :** publication locale, site statique, service local page/CSS/fiche/404/API. Aucun déploiement réel, aucune vérification d’en-têtes servis et aucune correction de facturation revendiqués.
+- **Suite :** après réactivation, relancer le workflow, constater le run vert puis le contrôle d’en-têtes du lendemain ; si `enablement: true` est refusé, activer Pages à la main avec la source **GitHub Actions** et consigner la date.
+
 ## 2026-10-25 — Séparer les contenus de personnage du site associatif
 
 - **Décision :** les portraits, références physiques et travaux personnels du personnage ne relèvent pas de ce dépôt. Ils sont retirés de l’arbre courant, avec sauvegarde hors dépôt avant suppression.
