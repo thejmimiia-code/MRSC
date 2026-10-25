@@ -95,6 +95,11 @@ jobs:
       - name: Vérifier le protocole éditorial commun
         run: python3 outils/test_protocole_editorial.py
 
+      - name: Vérifier la séparation des contenus personnels
+        run: |
+          python3 outils/test_separation_contenus.py
+          python3 outils/verifier-separation-contenus.py
+
       - name: Vérifier les pages, liens et scripts statiques
         run: python3 outils/verifier-site-statique.py
 
