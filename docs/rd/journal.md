@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-25 — Un dépôt sans issues ne rend plus rouge une vérification réussie
+
+- **Constat :** sur `main`, deux workflows échouaient alors que leurs contrôles passaient — « Vérifier les en-têtes servis par l’hébergement » (relevé réussi, échec à la publication de l’issue) et « Veille éditoriale des apprentissages » (contrôles réussis, échec à la création de l’issue). Cause unique : `has_issues` vaut `false` sur le dépôt, donc `gh issue create` échoue et `set -euo pipefail` fait tomber l’étape.
+- **Pourquoi c’est un défaut de notre côté :** un rapport périodique impossible à publier n’est pas une mesure en échec. Confondre les deux transforme un réglage du dépôt en alerte permanente — et une alerte toujours rouge cesse d’être lue.
+- **Correctif :** les deux étapes interrogent `has_issues` avant d’écrire. Si les issues sont désactivées, elles consignent le rapport dans le résumé de l’exécution, ajoutent une note renvoyant vers **Settings → General → Features**, et sortent en 0. Rien n’est perdu : le relevé et les rapports restent lisibles, ils ne sont simplement plus dupliqués dans une issue.
+- **Contrôles :** les six fichiers de workflow se chargent sans erreur (`yaml.safe_load`) ; le bloc shell ajouté est relu après analyse pour vérifier l’échappement des accents graves.
+- **Limite :** le comportement réel ne sera constaté qu’au prochain run (relevé à chaque publication et chaque nuit, veille chaque semaine). Ce correctif ne dit rien de la qualité des rapports eux-mêmes.
+- **Suite :** soit laisser les issues désactivées et lire les résumés d’exécution, soit les réactiver et retrouver les deux issues de suivi uniques.
+
 ## 2026-10-25 — La copie imprimée porte enfin son adresse, exigée par la licence
 
 - **Initiative :** présentation et licence. En vérifiant le signalement précédent sur le pied de page, un défaut plus grave est apparu : la feuille d'impression lit `attr(data-print-url)` depuis le 16 octobre, et **aucune page n'écrivait cet attribut**. Toute copie imprimée sortait avec « Copie du site M.R.S.C. — — à relire, pas une version certifiée », donc sans l'adresse que la licence rend obligatoire.
