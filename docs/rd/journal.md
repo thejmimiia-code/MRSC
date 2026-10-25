@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-25 — Un dépôt sans issues ne doit pas rendre rouge une vérification réussie
+
+- **Constat :** après la fusion de la correction du périmètre, `main` portait deux workflows rouges alors que leurs contrôles passaient : « Vérifier les en-têtes servis par l’hébergement » (étape de relevé réussie, échec à la publication de l’issue) et « Veille éditoriale des apprentissages » (étapes 4 et 5 réussies, échec à l’étape 7). Cause unique : `has_issues` vaut `false` sur le dépôt, donc `gh issue create` échoue.
+- **Pourquoi c’est un défaut de notre côté :** un rapport périodique qui ne peut pas être publié n’est pas une mesure en échec. Confondre les deux transforme un réglage du dépôt en erreur permanente, et une alerte toujours rouge finit par ne plus être lue.
+- **Correctif :** les deux étapes interrogent `has_issues` avant d’écrire ; si les issues sont désactivées, elles consignent le rapport dans le résumé de l’exécution, écrivent une note explicite et sortent en 0. Le relevé et les rapports ne sont donc jamais perdus, seulement non dupliqués dans une issue.
+- **Contrôles :** les six fichiers de workflow se chargent sans erreur (`yaml.safe_load`) ; le bloc shell ajouté est relu après analyse pour vérifier l’échappement des accents graves.
+- **Limite :** ce correctif ne réactive pas les issues et ne teste pas le comportement réel tant qu’un run n’a pas eu lieu. Il ne dit rien de la qualité des rapports eux-mêmes.
+- **Suite :** soit laisser les issues désactivées et lire les résumés d’exécution, soit les réactiver et retrouver les deux issues de suivi uniques.
+
 ## 2026-10-25 — Le site est revenu, mais il publiait la racine du dépôt
 
 - **Initiative :** publication GitHub Pages. Après le 404 du matin (site Pages absent, Actions arrêté par la facturation), le site répond de nouveau ; la source Pages a été réglée sur « Deploy from a branch ».

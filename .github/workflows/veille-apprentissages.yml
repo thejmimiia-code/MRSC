@@ -121,6 +121,19 @@ jobs:
             fi
           } > "$rapport"
 
+          # Un dépôt sans issues activées ne peut pas recevoir l'issue de veille.
+          # Les contrôles, eux, ont déjà tourné : cette étape s'arrête proprement
+          # pour ne pas rendre rouge une vérification qui a réussi.
+          if [ "$(gh api "repos/$GITHUB_REPOSITORY" --jq .has_issues 2>/dev/null || echo false)" != "true" ]; then
+            {
+              echo "### Issue de veille non publiée"
+              echo
+              echo "Les issues sont désactivées sur \`$GITHUB_REPOSITORY\`. Les rapports restent dans le résumé de cette exécution ; réactiver les issues dans **Settings → General → Features** rétablira l'issue de suivi unique."
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "Issues désactivées : rapports non publiés (conservés dans le résumé de l'exécution)."
+            exit 0
+          fi
+
           numero="$(gh issue list \
             --repo "$GITHUB_REPOSITORY" \
             --state open \
