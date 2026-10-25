@@ -4,11 +4,6 @@
 
 Reproduction statique des pages publiques de [www.mrsc.fr](https://www.mrsc.fr/) pour servir de base aux travaux de R&D, complétée par un outil citoyen : le simulateur macro-politique.
 
-## Périmètre des contenus
-
-Les références physiques, portraits, biographies et travaux personnels du personnage sont exclus de ce dépôt et de la publication du site associatif. Le prototype visuel correspondant a été retiré. La page `eva.html` conserve uniquement la présentation générale de la recherche en IA, sans portrait ni description physique.
-
-Ce retrait de l’arbre courant **n’efface pas l’historique, les anciennes PR ou les versions étiquetées**. Le dépôt doit rester privé jusqu’à une purge distincte de ces emplacements. Le contrôle `python3 outils/verifier-separation-contenus.py` bloque le retour des chemins connus ; il ne constitue pas un détecteur universel de données sensibles.
 
 ## Pages
 
