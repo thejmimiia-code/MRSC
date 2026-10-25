@@ -203,7 +203,7 @@ def pied_de_page(prefixe: str = "") -> str:
           <li><a href="{prefixe}transparence.html#licence">Licence</a></li>
           <li><a href="#contenu">Haut de page</a></li>
         </ul>
-        <p class="footer-rd">Version R&amp;D : les pages portent leur statut. <a href="{prefixe}transparence.html#rd-innovation">Méthode</a>&nbsp;·&nbsp;<a href="{prefixe}apprendre.html#boussole-savoirs">Boussole des savoirs</a>. Une copie imprimée n’est pas une version certifiée.</p>
+        <p class="footer-rd">Version R&amp;D : les pages portent leur statut. <a href="{prefixe}transparence.html#rd-innovation">Méthode</a>&nbsp;·&nbsp;<a href="{prefixe}apprendre.html#boussole-savoirs">Boussole des savoirs</a>. <span class="footer-rd-print">Une copie imprimée n’est pas une version certifiée.</span></p>
       </div>
     </div>
   </footer>'''

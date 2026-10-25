@@ -1028,6 +1028,47 @@ def controler_pied_de_page() -> list[str]:
             f"({', '.join(fautives[:3])}…) : les séparateurs peuvent s'y retrouver "
             "orphelins en fin de ligne"
         )
+
+    # 4. La mention d'impression ouvre sa propre ligne, calée à gauche.
+    # Collée après le point, elle commençait au milieu d'une ligne centrée et se
+    # coupait en deux (« Une copie imprimée / n'est pas une version certifiée »),
+    # signalé le 25 octobre 2026 avec capture.
+    imprimable = re.search(r"\.footer-rd-print\s*\{([^}]*)\}", texte)
+    if not imprimable:
+        erreurs.append(
+            "site.css — la règle .footer-rd-print a disparu : la mention d'impression "
+            "se recolle après le point et se coupe au milieu d'une ligne centrée"
+        )
+    else:
+        manquants = [
+            declaration
+            for declaration in ("display: block", "text-align: start")
+            if declaration not in imprimable.group(1)
+        ]
+        if manquants:
+            erreurs.append(
+                "site.css — la mention d'impression n'ouvre plus sa propre ligne calée à "
+                f"gauche ({', '.join(manquants)} manquant dans .footer-rd-print) : elle "
+                "démarre derrière le point de la phrase précédente"
+            )
+    if not re.search(r"\.footer-bottom\s+\.footer-rd\s*\{[^}]*max-width:\s*none", texte):
+        erreurs.append(
+            "site.css — la note de version est de nouveau bornée à 72ch dans le bas de "
+            "page (.footer-bottom .footer-rd { max-width: none }) : la mention "
+            "d'impression ne rejoint plus le bord gauche du conteneur"
+        )
+    sans_saut = []
+    for page in sorted(
+        chemin for chemin in list(RACINE.glob("*.html")) + list((RACINE / "apprendre" / "fiches").glob("*.html"))
+    ):
+        if '<span class="footer-rd-print">' not in page.read_text(encoding="utf-8"):
+            sans_saut.append(page.name)
+    if sans_saut:
+        erreurs.append(
+            f"{len(sans_saut)} page(s) collent la mention d'impression derrière le point, "
+            f"sans <span class=\"footer-rd-print\"> ({', '.join(sans_saut[:3])}…) : le "
+            "générateur de fiches et les pages racine doivent porter le même pied de page"
+        )
     return erreurs
 
 
