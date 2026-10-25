@@ -70,6 +70,11 @@ jobs:
       - name: Validate the editorial protocol
         run: python3 outils/test_protocole_editorial.py
 
+      - name: Validate separation of personal content
+        run: |
+          python3 outils/test_separation_contenus.py
+          python3 outils/verifier-separation-contenus.py
+
       - name: Validate static pages, links and scripts
         run: python3 outils/verifier-site-statique.py
 
@@ -105,7 +110,7 @@ jobs:
           # Publier la présentation prudente d’ÉVA, explicitement identifiée comme proposition à relire.
           # favicon.ico est référencé par les 94 pages : sans lui, chaque page du site publié
           # demandait un fichier absent et l’onglet restait sans icône.
-          cp index.html apprendre.html anglais-aventure.html ia-societe.html eva.html simulateur.html animations.html documents.html liens-utiles.html localisation.html nous-contacter.html transparence.html confidentialite.html 404.html sitemap.xml llms.txt favicon.ico _site/
+          cp index.html apprendre.html anglais-aventure.html ia-societe.html eva.html simulateur.html documents.html liens-utiles.html localisation.html nous-contacter.html transparence.html confidentialite.html 404.html sitemap.xml llms.txt favicon.ico _site/
           cp -R assets _site/assets
           # Fiches autonomes publiques ; les sources TOML restent dans docs/.
           cp -R apprendre/fiches _site/apprendre/fiches

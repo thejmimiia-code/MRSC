@@ -26,3 +26,12 @@ Gemfile.lock
 
 # Planches d'exploration : archivées dans les versions étiquetées, pas dans l'arbre
 docs/rd/statuts-animation/*.png
+
+# Les références physiques/personnelles du personnage relèvent d’un dépôt séparé.
+/assets/images/animation/eva*
+/assets/images/eva/
+/assets/images/eva-*
+/assets/models/eva/
+/docs/rd/statuts-animation/eva-*
+/livrables/
+/private-eva*/

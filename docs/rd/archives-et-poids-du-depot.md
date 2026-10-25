@@ -13,7 +13,7 @@ La fusion de la PR #85, le 19 octobre 2026, a fait entrer **505 PNG (1 290,9 Mo)
 
 - **Douze planches citées** dans [`plan-statuts-animation.md`](plan-statuts-animation.md) restent dans l’arbre, **converties en WebP sans perte** : **14,7 Mo** au total au lieu de **31,4 Mo**, pour une image **strictement identique** (écart pixel mesuré : `0`).
 - **Les 493 autres planches** et les douze originaux PNG sont **archivés hors de l’arbre**, dans la version étiquetée [`planches-statuts-animation-2026-10`](https://github.com/thejmimiia-code/MRSC/releases/tag/planches-statuts-animation-2026-10), qui pointe sur l’état du dépôt **avant** ce retrait.
-- `docs/rd/statuts-animation/` contient la [bible du film](statuts-animation/bible-fil-et-video-01.md), la référence `eva-reference.jpg`, les douze WebP sans perte et le manifeste `ARCHIVE-planches-2026-10.sha256`.
+- `docs/rd/statuts-animation/` contient la [bible du film](statuts-animation/bible-fil-et-video-01.md), les douze WebP sans perte et le manifeste `ARCHIVE-planches-2026-10.sha256`.
 - `.gitignore` ignore les `*.png` de ce dossier, pour qu’une planche ne revienne pas par inadvertance.
 - [`outils/verifier-planches-statuts.py`](../outils/verifier-planches-statuts.py) contrôle les liens, l’absence de PNG suivi et le manifeste ; il tourne dans la CI à chaque proposition.
 
@@ -137,3 +137,7 @@ Ne pas committer de nouvelles planches PNG dans le dépôt. Les déposer dans un
 - Le compte de fichiers et le poids « après » sont ceux de l’arbre fusionné le 19 octobre 2026 ; ils sont à recalculer avec les commandes ci-dessus si l’arbre évolue.
 - Les planches restent « à relire » : aucune n’est validée, et ce document ne dit rien de leur intérêt artistique.
 - `assets/images/favicon-192.png`, un temps livré sans être cité, est désormais déclaré comme icône 192×192 sur les 94 pages : plus aucune ressource du dossier `assets/` n’est orpheline.
+
+## Séparation du 25 octobre 2026
+
+La référence de personnage a été retirée de l’arbre courant et sauvegardée hors dépôt. Le manifeste historique reste inchangé pour vérifier l’archive d’origine ; ce n’est pas un inventaire des fichiers actuellement publiables. L’étiquette et l’historique contiennent encore les anciennes ressources et ne doivent pas être rendus publics sans une purge séparée. Les douze planches du film associatif sont conservées.
