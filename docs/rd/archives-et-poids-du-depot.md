@@ -3,7 +3,7 @@
 **Date :** 19 octobre 2026.  
 **Statut :** relevé technique par l’agent, pas une revue éditoriale des planches. Les chiffres viennent de commandes reproductibles, reproduites plus bas. Aucun jugement sur la qualité visuelle n’est porté ici.
 
-**Principe : rien n’est perdu.** Les 507 fichiers d’origine sont conservés octet pour octet dans l’étiquette [`planches-statuts-animation-2026-10`](https://github.com/thejmimiia-code/MRSC/releases/tag/planches-statuts-animation-2026-10), avec un manifeste d’empreintes vérifiable, et les douze planches conservées dans l’arbre sont **sans perte** (écart pixel nul).
+**Principe : rien n’est perdu.** Les 507 fichiers d’origine sont conservés octet pour octet dans l’étiquette [`planches-statuts-animation-2026-10`](https://github.com/thejmimiia-code/MRSC/releases/tag/planches-statuts-animation-2026-10), avec une sauvegarde du manifeste historique hors dépôt, et les douze planches conservées dans l’arbre sont **sans perte** (écart pixel nul).
 
 ## Pourquoi
 
@@ -13,7 +13,7 @@ La fusion de la PR #85, le 19 octobre 2026, a fait entrer **505 PNG (1 290,9 Mo)
 
 - **Douze planches citées** dans [`plan-statuts-animation.md`](plan-statuts-animation.md) restent dans l’arbre, **converties en WebP sans perte** : **14,7 Mo** au total au lieu de **31,4 Mo**, pour une image **strictement identique** (écart pixel mesuré : `0`).
 - **Les 493 autres planches** et les douze originaux PNG sont **archivés hors de l’arbre**, dans la version étiquetée [`planches-statuts-animation-2026-10`](https://github.com/thejmimiia-code/MRSC/releases/tag/planches-statuts-animation-2026-10), qui pointe sur l’état du dépôt **avant** ce retrait.
-- `docs/rd/statuts-animation/` contient la [bible du film](statuts-animation/bible-fil-et-video-01.md), la référence `eva-reference.jpg`, les douze WebP sans perte et le manifeste `ARCHIVE-planches-2026-10.sha256`.
+- `docs/rd/statuts-animation/` contient la [bible du film](statuts-animation/bible-fil-et-video-01.md), les douze WebP sans perte et le manifeste `ARCHIVE-film-associatif.sha256`.
 - `.gitignore` ignore les `*.png` de ce dossier, pour qu’une planche ne revienne pas par inadvertance.
 - [`outils/verifier-planches-statuts.py`](../outils/verifier-planches-statuts.py) contrôle les liens, l’absence de PNG suivi et le manifeste ; il tourne dans la CI à chaque proposition.
 
@@ -53,14 +53,14 @@ gh api repos/thejmimiia-code/MRSC --jq '.size'   # en kilo-octets
 
 ## Contrôle d’intégrité de l’archive
 
-Le manifeste [`statuts-animation/ARCHIVE-planches-2026-10.sha256`](statuts-animation/ARCHIVE-planches-2026-10.sha256) contient l’empreinte SHA-256 des **507** fichiers d’origine (505 PNG, la bible, la référence). Il a été produit à partir des objets de l’étiquette et vérifié une fois de bout en bout.
+Le manifeste [`statuts-animation/ARCHIVE-film-associatif.sha256`](statuts-animation/ARCHIVE-film-associatif.sha256) ne contient désormais que **343 empreintes** du périmètre associatif. Les 164 entrées de création du personnage ont été retirées le 25 octobre 2026. Les empreintes restantes sont inchangées ; le manifeste intégral de 507 fichiers reste sauvegardé hors dépôt. La vérification complète réalisée le 19 octobre est une preuve historique, pas un contrôle du périmètre actuel.
 
 ```sh
 mkdir -p /tmp/verif-archive
 git archive planches-statuts-animation-2026-10 docs/rd/statuts-animation | tar -x -C /tmp/verif-archive
 cd /tmp/verif-archive/docs/rd/statuts-animation
-cp /chemin/vers/le/depot/docs/rd/statuts-animation/ARCHIVE-planches-2026-10.sha256 .
-sha256sum -c ARCHIVE-planches-2026-10.sha256 --quiet   # aucun message = tout est conforme
+cp /chemin/vers/le/depot/docs/rd/statuts-animation/ARCHIVE-film-associatif.sha256 .
+sha256sum -c ARCHIVE-film-associatif.sha256 --quiet   # vérifie les 343 entrées du sous-ensemble associatif
 ```
 
 Résultat obtenu le 19 octobre 2026 : **507 fichiers conformes, aucun écart**.
@@ -137,3 +137,7 @@ Ne pas committer de nouvelles planches PNG dans le dépôt. Les déposer dans un
 - Le compte de fichiers et le poids « après » sont ceux de l’arbre fusionné le 19 octobre 2026 ; ils sont à recalculer avec les commandes ci-dessus si l’arbre évolue.
 - Les planches restent « à relire » : aucune n’est validée, et ce document ne dit rien de leur intérêt artistique.
 - `assets/images/favicon-192.png`, un temps livré sans être cité, est désormais déclaré comme icône 192×192 sur les 94 pages : plus aucune ressource du dossier `assets/` n’est orpheline.
+
+## Séparation du 25 octobre 2026
+
+La référence de personnage a été retirée de l’arbre courant et sauvegardée hors dépôt. Le manifeste intégral historique a été sorti de l’arbre courant ; le sous-ensemble associatif de 343 empreintes permet encore de vérifier les références du film, sans réexposer les entrées du personnage. L’étiquette et l’historique contiennent encore les anciennes ressources et ne doivent pas être rendus publics sans une purge séparée. Les douze planches du film associatif sont conservées.

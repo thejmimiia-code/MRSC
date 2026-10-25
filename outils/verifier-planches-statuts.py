@@ -9,7 +9,7 @@ Vérifie, sans réseau et sans dépendance externe :
 3. qu'aucun PNG n'est suivi dans `docs/rd/statuts-animation/` ;
 4. que les liens d'image des documents `docs/rd/*.md` désignent un fichier
    présent, ou à défaut une planche figurant au manifeste de l'archive ;
-5. que le manifeste d'empreintes de l'archive décrit bien 507 fichiers.
+5. que le manifeste d'empreintes de l'archive décrit bien les 343 fichiers de son périmètre associatif.
 
 Usage :
     python3 outils/verifier-planches-statuts.py [--verifier]
@@ -28,8 +28,8 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parent.parent
 PLAN = RACINE / "docs" / "rd" / "plan-statuts-animation.md"
 DOSSIER = RACINE / "docs" / "rd" / "statuts-animation"
-MANIFESTE = DOSSIER / "ARCHIVE-planches-2026-10.sha256"
-FICHIERS_ARCHIVES = 507
+MANIFESTE = DOSSIER / "ARCHIVE-film-associatif.sha256"
+FICHIERS_ARCHIVES = 343
 EXTENSIONS = (".md", ".html", ".toml", ".py", ".json", ".yml", ".yaml")
 
 
