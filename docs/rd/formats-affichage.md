@@ -567,6 +567,52 @@ disponible dans l'environnement de travail. Le raisonnement porte sur la cascade
 rendu réel reste à constater sur écran, notamment le voisinage d'une ligne
 centrée et d'une ligne calée à gauche.
 
+### Cinquième passage : la copie papier porte enfin son adresse (25 octobre 2026)
+
+Même signalement, suite. La feuille d'impression promettait depuis le 16 octobre
+« Copie du site M.R.S.C. — *adresse* — à relire, pas une version certifiée »,
+lue dans `attr(data-print-url)`. **Aucune page n'écrivait cet attribut.** La
+ligne s'imprimait donc avec un tiret vide, et la licence du site — usage libre,
+**attribution obligatoire avec citation de l'adresse** — n'était pas respectée
+sur papier. Aucun contrôle ne portait sur la feuille d'impression.
+
+- **Une source unique.** `data-print-url` est écrit dans la balise `<html>` de
+  chaque page **à partir de sa canonique**, pas recopié : sur les pages racine,
+  par un passage unique vérifiable ; sur les 85 fiches et `apprendre.html`, par
+  `outils/construire-apprentissages.py` ; sur la page du simulateur, par
+  `outils/construire-simulateur.py` dans sa couche d'intégration, le moteur
+  amont restant intact. `404.html` n'a pas de canonique et reçoit son adresse
+  publiée.
+- **Ce que la ligne dit maintenant.** Source et adresse de la page, rappel de la
+  licence avec son adresse complète, et le statut : « cette copie n'est pas une
+  version certifiée : le statut à jour est celui de la page en ligne ». Le pied
+  de page reste masqué en impression, parce que ses liens relatifs y seraient
+  morts ; la ligne le remplace.
+- **Pas de JavaScript dans la chaîne.** L'adresse est dans le HTML servi : une
+  impression sans script, un lecteur qui exporte en PDF ou une impression vers
+  une imprimante réseau donnent le même texte.
+- **Un domaine figé, mais surveillé.** L'adresse de licence est écrite en clair
+  dans la feuille. Le contrôle compare sa base à celle des canoniques : changer
+  de domaine sans toucher la feuille fait échouer la porte au lieu de laisser
+  une attribution pointer vers l'ancien site.
+- **Ce qui n'est toujours pas dit sur papier.** Les mentions de droits du pied
+  de page (« © … Tous droits réservés ») et la liste des liens légaux restent
+  hors de la copie : la ligne renvoie à la licence en ligne. Cette omission est
+  assumée ici, pas corrigée.
+
+Garde-fou : le 13ᵉ contrôle, renommé « pied de page et copie imprimée », vérifie
+la présence de `html::after` dans `@media print`, son contenu (`attr(data-print-url)`,
+l'adresse de licence, la mention de non-certification), l'attribut sur **les 98
+pages publiées**, l'égalité entre cet attribut et la canonique de chaque page, et
+l'accord entre la base des canoniques et celle citée dans la feuille.
+**Quatre mutations rejouées, quatre détectées** : attribut retiré d'une page
+racine, attribut retiré d'une fiche, adresse d'impression remplacée par un autre
+domaine, `attr(data-print-url)` retiré de la feuille.
+
+Limite : le contrôle lit le CSS et le HTML, il n'imprime rien. Le rendu papier —
+saut de page, position de la ligne sous un contenu long — reste à constater sur
+une impression réelle, ce que cet environnement ne permet pas.
+
 ## 6 octies. « Écouter la page » : une commande qui tient dans le panneau (23 octobre 2026)
 
 Le lot d'inclusion ajoute une commande de lecture à voix haute, en dernier dans

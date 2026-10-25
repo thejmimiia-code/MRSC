@@ -4572,6 +4572,16 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
   }
   a { color: inherit; text-decoration: underline; }
   .phrase { display: block; }
+  /* La licence du site exige une attribution qui cite l'adresse : une copie
+     imprimée doit donc porter elle-même cette adresse, et pas seulement un
+     numéro de page. Le pied de page est masqué en impression parce que ses
+     liens relatifs y seraient morts ; cette ligne le remplace et reprend
+     source, licence et statut. L'adresse vient de l'attribut data-print-url,
+     écrit dans chaque page à partir de sa canonique : sans lui, la ligne
+     s'imprimerait avec un tiret vide, ce qui était le cas jusqu'au
+     25 octobre 2026. La base de l'adresse de licence est vérifiée page par
+     page par outils/verifier-affichages.py, pour qu'un changement de domaine
+     échoue au lieu de passer inaperçu. */
   html::after {
     display: block;
     margin: 1.2rem 0 0;
@@ -4579,7 +4589,8 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
     border-top: 1px solid #333;
     color: #333;
     font-size: max(12px, .85rem);
-    content: "Copie du site M.R.S.C. — " attr(data-print-url) " — à relire, pas une version certifiée.";
+    line-height: 1.45;
+    content: "Copie imprimée du site M.R.S.C. — Source : " attr(data-print-url) " — Licence avec attribution obligatoire, texte complet : https://thejmimiia-code.github.io/MRSC/transparence.html#licence — Cette copie n’est pas une version certifiée : le statut à jour est celui de la page en ligne.";
   }
 }
 
