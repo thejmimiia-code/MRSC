@@ -114,6 +114,12 @@ jobs:
           python3 outils/test_fichiers_servis.py
           python3 outils/verifier-fichiers-servis.py
 
+      # Le contrôle réseau du périmètre ne peut pas tourner hors ligne : ce test
+      # vérifie qu'il détecte un hébergement qui publie la racine du dépôt, cas
+      # survenu le 25 octobre 2026 avec une source Pages « Deploy from a branch ».
+      - name: Vérifier le contrôle du périmètre de publication
+        run: python3 outils/test_verifier_publication.py
+
       # Le script écrit ses refus sur la sortie d’erreur : sans ce relais, un
       # échec n’affichait que « exit code 1 » dans l’onglet des vérifications,
       # ce qui interdisait de savoir quel fichier ou quelle largeur posait

@@ -99,7 +99,9 @@ jobs:
             echo
             echo "---"
             echo
-            echo "Ce rapport constate des en-têtes (code, type MIME, encodage, cache). Il ne mesure ni le rendu, ni la performance, ni une empreinte carbone. La politique de cache \`max-age=600\` est imposée par GitHub Pages et n’est pas réglable depuis le dépôt : la relever ne suffit pas à la corriger."
+            echo "Ce rapport constate des en-têtes (code, type MIME, encodage, cache) et le périmètre publié. Il ne mesure ni le rendu, ni la performance, ni une empreinte carbone. La politique de cache \`max-age=600\` est imposée par GitHub Pages et n’est pas réglable depuis le dépôt : la relever ne suffit pas à la corriger."
+            echo
+            echo "Le second tableau contrôle ce qui ne doit **pas** être servi. Un 200 sur \`README.md\`, \`AGENTS.md\`, \`docs/\`, \`outils/\` ou \`api/\` signifie que la source Pages est réglée sur « Deploy from a branch » et publie la racine du dépôt : la rebasculer sur « GitHub Actions »."
             echo
             echo "Le relevé est conservé dans le dépôt (\`docs/rd/en-tetes-servis-AAAA-MM-JJ.toml\`) et revérifié hors ligne à chaque porte par \`outils/verifier-fichiers-servis.py\` : un binaire servi doit faire exactement la taille du fichier du dépôt, un texte servi doit arriver compressé plus petit."
           } > "$corps"

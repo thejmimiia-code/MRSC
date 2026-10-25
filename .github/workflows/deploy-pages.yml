@@ -86,6 +86,12 @@ jobs:
           python3 outils/test_fichiers_servis.py
           python3 outils/verifier-fichiers-servis.py
 
+      # Le contrôle réseau du périmètre ne peut pas tourner hors ligne : ce test
+      # vérifie qu'il mord, en simulant un hébergement qui publie la racine du
+      # dépôt. Sans lui, une régression du contrôle lui-même passerait inaperçue.
+      - name: Validate the publication-perimeter check
+        run: python3 outils/test_verifier_publication.py
+
       - name: Validate image variants
         run: python3 outils/optimiser-images.py --verifier
 
@@ -98,8 +104,18 @@ jobs:
       - name: Validate site and simulator integration
         run: python3 outils/verifier-integration.py
 
+      # `enablement: true` crée le site Pages s'il n'existe pas encore.
+      # Sans cette option, une publication sur un dépôt où Pages n'est pas
+      # activé échoue au lieu de créer le site, et l'adresse publique répond
+      # 404 « There isn't a GitHub Pages site here » (cas du 25 octobre 2026).
+      # La source doit rester « GitHub Actions » : réglée sur « Deploy from a
+      # branch », GitHub Pages publie la racine du dépôt — donc `docs/`,
+      # `outils/`, `api/`, `README.md` et `AGENTS.md`, hors périmètre.
       - name: Configure GitHub Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+        with:
+          enablement: true
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Prepare public site files
         shell: bash
