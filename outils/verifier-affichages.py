@@ -1069,6 +1069,71 @@ def controler_pied_de_page() -> list[str]:
             f"sans <span class=\"footer-rd-print\"> ({', '.join(sans_saut[:3])}…) : le "
             "générateur de fiches et les pages racine doivent porter le même pied de page"
         )
+
+    # 5. La copie imprimée porte elle-même l'attribution exigée par la licence.
+    # Jusqu'au 25 octobre 2026, la ligne d'impression lisait un attribut que
+    # personne n'écrivait : elle s'imprimait avec un tiret vide, donc sans
+    # l'adresse que la licence rend obligatoire.
+    impression = re.search(r"html::after\s*\{([^}]*)\}", texte)
+    if not impression:
+        erreurs.append(
+            "site.css — la ligne d'impression a disparu (html::after dans @media print) : "
+            "une copie papier ne porte plus ni source, ni licence, ni statut"
+        )
+    else:
+        contenu = impression.group(1)
+        manquants = [
+            expression
+            for expression in ("attr(data-print-url)", "transparence.html#licence", "version certifiée")
+            if expression not in contenu
+        ]
+        if manquants:
+            erreurs.append(
+                "site.css — la ligne d'impression ne porte plus "
+                f"{', '.join(manquants)} : la licence exige une attribution qui cite l'adresse, "
+                "et la copie doit dire qu'elle n'est pas certifiée"
+            )
+        if "content:" not in contenu:
+            erreurs.append("site.css — la ligne d'impression n'a plus de contenu (content:)")
+
+    pages_publiees = sorted(
+        list(RACINE.glob("*.html")) + list((RACINE / "apprendre" / "fiches").glob("*.html"))
+    )
+    sans_adresse, adresses_fausses = [], []
+    bases = set()
+    for page in pages_publiees:
+        contenu_page = page.read_text(encoding="utf-8")
+        attribut = re.search(r'<html[^>]*\bdata-print-url="([^"]*)"', contenu_page)
+        canonique = re.search(r'<link rel="canonical" href="([^"]+)">', contenu_page)
+        if not attribut or not attribut.group(1).strip():
+            sans_adresse.append(page.name)
+            continue
+        if attribut.group(1).startswith("http"):
+            bases.add(re.match(r"(https?://[^/]+/[^/]+/)", attribut.group(1)).group(1)
+                      if re.match(r"(https?://[^/]+/[^/]+/)", attribut.group(1)) else attribut.group(1))
+        if canonique and attribut.group(1) != canonique.group(1):
+            adresses_fausses.append(f"{page.name} ({attribut.group(1)} au lieu de {canonique.group(1)})")
+    if sans_adresse:
+        erreurs.append(
+            f"{len(sans_adresse)} page(s) n'ont pas d'adresse d'impression (data-print-url) "
+            f"({', '.join(sans_adresse[:3])}…) : la copie papier s'imprime sans la source "
+            "que la licence rend obligatoire"
+        )
+    if adresses_fausses:
+        erreurs.append(
+            f"{len(adresses_fausses)} page(s) annoncent une autre adresse à l'impression que leur "
+            f"canonique ({'; '.join(adresses_fausses[:2])}…) : l'attribution pointerait ailleurs"
+        )
+    # Une adresse de licence figée dans la feuille doit suivre le domaine des
+    # canoniques : un changement de domaine la laisserait pointer vers l'ancien.
+    if bases:
+        base_site = sorted(bases)[0]
+        if base_site not in texte:
+            erreurs.append(
+                f"site.css — la base publiée des pages ({base_site}) n'apparaît pas dans la "
+                "feuille : l'adresse de licence de la ligne d'impression pointe vers un autre "
+                "domaine que les canoniques"
+            )
     return erreurs
 
 
@@ -1086,7 +1151,7 @@ CONTROLES = (
     ("décor du héros et son repli", controler_decor_du_heros),
     ("qualité d'encodage des images", controler_qualite_d_encodage),
     ("habillage du panneau", controler_habillage_du_panneau),
-    ("pied de page", controler_pied_de_page),
+    ("pied de page et copie imprimée", controler_pied_de_page),
     ("lecture à voix haute", controler_lecture_a_voix_haute),
     ("espacement du texte (WCAG 1.4.12)", controler_espacement_du_texte),
 )

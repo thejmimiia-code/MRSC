@@ -957,6 +957,33 @@ const SCENARIOS ="""
     return page + separateur + suite
 
 
+def ajouter_adresse_impression(contenu: str) -> str:
+    """Inscrit l'adresse canonique dans l'attribut lu par la feuille d'impression.
+
+    Le moteur amont ignore la feuille du site : c'est la couche d'intégration
+    qui doit fournir `data-print-url`. La licence du site exige une attribution
+    avec l'adresse, et une copie papier du simulateur doit la porter. La valeur
+    vient de la canonique du moteur, jamais recopiée à la main.
+    """
+    canonique = re.search(
+        r'<link\s+rel="canonical"\s+href="([^"]+)"', contenu, re.IGNORECASE
+    )
+    if not canonique:
+        raise SystemExit(
+            "Impossible d’ajouter l’adresse d’impression : canonique absente de la page du moteur."
+        )
+    ouverture_html = re.search(r"<html\b[^>]*>", contenu, re.IGNORECASE)
+    if not ouverture_html:
+        raise SystemExit(
+            "Impossible d’ajouter l’adresse d’impression : balise <html> absente."
+        )
+    balise = ouverture_html.group(0)
+    if "data-print-url" in balise:
+        return contenu
+    balise_annotee = balise[:-1] + f' data-print-url="{canonique.group(1)}">'
+    return contenu[: ouverture_html.start()] + balise_annotee + contenu[ouverture_html.end():]
+
+
 def page_complete() -> str:
     scenarios_json = json.dumps(
         {
@@ -972,6 +999,7 @@ def page_complete() -> str:
         )
     contenu = ajouter_zones_defilantes_accessibles(contenu)
     contenu = ajouter_zone_principale_accessible(contenu)
+    contenu = ajouter_adresse_impression(contenu)
 
     ouverture_entete = re.search(
         r'<header\b(?=[^>]*class="entete")[^>]*>', contenu, re.IGNORECASE

@@ -211,8 +211,13 @@ def pied_de_page(prefixe: str = "") -> str:
 
 def page_enveloppe(titre: str, description: str, contenu: str, prefixe: str = "", page: str = "apprendre", canonique: str = "") -> str:
     canonical = f'\n  <link rel="canonical" href="{e(canonique)}">' if canonique else ""
+    # La licence du site exige une attribution avec son adresse. Une copie
+    # imprimée doit donc porter elle-même cette adresse : la feuille
+    # d'impression la lit dans cet attribut, sans dépendre de JavaScript. La
+    # valeur est la canonique de la page, jamais recopiée à la main.
+    attribut_impression = f' data-print-url="{e(canonique)}"' if canonique else ""
     return f'''<!doctype html>
-<html lang="fr">
+<html lang="fr"{attribut_impression}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
