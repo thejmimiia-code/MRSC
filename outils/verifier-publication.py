@@ -11,14 +11,23 @@ ne compresse pas et le contrôle conclurait à tort à l’absence de compressio
 Les octets relevés sont ceux annoncés par Content-Length, c’est-à-dire la taille
 transférée quand une compression est appliquée.
 
+Il vérifie aussi le **périmètre** : les documents de travail, les outils et les
+sources du moteur ne doivent jamais être servis. Le 25 octobre 2026, une
+publication GitHub Pages configurée « depuis une branche » a servi la racine
+entière du dépôt (`README.md`, `AGENTS.md`, `outils/`, `docs/`…) : tous les
+fichiers attendus répondaient 200, donc ce contrôle passait au vert alors que le
+site publiait ce qu’il devait cacher. Une réponse 200 sur un chemin de
+`HORS_PERIMETRE` fait désormais échouer le contrôle.
+
 Exemples :
     python3 outils/verifier-publication.py --base-url https://exemple.github.io/MRSC/
     python3 outils/verifier-publication.py --base-url http://127.0.0.1:8000/ --tentatives 1
 
-Sortie : tableau Markdown sur la sortie standard. Code 0 si tous les fichiers
-répondent 200, 1 sinon. Un type MIME inattendu est signalé sans faire échouer
-le contrôle, car les navigateurs décodent d’après le contenu ; un type faux
-reste néanmoins un défaut à corriger côté hébergement.
+Sortie : tableaux Markdown sur la sortie standard. Code 0 si tous les fichiers
+du périmètre répondent 200 et si aucun fichier hors périmètre n’est servi,
+1 sinon. Un type MIME inattendu est signalé sans faire échouer le contrôle,
+car les navigateurs décodent d’après le contenu ; un type faux reste néanmoins
+un défaut à corriger côté hébergement.
 """
 
 from __future__ import annotations
@@ -52,6 +61,21 @@ CIBLES: tuple[tuple[str, tuple[str, ...], str], ...] = (
     ("assets/images/apple-touch-icon.png", ("image/png",), "Icône Apple Touch"),
     ("llms.txt", ("text/plain",), "Sommaire pour lecteurs automatiques"),
     ("sitemap.xml", ("application/xml", "text/xml"), "Sitemap"),
+)
+
+#: Chemins qui ne doivent **jamais** être servis par l’hébergement public.
+#: Leur présence signifie que la racine du dépôt est publiée au lieu du seul
+#: artefact préparé par `.github/workflows/deploy-pages.yml` — c’est le cas
+#: d’une source Pages « Deploy from a branch », qui sert tout le dépôt.
+#: (chemin, description)
+HORS_PERIMETRE: tuple[tuple[str, str], ...] = (
+    ("README.md", "Documentation de développement"),
+    ("AGENTS.md", "Consignes internes des agents"),
+    ("LICENCE", "Licence du dépôt"),
+    ("docs/protocole-editorial.md", "Protocole éditorial interne"),
+    ("docs/rd/journal.md", "Journal de R&D et de passation"),
+    ("outils/serveur-local.py", "Outil de développement"),
+    ("api/simuler.py", "Fonction serveur Python du moteur"),
 )
 
 
@@ -168,6 +192,29 @@ def main() -> int:
 
     manquants = [a for a in anomalies if "injoignable" in a or "HTTP" in a]
     types_inattendus = [a for a in anomalies if a not in manquants]
+
+    # ── Périmètre : ce qui ne doit pas être servi ──────────────────────────
+    fuites: list[str] = []
+    indetermines: list[str] = []
+    print("\n## Hors périmètre de publication (attendu : 404)\n")
+    print("| Chemin | Rôle | Statut | Verdict |")
+    print("| --- | --- | ---: | --- |")
+    for chemin, description in HORS_PERIMETRE:
+        url = construire_url(options.base_url, chemin)
+        statut, _, _, _, erreur, _ = sonder(url, options.tentatives, options.attente)
+        statut_affiche = str(statut) if statut else "—"
+        if statut == 200:
+            verdict = "**SERVI — fuite**"
+            fuites.append(f"{chemin} : servi en 200, alors qu’il ne doit pas être publié")
+        elif statut in (401, 403, 404, 410):
+            verdict = "absent, conforme"
+        else:
+            # Réseau coupé ou statut imprévu : ce n’est pas une fuite prouvée,
+            # mais le périmètre reste non vérifié — donc le contrôle échoue.
+            detail = f" ({erreur})" if erreur else ""
+            verdict = f"non vérifiable{detail}"
+            indetermines.append(f"{chemin} : statut {statut_affiche}, périmètre non vérifiable{detail}")
+        print(f"| `{chemin}` | {description} | {statut_affiche} | {verdict} |")
     if types_inattendus:
         print("\nTypes inattendus (à corriger côté hébergement, sans bloquer ici) :")
         for anomalie in types_inattendus:
@@ -176,9 +223,29 @@ def main() -> int:
         print("\nFichiers manquants ou injoignables :", file=sys.stderr)
         for anomalie in manquants:
             print(f"- {anomalie}", file=sys.stderr)
+    if fuites:
+        print("\nPérimètre de publication violé :", file=sys.stderr)
+        for fuite in fuites:
+            print(f"- {fuite}", file=sys.stderr)
+        print(
+            "  Vérifier la source Pages : elle doit être « GitHub Actions » et publier l’artefact "
+            "`_site` produit par `.github/workflows/deploy-pages.yml`, jamais la racine du dépôt. "
+            "Détail dans la section « Publication sur GitHub Pages » du README.",
+            file=sys.stderr,
+        )
+    if indetermines:
+        print("\nPérimètre non vérifié (ni fuite prouvée, ni conformité) :", file=sys.stderr)
+        for indetermine in indetermines:
+            print(f"- {indetermine}", file=sys.stderr)
+        print("  Relancer quand l’hébergement répond, ou vérifier l’adresse de base.", file=sys.stderr)
+    if manquants or fuites or indetermines:
         return 1
     compressés = sum(1 for resultat in resultats if resultat.encodage)
     print(f"\n{len(resultats)} fichiers contrôlés : tous répondent 200.")
+    print(
+        f"{len(HORS_PERIMETRE)} chemins internes contrôlés : aucun n’est servi "
+        "(documents de travail, outils et sources du moteur restent hors du site)."
+    )
     if compressés:
         print(f"Compression de transfert annoncée par l’hébergeur pour {compressés} fichier(s).")
     else:

@@ -81,6 +81,7 @@ python3 outils/verifier-poids-pages.py --rapport docs/rd/poids-pages.md
 python3 outils/verifier-publication.py --base-url https://thejmimiia-code.github.io/MRSC/
 python3 outils/test_fichiers_servis.py            # tests du relevé d’en-têtes conservé
 python3 outils/verifier-fichiers-servis.py        # le relevé daté tient-il encore ? (sans réseau)
+python3 outils/test_verifier_publication.py       # le contrôle du périmètre mord-il ? (sans réseau)
 ```
 
 Le contrôle réseau demande un accès au site publié ; il relève les types MIME, l’encodage et le cache et ne juge ni le rendu ni la performance. Il tourne aussi depuis l’onglet Actions (`Vérifier les en-têtes servis par l’hébergement`), chaque jour et à chaque modification du contrôleur ou de ses cibles ; le tableau est repris dans une issue de suivi unique, réécrite à chaque mesure et laissée ouverte, sans constituer un audit.
@@ -103,7 +104,9 @@ Puis ouvrir `http://localhost:4173`. Le serveur écoute uniquement sur `127.0.0.
 
 ## Publication sur GitHub Pages
 
-Le workflow `.github/workflows/deploy-pages.yml` valide le HTML, les liens locaux et la syntaxe JavaScript, puis publie les pages HTML (dont `404.html`, `confidentialite.html` et `anglais-aventure.html`), `assets/`, `sitemap.xml`, le catalogue et ses fiches autonomes ainsi que la page du simulateur (`simulateur/index.html` et sa provenance). Les documents de travail dans `docs/`, les outils de `outils/`, les sources Python du moteur et les fonctions `api/` ne sont pas copiés sur le site. Le déploiement est automatique à chaque push sur `main` (un lancement manuel reste possible depuis l’onglet **Actions** avec « Publish M.R.S.C site »). GitHub Pages est actuellement configuré en mode public avec HTTPS ; toute mise à jour de cette branche attend son intégration à `main` et une publication réussie.
+Le workflow `.github/workflows/deploy-pages.yml` valide le HTML, les liens locaux et la syntaxe JavaScript, puis publie les pages HTML (dont `404.html`, `confidentialite.html` et `anglais-aventure.html`), `assets/`, `sitemap.xml`, le catalogue et ses fiches autonomes ainsi que la page du simulateur (`simulateur/index.html` et sa provenance). Les documents de travail dans `docs/`, les outils de `outils/`, les sources Python du moteur et les fonctions `api/` ne sont pas copiés sur le site. Le déploiement est automatique à chaque push sur `main` (un lancement manuel reste possible depuis l’onglet **Actions** avec « Publish M.R.S.C site »).
+
+**La source Pages doit rester « GitHub Actions ».** Le 25 octobre 2026, le site a répondu 404 toute la journée — site Pages absent et Actions arrêté par la facturation — puis a été rétabli par une publication « Deploy from a branch ». Ce mode publie **la racine du dépôt** : `README.md`, `AGENTS.md`, `LICENCE`, `outils/`, `docs/` et `api/` sont alors servis sur l’adresse publique, hors du périmètre décrit ci-dessus. Une source « Deploy from a branch » ne doit donc pas être utilisée, même temporairement. `outils/verifier-publication.py` interroge désormais sept de ces chemins et **échoue** si l’un répond 200 ; le workflow « Vérifier les en-têtes servis par l’hébergement » le relit chaque nuit et écrit le verdict dans son issue de suivi. Le contrôle hors ligne du dispositif est `python3 outils/test_verifier_publication.py` (deux serveurs locaux simulés : une racine de dépôt servie, un périmètre correct).
 
 GitHub Pages ne sait pas exécuter Python : la copie embarquée ne calcule pas à cette adresse. Pour utiliser l’outil interactif, ouvrez [la version publiée du simulateur sur Vercel](https://d-mocratie-et-politique-du-peuple-p.vercel.app/).
 
