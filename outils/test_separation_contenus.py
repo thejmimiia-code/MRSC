@@ -29,13 +29,25 @@ class Separation(unittest.TestCase):
         self.assertTrue(self.controle("assets/images/eva-references/face.png"))
 
     def test_ancienne_reference_documentaire_detectee(self):
-        self.assertTrue(self.controle("docs/rd/statuts-animation/eva-reference.jpg"))
+        self.assertTrue(self.controle("docs/rd/statuts-animation/" + "eva-reference.jpg"))
 
     def test_lien_personnalisation_detecte(self):
         self.assertTrue(self.controle("assets/js/site.js", "link.href = 'animations.html';"))
 
     def test_route_de_publication_detectee(self):
         self.assertTrue(self.controle(".github/workflows/deploy-pages.yml", "cp animations.html _site/"))
+
+    def test_inventaire_personnage_detecte(self):
+        self.assertTrue(self.controle("docs/rd/statuts-animation/inventaire.sha256", "a" * 64 + "  eva-lock-01-face.png"))
+
+    def test_decision_personnage_detectee(self):
+        self.assertTrue(self.controle("docs/rd/journal.md", "Copie eva-choisie.png et décisions de création."))
+
+    def test_ancien_manifeste_integral_detecte(self):
+        self.assertTrue(self.controle("docs/rd/statuts-animation/" + "ARCHIVE-planches-2026-10.sha256"))
+
+    def test_inventaire_film_associatif_conserve(self):
+        self.assertEqual(self.controle("docs/rd/statuts-animation/ARCHIVE-film-associatif.sha256", "a" * 64 + "  accroche-01-seul-avec-les-ecrans.png"), [])
 
     def test_film_associatif_conserve(self):
         self.assertEqual(self.controle("docs/rd/statuts-animation/amblin-01-annees-80.webp"), [])

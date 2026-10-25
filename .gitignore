@@ -35,3 +35,6 @@ docs/rd/statuts-animation/*.png
 /docs/rd/statuts-animation/eva-*
 /livrables/
 /private-eva*/
+
+# Inventaire intégral ancien sauvegardé hors dépôt ; seul le sous-ensemble associatif reste.
+/docs/rd/statuts-animation/ARCHIVE-planches-2026-10.sha256

@@ -8,6 +8,7 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Périmètre :** retrait du prototype visuel et de ses dépendances, de son lien dans Personnalisation, de sa route de publication et des descriptions de personnage dans la bible du film. Les planches du film associatif et la présentation générale de la recherche en IA sont conservées.
 - **Limite :** ce nettoyage ne purge ni l’historique Git, ni les anciennes PR, ni les versions étiquetées. Ne pas republier le dépôt sans traiter ces emplacements ; le passage en privé ne garantit pas le retrait des copies antérieures.
 - **Prévention :** règles d’exclusion et contrôle dédié dans la CI et avant publication ; elles empêchent le retour des chemins connus, pas la reconnaissance universelle de données sensibles dans tout fichier.
+- **Complément :** retrait des deux décisions historiques de création du personnage et de 164 entrées de son inventaire ; 343 empreintes de travaux associatifs conservées sans modification. Les originaux restent sauvegardés hors dépôt et dans le dossier Drive de passation. Quatre tests supplémentaires portent le garde-fou à onze tests.
 - **Contrôles exécutés :** sept tests du garde-fou, vérifications statique, publication locale, intégration, sécurité, archive des planches et poids des pages ; quatre tests de reproductibilité. Aucun essai navigateur ni retrait des copies historiques revendiqué.
 
 ## 2026-10-24 — Réunir des groupes sans donner le même poids à leurs moyennes
@@ -1275,20 +1276,6 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Limites :** aucune mesure réseau, aucun test sur appareil réel, Safari, Firefox ou lecteur d’écran; aucun Lighthouse/CrUX; types MIME, compression et cache de GitHub Pages et Vercel non vérifiés; aucune estimation carbone; aucune revue visuelle humaine des images. La passe n’est ni un audit RGESN ni une preuve d’impact évité.
 - **Suite donnée le même jour :** `outils/verifier-publication.py` et le workflow « Vérifier les en-têtes servis par l’hébergement » relèvent désormais code, type MIME, encodage, octets et cache sur la version publiée. Relevé réel du 17 octobre 2026 (issue #90) : 18/18 fichiers en 200, `image/avif` et `image/webp` correctement typés, gzip sur les 9 fichiers texte et aucun sur les images (attendu), `Cache-Control: max-age=600`. L’estimation hors ligne reste à +0,7–4,2 % sous les octets servis pour les fichiers texte (gzip 9 estimé contre gzip de Pages), et identique à l’octet pour les images déjà compressées. Le relevé reste hors de la porte hors ligne et ne vaut ni pour Vercel, qui héberge le simulateur du dépôt amont, ni comme mesure de performance.
 - **Prochaine action :** faire relire les illustrations par une personne, mesurer sur appareil et réseau réels, puis seulement réviser l’état de `poids-et-sobriete-numerique` et la date de revue du portefeuille.
-
-## 2026-10-16 — Sigle moderne, sans drapeaux
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** le sceau d’E-06 est trop moyenâgeux ; les drapeaux font sectaire.
-- **Décision :** garder le visage E-06 ; hall sans bannières ; pas de sceau héraldique. Marque = arcs colorés contemporains ou barre LED. Planches `eva-moderne-01` à `05`. Accueil 3D inchangé.
-- **Contrôles :** planches modernes.
-
-## 2026-10-16 — Éva choisie : plan E-06 (atrium)
-
-- **Initiative :** `direction-artistique-motion`.
-- **Signal :** « La sixième est bien » = `elle-06-atrium.png`.
-- **Décision :** visage et corps androïde blanc de E-06 verrouillés pour Éva (vidéos, pédagogie). Copie `eva-choisie.png`. Suites `eva-lock-01` à `06`. Accueil 3D inchangé. Pas enfantin. Tous les âges autour d’elle.
-- **Contrôles :** planches lock.
 
 ## 2026-10-16 — Personnages-matériaux pour l’identité pédagogique
 
