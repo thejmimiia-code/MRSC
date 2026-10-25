@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-25 — La publication vérifie aussi l'attribution imprimée
+
+- **Constat :** `outils/verifier-affichages.py` porte depuis ce jour le contrôle de l'attribution sur copie imprimée — source, adresse, licence, statut. Il ne tournait que dans `verification.yml`, donc sur les pull requests. Une poussée directe sur `main`, ou une fusion dont la porte a été contournée, pouvait publier une page qui ne porte plus cette attribution, sans qu'aucun contrôle ne s'y oppose.
+- **Pourquoi c'est une incohérence :** la règle du dépôt est que la publication contrôle ses règles, pas seulement les pull requests. Une exigence de licence vérifiée à l'entrée et pas à la sortie n'est vérifiée qu'à moitié.
+- **Correctif :** `deploy-pages.yml` exécute `verifier-affichages.py` avant de préparer `_site`, sur le même commit que celui qui sera publié. Le coût est d'environ une seconde.
+- **Contrôles :** les six workflows se chargent sans erreur (`yaml.safe_load`), l'étape est la 12e sur 23 et le contrôle passe localement.
+- **Limite :** ce contrôle lit le dépôt, pas ce que l'hébergeur sert ensuite ; le relevé réseau reste le rôle de `verifier-publication.py`.
+- **Suite :** constater au prochain déploiement que l'étape apparaît verte, et qu'un échec de format bloque bien la publication avant l'envoi de l'artefact.
+
 ## 2026-10-25 — Un dépôt sans issues ne rend plus rouge une vérification réussie
 
 - **Constat :** sur `main`, deux workflows échouaient alors que leurs contrôles passaient — « Vérifier les en-têtes servis par l’hébergement » (relevé réussi, échec à la publication de l’issue) et « Veille éditoriale des apprentissages » (contrôles réussis, échec à la création de l’issue). Cause unique : `has_issues` vaut `false` sur le dépôt, donc `gh issue create` échoue et `set -euo pipefail` fait tomber l’étape.

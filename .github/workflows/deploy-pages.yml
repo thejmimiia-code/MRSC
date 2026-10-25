@@ -78,6 +78,14 @@ jobs:
       - name: Validate static pages, links and scripts
         run: python3 outils/verifier-site-statique.py
 
+      # Les garde-fous de format portent aussi l'attribution exigée par la
+      # licence sur une copie imprimée (source, adresse, statut). Ils ne
+      # tournaient que sur les pull requests : une fusion rapide ou une poussée
+      # directe sur `main` pouvait publier une page qui ne la porte plus.
+      # La publication vérifie donc ses propres règles, comme le reste.
+      - name: Validate the display and printed-copy guards
+        run: python3 outils/verifier-affichages.py
+
       - name: Validate the published file set
         run: python3 outils/verifier-publication-locale.py
 
