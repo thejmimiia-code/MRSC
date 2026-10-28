@@ -121,6 +121,7 @@ python3 outils/verifier-poids-pages.py
 python3 outils/test_mutations_budgets_visuels.py
 python3 outils/verifier-budgets-visuels.py
 python3 outils/test_mutations_files_relecture.py
+python3 outils/test_verifier_maj_amont.py
 python3 outils/file-relecture.py --verifier
 python3 outils/construire-paquets-relecture.py --verifier
 python3 outils/test_registre_relecture.py

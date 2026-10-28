@@ -50,7 +50,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/verifier-graphismes.cjs` | Mesure navigateur de trois visuels | Trois mutations internes (`distorsion`, `densite`, `ancre`) rejouées en CI | `test-en-soi` |
 | `outils/verifier-integration.py` | Intégration du simulateur au site, sans navigateur | `test_mutations_integration.py` (3 fautes : ressource orpheline, chiffre annoncé, page absente) | `banc` |
 | `outils/verifier-inventaire-controles.py` | Tient ce document : couverture, existence, vocabulaire des statuts | `test_verifier_inventaire_controles.py` (casse l'inventaire dans une copie) | `banc` |
-| `outils/verifier-maj-amont.py` | Retard du moteur embarqué sur l'amont | Vert de CI seulement | `aucun-test` |
+| `outils/verifier-maj-amont.py` | Retard du moteur embarqué sur l'amont | `test_verifier_maj_amont.py` (4 cas ; la provenance est lue dans une copie, la sonde réseau remplacée) | `faute-en-memoire` |
 | `outils/verifier-planches-statuts.py` | Planches des statuts et leur archive | Vert de CI seulement | `aucun-test` |
 | `outils/verifier-poids-pages.py` | Poids estimé des pages et budget de sobriété | `test_mutations_poids_pages.py` (4 fautes : image lourde, ressource absente, `<picture>` sans repli, budget à 1 Kio) | `banc` |
 | `outils/verifier-publication-locale.py` | Le site publié ne manque d'aucun fichier | `test_mutations_publication_locale.py` (6 fautes : copie, lien, aperçu local, sitemap) | `banc` |
@@ -70,18 +70,18 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 45 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
 - **Treize** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
-- **Sept** le sont en cassant des données en mémoire. C'est utile, mais la lecture du fichier sur disque n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests.
+- **Huit** le sont en cassant des données en mémoire ou en simulant ce qui ne peut pas être joint. C'est utile, mais la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests, et `verifier-maj-amont.py` n'interroge jamais réellement l'amont dans son test.
 - **Six** ont un test qui n'injecte aucune faute.
 - **Trois** sont eux-mêmes des tests (scripts navigateur, simulation de cache) : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre.
-- **Huit** ne sont prouvés par rien d'autre que leur vert quotidien.
+- **Sept** ne sont prouvés par rien d'autre que leur vert quotidien.
 - **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
 
-Autrement dit : **26 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 11 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et huit ne sont prouvés par rien d'autre que leur vert quotidien.
+Autrement dit : **27 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 10 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et sept ne sont prouvés par rien d'autre que leur vert quotidien.
 
 ## Par où continuer, par ordre de rentabilité
 
 1. `auditer-criteres-22.mjs` — il a déjà publié « 0 élément masqué » sans avoir rien pu charger ; ce défaut-là mérite un test qui le reproduit. Il demande Chromium : son banc devra tourner dans le job `graphismes`, pas dans `qualite`.
-2. `verifier-maj-amont.py` — il garde la fraîcheur du moteur embarqué, et un moteur en retard se voit mal.
+2. `verifier-planches-statuts.py` — il garde la cohérence des planches de statuts et de leur archive, sans aucun test.
 
 ## Limites de ce document
 

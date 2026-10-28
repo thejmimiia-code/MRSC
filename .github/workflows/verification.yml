@@ -56,6 +56,12 @@ jobs:
       - name: Vérifier la page générée du simulateur
         run: python3 outils/construire-simulateur.py --verifier
 
+      # `verifier-maj-amont.py` interroge le dépôt amont en réseau : il ne tourne
+      # pas ici. Ce qui tourne, c'est sa décision — révision identique, révision
+      # en retard, amont injoignable, sortie JSON — avec la sonde remplacée.
+      - name: Vérifier la décision de la sentinelle du moteur embarqué
+        run: python3 outils/test_verifier_maj_amont.py
+
       # Ce contrôle garde une règle de dépôt — « ne rien perdre en fusionnant » —
       # et n'avait aucun test. Le banc fabrique de petits dépôts git neufs et
       # casse une propriété à la fois (marqueur, `.orig`, ordre du journal, titre

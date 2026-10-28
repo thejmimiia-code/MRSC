@@ -15,6 +15,23 @@ derniere_revue = 2026-10-28
 regle = "Une entrée n'entre ici qu'avec une preuve locale, un contrôle exécutable et une limite écrite ; sinon elle reste une note de journal."
 
 [[avancee]]
+id = "une-sentinelle-reseau-se-teste-sans-reseau"
+date = 2026-10-28
+titre = "Une sentinelle réseau se teste sans réseau, en substituant sa sonde et non sa décision"
+constat = "`outils/verifier-maj-amont.py` compare la révision embarquée dans `simulateur/PROVENANCE.json` à celle de la branche `main` du dépôt amont, et sort en erreur quand une mise à jour est disponible. Ce code 1 est son signal utile : `maj-simulateur.yml` en fait une alerte. Rien ne prouvait pourtant qu'il distinguait trois états très différents — à jour, en retard, amont injoignable — et une panne réseau qui se lirait « rien à signaler » serait le pire des défauts, parce qu'il ressemble à une bonne nouvelle."
+changement = "`outils/test_verifier_maj_amont.py` charge l'outil en mémoire, remplace `revision_amont` par une valeur fixe ou par une fonction qui échoue, et lit la provenance d'une copie du dépôt : quatre cas — amont identique (code 0, « à jour »), amont plus récent (code 1, « Mise à jour disponible » et la commande à lancer), amont injoignable (arrêt non nul, jamais le mot « à jour »), sortie `--json` (`a_jour: false`, révisions présentes). Quatre tests, 0,2 s, sans aucun accès réseau."
+preuves = [
+  "outils/verifier-maj-amont.py",
+  "outils/test_verifier_maj_amont.py",
+  "simulateur/PROVENANCE.json",
+  ".github/workflows/maj-simulateur.yml",
+]
+controle = "python3 outils/test_verifier_maj_amont.py && python3 outils/verifier-inventaire-controles.py"
+limite = "La sonde `git ls-remote` n'est jamais exercée : le test remplace la fonction qui l'appelle, donc il prouve la décision et pas la lecture du réseau — d'où le classement en `faute-en-memoire`, pas en `banc`. Un changement de format de sortie de `git ls-remote` lui échapperait. Le test ne dit rien non plus de la mise à jour elle-même, qui reste une opération relue et validée par une personne."
+suite = "Éprouver `verifier-planches-statuts.py`, puis attaquer les quatre contrôles navigateur depuis le job `graphismes`."
+initiatives = ["documentation-rd-eva", "veille-savoirs-evolutifs"]
+
+[[avancee]]
 id = "la-file-de-relecture-prouve-son-tri"
 date = 2026-10-28
 titre = "Une file de relecture doit prouver son tri, pas seulement sa fraîcheur"
@@ -182,7 +199,7 @@ preuves = [
 ]
 controle = "python3 outils/test_verifier_taux_dates.py && python3 outils/verifier-taux-dates.py && python3 outils/verifier-rd-continue.py"
 limite = "Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle."
-suite = "Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 26 contrôles sur 37 ont désormais une preuve d'échec."
+suite = "Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 27 contrôles sur 37 ont désormais une preuve d'échec."
 initiatives = ["cartographier-les-lacunes", "relire-les-44-prototypes"]
 
 [[avancee]]

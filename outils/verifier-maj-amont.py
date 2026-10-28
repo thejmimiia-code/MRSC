@@ -18,11 +18,16 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
 
-RACINE = Path(__file__).resolve().parent.parent
+#: Racine lue par l'outil. La surcharge sert à son test
+#: (`outils/test_verifier_maj_amont.py`), qui lit la provenance d'une copie du
+#: dépôt : ce contrôle ne peut pas tourner sur une copie dont `simulateur/`
+#: viendrait du dépôt réel.
+RACINE = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 PROVENANCE = RACINE / "simulateur" / "PROVENANCE.json"
 
 

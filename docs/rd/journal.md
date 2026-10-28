@@ -2,6 +2,20 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-28 — Une sentinelle réseau se teste sans réseau
+
+- **Initiative :** `documentation-rd-eva`.
+- **Huitième lot de la journée :** `outils/verifier-maj-amont.py`. Il compare la révision embarquée dans `simulateur/PROVENANCE.json` à celle de la branche `main` du dépôt amont et sort en erreur quand une mise à jour est disponible — le code 1 est son signal utile, que `maj-simulateur.yml` transforme en alerte. Rien ne prouvait qu'il distinguait trois états très différents : à jour, en retard, amont injoignable.
+- **Le défaut que ce contrôle pouvait cacher :** une panne réseau lue « rien à signaler ». C'est le pire des modes de défaillance parce qu'il ressemble à une bonne nouvelle — un moteur qui prend du retard sans que personne ne soit prévenu.
+- **Quatre cas, sans réseau :** amont identique (code 0, « à jour ») ; amont plus récent (code 1, « Mise à jour disponible » et la commande) ; amont injoignable (arrêt non nul, et **jamais** le mot « à jour ») ; `--json` (`a_jour: false`, révisions présentes). Quatre tests, **0,2 s**.
+- **Comment sans réseau :** `revision_amont` est remplacée dans le module chargé — la décision est éprouvée, la sonde ne l'est pas. La provenance, elle, est réellement lue dans une copie du dépôt réécrite par le test.
+- **Un détail de fidélité :** un `SystemExit("message")` sort en code 1 et l'interpréteur écrit le message sur la sortie d'erreur. Le banc reproduit ce comportement au lieu d'inspecter l'exception, pour que l'assertion porte sur ce qu'une personne verrait vraiment.
+- **Le classement, sans complaisance :** `faute-en-memoire`, pas `banc` — les données sont cassées dans une copie, mais la sonde est simulée. C'est la troisième catégorie de l'inventaire qui sert à ça : dire exactement ce qui est prouvé.
+- **Un constat d'état, non corrigé :** au 28 octobre 2026, l'amont est à `88079be` et la copie embarquée à `99491d8` — l'outil répond donc « Mise à jour disponible » et sort en code 1. C'est son fonctionnement normal, et la mise à jour reste une opération relue par une personne ; ce lot ne la déclenche pas.
+- **Contrôles exécutés :** `test_verifier_maj_amont.py` (4 tests), `verifier-inventaire-controles.py`, `test_verifier_inventaire_controles.py`, `verifier-rd-continue.py`, `construire-avancees.py --verifier` (29 avancées), `verifier-integration.py`, `test_protocole_editorial.py`, chargement YAML du workflow, `git diff --check`.
+- **Limites :** `git ls-remote` n'est jamais exercé ; un changement de son format de sortie échapperait au test. Et le test ne dit rien de la mise à jour elle-même, qui demande une relecture du diff.
+- **Prochaine action :** `verifier-planches-statuts.py`, puis les quatre contrôles navigateur, dont le banc devra tourner dans le job `graphismes`.
+
 ## 2026-10-28 — La file de relecture prouve son tri, pas seulement sa fraîcheur
 
 - **Initiative :** `relire-les-44-prototypes`.
