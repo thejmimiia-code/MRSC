@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-28 — La porte des pages statiques est éprouvée par mutation
+
+- **Initiative :** `optimisation-du-site`.
+- **Suite de l'inventaire du même jour :** sur 42 outils de vérification, une dizaine seulement avait un test capable d'échouer quand on casse la propriété contrôlée. `verifier-site-statique.py` — la porte qui voit le plus de choses, 99 pages, liens, ancres, canoniques, sitemap, `llms.txt`, syntaxe JS — n'en avait aucun.
+- **Ce qui a été ajouté :** `outils/test_mutations_site_statique.py` plante cinq fautes réelles et exige un échec **avec le message attendu** : un lien qui suit un fichier renommé (`apprendre-absente.html`), une canonique recopiée d'une autre adresse, un `alt` perdu sur le logo, une ancre qui ne correspond plus à aucun identifiant (`#licence-absente`), une page publique oubliée au sitemap (`eva.html`).
+- **Une copie complète, et pourquoi :** le banc des affichages travaille sur des liens symboliques ; ici c'est impossible. La porte refuse toute cible qui sort du dépôt, et un lien symbolique vers l'original en sort par construction — la première tentative a produit 4 718 faux échecs. `banc_mutations.copie_complete()` copie donc réellement l'arbre (28 Mio, 0,06 s). Le cas est documenté dans le module, parce que la prochaine personne qui écrira un banc se posera la même question.
+- **Mutualisation :** les aides (`copie_jetable`, `copie_complete`, `ouvrir`, `muter`, `lancer`) sortent dans `outils/banc_mutations.py`. `test_mutations_affichages.py` a été réécrit pour l'utiliser, sans changer ses mutations — les trois tests restent verts, ce qui est la preuve du refactor.
+- **Câblage :** le banc tourne après `verifier-site-statique.py` dans `verification.yml` et `deploy-pages.yml` (15 s, dont cinq exécutions complètes de la porte), et `AGENTS.md` mentionne les deux bancs et la commande.
+- **Contrôles exécutés :** `test_mutations_site_statique.py` (3 tests, 5 mutations vues, copie intacte verte, dépôt inchangé), `test_mutations_affichages.py` (3 tests), `verifier-site-statique.py`, `verifier-affichages.py`, `verifier-rd-continue.py`, `verifier-integration.py`, `verifier-publication-locale.py`, `construire-avancees.py --verifier`, `test_protocole_editorial.py`, chargement YAML des deux workflows, `git diff --check`.
+- **Limites :** cinq fautes ne couvrent pas les 99 pages ni les contrôles de `llms.txt`, des relations ARIA ou des dépendances d'apprentissage ; le banc prouve que ces cinq cas sont vus, pas que la porte est complète. Les 15 s s'ajoutent au temps de CI. Toujours aucun navigateur.
+- **Prochaine action :** inventaire écrit des 42 outils — pour chacun, « banc de mutation », « test sans mutation » ou « écarté, et pourquoi » — plutôt que de traiter les outils un par un au hasard.
+
 ## 2026-10-28 — Les garde-fous d'affichage sont vus en échec, pas seulement verts
 
 - **Initiative :** `optimisation-du-site`.
