@@ -2,6 +2,19 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-28 — Les garde-fous d'affichage sont vus en échec, pas seulement verts
+
+- **Initiative :** `optimisation-du-site`.
+- **Constat de départ :** depuis le 23 octobre 2026, le journal répète « mutation rejouée : détectée » à propos de `verifier-affichages.py`. C'était vrai et c'était fait **à la main** : aucun test du dépôt n'échouait si l'on retirait la règle qu'un garde-fou prétend protéger. Un inventaire des outils le confirme : sur vingt outils de vérification, huit avaient un test, cinq d'entre eux un test qui mute réellement quelque chose.
+- **Ce qui a été ajouté :** `outils/test_mutations_affichages.py` rejoue cinq mutations datées du journal sur les seize garde-fous — panneau de personnalisation ancré à droite, mention d'impression sur sa propre ligne, note de version non bornée dans le bas de page, adresse d'impression et mention d'impression retirées de l'accueil. Chacune doit produire un échec **et** le message attendu, pas seulement un code de sortie.
+- **Comment, sans risque :** le banc construit une copie jetable du dépôt en **liens symboliques** ; seuls les fichiers mutés sont de vraies copies, et les dossiers parents sont matérialisés au besoin. `verifier-affichages.py` accepte désormais `MRSC_RACINE`, prévue pour cet usage. Un test vérifie que `assets/css/site.css` du dépôt est identique octet pour octet avant et après une mutation détectée : une porte qui laisse l'arbre modifié après un échec serait pire que pas de porte.
+- **Le contrôle qui compte :** la copie **intacte** doit être verte. Sans ce cas, un banc de mutation prouverait seulement que le contrôle échoue toujours.
+- **Défauts de mon propre banc, trouvés en l'écrivant :** `ouvrir()` utilisait `parts.index(morceau)`, qui renvoie la première occurrence et sautait le mauvais enfant dès qu'un nom se répétait ; et un fichier absent de la copie n'était jamais créé. Les deux cas donnaient un `FileNotFoundError` au lieu d'un test. Corrigés avant livraison, avec une fonction idempotente.
+- **Câblage :** le banc rejoint `verifier-affichages.py` dans `verification.yml` et `deploy-pages.yml` (environ 0,6 s), et `AGENTS.md` reçoit la règle et la commande.
+- **Contrôles exécutés :** `test_mutations_affichages.py` (3 tests, 5 mutations détectées), `verifier-affichages.py`, `verifier-rd-continue.py`, `construire-avancees.py --verifier`, `verifier-site-statique.py`, `verifier-integration.py`, `verifier-publication-locale.py`, `verifier-securite.py`, `test_reproductibilite_artefacts.py`, `test_protocole_editorial.py`, chargement YAML des deux workflows, `git diff --check`.
+- **Limites :** cinq mutations ne couvrent pas seize garde-fous — les autres restent prouvés par la lecture et par la mesure au navigateur, pas par un échec rejoué. Le banc prouve qu'une règle retirée est vue, pas qu'elle suffit à bien afficher. Toujours aucun navigateur ici.
+- **Prochaine action :** traiter ou écarter par écrit les outils de vérification qui n'ont encore aucun test de mutation, en commençant par `verifier-securite.py` et `verifier-site-statique.py`.
+
 ## 2026-10-28 — Une règle chiffrée porte sa date, et le contrôle prouve qu'il mord
 
 - **Initiative :** `cartographier-les-lacunes` et `relire-les-44-prototypes`.

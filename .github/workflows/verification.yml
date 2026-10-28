@@ -179,7 +179,9 @@ jobs:
       # plafonds d'image par densité, mesure de lecture) : la mesure complète
       # demande un navigateur, ces règles-ci se vérifient partout.
       - name: Vérifier les garde-fous des formats d’affichage
-        run: python3 outils/verifier-affichages.py
+        run: |
+          python3 outils/verifier-affichages.py
+          python3 outils/test_mutations_affichages.py
 
   graphismes:
     runs-on: ubuntu-24.04

@@ -427,7 +427,7 @@ Initiatives liées : `optimisation-du-site`.
 
 **Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
 
-**Suite.** Étendre la preuve aux autres contrôles préventifs du dépôt : lister ceux qui rendent zéro défaut sur le corpus courant et vérifier que chacun a un test qui échoue quand on plante la faute qu'il prétend voir.
+**Suite.** Étendre la preuve aux contrôles préventifs qui n'en ont pas encore : un inventaire des outils de vérification sans test de mutation est établi, et `verifier-affichages.py` est le premier traité (`outils/test_mutations_affichages.py`, cinq mutations). Restent notamment `verifier-securite.py`, `verifier-site-statique.py`, `verifier-fusions.py` et `auditer-criteres-22.mjs`, à traiter ou à écarter par écrit.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 

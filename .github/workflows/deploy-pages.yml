@@ -92,7 +92,9 @@ jobs:
       # directe sur `main` pouvait publier une page qui ne la porte plus.
       # La publication vérifie donc ses propres règles, comme le reste.
       - name: Validate the display and printed-copy guards
-        run: python3 outils/verifier-affichages.py
+        run: |
+          python3 outils/verifier-affichages.py
+          python3 outils/test_mutations_affichages.py
 
       - name: Validate the published file set
         run: python3 outils/verifier-publication-locale.py

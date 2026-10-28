@@ -17,11 +17,16 @@ Usage :
 
 from __future__ import annotations
 
+import os
 import re
 import sys
 from pathlib import Path
 
-RACINE = Path(__file__).resolve().parent.parent
+#: Racine lue par le contrôle. La surcharge sert un usage précis : rejouer les
+#: mutations sur une copie du dépôt (`outils/test_mutations_affichages.py`) sans
+#: toucher aux fichiers réels. Une porte qui modifie l'arbre qu'elle contrôle
+#: finit par le laisser modifié après un échec.
+RACINE = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 FEUILLES = (
     RACINE / "assets" / "css" / "site.css",
     RACINE / "assets" / "css" / "anglais-aventure.css",
