@@ -125,8 +125,12 @@ jobs:
       - name: Validate estimated page weight
         run: python3 outils/verifier-poids-pages.py
 
+      # Ce qui publie rend des comptes : les six mutations de sécurité sont
+      # rejouées ici aussi, pas seulement sur les pull requests.
       - name: Validate security boundaries
-        run: python3 outils/verifier-securite.py
+        run: |
+          python3 outils/verifier-securite.py
+          python3 outils/test_mutations_securite.py
 
       - name: Validate site and simulator integration
         run: python3 outils/verifier-integration.py

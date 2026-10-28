@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 20 |
+| Avancées consignées | 21 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 26 |
+| Contrôles exécutables cités | 28 |
 | Initiatives du portefeuille concernées | 12 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -427,7 +427,7 @@ Initiatives liées : `optimisation-du-site`.
 
 **Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
 
-**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). La suite est de combler les écarts par ordre de rentabilité, en commençant par `verifier-securite.py`.
+**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 18 contrôles sur 37 ont désormais une preuve d'échec.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 
@@ -452,6 +452,30 @@ Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 **Limite — ce que cela ne prouve pas.** Le garde vérifie la forme de l'inventaire, jamais la justesse d'un statut : une ligne qui déclare `banc` en citant un test existant mais sans rapport passerait. La couverture repose sur une convention de nommage (`test_*`, `__*` exclus) : un outil rangé ailleurs, ou un fichier d'aide nommé comme un contrôle, fausse le compte sans être vu. Enfin l'inventaire lui-même n'a été rempli qu'en lisant les tests, sans exécuter chaque mutation possible — c'est un jugement daté, pas une mesure.
 
 **Suite.** Prendre les contrôles par ordre de rentabilité écrite dans l'inventaire : `verifier-securite.py` n'a aucun test, puis `verifier-fusions.py`, puis les deux portes de publication, puis `auditer-criteres-22.mjs` et son « 0 élément masqué » publié sans avoir rien pu charger. Chaque nouveau banc met à jour la ligne correspondante dans le même commit.
+
+Initiatives liées : `optimisation-du-site`, `cartographier-les-lacunes`.
+
+### `onze-verifications-internes-jamais-vues-en-echec` — Un outil qui contient onze vérifications n'est pas un outil vérifié
+
+*Consignée le 2026-10-28.*
+
+**Constat.** `outils/verifier-securite.py` exécutait onze fonctions de contrôle — en-têtes Vercel, épinglage des actions, limites WSGI, provenance navigateur, liste statique — et l'inventaire du 28 octobre 2026 le classait `aucun-test`. Le classement était exact et contre-intuitif : l'outil contient des assertions, mais rien dans le dépôt ne prouvait qu'une seule d'entre elles savait échouer. Un `verifier(...)` qui ne peut pas mordre est un commentaire qui s'imprime « OK ».
+
+**Ce que cela change.** `outils/test_mutations_securite.py` plante six fautes réelles dans une copie complète du dépôt et exige l'échec avec le message attendu : en-tête `X-Frame-Options` retiré de `vercel.json`, `maxDuration` abaissé de 60 à 30 (la CSP restant intacte), action GitHub dé-épinglée sur `@v4`, runner repassé à `ubuntu-latest`, liste statique élargie à tout fichier de la racine, plafond de lecture d'une source distante supprimé du moteur. Sept tests, 3,3 s. `verifier-securite.py` lit désormais sa racine par `MRSC_RACINE`, y compris pour importer `simulateur/` : c'est la copie mutée qui est éprouvée, jamais l'original.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-securite.py`
+- `outils/test_mutations_securite.py`
+- `outils/banc_mutations.py`
+- `docs/rd/inventaire-controles.md`
+- `vercel.json`
+
+**Contrôle qui la maintient :** `python3 outils/test_mutations_securite.py && python3 outils/verifier-securite.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Six mutations épuisent ce que le banc sait voir, pas ce que la porte devrait couvrir : les contrôles de provenance navigateur, de cache partagé, de redirections et de limite WSGI ne sont éprouvés par aucune faute plantée, et deux d'entre eux reposent sur des objets simulés à l'intérieur de l'outil — un faux opener peut mentir sur le comportement réel d'urllib. Le banc ne dit rien non plus des frontières qui n'ont pas encore de contrôle du tout.
+
+**Suite.** Éprouver de la même façon les contrôles de provenance navigateur et de redirections (faux opener remplacé par un serveur local qui répond réellement), puis passer à `verifier-fusions.py`, qui garde la règle « ne rien perdre en fusionnant » sur un journal de 137 entrées.
 
 Initiatives liées : `optimisation-du-site`, `cartographier-les-lacunes`.
 

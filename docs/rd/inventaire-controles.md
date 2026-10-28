@@ -57,7 +57,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/verifier-publication.py` | Ce que l'hébergement sert réellement | `test_verifier_publication.py` (5 tests) | `test` |
 | `outils/verifier-rd-continue.py` | Consignes, skills et portefeuille R&D | Vert de CI seulement | `aucun-test` |
 | `outils/verifier-resilience-statutaire.py` | Structure documentaire du registre statutaire | `test_verifier_resilience_statutaire.py` (19 tests) | `faute-en-memoire` |
-| `outils/verifier-securite.py` | Frontières de sécurité du simulateur | Vert de CI seulement — **le plus surprenant de la liste** | `aucun-test` |
+| `outils/verifier-securite.py` | Frontières de sécurité du simulateur | `test_mutations_securite.py` (6 mutations : en-tête, limite, action, runner, liste statique, plafond de source) | `banc` |
 | `outils/verifier-separation-contenus.py` | Empêche le retour des contenus personnels | `test_separation_contenus.py` (11 tests) | `test` |
 | `outils/verifier-site-statique.py` | 99 pages, liens, ancres, canoniques, sitemap | `test_mutations_site_statique.py` (5 mutations) | `banc` |
 | `outils/verifier-source-distante.py` | Utilisabilité de la version en ligne du simulateur | Aucune : demande le réseau | `aucun-test` |
@@ -69,24 +69,23 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 
 45 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
-- **Quatre** contrôles sont éprouvés en cassant réellement un fichier : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
+- **Cinq** contrôles sont éprouvés en cassant réellement un fichier : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
 - **Sept** le sont en cassant des données en mémoire. C'est utile, mais la lecture du fichier sur disque n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests.
 - **Six** ont un test qui n'injecte aucune faute.
 - **Trois** sont eux-mêmes des tests (scripts navigateur, simulation de cache) : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre.
-- **Dix-sept** ne sont prouvés par rien d'autre que leur vert quotidien.
+- **Seize** ne sont prouvés par rien d'autre que leur vert quotidien.
 - **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
 
-Autrement dit : **17 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 20 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et dix-sept ne sont prouvés par rien d'autre que leur vert quotidien.
+Autrement dit : **18 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 19 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et seize ne sont prouvés par rien d'autre que leur vert quotidien.
 
 ## Par où continuer, par ordre de rentabilité
 
-1. `verifier-securite.py` — il garde les frontières HTTP, WSGI, la provenance navigateur et la liste statique du simulateur, et il n'a aucun test. C'est le décalage le plus fort entre l'enjeu et la preuve.
-2. `verifier-fusions.py` — il garde la règle « ne rien perdre en fusionnant », et il tourne sur un journal de 137 entrées où une inversion d'ordre s'est déjà produite.
-3. `verifier-publication-locale.py` et `verifier-integration.py` — deux portes à forte conséquence, vérifiées seulement par elles-mêmes.
-4. `auditer-criteres-22.mjs` — il a déjà publié « 0 élément masqué » sans avoir rien pu charger ; ce défaut-là mérite un test qui le reproduit.
+1. `verifier-fusions.py` — il garde la règle « ne rien perdre en fusionnant », et il tourne sur un journal de 137 entrées où une inversion d'ordre s'est déjà produite.
+2. `verifier-publication-locale.py` et `verifier-integration.py` — deux portes à forte conséquence, vérifiées seulement par elles-mêmes.
+3. `auditer-criteres-22.mjs` — il a déjà publié « 0 élément masqué » sans avoir rien pu charger ; ce défaut-là mérite un test qui le reproduit.
 
 ## Limites de ce document
 
 - Les statuts viennent de la lecture des tests le 28 octobre 2026, pas d'une exécution de chaque mutation possible. `test` et `faute-en-memoire` sont des jugements sur ce que fait le test, pas des mesures.
-- `verifier-securite.py` pourrait déjà contenir des assertions qui échouent si on retire une protection ; il n'a simplement pas de fichier de test dédié. Le classer `aucun-test` dit cela, pas qu'il est décoratif.
+- Le classement `aucun-test` de `verifier-securite.py` a été levé le 28 octobre 2026 par `outils/test_mutations_securite.py` ; six fautes plantées y suffisent à prouver que la porte refuse, pas qu'elle voit toutes les régressions de sécurité possibles.
 - L'inventaire ne juge pas l'utilité des contrôles, seulement l'existence d'une preuve qu'ils peuvent échouer.

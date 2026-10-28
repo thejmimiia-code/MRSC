@@ -25,7 +25,12 @@ import urllib.request
 from http.server import ThreadingHTTPServer
 from pathlib import Path
 
-RACINE = Path(__file__).resolve().parent.parent
+#: Racine lue par les contrôles. La surcharge sert au banc de mutation
+#: (`outils/test_mutations_securite.py`), qui casse `vercel.json`, un workflow,
+#: la liste statique ou une source du moteur dans une copie du dépôt. L'import
+#: des modules du simulateur suit la même racine : c'est bien la copie mutée qui
+#: doit être éprouvée, pas l'original.
+RACINE = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 sys.path.insert(0, str(RACINE))
 
 from simulateur import dashboard, donnees_live, marches  # noqa: E402
