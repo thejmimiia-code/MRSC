@@ -12,12 +12,17 @@ import argparse
 import datetime as dt
 import html as html_module
 import importlib.util
+import os
 import re
 import sys
 import tomllib
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+#: Racine lue par le contrôle. La surcharge sert au banc de mutation
+#: (`outils/test_mutations_rd_continue.py`), qui casse une initiative du
+#: portefeuille, une section de skill ou un lien de la page de transparence
+#: dans une copie du dépôt.
+ROOT = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 
 # Statuts éditoriaux : définitions partagées, jamais recopiées en chaîne locale.
 sys.path.insert(0, str(ROOT / "outils"))
