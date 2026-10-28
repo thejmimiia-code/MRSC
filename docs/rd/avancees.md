@@ -10,10 +10,10 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 25 |
+| Avancées consignées | 26 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 35 |
-| Initiatives du portefeuille concernées | 14 |
+| Contrôles exécutables cités | 37 |
+| Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
 
@@ -427,7 +427,7 @@ Initiatives liées : `optimisation-du-site`.
 
 **Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
 
-**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 22 contrôles sur 37 ont désormais une preuve d'échec.
+**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 23 contrôles sur 37 ont désormais une preuve d'échec.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 
@@ -569,6 +569,29 @@ Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 **Suite.** Éprouver `auditer-criteres-22.mjs`, qui a déjà publié « 0 élément masqué » sans avoir rien pu charger, puis `verifier-rd-continue.py`.
 
 Initiatives liées : `optimisation-du-site`, `co-conception-et-essais`.
+
+### `un-budget-qui-se-prouve-en-le-baissant` — Un budget affiché se prouve aussi en l'abaissant sur une copie intacte
+
+*Consignée le 2026-10-28.*
+
+**Constat.** Le site annonce des budgets de poids — 300 Kio mobile, 450 Kio grand écran, gzip estimé — et `outils/verifier-poids-pages.py` les fait respecter. Rien ne prouvait que ce contrôle savait refuser : une promesse publique tenue par un calcul jamais vu en échec est une promesse qu'on croit, et il suffit d'une illustration de 400 Kio pour qu'une page double sans que personne ne s'en aperçoive.
+
+**Ce que cela change.** `outils/test_mutations_poids_pages.py` plante quatre fautes dans une copie complète : une image incompressible de 400 Kio référencée par l'accueil (le budget mobile de 300 Kio cède), une ressource locale absente, un `<picture>` sans repli exploitable, et — sans toucher au dépôt — la même copie intacte lancée avec `--budget-mobile 1`, où rien ne doit passer. Cinq tests, 22 s, lancés dans `verification.yml` et dans `deploy-pages.yml`.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-poids-pages.py`
+- `outils/test_mutations_poids_pages.py`
+- `docs/rd/poids-pages.md`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_mutations_poids_pages.py && python3 outils/verifier-poids-pages.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le banc éprouve le calcul et les seuils, pas la promesse : les budgets de 300 et 450 Kio restent des seuils de travail choisis, qu'aucune mesure réseau, aucun cache et aucun appareil réel ne valident. La mutation « image lourde » écrit 400 Kio de hasard, ce qui simule une illustration mal compressée et non un usage réel. Et le contrôle ne pèse que ce qu'il sait lire : une police distante ou un média chargé après action lui échappent, comme son en-tête le dit déjà.
+
+**Suite.** Éprouver `auditer-criteres-22.mjs` — dont le banc devra tourner dans le job `graphismes`, puisqu'il demande Chromium — puis `verifier-budgets-visuels.py`.
+
+Initiatives liées : `poids-et-sobriete-numerique`, `optimisation-du-site`.
 
 ### `un-petit-depot-cobaye-pour-les-controles-git` — Un contrôle qui lit l'historique git se teste sur un dépôt neuf, jamais sur le vrai
 

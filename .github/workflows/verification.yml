@@ -181,8 +181,14 @@ jobs:
             exit "$statut"
           fi
 
+      # Le site annonce des budgets de poids : 300 Kio mobile, 450 Kio grand
+      # écran. Rien ne prouvait que le contrôle qui les applique sache refuser.
+      # Le banc ajoute une image de 400 Kio, une ressource absente, un <picture>
+      # sans repli, et abaisse le budget à 1 Kio sur une copie intacte (22 s).
       - name: Vérifier le poids estimé des pages
-        run: python3 outils/verifier-poids-pages.py
+        run: |
+          python3 outils/verifier-poids-pages.py
+          python3 outils/test_mutations_poids_pages.py
 
       - name: Vérifier les planches des statuts et leur archive
         run: python3 outils/verifier-planches-statuts.py
