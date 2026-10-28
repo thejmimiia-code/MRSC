@@ -28,12 +28,17 @@ Code de sortie : 0 si rien n'est perdu et qu'aucune erreur ne reste, 1 sinon.
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import subprocess
 import sys
 from pathlib import Path
 
-RACINE = Path(__file__).resolve().parent.parent
+#: Racine lue par le contrôle. La surcharge sert au banc de mutation
+#: (`outils/test_mutations_fusions.py`), qui fabrique de petits dépôts git où
+#: l'on casse le journal, l'index ou une branche — sans jamais toucher au dépôt
+#: réel, dont l'historique n'a pas à servir de cobaye.
+RACINE = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 JOURNAL = RACINE / "docs" / "rd" / "journal.md"
 MARQUEURS = re.compile(r"^(<<<<<<< |>>>>>>> )", re.MULTILINE)
 SAUVEGARDES = (".orig", ".rej", ".bak", ".BACKUP", ".LOCAL", ".REMOTE")
