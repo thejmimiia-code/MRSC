@@ -42,7 +42,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/test-experience.cjs` | 8 essais navigateur du panneau et du menu | Il est lui-même le test | `test-en-soi` |
 | `outils/verifier-accessibilite.cjs` | Audit axe des pages, lancé dans le job navigateur | Vert du job `graphismes` | `aucun-test` |
 | `outils/verifier-affichages.py` | 16 garde-fous de format et d'impression | `test_mutations_affichages.py` (5 mutations) | `banc` |
-| `outils/verifier-budgets-visuels.py` | Budgets d'affichage des titres | Vert de CI seulement | `aucun-test` |
+| `outils/verifier-budgets-visuels.py` | Budgets d'affichage des titres | `test_mutations_budgets_visuels.py` (3 fautes : titre long, page sans titre, H1 gonflé) | `banc` |
 | `outils/verifier-decision-prospective.py` | Faits internes du brief prospectif | `test_verifier_decision_prospective.py` (20 tests) | `test` |
 | `outils/verifier-fiches-statistiques.cjs` | Géométrie des deux fiches de statistiques | Vert du job `graphismes` | `aucun-test` |
 | `outils/verifier-fichiers-servis.py` | Relevé d'en-têtes confronté aux fichiers | `test_fichiers_servis.py` (28 tests) | `test` |
@@ -69,19 +69,19 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 
 45 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
-- **Dix** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
+- **Onze** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
 - **Sept** le sont en cassant des données en mémoire. C'est utile, mais la lecture du fichier sur disque n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests.
 - **Six** ont un test qui n'injecte aucune faute.
 - **Trois** sont eux-mêmes des tests (scripts navigateur, simulation de cache) : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre.
-- **Onze** ne sont prouvés par rien d'autre que leur vert quotidien.
+- **Dix** ne sont prouvés par rien d'autre que leur vert quotidien.
 - **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
 
-Autrement dit : **23 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 14 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et onze ne sont prouvés par rien d'autre que leur vert quotidien.
+Autrement dit : **24 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 13 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et dix ne sont prouvés par rien d'autre que leur vert quotidien.
 
 ## Par où continuer, par ordre de rentabilité
 
 1. `auditer-criteres-22.mjs` — il a déjà publié « 0 élément masqué » sans avoir rien pu charger ; ce défaut-là mérite un test qui le reproduit. Il demande Chromium : son banc devra tourner dans le job `graphismes`, pas dans `qualite`.
-2. `verifier-budgets-visuels.py` — il garde la longueur des titres et le rendu étroit du H1, deux choses qu'aucun test ne protège.
+2. `file-relecture.py` et `construire-paquets-relecture.py` — la file de relecture des 59 prototypes, vérifiée par `--verifier` seulement.
 
 ## Limites de ce document
 

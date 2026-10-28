@@ -32,11 +32,15 @@ demande une décision explicite, pas un ajustement du chiffre attendu.
 from __future__ import annotations
 
 import math
+import os
 import re
 import sys
 from pathlib import Path
 
-RACINE = Path(__file__).resolve().parent.parent
+#: Racine lue par le contrôle. La surcharge sert au banc de mutation
+#: (`outils/test_mutations_budgets_visuels.py`), qui allonge un titre, retire un
+#: `<title>` ou change une valeur de `site.css` dans une copie du dépôt.
+RACINE = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 CSS = RACINE / "assets" / "css" / "site.css"
 
 # Longueur au-delà de laquelle un titre de page est tronqué dans la plupart des

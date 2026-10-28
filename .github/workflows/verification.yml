@@ -223,8 +223,12 @@ jobs:
       - name: Vérifier la reproductibilité des sorties générées
         run: python3 outils/test_reproductibilite_artefacts.py
 
+      # Ces budgets existent parce qu'aucun test ne voyait un titre tronqué ni un
+      # H1 qui s'allonge : leur propre pouvoir de mordre est éprouvé juste après.
       - name: Vérifier les budgets d’affichage des titres et du H1
-        run: python3 outils/verifier-budgets-visuels.py
+        run: |
+          python3 outils/verifier-budgets-visuels.py
+          python3 outils/test_mutations_budgets_visuels.py
 
       # Les appuis de la mesure d'affichage (planchers de texte et de cible,
       # plafonds d'image par densité, mesure de lecture) : la mesure complète
