@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-28 — Le budget de poids se prouve aussi en l'abaissant
+
+- **Initiative :** `poids-et-sobriete-numerique`.
+- **Cinquième contrôle éprouvé de la journée :** `outils/verifier-poids-pages.py`. Le site annonce 300 Kio mobile et 450 Kio grand écran ; ce contrôle est le seul à faire tenir la promesse, et rien ne prouvait qu'il savait refuser.
+- **Quatre fautes :** une image incompressible de 400 Kio référencée par l'accueil — le budget mobile cède, mesuré à 555,6 Kio ; une ressource locale absente ; un `<picture>` sans repli exploitable ; et, **sans toucher au dépôt**, la copie intacte relancée avec `--budget-mobile 1`, où aucune page ne doit passer. Cinq tests, **22 s**.
+- **Le cas qui a demandé deux essais :** ma première `<picture>` contenait un `<img src>` valide, donc elle avait un repli et le contrôle avait raison de se taire. Il a fallu un `<img>` sans source exploitable pour que la faute existe vraiment. Une mutation qui ne casse rien est un test qui ne prouve rien — c'est déjà écrit dans `banc_mutations.muter()`, et l'écrire ne dispense pas de le vérifier à la main.
+- **Câblage :** `MRSC_RACINE` ajouté à `verifier-poids-pages.py` (la liste des pages est calculée à l'import, donc avant), banc lancé dans `verification.yml` et `deploy-pages.yml`, `AGENTS.md` mentionne le neuvième banc et son coût.
+- **L'inventaire suit :** `verifier-poids-pages.py` passe de `aucun-test` à `banc` → **10 bancs**, **23 contrôles sur 37** avec une preuve d'échec.
+- **Contrôles exécutés :** `test_mutations_poids_pages.py` (5 tests, 22,4 s), `verifier-poids-pages.py` (99 pages sous les budgets), `verifier-inventaire-controles.py`, `test_verifier_inventaire_controles.py`, `verifier-rd-continue.py`, `construire-avancees.py --verifier` (26 avancées), `test_protocole_editorial.py`, chargement YAML des deux workflows, `git diff --check`.
+- **Limites :** le banc éprouve le calcul et les seuils, pas la promesse. Les budgets restent des seuils de travail qu'aucune mesure réseau ni appareil réel ne valide ; l'image de 400 Kio simule une illustration mal compressée, pas un usage. Et le contrôle ne pèse que ce qu'il sait lire — une police distante ou un média chargé après action lui échappent, comme son en-tête le dit déjà.
+- **Prochaine action :** `auditer-criteres-22.mjs`, dont le banc devra tourner dans le job `graphismes` puisqu'il demande Chromium, puis `verifier-budgets-visuels.py`.
+
 ## 2026-10-28 — La mémoire du projet a son banc
 
 - **Initiative :** `coordination-de-tous-les-agents`.

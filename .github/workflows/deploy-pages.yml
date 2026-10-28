@@ -129,7 +129,9 @@ jobs:
         run: python3 outils/optimiser-images.py --verifier
 
       - name: Validate estimated page weight
-        run: python3 outils/verifier-poids-pages.py
+        run: |
+          python3 outils/verifier-poids-pages.py
+          python3 outils/test_mutations_poids_pages.py
 
       # Ce qui publie rend des comptes : les six mutations de sécurité sont
       # rejouées ici aussi, pas seulement sur les pull requests.

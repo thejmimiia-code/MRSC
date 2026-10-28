@@ -21,12 +21,16 @@ from __future__ import annotations
 
 import argparse
 import gzip
+import os
 import sys
 from dataclasses import dataclass, field
 from html.parser import HTMLParser
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+#: Racine lue par le contrôle. La surcharge sert au banc de mutation
+#: (`outils/test_mutations_poids_pages.py`), qui ajoute une image lourde ou
+#: casse un `<picture>` dans une copie du dépôt.
+ROOT = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 PAGES = sorted(ROOT.glob("*.html"))
 PAGES.extend(sorted((ROOT / "apprendre" / "fiches").glob("*.html")))
 PAGES.append(ROOT / "simulateur" / "index.html")
