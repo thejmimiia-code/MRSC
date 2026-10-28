@@ -212,6 +212,21 @@ jobs:
           python3 outils/verifier-planches-statuts.py
           python3 outils/test_mutations_planches_statuts.py
 
+      - name: Installer Node.js pour le banc de l'auditeur
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+
+      # Cet auditeur mesure trois critères WCAG dans un vrai Chromium, et son
+      # banc tourne ici plutôt que dans `graphismes` : il ne mesure rien. Deux
+      # faux paquets (`outils/faux-navigateur/`) remplacent `puppeteer-core` et
+      # `@sparticuz/chromium`, et le vrai script est lancé tel quel. Ce qui est
+      # éprouvé, c'est le contrat de sortie — un chargement en échec ne se lit
+      # pas « 0 défaut », et une cible à corriger garde la largeur de fenêtre à
+      # côté de la sienne. Coût : 4 s, aucun binaire à télécharger.
+      - name: Éprouver l'auditeur des critères WCAG 2.2 sans navigateur
+        run: node outils/test_auditer_criteres_22.mjs
+
       # Cette porte garde les frontières HTTP et WSGI, la provenance navigateur,
       # la liste statique et l'épinglage des actions : elle n'avait aucun test
       # jusqu'au 28 octobre 2026. Le banc plante six fautes réelles dans une

@@ -2,6 +2,22 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-28 — Un faux navigateur suffit à prouver un contrat, et il a trouvé un défaut de rapport
+
+- **Initiative :** `optimisation-du-site` (avec `documentation-rd-eva`).
+- **Dixième lot de la journée :** `outils/auditer-criteres-22.mjs`, qui mesure la taille des cibles (2.5.8), le focus masqué (2.4.11) et l'espacement du texte (1.4.12) dans un vrai Chromium. Aucun test. Sa géométrie ne se teste pas dans cette sandbox : le Chromium de `@sparticuz/chromium` ne démarre pas faute de `libnspr4`, et il n'y a pas de racine pour l'installer.
+- **Ce qui se teste quand même :** le contrat de sortie. C'est précisément là que l'auditeur a menti une fois — sans serveur local, il rendait « 0 cible, 0 élément testé », c'est-à-dire une page parfaite.
+- **Deux faux paquets, le vrai script :** `outils/faux-navigateur/puppeteer-core` et `…/@sparticuz/chromium` sont copiés dans un `node_modules` temporaire, `MRSC_BROWSER_NODE_MODULES` pointe dessus, et le script est lancé tel quel — non modifié pour l'occasion. Quatre modes pilotés par `FAUX_NAVIGATEUR_MODE` : nominal, échec total, échec partiel, défauts.
+- **Le défaut trouvé en chemin :** la ligne des cibles à corriger faisait `push({ page, largeur, ...cible })`. La cible porte elle aussi une clé `largeur` : la largeur de fenêtre était écrasée par celle de la cible, dans le compte rendu (`@16` au lieu de `@390`) comme dans le JSON. Le défaut ne se manifestait **que lorsqu'il y avait quelque chose à corriger** — le relevé du 24 octobre 2026, qui en comptait zéro, était juste par accident. Corrigé : `largeurCible` et `hauteurCible` à côté de `largeur`.
+- **Quatre cas, 4 s :** nominal (bilan chiffré, rapport JSON, aucun échec) ; échec total (code 1, « Toutes les pages ont échoué », et **aucune ligne de bilan**) ; échec partiel (code 0, « aucune conclusion ne peut en sortir », page nommée, échec isolé dans le JSON) ; défauts (cible nommée avec sa page et la largeur de fenêtre, débordement, rognage, focus masqué, passe coupée déclarée).
+- **Le banc mord, vérifié à la main :** en réintroduisant l'écrasement de `largeur`, le cas « défauts » échoue ; en retirant le `process.exitCode = 1` de l'échec total, le cas « échec total » échoue. Les deux mutations ont été appliquées puis retirées.
+- **Un détail de l'inventaire :** `verifier-inventaire-controles.py` n'acceptait de citer que des tests `.py` ou `.cjs` ; un banc Node `.mjs` était refusé. La reconnaissance est étendue à `.mjs`.
+- **Où il tourne :** dans `qualite`, pas dans `graphismes`. C'est écrit dans le workflow à l'endroit qui s'applique : le banc ne mesure rien, il ne lui faut aucun binaire, et il coûte 4 s. `qualite` reçoit donc une étape `setup-node`.
+- **Inventaire :** `auditer-criteres-22.mjs` passe de `aucun-test` à `faute-en-memoire` — le navigateur est simulé, la géométrie n'est jamais exercée. **45 outils · 14 `banc` · 9 `faute-en-memoire` · 6 `test` · 3 `test-en-soi` · 5 `aucun-test` · 8 `hors-portee`** → **29 contrôles sur 37**.
+- **Contrôles exécutés :** `test_auditer_criteres_22.mjs` (4 cas), `verifier-inventaire-controles.py`, `test_verifier_inventaire_controles.py`, `verifier-planches-statuts.py`, `test_mutations_planches_statuts.py`, chargement YAML du workflow.
+- **Limites :** le banc regarde ce que le script fait de mesures qu'on lui donne, pas la justesse de ce qu'il mesure. Le faux onglet départage la description d'une cible de ses points par le rang d'appel — fragile si le script change l'ordre de ses appels. Aucun banc ne couvre encore `verifier-accessibilite.cjs` ni `verifier-fiches-statistiques.cjs`.
+- **Prochaine action :** éprouver ces deux contrôles-là dans le job `graphismes`, où le vrai Chromium existe.
+
 ## 2026-10-28 — Le contrôle des planches avouait un résultat qu'il n'avait pas cherché
 
 - **Initiative :** `documentation-rd-eva`.
