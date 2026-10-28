@@ -27,12 +27,16 @@ Usage :
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import sys
 import tomllib
 from pathlib import Path
 
-RACINE = Path(__file__).resolve().parent.parent
+#: Racine lue par l'outil. La surcharge sert au banc de mutation
+#: (`outils/test_mutations_files_relecture.py`), qui ajoute une fiche au
+#: catalogue ou le laisse diverger dans une copie du dépôt.
+RACINE = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 
 # Statuts éditoriaux : définitions partagées, jamais recopiées en chaîne locale.
 sys.path.insert(0, str(RACINE / "outils"))

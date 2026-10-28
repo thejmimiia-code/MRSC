@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 27 |
+| Avancées consignées | 28 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 39 |
+| Contrôles exécutables cités | 41 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -427,7 +427,7 @@ Initiatives liées : `optimisation-du-site`.
 
 **Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
 
-**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 24 contrôles sur 37 ont désormais une preuve d'échec.
+**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 26 contrôles sur 37 ont désormais une preuve d'échec.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 
@@ -454,6 +454,29 @@ Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 **Suite.** Prendre les contrôles par ordre de rentabilité écrite dans l'inventaire : `verifier-securite.py` n'a aucun test, puis `verifier-fusions.py`, puis les deux portes de publication, puis `auditer-criteres-22.mjs` et son « 0 élément masqué » publié sans avoir rien pu charger. Chaque nouveau banc met à jour la ligne correspondante dans le même commit.
 
 Initiatives liées : `optimisation-du-site`, `cartographier-les-lacunes`.
+
+### `la-file-de-relecture-prouve-son-tri` — Une file de relecture doit prouver son tri, pas seulement sa fraîcheur
+
+*Consignée le 2026-10-28.*
+
+**Constat.** `outils/file-relecture.py` et `outils/construire-paquets-relecture.py` fabriquent la file de travail qu'une personne suivra pour les 59 prototypes : ordre de priorité, domaines à relecture spécialisée, mots-clés sensibles. Leur seule garde était `--verifier`, c'est-à-dire la comparaison du fichier commité avec sa régénération. Cette comparaison prouve que le fichier est frais, jamais que le tri classe encore : un classement silencieusement cassé resterait vert, et la file paraîtrait simplement plus courte.
+
+**Ce que cela change.** `outils/test_mutations_files_relecture.py` éprouve cinq cas dans une copie complète : le catalogue change sans régénération (les deux outils refusent), la file est supprimée, la file est éditée à la main, et — le cas qui compte — une fiche porteuse du mot « vaccin » est ajoutée dans un domaine neutre : elle doit apparaître avec le motif « santé : vaccin » et être rangée « hors domaine sensible, signalé par mots-clés » dans les paquets. Cinq tests, 3,7 s, un seul banc pour les deux outils qui partagent le même module de tri.
+
+**Preuves dans le dépôt :**
+
+- `outils/file-relecture.py`
+- `outils/construire-paquets-relecture.py`
+- `outils/test_mutations_files_relecture.py`
+- `docs/apprentissage/file-relecture.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_mutations_files_relecture.py && python3 outils/file-relecture.py --verifier && python3 outils/construire-paquets-relecture.py --verifier`
+
+**Limite — ce que cela ne prouve pas.** Le banc vérifie qu'un mot-clé connu est repéré, pas que la liste de mots-clés couvre les sujets sensibles : une fiche qui parle de santé sans employer aucun terme listé reste invisible, et c'est une limite de la méthode, pas du banc. `construire-paquets-relecture.py` emprunte en outre `auditer-prototypes.py`, qui ne lit pas `MRSC_RACINE` : ses états automatiques viennent toujours du dépôt réel, ce qui interdit de muter cette partie-là dans la copie. Enfin, classer n'est pas relire : la file reste une liste de travail, jamais une validation.
+
+**Suite.** Éprouver `verifier-maj-amont.py`, qui garde la fraîcheur du moteur embarqué, puis attaquer les contrôles navigateur (`auditer-criteres-22.mjs`, `auditer-affichages.mjs`, `verifier-accessibilite.cjs`, `verifier-fiches-statistiques.cjs`) depuis le job `graphismes`.
+
+Initiatives liées : `relire-les-44-prototypes`, `co-conception-et-essais`.
 
 ### `la-memoire-du-projet-a-son-banc` — La mémoire du projet est un contrôle comme un autre : elle doit savoir échouer
 

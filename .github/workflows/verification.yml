@@ -65,8 +65,14 @@ jobs:
           python3 outils/verifier-fusions.py
           python3 outils/test_mutations_fusions.py
 
+      # La file de relecture est ce qu'une personne suivra pour les 59
+      # prototypes : sa garde était la seule comparaison avec sa régénération.
+      # Le banc la fait diverger, la supprime, l'édite à la main, et vérifie que
+      # le tri par mots-clés classe encore une fiche sensible hors domaine.
       - name: Vérifier la file de relecture générée
-        run: python3 outils/file-relecture.py --verifier
+        run: |
+          python3 outils/file-relecture.py --verifier
+          python3 outils/test_mutations_files_relecture.py
 
       - name: Vérifier les contrôles automatiques et le registre des relectures
         run: |

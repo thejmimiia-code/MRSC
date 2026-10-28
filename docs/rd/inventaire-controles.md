@@ -27,11 +27,11 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/construire-apprentissages.py` | Génère les fiches et le catalogue | `--verifier` plus `test_reproductibilite_artefacts.py` | `hors-portee` |
 | `outils/construire-avancees.py` | Génère `avancees.md` depuis le registre | `test_avancees.py` (15 tests) | `faute-en-memoire` |
 | `outils/construire-carte-lacunes.py` | Génère la carte des lacunes | `--verifier` plus `test_reproductibilite_artefacts.py` | `hors-portee` |
-| `outils/construire-paquets-relecture.py` | Prépare les paquets de relecture | `--verifier` seul | `aucun-test` |
+| `outils/construire-paquets-relecture.py` | Prépare les paquets de relecture | `test_mutations_files_relecture.py` (même banc : les deux outils partagent le même tri) | `banc` |
 | `outils/construire-simulateur.py` | Génère `simulateur/index.html` | `--verifier` plus `verifier-integration.py` | `hors-portee` |
 | `outils/construire-sources-refusees.py` | Registre des sources tentées et refusées | `test_sources_refusees.py` (10 tests) | `faute-en-memoire` |
 | `outils/etat-rd.py` | Imprime l'état daté de la R&D | Aucune : sortie lue à la main | `aucun-test` |
-| `outils/file-relecture.py` | Construit la file de relecture | `--verifier` seul | `aucun-test` |
+| `outils/file-relecture.py` | Construit la file de relecture | `test_mutations_files_relecture.py` (divergence, fichier supprimé, édition à la main, tri éprouvé sur une fiche ajoutée) | `banc` |
 | `outils/generer-fonctions-api.py` | Génère les fonctions Vercel de `api/` | `verifier-integration.py` | `hors-portee` |
 | `outils/mettre-a-jour-simulateur.py` | Met à jour le moteur embarqué depuis l'amont | `verifier-maj-amont.py` | `hors-portee` |
 | `outils/optimiser-images.py` | Variantes AVIF/WebP des grandes illustrations | `test_manifeste_sans_imagemagick.py` (6 tests) et `--verifier` | `test` |
@@ -69,19 +69,19 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 
 45 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
-- **Onze** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
+- **Treize** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
 - **Sept** le sont en cassant des données en mémoire. C'est utile, mais la lecture du fichier sur disque n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests.
 - **Six** ont un test qui n'injecte aucune faute.
 - **Trois** sont eux-mêmes des tests (scripts navigateur, simulation de cache) : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre.
-- **Dix** ne sont prouvés par rien d'autre que leur vert quotidien.
+- **Huit** ne sont prouvés par rien d'autre que leur vert quotidien.
 - **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
 
-Autrement dit : **24 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 13 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et dix ne sont prouvés par rien d'autre que leur vert quotidien.
+Autrement dit : **26 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 11 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et huit ne sont prouvés par rien d'autre que leur vert quotidien.
 
 ## Par où continuer, par ordre de rentabilité
 
 1. `auditer-criteres-22.mjs` — il a déjà publié « 0 élément masqué » sans avoir rien pu charger ; ce défaut-là mérite un test qui le reproduit. Il demande Chromium : son banc devra tourner dans le job `graphismes`, pas dans `qualite`.
-2. `file-relecture.py` et `construire-paquets-relecture.py` — la file de relecture des 59 prototypes, vérifiée par `--verifier` seulement.
+2. `verifier-maj-amont.py` — il garde la fraîcheur du moteur embarqué, et un moteur en retard se voit mal.
 
 ## Limites de ce document
 

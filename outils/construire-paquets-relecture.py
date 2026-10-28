@@ -24,12 +24,16 @@ from __future__ import annotations
 
 import argparse
 import importlib.util
+import os
 import sys
 import tomllib
 from datetime import date
 from pathlib import Path
 
-RACINE = Path(__file__).resolve().parent.parent
+#: Racine lue par l'outil. La surcharge sert au banc de mutation
+#: (`outils/test_mutations_files_relecture.py`), qui ajoute une fiche au
+#: catalogue ou le laisse diverger dans une copie du dépôt.
+RACINE = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 SORTIE = RACINE / "docs" / "apprentissage" / "paquets-relecture.md"
 REGISTRE = RACINE / "docs" / "apprentissage" / "relectures.toml"
 

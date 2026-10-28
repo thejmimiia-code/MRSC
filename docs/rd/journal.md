@@ -2,6 +2,19 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-28 — La file de relecture prouve son tri, pas seulement sa fraîcheur
+
+- **Initiative :** `relire-les-44-prototypes`.
+- **Septième lot de la journée :** `outils/file-relecture.py` et `outils/construire-paquets-relecture.py`, les deux outils qui fabriquent ce qu'une personne suivra pour relire les 59 prototypes. Leur seule garde était `--verifier` : le fichier commité est-il identique à sa régénération ? Cette comparaison prouve que le fichier est frais — jamais que le tri classe encore quelque chose.
+- **Le défaut que ce vert cachait :** si la liste de mots-clés ou le calcul de priorité se cassait, la file resterait parfaitement « à jour » et simplement plus courte. Une personne ouvrirait un document propre, plus rien ne serait signalé, et rien ne le dirait.
+- **Cinq cas, un seul banc :** catalogue changé sans régénération (les deux outils refusent, « a divergé »), file supprimée (« absent »), file éditée à la main (refus), et **le cas qui compte** — une fiche recopiée d'un prototype existant, intitulée « Comprendre un vaccin et sa notice » et placée dans un domaine neutre, doit apparaître avec le motif « santé : vaccin » et être rangée « hors domaine sensible, signalé par mots-clés » dans les paquets. **Cinq tests, 3,7 s.**
+- **Pourquoi un banc pour deux outils :** ils partagent le même module de tri, `construire-paquets-relecture.py` important `file-relecture.py`. Deux bancs séparés auraient fini par diverger sur ce qu'ils considèrent comme la vérité — le défaut exact que la mutualisation du 24 octobre avait supprimé.
+- **Câblage :** `MRSC_RACINE` ajouté aux deux outils, banc lancé dans `verification.yml` après `file-relecture.py --verifier`. Il ne tourne pas à la publication : `docs/` n'est pas publié, et `deploy-pages.yml` n'appelle aucun des deux outils.
+- **L'inventaire suit :** deux lignes passent de `aucun-test` à `banc` → **13 bancs**, **26 contrôles sur 37** avec une preuve d'échec.
+- **Contrôles exécutés :** `test_mutations_files_relecture.py` (5 tests), `file-relecture.py --verifier`, `construire-paquets-relecture.py --verifier`, `verifier-inventaire-controles.py`, `test_verifier_inventaire_controles.py`, `verifier-rd-continue.py`, `construire-avancees.py --verifier` (28 avancées), `auditer-prototypes.py --verifier`, `test_protocole_editorial.py`, chargement YAML du workflow, `git diff --check`.
+- **Limites :** le banc vérifie qu'un mot-clé **connu** est repéré, pas que la liste couvre les sujets sensibles — une fiche qui parle de santé sans employer aucun terme listé reste invisible, et c'est une limite de la méthode. `construire-paquets-relecture.py` emprunte `auditer-prototypes.py`, qui ne lit pas `MRSC_RACINE` : ses états automatiques viennent toujours du dépôt réel, ce qui interdit de muter cette partie-là. Et classer n'est pas relire.
+- **Prochaine action :** `verifier-maj-amont.py`, puis les quatre contrôles navigateur, dont le banc devra tourner dans le job `graphismes`.
+
 ## 2026-10-28 — Les budgets d'affichage des titres sont vus en échec
 
 - **Initiative :** `coherence-textes-publics`.
