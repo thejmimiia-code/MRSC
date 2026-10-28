@@ -427,7 +427,7 @@ Initiatives liées : `optimisation-du-site`.
 
 **Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
 
-**Suite.** Étendre la preuve aux contrôles préventifs qui n'en ont pas encore : un inventaire des outils de vérification sans test de mutation est établi, et `verifier-affichages.py` est le premier traité (`outils/test_mutations_affichages.py`, cinq mutations). Restent notamment `verifier-securite.py`, `verifier-site-statique.py`, `verifier-fusions.py` et `auditer-criteres-22.mjs`, à traiter ou à écarter par écrit.
+**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). La suite n'est plus de traiter les outils un par un mais d'écrire l'inventaire des 42 : pour chacun, « banc de mutation », « test sans mutation » ou « écarté, et pourquoi » — `verifier-securite.py`, `verifier-fusions.py` et `auditer-criteres-22.mjs` sont les candidats les plus rentables.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 

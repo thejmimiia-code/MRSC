@@ -110,7 +110,9 @@ jobs:
           python3 outils/verifier-separation-contenus.py
 
       - name: Vérifier les pages, liens et scripts statiques
-        run: python3 outils/verifier-site-statique.py
+        run: |
+          python3 outils/verifier-site-statique.py
+          python3 outils/test_mutations_site_statique.py
 
       - name: Vérifier que le site publié ne manque d’aucun fichier
         run: python3 outils/verifier-publication-locale.py

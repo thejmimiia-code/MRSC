@@ -8,6 +8,7 @@ quelques relations d'accessibilité et la syntaxe JS disponible via Node.js.
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -20,7 +21,11 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
-ROOT = Path(__file__).resolve().parent.parent
+#: Racine lue par le contrôle. La surcharge sert un usage précis : rejouer les
+#: mutations sur une copie du dépôt (`outils/test_mutations_site_statique.py`)
+#: sans toucher aux fichiers réels. Une porte qui modifie l'arbre qu'elle
+#: contrôle finit par le laisser modifié après un échec.
+ROOT = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 
 # Statuts éditoriaux : définitions partagées, jamais recopiées en chaîne locale.
 sys.path.insert(0, str(ROOT / "outils"))

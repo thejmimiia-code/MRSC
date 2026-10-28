@@ -84,7 +84,9 @@ jobs:
           python3 outils/verifier-separation-contenus.py
 
       - name: Validate static pages, links and scripts
-        run: python3 outils/verifier-site-statique.py
+        run: |
+          python3 outils/verifier-site-statique.py
+          python3 outils/test_mutations_site_statique.py
 
       # Les garde-fous de format portent aussi l'attribution exigée par la
       # licence sur une copie imprimée (source, adresse, statut). Ils ne
