@@ -74,6 +74,15 @@ jobs:
           python3 outils/test_confronter_sources.py
           python3 outils/confronter-sources.py --verifier
 
+      # Le 28 octobre 2026, la carte `docs/rd/sujet-revenus-salaire-impots.md` a
+      # fixé une règle : un taux daté n'entre pas dans une fiche. Ce contrôle la
+      # rend exécutable. Il ne trouve rien aujourd'hui — c'est pourquoi son test
+      # de mutation existe : sans lui, un contrôle préventif ne prouverait rien.
+      - name: Vérifier qu'aucune règle chiffrée n'est écrite sans sa date
+        run: |
+          python3 outils/test_verifier_taux_dates.py
+          python3 outils/verifier-taux-dates.py
+
       - name: Vérifier les avancées R&D consignées
         run: |
           python3 outils/test_avancees.py
@@ -170,7 +179,9 @@ jobs:
       # plafonds d'image par densité, mesure de lecture) : la mesure complète
       # demande un navigateur, ces règles-ci se vérifient partout.
       - name: Vérifier les garde-fous des formats d’affichage
-        run: python3 outils/verifier-affichages.py
+        run: |
+          python3 outils/verifier-affichages.py
+          python3 outils/test_mutations_affichages.py
 
   graphismes:
     runs-on: ubuntu-24.04

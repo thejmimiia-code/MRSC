@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 18 |
+| Avancées consignées | 19 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 22 |
+| Contrôles exécutables cités | 24 |
 | Initiatives du portefeuille concernées | 12 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -408,6 +408,28 @@ Initiatives liées : `optimisation-du-site`, `ecouter-la-page`.
 **Suite.** Étendre le contrôle aux autres visuels et aux densités supérieures, mesurer le contraste et faire relire la direction photographique.
 
 Initiatives liées : `optimisation-du-site`.
+
+### `controle-preventif-qui-prouve-qu-il-mord` — Un contrôle préventif qui ne trouve rien doit prouver qu'il mord
+
+*Consignée le 2026-10-28.*
+
+**Constat.** Le contrôle `outils/verifier-taux-dates.py`, écrit le 28 octobre 2026 pour empêcher qu'une fiche recopie un taux de cotisation sans sa date, rend « 85 fiches contrôlées, 0 défaut » : le catalogue est propre, et un contrôle qui ne signale jamais rien est indiscernable d'un contrôle cassé. C'est le même piège que le relevé WCAG publiant « 0 élément masqué » quand il n'avait rien pu charger.
+
+**Ce que cela change.** Le contrôle est livré avec `outils/test_verifier_taux_dates.py`, qui plante dans une copie du catalogue les quatre fautes qu'il doit voir — taux sans année, montant légal sans année, règle datée sans source datée, phrase dans une liste — et qui rejoue l'outil par sous-processus pour vérifier que la sortie en erreur est bien celle du programme, pas seulement d'une fonction. Chaque ligne verte du dépôt vaut donc pour ce qu'elle prouve : une phrase acceptée est une phrase dont la forme est datée, pas une phrase exacte.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-taux-dates.py`
+- `outils/test_verifier_taux_dates.py`
+- `docs/rd/sujet-revenus-salaire-impots.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_verifier_taux_dates.py && python3 outils/verifier-taux-dates.py && python3 outils/verifier-rd-continue.py`
+
+**Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
+
+**Suite.** Étendre la preuve aux contrôles préventifs qui n'en ont pas encore : un inventaire des outils de vérification sans test de mutation est établi, et `verifier-affichages.py` est le premier traité (`outils/test_mutations_affichages.py`, cinq mutations). Restent notamment `verifier-securite.py`, `verifier-site-statique.py`, `verifier-fusions.py` et `auditer-criteres-22.mjs`, à traiter ou à écarter par écrit.
+
+Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 
 ### `taux-date-hors-de-la-fiche` — Un taux daté n'entre pas dans une fiche : on enseigne la vérification, pas le chiffre
 
