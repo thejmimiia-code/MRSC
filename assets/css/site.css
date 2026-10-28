@@ -4852,6 +4852,27 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
   to { opacity: 1; transform: none; }
 }
 
+/* --- En-tête compact sur ordinateur : le panneau s'ouvre vers la droite -----
+   Dans l'en-tête compact, les deux commandes se rangent au début de la barre,
+   juste après le logo. Ancré à droite de son bouton (`right: 0`), le panneau de
+   22 rem ne pouvait donc que sortir par la gauche : sur la capture du
+   28 octobre 2026 (2× : bord gauche de la fenêtre à x = 202, bord droit du
+   panneau à x = 811), ses 610 px visibles font 305 px CSS pour 352 px de
+   panneau — 47 px passaient hors de l'écran, et les libellés des lignes
+   (« Agrandir », « Écouter la page ») étaient rognés au bord de la fenêtre.
+   Il s'ouvre désormais vers la droite, où la place ne manque pas.
+   Le double garde de la requête écarte les deux formats qui ont déjà leur
+   ancrage : sous 761 px et en paysage court, les règles `position: fixed;
+   left: .5rem; right: .5rem` prennent la main plus bas dans cette feuille.
+   L'en-tête agrandi garde l'ancrage à droite : ses commandes, elles, suivent la
+   rangée centrée et le panneau y trouve sa place à gauche du bouton. */
+@media (min-width: 761px) and (min-height: 561px) {
+  html.entete-compacte .customize-settings-panel {
+    right: auto;
+    left: 0;
+  }
+}
+
 /* Les réglages deviennent des lignes du panneau : leurs résumés prennent toute
    la largeur, leurs panneaux s'ouvrent dans le flux au lieu de flotter. */
 html.has-js .site-header .customize-settings-panel .display-settings,
