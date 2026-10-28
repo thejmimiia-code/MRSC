@@ -27,6 +27,7 @@ Code de sortie : 0 si le périmètre publié est complet, 1 sinon.
 
 from __future__ import annotations
 
+import os
 import posixpath
 import re
 import shlex
@@ -35,7 +36,10 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import unquote
 
-RACINE = Path(__file__).resolve().parent.parent
+#: Racine lue par le contrôle. La surcharge sert au banc de mutation
+#: (`outils/test_mutations_publication_locale.py`), qui retire un fichier de la
+#: liste de copie ou casse un lien dans une copie du dépôt.
+RACINE = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 WORKFLOW = RACINE / ".github" / "workflows" / "deploy-pages.yml"
 SERVEUR = RACINE / "outils" / "serveur-local.py"
 ETAPE = "Prepare public site files"

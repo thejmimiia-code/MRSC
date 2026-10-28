@@ -129,8 +129,15 @@ jobs:
           python3 outils/verifier-site-statique.py
           python3 outils/test_mutations_site_statique.py
 
+      # Le défaut d'origine : un favicon présent dans le dépôt, demandé par les
+      # pages, et absent de la liste de copie du workflow — donc introuvable sur
+      # le site. Le banc retire un fichier de cette liste, oublie une page,
+      # casse un lien, élargit puis rétrécit l'aperçu local et déplace une
+      # adresse du sitemap, dans une copie complète du dépôt.
       - name: Vérifier que le site publié ne manque d’aucun fichier
-        run: python3 outils/verifier-publication-locale.py
+        run: |
+          python3 outils/verifier-publication-locale.py
+          python3 outils/test_mutations_publication_locale.py
 
       # Le relevé d’en-têtes est fait en réseau, hors de cette porte : ici on
       # confronte seulement ce relevé aux fichiers du dépôt. Un binaire dont la

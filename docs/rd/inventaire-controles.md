@@ -53,7 +53,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/verifier-maj-amont.py` | Retard du moteur embarqué sur l'amont | Vert de CI seulement | `aucun-test` |
 | `outils/verifier-planches-statuts.py` | Planches des statuts et leur archive | Vert de CI seulement | `aucun-test` |
 | `outils/verifier-poids-pages.py` | Poids estimé des pages et budget de sobriété | Vert de CI seulement | `aucun-test` |
-| `outils/verifier-publication-locale.py` | Le site publié ne manque d'aucun fichier | Vert de CI seulement | `aucun-test` |
+| `outils/verifier-publication-locale.py` | Le site publié ne manque d'aucun fichier | `test_mutations_publication_locale.py` (6 fautes : copie, lien, aperçu local, sitemap) | `banc` |
 | `outils/verifier-publication.py` | Ce que l'hébergement sert réellement | `test_verifier_publication.py` (5 tests) | `test` |
 | `outils/verifier-rd-continue.py` | Consignes, skills et portefeuille R&D | Vert de CI seulement | `aucun-test` |
 | `outils/verifier-resilience-statutaire.py` | Structure documentaire du registre statutaire | `test_verifier_resilience_statutaire.py` (19 tests) | `faute-en-memoire` |
@@ -69,18 +69,18 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 
 45 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
-- **Six** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant » et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
+- **Sept** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
 - **Sept** le sont en cassant des données en mémoire. C'est utile, mais la lecture du fichier sur disque n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests.
 - **Six** ont un test qui n'injecte aucune faute.
 - **Trois** sont eux-mêmes des tests (scripts navigateur, simulation de cache) : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre.
-- **Quinze** ne sont prouvés par rien d'autre que leur vert quotidien.
+- **Quatorze** ne sont prouvés par rien d'autre que leur vert quotidien.
 - **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
 
-Autrement dit : **19 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 18 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et quinze ne sont prouvés par rien d'autre que leur vert quotidien.
+Autrement dit : **20 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 17 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et quatorze ne sont prouvés par rien d'autre que leur vert quotidien.
 
 ## Par où continuer, par ordre de rentabilité
 
-1. `verifier-publication-locale.py` et `verifier-integration.py` — deux portes à forte conséquence, vérifiées seulement par elles-mêmes.
+1. `verifier-integration.py` — la dernière porte à forte conséquence qui ne soit vérifiée que par elle-même : 1 599 lignes, 16 routes exercées, et le contrôle qui compare la présentation au moteur.
 2. `auditer-criteres-22.mjs` — il a déjà publié « 0 élément masqué » sans avoir rien pu charger ; ce défaut-là mérite un test qui le reproduit.
 
 ## Limites de ce document
