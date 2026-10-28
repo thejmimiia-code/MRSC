@@ -17,8 +17,8 @@
 | Fiches publiées | 85 |
 | dont prototypes à relire | 59 |
 | Sujets sans aucune fiche | 17 |
-| Sujets ouverts par une carte de sujet | 3 |
-| Lesquels | `ecoute-prononciation`, `securite-sciences`, `systemes-embarques` |
+| Sujets ouverts par une carte de sujet | 4 |
+| Lesquels | `ecoute-prononciation`, `revenus-salaire-impots`, `securite-sciences`, `systemes-embarques` |
 
 ## 2. Répartition par domaine
 
@@ -46,7 +46,7 @@ Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Le
 
 | Domaine | Sujet | Statut | Exigence de preuve avant publication | Travail ouvert |
 | --- | --- | --- | --- | --- |
-| Budget, économie, consommation et travail | Revenus, fiche de paie, prélèvements et impôts | `a-creer` | Relecture par une personne compétente en argent, budget et finances, puis sources primaires datées | — |
+| Budget, économie, consommation et travail | Revenus, fiche de paie, prélèvements et impôts | `a-creer` | Relecture par une personne compétente en argent, budget et finances, puis sources primaires datées | [carte de sujet](sujet-revenus-salaire-impots.md) |
 | Sciences, technologie et environnement | Sécurité électrique, protections et limites des interventions | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées | — |
 | Sciences, technologie et environnement | Risques, consignes et usages sûrs des outils et produits | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | [carte de sujet](sujet-securite-sciences.md) |
 | Démarches, droits, sécurité et vie professionnelle | Droits au travail, contrats, sécurité et interlocuteurs | `a-creer` | Relecture par une personne compétente en droit, démarches et travail, puis sources primaires datées | — |
