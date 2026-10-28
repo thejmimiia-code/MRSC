@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 26 |
+| Avancées consignées | 27 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 37 |
+| Contrôles exécutables cités | 39 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -427,7 +427,7 @@ Initiatives liées : `optimisation-du-site`.
 
 **Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
 
-**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 23 contrôles sur 37 ont désormais une preuve d'échec.
+**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 24 contrôles sur 37 ont désormais une preuve d'échec.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 
@@ -615,6 +615,29 @@ Initiatives liées : `poids-et-sobriete-numerique`, `optimisation-du-site`.
 **Suite.** Éprouver les deux portes de publication (`verifier-publication-locale.py`, `verifier-integration.py`), puis `auditer-criteres-22.mjs` et son « 0 élément masqué » publié sans avoir rien pu charger.
 
 Initiatives liées : `optimisation-du-site`, `coordination-de-tous-les-agents`.
+
+### `un-titre-tronque-n-est-pas-une-faute-de-gout` — Un titre trop long n'est pas une faute de goût : c'est un budget qui doit mordre
+
+*Consignée le 2026-10-28.*
+
+**Constat.** `outils/verifier-budgets-visuels.py` existe parce qu'aucun test ne voyait deux choses : un `<title>` tronqué dans les résultats de recherche, et un H1 qui s'allonge sans que personne ne le remarque à 320 px. Il lit les valeurs réellement écrites dans `assets/css/site.css` au lieu de recopier des constantes — et rien ne prouvait qu'il savait échouer.
+
+**Ce que cela change.** `outils/test_mutations_budgets_visuels.py` plante trois fautes dans une copie complète : un `<title>` allongé à 79 caractères pour un plafond de 60, une page privée de sa balise `<title>`, et le plancher du `clamp()` de `h1` gonflé, qui fait passer l'estimation du titre d'accueil de 6 à 63 lignes. Quatre tests, 0,3 s.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-budgets-visuels.py`
+- `outils/test_mutations_budgets_visuels.py`
+- `assets/css/site.css`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_mutations_budgets_visuels.py && python3 outils/verifier-budgets-visuels.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** La géométrie du héros des mondes et la couverture des modes d'affichage ne sont pas éprouvées : une mutation du `srcset` retirant la variante 1672 px n'a pas fait échouer le contrôle, et ce constat vaut mieux que la prétention inverse. Les nombres de lignes restent des estimations hors ligne (police système, avance moyenne) qu'aucun rendu ne confirme ; un budget respecté dit qu'une chaîne est courte, pas qu'elle est bien écrite.
+
+**Suite.** Éprouver les deux outils de la file de relecture (`file-relecture.py`, `construire-paquets-relecture.py`), puis passer à `auditer-criteres-22.mjs` depuis le job `graphismes`.
+
+Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 
 ## 3. Ce que ce registre ne dit pas
 

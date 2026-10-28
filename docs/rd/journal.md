@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-28 — Les budgets d'affichage des titres sont vus en échec
+
+- **Initiative :** `coherence-textes-publics`.
+- **Sixième contrôle éprouvé de la journée :** `outils/verifier-budgets-visuels.py`. Il existe parce qu'aucun test ne voyait un `<title>` tronqué dans les résultats de recherche ni un H1 qui s'allonge à 320 px ; il lit les valeurs de `site.css` plutôt que de recopier des constantes — et rien ne prouvait qu'il savait refuser.
+- **Trois fautes :** un `<title>` porté à 79 caractères pour un plafond de 60 ; une page privée de sa balise `<title>` ; le plancher du `clamp()` de `h1` gonflé, qui fait passer l'estimation du titre d'accueil de **6 à 63 lignes**. Quatre tests, **0,3 s**.
+- **Une mutation qui n'a rien cassé, et c'est écrit :** retirer la variante `1672w` du `srcset` du héros des mondes laisse le contrôle vert. Plutôt que de forcer un test qui passerait pour une preuve, la limite est inscrite dans le banc et dans l'avancée : la géométrie du héros et les modes d'affichage ne sont pas éprouvés.
+- **Câblage :** `MRSC_RACINE` ajouté à `verifier-budgets-visuels.py`, banc lancé après la porte dans `verification.yml` (la publication ne lance pas ce contrôle), `AGENTS.md` mentionne le dixième banc.
+- **L'inventaire suit :** `verifier-budgets-visuels.py` passe de `aucun-test` à `banc` → **11 bancs**, **24 contrôles sur 37** avec une preuve d'échec.
+- **Contrôles exécutés :** `test_mutations_budgets_visuels.py` (4 tests), `verifier-budgets-visuels.py`, `verifier-inventaire-controles.py`, `test_verifier_inventaire_controles.py`, `test_mutations_poids_pages.py`, `verifier-rd-continue.py`, `construire-avancees.py --verifier` (27 avancées), `test_protocole_editorial.py`, chargement YAML du workflow, `git diff --check`.
+- **Limites :** trois fautes pour quatre familles de contrôles — les modes d'affichage et le héros des mondes restent hors d'atteinte du banc. Les nombres de lignes sont des estimations hors ligne qu'aucun rendu ne confirme : un budget respecté dit qu'une chaîne est courte, pas qu'elle est bien écrite.
+- **Prochaine action :** `file-relecture.py` et `construire-paquets-relecture.py`, la file de relecture des 59 prototypes, puis `auditer-criteres-22.mjs` depuis le job `graphismes`.
+
 ## 2026-10-28 — Le budget de poids se prouve aussi en l'abaissant
 
 - **Initiative :** `poids-et-sobriete-numerique`.
