@@ -48,7 +48,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/verifier-fichiers-servis.py` | Relevé d'en-têtes confronté aux fichiers | `test_fichiers_servis.py` (28 tests) | `test` |
 | `outils/verifier-fusions.py` | Fusion et suppression de branche sans perte | `test_mutations_fusions.py` (6 fautes dans de petits dépôts git neufs) | `banc` |
 | `outils/verifier-graphismes.cjs` | Mesure navigateur de trois visuels | Trois mutations internes (`distorsion`, `densite`, `ancre`) rejouées en CI | `test-en-soi` |
-| `outils/verifier-integration.py` | Intégration du simulateur au site, sans navigateur | Vert de CI seulement | `aucun-test` |
+| `outils/verifier-integration.py` | Intégration du simulateur au site, sans navigateur | `test_mutations_integration.py` (3 fautes : ressource orpheline, chiffre annoncé, page absente) | `banc` |
 | `outils/verifier-inventaire-controles.py` | Tient ce document : couverture, existence, vocabulaire des statuts | `test_verifier_inventaire_controles.py` (casse l'inventaire dans une copie) | `banc` |
 | `outils/verifier-maj-amont.py` | Retard du moteur embarqué sur l'amont | Vert de CI seulement | `aucun-test` |
 | `outils/verifier-planches-statuts.py` | Planches des statuts et leur archive | Vert de CI seulement | `aucun-test` |
@@ -69,19 +69,19 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 
 45 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
-- **Sept** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
+- **Huit** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
 - **Sept** le sont en cassant des données en mémoire. C'est utile, mais la lecture du fichier sur disque n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests.
 - **Six** ont un test qui n'injecte aucune faute.
 - **Trois** sont eux-mêmes des tests (scripts navigateur, simulation de cache) : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre.
-- **Quatorze** ne sont prouvés par rien d'autre que leur vert quotidien.
+- **Treize** ne sont prouvés par rien d'autre que leur vert quotidien.
 - **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
 
-Autrement dit : **20 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 17 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et quatorze ne sont prouvés par rien d'autre que leur vert quotidien.
+Autrement dit : **21 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 16 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et treize ne sont prouvés par rien d'autre que leur vert quotidien.
 
 ## Par où continuer, par ordre de rentabilité
 
-1. `verifier-integration.py` — la dernière porte à forte conséquence qui ne soit vérifiée que par elle-même : 1 599 lignes, 16 routes exercées, et le contrôle qui compare la présentation au moteur.
-2. `auditer-criteres-22.mjs` — il a déjà publié « 0 élément masqué » sans avoir rien pu charger ; ce défaut-là mérite un test qui le reproduit.
+1. `auditer-criteres-22.mjs` — il a déjà publié « 0 élément masqué » sans avoir rien pu charger ; ce défaut-là mérite un test qui le reproduit.
+2. `verifier-rd-continue.py` — il garde la continuité R&D (consignes, skills, portefeuille, veille) et n'a que son propre vert.
 
 ## Limites de ce document
 

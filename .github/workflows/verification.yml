@@ -192,8 +192,15 @@ jobs:
           python3 outils/verifier-securite.py
           python3 outils/test_mutations_securite.py
 
+      # La dernière porte à forte conséquence qui ne fût vérifiée que par
+      # elle-même. Son banc coûte 67 s — la porte lance quatre outils et monte
+      # un serveur à chaque exécution —, ce qui le réserve aux pull requests :
+      # rejouer les mêmes trois fautes à chaque publication n'apprendrait rien
+      # de neuf et doublerait la durée du travail de mise en ligne.
       - name: Vérifier l’intégration des routes et du site
-        run: python3 outils/verifier-integration.py
+        run: |
+          python3 outils/verifier-integration.py
+          python3 outils/test_mutations_integration.py
 
       # Nés de la panne du 22 octobre 2026 : deux sorties commitées portaient la
       # date du jour de leur génération et faisaient échouer cette porte, puis la
