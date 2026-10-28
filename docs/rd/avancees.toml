@@ -15,6 +15,23 @@ derniere_revue = 2026-10-28
 regle = "Une entrée n'entre ici qu'avec une preuve locale, un contrôle exécutable et une limite écrite ; sinon elle reste une note de journal."
 
 [[avancee]]
+id = "la-porte-de-publication-se-prouve-en-retirant-un-fichier"
+date = 2026-10-28
+titre = "Une porte de publication se prouve en retirant un fichier de sa propre liste"
+constat = "`outils/verifier-publication-locale.py` est né d'un vrai défaut : le favicon existait dans le dépôt, les pages le demandaient, et il manquait à la liste de copie de `deploy-pages.yml` — donc introuvable sur le site. Depuis, il relit cette liste, reconstruit le périmètre servi et confronte liens, `url()` du CSS, sitemap et liste blanche de l'aperçu local. Rien n'éprouvait ce contrôle : sa seule preuve était son propre vert."
+changement = "`outils/test_mutations_publication_locale.py` plante six fautes dans une copie complète du dépôt : une page ajoutée à la racine et oubliée à la copie, `favicon.ico` retiré de la liste — le défaut d'origine, rejoué —, un lien des pages vers un fichier non publié, une entrée en trop dans l'aperçu local, **l'inverse** (une page publiée que l'aperçu local ne sert pas), et une adresse du sitemap qui ne correspond à aucun fichier. Sept tests, 0,9 s. `verifier-publication-locale.py` lit sa racine par `MRSC_RACINE`."
+preuves = [
+  "outils/verifier-publication-locale.py",
+  "outils/test_mutations_publication_locale.py",
+  ".github/workflows/deploy-pages.yml",
+  "docs/rd/inventaire-controles.md",
+]
+controle = "python3 outils/test_mutations_publication_locale.py && python3 outils/verifier-publication-locale.py && python3 outils/verifier-inventaire-controles.py"
+limite = "Les mutations portent sur ce que la liste de copie déclare, jamais sur ce que GitHub Pages sert réellement : si le workflow copiait un fichier correctement mais que l'hébergement l'omettait, la porte resterait verte. Elle ne voit pas non plus les en-têtes HTTP ni les redirections. Les deux sens de l'aperçu local sont couverts, mais uniquement pour les fichiers racine — un dossier publié que l'aperçu servirait en trop lui échapperait."
+suite = "Éprouver `verifier-integration.py`, dernière porte à forte conséquence qui ne soit vérifiée que par elle-même, puis `auditer-criteres-22.mjs`."
+initiatives = ["optimisation-du-site", "raccordement-domaine-www"]
+
+[[avancee]]
 id = "un-petit-depot-cobaye-pour-les-controles-git"
 date = 2026-10-28
 titre = "Un contrôle qui lit l'historique git se teste sur un dépôt neuf, jamais sur le vrai"
@@ -80,7 +97,7 @@ preuves = [
 ]
 controle = "python3 outils/test_verifier_taux_dates.py && python3 outils/verifier-taux-dates.py && python3 outils/verifier-rd-continue.py"
 limite = "Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle."
-suite = "Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 19 contrôles sur 37 ont désormais une preuve d'échec."
+suite = "Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 20 contrôles sur 37 ont désormais une preuve d'échec."
 initiatives = ["cartographier-les-lacunes", "relire-les-44-prototypes"]
 
 [[avancee]]

@@ -105,8 +105,12 @@ jobs:
           python3 outils/verifier-affichages.py
           python3 outils/test_mutations_affichages.py
 
+      # Ici, la porte ne vérifie pas seulement : elle autorise la publication.
+      # Ses six mutations sont donc rejouées avant, dans une copie du dépôt.
       - name: Validate the published file set
-        run: python3 outils/verifier-publication-locale.py
+        run: |
+          python3 outils/verifier-publication-locale.py
+          python3 outils/test_mutations_publication_locale.py
 
       - name: Validate the recorded served-file measurement
         run: |

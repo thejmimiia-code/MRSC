@@ -2,6 +2,19 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-28 — La porte de publication se prouve en retirant un fichier de sa liste
+
+- **Initiative :** `optimisation-du-site`.
+- **Troisième point de l'ordre de rentabilité :** `outils/verifier-publication-locale.py`. Il est né d'un vrai défaut — le favicon existait dans le dépôt, les pages le demandaient, la liste de copie de `deploy-pages.yml` l'oubliait — et rien n'éprouvait ce contrôle depuis.
+- **Six fautes, dans une copie complète :** une page ajoutée à la racine et oubliée à la copie ; `favicon.ico` retiré de la liste, c'est-à-dire le défaut d'origine rejoué ; un lien des pages vers un fichier non publié ; une entrée en trop dans la liste blanche de l'aperçu local ; **l'inverse** — une page publiée que l'aperçu local ne sert pas ; une adresse du `sitemap.xml` qui ne correspond à aucun fichier publié.
+- **Les deux sens de l'aperçu local :** le contrôle compare deux listes qui doivent être identiques. Éprouver un seul sens aurait laissé la moitié de la promesse en l'air : un aperçu trop large fabrique un faux site, un aperçu trop étroit cache une page publiée.
+- **Coût :** sept tests, **0,9 s**. Le banc tourne après la porte dans `verification.yml` **et** dans `deploy-pages.yml` — ici la porte ne vérifie pas seulement, elle autorise la publication.
+- **Deuxième ancre typographique :** la première tentative a échoué sans rien écrire, parce que `verification.yml` écrit `d’aucun` avec une apostrophe courbe. Le remplacement exigeait l'ancre exacte. Leçon déjà notée le 27 octobre, reformulée ici : dans ces fichiers, copier l'ancre depuis le fichier, pas depuis le souvenir.
+- **L'inventaire suit :** `verifier-publication-locale.py` passe de `aucun-test` à `banc` → **7 bancs**, **20 contrôles sur 37** avec une preuve d'échec.
+- **Contrôles exécutés :** `test_mutations_publication_locale.py` (7 tests), `verifier-publication-locale.py` (136 fichiers, 99 pages, 4 802 références), `verifier-inventaire-controles.py`, `test_verifier_inventaire_controles.py`, `test_mutations_fusions.py`, `test_mutations_securite.py`, `test_mutations_affichages.py`, `test_mutations_site_statique.py`, `verifier-site-statique.py`, `verifier-integration.py`, `verifier-securite.py`, `verifier-fusions.py`, `verifier-rd-continue.py`, `construire-avancees.py --verifier` (23 avancées), `test_protocole_editorial.py`, chargement YAML des deux workflows, `git diff --check`.
+- **Limites :** les mutations portent sur ce que la liste de copie **déclare**, jamais sur ce que GitHub Pages sert réellement ; un hébergement qui omettrait un fichier correctement copié laisserait la porte verte. Les en-têtes HTTP et les redirections ne sont pas de son ressort (le workflow « en-têtes » les couvre). L'aperçu local n'est comparé que pour les fichiers racine : un dossier servi en trop lui échapperait.
+- **Prochaine action :** `verifier-integration.py`, dernière porte à forte conséquence vérifiée seulement par elle-même — 1 599 lignes, 16 routes exercées, et le contrôle qui compare la présentation du site au moteur du simulateur.
+
 ## 2026-10-28 — La règle « ne rien perdre en fusionnant » est éprouvée sur des dépôts neufs
 
 - **Initiative :** `optimisation-du-site`.

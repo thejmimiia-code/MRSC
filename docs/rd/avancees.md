@@ -10,10 +10,10 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 22 |
+| Avancées consignées | 23 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 30 |
-| Initiatives du portefeuille concernées | 12 |
+| Contrôles exécutables cités | 32 |
+| Initiatives du portefeuille concernées | 13 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
 
@@ -427,7 +427,7 @@ Initiatives liées : `optimisation-du-site`.
 
 **Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
 
-**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 19 contrôles sur 37 ont désormais une preuve d'échec.
+**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 20 contrôles sur 37 ont désormais une preuve d'échec.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 
@@ -454,6 +454,29 @@ Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 **Suite.** Prendre les contrôles par ordre de rentabilité écrite dans l'inventaire : `verifier-securite.py` n'a aucun test, puis `verifier-fusions.py`, puis les deux portes de publication, puis `auditer-criteres-22.mjs` et son « 0 élément masqué » publié sans avoir rien pu charger. Chaque nouveau banc met à jour la ligne correspondante dans le même commit.
 
 Initiatives liées : `optimisation-du-site`, `cartographier-les-lacunes`.
+
+### `la-porte-de-publication-se-prouve-en-retirant-un-fichier` — Une porte de publication se prouve en retirant un fichier de sa propre liste
+
+*Consignée le 2026-10-28.*
+
+**Constat.** `outils/verifier-publication-locale.py` est né d'un vrai défaut : le favicon existait dans le dépôt, les pages le demandaient, et il manquait à la liste de copie de `deploy-pages.yml` — donc introuvable sur le site. Depuis, il relit cette liste, reconstruit le périmètre servi et confronte liens, `url()` du CSS, sitemap et liste blanche de l'aperçu local. Rien n'éprouvait ce contrôle : sa seule preuve était son propre vert.
+
+**Ce que cela change.** `outils/test_mutations_publication_locale.py` plante six fautes dans une copie complète du dépôt : une page ajoutée à la racine et oubliée à la copie, `favicon.ico` retiré de la liste — le défaut d'origine, rejoué —, un lien des pages vers un fichier non publié, une entrée en trop dans l'aperçu local, **l'inverse** (une page publiée que l'aperçu local ne sert pas), et une adresse du sitemap qui ne correspond à aucun fichier. Sept tests, 0,9 s. `verifier-publication-locale.py` lit sa racine par `MRSC_RACINE`.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-publication-locale.py`
+- `outils/test_mutations_publication_locale.py`
+- `.github/workflows/deploy-pages.yml`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_mutations_publication_locale.py && python3 outils/verifier-publication-locale.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Les mutations portent sur ce que la liste de copie déclare, jamais sur ce que GitHub Pages sert réellement : si le workflow copiait un fichier correctement mais que l'hébergement l'omettait, la porte resterait verte. Elle ne voit pas non plus les en-têtes HTTP ni les redirections. Les deux sens de l'aperçu local sont couverts, mais uniquement pour les fichiers racine — un dossier publié que l'aperçu servirait en trop lui échapperait.
+
+**Suite.** Éprouver `verifier-integration.py`, dernière porte à forte conséquence qui ne soit vérifiée que par elle-même, puis `auditer-criteres-22.mjs`.
+
+Initiatives liées : `optimisation-du-site`, `raccordement-domaine-www`.
 
 ### `onze-verifications-internes-jamais-vues-en-echec` — Un outil qui contient onze vérifications n'est pas un outil vérifié
 
