@@ -342,6 +342,44 @@ les deux commandes à 32 px à 320, 500 et 720 px.
 Limite : la mesure est celle d'un Chromium sans interface ; le panneau est
 positionné par rapport à l'en-tête, dont il suit la hauteur mesurée.
 
+## 6 quinquies bis. Le panneau ne sort plus par la gauche en en-tête compact (28 octobre 2026)
+
+Le tableau ci-dessus ne mesurait, sur ordinateur, que l'**en-tête agrandi**
+(1 280 px : panneau à x = 912 ; 1 440 px : x = 1 072). Le cas « en-tête compact
+sur ordinateur » n'avait jamais été relevé — c'est celui du signalement « le menu
+part à gauche sur le mode ordinateur », où « Agrandir » se lit « randir » et
+« Écouter la page » « ter la page ».
+
+**Mesure de la capture** (capture système à 2×, panneau ouvert) : bord gauche de
+la fenêtre à x = 202, bord droit du panneau à x = 811. Le panneau visible fait
+donc 305 px CSS pour les 352 px que lui donne
+`min(clamp(300px, 22rem, 380px), calc(100vw - 1rem))` : **47 px sortent de
+l'écran par la gauche**. Deux indices confirment un rognage et non un décalage
+du texte — le bord gauche du cadre ne se voit pas, et un fragment d'icône
+subsiste devant chaque libellé.
+
+**Cause :** `right: 0` ancre le panneau à son bouton. Dans l'en-tête compact, les
+deux commandes se rangent au début de la barre, juste après le logo : le bouton
+« Personnalisation » finit à ~305 px du bord gauche, moins que la largeur du
+panneau. Dans l'en-tête agrandi, la rangée est centrée et le bouton se trouve
+assez à droite pour que le panneau tienne.
+
+**Correctif :** sous `@media (min-width: 761px) and (min-height: 561px)`,
+`html.entete-compacte .customize-settings-panel { right: auto; left: 0 }` — le
+panneau s'ouvre vers la droite, sous son bouton. La requête écarte elle-même les
+deux formats qui gardent leur ancrage propre (`position: fixed; left: .5rem;
+right: .5rem` sous 760 px et en paysage court) : sans ce double garde, la
+spécificité de `html.entete-compacte` l'aurait emporté sur leurs règles et aurait
+ramené le défaut sur téléphone. L'en-tête agrandi garde `right: 0`.
+
+`controler_panneau_du_menu` vérifie désormais la bascule **et sa requête**.
+Mutation rejouée : `right: auto; left: 0` remplacé par `right: 0` — détectée,
+fichier restauré à l'identique.
+
+Limite : aucun navigateur dans l'environnement de la correction ; la position est
+déduite de la capture et de la feuille de style, pas re-mesurée. Reste à relever
+une ligne « 1 280 × 900, en-tête compact » dans le tableau ci-dessus.
+
 ## 6 sexies. Finitions du panneau : la qualité se mesure aussi à l'écran (23 octobre 2026)
 
 Retour d'usage après la fusion : « c'est un affichage de haute qualité qu'il faut,

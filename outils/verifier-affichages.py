@@ -613,6 +613,27 @@ def controler_panneau_du_menu() -> list[str]:
             "site.css — le panneau « Personnalisation » n'est plus ancré sous son bouton "
             "avec un défilement interne (position: absolute; right: 0; overflow: auto)"
         )
+    # L'en-tête compact range ses deux commandes au début de la barre : ancré à
+    # droite de son bouton, le panneau de 22 rem sortait par la gauche de la
+    # fenêtre (28 octobre 2026, capture à 2× : bord gauche de la fenêtre à
+    # x = 202, bord droit du panneau à x = 811, soit 47 px hors écran et des
+    # libellés rognés). Sur ordinateur et en-tête compact, il s'ouvre vers la
+    # droite ; la requête écarte elle-même les formats qui ont leur propre
+    # ancrage (sous 761 px et en paysage court).
+    compact = re.search(
+        r"@media \(min-width: 761px\) and \(min-height: 561px\) \{\s*"
+        r"html\.entete-compacte \.customize-settings-panel \{(?P<corps>[^}]*)\}",
+        texte,
+    )
+    corps_compact = compact.group("corps") if compact else ""
+    if "left: 0" not in corps_compact or "right: auto" not in corps_compact:
+        erreurs.append(
+            "site.css — le panneau « Personnalisation » ne bascule plus vers la droite "
+            "dans l'en-tête compact sur ordinateur (html.entete-compacte "
+            ".customize-settings-panel { right: auto; left: 0 } sous min-width: 761px et "
+            "min-height: 561px) : ancré à droite d'un bouton placé au début de la barre, "
+            "il ressort par la gauche de l'écran et ses libellés sont rognés"
+        )
     # Deux commandes, deux colonnes égales : c'est la grille qui empêche le
     # libellé de se casser (« Parcour/s ») et qui laisse 32 px de haut à chaque
     # bouton. Une seule colonne sous 300 px, sinon deux colonnes de 19 px
