@@ -20,12 +20,16 @@ contrôle est identique. Code de sortie : 0 si tout est conforme, 1 sinon.
 
 from __future__ import annotations
 
+import os
 import re
 import subprocess
 import sys
 from pathlib import Path
 
-RACINE = Path(__file__).resolve().parent.parent
+#: Racine lue par le contrôle. La surcharge sert au banc de mutation
+#: (`outils/test_mutations_planches_statuts.py`), qui casse une planche, un lien
+#: d'image ou le manifeste dans une copie du dépôt.
+RACINE = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 PLAN = RACINE / "docs" / "rd" / "plan-statuts-animation.md"
 DOSSIER = RACINE / "docs" / "rd" / "statuts-animation"
 MANIFESTE = DOSSIER / "ARCHIVE-film-associatif.sha256"
@@ -105,10 +109,20 @@ def main() -> int:
             continue
         erreurs.append(f"lien d'image non résolu : {fichier.relative_to(RACINE)} → {cible}")
 
-    suivis = subprocess.run(
+    # Un dépôt git illisible ne doit pas se lire « aucun PNG suivi ». Avant le
+    # 28 octobre 2026, `git ls-files` en échec rendait une sortie vide, et le
+    # contrôle annonçait fièrement l'absence de PNG qu'il n'avait pas cherchés.
+    interrogation = subprocess.run(
         ["git", "ls-files", "docs/rd/statuts-animation"],
         cwd=RACINE, capture_output=True, text=True, check=False,
-    ).stdout.splitlines()
+    )
+    if interrogation.returncode != 0:
+        erreurs.append(
+            "dépôt git illisible depuis "
+            f"{RACINE} : le contrôle des PNG suivis n'a pas pu être fait "
+            f"({interrogation.stderr.strip().splitlines()[0] if interrogation.stderr.strip() else 'sans message'})"
+        )
+    suivis = interrogation.stdout.splitlines()
     if suivis:
         for chemin in suivis:
             if chemin.lower().endswith(".png"):

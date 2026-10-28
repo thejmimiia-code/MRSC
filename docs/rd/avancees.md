@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 29 |
+| Avancées consignées | 30 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 42 |
+| Contrôles exécutables cités | 43 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -615,6 +615,31 @@ Initiatives liées : `optimisation-du-site`, `co-conception-et-essais`.
 **Suite.** Éprouver `auditer-criteres-22.mjs` — dont le banc devra tourner dans le job `graphismes`, puisqu'il demande Chromium — puis `verifier-budgets-visuels.py`.
 
 Initiatives liées : `poids-et-sobriete-numerique`, `optimisation-du-site`.
+
+### `un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer` — Un contrôle qui n'a pas pu chercher doit le dire, pas annoncer qu'il n'a rien trouvé
+
+*Consignée le 2026-10-28.*
+
+**Constat.** `outils/verifier-planches-statuts.py` garde 12 planches citées, 203 liens d'image, 343 empreintes d'archive et l'absence de PNG suivi dans `docs/rd/statuts-animation/`. Il n'avait aucun test. En écrivant son banc, le cas « copie sans dépôt git » a révélé un défaut réel : `git ls-files` en échec renvoie une sortie vide, `splitlines()` rend une liste vide, et le contrôle annonçait « aucun PNG suivi » — il affirmait le résultat d'une recherche qu'il n'avait jamais pu faire. Le défaut ne se voyait pas dans le dépôt, où la commande réussit toujours.
+
+**Ce que cela change.** Le banc `outils/test_mutations_planches_statuts.py` plante sept situations dans une copie complète du dépôt : planche citée supprimée, référence `statuts-animation/…` sans fichier ni archive, lien d'image non résolu, manifeste à 342 empreintes, manifeste de 344 empreintes dont deux homonymes, PNG réellement suivi par `git add`, et copie privée de dépôt git. Huit tests, 1,3 s. `verifier-planches-statuts.py` honore `MRSC_RACINE` et lève une erreur explicite quand `git ls-files` échoue, au lieu de rendre un silence complice. Inventaire : `banc`, et le total passe à 28 contrôles sur 37.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-planches-statuts.py`
+- `outils/test_mutations_planches_statuts.py`
+- `outils/banc_mutations.py`
+- `docs/rd/plan-statuts-animation.md`
+- `docs/rd/statuts-animation/ARCHIVE-film-associatif.sha256`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `python3 outils/test_mutations_planches_statuts.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le banc prouve que le contrôle refuse ces sept situations, pas qu'il voit toutes les façons de casser une archive : une empreinte fausse pour un fichier présent, une planche citée depuis un fichier binaire ou un `.gitignore` trop large lui échappent. Le manifeste est vérifié en nombre, en unicité de noms et en forme de ligne, jamais en contenu : un fichier modifié sous une empreinte recopiée passerait. Et `git ls-files` reste la seule autorité sur les PNG suivis : le banc en simule l'absence de dépôt, pas une sortie incohérente.
+
+**Suite.** Vérifier aussi les empreintes elles-mêmes (`sha256sum -c` sur l'archive), puis attaquer les quatre contrôles navigateur depuis le job `graphismes`.
+
+Initiatives liées : `documentation-rd-eva`, `optimisation-du-site`.
 
 ### `un-petit-depot-cobaye-pour-les-controles-git` — Un contrôle qui lit l'historique git se teste sur un dépôt neuf, jamais sur le vrai
 
