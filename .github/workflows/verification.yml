@@ -56,8 +56,14 @@ jobs:
       - name: Vérifier la page générée du simulateur
         run: python3 outils/construire-simulateur.py --verifier
 
+      # Ce contrôle garde une règle de dépôt — « ne rien perdre en fusionnant » —
+      # et n'avait aucun test. Le banc fabrique de petits dépôts git neufs et
+      # casse une propriété à la fois (marqueur, `.orig`, ordre du journal, titre
+      # en double, branche au contenu unique), sans jamais muter le vrai dépôt.
       - name: Vérifier qu'aucune fusion n'est restée inachevée
-        run: python3 outils/verifier-fusions.py
+        run: |
+          python3 outils/verifier-fusions.py
+          python3 outils/test_mutations_fusions.py
 
       - name: Vérifier la file de relecture générée
         run: python3 outils/file-relecture.py --verifier

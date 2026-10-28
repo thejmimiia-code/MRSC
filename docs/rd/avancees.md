@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 21 |
+| Avancées consignées | 22 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 28 |
+| Contrôles exécutables cités | 30 |
 | Initiatives du portefeuille concernées | 12 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -427,7 +427,7 @@ Initiatives liées : `optimisation-du-site`.
 
 **Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
 
-**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 18 contrôles sur 37 ont désormais une preuve d'échec.
+**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 19 contrôles sur 37 ont désormais une preuve d'échec.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 
@@ -500,6 +500,29 @@ Initiatives liées : `optimisation-du-site`, `cartographier-les-lacunes`.
 **Suite.** Lors de la rédaction du prototype, vérifier qu'aucun taux ni plafond ne figure hors d'un encadré daté, puis examiner un contrôle qui signalerait dans une fiche d'économie un pourcentage présenté comme une connaissance stable.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
+
+### `un-petit-depot-cobaye-pour-les-controles-git` — Un contrôle qui lit l'historique git se teste sur un dépôt neuf, jamais sur le vrai
+
+*Consignée le 2026-10-28.*
+
+**Constat.** `outils/verifier-fusions.py` garde la règle « ne rien perdre en fusionnant » : état de fusion, marqueurs de conflit, fichiers de sauvegarde, ordre et unicité du journal, et avec `--branches` l'atteignabilité des blobs d'une branche distante. Deux régimes très différents, aucun test. L'éprouver en mutant le dépôt réel était exclu : y fabriquer une branche perdue ou un dossier `MERGE_HEAD` serait une faute, pas un test, et le banc doit pouvoir tourner sur une copie sans historique.
+
+**Ce que cela change.** `outils/test_mutations_fusions.py` fabrique à chaque cas un **petit dépôt git neuf** (deux entrées de journal, deux pages, un commit) et y casse une seule propriété : marqueur de conflit commité, `.orig` suivi, entrées de journal inversées, titres en double, branche distante portant un fichier présent nulle part ailleurs. Deux cas honnêtes restent verts et le prouvent : une branche déjà contenue dans `main` est dite telle avant toute comparaison d'objets, et une branche **recopiée** — contenu identique, commits distincts, donc pas un ancêtre — doit rester « supprimable sans perte », sinon le contrôle crierait au vol à chaque fusion par recopie. Huit tests, 0,5 s. `verifier-fusions.py` lit sa racine par `MRSC_RACINE`.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-fusions.py`
+- `outils/test_mutations_fusions.py`
+- `docs/rd/inventaire-controles.md`
+- `AGENTS.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_mutations_fusions.py && python3 outils/verifier-fusions.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Les dépôts d'essai comptent trois fichiers : le banc prouve que le contrôle réagit aux fautes plantées, pas qu'il tient sur un dépôt de 436 fichiers suivis ni sur un vrai historique de 137 entrées de journal. Le cas `MERGE_HEAD` et l'index non fusionné ne sont pas couverts, faute de pouvoir créer proprement un index conflictuel sans toucher à un dépôt réel. Enfin la suppression effective d'une branche reste une décision humaine : le contrôle dit « supprimable sans perte », il ne supprime rien.
+
+**Suite.** Éprouver les deux portes de publication (`verifier-publication-locale.py`, `verifier-integration.py`), puis `auditer-criteres-22.mjs` et son « 0 élément masqué » publié sans avoir rien pu charger.
+
+Initiatives liées : `optimisation-du-site`, `coordination-de-tous-les-agents`.
 
 ## 3. Ce que ce registre ne dit pas
 

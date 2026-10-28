@@ -2,6 +2,21 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-28 — La règle « ne rien perdre en fusionnant » est éprouvée sur des dépôts neufs
+
+- **Initiative :** `optimisation-du-site`.
+- **Deuxième point de l'ordre de rentabilité :** `outils/verifier-fusions.py`. Il garde l'état de fusion, les marqueurs de conflit, les `.orig` suivis, l'ordre antichronologique et l'unicité des titres du journal, et — avec `--branches` — l'atteignabilité des blobs de chaque branche distante. Aucun test.
+- **Ce qu'il ne fallait pas faire :** muter le dépôt réel. Fabriquer une branche perdue, un `MERGE_HEAD` ou un `.orig` suivi dans l'historique du projet serait une faute commise pour prouver qu'une faute serait vue.
+- **La solution :** `outils/test_mutations_fusions.py` crée un **petit dépôt git neuf** par cas (deux entrées de journal, deux pages, un commit) et casse une propriété à la fois — marqueur de conflit commité, `.orig` suivi, entrées de journal inversées, titres en double, branche distante au fichier unique. Huit tests, **0,5 s**: les dépôts d'essai sont plus rapides à fabriquer qu'à copier.
+- **Deux cas honnêtes, qui comptent autant que les fautes :** une branche déjà contenue dans `main` est dite « contenue dans main » **avant** toute comparaison d'objets ; une branche **recopiée** — même contenu, commits distincts, donc pas un ancêtre — est comparée blob par blob et doit rester « supprimable sans perte ». Sans ce second cas, le contrôle pourrait crier au vol à chaque fusion par recopie et personne ne l'aurait su.
+- **Un premier essai faux, corrigé :** la branche d'essai « absorbée » était un ancêtre de `main`, donc le raccourci s'appliquait et la comparaison de blobs n'était jamais atteinte. Le cas a été scindé en deux : l'ancêtre, et la recopie. Le second est le seul qui éprouve vraiment `blobs_atteignables()`.
+- **Câblage :** le banc tourne après la porte dans `verification.yml` (pas dans `deploy-pages.yml`, qui ne lance pas ce contrôle), `MRSC_RACINE` ajouté à `verifier-fusions.py`, `AGENTS.md` mentionne le cinquième banc.
+- **L'inventaire suit :** `verifier-fusions.py` passe de `aucun-test` à `banc` → **6 bancs**, **19 contrôles sur 37** avec une preuve d'échec.
+- **Un banc cassé par ce qu'il garde :** `test_verifier_inventaire_controles.py` a échoué dès que la ligne de `verifier-fusions.py` a changé de statut, parce qu'il recopiait la ligne entière en dur. La faute est instructive : un banc qui cite le document doit lire le document, sinon il interdit de le corriger. Les deux mutations concernées lisent maintenant la ligne dans la copie et n'en changent que le nécessaire.
+- **Contrôles exécutés :** `test_mutations_fusions.py` (8 tests), `verifier-fusions.py --branches` (436 fichiers suivis, branche de travail supprimable sans perte), `verifier-inventaire-controles.py`, `test_verifier_inventaire_controles.py`, `test_mutations_securite.py`, `test_mutations_affichages.py`, `test_mutations_site_statique.py`, `verifier-securite.py`, `verifier-rd-continue.py`, `construire-avancees.py --verifier` (22 avancées), `verifier-site-statique.py`, `verifier-publication-locale.py`, `verifier-integration.py`, `test_protocole_editorial.py`, chargement YAML des workflows, `git diff --check`.
+- **Limites :** les dépôts d'essai comptent trois fichiers ; le banc ne dit rien du comportement sur 436 fichiers suivis ni sur un vrai historique de 137 entrées. Ni `MERGE_HEAD` ni l'index non fusionné ne sont couverts — les créer proprement demanderait de manipuler un dépôt réel. Et le contrôle ne supprime rien : il autorise, une personne décide.
+- **Prochaine action :** `verifier-publication-locale.py` et `verifier-integration.py`, les deux portes de publication, puis `auditer-criteres-22.mjs`.
+
 ## 2026-10-28 — La porte de sécurité est vue en échec, six fois
 
 - **Initiative :** `optimisation-du-site`.

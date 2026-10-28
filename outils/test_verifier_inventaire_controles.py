@@ -29,6 +29,14 @@ OUTIL = "verifier-inventaire-controles.py"
 DOC = "docs/rd/inventaire-controles.md"
 
 
+def ligne_de(copie: Path, outil: str) -> str:
+    """Ligne du tableau décrivant `outil`, telle qu'elle est écrite dans la copie."""
+    for ligne in (copie / DOC).read_text(encoding="utf-8").splitlines():
+        if ligne.startswith(f"| `{outil}`"):
+            return ligne
+    raise AssertionError(f"{outil} n'a pas de ligne dans l'inventaire : le banc ne peut pas muter")
+
+
 class TestInventaireControles(unittest.TestCase):
     def test_copie_intacte_passe(self) -> None:
         with tempfile.TemporaryDirectory() as dossier:
@@ -52,16 +60,16 @@ class TestInventaireControles(unittest.TestCase):
         self.assertIn("absents de l'inventaire", resultat.stderr)
 
     def test_ligne_retiree_refuse(self) -> None:
-        """Retirer une ligne de l'inventaire doit être vu, pas silencieux."""
+        """Retirer une ligne de l'inventaire doit être vu, pas silencieux.
+
+        La ligne est lue dans la copie plutôt qu'écrite en dur : ce banc ne doit
+        pas casser chaque fois qu'un statut change dans le document qu'il garde.
+        """
         with tempfile.TemporaryDirectory() as dossier:
             copie = Path(dossier) / "copie"
             banc_mutations.copie_complete(copie)
-            banc_mutations.muter(
-                copie,
-                DOC,
-                "| `outils/verifier-fusions.py` | Fusion et suppression de branche sans perte | Vert de CI seulement | `aucun-test` |\n",
-                "",
-            )
+            ligne = ligne_de(copie, "outils/verifier-fusions.py")
+            banc_mutations.muter(copie, DOC, ligne, "")
             resultat = banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("outils/verifier-fusions.py", resultat.stderr)
@@ -85,12 +93,9 @@ class TestInventaireControles(unittest.TestCase):
         with tempfile.TemporaryDirectory() as dossier:
             copie = Path(dossier) / "copie"
             banc_mutations.copie_complete(copie)
-            banc_mutations.muter(
-                copie,
-                DOC,
-                "| `outils/verifier-maj-amont.py` | Retard du moteur embarqué sur l'amont | Vert de CI seulement | `aucun-test` |",
-                "| `outils/verifier-maj-amont.py` | Retard du moteur embarqué sur l'amont | Vert de CI seulement | `peut-etre` |",
-            )
+            ligne = ligne_de(copie, "outils/verifier-maj-amont.py")
+            statut = ligne.rsplit("`", 2)[1]
+            banc_mutations.muter(copie, DOC, ligne, ligne.replace(f"`{statut}`", "`peut-etre`"))
             resultat = banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("statut inconnu", resultat.stderr)
