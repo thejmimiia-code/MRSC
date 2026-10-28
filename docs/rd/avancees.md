@@ -4,14 +4,14 @@
 
 **À quoi cela sert :** un autre agent reprend le projet sans avoir à reconstituer l'histoire. Chaque entrée dit aussi ce qu'elle ne prouve pas, pour qu'une avancée ne se transforme pas en argument d'autorité.
 
-**Date du registre :** 2026-10-24 — dernière revue consignée dans `avancees.toml`. Cette sortie ne dépend pas du jour où elle est régénérée.
+**Date du registre :** 2026-10-28 — dernière revue consignée dans `avancees.toml`. Cette sortie ne dépend pas du jour où elle est régénérée.
 
 ## 1. Vue d'ensemble
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 17 |
-| Période couverte | du 2026-10-20 au 2026-10-24 |
+| Avancées consignées | 18 |
+| Période couverte | du 2026-10-20 au 2026-10-28 |
 | Contrôles exécutables cités | 22 |
 | Initiatives du portefeuille concernées | 12 |
 
@@ -408,6 +408,28 @@ Initiatives liées : `optimisation-du-site`, `ecouter-la-page`.
 **Suite.** Étendre le contrôle aux autres visuels et aux densités supérieures, mesurer le contraste et faire relire la direction photographique.
 
 Initiatives liées : `optimisation-du-site`.
+
+### `taux-date-hors-de-la-fiche` — Un taux daté n'entre pas dans une fiche : on enseigne la vérification, pas le chiffre
+
+*Consignée le 2026-10-28.*
+
+**Constat.** La fiche F2302 de Service-Public, vérifiée le 1er janvier 2026, publie des taux et des plafonds de cotisations salariales (assurance vieillesse, CSG dont une part non déductible, CRDS, retraites complémentaires) qui changent en tout ou partie à chaque exercice. Une fiche qui écrirait « la CSG est de 9,2 % » deviendrait fausse sans qu'aucun contrôle du dépôt ne le voie : ni `auditer-prototypes.py`, qui juge la forme et les sources, ni le prototype de confrontation, qui cherche des ancres lexicales, ne comparent un barème à sa date.
+
+**Ce que cela change.** La carte `docs/rd/sujet-revenus-salaire-impots.md` borne le sujet à ce qui ne vieillit pas : l'ordre de lecture d'un bulletin fictif, les deux soustractions à refaire, et la distinction des trois montants appelés « net » (à payer, imposable, social). Les taux et plafonds sont cités une fois, avec la date de vérification de l'éditeur, puis renvoyés à la source officielle ; la fiche à venir ne doit en recopier aucun.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/sujet-revenus-salaire-impots.md`
+- `docs/rd/carte-lacunes.md`
+- `docs/rd/portefeuille.toml`
+
+**Contrôle qui la maintient :** `python3 outils/construire-carte-lacunes.py --verifier && python3 outils/construire-avancees.py --verifier && python3 outils/verifier-rd-continue.py`
+
+**Limite — ce que cela ne prouve pas.** Cette règle n'est pas automatisée : rien ne détecte aujourd'hui un pourcentage ou un plafond en euros écrit dans une fiche sans date, et la carte n'est pas une fiche. Aucune relecture par une personne compétente en paie ou en droit du travail n'a eu lieu, aucun essai avec des personnes non plus, et les quatre pages ont été lues une seule fois, le 28 octobre 2026 : une réforme peut les changer avant la première fiche.
+
+**Suite.** Lors de la rédaction du prototype, vérifier qu'aucun taux ni plafond ne figure hors d'un encadré daté, puis examiner un contrôle qui signalerait dans une fiche d'économie un pourcentage présenté comme une connaissance stable.
+
+Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 
 ## 3. Ce que ce registre ne dit pas
 
