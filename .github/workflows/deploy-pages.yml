@@ -67,6 +67,14 @@ jobs:
           python3 outils/test_sources_refusees.py
           python3 outils/construire-sources-refusees.py --verifier
 
+      # La fiche est publiée : ses chiffres le sont aussi. Le contrôle tourne donc
+      # à la publication et pas seulement sur les pull requests, comme les
+      # garde-fous d'affichage depuis le 25 octobre 2026.
+      - name: Validate that dated rates carry their date
+        run: |
+          python3 outils/test_verifier_taux_dates.py
+          python3 outils/verifier-taux-dates.py
+
       - name: Validate the editorial protocol
         run: python3 outils/test_protocole_editorial.py
 
