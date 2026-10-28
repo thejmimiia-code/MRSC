@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 28 |
+| Avancées consignées | 30 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 41 |
+| Contrôles exécutables cités | 43 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -427,7 +427,7 @@ Initiatives liées : `optimisation-du-site`.
 
 **Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
 
-**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 26 contrôles sur 37 ont désormais une preuve d'échec.
+**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 27 contrôles sur 37 ont désormais une preuve d'échec.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 
@@ -616,6 +616,31 @@ Initiatives liées : `optimisation-du-site`, `co-conception-et-essais`.
 
 Initiatives liées : `poids-et-sobriete-numerique`, `optimisation-du-site`.
 
+### `un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer` — Un contrôle qui n'a pas pu chercher doit le dire, pas annoncer qu'il n'a rien trouvé
+
+*Consignée le 2026-10-28.*
+
+**Constat.** `outils/verifier-planches-statuts.py` garde 12 planches citées, 203 liens d'image, 343 empreintes d'archive et l'absence de PNG suivi dans `docs/rd/statuts-animation/`. Il n'avait aucun test. En écrivant son banc, le cas « copie sans dépôt git » a révélé un défaut réel : `git ls-files` en échec renvoie une sortie vide, `splitlines()` rend une liste vide, et le contrôle annonçait « aucun PNG suivi » — il affirmait le résultat d'une recherche qu'il n'avait jamais pu faire. Le défaut ne se voyait pas dans le dépôt, où la commande réussit toujours.
+
+**Ce que cela change.** Le banc `outils/test_mutations_planches_statuts.py` plante sept situations dans une copie complète du dépôt : planche citée supprimée, référence `statuts-animation/…` sans fichier ni archive, lien d'image non résolu, manifeste à 342 empreintes, manifeste de 344 empreintes dont deux homonymes, PNG réellement suivi par `git add`, et copie privée de dépôt git. Huit tests, 1,3 s. `verifier-planches-statuts.py` honore `MRSC_RACINE` et lève une erreur explicite quand `git ls-files` échoue, au lieu de rendre un silence complice. Inventaire : `banc`, et le total passe à 28 contrôles sur 37.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-planches-statuts.py`
+- `outils/test_mutations_planches_statuts.py`
+- `outils/banc_mutations.py`
+- `docs/rd/plan-statuts-animation.md`
+- `docs/rd/statuts-animation/ARCHIVE-film-associatif.sha256`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `python3 outils/test_mutations_planches_statuts.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le banc prouve que le contrôle refuse ces sept situations, pas qu'il voit toutes les façons de casser une archive : une empreinte fausse pour un fichier présent, une planche citée depuis un fichier binaire ou un `.gitignore` trop large lui échappent. Le manifeste est vérifié en nombre, en unicité de noms et en forme de ligne, jamais en contenu : un fichier modifié sous une empreinte recopiée passerait. Et `git ls-files` reste la seule autorité sur les PNG suivis : le banc en simule l'absence de dépôt, pas une sortie incohérente.
+
+**Suite.** Vérifier aussi les empreintes elles-mêmes (`sha256sum -c` sur l'archive), puis attaquer les quatre contrôles navigateur depuis le job `graphismes`.
+
+Initiatives liées : `documentation-rd-eva`, `optimisation-du-site`.
+
 ### `un-petit-depot-cobaye-pour-les-controles-git` — Un contrôle qui lit l'historique git se teste sur un dépôt neuf, jamais sur le vrai
 
 *Consignée le 2026-10-28.*
@@ -661,6 +686,29 @@ Initiatives liées : `optimisation-du-site`, `coordination-de-tous-les-agents`.
 **Suite.** Éprouver les deux outils de la file de relecture (`file-relecture.py`, `construire-paquets-relecture.py`), puis passer à `auditer-criteres-22.mjs` depuis le job `graphismes`.
 
 Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
+
+### `une-sentinelle-reseau-se-teste-sans-reseau` — Une sentinelle réseau se teste sans réseau, en substituant sa sonde et non sa décision
+
+*Consignée le 2026-10-28.*
+
+**Constat.** `outils/verifier-maj-amont.py` compare la révision embarquée dans `simulateur/PROVENANCE.json` à celle de la branche `main` du dépôt amont, et sort en erreur quand une mise à jour est disponible. Ce code 1 est son signal utile : `maj-simulateur.yml` en fait une alerte. Rien ne prouvait pourtant qu'il distinguait trois états très différents — à jour, en retard, amont injoignable — et une panne réseau qui se lirait « rien à signaler » serait le pire des défauts, parce qu'il ressemble à une bonne nouvelle.
+
+**Ce que cela change.** `outils/test_verifier_maj_amont.py` charge l'outil en mémoire, remplace `revision_amont` par une valeur fixe ou par une fonction qui échoue, et lit la provenance d'une copie du dépôt : quatre cas — amont identique (code 0, « à jour »), amont plus récent (code 1, « Mise à jour disponible » et la commande à lancer), amont injoignable (arrêt non nul, jamais le mot « à jour »), sortie `--json` (`a_jour: false`, révisions présentes). Quatre tests, 0,2 s, sans aucun accès réseau.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-maj-amont.py`
+- `outils/test_verifier_maj_amont.py`
+- `simulateur/PROVENANCE.json`
+- `.github/workflows/maj-simulateur.yml`
+
+**Contrôle qui la maintient :** `python3 outils/test_verifier_maj_amont.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** La sonde `git ls-remote` n'est jamais exercée : le test remplace la fonction qui l'appelle, donc il prouve la décision et pas la lecture du réseau — d'où le classement en `faute-en-memoire`, pas en `banc`. Un changement de format de sortie de `git ls-remote` lui échapperait. Le test ne dit rien non plus de la mise à jour elle-même, qui reste une opération relue et validée par une personne.
+
+**Suite.** Éprouver `verifier-planches-statuts.py`, puis attaquer les quatre contrôles navigateur depuis le job `graphismes`.
+
+Initiatives liées : `documentation-rd-eva`, `veille-savoirs-evolutifs`.
 
 ## 3. Ce que ce registre ne dit pas
 

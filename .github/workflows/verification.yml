@@ -56,6 +56,12 @@ jobs:
       - name: Vérifier la page générée du simulateur
         run: python3 outils/construire-simulateur.py --verifier
 
+      # `verifier-maj-amont.py` interroge le dépôt amont en réseau : il ne tourne
+      # pas ici. Ce qui tourne, c'est sa décision — révision identique, révision
+      # en retard, amont injoignable, sortie JSON — avec la sonde remplacée.
+      - name: Vérifier la décision de la sentinelle du moteur embarqué
+        run: python3 outils/test_verifier_maj_amont.py
+
       # Ce contrôle garde une règle de dépôt — « ne rien perdre en fusionnant » —
       # et n'avait aucun test. Le banc fabrique de petits dépôts git neufs et
       # casse une propriété à la fois (marqueur, `.orig`, ordre du journal, titre
@@ -196,8 +202,15 @@ jobs:
           python3 outils/verifier-poids-pages.py
           python3 outils/test_mutations_poids_pages.py
 
+      # Ce contrôle garde 12 planches, 203 liens d'image et 343 empreintes
+      # d'archive : beaucoup de surface, aucune preuve qu'il refuse. Le banc
+      # casse une planche, une référence, un lien, deux fois le manifeste, suit
+      # un PNG, et retire le dépôt git — car un `git ls-files` en échec rendait
+      # autrefois « aucun PNG suivi » au lieu d'un doute. Copie complète, 1,3 s.
       - name: Vérifier les planches des statuts et leur archive
-        run: python3 outils/verifier-planches-statuts.py
+        run: |
+          python3 outils/verifier-planches-statuts.py
+          python3 outils/test_mutations_planches_statuts.py
 
       # Cette porte garde les frontières HTTP et WSGI, la provenance navigateur,
       # la liste statique et l'épinglage des actions : elle n'avait aucun test
