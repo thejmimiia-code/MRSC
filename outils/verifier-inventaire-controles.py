@@ -93,7 +93,9 @@ def controler() -> list[str]:
             erreurs.append(f"{outil} : statut inconnu « {statut} » (admis : {', '.join(STATUTS)})")
             continue
         if STATUTS[statut]:
-            cites = re.findall(r"`(test_[a-z0-9_-]+\.(?:py|cjs))`", entree["reste"])
+            # `.mjs` depuis le 28 octobre 2026 : `test_auditer_criteres_22.mjs` éprouve
+            # un script Node, et l'inventaire refusait de le citer.
+            cites = re.findall(r"`(test_[a-z0-9_-]+\.(?:py|cjs|mjs))`", entree["reste"])
             if not cites:
                 erreurs.append(
                     f"{outil} : statut « {statut} » sans fichier de test cité pour le justifier"

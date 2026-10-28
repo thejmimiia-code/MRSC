@@ -341,7 +341,23 @@ async function main() {
       bilan.cibles.conformes += cibles.conformes;
       bilan.cibles.enLigne += cibles.enLigne.length;
       bilan.cibles.espacees += cibles.espacees.length;
-      for (const cible of cibles.aCorriger) bilan.cibles.aCorriger.push({ page, largeur, ...cible });
+      // Les dimensions de la cible sont nommées, pas étalées : `...cible`
+      // portait une clé `largeur` qui écrasait la largeur de la fenêtre. Le
+      // défaut ne se voyait que lorsqu'il y avait quelque chose à corriger —
+      // le relevé du 24 octobre 2026, qui en comptait zéro, reste juste — et
+      // affichait alors « @16 » au lieu de « @1280 ». Trouvé le 28 octobre 2026
+      // par `outils/test_auditer_criteres_22.mjs`.
+      for (const cible of cibles.aCorriger) {
+        bilan.cibles.aCorriger.push({
+          page,
+          largeur,
+          balise: cible.balise,
+          classe: cible.classe,
+          texte: cible.texte,
+          largeurCible: cible.largeur,
+          hauteurCible: cible.hauteur,
+        });
+      }
       if (mesurerEspacementActif) {
         const espacement = await mesurerEspacement(onglet);
         bilan.espacement.pages += 1;
@@ -387,7 +403,7 @@ async function main() {
   if (cibles.aCorriger.length) {
     for (const cible of cibles.aCorriger.slice(0, 30)) {
       console.log(`  à corriger — ${cible.page} @${cible.largeur} : ${cible.balise}.${cible.classe} `
-        + `${cible.largeur}×${cible.hauteur} « ${cible.texte} »`);
+        + `${cible.largeurCible}×${cible.hauteurCible} « ${cible.texte} »`);
     }
   }
   if (mesurerEspacementActif) {

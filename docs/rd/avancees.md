@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 30 |
+| Avancées consignées | 31 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 43 |
+| Contrôles exécutables cités | 44 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -640,6 +640,31 @@ Initiatives liées : `poids-et-sobriete-numerique`, `optimisation-du-site`.
 **Suite.** Vérifier aussi les empreintes elles-mêmes (`sha256sum -c` sur l'archive), puis attaquer les quatre contrôles navigateur depuis le job `graphismes`.
 
 Initiatives liées : `documentation-rd-eva`, `optimisation-du-site`.
+
+### `un-faux-navigateur-prouve-le-contrat-pas-la-mesure` — Un faux navigateur prouve le contrat de sortie, et il a trouvé un vrai défaut de rapport
+
+*Consignée le 2026-10-28.*
+
+**Constat.** `outils/auditer-criteres-22.mjs` mesure trois critères WCAG dans un vrai Chromium et n'avait aucun test. Sa géométrie ne se teste pas sans navigateur, mais son contrat de sortie si — et c'est là qu'il a menti une fois : sans serveur local, il rendait « 0 cible, 0 élément testé », c'est-à-dire une page parfaite. En écrivant le banc, un second défaut est apparu, latent : la ligne des cibles à corriger poussait `{ page, largeur, ...cible }`, et la cible portait elle aussi une clé `largeur`. La largeur de fenêtre était donc écrasée par la largeur de la cible, dans le compte rendu comme dans le JSON — mais seulement quand il y avait quelque chose à corriger. Le relevé du 24 octobre 2026, qui en comptait zéro, était juste par accident.
+
+**Ce que cela change.** Deux faux paquets (`outils/faux-navigateur/puppeteer-core` et `@sparticuz/chromium`) sont copiés dans un `node_modules` jetable, et `outils/test_auditer_criteres_22.mjs` lance **le vrai script** quatre fois : nominal, échec total (code 1, « Toutes les pages ont échoué », aucune ligne de bilan), échec partiel (le doute est écrit, la page en échec est nommée), défauts (cible trop petite, débordement, rognage, focus masqué, passe coupée par le plafond). 4 cas, 4 s, aucun binaire. Le rapport nomme désormais `largeurCible` et `hauteurCible` à côté de `largeur`, la fenêtre.
+
+**Preuves dans le dépôt :**
+
+- `outils/auditer-criteres-22.mjs`
+- `outils/test_auditer_criteres_22.mjs`
+- `outils/faux-navigateur/puppeteer-core/index.js`
+- `outils/faux-navigateur/@sparticuz/chromium/index.js`
+- `outils/verifier-inventaire-controles.py`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `node outils/test_auditer_criteres_22.mjs && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le banc ne mesure rien : il regarde ce que le script fait de mesures qu'on lui donne. La justesse de la géométrie — taille réelle d'une cible, recouvrement réel d'un bandeau, rognage réel d'un texte — reste hors de sa portée, et c'est pourquoi l'inventaire le classe `faute-en-memoire` et non `banc`. Le faux onglet départage la description d'une cible de ses points par le rang d'appel, ce qui casse si le script change l'ordre de ses appels ; et aucun banc ne couvre encore `verifier-accessibilite.cjs` ni `verifier-fiches-statistiques.cjs`, qui demandent, eux, un vrai Chromium.
+
+**Suite.** Éprouver les deux contrôles navigateur restants dans le job `graphismes` (le banc y a sa place : il lui faut un vrai Chromium), puis `etat-rd.py`.
+
+Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 
 ### `un-petit-depot-cobaye-pour-les-controles-git` — Un contrôle qui lit l'historique git se teste sur un dépôt neuf, jamais sur le vrai
 
