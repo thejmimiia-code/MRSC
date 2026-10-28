@@ -91,6 +91,15 @@ jobs:
       - name: Vérifier le portefeuille et la continuité R&D
         run: python3 outils/verifier-rd-continue.py
 
+      # L'inventaire `docs/rd/inventaire-controles.md` répond, outil par outil,
+      # à « qu'est-ce qui prouve que ce contrôle peut échouer ? ». Ce garde-là
+      # empêche l'oubli ; son banc plante cinq fautes dans une copie du dépôt,
+      # dont celle qui compte : un outil ajouté sans ligne dans l'inventaire.
+      - name: Vérifier que l'inventaire des contrôles reste complet
+        run: |
+          python3 outils/test_verifier_inventaire_controles.py
+          python3 outils/verifier-inventaire-controles.py
+
       - name: Vérifier les faits internes du brief prospectif
         run: |
           python3 outils/test_verifier_decision_prospective.py

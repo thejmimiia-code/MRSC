@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 19 |
+| Avancées consignées | 20 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 24 |
+| Contrôles exécutables cités | 26 |
 | Initiatives du portefeuille concernées | 12 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -427,9 +427,33 @@ Initiatives liées : `optimisation-du-site`.
 
 **Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
 
-**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). La suite n'est plus de traiter les outils un par un mais d'écrire l'inventaire des 42 : pour chacun, « banc de mutation », « test sans mutation » ou « écarté, et pourquoi » — `verifier-securite.py`, `verifier-fusions.py` et `auditer-criteres-22.mjs` sont les candidats les plus rentables.
+**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). La suite est de combler les écarts par ordre de rentabilité, en commençant par `verifier-securite.py`.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
+
+### `inventaire-des-controles-tenu-par-un-garde` — Un inventaire des contrôles ne vaut que s'il échoue quand on l'oublie
+
+*Consignée le 2026-10-28.*
+
+**Constat.** Le 28 octobre 2026, l'inventaire écrit des outils du dépôt a rendu un chiffre désagréable : sur 37 contrôles, 17 seulement s'appuient sur un test capable d'échouer. Mais un inventaire tenu à la main devient faux au premier outil ajouté, et rien dans la CI ne l'aurait signalé : le document aurait décrit un dépôt qui n'existe plus, en donnant l'impression que le sujet était traité.
+
+**Ce que cela change.** `outils/verifier-inventaire-controles.py` lit le tableau de `docs/rd/inventaire-controles.md` et échoue si un fichier d'`outils/` n'y figure pas, si une ligne désigne un outil absent, si un statut sort des six admis ou si le fichier de test annoncé n'existe pas. Il ne juge pas les statuts — il empêche seulement l'inventaire de mentir par omission. Son propre banc, `outils/test_verifier_inventaire_controles.py`, plante cinq fautes dans une copie complète du dépôt, dont celle qui compte : un outil ajouté sans ligne. Les deux tournent dans `verification.yml` et dans `deploy-pages.yml`, et `AGENTS.md` exige la ligne dans le même commit que l'outil.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-inventaire-controles.py`
+- `outils/test_verifier_inventaire_controles.py`
+- `docs/rd/inventaire-controles.md`
+- `AGENTS.md`
+- `outils/banc_mutations.py`
+
+**Contrôle qui la maintient :** `python3 outils/test_verifier_inventaire_controles.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le garde vérifie la forme de l'inventaire, jamais la justesse d'un statut : une ligne qui déclare `banc` en citant un test existant mais sans rapport passerait. La couverture repose sur une convention de nommage (`test_*`, `__*` exclus) : un outil rangé ailleurs, ou un fichier d'aide nommé comme un contrôle, fausse le compte sans être vu. Enfin l'inventaire lui-même n'a été rempli qu'en lisant les tests, sans exécuter chaque mutation possible — c'est un jugement daté, pas une mesure.
+
+**Suite.** Prendre les contrôles par ordre de rentabilité écrite dans l'inventaire : `verifier-securite.py` n'a aucun test, puis `verifier-fusions.py`, puis les deux portes de publication, puis `auditer-criteres-22.mjs` et son « 0 élément masqué » publié sans avoir rien pu charger. Chaque nouveau banc met à jour la ligne correspondante dans le même commit.
+
+Initiatives liées : `optimisation-du-site`, `cartographier-les-lacunes`.
 
 ### `taux-date-hors-de-la-fiche` — Un taux daté n'entre pas dans une fiche : on enseigne la vérification, pas le chiffre
 
