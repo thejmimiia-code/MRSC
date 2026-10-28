@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 23 |
+| Avancées consignées | 24 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 32 |
+| Contrôles exécutables cités | 34 |
 | Initiatives du portefeuille concernées | 13 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -427,7 +427,7 @@ Initiatives liées : `optimisation-du-site`.
 
 **Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
 
-**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 20 contrôles sur 37 ont désormais une preuve d'échec.
+**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 21 contrôles sur 37 ont désormais une preuve d'échec.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 
@@ -523,6 +523,29 @@ Initiatives liées : `optimisation-du-site`, `cartographier-les-lacunes`.
 **Suite.** Lors de la rédaction du prototype, vérifier qu'aucun taux ni plafond ne figure hors d'un encadré daté, puis examiner un contrôle qui signalerait dans une fiche d'économie un pourcentage présenté comme une connaissance stable.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
+
+### `un-banc-coute-le-prix-de-ce-qu-il-eprouve` — Un banc coûte le prix de ce qu'il éprouve, et ce prix se décide
+
+*Consignée le 2026-10-28.*
+
+**Constat.** `outils/verifier-integration.py` — 1 599 lignes, seize routes montées comme le fait Vercel, les chiffres annoncés en prose recalculés depuis le catalogue, les ressources orphelines traquées — n'était éprouvé que par son propre vert. Son banc est le plus lent du dépôt : la porte lance elle-même quatre outils et un serveur, soit 21 secondes par exécution.
+
+**Ce que cela change.** `outils/test_mutations_integration.py` plante trois fautes — une ressource ajoutée à `assets/` que rien ne cite, un nombre annoncé dans `apprendre.html` qui ne correspond plus au catalogue, une page publique supprimée — et retient la leçon de coût : 67 secondes pour quatre tests. Les autres bancs tournent aussi à la publication ; celui-ci reste sur les pull requests, parce que rejouer les mêmes trois fautes après chaque fusion n'apprend rien de neuf et doublerait la durée du travail de mise en ligne. Le choix est écrit dans le workflow, à l'endroit où il s'applique, et non seulement dans le journal.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-integration.py`
+- `outils/test_mutations_integration.py`
+- `.github/workflows/verification.yml`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_mutations_integration.py && python3 outils/verifier-integration.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Trois fautes ne couvrent ni les routes HTTP — éprouvées par `verifier-securite.py` — ni les contrôles que la porte délègue à d'autres outils (`construire-simulateur.py`, `generer-fonctions-api.py`, `verifier-site-statique.py`, `verifier-rd-continue.py`), dont deux ne lisent pas `MRSC_RACINE` : une mutation visant leur sortie serait restée invisible. Le banc coûte 67 s de CI à chaque pull request, et cette dépense se justifie par l'enjeu, pas par la vitesse.
+
+**Suite.** Éprouver `auditer-criteres-22.mjs`, qui a déjà publié « 0 élément masqué » sans avoir rien pu charger, puis `verifier-rd-continue.py`.
+
+Initiatives liées : `optimisation-du-site`, `co-conception-et-essais`.
 
 ### `un-petit-depot-cobaye-pour-les-controles-git` — Un contrôle qui lit l'historique git se teste sur un dépôt neuf, jamais sur le vrai
 

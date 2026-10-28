@@ -2,6 +2,19 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-28 — La porte d'intégration est éprouvée, et son banc a un prix
+
+- **Initiative :** `optimisation-du-site`.
+- **Quatrième et dernier point de l'ordre de rentabilité initial :** `outils/verifier-integration.py`. 1 599 lignes, seize routes montées comme le fait Vercel, les nombres écrits en prose recalculés depuis `catalogue.toml`, les ressources de `assets/` traquées quand plus rien ne les cite. Rien ne l'éprouvait ailleurs que par son propre vert.
+- **Trois fautes, trois familles :** une ressource ajoutée à `assets/` que rien ne cite ; un total annoncé dans `apprendre.html` qui ne correspond plus au catalogue ; une page publique supprimée. Elles couvrent ce que la porte vérifie **elle-même**, pas ce qu'elle délègue.
+- **Une limite trouvée en écrivant le banc :** deux des outils que la porte lance en sous-processus — `construire-simulateur.py` et `generer-fonctions-api.py` — ne lisent pas `MRSC_RACINE`. Ils auraient donc vérifié le **vrai** dépôt pendant qu'on croyait éprouver la copie. Le choix assumé est de ne pas les muter et de l'écrire, plutôt que d'ajouter la variable à deux outils de plus dans le même lot.
+- **Le prix, et la décision qu'il impose :** `verifier-integration.py` lance quatre outils et un serveur à chaque exécution, soit 21 s. Le banc complet prend **67 s** — de loin le plus cher du dépôt (les autres vont de 0,5 à 15 s). Il tourne donc **sur les pull requests seulement** : rejouer trois fois les mêmes fautes à chaque publication n'apprend rien et doublerait la durée du travail de mise en ligne. Ce choix est écrit dans `verification.yml`, à l'endroit où il s'applique.
+- **Câblage :** `MRSC_RACINE` ajouté à `verifier-integration.py` (import des modules de `simulateur/` compris), banc lancé après la porte dans `qualite`, `AGENTS.md` mentionne le septième banc et son coût.
+- **L'inventaire suit :** `verifier-integration.py` passe de `aucun-test` à `banc` → **8 bancs**, **21 contrôles sur 37** avec une preuve d'échec. La liste « par où continuer » est réécrite : elle pointe désormais `auditer-criteres-22.mjs` puis `verifier-rd-continue.py`.
+- **Contrôles exécutés :** `test_mutations_integration.py` (4 tests, 66,6 s), `verifier-integration.py` (tous les contrôles passent), `verifier-inventaire-controles.py`, `test_verifier_inventaire_controles.py`, `test_mutations_publication_locale.py`, `test_mutations_fusions.py`, `test_mutations_securite.py`, `test_mutations_affichages.py`, `test_mutations_site_statique.py`, `verifier-site-statique.py`, `verifier-publication-locale.py`, `verifier-securite.py`, `verifier-fusions.py`, `verifier-rd-continue.py`, `construire-avancees.py --verifier` (24 avancées), `test_protocole_editorial.py`, chargement YAML du workflow, `git diff --check`.
+- **Limites :** les routes HTTP de la porte ne sont pas éprouvées ici — `verifier-securite.py` les couvre et a son propre banc ; les contrôles délégués non plus, ce qui laisse deux outils hors d'atteinte du banc tant qu'ils ne lisent pas `MRSC_RACINE`. Le banc coûte 67 s à chaque pull request : c'est une dépense assumée, pas une optimisation oubliée.
+- **Prochaine action :** `auditer-criteres-22.mjs`, qui a publié « 0 élément masqué » alors qu'il n'avait rien pu charger, puis `verifier-rd-continue.py`.
+
 ## 2026-10-28 — La porte de publication se prouve en retirant un fichier de sa liste
 
 - **Initiative :** `optimisation-du-site`.
