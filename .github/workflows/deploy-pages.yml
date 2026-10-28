@@ -60,6 +60,13 @@ jobs:
       - name: Validate the R&D portfolio
         run: python3 outils/verifier-rd-continue.py
 
+      # Ce qui publie est ce qui doit rendre des comptes : l'inventaire des
+      # contrôles est vérifié ici aussi, pas seulement sur les pull requests.
+      - name: Validate the control inventory
+        run: |
+          python3 outils/test_verifier_inventaire_controles.py
+          python3 outils/verifier-inventaire-controles.py
+
       - name: Validate the mechanical audit and the human review register
         run: |
           python3 outils/auditer-prototypes.py --verifier
