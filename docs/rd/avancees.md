@@ -10,10 +10,10 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 24 |
+| Avancées consignées | 25 |
 | Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 34 |
-| Initiatives du portefeuille concernées | 13 |
+| Contrôles exécutables cités | 35 |
+| Initiatives du portefeuille concernées | 14 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
 
@@ -427,7 +427,7 @@ Initiatives liées : `optimisation-du-site`.
 
 **Limite — ce que cela ne prouve pas.** Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle.
 
-**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 21 contrôles sur 37 ont désormais une preuve d'échec.
+**Suite.** Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 22 contrôles sur 37 ont désormais une preuve d'échec.
 
 Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 
@@ -454,6 +454,29 @@ Initiatives liées : `cartographier-les-lacunes`, `relire-les-44-prototypes`.
 **Suite.** Prendre les contrôles par ordre de rentabilité écrite dans l'inventaire : `verifier-securite.py` n'a aucun test, puis `verifier-fusions.py`, puis les deux portes de publication, puis `auditer-criteres-22.mjs` et son « 0 élément masqué » publié sans avoir rien pu charger. Chaque nouveau banc met à jour la ligne correspondante dans le même commit.
 
 Initiatives liées : `optimisation-du-site`, `cartographier-les-lacunes`.
+
+### `la-memoire-du-projet-a-son-banc` — La mémoire du projet est un contrôle comme un autre : elle doit savoir échouer
+
+*Consignée le 2026-10-28.*
+
+**Constat.** `outils/verifier-rd-continue.py` garde ce qui rend la R&D reprenable : les skills des agents, le portefeuille d'initiatives, les avancées, les sources refusées, le registre de relecture, ce que la page de transparence en dit, et l'horaire de la veille. C'est la partie du dépôt qui décide de la suite du travail — et sa seule preuve était son propre vert. Un contrôle qui se tromperait sur le portefeuille aurait l'air aussi rassurant qu'un contrôle juste.
+
+**Ce que cela change.** `outils/test_mutations_rd_continue.py` plante quatre fautes dans une copie complète : une initiative privée de son champ `question`, une section `## Garde-fous` retirée d'un skill, l'ancre `rd-innovation` renommée dans `transparence.html`, et la veille hebdomadaire décalée du lundi au mardi. Cinq tests, 5 s, lancés dans `verification.yml` et dans `deploy-pages.yml`. `verifier-rd-continue.py` lit sa racine par `MRSC_RACINE`.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-rd-continue.py`
+- `outils/test_mutations_rd_continue.py`
+- `docs/rd/portefeuille.toml`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_mutations_rd_continue.py && python3 outils/verifier-rd-continue.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Les quatre fautes couvrent quatre familles, pas les trente-six contrôles du fichier : la carte des lacunes, les paquets de relecture, l'audit automatique et le registre des relectures restent éprouvés seulement par leur propre lecture. La mutation du skill a un effet en cascade sur le portefeuille, ce qui rend le message exact mais plus long : le banc vérifie le premier message, pas la liste complète. Rien ici ne dit qu'un portefeuille rempli soit un portefeuille juste.
+
+**Suite.** Éprouver `auditer-criteres-22.mjs` — dont le banc devra tourner dans le job `graphismes`, puisqu'il demande Chromium — puis `verifier-poids-pages.py`, la promesse publique de sobriété.
+
+Initiatives liées : `coordination-de-tous-les-agents`, `documentation-rd-eva`.
 
 ### `la-porte-de-publication-se-prouve-en-retirant-un-fichier` — Une porte de publication se prouve en retirant un fichier de sa propre liste
 

@@ -15,6 +15,23 @@ derniere_revue = 2026-10-28
 regle = "Une entrée n'entre ici qu'avec une preuve locale, un contrôle exécutable et une limite écrite ; sinon elle reste une note de journal."
 
 [[avancee]]
+id = "la-memoire-du-projet-a-son-banc"
+date = 2026-10-28
+titre = "La mémoire du projet est un contrôle comme un autre : elle doit savoir échouer"
+constat = "`outils/verifier-rd-continue.py` garde ce qui rend la R&D reprenable : les skills des agents, le portefeuille d'initiatives, les avancées, les sources refusées, le registre de relecture, ce que la page de transparence en dit, et l'horaire de la veille. C'est la partie du dépôt qui décide de la suite du travail — et sa seule preuve était son propre vert. Un contrôle qui se tromperait sur le portefeuille aurait l'air aussi rassurant qu'un contrôle juste."
+changement = "`outils/test_mutations_rd_continue.py` plante quatre fautes dans une copie complète : une initiative privée de son champ `question`, une section `## Garde-fous` retirée d'un skill, l'ancre `rd-innovation` renommée dans `transparence.html`, et la veille hebdomadaire décalée du lundi au mardi. Cinq tests, 5 s, lancés dans `verification.yml` et dans `deploy-pages.yml`. `verifier-rd-continue.py` lit sa racine par `MRSC_RACINE`."
+preuves = [
+  "outils/verifier-rd-continue.py",
+  "outils/test_mutations_rd_continue.py",
+  "docs/rd/portefeuille.toml",
+  "docs/rd/inventaire-controles.md",
+]
+controle = "python3 outils/test_mutations_rd_continue.py && python3 outils/verifier-rd-continue.py && python3 outils/verifier-inventaire-controles.py"
+limite = "Les quatre fautes couvrent quatre familles, pas les trente-six contrôles du fichier : la carte des lacunes, les paquets de relecture, l'audit automatique et le registre des relectures restent éprouvés seulement par leur propre lecture. La mutation du skill a un effet en cascade sur le portefeuille, ce qui rend le message exact mais plus long : le banc vérifie le premier message, pas la liste complète. Rien ici ne dit qu'un portefeuille rempli soit un portefeuille juste."
+suite = "Éprouver `auditer-criteres-22.mjs` — dont le banc devra tourner dans le job `graphismes`, puisqu'il demande Chromium — puis `verifier-poids-pages.py`, la promesse publique de sobriété."
+initiatives = ["coordination-de-tous-les-agents", "documentation-rd-eva"]
+
+[[avancee]]
 id = "un-banc-coute-le-prix-de-ce-qu-il-eprouve"
 date = 2026-10-28
 titre = "Un banc coûte le prix de ce qu'il éprouve, et ce prix se décide"
@@ -114,7 +131,7 @@ preuves = [
 ]
 controle = "python3 outils/test_verifier_taux_dates.py && python3 outils/verifier-taux-dates.py && python3 outils/verifier-rd-continue.py"
 limite = "Le contrôle ne lit que des chiffres écrits en pourcentage ou en euros et qu'un vocabulaire fermé de droit, de fiscalité et de protection sociale : une règle écrite en toutes lettres (« le dixième du brut ») ou un taux cité sans le mot attendu lui échappent, et il ne compare aucun barème à sa date. Ses quatorze tests disent qu'il détecte les cas plantés, pas qu'il couvre les cas réels. Il ne remplace ni la relecture compétente du domaine ni l'ouverture de la source officielle."
-suite = "Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 21 contrôles sur 37 ont désormais une preuve d'échec."
+suite = "Deux portes sont désormais éprouvées par mutation (`verifier-affichages.py`, `verifier-site-statique.py`, dix fautes plantées au total, aides partagées dans `outils/banc_mutations.py`). L'inventaire écrit des outils a depuis été livré et tenu par un garde : `docs/rd/inventaire-controles.md` et `outils/verifier-inventaire-controles.py` (45 fichiers, 37 contrôles, 17 appuyés sur un test capable d'échouer). `verifier-securite.py`, le premier de cette liste, a depuis reçu son banc (six fautes, `test_mutations_securite.py`) : 22 contrôles sur 37 ont désormais une preuve d'échec."
 initiatives = ["cartographier-les-lacunes", "relire-les-44-prototypes"]
 
 [[avancee]]

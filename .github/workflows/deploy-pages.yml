@@ -58,7 +58,9 @@ jobs:
           python3 outils/construire-avancees.py --verifier
 
       - name: Validate the R&D portfolio
-        run: python3 outils/verifier-rd-continue.py
+        run: |
+          python3 outils/verifier-rd-continue.py
+          python3 outils/test_mutations_rd_continue.py
 
       # Ce qui publie est ce qui doit rendre des comptes : l'inventaire des
       # contrôles est vérifié ici aussi, pas seulement sur les pull requests.

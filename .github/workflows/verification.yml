@@ -94,8 +94,14 @@ jobs:
           python3 outils/test_avancees.py
           python3 outils/construire-avancees.py --verifier
 
+      # La mémoire du projet — skills, portefeuille, avancées, sources refusées,
+      # relectures, veille — n'était prouvée que par son propre vert. Le banc
+      # casse une initiative, un skill, une ancre publique et l'horaire de la
+      # veille, dans une copie complète du dépôt (5 s).
       - name: Vérifier le portefeuille et la continuité R&D
-        run: python3 outils/verifier-rd-continue.py
+        run: |
+          python3 outils/verifier-rd-continue.py
+          python3 outils/test_mutations_rd_continue.py
 
       # L'inventaire `docs/rd/inventaire-controles.md` répond, outil par outil,
       # à « qu'est-ce qui prouve que ce contrôle peut échouer ? ». Ce garde-là

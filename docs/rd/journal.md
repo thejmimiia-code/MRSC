@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-28 — La mémoire du projet a son banc
+
+- **Initiative :** `coordination-de-tous-les-agents`.
+- **Le dernier contrôle de la première liste :** `outils/verifier-rd-continue.py` garde ce qui rend la R&D reprenable — skills, portefeuille, avancées, sources refusées, paquets de relecture, registre, page de transparence, veille hebdomadaire. Sa seule preuve était son propre vert.
+- **Quatre fautes, quatre familles :** une initiative privée de son champ `question` ; une section `## Garde-fous` retirée d'un skill ; l'ancre `rd-innovation` renommée dans `transparence.html` ; la veille décalée du lundi au mardi. Cinq tests, **5 s**.
+- **Un effet en cascade instructif :** retirer `## Garde-fous` d'un skill le rend inexploitable, et le portefeuille signale ensuite les huit initiatives qui s'appuient dessus. Le message exact est long — le banc vérifie le premier, pas la liste entière, et le dit dans sa limite.
+- **Câblage :** `MRSC_RACINE` ajouté à `verifier-rd-continue.py`, banc lancé dans `verification.yml` et `deploy-pages.yml` (5 s, donc les deux), `AGENTS.md` mentionne le huitième banc.
+- **L'inventaire suit :** `verifier-rd-continue.py` passe de `aucun-test` à `banc` → **9 bancs**, **22 contrôles sur 37** avec une preuve d'échec. La liste « par où continuer » est réécrite avec une contrainte nouvelle : `auditer-criteres-22.mjs` demande Chromium, donc son banc devra tourner dans le job `graphismes`.
+- **Contrôles exécutés :** `test_mutations_rd_continue.py` (5 tests), `verifier-rd-continue.py` (36 OK), `verifier-inventaire-controles.py`, `test_verifier_inventaire_controles.py`, les bancs d'affichage, de pages statiques, de sécurité, de fusions, de publication, d'intégration, `verifier-site-statique.py`, `verifier-integration.py`, `construire-avancees.py --verifier` (25 avancées), `test_protocole_editorial.py`, chargement YAML des deux workflows, `git diff --check`.
+- **Limites :** quatre fautes pour trente-six contrôles. La carte des lacunes, les paquets de relecture, l'audit automatique et le registre des relectures restent éprouvés par leur seule lecture. Et un portefeuille bien formé n'est pas un portefeuille juste.
+- **Prochaine action :** `auditer-criteres-22.mjs` — le script qui a déjà publié « 0 élément masqué » sans avoir rien pu charger — puis `verifier-poids-pages.py`.
+
 ## 2026-10-28 — La porte d'intégration est éprouvée, et son banc a un prix
 
 - **Initiative :** `optimisation-du-site`.
