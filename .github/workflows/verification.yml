@@ -373,6 +373,14 @@ jobs:
       # n'était exercé qu'à la main, sur une machine avec Chromium. Ce job est le
       # seul à installer Chromium, d'où sa place ici.
       #
+      # Les essais passent par `outils/serveur-local.py`, que le script démarre
+      # lui-même : c'est écrit dans sa documentation, et c'est nécessaire. La
+      # page `simulateur/` attend son API (`chargerContexte`, `chargerLexique`)
+      # avant d'ouvrir le guide ; servie par un simple `http.server`, elle reçoit
+      # des 404 et n'ouvre jamais `#overlay.visible`. Quatre des neuf essais
+      # tombent alors en `TimeoutError` — constaté le 29 octobre, lisible dans
+      # les annotations de l'exécution 40971214478.
+      #
       # Les échecs sont aussi publiés en annotations : les journaux complets de
       # GitHub Actions ne sont pas joignables depuis l'atelier qui tient ce
       # dépôt, alors qu'une annotation se lit par l'API. Sans cela, « le job est
@@ -380,11 +388,7 @@ jobs:
       - name: Éprouver les essais navigateur du panneau et du menu
         env:
           MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
-          MRSC_TEST_URL: http://127.0.0.1:4181/
         run: |
-          python3 -m http.server 4181 --bind 127.0.0.1 >"$RUNNER_TEMP/serveur-essais.log" 2>&1 &
-          serveur=$!
-          trap 'kill "$serveur" 2>/dev/null || true' EXIT
           set +e
           node outils/test-experience.cjs >"$RUNNER_TEMP/essais.log" 2>&1
           statut=$?
