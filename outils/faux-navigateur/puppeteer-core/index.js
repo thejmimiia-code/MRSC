@@ -21,7 +21,9 @@
 //                   passe de focus coupée par le plafond ;
 //   fiches-erreurs        — la mesure de géométrie d'une fiche rend une erreur ;
 //   fiches-statut-absent  — la fiche n'affiche pas son statut « Prototype à relire » ;
-//   a11y-violations       — le balayage axe-core rend deux règles en échec.
+//   a11y-violations       — le balayage axe-core rend deux règles en échec ;
+//   affichage-defauts    — chaque mesure d'affichage rend un débordement et une
+//                          cible trop petite.
 //
 // Les modes qui ne concernent pas un script ne le perturbent pas : c'est le
 // **type d'argument** quand il suffit (chaîne courte = sélecteur, chaîne de plus
@@ -42,8 +44,9 @@ class FauxOnglet {
     this.ferme = false;
   }
 
-  async setViewport({ width }) {
+  async setViewport({ width, height, deviceScaleFactor, isMobile, hasTouch } = {}) {
     this.largeur = width;
+    this.reglage = { width, height, deviceScaleFactor, isMobile, hasTouch };
   }
 
   async addStyleTag() {}
@@ -66,6 +69,10 @@ class FauxOnglet {
   // qu'un état interactif doit produire.
   async click(selecteur) {
     this.gestes.push(`click ${selecteur}`);
+  }
+
+  async evaluateOnNewDocument() {
+    this.gestes.push('evaluateOnNewDocument');
   }
 
   async select(selecteur, valeur) {
@@ -115,6 +122,35 @@ class FauxOnglet {
     }
     // 3 bis. La préparation de page (ouvrir les `<details>`) ne rend rien.
     if (/main details/.test(source)) return undefined;
+
+    // 3 quater. Mesure d'affichage (`auditer-affichages.mjs`) : elle prend
+    //            plusieurs arguments positionnels, donc c'est encore son texte
+    //            qui la désigne.
+    if (/defilementHorizontal/.test(source)) {
+      if (MODE === 'affichage-defauts') {
+        return {
+          defilementHorizontal: 12,
+          dehors: [{ selecteur: 'div.cadre', gauche: -8, droite: 398 }],
+          nbDehors: 2,
+          texteFin: [],
+          nbTexteFin: 0,
+          ciblesPetites: [{ selecteur: 'button.fermer', largeur: 16, hauteur: 16 }],
+          nbCiblesPetites: 1,
+          imagesAgrandies: [],
+          nbImagesAgrandies: 0,
+          textesCoupes: [],
+          nbTextesCoupes: 0,
+        };
+      }
+      return {
+        defilementHorizontal: 0,
+        dehors: [], nbDehors: 0,
+        texteFin: [], nbTexteFin: 0,
+        ciblesPetites: [], nbCiblesPetites: 0,
+        imagesAgrandies: [], nbImagesAgrandies: 0,
+        textesCoupes: [], nbTextesCoupes: 0,
+      };
+    }
 
     // 3 ter. Balayage axe-core (`verifier-accessibilite.cjs`) : c'est `axe.run`
     //        qui signe la fonction, et elle rend les violations.

@@ -247,6 +247,15 @@ jobs:
       - name: Éprouver le balayage d'accessibilité
         run: node outils/test_verifier_accessibilite.mjs
 
+      # `auditer-affichages.mjs` mesure 13 pages dans 19 formats et 10 modes :
+      # 2 470 mesures, chacune suivie d'une pause de 120 ms dans le script, soit
+      # dix minutes par exécution. Le banc réduit donc le périmètre à une page,
+      # un format et deux modes **dans une copie jetable**, et il le dit dans son
+      # en-tête : ce qu'il éprouve est le traitement d'une mesure et le code de
+      # sortie, pas la couverture des formats. 3 cas, 2,7 s.
+      - name: Éprouver la mesure d'affichage
+        run: node outils/test_auditer_affichages.mjs
+
       # `etat-rd.py` imprime le tableau que le brief de décision prospective cite
       # comme pièce justificative. Son pire défaut n'était pas de se tromper mais
       # de se taire : une source absente retirait ses lignes, et le tableau
