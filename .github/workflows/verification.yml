@@ -227,6 +227,15 @@ jobs:
       - name: Éprouver l'auditeur des critères WCAG 2.2 sans navigateur
         run: node outils/test_auditer_criteres_22.mjs
 
+      # `verifier-fiches-statistiques.cjs` promène deux fiches dans 288
+      # configurations et écrit un relevé JSON. Son pire défaut serait un relevé
+      # absent ou vide qui se lit « zéro échec ». Le banc le lance quatre fois
+      # avec le faux navigateur : nominal, géométrie fautive, statut absent,
+      # chargement impossible (code 2, aucun relevé écrit) — et vérifie que le
+      # relevé commité de `docs/rd/` n'a pas bougé. 5 cas, 0,3 s.
+      - name: Éprouver la géométrie des fiches de statistiques
+        run: node outils/test_verifier_fiches_statistiques.mjs
+
       # `etat-rd.py` imprime le tableau que le brief de décision prospective cite
       # comme pièce justificative. Son pire défaut n'était pas de se tromper mais
       # de se taire : une source absente retirait ses lignes, et le tableau
