@@ -227,6 +227,16 @@ jobs:
       - name: Éprouver l'auditeur des critères WCAG 2.2 sans navigateur
         run: node outils/test_auditer_criteres_22.mjs
 
+      # `etat-rd.py` imprime le tableau que le brief de décision prospective cite
+      # comme pièce justificative. Son pire défaut n'était pas de se tromper mais
+      # de se taire : une source absente retirait ses lignes, et le tableau
+      # gardait l'air complet. Le banc retire chaque source dans une copie et
+      # exige que le manque soit nommé, avec un code non nul. 7 cas, 1,2 s.
+      - name: Éprouver l'état de la R&D
+        run: |
+          python3 outils/etat-rd.py > /dev/null
+          python3 outils/test_etat_rd.py
+
       # Cette porte garde les frontières HTTP et WSGI, la provenance navigateur,
       # la liste statique et l'épinglage des actions : elle n'avait aucun test
       # jusqu'au 28 octobre 2026. Le banc plante six fautes réelles dans une

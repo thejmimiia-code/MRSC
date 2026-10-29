@@ -30,7 +30,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/construire-paquets-relecture.py` | Prépare les paquets de relecture | `test_mutations_files_relecture.py` (même banc : les deux outils partagent le même tri) | `banc` |
 | `outils/construire-simulateur.py` | Génère `simulateur/index.html` | `--verifier` plus `verifier-integration.py` | `hors-portee` |
 | `outils/construire-sources-refusees.py` | Registre des sources tentées et refusées | `test_sources_refusees.py` (10 tests) | `faute-en-memoire` |
-| `outils/etat-rd.py` | Imprime l'état daté de la R&D | Aucune : sortie lue à la main | `aucun-test` |
+| `outils/etat-rd.py` | Imprime l'état daté de la R&D | `test_etat_rd.py` (7 cas : chaque source retirée ou cassée doit être nommée, code 1) | `banc` |
 | `outils/file-relecture.py` | Construit la file de relecture | `test_mutations_files_relecture.py` (divergence, fichier supprimé, édition à la main, tri éprouvé sur une fiche ajoutée) | `banc` |
 | `outils/generer-fonctions-api.py` | Génère les fonctions Vercel de `api/` | `verifier-integration.py` | `hors-portee` |
 | `outils/mettre-a-jour-simulateur.py` | Met à jour le moteur embarqué depuis l'amont | `verifier-maj-amont.py` | `hors-portee` |
@@ -69,19 +69,19 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 
 45 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
-- **Quatorze** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture, les planches des statuts et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
+- **Quinze** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture, les planches des statuts, l'état daté de la R&D et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
 - **Neuf** le sont en cassant des données en mémoire ou en simulant ce qui ne peut pas être joint. C'est utile, mais la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests, et `verifier-maj-amont.py` n'interroge jamais réellement l'amont dans son test, et `auditer-criteres-22.mjs` ne voit jamais un vrai Chromium — son banc éprouve ce qu'il fait de mesures qu'on lui donne, pas la justesse de ce qu'il mesure.
 - **Six** ont un test qui n'injecte aucune faute.
 - **Trois** sont eux-mêmes des tests (scripts navigateur, simulation de cache) : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre.
-- **Cinq** ne sont prouvés par rien d'autre que leur vert quotidien.
+- **Quatre** ne sont prouvés par rien d'autre que leur vert quotidien.
 - **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
 
-Autrement dit : **29 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 8 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et cinq ne sont prouvés par rien d'autre que leur vert quotidien.
+Autrement dit : **30 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 7 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et quatre ne sont prouvés par rien d'autre que leur vert quotidien.
 
 ## Par où continuer, par ordre de rentabilité
 
-1. `verifier-accessibilite.cjs` et `verifier-fiches-statistiques.cjs` — ils dépendent d'un vrai Chromium ; leurs bancs devront tourner dans le job `graphismes`, pas dans `qualite`.
-2. `etat-rd.py` — il lit le portefeuille pour dire où en est la R&D ; rien ne prouve qu'il sache refuser un portefeuille incohérent.
+1. `verifier-accessibilite.cjs` et `verifier-fiches-statistiques.cjs`, puis `auditer-affichages.mjs` — ils dépendent d'un vrai Chromium ; leurs bancs devront tourner dans le job `graphismes`, pas dans `qualite`. Un faux navigateur peut déjà porter leur contrat de sortie : c'est ce qui a été fait pour `auditer-criteres-22.mjs`.
+2. `verifier-source-distante.py` — il demande le réseau ; son banc devra remplacer la sonde, comme `test_verifier_maj_amont.py`.
 
 ## Limites de ce document
 

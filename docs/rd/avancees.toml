@@ -47,6 +47,25 @@ limite = "Le banc ne mesure rien : il regarde ce que le script fait de mesures q
 suite = "Éprouver les deux contrôles navigateur restants dans le job `graphismes` (le banc y a sa place : il lui faut un vrai Chromium), puis `etat-rd.py`."
 initiatives = ["optimisation-du-site", "documentation-rd-eva"]
 
+[[avancee]]
+id = "un-etat-qui-perd-une-source-garde-l-air-complet"
+date = 2026-10-29
+titre = "Un rapport d'état qui perd une source sans le dire garde l'air complet"
+constat = "`outils/etat-rd.py` imprime le tableau que le brief de décision prospective cite comme pièce justificative — initiatives, fiches, prototypes, revues, poids maximal. Il n'avait aucun test, et son défaut n'était pas de se tromper : il était de **se taire**. Un `poids-pages.md` absent ou reformaté faisait disparaître trois lignes du tableau, un journal sans entrée datée en retirait une autre, un portefeuille absent levait une trace d'exception, et une fiche dont `revue_le` ne se lisait pas était écartée du compte des revues échues — une date mal écrite rendait la fiche **moins** suivie. Dans les trois premiers cas, le tableau restait lisible, donc rassurant."
+changement = "`etat-rd.py` honore `MRSC_RACINE`, traduit toute source absente ou illisible en `SourceIllisible` et l'inscrit comme une ligne « **non lu** — cause » au lieu de la supprimer ; les fiches à date illisible sont comptées et nommées dans une ligne « Revues non calculables » ; une sortie incomplète porte un code non nul et un avertissement explicite (« ce tableau ne doit pas servir de pièce jointe en l'état »). `outils/test_etat_rd.py` couvre sept cas dans une copie complète du dépôt : copie intacte, relevé de poids supprimé, relevé reformaté à trois colonnes, journal sans entrée datée, fiche au `revue_le` illisible, portefeuille absent, échéance calculée depuis `--date`. 1,2 s."
+preuves = [
+  "outils/etat-rd.py",
+  "outils/test_etat_rd.py",
+  "outils/banc_mutations.py",
+  "docs/rd/poids-pages.md",
+  "docs/rd/portefeuille.toml",
+  ".github/workflows/verification.yml",
+]
+controle = "python3 outils/test_etat_rd.py && python3 outils/verifier-inventaire-controles.py"
+limite = "Le banc prouve que l'outil nomme ce qu'il n'a pas pu lire, pas que ce qu'il lit est juste : une valeur fausse dans un fichier bien formé passerait sans être vue. La lecture du tableau de poids reste liée à sa forme — quatre colonnes, nom entre accents graves — et un futur relevé correctement rempli mais autrement formaté serait refusé, ce qui est le comportement voulu mais coûtera une correction. Rien ne vérifie non plus que les chiffres publiés correspondent à ce qu'un humain considérerait comme l'état de la R&D : c'est un compte, pas un jugement."
+suite = "Éprouver `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs` et `auditer-affichages.mjs` avec le faux navigateur, puis `verifier-source-distante.py` en remplaçant sa sonde réseau."
+initiatives = ["documentation-rd-eva", "veille-savoirs-evolutifs"]
+
 [meta]
 version = 1
 derniere_revue = 2026-10-28

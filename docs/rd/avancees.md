@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 31 |
-| Période couverte | du 2026-10-20 au 2026-10-28 |
-| Contrôles exécutables cités | 44 |
+| Avancées consignées | 32 |
+| Période couverte | du 2026-10-20 au 2026-10-29 |
+| Contrôles exécutables cités | 45 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -732,6 +732,31 @@ Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 **Limite — ce que cela ne prouve pas.** La sonde `git ls-remote` n'est jamais exercée : le test remplace la fonction qui l'appelle, donc il prouve la décision et pas la lecture du réseau — d'où le classement en `faute-en-memoire`, pas en `banc`. Un changement de format de sortie de `git ls-remote` lui échapperait. Le test ne dit rien non plus de la mise à jour elle-même, qui reste une opération relue et validée par une personne.
 
 **Suite.** Éprouver `verifier-planches-statuts.py`, puis attaquer les quatre contrôles navigateur depuis le job `graphismes`.
+
+Initiatives liées : `documentation-rd-eva`, `veille-savoirs-evolutifs`.
+
+### `un-etat-qui-perd-une-source-garde-l-air-complet` — Un rapport d'état qui perd une source sans le dire garde l'air complet
+
+*Consignée le 2026-10-29.*
+
+**Constat.** `outils/etat-rd.py` imprime le tableau que le brief de décision prospective cite comme pièce justificative — initiatives, fiches, prototypes, revues, poids maximal. Il n'avait aucun test, et son défaut n'était pas de se tromper : il était de **se taire**. Un `poids-pages.md` absent ou reformaté faisait disparaître trois lignes du tableau, un journal sans entrée datée en retirait une autre, un portefeuille absent levait une trace d'exception, et une fiche dont `revue_le` ne se lisait pas était écartée du compte des revues échues — une date mal écrite rendait la fiche **moins** suivie. Dans les trois premiers cas, le tableau restait lisible, donc rassurant.
+
+**Ce que cela change.** `etat-rd.py` honore `MRSC_RACINE`, traduit toute source absente ou illisible en `SourceIllisible` et l'inscrit comme une ligne « **non lu** — cause » au lieu de la supprimer ; les fiches à date illisible sont comptées et nommées dans une ligne « Revues non calculables » ; une sortie incomplète porte un code non nul et un avertissement explicite (« ce tableau ne doit pas servir de pièce jointe en l'état »). `outils/test_etat_rd.py` couvre sept cas dans une copie complète du dépôt : copie intacte, relevé de poids supprimé, relevé reformaté à trois colonnes, journal sans entrée datée, fiche au `revue_le` illisible, portefeuille absent, échéance calculée depuis `--date`. 1,2 s.
+
+**Preuves dans le dépôt :**
+
+- `outils/etat-rd.py`
+- `outils/test_etat_rd.py`
+- `outils/banc_mutations.py`
+- `docs/rd/poids-pages.md`
+- `docs/rd/portefeuille.toml`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `python3 outils/test_etat_rd.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le banc prouve que l'outil nomme ce qu'il n'a pas pu lire, pas que ce qu'il lit est juste : une valeur fausse dans un fichier bien formé passerait sans être vue. La lecture du tableau de poids reste liée à sa forme — quatre colonnes, nom entre accents graves — et un futur relevé correctement rempli mais autrement formaté serait refusé, ce qui est le comportement voulu mais coûtera une correction. Rien ne vérifie non plus que les chiffres publiés correspondent à ce qu'un humain considérerait comme l'état de la R&D : c'est un compte, pas un jugement.
+
+**Suite.** Éprouver `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs` et `auditer-affichages.mjs` avec le faux navigateur, puis `verifier-source-distante.py` en remplaçant sa sonde réseau.
 
 Initiatives liées : `documentation-rd-eva`, `veille-savoirs-evolutifs`.
 

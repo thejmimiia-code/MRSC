@@ -2,6 +2,21 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-29 — L'état de la R&D perdait des sources en silence
+
+- **Initiative :** `documentation-rd-eva` (avec `veille-savoirs-evolutifs`).
+- **Onzième lot :** `outils/etat-rd.py`. Il imprime le tableau que `docs/rd/decision-prospective.md` cite comme pièce justificative. Aucun test, et il n'est même pas lancé en CI.
+- **Le défaut de famille :** ce n'est pas de se tromper, c'est de **se taire**. Un `poids-pages.md` absent ou reformaté retirait trois lignes du tableau ; un journal sans entrée datée en retirait une ; un portefeuille absent levait une trace d'exception. Le tableau restait lisible — donc rassurant — alors qu'il ne disait plus rien de ces sources.
+- **Le cas le plus injuste :** une fiche dont `revue_le` ne se lit pas était écartée du compte des revues échues. Une date mal écrite rendait la fiche **moins** suivie qu'une fiche bien datée : le défaut punissait exactement celle qui avait besoin d'attention.
+- **Correction :** source absente ou illisible ⇒ `SourceIllisible`, ligne « **non lu** — cause » à la place de la ligne disparue, fiches à date illisible comptées et nommées, code de sortie 1 et avertissement « ce tableau ne doit pas servir de pièce jointe en l'état ».
+- **Sept cas, 1,2 s :** copie intacte (tous les indicateurs, aucun « non lu ») ; relevé de poids supprimé ; relevé reformaté à trois colonnes ; journal sans entrée datée ; fiche au `revue_le` illisible (`fr-lire-consigne`, nom lue dans la copie) ; portefeuille absent, sans trace d'exception ; échéance calculée depuis `--date` (2056 → « échue »).
+- **Le banc mord, vérifié à la main :** neutraliser la sortie en erreur fait échouer cinq cas ; retirer la collecte des dates illisibles fait échouer le cas de la fiche. Les deux mutations ont été appliquées puis retirées.
+- **Désormais en CI :** `qualite` lance `etat-rd.py` puis son banc. C'était un rapport jamais exécuté par la CI ; il y tourne pour la première fois.
+- **Inventaire :** `etat-rd.py` passe de `aucun-test` à `banc`. **45 outils · 15 `banc` · 9 `faute-en-memoire` · 6 `test` · 3 `test-en-soi` · 4 `aucun-test` · 8 `hors-portee`** → **30 contrôles sur 37**.
+- **Contrôles exécutés :** `test_etat_rd.py` (7), `etat-rd.py` sur le dépôt réel, `verifier-inventaire-controles.py`, `test_verifier_inventaire_controles.py`, `verifier-rd-continue.py`, `construire-avancees.py --verifier`, chargement YAML du workflow, `git diff --check`.
+- **Limites :** le banc prouve que l'outil nomme ce qu'il n'a pas pu lire, pas que ce qu'il lit est juste. La lecture du tableau de poids dépend de sa forme (quatre colonnes, nom entre accents graves) : un relevé autrement formaté serait refusé — comportement voulu, mais qui coûtera une correction le jour où le format changera.
+- **Prochaine action :** les trois contrôles navigateur restants (`verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs`, `auditer-affichages.mjs`), en réutilisant le faux navigateur du lot précédent.
+
 ## 2026-10-28 — Un faux navigateur suffit à prouver un contrat, et il a trouvé un défaut de rapport
 
 - **Initiative :** `optimisation-du-site` (avec `documentation-rd-eva`).
