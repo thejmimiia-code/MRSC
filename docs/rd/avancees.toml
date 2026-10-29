@@ -154,6 +154,24 @@ limite = "La vérification reste optionnelle, donc absente de la CI : l'archive 
 suite = "Éprouver les trois scripts qui sont eux-mêmes des tests (`test-experience.cjs`, `test-cache-css-ia.cjs`, `verifier-graphismes.cjs`). La vérification complète des 343 empreintes reste une action humaine, faute de place pour extraire l'archive."
 initiatives = ["documentation-rd-eva", "poids-et-sobriete-numerique"]
 
+[[avancee]]
+id = "un-code-de-sortie-ne-dit-pas-pourquoi"
+date = 2026-10-29
+titre = "Un code de sortie ne dit pas pourquoi : une mutation doit constater ce qu'elle plante"
+constat = "`verifier-graphismes.cjs` rejoue trois fautes internes — `distorsion`, `densite`, `ancre` — et la CI exigeait seulement que le contrôle sorte en erreur (code 1). Or un échec peut venir d'une panne sans rapport avec la mutation : un serveur absent, une page renommée, une exception dans une mesure. La CI aurait été verte avec un contrôle qui ne voit plus ce qu'il prétend voir, ce qui est exactement le défaut que la série de bancs cherchait à éliminer ailleurs."
+changement = "`outils/verifier-mutation-graphismes.py` lit le rapport JSON de chaque passe mutée et exige que l'erreur attendue y figure : « distorsion » pour `distorsion`, « densité insuffisante » pour `densite`, « ancre » pour `ancre`. Un rapport absent ou illisible est un refus, pas un silence. Le job `graphismes` appelle ce contrôle après chaque mutation, à côté du test du code de sortie. `outils/test_verifier_mutation_graphismes.py` couvre six cas hors ligne, dont un qui **relit les messages attendus dans le script** : une reformulation de `verifier-graphismes.cjs` fait échouer le test au lieu de le rendre faux."
+preuves = [
+  "outils/verifier-mutation-graphismes.py",
+  "outils/test_verifier_mutation_graphismes.py",
+  "outils/verifier-graphismes.cjs",
+  ".github/workflows/verification.yml",
+  "docs/rd/audit-graphismes-2026-10-24.json",
+]
+controle = "python3 outils/test_verifier_mutation_graphismes.py && python3 outils/verifier-inventaire-controles.py"
+limite = "Le contrôle dit qu'une erreur attendue a été constatée, jamais qu'elle a été constatée **pour la bonne raison** : la chaîne cherchée est un fragment, et un rapport qui la contiendrait par accident passerait. Il ne voit pas non plus une mutation qui n'échouerait sur aucune page, si le rapport contient par ailleurs l'erreur cherchée sur un autre relevé. Enfin, la liste des messages attendus reste une convention écrite à deux endroits — le script et le contrôle — et seule la relecture du test relie les deux."
+suite = "Éprouver les trois scripts qui sont eux-mêmes des tests (`test-experience.cjs`, `test-cache-css-ia.cjs`, `verifier-graphismes.cjs`), en commençant par vérifier que leurs mutations portent sur ce qu'ils mesurent."
+initiatives = ["optimisation-du-site", "documentation-rd-eva"]
+
 [meta]
 version = 1
 derniere_revue = 2026-10-28

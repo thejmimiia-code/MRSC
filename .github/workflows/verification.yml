@@ -343,12 +343,18 @@ jobs:
           MRSC_FICHES_JSON="$RUNNER_TEMP/graphismes/fiches-statistiques.json" node outils/verifier-fiches-statistiques.cjs
           node outils/test-cache-css-ia.cjs
           node outils/verifier-graphismes.cjs
+          # Le code de sortie ne dit pas *pourquoi* la mesure a échoué : une
+          # mutation qui ferait céder le contrôle pour une panne sans rapport
+          # laisserait la CI verte. Chaque passe mutée doit donc constater
+          # l'erreur qu'elle est censée provoquer — c'est le rôle de
+          # `verifier-mutation-graphismes.py`, testé hors navigateur (6 cas).
           for mutation in distorsion densite ancre; do
             set +e
             MRSC_MUTATION="$mutation" MRSC_GRAPHISMES_JSON="$RUNNER_TEMP/graphismes/mutation-$mutation.json" node outils/verifier-graphismes.cjs
             statut=$?
             set -e
             test "$statut" -eq 1
+            python3 outils/verifier-mutation-graphismes.py "$RUNNER_TEMP/graphismes/mutation-$mutation.json" "$mutation"
           done
       - name: Conserver les mesures et captures même en échec
         if: always()

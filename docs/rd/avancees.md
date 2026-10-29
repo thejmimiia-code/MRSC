@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 37 |
+| Avancées consignées | 38 |
 | Période couverte | du 2026-10-20 au 2026-10-29 |
-| Contrôles exécutables cités | 50 |
+| Contrôles exécutables cités | 51 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -805,6 +805,30 @@ Initiatives liées : `optimisation-du-site`, `co-conception-et-essais`.
 **Suite.** Éprouver `verifier-source-distante.py`, dernier contrôle sans preuve, en remplaçant sa sonde réseau.
 
 Initiatives liées : `optimisation-du-site`, `poids-et-sobriete-numerique`.
+
+### `un-code-de-sortie-ne-dit-pas-pourquoi` — Un code de sortie ne dit pas pourquoi : une mutation doit constater ce qu'elle plante
+
+*Consignée le 2026-10-29.*
+
+**Constat.** `verifier-graphismes.cjs` rejoue trois fautes internes — `distorsion`, `densite`, `ancre` — et la CI exigeait seulement que le contrôle sorte en erreur (code 1). Or un échec peut venir d'une panne sans rapport avec la mutation : un serveur absent, une page renommée, une exception dans une mesure. La CI aurait été verte avec un contrôle qui ne voit plus ce qu'il prétend voir, ce qui est exactement le défaut que la série de bancs cherchait à éliminer ailleurs.
+
+**Ce que cela change.** `outils/verifier-mutation-graphismes.py` lit le rapport JSON de chaque passe mutée et exige que l'erreur attendue y figure : « distorsion » pour `distorsion`, « densité insuffisante » pour `densite`, « ancre » pour `ancre`. Un rapport absent ou illisible est un refus, pas un silence. Le job `graphismes` appelle ce contrôle après chaque mutation, à côté du test du code de sortie. `outils/test_verifier_mutation_graphismes.py` couvre six cas hors ligne, dont un qui **relit les messages attendus dans le script** : une reformulation de `verifier-graphismes.cjs` fait échouer le test au lieu de le rendre faux.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-mutation-graphismes.py`
+- `outils/test_verifier_mutation_graphismes.py`
+- `outils/verifier-graphismes.cjs`
+- `.github/workflows/verification.yml`
+- `docs/rd/audit-graphismes-2026-10-24.json`
+
+**Contrôle qui la maintient :** `python3 outils/test_verifier_mutation_graphismes.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le contrôle dit qu'une erreur attendue a été constatée, jamais qu'elle a été constatée **pour la bonne raison** : la chaîne cherchée est un fragment, et un rapport qui la contiendrait par accident passerait. Il ne voit pas non plus une mutation qui n'échouerait sur aucune page, si le rapport contient par ailleurs l'erreur cherchée sur un autre relevé. Enfin, la liste des messages attendus reste une convention écrite à deux endroits — le script et le contrôle — et seule la relecture du test relie les deux.
+
+**Suite.** Éprouver les trois scripts qui sont eux-mêmes des tests (`test-experience.cjs`, `test-cache-css-ia.cjs`, `verifier-graphismes.cjs`), en commençant par vérifier que leurs mutations portent sur ce qu'ils mesurent.
+
+Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 
 ### `un-etat-qui-perd-une-source-garde-l-air-complet` — Un rapport d'état qui perd une source sans le dire garde l'air complet
 
