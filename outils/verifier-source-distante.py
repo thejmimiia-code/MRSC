@@ -54,8 +54,13 @@ def main() -> int:
 
     print(f"Source distante : {resultat['source']}")
     print(f"  page : statut {resultat['page']['statut']}, page du moteur : {'oui' if resultat['page']['indice_simulateur'] else 'non'}")
-    api = resultat["api"]
-    if api["route"]:
+    # Une ligne par route essayée : n'afficher que la dernière faisait
+    # disparaître le cas « 200 mais JSON sans les clés attendues ».
+    essais = resultat.get("api_essais") or []
+    for essai in essais:
+        print(f"  api  : {essai['route']} → statut {essai['statut']}, moteur : {'oui' if essai['indice_moteur'] else 'non'}")
+    if not essais and resultat["api"]["route"]:
+        api = resultat["api"]
         print(f"  api  : {api['route']} → statut {api['statut']}, moteur : {'oui' if api['indice_moteur'] else 'non'}")
     print()
     print(resultat["message"])

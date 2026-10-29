@@ -266,6 +266,16 @@ jobs:
           python3 outils/etat-rd.py > /dev/null
           python3 outils/test_etat_rd.py
 
+      # Dernier contrôle sans preuve. `verifier-source-distante.py` interroge la
+      # version en ligne du simulateur ; son banc ne simule pas HTTP, il le fait :
+      # un serveur local servant les réponses voulues, et le script lancé en
+      # sous-processus avec l'exception `SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE`.
+      # Sont donc réellement exercés la liste d'hôtes autorisés, urllib, les
+      # marqueurs de page, la lecture du JSON, l'ordre des routes et le code de
+      # sortie. 9 cas, 4,5 s, aucun octet sortant hors de la boucle locale.
+      - name: Éprouver la vérification de la source distante
+        run: python3 outils/test_verifier_source_distante.py
+
       # Cette porte garde les frontières HTTP et WSGI, la provenance navigateur,
       # la liste statique et l'épinglage des actions : elle n'avait aucun test
       # jusqu'au 28 octobre 2026. Le banc plante six fautes réelles dans une

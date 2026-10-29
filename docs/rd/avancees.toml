@@ -119,6 +119,24 @@ limite = "La réduction du périmètre est le point sensible : le banc ne prouve
 suite = "Éprouver `verifier-source-distante.py`, dernier contrôle sans preuve, en remplaçant sa sonde réseau."
 initiatives = ["optimisation-du-site", "poids-et-sobriete-numerique"]
 
+[[avancee]]
+id = "le-reseau-se-teste-sur-la-boucle-locale"
+date = 2026-10-29
+titre = "Un contrôle réseau se prouve sur la boucle locale, sans simuler HTTP"
+constat = "`outils/verifier-source-distante.py` était le dernier contrôle de l'inventaire sans aucune preuve. Il décide de la bascule du site vers la version en ligne du simulateur : page servie **et** API de calcul qui répond. Son banc ne pouvait pas se contenter de simuler — `api/verifier-source.py` fait ses requêtes avec `urllib` dans un module chargé par `importlib`, et le script est un sous-processus. Et il restait une faiblesse de rapport : quand `/api/scenarios` répondait 200 avec un JSON sans les clés attendues, seule la route suivante (`/api/catalogue`, 404) était affichée, et la raison réelle du refus disparaissait."
+changement = "`outils/test_verifier_source_distante.py` fait tourner un vrai serveur sur un port éphémère de la boucle locale et lance le script en sous-processus avec `SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE=1`, la seule exception prévue pour les tests. Neuf cas : page et API fonctionnelles, page de présentation refusée, API absente, seconde route qui suffit, JSON 200 sans les clés attendues, port fermé (jamais un succès), hôte non autorisé (refus sans requête), `--json` sur un refus, et la forme du JSON. `api/verifier-source.py` gagne `api_essais` — toutes les routes essayées, dans l'ordre — et le script imprime une ligne par essai. 9 cas, 4,5 s, aucun octet hors de la machine."
+preuves = [
+  "outils/verifier-source-distante.py",
+  "outils/test_verifier_source_distante.py",
+  "api/verifier-source.py",
+  "outils/verifier-integration.py",
+  ".github/workflows/verification.yml",
+]
+controle = "python3 outils/test_verifier_source_distante.py && python3 outils/verifier-inventaire-controles.py"
+limite = "Le serveur local répond exactement ce que le cas décide : le banc prouve la décision du script sur des réponses connues, pas la réalité de Vercel — un déploiement amont cassé ne serait pas vu, et la vérification réelle reste une action humaine. Le cas « port fermé » dépend d'un port rendu au système après fermeture, ce qui peut échouer si une autre processus le reprend entre-temps. Enfin, la lecture du JSON ne juge pas son contenu : un moteur qui renvoie des clés vides passe pour fonctionnel."
+suite = "Vérifier les empreintes de l'archive des statuts (`sha256sum -c`), que `verifier-planches-statuts.py` ne contrôle jamais en contenu, puis éprouver les trois scripts qui sont eux-mêmes des tests."
+initiatives = ["optimisation-du-site", "documentation-rd-eva"]
+
 [meta]
 version = 1
 derniere_revue = 2026-10-28

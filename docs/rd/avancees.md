@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 35 |
+| Avancées consignées | 36 |
 | Période couverte | du 2026-10-20 au 2026-10-29 |
-| Contrôles exécutables cités | 48 |
+| Contrôles exécutables cités | 49 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -734,6 +734,30 @@ Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 **Suite.** Éprouver `verifier-planches-statuts.py`, puis attaquer les quatre contrôles navigateur depuis le job `graphismes`.
 
 Initiatives liées : `documentation-rd-eva`, `veille-savoirs-evolutifs`.
+
+### `le-reseau-se-teste-sur-la-boucle-locale` — Un contrôle réseau se prouve sur la boucle locale, sans simuler HTTP
+
+*Consignée le 2026-10-29.*
+
+**Constat.** `outils/verifier-source-distante.py` était le dernier contrôle de l'inventaire sans aucune preuve. Il décide de la bascule du site vers la version en ligne du simulateur : page servie **et** API de calcul qui répond. Son banc ne pouvait pas se contenter de simuler — `api/verifier-source.py` fait ses requêtes avec `urllib` dans un module chargé par `importlib`, et le script est un sous-processus. Et il restait une faiblesse de rapport : quand `/api/scenarios` répondait 200 avec un JSON sans les clés attendues, seule la route suivante (`/api/catalogue`, 404) était affichée, et la raison réelle du refus disparaissait.
+
+**Ce que cela change.** `outils/test_verifier_source_distante.py` fait tourner un vrai serveur sur un port éphémère de la boucle locale et lance le script en sous-processus avec `SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE=1`, la seule exception prévue pour les tests. Neuf cas : page et API fonctionnelles, page de présentation refusée, API absente, seconde route qui suffit, JSON 200 sans les clés attendues, port fermé (jamais un succès), hôte non autorisé (refus sans requête), `--json` sur un refus, et la forme du JSON. `api/verifier-source.py` gagne `api_essais` — toutes les routes essayées, dans l'ordre — et le script imprime une ligne par essai. 9 cas, 4,5 s, aucun octet hors de la machine.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-source-distante.py`
+- `outils/test_verifier_source_distante.py`
+- `api/verifier-source.py`
+- `outils/verifier-integration.py`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `python3 outils/test_verifier_source_distante.py && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le serveur local répond exactement ce que le cas décide : le banc prouve la décision du script sur des réponses connues, pas la réalité de Vercel — un déploiement amont cassé ne serait pas vu, et la vérification réelle reste une action humaine. Le cas « port fermé » dépend d'un port rendu au système après fermeture, ce qui peut échouer si une autre processus le reprend entre-temps. Enfin, la lecture du JSON ne juge pas son contenu : un moteur qui renvoie des clés vides passe pour fonctionnel.
+
+**Suite.** Vérifier les empreintes de l'archive des statuts (`sha256sum -c`), que `verifier-planches-statuts.py` ne contrôle jamais en contenu, puis éprouver les trois scripts qui sont eux-mêmes des tests.
+
+Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 
 ### `un-balayage-vide-ne-vaut-pas-un-site-sans-violation` — Un balayage qui n'a rien analysé ne vaut pas un site sans violation
 
