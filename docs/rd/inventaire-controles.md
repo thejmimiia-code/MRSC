@@ -44,7 +44,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/verifier-affichages.py` | 16 garde-fous de format et d'impression | `test_mutations_affichages.py` (5 mutations) | `banc` |
 | `outils/verifier-budgets-visuels.py` | Budgets d'affichage des titres | `test_mutations_budgets_visuels.py` (3 fautes : titre long, page sans titre, H1 gonflé) | `banc` |
 | `outils/verifier-decision-prospective.py` | Faits internes du brief prospectif | `test_verifier_decision_prospective.py` (20 tests) | `test` |
-| `outils/verifier-fiches-statistiques.cjs` | Géométrie des deux fiches de statistiques | Vert du job `graphismes` | `aucun-test` |
+| `outils/verifier-fiches-statistiques.cjs` | Géométrie des deux fiches de statistiques | `test_verifier_fiches_statistiques.mjs` (navigateur remplacé ; 4 modes + relevé commité intact) | `faute-en-memoire` |
 | `outils/verifier-fichiers-servis.py` | Relevé d'en-têtes confronté aux fichiers | `test_fichiers_servis.py` (28 tests) | `test` |
 | `outils/verifier-fusions.py` | Fusion et suppression de branche sans perte | `test_mutations_fusions.py` (6 fautes dans de petits dépôts git neufs) | `banc` |
 | `outils/verifier-graphismes.cjs` | Mesure navigateur de trois visuels | Trois mutations internes (`distorsion`, `densite`, `ancre`) rejouées en CI | `test-en-soi` |
@@ -70,17 +70,17 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 45 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
 - **Quinze** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture, les planches des statuts, l'état daté de la R&D et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
-- **Neuf** le sont en cassant des données en mémoire ou en simulant ce qui ne peut pas être joint. C'est utile, mais la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests, et `verifier-maj-amont.py` n'interroge jamais réellement l'amont dans son test, et `auditer-criteres-22.mjs` ne voit jamais un vrai Chromium — son banc éprouve ce qu'il fait de mesures qu'on lui donne, pas la justesse de ce qu'il mesure.
+- **Dix** le sont en cassant des données en mémoire ou en simulant ce qui ne peut pas être joint. C'est utile, mais la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests, et `verifier-maj-amont.py` n'interroge jamais réellement l'amont dans son test, et les deux scripts navigateur (`auditer-criteres-22.mjs`, `verifier-fiches-statistiques.cjs`) ne voient jamais un vrai Chromium — leurs bancs éprouvent ce qu'ils font de mesures qu'on leur donne, pas la justesse de ce qu'ils mesurent.
 - **Six** ont un test qui n'injecte aucune faute.
 - **Trois** sont eux-mêmes des tests (scripts navigateur, simulation de cache) : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre.
-- **Quatre** ne sont prouvés par rien d'autre que leur vert quotidien.
+- **Trois** ne sont prouvés par rien d'autre que leur vert quotidien.
 - **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
 
-Autrement dit : **30 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 7 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et quatre ne sont prouvés par rien d'autre que leur vert quotidien.
+Autrement dit : **31 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 6 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et trois ne sont prouvés par rien d'autre que leur vert quotidien.
 
 ## Par où continuer, par ordre de rentabilité
 
-1. `verifier-accessibilite.cjs` et `verifier-fiches-statistiques.cjs`, puis `auditer-affichages.mjs` — ils dépendent d'un vrai Chromium ; leurs bancs devront tourner dans le job `graphismes`, pas dans `qualite`. Un faux navigateur peut déjà porter leur contrat de sortie : c'est ce qui a été fait pour `auditer-criteres-22.mjs`.
+1. `verifier-accessibilite.cjs` et `auditer-affichages.mjs` — ils mesurent une page entière ; leurs bancs peuvent porter leur contrat de sortie avec le faux navigateur, comme les deux premiers, sans attendre un vrai Chromium.
 2. `verifier-source-distante.py` — il demande le réseau ; son banc devra remplacer la sonde, comme `test_verifier_maj_amont.py`.
 
 ## Limites de ce document

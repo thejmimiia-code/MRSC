@@ -2,6 +2,21 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-29 — Un relevé absent ne doit pas ressembler à « zéro défaut »
+
+- **Initiative :** `optimisation-du-site`.
+- **Douzième lot :** `outils/verifier-fiches-statistiques.cjs`, 38 lignes, aucun test. Il promène les deux fiches de statistiques dans 288 configurations (4 largeurs × 3 tailles de texte × 6 dispositions × contraste et espacement renforcés), cherche un élément hors écran, un contenu rogné et le statut « Prototype à relire », puis écrit `docs/rd/audit-fiches-statistiques-2026-10-24.json`.
+- **Le défaut de famille, encore :** un relevé **absent** ne dit rien, mais un fichier manquant après un échec se lit facilement comme « pas de nouvelles, donc pas de problème ». Et le chemin d'écriture par défaut est dans le dépôt : un lancement local écrase un relevé commité et daté.
+- **Quatre modes avec le faux navigateur du lot #219 :** nominal (288 relevés, 0 échec, périmètre et limites écrits dans le fichier) ; géométrie fautive (288 échecs, l'erreur nommée) ; statut absent (le contrôle de statut n'est pas avalé par le contrôle géométrique) ; chargement impossible (code 2, **aucun relevé écrit**).
+- **Une garde de plus :** le banc vérifie que le relevé commité n'a pas bougé — il redirige toujours l'écriture par `MRSC_FICHES_JSON` vers un dossier temporaire. Un banc qui abîmerait une pièce datée du dépôt serait pire que pas de banc.
+- **5 cas, 0,3 s.** Le faux reconnaît la fonction de géométrie à son texte (aucun argument, `Prototype à relire` cherché) : c'est fragile et c'est écrit dans le source du faux, pas caché.
+- **Le banc mord, vérifié à la main :** forcer `process.exitCode=0` fait échouer les cas « géométrie fautive » et « statut absent ».
+- **Où il tourne :** dans `qualite`, pas `graphismes` — il ne mesure rien et ne lui faut aucun binaire. Le lancement réel du script reste dans `graphismes`, où Chromium existe.
+- **Inventaire :** `verifier-fiches-statistiques.cjs` passe de `aucun-test` à `faute-en-memoire`. **45 outils · 15 `banc` · 10 `faute-en-memoire` · 6 `test` · 3 `test-en-soi` · 3 `aucun-test` · 8 `hors-portee`** → **31 contrôles sur 37**.
+- **Contrôles exécutés :** `test_verifier_fiches_statistiques.mjs` (5), `test_auditer_criteres_22.mjs` (4), `verifier-inventaire-controles.py`, chargement YAML du workflow, `git diff --check`.
+- **Limites :** aucune géométrie n'est mesurée ; le contrat de sortie seulement. Le repérage de la fonction par son texte casse si le script est reformulé, et les 288 configurations sont un choix de l'outil, pas une mesure.
+- **Prochaine action :** `verifier-accessibilite.cjs` et `auditer-affichages.mjs`, même méthode.
+
 ## 2026-10-29 — L'état de la R&D perdait des sources en silence
 
 - **Initiative :** `documentation-rd-eva` (avec `veille-savoirs-evolutifs`).

@@ -12,13 +12,20 @@
 // testé » — c'est-à-dire une page parfaite. Un faux navigateur suffit à
 // reproduire ça, et coûte zéro seconde au lieu de vingt minutes.
 //
-// Les modes :
-//   nominal      — tout charge, aucune cible à corriger, aucun défaut ;
-//   echec-total  — aucun chargement n'aboutit ;
+// Les modes (le nom dit ce qui doit arriver, pas qui l'utilise) :
+//   nominal       — tout charge, aucune cible à corriger, aucun défaut ;
+//   echec-total   — aucun chargement n'aboutit ;
 //   echec-partiel — une page sur deux échoue ;
-//   defauts      — une cible trop petite non espacée, du texte rogné, un
-//                  débordement horizontal, un focus entièrement masqué et une
-//                  passe de focus coupée par le plafond.
+//   defauts       — une cible trop petite non espacée, du texte rogné, un
+//                   débordement horizontal, un focus entièrement masqué et une
+//                   passe de focus coupée par le plafond ;
+//   fiches-erreurs        — la mesure de géométrie d'une fiche rend une erreur ;
+//   fiches-statut-absent  — la fiche n'affiche pas son statut « Prototype à relire ».
+//
+// Les modes qui ne concernent pas un script ne le perturbent pas : c'est le
+// **type d'argument** qui décide quel contrat est simulé (chaîne = total de
+// focus, nombre = description ou points d'une cible, objet = géométrie d'une
+// fiche, rien = préparation de page).
 
 'use strict';
 
@@ -77,7 +84,24 @@ class FauxOnglet {
       return { debordement: 0, rognes: [], nombreRognes: 0 };
     }
 
-    // 3. Focus : trois appels anonymes, dans cet ordre par onglet — le total
+    // 3. Géométrie d'une fiche (`verifier-fiches-statistiques.cjs`). Cette
+    //    fonction-là ne prend **aucun** argument : c'est son texte qui la
+    //    distingue, et c'est fragile — d'où cette note. Elle cherche un élément
+    //    hors écran, un contenu rogné et la présence du statut « Prototype à
+    //    relire » ; le faux reconnaît la seconde de ces recherches.
+    const source = String(fonction);
+    if (/Prototype à relire/.test(source)) {
+      if (MODE === 'fiches-erreurs') return ['MAIN hors écran'];
+      if (MODE === 'fiches-statut-absent') return ['statut absent'];
+      return [];
+    }
+    // 3 bis. La préparation de page (ouvrir les `<details>`) ne rend rien.
+    if (/main details/.test(source)) return undefined;
+
+    // Les modes qui ne concernent pas ce script restent neutres : un objet en
+    // argument ne déclenche plus rien de particulier.
+
+    // 4. Focus : trois appels anonymes, dans cet ordre par onglet — le total
     //    (une chaîne en argument), puis pour chaque cible une description (un
     //    nombre), puis ses points (le même nombre). Le rang de l'appel départage
     //    description et points ; c'est fragile, et c'est écrit ici pour que

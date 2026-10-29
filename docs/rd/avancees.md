@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 32 |
+| Avancées consignées | 33 |
 | Période couverte | du 2026-10-20 au 2026-10-29 |
-| Contrôles exécutables cités | 45 |
+| Contrôles exécutables cités | 46 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -759,6 +759,30 @@ Initiatives liées : `documentation-rd-eva`, `veille-savoirs-evolutifs`.
 **Suite.** Éprouver `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs` et `auditer-affichages.mjs` avec le faux navigateur, puis `verifier-source-distante.py` en remplaçant sa sonde réseau.
 
 Initiatives liées : `documentation-rd-eva`, `veille-savoirs-evolutifs`.
+
+### `un-releve-qui-n-existe-pas-ne-dit-pas-zero-defaut` — Un relevé qui n'existe pas ne dit pas « zéro défaut »
+
+*Consignée le 2026-10-29.*
+
+**Constat.** `outils/verifier-fiches-statistiques.cjs` promène les deux fiches de statistiques dans 288 configurations (4 largeurs × 3 tailles de texte × 6 dispositions × contraste et espacement renforcés) et écrit un relevé JSON dans `docs/rd/`. Il n'avait aucun test. Son pire défaut n'était pas de mal mesurer : c'était qu'un relevé **absent** se lise comme un audit propre. Le script sort en code 2 si un chargement échoue, mais rien n'était vérifié là-dessus, et le fichier de relevé commité pouvait être écrasé par un simple lancement depuis le dépôt.
+
+**Ce que cela change.** `outils/test_verifier_fiches_statistiques.mjs` remplace `puppeteer-core` et `@sparticuz/chromium` par les deux faux paquets et lance **le vrai script** quatre fois : nominal (288 relevés, 0 échec, périmètre écrit dans le fichier), géométrie fautive (288 échecs comptés, l'erreur nommée), statut absent (le contrôle de statut n'est pas avalé par le contrôle géométrique), chargement impossible (code 2 et **aucun relevé écrit**). Le banc vérifie enfin que le relevé commité n'a pas bougé — il redirige toujours l'écriture hors du dépôt. 5 cas, 0,3 s.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-fiches-statistiques.cjs`
+- `outils/test_verifier_fiches_statistiques.mjs`
+- `outils/faux-navigateur/puppeteer-core/index.js`
+- `docs/rd/audit-fiches-statistiques-2026-10-24.json`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `node outils/test_verifier_fiches_statistiques.mjs && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le banc ne mesure aucune géométrie : il vérifie ce que le script fait du résultat qu'on lui donne, pas si un élément est réellement hors écran. Le faux reconnaît la fonction de géométrie à son texte (elle ne prend aucun argument et cherche `Prototype à relire`) : si le script était reformulé, le faux rendrait une valeur neutre et les cas d'échec ne mordraient plus — c'est le point fragile, écrit dans le code source du faux. Rien ne dit non plus que les 288 configurations soient les bonnes : c'est le choix de l'outil, pas une mesure.
+
+**Suite.** Éprouver `verifier-accessibilite.cjs` et `auditer-affichages.mjs` de la même façon, puis `verifier-source-distante.py` en remplaçant sa sonde réseau.
+
+Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 
 ## 3. Ce que ce registre ne dit pas
 
