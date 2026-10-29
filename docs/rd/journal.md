@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-29 — Un code de sortie ne dit pas pourquoi la mutation a mordu
+
+- **Initiative :** `optimisation-du-site` (avec `documentation-rd-eva`).
+- **Dix-septième lot :** le job `graphismes` rejoue trois mutations internes de `verifier-graphismes.cjs` et exigeait seulement le code de sortie 1. Un contrôle peut céder pour une panne sans rapport — serveur absent, page renommée, exception dans une mesure — et la CI serait restée verte avec un contrôle qui ne voit plus ce qu'il prétend voir.
+- **Le contrôle ajouté :** `outils/verifier-mutation-graphismes.py RAPPORT.json MUTATION` lit le rapport de la passe mutée et exige l'erreur attendue : « distorsion », « densité insuffisante », « ancre ». Un rapport absent ou illisible est un refus.
+- **Six cas hors ligne**, dont un qui **relit les chaînes attendues dans `verifier-graphismes.cjs`** : si le script reformule ses messages, le test échoue au lieu de devenir faux. 0,5 s.
+- **Un piège de rédaction, rencontré une fois :** la première version du contrôle était un heredoc `<<'PY'` glissé dans le `run: |` du workflow. Le contenu du bloc YAML est indenté, et un terminateur `PY` indenté ne ferme pas un heredoc shell — la CI aurait échoué à l'exécution, pas à la relecture. Le contrôle est donc devenu un outil du dépôt, ce qui vaut mieux : il est testable hors CI.
+- **Inventaire :** un outil de plus (46), `banc`. **46 outils · 17 `banc` · 12 `faute-en-memoire` · 6 `test` · 3 `test-en-soi` · 0 `aucun-test` · 8 `hors-portee`** → **35 contrôles sur 38**.
+- **Contrôles exécutés :** `test_verifier_mutation_graphismes.py` (6), `verifier-inventaire-controles.py`, chargement YAML du workflow, `git diff --check`.
+- **Limites :** la chaîne cherchée est un fragment ; une erreur présente par accident sur un autre relevé passerait. Le contrôle dit qu'une erreur a été constatée, pas qu'elle l'a été pour la bonne raison.
+- **Prochaine action :** les trois scripts qui *sont* des tests, en commençant par vérifier que leurs mutations portent bien sur ce qu'ils mesurent.
+
 ## 2026-10-29 — « Manifeste conforme » ne voulait dire que « 343 lignes bien formées »
 
 - **Initiative :** `documentation-rd-eva` (avec `poids-et-sobriete-numerique`).
