@@ -20,12 +20,14 @@
 //                   débordement horizontal, un focus entièrement masqué et une
 //                   passe de focus coupée par le plafond ;
 //   fiches-erreurs        — la mesure de géométrie d'une fiche rend une erreur ;
-//   fiches-statut-absent  — la fiche n'affiche pas son statut « Prototype à relire ».
+//   fiches-statut-absent  — la fiche n'affiche pas son statut « Prototype à relire » ;
+//   a11y-violations       — le balayage axe-core rend deux règles en échec.
 //
 // Les modes qui ne concernent pas un script ne le perturbent pas : c'est le
-// **type d'argument** qui décide quel contrat est simulé (chaîne = total de
-// focus, nombre = description ou points d'une cible, objet = géométrie d'une
-// fiche, rien = préparation de page).
+// **type d'argument** quand il suffit (chaîne courte = sélecteur, chaîne de plus
+// de mille caractères = source injectée, nombre = description ou points d'une
+// cible), et le **texte de la fonction** quand deux scripts partagent la même
+// signature (géométrie d'une fiche, `axe.run`).
 
 'use strict';
 
@@ -36,6 +38,7 @@ class FauxOnglet {
     this.page = page;
     this.largeur = 0;
     this.appelsFocus = 0;
+    this.gestes = [];
     this.ferme = false;
   }
 
@@ -56,6 +59,21 @@ class FauxOnglet {
 
   async close() {
     this.ferme = true;
+  }
+
+  // Gestes d'interface : le vrai onglet clique, choisit, saisit. Le faux les
+  // enregistre sans rien faire — c'est au script, pas au faux, de décider ce
+  // qu'un état interactif doit produire.
+  async click(selecteur) {
+    this.gestes.push(`click ${selecteur}`);
+  }
+
+  async select(selecteur, valeur) {
+    this.gestes.push(`select ${selecteur}=${valeur}`);
+  }
+
+  async type(selecteur, texte) {
+    this.gestes.push(`type ${selecteur}=${texte}`);
   }
 
   async evaluate(fonction, argument) {
@@ -98,6 +116,30 @@ class FauxOnglet {
     // 3 bis. La préparation de page (ouvrir les `<details>`) ne rend rien.
     if (/main details/.test(source)) return undefined;
 
+    // 3 ter. Balayage axe-core (`verifier-accessibilite.cjs`) : c'est `axe.run`
+    //        qui signe la fonction, et elle rend les violations.
+    if (/axe\.run/.test(source)) {
+      if (MODE === 'a11y-violations') {
+        return [
+          {
+            id: 'image-alt',
+            impact: 'critical',
+            help: 'Les images doivent avoir un attribut alt',
+            nodes: [{ target: 'main > img', summary: 'Élément img sans attribut alt | ' }],
+            nombre: 3,
+          },
+          {
+            id: 'link-name',
+            impact: 'serious',
+            help: 'Les liens doivent avoir un texte discernable',
+            nodes: [{ target: 'footer > a', summary: "Le lien n'a pas de texte | " }],
+            nombre: 1,
+          },
+        ];
+      }
+      return [];
+    }
+
     // Les modes qui ne concernent pas ce script restent neutres : un objet en
     // argument ne déclenche plus rien de particulier.
 
@@ -106,7 +148,11 @@ class FauxOnglet {
     //    nombre), puis ses points (le même nombre). Le rang de l'appel départage
     //    description et points ; c'est fragile, et c'est écrit ici pour que
     //    personne ne le découvre par surprise.
-    if (typeof argument === 'string') return 7;
+    // Une chaîne longue est du code injecté (la source d'axe-core) : elle ne
+    // rend rien. Une chaîne courte est le sélecteur du comptage de focus.
+    // Le sélecteur du comptage de focus fait une centaine de caractères ; la
+    // source d'axe-core en fait des milliers. Le seuil départage les deux.
+    if (typeof argument === 'string') return argument.length > 1000 ? undefined : 7;
     if (typeof argument === 'number') {
       this.appelsFocus += 1;
       if (this.appelsFocus % 2 === 1) return { balise: 'a', texte: 'un lien' };

@@ -2,6 +2,21 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-29 — Un balayage d'accessibilité qui n'analyse rien ressemble à un site parfait
+
+- **Initiative :** `optimisation-du-site` (avec `co-conception-et-essais`).
+- **Treizième lot :** `outils/verifier-accessibilite.cjs`, 321 lignes, aucun test. Il visite 12 pages à deux largeurs, puis une vingtaine d'états interactifs construits au clic — menu, panneau Affichage, contraste renforcé, lecture à voix haute, filtres d'Apprendre, aides dépliées, mission des Mondes, commandes du simulateur — et passe axe-core sur chacun.
+- **Trois mensonges possibles :** n'analyser aucune page et annoncer « 0 violation » ; perdre le lien entre une violation et l'état qui la porte ; sortir en succès malgré une règle en échec. Un total agrégé ne dit jamais où regarder.
+- **Trois faux paquets :** `puppeteer-core`, `@sparticuz/chromium` (avec `inflate` et `setupLambdaEnvironment`) et désormais `axe-core`, dont le `.min.js` existe pour que `require.resolve` aboutisse. Le vrai script est lancé sans modification, avec `MRSC_A11Y_BASE` pour qu'il ne démarre pas `serveur-local.py`.
+- **Trois cas, 40 s :** nominal (code 0, chaque exécution annoncée a sa ligne « OK — », les six états interactifs témoins sont relevés séparément) ; violations (code 1, deux règles nommées avec nœud, état et largeur, message de repli « consigner la mesure sans la présenter comme un audit ») ; chargement impossible (code 2, aucun rapport écrit).
+- **Le total n'est pas recopié :** le banc compare le nombre de « OK — » et le nombre de clés du rapport JSON au décompte que le script publie lui-même. Ajouter un état au balayage ne casse pas le banc ; en retirer un silencieusement, si.
+- **Le banc mord, vérifié à la main :** forcer `process.exit(0)` fait échouer le cas « violations ».
+- **Pourquoi 40 s :** le script attend ses états (`attendre(5000)` pour `simulateur.html`, des pauses de 250 à 600 ms ailleurs). Le banc hérite de ce coût ; il reste sans navigateur et tourne dans `qualite`.
+- **Inventaire :** `verifier-accessibilite.cjs` passe de `aucun-test` à `faute-en-memoire`. **45 outils · 15 `banc` · 11 `faute-en-memoire` · 6 `test` · 3 `test-en-soi` · 2 `aucun-test` · 8 `hors-portee`** → **32 contrôles sur 37**.
+- **Contrôles exécutés :** `test_verifier_accessibilite.mjs` (3), `test_verifier_fiches_statistiques.mjs` (5), `test_auditer_criteres_22.mjs` (4), `verifier-inventaire-controles.py`, `construire-avancees.py --verifier` (34 avancées), chargement YAML du workflow, `git diff --check`.
+- **Limites :** aucune règle axe n'est évaluée — le faux rend les violations qu'on lui demande, donc le banc prouve le traitement d'un résultat, jamais sa détection. Un axe-core cassé ne serait pas vu, et aucune page réelle n'est ouverte.
+- **Prochaine action :** `auditer-affichages.mjs`, dernier script navigateur sans banc.
+
 ## 2026-10-29 — Un relevé absent ne doit pas ressembler à « zéro défaut »
 
 - **Initiative :** `optimisation-du-site`.
