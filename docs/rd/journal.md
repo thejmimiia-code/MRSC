@@ -7,7 +7,8 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Initiative :** `documentation-rd-eva` (avec `poids-et-sobriete-numerique`).
 - **Seizième lot :** `outils/verifier-planches-statuts.py`. Son résumé concluait « manifeste de 343 empreintes **conforme** » alors qu'il ne vérifiait que le nombre de lignes, l'unicité des noms et la forme des empreintes. Le contenu n'était jamais comparé. Le mot « conforme » se lisait comme « archive intacte ».
 - **Ce qui existait déjà, mais à la main :** `docs/rd/archives-et-poids-du-depot.md` documente `sha256sum -c` sur une archive restaurée depuis l'étiquette `planches-statuts-animation-2026-10`. Une étape humaine, donc non rejouée.
-- **La mesure qui interdit la solution évidente :** comparer les fichiers de l'arbre au manifeste produirait de faux écarts. La bible du film, présente dans l'arbre, a pour empreinte `e6c9d68c…` ; le manifeste attend `6f3dcb4e…`. Cohérent avec une archive figée et un document vivant — mais **non tranché**, l'étiquette n'existe pas dans ce clone.
+- **La mesure qui interdit la solution évidente :** comparer les fichiers de l'arbre au manifeste produirait de faux écarts. La bible du film, présente dans l'arbre, a pour empreinte `e6c9d68c…` ; le manifeste attend `6f3dcb4e…`.
+- **Et la question tranchée dans la foulée :** les étiquettes ont été récupérées (`git fetch --tags`, 62 s), la bible extraite de `planches-statuts-animation-2026-10` par `git archive` porte **exactement** `6f3dcb4e…`. Aucune corruption : l'archive est figée sur la version de l'étiquette, le document de l'arbre a évolué depuis. Rejoué avec le nouvel outil sur la copie restaurée : `1 empreinte(s) conforme(s), 342 fichier(s) absent(s), aucun écart` — les 342 PNG n'ont pas été extraits (plus d'un gigaoctet), et le compte le dit.
 - **La réponse :** `--empreintes DOSSIER` recalcule les empreintes d'une archive restaurée, nomme chaque écart, et compte séparément les fichiers vérifiés et les absents. Sans l'option, le résumé dit « 343 empreintes bien formées (contenu non vérifié ici : l'archive vit hors de l'arbre) ».
 - **Trois cas ajoutés au banc :** deux fichiers non conformes nommés ; un fichier conforme compté (`1 empreinte(s) conforme(s), 342 fichier(s) absent(s)`) — l'empreinte est **recalculée** par le banc, jamais recopiée ; un dossier absent dit comme un manque.
 - **Le banc mord, vérifié à la main :** neutraliser la comparaison (`if False`) fait échouer le cas des deux fichiers non conformes.
@@ -15,7 +16,7 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Ce que la CI fait et ne fait pas :** elle lance le contrôle de forme, pas `--empreintes` — l'archive pèse plus d'un gigaoctet et vit hors du dépôt. Le journal le dit, et le résumé aussi.
 - **Contrôles exécutés :** `test_mutations_planches_statuts.py` (11), `verifier-planches-statuts.py` avec et sans `--verifier`, `verifier-inventaire-controles.py`, `construire-avancees.py --verifier`, `git diff --check`.
 - **Limites :** tant que personne ne lance `--empreintes` sur une copie restaurée, le contenu n'est pas vérifié. Mieux vaut un résumé qui l'avoue qu'un « conforme » trompeur, mais cela ne remplace pas la vérification.
-- **Prochaine action :** éprouver les trois scripts qui *sont* des tests, puis trancher l'écart d'empreinte avec une copie de l'étiquette.
+- **Prochaine action :** éprouver les trois scripts qui *sont* des tests (`test-experience.cjs`, `test-cache-css-ia.cjs`, `verifier-graphismes.cjs`).
 
 ## 2026-10-29 — Le dernier contrôle sans preuve : le réseau se teste sur la boucle locale
 

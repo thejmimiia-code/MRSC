@@ -72,7 +72,15 @@ python3 outils/verifier-planches-statuts.py --empreintes /tmp/verif-archive/docs
 # OK — archive vérifiée : N empreinte(s) conforme(s), M fichier(s) absent(s), aucun écart.
 ```
 
-Sans l'option, le contrôle ne vérifie **que la forme** du manifeste — 343 lignes bien formées, noms uniques, nombre attendu — et le dit désormais explicitement, au lieu d'annoncer « conforme ». La distinction compte : comparer les fichiers de l'arbre au manifeste produirait de faux écarts, parce que l'archive est figée et que les documents vivent. Mesuré le 29 octobre 2026 : la [bible du film](statuts-animation/bible-fil-et-video-01.md) présente dans l'arbre a pour empreinte `e6c9d68c…`, alors que le manifeste attend `6f3dcb4e…`. Cet écart est cohérent avec une archive figée et un document qui a évolué depuis ; il n'a **pas** été tranché ici (l'étiquette `planches-statuts-animation-2026-10` n'existe pas dans le clone de travail utilisé), et il ne doit pas être lu comme une corruption.
+Sans l'option, le contrôle ne vérifie **que la forme** du manifeste — 343 lignes bien formées, noms uniques, nombre attendu — et le dit désormais explicitement, au lieu d'annoncer « conforme ». La distinction compte : comparer les fichiers de l'arbre au manifeste produirait de faux écarts, parce que l'archive est figée et que les documents vivent. Mesuré le 29 octobre 2026, et **tranché** le même jour : la [bible du film](statuts-animation/bible-fil-et-video-01.md) présente dans l'arbre a pour empreinte `e6c9d68c…`, alors que le manifeste attend `6f3dcb4e…`. La copie de la bible dans l'étiquette `planches-statuts-animation-2026-10`, extraite par `git archive`, a exactement l'empreinte du manifeste (`6f3dcb4e…`). Il n'y a donc **aucune corruption** : l'archive est bien figée sur la version de l'étiquette, et le document de l'arbre a évolué depuis. Le contrôle rejoué sur ce fichier restauré :
+
+```sh
+git archive planches-statuts-animation-2026-10 docs/rd/statuts-animation/bible-fil-et-video-01.md | tar -x -C /tmp/verif-archive
+python3 outils/verifier-planches-statuts.py --empreintes /tmp/verif-archive/docs/rd/statuts-animation
+# OK — archive vérifiée : 1 empreinte(s) conforme(s), 342 fichier(s) absent(s) de la copie restaurée, aucun écart.
+```
+
+Les 342 autres empreintes n'ont pas été vérifiées ici : l'archive complète pèse plus d'un gigaoctet et n'a pas été extraite. Le compte le dit, au lieu d'annoncer 343 conformes.
 
 Le même outil contrôle les **liens d'image de tous les documents `docs/rd/*.md`** : 205 liens recensés au 19 octobre 2026, dont 193 vers des planches archivées (la [bible du film](statuts-animation/bible-fil-et-video-01.md)) et 12 vers les planches conservées. Un lien vers un fichier ni présent ni archivé fait échouer le contrôle, ce qui interdit qu'un retrait casse silencieusement une référence.
 

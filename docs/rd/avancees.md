@@ -848,9 +848,9 @@ Initiatives liées : `documentation-rd-eva`, `veille-savoirs-evolutifs`.
 
 **Contrôle qui la maintient :** `python3 outils/test_mutations_planches_statuts.py && python3 outils/verifier-planches-statuts.py`
 
-**Limite — ce que cela ne prouve pas.** La vérification reste optionnelle, donc absente de la CI : l'archive pèse plus d'un gigaoctet et vit hors du dépôt. Tant qu'une personne ne lance pas `--empreintes` sur une copie restaurée, le contenu n'est pas vérifié — le résumé le dit, ce qui vaut mieux qu'un « conforme » trompeur, mais ne remplace pas la vérification. L'écart constaté sur la bible du film n'est pas tranché : archive figée ou fichier modifié, la mesure seule ne le dit pas, et l'étiquette n'était pas disponible dans le clone de travail.
+**Limite — ce que cela ne prouve pas.** La vérification reste optionnelle, donc absente de la CI : l'archive pèse plus d'un gigaoctet et vit hors du dépôt. Tant qu'une personne ne lance pas `--empreintes` sur une copie restaurée, le contenu n'est pas vérifié — le résumé le dit, ce qui vaut mieux qu'un « conforme » trompeur, mais ne remplace pas la vérification. L'écart d'empreinte de la bible du film, lui, a été tranché le 29 octobre 2026 : la copie de l'étiquette `planches-statuts-animation-2026-10`, extraite par `git archive`, porte exactement l'empreinte du manifeste, donc l'archive est intacte et c'est le document de l'arbre qui a évolué. Une seule empreinte a été vérifiée sur les 343 : l'extraction complète pèse plus d'un gigaoctet.
 
-**Suite.** Éprouver les trois scripts qui sont eux-mêmes des tests (`test-experience.cjs`, `test-cache-css-ia.cjs`, `verifier-graphismes.cjs`), puis trancher l'écart d'empreinte de la bible avec une copie de l'étiquette.
+**Suite.** Éprouver les trois scripts qui sont eux-mêmes des tests (`test-experience.cjs`, `test-cache-css-ia.cjs`, `verifier-graphismes.cjs`). La vérification complète des 343 empreintes reste une action humaine, faute de place pour extraire l'archive.
 
 Initiatives liées : `documentation-rd-eva`, `poids-et-sobriete-numerique`.
 
