@@ -2,6 +2,21 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-29 — Un test que personne ne lançait
+
+- **Initiative :** `optimisation-du-site` (avec `documentation-rd-eva`).
+- **Dix-neuvième lot.** En ouvrant `test-experience.cjs` pour l'éprouver, la première chose vue n'est pas un défaut du test : c'est qu'**aucun workflow ne le lance**. `grep test-experience .github/workflows/*.yml` ne rend rien. Neuf essais interactifs, 1 257 lignes, exercés à la main depuis le 14 octobre.
+- **Ce que l'inventaire disait :** `test-en-soi`, dont la définition est « un script navigateur ou une simulation d'erreur, **lancé par la CI** ». La définition était fausse pour ce fichier, et rien ne le signalait — l'inventaire vérifie que les fichiers cités existent, pas que les statuts disent vrai du monde.
+- **Correction 1 — il tourne enfin :** le job `graphismes` (le seul qui installe Chromium) lance `MRSC_TEST_URL=http://127.0.0.1:4181/ node outils/test-experience.cjs` contre le serveur qu'il a déjà démarré. `simulateur/index.html` existe, donc `/simulateur/` est servi.
+- **Correction 2 — le harnais est éprouvé :** `outils/test_test_experience.mjs`, 0,5 s, sans Chromium. Avec le faux navigateur en échec total, les neuf essais doivent être comptés une fois, nommés, le bilan annoncé doit être `0/9` et le code de sortie 1. Première exécution complète du script dans cette sandbox : `0/9`, code 1, les neuf noms affichés.
+- **Le verdict a été vu mordre :** trois mutations de la copie sont rejetées — `process.exitCode` effacé (code 0), succès enregistré malgré l'exception (`9/9` après neuf échecs), essai renommé. Deux invariants lus dans la source : aucun essai sans `assert.`, aucun nom en double.
+- **Inventaire :** **46 outils · 19 `banc` · 12 `faute-en-memoire` · 6 `test` · 1 `test-en-soi` · 0 `aucun-test` · 8 `hors-portee`** → **37 contrôles sur 38**. `test-experience.cjs` passe de `test-en-soi` à `banc`.
+- **Contrôles exécutés :** `test_test_experience.mjs`, `verifier-inventaire-controles.py`, chargement YAML du workflow, `construire-avancees.py --verifier`, `verifier-rd-continue.py`, `verifier-integration.py`, `verifier-site-statique.py`, `git diff --check`.
+- **Le lancement en CI a d'abord échoué, et c'est ce qui l'a rendu juste.** Premier passage (exécution 40970230062) : le job `graphismes` tombe, sans qu'on puisse dire pourquoi — les journaux complets de GitHub Actions ne sont pas joignables depuis cet atelier, seul `api.github.com` l'est. Les échecs sont donc devenus des **annotations** (`::error title=…`), lisibles par l'API. Deuxième passage (40971214478) : quatre essais en `TimeoutError`, tous sur `#overlay.visible` — le guide du simulateur ne s'ouvre jamais.
+- **La cause, et non le contournement :** `simulateur/` attend son API (`chargerContexte`, `chargerLexique`) avant d'ouvrir le guide. Servie par `python3 -m http.server`, elle reçoit des 404 et l'initialisation s'arrête. Le script sait démarrer `outils/serveur-local.py` — c'est ce que sa documentation dit de faire depuis le 14 octobre. Le job ne passe donc plus d'URL : il laisse le script monter son serveur. Troisième passage (40972858034) : **`qualite` et `graphismes` verts**, les neuf essais réellement mesurés.
+- **Limites :** le banc ne rejoue aucun essai — il prouve le récit, pas la mesure. Les neuf essais sont verts en CI, ce qui ne dit pas qu'ils couvrent ce qu'ils prétendent couvrir.
+- **Prochaine action :** éprouver la mesure de `verifier-graphismes.cjs`, dernier contrôle sans second témoin.
+
 ## 2026-10-29 — Un test de cache qui ne sert plus rien reste vert
 
 - **Initiative :** `optimisation-du-site` (avec `documentation-rd-eva`).

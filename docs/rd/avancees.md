@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 39 |
+| Avancées consignées | 40 |
 | Période couverte | du 2026-10-20 au 2026-10-29 |
-| Contrôles exécutables cités | 52 |
+| Contrôles exécutables cités | 53 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -923,6 +923,29 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 **Limite — ce que cela ne prouve pas.** Le faux navigateur ne mesure rien : il encode la seule règle « l'ancien CSS décale les pastilles », et le banc prouve donc la plomberie du test — qu'il sert bien deux feuilles, qu'il les distingue, que ses assertions mordent — jamais que le CSS de f3c4ddf décalait réellement de 12 px sur un téléphone. Les trois cas mutés portent sur des copies jetables ; la racine factice ne contient que le CSS, la page et le script, si bien qu'une dépendance nouvelle du script à un autre fichier du dépôt ferait échouer le cas nominal — c'est voulu, mais ce n'est pas dit par le script lui-même.
 
 **Suite.** Éprouver `test-experience.cjs`, dernier script qui est lui-même un test, en commençant par ce qui est faisable sans navigateur : le compte d'essais annoncé et l'existence d'au moins une assertion par essai.
+
+Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
+
+### `un-test-que-personne-ne-lancait` — Un test que personne ne lançait : neuf essais navigateur hors de toute CI
+
+*Consignée le 2026-10-29.*
+
+**Constat.** `test-experience.cjs` contient neuf essais interactifs — choix immédiat, clavier et retour du focus, en-tête compact, panneaux à 320 et 1 440 px, contraste et espacement, stockage bloqué, guide, lecture à voix haute, iframe synchronisée — et **aucun workflow ne le lançait**. Il n'était exercé qu'à la main, sur une machine équipée de Chromium. L'inventaire le classait `test-en-soi`, statut dont la définition dit « lancé par la CI » : la définition était fausse pour lui. Un test que rien ne lance ne protège rien, même quand il passe.
+
+**Ce que cela change.** Deux corrections. Le job `graphismes` — le seul qui installe Chromium — lance désormais `node outils/test-experience.cjs` contre le serveur du site qu'il a déjà démarré. Et `outils/test_test_experience.mjs` éprouve le **harnais** : avec le faux navigateur en échec total, les neuf essais doivent être comptés une fois, nommés, le bilan annoncé doit être `0/9`, et le code de sortie 1. Trois mutations sont rejetées par ce verdict — `process.exitCode` effacé, succès enregistré malgré l'exception, essai renommé — et deux invariants sont lus dans la source : aucune assertion absente d'un essai, aucun nom en double.
+
+**Preuves dans le dépôt :**
+
+- `outils/test_test_experience.mjs`
+- `outils/test-experience.cjs`
+- `.github/workflows/verification.yml`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `node outils/test_test_experience.mjs`
+
+**Limite — ce que cela ne prouve pas.** Le banc ne rejoue aucun essai : le faux navigateur ne clique pas et ne mesure pas. Il prouve que le harnais ne peut pas raconter un succès qui n'a pas eu lieu — comptage, nommage, bilan, code de sortie — jamais que les neuf essais mesurent ce qu'ils annoncent. Ce second point est tenu par le job `graphismes` et un vrai Chromium : observé vert le 29 octobre (exécution 40972858034). Il a d'abord échoué, et c'est instructif — servi par `python3 -m http.server`, `simulateur/` reçoit des 404 sur son API, n'ouvre jamais `#overlay.visible`, et quatre essais tombent en `TimeoutError`. Le script doit donc démarrer `outils/serveur-local.py`, comme sa documentation le dit. Rien de tout cela ne prouve que les neuf essais couvrent ce qu'ils prétendent couvrir : ils sont verts, pas exhaustifs.
+
+**Suite.** Éprouver la mesure de `verifier-graphismes.cjs`, dernier contrôle sans second témoin.
 
 Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 

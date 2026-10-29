@@ -367,6 +367,40 @@ jobs:
             test "$statut" -eq 1
             python3 outils/verifier-mutation-graphismes.py "$RUNNER_TEMP/graphismes/mutation-$mutation.json" "$mutation"
           done
+      # Neuf essais interactifs (panneau, clavier, en-tête compact, stockage
+      # bloqué, guide, lecture à voix haute, iframe synchronisée). Le script
+      # existait depuis le 14 octobre et **aucun workflow ne le lançait** : il
+      # n'était exercé qu'à la main, sur une machine avec Chromium. Ce job est le
+      # seul à installer Chromium, d'où sa place ici.
+      #
+      # Les essais passent par `outils/serveur-local.py`, que le script démarre
+      # lui-même : c'est écrit dans sa documentation, et c'est nécessaire. La
+      # page `simulateur/` attend son API (`chargerContexte`, `chargerLexique`)
+      # avant d'ouvrir le guide ; servie par un simple `http.server`, elle reçoit
+      # des 404 et n'ouvre jamais `#overlay.visible`. Quatre des neuf essais
+      # tombent alors en `TimeoutError` — constaté le 29 octobre, lisible dans
+      # les annotations de l'exécution 40971214478.
+      #
+      # Les échecs sont aussi publiés en annotations : les journaux complets de
+      # GitHub Actions ne sont pas joignables depuis l'atelier qui tient ce
+      # dépôt, alors qu'une annotation se lit par l'API. Sans cela, « le job est
+      # rouge » serait tout ce qu'on saurait — et on ne saurait pas réparer.
+      - name: Éprouver les essais navigateur du panneau et du menu
+        env:
+          MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
+        run: |
+          set +e
+          node outils/test-experience.cjs >"$RUNNER_TEMP/essais.log" 2>&1
+          statut=$?
+          set -e
+          cat "$RUNNER_TEMP/essais.log"
+          if [ "$statut" -ne 0 ]; then
+            grep -E '^(ÉCHEC|Error|.*AssertionError|.*Error:)' "$RUNNER_TEMP/essais.log" | head -n 10 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::error title=Essais navigateur::$ligne"
+            done
+            exit "$statut"
+          fi
+
       - name: Conserver les mesures et captures même en échec
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
