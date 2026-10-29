@@ -2,6 +2,21 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-29 — Un banc de dix minutes sera contourné ; celui-ci en prend trois secondes
+
+- **Initiative :** `optimisation-du-site` (avec `poids-et-sobriete-numerique`).
+- **Quatorzième lot :** `outils/auditer-affichages.mjs`, dernier script navigateur sans banc. Il mesure 13 pages dans 19 formats (du pliable 280 px au 4k 3840) et 10 modes d'affichage enregistrés par le site : **2 470 mesures**, chacune suivie d'une pause de 120 ms dans le script.
+- **Le mur, mesuré :** une exécution complète avec le faux navigateur prend **9 min 57 s**, et il en fallait trois. Un banc qu'on n'exécute pas ne prouve rien ; un banc de trente minutes sera contourné.
+- **La décision, écrite dans l'en-tête du banc :** le périmètre est réduit **dans la copie jetable** à une page, un format et deux modes — 2 mesures, 2,7 s au total pour les trois cas. Ce qui est éprouvé est le traitement d'une mesure et le code de sortie, pas la couverture des formats. La règle vaut d'être retenue : *une réduction de banc est légitime si elle est écrite au-dessus du banc, pas seulement dans le journal.*
+- **Une particularité technique, rencontrée une fois :** ce script, contrairement aux trois autres, ne lit aucune variable pour trouver ses dépendances ; il les importe en modules ES. `NODE_PATH` ne sert à rien en ESM, et placer un `node_modules` dans le dépôt serait un dégât. Le banc monte donc une arborescence jetable : `outils/` copié (le script y est, intact), toutes les autres entrées liées symboliquement, faux paquets dans `node_modules`. Node résout alors depuis le vrai emplacement du script.
+- **La réduction elle-même est gardée :** trois ancres exactes (`const PAGES`, `const FORMATS`, `const MODES`) ; si le script était reformaté, le banc échouerait bruyamment au lieu de tester autre chose.
+- **Trois cas :** nominal (code 0, chaque mesure annoncée écrite, les six compteurs présents même à zéro) ; défauts (code 1, `équilibrée / index.html @ pliable 280 :: débordement 12px | 2 hors cadre | 1 cible<24px`) ; chargement impossible (arrêt non nul, **aucun rapport écrit**).
+- **Le banc mord, vérifié à la main :** forcer `process.exit(0)` fait échouer le cas « défauts ».
+- **Inventaire :** `auditer-affichages.mjs` passe de `aucun-test` à `faute-en-memoire`. **45 outils · 15 `banc` · 12 `faute-en-memoire` · 6 `test` · 3 `test-en-soi` · 1 `aucun-test` · 8 `hors-portee`** → **33 contrôles sur 37**. Il ne reste qu'un contrôle sans preuve : `verifier-source-distante.py`.
+- **Contrôles exécutés :** `test_auditer_affichages.mjs` (3, 2,7 s), `test_verifier_accessibilite.mjs` (3), `test_verifier_fiches_statistiques.mjs` (5), `test_auditer_criteres_22.mjs` (4), `verifier-inventaire-controles.py`, `construire-avancees.py --verifier` (35 avancées), chargement YAML du workflow, `git diff --check`.
+- **Limites :** les 19 formats et les 10 modes ne sont pas couverts ; une régression propre au 4k ou au pliable 280 passerait. Le faux navigateur ne charge aucune page : la géométrie réelle n'est jamais exercée, et la netteté d'image dépend d'ImageMagick, absent de cette sandbox.
+- **Prochaine action :** `verifier-source-distante.py`, dernier contrôle sans preuve.
+
 ## 2026-10-29 — Un balayage d'accessibilité qui n'analyse rien ressemble à un site parfait
 
 - **Initiative :** `optimisation-du-site` (avec `co-conception-et-essais`).

@@ -19,7 +19,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 
 | Outil | Rôle | Garde actuelle | Statut |
 | --- | --- | --- | --- |
-| `outils/auditer-affichages.mjs` | Audit navigateur des formats d'affichage | Vert du job `graphismes` | `aucun-test` |
+| `outils/auditer-affichages.mjs` | Audit navigateur des formats d'affichage | `test_auditer_affichages.mjs` (navigateur remplacé, périmètre réduit dans la copie ; 3 modes) | `faute-en-memoire` |
 | `outils/auditer-criteres-22.mjs` | Comptage des critères WCAG 2.2 sur les pages | `test_auditer_criteres_22.mjs` (navigateur remplacé par deux faux ; 4 modes : nominal, échec total, échec partiel, défauts) | `faute-en-memoire` |
 | `outils/auditer-prototypes.py` | 17 contrôles mécaniques par fiche | `test_audit_prototypes.py` (30 tests, données copiées puis cassées) | `faute-en-memoire` |
 | `outils/banc_mutations.py` | Aides partagées des bancs de mutation | Aucune : module d'aide, sans sortie | `hors-portee` |
@@ -70,18 +70,17 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 45 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
 - **Quinze** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture, les planches des statuts, l'état daté de la R&D et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
-- **Onze** le sont en cassant des données en mémoire ou en simulant ce qui ne peut pas être joint. C'est utile, mais la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests, et `verifier-maj-amont.py` n'interroge jamais réellement l'amont dans son test, et les trois scripts navigateur (`auditer-criteres-22.mjs`, `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs`) ne voient jamais un vrai Chromium — leurs bancs éprouvent ce qu'ils font de mesures qu'on leur donne, pas la justesse de ce qu'ils mesurent.
+- **Douze** le sont en cassant des données en mémoire ou en simulant ce qui ne peut pas être joint. C'est utile, mais la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests, et `verifier-maj-amont.py` n'interroge jamais réellement l'amont dans son test, et les quatre scripts navigateur (`auditer-criteres-22.mjs`, `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs`, `auditer-affichages.mjs`) ne voient jamais un vrai Chromium — leurs bancs éprouvent ce qu'ils font de mesures qu'on leur donne, pas la justesse de ce qu'ils mesurent.
 - **Six** ont un test qui n'injecte aucune faute.
 - **Trois** sont eux-mêmes des tests (scripts navigateur, simulation de cache) : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre.
-- **Deux** ne sont prouvés par rien d'autre que leur vert quotidien.
+- **Un** n'est prouvé par rien d'autre que son vert quotidien.
 - **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
 
-Autrement dit : **32 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 5 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et deux ne sont prouvés par rien d'autre que leur vert quotidien.
+Autrement dit : **33 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 4 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et un seul — `verifier-source-distante.py`, qui demande le réseau — n'est prouvé par rien d'autre que son vert quotidien.
 
 ## Par où continuer, par ordre de rentabilité
 
-1. `auditer-affichages.mjs` — dernier script navigateur sans banc ; il mesure 13 pages dans 18 formats, et son contrat de sortie se teste de la même façon.
-2. `verifier-source-distante.py` — il demande le réseau ; son banc devra remplacer la sonde, comme `test_verifier_maj_amont.py`.
+1. `verifier-source-distante.py` — dernier contrôle sans preuve. Il demande le réseau ; son banc devra remplacer la sonde, comme `test_verifier_maj_amont.py` l'a fait pour `verifier-maj-amont.py`.
 
 ## Limites de ce document
 

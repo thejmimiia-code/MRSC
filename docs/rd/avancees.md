@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 34 |
+| Avancées consignées | 35 |
 | Période couverte | du 2026-10-20 au 2026-10-29 |
-| Contrôles exécutables cités | 47 |
+| Contrôles exécutables cités | 48 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -758,6 +758,29 @@ Initiatives liées : `documentation-rd-eva`, `veille-savoirs-evolutifs`.
 **Suite.** Éprouver `auditer-affichages.mjs`, dernier script navigateur sans banc, puis `verifier-source-distante.py` en remplaçant sa sonde réseau.
 
 Initiatives liées : `optimisation-du-site`, `co-conception-et-essais`.
+
+### `un-banc-a-dix-minutes-se-reduit-en-lecrivant` — Un banc qui coûte dix minutes se réduit, en l'écrivant au-dessus du banc
+
+*Consignée le 2026-10-29.*
+
+**Constat.** `outils/auditer-affichages.mjs` mesure 13 pages dans 19 formats et 10 modes — 2 470 mesures — et n'avait aucun test. Son contrat de sortie s'éprouve comme celui des trois autres scripts navigateur, mais chaque mesure est suivie d'une pause de 120 ms dans le script : une exécution complète prend dix minutes, mesurées le 29 octobre 2026, et il en faut trois pour couvrir les cas. Un banc qu'on n'exécute pas ne prouve rien, et un banc qui coûte une demi-heure sera contourné.
+
+**Ce que cela change.** `outils/test_auditer_affichages.mjs` monte une arborescence jetable — `outils/` copié, le reste lié symboliquement, les faux paquets dans `node_modules` — parce que ce script, contrairement aux trois autres, importe ses dépendances en modules ES sans lire de variable. Il lance le script du dépôt après avoir réduit le périmètre **dans la copie** à une page, un format et deux modes, par ancres exactes qui échouent si le script est reformaté. Trois cas : nominal (chaque mesure annoncée est écrite, aucune clé ne manque), défauts (code 1, mesure nommée avec mode, page, format et compteurs), chargement impossible (arrêt non nul, aucun rapport partiel). 2,7 s au lieu de 30 minutes.
+
+**Preuves dans le dépôt :**
+
+- `outils/auditer-affichages.mjs`
+- `outils/test_auditer_affichages.mjs`
+- `outils/faux-navigateur/puppeteer-core/index.js`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `node outils/test_auditer_affichages.mjs && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** La réduction du périmètre est le point sensible : le banc ne prouve pas que les 19 formats et les 10 modes sont couverts, seulement que le script traite une mesure, nomme un défaut et écrit son rapport. Une régression qui ne toucherait qu'un format particulier (le 4k, le pliable 280) passerait sans être vue — c'est un choix assumé au nom du coût, et il est écrit dans l'en-tête du banc. Le faux navigateur ne charge aucune page : les six contrôles de géométrie ne sont jamais exercés sur du vrai HTML, et la netteté d'image dépend d'ImageMagick, absent ici.
+
+**Suite.** Éprouver `verifier-source-distante.py`, dernier contrôle sans preuve, en remplaçant sa sonde réseau.
+
+Initiatives liées : `optimisation-du-site`, `poids-et-sobriete-numerique`.
 
 ### `un-etat-qui-perd-une-source-garde-l-air-complet` — Un rapport d'état qui perd une source sans le dire garde l'air complet
 
