@@ -247,6 +247,17 @@ jobs:
       - name: Éprouver le balayage d'accessibilité
         run: node outils/test_verifier_accessibilite.mjs
 
+      # `test-cache-css-ia.cjs` simule un CSS périmé servi sous l'ancienne URL :
+      # il intercepte la requête de la feuille et sert lui-même deux CSS. Sa
+      # panne discrète n'est pas un écart de géométrie, c'est de ne plus servir
+      # l'ancienne feuille — le test afficherait alors un bilan vert sans rien
+      # reproduire. Le banc rejoue les cinq cas avec le faux navigateur (le faux
+      # rejoue l'interception et tire l'écart du CSS réellement servi) : nominal,
+      # version périmée, attente inversée, interception retirée, ancien CSS
+      # identique au courant. 0,5 s, aucun binaire à télécharger.
+      - name: Éprouver le test du cache CSS
+        run: node outils/test_test_cache_css_ia.mjs
+
       # `auditer-affichages.mjs` mesure 13 pages dans 19 formats et 10 modes :
       # 2 470 mesures, chacune suivie d'une pause de 120 ms dans le script, soit
       # dix minutes par exécution. Le banc réduit donc le périmètre à une page,

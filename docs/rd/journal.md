@@ -2,6 +2,20 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-29 — Un test de cache qui ne sert plus rien reste vert
+
+- **Initiative :** `optimisation-du-site` (avec `documentation-rd-eva`).
+- **Dix-huitième lot :** `test-cache-css-ia.cjs` intercepte la requête du CSS d'`ia-societe.html` et sert lui-même deux feuilles : l'ancienne sous l'URL nue, la versionnée sous `?v=…`. Il exige alors que l'écart pastille/point soit grand dans un cas et nul dans l'autre. Rien ne prouvait qu'il mord encore, et sa panne discrète n'est pas géométrique : c'est de **ne plus servir l'ancienne feuille**.
+- **Le banc :** `outils/test_test_cache_css_ia.mjs`, cinq cas, 0,5 s, sans Chromium. Il monte une racine factice (le CSS, la page, le script, les deux faux paquets) et lance le vrai script.
+- **Le faux navigateur a appris l'interception :** il rejoue les deux requêtes de la page simulée — le document, puis la feuille qu'il référence — et rend au script ce que celui-ci répond. La distance pastille/point est tirée du CSS **réellement servi**. C'est la seule géométrie que le faux encode, et elle est écrite dans son en-tête.
+- **Les cinq cas :** nominal (douze essais, `''` puis `?v=…`, annonce relue et confrontée au relevé) · version périmée dans la page (code 1, message nommé, **aucun relevé écrit**) · attente des deux cas inversée (code 1) · `setRequestInterception` retiré (code 1) · CSS courant servi comme « ancien » (code 1).
+- **Le banc a été vu mordre :** en neutralisant la règle du faux (`const anciennes = false`), il tombe — sept échecs, dont « les six configurations devraient être visitées ». Restauré ensuite.
+- **Les quatre bancs navigateur existants ont été relancés après la modification du faux** (`test_verifier_accessibilite.mjs`, `test_verifier_fiches_statistiques.mjs`, `test_auditer_criteres_22.mjs`, `test_auditer_affichages.mjs`) : tous verts.
+- **Inventaire :** **46 outils · 18 `banc` · 12 `faute-en-memoire` · 6 `test` · 2 `test-en-soi` · 0 `aucun-test` · 8 `hors-portee`** → **36 contrôles sur 38**. `test-cache-css-ia.cjs` passe de `test-en-soi` à `banc`.
+- **Contrôles exécutés :** le nouveau banc, les quatre bancs navigateur ci-dessus, `verifier-inventaire-controles.py`, chargement YAML du workflow, `construire-avancees.py --verifier`, `verifier-rd-continue.py`, `verifier-integration.py`, `verifier-site-statique.py`, `git diff --check`.
+- **Limites :** le faux n'encode qu'une règle et ne mesure rien ; le banc prouve la plomberie du test, pas que l'ancien CSS décalait réellement de 12 px sur un téléphone.
+- **Prochaine action :** `test-experience.cjs`, dernier script qui est lui-même un test, en commençant par ce qui se vérifie sans navigateur.
+
 ## 2026-10-29 — Un code de sortie ne dit pas pourquoi la mutation a mordu
 
 - **Initiative :** `optimisation-du-site` (avec `documentation-rd-eva`).

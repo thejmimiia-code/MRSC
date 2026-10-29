@@ -25,6 +25,16 @@
 //   affichage-defauts    — chaque mesure d'affichage rend un débordement et une
 //                          cible trop petite.
 //
+// Le faux sait aussi **rejouer une interception de requêtes**, ce dont
+// `test-cache-css-ia.cjs` a besoin : il ne connaît pas le réseau, il rejoue les
+// deux requêtes de la page qu'il simule — le document, puis la feuille qu'il
+// référence — et rend au script ce que celui-ci répond. La distance entre les
+// pastilles et leurs points est alors tirée du CSS **réellement servi** : si le
+// CSS porte encore les positions de f3c4ddf, les pastilles sont loin de leurs
+// points ; sinon elles sont dessus. C'est la seule règle de géométrie que le
+// faux encode, et elle est écrite ici pour que personne ne la prenne pour une
+// mesure.
+//
 // Les modes qui ne concernent pas un script ne le perturbent pas : c'est le
 // **type d'argument** quand il suffit (chaîne courte = sélecteur, chaîne de plus
 // de mille caractères = source injectée, nombre = description ou points d'une
@@ -42,6 +52,9 @@ class FauxOnglet {
     this.appelsFocus = 0;
     this.gestes = [];
     this.ferme = false;
+    this.interception = false;
+    this.ecouteurs = {};
+    this.reponses = [];
   }
 
   async setViewport({ width, height, deviceScaleFactor, isMobile, hasTouch } = {}) {
@@ -51,6 +64,44 @@ class FauxOnglet {
 
   async addStyleTag() {}
 
+  async setRequestInterception(actif) {
+    this.interception = Boolean(actif);
+  }
+
+  async on(evenement, ecouteur) {
+    (this.ecouteurs[evenement] ||= []).push(ecouteur);
+  }
+
+  // Rejoue le chargement d'une page quand un écouteur `request` est branché :
+  // le document, puis la feuille de style qu'il référence. Chaque requête passe
+  // par l'écouteur du script, qui répond ou poursuit ; le faux retient ce qui a
+  // été servi, jamais ce qu'il aurait fallu servir.
+  rejouerRequetes(url) {
+    const ecouteurs = this.ecouteurs.request || [];
+    if (!ecouteurs.length) return;
+    const jouer = (adresse) => {
+      const requete = {
+        url: () => String(adresse),
+        respond: (reponse) => this.reponses.push({ url: String(adresse), ...reponse }),
+        continue: () => this.reponses.push({ url: String(adresse), poursuivi: true }),
+      };
+      for (const ecouteur of ecouteurs) ecouteur(requete);
+    };
+    jouer(url);
+    const document_ = this.reponses.find((r) => String(r.contentType || '').includes('html'));
+    if (!document_) return;
+    const reference = /(assets\/css\/[^"'\s>]+)/.exec(String(document_.body));
+    if (reference) jouer(new URL(reference[1], url).href);
+  }
+
+  // La feuille que le script a réellement servie, ou `null` s'il n'a rien
+  // intercepté — ce `null` est ce qui fait échouer un script qui aurait perdu
+  // son interception au lieu de le laisser passer.
+  get cssServi() {
+    const feuille = this.reponses.find((r) => String(r.contentType || '').includes('css'));
+    return feuille ? String(feuille.body) : null;
+  }
+
   async goto(url) {
     const nom = String(url).split('/').pop();
     const index = Number(process.env.FAUX_NAVIGATEUR_INDEX || 0);
@@ -58,6 +109,7 @@ class FauxOnglet {
     if (MODE === 'echec-partiel' && index % 2 === 1) {
       throw new Error(`net::ERR_CONNECTION_REFUSED sur ${nom}`);
     }
+    if (this.interception) this.rejouerRequetes(String(url));
   }
 
   async close() {
@@ -107,6 +159,19 @@ class FauxOnglet {
         };
       }
       return { debordement: 0, rognes: [], nombreRognes: 0 };
+    }
+
+    // 2 bis. Alignement des pastilles de la constellation
+    //        (`test-cache-css-ia.cjs`) : la fonction lit `.ai-node` et les
+    //        cercles de `.ai-constellation-lines`, et rend une distance par
+    //        pastille. Le faux ne mesure rien : il rend la distance que le CSS
+    //        servi implique, telle que décrite en tête de fichier.
+    if (typeof argument === 'undefined' && /ai-constellation-lines/.test(String(fonction))) {
+      const feuille = this.cssServi;
+      if (feuille === null) return [Number.NaN, Number.NaN, Number.NaN, Number.NaN, Number.NaN];
+      const anciennes = /\.ai-node-info\s*\{[^}]*left:\s*12\.4%/.test(feuille);
+      const ecart = anciennes ? 12.4 : 0.4;
+      return [ecart, ecart, ecart, ecart, ecart];
     }
 
     // 3. Géométrie d'une fiche (`verifier-fiches-statistiques.cjs`). Cette
