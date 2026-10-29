@@ -38,7 +38,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/registre-relecture.py` | Registre des relectures humaines | `test_registre_relecture.py` (14 tests) | `faute-en-memoire` |
 | `outils/serveur-local.py` | Serveur local qui imite Vercel et GitHub Pages | Aucune : outil de développement | `hors-portee` |
 | `outils/statuts_editoriaux.py` | Définitions partagées des statuts | Aucune : module d'aide | `hors-portee` |
-| `outils/test-cache-css-ia.cjs` | Simule un CSS périmé servi sous l'ancienne URL | Il est lui-même le test ; mutation intégrée | `test-en-soi` |
+| `outils/test-cache-css-ia.cjs` | Simule un CSS périmé servi sous l'ancienne URL | `test_test_cache_css_ia.mjs` (5 cas : nominal, version périmée, attente inversée, interception retirée, ancien CSS identique) | `banc` |
 | `outils/test-experience.cjs` | 8 essais navigateur du panneau et du menu | Il est lui-même le test | `test-en-soi` |
 | `outils/verifier-accessibilite.cjs` | Audit axe des pages, lancé dans le job navigateur | `test_verifier_accessibilite.mjs` (navigateur et axe remplacés ; 3 modes, chaque exécution doit avoir son verdict) | `faute-en-memoire` |
 | `outils/verifier-affichages.py` | 16 garde-fous de format et d'impression | `test_mutations_affichages.py` (5 mutations) | `banc` |
@@ -70,22 +70,22 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 
 46 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
-- **Dix-sept** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture, les planches des statuts, l'état daté de la R&D, la vérification de la source distante, le contrôle des mutations d'affichage et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
+- **Dix-huit** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture, les planches des statuts, l'état daté de la R&D, la vérification de la source distante, le contrôle des mutations d'affichage, le test du cache CSS et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
 - **Douze** le sont en cassant des données en mémoire ou en simulant ce qui ne peut pas être joint. C'est utile, mais la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests ; `verifier-maj-amont.py` n'interroge jamais réellement l'amont ; et les quatre scripts navigateur (`auditer-criteres-22.mjs`, `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs`, `auditer-affichages.mjs`) ne voient jamais un vrai Chromium — leurs bancs éprouvent ce qu'ils font de mesures qu'on leur donne, pas la justesse de ce qu'ils mesurent.
 - **Six** ont un test qui n'injecte aucune faute.
-- **Trois** sont eux-mêmes des tests (scripts navigateur, simulation de cache) : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre.
+- **Deux** sont eux-mêmes des tests (scripts navigateur) : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre.
 - **Aucun** n'est réduit à son seul vert quotidien.
 - **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
 
-Autrement dit : **35 contrôles sur 38** s'appuient sur un test capable d'échouer. Les trois derniers n'ont aucune preuve de ce genre, et ce sont eux-mêmes des tests : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre. **Aucun contrôle n'est plus cru sur parole.**
+Autrement dit : **36 contrôles sur 38** s'appuient sur un test capable d'échouer. Les deux derniers n'ont aucune preuve de ce genre, et ce sont eux-mêmes des tests : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre. **Aucun contrôle n'est plus cru sur parole.**
 
 ## Par où continuer, par ordre de rentabilité
 
 1. Vérifier les **empreintes** de l'archive des statuts (`sha256sum -c`), que `verifier-planches-statuts.py` contrôle en nombre, en unicité de noms et en forme de ligne — jamais en contenu.
-2. Éprouver les trois scripts qui *sont* des tests (`test-experience.cjs`, `test-cache-css-ia.cjs`, `verifier-graphismes.cjs`) : leur échec est visible, mais un test qui ne mord plus ne se voit pas.
+2. Éprouver les deux derniers scripts qui *sont* des tests (`test-experience.cjs`, `verifier-graphismes.cjs`) : leur échec est visible, mais un test qui ne mord plus ne se voit pas. `verifier-graphismes.cjs` a, depuis le 29 octobre, un contrôle de ses rapports mutés ; ce qui reste non prouvé est la **mesure** elle-même, que seul un vrai Chromium peut exercer.
 
 ## Limites de ce document
 
-- Les statuts viennent de la lecture des tests le 28 octobre 2026, pas d'une exécution de chaque mutation possible. `test` et `faute-en-memoire` sont des jugements sur ce que fait le test, pas des mesures.
+- Les statuts viennent de la lecture des tests les 28 et 29 octobre 2026, pas d'une exécution de chaque mutation possible. `test` et `faute-en-memoire` sont des jugements sur ce que fait le test, pas des mesures.
 - Le classement `aucun-test` de `verifier-securite.py` a été levé le 28 octobre 2026 par `outils/test_mutations_securite.py` ; six fautes plantées y suffisent à prouver que la porte refuse, pas qu'elle voit toutes les régressions de sécurité possibles.
 - L'inventaire ne juge pas l'utilité des contrôles, seulement l'existence d'une preuve qu'ils peuvent échouer.

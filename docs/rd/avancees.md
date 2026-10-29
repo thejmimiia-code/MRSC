@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 38 |
+| Avancées consignées | 39 |
 | Période couverte | du 2026-10-20 au 2026-10-29 |
-| Contrôles exécutables cités | 51 |
+| Contrôles exécutables cités | 52 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -899,6 +899,30 @@ Initiatives liées : `documentation-rd-eva`, `poids-et-sobriete-numerique`.
 **Limite — ce que cela ne prouve pas.** Le banc ne mesure aucune géométrie : il vérifie ce que le script fait du résultat qu'on lui donne, pas si un élément est réellement hors écran. Le faux reconnaît la fonction de géométrie à son texte (elle ne prend aucun argument et cherche `Prototype à relire`) : si le script était reformulé, le faux rendrait une valeur neutre et les cas d'échec ne mordraient plus — c'est le point fragile, écrit dans le code source du faux. Rien ne dit non plus que les 288 configurations soient les bonnes : c'est le choix de l'outil, pas une mesure.
 
 **Suite.** Éprouver `verifier-accessibilite.cjs` et `auditer-affichages.mjs` de la même façon, puis `verifier-source-distante.py` en remplaçant sa sonde réseau.
+
+Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
+
+### `un-test-de-cache-qui-ne-sert-plus-rien-reste-vert` — Un test de cache qui ne sert plus rien reste vert
+
+*Consignée le 2026-10-29.*
+
+**Constat.** `test-cache-css-ia.cjs` simule un téléphone qui aurait gardé l'ancienne feuille de style : il intercepte la requête du CSS et sert lui-même deux feuilles, puis exige que les pastilles de la constellation soient décalées avec l'ancienne et alignées avec la versionnée. Rien ne prouvait que ce test mord encore. Sa panne la plus discrète n'est pas un écart de géométrie : c'est de **ne plus servir l'ancienne feuille**. Si l'interception disparaît, ou si les deux cas servent la même feuille, le test continue d'afficher un bilan vert sans rien reproduire du tout.
+
+**Ce que cela change.** `outils/test_test_cache_css_ia.mjs` lance le vrai script dans une racine factice (ses deux fichiers d'entrée et les faux paquets) et éprouve cinq cas : nominal — douze essais, les deux URL demandées, et le nombre annoncé relu dans la sortie puis confronté au relevé ; version de CSS périmée dans la page — code 1, message nommé, aucun relevé écrit ; attente des deux cas inversée dans une copie du script — code 1 ; `setRequestInterception` retiré — code 1 ; CSS courant servi comme « ancien » — code 1. Le faux `puppeteer-core` rejoue l'interception et tire la distance pastille/point du CSS **réellement servi**.
+
+**Preuves dans le dépôt :**
+
+- `outils/test_test_cache_css_ia.mjs`
+- `outils/test-cache-css-ia.cjs`
+- `outils/faux-navigateur/puppeteer-core/index.js`
+- `.github/workflows/verification.yml`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `node outils/test_test_cache_css_ia.mjs`
+
+**Limite — ce que cela ne prouve pas.** Le faux navigateur ne mesure rien : il encode la seule règle « l'ancien CSS décale les pastilles », et le banc prouve donc la plomberie du test — qu'il sert bien deux feuilles, qu'il les distingue, que ses assertions mordent — jamais que le CSS de f3c4ddf décalait réellement de 12 px sur un téléphone. Les trois cas mutés portent sur des copies jetables ; la racine factice ne contient que le CSS, la page et le script, si bien qu'une dépendance nouvelle du script à un autre fichier du dépôt ferait échouer le cas nominal — c'est voulu, mais ce n'est pas dit par le script lui-même.
+
+**Suite.** Éprouver `test-experience.cjs`, dernier script qui est lui-même un test, en commençant par ce qui est faisable sans navigateur : le compte d'essais annoncé et l'existence d'au moins une assertion par essai.
 
 Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 

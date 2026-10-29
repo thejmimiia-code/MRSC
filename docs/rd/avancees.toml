@@ -172,6 +172,24 @@ limite = "Le contrôle dit qu'une erreur attendue a été constatée, jamais qu'
 suite = "Éprouver les trois scripts qui sont eux-mêmes des tests (`test-experience.cjs`, `test-cache-css-ia.cjs`, `verifier-graphismes.cjs`), en commençant par vérifier que leurs mutations portent sur ce qu'ils mesurent."
 initiatives = ["optimisation-du-site", "documentation-rd-eva"]
 
+[[avancee]]
+id = "un-test-de-cache-qui-ne-sert-plus-rien-reste-vert"
+date = 2026-10-29
+titre = "Un test de cache qui ne sert plus rien reste vert"
+constat = "`test-cache-css-ia.cjs` simule un téléphone qui aurait gardé l'ancienne feuille de style : il intercepte la requête du CSS et sert lui-même deux feuilles, puis exige que les pastilles de la constellation soient décalées avec l'ancienne et alignées avec la versionnée. Rien ne prouvait que ce test mord encore. Sa panne la plus discrète n'est pas un écart de géométrie : c'est de **ne plus servir l'ancienne feuille**. Si l'interception disparaît, ou si les deux cas servent la même feuille, le test continue d'afficher un bilan vert sans rien reproduire du tout."
+changement = "`outils/test_test_cache_css_ia.mjs` lance le vrai script dans une racine factice (ses deux fichiers d'entrée et les faux paquets) et éprouve cinq cas : nominal — douze essais, les deux URL demandées, et le nombre annoncé relu dans la sortie puis confronté au relevé ; version de CSS périmée dans la page — code 1, message nommé, aucun relevé écrit ; attente des deux cas inversée dans une copie du script — code 1 ; `setRequestInterception` retiré — code 1 ; CSS courant servi comme « ancien » — code 1. Le faux `puppeteer-core` rejoue l'interception et tire la distance pastille/point du CSS **réellement servi**."
+preuves = [
+  "outils/test_test_cache_css_ia.mjs",
+  "outils/test-cache-css-ia.cjs",
+  "outils/faux-navigateur/puppeteer-core/index.js",
+  ".github/workflows/verification.yml",
+  "docs/rd/inventaire-controles.md",
+]
+controle = "node outils/test_test_cache_css_ia.mjs"
+limite = "Le faux navigateur ne mesure rien : il encode la seule règle « l'ancien CSS décale les pastilles », et le banc prouve donc la plomberie du test — qu'il sert bien deux feuilles, qu'il les distingue, que ses assertions mordent — jamais que le CSS de f3c4ddf décalait réellement de 12 px sur un téléphone. Les trois cas mutés portent sur des copies jetables ; la racine factice ne contient que le CSS, la page et le script, si bien qu'une dépendance nouvelle du script à un autre fichier du dépôt ferait échouer le cas nominal — c'est voulu, mais ce n'est pas dit par le script lui-même."
+suite = "Éprouver `test-experience.cjs`, dernier script qui est lui-même un test, en commençant par ce qui est faisable sans navigateur : le compte d'essais annoncé et l'existence d'au moins une assertion par essai."
+initiatives = ["optimisation-du-site", "documentation-rd-eva"]
+
 [meta]
 version = 1
 derniere_revue = 2026-10-28
