@@ -353,13 +353,6 @@ jobs:
           trap 'kill "$serveur"' EXIT
           MRSC_FICHES_JSON="$RUNNER_TEMP/graphismes/fiches-statistiques.json" node outils/verifier-fiches-statistiques.cjs
           node outils/test-cache-css-ia.cjs
-          # Neuf essais interactifs (panneau, clavier, en-tête compact, stockage
-          # bloqué, guide, lecture à voix haute, iframe synchronisée). Le script
-          # existait depuis le 14 octobre et **aucun workflow ne le lançait** :
-          # il n'était exercé qu'à la main, sur une machine avec Chromium. Sa
-          # mesure a besoin du vrai serveur du site ; celui de ce job sert la
-          # racine du dépôt, ce qui suffit (`simulateur/index.html` existe).
-          MRSC_TEST_URL=http://127.0.0.1:4181/ node outils/test-experience.cjs
           node outils/verifier-graphismes.cjs
           # Le code de sortie ne dit pas *pourquoi* la mesure a échoué : une
           # mutation qui ferait céder le contrôle pour une panne sans rapport
@@ -374,6 +367,36 @@ jobs:
             test "$statut" -eq 1
             python3 outils/verifier-mutation-graphismes.py "$RUNNER_TEMP/graphismes/mutation-$mutation.json" "$mutation"
           done
+      # Neuf essais interactifs (panneau, clavier, en-tête compact, stockage
+      # bloqué, guide, lecture à voix haute, iframe synchronisée). Le script
+      # existait depuis le 14 octobre et **aucun workflow ne le lançait** : il
+      # n'était exercé qu'à la main, sur une machine avec Chromium. Ce job est le
+      # seul à installer Chromium, d'où sa place ici.
+      #
+      # Les échecs sont aussi publiés en annotations : les journaux complets de
+      # GitHub Actions ne sont pas joignables depuis l'atelier qui tient ce
+      # dépôt, alors qu'une annotation se lit par l'API. Sans cela, « le job est
+      # rouge » serait tout ce qu'on saurait — et on ne saurait pas réparer.
+      - name: Éprouver les essais navigateur du panneau et du menu
+        env:
+          MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
+          MRSC_TEST_URL: http://127.0.0.1:4181/
+        run: |
+          python3 -m http.server 4181 --bind 127.0.0.1 >"$RUNNER_TEMP/serveur-essais.log" 2>&1 &
+          serveur=$!
+          trap 'kill "$serveur" 2>/dev/null || true' EXIT
+          set +e
+          node outils/test-experience.cjs >"$RUNNER_TEMP/essais.log" 2>&1
+          statut=$?
+          set -e
+          cat "$RUNNER_TEMP/essais.log"
+          if [ "$statut" -ne 0 ]; then
+            grep -E '^(ÉCHEC|Error|.*AssertionError|.*Error:)' "$RUNNER_TEMP/essais.log" | head -n 10 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::error title=Essais navigateur::$ligne"
+            done
+            exit "$statut"
+          fi
+
       - name: Conserver les mesures et captures même en échec
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
