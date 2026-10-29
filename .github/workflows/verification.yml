@@ -236,6 +236,17 @@ jobs:
       - name: Éprouver la géométrie des fiches de statistiques
         run: node outils/test_verifier_fiches_statistiques.mjs
 
+      # Le balayage axe-core visite 12 pages et une vingtaine d'états
+      # interactifs (menu, panneau, contraste, lecture à voix haute, filtres,
+      # aides dépliées, mission des Mondes, commandes du simulateur). Le faux
+      # navigateur rejoue les mêmes parcours sans Chromium, en 40 s — le script
+      # attend ses états comme en vrai, d'où le coût. Ce qui est éprouvé : une
+      # violation sort en code 1 et reste attachée à son état, un chargement
+      # impossible sort en code 2 sans écrire de rapport, et chaque exécution
+      # annoncée a bien son verdict.
+      - name: Éprouver le balayage d'accessibilité
+        run: node outils/test_verifier_accessibilite.mjs
+
       # `etat-rd.py` imprime le tableau que le brief de décision prospective cite
       # comme pièce justificative. Son pire défaut n'était pas de se tromper mais
       # de se taire : une source absente retirait ses lignes, et le tableau

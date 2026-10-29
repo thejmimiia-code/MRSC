@@ -1,0 +1,5 @@
+{
+  "name": "axe-core",
+  "version": "0.0.0-faux",
+  "description": "Faux axe-core : le fichier existe pour que require.resolve('axe-core/axe.min.js') aboutisse. Aucune règle n'est évaluée."
+}

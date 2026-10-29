@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 33 |
+| Avancées consignées | 34 |
 | Période couverte | du 2026-10-20 au 2026-10-29 |
-| Contrôles exécutables cités | 46 |
+| Contrôles exécutables cités | 47 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -734,6 +734,30 @@ Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 **Suite.** Éprouver `verifier-planches-statuts.py`, puis attaquer les quatre contrôles navigateur depuis le job `graphismes`.
 
 Initiatives liées : `documentation-rd-eva`, `veille-savoirs-evolutifs`.
+
+### `un-balayage-vide-ne-vaut-pas-un-site-sans-violation` — Un balayage qui n'a rien analysé ne vaut pas un site sans violation
+
+*Consignée le 2026-10-29.*
+
+**Constat.** `outils/verifier-accessibilite.cjs` visite 12 pages à deux largeurs et une vingtaine d'états interactifs — menu ouvert, panneau Affichage, contraste renforcé, lecture à voix haute, filtres d'Apprendre, aides dépliées, mission des Mondes, commandes du simulateur — et passe axe-core sur chacun. Il n'avait aucun test. Trois mensonges possibles : n'analyser aucune page et annoncer « 0 violation », perdre le lien entre une violation et l'état qui la porte, ou sortir en succès malgré une règle en échec. Un total agrégé ne dit jamais où regarder.
+
+**Ce que cela change.** `outils/test_verifier_accessibilite.mjs` remplace `puppeteer-core`, `@sparticuz/chromium` et `axe-core` par trois faux, lance le vrai script — sans serveur local, via `MRSC_A11Y_BASE` — et vérifie trois cas : nominal (code 0, chaque exécution annoncée a sa ligne de verdict, les états interactifs sont relevés séparément), violations (code 1, deux règles nommées avec nœud, état et largeur, message rappelant qu'une mesure n'est pas un audit), chargement impossible (code 2, aucun rapport écrit). Le nombre d'états n'est pas recopié dans le banc : il est confronté au décompte publié par le script. 3 cas, 40 s.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-accessibilite.cjs`
+- `outils/test_verifier_accessibilite.mjs`
+- `outils/faux-navigateur/puppeteer-core/index.js`
+- `outils/faux-navigateur/axe-core/axe.min.js`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `node outils/test_verifier_accessibilite.mjs && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Aucune règle axe n'est évaluée : le faux rend les violations qu'on lui demande, donc le banc prouve le traitement d'un résultat, jamais sa détection. Un axe-core cassé ou mal chargé ne serait pas vu, et aucune page réelle n'est ouverte. Les 40 secondes viennent des attentes d'interface du script lui-même, ce qui en fait le banc le plus coûteux de la série ; il tourne malgré tout dans `qualite`, sans navigateur.
+
+**Suite.** Éprouver `auditer-affichages.mjs`, dernier script navigateur sans banc, puis `verifier-source-distante.py` en remplaçant sa sonde réseau.
+
+Initiatives liées : `optimisation-du-site`, `co-conception-et-essais`.
 
 ### `un-etat-qui-perd-une-source-garde-l-air-complet` — Un rapport d'état qui perd une source sans le dire garde l'air complet
 
