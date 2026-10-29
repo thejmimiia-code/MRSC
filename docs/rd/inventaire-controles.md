@@ -60,7 +60,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/verifier-securite.py` | Frontières de sécurité du simulateur | `test_mutations_securite.py` (6 mutations : en-tête, limite, action, runner, liste statique, plafond de source) | `banc` |
 | `outils/verifier-separation-contenus.py` | Empêche le retour des contenus personnels | `test_separation_contenus.py` (11 tests) | `test` |
 | `outils/verifier-site-statique.py` | 99 pages, liens, ancres, canoniques, sitemap | `test_mutations_site_statique.py` (5 mutations) | `banc` |
-| `outils/verifier-source-distante.py` | Utilisabilité de la version en ligne du simulateur | Aucune : demande le réseau | `aucun-test` |
+| `outils/verifier-source-distante.py` | Utilisabilité de la version en ligne du simulateur | `test_verifier_source_distante.py` (9 cas sur un serveur local réel : page, API, ordre des routes, hôte refusé, port fermé) | `banc` |
 | `outils/verifier-taux-dates.py` | Une règle chiffrée porte sa date | `test_verifier_taux_dates.py` (14 tests, catalogue temporaire muté) | `banc` |
 | `outils/verifier-vote-distanciel.py` | Garde-fous documentaires du vote distanciel | `test_verifier_vote_distanciel.py` (86 tests) | `faute-en-memoire` |
 | `outils/versionner-css-ia.py` | Lie la page IA au contenu exact du CSS | `test_version_css_ia.py` (2 tests) | `test` |
@@ -69,18 +69,19 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 
 45 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
-- **Quinze** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture, les planches des statuts, l'état daté de la R&D et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
-- **Douze** le sont en cassant des données en mémoire ou en simulant ce qui ne peut pas être joint. C'est utile, mais la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests, et `verifier-maj-amont.py` n'interroge jamais réellement l'amont dans son test, et les quatre scripts navigateur (`auditer-criteres-22.mjs`, `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs`, `auditer-affichages.mjs`) ne voient jamais un vrai Chromium — leurs bancs éprouvent ce qu'ils font de mesures qu'on leur donne, pas la justesse de ce qu'ils mesurent.
+- **Seize** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture, les planches des statuts, l'état daté de la R&D, la vérification de la source distante et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
+- **Douze** le sont en cassant des données en mémoire ou en simulant ce qui ne peut pas être joint. C'est utile, mais la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests ; `verifier-maj-amont.py` n'interroge jamais réellement l'amont ; et les quatre scripts navigateur (`auditer-criteres-22.mjs`, `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs`, `auditer-affichages.mjs`) ne voient jamais un vrai Chromium — leurs bancs éprouvent ce qu'ils font de mesures qu'on leur donne, pas la justesse de ce qu'ils mesurent.
 - **Six** ont un test qui n'injecte aucune faute.
 - **Trois** sont eux-mêmes des tests (scripts navigateur, simulation de cache) : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre.
-- **Un** n'est prouvé par rien d'autre que son vert quotidien.
+- **Aucun** n'est réduit à son seul vert quotidien.
 - **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
 
-Autrement dit : **33 contrôles sur 37** s'appuient sur un test capable d'échouer. Les 4 autres n'ont aucune preuve de ce genre : trois *sont* des tests, et un seul — `verifier-source-distante.py`, qui demande le réseau — n'est prouvé par rien d'autre que son vert quotidien.
+Autrement dit : **34 contrôles sur 37** s'appuient sur un test capable d'échouer. Les trois derniers n'ont aucune preuve de ce genre, et ce sont eux-mêmes des tests : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre. **Aucun contrôle n'est plus cru sur parole.**
 
 ## Par où continuer, par ordre de rentabilité
 
-1. `verifier-source-distante.py` — dernier contrôle sans preuve. Il demande le réseau ; son banc devra remplacer la sonde, comme `test_verifier_maj_amont.py` l'a fait pour `verifier-maj-amont.py`.
+1. Vérifier les **empreintes** de l'archive des statuts (`sha256sum -c`), que `verifier-planches-statuts.py` contrôle en nombre, en unicité de noms et en forme de ligne — jamais en contenu.
+2. Éprouver les trois scripts qui *sont* des tests (`test-experience.cjs`, `test-cache-css-ia.cjs`, `verifier-graphismes.cjs`) : leur échec est visible, mais un test qui ne mord plus ne se voit pas.
 
 ## Limites de ce document
 

@@ -149,6 +149,10 @@ def verifier(source: str) -> dict[str, object]:
         "disponible": False,
         "page": {"statut": 0, "indice_simulateur": False},
         "api": {"route": "", "statut": 0, "indice_moteur": False},
+        # Toutes les routes essayées, dans l'ordre : `api` ne garde que la
+        # dernière. Sans cette liste, un rapport qui a vu une route répondre 200
+        # sans les bonnes clés ne le disait pas — il n'affichait que la suivante.
+        "api_essais": [],
         "verifie_le": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
     if not source:
@@ -184,6 +188,7 @@ def verifier(source: str) -> dict[str, object]:
         statut_api, contenu_api = _lire(base + route.lstrip("/"))
         moteur = statut_api == 200 and _indice_api(contenu_api, cles)
         resultat["api"] = {"route": route, "statut": statut_api, "indice_moteur": moteur}
+        resultat["api_essais"].append({"route": route, "statut": statut_api, "indice_moteur": moteur})
         if moteur:
             resultat["disponible"] = True
             resultat["message"] = "Source distante fonctionnelle : page et API de calcul répondent."

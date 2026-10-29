@@ -2,6 +2,20 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-29 — Le dernier contrôle sans preuve : le réseau se teste sur la boucle locale
+
+- **Initiative :** `optimisation-du-site` (avec `documentation-rd-eva`).
+- **Quinzième lot, et une étape :** `outils/verifier-source-distante.py`, dernier contrôle de l'inventaire classé `aucun-test`. Il décide de la bascule du site vers la version en ligne du simulateur : page servie **et** API de calcul qui répond.
+- **Pourquoi simuler ne suffisait pas :** `api/verifier-source.py` fait ses requêtes avec `urllib`, dans un module chargé par `importlib` ; le script en est un sous-processus. Un banc qui remplacerait `_lire` ne prouverait rien de la lecture réseau — c'est exactement la limite écrite pour `verifier-maj-amont.py`.
+- **Ce que le banc fait vraiment :** un serveur sur un port éphémère de la boucle locale, des réponses écrites par chaque cas, et le script lancé en sous-processus avec `SIMULATEUR_SOURCE_DISTANTE_TEST_LOCALE=1`. Sont donc exercés la liste d'hôtes autorisés, `urllib`, les marqueurs de page, la lecture du JSON, l'ordre des routes et le code de sortie. **Aucun octet hors de la machine.**
+- **Neuf cas, 4,5 s :** page et API fonctionnelles ; page de présentation refusée ; API absente (404) ; seconde route qui suffit (`/api/catalogue` quand `/api/scenarios` manque) ; JSON 200 **sans** les clés attendues ; port fermé ; hôte non autorisé — refus **sans aucune requête** ; `--json` sur un refus ; forme du JSON.
+- **Le défaut trouvé en chemin :** quand `/api/scenarios` répondait 200 avec un JSON sans les clés attendues, le rapport n'affichait que la route suivante (`/api/catalogue → statut 404`). La raison réelle du refus disparaissait — même famille que tout le reste de la série. Correction : `api/verifier-source.py` publie `api_essais`, la liste ordonnée des routes essayées, et le script imprime une ligne par essai. `api` reste la dernière tentative, pour ne rien casser chez les consommateurs existants (`assets/js/site.js` ne lit que `disponible`).
+- **Un cas ajouté grâce à une mutation :** mettre `return 0` au lieu de `0 if disponible else 1` dans `--json` n'était vu par personne, parce que `--json` n'était vérifié que sur l'adresse qui fonctionne. Un cas « `--json` sur un refus → code 1 » a été ajouté ; les deux mutations mordent maintenant.
+- **Inventaire :** `verifier-source-distante.py` passe de `aucun-test` à `banc`. **45 outils · 16 `banc` · 12 `faute-en-memoire` · 6 `test` · 3 `test-en-soi` · 0 `aucun-test` · 8 `hors-portee`** → **34 contrôles sur 37**. **Aucun contrôle n'est plus cru sur parole** : les trois derniers sont eux-mêmes des tests.
+- **Contrôles exécutés :** `test_verifier_source_distante.py` (9), `verifier-integration.py` (dont la section `source_distante`), `verifier-inventaire-controles.py`, `construire-avancees.py --verifier` (36 avancées), chargement YAML du workflow, `git diff --check`.
+- **Limites :** le serveur répond ce que le cas décide — le banc prouve la décision sur des réponses connues, pas la réalité de Vercel ; un déploiement amont cassé ne serait pas vu en CI. `verifier-integration.py` exerce déjà la vraie sonde, mais contre un bouchon local, jamais contre l'amont.
+- **Prochaine action :** vérifier les empreintes de l'archive des statuts (`sha256sum -c`), puis éprouver les trois scripts qui *sont* des tests.
+
 ## 2026-10-29 — Un banc de dix minutes sera contourné ; celui-ci en prend trois secondes
 
 - **Initiative :** `optimisation-du-site` (avec `poids-et-sobriete-numerique`).
