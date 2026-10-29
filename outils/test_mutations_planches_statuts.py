@@ -83,7 +83,10 @@ class TestPlanchesStatuts(unittest.TestCase):
     def test_copie_intacte_passe(self) -> None:
         resultat = executer(lambda copie: None)
         self.assertEqual(resultat.returncode, 0, resultat.stdout + resultat.stderr)
-        self.assertIn("manifeste de 343 empreintes conforme", resultat.stdout)
+        # Le résumé ne prétend plus « conforme » : il dit ce qui est vérifié
+        # (forme, nombre, unicité) et ce qui ne l'est pas (le contenu).
+        self.assertIn("manifeste de 343 empreintes bien formées", resultat.stdout)
+        self.assertIn("contenu non vérifié ici", resultat.stdout)
 
     def test_planche_supprimee_refusee(self) -> None:
         def supprimer(copie: Path) -> None:
@@ -158,6 +161,76 @@ class TestPlanchesStatuts(unittest.TestCase):
         resultat = executer(suivre)
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("PNG suivi dans l'arbre", resultat.stdout)
+
+    def test_archive_restauree_verifiee_en_contenu(self) -> None:
+        """`--empreintes` vérifie une archive restaurée, hors de l'arbre."""
+        with tempfile.TemporaryDirectory(prefix="mrsc-archive-") as dossier:
+            archive = Path(dossier) / "archive"
+            archive.mkdir()
+            # Deux fichiers dont l'empreinte est lue dans le manifeste réel.
+            manifeste = (RACINE / MANIFESTE).read_text(encoding="utf-8").splitlines()
+            entrees = [ligne.split("  ", 1) for ligne in manifeste if "  " in ligne][:2]
+            for _, nom in entrees:
+                (archive / nom).write_bytes(b"contenu de test")
+            # Une copie complète du dépôt pour que le reste du contrôle passe.
+            copie = Path(dossier) / "copie"
+            banc_mutations.copie_complete(copie)
+            subprocess.run(
+                ["git", "init", "-q", "-b", "main"],
+                cwd=copie, check=True, capture_output=True, env={**os.environ, **IDENTITE},
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--empreintes", str(archive)))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        # Les deux fichiers existent mais ne correspondent pas : deux écarts nommés.
+        self.assertEqual(resultat.stdout.count("empreinte différente"), 2, resultat.stdout)
+
+    def test_archive_conforme_acceptee(self) -> None:
+        """Un fichier réellement conforme est vu conforme, et compté."""
+        with tempfile.TemporaryDirectory(prefix="mrsc-archive-") as dossier:
+            archive = Path(dossier) / "archive"
+            archive.mkdir()
+            manifeste = (RACINE / MANIFESTE).read_text(encoding="utf-8").splitlines()
+            empreinte, nom = [ligne.split("  ", 1) for ligne in manifeste if "  " in ligne][0]
+            contenu = b"contenu conforme"
+            (archive / nom).write_bytes(contenu)
+            # Le manifeste de la copie est réécrit pour décrire ce fichier : le
+            # banc ne recopie pas une empreinte, il la recalcule.
+            copie = Path(dossier) / "copie"
+            banc_mutations.copie_complete(copie)
+            # Un dépôt git, sinon le contrôle des PNG échoue avant d'arriver au
+            # manifeste — c'est le comportement voulu, il est testé plus bas.
+            subprocess.run(
+                ["git", "init", "-q", "-b", "main"],
+                cwd=copie, check=True, capture_output=True, env={**os.environ, **IDENTITE},
+            )
+            import hashlib
+
+            calcule = hashlib.sha256(contenu).hexdigest()
+            chemin = copie / MANIFESTE
+            lignes = chemin.read_text(encoding="utf-8").splitlines()
+            lignes[0] = f"{calcule}  {nom}"
+            chemin.write_text("\n".join(lignes) + "\n", encoding="utf-8")
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--empreintes", str(archive)))
+        self.assertEqual(resultat.returncode, 0, resultat.stdout + resultat.stderr)
+        self.assertIn("1 empreinte(s) conforme(s)", resultat.stdout)
+        self.assertIn("342 fichier(s) absent(s)", resultat.stdout)
+
+    def test_archive_absente_est_un_manque(self) -> None:
+        def rien(copie: Path) -> None:
+            pass
+
+        with tempfile.TemporaryDirectory(prefix="mrsc-archive-") as dossier:
+            copie = Path(dossier) / "copie"
+            banc_mutations.copie_complete(copie)
+            subprocess.run(
+                ["git", "init", "-q", "-b", "main"],
+                cwd=copie, check=True, capture_output=True, env={**os.environ, **IDENTITE},
+            )
+            resultat = banc_mutations.lancer(
+                OUTIL, copie, arguments=("--empreintes", str(Path(dossier) / "inexistant"))
+            )
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("archive introuvable", resultat.stdout)
 
     def test_depot_illisible_refuse_au_lieu_de_rassurer(self) -> None:
         """Le défaut trouvé en écrivant ce banc : une vérification impossible n'est pas un succès."""

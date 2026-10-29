@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 36 |
+| Avancées consignées | 37 |
 | Période couverte | du 2026-10-20 au 2026-10-29 |
-| Contrôles exécutables cités | 49 |
+| Contrôles exécutables cités | 50 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -830,6 +830,29 @@ Initiatives liées : `optimisation-du-site`, `poids-et-sobriete-numerique`.
 **Suite.** Éprouver `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs` et `auditer-affichages.mjs` avec le faux navigateur, puis `verifier-source-distante.py` en remplaçant sa sonde réseau.
 
 Initiatives liées : `documentation-rd-eva`, `veille-savoirs-evolutifs`.
+
+### `un-manifeste-verifie-sa-forme-ne-verifie-pas-son-contenu` — Un manifeste dont on vérifie la forme ne dit rien de son contenu
+
+*Consignée le 2026-10-29.*
+
+**Constat.** `outils/verifier-planches-statuts.py` concluait « manifeste de 343 empreintes conforme » alors qu'il ne vérifiait que trois choses : le nombre de lignes, l'unicité des noms et la forme des empreintes. Le contenu n'était jamais comparé, et le mot « conforme » se lisait comme « archive intacte ». La comparaison existe pourtant — `sha256sum -c` sur une archive restaurée — mais elle reste une étape manuelle documentée, donc non rejouée. Mesuré le 29 octobre 2026 : la bible du film présente dans l'arbre a une empreinte (`e6c9d68c…`) différente de celle du manifeste (`6f3dcb4e…`), ce qui interdit de comparer naïvement l'arbre au manifeste.
+
+**Ce que cela change.** `verifier-planches-statuts.py` accepte `--empreintes DOSSIER` : il recalcule les empreintes d'une archive restaurée, nomme chaque écart, compte les fichiers réellement vérifiés et ceux qui sont absents de la copie. Sans l'option, le résumé ne dit plus « conforme » mais « 343 empreintes bien formées (contenu non vérifié ici : l'archive vit hors de l'arbre) ». Le banc gagne trois cas : deux fichiers non conformes nommés, un fichier conforme compté (empreinte recalculée, jamais recopiée), un dossier absent dit comme un manque. 11 tests, 1,6 s.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-planches-statuts.py`
+- `outils/test_mutations_planches_statuts.py`
+- `docs/rd/statuts-animation/ARCHIVE-film-associatif.sha256`
+- `docs/rd/archives-et-poids-du-depot.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_mutations_planches_statuts.py && python3 outils/verifier-planches-statuts.py`
+
+**Limite — ce que cela ne prouve pas.** La vérification reste optionnelle, donc absente de la CI : l'archive pèse plus d'un gigaoctet et vit hors du dépôt. Tant qu'une personne ne lance pas `--empreintes` sur une copie restaurée, le contenu n'est pas vérifié — le résumé le dit, ce qui vaut mieux qu'un « conforme » trompeur, mais ne remplace pas la vérification. L'écart d'empreinte de la bible du film, lui, a été tranché le 29 octobre 2026 : la copie de l'étiquette `planches-statuts-animation-2026-10`, extraite par `git archive`, porte exactement l'empreinte du manifeste, donc l'archive est intacte et c'est le document de l'arbre qui a évolué. Une seule empreinte a été vérifiée sur les 343 : l'extraction complète pèse plus d'un gigaoctet.
+
+**Suite.** Éprouver les trois scripts qui sont eux-mêmes des tests (`test-experience.cjs`, `test-cache-css-ia.cjs`, `verifier-graphismes.cjs`). La vérification complète des 343 empreintes reste une action humaine, faute de place pour extraire l'archive.
+
+Initiatives liées : `documentation-rd-eva`, `poids-et-sobriete-numerique`.
 
 ### `un-releve-qui-n-existe-pas-ne-dit-pas-zero-defaut` — Un relevé qui n'existe pas ne dit pas « zéro défaut »
 

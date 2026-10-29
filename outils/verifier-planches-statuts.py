@@ -11,8 +11,15 @@ Vérifie, sans réseau et sans dépendance externe :
    présent, ou à défaut une planche figurant au manifeste de l'archive ;
 5. que le manifeste d'empreintes de l'archive décrit bien les 343 fichiers de son périmètre associatif.
 
+Le manifeste n'est vérifié **en contenu** que sur demande, avec
+`--empreintes DOSSIER` : il décrit une archive restaurée (l'étiquette
+`planches-statuts-animation-2026-10`), pas l'arbre de travail. Comparer les
+fichiers présents dans le dépôt au manifeste produirait de faux écarts — la bible
+du film, par exemple, vit dans l'arbre et change, alors que l'archive est figée.
+
 Usage :
     python3 outils/verifier-planches-statuts.py [--verifier]
+    python3 outils/verifier-planches-statuts.py --empreintes /tmp/verif-archive
 
 `--verifier` est accepté pour rester homogène avec les autres outils ; le
 contrôle est identique. Code de sortie : 0 si tout est conforme, 1 sinon.
@@ -20,6 +27,8 @@ contrôle est identique. Code de sortie : 0 si tout est conforme, 1 sinon.
 
 from __future__ import annotations
 
+import argparse
+import hashlib
 import os
 import re
 import subprocess
@@ -56,6 +65,40 @@ def references_planches() -> list[tuple[Path, str]]:
     return trouves
 
 
+def entrees_du_manifeste(lignes: list[str]) -> list[tuple[str, str]]:
+    """(empreinte, nom) des lignes bien formées du manifeste."""
+    entrees = []
+    for ligne in lignes:
+        morceaux = ligne.split("  ", 1)
+        if len(morceaux) == 2 and re.fullmatch(r"[0-9a-f]{64}", morceaux[0]):
+            entrees.append((morceaux[0], morceaux[1].strip()))
+    return entrees
+
+
+def verifier_empreintes(dossier: Path, entrees: list[tuple[str, str]]) -> tuple[int, int, list[str]]:
+    """Compare les empreintes de `dossier` au manifeste.
+
+    Rend (fichiers vérifiés, fichiers absents, écarts). Un fichier absent n'est
+    pas un écart : l'archive restaurée peut être partielle ; c'est le compte qui
+    dit ce qui a été réellement vérifié.
+    """
+    verifies = 0
+    absents = 0
+    ecarts: list[str] = []
+    for empreinte, nom in entrees:
+        chemin = dossier / nom
+        if not chemin.is_file():
+            absents += 1
+            continue
+        calcule = hashlib.sha256(chemin.read_bytes()).hexdigest()
+        verifies += 1
+        if calcule != empreinte:
+            ecarts.append(
+                f"empreinte différente : {nom} (attendu {empreinte[:16]}…, calculé {calcule[:16]}…)"
+            )
+    return verifies, absents, ecarts
+
+
 def liens_images_docs() -> list[tuple[Path, str, bool]]:
     """Liens d'image des documents de `docs/rd/` : (fichier, cible, existe)."""
     trouves: list[tuple[Path, str, bool]] = []
@@ -73,6 +116,15 @@ def liens_images_docs() -> list[tuple[Path, str, bool]]:
 
 
 def main() -> int:
+    analyseur = argparse.ArgumentParser(description="Planches des statuts et archive")
+    analyseur.add_argument("--verifier", action="store_true", help="homogénéité avec les autres outils (sans effet)")
+    analyseur.add_argument(
+        "--empreintes",
+        metavar="DOSSIER",
+        help="vérifie les empreintes d'une archive restaurée dans DOSSIER",
+    )
+    options = analyseur.parse_args()
+
     erreurs: list[str] = []
 
     if not PLAN.is_file():
@@ -141,17 +193,37 @@ def main() -> int:
                 erreurs.append(f"ligne de manifeste invalide : {ligne[:80]}")
                 break
 
+    # Vérification en contenu, seulement sur demande : le manifeste décrit
+    # l'archive restaurée, pas l'arbre de travail.
+    verifies = absents = 0
+    if options.empreintes:
+        dossier = Path(options.empreintes)
+        if not dossier.is_dir():
+            erreurs.append(f"archive introuvable : {dossier}")
+        else:
+            lignes_manifeste = MANIFESTE.read_text(encoding="utf-8").splitlines() if MANIFESTE.is_file() else []
+            verifies, absents, ecarts = verifier_empreintes(dossier, entrees_du_manifeste(lignes_manifeste))
+            erreurs.extend(ecarts)
+            if not verifies and not absents:
+                erreurs.append(f"archive vide ou manifeste illisible : {dossier}")
+
     if erreurs:
         print("ÉCHEC — planches des statuts")
         for erreur in erreurs:
             print(f"  - {erreur}")
         return 1
 
+    if options.empreintes:
+        print(
+            f"OK — archive vérifiée : {verifies} empreinte(s) conforme(s), "
+            f"{absents} fichier(s) absent(s) de la copie restaurée, aucun écart."
+        )
     print(
         f"OK — planches des statuts : {len(citees)} planches citées présentes, "
         f"aucune référence cassée, aucun PNG suivi, {len(archivees)} fichiers archivés, "
         f"{len(liens)} liens d'image contrôlés dont {archives_docs} vers l'archive, "
-        f"manifeste de {FICHIERS_ARCHIVES} empreintes conforme."
+        f"manifeste de {FICHIERS_ARCHIVES} empreintes bien formées "
+        f"(contenu non vérifié ici : l'archive vit hors de l'arbre, voir --empreintes)."
     )
     return 0
 
