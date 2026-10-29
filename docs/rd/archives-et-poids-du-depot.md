@@ -65,6 +65,15 @@ sha256sum -c ARCHIVE-film-associatif.sha256 --quiet   # vérifie les 343 entrée
 
 Résultat obtenu le 19 octobre 2026 : **507 fichiers conformes, aucun écart**.
 
+Depuis le 29 octobre 2026, `outils/verifier-planches-statuts.py --empreintes DOSSIER` fait cette comparaison sans passer par `sha256sum`, et compte séparément ce qu'il a réellement vu :
+
+```sh
+python3 outils/verifier-planches-statuts.py --empreintes /tmp/verif-archive/docs/rd/statuts-animation
+# OK — archive vérifiée : N empreinte(s) conforme(s), M fichier(s) absent(s), aucun écart.
+```
+
+Sans l'option, le contrôle ne vérifie **que la forme** du manifeste — 343 lignes bien formées, noms uniques, nombre attendu — et le dit désormais explicitement, au lieu d'annoncer « conforme ». La distinction compte : comparer les fichiers de l'arbre au manifeste produirait de faux écarts, parce que l'archive est figée et que les documents vivent. Mesuré le 29 octobre 2026 : la [bible du film](statuts-animation/bible-fil-et-video-01.md) présente dans l'arbre a pour empreinte `e6c9d68c…`, alors que le manifeste attend `6f3dcb4e…`. Cet écart est cohérent avec une archive figée et un document qui a évolué depuis ; il n'a **pas** été tranché ici (l'étiquette `planches-statuts-animation-2026-10` n'existe pas dans le clone de travail utilisé), et il ne doit pas être lu comme une corruption.
+
 Le même outil contrôle les **liens d'image de tous les documents `docs/rd/*.md`** : 205 liens recensés au 19 octobre 2026, dont 193 vers des planches archivées (la [bible du film](statuts-animation/bible-fil-et-video-01.md)) et 12 vers les planches conservées. Un lien vers un fichier ni présent ni archivé fait échouer le contrôle, ce qui interdit qu'un retrait casse silencieusement une référence.
 
 ## Récupérer les originaux

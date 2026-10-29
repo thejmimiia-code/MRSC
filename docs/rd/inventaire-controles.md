@@ -51,7 +51,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/verifier-integration.py` | Intégration du simulateur au site, sans navigateur | `test_mutations_integration.py` (3 fautes : ressource orpheline, chiffre annoncé, page absente) | `banc` |
 | `outils/verifier-inventaire-controles.py` | Tient ce document : couverture, existence, vocabulaire des statuts | `test_verifier_inventaire_controles.py` (casse l'inventaire dans une copie) | `banc` |
 | `outils/verifier-maj-amont.py` | Retard du moteur embarqué sur l'amont | `test_verifier_maj_amont.py` (4 cas ; la provenance est lue dans une copie, la sonde réseau remplacée) | `faute-en-memoire` |
-| `outils/verifier-planches-statuts.py` | Planches des statuts et leur archive | `test_mutations_planches_statuts.py` (6 fautes plantées + un dépôt illisible qui doit être dit, pas tu) | `banc` |
+| `outils/verifier-planches-statuts.py` | Planches des statuts et leur archive | `test_mutations_planches_statuts.py` (6 fautes plantées, un dépôt illisible qui doit être dit, et 3 cas de vérification d'empreintes sur une archive restaurée) | `banc` |
 | `outils/verifier-poids-pages.py` | Poids estimé des pages et budget de sobriété | `test_mutations_poids_pages.py` (4 fautes : image lourde, ressource absente, `<picture>` sans repli, budget à 1 Kio) | `banc` |
 | `outils/verifier-publication-locale.py` | Le site publié ne manque d'aucun fichier | `test_mutations_publication_locale.py` (6 fautes : copie, lien, aperçu local, sitemap) | `banc` |
 | `outils/verifier-publication.py` | Ce que l'hébergement sert réellement | `test_verifier_publication.py` (5 tests) | `test` |
