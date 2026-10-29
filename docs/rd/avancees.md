@@ -943,9 +943,9 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 
 **Contrôle qui la maintient :** `node outils/test_test_experience.mjs`
 
-**Limite — ce que cela ne prouve pas.** Le banc ne rejoue aucun essai : le faux navigateur ne clique pas et ne mesure pas. Il prouve que le harnais ne peut pas raconter un succès qui n'a pas eu lieu — comptage, nommage, bilan, code de sortie — jamais que les neuf essais mesurent ce qu'ils annoncent. Ce second point dépend du job `graphismes` et d'un vrai Chromium, et il n'a pas pu être observé depuis cette sandbox. Le lancement en CI est lui-même une hypothèse : le job passe `MRSC_TEST_URL` à un `python3 -m http.server` sur la racine, alors que le script sait aussi démarrer `outils/serveur-local.py`.
+**Limite — ce que cela ne prouve pas.** Le banc ne rejoue aucun essai : le faux navigateur ne clique pas et ne mesure pas. Il prouve que le harnais ne peut pas raconter un succès qui n'a pas eu lieu — comptage, nommage, bilan, code de sortie — jamais que les neuf essais mesurent ce qu'ils annoncent. Ce second point est tenu par le job `graphismes` et un vrai Chromium : observé vert le 29 octobre (exécution 40972858034). Il a d'abord échoué, et c'est instructif — servi par `python3 -m http.server`, `simulateur/` reçoit des 404 sur son API, n'ouvre jamais `#overlay.visible`, et quatre essais tombent en `TimeoutError`. Le script doit donc démarrer `outils/serveur-local.py`, comme sa documentation le dit. Rien de tout cela ne prouve que les neuf essais couvrent ce qu'ils prétendent couvrir : ils sont verts, pas exhaustifs.
 
-**Suite.** Observer le premier passage en CI des neuf essais, puis éprouver la mesure de `verifier-graphismes.cjs`, dernier contrôle sans second témoin.
+**Suite.** Éprouver la mesure de `verifier-graphismes.cjs`, dernier contrôle sans second témoin.
 
 Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 
