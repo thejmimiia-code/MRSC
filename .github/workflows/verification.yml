@@ -353,6 +353,13 @@ jobs:
           trap 'kill "$serveur"' EXIT
           MRSC_FICHES_JSON="$RUNNER_TEMP/graphismes/fiches-statistiques.json" node outils/verifier-fiches-statistiques.cjs
           node outils/test-cache-css-ia.cjs
+          # Neuf essais interactifs (panneau, clavier, en-tête compact, stockage
+          # bloqué, guide, lecture à voix haute, iframe synchronisée). Le script
+          # existait depuis le 14 octobre et **aucun workflow ne le lançait** :
+          # il n'était exercé qu'à la main, sur une machine avec Chromium. Sa
+          # mesure a besoin du vrai serveur du site ; celui de ce job sert la
+          # racine du dépôt, ce qui suffit (`simulateur/index.html` existe).
+          MRSC_TEST_URL=http://127.0.0.1:4181/ node outils/test-experience.cjs
           node outils/verifier-graphismes.cjs
           # Le code de sortie ne dit pas *pourquoi* la mesure a échoué : une
           # mutation qui ferait céder le contrôle pour une panne sans rapport

@@ -190,6 +190,23 @@ limite = "Le faux navigateur ne mesure rien : il encode la seule règle « l'anc
 suite = "Éprouver `test-experience.cjs`, dernier script qui est lui-même un test, en commençant par ce qui est faisable sans navigateur : le compte d'essais annoncé et l'existence d'au moins une assertion par essai."
 initiatives = ["optimisation-du-site", "documentation-rd-eva"]
 
+[[avancee]]
+id = "un-test-que-personne-ne-lancait"
+date = 2026-10-29
+titre = "Un test que personne ne lançait : neuf essais navigateur hors de toute CI"
+constat = "`test-experience.cjs` contient neuf essais interactifs — choix immédiat, clavier et retour du focus, en-tête compact, panneaux à 320 et 1 440 px, contraste et espacement, stockage bloqué, guide, lecture à voix haute, iframe synchronisée — et **aucun workflow ne le lançait**. Il n'était exercé qu'à la main, sur une machine équipée de Chromium. L'inventaire le classait `test-en-soi`, statut dont la définition dit « lancé par la CI » : la définition était fausse pour lui. Un test que rien ne lance ne protège rien, même quand il passe."
+changement = "Deux corrections. Le job `graphismes` — le seul qui installe Chromium — lance désormais `node outils/test-experience.cjs` contre le serveur du site qu'il a déjà démarré. Et `outils/test_test_experience.mjs` éprouve le **harnais** : avec le faux navigateur en échec total, les neuf essais doivent être comptés une fois, nommés, le bilan annoncé doit être `0/9`, et le code de sortie 1. Trois mutations sont rejetées par ce verdict — `process.exitCode` effacé, succès enregistré malgré l'exception, essai renommé — et deux invariants sont lus dans la source : aucune assertion absente d'un essai, aucun nom en double."
+preuves = [
+  "outils/test_test_experience.mjs",
+  "outils/test-experience.cjs",
+  ".github/workflows/verification.yml",
+  "docs/rd/inventaire-controles.md",
+]
+controle = "node outils/test_test_experience.mjs"
+limite = "Le banc ne rejoue aucun essai : le faux navigateur ne clique pas et ne mesure pas. Il prouve que le harnais ne peut pas raconter un succès qui n'a pas eu lieu — comptage, nommage, bilan, code de sortie — jamais que les neuf essais mesurent ce qu'ils annoncent. Ce second point dépend du job `graphismes` et d'un vrai Chromium, et il n'a pas pu être observé depuis cette sandbox. Le lancement en CI est lui-même une hypothèse : le job passe `MRSC_TEST_URL` à un `python3 -m http.server` sur la racine, alors que le script sait aussi démarrer `outils/serveur-local.py`."
+suite = "Observer le premier passage en CI des neuf essais, puis éprouver la mesure de `verifier-graphismes.cjs`, dernier contrôle sans second témoin."
+initiatives = ["optimisation-du-site", "documentation-rd-eva"]
+
 [meta]
 version = 1
 derniere_revue = 2026-10-28
