@@ -4865,8 +4865,21 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
    ancrage : sous 761 px et en paysage court, les règles `position: fixed;
    left: .5rem; right: .5rem` prennent la main plus bas dans cette feuille.
    L'en-tête agrandi garde l'ancrage à droite : ses commandes, elles, suivent la
-   rangée centrée et le panneau y trouve sa place à gauche du bouton. */
-@media (min-width: 761px) and (min-height: 561px) {
+   rangée centrée et le panneau y trouve sa place à gauche du bouton.
+
+   La seconde condition était `min-height: 561px`, et c'est elle qui a laissé
+   passer la capture du 30 octobre 2026 : un téléphone en « aperçu ordinateur »
+   annonce une fenêtre **large et basse** (980 × 4xx). La fenêtre dépasse donc
+   761 px de large sans atteindre 561 px de haut, la règle ne s'appliquait pas,
+   et le panneau retombait sur `right: 0`, ancré à droite d'un bouton placé au
+   début de la barre : il sortait par la gauche, les libellés rognés
+   (« grandir », « arcours », « ffichage »). La hauteur n'a jamais été la bonne
+   question — ce qui compte est que la fenêtre soit assez large pour que le
+   panneau tienne à droite du bouton. D'où deux cas, en ou : au moins 921 px de
+   large (au-delà, le format « paysage court » ne s'applique plus, sa limite
+   étant 920 px), ou au moins 761 px de large et 561 px de haut (le bureau
+   ordinaire). Aucun autre format n'est touché. */
+@media (min-width: 921px), (min-width: 761px) and (min-height: 561px) {
   html.entete-compacte .customize-settings-panel {
     right: auto;
     left: 0;

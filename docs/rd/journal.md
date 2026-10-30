@@ -2,6 +2,19 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-30 — La hauteur n'aurait jamais dû entrer dans la requête
+
+- **Initiative :** `optimisation-du-site`.
+- **Le signalement :** « en mode réduit sur aperçu ordinateur depuis un smartphone le menu est logé à gauche à moitié visible », avec capture. Le panneau « Personnalisation » sortait par la gauche, libellés rognés — « grandir », « arcours », « ffichage ». Le défaut corrigé le 28 octobre était revenu.
+- **La cause, et elle est instructive :** la règle du 28 s'écrit `@media (min-width: 761px) and (min-height: 561px)`. La hauteur y était un garde, pour ne pas écraser les deux formats qui ont leur propre ancrage. Mais un téléphone en « aperçu ordinateur » n'annonce pas une petite fenêtre : il annonce une fenêtre **large et basse**, 980 × 4xx. Elle passe la largeur sans passer la hauteur, la règle ne s'applique pas, et le panneau retombe sur `right: 0` — ancré à droite d'un bouton placé au début de la barre.
+- **Pourquoi la mesure du 28 ne l'a pas vu :** elle avait été faite à 1 280 × 900 et déduite d'une capture, pas rejouée sur ce mode. Un garde de format qui n'est jamais mesuré sur les formats qu'il prétend écarter ne protège que ceux qu'on a visités.
+- **Le correctif :** `@media (min-width: 921px), (min-width: 761px) and (min-height: 561px)`. Au-delà de 920 px, le format « paysage court » n'existe plus (sa limite), donc le panneau a la place de s'ouvrir à droite ; en dessous, le garde de hauteur reste, inchangé. Aucun autre format n'est touché.
+- **Le contrôle statique suit :** `verifier-affichages.py` exige les deux branches, et son banc (`test_mutations_affichages.py`, 3 tests) retire toujours `right: auto; left: 0` pour vérifier qu'il mord.
+- **La mesure, cette fois :** `test-experience.cjs` gagne un dixième essai qui visite quatre formats — 980 × 440 (aperçu ordinateur), 1 024 × 500, 1 440 × 1 000, 800 × 500 (paysage court) —, réduit l'en-tête comme le fait l'utilisateur, et exige que le panneau et chacune de ses lignes restent dans la fenêtre. C'est la première fois que ce défaut est re-mesuré au lieu d'être déduit d'une capture.
+- **Contrôles exécutés :** `verifier-affichages.py`, `test_mutations_affichages.py`, `test_test_experience.mjs` (10 essais détectés), `versionner-css-ia.py` (version `9f727523f979398e`), `verifier-inventaire-controles.py`, `verifier-integration.py`, `verifier-site-statique.py`, `construire-avancees.py --verifier`, `verifier-rd-continue.py`, `git diff --check`.
+- **Limites :** aucun navigateur dans cet atelier, donc la correction n'y a pas été re-mesurée ; l'essai qui la mesure tourne en CI. Et 980 × 4xx sont les dimensions du mode « aperçu ordinateur », pas celles de l'appareil de la capture.
+- **Prochaine action :** lire le premier passage en CI de l'essai, puis vérifier sur le site publié.
+
 ## 2026-10-29 — La mesure se confrontait à sa propre mutation
 
 - **Initiative :** `optimisation-du-site` (avec `documentation-rd-eva`).

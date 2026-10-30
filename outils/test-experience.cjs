@@ -668,6 +668,76 @@ async function main() {
     }
   });
 
+  // Le 30 octobre 2026, un téléphone en « aperçu ordinateur » a montré le panneau
+  // « Personnalisation » sorti par la gauche de la fenêtre, libellés rognés
+  // (« grandir », « arcours », « ffichage »). La cause n'était pas un défaut de
+  // rangement mais une requête de largeur doublée d'une hauteur : la fenêtre
+  // annoncée par ce mode est large (980 px) et basse (moins de 561 px), donc
+  // aucune des deux règles d'ancrage ne s'appliquait et le panneau retombait sur
+  // `right: 0`, ancré à droite d'un bouton placé au début de la barre.
+  // L'essai mesure cette fenêtre-là, et les deux autres formats d'ancrage.
+  await executer('Aperçu ordinateur depuis un téléphone : 980 × 440, le panneau reste dans l’écran', async () => {
+    const page = await creerPage({ width: 980, height: 440 });
+    try {
+      const formats = [
+        { largeur: 980, hauteur: 440, nom: 'aperçu ordinateur, large et bas' },
+        { largeur: 1024, hauteur: 500, nom: 'fenêtre large et basse' },
+        { largeur: 1440, hauteur: 1000, nom: 'bureau ordinaire, en-tête compact' },
+        { largeur: 800, hauteur: 500, nom: 'paysage court, ancrage fixe' },
+      ];
+      for (const format of formats) {
+        await page.setViewport({ width: format.largeur, height: format.hauteur, deviceScaleFactor: 1 });
+        await ouvrirPageSite(page, 'index.html');
+        // Ce mode n'est pas reconnu comme compact par la requête du site : c'est
+        // l'utilisateur qui réduit l'en-tête. L'essai le fait comme lui.
+        const compact = await page.evaluate(
+          () => document.querySelector('.site-header').classList.contains('is-compact')
+        );
+        if (!compact) {
+          await ouvrirPersonnalisation(page);
+          await page.click('[data-header-compact-toggle]');
+          await page.waitForFunction(
+            () => document.querySelector('.site-header').classList.contains('is-compact')
+          );
+        }
+        await ouvrirPersonnalisation(page);
+        const mesure = await page.evaluate(() => {
+          const panneau = document.querySelector('.customize-settings-panel');
+          const cadre = panneau.getBoundingClientRect();
+          const style = getComputedStyle(panneau);
+          return {
+            viewport: window.innerWidth,
+            hauteurFenetre: window.innerHeight,
+            gauche: Math.round(cadre.left),
+            droite: Math.round(cadre.right),
+            largeur: Math.round(cadre.width),
+            ancrage: style.position,
+            compact: document.querySelector('.site-header').classList.contains('is-compact'),
+            libellesRognes: Array.from(panneau.children)
+              .filter((element) => element.getBoundingClientRect().height > 0)
+              .map((element) => {
+                const boite = element.getBoundingClientRect();
+                return {
+                  nom: (typeof element.className === 'string' ? element.className : element.tagName) || element.tagName,
+                  gauche: Math.round(boite.left),
+                  droite: Math.round(boite.right),
+                };
+              })
+              .filter((ligne) => ligne.gauche < -1 || ligne.droite > window.innerWidth + 1),
+          };
+        });
+        const contexte = `${format.nom} (${format.largeur} × ${format.hauteur}) : ${JSON.stringify(mesure)}`;
+        assert.equal(mesure.compact, true, `l’en-tête doit être compact — ${contexte}`);
+        assert.ok(mesure.gauche >= -1, `le panneau sort par la gauche — ${contexte}`);
+        assert.ok(mesure.droite <= mesure.viewport + 1, `le panneau sort par la droite — ${contexte}`);
+        assert.ok(mesure.largeur >= 260, `le panneau est écrasé — ${contexte}`);
+        assert.deepEqual(mesure.libellesRognes, [], `des libellés sortent de la fenêtre — ${contexte}`);
+      }
+    } finally {
+      await page.close();
+    }
+  });
+
   await executer('320 px à 130 % avec contraste et espacement renforcés sur le site et le simulateur', async () => {
     const pageSite = await creerPage({ width: 320, height: 800 });
     try {

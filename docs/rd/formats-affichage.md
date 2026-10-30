@@ -380,6 +380,33 @@ Limite : aucun navigateur dans l'environnement de la correction ; la position es
 déduite de la capture et de la feuille de style, pas re-mesurée. Reste à relever
 une ligne « 1 280 × 900, en-tête compact » dans le tableau ci-dessus.
 
+**Correctif du 30 octobre 2026 — la hauteur n'aurait jamais dû entrer dans la
+requête.** Retour d'usage : « en mode réduit sur aperçu ordinateur depuis un
+smartphone le menu est logé à gauche à moitié visible », capture à l'appui. Le
+panneau ressortait de nouveau par la gauche, libellés rognés (« grandir »,
+« arcours », « ffichage »).
+
+La cause est la seconde moitié du garde écrit le 28 : `min-height: 561px`. Un
+téléphone en « aperçu ordinateur » n'annonce pas une petite fenêtre, il annonce
+une fenêtre **large et basse** — 980 × 4xx sur la capture. Elle dépasse donc
+761 px de large sans atteindre 561 px de haut : la règle ne s'appliquait pas, le
+panneau retombait sur `right: 0`, ancré à droite d'un bouton placé au début de
+la barre, et sortait par la gauche. Le défaut du 28 octobre revenait par un mode
+que la mesure du 28 n'avait pas visité.
+
+La question n'est pas la hauteur, c'est la largeur : au-delà de 920 px, le format
+« paysage court » n'existe plus (sa limite), donc le panneau a la place de
+s'ouvrir à droite. La requête devient
+`@media (min-width: 921px), (min-width: 761px) and (min-height: 561px)` — les
+deux cas en ou, aucun autre format touché.
+
+`test-experience.cjs` porte désormais un essai mesuré, « Aperçu ordinateur depuis
+un téléphone : 980 × 440 », qui visite quatre formats (980 × 440, 1 024 × 500,
+1 440 × 1 000, 800 × 500 en paysage court), réduit l'en-tête comme le fait
+l'utilisateur, puis exige que le panneau et ses lignes restent dans la fenêtre.
+C'est la première fois que ce défaut est **re-mesuré** au lieu d'être déduit
+d'une capture.
+
 ## 6 sexies. Finitions du panneau : la qualité se mesure aussi à l'écran (23 octobre 2026)
 
 Retour d'usage après la fusion : « c'est un affichage de haute qualité qu'il faut,
