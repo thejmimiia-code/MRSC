@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 41 |
-| Période couverte | du 2026-10-20 au 2026-10-29 |
-| Contrôles exécutables cités | 54 |
+| Avancées consignées | 42 |
+| Période couverte | du 2026-10-20 au 2026-10-30 |
+| Contrôles exécutables cités | 55 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -969,6 +969,29 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 **Limite — ce que cela ne prouve pas.** Le banc ne rejoue aucun essai : le faux navigateur ne clique pas et ne mesure pas. Il prouve que le harnais ne peut pas raconter un succès qui n'a pas eu lieu — comptage, nommage, bilan, code de sortie — jamais que les neuf essais mesurent ce qu'ils annoncent. Ce second point est tenu par le job `graphismes` et un vrai Chromium : observé vert le 29 octobre (exécution 40972858034). Il a d'abord échoué, et c'est instructif — servi par `python3 -m http.server`, `simulateur/` reçoit des 404 sur son API, n'ouvre jamais `#overlay.visible`, et quatre essais tombent en `TimeoutError`. Le script doit donc démarrer `outils/serveur-local.py`, comme sa documentation le dit. Rien de tout cela ne prouve que les neuf essais couvrent ce qu'ils prétendent couvrir : ils sont verts, pas exhaustifs.
 
 **Suite.** Éprouver la mesure de `verifier-graphismes.cjs`, dernier contrôle sans second témoin.
+
+Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
+
+### `la-hauteur-n-aurait-jamais-du-entrer-dans-la-requete` — Le panneau ressortait par la gauche sur un téléphone en aperçu ordinateur
+
+*Consignée le 2026-10-30.*
+
+**Constat.** Retour d'usage : « en mode réduit sur aperçu ordinateur depuis un smartphone le menu est logé à gauche à moitié visible », capture à l'appui — le panneau « Personnalisation » sortait par la gauche, libellés rognés. La règle du 28 octobre qui l'ouvre vers la droite portait un second garde, `min-height: 561px`. Un téléphone en aperçu ordinateur n'annonce pas une petite fenêtre mais une fenêtre **large et basse** (980 × 4xx) : elle dépasse 761 px de large sans atteindre 561 px de haut, la règle ne s'appliquait pas, et le panneau retombait sur `right: 0`, ancré à droite d'un bouton placé au début de la barre. Le défaut corrigé le 28 revenait par un format que la mesure du 28 n'avait pas visité.
+
+**Ce que cela change.** La question n'est pas la hauteur, c'est la largeur : au-delà de 920 px, le format « paysage court » n'existe plus, donc le panneau a la place de s'ouvrir à droite. La requête devient `@media (min-width: 921px), (min-width: 761px) and (min-height: 561px)` — les deux cas en ou, aucun autre format touché. `test-experience.cjs` porte un dixième essai mesuré, « Aperçu ordinateur depuis un téléphone : 980 × 440 », qui visite quatre formats (980 × 440, 1 024 × 500, 1 440 × 1 000, 800 × 500 en paysage court), réduit l'en-tête comme le fait l'utilisateur, puis exige que le panneau et chacune de ses lignes restent dans la fenêtre. Le garde-fou statique `verifier-affichages.py` exige désormais les deux branches de la requête.
+
+**Preuves dans le dépôt :**
+
+- `assets/css/site.css`
+- `outils/verifier-affichages.py`
+- `outils/test-experience.cjs`
+- `docs/rd/formats-affichage.md`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py`
+
+**Limite — ce que cela ne prouve pas.** L'essai a été vu mordre : avec la requête d'avant remise en place, il tombe en CI et nomme le défaut mesuré — à 980 × 440, panneau à gauche = −43 px, cinq lignes à −35 px. La correction est déduite des dimensions annoncées par le mode « aperçu ordinateur » (980 px de large, moins de 561 px de haut) et de la feuille de style : aucun navigateur ne tourne dans l'atelier où elle a été écrite, donc elle n'a pas été re-mesurée là. L'essai qui la mesure existe mais son premier passage réel sera celui de la CI. Rien ne prouve non plus que 980 × 4xx soient les dimensions exactes du téléphone de la capture : ce sont celles du mode, pas celles de l'appareil.
+
+**Suite.** Lire le premier passage en CI de l'essai « Aperçu ordinateur », et vérifier sur le site publié qu'un téléphone en mode bureau ne rogne plus le panneau.
 
 Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 

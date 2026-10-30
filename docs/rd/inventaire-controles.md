@@ -39,7 +39,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/serveur-local.py` | Serveur local qui imite Vercel et GitHub Pages | Aucune : outil de développement | `hors-portee` |
 | `outils/statuts_editoriaux.py` | Définitions partagées des statuts | Aucune : module d'aide | `hors-portee` |
 | `outils/test-cache-css-ia.cjs` | Simule un CSS périmé servi sous l'ancienne URL | `test_test_cache_css_ia.mjs` (5 cas : nominal, version périmée, attente inversée, interception retirée, ancien CSS identique) | `banc` |
-| `outils/test-experience.cjs` | 9 essais navigateur du panneau, du menu et de la lecture vocale | `test_test_experience.mjs` (harnais seul : 9 échecs comptés et nommés, code de sortie, 3 mutations rejetées) · lancé par le job `graphismes` depuis le 29 octobre | `banc` |
+| `outils/test-experience.cjs` | 10 essais navigateur du panneau, du menu, de la lecture vocale et de l'ancrage du panneau | `test_test_experience.mjs` (harnais seul : 10 échecs comptés et nommés, code de sortie, 3 mutations rejetées) · lancé par le job `graphismes` depuis le 29 octobre | `banc` |
 | `outils/verifier-accessibilite.cjs` | Audit axe des pages, lancé dans le job navigateur | `test_verifier_accessibilite.mjs` (navigateur et axe remplacés ; 3 modes, chaque exécution doit avoir son verdict) | `faute-en-memoire` |
 | `outils/verifier-affichages.py` | 16 garde-fous de format et d'impression | `test_mutations_affichages.py` (5 mutations) | `banc` |
 | `outils/verifier-budgets-visuels.py` | Budgets d'affichage des titres | `test_mutations_budgets_visuels.py` (3 fautes : titre long, page sans titre, H1 gonflé) | `banc` |

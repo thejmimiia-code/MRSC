@@ -224,6 +224,23 @@ limite = "Premier passage réel en CI le 29 octobre, vert à l'exécution 410323
 suite = "Étendre les pages de contrôle aux autres mesures navigateur qui n'ont jamais été confrontées à une géométrie connue d'avance."
 initiatives = ["optimisation-du-site", "documentation-rd-eva"]
 
+[[avancee]]
+id = "la-hauteur-n-aurait-jamais-du-entrer-dans-la-requete"
+date = 2026-10-30
+titre = "Le panneau ressortait par la gauche sur un téléphone en aperçu ordinateur"
+constat = "Retour d'usage : « en mode réduit sur aperçu ordinateur depuis un smartphone le menu est logé à gauche à moitié visible », capture à l'appui — le panneau « Personnalisation » sortait par la gauche, libellés rognés. La règle du 28 octobre qui l'ouvre vers la droite portait un second garde, `min-height: 561px`. Un téléphone en aperçu ordinateur n'annonce pas une petite fenêtre mais une fenêtre **large et basse** (980 × 4xx) : elle dépasse 761 px de large sans atteindre 561 px de haut, la règle ne s'appliquait pas, et le panneau retombait sur `right: 0`, ancré à droite d'un bouton placé au début de la barre. Le défaut corrigé le 28 revenait par un format que la mesure du 28 n'avait pas visité."
+changement = "La question n'est pas la hauteur, c'est la largeur : au-delà de 920 px, le format « paysage court » n'existe plus, donc le panneau a la place de s'ouvrir à droite. La requête devient `@media (min-width: 921px), (min-width: 761px) and (min-height: 561px)` — les deux cas en ou, aucun autre format touché. `test-experience.cjs` porte un dixième essai mesuré, « Aperçu ordinateur depuis un téléphone : 980 × 440 », qui visite quatre formats (980 × 440, 1 024 × 500, 1 440 × 1 000, 800 × 500 en paysage court), réduit l'en-tête comme le fait l'utilisateur, puis exige que le panneau et chacune de ses lignes restent dans la fenêtre. Le garde-fou statique `verifier-affichages.py` exige désormais les deux branches de la requête."
+preuves = [
+  "assets/css/site.css",
+  "outils/verifier-affichages.py",
+  "outils/test-experience.cjs",
+  "docs/rd/formats-affichage.md",
+]
+controle = "python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py"
+limite = "L'essai a été vu mordre : avec la requête d'avant remise en place, il tombe en CI et nomme le défaut mesuré — à 980 × 440, panneau à gauche = −43 px, cinq lignes à −35 px. La correction est déduite des dimensions annoncées par le mode « aperçu ordinateur » (980 px de large, moins de 561 px de haut) et de la feuille de style : aucun navigateur ne tourne dans l'atelier où elle a été écrite, donc elle n'a pas été re-mesurée là. L'essai qui la mesure existe mais son premier passage réel sera celui de la CI. Rien ne prouve non plus que 980 × 4xx soient les dimensions exactes du téléphone de la capture : ce sont celles du mode, pas celles de l'appareil."
+suite = "Lire le premier passage en CI de l'essai « Aperçu ordinateur », et vérifier sur le site publié qu'un téléphone en mode bureau ne rogne plus le panneau."
+initiatives = ["optimisation-du-site", "documentation-rd-eva"]
+
 [meta]
 version = 1
 derniere_revue = 2026-10-28

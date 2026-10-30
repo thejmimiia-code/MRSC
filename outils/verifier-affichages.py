@@ -625,8 +625,16 @@ def controler_panneau_du_menu() -> list[str]:
     # libellés rognés). Sur ordinateur et en-tête compact, il s'ouvre vers la
     # droite ; la requête écarte elle-même les formats qui ont leur propre
     # ancrage (sous 761 px et en paysage court).
+    #
+    # La première des deux conditions était une hauteur (`min-height: 561px`).
+    # Le 30 octobre 2026, un téléphone en « aperçu ordinateur » — 980 × 4xx —
+    # l'a prise en défaut : assez large, trop basse, donc aucune des deux règles
+    # ne s'appliquait et le panneau ressortait par la gauche. C'est la largeur
+    # qui décide, pas la hauteur : au-delà de 920 px, le format « paysage
+    # court » n'existe plus, et le panneau a la place de s'ouvrir à droite.
+    # Ce contrôle exige donc les deux branches, en ou.
     compact = re.search(
-        r"@media \(min-width: 761px\) and \(min-height: 561px\) \{\s*"
+        r"@media \(min-width: 921px\), \(min-width: 761px\) and \(min-height: 561px\) \{\s*"
         r"html\.entete-compacte \.customize-settings-panel \{(?P<corps>[^}]*)\}",
         texte,
     )
@@ -635,9 +643,11 @@ def controler_panneau_du_menu() -> list[str]:
         erreurs.append(
             "site.css — le panneau « Personnalisation » ne bascule plus vers la droite "
             "dans l'en-tête compact sur ordinateur (html.entete-compacte "
-            ".customize-settings-panel { right: auto; left: 0 } sous min-width: 761px et "
-            "min-height: 561px) : ancré à droite d'un bouton placé au début de la barre, "
-            "il ressort par la gauche de l'écran et ses libellés sont rognés"
+            ".customize-settings-panel { right: auto; left: 0 } sous min-width: 921px, ou "
+            "sous min-width: 761px et min-height: 561px) : ancré à droite d'un bouton placé "
+            "au début de la barre, il ressort par la gauche de l'écran et ses libellés "
+            "sont rognés — c'est ce qui est arrivé le 30 octobre 2026 sur un téléphone "
+            "en aperçu ordinateur, large de 980 px et haut de moins de 561 px"
         )
     # Deux commandes, deux colonnes égales : c'est la grille qui empêche le
     # libellé de se casser (« Parcour/s ») et qui laisse 32 px de haut à chaque
