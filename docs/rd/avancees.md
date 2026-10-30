@@ -752,7 +752,7 @@ Initiatives liées : `documentation-rd-eva`, `veille-savoirs-evolutifs`.
 
 **Contrôle qui la maintient :** `node outils/test_mesure_graphismes.mjs`
 
-**Limite — ce que cela ne prouve pas.** La page de contrôle est une image PNG simple, à une disposition, une taille de texte et un mode de contraste : les trois pages réelles, les `srcset` et la constellation ne sont pas couverts. Le banc ne dit pas non plus que les seuils (distorsion > 0,01, écart d'ancre > 2 px) sont les bons — seulement que la mesure qui les alimente est juste. Il demande Chromium : sans les paquets navigateur il sort en code 2 et le dit, ce qui n'est pas un succès.
+**Limite — ce que cela ne prouve pas.** Premier passage réel en CI le 29 octobre, vert à l'exécution 41032306541 (le banc sort en code 2 sans navigateur, donc un vert signifie qu'il a mesuré). La page de contrôle est une image PNG simple, à une disposition, une taille de texte et un mode de contraste : les trois pages réelles, les `srcset` et la constellation ne sont pas couverts. Le banc ne dit pas non plus que les seuils (distorsion > 0,01, écart d'ancre > 2 px) sont les bons — seulement que la mesure qui les alimente est juste. Il demande Chromium : sans les paquets navigateur il sort en code 2 et le dit, ce qui n'est pas un succès.
 
 **Suite.** Étendre les pages de contrôle aux autres mesures navigateur qui n'ont jamais été confrontées à une géométrie connue d'avance.
 
