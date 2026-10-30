@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 40 |
+| Avancées consignées | 41 |
 | Période couverte | du 2026-10-20 au 2026-10-29 |
-| Contrôles exécutables cités | 53 |
+| Contrôles exécutables cités | 54 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -734,6 +734,29 @@ Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 **Suite.** Éprouver `verifier-planches-statuts.py`, puis attaquer les quatre contrôles navigateur depuis le job `graphismes`.
 
 Initiatives liées : `documentation-rd-eva`, `veille-savoirs-evolutifs`.
+
+### `la-mesure-se-confrontait-a-sa-propre-mutation` — La mesure des graphismes se confrontait à sa propre mutation
+
+*Consignée le 2026-10-29.*
+
+**Constat.** Les trois mutations internes de `verifier-graphismes.cjs` (`distorsion`, `densite`, `ancre`) étaient rejouées en CI et leurs rapports contrôlés : une mutation qui n'aurait pas produit l'erreur attendue faisait échouer le job. Mais les mutations sont plantées **par le script lui-même** : un `getBoundingClientRect` mal lu, une densité calculée à l'envers, une dimension native recopiée de `naturalWidth` au lieu du bitmap décodé auraient produit les mêmes messages, sur les mêmes pages, et le contrôle serait resté vert. Personne n'avait jamais confronté les nombres relevés à une géométrie connue d'avance.
+
+**Ce que cela change.** `outils/test_mesure_graphismes.mjs` génère une page de contrôle dans un dossier temporaire — un PNG unicolore écrit octet par octet, une boîte en pixels écrite dans la feuille de style — et la fait mesurer par un vrai Chromium en périmètre réduit (`MRSC_PERIMETRE_REDUIT=1`, déclaré dans le rapport). Trois cas : image 600 × 300 dans une boîte 200 × 100 (aucune erreur, densité 3) ; la même image étirée dans une boîte 200 × 200 (« distorsion » et « ratio de boîte différent de la source ») ; une image 60 × 30 dans une boîte 200 × 100 (« densité insuffisante » aux deux densités d'écran). Les dimensions natives, la boîte rendue, la densité et la distorsion sont recalculées à partir du relevé et comparées à l'arithmétique, jamais à des constantes recopiées.
+
+**Preuves dans le dépôt :**
+
+- `outils/test_mesure_graphismes.mjs`
+- `outils/verifier-graphismes.cjs`
+- `.github/workflows/verification.yml`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `node outils/test_mesure_graphismes.mjs`
+
+**Limite — ce que cela ne prouve pas.** Premier passage réel en CI le 29 octobre, vert à l'exécution 41032306541 (le banc sort en code 2 sans navigateur, donc un vert signifie qu'il a mesuré). La page de contrôle est une image PNG simple, à une disposition, une taille de texte et un mode de contraste : les trois pages réelles, les `srcset` et la constellation ne sont pas couverts. Le banc ne dit pas non plus que les seuils (distorsion > 0,01, écart d'ancre > 2 px) sont les bons — seulement que la mesure qui les alimente est juste. Il demande Chromium : sans les paquets navigateur il sort en code 2 et le dit, ce qui n'est pas un succès.
+
+**Suite.** Étendre les pages de contrôle aux autres mesures navigateur qui n'ont jamais été confrontées à une géométrie connue d'avance.
+
+Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 
 ### `le-reseau-se-teste-sur-la-boucle-locale` — Un contrôle réseau se prouve sur la boucle locale, sans simuler HTTP
 

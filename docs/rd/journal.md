@@ -2,6 +2,19 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-29 — La mesure se confrontait à sa propre mutation
+
+- **Initiative :** `optimisation-du-site` (avec `documentation-rd-eva`).
+- **Vingtième lot, et dernier `test-en-soi`.** `verifier-graphismes.cjs` mesurait trois visuels réels ; ses trois mutations internes étaient rejouées en CI et leurs rapports contrôlés depuis le matin même. Mais une mutation plantée **par le script** ne prouve que la cohérence du script avec lui-même : une densité calculée à l'envers, une dimension native recopiée de `naturalWidth`, un `getBoundingClientRect` mal interprété produiraient les mêmes messages sur les mêmes pages. Rien n'avait jamais confronté les nombres à une géométrie connue d'avance.
+- **La page de contrôle :** `outils/test_mesure_graphismes.mjs` écrit un PNG unicolore (IHDR/IDAT/IEND à la main, CRC calculés, aucune dépendance) et une page qui place l'image dans une boîte écrite en pixels. Trois cas : conforme (600 × 300 dans 200 × 100), distordu (200 × 200), basse densité (60 × 30 dans 200 × 100).
+- **Ce qui est vérifié :** dimensions natives, boîte rendue, densité et distorsion, toutes **recalculées à partir du relevé** et comparées à l'arithmétique. Le code de sortie et le nombre de relevés en échec suivent.
+- **Le périmètre réduit est déclaré :** `MRSC_PERIMETRE_REDUIT=1` réduit les boucles (une page, deux largeurs, une configuration), et le rapport porte `reduit: true` avec une phrase de périmètre. Un relevé de quatre lignes ne doit pas se lire comme l'audit complet — le banc le vérifie aussi.
+- **Inventaire :** **46 outils · 20 `banc` · 12 `faute-en-memoire` · 6 `test` · 0 `test-en-soi` · 0 `aucun-test` · 8 `hors-portee`** → **38 contrôles sur 38**. Le statut `test-en-soi` n'a plus aucun titulaire.
+- **Contrôles exécutés :** génération du PNG validée hors Node (CRCs vérifiés, dimensions 600 × 300, données décompressées de 540 300 octets comme attendu) ; `node --check` sur les deux scripts ; `verifier-inventaire-controles.py` ; chargement YAML du workflow ; `construire-avancees.py --verifier` ; `verifier-rd-continue.py` ; `verifier-integration.py` ; `verifier-site-statique.py` ; `git diff --check`.
+- **Premier passage réel :** la CI, exécution 41032306541 — **vert du premier coup**, neuf étapes du job `graphismes` toutes réussies, dont celle du banc. Comme le banc sort en code 2 quand Chromium manque, un vert signifie qu'il a réellement mesuré les trois pages de contrôle.
+- **Limites :** le banc demande Chromium et sort en code 2 sans lui — il n'a donc pas pu être exécuté dans cette sandbox. Une image PNG simple ne dit rien des trois pages réelles, des `srcset` ni de la constellation, et les seuils (`distorsion > 0,01`, écart d'ancre `> 2 px`) ne sont pas éprouvés : seule la mesure qui les alimente l'est.
+- **Prochaine action :** étendre les pages de contrôle aux autres mesures navigateur jamais confrontées à une géométrie connue d'avance.
+
 ## 2026-10-29 — Un test que personne ne lançait
 
 - **Initiative :** `optimisation-du-site` (avec `documentation-rd-eva`).
