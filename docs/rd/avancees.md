@@ -989,7 +989,7 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 
 **Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py`
 
-**Limite — ce que cela ne prouve pas.** La correction est déduite des dimensions annoncées par le mode « aperçu ordinateur » (980 px de large, moins de 561 px de haut) et de la feuille de style : aucun navigateur ne tourne dans l'atelier où elle a été écrite, donc elle n'a pas été re-mesurée là. L'essai qui la mesure existe mais son premier passage réel sera celui de la CI. Rien ne prouve non plus que 980 × 4xx soient les dimensions exactes du téléphone de la capture : ce sont celles du mode, pas celles de l'appareil.
+**Limite — ce que cela ne prouve pas.** L'essai a été vu mordre : avec la requête d'avant remise en place, il tombe en CI et nomme le défaut mesuré — à 980 × 440, panneau à gauche = −43 px, cinq lignes à −35 px. La correction est déduite des dimensions annoncées par le mode « aperçu ordinateur » (980 px de large, moins de 561 px de haut) et de la feuille de style : aucun navigateur ne tourne dans l'atelier où elle a été écrite, donc elle n'a pas été re-mesurée là. L'essai qui la mesure existe mais son premier passage réel sera celui de la CI. Rien ne prouve non plus que 980 × 4xx soient les dimensions exactes du téléphone de la capture : ce sont celles du mode, pas celles de l'appareil.
 
 **Suite.** Lire le premier passage en CI de l'essai « Aperçu ordinateur », et vérifier sur le site publié qu'un téléphone en mode bureau ne rogne plus le panneau.
 
