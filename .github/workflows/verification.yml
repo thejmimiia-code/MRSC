@@ -367,6 +367,30 @@ jobs:
             test "$statut" -eq 1
             python3 outils/verifier-mutation-graphismes.py "$RUNNER_TEMP/graphismes/mutation-$mutation.json" "$mutation"
           done
+      # Les deux contrôles précédents disent qu'une mutation produit l'erreur
+      # annoncée. Aucun ne dit que la géométrie relevée est la bonne : un
+      # `getBoundingClientRect` mal lu, une densité calculée à l'envers,
+      # resteraient verts, puisque les mutations sont plantées par le script
+      # lui-même. Ce banc mesure donc une page de contrôle générée ici — image
+      # 600 × 300 dans une boîte 200 × 100, puis déformée, puis en basse
+      # résolution — et confronte les nombres du rapport à l'arithmétique.
+      # Trois cas, quatre relevés chacun, périmètre réduit déclaré.
+      - name: Éprouver la mesure des graphismes sur une page de contrôle
+        env:
+          MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
+        run: |
+          set +e
+          node outils/test_mesure_graphismes.mjs >"$RUNNER_TEMP/mesure-graphismes.log" 2>&1
+          statut=$?
+          set -e
+          cat "$RUNNER_TEMP/mesure-graphismes.log"
+          if [ "$statut" -ne 0 ]; then
+            grep -E '^(ÉCHEC|Environnement|Error|.*Error:)' "$RUNNER_TEMP/mesure-graphismes.log" | head -n 10 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::error title=Mesure des graphismes::$ligne"
+            done
+            exit "$statut"
+          fi
+
       # Neuf essais interactifs (panneau, clavier, en-tête compact, stockage
       # bloqué, guide, lecture à voix haute, iframe synchronisée). Le script
       # existait depuis le 14 octobre et **aucun workflow ne le lançait** : il

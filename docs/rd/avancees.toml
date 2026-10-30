@@ -207,6 +207,23 @@ limite = "Le banc ne rejoue aucun essai : le faux navigateur ne clique pas et ne
 suite = "Éprouver la mesure de `verifier-graphismes.cjs`, dernier contrôle sans second témoin."
 initiatives = ["optimisation-du-site", "documentation-rd-eva"]
 
+[[avancee]]
+id = "la-mesure-se-confrontait-a-sa-propre-mutation"
+date = 2026-10-29
+titre = "La mesure des graphismes se confrontait à sa propre mutation"
+constat = "Les trois mutations internes de `verifier-graphismes.cjs` (`distorsion`, `densite`, `ancre`) étaient rejouées en CI et leurs rapports contrôlés : une mutation qui n'aurait pas produit l'erreur attendue faisait échouer le job. Mais les mutations sont plantées **par le script lui-même** : un `getBoundingClientRect` mal lu, une densité calculée à l'envers, une dimension native recopiée de `naturalWidth` au lieu du bitmap décodé auraient produit les mêmes messages, sur les mêmes pages, et le contrôle serait resté vert. Personne n'avait jamais confronté les nombres relevés à une géométrie connue d'avance."
+changement = "`outils/test_mesure_graphismes.mjs` génère une page de contrôle dans un dossier temporaire — un PNG unicolore écrit octet par octet, une boîte en pixels écrite dans la feuille de style — et la fait mesurer par un vrai Chromium en périmètre réduit (`MRSC_PERIMETRE_REDUIT=1`, déclaré dans le rapport). Trois cas : image 600 × 300 dans une boîte 200 × 100 (aucune erreur, densité 3) ; la même image étirée dans une boîte 200 × 200 (« distorsion » et « ratio de boîte différent de la source ») ; une image 60 × 30 dans une boîte 200 × 100 (« densité insuffisante » aux deux densités d'écran). Les dimensions natives, la boîte rendue, la densité et la distorsion sont recalculées à partir du relevé et comparées à l'arithmétique, jamais à des constantes recopiées."
+preuves = [
+  "outils/test_mesure_graphismes.mjs",
+  "outils/verifier-graphismes.cjs",
+  ".github/workflows/verification.yml",
+  "docs/rd/inventaire-controles.md",
+]
+controle = "node outils/test_mesure_graphismes.mjs"
+limite = "La page de contrôle est une image PNG simple, à une disposition, une taille de texte et un mode de contraste : les trois pages réelles, les `srcset` et la constellation ne sont pas couverts. Le banc ne dit pas non plus que les seuils (distorsion > 0,01, écart d'ancre > 2 px) sont les bons — seulement que la mesure qui les alimente est juste. Il demande Chromium : sans les paquets navigateur il sort en code 2 et le dit, ce qui n'est pas un succès."
+suite = "Étendre les pages de contrôle aux autres mesures navigateur qui n'ont jamais été confrontées à une géométrie connue d'avance."
+initiatives = ["optimisation-du-site", "documentation-rd-eva"]
+
 [meta]
 version = 1
 derniere_revue = 2026-10-28

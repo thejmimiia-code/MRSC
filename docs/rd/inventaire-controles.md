@@ -47,7 +47,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/verifier-fiches-statistiques.cjs` | Géométrie des deux fiches de statistiques | `test_verifier_fiches_statistiques.mjs` (navigateur remplacé ; 4 modes + relevé commité intact) | `faute-en-memoire` |
 | `outils/verifier-fichiers-servis.py` | Relevé d'en-têtes confronté aux fichiers | `test_fichiers_servis.py` (28 tests) | `test` |
 | `outils/verifier-fusions.py` | Fusion et suppression de branche sans perte | `test_mutations_fusions.py` (6 fautes dans de petits dépôts git neufs) | `banc` |
-| `outils/verifier-graphismes.cjs` | Mesure navigateur de trois visuels | Trois mutations internes (`distorsion`, `densite`, `ancre`) rejouées en CI | `test-en-soi` |
+| `outils/verifier-graphismes.cjs` | Mesure navigateur de trois visuels | `test_mesure_graphismes.mjs` (3 pages de contrôle aux dimensions connues, nombres confrontés à l'arithmétique) · `verifier-mutation-graphismes.py` (les 3 mutations produisent l'erreur annoncée) | `banc` |
 | `outils/verifier-integration.py` | Intégration du simulateur au site, sans navigateur | `test_mutations_integration.py` (3 fautes : ressource orpheline, chiffre annoncé, page absente) | `banc` |
 | `outils/verifier-inventaire-controles.py` | Tient ce document : couverture, existence, vocabulaire des statuts | `test_verifier_inventaire_controles.py` (casse l'inventaire dans une copie) | `banc` |
 | `outils/verifier-mutation-graphismes.py` | La mutation d'affichage a-t-elle fait dire au contrôle ce qu'elle devait ? | `test_verifier_mutation_graphismes.py` (6 cas, dont un qui relit les messages dans le script) | `banc` |
@@ -70,19 +70,19 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 
 46 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
-- **Dix-neuf** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture, les planches des statuts, l'état daté de la R&D, la vérification de la source distante, le contrôle des mutations d'affichage, le test du cache CSS, le harnais des essais navigateur et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
+- **Vingt** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture, les planches des statuts, l'état daté de la R&D, la vérification de la source distante, le contrôle des mutations d'affichage, le test du cache CSS, le harnais des essais navigateur, la mesure des graphismes et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
 - **Douze** le sont en cassant des données en mémoire ou en simulant ce qui ne peut pas être joint. C'est utile, mais la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests ; `verifier-maj-amont.py` n'interroge jamais réellement l'amont ; et les quatre scripts navigateur (`auditer-criteres-22.mjs`, `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs`, `auditer-affichages.mjs`) ne voient jamais un vrai Chromium — leurs bancs éprouvent ce qu'ils font de mesures qu'on leur donne, pas la justesse de ce qu'ils mesurent.
 - **Six** ont un test qui n'injecte aucune faute.
-- **Un** est lui-même un test (`verifier-graphismes.cjs`) : son échec est visible, et ses rapports mutés sont contrôlés depuis le 29 octobre, mais la mesure elle-même n'est prouvée que par le vrai Chromium de la CI.
+- **Aucun** n'est réduit à son propre témoignage.
 - **Aucun** n'est réduit à son seul vert quotidien.
 - **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
 
-Autrement dit : **37 contrôles sur 38** s'appuient sur un test capable d'échouer. Le dernier n'a aucune preuve de ce genre, et c'est lui-même un test : leur échec est visible, mais rien ne vérifie qu'ils continuent de mordre. **Aucun contrôle n'est plus cru sur parole.**
+Autrement dit : **38 contrôles sur 38** s'appuient sur un test capable d'échouer. Aucun contrôle n'est plus cru sur parole, et l'inventaire ne compte plus aucun `test-en-soi`.
 
 ## Par où continuer, par ordre de rentabilité
 
 1. Vérifier les **empreintes** de l'archive des statuts (`sha256sum -c`), que `verifier-planches-statuts.py` contrôle en nombre, en unicité de noms et en forme de ligne — jamais en contenu.
-2. Éprouver la **mesure** de `verifier-graphismes.cjs`, dernier contrôle sans second témoin : ses rapports mutés sont contrôlés, mais rien ne dit que la géométrie mesurée est la bonne. Seul un vrai Chromium peut l'exercer, et il n'y en a pas dans cette sandbox.
+2. Étendre les **pages de contrôle** aux autres scripts navigateur : la mesure de `verifier-graphismes.cjs` est désormais éprouvée sur une image générée, pas sur les trois pages réelles ni sur la constellation.
 
 ## Limites de ce document
 

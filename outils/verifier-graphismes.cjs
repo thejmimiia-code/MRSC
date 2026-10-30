@@ -15,11 +15,28 @@ const base = process.env.MRSC_TEST_URL || 'http://127.0.0.1:4181/';
 const output = process.env.MRSC_GRAPHISMES_JSON || 'docs/rd/audit-graphismes-2026-10-24.json';
 const captures = process.env.MRSC_CAPTURES;
 const mutation = process.env.MRSC_MUTATION || '';
+// Périmètre réduit : une page, deux largeurs, une configuration de texte, de
+// disposition et de mode. Sert aux bancs qui éprouvent la **mesure** elle-même
+// sur une page de contrôle — la couverture complète (3 pages × 7 largeurs ×
+// 5 textes × 6 dispositions × 3 modes × 2 densités) n'a pas sa place dans un
+// test de quelques secondes. Le rapport écrit alors son périmètre réduit, pour
+// qu'il ne puisse pas se lire comme un audit complet.
+const reduit = process.env.MRSC_PERIMETRE_REDUIT === '1';
+const densites = mutation ? [2] : [1, 2];
+const largeurs = mutation ? [1440] : reduit ? [320, 1440] : [320, 360, 390, 768, 1024, 1280, 1440];
+const textes = mutation || reduit ? [100] : [75, 85, 100, 115, 130];
+const dispositions = mutation || reduit ? ['equilibree'] : ['equilibree', 'lecture', 'vitrine', 'mosaique', 'panorama', 'compacte'];
+const modes = mutation || reduit ? ['normal'] : ['normal', 'renforce', 'couleurs-forcees'];
 (async () => {
   const browser = await puppeteer.launch({ executablePath: await chromium.executablePath(), args: chromium.args, headless: true });
-  const report = { perimetre: 'Accueil, illustration Apprendre, constellation IA uniquement', navigateur: await browser.version(), mutation, releves: [], erreurs: [] };
+  const report = {
+    perimetre: reduit && !mutation
+      ? 'Périmètre réduit (MRSC_PERIMETRE_REDUIT) : une page par densité, deux largeurs, une configuration de texte, de disposition et de mode. Ce relevé ne couvre pas l’audit complet.'
+      : 'Accueil, illustration Apprendre, constellation IA uniquement',
+    navigateur: await browser.version(), mutation, reduit, releves: [], erreurs: [],
+  };
   try {
-    for (const dpr of (mutation ? [2] : [1, 2])) for (const route of (process.env.MRSC_PAGES ? process.env.MRSC_PAGES.split(',') : mutation ? [mutation === 'ancre' ? 'ia-societe.html' : 'index.html'] : ['index.html', 'apprendre.html', 'ia-societe.html'])) {
+    for (const dpr of densites) for (const route of (process.env.MRSC_PAGES ? process.env.MRSC_PAGES.split(',') : mutation ? [mutation === 'ancre' ? 'ia-societe.html' : 'index.html'] : ['index.html', 'apprendre.html', 'ia-societe.html'])) {
       const page = await browser.newPage();
       await page.setViewport({ width: 1440, height: 1000, deviceScaleFactor: dpr });
       await page.goto(new URL(route, base).href, { waitUntil: 'networkidle0' });
@@ -29,9 +46,9 @@ const mutation = process.env.MRSC_MUTATION || '';
       if (mutation === 'distorsion') await page.addStyleTag({content: '.home-hero-visual img {height: 100px !important; object-fit: fill !important}'});
       if (mutation === 'ancre') await page.addStyleTag({content: '.ai-node-info {left: 40% !important}'});
       if (mutation === 'densite') await page.$eval('body', () => {const s=document.querySelectorAll('.home-hero-visual source');s.forEach(x=>x.remove());const i=document.querySelector('.home-hero-visual img');if(i)i.src='assets/images/accueil-logo-mrsc-3d-800.webp';});
-      for (const largeur of (mutation ? [1440] : [320, 360, 390, 768, 1024, 1280, 1440])) {
+      for (const largeur of largeurs) {
         await page.setViewport({width: largeur, height: 1000, deviceScaleFactor: dpr});
-        for (const texte of (mutation ? [100] : [75, 85, 100, 115, 130])) for (const disposition of (mutation ? ['equilibree'] : ['equilibree', 'lecture', 'vitrine', 'mosaique', 'panorama', 'compacte'])) for (const mode of (mutation ? ['normal'] : ['normal', 'renforce', 'couleurs-forcees'])) {
+        for (const texte of textes) for (const disposition of dispositions) for (const mode of modes) {
           await page.emulateMediaFeatures([{name:'forced-colors', value: mode === 'couleurs-forcees' ? 'active' : 'none'}]);
           await page.evaluate(({texte, disposition, mode}) => {
             const r=document.documentElement;
