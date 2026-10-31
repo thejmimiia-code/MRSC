@@ -9,11 +9,20 @@
 #    colonnes de conception — pas un chiffre choisi à la main ;
 # 3. aucun bloc `@media` de largeur ne lui réimpose un nombre de colonnes.
 #
-# La règle de calcul (`minimum_pour_k`) : le plus large minimum de piste qui
-# laisse encore `k` colonnes au conteneur maximal. Le plus large, parce que des
-# cartes larges se lisent mieux ; et « encore k colonnes au conteneur maximal »,
-# parce que c'est la seule façon de garder l'intention de la grille sans jamais
-# écrire de largeur d'écran.
+# La règle de calcul a deux branches, et c'est une différence de question :
+#
+# - trois colonnes ou plus (`minimum_pour_k`) : le plus large minimum qui laisse
+#   encore `k` colonnes au conteneur maximal — la grille a des étapes
+#   intermédiaires, on garde la forme et les cartes les plus larges possible ;
+# - deux colonnes (`minimum_de_repli`, éventuellement relevé par
+#   `minimum_sans_troisieme_colonne`) : il n'y a aucune étape, la seule
+#   information de conception est le moment où l'on renonce à la paire. Le
+#   minimum replace ce repli là où la cascade le plaçait, puis le relève juste
+#   assez pour qu'une troisième colonne ne tienne pas au conteneur maximal —
+#   sauf si les pages ne mettent jamais plus de deux éléments dans la grille,
+#   auquel cas `auto-fit` replie la piste vide et la colonne ne peut pas
+#   apparaître. Le champ `items` porte cette capacité, mesurée dans le HTML et
+#   revérifiée à chaque contrôle.
 #
 # Conversion du 31 octobre 2026 : quatre grilles, quatre blocs de palier en
 # moins, et l'écart mesuré avec l'ancienne cascade est **nul** à toutes les
@@ -31,48 +40,56 @@ feuille = "assets/css/site.css"
 selecteur = ".ai-metric-grid"
 colonnes = 4
 minimum = 270
+items = [4]
 raison = "Repères chiffrés de la page IA : quatre colonnes au conteneur maximal, trois dès 1 128 px de fenêtre — la cascade sautait de quatre à deux sous 1 000."
 
 [[grille]]
 selecteur = ".ai-forms-grid"
 colonnes = 4
 minimum = 270
+items = [4]
 raison = "Cartes de formulaires de la page IA : même règle que les repères chiffrés, dont elle partageait le palier."
 
 [[grille]]
 selecteur = ".ai-lives-grid"
 colonnes = 3
 minimum = 370
+items = [6]
 raison = "Six domaines de vie : trois colonnes au conteneur maximal, deux dès que la place manque, une seule en dessous — sans aucun palier."
 
 [[grille]]
 selecteur = ".learning-catalogue-grid"
 colonnes = 3
 minimum = 370
+items = [85]
 raison = "Catalogue des apprentissages : trois colonnes au conteneur maximal, puis deux, puis une. La carte mesure 250 px de haut : elle pouvait descendre plus étroitement que 370 sans se tasser, mais la règle garde les trois colonnes de la conception."
 
 [[grille]]
 selecteur = ".learning-level-grid"
 colonnes = 4
 minimum = 270
+items = [4]
 raison = "Niveaux du parcours : quatre colonnes au conteneur maximal, trois dès 1 128 px — la cascade sautait directement à deux sous 1 000."
 
 [[grille]]
 selecteur = ".learning-ecosystem-grid"
 colonnes = 4
 minimum = 270
+items = [4]
 raison = "Écosystème des ressources : même écriture que les niveaux, dont il partage la règle."
 
 [[grille]]
 selecteur = ".link-grid"
 colonnes = 3
 minimum = 370
+items = [1, 2, 3, 4, 5, 6, 7]
 raison = "Grilles de liens : trois colonnes au conteneur maximal, deux dès 1 132 px — la cascade attendait 920 px pour passer à deux, ce qui donnait des liens de 450 px à côté de liens de 150."
 
 [[grille]]
 selecteur = ".learning-code-grid"
 colonnes = 2
 minimum = 470
+items = [2]
 seuil_une_colonne = 1000
 raison = "Deux colonnes côte à côte : le palier de 1 000 px n'était pas un choix de largeur de carte mais le moment où l'on renonce à la paire. Il est recopié tel quel, et le calcul s'arrête juste avant."
 
@@ -80,22 +97,104 @@ raison = "Deux colonnes côte à côte : le palier de 1 000 px n'était pas un c
 selecteur = ".principle-grid"
 colonnes = 4
 minimum = 270
+items = [4, 6]
 raison = "Cartes de principes : quatre colonnes au conteneur maximal, trois à 952 px au lieu de deux — la cascade fixe sautait l'étape intermédiaire."
 
 [[grille]]
 selecteur = ".ai-fraud-grid"
 colonnes = 3
 minimum = 370
+items = [6]
 raison = "Cartes de fraudes : trois colonnes au conteneur maximal, deux dès que la place manque, une seule en dessous — sans aucun palier."
 
 [[grille]]
 selecteur = ".ai-fraud-steps"
 colonnes = 4
 minimum = 270
+items = [4]
 raison = "Étapes numérotées des réflexes : quatre colonnes au plus, jamais de colonne de moins de 270 px tant que le conteneur en contient une."
 
 [[grille]]
 selecteur = ".home-voice-grid"
 colonnes = 3
 minimum = 370
+items = [3]
 raison = "Témoignages de l'accueil : trois colonnes au conteneur maximal, deux à partir de 800 px de fenêtre, une seule en dessous."
+
+# — Troisième vague, 31 octobre 2026 : neuf grilles à deux colonnes. Le modèle
+# sait désormais combien d'éléments les pages mettent dans chaque grille
+# (`items`, mesuré dans le HTML et revérifié) : c'est ce qui décide si la
+# colonne que `auto-fit` ajouterait laisserait une carte orpheline ou
+# couperait une paire.
+
+[[grille]]
+selecteur = ".document-grid"
+colonnes = 2
+minimum = 380
+items = [4]
+seuil_une_colonne = 760
+raison = "Documents de la page « Documents » : quatre cartes en deux colonnes. Quatre éléments dans trois colonnes laisseraient la dernière carte seule ; le minimum est donc relevé juste assez pour que trois colonnes ne tiennent pas au conteneur maximal."
+
+[[grille]]
+selecteur = ".home-action-grid"
+colonnes = 2
+minimum = 380
+items = [4]
+seuil_une_colonne = 760
+raison = "Quatre actions de la page d'accueil : même raison que les documents, et même valeur."
+
+[[grille]]
+selecteur = ".eva-listes-grid"
+colonnes = 2
+minimum = 350
+items = [2]
+seuil_une_colonne = 760
+raison = "Deux listes de la page EVA : `auto-fit` ne remplit pas de piste vide, une troisième colonne ne peut pas apparaître — le minimum reste celui du seuil de repli, et l'écart avec la cascade supprimée est nul."
+
+[[grille]]
+selecteur = ".knowledge-compass"
+colonnes = 2
+minimum = 380
+items = [10]
+seuil_une_colonne = 760
+raison = "Dix entrées de la boussole d'apprentissage : trois colonnes en laisseraient une seule sur la dernière ligne, donc le minimum interdit la troisième colonne."
+
+[[grille]]
+selecteur = ".simulateur-chiffres"
+colonnes = 2
+minimum = 380
+items = [6]
+seuil_une_colonne = 760
+raison = "Liste de définitions du simulateur, trois paires `dt`/`dd` : une troisième colonne couperait les paires (`dt dd dt`), ce qui n'a pas de sens."
+
+[[grille]]
+selecteur = ".simulateur-duo"
+colonnes = 2
+minimum = 350
+items = [2]
+seuil_une_colonne = 760
+raison = "Deux panneaux « ce que fait / ce que ne fait pas » le simulateur : deux éléments, aucune troisième colonne possible."
+
+[[grille]]
+selecteur = ".simulateur-passeport"
+colonnes = 2
+minimum = 380
+items = [4]
+seuil_une_colonne = 760
+raison = "Deux paires `dt`/`dd` du passeport de compétences : trois colonnes couperaient les paires."
+
+[[grille]]
+selecteur = ".ai-balance-grid"
+colonnes = 2
+minimum = 350
+items = [2]
+seuil_une_colonne = 760
+raison = "Deux colonnes « ce que l'IA fait / ne fait pas » : deux éléments, aucune troisième colonne possible."
+
+[[grille]]
+selecteur = ".ai-fraud-lesson-list"
+colonnes = 2
+minimum = 380
+items = [5]
+seuil_une_colonne = 760
+raison = "Cinq leçons de la page fraude : trois colonnes feraient 3 + 2, deux colonnes font 2 + 2 + 1 — le dessin existant, que le minimum conserve."

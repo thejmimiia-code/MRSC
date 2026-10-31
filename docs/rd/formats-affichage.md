@@ -1156,3 +1156,43 @@ hausse comme leur baisse non datée.
 (« recommandé ») : l'ajustement à l'ancienne cascade et la règle de conception.
 Huit grilles ont d'abord été écrites avec le premier. C'est le contrôle
 (`--verifier`), qui recalcule la règle, qui l'a arrêté.
+
+## 12. Neuf grilles à deux colonnes, et ce que le modèle ne comptait pas (31 octobre 2026)
+
+Les neuf grilles restantes de la famille « deux colonnes » avaient un palier à
+760 px. La règle des deux colonnes donnait un minimum unique de 350 px. Il
+aurait produit, sur `.document-grid`, **trois colonnes dès 1 130 px de conteneur
+et une carte orpheline** : le modèle calculait des largeurs de piste sans savoir
+combien d'éléments les pages mettent dans la grille.
+
+### Trois branches, pas deux
+
+| Cas | Règle |
+| --- | --- |
+| `k ≥ 3` colonnes | plus large minimum qui garde `k` colonnes au conteneur maximal |
+| 2 colonnes, **plus de deux éléments** | repli là où la cascade renonçait, puis minimum relevé juste assez pour que trois colonnes ne tiennent pas |
+| 2 colonnes, **deux éléments** | repli seulement : `auto-fit` replie la piste vide, aucune troisième colonne ne peut apparaître |
+
+La capacité (`items`) est **mesurée** dans les pages et revérifiée à chaque
+contrôle ; une balise `dl` est reconnue comme liste de paires, qu'une troisième
+colonne couperait.
+
+| Grille | éléments | minimum | écart mesuré avec la cascade |
+| --- | --- | --- | --- |
+| `.eva-listes-grid`, `.simulateur-duo`, `.ai-balance-grid` | 2 | 350 px | nul |
+| `.document-grid`, `.home-action-grid` | 4 | 380 px | 6 largeurs sur 233 |
+| `.knowledge-compass` | 10 | 380 px | 6 largeurs sur 233 |
+| `.simulateur-chiffres`, `.simulateur-passeport`, `.ai-fraud-lesson-list` | 6, 4, 5 | 380 px | 6 largeurs sur 233 |
+
+### Deux lectures muettes corrigées
+
+- `gap: .75rem 1.1rem` = 12 px entre les lignes, **17,6 px entre les colonnes**.
+  Le modèle prenait le premier nombre ; deux grilles déclaraient un écart faux.
+- Un `@media` **vide** — trois blocs laissés sans règle après conversion —
+  faisait attribuer les règles suivantes à cette condition. Le rapport est passé
+  de 33 grilles à 16, huit conversions comprises, sans un mot. L'analyseur tient
+  désormais une pile de blocs refermée sur les accolades.
+
+État : **21 grilles dynamiques**, une seule grille égale encore sous palier
+(`.ai-path-steps`, 5 → 3 colonnes sous 520 px), 34 à pistes inégales assumées,
+**197 règles** sous condition de largeur.

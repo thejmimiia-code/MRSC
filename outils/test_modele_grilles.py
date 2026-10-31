@@ -113,7 +113,9 @@ class TestModeleGrilles(unittest.TestCase):
 
         La règle des trois colonnes appliquée aux grilles à deux aurait replié
         `.document-grid` dès 1 027 px au lieu de 760 — une régression visible sur
-        un ordinateur portable.
+        un ordinateur portable. Une grille de deux éléments, elle, n'a aucune
+        raison de relever son minimum pour empêcher une troisième colonne qui ne
+        peut pas apparaître : `auto-fit` ne remplit pas une piste vide.
         """
         grille = self.modele.Grille(selecteur=".deux", colonnes_base=2, gap=16)
         grille.regles = [
@@ -121,12 +123,91 @@ class TestModeleGrilles(unittest.TestCase):
             self.modele.Regle([".deux"], "minmax(0, 1fr)", 1, None, 760, None, 2, 1),
         ]
         self.assertEqual(self.modele.seuil_une_colonne(grille), 760)
-        minimum = self.modele.minimum_recommande(grille)
+        minimum = self.modele.minimum_recommande(grille, {"items": [2]})
         self.assertIsNotNone(minimum)
         # Deux colonnes doivent encore tenir juste au-dessus du seuil…
         self.assertEqual(self.modele.auto_fit(minimum, grille.gap, 770), 2, minimum)
         # … et ne plus tenir juste en dessous.
         self.assertEqual(self.modele.auto_fit(minimum, grille.gap, 750), 1, minimum)
+
+    def test_une_grille_a_quatre_elements_interdit_la_troisieme_colonne(self) -> None:
+        """Quatre cartes en trois colonnes laissent la dernière seule : la règle relève le minimum.
+
+        C'est ce qui distingue une grille convertie pour **retirer un palier**
+        d'une grille convertie pour **changer de dessin**. Sans cette règle,
+        `.document-grid` affichait trois colonnes et une carte orpheline sur un
+        écran de 1 920 px, un défaut que le modèle arithmétique ne voyait pas.
+        """
+        grille = self.modele.Grille(selecteur=".quatre", colonnes_base=2, gap=16)
+        grille.regles = [
+            self.modele.Regle([".quatre"], "repeat(2, minmax(0, 1fr))", 2, None, None, None, 1, 0),
+            self.modele.Regle([".quatre"], "minmax(0, 1fr)", 1, None, 760, None, 2, 1),
+        ]
+        minimum = self.modele.minimum_recommande(grille, {"items": [4]})
+        self.assertEqual(minimum, self.modele.minimum_sans_troisieme_colonne(grille))
+        large = self.modele.CONTENU_DEFAUT + self.modele.GARNITURE_LATERALE
+        self.assertEqual(self.modele.auto_fit(minimum, grille.gap, large), 2, minimum)
+        # Le repli doit rester sous le seuil ancien, sinon le palier supprimé
+        # revient par la petite porte.
+        self.assertLess(self.modele.auto_fit(minimum, grille.gap, 780), 2)
+
+    def test_la_capacite_borne_le_nombre_de_colonnes(self) -> None:
+        """Une grille de deux éléments ne montre jamais trois colonnes, quoi qu'en dise l'arithmétique."""
+        self.assertEqual(self.modele.auto_fit(350, 16, 2400), 3)
+        self.assertEqual(self.modele.auto_fit(350, 16, 2400, 2), 2)
+
+    def test_un_media_vide_ne_decale_pas_la_lecture(self) -> None:
+        """Un `@media` sans règle ne doit pas attribuer les règles suivantes à sa condition.
+
+        Le 31 octobre 2026, la conversion de `.eva-listes-grid` a laissé
+        `@media (max-width: 760px) {}`, et les huit grilles suivantes ont été
+        lues comme des règles de ce palier : le rapport est passé de 33 grilles à
+        16 sans un mot.
+        """
+        feuille = """
+@media (max-width: 760px) {
+}
+.une { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); }
+@media (max-width: 760px) {
+  .deux { grid-template-columns: minmax(0, 1fr); }
+}
+"""
+        regles = self.modele.decouper(feuille)
+        largeurs = {tuple(selecteurs): largeur for selecteurs, _, largeur, _, _ in regles}
+        self.assertEqual(largeurs[(".une",)], None)
+        self.assertEqual(largeurs[(".deux",)], 760)
+
+    def test_l_ecart_entre_colonnes_est_le_second_nombre(self) -> None:
+        """`gap: .75rem 1.1rem` vaut 12 px entre les lignes et 17,6 px entre les colonnes.
+
+        Le modèle prenait le premier nombre : le seuil de repli de
+        `.knowledge-compass` se décalait d'un écart de grille, et la recommandation
+        avec lui.
+        """
+        self.assertAlmostEqual(self.modele.ecart_colonnes("display:grid; gap: .75rem 1.1rem;"), 17.6)
+        self.assertAlmostEqual(self.modele.ecart_colonnes("gap: 1rem;"), 16.0)
+        self.assertAlmostEqual(self.modele.ecart_colonnes("column-gap: 20px;"), 20.0)
+        self.assertIsNone(self.modele.ecart_colonnes("row-gap: 20px;"))
+        self.assertIsNone(self.modele.ecart_colonnes("display: grid;"))
+
+    def test_capacite_fausse_est_refusee(self) -> None:
+        """Déclarer deux éléments là où la page en met quatre relève le minimum pour rien.
+
+        C'est le genre de chiffre qu'on « corrige » à la main dans un registre
+        quand il dérange ; le contrôle doit le remesurer dans les pages, pas le
+        croire.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                REGISTRE,
+                "selecteur = \".document-grid\"\ncolonnes = 2\nminimum = 380\nitems = [4]",
+                "selecteur = \".document-grid\"\ncolonnes = 2\nminimum = 380\nitems = [2]",
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("capacité déclarée [2]", resultat.stderr)
 
     def test_grille_devenue_inegale_est_refusee(self) -> None:
         """Une conversion annulée par une règle inégale ne doit pas passer pour dynamique."""
