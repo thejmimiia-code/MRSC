@@ -401,11 +401,69 @@ s'ouvrir à droite. La requête devient
 deux cas en ou, aucun autre format touché.
 
 `test-experience.cjs` porte désormais un essai mesuré, « Aperçu ordinateur depuis
-un téléphone : 980 × 440 », qui visite quatre formats (980 × 440, 1 024 × 500,
-1 440 × 1 000, 800 × 500 en paysage court), réduit l'en-tête comme le fait
-l'utilisateur, puis exige que le panneau et ses lignes restent dans la fenêtre.
-C'est la première fois que ce défaut est **re-mesuré** au lieu d'être déduit
-d'une capture.
+un téléphone : 980 × 440 », qui visite plusieurs formats, réduit l'en-tête comme
+le fait l'utilisateur, puis exige que le panneau et ses lignes restent dans la
+fenêtre. C'est la première fois que ce défaut est **re-mesuré** au lieu d'être
+déduit d'une capture.
+
+**Puis la troisième règle a été jetée (30 octobre 2026).** Retour d'usage, dans
+la même heure : « il faut que ce soit adapté à chaque variable d'affichage, car
+personne ne fait plus de plein écran constant ! Les gens règlent leurs fenêtres
+en fonction de leurs usages et modulent constamment. Donc il faut que la gestion
+soit dynamique et non sur des valeurs fixes. » C'était juste, et cela nommait le
+défaut de méthode : depuis le 28 octobre, on empilait des points de rupture —
+`right: 0`, puis `min-width: 761px and min-height: 561px`, puis `min-width:
+921px` — et chacun laissait passer le format qu'on n'avait pas imaginé.
+
+Les trois règles d'ancrage ont donc été **supprimées** de `site.css`. Le panneau
+est placé par `placerPanneauPersonnalisation()` dans `site.js` :
+
+| Ce qui est mesuré | Ce qui en est fait |
+| --- | --- |
+| largeur de la fenêtre (`visualViewport` s'il existe) | largeur bornée à la fenêtre moins deux marges de 8 px |
+| bord droit du bouton | panneau aligné à droite dessus ; s'il sort à gauche, aligné à gauche du bouton ; puis borné aux marges |
+| bas de l'en-tête | panneau posé dessous, hauteur bornée pour laisser au moins 160 px visibles, défilement interne au-delà |
+
+Le calcul est refait à **chaque ouverture** et à chaque changement : `resize`,
+`orientationchange`, `visualViewport` (`resize` et `scroll`, donc la barre
+d'adresse du téléphone et le clavier virtuel), et `ResizeObserver` sur l'en-tête
+(texte agrandi, en-tête réduit). Aucune de ces causes n'est un format nommé.
+
+Ce qui reste dans la feuille de style est un **repli**, pas une décision :
+position absolue sous le bouton, largeur souhaitée, défilement interne. Si le
+script ne s'exécute pas, le panneau reste lisible.
+
+Deux contrôles, à deux niveaux :
+
+- `outils/test_placement_panneau.mjs` extrait la vraie fonction de `site.js` et
+  l'exécute dans un contexte simulé (`node:vm`), **sans navigateur** : 3 600
+  positions — toutes les largeurs de 240 à 2 560 px par pas de 40, cinq
+  hauteurs, trois positions de bouton, avec et sans `visualViewport`. Il exige
+  que le panneau reste dans la fenêtre, que sa hauteur visible ne descende pas
+  sous 160 px, et que son bord droit suive le bouton quand la place le permet.
+  Il a trouvé un défaut que personne n'avait vu : fenêtre de 320 px, en-tête de
+  180 px, le panneau dépassait de 8 px par le bas — la borne de hauteur ne
+  réservait pas la marge.
+- `test_mutations_affichages.py` (8 mutations) vérifie que `verifier-affichages.py`
+  refuse un placement qui perd sa borne en largeur, son écoute de la fenêtre
+  visuelle, son rebranchement à l'ouverture, ou qu'une règle de format
+  réintroduit un ancrage fixe.
+- `test-experience.cjs` mesure, lui, un vrai Chromium : huit formats à
+  l'ouverture, puis **quatre redimensionnements panneau ouvert** (élargi,
+  écrasé en hauteur, rétréci en largeur, plein écran) — c'est la promesse
+  dynamique, mesurée.
+
+**Ce que ces contrôles ont trouvé, et qui ne se voyait pas à la lecture :**
+
+| Trouvé par | Défaut |
+| --- | --- |
+| `test_placement_panneau.mjs` (sans navigateur) | la borne de hauteur ne réservait pas la marge du bas : fenêtre 320 px, en-tête 180 px → dépassement de 8 px |
+| CI, essai à 980 × 440 | le panneau gardait les coordonnées de l'en-tête **agrandi** (left = −203 px) : réduire l'en-tête déplace le bouton, et le `ResizeObserver` de l'en-tête ne suffisait pas |
+| CI, essai à 800 × 500 | panneau ouvert **sans aucun style en ligne** : Chromium restaure `<details open>` après `load`, sans émettre `toggle` |
+
+Les deux derniers sont traités à la source : `setHeaderCompact` replace
+explicitement après avoir rangé les commandes, et un `MutationObserver` sur
+l'attribut `open` attrape la restauration du navigateur comme un clic.
 
 ## 6 sexies. Finitions du panneau : la qualité se mesure aussi à l'écran (23 octobre 2026)
 

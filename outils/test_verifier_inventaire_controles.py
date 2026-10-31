@@ -82,8 +82,8 @@ class TestInventaireControles(unittest.TestCase):
             banc_mutations.muter(
                 copie,
                 DOC,
-                "| `test_mutations_affichages.py` (5 mutations) | `banc` |",
-                "| `test_qui_n_existe_pas.py` (5 mutations) | `banc` |",
+                "`test_placement_panneau.mjs` (3 600 positions, sans navigateur)",
+                "`test_qui_n_existe_pas.py` (3 600 positions, sans navigateur)",
             )
             resultat = banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(resultat.returncode, 1, resultat.stdout)

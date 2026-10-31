@@ -332,6 +332,17 @@ jobs:
           python3 outils/verifier-affichages.py
           python3 outils/test_mutations_affichages.py
 
+      # Le panneau « Personnalisation » n'est plus ancré par un point de rupture :
+      # il est placé à la mesure dans `site.js` (largeur bornée à la fenêtre,
+      # bord droit aligné sur le bouton puis rabattu, hauteur bornée sous
+      # l'en-tête). Ce banc extrait la vraie fonction et l'exécute sans
+      # navigateur sur 3 600 positions — toutes les largeurs de 240 à 2 560 px
+      # croisées avec cinq hauteurs et trois boutons. Il a trouvé, avant tout
+      # Chromium, qu'une fenêtre de 320 px avec un en-tête de 180 laissait
+      # dépasser le panneau de 8 px.
+      - name: Vérifier le placement mesuré du panneau de personnalisation
+        run: node outils/test_placement_panneau.mjs
+
   graphismes:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
@@ -419,7 +430,11 @@ jobs:
           set -e
           cat "$RUNNER_TEMP/essais.log"
           if [ "$statut" -ne 0 ]; then
-            grep -E '^(ÉCHEC|Error|.*AssertionError|.*Error:)' "$RUNNER_TEMP/essais.log" | head -n 10 | cut -c1-900 | while IFS= read -r ligne; do
+            # Trois lignes de contexte après chaque échec : la première dit
+            # qu'un essai a échoué, les suivantes nomment l'assertion et sa
+            # ligne. Sans elles, une annotation ne permet pas de réparer.
+            grep -E -A3 '^(ÉCHEC|Error|.*AssertionError|.*Error:)' "$RUNNER_TEMP/essais.log" \
+              | head -n 60 | cut -c1-900 | grep -v '^--$' | while IFS= read -r ligne; do
               echo "::error title=Essais navigateur::$ligne"
             done
             exit "$statut"

@@ -4852,40 +4852,27 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
   to { opacity: 1; transform: none; }
 }
 
-/* --- En-tête compact sur ordinateur : le panneau s'ouvre vers la droite -----
-   Dans l'en-tête compact, les deux commandes se rangent au début de la barre,
-   juste après le logo. Ancré à droite de son bouton (`right: 0`), le panneau de
-   22 rem ne pouvait donc que sortir par la gauche : sur la capture du
-   28 octobre 2026 (2× : bord gauche de la fenêtre à x = 202, bord droit du
-   panneau à x = 811), ses 610 px visibles font 305 px CSS pour 352 px de
-   panneau — 47 px passaient hors de l'écran, et les libellés des lignes
-   (« Agrandir », « Écouter la page ») étaient rognés au bord de la fenêtre.
-   Il s'ouvre désormais vers la droite, où la place ne manque pas.
-   Le double garde de la requête écarte les deux formats qui ont déjà leur
-   ancrage : sous 761 px et en paysage court, les règles `position: fixed;
-   left: .5rem; right: .5rem` prennent la main plus bas dans cette feuille.
-   L'en-tête agrandi garde l'ancrage à droite : ses commandes, elles, suivent la
-   rangée centrée et le panneau y trouve sa place à gauche du bouton.
+/* --- Le panneau est placé à la mesure, pas par points de rupture -----------
+   Trois versions successives ont ancré ce panneau par une règle de format :
+   `right: 0` seul, puis `html.entete-compacte { right: auto; left: 0 }` sous
+   `min-width: 761px and min-height: 561px` (28 octobre 2026), puis la même
+   règle complétée par `min-width: 921px` (30 octobre 2026). Chacune laissait
+   passer un format : dans l'en-tête compact les deux commandes se rangent au
+   début de la barre, donc `right: 0` fait sortir le panneau par la gauche ; et
+   un téléphone en « aperçu ordinateur » annonce une fenêtre large et basse
+   (980 × 4xx) qui ne satisfait aucun des deux gardes.
 
-   La seconde condition était `min-height: 561px`, et c'est elle qui a laissé
-   passer la capture du 30 octobre 2026 : un téléphone en « aperçu ordinateur »
-   annonce une fenêtre **large et basse** (980 × 4xx). La fenêtre dépasse donc
-   761 px de large sans atteindre 561 px de haut, la règle ne s'appliquait pas,
-   et le panneau retombait sur `right: 0`, ancré à droite d'un bouton placé au
-   début de la barre : il sortait par la gauche, les libellés rognés
-   (« grandir », « arcours », « ffichage »). La hauteur n'a jamais été la bonne
-   question — ce qui compte est que la fenêtre soit assez large pour que le
-   panneau tienne à droite du bouton. D'où deux cas, en ou : au moins 921 px de
-   large (au-delà, le format « paysage court » ne s'applique plus, sa limite
-   étant 920 px), ou au moins 761 px de large et 561 px de haut (le bureau
-   ordinaire). Aucun autre format n'est touché. */
-@media (min-width: 921px), (min-width: 761px) and (min-height: 561px) {
-  html.entete-compacte .customize-settings-panel {
-    right: auto;
-    left: 0;
-  }
-}
+   Le 30 octobre 2026, la réponse n'a pas été une quatrième règle. Le panneau
+   est désormais placé par `placerPanneauPersonnalisation()` dans `site.js` :
+   largeur bornée à la fenêtre, bord droit aligné sur le bouton puis rabattu à
+   gauche s'il déborde, position bornée aux deux marges, hauteur bornée sous
+   l'en-tête. Le calcul est refait à chaque ouverture et à chaque changement de
+   fenêtre, de fenêtre visuelle, de rotation ou de hauteur d'en-tête.
 
+   Ce que la feuille garde ici est donc un **repli**, pas une décision : la
+   position absolue sous le bouton, la largeur souhaitée et le défilement
+   interne. Si le script ne s'exécute pas, le panneau reste lisible — sans
+   prétendre être bien placé dans tous les formats. */
 /* Les réglages deviennent des lignes du panneau : leurs résumés prennent toute
    la largeur, leurs panneaux s'ouvrent dans le flux au lieu de flotter. */
 html.has-js .site-header .customize-settings-panel .display-settings,
@@ -5069,26 +5056,6 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
   html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden])::before {
     width: 17px;
     height: 17px;
-  }
-}
-
-/* Sur téléphone et en paysage court, le panneau se cale sous l'en-tête à la
-   largeur de l'écran : ancré à son bouton, il déborderait par la gauche. */
-@media (max-width: 760px) {
-  .customize-settings-panel {
-    position: fixed;
-    left: .5rem;
-    right: .5rem;
-    width: auto;
-  }
-}
-
-@media (orientation: landscape) and (max-height: 560px) and (max-width: 920px) {
-  .customize-settings-panel {
-    position: fixed;
-    left: .5rem;
-    right: .5rem;
-    width: auto;
   }
 }
 
