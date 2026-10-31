@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 49 |
+| Avancées consignées | 50 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
 | Contrôles exécutables cités | 61 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1141,6 +1141,29 @@ Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 **Suite.** Résorber la dette par ordre de rentabilité : les trois paliers de grilles (1000, 981, 601 px, treize blocs) s'obtiennent en `auto-fit`/`minmax` sans condition ; puis le seuil 1260/1261 px, tenu à la main en deux endroits ; puis le cas paysage court, qui suppose qu'un écran bas est forcément étroit. Étendre le relevé à `anglais-aventure.css` et à l'habillage du simulateur.
 
 Initiatives liées : `optimisation-du-site`, `coordination-de-tous-les-agents`.
+
+### `une-ecriture-n-est-pas-un-dessin-et-ce-qui-doit-rester-fixe-se-declare` — Une écriture n'est pas un dessin : ce qui doit rester fixe se déclare
+
+*Consignée le 2026-10-31.*
+
+**Constat.** Le modèle ne reconnaissait les colonnes égales qu'écrites `repeat(k, minmax(…))`. `repeat(3, 1fr)` et `1fr 1fr` tombaient donc dans « pistes inégales », et le rapport annonçait 34 grilles inégales là où quatre étaient seulement écrites autrement. La correction a mis au jour cinq vignettes du panneau Personnalisation (`.layout-choice-preview`) dont la forme 3 × 2 **est** l'information : le modèle n'avait aucun moyen de le savoir et leur proposait une conversion qui aurait détruit ce qu'elles montrent.
+
+**Ce que cela change.** `REPEAT_FR` et `FR_EGALES` classent `repeat(k, 1fr)` et `N × 1fr` comme colonnes égales : 36 grilles à pistes égales, 30 inégales. Le registre gagne une section `[[grille_fixe]]` (sélecteur, nombre de colonnes, raison) : `--verifier` refuse une grille déclarée fixe qui disparaît, passe en largeur de piste ou change de nombre de colonnes, et `--regle` ne leur propose plus de conversion. Trois cas de banc ajoutés (24 au total).
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/formats-affichage.md`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py && python3 outils/compter-paliers.py`
+
+**Limite — ce que cela ne prouve pas.** Le classement reste textuel : `minmax(120px,1fr) minmax(160px,1fr)` n'est pas reconnu comme égal, et `.map-info` (`1fr 1fr` sous 920 px) n'entre dans aucune liste parce que sa règle de base n'existe pas — le modèle ne lit que la règle de base d'une grille. La liste des grilles fixes est une déclaration humaine : rien n'empêche d'y inscrire une grille qui devrait bouger.
+
+**Suite.** Mesurer, sans toucher à la feuille, ce qu'un `flex-wrap` exprimerait des 30 grilles à pistes inégales — et ce qu'il ne saurait pas décider sans navigateur.
+
+Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 
 ### `une-largeur-de-piste-se-calcule-pas-se-choisit` — Une grille dynamique n'a pas besoin de palier : sa largeur de piste se calcule
 

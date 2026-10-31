@@ -82,6 +82,13 @@ DECLARATION_COLONNES = re.compile(r"grid-template-columns\s*:\s*([^;]+)")
 #: proposait alors de convertir des panneaux qui n'ont rien à convertir, et le
 #: compte des grilles à traiter était faux par excès.
 REPEAT_FIXE = re.compile(r"^repeat\(\s*(\d+)\s*,\s*minmax\([^()]*\)\s*\)$")
+#: `repeat(3, 1fr)` et `1fr 1fr` sont des colonnes **égales** écrites sans
+#: `minmax`. Le 31 octobre 2026, le modèle les classait « asymétriques » : trois
+#: aperçus de présentation et le bloc `.map-info` échappaient donc au compte, et
+#: le rapport annonçait 34 grilles inégales là où quatre d'entre elles étaient
+#: seulement écrites autrement. Une écriture n'est pas un dessin.
+REPEAT_FR = re.compile(r"^repeat\(\s*(\d+)\s*,\s*(?:minmax\(\s*0\s*,\s*1fr\s*\)|1fr)\s*\)$")
+FR_EGALES = re.compile(r"^(?:1fr)(?:\s+1fr)+$")
 AUTOFIT_MIN = re.compile(
     r"^repeat\(\s*auto-fit\s*,\s*minmax\(\s*min\(\s*(\d+)px\s*,\s*100%\s*\)\s*,\s*1fr\s*\)\s*\)$"
 )
@@ -97,9 +104,11 @@ def classer_valeur(valeur: str) -> tuple[str, int | None, int | None]:
     None)` pour tout le reste — et « tout le reste » est dit, pas deviné.
     """
     valeur = " ".join(valeur.split())
-    trouvé = REPEAT_FIXE.match(valeur)
+    trouvé = REPEAT_FIXE.match(valeur) or REPEAT_FR.match(valeur)
     if trouvé:
         return "fixe", int(trouvé.group(1)), None
+    if FR_EGALES.match(valeur):
+        return "fixe", len(valeur.split()), None
     trouvé = AUTOFIT_MIN.match(valeur) or AUTOFIT_NU.match(valeur)
     if trouvé:
         return "dynamique", None, int(trouvé.group(1))
@@ -848,6 +857,31 @@ def verifier(
                 f"{selecteur} : un palier de largeur réimpose des colonnes ({condition}) — "
                 "la conversion est annulée par ce bloc"
             )
+    # Les grilles déclarées fixes **à dessein** : le registre les nomme pour que
+    # leur forme ne disparaisse pas par inadvertance, et pour que le rapport ne
+    # propose pas de les convertir. Sans cette section, cinq aperçus de
+    # présentation recevaient une consigne qui n'avait aucun sens.
+    for entree in registre.get("grille_fixe", []):
+        selecteur = entree.get("selecteur")
+        if not selecteur or selecteur not in grilles:
+            erreurs.append(f"{selecteur or '(sans sélecteur)'} : grille fixe déclarée absente de {FEUILLE}")
+            continue
+        grille = grilles[selecteur]
+        k = colonnes_de_conception(grille)
+        if grille.asymetrique:
+            erreurs.append(
+                f"{selecteur} : déclarée fixe à {entree.get('colonnes')} colonnes, "
+                f"mais sa règle de base est inégale ({grille.valeur_asymetrique[:50]})"
+            )
+            continue
+        if not k:
+            erreurs.append(f"{selecteur} : déclarée fixe, aucune règle de base ne fixe ses colonnes")
+            continue
+        if int(entree.get("colonnes", 0)) != k:
+            erreurs.append(
+                f"{selecteur} : déclarée fixe à {entree.get('colonnes')} colonnes, "
+                f"la feuille en donne {k}"
+            )
     return erreurs
 
 
@@ -946,13 +980,18 @@ def principal(arguments: list[str] | None = None) -> int:
         return 0
 
     if options.regle:
+        try:
+            declarees = lire_registre(RACINE).get("grille_fixe", [])
+        except SourceIllisible:
+            declarees = []
+        fixes = {entree.get("selecteur") for entree in declarees}
         capacites = lire_capacites(RACINE, [g.selecteur for g in convertibles(grilles)])
         appliquer_capacites(grilles, capacites)
         mesurees = 0
         for grille in convertibles(grilles):
             selecteur = grille.selecteur
             k = colonnes_de_conception(grille)
-            if not k:
+            if not k or selecteur in fixes:
                 continue
             minimum = minimum_recommande(grille, capacites.get(selecteur))
             if minimum is None:
@@ -970,6 +1009,8 @@ def principal(arguments: list[str] | None = None) -> int:
                 f"{len(paliers(grille))} palier(s) de largeur"
             )
         print(f"{mesurees} grilles mesurées.")
+        if fixes:
+            print(f"{len(fixes)} grille(s) déclarée(s) fixe(s) à dessein : {', '.join(sorted(fixes))}")
         inegales = asymetriques(grilles)
         if inegales:
             print(

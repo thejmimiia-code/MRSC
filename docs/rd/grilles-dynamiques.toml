@@ -209,3 +209,34 @@ colonnes = 5
 minimum = 220
 items = [5]
 raison = "Cinq étapes du parcours de la page IA : le plus large minimum qui garde cinq colonnes au conteneur maximal. Sous 520 px, l'ancienne cascade repliait à trois colonnes — un chiffre choisi, qui laissait des cartes de 59 px à 240 px de fenêtre ; la largeur de piste les remplace par un repli progressif."
+
+# — Grilles **fixes à dessein**, 31 octobre 2026. Le registre des grilles
+# dynamiques disait quoi convertir ; il ne disait pas ce qui doit rester fixe.
+# Les aperçus de présentation dessinent chacun une mise en page : leur forme
+# 3 × 2 **est** l'information, et une largeur de piste la détruirait. Sans cette
+# section, `--regle` leur proposait une conversion, et rien n'aurait signalé
+# qu'un aperçu cessait de montrer ce qu'il annonce.
+[[grille_fixe]]
+selecteur = ".layout-choice-preview[data-preview=\"lecture\"]"
+colonnes = 1
+raison = "Aperçu schématique de la présentation « Lecture » : une colonne, comme la présentation qu'il annonce."
+
+[[grille_fixe]]
+selecteur = ".layout-choice-preview[data-preview=\"vitrine\"]"
+colonnes = 1
+raison = "Aperçu schématique de la présentation « Vitrine » : une colonne de blocs larges."
+
+[[grille_fixe]]
+selecteur = ".layout-choice-preview[data-preview=\"mosaique\"]"
+colonnes = 3
+raison = "Aperçu schématique de la présentation « Mosaïque » : trois colonnes sur deux rangées, c'est le dessin qui porte l'information."
+
+[[grille_fixe]]
+selecteur = ".layout-choice-preview[data-preview=\"panorama\"]"
+colonnes = 3
+raison = "Aperçu schématique de la présentation « Panorama » : trois colonnes, deux rangées."
+
+[[grille_fixe]]
+selecteur = ".layout-choice-preview[data-preview=\"compacte\"]"
+colonnes = 3
+raison = "Aperçu schématique de la présentation « Compacte » : trois colonnes serrées, écart et remplissage réduits."
