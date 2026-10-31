@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 51 |
+| Avancées consignées | 52 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
 | Contrôles exécutables cités | 62 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1041,6 +1041,30 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 **Limite — ce que cela ne prouve pas.** Le rendu réel n'est pas vérifié : Chromium reste indisponible en sandbox et un banc navigateur sort en code 2. Le modèle suppose le conteneur `min(1160, W − 48)` et ne dit rien d'un cercle de 44 px dans une piste de 220 px ni d'un libellé long sur deux lignes. Ce qui reste sous condition de largeur n'est plus une grille mais des paliers de mise en page et les présentations choisies par l'utilisateur (compacte, lecture, panorama, vitrine), dont le statut reste à décider.
 
 **Suite.** Décider, mesure en main, si les présentations choisies par l'utilisateur relèvent de la même règle dynamique ou d'un choix explicite qui a le droit d'être fixe.
+
+Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
+
+### `la-premiere-grille-a-pistes-inegales-quitte-son-palier` — La première grille à pistes inégales quitte son palier, et une présentation ne se replie plus dans le vide
+
+*Consignée le 2026-10-31.*
+
+**Constat.** `.ai-hero-grid` portait un palier à 760 px qui la repliait d'un coup. La mesure de la veille autorisait la conversion (2 largeurs sur 233 changent de nombre de colonnes, 4,9 % d'écart de largeur au plus). Deux lectures étaient fausses : huit grilles portaient un écart lu comme 16 px là où la feuille écrit `clamp(2rem, 5vw, 4.5rem)` — parfois tronqué en `clamp(2rem,` — et six grilles étaient classées « proportion » alors qu'une de leurs colonnes a un **plafond** en pixels, que `flex` ne sait pas reproduire. Surtout, le modèle ne voyait pas que la présentation « Lecture » repliait `.ai-hero-grid` par `grid-template-columns` : sur un conteneur flex, cette déclaration n'a aucun effet.
+
+**Ce que cela change.** L'écart entre colonnes est lu comme une expression et évalué à chaque largeur (`ecart_a`), une expression illisible rendant `None` au lieu de 16 ; les colonnes à plafond forment une famille « borne » (6 grilles). `.ai-hero-grid` passe en `display: flex; flex-wrap: wrap`, chaque panneau portant `flex: <fr> 1 330px` et `min-width: 0`. La présentation « Lecture » replie par `flex-basis: 100%`, et `--verifier` refuse désormais toute présentation qui impose `grid-template-columns` à une grille convertie. Le registre garde la grille d'avant et le contrôle **recalcule** l'écart au lieu de croire le total écrit. Paliers : 194 règles (214 en début de journée).
+
+**Preuves dans le dépôt :**
+
+- `assets/css/site.css`
+- `docs/rd/grilles-dynamiques.toml`
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/formats-affichage.md`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py && python3 outils/compter-paliers.py && python3 outils/test_paliers_affichage.py`
+
+**Limite — ce que cela ne prouve pas.** Le rendu n'a pas été vérifié : Chromium reste indisponible en sandbox. Le repli et la largeur des colonnes sont calculés, la position du texte ne l'est pas. À 760 px de fenêtre l'écart passe de 32 à 38 px et le repli tombe vers 745 px au lieu de 760. Les treize grilles « proportion » restantes ne sont pas converties : plusieurs dépassent 9 % d'écart de largeur, et aucune n'a été vue à l'écran.
+
+**Suite.** Convertir `.english-promo-panel` (13 largeurs, 4,3 % d'écart) puis `.participation-grid` (9,0 %), en vérifiant à chaque fois qu'aucune présentation ne les replie par `grid-template-columns`.
 
 Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 

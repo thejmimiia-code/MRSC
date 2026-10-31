@@ -240,3 +240,18 @@ raison = "Aperçu schématique de la présentation « Panorama » : trois colonn
 selecteur = ".layout-choice-preview[data-preview=\"compacte\"]"
 colonnes = 3
 raison = "Aperçu schématique de la présentation « Compacte » : trois colonnes serrées, écart et remplissage réduits."
+
+# — Grilles à pistes inégales converties en `flex-wrap`, 31 octobre 2026. Une
+# largeur de piste (`auto-fit`) ne sait pas produire deux colonnes de largeurs
+# différentes ; `flex-wrap` le sait, et se replie quand les planchers déclarés ne
+# tiennent plus, sans aucune largeur d'écran. Le registre garde la valeur
+# **d'avant** (`grille_avant`) pour que le contrôle recalcule l'écart au lieu de
+# croire le nombre écrit, et le nom des présentations qui la repliaient.
+[[grille_flex]]
+selecteur = ".ai-hero-grid"
+grille_avant = "minmax(0, 1.05fr) minmax(330px, .95fr)"
+gap_avant = "clamp(2rem, 5vw, 4.5rem)"
+ecart_max_px = 16.5
+ecart_part = 0.049
+presentation_repliee = ["lecture"]
+raison = "Bandeau de la page IA : texte et constellation. Deux largeurs sur 233 changeaient de nombre de colonnes après conversion ; une colonne peut varier de 16,5 px (4,9 %) au plus, à cause du partage du seul surplus. Le palier de 760 px et la surcharge d'écart qui l'accompagnait disparaissent."

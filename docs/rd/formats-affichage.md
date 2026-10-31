@@ -1276,3 +1276,38 @@ Deux erreurs de calcul ont été corrigées avant d'écrire quoi que ce soit :
 comparer à `colonnes_anciennes` (qui répond toujours « 1 » pour une grille
 inégale) et oublier la borne par la capacité mesurée. Ce sont les deux erreurs
 qui avaient coûté deux journées sur les grilles égales.
+
+## 17. Première grille à pistes inégales convertie en `flex-wrap` (31 octobre 2026)
+
+`.ai-hero-grid` — texte et constellation de la page IA — portait un palier à
+760 px qui la repliait d'un coup. Elle se replie désormais quand ses deux
+panneaux de 330 px ne tiennent plus :
+
+```css
+.ai-hero-grid { display: flex; flex-wrap: wrap; gap: clamp(2rem, 5vw, 4.5rem); }
+.ai-hero-grid > :first-child { flex: 1.05 1 330px; min-width: 0; }
+.ai-hero-grid > :last-child  { flex: 0.95 1 330px; min-width: 0; }
+```
+
+**Coût mesuré :** 2 largeurs sur 233 changent de nombre de colonnes ; une colonne
+peut varier de 16,5 px (4,9 %) au plus, parce que `flex` ne partage que le
+surplus au-dessus du plancher là où la grille partageait tout par `fr`.
+
+### Le piège : une présentation qui ne replie plus rien
+
+La présentation « Lecture » repliait cette grille par
+`grid-template-columns: minmax(0,1fr)`. Sur un conteneur **flex**, cette
+déclaration est sans effet — la présentation aurait annoncé une colonne sans en
+produire. Elle passe par `flex-basis: 100%`, et `--verifier` refuse désormais
+qu'une présentation impose `grid-template-columns` à une grille convertie.
+
+### Deux lectures corrigées au passage
+
+- `gap: clamp(2rem, 5vw, 4.5rem)` était lu comme 16 px (ou tronqué en
+  `clamp(2rem,`). L'écart dépend de la fenêtre : il est désormais évalué largeur
+  par largeur, et une expression illisible rend `None` au lieu de 16.
+- `minmax(230px, 300px)` a un **plafond** en pixels, que `flex` ne sait pas
+  reproduire : six grilles passent de « proportion » à « borne ».
+
+État : 22 grilles dynamiques, 5 fixes déclarées, 1 en `flex-wrap`,
+**194 règles** sous condition de largeur (214 en début de journée).
