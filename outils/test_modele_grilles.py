@@ -89,6 +89,59 @@ class TestModeleGrilles(unittest.TestCase):
                 f"{k} colonnes demandées, {minimum}px ne les donnent pas",
             )
 
+    def test_une_grille_a_pistes_inegales_n_est_pas_convertible(self) -> None:
+        """`1fr auto` n'est pas un nombre de colonnes : le modèle doit le dire, pas le convertir.
+
+        Le 31 octobre 2026, la version précédente cherchait un `repeat(...)`
+        n'importe où dans la valeur : `.join-panel` (`minmax(0,1fr) auto`)
+        s'annonçait « 1 colonne » et `.learning-filters` « 2 colonnes ». Le
+        rapport proposait de convertir des panneaux qui n'ont rien à convertir.
+        """
+        for valeur, forme in (
+            ("minmax(0, 1fr) auto", "asymetrique"),
+            ("minmax(180px, 1.5fr) repeat(2, minmax(160px, 1fr)) auto", "asymetrique"),
+            ("20px 54px minmax(0, 1fr)", "asymetrique"),
+            ("minmax(0, .9fr) minmax(320px, 1.1fr)", "asymetrique"),
+            ("repeat(3, minmax(0, 1fr))", "fixe"),
+            ("minmax(0, 1fr)", "fixe"),
+            ("repeat(auto-fit, minmax(min(270px, 100%), 1fr))", "dynamique"),
+        ):
+            self.assertEqual(self.modele.classer_valeur(valeur)[0], forme, valeur)
+
+    def test_une_grille_a_deux_colonnes_garde_son_seuil_de_repli(self) -> None:
+        """Deux colonnes : il n'y a pas d'étape intermédiaire, seulement un moment où l'on renonce.
+
+        La règle des trois colonnes appliquée aux grilles à deux aurait replié
+        `.document-grid` dès 1 027 px au lieu de 760 — une régression visible sur
+        un ordinateur portable.
+        """
+        grille = self.modele.Grille(selecteur=".deux", colonnes_base=2, gap=16)
+        grille.regles = [
+            self.modele.Regle([".deux"], "repeat(2, minmax(0, 1fr))", 2, None, None, None, 1, 0),
+            self.modele.Regle([".deux"], "minmax(0, 1fr)", 1, None, 760, None, 2, 1),
+        ]
+        self.assertEqual(self.modele.seuil_une_colonne(grille), 760)
+        minimum = self.modele.minimum_recommande(grille)
+        self.assertIsNotNone(minimum)
+        # Deux colonnes doivent encore tenir juste au-dessus du seuil…
+        self.assertEqual(self.modele.auto_fit(minimum, grille.gap, 770), 2, minimum)
+        # … et ne plus tenir juste en dessous.
+        self.assertEqual(self.modele.auto_fit(minimum, grille.gap, 750), 1, minimum)
+
+    def test_grille_devenue_inegale_est_refusee(self) -> None:
+        """Une conversion annulée par une règle inégale ne doit pas passer pour dynamique."""
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                FEUILLE,
+                ".home-voice-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(370px,100%),1fr)); gap: 1rem; }",
+                ".home-voice-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; }",
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("redevenue inégale", resultat.stderr)
+
     # — le contrôle ------------------------------------------------------------
 
     def test_copie_intacte_passe(self) -> None:

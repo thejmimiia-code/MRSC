@@ -1090,7 +1090,7 @@ html.contraste-renforce .resource-scope-note {
 
 .link-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(370px, 100%), 1fr));
   gap: .85rem;
 }
 
@@ -1488,10 +1488,6 @@ html.contraste-renforce .resource-scope-note {
     display: none;
   }
 
-  .link-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .map-layout {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1619,10 +1615,12 @@ html.contraste-renforce .resource-scope-note {
     width: 35px;
   }
 
+  /* `.contact-grid` ne figure plus ici : sa règle de base est déjà une seule
+     colonne, la déclaration ne décidait rien. Trouvé le 31 octobre 2026 en
+     comparant, grille par grille, ce que chaque palier change réellement. */
   .hero-grid,
   .mission-grid,
-  .participation-grid,
-  .contact-grid {
+  .participation-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -1758,10 +1756,6 @@ html.contraste-renforce .resource-scope-note {
 
   .section {
     padding-block: 3.4rem;
-  }
-
-  .link-grid {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .footer-grid {
@@ -2179,7 +2173,7 @@ html.contraste-renforce .resource-scope-note {
 
 .ai-metric-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr));
   gap: 1rem;
 }
 
@@ -2232,7 +2226,7 @@ html.contraste-renforce .resource-scope-note {
 
 .ai-forms-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr));
   gap: 1rem;
 }
 
@@ -2376,7 +2370,7 @@ html.contraste-renforce .resource-scope-note {
 
 .ai-lives-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(370px, 100%), 1fr));
   gap: 1rem;
 }
 
@@ -2588,11 +2582,6 @@ html.contraste-renforce .resource-scope-note {
 }
 
 @media (max-width: 1000px) {
-  .ai-metric-grid,
-  .ai-forms-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .ai-path-panel {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -2628,10 +2617,6 @@ html.contraste-renforce .resource-scope-note {
 
   .ai-balance-grid {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .ai-lives-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .ai-cta-panel .button {
@@ -2690,12 +2675,6 @@ html.contraste-renforce .resource-scope-note {
   .ai-node {
     padding: .36rem .52rem;
     font-size: max(12px, .75rem);
-  }
-
-  .ai-metric-grid,
-  .ai-forms-grid,
-  .ai-lives-grid {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .ai-metric-card {
@@ -3497,7 +3476,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .learning-filter-count { margin:.4rem 0; color:var(--muted); font-size: max(12px, .9rem); }
 .learning-no-results { padding:1rem; border:1px solid var(--line); border-radius:12px; background:var(--paper); }
 .learning-catalogue-grid {
-  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(min(370px,100%),1fr)); gap:1rem;
   margin:1.3rem 0 0; padding:0; list-style:none;
 }
 .learning-catalogue-item { min-width:0; }
@@ -3519,7 +3498,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .learning-card-analogy { margin-top:auto; padding-top:.5rem; color:var(--text-soft-15); font-size: max(12px, .87rem); }
 .learning-card-link { align-self:flex-start; font-weight:750; }
 .learning-level-grid,.learning-ecosystem-grid {
-  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr)); gap:1rem;
   margin:1rem 0; padding:0; list-style:none;
 }
 .learning-level-grid > li { min-width:0; }
@@ -3669,7 +3648,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .learning-steps li::marker,.learning-answer-list li::marker { color:var(--green); font-weight:800; }
 .learning-code-examples { margin-block:2rem; }
 .learning-code-examples > p { color:var(--text-soft); }
-.learning-code-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.learning-code-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(470px,100%),1fr)); gap:1rem; }
 .learning-code-sample { min-width:0; margin:0; padding:1rem; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
 .learning-code-sample figcaption { margin-bottom:.6rem; color:var(--navy-ink); font-weight:800; }
 .learning-code-sample figcaption span { color:var(--muted); font-weight:650; }
@@ -3703,15 +3682,11 @@ html.contraste-renforce :is(.learning-analogy,.learning-coverage-topic,.learning
 html.contraste-renforce :is(.learning-analogy,.learning-coverage-topic,.learning-no-results) { background:var(--surface); }
 
 @media (max-width: 1000px) {
-  .learning-catalogue-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .learning-level-grid,.learning-ecosystem-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .learning-filters { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .learning-code-grid { grid-template-columns:minmax(0,1fr); }
   .learning-lesson-aside { top:calc(160px + 1rem); }
 }
 @media (max-width: 760px) {
   .learning-hero-grid,.learning-work-panel,.learning-article-layout { grid-template-columns:minmax(0,1fr); }
-  .learning-catalogue-grid,.learning-level-grid,.learning-ecosystem-grid { grid-template-columns:minmax(0,1fr); }
   .learning-filters { grid-template-columns:minmax(0,1fr); }
   .learning-feedback-panel { grid-template-columns:minmax(0,1fr); gap:1.2rem; }
   .learning-feedback-panel .button { justify-self:start; }

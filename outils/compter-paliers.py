@@ -120,6 +120,47 @@ def lire_feuille(racine: Path) -> str:
         raise SourceIllisible(f"feuille de style illisible : {FEUILLE} ({erreur})") from erreur
 
 
+def etendue(texte: str, ouvrante: int) -> int:
+    """Position de l'accolade fermante qui correspond à celle-ci, accolades comptées.
+
+    Une feuille tronquée rendrait `-1` : c'est une source illisible, pas une
+    mesure. La compter vaut mieux que la deviner.
+    """
+    profondeur = 0
+    for position in range(ouvrante, len(texte)):
+        if texte[position] == "{":
+            profondeur += 1
+        elif texte[position] == "}":
+            profondeur -= 1
+            if profondeur == 0:
+                return position
+    return -1
+
+
+def compter_regles(bloc: str) -> int:
+    """Nombre de règles de style écrites directement dans un bloc `@media`.
+
+    Le 31 octobre 2026, ce comptage a été ajouté parce que la dette ne bougeait
+    plus : douze grilles venaient de quitter leurs paliers et le relevé
+    annonçait toujours 41 blocs. Il comptait les **blocs** `@media`, pas ce
+    qu'ils décident — un bloc qui ne garde qu'une règle sans rapport avec la
+    largeur continuait de peser autant qu'un bloc qui en porte dix.
+    """
+    profondeur, regles, position = 0, 0, 0
+    while position < len(bloc):
+        caractere = bloc[position]
+        if caractere == "{":
+            profondeur += 1
+            if profondeur == 1:
+                entete = bloc[:position].rstrip().rsplit("}", 1)[-1].strip()
+                if entete and not entete.startswith("@"):
+                    regles += 1
+        elif caractere == "}":
+            profondeur -= 1
+        position += 1
+    return regles
+
+
 def relever(texte: str) -> list[dict[str, object]]:
     """Toutes les conditions `@media`, avec leur écriture d'origine et leur ligne.
 
@@ -136,12 +177,20 @@ def relever(texte: str) -> list[dict[str, object]]:
     conditions = []
     for trouve in re.finditer(r"@media\s*([^{]+)\{", sans_commentaires):
         brute = " ".join(trouve.group(1).split())
+        ouvrante = trouve.end() - 1
+        fermante = etendue(sans_commentaires, ouvrante)
+        if fermante == -1:
+            raise SourceIllisible(
+                f"bloc @media jamais refermé ligne {sans_commentaires[: trouve.start()].count(chr(10)) + 1}"
+                f" ({brute}) — le relevé s'arrêterait là sans le dire"
+            )
         conditions.append(
             {
                 "brute": brute,
                 "canonique": canoniser(brute),
                 "ligne": sans_commentaires[: trouve.start()].count("\n") + 1,
                 "classe": classer(canoniser(brute)),
+                "regles": compter_regles(sans_commentaires[ouvrante + 1 : fermante]),
             }
         )
     return conditions
@@ -173,12 +222,14 @@ def controler(conditions: list[dict[str, object]], registre: dict) -> tuple[list
     index = inscrire(registre)
 
     comptes: dict[str, int] = {}
+    regles: dict[str, int] = {}
     lignes: dict[str, list[int]] = {}
     ecritures: dict[str, set[str]] = {}
     classes: dict[str, str] = {}
     for condition in conditions:
         canonique = str(condition["canonique"])
         comptes[canonique] = comptes.get(canonique, 0) + 1
+        regles[canonique] = regles.get(canonique, 0) + int(condition.get("regles", 0))
         lignes.setdefault(canonique, []).append(int(condition["ligne"]))
         ecritures.setdefault(canonique, set()).add(str(condition["brute"]))
         classes[canonique] = str(condition["classe"])
@@ -226,6 +277,19 @@ def controler(conditions: list[dict[str, object]], registre: dict) -> tuple[list
             erreurs.append(
                 f"{canonique} : décision « {decision or 'absente'} » inconnue (attendu : dette ou assume)"
             )
+        declare_regles = entree.get("regles")
+        if isinstance(declare_regles, int):
+            delta = regles[canonique] - declare_regles
+            if delta > 0:
+                erreurs.append(
+                    f"{canonique} : {regles[canonique]} règles dans la feuille, {declare_regles} "
+                    f"déclarées — la dette a augmenté de {delta} règle(s) qui dépendent d'une largeur"
+                )
+            elif delta < 0:
+                erreurs.append(
+                    f"{canonique} : {regles[canonique]} règles, {declare_regles} déclarées — "
+                    "la dette a diminué, c'est une avancée : mettez le registre à jour et datez-la"
+                )
         declare = entree.get("occurrences")
         if not isinstance(declare, int):
             erreurs.append(f"{canonique} : le champ `occurrences` n'est pas un entier")
@@ -253,7 +317,9 @@ def controler(conditions: list[dict[str, object]], registre: dict) -> tuple[list
     bilan = {
         "conditions": len(comptes),
         "blocs": sum(comptes.values()),
+        "regles": sum(regles.values()),
         "comptes": comptes,
+        "comptes_regles": regles,
         "lignes": lignes,
         "classes": classes,
         "inscriptions": index,
@@ -285,7 +351,8 @@ def releve(registre: dict, bilan: dict[str, object]) -> str:
 
     lignes = [
         f"Paliers d'affichage — relevé du {date}",
-        f"{bilan['conditions']} conditions distinctes, {bilan['blocs']} blocs @media dans {FEUILLE}",
+        f"{bilan['conditions']} conditions distinctes, {bilan['blocs']} blocs @media, "
+        f"{bilan['regles']} règles dans {FEUILLE}",
     ]
     for classe, ordre in (("format", "format (taille de fenêtre)"), ("preference", "préférence (réglage de la personne)"), ("autre", "autre")):
         if classe in par_classe:
@@ -327,9 +394,11 @@ def mettre_a_jour(racine: Path, conditions: list[dict[str, object]]) -> list[str
         )
     texte = chemin.read_text(encoding="utf-8")
     comptes: dict[str, int] = {}
+    regles: dict[str, int] = {}
     for condition in conditions:
         canonique = str(condition["canonique"])
         comptes[canonique] = comptes.get(canonique, 0) + 1
+        regles[canonique] = regles.get(canonique, 0) + int(condition.get("regles", 0))
 
     sorties: list[str] = []
     courant: str | None = None
@@ -343,6 +412,11 @@ def mettre_a_jour(racine: Path, conditions: list[dict[str, object]]) -> list[str
         if compte and courant and courant in comptes:
             if str(comptes[courant]) != compte.group(2):
                 sorties.append(f"{compte.group(1)}{comptes[courant]}{compte.group(3)}")
+                continue
+        nombre_regles = re.match(r"^(regles\s*=\s*)(\d+)(\s*)$", ligne)
+        if nombre_regles and courant and courant in regles:
+            if str(regles[courant]) != nombre_regles.group(2):
+                sorties.append(f"{nombre_regles.group(1)}{regles[courant]}{nombre_regles.group(3)}")
                 continue
         sorties.append(ligne)
 
@@ -358,6 +432,7 @@ def mettre_a_jour(racine: Path, conditions: list[dict[str, object]]) -> list[str
                 f'condition = "{canonique}"',
                 'classe = "format"',
                 f"occurrences = {comptes[canonique]}",
+                f"regles = {regles[canonique]}",
                 'presume = ""',
                 'decision = "dette"',
             ]
@@ -407,9 +482,14 @@ def principal(arguments: list[str] | None = None) -> int:
 
     par_classe = bilan_par_classe(bilan)
     format_ = par_classe.get("format", {"conditions": 0, "blocs": 0})
+    regles_format = sum(
+        bilan["comptes_regles"][condition]
+        for condition in bilan["comptes"]
+        if bilan["classes"][condition] == "format"
+    )
     print(
         f"Paliers déclarés : {format_['conditions']} conditions de format, {format_['blocs']} blocs, "
-        f"chacune avec sa raison et sa décision · "
+        f"{regles_format} règles, chacune avec sa raison et sa décision · "
         f"{bilan['conditions'] - format_['conditions']} conditions de préférence ou autres, "
         "qui ne présument aucune taille d'écran."
     )
