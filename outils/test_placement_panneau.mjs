@@ -92,6 +92,8 @@ function placer({ largeurFenetre, hauteurFenetre, bouton, hauteurEntete, largeur
   const style = {};
   const panneau = {
     style,
+    // Le vrai panneau porte le marqueur `data-placement` que pose le placement.
+    dataset: {},
     getBoundingClientRect: () => ({
       width: style.width === '' || style.width === undefined ? largeurVoulue : parseFloat(style.width),
       left: 0, right: 0, top: 0, bottom: 0, height: 0,

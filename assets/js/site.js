@@ -817,6 +817,11 @@
     const HAUTEUR_MINIMALE_PANNEAU = 160;
     function placerPanneauPersonnalisation() {
       if (!personnalisation || !panneauPersonnalisation || !personnalisation.open) return;
+      // Marqueur lisible par les essais : sans lui, un placement qui ne
+      // s'exécute pas ressemble à un placement juste. C'est exactement ce qui
+      // s'est produit le 30 octobre 2026 — le panneau gardait la géométrie de
+      // la feuille de style, et rien ne le disait.
+      panneauPersonnalisation.dataset.placement = "mesure";
       const bouton = personnalisation.querySelector("summary");
       if (!bouton) return;
       const vue = window.visualViewport;

@@ -681,6 +681,11 @@ async function main() {
   //      se replacer sans être refermé puis rouvert.
   await executer('Panneau « Personnalisation » placé à la mesure, y compris quand la fenêtre change', async () => {
     const page = await creerPage({ width: 980, height: 440 });
+    // Une exception dans le calcul de placement serait sinon muette : le
+    // panneau garderait simplement la géométrie de la feuille de style, et
+    // l'échec parlerait de positions au lieu de parler de la cause.
+    const erreursPage = [];
+    page.on('pageerror', (erreur) => erreursPage.push(String(erreur && erreur.message ? erreur.message : erreur)));
     const mesurerPanneau = () => page.evaluate(() => {
       const panneau = document.querySelector('.customize-settings-panel');
       const cadre = panneau.getBoundingClientRect();
@@ -699,6 +704,8 @@ async function main() {
         });
       return {
         ouvert: document.querySelector('[data-customize-settings]')?.open === true,
+        styleEnLigne: panneau.getAttribute('style'),
+        placement: panneau.dataset.placement || null,
         largeurVue,
         hauteurVue,
         gauche: Math.round(cadre.left),
@@ -712,6 +719,12 @@ async function main() {
     });
     const verifierPlacement = (mesure, contexte) => {
       assert.equal(mesure.ouvert, true, `le panneau doit rester ouvert — ${contexte}`);
+      // Le marqueur est posé par `placerPanneauPersonnalisation` elle-même : s'il
+      // manque, la géométrie mesurée est celle de la feuille de style, et le
+      // reste des assertions parlerait d'autre chose que du placement.
+      assert.equal(mesure.placement, 'mesure',
+        `le placement mesuré ne s'est pas exécuté — ${contexte} : style « ${mesure.styleEnLigne} »`
+        + (erreursPage.length ? ` · exceptions de page : ${erreursPage.join(' | ')}` : ' · aucune exception de page'));
       assert.ok(mesure.gauche >= -1, `le panneau sort par la gauche — ${contexte} : ${JSON.stringify(mesure)}`);
       assert.ok(mesure.droite <= mesure.largeurVue + 1, `le panneau sort par la droite — ${contexte} : ${JSON.stringify(mesure)}`);
       assert.ok(mesure.haut >= -1, `le panneau sort par le haut — ${contexte} : ${JSON.stringify(mesure)}`);
