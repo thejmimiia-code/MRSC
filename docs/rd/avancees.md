@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 48 |
+| Avancées consignées | 49 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
 | Contrôles exécutables cités | 61 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1020,6 +1020,29 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 **Suite.** Lire le premier passage en CI de l'essai « Aperçu ordinateur », et vérifier sur le site publié qu'un téléphone en mode bureau ne rogne plus le panneau.
 
 Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
+
+### `aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran` — Aucune grille à pistes égales ne dépend plus d'une largeur d'écran
+
+*Consignée le 2026-10-31.*
+
+**Constat.** Vingt-deux grilles dessinées à colonnes égales décidaient encore de leur nombre de colonnes par un `@media` de largeur. La dernière, `.ai-path-steps`, imposait `repeat(3, …)` sous 520 px et recentrait sa cinquième étape par `grid-column: 2` : deux règles qui se répondaient pour rattraper une mise en page, et des cartes de 59 px de large à 240 px de fenêtre.
+
+**Ce que cela change.** La grille porte une largeur de piste (`minmax(min(220px, 100%), 1fr)`) et les deux règles du palier disparaissent. Le nombre de colonnes suit la place disponible : cinq au conteneur maximal, puis quatre, trois, deux, une. Mesure avant conversion : 94 largeurs sur 233 changeaient de nombre de colonnes, écart maximal 3 — un changement visible, dit comme tel. État : 22 grilles dynamiques, aucune grille à pistes égales sous palier de largeur, 34 grilles à pistes inégales assumées non convertibles, 195 règles sous condition de largeur (214 avant les trois lots du 31 octobre).
+
+**Preuves dans le dépôt :**
+
+- `assets/css/site.css`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/paliers-affichage.toml`
+- `docs/rd/formats-affichage.md`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/compter-paliers.py && python3 outils/test_paliers_affichage.py && python3 outils/test_modele_grilles.py`
+
+**Limite — ce que cela ne prouve pas.** Le rendu réel n'est pas vérifié : Chromium reste indisponible en sandbox et un banc navigateur sort en code 2. Le modèle suppose le conteneur `min(1160, W − 48)` et ne dit rien d'un cercle de 44 px dans une piste de 220 px ni d'un libellé long sur deux lignes. Ce qui reste sous condition de largeur n'est plus une grille mais des paliers de mise en page et les présentations choisies par l'utilisateur (compacte, lecture, panorama, vitrine), dont le statut reste à décider.
+
+**Suite.** Décider, mesure en main, si les présentations choisies par l'utilisateur relèvent de la même règle dynamique ou d'un choix explicite qui a le droit d'être fixe.
+
+Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 
 ### `un-modele-de-grille-doit-savoir-ce-qu-on-y-met` — Un modèle de grille qui ignore ce qu'on y met ajoute des colonnes que personne n'a dessinées
 

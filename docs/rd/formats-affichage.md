@@ -1193,6 +1193,23 @@ colonne couperait.
   de 33 grilles à 16, huit conversions comprises, sans un mot. L'analyseur tient
   désormais une pile de blocs refermée sur les accolades.
 
-État : **21 grilles dynamiques**, une seule grille égale encore sous palier
-(`.ai-path-steps`, 5 → 3 colonnes sous 520 px), 34 à pistes inégales assumées,
-**197 règles** sous condition de largeur.
+## 13. La dernière grille égale quitte son palier (31 octobre 2026)
+
+`.ai-path-steps` — les cinq étapes du parcours de la page IA — était la dernière
+grille à pistes égales dont le nombre de colonnes dépendait encore d'une largeur
+d'écran : cinq colonnes, puis `repeat(3, …)` sous 520 px, avec
+`li:last-child { grid-column: 2 }` pour recentrer la cinquième étape.
+
+La règle donne **220 px** : le plus large minimum qui laisse encore cinq
+colonnes à 1 160 px de conteneur. Les deux règles du palier de 520 px
+disparaissent ensemble — le recentrage n'a plus de sens quand le nombre de
+colonnes suit la largeur de piste. Mesure avant conversion : **94 largeurs sur
+233** changeaient de nombre de colonnes, écart maximal **3 colonnes** — c'est le
+prix, et il est dit : sous 520 px l'ancienne cascade montrait trois étapes par
+ligne, la nouvelle en montre une quand la place ne suffit plus (cartes de 59 px
+de large à 240 px de fenêtre auparavant).
+
+**État : 22 grilles dynamiques, aucune grille à pistes égales sous palier de
+largeur.** 34 grilles restent à pistes inégales, assumées et déclarées non
+convertibles, et **195 règles** restent sous condition de largeur (214 avant ces
+trois lots).
