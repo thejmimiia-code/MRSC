@@ -89,6 +89,53 @@ class TestModeleGrilles(unittest.TestCase):
                 f"{k} colonnes demandées, {minimum}px ne les donnent pas",
             )
 
+    def test_des_colonnes_egales_sans_minmax_restent_egales(self) -> None:
+        """`repeat(3, 1fr)` et `1fr 1fr` sont des colonnes égales, pas des pistes inégales.
+
+        Le 31 octobre 2026, le modèle ne reconnaissait que `repeat(k, minmax(…))` :
+        cinq aperçus de présentation et un bloc de carte échappaient au compte, et
+        le rapport annonçait 34 grilles inégales là où quatre étaient seulement
+        écrites autrement. Une écriture n'est pas un dessin.
+        """
+        for valeur, k in (
+            ("repeat(3,1fr)", 3),
+            ("repeat(2, 1fr)", 2),
+            ("repeat(2, minmax(0, 1fr))", 2),
+            ("1fr 1fr", 2),
+            ("1fr 1fr 1fr", 3),
+        ):
+            self.assertEqual(self.modele.classer_valeur(valeur), ("fixe", k, None), valeur)
+        for valeur in ("1fr 2fr", "minmax(0,1fr) auto", "44px 1fr", "repeat(2, max-content)"):
+            self.assertEqual(self.modele.classer_valeur(valeur)[0], "asymetrique", valeur)
+
+    def test_une_grille_declaree_fixe_qui_devient_dynamique_est_refusee(self) -> None:
+        """Un aperçu de présentation qui passerait en largeur de piste cesserait de montrer ce qu'il annonce."""
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                FEUILLE,
+                '.layout-choice-preview[data-preview="mosaique"] { grid-template-columns: repeat(3,1fr);',
+                '.layout-choice-preview[data-preview="mosaique"] { grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));',
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("déclarée fixe", resultat.stderr)
+
+    def test_une_grille_fixe_qui_change_de_nombre_de_colonnes_est_refusee(self) -> None:
+        """Une grille fixe déclarée à trois colonnes qui en affiche deux a changé de dessin."""
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                FEUILLE,
+                '.layout-choice-preview[data-preview="panorama"] { grid-template-columns: repeat(3,1fr);',
+                '.layout-choice-preview[data-preview="panorama"] { grid-template-columns: repeat(2,1fr);',
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("la feuille en donne 2", resultat.stderr)
+
     def test_une_grille_a_pistes_inegales_n_est_pas_convertible(self) -> None:
         """`1fr auto` n'est pas un nombre de colonnes : le modèle doit le dire, pas le convertir.
 

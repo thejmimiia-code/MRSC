@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-31 — Une écriture n'est pas un dessin
+
+- **Initiative :** `optimisation-du-site`.
+- **Le défaut :** `classer_valeur` ne reconnaissait la forme « colonnes égales » qu'écrite `repeat(k, minmax(…))`. `repeat(3, 1fr)` et `1fr 1fr` tombaient donc dans « pistes inégales », et le rapport annonçait **34 grilles inégales** là où quatre étaient seulement écrites autrement. Le chiffre était faux par excès, du même côté que l'erreur des 34 « convertibles » corrigée dans la journée.
+- **La correction :** `REPEAT_FR` et `FR_EGALES` reconnaissent `repeat(k, 1fr)`, `repeat(k, minmax(0, 1fr))` et `N × 1fr`. Le compte devient **36 grilles à pistes égales, 30 à pistes inégales**.
+- **Ce que la correction a mis au jour :** cinq de ces grilles nouvellement reconnues sont des **aperçus de présentation** (`.layout-choice-preview`) — des vignettes qui dessinent chacune une mise en page. Leur forme 3 × 2 **est** l'information ; une largeur de piste la détruirait. Le modèle n'avait aucun moyen de le savoir et `--regle` proposait de les convertir.
+- **La réponse n'est pas une exception dans le code, c'est une déclaration :** le registre gagne une section `[[grille_fixe]]` — sélecteur, nombre de colonnes, raison. `--verifier` contrôle que chaque grille déclarée fixe existe, reste à pistes égales et garde son nombre de colonnes ; `--regle` ne propose plus de la convertir et les nomme à part. Une conversion silencieuse d'un aperçu, ou un aperçu qui perd une colonne, sont désormais refusés.
+- **Contrôles exécutés :** `modele-grilles.py --verifier` (22 grilles dynamiques + 5 fixes déclarées, 0 déclaration morte) · `test_modele_grilles.py` (**24 cas**, dont trois nouveaux : colonnes égales sans `minmax`, grille fixe devenue dynamique, grille fixe qui change de colonnes) · `compter-paliers.py` (17 conditions, 38 blocs, 195 règles — feuille inchangée) · `test_paliers_affichage.py` (20 cas) · `verifier-inventaire-controles.py` · `verifier-rd-continue.py` · `verifier-integration.py` · `verifier-site-statique.py` (99 pages) · `verifier-publication-locale.py` (136 fichiers).
+- **Limites :** le classement reste textuel. `repeat(2, max-content)` et `1fr 2fr` sont inégales et le restent ; `minmax(120px, 1fr) minmax(120px, 1fr)` serait reconnu égal, `minmax(120px,1fr) minmax(160px,1fr)` non. Et `.map-info` (`1fr 1fr` sous 920 px) n'entre dans aucune des deux listes : sa règle de base n'existe pas, le modèle ne lit que la règle de base d'une grille.
+- **Prochaine action :** les 30 grilles à pistes inégales gardent leurs paliers. Mesurer, sans toucher à la feuille, ce qu'un `flex-wrap` exprimerait de mieux — et surtout, ce qu'il ne saurait pas décider sans navigateur.
+
 ## 2026-10-31 — Ce que le compteur de règles ne pouvait pas voir
 
 - **Initiative :** `optimisation-du-site`.

@@ -1232,3 +1232,21 @@ déclenchement.
 Ce qu'elle ne voit pas : une déclaration neutralisée par une règle postérieure
 de même spécificité hors condition de largeur, et une déclaration dont la valeur
 diffère mais dont l'effet est nul.
+
+## 15. Ce qui doit rester fixe se déclare (31 octobre 2026)
+
+Le registre `docs/rd/grilles-dynamiques.toml` disait quoi convertir ; il ne disait
+pas ce qui doit **rester fixe**. La distinction ne pouvait pas venir du code :
+`.layout-choice-preview` dessine, dans le panneau Personnalisation, une vignette
+par présentation — trois colonnes sur deux rangées pour « Mosaïque ». Cette forme
+**est** l'information ; une largeur de piste la détruirait.
+
+La section `[[grille_fixe]]` déclare donc sélecteur, nombre de colonnes et
+raison. `--verifier` refuse trois choses : une grille déclarée fixe qui
+disparaît, une qui passe en largeur de piste, une qui change de nombre de
+colonnes. `--regle` ne leur propose plus de conversion et les nomme à part.
+
+Au passage, une erreur de classement corrigée : `repeat(3, 1fr)` et `1fr 1fr`
+étaient lues comme des pistes **inégales**, faute d'être écrites avec `minmax`.
+Le compte passe de 34 à **30** grilles inégales, et de 33 à **36** grilles à
+pistes égales.
