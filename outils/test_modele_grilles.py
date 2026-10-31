@@ -209,6 +209,25 @@ class TestModeleGrilles(unittest.TestCase):
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("capacité déclarée [2]", resultat.stderr)
 
+    def test_declaration_qui_ne_decide_rien_est_refusee(self) -> None:
+        """Un `@media` qui réécrit la valeur déjà en vigueur ne protège de rien.
+
+        `.contact-grid` a vécu des mois dans le bloc de 760 px pour y réimposer
+        une colonne à une grille déjà à une colonne. Le compteur de règles ne
+        pouvait pas le voir : une règle qui perd son effet reste une règle.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                FEUILLE,
+                ".principle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr)); gap: 1rem; }",
+                ".principle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr)); gap: 1rem; }\n@media (max-width: 760px) { .principle-grid { grid-template-columns: repeat(auto-fit,minmax(min(270px,100%),1fr)); } }",
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("ne décide rien", resultat.stderr)
+
     def test_grille_devenue_inegale_est_refusee(self) -> None:
         """Une conversion annulée par une règle inégale ne doit pas passer pour dynamique."""
         with tempfile.TemporaryDirectory() as dossier:

@@ -505,6 +505,44 @@ def minimum_pour_k(k: int, gap: float, contenu: float = CONTENU_DEFAUT) -> int |
     return max(valides) if valides else None
 
 
+def normaliser(valeur: str) -> str:
+    """Compare deux écritures de la même valeur (`minmax(0, 1fr)` = `minmax(0,1fr)`)."""
+    return re.sub(r"\s+", "", valeur).replace(",", ",")
+
+
+def declarations_mortes(grilles: dict[str, Grille]) -> list[dict]:
+    """Les déclarations de colonnes, sous condition de largeur, qui ne décident rien.
+
+    Une règle `@media` qui réécrit la valeur déjà en vigueur ne protège de rien :
+    elle alourdit la feuille et fait croire à un palier qui n'existe pas. Le
+    31 octobre 2026, `.contact-grid` figurait dans le bloc de 760 px pour y
+    imposer `minmax(0, 1fr)` à une grille déjà à une colonne — et le compteur de
+    règles ne pouvait pas le voir, puisqu'une règle qui perd son effet reste une
+    règle. C'est cette limite-là que ce contrôle ferme.
+    """
+    mortes = []
+    for selecteur, grille in grilles.items():
+        for regle in grille.regles:
+            if regle.largeur_max is None and regle.largeur_min is None:
+                continue
+            largeur = regle.largeur_max if regle.largeur_max is not None else regle.largeur_min + 1
+            en_vigueur = None
+            for autre in sorted(grille.regles, key=lambda x: x.ordre):
+                if autre is regle or not applique(autre, largeur):
+                    continue
+                en_vigueur = autre.valeur
+            if en_vigueur is not None and normaliser(en_vigueur) == normaliser(regle.valeur):
+                mortes.append(
+                    {
+                        "selecteur": selecteur,
+                        "ligne": regle.ligne,
+                        "valeur": regle.valeur,
+                        "largeur": largeur,
+                    }
+                )
+    return mortes
+
+
 def paliers(grille: Grille) -> list[str]:
     """Les conditions de largeur qui décident encore des colonnes de cette grille."""
     conditions = []
@@ -675,13 +713,24 @@ def etat(grilles: dict[str, Grille], capacites: dict[str, dict] | None = None) -
     return lignes
 
 
-def rapport(lignes: list[dict], inegales: list[Grille] | None = None) -> str:
+def rapport(
+    lignes: list[dict],
+    inegales: list[Grille] | None = None,
+    grilles: dict[str, Grille] | None = None,
+) -> str:
     avec = [ligne for ligne in lignes if ligne["paliers"]]
     sorties = [
         f"{len(lignes)} grilles à pistes égales fixent leur nombre de colonnes dans {FEUILLE} ; "
         f"{len(avec)} le font encore par un palier de largeur.",
         "",
     ]
+    mortes = declarations_mortes(grilles or {})
+    sorties.append(
+        f"{len(mortes)} déclaration(s) sous condition de largeur ne décide(nt) rien : "
+        + ("aucune" if not mortes else ", ".join(m["selecteur"] for m in mortes))
+        + "."
+    )
+    sorties.append("")
     if inegales:
         sorties.append(
             f"{len(inegales)} grilles à pistes inégales (texte + bouton, formulaire, sommaire) "
@@ -834,6 +883,12 @@ def principal(arguments: list[str] | None = None) -> int:
         capacites = lire_capacites(RACINE, [e.get("selecteur") or "" for e in registre.get("grille", [])])
         appliquer_capacites(grilles, capacites)
         erreurs = verifier(grilles, registre, capacites)
+        for morte in declarations_mortes(grilles):
+            erreurs.append(
+                f"{morte['selecteur']} : la déclaration ligne {morte['ligne']} "
+                f"(`{morte['valeur'][:40]}`) ne décide rien — c'est déjà la valeur en vigueur "
+                f"à {morte['largeur']}px"
+            )
         sans_capacite = [
             selecteur
             for selecteur in (e.get("selecteur") or "" for e in registre.get("grille", []))
@@ -931,7 +986,7 @@ def principal(arguments: list[str] | None = None) -> int:
     if options.json:
         print(json.dumps(lignes, ensure_ascii=False, indent=2))
     else:
-        print(rapport(lignes, asymetriques(grilles)))
+        print(rapport(lignes, asymetriques(grilles), grilles))
     return 0
 
 
