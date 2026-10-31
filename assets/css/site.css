@@ -3817,11 +3817,11 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .map-frame[hidden] { display:none; }
 .table-scroll-hint { margin:0 0 .5rem; color:var(--muted); font-size: max(12px, .86rem); }
 .simulateur-section { scroll-margin-top:13rem; }
-@media (max-width:760px) {
+@media (max-width: 760px) {
   .learning-home-panel { grid-template-columns:minmax(0,1fr); align-items:start; gap:1.1rem; }
   .learning-home-panel .button { justify-self:start; }
 }
-@media (forced-colors:active) {
+@media (forced-colors: active) {
   .map-privacy-notice,.learning-home-panel { border-color:CanvasText !important; background:Canvas !important; color:CanvasText !important; }
 }
 .learning-card-source {

@@ -1048,3 +1048,33 @@ La méthode, les seuils, la matrice de 3 780 relevés et les limites sont décri
  dans [ligne-graphique.md](ligne-graphique.md). Le résultat reproductible est
 conservé dans [audit-graphismes-2026-10-24.json](audit-graphismes-2026-10-24.json).
 Ce contrôle ciblé ne remplace pas une vérification de tous les visuels du site.
+
+## 9. La dette des valeurs fixes, comptée (31 octobre 2026)
+
+Le lot du 30 octobre a retiré **un** panneau des points de rupture. Une règle
+locale n'est pas une règle : la feuille contenait 66 blocs `@media` et personne
+ne savait combien supposaient une taille d'écran. `outils/compter-paliers.py` les
+compte, et `docs/rd/paliers-affichage.toml` porte la raison de chacun.
+
+| Classe | Conditions | Blocs | Ce qu'elle présume |
+| --- | --- | --- | --- |
+| `format` | 17 | 45 | une largeur, une hauteur ou une orientation — donc un écran |
+| `preference` | 8 | 21 | un réglage de la personne, la densité ou l'impression — aucune taille |
+
+Sur les 17 conditions de format, **15 sont en dette** et 2 sont assumées : les
+planchers de survie à 240 et 300 px, en dessous desquels il n'existe plus
+d'appareil, seulement un cadre d'aperçu. La dette la plus lourde est
+`(max-width: 760px)`, quinze blocs : c'est ce seuil qui décide que le site est
+sur téléphone, et il n'a jamais été mesuré.
+
+Deux conditions vivaient écrites de deux façons — `(max-width:760px)` à côté de
+`(max-width: 760px)`, `(forced-colors:active)` à côté de
+`(forced-colors: active)`. Elles sont réécrites ; le contrôle refuse désormais
+deux écritures d'une même condition, parce qu'elles compteraient double.
+
+Ce que ce compte ne fait pas : il ne juge pas les raisons, et il ne dit pas
+combien de personnes voient quel palier. Il rend seulement l'ajout coûteux —
+« un palier de plus est un écran de plus que le site présume » — et la baisse
+visible, avec l'obligation de la dater. La résorption passe par les grilles
+(`auto-fit`, `minmax`), qui n'ont besoin d'aucune condition, puis par le seuil
+1260/1261 px tenu à la main en deux endroits.

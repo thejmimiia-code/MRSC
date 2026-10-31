@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 43 |
-| Période couverte | du 2026-10-20 au 2026-10-30 |
-| Contrôles exécutables cités | 56 |
+| Avancées consignées | 45 |
+| Période couverte | du 2026-10-20 au 2026-10-31 |
+| Contrôles exécutables cités | 58 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1020,6 +1020,54 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 **Suite.** Lire le premier passage en CI de l'essai « Aperçu ordinateur », et vérifier sur le site publié qu'un téléphone en mode bureau ne rogne plus le panneau.
 
 Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
+
+### `une-copie-de-banc-ne-se-mute-pas-par-ses-liens` — Une copie de banc faite de liens ne se mute qu'après matérialisation du chemin
+
+*Consignée le 2026-10-31.*
+
+**Constat.** Les bancs de ce dépôt travaillent sur une copie jetable remplie de liens symboliques (`outils/banc_mutations.py`) : `copie/assets` pointe vers `assets` du dépôt. Un banc écrit le 31 octobre 2026 a appelé `(copie / 'assets/css/site.css').unlink()` et `(copie / 'docs/rd/paliers-affichage.toml').unlink()` pour éprouver les cas « source absente ». Le chemin traverse un lien : ce sont la feuille de style réelle — 5 255 lignes — et le registre réel qui ont été supprimés. Le banc était vert sur tout le reste et rien ne le signalait : il éprouvait une copie qu'il venait de détruire à la place de l'original.
+
+**Ce que cela change.** `banc_mutations.cible(dossier, relatif)` matérialise le chemin — défait le lien, copie le fichier — puis vérifie que le chemin résolu reste **dans la copie**, et lève une erreur explicite sinon (`le chemin résolu sort de la copie`). `outils/test_paliers_affichage.py` ne touche plus aucun fichier autrement, et un de ses cas éprouve la garde elle-même. Le même lot ajoute une garde symétrique côté outil : `compter-paliers.py --mettre-a-jour` refuse d'écrire un registre qui résout hors de la racine qu'il a reçu l'ordre de lire (code 2, « pointe hors de la racine lue »). Le 31 octobre, cette seconde garde a été écrite **parce que** la première ne suffisait pas : la régénération du registre écrivait encore dans le vrai fichier à travers le lien.
+
+**Preuves dans le dépôt :**
+
+- `outils/banc_mutations.py`
+- `outils/test_paliers_affichage.py`
+- `outils/compter-paliers.py`
+- `docs/rd/paliers-affichage.toml`
+
+**Contrôle qui la maintient :** `python3 outils/test_paliers_affichage.py`
+
+**Limite — ce que cela ne prouve pas.** La garde protège les écritures qui passent par `cible` ; un banc futur peut encore écrire par un chemin brut. Elle ne dit rien des suppressions faites par un outil externe, ni des liens que le banc créerait lui-même vers l'extérieur. Le dégât a été réparable (`git checkout` pour la feuille, réécriture pour un registre non encore versionné) ; un fichier non versionné, lui, serait perdu sans trace.
+
+**Suite.** Faire lire ce cas par tout nouveau banc : la copie n'est pas un bac à sable, c'est une arborescence de liens. Étendre `cible` aux bancs existants lors de leur prochaine retouche.
+
+Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
+
+### `une-dette-d-affichage-se-compte-ou-se-perd` — Une règle d'affichage dynamique qui n'est pas comptée se perd un palier à la fois
+
+*Consignée le 2026-10-31.*
+
+**Constat.** La règle écrite le 30 octobre 2026 — pas de valeurs fixes de fenêtre, l'agencement mesure l'espace disponible — ne portait que sur un panneau. La feuille `assets/css/site.css` contenait 66 blocs `@media` et personne ne savait combien reposaient sur une taille d'écran supposée. Deux écritures différentes d'une même condition y vivaient même côte à côte (`(max-width:760px)` à côté de `(max-width: 760px)`, `(forced-colors:active)` à côté de `(forced-colors: active)`) : un comptage naïf aurait annoncé un palier de plus qu'il n'en existait.
+
+**Ce que cela change.** `outils/compter-paliers.py` relève chaque `@media`, canonise la condition, la classe (`format` si elle dépend d'une largeur, d'une hauteur ou de l'orientation ; `preference` si elle suit un réglage de la personne) et la confronte à `docs/rd/paliers-affichage.toml`, qui exige pour chaque condition de format une raison écrite, une décision (`dette` ou `assume`) et un compte exact. Une augmentation échoue — « un palier de plus est un écran de plus que le site présume » —, une diminution aussi, avec un autre message : c'est une avancée à dater. `--mettre-a-jour` inscrit les paliers inconnus avec une raison **vide**, que la vérification refuse ensuite : le script ne peut pas blanchir ce qu'il vient de découvrir. Banc de 19 cas, dont trois sources illisibles qui doivent sortir en code 2.
+
+**Preuves dans le dépôt :**
+
+- `outils/compter-paliers.py`
+- `outils/test_paliers_affichage.py`
+- `docs/rd/paliers-affichage.toml`
+- `assets/css/site.css`
+- `docs/rd/formats-affichage.md`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `python3 outils/compter-paliers.py --releve && python3 outils/test_paliers_affichage.py`
+
+**Limite — ce que cela ne prouve pas.** Le contrôle compte les `@media` d'une seule feuille (`assets/css/site.css`) ; la feuille de l'aventure et celle du simulateur embarqué ne sont pas relevées, et une condition écrite sous `@supports` échapperait au compte. Il ne juge pas les raisons : une phrase de quarante caractères passe, même fausse. Enfin, le relevé du 31 octobre 2026 — 17 conditions de format, 45 blocs, 15 en dette — est un compte de **déclarations**, pas une mesure de ce que les gens voient : il ne dit pas quel écran réel tombe de quel côté d'un palier.
+
+**Suite.** Résorber la dette par ordre de rentabilité : les trois paliers de grilles (1000, 981, 601 px, treize blocs) s'obtiennent en `auto-fit`/`minmax` sans condition ; puis le seuil 1260/1261 px, tenu à la main en deux endroits ; puis le cas paysage court, qui suppose qu'un écran bas est forcément étroit. Étendre le relevé à `anglais-aventure.css` et à l'habillage du simulateur.
+
+Initiatives liées : `optimisation-du-site`, `coordination-de-tous-les-agents`.
 
 ## 3. Ce que ce registre ne dit pas
 

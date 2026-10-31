@@ -1,0 +1,154 @@
+# Registre des paliers d'affichage : ce que le site présume de la fenêtre.
+#
+# Tenu par `outils/compter-paliers.py`, éprouvé par
+# `outils/test_paliers_affichage.py`. Une entrée par condition `@media` qui
+# dépend de la taille de la fenêtre — les conditions de préférence
+# (`prefers-*`, `forced-colors`, `any-pointer`, impression, densité) ne sont pas
+# listées : elles ne présument aucune taille, elles suivent un réglage.
+#
+# Trois champs obligatoires :
+#   `presume`   ce que ce palier suppose de la fenêtre de la personne ;
+#   `decision`  `dette` (à résorber par une mesure) ou `assume` (choix tenu, raison écrite) ;
+#   `occurrences` le nombre de blocs `@media` portant cette condition.
+#
+# Une augmentation du compte échoue : un palier de plus est un écran de plus que
+# le site présume. Une diminution échoue aussi, avec un autre message : c'est une
+# avancée à dater, pas un détail à laisser filer. Le 31 octobre 2026, le relevé
+# donnait 17 conditions de format pour 45 blocs, dont 15 en dette.
+
+[releve]
+date = 2026-10-31
+feuille = "assets/css/site.css"
+condition_total = 17
+bloc_total = 45
+
+# Le palier principal : sous 760 px, le site décide qu'il est sur téléphone.
+# C'est celui qui porte le plus de décisions et donc la plus grosse dette.
+[[condition]]
+condition = "(max-width: 760px)"
+classe = "format"
+occurrences = 15
+presume = "Sous 760 px, la fenêtre est un téléphone ou une tablette étroite. Le palier décide du repli du menu, de la grille des commandes d'en-tête, des colonnes de fiches et de la largeur du panneau de personnalisation. Rien ici n'a été mesuré : 760 px est une valeur choisie, et quinze blocs en dépendent."
+decision = "dette"
+
+[[condition]]
+condition = "(max-width: 520px)"
+classe = "format"
+occurrences = 9
+presume = "Sous 520 px, une rangée de deux boutons ne tient plus côte à côte : les commandes d'en-tête passent sur deux colonnes égales et les grilles se réduisent à une colonne. La limite vient d'un calcul de libellés (Menu, Personnalisation) à la police par défaut, pas d'une mesure de la rangée réelle."
+decision = "dette"
+
+[[condition]]
+condition = "(max-width: 1000px)"
+classe = "format"
+occurrences = 6
+presume = "Sous 1000 px, les grilles de trois ou quatre cartes passent à deux colonnes. C'est une décision de confort de lecture prise à une largeur ronde, alors qu'un `auto-fit` avec largeur minimale de carte donnerait le même résultat à toute largeur, sans palier."
+decision = "dette"
+
+# Deux écritures pour une seule décision : le menu se replie sous 1260 px, et la
+# rangée de liens reprend toute la largeur au-dessus. Les deux doivent rester
+# cohérentes, sinon il existe une largeur où le menu est replié dans une rangée
+# pleine largeur — ou l'inverse.
+[[condition]]
+condition = "(max-width: 1260px)"
+classe = "format"
+occurrences = 2
+presume = "Sous 1260 px, la rangée de liens du menu ne tient plus sur une ligne avec ses dix entrées, et la bascule « Menu » remplace la rangée. Le seuil dépend du nombre de liens et de la police, deux choses qui changent — il est écrit une fois pour toutes, puis répété en `min-width: 1261px`."
+decision = "dette"
+
+[[condition]]
+condition = "(min-width: 1261px)"
+classe = "format"
+occurrences = 1
+presume = "Au-dessus de 1260 px, la rangée de liens reprend toute la largeur disponible et peut passer sur deux lignes plutôt que tronquer le premier et le dernier lien. C'est la moitié haute d'un seuil dont la moitié basse est `(max-width: 1260px)` : deux conditions à tenir ensemble, à la main."
+decision = "dette"
+
+[[condition]]
+condition = "(min-width: 1041px)"
+classe = "format"
+occurrences = 1
+presume = "Au-dessus de 1040 px, le pied de page passe à quatre colonnes et les listes de liens à deux colonnes. La valeur est choisie pour que les quatre colonnes ne tassent pas les libellés de navigation ; aucune mesure du pied de page réel ne la justifie."
+decision = "dette"
+
+[[condition]]
+condition = "(min-width: 601px)"
+classe = "format"
+occurrences = 1
+presume = "Au-dessus de 600 px, la présentation « Mosaïque » affiche ses grilles sur deux colonnes. C'est le seul palier bas de cette présentation et il ne dépend d'aucune mesure de carte : la même grille en `auto-fit` s'en passerait."
+decision = "dette"
+
+[[condition]]
+condition = "(min-width: 981px)"
+classe = "format"
+occurrences = 1
+presume = "Au-dessus de 980 px, la présentation « Mosaïque » passe à quatre colonnes. Quatre colonnes à 981 px donnent des cartes nettement plus étroites qu'à 1260 px, sans que le contenu soit mesuré : le palier suppose que la place ne manque pas."
+decision = "dette"
+
+[[condition]]
+condition = "(min-width: 761px)"
+classe = "format"
+occurrences = 1
+presume = "Au-dessus de 760 px, l'illustration de la page d'anglais est large de 520 px au plus et alignée à gauche du panneau. La condition est l'exact contraire du palier principal : elle existe parce que 760 px est pris comme frontière de téléphone, pas parce que l'illustration a été mesurée."
+decision = "dette"
+
+[[condition]]
+condition = "(max-width: 340px)"
+classe = "format"
+occurrences = 1
+presume = "Sous 340 px, les titres de héros descendent d'un cran typographique. Un `clamp()` sur la taille de police ferait la même chose en continu, à toute largeur, sans ce palier — qui n'a été vérifié qu'à 320 px dans les essais navigateur."
+decision = "dette"
+
+[[condition]]
+condition = "(max-width: 380px)"
+classe = "format"
+occurrences = 1
+presume = "Sous 380 px, les nœuds de la constellation de la page IA sont réduits. La valeur vient du dessin de la constellation, pas d'une mesure du texte qu'elle contient : un libellé plus long la déborderait."
+decision = "dette"
+
+[[condition]]
+condition = "(max-width: 420px)"
+classe = "format"
+occurrences = 1
+presume = "Sous 420 px, les paires de boutons d'appel à l'action occupent toute la largeur, l'un sous l'autre. C'est le seul palier de boutons du site, alors que le même effet s'obtient en laissant la paire passer à la ligne quand la place manque."
+decision = "dette"
+
+[[condition]]
+condition = "(max-width: 920px)"
+classe = "format"
+occurrences = 1
+presume = "Sous 920 px, le bloc identité et contact, les grilles de liens et les cartes de la carte des lieux passent à une colonne. La valeur est intermédiaire entre les paliers 760 et 1000 px et n'a pas de raison propre : elle évite une colonne trop tassée, sans la mesurer."
+decision = "dette"
+
+# Le cas « paysage court » : un téléphone couché, ou une fenêtre écrasée en
+# hauteur. C'est le format que la personne utilisatrice a nommé le 30 octobre
+# 2026 en disant que personne ne travaille en plein écran.
+[[condition]]
+condition = "(orientation: landscape) and (max-height: 560px) and (max-width: 920px)"
+classe = "format"
+occurrences = 1
+presume = "En paysage et sous 560 px de haut (téléphone couché, fenêtre écrasée en hauteur), l'en-tête cesse d'être collant, l'identité se réduit et les héros raccourcissent. Le triple seuil suppose qu'un écran court est forcément étroit : une fenêtre de 1200 px de large et 500 px de haut n'en bénéficie pas, alors qu'elle manque autant de hauteur."
+decision = "dette"
+
+[[condition]]
+condition = "(max-width: 760px), (orientation: landscape) and (max-height: 560px) and (max-width: 920px)"
+classe = "format"
+occurrences = 1
+presume = "Le panneau du menu et la rangée de commandes d'en-tête cumulent les deux conditions précédentes pour se placer sous une barre parfois haute. Ce bloc répète à la main une décision déjà écrite deux fois ; il se désynchronisera au premier changement."
+decision = "dette"
+
+# Deux planchers de survie assumés : en dessous, ce n'est plus un écran réel,
+# c'est un cadre d'aperçu ou une fenêtre délibérément minuscule. Ils restent,
+# avec leur raison, plutôt que d'être découverts un jour par un débordement.
+[[condition]]
+condition = "(max-width: 300px)"
+classe = "format"
+occurrences = 1
+presume = "Sous 300 px, les commandes d'en-tête passent sur une seule colonne : à deux colonnes, des boutons de 19 px ne contenaient plus leur libellé. Aucun appareil consulté ici n'est plus étroit ; ce plancher protège les cadres d'aperçu et les fenêtres réduites à la main."
+decision = "assume"
+
+[[condition]]
+condition = "(max-width: 240px)"
+classe = "format"
+occurrences = 1
+presume = "Sous 240 px, le nom du site laisse la place aux deux commandes. C'est le plancher du survivant : en dessous, plus rien ne tient, et l'essai navigateur à 240 px vérifie seulement que le panneau ne sort pas de l'écran. Assumé, parce qu'aucune taille d'appareil ne s'y trouve et qu'il vaut mieux un plan de secours écrit qu'un débordement découvert par hasard."
+decision = "assume"
