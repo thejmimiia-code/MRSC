@@ -81,6 +81,36 @@ def ouvrir(dossier: Path, relatif: str, racine: Path = RACINE) -> Path:
     return courant / morceaux[-1]
 
 
+def cible(dossier: Path, relatif: str, racine: Path = RACINE) -> Path:
+    """Chemin **réel** dans la copie, prêt à être lu, écrit ou supprimé.
+
+    `copie_jetable` remplit la copie de liens symboliques : `copie/assets` pointe
+    vers le dépôt. Écrire `copie / "assets/css/site.css"`, ou y appeler
+    `unlink()`, atteint donc le fichier d'origine. Le 31 octobre 2026, un banc a
+    ainsi supprimé le vrai `assets/css/site.css` et le registre des paliers en
+    croyant éprouver une copie.
+
+    Cette fonction matérialise le chemin, puis **refuse de le rendre s'il sort de
+    la copie** : une garde qui échoue bruyamment vaut mieux qu'une restauration
+    par `git checkout` qu'on oublie.
+    """
+    chemin = ouvrir(dossier, relatif, racine)
+    if chemin.is_symlink():
+        chemin.unlink()
+    if not chemin.exists():
+        originale = racine / relatif
+        if originale.is_file():
+            shutil.copyfile(originale, chemin)
+        else:
+            chemin.mkdir(parents=True, exist_ok=True)
+    if not chemin.resolve().is_relative_to(dossier.resolve()):
+        raise AssertionError(
+            f"{relatif} : le chemin résolu sort de la copie ({chemin.resolve()}) — "
+            "une écriture ici toucherait le dépôt"
+        )
+    return chemin
+
+
 def muter(dossier: Path, relatif: str, ancien: str, nouveau: str, racine: Path = RACINE) -> None:
     """Remplace un fragment dans une copie réelle du fichier, jamais dans l'original.
 

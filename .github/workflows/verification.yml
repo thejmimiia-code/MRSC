@@ -343,6 +343,20 @@ jobs:
       - name: Vérifier le placement mesuré du panneau de personnalisation
         run: node outils/test_placement_panneau.mjs
 
+      # Depuis le 30 octobre 2026, la règle est écrite : l'agencement ne repose
+      # plus sur des valeurs fixes de fenêtre. Une règle pareille se perd un
+      # palier à la fois — d'où ce compte. Il relève chaque `@media` de
+      # `assets/css/site.css`, distingue les conditions de format (largeur,
+      # hauteur, orientation) des préférences de la personne, et exige pour
+      # chaque condition de format une raison écrite et une décision dans
+      # `docs/rd/paliers-affichage.toml`. Le 31 octobre 2026 : 17 conditions de
+      # format, 45 blocs, 15 en dette. Le banc plante 19 fautes, dont trois
+      # sources illisibles qui doivent sortir en code 2 plutôt qu'en vert.
+      - name: Compter les paliers d’affichage
+        run: |
+          python3 outils/compter-paliers.py --releve
+          python3 outils/test_paliers_affichage.py
+
   graphismes:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
