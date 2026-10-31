@@ -380,6 +380,31 @@ class TestModeleGrilles(unittest.TestCase):
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("ne décide rien", resultat.stderr)
 
+    def test_un_plafond_en_width_sur_un_enfant_de_grille_flex_est_refuse(self) -> None:
+        """En flex, `flex-basis` remplace la largeur : le plafond ne décide plus rien.
+
+        C'est le défaut du 31 octobre 2026, trouvé par la mesure navigateur et
+        non par le modèle : `.english-promo-art` plafonnait son image avec
+        `width: min(100%, 520px)` pour rendre vraie sa déclaration `sizes`.
+        Une fois son conteneur passé en `flex-wrap` et ses présentations en
+        `flex-basis: 100%`, la largeur venait du `flex-basis` : l'image montait à
+        879 px, le navigateur servait la variante de 800 px, densité 0,91.
+        Ce banc reproduit la régression — remettre `width` à la place de
+        `max-width` — et exige que le modèle, lui aussi, la refuse.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                FEUILLE,
+                ".english-promo-art { max-width: 520px; }",
+                ".english-promo-art { width: min(100%, 520px); }",
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("plafond en `width`", resultat.stderr)
+        self.assertIn("english-promo-art", resultat.stderr)
+
     def test_declaration_qui_ne_decide_rien_est_refusee(self) -> None:
         """Un `@media` qui réécrit la valeur déjà en vigueur ne protège de rien.
 

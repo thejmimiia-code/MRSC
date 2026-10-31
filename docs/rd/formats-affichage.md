@@ -1331,3 +1331,32 @@ et le chiffre est écrit pour que la décision ne se prenne pas au jugé.
 État : 22 grilles dynamiques, 5 fixes, **2 en `flex-wrap`**, 12 « proportion » et
 6 « borne » restantes, **192 règles** sous condition de largeur (214 en début de
 journée).
+
+## 19. Un plafond n'est pas une largeur : `max-width` sur une boîte flexible (31 octobre 2026)
+
+Le plafond de `.english-promo-art` était écrit `width: min(100%, 520px)`, et il
+tenait : dans une **grille**, un élément garde la largeur qu'on lui donne, la
+piste se contentant de le contenir. Dès que ses présentations passent les
+panneaux à `flex-basis: 100%`, la largeur de la boîte **vient du `flex-basis`** :
+le plafond en `width` cesse d'agir sans disparaître, et rien dans la feuille ne
+le signale.
+
+Conséquence mesurée, pas supposée : en présentation Lecture à 1024 px, l'image
+remontait à **879 px**, le navigateur — qui croyait encore la déclaration
+`sizes` à 520 px — servait la variante de 800 px, et la densité tombait à
+**0,91**. Le contrôle navigateur l'a vu (`densité insuffisante`) ; le modèle
+statique, non.
+
+D'où deux règles, désormais contrôlées :
+
+1. un plafond destiné à rendre vraie une déclaration `sizes` s'écrit
+   **`max-width`** — cette propriété s'applique à la taille principale d'une
+   boîte flexible (CSS Flexbox, § 9.2), contrairement à `width` ;
+2. `modele-grilles.py --verifier` refuse un `width: min(100%, Npx)` posé sur un
+   **enfant direct** d'une grille déclarée en `flex-wrap`, en le nommant : la
+   ligne, la classe et la propriété à écrire. Les enfants sont lus dans les
+   pages HTML, pas devinés : une grille absente des pages est dite non mesurée.
+
+Limite : le contrôle ne voit que la forme `min(100%, Npx)`. Un plafond écrit
+`width: 520px`, `width: 65ch` ou `inline-size` lui échappe encore, et une
+présentation qui plafonnerait autrement qu'en `flex-basis` aussi.
