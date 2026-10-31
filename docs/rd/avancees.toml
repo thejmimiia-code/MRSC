@@ -257,7 +257,7 @@ preuves = [
   "docs/rd/formats-affichage.md",
 ]
 controle = "node outils/test_placement_panneau.mjs && python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py"
-limite = "Le banc sans navigateur éprouve l'arithmétique, pas le rendu : un `visualViewport` réel, un zoom de page, un clavier virtuel ou un `backdrop-filter` qui déplace le référentiel peuvent se comporter autrement. C'est l'essai navigateur qui tranche, et son premier passage réel est celui de sa PR. Le placement dépend aussi d'un script : sans JavaScript, le panneau reste lisible mais pas nécessairement bien placé, et c'est écrit dans la feuille de style comme un repli assumé."
+limite = "Trois défauts ont été trouvés avant la fusion, et aucun ne se voyait à la lecture : une borne de hauteur qui ne réservait pas la marge du bas (banc sans navigateur), un panneau qui gardait les coordonnées de l'en-tête agrandi après réduction, et un panneau restauré ouvert par Chromium après `load` sans aucun événement `toggle` (les deux derniers par la CI). Le banc sans navigateur éprouve l'arithmétique, pas le rendu : un `visualViewport` réel, un zoom de page, un clavier virtuel ou un `backdrop-filter` qui déplace le référentiel peuvent se comporter autrement ; l'essai navigateur tranche, et il est vert depuis l'exécution 41195802262. Le placement dépend aussi d'un script : sans JavaScript, le panneau reste lisible mais pas nécessairement bien placé, et c'est écrit dans la feuille de style comme un repli assumé."
 suite = "Lire le premier passage en CI de l'essai à huit formats et quatre redimensionnements ; s'il tombe, savoir lequel des deux niveaux se trompe — le calcul sans navigateur ou le rendu."
 initiatives = ["optimisation-du-site", "documentation-rd-eva"]
 

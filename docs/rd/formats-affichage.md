@@ -453,6 +453,18 @@ Deux contrôles, à deux niveaux :
   écrasé en hauteur, rétréci en largeur, plein écran) — c'est la promesse
   dynamique, mesurée.
 
+**Ce que ces contrôles ont trouvé, et qui ne se voyait pas à la lecture :**
+
+| Trouvé par | Défaut |
+| --- | --- |
+| `test_placement_panneau.mjs` (sans navigateur) | la borne de hauteur ne réservait pas la marge du bas : fenêtre 320 px, en-tête 180 px → dépassement de 8 px |
+| CI, essai à 980 × 440 | le panneau gardait les coordonnées de l'en-tête **agrandi** (left = −203 px) : réduire l'en-tête déplace le bouton, et le `ResizeObserver` de l'en-tête ne suffisait pas |
+| CI, essai à 800 × 500 | panneau ouvert **sans aucun style en ligne** : Chromium restaure `<details open>` après `load`, sans émettre `toggle` |
+
+Les deux derniers sont traités à la source : `setHeaderCompact` replace
+explicitement après avoir rangé les commandes, et un `MutationObserver` sur
+l'attribut `open` attrape la restauration du navigateur comme un clic.
+
 ## 6 sexies. Finitions du panneau : la qualité se mesure aussi à l'écran (23 octobre 2026)
 
 Retour d'usage après la fusion : « c'est un affichage de haute qualité qu'il faut,
