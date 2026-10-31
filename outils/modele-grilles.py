@@ -691,6 +691,137 @@ def appliquer_capacites(grilles: dict[str, Grille], capacites: dict[str, dict]) 
             grille.items = max(capacite["items"])
 
 
+def pistes(valeur: str) -> list[str]:
+    """Découpe une valeur de `grid-template-columns` en pistes de premier niveau."""
+    morceaux, profondeur, courant = [], 0, ""
+    for caractere in valeur:
+        if caractere == "(":
+            profondeur += 1
+        elif caractere == ")":
+            profondeur -= 1
+        if caractere == " " and profondeur == 0:
+            if courant:
+                morceaux.append(courant)
+            courant = ""
+            continue
+        courant += caractere
+    if courant:
+        morceaux.append(courant)
+    return morceaux
+
+
+def nature_piste(piste: str) -> tuple[str, float | None, float | None]:
+    """`(nature, minimum, maximum)` d'une piste : `contenu`, `fixe` ou `souple`."""
+    piste = piste.strip()
+    if piste in ("auto", "max-content", "min-content", "fit-content"):
+        return "contenu", None, None
+    borne = re.match(r"^minmax\(\s*([^,]+?)\s*,\s*(.+?)\s*\)$", piste)
+    if borne:
+        bas, haut = borne.group(1), borne.group(2)
+        if bas in ("auto", "max-content", "min-content") or haut in ("auto", "max-content", "min-content"):
+            return "contenu", None, None
+        borne_basse = re.match(r"^([\d.]+)(px|rem)$", bas)
+        minimum = float(borne_basse.group(1)) * (16 if borne_basse.group(2) == "rem" else 1) if borne_basse else 0.0
+        return "souple", minimum, None
+    if re.match(r"^[\d.]+fr$", piste):
+        return "souple", 0.0, float(piste[:-2])
+    mesure = re.match(r"^([\d.]+)(px|rem)$", piste)
+    if mesure:
+        valeur = float(mesure.group(1))
+        return "fixe", valeur * (16 if mesure.group(2) == "rem" else 1), None
+    return "contenu", None, None
+
+
+def colonnes_de_la_cascade(grille: Grille, largeur: int) -> int:
+    """Colonnes que la feuille actuelle prescrit à cette largeur, pistes inégales comprises.
+
+    `colonnes_anciennes` ne lit que les règles qui **déclarent** un nombre de
+    colonnes ; une grille à pistes inégales y répondait toujours « 1 », et le
+    moindre calcul de flexion comparé à ce chiffre paraissait faux. Ici, une
+    valeur inégale est comptée par ses pistes : `minmax(0, 1.15fr) minmax(280px,
+    .75fr)` vaut deux colonnes tant que la règle de base s'applique.
+    """
+    en_vigueur = None
+    for regle in sorted(grille.regles, key=lambda x: x.ordre):
+        if applique(regle, largeur):
+            en_vigueur = regle
+    if en_vigueur is None:
+        return 1
+    if en_vigueur.colonnes:
+        return en_vigueur.colonnes
+    if en_vigueur.minimum:
+        return auto_fit(en_vigueur.minimum, grille.gap, largeur, grille.items)
+    return max(1, len(pistes(en_vigueur.valeur)))
+
+
+def pistes_des_inegales(
+    grilles: dict[str, Grille], capacites: dict[str, dict] | None = None
+) -> list[dict]:
+    """Ce qu'un `flex-wrap` exprimerait d'une grille à pistes inégales — et ce qu'il ne peut pas.
+
+    Trois réponses, et deux valent d'être dites :
+
+    - `contenu` : une piste `auto` ou `max-content` fait dépendre le repli du
+      **texte**, pas de l'arithmétique. Aucun modèle ne peut trancher sans
+      navigateur ; le script le dit au lieu de proposer un chiffre.
+    - `proportion` : toutes les pistes sont souples avec un plancher en pixels.
+      Un `flex: <g> 1 <plancher>` par élément reproduit le rapport, et le repli
+      tombe quand `n × plancher + (n-1) × écart` dépasse le conteneur. L'écart
+      avec la cascade actuelle est calculable — donc la décision peut se prendre
+      sur des nombres.
+    - `fixe` : des pistes en pixels ; rien à rendre dynamique.
+    """
+    capacites = capacites or {}
+    resultats = []
+    for grille in asymetriques(grilles):
+        items = (capacites.get(grille.selecteur) or {}).get("items") or []
+        grille.items = max(items) if items else 0
+        valeur = grille.valeur_asymetrique
+        if valeur.startswith("repeat("):
+            resultats.append({"selecteur": grille.selecteur, "forme": "motif", "valeur": valeur})
+            continue
+        natures = [nature_piste(p) for p in pistes(valeur)]
+        if not natures:
+            resultats.append({"selecteur": grille.selecteur, "forme": "illisible", "valeur": valeur})
+            continue
+        if any(nature == "contenu" for nature, _, _ in natures):
+            resultats.append({"selecteur": grille.selecteur, "forme": "contenu", "valeur": valeur})
+            continue
+        if all(nature == "fixe" for nature, _, _ in natures):
+            resultats.append({"selecteur": grille.selecteur, "forme": "fixe", "valeur": valeur})
+            continue
+        plancher = max((minimum or 0.0) for nature, minimum, _ in natures if nature == "souple")
+        if plancher <= 0:
+            resultats.append({"selecteur": grille.selecteur, "forme": "contenu", "valeur": valeur})
+            continue
+        # `flex-wrap` ne crée pas d'élément : une grille à deux panneaux n'en
+        # affichera jamais trois, même si deux planchers de 280 px tiennent trois
+        # fois dans 1 160 px. Le 31 octobre 2026, l'oubli de cette borne avait
+        # déjà produit un faux rapport sur les grilles `auto-fit` ; il est évité
+        # ici avant d'écrire la moindre ligne de CSS.
+        items = grille.items
+        ecarts = 0
+        for largeur in LARGEURS:
+            place = conteneur(largeur)
+            colonnes = 1
+            while (colonnes + 1) * plancher + colonnes * grille.gap <= place:
+                colonnes += 1
+            if items:
+                colonnes = min(colonnes, items)
+            if colonnes != colonnes_de_la_cascade(grille, largeur):
+                ecarts += 1
+        resultats.append(
+            {
+                "selecteur": grille.selecteur,
+                "forme": "proportion",
+                "valeur": valeur,
+                "plancher": int(plancher),
+                "ecarts": ecarts,
+            }
+        )
+    return resultats
+
+
 def etat(grilles: dict[str, Grille], capacites: dict[str, dict] | None = None) -> list[dict]:
     """Le tableau : grille, colonnes de base, paliers restants, recommandation."""
     capacites = capacites or {}
@@ -896,6 +1027,11 @@ def principal(arguments: list[str] | None = None) -> int:
         help="imprimer, grille par grille, le minimum que la règle de calcul donne",
     )
     analyseur.add_argument(
+        "--pistes",
+        action="store_true",
+        help="dire ce qu'un `flex-wrap` exprimerait des grilles à pistes inégales",
+    )
+    analyseur.add_argument(
         "--verifier",
         action="store_true",
         help="contrôle les grilles converties contre docs/rd/grilles-dynamiques.toml",
@@ -1019,6 +1155,45 @@ def principal(arguments: list[str] | None = None) -> int:
             )
             for grille in inegales:
                 print(f"  {grille.selecteur:32} {grille.valeur_asymetrique[:60]}")
+        return 0
+
+    if options.pistes:
+        capacites_inegales = lire_capacites(
+            RACINE, [g.selecteur for g in asymetriques(grilles)]
+        )
+        resultats = pistes_des_inegales(grilles, capacites_inegales)
+        formes: dict[str, int] = {}
+        for resultat in resultats:
+            formes[resultat["forme"]] = formes.get(resultat["forme"], 0) + 1
+        print(
+            f"{len(resultats)} grilles à pistes inégales : "
+            + ", ".join(f"{nombre} {forme}" for forme, nombre in sorted(formes.items()))
+        )
+        print(
+            "  contenu   : une piste `auto` ou `max-content` fait dépendre le repli du texte — "
+            "aucun modèle ne le tranche sans navigateur"
+        )
+        print("  proportion : un `flex: <g> 1 <plancher>px` reproduirait le rapport entre colonnes")
+        print("  motif / fixe / illisible : rien à rendre dynamique")
+        for resultat in resultats:
+            if resultat["forme"] == "proportion":
+                print(
+                    f"  {resultat['selecteur'][:44]:44} plancher {resultat['plancher']}px · "
+                    f"{resultat['ecarts']} largeur(s) sur {len(LARGEURS)} diffèrent de la cascade"
+                )
+            else:
+                print(f"  {resultat['selecteur'][:44]:44} {resultat['forme']}")
+        proches = [
+            r for r in resultats if r["forme"] == "proportion" and r["ecarts"] <= len(LARGEURS) // 8
+        ]
+        print(
+            f"{len(proches)} grille(s) changeraient de nombre de colonnes sur moins d'un huitième "
+            "du balayage : ce sont les seules qu'un `flex-wrap` remplacerait sans redessiner."
+        )
+        print(
+            "  Rien n'est écrit dans la feuille : ce relevé mesure avant de convertir, "
+            "et un rendu réel (contenu, ratio, hauteur) demanderait un navigateur."
+        )
         return 0
 
     capacites = lire_capacites(RACINE, [g.selecteur for g in convertibles(grilles)])

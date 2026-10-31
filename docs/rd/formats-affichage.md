@@ -1250,3 +1250,29 @@ Au passage, une erreur de classement corrigée : `repeat(3, 1fr)` et `1fr 1fr`
 étaient lues comme des pistes **inégales**, faute d'être écrites avec `minmax`.
 Le compte passe de 34 à **30** grilles inégales, et de 33 à **36** grilles à
 pistes égales.
+
+## 16. Mesurer avant d'écrire : `flex-wrap` sur les pistes inégales (31 octobre 2026)
+
+Les 30 grilles à pistes inégales gardent leurs paliers — mais est-ce un
+raccommodage ou la seule façon de tenir deux colonnes de largeurs différentes ?
+`modele-grilles.py --pistes` répond en trois familles, **sans toucher à la
+feuille** :
+
+| Famille | Nombre | Ce que cela veut dire |
+| --- | --- | --- |
+| `contenu` | 14 | une piste `auto` / `max-content` : le repli dépend du **texte**, aucun modèle ne le tranche sans navigateur |
+| `proportion` | 15 | un `flex: <g> 1 <plancher>px` reproduirait le rapport ; l'écart avec la cascade est calculable |
+| `motif` | 1 | `repeat(…)` imbriquée : rien à rendre dynamique |
+
+Écarts mesurés sur 233 largeurs : **4** pour `.ai-hero-grid`, 13 à 18 pour
+`.hero-grid`, `.participation-grid`, `.learning-work-panel`, `.english-promo-panel`,
+24 à 32 pour `.learning-article-layout`, `.ai-questions-layout`, `.map-layout`,
+et **179 à 221** pour `.ai-feature-panel`, `.simulateur-promo-panel`,
+`.learning-coverage-topic`. **11 grilles** changent de colonnes sur moins d'un
+huitième du balayage : ce sont les seules qu'un `flex-wrap` remplacerait sans
+redessiner.
+
+Deux erreurs de calcul ont été corrigées avant d'écrire quoi que ce soit :
+comparer à `colonnes_anciennes` (qui répond toujours « 1 » pour une grille
+inégale) et oublier la borne par la capacité mesurée. Ce sont les deux erreurs
+qui avaient coûté deux journées sur les grilles égales.

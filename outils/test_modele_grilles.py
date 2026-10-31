@@ -136,6 +136,35 @@ class TestModeleGrilles(unittest.TestCase):
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("la feuille en donne 2", resultat.stderr)
 
+    def test_les_pistes_d_une_valeur_sont_lues_au_premier_niveau(self) -> None:
+        """`minmax(0, 1.15fr) minmax(280px, .75fr)` fait deux pistes, pas quatre."""
+        self.assertEqual(
+            self.modele.pistes("minmax(0, 1.15fr) minmax(280px, .75fr)"),
+            ["minmax(0, 1.15fr)", "minmax(280px, .75fr)"],
+        )
+        self.assertEqual(
+            self.modele.nature_piste("minmax(280px, .75fr)")[0], "souple"
+        )
+        self.assertEqual(self.modele.nature_piste("auto")[0], "contenu")
+        self.assertEqual(self.modele.nature_piste("44px")[:2], ("fixe", 44.0))
+
+    def test_une_piste_auto_ne_se_decide_pas_sans_navigateur(self) -> None:
+        """Une piste `auto` fait dépendre le repli du texte : le modèle doit le dire."""
+        self.assertEqual(self.modele.nature_piste("max-content")[0], "contenu")
+        self.assertEqual(self.modele.nature_piste("minmax(auto, 1fr)")[0], "contenu")
+
+    def test_la_cascade_compte_les_pistes_inegales(self) -> None:
+        """`colonnes_anciennes` répond « 1 » pour une grille inégale : ce n'est pas sa forme."""
+        grille = self.modele.Grille(selecteur=".inégale", gap=16)
+        grille.regles = [
+            self.modele.Regle(
+                [".inégale"], "minmax(0, 1.15fr) minmax(280px, .75fr)", None, None, None, None, 1, 0
+            ),
+            self.modele.Regle([".inégale"], "minmax(0, 1fr)", 1, None, 760, None, 2, 1),
+        ]
+        self.assertEqual(self.modele.colonnes_de_la_cascade(grille, 1160), 2)
+        self.assertEqual(self.modele.colonnes_de_la_cascade(grille, 700), 1)
+
     def test_une_grille_a_pistes_inegales_n_est_pas_convertible(self) -> None:
         """`1fr auto` n'est pas un nombre de colonnes : le modèle doit le dire, pas le convertir.
 
