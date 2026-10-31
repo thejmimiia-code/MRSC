@@ -198,3 +198,14 @@ minimum = 380
 items = [5]
 seuil_une_colonne = 760
 raison = "Cinq leçons de la page fraude : trois colonnes feraient 3 + 2, deux colonnes font 2 + 2 + 1 — le dessin existant, que le minimum conserve."
+
+# — Dernière grille égale sous palier, 31 octobre 2026 : `.ai-path-steps` passe
+# de cinq colonnes fixes à une largeur de piste. La cascade imposait
+# `repeat(3, …)` sous 520 px et recentrait la dernière étape par
+# `li:last-child { grid-column: 2 }` ; les deux règles disparaissent ensemble.
+[[grille]]
+selecteur = ".ai-path-steps"
+colonnes = 5
+minimum = 220
+items = [5]
+raison = "Cinq étapes du parcours de la page IA : le plus large minimum qui garde cinq colonnes au conteneur maximal. Sous 520 px, l'ancienne cascade repliait à trois colonnes — un chiffre choisi, qui laissait des cartes de 59 px à 240 px de fenêtre ; la largeur de piste les remplace par un repli progressif."

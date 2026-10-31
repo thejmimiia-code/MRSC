@@ -2468,7 +2468,14 @@ html.contraste-renforce .resource-scope-note {
 
 .ai-path-steps {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  /* Cinq étapes au conteneur maximal, puis quatre, trois, deux, une — le
+     nombre de colonnes suit la largeur de piste, jamais une largeur d'écran.
+     La règle du 31 octobre 2026 donne 220 px : le plus large minimum qui
+     laisse encore cinq colonnes à 1 160 px de conteneur. Le palier de 520 px
+     qui imposait `repeat(3, …)` et recentrait la dernière étape est supprimé ;
+     il ne servait qu'à rattraper des cartes de 59 px de large à 240 px de
+     fenêtre. */
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
   gap: .5rem;
   margin: 0;
   padding: 0;
@@ -2679,15 +2686,6 @@ html.contraste-renforce .resource-scope-note {
 
   .ai-form-card h3 {
     min-height: 0;
-  }
-
-  .ai-path-steps {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    row-gap: 1rem;
-  }
-
-  .ai-path-steps li:last-child {
-    grid-column: 2;
   }
 
   .ai-sources-list {

@@ -54,7 +54,7 @@ decision = "dette"
 condition = "(max-width: 520px)"
 classe = "format"
 occurrences = 8
-regles = 70
+regles = 68
 presume = "Sous 520 px, une rangée de deux boutons ne tient plus côte à côte : les commandes d'en-tête passent sur deux colonnes égales et les grilles se réduisent à une colonne. La limite vient d'un calcul de libellés (Menu, Personnalisation) à la police par défaut, pas d'une mesure de la rangée réelle."
 decision = "dette"
 

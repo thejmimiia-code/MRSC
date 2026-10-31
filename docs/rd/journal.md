@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-31 — La dernière grille égale quitte son palier
+
+- **Initiative :** `optimisation-du-site`.
+- **Ce qui restait :** `.ai-path-steps`, les cinq étapes du parcours de la page IA. Cinq colonnes fixes, puis `repeat(3, …)` sous 520 px, et `li:last-child { grid-column: 2 }` pour recentrer la cinquième étape. C'était le dernier palier de largeur porté par une grille à pistes égales.
+- **Ce que la règle donne :** 220 px — le plus large minimum qui laisse encore cinq colonnes à 1 160 px de conteneur. Les deux règles du palier disparaissent ensemble : le recentrage de la dernière étape n'a plus de sens quand le nombre de colonnes suit la largeur de piste.
+- **Le prix, mesuré avant de convertir :** 94 largeurs de fenêtre sur 233 changeaient de nombre de colonnes, avec un écart maximal de 3. Sous 520 px, l'ancienne cascade affichait trois étapes par ligne ; la nouvelle en affiche une quand la place ne suffit plus. C'est un changement **visible**, pas une équivalence : à 400 px de fenêtre, l'ancienne grille donnait trois cartes de 112 px, la nouvelle une carte de 352 px. Les cartes de 59 px mesurées à 240 px de fenêtre disparaissent.
+- **Ce que je ne peux pas prouver :** le rendu réel. Chromium reste indisponible en sandbox (un banc navigateur sort en code 2, jamais vert), et la seule vérification possible ici est arithmétique. Le modèle suppose le conteneur `min(1160, W − 48)` et la grille dans `.container` — vrai sur cette page — mais il ne dit rien du cercle de 44 px dans une piste de 220 px, ni d'un libellé long sur deux lignes. C'est écrit comme limite, pas comme vérification.
+- **État :** **22 grilles dynamiques**, **aucune grille à pistes égales sous palier de largeur**, 34 grilles à pistes inégales assumées, **195 règles** sous condition de largeur (197 avant ce lot, 214 avant les trois lots du jour).
+- **Contrôles exécutés :** `modele-grilles.py --verifier` (22 grilles) · `test_modele_grilles.py` (20 cas) · `compter-paliers.py` (17 conditions, 38 blocs, 195 règles) · `test_paliers_affichage.py` (20 cas) · `verifier-affichages.py` et `test_mutations_affichages.py` · `versionner-css-ia.py` (`359936b543bca0ae`) · `verifier-integration.py` · `verifier-site-statique.py` (99 pages) · `verifier-publication-locale.py` (136 fichiers).
+- **Prochaine action :** ce qui reste sous condition de largeur n'est plus une grille à convertir mais des **paliers de mise en page** (marges, hauteurs, en-tête) et les **présentations** choisies par l'utilisateur (`compacte`, `lecture`, `panorama`, `vitrine`), qui réimposent des nombres de colonnes. Décider, mesure en main, si ces dernières relèvent de la même règle ou d'un choix explicite qui a le droit d'être fixe.
+
 ## 2026-10-31 — Neuf grilles à deux colonnes, et ce que le modèle ne savait pas compter
 
 - **Initiative :** `optimisation-du-site`.
