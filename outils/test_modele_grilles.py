@@ -344,7 +344,7 @@ class TestModeleGrilles(unittest.TestCase):
             banc_mutations.muter(
                 copie,
                 FEUILLE,
-                'html[data-layout="lecture"] main .ai-hero-grid > * { flex-basis: 100%; }',
+                'html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel) > * { flex-basis: 100%; }',
                 'html[data-layout="lecture"] main :is(.ai-hero-grid) { grid-template-columns: minmax(0,1fr); }',
             )
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
@@ -359,6 +359,26 @@ class TestModeleGrilles(unittest.TestCase):
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("écart déclaré", resultat.stderr)
+
+    def test_une_declaration_de_grille_sur_un_conteneur_flex_est_refusee(self) -> None:
+        """`justify-items` sur un conteneur flex ne décide rien.
+
+        Le palier de 761 px alignait `.english-promo-panel` par cette
+        déclaration, en même temps qu'il plafonnait son illustration. Une fois la
+        grille passée en `flex-wrap`, la moitié du palier ne faisait plus rien —
+        et aucun compteur ne le voyait, puisque la règle restait une règle.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                FEUILLE,
+                ".english-promo-panel > :first-child {",
+                ".english-promo-panel { justify-items: start; }\n.english-promo-panel > :first-child {",
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("ne décide rien", resultat.stderr)
 
     def test_declaration_qui_ne_decide_rien_est_refusee(self) -> None:
         """Un `@media` qui réécrit la valeur déjà en vigueur ne protège de rien.

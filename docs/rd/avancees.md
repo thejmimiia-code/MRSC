@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 52 |
+| Avancées consignées | 53 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
 | Contrôles exécutables cités | 62 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1087,6 +1087,30 @@ Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 **Limite — ce que cela ne prouve pas.** Le calcul suppose que le contenu se comporte comme une piste de largeur fixe : un titre long, une image à ratio ou une hauteur imposée ne s'y voient pas. Un écart de quatre largeurs sur 233 reste un écart, et seul un navigateur dirait si quelqu'un le voit — Chromium reste indisponible en sandbox. Deux erreurs de calcul ont été corrigées avant publication (comparer à `colonnes_anciennes`, qui répond toujours « 1 » pour une grille inégale, et oublier la borne par la capacité mesurée) : ce sont les deux mêmes qui avaient coûté deux journées sur les grilles égales.
 
 **Suite.** Convertir les grilles « proportion » dont l'écart tient sous 18 largeurs, une par une et relevé en main, en commençant par `.ai-hero-grid` (4 largeurs), puis vérifier dans un navigateur que le rapport entre colonnes est conservé.
+
+Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
+
+### `un-conteneur-flex-ne-lit-pas-les-declarations-de-grille` — Un conteneur flex ne lit pas les déclarations de grille — et le compteur les comptait
+
+*Consignée le 2026-10-31.*
+
+**Constat.** Le palier `@media (min-width: 761px)` de `.english-promo-panel` portait deux déclarations : le plafond de l'illustration, indispensable à sa déclaration `sizes`, et `justify-items: start` sur la grille. Une fois la grille convertie en `flex-wrap`, la seconde ne décide plus rien — mais elle reste une règle, elle continue de compter dans la dette, et aucun contrôle ne la voyait. C'est la même classe d'erreur que la déclaration morte déjà refusée pour les colonnes, étendue à toute la famille des propriétés de grille.
+
+**Ce que cela change.** `.english-promo-panel` passe en `flex-wrap` (280 px de base par panneau) : 13 largeurs sur 233 changent de nombre de colonnes, 14 px (5 %) d'écart de largeur au plus ; le palier de 760 px et le `justify-items` du palier de 761 px disparaissent. `--verifier` refuse désormais, sur une grille déclarée en `flex-wrap`, toute règle qui lui applique `grid-template-columns`, `grid-template-rows`, `grid-auto-flow` ou `justify-items`. `.participation-grid` (28 px, 9,9 % d'écart) est mesurée, retenue, et son chiffre écrit plutôt que décidé au jugé. Paliers : 192 règles (214 en début de journée).
+
+**Preuves dans le dépôt :**
+
+- `assets/css/site.css`
+- `docs/rd/grilles-dynamiques.toml`
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/formats-affichage.md`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py && python3 outils/compter-paliers.py`
+
+**Limite — ce que cela ne prouve pas.** Le rendu reste non vérifié localement : Chromium est indisponible en sandbox, et seuls les calculs de repli et de largeur de colonne sont faits. Six grilles gardent une colonne à plafond en pixels, qu'un `flex` ne reproduit pas sans `max-width` — et aucun contrôle de `max-width` n'existe encore. Un banc a échoué en cours de route parce qu'il mutait un fragment réécrit par la conversion : quand l'écriture est partagée par plusieurs conversions, le banc doit viser une condition stable.
+
+**Suite.** Convertir `.participation-grid` si sa mesure se confirme après suppression de ses paliers, puis traiter les six grilles « borne » en écrivant d'abord le contrôle de `max-width` qui manque.
 
 Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 

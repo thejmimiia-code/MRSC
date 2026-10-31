@@ -1214,6 +1214,21 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
                     f"{mesure['part']:.3f} de la colonne"
                 )
 
+        # Déclarations de grille sur un conteneur flex : inertes par définition.
+        # `justify-items: start` du palier de 761 px en était une : elle alignait
+        # les panneaux d'une grille, elle ne fait rien en flex.
+        for selecteurs, corps, lmax, lmin, ligne in regles:
+            if not any(s == selecteur or s.startswith(selecteur + " ") or s.startswith(selecteur + ">")
+                       or s.startswith(selecteur + " >") for s in selecteurs):
+                continue
+            corps_nu = re.sub(r"\s+", " ", corps)
+            for propriete in ("grid-template-columns", "grid-template-rows", "grid-auto-flow", "justify-items"):
+                if propriete in corps_nu:
+                    erreurs.append(
+                        f"{selecteur} : `{propriete}` ligne {ligne} sur un conteneur flex — "
+                        "cette déclaration ne décide rien"
+                    )
+
         # Présentations : une grille flex ne se replie pas par `grid-template-columns`.
         for selecteurs, corps, _, _, ligne in regles:
             if not any("html[data-layout" in s for s in selecteurs):

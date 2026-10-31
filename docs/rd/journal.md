@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-31 — La deuxième grille inégale, et la moitié de palier qui ne décidait plus rien
+
+- **Initiative :** `optimisation-du-site`.
+- **Ce qui a été converti :** `.english-promo-panel`, l'encart « aventure anglaise » de la page Apprendre — `flex-wrap` avec 280 px de base par panneau. Treize largeurs sur 233 changent de nombre de colonnes, une colonne peut varier de **14 px (5 %)** au plus.
+- **La trouvaille, et elle vaut pour toutes les suivantes :** le palier `@media (min-width: 761px)` contenait **deux** déclarations : le plafond de l'illustration (`width: min(100%, 520px)`, indispensable à la déclaration `sizes`) et `justify-items: start` sur la grille. Une fois la grille passée en `flex-wrap`, la seconde ne décide plus rien — mais elle reste une règle, elle continue de compter dans la dette, et aucun contrôle ne la voyait. Le journal avait déjà consigné cette classe d'erreur pour les colonnes ; elle existe pour **toutes** les propriétés de grille.
+- **Ce que le contrôle refuse désormais :** sur une grille déclarée en `flex-wrap`, toute règle qui lui applique `grid-template-columns`, `grid-template-rows`, `grid-auto-flow` ou `justify-items`. C'est la même idée que « une déclaration qui ne décide rien », étendue à la famille entière — sans quoi chaque conversion laisserait derrière elle des déclarations mortes que le compteur de règles compterait comme du travail restant.
+- **Retenu, pas converti :** `.participation-grid` mesure **28 px (9,9 %)** d'écart de largeur. C'est le double de ce qui a été accepté pour les deux premières, sur un bloc de la page d'accueil : la conversion attend, et le chiffre est écrit ici pour que la décision ne se prenne pas au jugé plus tard.
+- **Contrôles exécutés :** `modele-grilles.py --verifier` (22 dynamiques, 5 fixes, **2 flex**) · `test_modele_grilles.py` (**33 cas**, dont un nouveau : déclaration de grille sur conteneur flex) · `compter-paliers.py` (17 conditions, 38 blocs, **192 règles**) · `test_paliers_affichage.py` (20 cas) · `verifier-affichages.py` · `test_mutations_affichages.py` · `versionner-css-ia.py` (`a7ca913bca082e43`) · `verifier-integration.py` · `verifier-site-statique.py` (99 pages) · `verifier-publication-locale.py` (136 fichiers).
+- **Note de méthode :** un banc a échoué en cours de route parce qu'il mutait un fragment que la conversion venait de changer (`html[data-layout="lecture"] main .ai-hero-grid > *` devenu `:is(...)`). C'est la deuxième fois aujourd'hui qu'un banc meurt de son propre contenu : quand l'écriture d'une règle est partagée par plusieurs conversions, le banc doit viser une **condition** stable, pas la ligne exacte.
+- **Prochaine action :** `.participation-grid` (9,9 %) si sa mesure se confirme après la suppression de ses paliers, puis les six grilles `borne`, dont le plafond en pixels pourrait s'exprimer par `max-width` — mais alors il faudrait un contrôle de plus, et il n'existe pas encore.
+
 ## 2026-10-31 — La première grille à pistes inégales quitte son palier
 
 - **Initiative :** `optimisation-du-site`.

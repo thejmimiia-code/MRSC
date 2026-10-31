@@ -1311,3 +1311,23 @@ qu'une présentation impose `grid-template-columns` à une grille convertie.
 
 État : 22 grilles dynamiques, 5 fixes déclarées, 1 en `flex-wrap`,
 **194 règles** sous condition de largeur (214 en début de journée).
+
+## 18. Deuxième grille inégale, et les déclarations mortes d'un conteneur flex (31 octobre 2026)
+
+`.english-promo-panel` passe en `flex-wrap` (280 px de base par panneau) :
+**13 largeurs sur 233** changent de nombre de colonnes, une colonne peut varier
+de **14 px (5 %)** au plus.
+
+Le palier `@media (min-width: 761px)` portait deux déclarations : le plafond de
+l'illustration, indispensable à sa déclaration `sizes`, et `justify-items: start`
+sur la grille. La seconde ne décide plus rien en flex — mais elle restait une
+règle, donc du travail compté. `--verifier` refuse désormais, sur une grille
+déclarée en `flex-wrap`, toute règle qui lui applique `grid-template-columns`,
+`grid-template-rows`, `grid-auto-flow` ou `justify-items`.
+
+`.participation-grid` mesure **28 px (9,9 %)** d'écart : retenue, pas convertie,
+et le chiffre est écrit pour que la décision ne se prenne pas au jugé.
+
+État : 22 grilles dynamiques, 5 fixes, **2 en `flex-wrap`**, 12 « proportion » et
+6 « borne » restantes, **192 règles** sous condition de largeur (214 en début de
+journée).
