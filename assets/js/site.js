@@ -959,6 +959,13 @@
         headerCompactToggle.setAttribute("aria-label", description);
         headerCompactToggle.title = description;
         if (focusWouldBeHidden) headerCompactToggle.focus();
+        // L'en-tête compact ne change pas seulement de hauteur : il range ses
+        // deux commandes au début de la barre, donc le bouton se déplace de
+        // plusieurs centaines de pixels. Le panneau doit être replacé ici,
+        // explicitement — s'en remettre au seul ResizeObserver laissait le
+        // panneau aux coordonnées de l'en-tête agrandi (mesuré le 30 octobre
+        // 2026 : left = −203 px pour un bouton désormais à 169 px).
+        placerPanneauPersonnalisation();
       };
 
       headerCompactToggle.hidden = false;
