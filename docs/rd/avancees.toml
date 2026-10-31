@@ -10,6 +10,22 @@
 # agent. Une avancée sans limite écrite n'est pas une avancée, c'est une croyance.
 
 [[avancee]]
+id = "mesurer-avant-d-ecrire-ce-qu-un-flex-wrap-ferait-des-pistes-inegales"
+date = 2026-10-31
+titre = "Mesurer avant d'écrire : ce qu'un `flex-wrap` ferait des pistes inégales"
+constat = "Les 30 grilles à pistes inégales gardent leurs paliers. Était-ce un raccommodage, ou la seule façon de tenir deux colonnes de largeurs différentes ? Sans mesure, la réponse aurait été une opinion — et convertir à l'aveugle aurait redessiné des panneaux dont le rapport entre colonnes porte le sens (texte large + colonne étroite)."
+changement = "`modele-grilles.py --pistes` classe les 30 grilles inégales en 14 « contenu » (une piste `auto` ou `max-content` fait dépendre le repli du texte : aucun modèle ne le tranche sans navigateur), 15 « proportion » (un `flex: <g> 1 <plancher>px` reproduirait le rapport, avec un écart calculable) et 1 « motif » (`repeat(…)` imbriquée). Écarts mesurés sur 233 largeurs : 4 pour `.ai-hero-grid`, 13 à 18 pour six grilles, 24 à 32 pour trois autres, 179 à 221 pour trois panneaux. Onze grilles changent de colonnes sur moins d'un huitième du balayage : elles seules seraient remplaçables sans redessiner. Rien n'a été écrit dans la feuille."
+preuves = [
+  "outils/modele-grilles.py",
+  "outils/test_modele_grilles.py",
+  "docs/rd/formats-affichage.md",
+]
+controle = "python3 outils/modele-grilles.py --pistes && python3 outils/test_modele_grilles.py"
+limite = "Le calcul suppose que le contenu se comporte comme une piste de largeur fixe : un titre long, une image à ratio ou une hauteur imposée ne s'y voient pas. Un écart de quatre largeurs sur 233 reste un écart, et seul un navigateur dirait si quelqu'un le voit — Chromium reste indisponible en sandbox. Deux erreurs de calcul ont été corrigées avant publication (comparer à `colonnes_anciennes`, qui répond toujours « 1 » pour une grille inégale, et oublier la borne par la capacité mesurée) : ce sont les deux mêmes qui avaient coûté deux journées sur les grilles égales."
+suite = "Convertir les grilles « proportion » dont l'écart tient sous 18 largeurs, une par une et relevé en main, en commençant par `.ai-hero-grid` (4 largeurs), puis vérifier dans un navigateur que le rapport entre colonnes est conservé."
+initiatives = ["coordination-de-tous-les-agents", "optimisation-du-site"]
+
+[[avancee]]
 id = "une-ecriture-n-est-pas-un-dessin-et-ce-qui-doit-rester-fixe-se-declare"
 date = 2026-10-31
 titre = "Une écriture n'est pas un dessin : ce qui doit rester fixe se déclare"

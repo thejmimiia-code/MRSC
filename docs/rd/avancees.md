@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 50 |
+| Avancées consignées | 51 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
-| Contrôles exécutables cités | 61 |
+| Contrôles exécutables cités | 62 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1041,6 +1041,28 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 **Limite — ce que cela ne prouve pas.** Le rendu réel n'est pas vérifié : Chromium reste indisponible en sandbox et un banc navigateur sort en code 2. Le modèle suppose le conteneur `min(1160, W − 48)` et ne dit rien d'un cercle de 44 px dans une piste de 220 px ni d'un libellé long sur deux lignes. Ce qui reste sous condition de largeur n'est plus une grille mais des paliers de mise en page et les présentations choisies par l'utilisateur (compacte, lecture, panorama, vitrine), dont le statut reste à décider.
 
 **Suite.** Décider, mesure en main, si les présentations choisies par l'utilisateur relèvent de la même règle dynamique ou d'un choix explicite qui a le droit d'être fixe.
+
+Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
+
+### `mesurer-avant-d-ecrire-ce-qu-un-flex-wrap-ferait-des-pistes-inegales` — Mesurer avant d'écrire : ce qu'un `flex-wrap` ferait des pistes inégales
+
+*Consignée le 2026-10-31.*
+
+**Constat.** Les 30 grilles à pistes inégales gardent leurs paliers. Était-ce un raccommodage, ou la seule façon de tenir deux colonnes de largeurs différentes ? Sans mesure, la réponse aurait été une opinion — et convertir à l'aveugle aurait redessiné des panneaux dont le rapport entre colonnes porte le sens (texte large + colonne étroite).
+
+**Ce que cela change.** `modele-grilles.py --pistes` classe les 30 grilles inégales en 14 « contenu » (une piste `auto` ou `max-content` fait dépendre le repli du texte : aucun modèle ne le tranche sans navigateur), 15 « proportion » (un `flex: <g> 1 <plancher>px` reproduirait le rapport, avec un écart calculable) et 1 « motif » (`repeat(…)` imbriquée). Écarts mesurés sur 233 largeurs : 4 pour `.ai-hero-grid`, 13 à 18 pour six grilles, 24 à 32 pour trois autres, 179 à 221 pour trois panneaux. Onze grilles changent de colonnes sur moins d'un huitième du balayage : elles seules seraient remplaçables sans redessiner. Rien n'a été écrit dans la feuille.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/formats-affichage.md`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --pistes && python3 outils/test_modele_grilles.py`
+
+**Limite — ce que cela ne prouve pas.** Le calcul suppose que le contenu se comporte comme une piste de largeur fixe : un titre long, une image à ratio ou une hauteur imposée ne s'y voient pas. Un écart de quatre largeurs sur 233 reste un écart, et seul un navigateur dirait si quelqu'un le voit — Chromium reste indisponible en sandbox. Deux erreurs de calcul ont été corrigées avant publication (comparer à `colonnes_anciennes`, qui répond toujours « 1 » pour une grille inégale, et oublier la borne par la capacité mesurée) : ce sont les deux mêmes qui avaient coûté deux journées sur les grilles égales.
+
+**Suite.** Convertir les grilles « proportion » dont l'écart tient sous 18 largeurs, une par une et relevé en main, en commençant par `.ai-hero-grid` (4 largeurs), puis vérifier dans un navigateur que le rapport entre colonnes est conservé.
 
 Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 
