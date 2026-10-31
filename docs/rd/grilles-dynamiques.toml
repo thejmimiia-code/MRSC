@@ -24,6 +24,58 @@
 date = 2026-10-31
 feuille = "assets/css/site.css"
 
+# — Deuxième vague, 31 octobre 2026 : huit grilles de plus. Le seuil de repli à
+# une colonne est recopié du palier supprimé : c'est la seule information de
+# conception que porte une grille à deux colonnes, et le contrôle la relit.
+[[grille]]
+selecteur = ".ai-metric-grid"
+colonnes = 4
+minimum = 270
+raison = "Repères chiffrés de la page IA : quatre colonnes au conteneur maximal, trois dès 1 128 px de fenêtre — la cascade sautait de quatre à deux sous 1 000."
+
+[[grille]]
+selecteur = ".ai-forms-grid"
+colonnes = 4
+minimum = 270
+raison = "Cartes de formulaires de la page IA : même règle que les repères chiffrés, dont elle partageait le palier."
+
+[[grille]]
+selecteur = ".ai-lives-grid"
+colonnes = 3
+minimum = 370
+raison = "Six domaines de vie : trois colonnes au conteneur maximal, deux dès que la place manque, une seule en dessous — sans aucun palier."
+
+[[grille]]
+selecteur = ".learning-catalogue-grid"
+colonnes = 3
+minimum = 370
+raison = "Catalogue des apprentissages : trois colonnes au conteneur maximal, puis deux, puis une. La carte mesure 250 px de haut : elle pouvait descendre plus étroitement que 370 sans se tasser, mais la règle garde les trois colonnes de la conception."
+
+[[grille]]
+selecteur = ".learning-level-grid"
+colonnes = 4
+minimum = 270
+raison = "Niveaux du parcours : quatre colonnes au conteneur maximal, trois dès 1 128 px — la cascade sautait directement à deux sous 1 000."
+
+[[grille]]
+selecteur = ".learning-ecosystem-grid"
+colonnes = 4
+minimum = 270
+raison = "Écosystème des ressources : même écriture que les niveaux, dont il partage la règle."
+
+[[grille]]
+selecteur = ".link-grid"
+colonnes = 3
+minimum = 370
+raison = "Grilles de liens : trois colonnes au conteneur maximal, deux dès 1 132 px — la cascade attendait 920 px pour passer à deux, ce qui donnait des liens de 450 px à côté de liens de 150."
+
+[[grille]]
+selecteur = ".learning-code-grid"
+colonnes = 2
+minimum = 470
+seuil_une_colonne = 1000
+raison = "Deux colonnes côte à côte : le palier de 1 000 px n'était pas un choix de largeur de carte mais le moment où l'on renonce à la paire. Il est recopié tel quel, et le calcul s'arrête juste avant."
+
 [[grille]]
 selecteur = ".principle-grid"
 colonnes = 4

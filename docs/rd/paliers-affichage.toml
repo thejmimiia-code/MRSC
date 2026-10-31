@@ -21,6 +21,7 @@ date = 2026-10-31
 feuille = "assets/css/site.css"
 condition_total = 17
 bloc_total = 41
+regles_total = 205
 
 # Baisse datée du 31 octobre 2026 : 66 blocs → 62, puis 41 blocs de format.
 # Quatre blocs ont disparu parce que quatre grilles (`.principle-grid`,
@@ -29,6 +30,15 @@ bloc_total = 41
 # `(max-width: 1000px)` passe de 6 à 3 blocs, `(max-width: 520px)` de 9 à 8.
 # La preuve n'est pas ce commentaire : c'est `outils/modele-grilles.py`, qui
 # compare les deux cascades largeur par largeur et trouve un écart nul.
+#
+# Deuxième vague, même jour : huit grilles de plus quittent leurs paliers
+# (repères et formulaires de la page IA, domaines de vie, catalogue, niveaux et
+# écosystème des apprentissages, grilles de liens, blocs de code). Le compteur
+# ne voyait rien — il comptait des blocs `@media`, pas les règles qu'ils
+# décident ; un bloc qui garde une règle sans rapport avec la largeur pesait
+# autant qu'un bloc qui en porte dix. Il compte désormais les **règles** :
+# 214 → 205, et la baisse est répartie là où les conversions ont eu lieu
+# (1000 px : 9 → 5 ; 520 px : 72 → 70 ; 760 px : 81 → 79 ; 920 px : 8 → 7).
 
 # Le palier principal : sous 760 px, le site décide qu'il est sur téléphone.
 # C'est celui qui porte le plus de décisions et donc la plus grosse dette.
@@ -36,6 +46,7 @@ bloc_total = 41
 condition = "(max-width: 760px)"
 classe = "format"
 occurrences = 15
+regles = 79
 presume = "Sous 760 px, la fenêtre est un téléphone ou une tablette étroite. Le palier décide du repli du menu, de la grille des commandes d'en-tête, des colonnes de fiches et de la largeur du panneau de personnalisation. Rien ici n'a été mesuré : 760 px est une valeur choisie, et quinze blocs en dépendent."
 decision = "dette"
 
@@ -43,6 +54,7 @@ decision = "dette"
 condition = "(max-width: 520px)"
 classe = "format"
 occurrences = 8
+regles = 70
 presume = "Sous 520 px, une rangée de deux boutons ne tient plus côte à côte : les commandes d'en-tête passent sur deux colonnes égales et les grilles se réduisent à une colonne. La limite vient d'un calcul de libellés (Menu, Personnalisation) à la police par défaut, pas d'une mesure de la rangée réelle."
 decision = "dette"
 
@@ -50,6 +62,7 @@ decision = "dette"
 condition = "(max-width: 1000px)"
 classe = "format"
 occurrences = 3
+regles = 5
 presume = "Sous 1000 px, les grilles de trois ou quatre cartes passent à deux colonnes. Quatre grilles en sont sorties le 31 octobre 2026 ; il en reste trois blocs — le panneau de la page IA, la page du simulateur et la leçon d'apprentissage — dont les règles voisines (hauteur d'ancrage, alignement) tiennent le bloc en place, pas la largeur."
 decision = "dette"
 
@@ -61,6 +74,7 @@ decision = "dette"
 condition = "(max-width: 1260px)"
 classe = "format"
 occurrences = 2
+regles = 11
 presume = "Sous 1260 px, la rangée de liens du menu ne tient plus sur une ligne avec ses dix entrées, et la bascule « Menu » remplace la rangée. Le seuil dépend du nombre de liens et de la police, deux choses qui changent — il est écrit une fois pour toutes, puis répété en `min-width: 1261px`."
 decision = "dette"
 
@@ -68,6 +82,7 @@ decision = "dette"
 condition = "(min-width: 1261px)"
 classe = "format"
 occurrences = 1
+regles = 10
 presume = "Au-dessus de 1260 px, la rangée de liens reprend toute la largeur disponible et peut passer sur deux lignes plutôt que tronquer le premier et le dernier lien. C'est la moitié haute d'un seuil dont la moitié basse est `(max-width: 1260px)` : deux conditions à tenir ensemble, à la main."
 decision = "dette"
 
@@ -75,6 +90,7 @@ decision = "dette"
 condition = "(min-width: 1041px)"
 classe = "format"
 occurrences = 1
+regles = 3
 presume = "Au-dessus de 1040 px, le pied de page passe à quatre colonnes et les listes de liens à deux colonnes. La valeur est choisie pour que les quatre colonnes ne tassent pas les libellés de navigation ; aucune mesure du pied de page réel ne la justifie."
 decision = "dette"
 
@@ -82,6 +98,7 @@ decision = "dette"
 condition = "(min-width: 601px)"
 classe = "format"
 occurrences = 1
+regles = 2
 presume = "Au-dessus de 600 px, la présentation « Mosaïque » affiche ses grilles sur deux colonnes. C'est le seul palier bas de cette présentation et il ne dépend d'aucune mesure de carte : la même grille en `auto-fit` s'en passerait."
 decision = "dette"
 
@@ -89,6 +106,7 @@ decision = "dette"
 condition = "(min-width: 981px)"
 classe = "format"
 occurrences = 1
+regles = 1
 presume = "Au-dessus de 980 px, la présentation « Mosaïque » passe à quatre colonnes. Quatre colonnes à 981 px donnent des cartes nettement plus étroites qu'à 1260 px, sans que le contenu soit mesuré : le palier suppose que la place ne manque pas."
 decision = "dette"
 
@@ -96,6 +114,7 @@ decision = "dette"
 condition = "(min-width: 761px)"
 classe = "format"
 occurrences = 1
+regles = 2
 presume = "Au-dessus de 760 px, l'illustration de la page d'anglais est large de 520 px au plus et alignée à gauche du panneau. La condition est l'exact contraire du palier principal : elle existe parce que 760 px est pris comme frontière de téléphone, pas parce que l'illustration a été mesurée."
 decision = "dette"
 
@@ -103,6 +122,7 @@ decision = "dette"
 condition = "(max-width: 340px)"
 classe = "format"
 occurrences = 1
+regles = 1
 presume = "Sous 340 px, les titres de héros descendent d'un cran typographique. Un `clamp()` sur la taille de police ferait la même chose en continu, à toute largeur, sans ce palier — qui n'a été vérifié qu'à 320 px dans les essais navigateur."
 decision = "dette"
 
@@ -110,6 +130,7 @@ decision = "dette"
 condition = "(max-width: 380px)"
 classe = "format"
 occurrences = 1
+regles = 1
 presume = "Sous 380 px, les nœuds de la constellation de la page IA sont réduits. La valeur vient du dessin de la constellation, pas d'une mesure du texte qu'elle contient : un libellé plus long la déborderait."
 decision = "dette"
 
@@ -117,6 +138,7 @@ decision = "dette"
 condition = "(max-width: 420px)"
 classe = "format"
 occurrences = 1
+regles = 1
 presume = "Sous 420 px, les paires de boutons d'appel à l'action occupent toute la largeur, l'un sous l'autre. C'est le seul palier de boutons du site, alors que le même effet s'obtient en laissant la paire passer à la ligne quand la place manque."
 decision = "dette"
 
@@ -124,6 +146,7 @@ decision = "dette"
 condition = "(max-width: 920px)"
 classe = "format"
 occurrences = 1
+regles = 7
 presume = "Sous 920 px, le bloc identité et contact, les grilles de liens et les cartes de la carte des lieux passent à une colonne. La valeur est intermédiaire entre les paliers 760 et 1000 px et n'a pas de raison propre : elle évite une colonne trop tassée, sans la mesurer."
 decision = "dette"
 
@@ -134,6 +157,7 @@ decision = "dette"
 condition = "(orientation: landscape) and (max-height: 560px) and (max-width: 920px)"
 classe = "format"
 occurrences = 1
+regles = 5
 presume = "En paysage et sous 560 px de haut (téléphone couché, fenêtre écrasée en hauteur), l'en-tête cesse d'être collant, l'identité se réduit et les héros raccourcissent. Le triple seuil suppose qu'un écran court est forcément étroit : une fenêtre de 1200 px de large et 500 px de haut n'en bénéficie pas, alors qu'elle manque autant de hauteur."
 decision = "dette"
 
@@ -141,6 +165,7 @@ decision = "dette"
 condition = "(max-width: 760px), (orientation: landscape) and (max-height: 560px) and (max-width: 920px)"
 classe = "format"
 occurrences = 1
+regles = 2
 presume = "Le panneau du menu et la rangée de commandes d'en-tête cumulent les deux conditions précédentes pour se placer sous une barre parfois haute. Ce bloc répète à la main une décision déjà écrite deux fois ; il se désynchronisera au premier changement."
 decision = "dette"
 
@@ -151,6 +176,7 @@ decision = "dette"
 condition = "(max-width: 300px)"
 classe = "format"
 occurrences = 1
+regles = 2
 presume = "Sous 300 px, les commandes d'en-tête passent sur une seule colonne : à deux colonnes, des boutons de 19 px ne contenaient plus leur libellé. Aucun appareil consulté ici n'est plus étroit ; ce plancher protège les cadres d'aperçu et les fenêtres réduites à la main."
 decision = "assume"
 
@@ -158,5 +184,6 @@ decision = "assume"
 condition = "(max-width: 240px)"
 classe = "format"
 occurrences = 1
+regles = 3
 presume = "Sous 240 px, le nom du site laisse la place aux deux commandes. C'est le plancher du survivant : en dessous, plus rien ne tient, et l'essai navigateur à 240 px vérifie seulement que le panneau ne sort pas de l'écran. Assumé, parce qu'aucune taille d'appareil ne s'y trouve et qu'il vaut mieux un plan de secours écrit qu'un débordement découvert par hasard."
 decision = "assume"

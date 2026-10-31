@@ -64,18 +64,47 @@ CARTE_MINIMALE = 220
 CANDIDATS = list(range(180, 481, 10))
 
 MEDIA_LARGEUR = re.compile(r"\((min|max)-width\s*:\s*(\d+)px\s*\)")
-#: Les quatre écritures que la feuille emploie réellement. Une colonne unique
-#: (`minmax(0, 1fr)`) compte : c'est le repli que les paliers imposent partout,
-#: et l'ignorer faisait croire à une cascade plus haute qu'elle n'est — mesuré
-#: le 31 octobre 2026, le modèle annonçait deux colonnes à 240 px là où la
-#: feuille n'en donnait qu'une.
-DECLARATION_GRILLE = re.compile(
-    r"grid-template-columns\s*:\s*(repeat\(\s*(\d+)\s*,\s*minmax\([^)]*\)\s*\)|"
-    r"repeat\(\s*auto-fit\s*,\s*minmax\(\s*min\((\d+)px\s*,?\s*100%\)\s*,\s*1fr\s*\)\s*\)|"
-    r"repeat\(\s*auto-fit\s*,\s*minmax\(\s*(\d+)px\s*,\s*1fr\s*\)\s*\)|"
-    r"minmax\(\s*0\s*,\s*1fr\s*\)(?!\s*\))"
-    r")"
+
+#: La valeur complète d'une déclaration de colonnes, jusqu'au point-virgule.
+DECLARATION_COLONNES = re.compile(r"grid-template-columns\s*:\s*([^;]+)")
+
+#: Les formes que ce modèle sait lire. Tout le reste est **asymétrique** — un
+#: panneau texte + bouton (`minmax(0, 1fr) auto`), un formulaire à bouton
+#: (`minmax(180px, 1.5fr) repeat(2, minmax(160px, 1fr)) auto`), une colonne de
+#: navigation (`20px 54px minmax(0, 1fr)`). Ces dispositions ne se ramènent pas à
+#: un nombre de colonnes égales : les convertir en `auto-fit` **changerait le
+#: dessin**, pas seulement le moment du repli.
+#:
+#: Le 31 octobre 2026, la version précédente cherchait un fragment de
+#: `repeat(...)` n'importe où dans la valeur : `.join-panel` (`1fr auto`)
+#: s'annonçait « 1 colonne » et `.learning-filters` « 2 colonnes ». Le rapport
+#: proposait alors de convertir des panneaux qui n'ont rien à convertir, et le
+#: compte des grilles à traiter était faux par excès.
+REPEAT_FIXE = re.compile(r"^repeat\(\s*(\d+)\s*,\s*minmax\([^()]*\)\s*\)$")
+AUTOFIT_MIN = re.compile(
+    r"^repeat\(\s*auto-fit\s*,\s*minmax\(\s*min\(\s*(\d+)px\s*,\s*100%\s*\)\s*,\s*1fr\s*\)\s*\)$"
 )
+AUTOFIT_NU = re.compile(r"^repeat\(\s*auto-fit\s*,\s*minmax\(\s*(\d+)px\s*,\s*1fr\s*\)\s*\)$")
+UNE_COLONNE = re.compile(r"^minmax\(\s*0\s*,\s*1fr\s*\)$")
+
+FORMES = ("fixe", "dynamique", "asymetrique")
+def classer_valeur(valeur: str) -> tuple[str, int | None, int | None]:
+    """Forme, nombre de colonnes fixes, minimum de piste dynamique.
+
+    `("fixe", k, None)` pour `repeat(k, minmax(...))`, `("dynamique", None, N)`
+    pour `repeat(auto-fit, minmax(min(Npx,100%), 1fr))`, `("asymetrique", None,
+    None)` pour tout le reste — et « tout le reste » est dit, pas deviné.
+    """
+    valeur = " ".join(valeur.split())
+    trouvé = REPEAT_FIXE.match(valeur)
+    if trouvé:
+        return "fixe", int(trouvé.group(1)), None
+    trouvé = AUTOFIT_MIN.match(valeur) or AUTOFIT_NU.match(valeur)
+    if trouvé:
+        return "dynamique", None, int(trouvé.group(1))
+    if UNE_COLONNE.match(valeur):
+        return "fixe", 1, None
+    return "asymetrique", None, None
 
 
 @dataclass
@@ -101,6 +130,10 @@ class Grille:
     gap: float = 16.0
     regles: list[Regle] = field(default_factory=list)
     source: str = ""
+    #: Vraie dès qu'une de ses règles est asymétrique : la grille n'est alors pas
+    #: convertible en `auto-fit`, et le rapport doit le dire au lieu de proposer.
+    asymetrique: bool = False
+    valeur_asymetrique: str = ""
 
 
 def sans_commentaires(texte: str) -> str:
@@ -174,12 +207,11 @@ def lire_grilles(texte: str) -> dict[str, Grille]:
     texte = sans_commentaires(texte)
     grilles: dict[str, Grille] = {}
     for ordre, (selecteurs, corps, largeur_max, largeur_min, ligne) in enumerate(decouper(texte)):
-        trouve = DECLARATION_GRILLE.search(corps)
+        trouve = DECLARATION_COLONNES.search(corps)
         if not trouve:
             continue
         valeur = " ".join(trouve.group(1).split())
-        colonnes = int(trouve.group(2)) if trouve.group(2) else (1 if trouve.group(0).startswith("grid-template-columns: minmax") or trouve.group(0).startswith("grid-template-columns:minmax") else None)
-        minimum = int(trouve.group(3) or trouve.group(4)) if (trouve.group(3) or trouve.group(4)) else None
+        forme, colonnes, minimum = classer_valeur(valeur)
         gap = re.search(r"(?:^|;)\s*gap\s*:\s*([\d.]+)rem", corps)
         for selecteur in selecteurs:
             grille = grilles.setdefault(selecteur, Grille(selecteur=selecteur, source=f"site.css:{ligne}"))
@@ -196,6 +228,9 @@ def lire_grilles(texte: str) -> dict[str, Grille]:
                 ordre=ordre,
             )
             grille.regles.append(regle)
+            if forme == "asymetrique" and not grille.asymetrique:
+                grille.asymetrique = True
+                grille.valeur_asymetrique = valeur
             if largeur_max is None and largeur_min is None and colonnes:
                 grille.colonnes_base = colonnes
     return grilles
@@ -244,7 +279,16 @@ def ecart(grille: Grille, minimum: int) -> tuple[int, int, list[tuple[int, int, 
 
 
 def meilleur_minimum(grille: Grille) -> tuple[int, int, int, list[tuple[int, int, int]]]:
-    """Le plus petit `N` qui colle le mieux, à écart égal tranché par la plus petite carte pleine."""
+    """Le `N` qui reproduit le mieux l'ancienne cascade — **diagnostic, pas décision**.
+
+    Le 31 octobre 2026, ce chiffre a été pris pour la recommandation, et huit
+    grilles ont été converties avec lui : elles montraient 3 ou 4 colonnes au
+    conteneur maximal au lieu de 4, `minimum_pour_k` en demandait 270 et le CSS
+    portait 230. Deux règles différentes, un seul nom dans le rapport. La
+    recommandation est désormais `minimum_pour_k` et rien d'autre ; cette
+    fonction garde son usage — dire à quel point l'ancienne cascade est
+    reproduite — et n'est plus proposée comme consigne.
+    """
     classement = []
     for minimum in CANDIDATS:
         nombre, maximal, details = ecart(grille, minimum)
@@ -282,6 +326,64 @@ def colonnes_de_conception(grille: Grille) -> int:
     return 0
 
 
+def seuil_une_colonne(grille: Grille) -> int | None:
+    """La plus grande fenêtre où l'ancienne cascade ne montrait qu'une colonne.
+
+    C'est la seule information de conception que porte une grille à deux
+    colonnes : entre deux colonnes et une, il n'y a pas d'étape intermédiaire,
+    donc pas de largeur de carte à préserver — seulement un moment où l'on
+    renonce à la paire.
+    """
+    apparentes = [largeur for largeur in LARGEURS if colonnes_anciennes(grille, largeur) == 1]
+    return max(apparentes) if apparentes else None
+
+
+def seuil_note(grille: Grille) -> str:
+    """Le seuil de repli à une colonne, s'il compte pour cette grille."""
+    if colonnes_de_conception(grille) != 2:
+        return ""
+    seuil = seuil_une_colonne(grille)
+    return f" (repli à 1 col. sous {seuil}px)" if seuil else ""
+
+
+def minimum_recommande(grille: Grille) -> int | None:
+    """La largeur de piste que la règle donne à cette grille. Une seule source.
+
+    Deux cas, et la différence est une différence de question :
+
+    - **Trois colonnes ou plus** : la grille a des étapes intermédiaires, et la
+      bonne question est « jusqu'où les cartes peuvent-elles s'élargir sans que
+      la grille perde sa forme au conteneur maximal ? ». On prend donc le plus
+      large minimum qui garde `k` colonnes à 1160 px.
+    - **Deux colonnes** : il n'y a aucune étape intermédiaire. Prendre le plus
+      large minimum qui garde deux colonnes à 1160 px donnerait des panneaux de
+      570 px et un repli dès 1 207 px de fenêtre — une régression visible sur un
+      ordinateur portable. La seule information de conception est le moment où
+      l'on renonce à la paire ; le minimum se calcule pour que ce moment reste
+      celui de l'ancienne cascade.
+
+    Cette distinction a coûté une erreur, corrigée le 31 octobre 2026 : la
+    première version appliquait la règle des trois colonnes aux grilles à deux,
+    et proposait de replier `.document-grid` à 1 027 px au lieu de 760.
+    """
+    k = colonnes_de_conception(grille)
+    if not k:
+        return None
+    if k >= 3:
+        return minimum_pour_k(k, grille.gap)
+    seuil = seuil_une_colonne(grille)
+    if seuil is None:
+        return minimum_pour_k(k, grille.gap)
+    # Le repli doit tomber **au même endroit** que celui de la cascade :
+    # à la fenêtre de seuil, deux colonnes ne doivent déjà plus tenir. Prendre
+    # le plus large minimum qui tenait encore à `seuil + 1` laissait deux
+    # colonnes jusqu'à 744 px là où la conception repliait à 760 — un écart de
+    # seize pixels, la valeur d'un écart de grille, qui ne se voyait pas.
+    place = conteneur(seuil)
+    candidats = [n for n in CANDIDATS if 2 * n + grille.gap > place]
+    return min(candidats) if candidats else None
+
+
 def minimum_pour_k(k: int, gap: float, contenu: float = CONTENU_DEFAUT) -> int | None:
     """Le plus large minimum de piste qui laisse encore `k` colonnes au conteneur maximal.
 
@@ -312,12 +414,31 @@ def paliers(grille: Grille) -> list[str]:
     return sorted(set(conditions))
 
 
+def convertibles(grilles: dict[str, Grille]) -> list[Grille]:
+    """Les grilles que l'on peut réellement ramener à une largeur de piste."""
+    return sorted(
+        (
+            grille
+            for grille in grilles.values()
+            if colonnes_de_conception(grille) and not grille.asymetrique
+        ),
+        key=lambda grille: grille.selecteur,
+    )
+
+
+def asymetriques(grilles: dict[str, Grille]) -> list[Grille]:
+    """Les grilles à pistes inégales : elles gardent leurs paliers, et c'est normal."""
+    return sorted(
+        (grille for grille in grilles.values() if grille.asymetrique),
+        key=lambda grille: grille.selecteur,
+    )
+
+
 def etat(grilles: dict[str, Grille]) -> list[dict]:
     """Le tableau : grille, colonnes de base, paliers restants, recommandation."""
     lignes = []
-    for selecteur, grille in sorted(grilles.items()):
-        if not colonnes_de_conception(grille):
-            continue
+    for grille in convertibles(grilles):
+        selecteur = grille.selecteur
         conditions = paliers(grille)
         entree = {
             "selecteur": selecteur,
@@ -327,22 +448,34 @@ def etat(grilles: dict[str, Grille]) -> list[dict]:
             "source": grille.source,
         }
         if conditions:
-            minimum, nombre, maximal, details = meilleur_minimum(grille)
-            entree["minimum_recommande"] = minimum
-            entree["ecarts"] = nombre
-            entree["ecart_maximal"] = maximal
-            entree["carte_minimale"] = round(carte_minimale(grille, minimum), 1)
+            # La consigne vient de la règle, jamais d'une recherche d'ajustement.
+            minimum = minimum_recommande(grille)
+            if minimum is None:
+                entree["minimum_recommande"] = None
+            else:
+                nombre, maximal, _ = ecart(grille, minimum)
+                entree["minimum_recommande"] = minimum
+                entree["ecarts"] = nombre
+                entree["ecart_maximal"] = maximal
+                entree["carte_minimale"] = round(carte_minimale(grille, minimum), 1)
         lignes.append(entree)
     return lignes
 
 
-def rapport(lignes: list[dict]) -> str:
+def rapport(lignes: list[dict], inegales: list[Grille] | None = None) -> str:
     avec = [ligne for ligne in lignes if ligne["paliers"]]
     sorties = [
-        f"{len(lignes)} grilles fixent leur nombre de colonnes dans {FEUILLE} ; "
+        f"{len(lignes)} grilles à pistes égales fixent leur nombre de colonnes dans {FEUILLE} ; "
         f"{len(avec)} le font encore par un palier de largeur.",
         "",
     ]
+    if inegales:
+        sorties.append(
+            f"{len(inegales)} grilles à pistes inégales (texte + bouton, formulaire, sommaire) "
+            "ne se convertissent pas sans changer le dessin : elles ne sont pas comptées ci-dessus "
+            "et gardent leurs paliers."
+        )
+        sorties.append("")
     for ligne in avec:
         sorties.append(
             f"{ligne['selecteur']}  ({ligne['colonnes']} colonnes, gap {ligne['gap']:g}px) — {ligne['source']}"
@@ -396,9 +529,21 @@ def verifier(grilles: dict[str, Grille], registre: dict) -> list[str]:
             erreurs.append(f"{selecteur or '(sans sélecteur)'} : absent de {FEUILLE}")
             continue
         grille = grilles[selecteur]
+        if grille.asymetrique:
+            erreurs.append(
+                f"{selecteur} : la règle de base est redevenue inégale "
+                f"({grille.valeur_asymetrique[:60]}) — ce n'est plus `auto-fit`"
+            )
+            continue
         k = int(entree.get("colonnes", 0))
         declare = entree.get("minimum")
-        attendu = minimum_pour_k(k, grille.gap) if k else None
+        seuil = entree.get("seuil_une_colonne")
+        if seuil is not None:
+            place = conteneur(int(seuil))
+            candidats = [n for n in CANDIDATS if 2 * n + grille.gap > place]
+            attendu = min(candidats) if candidats else None
+        else:
+            attendu = minimum_pour_k(k, grille.gap) if k else None
         if attendu is None:
             erreurs.append(f"{selecteur} : aucune piste ne donne {k} colonnes au conteneur maximal")
             continue
@@ -482,13 +627,18 @@ def principal(arguments: list[str] | None = None) -> int:
             for largeur, ancienne, nouvelle in details[:20]:
                 print(f"  {largeur}px : {ancienne} → {nouvelle}")
             return 0
-        minimum, nombre, maximal, details = meilleur_minimum(grille)
-        print(f"{grille.selecteur} — {colonnes_de_conception(grille)} colonnes, gap {grille.gap:g}px")
+        k = colonnes_de_conception(grille)
+        minimum = minimum_recommande(grille)
+        if minimum is None:
+            print(f"{grille.selecteur} : aucune piste ne garde {k} colonnes au conteneur maximal")
+            return 2
+        nombre, maximal, details = ecart(grille, minimum)
+        print(f"{grille.selecteur} — {k} colonnes, gap {grille.gap:g}px")
         for condition in paliers(grille):
             print(f"  palier {condition}")
         print(
-            f"  meilleur auto-fit {minimum}px : {nombre} écart(s), maximum {maximal}, "
-            f"carte la plus étroite {carte_minimale(grille, minimum):.0f}px"
+            f"  règle : minmax(min({minimum}px, 100%), 1fr) — {nombre} écart(s) avec l'ancienne "
+            f"cascade, maximum {maximal}, carte la plus étroite {carte_minimale(grille, minimum):.0f}px"
         )
         for largeur, ancienne, nouvelle in details[:20]:
             print(f"    {largeur}px : {ancienne} → {nouvelle}")
@@ -496,11 +646,12 @@ def principal(arguments: list[str] | None = None) -> int:
 
     if options.regle:
         mesurees = 0
-        for selecteur, grille in sorted(grilles.items()):
+        for grille in convertibles(grilles):
+            selecteur = grille.selecteur
             k = colonnes_de_conception(grille)
             if not k:
                 continue
-            minimum = minimum_pour_k(k, grille.gap)
+            minimum = minimum_recommande(grille)
             if minimum is None:
                 print(f"{selecteur:32} {k} col. — aucune piste ne tient")
                 continue
@@ -511,18 +662,26 @@ def principal(arguments: list[str] | None = None) -> int:
                 for largeur in LARGEURS
             )
             print(
-                f"{selecteur:32} {k} col. → minmax(min({minimum}px, 100%), 1fr) · "
+                f"{selecteur:32} {k} col.{seuil_note(grille)} → minmax(min({minimum}px, 100%), 1fr) · "
                 f"pire carte {avant:.0f}px → {carte_minimale(grille, minimum):.0f}px · "
                 f"{len(paliers(grille))} palier(s) de largeur"
             )
         print(f"{mesurees} grilles mesurées.")
+        inegales = asymetriques(grilles)
+        if inegales:
+            print(
+                f"{len(inegales)} grilles à pistes inégales ne sont pas convertibles et gardent "
+                "leurs paliers :"
+            )
+            for grille in inegales:
+                print(f"  {grille.selecteur:32} {grille.valeur_asymetrique[:60]}")
         return 0
 
     lignes = etat(grilles)
     if options.json:
         print(json.dumps(lignes, ensure_ascii=False, indent=2))
     else:
-        print(rapport(lignes))
+        print(rapport(lignes, asymetriques(grilles)))
     return 0
 
 

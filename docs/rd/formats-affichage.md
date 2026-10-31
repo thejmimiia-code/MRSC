@@ -1115,3 +1115,44 @@ Limites : le modèle ne lit que la présentation par défaut (`--content: 1160px
 réduit un bloc `(orientation: landscape) and (max-height: 560px)` à sa largeur
 maximale, suppose le conteneur `min(1160, W − 48)` et ignore toute grille hors de
 `.container`. Il calcule des largeurs de piste, pas la lisibilité d'une carte.
+
+## 11. Douze grilles, et deux compteurs corrigés (31 octobre 2026)
+
+Après la première conversion de quatre grilles, le modèle comptait « 32 grilles
+restantes ». **C'était faux par excès** : il cherchait un `repeat(...)` n'importe
+où dans la valeur, si bien qu'un panneau texte + bouton (`minmax(0, 1fr) auto`)
+ou un formulaire à bouton (`minmax(180px, 1.5fr) repeat(2, minmax(160px, 1fr)) auto`)
+s'annonçaient convertibles. **34 grilles sont à pistes inégales** : `auto-fit`
+ne sait pas les produire, elles gardent leurs paliers, et le rapport le dit
+maintenant.
+
+### Deux règles, parce qu'il y a deux questions
+
+| Colonnes de conception | Règle | Pourquoi |
+| --- | --- | --- |
+| 3 et plus | plus large minimum qui garde `k` colonnes au conteneur maximal | il y a des étapes intermédiaires : on garde la forme au plus large et les cartes les plus larges possible |
+| 2 | minimum qui replace le repli **là où la cascade le plaçait** | il n'y a aucune étape : la seule information de conception est le moment où l'on renonce à la paire |
+
+Appliquer la première règle aux grilles à deux colonnes aurait replié
+`.document-grid` dès 1 027 px de fenêtre au lieu de 760 — une régression
+visible sur un ordinateur portable.
+
+### Converties le 31 octobre 2026
+
+`.ai-metric-grid` et `.ai-forms-grid` (4 col., 270 px), `.ai-lives-grid` (3, 370),
+`.learning-catalogue-grid` (3, 370), `.learning-level-grid` et
+`.learning-ecosystem-grid` (4, 270), `.link-grid` (3, 370),
+`.learning-code-grid` (2, 470, seuil 1 000 px recopié). Avec les quatre du lot
+précédent : **douze grilles**, onze restantes.
+
+### Ce que les compteurs ne voyaient pas
+
+`compter-paliers.py` comptait des **blocs** `@media`, pas les règles qu'ils
+décident : douze conversions, et le relevé annonçait toujours « 41 blocs, dette
+inchangée ». Il compte désormais les règles — **214 → 205** — et refuse leur
+hausse comme leur baisse non datée.
+
+`modele-grilles.py` portait deux minima pour la même grille, sous le même mot
+(« recommandé ») : l'ajustement à l'ancienne cascade et la règle de conception.
+Huit grilles ont d'abord été écrites avec le premier. C'est le contrôle
+(`--verifier`), qui recalcule la règle, qui l'a arrêté.

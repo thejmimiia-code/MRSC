@@ -151,21 +151,39 @@ class TestPaliersAffichage(unittest.TestCase):
     def test_dette_qui_diminue_est_signalee(self) -> None:
         """Une dette qui baisse est une avancée : elle doit être datée, pas avalée.
 
-        Le bloc de 1000 px passe à 920 px : la condition connue perd un bloc, une
-        autre en gagne un. Le banc exige le message de la baisse — c'est celui
-        qu'on pourrait être tenté de ne pas écrire.
+        Le bloc de 920 px passe à 910 px : la condition connue perd ses sept
+        règles, une autre en gagne sept. Le banc exige le message de la baisse —
+        c'est celui qu'on pourrait être tenté de ne pas écrire.
+
+        La première version visait le bloc de 1000 px et sa grille `.ai-metric-grid` ;
+        le 31 octobre 2026, cette grille est sortie du palier et le fragment a
+        disparu. Un banc ne doit pas mourir parce que le contenu qu'il cite a
+        changé : il vise désormais une condition stable du dépôt.
         """
         with tempfile.TemporaryDirectory() as dossier:
             copie = self.copie(dossier)
             banc_mutations.muter(
                 copie,
                 FEUILLE,
-                "@media (max-width: 1000px) {\n  .ai-metric-grid,\n  .ai-forms-grid {",
-                "@media (max-width: 920px) {\n  .ai-metric-grid,\n  .ai-forms-grid {",
+                "  .identity-contact {\n    display: none;\n  }\n\n",
+                "",
             )
             resultat = banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("la dette a diminué", resultat.stderr)
+
+    def test_une_regle_de_plus_dans_un_palier_est_refusee(self) -> None:
+        """Une règle ajoutée sous une largeur donnée est une dette de plus, même sans bloc neuf."""
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                FEUILLE,
+                "  .identity-contact {\n    display: none;\n  }\n",
+                "  .identity-contact {\n    display: none;\n  }\n  .regle-de-plus { color: red; }\n",
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("la dette a augmenté", resultat.stderr)
 
     def test_raison_vide_est_refusee(self) -> None:

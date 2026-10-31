@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 46 |
+| Avancées consignées | 47 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
 | Contrôles exécutables cités | 61 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1020,6 +1020,32 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 **Suite.** Lire le premier passage en CI de l'essai « Aperçu ordinateur », et vérifier sur le site publié qu'un téléphone en mode bureau ne rogne plus le panneau.
 
 Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
+
+### `un-rapport-ne-porte-pas-deux-recommandations-sous-un-mot` — Un rapport ne porte pas deux recommandations sous le même mot, et un compteur qui ne voit pas le travail le nie
+
+*Consignée le 2026-10-31.*
+
+**Constat.** Deux défauts de mesure trouvés le même jour, tous deux invisibles dans le résultat. 1) `modele-grilles.py` calculait deux minima différents pour la même grille : l'un par ajustement à l'ancienne cascade (`meilleur_minimum`), l'autre par la règle de conception (`minimum_pour_k`). Le rapport les appelait tous deux « le minimum recommandé » ; huit grilles ont été converties avec le premier (230, 280, 310 px) alors que la règle demandait l'autre (270, 370). 2) `compter-paliers.py` comptait les **blocs** `@media` et non les règles qu'ils décident : douze grilles ont quitté leurs paliers et le relevé annonçait toujours « 41 blocs, dette inchangée ». Un compteur qui ne voit pas le travail le nie, et décourage exactement ce qu'il prétend mesurer.
+
+**Ce que cela change.** `meilleur_minimum` n'est plus qu'un diagnostic et n'apparaît plus comme consigne ; la recommandation a une seule source, `minimum_recommande`, avec deux cas explicités (trois colonnes et plus : plus large minimum qui garde `k` colonnes au conteneur maximal ; deux colonnes : minimum qui replace le repli là où la cascade le plaçait, sans quoi `.document-grid` se serait replié à 1 027 px au lieu de 760). `compter-paliers.py` compte désormais les **règles** de chaque bloc, les inscrit au registre (`regles = N`) et refuse aussi bien leur augmentation que leur baisse non datée. Ce lot : 12 grilles dynamiques, 214 → 205 règles sous condition de largeur, 34 grilles à pistes inégales explicitement déclarées non convertibles au lieu d'être comptées à tort.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/compter-paliers.py`
+- `outils/test_modele_grilles.py`
+- `outils/test_paliers_affichage.py`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/paliers-affichage.toml`
+- `assets/css/site.css`
+
+**Contrôle qui la maintient :** `python3 outils/compter-paliers.py && python3 outils/modele-grilles.py --verifier && python3 outils/test_paliers_affichage.py && python3 outils/test_modele_grilles.py`
+
+**Limite — ce que cela ne prouve pas.** Le compte des règles ne voit pas une règle qui perd un sélecteur : `.contact-grid` figurait dans un bloc de 760 px pour y imposer une seule colonne à une grille déjà à une colonne, et le compte n'a pas bougé quand le sélecteur a été retiré. Il ne voit pas non plus ce que la règle décide réellement — une règle qui redéclare la valeur de base compte autant qu'une règle qui change tout. Et la correction des huit minima est passée par la comparaison du registre au CSS, pas par un test : sans registre, rien n'aurait signalé l'écart.
+
+**Suite.** Étendre le compte aux sélecteurs morts à l'intérieur d'une règle vivante, et convertir la famille des grilles à deux colonnes (seuil 760 px, minimum 350 px) avant de vérifier dans un navigateur ce que ni l'un ni l'autre des compteurs ne peut dire : le rendu réel d'une carte de 350 px.
+
+Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 
 ### `une-copie-de-banc-ne-se-mute-pas-par-ses-liens` — Une copie de banc faite de liens ne se mute qu'après matérialisation du chemin
 
