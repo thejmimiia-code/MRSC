@@ -99,6 +99,16 @@ MUTATIONS = (
         '<span class="footer-rd-print-absent">',
         "collent la mention d'impression derrière le point",
     ),
+    # Le plafond de l'illustration anglaise, ramené à un `width` : depuis que le
+    # panneau est en `flex-wrap`, `flex-basis: 100%` remplace la largeur et le
+    # plafond ne décide plus rien (densité 0,91 mesurée le 31 octobre 2026).
+    (
+        "plafond de 520 px de l'illustration anglaise remis en `width`",
+        "assets/css/site.css",
+        ".english-promo-art { max-width: 520px; }",
+        ".english-promo-art { width: min(100%, 520px); }",
+        "le plafond de 520 px de .english-promo-art a disparu",
+    ),
 )
 
 

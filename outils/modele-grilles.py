@@ -707,6 +707,62 @@ def pages_du_site(racine: Path) -> list[Path]:
     return pages
 
 
+class _EnfantsClasses(HTMLParser):
+    """Les classes des enfants **directs** d'un élément portant une classe suivie.
+
+    Sert à une seule question, mais elle a coûté une CI rouge le 31 octobre
+    2026 : un enfant de conteneur flex peut-il encore porter un plafond écrit en
+    `width` ? La réponse dépend de ce que les pages mettent dans la grille, donc
+    du HTML — pas de la feuille seule.
+    """
+
+    def __init__(self, cibles: set[str]) -> None:
+        super().__init__(convert_charrefs=True)
+        self.cibles = cibles
+        self.pile: list[tuple[str, str | None]] = []
+        self.enfants: dict[str, set[str]] = {}
+
+    def handle_starttag(self, balise, attributs):
+        if balise in VIDES:
+            return
+        classes = set(((dict(attributs).get("class") or "")).split())
+        if self.pile and self.pile[-1][1]:
+            self.enfants.setdefault(self.pile[-1][1], set()).update(classes)
+        marque = next(iter(sorted(classes & self.cibles)), None)
+        self.pile.append((balise, marque))
+
+    def handle_endtag(self, balise):
+        for i in range(len(self.pile) - 1, -1, -1):
+            if self.pile[i][0] == balise:
+                del self.pile[i:]
+                return
+
+
+def enfants_des_grilles(racine: Path, selecteurs: list[str]) -> dict[str, set[str]]:
+    """`{"english-promo-panel": {"english-promo-copy", "english-promo-art"}, …}`.
+
+    Un sélecteur absent des pages n'apparaît pas : le contrôle doit alors dire
+    qu'il n'a rien pu regarder, pas supposer un enfant unique.
+    """
+    import collections
+
+    cibles = {selecteur.lstrip(".") for selecteur in selecteurs if selecteur.startswith(".")}
+    enfants: dict[str, set[str]] = collections.defaultdict(set)
+    for page in pages_du_site(racine):
+        try:
+            texte = page.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        lecteur = _EnfantsClasses(cibles)
+        try:
+            lecteur.feed(texte)
+        except Exception:  # page mal formée : on ne prétend rien y mesurer
+            continue
+        for cible, classes in lecteur.enfants.items():
+            enfants["." + cible].update(classes)
+    return dict(enfants)
+
+
 def lire_capacites(racine: Path, selecteurs: list[str]) -> dict[str, dict]:
     """Ce que les pages mettent réellement dans chaque grille.
 
@@ -1146,6 +1202,9 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
     texte = sans_commentaires(chemin.read_text(encoding="utf-8"))
     regles = decouper(texte)
     erreurs: list[str] = []
+    enfants = enfants_des_grilles(
+        racine, [entree.get("selecteur") or "" for entree in entrees if entree.get("selecteur")]
+    )
     for entree in entrees:
         selecteur = entree.get("selecteur") or ""
         if not selecteur:
@@ -1213,6 +1272,43 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
                     f"{selecteur} : écart déclaré {declare_part:.3f}, la règle en donne "
                     f"{mesure['part']:.3f} de la colonne"
                 )
+
+        # Plafond en `width` sur un enfant : en flex, il ne s'applique pas.
+        # `flex-basis: 100%` sur les présentations remplace la largeur de la
+        # boîte ; le plafond qui rendait vraie une déclaration `sizes` cessait
+        # donc d'agir, et l'image repartait à 879 px en présentation Lecture
+        # (densité 0,91, mesuré le 31 octobre 2026). Un `max-width` s'applique,
+        # lui, à la taille principale d'une boîte flexible.
+        for classe in sorted(enfants.get(selecteur, set())):
+            for selecteurs, corps, _, _, ligne in regles:
+                corps_nu = re.sub(r"\s+", " ", corps)
+                if "max-width" in corps_nu:
+                    continue
+                plafond = re.search(r"width:\s*min\(\s*100%\s*,\s*\d+(?:\.\d+)?px\s*\)", corps_nu)
+                if not plafond:
+                    continue
+                if not any(f".{classe}" in s for s in selecteurs):
+                    continue
+                erreurs.append(
+                    f"{selecteur} : plafond en `width` sur .{classe} (ligne {ligne}) — "
+                    "en flex, `flex-basis` remplace la largeur et le plafond ne décide rien : "
+                    "écrire `max-width`"
+                )
+
+        # Déclarations de grille sur un conteneur flex : inertes par définition.
+        # `justify-items: start` du palier de 761 px en était une : elle alignait
+        # les panneaux d'une grille, elle ne fait rien en flex.
+        for selecteurs, corps, lmax, lmin, ligne in regles:
+            if not any(s == selecteur or s.startswith(selecteur + " ") or s.startswith(selecteur + ">")
+                       or s.startswith(selecteur + " >") for s in selecteurs):
+                continue
+            corps_nu = re.sub(r"\s+", " ", corps)
+            for propriete in ("grid-template-columns", "grid-template-rows", "grid-auto-flow", "justify-items"):
+                if propriete in corps_nu:
+                    erreurs.append(
+                        f"{selecteur} : `{propriete}` ligne {ligne} sur un conteneur flex — "
+                        "cette déclaration ne décide rien"
+                    )
 
         # Présentations : une grille flex ne se replie pas par `grid-template-columns`.
         for selecteurs, corps, _, _, ligne in regles:

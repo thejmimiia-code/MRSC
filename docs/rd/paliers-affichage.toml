@@ -46,7 +46,7 @@ regles_total = 205
 condition = "(max-width: 760px)"
 classe = "format"
 occurrences = 12
-regles = 70
+regles = 69
 presume = "Sous 760 px, la fenêtre est un téléphone ou une tablette étroite. Le palier décide du repli du menu, de la grille des commandes d'en-tête, des colonnes de fiches et de la largeur du panneau de personnalisation. Rien ici n'a été mesuré : 760 px est une valeur choisie, et quinze blocs en dépendent."
 decision = "dette"
 
@@ -114,7 +114,7 @@ decision = "dette"
 condition = "(min-width: 761px)"
 classe = "format"
 occurrences = 1
-regles = 2
+regles = 1
 presume = "Au-dessus de 760 px, l'illustration de la page d'anglais est large de 520 px au plus et alignée à gauche du panneau. La condition est l'exact contraire du palier principal : elle existe parce que 760 px est pris comme frontière de téléphone, pas parce que l'illustration a été mesurée."
 decision = "dette"
 

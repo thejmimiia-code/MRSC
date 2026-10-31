@@ -255,3 +255,12 @@ ecart_max_px = 16.5
 ecart_part = 0.049
 presentation_repliee = ["lecture"]
 raison = "Bandeau de la page IA : texte et constellation. Deux largeurs sur 233 changeaient de nombre de colonnes après conversion ; une colonne peut varier de 16,5 px (4,9 %) au plus, à cause du partage du seul surplus. Le palier de 760 px et la surcharge d'écart qui l'accompagnait disparaissent."
+
+[[grille_flex]]
+selecteur = ".english-promo-panel"
+grille_avant = "minmax(0, 1.05fr) minmax(280px, .95fr)"
+gap_avant = "clamp(1.2rem, 4vw, 3rem)"
+ecart_max_px = 14
+ecart_part = 0.05
+presentation_repliee = ["lecture"]
+raison = "Encart « aventure anglaise » de la page Apprendre : texte et illustration. Treize largeurs sur 233 changent de nombre de colonnes après conversion ; une colonne peut varier de 14 px (5 %) au plus. Le palier de 760 px et le `justify-items` du palier de 761 px, qui n'ont plus d'objet en flex, disparaissent."

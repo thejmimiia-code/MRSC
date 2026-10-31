@@ -334,8 +334,20 @@ def controler_illustrations() -> list[str]:
                     f"site.css — aspect-ratio {ratio.group(1)} / {ratio.group(2)} ne correspond plus "
                     f"à l’image 1672 × 941 ({attendu:.3f}) : le dessin serait recadré"
                 )
-    if "width: min(100%, 520px)" not in site:
-        erreurs.append("site.css — le plafond de 520 px de .english-promo-art a disparu")
+    # Le plafond de l'illustration n'est pas un ornement : sans lui, la
+    # déclaration `sizes` ment au navigateur (874 px rendus, variante de
+    # 1 200 px servie). Il doit être un `max-width`, pas un `width` : depuis que
+    # le panneau est en `flex-wrap`, `flex-basis: 100%` remplace la largeur de
+    # la boîte et un plafond en `width` ne décide plus rien (densité 0,91
+    # mesurée le 31 octobre 2026).
+    # La recherche porte sur la règle, pas sur le texte : `@media (max-width:
+    # 520px)` contient la même chaîne, et le garde-fou se croyait satisfait
+    # alors que le plafond n'existait plus — le banc de mutation l'a montré.
+    if re.search(r"\.english-promo-art\s*\{[^{}]*max-width:\s*520px", site) is None:
+        erreurs.append(
+            "site.css — le plafond de 520 px de .english-promo-art a disparu "
+            "(il s'écrit `max-width`, sinon `flex-basis` le rend inopérant)"
+        )
     return erreurs
 
 

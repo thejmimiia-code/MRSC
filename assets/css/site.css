@@ -4002,8 +4002,8 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
 
 /* Porte d’entrée entre les fiches autonomes et le prototype d’aventure anglaise. */
 .english-promo-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: clamp(1.2rem, 4vw, 3rem);
   align-items: center;
   padding: clamp(1.2rem, 3vw, 2rem);
@@ -4012,6 +4012,20 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
   background: var(--surface);
   box-shadow: var(--shadow);
 }
+/* Deux colonnes inégales, sans largeur d'écran (31 octobre 2026) : 280 px de
+   base chacune, le repli tombe quand les deux ne tiennent plus. Mesure du
+   changement : treize largeurs de fenêtre sur 233 changent de nombre de
+   colonnes, une colonne peut varier de 14 px (5 %) au plus. */
+.english-promo-panel > :first-child {
+  flex: 1.05 1 280px;
+  min-width: 0;
+}
+
+.english-promo-panel > :last-child {
+  flex: 0.95 1 280px;
+  min-width: 0;
+}
+
 .english-promo-copy h2 { max-width: 22ch; font-size: clamp(1.65rem, 3.2vw, 2.35rem); }
 .english-promo-copy > p:not(.eyebrow) { max-width: 68ch; color: var(--text-soft); }
 .english-promo-art { min-width: 0; margin: 0; }
@@ -4019,10 +4033,15 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
    760 px, mais les mises en page Lecture, Mosaïque, Panorama et Compacte
    élargissent la colonne : l'image montait à 874 px et le navigateur, trompé
    par la déclaration, servait une variante de 1 200 px — 1,46× d'agrandissement.
-   Le plafond rend la déclaration vraie dans toutes les présentations. */
+   Le plafond rend la déclaration vraie dans toutes les présentations.
+   Il s'écrit en `max-width` et non en `width`, et ce n'est pas un détail :
+   en présentation Lecture, `flex-basis: 100%` remplace la largeur de la boîte
+   et le plafond en `width` était donc ignoré — l'image repartait à 879 px et
+   le navigateur resservait une variante trop petite (densité 0,91), mesuré le
+   31 octobre 2026. Un `max-width` s'applique, lui, à la taille d'une boîte
+   flexible (CSS Flexbox, § 9.2). */
 @media (min-width: 761px) {
-  .english-promo-art { width: min(100%, 520px); }
-  .english-promo-panel { justify-items: start; }
+  .english-promo-art { max-width: 520px; }
 }
 /* `height: auto` n'est pas décoratif : l'attribut `height` du HTML s'applique
    comme une hauteur de 941 px, et `aspect-ratio` ne joue que sur une dimension
@@ -4032,7 +4051,6 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
 .english-promo-art img { width: 100%; height: auto; aspect-ratio: 1672 / 941; border-radius: 15px; object-fit: contain; object-position: center; }
 .english-promo-art figcaption { margin-top: .5rem; color: var(--muted); font-size: max(12px, .76rem); line-height: 1.45; }
 @media (max-width: 760px) {
-  .english-promo-panel { grid-template-columns: minmax(0, 1fr); }
   .english-promo-panel .hero-actions { align-items: stretch; flex-direction: column; }
   .english-promo-panel .hero-actions .button { width: 100%; }
 }
@@ -4164,7 +4182,7 @@ html.contraste-renforce .layout-choice.is-selected { background: var(--blue-soft
 html[data-layout="lecture"] { --content: 940px; }
 html[data-layout="lecture"] main :is(
   .hero-grid,.mission-grid,.participation-grid,.join-panel,.document-grid,.link-grid,.contact-grid,.map-layout,
-  .home-action-grid,.home-voice-grid,.home-share-panel,.english-promo-panel,
+  .home-action-grid,.home-voice-grid,.home-share-panel,
   .ai-feature-panel,.ai-metric-grid,.ai-forms-grid,.ai-balance-grid,.ai-lives-grid,
   .ai-questions-layout,.ai-path-panel,.ai-path-steps,.ai-cta-panel,.principle-grid,.trace-panel,
   .simulateur-intro,.simulateur-chiffres,.simulateur-promo-panel,.simulateur-duo,.home-hero-facts,
@@ -4181,7 +4199,7 @@ html[data-layout="lecture"] .site-footer .footer-grid { grid-template-columns: m
 /* « Lecture » composait cette grille en une colonne par `grid-template-columns`.
    Depuis que `.ai-hero-grid` est en `flex-wrap`, cette déclaration n'aurait plus
    d'effet : c'est la base des deux panneaux qui doit passer à 100 %. */
-html[data-layout="lecture"] main .ai-hero-grid > * { flex-basis: 100%; }
+html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel) > * { flex-basis: 100%; }
 html[data-layout="lecture"] main :is(.learning-lesson-article,.learning-lesson-aside,.ai-section-intro,.ai-fraud-evidence,.ai-hero-copy) {
   width: min(100%,78ch);
   margin-inline: auto;
