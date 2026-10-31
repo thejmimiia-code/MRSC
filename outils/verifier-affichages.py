@@ -483,6 +483,30 @@ def controler_qualite_d_encodage() -> list[str]:
     return erreurs
 
 
+def corps_de_fonction(script: str, nom: str) -> str | None:
+    """Rend le corps d'une fonction JavaScript, accolades équilibrées, ou None.
+
+    Sert à vérifier ce que fait un calcul, pas seulement qu'un nom existe : un
+    marqueur cherché dans tout le fichier trouverait la même chaîne ailleurs.
+    """
+    debut = script.find(f"function {nom}(")
+    if debut < 0:
+        return None
+    ouverture = script.find("{", debut)
+    if ouverture < 0:
+        return None
+    profondeur = 0
+    for position in range(ouverture, len(script)):
+        caractere = script[position]
+        if caractere == "{":
+            profondeur += 1
+        elif caractere == "}":
+            profondeur -= 1
+            if profondeur == 0:
+                return script[ouverture:position + 1]
+    return None
+
+
 def controler_panneau_du_menu() -> list[str]:
     """Le panneau du menu doit rester atteignable sur un écran court.
 
@@ -618,37 +642,72 @@ def controler_panneau_du_menu() -> list[str]:
             "site.css — le panneau « Personnalisation » n'est plus ancré sous son bouton "
             "avec un défilement interne (position: absolute; right: 0; overflow: auto)"
         )
-    # L'en-tête compact range ses deux commandes au début de la barre : ancré à
-    # droite de son bouton, le panneau de 22 rem sortait par la gauche de la
-    # fenêtre (28 octobre 2026, capture à 2× : bord gauche de la fenêtre à
-    # x = 202, bord droit du panneau à x = 811, soit 47 px hors écran et des
-    # libellés rognés). Sur ordinateur et en-tête compact, il s'ouvre vers la
-    # droite ; la requête écarte elle-même les formats qui ont leur propre
-    # ancrage (sous 761 px et en paysage court).
+    # Le panneau n'est plus ancré par une règle de format : il est **placé à la
+    # mesure** dans `site.js`, parce qu'aucun point de rupture ne suit une
+    # fenêtre qu'on redimensionne, qu'on zoome ou qu'on tourne. Trois règles
+    # successives l'ont montré : `right: 0` (le panneau sortait par la gauche
+    # dans l'en-tête compact), puis `min-width: 761px and min-height: 561px`
+    # (28 octobre 2026), puis son élargissement à `min-width: 921px` (30 octobre
+    # 2026) — et le format 980 × 4xx, large et bas, passait encore au travers.
     #
-    # La première des deux conditions était une hauteur (`min-height: 561px`).
-    # Le 30 octobre 2026, un téléphone en « aperçu ordinateur » — 980 × 4xx —
-    # l'a prise en défaut : assez large, trop basse, donc aucune des deux règles
-    # ne s'appliquait et le panneau ressortait par la gauche. C'est la largeur
-    # qui décide, pas la hauteur : au-delà de 920 px, le format « paysage
-    # court » n'existe plus, et le panneau a la place de s'ouvrir à droite.
-    # Ce contrôle exige donc les deux branches, en ou.
-    compact = re.search(
-        r"@media \(min-width: 921px\), \(min-width: 761px\) and \(min-height: 561px\) \{\s*"
-        r"html\.entete-compacte \.customize-settings-panel \{(?P<corps>[^}]*)\}",
-        texte,
-    )
-    corps_compact = compact.group("corps") if compact else ""
-    if "left: 0" not in corps_compact or "right: auto" not in corps_compact:
+    # Ce contrôle vérifie donc le calcul, pas la règle : que la fonction de
+    # placement mesure, borne et se rebranche sur tous les changements qui
+    # déplacent le bouton. Et l'inverse, aussi important : qu'aucune règle de
+    # format ne réintroduise un ancrage fixe qui contredirait la mesure.
+    placement = corps_de_fonction(script, "placerPanneauPersonnalisation")
+    if placement is None:
         erreurs.append(
-            "site.css — le panneau « Personnalisation » ne bascule plus vers la droite "
-            "dans l'en-tête compact sur ordinateur (html.entete-compacte "
-            ".customize-settings-panel { right: auto; left: 0 } sous min-width: 921px, ou "
-            "sous min-width: 761px et min-height: 561px) : ancré à droite d'un bouton placé "
-            "au début de la barre, il ressort par la gauche de l'écran et ses libellés "
-            "sont rognés — c'est ce qui est arrivé le 30 octobre 2026 sur un téléphone "
-            "en aperçu ordinateur, large de 980 px et haut de moins de 561 px"
+            "site.js — le panneau « Personnalisation » n'est plus placé à la mesure "
+            "(aucune fonction placerPanneauPersonnalisation) : il retombe sur un ancrage "
+            "fixe de la feuille de style et ressort de l'écran dès que la fenêtre n'est "
+            "pas celle qu'imaginait le point de rupture"
         )
+    else:
+        bornes = {
+            "getBoundingClientRect()": "il ne mesure plus le bouton (getBoundingClientRect)",
+            "visualViewport": "il ignore la fenêtre visuelle (barre d'adresse, clavier virtuel)",
+            "largeurFenetre - largeur - MARGE_PANNEAU": "il ne borne plus la position en largeur",
+            "hauteurFenetre - haut - MARGE_PANNEAU": "il ne borne plus la hauteur au bas de la fenêtre",
+            "style.left": "il ne replace plus le panneau horizontalement",
+            "style.maxHeight": "il ne replace plus sa hauteur maximale",
+        }
+        oubliees = [raison for marqueur, raison in bornes.items() if marqueur not in placement]
+        if oubliees:
+            erreurs.append(
+                "site.js — le placement du panneau « Personnalisation » ne tient plus : "
+                + " ; ".join(oubliees)
+                + ". Une coordonnée non bornée ressort de l'écran dès qu'un format s'éloigne "
+                "de celui qu'on avait en tête"
+            )
+    rebranchements = {
+        "personnalisation.addEventListener(\"toggle\", placerPanneauPersonnalisation)":
+            "il n'est plus placé à l'ouverture du panneau",
+        'window.addEventListener("resize", placerPanneauPersonnalisation':
+            "il ne se replace plus quand la fenêtre change de taille",
+        'window.visualViewport.addEventListener("resize", placerPanneauPersonnalisation':
+            "il ne se replace plus quand la fenêtre visuelle change (barre d'adresse)",
+        "new ResizeObserver(placerPanneauPersonnalisation)":
+            "il ne se replace plus quand l'en-tête change de hauteur (texte agrandi, en-tête réduit)",
+    }
+    for appel, raison in rebranchements.items():
+        if appel not in script:
+            erreurs.append(
+                "site.js — le panneau « Personnalisation » n'est plus replacé : " + raison
+                + ". Un panneau placé une fois reste au format de son ouverture"
+            )
+    ancrages = re.findall(
+        r"@media[^{]*\{[^@]*?\.customize-settings-panel\s*\{[^}]*position:\s*fixed",
+        texte,
+        re.S,
+    )
+    if ancrages or "html.entete-compacte .customize-settings-panel" in texte:
+        erreurs.append(
+            "site.css — le panneau « Personnalisation » est de nouveau ancré par un point "
+            "de rupture (position: fixed dans une @media, ou règle html.entete-compacte "
+            ".customize-settings-panel) : cette valeur contredit le placement mesuré et "
+            "ressort de l'écran dans les formats que le point de rupture n'a pas prévus"
+        )
+
     # Deux commandes, deux colonnes égales : c'est la grille qui empêche le
     # libellé de se casser (« Parcour/s ») et qui laisse 32 px de haut à chaque
     # bouton. Une seule colonne sous 300 px, sinon deux colonnes de 19 px

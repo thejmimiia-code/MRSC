@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 42 |
+| Avancées consignées | 43 |
 | Période couverte | du 2026-10-20 au 2026-10-30 |
-| Contrôles exécutables cités | 55 |
+| Contrôles exécutables cités | 56 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -969,6 +969,32 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 **Limite — ce que cela ne prouve pas.** Le banc ne rejoue aucun essai : le faux navigateur ne clique pas et ne mesure pas. Il prouve que le harnais ne peut pas raconter un succès qui n'a pas eu lieu — comptage, nommage, bilan, code de sortie — jamais que les neuf essais mesurent ce qu'ils annoncent. Ce second point est tenu par le job `graphismes` et un vrai Chromium : observé vert le 29 octobre (exécution 40972858034). Il a d'abord échoué, et c'est instructif — servi par `python3 -m http.server`, `simulateur/` reçoit des 404 sur son API, n'ouvre jamais `#overlay.visible`, et quatre essais tombent en `TimeoutError`. Le script doit donc démarrer `outils/serveur-local.py`, comme sa documentation le dit. Rien de tout cela ne prouve que les neuf essais couvrent ce qu'ils prétendent couvrir : ils sont verts, pas exhaustifs.
 
 **Suite.** Éprouver la mesure de `verifier-graphismes.cjs`, dernier contrôle sans second témoin.
+
+Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
+
+### `des-points-de-rupture-aux-mesures` — Le panneau se place à la mesure au lieu d'obéir à des points de rupture
+
+*Consignée le 2026-10-30.*
+
+**Constat.** Trois règles successives ont ancré le panneau « Personnalisation » : `right: 0`, puis `min-width: 761px and min-height: 561px`, puis l'ajout de `min-width: 921px`. Chacune était juste pour le format signalé et fausse pour le suivant — la dernière laissait passer 980 × 4xx. Empiler des points de rupture pour suivre des fenêtres qu'on redimensionne, qu'on zoome et qu'on tourne à longueur de journée est une course perdue : il y aura toujours un format qu'on n'a pas imaginé.
+
+**Ce que cela change.** `placerPanneauPersonnalisation()` dans `site.js` remplace les trois règles : elle mesure la fenêtre (`visualViewport` quand il existe), le bouton et l'en-tête, borne la largeur à la fenêtre moins deux marges, aligne le bord droit du panneau sur celui du bouton puis le rabat à gauche s'il déborde, borne la position aux marges et la hauteur pour laisser 160 px visibles. Le calcul est refait à chaque ouverture, à chaque `resize`, `orientationchange`, changement de fenêtre visuelle (barre d'adresse, clavier) et de hauteur d'en-tête. `outils/test_placement_panneau.mjs` extrait la fonction livrée et l'exécute sans navigateur sur 3 600 positions ; il a trouvé avant tout Chromium un dépassement de 8 px par le bas dans une fenêtre de 320 px avec un en-tête de 180. `verifier-affichages.py` vérifie désormais le calcul et refuse tout retour d'un ancrage par `@media`, et `test-experience.cjs` mesure huit formats puis quatre redimensionnements panneau ouvert dans un vrai navigateur.
+
+**Preuves dans le dépôt :**
+
+- `assets/js/site.js`
+- `assets/css/site.css`
+- `outils/test_placement_panneau.mjs`
+- `outils/verifier-affichages.py`
+- `outils/test_mutations_affichages.py`
+- `outils/test-experience.cjs`
+- `docs/rd/formats-affichage.md`
+
+**Contrôle qui la maintient :** `node outils/test_placement_panneau.mjs && python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py`
+
+**Limite — ce que cela ne prouve pas.** Le banc sans navigateur éprouve l'arithmétique, pas le rendu : un `visualViewport` réel, un zoom de page, un clavier virtuel ou un `backdrop-filter` qui déplace le référentiel peuvent se comporter autrement. C'est l'essai navigateur qui tranche, et son premier passage réel est celui de sa PR. Le placement dépend aussi d'un script : sans JavaScript, le panneau reste lisible mais pas nécessairement bien placé, et c'est écrit dans la feuille de style comme un repli assumé.
+
+**Suite.** Lire le premier passage en CI de l'essai à huit formats et quatre redimensionnements ; s'il tombe, savoir lequel des deux niveaux se trompe — le calcul sans navigateur ou le rendu.
 
 Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 

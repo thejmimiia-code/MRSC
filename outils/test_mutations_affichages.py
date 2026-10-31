@@ -38,12 +38,38 @@ OUTIL = "verifier-affichages.py"
 #: Les mutations reprennent des décisions datées du journal, pour que le banc
 #: garde le lien entre une règle écrite et le contrôle qui la tient.
 MUTATIONS = (
+    # Le panneau « Personnalisation » n'est plus ancré par un point de rupture :
+    # il est placé à la mesure dans `site.js` (30 octobre 2026). Les mutations
+    # portent donc sur le calcul — et la dernière sur une règle de format
+    # réintroduite, qui contredirait silencieusement la mesure.
     (
-        "panneau de personnalisation ancré à droite",
-        "assets/css/site.css",
-        "    right: auto;\n    left: 0;\n",
+        "panneau de personnalisation replacé à chaque changement de fenêtre",
+        "assets/js/site.js",
+        '      personnalisation.addEventListener("toggle", placerPanneauPersonnalisation);\n',
         "",
-        "ne bascule plus vers la droite",
+        "n'est plus placé à l'ouverture du panneau",
+    ),
+    (
+        "panneau de personnalisation borné à la fenêtre",
+        "assets/js/site.js",
+        "          largeurFenetre - largeur - MARGE_PANNEAU\n",
+        "          largeurFenetre\n",
+        "il ne borne plus la position en largeur",
+    ),
+    (
+        "panneau de personnalisation à l'écoute de la fenêtre visuelle",
+        "assets/js/site.js",
+        "      const vue = window.visualViewport;\n",
+        "      const vue = null;\n",
+        "il ignore la fenêtre visuelle",
+    ),
+    (
+        "panneau de personnalisation réancré par un point de rupture",
+        "assets/css/site.css",
+        "html.has-js .site-header .customize-settings-panel .display-settings,\n",
+        "html.entete-compacte .customize-settings-panel { left: 0; right: auto; }\n"
+        "html.has-js .site-header .customize-settings-panel .display-settings,\n",
+        "de nouveau ancré par un point de rupture",
     ),
     (
         "mention d'impression sur sa propre ligne",
@@ -105,7 +131,12 @@ class TestMutationsAffichages(unittest.TestCase):
         with tempfile.TemporaryDirectory() as dossier:
             copie = Path(dossier)
             banc_mutations.copie_jetable(copie)
-            banc_mutations.muter(copie, "assets/css/site.css", "    right: auto;\n    left: 0;\n", "")
+            banc_mutations.muter(
+                copie,
+                "assets/js/site.js",
+                "      panneauPersonnalisation.style.maxHeight = ",
+                "      panneauPersonnalisation.style.heightInutile = ",
+            )
             banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(avant, (RACINE / "assets" / "css" / "site.css").read_bytes())
 

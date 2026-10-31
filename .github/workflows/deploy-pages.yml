@@ -107,6 +107,17 @@ jobs:
           python3 outils/verifier-affichages.py
           python3 outils/test_mutations_affichages.py
 
+      # Le panneau « Personnalisation » n'est plus ancré par un point de rupture :
+      # il est placé à la mesure dans `site.js` (largeur bornée à la fenêtre,
+      # bord droit aligné sur le bouton puis rabattu, hauteur bornée sous
+      # l'en-tête). Ce banc extrait la vraie fonction et l'exécute sans
+      # navigateur sur 3 600 positions — toutes les largeurs de 240 à 2 560 px
+      # croisées avec cinq hauteurs et trois boutons. Il a trouvé, avant tout
+      # Chromium, qu'une fenêtre de 320 px avec un en-tête de 180 laissait
+      # dépasser le panneau de 8 px.
+      - name: Vérifier le placement mesuré du panneau de personnalisation
+        run: node outils/test_placement_panneau.mjs
+
       # Ici, la porte ne vérifie pas seulement : elle autorise la publication.
       # Ses six mutations sont donc rejouées avant, dans une copie du dépôt.
       - name: Validate the published file set

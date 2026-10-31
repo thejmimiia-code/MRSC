@@ -41,7 +41,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/test-cache-css-ia.cjs` | Simule un CSS périmé servi sous l'ancienne URL | `test_test_cache_css_ia.mjs` (5 cas : nominal, version périmée, attente inversée, interception retirée, ancien CSS identique) | `banc` |
 | `outils/test-experience.cjs` | 10 essais navigateur du panneau, du menu, de la lecture vocale et de l'ancrage du panneau | `test_test_experience.mjs` (harnais seul : 10 échecs comptés et nommés, code de sortie, 3 mutations rejetées) · lancé par le job `graphismes` depuis le 29 octobre | `banc` |
 | `outils/verifier-accessibilite.cjs` | Audit axe des pages, lancé dans le job navigateur | `test_verifier_accessibilite.mjs` (navigateur et axe remplacés ; 3 modes, chaque exécution doit avoir son verdict) | `faute-en-memoire` |
-| `outils/verifier-affichages.py` | 16 garde-fous de format et d'impression | `test_mutations_affichages.py` (5 mutations) | `banc` |
+| `outils/verifier-affichages.py` | 16 garde-fous de format et d'impression | `test_mutations_affichages.py` (8 mutations, dont 4 sur le placement mesuré du panneau) · `test_placement_panneau.mjs` (3 600 positions, sans navigateur) | `banc` |
 | `outils/verifier-budgets-visuels.py` | Budgets d'affichage des titres | `test_mutations_budgets_visuels.py` (3 fautes : titre long, page sans titre, H1 gonflé) | `banc` |
 | `outils/verifier-decision-prospective.py` | Faits internes du brief prospectif | `test_verifier_decision_prospective.py` (20 tests) | `test` |
 | `outils/verifier-fiches-statistiques.cjs` | Géométrie des deux fiches de statistiques | `test_verifier_fiches_statistiques.mjs` (navigateur remplacé ; 4 modes + relevé commité intact) | `faute-en-memoire` |

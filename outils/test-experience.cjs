@@ -670,23 +670,76 @@ async function main() {
 
   // Le 30 octobre 2026, un téléphone en « aperçu ordinateur » a montré le panneau
   // « Personnalisation » sorti par la gauche de la fenêtre, libellés rognés
-  // (« grandir », « arcours », « ffichage »). La cause n'était pas un défaut de
-  // rangement mais une requête de largeur doublée d'une hauteur : la fenêtre
-  // annoncée par ce mode est large (980 px) et basse (moins de 561 px), donc
-  // aucune des deux règles d'ancrage ne s'appliquait et le panneau retombait sur
-  // `right: 0`, ancré à droite d'un bouton placé au début de la barre.
-  // L'essai mesure cette fenêtre-là, et les deux autres formats d'ancrage.
-  await executer('Aperçu ordinateur depuis un téléphone : 980 × 440, le panneau reste dans l’écran', async () => {
+  // (« grandir », « arcours », « ffichage »). Deux règles de format successives
+  // l'avaient laissé passer ; la réponse n'est pas une troisième règle mais un
+  // placement mesuré (voir `placerPanneauPersonnalisation` dans site.js).
+  //
+  // Cet essai éprouve donc deux choses, et la seconde est la vraie promesse :
+  //   1. à l'ouverture, dans huit formats dont plusieurs « larges et bas » ;
+  //   2. **pendant que le panneau est ouvert**, quand la fenêtre change de
+  //      taille — redimensionner, tourner, changer de zoom : le panneau doit
+  //      se replacer sans être refermé puis rouvert.
+  await executer('Panneau « Personnalisation » placé à la mesure, y compris quand la fenêtre change', async () => {
     const page = await creerPage({ width: 980, height: 440 });
+    const mesurerPanneau = () => page.evaluate(() => {
+      const panneau = document.querySelector('.customize-settings-panel');
+      const cadre = panneau.getBoundingClientRect();
+      const fenetreVisuelle = window.visualViewport;
+      const largeurVue = Math.round(fenetreVisuelle ? fenetreVisuelle.width : document.documentElement.clientWidth);
+      const hauteurVue = Math.round(fenetreVisuelle ? fenetreVisuelle.height : window.innerHeight);
+      const lignes = Array.from(panneau.children)
+        .filter((element) => element.getBoundingClientRect().height > 0)
+        .map((element) => {
+          const boite = element.getBoundingClientRect();
+          return {
+            nom: (typeof element.className === 'string' ? element.className : element.tagName) || element.tagName,
+            gauche: Math.round(boite.left),
+            droite: Math.round(boite.right),
+          };
+        });
+      return {
+        ouvert: document.querySelector('[data-customize-settings]')?.open === true,
+        largeurVue,
+        hauteurVue,
+        gauche: Math.round(cadre.left),
+        droite: Math.round(cadre.right),
+        haut: Math.round(cadre.top),
+        bas: Math.round(cadre.bottom),
+        largeur: Math.round(cadre.width),
+        hauteur: Math.round(cadre.height),
+        lignes,
+      };
+    });
+    const verifierPlacement = (mesure, contexte) => {
+      assert.equal(mesure.ouvert, true, `le panneau doit rester ouvert — ${contexte}`);
+      assert.ok(mesure.gauche >= -1, `le panneau sort par la gauche — ${contexte} : ${JSON.stringify(mesure)}`);
+      assert.ok(mesure.droite <= mesure.largeurVue + 1, `le panneau sort par la droite — ${contexte} : ${JSON.stringify(mesure)}`);
+      assert.ok(mesure.haut >= -1, `le panneau sort par le haut — ${contexte} : ${JSON.stringify(mesure)}`);
+      assert.ok(mesure.bas <= mesure.hauteurVue + 1, `le panneau sort par le bas — ${contexte} : ${JSON.stringify(mesure)}`);
+      // 160 px minimum : c'est la borne écrite dans le placement, sous laquelle
+      // le panneau cesserait d'être utilisable même en défilant.
+      assert.ok(mesure.hauteur >= 160, `le panneau est écrasé — ${contexte} : ${JSON.stringify(mesure)}`);
+      const plancher = Math.min(260, mesure.largeurVue - 16);
+      assert.ok(mesure.largeur >= plancher, `le panneau est trop étroit — ${contexte} : ${JSON.stringify(mesure)}`);
+      assert.deepEqual(
+        mesure.lignes.filter((ligne) => ligne.gauche < -1 || ligne.droite > mesure.largeurVue + 1),
+        [],
+        `des libellés sortent de la fenêtre — ${contexte}`
+      );
+    };
     try {
       const formats = [
-        { largeur: 980, hauteur: 440, nom: 'aperçu ordinateur, large et bas' },
-        { largeur: 1024, hauteur: 500, nom: 'fenêtre large et basse' },
-        { largeur: 1440, hauteur: 1000, nom: 'bureau ordinaire, en-tête compact' },
-        { largeur: 800, hauteur: 500, nom: 'paysage court, ancrage fixe' },
+        [980, 440, 'aperçu ordinateur, large et bas'],
+        [1024, 500, 'fenêtre large et basse'],
+        [1440, 1000, 'bureau ordinaire, en-tête compact'],
+        [1366, 768, 'portable courant'],
+        [800, 500, 'paysage court'],
+        [667, 375, 'téléphone en paysage'],
+        [390, 844, 'téléphone en portrait'],
+        [240, 800, 'fenêtre étroite'],
       ];
-      for (const format of formats) {
-        await page.setViewport({ width: format.largeur, height: format.hauteur, deviceScaleFactor: 1 });
+      for (const [largeur, hauteur, nom] of formats) {
+        await page.setViewport({ width: largeur, height: hauteur, deviceScaleFactor: 1 });
         await ouvrirPageSite(page, 'index.html');
         // Ce mode n'est pas reconnu comme compact par la requête du site : c'est
         // l'utilisateur qui réduit l'en-tête. L'essai le fait comme lui.
@@ -701,37 +754,22 @@ async function main() {
           );
         }
         await ouvrirPersonnalisation(page);
-        const mesure = await page.evaluate(() => {
-          const panneau = document.querySelector('.customize-settings-panel');
-          const cadre = panneau.getBoundingClientRect();
-          const style = getComputedStyle(panneau);
-          return {
-            viewport: window.innerWidth,
-            hauteurFenetre: window.innerHeight,
-            gauche: Math.round(cadre.left),
-            droite: Math.round(cadre.right),
-            largeur: Math.round(cadre.width),
-            ancrage: style.position,
-            compact: document.querySelector('.site-header').classList.contains('is-compact'),
-            libellesRognes: Array.from(panneau.children)
-              .filter((element) => element.getBoundingClientRect().height > 0)
-              .map((element) => {
-                const boite = element.getBoundingClientRect();
-                return {
-                  nom: (typeof element.className === 'string' ? element.className : element.tagName) || element.tagName,
-                  gauche: Math.round(boite.left),
-                  droite: Math.round(boite.right),
-                };
-              })
-              .filter((ligne) => ligne.gauche < -1 || ligne.droite > window.innerWidth + 1),
-          };
-        });
-        const contexte = `${format.nom} (${format.largeur} × ${format.hauteur}) : ${JSON.stringify(mesure)}`;
-        assert.equal(mesure.compact, true, `l’en-tête doit être compact — ${contexte}`);
-        assert.ok(mesure.gauche >= -1, `le panneau sort par la gauche — ${contexte}`);
-        assert.ok(mesure.droite <= mesure.viewport + 1, `le panneau sort par la droite — ${contexte}`);
-        assert.ok(mesure.largeur >= 260, `le panneau est écrasé — ${contexte}`);
-        assert.deepEqual(mesure.libellesRognes, [], `des libellés sortent de la fenêtre — ${contexte}`);
+        verifierPlacement(await mesurerPanneau(), `${nom} (${largeur} × ${hauteur})`);
+      }
+
+      // Le panneau reste ouvert : c'est la fenêtre qui change. Rien ne dit au
+      // script de le replacer sinon les écouteurs branchés à sa création.
+      for (const [largeur, hauteur, nom] of [
+        [1440, 1000, 'élargi'],
+        [980, 440, 'écrasé en hauteur'],
+        [420, 900, 'rétréci en largeur'],
+        [1920, 1080, 'plein écran'],
+      ]) {
+        await page.setViewport({ width: largeur, height: hauteur, deviceScaleFactor: 1 });
+        // Une image d'animation laisse au navigateur le temps d'appliquer la
+        // nouvelle taille avant la mesure — et au ResizeObserver, le cas échéant.
+        await page.evaluate(() => new Promise((suite) => requestAnimationFrame(() => requestAnimationFrame(suite))));
+        verifierPlacement(await mesurerPanneau(), `redimensionné vers ${nom} (${largeur} × ${hauteur})`);
       }
     } finally {
       await page.close();

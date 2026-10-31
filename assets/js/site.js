@@ -180,8 +180,10 @@
   ];
   const layoutSettings = settings ? document.createElement("details") : null;
   // Panneau « Personnalisation » : déclaré ici pour que les gestionnaires de clic
-  // et de clavier, plus bas, puissent le fermer.
+  // et de clavier, plus bas, puissent le fermer, et pour que le placement
+  // mesuré (voir `placerPanneauPersonnalisation`) le retrouve.
   let personnalisation = null;
+  let panneauPersonnalisation = null;
   const layoutInputs = [];
   let layoutStatus = null;
 
@@ -784,6 +786,81 @@
       new ResizeObserver(publierHauteurEntete).observe(header);
     }
 
+    // --- Placement mesuré du panneau « Personnalisation » ------------------
+    // Personne ne garde plus une fenêtre à une taille fixe : on la redimensionne,
+    // on la coupe en deux, on zoome, on passe du portrait au paysage, et sur
+    // téléphone la barre d'adresse change la hauteur utile. Un point de rupture
+    // ne connaît aucun de ces états, et deux règles successives l'ont prouvé :
+    // celle du 28 octobre 2026 (`min-width: 761px and min-height: 561px`) puis
+    // sa correction du 30 (ajout de `min-width: 921px`) laissaient encore
+    // passer un format — 980 × 4xx, large et bas — où le panneau ressortait par
+    // la gauche, libellés rognés. Empiler des points de rupture, c'est courir
+    // après les formats ; mesurer, c'est n'en avoir aucun à courir après.
+    //
+    // Le panneau est donc placé **à la mesure**, à chaque ouverture et à chaque
+    // changement de fenêtre :
+    //   1. la largeur voulue par la feuille de style est relue, puis bornée à
+    //      la fenêtre moins deux marges ;
+    //   2. son bord droit est aligné sur celui du bouton ; si cela le fait
+    //      sortir par la gauche, c'est le bord gauche qui est aligné ; puis sa
+    //      position est bornée à la fenêtre — c'est cette borne qui remplace
+    //      les points de rupture ;
+    //   3. sa hauteur descend sous l'en-tête, bornée pour laisser au moins
+    //      160 px de panneau visible, avec défilement interne au-delà.
+    //
+    // Le positionnement reste `absolute` dans `.customize-settings`, qui porte
+    // le bouton : les coordonnées calculées sont donc ramenées à ce bouton. On
+    // évite ainsi `position: fixed` dans l'en-tête, dont le `backdrop-filter`
+    // fait de lui le référentiel des descendants fixes — un piège qui rendrait
+    // les coordonnées fausses sans que rien ne le signale.
+    const MARGE_PANNEAU = 8;
+    const HAUTEUR_MINIMALE_PANNEAU = 160;
+    function placerPanneauPersonnalisation() {
+      if (!personnalisation || !panneauPersonnalisation || !personnalisation.open) return;
+      const bouton = personnalisation.querySelector("summary");
+      if (!bouton) return;
+      const vue = window.visualViewport;
+      const largeurFenetre = Math.round(vue ? vue.width : document.documentElement.clientWidth);
+      const hauteurFenetre = Math.round(vue ? vue.height : window.innerHeight);
+      // Largeur voulue : celle de la feuille de style, relue à chaque fois
+      // plutôt que devinée — une largeur fixe ici contredirait le CSS.
+      panneauPersonnalisation.style.width = "";
+      const voulue = panneauPersonnalisation.getBoundingClientRect().width || 352;
+      const largeur = Math.round(
+        Math.max(160, Math.min(voulue, largeurFenetre - 2 * MARGE_PANNEAU))
+      );
+      const cadreBouton = bouton.getBoundingClientRect();
+      const cadreEntete = header ? header.getBoundingClientRect() : cadreBouton;
+      const aligneADroite = cadreBouton.right - largeur;
+      const gauche = Math.max(
+        MARGE_PANNEAU,
+        Math.min(
+          aligneADroite < MARGE_PANNEAU ? cadreBouton.left : aligneADroite,
+          largeurFenetre - largeur - MARGE_PANNEAU
+        )
+      );
+      // La borne de hauteur réserve la marge du bas : un en-tête de 180 px dans
+      // une fenêtre de 320 laissait sinon 152 px de panneau pour 160 demandés,
+      // et le panneau dépassait de 8 px. Trouvé par `test_placement_panneau.mjs`
+      // avant tout navigateur.
+      const haut = Math.max(
+        MARGE_PANNEAU,
+        Math.min(
+          cadreEntete.bottom + MARGE_PANNEAU,
+          hauteurFenetre - HAUTEUR_MINIMALE_PANNEAU - MARGE_PANNEAU
+        )
+      );
+      const hauteurDisponible = Math.max(
+        HAUTEUR_MINIMALE_PANNEAU,
+        hauteurFenetre - haut - MARGE_PANNEAU
+      );
+      panneauPersonnalisation.style.right = "auto";
+      panneauPersonnalisation.style.width = `${largeur}px`;
+      panneauPersonnalisation.style.left = `${Math.round(gauche - cadreBouton.left)}px`;
+      panneauPersonnalisation.style.top = `${Math.round(haut - cadreBouton.top)}px`;
+      panneauPersonnalisation.style.maxHeight = `${Math.round(hauteurDisponible)}px`;
+    }
+
     // Un seul bouton « Personnalisation » regroupe les commandes de préférence :
     // taille de l'en-tête, parcours, affichage et présentation. L'en-tête ne garde
     // ainsi que « Menu » et « Personnalisation ». Le déplacement se fait ici plutôt
@@ -804,7 +881,7 @@
       chevronPersonnalisation.textContent = "⌄";
       resume.append(" ", chevronPersonnalisation);
 
-      const panneauPersonnalisation = document.createElement("div");
+      panneauPersonnalisation = document.createElement("div");
       panneauPersonnalisation.className = "customize-settings-panel";
       panneauPersonnalisation.id = "site-customize-panel";
       resume.setAttribute("aria-controls", panneauPersonnalisation.id);
@@ -819,6 +896,21 @@
         if (element) panneauPersonnalisation.append(element);
       });
       outilsEntete.append(personnalisation);
+
+      // Le placement suit tous les changements qui déplacent le bouton ou
+      // réduisent la place : ouverture du panneau, fenêtre redimensionnée,
+      // rotation, barre d'adresse du téléphone, clavier virtuel, changement de
+      // taille de texte ou d'en-tête. Rien de tout cela n'est un format nommé.
+      personnalisation.addEventListener("toggle", placerPanneauPersonnalisation);
+      window.addEventListener("resize", placerPanneauPersonnalisation, { passive: true });
+      window.addEventListener("orientationchange", placerPanneauPersonnalisation);
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", placerPanneauPersonnalisation, { passive: true });
+        window.visualViewport.addEventListener("scroll", placerPanneauPersonnalisation, { passive: true });
+      }
+      if (header && typeof ResizeObserver === "function") {
+        new ResizeObserver(placerPanneauPersonnalisation).observe(header);
+      }
     }
 
     const closeMenu = () => {
