@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-31 — Ce que le compteur de règles ne pouvait pas voir
+
+- **Initiative :** `optimisation-du-site`.
+- **La limite écrite deux fois, et enfin refermée :** en retirant `.contact-grid` d'un bloc de 760 px, le compte des règles n'avait pas bougé — parce qu'une règle qui perd un sélecteur reste une règle. Deux journées de suite, cette phrase est restée une limite avouée au lieu d'un contrôle. `modele-grilles.py` sait désormais dire quelles déclarations de colonnes, sous condition de largeur, **ne décident rien** : pour chacune, il recalcule la valeur en vigueur à sa largeur en l'excluant elle-même, et compare les écritures normalisées (`minmax(0, 1fr)` et `minmax(0,1fr)` sont la même valeur).
+- **Mesure :** zéro aujourd'hui, sur les 33 grilles à pistes égales et les 34 inégales. Le contrôle est donc une **garde**, pas un nettoyage : il ne peut que se déclencher plus tard, et il échoue (`--verifier`) au lieu d'avertir.
+- **Pourquoi c'est un vrai contrôle et pas un ornement :** le cas est éprouvé par le banc — une déclaration identique à la valeur en vigueur, ajoutée dans un `@media`, fait sortir `--verifier` en code 1 avec le message « ne décide rien ». Sans ce cas, une garde qui n'a jamais mordu ne prouve rien.
+- **Ce que le contrôle ne voit toujours pas :** une déclaration neutralisée par une règle **postérieure de même spécificité** écrite ailleurs dans la feuille (hors condition de largeur, par exemple un bloc de préférence `html[data-layout]`) : la cascade du site s'en occupe, pas ce modèle. Et une déclaration dont la valeur diffère mais dont l'effet est nul (par exemple un minimum plus petit que celui du palier précédent) reste invisible : c'est un problème de portée, pas de texte.
+- **Contrôles exécutés :** `modele-grilles.py --verifier` (22 grilles, 0 déclaration morte) · `test_modele_grilles.py` (**21 cas**, dont la garde éprouvée) · `compter-paliers.py` (17 conditions, 38 blocs, 195 règles) · `test_paliers_affichage.py` (20 cas) · `verifier-affichages.py`, `test_mutations_affichages.py` · `verifier-integration.py` · `verifier-site-statique.py` (99 pages) · `verifier-publication-locale.py` (136 fichiers).
+- **Prochaine action :** les 34 grilles à pistes inégales gardent leurs paliers, et c'est justifié — mais `flex-wrap` exprimerait certaines d'entre elles sans largeur d'écran. Mesurer ce que cela changerait avant de l'écrire.
+
 ## 2026-10-31 — La dernière grille égale quitte son palier
 
 - **Initiative :** `optimisation-du-site`.

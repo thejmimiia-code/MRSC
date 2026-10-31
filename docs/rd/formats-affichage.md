@@ -1213,3 +1213,22 @@ de large à 240 px de fenêtre auparavant).
 largeur.** 34 grilles restent à pistes inégales, assumées et déclarées non
 convertibles, et **195 règles** restent sous condition de largeur (214 avant ces
 trois lots).
+
+## 14. La déclaration qui ne décide rien (31 octobre 2026)
+
+Deux journées de suite, le journal a porté la même limite : le compteur de
+règles ne voit pas un sélecteur mort **à l'intérieur** d'une règle vivante.
+`.contact-grid` a vécu dans un bloc de 760 px pour y réimposer une colonne à une
+grille déjà à une colonne, et le compte n'a pas bougé quand la déclaration a été
+retirée.
+
+`modele-grilles.py` recalcule maintenant, pour chaque déclaration de colonnes
+sous condition de largeur, la valeur **en vigueur à cette largeur en l'excluant
+elle-même**, et compare les écritures normalisées. Si les deux sont identiques,
+la déclaration ne décide rien et `--verifier` échoue. Mesure du jour : **zéro**
+sur les 67 grilles de la feuille — c'est donc une garde, et le banc en éprouve le
+déclenchement.
+
+Ce qu'elle ne voit pas : une déclaration neutralisée par une règle postérieure
+de même spécificité hors condition de largeur, et une déclaration dont la valeur
+diffère mais dont l'effet est nul.
