@@ -907,6 +907,13 @@
       // rotation, barre d'adresse du téléphone, clavier virtuel, changement de
       // taille de texte ou d'en-tête. Rien de tout cela n'est un format nommé.
       personnalisation.addEventListener("toggle", placerPanneauPersonnalisation);
+      // Chromium restaure l'état ouvert d'un `<details>` au rechargement, et le
+      // fait **après** l'événement `load` : ni `toggle` ni `load` ne passent
+      // alors. Observer l'attribut `open` attrape cette restauration comme un
+      // clic de l'utilisateur — mesuré le 30 octobre 2026 par l'essai à
+      // 800 × 500, panneau ouvert avec un style en ligne nul.
+      new MutationObserver(placerPanneauPersonnalisation)
+        .observe(personnalisation, { attributeFilter: ["open"] });
       window.addEventListener("resize", placerPanneauPersonnalisation, { passive: true });
       window.addEventListener("orientationchange", placerPanneauPersonnalisation);
       if (window.visualViewport) {

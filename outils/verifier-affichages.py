@@ -688,6 +688,8 @@ def controler_panneau_du_menu() -> list[str]:
             "il ne se replace plus quand la fenêtre visuelle change (barre d'adresse)",
         "new ResizeObserver(placerPanneauPersonnalisation)":
             "il ne se replace plus quand l'en-tête change de hauteur (texte agrandi, en-tête réduit)",
+        "new MutationObserver(placerPanneauPersonnalisation)":
+            "il ne voit plus un panneau restauré ouvert par le navigateur (attribut open posé après load)",
     }
     for appel, raison in rebranchements.items():
         if appel not in script:
