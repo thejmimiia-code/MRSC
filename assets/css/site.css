@@ -2752,7 +2752,7 @@ html.contraste-renforce .resource-scope-note {
 }
 .creator-quote p, .creator-sign { margin-bottom: 0; }
 .creator-sign { color: var(--on-navy-green); font-weight: 700; }
-.principle-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.principle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr)); gap: 1rem; }
 .principle-card {
   padding: 1.5rem;
   border: 1px solid var(--line);
@@ -2887,15 +2887,9 @@ html.contraste-renforce .resource-scope-note {
   .simulateur-chiffres { grid-template-columns: minmax(0, 1fr); }
   .simulateur-frame { height: 820px; }
 }
-@media (max-width: 1000px) {
-  .principle-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 @media (max-width: 760px) {
   .trace-panel { grid-template-columns: minmax(0, 1fr); }
   .trace-panel .button { justify-self: start; }
-}
-@media (max-width: 520px) {
-  .principle-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* Adaptations d’affichage, navigation commune et réglages accessibles. */
@@ -3762,14 +3756,14 @@ html.contraste-renforce :is(.privacy-summary,.privacy-review-note) { border-colo
 .ai-fraud-callout { margin-block:1.6rem; padding:clamp(1.2rem,3vw,1.8rem); border:1px solid var(--border-soft-6); border-left:6px solid var(--blue); border-radius:16px; background:var(--tint-blue-7); }
 .ai-fraud-callout strong { display:block; margin-bottom:.4rem; color:var(--navy-ink); font-size: max(12px, 1.15rem); }
 .ai-fraud-callout p { max-width:90ch; margin:0; color:var(--text-soft-7); }
-.ai-fraud-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-block:1.6rem 2.3rem; }
+.ai-fraud-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(370px,100%),1fr)); gap:1rem; margin-block:1.6rem 2.3rem; }
 .ai-fraud-card { padding:1.25rem; border:1px solid var(--line); border-radius:16px; background:var(--surface); box-shadow:0 8px 26px rgba(26,48,91,.045); }
 .ai-fraud-card h3 { margin-block:.4rem .55rem; font-size: max(12px, 1.12rem); }
 .ai-fraud-card p { margin:0; color:var(--text-soft-2); font-size: max(12px, .94rem); }
 .ai-fraud-label { color:var(--green); font-size: max(12px, .75rem); font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
 .ai-fraud-response { padding:clamp(1.3rem,4vw,2.2rem); border:1px solid var(--border-soft-4); border-radius:22px; background:var(--surface); }
 .ai-fraud-response > div:first-child h3 { max-width:34ch; font-size:clamp(1.35rem,2.8vw,1.9rem); }
-.ai-fraud-steps { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.85rem; margin:1.25rem 0; padding:0; list-style:none; counter-reset:reflexe; }
+.ai-fraud-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr)); gap:.85rem; margin:1.25rem 0; padding:0; list-style:none; counter-reset:reflexe; }
 .ai-fraud-steps li { display:flex; flex-direction:column; gap:.45rem; min-height:150px; padding:1rem; border:1px solid var(--line); border-radius:14px; background:var(--surface-soft); counter-increment:reflexe; }
 .ai-fraud-steps li::before { color:var(--blue); font-size: max(12px, .78rem); font-weight:800; content:"0" counter(reflexe); }
 .ai-fraud-steps strong { color:var(--navy-ink); }
@@ -3786,12 +3780,8 @@ html.contraste-renforce :is(.privacy-summary,.privacy-review-note) { border-colo
 .ai-fraud-evidence p:last-child { margin-bottom:0; }
 .ai-fraud-review { font-weight:650; }
 html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,.ai-fraud-steps li,.ai-fraud-lesson-list li) { border-color:currentColor; background:var(--surface); }
-@media (max-width: 1000px) {
-  .ai-fraud-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .ai-fraud-steps { grid-template-columns:repeat(2,minmax(0,1fr)); }
-}
 @media (max-width: 760px) {
-  .ai-fraud-grid,.ai-fraud-lesson-list,.ai-fraud-steps { grid-template-columns:minmax(0,1fr); }
+  .ai-fraud-lesson-list { grid-template-columns:minmax(0,1fr); }
   .ai-fraud-steps li { min-height:0; }
 }
 @media (forced-colors: active) {
@@ -3970,7 +3960,7 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 }
 .home-action-link:hover { color: var(--blue); text-decoration: underline; text-underline-offset: .2em; }
 .home-action-link span { color: var(--green); font-size: max(12px, 1.15rem); }
-.home-voice-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; }
+.home-voice-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(370px,100%),1fr)); gap: 1rem; }
 .home-voice-card {
   display: flex;
   flex-direction: column;
@@ -4013,13 +4003,10 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-join-actions { display: grid; gap: .6rem; }
 .home-join-actions .button { white-space: nowrap; }
 html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,.home-share-panel,.home-hero-facts > div) { border-color: currentColor; background: var(--surface); box-shadow: none; }
-@media (max-width: 1000px) {
-  .home-voice-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
-}
 @media (max-width: 760px) {
   .home-hero-civic .hero-grid { grid-template-columns: minmax(0,1fr); }
   .home-hero-aside { max-width: none; }
-  .home-action-grid,.home-voice-grid { grid-template-columns: minmax(0,1fr); }
+  .home-action-grid { grid-template-columns: minmax(0,1fr); }
   .home-share-panel { grid-template-columns: minmax(0,1fr); }
   .home-join-actions { justify-items: start; }
   .home-hero-visual { margin-inline: auto; }

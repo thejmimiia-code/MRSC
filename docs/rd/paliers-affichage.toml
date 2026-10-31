@@ -20,7 +20,15 @@
 date = 2026-10-31
 feuille = "assets/css/site.css"
 condition_total = 17
-bloc_total = 45
+bloc_total = 41
+
+# Baisse datée du 31 octobre 2026 : 66 blocs → 62, puis 41 blocs de format.
+# Quatre blocs ont disparu parce que quatre grilles (`.principle-grid`,
+# `.ai-fraud-grid`, `.ai-fraud-steps`, `.home-voice-grid`) tirent désormais leur
+# nombre de colonnes de la largeur de piste, et non d'une largeur d'écran :
+# `(max-width: 1000px)` passe de 6 à 3 blocs, `(max-width: 520px)` de 9 à 8.
+# La preuve n'est pas ce commentaire : c'est `outils/modele-grilles.py`, qui
+# compare les deux cascades largeur par largeur et trouve un écart nul.
 
 # Le palier principal : sous 760 px, le site décide qu'il est sur téléphone.
 # C'est celui qui porte le plus de décisions et donc la plus grosse dette.
@@ -34,15 +42,15 @@ decision = "dette"
 [[condition]]
 condition = "(max-width: 520px)"
 classe = "format"
-occurrences = 9
+occurrences = 8
 presume = "Sous 520 px, une rangée de deux boutons ne tient plus côte à côte : les commandes d'en-tête passent sur deux colonnes égales et les grilles se réduisent à une colonne. La limite vient d'un calcul de libellés (Menu, Personnalisation) à la police par défaut, pas d'une mesure de la rangée réelle."
 decision = "dette"
 
 [[condition]]
 condition = "(max-width: 1000px)"
 classe = "format"
-occurrences = 6
-presume = "Sous 1000 px, les grilles de trois ou quatre cartes passent à deux colonnes. C'est une décision de confort de lecture prise à une largeur ronde, alors qu'un `auto-fit` avec largeur minimale de carte donnerait le même résultat à toute largeur, sans palier."
+occurrences = 3
+presume = "Sous 1000 px, les grilles de trois ou quatre cartes passent à deux colonnes. Quatre grilles en sont sorties le 31 octobre 2026 ; il en reste trois blocs — le panneau de la page IA, la page du simulateur et la leçon d'apprentissage — dont les règles voisines (hauteur d'ancrage, alignement) tiennent le bloc en place, pas la largeur."
 decision = "dette"
 
 # Deux écritures pour une seule décision : le menu se replie sous 1260 px, et la

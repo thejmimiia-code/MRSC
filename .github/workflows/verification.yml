@@ -357,6 +357,19 @@ jobs:
           python3 outils/compter-paliers.py --releve
           python3 outils/test_paliers_affichage.py
 
+      # Compter les paliers ne dit pas *comment* en sortir. `modele-grilles.py`
+      # lit la cascade réelle d'une grille — règle de base, puis chaque `@media`
+      # qui la reprend, dans l'ordre du fichier — et calcule le nombre de
+      # colonnes à chaque largeur de fenêtre, pour l'ancienne écriture comme pour
+      # `auto-fit`. Quatre grilles sont converties le 31 octobre 2026 ; le
+      # contrôle vérifie que leur minimum de piste est celui que la règle donne
+      # (pas un chiffre choisi) et qu'aucun `@media` ne leur réimpose un nombre
+      # de colonnes. Le banc plante douze fautes, dont deux sources illisibles.
+      - name: Vérifier le modèle des grilles
+        run: |
+          python3 outils/modele-grilles.py --verifier
+          python3 outils/test_modele_grilles.py
+
   graphismes:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
