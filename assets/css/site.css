@@ -985,7 +985,7 @@ html.contraste-renforce .site-status-note {
 
 .document-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
   gap: 1.15rem;
 }
 
@@ -1654,10 +1654,6 @@ html.contraste-renforce .resource-scope-note {
     margin-top: .6rem;
   }
 
-  .document-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .document-card {
     min-height: unset;
   }
@@ -2291,7 +2287,7 @@ html.contraste-renforce .resource-scope-note {
 
 .ai-balance-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
   gap: 1.2rem;
 }
 
@@ -2615,10 +2611,6 @@ html.contraste-renforce .resource-scope-note {
     width: min(100%, 430px);
   }
 
-  .ai-balance-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .ai-cta-panel .button {
     justify-self: start;
   }
@@ -2776,7 +2768,7 @@ html.contraste-renforce .resource-scope-note {
 }
 .simulateur-chiffres {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
   gap: .9rem;
   margin: 0;
 }
@@ -2828,7 +2820,7 @@ html.contraste-renforce .resource-scope-note {
 .simulateur-source + .simulateur-avis { margin-top: 1rem; }
 .simulateur-note { margin-top: 1rem; font-size: max(12px, .88rem); color: var(--muted); }
 .simulateur-note code { padding: .1rem .35rem; border-radius: 6px; background: var(--blue-soft); color: var(--navy-ink); font-size: max(12px, .85em); }
-.simulateur-duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.simulateur-duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: 1rem; }
 .simulateur-duo h3 { font-size: max(12px, 1.15rem); }
 .simulateur-duo ul { display: grid; gap: .5rem; margin: .8rem 0 0; padding-left: 1.1rem; font-size: max(12px, .92rem); color: var(--muted); }
 .simulateur-duo li::marker { color: var(--green); }
@@ -2862,8 +2854,6 @@ html.contraste-renforce .resource-scope-note {
   .simulateur-promo-chips { justify-content: flex-start; }
 }
 @media (max-width: 760px) {
-  .simulateur-duo,
-  .simulateur-chiffres { grid-template-columns: minmax(0, 1fr); }
   .simulateur-frame { height: 820px; }
 }
 @media (max-width: 760px) {
@@ -3504,7 +3494,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .learning-level-grid > li { min-width:0; }
 .knowledge-compass {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
   gap: .75rem 1.1rem;
   margin: 1rem 0 1.2rem;
   padding: 0;
@@ -3534,9 +3524,6 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 }
 .knowledge-compass a { font-weight: 750; }
 .knowledge-compass small { color: var(--muted); font-size: max(12px, .82rem); }
-@media (max-width: 760px) {
-  .knowledge-compass { grid-template-columns: minmax(0, 1fr); }
-}
 .learning-level-card,.learning-ecosystem-card {
   height:100%; padding:1.2rem; border:1px solid var(--line); border-radius:16px;
   background:var(--surface); box-shadow:0 7px 22px rgba(26,48,91,.04);
@@ -3557,7 +3544,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .site-footer .footer-rd a { color: var(--on-navy-link); }
 .simulateur-passeport {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
   gap: .85rem 1.1rem;
   margin: 1rem 0 1.2rem;
 }
@@ -3569,9 +3556,6 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 }
 .simulateur-passeport dt { color: var(--green); font-weight: 800; font-size: max(12px, .82rem); letter-spacing: .04em; text-transform: uppercase; }
 .simulateur-passeport dd { margin: .35rem 0 0; }
-@media (max-width: 760px) {
-  .simulateur-passeport { grid-template-columns: minmax(0, 1fr); }
-}
 .learning-pending-note { font-size: max(12px, .82rem) !important; font-weight:700; }
 .learning-coverage-list { display:grid; gap:.7rem; }
 .learning-coverage-domain { border:1px solid var(--line); border-radius:14px; background:var(--surface); }
@@ -3612,7 +3596,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .learning-level-note { max-width:80ch; margin-top:1rem; font-size: max(12px, .9rem); }
 .eva-listes-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
   gap: 1.2rem;
   margin-top: 1.4rem;
 }
@@ -3631,9 +3615,6 @@ html.has-js .site-header.is-compact .header-compact-brand img {
   padding-left: 1.3rem;
 }
 .eva-paliers li { margin: .55rem 0; }
-@media (max-width: 760px) {
-  .eva-listes-grid { grid-template-columns: minmax(0, 1fr); }
-}
 .learning-article-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(230px,300px); align-items:start; gap:clamp(1.5rem,4vw,3rem); }
 .learning-lesson-article { min-width:0; }
 .learning-lesson-article > section { margin-bottom:2.1rem; }
@@ -3747,7 +3728,7 @@ html.contraste-renforce :is(.privacy-summary,.privacy-review-note) { border-colo
 .ai-fraud-lessons { margin-block:clamp(2rem,5vw,3.5rem); }
 .ai-fraud-lessons .ai-section-intro { margin-bottom:1rem; }
 .ai-fraud-lessons .ai-section-intro h3 { color:var(--navy-ink); font-size:clamp(1.5rem,3vw,2rem); }
-.ai-fraud-lesson-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem; margin:0; padding:0; list-style:none; }
+.ai-fraud-lesson-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr)); gap:.8rem; margin:0; padding:0; list-style:none; }
 .ai-fraud-lesson-list li { display:grid; gap:.35rem; align-content:start; min-height:100px; padding:1rem 1.1rem; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
 .ai-fraud-lesson-list a { font-weight:750; }
 .ai-fraud-lesson-list span { color:var(--text-soft); font-size: max(12px, .9rem); }
@@ -3756,7 +3737,6 @@ html.contraste-renforce :is(.privacy-summary,.privacy-review-note) { border-colo
 .ai-fraud-review { font-weight:650; }
 html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,.ai-fraud-steps li,.ai-fraud-lesson-list li) { border-color:currentColor; background:var(--surface); }
 @media (max-width: 760px) {
-  .ai-fraud-lesson-list { grid-template-columns:minmax(0,1fr); }
   .ai-fraud-steps li { min-height:0; }
 }
 @media (forced-colors: active) {
@@ -3898,7 +3878,7 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-association-intro .hero-actions { margin-block: 1rem .65rem; }
 .home-association-themes-label { margin: clamp(2rem,4vw,3rem) 0 .85rem; color: var(--green); }
 .home-association-themes { margin-top: .85rem; }
-.home-action-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+.home-action-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(380px,100%),1fr)); gap: 1rem; }
 .home-action-card {
   --home-card-accent: var(--blue);
   display: flex;
@@ -3981,8 +3961,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
 @media (max-width: 760px) {
   .home-hero-civic .hero-grid { grid-template-columns: minmax(0,1fr); }
   .home-hero-aside { max-width: none; }
-  .home-action-grid { grid-template-columns: minmax(0,1fr); }
-  .home-share-panel { grid-template-columns: minmax(0,1fr); }
+    .home-share-panel { grid-template-columns: minmax(0,1fr); }
   .home-join-actions { justify-items: start; }
   .home-hero-visual { margin-inline: auto; }
   .home-hero-visual img { width: 100%; height: auto; object-fit: contain; }

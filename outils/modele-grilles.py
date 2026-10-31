@@ -42,6 +42,7 @@ import math
 import os
 import re
 import sys
+from html.parser import HTMLParser
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -134,6 +135,13 @@ class Grille:
     #: convertible en `auto-fit`, et le rapport doit le dire au lieu de proposer.
     asymetrique: bool = False
     valeur_asymetrique: str = ""
+    #: Nombre d'éléments que les pages mettent au plus dans cette grille, mesuré
+    #: dans le HTML (`lire_capacites`). 0 = non mesuré. `auto-fit` ne remplit pas
+    #: une piste vide : une grille de deux éléments ne montre jamais trois
+    #: colonnes, même si l'arithmétique en calcule trois. Sans ce champ, le
+    #: modèle annonçait « 3 colonnes » et une carte de 192 px là où l'écran
+    #: affiche deux cartes de 570 px.
+    items: int = 0
 
 
 def sans_commentaires(texte: str) -> str:
@@ -144,14 +152,33 @@ def sans_commentaires(texte: str) -> str:
 def decouper(texte: str) -> list[tuple[list[str], str, int | None, int | None, int]]:
     """Rend (sélecteurs, corps, largeur max, largeur min, ligne) pour chaque règle.
 
-    Un analyseur volontairement pauvre : deux niveaux (`@media` et règle), pas de
-    `@supports`, pas d'imbrication. Il doit être capable de dire « je ne sais pas
-    lire ça » plutôt que de sauter une règle en silence.
+    Un analyseur volontairement pauvre : des blocs et des règles, pas
+    d'imbrication de règles. Il doit être capable de dire « je ne sais pas lire
+    ça » plutôt que de sauter une règle en silence.
+
+    Il tient une **pile de blocs** et referme les blocs vides comme les autres.
+    Le 31 octobre 2026, la version précédente ne refermait un `@media` qu'après
+    une règle : retirer la dernière règle d'un bloc laissait `@media (...) { }`,
+    et les règles **suivantes** étaient attribuées à cette condition. Huit
+    grilles converties ont disparu du rapport sans un mot, et le contrôle a
+    annoncé 16 grilles au lieu de 33. Un compteur qui perd des lignes sans le
+    dire est pire qu'un compteur faux : il fait croire au progrès.
     """
     regles = []
-    pile_media: list[tuple[int | None, int | None]] = []
+    blocs: list[tuple[int | None, int | None]] = []
     i, n = 0, len(texte)
     while i < n:
+        while i < n and texte[i] in " \t\r\n}":
+            if texte[i] == "}":
+                if not blocs:
+                    raise SystemExit(
+                        "accolade fermante sans bloc ouvert ligne "
+                        f"{texte[:i].count(chr(10)) + 1} — la feuille n'est pas lisible"
+                    )
+                blocs.pop()
+            i += 1
+        if i >= n:
+            break
         ouvrante = texte.find("{", i)
         if ouvrante == -1:
             break
@@ -173,10 +200,14 @@ def decouper(texte: str) -> list[tuple[list[str], str, int | None, int | None, i
                     f"condition non largeur rencontrée ligne {ligne} : {entete_nu} — "
                     "ce modèle ne sait pas la placer sur un axe de largeur"
                 )
-            pile_media.append((largeur_max, largeur_min))
+            blocs.append((largeur_max, largeur_min))
             i = ouvrante + 1
             continue
         if entete_nu.startswith("@"):
+            # `@supports`, `@font-face`, `@keyframes`… : le bloc est traversé,
+            # pas interprété. Il hérite de la condition du bloc qui le contient,
+            # pour qu'une règle imbriquée ne devienne pas « sans condition ».
+            blocs.append(blocs[-1] if blocs else (None, None))
             i = ouvrante + 1
             continue
         # Règle ordinaire : trouver sa fermeture.
@@ -190,16 +221,50 @@ def decouper(texte: str) -> list[tuple[list[str], str, int | None, int | None, i
                     break
             j += 1
         corps = texte[ouvrante + 1 : j]
-        largeur_max, largeur_min = pile_media[-1] if pile_media else (None, None)
+        largeur_max, largeur_min = blocs[-1] if blocs else (None, None)
         selecteurs = [s.strip() for s in re.split(r",(?![^(]*\))", entete_nu) if s.strip()]
         regles.append((selecteurs, corps, largeur_max, largeur_min, ligne))
         i = j + 1
-        # Refermer les blocs `@media` traversés : on avance jusqu'au `}` qui suit.
-        while i < n and texte[i:].lstrip().startswith("}"):
-            i = texte.index("}", i) + 1
-            if pile_media:
-                pile_media.pop()
     return regles
+
+
+#: Éléments sans contenu : ils ne comptent pas comme un enfant de grille.
+VIDES = frozenset(
+    "area base br col embed hr img input link meta source track wbr".split()
+)
+
+GAP_REM = re.compile(r"(?:^|;)\s*(gap|column-gap|row-gap)\s*:\s*([^;]+)")
+LONGUEUR = re.compile(r"^([\d.]+)(rem|px)$")
+
+
+def ecart_colonnes(corps: str) -> float | None:
+    """L'écart **entre colonnes** déclaré par ce bloc, en pixels.
+
+    Le 31 octobre 2026, la lecture prenait le premier nombre de `gap` sans
+    regarder lequel c'était : `gap: .75rem 1.1rem` vaut 12 px entre les lignes
+    et **17,6 px entre les colonnes**, et c'est le second qui décide du nombre
+    de colonnes. Deux grilles de la feuille sont dans ce cas. Le calcul du
+    seuil de repli s'en trouvait décalé d'un écart de grille — la même erreur
+    que celle déjà corrigée sur `.document-grid`, sous une autre forme.
+    """
+    trouve = GAP_REM.search(corps)
+    if not trouve:
+        return None
+    propriete, valeur = trouve.group(1), trouve.group(2).split()
+    mesures = []
+    for morceau in valeur:
+        longueur = LONGUEUR.match(morceau)
+        if not longueur:
+            return None
+        nombre = float(longueur.group(1))
+        mesures.append(nombre * 16 if longueur.group(2) == "rem" else nombre)
+    if not mesures:
+        return None
+    if propriete == "row-gap":
+        return None
+    if len(mesures) == 1:
+        return mesures[0]
+    return mesures[1]  # `gap: <ligne> <colonne>` — la colonne est la seconde
 
 
 def lire_grilles(texte: str) -> dict[str, Grille]:
@@ -212,11 +277,11 @@ def lire_grilles(texte: str) -> dict[str, Grille]:
             continue
         valeur = " ".join(trouve.group(1).split())
         forme, colonnes, minimum = classer_valeur(valeur)
-        gap = re.search(r"(?:^|;)\s*gap\s*:\s*([\d.]+)rem", corps)
+        gap = ecart_colonnes(corps)
         for selecteur in selecteurs:
             grille = grilles.setdefault(selecteur, Grille(selecteur=selecteur, source=f"site.css:{ligne}"))
-            if gap:
-                grille.gap = round(float(gap.group(1)) * 16, 2)
+            if gap is not None:
+                grille.gap = round(gap, 2)
             regle = Regle(
                 selecteurs=selecteurs,
                 valeur=valeur,
@@ -260,10 +325,15 @@ def colonnes_anciennes(grille: Grille, largeur: int) -> int:
     return resultat
 
 
-def auto_fit(minimum: int, gap: float, largeur: int) -> int:
-    """Colonnes que `repeat(auto-fit, minmax(min(Npx,100%), 1fr))` produit."""
+def auto_fit(minimum: int, gap: float, largeur: int, items: int = 0) -> int:
+    """Colonnes que `repeat(auto-fit, minmax(min(Npx,100%), 1fr))` produit.
+
+    `items` borne le résultat : `auto-fit` replie les pistes vides, donc une
+    grille qui ne reçoit que deux éléments n'en montre jamais trois.
+    """
     place = conteneur(largeur)
-    return max(1, math.floor((place + gap) / (minimum + gap)))
+    colonnes = max(1, math.floor((place + gap) / (minimum + gap)))
+    return min(colonnes, items) if items else colonnes
 
 
 def ecart(grille: Grille, minimum: int) -> tuple[int, int, list[tuple[int, int, int]]]:
@@ -271,7 +341,7 @@ def ecart(grille: Grille, minimum: int) -> tuple[int, int, list[tuple[int, int, 
     details = []
     for largeur in LARGEURS:
         ancienne = colonnes_anciennes(grille, largeur)
-        nouvelle = auto_fit(minimum, grille.gap, largeur)
+        nouvelle = auto_fit(minimum, grille.gap, largeur, grille.items)
         if ancienne != nouvelle:
             details.append((largeur, ancienne, nouvelle))
     maximal = max((abs(a - n) for _, a, n in details), default=0)
@@ -300,8 +370,11 @@ def meilleur_minimum(grille: Grille) -> tuple[int, int, int, list[tuple[int, int
 def carte_minimale(grille: Grille, minimum: int) -> float:
     """Largeur de carte la plus faible sur le balayage, pour la nouvelle règle."""
     return min(
-        (conteneur(largeur) - (auto_fit(minimum, grille.gap, largeur) - 1) * grille.gap)
-        / auto_fit(minimum, grille.gap, largeur)
+        (
+            conteneur(largeur)
+            - (auto_fit(minimum, grille.gap, largeur, grille.items) - 1) * grille.gap
+        )
+        / auto_fit(minimum, grille.gap, largeur, grille.items)
         for largeur in LARGEURS
     )
 
@@ -322,7 +395,7 @@ def colonnes_de_conception(grille: Grille) -> int:
         # `auto_fit` attend une largeur de **fenêtre** : lui passer une largeur de
         # conteneur appliquait la soustraction deux fois (1112 au lieu de 1160),
         # et une grille de quatre colonnes s'annonçait à trois.
-        return auto_fit(base.minimum, grille.gap, CONTENU_DEFAUT + GARNITURE_LATERALE)
+        return auto_fit(base.minimum, grille.gap, CONTENU_DEFAUT + GARNITURE_LATERALE, grille.items)
     return 0
 
 
@@ -346,10 +419,35 @@ def seuil_note(grille: Grille) -> str:
     return f" (repli à 1 col. sous {seuil}px)" if seuil else ""
 
 
-def minimum_recommande(grille: Grille) -> int | None:
+def minimum_de_repli(grille: Grille) -> int | None:
+    """Le plus petit minimum qui renonce à la paire là où la cascade y renonçait."""
+    seuil = seuil_une_colonne(grille)
+    if seuil is None:
+        return None
+    place = conteneur(seuil)
+    candidats = [n for n in CANDIDATS if 2 * n + grille.gap > place]
+    return min(candidats) if candidats else None
+
+
+def minimum_sans_troisieme_colonne(grille: Grille) -> int | None:
+    """Le plus petit minimum qui interdit une troisième colonne au conteneur maximal.
+
+    Une grille dessinée à deux colonnes n'a pas de troisième colonne à gagner :
+    l'ajouter, c'est soit laisser une carte seule sur sa ligne (quatre documents
+    deviennent 3 + 1), soit couper une paire (une `<dl>` de trois paires donne
+    `dt dd dt` puis `dd dt dd`). `auto-fit` sert ici à **retirer le palier**, pas
+    à changer le dessin. Le 31 octobre 2026, cette règle manquait : `.document-grid`
+    aurait affiché trois colonnes et une carte orpheline sur un écran de 1 920 px.
+    """
+    place = conteneur(CONTENU_DEFAUT + GARNITURE_LATERALE)
+    candidats = [n for n in CANDIDATS if 3 * n + 2 * grille.gap > place]
+    return min(candidats) if candidats else None
+
+
+def minimum_recommande(grille: Grille, capacite: dict | None = None) -> int | None:
     """La largeur de piste que la règle donne à cette grille. Une seule source.
 
-    Deux cas, et la différence est une différence de question :
+    Trois cas, et chacun répond à une question différente :
 
     - **Trois colonnes ou plus** : la grille a des étapes intermédiaires, et la
       bonne question est « jusqu'où les cartes peuvent-elles s'élargir sans que
@@ -360,28 +458,37 @@ def minimum_recommande(grille: Grille) -> int | None:
       570 px et un repli dès 1 207 px de fenêtre — une régression visible sur un
       ordinateur portable. La seule information de conception est le moment où
       l'on renonce à la paire ; le minimum se calcule pour que ce moment reste
-      celui de l'ancienne cascade.
+      celui de l'ancienne cascade (`minimum_de_repli`).
+    - **Deux colonnes qui pourraient en devenir trois** : `auto-fit` ajouterait
+      une colonne que personne n'a dessinée. Le minimum est alors relevé juste
+      assez pour que trois colonnes ne tiennent pas au conteneur maximal
+      (`minimum_sans_troisieme_colonne`), sauf si les pages ne mettent jamais
+      plus de deux éléments dans la grille — `auto-fit` ne remplit pas une piste
+      vide, la troisième colonne ne peut pas apparaître, et relever le minimum
+      ne protégerait de rien. C'est une capacité **mesurée**, pas supposée.
 
-    Cette distinction a coûté une erreur, corrigée le 31 octobre 2026 : la
-    première version appliquait la règle des trois colonnes aux grilles à deux,
-    et proposait de replier `.document-grid` à 1 027 px au lieu de 760.
+    Ces distinctions ont coûté deux erreurs, corrigées le 31 octobre 2026 : la
+    première version appliquait la règle des trois colonnes aux grilles à deux et
+    proposait de replier `.document-grid` à 1 027 px au lieu de 760 ; la seconde
+    ignorait la capacité des pages et aurait ajouté une colonne orpheline.
     """
     k = colonnes_de_conception(grille)
     if not k:
         return None
     if k >= 3:
         return minimum_pour_k(k, grille.gap)
-    seuil = seuil_une_colonne(grille)
-    if seuil is None:
+    if seuil_une_colonne(grille) is None:
         return minimum_pour_k(k, grille.gap)
-    # Le repli doit tomber **au même endroit** que celui de la cascade :
-    # à la fenêtre de seuil, deux colonnes ne doivent déjà plus tenir. Prendre
-    # le plus large minimum qui tenait encore à `seuil + 1` laissait deux
-    # colonnes jusqu'à 744 px là où la conception repliait à 760 — un écart de
-    # seize pixels, la valeur d'un écart de grille, qui ne se voyait pas.
-    place = conteneur(seuil)
-    candidats = [n for n in CANDIDATS if 2 * n + grille.gap > place]
-    return min(candidats) if candidats else None
+    repli = minimum_de_repli(grille)
+    if repli is None:
+        return None
+    cap = minimum_sans_troisieme_colonne(grille)
+    if cap is None:
+        return repli
+    items = (capacite or {}).get("items") or []
+    if items and max(items) <= k:
+        return repli
+    return max(repli, cap)
 
 
 def minimum_pour_k(k: int, gap: float, contenu: float = CONTENU_DEFAUT) -> int | None:
@@ -434,8 +541,112 @@ def asymetriques(grilles: dict[str, Grille]) -> list[Grille]:
     )
 
 
-def etat(grilles: dict[str, Grille]) -> list[dict]:
+class _CompteurEnfants(HTMLParser):
+    """Compte les enfants directs de chaque élément portant une classe mesurée.
+
+    Le 31 octobre 2026, le modèle ne savait rien de ce que les pages mettent
+    **dans** les grilles : il optimisait des largeurs de piste sans savoir
+    combien de cartes elles reçoivent. Or c'est ce qui décide si la colonne
+    ajoutée par `auto-fit` laisse une carte seule sur sa ligne, et si la grille
+    est une liste de paires (`<dl>`) qu'il ne faut pas couper en trois.
+    """
+
+    def __init__(self, selecteurs: set[str]) -> None:
+        super().__init__(convert_charrefs=True)
+        self.selecteurs = selecteurs
+        self.pile: list[str] = []
+        self.encours: list[dict] = []
+        self.resultats: list[tuple[str, str, int]] = []
+
+    def handle_starttag(self, balise, attributs):
+        if balise in VIDES:
+            return
+        classes = set(((dict(attributs).get("class") or "")).split())
+        for suivi in self.encours:
+            if len(self.pile) + 1 == suivi["niveau"] + 1:
+                suivi["compte"] += 1
+        self.pile.append(balise)
+        for selecteur in classes & self.selecteurs:
+            self.encours.append(
+                {"selecteur": selecteur, "balise": balise, "niveau": len(self.pile), "compte": 0}
+            )
+
+    def handle_endtag(self, balise):
+        for i in range(len(self.pile) - 1, -1, -1):
+            if self.pile[i] == balise:
+                del self.pile[i:]
+                break
+        for suivi in [s for s in self.encours if s["niveau"] > len(self.pile)]:
+            self.resultats.append((suivi["selecteur"], suivi["balise"], suivi["compte"]))
+            self.encours.remove(suivi)
+
+
+def pages_du_site(racine: Path) -> list[Path]:
+    """Les pages HTML du dépôt, sous-dossiers compris.
+
+    `Path.rglob` ne descend pas dans un lien symbolique ; or les bancs montent le
+    dépôt en liens. Un walk qui suit les liens mesure donc la même chose dans le
+    dépôt et dans une copie de banc, et `.learning-code-grid` — dont les pages
+    vivent dans `apprendre/fiches/` — n'est plus « absente » par accident de
+    parcours.
+    """
+    pages = []
+    for dossier, sous_dossiers, fichiers in os.walk(racine, followlinks=True):
+        sous_dossiers[:] = sorted(
+            nom
+            for nom in sous_dossiers
+            if nom not in {".git", "node_modules", "outils", "docs"} and not nom.startswith(".")
+        )
+        pages.extend(Path(dossier) / nom for nom in sorted(fichiers) if nom.endswith(".html"))
+    return pages
+
+
+def lire_capacites(racine: Path, selecteurs: list[str]) -> dict[str, dict]:
+    """Ce que les pages mettent réellement dans chaque grille.
+
+    Rend `{sélecteur: {"items": [...], "apparies": bool, "pages": [...]}}`. Un
+    sélecteur absent de toutes les pages est absent du dictionnaire : le rapport
+    doit alors dire que la capacité n'est pas mesurée, pas la supposer.
+    """
+    import collections
+
+    cibles = {selecteur.lstrip(".") for selecteur in selecteurs if selecteur.startswith(".")}
+    contenus: dict[str, list[tuple[str, str, int]]] = collections.defaultdict(list)
+    for page in pages_du_site(racine):
+        try:
+            texte = page.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        compteur = _CompteurEnfants(cibles)
+        try:
+            compteur.feed(texte)
+        except Exception:  # page mal formée : on ne prétend rien mesurer
+            continue
+        vus: set[str] = set()
+        for selecteur, balise, nombre in compteur.resultats:
+            vus.add(selecteur)
+            contenus["." + selecteur].append((page.name, balise, nombre))
+    capacites: dict[str, dict] = {}
+    for selecteur, trouvailles in contenus.items():
+        capacites[selecteur] = {
+            "items": sorted({nombre for _, _, nombre in trouvailles}),
+            "apparies": any(balise == "dl" for _, balise, _ in trouvailles),
+            "pages": sorted({page for page, _, _ in trouvailles}),
+        }
+    return capacites
+
+
+def appliquer_capacites(grilles: dict[str, Grille], capacites: dict[str, dict]) -> None:
+    """Inscrit dans chaque grille le nombre d'éléments que les pages y mettent."""
+    for selecteur, capacite in capacites.items():
+        grille = grilles.get(selecteur)
+        if grille is not None and capacite.get("items"):
+            grille.items = max(capacite["items"])
+
+
+def etat(grilles: dict[str, Grille], capacites: dict[str, dict] | None = None) -> list[dict]:
     """Le tableau : grille, colonnes de base, paliers restants, recommandation."""
+    capacites = capacites or {}
     lignes = []
     for grille in convertibles(grilles):
         selecteur = grille.selecteur
@@ -446,10 +657,12 @@ def etat(grilles: dict[str, Grille]) -> list[dict]:
             "gap": grille.gap,
             "paliers": conditions,
             "source": grille.source,
+            "items": (capacites.get(selecteur) or {}).get("items", []),
+            "apparies": (capacites.get(selecteur) or {}).get("apparies", False),
         }
         if conditions:
             # La consigne vient de la règle, jamais d'une recherche d'ajustement.
-            minimum = minimum_recommande(grille)
+            minimum = minimum_recommande(grille, capacites.get(selecteur))
             if minimum is None:
                 entree["minimum_recommande"] = None
             else:
@@ -488,6 +701,15 @@ def rapport(lignes: list[dict], inegales: list[Grille] | None = None) -> str:
             f"écart maximal {ligne['ecart_maximal']} colonne(s), "
             f"carte la plus étroite {ligne['carte_minimale']:g}px"
         )
+        if ligne.get("items"):
+            sorties.append(
+                f"    pages : {max(ligne['items'])} élément(s) au plus par grille"
+                + (
+                    " — liste de paires (`dl`), une troisième colonne la couperait"
+                    if ligne.get("apparies")
+                    else ""
+                )
+            )
     return "\n".join(sorties)
 
 
@@ -510,7 +732,9 @@ def lire_registre(racine: Path) -> dict:
         raise SourceIllisible(f"registre des grilles illisible : {REGISTRE} ({erreur})") from erreur
 
 
-def verifier(grilles: dict[str, Grille], registre: dict) -> list[str]:
+def verifier(
+    grilles: dict[str, Grille], registre: dict, capacites: dict[str, dict] | None = None
+) -> list[str]:
     """Chaque grille convertie doit rester dynamique, et son minimum doit être le calculé.
 
     Trois fautes possibles, et une seule suffit : la grille ne déclare plus
@@ -520,6 +744,7 @@ def verifier(grilles: dict[str, Grille], registre: dict) -> list[str]:
     que rien ne le dise.
     """
     erreurs: list[str] = []
+    capacites = capacites or {}
     entrees = registre.get("grille", [])
     if not entrees:
         return [f"{REGISTRE} ne déclare aucune grille convertie — le registre ne prouve rien"]
@@ -537,13 +762,19 @@ def verifier(grilles: dict[str, Grille], registre: dict) -> list[str]:
             continue
         k = int(entree.get("colonnes", 0))
         declare = entree.get("minimum")
-        seuil = entree.get("seuil_une_colonne")
-        if seuil is not None:
-            place = conteneur(int(seuil))
-            candidats = [n for n in CANDIDATS if 2 * n + grille.gap > place]
-            attendu = min(candidats) if candidats else None
-        else:
-            attendu = minimum_pour_k(k, grille.gap) if k else None
+        capacite = capacites.get(selecteur)
+        # Ce que les pages mettent dans la grille décide de la consigne : une
+        # grille à deux éléments ne peut pas afficher trois colonnes, une grille
+        # à quatre en afficherait une orpheline. Le registre doit donc déclarer
+        # ce qu'il a mesuré, et le contrôle le remesure.
+        declare_items = sorted(int(n) for n in (entree.get("items") or []))
+        mesures_items = sorted(int(n) for n in (capacite or {}).get("items", []))
+        if declare_items != mesures_items:
+            erreurs.append(
+                f"{selecteur} : capacité déclarée {declare_items or 'non déclarée'}, "
+                f"les pages en contiennent {mesures_items or 'aucune mesure'}"
+            )
+        attendu = minimum_recommande(grille, capacite)
         if attendu is None:
             erreurs.append(f"{selecteur} : aucune piste ne donne {k} colonnes au conteneur maximal")
             continue
@@ -600,7 +831,20 @@ def principal(arguments: list[str] | None = None) -> int:
         except SourceIllisible as erreur:
             print(f"Impossible de vérifier les grilles : {erreur}", file=sys.stderr)
             return 2
-        erreurs = verifier(grilles, registre)
+        capacites = lire_capacites(RACINE, [e.get("selecteur") or "" for e in registre.get("grille", [])])
+        appliquer_capacites(grilles, capacites)
+        erreurs = verifier(grilles, registre, capacites)
+        sans_capacite = [
+            selecteur
+            for selecteur in (e.get("selecteur") or "" for e in registre.get("grille", []))
+            if selecteur and selecteur not in capacites
+        ]
+        for selecteur in sans_capacite:
+            print(
+                f"  ! {selecteur} : absent des pages — sa capacité n'est pas mesurée, "
+                "et le minimum applique la règle la plus prudente",
+                file=sys.stderr,
+            )
         if erreurs:
             for erreur in erreurs:
                 print(f"  - {erreur}", file=sys.stderr)
@@ -628,7 +872,9 @@ def principal(arguments: list[str] | None = None) -> int:
                 print(f"  {largeur}px : {ancienne} → {nouvelle}")
             return 0
         k = colonnes_de_conception(grille)
-        minimum = minimum_recommande(grille)
+        capacite = lire_capacites(RACINE, [grille.selecteur]).get(grille.selecteur)
+        appliquer_capacites(grilles, {grille.selecteur: capacite} if capacite else {})
+        minimum = minimum_recommande(grille, capacite)
         if minimum is None:
             print(f"{grille.selecteur} : aucune piste ne garde {k} colonnes au conteneur maximal")
             return 2
@@ -645,13 +891,15 @@ def principal(arguments: list[str] | None = None) -> int:
         return 0
 
     if options.regle:
+        capacites = lire_capacites(RACINE, [g.selecteur for g in convertibles(grilles)])
+        appliquer_capacites(grilles, capacites)
         mesurees = 0
         for grille in convertibles(grilles):
             selecteur = grille.selecteur
             k = colonnes_de_conception(grille)
             if not k:
                 continue
-            minimum = minimum_recommande(grille)
+            minimum = minimum_recommande(grille, capacites.get(selecteur))
             if minimum is None:
                 print(f"{selecteur:32} {k} col. — aucune piste ne tient")
                 continue
@@ -677,7 +925,9 @@ def principal(arguments: list[str] | None = None) -> int:
                 print(f"  {grille.selecteur:32} {grille.valeur_asymetrique[:60]}")
         return 0
 
-    lignes = etat(grilles)
+    capacites = lire_capacites(RACINE, [g.selecteur for g in convertibles(grilles)])
+    appliquer_capacites(grilles, capacites)
+    lignes = etat(grilles, capacites)
     if options.json:
         print(json.dumps(lignes, ensure_ascii=False, indent=2))
     else:

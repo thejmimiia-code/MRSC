@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 47 |
+| Avancées consignées | 48 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
 | Contrôles exécutables cités | 61 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1020,6 +1020,30 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 **Suite.** Lire le premier passage en CI de l'essai « Aperçu ordinateur », et vérifier sur le site publié qu'un téléphone en mode bureau ne rogne plus le panneau.
 
 Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
+
+### `un-modele-de-grille-doit-savoir-ce-qu-on-y-met` — Un modèle de grille qui ignore ce qu'on y met ajoute des colonnes que personne n'a dessinées
+
+*Consignée le 2026-10-31.*
+
+**Constat.** La règle des deux colonnes donnait 350 px pour les neuf grilles restantes. Appliquée telle quelle, `.document-grid` — quatre cartes de documents, dessinées en deux colonnes — aurait affiché trois colonnes dès 1 130 px de conteneur et laissé la quatrième carte seule sur sa ligne ; `.simulateur-passeport` aurait coupé ses paires `dt`/`dd` en trois. Le modèle calculait des largeurs de piste sans jamais regarder combien d'éléments les pages mettent dans la grille. Et deux bugs de lecture muets se sont révélés en chemin : `gap: .75rem 1.1rem` était lu comme 12 px alors que l'écart **entre colonnes** est 17,6 px ; et un `@media` vide — trois blocs laissés sans règle après conversion — faisait attribuer les règles suivantes à cette condition, si bien que le rapport est passé de 33 grilles à 16 sans un mot, huit conversions comprises.
+
+**Ce que cela change.** `modele-grilles.py` lit désormais les pages (`lire_capacites` : enfants directs, balises `dl` reconnues comme listes de paires), et la règle à deux colonnes a trois branches : repli là où la cascade renonçait ; minimum relevé juste assez pour interdire une troisième colonne quand la grille reçoit plus de deux éléments ; minimum inchangé quand `auto-fit` ne peut pas remplir une piste vide. Le registre déclare `items` et le contrôle le remesure dans le HTML — une capacité fausse est refusée. L'analyseur CSS referme les blocs vides sur les accolades et refuse une accolade orpheline, et `auto_fit` borne son résultat par la capacité mesurée. Ce lot : neuf grilles converties (21 au total), 197 règles sous condition de largeur (205 avant, 214 avant le lot précédent), une seule grille égale encore sous palier.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/paliers-affichage.toml`
+- `assets/css/site.css`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py && python3 outils/compter-paliers.py && python3 outils/test_paliers_affichage.py`
+
+**Limite — ce que cela ne prouve pas.** La capacité se mesure sur le HTML statique : une grille remplie par script échapperait au compte, et aucune ne l'est aujourd'hui. Le modèle ne mesure pas les préférences d'affichage (compacte, lecture, panorama, vitrine), qui réimposent des nombres de colonnes, ni la lisibilité : une carte de 350 px peut encore casser un titre long, et seul un navigateur le dirait. Enfin, l'analyseur reste pauvre : `@supports` est traversé sans être interprété, et une condition de largeur exprimée en `em` serait refusée plutôt que devinée.
+
+**Suite.** Traiter `.ai-path-steps`, dernière grille égale sous palier : sa cascade passe de 5 à 3 colonnes à 520 px, un cas que la règle « une seule largeur de piste » n'exprime pas encore.
+
+Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 
 ### `un-rapport-ne-porte-pas-deux-recommandations-sous-un-mot` — Un rapport ne porte pas deux recommandations sous le même mot, et un compteur qui ne voit pas le travail le nie
 
