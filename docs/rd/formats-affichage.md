@@ -1078,3 +1078,40 @@ combien de personnes voient quel palier. Il rend seulement l'ajout coûteux —
 visible, avec l'obligation de la dater. La résorption passe par les grilles
 (`auto-fit`, `minmax`), qui n'ont besoin d'aucune condition, puis par le seuil
 1260/1261 px tenu à la main en deux endroits.
+
+## 10. Sortir des paliers par le calcul (31 octobre 2026)
+
+Compter la dette ne dit pas comment la résorber. `outils/modele-grilles.py`
+reconstitue la cascade réelle d'une grille — règle de base, puis chaque `@media`
+qui la reprend, dans l'ordre du fichier — et calcule le nombre de colonnes à
+chaque largeur de fenêtre :
+
+    colonnes(W) = max(1, floor((C(W) + g) / (N + g)))     avec C(W) = min(1160, W − 48)
+
+La règle de conversion est unique : on prend le **plus large** minimum de piste
+qui laisse encore `k` colonnes au conteneur maximal. Des cartes larges se lisent
+mieux, et le repli se produit exactement quand la largeur ne suffit plus — pas à
+une largeur ronde choisie d'avance.
+
+| Grille | Avant | Après |
+| --- | --- | --- |
+| `.principle-grid` | 4 col., puis 2 sous 1 000 px, 1 sous 520 | `minmax(min(270px, 100%), 1fr)` |
+| `.ai-fraud-grid` | 3 col., puis 2 sous 1 000 px, 1 sous 760 | `minmax(min(370px, 100%), 1fr)` |
+| `.ai-fraud-steps` | 4 col., puis 2 sous 1 000 px, 1 sous 760 | `minmax(min(270px, 100%), 1fr)` |
+| `.home-voice-grid` | 3 col., puis 2 sous 1 000 px, 1 sous 760 | `minmax(min(370px, 100%), 1fr)` |
+
+Quatre blocs `@media` disparaissent — trois `(max-width: 1000px)`, un
+`(max-width: 520px)` — et le compteur de paliers passe de 45 à 41 blocs de
+format. La conversion ne « reproduit » pas l'ancienne cascade : elle insère
+l'étape que la cascade sautait. Sous 1 000 px, `.principle-grid` montrait deux
+cartes de 468 px là où trois de 306 tenaient ; elle en montre trois.
+
+`docs/rd/grilles-dynamiques.toml` engage chaque grille sur trois points que
+`--verifier` contrôle : `auto-fit` dans la règle de base, minimum égal à celui
+que la règle donne, et **aucun `@media` qui réimpose un nombre de colonnes** —
+celui-là annulerait la conversion sans changer un caractère de la règle de base.
+
+Limites : le modèle ne lit que la présentation par défaut (`--content: 1160px`),
+réduit un bloc `(orientation: landscape) and (max-height: 560px)` à sa largeur
+maximale, suppose le conteneur `min(1160, W − 48)` et ignore toute grille hors de
+`.container`. Il calcule des largeurs de piste, pas la lisibilité d'une carte.

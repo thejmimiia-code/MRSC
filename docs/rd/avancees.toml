@@ -10,6 +10,25 @@
 # agent. Une avancée sans limite écrite n'est pas une avancée, c'est une croyance.
 
 [[avancee]]
+id = "une-largeur-de-piste-se-calcule-pas-se-choisit"
+date = 2026-10-31
+titre = "Une grille dynamique n'a pas besoin de palier : sa largeur de piste se calcule"
+constat = "Comptée le 31 octobre 2026, la dette d'affichage restait de 15 paliers, et la prochaine action écrite était de la « résorber ». Compter ne dit pas comment. Les grilles en montraient la raison : `.principle-grid` passait de 4 colonnes à **2** sous 1 000 px, sans jamais passer par 3 — la cascade sautait une étape. À 952 px de conteneur, deux cartes de 468 px occupaient la place de trois cartes de 306. Aucun de ces nombres n'était écrit nulle part : ils se déduisaient du CSS, à la main, grille par grille."
+changement = "`outils/modele-grilles.py` reconstitue la cascade réelle d'un sélecteur (règle de base, puis chaque `@media`, dans l'ordre du fichier) et calcule le nombre de colonnes à 233 largeurs, de 240 à 2 560 px, pour l'ancienne écriture comme pour `auto-fit`. La règle de conversion est unique et calculée : le **plus large** minimum de piste qui laisse encore `k` colonnes au conteneur maximal. Quatre grilles sont converties (`.principle-grid`, `.ai-fraud-grid`, `.ai-fraud-steps`, `.home-voice-grid`), quatre blocs `@media` disparaissent, et `docs/rd/grilles-dynamiques.toml` engage chaque grille sur trois points vérifiés : `auto-fit` dans la règle de base, minimum égal à celui que la règle donne, aucun `@media` qui réimpose un nombre de colonnes. Le compteur de paliers est passé de 45 à 41 blocs de format et a refusé la baisse jusqu'à ce qu'elle soit datée."
+preuves = [
+  "outils/modele-grilles.py",
+  "outils/test_modele_grilles.py",
+  "docs/rd/grilles-dynamiques.toml",
+  "docs/rd/paliers-affichage.toml",
+  "assets/css/site.css",
+  ".github/workflows/verification.yml",
+]
+controle = "python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py && python3 outils/compter-paliers.py"
+limite = "Le modèle ne lit que la présentation par défaut (`--content: 1160px`) : Panorama, Vitrine, Lecture, Compacte et Mosaïque fixent d'autres largeurs de conteneur et gardent leurs paliers. Il ne modélise pas les conditions de hauteur, réduit un bloc `(orientation: landscape) and (max-height: 560px)` à sa largeur maximale, suppose le conteneur `min(1160, W − 48)` et ignore toute grille hors de `.container`. Il calcule des largeurs de piste, pas la lisibilité d'une carte : un titre long dans 270 px peut encore casser sur trois lignes."
+suite = "Convertir les 32 grilles restantes qui fixent encore leur nombre de colonnes, en commençant par celles dont le bloc `@media` ne tient que par la largeur, puis vérifier dans un navigateur ce que le modèle ne peut pas voir : la lisibilité réelle d'une carte de 270 px à 1 024 px de fenêtre."
+initiatives = ["optimisation-du-site", "coordination-de-tous-les-agents"]
+
+[[avancee]]
 id = "une-copie-de-banc-ne-se-mute-pas-par-ses-liens"
 date = 2026-10-31
 titre = "Une copie de banc faite de liens ne se mute qu'après matérialisation du chemin"

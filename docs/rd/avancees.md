@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 45 |
+| Avancées consignées | 46 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
-| Contrôles exécutables cités | 58 |
+| Contrôles exécutables cités | 61 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1066,6 +1066,31 @@ Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 **Limite — ce que cela ne prouve pas.** Le contrôle compte les `@media` d'une seule feuille (`assets/css/site.css`) ; la feuille de l'aventure et celle du simulateur embarqué ne sont pas relevées, et une condition écrite sous `@supports` échapperait au compte. Il ne juge pas les raisons : une phrase de quarante caractères passe, même fausse. Enfin, le relevé du 31 octobre 2026 — 17 conditions de format, 45 blocs, 15 en dette — est un compte de **déclarations**, pas une mesure de ce que les gens voient : il ne dit pas quel écran réel tombe de quel côté d'un palier.
 
 **Suite.** Résorber la dette par ordre de rentabilité : les trois paliers de grilles (1000, 981, 601 px, treize blocs) s'obtiennent en `auto-fit`/`minmax` sans condition ; puis le seuil 1260/1261 px, tenu à la main en deux endroits ; puis le cas paysage court, qui suppose qu'un écran bas est forcément étroit. Étendre le relevé à `anglais-aventure.css` et à l'habillage du simulateur.
+
+Initiatives liées : `optimisation-du-site`, `coordination-de-tous-les-agents`.
+
+### `une-largeur-de-piste-se-calcule-pas-se-choisit` — Une grille dynamique n'a pas besoin de palier : sa largeur de piste se calcule
+
+*Consignée le 2026-10-31.*
+
+**Constat.** Comptée le 31 octobre 2026, la dette d'affichage restait de 15 paliers, et la prochaine action écrite était de la « résorber ». Compter ne dit pas comment. Les grilles en montraient la raison : `.principle-grid` passait de 4 colonnes à **2** sous 1 000 px, sans jamais passer par 3 — la cascade sautait une étape. À 952 px de conteneur, deux cartes de 468 px occupaient la place de trois cartes de 306. Aucun de ces nombres n'était écrit nulle part : ils se déduisaient du CSS, à la main, grille par grille.
+
+**Ce que cela change.** `outils/modele-grilles.py` reconstitue la cascade réelle d'un sélecteur (règle de base, puis chaque `@media`, dans l'ordre du fichier) et calcule le nombre de colonnes à 233 largeurs, de 240 à 2 560 px, pour l'ancienne écriture comme pour `auto-fit`. La règle de conversion est unique et calculée : le **plus large** minimum de piste qui laisse encore `k` colonnes au conteneur maximal. Quatre grilles sont converties (`.principle-grid`, `.ai-fraud-grid`, `.ai-fraud-steps`, `.home-voice-grid`), quatre blocs `@media` disparaissent, et `docs/rd/grilles-dynamiques.toml` engage chaque grille sur trois points vérifiés : `auto-fit` dans la règle de base, minimum égal à celui que la règle donne, aucun `@media` qui réimpose un nombre de colonnes. Le compteur de paliers est passé de 45 à 41 blocs de format et a refusé la baisse jusqu'à ce qu'elle soit datée.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/paliers-affichage.toml`
+- `assets/css/site.css`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py && python3 outils/compter-paliers.py`
+
+**Limite — ce que cela ne prouve pas.** Le modèle ne lit que la présentation par défaut (`--content: 1160px`) : Panorama, Vitrine, Lecture, Compacte et Mosaïque fixent d'autres largeurs de conteneur et gardent leurs paliers. Il ne modélise pas les conditions de hauteur, réduit un bloc `(orientation: landscape) and (max-height: 560px)` à sa largeur maximale, suppose le conteneur `min(1160, W − 48)` et ignore toute grille hors de `.container`. Il calcule des largeurs de piste, pas la lisibilité d'une carte : un titre long dans 270 px peut encore casser sur trois lignes.
+
+**Suite.** Convertir les 32 grilles restantes qui fixent encore leur nombre de colonnes, en commençant par celles dont le bloc `@media` ne tient que par la largeur, puis vérifier dans un navigateur ce que le modèle ne peut pas voir : la lisibilité réelle d'une carte de 270 px à 1 024 px de fenêtre.
 
 Initiatives liées : `optimisation-du-site`, `coordination-de-tous-les-agents`.
 

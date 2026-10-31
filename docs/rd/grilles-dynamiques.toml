@@ -1,0 +1,49 @@
+# Registre des grilles dont le nombre de colonnes vient de la largeur disponible.
+#
+# Tenu par `outils/modele-grilles.py --verifier`, éprouvé par
+# `outils/test_modele_grilles.py`. Une grille inscrite ici s'engage à trois
+# choses, et le contrôle refuse chacune de leur violation :
+#
+# 1. sa règle de base écrit `repeat(auto-fit, minmax(min(Npx, 100%), 1fr))` ;
+# 2. son `N` est **celui que la règle de calcul donne** pour son nombre de
+#    colonnes de conception — pas un chiffre choisi à la main ;
+# 3. aucun bloc `@media` de largeur ne lui réimpose un nombre de colonnes.
+#
+# La règle de calcul (`minimum_pour_k`) : le plus large minimum de piste qui
+# laisse encore `k` colonnes au conteneur maximal. Le plus large, parce que des
+# cartes larges se lisent mieux ; et « encore k colonnes au conteneur maximal »,
+# parce que c'est la seule façon de garder l'intention de la grille sans jamais
+# écrire de largeur d'écran.
+#
+# Conversion du 31 octobre 2026 : quatre grilles, quatre blocs de palier en
+# moins, et l'écart mesuré avec l'ancienne cascade est **nul** à toutes les
+# largeurs sauf là où l'ancienne cascade sautait une étape (de 3 à 2 colonnes
+# sans passer par rien).
+
+[releve]
+date = 2026-10-31
+feuille = "assets/css/site.css"
+
+[[grille]]
+selecteur = ".principle-grid"
+colonnes = 4
+minimum = 270
+raison = "Cartes de principes : quatre colonnes au conteneur maximal, trois à 952 px au lieu de deux — la cascade fixe sautait l'étape intermédiaire."
+
+[[grille]]
+selecteur = ".ai-fraud-grid"
+colonnes = 3
+minimum = 370
+raison = "Cartes de fraudes : trois colonnes au conteneur maximal, deux dès que la place manque, une seule en dessous — sans aucun palier."
+
+[[grille]]
+selecteur = ".ai-fraud-steps"
+colonnes = 4
+minimum = 270
+raison = "Étapes numérotées des réflexes : quatre colonnes au plus, jamais de colonne de moins de 270 px tant que le conteneur en contient une."
+
+[[grille]]
+selecteur = ".home-voice-grid"
+colonnes = 3
+minimum = 370
+raison = "Témoignages de l'accueil : trois colonnes au conteneur maximal, deux à partir de 800 px de fenêtre, une seule en dessous."
