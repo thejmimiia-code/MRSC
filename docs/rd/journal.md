@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-10-31 — Une CI rouge qui ne dit rien ne prouve rien
+
+- **Initiative :** `optimisation-du-site`.
+- **Le défaut, constaté sur la PR #241 :** le job `graphismes` est tombé en échec à l'étape « Mesurer les trois visuels dans les modes couverts ». Ni `gh run view --log-failed`, ni `gh api …/logs`, ni `gh run download` ne rendent quoi que ce soit depuis l'atelier (`EOF` à chaque fois). Il ne restait que la liste des étapes : le nom de l'étape fautive, et rien de ce qu'elle avait vu. Un job rouge sans annotation est indistinguable d'un job cassé sans rapport avec le code, et la CI a déjà menti dans les deux sens cette semaine.
+- **La correction, dans le workflow avant d'être dans le code :** le bloc de mesure accumule désormais les échecs (`echec=0`, `set +e`, chaque commande testée séparément, `exit 1` à la fin) au lieu de s'arrêter à la première. Les trois passes mutées gardent leur exigence : `verifier-graphismes.cjs` doit sortir en **exactement 1** — un 2 (navigateur absent) reste un échec — et `verifier-mutation-graphismes.py` doit reconnaître la mutation.
+- **Ce que l'annotation dit quand tout va bien :** rien. Ce qu'elle dit quand une mesure n'a rien écrit, ou quand un relevé JSON est illisible, ou quand un dossier est vide : elle le **nomme** au lieu de laisser croire que le job est vert. Au-delà de six constats, le surplus est compté (« N autre(s) ») et non tu.
+- **Ce que cela ne répare pas :** la cause de la chute du 31 octobre reste inconnue à cette heure. Le job n'a produit aucun relevé lisible depuis ici. La prochaine exécution le dira ; si elle retombe, l'annotation nommera la route et le motif.
+- **Contrôles exécutés :** `test_annoncer_echec_graphismes.py` (**5 cas** : constats recopiés, relevé valide sans constat, dossier vide, JSON illisible, débordement des annotations) · `verifier-inventaire-controles.py` (l'outil entre à l'inventaire, 49 lignes) · `test_verifier_inventaire_controles.py` · `verifier-integration.py` · `test_modele_grilles.py` (33 cas) · `modele-grilles.py --verifier` (22 dynamiques, 5 fixes, 2 flex) · `compter-paliers.py` (17 conditions, 38 blocs, 192 règles) · `test_paliers_affichage.py` (20 cas) · relecture du YAML (`yaml.safe_load`, 7 étapes dans le job) et `bash -n` sur le script de l'étape.
+- **Limites :** l'outil lit des fichiers JSON ; une étape qui échoue **sans** rien écrire ne peut être décrite que par « aucun constat écrit ». Et l'annotation GitHub borne ce qu'un humain lit : le détail complet reste dans l'artefact, hors d'atteinte depuis cet atelier.
+- **Prochaine action :** relancer la CI de #241 ; si `graphismes` retombe, lire l'annotation pour connaître la route, le motif et le chiffre mesuré.
+
 ## 2026-10-31 — La deuxième grille inégale, et la moitié de palier qui ne décidait plus rien
 
 - **Initiative :** `optimisation-du-site`.

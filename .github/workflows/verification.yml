@@ -123,6 +123,7 @@ jobs:
         run: |
           python3 outils/test_verifier_inventaire_controles.py
           python3 outils/verifier-inventaire-controles.py
+          python3 outils/test_annoncer_echec_graphismes.py
 
       - name: Vérifier les faits internes du brief prospectif
         run: |
@@ -389,22 +390,35 @@ jobs:
           python3 -m http.server 4181 --bind 0.0.0.0 >"$RUNNER_TEMP/serveur-graphismes.log" 2>&1 &
           serveur=$!
           trap 'kill "$serveur"' EXIT
+          # Une étape qui échoue doit dire ce qu'elle a vu : les journaux et les
+          # artefacts vivent sur un stockage que l'atelier n'atteint pas, et le
+          # 31 octobre 2026 ce job est tombé en rouge sans qu'aucune annotation
+          # ne nomme la mesure refusée. Les constats sont donc réémis en
+          # annotations, lisibles par l'API.
+          echec=0
+          set +e
           MRSC_FICHES_JSON="$RUNNER_TEMP/graphismes/fiches-statistiques.json" node outils/verifier-fiches-statistiques.cjs
+          [ $? -ne 0 ] && echec=1
           node outils/test-cache-css-ia.cjs
+          [ $? -ne 0 ] && echec=1
           node outils/verifier-graphismes.cjs
+          [ $? -ne 0 ] && echec=1
           # Le code de sortie ne dit pas *pourquoi* la mesure a échoué : une
           # mutation qui ferait céder le contrôle pour une panne sans rapport
           # laisserait la CI verte. Chaque passe mutée doit donc constater
           # l'erreur qu'elle est censée provoquer — c'est le rôle de
           # `verifier-mutation-graphismes.py`, testé hors navigateur (6 cas).
           for mutation in distorsion densite ancre; do
-            set +e
             MRSC_MUTATION="$mutation" MRSC_GRAPHISMES_JSON="$RUNNER_TEMP/graphismes/mutation-$mutation.json" node outils/verifier-graphismes.cjs
-            statut=$?
-            set -e
-            test "$statut" -eq 1
+            [ $? -eq 1 ] || echec=1
             python3 outils/verifier-mutation-graphismes.py "$RUNNER_TEMP/graphismes/mutation-$mutation.json" "$mutation"
+            [ $? -ne 0 ] && echec=1
           done
+          set -e
+          if [ "$echec" -ne 0 ]; then
+            python3 outils/annoncer-echec-graphismes.py "$RUNNER_TEMP/graphismes" || true
+            exit 1
+          fi
       # Les deux contrôles précédents disent qu'une mutation produit l'erreur
       # annoncée. Aucun ne dit que la géométrie relevée est la bonne : un
       # `getBoundingClientRect` mal lu, une densité calculée à l'envers,
