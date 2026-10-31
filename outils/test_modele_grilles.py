@@ -260,11 +260,28 @@ class TestModeleGrilles(unittest.TestCase):
         `.knowledge-compass` se décalait d'un écart de grille, et la recommandation
         avec lui.
         """
-        self.assertAlmostEqual(self.modele.ecart_colonnes("display:grid; gap: .75rem 1.1rem;"), 17.6)
-        self.assertAlmostEqual(self.modele.ecart_colonnes("gap: 1rem;"), 16.0)
-        self.assertAlmostEqual(self.modele.ecart_colonnes("column-gap: 20px;"), 20.0)
-        self.assertIsNone(self.modele.ecart_colonnes("row-gap: 20px;"))
-        self.assertIsNone(self.modele.ecart_colonnes("display: grid;"))
+        lire = self.modele.ecart_colonnes
+        self.assertEqual(lire("display:grid; gap: .75rem 1.1rem;"), "1.1rem")
+        self.assertEqual(lire("gap: 1rem;"), "1rem")
+        self.assertEqual(lire("column-gap: 20px;"), "20px")
+        self.assertIsNone(lire("row-gap: 20px;"))
+        self.assertIsNone(lire("display: grid;"))
+        self.assertAlmostEqual(self.modele.mesure_en_px(lire("gap: .75rem 1.1rem;")), 17.6)
+        self.assertAlmostEqual(self.modele.mesure_en_px("1rem"), 16.0)
+
+    def test_un_ecart_en_clamp_varie_avec_la_fenetre(self) -> None:
+        """`clamp(2rem, 5vw, 4.5rem)` vaut 32 px à 640, 38 px à 760, 72 px au-delà de 1 440.
+
+        Le modèle prenait la première valeur écrite — parfois `clamp(2rem,` tronqué
+        à l'espace — et huit grilles portaient donc un écart faux, donc un point
+        de repli faux. Un écart qui dépend de la fenêtre ne peut pas être un
+        nombre unique.
+        """
+        for largeur, attendu in ((640, 32.0), (760, 38.0), (1440, 72.0), (2000, 72.0)):
+            self.assertAlmostEqual(
+                self.modele.mesure_en_px("clamp(2rem, 5vw, 4.5rem)", largeur), attendu
+            )
+        self.assertIsNone(self.modele.mesure_en_px("clamp(2rem, 5vw, 4.5rem)"))
 
     def test_capacite_fausse_est_refusee(self) -> None:
         """Déclarer deux éléments là où la page en met quatre relève le minimum pour rien.
@@ -284,6 +301,64 @@ class TestModeleGrilles(unittest.TestCase):
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("capacité déclarée [2]", resultat.stderr)
+
+    def test_une_grille_flex_dont_le_rapport_change_est_refusee(self) -> None:
+        """`flex: 1.05 1 330px` n'est pas une préférence : c'est le rapport de la grille convertie.
+
+        Changer la base d'un panneau de 330 à 300 px déplace le point de repli
+        sans que rien d'autre ne bouge dans la feuille — la grille ne serait plus
+        celle qui a été mesurée.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie, FEUILLE, "flex: 0.95 1 330px;", "flex: 0.95 1 300px;"
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("aucune règle n'écrit `flex: 0.95 1 330px`", resultat.stderr)
+
+    def test_une_grille_flex_sans_repli_est_refusee(self) -> None:
+        """Sans `flex-wrap: wrap`, deux panneaux de 330 px débordent au lieu de s'empiler."""
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                FEUILLE,
+                "  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: clamp(2rem, 5vw, 4.5rem);",
+                "  display: flex;\n  align-items: center;\n  gap: clamp(2rem, 5vw, 4.5rem);",
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("le repli disparaît", resultat.stderr)
+
+    def test_une_presentation_qui_impose_une_grille_a_une_grille_flex_est_refusee(self) -> None:
+        """`grid-template-columns` sur un conteneur flex est sans effet : le repli annoncé n'existe pas.
+
+        C'est le piège de la conversion : la présentation « Lecture » repliait
+        `.ai-hero-grid` par cette déclaration, qui ne fait plus rien une fois la
+        grille passée en `flex-wrap`.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                FEUILLE,
+                'html[data-layout="lecture"] main .ai-hero-grid > * { flex-basis: 100%; }',
+                'html[data-layout="lecture"] main :is(.ai-hero-grid) { grid-template-columns: minmax(0,1fr); }',
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("sans effet sur un conteneur flex", resultat.stderr)
+
+    def test_un_ecart_de_flex_recopie_a_la_main_est_refuse(self) -> None:
+        """Le registre déclare l'écart qu'a coûté la conversion ; le contrôle le recalcule."""
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(copie, REGISTRE, "ecart_max_px = 16.5", "ecart_max_px = 4")
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("écart déclaré", resultat.stderr)
 
     def test_declaration_qui_ne_decide_rien_est_refusee(self) -> None:
         """Un `@media` qui réécrit la valeur déjà en vigueur ne protège de rien.

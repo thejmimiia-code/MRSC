@@ -138,6 +138,12 @@ class Grille:
     selecteur: str
     colonnes_base: int = 0
     gap: float = 16.0
+    #: L'écart tel qu'il est écrit (`1.15rem`, `clamp(2rem, 5vw, 4.5rem)`).
+    #: `gap` n'en est que la valeur à la fenêtre maximale ; un calcul mené à une
+    #: autre largeur doit passer par `ecart_a()`.
+    gap_expr: str = ""
+    #: Faux quand la feuille écrit un écart que ce modèle ne sait pas évaluer.
+    gap_lu: bool = True
     regles: list[Regle] = field(default_factory=list)
     source: str = ""
     #: Vraie dès qu'une de ses règles est asymétrique : la grille n'est alors pas
@@ -246,34 +252,77 @@ GAP_REM = re.compile(r"(?:^|;)\s*(gap|column-gap|row-gap)\s*:\s*([^;]+)")
 LONGUEUR = re.compile(r"^([\d.]+)(rem|px)$")
 
 
-def ecart_colonnes(corps: str) -> float | None:
-    """L'écart **entre colonnes** déclaré par ce bloc, en pixels.
+def ecart_colonnes(corps: str) -> str | None:
+    """L'expression de l'écart **entre colonnes** déclarée par ce bloc.
 
     Le 31 octobre 2026, la lecture prenait le premier nombre de `gap` sans
     regarder lequel c'était : `gap: .75rem 1.1rem` vaut 12 px entre les lignes
     et **17,6 px entre les colonnes**, et c'est le second qui décide du nombre
-    de colonnes. Deux grilles de la feuille sont dans ce cas. Le calcul du
-    seuil de repli s'en trouvait décalé d'un écart de grille — la même erreur
-    que celle déjà corrigée sur `.document-grid`, sous une autre forme.
+    de colonnes. Elle rendait aussi un nombre tout fait, ce qui obligeait à
+    supposer qu'un écart ne dépend pas de la fenêtre — faux pour les huit
+    grilles qui écrivent `clamp(2rem, 5vw, 4.5rem)`. L'expression est donc
+    gardée telle quelle, et évaluée par `ecart_a()` à chaque largeur.
     """
     trouve = GAP_REM.search(corps)
     if not trouve:
         return None
-    propriete, valeur = trouve.group(1), trouve.group(2).split()
-    mesures = []
-    for morceau in valeur:
-        longueur = LONGUEUR.match(morceau)
-        if not longueur:
-            return None
-        nombre = float(longueur.group(1))
-        mesures.append(nombre * 16 if longueur.group(2) == "rem" else nombre)
-    if not mesures:
-        return None
+    propriete, valeur = trouve.group(1), " ".join(trouve.group(2).split())
     if propriete == "row-gap":
         return None
-    if len(mesures) == 1:
-        return mesures[0]
-    return mesures[1]  # `gap: <ligne> <colonne>` — la colonne est la seconde
+    # `clamp(2rem, 5vw, 4.5rem)` contient des espaces : un découpage naïf rendait
+    # `clamp(2rem,` — un écart illisible, donc un calcul d'écart muet (0 px
+    # annoncé partout). On découpe au premier niveau de parenthèses.
+    morceaux, profondeur, courant = [], 0, ""
+    for caractere in valeur:
+        if caractere == "(":
+            profondeur += 1
+        elif caractere == ")":
+            profondeur -= 1
+        if caractere == " " and profondeur == 0:
+            if courant:
+                morceaux.append(courant)
+            courant = ""
+            continue
+        courant += caractere
+    if courant:
+        morceaux.append(courant)
+    return morceaux[1] if len(morceaux) == 2 else morceaux[0]
+
+
+CLAMP = re.compile(r"^clamp\(\s*([^,]+?)\s*,\s*([^,]+?)\s*,\s*(.+?)\s*\)$")
+
+
+def mesure_en_px(morceau: str, largeur: int | None = None) -> float | None:
+    """Une longueur CSS en pixels, évaluée à une largeur de fenêtre donnée.
+
+    Rend `None` quand l'expression n'est pas une longueur évaluable ici — un
+    `%`, une `ch`, une variable. L'appelant doit alors **le dire** : supposer
+    16 px en silence est exactement ce que ce fichier reproche aux autres.
+    """
+    morceau = morceau.strip()
+    trouvé = LONGUEUR.match(morceau)
+    if trouvé:
+        nombre = float(trouvé.group(1))
+        return nombre * 16 if trouvé.group(2) == "rem" else nombre
+    trouvé = re.match(r"^([\d.]+)vw$", morceau)
+    if trouvé and largeur is not None:
+        return float(trouvé.group(1)) * largeur / 100
+    borné = CLAMP.match(morceau)
+    if borné:
+        bas = mesure_en_px(borné.group(1), largeur)
+        milieu = mesure_en_px(borné.group(2), largeur)
+        haut = mesure_en_px(borné.group(3), largeur)
+        if None in (bas, milieu, haut):
+            return None
+        return max(bas, min(milieu, haut))
+    return None
+
+
+def ecart_a(grille: "Grille", largeur: int) -> float | None:
+    """L'écart entre colonnes de cette grille, à cette largeur de fenêtre."""
+    if not grille.gap_expr:
+        return None
+    return mesure_en_px(grille.gap_expr, largeur)
 
 
 def lire_grilles(texte: str) -> dict[str, Grille]:
@@ -286,11 +335,16 @@ def lire_grilles(texte: str) -> dict[str, Grille]:
             continue
         valeur = " ".join(trouve.group(1).split())
         forme, colonnes, minimum = classer_valeur(valeur)
-        gap = ecart_colonnes(corps)
+        gap_expr = ecart_colonnes(corps)
         for selecteur in selecteurs:
             grille = grilles.setdefault(selecteur, Grille(selecteur=selecteur, source=f"site.css:{ligne}"))
-            if gap is not None:
-                grille.gap = round(gap, 2)
+            if gap_expr is not None:
+                grille.gap_expr = gap_expr
+                valeur_max = mesure_en_px(gap_expr, CONTENU_DEFAUT + GARNITURE_LATERALE)
+                if valeur_max is None:
+                    grille.gap_lu = False
+                else:
+                    grille.gap = round(valeur_max, 2)
             regle = Regle(
                 selecteurs=selecteurs,
                 valeur=valeur,
@@ -328,10 +382,16 @@ def colonnes_anciennes(grille: Grille, largeur: int) -> int:
     for regle in sorted(grille.regles, key=lambda r: r.ordre):
         if applique(regle, largeur):
             if regle.minimum:
-                return auto_fit(regle.minimum, grille.gap, largeur)
+                return auto_fit_grille(grille, regle.minimum, largeur)
             if regle.colonnes:
                 resultat = regle.colonnes
     return resultat
+
+
+def auto_fit_grille(grille: "Grille", minimum: int, largeur: int) -> int:
+    """`auto_fit` avec l'écart **de cette largeur**, et non celui de la fenêtre maximale."""
+    gap = ecart_a(grille, largeur)
+    return auto_fit(minimum, grille.gap if gap is None else gap, largeur, grille.items)
 
 
 def auto_fit(minimum: int, gap: float, largeur: int, items: int = 0) -> int:
@@ -350,7 +410,7 @@ def ecart(grille: Grille, minimum: int) -> tuple[int, int, list[tuple[int, int, 
     details = []
     for largeur in LARGEURS:
         ancienne = colonnes_anciennes(grille, largeur)
-        nouvelle = auto_fit(minimum, grille.gap, largeur, grille.items)
+        nouvelle = auto_fit_grille(grille, minimum, largeur)
         if ancienne != nouvelle:
             details.append((largeur, ancienne, nouvelle))
     maximal = max((abs(a - n) for _, a, n in details), default=0)
@@ -378,14 +438,13 @@ def meilleur_minimum(grille: Grille) -> tuple[int, int, int, list[tuple[int, int
 
 def carte_minimale(grille: Grille, minimum: int) -> float:
     """Largeur de carte la plus faible sur le balayage, pour la nouvelle règle."""
-    return min(
-        (
-            conteneur(largeur)
-            - (auto_fit(minimum, grille.gap, largeur, grille.items) - 1) * grille.gap
-        )
-        / auto_fit(minimum, grille.gap, largeur, grille.items)
-        for largeur in LARGEURS
-    )
+    valeurs = []
+    for largeur in LARGEURS:
+        colonnes = auto_fit_grille(grille, minimum, largeur)
+        gap = ecart_a(grille, largeur)
+        gap = grille.gap if gap is None else gap
+        valeurs.append((conteneur(largeur) - (colonnes - 1) * gap) / colonnes)
+    return min(valeurs)
 
 
 def colonnes_de_conception(grille: Grille) -> int:
@@ -404,7 +463,7 @@ def colonnes_de_conception(grille: Grille) -> int:
         # `auto_fit` attend une largeur de **fenêtre** : lui passer une largeur de
         # conteneur appliquait la soustraction deux fois (1112 au lieu de 1160),
         # et une grille de quatre colonnes s'annonçait à trois.
-        return auto_fit(base.minimum, grille.gap, CONTENU_DEFAUT + GARNITURE_LATERALE, grille.items)
+        return auto_fit_grille(grille, base.minimum, CONTENU_DEFAUT + GARNITURE_LATERALE)
     return 0
 
 
@@ -722,7 +781,13 @@ def nature_piste(piste: str) -> tuple[str, float | None, float | None]:
             return "contenu", None, None
         borne_basse = re.match(r"^([\d.]+)(px|rem)$", bas)
         minimum = float(borne_basse.group(1)) * (16 if borne_basse.group(2) == "rem" else 1) if borne_basse else 0.0
-        return "souple", minimum, None
+        # Le `fr` **est** le poids : le perdre faisait croire qu'un `1.05fr` et un
+        # `.95fr` se partageaient l'espace à parts égales, et le calcul d'écart
+        # entre grille et `flex` rendait zéro partout.
+        poids = re.match(r"^([\d.]+)fr$", haut)
+        if poids:
+            return "souple", minimum, float(poids.group(1))
+        return "borne", minimum, None
     if re.match(r"^[\d.]+fr$", piste):
         return "souple", 0.0, float(piste[:-2])
     mesure = re.match(r"^([\d.]+)(px|rem)$", piste)
@@ -750,8 +815,96 @@ def colonnes_de_la_cascade(grille: Grille, largeur: int) -> int:
     if en_vigueur.colonnes:
         return en_vigueur.colonnes
     if en_vigueur.minimum:
-        return auto_fit(en_vigueur.minimum, grille.gap, largeur, grille.items)
+        return auto_fit_grille(grille, en_vigueur.minimum, largeur)
     return max(1, len(pistes(en_vigueur.valeur)))
+
+
+def largeurs_pistes(grille: Grille, largeur: int) -> dict | None:
+    """Largeur de chaque colonne, aujourd'hui (grille) et avec un `flex-wrap`.
+
+    Le nombre de colonnes ne dit pas tout : deux écritures peuvent afficher deux
+    colonnes et ne pas leur donner la même largeur. `1.05fr / .95fr` partage
+    tout l'espace selon le rapport ; `flex: 1.05 1 330px` ne partage que le
+    **surplus** au-dessus du plancher. Convertir sans le dire changerait le
+    dessin de quelques pour cent sans qu'aucun compteur ne le signale.
+
+    Rend `None` quand la forme ne s'évalue pas (piste de contenu, écart
+    illisible) : l'appelant doit alors renoncer, pas deviner.
+    """
+    if grille.asymetrique is True and not grille.regles:
+        return None
+    gap = ecart_a(grille, largeur)
+    if gap is None:
+        return None
+    en_vigueur = None
+    for regle in sorted(grille.regles, key=lambda x: x.ordre):
+        if applique(regle, largeur):
+            en_vigueur = regle
+    if en_vigueur is None:
+        return None
+    if en_vigueur.colonnes:
+        # Forme fixe : une seule largeur, égale, et un `flex` n'apporterait rien.
+        return None
+    natures = [nature_piste(piste) for piste in pistes(en_vigueur.valeur)]
+    if any(nature != "souple" for nature, _, _ in natures) or not natures:
+        return None
+    place = conteneur(largeur) - (len(natures) - 1) * gap
+    if place <= 0:
+        return None
+    # Grille : répartition par `fr`, planchers respectés.
+    poids = [maximum or 1.0 for _, _, maximum in natures]
+    planchers = [minimum or 0.0 for _, minimum, _ in natures]
+    largeurs = [0.0] * len(natures)
+    libres = set(range(len(natures)))
+    reste = place
+    while libres:
+        total = sum(poids[i] for i in libres)
+        bloque = {i for i in libres if reste * poids[i] / total < planchers[i]}
+        if not bloque:
+            for i in libres:
+                largeurs[i] = reste * poids[i] / total
+            break
+        for i in bloque:
+            largeurs[i] = planchers[i]
+            reste -= planchers[i]
+            libres.discard(i)
+    grille_largeurs = list(largeurs)
+    # `flex-wrap` : base = plancher de la piste, le plus grand plancher si elle
+    # n'en a pas ; la croissance reprend le rapport des `fr`.
+    plancher_commun = max(planchers) or 0.0
+    if plancher_commun <= 0:
+        return None
+    bases = [m if m and m > 0 else plancher_commun for m in planchers]
+    if sum(bases) + (len(bases) - 1) * gap > place + (len(bases) - 1) * gap:
+        pass
+    if sum(bases) + (len(bases) - 1) * gap > conteneur(largeur):
+        flex_largeurs = None  # replié : une seule colonne par ligne
+    else:
+        surplus = conteneur(largeur) - sum(bases) - (len(bases) - 1) * gap
+        total_poids = sum(poids)
+        flex_largeurs = [
+            base + surplus * poids[i] / total_poids for i, base in enumerate(bases)
+        ]
+    if flex_largeurs is None:
+        return {"grille": grille_largeurs, "flex": None, "gap": gap}
+    ecart_max = max(abs(a - b) for a, b in zip(grille_largeurs, flex_largeurs))
+    return {"grille": grille_largeurs, "flex": flex_largeurs, "gap": gap, "ecart": ecart_max}
+
+
+def ecart_de_largeur(grille: Grille) -> dict:
+    """L'écart maximal, en pixels et en part de la colonne, entre grille et `flex`."""
+    pire_px, pire_part, mesures = 0.0, 0.0, 0
+    for largeur in LARGEURS:
+        resultat = largeurs_pistes(grille, largeur)
+        if not resultat or resultat["flex"] is None:
+            continue
+        mesures += 1
+        for attendu, obtenu in zip(resultat["grille"], resultat["flex"]):
+            if attendu <= 0:
+                continue
+            pire_px = max(pire_px, abs(attendu - obtenu))
+            pire_part = max(pire_part, abs(attendu - obtenu) / attendu)
+    return {"px": pire_px, "part": pire_part, "mesures": mesures}
 
 
 def pistes_des_inegales(
@@ -787,6 +940,18 @@ def pistes_des_inegales(
         if any(nature == "contenu" for nature, _, _ in natures):
             resultats.append({"selecteur": grille.selecteur, "forme": "contenu", "valeur": valeur})
             continue
+        # `minmax(230px, 300px)` : la colonne a un **plafond** en pixels. `flex`
+        # n'a pas de plafond sur un élément qui rétrécit ; il faudrait une
+        # `max-width`, et le modèle ne saurait pas la vérifier. Dit, pas deviné.
+        if any(
+            re.search(r"^([\d.]+)(px|rem)$", morceau.strip())
+            for morceau in (pistes(valeur))
+        ):
+            resultats.append({"selecteur": grille.selecteur, "forme": "borne", "valeur": valeur})
+            continue
+        if any(nature == "borne" for nature, _, _ in natures):
+            resultats.append({"selecteur": grille.selecteur, "forme": "borne", "valeur": valeur})
+            continue
         if all(nature == "fixe" for nature, _, _ in natures):
             resultats.append({"selecteur": grille.selecteur, "forme": "fixe", "valeur": valeur})
             continue
@@ -804,7 +969,9 @@ def pistes_des_inegales(
         for largeur in LARGEURS:
             place = conteneur(largeur)
             colonnes = 1
-            while (colonnes + 1) * plancher + colonnes * grille.gap <= place:
+            ecart = ecart_a(grille, largeur)
+            ecart = grille.gap if ecart is None else ecart
+            while (colonnes + 1) * plancher + colonnes * ecart <= place:
                 colonnes += 1
             if items:
                 colonnes = min(colonnes, items)
@@ -919,6 +1086,159 @@ def lire_registre(racine: Path) -> dict:
         return tomllib.loads(chemin.read_text(encoding="utf-8"))
     except (OSError, UnicodeDecodeError, tomllib.TOMLDecodeError) as erreur:
         raise SourceIllisible(f"registre des grilles illisible : {REGISTRE} ({erreur})") from erreur
+
+
+def grille_synthetique(selecteur: str, valeur: str, gap_expr: str) -> Grille:
+    """Reconstruit la grille **d'avant** à partir de ce que le registre déclare.
+
+    Une fois convertie, la grille n'a plus de `grid-template-columns` : le
+    modèle ne peut plus mesurer l'écart qu'elle a coûté. Le registre garde donc
+    l'ancienne valeur, et le contrôle **recalcule** l'écart au lieu de croire le
+    nombre écrit — sans quoi ce nombre serait un total recopié à la main.
+    """
+    grille = Grille(selecteur=selecteur, gap_expr=gap_expr)
+    valeur_gap = mesure_en_px(gap_expr, CONTENU_DEFAUT + GARNITURE_LATERALE)
+    grille.gap = round(valeur_gap, 2) if valeur_gap is not None else 16.0
+    grille.gap_lu = valeur_gap is not None
+    grille.regles = [Regle([selecteur], valeur, None, None, None, None, 1, 0)]
+    return grille
+
+
+def flex_attendu(valeur: str) -> list[str]:
+    """Les déclarations `flex` que la règle donne, une par piste, sans ajustement.
+
+    Le plancher d'une piste est son minimum déclaré ; une piste sans minimum
+    reçoit le plus grand plancher des autres, pour que le repli tombe quand les
+    deux ne tiennent plus — et non quand le premier panneau rétrécit à zéro. Le
+    coefficient de croissance est le `fr` : c'est lui qui porte le rapport.
+    """
+    natures = [nature_piste(piste) for piste in pistes(valeur)]
+    if not natures or any(nature != "souple" for nature, _, _ in natures):
+        return []
+    planchers = [minimum or 0.0 for _, minimum, _ in natures]
+    commun = max(planchers) or 0.0
+    if commun <= 0:
+        return []
+    attendus = []
+    for minimum, maximum in ((minimum or 0.0, maximum) for _, minimum, maximum in natures):
+        base = minimum if minimum > 0 else commun
+        attendus.append(f"{maximum:g} 1 {base:g}px")
+    return attendus
+
+
+def verifier_flex(racine: Path, registre: dict) -> list[str]:
+    """Contrôle les grilles converties en `flex-wrap`.
+
+    Quatre fautes, et chacune a coûté quelque chose : une règle de base qui
+    n'est plus `flex` avec `flex-wrap` (le repli disparaîtrait), des
+    déclarations `flex` qui ne sont plus celles de la règle (le rapport entre
+    colonnes dérive), une déclaration d'écart recopiée à la main au lieu d'être
+    recalculée, et — la plus discrète — une présentation qui impose encore
+    `grid-template-columns` à cette grille : sur un conteneur flex, elle est
+    sans effet, et la présentation ne replie plus rien.
+    """
+    entrees = registre.get("grille_flex", [])
+    if not entrees:
+        return []
+    chemin = racine / FEUILLE
+    if not chemin.is_file():
+        raise SourceIllisible(f"feuille de style introuvable : {FEUILLE}")
+    texte = sans_commentaires(chemin.read_text(encoding="utf-8"))
+    regles = decouper(texte)
+    erreurs: list[str] = []
+    for entree in entrees:
+        selecteur = entree.get("selecteur") or ""
+        if not selecteur:
+            erreurs.append("grille_flex sans sélecteur")
+            continue
+        base = [
+            corps
+            for selecteurs, corps, lmax, lmin, _ in regles
+            if selecteur in selecteurs and lmax is None and lmin is None
+        ]
+        if not base:
+            erreurs.append(f"{selecteur} : aucune règle de base trouvée dans {FEUILLE}")
+            continue
+        corps_base = re.sub(r"\s+", " ", base[0])
+        if "display: flex" not in corps_base and "display:flex" not in corps_base:
+            erreurs.append(f"{selecteur} : sa règle de base n'est plus `display: flex`")
+        if "flex-wrap: wrap" not in corps_base and "flex-wrap:wrap" not in corps_base:
+            erreurs.append(f"{selecteur} : sa règle de base n'a plus `flex-wrap: wrap` — le repli disparaît")
+        if "grid-template-columns" in corps_base:
+            erreurs.append(f"{selecteur} : sa règle de base déclare encore `grid-template-columns`")
+
+        valeur = entree.get("grille_avant") or ""
+        gap_expr = entree.get("gap_avant") or ""
+        attendus = flex_attendu(valeur)
+        if not attendus:
+            erreurs.append(
+                f"{selecteur} : `grille_avant` n'est pas une suite de pistes souples "
+                f"({valeur[:50]}) — le registre ne décrit pas ce qui a été converti"
+            )
+        for attendu in attendus:
+            trouve = any(
+                selecteurs
+                and any(s.startswith(selecteur) for s in selecteurs)
+                and re.sub(r"\s+", " ", corps).find(f"flex: {attendu}") >= 0
+                for selecteurs, corps, _, _, _ in regles
+            )
+            if not trouve:
+                erreurs.append(
+                    f"{selecteur} : aucune règle n'écrit `flex: {attendu}` — "
+                    "la règle donne ce rapport, le registre dit qu'il a été appliqué"
+                )
+        if not any(
+            any(s.startswith(selecteur) for s in selecteurs)
+            and "min-width: 0" in re.sub(r"\s+", " ", corps)
+            for selecteurs, corps, _, _, _ in regles
+        ):
+            erreurs.append(
+                f"{selecteur} : ses panneaux n'ont pas `min-width: 0` — en flex, un "
+                "panneau refuse de rétrécir sous son contenu, ce que la grille autorisait"
+            )
+
+        # Écart recalculé, jamais recopié.
+        if valeur and gap_expr:
+            synthetique = grille_synthetique(selecteur, valeur, gap_expr)
+            mesure = ecart_de_largeur(synthetique)
+            declare_px = float(entree.get("ecart_max_px", -1))
+            declare_part = float(entree.get("ecart_part", -1))
+            if abs(declare_px - mesure["px"]) > 1.5:
+                erreurs.append(
+                    f"{selecteur} : écart déclaré {declare_px:g}px, la règle en donne "
+                    f"{mesure['px']:.1f}px"
+                )
+            if abs(declare_part - mesure["part"]) > 0.005:
+                erreurs.append(
+                    f"{selecteur} : écart déclaré {declare_part:.3f}, la règle en donne "
+                    f"{mesure['part']:.3f} de la colonne"
+                )
+
+        # Présentations : une grille flex ne se replie pas par `grid-template-columns`.
+        for selecteurs, corps, _, _, ligne in regles:
+            if not any("html[data-layout" in s for s in selecteurs):
+                continue
+            if "grid-template-columns" not in corps:
+                continue
+            if not any(selecteur in s for s in selecteurs):
+                continue
+            erreurs.append(
+                f"{selecteur} : la présentation ligne {ligne} lui impose encore "
+                "`grid-template-columns` — sans effet sur un conteneur flex, donc sans repli"
+            )
+        for presentation in entree.get("presentation_repliee", []):
+            marqueur = f'html[data-layout="{presentation}"]'
+            trouve = any(
+                any(marqueur in s and selecteur in s for s in selecteurs)
+                and "flex-basis" in re.sub(r"\s+", " ", corps)
+                for selecteurs, corps, _, _, _ in regles
+            )
+            if not trouve:
+                erreurs.append(
+                    f"{selecteur} : la présentation « {presentation} » le repliait, et "
+                    "aucune règle `flex-basis` ne le replie plus"
+                )
+    return erreurs
 
 
 def verifier(
@@ -1053,6 +1373,7 @@ def principal(arguments: list[str] | None = None) -> int:
         capacites = lire_capacites(RACINE, [e.get("selecteur") or "" for e in registre.get("grille", [])])
         appliquer_capacites(grilles, capacites)
         erreurs = verifier(grilles, registre, capacites)
+        erreurs.extend(verifier_flex(RACINE, registre))
         for morte in declarations_mortes(grilles):
             erreurs.append(
                 f"{morte['selecteur']} : la déclaration ligne {morte['ligne']} "
@@ -1135,7 +1456,7 @@ def principal(arguments: list[str] | None = None) -> int:
                 continue
             mesurees += 1
             avant = min(
-                (conteneur(largeur) - (colonnes_anciennes(grille, largeur) - 1) * grille.gap)
+                (conteneur(largeur) - (colonnes_anciennes(grille, largeur) - 1) * (ecart_a(grille, largeur) or grille.gap))
                 / colonnes_anciennes(grille, largeur)
                 for largeur in LARGEURS
             )
@@ -1174,12 +1495,19 @@ def principal(arguments: list[str] | None = None) -> int:
             "aucun modèle ne le tranche sans navigateur"
         )
         print("  proportion : un `flex: <g> 1 <plancher>px` reproduirait le rapport entre colonnes")
+        print(
+            "  borne     : une colonne a un **plafond** en pixels (`minmax(230px, 300px)`) — "
+            "un `flex` n'en a pas"
+        )
         print("  motif / fixe / illisible : rien à rendre dynamique")
         for resultat in resultats:
             if resultat["forme"] == "proportion":
+                grille = grilles[resultat["selecteur"]]
+                largeur = ecart_de_largeur(grille)
                 print(
                     f"  {resultat['selecteur'][:44]:44} plancher {resultat['plancher']}px · "
-                    f"{resultat['ecarts']} largeur(s) sur {len(LARGEURS)} diffèrent de la cascade"
+                    f"{resultat['ecarts']} largeur(s) sur {len(LARGEURS)} diffèrent de la cascade · "
+                    f"colonnes jusqu'à {largeur['px']:.0f}px ({largeur['part']:.1%}) d'écart"
                 )
             else:
                 print(f"  {resultat['selecteur'][:44]:44} {resultat['forme']}")
