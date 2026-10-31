@@ -916,6 +916,15 @@
       if (header && typeof ResizeObserver === "function") {
         new ResizeObserver(placerPanneauPersonnalisation).observe(header);
       }
+      // Le navigateur peut restaurer `<details open>` au chargement (rechargement,
+      // retour arrière) : le panneau est alors ouvert sans qu'aucun événement
+      // `toggle` n'ait eu lieu, et il garderait la géométrie du repli. Constaté
+      // le 30 octobre 2026 par l'essai à 667 × 375 : panneau ouvert, style en
+      // ligne nul. On place donc aussi au chargement.
+      placerPanneauPersonnalisation();
+      if (document.readyState !== "complete") {
+        window.addEventListener("load", placerPanneauPersonnalisation, { once: true });
+      }
     }
 
     const closeMenu = () => {

@@ -754,6 +754,12 @@ async function main() {
       for (const [largeur, hauteur, nom] of formats) {
         await page.setViewport({ width: largeur, height: hauteur, deviceScaleFactor: 1 });
         await ouvrirPageSite(page, 'index.html');
+        // Un `<details open>` restauré par le navigateur n'émet aucun `toggle` :
+        // l'essai note donc si le panneau était déjà ouvert, pour que l'échec
+        // dise « restauré » plutôt que « placement absent ».
+        const ouvertAuChargement = await page.evaluate(
+          () => document.querySelector('[data-customize-settings]')?.open === true
+        );
         // Ce mode n'est pas reconnu comme compact par la requête du site : c'est
         // l'utilisateur qui réduit l'en-tête. L'essai le fait comme lui.
         const compact = await page.evaluate(
@@ -767,7 +773,10 @@ async function main() {
           );
         }
         await ouvrirPersonnalisation(page);
-        verifierPlacement(await mesurerPanneau(), `${nom} (${largeur} × ${hauteur})`);
+        verifierPlacement(
+          await mesurerPanneau(),
+          `${nom} (${largeur} × ${hauteur})${ouvertAuChargement ? ', panneau restauré ouvert au chargement' : ''}`
+        );
       }
 
       // Le panneau reste ouvert : c'est la fenêtre qui change. Rien ne dit au
