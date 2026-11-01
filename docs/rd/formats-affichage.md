@@ -1824,8 +1824,8 @@ conteneur**. Ce conteneur valait, dans son code, une constante :
 Autrement dit : 48 px de marge de chaque côté, partout, toujours. C'est vrai de `3rem` à
 taille de texte normale — et faux partout ailleurs. La première confrontation à un vrai
 navigateur (34 grilles, 743 points, `HeadlessChrome/153`) a trouvé **70 points divergents
-sur 673 confirmés**, et les largeurs d'éléments imprimées par le relevé désignent trois
-causes sans ambiguïté :
+sur 673 confirmés, dans 23 grilles sur 34**, et les largeurs d'éléments imprimées par le
+relevé désignent trois causes sans ambiguïté :
 
 | cause | ce que la feuille fait | ce que le modèle croyait | écart mesuré |
 | --- | --- | --- | --- |
