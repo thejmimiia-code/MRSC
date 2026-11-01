@@ -1515,3 +1515,37 @@ largeur, dit la vérité.
 Limite du nouveau contrôle : il suppose **une seule** condition de repli sous
 `repli_avant_px`. Une grille dont le palier changeait deux fois demanderait un
 champ par condition, que le modèle ne gère pas encore.
+
+## 24. Trois grilles de plus, et le compteur de paliers qui avoue (31 octobre 2026)
+
+| Grille | Base de compromis | Repli reproduit | Coût (écart de colonne) |
+|---|---:|---|---:|
+| `.ai-questions-layout` | 20.85em (333,6 px) | 333,48 px | 100 px — 38,3 % |
+| `.learning-hero-grid` | 21.09em (337,4 px) | 337,4 px | 50,6 px — 17,4 % |
+| `.participation-grid` | 21.29em (340,5 px) | 340,5 px | 34,1 px — 11 % |
+
+Aucune largeur ne change de nombre de colonnes — vérifié par `repli_avant_px`,
+pas affirmé.
+
+**Le revirement de `.participation-grid`, écrit avec ses deux chiffres.** Le
+matin, elle avait été retenue : sa conversion créait une plage 640–760 px avec
+28 px (9 %) d'écart. Ce n'était pas un jugement définitif mais l'absence d'une
+méthode — on ne savait choisir que la base déclarée. La base de compromis
+supprime la plage ; le coût monte à 34,1 px (11 %). Un demi-point de proportion
+payé pour un nombre de colonnes constant, et une base qui suit la taille du texte.
+
+**Le compteur de paliers avoue, et c'est le fait marquant.** Trois grilles
+quittent leur palier, le compteur ne baisse que de **189 à 188** :
+`.ai-questions-layout` et `.learning-hero-grid` occupaient des règles à
+plusieurs sélecteurs, et retirer un sélecteur d'une règle ne change ni le nombre
+de blocs ni celui des règles. Seule `.participation-grid`, seule sur sa règle,
+coûte une unité.
+
+Conséquence pour la suite : **la dette de 188 règles n'est plus un indicateur
+d'avancement.** Trois conversions peuvent n'en retirer qu'une. Les seuls chiffres
+honnêtes sont le nombre de grilles en `flex-wrap` (11) et le nombre de
+« proportion » restantes (4).
+
+Limites : bases calculées sur la présentation par défaut (contenu 1 160 px) ; en
+Lecture (940 px) et Panorama (1 480 px) le repli se décale, et le modèle ne les
+mesure pas.

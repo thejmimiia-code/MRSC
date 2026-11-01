@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 58 |
+| Avancées consignées | 59 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
 | Contrôles exécutables cités | 63 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1114,6 +1114,30 @@ Initiatives liées : `optimisation-du-site`.
 **Limite — ce que cela ne prouve pas.** La reproduction est arithmétique : elle garantit le même nombre de colonnes, pas le même dessin — une colonne peut varier de 68,7 px (24,3 %) au lieu de 58,9 px (20,9 %). Le compromis est calculé sur la présentation par défaut (contenu 1 160 px) ; en Lecture, à 940 px, le repli avance et le modèle ne mesure pas cette présentation. Aucun rendu n'a été observé dans un navigateur.
 
 **Suite.** Appliquer la même méthode à .mission-grid (compromis 20.9em) et .learning-work-panel (21.3em), puis traiter à part .ai-feature-panel et .simulateur-promo-panel, pour lesquels aucune base ne reproduit la cascade — le relevé le dit désormais.
+
+Initiatives liées : `optimisation-du-site`.
+
+### `compteur-paliers-avoue` — Reconnaître que le compteur de paliers ne mesure plus l'avancement
+
+*Consignée le 2026-10-31.*
+
+**Constat.** Trois grilles ont quitté leur palier le même jour, et le compteur n'a baissé que de 189 à 188 : .ai-questions-layout et .learning-hero-grid occupaient des règles à plusieurs sélecteurs, et retirer un sélecteur d'une règle ne change ni le nombre de blocs ni celui des règles. Le chiffre restait juste, mais il ne disait plus ce qu'on croyait y lire.
+
+**Ce que cela change.** Le registre des paliers écrit la limite en clair — il compte des règles et des blocs, pas des décisions — et les deux seuls chiffres d'avancement retenus sont désormais le nombre de grilles en flex-wrap (11) et le nombre de grilles « proportion » restantes (4). Le même jour, .ai-questions-layout (20.85em), .learning-hero-grid (21.09em) et .participation-grid (21.29em) sont converties avec une base de compromis qui reproduit exactement leur repli d'avant.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/paliers-affichage.toml`
+- `docs/rd/grilles-dynamiques.toml`
+- `outils/compter-paliers.py`
+- `outils/modele-grilles.py`
+- `docs/rd/formats-affichage.md`
+
+**Contrôle qui la maintient :** `python3 outils/compter-paliers.py && python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py`
+
+**Limite — ce que cela ne prouve pas.** Le compteur reste utile comme garde-fou d'augmentation (un palier de plus est un écran de plus présumé) ; c'est comme mesure d'avancement qu'il ne vaut rien. Et les bases de compromis sont calculées sur la présentation par défaut (contenu 1 160 px), pas en Lecture ni en Panorama.
+
+**Suite.** Traiter les quatre grilles « proportion » restantes, dont trois n'ont aucune base qui reproduit leur repli : la méthode doit être dite, pas improvisée.
 
 Initiatives liées : `optimisation-du-site`.
 
