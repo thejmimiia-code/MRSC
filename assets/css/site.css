@@ -2303,7 +2303,7 @@ html.contraste-renforce .resource-scope-note {
 
 .ai-question-list li {
   display: grid;
-  grid-template-columns: 44px 1fr;
+  grid-template-columns: 2.75rem 1fr;
   gap: .75rem;
   padding: 1rem 0;
   border-bottom: 1px solid var(--border-soft-9);
@@ -3720,7 +3720,7 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-hero-aside > .eyebrow { margin-bottom: .55rem; color: var(--green); }
 .home-hero-aside h2 { margin-bottom: 1rem; font-size: clamp(1.35rem,2.5vw,1.8rem); }
 .home-entry-list { display: grid; gap: .9rem; margin: 0; padding: 0; list-style: none; }
-.home-entry-list li { display: grid; grid-template-columns: 38px minmax(0,1fr); align-items: start; gap: .7rem; }
+.home-entry-list li { display: grid; grid-template-columns: 2.375rem minmax(0,1fr); align-items: start; gap: .7rem; }
 .home-entry-mark {
   display: grid;
   place-items: center;
@@ -3997,7 +3997,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
 .layout-settings-options legend { margin-bottom: .55rem; color: var(--navy-ink); font-size: clamp(14px,.95rem,18px); font-weight: 750; }
 .layout-choice {
   display: grid;
-  grid-template-columns: 20px 54px minmax(0,1fr);
+  grid-template-columns: 1.25rem 3.375rem minmax(0,1fr);
   align-items: start;
   gap: .65rem;
   min-height: 44px;
@@ -5085,7 +5085,7 @@ html.has-js .site-header .customize-settings-panel .layout-settings-options {
   gap: .3rem;
 }
 html.has-js .site-header .customize-settings-panel .layout-choice {
-  grid-template-columns: 18px 40px minmax(0, 1fr);
+  grid-template-columns: 1.125rem 2.5rem minmax(0, 1fr);
   gap: .45rem;
   padding: .45rem .5rem;
   align-items: start;

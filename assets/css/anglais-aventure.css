@@ -157,7 +157,7 @@
 .adventure-turn-meter progress::-webkit-progress-bar { border-radius: 99px; background: #e9edf1; }
 .adventure-turn-meter progress::-webkit-progress-value { border-radius: 99px; background: var(--mondes-progres); }
 .adventure-turn-meter progress::-moz-progress-bar { border-radius: 99px; background: var(--mondes-progres); }
-.adventure-character-line { display: grid; grid-template-columns: 42px minmax(0, 1fr) auto; gap: .65rem; align-items: center; margin-block: .8rem 1rem; padding: .75rem; border: 1px solid #e1e7ed; border-radius: 14px; background: #f7f9fb; }
+.adventure-character-line { display: grid; grid-template-columns: 2.625rem minmax(0, 1fr) auto; gap: .65rem; align-items: center; margin-block: .8rem 1rem; padding: .75rem; border: 1px solid #e1e7ed; border-radius: 14px; background: #f7f9fb; }
 .adventure-character-avatar { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 13px; background: var(--navy); color: #ffe2a2; font-size: max(12px, 1.1rem); }
 .adventure-character-copy { min-width: 0; }
 .adventure-character-name { margin-bottom: .18rem; color: var(--muted); font-size: max(12px, .75rem); font-weight: 800; }
@@ -387,7 +387,7 @@ html.contraste-renforce .adventure-promise-list li { border-color: CanvasText; b
   .adventure-progress-list { grid-template-columns: minmax(0, 1fr); }
   .adventure-sheet-grid { grid-template-columns: minmax(0, 1fr); }
   .adventure-roadmap-list { grid-template-columns: minmax(0, 1fr); }
-  .adventure-character-line { grid-template-columns: 36px minmax(0, 1fr); }
+  .adventure-character-line { grid-template-columns: 2.25rem minmax(0, 1fr); }
   .adventure-character-avatar { width: 36px; height: 36px; }
   .adventure-character-line > .button { grid-column: 2; justify-self: start; }
   .adventure-answer-option { grid-template-columns: minmax(0, 1fr); }

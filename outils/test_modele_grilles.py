@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Éprouve le modèle des grilles : dix fautes, dont deux sources illisibles.
+"""Éprouve le modèle des grilles : quarante-huit cas, dont deux sources illisibles.
 
 `outils/modele-grilles.py` ne vaut que s'il refuse. Ce banc casse une chose à la
 fois dans une copie jetable (`outils/banc_mutations.py` : liens symboliques,
@@ -18,7 +18,7 @@ Et deux sources illisibles, qui doivent sortir en code 2 : une feuille absente,
 un registre absent. Un contrôle qui n'a pas pu mesurer n'a pas le droit de dire
 que tout va bien.
 
-Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces dix
+Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces quarante-huit
 situations, pas qu'il couvre toutes les façons de perdre une grille dynamique.
 Un `@supports` qui réécrirait les colonnes, ou un style en ligne, lui échappent.
 
@@ -585,6 +585,115 @@ class TestModeleGrilles(unittest.TestCase):
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("redevenue inégale", resultat.stderr)
+
+    def test_une_piste_fixe_en_pixels_est_refusee(self) -> None:
+        """Une colonne d'icône en `px` ignore le réglage de taille du texte.
+
+        `2.75rem` vaut 44 px à 100 % et 57 px à 130 %. `44px` vaut 44 px dans
+        les deux cas : à 130 %, le numéro grossit dans une colonne qui ne suit
+        pas. Quatre grilles étaient dans ce cas le 1er novembre 2026 ; aucune
+        n'a de palier, donc rien d'autre à leur reprocher.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(copie, FEUILLE, "2.75rem 1fr", "44px 1fr")
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn(".ai-question-list li", resultat.stderr)
+        self.assertIn("pixels nus", resultat.stderr)
+        self.assertIn("rem", resultat.stderr)
+
+    def test_une_piste_fixe_en_rem_passe(self) -> None:
+        """La même longueur en `rem` n'est pas une faute : c'est la réparation."""
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(copie, FEUILLE, "1.25rem 3.375rem", "2rem 3.375rem")
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 0, resultat.stdout + resultat.stderr)
+        self.assertNotIn("pixels nus", resultat.stderr)
+
+    def test_une_piste_en_pixels_dans_la_feuille_de_l_aventure_est_refusee(self) -> None:
+        """Le défaut existait aussi hors de `site.css` : `42px` sous la ligne du personnage."""
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                "assets/css/anglais-aventure.css",
+                "2.625rem minmax(0, 1fr) auto",
+                "42px minmax(0, 1fr) auto",
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn(".adventure-character-line", resultat.stderr)
+        self.assertIn("anglais-aventure.css", resultat.stderr)
+
+    def test_une_piste_en_pixels_dans_le_panneau_du_simulateur_est_refusee(self) -> None:
+        """Le panneau de présentation du simulateur est de nous : sa piste aussi.
+
+        La feuille du moteur embarqué, elle, vient de l'amont : ce contrôle ne la
+        lit pas, et c'est écrit dans ses limites.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                "outils/construire-simulateur.py",
+                "1.25rem 3.375rem minmax(0,1fr)",
+                "20px 54px minmax(0,1fr)",
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn(".site-layout-choice", resultat.stderr)
+        self.assertIn("construire-simulateur.py", resultat.stderr)
+
+    def test_un_plafond_declare_qui_disparait_est_refuse(self) -> None:
+        """Une décision écrite ne doit pas survivre à son objet.
+
+        `.learning-article-layout` est refusé à la conversion à cause de son
+        plafond. Si la feuille perd ce plafond, le refus devient faux — et un
+        refus faux coûte plus cher qu'aucun refus, parce qu'il décourage une
+        conversion devenue possible.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie,
+                FEUILLE,
+                "minmax(0,1fr) minmax(230px,300px)",
+                "minmax(0,1fr) minmax(0,1fr)",
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("déclaré à plafond", resultat.stderr)
+
+    def test_une_colonne_d_icone_n_est_pas_un_plafond(self) -> None:
+        """Le mot « borne » recouvrait deux choses que rien ne rapproche.
+
+        `44px 1fr` réserve une colonne de numéro : aucun palier, aucun repli,
+        rien à convertir. `minmax(230px, 300px)` a un **plafond** : `flex` ne
+        sait pas le rendre, et sur une seule ligne la grille étire ce panneau à
+        toute la largeur alors qu'un élément flex y resterait à 300 px. Le
+        relevé doit les nommer différemment, sinon il envoie convertir la
+        première et oublie la seconde.
+        """
+        grilles = {}
+        for selecteur, valeur in (
+            (".badge", "2.75rem 1fr"),
+            (".plafond", "minmax(0,1fr) minmax(230px,300px)"),
+            (".proportion", "minmax(0, .9fr) minmax(320px, 1.1fr)"),
+        ):
+            grille = self.modele.Grille(selecteur=selecteur)
+            grille.asymetrique = True
+            grille.valeur_asymetrique = valeur
+            grille.regles = [self.modele.Regle([selecteur], valeur, None, None, None, None, 1, 0)]
+            grilles[selecteur] = grille
+        formes = {
+            r["selecteur"]: r["forme"]
+            for r in self.modele.pistes_des_inegales(grilles)
+        }
+        self.assertEqual(formes.get(".badge"), "badge")
+        self.assertEqual(formes.get(".plafond"), "plafond")
+        self.assertEqual(formes.get(".proportion"), "proportion")
 
     # — le contrôle ------------------------------------------------------------
 

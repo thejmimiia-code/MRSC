@@ -354,3 +354,21 @@ ecart_max_px = 34.1
 ecart_part = 0.11
 presentation_repliee = ["lecture"]
 raison = "Bloc de participation de l'accueil : citation et carte « Comment participer ? ». Grille RETENUE le matin du 31 octobre — 640–760 px de plage, 28 px (9 %) d'écart — puis convertie l'après-midi : la base de compromis (340,5 px, écrite 21.29em) reproduit exactement le repli d'avant, donc la plage disparaît. Le coût passe de 28 px (9 %) à 34,1 px (11 %) : un demi-point de proportion payé pour un nombre de colonnes constant, et une base qui suit désormais la taille du texte."
+
+# — Refus écrits du 1er novembre 2026 -----------------------------------------
+# Le relevé `--pistes` classait six grilles « borne » — le mot d'un plafond.
+# Cinq n'en avaient aucun : `2.75rem 1fr`, `2.375rem minmax(0,1fr)`,
+# `1.25rem 3.375rem minmax(0,1fr)`, `2.4rem 1fr`, `1.125rem 2.5rem minmax(0,1fr)`.
+# Ce sont des colonnes de numéro ou d'icône, sans aucun palier : elles ne se
+# replient jamais, il n'y a rien à rendre dynamique. Leur seul défaut était
+# l'unité — quatre d'entre elles étaient en pixels nus, donc insensibles au
+# réglage de taille de texte ; elles sont passées en `rem`, à longueur égale à
+# 100 %. Le relevé les nomme désormais `badge`, et `--verifier` refuse toute
+# piste écrite en pixels nus dans les feuilles qui sont de nous.
+#
+# Il reste un vrai plafond, et il est écrit ici pour qu'on ne le reconvertisse
+# pas sans le relire.
+[[grille_plafond]]
+selecteur = ".learning-article-layout"
+valeur = "minmax(0,1fr) minmax(230px,300px)"
+raison = "Article de leçon et rail latéral. Mesure du 1er novembre 2026 : sur les 180 largeurs où la grille a deux colonnes, la piste plafonnée vaut exactement 300 px — la borne basse de 230 px n'est jamais atteinte, la cascade ne la sert pas. Le refus ne porte donc pas sur la borne, mais sur la seconde conséquence du plafond : sous 760 px, la grille met ce panneau sur une seule piste `minmax(0,1fr)` et il prend toute la largeur ; un `flex` de base 300 px ne saurait pas faire cela, parce que `flex-grow` ne peut pas dépendre du repli. Convertir demanderait un second comportement, pas une base."

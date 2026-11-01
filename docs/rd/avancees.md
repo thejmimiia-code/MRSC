@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 60 |
+| Avancées consignées | 61 |
 | Période couverte | du 2026-10-20 au 2026-11-01 |
 | Contrôles exécutables cités | 65 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1404,6 +1404,32 @@ Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 **Suite.** Convertir les 32 grilles restantes qui fixent encore leur nombre de colonnes, en commençant par celles dont le bloc `@media` ne tient que par la largeur, puis vérifier dans un navigateur ce que le modèle ne peut pas voir : la lisibilité réelle d'une carte de 270 px à 1 024 px de fenêtre.
 
 Initiatives liées : `optimisation-du-site`, `coordination-de-tous-les-agents`.
+
+### `badges-en-rem` — Séparer une colonne d'icône d'un plafond, et la faire suivre la taille du texte
+
+*Consignée le 2026-11-01.*
+
+**Constat.** Le relevé classait six grilles « borne » — le mot d'un plafond. Cinq n'en avaient aucun : des colonnes de numéro ou d'icône à zéro palier, qui ne se replient jamais et n'avaient donc rien à convertir. Leur défaut réel était ailleurs : quatre étaient écrites en pixels nus, donc insensibles au réglage de taille de texte du site, alors que le numéro qu'elles portent, lui, grandit.
+
+**Ce que cela change.** Le relevé distingue désormais badge, plafond, proportion, contenu et motif, et dit pour chaque badge son nombre de paliers et l'unité de ses pistes. Huit pistes en pixels ont été réécrites en rem à longueur égale (44/38/20/54/18/40 px côté site, 42/36 px dans la feuille de l'aventure, 20/54 px dans le panneau du simulateur) : rendu identique à 100 %, suivent le texte à 115 % et 130 %. --verifier refuse toute piste en pixels nus dans les trois sources qui sont de nous. Le seul vrai plafond, .learning-article-layout, est refusé avec sa mesure : la piste vaut 300 px sur les 180 largeurs à deux colonnes, la borne de 230 px n'est jamais atteinte, et flex ne sait pas rendre ce panneau pleine largeur quand il est seul sur sa ligne.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `assets/css/site.css`
+- `assets/css/anglais-aventure.css`
+- `outils/construire-simulateur.py`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/formats-affichage.md`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py && python3 outils/verifier-integration.py`
+
+**Limite — ce que cela ne prouve pas.** Aucun de ces changements n'a été regardé à 130 % dans un navigateur : la preuve est arithmétique. La feuille du moteur embarqué du simulateur vient de l'amont et n'est pas lue : ses pistes restent en pixels. Et la vérification ne lit que le texte des déclarations, pas une piste calculée en JavaScript.
+
+**Suite.** Traiter les huit grilles « contenu », dont le repli dépend du texte : la CI dispose d'un Chromium, l'atelier non — mesurer là-bas, ou écrire pourquoi on ne mesure pas.
+
+Initiatives liées : `optimisation-du-site`.
 
 ### `classes-mortes-relevees` — Mesurer les grilles que personne n'ouvre, avant de les convertir
 

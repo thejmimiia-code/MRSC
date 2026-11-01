@@ -1009,3 +1009,15 @@ controle = "python3 outils/auditer-selecteurs-morts.py --verifier && python3 out
 limite = "Le relevé ne voit pas une classe construite par une source qu'il ne lit pas, et il ne dit rien de l'utilité d'une classe qu'il trouve : une règle peut viser une classe présente et n'avoir aucun effet. Les six classes d'anglais-aventure.css construites à l'exécution restent indécidables, comptées mais non jugées. Les deux « proportion » qui restent ne sont pas converties : .learning-coverage-topic est une composition avec un enfant placé (grid-column:2), et .map-layout coûterait 212,9 px (78,8 %) d'écart de largeur de colonne."
 suite = "Instruire les six grilles « borne » — un plafond en pixels n'a pas d'équivalent direct en flex — puis les huit « contenu », dont le repli dépend du texte et qu'aucun modèle ne tranche sans navigateur."
 initiatives = ["optimisation-du-site"]
+
+[[avancee]]
+id = "badges-en-rem"
+date = 2026-11-01
+titre = "Séparer une colonne d'icône d'un plafond, et la faire suivre la taille du texte"
+constat = "Le relevé classait six grilles « borne » — le mot d'un plafond. Cinq n'en avaient aucun : des colonnes de numéro ou d'icône à zéro palier, qui ne se replient jamais et n'avaient donc rien à convertir. Leur défaut réel était ailleurs : quatre étaient écrites en pixels nus, donc insensibles au réglage de taille de texte du site, alors que le numéro qu'elles portent, lui, grandit."
+changement = "Le relevé distingue désormais badge, plafond, proportion, contenu et motif, et dit pour chaque badge son nombre de paliers et l'unité de ses pistes. Huit pistes en pixels ont été réécrites en rem à longueur égale (44/38/20/54/18/40 px côté site, 42/36 px dans la feuille de l'aventure, 20/54 px dans le panneau du simulateur) : rendu identique à 100 %, suivent le texte à 115 % et 130 %. --verifier refuse toute piste en pixels nus dans les trois sources qui sont de nous. Le seul vrai plafond, .learning-article-layout, est refusé avec sa mesure : la piste vaut 300 px sur les 180 largeurs à deux colonnes, la borne de 230 px n'est jamais atteinte, et flex ne sait pas rendre ce panneau pleine largeur quand il est seul sur sa ligne."
+preuves = ["outils/modele-grilles.py", "outils/test_modele_grilles.py", "assets/css/site.css", "assets/css/anglais-aventure.css", "outils/construire-simulateur.py", "docs/rd/grilles-dynamiques.toml", "docs/rd/formats-affichage.md"]
+controle = "python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py && python3 outils/verifier-integration.py"
+limite = "Aucun de ces changements n'a été regardé à 130 % dans un navigateur : la preuve est arithmétique. La feuille du moteur embarqué du simulateur vient de l'amont et n'est pas lue : ses pistes restent en pixels. Et la vérification ne lit que le texte des déclarations, pas une piste calculée en JavaScript."
+suite = "Traiter les huit grilles « contenu », dont le repli dépend du texte : la CI dispose d'un Chromium, l'atelier non — mesurer là-bas, ou écrire pourquoi on ne mesure pas."
+initiatives = ["optimisation-du-site"]

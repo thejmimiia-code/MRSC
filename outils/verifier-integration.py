@@ -678,7 +678,11 @@ def fichiers_du_site() -> None:
                 ".layout-settings:not([open]) > .layout-settings-panel",
                 ".display-settings:not([open]) > .display-settings-panel",
                 ".layout-choice {",
-                'grid-template-columns: 20px 54px minmax(0,1fr)',
+                # 1er novembre 2026 : la colonne du bouton radio et celle de
+                # l'aperçu étaient en pixels nus, donc insensibles au réglage
+                # de taille de texte. 1.25rem et 3.375rem valent les mêmes
+                # 20 et 54 px à 100 %, et suivent le réglage au-delà.
+                'grid-template-columns: 1.25rem 3.375rem minmax(0,1fr)',
                 ".layout-choice-preview {",
                 '.layout-choice-preview[data-preview="mosaique"] > span:nth-child(1) { grid-column: span 2; }',
                 'html[data-layout="lecture"] { --content: 940px; }',
