@@ -355,6 +355,33 @@ class TestModeleGrilles(unittest.TestCase):
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("sans effet sur un conteneur flex", resultat.stderr)
 
+    def test_une_base_qui_ne_reproduit_pas_le_repli_annonce_est_refusee(self) -> None:
+        """« Aucune largeur ne change de nombre de colonnes » doit se vérifier.
+
+        `.hero-grid` a été converti avec une base choisie pour reproduire
+        exactement son ancien repli. La règle de palier ayant disparu avec la
+        conversion, rien dans la feuille ne permettait de contrôler la promesse :
+        le registre garde donc `repli_avant_px = 760`, et le contrôle reconstruit
+        la cascade d'avant. Ce cas remet la base d'origine (280 px) partout où
+        elle est écrite et exige le refus, avec la plage nommée.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie, REGISTRE,
+                'plancher_expr = "20.4em"\nplancher_px = 326.4',
+                'plancher_expr = "17.5em"\nplancher_px = 280',
+            )
+            for avant, apres in (
+                ("flex: 1.15 1 20.4em;", "flex: 1.15 1 17.5em;"),
+                ("flex: .75 1 20.4em;", "flex: .75 1 17.5em;"),
+            ):
+                banc_mutations.muter(copie, FEUILLE, avant, apres)
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("ne reproduit pas le repli", resultat.stderr)
+        self.assertIn("670 à 760 px", resultat.stderr)
+
     def test_une_base_en_em_remplacee_par_des_pixels_est_refusee(self) -> None:
         """La base de `.hero-grid` est en `em` parce qu'elle doit suivre le texte.
 

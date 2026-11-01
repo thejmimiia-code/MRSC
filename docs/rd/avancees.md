@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 56 |
+| Avancées consignées | 58 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
-| Contrôles exécutables cités | 62 |
+| Contrôles exécutables cités | 63 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1021,6 +1021,31 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 
 Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 
+### `attente-navigateur-nommee` — Nommer la condition qu'une attente de navigateur attendait
+
+*Consignée le 2026-10-31.*
+
+**Constat.** La CI est tombée sur un TimeoutError de Puppeteer qui ne nommait ni la condition, ni la ligne du script ; les journaux du job étant inatteignables depuis l'atelier et l'annotation bornée à trois lignes de contexte, diagnostiquer a demandé deux relances et une lecture de source pour une information que le script possédait.
+
+**Ce que cela change.** Le module outils/attente-navigateur.cjs enveloppe page.waitForFunction : à l'expiration, le message recopie la source de la condition, le délai appliqué et la cause d'origine avec son type (TimeoutError et TypeError ne se réparent pas pareil). Les 53 attentes de test-experience.cjs passent par lui. L'annotation du workflow garde huit lignes de contexte et filtre les cadres du script. Deux bancs entrent dans qualite : test_attente_navigateur.cjs (4 cas, page factice) et test_test_experience.mjs, qui existait depuis le 14 octobre sans tourner dans aucune porte.
+
+**Preuves dans le dépôt :**
+
+- `outils/attente-navigateur.cjs`
+- `outils/test_attente_navigateur.cjs`
+- `outils/test-experience.cjs`
+- `outils/test_test_experience.mjs`
+- `.github/workflows/verification.yml`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `node outils/test_attente_navigateur.cjs && node outils/test_test_experience.mjs && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le banc éprouve le message d'échec sur une page factice, pas le comportement de Puppeteer : il ne dit pas si trente secondes suffisent à un vrai navigateur, ni pourquoi le job est tombé le 31 octobre 2026 — cette cause reste inconnue, et un vert ultérieur ne la prouverait pas.
+
+**Suite.** Relire la prochaine annotation, qui nomme la condition, et traiter la cause réelle du TimeoutError au lieu de la deviner.
+
+Initiatives liées : `optimisation-du-site`.
+
 ### `aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran` — Aucune grille à pistes égales ne dépend plus d'une largeur d'écran
 
 *Consignée le 2026-10-31.*
@@ -1159,6 +1184,30 @@ Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 **Limite — ce que cela ne prouve pas.** Aucune mesure navigateur n'a été faite à 600 px : l'arithmétique prouve l'absence de débordement, pas la lisibilité de deux colonnes de 264 px. C'est la raison pour laquelle .participation-grid, dont le contenu est typographiquement plus lourd, reste retenu.
 
 **Suite.** Mesurer le panneau à 600 et 700 px dans un navigateur avant de convertir .hero-grid et .mission-grid, dont l'écart de largeur est trois fois plus grand (59 et 91 px).
+
+Initiatives liées : `optimisation-du-site`.
+
+### `repli-avant-verifie` — Vérifier qu'une base de flex reproduit le repli qu'elle prétend remplacer
+
+*Consignée le 2026-10-31.*
+
+**Constat.** Le lot précédent affirmait que la base de .hero-grid reproduisait exactement l'ancien repli, mais la règle de palier ayant disparu avec la conversion, aucun contrôle ne pouvait refaire le calcul. Une promesse qu'on ne peut pas vérifier ne vaut pas mieux qu'une valeur fixe non mesurée.
+
+**Ce que cela change.** Le registre des grilles flex gagne repli_avant_px : la largeur sous laquelle la cascade d'avant imposait une colonne. --verifier reconstruit cette cascade, applique la base déclarée et refuse si le nombre de colonnes diffère à une seule des 233 largeurs, en nommant la plage fautive. .mission-grid (20.85em) et .learning-work-panel (21.29em) sont converties avec cette garantie ; un cas de banc remet la base d'origine et exige le refus.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/formats-affichage.md`
+- `assets/css/site.css`
+
+**Contrôle qui la maintient :** `python3 outils/test_modele_grilles.py && python3 outils/modele-grilles.py --verifier`
+
+**Limite — ce que cela ne prouve pas.** Le contrôle suppose une seule condition de repli sous la largeur déclarée : une grille dont le palier changeait deux fois demanderait un champ par condition. Et la reproduction reste arithmétique : même nombre de colonnes, pas même dessin — .mission-grid conserve 116,8 px (44,7 %) d'écart de largeur de colonne, le plus élevé du fil, à cause de son rapport 1,35 / 0,65 très dissymétrique.
+
+**Suite.** Étendre le champ aux grilles à plusieurs conditions de repli, puis traiter les quatre grilles « proportion » sans compromis calculable (.ai-feature-panel, .learning-coverage-topic, .simulateur-promo-panel) par une autre méthode, en le disant.
 
 Initiatives liées : `optimisation-du-site`.
 

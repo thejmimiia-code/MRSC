@@ -72,6 +72,13 @@ async function lancer(script = source) {
   await cp(path.join(FAUX, '@sparticuz', 'chromium'), path.join(modules, '@sparticuz', 'chromium'), { recursive: true });
   const chemin = path.join(dossier, 'test-experience.cjs');
   await writeFile(chemin, script);
+  // Le script peut require des modules locaux (`./attente-navigateur.cjs`) :
+  // sans eux, le banc reprocherait au harnais un échec qui vient de sa propre
+  // copie incomplète. Les dépendances déclarées sont copiées d'après la source,
+  // pas devinées.
+  for (const [, dependance] of script.matchAll(/require\('\.\/([^']+)'\)/g)) {
+    await cp(path.join(OUTILS, dependance), path.join(dossier, dependance), { force: true });
+  }
   const { serveur, url } = await serveurFactice();
   try {
     const execution = await new Promise((resoudre) => {
