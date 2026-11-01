@@ -1360,3 +1360,39 @@ D'où deux règles, désormais contrôlées :
 Limite : le contrôle ne voit que la forme `min(100%, Npx)`. Un plafond écrit
 `width: 520px`, `width: 65ch` ou `inline-size` lui échappe encore, et une
 présentation qui plafonnerait autrement qu'en `flex-basis` aussi.
+
+## 20. Troisième grille inégale : lire la plage, pas le compte (31 octobre 2026)
+
+`.ai-path-panel` (page IA) passe en `flex-wrap` : `0.9fr` / `1.1fr`, 320 px de
+base commune. Son palier `@media (max-width: 1000px)` ne portait que cette
+grille et disparaît en entier — 37 blocs, 191 règles.
+
+**La leçon de méthode est plus importante que la conversion.** Le relevé disait
+« 29 largeurs sur 233 diffèrent de la cascade » : un compte, sans lieu. Deux
+grilles au compte voisin pouvaient donc cacher des conséquences opposées, et
+c'est exactement ce qui s'était produit.
+
+`modele-grilles.py --pistes` imprime désormais la **bande** :
+
+```
+.ai-path-panel     plancher 320px · 29 largeur(s) sur 233 diffèrent de la cascade · colonnes jusqu'à 32px (7.6%) d'écart
+    720–1000 px : 1 colonne(s) deviennent 2
+.participation-grid plancher 280px · 13 largeur(s) sur 233 diffèrent de la cascade · colonnes jusqu'à 28px (9.0%) d'écart
+    640–760 px : 1 colonne(s) deviennent 2
+```
+
+Une bande qui tombe **dans un palier existant** n'est pas la même décision qu'une
+bande qui tombe là où la grille n'avait plus de règle : la première déplace une
+décision déjà prise avec d'autres, la seconde ne fait que prolonger un repli.
+
+Décisions de la journée, écrites pour ne pas être reprises au jugé :
+
+- `.ai-path-panel` — **converti** (bande 720–1 000 px, repli à 672 px de
+  conteneur).
+- `.participation-grid` — **retenu** : sa bande (640–760 px) traverse le palier
+  de 760 px, qui porte d'autres décisions, et aucune mesure navigateur n'a montré
+  ce que deux cartes côte à côte y donnent.
+
+Limites : la bande est calculée sur la présentation par défaut (`--content`
+1 160 px). En Lecture (940 px) et en Panorama (1 480 px) elle se décale, et le
+modèle ne les mesure pas.

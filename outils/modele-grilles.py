@@ -963,6 +963,64 @@ def ecart_de_largeur(grille: Grille) -> dict:
     return {"px": pire_px, "part": pire_part, "mesures": mesures}
 
 
+def colonnes_en_flex(grille: Grille, largeur: int, plancher: float, items: int = 0) -> int:
+    """Le nombre de panneaux qu'un `flex-wrap` alignerait à cette largeur.
+
+    La règle est écrite **une fois**, ici : un panneau de plus tient quand
+    `(n + 1) × plancher + n × écart` ne dépasse pas le conteneur. Le plafond par
+    `items` n'est pas une précaution de style : `flex-wrap` ne crée pas
+    d'élément, une grille de deux panneaux n'en montrera jamais trois.
+    """
+    place = conteneur(largeur)
+    ecart = ecart_a(grille, largeur)
+    ecart = grille.gap if ecart is None else ecart
+    colonnes = 1
+    while (colonnes + 1) * plancher + colonnes * ecart <= place:
+        colonnes += 1
+    if items:
+        colonnes = min(colonnes, items)
+    return colonnes
+
+
+def bandes_de_changement(grille: Grille, plancher: float | None = None) -> list[dict]:
+    """Où, et de combien, une conversion changerait le nombre de colonnes.
+
+    Un compte de largeurs (« 29 sur 233 ») ne dit pas **où**. Le 31 octobre
+    2026, deux conversions avaient un compte voisin et des conséquences très
+    différentes : treize largeurs sur 233 pour une grille qui passait de deux
+    colonnes à deux colonnes ne changeaient presque rien, alors qu'une grille
+    qui passait de **une à deux** colonnes sur la même plage redessinait la
+    page. La plage, elle, se lit : « de 704 à 1 032 px, une colonne devient
+    deux ».
+    """
+    valeur = plancher if plancher is not None else plancher_de(grille)
+    if valeur is None or valeur <= 0:
+        return []
+    bandes: list[dict] = []
+    encours: dict | None = None
+    for largeur in LARGEURS:
+        flex = colonnes_en_flex(grille, largeur, valeur, grille.items)
+        cascade = colonnes_de_la_cascade(grille, largeur)
+        if flex == cascade:
+            encours = None
+            continue
+        if encours is not None and encours["cascade"] == cascade and encours["flex"] == flex:
+            encours["fin"] = largeur
+            continue
+        encours = {"debut": largeur, "fin": largeur, "cascade": cascade, "flex": flex}
+        bandes.append(encours)
+    return bandes
+
+
+def plancher_de(grille: Grille) -> float | None:
+    """Le plus grand minimum de piste d'une grille à pistes souples, ou `None`."""
+    natures = [nature_piste(piste) for piste in pistes(grille.valeur_asymetrique)]
+    if not natures or any(nature != "souple" for nature, _, _ in natures):
+        return None
+    valeur = max((minimum or 0.0) for _, minimum, _ in natures)
+    return valeur if valeur > 0 else None
+
+
 def pistes_des_inegales(
     grilles: dict[str, Grille], capacites: dict[str, dict] | None = None
 ) -> list[dict]:
@@ -1021,18 +1079,12 @@ def pistes_des_inegales(
         # déjà produit un faux rapport sur les grilles `auto-fit` ; il est évité
         # ici avant d'écrire la moindre ligne de CSS.
         items = grille.items
-        ecarts = 0
-        for largeur in LARGEURS:
-            place = conteneur(largeur)
-            colonnes = 1
-            ecart = ecart_a(grille, largeur)
-            ecart = grille.gap if ecart is None else ecart
-            while (colonnes + 1) * plancher + colonnes * ecart <= place:
-                colonnes += 1
-            if items:
-                colonnes = min(colonnes, items)
-            if colonnes != colonnes_de_la_cascade(grille, largeur):
-                ecarts += 1
+        ecarts = sum(
+            1
+            for largeur in LARGEURS
+            if colonnes_en_flex(grille, largeur, plancher, items)
+            != colonnes_de_la_cascade(grille, largeur)
+        )
         resultats.append(
             {
                 "selecteur": grille.selecteur,
@@ -1605,6 +1657,11 @@ def principal(arguments: list[str] | None = None) -> int:
                     f"{resultat['ecarts']} largeur(s) sur {len(LARGEURS)} diffèrent de la cascade · "
                     f"colonnes jusqu'à {largeur['px']:.0f}px ({largeur['part']:.1%}) d'écart"
                 )
+                for bande in bandes_de_changement(grille, resultat["plancher"]):
+                    print(
+                        f"      {bande['debut']}–{bande['fin']} px : {bande['cascade']} colonne(s) "
+                        f"deviennent {bande['flex']}"
+                    )
             else:
                 print(f"  {resultat['selecteur'][:44]:44} {resultat['forme']}")
         proches = [

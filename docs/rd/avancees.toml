@@ -925,3 +925,15 @@ controle = "python3 outils/test_exemples_statistiques.py && python3 outils/verif
 limite = "Les contrôles portent sur des passages identifiés et des calculs finis : ils ne comprennent pas la totalité du texte, ne prouvent pas l'efficacité d'une analogie et ne remplacent aucune relecture mathématique ou pédagogique indépendante."
 suite = "Faire relire les deux fiches et leurs tâches candidates, puis étendre les assertions aux prochains exemples sans transformer une correction automatique en promesse de compréhension."
 initiatives = ["relire-les-44-prototypes", "co-conception-et-essais"]
+
+[[avancee]]
+id = "bande-de-changement-des-grilles"
+date = 2026-10-31
+titre = "Lire où une conversion change les colonnes, pas seulement combien de largeurs"
+constat = "Le relevé des grilles à pistes inégales donnait un compte de largeurs (« 29 sur 233 diffèrent de la cascade ») sans dire lesquelles. Deux grilles au compte voisin, .participation-grid (13) et .ai-path-panel (29), cachaient donc des conséquences opposées : la seconde passait d'une à deux colonnes sur toute la plage 720–1 000 px, la première restait à deux colonnes et ne changeait que des largeurs."
+changement = "modele-grilles.py --pistes imprime la bande de largeurs où le nombre de colonnes change, et de combien, en réutilisant la règle de calcul du nombre de colonnes en flex (extraite en colonnes_en_flex, une seule fois). La décision de convertir .ai-path-panel et de retenir .participation-grid est écrite, avec sa bande, dans le journal et dans formats-affichage.md § 20."
+preuves = ["outils/modele-grilles.py", "outils/test_modele_grilles.py", "docs/rd/journal.md", "docs/rd/formats-affichage.md", "docs/rd/grilles-dynamiques.toml"]
+controle = "python3 outils/test_modele_grilles.py && python3 outils/modele-grilles.py --verifier && python3 outils/compter-paliers.py"
+limite = "La bande est calculée sur la présentation par défaut (contenu de 1 160 px) ; en Lecture (940 px) et en Panorama (1 480 px) elle se décale, et le modèle ne mesure pas ces présentations. Elle suppose aussi un contenu de largeur fixe : un titre long ou une image à ratio peuvent changer le repli réel, ce qu'aucun calcul hors navigateur ne tranche."
+suite = "Mesurer dans le navigateur le rendu de .ai-path-panel dans la bande 720–1 000 px, puis traiter .home-share-panel dont la bande traverse le palier de 760 px, ce qui demande de savoir ce que ce palier porte encore."
+initiatives = ["optimisation-du-site"]

@@ -2461,14 +2461,31 @@ html.contraste-renforce .resource-scope-note {
 }
 
 .ai-path-panel {
-  display: grid;
-  grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr);
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 2rem;
   padding: clamp(1.7rem, 4vw, 3rem);
   border-radius: 24px;
   background: var(--navy);
   color: rgba(255, 255, 255, .78);
+}
+
+/* Deux colonnes inégales, sans largeur d'écran (31 octobre 2026) : 320 px de
+   base chacune, le repli tombe quand les deux ne tiennent plus (672 px de
+   conteneur, écart compris). Le palier de 1 000 px qui forçait une colonne
+   disparaît avec le bloc qui le portait — c'est le seul bloc de la feuille
+   dédié à cette grille. Ce que la conversion change, mesuré : de 720 à
+   1 000 px de fenêtre, une colonne devient deux (29 largeurs sur 233) ;
+   ailleurs, rien. Une colonne peut varier de 32 px (7,6 %) au plus. */
+.ai-path-panel > :first-child {
+  flex: 0.9 1 320px;
+  min-width: 0;
+}
+
+.ai-path-panel > :last-child {
+  flex: 1.1 1 320px;
+  min-width: 0;
 }
 
 .ai-path-panel h2 {
@@ -2599,12 +2616,6 @@ html.contraste-renforce .resource-scope-note {
   max-width: 740px;
   margin-bottom: 0;
   color: var(--muted);
-}
-
-@media (max-width: 1000px) {
-  .ai-path-panel {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 @media (max-width: 760px) {
@@ -4184,7 +4195,7 @@ html[data-layout="lecture"] main :is(
   .hero-grid,.mission-grid,.participation-grid,.join-panel,.document-grid,.link-grid,.contact-grid,.map-layout,
   .home-action-grid,.home-voice-grid,.home-share-panel,
   .ai-feature-panel,.ai-metric-grid,.ai-forms-grid,.ai-balance-grid,.ai-lives-grid,
-  .ai-questions-layout,.ai-path-panel,.ai-path-steps,.ai-cta-panel,.principle-grid,.trace-panel,
+  .ai-questions-layout,.ai-path-steps,.ai-cta-panel,.principle-grid,.trace-panel,
   .simulateur-intro,.simulateur-chiffres,.simulateur-promo-panel,.simulateur-duo,.home-hero-facts,
   .learning-hero-grid,.learning-work-panel,.learning-article-layout,.learning-catalogue-grid,
   .learning-level-grid,.learning-ecosystem-grid,.learning-filters,.learning-feedback-panel,
@@ -4199,7 +4210,7 @@ html[data-layout="lecture"] .site-footer .footer-grid { grid-template-columns: m
 /* « Lecture » composait cette grille en une colonne par `grid-template-columns`.
    Depuis que `.ai-hero-grid` est en `flex-wrap`, cette déclaration n'aurait plus
    d'effet : c'est la base des deux panneaux qui doit passer à 100 %. */
-html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel) > * { flex-basis: 100%; }
+html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel, .ai-path-panel) > * { flex-basis: 100%; }
 html[data-layout="lecture"] main :is(.learning-lesson-article,.learning-lesson-aside,.ai-section-intro,.ai-fraud-evidence,.ai-hero-copy) {
   width: min(100%,78ch);
   margin-inline: auto;
