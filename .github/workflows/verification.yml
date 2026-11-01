@@ -387,6 +387,16 @@ jobs:
           python3 outils/modele-grilles.py --verifier
           python3 outils/test_modele_grilles.py
 
+      # Le rapporteur confronte la prédiction du modèle au relevé d'un
+      # navigateur. Il tourne dans `graphismes`, où le Chromium existe ; son banc
+      # n'a besoin de rien : il fabrique une prédiction et un relevé, et regarde
+      # ce que le rapporteur en dit. Le 1er novembre 2026, le modèle se
+      # contredisait tout seul — trois grilles changeaient de colonnes à 761 px
+      # sans que rien ne le voie. Un contrôle qui ne se confronte qu'à sa propre
+      # arithmétique ne prouve que sa cohérence.
+      - name: Éprouver le rapporteur de la mesure des colonnes
+        run: python3 outils/test_rapporter_mesure_grilles.py
+
       # Le 1er novembre 2026, le modèle annonçait quatre grilles « proportion »
       # restantes ; deux d'entre elles n'existaient que dans la feuille, et le
       # relevé proposait donc des conversions sans objet. Une grille que
@@ -451,6 +461,60 @@ jobs:
             python3 outils/annoncer-echec-graphismes.py "$RUNNER_TEMP/graphismes" || true
             exit 1
           fi
+      # Le modèle des grilles annonce, largeur par largeur et taille de texte par
+      # taille de texte, le nombre de colonnes de 34 grilles. Il ne s'est jamais
+      # confronté à un navigateur : le 1er novembre 2026, trois grilles
+      # converties la veille changeaient de colonnes à 761 px, et c'était le
+      # modèle qui validait le modèle. Ici, un vrai Chromium compte les colonnes
+      # — rangées d'un `flex-wrap`, pistes non nulles d'une grille — et le
+      # rapporteur dit où les deux divergent.
+      #
+      # Cette étape est un **relevé**, pas encore un contrôle : elle publie les
+      # divergences sans faire échouer le job, et le dit en première ligne. Elle
+      # échoue en revanche si une mesure n'a pas eu lieu (code 2 sans navigateur,
+      # page ou sélecteur introuvable) : un relevé incomplet ne vaut pas un
+      # relevé vide, il vaut un échec.
+      - name: Confronter les colonnes annoncées aux colonnes réelles
+        env:
+          MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
+          MRSC_TEST_URL: http://127.0.0.1:4183/
+        run: |
+          mkdir -p "$RUNNER_TEMP/graphismes/colonnes"
+          python3 outils/modele-grilles.py --releve-json "$RUNNER_TEMP/graphismes/colonnes/releve.json"
+          python3 -m http.server 4183 --bind 0.0.0.0 >"$RUNNER_TEMP/serveur-colonnes.log" 2>&1 &
+          serveur=$!
+          trap 'kill "$serveur"' EXIT
+          sleep 1
+          set +e
+          node outils/mesurer-grilles.cjs \
+            "$RUNNER_TEMP/graphismes/colonnes/releve.json" \
+            "$RUNNER_TEMP/graphismes/colonnes/rapport.json" \
+            >"$RUNNER_TEMP/graphismes/colonnes/mesure.log" 2>&1
+          mesure=$?
+          set -e
+          cat "$RUNNER_TEMP/graphismes/colonnes/mesure.log"
+          if [ "$mesure" -ne 0 ]; then
+            grep -E '^(  !|Environnement)' "$RUNNER_TEMP/graphismes/colonnes/mesure.log" \
+              | head -n 10 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::error title=Mesure des colonnes::$ligne"
+            done
+            exit "$mesure"
+          fi
+          set +e
+          python3 outils/rapporter-mesure-grilles.py \
+            --releve "$RUNNER_TEMP/graphismes/colonnes/releve.json" \
+            --rapport "$RUNNER_TEMP/graphismes/colonnes/rapport.json" \
+            | tee "$RUNNER_TEMP/graphismes/colonnes/comparaison.log"
+          comparaison=${PIPESTATUS[0]}
+          set -e
+          if [ "$comparaison" -ne 0 ]; then
+            grep -E '^(  !|  à|Refusé|Impossible)' "$RUNNER_TEMP/graphismes/colonnes/comparaison.log" \
+              | head -n 20 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::error title=Colonnes des grilles::$ligne"
+            done
+            exit "$comparaison"
+          fi
+
       # Les deux contrôles précédents disent qu'une mutation produit l'erreur
       # annoncée. Aucun ne dit que la géométrie relevée est la bonne : un
       # `getBoundingClientRect` mal lu, une densité calculée à l'envers,

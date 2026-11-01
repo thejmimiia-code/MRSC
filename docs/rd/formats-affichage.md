@@ -1729,3 +1729,87 @@ La feuille du moteur embarqué du simulateur vient de l'amont
 ne les lit pas — il lit `construire-simulateur.py`, qui ne porte que nos règles.
 Aucun de ces changements n'a été regardé à 130 % dans un navigateur : la preuve
 est arithmétique (44 px = 2,75 × 16), pas visuelle.
+
+## 27. Une bande d'un pixel, et la fin d'un modèle qui se validait lui-même (1er novembre 2026)
+
+Les six grilles converties en `flex-wrap` le 31 octobre portaient, au registre,
+la phrase « aucune largeur ne change de nombre de colonnes ». Elle avait été
+vérifiée à chaque largeur multiple de 10 px. En repassant le **même balayage au
+pixel** — 2 321 largeurs de 240 à 2 560 —, trois des six changeaient de colonnes
+à **761 px**.
+
+La cause n'est pas un chiffre faux, c'est une géométrie :
+
+> une base de `flex` ne replie qu'à un seuil, et les bases qui tombent pile entre
+> 760 et 761 px forment une fenêtre de **0,46 px** de large.
+
+| grille | base écrite la veille | px | fenêtre mesurée | corrigée en |
+| --- | --- | --- | --- | --- |
+| `.hero-grid` | `20.4em` | 326,40 | ]325,60 ; 326,06] | `20.37em` (325,92) |
+| `.learning-work-panel` | `21.29em` | 340,64 | ]340,00 ; 340,50] | `21.28em` (340,48) |
+| `.participation-grid` | `21.29em` | 340,64 | ]340,00 ; 340,50] | `21.28em` (340,48) |
+
+Deux fautes de méthode ont été corrigées dans le calcul, pas seulement trois
+valeurs : la base en `em` est désormais arrondie **vers le bas** puis vérifiée au
+pixel (arrondir au-dessus de la base trouvée sort de la fenêtre et rouvre la
+bande qu'on voulait fermer), et la tolérance du registre est passée de **0,5 px**
+à **0,01 px** — plus large que la fenêtre, elle ne contrôlait rien.
+
+### Ce que cet épisode a vraiment appris
+
+Le balayage au pixel a trouvé trois erreurs que le balayage au pas de 10 px
+avait validées. Mais le défaut est plus profond que le pas : **le modèle était le
+seul juge du modèle**. Rien, dans ce dépôt, ne confrontait ce qu'il annonce à ce
+qu'un navigateur affiche. Un contrôle qui ne se compare qu'à sa propre
+arithmétique ne prouve que sa cohérence.
+
+D'où la chaîne ajoutée ce jour, en trois pièces séparées à dessein :
+
+1. **la prédiction** — `outils/modele-grilles.py --releve-json` écrit, pour
+   **34 grilles**, ce que la feuille *devrait* produire : les largeurs qui
+   encadrent chaque rupture annoncée, plus treize largeurs de repère. Une base en
+   `em` est annoncée à 100 %, 115 % et 130 % — la promesse « le repli suit la
+   taille du texte » n'avait jamais été mesurée nulle part. Une base en pixels
+   n'est annoncée qu'à 100 %, et le relevé le dit (`suit_le_texte = false`)
+   plutôt que de mesurer trois fois la même chose ;
+2. **la mesure** — `outils/mesurer-grilles.cjs` compte, dans un vrai Chromium,
+   les colonnes de chaque grille : rangées d'un `flex-wrap`, repérées par la
+   position horizontale et non par le haut (plusieurs grilles converties sont en
+   `align-items: center`, où deux panneaux n'ont jamais le même bord haut) ;
+   pistes **non nulles** d'une grille (`auto-fit` replie les pistes vides à 0 px,
+   et une grille de deux cartes sur quatre pistes n'a pas quatre colonnes). Il
+   élargit la fenêtre de la largeur de l'ascenseur jusqu'à ce que la largeur
+   cliente vaille exactement la largeur demandée : sans cela, chaque mesure
+   serait décalée de 15 px et le modèle accuserait la feuille d'un artefact de
+   navigateur ;
+3. **la comparaison** — `outils/rapporter-mesure-grilles.py` lit les deux
+   fichiers et nomme les divergences : largeur, échelle de texte, valeur
+   annoncée, valeur vue, et **largeur réelle de l'élément** à côté du conteneur
+   que le modèle présume. Cette dernière colonne est la première cause à écarter
+   avant d'accuser la feuille : une grille qui porte son propre remplissage
+   n'occupe pas la largeur que `conteneur()` lui prête.
+
+### Le contrat de sortie, écrit avant la première mesure
+
+- `mesurer-grilles.cjs` sort en **code 2** sans navigateur ou sans modules, et
+  le dit — jamais vert, jamais un rapport vide présenté comme un succès ;
+- il sort en **code 1** si une page ou un sélecteur n'a pas pu être mesuré ;
+- `rapporter-mesure-grilles.py` sort en **code 2** sur un rapport sans
+  navigateur, vide ou illisible, et compte un point annoncé sans mesure comme
+  **non mesuré**, jamais comme conforme ;
+- en mode `--controler`, la moindre divergence le fait sortir en **code 1**. Ce
+  mode n'est pas encore celui de la CI : le premier passage est un **relevé**.
+  Il publie les nombres, et l'étape le dit en première ligne de sa sortie. Passer
+  au contrôle demande de lire ces nombres d'abord — l'inverse serait décider
+  avant de mesurer.
+
+### Limites
+
+Le relevé mesure la présentation par défaut (celle que la feuille applique sans
+`data-layout`) : les cinq autres présentations replient plusieurs de ces grilles
+par d'autres règles, et ne sont pas couvertes. Il ne mesure qu'un point par
+(page, grille) : la même grille peut se comporter autrement dans une page où
+elle reçoit plus d'éléments — le relevé choisit la page où elle en reçoit le
+plus, et le dit dans la prédiction. Enfin la comparaison reste celle d'un
+navigateur sans personne devant : elle compte des colonnes, elle ne dit pas si la
+page est lisible.

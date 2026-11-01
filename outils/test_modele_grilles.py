@@ -29,6 +29,7 @@ Usage :
 from __future__ import annotations
 
 import importlib.util
+import json
 import re
 import sys
 import tempfile
@@ -409,6 +410,64 @@ class TestModeleGrilles(unittest.TestCase):
             r"repli_avant_px = 760` annoncé comme reproduit, mais à \d+ px "
             r"\(bande \d+–760\)",
         )
+
+    # — relevé pour un navigateur ----------------------------------------------
+
+    def test_le_releve_annonce_les_tailles_de_texte_pour_une_base_en_em(self) -> None:
+        """Le relevé navigateur doit porter la promesse, pas seulement les largeurs.
+
+        La feuille affirme qu'une base en `em` fait avancer le repli quand le
+        texte grandit. Cette phrase n'était mesurée nulle part : le relevé
+        l'inscrit donc en clair, à 100 %, 115 % et 130 %, et à la largeur même
+        où le repli est annoncé — 760 et 761 px.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            sortie = Path(dossier) / "releve.json"
+            resultat = banc_mutations.lancer(
+                OUTIL, copie, arguments=("--releve-json", str(sortie))
+            )
+            self.assertEqual(resultat.returncode, 0, resultat.stderr)
+            releve = json.loads(sortie.read_text(encoding="utf-8"))
+        grille = next(
+            g for g in releve["grilles"] if g["selecteur"] == ".hero-grid"
+        )
+        self.assertTrue(grille["suit_le_texte"], grille)
+        self.assertEqual(sorted({p["echelle"] for p in grille["points"]}), [1.0, 1.15, 1.3])
+        largeurs = {p["largeur"] for p in grille["points"]}
+        self.assertIn(760, largeurs)
+        self.assertIn(761, largeurs)
+        # À 130 %, la base vaut 1,3 fois plus : la paire ne tient plus dans la
+        # même fenêtre, donc le repli arrive **plus tôt**. C'est exactement ce
+        # qu'une condition de largeur d'écran ne sait pas faire, et le relevé
+        # l'inscrit à 920 px : deux colonnes à 100 %, une seule à 130 %.
+        assise = {(p["largeur"], p["echelle"]): p["attendu"] for p in grille["points"]}
+        self.assertEqual(assise[(760, 1.0)], 1)
+        self.assertEqual(assise[(920, 1.0)], 2)
+        self.assertEqual(assise[(920, 1.3)], 1)
+
+    def test_un_selecteur_qui_ne_se_mesure_pas_est_liste(self) -> None:
+        """Un relevé qui écarte une grille en silence ferait croire à une mesure.
+
+        Le navigateur ne peut mesurer que ce qu'une page contient ; le relevé
+        doit donc nommer ce qu'il n'a pas pu préparer, et le contrôle de
+        sortie aussi.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie, REGISTRE, 'selecteur = ".hero-grid"', 'selecteur = ".hero-grid-absent"'
+            )
+            sortie = Path(dossier) / "releve.json"
+            resultat = banc_mutations.lancer(
+                OUTIL, copie, arguments=("--releve-json", str(sortie))
+            )
+            releve = json.loads(sortie.read_text(encoding="utf-8"))
+        self.assertEqual(resultat.returncode, 0, resultat.stderr)
+        absents = {entree["selecteur"] for entree in releve["non_mesurables"]}
+        self.assertIn(".hero-grid-absent", absents)
+        self.assertIn("non mesuré", resultat.stderr)
+        self.assertNotIn(".hero-grid-absent", {g["selecteur"] for g in releve["grilles"]})
 
     def test_une_base_en_em_remplacee_par_des_pixels_est_refusee(self) -> None:
         """La base de `.hero-grid` est en `em` parce qu'elle doit suivre le texte.
