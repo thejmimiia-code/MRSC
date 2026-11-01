@@ -1729,3 +1729,137 @@ La feuille du moteur embarqué du simulateur vient de l'amont
 ne les lit pas — il lit `construire-simulateur.py`, qui ne porte que nos règles.
 Aucun de ces changements n'a été regardé à 130 % dans un navigateur : la preuve
 est arithmétique (44 px = 2,75 × 16), pas visuelle.
+
+## 27. Une bande d'un pixel, et la fin d'un modèle qui se validait lui-même (1er novembre 2026)
+
+Les six grilles converties en `flex-wrap` le 31 octobre portaient, au registre,
+la phrase « aucune largeur ne change de nombre de colonnes ». Elle avait été
+vérifiée à chaque largeur multiple de 10 px. En repassant le **même balayage au
+pixel** — 2 321 largeurs de 240 à 2 560 —, trois des six changeaient de colonnes
+à **761 px**.
+
+La cause n'est pas un chiffre faux, c'est une géométrie :
+
+> une base de `flex` ne replie qu'à un seuil, et les bases qui tombent pile entre
+> 760 et 761 px forment une fenêtre de **0,46 px** de large.
+
+| grille | base écrite la veille | px | fenêtre mesurée | corrigée en |
+| --- | --- | --- | --- | --- |
+| `.hero-grid` | `20.4em` | 326,40 | ]325,60 ; 326,06] | `20.37em` (325,92) |
+| `.learning-work-panel` | `21.29em` | 340,64 | ]340,00 ; 340,50] | `21.28em` (340,48) |
+| `.participation-grid` | `21.29em` | 340,64 | ]340,00 ; 340,50] | `21.28em` (340,48) |
+
+Deux fautes de méthode ont été corrigées dans le calcul, pas seulement trois
+valeurs : la base en `em` est désormais arrondie **vers le bas** puis vérifiée au
+pixel (arrondir au-dessus de la base trouvée sort de la fenêtre et rouvre la
+bande qu'on voulait fermer), et la tolérance du registre est passée de **0,5 px**
+à **0,01 px** — plus large que la fenêtre, elle ne contrôlait rien.
+
+### Ce que cet épisode a vraiment appris
+
+Le balayage au pixel a trouvé trois erreurs que le balayage au pas de 10 px
+avait validées. Mais le défaut est plus profond que le pas : **le modèle était le
+seul juge du modèle**. Rien, dans ce dépôt, ne confrontait ce qu'il annonce à ce
+qu'un navigateur affiche. Un contrôle qui ne se compare qu'à sa propre
+arithmétique ne prouve que sa cohérence.
+
+D'où la chaîne ajoutée ce jour, en trois pièces séparées à dessein :
+
+1. **la prédiction** — `outils/modele-grilles.py --releve-json` écrit, pour
+   **34 grilles**, ce que la feuille *devrait* produire : les largeurs qui
+   encadrent chaque rupture annoncée, plus treize largeurs de repère. Une base en
+   `em` est annoncée à 100 %, 115 % et 130 % — la promesse « le repli suit la
+   taille du texte » n'avait jamais été mesurée nulle part. Une base en pixels
+   n'est annoncée qu'à 100 %, et le relevé le dit (`suit_le_texte = false`)
+   plutôt que de mesurer trois fois la même chose ;
+2. **la mesure** — `outils/mesurer-grilles.cjs` compte, dans un vrai Chromium,
+   les colonnes de chaque grille : rangées d'un `flex-wrap`, repérées par la
+   position horizontale et non par le haut (plusieurs grilles converties sont en
+   `align-items: center`, où deux panneaux n'ont jamais le même bord haut) ;
+   pistes **non nulles** d'une grille (`auto-fit` replie les pistes vides à 0 px,
+   et une grille de deux cartes sur quatre pistes n'a pas quatre colonnes). Il
+   élargit la fenêtre de la largeur de l'ascenseur jusqu'à ce que la largeur
+   cliente vaille exactement la largeur demandée : sans cela, chaque mesure
+   serait décalée de 15 px et le modèle accuserait la feuille d'un artefact de
+   navigateur ;
+3. **la comparaison** — `outils/rapporter-mesure-grilles.py` lit les deux
+   fichiers et nomme les divergences : largeur, échelle de texte, valeur
+   annoncée, valeur vue, et **largeur réelle de l'élément** à côté du conteneur
+   que le modèle présume. Cette dernière colonne est la première cause à écarter
+   avant d'accuser la feuille : une grille qui porte son propre remplissage
+   n'occupe pas la largeur que `conteneur()` lui prête.
+
+### Le contrat de sortie, écrit avant la première mesure
+
+- `mesurer-grilles.cjs` sort en **code 2** sans navigateur ou sans modules, et
+  le dit — jamais vert, jamais un rapport vide présenté comme un succès ;
+- il sort en **code 1** si une page ou un sélecteur n'a pas pu être mesuré ;
+- `rapporter-mesure-grilles.py` sort en **code 2** sur un rapport sans
+  navigateur, vide ou illisible, et compte un point annoncé sans mesure comme
+  **non mesuré**, jamais comme conforme ;
+- en mode `--controler`, la moindre divergence le fait sortir en **code 1**. Ce
+  mode n'est pas encore celui de la CI : le premier passage est un **relevé**.
+  Il publie les nombres, et l'étape le dit en première ligne de sa sortie. Passer
+  au contrôle demande de lire ces nombres d'abord — l'inverse serait décider
+  avant de mesurer.
+
+### Limites
+
+Le relevé mesure la présentation par défaut (celle que la feuille applique sans
+`data-layout`) : les cinq autres présentations replient plusieurs de ces grilles
+par d'autres règles, et ne sont pas couvertes. Il ne mesure qu'un point par
+(page, grille) : la même grille peut se comporter autrement dans une page où
+elle reçoit plus d'éléments — le relevé choisit la page où elle en reçoit le
+plus, et le dit dans la prédiction. Enfin la comparaison reste celle d'un
+navigateur sans personne devant : elle compte des colonnes, elle ne dit pas si la
+page est lisible.
+
+## 28. Le conteneur n'a jamais été mesuré : une valeur fixe sous vingt-deux grilles (1er novembre 2026)
+
+Le modèle des grilles ne calcule pas les colonnes dans l'abstrait : il les calcule **dans un
+conteneur**. Ce conteneur valait, dans son code, une constante :
+
+> `conteneur(w) = min(1160, w − 48)`
+
+Autrement dit : 48 px de marge de chaque côté, partout, toujours. C'est vrai de `3rem` à
+taille de texte normale — et faux partout ailleurs. La première confrontation à un vrai
+navigateur (34 grilles, 743 points, `HeadlessChrome/153`) a trouvé **70 points divergents
+sur 673 confirmés, dans 23 grilles sur 34**, et les largeurs d'éléments imprimées par le
+relevé désignent trois causes sans ambiguïté :
+
+| cause | ce que la feuille fait | ce que le modèle croyait | écart mesuré |
+| --- | --- | --- | --- |
+| gouttière réduite | `@media (max-width: 760px)` → `calc(100% - 2rem)` | 48 px à toute largeur | à 760 px : élément 728 px, modèle 712 px |
+| gouttière en `rem` | `3rem` suit la taille du texte | 48 px à 115 % et 130 % | conteneur réel plus étroit de 7,2 puis 14,4 px |
+| remplissage du panneau | `.learning-work-panel` : `clamp(1.5rem,4vw,2.6rem)` | le conteneur entier pour ses enfants | à 761 px : 652 px de contenu pour 713 px d'élément |
+
+### Une promesse qui ne peut pas être tenue
+
+Reproduire l'ancien repli de `.hero-grid` (une colonne à 760 px, deux à 761) demanderait,
+avec la vraie gouttière :
+
+- à 760 px, conteneur 728 px, écart `8vw` = 60,8 px : `2b + 60,8 > 728` → `b > 333,6` ;
+- à 761 px, conteneur 713 px, écart 60,88 px : `2b + 60,88 ≤ 713` → `b ≤ 326,06`.
+
+**L'intersection est vide.** Ce n'est pas un mauvais choix de base : entre 760 et 761 px le
+conteneur **rétrécit** de 15 px, et un `flex-basis` ne peut pas produire un repli quand la
+place disponible augmente. La phrase « le repli ne bouge pas » était donc, pour les six
+grilles dont le palier tombait à 760 px, une promesse irréalisable — vérifiée dans un modèle
+qui présumait le conteneur, donc incapable de la contredire.
+
+Le repli réel n'est plus 760 px : il est là où le contenu cesse de tenir. Pour `.hero-grid`,
+`651,84 + 0,08w > w − 32` donne **≈ 743 px**, et le navigateur le confirme — deux colonnes à
+760 px, là où la règle supprimée en imposait une.
+
+### Ce que ce relevé n'est pas
+
+Ce n'est pas un contrôle : il publie, il ne juge pas, et il le dit en première ligne. Le
+passer en contrôle avant d'avoir corrigé le conteneur ferait échouer la CI sur un défaut
+connu, nommé et déjà en cours de correction — ce qui n'apprendrait rien à personne.
+
+### Limites
+
+Le relevé ne couvre que la présentation par défaut : `--content` vaut 940 px en Lecture,
+1 480 px en Panorama, et ces valeurs ne sont pas mesurées. Il ne dit rien de la lisibilité :
+il compte des colonnes. Enfin les annotations de CI sont plafonnées à une dizaine par étape —
+le total est donc imprimé avant le détail, et le workflow avoue le nombre de grilles coupées.

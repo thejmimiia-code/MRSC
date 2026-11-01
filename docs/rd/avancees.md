@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 62 |
+| Avancées consignées | 64 |
 | Période couverte | du 2026-10-20 au 2026-11-01 |
-| Contrôles exécutables cités | 65 |
+| Contrôles exécutables cités | 68 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1477,6 +1477,56 @@ Initiatives liées : `optimisation-du-site`.
 **Limite — ce que cela ne prouve pas.** Le relevé ne voit pas une classe construite par une source qu'il ne lit pas, et il ne dit rien de l'utilité d'une classe qu'il trouve : une règle peut viser une classe présente et n'avoir aucun effet. Les six classes d'anglais-aventure.css construites à l'exécution restent indécidables, comptées mais non jugées. Les deux « proportion » qui restent ne sont pas converties : .learning-coverage-topic est une composition avec un enfant placé (grid-column:2), et .map-layout coûterait 212,9 px (78,8 %) d'écart de largeur de colonne.
 
 **Suite.** Instruire les six grilles « borne » — un plafond en pixels n'a pas d'équivalent direct en flex — puis les huit « contenu », dont le repli dépend du texte et qu'aucun modèle ne tranche sans navigateur.
+
+Initiatives liées : `optimisation-du-site`.
+
+### `conteneur-jamais-mesure` — Le conteneur du modèle était une constante, et le navigateur l'a dit
+
+*Consignée le 2026-11-01.*
+
+**Constat.** Le modèle des grilles ne calcule pas des colonnes dans l'abstrait : il les calcule dans un conteneur, et ce conteneur valait min(1160, largeur - 48) — 48 px de marge, partout, toujours. La première confrontation à un vrai navigateur (34 grilles, 743 points) a trouvé 70 points divergents sur 673 confirmés, dans 23 grilles sur 34, et les largeurs d'éléments imprimées désignent trois causes : la feuille réduit la gouttière à 2rem sous 760 px (le conteneur réel est 16 px plus large que le modèle), la gouttière est en rem et suit donc la taille du texte (7,2 puis 14,4 px d'écart à 115 et 130 %), et une grille qui porte son propre remplissage donne moins que le conteneur à ses enfants (.learning-work-panel : 652 px de contenu pour 713 px d'élément à 761 px).
+
+**Ce que cela change.** La promesse « aucune largeur ne change de nombre de colonnes », portée par six grilles converties, est réfutée dans un navigateur. Pour les grilles dont le palier tombait à 760 px, elle est même démontrée irréalisable : à 760 px le conteneur vaut 728 px et exige une base supérieure à 333,6 px, à 761 px il vaut 713 px et exige une base inférieure à 326,06 px — l'intersection est vide, parce que le conteneur rétrécit de 15 px quand la fenêtre grandit d'un pixel. Aucun flex-basis ne peut produire un repli quand la place augmente. La promesse sera donc retirée du registre, pas adoucie, et le conteneur deviendra une fonction de la largeur et de la taille du texte, lue dans la feuille. Le relevé navigateur, lui, reste un relevé jusqu'à cette correction : il publie, il ne juge pas, et le dit.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/mesurer-grilles.cjs`
+- `outils/rapporter-mesure-grilles.py`
+- `docs/rd/formats-affichage.md`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --releve-json /tmp/releve.json et node outils/mesurer-grilles.cjs, puis python3 outils/rapporter-mesure-grilles.py --resume`
+
+**Limite — ce que cela ne prouve pas.** La mesure est celle d'un navigateur sans personne devant : elle compte des colonnes, elle ne dit rien de la lisibilité. Elle ne couvre que la présentation par défaut, pas les cinq autres où --content vaut 940 ou 1 480 px. Et les annotations de CI sont plafonnées à une dizaine par étape : le total est donc imprimé avant le détail et le workflow avoue le nombre de grilles coupées.
+
+**Suite.** Modéliser le conteneur (gouttière 3rem au-dessus de 760 px, 2rem à 760 et moins, multipliée par la taille du texte), puis retirer repli_avant_px des six grilles dont le palier était à 760 px : une promesse irréalisable se retire, elle ne s'adoucit pas. Le relevé ne devient un contrôle qu'après, et son premier passage en --controler devra donner zéro divergence.
+
+Initiatives liées : `optimisation-du-site`.
+
+### `modele-confronte-au-navigateur` — Un modèle qui se valide lui-même ne prouve que sa cohérence
+
+*Consignée le 2026-11-01.*
+
+**Constat.** La promesse « aucune largeur ne change de nombre de colonnes », portée par six grilles converties, n'était vérifiée que par le modèle lui-même : modele-grilles.py calculait les colonnes de sa propre formule et se déclarait d'accord. Le 1er novembre 2026, un balayage plus fin a trouvé trois bandes d'un pixel dans ces grilles — et rien, dans le dépôt, ne pouvait les contredire. Un contrôle qui ne se compare qu'à sa propre arithmétique ne prouve que sa cohérence.
+
+**Ce que cela change.** Une chaîne de trois pièces séparées. modele-grilles.py --releve-json écrit la prédiction pour 34 grilles : les largeurs qui encadrent chaque rupture annoncée, plus treize largeurs de repère, aux trois tailles de texte pour une base en em (100, 115, 130 %) et à 100 % seulement pour une base en pixels, ce que le relevé écrit. mesurer-grilles.cjs compte dans un vrai Chromium : rangées d'un flex-wrap repérées par la position horizontale (le haut serait faux en align-items: center), pistes non nulles d'une grille (auto-fit replie une piste vide à 0 px), et fenêtre élargie de la largeur de l'ascenseur pour que clientWidth vaille la largeur demandée. rapporter-mesure-grilles.py compare et nomme : largeur, échelle, valeur annoncée, valeur vue, et largeur réelle de l'élément à côté du conteneur présumé. Codes de sortie écrits avant la première mesure : 2 sans navigateur, 1 si une page ou un sélecteur échappe à la mesure, et un point annoncé sans mesure est compté non mesuré.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/mesurer-grilles.cjs`
+- `outils/rapporter-mesure-grilles.py`
+- `outils/test_rapporter_mesure_grilles.py`
+- `outils/test_modele_grilles.py`
+- `.github/workflows/verification.yml`
+- `docs/rd/formats-affichage.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_rapporter_mesure_grilles.py && python3 outils/test_modele_grilles.py && python3 outils/modele-grilles.py --releve-json /tmp/releve.json`
+
+**Limite — ce que cela ne prouve pas.** L'atelier n'a pas de Chromium : la première mesure réelle n'a lieu que dans le job graphismes, et tant qu'elle n'a pas tourné, ce lot livre l'instrument, pas la preuve. Le relevé ne couvre que la présentation par défaut — les cinq autres replient plusieurs de ces grilles par d'autres règles — et un seul point par couple page/grille, sur la page où la grille reçoit le plus d'éléments. Il compte des colonnes : il ne dit rien de la lisibilité. Le mode --controler existe mais n'est pas encore celui de la CI : le premier passage publie, il ne juge pas.
+
+**Suite.** Lire le relevé de la première exécution, puis passer l'étape en --controler : soit le modèle est confirmé, soit ses divergences sont nommées, et la première cause à écarter est le remplissage des panneaux que conteneur() ne modélise pas.
 
 Initiatives liées : `optimisation-du-site`.
 

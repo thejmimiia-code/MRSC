@@ -2003,6 +2003,218 @@ def verifier(
     return erreurs
 
 
+#: Largeurs échantillonnées dans le relevé navigateur, en plus des ruptures.
+#: Le relevé ne rejoue pas les 2 321 largeurs du modèle : un navigateur coûte
+#: des secondes par largeur, là où le modèle coûte des millisecondes. Il mesure
+#: donc les deux largeurs qui encadrent chaque rupture annoncée — c'est là que
+#: le 1er novembre 2026 une bande d'un pixel a échappé au pas de 10 px — plus
+#: quelques largeurs de repère.
+LARGEURS_REPERE = (240, 320, 390, 520, 760, 761, 920, 1000, 1160, 1280, 1440, 1920, 2560)
+
+
+def pages_des_grilles(racine: Path, selecteurs: list[str]) -> dict[str, str]:
+    """La page où chaque grille reçoit le plus d'éléments, en chemin relatif.
+
+    Un sélecteur absent des pages n'apparaît pas : le relevé doit alors dire
+    qu'il n'a rien pu mesurer, pas choisir une page au hasard.
+    """
+    import collections
+
+    cibles = {selecteur.lstrip(".") for selecteur in selecteurs if selecteur.startswith(".")}
+    trouves: dict[str, dict[str, int]] = collections.defaultdict(dict)
+    for page in pages_du_site(racine):
+        try:
+            texte = page.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        compteur = _CompteurEnfants(cibles)
+        try:
+            compteur.feed(texte)
+        except Exception:  # page mal formée : on ne prétend rien y mesurer
+            continue
+        relatif = page.relative_to(racine).as_posix()
+        for selecteur, _, nombre in compteur.resultats:
+            cle = "." + selecteur
+            trouves[cle][relatif] = max(trouves[cle].get(relatif, 0), nombre)
+    return {
+        selecteur: sorted(pages.items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
+        for selecteur, pages in trouves.items()
+        if pages
+    }
+
+
+def _ruptures(prediction, largeurs: list[int]) -> list[int]:
+    """Les largeurs où le nombre de colonnes annoncé change, et celle d'avant."""
+    points: set[int] = set()
+    precedent = None
+    for largeur in largeurs:
+        colonnes = prediction(largeur)
+        if precedent is not None and colonnes != precedent:
+            points.add(largeur - 1)
+            points.add(largeur)
+        precedent = colonnes
+    return sorted(points)
+
+
+def releve_navigateur(
+    racine: Path, grilles: dict[str, Grille], registre: dict
+) -> dict:
+    """Ce que le modèle **annonce**, à confronter à un vrai navigateur.
+
+    Le 1er novembre 2026, trois grilles converties la veille changeaient de
+    nombre de colonnes à 761 px : le modèle ne pouvait pas le voir, puisqu'il
+    vérifiait sa propre arithmétique. Ce relevé sort du modèle les nombres qu'il
+    affirme, largeur par largeur et taille de texte par taille de texte, pour
+    qu'un navigateur les contredise. Il ne juge rien ici : il publie une
+    prédiction datée.
+    """
+    familles: list[tuple[str, dict]] = (
+        [("flex", entree) for entree in registre.get("grille_flex", [])]
+        + [("grille", entree) for entree in registre.get("grille", [])]
+        + [("grille", entree) for entree in registre.get("grille_plafond", [])]
+    )
+    selecteurs = [str(entree.get("selecteur") or "") for _, entree in familles]
+    pages = pages_des_grilles(racine, [s for s in selecteurs if s])
+    capacites = lire_capacites(racine, [s for s in selecteurs if s])
+    appliquer_capacites(grilles, capacites)
+
+    releve: dict = {
+        "feuille": str(FEUILLE),
+        "largeurs_repere": list(LARGEURS_REPERE),
+        "avertissement": (
+            "Prédiction du modèle, pas une mesure : chaque point dit ce que la "
+            "feuille devrait produire d'après `modele-grilles.py`. Un navigateur "
+            "le contredit ou le confirme, il ne le remplace pas."
+        ),
+        "grilles": [],
+        "non_mesurables": [],
+    }
+    for famille, entree in familles:
+        selecteur = str(entree.get("selecteur") or "")
+        # Une grille convertie en `flex-wrap` n'a plus de `grid-template-columns` :
+        # `lire_grilles` ne la voit donc plus, et c'est normal. Sa cascade d'avant
+        # est écrite au registre (`grille_avant`, `gap_avant`) : le relevé la
+        # reconstruit, comme le fait déjà le contrôle de la promesse de repli.
+        if famille == "flex" and selecteur:
+            grille = grille_synthetique(
+                selecteur,
+                str(entree.get("grille_avant") or ""),
+                str(entree.get("gap_avant") or ""),
+            )
+        else:
+            grille = grilles.get(selecteur)
+        if not selecteur or grille is None:
+            releve["non_mesurables"].append(
+                {"selecteur": selecteur, "raison": "sélecteur absent de la feuille"}
+            )
+            continue
+        if selecteur in capacites and capacites[selecteur].get("items"):
+            grille.items = max(capacites[selecteur]["items"])
+        page = pages.get(selecteur)
+        if not page:
+            releve["non_mesurables"].append(
+                {"selecteur": selecteur, "raison": "aucune page ne contient cette grille"}
+            )
+            continue
+
+        if famille == "flex":
+            ecrite = base_ecrite(racine, selecteur)
+            if ecrite is None:
+                releve["non_mesurables"].append(
+                    {
+                        "selecteur": selecteur,
+                        "raison": "aucune base de `flex` lisible dans la feuille",
+                    }
+                )
+                continue
+            base_expr, mesure = ecrite
+            base_px = entree.get("plancher_px") or mesure
+            # Une base en `em` suit la taille du texte : à 130 %, elle vaut 30 %
+            # de plus, et le repli doit avancer. C'est la promesse écrite dans la
+            # feuille, et elle n'a jamais été mesurée nulle part. Une base en
+            # pixels, elle, ne bouge pas : mesurer trois fois la même chose
+            # n'apprendrait rien, et le relevé l'écrit.
+            suivant_le_texte = base_expr.endswith("em")
+            echelles = (1.0, 1.15, 1.3) if suivant_le_texte else (1.0,)
+            base_em = float(base_expr[:-2]) if suivant_le_texte else 0.0
+            points: list[dict] = []
+            for echelle in echelles:
+                base = base_em * RACINE_PX * echelle if suivant_le_texte else float(base_px)
+
+                def prediction(largeur: int, base=base) -> int:
+                    return colonnes_en_flex(grille, largeur, base, grille.items)
+
+                retenues = set(_ruptures(prediction, LARGEURS_FINES)) | set(LARGEURS_REPERE)
+                for largeur in sorted(retenues):
+                    points.append(
+                        {
+                            "largeur": largeur,
+                            "echelle": echelle,
+                            "attendu": prediction(largeur),
+                        }
+                    )
+            releve["grilles"].append(
+                {
+                    "selecteur": selecteur,
+                    "page": page,
+                    "forme": "flex",
+                    "base_expr": base_expr,
+                    "base_px": float(base_px),
+                    "suit_le_texte": suivant_le_texte,
+                    "items": grille.items,
+                    "points": points,
+                }
+            )
+            continue
+
+        def prediction_grille(largeur: int) -> int:
+            return colonnes_de_la_cascade(grille, largeur)
+
+        retenues = set(_ruptures(prediction_grille, LARGEURS_FINES)) | set(LARGEURS_REPERE)
+        releve["grilles"].append(
+            {
+                "selecteur": selecteur,
+                "page": page,
+                "forme": "grille",
+                "items": grille.items,
+                # Les pistes d'une grille auto-fit sont en pixels : agrandir le
+                # texte ne change pas leur nombre. Une seule échelle suffit, et
+                # le dire vaut mieux que de mesurer trois fois la même chose.
+                "points": [
+                    {"largeur": largeur, "echelle": 1.0, "attendu": prediction_grille(largeur)}
+                    for largeur in sorted(retenues)
+                ],
+            }
+        )
+    return releve
+
+
+FLEX_ECRIT = re.compile(r"flex\s*:\s*[\d.]+\s+\d+\s+([\d.]+)(em|px)")
+
+
+def base_ecrite(racine: Path, selecteur: str) -> tuple[str, float] | None:
+    """La base de `flex` telle qu'elle est **écrite** dans la feuille.
+
+    Le registre porte `plancher_expr` pour les bases converties en `em` ; les
+    quatre grilles converties le 31 octobre en pixels n'en ont pas, et leur base
+    ne vit que dans la feuille. Lire la feuille plutôt que le registre évite de
+    recopier un chiffre — et c'est la valeur écrite qui décide du repli.
+    """
+    chemin = racine / FEUILLE
+    if not chemin.is_file():
+        return None
+    for selecteurs, corps, *_ in decouper(sans_commentaires(chemin.read_text(encoding="utf-8"))):
+        if not any(s == selecteur or s.startswith(selecteur + " ") or s.startswith(selecteur + ">")
+                   or s.startswith(selecteur + " >") for s in selecteurs):
+            continue
+        trouve = FLEX_ECRIT.search(corps)
+        if trouve:
+            return f"{trouve.group(1)}{trouve.group(2)}", float(trouve.group(1)) * (
+                RACINE_PX if trouve.group(2) == "em" else 1.0
+            )
+    return None
+
+
 def principal(arguments: list[str] | None = None) -> int:
     analyseur = argparse.ArgumentParser(description="Mesure les grilles au lieu de présumer leurs paliers.")
     analyseur.add_argument("--grille", help="ne mesurer qu'un sélecteur")
@@ -2019,6 +2231,11 @@ def principal(arguments: list[str] | None = None) -> int:
         help="dire ce qu'un `flex-wrap` exprimerait des grilles à pistes inégales",
     )
     analyseur.add_argument(
+        "--releve-json",
+        metavar="CHEMIN",
+        help="écrire ce que le modèle annonce, largeur par largeur, pour un navigateur",
+    )
+    analyseur.add_argument(
         "--verifier",
         action="store_true",
         help="contrôle les grilles converties contre docs/rd/grilles-dynamiques.toml",
@@ -2030,6 +2247,30 @@ def principal(arguments: list[str] | None = None) -> int:
         print(f"Feuille de style introuvable : {FEUILLE}", file=sys.stderr)
         return 2
     grilles = lire_grilles(chemin.read_text(encoding="utf-8"))
+
+    if options.releve_json:
+        try:
+            registre = lire_registre(RACINE)
+        except SourceIllisible as erreur:
+            print(f"Impossible de relever les grilles : {erreur}", file=sys.stderr)
+            return 2
+        releve = releve_navigateur(RACINE, grilles, registre)
+        destination = Path(options.releve_json)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(
+            json.dumps(releve, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
+        )
+        points = sum(len(grille["points"]) for grille in releve["grilles"])
+        print(
+            f"Relevé écrit : {destination} — {len(releve['grilles'])} grille(s), "
+            f"{points} point(s) à confronter à un navigateur."
+        )
+        for absent in releve["non_mesurables"]:
+            print(
+                f"  ! {absent['selecteur']} : {absent['raison']} — non mesuré",
+                file=sys.stderr,
+            )
+        return 0
 
     if options.verifier:
         try:
