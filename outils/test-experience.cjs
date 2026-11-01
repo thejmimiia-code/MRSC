@@ -135,7 +135,7 @@ async function creerPage(viewport = { width: 1280, height: 900 }, options = {}) 
 
 async function ouvrirPageSite(page, route) {
   await page.goto(adresse(route), { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForFunction(() => {
+  await attendre(page, () => {
     const reglage = document.querySelector('[data-site-layout-settings]');
     return Boolean(reglage && !reglage.hidden && reglage.querySelector('summary'));
   }, { timeout: 30000 });
@@ -149,8 +149,8 @@ async function ouvrirSimulateur(page) {
   // Le guide de première visite fait partie du parcours : le test le ferme avec
   // sa commande visible, au lieu de le contourner en préremplissant le stockage.
   await page.click('#modale .guide-actions button.primaire');
-  await page.waitForFunction(() => !document.getElementById('overlay')?.classList.contains('visible'));
-  await page.waitForFunction(() => {
+  await attendre(page, () => !document.getElementById('overlay')?.classList.contains('visible'));
+  await attendre(page, () => {
     const reglage = document.querySelector('[data-site-layout-settings]');
     return Boolean(reglage && !reglage.hidden);
   }, { timeout: 15000 });
@@ -165,7 +165,7 @@ async function ouvrirPersonnalisation(page) {
   // sont directement accessibles, sans panneau intermédiaire.
   if (!etat.present || etat.ouvert) return;
   await page.click('.customize-settings > summary');
-  await page.waitForFunction(() => document.querySelector('[data-customize-settings]')?.open === true);
+  await attendre(page, () => document.querySelector('[data-customize-settings]')?.open === true);
 }
 
 async function ouvrirPanneau(page) {
@@ -177,14 +177,14 @@ async function ouvrirPanneau(page) {
   const resume = '[data-site-layout-settings] > summary';
   await page.click(resume);
   try {
-    await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === true, { timeout: 2000 });
+    await attendre(page, () => document.querySelector('[data-site-layout-settings]')?.open === true, { timeout: 2000 });
   } catch (_erreur) {
     // Sur le simulateur, la barre de retour est collante : au clic suivant, un
     // élément peut recouvrir le résumé et avaler le clic. L'activation au
     // clavier vise le contrôle, pas ses coordonnées.
     await page.focus(resume);
     await page.keyboard.press('Enter');
-    await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === true);
+    await attendre(page, () => document.querySelector('[data-site-layout-settings]')?.open === true);
   }
 }
 
@@ -272,6 +272,11 @@ async function executer(nom, action) {
   }
 }
 
+// L'attente nommée vit dans son propre module : elle est éprouvée sans navigateur
+// par `outils/test_attente_navigateur.cjs`, ce qu'un helper enfoui ici ne
+// permettrait pas.
+const { attendre } = require('./attente-navigateur.cjs');
+
 let puppeteerBrowser;
 
 async function main() {
@@ -302,7 +307,7 @@ async function main() {
       await page.click('[data-spacing-toggle]');
       await ouvrirPanneau(page);
       await page.click('[data-site-layout-settings] input[name="mrsc-site-layout"][value="panorama"]');
-      await page.waitForFunction(() => document.documentElement.dataset.layout === 'panorama');
+      await attendre(page, () => document.documentElement.dataset.layout === 'panorama');
 
       const etat = await page.evaluate(() => ({
         texte: document.documentElement.classList.contains('texte-agrandi'),
@@ -321,7 +326,7 @@ async function main() {
       assert.equal(await page.$eval('main', (element) => element.innerText), contenuAvant);
 
       await page.goto(adresse('apprendre.html'), { waitUntil: 'domcontentloaded' });
-      await page.waitForFunction(() => document.documentElement.dataset.layout === 'panorama');
+      await attendre(page, () => document.documentElement.dataset.layout === 'panorama');
       await ouvrirPageSite(page, 'apprendre.html');
       await ouvrirPanneau(page);
 
@@ -331,7 +336,7 @@ async function main() {
       const libellesNeufs = { vitrine: 'Vitrine', mosaique: 'Mosaïque', compacte: 'Compacte' };
       for (const [valeur, libelle] of Object.entries(libellesNeufs)) {
         await page.click(`[data-site-layout-settings] input[name="mrsc-site-layout"][value="${valeur}"]`);
-        await page.waitForFunction((attendue) => document.documentElement.dataset.layout === attendue, {}, valeur);
+        await attendre(page, (attendue) => document.documentElement.dataset.layout === attendue, {}, valeur);
         const etatMode = await page.evaluate(() => ({
           choix: localStorage.getItem('mrsc-mise-en-page'),
           annonces: document.querySelector('[data-site-layout-settings] [role="status"]')?.textContent,
@@ -347,7 +352,7 @@ async function main() {
       }
 
       await page.click('.layout-settings-reset');
-      await page.waitForFunction(() => document.documentElement.dataset.layout === 'equilibree');
+      await attendre(page, () => document.documentElement.dataset.layout === 'equilibree');
       assert.equal(await page.evaluate(() => localStorage.getItem('mrsc-mise-en-page')), 'equilibree');
     } finally {
       await page.close();
@@ -362,16 +367,16 @@ async function main() {
       const summary = '[data-site-layout-settings] > summary';
       await page.focus(summary);
       await page.keyboard.press('Enter');
-      await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === true);
+      await attendre(page, () => document.querySelector('[data-site-layout-settings]')?.open === true);
       const transformOuvert = await page.$eval('.layout-settings-chevron', (element) => getComputedStyle(element).transform);
       assert.notEqual(transformOuvert, 'none', 'le chevron doit pivoter à l’ouverture');
 
       await page.focus('[data-site-layout-settings] input[name="mrsc-site-layout"][value="equilibree"]');
       await page.keyboard.press('ArrowDown');
-      await page.waitForFunction(() => document.documentElement.dataset.layout === 'lecture');
+      await attendre(page, () => document.documentElement.dataset.layout === 'lecture');
       await page.keyboard.press('Escape');
-      await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === false);
-      await page.waitForFunction(() => getComputedStyle(document.querySelector('.layout-settings-chevron')).transform === 'none');
+      await attendre(page, () => document.querySelector('[data-site-layout-settings]')?.open === false);
+      await attendre(page, () => getComputedStyle(document.querySelector('.layout-settings-chevron')).transform === 'none');
       const retour = await page.evaluate(() => ({
         actif: document.activeElement?.matches('[data-site-layout-settings] > summary'),
         transform: getComputedStyle(document.querySelector('.layout-settings-chevron')).transform,
@@ -382,12 +387,12 @@ async function main() {
       const summaryAffichage = '[data-display-settings] > summary';
       await page.focus(summaryAffichage);
       await page.keyboard.press('Enter');
-      await page.waitForFunction(() => document.querySelector('[data-display-settings]')?.open === true);
+      await attendre(page, () => document.querySelector('[data-display-settings]')?.open === true);
       const transformAffichageOuvert = await page.$eval('.display-settings-chevron', (element) => getComputedStyle(element).transform);
       assert.notEqual(transformAffichageOuvert, 'none', 'le chevron Affichage doit pivoter à l’ouverture');
       await page.keyboard.press('Escape');
-      await page.waitForFunction(() => document.querySelector('[data-display-settings]')?.open === false);
-      await page.waitForFunction(() => getComputedStyle(document.querySelector('.display-settings-chevron')).transform === 'none');
+      await attendre(page, () => document.querySelector('[data-display-settings]')?.open === false);
+      await attendre(page, () => getComputedStyle(document.querySelector('.display-settings-chevron')).transform === 'none');
       assert.equal(await page.evaluate(() => document.activeElement?.matches('[data-display-settings] > summary')), true);
     } finally {
       await page.close();
@@ -437,7 +442,7 @@ async function main() {
       // page » ajoutée le 23 octobre 2026 (cinq blocs, dont quatre réglages).
       await page.focus('.customize-settings > summary');
       await page.keyboard.press('Enter');
-      await page.waitForFunction(() => document.querySelector('[data-customize-settings]')?.open === true);
+      await attendre(page, () => document.querySelector('[data-customize-settings]')?.open === true);
       const lignes = await page.evaluate(() => {
         const panneau = document.querySelector('.customize-settings-panel');
         const cadre = panneau.getBoundingClientRect();
@@ -495,7 +500,7 @@ async function main() {
       // deviendrait inatteignable, le bouton vivant dans ce panneau.
       const largeurAvant = await page.$eval(bascule, (element) => Math.round(element.getBoundingClientRect().width));
       await page.click(bascule);
-      await page.waitForFunction(() => !document.querySelector('.site-header').classList.contains('is-compact'));
+      await attendre(page, () => !document.querySelector('.site-header').classList.contains('is-compact'));
       assert.equal(
         await page.evaluate(() => document.querySelector('[data-customize-settings]')?.open),
         true,
@@ -508,21 +513,21 @@ async function main() {
         'le cadre de la commande ne change pas quand le libellé bascule'
       );
       await page.click(bascule);
-      await page.waitForFunction(() => document.querySelector('.site-header').classList.contains('is-compact'));
+      await attendre(page, () => document.querySelector('.site-header').classList.contains('is-compact'));
       assert.equal(await page.$eval(bascule, (element) => element.textContent.trim()), 'Agrandir');
 
       // Échap referme d'abord le réglage ouvert, puis le panneau.
       await page.click('[data-site-layout-settings] > summary');
-      await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === true);
+      await attendre(page, () => document.querySelector('[data-site-layout-settings]')?.open === true);
       await page.keyboard.press('Escape');
-      await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === false);
+      await attendre(page, () => document.querySelector('[data-site-layout-settings]')?.open === false);
       assert.equal(
         await page.evaluate(() => document.querySelector('[data-customize-settings]')?.open),
         true,
         'le premier Échap ne referme que le réglage ouvert'
       );
       await page.keyboard.press('Escape');
-      await page.waitForFunction(() => document.querySelector('[data-customize-settings]')?.open === false);
+      await attendre(page, () => document.querySelector('[data-customize-settings]')?.open === false);
       assert.equal(
         await page.evaluate(() => document.activeElement?.matches('.customize-settings > summary')),
         true,
@@ -532,8 +537,8 @@ async function main() {
       // Sous 520 px, les deux commandes partagent la grille à parts égales : 32 px
       // de haut, même largeur, quel que soit le libellé.
       await page.setViewport({ width: 500, height: 800, deviceScaleFactor: 1 });
-      await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
-      await page.waitForFunction(
+      await attendre(page, () => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
+      await attendre(page, 
         () => document.querySelector('[data-header-compact-toggle]')?.textContent.trim() === 'Agrandir'
       );
       const rangee = await page.evaluate(() => {
@@ -550,7 +555,7 @@ async function main() {
       // À 320 px, les deux libellés tiennent entiers dans leur bouton : aucune
       // commande n'est rognée, et les deux gardent la même largeur.
       await page.setViewport({ width: 320, height: 800, deviceScaleFactor: 1 });
-      await page.waitForFunction(() => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
+      await attendre(page, () => document.querySelector('.site-header')?.classList.contains('is-compact'), { timeout: 2500 });
       const commandes320 = await page.evaluate(() => {
         const mesurer = (selecteur) => {
           const element = document.querySelector(selecteur);
@@ -647,7 +652,7 @@ async function main() {
 
           await ouvrirPersonnalisation(page);
           await page.click('[data-display-settings] > summary');
-          await page.waitForFunction(() => document.querySelector('[data-display-settings]')?.open === true);
+          await attendre(page, () => document.querySelector('[data-display-settings]')?.open === true);
           await verifierPanneauDansViewport(page, '.display-settings-panel');
           await ouvrirPanneau(page);
           await verifierPanneauDansViewport(page, '.layout-settings-panel');
@@ -659,7 +664,7 @@ async function main() {
       assert.ok(paysage.document <= paysage.viewport + 1, `débordement en paysage court : ${JSON.stringify(paysage)}`);
       await ouvrirPersonnalisation(page);
       await page.click('[data-display-settings] > summary');
-      await page.waitForFunction(() => document.querySelector('[data-display-settings]')?.open === true);
+      await attendre(page, () => document.querySelector('[data-display-settings]')?.open === true);
       await verifierPanneauDansViewport(page, '.display-settings-panel');
       await ouvrirPanneau(page);
       await verifierPanneauDansViewport(page, '.layout-settings-panel');
@@ -768,7 +773,7 @@ async function main() {
         if (!compact) {
           await ouvrirPersonnalisation(page);
           await page.click('[data-header-compact-toggle]');
-          await page.waitForFunction(
+          await attendre(page, 
             () => document.querySelector('.site-header').classList.contains('is-compact')
           );
         }
@@ -814,7 +819,7 @@ async function main() {
       await ouvrirPanneau(pageSite);
       await verifierPanneauDansViewport(pageSite, '.layout-settings-panel');
       await pageSite.click('[data-site-layout-settings] input[name="mrsc-site-layout"][value="panorama"]');
-      await pageSite.waitForFunction(() => document.documentElement.dataset.layout === 'panorama');
+      await attendre(pageSite, () => document.documentElement.dataset.layout === 'panorama');
       const etatSite = await pageSite.evaluate(() => ({
         largeurDocument: document.documentElement.scrollWidth,
         largeurFenetre: innerWidth,
@@ -840,7 +845,7 @@ async function main() {
       await ouvrirPanneau(pageSimulateur);
       await verifierPanneauDansViewport(pageSimulateur, '.site-layout-panel');
       await pageSimulateur.click('[data-site-layout-settings] input[name="mrsc-site-layout"][value="panorama"]');
-      await pageSimulateur.waitForFunction(() => document.documentElement.dataset.layout === 'panorama');
+      await attendre(pageSimulateur, () => document.documentElement.dataset.layout === 'panorama');
       const etatSimulateur = await pageSimulateur.evaluate(() => ({
         largeurDocument: document.documentElement.scrollWidth,
         largeurFenetre: innerWidth,
@@ -875,13 +880,13 @@ async function main() {
       assert.equal(etatSimulateur.espacement, true);
       assert.ok(etatSimulateur.largeurDocument <= etatSimulateur.largeurFenetre + 1, JSON.stringify(etatSimulateur));
       await pageSimulateur.keyboard.press('Escape');
-      await pageSimulateur.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === false);
+      await attendre(pageSimulateur, () => document.querySelector('[data-site-layout-settings]')?.open === false);
       await verifierPanneauReplie(pageSimulateur, '.site-layout-panel');
       await pageSimulateur.click('[data-site-journey] > summary');
-      await pageSimulateur.waitForFunction(() => document.querySelector('[data-site-journey]')?.open === true);
+      await attendre(pageSimulateur, () => document.querySelector('[data-site-journey]')?.open === true);
       await verifierPanneauDansViewport(pageSimulateur, '.site-journey-panel');
       await pageSimulateur.keyboard.press('Escape');
-      await pageSimulateur.waitForFunction(() => document.querySelector('[data-site-journey]')?.open === false);
+      await attendre(pageSimulateur, () => document.querySelector('[data-site-journey]')?.open === false);
       await verifierPanneauReplie(pageSimulateur, '.site-journey-panel');
       await ouvrirPanneau(pageSimulateur);
       await pageSimulateur.setViewport({ width: 320, height: 375, deviceScaleFactor: 1 });
@@ -901,7 +906,7 @@ async function main() {
       await ouvrirPageSite(page, 'index.html');
       await ouvrirPanneau(page);
       await page.click('[data-site-layout-settings] input[name="mrsc-site-layout"][value="lecture"]');
-      await page.waitForFunction(() => document.documentElement.dataset.layout === 'lecture');
+      await attendre(page, () => document.documentElement.dataset.layout === 'lecture');
       const acces = await page.evaluate(() => {
         try { localStorage.getItem('mrsc-mise-en-page'); return false; }
         catch (_error) { return true; }
@@ -922,7 +927,7 @@ async function main() {
       await ouvrirSimulateur(pageSimulateur);
       await ouvrirPanneau(pageSimulateur);
       await pageSimulateur.click('[data-site-layout-settings] input[name="mrsc-site-layout"][value="lecture"]');
-      await pageSimulateur.waitForFunction(() => document.documentElement.dataset.layout === 'lecture');
+      await attendre(pageSimulateur, () => document.documentElement.dataset.layout === 'lecture');
       const stockageRefuse = await pageSimulateur.evaluate(() => {
         try { localStorage.getItem('mrsc-mise-en-page'); return false; }
         catch (_error) { return true; }
@@ -948,7 +953,7 @@ async function main() {
       const chevronOuvert = await page.$eval('.site-layout-chevron', (element) => getComputedStyle(element).transform);
       assert.notEqual(chevronOuvert, 'none', 'le chevron du simulateur doit pivoter à l’ouverture');
       await page.click('[data-site-layout-settings] input[name="mrsc-site-layout"][value="panorama"]');
-      await page.waitForFunction(() => document.documentElement.dataset.layout === 'panorama');
+      await attendre(page, () => document.documentElement.dataset.layout === 'panorama');
       assert.equal(await page.evaluate(() => localStorage.getItem('mrsc-mise-en-page')), 'panorama');
       const etat = await page.evaluate(() => ({
         guideFerme: !document.getElementById('overlay').classList.contains('visible'),
@@ -960,8 +965,8 @@ async function main() {
       assert.equal(etat.contenu, true);
       assert.ok(etat.largeurDocument <= etat.largeurFenetre + 1, JSON.stringify(etat, null, 2));
       await page.keyboard.press('Escape');
-      await page.waitForFunction(() => document.querySelector('[data-site-layout-settings]')?.open === false);
-      await page.waitForFunction(() => getComputedStyle(document.querySelector('.site-layout-chevron')).transform === 'none');
+      await attendre(page, () => document.querySelector('[data-site-layout-settings]')?.open === false);
+      await attendre(page, () => getComputedStyle(document.querySelector('.site-layout-chevron')).transform === 'none');
       await verifierPanneauReplie(page, '.site-layout-panel');
     } finally {
       await page.close();
@@ -1011,7 +1016,7 @@ async function main() {
       assert.equal(commande, 'Lire à voix haute');
 
       await page.click('[data-read-aloud-toggle]');
-      await page.waitForFunction(() => window.__lus.length > 5, { timeout: 15000 });
+      await attendre(page, () => window.__lus.length > 5, { timeout: 15000 });
       const pendant = await page.evaluate(() => ({
         commande: document.querySelector('[data-read-aloud-toggle]').textContent.trim(),
         nomComplet: document.querySelector('[data-read-aloud-toggle]').getAttribute('aria-label'),
@@ -1034,7 +1039,7 @@ async function main() {
       assert.equal(pendant.marques, 1, 'un seul bloc en cours de lecture doit être marqué');
       assert.match(pendant.statut, /Lecture à voix haute commencée/);
 
-      await page.waitForFunction(() => document.querySelector('[data-read-aloud-status]').textContent.includes('terminée'), { timeout: 60000 });
+      await attendre(page, () => document.querySelector('[data-read-aloud-status]').textContent.includes('terminée'), { timeout: 60000 });
       const apres = await page.evaluate(() => ({
         commande: document.querySelector('[data-read-aloud-toggle]').textContent.trim(),
         pause: document.querySelector('[data-read-aloud-pause]').hidden,
@@ -1056,9 +1061,9 @@ async function main() {
 
       // Arrêt net : le bouton coupe la voix et remet la commande à zéro.
       await page.click('[data-read-aloud-toggle]');
-      await page.waitForFunction(() => document.querySelector('[data-read-aloud-status]').textContent.includes('commencée'), { timeout: 15000 });
+      await attendre(page, () => document.querySelector('[data-read-aloud-status]').textContent.includes('commencée'), { timeout: 15000 });
       await page.click('[data-read-aloud-toggle]');
-      await page.waitForFunction(() => document.querySelector('[data-read-aloud-status]').textContent.includes('arrêtée'), { timeout: 15000 });
+      await attendre(page, () => document.querySelector('[data-read-aloud-status]').textContent.includes('arrêtée'), { timeout: 15000 });
       const arret = await page.evaluate(() => ({
         annulations: window.__annulations,
         marques: document.querySelectorAll('.lecture-en-cours').length,
@@ -1106,11 +1111,11 @@ async function main() {
       assert.equal(avantVitesse, '1', 'le débit de départ doit être celui de l\u2019appareil');
 
       await page.click('[data-read-aloud-toggle]');
-      await page.waitForFunction(() => window.__lus.length > 0);
+      await attendre(page, () => window.__lus.length > 0);
       assert.equal((await page.evaluate(() => window.__lus[0].debit)), 1);
 
       await page.select('[data-read-aloud-speed]', '1.5');
-      await page.waitForFunction(() => window.__lus.some((entree) => entree.debit === 1.5), { timeout: 5000 });
+      await attendre(page, () => window.__lus.some((entree) => entree.debit === 1.5), { timeout: 5000 });
       const apresVitesse = await page.evaluate(() => ({
         stockage: localStorage.getItem('mrsc-lecture-vitesse'),
         statut: document.querySelector('[data-read-aloud-status]').textContent,
@@ -1131,7 +1136,7 @@ async function main() {
       });
       const avantRecul = await page.evaluate(() => window.__lus.length);
       await page.click('[data-read-aloud-back]');
-      await page.waitForFunction(
+      await attendre(page, 
         (avant) => window.__lus.length > avant,
         { timeout: 5000 },
         avantRecul,
@@ -1206,7 +1211,7 @@ async function main() {
           if (commande.textContent.trim() !== 'Lire à voix haute') commande.click();
           commande.click();
         }, ouvrir);
-        await page.waitForFunction(
+        await attendre(page, 
           () => document.querySelector('[data-read-aloud-status]').textContent.includes('terminée'),
           { timeout: 120000 },
         );
@@ -1253,7 +1258,7 @@ async function main() {
       });
       await ouvrirPersonnalisation(page);
       await page.click('[data-read-aloud-toggle]');
-      await page.waitForFunction(
+      await attendre(page, 
         () => document.querySelector('[data-read-aloud-status]').textContent.includes('terminée'),
         { timeout: 120000 },
       );
@@ -1282,7 +1287,7 @@ async function main() {
       await ouvrirPageSite(page, 'anglais-aventure.html');
       await page.waitForSelector('[data-mission-id="gare"]');
       await page.click('[data-mission-id="gare"]');
-      await page.waitForFunction(() => document.querySelector('#dialogue-line')?.textContent.trim().length > 0);
+      await attendre(page, () => document.querySelector('#dialogue-line')?.textContent.trim().length > 0);
       await page.evaluate(() => {
         window.__lus = [];
         const fausse = {
@@ -1296,7 +1301,7 @@ async function main() {
       });
       await ouvrirPersonnalisation(page);
       await page.click('[data-read-aloud-toggle]');
-      await page.waitForFunction(() => window.__lus.some((entree) => entree.langue === 'en'), { timeout: 60000 });
+      await attendre(page, () => window.__lus.some((entree) => entree.langue === 'en'), { timeout: 60000 });
       const anglais = await page.evaluate(() => window.__lus.filter((entree) => entree.langue === 'en'));
       assert.ok(anglais.length >= 1);
       assert.match(anglais[0].texte, /^[A-Za-z]/);
@@ -1313,7 +1318,7 @@ async function main() {
     );
     try {
       await page.goto(adresse('simulateur.html'), { waitUntil: 'domcontentloaded', timeout: 60000 });
-      await page.waitForFunction(() => {
+      await attendre(page, () => {
         const iframe = document.querySelector('iframe.simulateur-frame');
         if (!iframe) return false;
         try {
@@ -1323,7 +1328,7 @@ async function main() {
           return false;
         }
       }, { timeout: 90000 });
-      await page.waitForFunction(() => {
+      await attendre(page, () => {
         const reglage = document.querySelector('[data-site-layout-settings]');
         return Boolean(reglage && !reglage.hidden);
       }, { timeout: 30000 });
@@ -1346,7 +1351,7 @@ async function main() {
       await page.click('[data-spacing-toggle]');
       await ouvrirPanneau(page);
       await page.click('[data-site-layout-settings] input[name="mrsc-site-layout"][value="panorama"]');
-      await frame.waitForFunction(() => document.documentElement.dataset.layout === 'panorama');
+      await attendre(frame, () => document.documentElement.dataset.layout === 'panorama');
       const synchronisation = await frame.evaluate(() => ({
         texte: document.documentElement.classList.contains('texte-agrandi'),
         contraste: document.documentElement.classList.contains('contraste-renforce'),

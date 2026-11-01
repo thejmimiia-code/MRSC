@@ -125,6 +125,17 @@ jobs:
           python3 outils/verifier-inventaire-controles.py
           python3 outils/test_annoncer_echec_graphismes.py
 
+      # Deux bancs du harnais des essais navigateur, et aucun des deux n'a besoin
+      # de Chromium : l'attente nommée est éprouvée sur une page factice, et le
+      # harnais lui-même sur le faux navigateur (il prouve qu'un essai qui échoue
+      # ne peut pas être compté comme réussi). Ils vivaient hors de toute porte :
+      # un `require` cassé dans le harnais n'aurait été vu qu'à la première
+      # exécution réelle, soit neuf minutes plus tard.
+      - name: Éprouver l'attente nommée et le harnais des essais navigateur
+        run: |
+          node outils/test_attente_navigateur.cjs
+          node outils/test_test_experience.mjs
+
       - name: Vérifier les faits internes du brief prospectif
         run: |
           python3 outils/test_verifier_decision_prospective.py
@@ -474,8 +485,11 @@ jobs:
             # Trois lignes de contexte après chaque échec : la première dit
             # qu'un essai a échoué, les suivantes nomment l'assertion et sa
             # ligne. Sans elles, une annotation ne permet pas de réparer.
-            grep -E -A3 '^(ÉCHEC|Error|.*AssertionError|.*Error:)' "$RUNNER_TEMP/essais.log" \
-              | head -n 60 | cut -c1-900 | grep -v '^--$' | while IFS= read -r ligne; do
+            # Huit lignes de contexte, et pas trois : le 31 octobre 2026, la
+            # cause d'un `TimeoutError` vivait au cinquième cadre, et l'annotation
+            # n'avait gardé que les trois premiers — tous internes à Puppeteer.
+            grep -E -A8 '^(ÉCHEC|Error|.*AssertionError|.*Error:|.*test-experience\.cjs:)' "$RUNNER_TEMP/essais.log" \
+              | head -n 80 | cut -c1-900 | grep -v '^--$' | while IFS= read -r ligne; do
               echo "::error title=Essais navigateur::$ligne"
             done
             exit "$statut"

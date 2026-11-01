@@ -973,3 +973,15 @@ controle = "python3 outils/test_modele_grilles.py && python3 outils/modele-grill
 limite = "Le contrôle suppose une seule condition de repli sous la largeur déclarée : une grille dont le palier changeait deux fois demanderait un champ par condition. Et la reproduction reste arithmétique : même nombre de colonnes, pas même dessin — .mission-grid conserve 116,8 px (44,7 %) d'écart de largeur de colonne, le plus élevé du fil, à cause de son rapport 1,35 / 0,65 très dissymétrique."
 suite = "Étendre le champ aux grilles à plusieurs conditions de repli, puis traiter les quatre grilles « proportion » sans compromis calculable (.ai-feature-panel, .learning-coverage-topic, .simulateur-promo-panel) par une autre méthode, en le disant."
 initiatives = ["optimisation-du-site"]
+
+[[avancee]]
+id = "attente-navigateur-nommee"
+date = 2026-10-31
+titre = "Nommer la condition qu'une attente de navigateur attendait"
+constat = "La CI est tombée sur un TimeoutError de Puppeteer qui ne nommait ni la condition, ni la ligne du script ; les journaux du job étant inatteignables depuis l'atelier et l'annotation bornée à trois lignes de contexte, diagnostiquer a demandé deux relances et une lecture de source pour une information que le script possédait."
+changement = "Le module outils/attente-navigateur.cjs enveloppe page.waitForFunction : à l'expiration, le message recopie la source de la condition, le délai appliqué et la cause d'origine avec son type (TimeoutError et TypeError ne se réparent pas pareil). Les 53 attentes de test-experience.cjs passent par lui. L'annotation du workflow garde huit lignes de contexte et filtre les cadres du script. Deux bancs entrent dans qualite : test_attente_navigateur.cjs (4 cas, page factice) et test_test_experience.mjs, qui existait depuis le 14 octobre sans tourner dans aucune porte."
+preuves = ["outils/attente-navigateur.cjs", "outils/test_attente_navigateur.cjs", "outils/test-experience.cjs", "outils/test_test_experience.mjs", ".github/workflows/verification.yml", "docs/rd/inventaire-controles.md"]
+controle = "node outils/test_attente_navigateur.cjs && node outils/test_test_experience.mjs && python3 outils/verifier-inventaire-controles.py"
+limite = "Le banc éprouve le message d'échec sur une page factice, pas le comportement de Puppeteer : il ne dit pas si trente secondes suffisent à un vrai navigateur, ni pourquoi le job est tombé le 31 octobre 2026 — cette cause reste inconnue, et un vert ultérieur ne la prouverait pas."
+suite = "Relire la prochaine annotation, qui nomme la condition, et traiter la cause réelle du TimeoutError au lieu de la deviner."
+initiatives = ["optimisation-du-site"]

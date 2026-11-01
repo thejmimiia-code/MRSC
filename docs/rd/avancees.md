@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 57 |
+| Avancées consignées | 58 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
-| Contrôles exécutables cités | 62 |
+| Contrôles exécutables cités | 63 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1020,6 +1020,31 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 **Suite.** Lire le premier passage en CI de l'essai « Aperçu ordinateur », et vérifier sur le site publié qu'un téléphone en mode bureau ne rogne plus le panneau.
 
 Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
+
+### `attente-navigateur-nommee` — Nommer la condition qu'une attente de navigateur attendait
+
+*Consignée le 2026-10-31.*
+
+**Constat.** La CI est tombée sur un TimeoutError de Puppeteer qui ne nommait ni la condition, ni la ligne du script ; les journaux du job étant inatteignables depuis l'atelier et l'annotation bornée à trois lignes de contexte, diagnostiquer a demandé deux relances et une lecture de source pour une information que le script possédait.
+
+**Ce que cela change.** Le module outils/attente-navigateur.cjs enveloppe page.waitForFunction : à l'expiration, le message recopie la source de la condition, le délai appliqué et la cause d'origine avec son type (TimeoutError et TypeError ne se réparent pas pareil). Les 53 attentes de test-experience.cjs passent par lui. L'annotation du workflow garde huit lignes de contexte et filtre les cadres du script. Deux bancs entrent dans qualite : test_attente_navigateur.cjs (4 cas, page factice) et test_test_experience.mjs, qui existait depuis le 14 octobre sans tourner dans aucune porte.
+
+**Preuves dans le dépôt :**
+
+- `outils/attente-navigateur.cjs`
+- `outils/test_attente_navigateur.cjs`
+- `outils/test-experience.cjs`
+- `outils/test_test_experience.mjs`
+- `.github/workflows/verification.yml`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `node outils/test_attente_navigateur.cjs && node outils/test_test_experience.mjs && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le banc éprouve le message d'échec sur une page factice, pas le comportement de Puppeteer : il ne dit pas si trente secondes suffisent à un vrai navigateur, ni pourquoi le job est tombé le 31 octobre 2026 — cette cause reste inconnue, et un vert ultérieur ne la prouverait pas.
+
+**Suite.** Relire la prochaine annotation, qui nomme la condition, et traiter la cause réelle du TimeoutError au lieu de la deviner.
+
+Initiatives liées : `optimisation-du-site`.
 
 ### `aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran` — Aucune grille à pistes égales ne dépend plus d'une largeur d'écran
 
