@@ -1420,6 +1420,41 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
                     f"{mesure['part']:.3f} de la colonne"
                 )
 
+        # La promesse « aucune largeur ne change de nombre de colonnes » se
+        # vérifie, elle ne s'affirme pas. Le 31 octobre 2026, `.hero-grid` a été
+        # converti avec une base choisie pour reproduire exactement son ancien
+        # repli ; rien dans la feuille ne permettait de le contrôler, puisque la
+        # règle de palier avait disparu avec la conversion. Le registre garde
+        # donc la largeur du repli d'avant (`repli_avant_px`), et le contrôle
+        # reconstruit la cascade d'avant pour confronter les deux.
+        repli = entree.get("repli_avant_px")
+        if repli is not None:
+            if not isinstance(repli, int) or repli <= 0:
+                erreurs.append(
+                    f"{selecteur} : `repli_avant_px` ({repli!r}) n'est pas une largeur en pixels"
+                )
+            elif not (base_expr and isinstance(base_px, (int, float))):
+                erreurs.append(
+                    f"{selecteur} : `repli_avant_px` sans base déclarée — la promesse "
+                    "« le repli ne change pas » porte sur une base qui n'est pas écrite"
+                )
+            else:
+                avant = grille_synthetique(selecteur, valeur, gap_expr)
+                avant.items = len(attendus)
+                avant.regles.append(
+                    Regle([selecteur], "minmax(0, 1fr)", None, None, repli, None, 2, 1)
+                )
+                avant.base_flex = float(base_px)
+                bandes = bandes_de_changement(avant, float(base_px))
+                if bandes:
+                    premiere = bandes[0]
+                    erreurs.append(
+                        f"{selecteur} : `repli_avant_px = {repli}` annoncé comme reproduit, "
+                        f"mais de {premiere['debut']} à {premiere['fin']} px la grille d'avant "
+                        f"montrait {premiere['cascade']} colonne(s) et le flex en donne "
+                        f"{premiere['flex']} — la base ne reproduit pas le repli"
+                    )
+
         # Plafond en `width` sur un enfant : en flex, il ne s'applique pas.
         # `flex-basis: 100%` sur les présentations remplace la largeur de la
         # boîte ; le plafond qui rendait vraie une déclaration `sizes` cessait

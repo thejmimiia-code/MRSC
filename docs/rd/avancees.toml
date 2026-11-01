@@ -961,3 +961,15 @@ controle = "python3 outils/test_modele_grilles.py && python3 outils/modele-grill
 limite = "La reproduction est arithmétique : elle garantit le même nombre de colonnes, pas le même dessin — une colonne peut varier de 68,7 px (24,3 %) au lieu de 58,9 px (20,9 %). Le compromis est calculé sur la présentation par défaut (contenu 1 160 px) ; en Lecture, à 940 px, le repli avance et le modèle ne mesure pas cette présentation. Aucun rendu n'a été observé dans un navigateur."
 suite = "Appliquer la même méthode à .mission-grid (compromis 20.9em) et .learning-work-panel (21.3em), puis traiter à part .ai-feature-panel et .simulateur-promo-panel, pour lesquels aucune base ne reproduit la cascade — le relevé le dit désormais."
 initiatives = ["optimisation-du-site"]
+
+[[avancee]]
+id = "repli-avant-verifie"
+date = 2026-10-31
+titre = "Vérifier qu'une base de flex reproduit le repli qu'elle prétend remplacer"
+constat = "Le lot précédent affirmait que la base de .hero-grid reproduisait exactement l'ancien repli, mais la règle de palier ayant disparu avec la conversion, aucun contrôle ne pouvait refaire le calcul. Une promesse qu'on ne peut pas vérifier ne vaut pas mieux qu'une valeur fixe non mesurée."
+changement = "Le registre des grilles flex gagne repli_avant_px : la largeur sous laquelle la cascade d'avant imposait une colonne. --verifier reconstruit cette cascade, applique la base déclarée et refuse si le nombre de colonnes diffère à une seule des 233 largeurs, en nommant la plage fautive. .mission-grid (20.85em) et .learning-work-panel (21.29em) sont converties avec cette garantie ; un cas de banc remet la base d'origine et exige le refus."
+preuves = ["outils/modele-grilles.py", "outils/test_modele_grilles.py", "docs/rd/grilles-dynamiques.toml", "docs/rd/formats-affichage.md", "assets/css/site.css"]
+controle = "python3 outils/test_modele_grilles.py && python3 outils/modele-grilles.py --verifier"
+limite = "Le contrôle suppose une seule condition de repli sous la largeur déclarée : une grille dont le palier changeait deux fois demanderait un champ par condition. Et la reproduction reste arithmétique : même nombre de colonnes, pas même dessin — .mission-grid conserve 116,8 px (44,7 %) d'écart de largeur de colonne, le plus élevé du fil, à cause de son rapport 1,35 / 0,65 très dissymétrique."
+suite = "Étendre le champ aux grilles à plusieurs conditions de repli, puis traiter les quatre grilles « proportion » sans compromis calculable (.ai-feature-panel, .learning-coverage-topic, .simulateur-promo-panel) par une autre méthode, en le disant."
+initiatives = ["optimisation-du-site"]

@@ -289,7 +289,32 @@ grille_avant = "minmax(0, 1.15fr) minmax(280px, .75fr)"
 gap_avant = "clamp(2.5rem, 8vw, 7rem)"
 plancher_expr = "20.4em"
 plancher_px = 326.4
+repli_avant_px = 760
 ecart_max_px = 68.7
 ecart_part = 0.243
 presentation_repliee = ["lecture"]
 raison = "Ouverture de l'accueil : texte à gauche, carte de repères à droite. Première base écrite en em : elle suit la taille du texte, donc le repli avance tout seul à 115 % et 130 %, ce qu'aucune condition de largeur d'écran ne fait. 20.4em (326,4 px) est la plus petite base qui reproduit exactement le repli d'avant — le nombre de colonnes ne change à aucune largeur — au prix d'un écart de largeur de colonne plus grand (68,7 px, 24,3 % au lieu de 58,9 px, 20,9 %). Deux règles de palier qui forçaient une colonne disparaissent, dont celle de .home-hero-civic .hero-grid."
+
+[[grille_flex]]
+selecteur = ".mission-grid"
+grille_avant = "minmax(0, 1.35fr) minmax(260px, .65fr)"
+gap_avant = "clamp(2rem, 6vw, 5rem)"
+plancher_expr = "20.85em"
+plancher_px = 333.6
+repli_avant_px = 760
+ecart_max_px = 116.8
+ecart_part = 0.447
+presentation_repliee = ["lecture"]
+raison = "Bloc ÉVA de l'accueil : texte long à gauche, carte des valeurs à droite. Base en em (20.85em), la plus petite qui reproduit le repli d'avant (333,48 px) : aucune largeur ne change de nombre de colonnes. Le rapport 1,35 / 0,65 est le plus dissymétrique converti jusqu'ici, d'où un coût de 116,8 px (44,7 %) sur la largeur de colonne — c'est le prix du partage du seul surplus par flex, contre le partage de tout l'espace par fr."
+
+[[grille_flex]]
+selecteur = ".learning-work-panel"
+grille_avant = "minmax(0,1.2fr) minmax(280px,.8fr)"
+gap_avant = "2rem"
+plancher_expr = "21.29em"
+plancher_px = 340.6
+repli_avant_px = 760
+ecart_max_px = 68.1
+ecart_part = 0.243
+presentation_repliee = ["lecture"]
+raison = "Panneau « Le quotidien et le travail sont aussi des lieux d'apprentissage » de la page Apprendre : texte à gauche, trois étapes à droite. Base en em (21.29em = 340,6 px), la plus petite qui reproduit le repli d'avant (340,5 px) : aucune largeur ne change de nombre de colonnes. Coût mesuré : 68,1 px (24,3 %)."

@@ -812,10 +812,29 @@ html.contraste-renforce .site-status-note {
 }
 
 .mission-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: clamp(2rem, 6vw, 5rem);
-  align-items: start;
+  align-items: flex-start;
+}
+/* Deux colonnes inégales, sans largeur d'écran (31 octobre 2026). Base en `em`
+   (20.85em = 333,6 px à taille de texte normale) : elle suit la taille du
+   texte, donc le repli avance tout seul quand quelqu'un agrandit. La plus
+   petite base qui reproduit exactement le repli d'avant vaut 333,48 px ; le
+   nombre de colonnes ne change donc à aucune largeur, et la règle de 760 px
+   qui forçait une colonne disparaît (elle reste pour `.participation-grid`).
+   Coût, mesuré et non estimé : une colonne peut varier de 116,8 px (44,7 %) —
+   bien plus que pour `.hero-grid`, parce que le rapport 1,35 / 0,65 est très
+   dissymétrique : le partage du seul surplus par `flex` s'éloigne du partage
+   de tout l'espace par `fr`. */
+.mission-grid > :first-child {
+  flex: 1.35 1 20.85em;
+  min-width: 0;
+}
+
+.mission-grid > :last-child {
+  flex: .65 1 20.85em;
+  min-width: 0;
 }
 
 .copy-block {
@@ -1641,7 +1660,6 @@ html.contraste-renforce .resource-scope-note {
   /* `.contact-grid` ne figure plus ici : sa règle de base est déjà une seule
      colonne, la déclaration ne décidait rien. Trouvé le 31 octobre 2026 en
      comparant, grille par grille, ce que chaque palier change réellement. */
-  .mission-grid,
   .participation-grid {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -3616,9 +3634,23 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .learning-coverage-topic-a-creer .learning-coverage-status,.learning-coverage-topic-revue-experte .learning-coverage-status { color:var(--gold-ink-2); }
 .learning-coverage-links { grid-column:2; margin:0; font-size: max(12px, .84rem); }
 .learning-work-panel {
-  display:grid; grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr); align-items:center;
+  display:flex; flex-wrap:wrap; align-items:center;
   gap:2rem; padding:clamp(1.5rem,4vw,2.6rem); border-radius:22px;
   background:linear-gradient(115deg,var(--tint-green),var(--surface-soft-2) 62%,var(--tint-gold));
+}
+/* Deux colonnes inégales, sans largeur d'écran (31 octobre 2026) : base en `em`
+   (21.29em = 340,6 px), la plus petite qui reproduit le repli d'avant —
+   340,5 px. Aucune largeur ne change donc de nombre de colonnes, et la règle de
+   760 px qui forçait une colonne cesse de nommer cette grille. Coût mesuré :
+   68,1 px (24,3 %) d'écart de largeur de colonne au plus. */
+.learning-work-panel > :first-child {
+  flex: 1.2 1 21.29em;
+  min-width: 0;
+}
+
+.learning-work-panel > :last-child {
+  flex: .8 1 21.29em;
+  min-width: 0;
 }
 .learning-work-panel h2 { font-size:clamp(1.7rem,3vw,2.3rem); }
 .learning-work-steps { display:grid; gap:.7rem; margin:0; padding:0; list-style:none; }
@@ -3710,7 +3742,7 @@ html.contraste-renforce :is(.learning-analogy,.learning-coverage-topic,.learning
   .learning-lesson-aside { top:calc(160px + 1rem); }
 }
 @media (max-width: 760px) {
-  .learning-hero-grid,.learning-work-panel,.learning-article-layout { grid-template-columns:minmax(0,1fr); }
+  .learning-hero-grid,.learning-article-layout { grid-template-columns:minmax(0,1fr); }
   .learning-filters { grid-template-columns:minmax(0,1fr); }
   .learning-feedback-panel { grid-template-columns:minmax(0,1fr); gap:1.2rem; }
   .learning-feedback-panel .button { justify-self:start; }
@@ -4231,12 +4263,12 @@ html.contraste-renforce .layout-choice.is-selected { background: var(--blue-soft
 /* Lecture : largeur de lecture maîtrisée et composition en colonne. */
 html[data-layout="lecture"] { --content: 940px; }
 html[data-layout="lecture"] main :is(
-  .mission-grid,.participation-grid,.join-panel,.document-grid,.link-grid,.contact-grid,.map-layout,
+  .participation-grid,.join-panel,.document-grid,.link-grid,.contact-grid,.map-layout,
   .home-action-grid,.home-voice-grid,
   .ai-feature-panel,.ai-metric-grid,.ai-forms-grid,.ai-balance-grid,.ai-lives-grid,
   .ai-questions-layout,.ai-path-steps,.ai-cta-panel,.principle-grid,.trace-panel,
   .simulateur-intro,.simulateur-chiffres,.simulateur-promo-panel,.simulateur-duo,.home-hero-facts,
-  .learning-hero-grid,.learning-work-panel,.learning-article-layout,.learning-catalogue-grid,
+  .learning-hero-grid,.learning-article-layout,.learning-catalogue-grid,
   .learning-level-grid,.learning-ecosystem-grid,.learning-filters,.learning-feedback-panel,
   .learning-code-grid,.learning-coverage-topic,.learning-home-panel,
   .ai-fraud-grid,.ai-fraud-steps,.ai-fraud-lesson-list,
@@ -4249,7 +4281,7 @@ html[data-layout="lecture"] .site-footer .footer-grid { grid-template-columns: m
 /* « Lecture » composait cette grille en une colonne par `grid-template-columns`.
    Depuis que `.ai-hero-grid` est en `flex-wrap`, cette déclaration n'aurait plus
    d'effet : c'est la base des deux panneaux qui doit passer à 100 %. */
-html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel, .ai-path-panel, .home-share-panel, .hero-grid) > * { flex-basis: 100%; }
+html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel, .ai-path-panel, .home-share-panel, .hero-grid, .mission-grid, .learning-work-panel) > * { flex-basis: 100%; }
 html[data-layout="lecture"] main :is(.learning-lesson-article,.learning-lesson-aside,.ai-section-intro,.ai-fraud-evidence,.ai-hero-copy) {
   width: min(100%,78ch);
   margin-inline: auto;

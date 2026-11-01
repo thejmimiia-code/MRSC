@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 56 |
+| Avancées consignées | 57 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
 | Contrôles exécutables cités | 62 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1159,6 +1159,30 @@ Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 **Limite — ce que cela ne prouve pas.** Aucune mesure navigateur n'a été faite à 600 px : l'arithmétique prouve l'absence de débordement, pas la lisibilité de deux colonnes de 264 px. C'est la raison pour laquelle .participation-grid, dont le contenu est typographiquement plus lourd, reste retenu.
 
 **Suite.** Mesurer le panneau à 600 et 700 px dans un navigateur avant de convertir .hero-grid et .mission-grid, dont l'écart de largeur est trois fois plus grand (59 et 91 px).
+
+Initiatives liées : `optimisation-du-site`.
+
+### `repli-avant-verifie` — Vérifier qu'une base de flex reproduit le repli qu'elle prétend remplacer
+
+*Consignée le 2026-10-31.*
+
+**Constat.** Le lot précédent affirmait que la base de .hero-grid reproduisait exactement l'ancien repli, mais la règle de palier ayant disparu avec la conversion, aucun contrôle ne pouvait refaire le calcul. Une promesse qu'on ne peut pas vérifier ne vaut pas mieux qu'une valeur fixe non mesurée.
+
+**Ce que cela change.** Le registre des grilles flex gagne repli_avant_px : la largeur sous laquelle la cascade d'avant imposait une colonne. --verifier reconstruit cette cascade, applique la base déclarée et refuse si le nombre de colonnes diffère à une seule des 233 largeurs, en nommant la plage fautive. .mission-grid (20.85em) et .learning-work-panel (21.29em) sont converties avec cette garantie ; un cas de banc remet la base d'origine et exige le refus.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/formats-affichage.md`
+- `assets/css/site.css`
+
+**Contrôle qui la maintient :** `python3 outils/test_modele_grilles.py && python3 outils/modele-grilles.py --verifier`
+
+**Limite — ce que cela ne prouve pas.** Le contrôle suppose une seule condition de repli sous la largeur déclarée : une grille dont le palier changeait deux fois demanderait un champ par condition. Et la reproduction reste arithmétique : même nombre de colonnes, pas même dessin — .mission-grid conserve 116,8 px (44,7 %) d'écart de largeur de colonne, le plus élevé du fil, à cause de son rapport 1,35 / 0,65 très dissymétrique.
+
+**Suite.** Étendre le champ aux grilles à plusieurs conditions de repli, puis traiter les quatre grilles « proportion » sans compromis calculable (.ai-feature-panel, .learning-coverage-topic, .simulateur-promo-panel) par une autre méthode, en le disant.
 
 Initiatives liées : `optimisation-du-site`.
 

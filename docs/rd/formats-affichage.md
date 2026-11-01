@@ -1466,3 +1466,52 @@ colonnes — pas un même dessin.
 Limite : le compromis est calculé sur la présentation par défaut (contenu
 1 160 px) ; en Lecture (940 px) le repli avance, et le modèle ne mesure pas
 cette présentation.
+
+## 23. La promesse « le repli ne bouge pas » devient un contrôle (31 octobre 2026)
+
+Le lot précédent annonçait que la base de `.hero-grid` reproduisait exactement
+l'ancien repli. C'était vrai, mais **affirmé** : la règle de palier avait disparu
+avec la conversion, donc plus rien dans la feuille ne permettait de refaire le
+calcul. Un registre qui garde `ecart_max_px` mais pas la largeur de repli d'avant
+laisse la promesse invérifiable.
+
+Le registre garde désormais :
+
+```toml
+plancher_expr = "20.4em"
+plancher_px   = 326.4
+repli_avant_px = 760
+```
+
+`--verifier` reconstruit la cascade d'avant (`grille_avant` + une règle qui force
+une colonne sous `repli_avant_px`), applique la base déclarée, et refuse si le
+nombre de colonnes diffère à **une seule** des 233 largeurs mesurées. Le message
+nomme la plage :
+
+```
+.hero-grid : `repli_avant_px = 760` annoncé comme reproduit, mais de 670 à
+760 px la grille d'avant montrait 1 colonne(s) et le flex en donne 2
+```
+
+Deux grilles converties avec cette garantie :
+
+| Grille | Base | Mesurée | Coût (écart de colonne) |
+|---|---:|---:|---:|
+| `.mission-grid` | 20.85em (333,6 px) | 333,48 px | **116,8 px — 44,7 %** |
+| `.learning-work-panel` | 21.29em (340,6 px) | 340,5 px | 68,1 px — 24,3 % |
+
+`.mission-grid` porte le coût le plus élevé de tout le fil, et il s'explique : son
+rapport 1,35 / 0,65 est très dissymétrique, et `flex` ne partage que le **surplus**
+là où `fr` partage **tout** l'espace. Même nombre de colonnes partout, proportions
+plus éloignées.
+
+**Ce que le compteur de paliers ne voit pas :** les deux blocs `@media` concernés
+portent plusieurs sélecteurs ; retirer un sélecteur d'une règle ne change ni le
+nombre de blocs ni celui des règles. Le compteur reste à 189 alors que deux
+grilles quittent leurs paliers. C'est la même limite que pour `.contact-grid` —
+et la réponse est la même : seule la comparaison des cascades, largeur par
+largeur, dit la vérité.
+
+Limite du nouveau contrôle : il suppose **une seule** condition de repli sous
+`repli_avant_px`. Une grille dont le palier changeait deux fois demanderait un
+champ par condition, que le modèle ne gère pas encore.
