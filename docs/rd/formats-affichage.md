@@ -1916,11 +1916,40 @@ peut le savoir à sa place.
 | `1rem` = 16 px | la taille de texte est un paramètre (1, 1,15, 1,3) | — |
 | conteneur entier pour les enfants | `padding` de la règle de base | `padding_lu = false`, le modèle refuse de prédire |
 
+### Ce que la correction a effectivement changé
+
+Mesuré deux fois, avec le même navigateur et le même protocole :
+
+| | avant la gouttière lue | après |
+| --- | --- | --- |
+| points annoncés | 743 | 761 |
+| confirmés par le navigateur | 673 | **722** |
+| divergents | 70 | **39**, dont 4 au seuil |
+| grilles divergentes | 23 sur 34 | **8 sur 34** |
+
+### Les deux causes qui restent
+
+**1. Le seuil.** Quatre divergences tombent à moins d'un pixel de la bascule :
+`.hero-grid` et `.mission-grid` à 743 px (0,28 et 0,78 px), `.home-share-panel` à
+615 px (0,60 px), `.english-promo-panel` à 658 px (0,20 px). À cette distance, ce
+n'est plus le modèle qui décide : la largeur d'une barre de défilement, l'arrondi
+de `vw` et le sous-pixel de la mise en page tranchent. Chaque point du relevé
+porte donc sa **marge**, et le rapporteur les **compte** sans les absorber —
+tolérance déclarée à 1 px, plus petite que la plus étroite des colonnes
+mesurées (145 px).
+
+**2. Le parent.** Les 35 autres divergences tiennent à quatre grilles posées
+**dans une colonne** : `.simulateur-chiffres` mesure 521,44 px là où le modèle en
+présume 1 112, `.learning-code-grid` 615,84 contre 956, `.ai-fraud-steps` 505,13
+contre 554. Le modèle présume que toute grille reçoit `.container` entier ; c'est
+faux dès qu'une grille vit dans une piste de `.learning-article-layout` ou de
+`.simulateur-duo`.
+
 ### Limites
 
 Seules la présentation par défaut et la gouttière de `.container` sont lues : un
 conteneur qui écrirait sa largeur autrement (`max-width`, `%` imbriqué) sortirait
-en code 2 plutôt que d'être deviné. Le décalage de défilement, les marges d'un
-parent plus étroit que `.container` et les grilles posées dans une colonne ne sont
-pas modélisés. Enfin rien de tout cela n'a été regardé dans un navigateur par une
-personne : le relevé compte des colonnes, il ne juge pas la lisibilité.
+en code 2 plutôt que d'être deviné. La chaîne des **ancêtres** n'est pas
+modélisée — c'est la cause des 35 divergences restantes. Enfin rien de tout cela
+n'a été regardé par une personne : le relevé compte des colonnes, il ne juge pas
+la lisibilité.
