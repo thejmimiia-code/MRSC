@@ -376,7 +376,12 @@ jobs:
       # `auto-fit`. Quatre grilles sont converties le 31 octobre 2026 ; le
       # contrôle vérifie que leur minimum de piste est celui que la règle donne
       # (pas un chiffre choisi) et qu'aucun `@media` ne leur réimpose un nombre
-      # de colonnes. Le banc plante douze fautes, dont deux sources illisibles.
+      # de colonnes. Depuis le 1er novembre 2026, il refuse aussi toute piste
+      # écrite en pixels nus : une colonne d'icône en `px` ne suit pas le réglage
+      # de taille de texte, une colonne en `rem` si. Trois sources lues — les deux
+      # feuilles du site et le générateur du simulateur ; la feuille du moteur
+      # embarqué vient de l'amont et n'est pas de ce contrôle. Le banc compte
+      # 48 cas, dont deux sources illisibles qui doivent sortir en code 2.
       - name: Vérifier le modèle des grilles
         run: |
           python3 outils/modele-grilles.py --verifier

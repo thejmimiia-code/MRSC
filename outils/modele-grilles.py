@@ -1017,6 +1017,74 @@ def bandes_de_changement(grille: Grille, plancher: float | None = None) -> list[
     return bandes
 
 
+#: Une piste écrite en pixels **nus** : `44px`, pas `minmax(44px, 1fr)`.
+PISTE_PX = re.compile(r"^[\d.]+px$")
+
+#: Un plafond : les deux bornes d'un `minmax(...)` en longueurs, sans `fr`.
+PLAFOND = re.compile(r"^minmax\(\s*([\d.]+)(px|rem)\s*,\s*([\d.]+)(px|rem)\s*\)$")
+
+
+def pistes_en_px(valeur: str) -> list[str]:
+    """Les pistes que la taille du texte ne fera jamais bouger.
+
+    `44px 1fr` réserve 44 px au numéro, quoi qu'il arrive. `2.75rem 1fr`
+    réserve 44 px à 100 % — mais 57 px quand la personne règle le texte à
+    130 %, ce que le site sait faire (`html.texte-tres-agrandi`). La première
+    écriture ignore ce réglage ; la seconde le suit. C'est la seule différence,
+    et elle n'apparaît sur aucune capture d'écran par défaut.
+    """
+    return [p.strip() for p in pistes(valeur) if PISTE_PX.fullmatch(p.strip())]
+
+
+def plafonds(valeur: str) -> list[str]:
+    """Les pistes à plafond : `minmax(230px, 300px)`.
+
+    Elles ne sont pas des colonnes d'icône. Un `flex` ne sait pas plafonner un
+    élément qui rétrécit, donc la conversion demanderait une `max-width` — et
+    une autre décision : sur une seule colonne, la grille étire ce panneau à
+    toute la largeur, alors qu'un élément flex de base 300 px y resterait à
+    300 px. Deux comportements, pas un.
+    """
+    return [p.strip() for p in pistes(valeur) if PLAFOND.fullmatch(p.strip())]
+
+
+def largeur_plafonnee(grille: Grille, valeur: str) -> dict | None:
+    """Ce que vaut, largeur par largeur, la piste qui porte un plafond.
+
+    Une piste `minmax(230px, 300px)` à côté d'une piste `1fr` ne se contente
+    pas de plafonner : elle prend sa **borne haute** tant que la place restante
+    le permet, puisque l'autre piste peut descendre à zéro. Rendre les deux
+    bornes et la valeur observée dit si la borne basse sert encore à quelque
+    chose — ou si elle est un garde-fou que la cascade n'atteint jamais.
+    """
+    pistes_plafonnees = plafonds(valeur)
+    if len(pistes_plafonnees) != 1 or len(pistes(valeur)) != 2:
+        return None
+    trouve = PLAFOND.fullmatch(pistes_plafonnees[0])
+    if not trouve:
+        return None
+    bas = float(trouve.group(1)) * (RACINE_PX if trouve.group(2) == "rem" else 1)
+    haut = float(trouve.group(3)) * (RACINE_PX if trouve.group(4) == "rem" else 1)
+    mesurees = []
+    for largeur in LARGEURS:
+        if colonnes_de_la_cascade(grille, largeur) != 2:
+            continue
+        gap = ecart_a(grille, largeur)
+        gap = grille.gap if gap is None else gap
+        place = conteneur(largeur) - gap
+        mesurees.append(min(haut, max(bas, place)))
+    if not mesurees:
+        return None
+    return {
+        "bas": bas,
+        "haut": haut,
+        "mini": min(mesurees),
+        "maxi": max(mesurees),
+        "largeurs": len(mesurees),
+        "borne_basse_atteinte": min(mesurees) <= bas + 0.5,
+    }
+
+
 def plancher_de(grille: Grille) -> float | None:
     """Le plus grand minimum de piste d'une grille à pistes souples, ou `None`."""
     natures = [nature_piste(piste) for piste in pistes(grille.valeur_asymetrique)]
@@ -1090,6 +1158,15 @@ def pistes_des_inegales(
       tombe quand `n × plancher + (n-1) × écart` dépasse le conteneur. L'écart
       avec la cascade actuelle est calculable — donc la décision peut se prendre
       sur des nombres.
+    - `plafond` : une piste `minmax(230px, 300px)`. Un `flex` ne plafonne pas
+      un élément qui rétrécit, et la conversion devrait décider d'un second
+      comportement : pleine largeur quand le panneau est seul sur sa ligne. Le
+      modèle le dit au lieu de proposer une base.
+    - `badge` : une piste fixe (`44px`) à côté d'une piste souple — la colonne
+      d'un numéro ou d'une icône. Ces grilles n'ont **aucun palier** : elles ne
+      se replient jamais, il n'y a donc rien à rendre dynamique. Le seul défaut
+      qui reste est l'unité : en `px`, la colonne ne suit pas la taille du
+      texte ; en `rem`, si.
     - `fixe` : des pistes en pixels ; rien à rendre dynamique.
     """
     capacites = capacites or {}
@@ -1108,17 +1185,38 @@ def pistes_des_inegales(
         if any(nature == "contenu" for nature, _, _ in natures):
             resultats.append({"selecteur": grille.selecteur, "forme": "contenu", "valeur": valeur})
             continue
-        # `minmax(230px, 300px)` : la colonne a un **plafond** en pixels. `flex`
-        # n'a pas de plafond sur un élément qui rétrécit ; il faudrait une
-        # `max-width`, et le modèle ne saurait pas la vérifier. Dit, pas deviné.
-        if any(
-            re.search(r"^([\d.]+)(px|rem)$", morceau.strip())
-            for morceau in (pistes(valeur))
-        ):
-            resultats.append({"selecteur": grille.selecteur, "forme": "borne", "valeur": valeur})
+        # `minmax(230px, 300px)` : la colonne a un **plafond**. C'est le seul
+        # cas où `flex` ne sait pas faire sans une `max-width`, et où il faudrait
+        # décider d'un second comportement (pleine largeur quand le panneau est
+        # seul sur sa ligne). Dit, pas deviné.
+        if plafonds(valeur) or any(nature == "borne" for nature, _, _ in natures):
+            resultats.append(
+                {
+                    "selecteur": grille.selecteur,
+                    "forme": "plafond",
+                    "valeur": valeur,
+                    "plafonds": plafonds(valeur),
+                }
+            )
             continue
-        if any(nature == "borne" for nature, _, _ in natures):
-            resultats.append({"selecteur": grille.selecteur, "forme": "borne", "valeur": valeur})
+        # Une piste fixe à côté d'une piste souple : `44px 1fr` réserve la
+        # colonne d'un numéro ou d'une icône. Le 1er novembre 2026, ces grilles
+        # s'appelaient « borne » — le mot d'un plafond — alors qu'aucune n'en
+        # avait, et qu'aucune n'a de palier : elles ne se replient jamais. Le
+        # seul défaut qui leur reste est l'unité : en px, la colonne ne suit pas
+        # la taille du texte.
+        fixes = [p.strip() for p in pistes(valeur) if re.fullmatch(r"[\d.]+(?:px|rem)", p.strip())]
+        if fixes:
+            resultats.append(
+                {
+                    "selecteur": grille.selecteur,
+                    "forme": "badge",
+                    "valeur": valeur,
+                    "fixes": fixes,
+                    "px": pistes_en_px(valeur),
+                    "paliers": paliers(grille),
+                }
+            )
             continue
         if all(nature == "fixe" for nature, _, _ in natures):
             resultats.append({"selecteur": grille.selecteur, "forme": "fixe", "valeur": valeur})
@@ -1519,8 +1617,92 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
     return erreurs
 
 
+#: Les feuilles écrites ici. Le 1er novembre 2026, la colonne d'icône du
+#: panneau du simulateur (`20px 54px`) était en pixels nus comme celles du site :
+#: la vérifier seulement dans `site.css` aurait laissé la moitié du défaut.
+#: `construire-simulateur.py` est lu pour la même raison — il porte les seules
+#: règles du simulateur qui soient de nous. La feuille du moteur embarqué vient
+#: de l'amont (`simulateur/PROVENANCE.json`) et n'est pas de ce lot : ses pistes
+#: (`1fr 96px 74px auto`) restent en pixels, et ce n'est pas une faute qu'on
+#: puisse corriger ici.
+FEUILLES_SERVIES = (
+    "assets/css/site.css",
+    "assets/css/anglais-aventure.css",
+    "outils/construire-simulateur.py",
+)
+
+
+def feuilles_lues(racine: Path) -> list[tuple[str, str]]:
+    """Le CSS servi, par source, y compris les blocs `<style>` de la page du simulateur."""
+    sources: list[tuple[str, str]] = []
+    for relatif in FEUILLES_SERVIES:
+        chemin = racine / relatif
+        if chemin.is_file():
+            sources.append((relatif, chemin.read_text(encoding="utf-8")))
+    return sources
+
+
+def verifier_pistes_en_px(grilles: dict[str, Grille], racine: Path | None = None) -> list[str]:
+    """Aucune piste de grille ne doit rester écrite en pixels **nus**.
+
+    Le 1er novembre 2026, quatre grilles réservaient leur colonne de numéro ou
+    d'icône en pixels : `44px 1fr`, `38px minmax(0,1fr)`, `20px 54px minmax(0,1fr)`
+    et `18px 40px minmax(0,1fr)`. Aucune ne se replie jamais — elles n'ont aucun
+    palier, et c'est normal — mais toutes ignorent le réglage de taille de texte
+    du site : à 130 %, le texte grandit dans `.texte-tres-agrandi`, la colonne
+    non. `2.75rem` vaut les mêmes 44 px à 100 %, et suit le réglage.
+
+    Une piste écrite dans un `minmax(...)` n'est pas concernée : elle porte déjà
+    une décision de largeur, pas une taille d'icône.
+    """
+    erreurs: list[str] = []
+    vus: set[tuple[str, int, str]] = set()
+
+    def relever(source: str, table: dict[str, Grille]) -> None:
+        for selecteur, grille in sorted(table.items()):
+            for regle in grille.regles:
+                if not regle.valeur:
+                    continue
+                for piste in pistes_en_px(regle.valeur):
+                    cle = (source, regle.ligne, piste)
+                    if cle in vus:
+                        continue
+                    vus.add(cle)
+                    erreurs.append(
+                        f"{selecteur} ({source}) : piste `{piste}` en pixels nus "
+                        f"(ligne {regle.ligne}) — elle ne suit pas la taille du texte ; "
+                        "écrire la même longueur en rem"
+                    )
+
+    relever(FEUILLE, grilles)
+    if racine is not None:
+        # Les autres sources ne passent pas par `lire_grilles` : la feuille du
+        # simulateur porte des conditions que ce modèle ne sait pas placer sur
+        # un axe de largeur (`orientation: landscape and max-height`), et il
+        # refuse alors de lire quoi que ce soit. Une lecture étroite, qui ne
+        # cherche que les déclarations de colonnes, ne dépend pas de ces
+        # conditions — et dit ce qu'elle ne lit pas : elle ne nomme que la
+        # dernière ligne du sélecteur, sans numéro de ligne.
+        for source, texte in feuilles_lues(racine):
+            if source == FEUILLE:
+                continue
+            for bloc in re.finditer(
+                r"([^{}]+)\{([^{}]*?grid-template-columns\s*:\s*([^;]+);)", texte
+            ):
+                selecteur = bloc.group(1).strip().splitlines()[-1].strip()
+                for piste in pistes_en_px(bloc.group(3)):
+                    erreurs.append(
+                        f"{selecteur} ({source}) : piste `{piste}` en pixels nus — "
+                        "elle ne suit pas la taille du texte ; écrire la même longueur en rem"
+                    )
+    return erreurs
+
+
 def verifier(
-    grilles: dict[str, Grille], registre: dict, capacites: dict[str, dict] | None = None
+    grilles: dict[str, Grille],
+    registre: dict,
+    capacites: dict[str, dict] | None = None,
+    racine: Path | None = None,
 ) -> list[str]:
     """Chaque grille convertie doit rester dynamique, et son minimum doit être le calculé.
 
@@ -1530,11 +1712,12 @@ def verifier(
     un correctif ajouté plus tard dans un `@media` annulerait la conversion sans
     que rien ne le dise.
     """
-    erreurs: list[str] = []
+    erreurs: list[str] = verifier_pistes_en_px(grilles, racine)
     capacites = capacites or {}
     entrees = registre.get("grille", [])
     if not entrees:
-        return [f"{REGISTRE} ne déclare aucune grille convertie — le registre ne prouve rien"]
+        erreurs.append(f"{REGISTRE} ne déclare aucune grille convertie — le registre ne prouve rien")
+        return erreurs
     for entree in entrees:
         selecteur = entree.get("selecteur")
         if not selecteur or selecteur not in grilles:
@@ -1590,6 +1773,24 @@ def verifier(
     # leur forme ne disparaisse pas par inadvertance, et pour que le rapport ne
     # propose pas de les convertir. Sans cette section, cinq aperçus de
     # présentation recevaient une consigne qui n'avait aucun sens.
+    # Les plafonds refusés : le registre les nomme pour que le refus ne se
+    # perde pas, et le contrôle vérifie que la raison a toujours un objet. Une
+    # grille qui perd son plafond rendrait cette décision fausse.
+    for entree in registre.get("grille_plafond", []):
+        selecteur = entree.get("selecteur")
+        if not selecteur or selecteur not in grilles:
+            erreurs.append(
+                f"{selecteur or '(sans sélecteur)'} : plafond déclaré absent de {FEUILLE} — "
+                "la décision écrite n'a plus d'objet"
+            )
+            continue
+        grille = grilles[selecteur]
+        valeur = grille.valeur_asymetrique or ""
+        if not plafonds(valeur):
+            erreurs.append(
+                f"{selecteur} : déclaré à plafond ({entree.get('valeur')}), "
+                f"la feuille écrit {valeur[:60]!r}"
+            )
     for entree in registre.get("grille_fixe", []):
         selecteur = entree.get("selecteur")
         if not selecteur or selecteur not in grilles:
@@ -1650,7 +1851,7 @@ def principal(arguments: list[str] | None = None) -> int:
             return 2
         capacites = lire_capacites(RACINE, [e.get("selecteur") or "" for e in registre.get("grille", [])])
         appliquer_capacites(grilles, capacites)
-        erreurs = verifier(grilles, registre, capacites)
+        erreurs = verifier(grilles, registre, capacites, RACINE)
         erreurs.extend(verifier_flex(RACINE, registre))
         for morte in declarations_mortes(grilles):
             erreurs.append(
@@ -1774,8 +1975,12 @@ def principal(arguments: list[str] | None = None) -> int:
         )
         print("  proportion : un `flex: <g> 1 <plancher>px` reproduirait le rapport entre colonnes")
         print(
-            "  borne     : une colonne a un **plafond** en pixels (`minmax(230px, 300px)`) — "
-            "un `flex` n'en a pas"
+            "  plafond   : une colonne a un **plafond** (`minmax(230px, 300px)`) — un `flex` "
+            "n'en a pas, et sur une seule ligne il ne prendrait pas toute la largeur"
+        )
+        print(
+            "  badge     : une piste fixe à côté d'une piste souple (`44px 1fr`) — aucun palier, "
+            "donc rien à replier ; seule l'unité compte (px ne suit pas la taille du texte, rem si)"
         )
         print("  motif / fixe / illisible : rien à rendre dynamique")
         for resultat in resultats:
@@ -1802,6 +2007,32 @@ def principal(arguments: list[str] | None = None) -> int:
                         f"      {bande['debut']}–{bande['fin']} px : {bande['cascade']} colonne(s) "
                         f"deviennent {bande['flex']}"
                     )
+            elif resultat["forme"] == "badge":
+                paliers_grille = resultat.get("paliers") or []
+                px = resultat.get("px") or []
+                print(
+                    f"  {resultat['selecteur'][:44]:44} badge {', '.join(resultat.get('fixes') or [])} · "
+                    f"{len(paliers_grille)} palier(s)"
+                    + (f" · à réécrire en rem : {', '.join(px)}" if px else " · déjà en rem")
+                )
+            elif resultat["forme"] == "plafond":
+                grille = grilles[resultat["selecteur"]]
+                bornes = largeur_plafonnee(grille, resultat["valeur"])
+                detail = ""
+                if bornes:
+                    detail = (
+                        f" · la piste vaut {bornes['mini']:g} à {bornes['maxi']:g} px sur "
+                        f"{bornes['largeurs']} largeur(s) à deux colonnes"
+                        + (
+                            f" — la borne basse ({bornes['bas']:g} px) n'est jamais atteinte"
+                            if not bornes["borne_basse_atteinte"]
+                            else f" — la borne basse ({bornes['bas']:g} px) sert"
+                        )
+                    )
+                print(
+                    f"  {resultat['selecteur'][:44]:44} plafond {', '.join(resultat.get('plafonds') or [])} · "
+                    "un `flex` ne sait pas plafonner un panneau qui rétrécit" + detail
+                )
             else:
                 print(f"  {resultat['selecteur'][:44]:44} {resultat['forme']}")
         proches = [

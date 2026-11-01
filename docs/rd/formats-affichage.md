@@ -1640,3 +1640,87 @@ cité dans un registre est une trace, pas un usage — et il se retire lui-même
 son corpus, ainsi que ses bancs, parce qu'un banc cite les noms qu'il cherche.
 Les six classes d'`anglais-aventure.css` construites à l'exécution restent
 **indécidables** : elles sont comptées, pas jugées.
+
+## 26. « Borne » recouvrait deux choses — et une colonne d'icône en `px` ne suit pas le texte (1er novembre 2026)
+
+Le lot précédent laissait six grilles classées « borne », avec ce commentaire
+dans le code : *une colonne a un plafond en pixels, un `flex` n'en a pas*. La
+mesure a montré que **cinq d'entre elles n'avaient aucun plafond** :
+
+| Grille | Valeur | Paliers | Verdict |
+| --- | --- | ---: | --- |
+| `.layout-choice` | `1.25rem 3.375rem minmax(0,1fr)` | 0 | badge |
+| `.home-entry-list li` | `2.375rem minmax(0,1fr)` | 0 | badge |
+| `.learning-work-steps li` | `2.4rem 1fr` | 0 | badge |
+| `.ai-question-list li` | `2.75rem 1fr` | 0 | badge |
+| `html.has-js .site-header .customize-settings` | `1.125rem 2.5rem minmax(0,1fr)` | 0 | badge |
+| `.learning-article-layout` | `minmax(0,1fr) minmax(230px,300px)` | 1 | **plafond** |
+
+Aucune des cinq premières n'a de palier, aucune ne se replie : **il n'y avait
+rien à rendre dynamique**, et le rapport envoyait convertir des colonnes de
+numéro. Le mot « borne » mélangeait une décision de largeur (un plafond) et une
+taille d'icône.
+
+### Le défaut réel des badges : l'unité
+
+Quatre de ces colonnes étaient écrites en **pixels nus** — `44px`, `38px`,
+`20px` et `54px`, `18px` et `40px`. Le site sait agrandir le texte
+(`html.texte-agrandi` porte la taille racine à 115 %, `texte-tres-agrandi` à
+130 %). Une colonne en `px` ne bouge pas ; le numéro qu'elle porte, si. À 130 %,
+on garde 44 px pour un texte 30 % plus large.
+
+`rem` suit la taille racine. À 100 %, les deux écritures sont **identiques** :
+
+| Avant | Après | À 100 % | À 130 % |
+| --- | --- | ---: | ---: |
+| `44px` | `2.75rem` | 44 px | 57,2 px |
+| `38px` | `2.375rem` | 38 px | 49,4 px |
+| `20px` | `1.25rem` | 20 px | 26 px |
+| `54px` | `3.375rem` | 54 px | 70,2 px |
+| `18px` | `1.125rem` | 18 px | 23,4 px |
+| `40px` | `2.5rem` | 40 px | 52 px |
+| `42px` | `2.625rem` | 42 px | 54,6 px |
+| `36px` | `2.25rem` | 36 px | 46,8 px |
+
+Huit pistes réécrites dans sept règles, aucune capture par défaut qui change : c'est le seul
+changement de ce fil dont le rendu à 100 % est **rigoureusement identique** à
+l'ancien, et qui ne se voit qu'au rythme où la personne lit.
+
+### Le contrôle
+
+`modele-grilles.py --verifier` refuse désormais toute piste en `Npx` nu, dans
+les trois sources qui sont de nous : `assets/css/site.css`,
+`assets/css/anglais-aventure.css` (`.adventure-character-line`, `42px` puis
+`36px` sous 520 px) et `outils/construire-simulateur.py` (le panneau
+`.site-layout-choice`, `20px 54px`). Une piste écrite dans un `minmax(...)`
+n'est pas concernée : elle porte une décision de largeur, pas une taille
+d'icône.
+
+### Le plafond refusé, et la mesure qui change le refus
+
+`.learning-article-layout` est la seule grille à plafond. Le relevé dit
+maintenant, largeur par largeur :
+
+> la piste vaut 300 à 300 px sur 180 largeurs à deux colonnes — la borne basse
+> (230 px) n'est jamais atteinte
+
+Autrement dit, `minmax(230px, 300px)` **se comporte comme `300px`** partout où
+la grille a deux colonnes : la borne basse est un garde-fou que la cascade
+n'atteint jamais. Le refus ne porte donc pas sur le plafond lui-même. Il porte
+sur l'autre moitié du comportement : sous 760 px, la grille met ce panneau sur
+une piste `minmax(0,1fr)` et il prend **toute la largeur**. Un `flex` de base
+300 px resterait à 300 px : `flex-grow` ne peut pas dépendre du repli. Convertir
+demanderait un second comportement, pas une base.
+
+Ce refus est écrit dans `docs/rd/grilles-dynamiques.toml` (`[[grille_plafond]]`),
+et le contrôle vérifie qu'il a toujours un objet : si la feuille perd le
+plafond, la décision est refusée comme fausse.
+
+### Limites
+
+La feuille du moteur embarqué du simulateur vient de l'amont
+(`simulateur/PROVENANCE.json`) et n'a pas été touchée : ses pistes
+(`1fr 96px 74px auto` dans `.levier.compact`) restent en pixels, et ce contrôle
+ne les lit pas — il lit `construire-simulateur.py`, qui ne porte que nos règles.
+Aucun de ces changements n'a été regardé à 130 % dans un navigateur : la preuve
+est arithmétique (44 px = 2,75 × 16), pas visuelle.
