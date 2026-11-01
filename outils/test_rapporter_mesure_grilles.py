@@ -187,13 +187,22 @@ class TestRapporterMesureGrilles(unittest.TestCase):
             resume=True,
         )
         self.assertEqual(resultat.returncode, 0, resultat.stdout + resultat.stderr)
-        lignes = [ligne for ligne in resultat.stdout.splitlines() if ligne.startswith("RESUME")]
+        lignes = [
+            ligne
+            for ligne in resultat.stdout.splitlines()
+            if ligne.startswith("RESUME ") and not ligne.startswith("RESUME TOTAL")
+        ]
         self.assertEqual(len(lignes), 1, resultat.stdout)
         self.assertIn(".hero-grid", lignes[0])
         self.assertIn("index.html", lignes[0])
         self.assertIn("première à 761 px", lignes[0])
         self.assertIn("annoncé 2, vu 1", lignes[0])
         self.assertIn("élément 712 px", lignes[0])
+        # Le total, lui, doit égaler celui de la synthèse : deux modes qui
+        # compteraient différemment feraient croire à une mesure incomplète.
+        total = [ligne for ligne in resultat.stdout.splitlines() if ligne.startswith("RESUME TOTAL")]
+        self.assertEqual(len(total), 1, resultat.stdout)
+        self.assertIn("1 grille(s), 1 divergence(s) sur 2 point(s)", total[0])
 
     def test_rapport_sans_navigateur_refuse(self) -> None:
         resultat = executer(

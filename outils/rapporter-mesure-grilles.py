@@ -182,6 +182,17 @@ def principal(arguments: list[str] | None = None) -> int:
                 f"première à {premiere['largeur']} px (texte ×{premiere['echelle']:g}) : "
                 f"annoncé {premiere['attendu']}, vu {premiere['mesure']}{element}"
             )
+        # Le total est imprimé à part : un canal d'annotations qui ne garde que
+        # dix lignes doit pouvoir montrer qu'on lui en a coupé. Le 1er novembre
+        # 2026, le premier relevé publié annonçait 70 divergences et n'en nommait
+        # que 23 : GitHub plafonne les annotations d'une étape, et rien dans la
+        # sortie ne disait combien de lignes avaient été perdues.
+        print(
+            f"RESUME TOTAL {sum(1 for g in comparaison['grilles'] if g['divergences'])} "
+            f"grille(s), {comparaison['total'] - comparaison['conformes'] - len(comparaison['non_mesures'])} "
+            f"divergence(s) sur {comparaison['total']} point(s) annoncé(s), "
+            f"{len(comparaison['non_mesures'])} non mesuré(s)"
+        )
         return 0
 
     mode = "CONTRÔLE" if options.controler else "RELEVÉ (pas encore un contrôle)"

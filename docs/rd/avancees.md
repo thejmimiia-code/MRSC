@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 63 |
+| Avancées consignées | 64 |
 | Période couverte | du 2026-10-20 au 2026-11-01 |
-| Contrôles exécutables cités | 67 |
+| Contrôles exécutables cités | 68 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1477,6 +1477,30 @@ Initiatives liées : `optimisation-du-site`.
 **Limite — ce que cela ne prouve pas.** Le relevé ne voit pas une classe construite par une source qu'il ne lit pas, et il ne dit rien de l'utilité d'une classe qu'il trouve : une règle peut viser une classe présente et n'avoir aucun effet. Les six classes d'anglais-aventure.css construites à l'exécution restent indécidables, comptées mais non jugées. Les deux « proportion » qui restent ne sont pas converties : .learning-coverage-topic est une composition avec un enfant placé (grid-column:2), et .map-layout coûterait 212,9 px (78,8 %) d'écart de largeur de colonne.
 
 **Suite.** Instruire les six grilles « borne » — un plafond en pixels n'a pas d'équivalent direct en flex — puis les huit « contenu », dont le repli dépend du texte et qu'aucun modèle ne tranche sans navigateur.
+
+Initiatives liées : `optimisation-du-site`.
+
+### `conteneur-jamais-mesure` — Le conteneur du modèle était une constante, et le navigateur l'a dit
+
+*Consignée le 2026-11-01.*
+
+**Constat.** Le modèle des grilles ne calcule pas des colonnes dans l'abstrait : il les calcule dans un conteneur, et ce conteneur valait min(1160, largeur - 48) — 48 px de marge, partout, toujours. La première confrontation à un vrai navigateur (34 grilles, 743 points) a trouvé 70 points divergents sur 673 confirmés, et les largeurs d'éléments imprimées désignent trois causes : la feuille réduit la gouttière à 2rem sous 760 px (le conteneur réel est 16 px plus large que le modèle), la gouttière est en rem et suit donc la taille du texte (7,2 puis 14,4 px d'écart à 115 et 130 %), et une grille qui porte son propre remplissage donne moins que le conteneur à ses enfants (.learning-work-panel : 652 px de contenu pour 713 px d'élément à 761 px).
+
+**Ce que cela change.** La promesse « aucune largeur ne change de nombre de colonnes », portée par six grilles converties, est réfutée dans un navigateur. Pour les grilles dont le palier tombait à 760 px, elle est même démontrée irréalisable : à 760 px le conteneur vaut 728 px et exige une base supérieure à 333,6 px, à 761 px il vaut 713 px et exige une base inférieure à 326,06 px — l'intersection est vide, parce que le conteneur rétrécit de 15 px quand la fenêtre grandit d'un pixel. Aucun flex-basis ne peut produire un repli quand la place augmente. La promesse sera donc retirée du registre, pas adoucie, et le conteneur deviendra une fonction de la largeur et de la taille du texte, lue dans la feuille. Le relevé navigateur, lui, reste un relevé jusqu'à cette correction : il publie, il ne juge pas, et le dit.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/mesurer-grilles.cjs`
+- `outils/rapporter-mesure-grilles.py`
+- `docs/rd/formats-affichage.md`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --releve-json /tmp/releve.json et node outils/mesurer-grilles.cjs, puis python3 outils/rapporter-mesure-grilles.py --resume`
+
+**Limite — ce que cela ne prouve pas.** La mesure est celle d'un navigateur sans personne devant : elle compte des colonnes, elle ne dit rien de la lisibilité. Elle ne couvre que la présentation par défaut, pas les cinq autres où --content vaut 940 ou 1 480 px. Et les annotations de CI sont plafonnées à une dizaine par étape : le total est donc imprimé avant le détail et le workflow avoue le nombre de grilles coupées.
+
+**Suite.** Modéliser le conteneur (gouttière 3rem au-dessus de 760 px, 2rem à 760 et moins, multipliée par la taille du texte), puis retirer repli_avant_px des six grilles dont le palier était à 760 px : une promesse irréalisable se retire, elle ne s'adoucit pas. Le relevé ne devient un contrôle qu'après, et son premier passage en --controler devra donner zéro divergence.
 
 Initiatives liées : `optimisation-du-site`.
 

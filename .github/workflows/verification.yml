@@ -522,10 +522,22 @@ jobs:
             --rapport "$RUNNER_TEMP/graphismes/colonnes/rapport.json" --resume \
             >"$RUNNER_TEMP/graphismes/colonnes/resume.log" 2>&1 || true
           cat "$RUNNER_TEMP/graphismes/colonnes/resume.log"
-          grep -E '^RESUME' "$RUNNER_TEMP/graphismes/colonnes/resume.log" \
-            | head -n 40 | cut -c1-900 | while IFS= read -r ligne; do
+          # GitHub ne garde qu'une dizaine d'annotations par étape : la synthèse
+          # et le total passent donc avant le détail, sinon le nombre de grilles
+          # divergentes serait coupé sans que rien ne le dise.
+          grep -E '^RESUME TOTAL' "$RUNNER_TEMP/graphismes/colonnes/resume.log" \
+            | head -n 1 | cut -c1-900 | while IFS= read -r ligne; do
             echo "::warning title=Colonnes des grilles::$ligne"
           done
+          grep -E '^RESUME ' "$RUNNER_TEMP/graphismes/colonnes/resume.log" \
+            | grep -v '^RESUME TOTAL' | head -n 7 | cut -c1-900 | while IFS= read -r ligne; do
+            echo "::warning title=Colonnes des grilles::$ligne"
+          done
+          nombre=$(grep -c '^RESUME ' "$RUNNER_TEMP/graphismes/colonnes/resume.log" || true)
+          nombre=$((nombre > 0 ? nombre - 1 : 0))
+          if [ "$nombre" -gt 7 ]; then
+            echo "::warning title=Colonnes des grilles::… $nombre grilles divergentes au total, 7 nommées ici (plafond d'annotations) — détail dans l'artefact mesures-graphismes"
+          fi
           if [ "$comparaison" -ne 0 ]; then
             grep -E '^(Refusé|Impossible)' "$RUNNER_TEMP/graphismes/colonnes/comparaison.log" \
               | head -n 5 | cut -c1-900 | while IFS= read -r ligne; do

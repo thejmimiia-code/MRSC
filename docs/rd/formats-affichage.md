@@ -1813,3 +1813,53 @@ elle reçoit plus d'éléments — le relevé choisit la page où elle en reçoi
 plus, et le dit dans la prédiction. Enfin la comparaison reste celle d'un
 navigateur sans personne devant : elle compte des colonnes, elle ne dit pas si la
 page est lisible.
+
+## 28. Le conteneur n'a jamais été mesuré : une valeur fixe sous vingt-deux grilles (1er novembre 2026)
+
+Le modèle des grilles ne calcule pas les colonnes dans l'abstrait : il les calcule **dans un
+conteneur**. Ce conteneur valait, dans son code, une constante :
+
+> `conteneur(w) = min(1160, w − 48)`
+
+Autrement dit : 48 px de marge de chaque côté, partout, toujours. C'est vrai de `3rem` à
+taille de texte normale — et faux partout ailleurs. La première confrontation à un vrai
+navigateur (34 grilles, 743 points, `HeadlessChrome/153`) a trouvé **70 points divergents
+sur 673 confirmés**, et les largeurs d'éléments imprimées par le relevé désignent trois
+causes sans ambiguïté :
+
+| cause | ce que la feuille fait | ce que le modèle croyait | écart mesuré |
+| --- | --- | --- | --- |
+| gouttière réduite | `@media (max-width: 760px)` → `calc(100% - 2rem)` | 48 px à toute largeur | à 760 px : élément 728 px, modèle 712 px |
+| gouttière en `rem` | `3rem` suit la taille du texte | 48 px à 115 % et 130 % | conteneur réel plus étroit de 7,2 puis 14,4 px |
+| remplissage du panneau | `.learning-work-panel` : `clamp(1.5rem,4vw,2.6rem)` | le conteneur entier pour ses enfants | à 761 px : 652 px de contenu pour 713 px d'élément |
+
+### Une promesse qui ne peut pas être tenue
+
+Reproduire l'ancien repli de `.hero-grid` (une colonne à 760 px, deux à 761) demanderait,
+avec la vraie gouttière :
+
+- à 760 px, conteneur 728 px, écart `8vw` = 60,8 px : `2b + 60,8 > 728` → `b > 333,6` ;
+- à 761 px, conteneur 713 px, écart 60,88 px : `2b + 60,88 ≤ 713` → `b ≤ 326,06`.
+
+**L'intersection est vide.** Ce n'est pas un mauvais choix de base : entre 760 et 761 px le
+conteneur **rétrécit** de 15 px, et un `flex-basis` ne peut pas produire un repli quand la
+place disponible augmente. La phrase « le repli ne bouge pas » était donc, pour les six
+grilles dont le palier tombait à 760 px, une promesse irréalisable — vérifiée dans un modèle
+qui présumait le conteneur, donc incapable de la contredire.
+
+Le repli réel n'est plus 760 px : il est là où le contenu cesse de tenir. Pour `.hero-grid`,
+`651,84 + 0,08w > w − 32` donne **≈ 743 px**, et le navigateur le confirme — deux colonnes à
+760 px, là où la règle supprimée en imposait une.
+
+### Ce que ce relevé n'est pas
+
+Ce n'est pas un contrôle : il publie, il ne juge pas, et il le dit en première ligne. Le
+passer en contrôle avant d'avoir corrigé le conteneur ferait échouer la CI sur un défaut
+connu, nommé et déjà en cours de correction — ce qui n'apprendrait rien à personne.
+
+### Limites
+
+Le relevé ne couvre que la présentation par défaut : `--content` vaut 940 px en Lecture,
+1 480 px en Panorama, et ces valeurs ne sont pas mesurées. Il ne dit rien de la lisibilité :
+il compte des colonnes. Enfin les annotations de CI sont plafonnées à une dizaine par étape —
+le total est donc imprimé avant le détail, et le workflow avoue le nombre de grilles coupées.
