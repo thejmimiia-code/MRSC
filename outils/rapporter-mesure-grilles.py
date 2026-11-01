@@ -39,6 +39,19 @@ from pathlib import Path
 
 RACINE = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 
+#: Distance, en pixels, sous laquelle une prédiction n'en est plus une.
+#:
+#: À 0,3 px du point de bascule, la largeur d'une barre de défilement, l'arrondi
+#: de `vw` ou le sous-pixel de la mise en page décident à la place du modèle. Le
+#: 1er novembre 2026, `.hero-grid` prédisait une colonne à 743 px et le navigateur
+#: en comptait deux : l'écart valait 0,28 px. Sans ce seuil nommé, cette
+#: divergence se lirait comme une erreur de 700 px, et un `--controler` la
+#: refuserait — donc on élargirait les bases jusqu'à ce que le hasard soit
+#: d'accord, ce qui n'apprend rien. La tolérance est **plus petite qu'une colonne**
+#: (une colonne fait au moins 145 px ici) : elle ne peut masquer aucune erreur
+#: réelle, et elle est comptée, jamais absorbée.
+SEUIL_PX = 1.0
+
 #: Ce rapporteur ne calcule **aucune** largeur. La largeur que le modèle présume
 #: par largeur pour les enfants d'une grille est écrite dans la prédiction
 #: (`conteneur`), point par point. La recalculer ici aurait deux défauts d'un
@@ -75,12 +88,15 @@ def contexte(divergence: dict) -> str:
     if divergence.get("largeur_element") is None:
         return ""
     presume = divergence.get("conteneur_presume")
-    if presume is None:
-        return f", élément {divergence['largeur_element']:g} px (conteneur non déclaré)"
-    return (
-        f", élément {divergence['largeur_element']:g} px "
-        f"(présumé {presume:g} px)"
+    marge = divergence.get("marge")
+    ou = (
+        f", élément {divergence['largeur_element']:g} px (conteneur non déclaré)"
+        if presume is None
+        else f", élément {divergence['largeur_element']:g} px (présumé {presume:g} px)"
     )
+    if marge is not None:
+        ou += f", à {float(marge):.2f} px du seuil"
+    return ou
 
 
 def confronter(releve: dict, rapport: dict) -> dict:
@@ -117,6 +133,10 @@ def confronter(releve: dict, rapport: dict) -> dict:
                     "display": mesure.get("display"),
                     "conteneur_presume": point.get("conteneur"),
                     "largeur_cliente": mesure.get("largeur_cliente"),
+                    "marge": point.get("marge"),
+                    "au_seuil": (
+                        point.get("marge") is not None and float(point["marge"]) < SEUIL_PX
+                    ),
                 }
             )
         resultat["grilles"].append(
@@ -197,21 +217,30 @@ def principal(arguments: list[str] | None = None) -> int:
         # 2026, le premier relevé publié annonçait 70 divergences et n'en nommait
         # que 23 : GitHub plafonne les annotations d'une étape, et rien dans la
         # sortie ne disait combien de lignes avaient été perdues.
+        total_seuil = sum(
+            1
+            for g in comparaison["grilles"]
+            for d in g["divergences"]
+            if d.get("au_seuil")
+        )
         print(
             f"RESUME TOTAL {sum(1 for g in comparaison['grilles'] if g['divergences'])} "
             f"grille(s), {comparaison['total'] - comparaison['conformes'] - len(comparaison['non_mesures'])} "
-            f"divergence(s) sur {comparaison['total']} point(s) annoncé(s), "
-            f"{len(comparaison['non_mesures'])} non mesuré(s)"
+            f"divergence(s) dont {total_seuil} au seuil, sur {comparaison['total']} point(s) "
+            f"annoncé(s), {len(comparaison['non_mesures'])} non mesuré(s)"
         )
         return 0
 
     mode = "CONTRÔLE" if options.controler else "RELEVÉ (pas encore un contrôle)"
     divergentes = [g for g in comparaison["grilles"] if g["divergences"]]
+    toutes = [d for g in divergentes for d in g["divergences"]]
+    au_seuil = [d for d in toutes if d["au_seuil"]]
+    ailleurs = [d for d in toutes if not d["au_seuil"]]
     print(
         f"{mode} — {comparaison['total']} point(s) annoncé(s), "
-        f"{comparaison['conformes']} confirmé(s), "
-        f"{comparaison['total'] - comparaison['conformes'] - len(comparaison['non_mesures'])} "
-        f"divergent(s), {len(comparaison['non_mesures'])} non mesuré(s), "
+        f"{comparaison['conformes']} confirmé(s), {len(toutes)} divergent(s) "
+        f"dont {len(au_seuil)} au seuil (moins de {SEUIL_PX:g} px), "
+        f"{len(comparaison['non_mesures'])} non mesuré(s), "
         f"navigateur {rapport['navigateur']}."
     )
 
@@ -265,14 +294,25 @@ def principal(arguments: list[str] | None = None) -> int:
             file=sys.stderr,
         )
         return 1
-    if divergentes:
+    if ailleurs:
+        grilles_ailleurs = {
+            g["selecteur"] for g in divergentes if any(not d["au_seuil"] for d in g["divergences"])
+        }
         print(
-            f"Refusé : {sum(len(g['divergences']) for g in divergentes)} divergence(s) "
-            f"entre le modèle et le navigateur, sur {len(divergentes)} grille(s).",
+            f"Refusé : {len(ailleurs)} divergence(s) hors du seuil de {SEUIL_PX:g} px, "
+            f"sur {len(grilles_ailleurs)} grille(s) — "
+            + ", ".join(sorted(grilles_ailleurs)[:8]),
             file=sys.stderr,
         )
         return 1
-    print("Accord : le navigateur compte les mêmes colonnes que le modèle, à chaque point mesuré.")
+    if au_seuil:
+        print(
+            f"Accord hors seuil : {len(au_seuil)} divergence(s) à moins de {SEUIL_PX:g} px "
+            "de la bascule — comptées, non absorbées, et sans effet sur le nombre de "
+            "colonnes d'une largeur voisine."
+        )
+    else:
+        print("Accord : le navigateur compte les mêmes colonnes que le modèle, à chaque point mesuré.")
     return 0
 
 

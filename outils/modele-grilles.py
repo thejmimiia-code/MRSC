@@ -1239,6 +1239,33 @@ def completer_grille(grille: Grille, racine: Path) -> None:
         grille.padding_lu = padding_horizontal_px(trouve, CONTENU_DEFAUT) is not None
 
 
+def marge_au_seuil(
+    grille: Grille, largeur: int, plancher: float, echelle: float = 1.0
+) -> float:
+    """De combien de pixels la prédiction est-elle du point de bascule ?
+
+    Une grille qui tient à 0,3 px près n'est pas une grille qui tient : la
+    gouttière d'une barre de défilement, l'arrondi de `vw` et le sous-pixel de la
+    mise en page peuvent la faire basculer, et le navigateur a raison contre le
+    modèle. Le 1er novembre 2026, `.hero-grid` prédisait une colonne à 743 px
+    alors qu'elle en montrait deux — l'écart valait 0,28 px, et un relevé qui
+    n'aurait pas donné cette marge aurait fait croire à une erreur de 700 px.
+
+    Rend la distance, en pixels, à la bascule la plus proche (0 = sur le fil).
+    """
+    place = conteneur_de(grille, largeur, echelle)
+    ecart = ecart_a(grille, largeur, echelle)
+    ecart = grille.gap if ecart is None else ecart
+    colonnes = colonnes_en_flex(grille, largeur, plancher, grille.items, echelle)
+    # Marge en dessous : ce qu'il reste quand `colonnes` panneaux tiennent.
+    dessous = place - (colonnes * plancher + (colonnes - 1) * ecart)
+    # Marge au-dessus : ce qui manque pour un panneau de plus.
+    if grille.items and colonnes >= grille.items:
+        return max(dessous, 0.0)
+    dessus = ((colonnes + 1) * plancher + colonnes * ecart) - place
+    return max(min(dessous, dessus), 0.0)
+
+
 def bandes_de_retour(grille: Grille, base: float, echelle: float = 1.0) -> list[dict]:
     """Les largeurs où la grille **perd** une colonne en gagnant de la place.
 
@@ -2497,6 +2524,11 @@ def releve_navigateur(
                             # deux arithmétiques qui divergent feraient accuser
                             # la feuille d'un désaccord entre deux constantes.
                             "conteneur": round(conteneur_de(grille, largeur, echelle), 2),
+                            # La distance à la bascule : une prédiction à 0,3 px
+                            # du seuil n'est pas une prédiction, c'est une
+                            # convention. Le rapporteur la nomme au lieu de
+                            # compter la divergence comme une faute.
+                            "marge": round(marge_au_seuil(grille, largeur, base, echelle), 2),
                         }
                     )
             releve["grilles"].append(

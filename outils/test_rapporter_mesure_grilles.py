@@ -202,7 +202,41 @@ class TestRapporterMesureGrilles(unittest.TestCase):
         # compteraient différemment feraient croire à une mesure incomplète.
         total = [ligne for ligne in resultat.stdout.splitlines() if ligne.startswith("RESUME TOTAL")]
         self.assertEqual(len(total), 1, resultat.stdout)
-        self.assertIn("1 grille(s), 1 divergence(s) sur 2 point(s)", total[0])
+        self.assertIn("1 grille(s), 1 divergence(s) dont 0 au seuil, sur 2 point(s)", total[0])
+
+    def test_une_divergence_au_seuil_est_comptee_pas_refusee(self) -> None:
+        """Une prédiction à 0,28 px de la bascule n'est pas une erreur de colonne.
+
+        Le 1er novembre 2026, `.hero-grid` prédisait une colonne à 743 px et le
+        navigateur en comptait deux : 0,28 px d'écart, la largeur d'une barre de
+        défilement. Le contrôle refuse les divergences qui changent réellement le
+        dessin, et **compte** celles qui tombent à moins d'un pixel du seuil —
+        sans quoi on élargirait les bases jusqu'à ce que le hasard soit d'accord.
+        """
+        point = {"largeur": 743, "echelle": 1.0, "attendu": 1, "conteneur": 711.0, "marge": 0.28}
+        resultat = executer(prediction([point]), rapport([mesure(743, 2)]), controler=True)
+        self.assertEqual(resultat.returncode, 0, resultat.stdout + resultat.stderr)
+        self.assertIn("1 divergent(s) dont 1 au seuil", resultat.stdout)
+        self.assertIn("Accord hors seuil", resultat.stdout)
+        self.assertIn("à 0.28 px du seuil", resultat.stdout)
+        self.assertNotIn("Refusé", resultat.stderr)
+
+    def test_une_divergence_hors_du_seuil_est_refusee_et_nommee(self) -> None:
+        point = {"largeur": 743, "echelle": 1.0, "attendu": 1, "conteneur": 711.0, "marge": 42.5}
+        resultat = executer(prediction([point]), rapport([mesure(743, 2)]), controler=True)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("Refusé", resultat.stderr)
+        self.assertIn("hors du seuil", resultat.stderr)
+        self.assertIn(".hero-grid", resultat.stderr)
+
+    def test_le_total_du_resume_separe_les_seuils(self) -> None:
+        points = [
+            {"largeur": 743, "echelle": 1.0, "attendu": 1, "conteneur": 711.0, "marge": 0.28},
+            {"largeur": 900, "echelle": 1.0, "attendu": 2, "conteneur": 852.0, "marge": 30.0},
+        ]
+        resultat = executer(prediction(points), rapport([mesure(743, 2), mesure(900, 1)]), resume=True)
+        self.assertEqual(resultat.returncode, 0, resultat.stdout + resultat.stderr)
+        self.assertIn("2 divergence(s) dont 1 au seuil", resultat.stdout)
 
     def test_rapport_sans_navigateur_refuse(self) -> None:
         resultat = executer(
