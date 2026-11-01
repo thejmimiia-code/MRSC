@@ -949,3 +949,15 @@ controle = "python3 outils/test_modele_grilles.py && python3 outils/modele-grill
 limite = "Aucune mesure navigateur n'a été faite à 600 px : l'arithmétique prouve l'absence de débordement, pas la lisibilité de deux colonnes de 264 px. C'est la raison pour laquelle .participation-grid, dont le contenu est typographiquement plus lourd, reste retenu."
 suite = "Mesurer le panneau à 600 et 700 px dans un navigateur avant de convertir .hero-grid et .mission-grid, dont l'écart de largeur est trois fois plus grand (59 et 91 px)."
 initiatives = ["optimisation-du-site"]
+
+[[avancee]]
+id = "base-flex-en-em"
+date = 2026-10-31
+titre = "Faire suivre le repli d'une grille à la taille du texte, pas à celle de la fenêtre"
+constat = "Les conversions en flex-wrap gardaient le minimum déclaré comme base, ce qui créait une plage où deux colonnes apparaissaient sous 760 px, et laissait le repli dépendre uniquement de la largeur de la fenêtre. Une base en pixels ignore totalement le réglage de taille de texte, alors que le contenu, lui, grandit avec elle."
+changement = "modele-grilles.py --pistes propose désormais un plancher de compromis : la plus petite base qui reproduit le nombre de colonnes de la cascade à toutes les largeurs mesurées (325,64 px pour .hero-grid). .hero-grid est converti avec une base en em (20.4em), choisie au centième supérieur, et le registre déclare l'écriture et sa valeur en pixels pour que le contrôle recoupe les deux. À 130 %, la base passe de 326 à 424 px et le repli avance sans qu'aucune condition de largeur d'écran n'intervienne."
+preuves = ["outils/modele-grilles.py", "outils/test_modele_grilles.py", "docs/rd/grilles-dynamiques.toml", "assets/css/site.css", "docs/rd/formats-affichage.md"]
+controle = "python3 outils/test_modele_grilles.py && python3 outils/modele-grilles.py --verifier && python3 outils/compter-paliers.py"
+limite = "La reproduction est arithmétique : elle garantit le même nombre de colonnes, pas le même dessin — une colonne peut varier de 68,7 px (24,3 %) au lieu de 58,9 px (20,9 %). Le compromis est calculé sur la présentation par défaut (contenu 1 160 px) ; en Lecture, à 940 px, le repli avance et le modèle ne mesure pas cette présentation. Aucun rendu n'a été observé dans un navigateur."
+suite = "Appliquer la même méthode à .mission-grid (compromis 20.9em) et .learning-work-panel (21.3em), puis traiter à part .ai-feature-panel et .simulateur-promo-panel, pour lesquels aucune base ne reproduit la cascade — le relevé le dit désormais."
+initiatives = ["optimisation-du-site"]

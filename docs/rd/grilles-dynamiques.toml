@@ -282,3 +282,14 @@ ecart_max_px = 28.9
 ecart_part = 0.111
 presentation_repliee = ["lecture"]
 raison = "Panneau « Partager le site » de l'accueil : texte à gauche, boutons de partage à droite. Entre 600 et 760 px de fenêtre, deux colonnes de 264 px apparaissent là où le palier de 760 px en imposait une — c'est la grille qui demande 260 px par colonne, et le palier le lui refusait. Une colonne peut varier de 29 px (11 %) au plus sur l'ensemble du balayage."
+
+[[grille_flex]]
+selecteur = ".hero-grid"
+grille_avant = "minmax(0, 1.15fr) minmax(280px, .75fr)"
+gap_avant = "clamp(2.5rem, 8vw, 7rem)"
+plancher_expr = "20.4em"
+plancher_px = 326.4
+ecart_max_px = 68.7
+ecart_part = 0.243
+presentation_repliee = ["lecture"]
+raison = "Ouverture de l'accueil : texte à gauche, carte de repères à droite. Première base écrite en em : elle suit la taille du texte, donc le repli avance tout seul à 115 % et 130 %, ce qu'aucune condition de largeur d'écran ne fait. 20.4em (326,4 px) est la plus petite base qui reproduit exactement le repli d'avant — le nombre de colonnes ne change à aucune largeur — au prix d'un écart de largeur de colonne plus grand (68,7 px, 24,3 % au lieu de 58,9 px, 20,9 %). Deux règles de palier qui forçaient une colonne disparaissent, dont celle de .home-hero-civic .hero-grid."

@@ -635,10 +635,33 @@ html.contraste-renforce .site-status-note {
 .hero-grid {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, .75fr);
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: clamp(2.5rem, 8vw, 7rem);
+}
+/* Deux colonnes inégales, sans largeur d'écran (31 octobre 2026). La base est
+   écrite en `em` (20.4em = 326,4 px à taille de texte normale), et ce n'est pas
+   une coquetterie : elle **suit la taille du texte**. À 130 %, la base vaut
+   424 px et le repli avance donc tout seul — ce qu'une condition de largeur
+   d'écran ne sait pas faire, puisqu'elle ignore le réglage de la personne.
+   Pourquoi 20.4em plutôt que le minimum déclaré de 280 px : avec 280 px, deux
+   colonnes tenaient dès 592 px de fenêtre, alors que le palier de 760 px en
+   imposait une. `modele-grilles.py` a cherché la plus petite base qui reproduit
+   exactement le repli d'avant : 325,64 px. 20.4em en donne 326,4 ; le nombre de
+   colonnes ne change donc à **aucune** largeur, et les deux règles de palier
+   qui forçaient une colonne (dont celle de `.home-hero-civic .hero-grid`)
+   disparaissent. Ce que cela coûte, mesuré : une colonne peut varier de 68,7 px
+   (24,3 %) au plus au lieu de 58,9 px (20,9 %) ; la carte de droite s'élargit,
+   le texte de gauche se resserre, aux très grandes largeurs. */
+.hero-grid > :first-child {
+  flex: 1.15 1 20.4em;
+  min-width: 0;
+}
+
+.hero-grid > :last-child {
+  flex: .75 1 20.4em;
+  min-width: 0;
 }
 
 .eyebrow {
@@ -1618,7 +1641,6 @@ html.contraste-renforce .resource-scope-note {
   /* `.contact-grid` ne figure plus ici : sa règle de base est déjà une seule
      colonne, la déclaration ne décidait rien. Trouvé le 31 octobre 2026 en
      comparant, grille par grille, ce que chaque palier change réellement. */
-  .hero-grid,
   .mission-grid,
   .participation-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -3999,7 +4021,6 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-join-actions .button { white-space: nowrap; }
 html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,.home-share-panel,.home-hero-facts > div) { border-color: currentColor; background: var(--surface); box-shadow: none; }
 @media (max-width: 760px) {
-  .home-hero-civic .hero-grid { grid-template-columns: minmax(0,1fr); }
   .home-hero-aside { max-width: none; }
   .home-join-actions { justify-items: start; }
   .home-hero-visual { margin-inline: auto; }
@@ -4210,7 +4231,7 @@ html.contraste-renforce .layout-choice.is-selected { background: var(--blue-soft
 /* Lecture : largeur de lecture maîtrisée et composition en colonne. */
 html[data-layout="lecture"] { --content: 940px; }
 html[data-layout="lecture"] main :is(
-  .hero-grid,.mission-grid,.participation-grid,.join-panel,.document-grid,.link-grid,.contact-grid,.map-layout,
+  .mission-grid,.participation-grid,.join-panel,.document-grid,.link-grid,.contact-grid,.map-layout,
   .home-action-grid,.home-voice-grid,
   .ai-feature-panel,.ai-metric-grid,.ai-forms-grid,.ai-balance-grid,.ai-lives-grid,
   .ai-questions-layout,.ai-path-steps,.ai-cta-panel,.principle-grid,.trace-panel,
@@ -4228,7 +4249,7 @@ html[data-layout="lecture"] .site-footer .footer-grid { grid-template-columns: m
 /* « Lecture » composait cette grille en une colonne par `grid-template-columns`.
    Depuis que `.ai-hero-grid` est en `flex-wrap`, cette déclaration n'aurait plus
    d'effet : c'est la base des deux panneaux qui doit passer à 100 %. */
-html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel, .ai-path-panel, .home-share-panel) > * { flex-basis: 100%; }
+html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel, .ai-path-panel, .home-share-panel, .hero-grid) > * { flex-basis: 100%; }
 html[data-layout="lecture"] main :is(.learning-lesson-article,.learning-lesson-aside,.ai-section-intro,.ai-fraud-evidence,.ai-hero-copy) {
   width: min(100%,78ch);
   margin-inline: auto;

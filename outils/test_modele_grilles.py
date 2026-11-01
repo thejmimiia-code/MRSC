@@ -355,6 +355,49 @@ class TestModeleGrilles(unittest.TestCase):
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("sans effet sur un conteneur flex", resultat.stderr)
 
+    def test_une_base_en_em_remplacee_par_des_pixels_est_refusee(self) -> None:
+        """La base de `.hero-grid` est en `em` parce qu'elle doit suivre le texte.
+
+        Écrite en pixels, elle ne bougerait plus quand la personne agrandit le
+        texte : le contrôle doit refuser la substitution, pas seulement vérifier
+        qu'un `flex` existe.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie, FEUILLE, "flex: 1.15 1 20.4em;", "flex: 1.15 1 326px;"
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("flex: 1.15 1 20.4em", resultat.stderr)
+
+    def test_une_base_en_em_dont_les_pixels_ne_correspondent_pas_est_refusee(self) -> None:
+        """`20.4em` vaut 326,4 px : un registre qui dit 300 px ment sur le repli."""
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(copie, REGISTRE, "plancher_px = 326.4", "plancher_px = 300")
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("vaut 326.4 px", resultat.stderr)
+
+    def test_le_plancher_de_compromis_reproduit_le_repli(self) -> None:
+        """Le compromis n'est pas un chiffre proposé : il est vérifié sur tout le balayage."""
+        grille = self.grille_avec_palier(
+            "minmax(0, 1.15fr) minmax(280px, .75fr)", 760, "minmax(0, 1fr)"
+        )
+        compromis = self.modele.plancher_de_compromis(grille, pas=2)
+        self.assertIsNotNone(compromis)
+        self.assertEqual(self.modele.bandes_de_changement(grille, compromis["px"]), [])
+        # Et la base déclarée, elle, laisse bien une plage : sans quoi le
+        # compromis ne prouverait rien.
+        self.assertNotEqual(self.modele.bandes_de_changement(grille, 280), [])
+        # L'écriture en `em` est arrondie au-dessus, jamais en dessous : sinon
+        # la base écrite serait plus petite que celle qui vient d'être vérifiée.
+        ecrit = compromis["em"] * 16
+        self.assertGreaterEqual(ecrit, compromis["px"])
+        self.assertLess(ecrit - compromis["px"], 0.5)
+        self.assertEqual(self.modele.bandes_de_changement(grille, ecrit), [])
+
     def test_un_zero_de_plus_ne_change_pas_le_rapport(self) -> None:
         """`flex: .8` et `flex: 0.8` sont la même déclaration.
 

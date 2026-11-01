@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 55 |
+| Avancées consignées | 56 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
 | Contrôles exécutables cités | 62 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1065,6 +1065,30 @@ Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 **Limite — ce que cela ne prouve pas.** La bande est calculée sur la présentation par défaut (contenu de 1 160 px) ; en Lecture (940 px) et en Panorama (1 480 px) elle se décale, et le modèle ne mesure pas ces présentations. Elle suppose aussi un contenu de largeur fixe : un titre long ou une image à ratio peuvent changer le repli réel, ce qu'aucun calcul hors navigateur ne tranche.
 
 **Suite.** Mesurer dans le navigateur le rendu de .ai-path-panel dans la bande 720–1 000 px, puis traiter .home-share-panel dont la bande traverse le palier de 760 px, ce qui demande de savoir ce que ce palier porte encore.
+
+Initiatives liées : `optimisation-du-site`.
+
+### `base-flex-en-em` — Faire suivre le repli d'une grille à la taille du texte, pas à celle de la fenêtre
+
+*Consignée le 2026-10-31.*
+
+**Constat.** Les conversions en flex-wrap gardaient le minimum déclaré comme base, ce qui créait une plage où deux colonnes apparaissaient sous 760 px, et laissait le repli dépendre uniquement de la largeur de la fenêtre. Une base en pixels ignore totalement le réglage de taille de texte, alors que le contenu, lui, grandit avec elle.
+
+**Ce que cela change.** modele-grilles.py --pistes propose désormais un plancher de compromis : la plus petite base qui reproduit le nombre de colonnes de la cascade à toutes les largeurs mesurées (325,64 px pour .hero-grid). .hero-grid est converti avec une base en em (20.4em), choisie au centième supérieur, et le registre déclare l'écriture et sa valeur en pixels pour que le contrôle recoupe les deux. À 130 %, la base passe de 326 à 424 px et le repli avance sans qu'aucune condition de largeur d'écran n'intervienne.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/grilles-dynamiques.toml`
+- `assets/css/site.css`
+- `docs/rd/formats-affichage.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_modele_grilles.py && python3 outils/modele-grilles.py --verifier && python3 outils/compter-paliers.py`
+
+**Limite — ce que cela ne prouve pas.** La reproduction est arithmétique : elle garantit le même nombre de colonnes, pas le même dessin — une colonne peut varier de 68,7 px (24,3 %) au lieu de 58,9 px (20,9 %). Le compromis est calculé sur la présentation par défaut (contenu 1 160 px) ; en Lecture, à 940 px, le repli avance et le modèle ne mesure pas cette présentation. Aucun rendu n'a été observé dans un navigateur.
+
+**Suite.** Appliquer la même méthode à .mission-grid (compromis 20.9em) et .learning-work-panel (21.3em), puis traiter à part .ai-feature-panel et .simulateur-promo-panel, pour lesquels aucune base ne reproduit la cascade — le relevé le dit désormais.
 
 Initiatives liées : `optimisation-du-site`.
 
