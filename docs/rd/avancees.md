@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 54 |
+| Avancées consignées | 55 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
 | Contrôles exécutables cités | 62 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1113,6 +1113,30 @@ Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 **Suite.** Convertir les grilles « proportion » dont l'écart tient sous 18 largeurs, une par une et relevé en main, en commençant par `.ai-hero-grid` (4 largeurs), puis vérifier dans un navigateur que le rapport entre colonnes est conservé.
 
 Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
+
+### `plage-de-deux-colonnes-assumee` — Accepter une plage de deux colonnes quand le palier contredisait la grille
+
+*Consignée le 2026-10-31.*
+
+**Constat.** .home-share-panel demandait minmax(260px,.8fr) : deux colonnes tiennent dès 592 px de fenêtre, mais un palier de 760 px en imposait une seule. La valeur fixe refusait ce que l'arithmétique de la grille autorisait, et le compteur de paliers la comptait comme une dette sans dire qu'elle contredisait le contenu.
+
+**Ce que cela change.** Le panneau passe en flex-wrap (260 px de base, rapport 1 / 0,8). Entre 600 et 760 px, il montre deux colonnes de 264 px : la seule plage qui change, assumée et bornée par trois vérifications écrites (flex-wrap ne déborde pas, les boutons tiennent dans 264 px, le texte est plafonné à 60ch). Le registre des paliers passe de 191 à 190 règles.
+
+**Preuves dans le dépôt :**
+
+- `assets/css/site.css`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/paliers-affichage.toml`
+- `docs/rd/formats-affichage.md`
+- `outils/test_modele_grilles.py`
+
+**Contrôle qui la maintient :** `python3 outils/test_modele_grilles.py && python3 outils/modele-grilles.py --verifier && python3 outils/compter-paliers.py`
+
+**Limite — ce que cela ne prouve pas.** Aucune mesure navigateur n'a été faite à 600 px : l'arithmétique prouve l'absence de débordement, pas la lisibilité de deux colonnes de 264 px. C'est la raison pour laquelle .participation-grid, dont le contenu est typographiquement plus lourd, reste retenu.
+
+**Suite.** Mesurer le panneau à 600 et 700 px dans un navigateur avant de convertir .hero-grid et .mission-grid, dont l'écart de largeur est trois fois plus grand (59 et 91 px).
+
+Initiatives liées : `optimisation-du-site`.
 
 ### `un-conteneur-flex-ne-lit-pas-les-declarations-de-grille` — Un conteneur flex ne lit pas les déclarations de grille — et le compteur les comptait
 

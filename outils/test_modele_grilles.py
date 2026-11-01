@@ -355,6 +355,34 @@ class TestModeleGrilles(unittest.TestCase):
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("sans effet sur un conteneur flex", resultat.stderr)
 
+    def test_un_zero_de_plus_ne_change_pas_le_rapport(self) -> None:
+        """`flex: .8` et `flex: 0.8` sont la même déclaration.
+
+        Le contrôle cherchait la chaîne exacte : la feuille écrit `.95fr`
+        depuis toujours, et la première conversion qui a écrit `.8` s'est fait
+        refuser pour une faute de forme. La tolérance ne doit pas devenir une
+        indifférence : le cas suivant vérifie qu'un chiffre de plus ne passe pas.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie, FEUILLE, ".home-share-panel > :last-child {\n  flex: .8 1 260px;",
+                ".home-share-panel > :last-child {\n  flex: 0.8 1 260px;",
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 0, resultat.stderr)
+
+    def test_un_rapport_de_flex_falsifie_est_toujours_refuse(self) -> None:
+        """La tolérance porte sur l'écriture, jamais sur la valeur."""
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie, FEUILLE, "flex: .8 1 260px;", "flex: 1.8 1 260px;",
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("aucune règle n'écrit `flex: 0.8 1 260px`", resultat.stderr)
+
     def test_un_ecart_de_flex_recopie_a_la_main_est_refuse(self) -> None:
         """Le registre déclare l'écart qu'a coûté la conversion ; le contrôle le recalcule."""
         with tempfile.TemporaryDirectory() as dossier:

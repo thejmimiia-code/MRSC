@@ -1234,6 +1234,16 @@ def flex_attendu(valeur: str) -> list[str]:
     return attendus
 
 
+def _sans_zero_inutile(corps: str) -> str:
+    """`.8` et `0.8` sont la même déclaration : la comparaison ne doit pas en dépendre.
+
+    Le contrôle cherchait la chaîne exacte `flex: 0.8 1 260px` là où la feuille
+    écrivait `flex: .8 1 260px` — une faute de forme, pas de fond. La feuille
+    écrit `.95fr` depuis toujours ; le contrôle apprend la même tolérance.
+    """
+    return re.sub(r"(?<![\d.])\.(\d)", r"0.\1", corps)
+
+
 def verifier_flex(racine: Path, registre: dict) -> list[str]:
     """Contrôle les grilles converties en `flex-wrap`.
 
@@ -1290,7 +1300,7 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
             trouve = any(
                 selecteurs
                 and any(s.startswith(selecteur) for s in selecteurs)
-                and re.sub(r"\s+", " ", corps).find(f"flex: {attendu}") >= 0
+                and f"flex: {attendu}" in _sans_zero_inutile(re.sub(r"\s+", " ", corps))
                 for selecteurs, corps, _, _, _ in regles
             )
             if not trouve:

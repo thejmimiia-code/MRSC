@@ -273,3 +273,12 @@ ecart_max_px = 32
 ecart_part = 0.111
 presentation_repliee = ["lecture"]
 raison = "Panneau « Comprendre. Débattre. Décider. » de la page IA : méthode à gauche, cinq étapes à droite. Le palier de 1 000 px ne portait que cette grille et disparaît en entier (37 blocs, 191 règles). Coût mesuré, et c'est la première fois qu'on le lit en plage : de 720 à 1 000 px de fenêtre, une colonne devient deux ; ailleurs rien. Une colonne peut varier de 32 px (7,6 %) au plus."
+
+[[grille_flex]]
+selecteur = ".home-share-panel"
+grille_avant = "minmax(0,1fr) minmax(260px,.8fr)"
+gap_avant = "1.5rem"
+ecart_max_px = 28.9
+ecart_part = 0.111
+presentation_repliee = ["lecture"]
+raison = "Panneau « Partager le site » de l'accueil : texte à gauche, boutons de partage à droite. Entre 600 et 760 px de fenêtre, deux colonnes de 264 px apparaissent là où le palier de 760 px en imposait une — c'est la grille qui demande 260 px par colonne, et le palier le lui refusait. Une colonne peut varier de 29 px (11 %) au plus sur l'ensemble du balayage."

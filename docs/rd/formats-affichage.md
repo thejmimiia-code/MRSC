@@ -1396,3 +1396,32 @@ Décisions de la journée, écrites pour ne pas être reprises au jugé :
 Limites : la bande est calculée sur la présentation par défaut (`--content`
 1 160 px). En Lecture (940 px) et en Panorama (1 480 px) elle se décale, et le
 modèle ne les mesure pas.
+
+## 21. Quatrième grille inégale : accepter une plage au lieu de la supprimer (31 octobre 2026)
+
+`.home-share-panel` (accueil, « Partager le site ») passe en `flex-wrap` :
+rapport 1 / 0,8 porté par le `fr`, 260 px de base par colonne. Sa règle de repli
+vivait dans le bloc `@media (max-width: 760px)` parmi cinq autres : le bloc reste,
+il perd une règle (191 → 190).
+
+**C'est la première conversion qui crée une plage au lieu d'en supprimer une.**
+Entre 600 et 760 px de fenêtre, le panneau montre deux colonnes de 264 px là où
+le palier imposait une colonne. Ce n'est pas un compromis subi : `minmax(260px,
+.8fr)` demande 260 px par colonne, et deux telles colonnes tiennent dès 592 px de
+fenêtre. Le palier refusait ce que la grille elle-même autorisait — une valeur
+fixe contre l'arithmétique du contenu.
+
+Ce qui a été vérifié avant d'accepter :
+
+- **pas de débordement possible** : `flex-wrap` replie au lieu de déborder ;
+- **les boutons tiennent** : `.home-share-actions` est déjà en `flex-wrap`, et le
+  plus long libellé (« Envoyer par courriel ») mesure ~190 px avec son
+  remplissage, pour 264 px de colonne ;
+- **le texte ne s'étire pas** : `max-width: 60ch` sur le paragraphe, donc il se
+  replie au lieu d'étirer la colonne.
+
+Ce qui reste non prouvé : personne n'a vu ce panneau à 600 px dans un navigateur.
+L'arithmétique dit « pas de débordement », pas « cela se lit bien ». C'est la
+limite qui avait fait **retenir** `.participation-grid`, et la différence tient au
+contenu : une carte de citation à 25,6 px de corps dans 229 px de large, contre
+deux paragraphes de 0,9 rem et deux boutons.
