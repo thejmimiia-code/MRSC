@@ -39,17 +39,14 @@ from pathlib import Path
 
 RACINE = Path(os.environ.get("MRSC_RACINE") or Path(__file__).resolve().parent.parent).resolve()
 
-#: Contenu que le modèle présume à la largeur d'une fenêtre, pour dire si
-#: l'élément mesuré disposait vraiment de cette place. Recopié de
-#: `modele-grilles.py` (`conteneur`) à dessein : ce rapporteur ne doit pas
-#: dépendre du module qu'il contrôle, sans quoi une erreur du module deviendrait
-#: une erreur de mesure. Un écart entre les deux constantes est visible ici.
-CONTENU_DEFAUT = 1160
-GARNITURE_LATERALE = 48
-
-
-def conteneur(largeur: int) -> float:
-    return min(CONTENU_DEFAUT, largeur - GARNITURE_LATERALE)
+#: Ce rapporteur ne calcule **aucune** largeur. La largeur que le modèle présume
+#: par largeur pour les enfants d'une grille est écrite dans la prédiction
+#: (`conteneur`), point par point. La recalculer ici aurait deux défauts d'un
+#: coup : deux arithmétiques capables de diverger, et une accusation portée
+#: contre la feuille pour un désaccord entre deux constantes. Le 1er novembre
+#: 2026, cette valeur valait 48 px de gouttière partout, alors que la feuille en
+#: écrit 32 sous 760 px : c'est précisément l'erreur qu'il fallait voir, pas
+#: reproduire.
 
 
 class SourceIllisible(Exception):
@@ -66,6 +63,24 @@ def lire(chemin: Path, quoi: str) -> dict:
     if not isinstance(contenu, dict):
         raise SourceIllisible(f"{quoi} n'est pas un objet JSON : {chemin}")
     return contenu
+
+
+def contexte(divergence: dict) -> str:
+    """« , élément 728 px (présumé 712 px) » — ou rien quand rien n'est mesuré.
+
+    Deux largeurs différentes sous le même nom feraient accuser la feuille d'un
+    artefact du navigateur. Quand la prédiction ne porte pas de conteneur, le
+    rapport dit « non déclaré » plutôt que de laisser croire à un accord.
+    """
+    if divergence.get("largeur_element") is None:
+        return ""
+    presume = divergence.get("conteneur_presume")
+    if presume is None:
+        return f", élément {divergence['largeur_element']:g} px (conteneur non déclaré)"
+    return (
+        f", élément {divergence['largeur_element']:g} px "
+        f"(présumé {presume:g} px)"
+    )
 
 
 def confronter(releve: dict, rapport: dict) -> dict:
@@ -100,7 +115,7 @@ def confronter(releve: dict, rapport: dict) -> dict:
                     "mesure": mesure["colonnes"],
                     "largeur_element": mesure.get("largeur_element"),
                     "display": mesure.get("display"),
-                    "conteneur_presume": round(conteneur(point.get("largeur", 0)), 2),
+                    "conteneur_presume": point.get("conteneur"),
                     "largeur_cliente": mesure.get("largeur_cliente"),
                 }
             )
@@ -170,12 +185,7 @@ def principal(arguments: list[str] | None = None) -> int:
             if not grille["divergences"]:
                 continue
             premiere = grille["divergences"][0]
-            element = (
-                ""
-                if premiere["largeur_element"] is None
-                else f", élément {premiere['largeur_element']:g} px (présumé "
-                f"{premiere['conteneur_presume']:g} px)"
-            )
+            element = contexte(premiere)
             print(
                 f"RESUME {grille['selecteur']} ({grille['page']}) : "
                 f"{len(grille['divergences'])} divergence(s) sur {grille['points']} point(s) · "
@@ -213,14 +223,7 @@ def principal(arguments: list[str] | None = None) -> int:
             f"{len(grille['divergences'])} divergence(s) sur {grille['points']} point(s)"
         )
         for divergence in grille["divergences"][:8]:
-            indice = (
-                ""
-                if divergence["largeur_element"] is None
-                else (
-                    f" · élément {divergence['largeur_element']:g} px, "
-                    f"conteneur présumé {divergence['conteneur_presume']:g} px"
-                )
-            )
+            indice = contexte(divergence)
             print(
                 f"  à {divergence['largeur']} px (texte ×{divergence['echelle']:g}) : "
                 f"le modèle annonce {divergence['attendu']} colonne(s), "

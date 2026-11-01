@@ -28,8 +28,8 @@ Usage :
 
 from __future__ import annotations
 
-import importlib.util
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -161,12 +161,12 @@ class TestRapporterMesureGrilles(unittest.TestCase):
     def test_la_largeur_de_l_element_est_imprimee(self) -> None:
         """La première cause d'un écart est le remplissage du panneau, pas la feuille."""
         resultat = executer(
-            prediction([{"largeur": 761, "echelle": 1.0, "attendu": 2}]),
+            prediction([{"largeur": 761, "echelle": 1.0, "attendu": 2, "conteneur": 713.0}]),
             rapport([mesure(761, 1, largeur_element=640.0)]),
         )
         self.assertEqual(resultat.returncode, 0, resultat.stdout + resultat.stderr)
         self.assertIn("élément 640 px", resultat.stdout)
-        self.assertIn("conteneur présumé 713 px", resultat.stdout)
+        self.assertIn("(présumé 713 px)", resultat.stdout)
 
     def test_le_resume_tient_sur_une_ligne_par_grille(self) -> None:
         """Une annotation de CI ne garde que quelques lignes, et doit se lire seule.
@@ -223,31 +223,47 @@ class TestRapporterMesureGrilles(unittest.TestCase):
         self.assertIn("illisible", illisible.stderr)
         self.assertNotIn("Traceback", illisible.stderr)
 
-    def test_les_constantes_du_modele_sont_les_memes(self) -> None:
-        """Le rapporteur ne doit pas juger avec une autre arithmétique que le modèle.
+    def test_le_conteneur_vient_de_la_prediction(self) -> None:
+        """Le rapporteur ne recalcule aucune largeur : il lit celle du modèle.
 
-        Il recopie `conteneur` pour ne pas dépendre du module qu'il contrôle ;
-        encore faut-il que la copie soit fidèle. Le jour où le modèle changera sa
-        largeur de contenu, ce test le dira — plutôt que de laisser le rapporteur
-        accuser la feuille d'un désaccord entre deux constantes.
+        Le 1er novembre 2026, le rapporteur présumait lui aussi 48 px de gouttière,
+        et aurait donc validé une prédiction fausse en la comparant à sa propre
+        erreur. La largeur présumée est désormais écrite point par point dans la
+        prédiction ; ce banc vérifie qu'elle est bien celle qui s'affiche, et
+        qu'une prédiction sans conteneur est dite « non déclarée » au lieu d'être
+        comblée par une valeur maison.
         """
-        specification = importlib.util.spec_from_file_location(
-            "rapporter_mesure_grilles", RACINE / "outils" / OUTIL
+        points = [{"largeur": 761, "echelle": 1.0, "attendu": 2, "conteneur": 713.0}]
+        resultat = executer(
+            prediction(points), rapport([mesure(761, 1, largeur_element=713.0)])
         )
-        rapporteur = importlib.util.module_from_spec(specification)
-        specification.loader.exec_module(rapporteur)
-        modele = importlib.util.spec_from_file_location("modele_grilles", RACINE / "outils" / MODELE)
-        module = importlib.util.module_from_spec(modele)
-        # `modele-grilles.py` déclare des `dataclass` : leur création relit
-        # `sys.modules[cls.__module__]`, qui n'existe pas tant que le module n'y
-        # est pas inscrit. Sans cette ligne, le banc échoue sur une
-        # `AttributeError` sans rapport avec ce qu'il éprouve.
-        sys.modules["modele_grilles"] = module
-        modele.loader.exec_module(module)
-        self.assertEqual(rapporteur.CONTENU_DEFAUT, module.CONTENU_DEFAUT)
-        self.assertEqual(rapporteur.GARNITURE_LATERALE, module.GARNITURE_LATERALE)
-        for largeur in (240, 760, 1160, 2560):
-            self.assertEqual(rapporteur.conteneur(largeur), module.conteneur(largeur))
+        self.assertEqual(resultat.returncode, 0, resultat.stdout + resultat.stderr)
+        self.assertIn("(présumé 713 px)", resultat.stdout)
+
+        sans = [{"largeur": 761, "echelle": 1.0, "attendu": 2}]
+        resultat = executer(prediction(sans), rapport([mesure(761, 1, largeur_element=713.0)]))
+        self.assertEqual(resultat.returncode, 0, resultat.stdout + resultat.stderr)
+        self.assertIn("conteneur non déclaré", resultat.stdout)
+
+    def test_le_rapporteur_n_importe_pas_le_modele(self) -> None:
+        """Il ne doit pas dépendre du module qu'il contrôle.
+
+        Un rapporteur qui importerait `modele-grilles.py` hériterait de ses
+        erreurs : une faute de calcul du modèle deviendrait un accord parfait.
+        Le banc le lit donc : le fichier ne doit citer ni `import` du modèle, ni
+        constante de largeur de contenu.
+        """
+        texte = (RACINE / "outils" / OUTIL).read_text(encoding="utf-8")
+        code = "\n".join(
+            ligne for ligne in texte.splitlines() if not ligne.lstrip().startswith("#")
+        )
+        self.assertIsNone(
+            re.search(r"^\s*(?:import|from)\s+modele", code, flags=re.M),
+            "le rapporteur importe le modèle qu'il contrôle",
+        )
+        self.assertNotIn("spec_from_file_location", code)
+        self.assertNotIn("GARNITURE_LATERALE", code)
+        self.assertNotIn("CONTENU_DEFAUT", code)
 
 
 if __name__ == "__main__":
