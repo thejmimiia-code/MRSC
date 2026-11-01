@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 53 |
+| Avancées consignées | 54 |
 | Période couverte | du 2026-10-20 au 2026-10-31 |
 | Contrôles exécutables cités | 62 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1043,6 +1043,30 @@ Initiatives liées : `optimisation-du-site`, `documentation-rd-eva`.
 **Suite.** Décider, mesure en main, si les présentations choisies par l'utilisateur relèvent de la même règle dynamique ou d'un choix explicite qui a le droit d'être fixe.
 
 Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
+
+### `bande-de-changement-des-grilles` — Lire où une conversion change les colonnes, pas seulement combien de largeurs
+
+*Consignée le 2026-10-31.*
+
+**Constat.** Le relevé des grilles à pistes inégales donnait un compte de largeurs (« 29 sur 233 diffèrent de la cascade ») sans dire lesquelles. Deux grilles au compte voisin, .participation-grid (13) et .ai-path-panel (29), cachaient donc des conséquences opposées : la seconde passait d'une à deux colonnes sur toute la plage 720–1 000 px, la première restait à deux colonnes et ne changeait que des largeurs.
+
+**Ce que cela change.** modele-grilles.py --pistes imprime la bande de largeurs où le nombre de colonnes change, et de combien, en réutilisant la règle de calcul du nombre de colonnes en flex (extraite en colonnes_en_flex, une seule fois). La décision de convertir .ai-path-panel et de retenir .participation-grid est écrite, avec sa bande, dans le journal et dans formats-affichage.md § 20.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/journal.md`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/grilles-dynamiques.toml`
+
+**Contrôle qui la maintient :** `python3 outils/test_modele_grilles.py && python3 outils/modele-grilles.py --verifier && python3 outils/compter-paliers.py`
+
+**Limite — ce que cela ne prouve pas.** La bande est calculée sur la présentation par défaut (contenu de 1 160 px) ; en Lecture (940 px) et en Panorama (1 480 px) elle se décale, et le modèle ne mesure pas ces présentations. Elle suppose aussi un contenu de largeur fixe : un titre long ou une image à ratio peuvent changer le repli réel, ce qu'aucun calcul hors navigateur ne tranche.
+
+**Suite.** Mesurer dans le navigateur le rendu de .ai-path-panel dans la bande 720–1 000 px, puis traiter .home-share-panel dont la bande traverse le palier de 760 px, ce qui demande de savoir ce que ce palier porte encore.
+
+Initiatives liées : `optimisation-du-site`.
 
 ### `la-premiere-grille-a-pistes-inegales-quitte-son-palier` — La première grille à pistes inégales quitte son palier, et une présentation ne se replie plus dans le vide
 

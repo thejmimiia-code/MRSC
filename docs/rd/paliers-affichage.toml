@@ -20,8 +20,8 @@
 date = 2026-10-31
 feuille = "assets/css/site.css"
 condition_total = 17
-bloc_total = 41
-regles_total = 205
+bloc_total = 37
+regles_total = 191
 
 # Baisse datée du 31 octobre 2026 : 66 blocs → 62, puis 41 blocs de format.
 # Quatre blocs ont disparu parce que quatre grilles (`.principle-grid`,
@@ -30,6 +30,13 @@ regles_total = 205
 # `(max-width: 1000px)` passe de 6 à 3 blocs, `(max-width: 520px)` de 9 à 8.
 # La preuve n'est pas ce commentaire : c'est `outils/modele-grilles.py`, qui
 # compare les deux cascades largeur par largeur et trouve un écart nul.
+#
+# Troisième vague, même jour : `.ai-path-panel` (page IA) en `flex-wrap`. Son
+# bloc `(max-width: 1000px)` ne portait qu'elle et disparaît en entier : le
+# compteur passe de 38 blocs à 37 et de 192 règles à 191. La preuve du coût est
+# nouvelle et se lit en clair : `modele-grilles.py --pistes` donne la **plage**
+# où le nombre de colonnes change (720–1 000 px : une colonne devient deux),
+# et pas seulement le nombre de largeurs concernées.
 #
 # Deuxième vague, même jour : huit grilles de plus quittent leurs paliers
 # (repères et formulaires de la page IA, domaines de vie, catalogue, niveaux et
@@ -61,9 +68,9 @@ decision = "dette"
 [[condition]]
 condition = "(max-width: 1000px)"
 classe = "format"
-occurrences = 3
-regles = 5
-presume = "Sous 1000 px, les grilles de trois ou quatre cartes passent à deux colonnes. Quatre grilles en sont sorties le 31 octobre 2026 ; il en reste trois blocs — le panneau de la page IA, la page du simulateur et la leçon d'apprentissage — dont les règles voisines (hauteur d'ancrage, alignement) tiennent le bloc en place, pas la largeur."
+occurrences = 2
+regles = 4
+presume = "Sous 1000 px, les grilles de trois ou quatre cartes passent à deux colonnes. Cinq grilles en sont sorties le 31 octobre 2026 — la dernière étant `.ai-path-panel`, dont le bloc ne portait qu'elle ; il en reste deux blocs, la page du simulateur et la leçon d'apprentissage, dont les règles voisines (hauteur d'ancrage, alignement) tiennent le bloc en place, pas la largeur."
 decision = "dette"
 
 # Deux écritures pour une seule décision : le menu se replie sous 1260 px, et la

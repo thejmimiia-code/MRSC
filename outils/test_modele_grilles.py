@@ -341,11 +341,15 @@ class TestModeleGrilles(unittest.TestCase):
         """
         with tempfile.TemporaryDirectory() as dossier:
             copie = self.copie(dossier)
+            # La mutation vise une **condition** stable — la règle de base de la
+            # grille — et non la ligne partagée qui porte les présentations : le
+            # 31 octobre 2026, celle-ci a changé deux fois dans la même journée,
+            # et chaque fois un banc est mort de son propre contenu.
             banc_mutations.muter(
                 copie,
                 FEUILLE,
-                'html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel) > * { flex-basis: 100%; }',
-                'html[data-layout="lecture"] main :is(.ai-hero-grid) { grid-template-columns: minmax(0,1fr); }',
+                ".ai-hero-grid > :first-child {",
+                'html[data-layout="lecture"] main :is(.ai-hero-grid) { grid-template-columns: minmax(0,1fr); }\n.ai-hero-grid > :first-child {',
             )
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
@@ -379,6 +383,52 @@ class TestModeleGrilles(unittest.TestCase):
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("ne décide rien", resultat.stderr)
+
+    def grille_avec_palier(self, valeur: str, palier_max: int, valeur_palier: str):
+        """Une grille d'avant conversion : règle de base, puis un palier qui replie.
+
+        `.ai-path-panel` était exactement cela — `minmax(0, .9fr) minmax(320px,
+        1.1fr)`, et un `@media (max-width: 1000px)` qui forçait une colonne. Une
+        grille synthétique sans palier n'aurait pas de cascade à comparer : la
+        bande y serait toujours la même, et ne prouverait rien.
+        """
+        grille = self.modele.grille_synthetique(".exemple", valeur, "2rem")
+        # Deux panneaux, comme dans les pages : `flex-wrap` ne crée pas d'élément
+        # et une grille de deux enfants n'en alignera jamais trois.
+        grille.items = 2
+        grille.regles.append(
+            self.modele.Regle(
+                [".exemple"], valeur_palier, None, None, palier_max, None, 2, 1
+            )
+        )
+        return grille
+
+    def test_une_bande_de_changement_dit_ou_et_de_combien(self) -> None:
+        """Un compte de largeurs ne dit pas **où** la conversion redessine.
+
+        Le 31 octobre 2026, `.participation-grid` et `.ai-path-panel` avaient des
+        comptes voisins (13 et 29 largeurs sur 233) et des conséquences très
+        différentes : la première passait de deux colonnes à deux colonnes
+        presque partout, la seconde d'**une à deux** sur toute la plage
+        720–1 000 px. La plage se lit ; le compte, non.
+        """
+        grille = self.grille_avec_palier("minmax(0, .9fr) minmax(320px, 1.1fr)", 1000, "minmax(0, 1fr)")
+        bandes = self.modele.bandes_de_changement(grille, 320)
+        self.assertEqual(len(bandes), 1, bandes)
+        self.assertEqual(
+            (bandes[0]["debut"], bandes[0]["fin"], bandes[0]["cascade"], bandes[0]["flex"]),
+            (720, 1000, 1, 2),
+        )
+
+    def test_une_grille_flex_qui_perd_son_rapport_change_de_bande(self) -> None:
+        """La bande n'est pas recopiée : elle suit la valeur qu'on lui donne."""
+        grille = self.grille_avec_palier("minmax(0, .9fr) minmax(480px, 1.1fr)", 1200, "minmax(0, 1fr)")
+        bandes = self.modele.bandes_de_changement(grille, 480)
+        self.assertEqual(
+            [(b["debut"], b["fin"], b["cascade"], b["flex"]) for b in bandes],
+            [(1040, 1200, 1, 2)],
+            bandes,
+        )
 
     def test_un_plafond_en_width_sur_un_enfant_de_grille_flex_est_refuse(self) -> None:
         """En flex, `flex-basis` remplace la largeur : le plafond ne décide plus rien.
