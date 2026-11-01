@@ -1425,3 +1425,44 @@ L'arithmétique dit « pas de débordement », pas « cela se lit bien ». C'est
 limite qui avait fait **retenir** `.participation-grid`, et la différence tient au
 contenu : une carte de citation à 25,6 px de corps dans 229 px de large, contre
 deux paragraphes de 0,9 rem et deux boutons.
+
+## 22. Une base en `em` : le repli suit la taille du texte (31 octobre 2026)
+
+Les quatre conversions précédentes acceptaient une plage où deux colonnes
+apparaissent, faute de mieux. Il y avait une troisième issue, et elle est
+meilleure : **choisir la base** au lieu de garder le minimum déclaré.
+
+`plancher_de_compromis()` cherche la plus petite base qui reproduit le nombre de
+colonnes de la cascade à **toutes** les largeurs mesurées. Pour `.hero-grid` :
+325,64 px. Avec elle, aucune largeur ne change de nombre de colonnes, et les
+deux règles de palier qui forçaient une colonne peuvent partir.
+
+Et cette base est écrite en `em` — `20.4em`, soit 326,4 px à taille normale :
+
+| Taille de texte | Base écoulée | Effet |
+|---|---:|---|
+| 100 % | 326,4 px | repli identique à l'ancien palier |
+| 115 % | 375,4 px | le repli avance |
+| 130 % | 424,3 px | le repli avance davantage |
+
+Une base en pixels ignore le réglage de taille de texte ; une base en `em` le
+suit. C'est la première fois dans ce fil qu'un repli dépend d'une **variable
+d'affichage choisie par la personne**, et non de la largeur de sa fenêtre.
+
+Deux garde-fous :
+
+1. **l'arrondi est fait au centième supérieur** — arrondir vers le bas rendrait
+   une base plus petite que celle qui vient d'être vérifiée, et ferait
+   réapparaître la plage ;
+2. le registre déclare **l'écriture et sa valeur en pixels**
+   (`plancher_expr = "20.4em"`, `plancher_px = 326.4`), et `--verifier` refuse
+   qu'elles se contredisent de plus de 0,5 px, ou que la feuille écrive des
+   pixels là où le registre annonce des `em`.
+
+Ce que cela coûte, chiffré : une colonne peut varier de 68,7 px (24,3 %) au lieu
+de 58,9 px (20,9 %). La reproduction est arithmétique — même *nombre* de
+colonnes — pas un même dessin.
+
+Limite : le compromis est calculé sur la présentation par défaut (contenu
+1 160 px) ; en Lecture (940 px) le repli avance, et le modèle ne mesure pas
+cette présentation.

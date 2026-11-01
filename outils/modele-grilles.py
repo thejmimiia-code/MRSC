@@ -150,6 +150,9 @@ class Grille:
     #: convertible en `auto-fit`, et le rapport doit le dire au lieu de proposer.
     asymetrique: bool = False
     valeur_asymetrique: str = ""
+    #: Base de `flex` choisie quand elle diffère du minimum déclaré — écrite en
+    #: `em` pour suivre la taille du texte (voir `plancher_de_compromis`).
+    base_flex: float | None = None
     #: Nombre d'éléments que les pages mettent au plus dans cette grille, mesuré
     #: dans le HTML (`lire_capacites`). 0 = non mesuré. `auto-fit` ne remplit pas
     #: une piste vide : une grille de deux éléments ne montre jamais trois
@@ -930,7 +933,9 @@ def largeurs_pistes(grille: Grille, largeur: int) -> dict | None:
     plancher_commun = max(planchers) or 0.0
     if plancher_commun <= 0:
         return None
-    bases = [m if m and m > 0 else plancher_commun for m in planchers]
+    if grille.base_flex:
+        plancher_commun = grille.base_flex
+    bases = [grille.base_flex or (m if m and m > 0 else plancher_commun) for m in planchers]
     if sum(bases) + (len(bases) - 1) * gap > place + (len(bases) - 1) * gap:
         pass
     if sum(bases) + (len(bases) - 1) * gap > conteneur(largeur):
@@ -1019,6 +1024,55 @@ def plancher_de(grille: Grille) -> float | None:
         return None
     valeur = max((minimum or 0.0) for _, minimum, _ in natures)
     return valeur if valeur > 0 else None
+
+
+#: Taille de la police racine, en pixels : la valeur que le navigateur applique
+#: à `1rem` quand la personne n'a rien changé. Les bases écrites en `em` s'y
+#: rapportent — c'est ce qui les fait suivre la taille du texte.
+RACINE_PX = 16.0
+
+
+def plancher_de_compromis(grille: Grille, pas: float = 0.5) -> dict | None:
+    """La base la plus petite qui **reproduit** le repli actuel, et son écriture en `em`.
+
+    Le 31 octobre 2026, trois conversions ont été acceptées en créant une plage
+    où le nombre de colonnes change (`600–760 px`). C'est défendable, mais ce
+    n'est pas la seule issue : une base plus large déplace le repli sans
+    supprimer de règle de grille. La question n'est donc plus « convertir ou
+    non », elle devient « avec quelle base, et qu'est-ce que cela coûte ».
+
+    Cette fonction cherche la plus **petite** base qui laisse intact le nombre
+    de colonnes à toutes les largeurs mesurées — la moins gourmande en largeur
+    de colonne, donc celle qui change le moins le dessin. Rend `None` quand
+    aucune base ne le fait : le dire vaut mieux que proposer un chiffre qui ne
+    reproduit rien.
+
+    La base est rendue aussi en `em` (`px / 16`) : écrite ainsi dans la feuille,
+    elle **suit la taille du texte** — un réglage à 130 % élargit la base de
+    30 %, donc avance le repli, ce qu'aucune condition de largeur d'écran ne
+    sait faire.
+    """
+    reference = [
+        colonnes_de_la_cascade(grille, largeur) for largeur in LARGEURS
+    ]
+    haut = conteneur(max(LARGEURS)) / 2 + 1
+    base = grille.gap
+    while base < haut:
+        if all(
+            colonnes_en_flex(grille, largeur, base, grille.items) == attendu
+            for largeur, attendu in zip(LARGEURS, reference)
+        ):
+            # L'écriture en `em` est arrondie **au-dessus** : arrondir vers le
+            # bas rendrait une base plus petite que celle qui vient d'être
+            # vérifiée, et ferait réapparaître la plage qu'on cherchait à fermer.
+            centiemes = math.ceil(base / RACINE_PX * 100)
+            return {
+                "px": base,
+                "em": centiemes / 100,
+                "expr": f"{centiemes / 100:.2f}".rstrip("0").rstrip(".") + "em",
+            }
+        base += pas
+    return None
 
 
 def pistes_des_inegales(
@@ -1212,7 +1266,7 @@ def grille_synthetique(selecteur: str, valeur: str, gap_expr: str) -> Grille:
     return grille
 
 
-def flex_attendu(valeur: str) -> list[str]:
+def flex_attendu(valeur: str, base: float | None = None, base_expr: str = "") -> list[str]:
     """Les déclarations `flex` que la règle donne, une par piste, sans ajustement.
 
     Le plancher d'une piste est son minimum déclaré ; une piste sans minimum
@@ -1221,8 +1275,12 @@ def flex_attendu(valeur: str) -> list[str]:
     coefficient de croissance est le `fr` : c'est lui qui porte le rapport.
     """
     natures = [nature_piste(piste) for piste in pistes(valeur)]
-    if not natures or any(nature != "souple" for nature, _, _ in natures):
+    if any(nature != "souple" for nature, _, _ in natures) or not natures:
         return []
+    if base_expr:
+        # Une base écrite en `em` suit la taille du texte : c'est cette écriture
+        # qu'on exige dans la feuille, pas un nombre de pixels figé.
+        return [f"{(maximum or 1.0):g} 1 {base_expr}" for _, _, maximum in natures]
     planchers = [minimum or 0.0 for _, minimum, _ in natures]
     commun = max(planchers) or 0.0
     if commun <= 0:
@@ -1290,7 +1348,32 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
 
         valeur = entree.get("grille_avant") or ""
         gap_expr = entree.get("gap_avant") or ""
-        attendus = flex_attendu(valeur)
+        # Une base écrite en `em` (31 octobre 2026) : elle ne vient pas du
+        # minimum déclaré, elle est **choisie** pour que le repli tombe au même
+        # endroit que le palier qu'elle remplace — et pour suivre la taille du
+        # texte, ce qu'aucune condition de largeur d'écran ne sait faire. Le
+        # registre doit donc dire les deux : l'écriture et le nombre de pixels
+        # qu'elle vaut à taille de texte normale.
+        base_expr = entree.get("plancher_expr") or ""
+        base_px = entree.get("plancher_px")
+        if base_expr:
+            if not re.fullmatch(r"[\d.]+em", base_expr):
+                erreurs.append(
+                    f"{selecteur} : `plancher_expr` ({base_expr}) n'est pas une longueur en em"
+                )
+            elif not isinstance(base_px, (int, float)):
+                erreurs.append(
+                    f"{selecteur} : `plancher_expr` sans `plancher_px` — la valeur en pixels "
+                    "n'est pas vérifiable"
+                )
+            else:
+                mesure = float(base_expr[:-2]) * RACINE_PX
+                if abs(mesure - float(base_px)) > 0.5:
+                    erreurs.append(
+                        f"{selecteur} : `{base_expr}` vaut {mesure:g} px, le registre déclare "
+                        f"{float(base_px):g} px"
+                    )
+        attendus = flex_attendu(valeur, base_expr=base_expr)
         if not attendus:
             erreurs.append(
                 f"{selecteur} : `grille_avant` n'est pas une suite de pistes souples "
@@ -1321,6 +1404,8 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
         # Écart recalculé, jamais recopié.
         if valeur and gap_expr:
             synthetique = grille_synthetique(selecteur, valeur, gap_expr)
+            if base_expr and isinstance(base_px, (int, float)):
+                synthetique.base_flex = float(base_px)
             mesure = ecart_de_largeur(synthetique)
             declare_px = float(entree.get("ecart_max_px", -1))
             declare_part = float(entree.get("ecart_part", -1))
@@ -1666,6 +1751,16 @@ def principal(arguments: list[str] | None = None) -> int:
                     f"  {resultat['selecteur'][:44]:44} plancher {resultat['plancher']}px · "
                     f"{resultat['ecarts']} largeur(s) sur {len(LARGEURS)} diffèrent de la cascade · "
                     f"colonnes jusqu'à {largeur['px']:.0f}px ({largeur['part']:.1%}) d'écart"
+                )
+                compromis = plancher_de_compromis(grille)
+                print(
+                    "      compromis : "
+                    + (
+                        f"{compromis['px']:g} px ({compromis['expr']}) reproduirait le repli "
+                        "actuel, et suivrait la taille du texte"
+                        if compromis
+                        else "aucune base ne reproduit le repli actuel"
+                    )
                 )
                 for bande in bandes_de_changement(grille, resultat["plancher"]):
                     print(
