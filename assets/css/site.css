@@ -3953,8 +3953,8 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-voice-card p { flex: 1 1 auto; margin-bottom: .8rem; color: var(--text-soft); font-size: max(12px, .9rem); }
 .home-voice-card a { font-weight: 750; }
 .home-share-panel {
-  display: grid;
-  grid-template-columns: minmax(0,1fr) minmax(260px,.8fr);
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1.5rem;
   margin-top: 1.2rem;
@@ -3964,6 +3964,25 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
   border-radius: 16px;
   background: linear-gradient(110deg,var(--surface-soft),var(--tint-green-6));
 }
+/* Deux colonnes inégales, sans largeur d'écran (31 octobre 2026) : 260 px de
+   base, le rapport 1 / 0,8 porté par le `fr`. La colonne d'actions ne rétrécit
+   jamais sous 260 px et ses deux boutons, qui passent à la ligne
+   (`.home-share-actions` est déjà en `flex-wrap`), tiennent : le plus long
+   mesure environ 190 px de texte et de remplissage. Entre 600 et 760 px de
+   fenêtre, le panneau montre donc deux colonnes de 264 px là où le palier de
+   760 px en imposait une : c'est la seule plage qui change, et elle change
+   parce que la grille elle-même demande 260 px par colonne, ce que le palier
+   contredisait. Une colonne peut varier de 29 px (11 %) au plus. */
+.home-share-panel > :first-child {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.home-share-panel > :last-child {
+  flex: .8 1 260px;
+  min-width: 0;
+}
+
 .home-share-panel h3 { margin-bottom: .5rem; font-size: clamp(1.2rem,2.5vw,1.55rem); }
 .home-share-panel > div:first-child > p:nth-of-type(2) { max-width: 60ch; margin-bottom: 0; color: var(--text-soft); }
 .home-share-panel .home-public-url { margin-top: .7rem; color: var(--navy-ink); font-size: max(12px, .88rem); overflow-wrap: anywhere; }
@@ -3982,7 +4001,6 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
 @media (max-width: 760px) {
   .home-hero-civic .hero-grid { grid-template-columns: minmax(0,1fr); }
   .home-hero-aside { max-width: none; }
-    .home-share-panel { grid-template-columns: minmax(0,1fr); }
   .home-join-actions { justify-items: start; }
   .home-hero-visual { margin-inline: auto; }
   .home-hero-visual img { width: 100%; height: auto; object-fit: contain; }
@@ -4193,7 +4211,7 @@ html.contraste-renforce .layout-choice.is-selected { background: var(--blue-soft
 html[data-layout="lecture"] { --content: 940px; }
 html[data-layout="lecture"] main :is(
   .hero-grid,.mission-grid,.participation-grid,.join-panel,.document-grid,.link-grid,.contact-grid,.map-layout,
-  .home-action-grid,.home-voice-grid,.home-share-panel,
+  .home-action-grid,.home-voice-grid,
   .ai-feature-panel,.ai-metric-grid,.ai-forms-grid,.ai-balance-grid,.ai-lives-grid,
   .ai-questions-layout,.ai-path-steps,.ai-cta-panel,.principle-grid,.trace-panel,
   .simulateur-intro,.simulateur-chiffres,.simulateur-promo-panel,.simulateur-duo,.home-hero-facts,
@@ -4210,7 +4228,7 @@ html[data-layout="lecture"] .site-footer .footer-grid { grid-template-columns: m
 /* « Lecture » composait cette grille en une colonne par `grid-template-columns`.
    Depuis que `.ai-hero-grid` est en `flex-wrap`, cette déclaration n'aurait plus
    d'effet : c'est la base des deux panneaux qui doit passer à 100 %. */
-html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel, .ai-path-panel) > * { flex-basis: 100%; }
+html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel, .ai-path-panel, .home-share-panel) > * { flex-basis: 100%; }
 html[data-layout="lecture"] main :is(.learning-lesson-article,.learning-lesson-aside,.ai-section-intro,.ai-fraud-evidence,.ai-hero-copy) {
   width: min(100%,78ch);
   margin-inline: auto;
