@@ -241,14 +241,22 @@ class TestPaliersAffichage(unittest.TestCase):
         self.assertIn("écriture non canonique", resultat.stderr)
 
     def test_deux_ecritures_de_la_meme_condition_sont_refusees(self) -> None:
-        """Deux écritures d'une même condition feraient mentir le comptage."""
+        """Deux écritures d'une même condition feraient mentir le comptage.
+
+        Le cas visait `(max-width: 1000px)` jusqu'au 1er novembre 2026 : ce jour
+        là, `.simulateur-intro` a quitté le dernier bloc de cette condition, qui
+        n'en porte plus qu'un — muter une écriture unique ne produit alors
+        qu'une écriture « non canonique ». Le cas vise donc `(max-width: 760px)`,
+        qui en porte onze : c'est toujours la même faute, sur une condition qui
+        peut encore en être le théâtre.
+        """
         with tempfile.TemporaryDirectory() as dossier:
             copie = self.copie(dossier)
             banc_mutations.muter(
                 copie,
                 FEUILLE,
-                "@media (max-width: 1000px) {",
-                "@media (max-width:1000px) {",
+                "@media (max-width: 760px) {",
+                "@media (max-width:760px) {",
             )
             resultat = banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(resultat.returncode, 1, resultat.stdout)

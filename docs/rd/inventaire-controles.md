@@ -87,7 +87,7 @@ Autrement dit : **40 contrôles sur 40** s'appuient sur un test capable d'échou
 ## Par où continuer, par ordre de rentabilité
 
 1. Continuer la **conversion des grilles** : `outils/modele-grilles.py --regle` en compte 36 dont 4 converties ; les 32 autres fixent encore leur nombre de colonnes, dont 30 par un palier de largeur. Chacune se convertit avec la même règle — le plus large minimum de piste qui garde les colonnes de conception au conteneur maximal — et le modèle dit d'avance l'écart avec l'ancienne cascade.
-2. Résorber la **dette des paliers** comptée par `outils/compter-paliers.py` : 15 conditions de format pour 45 blocs, dont aucune n'a été mesurée. Commencer par les grilles (trois paliers, 13 blocs) qui s'obtiendraient en `auto-fit`, puis par le seuil 1260/1261 px, tenu à la main en deux endroits.
+2. Résorber la **dette des paliers** comptée par `outils/compter-paliers.py` : au 1er novembre 2026, **17 conditions de format pour 35 blocs**, dont aucune n'a été mesurée. Le levier n'est plus `auto-fit` seul : c'est le calcul de la cascade (`outils/modele-grilles.py`), qui mesure le repli avant et après conversion. Resteront les paliers qui ne sont pas des grilles, dont le seuil 1260/1261 px tenu à la main en deux endroits.
 3. Vérifier les **empreintes** de l'archive des statuts (`sha256sum -c`), que `verifier-planches-statuts.py` contrôle en nombre, en unicité de noms et en forme de ligne — jamais en contenu.
 4. Étendre les **pages de contrôle** aux autres scripts navigateur : la mesure de `verifier-graphismes.cjs` est désormais éprouvée sur une image générée, pas sur les trois pages réelles ni sur la constellation.
 

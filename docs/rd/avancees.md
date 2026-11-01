@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 61 |
+| Avancées consignées | 62 |
 | Période couverte | du 2026-10-20 au 2026-11-01 |
 | Contrôles exécutables cités | 65 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1428,6 +1428,30 @@ Initiatives liées : `optimisation-du-site`, `coordination-de-tous-les-agents`.
 **Limite — ce que cela ne prouve pas.** Aucun de ces changements n'a été regardé à 130 % dans un navigateur : la preuve est arithmétique. La feuille du moteur embarqué du simulateur vient de l'amont et n'est pas lue : ses pistes restent en pixels. Et la vérification ne lit que le texte des déclarations, pas une piste calculée en JavaScript.
 
 **Suite.** Traiter les huit grilles « contenu », dont le repli dépend du texte : la CI dispose d'un Chromium, l'atelier non — mesurer là-bas, ou écrire pourquoi on ne mesure pas.
+
+Initiatives liées : `optimisation-du-site`.
+
+### `bande-d-un-pixel` — Une promesse vérifiée au pas de 10 px ne vaut rien : la fenêtre d'une base flex fait un demi-pixel
+
+*Consignée le 2026-11-01.*
+
+**Constat.** Six grilles converties en flex-wrap portaient au registre la phrase « aucune largeur ne change de nombre de colonnes », vérifiée aux largeurs multiples de 10 px. Le même balayage au pixel (2 321 largeurs de 240 à 2 560) a montré que trois d'entre elles changeaient de colonnes à 761 px — une bande d'un seul pixel. Pour un repli voulu à 760 px, les bases qui le reproduisent forment une fenêtre de 0,46 px de large ; 20.4em (326,40 px) tombait 0,34 px au-dessus de la fenêtre de .hero-grid (325,60 à 326,06 px), et 21.29em (340,64 px) au-dessus de celle de .learning-work-panel et .participation-grid (340,00 à 340,50 px). La veille avait validé trois grilles que son pas n'avait pas vues.
+
+**Ce que cela change.** Les trois bases sont réécrites (20.37em, 21.28em, 21.28em) et le calcul est corrigé à la racine : la base en em est arrondie vers le bas puis vérifiée au pixel (arrondir vers le haut sort de la fenêtre et rouvre la bande), et la tolérance du registre passe de 0,5 px à 0,01 px — plus large que la fenêtre, elle ne contrôlait rien. .simulateur-intro est convertie (base 28.53em, repli 1 000 px, 0 bande) et son palier supprimé. Deux formes sont nommées au lieu d'être forcées : sans-plancher (.footer-grid, deux marches 4 → 2 → 1, aucune base unique) et decor. Le relevé compte 16 grilles à pistes inégales, les paliers 17 conditions / 35 blocs / 175 règles.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `assets/css/site.css`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/paliers-affichage.toml`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py && python3 outils/compter-paliers.py && python3 outils/verifier-integration.py`
+
+**Limite — ce que cela ne prouve pas.** La promesse est tenue au pixel, mais sur la présentation par défaut (contenu 1 160 px) et avec une racine à 16 px : à 115 % et 130 % la base en em avance le repli, ce qui est voulu et non mesuré. « Aucune bande » ne veut pas dire « mêmes largeurs » : le coût de conversion reste réel (68,6 px, 24,3 % pour .hero-grid). Le balayage au pixel coûte du temps (test_modele_grilles.py passe de 19 s à 61 s). Et un refus faux a été trouvé en réparant les bancs : un modèle peut répondre « aucune base » sans avoir mesuré, quand il ne reconnaît pas la forme d'écriture d'une règle de palier.
+
+**Suite.** Traiter les deux grilles « proportion » restantes et les cinq « contenu », puis mesurer le repli des bases en em à 115 % et 130 % — la CI a un Chromium, l'atelier non.
 
 Initiatives liées : `optimisation-du-site`.
 

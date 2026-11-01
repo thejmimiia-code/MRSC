@@ -29,6 +29,7 @@ Usage :
 from __future__ import annotations
 
 import importlib.util
+import re
 import sys
 import tempfile
 import unittest
@@ -51,6 +52,23 @@ def charger_module():
     sys.modules["modele_grilles"] = module
     spec.loader.exec_module(module)
     return module
+
+
+def base_de(copie: Path, selecteur: str) -> tuple[str, float]:
+    """La base écrite au registre pour un sélecteur : `(expr, px)`.
+
+    Lue et non recopiée : le 1er novembre 2026, la base de `.hero-grid` est
+    passée de 20.4em à 20.37em parce que 20.4em sortait de la fenêtre du repli
+    de 0,34 px. Trois cas de ce banc citaient la valeur en dur et se sont mis à
+    échouer sur un fragment absent, pas sur la règle qu'ils éprouvent. Une
+    condition stable vaut mieux qu'un texte exact.
+    """
+    texte = (copie / REGISTRE).read_text(encoding="utf-8")
+    bloc = next(
+        b for b in texte.split("[[grille_flex]]") if f'selecteur = "{selecteur}"' in b
+    )
+    expr = re.search(r'plancher_expr = "([^"]+)"', bloc).group(1)
+    return expr, float(expr[:-2]) * 16
 
 
 class TestModeleGrilles(unittest.TestCase):
@@ -367,20 +385,30 @@ class TestModeleGrilles(unittest.TestCase):
         """
         with tempfile.TemporaryDirectory() as dossier:
             copie = self.copie(dossier)
+            expr, px = base_de(copie, ".hero-grid")
             banc_mutations.muter(
                 copie, REGISTRE,
-                'plancher_expr = "20.4em"\nplancher_px = 326.4',
-                'plancher_expr = "17.5em"\nplancher_px = 280',
+                f'plancher_expr = "{expr}"',
+                'plancher_expr = "17.5em"',
+            )
+            banc_mutations.muter(
+                copie, REGISTRE, f"plancher_px = {px:g}".replace(".0", ""), "plancher_px = 280"
             )
             for avant, apres in (
-                ("flex: 1.15 1 20.4em;", "flex: 1.15 1 17.5em;"),
-                ("flex: .75 1 20.4em;", "flex: .75 1 17.5em;"),
+                (f"flex: 1.15 1 {expr};", "flex: 1.15 1 17.5em;"),
+                (f"flex: .75 1 {expr};", "flex: .75 1 17.5em;"),
             ):
                 banc_mutations.muter(copie, FEUILLE, avant, apres)
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("ne reproduit pas le repli", resultat.stderr)
-        self.assertIn("670 à 760 px", resultat.stderr)
+        # La plage est lue dans la sortie, pas recopiée : le refus doit nommer
+        # la bande où le nombre de colonnes diffère, quelle qu'elle soit.
+        self.assertRegex(
+            resultat.stderr,
+            r"repli_avant_px = 760` annoncé comme reproduit, mais à \d+ px "
+            r"\(bande \d+–760\)",
+        )
 
     def test_une_base_en_em_remplacee_par_des_pixels_est_refusee(self) -> None:
         """La base de `.hero-grid` est en `em` parce qu'elle doit suivre le texte.
@@ -391,21 +419,29 @@ class TestModeleGrilles(unittest.TestCase):
         """
         with tempfile.TemporaryDirectory() as dossier:
             copie = self.copie(dossier)
+            expr, px = base_de(copie, ".hero-grid")
             banc_mutations.muter(
-                copie, FEUILLE, "flex: 1.15 1 20.4em;", "flex: 1.15 1 326px;"
+                copie, FEUILLE, f"flex: 1.15 1 {expr};", f"flex: 1.15 1 {px:g}px;"
             )
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
-        self.assertIn("flex: 1.15 1 20.4em", resultat.stderr)
+        self.assertIn(f"flex: 1.15 1 {expr}", resultat.stderr)
 
     def test_une_base_en_em_dont_les_pixels_ne_correspondent_pas_est_refusee(self) -> None:
-        """`20.4em` vaut 326,4 px : un registre qui dit 300 px ment sur le repli."""
+        """Un registre qui déclare 300 px pour `20.37em` ment sur le repli.
+
+        La valeur est lue, pas recopiée : une conversion ultérieure peut changer
+        la base sans que cette faute change de nature.
+        """
         with tempfile.TemporaryDirectory() as dossier:
             copie = self.copie(dossier)
-            banc_mutations.muter(copie, REGISTRE, "plancher_px = 326.4", "plancher_px = 300")
+            expr, px = base_de(copie, ".hero-grid")
+            banc_mutations.muter(
+                copie, REGISTRE, f"plancher_px = {px:g}".replace(".0", ""), "plancher_px = 300"
+            )
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
-        self.assertIn("vaut 326.4 px", resultat.stderr)
+        self.assertIn(f"`{expr}` vaut", resultat.stderr)
 
     def test_le_plancher_de_compromis_reproduit_le_repli(self) -> None:
         """Le compromis n'est pas un chiffre proposé : il est vérifié sur tout le balayage."""
@@ -414,16 +450,19 @@ class TestModeleGrilles(unittest.TestCase):
         )
         compromis = self.modele.plancher_de_compromis(grille, pas=2)
         self.assertIsNotNone(compromis)
-        self.assertEqual(self.modele.bandes_de_changement(grille, compromis["px"]), [])
-        # Et la base déclarée, elle, laisse bien une plage : sans quoi le
-        # compromis ne prouverait rien.
-        self.assertNotEqual(self.modele.bandes_de_changement(grille, 280), [])
-        # L'écriture en `em` est arrondie au-dessus, jamais en dessous : sinon
-        # la base écrite serait plus petite que celle qui vient d'être vérifiée.
+        # Le contrôle se fait au pixel depuis le 1er novembre 2026 : au pas de
+        # 10 px, une bande d'un ou deux pixels passe inaperçue — trois grilles
+        # converties la veille en portaient une à 761 px.
+        self.assertEqual(self.modele.bandes_fines(grille, compromis["px"]), [])
+        # Et la base déclarée d'origine, elle, laisse bien une plage : sans quoi
+        # le compromis ne prouverait rien.
+        self.assertNotEqual(self.modele.bandes_fines(grille, 280), [])
+        # L'écriture en `em` est arrondie **vers le bas**, et c'est la valeur
+        # écrite qui est vérifiée : arrondir au-dessus sortait de la fenêtre de
+        # 0,46 px et rouvrait une bande d'un pixel.
         ecrit = compromis["em"] * 16
-        self.assertGreaterEqual(ecrit, compromis["px"])
-        self.assertLess(ecrit - compromis["px"], 0.5)
-        self.assertEqual(self.modele.bandes_de_changement(grille, ecrit), [])
+        self.assertLessEqual(ecrit, compromis["px"])
+        self.assertEqual(self.modele.bandes_fines(grille, ecrit), [])
 
     def test_un_zero_de_plus_ne_change_pas_le_rapport(self) -> None:
         """`flex: .8` et `flex: 0.8` sont la même déclaration.
@@ -645,6 +684,73 @@ class TestModeleGrilles(unittest.TestCase):
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn(".site-layout-choice", resultat.stderr)
         self.assertIn("construire-simulateur.py", resultat.stderr)
+
+    def test_une_base_hors_fenetre_d_un_tiers_de_pixel_est_refusee(self) -> None:
+        """La faute que le balayage au pas de 10 px ne voyait pas.
+
+        `.hero-grid` a été écrite `20.4em` (326,4 px) le 31 octobre 2026 avec la
+        promesse « aucune largeur ne change de nombre de colonnes ». La fenêtre
+        des bases qui replient entre 760 et 761 px va de 325,60 à 326,06 px :
+        326,4 en sort de 0,34 px, et le `flex` attend donc un tiers de pixel de
+        plus que le palier — une colonne manque à **761 px**, une largeur que le
+        pas de 10 px saute. Le banc remet l'ancienne base et exige le refus.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(copie, FEUILLE, "1.15 1 20.37em", "1.15 1 20.4em")
+            banc_mutations.muter(copie, FEUILLE, ".75 1 20.37em", ".75 1 20.4em")
+            banc_mutations.muter(copie, REGISTRE, 'plancher_expr = "20.37em"', 'plancher_expr = "20.4em"')
+            banc_mutations.muter(copie, REGISTRE, "plancher_px = 325.92", "plancher_px = 326.4")
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("761 px", resultat.stderr)
+        self.assertIn("fenêtre des bases", resultat.stderr)
+        self.assertIn("325.60", resultat.stderr)
+        self.assertIn("326.06", resultat.stderr)
+
+    def test_une_base_dont_les_pixels_ne_collent_qu_a_un_demi_pixel_est_refusee(self) -> None:
+        """La tolérance d'un demi-pixel était plus large que la fenêtre entière.
+
+        `21.29em` vaut 340,64 px ; le registre déclarait 340,5 px, et l'écart de
+        0,14 px passait sous une tolérance de 0,5 px. Or la fenêtre fait 0,5 px
+        de large : la tolérance pouvait donc couvrir une base fausse. Elle est
+        ramenée à 0,01 px.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(copie, REGISTRE, "plancher_px = 340.48\n", "plancher_px = 340.3\n")
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("la base mesurée est celle qui est écrite", resultat.stderr)
+
+    def test_une_grille_sans_plancher_n_est_pas_dite_contenu(self) -> None:
+        """« Contenu » veut dire « le texte décide ». Un `fr` sans plancher, non.
+
+        Le 1er novembre 2026, `.simulateur-intro` (`minmax(0,1.35fr) minmax(0,1fr)`)
+        et `.footer-grid` tombaient dans « contenu » avec les vraies pistes
+        `auto` : le relevé annonçait « aucun modèle ne le tranche sans
+        navigateur » pour des grilles dont le repli venait d'un palier, et dont
+        l'une avait un compromis calculable au pixel près.
+        """
+        grilles = {}
+        for selecteur, valeur, palier in (
+            (".sans-plancher", "minmax(0, 1.35fr) minmax(0, 1fr)", 1000),
+            (".decor", "1.4fr 1fr", None),
+            (".contenu", "minmax(0, 1fr) auto", 760),
+        ):
+            grille = self.modele.Grille(selecteur=selecteur)
+            grille.asymetrique = True
+            grille.valeur_asymetrique = valeur
+            grille.regles = [self.modele.Regle([selecteur], valeur, None, None, None, None, 1, 0)]
+            if palier:
+                grille.regles.append(
+                    self.modele.Regle([selecteur], "minmax(0, 1fr)", 1, None, palier, None, 2, 1)
+                )
+            grilles[selecteur] = grille
+        formes = {r["selecteur"]: r["forme"] for r in self.modele.pistes_des_inegales(grilles)}
+        self.assertEqual(formes.get(".sans-plancher"), "sans-plancher")
+        self.assertEqual(formes.get(".decor"), "decor")
+        self.assertEqual(formes.get(".contenu"), "contenu")
 
     def test_un_plafond_declare_qui_disparait_est_refuse(self) -> None:
         """Une décision écrite ne doit pas survivre à son objet.

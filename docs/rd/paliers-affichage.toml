@@ -20,8 +20,8 @@
 date = 2026-11-01
 feuille = "assets/css/site.css"
 condition_total = 17
-bloc_total = 36
-regles_total = 176
+bloc_total = 35
+regles_total = 175
 
 # Baisse datée du 31 octobre 2026 : 66 blocs → 62, puis 41 blocs de format.
 # Quatre blocs ont disparu parce que quatre grilles (`.principle-grid`,
@@ -65,6 +65,12 @@ regles_total = 176
 # décisions ; seul le calcul des cascades, largeur par largeur, dit combien de
 # grilles ont réellement quitté leur palier.
 #
+# Baisse datée du 1er novembre 2026 (soir) : 176 → 175 règles, 36 → 35 blocs.
+# `.simulateur-intro` était la dernière grille d'un bloc `(max-width: 1000px)`
+# qui ne portait qu'elle : le bloc disparaît en entier. La condition reste (un
+# autre bloc décide de `.learning-filters` et de l'ancrage de la leçon), mais
+# elle n'a plus qu'un bloc et deux règles.
+#
 # Baisse datée du 1er novembre 2026, et ce n'est pas une conversion : 188 → 176
 # règles, 37 → 36 blocs. Ce lot n'a converti aucune grille ; il a retiré les
 # classes que **aucune page n'ouvre** — `outils/auditer-selecteurs-morts.py` en
@@ -106,9 +112,9 @@ decision = "dette"
 [[condition]]
 condition = "(max-width: 1000px)"
 classe = "format"
-occurrences = 2
-regles = 3
-presume = "Sous 1000 px, les grilles de trois ou quatre cartes passent à deux colonnes. Cinq grilles en sont sorties le 31 octobre 2026 — la dernière étant `.ai-path-panel`, dont le bloc ne portait qu'elle ; il en reste deux blocs, la page du simulateur et la leçon d'apprentissage, dont les règles voisines (hauteur d'ancrage, alignement) tiennent le bloc en place, pas la largeur."
+occurrences = 1
+regles = 2
+presume = "Sous 1000 px, une grille de trois ou quatre cartes passe à deux colonnes. Six grilles en sont sorties les 31 octobre et 1er novembre 2026 — la dernière étant `.simulateur-intro`, dont le bloc ne portait qu'elle et qui disparaît avec elle. Il ne reste qu'un bloc, la leçon d'apprentissage, dont la règle voisine (ancrage de l'aside) tient le bloc en place, pas la largeur."
 decision = "dette"
 
 # Deux écritures pour une seule décision : le menu se replie sous 1260 px, et la
