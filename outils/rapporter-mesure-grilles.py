@@ -124,6 +124,11 @@ def principal(arguments: list[str] | None = None) -> int:
     analyseur.add_argument("--releve", required=True, help="prédiction écrite par --releve-json")
     analyseur.add_argument("--rapport", required=True, help="relevé écrit par mesurer-grilles.cjs")
     analyseur.add_argument(
+        "--resume",
+        action="store_true",
+        help="une ligne par grille divergente, lisible telle quelle en annotation",
+    )
+    analyseur.add_argument(
         "--controler",
         action="store_true",
         help="faire échouer le rapport sur la moindre divergence (sinon : relevé publiable)",
@@ -156,6 +161,29 @@ def principal(arguments: list[str] | None = None) -> int:
         )
         return 2
 
+    if options.resume:
+        # Une annotation de CI ne garde que quelques lignes : chaque grille doit
+        # tenir sur la sienne, avec sa première divergence et la largeur réelle
+        # de l'élément mesuré — la première cause à écarter avant d'accuser la
+        # feuille.
+        for grille in comparaison["grilles"]:
+            if not grille["divergences"]:
+                continue
+            premiere = grille["divergences"][0]
+            element = (
+                ""
+                if premiere["largeur_element"] is None
+                else f", élément {premiere['largeur_element']:g} px (présumé "
+                f"{premiere['conteneur_presume']:g} px)"
+            )
+            print(
+                f"RESUME {grille['selecteur']} ({grille['page']}) : "
+                f"{len(grille['divergences'])} divergence(s) sur {grille['points']} point(s) · "
+                f"première à {premiere['largeur']} px (texte ×{premiere['echelle']:g}) : "
+                f"annoncé {premiere['attendu']}, vu {premiere['mesure']}{element}"
+            )
+        return 0
+
     mode = "CONTRÔLE" if options.controler else "RELEVÉ (pas encore un contrôle)"
     divergentes = [g for g in comparaison["grilles"] if g["divergences"]]
     print(
@@ -186,6 +214,12 @@ def principal(arguments: list[str] | None = None) -> int:
                 f"  à {divergence['largeur']} px (texte ×{divergence['echelle']:g}) : "
                 f"le modèle annonce {divergence['attendu']} colonne(s), "
                 f"le navigateur en compte {divergence['mesure']} ({divergence['display']}){indice}"
+                # La grille est répétée sur la ligne : une annotation de CI, un
+                # journal filtré ou un extrait collé dans un message doivent se
+                # lire seuls. Le 1er novembre 2026, les annotations du premier
+                # relevé ne nommaient aucune grille — le titre du groupe était
+                # resté en amont du filtre.
+                f" · {grille['selecteur']}"
             )
         if len(grille["divergences"]) > 8:
             print(f"  … {len(grille['divergences']) - 8} autre(s) divergence(s) dans le rapport.")

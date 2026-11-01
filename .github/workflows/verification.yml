@@ -517,8 +517,13 @@ jobs:
             | head -n 1 | cut -c1-900 | while IFS= read -r ligne; do
             echo "::warning title=Colonnes des grilles::$ligne"
           done
-          grep -E '^(  à|  !)' "$RUNNER_TEMP/graphismes/colonnes/comparaison.log" \
-            | head -n 25 | cut -c1-900 | while IFS= read -r ligne; do
+          python3 outils/rapporter-mesure-grilles.py \
+            --releve "$RUNNER_TEMP/graphismes/colonnes/releve.json" \
+            --rapport "$RUNNER_TEMP/graphismes/colonnes/rapport.json" --resume \
+            >"$RUNNER_TEMP/graphismes/colonnes/resume.log" 2>&1 || true
+          cat "$RUNNER_TEMP/graphismes/colonnes/resume.log"
+          grep -E '^RESUME' "$RUNNER_TEMP/graphismes/colonnes/resume.log" \
+            | head -n 40 | cut -c1-900 | while IFS= read -r ligne; do
             echo "::warning title=Colonnes des grilles::$ligne"
           done
           if [ "$comparaison" -ne 0 ]; then

@@ -89,6 +89,7 @@ def executer(
     sortie: dict | None = None,
     *,
     controler: bool = False,
+    resume: bool = False,
     brut_releve: str | None = None,
     brut_rapport: str | None = None,
     sans_rapport: bool = False,
@@ -109,6 +110,8 @@ def executer(
         arguments = ["--releve", str(chemin_releve), "--rapport", str(chemin_rapport)]
         if controler:
             arguments.append("--controler")
+        if resume:
+            arguments.append("--resume")
         return banc_mutations.lancer(OUTIL, RACINE, arguments=tuple(arguments))
 
 
@@ -164,6 +167,33 @@ class TestRapporterMesureGrilles(unittest.TestCase):
         self.assertEqual(resultat.returncode, 0, resultat.stdout + resultat.stderr)
         self.assertIn("élément 640 px", resultat.stdout)
         self.assertIn("conteneur présumé 713 px", resultat.stdout)
+
+    def test_le_resume_tient_sur_une_ligne_par_grille(self) -> None:
+        """Une annotation de CI ne garde que quelques lignes, et doit se lire seule.
+
+        Le premier relevé publié le 1er novembre 2026 ne nommait aucune grille
+        dans ses annotations : le nom restait dans un titre de groupe, en amont
+        du filtre. Une ligne de résumé doit donc porter le sélecteur, la page, la
+        première divergence et la largeur de l'élément mesuré.
+        """
+        resultat = executer(
+            prediction(
+                [
+                    {"largeur": 760, "echelle": 1.0, "attendu": 1},
+                    {"largeur": 761, "echelle": 1.0, "attendu": 2},
+                ]
+            ),
+            rapport([mesure(760, 1), mesure(761, 1, largeur_element=712.0)]),
+            resume=True,
+        )
+        self.assertEqual(resultat.returncode, 0, resultat.stdout + resultat.stderr)
+        lignes = [ligne for ligne in resultat.stdout.splitlines() if ligne.startswith("RESUME")]
+        self.assertEqual(len(lignes), 1, resultat.stdout)
+        self.assertIn(".hero-grid", lignes[0])
+        self.assertIn("index.html", lignes[0])
+        self.assertIn("première à 761 px", lignes[0])
+        self.assertIn("annoncé 2, vu 1", lignes[0])
+        self.assertIn("élément 712 px", lignes[0])
 
     def test_rapport_sans_navigateur_refuse(self) -> None:
         resultat = executer(
