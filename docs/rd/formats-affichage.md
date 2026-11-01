@@ -1549,3 +1549,94 @@ honnêtes sont le nombre de grilles en `flex-wrap` (11) et le nombre de
 Limites : bases calculées sur la présentation par défaut (contenu 1 160 px) ; en
 Lecture (940 px) et Panorama (1 480 px) le repli se décale, et le modèle ne les
 mesure pas.
+
+## 25. Deux des quatre grilles « proportion » n'existent pas (1er novembre 2026)
+
+Le relevé de la veille laissait quatre grilles « proportion » à traiter, en
+disant que trois n'avaient **aucune base** qui reproduise leur repli. La suite
+du travail a trouvé autre chose, et c'est plus utile que la conversion
+attendue : **deux de ces grilles ne sont ouvertes par aucune page.**
+
+### Ce que le nouveau relevé mesure
+
+`outils/auditer-selecteurs-morts.py` lit chaque sélecteur de `assets/css` et
+cherche le nom de classe dans les sources qui peuvent en produire une instance :
+pages HTML servies, scripts, générateurs, données. Trois verdicts, jamais deux —
+**lue** (le nom existe en toutes lettres), **dynamique** (le nom est construit à
+l'exécution, donc indécidable d'ici : `adventure-learning-world-${n}`) et
+**morte**.
+
+Sur la feuille du 1er novembre 2026 : **25 classes mortes**, soit 6,7 % des
+374 classes de `site.css`.
+
+| Famille | Classes mortes | Ce qu'elles portaient |
+| --- | ---: | --- |
+| `ai-feature-*` | 13 | toute une section « constellation d'usages » de la page IA |
+| `simulateur-promo-*` | 2 | le panneau de promotion du simulateur |
+| `learning-home-*` | 2 | un panneau d'accueil des apprentissages |
+| `hero-logo*`, `hero-aside-*` | 4 | un visuel de héros et deux notes d'aside |
+| autres | 4 | `.enthusiasm`, `.statute-line`, `.home-statut-card`, `.site-journey-title` |
+
+Deux d'entre elles étaient les grilles « proportion » `.ai-feature-panel` et
+`.simulateur-promo-panel`.
+
+### Ce que le modèle faisait de ces grilles
+
+Pour `.simulateur-promo-panel`, `--pistes` calculait un compromis à
+**28,54em (456,5 px)** « qui reproduirait le repli actuel ». Le calcul était
+juste : la cascade de la feuille, largeur par largeur, était fidèlement
+reproduite. Il portait seulement sur une grille à laquelle aucune page ne confie
+d'enfants. **Un modèle arithmétique ne sait pas distinguer une grille d'un nom
+dans une feuille** ; il faut une autre mesure pour cela.
+
+Pour `.ai-feature-panel` et `.learning-coverage-topic`, le même relevé disait
+« aucune base ne reproduit le repli actuel ». Le verdict était juste pour
+`.learning-coverage-topic`, et **faux par accident** pour `.ai-feature-panel` :
+le nombre d'éléments y était inconnu (`items = 0`, faute de page), et `flex` sans
+plafond d'éléments peut aligner trois panneaux là où la grille n'a que deux
+pistes. Aucune base ne reproduisait alors une cascade inventée. Le dire reste la
+bonne réponse ; la raison, elle, était la mauvaise.
+
+### Ce qui a changé dans la feuille
+
+Les 25 familles de règles sont retirées — pas seulement les deux grilles : une
+règle qu'aucune page n'ouvre ne mesure rien, et la laisser reviendrait à
+entretenir un compteur qui compte des fantômes. Le retrait est chirurgical :
+dans une liste de sélecteurs, seules les branches mortes partent (`.map-privacy-notice,.learning-home-panel`
+garde la première) ; dans un `:is(...)`, seules les branches mortes partent
+aussi ; un composé entièrement mort suffit à condamner le sélecteur, puisque
+`.learning-home-panel .button` vise un bouton sous un panneau qui n'existe pas.
+
+| Compteur | Avant | Après |
+| --- | ---: | ---: |
+| classes de `site.css` | 374 | 349 |
+| grilles à pistes inégales relevées | 20 | **17** |
+| dont « proportion » | 4 | **2** |
+| blocs `@media` de format | 37 | **36** |
+| règles sous un palier de largeur | 188 | **176** |
+
+La baisse de 12 règles est réelle et répartie : 6 de moins sous 760 px, 5 sous
+520 px, 1 sous 1000 px. Elle ne doit rien à une conversion — c'est la première
+fois dans ce fil que le compteur de paliers baisse sans qu'une grille change de
+forme.
+
+### Les deux « proportion » qui restent, et ce qu'elles deviennent
+
+| Grille | Verdict | Preuve |
+| --- | --- | --- |
+| `.learning-coverage-topic` | **non convertie** | trois enfants pour deux pistes : les liens sont placés par `grid-column:2` puis déplacés par `grid-column:auto` sous 760 px. Ce n'est pas un partage de panneaux mais une composition avec un enfant placé ; en `flex-wrap`, les liens occuperaient toute la rangée |
+| `.map-layout` | **non convertie** | compromis 26,62em reproduisant le repli (aucune bande de changement), mais coût mesuré **212,9 px — 78,8 %** d'écart de largeur de colonne, pour un rapport 1,5 / 0,5. Son repli vit à 920 px, avec deux autres décisions de la page contact (`display:none` sur `.identity-contact`, `.map-info` en deux colonnes) |
+
+Autrement dit : sur les quatre « proportion » annoncées, **zéro conversion**,
+deux suppressions et deux refus motivés. C'est un lot qui ne ressemble pas aux
+précédents, et c'est le résultat honnête.
+
+### Limites
+
+Le relevé ne voit pas une classe construite par une source qu'il ne lit pas, et
+il ne dit rien de l'utilité d'une classe qu'il trouve : une règle peut viser une
+classe présente et n'avoir aucun effet. Il ne lit ni `.md` ni `.toml` — un nom
+cité dans un registre est une trace, pas un usage — et il se retire lui-même de
+son corpus, ainsi que ses bancs, parce qu'un banc cite les noms qu'il cherche.
+Les six classes d'`anglais-aventure.css` construites à l'exécution restent
+**indécidables** : elles sont comptées, pas jugées.

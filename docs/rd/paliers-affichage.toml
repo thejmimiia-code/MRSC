@@ -17,11 +17,11 @@
 # donnait 17 conditions de format pour 45 blocs, dont 15 en dette.
 
 [releve]
-date = 2026-10-31
+date = 2026-11-01
 feuille = "assets/css/site.css"
 condition_total = 17
-bloc_total = 37
-regles_total = 188
+bloc_total = 36
+regles_total = 176
 
 # Baisse datée du 31 octobre 2026 : 66 blocs → 62, puis 41 blocs de format.
 # Quatre blocs ont disparu parce que quatre grilles (`.principle-grid`,
@@ -65,6 +65,17 @@ regles_total = 188
 # décisions ; seul le calcul des cascades, largeur par largeur, dit combien de
 # grilles ont réellement quitté leur palier.
 #
+# Baisse datée du 1er novembre 2026, et ce n'est pas une conversion : 188 → 176
+# règles, 37 → 36 blocs. Ce lot n'a converti aucune grille ; il a retiré les
+# classes que **aucune page n'ouvre** — `outils/auditer-selecteurs-morts.py` en
+# a trouvé 25, dont deux des quatre grilles dites « proportion »
+# (`.ai-feature-panel`, `.simulateur-promo-panel`) et `.learning-home-panel`.
+# Le bloc `(max-width: 760px)` qui ne portait que cette dernière disparaît en
+# entier, et les listes de présentation « Lecture » et « Panorama » perdent
+# leurs branches mortes. La baisse est donc réelle et elle se lit : un palier
+# porte 6 règles de moins sous 760 px, 5 de moins sous 520 px, 1 de moins sous
+# 1000 px.
+#
 # Deuxième vague, même jour : huit grilles de plus quittent leurs paliers
 # (repères et formulaires de la page IA, domaines de vie, catalogue, niveaux et
 # écosystème des apprentissages, grilles de liens, blocs de code). Le compteur
@@ -79,16 +90,16 @@ regles_total = 188
 [[condition]]
 condition = "(max-width: 760px)"
 classe = "format"
-occurrences = 12
-regles = 66
-presume = "Sous 760 px, la fenêtre est un téléphone ou une tablette étroite. Le palier décide du repli du menu, de la grille des commandes d'en-tête, des colonnes de fiches et de la largeur du panneau de personnalisation. Rien ici n'a été mesuré : 760 px est une valeur choisie, et quinze blocs en dépendent."
+occurrences = 11
+regles = 60
+presume = "Sous 760 px, la fenêtre est un téléphone ou une tablette étroite. Le palier décide du repli du menu, de la grille des commandes d'en-tête, des colonnes de fiches et de la largeur du panneau de personnalisation. Rien ici n'a été mesuré : 760 px est une valeur choisie, et onze blocs en dépendent."
 decision = "dette"
 
 [[condition]]
 condition = "(max-width: 520px)"
 classe = "format"
 occurrences = 8
-regles = 68
+regles = 63
 presume = "Sous 520 px, une rangée de deux boutons ne tient plus côte à côte : les commandes d'en-tête passent sur deux colonnes égales et les grilles se réduisent à une colonne. La limite vient d'un calcul de libellés (Menu, Personnalisation) à la police par défaut, pas d'une mesure de la rangée réelle."
 decision = "dette"
 
@@ -96,7 +107,7 @@ decision = "dette"
 condition = "(max-width: 1000px)"
 classe = "format"
 occurrences = 2
-regles = 4
+regles = 3
 presume = "Sous 1000 px, les grilles de trois ou quatre cartes passent à deux colonnes. Cinq grilles en sont sorties le 31 octobre 2026 — la dernière étant `.ai-path-panel`, dont le bloc ne portait qu'elle ; il en reste deux blocs, la page du simulateur et la leçon d'apprentissage, dont les règles voisines (hauteur d'ancrage, alignement) tiennent le bloc en place, pas la largeur."
 decision = "dette"
 

@@ -761,33 +761,6 @@ html.contraste-renforce .site-status-note {
   backdrop-filter: blur(10px);
 }
 
-.hero-logo-wrap {
-  display: grid;
-  place-items: center;
-  min-height: 230px;
-  padding: 1rem;
-  border-radius: 18px;
-  background: var(--surface);
-}
-
-.hero-logo {
-  width: min(100%, 290px);
-  max-height: 215px;
-  object-fit: contain;
-}
-
-.hero-aside-label {
-  margin: 1rem 0 .2rem;
-  color: var(--navy-ink);
-  font-weight: 750;
-}
-
-.hero-aside-note {
-  margin: 0;
-  color: var(--muted);
-  font-size: max(12px, .9rem);
-}
-
 .section {
   padding-block: clamp(3.5rem, 7vw, 6rem);
 }
@@ -910,6 +883,7 @@ html.contraste-renforce .site-status-note {
    échange : l'écart de largeur de colonne monte de 28 px (9 %) à 34,1 px
    (11 %). Un nombre de colonnes constant partout vaut ce demi-point de
    proportion, et la base suit désormais la taille du texte. */
+
 .participation-grid > :first-child {
   flex: 1.1 1 21.29em;
   min-width: 0;
@@ -1009,13 +983,6 @@ html.contraste-renforce .site-status-note {
 
 .join-panel .button {
   white-space: nowrap;
-}
-
-.enthusiasm {
-  display: inline-block;
-  margin-top: .3rem;
-  color: var(--navy-ink);
-  font-weight: 800;
 }
 
 .page-banner {
@@ -1254,10 +1221,6 @@ html.contraste-renforce .resource-scope-note {
   overflow: hidden;
 }
 
-.statute-line {
-  margin: 1.5rem 0 0;
-}
-
 .map-frame {
   display: block;
   width: 100%;
@@ -1441,6 +1404,7 @@ html.contraste-renforce .resource-scope-note {
 /* Dix liens de navigation empilés faisaient une colonne deux fois plus haute que
    les trois autres, avec un grand vide sous le logo. Deux colonnes au-delà de
    1 040 px rendent le pied de page équilibré et plus court. */
+
 @media (min-width: 1041px) {
   .footer-grid {
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.05fr) minmax(0, .7fr) minmax(0, .7fr);
@@ -1491,6 +1455,7 @@ html.contraste-renforce .resource-scope-note {
 /* Les liens légaux restent une liste, mais sans puce ni filet : seuls les
    écarts séparent les entrées. Un séparateur vertical pouvait ouvrir une ligne
    quand la rangée se repliait et se lisait alors comme une barre orpheline. */
+
 .footer-legal {
   display: flex;
   flex-wrap: wrap;
@@ -1533,6 +1498,7 @@ html.contraste-renforce .resource-scope-note {
    Collée après le point, elle commençait au milieu d'une ligne centrée et se
    coupait en deux au mauvais endroit (signalé le 25 octobre 2026). Le reste du
    bas de page garde le centrage demandé le 23 octobre 2026. */
+
 .footer-bottom .footer-rd {
   max-width: none;
 }
@@ -1678,20 +1644,13 @@ html.contraste-renforce .resource-scope-note {
   /* `.contact-grid` ne figure plus ici : sa règle de base est déjà une seule
      colonne, la déclaration ne décidait rien. Trouvé le 31 octobre 2026 en
      comparant, grille par grille, ce que chaque palier change réellement. */
+
   .hero-grid {
     gap: 2rem;
   }
 
   .hero-aside {
     max-width: 390px;
-  }
-
-  .hero-logo-wrap {
-    min-height: 195px;
-  }
-
-  .hero-logo {
-    max-height: 180px;
   }
 
   .mission-grid {
@@ -1800,10 +1759,6 @@ html.contraste-renforce .resource-scope-note {
     padding: .8rem;
   }
 
-  .hero-logo-wrap {
-    min-height: 170px;
-  }
-
   .section {
     padding-block: 3.4rem;
   }
@@ -1848,162 +1803,8 @@ html.contraste-renforce .resource-scope-note {
   }
 }
 
-/* IA & société — piste visuelle éditoriale : une constellation d'usages */
-.ai-feature-section {
-  padding-block: clamp(2.5rem, 5vw, 4rem);
-}
-
-.ai-feature-panel {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
-  align-items: center;
-  gap: clamp(1.5rem, 5vw, 4rem);
-  padding: clamp(1.6rem, 5vw, 3.5rem);
-  overflow: hidden;
-  border: 1px solid var(--border-soft-3);
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at 83% 45%, rgba(118, 181, 68, .15), transparent 17rem),
-    linear-gradient(118deg, var(--surface-soft), var(--tint-blue-3));
-}
-
-.ai-feature-copy,
-.ai-feature-visual {
-  position: relative;
-  z-index: 1;
-}
-
-.ai-feature-copy h2 {
-  max-width: 570px;
-}
-
-.ai-feature-copy > p:not(.eyebrow) {
-  max-width: 660px;
-  color: var(--text-soft-2);
-  font-size: max(12px, 1.05rem);
-}
-
-.ai-feature-copy .button {
-  margin-top: .35rem;
-}
-
-.ai-feature-visual {
-  justify-self: center;
-  width: min(100%, 390px);
-  aspect-ratio: 1;
-  isolation: isolate;
-}
-
-.ai-feature-orbit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 76%;
-  height: 76%;
-  border: 1px solid rgba(41, 88, 162, .2);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.ai-feature-orbit::before,
-.ai-feature-orbit::after {
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 4px rgba(118, 181, 68, .16);
-  content: "";
-}
-
-.ai-feature-orbit::before {
-  top: 15%;
-  left: 8%;
-}
-
-.ai-feature-orbit::after {
-  right: 4%;
-  bottom: 21%;
-  background: var(--gold);
-  box-shadow: 0 0 0 4px rgba(231, 161, 38, .16);
-}
-
-.ai-feature-orbit-two {
-  width: 56%;
-  height: 56%;
-  border-style: dashed;
-  border-color: rgba(41, 88, 162, .15);
-}
-
-.ai-feature-orbit-two::before {
-  top: auto;
-  right: 5%;
-  bottom: 2%;
-  left: auto;
-  background: var(--red);
-  box-shadow: 0 0 0 4px rgba(229, 80, 88, .13);
-}
-
-.ai-feature-orbit-two::after {
-  top: 7%;
-  right: auto;
-  bottom: auto;
-  left: 20%;
-}
-
-.ai-feature-core {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: grid;
-  place-items: center;
-  width: 100px;
-  height: 100px;
-  border: 8px solid rgba(255, 255, 255, .92);
-  border-radius: 50%;
-  background: var(--navy);
-  color: var(--on-navy);
-  font-size: max(12px, 1.7rem);
-  font-weight: 850;
-  box-shadow: 0 12px 35px rgba(29, 50, 104, .22);
-  transform: translate(-50%, -50%);
-}
-
-.ai-feature-node {
-  position: absolute;
-  padding: .45rem .72rem;
-  border: 1px solid var(--border-soft-10);
-  border-radius: 999px;
-  background: var(--surface-veil-strong);
-  color: var(--text-soft-7);
-  font-size: max(12px, .8rem);
-  font-weight: 750;
-  box-shadow: 0 5px 16px rgba(27, 46, 82, .08);
-}
-
-.ai-feature-node-work {
-  top: 9%;
-  left: 21%;
-}
-
-.ai-feature-node-health {
-  top: 26%;
-  right: 0;
-}
-
-.ai-feature-node-info {
-  top: 54%;
-  left: 0;
-}
-
-.ai-feature-node-place {
-  right: 4%;
-  bottom: 15%;
-}
-
 /* Page IA : récit, chiffres sourcés et cartographie des effets */
+
 .ai-hero {
   position: relative;
   overflow: hidden;
@@ -2480,6 +2281,7 @@ html.contraste-renforce .resource-scope-note {
    (38,3 %) d'écart de largeur de colonne au plus — le rapport 0,7 / 1,3 est
    aussi dissymétrique que celui de `.mission-grid`, et `flex` ne partage que
    le surplus là où `fr` partage tout l'espace. */
+
 .ai-questions-layout > :first-child {
   flex: .7 1 20.85em;
   min-width: 0;
@@ -2689,17 +2491,8 @@ html.contraste-renforce .resource-scope-note {
 }
 
 @media (max-width: 760px) {
-  .ai-feature-panel,
   .ai-cta-panel {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .ai-feature-panel {
-    gap: 1rem;
-  }
-
-  .ai-feature-visual {
-    width: min(100%, 340px);
   }
 
   .ai-hero h1 {
@@ -2716,24 +2509,6 @@ html.contraste-renforce .resource-scope-note {
 }
 
 @media (max-width: 520px) {
-  .ai-feature-panel {
-    padding: 1.35rem;
-  }
-
-  .ai-feature-visual {
-    width: min(100%, 300px);
-  }
-
-  .ai-feature-node {
-    padding: .36rem .52rem;
-    font-size: max(12px, .75rem);
-  }
-
-  .ai-feature-core {
-    width: 82px;
-    height: 82px;
-    font-size: max(12px, 1.45rem);
-  }
 
   .ai-hero {
     padding-block: 3.5rem;
@@ -2786,6 +2561,7 @@ html.contraste-renforce .resource-scope-note {
 }
 
 /* Transparence, registre des sources et licence */
+
 .stack { display: grid; gap: 1.5rem; }
 .stack > .section-heading { margin-bottom: 0; }
 .creator-note {
@@ -2850,6 +2626,7 @@ html.contraste-renforce .resource-scope-note {
 .trace-tag { display: inline-block; padding: .15rem .5rem; border-radius: 6px; background: var(--blue-soft); color: var(--navy-ink); font-size: max(12px, .75rem); font-weight: 750; }
 .trace-tag-original { background: var(--tint-green-2); color: var(--green-ink); }
 /* Simulateur macro-politique — page d'intégration et encart d'accueil */
+
 .simulateur-intro {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
@@ -2915,33 +2692,8 @@ html.contraste-renforce .resource-scope-note {
 .simulateur-duo ul { display: grid; gap: .5rem; margin: .8rem 0 0; padding-left: 1.1rem; font-size: max(12px, .92rem); color: var(--muted); }
 .simulateur-duo li::marker { color: var(--green); }
 .simulateur-card-limite { border-top-color: var(--gold); }
-.simulateur-promo-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(260px, .7fr);
-  align-items: center;
-  gap: clamp(1.5rem, 4vw, 3rem);
-  padding: clamp(1.7rem, 4vw, 3rem);
-  border: 1px solid var(--border-soft-3);
-  border-radius: 26px;
-  background:
-    radial-gradient(circle at 88% 20%, rgba(118, 181, 68, .16), transparent 16rem),
-    linear-gradient(118deg, var(--surface-soft), var(--tint-blue-3));
-}
-.simulateur-promo-panel h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); }
-.simulateur-promo-chips { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: flex-end; margin: 0; padding: 0; list-style: none; }
-.simulateur-promo-chips li {
-  padding: .4rem .8rem;
-  border: 1px solid var(--border-soft-7);
-  border-radius: 999px;
-  background: var(--surface);
-  font-size: max(12px, .8rem);
-  font-weight: 650;
-  color: var(--navy-ink);
-}
 @media (max-width: 1000px) {
-  .simulateur-intro,
-  .simulateur-promo-panel { grid-template-columns: minmax(0, 1fr); }
-  .simulateur-promo-chips { justify-content: flex-start; }
+  .simulateur-intro { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 760px) {
   .simulateur-frame { height: 820px; }
@@ -2952,6 +2704,7 @@ html.contraste-renforce .resource-scope-note {
 }
 
 /* Adaptations d’affichage, navigation commune et réglages accessibles. */
+
 .nav-inner { justify-content: center; gap: clamp(6px,.5rem,10px); }
 
 .display-settings {
@@ -3045,6 +2798,7 @@ html.contraste-renforce .resource-scope-note {
    personnalisation, séparée des réglages d'affichage par un filet. Le bloc en
    cours de lecture est marqué par un contour, jamais par un changement de
    taille : rien ne bouge sous les yeux de la personne qui suit. */
+
 .read-aloud {
   margin-top: .8rem;
   padding-top: .85rem;
@@ -3055,6 +2809,7 @@ html.contraste-renforce .resource-scope-note {
 /* Trois commandes et un choix de vitesse : le bouton principal occupe sa ligne,
    « Pause » et « Reculer » se partagent la suivante quand la place le permet et
    passent l'un sous l'autre sinon. Aucun libellé n'est tronqué. */
+
 .read-aloud-controls .display-control-wide { flex: 1 1 100%; min-width: 0; white-space: normal; }
 .read-aloud-controls [data-read-aloud-pause],
 .read-aloud-controls [data-read-aloud-back] { flex: 1 1 auto; min-width: 0; white-space: normal; }
@@ -3307,6 +3062,7 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
      contenu (pages à dix liens, polices larges) : elle utilise alors toute la
      largeur disponible et, si cela ne suffit toujours pas, passe sur deux
      lignes au lieu de tronquer le premier et le dernier élément. */
+
   .nav-inner { flex-wrap: wrap; width: min(100% - 2rem, 104rem); }
   html.has-js:not(.texte-agrandi):not(.texte-tres-agrandi) .site-header.is-compact .nav-inner {
     display: flex;
@@ -3480,6 +3236,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
      Ramené à 36 px le même jour, sur retour d'usage : à 44 px, la grille de
      trois rangées pesait 149 px d'en-tête sur un écran de 640. 36 px reste
      bien au-dessus du minimum WCAG et se touche sans visée. */
+
   html.has-js .site-header.is-compact .nav-toggle,
   html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
   html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary, .customize-settings > summary) {
@@ -3514,6 +3271,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 
 /* Catalogue d’apprentissage et fiches autonomes : repères non stigmatisants,
    analogies explicites et corrections ouvertes au choix. */
+
 .learning-hero {
   padding-block: clamp(3rem,7vw,6rem);
   background: linear-gradient(120deg,var(--tint-blue-4),var(--tint-green-3) 70%,var(--tint-gold-4));
@@ -3530,6 +3288,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
    (337,4 px). Aucune largeur ne change de nombre de colonnes, et la règle de
    760 px cesse de nommer cette grille — elle reste pour
    `.learning-article-layout`. Coût mesuré : 50,6 px (17,4 %). */
+
 .learning-hero-grid > :first-child {
   flex: 1.15 1 21.09em;
   min-width: 0;
@@ -3686,6 +3445,7 @@ html.has-js .site-header.is-compact .header-compact-brand img {
    340,5 px. Aucune largeur ne change donc de nombre de colonnes, et la règle de
    760 px qui forçait une colonne cesse de nommer cette grille. Coût mesuré :
    68,1 px (24,3 %) d'écart de largeur de colonne au plus. */
+
 .learning-work-panel > :first-child {
   flex: 1.2 1 21.29em;
   min-width: 0;
@@ -3806,6 +3566,7 @@ html.contraste-renforce :is(.learning-analogy,.learning-coverage-topic,.learning
 }
 
 /* Notice de vie privée : séparer les faits techniques et les validations attendues. */
+
 .privacy-content { display:grid; gap:clamp(1.5rem,3vw,2.6rem); max-width:900px; }
 .privacy-content > section { scroll-margin-top:13rem; }
 .privacy-content > section > h2,.privacy-summary h2 { font-size:clamp(1.5rem,3vw,2rem); }
@@ -3823,9 +3584,6 @@ html.contraste-renforce :is(.privacy-summary,.privacy-review-note) { border-colo
 @media (forced-colors: active) {
   .privacy-summary,.privacy-review-note,.privacy-content code { border-color:CanvasText !important; background:Canvas !important; color:CanvasText !important; }
 }
-
-/* IA & société : repères de vérification et de réponse aux fraudes. */
-.ai-feature-practice { margin:.9rem 0 0; font-size: max(12px, .94rem) !important; font-weight:700; }
 .ai-fraud-section { background:linear-gradient(180deg,var(--surface-soft-4) 0%,var(--surface) 56%,var(--surface-soft-2) 100%); }
 .ai-fraud-callout { margin-block:1.6rem; padding:clamp(1.2rem,3vw,1.8rem); border:1px solid var(--border-soft-6); border-left:6px solid var(--blue); border-radius:16px; background:var(--tint-blue-7); }
 .ai-fraud-callout strong { display:block; margin-bottom:.4rem; color:var(--navy-ink); font-size: max(12px, 1.15rem); }
@@ -3860,15 +3618,6 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 @media (forced-colors: active) {
   .ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,.ai-fraud-steps li,.ai-fraud-lesson-list li { border-color:CanvasText !important; background:Canvas !important; color:CanvasText !important; box-shadow:none !important; }
 }
-
-.learning-home-promo { padding-block:clamp(2.8rem,5vw,4.2rem); }
-.learning-home-panel {
-  display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:2rem;
-  padding:clamp(1.4rem,4vw,2.4rem); border:1px solid var(--border-soft); border-radius:22px;
-  background:linear-gradient(115deg,var(--tint-green),var(--surface-soft-2) 62%,var(--tint-gold));
-}
-.learning-home-panel h2 { max-width:28ch; font-size:clamp(1.6rem,3.2vw,2.3rem); }
-.learning-home-panel p:last-child { max-width:75ch; margin-bottom:0; color:var(--text-soft); }
 .learning-feedback { padding-block:clamp(2rem,5vw,3.5rem); }
 .map-privacy-notice {
   margin:1rem 0; padding:1rem 1.15rem; border:1px solid var(--border-soft-4); border-left:5px solid var(--gold);
@@ -3880,12 +3629,8 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .map-frame[hidden] { display:none; }
 .table-scroll-hint { margin:0 0 .5rem; color:var(--muted); font-size: max(12px, .86rem); }
 .simulateur-section { scroll-margin-top:13rem; }
-@media (max-width: 760px) {
-  .learning-home-panel { grid-template-columns:minmax(0,1fr); align-items:start; gap:1.1rem; }
-  .learning-home-panel .button { justify-self:start; }
-}
 @media (forced-colors: active) {
-  .map-privacy-notice,.learning-home-panel { border-color:CanvasText !important; background:Canvas !important; color:CanvasText !important; }
+  .map-privacy-notice { border-color:CanvasText !important; background:Canvas !important; color:CanvasText !important; }
 }
 .learning-card-source {
   margin:.45rem 0 .15rem;
@@ -3900,6 +3645,7 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .learning-card-link { margin-top:.4rem; }
 
 /* Accueil M.R.S.C : une hiérarchie commune entre mission, ressources et participation. */
+
 .home-hero-civic .hero-grid { align-items: center; }
 .home-hero-civic .hero-title { max-width: 20ch; }
 
@@ -3938,6 +3684,7 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-hero-civic .hero-title span { color: var(--blue); }
 /* Repères chiffrés de l’ouverture : les nombres viennent du catalogue et du
    moteur du simulateur, jamais recopiés à la main (voir verifier-integration.py). */
+
 .home-hero-facts {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(min(190px,100%),1fr));
@@ -3990,8 +3737,6 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-entry-list strong { color: var(--navy-ink); line-height: 1.35; }
 .home-entry-list small { margin-top: .16rem; color: var(--muted); font-size: max(12px, .84rem); line-height: 1.45; }
 .home-hero-note { margin: 1rem 0 0; padding-top: .85rem; border-top: 1px solid var(--line); color: var(--muted); font-size: max(12px, .84rem); }
-.home-statut-card .eyebrow { color: var(--green); }
-.home-statut-card .button { margin-top: .6rem; }
 .home-association-intro { max-width: 78ch; margin-inline: auto; }
 .home-association-intro .hero-actions { margin-block: 1rem .65rem; }
 .home-association-themes-label { margin: clamp(2rem,4vw,3rem) 0 .85rem; color: var(--green); }
@@ -4070,6 +3815,7 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
    760 px en imposait une : c'est la seule plage qui change, et elle change
    parce que la grille elle-même demande 260 px par colonne, ce que le palier
    contredisait. Une colonne peut varier de 29 px (11 %) au plus. */
+
 .home-share-panel > :first-child {
   flex: 1 1 260px;
   min-width: 0;
@@ -4126,6 +3872,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
 }
 
 /* Porte d’entrée entre les fiches autonomes et le prototype d’aventure anglaise. */
+
 .english-promo-panel {
   display: flex;
   flex-wrap: wrap;
@@ -4141,6 +3888,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
    base chacune, le repli tombe quand les deux ne tiennent plus. Mesure du
    changement : treize largeurs de fenêtre sur 233 changent de nombre de
    colonnes, une colonne peut varier de 14 px (5 %) au plus. */
+
 .english-promo-panel > :first-child {
   flex: 1.05 1 280px;
   min-width: 0;
@@ -4165,6 +3913,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
    le navigateur resservait une variante trop petite (densité 0,91), mesuré le
    31 octobre 2026. Un `max-width` s'applique, lui, à la taille d'une boîte
    flexible (CSS Flexbox, § 9.2). */
+
 @media (min-width: 761px) {
   .english-promo-art { max-width: 520px; }
 }
@@ -4173,6 +3922,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
    automatique. Sans cette ligne, la boîte mesurait 497 × 941 px et l'image,
    étirée de 2,1 fois pour la couvrir, montrait ses pixels (constaté le
    23 octobre 2026). */
+
 .english-promo-art img { width: 100%; height: auto; aspect-ratio: 1672 / 941; border-radius: 15px; object-fit: contain; object-position: center; }
 .english-promo-art figcaption { margin-top: .5rem; color: var(--muted); font-size: max(12px, .76rem); line-height: 1.45; }
 @media (max-width: 760px) {
@@ -4186,6 +3936,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
 
 /* Personnalisation de la présentation : les préférences changent le CSS sans
    modifier le contenu, la navigation ni les fonctions des pages. */
+
 .layout-settings {
   position: static;
   flex: 0 0 auto;
@@ -4259,6 +4010,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
   cursor: pointer;
 }
 /* Mini-aperçu schématique : il montre la composition, il ne la remplace pas. */
+
 .layout-choice-preview {
   display: grid;
   gap: 3px;
@@ -4294,6 +4046,7 @@ html.contraste-renforce :is(.home-hero-aside,.home-action-card,.home-voice-card,
 /* --muted (#647086) tombe à 4,36:1 sur le fond bleu clair d'une carte
    sélectionnée : sous le seuil AA de 4,5:1 pour un texte de 12 px. La teinte
    voisine --text-soft donne 5,58:1 sans contraster davantage sur fond blanc. */
+
 .layout-choice-copy > span { display: block; margin-top: .1rem; color: var(--text-soft); font-size: max(12px, .82rem); line-height: 1.42; }
 .layout-settings-status { min-height: 1.4em; margin: .65rem 0 0; color: var(--navy-ink); font-size: max(12px, .86rem); font-weight: 700; }
 .layout-settings-note { margin: .45rem 0 0; color: var(--muted); font-size: max(12px, .78rem); line-height: 1.45; }
@@ -4304,16 +4057,16 @@ html.contraste-renforce .layout-choice { border-color: currentColor; box-shadow:
 html.contraste-renforce .layout-choice.is-selected { background: var(--blue-soft); }
 
 /* Lecture : largeur de lecture maîtrisée et composition en colonne. */
+
 html[data-layout="lecture"] { --content: 940px; }
 html[data-layout="lecture"] main :is(
   .join-panel,.document-grid,.link-grid,.contact-grid,.map-layout,
-  .home-action-grid,.home-voice-grid,
-  .ai-feature-panel,.ai-metric-grid,.ai-forms-grid,.ai-balance-grid,.ai-lives-grid,
+  .home-action-grid,.home-voice-grid,.ai-metric-grid,.ai-forms-grid,.ai-balance-grid,.ai-lives-grid,
   .ai-path-steps,.ai-cta-panel,.principle-grid,.trace-panel,
-  .simulateur-intro,.simulateur-chiffres,.simulateur-promo-panel,.simulateur-duo,.home-hero-facts,
+  .simulateur-intro,.simulateur-chiffres,.simulateur-duo,.home-hero-facts,
   .learning-article-layout,.learning-catalogue-grid,
   .learning-level-grid,.learning-ecosystem-grid,.learning-filters,.learning-feedback-panel,
-  .learning-code-grid,.learning-coverage-topic,.learning-home-panel,
+  .learning-code-grid,.learning-coverage-topic,
   .ai-fraud-grid,.ai-fraud-steps,.ai-fraud-lesson-list,
   .adventure-onboarding-grid,.adventure-settings,.adventure-dashboard,.adventure-quest-grid,
   .adventure-play-grid,.adventure-sheet-grid,.adventure-method-panel,.adventure-roadmap-list,.adventure-progress-list,
@@ -4324,6 +4077,7 @@ html[data-layout="lecture"] .site-footer .footer-grid { grid-template-columns: m
 /* « Lecture » composait cette grille en une colonne par `grid-template-columns`.
    Depuis que `.ai-hero-grid` est en `flex-wrap`, cette déclaration n'aurait plus
    d'effet : c'est la base des deux panneaux qui doit passer à 100 %. */
+
 html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel, .ai-path-panel, .home-share-panel, .hero-grid, .mission-grid, .learning-work-panel, .ai-questions-layout, .learning-hero-grid, .participation-grid) > * { flex-basis: 100%; }
 html[data-layout="lecture"] main :is(.learning-lesson-article,.learning-lesson-aside,.ai-section-intro,.ai-fraud-evidence,.ai-hero-copy) {
   width: min(100%,78ch);
@@ -4335,6 +4089,7 @@ html[data-layout="lecture"] main :is(.section,.content-section,.learning-lesson-
 }
 
 /* Panorama composite : plus d’espace horizontal pour parcourir les collections de cartes. */
+
 html[data-layout="panorama"] { --content: 1480px; }
 html[data-layout="panorama"] main :is(
   .document-grid,.link-grid,.home-action-grid,.home-voice-grid,
@@ -4348,7 +4103,7 @@ html[data-layout="panorama"] main :is(
   gap: clamp(.75rem,1.35vw,1.35rem);
 }
 html[data-layout="panorama"] main :is(
-  .hero-grid,.mission-grid,.participation-grid,.join-panel,.contact-grid,.map-layout,.ai-feature-panel,.ai-hero-grid,.ai-cta-panel,
+  .hero-grid,.mission-grid,.participation-grid,.join-panel,.contact-grid,.map-layout,.ai-hero-grid,.ai-cta-panel,
   .learning-hero-grid,.learning-article-layout,.adventure-dashboard,.adventure-onboarding-grid,
   .adventure-play-grid,.adventure-method-panel,.adventure-learning-workspace,.simulateur-intro
 ) { gap: clamp(1.25rem,3vw,3rem); }
@@ -4362,6 +4117,7 @@ html[data-layout="vitrine"] main :is(.section,.content-section,.learning-lesson-
 }
 /* Planchers volontairement proches de la base : à 320 px, un mot long de
    titre (« Transparence, ») doit encore tenir dans le conteneur. */
+
 html[data-layout="vitrine"] main h1 { font-size: clamp(2.4rem,7.5vw,5.6rem); }
 html[data-layout="vitrine"] main h2 { font-size: clamp(1.75rem,4.2vw,3.2rem); }
 html[data-layout="vitrine"] main .section-heading { max-width: 860px; margin-bottom: 2.75rem; }
@@ -4395,6 +4151,7 @@ html[data-layout="vitrine"] main :is(
    exclues des listes « collections » de Panorama, Vitrine, Mosaïque et
    Compacte : une suite numérotée ne doit pas paraître hiérarchisée, et leur
    placement explicite créerait une colonne implicite en piste unique. */
+
 html[data-layout="mosaique"] { --content: 1380px; }
 html[data-layout="mosaique"] main :is(
   .document-card,.home-action-card,.home-voice-card,.values-card,.scope-card,.quote-card,
@@ -4444,6 +4201,7 @@ html[data-layout="mosaique"] main :is(
 
 /* En pistes étroites, un nom de domaine long doit pouvoir se couper pour
    ne pas pousser son icône hors de la carte (Mosaïque et Compacte). */
+
 html:is([data-layout="mosaique"],[data-layout="compacte"]) main .resource-link > span {
   min-width: 0;
   overflow-wrap: anywhere;
@@ -4452,6 +4210,7 @@ html:is([data-layout="mosaique"],[data-layout="compacte"]) main .resource-link >
 /* Compacte : densité resserrée pour balayer et comparer. Seuls les espaces
    et les pistes changent : ni la taille du texte (réglage « Affichage »),
    ni celle des zones tactiles des commandes ne sont réduites. */
+
 html[data-layout="compacte"] { --content: 1480px; --radius: 12px; --shadow: 0 4px 14px rgba(26,48,91,.06); }
 html[data-layout="compacte"] main :is(.section,.content-section,.learning-lesson-hero) {
   padding-block: clamp(1.75rem,3.5vw,2.75rem);
@@ -4486,6 +4245,7 @@ html[data-layout="compacte"] main :is(
 @media (max-width: 760px) {
   /* Le panneau s’ouvre sous une barre parfois haute (150 % de texte, liens repliés) :
      réserver aussi cette hauteur d’ancrage pour ne pas sortir du viewport. */
+
   .layout-settings-panel { max-height: max(6rem,calc(100vh - 14rem)); }
 }
 @media (max-width: 520px) {
@@ -4531,12 +4291,14 @@ html[data-layout="compacte"] main :is(
    150 caractères par ligne, très au-delà des 45 à 75 qui se lisent d'un trait.
    `ch` suit la taille de police : le plafond reste juste quand le texte est
    agrandi. Les blocs déjà plus étroits ne changent pas. */
+
 main .container p { max-width: 72ch; }
 
 /* Tokens insécables. Une adresse web ou un identifiant long ne se coupe pas :
    il élargissait sa piste de grille et faisait défiler la page entière à
    280 px. `anywhere` autorise la césure et, surtout, entre dans le calcul de la
    largeur minimale, ce que `break-word` ne fait pas. */
+
 main { overflow-wrap: break-word; }
 main :is(code, kbd, samp, .resource-link > span, .erreur-liens a, .trace-list a) {
   overflow-wrap: anywhere;
@@ -4546,6 +4308,7 @@ main :is(.trace-list li, .erreur-liens li, .resource-entry, .resource-link) { mi
 
 /* Boutons pleine largeur : sous 420 px, un intitulé en `nowrap` débordait de la
    page plutôt que de passer à la ligne. */
+
 @media (max-width: 420px) {
   .home-join-actions .button, .hero-actions .button { white-space: normal; }
 }
@@ -4554,18 +4317,21 @@ main :is(.trace-list li, .erreur-liens li, .resource-entry, .resource-link) { mi
    carte fait 260 px et l'intitulé « Voir notre méthode de R&D » en `nowrap`
    268 px : les 8 derniers pixels étaient rognés par l'`overflow: hidden` de la
    carte. L'intitulé passe à la ligne plutôt que d'être coupé. */
+
 .home-eva-status .button { max-width: 100%; white-space: normal; }
 
 /* Liens de contenu en boîte (cartes de fiche, fichiers, adresse, carte) : à
    75 % de texte, leur hauteur tombait à 20 px. Sur un lien réellement en ligne,
    min-height ne s'applique pas : la règle ne touche donc que les liens-blocs,
    et WCAG 2.5.8 exempte les liens insérés dans une phrase. */
+
 main a { min-height: 24px; }
 
 /* Cible tactile d'au moins 24 px (WCAG 2.2, 2.5.8). Le contact de pied de page
    mesurait 23,6 px de haut, et les liens de source des cartes de mesure 17 px.
    Les liens réellement insérés dans une phrase restent hors de ce plancher :
    WCAG les exempte, et les étirer casserait le fil du texte. */
+
 .identity-contact { min-height: 24px; }
 main .ai-metric-card a { min-height: 24px; }
 
@@ -4579,6 +4345,7 @@ main .ai-metric-card a { min-height: 24px; }
    pour ne pas étirer un bitmap de 1 400 px — et ils rapetissaient le dessin de
    moitié sur un écran 2×, qui le montre désormais sur toute la largeur de la
    colonne, comme à 1×. */
+
 @media (min-resolution: 3dppx) {
   .brand-logo, .footer-logo,
   html.has-js .site-header.is-compact .header-compact-brand img { max-width: 78px; }
@@ -4591,12 +4358,14 @@ main .ai-metric-card a { min-height: 24px; }
 /* La balise <small> garde la taille par défaut du navigateur (0,833 em) :
    à 75 %, elle retombait à 10 px. Le plancher de 12 px la remet au niveau du
    texte réduit, sans changer son rôle visuel. */
+
 small { font-size: max(12px, .833em); }
 
 /* Réglage « texte 50 % » : la taille du texte est le choix de la personne,
    on n'y touche pas — 50 % de 16 px font 8 px, c'est la définition du réglage.
    Les commandes, elles, gardent une cible de 24 px, comme les champs de
    formulaire gardent déjà un plancher de 12 px plus haut dans la feuille. */
+
 html:is(.texte-tres-reduit,.texte-reduit) :is(button, summary, .button, .display-control, .nav-links a, .header-compact-brand) {
   min-height: 24px;
 }
@@ -4605,6 +4374,7 @@ html:is(.texte-tres-reduit,.texte-reduit) :is(button, summary, .button, .display
    pourcentage dans un cercle. Avec un texte agrandi, la pastille de gauche
    sortait de l'écran (position -16 px à 280 px). On les rapproche du centre et
    on borne leur largeur sous 380 px. */
+
 @media (max-width: 380px) {
   .ai-node { max-width: 52%; }
 }
@@ -4613,10 +4383,12 @@ html:is(.texte-tres-reduit,.texte-reduit) :is(button, summary, .button, .display
    mesure 301 px et ne tenait pas dans 258 px : la page entière défilait
    latéralement. On réduit d'abord le corps, et la césure ne sert que de dernier
    recours pour un mot plus long encore. */
+
 main :is(h1, h2, h3) { overflow-wrap: break-word; }
 /* Texte agrandi et en-tête compact : les commandes ne tiennent plus sur une
    seule ligne (à 280 px, le sélecteur de présentation sortait de 35 px). Elles
    passent à la ligne plutôt que de déborder. */
+
 html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .site-header .nav-inner,
 html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .site-header .header-compact-tools {
   flex-wrap: wrap;
@@ -4627,6 +4399,7 @@ html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .site-header .header-compact-
    la largeur disponible. `anywhere` autorise la césure ET fait entrer cette
    césure dans le calcul de largeur minimale, sans quoi une piste de grille
    s'élargit et la page entière défile. */
+
 html.has-js:is(.texte-agrandi,.texte-tres-agrandi) main,
 html:is(.texte-agrandi,.texte-tres-agrandi) main :is(h1, h2, h3, p, li, span, summary, a, strong, em, .eyebrow) {
   overflow-wrap: anywhere;
@@ -4637,6 +4410,7 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
 @media (max-width: 340px) {
   /* La liste nomme les héros un par un : chacun de leurs sélecteurs porte une
      classe et l'emporterait sur un `main h1` générique. */
+
   main :is(h1, h2),
   .ai-hero h1, .home-hero h1, .page-banner h1,
   .learning-hero h1, .learning-hero-copy h1, .learning-lesson-hero h1,
@@ -4694,6 +4468,7 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
 
 /* Dernière adaptation : une largeur inférieure au logo ne doit pas pousser
    les commandes hors de l’écran. */
+
 @media (max-width: 240px) {
   html.has-js .site-header.is-compact .header-compact-brand {
     display: none;
@@ -4788,6 +4563,7 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
   }
   /* `.is-compact .nav-inner` impose `nowrap` : sans cette règle, la rangée des
      commandes débordait de 63 px au lieu de passer sous le logo. */
+
   html.has-js .site-header.is-compact .nav-inner {
     flex-wrap: wrap;
     /* Sous 210 px de large, la grille passe sur sa propre rangée plutôt que de
@@ -4799,6 +4575,7 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
      d'en-tête, 36 px encore 122 px. À 32 px il reste 10 px au-dessus et
      au-dessous d'un libellé de 12 px, et 8 px au-dessus du minimum WCAG. Les
      autres formats compacts (paysage, tablette) gardent 36 px. */
+
   html.has-js .site-header.is-compact .nav-toggle,
   html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
   html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary, .customize-settings > summary) {
@@ -4829,6 +4606,7 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
 
 /* Sous 300 px de fenêtre, la gouttière de l'en-tête ne laisse plus la place
    d'écrire « Agrandir » dans une colonne : l'en-tête prend toute la largeur. */
+
 @media (max-width: 300px) {
   html.has-js .site-header.is-compact .nav-inner {
     width: 100%;
@@ -4906,6 +4684,7 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
 /* Chevrons : un même dessin partagé par les quatre panneaux du site. La taille
    du glyphe est annulée (`font-size: 0`) pour que le caractère d'origine ne
    s'affiche plus sous le masque. */
+
 .display-settings-chevron,
 .layout-settings-chevron,
 .site-journey-chevron,
@@ -5007,6 +4786,7 @@ html.has-js .site-header .customize-settings-panel :is(
 }
 
 /* L'icône de chaque ligne : un masque, teinté par `currentColor`. */
+
 html.has-js .site-header .customize-settings-panel :is(
   .display-settings,
   .layout-settings,
@@ -5062,6 +4842,7 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings, .layou
 /* « Agrandir / Réduire » prend exactement l'habillage d'une ligne : c'est la
    première du panneau, et non un bouton centré à part. Comme le libellé est
    réécrit par `site.js`, l'icône est un masque et non un élément du DOM. */
+
 html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]) {
   display: flex;
   width: 100%;
@@ -5094,6 +4875,7 @@ html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([h
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 4H4v5'/%3E%3Cpath d='M15 4h5v5'/%3E%3Cpath d='M15 20h5v-5'/%3E%3Cpath d='M9 20H4v-5'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
 }
 /* En-tête déjà agrandi : le bouton propose de le réduire, l'icône suit. */
+
 html.has-js:not(.entete-compacte) .site-header .customize-settings-panel .header-compact-toggle:not([hidden])::before {
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9h5V4'/%3E%3Cpath d='M20 9h-5V4'/%3E%3Cpath d='M20 15h-5v5'/%3E%3Cpath d='M4 15h5v5'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9h5V4'/%3E%3Cpath d='M20 9h-5V4'/%3E%3Cpath d='M20 15h-5v5'/%3E%3Cpath d='M4 15h5v5'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
@@ -5108,6 +4890,7 @@ html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([h
 }
 
 /* Un filet sépare le réglage d'en-tête des trois réglages de préférence. */
+
 html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]) + .site-journey-settings {
   margin-top: .3rem;
   padding-top: .3rem;
@@ -5176,6 +4959,7 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
 
 /* Le contenu d'un réglage ouvert s'aligne sur son libellé, pas sur son icône :
    l'icône fait 19 px et l'écart 9,6 px, d'où un retrait de 28,6 px. */
+
 html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, .layout-settings-panel, .site-journey-panel) {
   padding-left: 1.8rem;
   border-left-color: var(--border-soft-2);
@@ -5183,7 +4967,8 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
 
 /* Les titres de section deviennent des étiquettes discrètes : dans un panneau
    étroit, un gros titre en gras concurrence les lignes du menu. */
-html.has-js .site-header .customize-settings-panel :is(.display-settings-title, .layout-settings-title, .site-journey-title) {
+
+html.has-js .site-header .customize-settings-panel :is(.display-settings-title, .layout-settings-title) {
   margin: 0 0 .45rem;
   color: var(--text-soft);
   font-size: max(12px, .72rem);
@@ -5194,6 +4979,7 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-title, 
 }
 
 /* --- Affichage : un compteur lisible et un contrôle segmenté -------------- */
+
 html.has-js .site-header .customize-settings-panel .display-settings-row {
   width: fit-content;
   margin: 0 0 .55rem;
@@ -5237,6 +5023,7 @@ html.has-js .site-header .customize-settings-panel .display-text-level {
 }
 
 /* Les deux bascules pleine largeur : fond papier, état enfoncé visible. */
+
 html.has-js .site-header .customize-settings-panel .display-settings-actions {
   gap: .3rem;
 }
@@ -5264,6 +5051,7 @@ html.has-js .site-header .customize-settings-panel .display-settings-note {
 }
 
 /* --- Parcours : deux colonnes de boutons, l'étape sur sa propre ligne ------ */
+
 html.has-js .site-header .customize-settings-panel .site-journey-inner {
   gap: .4rem;
 }
@@ -5293,6 +5081,7 @@ html.has-js .site-header .customize-settings-panel .site-journey-status {
 }
 
 /* --- Présentation : des cartes plus compactes pour tenir dans le panneau --- */
+
 html.has-js .site-header .customize-settings-panel .layout-settings-options {
   gap: .3rem;
 }
