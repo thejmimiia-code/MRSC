@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 64 |
+| Avancées consignées | 65 |
 | Période couverte | du 2026-10-20 au 2026-11-01 |
 | Contrôles exécutables cités | 68 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1501,6 +1501,30 @@ Initiatives liées : `optimisation-du-site`.
 **Limite — ce que cela ne prouve pas.** La mesure est celle d'un navigateur sans personne devant : elle compte des colonnes, elle ne dit rien de la lisibilité. Elle ne couvre que la présentation par défaut, pas les cinq autres où --content vaut 940 ou 1 480 px. Et les annotations de CI sont plafonnées à une dizaine par étape : le total est donc imprimé avant le détail et le workflow avoue le nombre de grilles coupées.
 
 **Suite.** Modéliser le conteneur (gouttière 3rem au-dessus de 760 px, 2rem à 760 et moins, multipliée par la taille du texte), puis retirer repli_avant_px des six grilles dont le palier était à 760 px : une promesse irréalisable se retire, elle ne s'adoucit pas. Le relevé ne devient un contrôle qu'après, et son premier passage en --controler devra donner zéro divergence.
+
+Initiatives liées : `optimisation-du-site`.
+
+### `gouttiere-lue-pas-supposee` — Le conteneur cesse d'être un chiffre : la gouttière est lue dans la feuille
+
+*Consignée le 2026-11-01.*
+
+**Constat.** Le modèle des grilles calculait les colonnes dans un conteneur qu'il ne lisait pas : min(1160, largeur - 48), 48 px de gouttière partout. La feuille écrit calc(100% - 3rem) et, sous 760 px, calc(100% - 2rem). À 760 px le conteneur réel vaut 728 px et le modèle en présumait 712. Conséquence non vue depuis le premier jour : le conteneur rétrécit de 16 px quand la fenêtre grandit d'un pixel, si bien que la promesse « le repli ne bouge pas » des six grilles converties sur un palier de 760 px était géométriquement irréalisable — reproduire ce repli exige une base supérieure à 333,6 px d'un côté du seuil et inférieure à 326,06 px de l'autre, et l'intersection est vide.
+
+**Ce que cela change.** Trois lectures remplacent trois suppositions. La gouttière est lue dans la règle .container (3rem au-dessus de 760 px, 2rem à 760 et moins) et une lecture impossible fait sortir l'outil en code 2 au lieu de retomber sur 48 px. La taille du texte devient un paramètre : 1rem vaut 16 px × 1,15 ou × 1,3, donc la gouttière grandit et le conteneur rétrécit quand quelqu'un agrandit, tandis que vw ne suit pas le texte. Le remplissage du conteneur est lu aussi (padding de la règle de base), parce qu'une grille qui en porte un ne donne pas sa largeur à ses enfants. La promesse irréalisable est retirée, pas adoucie : six grilles déclarent repli_refuse_px et le contrôle recalcule la fenêtre des bases qui y arriveraient, en refusant si elle n'est pas vide. À la place, un invariant qui survivra aux prochaines conversions : une grille ne perd jamais une colonne en gagnant de la place, vérifié aux trois tailles de texte. Le relevé navigateur ne recalcule plus aucune largeur : la largeur présumée est écrite point par point dans la prédiction.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `docs/rd/grilles-dynamiques.toml`
+- `outils/test_modele_grilles.py`
+- `outils/rapporter-mesure-grilles.py`
+- `docs/rd/formats-affichage.md`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py && python3 outils/test_rapporter_mesure_grilles.py && python3 outils/modele-grilles.py --releve-json /tmp/releve.json`
+
+**Limite — ce que cela ne prouve pas.** Après correction, la mesure est passée de 70 divergences dans 23 grilles à 39 dans 8, dont 4 à moins d'un pixel de la bascule (comptées, tolérance déclarée à 1 px, plus petite qu'une colonne). Les 35 autres viennent de quatre grilles posées dans une colonne, dont le parent est plus étroit que le conteneur : .simulateur-chiffres mesure 521,44 px là où le modèle en présume 1 112, .learning-code-grid 615,84 contre 956. La chaîne des ancêtres n'est pas modélisée, et l'étape reste un relevé tant que ces 35 divergences ne sont pas expliquées par le modèle. Seule la présentation par défaut et la gouttière de .container sont lues : un conteneur qui écrirait sa largeur autrement (max-width, pourcentage imbriqué) sort en code 2 plutôt que d'être deviné. Ni le décalage de défilement, ni les marges d'un parent plus étroit que .container, ni les grilles posées dans une colonne ne sont modélisés. Le relevé navigateur ne dit toujours rien de la lisibilité, et son passage en contrôle attend que la mesure corrigée montre zéro divergence.
+
+**Suite.** Donner au modèle la chaîne des ancêtres : une grille posée dans une piste de .learning-article-layout ou de .simulateur-duo ne reçoit pas le conteneur entier, et largeurs_pistes sait déjà calculer la piste du parent. Ces 35 divergences tomberont alors, et l'étape pourra passer en --controler.
 
 Initiatives liées : `optimisation-du-site`.
 

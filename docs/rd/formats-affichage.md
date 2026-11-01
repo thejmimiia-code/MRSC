@@ -1863,3 +1863,93 @@ Le relevé ne couvre que la présentation par défaut : `--content` vaut 940 px 
 1 480 px en Panorama, et ces valeurs ne sont pas mesurées. Il ne dit rien de la lisibilité :
 il compte des colonnes. Enfin les annotations de CI sont plafonnées à une dizaine par étape —
 le total est donc imprimé avant le détail, et le workflow avoue le nombre de grilles coupées.
+
+## 29. La gouttière était une constante : le conteneur se lit (1er novembre 2026)
+
+Le conteneur du modèle valait `min(1160, largeur - 48)`. La feuille écrit
+`calc(100% - 3rem)`, et **sous 760 px `calc(100% - 2rem)`** :
+
+| fenêtre | conteneur présumé | conteneur réel | écart |
+| --- | --- | --- | --- |
+| 760 px | 712 px | **728 px** | +16 px |
+| 761 px | 713 px | 713 px | 0 |
+| 800 px à 130 % | 752 px | 737,6 px | −14,4 px |
+
+Trois conséquences, dans cet ordre :
+
+1. **le conteneur rétrécit** de 16 px quand la fenêtre grandit d'un pixel ;
+2. la gouttière étant en `rem`, elle **suit la taille du texte** : à 130 %, elle
+   vaut 62,4 px, et le conteneur est d'autant plus étroit ;
+3. un conteneur qui porte son **propre remplissage** ne donne pas sa largeur à
+   ses enfants : `.learning-work-panel` mesure 713 px à 761 px et n'en laisse
+   que 652 à ses deux panneaux.
+
+### La promesse qu'il fallait retirer
+
+Reproduire l'ancien repli de `.hero-grid` — une colonne à 760 px, deux à 761 —
+demanderait :
+
+- à 760 px : `2b + 60,8 px > 728 px`, donc `b > 333,6 px` ;
+- à 761 px : `2b + 60,88 px ≤ 713 px`, donc `b ≤ 326,06 px`.
+
+L'intersection est **vide**. Ce n'est pas une base mal choisie : aucun
+`flex-basis` ne fait replier une grille quand la place disponible augmente. Six
+grilles déclarent donc leur repli `refusé` (`repli_refuse_px`), le contrôle
+**recalcule** la fenêtre et refuse si elle n'est pas vide. `.simulateur-intro`
+garde la sienne : à 1 000 px, la gouttière ne change pas de côté, la fenêtre
+existe et reste vérifiée.
+
+### L'invariant qui remplace la promesse
+
+> Une grille ne perd jamais une colonne en gagnant de la place.
+
+C'est le défaut que « une bande d'un pixel » décrivait sans le nommer. Il est
+vérifié aux trois tailles de texte : une base en `em` et un écart en `rem`
+bougent tous les deux avec le réglage de la personne, et aucune mesure d'écran ne
+peut le savoir à sa place.
+
+### Ce que lit le modèle, désormais, au lieu de le supposer
+
+| ce qui était supposé | ce qui est lu | si la lecture échoue |
+| --- | --- | --- |
+| 48 px de gouttière | `.container` : `3rem` / `2rem` sous 760 px | `lire_gouttiere` lève, l'outil sort en code 2 |
+| `1rem` = 16 px | la taille de texte est un paramètre (1, 1,15, 1,3) | — |
+| conteneur entier pour les enfants | `padding` de la règle de base | `padding_lu = false`, le modèle refuse de prédire |
+
+### Ce que la correction a effectivement changé
+
+Mesuré deux fois, avec le même navigateur et le même protocole :
+
+| | avant la gouttière lue | après |
+| --- | --- | --- |
+| points annoncés | 743 | 761 |
+| confirmés par le navigateur | 673 | **722** |
+| divergents | 70 | **39**, dont 4 au seuil |
+| grilles divergentes | 23 sur 34 | **8 sur 34** |
+
+### Les deux causes qui restent
+
+**1. Le seuil.** Quatre divergences tombent à moins d'un pixel de la bascule :
+`.hero-grid` et `.mission-grid` à 743 px (0,28 et 0,78 px), `.home-share-panel` à
+615 px (0,60 px), `.english-promo-panel` à 658 px (0,20 px). À cette distance, ce
+n'est plus le modèle qui décide : la largeur d'une barre de défilement, l'arrondi
+de `vw` et le sous-pixel de la mise en page tranchent. Chaque point du relevé
+porte donc sa **marge**, et le rapporteur les **compte** sans les absorber —
+tolérance déclarée à 1 px, plus petite que la plus étroite des colonnes
+mesurées (145 px).
+
+**2. Le parent.** Les 35 autres divergences tiennent à quatre grilles posées
+**dans une colonne** : `.simulateur-chiffres` mesure 521,44 px là où le modèle en
+présume 1 112, `.learning-code-grid` 615,84 contre 956, `.ai-fraud-steps` 505,13
+contre 554. Le modèle présume que toute grille reçoit `.container` entier ; c'est
+faux dès qu'une grille vit dans une piste de `.learning-article-layout` ou de
+`.simulateur-duo`.
+
+### Limites
+
+Seules la présentation par défaut et la gouttière de `.container` sont lues : un
+conteneur qui écrirait sa largeur autrement (`max-width`, `%` imbriqué) sortirait
+en code 2 plutôt que d'être deviné. La chaîne des **ancêtres** n'est pas
+modélisée — c'est la cause des 35 divergences restantes. Enfin rien de tout cela
+n'a été regardé par une personne : le relevé compte des colonnes, il ne juge pas
+la lisibilité.

@@ -76,6 +76,10 @@ class TestModeleGrilles(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.modele = charger_module()
+        # La gouttière du conteneur est **lue**, jamais présumée : depuis le
+        # 1er novembre 2026, un calcul de largeur sans elle est refusé. Les cas
+        # ci-dessous l'obtiennent donc de la feuille, comme l'outil en ligne.
+        cls.modele.definir_gouttiere((RACINE / FEUILLE).read_text(encoding="utf-8"))
 
     def copie(self, dossier: str) -> Path:
         copie = Path(dossier)
@@ -220,10 +224,22 @@ class TestModeleGrilles(unittest.TestCase):
         self.assertEqual(self.modele.seuil_une_colonne(grille), 760)
         minimum = self.modele.minimum_recommande(grille, {"items": [2]})
         self.assertIsNotNone(minimum)
-        # Deux colonnes doivent encore tenir juste au-dessus du seuil…
-        self.assertEqual(self.modele.auto_fit(minimum, grille.gap, 770), 2, minimum)
-        # … et ne plus tenir juste en dessous.
-        self.assertEqual(self.modele.auto_fit(minimum, grille.gap, 750), 1, minimum)
+        # La paire est refusée **au seuil**, et elle revient dès que le conteneur
+        # dépasse ce que deux panneaux réclament. Depuis le 1er novembre 2026, ce
+        # retour n'a plus lieu au-dessus du seuil immédiatement : la gouttière du
+        # conteneur passe de 3rem à 2rem à 760 px, si bien que le conteneur vaut
+        # 728 px à 760 et 713 px à 761. La paire renoncée à 760 peut donc revenir
+        # un peu plus loin, et jamais en arrière — c'est l'invariant vérifié.
+        self.assertEqual(self.modele.auto_fit(minimum, grille.gap, 760), 1, minimum)
+        # Le plafond par `items` n'est pas un détail : la grille ne reçoit que
+        # deux enfants, donc `auto-fit` ne peut pas en montrer trois même si
+        # l'arithmétique en trouve la place.
+        self.assertEqual(
+            self.modele.auto_fit(minimum, grille.gap, self.modele.fenetre_maximale(), 2), 2, minimum
+        )
+        self.assertEqual(
+            self.modele.auto_fit(minimum, grille.gap, self.modele.fenetre_maximale()), 3, minimum
+        )
 
     def test_une_grille_a_quatre_elements_interdit_la_troisieme_colonne(self) -> None:
         """Quatre cartes en trois colonnes laissent la dernière seule : la règle relève le minimum.
@@ -240,7 +256,7 @@ class TestModeleGrilles(unittest.TestCase):
         ]
         minimum = self.modele.minimum_recommande(grille, {"items": [4]})
         self.assertEqual(minimum, self.modele.minimum_sans_troisieme_colonne(grille))
-        large = self.modele.CONTENU_DEFAUT + self.modele.GARNITURE_LATERALE
+        large = self.modele.fenetre_maximale()
         self.assertEqual(self.modele.auto_fit(minimum, grille.gap, large), 2, minimum)
         # Le repli doit rester sous le seuil ancien, sinon le palier supprimé
         # revient par la petite porte.
@@ -374,44 +390,42 @@ class TestModeleGrilles(unittest.TestCase):
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("sans effet sur un conteneur flex", resultat.stderr)
 
-    def test_une_base_qui_ne_reproduit_pas_le_repli_annonce_est_refusee(self) -> None:
-        """« Aucune largeur ne change de nombre de colonnes » doit se vérifier.
+    def test_un_repli_declare_irrealisable_doit_l_etre_vraiment(self) -> None:
+        """Une promesse retirée se démontre, sinon elle est une excuse.
 
-        `.hero-grid` a été converti avec une base choisie pour reproduire
-        exactement son ancien repli. La règle de palier ayant disparu avec la
-        conversion, rien dans la feuille ne permettait de contrôler la promesse :
-        le registre garde donc `repli_avant_px = 760`, et le contrôle reconstruit
-        la cascade d'avant. Ce cas remet la base d'origine (280 px) partout où
-        elle est écrite et exige le refus, avec la plage nommée.
+        Depuis le 1er novembre 2026, six grilles ne promettent plus de reproduire
+        leur ancien repli : la gouttière du conteneur rétrécit à 760 px, aucune
+        base ne peut donc faire replier la grille quand la fenêtre grandit d'un
+        pixel. Le registre déclare `repli_refuse_px = 760`, et le contrôle
+        **recalcule** la fenêtre des bases qui y arriveraient. Ce cas déplace le
+        refus à 900 px, où une base y arrive très bien : le refus n'a plus
+        d'objet, et le contrôle doit le dire.
         """
         with tempfile.TemporaryDirectory() as dossier:
             copie = self.copie(dossier)
-            expr, px = base_de(copie, ".hero-grid")
+            texte = (copie / REGISTRE).read_text(encoding="utf-8")
+            bloc = next(b for b in texte.split("[[grille_flex]]") if 'selecteur = ".hero-grid"' in b)
+            assert "repli_refuse_px = 760" in bloc
             banc_mutations.muter(
-                copie, REGISTRE,
-                f'plancher_expr = "{expr}"',
-                'plancher_expr = "17.5em"',
+                copie, REGISTRE, "repli_refuse_px = 760", "repli_refuse_px = 900"
             )
-            banc_mutations.muter(
-                copie, REGISTRE, f"plancher_px = {px:g}".replace(".0", ""), "plancher_px = 280"
-            )
-            for avant, apres in (
-                (f"flex: 1.15 1 {expr};", "flex: 1.15 1 17.5em;"),
-                (f"flex: .75 1 {expr};", "flex: .75 1 17.5em;"),
-            ):
-                banc_mutations.muter(copie, FEUILLE, avant, apres)
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
-        self.assertIn("ne reproduit pas le repli", resultat.stderr)
-        # La plage est lue dans la sortie, pas recopiée : le refus doit nommer
-        # la bande où le nombre de colonnes diffère, quelle qu'elle soit.
-        self.assertRegex(
+        self.assertIn(
+            "le registre déclare irréalisable le repli à 900 px, or une base y arrive",
             resultat.stderr,
-            r"repli_avant_px = 760` annoncé comme reproduit, mais à \d+ px "
-            r"\(bande \d+–760\)",
         )
 
-    # — relevé pour un navigateur ----------------------------------------------
+    def test_un_ancien_repli_et_un_refus_ensemble_sont_refuses(self) -> None:
+        """Le repli est soit reproduit, soit démontré irréalisable — pas les deux."""
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = self.copie(dossier)
+            banc_mutations.muter(
+                copie, REGISTRE, "repli_refuse_px = 760", "repli_refuse_px = 760\nrepli_avant_px = 760"
+            )
+            resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("pas les deux", resultat.stderr)
 
     def test_le_releve_annonce_les_tailles_de_texte_pour_une_base_en_em(self) -> None:
         """Le relevé navigateur doit porter la promesse, pas seulement les largeurs.
@@ -442,7 +456,13 @@ class TestModeleGrilles(unittest.TestCase):
         # qu'une condition de largeur d'écran ne sait pas faire, et le relevé
         # l'inscrit à 920 px : deux colonnes à 100 %, une seule à 130 %.
         assise = {(p["largeur"], p["echelle"]): p["attendu"] for p in grille["points"]}
-        self.assertEqual(assise[(760, 1.0)], 1)
+        # Le repli réel de `.hero-grid` n'est plus 760 px : avec la gouttière que
+        # la feuille écrit vraiment, la paire tient jusqu'à 743 px. Le 1er
+        # novembre 2026, le navigateur l'a confirmé — deux colonnes à 760 px, là
+        # où le palier supprimé en imposait une.
+        self.assertIn(743, largeurs)
+        self.assertEqual(assise[(743, 1.0)], 1)
+        self.assertEqual(assise[(760, 1.0)], 2)
         self.assertEqual(assise[(920, 1.0)], 2)
         self.assertEqual(assise[(920, 1.3)], 1)
 
@@ -502,10 +522,32 @@ class TestModeleGrilles(unittest.TestCase):
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn(f"`{expr}` vaut", resultat.stderr)
 
+    def test_un_palier_de_760_px_n_a_aucune_base_qui_le_reproduise(self) -> None:
+        """La démonstration que la promesse du 31 octobre était irréalisable.
+
+        Sous 760 px la feuille retire `2rem` de gouttière, au-dessus `3rem` : le
+        conteneur vaut 728 px à 760 et 713 px à 761. Reproduire un repli pile
+        entre ces deux largeurs demanderait une base entre 326,06 et 333,6 px à
+        la fois — impossible, et le modèle doit le dire au lieu de proposer un
+        chiffre. C'est pour cette raison que six grilles déclarent leur repli
+        `refusé` dans le registre, et que le contrôle démontre ce refus.
+        """
+        grille = self.grille_avec_palier(
+            "minmax(0, 1.15fr) minmax(280px, .75fr)", 760, "minmax(0, 1fr)"
+        )
+        self.assertIsNone(self.modele.plancher_de_compromis(grille, pas=2))
+        self.assertIsNone(self.modele.fenetre_de_base(grille, 760))
+        # Et la fenêtre redevient non vide dès que le palier tombe ailleurs : le
+        # refus tient au seuil de gouttière, pas à la géométrie du `flex`.
+        autre = self.grille_avec_palier(
+            "minmax(0, 1.15fr) minmax(280px, .75fr)", 900, "minmax(0, 1fr)"
+        )
+        self.assertIsNotNone(self.modele.fenetre_de_base(autre, 900))
+
     def test_le_plancher_de_compromis_reproduit_le_repli(self) -> None:
         """Le compromis n'est pas un chiffre proposé : il est vérifié sur tout le balayage."""
         grille = self.grille_avec_palier(
-            "minmax(0, 1.15fr) minmax(280px, .75fr)", 760, "minmax(0, 1fr)"
+            "minmax(0, 1.15fr) minmax(280px, .75fr)", 900, "minmax(0, 1fr)"
         )
         compromis = self.modele.plancher_de_compromis(grille, pas=2)
         self.assertIsNotNone(compromis)
@@ -611,9 +653,13 @@ class TestModeleGrilles(unittest.TestCase):
         grille = self.grille_avec_palier("minmax(0, .9fr) minmax(320px, 1.1fr)", 1000, "minmax(0, 1fr)")
         bandes = self.modele.bandes_de_changement(grille, 320)
         self.assertEqual(len(bandes), 1, bandes)
+        # La bande commence à 710 px, et non 720 : sous 760 px la feuille retire
+        # 2rem au lieu de 3rem, donc le conteneur est 16 px plus large et deux
+        # panneaux de 320 px y tiennent déjà. C'est le conteneur lu, pas une
+        # constante de 48 px, qui déplace cette borne.
         self.assertEqual(
             (bandes[0]["debut"], bandes[0]["fin"], bandes[0]["cascade"], bandes[0]["flex"]),
-            (720, 1000, 1, 2),
+            (710, 1000, 1, 2),
         )
 
     def test_une_grille_flex_qui_perd_son_rapport_change_de_bande(self) -> None:
@@ -744,28 +790,36 @@ class TestModeleGrilles(unittest.TestCase):
         self.assertIn(".site-layout-choice", resultat.stderr)
         self.assertIn("construire-simulateur.py", resultat.stderr)
 
-    def test_une_base_hors_fenetre_d_un_tiers_de_pixel_est_refusee(self) -> None:
-        """La faute que le balayage au pas de 10 px ne voyait pas.
+    def test_une_base_trop_grande_fait_perdre_une_colonne_en_gagnant_de_la_place(self) -> None:
+        """Le défaut que le pas de 10 px ne voyait pas, nommé par son vrai nom.
 
-        `.hero-grid` a été écrite `20.4em` (326,4 px) le 31 octobre 2026 avec la
-        promesse « aucune largeur ne change de nombre de colonnes ». La fenêtre
-        des bases qui replient entre 760 et 761 px va de 325,60 à 326,06 px :
-        326,4 en sort de 0,34 px, et le `flex` attend donc un tiers de pixel de
-        plus que le palier — une colonne manque à **761 px**, une largeur que le
-        pas de 10 px saute. Le banc remet l'ancienne base et exige le refus.
+        Le 31 octobre 2026, ce cas s'écrivait « la fenêtre des bases qui replient
+        à 760 px va de 325,60 à 326,06 px, et 20.4em en sort de 0,34 px ». C'était
+        vrai **d'un conteneur qui n'existait pas** : le modèle présumait 48 px de
+        gouttière partout, alors que la feuille en écrit 32 sous 760 px.
+
+        Avec la vraie gouttière, la contrainte ne porte plus sur une fenêtre mais
+        sur une **marche arrière** : à 760 px le conteneur vaut 728 px et deux
+        panneaux de 326,4 px tiennent (713,6 px) ; à 761 px il vaut 713 px et ils
+        n'y tiennent plus. La grille passe donc de deux colonnes à une alors que
+        la fenêtre s'élargit d'un pixel — un défaut visible, et non une bande
+        théorique. 20.37em (325,92 px) passe : 713,68 px ne tient pas non plus,
+        mais la base est assez petite pour que la seconde colonne tienne encore.
         """
         with tempfile.TemporaryDirectory() as dossier:
             copie = self.copie(dossier)
-            banc_mutations.muter(copie, FEUILLE, "1.15 1 20.37em", "1.15 1 20.4em")
-            banc_mutations.muter(copie, FEUILLE, ".75 1 20.37em", ".75 1 20.4em")
-            banc_mutations.muter(copie, REGISTRE, 'plancher_expr = "20.37em"', 'plancher_expr = "20.4em"')
-            banc_mutations.muter(copie, REGISTRE, "plancher_px = 325.92", "plancher_px = 326.4")
+            expr, px = base_de(copie, ".hero-grid")
+            banc_mutations.muter(copie, FEUILLE, f"1.15 1 {expr}", "1.15 1 20.4em")
+            banc_mutations.muter(copie, FEUILLE, f".75 1 {expr}", ".75 1 20.4em")
+            banc_mutations.muter(copie, REGISTRE, f'plancher_expr = "{expr}"', 'plancher_expr = "20.4em"')
+            banc_mutations.muter(
+                copie, REGISTRE, f"plancher_px = {px:g}".replace(".0", ""), "plancher_px = 326.4"
+            )
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("passe de 2 à 1 colonne(s)", resultat.stderr)
+        self.assertIn("alors que la fenêtre s'élargit", resultat.stderr)
         self.assertIn("761 px", resultat.stderr)
-        self.assertIn("fenêtre des bases", resultat.stderr)
-        self.assertIn("325.60", resultat.stderr)
-        self.assertIn("326.06", resultat.stderr)
 
     def test_une_base_dont_les_pixels_ne_collent_qu_a_un_demi_pixel_est_refusee(self) -> None:
         """La tolérance d'un demi-pixel était plus large que la fenêtre entière.

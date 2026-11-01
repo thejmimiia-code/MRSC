@@ -64,7 +64,93 @@ LARGEURS_FINES = list(range(240, 2561, 1))
 #: `--content` vaut 1160 px par défaut ; les présentations le changent (940,
 #: 1240, 1380, 1480) et ce script ne mesure que la présentation par défaut.
 CONTENU_DEFAUT = 1160
-GARNITURE_LATERALE = 48  # 3rem
+
+#: La gouttière horizontale du conteneur n'est **plus une constante**.
+#:
+#: Le 1er novembre 2026, la première confrontation à un vrai navigateur a trouvé
+#: 70 points divergents sur 743, dans 23 grilles sur 34. Les largeurs d'éléments
+#: mesurées désignaient un seul coupable, présent depuis le premier jour : le
+#: modèle présumait 48 px de gouttière **partout**, alors que la feuille écrit
+#: `calc(100% - 3rem)` et, sous 760 px, `calc(100% - 2rem)`. Le conteneur
+#: rétrécit donc de 16 px quand la fenêtre grandit d'un pixel, et aucune base de
+#: `flex` ne peut produire un repli dans ce sens : les six grilles converties sur
+#: un palier de 760 px promettaient un repli géométriquement impossible.
+#:
+#: Une gouttière en `rem` suit la taille du texte : à 130 %, 3rem vaut 62,4 px.
+@dataclass(frozen=True)
+class Gouttiere:
+    """Ce que la feuille retire à `100%` pour fabriquer le conteneur."""
+
+    large: float = 3.0  # en `rem`, au-dessus du seuil
+    etroit: float = 2.0  # en `rem`, au seuil et en dessous
+    seuil: int = 760
+    source: str = "non lue"
+
+    def en_px(self, largeur: int, echelle: float = 1.0) -> float:
+        rem = self.etroit if largeur <= self.seuil else self.large
+        return rem * RACINE_PX * echelle
+
+
+class GouttiereIllisible(Exception):
+    """La feuille ne dit pas ce que le conteneur retire : le modèle doit se taire."""
+
+
+#: Remplie par `lire_grilles` à partir de la feuille. Vide tant que rien n'a été
+#: lu : `conteneur()` refuse alors de calculer, plutôt que de retomber sur 48 px.
+GOUTTIERE: Gouttiere | None = None
+
+
+def lire_gouttiere(texte: str) -> Gouttiere:
+    """La gouttière du `.container`, lue dans la feuille.
+
+    Deux déclarations suffisent : `width: min(var(--content), calc(100% - Nrem))`
+    dans la règle de base, et la même sous une condition `(max-width: …px)`. Un
+    `%` sans `rem`, une variable ou une valeur en `px` ne sont pas interprétés :
+    la lecture échoue et l'appelant doit le dire. C'est le seul chiffre que ce
+    modèle présumait encore, et il portait vingt-deux grilles.
+    """
+    base: float | None = None
+    etroit: float | None = None
+    seuil: int | None = None
+    for selecteurs, corps, largeur_max, largeur_min, _ in decouper(sans_commentaires(texte)):
+        if not any(selecteur == ".container" for selecteur in selecteurs):
+            continue
+        trouve = re.search(r"width\s*:\s*min\([^;]*calc\(\s*100%\s*-\s*([\d.]+)rem\s*\)", corps)
+        if not trouve:
+            continue
+        valeur = float(trouve.group(1))
+        if largeur_max is not None:
+            etroit = valeur
+            seuil = largeur_max
+        elif largeur_min is None:
+            base = valeur
+    if base is None:
+        raise GouttiereIllisible(
+            "aucune règle `.container` ne dit ce qu'elle retire à 100% — "
+            "le conteneur ne peut pas être calculé, et 48 px serait une supposition"
+        )
+    return Gouttiere(
+        large=base,
+        etroit=etroit if etroit is not None else base,
+        seuil=seuil if seuil is not None else 0,
+        source="site.css",
+    )
+
+
+def definir_gouttiere(texte: str) -> Gouttiere:
+    """Inscrit la gouttière lue pour les calculs suivants."""
+    global GOUTTIERE
+    GOUTTIERE = lire_gouttiere(texte)
+    return GOUTTIERE
+
+
+def gouttiere() -> Gouttiere:
+    if GOUTTIERE is None:
+        raise GouttiereIllisible(
+            "la gouttière du conteneur n'a pas été lue — appeler `definir_gouttiere` "
+            "avec la feuille avant tout calcul de largeur"
+        )
+    return GOUTTIERE
 
 #: Largeur de carte en dessous de laquelle une grille tasse son contenu.
 CARTE_MINIMALE = 220
@@ -161,6 +247,13 @@ class Grille:
     #: Base de `flex` choisie quand elle diffère du minimum déclaré — écrite en
     #: `em` pour suivre la taille du texte (voir `plancher_de_compromis`).
     base_flex: float | None = None
+    #: Le remplissage horizontal écrit par la règle de base (`clamp(1.5rem,4vw,2.6rem)`).
+    #: Un conteneur qui porte son propre remplissage ne donne pas sa largeur à ses
+    #: enfants, et le nombre de colonnes se décide sur la largeur utile.
+    padding_expr: str | None = None
+    #: Faux quand ce remplissage n'est pas évaluable : la largeur utile est alors
+    #: inconnue, et le modèle refuse de prédire au lieu de supposer.
+    padding_lu: bool = True
     #: Nombre d'éléments que les pages mettent au plus dans cette grille, mesuré
     #: dans le HTML (`lire_capacites`). 0 = non mesuré. `auto-fit` ne remplit pas
     #: une piste vide : une grille de deux éléments ne montre jamais trois
@@ -303,7 +396,7 @@ def ecart_colonnes(corps: str) -> str | None:
 CLAMP = re.compile(r"^clamp\(\s*([^,]+?)\s*,\s*([^,]+?)\s*,\s*(.+?)\s*\)$")
 
 
-def mesure_en_px(morceau: str, largeur: int | None = None) -> float | None:
+def mesure_en_px(morceau: str, largeur: int | None = None, echelle: float = 1.0) -> float | None:
     """Une longueur CSS en pixels, évaluée à une largeur de fenêtre donnée.
 
     Rend `None` quand l'expression n'est pas une longueur évaluable ici — un
@@ -311,34 +404,51 @@ def mesure_en_px(morceau: str, largeur: int | None = None) -> float | None:
     16 px en silence est exactement ce que ce fichier reproche aux autres.
     """
     morceau = morceau.strip()
+    # Un zéro sans unité est un zéro : `padding: 0` ne réserve aucune place, et
+    # le refuser rendait illisible le remplissage de toute grille qui l'écrit.
+    if re.match(r"^[+-]?0+(?:\.0+)?$", morceau):
+        return 0.0
     trouvé = LONGUEUR.match(morceau)
     if trouvé:
         nombre = float(trouvé.group(1))
-        return nombre * 16 if trouvé.group(2) == "rem" else nombre
+        return nombre * RACINE_PX * echelle if trouvé.group(2) == "rem" else nombre
     trouvé = re.match(r"^([\d.]+)vw$", morceau)
     if trouvé and largeur is not None:
+        # `vw` ne suit pas la taille du texte : 5vw vaut 5 % de la fenêtre, quel
+        # que soit le réglage. C'est la moitié des écarts de `.hero-grid`.
         return float(trouvé.group(1)) * largeur / 100
     borné = CLAMP.match(morceau)
     if borné:
-        bas = mesure_en_px(borné.group(1), largeur)
-        milieu = mesure_en_px(borné.group(2), largeur)
-        haut = mesure_en_px(borné.group(3), largeur)
+        bas = mesure_en_px(borné.group(1), largeur, echelle)
+        milieu = mesure_en_px(borné.group(2), largeur, echelle)
+        haut = mesure_en_px(borné.group(3), largeur, echelle)
         if None in (bas, milieu, haut):
             return None
         return max(bas, min(milieu, haut))
     return None
 
 
-def ecart_a(grille: "Grille", largeur: int) -> float | None:
-    """L'écart entre colonnes de cette grille, à cette largeur de fenêtre."""
+def fenetre_maximale() -> int:
+    """La plus petite fenêtre où le conteneur atteint `--content`.
+
+    Dérivée de la gouttière lue, et non écrite 1208 px : le jour où la feuille
+    change `3rem`, tout ce qui se mesure « à la fenêtre maximale » doit changer
+    avec elle.
+    """
+    return int(round(CONTENU_DEFAUT + gouttiere().large * RACINE_PX))
+
+
+def ecart_a(grille: "Grille", largeur: int, echelle: float = 1.0) -> float | None:
+    """L'écart entre colonnes de cette grille, à cette largeur et taille de texte."""
     if not grille.gap_expr:
         return None
-    return mesure_en_px(grille.gap_expr, largeur)
+    return mesure_en_px(grille.gap_expr, largeur, echelle)
 
 
 def lire_grilles(texte: str) -> dict[str, Grille]:
     """Toutes les grilles dont la feuille fixe ou calcule le nombre de colonnes."""
     texte = sans_commentaires(texte)
+    definir_gouttiere(texte)
     grilles: dict[str, Grille] = {}
     for ordre, (selecteurs, corps, largeur_max, largeur_min, ligne) in enumerate(decouper(texte)):
         trouve = DECLARATION_COLONNES.search(corps)
@@ -347,11 +457,15 @@ def lire_grilles(texte: str) -> dict[str, Grille]:
         valeur = " ".join(trouve.group(1).split())
         forme, colonnes, minimum = classer_valeur(valeur)
         gap_expr = ecart_colonnes(corps)
+        remplissage = padding_horizontal(corps) if largeur_max is None and largeur_min is None else None
         for selecteur in selecteurs:
             grille = grilles.setdefault(selecteur, Grille(selecteur=selecteur, source=f"site.css:{ligne}"))
+            if remplissage and grille.padding_expr is None:
+                grille.padding_expr = remplissage
+                grille.padding_lu = padding_horizontal_px(remplissage, CONTENU_DEFAUT) is not None
             if gap_expr is not None:
                 grille.gap_expr = gap_expr
-                valeur_max = mesure_en_px(gap_expr, CONTENU_DEFAUT + GARNITURE_LATERALE)
+                valeur_max = mesure_en_px(gap_expr, fenetre_maximale())
                 if valeur_max is None:
                     grille.gap_lu = False
                 else:
@@ -375,8 +489,90 @@ def lire_grilles(texte: str) -> dict[str, Grille]:
     return grilles
 
 
-def conteneur(largeur: int, contenu: int = CONTENU_DEFAUT) -> float:
-    return min(contenu, largeur - GARNITURE_LATERALE)
+def conteneur(largeur: int, contenu: float = CONTENU_DEFAUT, echelle: float = 1.0) -> float:
+    """Largeur du `.container` à cette fenêtre et cette taille de texte.
+
+    `echelle` vaut 1 à taille normale, 1,15 à 115 %, 1,3 à 130 % : une gouttière
+    écrite en `rem` grandit avec le texte, donc le conteneur **rétrécit** quand
+    quelqu'un agrandit. C'était l'une des trois causes de divergence mesurées le
+    1er novembre 2026, et elle rendait fausse toute prédiction au-delà de 100 %.
+    """
+    return min(contenu, largeur - gouttiere().en_px(largeur, echelle))
+
+
+PADDING_DECLARATION = re.compile(r"(?<![\w-])padding(?:-inline|-left|-right)?\s*:\s*([^;]+)")
+
+
+def padding_horizontal(corps: str) -> str | None:
+    """L'expression du remplissage **horizontal** d'un bloc, s'il y en a un.
+
+    Une grille qui porte son propre remplissage ne donne pas le conteneur entier
+    à ses enfants : `.learning-work-panel` vaut 713 px à 761 px de fenêtre et
+    n'en laisse que 652 à ses deux panneaux. Le prédicat du repli porte donc sur
+    la largeur **utile**, pas sur celle du conteneur.
+    """
+    trouve = PADDING_DECLARATION.search(corps)
+    if not trouve:
+        return None
+    valeur = " ".join(trouve.group(1).split())
+    return valeur
+
+
+def padding_horizontal_px(expression: str, largeur: int, echelle: float = 1.0) -> float | None:
+    """Le remplissage horizontal total (gauche + droite), en pixels."""
+    morceaux, profondeur, courant = [], 0, ""
+    for caractere in expression:
+        if caractere == "(":
+            profondeur += 1
+        elif caractere == ")":
+            profondeur -= 1
+        if caractere == " " and profondeur == 0:
+            if courant:
+                morceaux.append(courant)
+            courant = ""
+            continue
+        courant += caractere
+    if courant:
+        morceaux.append(courant)
+    if not morceaux or len(morceaux) > 4:
+        return None
+    # `padding: a` → a des deux côtés ; `a b` → b ; `a b c` → b ; `a b c d` → b+d.
+    if len(morceaux) == 1:
+        gauche = droite = mesure_en_px(morceaux[0], largeur, echelle)
+    elif len(morceaux) == 2:
+        gauche = droite = mesure_en_px(morceaux[1], largeur, echelle)
+    elif len(morceaux) == 3:
+        gauche = droite = mesure_en_px(morceaux[1], largeur, echelle)
+    else:
+        gauche = mesure_en_px(morceaux[1], largeur, echelle)
+        droite = mesure_en_px(morceaux[3], largeur, echelle)
+    if gauche is None or droite is None:
+        return None
+    return gauche + droite
+
+
+def conteneur_de(grille: "Grille", largeur: int, echelle: float = 1.0) -> float:
+    """La largeur que cette grille laisse **à ses enfants**, remplissage déduit.
+
+    Rend le conteneur entier quand la règle n'écrit aucun remplissage. Quand elle
+    en écrit un que ce modèle ne sait pas évaluer, elle lève : une largeur utile
+    supposée fausse est exactement ce qui a coûté 70 divergences.
+    """
+    place = conteneur(largeur, echelle=echelle)
+    if not grille.padding_expr:
+        return place
+    if not grille.padding_lu:
+        raise GouttiereIllisible(
+            f"{grille.selecteur} : remplissage `{grille.padding_expr[:40]}` illisible — "
+            "la largeur utile de ses enfants ne peut pas être calculée"
+        )
+    rembourrage = padding_horizontal_px(grille.padding_expr, largeur, echelle)
+    if rembourrage is None:
+        raise GouttiereIllisible(
+            f"{grille.selecteur} : remplissage `{grille.padding_expr[:40]}` non évaluable "
+            f"à {largeur} px — la largeur utile de ses enfants ne peut pas être calculée"
+        )
+    return place - rembourrage
 
 
 def applique(regle: Regle, largeur: int) -> bool:
@@ -474,7 +670,7 @@ def colonnes_de_conception(grille: Grille) -> int:
         # `auto_fit` attend une largeur de **fenêtre** : lui passer une largeur de
         # conteneur appliquait la soustraction deux fois (1112 au lieu de 1160),
         # et une grille de quatre colonnes s'annonçait à trois.
-        return auto_fit_grille(grille, base.minimum, CONTENU_DEFAUT + GARNITURE_LATERALE)
+        return auto_fit_grille(grille, base.minimum, fenetre_maximale())
     return 0
 
 
@@ -499,7 +695,15 @@ def seuil_note(grille: Grille) -> str:
 
 
 def minimum_de_repli(grille: Grille) -> int | None:
-    """Le plus petit minimum qui renonce à la paire là où la cascade y renonçait."""
+    """Le plus petit minimum qui renonce à la paire là où la cascade y renonçait.
+
+    Le seuil se lit sur `conteneur(seuil)`, et non sur `conteneur(seuil + 1)` :
+    sous 760 px la gouttière est plus étroite, donc le conteneur y est **plus
+    large**. Une paire renoncée à 760 px peut donc revenir un peu au-dessus, dès
+    que le conteneur dépasse ce que deux panneaux réclament — elle ne revient
+    jamais en arrière, et c'est cet invariant, et non le souvenir du palier, que
+    le contrôle vérifie (`bandes_de_retour`).
+    """
     seuil = seuil_une_colonne(grille)
     if seuil is None:
         return None
@@ -518,7 +722,7 @@ def minimum_sans_troisieme_colonne(grille: Grille) -> int | None:
     à changer le dessin. Le 31 octobre 2026, cette règle manquait : `.document-grid`
     aurait affiché trois colonnes et une carte orpheline sur un écran de 1 920 px.
     """
-    place = conteneur(CONTENU_DEFAUT + GARNITURE_LATERALE)
+    place = conteneur(fenetre_maximale())
     candidats = [n for n in CANDIDATS if 3 * n + 2 * grille.gap > place]
     return min(candidats) if candidats else None
 
@@ -580,7 +784,7 @@ def minimum_pour_k(k: int, gap: float, contenu: float = CONTENU_DEFAUT) -> int |
     et fait tomber le nombre de colonnes exactement au moment où la largeur ne
     suffit plus — pas à une largeur ronde choisie d'avance.
     """
-    valides = [n for n in CANDIDATS if auto_fit(n, gap, int(contenu) + GARNITURE_LATERALE) == k]
+    valides = [n for n in CANDIDATS if auto_fit(n, gap, fenetre_maximale()) == k]
     return max(valides) if valides else None
 
 
@@ -982,7 +1186,9 @@ def ecart_de_largeur(grille: Grille) -> dict:
     return {"px": pire_px, "part": pire_part, "mesures": mesures}
 
 
-def colonnes_en_flex(grille: Grille, largeur: int, plancher: float, items: int = 0) -> int:
+def colonnes_en_flex(
+    grille: Grille, largeur: int, plancher: float, items: int = 0, echelle: float = 1.0
+) -> int:
     """Le nombre de panneaux qu'un `flex-wrap` alignerait à cette largeur.
 
     La règle est écrite **une fois**, ici : un panneau de plus tient quand
@@ -990,8 +1196,8 @@ def colonnes_en_flex(grille: Grille, largeur: int, plancher: float, items: int =
     `items` n'est pas une précaution de style : `flex-wrap` ne crée pas
     d'élément, une grille de deux panneaux n'en montrera jamais trois.
     """
-    place = conteneur(largeur)
-    ecart = ecart_a(grille, largeur)
+    place = conteneur_de(grille, largeur, echelle)
+    ecart = ecart_a(grille, largeur, echelle)
     ecart = grille.gap if ecart is None else ecart
     colonnes = 1
     while (colonnes + 1) * plancher + colonnes * ecart <= place:
@@ -999,6 +1205,98 @@ def colonnes_en_flex(grille: Grille, largeur: int, plancher: float, items: int =
     if items:
         colonnes = min(colonnes, items)
     return colonnes
+
+
+def padding_du_selecteur(racine: Path, selecteur: str) -> str | None:
+    """Le remplissage horizontal écrit par la règle **de base** de ce sélecteur.
+
+    Une grille convertie en `flex` n'a plus de `grid-template-columns` : elle a
+    donc disparu de `lire_grilles`, et son remplissage avec elle. Or c'est lui
+    qui décide de la largeur utile de ses enfants — `.learning-work-panel` valait
+    713 px de large et ne laissait que 652 px à ses deux panneaux.
+    """
+    chemin = racine / FEUILLE
+    if not chemin.is_file():
+        return None
+    for selecteurs, corps, largeur_max, largeur_min, _ in decouper(sans_commentaires(chemin.read_text(encoding="utf-8"))):
+        if largeur_max is not None or largeur_min is not None:
+            continue
+        if not any(s == selecteur for s in selecteurs):
+            continue
+        trouve = padding_horizontal(corps)
+        if trouve:
+            return trouve
+    return None
+
+
+def completer_grille(grille: Grille, racine: Path) -> None:
+    """Inscrit sur une grille synthétique le remplissage que la feuille lui écrit."""
+    if grille.padding_expr:
+        return
+    trouve = padding_du_selecteur(racine, grille.selecteur)
+    if trouve:
+        grille.padding_expr = trouve
+        grille.padding_lu = padding_horizontal_px(trouve, CONTENU_DEFAUT) is not None
+
+
+def marge_au_seuil(
+    grille: Grille, largeur: int, plancher: float, echelle: float = 1.0
+) -> float:
+    """De combien de pixels la prédiction est-elle du point de bascule ?
+
+    Une grille qui tient à 0,3 px près n'est pas une grille qui tient : la
+    gouttière d'une barre de défilement, l'arrondi de `vw` et le sous-pixel de la
+    mise en page peuvent la faire basculer, et le navigateur a raison contre le
+    modèle. Le 1er novembre 2026, `.hero-grid` prédisait une colonne à 743 px
+    alors qu'elle en montrait deux — l'écart valait 0,28 px, et un relevé qui
+    n'aurait pas donné cette marge aurait fait croire à une erreur de 700 px.
+
+    Rend la distance, en pixels, à la bascule la plus proche (0 = sur le fil).
+    """
+    place = conteneur_de(grille, largeur, echelle)
+    ecart = ecart_a(grille, largeur, echelle)
+    ecart = grille.gap if ecart is None else ecart
+    colonnes = colonnes_en_flex(grille, largeur, plancher, grille.items, echelle)
+    # Marge en dessous : ce qu'il reste quand `colonnes` panneaux tiennent.
+    dessous = place - (colonnes * plancher + (colonnes - 1) * ecart)
+    # Marge au-dessus : ce qui manque pour un panneau de plus.
+    if grille.items and colonnes >= grille.items:
+        return max(dessous, 0.0)
+    dessus = ((colonnes + 1) * plancher + colonnes * ecart) - place
+    return max(min(dessous, dessus), 0.0)
+
+
+def bandes_de_retour(grille: Grille, base: float, echelle: float = 1.0) -> list[dict]:
+    """Les largeurs où la grille **perd** une colonne en gagnant de la place.
+
+    C'est l'invariant qui compte vraiment, et il ne dépend d'aucune cascade
+    d'avant : quand la fenêtre s'élargit, une grille qui replie ne peut pas
+    passer de deux colonnes à une. Or le 1er novembre 2026, la gouttière du
+    conteneur passant de `2rem` à `3rem` à 761 px, le conteneur **rétrécit** de
+    16 px quand la fenêtre grandit d'un pixel : une base mal choisie produit
+    alors exactement cette marche arrière — celle que l'ancien contrôle appelait
+    « une bande d'un pixel » sans jamais la nommer ainsi.
+    """
+    bandes: list[dict] = []
+    encours: dict | None = None
+    precedent = colonnes_en_flex(grille, LARGEURS_FINES[0], base, grille.items, echelle)
+    for largeur in LARGEURS_FINES[1:]:
+        colonnes = colonnes_en_flex(grille, largeur, base, grille.items, echelle)
+        if colonnes < precedent:
+            if encours is not None and encours["fin"] == largeur - 1 and encours["apres"] == colonnes:
+                encours["fin"] = largeur
+            else:
+                encours = {
+                    "debut": largeur,
+                    "fin": largeur,
+                    "avant": precedent,
+                    "apres": colonnes,
+                }
+                bandes.append(encours)
+        else:
+            encours = None
+        precedent = colonnes
+    return bandes
 
 
 def bandes_de_changement(grille: Grille, plancher: float | None = None) -> list[dict]:
@@ -1525,7 +1823,7 @@ def grille_synthetique(selecteur: str, valeur: str, gap_expr: str) -> Grille:
     nombre écrit — sans quoi ce nombre serait un total recopié à la main.
     """
     grille = Grille(selecteur=selecteur, gap_expr=gap_expr)
-    valeur_gap = mesure_en_px(gap_expr, CONTENU_DEFAUT + GARNITURE_LATERALE)
+    valeur_gap = mesure_en_px(gap_expr, fenetre_maximale())
     grille.gap = round(valeur_gap, 2) if valeur_gap is not None else 16.0
     grille.gap_lu = valeur_gap is not None
     grille.regles = [Regle([selecteur], valeur, None, None, None, None, 1, 0)]
@@ -1704,6 +2002,45 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
         # règle de palier avait disparu avec la conversion. Le registre garde
         # donc la largeur du repli d'avant (`repli_avant_px`), et le contrôle
         # reconstruit la cascade d'avant pour confronter les deux.
+        #
+        # Le 1er novembre 2026, cette promesse est tombée pour six grilles sur
+        # onze : avec la **vraie** gouttière, reproduire un repli à 760 px exige
+        # une base supérieure à 333,6 px à 760 px (conteneur 728) et inférieure
+        # à 326,06 px à 761 px (conteneur 713) — l'intersection est vide, parce
+        # que le conteneur rétrécit de 16 px quand la fenêtre grandit d'un pixel.
+        # Une promesse irréalisable ne s'adoucit pas, elle se retire : ces
+        # grilles déclarent `repli_refuse_px`, le contrôle **démontre** alors que
+        # la fenêtre est vide, et exige à la place l'invariant qui compte
+        # vraiment — une grille ne perd jamais une colonne en gagnant de la place.
+        refuse = entree.get("repli_refuse_px")
+        if refuse is not None:
+            if not isinstance(refuse, int) or refuse <= 0:
+                erreurs.append(
+                    f"{selecteur} : `repli_refuse_px` ({refuse!r}) n'est pas une largeur en pixels"
+                )
+            elif not (base_expr and isinstance(base_px, (int, float))):
+                erreurs.append(
+                    f"{selecteur} : `repli_refuse_px` sans base déclarée — le refus porte "
+                    "sur une base qui n'est pas écrite"
+                )
+            else:
+                avant = grille_synthetique(selecteur, valeur, gap_expr)
+                completer_grille(avant, racine)
+                avant.items = len(attendus)
+                fenetre = fenetre_de_base(avant, refuse)
+                if fenetre is not None:
+                    erreurs.append(
+                        f"{selecteur} : le registre déclare irréalisable le repli à {refuse} px, "
+                        f"or une base y arrive — celles de {fenetre['bas']:.2f} à "
+                        f"{fenetre['haut']:.2f} px. Le refus n'a plus d'objet : c'est la "
+                        "déclaration de base qu'il faut revoir"
+                    )
+            if entree.get("repli_avant_px") is not None:
+                erreurs.append(
+                    f"{selecteur} : `repli_avant_px` et `repli_refuse_px` ensemble — "
+                    "le repli est soit reproduit, soit démontré irréalisable, pas les deux"
+                )
+
         repli = entree.get("repli_avant_px")
         if repli is not None:
             if not isinstance(repli, int) or repli <= 0:
@@ -1717,6 +2054,7 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
                 )
             else:
                 avant = grille_synthetique(selecteur, valeur, gap_expr)
+                completer_grille(avant, racine)
                 avant.items = len(attendus)
                 avant.regles.append(
                     Regle([selecteur], "minmax(0, 1fr)", None, None, repli, None, 2, 1)
@@ -1739,6 +2077,30 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
                         f"mais à {premiere['debut']} px (bande {premiere['debut']}–{premiere['fin']}) "
                         f"la grille d'avant montrait {premiere['cascade']} colonne(s) et le flex "
                         f"en donne {premiere['flex']} — {ou} : la base ne reproduit pas le repli"
+                    )
+
+        # L'invariant qui survit à tout le reste, et qui ne présume aucune
+        # cascade d'avant : **une grille ne perd jamais une colonne en gagnant de
+        # la place**. Il se vérifie aux trois tailles de texte, parce qu'une base
+        # en `em` et un écart en `rem` bougent tous les deux avec le réglage de la
+        # personne — et qu'aucune mesure d'écran ne peut le savoir à sa place.
+        if base_expr and isinstance(base_px, (int, float)) and attendus:
+            base_em = float(base_expr[:-2]) if base_expr.endswith("em") else None
+            synthetique = grille_synthetique(selecteur, valeur, gap_expr)
+            completer_grille(synthetique, racine)
+            synthetique.items = len(attendus)
+            for echelle in (1.0, 1.15, 1.3):
+                base_echelle = (
+                    base_em * RACINE_PX * echelle if base_em is not None else float(base_px)
+                )
+                retours = bandes_de_retour(synthetique, base_echelle, echelle)
+                if retours:
+                    premiere = retours[0]
+                    erreurs.append(
+                        f"{selecteur} : à {premiere['debut']} px et texte ×{echelle:g}, la grille "
+                        f"passe de {premiere['avant']} à {premiere['apres']} colonne(s) alors que "
+                        f"la fenêtre s'élargit (bande {premiere['debut']}–{premiere['fin']}) — "
+                        "une base trop grande pour la gouttière de ce côté du seuil"
                     )
 
         # Plafond en `width` sur un enfant : en flex, il ne s'applique pas.
@@ -2110,6 +2472,10 @@ def releve_navigateur(
             continue
         if selecteur in capacites and capacites[selecteur].get("items"):
             grille.items = max(capacites[selecteur]["items"])
+        # Le remplissage du conteneur lui-même : une grille qui en porte un ne
+        # donne pas sa largeur à ses enfants, et le navigateur compte les
+        # colonnes dans la largeur utile.
+        completer_grille(grille, racine)
         page = pages.get(selecteur)
         if not page:
             releve["non_mesurables"].append(
@@ -2141,8 +2507,8 @@ def releve_navigateur(
             for echelle in echelles:
                 base = base_em * RACINE_PX * echelle if suivant_le_texte else float(base_px)
 
-                def prediction(largeur: int, base=base) -> int:
-                    return colonnes_en_flex(grille, largeur, base, grille.items)
+                def prediction(largeur: int, base=base, echelle=echelle) -> int:
+                    return colonnes_en_flex(grille, largeur, base, grille.items, echelle)
 
                 retenues = set(_ruptures(prediction, LARGEURS_FINES)) | set(LARGEURS_REPERE)
                 for largeur in sorted(retenues):
@@ -2151,6 +2517,18 @@ def releve_navigateur(
                             "largeur": largeur,
                             "echelle": echelle,
                             "attendu": prediction(largeur),
+                            # La largeur que le modèle présume pour les enfants :
+                            # le rapporteur la compare à celle que le navigateur
+                            # mesure, et c'est là que se lisent la gouttière et
+                            # le remplissage. Le rapporteur ne la recalcule pas —
+                            # deux arithmétiques qui divergent feraient accuser
+                            # la feuille d'un désaccord entre deux constantes.
+                            "conteneur": round(conteneur_de(grille, largeur, echelle), 2),
+                            # La distance à la bascule : une prédiction à 0,3 px
+                            # du seuil n'est pas une prédiction, c'est une
+                            # convention. Le rapporteur la nomme au lieu de
+                            # compter la divergence comme une faute.
+                            "marge": round(marge_au_seuil(grille, largeur, base, echelle), 2),
                         }
                     )
             releve["grilles"].append(
@@ -2181,7 +2559,12 @@ def releve_navigateur(
                 # texte ne change pas leur nombre. Une seule échelle suffit, et
                 # le dire vaut mieux que de mesurer trois fois la même chose.
                 "points": [
-                    {"largeur": largeur, "echelle": 1.0, "attendu": prediction_grille(largeur)}
+                    {
+                        "largeur": largeur,
+                        "echelle": 1.0,
+                        "attendu": prediction_grille(largeur),
+                        "conteneur": round(conteneur_de(grille, largeur), 2),
+                    }
                     for largeur in sorted(retenues)
                 ],
             }
@@ -2261,6 +2644,12 @@ def principal(arguments: list[str] | None = None) -> int:
             json.dumps(releve, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
         )
         points = sum(len(grille["points"]) for grille in releve["grilles"])
+        gouttiere_lue = gouttiere()
+        print(
+            f"Conteneur lu : gouttière {gouttiere_lue.large:g}rem au-dessus de "
+            f"{gouttiere_lue.seuil} px, {gouttiere_lue.etroit:g}rem à {gouttiere_lue.seuil} px "
+            "et moins, multipliée par la taille du texte."
+        )
         print(
             f"Relevé écrit : {destination} — {len(releve['grilles'])} grille(s), "
             f"{points} point(s) à confronter à un navigateur."
@@ -2394,6 +2783,13 @@ def principal(arguments: list[str] | None = None) -> int:
         formes: dict[str, int] = {}
         for resultat in resultats:
             formes[resultat["forme"]] = formes.get(resultat["forme"], 0) + 1
+        gouttiere_lue = gouttiere()
+        print(
+            "Conteneur : "
+            f"`100% - {gouttiere_lue.large:g}rem` au-dessus de {gouttiere_lue.seuil} px, "
+            f"`100% - {gouttiere_lue.etroit:g}rem` à {gouttiere_lue.seuil} px et moins "
+            f"(lu dans {gouttiere_lue.source}) — la gouttière suit la taille du texte."
+        )
         print(
             f"{len(resultats)} grilles à pistes inégales : "
             + ", ".join(f"{nombre} {forme}" for forme, nombre in sorted(formes.items()))
