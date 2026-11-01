@@ -997,3 +997,15 @@ controle = "python3 outils/compter-paliers.py && python3 outils/modele-grilles.p
 limite = "Le compteur reste utile comme garde-fou d'augmentation (un palier de plus est un écran de plus présumé) ; c'est comme mesure d'avancement qu'il ne vaut rien. Et les bases de compromis sont calculées sur la présentation par défaut (contenu 1 160 px), pas en Lecture ni en Panorama."
 suite = "Traiter les quatre grilles « proportion » restantes, dont trois n'ont aucune base qui reproduit leur repli : la méthode doit être dite, pas improvisée."
 initiatives = ["optimisation-du-site"]
+
+[[avancee]]
+id = "classes-mortes-relevees"
+date = 2026-11-01
+titre = "Mesurer les grilles que personne n'ouvre, avant de les convertir"
+constat = "Le relevé annonçait quatre grilles « proportion » restantes et proposait pour deux d'entre elles (.ai-feature-panel, .simulateur-promo-panel) des conversions, dont un compromis chiffré à 28,54em. Ces deux grilles n'étaient ouvertes par aucune page : toute une famille ai-feature-* (13 classes) et simulateur-promo-* (2) dormait dans la feuille, avec 25 classes mortes au total. Un modèle arithmétique ne sait pas distinguer une grille d'un nom dans une feuille."
+changement = "Un nouveau contrôle, outils/auditer-selecteurs-morts.py, lit chaque sélecteur de assets/css et cherche le nom de classe dans les sources capables d'en produire une instance (pages, scripts, générateurs, données). Trois verdicts : lue, dynamique (construite à l'exécution, donc indécidable : adventure-learning-world-${n}) ou morte. Les 25 classes mortes sont retirées de la feuille, branche par branche dans les listes et les :is(...), et un composé entièrement mort condamne le sélecteur. Compteurs : 20 → 17 grilles à pistes inégales, 4 → 2 « proportion », 37 → 36 blocs de format, 188 → 176 règles de palier."
+preuves = ["outils/auditer-selecteurs-morts.py", "outils/test_auditer_selecteurs_morts.py", "assets/css/site.css", "docs/rd/paliers-affichage.toml", "docs/rd/formats-affichage.md", ".github/workflows/verification.yml"]
+controle = "python3 outils/auditer-selecteurs-morts.py --verifier && python3 outils/test_auditer_selecteurs_morts.py && python3 outils/compter-paliers.py && python3 outils/modele-grilles.py --verifier"
+limite = "Le relevé ne voit pas une classe construite par une source qu'il ne lit pas, et il ne dit rien de l'utilité d'une classe qu'il trouve : une règle peut viser une classe présente et n'avoir aucun effet. Les six classes d'anglais-aventure.css construites à l'exécution restent indécidables, comptées mais non jugées. Les deux « proportion » qui restent ne sont pas converties : .learning-coverage-topic est une composition avec un enfant placé (grid-column:2), et .map-layout coûterait 212,9 px (78,8 %) d'écart de largeur de colonne."
+suite = "Instruire les six grilles « borne » — un plafond en pixels n'a pas d'équivalent direct en flex — puis les huit « contenu », dont le repli dépend du texte et qu'aucun modèle ne tranche sans navigateur."
+initiatives = ["optimisation-du-site"]

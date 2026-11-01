@@ -629,7 +629,11 @@ def fichiers_du_site() -> None:
             )
         )
         and styles.count("var(--white)") == 0
-        and styles.count("var(--navy)") == 13
+        # Compte daté : 13 jusqu'au 1er novembre 2026, 12 depuis le retrait des
+        # 25 classes qu'aucune page n'ouvre — le noyau de la constellation
+        # `.ai-feature-core` en portait un. Le nombre reste exact : il doit
+        # baisser quand une règle disparaît, pas quand on ajoute un littéral.
+        and styles.count("var(--navy)") == 12
         and styles.count("rgba(255, 255, 255, .97)") == 1
         and styles.count("#121f43") == 1
         and (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8").count("var(--navy)") == 1,

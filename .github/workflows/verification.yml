@@ -382,6 +382,22 @@ jobs:
           python3 outils/modele-grilles.py --verifier
           python3 outils/test_modele_grilles.py
 
+      # Le 1er novembre 2026, le modèle annonçait quatre grilles « proportion »
+      # restantes ; deux d'entre elles n'existaient que dans la feuille, et le
+      # relevé proposait donc des conversions sans objet. Une grille que
+      # personne n'ouvre n'a pas de repli à reproduire. Ce contrôle cherche
+      # chaque classe de `assets/css` dans les sources qui peuvent produire une
+      # instance (pages, scripts, générateurs, données) et refuse celles qui
+      # n'y figurent nulle part — sauf si une source les construit à
+      # l'exécution (`adventure-learning-world-${n}`), cas qu'il avoue
+      # indécidable au lieu de le déclarer mort. Le banc plante sept fautes dans
+      # une vraie copie, dont une feuille absente et un corpus vidé, qui doivent
+      # sortir en code 2.
+      - name: Relever les classes que personne n’ouvre
+        run: |
+          python3 outils/auditer-selecteurs-morts.py --verifier
+          python3 outils/test_auditer_selecteurs_morts.py
+
   graphismes:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
