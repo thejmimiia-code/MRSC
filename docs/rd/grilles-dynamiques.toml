@@ -287,13 +287,13 @@ raison = "Panneau « Partager le site » de l'accueil : texte à gauche, boutons
 selecteur = ".hero-grid"
 grille_avant = "minmax(0, 1.15fr) minmax(280px, .75fr)"
 gap_avant = "clamp(2.5rem, 8vw, 7rem)"
-plancher_expr = "20.4em"
-plancher_px = 326.4
+plancher_expr = "20.37em"
+plancher_px = 325.92
 repli_avant_px = 760
-ecart_max_px = 68.7
+ecart_max_px = 68.6
 ecart_part = 0.243
 presentation_repliee = ["lecture"]
-raison = "Ouverture de l'accueil : texte à gauche, carte de repères à droite. Première base écrite en em : elle suit la taille du texte, donc le repli avance tout seul à 115 % et 130 %, ce qu'aucune condition de largeur d'écran ne fait. 20.4em (326,4 px) est la plus petite base qui reproduit exactement le repli d'avant — le nombre de colonnes ne change à aucune largeur — au prix d'un écart de largeur de colonne plus grand (68,7 px, 24,3 % au lieu de 58,9 px, 20,9 %). Deux règles de palier qui forçaient une colonne disparaissent, dont celle de .home-hero-civic .hero-grid."
+raison = "Ouverture de l'accueil : texte à gauche, carte de repères à droite. Première base écrite en em : elle suit la taille du texte, donc le repli avance tout seul à 115 % et 130 %, ce qu'aucune condition de largeur d'écran ne fait. La base écrite est 20.37em (325,92 px), pas 20.4em : les bases qui replient à 760 px forment une fenêtre étroite — ]325,60 ; 326,06] px, soit 0,46 px de large — et 20.4em (326,40 px) tombe juste au-dessus, ce qui laissait une bande d'un seul pixel à 761 px. Le nombre de colonnes ne change donc à aucune largeur, vérifié au pixel et non au pas de 10 px, au prix d'un écart de largeur de colonne plus grand (68,6 px, 24,3 % au lieu de 58,9 px, 20,9 %). Deux règles de palier qui forçaient une colonne disparaissent, dont celle de .home-hero-civic .hero-grid."
 
 [[grille_flex]]
 selecteur = ".mission-grid"
@@ -311,13 +311,13 @@ raison = "Bloc ÉVA de l'accueil : texte long à gauche, carte des valeurs à dr
 selecteur = ".learning-work-panel"
 grille_avant = "minmax(0,1.2fr) minmax(280px,.8fr)"
 gap_avant = "2rem"
-plancher_expr = "21.29em"
-plancher_px = 340.6
+plancher_expr = "21.28em"
+plancher_px = 340.48
 repli_avant_px = 760
 ecart_max_px = 68.1
 ecart_part = 0.243
 presentation_repliee = ["lecture"]
-raison = "Panneau « Le quotidien et le travail sont aussi des lieux d'apprentissage » de la page Apprendre : texte à gauche, trois étapes à droite. Base en em (21.29em = 340,6 px), la plus petite qui reproduit le repli d'avant (340,5 px) : aucune largeur ne change de nombre de colonnes. Coût mesuré : 68,1 px (24,3 %)."
+raison = "Panneau « Le quotidien et le travail sont aussi des lieux d'apprentissage » de la page Apprendre : texte à gauche, trois étapes à droite. Base en em 21.28em (340,48 px) : la fenêtre des bases qui replient à 760 px va de 340,00 à 340,50 px, et 21.29em (340,64 px) en sortait de 0,14 px — une bande d'un pixel à 761 px, invisible au pas de 10 px du relevé. Vérifié au pixel, aucune largeur ne change de nombre de colonnes. Coût mesuré : 68,1 px (24,3 %)."
 
 [[grille_flex]]
 selecteur = ".ai-questions-layout"
@@ -336,7 +336,7 @@ selecteur = ".learning-hero-grid"
 grille_avant = "minmax(0,1.15fr) minmax(270px,.85fr)"
 gap_avant = "clamp(1.5rem,5vw,4rem)"
 plancher_expr = "21.09em"
-plancher_px = 337.4
+plancher_px = 337.44
 repli_avant_px = 760
 ecart_max_px = 50.6
 ecart_part = 0.174
@@ -347,13 +347,13 @@ raison = "Ouverture de la page Apprendre : texte et principes. Base en em (21.09
 selecteur = ".participation-grid"
 grille_avant = "minmax(0, 1.1fr) minmax(280px, .9fr)"
 gap_avant = "2rem"
-plancher_expr = "21.29em"
-plancher_px = 340.5
+plancher_expr = "21.28em"
+plancher_px = 340.48
 repli_avant_px = 760
-ecart_max_px = 34.1
+ecart_max_px = 34.0
 ecart_part = 0.11
 presentation_repliee = ["lecture"]
-raison = "Bloc de participation de l'accueil : citation et carte « Comment participer ? ». Grille RETENUE le matin du 31 octobre — 640–760 px de plage, 28 px (9 %) d'écart — puis convertie l'après-midi : la base de compromis (340,5 px, écrite 21.29em) reproduit exactement le repli d'avant, donc la plage disparaît. Le coût passe de 28 px (9 %) à 34,1 px (11 %) : un demi-point de proportion payé pour un nombre de colonnes constant, et une base qui suit désormais la taille du texte."
+raison = "Bloc de participation de l'accueil : citation et carte « Comment participer ? ». Grille RETENUE le matin du 31 octobre — 640–760 px de plage, 28 px (9 %) d'écart — puis convertie l'après-midi : la base de compromis (340,48 px, écrite 21.28em — et non 21.29em, qui sort de la fenêtre de 0,46 px en rouvrant une bande d'un pixel) reproduit exactement le repli d'avant, donc la plage disparaît. Le coût passe de 28 px (9 %) à 34,0 px (11 %) : un demi-point de proportion payé pour un nombre de colonnes constant, et une base qui suit désormais la taille du texte."
 
 # — Refus écrits du 1er novembre 2026 -----------------------------------------
 # Le relevé `--pistes` classait six grilles « borne » — le mot d'un plafond.
@@ -372,3 +372,24 @@ raison = "Bloc de participation de l'accueil : citation et carte « Comment part
 selecteur = ".learning-article-layout"
 valeur = "minmax(0,1fr) minmax(230px,300px)"
 raison = "Article de leçon et rail latéral. Mesure du 1er novembre 2026 : sur les 180 largeurs où la grille a deux colonnes, la piste plafonnée vaut exactement 300 px — la borne basse de 230 px n'est jamais atteinte, la cascade ne la sert pas. Le refus ne porte donc pas sur la borne, mais sur la seconde conséquence du plafond : sous 760 px, la grille met ce panneau sur une seule piste `minmax(0,1fr)` et il prend toute la largeur ; un `flex` de base 300 px ne saurait pas faire cela, parce que `flex-grow` ne peut pas dépendre du repli. Convertir demanderait un second comportement, pas une base."
+
+# — Septième vague, 1er novembre 2026 : `.simulateur-intro` --------------------
+# Le relevé la classait « contenu » avec les vraies pistes `auto`, mais rien n'y
+# dépend du texte : `minmax(0,1.35fr) minmax(0,1fr)` n'a simplement aucun
+# plancher. Le repli venait du palier de 1 000 px, et une base choisie le
+# remplace. La fenêtre des bases qui replient pile entre 1 000 et 1 001 px est
+# ]456,00 ; 456,48] ; 28.53em = 456,48 px est la plus grande écriture en `em`
+# qui y tombe, et la vérification au pixel sur 2 321 largeurs ne trouve aucune
+# bande. La recherche par pas de 0,5 px, elle, ratait cette fenêtre de 0,48 px :
+# 456,0 était sous la borne basse et 456,5 au-dessus de la haute.
+[[grille_flex]]
+selecteur = ".simulateur-intro"
+grille_avant = "minmax(0, 1.35fr) minmax(0, 1fr)"
+gap_avant = "clamp(1.5rem, 4vw, 3rem)"
+plancher_expr = "28.53em"
+plancher_px = 456.48
+repli_avant_px = 1000
+ecart_max_px = 68.0
+ecart_part = 0.173
+presentation_repliee = ["lecture"]
+raison = "Introduction de la page simulateur : texte d'un côté, chiffres clés de l'autre. Deux colonnes sans plancher, repliées par un palier de 1 000 px qui ne portait qu'elles. Base choisie dans la fenêtre exacte du repli, vérifiée au pixel : aucune largeur ne change de nombre de colonnes. Coût mesuré : 68,0 px (17,3 %), pour la même raison que partout ailleurs — flex ne partage que le surplus."

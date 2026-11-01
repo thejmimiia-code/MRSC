@@ -640,27 +640,29 @@ html.contraste-renforce .site-status-note {
   align-items: center;
   gap: clamp(2.5rem, 8vw, 7rem);
 }
-/* Deux colonnes inégales, sans largeur d'écran (31 octobre 2026). La base est
-   écrite en `em` (20.4em = 326,4 px à taille de texte normale), et ce n'est pas
-   une coquetterie : elle **suit la taille du texte**. À 130 %, la base vaut
-   424 px et le repli avance donc tout seul — ce qu'une condition de largeur
-   d'écran ne sait pas faire, puisqu'elle ignore le réglage de la personne.
-   Pourquoi 20.4em plutôt que le minimum déclaré de 280 px : avec 280 px, deux
-   colonnes tenaient dès 592 px de fenêtre, alors que le palier de 760 px en
-   imposait une. `modele-grilles.py` a cherché la plus petite base qui reproduit
-   exactement le repli d'avant : 325,64 px. 20.4em en donne 326,4 ; le nombre de
-   colonnes ne change donc à **aucune** largeur, et les deux règles de palier
-   qui forçaient une colonne (dont celle de `.home-hero-civic .hero-grid`)
-   disparaissent. Ce que cela coûte, mesuré : une colonne peut varier de 68,7 px
-   (24,3 %) au plus au lieu de 58,9 px (20,9 %) ; la carte de droite s'élargit,
-   le texte de gauche se resserre, aux très grandes largeurs. */
+/* Deux colonnes inégales, sans largeur d'écran (31 octobre 2026, base corrigée le
+   1er novembre). La base est écrite en `em` (20.37em = 325,92 px à taille de
+   texte normale), et ce n'est pas une coquetterie : elle **suit la taille du
+   texte**. À 130 %, elle vaut 423,7 px et le repli avance donc tout seul — ce
+   qu'une condition de largeur d'écran ne sait pas faire, puisqu'elle ignore le
+   réglage de la personne.
+   Pourquoi 20.37em : le palier repliait à 760 px, et une base de `flex` ne
+   replie qu'à un seuil. La fenêtre des bases qui tombent pile entre 760 et
+   761 px va de **325,60 à 326,06 px** — un demi-pixel de large. La valeur
+   écrite la veille, 20.4em = 326,4 px, sortait de cette fenêtre de 0,34 px et
+   laissait une bande d'**un pixel** à 761 px, que le balayage au pas de 10 px
+   ne voyait pas. 20.37em reste dedans : le nombre de colonnes ne change plus à
+   aucune largeur, au pixel près.
+   Ce que cela coûte, mesuré : une colonne peut varier de 68,6 px (24,3 %) au
+   plus au lieu de 58,9 px (20,9 %) ; la carte de droite s'élargit, le texte de
+   gauche se resserre, aux très grandes largeurs. */
 .hero-grid > :first-child {
-  flex: 1.15 1 20.4em;
+  flex: 1.15 1 20.37em;
   min-width: 0;
 }
 
 .hero-grid > :last-child {
-  flex: .75 1 20.4em;
+  flex: .75 1 20.37em;
   min-width: 0;
 }
 
@@ -878,19 +880,22 @@ html.contraste-renforce .site-status-note {
    avait été **retenue** le matin du 31 octobre : à 280 px de base, elle laissait
    une plage de 640 à 760 px où deux cartes apparaissaient, avec 28 px (9 %)
    d'écart de largeur. La décision est levée par une mesure, pas par un
-   revirement : la base de compromis — 340,5 px, écrite 21.29em — reproduit
+   revirement : la base de compromis — 340,48 px, écrite 21.28em — reproduit
    exactement le repli d'avant, donc la plage disparaît. Ce qu'on paie en
-   échange : l'écart de largeur de colonne monte de 28 px (9 %) à 34,1 px
+   échange : l'écart de largeur de colonne monte de 28 px (9 %) à 34,0 px
    (11 %). Un nombre de colonnes constant partout vaut ce demi-point de
-   proportion, et la base suit désormais la taille du texte. */
+   proportion, et la base suit désormais la taille du texte.
+   Écrit 21.29em la veille, corrigé le 1er novembre : 21.29em vaut 340,64 px,
+   soit 0,14 px **au-dessus** de la fenêtre (340,00 à 340,50 px) — et cette
+   bande d'un pixel à 761 px, le balayage au pas de 10 px ne la voyait pas. */
 
 .participation-grid > :first-child {
-  flex: 1.1 1 21.29em;
+  flex: 1.1 1 21.28em;
   min-width: 0;
 }
 
 .participation-grid > :last-child {
-  flex: .9 1 21.29em;
+  flex: .9 1 21.28em;
   min-width: 0;
 }
 
@@ -2627,10 +2632,26 @@ html.contraste-renforce .resource-scope-note {
 /* Simulateur macro-politique — page d'intégration et encart d'accueil */
 
 .simulateur-intro {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: clamp(1.5rem, 4vw, 3rem);
-  align-items: start;
+  align-items: flex-start;
+}
+/* Deux colonnes inégales, sans largeur d'écran (1er novembre 2026). Le palier de
+   1 000 px décidait du repli ; une base choisie le remplace. 28.53em (456,48 px)
+   est la plus grande écriture en `em` qui tombe dans la fenêtre des bases
+   repliant pile entre 1 000 et 1 001 px : ]456,00 ; 456,48]. Vérifié au pixel
+   sur les 2 321 largeurs de 240 à 2 560 px : aucune bande.
+   Ce que cela coûte : 68,0 px (17,3 %) d'écart de largeur de colonne au plus,
+   parce que `flex` ne partage que le surplus là où `fr` partage tout l'espace. */
+.simulateur-intro > :first-child {
+  flex: 1.35 1 28.53em;
+  min-width: 0;
+}
+
+.simulateur-intro > :last-child {
+  flex: 1 1 28.53em;
+  min-width: 0;
 }
 .simulateur-chiffres {
   display: grid;
@@ -2691,9 +2712,6 @@ html.contraste-renforce .resource-scope-note {
 .simulateur-duo ul { display: grid; gap: .5rem; margin: .8rem 0 0; padding-left: 1.1rem; font-size: max(12px, .92rem); color: var(--muted); }
 .simulateur-duo li::marker { color: var(--green); }
 .simulateur-card-limite { border-top-color: var(--gold); }
-@media (max-width: 1000px) {
-  .simulateur-intro { grid-template-columns: minmax(0, 1fr); }
-}
 @media (max-width: 760px) {
   .simulateur-frame { height: 820px; }
 }
@@ -3439,19 +3457,21 @@ html.has-js .site-header.is-compact .header-compact-brand img {
   gap:2rem; padding:clamp(1.5rem,4vw,2.6rem); border-radius:22px;
   background:linear-gradient(115deg,var(--tint-green),var(--surface-soft-2) 62%,var(--tint-gold));
 }
-/* Deux colonnes inégales, sans largeur d'écran (31 octobre 2026) : base en `em`
-   (21.29em = 340,6 px), la plus petite qui reproduit le repli d'avant —
-   340,5 px. Aucune largeur ne change donc de nombre de colonnes, et la règle de
-   760 px qui forçait une colonne cesse de nommer cette grille. Coût mesuré :
-   68,1 px (24,3 %) d'écart de largeur de colonne au plus. */
+/* Deux colonnes inégales, sans largeur d'écran (31 octobre 2026, base corrigée
+   le 1er novembre) : base en `em` (21.28em = 340,48 px). La fenêtre des bases
+   qui replient pile entre 760 et 761 px va de 340,00 à 340,50 px ; 21.29em
+   (340,64 px) en sortait de 0,14 px et laissait une bande d'un pixel à 761 px.
+   Aucune largeur ne change plus de nombre de colonnes, au pixel près, et la
+   règle de 760 px qui forçait une colonne cesse de nommer cette grille. Coût
+   mesuré : 68,1 px (24,3 %) d'écart de largeur de colonne au plus. */
 
 .learning-work-panel > :first-child {
-  flex: 1.2 1 21.29em;
+  flex: 1.2 1 21.28em;
   min-width: 0;
 }
 
 .learning-work-panel > :last-child {
-  flex: .8 1 21.29em;
+  flex: .8 1 21.28em;
   min-width: 0;
 }
 .learning-work-panel h2 { font-size:clamp(1.7rem,3vw,2.3rem); }
@@ -4062,7 +4082,7 @@ html[data-layout="lecture"] main :is(
   .join-panel,.document-grid,.link-grid,.contact-grid,.map-layout,
   .home-action-grid,.home-voice-grid,.ai-metric-grid,.ai-forms-grid,.ai-balance-grid,.ai-lives-grid,
   .ai-path-steps,.ai-cta-panel,.principle-grid,.trace-panel,
-  .simulateur-intro,.simulateur-chiffres,.simulateur-duo,.home-hero-facts,
+  .simulateur-chiffres,.simulateur-duo,.home-hero-facts,
   .learning-article-layout,.learning-catalogue-grid,
   .learning-level-grid,.learning-ecosystem-grid,.learning-filters,.learning-feedback-panel,
   .learning-code-grid,.learning-coverage-topic,
@@ -4077,7 +4097,7 @@ html[data-layout="lecture"] .site-footer .footer-grid { grid-template-columns: m
    Depuis que `.ai-hero-grid` est en `flex-wrap`, cette déclaration n'aurait plus
    d'effet : c'est la base des deux panneaux qui doit passer à 100 %. */
 
-html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel, .ai-path-panel, .home-share-panel, .hero-grid, .mission-grid, .learning-work-panel, .ai-questions-layout, .learning-hero-grid, .participation-grid) > * { flex-basis: 100%; }
+html[data-layout="lecture"] main :is(.ai-hero-grid, .english-promo-panel, .ai-path-panel, .home-share-panel, .hero-grid, .mission-grid, .learning-work-panel, .ai-questions-layout, .learning-hero-grid, .participation-grid, .simulateur-intro) > * { flex-basis: 100%; }
 html[data-layout="lecture"] main :is(.learning-lesson-article,.learning-lesson-aside,.ai-section-intro,.ai-fraud-evidence,.ai-hero-copy) {
   width: min(100%,78ch);
   margin-inline: auto;

@@ -1058,14 +1058,19 @@ compte, et `docs/rd/paliers-affichage.toml` porte la raison de chacun.
 
 | Classe | Conditions | Blocs | Ce qu'elle présume |
 | --- | --- | --- | --- |
-| `format` | 17 | 45 | une largeur, une hauteur ou une orientation — donc un écran |
+| `format` | 17 | 35 | une largeur, une hauteur ou une orientation — donc un écran |
 | `preference` | 8 | 21 | un réglage de la personne, la densité ou l'impression — aucune taille |
 
 Sur les 17 conditions de format, **15 sont en dette** et 2 sont assumées : les
 planchers de survie à 240 et 300 px, en dessous desquels il n'existe plus
 d'appareil, seulement un cadre d'aperçu. La dette la plus lourde est
-`(max-width: 760px)`, quinze blocs : c'est ce seuil qui décide que le site est
+`(max-width: 760px)`, **onze blocs** : c'est ce seuil qui décide que le site est
 sur téléphone, et il n'a jamais été mesuré.
+
+Ce tableau a été recopié à la main une fois de trop : il annonçait encore 45
+blocs de format et quinze blocs à 760 px quand le relevé du 1er novembre 2026 en
+comptait 35 et onze. Le chiffre qui fait foi est la sortie de
+`compter-paliers.py --releve`, pas cette ligne.
 
 Deux conditions vivaient écrites de deux façons — `(max-width:760px)` à côté de
 `(max-width: 760px)`, `(forced-colors:active)` à côté de

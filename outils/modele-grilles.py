@@ -52,6 +52,14 @@ FEUILLE = Path("assets/css/site.css")
 #: Largeurs de fenêtre balayées, de la plus étroite tenable au grand écran.
 LARGEURS = list(range(240, 2561, 10))
 
+#: Le même balayage au pixel. Depuis le 1er novembre 2026, la promesse « aucune
+#: largeur ne change de nombre de colonnes » se vérifie ici : au pas de 10 px,
+#: trois grilles converties la veille passaient pour exactes alors qu'elles
+#: changeaient de colonnes à **761 px**, une largeur que le pas sautait. Une
+#: bande étroite n'est pas une bande nulle — la première est invisible, la
+#: seconde est vraie.
+LARGEURS_FINES = list(range(240, 2561, 1))
+
 #: Largeur du conteneur : `width: min(var(--content), calc(100% - 3rem))`.
 #: `--content` vaut 1160 px par défaut ; les présentations le changent (940,
 #: 1240, 1380, 1480) et ce script ne mesure que la présentation par défaut.
@@ -931,7 +939,13 @@ def largeurs_pistes(grille: Grille, largeur: int) -> dict | None:
     # `flex-wrap` : base = plancher de la piste, le plus grand plancher si elle
     # n'en a pas ; la croissance reprend le rapport des `fr`.
     plancher_commun = max(planchers) or 0.0
-    if plancher_commun <= 0:
+    # Une grille `minmax(0, 1.35fr) minmax(0, 1fr)` n'a aucun plancher : ses
+    # colonnes ne dépendent que de la place. La base d'un `flex` est alors une
+    # **décision** (où l'on renonce à la paire), et c'est elle qu'on mesure —
+    # pas `0`, qui empêcherait tout repli. Le 1er novembre 2026, ce cas tombait
+    # dans « contenu » avec les vraies pistes `auto`, ce qui est faux : rien
+    # n'y dépend du texte.
+    if plancher_commun <= 0 and not grille.base_flex:
         return None
     if grille.base_flex:
         plancher_commun = grille.base_flex
@@ -1100,6 +1114,101 @@ def plancher_de(grille: Grille) -> float | None:
 RACINE_PX = 16.0
 
 
+def bandes_fines(grille: Grille, base: float) -> list[dict]:
+    """Les bandes de changement au pixel près, avec la base réellement écrite.
+
+    `bandes_de_changement` balaie au pas de 10 px : elle ne voit pas une bande
+    d'un ou deux pixels, et c'est exactement là que se cachaient trois erreurs.
+    """
+    bandes: list[dict] = []
+    encours: dict | None = None
+    for largeur in LARGEURS_FINES:
+        flex = colonnes_en_flex(grille, largeur, base, grille.items)
+        cascade = colonnes_de_la_cascade(grille, largeur)
+        if flex == cascade:
+            encours = None
+            continue
+        if encours is not None and encours["cascade"] == cascade and encours["flex"] == flex:
+            encours["fin"] = largeur
+            continue
+        encours = {"debut": largeur, "fin": largeur, "cascade": cascade, "flex": flex}
+        bandes.append(encours)
+    return bandes
+
+
+def fenetre_de_base(grille: Grille, repli: int) -> dict | None:
+    """Les bases, en pixels, qui replient exactement là où le palier repliait.
+
+    Un palier est une marche : sous `repli` la grille montrait une colonne, à
+    `repli + 1` elle en montrait deux. Une base de `flex` n'a qu'un seuil, et
+    ce seuil tombe là où `n × base + (n-1) × écart` cesse de tenir dans le
+    conteneur. La condition s'écrit donc en deux inégalités, et la fenêtre qui
+    en sort est **étroite** : 0,46 px pour `.hero-grid`. Écrire 20.4em au lieu
+    de 20.37em sortait de la fenêtre d'un tiers de pixel — et créait une bande
+    de 1 px que le balayage au pas de 10 px ne voyait pas.
+
+    Rend `None` quand la fenêtre est vide (l'écart varie avec la largeur, et
+    `clamp` peut la décaler plus vite que le conteneur ne grandit) : aucune
+    base ne reproduit alors le palier, et il faut le dire.
+    """
+    natures = [nature_piste(piste) for piste in pistes(grille.valeur_asymetrique)]
+    n = len(natures)
+    if n < 2 or not all(nature == "souple" for nature, _, _ in natures):
+        return None
+
+    def eclatement(largeur: int) -> float:
+        ecart = ecart_a(grille, largeur)
+        return grille.gap if ecart is None else ecart
+
+    haut = (conteneur(repli + 1) - (n - 1) * eclatement(repli + 1)) / n
+    bas = (conteneur(repli) - (n - 1) * eclatement(repli)) / n
+    if haut <= bas:
+        return None
+    return {"bas": bas, "haut": haut, "largeur": haut - bas}
+
+
+def repli_de(grille: Grille) -> int | None:
+    """La largeur sous laquelle la cascade actuelle ne montre plus qu'une colonne.
+
+    Rend `None` quand la cascade a **plusieurs** marches (`.footer-grid` passe
+    de quatre colonnes à deux, puis à une) : une base de `flex` n'a qu'un seuil,
+    et deux marches ne se reproduisent pas avec un seul nombre.
+    """
+    marches = [
+        regle.largeur_max
+        for regle in grille.regles
+        if regle.largeur_max is not None
+        # Une règle de palier peut dire « une colonne » de deux façons : par un
+        # nombre (`repeat(1, …)` lu en `colonnes`) ou par une valeur d'une seule
+        # piste (`minmax(0, 1fr)`). Ne lire que la première faisait répondre
+        # « aucune base » à une grille dont la fenêtre se calculait pourtant.
+        and (regle.colonnes == 1 or len(pistes(regle.valeur)) == 1)
+    ]
+    return max(marches) if len(set(marches)) == 1 and marches else None
+
+
+def base_en_em(dans_fenetre: dict, racine_px: float = RACINE_PX) -> dict:
+    """La plus grande écriture en `em` qui reste **dans** la fenêtre.
+
+    L'arrondi va vers le bas : la valeur écrite doit rester sous la borne haute,
+    sinon le `flex` attend un tiers de pixel de plus que le palier et laisse une
+    bande d'un pixel. Le 31 octobre 2026, l'arrondi allait vers le haut « pour ne
+    pas rendre une base plus petite que celle qui venait d'être vérifiée » — le
+    raisonnement était incomplet : plus petite que la borne haute, plus grande
+    que la borne basse, voilà la seule condition.
+    """
+    centiemes = math.floor(dans_fenetre["haut"] / racine_px * 100)
+    valeur = centiemes / 100
+    return {
+        "em": valeur,
+        "px": valeur * racine_px,
+        "expr": f"{valeur:.2f}".rstrip("0").rstrip(".") + "em",
+        # Une fenêtre plus étroite qu'un centième de `em` (0,16 px) n'a aucune
+        # écriture valable : le dire vaut mieux que proposer un chiffre dehors.
+        "dans_fenetre": dans_fenetre["bas"] < valeur * racine_px <= dans_fenetre["haut"],
+    }
+
+
 def plancher_de_compromis(grille: Grille, pas: float = 0.5) -> dict | None:
     """La base la plus petite qui **reproduit** le repli actuel, et son écriture en `em`.
 
@@ -1120,25 +1229,62 @@ def plancher_de_compromis(grille: Grille, pas: float = 0.5) -> dict | None:
     30 %, donc avance le repli, ce qu'aucune condition de largeur d'écran ne
     sait faire.
     """
-    reference = [
-        colonnes_de_la_cascade(grille, largeur) for largeur in LARGEURS
-    ]
+    reference = [colonnes_de_la_cascade(grille, largeur) for largeur in LARGEURS]
+    reference_fine = [colonnes_de_la_cascade(grille, largeur) for largeur in LARGEURS_FINES]
+
+    def reproduit(base: float, largeurs: list[int], attendus: list[int]) -> bool:
+        return all(
+            colonnes_en_flex(grille, largeur, base, grille.items) == attendu
+            for largeur, attendu in zip(largeurs, attendus)
+        )
+
+    # Une seule marche : la fenêtre se calcule exactement. La recherche par pas
+    # de 0,5 px, elle, ratait la fenêtre de `.simulateur-intro` (0,48 px de
+    # large) : 456,0 était juste en dessous de la borne basse et 456,5 juste
+    # au-dessus de la haute. Une recherche qui tombe à côté d'une fenêtre étroite
+    # conclut « aucune base » — et ce refus-là serait faux.
+    marche = repli_de(grille)
+    if marche is not None:
+        fenetre = fenetre_de_base(grille, marche)
+        if fenetre:
+            candidate = base_en_em(fenetre)
+            if reproduit(candidate["px"], LARGEURS_FINES, reference_fine):
+                return {
+                    "px": round(candidate["px"], 2),
+                    "em": candidate["em"],
+                    "expr": candidate["expr"],
+                    "verifie_au_pixel": True,
+                }
+            return None
+
     haut = conteneur(max(LARGEURS)) / 2 + 1
     base = grille.gap
     while base < haut:
-        if all(
-            colonnes_en_flex(grille, largeur, base, grille.items) == attendu
-            for largeur, attendu in zip(LARGEURS, reference)
+        # Le balayage grossier écarte vite les mauvaises bases ; le balayage au
+        # pixel tranche. Depuis le 1er novembre 2026, une base validée seulement
+        # au pas de 10 px peut laisser une bande d'un pixel : c'est arrivé trois
+        # fois sur les six grilles converties la veille.
+        if reproduit(base, LARGEURS, reference) and reproduit(
+            base, LARGEURS_FINES, reference_fine
         ):
-            # L'écriture en `em` est arrondie **au-dessus** : arrondir vers le
-            # bas rendrait une base plus petite que celle qui vient d'être
-            # vérifiée, et ferait réapparaître la plage qu'on cherchait à fermer.
-            centiemes = math.ceil(base / RACINE_PX * 100)
-            return {
-                "px": base,
-                "em": centiemes / 100,
-                "expr": f"{centiemes / 100:.2f}".rstrip("0").rstrip(".") + "em",
-            }
+            # L'écriture en `em` est arrondie **vers le bas**, puis vérifiée au
+            # pixel : la valeur écrite doit rester sous la borne haute de la
+            # fenêtre, sinon le `flex` attend un tiers de pixel de plus que le
+            # palier. L'arrondi au-dessus du 31 octobre 2026 avait créé
+            # exactement cette bande-là.
+            centiemes = math.floor(base / RACINE_PX * 100)
+            for recul in range(0, 6):
+                candidat = (centiemes - recul) / 100
+                if candidat <= 0:
+                    break
+                if reproduit(candidat * RACINE_PX, LARGEURS_FINES, reference_fine):
+                    return {
+                        "px": round(candidat * RACINE_PX, 2),
+                        "em": candidat,
+                        "expr": f"{candidat:.2f}".rstrip("0").rstrip(".") + "em",
+                        "verifie_au_pixel": True,
+                    }
+            return None
         base += pas
     return None
 
@@ -1168,6 +1314,12 @@ def pistes_des_inegales(
       qui reste est l'unité : en `px`, la colonne ne suit pas la taille du
       texte ; en `rem`, si.
     - `fixe` : des pistes en pixels ; rien à rendre dynamique.
+    - `sans-plancher` : des `fr` sans plancher en pixels
+      (`minmax(0,1.35fr) minmax(0,1fr)`). Rien ne dépend du texte, mais le
+      repli vient d'un palier : une base **choisie** peut le remplacer, à
+      condition d'être vérifiée au pixel.
+    - `decor` : des `fr` sans plancher et **sans palier** — un aperçu
+      schématique de présentation. Ses colonnes ne changent jamais.
     """
     capacites = capacites or {}
     resultats = []
@@ -1223,7 +1375,23 @@ def pistes_des_inegales(
             continue
         plancher = max((minimum or 0.0) for nature, minimum, _ in natures if nature == "souple")
         if plancher <= 0:
-            resultats.append({"selecteur": grille.selecteur, "forme": "contenu", "valeur": valeur})
+            # Aucune piste n'a de plancher : les colonnes ne dépendent que de la
+            # place. Le 1er novembre 2026, ces grilles tombaient dans « contenu »
+            # avec les vraies pistes `auto` — un mot qui dit « le texte décide »
+            # là où rien ne dépend du texte. Deux cas, et un seul a un travail :
+            #   .sans-plancher : un palier décide du repli, et seule une base
+            #                    choisie peut le remplacer ;
+            #   .decor        : aucun palier, les colonnes ne changent jamais.
+            conditions = paliers(grille)
+            resultats.append(
+                {
+                    "selecteur": grille.selecteur,
+                    "forme": "sans-plancher" if conditions else "decor",
+                    "valeur": valeur,
+                    "paliers": conditions,
+                    "compromis": plancher_de_compromis(grille) if conditions else None,
+                }
+            )
             continue
         # `flex-wrap` ne crée pas d'élément : une grille à deux panneaux n'en
         # affichera jamais trois, même si deux planchers de 280 px tiennent trois
@@ -1361,6 +1529,12 @@ def grille_synthetique(selecteur: str, valeur: str, gap_expr: str) -> Grille:
     grille.gap = round(valeur_gap, 2) if valeur_gap is not None else 16.0
     grille.gap_lu = valeur_gap is not None
     grille.regles = [Regle([selecteur], valeur, None, None, None, None, 1, 0)]
+    # La valeur d'avant est celle de la grille : sans ces deux champs,
+    # `fenetre_de_base` ne saurait pas combien de pistes compter et répondrait
+    # « aucune base ne reproduit ce repli » — un refus juste, pour une mauvaise
+    # raison, exactement le défaut reproché au relevé la veille.
+    grille.asymetrique = True
+    grille.valeur_asymetrique = valeur
     return grille
 
 
@@ -1466,10 +1640,15 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
                 )
             else:
                 mesure = float(base_expr[:-2]) * RACINE_PX
-                if abs(mesure - float(base_px)) > 0.5:
+                # Tolérance d'un centième de pixel, pas d'un demi : la fenêtre
+                # des bases qui replient au bon endroit fait 0,46 px, et le
+                # 1er novembre 2026 un écart de 0,14 px entre `21.29em`
+                # (340,64 px) et le `plancher_px` déclaré (340,5) est passé
+                # sous une tolérance de 0,5 px — en cachant une bande réelle.
+                if abs(mesure - float(base_px)) > 0.01:
                     erreurs.append(
-                        f"{selecteur} : `{base_expr}` vaut {mesure:g} px, le registre déclare "
-                        f"{float(base_px):g} px"
+                        f"{selecteur} : `{base_expr}` vaut {mesure:.2f} px, le registre déclare "
+                        f"{float(base_px):g} px — la base mesurée est celle qui est écrite"
                     )
         attendus = flex_attendu(valeur, base_expr=base_expr)
         if not attendus:
@@ -1503,7 +1682,7 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
         if valeur and gap_expr:
             synthetique = grille_synthetique(selecteur, valeur, gap_expr)
             if base_expr and isinstance(base_px, (int, float)):
-                synthetique.base_flex = float(base_px)
+                synthetique.base_flex = float(base_expr[:-2]) * RACINE_PX
             mesure = ecart_de_largeur(synthetique)
             declare_px = float(entree.get("ecart_max_px", -1))
             declare_part = float(entree.get("ecart_part", -1))
@@ -1542,15 +1721,24 @@ def verifier_flex(racine: Path, registre: dict) -> list[str]:
                 avant.regles.append(
                     Regle([selecteur], "minmax(0, 1fr)", None, None, repli, None, 2, 1)
                 )
-                avant.base_flex = float(base_px)
-                bandes = bandes_de_changement(avant, float(base_px))
+                ecrite = float(base_expr[:-2]) * RACINE_PX
+                avant.base_flex = ecrite
+                bandes = bandes_fines(avant, ecrite)
                 if bandes:
                     premiere = bandes[0]
+                    fenetre = fenetre_de_base(avant, repli)
+                    ou = (
+                        f"la fenêtre des bases qui replient à {repli} px va de "
+                        f"{fenetre['bas']:.2f} à {fenetre['haut']:.2f} px, et `{base_expr}` "
+                        f"en vaut {ecrite:.2f}"
+                        if fenetre
+                        else "aucune base ne reproduit ce repli"
+                    )
                     erreurs.append(
                         f"{selecteur} : `repli_avant_px = {repli}` annoncé comme reproduit, "
-                        f"mais de {premiere['debut']} à {premiere['fin']} px la grille d'avant "
-                        f"montrait {premiere['cascade']} colonne(s) et le flex en donne "
-                        f"{premiere['flex']} — la base ne reproduit pas le repli"
+                        f"mais à {premiere['debut']} px (bande {premiere['debut']}–{premiere['fin']}) "
+                        f"la grille d'avant montrait {premiere['cascade']} colonne(s) et le flex "
+                        f"en donne {premiere['flex']} — {ou} : la base ne reproduit pas le repli"
                     )
 
         # Plafond en `width` sur un enfant : en flex, il ne s'applique pas.
@@ -1979,9 +2167,14 @@ def principal(arguments: list[str] | None = None) -> int:
             "n'en a pas, et sur une seule ligne il ne prendrait pas toute la largeur"
         )
         print(
-            "  badge     : une piste fixe à côté d'une piste souple (`44px 1fr`) — aucun palier, "
+            "  badge     : une piste fixe à côté d'une piste souple (`2.75rem 1fr`) — aucun palier, "
             "donc rien à replier ; seule l'unité compte (px ne suit pas la taille du texte, rem si)"
         )
+        print(
+            "  sans-plancher : des `fr` sans plancher — le repli vient d'un palier, et seule une "
+            "base choisie peut le remplacer, vérifiée au pixel"
+        )
+        print("  decor     : des `fr` sans plancher ni palier — un aperçu, rien à rendre dynamique")
         print("  motif / fixe / illisible : rien à rendre dynamique")
         for resultat in resultats:
             if resultat["forme"] == "proportion":
@@ -2007,6 +2200,22 @@ def principal(arguments: list[str] | None = None) -> int:
                         f"      {bande['debut']}–{bande['fin']} px : {bande['cascade']} colonne(s) "
                         f"deviennent {bande['flex']}"
                     )
+            elif resultat["forme"] in ("sans-plancher", "decor"):
+                compromis = resultat.get("compromis")
+                conditions = resultat.get("paliers") or []
+                print(
+                    f"  {resultat['selecteur'][:44]:44} {resultat['forme']:9} "
+                    f"{len(conditions)} palier(s)"
+                    + (
+                        f" · compromis {compromis['px']:g} px ({compromis['expr']}), vérifié au pixel"
+                        if compromis
+                        else (
+                            " · aucune base ne reproduit le repli au pixel près"
+                            if conditions
+                            else " · aucune largeur ne change de nombre de colonnes"
+                        )
+                    )
+                )
             elif resultat["forme"] == "badge":
                 paliers_grille = resultat.get("paliers") or []
                 px = resultat.get("px") or []
