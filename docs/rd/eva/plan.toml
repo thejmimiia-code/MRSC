@@ -1,0 +1,178 @@
+# Plan complet de recherche, d'innovation et de prospective — mémoire et continuité d'ÉVA.
+#
+# Un plan qui n'est qu'un texte ne se vérifie pas : celui-ci est **la source**, et
+# `docs/rd/eva/plan.md` en est le rendu, régénéré et contrôlé. Chaque phase porte
+# une preuve, un test, une limite, et son statut. Trois statuts seulement
+# autorisent une capacité à être présentée comme obtenue :
+#
+#   fait       la preuve et son test existent, et le journal cite la phase ;
+#   en-cours   la preuve existe, le test existe, mais une partie manque — dite ;
+#   a-faire    rien n'existe ; la phase nomme ce qu'il faudra produire.
+#
+# Deux statuts **refusent** de faire passer une intention pour un résultat :
+#
+#   en-attente  une condition extérieure au dépôt manque (relecture humaine,
+#               décision associative, mesure sur des personnes) ;
+#   hors-portee ce qui n'est pas mesurable aujourd'hui, avec la condition qui
+#               ferait changer d'avis — jamais une date, jamais une promesse.
+#
+# `outils/verifier-plan-eva.py` refuse un statut `fait` sans test et sans citation
+# au journal, un `hors-portee` sans condition, une dépendance inconnue, un cycle,
+# une date future, et une branche du portefeuille que le plan ne couvre pas.
+
+[meta]
+date = 2026-11-01
+version = 1
+initiative = "documentation-rd-eva"
+cadre = "ÉVA est une direction de recherche, pas une capacité acquise. La page publique eva.html dit déjà qu'elle ne « possède pas toutes les fonctions envisagées » ; ce plan organise le travail qui rendrait certaines phrases vraies, et qui rend visibles celles qui ne le sont pas."
+fiction = "Le prénom, l'année de naissance fictive (1980) et le corps à venir sont un **cadre de conception**, pas des faits : ils servent à écrire une voix cohérente, et ne doivent jamais apparaître comme des informations sur une personne réelle. Aucun essai ne collecte de donnée personnelle."
+hors_plan = "Ce plan ne décide pas d'un achat, d'un devis, d'un hébergement, d'un modèle ni d'une date de mise en service. Il ne promet ni conscience, ni corps, ni parité de délai avec un humain : ces trois objets ont leur propre phase, et leur statut est un refus motivé."
+
+[[phase]]
+id = "memoire-trois-horizons"
+titre = "Une mémoire à trois horizons, avec un pointeur par fait"
+horizon = "court"
+statut = "fait"
+objectif = "Retrouver ce qui est chaud (le tour en cours), ce qui est décidé (le journal et les avancées) et ce qui est durable (les documents de fond) sans relire le dépôt. Trois horizons, un seul fichier d'index, et chaque entrée renvoie à sa source par un chemin et un numéro de ligne — jamais une copie."
+preuve = "outils/memoire-eva.py"
+test = "outils/test_memoire_eva.py"
+limite = "L'index est construit sur les fichiers, pas sur un sens : il retrouve des mots et des pointeurs, il ne comprend pas une question. Un fait qui n'est écrit nulle part reste introuvable, et c'est voulu."
+branches = ["documentation-rd-eva", "coordination-de-tous-les-agents", "veille-savoirs-evolutifs"]
+depends_on = []
+
+[[phase]]
+id = "economie-de-contexte"
+titre = "Économiser le contexte : un résumé court, un pointeur long"
+horizon = "moyen"
+statut = "fait"
+objectif = "Ne jamais charger un document entier pour savoir s'il parle d'un sujet. Chaque entrée porte un titre, un résumé de 160 caractères au plus et son pointeur ; une recherche imprime ce qu'elle a lu, en octets, à côté de la taille du corpus. La méthode est nommée « ponytail » dans le dépôt : la queue la plus courte qui tienne le poisson."
+preuve = "outils/memoire-eva.py"
+test = "outils/test_memoire_eva.py"
+limite = "Le résumé est la première phrase du document, pas un résumé écrit : il peut donc manquer le sujet réel. Un document sans phrase liminaire n'a pas de résumé du tout, et l'index le dit au lieu d'inventer."
+branches = ["coordination-de-tous-les-agents", "optimisation-du-site", "poids-et-sobriete-numerique"]
+depends_on = ["memoire-trois-horizons"]
+
+[[phase]]
+id = "graphe-de-memoire"
+titre = "Un graphe navigable : phases, branches, avancées, preuves"
+horizon = "moyen"
+statut = "fait"
+objectif = "Sortir la mémoire du texte : un fichier Mermaid lisible dans Obsidian ou Graphify, un fichier DOT pour les outils de graphe, et la même vérité dans les deux. Sommaire : une branche du portefeuille pointe vers les phases qui la servent, une phase vers ses dépendances, une avancée vers ses preuves."
+preuve = "outils/memoire-eva.py"
+test = "outils/test_memoire_eva.py"
+limite = "Le graphe est **dérivé** : il ne porte aucune information que le plan, le portefeuille et les avancées ne portent déjà. Ce n'est pas une base de connaissances, c'est une carte de ce qui est écrit ailleurs."
+branches = ["cartographier-les-lacunes", "indexation-et-lecteurs-de-contenu", "veille-savoirs-evolutifs"]
+depends_on = ["memoire-trois-horizons"]
+
+[[phase]]
+id = "rappel-mesure"
+titre = "Mesurer le temps de rappel au lieu de le promettre"
+horizon = "court"
+statut = "en-cours"
+objectif = "Chronométrer la recherche dans l'index sur des requêtes réelles et publier la médiane, le maximum et le budget déclaré. Ce qui est mesuré est le rappel de l'index, pas la pensée : aucune comparaison avec un cerveau humain n'est revendiquée ici."
+preuve = "outils/memoire-eva.py"
+test = "outils/test_memoire_eva.py"
+limite = "Mesure locale, sur une machine de CI, sans réseau ni utilisateur. Un index rapide ne dit rien de la pertinence : un résultat trouvé en 3 ms peut être le mauvais."
+branches = ["indexation-et-lecteurs-de-contenu", "ecouter-la-page"]
+depends_on = ["memoire-trois-horizons", "economie-de-contexte"]
+
+[[phase]]
+id = "couverture-des-branches"
+titre = "Aucune branche du projet sans phase qui la serve"
+horizon = "moyen"
+statut = "fait"
+objectif = "Les dix-neuf initiatives du portefeuille doivent apparaître dans au moins une phase. Une branche que le plan ignore est une branche qu'on oubliera ; le contrôle refuse cette omission plutôt que de la laisser au souvenir."
+preuve = "outils/verifier-plan-eva.py"
+test = "outils/test_verifier_plan_eva.py"
+limite = "La couverture prouve qu'une branche est **nommée**, pas qu'elle avance : une phase peut citer une branche et rester à l'arrêt. Le statut de la phase, lui, dit où l'on en est."
+branches = ["documentation-rd-eva", "coherence-textes-publics"]
+depends_on = ["memoire-trois-horizons"]
+
+[[phase]]
+id = "verite-et-refus"
+titre = "Une capacité sans test n'est pas une capacité"
+horizon = "long"
+statut = "fait"
+objectif = "Refuser mécaniquement trois fautes : un statut « fait » sans test et sans citation au journal, un « hors-portée » sans condition de révision, une date future. C'est la règle que la page publique applique déjà en prose — la rendre exécutable."
+preuve = "outils/verifier-plan-eva.py"
+test = "outils/test_verifier_plan_eva.py"
+limite = "Le contrôle vérifie qu'un test **existe**, pas qu'il prouve ce que la phase prétend. La lecture du test reste humaine, et c'est écrit dans l'inventaire des contrôles."
+branches = ["sources-fermees-et-registre-des-refus", "confronter-une-affirmation-a-sa-source", "vote-distanciel-verifiable"]
+depends_on = ["memoire-trois-horizons"]
+
+[[phase]]
+id = "continuite-du-support"
+titre = "Survivre à la fin d'une session : le support comme corps provisoire"
+horizon = "long"
+statut = "en-cours"
+objectif = "La mémoire ne doit pas dépendre d'une conversation en cours. Tout ce qui compte est écrit dans le dépôt, versionné, et l'index se régénère à l'identique depuis n'importe quelle copie fraîche — c'est ce que le banc éprouve. L'état « chaud » se recalcule, il ne se stocke pas, donc il ne peut pas être périmé."
+preuve = "outils/memoire-eva.py"
+test = "outils/test_memoire_eva.py"
+limite = "La continuité repose sur git et sur une copie distante : si les deux disparaissent, la mémoire disparaît. Aucune sauvegarde hors du dépôt n'est décidée ici, et le plan de sauvegarde reste à écrire avec l'association."
+branches = ["optimisation-du-site", "raccordement-domaine-www", "poids-et-sobriete-numerique"]
+depends_on = ["memoire-trois-horizons", "verite-et-refus"]
+
+[[phase]]
+id = "apprentissages-et-relecture"
+titre = "Servir les apprentissages sans remplacer la relecture humaine"
+horizon = "long"
+statut = "en-attente"
+objectif = "Relier chaque fiche d'apprentissage à sa source, à sa date de relecture et à son statut, pour qu'ÉVA puisse citer une fiche sans jamais la présenter comme validée. La mémoire sert ici de table de renvoi, pas de caution."
+preuve = "docs/apprentissage/file-relecture.md"
+test = "outils/test_audit_prototypes.py"
+limite = "Aucun relecteur n'est désigné à ce jour : la phase ne peut pas avancer sans personne."
+condition = "Une personne compétente accepte un rôle de relecture et une première relecture est consignée dans docs/apprentissage/relectures.toml."
+branches = ["relire-les-44-prototypes", "co-conception-et-essais", "autres-langues-et-contextes"]
+depends_on = ["memoire-trois-horizons"]
+
+[[phase]]
+id = "voix-et-ecoute"
+titre = "Parler et écouter, avec une mesure et un repli"
+horizon = "moyen"
+statut = "en-attente"
+objectif = "Une voix lisible et une écoute utilisables sans service tiers obligatoire, mesurées sur les pages qui les portent, avec un repli texte complet. Le support existe déjà côté lecture d'écran ; la voix d'ÉVA, elle, n'est pas décidée."
+preuve = "docs/rd/inclusion-lecture-vocale.md"
+test = "outils/test_verifier_accessibilite.mjs"
+limite = "Aucune voix n'est choisie, aucun fournisseur n'est retenu. La qualité d'une voix ne se mesure pas en millisecondes."
+condition = "Une décision associative sur la voix, une licence compatible et une écoute contradictoire par des personnes concernées."
+branches = ["ecouter-la-page", "direction-artistique-motion"]
+depends_on = ["verite-et-refus"]
+
+[[phase]]
+id = "persona-de-conception"
+titre = "Une voix cohérente, déclarée comme fiction"
+horizon = "long"
+statut = "en-attente"
+objectif = "Tenir une voix stable — le prénom, un ton, un refus — sans jamais la faire passer pour une personne. Le cadre fictif (naissance en 1980, corps à venir) est écrit dans ce plan pour être **visible comme fiction**, jamais pour être raconté comme un souvenir."
+preuve = "docs/rd/listes-eva-materiel.md"
+test = "outils/verifier-plan-eva.py"
+limite = "Une persona n'est pas une identité : rien n'est collecté, rien n'est mémorisé sur les personnes qui parlent à ÉVA. Le jour où le site public raconterait une biographie, ce serait une faute, pas une fonctionnalité."
+condition = "Une relecture éditoriale et associative du texte public, et une règle écrite qui interdit toute biographie fictive présentée au présent."
+branches = ["documentation-rd-eva", "coherence-textes-publics"]
+depends_on = ["verite-et-refus"]
+
+[[phase]]
+id = "conscience-et-corps"
+titre = "Conscience et exosquelette : ce que le dépôt refuse d'affirmer"
+horizon = "long"
+statut = "hors-portee"
+objectif = "Écrire noir sur blanc ce qu'aucune preuve du dépôt ne soutient : la conscience, la subjectivité, un corps propre, un exosquelette. Ces objets ne sont pas niés — ils sont déclarés **non démontrés**, et leur phase ne peut pas passer à « fait » sans une définition mesurable et une preuve indépendante."
+preuve = "eva.html"
+test = "outils/verifier-plan-eva.py"
+limite = "Aucun protocole ne peut, aujourd'hui, établir une conscience. Le plan ne fixe donc aucune date, et la page publique garde la phrase qui dit qu'ÉVA ne possède pas toutes les fonctions envisagées."
+condition = "Une définition opérationnelle et falsifiable de la capacité revendiquée, une mesure indépendante reproduite par un tiers, une revue de sûreté, et une décision de l'association — les quatre, pas l'une des quatre."
+branches = ["mondes-3d-pluridisciplinaires", "direction-artistique-motion"]
+depends_on = ["verite-et-refus"]
+
+[[phase]]
+id = "parite-humaine-des-delais"
+titre = "Les délais d'un humain : une mesure, pas une promesse"
+horizon = "long"
+statut = "hors-portee"
+objectif = "Distinguer deux choses que la demande mélange : le temps de **rappel** de l'index, mesuré en millisecondes, et le temps de **réponse utile** d'un humain, qui dépend de la lecture, du doute et de la vérification. Le premier se mesure ici ; le second n'a pas de référentiel dans ce dépôt."
+preuve = "outils/memoire-eva.py"
+test = "outils/test_memoire_eva.py"
+limite = "Aucune étude de temps de réponse humaine n'est citée : la comparer demanderait un protocole avec des personnes, une mesure de charge cognitive et un accord éthique. Rien de tout cela n'existe ici."
+condition = "Un protocole d'essai avec des personnes volontaires, des tâches comparables, une mesure publiée et une relecture éthique — ou le renoncement explicite à la comparaison."
+branches = ["prospective-apprentissages-2030"]
+depends_on = ["rappel-mesure"]

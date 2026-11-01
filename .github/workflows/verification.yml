@@ -387,6 +387,21 @@ jobs:
           python3 outils/modele-grilles.py --verifier
           python3 outils/test_modele_grilles.py
 
+      # La mémoire d'ÉVA n'a qu'une preuve possible : elle se vérifie elle-même,
+      # et son plan se laisse contredire. Quatre fautes sont refusées ici plutôt
+      # que promises ailleurs — un statut « fait » sans banc, un « hors-portée »
+      # sans condition de révision, une branche du portefeuille que le plan ne
+      # sert pas, un index qui n'est plus le rendu de ses sources. Le banc de la
+      # mémoire écrit dans une **vraie** copie : une copie faite de liens
+      # symboliques a déjà mutilé le plan du dépôt le 1er novembre 2026.
+      - name: Vérifier la mémoire et le plan d’ÉVA
+        run: |
+          python3 outils/memoire-eva.py --verifier
+          python3 outils/memoire-eva.py --evaluer
+          python3 outils/verifier-plan-eva.py
+          python3 outils/test_memoire_eva.py
+          python3 outils/test_verifier_plan_eva.py
+
       # Le rapporteur confronte la prédiction du modèle au relevé d'un
       # navigateur. Il tourne dans `graphismes`, où le Chromium existe ; son banc
       # n'a besoin de rien : il fabrique une prédiction et un relevé, et regarde
