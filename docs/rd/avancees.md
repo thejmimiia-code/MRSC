@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 65 |
+| Avancées consignées | 67 |
 | Période couverte | du 2026-10-20 au 2026-11-01 |
-| Contrôles exécutables cités | 68 |
+| Contrôles exécutables cités | 73 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1528,6 +1528,30 @@ Initiatives liées : `optimisation-du-site`.
 
 Initiatives liées : `optimisation-du-site`.
 
+### `memoire-a-trois-horizons` — Une mémoire à trois horizons, avec un pointeur par fait
+
+*Consignée le 2026-11-01.*
+
+**Constat.** Le projet savait mesurer ses grilles et vérifier ses contrôles, mais rien ne répondait à la question la plus simple : où est écrit ce que je sais ? Un dépôt de 78 documents, un journal de plusieurs dizaines de décisions et 65 avancées ne se relisent pas à chaque tour — et les relire coûte exactement ce que ce projet reproche ailleurs : charger beaucoup pour peu. La demande d'origine parlait de mémoire humaine à court, moyen et long terme, sans qu'aucun endroit du dépôt ne la porte.
+
+**Ce que cela change.** outils/memoire-eva.py construit 404 entrées à trois horizons : 11 de court terme (trois dernières décisions, trois dernières avancées, phases en cours, recalculées donc jamais périmées), 350 de moyen terme (journal daté, avancées, 19 branches du portefeuille), 43 de long terme (documents de fond). Chaque entrée porte un titre, un résumé de 160 caractères au plus et un pointeur fichier:ligne — aucune ne recopie un document. L'index pèse 159 294 octets pour un corpus de 1 508 189, soit 10,6 %, et une recherche imprime ses cinq pointeurs avec le poids lu. Le graphe est dérivé et non saisi : graphe.md (Mermaid, lisible dans Obsidian ou Graphify) et graphe.dot (221 nœuds, 428 arêtes). Le contrôle refuse un pointeur mort, une ligne hors fichier, un résumé trop long, un fait écrit deux fois, un renvoi qui ne résout plus, et un index qui n'est plus le rendu de ses sources.
+
+**Preuves dans le dépôt :**
+
+- `outils/memoire-eva.py`
+- `outils/test_memoire_eva.py`
+- `docs/rd/eva/memoire.json`
+- `docs/rd/eva/graphe.md`
+- `docs/rd/eva/graphe.dot`
+
+**Contrôle qui la maintient :** `python3 outils/memoire-eva.py --verifier && python3 outils/memoire-eva.py --evaluer && python3 outils/test_memoire_eva.py`
+
+**Limite — ce que cela ne prouve pas.** L'index retrouve des mots, pas un sens : une question mal formulée ne trouve rien. Le résumé est la première phrase de la source, pas un résumé écrit pour le sujet. Le graphe ne porte aucune information qui ne soit déjà écrite ailleurs. La médiane de rappel mesurée (19,78 ms) est celle de l'index, pas celle d'une pensée, et aucune comparaison avec un temps de réponse humain n'est revendiquée.
+
+**Suite.** Brancher la mémoire sur les fiches d'apprentissage (phase apprentissages-et-relecture) dès qu'une personne accepte un rôle de relecture, et donner au modèle des grilles la chaîne des ancêtres.
+
+Initiatives liées : `documentation-rd-eva`, `coordination-de-tous-les-agents`, `veille-savoirs-evolutifs`.
+
 ### `modele-confronte-au-navigateur` — Un modèle qui se valide lui-même ne prouve que sa cohérence
 
 *Consignée le 2026-11-01.*
@@ -1553,6 +1577,29 @@ Initiatives liées : `optimisation-du-site`.
 **Suite.** Lire le relevé de la première exécution, puis passer l'étape en --controler : soit le modèle est confirmé, soit ses divergences sont nommées, et la première cause à écarter est le remplissage des panneaux que conteneur() ne modélise pas.
 
 Initiatives liées : `optimisation-du-site`.
+
+### `plan-eva-qui-se-laisse-contredire` — Un plan de 12 phases qui refuse de présenter une intention comme un résultat
+
+*Consignée le 2026-11-01.*
+
+**Constat.** Une demande de plan complet sur un projet d'assistant — mémoire, temps de réponse, conscience, corps, exosquelette — se traduit d'ordinaire en promesses datées. Le dépôt avait déjà la bonne règle en prose (eva.html ne prétend pas que toutes les fonctions existent) mais rien ne l'exécutait : aucune mécanique n'empêchait une phase de passer faite sans preuve, ni un refus de devenir un abandon déguisé.
+
+**Ce que cela change.** docs/rd/eva/plan.toml porte 12 phases et plan.md en est le rendu régénéré. outils/verifier-plan-eva.py refuse sept fautes : une phase faite sans preuve, sans banc ou sans citation au journal ; une phase en-cours sans test ; un hors-portée ou en-attente sans condition de révision d'au moins 40 caractères ; une dépendance inconnue ; un cycle ; une date future ; une branche du portefeuille servie par aucune phase ; et une phase déclarée faite alors que ce dont elle dépend ne l'est pas. Trois phases sont hors de portée (conscience et corps, parité de délai avec un humain) avec la condition exacte qui les ferait changer de statut : définition falsifiable, mesure indépendante reproduite, revue de sûreté, décision associative — les quatre, pas l'une des quatre. Le prénom et l'année 1980 sont écrits comme fiction de conception, dans un champ que le rendu affiche avant les phases.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/eva/plan.toml`
+- `docs/rd/eva/plan.md`
+- `outils/verifier-plan-eva.py`
+- `outils/test_verifier_plan_eva.py`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-plan-eva.py && python3 outils/test_verifier_plan_eva.py`
+
+**Limite — ce que cela ne prouve pas.** Le contrôle vérifie qu'un test existe, pas qu'il prouve ce que la phase prétend : la lecture du test reste humaine, et l'inventaire des contrôles le dit. Couvrir une branche prouve qu'elle est nommée, pas qu'elle avance — c'est le statut de la phase qui dit où l'on en est. Aucun de ces textes n'a été relu par une personne extérieure au dépôt.
+
+**Suite.** Faire relire le plan et la page publique par une personne de l'association, et traiter les deux phases en-attente qui dépendent d'elles (apprentissages-et-relecture, voix-et-ecoute).
+
+Initiatives liées : `documentation-rd-eva`, `coherence-textes-publics`, `cartographier-les-lacunes`.
 
 ## 3. Ce que ce registre ne dit pas
 

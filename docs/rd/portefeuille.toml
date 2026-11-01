@@ -118,12 +118,12 @@ skills = ["direction-artistique-motion", "conception-innovation", "conception-pe
 id = "documentation-rd-eva"
 titre = "Préparer un suivi public des travaux d’ÉVA"
 priorite = "P1"
-phase = "cadrage"
-etat = "a-cadrer"
+phase = "recherche"
+etat = "en-cours"
 domaines = ["numerique-ia"]
 question = "Comment présenter les travaux d’ÉVA en termes clairs, en séparant les objectifs des essais, des résultats et des capacités démontrées?"
-preuves = ["index.html", "eva.html", "transparence.html", "docs/rd/listes-eva-materiel.md", "docs/rd/materiel-spark-serveur-dons.md", "docs/rd-coherence-visuelle-editoriale.md"]
-prochaine_action = "Faire relire le cycle cagnotte → point → achat ou conservation/placement selon les règles associatives → appel complémentaire (eva.html#cagnotte-dons). N’ouvrir une cagnotte et n’acheter qu’après décision associative et devis daté. Ne pas présenter un placement comme un rendement, ni la conscience comme un résultat."
+preuves = ["index.html", "eva.html", "transparence.html", "docs/rd/listes-eva-materiel.md", "docs/rd/materiel-spark-serveur-dons.md", "docs/rd-coherence-visuelle-editoriale.md", "docs/rd/eva/plan.toml", "docs/rd/eva/plan.md", "docs/rd/eva/graphe.md", "docs/rd/eva/graphe.dot", "docs/rd/eva/memoire.json", "outils/memoire-eva.py", "outils/verifier-plan-eva.py", "outils/test_memoire_eva.py", "outils/test_verifier_plan_eva.py"]
+prochaine_action = "La mémoire à trois horizons existe et se contrôle (`docs/rd/eva/plan.md`, 404 entrées, 10,6 % du corpus lu par recherche, médiane de rappel 19,8 ms), et le plan de 12 phases refuse mécaniquement toute capacité sans banc et tout refus sans condition. Prochaine étape : brancher la phase `apprentissages-et-relecture` dès qu’une personne accepte un rôle de relecture, et faire relire le cycle cagnotte → point → achat ou conservation/placement selon les règles associatives → appel complémentaire (eva.html#cagnotte-dons). N’ouvrir une cagnotte et n’acheter qu’après décision associative et devis daté. Ne pas présenter un placement comme un rendement, ni la conscience comme un résultat : les phases `conscience-et-corps` et `parite-humaine-des-delais` sont déclarées hors de portée, avec la condition qui les ferait changer."
 criteres_sortie = ["Chaque capacité annoncée est liée à une démonstration datée et documentée.", "Les objectifs et hypothèses sont identifiés comme tels.", "Les résultats, échecs, limites et validations manquantes sont indiqués.", "La présentation reste compréhensible sans jargon et les éléments publiés sont autorisés."]
 skills = ["documentation-technique", "recherche-sources", "accessibilite-co-conception", "evaluation-maintenance"]
 
