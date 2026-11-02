@@ -97,7 +97,7 @@ minimum = 470
 items = [2]
 seuil_une_colonne = 1000
 raison = "Deux colonnes côte à côte : le palier de 1 000 px n'était pas un choix de largeur de carte mais le moment où l'on renonce à la paire. Il est recopié tel quel, et le calcul s'arrête juste avant."
-motif_ecart = "Décision ouverte, gardée telle quelle : la règle, dans les 812 px que cette grille occupe réellement, proposerait 300 px, ce qui ferait revenir la paire juste au-dessus de 1 000 px de fenêtre. Adopter 300 px rétrécit les deux blocs de code ; garder 470 px laisse le dessin déclaré hors d'atteinte. Aucune des deux n'est adoptée ici."
+motif_ecart = "Décision ouverte, gardée telle quelle : la règle, dans les 812 px que cette grille occupe réellement, proposerait 300 px. Mesuré largeur par largeur le 2 novembre 2026 : avec 470 px la grille ne montre jamais deux colonnes ; avec 300 px elle en montre deux de 650 à 760 px, une seule de 770 à 1 000 px, puis deux dès 1 010 px — un dessin qui clignote. Adopter 300 px rétrécit les blocs de code sans garantir la paire ; garder 470 px laisse le dessin déclaré hors d'atteinte. Aucune des deux n'est adoptée ici."
 piste_jamais_atteinte = true
 motif = "Deux pistes de 470 px en demandent 956 ; la place la plus large que cette grille occupe vaut 812 px, parce que la page est en deux colonnes avec un sommaire de 300 px (mesuré le 2 novembre 2026). Les deux exemples ne sont donc jamais côte à côte, alors que le registre justifiait ce minimum par une paire. Décision ouverte, et elle revient à une personne : minimum à 390 px (paire au-delà de 1 184 px de fenêtre), à 298 px (paire dès 1 000 px, comme l'ancien palier), ou une seule colonne assumée. La règle de recommandation raisonne encore dans le conteneur : ces trois choix demandent de la reprendre, pas de changer un chiffre."
 
@@ -121,7 +121,7 @@ colonnes = 4
 minimum = 270
 items = [4]
 raison = "Étapes numérotées des réflexes : quatre colonnes au plus, jamais de colonne de moins de 270 px tant que le conteneur en contient une."
-motif_ecart = "Décision ouverte, gardée telle quelle : la règle, dans les 1 087,6 px que cette grille occupe, proposerait 260 px et les quatre étapes tiendraient sur une ligne. Adopter 260 px rétrécit chaque étape de dix pixels ; garder 270 px laisse la quatrième colonne hors d'atteinte. Personne n'a tranché."
+motif_ecart = "Décision ouverte, gardée telle quelle : la règle, dans les 1 087,6 px que cette grille occupe, proposerait 260 px. Mesuré le 2 novembre 2026 : les quatre étapes tiennent alors sur une ligne dès 1 210 px de fenêtre, et trois colonnes de 960 à 1 200 px. Avec les 270 px adoptés, la grille plafonne à trois colonnes partout. Adopter 260 px rétrécit chaque étape de dix pixels ; garder 270 px laisse la quatrième colonne hors d'atteinte. Personne n'a tranché."
 piste_jamais_atteinte = true
 motif = "Quatre pistes de 270 px en demandent 1 120,8 ; la place la plus large que cette liste occupe vaut 1 087,6 px, parce que le panneau qui la porte lui retire son remplissage et sa bordure : il manque 33 px, et la quatrième carte ne tient jamais. Abaisser le minimum à 260 px rendrait la quatrième colonne au maximum de largeur, mais la règle de recommandation, qui raisonne encore dans le conteneur, demanderait alors 370 px : le changement suppose de reprendre la règle. Décision ouverte."
 

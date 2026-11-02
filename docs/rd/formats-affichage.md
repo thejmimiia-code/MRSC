@@ -1950,6 +1950,121 @@ faux dès qu'une grille vit dans une piste de `.learning-article-layout` ou de
 Seules la présentation par défaut et la gouttière de `.container` sont lues : un
 conteneur qui écrirait sa largeur autrement (`max-width`, `%` imbriqué) sortirait
 en code 2 plutôt que d'être deviné. La chaîne des **ancêtres** n'est pas
-modélisée — c'est la cause des 35 divergences restantes. Enfin rien de tout cela
+modélisée — c'est la cause des 35 divergences restantes, et l'objet de la
+section 30, écrite le lendemain. Enfin rien de tout cela
 n'a été regardé par une personne : le relevé compte des colonnes, il ne juge pas
 la lisibilité.
+
+## 30. La grille n'occupe pas le conteneur : la chaîne des ancêtres (2 novembre 2026)
+
+Quatre grilles ne reçoivent pas `.container` entier, et le modèle le présumait
+depuis toujours. `.simulateur-chiffres` mesurait 521,44 px, `.learning-code-grid`
+615,84 px, `.ai-fraud-steps` 505,13 px, `.ai-path-steps` 394,02 px. Trois causes,
+toutes lues dans la feuille : un parent `flex` qui partage sa largeur (`.simulateur-intro`,
+`flex: 1.35 1 28.53em` face à `flex: 1 1 28.53em`), un parent `grid` à colonne fixe
+(`.learning-article-layout`, `minmax(0,1fr) minmax(230px,300px)` et 40,16 px
+d'écart), le remplissage **et la bordure** d'un parent bloc (`.ai-fraud-response`,
+`clamp(1.3rem,4vw,2.2rem)` plus 1 px de chaque côté).
+
+Le modèle lit désormais la page et la feuille **par classe** : `chaine_d_ancetres`
+retrouve l'élément et ses parents, `largeur_de_la_chaine` calcule ce que la chaîne
+laisse — bloc, `flex` en ligne (`grow`, `shrink`, base en `px`/`rem`/`em`, repli),
+`grid` à pistes évaluables, remplissage, bordures et marges compris. Ce qui n'est
+pas lisible rend `None`, et le relevé l'écrit (`conteneur_source`) : base
+`flex: auto`, piste `auto`, bordure sans épaisseur (`border: solid` vaut `medium`,
+3 px, et le deviner déplacerait la largeur utile de 6 px).
+
+Trois erreurs ont été trouvées par la mesure et non par la relecture : une condition
+de repli `flex` comptait **deux fois** l'écart (`.simulateur-intro` repliait à
+1 044 px pour 996 px d'enfants) ; `split()` tronquait `clamp(1.5rem, 4vw, 3rem)`, si
+bien que l'écart valait 0 px et `.simulateur-chiffres` sortait à 541,18 px au lieu de
+521,44 ; la gouttière du conteneur avait un **troisième** palier
+(`calc(100% - 1.35rem)` sous 520 px) que `lire_gouttiere` ignorait, et le modèle
+présumait 448 px là où le navigateur donnait 458,39.
+
+Résultat mesuré : **39 divergences dans 8 grilles** deviennent **4 dans 4 grilles**,
+toutes à moins d'un pixel de la bascule (0,20 · 0,28 · 0,60 · 0,78 px), sur 756
+points dont 752 confirmés et zéro non mesuré. L'étape de CI passe de relevé à
+**contrôle** : une divergence franche échoue en nommant la grille, la largeur et les
+deux largeurs d'élément ; une divergence au seuil est comptée, jamais absorbée ; une
+mesure qui n'a pas eu lieu sort en code 2.
+
+### Ce que la chaîne a révélé, et qu'aucun raisonnement ne voyait
+
+Le registre justifie chaque minimum de piste par un nombre de colonnes « au conteneur
+maximal ». Trois grilles ne reçoivent jamais ce conteneur, donc trois dessins déclarés
+n'existaient nulle part : `.learning-code-grid` (2 × 470 px demandent 956, place
+maximale **812**), `.ai-fraud-steps` (4 × 270 demandent 1 120,8, place **1 087,6**,
+33 px trop court), `.ai-path-steps` (5 × 220 demandent 1 132, place **669,6**).
+`pistes_jamais_atteintes` refuse désormais un tel minimum, sauf dérogation écrite
+(`piste_jamais_atteinte` + `motif` de 40 caractères au moins) — et re-vérifie la
+dérogation **dans les deux sens** : si deux pistes tiennent de nouveau, elle est
+refusée aussi. Les trois dérogations sont nommées à chaque passage réussi, pour qu'un
+contrôle vert ne les rende pas invisibles.
+
+### Limites
+
+La chaîne est lue sur la page où la grille apparaît le plus souvent, et sur le premier
+élément portant la classe : une grille posée dans deux contextes n'a qu'une prédiction.
+Les `min()` et `repeat()` d'un `grid-template-columns` parent ne sont pas modélisés. Le
+relevé ne mesure que la présentation par défaut. Enfin, la règle qui dérive les minima
+raisonne encore dans le conteneur : c'est l'objet de la section 31.
+
+## 31. L'intention vient du registre, la place vient du dessin (2 novembre 2026)
+
+La section 30 laissait une contradiction : le contrôle savait que trois dessins
+n'existaient nulle part, et la règle continuait de les justifier. Brancher la règle sur
+la chaîne a d'abord produit **six faux écarts**, dont `.ai-fraud-steps` à 270 px contre
+370 px proposés. La cause n'était pas la chaîne : `colonnes_de_conception` **déduisait**
+le nombre de colonnes du minimum en vigueur. Dans la place réelle la paire de
+`.learning-code-grid` ne tient pas, donc le modèle concluait « une colonne », et la
+règle répondait **400 px** pour une grille à une colonne. Le modèle relisait le dessin
+déclaré dans le dessin raté, puis proposait de ratifier l'échec.
+
+Deux séparations corrigent cela : **l'intention** vient du registre (`colonnes`,
+`seuil_une_colonne`), **la place** vient de la chaîne d'ancêtres. `minimum_propose`
+pose la question qui manquait à côté de `minimum_pour_k` (qui suppose le conteneur) et
+de `minimum_recommande` (qui suppose la cascade d'avant) : *où cette grille est-elle,
+réellement ?* Deux primitives répondent dans une place donnée, `minimum_pour_place` et
+`minimum_au_seuil`. La fonction **ne l'applique pas**.
+
+`ecarts_de_place` refuse le silence : chaque écart est nommé avec sa place, sa
+proposition et le minimum adopté, et exige un `motif_ecart` de 40 caractères au moins,
+re-vérifié dans les deux sens (un motif qui ne recouvre plus aucun écart est refusé —
+sinon il deviendrait une exemption permanente). Mesure du jour : quinze grilles
+d'accord, **sept écarts** — `.learning-code-grid` 470 → 300 px, `.ai-fraud-steps`
+270 → 260 px, `.simulateur-chiffres` 380 → 360 px, `.eva-listes-grid`,
+`.simulateur-duo` et `.ai-balance-grid` 350 → 360 px, `.ai-path-steps` sans
+proposition (cinq étapes dans 669,6 px demandent 127 px, sous le plancher de 180 px du
+modèle). Aucune valeur de la feuille n'a changé : le modèle mesure et nomme, une
+personne tranche.
+
+### Ce que l'adoption changerait, largeur par largeur
+
+`--comparer` mesure, pour ces sept grilles, le nombre de colonnes aux 233 largeurs
+balayées, avec le minimum adopté puis avec la proposition. Trois résultats renversent
+la lecture naturelle du tableau précédent.
+
+`.learning-code-grid` à 300 px **clignote** : deux colonnes de 650 à 760 px, une seule
+de 770 à 1 000 px, deux de nouveau dès 1 010 px. Ce n'est pas un défaut du modèle : la
+gouttière du conteneur passe de 2rem à 3rem à 761 px, la place **rétrécit** quand la
+fenêtre grandit d'un pixel, et la paire peut disparaître sans qu'aucune règle ne soit
+contredite. Les 470 px adoptés, eux, ne montrent jamais deux colonnes.
+
+`.eva-listes-grid`, `.simulateur-duo` et `.ai-balance-grid`, à l'inverse, montrent
+**déjà** deux colonnes de 750 à 780 px avec les 350 px adoptés : la proposition de
+360 px ne répare rien, elle **retire** une paire existante et repousse le repli à
+790 px. `.ai-fraud-steps` plafonne à trois colonnes avec 270 px, et les 260 px
+proposés portent à quatre à partir de 1 210 px. `.simulateur-chiffres` montre une,
+deux, puis de nouveau une colonne (830–1 000 px pour la paire), son parent `flex`
+passant côte à côte au-delà de 1 000 px. `.ai-path-steps` ne dépasse pas **deux**
+colonnes dans les 669,6 px reçus : sa dérogation est confirmée.
+
+### Limites
+
+La comparaison est celle du modèle, pas celle d'un navigateur : elle ne dit rien d'une
+carte trop étroite pour son contenu, ni d'un texte qui déborde, et elle ne couvre que
+la présentation par défaut. Deux phrases d'un premier jet — « la paire revient juste
+au-dessus de 1 000 px » — ont été corrigées par cette mesure, pas par une relecture.
+Les sept propositions restent **non adoptées** : aucune n'est mesurée dans un
+navigateur, et trois d'entre elles iraient dans le sens d'un dessin plus pauvre.

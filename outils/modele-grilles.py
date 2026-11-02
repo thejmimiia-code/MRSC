@@ -188,9 +188,13 @@ def gouttiere() -> Gouttiere:
         )
     return GOUTTIERE
 
-#: Largeur de carte en dessous de laquelle une grille tasse son contenu.
-CARTE_MINIMALE = 220
-
+#: Aucun plancher de lisibilité n'est déclaré ici : `CARTE_MINIMALE = 220` a
+#: existé jusqu'au 2 novembre 2026 et **n'était lu nulle part**. Mesuré, il était
+#: faux pour les vingt-deux grilles : à 240 px de fenêtre, la carte unique de
+#: chaque grille vaut 218,4 px, sous le seuil qu'il prétendait défendre. Un
+#: chiffre rond qui ne sert à rien et que la feuille contredit est un chiffre
+#: inventé ; celui dont le modèle a besoin — la carte la plus étroite réellement
+#: affichée — se calcule (`carte_minimale`).
 #: Planchers candidats pour `minmax(min(Npx, 100%), 1fr)`, par pas de 10 px.
 CANDIDATS = list(range(180, 481, 10))
 
@@ -1379,13 +1383,19 @@ def meilleur_minimum(grille: Grille) -> tuple[int, int, int, list[tuple[int, int
 
 
 def carte_minimale(grille: Grille, minimum: int) -> float:
-    """Largeur de carte la plus faible sur le balayage, pour la nouvelle règle."""
+    """Largeur de carte la plus faible sur le balayage, dans la place **réelle**.
+
+    Ce chiffre était calculé dans le conteneur, comme les minima : sur
+    `.learning-code-grid`, il annonçait une carte plus large que la place que la
+    grille reçoit. Un nombre faux dans un rapport coûte plus cher qu'un nombre
+    absent — il se recopie.
+    """
     valeurs = []
     for largeur in LARGEURS:
-        colonnes = auto_fit_grille(grille, minimum, largeur)
+        colonnes = colonnes_avec(grille, minimum, largeur)
         gap = ecart_a(grille, largeur)
         gap = grille.gap if gap is None else gap
-        valeurs.append((conteneur(largeur) - (colonnes - 1) * gap) / colonnes)
+        valeurs.append((conteneur_de(grille, largeur) - (colonnes - 1) * gap) / colonnes)
     return min(valeurs)
 
 
@@ -1582,6 +1592,34 @@ def minimum_propose(grille: Grille, entree: dict, capacite: dict | None = None) 
     if repli is None or cap is None:
         return repli or cap
     return max(repli, cap)
+
+
+def colonnes_avec(grille: Grille, minimum: int, largeur: int) -> int:
+    """Colonnes obtenues avec ce minimum, dans la place que la grille reçoit là."""
+    gap = ecart_a(grille, largeur)
+    return auto_fit_place(
+        minimum, grille.gap if gap is None else gap, conteneur_de(grille, largeur), grille.items
+    )
+
+
+def comparer_minimum(grille: Grille, minimum: int, propose: int | None) -> dict:
+    """Ce que le dessin devient si l'on adopte la proposition — mesuré, pas conseillé.
+
+    Une décision de dessin ne se prend pas sur un nombre de pixels de piste : elle
+    se prend sur ce que la page montre. Cette comparaison donne, largeur par
+    largeur, le nombre de colonnes avec le minimum adopté et avec la proposition,
+    et les largeurs où le dessin change. Elle ne tranche rien.
+    """
+    adopte = [colonnes_avec(grille, minimum, largeur) for largeur in LARGEURS]
+    if propose is None:
+        return {"adopte": adopte, "propose": None, "bascules": []}
+    propose_valeurs = [colonnes_avec(grille, propose, largeur) for largeur in LARGEURS]
+    bascules = [
+        {"largeur": largeur, "adopte": avant, "propose": apres}
+        for largeur, avant, apres in zip(LARGEURS, adopte, propose_valeurs)
+        if avant != apres
+    ]
+    return {"adopte": adopte, "propose": propose_valeurs, "bascules": bascules}
 
 
 def ecarts_de_place(
@@ -3558,6 +3596,11 @@ def principal(arguments: list[str] | None = None) -> int:
         help="dire ce qu'un `flex-wrap` exprimerait des grilles à pistes inégales",
     )
     analyseur.add_argument(
+        "--comparer",
+        action="store_true",
+        help="mesurer, largeur par largeur, ce que la proposition changerait au dessin",
+    )
+    analyseur.add_argument(
         "--releve-json",
         metavar="CHEMIN",
         help="écrire ce que le modèle annonce, largeur par largeur, pour un navigateur",
@@ -3702,6 +3745,53 @@ def principal(arguments: list[str] | None = None) -> int:
             print(f"    {largeur}px : {ancienne} → {nouvelle}")
         return 0
 
+    if options.comparer:
+        try:
+            registre = lire_registre(RACINE)
+        except SourceIllisible as erreur:
+            print(f"Impossible de comparer les minima : {erreur}", file=sys.stderr)
+            return 2
+        selecteurs = [entree.get("selecteur") or "" for entree in registre.get("grille", [])]
+        capacites = lire_capacites(RACINE, selecteurs)
+        appliquer_capacites(grilles, capacites)
+        pages = pages_des_grilles(RACINE, selecteurs)
+        comparaisons = 0
+        for entree in registre.get("grille", []):
+            selecteur = entree.get("selecteur")
+            if not selecteur or selecteur not in grilles:
+                continue
+            grille = grilles[selecteur]
+            minimum = entree.get("minimum")
+            if not isinstance(minimum, int):
+                continue
+            grille.chaine = (
+                chaine_d_ancetres(RACINE, pages[selecteur], selecteur) if pages.get(selecteur) else None
+            )
+            propose = minimum_propose(grille, entree, capacites.get(selecteur))
+            if propose == minimum:
+                continue
+            comparaisons += 1
+            resultat = comparer_minimum(grille, minimum, propose)
+            place = place_maximale(grille)
+            if resultat["propose"] is None:
+                print(
+                    f"{selecteur:28} adopté {minimum}px : "
+                    f"{max(resultat['adopte'])} colonne(s) au plus dans {place:.1f}px — "
+                    "aucune proposition sous le plancher du modèle"
+                )
+                continue
+            print(
+                f"{selecteur:28} adopté {minimum}px → {max(resultat['adopte'])} col. · "
+                f"proposé {propose}px → {max(resultat['propose'])} col. · "
+                f"{len(resultat['bascules'])} largeur(s) changent"
+            )
+            for bascule in resultat["bascules"][:6]:
+                print(
+                    f"    {bascule['largeur']}px : {bascule['adopte']} → {bascule['propose']} colonnes"
+                )
+        print(f"{comparaisons} grille(s) où la proposition change le dessin.")
+        return 0
+
     if options.regle:
         try:
             declarees = lire_registre(RACINE).get("grille_fixe", [])
@@ -3721,8 +3811,14 @@ def principal(arguments: list[str] | None = None) -> int:
                 print(f"{selecteur:32} {k} col. — aucune piste ne tient")
                 continue
             mesurees += 1
+            # Les deux colonnes du rapport se lisent dans la **même** place : une
+            # carte « avant » calculée dans le conteneur et une carte « après »
+            # calculée dans la place réelle compareraient deux dessins différents.
             avant = min(
-                (conteneur(largeur) - (colonnes_anciennes(grille, largeur) - 1) * (ecart_a(grille, largeur) or grille.gap))
+                (
+                    conteneur_de(grille, largeur)
+                    - (colonnes_anciennes(grille, largeur) - 1) * (ecart_a(grille, largeur) or grille.gap)
+                )
                 / colonnes_anciennes(grille, largeur)
                 for largeur in LARGEURS
             )
