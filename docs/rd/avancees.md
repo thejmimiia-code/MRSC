@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 77 |
+| Avancées consignées | 78 |
 | Période couverte | du 2026-10-20 au 2026-11-02 |
 | Contrôles exécutables cités | 85 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1621,9 +1621,9 @@ Initiatives liées : `documentation-rd-eva`, `coherence-textes-publics`, `cartog
 
 **Contrôle qui la maintient :** `python3 outils/cadrages.py --releve-json /tmp/plan.json && node outils/mesurer-cadrages.cjs /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --controler /tmp/plan.json /tmp/rapport.json && python3 outils/test_cadrages.py`
 
-**Limite — ce que cela ne prouve pas.** Le contrôle mesure le débordement horizontal et le nombre de colonnes : il ne dit rien de la hauteur, des chevauchements verticaux, du contraste ni de la lisibilité d'une carte étroite, et une page sans grille déclarée n'est pas visitée. La mutation qui prouve la garde est faite à la main sur une copie jetable, elle n'est pas automatisée. Coût mesuré : 5 min 02 pour 480 combinaisons, ce qui a fait relever le plafond du job graphismes de 20 à 30 minutes.
+**Limite — ce que cela ne prouve pas.** Le contrôle mesure le débordement horizontal et le nombre de colonnes : il ne dit rien de la hauteur, du contraste ni de la lisibilité d'une carte étroite, et une page sans grille déclarée n'est pas visitée. Les chevauchements de cartes, d'abord hors de portée, sont couverts depuis l'avancée « ni mot coupé, ni carte superposée ». La mutation qui prouve la garde est faite à la main sur une copie jetable, elle n'est pas automatisée. Coût mesuré : 5 min 02 pour 480 combinaisons, ce qui a fait relever le plafond du job graphismes de 20 à 30 minutes.
 
-**Suite.** Étendre le contrôle à la hauteur et aux chevauchements verticaux, puis automatiser la mutation qui prouve la garde.
+**Suite.** Couvrir la hauteur des blocs et le contraste, puis automatiser la mutation qui prouve la garde.
 
 Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
 
@@ -1834,6 +1834,30 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-
 **Suite.** Reproduire localement chaque étape qui tombe, plutôt que relancer la CI à l'aveugle, et relancer `--regenerer` en dernier geste de chaque lot qui touche un document.
 
 Initiatives liées : `documentation-rd-eva`, `coherence-textes-publics`, `cartographier-les-lacunes`.
+
+### `ni-mot-coupe-ni-carte-superposee` — Ni mot coupé, ni carte superposée : ce que le visiteur lit entre dans la mesure
+
+*Consignée le 2026-11-02.*
+
+**Constat.** Le contrôle des cadrages mesurait le débordement horizontal et le nombre de colonnes. Il ne regardait pas ce que le visiteur lit : un mot rogné par une zone de découpe, ou deux cartes dessinées l'une sur l'autre, ne changent ni la largeur du document ni le nombre de colonnes. Le site pouvait donc passer vert en perdant du texte.
+
+**Ce que cela change.** Le relevé navigateur compte désormais, à chaque cadrage, les **mots coupés** et les **cartes qui se recouvrent** dans une grille déclarée ; `--controler` refuse les deux, nomme l'élément, la mesure en pixels et l'extrait du mot perdu. Le texte se compte sur les nœuds de texte, jamais sur `scrollHeight` : le 2 novembre 2026, la mesure grossière accusait 51 fois — fonds décoratifs, badges, flèches qui débordent d'un conteneur en `overflow: hidden` — pour **zéro mot réellement perdu**. La version précise garde la promesse et ne dénonce pas un dessin qui la tient. Résultat sur les 480 combinaisons : **0 mot coupé, 0 chevauchement**. La garde est éprouvée dans les deux sens sur une copie jetable : `max-height: 40px` avec `overflow: hidden` sur `.home-action-card` fait refuser **8 mots coupés** (« article.home-action-card coupe un mot de 303,8 px »), et `top: -70px` sur une carte sur deux de `.home-action-grid` fait refuser **2 chevauchements** de 368,39 × 32,75 px. Un relevé d'avant ce contrôle est refusé : les deux clés absentes valent « non mesuré », pas accord.
+
+**Preuves dans le dépôt :**
+
+- `outils/mesurer-cadrages.cjs`
+- `outils/cadrages.py`
+- `outils/test_cadrages.py`
+- `docs/rd/cadrages.toml`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/cadrages.py --releve-json /tmp/plan.json && node outils/mesurer-cadrages.cjs /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --controler /tmp/plan.json /tmp/rapport.json && python3 outils/test_cadrages.py`
+
+**Limite — ce que cela ne prouve pas.** Le contrôle ne dit rien de la hauteur totale de la page, du contraste, ni de la lisibilité d'une carte étroite — une carte peut rester lisible à 300 px et devenir illisible à 260. Il ne voit les chevauchements qu'entre enfants directs d'une grille déclarée : une superposition entre deux sections, ou avec un élément en position fixe, lui échappe. Il ne mesure que le visible à l'instant du relevé : un mot coupé qui n'apparaît qu'au survol ou dans un panneau ouvert n'est pas vu. Coût : 275 s pour 480 combinaisons.
+
+**Suite.** Automatiser les deux mutations dans un banc, puis confronter la hauteur des blocs à une grille typographique.
+
+Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
 
 ## 3. Ce que ce registre ne dit pas
 

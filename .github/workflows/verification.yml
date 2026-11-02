@@ -575,11 +575,12 @@ jobs:
       # défaut, trois tailles de texte. Le panneau de personnalisation en propose
       # six et cinq crans, et `--content` comme les gouttières changent avec eux.
       # Cette étape confronte donc quatre pages dans 6 × 5 × 4 = 480 cadrages :
-      # débordement horizontal au demi-pixel près, et nombre de colonnes de
-      # chaque grille déclarée. Coût mesuré : 5 min 02 en local, d'où le plafond
+      # débordement horizontal au demi-pixel près, nombre de colonnes de chaque
+      # grille déclarée, mots coupés par une zone de découpe et cartes qui se
+      # recouvrent. Coût mesuré : 5 min 02 en local, d'où le plafond
       # de 30 minutes sur ce job — un banc lent vaut mieux qu'un banc absent, à
       # condition de dire ce qu'il coûte.
-      - name: Confronter chaque cadrage personnalisé, au pixel près
+      - name: Confronter chaque cadrage personnalisé, au pixel près, mots et cartes compris
         env:
           MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
           MRSC_TEST_URL: http://127.0.0.1:4185/

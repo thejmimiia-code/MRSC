@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Éprouve le contrôle des cadrages : douze cas, sans navigateur.
+"""Éprouve le contrôle des cadrages : quinze cas, sans navigateur.
 
 `outils/cadrages.py --controler` ne vaut que s'il refuse. Ce banc lui donne des
 plans et des rapports fabriqués — jamais le vrai dépôt, jamais un navigateur — et
@@ -77,6 +77,8 @@ class TestCadrages(unittest.TestCase):
                     "largeur": 1440,
                     "debordement": debordement,
                     "colonnes": colonnes,
+                    "coupes": [],
+                    "chevauchements": [],
                 }
             )
         return {"navigateur": "HeadlessChrome/essai", "mesures": mesures}
@@ -176,6 +178,43 @@ class TestCadrages(unittest.TestCase):
         self.assertEqual(milieu["colonnes"], 2)
         # Et une grille que la présentation ne nomme pas ne reçoit aucune règle.
         self.assertIsNone(modele.regle_applicable(trouvees, "mosaique", 1440, ".ai-balance-grid"))
+
+    def test_un_mot_coupe_est_refuse_et_nomme(self) -> None:
+        """Un mot rogné par une zone de découpe est un mot que personne ne lit."""
+        rapport = self.rapport({".document-grid": 3})
+        rapport["mesures"][0]["coupes"] = [
+            {"tag": "article", "classe": "document-card", "depasse": 7.5, "texte": "le dossier de"}
+        ]
+        erreurs = self.cadrages.controler(self.plan({".document-grid": 3}), rapport)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("article.document-card coupe un mot de 7.5 px", erreurs[0])
+        self.assertIn("le dossier de", erreurs[0])
+
+    def test_un_chevauchement_de_cartes_est_refuse_et_nomme(self) -> None:
+        rapport = self.rapport({".document-grid": 3})
+        rapport["mesures"][0]["chevauchements"] = [
+            {
+                "selecteur": ".document-grid",
+                "premiere": "article.document-card",
+                "seconde": "aside.document-note",
+                "largeur": 40.0,
+                "hauteur": 12.5,
+            }
+        ]
+        erreurs = self.cadrages.controler(self.plan({".document-grid": 3}), rapport)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("se chevauchent de 40.0 × 12.5 px", erreurs[0])
+        self.assertIn(".document-grid", erreurs[0])
+
+    def test_un_releve_de_texte_absent_ne_passe_pas_pour_un_accord(self) -> None:
+        """Un rapport d'avant ce contrôle ne prouve rien du texte : il est refusé."""
+        rapport = self.rapport({".document-grid": 3})
+        del rapport["mesures"][0]["coupes"]
+        del rapport["mesures"][0]["chevauchements"]
+        erreurs = self.cadrages.controler(self.plan({".document-grid": 3}), rapport)
+        self.assertEqual(len(erreurs), 2, erreurs)
+        self.assertIn("texte coupé non mesuré", erreurs[0])
+        self.assertIn("chevauchement non mesuré", erreurs[1])
 
     def test_le_cout_declare_est_celui_du_plan(self) -> None:
         """Un registre qui annonce le coût du lot précédent se trompe de moitié.

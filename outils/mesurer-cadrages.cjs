@@ -2,10 +2,18 @@
 'use strict';
 // Mesure, dans un vrai navigateur, le dessin de chaque page **dans chaque
 // cadrage personnalisé** : six présentations × cinq crans de texte × quatre
-// largeurs. Deux choses sont relevées, et une seule suffit au contrôle :
+// largeurs. Quatre choses sont relevées, et une seule suffit au contrôle :
 //
 //   - le débordement horizontal du document, en pixels (tolérance 0,5 px) ;
-//   - le nombre de colonnes de chaque grille déclarée.
+//   - le nombre de colonnes de chaque grille déclarée ;
+//   - le **texte coupé** : un mot dont la boîte sort de la zone de découpe d'un
+//     ancêtre en `overflow: hidden` ou `clip` ;
+//   - les **cartes qui se chevauchent** dans une grille déclarée.
+//
+// Le texte coupé se compte sur les nœuds de texte, pas sur `scrollHeight` : un
+// conteneur dont un enfant **décoratif** déborde est légitime et n'efface aucun
+// mot. Le 2 novembre 2026, la mesure grossière accusait 51 fois pour zéro mot
+// réellement coupé — c'est la version précise qui a été gardée.
 //
 // Ce script ne juge rien : il compte et il écrit. La comparaison au plan est le
 // travail de `outils/cadrages.py --controler`, qui n'a pas besoin de navigateur
@@ -112,7 +120,85 @@ function mesurer(selecteurs) {
       colonnes[selecteur] = compte;
     }
   }
-  return { debordement, coupable, colonnes };
+  // Un conteneur qui découpe et dont un enfant décoratif dépasse est légitime :
+  // ce sont les **mots** qui doivent rester lisibles, pas les boîtes.
+  const coupes = [];
+  for (const element of document.querySelectorAll('body *')) {
+    const style = getComputedStyle(element);
+    const coupeX = style.overflowX === 'hidden' || style.overflowX === 'clip';
+    const coupeY = style.overflowY === 'hidden' || style.overflowY === 'clip';
+    if (!coupeX && !coupeY) continue;
+    const boite = element.getBoundingClientRect();
+    if (boite.width === 0 || boite.height === 0) continue;
+    const gauche = boite.left + element.clientLeft;
+    const haut = boite.top + element.clientTop;
+    const droite = gauche + element.clientWidth;
+    const bas = haut + element.clientHeight;
+    const mots = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    let noeud;
+    let pire = 0;
+    let extrait = '';
+    while ((noeud = mots.nextNode())) {
+      if (!noeud.textContent || !noeud.textContent.trim()) continue;
+      const portee = noeud.parentElement;
+      if (!portee || getComputedStyle(portee).display === 'none') continue;
+      const rect = portee.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) continue;
+      const depasse = Math.max(
+        coupeX ? rect.right - droite : 0,
+        coupeX ? gauche - rect.left : 0,
+        coupeY ? rect.bottom - bas : 0,
+        coupeY ? haut - rect.top : 0
+      );
+      if (depasse > 0.5 && depasse > pire) {
+        pire = depasse;
+        extrait = noeud.textContent.trim().slice(0, 40);
+      }
+    }
+    if (pire > 0) {
+      coupes.push({
+        tag: element.tagName.toLowerCase(),
+        classe: String(element.className || '').slice(0, 60),
+        depasse: Math.round(pire * 100) / 100,
+        texte: extrait,
+      });
+    }
+  }
+  if (coupes.length > 8) coupes.length = 8;
+
+  // Deux cartes d'une même grille ne doivent pas se recouvrir : un recouvrement
+  // cache du contenu, et un contenu caché n'est pas un contenu présent.
+  const chevauchements = [];
+  for (const selecteur of selecteurs) {
+    const grille = Array.from(document.querySelectorAll(selecteur)).find(
+      (candidat) => candidat.getBoundingClientRect().width > 0
+    );
+    if (!grille) continue;
+    const cartes = Array.from(grille.children)
+      .filter((enfant) => getComputedStyle(enfant).display !== 'none')
+      .slice(0, 60);
+    for (let i = 0; i < cartes.length; i += 1) {
+      for (let j = i + 1; j < cartes.length; j += 1) {
+        const a = cartes[i].getBoundingClientRect();
+        const b = cartes[j].getBoundingClientRect();
+        if (a.width === 0 || a.height === 0 || b.width === 0 || b.height === 0) continue;
+        const dx = Math.min(a.right, b.right) - Math.max(a.left, b.left);
+        const dy = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+        if (dx > 0.5 && dy > 0.5) {
+          chevauchements.push({
+            selecteur,
+            premiere: `${cartes[i].tagName.toLowerCase()}${cartes[i].className ? `.${String(cartes[i].className).split(' ')[0]}` : ''}`,
+            seconde: `${cartes[j].tagName.toLowerCase()}${cartes[j].className ? `.${String(cartes[j].className).split(' ')[0]}` : ''}`,
+            largeur: Math.round(dx * 100) / 100,
+            hauteur: Math.round(dy * 100) / 100,
+          });
+        }
+      }
+    }
+  }
+  if (chevauchements.length > 8) chevauchements.length = 8;
+
+  return { debordement, coupable, colonnes, coupes, chevauchements };
 }
 
 (async () => {
@@ -224,9 +310,15 @@ function mesurer(selecteurs) {
   fs.writeFileSync(destination, `${JSON.stringify(rapport, null, 1)}\n`);
 
   const debordants = rapport.mesures.filter((mesure) => (mesure.debordement || 0) > 0).length;
+  const coupes = rapport.mesures.reduce((total, mesure) => total + (mesure.coupes || []).length, 0);
+  const chevauchements = rapport.mesures.reduce(
+    (total, mesure) => total + (mesure.chevauchements || []).length,
+    0
+  );
   console.log(
     `Cadrages mesurés : ${rapport.mesures.length} point(s) sur ${plan.combinaisons.length} attendu(s), ` +
-      `${debordants} en débordement, ${rapport.erreurs.length} erreur(s) — rapport écrit dans ${destination}.`
+      `${debordants} en débordement, ${coupes} texte(s) coupé(s), ${chevauchements} chevauchement(s), ` +
+      `${rapport.erreurs.length} erreur(s) — rapport écrit dans ${destination}.`
   );
   if (rapport.erreurs.length) {
     for (const erreur of rapport.erreurs.slice(0, 20)) {

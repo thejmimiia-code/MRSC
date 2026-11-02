@@ -2252,11 +2252,39 @@ fait refuser les **cinq** crans de 320 px, en nommant l'élément et la mesure e
 « `div.home-share-panel` dépasse de 588,09 px » à 75 %, 594,05 px à 130 %. Le dépôt n'a
 pas été touché, la copie a été supprimée.
 
+### Ce que le visiteur lit entre aussi dans la mesure
+
+Mesurer la largeur du document et le nombre de colonnes ne suffit pas : un mot rogné par
+une zone de découpe, ou deux cartes dessinées l'une sur l'autre, ne changent ni l'une ni
+l'autre. Le relevé compte donc, à chaque cadrage, les **mots coupés** et les **cartes qui
+se recouvrent**, et les refuse en nommant l'élément, la mesure en pixels et l'extrait du
+mot perdu.
+
+Le texte se compte sur les **nœuds de texte**, jamais sur `scrollHeight`. La différence
+n'est pas théorique : la mesure grossière a accusé **51 fois** — fonds décoratifs, badges
+et flèches qui débordent légitimement d'un conteneur en `overflow: hidden` — pour **zéro
+mot réellement perdu**. Une mesure qui dénonce un dessin qui tient la promesse n'est pas
+plus utile qu'une mesure qui se taît.
+
+Deux mutations, sur copie jetable, prouvent que les deux nouvelles gardes mordent :
+
+| Mutation | Refus |
+| --- | --- |
+| `max-height: 40px; overflow: hidden` sur `.home-action-card` | code 1, 8 mots coupés nommés — « `article.home-action-card` coupe un mot de 303,8 px » |
+| `top: -70px` sur une carte sur deux de `.home-action-grid` | code 1, 2 chevauchements de 368,39 × 32,75 px |
+
+Une troisième tentative — `top: -60px` sur **toutes** les cartes — n'a rien prouvé : elle
+déplaçait l'ensemble d'un bloc, sans changer une seule distance. Un banc qui ne mord pas
+ne dit rien, et c'est pour cela qu'il est éprouvé avant d'être cru.
+
 ### Limites
 
-Le contrôle mesure le débordement **horizontal** et le nombre de colonnes. Il ne dit rien
-de la hauteur, des chevauchements verticaux, du contraste ni de la lisibilité d'une carte
-étroite ; une page sans grille déclarée n'est pas visitée, donc un défaut qui n'affecterait
-qu'elle échapperait au contrôle. Coût mesuré : **5 min 02** pour 480 combinaisons, ce qui a
+Le relevé mesure quatre choses, et elles seules. Il ne dit rien de la hauteur totale, du
+contraste ni de la lisibilité d'une carte étroite — une carte peut rester lisible à 300 px
+et devenir illisible à 260. Il ne voit les chevauchements qu'entre enfants directs d'une
+grille déclarée : une superposition entre deux sections lui échappe. Il ne voit que l'état
+visible au moment du relevé : un mot coupé qui n'apparaît qu'au survol ou dans un panneau
+ouvert n'est pas mesuré. Une page sans grille déclarée n'est pas visitée, donc un défaut
+qui n'affecterait qu'elle échapperait au contrôle. Coût mesuré : **5 min 02** pour 480 combinaisons, ce qui a
 fait relever le plafond du job `graphismes` de 20 à 30 minutes — un banc lent vaut mieux
 qu'un banc absent, à condition de dire ce qu'il coûte.
