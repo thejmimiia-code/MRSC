@@ -1,18 +1,28 @@
 # Registre des grilles dont le nombre de colonnes vient de la largeur disponible.
 #
 # Tenu par `outils/modele-grilles.py --verifier`, éprouvé par
-# `outils/test_modele_grilles.py`. Une grille inscrite ici s'engage à trois
+# `outils/test_modele_grilles.py`. Une grille inscrite ici s'engage à quatre
 # choses, et le contrôle refuse chacune de leur violation :
 #
 # 1. sa règle de base écrit `repeat(auto-fit, minmax(min(Npx, 100%), 1fr))` ;
-# 2. son `N` est **celui que la règle de calcul donne** pour son nombre de
-#    colonnes de conception — pas un chiffre choisi à la main ;
+# 2. son `N` est celui que la règle donne **dans la place qu'elle occupe
+#    réellement**, ou l'écart est motivé (point 4) — depuis le 2 novembre 2026,
+#    le contrôle confronte aussi la feuille à ce registre, et non plus à une
+#    règle calculée dans un conteneur que trois grilles ne reçoivent jamais ;
 # 3. aucun bloc `@media` de largeur ne lui réimpose un nombre de colonnes ;
 # 4. si la place qu'elle occupe **réellement** ne redonne pas son minimum, le
 #    registre écrit pourquoi (`motif_ecart`, quarante caractères au moins). Le
 #    2 novembre 2026, sept grilles sur vingt-deux étaient dans ce cas : la règle
 #    de calcul raisonnait dans le conteneur, et `.learning-code-grid` ne reçoit
 #    jamais plus de 812 px. Le modèle ne tranche pas ce dessin — il le nomme.
+#
+# Le même jour, sept décisions ont été prises sur la mesure : deux grilles sont
+# sorties du `auto-fit` parce qu'aucun minimum ne pouvait tenir leur tracé
+# (`.learning-code-grid` et `.ai-path-steps`, désormais en `[[grille_fixe]]`),
+# deux minima ont été adoptés (`.ai-fraud-steps` 360 px pour 2 colonnes,
+# `.simulateur-chiffres` 360 px), et trois gardent leur valeur avec un motif
+# réécrit sur la bande exacte (les grilles à 350 px, dont la paire tient de 752
+# à 760 px puis revient à 768 px).
 #
 # La règle de calcul a deux branches, et c'est une différence de question :
 #
@@ -91,17 +101,6 @@ items = [1, 2, 3, 4, 5, 6, 7]
 raison = "Grilles de liens : trois colonnes au conteneur maximal, deux dès 1 132 px — la cascade attendait 920 px pour passer à deux, ce qui donnait des liens de 450 px à côté de liens de 150."
 
 [[grille]]
-selecteur = ".learning-code-grid"
-colonnes = 2
-minimum = 470
-items = [2]
-seuil_une_colonne = 1000
-raison = "Deux colonnes côte à côte : le palier de 1 000 px n'était pas un choix de largeur de carte mais le moment où l'on renonce à la paire. Il est recopié tel quel, et le calcul s'arrête juste avant."
-motif_ecart = "Décision ouverte, gardée telle quelle : la règle, dans les 812 px que cette grille occupe réellement, proposerait 300 px. Mesuré largeur par largeur le 2 novembre 2026 : avec 470 px la grille ne montre jamais deux colonnes ; avec 300 px elle en montre deux de 650 à 760 px, une seule de 770 à 1 000 px, puis deux dès 1 010 px — un dessin qui clignote. Adopter 300 px rétrécit les blocs de code sans garantir la paire ; garder 470 px laisse le dessin déclaré hors d'atteinte. Aucune des deux n'est adoptée ici."
-piste_jamais_atteinte = true
-motif = "Deux pistes de 470 px en demandent 956 ; la place la plus large que cette grille occupe vaut 812 px, parce que la page est en deux colonnes avec un sommaire de 300 px (mesuré le 2 novembre 2026). Les deux exemples ne sont donc jamais côte à côte, alors que le registre justifiait ce minimum par une paire. Décision ouverte, et elle revient à une personne : minimum à 390 px (paire au-delà de 1 184 px de fenêtre), à 298 px (paire dès 1 000 px, comme l'ancien palier), ou une seule colonne assumée. La règle de recommandation raisonne encore dans le conteneur : ces trois choix demandent de la reprendre, pas de changer un chiffre."
-
-[[grille]]
 selecteur = ".principle-grid"
 colonnes = 4
 minimum = 270
@@ -117,13 +116,11 @@ raison = "Cartes de fraudes : trois colonnes au conteneur maximal, deux dès que
 
 [[grille]]
 selecteur = ".ai-fraud-steps"
-colonnes = 4
-minimum = 270
+colonnes = 2
+minimum = 360
 items = [4]
-raison = "Étapes numérotées des réflexes : quatre colonnes au plus, jamais de colonne de moins de 270 px tant que le conteneur en contient une."
-motif_ecart = "Décision ouverte, gardée telle quelle : la règle, dans les 1 087,6 px que cette grille occupe, proposerait 260 px. Mesuré le 2 novembre 2026 : les quatre étapes tiennent alors sur une ligne dès 1 210 px de fenêtre, et trois colonnes de 960 à 1 200 px. Avec les 270 px adoptés, la grille plafonne à trois colonnes partout. Adopter 260 px rétrécit chaque étape de dix pixels ; garder 270 px laisse la quatrième colonne hors d'atteinte. Personne n'a tranché."
-piste_jamais_atteinte = true
-motif = "Quatre pistes de 270 px en demandent 1 120,8 ; la place la plus large que cette liste occupe vaut 1 087,6 px, parce que le panneau qui la porte lui retire son remplissage et sa bordure : il manque 33 px, et la quatrième carte ne tient jamais. Abaisser le minimum à 260 px rendrait la quatrième colonne au maximum de largeur, mais la règle de recommandation, qui raisonne encore dans le conteneur, demanderait alors 370 px : le changement suppose de reprendre la règle. Décision ouverte."
+raison = "Quatre réflexes en deux colonnes : la carte vaut 537 px au conteneur maximal, la grille passe de une à deux colonnes sans jamais traverser trois — 2 × 2, équilibré, sans carte orpheline."
+motif_ecart = "Le plafond du modèle pour deux colonnes (480 px) garderait la forme au conteneur maximal en repoussant la paire jusqu'à 973,6 px de place, donc une seule colonne sur presque tous les écrans ; 360 px donne 2 × 2 dès que les deux cartes tiennent, sans jamais traverser trois colonnes — et sans laisser la quatrième étape seule, ce que 270 px faisait de 958 à 2 560 px de fenêtre. Mesuré le 2 novembre 2026."
 
 [[grille]]
 selecteur = ".home-voice-grid"
@@ -161,7 +158,7 @@ minimum = 350
 items = [2]
 seuil_une_colonne = 760
 raison = "Deux listes de la page EVA : `auto-fit` ne remplit pas de piste vide, une troisième colonne ne peut pas apparaître — le minimum reste celui du seuil de repli, et l'écart avec la cascade supprimée est nul."
-motif_ecart = "La règle, dans les 728 px reçus au seuil de 760, proposerait 360 px : à 350 px la paire tient encore à 760 px, là où le palier supprimé n'en montrait qu'une. Relever à 360 px déplacerait ce repli de dix pixels ; ce déplacement n'est pas adopté sans mesure dans la page."
+motif_ecart = "La règle, dans les 728 px reçus au seuil de 760, proposerait 360 px. Mesuré largeur par largeur le 2 novembre 2026 : avec 350 px la paire tient de 752 à 760 px, disparaît de 761 à 767 (la gouttière du conteneur passe de 2rem à 3rem, la place rétrécit d'un pixel à l'autre) et revient dès 768 px. À 360 px elle ne reviendrait qu'à 788 px : une tablette de 768 px perdrait la paire. Le retrait de sept pixels est préféré à la perte d'une colonne sur une largeur réelle."
 
 [[grille]]
 selecteur = ".knowledge-compass"
@@ -174,11 +171,10 @@ raison = "Dix entrées de la boussole d'apprentissage : trois colonnes en laisse
 [[grille]]
 selecteur = ".simulateur-chiffres"
 colonnes = 2
-minimum = 380
+minimum = 360
 items = [6]
 seuil_une_colonne = 760
 raison = "Liste de définitions du simulateur, trois paires `dt`/`dd` : une troisième colonne couperait les paires (`dt dd dt`), ce qui n'a pas de sens."
-motif_ecart = "La règle, dans les 952 px que cette grille occupe, proposerait 360 px. À 380 px les deux colonnes tiennent au conteneur maximal ; la proposition ne change pas ce dessin, elle avance le moment du repli. Ni l'un ni l'autre n'est adopté sans mesure dans la page servie."
 
 [[grille]]
 selecteur = ".simulateur-duo"
@@ -187,7 +183,7 @@ minimum = 350
 items = [2]
 seuil_une_colonne = 760
 raison = "Deux panneaux « ce que fait / ce que ne fait pas » le simulateur : deux éléments, aucune troisième colonne possible."
-motif_ecart = "La règle, dans les 728 px reçus au seuil de 760, proposerait 360 px : à 350 px la paire tient encore à 760 px, là où le palier supprimé n'en montrait qu'une. Relever à 360 px déplacerait ce repli ; ce déplacement n'est pas adopté sans mesure dans la page."
+motif_ecart = "La règle, dans les 728 px reçus au seuil de 760, proposerait 360 px. Mesuré le 2 novembre 2026 : avec 350 px la paire tient de 748 à 760 px, disparaît de 761 à 763 et revient dès 764 px ; à 360 px elle n'arriverait qu'à 784 px, donc pas sur une tablette de 768 px. Le palier de 760 px qui plaçait ce repli a été supprimé, et 350 px est ce qui en garde le plus fidèlement le dessin."
 
 [[grille]]
 selecteur = ".simulateur-passeport"
@@ -204,7 +200,7 @@ minimum = 350
 items = [2]
 seuil_une_colonne = 760
 raison = "Deux colonnes « ce que l'IA fait / ne fait pas » : deux éléments, aucune troisième colonne possible."
-motif_ecart = "La règle, dans les 728 px reçus au seuil de 760, proposerait 360 px : à 350 px la paire tient encore à 760 px, là où le palier supprimé n'en montrait qu'une. Relever à 360 px déplacerait ce repli ; ce déplacement n'est pas adopté sans mesure dans la page."
+motif_ecart = "La règle, dans les 728 px reçus au seuil de 760, proposerait 360 px. Mesuré le 2 novembre 2026 : avec 350 px la paire tient de 752 à 760 px, disparaît de 761 à 767 et revient dès 768 px ; à 360 px elle ne reviendrait qu'à 788 px. Les deux colonnes de cette grille comparent deux textes, et les perdre sur une tablette de 768 px coûterait plus que la bande de sept pixels où elles s'effacent."
 
 [[grille]]
 selecteur = ".ai-fraud-lesson-list"
@@ -218,22 +214,6 @@ raison = "Cinq leçons de la page fraude : trois colonnes feraient 3 + 2, deux c
 # de cinq colonnes fixes à une largeur de piste. La cascade imposait
 # `repeat(3, …)` sous 520 px et recentrait la dernière étape par
 # `li:last-child { grid-column: 2 }` ; les deux règles disparaissent ensemble.
-[[grille]]
-selecteur = ".ai-path-steps"
-colonnes = 5
-minimum = 220
-items = [5]
-raison = "Cinq étapes du parcours de la page IA : le plus large minimum qui garde cinq colonnes au conteneur maximal. Sous 520 px, l'ancienne cascade repliait à trois colonnes — un chiffre choisi, qui laissait des cartes de 59 px à 240 px de fenêtre ; la largeur de piste les remplace par un repli progressif."
-motif_ecart = "Le modèle n'a aucune piste à proposer : cinq étapes dans 669,6 px réclament 127 px chacune, sous le plancher de 180 px en dessous duquel il ne descend pas. Garder 220 px laisse les cinq étapes sur une seule colonne. Deux issues hors de portée du modèle — une colonne assumée, ou un plancher abaissé — et une personne pour choisir."
-piste_jamais_atteinte = true
-motif = "Cinq pistes de 220 px en demandent 1 132 ; la place la plus large que cette liste occupe vaut 669,6 px, parce que son panneau est en `flex` à deux enfants et ne lui laisse que la moitié de son contenu. Le commentaire de la feuille annonçait « cinq étapes au conteneur maximal » : ce dessin n'existe pas, et la liste montre au plus deux colonnes. Décision ouverte : abaisser le minimum à 127 px, ou écrire une seule colonne et corriger le commentaire. Le modèle ne tranche pas un dessin."
-
-# — Grilles **fixes à dessein**, 31 octobre 2026. Le registre des grilles
-# dynamiques disait quoi convertir ; il ne disait pas ce qui doit rester fixe.
-# Les aperçus de présentation dessinent chacun une mise en page : leur forme
-# 3 × 2 **est** l'information, et une largeur de piste la détruirait. Sans cette
-# section, `--regle` leur proposait une conversion, et rien n'aurait signalé
-# qu'un aperçu cessait de montrer ce qu'il annonce.
 [[grille_fixe]]
 selecteur = ".layout-choice-preview[data-preview=\"lecture\"]"
 colonnes = 1
@@ -417,3 +397,18 @@ ecart_max_px = 68.0
 ecart_part = 0.173
 presentation_repliee = ["lecture"]
 raison = "Introduction de la page simulateur : texte d'un côté, chiffres clés de l'autre. Deux colonnes sans plancher, repliées par un palier de 1 000 px qui ne portait qu'elles. Base choisie dans la fenêtre exacte du repli, vérifiée au pixel : aucune largeur ne change de nombre de colonnes. Coût mesuré : 68,0 px (17,3 %), pour la même raison que partout ailleurs — flex ne partage que le surplus."
+
+# — Deux grilles que le 2 novembre 2026 a fait sortir du `auto-fit`, sur mesure.
+# Ce ne sont pas des grilles « à dessein fixe » comme les aperçus de présentation :
+# ce sont deux tracés dont la mesure a montré qu'aucun nombre de colonnes ne
+# pouvait être tenu. Elles restent déclarées ici pour que leur forme ne change pas
+# par inadvertance.
+[[grille_fixe]]
+selecteur = ".learning-code-grid"
+colonnes = 1
+raison = "Blocs de code à comparer : la grille vit dans la colonne d'un article et n'occupe jamais plus de 812 px. Deux pistes de 470 px en demandent 956 ; à 300 px la paire apparaîtrait, disparaîtrait et reviendrait (2 col. de 648 à 760 px, 1 jusqu'à 1 004, 2 au-delà) parce que la gouttière du conteneur rétrécit la place à 761 px. Les blocs portent `white-space:pre` : une piste étroite les ferait défiler horizontalement. Une colonne pleine largeur les montre en entier."
+
+[[grille_fixe]]
+selecteur = ".ai-path-steps"
+colonnes = 1
+raison = "Chaîne de cinq étapes, décidée le 2 novembre 2026 après mesure : aucun minimum ne donne un nombre de colonnes qui ne redescend jamais, parce que le panneau `flex` qui la porte la place à côté du texte dès 783 px de fenêtre, où elle reçoit deux fois moins de largeur qu'à 780. Avec 220 px elle montrait deux colonnes de 535 à 782, une seule de 783 à 1 035, deux de nouveau au-delà ; et cinq étapes dans 669,6 px demanderaient 127 px chacune. Cercle de 44 px et libellé d'un mot sur un même axe."

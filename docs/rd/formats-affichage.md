@@ -2068,3 +2068,80 @@ la présentation par défaut. Deux phrases d'un premier jet — « la paire revi
 au-dessus de 1 000 px » — ont été corrigées par cette mesure, pas par une relecture.
 Les sept propositions restent **non adoptées** : aucune n'est mesurée dans un
 navigateur, et trois d'entre elles iraient dans le sens d'un dessin plus pauvre.
+
+## 32. Qualité d'abord : quatre tracés corrigés, deux promesses retirées (2 novembre 2026)
+
+Les sections 30 et 31 laissent sept propositions ouvertes ; la section 33 les
+reprend une par une avec les bandes exactes mesurées, et corrige deux phrases trop
+sûres d'elles. Celles-ci restent la trace de l'état du matin. Elles sont tranchées ici,
+sur la mesure, avec une consigne reçue telle quelle : « dans tous les cas de figure,
+qualité et professionnel ». Ce qui suit n'est donc pas le résultat d'une règle, mais
+de décisions prises avec ce que la règle a mesuré — et deux d'entre elles retirent un
+dessin au lieu de l'ajuster.
+
+### Deux grilles sortent du `auto-fit`
+
+`.learning-code-grid` n'occupe jamais plus de **812 px** ; deux pistes de 470 px en
+demandent 956. À 300 px (la proposition), la paire apparaîtrait de 648 à 760 px,
+**disparaîtrait** jusqu'à 1 004 et reviendrait : la gouttière du conteneur rétrécit la
+place à 761 px. Ses blocs de code portent `white-space:pre` et défileraient
+horizontalement dans une piste étroite, alors qu'une colonne pleine largeur les montre
+en entier. La grille est déclarée fixe à une colonne.
+
+`.ai-path-steps` est un cas plus net : **aucun** minimum ne donne un nombre de colonnes
+qui ne redescend jamais. Ce n'est pas le modèle, c'est la géométrie — le panneau `flex`
+qui la porte la place à côté du texte dès 783 px de fenêtre, où elle reçoit deux fois
+moins de largeur qu'à 780 px. Avec 220 px : deux colonnes de 535 à 782, une seule de
+783 à 1 035, deux de nouveau au-delà. Cinq étapes dans 669,6 px demanderaient 127 px
+chacune, sous tout plancher lisible. Les cinq étapes s'empilent — cercle de 44 px et
+libellé d'un mot sur un même axe.
+
+### Deux minima adoptés
+
+| grille | avant | après | ce que la mesure dit |
+| --- | --- | --- | --- |
+| `.ai-fraud-steps` | 270 px, 4 col. déclarées | **360 px, 2 col.** | à 270 px, trois colonnes dès 958 px : la quatrième étape restait seule jusqu'à 2 560 px. À 260 px, quatre cartes de 261,7 px de prose. À 360 px : carte de 537 px, et le seuil de trois colonnes (1 107,2 px) dépasse les 1 087,6 px reçus — la grille ne traverse jamais trois colonnes, donc 1 puis 2 × 2, sans carte orpheline. |
+| `.simulateur-chiffres` | 380 px | **360 px** | la paire commence à 783 px au lieu de 823, et le haut de la plage ne change pas : au-delà de 1 000 px, le parent `flex` place ses deux enfants côte à côte et la grille ne reçoit plus que 521 px. Relever ne protégeait rien. |
+
+### Trois minima gardés, motifs réécrits
+
+`.eva-listes-grid`, `.simulateur-duo` et `.ai-balance-grid` restent à **350 px**. À
+360 px, la paire ne reviendrait qu'à 788 px et une tablette de 768 px la perdrait ; à
+350 px elle tient de 752 à 760 px, s'efface de 761 à 767 (la gouttière passe de 2rem à
+3rem) et revient dès 768 px. Les motifs du registre portent désormais ces trois bandes
+au lieu d'une approximation.
+
+### La règle est réunifiée
+
+`verifier()` confrontait la feuille à un minimum calculé **dans le conteneur** ; il
+confronte maintenant la feuille au **registre**, et `ecarts_de_place` confronte le
+registre à la règle **dans la place réelle**, motif à l'appui. Le lot annoncé la veille
+— « reprendre `minimum_recommande` sur la place réelle » — est donc fait, non par un
+chiffre imposé aux vingt-deux grilles, mais par un contrôle qui refuse le silence. Les
+trois dérogations `piste_jamais_atteinte` ont disparu faute d'objet : deux tracés sont
+devenus fixes et déclarés, le troisième porte un minimum qui tient.
+
+### Ce que la mesure refuse de promettre
+
+Une carte seule sur la dernière rangée n'est pas toujours évitable. `auto-fit` traverse
+tous les nombres de colonnes avant d'atteindre le plus grand : pour 4 éléments, la bande
+à 3 colonnes existe **avant** celle à 4. Elle disparaît seulement quand la place maximale
+reste sous le seuil de trois colonnes — vrai pour `.ai-fraud-steps` à 360 px, faux pour
+`.ai-metric-grid`, `.ai-forms-grid`, `.learning-level-grid` et `.learning-ecosystem-grid`
+(4 éléments, 1 160 px de place) comme pour `.home-voice-grid` (3 éléments, deux colonnes
+de 804 à 1 189 px). Ces cinq grilles restent **mesurées et non corrigées** : les corriger
+demanderait de changer leur nombre de colonnes déclaré, donc un autre dessin.
+
+### Résultat, mesuré après changement
+
+**722 points** annoncés, **718 confirmés**, **4 divergences** toutes à moins d'un pixel
+de la bascule (0,20 · 0,28 · 0,60 · 0,78 px, les mêmes quatre qu'avant), **0 non mesuré**.
+Le relevé passe de 34 à 32 grilles : les deux tracés fixes n'ont plus de colonnes à
+prédire. Version CSS IA : `9126a2b94e7860c0`.
+
+### Limites
+
+Aucun de ces quatre tracés n'a été regardé par un œil humain. Le modèle et le navigateur
+comptent des colonnes ; ils ne disent pas si une carte de 537 px est agréable à lire, ni
+si cinq étapes empilées valent mieux qu'une rangée impossible. La relecture visuelle
+reste due, et elle seule peut contredire ces décisions.

@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 72 |
+| Avancées consignées | 73 |
 | Période couverte | du 2026-10-20 au 2026-11-02 |
-| Contrôles exécutables cités | 77 |
+| Contrôles exécutables cités | 80 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1713,6 +1713,31 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-
 **Limite — ce que cela ne prouve pas.** La carte la plus étroite reste un calcul de modèle : elle ne dit rien du texte qui déborde ni de la hauteur d'une carte, et elle ne couvre que la présentation par défaut. Aucun seuil de lisibilité n'est déclaré à la place de la constante retirée — le modèle dit ce qu'il mesure, il ne fixe pas une limite de confort.
 
 **Suite.** Prendre la carte la plus étroite comme critère des décisions ouvertes sur les tracés, puis trancher les sept propositions avec les bandes mesurées.
+
+Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
+
+### `grilles-qualite-tracés-tranches` — Qualité d'abord : quatre tracés corrigés, deux promesses retirées, la règle réunifiée
+
+*Consignée le 2026-11-02.*
+
+**Constat.** Sept propositions de minima restaient ouvertes, et trois grilles portaient un minimum justifié par un dessin qui n'existe nulle part. La consigne reçue — qualité et professionnalisme dans tous les cas — a permis de trancher sur la mesure plutôt que sur un chiffre rond.
+
+**Ce que cela change.** Deux grilles sortent du `auto-fit` et sont déclarées fixes à une colonne : `.learning-code-grid` (jamais plus de 812 px de place ; à 300 px la paire apparaîtrait, disparaîtrait jusqu'à 1 004 px et reviendrait, et ses blocs `white-space:pre` défileraient dans une piste étroite) et `.ai-path-steps` (aucun minimum ne donne un nombre de colonnes monotone, parce que le panneau `flex` lui retire la moitié de sa largeur dès 783 px ; les cinq étapes s'empilent). Deux minima sont adoptés : `.ai-fraud-steps` 270 → 360 px avec 2 colonnes déclarées au lieu de 4 — 270 px montrait trois colonnes dès 958 px, donc la quatrième étape seule, et 260 px aurait donné quatre cartes de 261,7 px de prose ; `.simulateur-chiffres` 380 → 360 px, la paire passant de 823 à 783 px sans changer le haut de la plage. Trois minima restent à 350 px (`.eva-listes-grid`, `.simulateur-duo`, `.ai-balance-grid`) avec un motif réécrit sur la bande exacte : paire de 752 à 760 px, effacée de 761 à 767, revenue dès 768, là où 360 px la repousserait à 788 et la retirerait à une tablette de 768 px. Enfin la règle est réunifiée : `verifier()` confronte la feuille au registre, et `ecarts_de_place` confronte le registre à la règle dans la place réelle, motif à l'appui. Les trois dérogations `piste_jamais_atteinte` disparaissent faute d'objet.
+
+**Preuves dans le dépôt :**
+
+- `assets/css/site.css`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/grilles-dynamiques.toml`
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `ia-societe.html`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py && python3 outils/modele-grilles.py --releve-json … && node outils/mesurer-grilles.cjs … && python3 outils/rapporter-mesure-grilles.py --controler`
+
+**Limite — ce que cela ne prouve pas.** Aucun de ces quatre tracés n'a été regardé par un œil humain : le modèle et le navigateur comptent des colonnes, ils ne disent pas si une carte de 537 px est agréable à lire ni si cinq étapes empilées valent mieux qu'une rangée impossible. Une carte seule sur la dernière rangée n'est pas toujours évitable — `auto-fit` traverse tous les nombres de colonnes avant d'atteindre le plus grand — et quatre grilles restent dans ce cas, mesurées mais non corrigées : `.ai-metric-grid`, `.ai-forms-grid`, `.learning-level-grid`, `.learning-ecosystem-grid` (4 éléments, 1 160 px de place) et `.home-voice-grid` (3 éléments, deux colonnes de 804 à 1 189 px).
+
+**Suite.** Faire relire les quatre tracés sur les pages réelles, puis décider pour chaque grille à carte orpheline entre un autre nombre de colonnes déclaré et une orpheline assumée avec son motif.
 
 Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
 

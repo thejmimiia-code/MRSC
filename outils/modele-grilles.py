@@ -3266,25 +3266,26 @@ def verifier(
                 f"{selecteur} : capacité déclarée {declare_items or 'non déclarée'}, "
                 f"les pages en contiennent {mesures_items or 'aucune mesure'}"
             )
-        attendu = minimum_recommande(grille, capacite)
-        if attendu is None:
-            erreurs.append(f"{selecteur} : aucune piste ne donne {k} colonnes au conteneur maximal")
-            continue
-        if declare != attendu:
-            erreurs.append(
-                f"{selecteur} : minimum déclaré {declare}px, la règle en donne {attendu}px "
-                f"pour {k} colonnes et un écart de {grille.gap:g}px"
-            )
+        # Le partage des rôles a changé le 2 novembre 2026, et c'est une
+        # correction : la règle ne raisonne plus dans le conteneur mais dans la
+        # **place réelle** de la grille (`ecarts_de_place`, juste au-dessus). Ici
+        # il ne reste donc qu'une chose à vérifier — que la feuille et le registre
+        # disent le même nombre. Auparavant, ce contrôle comparait la feuille à
+        # une règle calculée dans un conteneur que trois grilles ne reçoivent
+        # jamais ; il exigeait alors un nombre qui n'avait aucun sens pour elles.
         base = next(
             (r for r in grille.regles if r.largeur_max is None and r.largeur_min is None),
             None,
         )
+        if not isinstance(declare, int):
+            erreurs.append(f"{selecteur} : le registre ne déclare aucun minimum entier")
+            continue
         if base is None or base.minimum is None:
             erreurs.append(f"{selecteur} : sa règle de base ne déclare pas `auto-fit`")
-        elif base.minimum != attendu:
+        elif base.minimum != declare:
             erreurs.append(
                 f"{selecteur} : la feuille déclare `minmax(min({base.minimum}px, 100%), 1fr)`, "
-                f"la règle demande {attendu}px"
+                f"le registre adopte {declare}px pour {k} colonnes"
             )
         for condition in paliers(grille):
             erreurs.append(

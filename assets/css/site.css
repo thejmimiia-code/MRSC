@@ -2377,20 +2377,18 @@ html.contraste-renforce .resource-scope-note {
   margin-bottom: 0;
 }
 
+/* Une colonne, assumée le 2 novembre 2026. Mesuré : aucun minimum ne donne un
+   nombre de colonnes qui ne redescend jamais, parce que le panneau `flex` qui
+   porte cette liste la place à côté du texte dès 783 px de fenêtre : elle reçoit
+   alors deux fois moins de largeur qu'à 780 px. Avec 220 px, la liste montre
+   deux colonnes de 535 à 782 px, une seule de 783 à 1 035, deux de nouveau
+   au-delà — un dessin qui clignote. Cinq étapes dans les 669,6 px qu'elle reçoit
+   au plus large demanderaient 127 px chacune, sous tout plancher lisible. Les
+   cinq étapes s'empilent donc : cercle de 44 px et libellé d'un mot, même axe.
+   Décision déclarée dans docs/rd/grilles-dynamiques.toml ([[grille_fixe]]). */
 .ai-path-steps {
   display: grid;
-  /* Le nombre de colonnes suit la largeur de piste, jamais une largeur d'écran.
-     Mesuré le 2 novembre 2026 : cette liste vit dans un panneau `flex` à deux
-     enfants et n'occupe jamais plus de 669,6 px, si bien qu'elle montre au plus
-     deux colonnes — les cinq étapes « au conteneur maximal » annoncées ici
-     n'existent pas. Le registre des grilles porte la mesure et la décision à
-     prendre ; le modèle ne tranche pas un dessin.
-     La règle du 31 octobre 2026 donne 220 px : le plus large minimum qui
-     laisse encore cinq colonnes à 1 160 px de conteneur. Le palier de 520 px
-     qui imposait `repeat(3, …)` et recentrait la dernière étape est supprimé ;
-     il ne servait qu'à rattraper des cartes de 59 px de large à 240 px de
-     fenêtre. */
-  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: .5rem;
   margin: 0;
   padding: 0;
@@ -2659,7 +2657,11 @@ html.contraste-renforce .resource-scope-note {
 }
 .simulateur-chiffres {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+  /* 360 px, mesuré le 2 novembre 2026 : la paire commence à 783 px de fenêtre au
+     lieu de 823, et le haut de la plage ne change pas — au-delà de 1 000 px le
+     parent `flex` place ses deux enfants côte à côte et cette grille ne reçoit
+     plus que 521 px, donc une seule colonne. Relever à 380 ne protégeait rien. */
+  grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
   gap: .9rem;
   margin: 0;
 }
@@ -3530,7 +3532,16 @@ html.has-js .site-header.is-compact .header-compact-brand img {
 .learning-steps li::marker,.learning-answer-list li::marker { color:var(--green); font-weight:800; }
 .learning-code-examples { margin-block:2rem; }
 .learning-code-examples > p { color:var(--text-soft); }
-.learning-code-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(470px,100%),1fr)); gap:1rem; }
+/* Une colonne, assumée le 2 novembre 2026 — et non un `auto-fit` qui promettait
+   deux colonnes. Mesuré : cette grille vit dans une colonne de l'article et
+   n'occupe jamais plus de 812 px ; deux pistes de 470 px en demandent 956, deux
+   de 300 px en demanderaient 616 mais la paire apparaîtrait, disparaîtrait et
+   reviendrait (2 col. de 648 à 760 px, 1 jusqu'à 1 004, 2 au-delà) parce que la
+   gouttière du conteneur rétrécit la place à 761 px. Les blocs de code portent
+   `white-space:pre` : une piste étroite les ferait défiler horizontalement,
+   alors qu'une colonne pleine largeur les montre en entier. La décision est
+   déclarée dans docs/rd/grilles-dynamiques.toml ([[grille_fixe]]). */
+.learning-code-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:1rem; }
 .learning-code-sample { min-width:0; margin:0; padding:1rem; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
 .learning-code-sample figcaption { margin-bottom:.6rem; color:var(--navy-ink); font-weight:800; }
 .learning-code-sample figcaption span { color:var(--muted); font-weight:650; }
@@ -3618,7 +3629,17 @@ html.contraste-renforce :is(.privacy-summary,.privacy-review-note) { border-colo
 .ai-fraud-label { color:var(--green); font-size: max(12px, .75rem); font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
 .ai-fraud-response { padding:clamp(1.3rem,4vw,2.2rem); border:1px solid var(--border-soft-4); border-radius:22px; background:var(--surface); }
 .ai-fraud-response > div:first-child h3 { max-width:34ch; font-size:clamp(1.35rem,2.8vw,1.9rem); }
-.ai-fraud-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr)); gap:.85rem; margin:1.25rem 0; padding:0; list-style:none; counter-reset:reflexe; }
+/* Quatre étapes, deux colonnes — décidé le 2 novembre 2026 sur mesure, pas sur
+   un chiffre rond. Cette liste vit dans `.ai-fraud-response`, qui ne lui laisse
+   jamais plus de 1 087,6 px. Avec 270 px elle montrait trois colonnes dès 958 px
+   de fenêtre, donc une quatrième étape seule sur sa rangée ; avec 260 px, quatre
+   cartes de 261,7 px de prose, soit une trentaine de caractères par ligne. À
+   360 px, la carte vaut 537 px et la grille passe de une à deux colonnes sans
+   jamais traverser trois : 2 × 2, équilibré, sans carte orpheline et sans piste
+   hors d'atteinte. Le plafond du modèle (480 px) laisserait une seule colonne
+   jusqu'à 973,6 px de place : il garde la forme au conteneur maximal en
+   repoussant le moment où la paire arrive, ce qui n'est pas le but ici. */
+.ai-fraud-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr)); gap:.85rem; margin:1.25rem 0; padding:0; list-style:none; counter-reset:reflexe; }
 .ai-fraud-steps li { display:flex; flex-direction:column; gap:.45rem; min-height:150px; padding:1rem; border:1px solid var(--line); border-radius:14px; background:var(--surface-soft); counter-increment:reflexe; }
 .ai-fraud-steps li::before { color:var(--blue); font-size: max(12px, .78rem); font-weight:800; content:"0" counter(reflexe); }
 .ai-fraud-steps strong { color:var(--navy-ink); }
