@@ -2184,11 +2184,30 @@ mesurée ». Rien n'est dérivé dans ce lot : le calcul exigerait la place rée
 chaque présentation, où `--content` change, et la chaîne des ancêtres serait à
 recalculer.
 
-### Un signe qui mérite d'être noté
+### Ce que les présentations font vraiment
 
-En **Vitrine**, toutes les grilles concernées tombent à **trois colonnes** au conteneur
-maximal, alors que le registre déclare quatre colonnes pour les repères chiffrés, trois
-pour les vies, deux pour les documents. En **Compacte**, elles vont de trois à cinq.
-Autrement dit, le nombre de colonnes annoncé par le registre n'est pas celui que la page
-montre dans cinq présentations sur six — et c'est exactement ce que la consigne
-« qualité et professionnel » demandait de ne pas laisser caché.
+| grille | défaut | compacte | panorama | vitrine |
+| --- | --- | --- | --- | --- |
+| `.ai-metric-grid`, `.ai-forms-grid`, `.learning-level-grid`, `.learning-ecosystem-grid` | 4 | 4 à 6 | 4 à 5 | **3** |
+| `.ai-lives-grid`, `.learning-catalogue-grid`, `.link-grid`, `.ai-fraud-grid`, `.principle-grid` | 3 | 6 | 5 | **3** |
+| `.document-grid`, `.home-action-grid`, `.knowledge-compass`, `.simulateur-passeport`, `.ai-fraud-lesson-list` | 2 | 4 à 6 | 4 à 5 | **3** |
+| `.eva-listes-grid`, `.simulateur-duo` | 2 | 2 | 2 | 2 |
+
+Deux faits s'y lisent, qu'aucun document ne disait :
+
+1. en **Vitrine**, *toutes* les grilles tombent à trois colonnes, quel que soit leur dessin
+   déclaré — quatre, trois ou deux. La présentation aplatit le dessin au lieu de l'amplifier ;
+2. pour les cinq grilles déclarées à deux colonnes, trois colonnes en Vitrine veut dire
+   **plus** de colonnes que par défaut, donc des tuiles **plus petites** dans la présentation
+   dont la feuille annonce « rythme lent, grandes zones et une idée à la fois ».
+   La présentation annonce l'inverse de ce qu'elle fait.
+
+`contradictions_d_ordre` mesure cette intention inscrite dans le nom — Compacte et Panorama
+au moins autant de colonnes que par défaut, Vitrine moins — et `--verifier` **nomme** les
+cinq grilles à chaque passage réussi, sans faire échouer. Corriger demanderait de porter le
+minimum de Vitrine à 410 px, et **aucun navigateur ne mesure cette présentation** : changer
+une valeur que rien ne vérifie serait le geste refusé depuis le 1er novembre 2026.
+
+Un second signe, dans l'autre sens : en Compacte et Panorama, `.ai-fraud-steps` repasse à
+**quatre colonnes** — les quatre cartes de prose que la section 32 avait écartées à 261,7 px.
+Le dessin tranché pour la présentation par défaut est défait par deux autres.

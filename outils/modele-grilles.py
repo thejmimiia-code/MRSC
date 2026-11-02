@@ -1796,6 +1796,81 @@ def presentations_declarees(
     return erreurs
 
 
+def contenu_des_presentations(texte: str) -> dict[str, float]:
+    """La largeur de contenu que chaque présentation déclare (`--content`)."""
+    contenus = {"defaut": CONTENU_DEFAUT}
+    for selecteurs, corps, _, _, _ in decouper(sans_commentaires(texte)):
+        for selecteur in selecteurs:
+            nom = PRESENTATION.match(selecteur.strip())
+            if nom is None:
+                continue
+            trouve = re.search(r"--content\s*:\s*(\d+)px", corps)
+            if trouve:
+                contenus.setdefault(nom.group(1), float(trouve.group(1)))
+    return contenus
+
+
+def ordre_des_presentations(
+    grilles: dict[str, Grille], registre: dict, texte: str
+) -> list[dict]:
+    """Ce que chaque présentation fait vraiment au nombre de colonnes.
+
+    Une présentation porte une intention dans son nom : « Compacte » doit donner
+    au moins autant de colonnes que la présentation par défaut, « Vitrine » doit
+    en donner moins — c'est ce qu'annoncent leurs commentaires de la feuille. Le
+    2 novembre 2026, la mesure a montré que cinq grilles à deux colonnes en
+    donnaient **trois** en Vitrine : une tuile plus petite dans la présentation
+    qui promet les plus grandes. Ce n'est pas corrigé ici — la valeur qui
+    corrigerait (410 px) n'est mesurée par aucun navigateur — mais ce n'est plus
+    invisible.
+    """
+    contenus = contenu_des_presentations(texte)
+    regimes = {e.get("presentation"): e for e in registre.get("grille_presentation", [])}
+    entrees = {e.get("selecteur"): e for e in registre.get("grille", [])}
+    lignes: list[dict] = []
+    for selecteur, entree in sorted(entrees.items()):
+        grille = grilles.get(selecteur)
+        if grille is None or grille.asymetrique or not isinstance(entree.get("minimum"), int):
+            continue
+        defaut = auto_fit_place(
+            entree["minimum"], grille.gap, conteneur(2560, contenu=contenus["defaut"]), grille.items
+        )
+        compte = {"defaut": defaut}
+        for nom, regime in regimes.items():
+            if regime.get("regime") != "auto-fit" or not isinstance(regime.get("minimum"), int):
+                continue
+            compte[nom] = auto_fit_place(
+                regime["minimum"], grille.gap, conteneur(2560, contenu=contenus.get(nom, contenus["defaut"])), grille.items
+            )
+        lignes.append({"selecteur": selecteur, "colonnes": compte})
+    return lignes
+
+
+def contradictions_d_ordre(lignes: list[dict]) -> list[str]:
+    """Nomme les grilles dont une présentation contredit son intention."""
+    messages: list[str] = []
+    for ligne in lignes:
+        compte = ligne["colonnes"]
+        defaut = compte.get("defaut")
+        if defaut is None:
+            continue
+        for nom, sens in (("compacte", "plus"), ("panorama", "plus"), ("vitrine", "moins")):
+            valeur = compte.get(nom)
+            if valeur is None:
+                continue
+            if sens == "plus" and valeur < defaut:
+                messages.append(
+                    f"{ligne['selecteur']} : {valeur} colonne(s) en « {nom} » contre {defaut} par "
+                    f"défaut — la présentation annonce l'inverse"
+                )
+            if sens == "moins" and valeur > defaut:
+                messages.append(
+                    f"{ligne['selecteur']} : {valeur} colonne(s) en « {nom} » contre {defaut} par "
+                    f"défaut — la présentation annonce l'inverse"
+                )
+    return messages
+
+
 def normaliser(valeur: str) -> str:
     """Compare deux écritures de la même valeur (`minmax(0, 1fr)` = `minmax(0,1fr)`)."""
     return re.sub(r"\s+", "", valeur).replace(",", ",")
@@ -3819,6 +3894,20 @@ def principal(arguments: list[str] | None = None) -> int:
         # Même raison pour les minima : une grille dont la place réelle ne redonne
         # pas le minimum adopté porte une décision ouverte. Elle est nommée à
         # chaque passage réussi, sinon elle disparaîtrait du regard.
+        try:
+            texte_feuille = (RACINE / FEUILLE).read_text(encoding="utf-8")
+        except OSError:
+            texte_feuille = ""
+        if texte_feuille:
+            contradictions = contradictions_d_ordre(ordre_des_presentations(grilles, registre, texte_feuille))
+            if contradictions:
+                print(
+                    f"  {len(contradictions)} grille(s) où une présentation promet l'inverse de ce "
+                    "qu'elle fait (mesure au conteneur maximal, présentation non mesurée par un "
+                    "navigateur) :"
+                )
+                for message in contradictions:
+                    print(f"    · {message}")
         ecartes = sorted(
             entree.get("selecteur")
             for entree in registre.get("grille", [])
@@ -3910,6 +3999,19 @@ def principal(arguments: list[str] | None = None) -> int:
                         f"           au conteneur maximal : {colonnes} colonne(s) selon la grille, "
                         f"écart de {gabarit.gap:g}px — présentation non mesurée"
                     )
+        matrice = ordre_des_presentations(grilles, registre, texte)
+        if matrice:
+            noms = [nom for nom in ("defaut", "compacte", "panorama", "vitrine") if any(nom in l["colonnes"] for l in matrice)]
+            print("  " + "grille".ljust(26) + "".join(nom.rjust(10) for nom in noms))
+            for ligne in matrice:
+                print(
+                    "  "
+                    + ligne["selecteur"].ljust(26)
+                    + "".join(str(ligne["colonnes"].get(nom, "-")).rjust(10) for nom in noms)
+                )
+            contradictions = contradictions_d_ordre(matrice)
+            for message in contradictions:
+                print(f"  ! {message}")
         print(f"{len(trouvees)} couple(s) grille × présentation, dans {len(par_presentation)} présentation(s).")
         print(
             "  Aucun de ces minima n'est dérivé par la règle, et aucun n'a été mesuré "

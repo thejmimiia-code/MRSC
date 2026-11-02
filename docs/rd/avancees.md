@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 75 |
+| Avancées consignées | 76 |
 | Période couverte | du 2026-10-20 au 2026-11-02 |
 | Contrôles exécutables cités | 81 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1713,6 +1713,29 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-
 **Limite — ce que cela ne prouve pas.** La carte la plus étroite reste un calcul de modèle : elle ne dit rien du texte qui déborde ni de la hauteur d'une carte, et elle ne couvre que la présentation par défaut. Aucun seuil de lisibilité n'est déclaré à la place de la constante retirée — le modèle dit ce qu'il mesure, il ne fixe pas une limite de confort.
 
 **Suite.** Prendre la carte la plus étroite comme critère des décisions ouvertes sur les tracés, puis trancher les sept propositions avec les bandes mesurées.
+
+Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
+
+### `grilles-presentations-contradictions` — Vitrine promet les plus grandes tuiles et en donne de plus petites
+
+*Consignée le 2026-11-02.*
+
+**Constat.** Une fois la matrice imprimée grille par grille, deux faits apparaissent qu'aucun document ne disait : en « Vitrine », toutes les grilles tombent à trois colonnes quel que soit leur dessin déclaré (quatre, trois ou deux), et pour les cinq grilles déclarées à deux colonnes cela veut dire plus de colonnes que par défaut — donc des tuiles plus petites dans la présentation dont la feuille annonce « rythme lent, grandes zones et une idée à la fois ». Second fait, dans l'autre sens : en « Compacte » et « Panorama », `.ai-fraud-steps` repasse à quatre colonnes, les quatre cartes de prose que le lot précédent avait écartées.
+
+**Ce que cela change.** `contradictions_d_ordre` mesure l'intention inscrite dans le nom des présentations — Compacte et Panorama au moins autant de colonnes que par défaut, Vitrine moins — et `--verifier` nomme les cinq grilles à chaque passage réussi, sans faire échouer ; `--presentations` imprime la matrice complète (20 grilles × 4 présentations) avec les contradictions signalées. Rien n'est corrigé : porter le minimum de Vitrine à 410 px supprimerait la troisième colonne, mais aucun navigateur ne mesure cette présentation, et changer une valeur que rien ne vérifie est précisément le geste refusé depuis le 1er novembre 2026.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/journal.md`
+- `docs/rd/grilles-dynamiques.toml`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/modele-grilles.py --presentations && python3 outils/test_modele_grilles.py`
+
+**Limite — ce que cela ne prouve pas.** La matrice est calculée dans le conteneur de chaque présentation, sans chaîne d'ancêtres et sans navigateur : elle dit l'ordre des nombres, pas ce que la page affiche. Aucune de ces valeurs n'est dérivée, et le relevé navigateur ne sait toujours mesurer que la présentation par défaut.
+
+**Suite.** Apprendre au relevé navigateur à mesurer une autre présentation que celle par défaut, puis trancher les cinq contradictions de Vitrine et le retour de `.ai-fraud-steps` à quatre colonnes en Compacte et Panorama.
 
 Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
 
