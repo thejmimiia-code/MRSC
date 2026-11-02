@@ -230,6 +230,55 @@ def controler(plan: dict, rapport: dict) -> list[str]:
     return erreurs
 
 
+def orphelins(plan: dict, rapport: dict) -> tuple[list[dict], list[str]]:
+    """Nomme les grilles dont la dernière rangée laisse un vide visible.
+
+    Une rangée incomplète n'est pas une faute : cinq cartes en deux colonnes
+    laissent une carte seule, et c'est parfois le dessin voulu. Ce diagnostic ne
+    refuse rien — il chiffre, cadrage par cadrage, ce qu'un œil verrait, et
+    laisse la décision à une personne. Il rend aussi les grilles dont la rangée
+    n'a pas été relevée : un diagnostic incomplet se dit, il ne se tait pas.
+    """
+    mesures = rapport.get("mesures") or []
+    index = {(m.get("page"), m.get("layout"), m.get("cran"), m.get("largeur")): m for m in mesures}
+    trouvees: dict[tuple[str, str], dict] = {}
+    sans_releve: set[str] = set()
+    for combinaison in plan.get("combinaisons", []):
+        cle = (combinaison["page"], combinaison.get("layout"), combinaison.get("cran"), combinaison["largeur"])
+        mesure = index.get(cle)
+        if mesure is None:
+            continue
+        rangees = mesure.get("rangees") or {}
+        for selecteur, attendu in (combinaison.get("attendu") or {}).items():
+            if selecteur not in rangees:
+                sans_releve.add(selecteur)
+                continue
+            fait = rangees[selecteur]
+            # `manque` est déjà net des gouttières : un vide plus fin qu'un
+            # demi-pixel n'est pas un vide, c'est un arrondi de navigateur.
+            if attendu is None or attendu <= 1 or float(fait.get("manque") or 0) <= 0.5:
+                continue
+            entree = trouvees.setdefault(
+                (combinaison["page"], selecteur),
+                {
+                    "page": combinaison["page"],
+                    "selecteur": selecteur,
+                    "cadrages": 0,
+                    "pire_manque": 0.0,
+                    "exemple": None,
+                },
+            )
+            entree["cadrages"] += 1
+            if float(fait.get("manque") or 0) > entree["pire_manque"]:
+                entree["pire_manque"] = float(fait.get("manque") or 0)
+                entree["exemple"] = (
+                    f"{combinaison.get('layout') or 'défaut'} · {combinaison.get('cran')} % · "
+                    f"{combinaison['largeur']} px · {fait.get('cartes_derniere_rangee')} carte(s) "
+                    f"sur {attendu} colonne(s)"
+                )
+    return sorted(trouvees.values(), key=lambda e: (-e["pire_manque"], e["selecteur"])), sorted(sans_releve)
+
+
 def principal(arguments: list[str] | None = None) -> int:
     analyseur = argparse.ArgumentParser(description="Confronte le dessin dans tous les cadrages personnalisés.")
     analyseur.add_argument("--releve-json", metavar="CHEMIN", help="écrire le plan à mesurer")
@@ -238,6 +287,12 @@ def principal(arguments: list[str] | None = None) -> int:
         nargs=2,
         metavar=("PLAN", "RAPPORT"),
         help="confronter un rapport de mesure au plan",
+    )
+    analyseur.add_argument(
+        "--orphelins",
+        nargs=2,
+        metavar=("PLAN", "RAPPORT"),
+        help="nommer les grilles dont la dernière rangée laisse un vide visible",
     )
     options = analyseur.parse_args(arguments)
 
@@ -261,6 +316,35 @@ def principal(arguments: list[str] | None = None) -> int:
             f"Plan de cadrage écrit : {destination} — {len(plan['combinaisons'])} combinaison(s), "
             f"{attendus} grille(s) à confronter, tolérance {plan['tolerance_px']} px."
         )
+        return 0
+
+    if options.orphelins:
+        plan_lu, rapport_lu = options.orphelins
+        try:
+            plan = json.loads(Path(plan_lu).read_text(encoding="utf-8"))
+            rapport = json.loads(Path(rapport_lu).read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as erreur:
+            print(f"Lecture impossible ({erreur}) — aucun diagnostic.", file=sys.stderr)
+            return 2
+        liste, sans_releve = orphelins(plan, rapport)
+        if not liste:
+            print(
+                "Rangées : aucune grille ne laisse de vide visible dans les cadrages mesurés "
+                f"— {len(rapport.get('mesures') or [])} relevé(s) lu(s)."
+            )
+        for entree in liste:
+            print(
+                f"  - {entree['page']} · {entree['selecteur']} : {entree['cadrages']} cadrage(s) "
+                f"avec une dernière rangée incomplète, vide maximal {entree['pire_manque']:.2f} px "
+                f"({entree['exemple']})"
+            )
+        if sans_releve:
+            print(
+                f"  ! {len(sans_releve)} grille(s) sans relevé de rangée : "
+                + ", ".join(sans_releve[:8])
+                + ("…" if len(sans_releve) > 8 else ""),
+                file=sys.stderr,
+            )
         return 0
 
     if options.controler:

@@ -625,6 +625,20 @@ jobs:
               echo "::error title=Cadrages personnalisés::$ligne"
             done
           fi
+          # Une dernière rangée incomplète n'est pas une faute : c'est un fait de
+          # dessin, chiffré ici pour qu'une décision se prenne sur des nombres et
+          # non sur une impression. Le diagnostic ne fait jamais échouer l'étape ;
+          # s'il n'a pas pu lire une grille, il le dit, et l'annotation aussi.
+          set +e
+          python3 outils/cadrages.py --orphelins \
+            "$RUNNER_TEMP/graphismes/cadrages/plan.json" \
+            "$RUNNER_TEMP/graphismes/cadrages/rapport.json" \
+            >"$RUNNER_TEMP/graphismes/cadrages/orphelins.log" 2>&1
+          set -e
+          head -n 12 "$RUNNER_TEMP/graphismes/cadrages/orphelins.log" \
+            | cut -c1-900 | while IFS= read -r ligne; do
+            echo "::notice title=Rangées incomplètes::$ligne"
+          done
           exit "$controle"
 
       # Le banc précédent mesure ; celui-ci prouve que la mesure mord. Il rejoue

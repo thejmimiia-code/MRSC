@@ -90,6 +90,10 @@ function mesurer(selecteurs) {
     }
   }
   const colonnes = {};
+  // Une rangée incomplète n'est pas une faute en soi : c'est un fait de dessin
+  // (« cinq cartes en deux colonnes laissent une carte seule »). Le relevé le
+  // compte, `cadrages.py --orphelins` le nomme, et la décision reste humaine.
+  const rangees = {};
   for (const selecteur of selecteurs) {
     const elements = Array.from(document.querySelectorAll(selecteur));
     const element = elements.find((candidat) => {
@@ -98,6 +102,34 @@ function mesurer(selecteurs) {
     });
     if (!element) continue;
     const style = getComputedStyle(element);
+    const enfants = Array.from(element.children).filter(
+      (enfant) => getComputedStyle(enfant).display !== 'none' && enfant.getBoundingClientRect().width > 0
+    );
+    if (enfants.length > 0 && (style.display === 'grid' || style.display === 'inline-grid' || style.display === 'flex')) {
+      const boite = element.getBoundingClientRect();
+      const interieur = boite.left + element.clientLeft;
+      const largeurUtile = element.clientWidth;
+      const ecart = parseFloat(style.columnGap) || 0;
+      // Les cartes d'une même rangée partagent leur bord haut, à l'arrondi près.
+      const parRangee = new Map();
+      for (const enfant of enfants) {
+        const rect = enfant.getBoundingClientRect();
+        const cle = Math.round(rect.top);
+        if (!parRangee.has(cle)) parRangee.set(cle, []);
+        parRangee.get(cle).push(rect);
+      }
+      const hauts = Array.from(parRangee.keys()).sort((a, b) => a - b);
+      const derniere = parRangee.get(hauts[hauts.length - 1]) || [];
+      const occupe = derniere.reduce((total, rect) => total + rect.width, 0);
+      const manque = Math.max(0, largeurUtile - occupe - ecart * Math.max(0, derniere.length - 1));
+      rangees[selecteur] = {
+        cartes: enfants.length,
+        rangees: hauts.length,
+        cartes_derniere_rangee: derniere.length,
+        manque: Math.round(manque * 100) / 100,
+        interieur: Math.round(interieur * 100) / 100,
+      };
+    }
     if (style.display === 'grid' || style.display === 'inline-grid') {
       // Une piste repliée par `auto-fit` vaut 0 px : elle ne compte pas.
       const pistes = (style.gridTemplateColumns || '').trim().split(/\s+(?![^(]*\))/);
@@ -198,7 +230,7 @@ function mesurer(selecteurs) {
   }
   if (chevauchements.length > 8) chevauchements.length = 8;
 
-  return { debordement, coupable, colonnes, coupes, chevauchements };
+  return { debordement, coupable, colonnes, rangees, coupes, chevauchements };
 }
 
 (async () => {
