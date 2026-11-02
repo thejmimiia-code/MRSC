@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 68 |
+| Avancées consignées | 69 |
 | Période couverte | du 2026-10-20 au 2026-11-02 |
 | Contrôles exécutables cités | 75 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1624,6 +1624,29 @@ Initiatives liées : `documentation-rd-eva`, `coherence-textes-publics`, `cartog
 **Suite.** Faire entrer la chaîne des ancêtres dans le calcul des minima recommandés, puis étendre le balayage aux autres présentations.
 
 Initiatives liées : `optimisation-du-site`, `poids-et-sobriete-numerique`, `coherence-textes-publics`.
+
+### `grilles-dessins-jamais-atteints` — Trois dessins que le registre justifiait et que la page n'a jamais montrés
+
+*Consignée le 2026-11-02.*
+
+**Constat.** Le registre des grilles dynamiques justifie chaque minimum de piste par un nombre de colonnes « au conteneur maximal ». Trois grilles ne reçoivent jamais ce conteneur, parce que leur parent le partage : `.learning-code-grid` demande 956 px pour deux pistes de 470 alors que sa place la plus large vaut 812 ; `.ai-fraud-steps` demande 1 120,8 px pour quatre pistes de 270 contre 1 087,6 disponibles, 33 px trop court ; `.ai-path-steps` demande 1 132 px pour cinq pistes de 220 contre 669,6. Trois dessins justifiés par un raisonnement, jamais vérifiés contre ce que la page affiche.
+
+**Ce que cela change.** `pistes_jamais_atteintes` mesure pour chaque grille déclarée la plus large place qu'elle occupe sur tout le balayage, chaîne d'ancêtres comprise, et refuse un minimum dont `k` colonnes ne tiennent nulle part. La dérogation écrite (`piste_jamais_atteinte` + `motif`) est contrôlée dans les deux sens : sans motif de 40 caractères elle est refusée, et si deux pistes tiennent de nouveau elle est refusée aussi — une exemption qui ne se démontre plus redevient un oubli. Les trois dérogations sont nommées à chaque passage réussi, avec leur mesure. Aucun minimum n'a été changé : les trois décisions sont écrites, chiffrées et laissées à une personne, y compris les valeurs qui les rendraient vraies (390 ou 298 px pour `.learning-code-grid`, 260 px pour `.ai-fraud-steps`, 127 px pour `.ai-path-steps`). Le commentaire de la feuille qui annonçait « cinq étapes au conteneur maximal » porte désormais la mesure : deux colonnes au plus.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/grilles-dynamiques.toml`
+- `assets/css/site.css`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py`
+
+**Limite — ce que cela ne prouve pas.** La règle de recommandation (`minimum_recommande`, `minimum_pour_k`) raisonne encore dans le conteneur entier : la brancher sur la chaîne demanderait 370 px à `.ai-fraud-steps` au lieu de 270 et ferait changer quatre grilles d'un coup, sur une décision qui n'a pas été prise. Le contrôle porte donc la mesure sans réécrire les minima par la petite porte. Les valeurs proposées pour rendre les dessins vrais ne sont pas mesurées dans un navigateur : elles sont des candidats, pas des corrections.
+
+**Suite.** Reprendre `minimum_recommande` sur la place réelle, puis re-dériver les vingt-deux minima d'un seul lot en mesurant chaque dessin avant et après dans un navigateur.
+
+Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
 
 ## 3. Ce que ce registre ne dit pas
 

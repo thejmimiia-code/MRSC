@@ -92,6 +92,8 @@ minimum = 470
 items = [2]
 seuil_une_colonne = 1000
 raison = "Deux colonnes côte à côte : le palier de 1 000 px n'était pas un choix de largeur de carte mais le moment où l'on renonce à la paire. Il est recopié tel quel, et le calcul s'arrête juste avant."
+piste_jamais_atteinte = true
+motif = "Deux pistes de 470 px en demandent 956 ; la place la plus large que cette grille occupe vaut 812 px, parce que la page est en deux colonnes avec un sommaire de 300 px (mesuré le 2 novembre 2026). Les deux exemples ne sont donc jamais côte à côte, alors que le registre justifiait ce minimum par une paire. Décision ouverte, et elle revient à une personne : minimum à 390 px (paire au-delà de 1 184 px de fenêtre), à 298 px (paire dès 1 000 px, comme l'ancien palier), ou une seule colonne assumée. La règle de recommandation raisonne encore dans le conteneur : ces trois choix demandent de la reprendre, pas de changer un chiffre."
 
 [[grille]]
 selecteur = ".principle-grid"
@@ -113,6 +115,8 @@ colonnes = 4
 minimum = 270
 items = [4]
 raison = "Étapes numérotées des réflexes : quatre colonnes au plus, jamais de colonne de moins de 270 px tant que le conteneur en contient une."
+piste_jamais_atteinte = true
+motif = "Quatre pistes de 270 px en demandent 1 120,8 ; la place la plus large que cette liste occupe vaut 1 087,6 px, parce que le panneau qui la porte lui retire son remplissage et sa bordure : il manque 33 px, et la quatrième carte ne tient jamais. Abaisser le minimum à 260 px rendrait la quatrième colonne au maximum de largeur, mais la règle de recommandation, qui raisonne encore dans le conteneur, demanderait alors 370 px : le changement suppose de reprendre la règle. Décision ouverte."
 
 [[grille]]
 selecteur = ".home-voice-grid"
@@ -209,6 +213,8 @@ colonnes = 5
 minimum = 220
 items = [5]
 raison = "Cinq étapes du parcours de la page IA : le plus large minimum qui garde cinq colonnes au conteneur maximal. Sous 520 px, l'ancienne cascade repliait à trois colonnes — un chiffre choisi, qui laissait des cartes de 59 px à 240 px de fenêtre ; la largeur de piste les remplace par un repli progressif."
+piste_jamais_atteinte = true
+motif = "Cinq pistes de 220 px en demandent 1 132 ; la place la plus large que cette liste occupe vaut 669,6 px, parce que son panneau est en `flex` à deux enfants et ne lui laisse que la moitié de son contenu. Le commentaire de la feuille annonçait « cinq étapes au conteneur maximal » : ce dessin n'existe pas, et la liste montre au plus deux colonnes. Décision ouverte : abaisser le minimum à 127 px, ou écrire une seule colonne et corriger le commentaire. Le modèle ne tranche pas un dessin."
 
 # — Grilles **fixes à dessein**, 31 octobre 2026. Le registre des grilles
 # dynamiques disait quoi convertir ; il ne disait pas ce qui doit rester fixe.
