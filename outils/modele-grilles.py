@@ -1584,6 +1584,34 @@ def minimum_propose(grille: Grille, entree: dict, capacite: dict | None = None) 
     return max(repli, cap)
 
 
+def colonnes_avec(grille: Grille, minimum: int, largeur: int) -> int:
+    """Colonnes obtenues avec ce minimum, dans la place que la grille reçoit là."""
+    gap = ecart_a(grille, largeur)
+    return auto_fit_place(
+        minimum, grille.gap if gap is None else gap, conteneur_de(grille, largeur), grille.items
+    )
+
+
+def comparer_minimum(grille: Grille, minimum: int, propose: int | None) -> dict:
+    """Ce que le dessin devient si l'on adopte la proposition — mesuré, pas conseillé.
+
+    Une décision de dessin ne se prend pas sur un nombre de pixels de piste : elle
+    se prend sur ce que la page montre. Cette comparaison donne, largeur par
+    largeur, le nombre de colonnes avec le minimum adopté et avec la proposition,
+    et les largeurs où le dessin change. Elle ne tranche rien.
+    """
+    adopte = [colonnes_avec(grille, minimum, largeur) for largeur in LARGEURS]
+    if propose is None:
+        return {"adopte": adopte, "propose": None, "bascules": []}
+    propose_valeurs = [colonnes_avec(grille, propose, largeur) for largeur in LARGEURS]
+    bascules = [
+        {"largeur": largeur, "adopte": avant, "propose": apres}
+        for largeur, avant, apres in zip(LARGEURS, adopte, propose_valeurs)
+        if avant != apres
+    ]
+    return {"adopte": adopte, "propose": propose_valeurs, "bascules": bascules}
+
+
 def ecarts_de_place(
     grilles: dict[str, Grille], registre: dict, capacites: dict[str, dict] | None = None,
     racine: Path | None = None,
@@ -3558,6 +3586,11 @@ def principal(arguments: list[str] | None = None) -> int:
         help="dire ce qu'un `flex-wrap` exprimerait des grilles à pistes inégales",
     )
     analyseur.add_argument(
+        "--comparer",
+        action="store_true",
+        help="mesurer, largeur par largeur, ce que la proposition changerait au dessin",
+    )
+    analyseur.add_argument(
         "--releve-json",
         metavar="CHEMIN",
         help="écrire ce que le modèle annonce, largeur par largeur, pour un navigateur",
@@ -3700,6 +3733,53 @@ def principal(arguments: list[str] | None = None) -> int:
         )
         for largeur, ancienne, nouvelle in details[:20]:
             print(f"    {largeur}px : {ancienne} → {nouvelle}")
+        return 0
+
+    if options.comparer:
+        try:
+            registre = lire_registre(RACINE)
+        except SourceIllisible as erreur:
+            print(f"Impossible de comparer les minima : {erreur}", file=sys.stderr)
+            return 2
+        selecteurs = [entree.get("selecteur") or "" for entree in registre.get("grille", [])]
+        capacites = lire_capacites(RACINE, selecteurs)
+        appliquer_capacites(grilles, capacites)
+        pages = pages_des_grilles(RACINE, selecteurs)
+        comparaisons = 0
+        for entree in registre.get("grille", []):
+            selecteur = entree.get("selecteur")
+            if not selecteur or selecteur not in grilles:
+                continue
+            grille = grilles[selecteur]
+            minimum = entree.get("minimum")
+            if not isinstance(minimum, int):
+                continue
+            grille.chaine = (
+                chaine_d_ancetres(RACINE, pages[selecteur], selecteur) if pages.get(selecteur) else None
+            )
+            propose = minimum_propose(grille, entree, capacites.get(selecteur))
+            if propose == minimum:
+                continue
+            comparaisons += 1
+            resultat = comparer_minimum(grille, minimum, propose)
+            place = place_maximale(grille)
+            if resultat["propose"] is None:
+                print(
+                    f"{selecteur:28} adopté {minimum}px : "
+                    f"{max(resultat['adopte'])} colonne(s) au plus dans {place:.1f}px — "
+                    "aucune proposition sous le plancher du modèle"
+                )
+                continue
+            print(
+                f"{selecteur:28} adopté {minimum}px → {max(resultat['adopte'])} col. · "
+                f"proposé {propose}px → {max(resultat['propose'])} col. · "
+                f"{len(resultat['bascules'])} largeur(s) changent"
+            )
+            for bascule in resultat["bascules"][:6]:
+                print(
+                    f"    {bascule['largeur']}px : {bascule['adopte']} → {bascule['propose']} colonnes"
+                )
+        print(f"{comparaisons} grille(s) où la proposition change le dessin.")
         return 0
 
     if options.regle:

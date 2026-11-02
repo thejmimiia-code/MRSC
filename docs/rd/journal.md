@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-11-02 — Ce que l'adoption changerait, largeur par largeur : une grille clignote, trois perdraient leur paire
+
+- **Initiative :** `optimisation-du-site`.
+- **La question laissée ouverte par le lot précédent, et pourquoi un chiffre de piste n'y répond pas :** « adopter 300 px au lieu de 470 » ne dit rien de ce que la page montrerait. `--comparer` mesure donc, pour chacune des sept grilles, le nombre de colonnes à chacune des 233 largeurs de fenêtre — avec le minimum adopté, puis avec la proposition — et nomme les largeurs où le dessin change. Ce n'est pas une recommandation : c'est la matière d'une décision.
+- **Ce que la mesure renverse, et c'est le fait le plus utile du lot :** pour `.eva-listes-grid`, `.simulateur-duo` et `.ai-balance-grid`, les 350 px adoptés montrent **déjà** deux colonnes dans la bande 750–780 px, là où leur palier supprimé n'en montrait qu'une. La proposition de 360 px ne « répare » donc rien : elle **retire** une paire qui existe aujourd'hui et repousse le repli à 790 px. Autrement dit, parmi les sept écarts, trois vont dans le sens d'un dessin plus pauvre. Aucun n'est adopté, mais l'argument change de camp.
+- **`.learning-code-grid` clignote si l'on adopte 300 px, et c'est mesuré :** deux colonnes de 650 à 760 px, **une seule** de 770 à 1 000 px, deux de nouveau dès 1 010 px. Ce retour n'est pas un défaut du modèle : la gouttière du conteneur passe de 2rem à 3rem à 761 px, la place **rétrécit** quand la fenêtre grandit d'un pixel, et la paire peut donc disparaître sans qu'aucune règle ne soit contredite. Un dessin qui apparaît, disparaît et revient ne s'adopte pas sur un chiffre de piste. Les 470 px adoptés, eux, ne montrent jamais deux colonnes : le dessin déclaré reste hors d'atteinte.
+- **Deux autres lectures, tout aussi concrètes :** `.ai-fraud-steps` plafonne à **trois** colonnes avec les 270 px adoptés ; les 260 px proposés les portent à quatre à partir de 1 210 px. `.simulateur-chiffres` montre une, deux, puis de nouveau une colonne (830–1 000 px de paire, 1 010 px et au-delà une seule) parce que son parent flex passe côte à côte au-delà de 1 000 px ; la proposition de 360 px avance la paire à 790 px sans changer le haut de la plage. `.ai-path-steps`, enfin, ne dépasse pas **deux** colonnes dans les 669,6 px qu'il reçoit : la dérogation est confirmée, et il n'y a rien à proposer sous le plancher de 180 px.
+- **Deux corrections, écrites plutôt que silencieuses :** le tableau de l'entrée précédente disait que 300 px feraient revenir la paire « juste au-dessus de 1 000 px de fenêtre ». La mesure largeur par largeur dit : de 650 à 760 px, puis à partir de 1 010 px. La ligne du tableau et le motif de `.learning-code-grid` portent désormais les bandes mesurées ; celui de `.ai-fraud-steps` ajoute que les quatre étapes tiennent dès 1 210 px. Une phrase trop sûre d'elle s'est trompée d'un facteur deux, et c'est la mesure qui l'a dit, pas la relecture.
+- **Une lacune de documentation comblée, et datée :** `docs/rd/formats-affichage.md` s'arrêtait à la section 29 (1er novembre) et affirmait encore « la chaîne des ancêtres n'est pas modélisée ». Les sections **30** (chaîne des ancêtres, dessins inatteignables) et **31** (place réelle, `ecarts_de_place`, comparaison) sont écrites après coup, le même jour, avec leurs mesures et leurs limites ; la phrase périmée de la section 29 renvoie désormais à la section 30 au lieu de rester fausse.
+- **Contrôles exécutés :** `modele-grilles.py --comparer` (**7 grilles** où la proposition change le dessin, 168 largeurs pour `.learning-code-grid`, 141 pour `.ai-fraud-steps`) · `modele-grilles.py --verifier` (code 0) · `test_modele_grilles.py` (**74 cas**, dont deux neufs : la comparaison montre ce que la proposition change, et une proposition absente ne produit aucune bascule) · `py_compile` · `git diff --check`.
+- **Prochaine action :** trancher les sept propositions une par une, avec ce tableau sous les yeux — et commencer par refuser celles qui retireraient une paire (les trois grilles à 350 px), ou alors décider explicitement que le repli de 760 px est préférable à la paire de 750–780 px.
+
 ## 2026-11-02 — Sept minima calculés dans une largeur que la grille n'occupe pas
 
 - **Initiative :** `optimisation-du-site`.
@@ -12,8 +24,8 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 
   | grille | adopté | proposé | place réelle | ce que la proposition change |
   | --- | --- | --- | --- | --- |
-  | `.learning-code-grid` | 470 px | **300 px** | 812 px | la paire revient juste au-dessus de 1 000 px de fenêtre |
-  | `.ai-fraud-steps` | 270 px | **260 px** | 1 087,6 px | les quatre étapes tiennent sur une ligne |
+  | `.learning-code-grid` | 470 px | **300 px** | 812 px | la paire apparaît de 650 à 760 px, une seule colonne jusqu'à 1 000 px, puis deux dès 1 010 px (mesuré largeur par largeur dans l'entrée suivante) |
+  | `.ai-fraud-steps` | 270 px | **260 px** | 1 087,6 px | les quatre étapes tiennent sur une ligne dès 1 210 px de fenêtre |
   | `.ai-path-steps` | 220 px | **aucune** | 669,6 px | 5 colonnes réclament 127 px, sous le plancher de 180 px |
   | `.simulateur-chiffres` | 380 px | 360 px | 952 px | le repli avance, le dessin au conteneur maximal ne change pas |
   | `.eva-listes-grid` | 350 px | 360 px | 728 px au seuil de 760 | le repli de la paire recule de dix pixels |

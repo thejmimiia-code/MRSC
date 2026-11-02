@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 70 |
+| Avancées consignées | 71 |
 | Période couverte | du 2026-10-20 au 2026-11-02 |
-| Contrôles exécutables cités | 75 |
+| Contrôles exécutables cités | 76 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1624,6 +1624,29 @@ Initiatives liées : `documentation-rd-eva`, `coherence-textes-publics`, `cartog
 **Suite.** Faire entrer la chaîne des ancêtres dans le calcul des minima recommandés, puis étendre le balayage aux autres présentations.
 
 Initiatives liées : `optimisation-du-site`, `poids-et-sobriete-numerique`, `coherence-textes-publics`.
+
+### `grilles-comparaison-largeur-par-largeur` — Ce que l'adoption d'un minimum changerait : une grille clignote, trois perdraient leur paire
+
+*Consignée le 2026-11-02.*
+
+**Constat.** Un minimum de piste adopté ne dit rien de ce que la page montre. Les sept propositions du lot précédent étaient des nombres ; décider lequel adopter demandait de savoir, largeur par largeur, combien de colonnes la grille affiche avec l'un et avec l'autre.
+
+**Ce que cela change.** `--comparer` mesure, pour chaque grille où la proposition diffère du minimum adopté, le nombre de colonnes aux 233 largeurs de fenêtre balayées, avec la place réelle et la capacité mesurée, et nomme les largeurs où le dessin change. Trois résultats renversent la lecture du lot précédent : pour `.eva-listes-grid`, `.simulateur-duo` et `.ai-balance-grid`, les 350 px adoptés montrent déjà deux colonnes de 750 à 780 px, donc la proposition de 360 px retirerait une paire existante ; `.learning-code-grid` à 300 px clignote (deux colonnes de 650 à 760 px, une seule jusqu'à 1 000, deux dès 1 010) parce que la gouttière du conteneur rétrécit la place à 761 px ; `.ai-path-steps` ne dépasse pas deux colonnes dans les 669,6 px reçus, ce qui confirme sa dérogation. Deux phrases du lot précédent sont corrigées avec les bandes mesurées, pas effacées.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --comparer && python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py`
+
+**Limite — ce que cela ne prouve pas.** La comparaison est celle du modèle, pas du navigateur : elle ne dit rien d'une carte trop étroite pour son contenu ni d'un texte qui déborde, et elle ne couvre que la présentation par défaut. Aucun minimum n'a été adopté, et la feuille n'a pas changé d'un pixel.
+
+**Suite.** Trancher les sept propositions une par une avec ce tableau : refuser celles qui retireraient une paire, ou décider explicitement que le repli de 760 px vaut mieux que la paire de 750 à 780 px, puis mesurer le dessin retenu dans un navigateur.
+
+Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
 
 ### `grilles-dessins-jamais-atteints` — Trois dessins que le registre justifiait et que la page n'a jamais montrés
 
