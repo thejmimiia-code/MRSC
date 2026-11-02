@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 67 |
-| Période couverte | du 2026-10-20 au 2026-11-01 |
-| Contrôles exécutables cités | 73 |
+| Avancées consignées | 68 |
+| Période couverte | du 2026-10-20 au 2026-11-02 |
+| Contrôles exécutables cités | 75 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1600,6 +1600,30 @@ Initiatives liées : `optimisation-du-site`.
 **Suite.** Faire relire le plan et la page publique par une personne de l'association, et traiter les deux phases en-attente qui dépendent d'elles (apprentissages-et-relecture, voix-et-ecoute).
 
 Initiatives liées : `documentation-rd-eva`, `coherence-textes-publics`, `cartographier-les-lacunes`.
+
+### `grilles-chaine-des-ancetres` — La grille n'occupe pas le conteneur : la chaîne des ancêtres, et le relevé devenu contrôle
+
+*Consignée le 2026-11-02.*
+
+**Constat.** Le modèle des grilles présumait que chaque grille occupait `.container` entier. Vrai pour trente grilles, faux pour quatre : `.simulateur-chiffres` mesurait 521,44 px là où le modèle en présumait 1 112, `.learning-code-grid` 615,84 contre 956, `.ai-fraud-steps` 505,13 contre 554, `.ai-path-steps` 394,02 contre 448,4. Ces quatre grilles vivent dans une colonne : un parent flex qui partage sa largeur entre deux enfants, un parent grid à colonne de 300 px, le remplissage et la bordure d'un parent bloc. Le modèle ne connaissait pas leurs ancêtres, et c'est ce qui interdisait de transformer le relevé navigateur en contrôle.
+
+**Ce que cela change.** `outils/modele-grilles.py` lit la page et la feuille par classe : `chaine_d_ancetres` retrouve l'élément et ses parents, `definir_feuille` indexe les règles, et `largeur_de_la_chaine` calcule ce que la chaîne laisse — bloc, flex en ligne (grow, shrink, base, repli) ou grid à pistes évaluables, remplissage, bordures et marges compris. Ce qui n'est pas lisible rend `None` et le relevé l'écrit (`conteneur_source`) : base `flex: auto`, piste `auto`, bordure sans épaisseur. La gouttière du conteneur devient une suite de paliers lue en entier — `3rem` partout, `2rem` sous 760 px, `1.35rem` sous 520 px — là où le modèle n'en connaissait que deux et présumait 448 px à 480 de fenêtre au lieu des 458,39 mesurés. Résultat mesuré sur 756 points : 39 divergences dans 8 grilles deviennent 4 dans 4 grilles, toutes à moins d'un pixel du point de bascule (0,20 · 0,28 · 0,60 · 0,78 px), 752 points confirmés, 0 non mesuré. L'étape de CI passe en `--controler` : une divergence franche échoue en nommant la grille, la largeur et les deux largeurs d'élément ; une divergence au seuil est comptée, jamais absorbée.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `outils/mesurer-grilles.cjs`
+- `outils/rapporter-mesure-grilles.py`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py && MRSC_BROWSER_NODE_MODULES=… node outils/mesurer-grilles.cjs … && python3 outils/rapporter-mesure-grilles.py --releve … --rapport … --controler`
+
+**Limite — ce que cela ne prouve pas.** La chaîne est lue sur la page où la grille apparaît le plus souvent, et sur le premier élément portant la classe : une grille posée dans deux contextes n'a qu'une prédiction. Les `min()` et `repeat()` d'un `grid-template-columns` parent ne sont pas modélisés. Les minima de piste recommandés raisonnent encore dans le conteneur entier, donc à tort pour une grille large d'une demi-colonne : c'est le défaut suivant, écrit au journal, pas un acquis. Le relevé ne mesure que la présentation par défaut.
+
+**Suite.** Faire entrer la chaîne des ancêtres dans le calcul des minima recommandés, puis étendre le balayage aux autres présentations.
+
+Initiatives liées : `optimisation-du-site`, `poids-et-sobriete-numerique`, `coherence-textes-publics`.
 
 ## 3. Ce que ce registre ne dit pas
 

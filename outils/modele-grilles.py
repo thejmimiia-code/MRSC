@@ -79,15 +79,47 @@ CONTENU_DEFAUT = 1160
 #: Une gouttière en `rem` suit la taille du texte : à 130 %, 3rem vaut 62,4 px.
 @dataclass(frozen=True)
 class Gouttiere:
-    """Ce que la feuille retire à `100%` pour fabriquer le conteneur."""
+    """Ce que la feuille retire à `100%` pour fabriquer le conteneur.
 
-    large: float = 3.0  # en `rem`, au-dessus du seuil
-    etroit: float = 2.0  # en `rem`, au seuil et en dessous
-    seuil: int = 760
+    Ce n'est pas **une** valeur mais une suite de paliers : `3rem` partout,
+    `2rem` jusqu'à 760 px, puis `1.35rem` jusqu'à 520 px. Le 1er novembre 2026,
+    le modèle n'en lisait que deux et retenait le dernier palier étroit qu'il
+    trouvait — à 480 px il présumait 448 px de conteneur là où le navigateur en
+    affichait 458,39. Dix pixels d'écart, et seize divergences attribuées à la
+    feuille.
+    """
+
+    #: `(rem, largeur_max, largeur_min)` dans l'ordre de la feuille : la
+    #: dernière déclaration applicable gagne, exactement comme dans la cascade.
+    paliers: tuple[tuple[float, int | None, int | None], ...] = ((3.0, None, None),)
     source: str = "non lue"
 
+    @property
+    def base(self) -> float:
+        """La gouttière des grandes fenêtres : celle qui n'a aucune condition."""
+        for valeur, largeur_max, largeur_min in self.paliers:
+            if largeur_max is None and largeur_min is None:
+                return valeur
+        return self.paliers[0][0]
+
+    def description(self) -> str:
+        """« 3rem partout ; 2rem jusqu'à 760 px ; 1.35rem jusqu'à 520 px »."""
+        return " ; ".join(
+            f"{valeur:g}rem "
+            + ("partout" if largeur_max is None else f"jusqu'à {largeur_max} px")
+            for valeur, largeur_max, _ in self.paliers
+        )
+
     def en_px(self, largeur: int, echelle: float = 1.0) -> float:
-        rem = self.etroit if largeur <= self.seuil else self.large
+        rem = None
+        for valeur, largeur_max, largeur_min in self.paliers:
+            if largeur_max is not None and largeur > largeur_max:
+                continue
+            if largeur_min is not None and largeur < largeur_min:
+                continue
+            rem = valeur
+        if rem is None:  # aucune déclaration ne couvre cette largeur : la base
+            rem = self.paliers[0][0]
         return rem * RACINE_PX * echelle
 
 
@@ -100,6 +132,15 @@ class GouttiereIllisible(Exception):
 GOUTTIERE: Gouttiere | None = None
 
 
+#: Toute déclaration de largeur portée par `.container`. Elles sont **toutes**
+#: examinées : n'en lire qu'une forme laissait le palier `calc(100% - 1.35rem)`
+#: hors du modèle, et le conteneur faux de 10 px sous 520 px.
+LARGEUR_CONTENEUR = re.compile(r"width\s*:\s*([^;]+)")
+
+#: `calc(100% - Nrem)`, éventuellement enveloppé d'un `min(var(--content), …)`.
+GOUTTIERE_REM = re.compile(r"calc\(\s*100%\s*-\s*([\d.]+)rem\s*\)")
+
+
 def lire_gouttiere(texte: str) -> Gouttiere:
     """La gouttière du `.container`, lue dans la feuille.
 
@@ -109,32 +150,27 @@ def lire_gouttiere(texte: str) -> Gouttiere:
     la lecture échoue et l'appelant doit le dire. C'est le seul chiffre que ce
     modèle présumait encore, et il portait vingt-deux grilles.
     """
-    base: float | None = None
-    etroit: float | None = None
-    seuil: int | None = None
+    paliers: list[tuple[float, int | None, int | None]] = []
     for selecteurs, corps, largeur_max, largeur_min, _ in decouper(sans_commentaires(texte)):
         if not any(selecteur == ".container" for selecteur in selecteurs):
             continue
-        trouve = re.search(r"width\s*:\s*min\([^;]*calc\(\s*100%\s*-\s*([\d.]+)rem\s*\)", corps)
-        if not trouve:
-            continue
-        valeur = float(trouve.group(1))
-        if largeur_max is not None:
-            etroit = valeur
-            seuil = largeur_max
-        elif largeur_min is None:
-            base = valeur
-    if base is None:
+        for declaration in LARGEUR_CONTENEUR.findall(corps):
+            trouve = GOUTTIERE_REM.search(declaration)
+            if trouve is None:
+                # Une largeur de conteneur que ce modèle ne sait pas lire : il
+                # doit le dire, pas garder le palier précédent en silence.
+                raise GouttiereIllisible(
+                    "règle `.container` : `width: "
+                    f"{' '.join(declaration.split())[:60]}` n'est pas "
+                    "`calc(100% - Nrem)` — la gouttière ne peut pas être lue"
+                )
+            paliers.append((float(trouve.group(1)), largeur_max, largeur_min))
+    if not any(largeur_max is None and largeur_min is None for _, largeur_max, largeur_min in paliers):
         raise GouttiereIllisible(
             "aucune règle `.container` ne dit ce qu'elle retire à 100% — "
             "le conteneur ne peut pas être calculé, et 48 px serait une supposition"
         )
-    return Gouttiere(
-        large=base,
-        etroit=etroit if etroit is not None else base,
-        seuil=seuil if seuil is not None else 0,
-        source="site.css",
-    )
+    return Gouttiere(paliers=tuple(paliers), source="site.css")
 
 
 def definir_gouttiere(texte: str) -> Gouttiere:
@@ -254,6 +290,11 @@ class Grille:
     #: Faux quand ce remplissage n'est pas évaluable : la largeur utile est alors
     #: inconnue, et le modèle refuse de prédire au lieu de supposer.
     padding_lu: bool = True
+    #: La chaîne d'ancêtres lue dans la page qui porte cette grille (voir
+    #: `chaine_d_ancetres`). Vide tant qu'aucune page n'a été lue : la largeur
+    #: utile retombe alors sur celle du conteneur, et `source_conteneur` le dit.
+    chaine: list["Element"] | None = None
+
     #: Nombre d'éléments que les pages mettent au plus dans cette grille, mesuré
     #: dans le HTML (`lire_capacites`). 0 = non mesuré. `auto-fit` ne remplit pas
     #: une piste vide : une grille de deux éléments ne montre jamais trois
@@ -435,7 +476,7 @@ def fenetre_maximale() -> int:
     change `3rem`, tout ce qui se mesure « à la fenêtre maximale » doit changer
     avec elle.
     """
-    return int(round(CONTENU_DEFAUT + gouttiere().large * RACINE_PX))
+    return int(round(CONTENU_DEFAUT + gouttiere().base * RACINE_PX))
 
 
 def ecart_a(grille: "Grille", largeur: int, echelle: float = 1.0) -> float | None:
@@ -449,6 +490,9 @@ def lire_grilles(texte: str) -> dict[str, Grille]:
     """Toutes les grilles dont la feuille fixe ou calcule le nombre de colonnes."""
     texte = sans_commentaires(texte)
     definir_gouttiere(texte)
+    # La feuille est lue une seconde fois, indexée par classe : c'est elle qui
+    # répond « quelle largeur ce parent laisse-t-il à cet enfant ? ».
+    definir_feuille(texte)
     grilles: dict[str, Grille] = {}
     for ordre, (selecteurs, corps, largeur_max, largeur_min, ligne) in enumerate(decouper(texte)):
         trouve = DECLARATION_COLONNES.search(corps)
@@ -551,6 +595,679 @@ def padding_horizontal_px(expression: str, largeur: int, echelle: float = 1.0) -
     return gauche + droite
 
 
+# ---------------------------------------------------------------------------
+# La chaîne des ancêtres
+#
+# Une grille n'occupe pas le conteneur : elle occupe ce que ses ancêtres lui
+# laissent. Jusqu'au 1er novembre 2026, ce modèle présumait le contraire et
+# n'ajoutait qu'un remplissage lu sur la grille elle-même. Quatre grilles le
+# contredisaient, toujours de la même façon : l'élément mesuré était **plus
+# étroit** que le conteneur présumé — 521,44 px contre 1 112 pour
+# `.simulateur-chiffres`, 505,13 contre 554 pour `.ai-fraud-steps`, 615,84 contre
+# 956 pour `.learning-code-grid`, 394,02 contre 448,4 pour `.ai-path-steps`.
+# Trois causes, toutes lues dans la feuille : un parent `flex` qui partage sa
+# largeur entre deux enfants, un parent `grid` à deux colonnes dont une de
+# 300 px, et le remplissage (plus une bordure) d'un parent bloc.
+#
+# Ce que ce modèle sait lire est volontairement étroit : `display` bloc, `flex`
+# et `grid` avec des pistes évaluables ; des pseudo-classes de rang ou des
+# classes d'enfants pour les règles `> :first-child`. Tout le reste rend `None`,
+# et l'appelant écrit « chaîne non modélisée » plutôt que de retomber en silence
+# sur la largeur du conteneur.
+# ---------------------------------------------------------------------------
+
+BALISES_VIDES = frozenset(
+    {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
+)
+
+#: Balises dont l'ouverture ferme implicitement la précédente du même genre.
+#: Sans cela, une page écrite sans `</li>` verrait tous ses éléments imbriqués.
+FERMETURES_IMPLICITES = {
+    "li": {"li"},
+    "p": {"p"},
+    "dd": {"dd", "dt"},
+    "dt": {"dd", "dt"},
+    "option": {"option"},
+    "tr": {"tr"},
+    "td": {"td", "th"},
+    "th": {"td", "th"},
+}
+
+
+@dataclass
+class Element:
+    """Un élément du document, réduit à ce qui décide d'une largeur."""
+
+    balise: str
+    classes: tuple[str, ...]
+    rang: int = 0
+    enfants: list["Element"] = field(default_factory=list)
+
+    @property
+    def nombre_enfants(self) -> int:
+        return len(self.enfants)
+
+    def porte(self, classe: str) -> bool:
+        return classe in self.classes
+
+
+class _Chaine(HTMLParser):
+    """Retrouve un élément par sa classe et rend ses ancêtres, du haut au parent.
+
+    `orig` n'est pas une coquetterie : une page porte parfois deux éléments de la
+    même classe (`.ai-path-steps` apparaît une fois, mais `deux` occurrences
+    existent ailleurs), et la mesure navigateur prend le **premier visible**.
+    Prendre le premier du document est le seul choix qui puisse être vérifié ;
+    l'écart serait sinon invisible.
+    """
+
+    def __init__(self, cible: str) -> None:
+        super().__init__(convert_charrefs=True)
+        self.cible = cible
+        self.pile: list[Element] = []
+        self.chaine: list[Element] | None = None
+
+    def handle_starttag(self, balise, attributs):
+        if balise in FERMETURES_IMPLICITES:
+            while self.pile and self.pile[-1].balise in FERMETURES_IMPLICITES[balise]:
+                self.pile.pop()
+        classe = dict(attributs).get("class") or ""
+        classes = tuple(classe.split())
+        parent = self.pile[-1] if self.pile else None
+        element = Element(balise=balise, classes=classes, rang=len(parent.enfants) if parent else 0)
+        if parent is not None:
+            parent.enfants.append(element)
+        if self.chaine is None and self.cible in classes:
+            # Les ancêtres sont gardés **par référence** : leurs compteurs
+            # d'enfants continuent de se remplir pendant la lecture du document.
+            self.chaine = [*self.pile, element]
+        if balise not in BALISES_VIDES:
+            self.pile.append(element)
+
+    def handle_endtag(self, balise):
+        for indice in range(len(self.pile) - 1, -1, -1):
+            if self.pile[indice].balise == balise:
+                del self.pile[indice:]
+                return
+
+
+@dataclass(frozen=True)
+class RegleBrute:
+    """Une règle de la feuille, réduite à ses sélecteurs et à son corps."""
+
+    selecteurs: tuple[str, ...]
+    corps: str
+    largeur_max: int | None
+    largeur_min: int | None
+
+
+#: Remplies par `definir_feuille()`. Vides tant que rien n'a été lu : les
+#: fonctions de largeur rendent alors `None` au lieu de supposer.
+REGLES: list[RegleBrute] = []
+CHAINES: dict[tuple[str, str], list[Element] | None] = {}
+
+#: Index par classe : une règle est rangée sous **chaque** classe qu'elle nomme.
+#: Sans cet index, chaque appel parcourait les 3 000 règles de la feuille, et une
+#: largeur utile calculée pour 761 points sur 34 grilles aurait coûté des heures.
+REGLES_PAR_CLASSE: dict[str, list[RegleBrute]] = {}
+REGLES_ENFANT_PAR_CLASSE: dict[str, list[RegleBrute]] = {}
+
+#: `{(classes, largeur): déclarations}` — les mêmes déclarations sont relues des
+#: milliers de fois pour une même largeur.
+PROPRIETES: dict[tuple[tuple[str, ...], int], dict[str, str]] = {}
+
+
+def definir_feuille(texte: str) -> None:
+    """Lit une fois la feuille : sélecteurs, corps, conditions et index par classe."""
+    global REGLES
+    REGLES = [
+        RegleBrute(tuple(selecteurs), corps, largeur_max, largeur_min)
+        for selecteurs, corps, largeur_max, largeur_min, _ in decouper(sans_commentaires(texte))
+    ]
+    REGLES_PAR_CLASSE.clear()
+    REGLES_ENFANT_PAR_CLASSE.clear()
+    PROPRIETES.clear()
+    CHAINES.clear()
+    for regle in REGLES:
+        for selecteur in regle.selecteurs:
+            nommees = _classes_du_selecteur(selecteur)
+            if nommees is not None:
+                for classe in nommees:
+                    REGLES_PAR_CLASSE.setdefault(classe, []).append(regle)
+                continue
+            enfant = _SELECTEUR_ENFANT.match(selecteur)
+            if enfant:
+                nommees = _classes_du_selecteur(enfant.group(1))
+                if nommees:
+                    for classe in nommees:
+                        REGLES_ENFANT_PAR_CLASSE.setdefault(classe, []).append(regle)
+
+
+def chaine_d_ancetres(racine: Path, page: str, selecteur: str) -> list[Element] | None:
+    """La chaîne d'un élément, du document jusqu'à lui (`None` s'il est absent)."""
+    cle = (page, selecteur)
+    if cle in CHAINES:
+        return CHAINES[cle]
+    chemin = racine / page
+    if not chemin.is_file() or not selecteur.startswith("."):
+        CHAINES[cle] = None
+        return None
+    lecteur = _Chaine(selecteur.lstrip("."))
+    try:
+        lecteur.feed(chemin.read_text(encoding="utf-8", errors="replace"))
+    except Exception:  # page illisible ou mal formée : on ne prétend rien y lire
+        CHAINES[cle] = None
+        return None
+    CHAINES[cle] = lecteur.chaine
+    return lecteur.chaine
+
+
+_SELECTEUR_CLASSES = re.compile(r"^(?:\.[\w-]+)+$")
+_SELECTEUR_ENFANT = re.compile(r"^((?:\.[\w-]+)+)\s*>\s*(.+)$")
+
+
+def _classes_du_selecteur(selecteur: str) -> set[str] | None:
+    if not _SELECTEUR_CLASSES.match(selecteur):
+        return None
+    return {morceau.lstrip(".") for morceau in selecteur.split(".") if morceau}
+
+
+class _Arret(Exception):
+    """Une déclaration que ce modèle ne sait pas lire : la largeur est inconnue."""
+
+
+def declarations_de(classes: tuple[str, ...]) -> list[RegleBrute]:
+    """Les règles qui nomment cet élément, conditions de largeur comprises."""
+    ensemble = set(classes)
+    retenues: list[RegleBrute] = []
+    vues: set[int] = set()
+    for classe in classes:
+        for regle in REGLES_PAR_CLASSE.get(classe, ()):
+            if id(regle) in vues:
+                continue
+            for selecteur in regle.selecteurs:
+                nommees = _classes_du_selecteur(selecteur)
+                if nommees is not None and nommees <= ensemble:
+                    retenues.append(regle)
+                    vues.add(id(regle))
+                    break
+    return retenues
+
+
+def declarations_d_enfant(
+    parent: Element, enfant: Element, regles_parent: list[RegleBrute] | None = None
+) -> list[RegleBrute]:
+    """Les règles qui visent un enfant précis (`> :first-child`, `> .panneau`)."""
+    total = parent.nombre_enfants
+    retenues: list[RegleBrute] = []
+    candidates: list[RegleBrute] = []
+    for classe in parent.classes:
+        candidates.extend(REGLES_ENFANT_PAR_CLASSE.get(classe, ()))
+    for regle in candidates:
+        for selecteur in regle.selecteurs:
+            trouve = _SELECTEUR_ENFANT.match(selecteur)
+            if not trouve:
+                continue
+            nommees = _classes_du_selecteur(trouve.group(1))
+            if nommees is None or not nommees <= set(parent.classes):
+                continue
+            droite = trouve.group(2).strip()
+            if droite.startswith(":"):
+                rang = enfant.rang
+                valable = (
+                    (droite == ":first-child" and rang == 0)
+                    or (droite == ":last-child" and rang == total - 1)
+                    or (droite == ":only-child" and total == 1)
+                    or droite == f":nth-child({rang + 1})"
+                )
+                if not valable:
+                    continue
+            elif droite.startswith("."):
+                nommees_enfant = _classes_du_selecteur(droite)
+                if nommees_enfant is None or not nommees_enfant <= set(enfant.classes):
+                    continue
+            elif droite != enfant.balise:
+                continue
+            retenues.append(regle)
+            break
+    return retenues
+
+
+def _morceaux(corps: str) -> dict[str, str]:
+    sortie: dict[str, str] = {}
+    for declaration in corps.split(";"):
+        if ":" not in declaration:
+            continue
+        propriete, _, valeur = declaration.partition(":")
+        propriete = propriete.strip().lower()
+        if propriete:
+            sortie[propriete] = " ".join(valeur.split())
+    return sortie
+
+
+def _propietes(regles: list[RegleBrute], largeur: int) -> dict[str, str]:
+    """Les déclarations applicables à cette largeur, dans l'ordre de la feuille."""
+    resultat: dict[str, str] = {}
+    for regle in regles:
+        if regle.largeur_max is not None and largeur > regle.largeur_max:
+            continue
+        if regle.largeur_min is not None and largeur < regle.largeur_min:
+            continue
+        resultat.update(_morceaux(regle.corps))
+    return resultat
+
+
+def propietes_de(classes: tuple[str, ...], largeur: int) -> dict[str, str]:
+    """Les déclarations d'un élément à cette largeur, mémoïsées."""
+    cle = (classes, largeur)
+    if cle not in PROPRIETES:
+        PROPRIETES[cle] = _propietes(declarations_de(classes), largeur)
+    return PROPRIETES[cle]
+
+
+def propietes_d_enfant(
+    parent: Element, enfant: Element, largeur: int
+) -> dict[str, str]:
+    """Les déclarations qui visent cet enfant précis, à cette largeur."""
+    return _propietes(declarations_d_enfant(parent, enfant), largeur)
+
+
+def _morceaux_de_valeur(valeur: str) -> list[str]:
+    """Découpe une valeur aux espaces de **premier niveau**.
+
+    `clamp(1.5rem, 4vw, 3rem)` contient des espaces : un `split()` rendrait
+    `clamp(1.5rem,` — et l'écart serait alors évalué à 0 px, ce qui a fait
+    diverger `.simulateur-chiffres` de 19,74 px au premier essai.
+    """
+    morceaux, profondeur, courant = [], 0, ""
+    for caractere in valeur:
+        if caractere == "(":
+            profondeur += 1
+        elif caractere == ")":
+            profondeur -= 1
+        if caractere == " " and profondeur == 0:
+            if courant:
+                morceaux.append(courant)
+            courant = ""
+            continue
+        courant += caractere
+    if courant:
+        morceaux.append(courant)
+    return morceaux
+
+
+def _ecart(propietes: dict[str, str], largeur: int, echelle: float) -> float | None:
+    """L'écart **entre colonnes** d'un conteneur, ou `None` s'il est illisible."""
+    if "column-gap" in propietes:
+        morceaux = _morceaux_de_valeur(propietes["column-gap"])
+        if not morceaux:
+            return None
+        return mesure_en_px(morceaux[0], largeur, echelle)
+    if "gap" in propietes:
+        morceaux = _morceaux_de_valeur(propietes["gap"])
+        if not morceaux:
+            return None
+        return mesure_en_px(morceaux[1] if len(morceaux) >= 2 else morceaux[0], largeur, echelle)
+    return 0.0
+
+
+def _cotes(valeur: str, largeur: int, echelle: float) -> tuple[float, float] | None:
+    """Les deux côtés horizontaux d'un raccourci (`a`, `a b`, `a b c`, `a b c d`)."""
+    morceaux = _morceaux_de_valeur(valeur)
+    if not morceaux or len(morceaux) > 4:
+        return None
+    if len(morceaux) == 1:
+        gauche = droite = mesure_en_px(morceaux[0], largeur, echelle)
+    elif len(morceaux) == 2:
+        gauche = droite = mesure_en_px(morceaux[1], largeur, echelle)
+    elif len(morceaux) == 3:
+        gauche = droite = mesure_en_px(morceaux[1], largeur, echelle)
+    else:
+        gauche = mesure_en_px(morceaux[1], largeur, echelle)
+        droite = mesure_en_px(morceaux[3], largeur, echelle)
+    if gauche is None or droite is None:
+        return None
+    return gauche, droite
+
+
+def _cotes_en_ligne(valeur: str, largeur: int, echelle: float) -> tuple[float, float] | None:
+    """Les deux côtés d'un raccourci `-inline` : `a` ou `a b` (début, fin)."""
+    morceaux = valeur.split()
+    if len(morceaux) == 1:
+        cote = mesure_en_px(morceaux[0], largeur, echelle)
+        return None if cote is None else (cote, cote)
+    if len(morceaux) == 2:
+        debut = mesure_en_px(morceaux[0], largeur, echelle)
+        fin_cote = mesure_en_px(morceaux[1], largeur, echelle)
+        if debut is None or fin_cote is None:
+            return None
+        return debut, fin_cote
+    return None
+
+
+def _une_cote(
+    propietes: dict[str, str], famille: str, cote: str, largeur: int, echelle: float
+) -> float | None:
+    """Un côté horizontal : la propriété explicite gagne, puis `-inline`, puis le raccourci."""
+    explicite = propietes.get(f"{famille}-{cote}")
+    if explicite is not None:
+        return mesure_en_px(explicite, largeur, echelle)
+    en_ligne = propietes.get(f"{famille}-inline")
+    if en_ligne is not None:
+        cotes = _cotes_en_ligne(en_ligne, largeur, echelle)
+        if cotes is None:
+            return None
+        return cotes[0] if cote == "left" else cotes[1]
+    valeur = propietes.get(famille)
+    if valeur is None:
+        return 0.0
+    cotes = _cotes(valeur, largeur, echelle)
+    if cotes is None:
+        return None
+    return cotes[0] if cote == "left" else cotes[1]
+
+
+def _remplissage(propietes: dict[str, str], largeur: int, echelle: float) -> float | None:
+    gauche = _une_cote(propietes, "padding", "left", largeur, echelle)
+    droite = _une_cote(propietes, "padding", "right", largeur, echelle)
+    if gauche is None or droite is None:
+        return None
+    return gauche + droite
+
+
+def _epaisseur_de_bordure(valeur: str, largeur: int, echelle: float) -> float | None:
+    """L'épaisseur d'un `border` (`1px solid var(--x)`), ou `None` si illisible."""
+    morceaux = valeur.split()
+    if not morceaux:
+        return None
+    if morceaux[0] in ("none", "hidden"):
+        return 0.0
+    for morceau in morceaux:
+        epaisseur = mesure_en_px(morceau, largeur, echelle)
+        if epaisseur is not None:
+            return epaisseur
+    # `border: solid` sans épaisseur vaut `medium` (3 px) ; le deviner serait une
+    # supposition, et la largeur utile dépend de 6 px.
+    return None
+
+
+def _bordures(propietes: dict[str, str], largeur: int, echelle: float) -> float | None:
+    total = 0.0
+    for cote in ("left", "right"):
+        explicite = propietes.get(f"border-{cote}")
+        if explicite is not None:
+            epaisseur = _epaisseur_de_bordure(explicite, largeur, echelle)
+            if epaisseur is None:
+                return None
+            total += epaisseur
+            continue
+        largeur_bordure = propietes.get(f"border-{cote}-width")
+        if largeur_bordure is not None:
+            epaisseur = mesure_en_px(largeur_bordure, largeur, echelle)
+            if epaisseur is None:
+                return None
+            total += epaisseur
+            continue
+        raccourci = propietes.get("border")
+        if raccourci is not None:
+            epaisseur = _epaisseur_de_bordure(raccourci, largeur, echelle)
+            if epaisseur is None:
+                return None
+            total += epaisseur
+    return total
+
+
+def _marges(propietes: dict[str, str], largeur: int, echelle: float) -> float | None:
+    gauche = _une_cote(propietes, "margin", "left", largeur, echelle)
+    droite = _une_cote(propietes, "margin", "right", largeur, echelle)
+    if gauche is None or droite is None:
+        return None
+    return gauche + droite
+
+
+def _longueur(expression: str, largeur: int, echelle: float, police: float) -> float | None:
+    """Une longueur CSS, `em` compris — `em` se rapporte à la police de l'élément."""
+    expression = expression.strip()
+    trouve = re.match(r"^([\d.]+)em$", expression)
+    if trouve:
+        return float(trouve.group(1)) * police
+    return mesure_en_px(expression, largeur, echelle)
+
+
+def _flex(propietes: dict[str, str], largeur: int, echelle: float) -> tuple[float, float, float] | None:
+    """`(grow, shrink, base)` d'un enfant `flex`, ou `None` si la base est `auto`."""
+    valeur = propietes.get("flex")
+    if valeur is None:
+        return None
+    morceaux = valeur.split()
+    grow = 1.0
+    shrink = 1.0
+    base: float | None = None
+    if len(morceaux) == 1:
+        if morceaux[0] in ("none", "initial", "auto"):
+            return None
+        if re.match(r"^[\d.]+$", morceaux[0]):
+            grow = float(morceaux[0])
+        else:
+            base = _longueur(morceaux[0], largeur, echelle, RACINE_PX * echelle)
+    else:
+        if not re.match(r"^[\d.]+$", morceaux[0]):
+            return None
+        grow = float(morceaux[0])
+        if len(morceaux) >= 2 and re.match(r"^[\d.]+$", morceaux[1]):
+            shrink = float(morceaux[1])
+            reste = morceaux[2:]
+        else:
+            reste = morceaux[1:]
+        if reste:
+            if reste[0] in ("auto", "min-content", "max-content", "fit-content", "content"):
+                return None
+            base = _longueur(reste[0], largeur, echelle, RACINE_PX * echelle)
+    if base is None:
+        return None
+    return grow, shrink, base
+
+
+def _pistes_evaluables(
+    valeur: str, largeur: int, echelle: float
+) -> list[tuple[float, float | None]] | None:
+    """`[(base, fr)]` : `fr` vaut `None` pour une piste solide, son poids sinon."""
+    sortie: list[tuple[float, float | None]] = []
+    for piste in pistes(valeur):
+        piste = piste.strip()
+        trouve = re.match(r"^minmax\(\s*([^,]+?)\s*,\s*(.+?)\s*\)$", piste)
+        if trouve:
+            minimum_expr, maximum_expr = trouve.group(1), trouve.group(2)
+            minimum = _longueur(minimum_expr, largeur, echelle, RACINE_PX * echelle)
+            if minimum is None:
+                return None
+            poids = re.match(r"^([\d.]+)fr$", maximum_expr)
+            if poids:
+                sortie.append((minimum, float(poids.group(1))))
+                continue
+            maximum = _longueur(maximum_expr, largeur, echelle, RACINE_PX * echelle)
+            if maximum is None:
+                return None
+            sortie.append((maximum, None))
+            continue
+        poids = re.match(r"^([\d.]+)fr$", piste)
+        if poids:
+            sortie.append((0.0, float(poids.group(1))))
+            continue
+        fixe = _longueur(piste, largeur, echelle, RACINE_PX * echelle)
+        if fixe is None:
+            return None
+        sortie.append((fixe, None))
+    return sortie or None
+
+
+def _place_dans_un_flex(
+    parent: Element, enfant: Element, place: float, largeur: int, echelle: float
+) -> float | None:
+    """La largeur d'un enfant dans un parent `flex` en ligne, repli compris.
+
+    Le repli est celui du navigateur : une ligne se remplit tant que l'enfant
+    suivant y tient avec son écart ; la place libre d'une ligne se partage selon
+    `flex-grow`, et un manque se répartit selon `flex-shrink × base`.
+    """
+    regles_parent = declarations_de(parent.classes)
+    propietes = _propietes(regles_parent, largeur)
+    if not str(propietes.get("display", "")).startswith("flex"):
+        return None
+    if not str(propietes.get("flex-direction", "row")).startswith("row"):
+        return None
+    ecart = _ecart(propietes, largeur, echelle)
+    if ecart is None:
+        return None
+
+    grow: list[float] = []
+    shrink: list[float] = []
+    bases: list[float] = []
+    for enfant_du_parent in parent.enfants:
+        reglages = _propietes(
+            declarations_d_enfant(parent, enfant_du_parent, regles_parent), largeur
+        )
+        marge = _marges(reglages, largeur, echelle)
+        lu = _flex(reglages, largeur, echelle)
+        if marge is None or lu is None:
+            # Une base `auto` dépend du contenu : ce modèle ne la devine pas.
+            return None
+        grow.append(lu[0])
+        shrink.append(lu[1])
+        bases.append(lu[2] + marge)
+    if not bases:
+        return None
+
+    def dimensionner(indices: list[int]) -> dict[int, float]:
+        largeurs = {indice: bases[indice] for indice in indices}
+        if not indices:
+            return largeurs
+        libre = place - sum(bases[i] for i in indices) - ecart * (len(indices) - 1)
+        if libre > 0:
+            total = sum(grow[i] for i in indices)
+            if total > 0:
+                for i in indices:
+                    largeurs[i] += libre * grow[i] / total
+        elif libre < 0:
+            poids = sum(shrink[i] * bases[i] for i in indices)
+            if poids > 0:
+                for i in indices:
+                    largeurs[i] += libre * (shrink[i] * bases[i]) / poids
+        return largeurs
+
+    # Une ligne se remplit tant que l'enfant suivant y tient **avec un seul
+    # écart de plus** : compter l'écart deux fois faisait replier
+    # `.simulateur-intro` à 1 044 px alors que ses deux enfants tenaient dans
+    # 996 px (480,20 + 41,76 + 474,05 = 996,01).
+    ligne: list[int] = []
+    for indice in range(len(bases)):
+        occupe = sum(bases[i] for i in ligne) + ecart * max(0, len(ligne) - 1)
+        if ligne and occupe + ecart + bases[indice] > place + 0.001:
+            if enfant.rang in ligne:
+                return dimensionner(ligne)[enfant.rang]
+            ligne = [indice]
+        else:
+            ligne.append(indice)
+    if enfant.rang in ligne:
+        return dimensionner(ligne)[enfant.rang]
+    return None
+
+
+def _place_dans_une_grille(
+    parent: Element, enfant: Element, place: float, largeur: int, echelle: float
+) -> float | None:
+    """La largeur d'un enfant dans un parent `grid` à pistes évaluables."""
+    propietes = _propietes(declarations_de(parent.classes), largeur)
+    if not str(propietes.get("display", "")).startswith("grid"):
+        return None
+    valeur = propietes.get("grid-template-columns")
+    if not valeur:
+        return None
+    pistes_lues = _pistes_evaluables(valeur, largeur, echelle)
+    if not pistes_lues:
+        return None
+    ecart = _ecart(propietes, largeur, echelle)
+    if ecart is None:
+        return None
+    if enfant.rang >= len(pistes_lues):
+        return None  # piste implicite : ce modèle n'en modélise pas la largeur
+    solides = sum(base for base, poids in pistes_lues if poids is None)
+    total_fr = sum(poids for _, poids in pistes_lues if poids is not None)
+    libre = place - solides - ecart * (len(pistes_lues) - 1)
+    if libre < 0:
+        return None  # débordement : la largeur de l'enfant ne suit plus la piste
+    base, poids = pistes_lues[enfant.rang]
+    if poids is None:
+        return base
+    return base + libre * poids / total_fr
+
+
+#: `{(id(chaine), largeur, échelle): largeur}` — la même chaîne est interrogée
+#: pour chaque largeur balayée, à chaque échelle : 34 grilles × 2 321 largeurs.
+PLACES: dict[tuple[int, int, float], float | None] = {}
+
+
+def largeur_de_la_chaine(
+    chaine: list[Element] | None, largeur: int, echelle: float = 1.0
+) -> float | None:
+    """La largeur utile, mémoïsée — la chaîne est immuable une fois lue."""
+    if not chaine:
+        return None
+    cle = (id(chaine), largeur, round(echelle, 3))
+    if cle not in PLACES:
+        PLACES[cle] = _largeur_de_la_chaine(chaine, largeur, echelle)
+    return PLACES[cle]
+
+
+def _largeur_de_la_chaine(
+    chaine: list[Element] | None, largeur: int, echelle: float = 1.0
+) -> float | None:
+    """Ce que la chaîne d'ancêtres laisse à l'élément, en pixels.
+
+    Rend `None` dès qu'une déclaration n'est pas lisible : une largeur utile
+    supposée fausse est exactement ce qui a coûté 39 divergences, et l'appelant
+    doit pouvoir l'écrire noir sur blanc.
+    """
+    if not chaine:
+        return None
+    depart = next((i for i, element in enumerate(chaine) if element.porte("container")), None)
+    if depart is None:
+        return None
+    place = conteneur(largeur, echelle=echelle)
+    for indice in range(depart, len(chaine)):
+        element = chaine[indice]
+        propietes = _propietes(declarations_de(element.classes), largeur)
+        remplissage = _remplissage(propietes, largeur, echelle)
+        bordures = _bordures(propietes, largeur, echelle)
+        if remplissage is None or bordures is None:
+            return None
+        if indice == len(chaine) - 1:
+            return place
+        enfant = chaine[indice + 1]
+        marges = _marges(
+            _propietes(
+                declarations_d_enfant(element, enfant, declarations_de(element.classes)), largeur
+            ),
+            largeur,
+            echelle,
+        )
+        if marges is None:
+            return None
+        place = place - remplissage - bordures - marges
+        if place <= 0:
+            return None
+        affichage = str(propietes.get("display", "block"))
+        if affichage.startswith("flex"):
+            place = _place_dans_un_flex(element, enfant, place, largeur, echelle)
+        elif affichage.startswith("grid"):
+            place = _place_dans_une_grille(element, enfant, place, largeur, echelle)
+        elif affichage.startswith("inline"):
+            return None
+        if place is None:
+            return None
+    return place
+
+
 def conteneur_de(grille: "Grille", largeur: int, echelle: float = 1.0) -> float:
     """La largeur que cette grille laisse **à ses enfants**, remplissage déduit.
 
@@ -558,7 +1275,9 @@ def conteneur_de(grille: "Grille", largeur: int, echelle: float = 1.0) -> float:
     en écrit un que ce modèle ne sait pas évaluer, elle lève : une largeur utile
     supposée fausse est exactement ce qui a coûté 70 divergences.
     """
-    place = conteneur(largeur, echelle=echelle)
+    place = largeur_de_la_chaine(grille.chaine, largeur, echelle)
+    if place is None:
+        place = conteneur(largeur, echelle=echelle)
     if not grille.padding_expr:
         return place
     if not grille.padding_lu:
@@ -596,20 +1315,36 @@ def colonnes_anciennes(grille: Grille, largeur: int) -> int:
 
 
 def auto_fit_grille(grille: "Grille", minimum: int, largeur: int) -> int:
-    """`auto_fit` avec l'écart **de cette largeur**, et non celui de la fenêtre maximale."""
+    """`auto_fit` dans la place que la grille occupe **vraiment**.
+
+    `conteneur_de` rend cette place : le conteneur, moins le remplissage de la
+    grille, moins ce que ses ancêtres lui retirent quand la page le dit. Le
+    1er novembre 2026, cette fonction comptait dans la largeur de la fenêtre :
+    `.simulateur-chiffres` occupait 521 px et le modèle y plaçait deux cartes de
+    380 px, ce qui n'entre pas.
+    """
     gap = ecart_a(grille, largeur)
-    return auto_fit(minimum, grille.gap if gap is None else gap, largeur, grille.items)
+    return auto_fit_place(
+        minimum,
+        grille.gap if gap is None else gap,
+        conteneur_de(grille, largeur),
+        grille.items,
+    )
 
 
-def auto_fit(minimum: int, gap: float, largeur: int, items: int = 0) -> int:
+def auto_fit_place(minimum: int, gap: float, place: float, items: int = 0) -> int:
     """Colonnes que `repeat(auto-fit, minmax(min(Npx,100%), 1fr))` produit.
 
     `items` borne le résultat : `auto-fit` replie les pistes vides, donc une
     grille qui ne reçoit que deux éléments n'en montre jamais trois.
     """
-    place = conteneur(largeur)
     colonnes = max(1, math.floor((place + gap) / (minimum + gap)))
     return min(colonnes, items) if items else colonnes
+
+
+def auto_fit(minimum: int, gap: float, largeur: int, items: int = 0) -> int:
+    """`auto_fit` dans le conteneur, sans chaîne d'ancêtres : le cas sans page."""
+    return auto_fit_place(minimum, gap, conteneur(largeur), items)
 
 
 def ecart(grille: Grille, minimum: int) -> tuple[int, int, list[tuple[int, int, int]]]:
@@ -2483,6 +3218,10 @@ def releve_navigateur(
             )
             continue
 
+        # La chaîne des ancêtres : ce que la page retire avant d'arriver à la
+        # grille. Sans elle, le modèle présume que la grille occupe le
+        # conteneur — vrai pour trente grilles, faux pour quatre.
+        grille.chaine = chaine_d_ancetres(racine, page, selecteur)
         if famille == "flex":
             ecrite = base_ecrite(racine, selecteur)
             if ecrite is None:
@@ -2524,6 +3263,11 @@ def releve_navigateur(
                             # deux arithmétiques qui divergent feraient accuser
                             # la feuille d'un désaccord entre deux constantes.
                             "conteneur": round(conteneur_de(grille, largeur, echelle), 2),
+                            # D'où vient cette largeur présumée : de la chaîne
+                            # des ancêtres lue dans la page, ou du seul conteneur
+                            # quand la chaîne n'est pas modélisable. Le rapporteur
+                            # ne peut pas les confondre sans accuser la feuille.
+                            "conteneur_source": "chaine" if grille.chaine else "conteneur",
                             # La distance à la bascule : une prédiction à 0,3 px
                             # du seuil n'est pas une prédiction, c'est une
                             # convention. Le rapporteur la nomme au lieu de
@@ -2564,6 +3308,7 @@ def releve_navigateur(
                         "echelle": 1.0,
                         "attendu": prediction_grille(largeur),
                         "conteneur": round(conteneur_de(grille, largeur), 2),
+                        "conteneur_source": "chaine" if grille.chaine else "conteneur",
                     }
                     for largeur in sorted(retenues)
                 ],
@@ -2646,9 +3391,8 @@ def principal(arguments: list[str] | None = None) -> int:
         points = sum(len(grille["points"]) for grille in releve["grilles"])
         gouttiere_lue = gouttiere()
         print(
-            f"Conteneur lu : gouttière {gouttiere_lue.large:g}rem au-dessus de "
-            f"{gouttiere_lue.seuil} px, {gouttiere_lue.etroit:g}rem à {gouttiere_lue.seuil} px "
-            "et moins, multipliée par la taille du texte."
+            f"Conteneur lu : gouttière {gouttiere_lue.description()} "
+            "(la dernière applicable gagne), multipliée par la taille du texte."
         )
         print(
             f"Relevé écrit : {destination} — {len(releve['grilles'])} grille(s), "
@@ -2785,9 +3529,7 @@ def principal(arguments: list[str] | None = None) -> int:
             formes[resultat["forme"]] = formes.get(resultat["forme"], 0) + 1
         gouttiere_lue = gouttiere()
         print(
-            "Conteneur : "
-            f"`100% - {gouttiere_lue.large:g}rem` au-dessus de {gouttiere_lue.seuil} px, "
-            f"`100% - {gouttiere_lue.etroit:g}rem` à {gouttiere_lue.seuil} px et moins "
+            f"Conteneur : {gouttiere_lue.description()} "
             f"(lu dans {gouttiere_lue.source}) — la gouttière suit la taille du texte."
         )
         print(

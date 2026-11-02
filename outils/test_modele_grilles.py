@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Éprouve le modèle des grilles : quarante-huit cas, dont deux sources illisibles.
+"""Éprouve le modèle des grilles : soixante-quatre cas, dont deux sources illisibles.
 
 `outils/modele-grilles.py` ne vaut que s'il refuse. Ce banc casse une chose à la
 fois dans une copie jetable (`outils/banc_mutations.py` : liens symboliques,
@@ -18,7 +18,7 @@ Et deux sources illisibles, qui doivent sortir en code 2 : une feuille absente,
 un registre absent. Un contrôle qui n'a pas pu mesurer n'a pas le droit de dire
 que tout va bien.
 
-Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces quarante-huit
+Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces soixante-quatre
 situations, pas qu'il couvre toutes les façons de perdre une grille dynamique.
 Un `@supports` qui réécrirait les colonnes, ou un style en ligne, lui échappent.
 
@@ -79,7 +79,11 @@ class TestModeleGrilles(unittest.TestCase):
         # La gouttière du conteneur est **lue**, jamais présumée : depuis le
         # 1er novembre 2026, un calcul de largeur sans elle est refusé. Les cas
         # ci-dessous l'obtiennent donc de la feuille, comme l'outil en ligne.
-        cls.modele.definir_gouttiere((RACINE / FEUILLE).read_text(encoding="utf-8"))
+        feuille = (RACINE / FEUILLE).read_text(encoding="utf-8")
+        cls.modele.definir_gouttiere(feuille)
+        # La feuille est aussi lue **par classe**, pour la chaîne des ancêtres :
+        # c'est elle qui répond « quelle largeur ce parent laisse-t-il ? ».
+        cls.modele.definir_feuille(feuille)
 
     def copie(self, dossier: str) -> Path:
         copie = Path(dossier)
@@ -1010,6 +1014,92 @@ class TestModeleGrilles(unittest.TestCase):
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
         self.assertEqual(resultat.returncode, 2, resultat.stdout)
         self.assertIn("registre des grilles introuvable", resultat.stderr)
+
+
+    # — la chaîne des ancêtres ------------------------------------------------
+
+    def test_la_gouttiere_a_trois_paliers_et_le_dernier_gagne(self) -> None:
+        """`3rem`, puis `2rem` sous 760 px, puis `1.35rem` sous 520 px.
+
+        Le modèle n'en lisait que deux et retenait le dernier palier étroit
+        trouvé : à 480 px il présumait 448 px de conteneur là où le navigateur en
+        affichait 458,39. Dix pixels, et seize divergences attribuées à la feuille.
+        """
+        gouttiere = self.modele.gouttiere()
+        self.assertEqual([palier[0] for palier in gouttiere.paliers], [3.0, 2.0, 1.35])
+        self.assertAlmostEqual(self.modele.conteneur(1160), 1112.0)
+        self.assertAlmostEqual(self.modele.conteneur(760), 728.0)
+        self.assertAlmostEqual(self.modele.conteneur(520), 498.4)
+        self.assertAlmostEqual(self.modele.conteneur(480), 458.4)
+
+    def test_une_gouttiere_en_pixels_est_refusee(self) -> None:
+        """Une largeur de conteneur que le modèle ne sait pas lire doit lever."""
+        feuille = (
+            ".container { width: min(var(--content), calc(100% - 3rem)); }\n"
+            "@media (max-width: 520px) { .container { width: calc(100% - 21px); } }\n"
+        )
+        with self.assertRaises(self.modele.GouttiereIllisible):
+            self.modele.lire_gouttiere(feuille)
+
+    def test_un_parent_flex_partage_sa_largeur(self) -> None:
+        """`.simulateur-chiffres` occupe 521,43 px sur 1 112 de conteneur.
+
+        Deux enfants `flex: 1.35 1 28.53em` et `flex: 1 1 28.53em` : le second ne
+        reçoit que sa base et sa part du surplus. Le navigateur mesure 521,44.
+        """
+        place = self.modele.largeur_de_la_chaine(
+            self.modele.chaine_d_ancetres(RACINE, "simulateur.html", ".simulateur-chiffres"), 1160
+        )
+        self.assertIsNotNone(place)
+        self.assertAlmostEqual(place, 521.44, delta=0.5)
+
+    def test_un_parent_grille_a_colonne_fixe(self) -> None:
+        """`.learning-code-grid` : colonne de 300 px, écart de 40,16 px, donc 615,84."""
+        place = self.modele.largeur_de_la_chaine(
+            self.modele.chaine_d_ancetres(
+                RACINE, "apprendre/fiches/prog-comparer-langages.html", ".learning-code-grid"
+            ),
+            1004,
+        )
+        self.assertIsNotNone(place)
+        self.assertAlmostEqual(place, 615.84, delta=0.5)
+
+    def test_le_remplissage_et_la_bordure_d_un_parent_comptent(self) -> None:
+        """`.ai-fraud-steps` : 554 px de conteneur, moins 2 × 23,44 et 2 × 1 px."""
+        place = self.modele.largeur_de_la_chaine(
+            self.modele.chaine_d_ancetres(RACINE, "ia-societe.html", ".ai-fraud-steps"), 586
+        )
+        self.assertIsNotNone(place)
+        self.assertAlmostEqual(place, 505.13, delta=0.5)
+
+    def test_un_parent_flex_qui_replie(self) -> None:
+        """`.ai-path-steps` à 470 px : les deux panneaux s'empilent, chacun pleine ligne.
+
+        470 px de fenêtre, 21,6 px de gouttière, 54,4 px de remplissage : 394 px.
+        """
+        place = self.modele.largeur_de_la_chaine(
+            self.modele.chaine_d_ancetres(RACINE, "ia-societe.html", ".ai-path-steps"), 470
+        )
+        self.assertIsNotNone(place)
+        self.assertAlmostEqual(place, 394.02, delta=0.5)
+
+    def test_une_base_flex_auto_rend_la_chaine_illisible(self) -> None:
+        """`flex: 1 1 auto` dépend du contenu : le modèle ne doit pas le deviner."""
+        self.assertIsNone(self.modele._flex({"flex": "1 1 auto"}, 1000, 1.0))
+        self.assertIsNone(self.modele._flex({"flex": "auto"}, 1000, 1.0))
+
+    def test_une_bordure_sans_epaisseur_rend_la_chaine_illisible(self) -> None:
+        """`border: solid` vaut `medium` (3 px) en CSS : le deviner serait une supposition."""
+        self.assertIsNone(self.modele._bordures({"border": "solid"}, 1000, 1.0))
+        self.assertAlmostEqual(self.modele._bordures({"border": "1px solid var(--x)"}, 1000, 1.0), 2.0)
+
+    def test_une_piste_auto_rend_la_grille_ancetre_illisible(self) -> None:
+        """Une piste `auto` dépend du texte : la largeur d'un enfant n'est pas calculable."""
+        self.assertIsNone(self.modele._pistes_evaluables("auto minmax(230px,300px)", 1000, 1.0))
+        self.assertEqual(
+            self.modele._pistes_evaluables("minmax(0,1fr) minmax(230px,300px)", 1000, 1.0),
+            [(0.0, 1.0), (300.0, None)],
+        )
 
     def test_le_depot_n_est_pas_modifie(self) -> None:
         avant = {
