@@ -45,6 +45,7 @@ digraph memoire {
   "avancee:la-premiere-grille-a-pistes-inegales-quitte-son-palier" [shape=note, label="avancee:la-premiere-grille-a-pistes-inegales-quitte-son-palier"];
   "avancee:le-reseau-se-teste-sur-la-boucle-locale" [shape=note, label="avancee:le-reseau-se-teste-sur-la-boucle-locale"];
   "avancee:memoire-a-trois-horizons" [shape=note, label="avancee:memoire-a-trois-horizons"];
+  "avancee:memoire-index-regenerer-en-dernier" [shape=note, label="avancee:memoire-index-regenerer-en-dernier"];
   "avancee:mesure-servie-reverifiee" [shape=note, label="avancee:mesure-servie-reverifiee"];
   "avancee:mesurer-avant-d-ecrire-ce-qu-un-flex-wrap-ferait-des-pistes-inegales" [shape=note, label="avancee:mesurer-avant-d-ecrire-ce-qu-un-flex-wrap-ferait-des-pistes-inegales"];
   "avancee:modele-confronte-au-navigateur" [shape=note, label="avancee:modele-confronte-au-navigateur"];
@@ -359,6 +360,9 @@ digraph memoire {
   "avancee:memoire-a-trois-horizons" -> "docs/rd/eva/memoire.json" [label="prouvée par"];
   "avancee:memoire-a-trois-horizons" -> "outils/memoire-eva.py" [label="prouvée par"];
   "avancee:memoire-a-trois-horizons" -> "outils/test_memoire_eva.py" [label="prouvée par"];
+  "avancee:memoire-index-regenerer-en-dernier" -> "docs/rd/eva/memoire.json" [label="prouvée par"];
+  "avancee:memoire-index-regenerer-en-dernier" -> "docs/rd/journal.md" [label="prouvée par"];
+  "avancee:memoire-index-regenerer-en-dernier" -> "outils/memoire-eva.py" [label="prouvée par"];
   "avancee:mesure-servie-reverifiee" -> "docs/rd/en-tetes-servis-2026-10-20.toml" [label="prouvée par"];
   "avancee:mesure-servie-reverifiee" -> "outils/test_fichiers_servis.py" [label="prouvée par"];
   "avancee:mesure-servie-reverifiee" -> "outils/verifier-fichiers-servis.py" [label="prouvée par"];
@@ -520,6 +524,7 @@ digraph memoire {
   "branche:cartographier-les-lacunes" -> "avancee:carte-de-sujet-avant-premiere-fiche" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:controle-preventif-qui-prouve-qu-il-mord" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:inventaire-des-controles-tenu-par-un-garde" [label="a produit"];
+  "branche:cartographier-les-lacunes" -> "avancee:memoire-index-regenerer-en-dernier" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:onze-verifications-internes-jamais-vues-en-echec" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:plan-eva-qui-se-laisse-contredire" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:taux-date-hors-de-la-fiche" [label="a produit"];
@@ -535,6 +540,7 @@ digraph memoire {
   "branche:coherence-textes-publics" -> "avancee:grilles-place-reelle-proposee" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-plancher-de-lecture-retire" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-qualite-tracés-tranches" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:memoire-index-regenerer-en-dernier" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:phrase-publique-recalculee" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:plan-eva-qui-se-laisse-contredire" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-titre-tronque-n-est-pas-une-faute-de-gout" [label="a produit"];
@@ -568,6 +574,7 @@ digraph memoire {
   "branche:documentation-rd-eva" -> "avancee:la-mesure-se-confrontait-a-sa-propre-mutation" [label="a produit"];
   "branche:documentation-rd-eva" -> "avancee:le-reseau-se-teste-sur-la-boucle-locale" [label="a produit"];
   "branche:documentation-rd-eva" -> "avancee:memoire-a-trois-horizons" [label="a produit"];
+  "branche:documentation-rd-eva" -> "avancee:memoire-index-regenerer-en-dernier" [label="a produit"];
   "branche:documentation-rd-eva" -> "avancee:plan-eva-qui-se-laisse-contredire" [label="a produit"];
   "branche:documentation-rd-eva" -> "avancee:un-code-de-sortie-ne-dit-pas-pourquoi" [label="a produit"];
   "branche:documentation-rd-eva" -> "avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer" [label="a produit"];
