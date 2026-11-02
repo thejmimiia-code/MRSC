@@ -90,10 +90,18 @@ class TestSecurite(unittest.TestCase):
         self.assertIn("épinglées sur des révisions immuables", resultat.stderr)
 
     def test_runner_non_epingle_refuse(self) -> None:
+        """Le fragment muté est le runner lui-même, pas le plafond qui le suit.
+
+        Le 2 novembre 2026, ce cas a échoué pour une raison qui n'avait rien à
+        voir avec la sécurité : il visait « ubuntu-24.04 » **suivi de**
+        « timeout-minutes: 20 », et le plafond du job a légitimement été porté à
+        30 minutes. La mutation ne mordait plus. Un banc ne doit pas dépendre du
+        texte d'une règle qu'un autre travail a le droit de changer.
+        """
         resultat = executer((
             CI,
-            "runs-on: ubuntu-24.04\n    timeout-minutes: 20",
-            "runs-on: ubuntu-latest\n    timeout-minutes: 20",
+            "runs-on: ubuntu-24.04\n",
+            "runs-on: ubuntu-latest\n",
         ))
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("pin un runner Ubuntu 24.04", resultat.stderr)

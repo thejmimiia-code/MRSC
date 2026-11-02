@@ -537,7 +537,19 @@ def lire_grilles(texte: str) -> dict[str, Grille]:
     return grilles
 
 
-def conteneur(largeur: int, contenu: float = CONTENU_DEFAUT, echelle: float = 1.0) -> float:
+#: Largeur de contenu de la présentation en cours de mesure. `--content` change
+#: avec la présentation (940 px en Lecture, 1 480 en Panorama et Compacte) et
+#: une grille n'a pas la même place dans 940 px que dans 1 160.
+CONTENU_COURANT: float = CONTENU_DEFAUT
+
+
+def definir_contenu(valeur: float) -> None:
+    """Fixe la largeur de contenu des calculs suivants (`--content` de la présentation)."""
+    global CONTENU_COURANT
+    CONTENU_COURANT = float(valeur)
+
+
+def conteneur(largeur: int, contenu: float | None = None, echelle: float = 1.0) -> float:
     """Largeur du `.container` à cette fenêtre et cette taille de texte.
 
     `echelle` vaut 1 à taille normale, 1,15 à 115 %, 1,3 à 130 % : une gouttière
@@ -545,6 +557,7 @@ def conteneur(largeur: int, contenu: float = CONTENU_DEFAUT, echelle: float = 1.
     quelqu'un agrandit. C'était l'une des trois causes de divergence mesurées le
     1er novembre 2026, et elle rendait fausse toute prédiction au-delà de 100 %.
     """
+    contenu = CONTENU_COURANT if contenu is None else contenu
     return min(contenu, largeur - gouttiere().en_px(largeur, echelle))
 
 
@@ -1217,7 +1230,10 @@ def largeur_de_la_chaine(
     """La largeur utile, mémoïsée — la chaîne est immuable une fois lue."""
     if not chaine:
         return None
-    cle = (id(chaine), largeur, round(echelle, 3))
+    # `CONTENU_COURANT` entre dans la clé : sans lui, la place calculée pour la
+    # présentation par défaut resservait telle quelle sous « Compacte », dont le
+    # `--content` vaut 1 480 px au lieu de 1 160.
+    cle = (id(chaine), largeur, round(echelle, 3), CONTENU_COURANT)
     if cle not in PLACES:
         PLACES[cle] = _largeur_de_la_chaine(chaine, largeur, echelle)
     return PLACES[cle]
@@ -1715,6 +1731,7 @@ def presentations_lues(grilles: dict[str, Grille], texte: str) -> list[dict]:
                     trouvees.append(
                         {
                             "presentation": nom.group(1),
+                            "gap_expr": ecart_colonnes(corps),
                             "selecteur": grille,
                             "valeur": " ".join(valeur.split()),
                             "regime": motif,
@@ -1869,6 +1886,62 @@ def contradictions_d_ordre(lignes: list[dict]) -> list[str]:
                     f"défaut — la présentation annonce l'inverse"
                 )
     return messages
+
+
+def regle_applicable(
+    trouvees: list[dict], presentation: str, largeur: int, selecteur: str
+) -> dict | None:
+    """La règle de cette présentation qui s'applique à cette largeur, s'il y en a une.
+
+    `mosaique` en écrit deux : deux colonnes jusqu'à 601 px, quatre à partir de
+    981 px. Entre les deux, aucune ne s'applique et c'est la règle de base qui
+    décide — exactement comme dans la cascade.
+    """
+    applicable = None
+    for trouvee in trouvees:
+        if trouvee["presentation"] != presentation or trouvee["selecteur"] != selecteur:
+            continue
+        if trouvee["largeur_max"] is not None and largeur > trouvee["largeur_max"]:
+            continue
+        if trouvee["largeur_min"] is not None and largeur < trouvee["largeur_min"]:
+            continue
+        # La **dernière** gagne : `mosaique` écrit deux colonnes dès 601 px puis
+        # quatre dès 981 px, et prendre la première trouvée annonçait deux
+        # colonnes sur un écran de 1 440 px — 96 écarts d'un coup, tous faux.
+        applicable = trouvee
+    return applicable
+
+
+def colonnes_attendues(
+    grille: Grille, entree: dict, regle: dict | None, largeur: int, echelle: float = 1.0
+) -> int:
+    """Le nombre de colonnes que la feuille **doit** donner, dans ce cadrage.
+
+    Trois régimes, et une distinction qui compte : une piste `auto-fit` vide se
+    replie, donc le nombre d'éléments borne le résultat ; une piste de
+    `repeat(4, …)` ne se replie pas, donc quatre colonnes restent quatre, même
+    avec deux cartes — c'est le dessin de « Mosaïque ».
+    """
+    place = conteneur_de(grille, largeur, echelle)
+    ecart_ici = ecart_a(grille, largeur, echelle)
+    ecart_ici = grille.gap if ecart_ici is None else ecart_ici
+    if regle is None:
+        minimum = entree.get("minimum")
+        if not isinstance(minimum, int):
+            return 0
+        return auto_fit_place(minimum, ecart_ici, place, grille.items)
+    if regle["regime"] == "fixe":
+        return int(regle.get("colonnes") or 1)
+    if regle["valeur"].lstrip().startswith("minmax(0") or regle["valeur"].strip() == "1fr":
+        return 1
+    minimum = regle.get("minimum")
+    if regle.get("gap_expr"):
+        mesure = mesure_en_px(regle["gap_expr"], largeur, echelle)
+        if mesure is not None:
+            ecart_ici = mesure
+    if not isinstance(minimum, int):
+        return 0
+    return auto_fit_place(minimum, ecart_ici, place, grille.items)
 
 
 def normaliser(valeur: str) -> str:

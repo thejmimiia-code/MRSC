@@ -2211,3 +2211,52 @@ une valeur que rien ne vérifie serait le geste refusé depuis le 1er novembre 2
 Un second signe, dans l'autre sens : en Compacte et Panorama, `.ai-fraud-steps` repasse à
 **quatre colonnes** — les quatre cartes de prose que la section 32 avait écartées à 261,7 px.
 Le dessin tranché pour la présentation par défaut est défait par deux autres.
+
+## 34. Le cadrage personnalisé entre dans le contrôle, au demi-pixel près (2 novembre 2026)
+
+La promesse du site — « la mise en page suit l'espace disponible, jamais une largeur
+d'écran supposée » — n'était vérifiée que dans **un** cadrage : présentation par défaut,
+trois tailles de texte. Le panneau de personnalisation en propose **six** présentations et
+**cinq** crans de 75 à 130 %, et `--content` comme les gouttières changent avec eux : une
+grille n'a pas la même place dans 940 px qu'en 1 480.
+
+`outils/cadrages.py` construit donc un plan de **480 combinaisons** (6 présentations ×
+5 crans × 4 largeurs × 4 pages), `outils/mesurer-cadrages.cjs` le mesure dans un vrai
+Chromium, et `--controler` refuse :
+
+- un **débordement horizontal** au-delà de **0,5 px** — le plus petit écart qu'un
+  navigateur puisse produire en arrondissant une longueur. À 0,5 px le contrôle passe, à
+  0,51 px il refuse ; le banc l'éprouve dans les deux sens ;
+- un **nombre de colonnes** qui n'est pas celui promis par la feuille dans ce cadrage-là ;
+- une combinaison **non mesurée** : un contrôle incomplet ne vaut pas un contrôle vide.
+
+### Trois fautes du modèle, trouvées par la mesure
+
+1. `regle_applicable` retenait la **première** règle de présentation applicable.
+   « Mosaïque » écrit deux colonnes dès 601 px puis quatre dès 981 : le modèle annonçait
+   deux colonnes sur un écran de 1 440 px. Dans la cascade, c'est la **dernière** qui
+   gagne — 96 écarts d'un coup, tous faux, tous attribués à la feuille.
+2. La règle d'une présentation était appliquée **sans regarder quelle grille** elle
+   nomme : `.ai-balance-grid` héritait du régime de `.ai-forms-grid`, puisqu'elles vivent
+   dans la même liste `:is(…)`. Un modèle qui répond pour une grille avec la règle d'une
+   autre est pire qu'un modèle muet.
+3. Le cache des largeurs ne dépendait pas de `CONTENU_COURANT` : la place calculée pour
+   1 160 px resservait sous « Compacte », dont le `--content` vaut 1 480.
+
+Après correction : **480 combinaisons mesurées, 0 débordement, 0 écart de colonnes**.
+
+### La garde est éprouvée
+
+Sur une **copie jetable**, `min-width: 900px` posé sur `.home-share-panel` en Vitrine a
+fait refuser les **cinq** crans de 320 px, en nommant l'élément et la mesure exacte :
+« `div.home-share-panel` dépasse de 588,09 px » à 75 %, 594,05 px à 130 %. Le dépôt n'a
+pas été touché, la copie a été supprimée.
+
+### Limites
+
+Le contrôle mesure le débordement **horizontal** et le nombre de colonnes. Il ne dit rien
+de la hauteur, des chevauchements verticaux, du contraste ni de la lisibilité d'une carte
+étroite ; une page sans grille déclarée n'est pas visitée, donc un défaut qui n'affecterait
+qu'elle échapperait au contrôle. Coût mesuré : **5 min 02** pour 480 combinaisons, ce qui a
+fait relever le plafond du job `graphismes` de 20 à 30 minutes — un banc lent vaut mieux
+qu'un banc absent, à condition de dire ce qu'il coûte.

@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 76 |
+| Avancées consignées | 77 |
 | Période couverte | du 2026-10-20 au 2026-11-02 |
-| Contrôles exécutables cités | 81 |
+| Contrôles exécutables cités | 85 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1600,6 +1600,32 @@ Initiatives liées : `optimisation-du-site`.
 **Suite.** Faire relire le plan et la page publique par une personne de l'association, et traiter les deux phases en-attente qui dépendent d'elles (apprentissages-et-relecture, voix-et-ecoute).
 
 Initiatives liées : `documentation-rd-eva`, `coherence-textes-publics`, `cartographier-les-lacunes`.
+
+### `cadrages-personnalises-au-pixel` — Le cadrage personnalisé entre dans le contrôle, au demi-pixel près
+
+*Consignée le 2026-11-02.*
+
+**Constat.** La promesse « la mise en page suit l'espace disponible » n'était vérifiée que dans un cadrage : présentation par défaut, trois tailles de texte. Le panneau en propose six présentations et cinq crans de 75 à 130 %, et `--content` comme les gouttières changent avec eux : une grille n'a pas la même place dans 940 px qu'en 1 480. Aucun contrôle ne confrontait donc la feuille à ce qu'elle affiche réellement dans les cadrages que le visiteur peut choisir.
+
+**Ce que cela change.** `outils/cadrages.py` construit un plan de 480 combinaisons (6 présentations × 5 crans × 4 largeurs × 4 pages), `outils/mesurer-cadrages.cjs` le mesure dans un vrai Chromium — débordement horizontal et nombre de colonnes de chaque grille déclarée — et `--controler` refuse tout écart au-delà de 0,5 px, le plus petit écart qu'un navigateur puisse produire en arrondissant une longueur. Une combinaison non mesurée est une erreur : un contrôle incomplet ne vaut pas un contrôle vide. Trois fautes du modèle ont été trouvées par cette mesure : la cascade des présentations retenait la première règle applicable au lieu de la dernière (96 écarts faux), la règle d'une présentation était appliquée à des grilles qu'elle ne nomme pas, et le cache des largeurs ignorait `--content`. Après correction : 480 combinaisons mesurées, 0 débordement, 0 écart de colonnes. La garde est elle-même éprouvée sur une copie jetable : `min-width: 900px` sur `.home-share-panel` en Vitrine fait refuser les cinq crans, avec l'élément et la mesure exacte (588,09 px à 75 %).
+
+**Preuves dans le dépôt :**
+
+- `outils/cadrages.py`
+- `outils/mesurer-cadrages.cjs`
+- `outils/test_cadrages.py`
+- `docs/rd/cadrages.toml`
+- `.github/workflows/verification.yml`
+- `docs/rd/inventaire-controles.md`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/cadrages.py --releve-json /tmp/plan.json && node outils/mesurer-cadrages.cjs /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --controler /tmp/plan.json /tmp/rapport.json && python3 outils/test_cadrages.py`
+
+**Limite — ce que cela ne prouve pas.** Le contrôle mesure le débordement horizontal et le nombre de colonnes : il ne dit rien de la hauteur, des chevauchements verticaux, du contraste ni de la lisibilité d'une carte étroite, et une page sans grille déclarée n'est pas visitée. La mutation qui prouve la garde est faite à la main sur une copie jetable, elle n'est pas automatisée. Coût mesuré : 5 min 02 pour 480 combinaisons, ce qui a fait relever le plafond du job graphismes de 20 à 30 minutes.
+
+**Suite.** Étendre le contrôle à la hauteur et aux chevauchements verticaux, puis automatiser la mutation qui prouve la garde.
+
+Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
 
 ### `grilles-chaine-des-ancetres` — La grille n'occupe pas le conteneur : la chaîne des ancêtres, et le relevé devenu contrôle
 
