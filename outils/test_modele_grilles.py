@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Éprouve le modèle des grilles : soixante-quatorze cas, dont deux sources illisibles.
+"""Éprouve le modèle des grilles : soixante-seize cas, dont deux sources illisibles.
 
 `outils/modele-grilles.py` ne vaut que s'il refuse. Ce banc casse une chose à la
 fois dans une copie jetable (`outils/banc_mutations.py` : liens symboliques,
@@ -18,7 +18,7 @@ Et deux sources illisibles, qui doivent sortir en code 2 : une feuille absente,
 un registre absent. Un contrôle qui n'a pas pu mesurer n'a pas le droit de dire
 que tout va bien.
 
-Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces soixante-quatorze
+Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces soixante-seize
 situations, pas qu'il couvre toutes les façons de perdre une grille dynamique.
 Un `@supports` qui réécrirait les colonnes, ou un style en ligne, lui échappent.
 
@@ -1219,6 +1219,46 @@ class TestModeleGrilles(unittest.TestCase):
             entree["colonnes"],
             f"{entree['colonnes']} colonnes ne tiennent pas avec {propose}px dans {place:.1f}px",
         )
+
+    def test_la_pire_carte_se_mesure_dans_la_place_reelle(self) -> None:
+        """Une carte annoncée dans le conteneur est une carte qui n'existe pas.
+
+        `.ai-fraud-steps` ne reçoit jamais plus de 1 087,6 px : sa pire carte,
+        calculée dans la place réelle, est **plus étroite** que celle que le
+        conteneur donnerait. Le rapport de `--regle` ne doit pas mélanger les
+        deux places, sinon il compare deux dessins différents.
+        """
+        feuille = (RACINE / FEUILLE).read_text(encoding="utf-8")
+        grilles = self.modele.lire_grilles(feuille)
+        registre = self.modele.lire_registre(RACINE)
+        capacites = self.modele.lire_capacites(RACINE, [".ai-fraud-steps"])
+        self.modele.appliquer_capacites(grilles, capacites)
+        grille = grilles[".ai-fraud-steps"]
+        pages = self.modele.pages_des_grilles(RACINE, [".ai-fraud-steps"])
+        grille.chaine = self.modele.chaine_d_ancetres(RACINE, pages[".ai-fraud-steps"], grille.selecteur)
+        minimum = next(e["minimum"] for e in registre["grille"] if e["selecteur"] == ".ai-fraud-steps")
+        reelle = self.modele.carte_minimale(grille, minimum)
+        conteneur = min(
+            (
+                self.modele.conteneur(largeur)
+                - (self.modele.auto_fit(minimum, grille.gap, largeur) - 1) * grille.gap
+            )
+            / self.modele.auto_fit(minimum, grille.gap, largeur)
+            for largeur in self.modele.LARGEURS
+        )
+        self.assertLess(reelle, conteneur, "la place réelle n'est pas plus étroite que le conteneur")
+        self.assertGreater(reelle, 0)
+
+    def test_aucun_plancher_de_lecture_n_est_declare_sans_etre_mesure(self) -> None:
+        """`CARTE_MINIMALE = 220` n'était lu nulle part et la feuille le contredit.
+
+        À 240 px de fenêtre, la carte unique de chaque grille vaut 218,4 px : le
+        seuil qu'il prétendait défendre était déjà franchi partout. Un chiffre
+        rond qui ne sert à rien et que la mesure contredit est un chiffre inventé.
+        """
+        self.assertFalse(hasattr(self.modele, "CARTE_MINIMALE"))
+        plus_etroite = self.modele.conteneur(self.modele.LARGEURS[0])
+        self.assertLess(plus_etroite, 220, "la carte la plus étroite n'est plus sous 220 px")
 
     def test_la_comparaison_montre_ce_que_la_proposition_change(self) -> None:
         """Une décision de dessin se prend sur ce que la page montre, pas sur des pixels de piste.

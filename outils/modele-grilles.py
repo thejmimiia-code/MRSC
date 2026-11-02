@@ -188,9 +188,13 @@ def gouttiere() -> Gouttiere:
         )
     return GOUTTIERE
 
-#: Largeur de carte en dessous de laquelle une grille tasse son contenu.
-CARTE_MINIMALE = 220
-
+#: Aucun plancher de lisibilité n'est déclaré ici : `CARTE_MINIMALE = 220` a
+#: existé jusqu'au 2 novembre 2026 et **n'était lu nulle part**. Mesuré, il était
+#: faux pour les vingt-deux grilles : à 240 px de fenêtre, la carte unique de
+#: chaque grille vaut 218,4 px, sous le seuil qu'il prétendait défendre. Un
+#: chiffre rond qui ne sert à rien et que la feuille contredit est un chiffre
+#: inventé ; celui dont le modèle a besoin — la carte la plus étroite réellement
+#: affichée — se calcule (`carte_minimale`).
 #: Planchers candidats pour `minmax(min(Npx, 100%), 1fr)`, par pas de 10 px.
 CANDIDATS = list(range(180, 481, 10))
 
@@ -1379,13 +1383,19 @@ def meilleur_minimum(grille: Grille) -> tuple[int, int, int, list[tuple[int, int
 
 
 def carte_minimale(grille: Grille, minimum: int) -> float:
-    """Largeur de carte la plus faible sur le balayage, pour la nouvelle règle."""
+    """Largeur de carte la plus faible sur le balayage, dans la place **réelle**.
+
+    Ce chiffre était calculé dans le conteneur, comme les minima : sur
+    `.learning-code-grid`, il annonçait une carte plus large que la place que la
+    grille reçoit. Un nombre faux dans un rapport coûte plus cher qu'un nombre
+    absent — il se recopie.
+    """
     valeurs = []
     for largeur in LARGEURS:
-        colonnes = auto_fit_grille(grille, minimum, largeur)
+        colonnes = colonnes_avec(grille, minimum, largeur)
         gap = ecart_a(grille, largeur)
         gap = grille.gap if gap is None else gap
-        valeurs.append((conteneur(largeur) - (colonnes - 1) * gap) / colonnes)
+        valeurs.append((conteneur_de(grille, largeur) - (colonnes - 1) * gap) / colonnes)
     return min(valeurs)
 
 
@@ -3801,8 +3811,14 @@ def principal(arguments: list[str] | None = None) -> int:
                 print(f"{selecteur:32} {k} col. — aucune piste ne tient")
                 continue
             mesurees += 1
+            # Les deux colonnes du rapport se lisent dans la **même** place : une
+            # carte « avant » calculée dans le conteneur et une carte « après »
+            # calculée dans la place réelle compareraient deux dessins différents.
             avant = min(
-                (conteneur(largeur) - (colonnes_anciennes(grille, largeur) - 1) * (ecart_a(grille, largeur) or grille.gap))
+                (
+                    conteneur_de(grille, largeur)
+                    - (colonnes_anciennes(grille, largeur) - 1) * (ecart_a(grille, largeur) or grille.gap)
+                )
                 / colonnes_anciennes(grille, largeur)
                 for largeur in LARGEURS
             )

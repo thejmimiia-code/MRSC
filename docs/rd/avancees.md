@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 71 |
+| Avancées consignées | 72 |
 | Période couverte | du 2026-10-20 au 2026-11-02 |
-| Contrôles exécutables cités | 76 |
+| Contrôles exécutables cités | 77 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1691,6 +1691,28 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-
 **Limite — ce que cela ne prouve pas.** La règle adoptée n'a pas bougé : `minimum_recommande` raisonne toujours dans le conteneur, et les sept propositions ne sont ni mesurées dans un navigateur ni approuvées. Un fait gênant est écrit plutôt que contourné : à 350 px, la paire de `.eva-listes-grid`, `.simulateur-duo` et `.ai-balance-grid` tient encore à 760 px de fenêtre (719,2 px dans 728) là où leur palier supprimé n'en montrait qu'une — la proposition de 360 px replace ce repli sans le décider. `.ai-path-steps` n'a aucune proposition : cinq étapes dans 669,6 px demandent 127 px par étape, sous le plancher de 180 px du modèle.
 
 **Suite.** Adopter, refuser ou borner chacune des sept propositions dans un même lot, en mesurant le dessin avant et après dans un navigateur, en commençant par `.learning-code-grid` et `.ai-fraud-steps`, où l'adoption ferait tomber deux des trois dérogations.
+
+Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
+
+### `grilles-plancher-de-lecture-retire` — Un plancher de lisibilité que personne ne lisait, et une carte annoncée dans un conteneur que la grille n'a pas
+
+*Consignée le 2026-11-02.*
+
+**Constat.** `CARTE_MINIMALE = 220` déclarait, en commentaire, la largeur « en dessous de laquelle une grille tasse son contenu ». Le dépôt ne la lisait nulle part. Mesurée, elle est fausse pour les vingt-deux grilles : à 240 px de fenêtre, la carte unique de chaque grille vaut 218,4 px, sous le seuil qu'elle prétendait défendre. Et `carte_minimale`, qui calcule la carte la plus étroite réellement affichée, la calculait dans le conteneur : un rapport faux dès qu'une grille vit dans une colonne.
+
+**Ce que cela change.** La constante est retirée, avec la raison écrite à sa place : un chiffre rond qui ne sert à rien et que la feuille contredit est un chiffre inventé. `carte_minimale` se lit désormais dans la place réelle avec `colonnes_avec`, et le chiffre change de nature : `.ai-fraud-steps` 174,8 px, `.ai-path-steps` 164 px, contre 218,4 px pour les vingt autres grilles — deux grilles de la page IA montrent donc déjà des cartes plus étroites que le plancher imaginaire. Les deux colonnes de `--regle` (« pire carte avant → après ») se lisent dans la même place. Donner la chaîne à `--regle` a été essayé puis écarté : deux régimes mélangés dans un même rapport produisent `.ai-path-steps : 2 col. — aucune piste ne tient`, un chiffre qui n'appartient à aucun ; `--regle` reste la règle du conteneur, `--comparer` porte la place réelle.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --regle && python3 outils/modele-grilles.py --verifier && python3 outils/test_modele_grilles.py`
+
+**Limite — ce que cela ne prouve pas.** La carte la plus étroite reste un calcul de modèle : elle ne dit rien du texte qui déborde ni de la hauteur d'une carte, et elle ne couvre que la présentation par défaut. Aucun seuil de lisibilité n'est déclaré à la place de la constante retirée — le modèle dit ce qu'il mesure, il ne fixe pas une limite de confort.
+
+**Suite.** Prendre la carte la plus étroite comme critère des décisions ouvertes sur les tracés, puis trancher les sept propositions avec les bandes mesurées.
 
 Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
 
