@@ -484,11 +484,17 @@ jobs:
       # — rangées d'un `flex-wrap`, pistes non nulles d'une grille — et le
       # rapporteur dit où les deux divergent.
       #
-      # Cette étape est un **relevé**, pas encore un contrôle : elle publie les
-      # divergences sans faire échouer le job, et le dit en première ligne. Elle
-      # échoue en revanche si une mesure n'a pas eu lieu (code 2 sans navigateur,
-      # page ou sélecteur introuvable) : un relevé incomplet ne vaut pas un
-      # relevé vide, il vaut un échec.
+      # Cette étape est un **contrôle** depuis que les 35 divergences du 1er
+      # novembre 2026 sont expliquées : quatre grilles n'occupaient pas le
+      # conteneur mais ce que leurs ancêtres leur laissaient — un parent `flex`
+      # qui partage sa largeur, un parent `grid` à colonne de 300 px, le
+      # remplissage et la bordure d'un parent bloc. Modélisées, elles passent.
+      # Ce qui reste est à moins d'un pixel du point de bascule (0,20 à 0,78 px) :
+      # c'est nommé, compté, et sans effet sur le nombre de colonnes d'une largeur
+      # voisine — le contrôle accepte ce qui ne peut pas être décidé, mais refuse
+      # toute divergence franche. Il échoue aussi si une mesure n'a pas eu lieu
+      # (code 2 sans navigateur, page ou sélecteur introuvable) : un contrôle
+      # incomplet ne vaut pas un contrôle vide, il vaut un échec.
       - name: Confronter les colonnes annoncées aux colonnes réelles
         env:
           MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
@@ -518,7 +524,7 @@ jobs:
           set +e
           python3 outils/rapporter-mesure-grilles.py \
             --releve "$RUNNER_TEMP/graphismes/colonnes/releve.json" \
-            --rapport "$RUNNER_TEMP/graphismes/colonnes/rapport.json" \
+            --rapport "$RUNNER_TEMP/graphismes/colonnes/rapport.json" --controler \
             | tee "$RUNNER_TEMP/graphismes/colonnes/comparaison.log"
           comparaison=${PIPESTATUS[0]}
           set -e
@@ -526,8 +532,9 @@ jobs:
           # n'atteint pas : sans annotation, « le relevé a tourné » serait tout
           # ce qu'on saurait, et les nombres mesurés resteraient invisibles. Une
           # annotation se lit par l'API, elle. Les divergences sont donc publiées
-          # en `warning` même quand l'étape réussit — c'est un relevé, pas une
-          # panne — et la ligne de synthèse l'est toujours.
+          # en `warning` même quand l'étape réussit — une divergence au seuil
+          # n'est pas une panne, et la ligne de synthèse l'est toujours. Une
+          # divergence franche, elle, sort en `error` plus bas.
           grep -E '^(RELEVÉ|CONTRÔLE)' "$RUNNER_TEMP/graphismes/colonnes/comparaison.log" \
             | head -n 1 | cut -c1-900 | while IFS= read -r ligne; do
             echo "::warning title=Colonnes des grilles::$ligne"

@@ -20,9 +20,12 @@ Trois choses qu'il refuse de faire passer pour un succès :
   que le modèle présume, la largeur réelle est imprimée à côté : c'est la
   première cause à écarter avant d'accuser la feuille.
 
-Mode `--controler` : une divergence fait sortir en code 1. Sans cette option,
-le script reste un relevé — il publie, il ne juge pas encore, et il le dit en
-première ligne de sa sortie.
+Mode `--controler` : c'est celui du dépôt depuis le 2 novembre 2026. Une
+divergence **franche** fait sortir en code 1 ; une divergence à moins d'un pixel
+du point de bascule est nommée, comptée et acceptée — elle ne peut pas être
+tranchée, et l'absorber en silence reviendrait à élargir les bases jusqu'à ce que
+le hasard soit d'accord. Sans cette option, le script reste un relevé : il
+publie, il ne juge pas, et il le dit en première ligne de sa sortie.
 
 Usage :
     python3 outils/rapporter-mesure-grilles.py --releve releve.json --rapport rapport.json
