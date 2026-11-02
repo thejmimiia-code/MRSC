@@ -1523,6 +1523,129 @@ def minimum_pour_k(k: int, gap: float, contenu: float = CONTENU_DEFAUT) -> int |
     return max(valides) if valides else None
 
 
+def minimum_pour_place(k: int, gap: float, place: float, items: int = 0) -> int | None:
+    """Le plus large minimum qui garde `k` colonnes dans **cette** place-là.
+
+    C'est `minimum_pour_k` avec la place en argument : la même question, posée
+    sur la largeur que la grille reçoit vraiment. Une grille posée dans une
+    colonne de 300 px ne peut pas se voir répondre 350 px au nom d'un conteneur
+    qu'elle n'occupe jamais.
+    """
+    if items and items < k:
+        return None
+    valides = [n for n in CANDIDATS if auto_fit_place(n, gap, place, items) == k]
+    return max(valides) if valides else None
+
+
+def minimum_au_seuil(k: int, gap: float, place: float) -> int | None:
+    """Le plus petit minimum qui renonce à `k` colonnes dans cette place-là."""
+    candidats = [n for n in CANDIDATS if k * n + (k - 1) * gap > place]
+    return min(candidats) if candidats else None
+
+
+def minimum_propose(grille: Grille, entree: dict, capacite: dict | None = None) -> int | None:
+    """Ce que la règle donnerait si elle raisonnait dans la place **réelle**.
+
+    Deux choses ont changé le 2 novembre 2026, et elles vont ensemble :
+
+    - **l'intention vient du registre**, pas d'une mesure de la feuille. Une
+      grille convertie en `auto-fit` n'annonce plus son nombre de colonnes :
+      `colonnes_de_conception` le déduisait de son minimum actuel, et le modèle
+      se mettait à croire que `.learning-code-grid` était une grille à une
+      colonne parce que sa paire ne tenait nulle part. Le dessin déclaré ne se
+      relit pas dans le dessin raté ;
+    - **la place vient du dessin**, pas du conteneur. `.learning-code-grid`
+      n'occupe que 812 px au plus large, `.ai-fraud-steps` 1 087,6 px : leur
+      demander de tenir dans 1 160 px justifiait des minima qui ne tiennent
+      nulle part, et trois dérogations « piste jamais atteinte » sont nées de là.
+
+    Dans `minimum_pour_k`, on suppose le conteneur ; dans
+    `minimum_recommande`, on suppose la cascade d'avant. Il y manquait une
+    troisième mesure : **où cette grille est-elle, réellement ?** Cette fonction
+    ne l'applique pas — elle la nomme. Le minimum adopté reste celui que le
+    registre porte, et un écart doit être écrit (`motif_ecart`).
+    """
+    if grille.asymetrique:
+        return None
+    k = int(entree.get("colonnes") or 0)
+    if not k:
+        return None
+    items = sorted(int(n) for n in (capacite or {}).get("items") or [])
+    place = place_maximale(grille)
+    seuil = entree.get("seuil_une_colonne")
+    if k >= 3 or seuil is None:
+        return minimum_pour_place(k, grille.gap, place, max(items) if items else 0)
+    repli = minimum_au_seuil(2, grille.gap, conteneur_de(grille, int(seuil)))
+    if not items or max(items) <= k:
+        return repli
+    cap = minimum_au_seuil(3, grille.gap, place)
+    if repli is None or cap is None:
+        return repli or cap
+    return max(repli, cap)
+
+
+def ecarts_de_place(
+    grilles: dict[str, Grille], registre: dict, capacites: dict[str, dict] | None = None,
+    racine: Path | None = None,
+) -> list[str]:
+    """Nomme chaque grille dont la place réelle dément le minimum adopté.
+
+    Le contrôle ne tranche pas : il refuse le silence. Un écart entre le minimum
+    que la règle proposerait et celui que le registre porte est une décision de
+    dessin — elle appartient à une personne — mais elle doit être **écrite**.
+    Sans ce refus, sept grilles portaient le 2 novembre 2026 un minimum calculé
+    dans une largeur qu'elles n'occupent pas, et rien ne le disait.
+
+    La dérogation est re-vérifiée dans les deux sens : un motif qui ne recouvre
+    plus aucun écart est refusé, sinon il deviendrait une exemption permanente.
+    """
+    capacites = capacites or {}
+    erreurs: list[str] = []
+    pages = pages_des_grilles(racine, list(grilles)) if racine is not None else {}
+    for entree in registre.get("grille", []):
+        selecteur = entree.get("selecteur")
+        if not selecteur or selecteur not in grilles:
+            continue
+        grille = grilles[selecteur]
+        adopted = entree.get("minimum")
+        if not isinstance(adopted, int):
+            continue
+        ancienne = grille.chaine
+        if racine is not None and pages.get(selecteur):
+            grille.chaine = chaine_d_ancetres(racine, pages[selecteur], selecteur)
+        try:
+            propose = minimum_propose(grille, entree, capacites.get(selecteur))
+            place = place_maximale(grille)
+        finally:
+            grille.chaine = ancienne
+        motif = str(entree.get("motif_ecart") or "").strip()
+        if propose == adopted:
+            if motif:
+                erreurs.append(
+                    f"{selecteur} : `motif_ecart` n'a plus d'objet — la règle, dans la place "
+                    f"réelle ({place:.1f}px), propose de nouveau les {adopted}px adoptés"
+                )
+            continue
+        if not motif:
+            proposition = (
+                f"proposerait {propose}px" if propose is not None
+                else f"ne trouve aucune piste qui donne {int(entree.get('colonnes') or 0)} "
+                f"colonnes au-dessus de {CANDIDATS[0]}px"
+            )
+            erreurs.append(
+                f"{selecteur} : dans la place réelle ({place:.1f}px), la règle {proposition} ; "
+                f"le registre adopte {adopted}px — écrire `motif_ecart` (40 caractères au moins) "
+                "ou adopter la proposition"
+            )
+            continue
+        if len(motif) < 40:
+            erreurs.append(
+                f"{selecteur} : `motif_ecart` fait {len(motif)} caractères — un écart de minimum "
+                "sans raison écrite est un chiffre magique"
+            )
+    return erreurs
+
+
 def normaliser(valeur: str) -> str:
     """Compare deux écritures de la même valeur (`minmax(0, 1fr)` = `minmax(0,1fr)`)."""
     return re.sub(r"\s+", "", valeur).replace(",", ",")
@@ -3074,6 +3197,7 @@ def verifier(
     erreurs: list[str] = verifier_pistes_en_px(grilles, racine)
     capacites = capacites or {}
     erreurs.extend(pistes_jamais_atteintes(grilles, registre, racine))
+    erreurs.extend(ecarts_de_place(grilles, registre, capacites, racine))
     entrees = registre.get("grille", [])
     if not entrees:
         erreurs.append(f"{REGISTRE} ne déclare aucune grille convertie — le registre ne prouve rien")
@@ -3529,6 +3653,19 @@ def principal(arguments: list[str] | None = None) -> int:
             print(
                 f"  {len(jamais)} dessin(s) déclaré(s) inatteignable(s), avec sa mesure et sa "
                 "décision ouverte : " + ", ".join(sorted(jamais))
+            )
+        # Même raison pour les minima : une grille dont la place réelle ne redonne
+        # pas le minimum adopté porte une décision ouverte. Elle est nommée à
+        # chaque passage réussi, sinon elle disparaîtrait du regard.
+        ecartes = sorted(
+            entree.get("selecteur")
+            for entree in registre.get("grille", [])
+            if entree.get("motif_ecart")
+        )
+        if ecartes:
+            print(
+                f"  {len(ecartes)} minimum(s) adopté(s) que la place réelle ne redonne pas, avec "
+                "son motif écrit : " + ", ".join(ecartes)
             )
         return 0
 

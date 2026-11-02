@@ -31,6 +31,7 @@ digraph memoire {
   "avancee:gouttiere-lue-pas-supposee" [shape=note, label="avancee:gouttiere-lue-pas-supposee"];
   "avancee:grilles-chaine-des-ancetres" [shape=note, label="avancee:grilles-chaine-des-ancetres"];
   "avancee:grilles-dessins-jamais-atteints" [shape=note, label="avancee:grilles-dessins-jamais-atteints"];
+  "avancee:grilles-place-reelle-proposee" [shape=note, label="avancee:grilles-place-reelle-proposee"];
   "avancee:indice-de-confrontation-non-certifiant" [shape=note, label="avancee:indice-de-confrontation-non-certifiant"];
   "avancee:inventaire-des-controles-tenu-par-un-garde" [shape=note, label="avancee:inventaire-des-controles-tenu-par-un-garde"];
   "avancee:la-file-de-relecture-prouve-son-tri" [shape=note, label="avancee:la-file-de-relecture-prouve-son-tri"];
@@ -300,6 +301,10 @@ digraph memoire {
   "avancee:grilles-dessins-jamais-atteints" -> "docs/rd/grilles-dynamiques.toml" [label="prouvée par"];
   "avancee:grilles-dessins-jamais-atteints" -> "outils/modele-grilles.py" [label="prouvée par"];
   "avancee:grilles-dessins-jamais-atteints" -> "outils/test_modele_grilles.py" [label="prouvée par"];
+  "avancee:grilles-place-reelle-proposee" -> "docs/rd/grilles-dynamiques.toml" [label="prouvée par"];
+  "avancee:grilles-place-reelle-proposee" -> "docs/rd/journal.md" [label="prouvée par"];
+  "avancee:grilles-place-reelle-proposee" -> "outils/modele-grilles.py" [label="prouvée par"];
+  "avancee:grilles-place-reelle-proposee" -> "outils/test_modele_grilles.py" [label="prouvée par"];
   "avancee:indice-de-confrontation-non-certifiant" -> "docs/rd/confrontations-sources.md" [label="prouvée par"];
   "avancee:indice-de-confrontation-non-certifiant" -> "docs/rd/confrontations-sources.toml" [label="prouvée par"];
   "avancee:indice-de-confrontation-non-certifiant" -> "outils/confronter-sources.py" [label="prouvée par"];
@@ -512,6 +517,7 @@ digraph memoire {
   "branche:co-conception-et-essais" -> "phase:apprentissages-et-relecture" [label="servie par"];
   "branche:coherence-textes-publics" -> "avancee:grilles-chaine-des-ancetres" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-dessins-jamais-atteints" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:grilles-place-reelle-proposee" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:phrase-publique-recalculee" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:plan-eva-qui-se-laisse-contredire" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-titre-tronque-n-est-pas-une-faute-de-gout" [label="a produit"];
@@ -581,6 +587,7 @@ digraph memoire {
   "branche:optimisation-du-site" -> "avancee:gouttiere-lue-pas-supposee" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:grilles-chaine-des-ancetres" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:grilles-dessins-jamais-atteints" [label="a produit"];
+  "branche:optimisation-du-site" -> "avancee:grilles-place-reelle-proposee" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:inventaire-des-controles-tenu-par-un-garde" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:la-hauteur-n-aurait-jamais-du-entrer-dans-la-requete" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:la-mesure-se-confrontait-a-sa-propre-mutation" [label="a produit"];
@@ -620,6 +627,7 @@ digraph memoire {
   "branche:optimisation-du-site" -> "phase:economie-de-contexte" [label="servie par"];
   "branche:poids-et-sobriete-numerique" -> "avancee:grilles-chaine-des-ancetres" [label="a produit"];
   "branche:poids-et-sobriete-numerique" -> "avancee:grilles-dessins-jamais-atteints" [label="a produit"];
+  "branche:poids-et-sobriete-numerique" -> "avancee:grilles-place-reelle-proposee" [label="a produit"];
   "branche:poids-et-sobriete-numerique" -> "avancee:un-banc-a-dix-minutes-se-reduit-en-lecrivant" [label="a produit"];
   "branche:poids-et-sobriete-numerique" -> "avancee:un-budget-qui-se-prouve-en-le-baissant" [label="a produit"];
   "branche:poids-et-sobriete-numerique" -> "avancee:un-manifeste-verifie-sa-forme-ne-verifie-pas-son-contenu" [label="a produit"];

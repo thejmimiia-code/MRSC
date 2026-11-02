@@ -7,7 +7,12 @@
 # 1. sa règle de base écrit `repeat(auto-fit, minmax(min(Npx, 100%), 1fr))` ;
 # 2. son `N` est **celui que la règle de calcul donne** pour son nombre de
 #    colonnes de conception — pas un chiffre choisi à la main ;
-# 3. aucun bloc `@media` de largeur ne lui réimpose un nombre de colonnes.
+# 3. aucun bloc `@media` de largeur ne lui réimpose un nombre de colonnes ;
+# 4. si la place qu'elle occupe **réellement** ne redonne pas son minimum, le
+#    registre écrit pourquoi (`motif_ecart`, quarante caractères au moins). Le
+#    2 novembre 2026, sept grilles sur vingt-deux étaient dans ce cas : la règle
+#    de calcul raisonnait dans le conteneur, et `.learning-code-grid` ne reçoit
+#    jamais plus de 812 px. Le modèle ne tranche pas ce dessin — il le nomme.
 #
 # La règle de calcul a deux branches, et c'est une différence de question :
 #
@@ -92,6 +97,7 @@ minimum = 470
 items = [2]
 seuil_une_colonne = 1000
 raison = "Deux colonnes côte à côte : le palier de 1 000 px n'était pas un choix de largeur de carte mais le moment où l'on renonce à la paire. Il est recopié tel quel, et le calcul s'arrête juste avant."
+motif_ecart = "Décision ouverte, gardée telle quelle : la règle, dans les 812 px que cette grille occupe réellement, proposerait 300 px, ce qui ferait revenir la paire juste au-dessus de 1 000 px de fenêtre. Adopter 300 px rétrécit les deux blocs de code ; garder 470 px laisse le dessin déclaré hors d'atteinte. Aucune des deux n'est adoptée ici."
 piste_jamais_atteinte = true
 motif = "Deux pistes de 470 px en demandent 956 ; la place la plus large que cette grille occupe vaut 812 px, parce que la page est en deux colonnes avec un sommaire de 300 px (mesuré le 2 novembre 2026). Les deux exemples ne sont donc jamais côte à côte, alors que le registre justifiait ce minimum par une paire. Décision ouverte, et elle revient à une personne : minimum à 390 px (paire au-delà de 1 184 px de fenêtre), à 298 px (paire dès 1 000 px, comme l'ancien palier), ou une seule colonne assumée. La règle de recommandation raisonne encore dans le conteneur : ces trois choix demandent de la reprendre, pas de changer un chiffre."
 
@@ -115,6 +121,7 @@ colonnes = 4
 minimum = 270
 items = [4]
 raison = "Étapes numérotées des réflexes : quatre colonnes au plus, jamais de colonne de moins de 270 px tant que le conteneur en contient une."
+motif_ecart = "Décision ouverte, gardée telle quelle : la règle, dans les 1 087,6 px que cette grille occupe, proposerait 260 px et les quatre étapes tiendraient sur une ligne. Adopter 260 px rétrécit chaque étape de dix pixels ; garder 270 px laisse la quatrième colonne hors d'atteinte. Personne n'a tranché."
 piste_jamais_atteinte = true
 motif = "Quatre pistes de 270 px en demandent 1 120,8 ; la place la plus large que cette liste occupe vaut 1 087,6 px, parce que le panneau qui la porte lui retire son remplissage et sa bordure : il manque 33 px, et la quatrième carte ne tient jamais. Abaisser le minimum à 260 px rendrait la quatrième colonne au maximum de largeur, mais la règle de recommandation, qui raisonne encore dans le conteneur, demanderait alors 370 px : le changement suppose de reprendre la règle. Décision ouverte."
 
@@ -154,6 +161,7 @@ minimum = 350
 items = [2]
 seuil_une_colonne = 760
 raison = "Deux listes de la page EVA : `auto-fit` ne remplit pas de piste vide, une troisième colonne ne peut pas apparaître — le minimum reste celui du seuil de repli, et l'écart avec la cascade supprimée est nul."
+motif_ecart = "La règle, dans les 728 px reçus au seuil de 760, proposerait 360 px : à 350 px la paire tient encore à 760 px, là où le palier supprimé n'en montrait qu'une. Relever à 360 px déplacerait ce repli de dix pixels ; ce déplacement n'est pas adopté sans mesure dans la page."
 
 [[grille]]
 selecteur = ".knowledge-compass"
@@ -170,6 +178,7 @@ minimum = 380
 items = [6]
 seuil_une_colonne = 760
 raison = "Liste de définitions du simulateur, trois paires `dt`/`dd` : une troisième colonne couperait les paires (`dt dd dt`), ce qui n'a pas de sens."
+motif_ecart = "La règle, dans les 952 px que cette grille occupe, proposerait 360 px. À 380 px les deux colonnes tiennent au conteneur maximal ; la proposition ne change pas ce dessin, elle avance le moment du repli. Ni l'un ni l'autre n'est adopté sans mesure dans la page servie."
 
 [[grille]]
 selecteur = ".simulateur-duo"
@@ -178,6 +187,7 @@ minimum = 350
 items = [2]
 seuil_une_colonne = 760
 raison = "Deux panneaux « ce que fait / ce que ne fait pas » le simulateur : deux éléments, aucune troisième colonne possible."
+motif_ecart = "La règle, dans les 728 px reçus au seuil de 760, proposerait 360 px : à 350 px la paire tient encore à 760 px, là où le palier supprimé n'en montrait qu'une. Relever à 360 px déplacerait ce repli ; ce déplacement n'est pas adopté sans mesure dans la page."
 
 [[grille]]
 selecteur = ".simulateur-passeport"
@@ -194,6 +204,7 @@ minimum = 350
 items = [2]
 seuil_une_colonne = 760
 raison = "Deux colonnes « ce que l'IA fait / ne fait pas » : deux éléments, aucune troisième colonne possible."
+motif_ecart = "La règle, dans les 728 px reçus au seuil de 760, proposerait 360 px : à 350 px la paire tient encore à 760 px, là où le palier supprimé n'en montrait qu'une. Relever à 360 px déplacerait ce repli ; ce déplacement n'est pas adopté sans mesure dans la page."
 
 [[grille]]
 selecteur = ".ai-fraud-lesson-list"
@@ -213,6 +224,7 @@ colonnes = 5
 minimum = 220
 items = [5]
 raison = "Cinq étapes du parcours de la page IA : le plus large minimum qui garde cinq colonnes au conteneur maximal. Sous 520 px, l'ancienne cascade repliait à trois colonnes — un chiffre choisi, qui laissait des cartes de 59 px à 240 px de fenêtre ; la largeur de piste les remplace par un repli progressif."
+motif_ecart = "Le modèle n'a aucune piste à proposer : cinq étapes dans 669,6 px réclament 127 px chacune, sous le plancher de 180 px en dessous duquel il ne descend pas. Garder 220 px laisse les cinq étapes sur une seule colonne. Deux issues hors de portée du modèle — une colonne assumée, ou un plancher abaissé — et une personne pour choisir."
 piste_jamais_atteinte = true
 motif = "Cinq pistes de 220 px en demandent 1 132 ; la place la plus large que cette liste occupe vaut 669,6 px, parce que son panneau est en `flex` à deux enfants et ne lui laisse que la moitié de son contenu. Le commentaire de la feuille annonçait « cinq étapes au conteneur maximal » : ce dessin n'existe pas, et la liste montre au plus deux colonnes. Décision ouverte : abaisser le minimum à 127 px, ou écrire une seule colonne et corriger le commentaire. Le modèle ne tranche pas un dessin."
 

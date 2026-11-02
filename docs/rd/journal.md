@@ -2,6 +2,31 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-11-02 — Sept minima calculés dans une largeur que la grille n'occupe pas
+
+- **Initiative :** `optimisation-du-site`.
+- **La question du jour, et pourquoi elle n'était pas réglée :** l'entrée précédente a nommé trois dessins inatteignables et écrit noir sur blanc qu'elle n'y touchait pas. La règle de calcul, elle, n'a pas bougé : `minimum_recommande` et `minimum_pour_k` raisonnent toujours dans le conteneur entier. Ce lot ne réécrit toujours aucun minimum — il **mesure** ce que la règle dirait dans la place réelle, et refuse le silence.
+- **Deux tentatives, et la première a échoué pour une raison instructive :** attacher la chaîne des ancêtres à toutes les grilles avant `verifier()` a produit **six** écarts, dont `.ai-fraud-steps` 270 px contre 370 px proposés. Ce n'était ni une erreur de la chaîne ni une erreur du contrôle : `colonnes_de_conception` **déduisait** le nombre de colonnes du minimum en vigueur. Or dans la place réelle la paire de `.learning-code-grid` ne tient pas, donc le modèle concluait « une colonne », et la règle répondait **400 px** pour une grille à une colonne. Le modèle relisait le dessin déclaré dans le dessin raté, puis proposait de ratifier l'échec. C'est exactement ce que la règle « le modèle ne tranche pas un dessin » interdit de faire par inadvertance.
+- **Les deux séparations qui font ce lot :** l'**intention** vient du registre (`colonnes`, `seuil_une_colonne`) et la **place** vient de la chaîne d'ancêtres. `minimum_propose` pose alors la troisième question qui manquait : `minimum_pour_k` suppose le conteneur, `minimum_recommande` suppose la cascade d'avant, celle-ci demande **où cette grille est**. `minimum_pour_place` et `minimum_au_seuil` sont les deux primitives qui répondent dans une place donnée.
+- **Le tableau, mesuré sur les vingt-deux grilles :** quinze sont d'accord avec la règle actuelle. Sept portent un minimum calculé dans une largeur qu'elles ne reçoivent pas :
+
+  | grille | adopté | proposé | place réelle | ce que la proposition change |
+  | --- | --- | --- | --- | --- |
+  | `.learning-code-grid` | 470 px | **300 px** | 812 px | la paire revient juste au-dessus de 1 000 px de fenêtre |
+  | `.ai-fraud-steps` | 270 px | **260 px** | 1 087,6 px | les quatre étapes tiennent sur une ligne |
+  | `.ai-path-steps` | 220 px | **aucune** | 669,6 px | 5 colonnes réclament 127 px, sous le plancher de 180 px |
+  | `.simulateur-chiffres` | 380 px | 360 px | 952 px | le repli avance, le dessin au conteneur maximal ne change pas |
+  | `.eva-listes-grid` | 350 px | 360 px | 728 px au seuil de 760 | le repli de la paire recule de dix pixels |
+  | `.simulateur-duo` | 350 px | 360 px | 728 px au seuil de 760 | idem |
+  | `.ai-balance-grid` | 350 px | 360 px | 728 px au seuil de 760 | idem |
+
+- **Ce que le tableau dit des trois dérogations existantes :** `.learning-code-grid` et `.ai-fraud-steps` sont précisément les deux grilles dont le minimum n'a jamais été recalculé dans la place réelle ; la proposition les **répare** (300 px et 260 px) au lieu de déroger. Elles restent en dérogation tant que personne ne les adopte. `.ai-path-steps`, lui, n'a aucune proposition possible : cinq étapes dans 669,6 px demandent 127 px par étape, et le modèle ne descend pas sous 180 px de piste — deux issues sont hors de sa portée (une colonne assumée, un plancher abaissé), et il le dit.
+- **Un fait gênant, écrit plutôt que contourné :** pour les trois grilles à 350 px, la paire **tient encore** à 760 px de fenêtre (2 × 350 + 19,2 = 719,2 px dans 728 px), là où leur palier supprimé n'en montrait qu'une. La conversion à `auto-fit` a donc déjà déplacé le repli de ces trois grilles ; la proposition de 360 px le replace. Ce n'est pas une régression, c'est un déplacement — et il n'est pas adopté davantage que les autres.
+- **Le contrôle, et ce qu'il refuse :** `ecarts_de_place` nomme chaque écart avec la place, la proposition et le minimum adopté ; il exige un `motif_ecart` de **40 caractères au moins**, et le re-vérifie **dans les deux sens** — un motif qui ne recouvre plus aucun écart est refusé (« n'a plus d'objet »), sinon il deviendrait une exemption permanente. Les sept motifs sont écrits dans `docs/rd/grilles-dynamiques.toml`, chacun disant la proposition, l'effet du changement et le fait que **rien n'est adopté**. Le passage réussi les nomme : un contrôle vert ne doit pas rendre invisibles les décisions qui restent ouvertes.
+- **Ce qui n'est pas fait, et qui est le lot suivant :** aucune valeur de `assets/css/site.css` n'a changé d'un pixel. Adopter les sept propositions demande une mesure **avant et après** dans un navigateur, largeur par largeur, et c'est une décision de dessin qui appartient à une personne.
+- **Contrôles exécutés :** `modele-grilles.py --verifier` (22 grilles, **3 dessins inatteignables**, **7 minima écartés et motivés**, code 0) · `test_modele_grilles.py` (**72 cas**, dont cinq neufs : la place réelle ne demande pas le conteneur, la proposition tient dans la place qu'elle mesure, écart sans motif refusé, motif trop court refusé, motif devenu sans objet refusé) · `py_compile` · `git diff --check`.
+- **Prochaine action :** adopter, refuser ou borner chacune des sept propositions dans un même lot, en mesurant le dessin avant et après dans un navigateur — et commencer par `.learning-code-grid` et `.ai-fraud-steps`, où l'adoption ferait tomber deux des trois dérogations.
+
 ## 2026-11-02 — Trois dessins que le registre justifiait et que la page n'a jamais montrés
 
 - **Initiative :** `optimisation-du-site`.
