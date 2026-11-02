@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Éprouve le modèle des grilles : soixante-sept cas, dont deux sources illisibles.
+"""Éprouve le modèle des grilles : soixante-douze cas, dont deux sources illisibles.
 
 `outils/modele-grilles.py` ne vaut que s'il refuse. Ce banc casse une chose à la
 fois dans une copie jetable (`outils/banc_mutations.py` : liens symboliques,
@@ -18,7 +18,7 @@ Et deux sources illisibles, qui doivent sortir en code 2 : une feuille absente,
 un registre absent. Un contrôle qui n'a pas pu mesurer n'a pas le droit de dire
 que tout va bien.
 
-Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces soixante-sept
+Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces soixante-douze
 situations, pas qu'il couvre toutes les façons de perdre une grille dynamique.
 Un `@supports` qui réécrirait les colonnes, ou un style en ligne, lui échappent.
 
@@ -1175,6 +1175,108 @@ class TestModeleGrilles(unittest.TestCase):
         erreurs = self.modele.pistes_jamais_atteintes({".petit": grille}, registre)
         self.assertEqual(len(erreurs), 1, erreurs)
         self.assertIn("la dérogation n'a plus d'objet", erreurs[0])
+
+    def test_la_place_reelle_ne_demande_pas_le_conteneur(self) -> None:
+        """Quatre étapes dans 1 087,6 px ne reçoivent pas la piste que 1 160 px donneraient.
+
+        `minimum_pour_k` posait la question dans le conteneur : 370 px pour trois
+        colonnes. Dans la place réellement reçue, la même question donne un autre
+        nombre — c'est ce que `.ai-fraud-steps` portait sans que rien ne le dise.
+        """
+        self.assertEqual(self.modele.minimum_pour_place(4, 13.6, 1087.6), 260)
+        self.assertEqual(self.modele.minimum_pour_place(3, 16.0, 1160.0), 370)
+        self.assertEqual(self.modele.minimum_au_seuil(2, 19.2, 728.0), 360)
+        self.assertEqual(self.modele.minimum_au_seuil(2, 19.2, 712.0), 350)
+        # Une grille qui ne reçoit que deux éléments n'en montre pas cinq, quelle
+        # que soit la place : la proposition n'invente pas de colonnes.
+        self.assertIsNone(self.modele.minimum_pour_place(5, 8.0, 669.6, 2))
+
+    def test_la_proposition_dans_la_place_reelle_tient_dans_cette_place(self) -> None:
+        """La proposition se vérifie là où elle est faite : dans la place de la grille.
+
+        Dix grilles sur vingt-deux reçoivent le conteneur ; trois n'en reçoivent
+        qu'une partie. Ce cas lit la page réelle et demande à la proposition de
+        tenir — sans recopier de chiffre, pour qu'un changement de feuille se
+        voie dans le message et non dans un fragment absent.
+        """
+        feuille = (RACINE / FEUILLE).read_text(encoding="utf-8")
+        grilles = self.modele.lire_grilles(feuille)
+        registre = self.modele.lire_registre(RACINE)
+        capacites = self.modele.lire_capacites(
+            RACINE, [e.get("selecteur") or "" for e in registre.get("grille", [])]
+        )
+        self.modele.appliquer_capacites(grilles, capacites)
+        pages = self.modele.pages_des_grilles(RACINE, [".learning-code-grid"])
+        grille = grilles[".learning-code-grid"]
+        grille.chaine = self.modele.chaine_d_ancetres(RACINE, pages[".learning-code-grid"], grille.selecteur)
+        entree = next(e for e in registre["grille"] if e["selecteur"] == grille.selecteur)
+        propose = self.modele.minimum_propose(grille, entree, capacites.get(grille.selecteur))
+        self.assertIsNotNone(propose)
+        self.assertLess(propose, entree["minimum"], "la règle propose le minimum déjà adopté")
+        place = self.modele.place_maximale(grille)
+        self.assertEqual(
+            self.modele.auto_fit_place(propose, grille.gap, place, entree["colonnes"]),
+            entree["colonnes"],
+            f"{entree['colonnes']} colonnes ne tiennent pas avec {propose}px dans {place:.1f}px",
+        )
+
+    def test_un_ecart_de_place_sans_motif_est_refuse(self) -> None:
+        """Un minimum adopté que la place réelle ne redonne pas doit être écrit."""
+        grille = self.modele.Grille(selecteur=".trois", colonnes_base=3, gap=16.0)
+        grille.regles = [
+            self.modele.Regle(
+                [".trois"], "repeat(auto-fit, minmax(min(700px, 100%), 1fr))", None, 700, None, None, 1, 0
+            )
+        ]
+        registre = {"grille": [{"selecteur": ".trois", "colonnes": 3, "minimum": 700}]}
+        erreurs = self.modele.ecarts_de_place({".trois": grille}, registre)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("proposerait 370px", erreurs[0])
+        self.assertIn("adopte 700px", erreurs[0])
+        self.assertIn("motif_ecart", erreurs[0])
+
+        # Le motif écrit fait taire le refus — et il nomme la décision.
+        registre["grille"][0]["motif_ecart"] = (
+            "Le minimum de 700 px est gardé pour une raison de lisibilité en cours d'arbitrage."
+        )
+        self.assertEqual(self.modele.ecarts_de_place({".trois": grille}, registre), [])
+
+    def test_un_motif_d_ecart_trop_court_est_refuse(self) -> None:
+        """Quarante caractères : en dessous, c'est une initiale, pas une raison."""
+        grille = self.modele.Grille(selecteur=".trois", colonnes_base=3, gap=16.0)
+        grille.regles = [
+            self.modele.Regle(
+                [".trois"], "repeat(auto-fit, minmax(min(700px, 100%), 1fr))", None, 700, None, None, 1, 0
+            )
+        ]
+        registre = {
+            "grille": [{"selecteur": ".trois", "colonnes": 3, "minimum": 700, "motif_ecart": "court"}]
+        }
+        erreurs = self.modele.ecarts_de_place({".trois": grille}, registre)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("chiffre magique", erreurs[0])
+
+    def test_un_motif_d_ecart_devenu_sans_objet_est_refuse(self) -> None:
+        """Un motif qui ne recouvre plus d'écart serait une exemption permanente."""
+        grille = self.modele.Grille(selecteur=".trois", colonnes_base=3, gap=16.0)
+        grille.regles = [
+            self.modele.Regle(
+                [".trois"], "repeat(auto-fit, minmax(min(370px, 100%), 1fr))", None, 370, None, None, 1, 0
+            )
+        ]
+        registre = {
+            "grille": [
+                {
+                    "selecteur": ".trois",
+                    "colonnes": 3,
+                    "minimum": 370,
+                    "motif_ecart": "Une raison écrite le jour où la place réelle changeait encore du tout au tout.",
+                }
+            ]
+        }
+        erreurs = self.modele.ecarts_de_place({".trois": grille}, registre)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("n'a plus d'objet", erreurs[0])
 
     def test_le_depot_n_est_pas_modifie(self) -> None:
         avant = {
