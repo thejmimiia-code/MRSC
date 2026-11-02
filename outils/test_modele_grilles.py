@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Éprouve le modèle des grilles : quatre-vingts cas, dont deux sources illisibles.
+"""Éprouve le modèle des grilles : quatre-vingt-un cas, dont deux sources illisibles.
 
 `outils/modele-grilles.py` ne vaut que s'il refuse. Ce banc casse une chose à la
 fois dans une copie jetable (`outils/banc_mutations.py` : liens symboliques,
@@ -18,7 +18,7 @@ Et deux sources illisibles, qui doivent sortir en code 2 : une feuille absente,
 un registre absent. Un contrôle qui n'a pas pu mesurer n'a pas le droit de dire
 que tout va bien.
 
-Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces quatre-vingts
+Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces quatre-vingt-un
 situations, pas qu'il couvre toutes les façons de perdre une grille dynamique.
 Un `@supports` qui réécrirait les colonnes, ou un style en ligne, lui échappent.
 
@@ -1427,6 +1427,42 @@ class TestModeleGrilles(unittest.TestCase):
             )
         self.assertEqual(len(erreurs), 1, erreurs)
         self.assertIn("illisible", erreurs[0])
+
+    def test_une_presentation_qui_promet_l_inverse_est_nommee(self) -> None:
+        """« Vitrine » annonce les plus grandes tuiles : moins de colonnes, pas plus.
+
+        La mesure du 2 novembre 2026 a trouvé cinq grilles à deux colonnes qui en
+        donnent trois en Vitrine — donc des tuiles plus petites dans la
+        présentation qui promet les plus grandes. Le contrôle ne les corrige pas
+        (aucun navigateur ne mesure cette présentation) ; il refuse de les taire.
+        """
+        textes = (
+            'html[data-layout="vitrine"] { --content: 1240px; }\n'
+            '.deux { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); }\n'
+        )
+        grille = self.modele.Grille(selecteur=".deux", colonnes_base=2, gap=16.0)
+        grille.regles = [
+            self.modele.Regle(
+                [".deux"], "repeat(auto-fit, minmax(min(380px, 100%), 1fr))", None, 380, None, None, 1, 0
+            )
+        ]
+        registre = {
+            "grille": [{"selecteur": ".deux", "colonnes": 2, "minimum": 380, "items": [4]}],
+            "grille_presentation": [
+                {"presentation": "vitrine", "regime": "auto-fit", "minimum": 340, "colonnes": [3]}
+            ],
+        }
+        grille.items = 4
+        lignes = self.modele.ordre_des_presentations({".deux": grille}, registre, textes)
+        self.assertEqual(lignes[0]["colonnes"]["defaut"], 2)
+        self.assertEqual(lignes[0]["colonnes"]["vitrine"], 3)
+        messages = self.modele.contradictions_d_ordre(lignes)
+        self.assertEqual(len(messages), 1, messages)
+        self.assertIn("annonce l'inverse", messages[0])
+        # Un ordre conforme ne dit rien.
+        grille_large = self.modele.Grille(selecteur=".deux", colonnes_base=4, gap=16.0)
+        grille_large.items = 4
+        self.assertEqual(self.modele.contradictions_d_ordre([{"selecteur": ".x", "colonnes": {"defaut": 2, "vitrine": 2}}]), [])
 
     def test_le_depot_n_est_pas_modifie(self) -> None:
         avant = {

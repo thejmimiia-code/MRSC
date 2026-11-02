@@ -2,6 +2,24 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-11-02 — Vitrine promet les plus grandes tuiles et en donne de plus petites
+
+- **Initiative :** `optimisation-du-site`.
+- **Ce que la matrice des présentations dit, une fois imprimée grille par grille :**
+
+  | grille | défaut | compacte | panorama | vitrine |
+  | --- | --- | --- | --- | --- |
+  | `.ai-metric-grid`, `.ai-forms-grid`, `.learning-level-grid`, `.learning-ecosystem-grid` | 4 | 4 à 6 | 4 à 5 | **3** |
+  | `.ai-lives-grid`, `.learning-catalogue-grid`, `.link-grid`, `.ai-fraud-grid`, `.principle-grid` | 3 | 6 | 5 | **3** |
+  | `.document-grid`, `.home-action-grid`, `.knowledge-compass`, `.simulateur-passeport`, `.ai-fraud-lesson-list` | 2 | 4 à 6 | 4 à 5 | **3** |
+  | `.eva-listes-grid`, `.simulateur-duo` | 2 | 2 | 2 | 2 |
+
+- **Deux choses s'y voient, et aucune n'était dite :** 1) en « Vitrine », **toutes** les grilles tombent à trois colonnes, quel que soit leur dessin déclaré — quatre, trois ou deux ; 2) pour les cinq grilles déclarées à deux colonnes, trois colonnes en Vitrine veut dire **plus** de colonnes que par défaut, donc des tuiles **plus petites** dans la présentation dont le commentaire de la feuille dit « rythme lent, grandes zones et une idée à la fois ». La présentation annonce l'inverse de ce qu'elle fait, sur cinq grilles.
+- **Ce que le contrôle en fait, et pourquoi il ne corrige pas :** `contradictions_d_ordre` mesure l'intention inscrite dans le nom — Compacte et Panorama au moins autant de colonnes que par défaut, Vitrine moins — et `--verifier` **nomme** les cinq grilles à chaque passage réussi, sans faire échouer. Corriger demanderait de porter le minimum de Vitrine à 410 px (au-delà de trois colonnes dans 1 240 px), et **aucun navigateur ne mesure cette présentation** : le relevé ne couvre que la présentation par défaut. Changer une valeur que rien ne vérifie serait exactement le geste que ce dépôt refuse depuis le 1er novembre.
+- **Un second signe, dans l'autre sens :** en « Compacte » et « Panorama », `.ai-fraud-steps` repasse à quatre colonnes — les quatre cartes de prose que le lot précédent a écartées à 261,7 px de large. Le lot a tranché pour la présentation par défaut ; les deux autres le défont, et personne ne l'avait mesuré.
+- **Contrôles exécutés :** `modele-grilles.py --verifier` (code 0, **5 contradictions nommées**) · `--presentations` (matrice 20 grilles × 4 colonnes, 106 couples) · `test_modele_grilles.py` (**81 cas**, dont un neuf : une présentation qui promet l'inverse est nommée, un ordre conforme ne dit rien) · `py_compile` · `git diff --check`.
+- **Prochaine action :** apprendre au relevé navigateur à mesurer une **autre** présentation que celle par défaut (`MRSC_LAYOUT=vitrine`), puis trancher les cinq contradictions et le retour de `.ai-fraud-steps` à quatre colonnes, avec une mesure avant/après.
+
 ## 2026-11-02 — Les cinq autres présentations réimposaient des colonnes que personne ne vérifiait
 
 - **Initiative :** `optimisation-du-site`.
@@ -11,7 +29,7 @@ Ce journal conserve les décisions structurantes et les relais utiles, pas le d�
 - **Ce que ce lot ne fait pas, et qui est le suivant :** il ne **dérive** aucun de ces minima. Le faire demande de calculer la place réelle **dans chaque présentation** : `--content` passe de 1 160 à 940, 1 240, 1 380 et 1 480 px, et la chaîne des ancêtres doit être recalculée sous chaque présentation — deux choses que ce lot ne touche pas. Tant que ce n'est pas fait, `--presentations` affiche l'ordre de grandeur au conteneur maximal et **le dit** : « présentation non mesurée ».
 - **Un signe qui mérite d'être noté :** en `vitrine`, toutes les grilles concernées tombent à **3 colonnes** au conteneur maximal, quel que soit leur nombre déclaré en présentation par défaut (4 pour les repères, 3 pour les vies, 2 pour les documents). En `compacte`, elles vont de 3 à 5. Autrement dit, le nombre de colonnes annoncé par le registre **n'est pas** celui que la page montre dans cinq présentations sur six.
 - **Contrôles exécutés :** `modele-grilles.py --verifier` (code 0 ; 20 dynamiques, 7 fixes, 4 motifs, 5 régimes de présentation) · `--presentations` (106 couples, 5 présentations) · `test_modele_grilles.py` (**80 cas**, dont quatre neufs : présentation non déclarée refusée, régime qui ne correspond plus refusé, régime sans règle refusé, feuille illisible signalée au lieu d'un zéro) · `py_compile` · `git diff --check`.
-- **Prochaine action :** dériver les minima par présentation, en commençant par `vitrine` (340 px pour toutes, alors que le registre déclare 4, 3 et 2 colonnes selon les grilles) — et mesurer une présentation dans le navigateur, ce que le relevé ne sait pas encore faire.
+- **Prochaine action (partiellement faite dans l'entrée suivante) :** mesurer ce que chaque présentation fait vraiment au nombre de colonnes — c'est fait — puis dériver les minima par présentation, et apprendre au relevé navigateur à mesurer une autre présentation que celle par défaut.
 
 ## 2026-11-02 — Une CI rouge qui disait « code 1 » et rien d'autre, reproduite en trois minutes
 
