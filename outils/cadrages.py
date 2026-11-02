@@ -191,6 +191,33 @@ def controler(plan: dict, rapport: dict) -> list[str]:
                 f"{libelle} : débordement horizontal de {debordement} px "
                 f"(tolérance {tolerance} px){detail}"
             )
+        # Un mot coupé est un mot perdu : la zone de découpe d'un ancêtre le
+        # rogne, et le visiteur ne le lit jamais. On le nomme avec son extrait.
+        coupes = mesure.get("coupes")
+        if coupes is None:
+            erreurs.append(f"{libelle} : texte coupé non mesuré")
+        else:
+            for coupe in coupes:
+                nom = coupe.get("tag", "?") + (
+                    f".{coupe['classe']}" if coupe.get("classe") else ""
+                )
+                extrait = (coupe.get("texte") or "").strip()
+                erreurs.append(
+                    f"{libelle} : {nom} coupe un mot de {coupe.get('depasse')} px"
+                    + (f" (« {extrait} »)" if extrait else "")
+                )
+        # Deux cartes qui se recouvrent : l'une cache l'autre.
+        chevauchements = mesure.get("chevauchements")
+        if chevauchements is None:
+            erreurs.append(f"{libelle} : chevauchement non mesuré")
+        else:
+            for chevauchement in chevauchements:
+                erreurs.append(
+                    f"{libelle} : {chevauchement.get('premiere')} et "
+                    f"{chevauchement.get('seconde')} se chevauchent de "
+                    f"{chevauchement.get('largeur')} × {chevauchement.get('hauteur')} px "
+                    f"dans {chevauchement.get('selecteur')}"
+                )
         observees = mesure.get("colonnes") or {}
         for selecteur, attendu in (combinaison.get("attendu") or {}).items():
             if selecteur not in observees:
@@ -260,7 +287,8 @@ def principal(arguments: list[str] | None = None) -> int:
         mesures = len(rapport.get("mesures", []))
         print(
             f"Cadrages : {combinaisons} combinaison(s) mesurée(s) sur {mesures} relevé(s), "
-            f"aucun débordement au-delà de {plan.get('tolerance_px')} px, aucun écart de colonnes "
+            f"aucun débordement au-delà de {plan.get('tolerance_px')} px, aucun écart de colonnes, "
+            f"aucun mot coupé, aucun chevauchement de cartes "
             f"— navigateur {rapport.get('navigateur') or 'inconnu'}."
         )
         return 0

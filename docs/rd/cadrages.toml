@@ -42,7 +42,9 @@ valeurs = ["index.html", "apprendre.html", "ia-societe.html", "simulateur.html"]
 raison = "Une page par famille de dessin : accueil, fiches d'apprentissage, page IA — la plus dense en grilles — et simulateur, dont les grilles vivent dans un panneau `flex`."
 
 [cout]
-# Mesuré le 2 novembre 2026 sur le dépôt : 480 combinaisons, 0 débordement.
+# Mesuré le 2 novembre 2026 sur le dépôt : 480 combinaisons, 0 débordement,
+# 0 mot coupé, 0 chevauchement. Deux passes donnent 302 s puis 275 s : le temps
+# dépend de la machine, pas du nombre de cadrages.
 mesure_locale_secondes = 302
 combinaisons = 480
 note = """Une combinaison coûte un changement de largeur, pas un chargement : le
@@ -52,9 +54,18 @@ moitié, et c'est ce que `test_cadrages.py` refuse."""
 
 [limites]
 texte = """
-Le relevé ne mesure que le débordement **horizontal** et le nombre de colonnes.
-Il ne dit rien de la hauteur, des chevauchements verticaux, du contraste, ni de
-la lisibilité d'une carte étroite. Les présentations sont mesurées sur les pages
-qui portent les grilles déclarées : une page sans grille déclarée n'est pas
-visitée, et un défaut qui n'affecterait qu'elle échapperait au contrôle.
+Le relevé mesure quatre choses, et elles seules : le débordement **horizontal**,
+le nombre de colonnes de chaque grille déclarée, les **mots coupés** par une zone
+de découpe et les **cartes qui se recouvrent** entre enfants directs d'une
+grille déclarée.
+
+Il ne dit rien de la hauteur totale de la page, du contraste, ni de la
+lisibilité d'une carte étroite — une carte peut rester lisible à 300 px et
+devenir illisible à 260. Une superposition entre deux sections, ou avec un
+élément en position fixe, lui échappe, faute d'être un couple d'enfants de
+grille. Il ne voit que l'état visible au moment du relevé : un mot coupé qui
+n'apparaît qu'au survol ou dans un panneau ouvert n'est pas vu. Enfin, les
+présentations sont mesurées sur les pages qui portent les grilles déclarées :
+une page sans grille déclarée n'est pas visitée, et un défaut qui n'affecterait
+qu'elle échapperait au contrôle.
 """

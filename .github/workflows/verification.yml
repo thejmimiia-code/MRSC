@@ -575,11 +575,12 @@ jobs:
       # défaut, trois tailles de texte. Le panneau de personnalisation en propose
       # six et cinq crans, et `--content` comme les gouttières changent avec eux.
       # Cette étape confronte donc quatre pages dans 6 × 5 × 4 = 480 cadrages :
-      # débordement horizontal au demi-pixel près, et nombre de colonnes de
-      # chaque grille déclarée. Coût mesuré : 5 min 02 en local, d'où le plafond
+      # débordement horizontal au demi-pixel près, nombre de colonnes de chaque
+      # grille déclarée, mots coupés par une zone de découpe et cartes qui se
+      # recouvrent. Coût mesuré : 5 min 02 en local, d'où le plafond
       # de 30 minutes sur ce job — un banc lent vaut mieux qu'un banc absent, à
       # condition de dire ce qu'il coûte.
-      - name: Confronter chaque cadrage personnalisé, au pixel près
+      - name: Confronter chaque cadrage personnalisé, au pixel près, mots et cartes compris
         env:
           MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
           MRSC_TEST_URL: http://127.0.0.1:4185/
@@ -626,7 +627,17 @@ jobs:
           fi
           exit "$controle"
 
-      # Les deux contrôles précédents disent qu'une mutation produit l'erreur
+      # Le banc précédent mesure ; celui-ci prouve que la mesure mord. Il rejoue
+      # sur une copie jetable les deux mutations qui ont été faites à la main le
+      # 2 novembre 2026 : un mot rogné par une zone de découpe, deux cartes
+      # superposées. Sans navigateur, il sort en code 2 et le dit — jamais vert.
+      # Coût mesuré : 13 s pour trois cas (dont la copie intacte qui doit passer).
+      - name: Éprouver que le contrôle des cadrages refuse un mot coupé et deux cartes superposées
+        env:
+          MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
+        run: python3 outils/test_mutations_cadrages.py
+
+      # Les contrôles précédents disent qu'une mutation produit l'erreur
       # annoncée. Aucun ne dit que la géométrie relevée est la bonne : un
       # `getBoundingClientRect` mal lu, une densité calculée à l'envers,
       # resteraient verts, puisque les mutations sont plantées par le script
