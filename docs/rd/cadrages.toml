@@ -43,14 +43,25 @@ raison = "Une page par famille de dessin : accueil, fiches d'apprentissage, page
 
 [cout]
 # Mesuré le 2 novembre 2026 sur le dépôt : 480 combinaisons, 0 débordement,
-# 0 mot coupé, 0 chevauchement. Deux passes donnent 302 s puis 275 s : le temps
-# dépend de la machine, pas du nombre de cadrages.
-mesure_locale_secondes = 302
+# 0 mot coupé, 0 chevauchement. Trois passes donnent 302 s, 275 s puis 262 s,
+# alors que la troisième mesure *plus* que la première : l'écart vient de la
+# machine, pas du travail. Ne pas lire cette baisse comme un progrès.
+mesure_locale_secondes = 262
 combinaisons = 480
 note = """Une combinaison coûte un changement de largeur, pas un chargement : le
 temps de chargement se compte en états (page, présentation, cran), pas en
 combinaisons. Un banc qui annonce le coût de l'état précédent se trompe de
 moitié, et c'est ce que `test_cadrages.py` refuse."""
+
+[rangees]
+# `--orphelins` nomme les grilles dont la dernière rangée laisse un vide visible.
+# Il ne refuse rien : une rangée incomplète est parfois le dessin voulu, et le
+# 2 novembre 2026 la décision chiffrée revient à une personne, pas au modèle.
+outil = "python3 outils/cadrages.py --orphelins PLAN RAPPORT"
+definition = "Une grille laisse un vide quand ce que sa dernière rangée occupe, gouttières déduites, laisse plus de 0,5 px libres sur la largeur utile — seuil identique à celui du débordement, pour la même raison : c'est le plus petit écart qu'un navigateur puisse produire en arrondissant une longueur."
+seuil_px = 0.5
+resultat = "13 couples page/grille laissent un vide dans au moins un cadrage. Le pire : `apprendre.html · .learning-catalogue-grid`, 35 cadrages, 1 176,50 px libres en « Compacte » à 75 % sur 1 440 px (une carte sur six colonnes). Puis `ia-societe.html · .ai-fraud-lesson-list`, 35 cadrages, 1 048,19 px. Six grilles de la page IA et de l'apprentissage partagent le même cas à trois colonnes : 15 cadrages, 850,67 px libres."
+decision = "Non tranchée. Les nombres sont publiés, l'annotation de CI les imprime à chaque passage ; toute correction qui ajouterait un palier de largeur serait un raccommodage, refusé depuis le 30 octobre 2026."
 
 [limites]
 texte = """

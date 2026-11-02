@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 78 |
+| Avancées consignées | 79 |
 | Période couverte | du 2026-10-20 au 2026-11-02 |
-| Contrôles exécutables cités | 86 |
+| Contrôles exécutables cités | 87 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1857,6 +1857,31 @@ Initiatives liées : `documentation-rd-eva`, `coherence-textes-publics`, `cartog
 **Limite — ce que cela ne prouve pas.** Le contrôle ne dit rien de la hauteur totale de la page, du contraste, ni de la lisibilité d'une carte étroite — une carte peut rester lisible à 300 px et devenir illisible à 260. Il ne voit les chevauchements qu'entre enfants directs d'une grille déclarée : une superposition entre deux sections, ou avec un élément en position fixe, lui échappe. Il ne mesure que le visible à l'instant du relevé : un mot coupé qui n'apparaît qu'au survol ou dans un panneau ouvert n'est pas vu. Coût : 275 s pour 480 combinaisons.
 
 **Suite.** Confronter la hauteur des blocs à une grille typographique et le contraste à un seuil mesuré.
+
+Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
+
+### `rangees-incompletes-chiffrees` — Les rangées incomplètes passent du ressenti au chiffre
+
+*Consignée le 2026-11-02.*
+
+**Constat.** Les cinq grilles à carte orpheline étaient connues par leur nom, pas par leur ampleur. Nul ne savait dans quels cadrages le défaut apparaît, ni combien de place il laisse vide : à 100 % sur un téléphone une rangée incomplète se voit à peine, à 75 % sur 1 440 px elle peut vider un tiers de la page.
+
+**Ce que cela change.** `cadrages.py --orphelins` lit le relevé navigateur et nomme, page par grille, le nombre de cadrages où la dernière rangée laisse plus de 0,5 px libres — le même seuil que le débordement, pour la même raison. Le relevé navigateur compte désormais, par grille, les cartes, les rangées, les cartes de la dernière rangée et la place qui reste, gouttières déduites. **13 couples page/grille** sont concernés : le pire est `apprendre.html · .learning-catalogue-grid` (35 cadrages, **1 176,50 px** libres en « Compacte » à 75 % sur 1 440 px, une carte sur six colonnes), suivi de `ia-societe.html · .ai-fraud-lesson-list` (35 cadrages, 1 048,19 px). Le diagnostic ne refuse rien : il chiffre, et l'étape de CI l'imprime en annotation à chaque passage. Une grille dont la rangée n'a pas été relevée est nommée au lieu d'être passée sous silence.
+
+**Preuves dans le dépôt :**
+
+- `outils/cadrages.py`
+- `outils/mesurer-cadrages.cjs`
+- `outils/test_cadrages.py`
+- `docs/rd/cadrages.toml`
+- `.github/workflows/verification.yml`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/cadrages.py --releve-json /tmp/plan.json && node outils/mesurer-cadrages.cjs /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --controler /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --orphelins /tmp/plan.json /tmp/rapport.json && python3 outils/test_cadrages.py`
+
+**Limite — ce que cela ne prouve pas.** Le diagnostic mesure un vide géométrique, pas une gêne : une rangée incomplète peut être le dessin voulu, et une rangée pleine peut rester laide. Il ne voit que les enfants directs d'une grille déclarée, à l'instant du relevé, et seulement dans les quatre pages visitées. La décision de corriger reste humaine et n'est pas prise : aucune règle n'a été changée.
+
+**Suite.** Trancher, grille par grille, entre assumer la rangée incomplète et changer le dessin — sans ajouter de palier, et en re-mesurant après chaque décision.
 
 Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
 

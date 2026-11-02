@@ -2283,6 +2283,32 @@ exige aussi que la copie **intacte** passe — sans quoi un contrôle qui refuse
 paraîtrait infaillible. Sans navigateur, il sort en **code 2** et le dit : un banc
 navigateur muet passerait pour vert.
 
+### Les rangées incomplètes, chiffrées mais non tranchées
+
+Reste un défaut que ni le débordement ni les colonnes ne décrivent : la **carte
+orpheline**. Cinq cartes en trois colonnes laissent une rangée à moitié vide, et
+l'ampleur dépend entièrement du cadrage — invisible à 100 % sur un téléphone,
+elle peut vider un tiers de la page à 75 % sur 1 440 px.
+
+`cadrages.py --orphelins` lit le relevé et nomme, page par grille, le nombre de
+cadrages où la dernière rangée laisse plus de 0,5 px libres, gouttières déduites.
+**13 couples page/grille** sont concernés. Le pire :
+
+| Page · grille | Cadrages | Vide maximal | Cadrage |
+| --- | --- | --- | --- |
+| `apprendre.html · .learning-catalogue-grid` | 35 | 1 176,50 px | Compacte · 75 % · 1 440 px · 1 carte sur 6 colonnes |
+| `ia-societe.html · .ai-fraud-lesson-list` | 35 | 1 048,19 px | Panorama · 130 % · 1 440 px · 1 carte sur 4 colonnes |
+| `apprendre.html · .knowledge-compass` | 25 | 1 046,86 px | Mosaïque · 130 % · 1 440 px · 1 carte sur 4 colonnes |
+
+Six grilles de la page IA et de l'apprentissage partagent le cas le plus fréquent,
+à trois colonnes : 15 cadrages, 850,67 px libres.
+
+Ce diagnostic **ne refuse rien** et n'a corrigé aucune règle : une rangée
+incomplète est parfois le dessin voulu, et le modèle mesure et nomme, il ne
+tranche pas. L'étape de CI l'imprime en annotation à chaque passage, pour que la
+décision se prenne sur des nombres. Une grille dont la rangée n'a pas pu être
+relevée est nommée : un diagnostic qui ne peut pas lire sa source le dit.
+
 ### Limites
 
 Le relevé mesure quatre choses, et elles seules. Il ne dit rien de la hauteur totale, du

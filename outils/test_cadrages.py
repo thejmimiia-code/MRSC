@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Éprouve le contrôle des cadrages : quinze cas, sans navigateur.
+"""Éprouve le contrôle des cadrages : dix-huit cas, sans navigateur.
 
 `outils/cadrages.py --controler` ne vaut que s'il refuse. Ce banc lui donne des
 plans et des rapports fabriqués — jamais le vrai dépôt, jamais un navigateur — et
@@ -79,6 +79,10 @@ class TestCadrages(unittest.TestCase):
                     "colonnes": colonnes,
                     "coupes": [],
                     "chevauchements": [],
+                    "rangees": {
+                        selecteur: {"cartes": 3, "rangees": 1, "cartes_derniere_rangee": 3, "manque": 0.0}
+                        for selecteur in colonnes
+                    },
                 }
             )
         return {"navigateur": "HeadlessChrome/essai", "mesures": mesures}
@@ -215,6 +219,40 @@ class TestCadrages(unittest.TestCase):
         self.assertEqual(len(erreurs), 2, erreurs)
         self.assertIn("texte coupé non mesuré", erreurs[0])
         self.assertIn("chevauchement non mesuré", erreurs[1])
+
+    def test_une_derniere_rangee_incomplete_est_nommee(self) -> None:
+        """Cinq cartes en deux colonnes : le fait est chiffré, il n'est pas refusé."""
+        plan = self.plan({".document-grid": 2})
+        rapport = self.rapport({".document-grid": 2})
+        rapport["mesures"][0]["rangees"][".document-grid"] = {
+            "cartes": 5,
+            "rangees": 3,
+            "cartes_derniere_rangee": 1,
+            "manque": 412.5,
+        }
+        trouves, sans_releve = self.cadrages.orphelins(plan, rapport)
+        self.assertEqual(sans_releve, [])
+        self.assertEqual(len(trouves), 1, trouves)
+        self.assertEqual(trouves[0]["selecteur"], ".document-grid")
+        self.assertEqual(trouves[0]["cadrages"], 1)
+        self.assertAlmostEqual(trouves[0]["pire_manque"], 412.5)
+        self.assertIn("1 carte(s) sur 2 colonne(s)", trouves[0]["exemple"])
+        # Le diagnostic ne refuse rien : c'est une mesure, pas un verdict.
+        self.assertEqual(self.cadrages.controler(plan, rapport), [])
+
+    def test_une_rangee_pleine_ne_dit_rien(self) -> None:
+        plan = self.plan({".document-grid": 3})
+        trouves, sans_releve = self.cadrages.orphelins(plan, self.rapport({".document-grid": 3}))
+        self.assertEqual(trouves, [])
+        self.assertEqual(sans_releve, [])
+
+    def test_une_grille_sans_releve_de_rangee_est_signalee(self) -> None:
+        """Un diagnostic qui ne peut pas lire sa source le dit, il n'imprime pas moins."""
+        plan = self.plan({".document-grid": 3})
+        rapport = self.rapport({".document-grid": 3})
+        del rapport["mesures"][0]["rangees"]
+        _trouves, sans_releve = self.cadrages.orphelins(plan, rapport)
+        self.assertEqual(sans_releve, [".document-grid"])
 
     def test_le_cout_declare_est_celui_du_plan(self) -> None:
         """Un registre qui annonce le coût du lot précédent se trompe de moitié.
