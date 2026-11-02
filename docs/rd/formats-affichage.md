@@ -2145,3 +2145,50 @@ Aucun de ces quatre tracés n'a été regardé par un œil humain. Le modèle et
 comptent des colonnes ; ils ne disent pas si une carte de 537 px est agréable à lire, ni
 si cinq étapes empilées valent mieux qu'une rangée impossible. La relecture visuelle
 reste due, et elle seule peut contredire ces décisions.
+
+## 33. Les cinq autres présentations réimposaient des colonnes que personne ne vérifiait (2 novembre 2026)
+
+Le modèle et le relevé navigateur ne connaissent que la présentation **par défaut**.
+En cherchant où la feuille parle encore de colonnes, la liste est apparue : cinq autres
+présentations en réimposent aux grilles déclarées.
+
+| présentation | ce que la feuille écrit | `--content` |
+| --- | --- | --- |
+| Lecture | une colonne (`minmax(0,1fr)`) | 940 px |
+| Panorama | `auto-fit`, minimum **260 px** | 1 480 px |
+| Vitrine | `auto-fit`, minimum **340 px** | 1 240 px |
+| Compacte | `auto-fit`, minimum **215 px** | 1 480 px |
+| Mosaïque | `repeat(2)` sous 601 px, `repeat(4)` à partir de 981 px | 1 380 px |
+
+Soit **106 couples grille × présentation**, avec trois minima choisis à la main le
+18 octobre 2026 — aucun dérivé, aucun mesuré.
+
+### Pourquoi le contrôle ne voyait rien
+
+`decouper` conserve un `:is(…)` comme **un seul** sélecteur. Une règle
+`html[data-layout="vitrine"] main :is(.ai-metric-grid, …)` n'est donc jamais rattachée
+à `.ai-metric-grid` : elle n'entrait ni dans `regles`, ni dans `paliers`, ni dans le
+refus des paliers de largeur. Le contrôle vérifiait la feuille par défaut et se taisait
+sur le reste.
+
+### Ce que le lot ajoute, et ce qu'il avoue
+
+`presentations_lues` relit ces règles ; `presentations_declarees` exige qu'une
+présentation qui touche une grille déclarée porte un **régime** — `auto-fit` avec son
+minimum, `fixe` avec ses nombres de colonnes, ou `colonne-unique` — confronté à la
+feuille dans les deux sens : une valeur qui a changé est refusée, un régime qui ne porte
+plus aucune règle aussi. Cinq entrées remplacent ce qui aurait été 106 lignes.
+
+`--presentations` imprime la matrice et, à chaque ligne, écrit « présentation non
+mesurée ». Rien n'est dérivé dans ce lot : le calcul exigerait la place réelle dans
+chaque présentation, où `--content` change, et la chaîne des ancêtres serait à
+recalculer.
+
+### Un signe qui mérite d'être noté
+
+En **Vitrine**, toutes les grilles concernées tombent à **trois colonnes** au conteneur
+maximal, alors que le registre déclare quatre colonnes pour les repères chiffrés, trois
+pour les vies, deux pour les documents. En **Compacte**, elles vont de trois à cinq.
+Autrement dit, le nombre de colonnes annoncé par le registre n'est pas celui que la page
+montre dans cinq présentations sur six — et c'est exactement ce que la consigne
+« qualité et professionnel » demandait de ne pas laisser caché.

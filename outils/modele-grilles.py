@@ -1684,6 +1684,118 @@ def ecarts_de_place(
     return erreurs
 
 
+#: Une règle portée par une présentation nommée : `html[data-layout="vitrine"] …`.
+PRESENTATION = re.compile(r'html\[data-layout="([a-z]+)"\]')
+
+
+def presentations_lues(grilles: dict[str, Grille], texte: str) -> list[dict]:
+    """Les règles qui réimposent des colonnes dans une présentation nommée.
+
+    Le modèle ne voyait que la feuille « par défaut ». Or les six présentations
+    en réimposent : `panorama` 260 px, `vitrine` 340 px, `compacte` 215 px,
+    `lecture` une colonne, `mosaïque` 2 puis 4 colonnes sous condition de
+    largeur. Quatre-vingt-huit couples grille × présentation, aucun dérivé par
+    la règle, aucun mesuré par un navigateur — le relevé ne couvre que la
+    présentation par défaut. Ce n'est pas une mesure : c'est leur lecture.
+    """
+    declares = set(grilles)
+    trouvees: list[dict] = []
+    for selecteurs, corps, largeur_max, largeur_min, ligne in decouper(sans_commentaires(texte)):
+        declaration = DECLARATION_COLONNES.search(corps)
+        if declaration is None:
+            continue
+        valeur = declaration.group(1).strip()
+        for selecteur in selecteurs:
+            nom = PRESENTATION.match(selecteur.strip())
+            if nom is None:
+                continue
+            for grille in declares:
+                if grille in selecteur:
+                    motif, colonnes, minimum = classer_valeur(" ".join(valeur.split()))
+                    trouvees.append(
+                        {
+                            "presentation": nom.group(1),
+                            "selecteur": grille,
+                            "valeur": " ".join(valeur.split()),
+                            "regime": motif,
+                            "colonnes": colonnes,
+                            "minimum": minimum,
+                            "largeur_min": largeur_min,
+                            "largeur_max": largeur_max,
+                            "ligne": ligne,
+                        }
+                    )
+    return trouvees
+
+
+def presentations_declarees(
+    grilles: dict[str, Grille], registre: dict, racine: Path | None = None
+) -> list[str]:
+    """Chaque présentation qui touche une grille déclarée doit être déclarée ici.
+
+    Le registre porte un **régime par présentation** — pas quatre-vingt-huit
+    lignes. Le contrôle vérifie que chaque règle trouvée dans la feuille
+    correspond exactement au régime déclaré, et qu'un régime déclaré a encore
+    des règles à couvrir : une déclaration sans objet est refusée, comme les
+    dérogations des autres sections.
+    """
+    erreurs: list[str] = []
+    chemin = (racine or RACINE) / FEUILLE
+    try:
+        texte = chemin.read_text(encoding="utf-8")
+    except OSError as erreur:
+        return [f"{FEUILLE} illisible ({erreur.strerror}) — les présentations ne sont pas vérifiées"]
+    trouvees = presentations_lues(grilles, texte)
+    declarees = {entree.get("presentation"): entree for entree in registre.get("grille_presentation", [])}
+    if trouvees and not declarees:
+        return [
+            f"{len(trouvees)} règle(s) de présentation réimposent des colonnes à une grille "
+            "déclarée, et aucune n'est inscrite dans [[grille_presentation]]"
+        ]
+    couvertes: set[str] = set()
+    for trouvee in trouvees:
+        nom = trouvee["presentation"]
+        entree = declarees.get(nom)
+        if entree is None:
+            erreurs.append(
+                f"{trouvee['selecteur']} : la présentation « {nom} » lui réimpose "
+                f"`{trouvee['valeur'][:50]}` (ligne {trouvee['ligne']}) sans régime déclaré"
+            )
+            continue
+        couvertes.add(nom)
+        regime = entree.get("regime")
+        if regime == "auto-fit":
+            attendu = entree.get("minimum")
+            if trouvee["minimum"] != attendu:
+                erreurs.append(
+                    f"{nom} / {trouvee['selecteur']} : la feuille écrit "
+                    f"`{trouvee['valeur'][:50]}` (ligne {trouvee['ligne']}), le régime déclaré "
+                    f"demande {attendu}px"
+                )
+        elif regime == "fixe":
+            attendues = sorted(int(n) for n in entree.get("colonnes") or [])
+            if trouvee["regime"] != "fixe" or trouvee["colonnes"] not in attendues:
+                erreurs.append(
+                    f"{nom} / {trouvee['selecteur']} : la feuille écrit "
+                    f"`{trouvee['valeur'][:50]}` (ligne {trouvee['ligne']}), le régime déclaré "
+                    f"fixe {attendues} colonne(s)"
+                )
+        elif regime == "colonne-unique":
+            if trouvee["valeur"] not in ("minmax(0,1fr)", "minmax(0, 1fr)", "1fr"):
+                erreurs.append(
+                    f"{nom} / {trouvee['selecteur']} : déclarée en colonne unique, la feuille "
+                    f"écrit `{trouvee['valeur'][:50]}` (ligne {trouvee['ligne']})"
+                )
+        else:
+            erreurs.append(f"{nom} : régime inconnu `{regime}` (attendu auto-fit, fixe ou colonne-unique)")
+    for nom, entree in sorted(declarees.items()):
+        if nom not in couvertes:
+            erreurs.append(
+                f"« {nom} » : régime déclaré sans aucune règle qui le porte — la décision n'a plus d'objet"
+            )
+    return erreurs
+
+
 def normaliser(valeur: str) -> str:
     """Compare deux écritures de la même valeur (`minmax(0, 1fr)` = `minmax(0,1fr)`)."""
     return re.sub(r"\s+", "", valeur).replace(",", ",")
@@ -3236,6 +3348,7 @@ def verifier(
     capacites = capacites or {}
     erreurs.extend(pistes_jamais_atteintes(grilles, registre, racine))
     erreurs.extend(ecarts_de_place(grilles, registre, capacites, racine))
+    erreurs.extend(presentations_declarees(grilles, registre, racine))
     entrees = registre.get("grille", [])
     if not entrees:
         erreurs.append(f"{REGISTRE} ne déclare aucune grille convertie — le registre ne prouve rien")
@@ -3597,6 +3710,11 @@ def principal(arguments: list[str] | None = None) -> int:
         help="dire ce qu'un `flex-wrap` exprimerait des grilles à pistes inégales",
     )
     analyseur.add_argument(
+        "--presentations",
+        action="store_true",
+        help="dire ce que chaque présentation réimpose aux grilles déclarées",
+    )
+    analyseur.add_argument(
         "--comparer",
         action="store_true",
         help="mesurer, largeur par largeur, ce que la proposition changerait au dessin",
@@ -3744,6 +3862,59 @@ def principal(arguments: list[str] | None = None) -> int:
         )
         for largeur, ancienne, nouvelle in details[:20]:
             print(f"    {largeur}px : {ancienne} → {nouvelle}")
+        return 0
+
+    if options.presentations:
+        try:
+            registre = lire_registre(RACINE)
+            texte = (RACINE / FEUILLE).read_text(encoding="utf-8")
+        except (SourceIllisible, OSError) as erreur:
+            print(f"Impossible de lire les présentations : {erreur}", file=sys.stderr)
+            return 2
+        capacites = lire_capacites(
+            RACINE, [e.get("selecteur") or "" for e in registre.get("grille", [])]
+        )
+        appliquer_capacites(grilles, capacites)
+        trouvees = presentations_lues(grilles, texte)
+        regimes = {e.get("presentation"): e for e in registre.get("grille_presentation", [])}
+        par_presentation: dict[str, list[dict]] = {}
+        for trouvee in trouvees:
+            par_presentation.setdefault(trouvee["presentation"], []).append(trouvee)
+        for nom in sorted(par_presentation):
+            regles = par_presentation[nom]
+            regime = regimes.get(nom, {})
+            valeurs = sorted({regle["valeur"] for regle in regles})
+            print(
+                f"{nom:10} {len(regles):3} règle(s) · régime déclaré "
+                f"{regime.get('regime') or 'AUCUN'}"
+                + (f" ({regime.get('minimum')}px)" if regime.get("minimum") else "")
+            )
+            for valeur in valeurs:
+                selecteurs = sorted({r["selecteur"] for r in regles if r["valeur"] == valeur})
+                print(f"           `{valeur}` sur {len(selecteurs)} grille(s) : {', '.join(selecteurs[:4])}")
+            # Ce que cela donne au conteneur de cette présentation, sans chaîne
+            # d'ancêtres : une indication, pas une mesure — la feuille ne dit rien
+            # de la place réelle sous une autre présentation.
+            minimum = regime.get("minimum")
+            if regime.get("regime") == "auto-fit" and isinstance(minimum, int):
+                gabarit = next((g for g in grilles.values() if g.selecteur in {r["selecteur"] for r in regles}), None)
+                if gabarit is not None:
+                    colonnes = sorted(
+                        {
+                            auto_fit_place(minimum, gabarit.gap, conteneur(2560), grille.items)
+                            for grille in grilles.values()
+                            if grille.selecteur in {r["selecteur"] for r in regles}
+                        }
+                    )
+                    print(
+                        f"           au conteneur maximal : {colonnes} colonne(s) selon la grille, "
+                        f"écart de {gabarit.gap:g}px — présentation non mesurée"
+                    )
+        print(f"{len(trouvees)} couple(s) grille × présentation, dans {len(par_presentation)} présentation(s).")
+        print(
+            "  Aucun de ces minima n'est dérivé par la règle, et aucun n'a été mesuré "
+            "dans un navigateur : le relevé ne couvre que la présentation par défaut."
+        )
         return 0
 
     if options.comparer:

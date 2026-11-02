@@ -412,3 +412,49 @@ raison = "Blocs de code à comparer : la grille vit dans la colonne d'un article
 selecteur = ".ai-path-steps"
 colonnes = 1
 raison = "Chaîne de cinq étapes, décidée le 2 novembre 2026 après mesure : aucun minimum ne donne un nombre de colonnes qui ne redescend jamais, parce que le panneau `flex` qui la porte la place à côté du texte dès 783 px de fenêtre, où elle reçoit deux fois moins de largeur qu'à 780. Avec 220 px elle montrait deux colonnes de 535 à 782, une seule de 783 à 1 035, deux de nouveau au-delà ; et cinq étapes dans 669,6 px demanderaient 127 px chacune. Cercle de 44 px et libellé d'un mot sur un même axe."
+
+# — Les présentations, 2 novembre 2026.
+#
+# Le relevé navigateur ne mesure que la présentation **par défaut**. Or cinq
+# autres réimposent des colonnes aux grilles déclarées ici : quatre-vingt-huit
+# couples grille × présentation, qu'aucune règle ne dérivait et qu'aucun
+# navigateur n'a mesurés. Ce n'est pas une mesure, c'est un état des lieux :
+# chaque régime est déclaré avec la valeur réellement écrite dans la feuille, et
+# le contrôle refuse une règle qui ne correspond plus au régime déclaré — ou un
+# régime qui ne porte plus aucune règle.
+#
+# Aucun de ces minima n'est dérivé : 215, 260 et 340 px ont été choisis à la
+# main le 18 octobre 2026, comme les minima de base avant le 31 octobre. Les
+# dériver demanderait de calculer la place réelle **dans chaque présentation**,
+# puisque `--content` change (940, 1 240, 1 380, 1 480 px) et que la chaîne des
+# ancêtres ne dépend d'aucune présentation : c'est le lot suivant, écrit au
+# journal.
+
+[[grille_presentation]]
+presentation = "lecture"
+regime = "colonne-unique"
+raison = "La présentation « Lecture » compose en une colonne, à dessein : c'est le dessin qu'elle annonce, et il ne dépend d'aucune mesure de place."
+
+[[grille_presentation]]
+presentation = "panorama"
+regime = "auto-fit"
+minimum = 260
+raison = "Panorama : cartes resserrées pour faire tenir beaucoup de contenu dans une largeur de lecture de 1 480 px. Valeur choisie le 18 octobre 2026, non dérivée par la règle de calcul."
+
+[[grille_presentation]]
+presentation = "vitrine"
+regime = "auto-fit"
+minimum = 340
+raison = "Vitrine : grandes tuiles, une idée à la fois, sur 1 240 px. Valeur choisie le 18 octobre 2026, non dérivée par la règle de calcul."
+
+[[grille_presentation]]
+presentation = "compacte"
+regime = "auto-fit"
+minimum = 215
+raison = "Compacte : le plus grand nombre de colonnes possible sur 1 480 px, écart et remplissage resserrés. Valeur choisie le 18 octobre 2026, non dérivée par la règle de calcul."
+
+[[grille_presentation]]
+presentation = "mosaique"
+regime = "fixe"
+colonnes = [2, 4]
+raison = "Mosaïque : deux colonnes sous 601 px de fenêtre, quatre à partir de 981 px, parce que les portées double largeur ne doivent apparaître qu'à partir de deux colonnes. Ces deux paliers sont déclarés dans docs/rd/paliers-affichage.toml et comptés par `compter-paliers.py --releve`."

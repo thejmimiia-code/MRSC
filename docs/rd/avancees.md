@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 74 |
+| Avancées consignées | 75 |
 | Période couverte | du 2026-10-20 au 2026-11-02 |
-| Contrôles exécutables cités | 80 |
+| Contrôles exécutables cités | 81 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1713,6 +1713,29 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-
 **Limite — ce que cela ne prouve pas.** La carte la plus étroite reste un calcul de modèle : elle ne dit rien du texte qui déborde ni de la hauteur d'une carte, et elle ne couvre que la présentation par défaut. Aucun seuil de lisibilité n'est déclaré à la place de la constante retirée — le modèle dit ce qu'il mesure, il ne fixe pas une limite de confort.
 
 **Suite.** Prendre la carte la plus étroite comme critère des décisions ouvertes sur les tracés, puis trancher les sept propositions avec les bandes mesurées.
+
+Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
+
+### `grilles-presentations-declarees` — Les cinq autres présentations réimposaient des colonnes que personne ne vérifiait
+
+*Consignée le 2026-11-02.*
+
+**Constat.** Le modèle des grilles et le relevé navigateur ne connaissent que la présentation par défaut. Or cinq autres réimposent des colonnes aux grilles déclarées : panorama 260 px, vitrine 340 px, compacte 215 px, lecture une colonne, mosaïque 2 puis 4 colonnes sous condition de largeur — 106 couples grille × présentation, choisis à la main le 18 octobre 2026, dont aucun n'était dérivé ni mesuré. `decouper` conserve un `:is(…)` comme un seul sélecteur : ces règles n'étaient donc rattachées à aucune grille et échappaient à tous les contrôles.
+
+**Ce que cela change.** `presentations_lues` relit les règles portées par `html[data-layout='…']`, et `presentations_declarees` exige qu'une présentation qui touche une grille déclarée porte un régime : `auto-fit` avec son minimum, `fixe` avec ses nombres de colonnes, ou `colonne-unique`. Le régime est confronté à la feuille dans les deux sens — une valeur qui a changé est refusée, un régime qui ne porte plus aucune règle aussi. Cinq entrées du registre remplacent ce qui aurait été 106 lignes. `--presentations` imprime la matrice et dit, à chaque ligne, que la présentation n'est pas mesurée. Effet constaté : en vitrine, toutes les grilles concernées tombent à trois colonnes au conteneur maximal, alors que le registre en déclare quatre, trois ou deux selon les grilles.
+
+**Preuves dans le dépôt :**
+
+- `outils/modele-grilles.py`
+- `outils/test_modele_grilles.py`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/modele-grilles.py --verifier && python3 outils/modele-grilles.py --presentations && python3 outils/test_modele_grilles.py`
+
+**Limite — ce que cela ne prouve pas.** Aucun de ces minima n'est dérivé : le calcul exigerait la place réelle dans chaque présentation, où `--content` passe de 1 160 à 940, 1 240, 1 380 et 1 480 px, et où la chaîne des ancêtres serait à recalculer. Les présentations restent non mesurées par un navigateur : le relevé ne couvre que la présentation par défaut, et `--presentations` l'écrit à chaque ligne.
+
+**Suite.** Dériver les minima par présentation en commençant par vitrine — 340 px pour toutes les grilles, alors que le registre en déclare quatre, trois ou deux — puis apprendre au relevé navigateur à mesurer une autre présentation que celle par défaut.
 
 Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
 

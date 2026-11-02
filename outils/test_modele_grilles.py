@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Éprouve le modèle des grilles : soixante-seize cas, dont deux sources illisibles.
+"""Éprouve le modèle des grilles : quatre-vingts cas, dont deux sources illisibles.
 
 `outils/modele-grilles.py` ne vaut que s'il refuse. Ce banc casse une chose à la
 fois dans une copie jetable (`outils/banc_mutations.py` : liens symboliques,
@@ -18,7 +18,7 @@ Et deux sources illisibles, qui doivent sortir en code 2 : une feuille absente,
 un registre absent. Un contrôle qui n'a pas pu mesurer n'a pas le droit de dire
 que tout va bien.
 
-Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces soixante-seize
+Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces quatre-vingts
 situations, pas qu'il couvre toutes les façons de perdre une grille dynamique.
 Un `@supports` qui réécrirait les colonnes, ou un style en ligne, lui échappent.
 
@@ -1352,6 +1352,81 @@ class TestModeleGrilles(unittest.TestCase):
         erreurs = self.modele.ecarts_de_place({".trois": grille}, registre)
         self.assertEqual(len(erreurs), 1, erreurs)
         self.assertIn("n'a plus d'objet", erreurs[0])
+
+    def test_une_presentation_qui_reimpose_des_colonnes_doit_etre_declaree(self) -> None:
+        """Les cinq autres présentations réimposaient des colonnes que rien ne vérifiait.
+
+        `html[data-layout="vitrine"] main :is(…)` écrit un `auto-fit` à 340 px pour
+        quinze grilles déclarées. Le modèle ne lisait que la feuille par défaut, si
+        bien que quatre-vingt-cinq couples grille × présentation portaient un
+        minimum qu'aucune règle ne dérivait et qu'aucun navigateur ne mesurait.
+        """
+        grille = self.modele.Grille(selecteur=".six", colonnes_base=3, gap=16.0)
+        feuille = (
+            'html[data-layout="vitrine"] main :is(.six) {'
+            " grid-template-columns: repeat(auto-fit,minmax(min(340px,100%),1fr)); }"
+        )
+        grilles = {".six": grille}
+        self.assertEqual(self.modele.presentations_lues(grilles, feuille)[0]["minimum"], 340)
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = Path(dossier)
+            (copie / FEUILLE).parent.mkdir(parents=True, exist_ok=True)
+            (copie / FEUILLE).write_text(feuille, encoding="utf-8")
+            erreurs = self.modele.presentations_declarees(grilles, {"grille_presentation": []}, copie)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("aucune n'est inscrite", erreurs[0])
+
+    def test_un_regime_de_presentation_qui_ne_correspond_plus_est_refuse(self) -> None:
+        """Le régime déclaré est vérifié contre la feuille, pas seulement nommé."""
+        grille = self.modele.Grille(selecteur=".six", colonnes_base=3, gap=16.0)
+        feuille = (
+            'html[data-layout="vitrine"] main :is(.six) {'
+            " grid-template-columns: repeat(auto-fit,minmax(min(340px,100%),1fr)); }"
+        )
+        registre = {
+            "grille_presentation": [
+                {"presentation": "vitrine", "regime": "auto-fit", "minimum": 260}
+            ]
+        }
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = Path(dossier)
+            (copie / FEUILLE).parent.mkdir(parents=True, exist_ok=True)
+            (copie / FEUILLE).write_text(feuille, encoding="utf-8")
+            erreurs = self.modele.presentations_declarees({".six": grille}, registre, copie)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("le régime déclaré demande 260px", erreurs[0])
+
+    def test_un_regime_de_presentation_sans_regle_est_refuse(self) -> None:
+        """Une décision qui ne porte plus aucune règle n'a plus d'objet."""
+        grille = self.modele.Grille(selecteur=".six", colonnes_base=3, gap=16.0)
+        feuille = ".six { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }"
+        registre = {
+            "grille_presentation": [
+                {
+                    "presentation": "vitrine",
+                    "regime": "auto-fit",
+                    "minimum": 340,
+                    "raison": "Une raison assez longue pour ne pas être un oubli.",
+                }
+            ]
+        }
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = Path(dossier)
+            (copie / FEUILLE).parent.mkdir(parents=True, exist_ok=True)
+            (copie / FEUILLE).write_text(feuille, encoding="utf-8")
+            erreurs = self.modele.presentations_declarees({".six": grille}, registre, copie)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("n'a plus d'objet", erreurs[0])
+
+    def test_une_feuille_illisible_fait_parler_le_controle(self) -> None:
+        """Un contrôle qui ne peut pas lire sa source le dit — il ne renvoie pas zéro."""
+        grille = self.modele.Grille(selecteur=".six", colonnes_base=3, gap=16.0)
+        with tempfile.TemporaryDirectory() as dossier:
+            erreurs = self.modele.presentations_declarees(
+                {".six": grille}, {"grille_presentation": []}, Path(dossier)
+            )
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("illisible", erreurs[0])
 
     def test_le_depot_n_est_pas_modifie(self) -> None:
         avant = {
