@@ -430,7 +430,10 @@ jobs:
 
   graphismes:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    # 20 minutes ne suffisaient plus depuis le contrôle des cadrages (5 min 02
+    # mesurées en local, 480 combinaisons) : le plafond est relevé plutôt que le
+    # banc raccourci, et la raison est écrite ici.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -567,6 +570,61 @@ jobs:
             done
             exit "$comparaison"
           fi
+
+      # Le contrôle des colonnes ne regarde qu'un cadrage : présentation par
+      # défaut, trois tailles de texte. Le panneau de personnalisation en propose
+      # six et cinq crans, et `--content` comme les gouttières changent avec eux.
+      # Cette étape confronte donc quatre pages dans 6 × 5 × 4 = 480 cadrages :
+      # débordement horizontal au demi-pixel près, et nombre de colonnes de
+      # chaque grille déclarée. Coût mesuré : 5 min 02 en local, d'où le plafond
+      # de 30 minutes sur ce job — un banc lent vaut mieux qu'un banc absent, à
+      # condition de dire ce qu'il coûte.
+      - name: Confronter chaque cadrage personnalisé, au pixel près
+        env:
+          MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
+          MRSC_TEST_URL: http://127.0.0.1:4185/
+        run: |
+          mkdir -p "$RUNNER_TEMP/graphismes/cadrages"
+          python3 outils/cadrages.py --releve-json "$RUNNER_TEMP/graphismes/cadrages/plan.json"
+          python3 -m http.server 4185 --bind 0.0.0.0 >"$RUNNER_TEMP/serveur-cadrages.log" 2>&1 &
+          serveur=$!
+          trap 'kill "$serveur"' EXIT
+          sleep 1
+          set +e
+          node outils/mesurer-cadrages.cjs \
+            "$RUNNER_TEMP/graphismes/cadrages/plan.json" \
+            "$RUNNER_TEMP/graphismes/cadrages/rapport.json" \
+            >"$RUNNER_TEMP/graphismes/cadrages/mesure.log" 2>&1
+          mesure=$?
+          set -e
+          cat "$RUNNER_TEMP/graphismes/cadrages/mesure.log"
+          if [ "$mesure" -ne 0 ]; then
+            grep -E '^(  !|Environnement)' "$RUNNER_TEMP/graphismes/cadrages/mesure.log" \
+              | head -n 10 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::error title=Cadrages personnalisés::$ligne"
+            done
+            exit "$mesure"
+          fi
+          set +e
+          python3 outils/cadrages.py --controler \
+            "$RUNNER_TEMP/graphismes/cadrages/plan.json" \
+            "$RUNNER_TEMP/graphismes/cadrages/rapport.json" \
+            >"$RUNNER_TEMP/graphismes/cadrages/controle.log" 2>&1
+          controle=$?
+          set -e
+          cat "$RUNNER_TEMP/graphismes/cadrages/controle.log"
+          if [ "$controle" -eq 0 ]; then
+            grep -E '^Cadrages' "$RUNNER_TEMP/graphismes/cadrages/controle.log" \
+              | head -n 1 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::notice title=Cadrages personnalisés::$ligne"
+            done
+          else
+            grep -E '^(  -|Refusé|Lecture)' "$RUNNER_TEMP/graphismes/cadrages/controle.log" \
+              | head -n 10 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::error title=Cadrages personnalisés::$ligne"
+            done
+          fi
+          exit "$controle"
 
       # Les deux contrôles précédents disent qu'une mutation produit l'erreur
       # annoncée. Aucun ne dit que la géométrie relevée est la bonne : un

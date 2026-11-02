@@ -1,0 +1,60 @@
+# Registre des cadrages personnalisés confrontés au navigateur.
+#
+# Tenu par `outils/cadrages.py --controler`, mesuré par
+# `outils/mesurer-cadrages.cjs`, éprouvé par `outils/test_cadrages.py`.
+#
+# Le 2 novembre 2026, la promesse « la mise en page suit l'espace disponible »
+# n'était vérifiée que dans **un** cadrage : présentation par défaut, trois
+# tailles de texte. Le panneau de personnalisation en propose six présentations
+# et cinq crans de 75 à 130 %, et `--content` comme les gouttières changent avec
+# eux : une grille n'a pas la même place dans 940 px que dans 1 480.
+
+[releve]
+date = 2026-11-02
+feuille = "assets/css/site.css"
+
+# La tolérance est le plus petit écart qu'un navigateur puisse produire en
+# arrondissant une longueur : un demi-pixel. Au-delà, le débordement est réel.
+tolerance_px = 0.5
+
+# Ce qui est confronté, à chaque combinaison : le débordement horizontal du
+# document, et le nombre de colonnes de chaque grille déclarée dans
+# `grilles-dynamiques.toml`. Une combinaison non mesurée est une erreur.
+
+[[dimension]]
+nom = "presentation"
+valeurs = ["defaut", "vitrine", "panorama", "compacte", "mosaique", "lecture"]
+raison = "Les six présentations du panneau. Elles réimposent des colonnes, changent `--content` (940 à 1 480 px) et parfois la base des panneaux `flex` : c'est le cadrage le plus large du site."
+
+[[dimension]]
+nom = "cran_de_texte"
+valeurs = ["75", "85", "100", "115", "130"]
+raison = "Les cinq crans réellement proposés par `site.js` (`textLevels`). Une gouttière en `rem` grandit avec le texte : le conteneur rétrécit quand on agrandit, et le nombre de colonnes change."
+
+[[dimension]]
+nom = "largeur"
+valeurs = ["320", "390", "768", "1440"]
+raison = "Quatre largeurs qui encadrent les seuils de la feuille : téléphone étroit, téléphone courant, tablette — de part et d'autre du seuil de 760 px et du changement de gouttière — et bureau."
+
+[[dimension]]
+nom = "page"
+valeurs = ["index.html", "apprendre.html", "ia-societe.html", "simulateur.html"]
+raison = "Une page par famille de dessin : accueil, fiches d'apprentissage, page IA — la plus dense en grilles — et simulateur, dont les grilles vivent dans un panneau `flex`."
+
+[cout]
+# Mesuré le 2 novembre 2026 sur le dépôt : 480 combinaisons, 0 débordement.
+mesure_locale_secondes = 302
+combinaisons = 480
+note = """Une combinaison coûte un changement de largeur, pas un chargement : le
+temps de chargement se compte en états (page, présentation, cran), pas en
+combinaisons. Un banc qui annonce le coût de l'état précédent se trompe de
+moitié, et c'est ce que `test_cadrages.py` refuse."""
+
+[limites]
+texte = """
+Le relevé ne mesure que le débordement **horizontal** et le nombre de colonnes.
+Il ne dit rien de la hauteur, des chevauchements verticaux, du contraste, ni de
+la lisibilité d'une carte étroite. Les présentations sont mesurées sur les pages
+qui portent les grilles déclarées : une page sans grille déclarée n'est pas
+visitée, et un défaut qui n'affecterait qu'elle échapperait au contrôle.
+"""
