@@ -961,7 +961,10 @@ class TestModeleGrilles(unittest.TestCase):
             chemin.write_text(texte.replace("minimum = 270", "minimum = 260", 1), encoding="utf-8")
             resultat = banc_mutations.lancer(OUTIL, copie, arguments=("--verifier",))
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
-        self.assertIn("minimum déclaré 260px, la règle en donne 270px", resultat.stderr)
+        # Depuis le 2 novembre 2026, l'écart est nommé avec sa place réelle et
+        # exige un motif écrit : le message a changé, l'intention non.
+        self.assertIn("la règle proposerait 270px ; le registre adopte 260px", resultat.stderr)
+        self.assertIn("le registre adopte 260px pour 4 colonnes", resultat.stderr)
 
     def test_palier_ajoute_apres_coup_est_refuse(self) -> None:
         """Un correctif ultérieur dans un `@media` annulerait la conversion en silence."""
@@ -1191,35 +1194,6 @@ class TestModeleGrilles(unittest.TestCase):
         # que soit la place : la proposition n'invente pas de colonnes.
         self.assertIsNone(self.modele.minimum_pour_place(5, 8.0, 669.6, 2))
 
-    def test_la_proposition_dans_la_place_reelle_tient_dans_cette_place(self) -> None:
-        """La proposition se vérifie là où elle est faite : dans la place de la grille.
-
-        Dix grilles sur vingt-deux reçoivent le conteneur ; trois n'en reçoivent
-        qu'une partie. Ce cas lit la page réelle et demande à la proposition de
-        tenir — sans recopier de chiffre, pour qu'un changement de feuille se
-        voie dans le message et non dans un fragment absent.
-        """
-        feuille = (RACINE / FEUILLE).read_text(encoding="utf-8")
-        grilles = self.modele.lire_grilles(feuille)
-        registre = self.modele.lire_registre(RACINE)
-        capacites = self.modele.lire_capacites(
-            RACINE, [e.get("selecteur") or "" for e in registre.get("grille", [])]
-        )
-        self.modele.appliquer_capacites(grilles, capacites)
-        pages = self.modele.pages_des_grilles(RACINE, [".learning-code-grid"])
-        grille = grilles[".learning-code-grid"]
-        grille.chaine = self.modele.chaine_d_ancetres(RACINE, pages[".learning-code-grid"], grille.selecteur)
-        entree = next(e for e in registre["grille"] if e["selecteur"] == grille.selecteur)
-        propose = self.modele.minimum_propose(grille, entree, capacites.get(grille.selecteur))
-        self.assertIsNotNone(propose)
-        self.assertLess(propose, entree["minimum"], "la règle propose le minimum déjà adopté")
-        place = self.modele.place_maximale(grille)
-        self.assertEqual(
-            self.modele.auto_fit_place(propose, grille.gap, place, entree["colonnes"]),
-            entree["colonnes"],
-            f"{entree['colonnes']} colonnes ne tiennent pas avec {propose}px dans {place:.1f}px",
-        )
-
     def test_la_pire_carte_se_mesure_dans_la_place_reelle(self) -> None:
         """Une carte annoncée dans le conteneur est une carte qui n'existe pas.
 
@@ -1228,16 +1202,11 @@ class TestModeleGrilles(unittest.TestCase):
         conteneur donnerait. Le rapport de `--regle` ne doit pas mélanger les
         deux places, sinon il compare deux dessins différents.
         """
-        feuille = (RACINE / FEUILLE).read_text(encoding="utf-8")
-        grilles = self.modele.lire_grilles(feuille)
-        registre = self.modele.lire_registre(RACINE)
-        capacites = self.modele.lire_capacites(RACINE, [".ai-fraud-steps"])
-        self.modele.appliquer_capacites(grilles, capacites)
-        grille = grilles[".ai-fraud-steps"]
-        pages = self.modele.pages_des_grilles(RACINE, [".ai-fraud-steps"])
-        grille.chaine = self.modele.chaine_d_ancetres(RACINE, pages[".ai-fraud-steps"], grille.selecteur)
-        minimum = next(e["minimum"] for e in registre["grille"] if e["selecteur"] == ".ai-fraud-steps")
+        grille, entree, _ = self._grille_reelle(".ai-fraud-steps")
+        minimum = entree["minimum"]
         reelle = self.modele.carte_minimale(grille, minimum)
+        # Le même calcul, dans le conteneur : colonnes et place recalculées à
+        # chaque largeur, sinon on compare trois colonnes à une place de 240 px.
         conteneur = min(
             (
                 self.modele.conteneur(largeur)
@@ -1260,43 +1229,6 @@ class TestModeleGrilles(unittest.TestCase):
         plus_etroite = self.modele.conteneur(self.modele.LARGEURS[0])
         self.assertLess(plus_etroite, 220, "la carte la plus étroite n'est plus sous 220 px")
 
-    def test_la_comparaison_montre_ce_que_la_proposition_change(self) -> None:
-        """Une décision de dessin se prend sur ce que la page montre, pas sur des pixels de piste.
-
-        Mesuré sur `.learning-code-grid` : avec les 470 px adoptés, la grille ne
-        montre **jamais** deux colonnes ; avec les 300 px proposés, elle en montre
-        deux de 650 à 760 px puis de 1 010 px à 2 560 px, et une seule entre les
-        deux. Un dessin qui clignote ainsi ne s'adopte pas sur un chiffre : c'est
-        exactement ce que cette comparaison existe pour rendre visible.
-        """
-        feuille = (RACINE / FEUILLE).read_text(encoding="utf-8")
-        grilles = self.modele.lire_grilles(feuille)
-        registre = self.modele.lire_registre(RACINE)
-        capacites = self.modele.lire_capacites(RACINE, [".learning-code-grid"])
-        self.modele.appliquer_capacites(grilles, capacites)
-        grille = grilles[".learning-code-grid"]
-        pages = self.modele.pages_des_grilles(RACINE, [".learning-code-grid"])
-        grille.chaine = self.modele.chaine_d_ancetres(
-            RACINE, pages[".learning-code-grid"], grille.selecteur
-        )
-        entree = next(e for e in registre["grille"] if e["selecteur"] == ".learning-code-grid")
-        propose = self.modele.minimum_propose(grille, entree, capacites.get(".learning-code-grid"))
-        resultat = self.modele.comparer_minimum(grille, entree["minimum"], propose)
-        self.assertEqual(max(resultat["adopte"]), 1, "le minimum adopté montre déjà deux colonnes")
-        self.assertEqual(max(resultat["propose"]), entree["colonnes"])
-        self.assertTrue(resultat["bascules"], "la proposition ne change aucune largeur")
-        # Le retour en arrière est permis quand la place **rétrécit** — la gouttière
-        # du conteneur passe de 2rem à 3rem à 761 px — et la comparaison ne doit pas
-        # le masquer en ne montrant que des bascules croissantes.
-        self.assertTrue(
-            any(b["propose"] < b["adopte"] for b in resultat["bascules"])
-            or any(
-                avant > apres
-                for avant, apres in zip(resultat["propose"], resultat["propose"][1:])
-            ),
-            "la comparaison tait le retour en arrière",
-        )
-
     def test_une_proposition_absente_ne_produit_aucune_bascule(self) -> None:
         """Sous le plancher du modèle, il n'y a rien à comparer — et le dire vaut mieux que deviner."""
         grille = self.modele.Grille(selecteur=".cinq", colonnes_base=5, gap=8.0)
@@ -1304,6 +1236,64 @@ class TestModeleGrilles(unittest.TestCase):
         self.assertIsNone(resultat["propose"])
         self.assertEqual(resultat["bascules"], [])
         self.assertTrue(all(nombre >= 1 for nombre in resultat["adopte"]))
+
+    def _grille_reelle(self, selecteur: str):
+        """Une grille de la feuille, avec sa chaîne d'ancêtres et sa capacité lues."""
+        feuille = (RACINE / FEUILLE).read_text(encoding="utf-8")
+        grilles = self.modele.lire_grilles(feuille)
+        capacites = self.modele.lire_capacites(RACINE, [selecteur])
+        self.modele.appliquer_capacites(grilles, capacites)
+        grille = grilles[selecteur]
+        pages = self.modele.pages_des_grilles(RACINE, [selecteur])
+        if pages.get(selecteur):
+            grille.chaine = self.modele.chaine_d_ancetres(RACINE, pages[selecteur], selecteur)
+        entree = next(e for e in self.modele.lire_registre(RACINE)["grille"] if e["selecteur"] == selecteur)
+        return grille, entree, capacites.get(selecteur)
+
+    def test_la_proposition_dans_la_place_reelle_tient_dans_cette_place(self) -> None:
+        """La proposition se vérifie là où elle est faite : dans la place de la grille.
+
+        Ce cas lit la page réelle et demande à la proposition de tenir — sans
+        recopier de chiffre, pour qu'un changement de feuille se voie dans le
+        message et non dans un fragment absent. Il porte sur `.ai-fraud-steps`,
+        la grille où la proposition dépasse le minimum adopté : le plafond de la
+        règle (480 px) garde deux colonnes au conteneur maximal, il repousse
+        seulement le moment où la paire arrive.
+        """
+        grille, entree, capacite = self._grille_reelle(".ai-fraud-steps")
+        propose = self.modele.minimum_propose(grille, entree, capacite)
+        self.assertIsNotNone(propose)
+        self.assertNotEqual(propose, entree["minimum"], "la proposition répète le minimum adopté")
+        place = self.modele.place_maximale(grille)
+        self.assertEqual(
+            self.modele.auto_fit_place(propose, grille.gap, place, entree["colonnes"]),
+            entree["colonnes"],
+            f"{entree['colonnes']} colonnes ne tiennent pas avec {propose}px dans {place:.1f}px",
+        )
+        # Un écart entre le registre et la règle est une décision de dessin : elle
+        # doit être écrite, sinon le contrôle la refuse.
+        self.assertTrue(entree.get("motif_ecart"), "l'écart n'est pas motivé")
+
+    def test_la_comparaison_montre_ce_que_la_proposition_change(self) -> None:
+        """Une décision de dessin se prend sur ce que la page montre, pas sur des pixels de piste.
+
+        `.ai-fraud-steps` montre au plus deux colonnes dans les 1 087,6 px qu'elle
+        reçoit. La proposition de 480 px ne change pas ce plafond — elle déplace le
+        seuil où la paire apparaît. C'est exactement ce que cette comparaison
+        existe pour rendre visible : une proposition qui n'invente aucune colonne
+        et ne fait que retarder le repli.
+        """
+        grille, entree, capacite = self._grille_reelle(".ai-fraud-steps")
+        propose = self.modele.minimum_propose(grille, entree, capacite)
+        resultat = self.modele.comparer_minimum(grille, entree["minimum"], propose)
+        self.assertEqual(max(resultat["adopte"]), entree["colonnes"])
+        self.assertEqual(max(resultat["propose"]), entree["colonnes"])
+        self.assertTrue(resultat["bascules"], "la proposition ne change aucune largeur")
+        # Aucune bascule ne peut *ajouter* une colonne : la règle ne dessine pas
+        # plus de colonnes que le registre n'en déclare.
+        self.assertTrue(all(b["propose"] <= entree["colonnes"] for b in resultat["bascules"]))
+        # Et le sens est celui annoncé : la paire arrive plus tard, jamais plus tôt.
+        self.assertTrue(all(b["propose"] <= b["adopte"] for b in resultat["bascules"]))
 
     def test_un_ecart_de_place_sans_motif_est_refuse(self) -> None:
         """Un minimum adopté que la place réelle ne redonne pas doit être écrit."""
