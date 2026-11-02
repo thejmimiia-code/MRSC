@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 73 |
+| Avancées consignées | 74 |
 | Période couverte | du 2026-10-20 au 2026-11-02 |
 | Contrôles exécutables cités | 80 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1740,6 +1740,28 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-
 **Suite.** Faire relire les quatre tracés sur les pages réelles, puis décider pour chaque grille à carte orpheline entre un autre nombre de colonnes déclaré et une orpheline assumée avec son motif.
 
 Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
+
+### `memoire-index-regenerer-en-dernier` — Une CI rouge qui disait « code 1 » et rien d'autre, reproduite en local
+
+*Consignée le 2026-11-02.*
+
+**Constat.** La PR #259 est tombée sur l'étape « Vérifier la mémoire et le plan d'ÉVA », avec pour seule annotation « Process completed with exit code 1 » — les journaux du job sont illisibles depuis cet atelier. L'échec venait de l'ordre des gestes : l'index de mémoire avait été régénéré, puis une ligne vide de fin de fichier retirée dans `docs/rd/formats-affichage.md`. Un octet de moins dans le corpus, et l'index ne correspondait plus.
+
+**Ce que cela change.** L'étape a été rejouée en local commande par commande, l'échec s'est reproduit immédiatement sur `memoire-eva.py --verifier`, et l'index a été régénéré après la correction de forme (418 entrées, 233 nœuds, 483 arêtes, index de 165 331 octets pour un corpus de 1 577 489, soit 10,5 %). La règle de méthode est écrite au journal : `--regenerer` se lance en dernier, après toute retouche de texte, y compris une fin de fichier.
+
+**Preuves dans le dépôt :**
+
+- `outils/memoire-eva.py`
+- `docs/rd/eva/memoire.json`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/memoire-eva.py --verifier && python3 outils/memoire-eva.py --evaluer && python3 outils/verifier-plan-eva.py && python3 outils/test_memoire_eva.py && python3 outils/test_verifier_plan_eva.py`
+
+**Limite — ce que cela ne prouve pas.** Le contrôle attrape l'index périmé, mais la CI ne dit pas pourquoi : son unique annotation est un code de sortie, et les journaux du job restent inaccessibles depuis cet atelier. La reproduction locale est donc le seul moyen d'apprendre la cause — une limite d'outillage, pas de méthode.
+
+**Suite.** Reproduire localement chaque étape qui tombe, plutôt que relancer la CI à l'aveugle, et relancer `--regenerer` en dernier geste de chaque lot qui touche un document.
+
+Initiatives liées : `documentation-rd-eva`, `coherence-textes-publics`, `cartographier-les-lacunes`.
 
 ## 3. Ce que ce registre ne dit pas
 

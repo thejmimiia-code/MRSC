@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-11-02 — Une CI rouge qui disait « code 1 » et rien d'autre, reproduite en trois minutes
+
+- **Initiative :** `documentation-rd-eva`.
+- **Le fait :** la PR #259 est tombée sur l'étape « Vérifier la mémoire et le plan d'ÉVA ». L'unique annotation disponible était « Process completed with exit code 1 », et les journaux du job sont illisibles depuis cet atelier (blob Azure en `EOF`, déjà constaté). L'étape a donc été **rejouée en local**, commande par commande, et l'échec s'est reproduit immédiatement : `memoire-eva.py --verifier` refusait « `docs/rd/eva/memoire.json` n'est plus le rendu de ses sources ».
+- **La cause, et c'est une faute de méthode de ce lot-ci :** l'index de mémoire avait été régénéré, puis un `git diff --check` a signalé une ligne vide en fin de `docs/rd/formats-affichage.md` ; la ligne a été retirée **après** la régénération. Un octet de moins dans le corpus, et l'index ne correspondait plus. La correction était juste, l'ordre des gestes ne l'était pas : un contrôle de forme qui touche un document change le corpus au même titre qu'une phrase.
+- **Ce que cela rappelle, et qui est désormais écrit :** `--regenerer` se lance **en dernier**, après toute retouche de texte, y compris une fin de fichier. Le contrôle l'a dit sans ambiguïté — il n'a pas laissé passer un index périmé, et c'est exactement ce qu'on lui demande.
+- **Contrôles exécutés :** reproduction locale des cinq commandes de l'étape (`--verifier`, `--evaluer`, `verifier-plan-eva.py`, `test_memoire_eva.py`, `test_verifier_plan_eva.py`) · `--regenerer` (418 entrées, 233 nœuds, 483 arêtes, index 165 331 octets pour 1 577 489, soit 10,5 %) · `--verifier` (cohérent) · PR #259 **verte** (`qualite` 6m16s, `graphismes` 11m8s) · `main` = **`a1ba41c`**, quatre workflows verts.
+- **Prochaine action :** faire relire les quatre tracés corrigés par un œil humain — c'est la seule limite que le modèle et le navigateur ne peuvent pas lever.
+
 ## 2026-11-02 — Qualité d'abord : quatre tracés corrigés, deux promesses retirées, la règle réunifiée
 
 - **Initiative :** `optimisation-du-site`.
