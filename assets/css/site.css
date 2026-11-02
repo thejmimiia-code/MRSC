@@ -2379,8 +2379,12 @@ html.contraste-renforce .resource-scope-note {
 
 .ai-path-steps {
   display: grid;
-  /* Cinq étapes au conteneur maximal, puis quatre, trois, deux, une — le
-     nombre de colonnes suit la largeur de piste, jamais une largeur d'écran.
+  /* Le nombre de colonnes suit la largeur de piste, jamais une largeur d'écran.
+     Mesuré le 2 novembre 2026 : cette liste vit dans un panneau `flex` à deux
+     enfants et n'occupe jamais plus de 669,6 px, si bien qu'elle montre au plus
+     deux colonnes — les cinq étapes « au conteneur maximal » annoncées ici
+     n'existent pas. Le registre des grilles porte la mesure et la décision à
+     prendre ; le modèle ne tranche pas un dessin.
      La règle du 31 octobre 2026 donne 220 px : le plus large minimum qui
      laisse encore cinq colonnes à 1 160 px de conteneur. Le palier de 520 px
      qui imposait `repeat(3, …)` et recentrait la dernière étape est supprimé ;

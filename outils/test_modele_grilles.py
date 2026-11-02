@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Éprouve le modèle des grilles : soixante-quatre cas, dont deux sources illisibles.
+"""Éprouve le modèle des grilles : soixante-sept cas, dont deux sources illisibles.
 
 `outils/modele-grilles.py` ne vaut que s'il refuse. Ce banc casse une chose à la
 fois dans une copie jetable (`outils/banc_mutations.py` : liens symboliques,
@@ -18,7 +18,7 @@ Et deux sources illisibles, qui doivent sortir en code 2 : une feuille absente,
 un registre absent. Un contrôle qui n'a pas pu mesurer n'a pas le droit de dire
 que tout va bien.
 
-Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces soixante-quatre
+Ce que ce banc ne dit pas : il prouve que le contrôle mord sur ces soixante-sept
 situations, pas qu'il couvre toutes les façons de perdre une grille dynamique.
 Un `@supports` qui réécrirait les colonnes, ou un style en ligne, lui échappent.
 
@@ -1100,6 +1100,81 @@ class TestModeleGrilles(unittest.TestCase):
             self.modele._pistes_evaluables("minmax(0,1fr) minmax(230px,300px)", 1000, 1.0),
             [(0.0, 1.0), (300.0, None)],
         )
+
+
+    def test_un_dessin_qui_ne_peut_tenir_nulle_part_est_refuse(self) -> None:
+        """Un minimum de 700 px ne fait jamais deux colonnes dans un conteneur de 1 160.
+
+        C'est le défaut que la chaîne des ancêtres a rendu visible : le registre
+        justifiait des minima par un nombre de colonnes au conteneur maximal, et
+        trois grilles ne reçoivent jamais ce conteneur.
+        """
+        grille = self.modele.Grille(selecteur=".large", colonnes_base=2, gap=16.0)
+        grille.regles = [
+            self.modele.Regle(
+                [".large"], "repeat(auto-fit, minmax(min(700px, 100%), 1fr))", None, 700, None, None, 1, 0
+            )
+        ]
+        registre = {"grille": [{"selecteur": ".large", "colonnes": 2, "minimum": 700}]}
+        erreurs = self.modele.pistes_jamais_atteintes({".large": grille}, registre)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("ne peuvent tenir nulle part", erreurs[0])
+        self.assertIn("1416.0px", erreurs[0])
+        self.assertIn("1160.0px", erreurs[0])
+
+        # Une déclaration écrite et motivée la fait taire — la dérogation existe,
+        # mais elle se lit.
+        registre["grille"][0]["piste_jamais_atteinte"] = True
+        registre["grille"][0]["motif"] = (
+            "Le panneau ne laisse jamais plus de 669 px à cette liste, mesuré le 2 novembre 2026."
+        )
+        self.assertEqual(self.modele.pistes_jamais_atteintes({".large": grille}, registre), [])
+
+    def test_une_derogation_sans_motif_est_refusee(self) -> None:
+        """Une dérogation sans raison est un oubli déguisé en décision."""
+        grille = self.modele.Grille(selecteur=".large", colonnes_base=2, gap=16.0)
+        grille.regles = [
+            self.modele.Regle(
+                [".large"], "repeat(auto-fit, minmax(min(700px, 100%), 1fr))", None, 700, None, None, 1, 0
+            )
+        ]
+        registre = {
+            "grille": [
+                {
+                    "selecteur": ".large",
+                    "colonnes": 2,
+                    "minimum": 700,
+                    "piste_jamais_atteinte": True,
+                    "motif": "court",
+                }
+            ]
+        }
+        erreurs = self.modele.pistes_jamais_atteintes({".large": grille}, registre)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("sans motif écrit", erreurs[0])
+
+    def test_une_derogation_devenue_fausse_est_refusee(self) -> None:
+        """Si deux pistes tiennent de nouveau, la dérogation n'a plus d'objet."""
+        grille = self.modele.Grille(selecteur=".petit", colonnes_base=2, gap=16.0)
+        grille.regles = [
+            self.modele.Regle(
+                [".petit"], "repeat(auto-fit, minmax(min(200px, 100%), 1fr))", None, 200, None, None, 1, 0
+            )
+        ]
+        registre = {
+            "grille": [
+                {
+                    "selecteur": ".petit",
+                    "colonnes": 2,
+                    "minimum": 200,
+                    "piste_jamais_atteinte": True,
+                    "motif": "Une raison assez longue pour passer le contrôle des quarante caractères.",
+                }
+            ]
+        }
+        erreurs = self.modele.pistes_jamais_atteintes({".petit": grille}, registre)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("la dérogation n'a plus d'objet", erreurs[0])
 
     def test_le_depot_n_est_pas_modifie(self) -> None:
         avant = {

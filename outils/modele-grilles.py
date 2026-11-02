@@ -2983,6 +2983,80 @@ def verifier_pistes_en_px(grilles: dict[str, Grille], racine: Path | None = None
     return erreurs
 
 
+def place_maximale(grille: "Grille", largeurs: list[int] | None = None) -> float:
+    """La plus large place que cette grille occupe, toutes fenêtres confondues.
+
+    Une grille posée dans une colonne ne reçoit jamais le conteneur : le maximum
+    de `conteneur_de` sur tout le balayage est la seule largeur où une paire de
+    colonnes pourrait tenir. Sur `.learning-code-grid`, ce maximum vaut 812 px
+    quand deux pistes de 470 px en demandent 956.
+    """
+    return max(conteneur_de(grille, largeur) for largeur in (largeurs or LARGEURS))
+
+
+def pistes_jamais_atteintes(
+    grilles: dict[str, Grille], registre: dict, racine: Path | None = None
+) -> list[str]:
+    """Une piste dont deux colonnes ne tiennent dans **aucune** fenêtre.
+
+    Le registre des grilles dynamiques a justifié chaque minimum par un nombre
+    de colonnes à une largeur donnée. Une grille dont la place maximale est plus
+    étroite que deux pistes ne montrera jamais cette paire : le minimum promet
+    alors un état qui n'existe pas. Le contrôle le refuse, sauf déclaration
+    écrite (`piste_jamais_atteinte` et son motif) — et une déclaration qui ne
+    correspond plus à rien est refusée aussi, sans quoi elle deviendrait une
+    exemption permanente.
+    """
+    erreurs: list[str] = []
+    declares = {
+        entree.get("selecteur"): entree
+        for entree in registre.get("grille", [])
+        if entree.get("selecteur")
+    }
+    pages = pages_des_grilles(racine, list(declares)) if racine is not None else {}
+    for selecteur, entree in sorted(declares.items()):
+        grille = grilles.get(selecteur)
+        if grille is None or grille.asymetrique:
+            continue
+        minimum = entree.get("minimum")
+        if not isinstance(minimum, int):
+            continue
+        # La chaîne est posée **le temps de cette mesure** : le reste du
+        # contrôle continue de raisonner dans le conteneur, comme les
+        # recommandations de minimum — c'est une limite écrite, et la changer
+        # d'un coup demanderait de reprendre les vingt-deux minima d'un seul lot.
+        k = int(entree.get("colonnes") or 2)
+        besoin = k * minimum + (k - 1) * grille.gap
+        ancienne = grille.chaine
+        if racine is not None and pages.get(selecteur):
+            grille.chaine = chaine_d_ancetres(racine, pages[selecteur], selecteur)
+        try:
+            place = place_maximale(grille)
+        finally:
+            grille.chaine = ancienne
+        if besoin <= place:
+            if entree.get("piste_jamais_atteinte"):
+                erreurs.append(
+                    f"{selecteur} : déclaré « piste jamais atteinte », or {k} pistes de "
+                    f"{minimum}px tiennent dans {place:.1f}px — la dérogation n'a plus d'objet"
+                )
+            continue
+        if entree.get("piste_jamais_atteinte"):
+            motif = str(entree.get("motif") or "").strip()
+            if len(motif) < 40:
+                erreurs.append(
+                    f"{selecteur} : piste jamais atteinte sans motif écrit "
+                    f"({len(motif)} caractères) — une dérogation sans raison est un oubli"
+                )
+            continue
+        erreurs.append(
+            f"{selecteur} : {k} colonnes de {minimum}px ne peuvent tenir nulle part — elles "
+            f"en demandent {besoin:.1f}px, la place la plus large de cette grille vaut "
+            f"{place:.1f}px — le registre justifie ce minimum par un dessin qui n'existe pas"
+        )
+    return erreurs
+
+
 def verifier(
     grilles: dict[str, Grille],
     registre: dict,
@@ -2999,6 +3073,7 @@ def verifier(
     """
     erreurs: list[str] = verifier_pistes_en_px(grilles, racine)
     capacites = capacites or {}
+    erreurs.extend(pistes_jamais_atteintes(grilles, registre, racine))
     entrees = registre.get("grille", [])
     if not entrees:
         erreurs.append(f"{REGISTRE} ne déclare aucune grille convertie — le registre ne prouve rien")
@@ -3438,10 +3513,23 @@ def principal(arguments: list[str] | None = None) -> int:
             print(f"Refusé : {len(erreurs)} écart(s) entre la feuille et {REGISTRE}.", file=sys.stderr)
             return 1
         converties = len(registre.get("grille", []))
+        jamais = [
+            entree.get("selecteur")
+            for entree in registre.get("grille", [])
+            if entree.get("piste_jamais_atteinte")
+        ]
         print(
             f"Grilles dynamiques : {converties} grilles déclarent leur largeur de piste au lieu "
             "d'un nombre de colonnes, et aucune ne se laisse réimposer un palier."
         )
+        # Un contrôle qui tairait ses exceptions les rendrait invisibles : le
+        # dessin inatteignable est donc nommé à chaque passage réussi, avec sa
+        # mesure, et pas seulement dans un fichier qu'on ne rouvre pas.
+        if jamais:
+            print(
+                f"  {len(jamais)} dessin(s) déclaré(s) inatteignable(s), avec sa mesure et sa "
+                "décision ouverte : " + ", ".join(sorted(jamais))
+            )
         return 0
 
     if options.grille:
