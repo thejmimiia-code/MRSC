@@ -189,6 +189,7 @@ digraph memoire {
   "outils/test_mesure_graphismes.mjs" [shape=plaintext, label="outils/test_mesure_graphismes.mjs"];
   "outils/test_modele_grilles.py" [shape=plaintext, label="outils/test_modele_grilles.py"];
   "outils/test_mutations_budgets_visuels.py" [shape=plaintext, label="outils/test_mutations_budgets_visuels.py"];
+  "outils/test_mutations_cadrages.py" [shape=plaintext, label="outils/test_mutations_cadrages.py"];
   "outils/test_mutations_files_relecture.py" [shape=plaintext, label="outils/test_mutations_files_relecture.py"];
   "outils/test_mutations_fusions.py" [shape=plaintext, label="outils/test_mutations_fusions.py"];
   "outils/test_mutations_integration.py" [shape=plaintext, label="outils/test_mutations_integration.py"];
@@ -393,10 +394,10 @@ digraph memoire {
   "avancee:modele-confronte-au-navigateur" -> "outils/modele-grilles.py" [label="prouvée par"];
   "avancee:modele-confronte-au-navigateur" -> "outils/rapporter-mesure-grilles.py" [label="prouvée par"];
   "avancee:modele-confronte-au-navigateur" -> "outils/test_rapporter_mesure_grilles.py" [label="prouvée par"];
-  "avancee:ni-mot-coupe-ni-carte-superposee" -> "docs/rd/cadrages.toml" [label="prouvée par"];
   "avancee:ni-mot-coupe-ni-carte-superposee" -> "outils/cadrages.py" [label="prouvée par"];
   "avancee:ni-mot-coupe-ni-carte-superposee" -> "outils/mesurer-cadrages.cjs" [label="prouvée par"];
   "avancee:ni-mot-coupe-ni-carte-superposee" -> "outils/test_cadrages.py" [label="prouvée par"];
+  "avancee:ni-mot-coupe-ni-carte-superposee" -> "outils/test_mutations_cadrages.py" [label="prouvée par"];
   "avancee:onze-verifications-internes-jamais-vues-en-echec" -> "docs/rd/inventaire-controles.md" [label="prouvée par"];
   "avancee:onze-verifications-internes-jamais-vues-en-echec" -> "outils/banc_mutations.py" [label="prouvée par"];
   "avancee:onze-verifications-internes-jamais-vues-en-echec" -> "outils/test_mutations_securite.py" [label="prouvée par"];

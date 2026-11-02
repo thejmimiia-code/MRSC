@@ -2277,6 +2277,12 @@ Une troisième tentative — `top: -60px` sur **toutes** les cartes — n'a rien
 déplaçait l'ensemble d'un bloc, sans changer une seule distance. Un banc qui ne mord pas
 ne dit rien, et c'est pour cela qu'il est éprouvé avant d'être cru.
 
+Ces deux mutations ne restent pas des gestes de session : `outils/test_mutations_cadrages.py`
+les rejoue seul, sur une copie jetable servie par un port libre, deux cadrages par cas. Il
+exige aussi que la copie **intacte** passe — sans quoi un contrôle qui refuserait toujours
+paraîtrait infaillible. Sans navigateur, il sort en **code 2** et le dit : un banc
+navigateur muet passerait pour vert.
+
 ### Limites
 
 Le relevé mesure quatre choses, et elles seules. Il ne dit rien de la hauteur totale, du
