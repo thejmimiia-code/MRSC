@@ -2,7 +2,7 @@
 
 **Document de travail, daté du 28 octobre 2026.** Il répond à une seule question, outil par outil : *qu'est-ce qui prouve que ce contrôle peut échouer ?* Un contrôle dont personne n'a jamais vu l'échec est une affirmation, pas une vérification — c'est la leçon tirée ce jour en écrivant `outils/test_mutations_affichages.py` puis `outils/test_mutations_site_statique.py`.
 
-Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'on ne le sait pas encore, et il nomme le travail restant. Il est tenu par `outils/verifier-inventaire-controles.py`, qui échoue si un outil du dépôt n'y figure pas, si un test annoncé n'existe pas ou si un chemin cité a bougé — et dont le propre pouvoir de mordre est éprouvé par `outils/test_verifier_inventaire_controles.py`, cinq fautes plantées dans une copie du dépôt. Un inventaire qu'on peut oublier de mettre à jour ne vaut rien ; un garde d'inventaire qu'on croit sur parole ne vaut pas mieux.
+Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'on ne le sait pas encore, et il nomme le travail restant. Il est tenu par `outils/verifier-inventaire-controles.py`, qui échoue si un outil du dépôt n'y figure pas, si un test annoncé n'existe pas ou si un chemin cité a bougé — et dont le propre pouvoir de mordre est éprouvé par `outils/test_verifier_inventaire_controles.py`, neuf fautes plantées dans une copie du dépôt. Un inventaire qu'on peut oublier de mettre à jour ne vaut rien ; un garde d'inventaire qu'on croit sur parole ne vaut pas mieux.
 
 ## Comment lire la colonne « Statut »
 
@@ -54,7 +54,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/verifier-fusions.py` | Fusion et suppression de branche sans perte | `test_mutations_fusions.py` (6 fautes dans de petits dépôts git neufs) | `banc` |
 | `outils/verifier-graphismes.cjs` | Mesure navigateur de trois visuels | `test_mesure_graphismes.mjs` (3 pages de contrôle aux dimensions connues, nombres confrontés à l'arithmétique) · `verifier-mutation-graphismes.py` (les 3 mutations produisent l'erreur annoncée) | `banc` |
 | `outils/verifier-integration.py` | Intégration du simulateur au site, sans navigateur | `test_mutations_integration.py` (3 fautes : ressource orpheline, chiffre annoncé, page absente) | `banc` |
-| `outils/verifier-inventaire-controles.py` | Tient ce document : couverture, existence, vocabulaire des statuts | `test_verifier_inventaire_controles.py` (casse l'inventaire dans une copie) | `banc` |
+| `outils/verifier-inventaire-controles.py` | Tient ce document : couverture, existence, vocabulaire des statuts, **et les comptes** du tableau « Combien » confrontés aux lignes réelles | `test_verifier_inventaire_controles.py` (9 fautes dans une copie : outil ajouté, ligne retirée, test annoncé absent, statut inconnu, compte faux, phrase de synthèse fausse puis effacée, statut absent du tableau) | `banc` |
 | `outils/memoire-eva.py` | Mémoire à trois horizons d'ÉVA : index, recherche par pointeurs, graphe Mermaid et DOT, contrôle de fraîcheur | `test_memoire_eva.py` (10 cas dans une vraie copie : pointeur mort, ligne hors fichier, résumé trop long, fait écrit deux fois, renvoi qui ne résout plus, index absent en code 2, déterminisme, source disparue) | `banc` |
 | `outils/verifier-plan-eva.py` | Aucune capacité sans test, aucun refus sans condition : statuts, dépendances, cycles, couverture des 19 branches du portefeuille | `test_verifier_plan_eva.py` (9 cas : phase faite sans test, phase faite sans citation au journal, hors-portée sans condition, condition trop courte, cycle, dépendance inconnue, branche non servie, plan illisible en code 2) | `banc` |
 | `outils/mesurer-grilles.cjs` | Compte, dans un vrai Chromium, les colonnes des grilles que le modèle annonce — rangées d'un `flex-wrap`, pistes non nulles d'une grille | `rapporter-mesure-grilles.py` et son banc hors ligne ; sans navigateur il sort en code 2 et le dit (vérifié à la main le 1er novembre 2026, l'atelier n'a pas de Chromium) | `hors-portee` |
@@ -75,20 +75,30 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/verifier-source-distante.py` | Utilisabilité de la version en ligne du simulateur | `test_verifier_source_distante.py` (9 cas sur un serveur local réel : page, API, ordre des routes, hôte refusé, port fermé) | `banc` |
 | `outils/verifier-taux-dates.py` | Une règle chiffrée porte sa date | `test_verifier_taux_dates.py` (14 tests, catalogue temporaire muté) | `banc` |
 | `outils/verifier-vote-distanciel.py` | Garde-fous documentaires du vote distanciel | `test_verifier_vote_distanciel.py` (86 tests) | `faute-en-memoire` |
+| `outils/verifier-workflows.py` | Les six workflows de `.github/` se lisent : clé `jobs`, `runs-on` par job, `name` et un seul de `run`/`uses` par étape ; sans analyseur YAML, code 2 et rien de prétendu vérifié | `test_verifier_workflows.py` (8 cas : intact, « : » dans un nom d'étape — la faute du 3 novembre 2026 —, job sans `runs-on`, étape sans nom, étape à `run` **et** `uses`, `jobs` absent, aucun workflow, analyseur absent) | `banc` |
 | `outils/versionner-css-ia.py` | Lie la page IA au contenu exact du CSS | `test_version_css_ia.py` (2 tests) | `test` |
 
 ## Ce que l'inventaire dit en clair
 
 48 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
-- **Vingt-deux** contrôles sont éprouvés en cassant réellement quelque chose : les garde-fous d'affichage, la porte des pages statiques, la règle des taux datés, les frontières de sécurité, la règle « ne rien perdre en fusionnant », la porte de publication, la porte d'intégration, la continuité R&D, le budget de poids, les budgets d'affichage, les deux outils de la file de relecture, les planches des statuts, l'état daté de la R&D, la vérification de la source distante, le contrôle des mutations d'affichage, le test du cache CSS, le harnais des essais navigateur, la mesure des graphismes et ce contrôle-ci, qui casse l'inventaire dans une copie du dépôt.
-- **Douze** le sont en cassant des données en mémoire ou en simulant ce qui ne peut pas être joint. C'est utile, mais la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée : un `registre-relecture.py` qui lirait le mauvais fichier resterait vert sur ces tests ; `verifier-maj-amont.py` n'interroge jamais réellement l'amont ; et les quatre scripts navigateur (`auditer-criteres-22.mjs`, `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs`, `auditer-affichages.mjs`) ne voient jamais un vrai Chromium — leurs bancs éprouvent ce qu'ils font de mesures qu'on leur donne, pas la justesse de ce qu'ils mesurent.
-- **Six** ont un test qui n'injecte aucune faute.
-- **Aucun** n'est réduit à son propre témoignage.
-- **Aucun** n'est réduit à son seul vert quotidien.
-- **Huit** ne sont pas des contrôles (générateurs, aides partagées, serveur local) : ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`.
+### Combien, et pourquoi ces nombres ne sont pas recopiés à la main
 
-Autrement dit : **40 contrôles sur 40** s'appuient sur un test capable d'échouer. Aucun contrôle n'est plus cru sur parole, et l'inventaire ne compte plus aucun `test-en-soi`.
+Ce tableau est lu par `outils/verifier-inventaire-controles.py` : chaque nombre y
+est confronté au compte réel des lignes ci-dessus, et la phrase qui suit est
+confrontée aux deux totaux. Un compte tenu à la main pourrit en une semaine —
+celui-ci ne le peut plus.
+
+| Statut | Nombre | Ce que cela veut dire ici |
+| --- | --- | --- |
+| `banc` | 30 | Le contrôle a été vu échouer sur une faute plantée, dont voici les plus récents : les cadrages (`test_mutations_cadrages.py`, 3 cas, navigateur), les workflows (`test_verifier_workflows.py`, 8 cas) et cet inventaire lui-même. |
+| `faute-en-memoire` | 12 | Des données sont cassées en mémoire ou un service est simulé ; la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée. `verifier-maj-amont.py` n'interroge jamais réellement l'amont ; les quatre scripts navigateur (`auditer-criteres-22.mjs`, `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs`, `auditer-affichages.mjs`) ne voient jamais un vrai Chromium — leurs bancs éprouvent ce qu'ils font de mesures qu'on leur donne, pas la justesse de ce qu'ils mesurent. |
+| `test` | 6 | Un test existe, mais il n'injecte aucune faute. |
+| `test-en-soi` | 0 | Plus aucun : un script qui n'est prouvé que par son propre vert n'est plus compté comme contrôlé. |
+| `aucun-test` | 0 | Plus aucun : c'était du travail nommé, il est fait. |
+| `hors-portee` | 10 | Générateurs, aides partagées, serveur local : ce ne sont pas des contrôles. Ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`. |
+
+Autrement dit : **48 contrôles sur 48** s'appuient sur un test capable d'échouer.
 
 ## Par où continuer, par ordre de rentabilité
 

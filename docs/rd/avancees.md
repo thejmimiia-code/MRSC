@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 80 |
+| Avancées consignées | 81 |
 | Période couverte | du 2026-10-20 au 2026-11-03 |
-| Contrôles exécutables cités | 88 |
+| Contrôles exécutables cités | 90 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1879,7 +1879,7 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-
 
 **Contrôle qui la maintient :** `python3 outils/cadrages.py --releve-json /tmp/plan.json && node outils/mesurer-cadrages.cjs /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --controler /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --orphelins /tmp/plan.json /tmp/rapport.json && python3 outils/test_cadrages.py`
 
-**Limite — ce que cela ne prouve pas.** Le diagnostic mesure un vide géométrique, pas une gêne : une rangée incomplète peut être le dessin voulu, et une rangée pleine peut rester laide. Il ne voit que les enfants directs d'une grille déclarée, à l'instant du relevé, et sur le **premier exemplaire** d'un sélecteur qui en nomme plusieurs. La décision de corriger reste humaine et n'est pas prise : aucune règle n'a été changée.
+**Limite — ce que cela ne prouve pas.** Le diagnostic mesure un vide géométrique, pas une gêne : une rangée incomplète peut être le dessin voulu, et une rangée pleine peut rester laide. Il ne voit que les enfants directs d'une grille déclarée, à l'instant du relevé, et ne regardait que le **premier exemplaire** d'un sélecteur qui en nomme plusieurs — limite levée le 3 novembre 2026 par `contraste-et-pages-oubliees`, qui relève chaque exemplaire et applique la capacité aux grilles qui replient. La décision de corriger reste humaine et n'est pas prise : aucune règle n'a été changée.
 
 **Suite.** Trancher, grille par grille, entre assumer la rangée incomplète et changer le dessin — sans ajouter de palier, et en re-mesurant après chaque décision.
 
@@ -1909,6 +1909,30 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-
 **Suite.** Étendre la mesure aux états interactifs et aux fonds en image, en disant ce que la méthode coûte — la capture d'écran a été chiffrée à 690 ms par élément et n'a pas été retenue.
 
 Initiatives liées : `optimisation-du-site`, `ecouter-la-page`, `coherence-textes-publics`.
+
+### `un-yaml-casse-n-etait-pas-une-erreur` — Un workflow illisible n'était pas une erreur : c'était un silence, et il ressemblait à un succès
+
+*Consignée le 2026-11-03.*
+
+**Constat.** Un nom d'étape écrit « Confronter chaque cadrage personnalisé : géométrie, mots, cartes et contraste » a suffi. Dans un scalaire YAML non cité, « : » suivi d'une espace ouvre une table : le fichier n'était plus lisible. GitHub a répondu « This run likely failed because of a workflow file issue » et n'a lancé **aucun** job — ni `qualite`, ni `graphismes`. Pendant ce temps, rien dans le dépôt ne lisait les workflows : un contrôle absent ne pouvait pas échouer, donc tout était vert. C'est la forme la plus dangereuse du défaut, celle qui ressemble à une réussite.
+
+**Ce que cela change.** `outils/verifier-workflows.py` lit chaque fichier de `.github/workflows/` avec un vrai analyseur YAML, puis vérifie la forme attendue : clé `jobs` non vide, `runs-on` par job, `name` et exactement un de `run`/`uses` par étape. Sans analyseur disponible, il sort en **code 2** en le disant — jamais en code 0 comme si les six fichiers avaient été lus. Son banc, `outils/test_verifier_workflows.py`, plante la faute exacte du 3 novembre dans une copie jetable et **huit** cas au total, dont le refus « aucun workflow », qui empêche un dossier vide de passer pour un dépôt vérifié. L'étape est entrante dans le job `qualite`, avant les autres contrôles : un workflow illisible rend les suivants inutiles. Deux étapes du job `graphismes` n'avaient pas de nom — elles en ont un, sans quoi la règle n'aurait pas pu être tenue.
+
+**Preuves dans le dépôt :**
+
+- `outils/verifier-workflows.py`
+- `outils/test_verifier_workflows.py`
+- `.github/workflows/verification.yml`
+- `docs/rd/inventaire-controles.md`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_verifier_workflows.py && python3 outils/verifier-workflows.py`
+
+**Limite — ce que cela ne prouve pas.** Le contrôle juge la **forme**, pas le sens : un workflow lisible peut appeler une action obsolète, demander des droits excessifs ou lancer un banc qui ne mesure rien. Il ne remplace pas une exécution — il garantit seulement que GitHub peut démarrer les jobs. Il exige PyYAML : la CI l'installe explicitement dans l'étape, et hors CI l'absence du module est un refus, pas un silence. Le nom obligatoire par étape est une règle du dépôt, pas de GitHub : elle coûte deux lignes et rend les annotations d'échec lisibles.
+
+**Suite.** Vérifier la validité des workflows dans les autres dépôts du projet, et étendre la garde aux déclencheurs (`on:`) et aux versions d'actions épinglées, que `verifier-securite.py` couvre en partie.
+
+Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 
 ## 3. Ce que ce registre ne dit pas
 

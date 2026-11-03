@@ -3,8 +3,9 @@
 
 `verifier-inventaire-controles.py` garde `docs/rd/inventaire-controles.md` : un
 outil ajouté sans ligne, un fichier de test annoncé qui n'existe pas, un chemin
-cité qui a bougé. Ce contrôle-là aussi doit prouver qu'il mord — sinon il
-protège l'inventaire exactement comme un cadenas sans pêne.
+cité qui a bougé, un total écrit à la main qui a pris du retard. Ce contrôle-là
+aussi doit prouver qu'il mord — sinon il protège l'inventaire exactement comme
+un cadenas sans pêne.
 
 Les fautes sont plantées dans une copie complète du dépôt, comme pour la porte
 des pages statiques : l'outil lit des chemins réels.
@@ -88,6 +89,51 @@ class TestInventaireControles(unittest.TestCase):
             resultat = banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("test_qui_n_existe_pas.py", resultat.stderr)
+
+    def test_compte_du_tableau_faux_refuse(self) -> None:
+        """Le 3 novembre 2026, la prose annonçait « Vingt-deux » bancs pour trente.
+
+        Le total était recopié à la main, personne ne le relisait, et il avait
+        pris six unités de retard. Le tableau « Combien » est désormais confronté
+        aux lignes réelles : ce cas casse un seul chiffre.
+        """
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = Path(dossier) / "copie"
+            banc_mutations.copie_complete(copie)
+            texte = (copie / DOC).read_text(encoding="utf-8")
+            banc_mutations.muter(copie, DOC, "| `banc` | 30 |", "| `banc` | 31 |")
+            resultat = banc_mutations.lancer(OUTIL, copie)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("annonce 31", resultat.stderr)
+        self.assertGreater(texte.count("| `banc` | 30 |"), 0)
+
+    def test_phrase_de_synthese_fausse_refusee(self) -> None:
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = Path(dossier) / "copie"
+            banc_mutations.copie_complete(copie)
+            banc_mutations.muter(copie, DOC, "**48 contrôles sur 48**", "**47 contrôles sur 48**")
+            resultat = banc_mutations.lancer(OUTIL, copie)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("47 contrôles éprouvés", resultat.stderr)
+
+    def test_phrase_de_synthese_effacee_refusee(self) -> None:
+        """Effacer la phrase ne doit pas valoir zéro erreur : elle porte les totaux."""
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = Path(dossier) / "copie"
+            banc_mutations.copie_complete(copie)
+            banc_mutations.muter(copie, DOC, "**48 contrôles sur 48**", "quarante-huit contrôles")
+            resultat = banc_mutations.lancer(OUTIL, copie)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout)
+        self.assertIn("a disparu", resultat.stderr)
+
+    def test_statut_absent_du_tableau_refuse(self) -> None:
+        with tempfile.TemporaryDirectory() as dossier:
+            copie = Path(dossier) / "copie"
+            banc_mutations.copie_complete(copie)
+            banc_mutations.muter(copie, DOC, "| `test-en-soi` | 0 |", "| `test_en_soi` | 0 |")
+            resultat = banc_mutations.lancer(OUTIL, copie)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout + resultat.stderr)
+        self.assertIn("omet", resultat.stderr)
 
     def test_statut_inconnu_refuse(self) -> None:
         with tempfile.TemporaryDirectory() as dossier:
