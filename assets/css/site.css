@@ -35,6 +35,8 @@
   --border-strong: #aebbd0;
   --border-soft: #dfe6ef;
   --border-soft-2: #d7ddea;
+  /* Anneau de focus : bleu par défaut, clair sur les surfaces marines. */
+  --focus-ring: var(--blue);
   --on-navy: #fff;
   --on-navy-sky: #bae6fd;
   --on-navy-pale: #d9e5f7;
@@ -169,13 +171,22 @@ a {
 button:focus-visible,
 a:focus-visible,
 summary:focus-visible {
-  outline: 3px solid var(--blue);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 4px;
 }
 
-.main-nav :focus-visible,
-.site-footer a:focus-visible {
-  outline-color: var(--on-navy);
+/* Un anneau de focus doit être vu, pas seulement présent. Mesuré le 3 novembre
+   2026 : le bleu du site posé sur la surface marine de `.creator-note` donne
+   1,76:1 — sous les 3:1 de WCAG 2.2 AA (1.4.11, contraste des éléments non
+   textuels). Plutôt que de répéter un `outline-color` par composant, chaque
+   surface sombre pose la variable : une surface ajoutée plus tard n'a qu'une
+   ligne à écrire, et `outils/mesurer-focus.cjs` dit si elle est juste. */
+.main-nav,
+.site-footer,
+.creator-note,
+.ai-path-panel,
+.ai-node {
+  --focus-ring: var(--on-navy);
 }
 
 .visually-hidden {
