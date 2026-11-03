@@ -109,13 +109,13 @@ def controler(plan: dict, rapport: dict) -> list[str]:
             continue
         for element in elements:
             etiquette = f"{nom} · {largeur} px · {element.get('selecteur', '?')}"
-            if element.get("retabli") is False:
-                # Le focus rendu par `element.focus()` ne redonne pas l'apparence
-                # que la touche Tab avait produite : l'apparence « au repos » n'est
-                # alors pas comparable, et tout chiffre qui en sortirait serait faux.
+            if element.get("au_repos") is False:
+                # L'élément est encore celui qui a le focus : l'apparence « au
+                # repos » n'en est pas une, et la comparaison porterait sur deux
+                # états identiques — donc dans le sens rassurant.
                 refus.append(
-                    f"{etiquette} : apparence de focus non retrouvée après défocalisation — "
-                    "la comparaison au repos n'est pas fiable, aucun rapport n'est rendu"
+                    f"{etiquette} : l'élément avait encore le focus à la lecture du repos — "
+                    "la comparaison n'est pas fiable, aucun rapport n'est rendu"
                 )
                 continue
             if element.get("fond_image"):

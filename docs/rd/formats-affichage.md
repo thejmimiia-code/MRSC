@@ -2424,7 +2424,7 @@ correction ne répète pas un `outline-color` par composant : un jeton
 repassent en blanc. Une surface ajoutée plus tard n'a qu'une ligne à écrire, et
 la mesure dit si elle est juste.
 
-### Cinq fautes de sonde, corrigées avant de conclure
+### Six fautes de sonde, corrigées avant de conclure
 
 | Faute | Effet |
 | --- | --- |
@@ -2433,6 +2433,16 @@ la mesure dit si elle est juste.
 | un dénominateur estimé par sélecteur | 220 cibles annoncées « non parcourues » alors que la traversée avait atteint la fin du document |
 | un focus rendu par `element.focus()` non vérifié | une apparence de repos prise sur un autre état que le focus réel |
 | mutations cumulées dans une copie partagée | `outline: none` resté dans la feuille, deux cas suivants faussés |
+| repos obtenu en défocalisant puis en redonnant le focus | échec en intégration continue sur `documents.html` : le focus programmatique ne redonne pas toujours `:focus-visible` |
+
+La dernière a coûté une exécution de CI, et elle a bien fait : le garde a refusé
+de conclure au lieu de rendre un chiffre faux **dans le sens rassurant**. Le
+repos se lit désormais **au pas suivant** — la touche Tab suivante relâche
+l'élément d'elle-même — et le relevé ne manipule plus jamais le focus. Une
+seconde correction a suivi : les valeurs de l'indicateur se lisent dans
+l'apparence capturée **au moment du focus**, jamais dans un `getComputedStyle`
+tardif, sans quoi le relevé se contredisait (« changement : contour »,
+« indicateur : aucun » sur 2 496 éléments).
 
 Les deux dernières sont les plus instructives : le script **vérifie** que
 l'apparence rendue après défocalisation est identique à celle du focus réel, et

@@ -76,9 +76,15 @@ const base = process.env.MRSC_TEST_URL || 'http://127.0.0.1:4183/';
 
 // --- Ce qui tourne dans la page ------------------------------------------------
 
-//: Mesure l'élément qui a le focus. Les seuils ne sont pas ici : le rapport WCAG
-//: est calculé, jamais comparé.
-function mesurerActif(position) {
+//: Mesure un pas de la traversée. Le repos d'un élément n'est **jamais** obtenu
+//: en le défocalisant : la touche Tab suivante le relâche d'elle-même, et c'est
+//: son apparence à ce moment-là qui sert de référence. Le 3 novembre 2026, la
+//: version qui défocalisait puis redonnait le focus a échoué en intégration
+//: continue sur `documents.html` : le focus programmatique ne redonne pas
+//: toujours `:focus-visible`, et le garde a refusé de conclure — à juste titre.
+//: Lire le repos au pas suivant ne manipule rien : elle mesure ce que la
+//: personne voit, un élément après l'autre.
+function mesurerPas(position) {
   const lireCouleur = (texte) => {
     const trouve = String(texte).match(/rgba?\(([^)]+)\)/);
     if (!trouve) return null;
@@ -144,87 +150,93 @@ function mesurerActif(position) {
     };
   };
 
-  const actif = document.activeElement;
-  // La traversée clavier revient au document après le dernier élément : c'est la
-  // fin du parcours, pas une mesure vide.
-  if (!actif || actif === document.body) return { fin: true };
-  if (!window.__mrscVus) window.__mrscVus = new WeakSet();
-  if (window.__mrscVus.has(actif)) return { deja_vu: true };
-  window.__mrscVus.add(actif);
-
-  const libelle = (actif.textContent || actif.getAttribute('aria-label') || '').trim().slice(0, 40);
-
-  // L'apparence au focus est celle que la touche Tab vient de produire : la
-  // seule qui compte, parce que c'est celle que voit une personne au clavier.
-  const auFocus = apparence(actif);
-  // Le repos est obtenu en défocalisant l'élément, puis le focus est rendu pour
-  // que la touche Tab suivante reprenne où elle en était. Un `element.focus()`
-  // ne déclenche pas `:focus-visible` de façon fiable : le script vérifie donc
-  // que l'apparence rendue est identique à celle du focus réel, et refuse de
-  // conclure sinon.
-  actif.blur();
-  const auRepos = apparence(actif);
-  actif.focus({ preventScroll: true });
-  const apresRetour = apparence(actif);
-  const retabli = JSON.stringify(apresRetour) === JSON.stringify(auFocus);
-
-  const exterieur = fondVu(actif.parentElement);
-  const interieur = fondVu(actif);
-  const style = getComputedStyle(actif);
-
-  const mesure = {
-    position,
-    selecteur: nom(actif),
-    libelle,
-    retabli,
-    fond: exterieur.couleur,
-    fond_image: exterieur.image || interieur.image,
-    changement: null,
-    indicateur: 'aucun',
-    couleur: null,
-    epaisseur: null,
-    contraste: null,
+  //: Compare l'apparence au focus et celle au repos, et rend la mesure.
+  const conclure = (element, auFocus, auRepos, rang) => {
+    // Les valeurs de l'indicateur se lisent dans `auFocus`, jamais dans un
+    // `getComputedStyle` tardif : au moment où le précédent est mesuré, il a
+    // perdu le focus, et son contour est déjà celui du repos. La première
+    // version de ce correctif lisait le style trop tard : elle voyait
+    // « changement: contour » et « indicateur: aucun » sur 2 496 éléments —
+    // un relevé qui se contredit, refusé par le contrôle avant publication.
+    const [contourStyle, contourLargeur, contourCouleur] = auFocus.contour.split('|');
+    const exterieur = fondVu(element.parentElement);
+    const interieur = fondVu(element);
+    const mesure = {
+      position: rang,
+      selecteur: nom(element),
+      libelle: (element.textContent || element.getAttribute('aria-label') || '').trim().slice(0, 40),
+      // L'élément mesuré au repos est-il vraiment au repos ? Si le focus ne l'a
+      // pas quitté, la comparaison porterait sur deux états identiques et la
+      // conclusion serait fausse dans le sens rassurant.
+      au_repos: document.activeElement !== element,
+      fond: exterieur.couleur,
+      fond_image: exterieur.image || interieur.image,
+      changement: null,
+      indicateur: 'aucun',
+      couleur: null,
+      epaisseur: null,
+      contraste: null,
+    };
+    if (auFocus.contour !== auRepos.contour) {
+      const couleur = lireCouleur(contourCouleur);
+      const epaisseur = parseFloat(contourLargeur) || 0;
+      mesure.changement = 'contour';
+      mesure.epaisseur = epaisseur;
+      mesure.couleur = couleur;
+      if (contourStyle === 'none' || epaisseur === 0) {
+        // Un contour effacé au focus est un changement, pas un indicateur.
+        mesure.indicateur = 'aucun';
+      } else {
+        mesure.indicateur = 'contour';
+        mesure.contraste = rapport(couleur, exterieur.couleur);
+      }
+    } else if (auFocus.ombre !== auRepos.ombre) {
+      const couleur = lireCouleur(auFocus.ombre.replace(/inset/g, ''));
+      mesure.changement = 'ombre';
+      mesure.couleur = couleur;
+      mesure.indicateur = couleur ? 'ombre' : 'aucun';
+      mesure.contraste = rapport(couleur, exterieur.couleur);
+    } else if (auFocus.fond !== auRepos.fond) {
+      const couleur = lireCouleur(auFocus.fond);
+      mesure.changement = 'fond';
+      mesure.couleur = couleur;
+      mesure.indicateur = 'fond';
+      mesure.contraste = rapport(couleur, exterieur.couleur);
+    } else if (auFocus.bordure !== auRepos.bordure) {
+      const couleur = lireCouleur(auFocus.bordure.split('|')[2]);
+      mesure.changement = 'bordure';
+      mesure.couleur = couleur;
+      mesure.indicateur = 'bordure';
+      mesure.contraste = rapport(couleur, interieur.couleur);
+    } else if (auFocus.decoration !== auRepos.decoration || auFocus.couleur !== auRepos.couleur) {
+      const couleur = lireCouleur(auFocus.decoration.split('|')[1]) || lireCouleur(auFocus.couleur);
+      mesure.changement = 'texte';
+      mesure.couleur = couleur;
+      mesure.indicateur = 'texte';
+      mesure.contraste = rapport(couleur, interieur.couleur);
+    }
+    return mesure;
   };
 
-  if (auFocus.contour !== auRepos.contour) {
-    const couleur = lireCouleur(style.outlineColor);
-    const epaisseur = parseFloat(style.outlineWidth) || 0;
-    mesure.changement = 'contour';
-    mesure.epaisseur = epaisseur;
-    mesure.couleur = couleur;
-    if (style.outlineStyle === 'none' || epaisseur === 0) {
-      // Un contour effacé au focus est un changement, pas un indicateur.
-      mesure.indicateur = 'aucun';
-    } else {
-      mesure.indicateur = 'contour';
-      mesure.contraste = rapport(couleur, exterieur.couleur);
-    }
-  } else if (auFocus.ombre !== auRepos.ombre) {
-    const couleur = lireCouleur(style.boxShadow.replace(/inset/g, ''));
-    mesure.changement = 'ombre';
-    mesure.couleur = couleur;
-    mesure.indicateur = couleur ? 'ombre' : 'aucun';
-    mesure.contraste = rapport(couleur, exterieur.couleur);
-  } else if (auFocus.fond !== auRepos.fond) {
-    const couleur = lireCouleur(style.backgroundColor);
-    mesure.changement = 'fond';
-    mesure.couleur = couleur;
-    mesure.indicateur = 'fond';
-    mesure.contraste = rapport(couleur, exterieur.couleur);
-  } else if (auFocus.bordure !== auRepos.bordure) {
-    const couleur = lireCouleur(style.borderTopColor);
-    mesure.changement = 'bordure';
-    mesure.couleur = couleur;
-    mesure.indicateur = 'bordure';
-    mesure.contraste = rapport(couleur, interieur.couleur);
-  } else if (auFocus.decoration !== auRepos.decoration || auFocus.couleur !== auRepos.couleur) {
-    const couleur = lireCouleur(style.textDecorationColor) || lireCouleur(style.color);
-    mesure.changement = 'texte';
-    mesure.couleur = couleur;
-    mesure.indicateur = 'texte';
-    mesure.contraste = rapport(couleur, interieur.couleur);
+  const etat = window.__mrscEtat || (window.__mrscEtat = { precedent: null, auFocus: null, rang: 0, vus: new WeakSet() });
+
+  // 1. Le précédent vient de perdre le focus : c'est son apparence au repos.
+  let mesure = null;
+  if (etat.precedent) {
+    mesure = conclure(etat.precedent, etat.auFocus, apparence(etat.precedent), etat.rang);
+    etat.precedent = null;
+    etat.auFocus = null;
   }
-  return mesure;
+
+  // 2. L'élément qui vient de recevoir le focus.
+  const actif = document.activeElement;
+  if (!actif || actif === document.body) return { fin: true, mesure };
+  if (etat.vus.has(actif)) return { deja_vu: true, mesure };
+  etat.vus.add(actif);
+  etat.precedent = actif;
+  etat.auFocus = apparence(actif);
+  etat.rang = position;
+  return { mesure };
 }
 
 // --- La traversée ---------------------------------------------------------------
@@ -275,10 +287,16 @@ function mesurerActif(position) {
           // s'applique pas à un focus programmatique.
           for (let pas = 0; pas < limite; pas += 1) {
             await page.keyboard.press('Tab');
-            const mesure = await page.evaluate(mesurerActif, pas + 1);
-            if (!mesure || mesure.fin || mesure.deja_vu) break;
-            elements.push(mesure);
+            const etape = await page.evaluate(mesurerPas, pas + 1);
+            if (etape.mesure) elements.push(etape.mesure);
+            if (!etape || etape.fin || etape.deja_vu) break;
           }
+          // Un dernier Tab relâche l'élément mesuré en dernier : sans lui, son
+          // apparence au repos n'aurait jamais été lue, et il serait absent du
+          // décompte sans que personne ne sache pourquoi.
+          await page.keyboard.press('Tab');
+          const dernier = await page.evaluate(mesurerPas, limite + 1);
+          if (dernier && dernier.mesure) elements.push(dernier.mesure);
           rapport.pages.push({
             page: nomPage,
             largeur,
