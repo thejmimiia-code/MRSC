@@ -2388,3 +2388,104 @@ ouvert n'est pas mesuré. Une page sans grille déclarée n'est pas visitée, do
 qui n'affecterait qu'elle échapperait au contrôle. Coût mesuré : **5 min 02** pour 480 combinaisons, ce qui a
 fait relever le plafond du job `graphismes` de 20 à 30 minutes — un banc lent vaut mieux
 qu'un banc absent, à condition de dire ce qu'il coûte.
+
+## 12. L'anneau de focus, mesuré comme le texte (3 novembre 2026)
+
+Le contraste du texte est entré dans la mesure le 3 novembre 2026 ; l'anneau de
+focus, non. Une page peut être parfaitement lisible et impraticable au clavier
+sans que rien ne le dise — c'est exactement le genre de défaut qu'un contrôle
+géométrique laisse passer, et que personne ne voit sur une capture d'écran.
+
+### La méthode
+
+`outils/mesurer-focus.cjs` **presse réellement la touche Tab**. `element.focus()`
+ne déclenche pas `:focus-visible` de façon fiable dans Chromium : juger un style
+qui ne s'applique pas à une personne qui navigue au clavier serait une faute de
+sonde déguisée en conformité. Pour chaque élément atteint, le relevé note :
+
+- **ce qui change** au focus — contour, ombre, fond, bordure, décor ou couleur
+  de texte — et **l'épaisseur** du contour quand il y en a un ;
+- **la couleur** de cet indicateur et **le fond réellement vu** derrière lui,
+  couche par couche, du bas vers le haut ;
+- le **rapport WCAG** calculé, jamais comparé.
+
+`outils/focus.py` pose le seuil : **3:1**, critère 1.4.11 de WCAG 2.2 AA
+(contraste des éléments non textuels). **3,0:1 passe, 2,99:1 est refusé.** Un
+élément dont rien ne change relève d'un autre critère — **2.4.7**, focus
+visible — et le message le dit.
+
+### Ce que la mesure a trouvé, et ce qu'elle a corrigé
+
+Premier passage : **40 liens sous le seuil**, tous sur la surface marine de
+`.creator-note` (`transparence.html`), où le bleu du site donne **1,76:1**. La
+correction ne répète pas un `outline-color` par composant : un jeton
+`--focus-ring` vaut `--blue` par défaut, et les cinq surfaces sombres
+(`.main-nav`, `.site-footer`, `.creator-note`, `.ai-path-panel`, `.ai-node`) le
+repassent en blanc. Une surface ajoutée plus tard n'a qu'une ligne à écrire, et
+la mesure dit si elle est juste.
+
+### Six fautes de sonde, corrigées avant de conclure
+
+| Faute | Effet |
+| --- | --- |
+| fond lu sur la première couleur non nulle | un contour doré accusé à 2,21:1 contre un blanc à 5,5 % sur un marine |
+| apparence au repos mémorisée avant la traversée | les éléments rendus focusables après chargement déclarés « inconnus » |
+| un dénominateur estimé par sélecteur | 220 cibles annoncées « non parcourues » alors que la traversée avait atteint la fin du document |
+| un focus rendu par `element.focus()` non vérifié | une apparence de repos prise sur un autre état que le focus réel |
+| mutations cumulées dans une copie partagée | `outline: none` resté dans la feuille, deux cas suivants faussés |
+| repos obtenu en défocalisant puis en redonnant le focus | échec en intégration continue sur `documents.html` : le focus programmatique ne redonne pas toujours `:focus-visible` |
+
+La dernière a coûté une exécution de CI, et elle a bien fait : le garde a refusé
+de conclure au lieu de rendre un chiffre faux **dans le sens rassurant**. Le
+repos se lit désormais **au pas suivant** — la touche Tab suivante relâche
+l'élément d'elle-même — et le relevé ne manipule plus jamais le focus. Une
+seconde correction a suivi : les valeurs de l'indicateur se lisent dans
+l'apparence capturée **au moment du focus**, jamais dans un `getComputedStyle`
+tardif, sans quoi le relevé se contredisait (« changement : contour »,
+« indicateur : aucun » sur 2 496 éléments).
+
+Les deux dernières sont les plus instructives : le script **vérifie** que
+l'apparence rendue après défocalisation est identique à celle du focus réel, et
+refuse de conclure sinon ; et le banc **restaure** la feuille avant chaque cas —
+une copie jetable n'est pas une copie neuve.
+
+### Résultat
+
+**26 pages et largeurs** (13 pages × 2), **2 621 éléments portés au focus**,
+**2 497 indicateurs jugés, 0 sous le seuil, 0 sans indicateur**, **124 sur fond
+d'image** comptés à part et jamais jugés, **0 relevé arrêté au plafond**. Coût :
+38 s.
+
+Le compte varie d'une unité selon l'exécution (2 620 en local, 2 621 en
+intégration continue le 3 novembre 2026) : un élément rendu focusable par script
+peut apparaître ou non selon le moment du chargement. Ce n'est pas une
+approximation de la mesure, c'est un fait du document — et le seuil n'en dépend
+pas.
+
+Le plafond par défaut est de 60 éléments par page et par largeur : c'est un
+**échantillon déclaré**, utile pour un essai rapide, et le rapport dit quand la
+traversée s'est arrêtée au plafond. La porte de CI mesure la page entière
+(`--limite 500`) : sur soixante éléments, dix relevés s'arrêtaient au plafond et
+1 218 éléments seulement étaient vus — un chiffre juste pour une autre question.
+
+### Bancs
+
+- `outils/test_focus.py` — **12 cas sans navigateur** : 3,0:1 passe, 2,99:1 est
+  refusé, un indicateur sans rapport calculable est refusé, un fond d'image est
+  compté et non jugé, un relevé vide, une page ou une largeur annoncée au plan et
+  absente du rapport, une apparence non retrouvée.
+- `outils/test_mutations_focus.py` — **3 cas dans Chromium**, dans le job
+  `graphismes` : copie intacte verte ; correction retirée → **1,76:1** nommé ;
+  anneau effacé → « aucun indicateur ». Sans navigateur, le banc sort en code 2
+  et le dit.
+
+### Limites
+
+Deux largeurs seulement (390 et 1 440 px) : un anneau de focus ne dépend pas de
+la place, mais deux largeurs ne prouvent pas l'absence de cas propres aux
+intermédiaires. La traversée s'arrête au premier élément déjà vu, et le rapport
+dit si elle a buté sur le plafond — ici, jamais. Les états de survol, de focus
+programmatique et de focus dans une iframe ne sont pas mesurés ; un fond en
+image (124 éléments) reste hors de portée. Le seuil de 3:1 est celui de
+WCAG 2.2 AA ; le RGAA 5, aligné dessus, n'est pas encore publié. Et rien de tout
+cela ne remplace une traversée au clavier par une personne.

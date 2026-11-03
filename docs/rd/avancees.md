@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 81 |
+| Avancées consignées | 82 |
 | Période couverte | du 2026-10-20 au 2026-11-03 |
-| Contrôles exécutables cités | 90 |
+| Contrôles exécutables cités | 95 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1909,6 +1909,34 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-
 **Suite.** Étendre la mesure aux états interactifs et aux fonds en image, en disant ce que la méthode coûte — la capture d'écran a été chiffrée à 690 ms par élément et n'a pas été retenue.
 
 Initiatives liées : `optimisation-du-site`, `ecouter-la-page`, `coherence-textes-publics`.
+
+### `un-anneau-de-focus-se-mesure-comme-un-texte` — Un anneau de focus se mesure : quarante liens invisibles au clavier
+
+*Consignée le 2026-11-03.*
+
+**Constat.** Le contraste du texte était mesuré cadrage par cadrage depuis la veille ; l'indicateur de focus ne l'était pas. Or une page peut passer tous les contrôles de lisibilité et rester impraticable au clavier : si l'anneau de focus a la couleur du fond, la personne qui avance à la touche Tab ne sait plus où elle est. Le dépôt mesurait le focus **non masqué** (WCAG 2.2, 2.4.11) — l'élément n'est pas caché derrière un bandeau — jamais le focus **visible** (2.4.7) ni le contraste de son indicateur (1.4.11).
+
+**Ce que cela change.** `outils/mesurer-focus.cjs` presse réellement la touche Tab — `element.focus()` ne déclenche pas `:focus-visible` de façon fiable, et juger un style qui ne s'applique pas serait une faute de sonde déguisée en conformité. Le repos d'un élément n'est **jamais** obtenu en le défocalisant : la touche Tab suivante le relâche d'elle-même, et son apparence à ce moment-là sert de référence — une première version qui défocalisait a échoué en intégration continue sur `documents.html`, et le garde a refusé de conclure plutôt que de rendre un chiffre faux dans le sens rassurant. Pour chaque élément atteint, il relève ce qui change (contour, ombre, fond, bordure, texte), la couleur de l'indicateur, le **fond réellement vu** derrière lui — les couches sont composées du bas vers le haut — et le rapport WCAG. `outils/focus.py` pose le seuil : **3:1** (WCAG 2.2 AA, 1.4.11), **3,0:1 passe, 2,99:1 est refusé**. Premier passage : **40 liens sous le seuil**, tous sur la surface marine de `.creator-note`, où le bleu du site donne **1,76:1**. Corrigé par le jeton `--focus-ring` (bleu par défaut, blanc sur les cinq surfaces sombres) plutôt que par un `outline-color` répété par composant. Résultat : **26 relevés, 2 621 éléments portés au focus, 2 497 indicateurs jugés, 0 sous le seuil, 0 sans indicateur**, 124 sur fond d'image comptés à part, 0 relevé arrêté au plafond, en 38 s.
+
+**Preuves dans le dépôt :**
+
+- `outils/mesurer-focus.cjs`
+- `outils/focus.py`
+- `outils/test_focus.py`
+- `outils/test_mutations_focus.py`
+- `assets/css/site.css`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/cadrages.toml`
+- `.github/workflows/verification.yml`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/focus.py --plan /tmp/focus-plan.json && node outils/mesurer-focus.cjs /tmp/focus-plan.json /tmp/focus-rapport.json && python3 outils/focus.py --controler /tmp/focus-plan.json /tmp/focus-rapport.json && python3 outils/test_focus.py && python3 outils/test_mutations_focus.py`
+
+**Limite — ce que cela ne prouve pas.** Deux largeurs (390 et 1 440 px) : un anneau de focus ne dépend pas de la place, mais deux largeurs ne prouvent pas l'absence de cas propres aux intermédiaires. Les états de survol, de focus programmatique et de focus dans une iframe ne sont pas mesurés ; 124 éléments posés sur une image restent hors de portée et sont comptés. La traversée s'arrête au premier élément déjà vu et dit si elle a buté sur le plafond, pas ce qu'elle n'a pas atteint. Le seuil de 3:1 est celui de WCAG 2.2 AA ; le RGAA 5, aligné dessus, n'est pas encore publié. Enfin, un indicateur conforme à 3:1 peut rester peu visible sur un écran de téléphone en plein soleil : la mesure donne un chiffre, elle ne remplace pas une traversée au clavier par une personne.
+
+**Suite.** Mesurer les états intermédiaires (768 px) et les éléments révélés par script — panneaux ouverts, menus déployés — en disant d'abord combien d'éléments cela ajoute et ce que la mesure coûte.
+
+Initiatives liées : `ecouter-la-page`, `optimisation-du-site`, `coherence-textes-publics`.
 
 ### `un-yaml-casse-n-etait-pas-une-erreur` — Un workflow illisible n'était pas une erreur : c'était un silence, et il ressemblait à un succès
 

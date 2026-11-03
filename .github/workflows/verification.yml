@@ -126,6 +126,14 @@ jobs:
           python3 outils/verifier-inventaire-controles.py
           python3 outils/test_annoncer_echec_graphismes.py
 
+      # La règle du focus — seuil de 3:1, aveu des fonds en image, refus d'un
+      # relevé vide, d'une page non mesurée ou d'une apparence non retrouvée —
+      # est éprouvée sans navigateur : douze cas, instantanés. Le pouvoir de
+      # mordre de la mesure elle-même est prouvé dans `graphismes`, où Chromium
+      # est disponible.
+      - name: Vérifier la règle de contraste de l'anneau de focus
+        run: python3 outils/test_focus.py
+
       # Le 3 novembre 2026, un nom d'étape contenant « : » a rendu ce fichier
       # illisible : GitHub n'a lancé **aucun** job et a répondu « This run likely
       # failed because of a workflow file issue ». Rien dans le dépôt ne lisait
@@ -445,7 +453,11 @@ jobs:
     runs-on: ubuntu-24.04
     # 20 minutes ne suffisaient plus depuis le contrôle des cadrages (5 min 02
     # mesurées en local, 480 combinaisons) : le plafond est relevé plutôt que le
-    # banc raccourci, et la raison est écrite ici.
+    # banc raccourci, et la raison est écrite ici. Le 3 novembre 2026, c'est
+    # l'**installation du navigateur** qui a mangé le plafond — 1 797 s — et non
+    # une mesure : elle est désormais mise en cache, et le plafond reste à 30
+    # minutes pour que ce soit une mesure trop lente qui le franchisse, jamais
+    # un téléchargement.
     timeout-minutes: 30
     steps:
       - name: Récupérer les sources
@@ -454,7 +466,19 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
+      # Le 3 novembre 2026, cette installation a pris **1 797 s** — trente
+      # minutes à elle seule — et le job a été coupé avant la première mesure.
+      # Le réseau du runner n'est pas une dépendance qu'on peut tenir pour
+      # acquise : les deux paquets sont donc mis en cache, et le cache n'est
+      # écrit que si l'installation réussit.
+      - name: Restaurer le navigateur de mesure
+        id: cache-navigateur
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: ${{ runner.temp }}/mrsc-browser
+          key: mrsc-browser-puppeteer-core-25.16.0-sparticuz-chromium-153.0.0
       - name: Installer le navigateur de mesure
+        if: steps.cache-navigateur.outputs.cache-hit != 'true'
         run: npm install --prefix "$RUNNER_TEMP/mrsc-browser" puppeteer-core@25.16.0 @sparticuz/chromium@153.0.0
       - name: Mesurer les trois visuels dans les modes couverts
         env:
@@ -666,6 +690,71 @@ jobs:
             echo "::notice title=Écartés du contraste::$ligne"
           done
           exit "$controle"
+
+      # Le contraste du texte était mesuré depuis la veille ; l'anneau de focus ne
+      # l'était pas. Une page peut être parfaitement lisible et impraticable au
+      # clavier : sur la surface marine de `.creator-note`, le bleu du site donnait
+      # 1,76:1, sous les 3:1 de WCAG 2.2 AA (1.4.11) — quarante liens mesurés
+      # ainsi, puis corrigés par le jeton `--focus-ring`.
+      - name: Mesurer l'anneau de focus, puis prouver que la mesure mord
+        env:
+          MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
+          MRSC_TEST_URL: http://127.0.0.1:4186/
+        run: |
+          mkdir -p "$RUNNER_TEMP/graphismes/focus"
+          # Le plafond par défaut (60 par page et par largeur) sert à un essai
+          # rapide ; la porte mesure la page entière — 2 620 éléments, 45 s —
+          # parce qu'un échantillon qui s'arrête au plafond ne dit rien des
+          # 1 400 cibles qu'il n'a pas vues.
+          python3 outils/focus.py --plan "$RUNNER_TEMP/graphismes/focus/plan.json" --limite 500
+          python3 -m http.server 4186 --bind 0.0.0.0 >"$RUNNER_TEMP/serveur-focus.log" 2>&1 &
+          serveur=$!
+          trap 'kill "$serveur"' EXIT
+          sleep 1
+          set +e
+          node outils/mesurer-focus.cjs \
+            "$RUNNER_TEMP/graphismes/focus/plan.json" \
+            "$RUNNER_TEMP/graphismes/focus/rapport.json" \
+            >"$RUNNER_TEMP/graphismes/focus/mesure.log" 2>&1
+          mesure=$?
+          set -e
+          cat "$RUNNER_TEMP/graphismes/focus/mesure.log"
+          if [ "$mesure" -ne 0 ]; then
+            grep -E '^(  -|Environnement)' "$RUNNER_TEMP/graphismes/focus/mesure.log" \
+              | head -n 10 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::error title=Focus au clavier::$ligne"
+            done
+            exit "$mesure"
+          fi
+          set +e
+          python3 outils/focus.py --controler \
+            "$RUNNER_TEMP/graphismes/focus/plan.json" \
+            "$RUNNER_TEMP/graphismes/focus/rapport.json" \
+            >"$RUNNER_TEMP/graphismes/focus/controle.log" 2>&1
+          controle=$?
+          set -e
+          cat "$RUNNER_TEMP/graphismes/focus/controle.log"
+          if [ "$controle" -eq 0 ]; then
+            grep -E '^Focus' "$RUNNER_TEMP/graphismes/focus/controle.log" \
+              | head -n 1 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::notice title=Focus au clavier::$ligne"
+            done
+          else
+            grep -E '^(  -|Refusé|Lecture)' "$RUNNER_TEMP/graphismes/focus/controle.log" \
+              | head -n 10 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::error title=Focus au clavier::$ligne"
+            done
+          fi
+          exit "$controle"
+
+      # Une mesure qui ne trouve plus rien est ce qu'on obtient d'une mesure qui
+      # ne regarde plus. Ce banc retire la correction dans une copie et exige le
+      # retour du refus à 1,76:1, puis efface l'anneau et exige le refus pour
+      # absence d'indicateur. Trois cas, huit secondes, navigateur compris.
+      - name: Éprouver que la mesure du focus refuse un anneau invisible
+        env:
+          MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
+        run: python3 outils/test_mutations_focus.py
 
       # Le banc précédent mesure ; celui-ci prouve que la mesure mord. Il rejoue
       # sur une copie jetable les deux mutations qui ont été faites à la main le

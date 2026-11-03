@@ -35,6 +35,8 @@
   --border-strong: #aebbd0;
   --border-soft: #dfe6ef;
   --border-soft-2: #d7ddea;
+  /* Anneau de focus : bleu par défaut, clair sur les surfaces marines. */
+  --focus-ring: var(--blue);
   --on-navy: #fff;
   --on-navy-sky: #bae6fd;
   --on-navy-pale: #d9e5f7;
@@ -169,13 +171,8 @@ a {
 button:focus-visible,
 a:focus-visible,
 summary:focus-visible {
-  outline: 3px solid var(--blue);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 4px;
-}
-
-.main-nav :focus-visible,
-.site-footer a:focus-visible {
-  outline-color: var(--on-navy);
 }
 
 .visually-hidden {
@@ -5183,4 +5180,23 @@ html.has-js .site-header .customize-settings-panel .layout-settings-reset {
 html.has-js .site-header.is-compact .nav-toggle svg {
   width: 16px;
   height: 16px;
+}
+
+/* Un anneau de focus doit être vu, pas seulement présent. Mesuré le 3 novembre
+   2026 : le bleu du site posé sur la surface marine de `.creator-note` donne
+   1,76:1 — sous les 3:1 de WCAG 2.2 AA (1.4.11, contraste des éléments non
+   textuels). Chaque surface sombre pose donc la variable, et une surface
+   ajoutée plus tard n'a qu'une ligne à écrire pour que la mesure la juge juste.
+
+   Ce bloc est écrit **en fin de feuille**, après les règles de base des
+   composants : `modele-grilles.py` lit la première règle de base d'une grille
+   convertie en `flex`, et une liste de sélecteurs posée plus haut lui faisait
+   prendre cette règle-ci pour la base de `.ai-path-panel`. Une déclaration de
+   jeton n'est pas une règle de mise en page, et l'ordre le dit. */
+.main-nav,
+.site-footer,
+.creator-note,
+.ai-path-panel,
+.ai-node {
+  --focus-ring: var(--on-navy);
 }

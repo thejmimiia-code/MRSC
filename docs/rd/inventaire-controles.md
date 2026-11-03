@@ -76,6 +76,9 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/verifier-taux-dates.py` | Une règle chiffrée porte sa date | `test_verifier_taux_dates.py` (14 tests, catalogue temporaire muté) | `banc` |
 | `outils/verifier-vote-distanciel.py` | Garde-fous documentaires du vote distanciel | `test_verifier_vote_distanciel.py` (86 tests) | `faute-en-memoire` |
 | `outils/verifier-workflows.py` | Les six workflows de `.github/` se lisent : clé `jobs`, `runs-on` par job, `name` et un seul de `run`/`uses` par étape ; sans analyseur YAML, code 2 et rien de prétendu vérifié | `test_verifier_workflows.py` (8 cas : intact, « : » dans un nom d'étape — la faute du 3 novembre 2026 —, job sans `runs-on`, étape sans nom, étape à `run` **et** `uses`, `jobs` absent, aucun workflow, analyseur absent) | `banc` |
+| `outils/mesurer-focus.cjs` | Ce que devient un élément au focus clavier : indicateur, couleur, fond composé, rapport WCAG | `test_mutations_focus.py` (3 cas, vrai Chromium : copie intacte, correction retirée → 1,76:1 nommé, anneau effacé → aucun indicateur ; sans navigateur, code 2) | `banc` |
+| `outils/focus.py` | Seuil de 3:1 (WCAG 2.2 AA, 1.4.11), aveu des fonds en image, refus d'un relevé vide ou non mesuré | `test_focus.py` (12 cas, sans navigateur, 3,0:1 et 2,99:1 dans les deux sens) · `test_mutations_focus.py` (la mesure mord dans un vrai Chromium) | `banc` |
+| `outils/test_focus.py` | La règle du focus, éprouvée sans navigateur | `test-en-soi` : c'est le test, lancé par le job `qualite` ; s'il cesse de mordre, seule sa lecture le dit | `test-en-soi` |
 | `outils/versionner-css-ia.py` | Lie la page IA au contenu exact du CSS | `test_version_css_ia.py` (2 tests) | `test` |
 
 ## Ce que l'inventaire dit en clair
@@ -91,14 +94,14 @@ celui-ci ne le peut plus.
 
 | Statut | Nombre | Ce que cela veut dire ici |
 | --- | --- | --- |
-| `banc` | 30 | Le contrôle a été vu échouer sur une faute plantée, dont voici les plus récents : les cadrages (`test_mutations_cadrages.py`, 3 cas, navigateur), les workflows (`test_verifier_workflows.py`, 8 cas) et cet inventaire lui-même. |
+| `banc` | 32 | Le contrôle a été vu échouer sur une faute plantée, dont voici les plus récents : les cadrages (`test_mutations_cadrages.py`, 3 cas, navigateur), les workflows (`test_verifier_workflows.py`, 8 cas) et cet inventaire lui-même. |
 | `faute-en-memoire` | 12 | Des données sont cassées en mémoire ou un service est simulé ; la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée. `verifier-maj-amont.py` n'interroge jamais réellement l'amont ; les quatre scripts navigateur (`auditer-criteres-22.mjs`, `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs`, `auditer-affichages.mjs`) ne voient jamais un vrai Chromium — leurs bancs éprouvent ce qu'ils font de mesures qu'on leur donne, pas la justesse de ce qu'ils mesurent. |
 | `test` | 6 | Un test existe, mais il n'injecte aucune faute. |
-| `test-en-soi` | 0 | Plus aucun : un script qui n'est prouvé que par son propre vert n'est plus compté comme contrôlé. |
+| `test-en-soi` | 1 | Le fichier **est** le test : `test_focus.py`, lancé par le job `qualite`. S'il cesse de mordre, seule sa lecture le dit — c'est pourquoi la mesure elle-même a son banc dans `graphismes`. |
 | `aucun-test` | 0 | Plus aucun : c'était du travail nommé, il est fait. |
 | `hors-portee` | 10 | Générateurs, aides partagées, serveur local : ce ne sont pas des contrôles. Ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`. |
 
-Autrement dit : **48 contrôles sur 48** s'appuient sur un test capable d'échouer.
+Autrement dit : **50 contrôles sur 51** s'appuient sur un test capable d'échouer.
 
 ## Par où continuer, par ordre de rentabilité
 
