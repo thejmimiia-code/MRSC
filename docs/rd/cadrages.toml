@@ -115,7 +115,7 @@ outil = "python3 outils/focus.py --plan PLAN puis node outils/mesurer-focus.cjs 
 seuil = 3.0
 critere = "WCAG 2.2 AA, 1.4.11 — contraste des éléments non textuels ; 2.4.7 pour un élément dont rien ne change au focus."
 largeurs_px = [390, 1440]
-resultat = "26 relevés (13 pages × 2 largeurs), 2 620 éléments portés au focus, 2 496 indicateurs jugés, 0 sous le seuil, 0 sans indicateur, 124 sur fond d'image comptés à part, 0 relevé arrêté au plafond. Coût : 38 s."
+resultat = "26 relevés (13 pages × 2 largeurs, 500 éléments au plus par relevé — la page entière), 2 620 éléments portés au focus, 2 496 indicateurs jugés, 0 sous le seuil, 0 sans indicateur, 124 sur fond d'image comptés à part, 0 relevé arrêté au plafond. Coût : 38 s."
 trouvaille = "Premier passage : 40 liens sous le seuil, tous sur `.creator-note`, où le bleu du site sur le marine donne 1,76:1. Corrigé par le jeton `--focus-ring`, clair sur les cinq surfaces sombres, plutôt que par un `outline-color` répété par composant."
 angle_mort = """
 Deux largeurs seulement, et la traversée s'arrête au premier élément déjà vu :

@@ -2456,6 +2456,12 @@ une copie jetable n'est pas une copie neuve.
 d'image** comptés à part et jamais jugés, **0 relevé arrêté au plafond**. Coût :
 38 s.
 
+Le plafond par défaut est de 60 éléments par page et par largeur : c'est un
+**échantillon déclaré**, utile pour un essai rapide, et le rapport dit quand la
+traversée s'est arrêtée au plafond. La porte de CI mesure la page entière
+(`--limite 500`) : sur soixante éléments, dix relevés s'arrêtaient au plafond et
+1 218 éléments seulement étaient vus — un chiffre juste pour une autre question.
+
 ### Bancs
 
 - `outils/test_focus.py` — **12 cas sans navigateur** : 3,0:1 passe, 2,99:1 est

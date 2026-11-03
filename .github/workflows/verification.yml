@@ -702,7 +702,11 @@ jobs:
           MRSC_TEST_URL: http://127.0.0.1:4186/
         run: |
           mkdir -p "$RUNNER_TEMP/graphismes/focus"
-          python3 outils/focus.py --plan "$RUNNER_TEMP/graphismes/focus/plan.json"
+          # Le plafond par défaut (60 par page et par largeur) sert à un essai
+          # rapide ; la porte mesure la page entière — 2 620 éléments, 45 s —
+          # parce qu'un échantillon qui s'arrête au plafond ne dit rien des
+          # 1 400 cibles qu'il n'a pas vues.
+          python3 outils/focus.py --plan "$RUNNER_TEMP/graphismes/focus/plan.json" --limite 500
           python3 -m http.server 4186 --bind 0.0.0.0 >"$RUNNER_TEMP/serveur-focus.log" 2>&1 &
           serveur=$!
           trap 'kill "$serveur"' EXIT
