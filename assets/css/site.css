@@ -7,7 +7,12 @@
   --green: #456d29;
   --gold: #e7a126;
   --red: #e55058;
-  --muted: #647086;
+  /* Le texte de second plan. Assombri le 3 novembre 2026 : #647086 mesurait
+     4,43:1 sur le dégradé crème du bandeau de page (WCAG 2.2 AA exige 4,5:1
+     pour un petit texte) et 4,50:1 exactement sur le vert pâle d'une carte —
+     c'est-à-dire à la limite, et sous elle. #5f6b81 donne 4,77:1 au pire point
+     calculé ; la teinte ne bouge pas, seule la clarté descend de 4 %. */
+  --muted: #5f6b81;
   --line: #e3e8f0;
   --paper: #f5f7fa;
   --white: #fff;

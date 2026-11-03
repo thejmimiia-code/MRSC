@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 82 |
+| Avancées consignées | 83 |
 | Période couverte | du 2026-10-20 au 2026-11-03 |
 | Contrôles exécutables cités | 95 |
 | Initiatives du portefeuille concernées | 15 |
@@ -1937,6 +1937,33 @@ Initiatives liées : `optimisation-du-site`, `ecouter-la-page`, `coherence-texte
 **Suite.** Mesurer les états intermédiaires (768 px) et les éléments révélés par script — panneaux ouverts, menus déployés — en disant d'abord combien d'éléments cela ajoute et ce que la mesure coûte.
 
 Initiatives liées : `ecouter-la-page`, `optimisation-du-site`, `coherence-textes-publics`.
+
+### `un-degrade-est-une-plage-de-contraste` — Un texte sur un dégradé n'est pas un texte sans fond : la plage a un pire point
+
+*Consignée le 2026-11-03.*
+
+**Constat.** 27 700 textes étaient posés sur un « fond d'image » et **comptés, jamais jugés** : la méthode ne lisait que des couleurs unies, et un dégradé n'en est pas une. Le classement était pourtant faux dès le départ — le site ne pose aucune image en fond de texte, il pose des dégradés : bandeaux, panneaux d'appel, héros, cartes teintées. Un fond qu'on ne sait pas lire n'est pas un fond conforme, mais ce n'était pas une raison pour le déclarer illisible : c'était une raison de le lire.
+
+**Ce que cela change.** Le relevé lit désormais les **arrêts** de chaque couche de dégradé — Chromium les normalise en `rgb(…)`, la lecture est donc exacte — et ne juge toujours rien. `cadrages.py` échantillonne l'interpolation en **neuf points** par paire d'arrêts, compose les couches avec leurs transparences sur le fond opaque le plus proche et retient le **pire** rapport, nommé avec son point : « p contraste 4.434:1 sur un dégradé, seuil 4.5:1 pour 12 px — pire point rgb(248, 241, 223) ». Deux corrections en chemin : la remontée s'arrête au premier fond **opaque** (un bouton plein sur un bandeau dégradé était jugé contre le bandeau qu'il recouvre : 24 faux refus à 1,06:1), et le classement « image » tombe à **0**. Résultat : 385 830 textes sur fond uni et **17 500 sur dégradé** jugés, **960 constats** ramenés à **trois textes** — tous porteurs du jeton `--muted` (`#647086`), entre 4,43:1 et 4,50:1. Le jeton tenait 5,00:1 sur blanc, ce qui explique qu'il ait passé tous les contrôles précédents. Assombri à `#5f6b81` (teinte constante, 4 % de clarté en moins) : 4,77:1 au pire point, **0 refus**.
+
+**Preuves dans le dépôt :**
+
+- `outils/mesurer-cadrages.cjs`
+- `outils/cadrages.py`
+- `outils/test_cadrages.py`
+- `assets/css/site.css`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/cadrages.toml`
+- `docs/rd/inventaire-couleurs-jetons.md`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `node outils/mesurer-cadrages.cjs /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --controler /tmp/plan.json /tmp/rapport.json && python3 outils/test_cadrages.py`
+
+**Limite — ce que cela ne prouve pas.** Le pire point d'une plage n'est pas le point où le texte se trouve : la mesure ne connaît pas la géométrie du dégradé sous le texte. Elle est donc **conservatrice** — elle peut refuser un texte qui passerait à l'endroit exact où il est posé, jamais l'inverse. Une image `url(...)`, un `conic-gradient`, un `repeating-*` ou une `color-mix()` restent comptés et nommés, jamais jugés (le site n'en pose aucun). L'échantillonnage en neuf points par paire d'arrêts suit une interpolation sRGB ; une interpolation dans un autre espace colorimétrique n'est pas modélisée. La capture de pixels, qui lèverait la limite de géométrie, a été chiffrée à 690 ms par élément : hors budget pour 17 500 textes.
+
+**Suite.** Descendre à la géométrie du dégradé sous le texte (angle, position du texte dans la boîte) pour remplacer le majorant par la couleur réelle au point, en commençant par les trois dégradés concernés et en disant ce que cela change sur les 17 500 textes.
+
+Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`, `ecouter-la-page`.
 
 ### `un-yaml-casse-n-etait-pas-une-erreur` — Un workflow illisible n'était pas une erreur : c'était un silence, et il ressemblait à un succès
 

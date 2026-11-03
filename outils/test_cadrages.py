@@ -456,5 +456,111 @@ class TestCadrages(unittest.TestCase):
         self.assertEqual(float(registre["releve"]["tolerance_px"]), 0.5)
 
 
+class TestDegrade(unittest.TestCase):
+    """Le contraste d'un texte posé sur un dégradé : une plage, pas une couleur.
+
+    Jusqu'au 3 novembre 2026, un texte sur un dégradé était **compté** et jamais
+    jugé. Or le site en pose partout : bandeaux, panneaux d'appel, héros. Le
+    navigateur rend les arrêts de chaque couche ; ce contrôle-ci cherche le pire
+    point de la plage et applique le même seuil que pour un fond uni.
+    """
+
+    BLANC = {"r": 255, "g": 255, "b": 255, "a": 1}
+    NOIR = {"r": 0, "g": 0, "b": 0, "a": 1}
+
+    def setUp(self) -> None:
+        self.m = self._module()
+
+    @staticmethod
+    def _module():
+        import importlib.util
+        import sys
+        spec = importlib.util.spec_from_file_location("cadrages", RACINE / "outils" / "cadrages.py")
+        module = importlib.util.module_from_spec(spec)
+        sys.modules["cadrages"] = module
+        spec.loader.exec_module(module)
+        return module
+
+    def test_plage_uniforme_rend_une_couleur(self) -> None:
+        plage = self.m.plage_degrade(self.BLANC, [[self.BLANC]])
+        self.assertTrue(plage)
+        self.assertTrue(all(couleur["r"] == 255 for couleur in plage))
+
+    def test_plage_suit_les_deux_extremes(self) -> None:
+        plage = self.m.plage_degrade(self.BLANC, [[self.NOIR, self.BLANC]])
+        lumineuses = [self.m.luminance_wcag(couleur) for couleur in plage]
+        self.assertAlmostEqual(min(lumineuses), 0.0, places=3)
+        self.assertAlmostEqual(max(lumineuses), 1.0, places=3)
+
+    def test_arret_transparent_laisse_voir_la_base(self) -> None:
+        """Un halo `transparent` sur un marine : le fond reste le marine."""
+        marine = {"r": 29, "g": 50, "b": 104, "a": 1}
+        transparent = {"r": 0, "g": 0, "b": 0, "a": 0}
+        plage = self.m.plage_degrade(marine, [[{"r": 255, "g": 255, "b": 255, "a": 0.2}, transparent]])
+        for couleur in plage:
+            self.assertLess(couleur["r"], 200, "une couche à 20 % ne peut pas blanchir un marine")
+
+    def test_texte_blanc_sur_degrade_clair_refuse(self) -> None:
+        candidat = {
+            "couleur": self.BLANC,
+            "base": self.BLANC,
+            "couches": [[{"r": 250, "g": 250, "b": 250, "a": 1}, {"r": 245, "g": 247, "b": 251, "a": 1}]],
+            "taille": 16,
+            "gras": False,
+        }
+        pire, _ = self.m.pire_contraste_degrade(candidat)
+        self.assertLess(pire, 1.2)
+        self.assertLess(pire, self.m.seuil_de_contraste(16, False))
+
+    def test_texte_sombre_sur_degrade_clair_passe(self) -> None:
+        candidat = {
+            "couleur": {"r": 20, "g": 30, "b": 50, "a": 1},
+            "base": self.BLANC,
+            "couches": [[{"r": 250, "g": 250, "b": 250, "a": 1}, {"r": 240, "g": 244, "b": 250, "a": 1}]],
+            "taille": 16,
+            "gras": False,
+        }
+        pire, _ = self.m.pire_contraste_degrade(candidat)
+        self.assertGreaterEqual(pire, self.m.seuil_de_contraste(16, False))
+
+    def test_degrade_sous_le_seuil_est_refuse_par_le_controle(self) -> None:
+        """Le contrôle doit nommer le pire point, pas seulement le rapport."""
+        plan = {"tolerance_px": 0.5, "combinaisons": [{"page": "index.html", "layout": None, "cran": 100, "largeur": 1440}]}
+        mesure = {
+            "page": "index.html",
+            "layout": None,
+            "cran": 100,
+            "largeur": 1440,
+            "debordement": 0,
+            "grilles": [],
+            "coupes": [],
+            "masques": 0,
+            "chevauchements": [],
+            "contraste": {
+                "mesures": 10,
+                "decoratifs": 0,
+                "fond_image": 0,
+                "degrades": 1,
+                "candidats": [],
+                "candidats_degrade": [
+                    {
+                        "tag": "p",
+                        "classe": "page-lead",
+                        "couleur": {"r": 255, "g": 255, "b": 255, "a": 1},
+                        "base": {"r": 255, "g": 255, "b": 255, "a": 1},
+                        "couches": [[{"r": 252, "g": 252, "b": 252, "a": 1}, {"r": 248, "g": 250, "b": 254, "a": 1}]],
+                        "taille": 18,
+                        "gras": False,
+                        "texte": "Un texte blanc sur un fond clair",
+                    }
+                ],
+            },
+        }
+        erreurs = self.m.controler(plan, {"mesures": [mesure]})
+        self.assertTrue(erreurs, "un texte blanc sur un dégradé clair doit être refusé")
+        self.assertIn("sur un dégradé", erreurs[0])
+        self.assertIn("pire point", erreurs[0])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -291,6 +291,22 @@ def controler(plan: dict, rapport: dict) -> list[str]:
                     + (" gras" if candidat.get("gras") else "")
                     + (f" (« {texte} »)" if texte else "")
                 )
+            for candidat in contraste.get("candidats_degrade") or []:
+                seuil = seuil_de_contraste(float(candidat.get("taille") or 0), bool(candidat.get("gras")))
+                pire, fond = pire_contraste_degrade(candidat)
+                if pire >= seuil:
+                    continue
+                nom = candidat.get("tag", "?") + (
+                    f".{candidat['classe']}" if candidat.get("classe") else ""
+                )
+                texte = (candidat.get("texte") or "").strip()
+                erreurs.append(
+                    f"{libelle} : {nom} contraste {pire}:1 sur un dégradé, seuil {seuil}:1 "
+                    f"pour {candidat.get('taille')} px"
+                    + (" gras" if candidat.get("gras") else "")
+                    + f" — pire point rgb({fond['r']:.0f}, {fond['g']:.0f}, {fond['b']:.0f})"
+                    + (f" (« {texte} »)" if texte else "")
+                )
         # Le plan annonce une **capacité** ; ce que le visiteur voit en dépend
         # aussi du nombre de cartes. Chaque exemplaire est donc confronté avec
         # son propre compte : cinq cartes dans une grille qui permet six colonnes
@@ -364,6 +380,94 @@ def seuil_de_contraste(taille: float, gras: bool) -> float:
     if gras and taille >= SEUIL_GRAND_TEXTE_GRAS_PX:
         return CONTRASTE_GRAND_TEXTE
     return CONTRASTE_PETIT_TEXTE
+
+
+def luminance_wcag(couleur: dict) -> float:
+    """Luminance relative WCAG d'une couleur `{r, g, b}` en 0–255."""
+
+    def canal(valeur: float) -> float:
+        v = float(valeur) / 255
+        return v / 12.92 if v <= 0.03928 else ((v + 0.055) / 1.055) ** 2.4
+
+    return 0.2126 * canal(couleur["r"]) + 0.7152 * canal(couleur["g"]) + 0.0722 * canal(couleur["b"])
+
+
+def rapport_wcag(une: dict, autre: dict) -> float:
+    l1, l2 = luminance_wcag(une), luminance_wcag(autre)
+    return (max(l1, l2) + 0.05) / (min(l1, l2) + 0.05)
+
+
+def poser(dessus: dict, dessous: dict) -> dict:
+    """Compose une couleur sur une autre, comme le fait un navigateur."""
+    alpha = float(dessus.get("a", 1))
+    return {
+        "r": dessus["r"] * alpha + dessous["r"] * (1 - alpha),
+        "g": dessus["g"] * alpha + dessous["g"] * (1 - alpha),
+        "b": dessus["b"] * alpha + dessous["b"] * (1 - alpha),
+        "a": 1,
+    }
+
+
+#: Points échantillonnés entre deux arrêts d'un dégradé. Neuf suffisent à suivre
+#: une interpolation en sRGB sans prétendre la prouver : entre deux couleurs, la
+#: luminance varie de façon monotone par canal, et le pire cas d'un texte est
+#: toujours à l'un des extrêmes ou près d'eux. C'est une borne **pratique**,
+#: écrite comme telle dans la limite du registre.
+ECHANTILLONS_DEGRADE = 9
+
+
+def plage_degrade(base: dict, couches: list[list[dict]], seuil_points: int = 64) -> list[dict]:
+    """Rend les couleurs que le fond peut prendre, du plus sombre au plus clair.
+
+    Chaque couche est un dégradé (liste d'arrêts) posé au-dessus du précédent.
+    Une couche peut contenir des arrêts transparents : ils laissent voir ce qui
+    est dessous, et c'est justement le cas des halos radiaux du site.
+    """
+    couleurs = [base]
+    for arrets in couches:
+        if not arrets:
+            continue
+        echantillons: list[dict] = []
+        if len(arrets) == 1:
+            echantillons = [arrets[0]]
+        else:
+            for a, b in zip(arrets, arrets[1:]):
+                for rang in range(ECHANTILLONS_DEGRADE):
+                    part = rang / (ECHANTILLONS_DEGRADE - 1)
+                    echantillons.append(
+                        {
+                            "r": a["r"] + (b["r"] - a["r"]) * part,
+                            "g": a["g"] + (b["g"] - a["g"]) * part,
+                            "b": a["b"] + (b["b"] - a["b"]) * part,
+                            "a": a.get("a", 1) + (b.get("a", 1) - a.get("a", 1)) * part,
+                        }
+                    )
+        composees = [poser(echantillon, fond) for fond in couleurs for echantillon in echantillons]
+        # Les compositions sont ramenées aux deux extrêmes de luminance plus la
+        # médiane : garder les 81 compositions de trois couches rendrait le
+        # contrôle lent sans rien prouver de plus.
+        composees.sort(key=luminance_wcag)
+        if len(composees) > 3:
+            composees = [composees[0], composees[len(composees) // 2], composees[-1]]
+        couleurs = composees
+        if len(couleurs) > seuil_points:  # garde-fou : jamais atteint avec 3 couleurs
+            couleurs = couleurs[:seuil_points]
+    return couleurs
+
+
+def pire_contraste_degrade(candidat: dict) -> tuple[float, dict]:
+    """Le pire rapport de contraste d'un texte sur une plage de dégradé."""
+    texte = dict(candidat.get("couleur") or {})
+    base = dict(candidat.get("base") or {"r": 255, "g": 255, "b": 255, "a": 1})
+    couches = candidat.get("couches") or []
+    plage = plage_degrade(base, couches)
+    pire, pire_fond = None, base
+    for fond in plage:
+        couleur = poser(texte, fond) if float(texte.get("a", 1)) < 1 else texte
+        ratio = rapport_wcag(couleur, fond)
+        if pire is None or ratio < pire:
+            pire, pire_fond = ratio, fond
+    return round(pire or 0, 3), pire_fond
 
 
 def orphelins(plan: dict, rapport: dict) -> tuple[list[dict], list[str]]:

@@ -2489,3 +2489,65 @@ programmatique et de focus dans une iframe ne sont pas mesurés ; un fond en
 image (124 éléments) reste hors de portée. Le seuil de 3:1 est celui de
 WCAG 2.2 AA ; le RGAA 5, aligné dessus, n'est pas encore publié. Et rien de tout
 cela ne remplace une traversée au clavier par une personne.
+
+## 13. Un texte sur un dégradé n'est pas un texte sans fond (3 novembre 2026)
+
+**17 500 textes** étaient posés sur un dégradé — bandeaux de page, panneaux
+d'appel, héros, cartes teintées — et **comptés, jamais jugés**. La méthode ne
+lisait que des couleurs unies ; un dégradé n'en est pas une, c'est une étendue.
+
+### Ce qui a changé
+
+Le relevé n'écarte plus un texte parce qu'il voit un `background-image` : il en
+lit les **arrêts**. Chromium normalise déjà chaque couche en
+`linear-gradient(rgb(…), rgb(…))`, ce qui rend la lecture exacte. `cadrages.py`
+échantillonne l'interpolation en **neuf points** par paire d'arrêts, compose les
+couches (arrêts transparents compris) sur le fond opaque le plus proche, et
+retient le **pire** rapport. Le message nomme ce pire point :
+
+> `apprendre.html · défaut · 85 % · 390 px : p contraste 4.434:1 sur un dégradé,
+> seuil 4.5:1 pour 12 px — pire point rgb(248, 241, 223)`
+
+### Deux fautes de méthode, avant le premier vrai défaut
+
+1. **La remontée ne s'arrêtait pas à un fond opaque.** Un bouton plein sur un
+   bandeau dégradé était jugé *contre le bandeau qu'il recouvre* : **24 boutons**
+   accusés à 1,06:1. Le navigateur a raison, pas la remontée naïve — la boucle
+   s'arrête au premier fond opaque.
+2. **Un dégradé n'est pas une couleur.** Prendre le pire point d'une plage
+   entière est un majorant : c'est sûr, mais une section claire→foncée accuse un
+   texte qui n'occupe qu'une bande. L'outil l'assume et le nomme (le pire point
+   est imprimé, la décision reste lisible) — c'est écrit dans les limites.
+
+### Ce que la mesure a trouvé
+
+Trois textes seulement, répétés sur 1 060 cadrages — **960 constats** :
+
+| Texte | Couleur | Pire fond | Rapport | Seuil |
+| --- | --- | --- | --- | --- |
+| `p.page-lead` | `#647086` | crème `rgb(248, 241, 223)` | **4,43:1** | 4,5:1 |
+| `p` de carte teintée | `#647086` | vert pâle `rgb(239, 245, 233)` | **4,50:1** | 4,5:1 |
+| `span.phrase` | `#647086` | bleu pâle `rgb(237, 242, 250)` | **4,44:1** | 4,5:1 |
+
+Le coupable est un seul jeton, `--muted` (`#647086`) : il tenait sur fond blanc
+(5,00:1) et tombait **sous le seuil dès qu'un dégradé passait dessous**. Il est
+assombri de 4 % en clarté, à teinte constante : `#5f6b81`, **4,77:1 au pire
+point**. Après correction : **0 refus**, 385 830 textes sur fond uni et 17 500
+sur dégradé jugés, aucun écart.
+
+### Ce qui reste hors de portée, et le dit
+
+Une **image** (`url(...)`), un `conic-gradient`, un `repeating-*`, une
+`color-mix()` restent comptés et nommés par `--ecartes`. Le site n'en pose aucun
+aujourd'hui : les 27 700 « textes sur fond d'image » d'hier étaient tous des
+dégradés. Le chiffre est tombé à **0**, et c'est la preuve que le classement
+d'hier était trop grossier.
+
+### Limite de la méthode
+
+Le pire point d'une plage n'est pas le point où le texte se trouve : la mesure
+ne connaît pas la géométrie du dégradé sous le texte. Elle est donc
+**conservatrice** — elle peut refuser un texte qui, à l'endroit exact où il est
+posé, passerait. Elle ne peut pas l'inverse. Descendre à la géométrie (angle,
+position du texte dans la boîte) ou à la capture de pixels a été chiffré :
+690 ms par élément pour la capture, hors budget pour 17 500 textes.

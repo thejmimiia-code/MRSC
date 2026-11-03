@@ -306,6 +306,8 @@ function mesurer(selecteurs) {
     mesures: 0,
     decoratifs: 0,
     fond_image: 0,
+    degrades: 0,
+    candidats_degrade: [],
     sans_texte: 0,
     minimum: null,
     candidats: [],
@@ -340,19 +342,73 @@ function mesurer(selecteurs) {
     let fond = { r: 255, g: 255, b: 255, a: 1 };
     const piles = [];
     let image = null;
+    // Les couches de dégradé rencontrées, de la plus haute à la plus basse.
+    let couches = [];
+    let indechiffrable = null;
     while (courant) {
       const st = getComputedStyle(courant);
-      if (!image && st.backgroundImage && st.backgroundImage !== 'none') {
-        const nom = String(courant.className || '').split(' ')[0];
-        image = `${courant.tagName.toLowerCase()}${nom ? `.${nom}` : ''}`;
+      if (st.backgroundImage && st.backgroundImage !== 'none') {
+        if (!image) {
+          const nom = String(courant.className || '').split(' ')[0];
+          image = `${courant.tagName.toLowerCase()}${nom ? `.${nom}` : ''}`;
+        }
+        // Ce que le script sait lire : des dégradés dont tous les arrêts sont
+        // des couleurs. Ce qu'il ne sait pas : une image, un `conic-gradient`,
+        // un `repeating-*`, une `color-mix()`. Il le dit au lieu de le taire —
+        // un fond qu'on ne sait pas calculer n'est pas un fond conforme.
+        const brute = st.backgroundImage;
+        if (!indechiffrable) {
+          if (/url\(/i.test(brute) || /conic-gradient|repeating-/i.test(brute) || /color-mix\(/i.test(brute)) {
+            indechiffrable = brute.includes('url(') ? 'image' : 'degrade_non_lu';
+          } else {
+            const lues = [];
+            for (const morceau of brute.split(/,(?![^(]*\))/)) {
+              const couleurs = [];
+              for (const trouve of morceau.matchAll(/rgba?\([^)]+\)/g)) {
+                const couleur = lireCouleur(trouve[0]);
+                if (couleur) couleurs.push(couleur);
+              }
+              if (couleurs.length) lues.push(couleurs);
+            }
+            couches = lues.concat(couches);
+          }
+        }
       }
       const couleur = lireCouleur(st.backgroundColor);
       if (couleur && couleur.a > 0) piles.push(couleur);
+      // Un fond **opaque** masque tout ce qui est dessous : un bouton plein sur
+      // un bandeau dégradé ne laisse pas voir le bandeau. Continuer à remonter
+      // faisait accuser 24 boutons d'un contraste de 1,06:1 contre le dégradé de
+      // leur section, alors que leur propre fond les couvre. C'est le navigateur
+      // qui a raison, pas la remontée naïve.
+      if (couleur && couleur.a >= 1) break;
       courant = courant.parentElement;
     }
     if (image) {
-      contraste.fond_image += 1;
-      nommer(contraste.fond_image_selecteurs, image);
+      if (indechiffrable || !couches.length) {
+        contraste.fond_image += 1;
+        nommer(contraste.fond_image_selecteurs, image);
+        continue;
+      }
+      // Un dégradé est calculable : le fond n'est pas « hors de portée », il est
+      // une plage. Le script rend les couleurs d'arrêt et la base unie ; c'est
+      // `cadrages.py` qui cherche le pire contraste de la plage et décide.
+      let base = fond;
+      for (let i = piles.length - 1; i >= 0; i -= 1) base = poser(piles[i], base);
+      const gras = Number(style.fontWeight) >= 700;
+      contraste.degrades += 1;
+      if (contraste.candidats_degrade.length < 200) {
+        contraste.candidats_degrade.push({
+          tag: element.tagName.toLowerCase(),
+          classe: String(element.className || '').slice(0, 60),
+          couleur: avant,
+          base,
+          couches,
+          taille,
+          gras,
+          texte: (element.textContent || '').trim().slice(0, 40),
+        });
+      }
       continue;
     }
     for (let i = piles.length - 1; i >= 0; i -= 1) fond = poser(piles[i], fond);
@@ -506,6 +562,7 @@ function mesurer(selecteurs) {
   );
   const textes = rapport.mesures.reduce((total, mesure) => total + ((mesure.contraste || {}).mesures || 0), 0);
   const surImage = rapport.mesures.reduce((total, mesure) => total + ((mesure.contraste || {}).fond_image || 0), 0);
+  const degrades = rapport.mesures.reduce((total, mesure) => total + ((mesure.contraste || {}).degrades || 0), 0);
   const decoratifs = rapport.mesures.reduce((total, mesure) => total + ((mesure.contraste || {}).decoratifs || 0), 0);
   const masques = rapport.mesures.reduce((total, mesure) => total + (mesure.masques || 0), 0);
   console.log(
@@ -514,8 +571,9 @@ function mesurer(selecteurs) {
       `${rapport.erreurs.length} erreur(s) — rapport écrit dans ${destination}.`
   );
   console.log(
-    `Contraste : ${textes} texte(s) mesuré(s) sur fond uni, ${surImage} sur fond d'image (non mesurable ` +
-      `par cette méthode), ${decoratifs} décoratif(s) écarté(s). Textes volontairement masqués : ${masques}.`
+    `Contraste : ${textes} texte(s) mesuré(s) sur fond uni, ${degrades} sur dégradé (plage rendue à ` +
+      `\`cadrages.py\`), ${surImage} sur image (non calculable par cette méthode), ` +
+      `${decoratifs} décoratif(s) écarté(s). Textes volontairement masqués : ${masques}.`
   );
   if (rapport.erreurs.length) {
     for (const erreur of rapport.erreurs.slice(0, 20)) {

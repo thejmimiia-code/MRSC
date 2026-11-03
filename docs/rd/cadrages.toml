@@ -100,11 +100,24 @@ jamais jugé : un glyphe ornemental n'a pas à tenir un rapport de lecture, et
 l'écarter est un choix explicite plutôt qu'un angle mort.
 """
 angle_mort = """
-Un fond en image ou en dégradé n'est pas mesuré : la méthode ne lit que des
-couleurs de fond unies, et un aplat transparent sur une photographie ne se
-calcule pas. Ces textes sont **comptés** dans le rapport, jamais supposés bons.
-Les états de survol, de focus et les éléments révélés par script ne sont pas
-mesurés non plus : le relevé voit l'état affiché, pas tous les états.
+Un fond en **image** — une photographie, un `url(...)` — n'est pas mesuré : la
+méthode ne lit que des couleurs. Ces textes sont **comptés** dans le rapport,
+jamais supposés bons. Un **dégradé**, en revanche, est une plage de couleurs que
+le navigateur rend exactement : ses arrêts sont relevés, et le pire contraste de
+la plage est calculé puis comparé au seuil. Les états de survol, de focus et les
+éléments révélés par script ne sont pas mesurés non plus : le relevé voit l'état
+affiché, pas tous les états.
+"""
+note_degrade = """
+Un dégradé n'est pas une couleur mais une étendue. Le navigateur rend les arrêts
+de chaque couche ; `cadrages.py` échantillonne l'interpolation en neuf points par
+paire d'arrêts, compose les couches (arrêts transparents compris) et compose sur
+le fond opaque le plus proche. Il retient le **pire** rapport. La remontée
+s'arrête au premier fond **opaque** : un bouton plein sur un bandeau dégradé ne
+laisse pas voir le bandeau, et continuer faisait accuser 24 boutons d'un
+contraste de 1,06:1 contre une couleur qu'ils recouvrent. Ce qu'il ne sait pas :
+une image, un `conic-gradient`, un `repeating-*`, une `color-mix()` — ceux-là
+sont comptés et nommés, jamais supposés conformes.
 """
 
 [focus]
