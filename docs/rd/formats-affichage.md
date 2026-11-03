@@ -2499,55 +2499,61 @@ lisait que des couleurs unies ; un dégradé n'en est pas une, c'est une étendu
 ### Ce qui a changé
 
 Le relevé n'écarte plus un texte parce qu'il voit un `background-image` : il en
-lit les **arrêts**. Chromium normalise déjà chaque couche en
-`linear-gradient(rgb(…), rgb(…))`, ce qui rend la lecture exacte. `cadrages.py`
-échantillonne l'interpolation en **neuf points** par paire d'arrêts, compose les
-couches (arrêts transparents compris) sur le fond opaque le plus proche, et
-retient le **pire** rapport. Le message nomme ce pire point :
+lit les **arrêts** et la **boîte**. Chromium normalise chaque couche en
+`linear-gradient(90deg, rgb(…), rgb(…))` ou `radial-gradient(circle at 84% 16%,
+…, … 352px)`, ce qui rend la lecture exacte. `cadrages.py` projette ensuite la
+boîte du texte sur l'axe du dégradé — droite pour un linéaire, distance au centre
+pour un radial — et n'échantillonne que la **portion réellement sous le texte** :
+neuf points régulièrement espacés, plus chaque arrêt qui tombe dans la portion.
+Le message nomme le pire point :
 
-> `apprendre.html · défaut · 85 % · 390 px : p contraste 4.434:1 sur un dégradé,
-> seuil 4.5:1 pour 12 px — pire point rgb(248, 241, 223)`
+> `index.html · lecture · 75 % · 1440 px : small contraste 4.444:1 sur un
+> dégradé, seuil 4.5:1 pour 12 px — pire point rgb(237, 242, 250)`
 
-### Deux fautes de méthode, avant le premier vrai défaut
+### Trois fautes de méthode, avant le premier chiffre publiable
 
 1. **La remontée ne s'arrêtait pas à un fond opaque.** Un bouton plein sur un
    bandeau dégradé était jugé *contre le bandeau qu'il recouvre* : **24 boutons**
-   accusés à 1,06:1. Le navigateur a raison, pas la remontée naïve — la boucle
-   s'arrête au premier fond opaque.
+   accusés à 1,06:1. Le navigateur a raison, pas la remontée naïve.
 2. **Un dégradé n'est pas une couleur.** Prendre le pire point d'une plage
-   entière est un majorant : c'est sûr, mais une section claire→foncée accuse un
-   texte qui n'occupe qu'une bande. L'outil l'assume et le nomme (le pire point
-   est imprimé, la décision reste lisible) — c'est écrit dans les limites.
+   entière est un majorant : une section claire→foncée accuse un texte qui
+   n'occupe qu'une bande. Ce majorant a été remplacé par la projection de la
+   boîte du texte — sur les 17 500 verdicts, **16 515** deviennent plus
+   permissifs, **985** restent identiques, **aucun** ne devient plus sévère.
+3. **La découpe des couches était fausse.** La virgule entre deux **arrêts** d'un
+   même dégradé est suivie d'une couleur, exactement comme celle entre deux
+   **couches** : une expression régulière ne peut pas les distinguer. Chaque
+   arrêt devenait donc un calque, et la plage calculée portait sur des aplats qui
+   n'existent nulle part. La découpe se fait sur la **profondeur des
+   parenthèses**, et `test_contraste-degrade.py` la rejoue : deux arrêts doivent
+   ressortir comme **une** couche à deux arrêts.
 
-### Ce que la mesure a trouvé
+### Ce que la mesure corrigée trouve
 
-Trois textes seulement, répétés sur 1 060 cadrages — **960 constats** :
+Sur 1 060 cadrages : **385 810** textes sur fond uni, **17 500** sur dégradé,
+**0** sur fond d'image, 3 460 décoratifs écartés, 4 240 masqués. Le pire rapport
+d'un texte sur dégradé est **4,782:1** — rien ne passe sous son seuil.
 
-| Texte | Couleur | Pire fond | Rapport | Seuil |
-| --- | --- | --- | --- | --- |
-| `p.page-lead` | `#647086` | crème `rgb(248, 241, 223)` | **4,43:1** | 4,5:1 |
-| `p` de carte teintée | `#647086` | vert pâle `rgb(239, 245, 233)` | **4,50:1** | 4,5:1 |
-| `span.phrase` | `#647086` | bleu pâle `rgb(237, 242, 250)` | **4,44:1** | 4,5:1 |
-
-Le coupable est un seul jeton, `--muted` (`#647086`) : il tenait sur fond blanc
-(5,00:1) et tombait **sous le seuil dès qu'un dégradé passait dessous**. Il est
-assombri de 4 % en clarté, à teinte constante : `#5f6b81`, **4,77:1 au pire
-point**. Après correction : **0 refus**, 385 830 textes sur fond uni et 17 500
-sur dégradé jugés, aucun écart.
+Le jeton `--muted` (`#647086`), lui, tombe à **4,444:1** et ferait refuser
+**732 textes** sur **cinq** sélecteurs. Il tenait **5,00:1 sur blanc** — d'où son
+passage sous tous les contrôles précédents. Assombri à **`#5f6b81`** (même teinte,
+4 % de clarté en moins) : **4,782:1** au pire point, **0 refus**.
 
 ### Ce qui reste hors de portée, et le dit
 
 Une **image** (`url(...)`), un `conic-gradient`, un `repeating-*`, une
-`color-mix()` restent comptés et nommés par `--ecartes`. Le site n'en pose aucun
-aujourd'hui : les 27 700 « textes sur fond d'image » d'hier étaient tous des
-dégradés. Le chiffre est tombé à **0**, et c'est la preuve que le classement
-d'hier était trop grossier.
+`color-mix()` restent comptés et nommés par `--ecartes` — le site n'en pose
+aucun : les 27 700 « textes sur fond d'image » d'hier étaient tous des dégradés.
+
+Un dégradé **radial** n'est situé que si son centre est écrit en pourcentage et
+son rayon en pixels ; sinon la zone vaut la plage entière, majorant assumé et
+non silence. L'interpolation suivie est celle de sRGB. La boîte du dégradé est
+prise au `border-box` : une bordure épaisse décalerait l'axe de quelques pixels.
 
 ### Limite de la méthode
 
-Le pire point d'une plage n'est pas le point où le texte se trouve : la mesure
-ne connaît pas la géométrie du dégradé sous le texte. Elle est donc
-**conservatrice** — elle peut refuser un texte qui, à l'endroit exact où il est
-posé, passerait. Elle ne peut pas l'inverse. Descendre à la géométrie (angle,
-position du texte dans la boîte) ou à la capture de pixels a été chiffré :
-690 ms par élément pour la capture, hors budget pour 17 500 textes.
+La mesure suit la géométrie du dégradé, pas celle du **glyphe** : la zone est
+celle de la boîte du texte, pas de chaque ligne. Un texte qui déborde de la zone
+claire d'un dégradé reste jugé contre la portion que sa boîte couvre. La capture
+de pixels, qui lèverait cette limite, a été chiffrée à 690 ms par élément : hors
+budget pour 17 500 textes.

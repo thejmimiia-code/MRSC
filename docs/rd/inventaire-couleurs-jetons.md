@@ -56,7 +56,7 @@ Textes fréquents sur blanc (`#ffffff`) et sur `--paper` (`#f5f7fa`) :
 | `#835100` | 6,68:1 | 6,23:1 |
 | `#536078` | 6,34:1 | 5,91:1 |
 | `--green` `#456d29` | 6,05:1 | 5,63:1 |
-| `--muted` `#5f6b81` (assombri le 3 novembre 2026) | 5,38:1 | 4,77:1 au pire point d'un dégradé |
+| `--muted` `#5f6b81` (assombri le 3 novembre 2026) | 5,38:1 | 4,78:1 au pire point d'un dégradé |
 
 Textes sur `--navy` (`#1d3268`) : blanc 12,29:1 ; `#d9e5f7` 9,66:1 ; `#d6e9c3` 9,54:1 ; `#bae6fd` 9,26:1 ; `--gold` `#e7a126` 5,57:1.
 

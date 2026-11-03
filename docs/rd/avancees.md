@@ -12,7 +12,7 @@
 | --- | ---: |
 | Avancées consignées | 83 |
 | Période couverte | du 2026-10-20 au 2026-11-03 |
-| Contrôles exécutables cités | 95 |
+| Contrôles exécutables cités | 97 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1938,30 +1938,31 @@ Initiatives liées : `optimisation-du-site`, `ecouter-la-page`, `coherence-texte
 
 Initiatives liées : `ecouter-la-page`, `optimisation-du-site`, `coherence-textes-publics`.
 
-### `un-degrade-est-une-plage-de-contraste` — Un texte sur un dégradé n'est pas un texte sans fond : la plage a un pire point
+### `un-degrade-est-une-plage-de-contraste` — Un texte sur un dégradé n'est pas un texte sans fond : la plage a un pire point, sous le texte
 
 *Consignée le 2026-11-03.*
 
 **Constat.** 27 700 textes étaient posés sur un « fond d'image » et **comptés, jamais jugés** : la méthode ne lisait que des couleurs unies, et un dégradé n'en est pas une. Le classement était pourtant faux dès le départ — le site ne pose aucune image en fond de texte, il pose des dégradés : bandeaux, panneaux d'appel, héros, cartes teintées. Un fond qu'on ne sait pas lire n'est pas un fond conforme, mais ce n'était pas une raison pour le déclarer illisible : c'était une raison de le lire.
 
-**Ce que cela change.** Le relevé lit désormais les **arrêts** de chaque couche de dégradé — Chromium les normalise en `rgb(…)`, la lecture est donc exacte — et ne juge toujours rien. `cadrages.py` échantillonne l'interpolation en **neuf points** par paire d'arrêts, compose les couches avec leurs transparences sur le fond opaque le plus proche et retient le **pire** rapport, nommé avec son point : « p contraste 4.434:1 sur un dégradé, seuil 4.5:1 pour 12 px — pire point rgb(248, 241, 223) ». Deux corrections en chemin : la remontée s'arrête au premier fond **opaque** (un bouton plein sur un bandeau dégradé était jugé contre le bandeau qu'il recouvre : 24 faux refus à 1,06:1), et le classement « image » tombe à **0**. Résultat : 385 830 textes sur fond uni et **17 500 sur dégradé** jugés, **960 constats** ramenés à **trois textes** — tous porteurs du jeton `--muted` (`#647086`), entre 4,43:1 et 4,50:1. Le jeton tenait 5,00:1 sur blanc, ce qui explique qu'il ait passé tous les contrôles précédents. Assombri à `#5f6b81` (teinte constante, 4 % de clarté en moins) : 4,77:1 au pire point, **0 refus**.
+**Ce que cela change.** Le relevé lit les **arrêts** de chaque couche — Chromium les normalise en `rgb(…)`, la lecture est donc exacte — et retient la **boîte** de la couche. `cadrages.py` projette la boîte du texte sur l'axe du dégradé, n'échantillonne que la **portion réellement sous le texte** (neuf points régulièrement espacés, plus chaque arrêt qui y tombe), compose les couches avec leurs transparences sur le fond opaque le plus proche et retient le **pire** rapport, nommé avec son point : « small contraste 4.444:1 sur un dégradé, seuil 4.5:1 pour 12 px — pire point rgb(237, 242, 250) ». Trois fautes corrigées en chemin. La remontée s'arrête au premier fond **opaque** (un bouton plein sur un bandeau dégradé était jugé contre le bandeau qu'il recouvre : 24 faux refus à 1,06:1). Le classement « image » tombe à **0**. Et la découpe des couches, faite d'abord sur une expression régulière, confondait la virgule entre deux **arrêts** et celle entre deux **couches** : chaque arrêt devenait un calque, la plage portait sur des aplats qui n'existent nulle part. La découpe se fait maintenant sur la **profondeur des parenthèses**, et un banc la rejoue. Résultat mesuré sur 1 060 cadrages : **385 810** textes sur fond uni, **17 500** sur dégradé, pire rapport **4,782:1**, aucun refus. La géométrie resserre le majorant — 16 515 verdicts plus permissifs, 985 identiques, **aucun** plus sévère. Avec l'ancienne valeur du jeton `--muted` (`#647086`), le même relevé refuserait **732 textes** sur **cinq** sélecteurs (pire : 4,444:1) : assombri à `#5f6b81`, le pire remonte à 4,782:1 et **0 refus** subsiste.
 
 **Preuves dans le dépôt :**
 
 - `outils/mesurer-cadrages.cjs`
 - `outils/cadrages.py`
 - `outils/test_cadrages.py`
+- `outils/test_contraste-degrade.py`
 - `assets/css/site.css`
 - `docs/rd/formats-affichage.md`
 - `docs/rd/cadrages.toml`
 - `docs/rd/inventaire-couleurs-jetons.md`
 - `docs/rd/journal.md`
 
-**Contrôle qui la maintient :** `node outils/mesurer-cadrages.cjs /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --controler /tmp/plan.json /tmp/rapport.json && python3 outils/test_cadrages.py`
+**Contrôle qui la maintient :** `MRSC_BROWSER_NODE_MODULES=… node outils/mesurer-cadrages.cjs /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --controler /tmp/plan.json /tmp/rapport.json && python3 outils/test_cadrages.py && MRSC_BROWSER_NODE_MODULES=… python3 outils/test_contraste-degrade.py`
 
-**Limite — ce que cela ne prouve pas.** Le pire point d'une plage n'est pas le point où le texte se trouve : la mesure ne connaît pas la géométrie du dégradé sous le texte. Elle est donc **conservatrice** — elle peut refuser un texte qui passerait à l'endroit exact où il est posé, jamais l'inverse. Une image `url(...)`, un `conic-gradient`, un `repeating-*` ou une `color-mix()` restent comptés et nommés, jamais jugés (le site n'en pose aucun). L'échantillonnage en neuf points par paire d'arrêts suit une interpolation sRGB ; une interpolation dans un autre espace colorimétrique n'est pas modélisée. La capture de pixels, qui lèverait la limite de géométrie, a été chiffrée à 690 ms par élément : hors budget pour 17 500 textes.
+**Limite — ce que cela ne prouve pas.** La mesure suit la géométrie du dégradé, pas celle du glyphe : la zone est celle de la boîte du texte, ligne à ligne non. Un dégradé **radial** n'est situé que si son centre est écrit en pourcentage et son rayon en pixels ; sinon la zone vaut la plage entière, majorant assumé et non silence. Une image `url(...)`, un `conic-gradient`, un `repeating-*` ou une `color-mix()` restent comptés et nommés, jamais jugés (le site n'en pose aucun). L'interpolation suivie est celle de sRGB ; la boîte du dégradé est prise au `border-box`, qu'une bordure épaisse décalerait. Le banc ne couvre que des dégradés linéaires à arrêts en pourcentage : la zone radiale est calculée mais aucun cas ne la vérifie. La capture de pixels, qui lèverait la limite de géométrie, a été chiffrée à 690 ms par élément : hors budget pour 17 500 textes.
 
-**Suite.** Descendre à la géométrie du dégradé sous le texte (angle, position du texte dans la boîte) pour remplacer le majorant par la couleur réelle au point, en commençant par les trois dégradés concernés et en disant ce que cela change sur les 17 500 textes.
+**Suite.** Écrire le cas de banc de la zone **radiale** — en pixels et en pourcentage — avant de s'en servir, puis descendre à la ligne de texte plutôt qu'à la boîte.
 
 Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`, `ecouter-la-page`.
 

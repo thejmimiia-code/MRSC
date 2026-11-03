@@ -110,15 +110,33 @@ affiché, pas tous les états.
 """
 note_degrade = """
 Un dégradé n'est pas une couleur mais une étendue. Le navigateur rend les arrêts
-de chaque couche ; `cadrages.py` échantillonne l'interpolation en neuf points par
-paire d'arrêts, compose les couches (arrêts transparents compris) et compose sur
-le fond opaque le plus proche. Il retient le **pire** rapport. La remontée
-s'arrête au premier fond **opaque** : un bouton plein sur un bandeau dégradé ne
-laisse pas voir le bandeau, et continuer faisait accuser 24 boutons d'un
-contraste de 1,06:1 contre une couleur qu'ils recouvrent. Ce qu'il ne sait pas :
-une image, un `conic-gradient`, un `repeating-*`, une `color-mix()` — ceux-là
-sont comptés et nommés, jamais supposés conformes.
+de chaque couche ; `cadrages.py` projette la boîte du texte sur l'axe du dégradé
+et n'échantillonne que la **portion réellement sous le texte** (neuf points
+régulièrement espacés, plus chaque arrêt qui tombe dans cette portion). Les
+couches sont composées dans l'ordre, arrêts transparents compris, sur le fond
+opaque le plus proche, et le **pire** rapport est retenu. La remontée s'arrête au
+premier fond **opaque** : un bouton plein sur un bandeau dégradé ne laisse pas
+voir le bandeau, et continuer faisait accuser 24 boutons d'un contraste de
+1,06:1 contre une couleur qu'ils recouvrent.
+
+Deux fautes ont été corrigées le 3 novembre 2026, avant que le chiffre soit
+publié. La première : la découpe des couches se faisait sur une expression
+régulière, et la virgule entre deux **arrêts** d'un même dégradé ressemble à
+celle entre deux **couches** — chaque arrêt devenait un calque, et la plage
+calculée portait sur des aplats qui n'existent nulle part. La découpe se fait
+maintenant sur la profondeur des parenthèses. La seconde : retenir le pire point
+de l'étendue entière est un majorant ; la géométrie le resserre, et sur les
+17 500 textes concernés 16 515 verdicts deviennent plus permissifs, aucun plus
+sévère.
+
+Ce qu'il ne sait pas : une image, un `conic-gradient`, un `repeating-*`, une
+`color-mix()` — ceux-là sont comptés et nommés, jamais supposés conformes. Un
+dégradé radial n'est situé que si son centre est écrit en pourcentage et son
+rayon en pixels ; sinon la zone vaut la plage entière, ce qui est un majorant et
+non un silence. L'interpolation suivie est celle de sRGB. La boîte du dégradé est
+prise au `border-box` : une bordure épaisse décalerait l'axe de quelques pixels.
 """
+resultat_degrade = """Relevé du 3 novembre 2026, sur les 1 060 combinaisons : **17 500 textes** posés sur un dégradé, jugés un par un contre la portion de plage qui les couvre. Le relevé compte aussi **385 810 textes** sur fond uni, 3 460 décoratifs écartés et 4 240 textes volontairement masqués ; aucun texte sur fond d'image, car le site n'en pose aucun derrière du texte. Le pire rapport mesuré sur un dégradé est **4,782:1** ; aucun texte n'est sous son seuil. Avec l'ancienne valeur du jeton `--muted` (`#647086`), le même relevé refuserait **732 textes** répartis sur **cinq** sélecteurs (le pire : `p.page-lead`, à **4,444:1**) — le jeton est donc bien la cause, et c'est en le mesurant qu'on l'a su, pas en le supposant."""
 
 [focus]
 # Le focus au clavier se mesure comme le texte : même navigateur, même méthode,

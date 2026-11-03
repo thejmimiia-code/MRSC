@@ -766,6 +766,17 @@ jobs:
           MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
         run: python3 outils/test_mutations_cadrages.py
 
+      # Et ce banc-ci éprouve la lecture elle-même : un dégradé doit sortir comme
+      # une couche à deux arrêts (la découpe d'expression régulière en faisait
+      # deux calques, et publiait des rapports calculés sur des aplats qui
+      # n'existent nulle part), et un texte posé à droite d'un dégradé horizontal
+      # doit être jugé contre la fin de la plage, pas contre son début.
+      # Deux cas, deux secondes. Sans navigateur : code 2.
+      - name: Éprouver que la lecture d'un dégradé garde ses arrêts et la zone du texte
+        env:
+          MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
+        run: python3 outils/test_contraste-degrade.py
+
       # Les contrôles précédents disent qu'une mutation produit l'erreur
       # annoncée. Aucun ne dit que la géométrie relevée est la bonne : un
       # `getBoundingClientRect` mal lu, une densité calculée à l'envers,

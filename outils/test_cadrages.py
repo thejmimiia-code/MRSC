@@ -523,6 +523,59 @@ class TestDegrade(unittest.TestCase):
         pire, _ = self.m.pire_contraste_degrade(candidat)
         self.assertGreaterEqual(pire, self.m.seuil_de_contraste(16, False))
 
+    def test_zone_sous_le_texte_restreint_la_plage(self) -> None:
+        """Le pire point de la plage entière n'est pas le pire point sous le texte.
+
+        Un bandeau clair→sombre : un texte sombre posé sur le haut clair passe,
+        alors que la plage entière le refuserait. C'est tout l'intérêt de
+        projeter la boîte du texte sur l'axe du dégradé.
+        """
+        clair = {"r": 250, "g": 248, "b": 240, "a": 1}
+        sombre = {"r": 20, "g": 25, "b": 35, "a": 1}
+        texte = {"r": 40, "g": 45, "b": 60, "a": 1}
+        entiere = {"couleur": texte, "base": clair, "couches": [[clair, sombre]], "taille": 16, "gras": False}
+        haute = {
+            "couleur": texte,
+            "base": clair,
+            "couches": [
+                {
+                    "type": "lineaire",
+                    "zone": [0.0, 0.1],
+                    "arrets": [dict(clair, t=0.0), dict(sombre, t=1.0)],
+                }
+            ],
+            "taille": 16,
+            "gras": False,
+        }
+        pire_entier, _ = self.m.pire_contraste_degrade(entiere)
+        pire_haute, _ = self.m.pire_contraste_degrade(haute)
+        self.assertLess(pire_entier, 2.0, "sur la plage entière, le texte sombre touche le sombre")
+        self.assertGreater(pire_haute, pire_entier, "restreint au haut clair, il passe mieux")
+        self.assertGreaterEqual(pire_haute, self.m.seuil_de_contraste(16, False))
+
+    def test_zone_basse_du_degrade_refuse_le_texte_sombre(self) -> None:
+        clair = {"r": 250, "g": 248, "b": 240, "a": 1}
+        sombre = {"r": 20, "g": 25, "b": 35, "a": 1}
+        candidat = {
+            "couleur": {"r": 40, "g": 45, "b": 60, "a": 1},
+            "base": clair,
+            "couches": [
+                {"type": "lineaire", "zone": [0.9, 1.0], "arrets": [dict(clair, t=0.0), dict(sombre, t=1.0)]}
+            ],
+            "taille": 16,
+            "gras": False,
+        }
+        pire, fond = self.m.pire_contraste_degrade(candidat)
+        self.assertLess(pire, 2.0)
+        self.assertLess(fond["r"], 60, "le pire fond retenu est bien le bas sombre")
+
+    def test_zone_illisible_vaut_la_plage_entiere(self) -> None:
+        """Une zone qu'on ne sait pas lire est un majorant, jamais un silence."""
+        noir = {"r": 0, "g": 0, "b": 0, "a": 1}
+        plage = self.m.plage_degrade({"r": 255, "g": 255, "b": 255, "a": 1}, [{"zone": "inconnue", "arrets": [noir, dict(noir, t=1.0)]}])
+        lumineuses = [self.m.luminance_wcag(couleur) for couleur in plage]
+        self.assertAlmostEqual(min(lumineuses), 0.0, places=3)
+
     def test_degrade_sous_le_seuil_est_refuse_par_le_controle(self) -> None:
         """Le contrôle doit nommer le pire point, pas seulement le rapport."""
         plan = {"tolerance_px": 0.5, "combinaisons": [{"page": "index.html", "layout": None, "cran": 100, "largeur": 1440}]}

@@ -416,32 +416,83 @@ def poser(dessus: dict, dessous: dict) -> dict:
 ECHANTILLONS_DEGRADE = 9
 
 
-def plage_degrade(base: dict, couches: list[list[dict]], seuil_points: int = 64) -> list[dict]:
+def _arrets_et_zone(couche) -> tuple[list[dict], tuple[float, float]]:
+    """Rend les arrêts d'une couche et la portion de l'axe couverte par le texte.
+
+    Le relevé donne des arrêts `{r, g, b, a, t}` et une zone `[début, fin]` sur
+    l'axe du dégradé — la projection de la boîte du texte. Une couche d'ancienne
+    forme (simple liste de couleurs) reste lue : zone entière, positions
+    implicites. Une zone illisible vaut la plage entière : c'est un majorant,
+    jamais un silence.
+    """
+    if isinstance(couche, dict):
+        arrets = list(couche.get("arrets") or [])
+        zone = couche.get("zone") or [0.0, 1.0]
+    else:
+        arrets, zone = list(couche or []), [0.0, 1.0]
+    if len(arrets) < 2:
+        return arrets, (0.0, 1.0)
+    positions = [a.get("t") if isinstance(a, dict) else None for a in arrets]
+    if any(p is None for p in positions):
+        # Positions partiellement écrites : on revient à l'hypothèse uniforme,
+        # qui couvre le même chemin de couleurs — elle ne le situe simplement
+        # pas au pixel près. Le relevé dit lesquelles il n'a pas pu lire.
+        positions = [i / (len(arrets) - 1) for i in range(len(arrets))]
+    try:
+        debut, fin = float(zone[0]), float(zone[1])
+    except (TypeError, ValueError, IndexError):
+        debut, fin = 0.0, 1.0
+    debut, fin = max(0.0, min(1.0, debut)), max(0.0, min(1.0, fin))
+    if fin < debut:
+        debut, fin = fin, debut
+    return arrets, (debut, fin)
+
+
+def _couleur_a(arrets: list[dict], positions: list[float], t: float) -> dict:
+    if t <= positions[0]:
+        return dict(arrets[0])
+    if t >= positions[-1]:
+        return dict(arrets[-1])
+    for i in range(1, len(positions)):
+        if t <= positions[i]:
+            largeur = positions[i] - positions[i - 1] or 1e-9
+            part = (t - positions[i - 1]) / largeur
+            a, b = arrets[i - 1], arrets[i]
+            return {
+                "r": a["r"] + (b["r"] - a["r"]) * part,
+                "g": a["g"] + (b["g"] - a["g"]) * part,
+                "b": a["b"] + (b["b"] - a["b"]) * part,
+                "a": a.get("a", 1) + (b.get("a", 1) - a.get("a", 1)) * part,
+            }
+    return dict(arrets[-1])
+
+
+def plage_degrade(base: dict, couches: list, seuil_points: int = 64) -> list[dict]:
     """Rend les couleurs que le fond peut prendre, du plus sombre au plus clair.
 
-    Chaque couche est un dégradé (liste d'arrêts) posé au-dessus du précédent.
-    Une couche peut contenir des arrêts transparents : ils laissent voir ce qui
-    est dessous, et c'est justement le cas des halos radiaux du site.
+    Chaque couche est un dégradé posé au-dessus du précédent, réduit à la
+    **portion réellement sous le texte**. Une couche peut contenir des arrêts
+    transparents : ils laissent voir ce qui est dessous, et c'est justement le
+    cas des halos radiaux du site.
     """
     couleurs = [base]
-    for arrets in couches:
+    for couche in couches:
+        arrets, (debut, fin) = _arrets_et_zone(couche)
         if not arrets:
             continue
-        echantillons: list[dict] = []
+        positions = [a.get("t") if isinstance(a, dict) else None for a in arrets]
         if len(arrets) == 1:
-            echantillons = [arrets[0]]
-        else:
-            for a, b in zip(arrets, arrets[1:]):
-                for rang in range(ECHANTILLONS_DEGRADE):
-                    part = rang / (ECHANTILLONS_DEGRADE - 1)
-                    echantillons.append(
-                        {
-                            "r": a["r"] + (b["r"] - a["r"]) * part,
-                            "g": a["g"] + (b["g"] - a["g"]) * part,
-                            "b": a["b"] + (b["b"] - a["b"]) * part,
-                            "a": a.get("a", 1) + (b.get("a", 1) - a.get("a", 1)) * part,
-                        }
-                    )
+            positions = [0.0]
+        elif any(p is None for p in positions):
+            positions = [i / (len(arrets) - 1) for i in range(len(arrets))]
+        positions = [float(p) for p in positions]
+        if fin <= debut:
+            fin = min(1.0, debut + 0.001)
+        points = {debut, fin}
+        points.update(p for p in positions if debut <= p <= fin)
+        for rang in range(ECHANTILLONS_DEGRADE):
+            points.add(debut + (fin - debut) * rang / (ECHANTILLONS_DEGRADE - 1))
+        echantillons = [_couleur_a(arrets, positions, p) for p in sorted(points)]
         composees = [poser(echantillon, fond) for fond in couleurs for echantillon in echantillons]
         # Les compositions sont ramenées aux deux extrêmes de luminance plus la
         # médiane : garder les 81 compositions de trois couches rendrait le

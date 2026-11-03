@@ -189,6 +189,7 @@ digraph memoire {
   "outils/test_avancees.py" [shape=plaintext, label="outils/test_avancees.py"];
   "outils/test_cadrages.py" [shape=plaintext, label="outils/test_cadrages.py"];
   "outils/test_confronter_sources.py" [shape=plaintext, label="outils/test_confronter_sources.py"];
+  "outils/test_contraste-degrade.py" [shape=plaintext, label="outils/test_contraste-degrade.py"];
   "outils/test_etat_rd.py" [shape=plaintext, label="outils/test_etat_rd.py"];
   "outils/test_exemples_statistiques.py" [shape=plaintext, label="outils/test_exemples_statistiques.py"];
   "outils/test_fichiers_servis.py" [shape=plaintext, label="outils/test_fichiers_servis.py"];
@@ -497,10 +498,10 @@ digraph memoire {
   "avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer" -> "outils/banc_mutations.py" [label="prouvée par"];
   "avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer" -> "outils/test_mutations_planches_statuts.py" [label="prouvée par"];
   "avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer" -> "outils/verifier-planches-statuts.py" [label="prouvée par"];
-  "avancee:un-degrade-est-une-plage-de-contraste" -> "assets/css/site.css" [label="prouvée par"];
   "avancee:un-degrade-est-une-plage-de-contraste" -> "outils/cadrages.py" [label="prouvée par"];
   "avancee:un-degrade-est-une-plage-de-contraste" -> "outils/mesurer-cadrages.cjs" [label="prouvée par"];
   "avancee:un-degrade-est-une-plage-de-contraste" -> "outils/test_cadrages.py" [label="prouvée par"];
+  "avancee:un-degrade-est-une-plage-de-contraste" -> "outils/test_contraste-degrade.py" [label="prouvée par"];
   "avancee:un-espacement-impose-casse-la-page" -> "assets/css/site.css" [label="prouvée par"];
   "avancee:un-espacement-impose-casse-la-page" -> "docs/rd/formats-affichage.md" [label="prouvée par"];
   "avancee:un-espacement-impose-casse-la-page" -> "outils/auditer-criteres-22.mjs" [label="prouvée par"];
