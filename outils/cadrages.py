@@ -54,8 +54,21 @@ PRESENTATIONS = (None, "vitrine", "panorama", "compacte", "mosaique", "lecture")
 #: une échelle. Le cran 100 % vaut 1 : c'est la référence des feuilles.
 ECHELLES = {75: 0.75, 85: 0.85, 100: 1.0, 115: 1.15, 130: 1.3}
 
-#: Les pages qui portent le plus de grilles déclarées, une par famille de dessin.
-PAGES = ("index.html", "apprendre.html", "ia-societe.html", "simulateur.html")
+def pages_publiees(racine: Path = RACINE) -> tuple[str, ...]:
+    """Toutes les pages du site, lues sur le disque et non recopiées ici.
+
+    Le 2 novembre 2026, le contrôle ne visitait que quatre pages — une par
+    famille de dessin. Neuf pages publiées n'étaient donc confrontées à aucun
+    cadrage : un débordement qui n'aurait touché que `documents.html` serait
+    passé inaperçu, et la limite était écrite noir sur blanc dans le registre.
+    Une liste écrite à la main aurait vieilli de la même façon ; elle est donc
+    dérivée, et le registre est confronté à elle par `test_cadrages.py`.
+    """
+    return tuple(sorted(chemin.name for chemin in racine.glob("*.html")))
+
+
+#: Toutes les pages publiées, une par fichier à la racine du site.
+PAGES = pages_publiees()
 
 #: Quatre largeurs qui encadrent les seuils de la feuille : téléphone étroit,
 #: téléphone courant, tablette (le seuil de 760 px et sa gouttière) et bureau.
@@ -92,12 +105,21 @@ def construire_plan(modele, registre: dict, feuille: str) -> dict:
 
     defaut = contenus["defaut"]
     combinaisons: list[dict] = []
+    # Une présentation réécrit des colonnes de grille et la largeur du conteneur.
+    # Sur une page sans grille déclarée, elle n'a pas de cible nommée : la
+    # mesurer six fois coûterait cinq chargements de plus par cran et par
+    # largeur sans rien confronter. Ces pages sont donc mesurées dans la
+    # présentation par défaut seulement — c'est écrit dans `cadrages.toml`.
+    pages_avec_grilles = {
+        page for page in PAGES if any(pages.get(selecteur) == page for selecteur in entrees)
+    }
     for page in PAGES:
-        for presentation in PRESENTATIONS:
+        presentations = PRESENTATIONS if page in pages_avec_grilles else (None,)
+        for presentation in presentations:
             for cran, echelle in ECHELLES.items():
                 modele.definir_contenu(contenus.get(presentation or "defaut", defaut))
                 for largeur in LARGEURS:
-                    attendu: dict[str, int] = {}
+                    attendu: dict[str, dict] = {}
                     for selecteur, entree in entrees.items():
                         if pages.get(selecteur) != page:
                             continue
@@ -117,11 +139,38 @@ def construire_plan(modele, registre: dict, feuille: str) -> dict:
                                     trouvees, presentation, largeur, selecteur
                                 )
                             )
-                            nombre = modele.colonnes_attendues(grille, entree, regle, largeur, echelle)
+                            # Le plan annonce la **capacité** : combien de colonnes
+                            # la place permet. Le nombre de cartes borne ce que le
+                            # visiteur voit, et c'est au contrôle de l'appliquer —
+                            # exemplaire par exemplaire, avec le compte réellement
+                            # lu. Le registre, lui, ne connaît que des listes
+                            # possibles (`items = [1, …, 7]`) : s'en servir ici
+                            # supposerait un exemplaire unique par sélecteur, ce
+                            # qui est faux sur `liens-utiles.html` et
+                            # `transparence.html`.
+                            cartes_declarees = grille.items
+                            grille.items = 0
+                            try:
+                                nombre = modele.colonnes_attendues(
+                                    grille, entree, regle, largeur, echelle
+                                )
+                            finally:
+                                grille.items = cartes_declarees
+                            # Une grille `auto-fit` **replie** ses pistes vides :
+                            # trois cartes dans une place de six n'en occupent
+                            # que trois. Un `repeat(4, …)` ne replie rien :
+                            # quatre colonnes restent quatre, même avec une seule
+                            # carte. Le contrôle a besoin de le savoir, sinon il
+                            # applique la borne des cartes à un dessin fixe.
+                            repliable = regle is None or (
+                                regle.get("regime") != "fixe"
+                                and not str(regle.get("valeur", "")).lstrip().startswith("minmax(0")
+                                and str(regle.get("valeur", "")).strip() != "1fr"
+                            )
                         finally:
                             grille.chaine = ancienne
                         if nombre:
-                            attendu[selecteur] = nombre
+                            attendu[selecteur] = {"colonnes": nombre, "repliable": bool(repliable)}
                     combinaisons.append(
                         {
                             "page": page,
@@ -218,16 +267,103 @@ def controler(plan: dict, rapport: dict) -> list[str]:
                     f"{chevauchement.get('largeur')} × {chevauchement.get('hauteur')} px "
                     f"dans {chevauchement.get('selecteur')}"
                 )
-        observees = mesure.get("colonnes") or {}
-        for selecteur, attendu in (combinaison.get("attendu") or {}).items():
-            if selecteur not in observees:
-                erreurs.append(f"{libelle} : {selecteur} n'a pas été mesurée")
-            elif observees[selecteur] != attendu:
+        # Le contraste : ce qui est écrit doit rester lisible, et pas seulement
+        # tenir dans la page. Le seuil dépend de la taille et de la graisse, donc
+        # il se calcule ici et non dans le navigateur.
+        contraste = mesure.get("contraste")
+        if contraste is None:
+            erreurs.append(f"{libelle} : contraste non mesuré")
+        else:
+            if not contraste.get("mesures"):
+                erreurs.append(f"{libelle} : aucun texte mesuré pour le contraste")
+            for candidat in contraste.get("candidats") or []:
+                seuil = seuil_de_contraste(float(candidat.get("taille") or 0), bool(candidat.get("gras")))
+                rapport_mesure = float(candidat.get("ratio") or 0)
+                if rapport_mesure >= seuil:
+                    continue
+                nom = candidat.get("tag", "?") + (
+                    f".{candidat['classe']}" if candidat.get("classe") else ""
+                )
+                texte = (candidat.get("texte") or "").strip()
                 erreurs.append(
-                    f"{libelle} : {selecteur} annonce {attendu} colonne(s), le navigateur "
-                    f"en compte {observees[selecteur]}"
+                    f"{libelle} : {nom} contraste {rapport_mesure}:1, seuil {seuil}:1 "
+                    f"pour {candidat.get('taille')} px"
+                    + (" gras" if candidat.get("gras") else "")
+                    + (f" (« {texte} »)" if texte else "")
+                )
+        # Le plan annonce une **capacité** ; ce que le visiteur voit en dépend
+        # aussi du nombre de cartes. Chaque exemplaire est donc confronté avec
+        # son propre compte : cinq cartes dans une grille qui permet six colonnes
+        # en occupent cinq, et c'est conforme. Ne mesurer qu'un exemplaire par
+        # sélecteur — le premier trouvé — faisait accuser la feuille de 14 écarts
+        # qui n'existaient pas, le 3 novembre 2026.
+        detail_grilles = mesure.get("grilles")
+        if detail_grilles is None:
+            # Sans ce relevé, aucune colonne ne peut être confrontée : le dire une
+            # fois vaut mieux que d'ajouter une erreur par grille pour la même cause.
+            erreurs.append(f"{libelle} : grilles non mesurées (colonnes absentes du relevé)")
+            detail_grilles = None
+        for selecteur, capacite in (combinaison.get("attendu") or {}).items():
+            if detail_grilles is None:
+                break
+            detail = detail_grilles.get(selecteur)
+            if detail is None:
+                erreurs.append(f"{libelle} : {selecteur} n'a pas été mesurée")
+                continue
+            if isinstance(capacite, dict):
+                colonnes_max = int(capacite.get("colonnes") or 0)
+                repliable = bool(capacite.get("repliable"))
+            else:
+                erreurs.append(f"{libelle} : {selecteur} sans capacité déclarée dans le plan")
+                continue
+            instances = detail.get("instances") or []
+            total = int(detail.get("total") or 0)
+            if not instances:
+                erreurs.append(f"{libelle} : {selecteur} ne porte aucune carte à mesurer")
+                continue
+            if total > len(instances):
+                # Le relevé plafonne le nombre d'exemplaires inspectés : le taire
+                # laisserait croire que tous l'ont été.
+                erreurs.append(
+                    f"{libelle} : {selecteur} compte {total} exemplaire(s), "
+                    f"{len(instances)} seul(s) inspecté(s)"
+                )
+            for rang, instance in enumerate(instances, start=1):
+                cartes = int(instance.get("cartes") or 0)
+                attendu_ici = min(colonnes_max, cartes) if repliable and cartes else colonnes_max
+                observe = int(instance.get("colonnes") or 0)
+                if observe == attendu_ici:
+                    continue
+                pistes = int(instance.get("pistes") or observe)
+                repliees = pistes - observe
+                detail_pistes = (
+                    f" ({pistes} piste(s) déclarée(s), {repliees} repliée(s))" if repliees > 0 else ""
+                )
+                exemplaire = f" · exemplaire {rang}/{total}" if total > 1 else ""
+                erreurs.append(
+                    f"{libelle}{exemplaire} : {selecteur} annonce {attendu_ici} colonne(s) "
+                    f"occupée(s) pour {cartes} carte(s), le navigateur en compte {observe}"
+                    f"{detail_pistes}"
                 )
     return erreurs
+
+
+#: « Grand texte » au sens WCAG 2.2 (1.4.3) : 24 px, ou 18,66 px en gras —
+#: c'est-à-dire 18 pt. Les deux seuils sont écrits ici, en un seul endroit, pour
+#: que le calcul de la mesure et le contrôle ne puissent pas diverger.
+SEUIL_GRAND_TEXTE_PX = 24.0
+SEUIL_GRAND_TEXTE_GRAS_PX = 18.66
+CONTRASTE_PETIT_TEXTE = 4.5
+CONTRASTE_GRAND_TEXTE = 3.0
+
+
+def seuil_de_contraste(taille: float, gras: bool) -> float:
+    """Le rapport minimal exigé pour un texte, selon sa taille et sa graisse."""
+    if taille >= SEUIL_GRAND_TEXTE_PX:
+        return CONTRASTE_GRAND_TEXTE
+    if gras and taille >= SEUIL_GRAND_TEXTE_GRAS_PX:
+        return CONTRASTE_GRAND_TEXTE
+    return CONTRASTE_PETIT_TEXTE
 
 
 def orphelins(plan: dict, rapport: dict) -> tuple[list[dict], list[str]]:
@@ -248,15 +384,17 @@ def orphelins(plan: dict, rapport: dict) -> tuple[list[dict], list[str]]:
         mesure = index.get(cle)
         if mesure is None:
             continue
-        rangees = mesure.get("rangees") or {}
-        for selecteur, attendu in (combinaison.get("attendu") or {}).items():
-            if selecteur not in rangees:
+        detail_grilles = mesure.get("grilles") or {}
+        for selecteur, capacite in (combinaison.get("attendu") or {}).items():
+            detail = detail_grilles.get(selecteur)
+            if detail is None or not detail.get("instances"):
                 sans_releve.add(selecteur)
                 continue
-            fait = rangees[selecteur]
+            fait = detail["instances"][0]
+            colonnes_max = int(capacite.get("colonnes") or 0) if isinstance(capacite, dict) else 0
             # `manque` est déjà net des gouttières : un vide plus fin qu'un
             # demi-pixel n'est pas un vide, c'est un arrondi de navigateur.
-            if attendu is None or attendu <= 1 or float(fait.get("manque") or 0) <= 0.5:
+            if colonnes_max <= 1 or float(fait.get("manque") or 0) <= 0.5:
                 continue
             entree = trouvees.setdefault(
                 (combinaison["page"], selecteur),
@@ -273,10 +411,33 @@ def orphelins(plan: dict, rapport: dict) -> tuple[list[dict], list[str]]:
                 entree["pire_manque"] = float(fait.get("manque") or 0)
                 entree["exemple"] = (
                     f"{combinaison.get('layout') or 'défaut'} · {combinaison.get('cran')} % · "
-                    f"{combinaison['largeur']} px · {fait.get('cartes_derniere_rangee')} carte(s) "
-                    f"sur {attendu} colonne(s)"
+                    f"{combinaison['largeur']} px · {fait.get('derniere')} carte(s) sur la "
+                    f"dernière rangée, {colonnes_max} colonne(s) au plus"
                 )
     return sorted(trouvees.values(), key=lambda e: (-e["pire_manque"], e["selecteur"])), sorted(sans_releve)
+
+
+def ecartes(rapport: dict) -> dict:
+    """Nomme ce que le contrôle écarte, avec son compte.
+
+    Un contrôle qui exclut sans le dire finit par exclure tout. Deux familles
+    sont écartées du contraste : le texte **décoratif déclaré** (`aria-hidden`,
+    `role="presentation"`) et le texte posé sur un **fond en image**, que la
+    méthode ne sait pas calculer. Ce diagnostic les rend relisibles, sélecteur
+    par sélecteur ; il ne juge rien et ne refuse rien.
+    """
+    decoratifs: dict[str, int] = {}
+    fond_image: dict[str, int] = {}
+    for mesure in rapport.get("mesures") or []:
+        contraste = mesure.get("contraste") or {}
+        for selecteur in contraste.get("decoratifs_selecteurs") or []:
+            decoratifs[selecteur] = decoratifs.get(selecteur, 0) + 1
+        for selecteur in contraste.get("fond_image_selecteurs") or []:
+            fond_image[selecteur] = fond_image.get(selecteur, 0) + 1
+    return {
+        "decoratifs": sorted(decoratifs.items(), key=lambda couple: (-couple[1], couple[0])),
+        "fond_image": sorted(fond_image.items(), key=lambda couple: (-couple[1], couple[0])),
+    }
 
 
 def principal(arguments: list[str] | None = None) -> int:
@@ -287,6 +448,12 @@ def principal(arguments: list[str] | None = None) -> int:
         nargs=2,
         metavar=("PLAN", "RAPPORT"),
         help="confronter un rapport de mesure au plan",
+    )
+    analyseur.add_argument(
+        "--ecartes",
+        nargs=1,
+        metavar="RAPPORT",
+        help="nommer les textes écartés du contraste (décoratifs, fonds en image)",
     )
     analyseur.add_argument(
         "--orphelins",
@@ -316,6 +483,25 @@ def principal(arguments: list[str] | None = None) -> int:
             f"Plan de cadrage écrit : {destination} — {len(plan['combinaisons'])} combinaison(s), "
             f"{attendus} grille(s) à confronter, tolérance {plan['tolerance_px']} px."
         )
+        return 0
+
+    if options.ecartes:
+        try:
+            rapport = json.loads(Path(options.ecartes[0]).read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as erreur:
+            print(f"Lecture impossible ({erreur}) — aucun diagnostic.", file=sys.stderr)
+            return 2
+        bilan = ecartes(rapport)
+        if not bilan["decoratifs"] and not bilan["fond_image"]:
+            print("Écartés du contraste : aucun — tout texte visible a été mesuré.")
+            return 0
+        print("Écartés du contraste, décoratif déclaré (aria-hidden, role=presentation) :")
+        for selecteur, compte in bilan["decoratifs"]:
+            print(f"  - {selecteur} : présent dans {compte} cadrage(s)")
+        print("Écartés du contraste, texte posé sur un fond en image (non calculable) :")
+        for selecteur, compte in bilan["fond_image"]:
+            print(f"  - {selecteur} : présent dans {compte} cadrage(s)")
+        print("Ces textes ne sont ni jugés ni corrigés : ce diagnostic les rend relisibles.")
         return 0
 
     if options.orphelins:
@@ -372,7 +558,7 @@ def principal(arguments: list[str] | None = None) -> int:
         print(
             f"Cadrages : {combinaisons} combinaison(s) mesurée(s) sur {mesures} relevé(s), "
             f"aucun débordement au-delà de {plan.get('tolerance_px')} px, aucun écart de colonnes, "
-            f"aucun mot coupé, aucun chevauchement de cartes "
+            f"aucun mot coupé, aucun chevauchement de cartes, contraste tenu "
             f"— navigateur {rapport.get('navigateur') or 'inconnu'}."
         )
         return 0

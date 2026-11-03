@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 79 |
-| Période couverte | du 2026-10-20 au 2026-11-02 |
-| Contrôles exécutables cités | 87 |
+| Avancées consignées | 80 |
+| Période couverte | du 2026-10-20 au 2026-11-03 |
+| Contrôles exécutables cités | 88 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1866,7 +1866,7 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-
 
 **Constat.** Les cinq grilles à carte orpheline étaient connues par leur nom, pas par leur ampleur. Nul ne savait dans quels cadrages le défaut apparaît, ni combien de place il laisse vide : à 100 % sur un téléphone une rangée incomplète se voit à peine, à 75 % sur 1 440 px elle peut vider un tiers de la page.
 
-**Ce que cela change.** `cadrages.py --orphelins` lit le relevé navigateur et nomme, page par grille, le nombre de cadrages où la dernière rangée laisse plus de 0,5 px libres — le même seuil que le débordement, pour la même raison. Le relevé navigateur compte désormais, par grille, les cartes, les rangées, les cartes de la dernière rangée et la place qui reste, gouttières déduites. **13 couples page/grille** sont concernés : le pire est `apprendre.html · .learning-catalogue-grid` (35 cadrages, **1 176,50 px** libres en « Compacte » à 75 % sur 1 440 px, une carte sur six colonnes), suivi de `ia-societe.html · .ai-fraud-lesson-list` (35 cadrages, 1 048,19 px). Le diagnostic ne refuse rien : il chiffre, et l'étape de CI l'imprime en annotation à chaque passage. Une grille dont la rangée n'a pas été relevée est nommée au lieu d'être passée sous silence.
+**Ce que cela change.** `cadrages.py --orphelins` lit le relevé navigateur et nomme, page par grille, le nombre de cadrages où la dernière rangée laisse plus de 0,5 px libres — le même seuil que le débordement, pour la même raison. Le relevé navigateur compte désormais, par grille, les cartes, les rangées, les cartes de la dernière rangée et la place qui reste, gouttières déduites. **16 couples page/grille** sont concernés : le pire est `apprendre.html · .learning-catalogue-grid` (35 cadrages, **1 176,50 px** libres en « Compacte » à 75 % sur 1 440 px, une carte sur six colonnes), suivi de `ia-societe.html · .ai-fraud-lesson-list` et `liens-utiles.html · .link-grid` (35 cadrages, 1 048,19 px chacun). Le nombre est passé de 13 à 16 le 3 novembre 2026, quand le contrôle a cessé de ne visiter que quatre pages. Le diagnostic ne refuse rien : il chiffre, et l'étape de CI l'imprime en annotation à chaque passage. Une grille dont la rangée n'a pas été relevée est nommée au lieu d'être passée sous silence.
 
 **Preuves dans le dépôt :**
 
@@ -1879,11 +1879,36 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-
 
 **Contrôle qui la maintient :** `python3 outils/cadrages.py --releve-json /tmp/plan.json && node outils/mesurer-cadrages.cjs /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --controler /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --orphelins /tmp/plan.json /tmp/rapport.json && python3 outils/test_cadrages.py`
 
-**Limite — ce que cela ne prouve pas.** Le diagnostic mesure un vide géométrique, pas une gêne : une rangée incomplète peut être le dessin voulu, et une rangée pleine peut rester laide. Il ne voit que les enfants directs d'une grille déclarée, à l'instant du relevé, et seulement dans les quatre pages visitées. La décision de corriger reste humaine et n'est pas prise : aucune règle n'a été changée.
+**Limite — ce que cela ne prouve pas.** Le diagnostic mesure un vide géométrique, pas une gêne : une rangée incomplète peut être le dessin voulu, et une rangée pleine peut rester laide. Il ne voit que les enfants directs d'une grille déclarée, à l'instant du relevé, et sur le **premier exemplaire** d'un sélecteur qui en nomme plusieurs. La décision de corriger reste humaine et n'est pas prise : aucune règle n'a été changée.
 
 **Suite.** Trancher, grille par grille, entre assumer la rangée incomplète et changer le dessin — sans ajouter de palier, et en re-mesurant après chaque décision.
 
 Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`, `poids-et-sobriete-numerique`.
+
+### `contraste-et-pages-oubliees` — Toutes les pages, chaque exemplaire, et ce qu'on peut y lire : contraste mesuré
+
+*Consignée le 2026-11-03.*
+
+**Constat.** Trois angles morts se répondaient. Le contrôle ne visitait que quatre pages : `404`, `anglais-aventure`, `confidentialite`, `documents`, `eva`, `liens-utiles`, `localisation`, `nous-contacter` et `transparence` n'étaient confrontées à aucun cadrage, et le registre l'écrivait noir sur blanc. Il ne mesurait ensuite qu'**un exemplaire** par sélecteur, alors qu'un même sélecteur nomme plusieurs grilles dans une page — `liens-utiles.html` en porte sept, `transparence.html` deux — et que le registre déclarait déjà des listes de tailles possibles (`items = [1, …, 7]`) : la preuve était écrite, le banc ne la lisait pas. Enfin il ne mesurait que la géométrie : une page peut tenir exactement dans la fenêtre et afficher un texte que personne ne lit.
+
+**Ce que cela change.** Les pages sont lues sur le disque (`pages_publiees`) : les **13 pages publiées** entrent dans le plan, les huit qui portent une grille déclarée dans les six présentations, les cinq autres dans la présentation par défaut. **1 060 combinaisons**, et **chaque exemplaire** d'une grille est relevé à part (plafond de 12, nommé quand il est atteint). Le plan annonce une **capacité**, le contrôle applique à chaque exemplaire le nombre de cartes réellement lu — et seulement quand la grille **replie** ses pistes (`auto-fit`) : un `repeat(4, …)` garde quatre colonnes avec une seule carte. Le relevé calcule en plus le **contraste WCAG** de chaque texte sur fond uni ; `cadrages.py` décide seul du seuil (4,5:1, ou 3:1 à partir de 24 px, ou 18,66 px en gras) et refuse en nommant le rapport, le seuil, la taille et l'extrait. Le décoratif déclaré (`aria-hidden`) et le texte posé sur une image sont écartés **et nommés** par `--ecartes`. Résultat : **1 060 cadrages mesurés, 0 débordement, 0 mot coupé, 0 chevauchement, 0 écart de colonnes, 0 refus de contraste** sur **375 520 textes** posés sur un fond uni ; 27 700 textes sur fond d'image et 3 460 textes décoratifs sont hors de portée et comptés. Cinq fautes de la sonde ont été trouvées et corrigées avant de conclure : `font-size: 0` jugé illisible, `script`/`style` jugés comme du texte, décor confondu avec le contenu, texte réservé aux lecteurs d'écran compté comme coupé (**160** faux refus à 1 px près), et exemplaire unique supposé (**44** faux écarts au total, 14 puis 30).
+
+**Preuves dans le dépôt :**
+
+- `outils/mesurer-cadrages.cjs`
+- `outils/cadrages.py`
+- `outils/test_cadrages.py`
+- `docs/rd/cadrages.toml`
+- `.github/workflows/verification.yml`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/cadrages.py --releve-json /tmp/plan.json && node outils/mesurer-cadrages.cjs /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --controler /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --ecartes /tmp/rapport.json && python3 outils/test_cadrages.py`
+
+**Limite — ce que cela ne prouve pas.** Le contraste n'est mesuré que sur un fond de couleur unie : 27 700 textes posés sur une image sont comptés, pas mesurés, et les états de survol, de focus ou révélés par script ne le sont pas non plus. Le seuil de 3:1 pour un grand texte est celui de WCAG 2.2 AA ; le RGAA 5, aligné dessus, n'est pas encore publié. Douze exemplaires au plus par sélecteur sont inspectés. La matrice statique (`modele-grilles.py --presentations`) borne, elle, son calcul par le plus grand nombre de cartes déclaré : c'est un outil de conception, pas le contrôle, et les deux nombres peuvent différer sans que l'un mente. Rien de tout cela ne remplace une relecture humaine.
+
+**Suite.** Étendre la mesure aux états interactifs et aux fonds en image, en disant ce que la méthode coûte — la capture d'écran a été chiffrée à 690 ms par élément et n'a pas été retenue.
+
+Initiatives liées : `optimisation-du-site`, `ecouter-la-page`, `coherence-textes-publics`.
 
 ## 3. Ce que ce registre ne dit pas
 

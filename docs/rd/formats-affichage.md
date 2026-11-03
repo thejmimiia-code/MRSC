@@ -2292,22 +2292,90 @@ elle peut vider un tiers de la page à 75 % sur 1 440 px.
 
 `cadrages.py --orphelins` lit le relevé et nomme, page par grille, le nombre de
 cadrages où la dernière rangée laisse plus de 0,5 px libres, gouttières déduites.
-**13 couples page/grille** sont concernés. Le pire :
+**16 couples page/grille** sont concernés — 13 avant que le contrôle cesse de ne
+visiter que quatre pages. Le pire :
 
 | Page · grille | Cadrages | Vide maximal | Cadrage |
 | --- | --- | --- | --- |
 | `apprendre.html · .learning-catalogue-grid` | 35 | 1 176,50 px | Compacte · 75 % · 1 440 px · 1 carte sur 6 colonnes |
 | `ia-societe.html · .ai-fraud-lesson-list` | 35 | 1 048,19 px | Panorama · 130 % · 1 440 px · 1 carte sur 4 colonnes |
+| `liens-utiles.html · .link-grid` | 35 | 1 048,19 px | Panorama · 130 % · 1 440 px · 1 carte sur 4 colonnes |
 | `apprendre.html · .knowledge-compass` | 25 | 1 046,86 px | Mosaïque · 130 % · 1 440 px · 1 carte sur 4 colonnes |
 
-Six grilles de la page IA et de l'apprentissage partagent le cas le plus fréquent,
-à trois colonnes : 15 cadrages, 850,67 px libres.
+Huit grilles partagent le cas le plus fréquent, à trois colonnes en « Vitrine » à
+115 % : 15 cadrages, 850,67 px libres.
 
 Ce diagnostic **ne refuse rien** et n'a corrigé aucune règle : une rangée
 incomplète est parfois le dessin voulu, et le modèle mesure et nomme, il ne
 tranche pas. L'étape de CI l'imprime en annotation à chaque passage, pour que la
 décision se prenne sur des nombres. Une grille dont la rangée n'a pas pu être
 relevée est nommée : un diagnostic qui ne peut pas lire sa source le dit.
+
+### Toutes les pages, et le contraste
+
+Le plan ne visitait que quatre pages, une par famille de dessin. Neuf autres —
+`404`, `anglais-aventure`, `confidentialite`, `documents`, `eva`, `liens-utiles`,
+`localisation`, `nous-contacter`, `transparence` — n'étaient confrontées à aucun
+cadrage, et le registre l'écrivait. La liste est désormais **lue sur le disque** :
+**13 pages**, **1 060 combinaisons**, six présentations partout où une grille est
+déclarée (huit pages), présentation par défaut ailleurs (cinq pages).
+
+Et la géométrie ne dit pas tout : une page peut tenir exactement dans la fenêtre
+en affichant un texte que personne ne lit. Le relevé calcule donc le **rapport de
+contraste WCAG** de chaque texte dont le fond est une couleur unie, et
+`cadrages.py` seul décide du seuil :
+
+| Texte | Seuil |
+| --- | --- |
+| petit texte | **4,5:1** |
+| ≥ 24 px, ou ≥ 18,66 px en gras | **3:1** |
+
+Un rapport sous le seuil est refusé avec l'élément, le rapport obtenu, le seuil
+attendu, la taille et l'extrait. Le texte **décoratif déclaré** (`aria-hidden`,
+`role="presentation"`) est compté à part, jamais jugé : un glyphe ornemental n'a
+pas à tenir un rapport de lecture, et l'écarter est un choix écrit plutôt qu'un
+angle mort.
+
+Quatre fautes de la première sonde ont été corrigées avant de conclure quoi que
+ce soit : un `font-size: 0` compté comme un texte illisible (douze refus faux, tous
+sur le même chevron de panneau), les éléments `script`/`style` dont le contenu
+était jugé comme du texte affiché, le décor confondu avec le contenu, et le
+**texte réservé aux lecteurs d'écran**. Ce dernier est le plus instructif : la
+technique classique — une boîte de 1 × 1 px, `clip: rect(0, 0, 0, 0)` — produisait
+**160 « mots coupés »** sur `anglais-aventure.html`, tous à 1 px près. Un détecteur
+qui ignore comment une page cache volontairement du texte accuse le dessin d'un
+défaut qui n'existe pas. Le masquage est reconnu par sa **technique**, jamais par
+un nom de classe : une carte mal dessinée qui porterait la même classe resterait
+accusée.
+
+Une piste a été **écartée avec son chiffre** : mesurer le contraste sur les fonds
+en image par capture d'écran coûte 690 ms par élément, soit 4,5 minutes pour six
+cadrages — et demanderait un seuil de « pire pixel » qu'aucune norme ne définit.
+La méthode est donc bornée aux fonds unis, et les 3 740 textes posés sur une
+image sont **comptés**, jamais supposés bons.
+
+### Un sélecteur, plusieurs grilles
+
+Un sélecteur peut nommer **plusieurs** grilles dans une même page :
+`liens-utiles.html` porte sept `.link-grid`, `transparence.html` deux
+`.principle-grid`. Le relevé n'en mesurait que la première — d'où **quatorze
+écarts faux** le 3 novembre 2026, sur des grilles qui allaient très bien. Le
+registre déclarait pourtant des listes de tailles possibles (`items = [1, …, 7]`) :
+la preuve que les exemplaires diffèrent était écrite noir sur blanc, et le banc
+ne la lisait pas.
+
+Le contrat est donc explicite :
+
+- le plan annonce une **capacité** — combien de colonnes la place permet ;
+- le contrôle applique à **chaque exemplaire** le nombre de cartes réellement lu :
+  cinq cartes dans une grille qui permet six colonnes en occupent cinq, et c'est
+  conforme ;
+- quand les deux nombres diffèrent, le message les donne tous les deux — « 6
+  piste(s) déclarée(s), 1 repliée(s) » — parce qu'une piste repliée par
+  `auto-fit` est un fait, pas un défaut ;
+- au-delà de **douze exemplaires**, le relevé s'arrête et le contrôle le dit :
+  « compte 14 exemplaire(s), 12 seul(s) inspecté(s) ». Un plafond tu serait un
+  accord de complaisance.
 
 ### Limites
 

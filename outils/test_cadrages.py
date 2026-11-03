@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Éprouve le contrôle des cadrages : dix-huit cas, sans navigateur.
+"""Éprouve le contrôle des cadrages : trente et un cas, sans navigateur.
 
 `outils/cadrages.py --controler` ne vaut que s'il refuse. Ce banc lui donne des
 plans et des rapports fabriqués — jamais le vrai dépôt, jamais un navigateur — et
@@ -51,7 +51,7 @@ class TestCadrages(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.cadrages = charger_module()
 
-    def plan(self, attendu: dict[str, int], combinaisons: int = 1) -> dict:
+    def plan(self, attendu: dict[str, int], combinaisons: int = 1, repliable: bool = True) -> dict:
         liste = []
         for index in range(combinaisons):
             liste.append(
@@ -61,7 +61,10 @@ class TestCadrages(unittest.TestCase):
                     "cran": 100 if index == 0 else 130,
                     "echelle": 1.0 if index == 0 else 1.3,
                     "largeur": 1440,
-                    "attendu": attendu,
+                    "attendu": {
+                        selecteur: {"colonnes": colonnes, "repliable": repliable}
+                        for selecteur, colonnes in attendu.items()
+                    },
                 }
             )
         return {"tolerance_px": 0.5, "combinaisons": liste}
@@ -76,12 +79,30 @@ class TestCadrages(unittest.TestCase):
                     "cran": 100 if index == 0 else 130,
                     "largeur": 1440,
                     "debordement": debordement,
-                    "colonnes": colonnes,
-                    "coupes": [],
-                    "chevauchements": [],
-                    "rangees": {
-                        selecteur: {"cartes": 3, "rangees": 1, "cartes_derniere_rangee": 3, "manque": 0.0}
+                    "grilles": {
+                        selecteur: {
+                            "total": 1,
+                            "instances": [
+                                {
+                                    "cartes": 3,
+                                    "colonnes": colonnes[selecteur],
+                                    "pistes": colonnes[selecteur],
+                                    "rangees": 1,
+                                    "manque": 0.0,
+                                }
+                            ],
+                        }
                         for selecteur in colonnes
+                    },
+                    "coupes": [],
+                    "masques": 0,
+                    "chevauchements": [],
+                    "contraste": {
+                        "mesures": 12,
+                        "decoratifs": 1,
+                        "fond_image": 0,
+                        "sans_texte": 0,
+                        "candidats": [],
                     },
                 }
             )
@@ -114,7 +135,7 @@ class TestCadrages(unittest.TestCase):
             self.plan({".document-grid": 3}), self.rapport({".document-grid": 2})
         )
         self.assertEqual(len(erreurs), 1, erreurs)
-        self.assertIn("annonce 3 colonne(s), le navigateur en compte 2", erreurs[0])
+        self.assertIn("annonce 3 colonne(s) occupée(s) pour 3 carte(s), le navigateur en compte 2", erreurs[0])
 
     def test_une_grille_non_mesuree_est_une_erreur(self) -> None:
         erreurs = self.cadrages.controler(self.plan({".document-grid": 3}), self.rapport({}))
@@ -159,9 +180,19 @@ class TestCadrages(unittest.TestCase):
         self.assertEqual(crans, set(self.cadrages.ECHELLES))
         self.assertEqual(largeurs, set(self.cadrages.LARGEURS))
         self.assertEqual(plan["tolerance_px"], 0.5)
-        # Chaque combinaison doit annoncer au moins une grille : un plan qui ne
-        # confronte rien serait vert sans rien prouver.
-        self.assertTrue(all(c["attendu"] for c in plan["combinaisons"]))
+        # Une page qui porte une grille déclarée doit en annoncer au moins une :
+        # un plan qui ne confronte rien serait vert sans rien prouver.
+        avec_grilles = {c["page"] for c in plan["combinaisons"] if c["attendu"]}
+        self.assertEqual(avec_grilles, set(plan["grilles"]))
+        # Une page sans grille déclarée n'a aucune cible nommée : elle est
+        # visitée dans la présentation par défaut seulement, et le plan le dit
+        # en n'annonçant rien — jamais en se taisant sur une page absente.
+        sans_grille = set(self.cadrages.PAGES) - avec_grilles
+        self.assertEqual(sans_grille, {"404.html", "anglais-aventure.html", "confidentialite.html", "localisation.html", "nous-contacter.html"})
+        for page in sans_grille:
+            combinaisons = [c for c in plan["combinaisons"] if c["page"] == page]
+            self.assertTrue(combinaisons, f"{page} n'est visitée dans aucun cadrage")
+            self.assertEqual({c["layout"] for c in combinaisons}, {None})
 
     def test_la_cascade_des_presentations_retient_la_derniere_regle(self) -> None:
         """« Mosaïque » écrit deux colonnes dès 601 px, puis quatre dès 981.
@@ -224,11 +255,11 @@ class TestCadrages(unittest.TestCase):
         """Cinq cartes en deux colonnes : le fait est chiffré, il n'est pas refusé."""
         plan = self.plan({".document-grid": 2})
         rapport = self.rapport({".document-grid": 2})
-        rapport["mesures"][0]["rangees"][".document-grid"] = {
-            "cartes": 5,
-            "rangees": 3,
-            "cartes_derniere_rangee": 1,
-            "manque": 412.5,
+        rapport["mesures"][0]["grilles"][".document-grid"] = {
+            "total": 1,
+            "instances": [
+                {"cartes": 5, "colonnes": 2, "pistes": 2, "rangees": 3, "derniere": 1, "manque": 412.5}
+            ],
         }
         trouves, sans_releve = self.cadrages.orphelins(plan, rapport)
         self.assertEqual(sans_releve, [])
@@ -236,7 +267,7 @@ class TestCadrages(unittest.TestCase):
         self.assertEqual(trouves[0]["selecteur"], ".document-grid")
         self.assertEqual(trouves[0]["cadrages"], 1)
         self.assertAlmostEqual(trouves[0]["pire_manque"], 412.5)
-        self.assertIn("1 carte(s) sur 2 colonne(s)", trouves[0]["exemple"])
+        self.assertIn("1 carte(s) sur la dernière rangée, 2 colonne(s) au plus", trouves[0]["exemple"])
         # Le diagnostic ne refuse rien : c'est une mesure, pas un verdict.
         self.assertEqual(self.cadrages.controler(plan, rapport), [])
 
@@ -250,9 +281,152 @@ class TestCadrages(unittest.TestCase):
         """Un diagnostic qui ne peut pas lire sa source le dit, il n'imprime pas moins."""
         plan = self.plan({".document-grid": 3})
         rapport = self.rapport({".document-grid": 3})
-        del rapport["mesures"][0]["rangees"]
+        del rapport["mesures"][0]["grilles"]
         _trouves, sans_releve = self.cadrages.orphelins(plan, rapport)
         self.assertEqual(sans_releve, [".document-grid"])
+
+    def test_le_seuil_de_contraste_suit_la_taille_et_la_graisse(self) -> None:
+        """4,5:1 pour un petit texte, 3:1 pour un grand, 3:1 pour un gras de 18,66 px."""
+        seuil = self.cadrages.seuil_de_contraste
+        self.assertEqual(seuil(16, False), 4.5)
+        self.assertEqual(seuil(16, True), 4.5)     # gras, mais loin de 18,66 px
+        self.assertEqual(seuil(23.9, True), 3.0)   # gras et au-dessus de 18,66 px
+        self.assertEqual(seuil(18.66, True), 3.0)  # la borne exacte compte
+        self.assertEqual(seuil(18.66, False), 4.5)
+        self.assertEqual(seuil(24, False), 3.0)
+        self.assertEqual(seuil(43.2, True), 3.0)
+
+    def test_un_contraste_insuffisant_est_refuse_et_nomme(self) -> None:
+        plan = self.plan({".document-grid": 3})
+        rapport = self.rapport({".document-grid": 3})
+        rapport["mesures"][0]["contraste"]["candidats"] = [
+            {"tag": "p", "classe": "hero-lede", "ratio": 2.9, "taille": 16, "gras": False, "texte": "Lire la suite"}
+        ]
+        erreurs = self.cadrages.controler(plan, rapport)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("p.hero-lede contraste 2.9:1, seuil 4.5:1 pour 16 px", erreurs[0])
+        self.assertIn("Lire la suite", erreurs[0])
+
+    def test_un_grand_texte_a_3_2_passe_et_un_petit_a_3_2_echoue(self) -> None:
+        """Le même rapport ne veut pas dire la même chose selon la taille."""
+        candidat = {"tag": "h2", "classe": "titre", "ratio": 3.2, "gras": False, "texte": "Un titre"}
+        plan = self.plan({".document-grid": 3})
+
+        grand = self.rapport({".document-grid": 3})
+        grand["mesures"][0]["contraste"]["candidats"] = [{**candidat, "taille": 32}]
+        self.assertEqual(self.cadrages.controler(plan, grand), [])
+
+        petit = self.rapport({".document-grid": 3})
+        petit["mesures"][0]["contraste"]["candidats"] = [{**candidat, "taille": 16}]
+        erreurs = self.cadrages.controler(plan, petit)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("seuil 4.5:1", erreurs[0])
+
+    def test_un_contraste_absent_ou_vide_ne_passe_pas_pour_un_accord(self) -> None:
+        """Un rapport d'avant ce contrôle, ou un état où rien n'a pu être mesuré."""
+        plan = self.plan({".document-grid": 3})
+        absent = self.rapport({".document-grid": 3})
+        del absent["mesures"][0]["contraste"]
+        erreurs = self.cadrages.controler(plan, absent)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("contraste non mesuré", erreurs[0])
+
+        vide = self.rapport({".document-grid": 3})
+        vide["mesures"][0]["contraste"]["mesures"] = 0
+        erreurs = self.cadrages.controler(plan, vide)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("aucun texte mesuré pour le contraste", erreurs[0])
+
+    def test_toutes_les_pages_publiees_sont_visitees(self) -> None:
+        """La liste des pages est lue sur le disque : neuf pages échappaient au contrôle."""
+        pages = self.cadrages.pages_publiees()
+        self.assertIn("documents.html", pages)
+        self.assertIn("transparence.html", pages)
+        self.assertEqual(sorted(pages), sorted(self.cadrages.PAGES))
+        self.assertGreaterEqual(len(pages), 13)
+
+    def test_cinq_cartes_dans_six_colonnes_ne_sont_pas_un_ecart(self) -> None:
+        """Le 3 novembre 2026 : 14 écarts faux, tous dus au nombre de cartes.
+
+        `.link-grid` permet six colonnes à 1 440 px et n'a que cinq liens :
+        `auto-fit` replie la sixième piste. La capacité est six, l'occupation est
+        cinq, et le dessin est conforme.
+        """
+        rapport = self.rapport({".document-grid": 6})
+        rapport["mesures"][0]["grilles"][".document-grid"]["instances"][0].update(
+            {"cartes": 5, "colonnes": 5, "pistes": 6}
+        )
+        self.assertEqual(self.cadrages.controler(self.plan({".document-grid": 6}), rapport), [])
+
+    def test_une_grille_fixe_garde_ses_colonnes_meme_avec_une_carte(self) -> None:
+        """`repeat(4, …)` ne replie rien : une carte occupe la première de quatre.
+
+        Le 3 novembre 2026, la borne des cartes appliquée à un dessin fixe a
+        produit 30 écarts faux en « Mosaïque », où la feuille écrit `repeat(4)`.
+        """
+        rapport = self.rapport({".document-grid": 4})
+        rapport["mesures"][0]["grilles"][".document-grid"]["instances"][0].update(
+            {"cartes": 1, "colonnes": 4, "pistes": 4}
+        )
+        plan = self.plan({".document-grid": 4}, repliable=False)
+        self.assertEqual(self.cadrages.controler(plan, rapport), [])
+
+    def test_une_occupation_differente_est_refusee_avec_les_deux_nombres(self) -> None:
+        rapport = self.rapport({".document-grid": 6})
+        rapport["mesures"][0]["grilles"][".document-grid"]["instances"][0].update(
+            {"cartes": 6, "colonnes": 4, "pistes": 6}
+        )
+        erreurs = self.cadrages.controler(self.plan({".document-grid": 6}), rapport)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("annonce 6 colonne(s) occupée(s) pour 6 carte(s), le navigateur en compte 4", erreurs[0])
+        self.assertIn("6 piste(s) déclarée(s), 2 repliée(s)", erreurs[0])
+
+    def test_chaque_exemplaire_est_confronte_et_nomme(self) -> None:
+        """Un sélecteur peut nommer plusieurs grilles : aucune ne passe par omission."""
+        rapport = self.rapport({".document-grid": 2})
+        rapport["mesures"][0]["grilles"][".document-grid"] = {
+            "total": 2,
+            "instances": [
+                {"cartes": 2, "colonnes": 2, "pistes": 2, "rangees": 1, "manque": 0.0},
+                {"cartes": 2, "colonnes": 1, "pistes": 2, "rangees": 2, "manque": 0.0},
+            ],
+        }
+        erreurs = self.cadrages.controler(self.plan({".document-grid": 2}), rapport)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("exemplaire 2/2", erreurs[0])
+
+    def test_un_exemplaire_non_inspecte_est_signale(self) -> None:
+        """Le relevé plafonne à douze exemplaires : le taire ferait croire à un accord."""
+        rapport = self.rapport({".document-grid": 2})
+        rapport["mesures"][0]["grilles"][".document-grid"]["total"] = 14
+        erreurs = self.cadrages.controler(self.plan({".document-grid": 2}), rapport)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("compte 14 exemplaire(s), 1 seul(s) inspecté(s)", erreurs[0])
+
+    def test_un_rapport_sans_grilles_est_refuse(self) -> None:
+        """Le nombre de colonnes d'un relevé ancien ne prouve rien de la capacité."""
+        rapport = self.rapport({".document-grid": 3})
+        del rapport["mesures"][0]["grilles"]
+        erreurs = self.cadrages.controler(self.plan({".document-grid": 3}), rapport)
+        self.assertEqual(len(erreurs), 1, erreurs)
+        self.assertIn("grilles non mesurées", erreurs[0])
+
+    def test_un_texte_masque_volontairement_n_est_pas_coupe(self) -> None:
+        """Le 3 novembre 2026, 160 « mots coupés » étaient un utilitaire visuel masqué."""
+        plan = self.plan({".document-grid": 3})
+        rapport = self.rapport({".document-grid": 3})
+        rapport["mesures"][0]["masques"] = 7
+        rapport["mesures"][0]["coupes"] = []
+        self.assertEqual(self.cadrages.controler(plan, rapport), [])
+
+    def test_les_ecartes_du_contraste_sont_nommes(self) -> None:
+        """Une exemption qui ne se nomme pas devient un angle mort."""
+        rapport = self.rapport({".document-grid": 3})
+        rapport["mesures"][0]["contraste"]["decoratifs_selecteurs"] = ["span.adventure-map-mark"]
+        rapport["mesures"][0]["contraste"]["fond_image_selecteurs"] = ["section.home-hero"]
+        bilan = self.cadrages.ecartes(rapport)
+        self.assertEqual(bilan["decoratifs"], [("span.adventure-map-mark", 1)])
+        self.assertEqual(bilan["fond_image"], [("section.home-hero", 1)])
 
     def test_le_cout_declare_est_celui_du_plan(self) -> None:
         """Un registre qui annonce le coût du lot précédent se trompe de moitié.
