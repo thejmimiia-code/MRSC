@@ -8,20 +8,24 @@ dégradé clair→sombre devenait donc deux calques unis — et le pire contrast
 d'une plage était calculé sur des aplats qui n'existent nulle part. Les chiffres
 du lot étaient justes dans leur forme et faux dans leur objet.
 
-Ce banc rejoue deux choses, sur une page de banc écrite pour lui, dans une copie
-jetable du dépôt :
+Ce banc rejoue trois choses, sur une page de banc écrite pour lui, dans une
+copie jetable du dépôt :
 
 1. **la découpe** : un dégradé à deux arrêts doit ressortir comme **une** couche
    à deux arrêts, jamais comme deux couches à un arrêt ;
-2. **la zone** : un texte étroit posé à gauche d'un dégradé horizontal doit
-   garder une portion de plage proche de 0, celui posé à droite une portion
-   proche de 1 — et les deux rapports doivent en découler. Sans cela, le relevé
-   juge un texte contre une couleur qui n'est pas sous lui.
+2. **la zone linéaire** : un texte étroit posé à gauche d'un dégradé
+   horizontal doit garder une portion de plage proche de 0, celui posé à droite
+   une portion proche de 1 — et les deux rapports doivent en découler. Sans
+   cela, le relevé juge un texte contre une couleur qui n'est pas sous lui ;
+3. **la zone radiale** : un halo de 100 px de rayon ne colore que son disque. Un
+   texte dans le rayon voit le début de l'interpolation, un texte au-delà ne voit
+   que le dernier arrêt — et la zone doit le dire (`[1, 1]`).
 
-Ce que ce banc ne dit pas : il éprouve des dégradés `linear-gradient` à arrêts
-en pourcentage, sur une page de banc. Il ne prouve rien des dégradés radiaux du
-site (la zone radiale y est calculée, mais aucun cas ne la vérifie ici) ni des
-arrêts en pixels. Il ne tourne pas sans navigateur — il sort alors en **code 2**
+Ce que ce banc ne dit pas : il éprouve un `linear-gradient` à arrêts en
+pourcentage et un `radial-gradient` **circulaire** à arrêt en pixels, sur une
+page de banc. Il ne dit rien des formes `ellipse`, des tailles en mots-clés, des
+arrêts radiaux en pourcentage ni des dégradés répétés : ces cas-là retombent sur
+la plage entière, et aucun cas ne chiffre ici ce que ce majorant coûte. Il ne tourne pas sans navigateur — il sort alors en **code 2**
 et le dit, parce qu'un banc navigateur muet passerait pour vert.
 
 Usage :
@@ -65,11 +69,18 @@ PAGE_DE_BANC = """<!doctype html>
   .banc-bande p { margin: 0; width: 100px; color: rgb(17, 17, 17); font-size: 16px; }
   /* Spécificité supérieure à `.banc-bande p`, qui remet les marges à zéro. */
   div.banc-bande p.banc-a-droite { margin-left: 900px; }
+  /* Halo de 100 px de rayon, centré à gauche : le second texte est loin du
+     rayon, donc sur le dernier arrêt — noir — et non sur l'interpolation. */
+  .banc-halo { width: 1000px; height: 200px; margin: 0; display: flex; align-items: center;
+    background-image: radial-gradient(circle at 0% 50%, rgb(255, 255, 255), rgb(0, 0, 0) 100px); }
+  .banc-halo p { margin: 0; width: 40px; color: rgb(17, 17, 17); font-size: 16px; }
+  div.banc-halo p.banc-loin { margin-left: 800px; }
 </style>
 </head>
 <body>
   <div class="banc-bande"><p id="gauche">Texte à gauche</p></div>
   <div class="banc-bande"><p id="droite" class="banc-a-droite">Texte à droite</p></div>
+  <div class="banc-halo"><p id="pres">Près</p><p id="loin" class="banc-loin">Loin</p></div>
 </body>
 </html>
 """
@@ -147,10 +158,10 @@ class TestContrasteDegrade(unittest.TestCase):
         """À gauche le texte est sur le blanc, à droite sur le noir : la mesure le dit."""
         par_classe = {}
         for candidat in self.candidats():
-            classes = str(candidat.get("classe") or "").split()
-            cle = "droite" if "banc-a-droite" in classes else "gauche"
-            par_classe[cle] = candidat
-        self.assertEqual(set(par_classe), {"gauche", "droite"}, "les deux textes de banc doivent être relevés")
+            identifiant = str(candidat.get("id") or "")
+            if identifiant in {"gauche", "droite"}:
+                par_classe[identifiant] = candidat
+        self.assertEqual(set(par_classe), {"gauche", "droite"}, "les deux textes de banc doivent être relevés par leur identifiant")
         gauche = par_classe["gauche"]["couches"][0]["zone"]
         droite = par_classe["droite"]["couches"][0]["zone"]
         self.assertLess(gauche[1], 0.2, f"le texte de gauche occupe le début du dégradé, zone relevée {gauche}")
@@ -162,6 +173,42 @@ class TestContrasteDegrade(unittest.TestCase):
         self.assertLess(pire_droite, 1.5, "sur le noir, le même texte n'a presque plus de contraste")
         self.assertLess(pire_droite, self.cadrages.seuil_de_contraste(16, False))
 
+
+    def test_la_zone_radiale_sort_du_rayon(self) -> None:
+        """Un halo de 100 px : près du centre il compte, au-delà il n'existe plus.
+
+        Sans cette vérification, la zone radiale pourrait valoir la plage
+        entière sans que rien ne le dise — et le héros du site, qui pose quatre
+        halos, serait jugé contre des couleurs qu'il ne montre pas sous son
+        texte.
+        """
+        par_identifiant = {}
+        for candidat in self.candidats():
+            identifiant = str(candidat.get("id") or "")
+            if identifiant in {"pres", "loin"}:
+                par_identifiant[identifiant] = candidat
+        if set(par_identifiant) != {"pres", "loin"}:
+            self.fail(
+                "le relevé ne nomme pas les deux textes du halo : "
+                f"{sorted(par_identifiant)} — le banc ne peut pas conclure"
+            )
+        pres = par_identifiant["pres"]["couches"][0]
+        loin = par_identifiant["loin"]["couches"][0]
+        self.assertEqual(pres["type"], "radial", "la couche doit être lue comme radiale")
+        self.assertLess(
+            pres["zone"][1],
+            0.5,
+            f"le texte près du centre reste dans la moitié intérieure du halo, zone {pres['zone']}",
+        )
+        self.assertEqual(loin["zone"], [1, 1], f"au-delà du rayon, le texte ne voit que le dernier arrêt, zone {loin['zone']}")
+        pire_pres, _ = self.cadrages.pire_contraste_degrade(par_identifiant["pres"])
+        pire_loin, _ = self.cadrages.pire_contraste_degrade(par_identifiant["loin"])
+        self.assertGreaterEqual(
+            pire_pres,
+            self.cadrages.seuil_de_contraste(16, False),
+            "dans la moitié intérieure du halo, le texte presque noir garde son contraste",
+        )
+        self.assertLess(pire_loin, 1.5, "au-delà du rayon, le même texte est sur du noir")
 
 def raison_d_un_banc_muet() -> int:
     """Sans navigateur, ce banc sort en code 2 et le dit — jamais en vert."""

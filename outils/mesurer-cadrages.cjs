@@ -524,6 +524,7 @@ function mesurer(selecteurs) {
       if (contraste.candidats_degrade.length < 200) {
         contraste.candidats_degrade.push({
           tag: element.tagName.toLowerCase(),
+          id: element.id || null,
           classe: String(element.className || '').slice(0, 60),
           couleur: avant,
           base,

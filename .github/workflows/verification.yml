@@ -771,7 +771,9 @@ jobs:
       # deux calques, et publiait des rapports calculés sur des aplats qui
       # n'existent nulle part), et un texte posé à droite d'un dégradé horizontal
       # doit être jugé contre la fin de la plage, pas contre son début.
-      # Deux cas, deux secondes. Sans navigateur : code 2.
+      # Trois cas, deux secondes — dont la zone radiale, sans laquelle un halo
+      # de 100 px serait jugé comme s'il colorait toute la page. Sans
+      # navigateur : code 2.
       - name: Éprouver que la lecture d'un dégradé garde ses arrêts et la zone du texte
         env:
           MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
