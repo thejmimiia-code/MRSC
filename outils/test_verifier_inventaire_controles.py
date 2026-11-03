@@ -16,6 +16,7 @@ Usage :
 
 from __future__ import annotations
 
+import re
 import sys
 import tempfile
 import unittest
@@ -95,33 +96,37 @@ class TestInventaireControles(unittest.TestCase):
 
         Le total était recopié à la main, personne ne le relisait, et il avait
         pris six unités de retard. Le tableau « Combien » est désormais confronté
-        aux lignes réelles : ce cas casse un seul chiffre.
+        aux lignes réelles : ce cas casse un seul chiffre — celui du banc, lu dans
+        le document et non recopié ici, pour que le banc ne meure pas au prochain
+        ajout d'outil (ce qui est arrivé le jour même).
         """
         with tempfile.TemporaryDirectory() as dossier:
             copie = Path(dossier) / "copie"
             banc_mutations.copie_complete(copie)
-            texte = (copie / DOC).read_text(encoding="utf-8")
-            banc_mutations.muter(copie, DOC, "| `banc` | 30 |", "| `banc` | 31 |")
+            nombre = self.nombre_du_banc(copie)
+            banc_mutations.muter(copie, DOC, f"| `banc` | {nombre} |", f"| `banc` | {nombre + 1} |")
             resultat = banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
-        self.assertIn("annonce 31", resultat.stderr)
-        self.assertGreater(texte.count("| `banc` | 30 |"), 0)
+        self.assertIn(f"annonce {nombre + 1}", resultat.stderr)
 
     def test_phrase_de_synthese_fausse_refusee(self) -> None:
         with tempfile.TemporaryDirectory() as dossier:
             copie = Path(dossier) / "copie"
             banc_mutations.copie_complete(copie)
-            banc_mutations.muter(copie, DOC, "**48 contrôles sur 48**", "**47 contrôles sur 48**")
+            phrase = self.phrase_de_synthese(copie)
+            avec, total = phrase.groups()
+            banc_mutations.muter(copie, DOC, phrase.group(0), f"**{int(avec) - 1} contrôles sur {total}**")
             resultat = banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
-        self.assertIn("47 contrôles éprouvés", resultat.stderr)
+        self.assertIn(f"{int(avec) - 1} contrôles éprouvés", resultat.stderr)
 
     def test_phrase_de_synthese_effacee_refusee(self) -> None:
         """Effacer la phrase ne doit pas valoir zéro erreur : elle porte les totaux."""
         with tempfile.TemporaryDirectory() as dossier:
             copie = Path(dossier) / "copie"
             banc_mutations.copie_complete(copie)
-            banc_mutations.muter(copie, DOC, "**48 contrôles sur 48**", "quarante-huit contrôles")
+            phrase = self.phrase_de_synthese(copie)
+            banc_mutations.muter(copie, DOC, phrase.group(0), "les contrôles éprouvés, en prose")
             resultat = banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(resultat.returncode, 1, resultat.stdout)
         self.assertIn("a disparu", resultat.stderr)
@@ -130,10 +135,33 @@ class TestInventaireControles(unittest.TestCase):
         with tempfile.TemporaryDirectory() as dossier:
             copie = Path(dossier) / "copie"
             banc_mutations.copie_complete(copie)
-            banc_mutations.muter(copie, DOC, "| `test-en-soi` | 0 |", "| `test_en_soi` | 0 |")
+            ligne = self.ligne_de_combien(copie, "test-en-soi")
+            trouve = re.match(r"\|\s*`(?P<statut>[a-z-]+)`", ligne)
+            self.assertIsNotNone(trouve)
+            banc_mutations.muter(copie, DOC, ligne, ligne.replace("`test-en-soi`", "`test_en_soi`"))
             resultat = banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(resultat.returncode, 1, resultat.stdout + resultat.stderr)
         self.assertIn("omet", resultat.stderr)
+
+    @staticmethod
+    def ligne_de_combien(copie: Path, statut: str) -> str:
+        """Ligne du tableau « Combien » pour un statut, lue dans le document."""
+        for ligne in (copie / DOC).read_text(encoding="utf-8").splitlines():
+            if re.match(rf"\|\s*`{re.escape(statut)}`\s*\|\s*\d+\s*\|", ligne):
+                return ligne
+        raise AssertionError(f"aucune ligne « {statut} » dans le tableau : le banc ne peut pas muter")
+
+    def nombre_du_banc(self, copie: Path) -> int:
+        """Nombre annoncé pour les bancs, lu dans le document — jamais recopié."""
+        ligne = self.ligne_de_combien(copie, "banc")
+        return int(re.search(r"\|\s*(\d+)\s*\|", ligne.split("`banc`", 1)[1]).group(1))
+
+    @staticmethod
+    def phrase_de_synthese(copie: Path) -> re.Match[str]:
+        trouve = re.search(r"\*\*(\d+) contrôles sur (\d+)\*\*", (copie / DOC).read_text(encoding="utf-8"))
+        if not trouve:
+            raise AssertionError("la phrase « N contrôles sur N » a disparu du document")
+        return trouve
 
     def test_statut_inconnu_refuse(self) -> None:
         with tempfile.TemporaryDirectory() as dossier:

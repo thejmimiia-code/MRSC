@@ -107,6 +107,25 @@ Les états de survol, de focus et les éléments révélés par script ne sont p
 mesurés non plus : le relevé voit l'état affiché, pas tous les états.
 """
 
+[focus]
+# Le focus au clavier se mesure comme le texte : même navigateur, même méthode,
+# seuil différent. Ce n'est pas un cadrage — la largeur ne change pas l'anneau —
+# mais deux largeurs sont visitées pour ne pas le supposer.
+outil = "python3 outils/focus.py --plan PLAN puis node outils/mesurer-focus.cjs PLAN RAPPORT puis python3 outils/focus.py --controler PLAN RAPPORT"
+seuil = 3.0
+critere = "WCAG 2.2 AA, 1.4.11 — contraste des éléments non textuels ; 2.4.7 pour un élément dont rien ne change au focus."
+largeurs_px = [390, 1440]
+resultat = "26 relevés (13 pages × 2 largeurs), 2 620 éléments portés au focus, 2 496 indicateurs jugés, 0 sous le seuil, 0 sans indicateur, 124 sur fond d'image comptés à part, 0 relevé arrêté au plafond. Coût : 38 s."
+trouvaille = "Premier passage : 40 liens sous le seuil, tous sur `.creator-note`, où le bleu du site sur le marine donne 1,76:1. Corrigé par le jeton `--focus-ring`, clair sur les cinq surfaces sombres, plutôt que par un `outline-color` répété par composant."
+angle_mort = """
+Deux largeurs seulement, et la traversée s'arrête au premier élément déjà vu :
+le rapport dit si elle a buté sur le plafond (jamais ici), pas ce qu'elle n'a pas
+atteint. Les états de survol et de focus programmatique ne sont pas mesurés, ni
+le focus dans une iframe, ni un élément posé sur une image (124 comptés). Un
+indicateur peut être conforme à 3:1 et rester peu visible sur un écran de
+téléphone en plein soleil : la mesure donne un chiffre, pas une impression.
+"""
+
 [rangees]
 # `--orphelins` nomme les grilles dont la dernière rangée laisse un vide visible.
 # Il ne refuse rien : une rangée incomplète est parfois le dessin voulu, et le
