@@ -26,6 +26,7 @@ digraph memoire {
   "avancee:classes-mortes-relevees" [shape=note, label="avancee:classes-mortes-relevees"];
   "avancee:compteur-paliers-avoue" [shape=note, label="avancee:compteur-paliers-avoue"];
   "avancee:conteneur-jamais-mesure" [shape=note, label="avancee:conteneur-jamais-mesure"];
+  "avancee:contraste-et-pages-oubliees" [shape=note, label="avancee:contraste-et-pages-oubliees"];
   "avancee:controle-preventif-qui-prouve-qu-il-mord" [shape=note, label="avancee:controle-preventif-qui-prouve-qu-il-mord"];
   "avancee:des-points-de-rupture-aux-mesures" [shape=note, label="avancee:des-points-de-rupture-aux-mesures"];
   "avancee:ecouter-sans-promettre-une-conformite" [shape=note, label="avancee:ecouter-sans-promettre-une-conformite"];
@@ -296,6 +297,10 @@ digraph memoire {
   "avancee:conteneur-jamais-mesure" -> "outils/mesurer-grilles.cjs" [label="prouvée par"];
   "avancee:conteneur-jamais-mesure" -> "outils/modele-grilles.py" [label="prouvée par"];
   "avancee:conteneur-jamais-mesure" -> "outils/rapporter-mesure-grilles.py" [label="prouvée par"];
+  "avancee:contraste-et-pages-oubliees" -> "docs/rd/cadrages.toml" [label="prouvée par"];
+  "avancee:contraste-et-pages-oubliees" -> "outils/cadrages.py" [label="prouvée par"];
+  "avancee:contraste-et-pages-oubliees" -> "outils/mesurer-cadrages.cjs" [label="prouvée par"];
+  "avancee:contraste-et-pages-oubliees" -> "outils/test_cadrages.py" [label="prouvée par"];
   "avancee:controle-preventif-qui-prouve-qu-il-mord" -> "docs/rd/sujet-revenus-salaire-impots.md" [label="prouvée par"];
   "avancee:controle-preventif-qui-prouve-qu-il-mord" -> "outils/test_verifier_taux_dates.py" [label="prouvée par"];
   "avancee:controle-preventif-qui-prouve-qu-il-mord" -> "outils/verifier-taux-dates.py" [label="prouvée par"];
@@ -565,6 +570,7 @@ digraph memoire {
   "branche:co-conception-et-essais" -> "avancee:un-banc-coute-le-prix-de-ce-qu-il-eprouve" [label="a produit"];
   "branche:co-conception-et-essais" -> "phase:apprentissages-et-relecture" [label="servie par"];
   "branche:coherence-textes-publics" -> "avancee:cadrages-personnalises-au-pixel" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:contraste-et-pages-oubliees" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-chaine-des-ancetres" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-comparaison-largeur-par-largeur" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-dessins-jamais-atteints" [label="a produit"];
@@ -624,6 +630,7 @@ digraph memoire {
   "branche:documentation-rd-eva" -> "phase:memoire-trois-horizons" [label="servie par"];
   "branche:documentation-rd-eva" -> "phase:persona-de-conception" [label="servie par"];
   "branche:ecouter-la-page" -> "avancee:boite-non-nulle-nest-pas-affichee" [label="a produit"];
+  "branche:ecouter-la-page" -> "avancee:contraste-et-pages-oubliees" [label="a produit"];
   "branche:ecouter-la-page" -> "avancee:ecouter-sans-promettre-une-conformite" [label="a produit"];
   "branche:ecouter-la-page" -> "avancee:un-total-sans-son-manque" [label="a produit"];
   "branche:ecouter-la-page" -> "phase:rappel-mesure" [label="servie par"];
@@ -643,6 +650,7 @@ digraph memoire {
   "branche:optimisation-du-site" -> "avancee:classes-mortes-relevees" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:compteur-paliers-avoue" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:conteneur-jamais-mesure" [label="a produit"];
+  "branche:optimisation-du-site" -> "avancee:contraste-et-pages-oubliees" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:des-points-de-rupture-aux-mesures" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:gouttiere-lue-pas-supposee" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:grilles-chaine-des-ancetres" [label="a produit"];

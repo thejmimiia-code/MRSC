@@ -574,13 +574,16 @@ jobs:
       # Le contrôle des colonnes ne regarde qu'un cadrage : présentation par
       # défaut, trois tailles de texte. Le panneau de personnalisation en propose
       # six et cinq crans, et `--content` comme les gouttières changent avec eux.
-      # Cette étape confronte donc quatre pages dans 6 × 5 × 4 = 480 cadrages :
-      # débordement horizontal au demi-pixel près, nombre de colonnes de chaque
-      # grille déclarée, mots coupés par une zone de découpe et cartes qui se
-      # recouvrent. Coût mesuré : 5 min 02 en local, d'où le plafond
-      # de 30 minutes sur ce job — un banc lent vaut mieux qu'un banc absent, à
-      # condition de dire ce qu'il coûte.
-      - name: Confronter chaque cadrage personnalisé, au pixel près, mots et cartes compris
+      # Cette étape confronte donc les **treize pages publiées** — six
+      # présentations là où une grille est déclarée, la présentation par défaut
+      # ailleurs, soit 1 060 cadrages. Elle refuse un débordement horizontal
+      # au-delà de 0,5 px, un écart de colonnes, un mot coupé par une zone de
+      # découpe, deux cartes superposées et un contraste sous le seuil WCAG.
+      # Les pages sont lues sur le disque : neuf d'entre elles échappaient à
+      # tout cadrage avant le 3 novembre 2026. Coût mesuré : 405 s en local,
+      # d'où le plafond de 30 minutes sur ce job — un banc lent vaut mieux qu'un
+      # banc absent, à condition de dire ce qu'il coûte.
+      - name: Confronter chaque cadrage personnalisé : géométrie, mots, cartes et contraste
         env:
           MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
           MRSC_TEST_URL: http://127.0.0.1:4185/
@@ -638,6 +641,14 @@ jobs:
           head -n 12 "$RUNNER_TEMP/graphismes/cadrages/orphelins.log" \
             | cut -c1-900 | while IFS= read -r ligne; do
             echo "::notice title=Rangées incomplètes::$ligne"
+          done
+          # Ce que le contraste écarte — décoratif déclaré, fond en image — est
+          # nommé ici : une exemption qui ne se nomme jamais devient un angle mort.
+          python3 outils/cadrages.py --ecartes "$RUNNER_TEMP/graphismes/cadrages/rapport.json" \
+            >"$RUNNER_TEMP/graphismes/cadrages/ecartes.log" 2>&1 || true
+          head -n 12 "$RUNNER_TEMP/graphismes/cadrages/ecartes.log" \
+            | cut -c1-900 | while IFS= read -r ligne; do
+            echo "::notice title=Écartés du contraste::$ligne"
           done
           exit "$controle"
 

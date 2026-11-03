@@ -38,20 +38,74 @@ raison = "Quatre largeurs qui encadrent les seuils de la feuille : téléphone �
 
 [[dimension]]
 nom = "page"
-valeurs = ["index.html", "apprendre.html", "ia-societe.html", "simulateur.html"]
-raison = "Une page par famille de dessin : accueil, fiches d'apprentissage, page IA — la plus dense en grilles — et simulateur, dont les grilles vivent dans un panneau `flex`."
+# Les treize pages publiées, lues sur le disque par `pages_publiees()` : la
+# liste n'est pas recopiée à la main, et `test_cadrages.py` confronte ce bloc au
+# disque. Jusqu'au 2 novembre 2026, quatre pages seulement étaient visitées ;
+# neuf échappaient à tout cadrage, ce qui était écrit dans les limites — et une
+# limite écrite n'est pas une couverture.
+valeurs = [
+  "404.html", "anglais-aventure.html", "apprendre.html", "confidentialite.html",
+  "documents.html", "eva.html", "ia-societe.html", "index.html",
+  "liens-utiles.html", "localisation.html", "nous-contacter.html",
+  "simulateur.html", "transparence.html",
+]
+raison = "Toutes les pages publiées. Huit portent une grille déclarée et sont donc mesurées dans les six présentations ; cinq n'en portent aucune (`404`, `anglais-aventure`, `confidentialite`, `localisation`, `nous-contacter`) et sont mesurées dans la présentation par défaut seulement : une présentation n'a de cible nommée que là où une grille est déclarée, et la mesurer six fois coûterait cinq chargements de plus par cran et par largeur sans rien confronter."
 
 [cout]
-# Mesuré le 2 novembre 2026 sur le dépôt : 480 combinaisons, 0 débordement,
-# 0 mot coupé, 0 chevauchement. Trois passes donnent 302 s, 275 s puis 262 s,
-# alors que la troisième mesure *plus* que la première : l'écart vient de la
-# machine, pas du travail. Ne pas lire cette baisse comme un progrès.
-mesure_locale_secondes = 262
-combinaisons = 480
+# Mesuré les 2 et 3 novembre 2026 sur le dépôt. Le 2, 480 combinaisons en 262 à
+# 302 s. Le 3, 1 060 combinaisons — les 13 pages, contraste compris — en 405 s :
+# les cinq pages sans grille déclarée ne coûtent qu'un état chacune et le temps
+# par combinaison baisse, il ne dit donc rien de la qualité du contrôle.
+mesure_locale_secondes = 408
+combinaisons = 1060
 note = """Une combinaison coûte un changement de largeur, pas un chargement : le
 temps de chargement se compte en états (page, présentation, cran), pas en
 combinaisons. Un banc qui annonce le coût de l'état précédent se trompe de
 moitié, et c'est ce que `test_cadrages.py` refuse."""
+
+[exemplaires]
+# Un sélecteur peut nommer plusieurs grilles dans une page : `liens-utiles.html`
+# en porte sept, `transparence.html` deux. Chaque exemplaire est relevé à part.
+plafond = 12
+note = """
+Le plan annonce une **capacité** : combien de colonnes la place permet. Le
+contrôle applique à chaque exemplaire le nombre de cartes réellement lu, et
+nomme les deux nombres quand la piste déclarée n'est pas occupée. Au-delà du
+plafond, le contrôle refuse le cadrage en disant combien d'exemplaires il n'a
+pas inspectés : un plafond tu serait un accord de complaisance.
+"""
+ecart_du_3_novembre = """
+Quatorze écarts faux ont été produits avant cette règle, sur `.link-grid` en
+Compacte et `.principle-grid` en Panorama et Compacte : le relevé ne mesurait
+que le premier exemplaire, alors que le registre déclare des listes de tailles
+possibles (`items = [1, …, 7]`). La matrice statique (`modele-grilles.py
+--presentations`) borne, elle, son calcul par le plus grand nombre de cartes
+déclaré ; c'est un outil de conception, pas le contrôle, et les deux nombres
+peuvent donc différer sans que l'un des deux mente — le contrôle, lui, lit le
+nombre réel.
+"""
+
+[contraste]
+# Ce que la mesure calcule, et ce que le contrôle exige.
+seuil_petit_texte = 4.5
+seuil_grand_texte = 3.0
+grand_texte_px = 24.0
+grand_texte_gras_px = 18.66
+note = """
+Le navigateur écrit le rapport de chaque texte qui descend sous 4,5:1 ; le seuil
+applicable est décidé par `cadrages.py` (`seuil_de_contraste`), seul endroit où
+il est écrit, et éprouvé sans navigateur par `test_cadrages.py`. Un texte
+**décoratif** — `aria-hidden`, `role="presentation"` — est compté à part et
+jamais jugé : un glyphe ornemental n'a pas à tenir un rapport de lecture, et
+l'écarter est un choix explicite plutôt qu'un angle mort.
+"""
+angle_mort = """
+Un fond en image ou en dégradé n'est pas mesuré : la méthode ne lit que des
+couleurs de fond unies, et un aplat transparent sur une photographie ne se
+calcule pas. Ces textes sont **comptés** dans le rapport, jamais supposés bons.
+Les états de survol, de focus et les éléments révélés par script ne sont pas
+mesurés non plus : le relevé voit l'état affiché, pas tous les états.
+"""
 
 [rangees]
 # `--orphelins` nomme les grilles dont la dernière rangée laisse un vide visible.
@@ -60,7 +114,7 @@ moitié, et c'est ce que `test_cadrages.py` refuse."""
 outil = "python3 outils/cadrages.py --orphelins PLAN RAPPORT"
 definition = "Une grille laisse un vide quand ce que sa dernière rangée occupe, gouttières déduites, laisse plus de 0,5 px libres sur la largeur utile — seuil identique à celui du débordement, pour la même raison : c'est le plus petit écart qu'un navigateur puisse produire en arrondissant une longueur."
 seuil_px = 0.5
-resultat = "13 couples page/grille laissent un vide dans au moins un cadrage. Le pire : `apprendre.html · .learning-catalogue-grid`, 35 cadrages, 1 176,50 px libres en « Compacte » à 75 % sur 1 440 px (une carte sur six colonnes). Puis `ia-societe.html · .ai-fraud-lesson-list`, 35 cadrages, 1 048,19 px. Six grilles de la page IA et de l'apprentissage partagent le même cas à trois colonnes : 15 cadrages, 850,67 px libres."
+resultat = "16 couples page/grille laissent un vide dans au moins un cadrage. Le pire : `apprendre.html · .learning-catalogue-grid`, 35 cadrages, 1 176,50 px libres en « Compacte » à 75 % sur 1 440 px (une carte sur six colonnes). Puis `ia-societe.html · .ai-fraud-lesson-list` et `liens-utiles.html · .link-grid`, 35 cadrages, 1 048,19 px chacun. Huit grilles partagent le même cas à trois colonnes en « Vitrine » à 115 % : 15 cadrages, 850,67 px libres. Le nombre est passé de 13 à 16 le 3 novembre 2026, quand le contrôle a cessé de ne visiter que quatre pages."
 decision = "Non tranchée. Les nombres sont publiés, l'annotation de CI les imprime à chaque passage ; toute correction qui ajouterait un palier de largeur serait un raccommodage, refusé depuis le 30 octobre 2026."
 
 [limites]
