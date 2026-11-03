@@ -12,7 +12,11 @@ Ce contrôle ne juge pas les statuts. Il vérifie trois choses mécaniques :
    `test_*` et `__*` figure dans l'inventaire, une fois ;
 2. **existence** — tout chemin cité dans l'inventaire existe dans le dépôt ;
 3. **vocabulaire** — le statut est l'un des six admis, et le fichier de test
-   annoncé pour un statut qui en exige un existe vraiment.
+   annoncé pour un statut qui en exige un existe vraiment ;
+4. **comptes** — le tableau « Combien » et la phrase « N contrôles sur M » sont
+   confrontés aux lignes réelles. Ces nombres étaient recopiés à la main et
+   avaient pris six unités de retard ; un total écrit à la main n'est pas un
+   contrôle, c'est une opinion datée.
 
 Il ne dit pas qu'un statut `banc` est mérité : c'est la lecture du banc qui le
 dit. Il empêche seulement l'inventaire de mentir par omission.
@@ -48,6 +52,10 @@ STATUTS = {
 
 LIGNE = re.compile(r"^\|\s*`(?P<outil>outils/[^`]+)`\s*\|(?P<reste>.+)\|\s*`(?P<statut>[a-z-]+)`\s*\|\s*$")
 CHEMIN = re.compile(r"`(?P<chemin>(?:outils|docs|assets)/[^`]+?\.(?:py|mjs|cjs|md|toml|html|css|js))`")
+#: Ligne du tableau « Combien », sous la forme `| \`banc\` | 30 | … |`.
+COMPTE = re.compile(r"^\|\s*`(?P<statut>[a-z-]+)`\s*\|\s*(?P<nombre>\d+)\s*\|")
+#: La phrase de synthèse : « **48 contrôles sur 48** ».
+PHRASE = re.compile(r"\*\*(?P<avec>\d+) contrôles sur (?P<total>\d+)\*\*")
 
 
 def outils_reellement_presents() -> set[str]:
@@ -115,14 +123,69 @@ def controler() -> list[str]:
         if not (RACINE / chemin).exists():
             erreurs.append(f"inventaire : chemin cité introuvable « {chemin} »")
 
+    erreurs.extend(controler_comptes(texte, entrees))
+    return erreurs
+
+
+def compter(entrees: list[dict[str, str]]) -> dict[str, int]:
+    """Nombre de lignes par statut, lu dans le tableau de l'inventaire."""
+    comptes: dict[str, int] = {statut: 0 for statut in STATUTS}
+    for entree in entrees:
+        comptes[entree["statut"]] = comptes.get(entree["statut"], 0) + 1
+    return comptes
+
+
+def controler_comptes(texte: str, entrees: list[dict[str, str]]) -> list[str]:
+    """Confronte les totaux écrits dans le document aux lignes réelles.
+
+    Un document qui annonce « 22 » quand le tableau en porte 30 n'est pas un
+    document faux : c'est un document daté, présenté comme s'il était à jour.
+    """
+    erreurs: list[str] = []
+    comptes = compter(entrees)
+    annonces: dict[str, int] = {}
+    for ligne in texte.splitlines():
+        trouve = COMPTE.match(ligne)
+        if trouve:
+            statut, nombre = trouve.group("statut"), int(trouve.group("nombre"))
+            if statut not in STATUTS:
+                erreurs.append(f"inventaire : le tableau « Combien » annonce un statut inconnu « {statut} »")
+                continue
+            annonces[statut] = nombre
+            if nombre != comptes.get(statut, 0):
+                erreurs.append(
+                    f"inventaire : le tableau « Combien » annonce {nombre} « {statut} », "
+                    f"le tableau des outils en compte {comptes.get(statut, 0)}"
+                )
+    oublies = sorted(statut for statut in STATUTS if statut not in annonces)
+    if oublies:
+        erreurs.append(
+            "inventaire : le tableau « Combien » omet " + ", ".join(f"« {s} »" for s in oublies)
+            + " — un statut absent se lit comme un statut à zéro"
+        )
+
+    phrase = PHRASE.search(texte)
+    total = sum(comptes.values()) - comptes.get("hors-portee", 0)
+    avec = total - comptes.get("test-en-soi", 0) - comptes.get("aucun-test", 0)
+    if not phrase:
+        erreurs.append("inventaire : la phrase « N contrôles sur N » a disparu — les totaux ne sont plus confrontés")
+    else:
+        if int(phrase.group("avec")) != avec:
+            erreurs.append(
+                f"inventaire : la phrase annonce {phrase.group('avec')} contrôles éprouvés, "
+                f"l'inventaire en compte {avec}"
+            )
+        if int(phrase.group("total")) != total:
+            erreurs.append(
+                f"inventaire : la phrase annonce {phrase.group('total')} contrôles, "
+                f"l'inventaire en compte {total} hors « hors-portee »"
+            )
     return erreurs
 
 
 def resume() -> str:
     texte = INVENTAIRE.read_text(encoding="utf-8")
-    comptes: dict[str, int] = {}
-    for entree in lignes_inventaire(texte):
-        comptes[entree["statut"]] = comptes.get(entree["statut"], 0) + 1
+    comptes = compter(lignes_inventaire(texte))
     detail = ", ".join(f"{statut} : {comptes.get(statut, 0)}" for statut in STATUTS)
     return f"Inventaire des contrôles : {sum(comptes.values())} outils — {detail}"
 

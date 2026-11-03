@@ -117,13 +117,26 @@ jobs:
 
       # L'inventaire `docs/rd/inventaire-controles.md` répond, outil par outil,
       # à « qu'est-ce qui prouve que ce contrôle peut échouer ? ». Ce garde-là
-      # empêche l'oubli ; son banc plante cinq fautes dans une copie du dépôt,
-      # dont celle qui compte : un outil ajouté sans ligne dans l'inventaire.
+      # empêche l'oubli ; son banc plante neuf fautes dans une copie du dépôt,
+      # dont celle qui compte : un outil ajouté sans ligne dans l'inventaire — et, depuis
+      # le 3 novembre 2026, un total de la prose qui ne correspond plus aux lignes.
       - name: Vérifier que l'inventaire des contrôles reste complet
         run: |
           python3 outils/test_verifier_inventaire_controles.py
           python3 outils/verifier-inventaire-controles.py
           python3 outils/test_annoncer_echec_graphismes.py
+
+      # Le 3 novembre 2026, un nom d'étape contenant « : » a rendu ce fichier
+      # illisible : GitHub n'a lancé **aucun** job et a répondu « This run likely
+      # failed because of a workflow file issue ». Rien dans le dépôt ne lisait
+      # les workflows — un YAML cassé n'était pas une erreur, c'était un silence.
+      # Le contrôle lit chaque fichier avec un vrai analyseur ; son banc plante
+      # la faute exacte, et le refus « pas d'analyseur » (code 2).
+      - name: Vérifier la lisibilité des workflows
+        run: |
+          python3 -m pip install --quiet --disable-pip-version-check pyyaml
+          python3 outils/test_verifier_workflows.py
+          python3 outils/verifier-workflows.py
 
       # Deux bancs du harnais des essais navigateur, et aucun des deux n'a besoin
       # de Chromium : l'attente nommée est éprouvée sur une page factice, et le
@@ -435,8 +448,10 @@ jobs:
     # banc raccourci, et la raison est écrite ici.
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - name: Récupérer les sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Installer Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
       - name: Installer le navigateur de mesure
