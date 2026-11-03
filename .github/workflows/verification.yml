@@ -583,7 +583,7 @@ jobs:
       # tout cadrage avant le 3 novembre 2026. Coût mesuré : 405 s en local,
       # d'où le plafond de 30 minutes sur ce job — un banc lent vaut mieux qu'un
       # banc absent, à condition de dire ce qu'il coûte.
-      - name: Confronter chaque cadrage personnalisé : géométrie, mots, cartes et contraste
+      - name: Confronter chaque cadrage personnalisé — géométrie, mots, cartes et contraste
         env:
           MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
           MRSC_TEST_URL: http://127.0.0.1:4185/
