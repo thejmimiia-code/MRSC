@@ -2451,10 +2451,16 @@ une copie jetable n'est pas une copie neuve.
 
 ### Résultat
 
-**26 pages et largeurs** (13 pages × 2), **2 620 éléments portés au focus**,
-**2 496 indicateurs jugés, 0 sous le seuil, 0 sans indicateur**, **124 sur fond
+**26 pages et largeurs** (13 pages × 2), **2 621 éléments portés au focus**,
+**2 497 indicateurs jugés, 0 sous le seuil, 0 sans indicateur**, **124 sur fond
 d'image** comptés à part et jamais jugés, **0 relevé arrêté au plafond**. Coût :
 38 s.
+
+Le compte varie d'une unité selon l'exécution (2 620 en local, 2 621 en
+intégration continue le 3 novembre 2026) : un élément rendu focusable par script
+peut apparaître ou non selon le moment du chargement. Ce n'est pas une
+approximation de la mesure, c'est un fait du document — et le seuil n'en dépend
+pas.
 
 Le plafond par défaut est de 60 éléments par page et par largeur : c'est un
 **échantillon déclaré**, utile pour un essai rapide, et le rapport dit quand la
