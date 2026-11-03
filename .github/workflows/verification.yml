@@ -453,7 +453,11 @@ jobs:
     runs-on: ubuntu-24.04
     # 20 minutes ne suffisaient plus depuis le contrôle des cadrages (5 min 02
     # mesurées en local, 480 combinaisons) : le plafond est relevé plutôt que le
-    # banc raccourci, et la raison est écrite ici.
+    # banc raccourci, et la raison est écrite ici. Le 3 novembre 2026, c'est
+    # l'**installation du navigateur** qui a mangé le plafond — 1 797 s — et non
+    # une mesure : elle est désormais mise en cache, et le plafond reste à 30
+    # minutes pour que ce soit une mesure trop lente qui le franchisse, jamais
+    # un téléchargement.
     timeout-minutes: 30
     steps:
       - name: Récupérer les sources
@@ -462,7 +466,19 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
+      # Le 3 novembre 2026, cette installation a pris **1 797 s** — trente
+      # minutes à elle seule — et le job a été coupé avant la première mesure.
+      # Le réseau du runner n'est pas une dépendance qu'on peut tenir pour
+      # acquise : les deux paquets sont donc mis en cache, et le cache n'est
+      # écrit que si l'installation réussit.
+      - name: Restaurer le navigateur de mesure
+        id: cache-navigateur
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: ${{ runner.temp }}/mrsc-browser
+          key: mrsc-browser-puppeteer-core-25.16.0-sparticuz-chromium-153.0.0
       - name: Installer le navigateur de mesure
+        if: steps.cache-navigateur.outputs.cache-hit != 'true'
         run: npm install --prefix "$RUNNER_TEMP/mrsc-browser" puppeteer-core@25.16.0 @sparticuz/chromium@153.0.0
       - name: Mesurer les trois visuels dans les modes couverts
         env:
