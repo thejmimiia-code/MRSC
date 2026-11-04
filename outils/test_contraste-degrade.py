@@ -22,10 +22,12 @@ copie jetable du dépôt :
    que le dernier arrêt — et la zone doit le dire (`[1, 1]`).
 
 Ce que ce banc ne dit pas : il éprouve un `linear-gradient` à arrêts en
-pourcentage et un `radial-gradient` **circulaire** à arrêt en pixels, sur une
-page de banc. Il ne dit rien des formes `ellipse`, des tailles en mots-clés, des
-arrêts radiaux en pourcentage ni des dégradés répétés : ces cas-là retombent sur
-la plage entière, et aucun cas ne chiffre ici ce que ce majorant coûte. Il ne tourne pas sans navigateur — il sort alors en **code 2**
+pourcentage, un `radial-gradient` **circulaire** à arrêt en pixels, un halo au
+centre **par défaut** (que Chromium écrit sans `at`) et un halo **ambigu** dont
+l'arrêt est en pourcentage, donc sans rayon. Il ne dit rien des formes
+`ellipse`, des tailles en mots-clés, des centres écrits en pixels ni des
+dégradés répétés : ces cas-là retombent sur la plage entière. Depuis le
+4 novembre 2026, ce majorant n'est plus tu — il est compté, motif par motif. Il ne tourne pas sans navigateur — il sort alors en **code 2**
 et le dit, parce qu'un banc navigateur muet passerait pour vert.
 
 Usage :
@@ -75,12 +77,28 @@ PAGE_DE_BANC = """<!doctype html>
     background-image: radial-gradient(circle at 0% 50%, rgb(255, 255, 255), rgb(0, 0, 0) 100px); }
   .banc-halo p { margin: 0; width: 40px; color: rgb(17, 17, 17); font-size: 16px; }
   div.banc-halo p.banc-loin { margin-left: 800px; }
+  /* Halo **ambigu** : un arrêt en pourcentage, donc aucun rayon en pixels. La
+     mesure ne sait pas où passe la limite du disque et retombe sur la plage
+     entière. C'est ce majorant que le 4 novembre 2026 on a cessé de taire. */
+  .banc-halo-ambigu { width: 1000px; height: 200px; margin: 0; display: flex; align-items: center;
+    background-image: radial-gradient(circle at 50% 50%, rgb(255, 255, 255), rgb(0, 0, 0) 60%); }
+  .banc-halo-ambigu p { margin: 0; width: 200px; color: rgb(17, 17, 17); font-size: 16px; }
+  /* Halo au centre **par défaut** : `at 50% 50%` est omis, ce qui est la valeur
+     du CSS — et Chromium ne l'écrit pas dans la valeur calculée. Le rayon est en
+     pixels, donc cette fois la zone est situable : le 4 novembre 2026, ce cas a
+     montré que le relevé renonçait à situer des halos dont il connaissait le
+     centre. */
+  .banc-halo-defaut { width: 1000px; height: 200px; margin: 0; display: flex; align-items: center;
+    background-image: radial-gradient(circle, rgb(255, 255, 255), rgb(0, 0, 0) 100px); }
+  .banc-halo-defaut p { margin: 0 0 0 450px; width: 100px; color: rgb(17, 17, 17); font-size: 16px; }
 </style>
 </head>
 <body>
   <div class="banc-bande"><p id="gauche">Texte à gauche</p></div>
   <div class="banc-bande"><p id="droite" class="banc-a-droite">Texte à droite</p></div>
   <div class="banc-halo"><p id="pres">Près</p><p id="loin" class="banc-loin">Loin</p></div>
+  <div class="banc-halo-ambigu"><p id="ambigu">Halo ambigu</p></div>
+  <div class="banc-halo-defaut"><p id="defaut">Centre par défaut</p></div>
 </body>
 </html>
 """
@@ -209,6 +227,96 @@ class TestContrasteDegrade(unittest.TestCase):
             "dans la moitié intérieure du halo, le texte presque noir garde son contraste",
         )
         self.assertLess(pire_loin, 1.5, "au-delà du rayon, le même texte est sur du noir")
+
+    def test_le_centre_par_defaut_est_lu(self) -> None:
+        """`at 50% 50%` omis par Chromium n'est pas un centre inconnu.
+
+        Le CSS pose le centre à `50% 50%` par défaut, et la valeur calculée ne
+        l'écrit pas. Le relevé comptait pourtant ces halos « centre absent » et
+        renonçait à les situer. Le 4 novembre 2026, le banc a produit ce fait ;
+        le relevé le lit maintenant.
+        """
+        defaut = None
+        for candidat in self.candidats():
+            if str(candidat.get("id") or "") == "defaut":
+                defaut = candidat
+        if defaut is None:
+            self.fail("le relevé ne nomme pas le texte du halo au centre par défaut")
+        couche = defaut["couches"][0]
+        self.assertEqual(couche["type"], "radial")
+        self.assertIs(
+            couche.get("situe"),
+            True,
+            f"un halo dont le centre est le centre par défaut est situable — couche relevée {couche}",
+        )
+        debut, fin = couche["zone"]
+        self.assertGreaterEqual(debut, 0.0)
+        self.assertLessEqual(fin, 1.0)
+        self.assertGreater(
+            fin,
+            0.3,
+            f"le texte est au milieu du halo : la zone doit y descendre, et non couvrir la plage — zone {couche['zone']}",
+        )
+        self.assertLess(debut, 0.9, f"la zone reste dans le halo, zone {couche['zone']}")
+        # Et cela change le verdict : la plage entière, elle, contient le noir.
+        entier = dict(defaut)
+        entier["couches"] = [dict(couche, zone=[0, 1])]
+        pire_situe, _ = self.cadrages.pire_contraste_degrade(defaut)
+        pire_entier, _ = self.cadrages.pire_contraste_degrade(entier)
+        self.assertGreater(
+            pire_situe,
+            pire_entier,
+            f"situer la zone doit rendre le verdict plus juste : {pire_situe} contre {pire_entier}",
+        )
+
+    def test_un_halo_sans_rayon_est_compte_comme_non_situe(self) -> None:
+        """Le majorant cesse d'être tu : la couche dit qu'elle n'est pas située.
+
+        Un `radial-gradient` dont l'arrêt est en pourcentage n'a pas de rayon en
+        pixels : la zone ne peut pas être projetée, et la mesure retombait sur la
+        plage entière **sans le dire**. Elle le dit maintenant — motif compris —
+        et la page le compte pour **tous** ses textes, pas seulement pour ceux
+        joints au rapport.
+        """
+        ambigu = None
+        for candidat in self.candidats():
+            if str(candidat.get("id") or "") == "ambigu":
+                ambigu = candidat
+        if ambigu is None:
+            self.fail("le relevé ne nomme pas le texte du halo ambigu : le banc ne peut pas conclure")
+        couche = ambigu["couches"][0]
+        self.assertEqual(couche["type"], "radial", "la couche du halo ambigu est radiale")
+        self.assertIs(
+            couche.get("situe"),
+            False,
+            f"un halo sans rayon en pixels n'est pas situé, couche relevée {couche}",
+        )
+        self.assertEqual(couche.get("motif"), "rayon-absent-ou-en-pourcentage")
+        self.assertEqual(couche["zone"], [0, 1], "non située, la zone vaut la plage entière — majorant assumé")
+
+        contraste = (self.donnees.get("mesures") or [{}])[0].get("contraste") or {}
+        self.assertEqual(
+            contraste.get("degrades_radiaux_non_situes"),
+            1,
+            "la page compte un texte jugé contre une plage qu'il ne voit pas — "
+            f"compteur relevé : {contraste.get('degrades_radiaux_non_situes')}, "
+            f"textes radiaux : {contraste.get('degrades_radiaux')}",
+        )
+        self.assertEqual(
+            (contraste.get("couches_radiales_non_situees") or {}),
+            {"rayon-absent-ou-en-pourcentage": 1},
+            "le motif du majorant doit être compté, pas seulement le total — "
+            f"compteurs relevés : {contraste.get('couches_radiales_non_situees')}",
+        )
+
+    def test_le_diagnostic_chiffre_le_majorant_du_banc(self) -> None:
+        """Le chiffrage lit le vrai rapport du banc : il ne peut pas mentir sur zéro."""
+        bilan = self.cadrages.majorant_radial(self.donnees)
+        self.assertTrue(bilan.get("lisible"), f"le rapport du banc doit être lisible : {bilan.get('raison')}")
+        self.assertEqual(bilan["textes_non_situes"], 1, f"bilan relevé : {bilan}")
+        self.assertEqual(bilan["couches_par_motif"], {"rayon-absent-ou-en-pourcentage": 1}, f"bilan relevé : {bilan}")
+        self.assertEqual(bilan["echantillon"], 1, f"le texte du halo ambigu est joint au rapport — bilan relevé : {bilan}")
+
 
 def raison_d_un_banc_muet() -> int:
     """Sans navigateur, ce banc sort en code 2 et le dit — jamais en vert."""

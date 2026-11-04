@@ -713,6 +713,47 @@ jobs:
           done
           exit "$controle"
 
+      # Un dégradé **radial** dont le centre ou le rayon n'est pas lisible est
+      # jugé contre la plage entière : majorant assumé depuis le 3 novembre
+      # 2026, et jamais chiffré — un majorant qu'on ne chiffre pas se lit comme
+      # une mesure. Ce diagnostic le compte sur **tous** les textes (ses
+      # compteurs ne sont pas plafonnés) et chiffre, sur l'échantillon joint,
+      # combien de verdicts tiennent à lui seul. Il ne refuse rien : si le relevé
+      # ne porte pas les compteurs, il le dit et sort en code 2 — jamais zéro.
+      #
+      # Il vit dans **sa propre étape** parce que l'annotation est plafonnée à dix
+      # lignes par étape : laissé dans l'étape des cadrages, il tombait après les
+      # neuf rangées incomplètes et n'apparaissait jamais. C'est le troisième
+      # plafond d'annotation rencontré depuis le 4 novembre 2026.
+      - name: Chiffrer le majorant radial — ce qui est jugé sans être situé
+        run: |
+          set +e
+          python3 outils/cadrages.py --radiaux \
+            "$RUNNER_TEMP/graphismes/cadrages/rapport.json" \
+            >"$RUNNER_TEMP/graphismes/cadrages/radiaux.log" 2>&1
+          radiaux=$?
+          set -e
+          cat "$RUNNER_TEMP/graphismes/cadrages/radiaux.log"
+          if [ "$radiaux" -eq 0 ]; then
+            head -n 8 "$RUNNER_TEMP/graphismes/cadrages/radiaux.log" \
+              | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::notice title=Majorant radial::$ligne"
+            done
+          else
+            # Il n'a pas pu lire sa source : il le dit, et l'annotation aussi.
+            head -n 4 "$RUNNER_TEMP/graphismes/cadrages/radiaux.log" \
+              | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::warning title=Majorant radial non chiffré::$ligne"
+            done
+          fi
+          {
+            echo "### Majorant radial — ce qui est jugé sans être situé"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/graphismes/cadrages/radiaux.log"
+            echo '```'
+          } >>"$GITHUB_STEP_SUMMARY"
+
       # Le contraste du texte était mesuré depuis la veille ; l'anneau de focus ne
       # l'était pas. Une page peut être parfaitement lisible et impraticable au
       # clavier : sur la surface marine de `.creator-note`, le bleu du site donnait
@@ -796,10 +837,26 @@ jobs:
       # Trois cas, deux secondes — dont la zone radiale, sans laquelle un halo
       # de 100 px serait jugé comme s'il colorait toute la page. Sans
       # navigateur : code 2.
+      # Le 4 novembre 2026, ce banc est devenu rouge sans que l'annotation dise
+      # pourquoi : le journal n'est pas lisible depuis cette session, et
+      # « exit code 1 » ne nomme rien. Une CI rouge doit dire ce qu'elle a vu —
+      # l'étape capture donc ses échecs et les publie en annotations.
       - name: Éprouver que la lecture d'un dégradé garde ses arrêts et la zone du texte
         env:
           MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
-        run: python3 outils/test_contraste-degrade.py
+        run: |
+          set +e
+          python3 outils/test_contraste-degrade.py >"$RUNNER_TEMP/degrade.log" 2>&1
+          statut=$?
+          set -e
+          cat "$RUNNER_TEMP/degrade.log"
+          if [ "$statut" -ne 0 ]; then
+            grep -E -A6 '^(FAIL|ERROR|AssertionError)' "$RUNNER_TEMP/degrade.log" \
+              | head -n 40 | cut -c1-900 | grep -v '^--$' | while IFS= read -r ligne; do
+              echo "::error title=Banc du contraste des dégradés::$ligne"
+            done
+            exit "$statut"
+          fi
 
       # Les contrôles précédents disent qu'une mutation produit l'erreur
       # annoncée. Aucun ne dit que la géométrie relevée est la bonne : un

@@ -674,5 +674,156 @@ class TestDegrade(unittest.TestCase):
         self.assertIn("pire point", erreurs[0])
 
 
+class TestMajorantRadial(unittest.TestCase):
+    """Ce que coûte un dégradé radial dont la zone n'a pas pu être située.
+
+    Un halo dont le centre ou le rayon n'est pas lisible est jugé contre la
+    plage **entière** — majorant assumé depuis le 3 novembre 2026, et jamais
+    chiffré. Ces cas éprouvent le chiffrage : il compte les textes, nomme le
+    motif, et dit combien de verdicts tiennent au majorant seul. Il refuse aussi
+    un rapport qui ne porte pas ses compteurs, plutôt que d'y lire zéro.
+    """
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.m = charger_module()
+
+    # --- Fixtures ---------------------------------------------------------
+    def candidat(self, situe: bool, taille: int = 16) -> dict:
+        """Un texte doux posé sous un halo sombre qu'il ne voit peut-être pas."""
+        return {
+            "tag": "p",
+            "classe": "bandeau-lead",
+            "couleur": {"r": 95, "g": 107, "b": 129, "a": 1},
+            "base": {"r": 255, "g": 255, "b": 255, "a": 1},
+            "couches": [
+                {
+                    "type": "radial",
+                    "zone": [0.0, 1.0],
+                    "situe": situe,
+                    "motif": None if situe else "rayon-absent-ou-en-pourcentage",
+                    "arrets": [
+                        {"r": 24, "g": 36, "b": 59, "a": 1, "t": 0.0},
+                        {"r": 255, "g": 255, "b": 255, "a": 1, "t": 1.0},
+                    ],
+                }
+            ],
+            "taille": taille,
+            "gras": False,
+            "texte": "Un paragraphe posé sur un halo",
+        }
+
+    def mesure(self, contraste: dict) -> dict:
+        return {"page": "index.html", "layout": None, "cran": 100, "largeur": 1440, "contraste": contraste}
+
+    def rapport(self, **compteurs) -> dict:
+        contraste = {
+            "degrades": 20,
+            "degrades_radiaux": 8,
+            "degrades_radiaux_non_situes": 3,
+            "degrades_centre_implicite": 12,
+            "couches_radiales_non_situees": {"rayon-absent-ou-en-pourcentage": 3},
+            "candidats_degrade": [self.candidat(situe=False)],
+        }
+        contraste.update(compteurs)
+        return {"mesures": [self.mesure(contraste)]}
+
+    # --- Cas --------------------------------------------------------------
+    def test_le_majorant_se_chiffre_et_se_nomme(self) -> None:
+        bilan = self.m.majorant_radial(self.rapport())
+        self.assertTrue(bilan["lisible"])
+        self.assertEqual(bilan["textes_degrades"], 20)
+        self.assertEqual(bilan["textes_radiaux"], 8)
+        self.assertEqual(bilan["textes_non_situes"], 3)
+        self.assertEqual(bilan["couches_par_motif"], {"rayon-absent-ou-en-pourcentage": 3})
+        self.assertEqual(
+            bilan["textes_centre_implicite"],
+            12,
+            "le centre par défaut, désormais lu, est compté à part de ce qui reste non situé",
+        )
+        self.assertEqual(bilan["echantillon"], 1)
+        self.assertEqual(bilan["verdicts_en_jeu"], 1, "le texte doux serait conforme sans la couche ambiguë")
+        self.assertIsNotNone(bilan["pire_ecart"])
+        self.assertEqual(bilan["pire_ecart"]["selecteur"], "p.bandeau-lead")
+        self.assertGreater(bilan["pire_ecart"]["sans"], bilan["pire_ecart"]["avec"])
+
+    def test_une_couche_situee_ne_compte_pas_dans_le_majorant(self) -> None:
+        rapport = self.rapport(candidats_degrade=[self.candidat(situe=True)])
+        bilan = self.m.majorant_radial(rapport)
+        self.assertTrue(bilan["lisible"])
+        self.assertEqual(bilan["echantillon"], 0)
+        self.assertEqual(bilan["verdicts_en_jeu"], 0)
+
+    def test_un_rapport_sans_compteurs_radiaux_est_refuse(self) -> None:
+        """Un relevé d'avant le chiffrage ne vaut pas « zéro » : il ne sait pas."""
+        contraste = {
+            "degrades": 20,
+            "candidats_degrade": [],
+        }
+        bilan = self.m.majorant_radial({"mesures": [self.mesure(contraste)]})
+        self.assertFalse(bilan["lisible"])
+        self.assertIn("compteurs radiaux", bilan["raison"])
+
+    def test_un_releve_sans_le_compteur_du_centre_implicite_reste_lisible(self) -> None:
+        """Le compteur du centre implicite est un ajout : son absence vaut zéro, pas un refus."""
+        contraste = {
+            "degrades": 20,
+            "degrades_radiaux": 8,
+            "degrades_radiaux_non_situes": 0,
+            "couches_radiales_non_situees": {},
+            "candidats_degrade": [],
+        }
+        bilan = self.m.majorant_radial({"mesures": [self.mesure(contraste)]})
+        self.assertTrue(bilan["lisible"])
+        self.assertEqual(bilan["textes_centre_implicite"], 0)
+
+    def test_un_rapport_sans_releve_est_refuse(self) -> None:
+        bilan = self.m.majorant_radial({"mesures": []})
+        self.assertFalse(bilan["lisible"])
+        self.assertIn("aucun relevé", bilan["raison"])
+
+    def test_aucun_radial_non_situe_dit_zero_sans_le_taire(self) -> None:
+        rapport = self.rapport(
+            degrades_radiaux_non_situes=0,
+            couches_radiales_non_situees={},
+            candidats_degrade=[],
+        )
+        bilan = self.m.majorant_radial(rapport)
+        self.assertTrue(bilan["lisible"])
+        self.assertEqual(bilan["textes_non_situes"], 0)
+
+    def test_la_ligne_de_commande_sort_en_code_2_quand_elle_ne_peut_pas_lire(self) -> None:
+        import subprocess
+
+        with tempfile.TemporaryDirectory() as dossier:
+            chemin = Path(dossier) / "rapport.json"
+            chemin.write_text(
+                json.dumps({"mesures": [self.mesure({"degrades": 3, "candidats_degrade": []})]}),
+                encoding="utf-8",
+            )
+            resultat = subprocess.run(
+                [sys.executable, str(RACINE / "outils" / "cadrages.py"), "--radiaux", str(chemin)],
+                capture_output=True,
+                text=True,
+            )
+        self.assertEqual(resultat.returncode, 2, "un rapport illisible ne doit pas sortir en code 0")
+        self.assertIn("compteurs radiaux", resultat.stderr)
+
+    def test_la_ligne_de_commande_chiffre_un_rapport_lisible(self) -> None:
+        import subprocess
+
+        with tempfile.TemporaryDirectory() as dossier:
+            chemin = Path(dossier) / "rapport.json"
+            chemin.write_text(json.dumps(self.rapport()), encoding="utf-8")
+            resultat = subprocess.run(
+                [sys.executable, str(RACINE / "outils" / "cadrages.py"), "--radiaux", str(chemin)],
+                capture_output=True,
+                text=True,
+            )
+        self.assertEqual(resultat.returncode, 0)
+        self.assertIn("Majorant radial : 3 texte(s) sur 20", resultat.stdout)
+        self.assertIn("borne, pas une mesure", resultat.stdout)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
