@@ -706,8 +706,7 @@ def principal(arguments: list[str] | None = None) -> int:
             )
         if sans_motif:
             print(
-                f"  ! {len(sans_motif)} vide(s) sans motif écrit : " + ", ".join(sans_motif[:6])
-                + ("…" if len(sans_motif) > 6 else "")
+                f"  ! {len(sans_motif)} vide(s) sans motif écrit : " + ", ".join(sans_motif)
                 + " — la décision du 4 novembre 2026 demande le motif dans [rangees.motifs].",
                 file=sys.stderr,
             )

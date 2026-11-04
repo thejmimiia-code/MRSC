@@ -685,6 +685,14 @@ jobs:
           # 4 novembre 2026, et sept vides restaient invisibles. Le résumé de
           # l'étape n'a pas ce plafond — c'est là que la liste entière est
           # publiée, motifs compris, pour qu'une décision se prenne sur les seize.
+          # Un vide assumé sans motif est une dérogation en blanc : la décision
+          # A2 du 4 novembre 2026 le refuse. Ces lignes vivent sur la sortie
+          # d'erreur, après la liste — donc hors du `head -n 12` ci-dessus.
+          # Elles sortent en avertissement, nommées une par une.
+          grep '^  ! ' "$RUNNER_TEMP/graphismes/cadrages/orphelins.log" \
+            | cut -c1-900 | while IFS= read -r ligne; do
+            echo "::warning title=Vides assumés sans motif::$ligne"
+          done || true
           {
             echo "### Rangées incomplètes — liste entière"
             echo
