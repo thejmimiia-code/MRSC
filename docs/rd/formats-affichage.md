@@ -2302,8 +2302,13 @@ visiter que quatre pages. Le pire :
 | `liens-utiles.html · .link-grid` | 35 | 1 048,19 px | Panorama · 130 % · 1 440 px · 1 carte sur 4 colonnes |
 | `apprendre.html · .knowledge-compass` | 25 | 1 046,86 px | Mosaïque · 130 % · 1 440 px · 1 carte sur 4 colonnes |
 
-Huit grilles partagent le cas le plus fréquent, à trois colonnes en « Vitrine » à
-115 % : 15 cadrages, 850,67 px libres.
+**Sept** grilles partagent le cas le plus fréquent, à trois colonnes en
+« Vitrine » à 115 % : 15 cadrages, 850,67 px libres — `.ai-forms-grid`,
+`.principle-grid`, `.learning-level-grid`, `.learning-ecosystem-grid`,
+`.home-action-grid`, `.document-grid`, `.ai-metric-grid`. Ce nombre était écrit
+« huit » avant le 4 novembre 2026 ; la liste nominative, publiée en clair par le
+résumé de CI, en donne sept. Le compte se corrige **avec sa liste**, jamais en
+silence.
 
 Ce diagnostic **ne refuse rien** et n'a corrigé aucune règle : une rangée
 incomplète est parfois le dessin voulu, et le modèle mesure et nomme, il ne
@@ -2580,10 +2585,21 @@ ces motifs et n'appelle plus « assumé » un vide qui n'en a pas — il écrit
 `SANS MOTIF ÉCRIT` et nomme les couples concernés sur la sortie d'erreur. Un
 vide assumé sans motif serait une dérogation en blanc.
 
-**Ce qu'elle ne fait pas :** neuf motifs sont écrits sur seize. Les sept autres
-n'étaient pas visibles ; la liste entière part désormais dans le **résumé
-d'étape** de la CI, qui n'a pas de plafond. Tant qu'ils manquent, le contrôle le
-dit à chaque passage — c'est un travail nommé, pas un vert.
+**Les seize motifs sont écrits.** Les sept derniers ont demandé deux détours,
+tous deux consignés parce qu'ils disent quelque chose du diagnostic : les noms
+manquants n'apparaissaient nulle part (la ligne qui les liste tombait après le
+`head -n 12` de l'annotation), puis ils apparaissaient **sans leur chiffre** — et
+un motif qu'on écrit sans son nombre s'écrit de mémoire. Le contrôle sort
+maintenant chaque vide sans motif sur sa propre ligne, avec ses cadrages, son
+vide maximal et son cadrage le plus large. La liste entière part aussi dans le
+**résumé d'étape**, qui n'a pas le plafond de l'annotation.
+
+**Ce que l'écriture des seize a révélé :** sur les sept derniers, cinq ont la
+même forme — quatre cartes, trois colonnes au plus, une carte seule — et deux
+tiennent à un **écart entre le registre et la cascade** (`.document-grid` déclare
+2 colonnes et en reçoit 3 ; `.ai-metric-grid` en déclare 4 et en reçoit 3). Le
+motif n'est donc pas le même pour tous : « c'est le dessin voulu » ne suffit pas,
+la raison arithmétique est écrite couple par couple.
 
 **Deux décisions du même jour, pour mémoire :** `B1` — le glyphe `✦` de
 « Les Mondes » reste à 2,66:1, décoratif déclaré (`aria-hidden`), hors du champ

@@ -294,7 +294,12 @@ class TestCadrages(unittest.TestCase):
     def test_les_motifs_du_registre_sont_lus(self) -> None:
         """Les motifs publiés sont réellement lus, et chacun nomme son vide."""
         motifs = self.cadrages.lire_motifs()
-        self.assertGreaterEqual(len(motifs), 9, f"seulement {len(motifs)} motif(s) lu(s)")
+        self.assertEqual(
+            len(motifs),
+            16,
+            f"{len(motifs)} motif(s) lu(s) : les seize couples du diagnostic doivent en avoir un "
+            "(décision A2 du 4 novembre 2026)",
+        )
         for cle, motif in motifs.items():
             self.assertIn(" · ", cle, f"clé sans page ni sélecteur : {cle}")
             self.assertGreater(len(motif), 80, f"motif trop court pour dire quoi que ce soit : {cle}")

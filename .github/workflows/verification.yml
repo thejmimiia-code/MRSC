@@ -687,8 +687,11 @@ jobs:
           # publiée, motifs compris, pour qu'une décision se prenne sur les seize.
           # Un vide assumé sans motif est une dérogation en blanc : la décision
           # A2 du 4 novembre 2026 le refuse. Ces lignes vivent sur la sortie
-          # d'erreur, après la liste — donc hors du `head -n 12` ci-dessus.
-          # Elles sortent en avertissement, nommées une par une.
+          # d'erreur, avec le chiffre de chaque vide — un motif écrit sans son
+          # nombre s'écrit de mémoire. Les seize sont écrits depuis le
+          # 4 novembre 2026 : cette boucle ne doit plus rien afficher, et le
+          # jour où elle affichera quelque chose, ce sera un vide neuf.
+          # (L'annotation est plafonnée : ces lignes tombent après `head -n 12`.)
           grep '^  ! ' "$RUNNER_TEMP/graphismes/cadrages/orphelins.log" \
             | cut -c1-900 | while IFS= read -r ligne; do
             echo "::warning title=Vides assumés sans motif::$ligne"
