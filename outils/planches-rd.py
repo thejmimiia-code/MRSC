@@ -9,12 +9,17 @@ devient une capture sans origine.
 
 Ce que ce script dessine : les couleurs, les tailles de texte et les rapports de
 contraste **réels** du site, recalculés par la formule WCAG 2.2, plus les textes
-des pages. Ce qu'il ne fait pas : une capture du navigateur. Aucun Chromium
+des pages. La planche des réponses, elle, ne dessine rien de neuf : elle **lit**
+`docs/rd/cadrages.toml`, comme le contrôle, pour qu'une image du dossier ne
+puisse pas contredire la CI sur ce qui a été décidé. Ce qu'il ne fait pas : une capture du navigateur. Aucun Chromium
 n'est requis, et chaque planche l'écrit sur elle-même — un dessin mesuré ne doit
 jamais se faire passer pour une capture.
 
 Les fichiers produits sont destinés au Drive de passation, pas au dépôt : une
 image de 150 Ko dans Git ne prouverait rien de plus que le script qui la refait.
+Leur dossier, écrit ici pour qu'il se retrouve sans fouiller le Drive :
+`MRSC — ESPACE PRIVÉ ISOLÉ` → `06 — Planches R&D du site (preuves visuelles)`
+(`1Ne-139sA65TZg_oDXq2ixWEy2hh7Wy5N`), et nulle part ailleurs.
 
 Usage :
     python3 outils/planches-rd.py                 # écrit dans build/planches-rd
@@ -139,8 +144,8 @@ def bandeau(image: ImageDraw.ImageDraw, titre: str, sous_titre: str) -> None:
     image.text((80, 84), sous_titre, font=police(22), fill=(196, 210, 234))
 
 
-def pied(image: ImageDraw.ImageDraw, sources: str, question: str) -> None:
-    y = HAUTEUR - 128
+def pied(image: ImageDraw.ImageDraw, sources: str, question: str, hauteur: int = HAUTEUR) -> None:
+    y = hauteur - 128
     image.line([78, y, LARGEUR - 78, y], fill=TRAIT, width=2)
     image.text((78, y + 16), question, font=police(24, gras=True), fill=BLEU)
     image.text((78, y + 54), sources, font=mono(17), fill=MUTED)
@@ -466,6 +471,212 @@ def planche_decisions() -> Path:
     return chemin
 
 
+def lire_registre() -> dict:
+    """Lit les décisions dans `docs/rd/cadrages.toml`, là où le contrôle les lit.
+
+    Une planche qui répond se lit à la même source que le contrôle : sinon la
+    pièce du dossier et la CI peuvent se contredire, et c'est l'image qu'on croit.
+    """
+    chemin = RACINE / "docs" / "rd" / "cadrages.toml"
+    try:
+        import tomllib
+
+        with chemin.open("rb") as flux:
+            return tomllib.load(flux)
+    except (OSError, ModuleNotFoundError, ValueError) as erreur:  # pragma: no cover
+        print(
+            f"Planches : le registre {chemin} est illisible ({erreur}). "
+            "La planche des réponses ne sera pas dessinée — jamais une réponse inventée.",
+            file=sys.stderr,
+        )
+        return {}
+
+
+def section(dessin, x: int, y: int, titre: str, corps: str, largeur: int) -> int:
+    dessin.text((x, y), titre, font=police(17, gras=True), fill=NAVY)
+    y += 27
+    y = paragraphe(dessin, x, y, corps, police(18), largeur, couleur=ENCRE, interligne=1.3)
+    return y + 14
+
+
+def planche_reponses() -> Path | None:
+    """La réponse aux trois cas, relue dans le registre — et non recopiée."""
+    registre = lire_registre()
+    if not registre:
+        return None
+
+    rangees = registre.get("rangees") or {}
+    motifs = rangees.get("motifs") or {}
+    glyphe = registre.get("glyphe_decoratif") or {}
+    ecarts = registre.get("divergences_colonnes") or {}
+
+    trouves = {
+        "A": bool(motifs),
+        "B": bool(glyphe.get("decision")),
+        "C": bool(ecarts.get("decision")),
+    }
+    conditions = {
+        "A": str(rangees.get("condition_de_revision") or ""),
+        "B": str(glyphe.get("condition_de_revision") or ""),
+        "C": str(ecarts.get("condition_de_revision") or ""),
+    }
+
+    # --- C : la liste des écarts, lue dans le registre, pas recopiée à la main ---
+    import re
+
+    releves = re.findall(r"`(\.[\w-]+)` \((\d+,\d+) px", str(ecarts.get("resultat", "")))
+    liste_ecarts = " · ".join(f"{nom} {valeur} px" for nom, valeur in releves) or "liste illisible"
+
+    cartes = []
+
+    if motifs:
+        cartes.append(
+            (
+                "A",
+                trouves["A"],
+                "Les vides de dernière rangée",
+                f"{len(motifs)} couples page/grille laissent un vide et portent chacun leur motif "
+                "écrit : le vide reste, il est assumé, il n'est pas oublié.",
+                "`cadrages.py --orphelins` imprime « SANS MOTIF ÉCRIT » pour tout vide qui n'en a "
+                "pas, avec ses cadrages, son vide maximal et son cadrage : un vide assumé sans "
+                "motif serait une dérogation en blanc.",
+                conditions["A"] or "Aucune condition de révision n'est écrite dans le registre.",
+            )
+        )
+    else:
+        cartes.append(
+            ("A", False, "Les vides de dernière rangée", "Aucun motif écrit : le vide n'est pas assumé.",
+             "Le contrôle le nomme à chaque CI.", "Aucune condition de révision n'est écrite.")
+        )
+
+    if glyphe:
+        cartes.append(
+            (
+                "B",
+                trouves["B"],
+                "Le glyphe ✦ du jeu « Les Mondes »",
+                f"{glyphe.get('selecteur', 'span.adventure-map-mark')} reste "
+                f"{glyphe.get('valeur', '#d29236')} à "
+                f"{float(glyphe.get('rapport_sur_blanc', 0)):.2f}".replace(".", ",")
+                + ":1 — assumé tel quel, pas foncé.",
+                "Décoratif déclaré (`aria-hidden`) : hors du champ de 1.4.11, qui ne vise que ce qui "
+                "est nécessaire à la compréhension. Un cas de `test_cadrages.py` refuse la suite si "
+                "la déclaration disparaît ou si la couleur change.",
+                conditions["B"] or "Aucune condition de révision n'est écrite dans le registre.",
+            )
+        )
+    else:
+        cartes.append(
+            ("B", False, "Le glyphe ✦ du jeu « Les Mondes »", "Aucune décision n'est écrite.",
+             "Le contrôle n'a rien à appliquer.", "Aucune condition de révision n'est écrite.")
+        )
+
+    if ecarts:
+        cartes.append(
+            (
+                "C",
+                trouves["C"],
+                "Les colonnes qui s'écartent sous le pixel",
+                f"{len(releves)} divergences, toutes sous "
+                f"{str(ecarts.get('seuil_px', 1.0)).replace('.', ',')} px — comptées comme avant, "
+                f"aucune absorbée : {liste_ecarts}.",
+                "Elles restent nommées et chiffrées, et l'annotation de CI les imprime : absorber un "
+                "écart le rendrait indistinguable d'un écart absent, or c'est ce désaccord que le "
+                "contrôle est là pour voir.",
+                conditions["C"] or "Aucune condition de révision n'est écrite dans le registre.",
+            )
+        )
+    else:
+        cartes.append(
+            ("C", False, "Les colonnes qui s'écartent sous le pixel", "Aucune décision n'est écrite.",
+             "Le contrôle n'a rien à appliquer.", "Aucune condition de révision n'est écrite.")
+        )
+
+    # La carte la plus haute décide de la hauteur de la planche : une image
+    # garde la taille de son contenu, pas celle d'un cadre vide.
+    y, largeur_carte, interligne = 150, 600, int(20 * 1.3)
+    largeur_texte_carte = largeur_carte - 52
+
+    def hauteur_carte(titre_carte, corps) -> int:
+        hauteur = 86 + len(envelopper(police(25, gras=True), titre_carte, largeur_texte_carte)) * 32 + 16
+        for contenu in corps:
+            hauteur += 27 + len(envelopper(police(20), contenu, largeur_texte_carte)) * interligne + 14
+        return hauteur
+
+    hauteur = max(hauteur_carte(titre_carte, (reponse, effet, revision))
+                  for _, _, titre_carte, reponse, effet, revision in cartes) + 44
+    hauteur_image = y + hauteur + 26 + 62 + 44 + 128
+
+    image = Image.new("RGB", (LARGEUR, hauteur_image), BLANC)
+    dessin = ImageDraw.Draw(image)
+    bandeau(
+        dessin,
+        "Trois décisions qui ont leur réponse — et ce que le code en a fait",
+        "M.R.S.C. — R&D · 4 novembre 2026 · A2 · B1 · C1, écrits dans docs/rd/cadrages.toml, relus ici",
+    )
+
+    for index, (lettre, tranchee, titre_carte, reponse, effet, revision) in enumerate(cartes):
+        x = 78 + index * (largeur_carte + 22)
+        cadre(dessin, x, y, largeur_carte, hauteur)
+        dessin.text((x + 26, y + 20), lettre, font=police(44, gras=True), fill=BLEU)
+        fond, encre = (VERT_PALE, VERT) if tranchee else ((253, 235, 236), ROUGE)
+        pastille(dessin, x + 96, y + 30, "TRANCHÉE" if tranchee else "EN ATTENTE", police(17, gras=True), fond, encre)
+        yy = y + 86
+        for ligne in envelopper(police(25, gras=True), titre_carte, largeur_texte_carte):
+            dessin.text((x + 26, yy), ligne, font=police(25, gras=True), fill=ENCRE)
+            yy += 32
+        yy += 16
+        yy = section(dessin, x + 26, yy, "LA RÉPONSE", reponse, largeur_texte_carte)
+        yy = section(dessin, x + 26, yy, "CE QUE LE CODE EN FAIT", effet, largeur_texte_carte)
+        section(dessin, x + 26, yy, "ELLE SERAIT RÉVISÉE SI", revision, largeur_texte_carte)
+
+    # Ce qui reste ouvert, dit sur l'image même : rien, ou le nom de ce qui manque.
+    ouvertes = [lettre for lettre, tranchee, *_ in cartes if not tranchee]
+    sans_cond = [lettre for lettre, condition in conditions.items() if not condition]
+    if ouvertes:
+        bilan = ("Reste ouvert : " + ", ".join(ouvertes)
+                 + " — la décision n'est pas écrite dans le registre, et cette image ne la remplace pas.")
+        fond_bilan, texte_bilan = (253, 235, 236), ROUGE
+    elif sans_cond:
+        bilan = ("Reste ouvert, faute de condition de révision : " + ", ".join(sans_cond)
+                 + " — une décision qu'on ne sait pas quand réviser n'est pas tenue.")
+        fond_bilan, texte_bilan = (253, 235, 236), ROUGE
+    else:
+        bilan = ("Rien ne reste ouvert sur ces trois cas : chaque réponse est écrite dans le registre, "
+                 "et chacune porte la condition qui la réviserait.")
+        fond_bilan, texte_bilan = VERT_PALE, VERT
+    haut_bilan = y + hauteur + 26
+    cadre(dessin, 78, haut_bilan, LARGEUR - 156, 62, fond=fond_bilan, bord=fond_bilan)
+    dessin.text((104, haut_bilan + 19), bilan, font=police(21, gras=True), fill=texte_bilan)
+
+    pied(
+        dessin,
+        "docs/rd/cadrages.toml [rangees.motifs] · [glyphe_decoratif] · [divergences_colonnes] · docs/rd/journal.md",
+        "Cette planche lit les décisions, elle ne les prend pas : un verdict change dans le registre, et l’image suit.",
+        hauteur=hauteur_image,
+    )
+    chemin = SORTIE / "Planche-4-les-trois-reponses.png"
+    image.save(chemin)
+
+    manquantes = [lettre for lettre, tranchee, *_ in cartes if not tranchee]
+    if manquantes:
+        print(
+            "Planches : réponse absente du registre pour "
+            + ", ".join(manquantes)
+            + " — la planche le montre au lieu de le taire.",
+            file=sys.stderr,
+        )
+    sans_condition = [lettre for lettre, condition in conditions.items() if not condition]
+    if sans_condition:
+        print(
+            "Planches : décision écrite sans condition de révision pour "
+            + ", ".join(sans_condition)
+            + " — une décision qu'on ne sait pas quand réviser n'est pas une décision tenue.",
+            file=sys.stderr,
+        )
+    return chemin
+
+
 def principal(arguments: list[str] | None = None) -> int:
     global SORTIE
     analyseur = argparse.ArgumentParser(description="Dessine les planches visuelles de la R&D.")
@@ -478,10 +689,14 @@ def principal(arguments: list[str] | None = None) -> int:
     options = analyseur.parse_args(arguments)
     SORTIE = options.sortie
     SORTIE.mkdir(parents=True, exist_ok=True)
-    for fabrique in (planche_muted, planche_degrades, planche_decisions):
-        print(fabrique())
+    compte = 0
+    for fabrique in (planche_muted, planche_degrades, planche_decisions, planche_reponses):
+        chemin = fabrique()
+        if chemin is not None:
+            compte += 1
+            print(chemin)
     print(
-        f"Planches : 3 fichier(s) écrit(s) dans {SORTIE}. Dessin mesuré (WCAG 2.2), "
+        f"Planches : {compte} fichier(s) écrit(s) dans {SORTIE}. Dessin mesuré (WCAG 2.2), "
         "pas une capture de navigateur.",
         file=sys.stderr,
     )

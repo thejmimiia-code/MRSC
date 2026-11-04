@@ -1288,6 +1288,18 @@ suite = "Chiffrer ce que coûte l'absence de zone pour les formes `ellipse` et l
 initiatives = ["coherence-textes-publics", "optimisation-du-site", "ecouter-la-page"]
 
 [[avancee]]
+id = "une-planche-qui-repond-lit-le-registre"
+date = 2026-11-04
+titre = "Une planche qui répond lit le registre — sinon l'image et le contrôle finissent par se contredire"
+constat = "Le 4 novembre 2026, les trois planches déposées au Drive ont été rouvertes pour la personne responsable, et la question est revenue : « il semblerait que ce soit exactement les mêmes demandes ». Elle avait raison, et ce n'était pas une question de contenu : **A2, B1 et C1 étaient tranchées**, écrites dans le registre, appliquées par le code, vertes en CI. C'était la pièce qui mentait — `Planche-3-decisions-en-attente.png` annonce « Trois décisions qui t'attendent — rien n'est tranché ici » —, et une image dans un dossier de preuves qui pose une question déjà répondue fait croire qu'on redemande."
+changement = "Une quatrième planche, **`Planche-4-les-trois-reponses.png`**, reprend les trois cas avec leur réponse, ce que le code en fait et la condition qui les réviserait. Elle ne recopie rien : `planches-rd.py` **lit** `docs/rd/cadrages.toml` — les seize motifs, le sélecteur, la couleur et le rapport du glyphe, la liste et le seuil des écarts — au lieu de les écrire en dur. Un verdict retiré du registre la fait basculer en « EN ATTENTE » ; une décision sans condition de révision est nommée « RESTE OUVERT, faute de condition de révision » ; un registre illisible ne produit aucune planche et sort en code 2 plutôt que d'inventer une réponse. La planche 3 reste **telle qu'elle a été montrée**, et ses empreintes comme celles des planches 1 et 2 sont **inchangées** (`e409eb67…`, `dbe2228…`, `5518357…`) : une pièce datée ne se réécrit pas après coup, elle reçoit sa réponse à côté. La lecture a révélé une asymétrie : B1 et C1 portaient une `condition_de_revision` écrite, **A2 non** — elle a été écrite dans `[rangees]` comme conséquence mécanique (un motif vaut pour un nombre de cartes et un nombre de colonnes mesurés), pas comme une décision nouvelle."
+preuves = ["outils/planches-rd.py", "docs/rd/cadrages.toml", "docs/rd/journal.md", "docs/rd/inventaire-controles.md"]
+controle = "python3 outils/planches-rd.py --sortie /tmp/planches && md5sum /tmp/planches/*.png && python3 outils/test_cadrages.py"
+limite = "La planche des réponses ne peut pas tourner en CI : elle exige Pillow et les polices DejaVu, absents de l'image de vérification, et elle reste donc `hors-portee` dans l'inventaire. Sa reproductibilité est vérifiée à la main, deux exécutions donnant la même empreinte, et ses nombres viennent du registre — mais rien n'empêche mécaniquement un futur lot de recopier une valeur en dur dans le dessin. Elle ne juge pas non plus la qualité de la décision : elle en montre l'état."
+suite = "Faire lire au dessin la liste nominative des seize motifs plutôt que leur seul nombre, pour qu'un couple ajouté au registre apparaisse sur la planche sans retoucher le code."
+initiatives = ["coherence-textes-publics", "optimisation-du-site"]
+
+[[avancee]]
 id = "un-vide-assume-porte-son-motif"
 date = 2026-11-04
 titre = "Un vide assumé porte son motif écrit — et un vide sans motif n'est pas assumé"

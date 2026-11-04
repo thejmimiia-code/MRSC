@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 84 |
+| Avancées consignées | 85 |
 | Période couverte | du 2026-10-20 au 2026-11-04 |
-| Contrôles exécutables cités | 97 |
+| Contrôles exécutables cités | 99 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -2013,6 +2013,29 @@ Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
 **Limite — ce que cela ne prouve pas.** Les seize motifs décrivent ce que la mesure permet de dire : le nombre de cartes vient du registre des grilles, le nombre de colonnes du relevé. Pour `.link-grid`, qui déclare de 1 à 7 liens, le motif couvre la plage entière et pas un cas. Deux couples portent un motif qui pointe un **désaccord** entre registre et cascade plutôt qu'un choix de dessin : c'est un fait relevé, pas une justification — si la cascade changeait, ces deux motifs seraient à réécrire. Les motifs s'appuient sur le nombre de cartes du registre des grilles ; pour `.link-grid`, qui déclare de 1 à 7 liens, le motif couvre la plage entière et pas un cas. Pour B1, la décision ne tient que si le glyphe reste sans signification : le contrôle vérifie `aria-hidden`, pas l'intention — un futur lot qui lui donnerait un sens devrait relire l'entrée. Pour C1, quatre divergences font quatre lignes de bruit par rapport ; au-delà de six, la décision sera réexaminée.
 
 **Suite.** Écrire les sept motifs restants sur la liste entière du résumé d'étape, puis vérifier que l'annotation et le résumé ne divergent jamais : deux listes qui se contredisent valent moins qu'une seule.
+
+Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
+
+### `une-planche-qui-repond-lit-le-registre` — Une planche qui répond lit le registre — sinon l'image et le contrôle finissent par se contredire
+
+*Consignée le 2026-11-04.*
+
+**Constat.** Le 4 novembre 2026, les trois planches déposées au Drive ont été rouvertes pour la personne responsable, et la question est revenue : « il semblerait que ce soit exactement les mêmes demandes ». Elle avait raison, et ce n'était pas une question de contenu : **A2, B1 et C1 étaient tranchées**, écrites dans le registre, appliquées par le code, vertes en CI. C'était la pièce qui mentait — `Planche-3-decisions-en-attente.png` annonce « Trois décisions qui t'attendent — rien n'est tranché ici » —, et une image dans un dossier de preuves qui pose une question déjà répondue fait croire qu'on redemande.
+
+**Ce que cela change.** Une quatrième planche, **`Planche-4-les-trois-reponses.png`**, reprend les trois cas avec leur réponse, ce que le code en fait et la condition qui les réviserait. Elle ne recopie rien : `planches-rd.py` **lit** `docs/rd/cadrages.toml` — les seize motifs, le sélecteur, la couleur et le rapport du glyphe, la liste et le seuil des écarts — au lieu de les écrire en dur. Un verdict retiré du registre la fait basculer en « EN ATTENTE » ; une décision sans condition de révision est nommée « RESTE OUVERT, faute de condition de révision » ; un registre illisible ne produit aucune planche et sort en code 2 plutôt que d'inventer une réponse. La planche 3 reste **telle qu'elle a été montrée**, et ses empreintes comme celles des planches 1 et 2 sont **inchangées** (`e409eb67…`, `dbe2228…`, `5518357…`) : une pièce datée ne se réécrit pas après coup, elle reçoit sa réponse à côté. La lecture a révélé une asymétrie : B1 et C1 portaient une `condition_de_revision` écrite, **A2 non** — elle a été écrite dans `[rangees]` comme conséquence mécanique (un motif vaut pour un nombre de cartes et un nombre de colonnes mesurés), pas comme une décision nouvelle.
+
+**Preuves dans le dépôt :**
+
+- `outils/planches-rd.py`
+- `docs/rd/cadrages.toml`
+- `docs/rd/journal.md`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `python3 outils/planches-rd.py --sortie /tmp/planches && md5sum /tmp/planches/*.png && python3 outils/test_cadrages.py`
+
+**Limite — ce que cela ne prouve pas.** La planche des réponses ne peut pas tourner en CI : elle exige Pillow et les polices DejaVu, absents de l'image de vérification, et elle reste donc `hors-portee` dans l'inventaire. Sa reproductibilité est vérifiée à la main, deux exécutions donnant la même empreinte, et ses nombres viennent du registre — mais rien n'empêche mécaniquement un futur lot de recopier une valeur en dur dans le dessin. Elle ne juge pas non plus la qualité de la décision : elle en montre l'état.
+
+**Suite.** Faire lire au dessin la liste nominative des seize motifs plutôt que leur seul nombre, pour qu'un couple ajouté au registre apparaisse sur la planche sans retoucher le code.
 
 Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 
