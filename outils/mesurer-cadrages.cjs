@@ -384,16 +384,18 @@ function mesurer(selecteurs) {
     // fait différent, et il porte son propre motif.
     let cx;
     let cy;
+    let implicite = false;
     if (centre) {
       cx = boite.left + (Number(centre[1]) / 100) * boite.width;
       cy = boite.top + (Number(centre[2]) / 100) * boite.height;
     } else if (!/\bat\b/.test(texteEntete)) {
       cx = boite.left + boite.width / 2;
       cy = boite.top + boite.height / 2;
+      implicite = true;
     } else {
-      return { zone: [0, 1], motif: 'centre-non-lu' };
+      return { zone: [0, 1], motif: 'centre-non-lu', implicite: false };
     }
-    if (!(rayon > 0)) return { zone: [0, 1], motif: 'rayon-absent-ou-en-pourcentage' };
+    if (!(rayon > 0)) return { zone: [0, 1], motif: 'rayon-absent-ou-en-pourcentage', implicite };
     let mini = Infinity;
     let maxi = -Infinity;
     for (const [x, y] of coins(texte)) {
@@ -401,7 +403,7 @@ function mesurer(selecteurs) {
       mini = Math.min(mini, d);
       maxi = Math.max(maxi, d);
     }
-    return { zone: portion(mini, maxi), motif: null };
+    return { zone: portion(mini, maxi), motif: null, implicite };
   };
   // Une couche : ses arrêts (couleur + position) et la portion de l'axe que le
   // texte recouvre. `position: null` quand le CSS ne l'écrit pas — c'est le
@@ -445,7 +447,14 @@ function mesurer(selecteurs) {
     }
     if (radial) {
       const lue = zoneRadiale(entete, boite, texte, rayon);
-      return { type: 'radial', zone: lue.zone, situe: lue.motif === null, motif: lue.motif, arrets };
+      return {
+        type: 'radial',
+        zone: lue.zone,
+        situe: lue.motif === null,
+        motif: lue.motif,
+        centre_implicite: lue.implicite === true,
+        arrets,
+      };
     }
     return { type: 'lineaire', zone: zoneLineaire(angleDuDegrade(entete), boite, texte), situe: true, motif: null, arrets };
   };
@@ -462,6 +471,7 @@ function mesurer(selecteurs) {
     // couverture. `candidats_degrade` est plafonné, ces compteurs non.
     degrades_radiaux: 0,
     degrades_radiaux_non_situes: 0,
+    degrades_centre_implicite: 0,
     couches_radiales_non_situees: {},
     candidats_degrade: [],
     sans_texte: 0,
@@ -553,6 +563,9 @@ function mesurer(selecteurs) {
       const radiales = couches.filter((c) => c.type === 'radial');
       if (radiales.length) {
         contraste.degrades_radiaux += 1;
+        if (radiales.some((c) => c.centre_implicite === true)) {
+          contraste.degrades_centre_implicite += 1;
+        }
         const nonSituees = radiales.filter((c) => c.situe === false);
         if (nonSituees.length) {
           contraste.degrades_radiaux_non_situes += 1;

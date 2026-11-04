@@ -249,15 +249,24 @@ class TestContrasteDegrade(unittest.TestCase):
             True,
             f"un halo dont le centre est le centre par défaut est situable — couche relevée {couche}",
         )
-        self.assertLess(
-            couche["zone"][0],
-            0.1,
-            f"le texte est au centre du halo, la zone doit partir de zéro — zone {couche['zone']}",
-        )
+        debut, fin = couche["zone"]
+        self.assertGreaterEqual(debut, 0.0)
+        self.assertLessEqual(fin, 1.0)
         self.assertGreater(
-            couche["zone"][1],
-            0.0,
-            "la zone d'un halo de 100 px ne doit pas être réduite à un point",
+            fin,
+            0.3,
+            f"le texte est au milieu du halo : la zone doit y descendre, et non couvrir la plage — zone {couche['zone']}",
+        )
+        self.assertLess(debut, 0.9, f"la zone reste dans le halo, zone {couche['zone']}")
+        # Et cela change le verdict : la plage entière, elle, contient le noir.
+        entier = dict(defaut)
+        entier["couches"] = [dict(couche, zone=[0, 1])]
+        pire_situe, _ = self.cadrages.pire_contraste_degrade(defaut)
+        pire_entier, _ = self.cadrages.pire_contraste_degrade(entier)
+        self.assertGreater(
+            pire_situe,
+            pire_entier,
+            f"situer la zone doit rendre le verdict plus juste : {pire_situe} contre {pire_entier}",
         )
 
     def test_un_halo_sans_rayon_est_compte_comme_non_situe(self) -> None:

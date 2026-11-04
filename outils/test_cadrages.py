@@ -721,6 +721,7 @@ class TestMajorantRadial(unittest.TestCase):
             "degrades": 20,
             "degrades_radiaux": 8,
             "degrades_radiaux_non_situes": 3,
+            "degrades_centre_implicite": 12,
             "couches_radiales_non_situees": {"rayon-absent-ou-en-pourcentage": 3},
             "candidats_degrade": [self.candidat(situe=False)],
         }
@@ -735,6 +736,11 @@ class TestMajorantRadial(unittest.TestCase):
         self.assertEqual(bilan["textes_radiaux"], 8)
         self.assertEqual(bilan["textes_non_situes"], 3)
         self.assertEqual(bilan["couches_par_motif"], {"rayon-absent-ou-en-pourcentage": 3})
+        self.assertEqual(
+            bilan["textes_centre_implicite"],
+            12,
+            "le centre par défaut, désormais lu, est compté à part de ce qui reste non situé",
+        )
         self.assertEqual(bilan["echantillon"], 1)
         self.assertEqual(bilan["verdicts_en_jeu"], 1, "le texte doux serait conforme sans la couche ambiguë")
         self.assertIsNotNone(bilan["pire_ecart"])
@@ -757,6 +763,19 @@ class TestMajorantRadial(unittest.TestCase):
         bilan = self.m.majorant_radial({"mesures": [self.mesure(contraste)]})
         self.assertFalse(bilan["lisible"])
         self.assertIn("compteurs radiaux", bilan["raison"])
+
+    def test_un_releve_sans_le_compteur_du_centre_implicite_reste_lisible(self) -> None:
+        """Le compteur du centre implicite est un ajout : son absence vaut zéro, pas un refus."""
+        contraste = {
+            "degrades": 20,
+            "degrades_radiaux": 8,
+            "degrades_radiaux_non_situes": 0,
+            "couches_radiales_non_situees": {},
+            "candidats_degrade": [],
+        }
+        bilan = self.m.majorant_radial({"mesures": [self.mesure(contraste)]})
+        self.assertTrue(bilan["lisible"])
+        self.assertEqual(bilan["textes_centre_implicite"], 0)
 
     def test_un_rapport_sans_releve_est_refuse(self) -> None:
         bilan = self.m.majorant_radial({"mesures": []})

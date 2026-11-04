@@ -680,6 +680,7 @@ def majorant_radial(rapport: dict) -> dict:
         "textes_degrades": 0,
         "textes_radiaux": 0,
         "textes_non_situes": 0,
+        "textes_centre_implicite": 0,
         "couches_par_motif": {},
         "echantillon": 0,
         "deplaces": 0,
@@ -692,6 +693,7 @@ def majorant_radial(rapport: dict) -> dict:
         bilan["textes_degrades"] += int(contraste.get("degrades") or 0)
         bilan["textes_radiaux"] += int(contraste.get("degrades_radiaux") or 0)
         bilan["textes_non_situes"] += int(contraste.get("degrades_radiaux_non_situes") or 0)
+        bilan["textes_centre_implicite"] += int(contraste.get("degrades_centre_implicite") or 0)
         for motif, compte in (contraste.get("couches_radiales_non_situees") or {}).items():
             bilan["couches_par_motif"][motif] = bilan["couches_par_motif"].get(motif, 0) + int(compte)
         for candidat in contraste.get("candidats_degrade") or []:
@@ -806,6 +808,11 @@ def principal(arguments: list[str] | None = None) -> int:
             f"{motif} ({compte})" for motif, compte in sorted(bilan["couches_par_motif"].items())
         )
         print(f"  - motifs des couches non situées : {motifs or 'aucun motif écrit'}")
+        if bilan["textes_centre_implicite"]:
+            print(
+                f"  - {bilan['textes_centre_implicite']} texte(s) portent un halo dont le centre est la "
+                "valeur par défaut, que Chromium n'écrit pas : situés depuis le 4 novembre 2026."
+            )
         print(
             f"  - sur l'échantillon joint, {bilan['echantillon']} texte(s) portent une couche "
             f"non située ; {bilan['deplaces']} voient leur pire rapport changer si on la retire, "
