@@ -137,6 +137,23 @@ non un silence. L'interpolation suivie est celle de sRGB. La boîte du dégradé
 prise au `border-box` : une bordure épaisse décalerait l'axe de quelques pixels.
 """
 resultat_degrade = """Relevé du 3 novembre 2026, sur les 1 060 combinaisons : **17 500 textes** posés sur un dégradé, jugés un par un contre la portion de plage qui les couvre. Le relevé compte aussi **385 810 textes** sur fond uni, 3 460 décoratifs écartés et 4 240 textes volontairement masqués ; aucun texte sur fond d'image, car le site n'en pose aucun derrière du texte. Le pire rapport mesuré sur un dégradé est **4,782:1** ; aucun texte n'est sous son seuil. Avec l'ancienne valeur du jeton `--muted` (`#647086`), le même relevé refuserait **732 textes** répartis sur **cinq** sélecteurs (le pire : `p.page-lead`, à **4,444:1**) — le jeton est donc bien la cause, et c'est en le mesurant qu'on l'a su, pas en le supposant."""
+decision_humaine_du_4_novembre = """
+Tranchée le 4 novembre 2026 par la personne responsable, sur pièce visuelle et
+non sur un tableau : « de ce que je vois, c'est bon ». La planche
+`Planche-1-jeton-muted-avant-apres.png` (Drive de passation, dossier 46, fichier
+`14xeIsVfZmMR1bk54Q-cROHHGdft3SRdU`) montre le même paragraphe du site sur les
+quatre fonds réellement posés derrière du texte secondaire — crème
+`#f8f1df`, bleu pâle `rgb(237, 242, 250)`, vert pâle `#eff5e9`, blanc — avec,
+pour chacun, l’ancienne et la nouvelle valeur. Les rapports y sont ceux du
+calcul, pas d’une capture : 4,434 → 4,771 · 4,444 → 4,782 · 4,498 → 4,840 ·
+4,996 → 5,375. La teinte est conservée (même angle de gris-bleu, clarté −4 %) :
+la planche ne sert pas à choisir une couleur, elle sert à vérifier qu’un
+assombrissement de 4 % ne change pas la lecture du site. Ce qu’elle ne prouve
+pas : l’accord porte sur une **reconstitution mesurée**, pas sur une capture du
+navigateur, et aucune personne extérieure n’a relu la page. La planche est
+refaite à l’identique par `outils/planches-rd.py` (fichiers identiques au
+bit près, vérifié par empreinte MD5 le 4 novembre 2026).
+"""
 
 [focus]
 # Le focus au clavier se mesure comme le texte : même navigateur, même méthode,

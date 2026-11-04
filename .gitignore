@@ -38,3 +38,7 @@ docs/rd/statuts-animation/*.png
 
 # Inventaire intégral ancien sauvegardé hors dépôt ; seul le sous-ensemble associatif reste.
 /docs/rd/statuts-animation/ARCHIVE-planches-2026-10.sha256
+
+# Planches visuelles de la R&D : pièces de passation (Drive), refaites par
+# `outils/planches-rd.py`. Une image dans Git ne prouverait rien de plus.
+/build/

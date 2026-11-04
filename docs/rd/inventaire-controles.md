@@ -25,6 +25,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/attente-navigateur.cjs` | Une attente de navigateur qui expire nomme sa condition | `test_attente_navigateur.cjs` (4 cas : succès et arguments, délai dépassé nommé avec délai et cause, erreur qui n'est pas un délai, condition tronquée) | `banc` |
 | `outils/auditer-selecteurs-morts.py` | Relève les classes de la feuille qu'aucune page, aucun script, aucun générateur n'ouvre | `test_auditer_selecteurs_morts.py` (8 cas dans une vraie copie : classe sans instance nommée, classe présente dans une page tolérée, classe construite à l'exécution laissée indécidable, nom cité seulement dans `docs/` encore mort, commentaire qui ne fait pas une instance, feuille absente et corpus vidé en code 2, copie intacte sans faute) | `banc` |
 | `outils/banc_mutations.py` | Aides partagées des bancs de mutation | Aucune : module d'aide, sans sortie | `hors-portee` |
+| `outils/planches-rd.py` | Dessine les planches visuelles de la R&D — les couleurs, tailles et rapports réels du site, recalculés par la formule WCAG 2.2 — pour qu’une décision prise sur une image laisse une image reproductible | Aucune : ce n’est pas un contrôle, c’est une pièce à regarder. Les trois fichiers produits le 4 novembre 2026 sont identiques au bit près à ceux déposés dans le Drive de passation (empreintes MD5 comparées) ; sans Pillow ou sans polices DejaVu, il sort en code 2 et le dit | `hors-portee` |
 | `outils/compter-paliers.py` | Compte les paliers d'affichage et refuse ceux que personne n'a déclarés | `test_paliers_affichage.py` (20 cas : palier neuf, dette qui monte, dette qui descend, raison vide, courte ou en attente, décision inventée, deux écritures de la même condition, écriture non canonique, inscription orpheline, trois sources illisibles, écriture à travers un lien refusée, et la garde de copie) | `banc` |
 | `outils/confronter-sources.py` | Prototype de confrontation d'affirmations aux sources | `test_confronter_sources.py` (9 tests) | `faute-en-memoire` |
 | `outils/construire-apprentissages.py` | Génère les fiches et le catalogue | `--verifier` plus `test_reproductibilite_artefacts.py` | `hors-portee` |
@@ -99,7 +100,7 @@ celui-ci ne le peut plus.
 | `test` | 6 | Un test existe, mais il n'injecte aucune faute. |
 | `test-en-soi` | 1 | Le fichier **est** le test : `test_focus.py`, lancé par le job `qualite`. S'il cesse de mordre, seule sa lecture le dit — c'est pourquoi la mesure elle-même a son banc dans `graphismes`. |
 | `aucun-test` | 0 | Plus aucun : c'était du travail nommé, il est fait. |
-| `hors-portee` | 10 | Générateurs, aides partagées, serveur local : ce ne sont pas des contrôles. Ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`. |
+| `hors-portee` | 11 | Générateurs, aides partagées, serveur local : ce ne sont pas des contrôles. Ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`. |
 
 Autrement dit : **50 contrôles sur 51** s'appuient sur un test capable d'échouer.
 
