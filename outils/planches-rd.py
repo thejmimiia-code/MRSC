@@ -15,6 +15,9 @@ jamais se faire passer pour une capture.
 
 Les fichiers produits sont destinés au Drive de passation, pas au dépôt : une
 image de 150 Ko dans Git ne prouverait rien de plus que le script qui la refait.
+Leur dossier, écrit ici pour qu'il se retrouve sans fouiller le Drive :
+`MRSC — ESPACE PRIVÉ ISOLÉ` → `06 — Planches R&D du site (preuves visuelles)`
+(`1Ne-139sA65TZg_oDXq2ixWEy2hh7Wy5N`), et nulle part ailleurs.
 
 Usage :
     python3 outils/planches-rd.py                 # écrit dans build/planches-rd
