@@ -681,6 +681,17 @@ jobs:
             | cut -c1-900 | while IFS= read -r ligne; do
             echo "::notice title=Rangées incomplètes::$ligne"
           done
+          # L'annotation est plafonnée : neuf couples sur seize s'y voyaient le
+          # 4 novembre 2026, et sept vides restaient invisibles. Le résumé de
+          # l'étape n'a pas ce plafond — c'est là que la liste entière est
+          # publiée, motifs compris, pour qu'une décision se prenne sur les seize.
+          {
+            echo "### Rangées incomplètes — liste entière"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/graphismes/cadrages/orphelins.log"
+            echo '```'
+          } >>"$GITHUB_STEP_SUMMARY"
           # Ce que le contraste écarte — décoratif déclaré, fond en image — est
           # nommé ici : une exemption qui ne se nomme jamais devient un angle mort.
           python3 outils/cadrages.py --ecartes "$RUNNER_TEMP/graphismes/cadrages/rapport.json" \

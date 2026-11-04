@@ -521,6 +521,24 @@ def pire_contraste_degrade(candidat: dict) -> tuple[float, dict]:
     return round(pire or 0, 3), pire_fond
 
 
+def lire_motifs(chemin: Path | None = None) -> dict[str, str]:
+    """Rend les motifs écrits pour les rangées incomplètes assumées.
+
+    Le 4 novembre 2026, une personne a tranché : une rangée incomplète reste un
+    fait de dessin, mais un vide **assumé** doit porter son motif, écrit dans
+    `docs/rd/cadrages.toml` à côté de son chiffre. Un motif qui n'existe que
+    dans une conversation ne survit pas à la conversation.
+
+    Un registre illisible n'est pas un registre vide : le diagnostic le dit
+    plutôt que de déclarer tous les vides « sans motif ».
+    """
+    chemin = chemin or (RACINE / REGISTRE_CADRAGES)
+    registre = lire_registre(chemin)
+    rangees = registre.get("rangees") or {}
+    motifs = rangees.get("motifs") or {}
+    return {str(cle): str(valeur) for cle, valeur in motifs.items()}
+
+
 def orphelins(plan: dict, rapport: dict) -> tuple[list[dict], list[str]]:
     """Nomme les grilles dont la dernière rangée laisse un vide visible.
 
@@ -530,6 +548,7 @@ def orphelins(plan: dict, rapport: dict) -> tuple[list[dict], list[str]]:
     laisse la décision à une personne. Il rend aussi les grilles dont la rangée
     n'a pas été relevée : un diagnostic incomplet se dit, il ne se tait pas.
     """
+    motifs = lire_motifs()
     mesures = rapport.get("mesures") or []
     index = {(m.get("page"), m.get("layout"), m.get("cran"), m.get("largeur")): m for m in mesures}
     trouvees: dict[tuple[str, str], dict] = {}
@@ -561,6 +580,7 @@ def orphelins(plan: dict, rapport: dict) -> tuple[list[dict], list[str]]:
                     "exemple": None,
                 },
             )
+            entree["motif"] = motifs.get(f"{combinaison['page']} · {selecteur}")
             entree["cadrages"] += 1
             if float(fait.get("manque") or 0) > entree["pire_manque"]:
                 entree["pire_manque"] = float(fait.get("manque") or 0)
@@ -673,11 +693,23 @@ def principal(arguments: list[str] | None = None) -> int:
                 "Rangées : aucune grille ne laisse de vide visible dans les cadrages mesurés "
                 f"— {len(rapport.get('mesures') or [])} relevé(s) lu(s)."
             )
+        sans_motif = []
         for entree in liste:
+            motif = entree.get("motif")
+            if not motif:
+                sans_motif.append(f"{entree['page']} · {entree['selecteur']}")
             print(
                 f"  - {entree['page']} · {entree['selecteur']} : {entree['cadrages']} cadrage(s) "
                 f"avec une dernière rangée incomplète, vide maximal {entree['pire_manque']:.2f} px "
                 f"({entree['exemple']})"
+                + (f" — assumée : {motif}" if motif else " — SANS MOTIF ÉCRIT")
+            )
+        if sans_motif:
+            print(
+                f"  ! {len(sans_motif)} vide(s) sans motif écrit : " + ", ".join(sans_motif[:6])
+                + ("…" if len(sans_motif) > 6 else "")
+                + " — la décision du 4 novembre 2026 demande le motif dans [rangees.motifs].",
+                file=sys.stderr,
             )
         if sans_releve:
             print(

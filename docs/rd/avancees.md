@@ -10,8 +10,8 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 83 |
-| Période couverte | du 2026-10-20 au 2026-11-03 |
+| Avancées consignées | 84 |
+| Période couverte | du 2026-10-20 au 2026-11-04 |
 | Contrôles exécutables cités | 97 |
 | Initiatives du portefeuille concernées | 15 |
 
@@ -1989,6 +1989,32 @@ Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`, `ecoute
 **Suite.** Vérifier la validité des workflows dans les autres dépôts du projet, et étendre la garde aux déclencheurs (`on:`) et aux versions d'actions épinglées, que `verifier-securite.py` couvre en partie.
 
 Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
+
+### `un-vide-assume-porte-son-motif` — Un vide assumé porte son motif écrit — et un vide sans motif n'est pas assumé
+
+*Consignée le 2026-11-04.*
+
+**Constat.** Seize couples page/grille laissent un vide dans leur dernière rangée, et **sept de ces vides étaient invisibles** : l'annotation de CI est plafonnée à douze lignes, donc neuf couples s'y montraient. Un diagnostic qui n'imprime qu'une partie de sa liste ne vaut pas mieux qu'un diagnostic muet — celui qui décide croit avoir tout vu.
+
+**Ce que cela change.** Trois décisions du 4 novembre 2026, prises par une personne sur une planche visuelle, et **rendues exécutoires**. **A2** : le vide reste, et son motif s'écrit dans `docs/rd/cadrages.toml` (`[rangees.motifs]`), à côté de son chiffre ; `--orphelins` lit ces motifs et imprime `SANS MOTIF ÉCRIT` pour tout vide qui n'en a pas — une dérogation en blanc n'est plus comptée comme assumée. Neuf motifs sur seize sont écrits et chiffrés (le plus fort : 85 fiches en six colonnes, 1 176,50 px, arithmétique et non réglable), et la liste entière part désormais dans le **résumé d'étape**, qui n'a pas le plafond de l'annotation. **B1** : le glyphe ✦ de « Les Mondes » reste à 2,66:1 — décoratif déclaré (`aria-hidden`), hors du champ de WCAG 1.4.11 — et un cas de `test_cadrages.py` refuse la suite si la déclaration disparaît ou si la couleur change : la décision a une condition de révision qui se vérifie. **C1** : les quatre écarts de colonnes inférieurs au pixel restent comptés, parce qu'absorber un écart le rendrait indistinguable d'un écart absent.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/cadrages.toml`
+- `outils/cadrages.py`
+- `outils/test_cadrages.py`
+- `.github/workflows/verification.yml`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/journal.md`
+- `outils/planches-rd.py`
+
+**Contrôle qui la maintient :** `python3 outils/cadrages.py --orphelins /tmp/plan.json /tmp/rapport.json && python3 outils/test_cadrages.py`
+
+**Limite — ce que cela ne prouve pas.** Neuf motifs sur seize : les sept autres attendent la liste entière que la CI publiera, et le contrôle les nomme à chaque passage tant qu'ils manquent — c'est un travail nommé, pas un vert. Les motifs s'appuient sur le nombre de cartes du registre des grilles ; pour `.link-grid`, qui déclare de 1 à 7 liens, le motif couvre la plage entière et pas un cas. Pour B1, la décision ne tient que si le glyphe reste sans signification : le contrôle vérifie `aria-hidden`, pas l'intention — un futur lot qui lui donnerait un sens devrait relire l'entrée. Pour C1, quatre divergences font quatre lignes de bruit par rapport ; au-delà de six, la décision sera réexaminée.
+
+**Suite.** Écrire les sept motifs restants sur la liste entière du résumé d'étape, puis vérifier que l'annotation et le résumé ne divergent jamais : deux listes qui se contredisent valent moins qu'une seule.
+
+Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 
 ## 3. Ce que ce registre ne dit pas
 

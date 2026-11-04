@@ -2557,3 +2557,36 @@ celle de la boîte du texte, pas de chaque ligne. Un texte qui déborde de la zo
 claire d'un dégradé reste jugé contre la portion que sa boîte couvre. La capture
 de pixels, qui lèverait cette limite, a été chiffrée à 690 ms par élément : hors
 budget pour 17 500 textes.
+
+## 14. Un vide assumé porte son motif écrit (4 novembre 2026)
+
+Seize couples page/grille laissent un vide dans leur dernière rangée. Le
+diagnostic les chiffrait, l'annotation de CI en montrait **neuf** — elle est
+plafonnée à douze lignes. Sept vides étaient donc invisibles, ce qui n'est pas
+un accord : c'est un silence.
+
+**Décision A2, prise par une personne sur la planche 3 :** le vide reste, et
+**son motif s'écrit** dans `docs/rd/cadrages.toml`, section `[rangees.motifs]`,
+à côté de son chiffre. Exemple, le plus fort :
+
+> `apprendre.html · .learning-catalogue-grid` — 85 fiches déclarées, 6 colonnes
+> au plus à 75 % en Compacte sur 1 440 px : la dernière rangée en porte une,
+> d'où 1 176,50 px libres. Aucun nombre de colonnes ne remplit 85 fiches : 85
+> n'est divisible ni par 2, ni par 4, ni par 6. Le vide est arithmétique, pas un
+> défaut de réglage.
+
+**Ce que la décision change dans le contrôle :** `cadrages.py --orphelins` lit
+ces motifs et n'appelle plus « assumé » un vide qui n'en a pas — il écrit
+`SANS MOTIF ÉCRIT` et nomme les couples concernés sur la sortie d'erreur. Un
+vide assumé sans motif serait une dérogation en blanc.
+
+**Ce qu'elle ne fait pas :** neuf motifs sont écrits sur seize. Les sept autres
+n'étaient pas visibles ; la liste entière part désormais dans le **résumé
+d'étape** de la CI, qui n'a pas de plafond. Tant qu'ils manquent, le contrôle le
+dit à chaque passage — c'est un travail nommé, pas un vert.
+
+**Deux décisions du même jour, pour mémoire :** `B1` — le glyphe `✦` de
+« Les Mondes » reste à 2,66:1, décoratif déclaré (`aria-hidden`), hors du champ
+de WCAG 1.4.11 ; un cas de `test_cadrages.py` refuse la suite si la déclaration
+disparaît. `C1` — les quatre écarts de colonnes inférieurs au pixel restent
+**comptés** : absorber un écart le rendrait indistinguable d'un écart absent.

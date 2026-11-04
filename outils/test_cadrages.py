@@ -28,6 +28,7 @@ Usage :
 from __future__ import annotations
 
 import importlib.util
+import re as _re
 import json
 import sys
 import tempfile
@@ -271,6 +272,35 @@ class TestCadrages(unittest.TestCase):
         # Le diagnostic ne refuse rien : c'est une mesure, pas un verdict.
         self.assertEqual(self.cadrages.controler(plan, rapport), [])
 
+    def test_un_vide_assume_porte_son_motif(self) -> None:
+        """Décision A2 du 4 novembre 2026 : un vide gardé doit porter son motif.
+
+        Le motif est lu dans le registre, pas écrit dans le test : le banc qui
+        cite un document doit le lire. Le cas ci-dessous vérifie les deux sens —
+        un couple qui a un motif, un couple qui n'en a pas.
+        """
+        plan = self.plan({".document-grid": 2})
+        rapport = self.rapport({".document-grid": 2})
+        rapport["mesures"][0]["grilles"][".document-grid"] = {
+            "total": 1,
+            "instances": [
+                {"cartes": 5, "colonnes": 2, "pistes": 2, "rangees": 3, "derniere": 1, "manque": 412.5}
+            ],
+        }
+        trouves, _ = self.cadrages.orphelins(plan, rapport)
+        self.assertEqual(len(trouves), 1)
+        self.assertFalse(trouves[0].get("motif"), "ce couple n'a pas de motif : il doit être signalé")
+
+    def test_les_motifs_du_registre_sont_lus(self) -> None:
+        """Les motifs publiés sont réellement lus, et chacun nomme son vide."""
+        motifs = self.cadrages.lire_motifs()
+        self.assertGreaterEqual(len(motifs), 9, f"seulement {len(motifs)} motif(s) lu(s)")
+        for cle, motif in motifs.items():
+            self.assertIn(" · ", cle, f"clé sans page ni sélecteur : {cle}")
+            self.assertGreater(len(motif), 80, f"motif trop court pour dire quoi que ce soit : {cle}")
+        self.assertIn("apprendre.html · .learning-catalogue-grid", motifs)
+        self.assertIn("1 176,50", motifs["apprendre.html · .learning-catalogue-grid"])
+
     def test_une_rangee_pleine_ne_dit_rien(self) -> None:
         plan = self.plan({".document-grid": 3})
         trouves, sans_releve = self.cadrages.orphelins(plan, self.rapport({".document-grid": 3}))
@@ -284,6 +314,30 @@ class TestCadrages(unittest.TestCase):
         del rapport["mesures"][0]["grilles"]
         _trouves, sans_releve = self.cadrages.orphelins(plan, rapport)
         self.assertEqual(sans_releve, [".document-grid"])
+
+    def test_le_glyphe_decoratif_reste_declaratif(self) -> None:
+        """La décision B1 du 4 novembre 2026 tient tant que le glyphe est décoratif.
+
+        Si `span.adventure-map-mark` cesse d'être `aria-hidden`, ou si sa couleur
+        change, la décision est caduque : le glyphe tombe sous 1.4.11 à 3:1. Ce
+        cas transforme cette condition en refus — une décision qui ne se vérifie
+        pas se périme sans que personne ne s'en aperçoive.
+        """
+        page = (RACINE / "anglais-aventure.html").read_text(encoding="utf-8")
+        marques = _re.findall(r'<span class="adventure-map-mark"[^>]*>', page)
+        self.assertEqual(len(marques), 1, f"{len(marques)} marque(s) trouvée(s) dans anglais-aventure.html")
+        self.assertIn(
+            'aria-hidden="true"',
+            marques[0],
+            "le glyphe n'est plus déclaré décoratif : la décision B1 (2,66:1 assumé) est caduque, "
+            "il relève du seuil 3:1 de WCAG 1.4.11",
+        )
+        feuille = (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8")
+        self.assertIn(
+            ".adventure-map-mark { color: #d29236;",
+            feuille,
+            "la couleur du glyphe a changé : mettre à jour la décision B1 et le rapport mesuré (2,66:1)",
+        )
 
     def test_le_seuil_de_contraste_suit_la_taille_et_la_graisse(self) -> None:
         """4,5:1 pour un petit texte, 3:1 pour un grand, 3:1 pour un gras de 18,66 px."""
