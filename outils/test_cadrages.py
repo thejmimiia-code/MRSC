@@ -28,6 +28,7 @@ Usage :
 from __future__ import annotations
 
 import importlib.util
+import re as _re
 import json
 import sys
 import tempfile
@@ -271,6 +272,40 @@ class TestCadrages(unittest.TestCase):
         # Le diagnostic ne refuse rien : c'est une mesure, pas un verdict.
         self.assertEqual(self.cadrages.controler(plan, rapport), [])
 
+    def test_un_vide_assume_porte_son_motif(self) -> None:
+        """Décision A2 du 4 novembre 2026 : un vide gardé doit porter son motif.
+
+        Le motif est lu dans le registre, pas écrit dans le test : le banc qui
+        cite un document doit le lire. Le cas ci-dessous vérifie les deux sens —
+        un couple qui a un motif, un couple qui n'en a pas.
+        """
+        plan = self.plan({".document-grid": 2})
+        rapport = self.rapport({".document-grid": 2})
+        rapport["mesures"][0]["grilles"][".document-grid"] = {
+            "total": 1,
+            "instances": [
+                {"cartes": 5, "colonnes": 2, "pistes": 2, "rangees": 3, "derniere": 1, "manque": 412.5}
+            ],
+        }
+        trouves, _ = self.cadrages.orphelins(plan, rapport)
+        self.assertEqual(len(trouves), 1)
+        self.assertFalse(trouves[0].get("motif"), "ce couple n'a pas de motif : il doit être signalé")
+
+    def test_les_motifs_du_registre_sont_lus(self) -> None:
+        """Les motifs publiés sont réellement lus, et chacun nomme son vide."""
+        motifs = self.cadrages.lire_motifs()
+        self.assertEqual(
+            len(motifs),
+            16,
+            f"{len(motifs)} motif(s) lu(s) : les seize couples du diagnostic doivent en avoir un "
+            "(décision A2 du 4 novembre 2026)",
+        )
+        for cle, motif in motifs.items():
+            self.assertIn(" · ", cle, f"clé sans page ni sélecteur : {cle}")
+            self.assertGreater(len(motif), 80, f"motif trop court pour dire quoi que ce soit : {cle}")
+        self.assertIn("apprendre.html · .learning-catalogue-grid", motifs)
+        self.assertIn("1 176,50", motifs["apprendre.html · .learning-catalogue-grid"])
+
     def test_une_rangee_pleine_ne_dit_rien(self) -> None:
         plan = self.plan({".document-grid": 3})
         trouves, sans_releve = self.cadrages.orphelins(plan, self.rapport({".document-grid": 3}))
@@ -284,6 +319,30 @@ class TestCadrages(unittest.TestCase):
         del rapport["mesures"][0]["grilles"]
         _trouves, sans_releve = self.cadrages.orphelins(plan, rapport)
         self.assertEqual(sans_releve, [".document-grid"])
+
+    def test_le_glyphe_decoratif_reste_declaratif(self) -> None:
+        """La décision B1 du 4 novembre 2026 tient tant que le glyphe est décoratif.
+
+        Si `span.adventure-map-mark` cesse d'être `aria-hidden`, ou si sa couleur
+        change, la décision est caduque : le glyphe tombe sous 1.4.11 à 3:1. Ce
+        cas transforme cette condition en refus — une décision qui ne se vérifie
+        pas se périme sans que personne ne s'en aperçoive.
+        """
+        page = (RACINE / "anglais-aventure.html").read_text(encoding="utf-8")
+        marques = _re.findall(r'<span class="adventure-map-mark"[^>]*>', page)
+        self.assertEqual(len(marques), 1, f"{len(marques)} marque(s) trouvée(s) dans anglais-aventure.html")
+        self.assertIn(
+            'aria-hidden="true"',
+            marques[0],
+            "le glyphe n'est plus déclaré décoratif : la décision B1 (2,66:1 assumé) est caduque, "
+            "il relève du seuil 3:1 de WCAG 1.4.11",
+        )
+        feuille = (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8")
+        self.assertIn(
+            ".adventure-map-mark { color: #d29236;",
+            feuille,
+            "la couleur du glyphe a changé : mettre à jour la décision B1 et le rapport mesuré (2,66:1)",
+        )
 
     def test_le_seuil_de_contraste_suit_la_taille_et_la_graisse(self) -> None:
         """4,5:1 pour un petit texte, 3:1 pour un grand, 3:1 pour un gras de 18,66 px."""
@@ -454,6 +513,165 @@ class TestCadrages(unittest.TestCase):
         self.assertEqual(sorted(dimensions["largeur"]), sorted(str(w) for w in self.cadrages.LARGEURS))
         self.assertEqual(sorted(dimensions["page"]), sorted(self.cadrages.PAGES))
         self.assertEqual(float(registre["releve"]["tolerance_px"]), 0.5)
+
+
+class TestDegrade(unittest.TestCase):
+    """Le contraste d'un texte posé sur un dégradé : une plage, pas une couleur.
+
+    Jusqu'au 3 novembre 2026, un texte sur un dégradé était **compté** et jamais
+    jugé. Or le site en pose partout : bandeaux, panneaux d'appel, héros. Le
+    navigateur rend les arrêts de chaque couche ; ce contrôle-ci cherche le pire
+    point de la plage et applique le même seuil que pour un fond uni.
+    """
+
+    BLANC = {"r": 255, "g": 255, "b": 255, "a": 1}
+    NOIR = {"r": 0, "g": 0, "b": 0, "a": 1}
+
+    def setUp(self) -> None:
+        self.m = self._module()
+
+    @staticmethod
+    def _module():
+        import importlib.util
+        import sys
+        spec = importlib.util.spec_from_file_location("cadrages", RACINE / "outils" / "cadrages.py")
+        module = importlib.util.module_from_spec(spec)
+        sys.modules["cadrages"] = module
+        spec.loader.exec_module(module)
+        return module
+
+    def test_plage_uniforme_rend_une_couleur(self) -> None:
+        plage = self.m.plage_degrade(self.BLANC, [[self.BLANC]])
+        self.assertTrue(plage)
+        self.assertTrue(all(couleur["r"] == 255 for couleur in plage))
+
+    def test_plage_suit_les_deux_extremes(self) -> None:
+        plage = self.m.plage_degrade(self.BLANC, [[self.NOIR, self.BLANC]])
+        lumineuses = [self.m.luminance_wcag(couleur) for couleur in plage]
+        self.assertAlmostEqual(min(lumineuses), 0.0, places=3)
+        self.assertAlmostEqual(max(lumineuses), 1.0, places=3)
+
+    def test_arret_transparent_laisse_voir_la_base(self) -> None:
+        """Un halo `transparent` sur un marine : le fond reste le marine."""
+        marine = {"r": 29, "g": 50, "b": 104, "a": 1}
+        transparent = {"r": 0, "g": 0, "b": 0, "a": 0}
+        plage = self.m.plage_degrade(marine, [[{"r": 255, "g": 255, "b": 255, "a": 0.2}, transparent]])
+        for couleur in plage:
+            self.assertLess(couleur["r"], 200, "une couche à 20 % ne peut pas blanchir un marine")
+
+    def test_texte_blanc_sur_degrade_clair_refuse(self) -> None:
+        candidat = {
+            "couleur": self.BLANC,
+            "base": self.BLANC,
+            "couches": [[{"r": 250, "g": 250, "b": 250, "a": 1}, {"r": 245, "g": 247, "b": 251, "a": 1}]],
+            "taille": 16,
+            "gras": False,
+        }
+        pire, _ = self.m.pire_contraste_degrade(candidat)
+        self.assertLess(pire, 1.2)
+        self.assertLess(pire, self.m.seuil_de_contraste(16, False))
+
+    def test_texte_sombre_sur_degrade_clair_passe(self) -> None:
+        candidat = {
+            "couleur": {"r": 20, "g": 30, "b": 50, "a": 1},
+            "base": self.BLANC,
+            "couches": [[{"r": 250, "g": 250, "b": 250, "a": 1}, {"r": 240, "g": 244, "b": 250, "a": 1}]],
+            "taille": 16,
+            "gras": False,
+        }
+        pire, _ = self.m.pire_contraste_degrade(candidat)
+        self.assertGreaterEqual(pire, self.m.seuil_de_contraste(16, False))
+
+    def test_zone_sous_le_texte_restreint_la_plage(self) -> None:
+        """Le pire point de la plage entière n'est pas le pire point sous le texte.
+
+        Un bandeau clair→sombre : un texte sombre posé sur le haut clair passe,
+        alors que la plage entière le refuserait. C'est tout l'intérêt de
+        projeter la boîte du texte sur l'axe du dégradé.
+        """
+        clair = {"r": 250, "g": 248, "b": 240, "a": 1}
+        sombre = {"r": 20, "g": 25, "b": 35, "a": 1}
+        texte = {"r": 40, "g": 45, "b": 60, "a": 1}
+        entiere = {"couleur": texte, "base": clair, "couches": [[clair, sombre]], "taille": 16, "gras": False}
+        haute = {
+            "couleur": texte,
+            "base": clair,
+            "couches": [
+                {
+                    "type": "lineaire",
+                    "zone": [0.0, 0.1],
+                    "arrets": [dict(clair, t=0.0), dict(sombre, t=1.0)],
+                }
+            ],
+            "taille": 16,
+            "gras": False,
+        }
+        pire_entier, _ = self.m.pire_contraste_degrade(entiere)
+        pire_haute, _ = self.m.pire_contraste_degrade(haute)
+        self.assertLess(pire_entier, 2.0, "sur la plage entière, le texte sombre touche le sombre")
+        self.assertGreater(pire_haute, pire_entier, "restreint au haut clair, il passe mieux")
+        self.assertGreaterEqual(pire_haute, self.m.seuil_de_contraste(16, False))
+
+    def test_zone_basse_du_degrade_refuse_le_texte_sombre(self) -> None:
+        clair = {"r": 250, "g": 248, "b": 240, "a": 1}
+        sombre = {"r": 20, "g": 25, "b": 35, "a": 1}
+        candidat = {
+            "couleur": {"r": 40, "g": 45, "b": 60, "a": 1},
+            "base": clair,
+            "couches": [
+                {"type": "lineaire", "zone": [0.9, 1.0], "arrets": [dict(clair, t=0.0), dict(sombre, t=1.0)]}
+            ],
+            "taille": 16,
+            "gras": False,
+        }
+        pire, fond = self.m.pire_contraste_degrade(candidat)
+        self.assertLess(pire, 2.0)
+        self.assertLess(fond["r"], 60, "le pire fond retenu est bien le bas sombre")
+
+    def test_zone_illisible_vaut_la_plage_entiere(self) -> None:
+        """Une zone qu'on ne sait pas lire est un majorant, jamais un silence."""
+        noir = {"r": 0, "g": 0, "b": 0, "a": 1}
+        plage = self.m.plage_degrade({"r": 255, "g": 255, "b": 255, "a": 1}, [{"zone": "inconnue", "arrets": [noir, dict(noir, t=1.0)]}])
+        lumineuses = [self.m.luminance_wcag(couleur) for couleur in plage]
+        self.assertAlmostEqual(min(lumineuses), 0.0, places=3)
+
+    def test_degrade_sous_le_seuil_est_refuse_par_le_controle(self) -> None:
+        """Le contrôle doit nommer le pire point, pas seulement le rapport."""
+        plan = {"tolerance_px": 0.5, "combinaisons": [{"page": "index.html", "layout": None, "cran": 100, "largeur": 1440}]}
+        mesure = {
+            "page": "index.html",
+            "layout": None,
+            "cran": 100,
+            "largeur": 1440,
+            "debordement": 0,
+            "grilles": [],
+            "coupes": [],
+            "masques": 0,
+            "chevauchements": [],
+            "contraste": {
+                "mesures": 10,
+                "decoratifs": 0,
+                "fond_image": 0,
+                "degrades": 1,
+                "candidats": [],
+                "candidats_degrade": [
+                    {
+                        "tag": "p",
+                        "classe": "page-lead",
+                        "couleur": {"r": 255, "g": 255, "b": 255, "a": 1},
+                        "base": {"r": 255, "g": 255, "b": 255, "a": 1},
+                        "couches": [[{"r": 252, "g": 252, "b": 252, "a": 1}, {"r": 248, "g": 250, "b": 254, "a": 1}]],
+                        "taille": 18,
+                        "gras": False,
+                        "texte": "Un texte blanc sur un fond clair",
+                    }
+                ],
+            },
+        }
+        erreurs = self.m.controler(plan, {"mesures": [mesure]})
+        self.assertTrue(erreurs, "un texte blanc sur un dégradé clair doit être refusé")
+        self.assertIn("sur un dégradé", erreurs[0])
+        self.assertIn("pire point", erreurs[0])
 
 
 if __name__ == "__main__":

@@ -2302,8 +2302,13 @@ visiter que quatre pages. Le pire :
 | `liens-utiles.html · .link-grid` | 35 | 1 048,19 px | Panorama · 130 % · 1 440 px · 1 carte sur 4 colonnes |
 | `apprendre.html · .knowledge-compass` | 25 | 1 046,86 px | Mosaïque · 130 % · 1 440 px · 1 carte sur 4 colonnes |
 
-Huit grilles partagent le cas le plus fréquent, à trois colonnes en « Vitrine » à
-115 % : 15 cadrages, 850,67 px libres.
+**Sept** grilles partagent le cas le plus fréquent, à trois colonnes en
+« Vitrine » à 115 % : 15 cadrages, 850,67 px libres — `.ai-forms-grid`,
+`.principle-grid`, `.learning-level-grid`, `.learning-ecosystem-grid`,
+`.home-action-grid`, `.document-grid`, `.ai-metric-grid`. Ce nombre était écrit
+« huit » avant le 4 novembre 2026 ; la liste nominative, publiée en clair par le
+résumé de CI, en donne sept. Le compte se corrige **avec sa liste**, jamais en
+silence.
 
 Ce diagnostic **ne refuse rien** et n'a corrigé aucune règle : une rangée
 incomplète est parfois le dessin voulu, et le modèle mesure et nomme, il ne
@@ -2489,3 +2494,115 @@ programmatique et de focus dans une iframe ne sont pas mesurés ; un fond en
 image (124 éléments) reste hors de portée. Le seuil de 3:1 est celui de
 WCAG 2.2 AA ; le RGAA 5, aligné dessus, n'est pas encore publié. Et rien de tout
 cela ne remplace une traversée au clavier par une personne.
+
+## 13. Un texte sur un dégradé n'est pas un texte sans fond (3 novembre 2026)
+
+**17 500 textes** étaient posés sur un dégradé — bandeaux de page, panneaux
+d'appel, héros, cartes teintées — et **comptés, jamais jugés**. La méthode ne
+lisait que des couleurs unies ; un dégradé n'en est pas une, c'est une étendue.
+
+### Ce qui a changé
+
+Le relevé n'écarte plus un texte parce qu'il voit un `background-image` : il en
+lit les **arrêts** et la **boîte**. Chromium normalise chaque couche en
+`linear-gradient(90deg, rgb(…), rgb(…))` ou `radial-gradient(circle at 84% 16%,
+…, … 352px)`, ce qui rend la lecture exacte. `cadrages.py` projette ensuite la
+boîte du texte sur l'axe du dégradé — droite pour un linéaire, distance au centre
+pour un radial — et n'échantillonne que la **portion réellement sous le texte** :
+neuf points régulièrement espacés, plus chaque arrêt qui tombe dans la portion.
+Le message nomme le pire point :
+
+> `index.html · lecture · 75 % · 1440 px : small contraste 4.444:1 sur un
+> dégradé, seuil 4.5:1 pour 12 px — pire point rgb(237, 242, 250)`
+
+### Trois fautes de méthode, avant le premier chiffre publiable
+
+1. **La remontée ne s'arrêtait pas à un fond opaque.** Un bouton plein sur un
+   bandeau dégradé était jugé *contre le bandeau qu'il recouvre* : **24 boutons**
+   accusés à 1,06:1. Le navigateur a raison, pas la remontée naïve.
+2. **Un dégradé n'est pas une couleur.** Prendre le pire point d'une plage
+   entière est un majorant : une section claire→foncée accuse un texte qui
+   n'occupe qu'une bande. Ce majorant a été remplacé par la projection de la
+   boîte du texte — sur les 17 500 verdicts, **16 515** deviennent plus
+   permissifs, **985** restent identiques, **aucun** ne devient plus sévère.
+3. **La découpe des couches était fausse.** La virgule entre deux **arrêts** d'un
+   même dégradé est suivie d'une couleur, exactement comme celle entre deux
+   **couches** : une expression régulière ne peut pas les distinguer. Chaque
+   arrêt devenait donc un calque, et la plage calculée portait sur des aplats qui
+   n'existent nulle part. La découpe se fait sur la **profondeur des
+   parenthèses**, et `test_contraste-degrade.py` la rejoue : deux arrêts doivent
+   ressortir comme **une** couche à deux arrêts.
+
+### Ce que la mesure corrigée trouve
+
+Sur 1 060 cadrages : **385 810** textes sur fond uni, **17 500** sur dégradé,
+**0** sur fond d'image, 3 460 décoratifs écartés, 4 240 masqués. Le pire rapport
+d'un texte sur dégradé est **4,782:1** — rien ne passe sous son seuil.
+
+Le jeton `--muted` (`#647086`), lui, tombe à **4,444:1** et ferait refuser
+**732 textes** sur **cinq** sélecteurs. Il tenait **5,00:1 sur blanc** — d'où son
+passage sous tous les contrôles précédents. Assombri à **`#5f6b81`** (même teinte,
+4 % de clarté en moins) : **4,782:1** au pire point, **0 refus**.
+
+### Ce qui reste hors de portée, et le dit
+
+Une **image** (`url(...)`), un `conic-gradient`, un `repeating-*`, une
+`color-mix()` restent comptés et nommés par `--ecartes` — le site n'en pose
+aucun : les 27 700 « textes sur fond d'image » d'hier étaient tous des dégradés.
+
+Un dégradé **radial** n'est situé que si son centre est écrit en pourcentage et
+son rayon en pixels ; sinon la zone vaut la plage entière, majorant assumé et
+non silence. L'interpolation suivie est celle de sRGB. La boîte du dégradé est
+prise au `border-box` : une bordure épaisse décalerait l'axe de quelques pixels.
+
+### Limite de la méthode
+
+La mesure suit la géométrie du dégradé, pas celle du **glyphe** : la zone est
+celle de la boîte du texte, pas de chaque ligne. Un texte qui déborde de la zone
+claire d'un dégradé reste jugé contre la portion que sa boîte couvre. La capture
+de pixels, qui lèverait cette limite, a été chiffrée à 690 ms par élément : hors
+budget pour 17 500 textes.
+
+## 14. Un vide assumé porte son motif écrit (4 novembre 2026)
+
+Seize couples page/grille laissent un vide dans leur dernière rangée. Le
+diagnostic les chiffrait, l'annotation de CI en montrait **neuf** — elle est
+plafonnée à douze lignes. Sept vides étaient donc invisibles, ce qui n'est pas
+un accord : c'est un silence.
+
+**Décision A2, prise par une personne sur la planche 3 :** le vide reste, et
+**son motif s'écrit** dans `docs/rd/cadrages.toml`, section `[rangees.motifs]`,
+à côté de son chiffre. Exemple, le plus fort :
+
+> `apprendre.html · .learning-catalogue-grid` — 85 fiches déclarées, 6 colonnes
+> au plus à 75 % en Compacte sur 1 440 px : la dernière rangée en porte une,
+> d'où 1 176,50 px libres. Aucun nombre de colonnes ne remplit 85 fiches : 85
+> n'est divisible ni par 2, ni par 4, ni par 6. Le vide est arithmétique, pas un
+> défaut de réglage.
+
+**Ce que la décision change dans le contrôle :** `cadrages.py --orphelins` lit
+ces motifs et n'appelle plus « assumé » un vide qui n'en a pas — il écrit
+`SANS MOTIF ÉCRIT` et nomme les couples concernés sur la sortie d'erreur. Un
+vide assumé sans motif serait une dérogation en blanc.
+
+**Les seize motifs sont écrits.** Les sept derniers ont demandé deux détours,
+tous deux consignés parce qu'ils disent quelque chose du diagnostic : les noms
+manquants n'apparaissaient nulle part (la ligne qui les liste tombait après le
+`head -n 12` de l'annotation), puis ils apparaissaient **sans leur chiffre** — et
+un motif qu'on écrit sans son nombre s'écrit de mémoire. Le contrôle sort
+maintenant chaque vide sans motif sur sa propre ligne, avec ses cadrages, son
+vide maximal et son cadrage le plus large. La liste entière part aussi dans le
+**résumé d'étape**, qui n'a pas le plafond de l'annotation.
+
+**Ce que l'écriture des seize a révélé :** sur les sept derniers, cinq ont la
+même forme — quatre cartes, trois colonnes au plus, une carte seule — et deux
+tiennent à un **écart entre le registre et la cascade** (`.document-grid` déclare
+2 colonnes et en reçoit 3 ; `.ai-metric-grid` en déclare 4 et en reçoit 3). Le
+motif n'est donc pas le même pour tous : « c'est le dessin voulu » ne suffit pas,
+la raison arithmétique est écrite couple par couple.
+
+**Deux décisions du même jour, pour mémoire :** `B1` — le glyphe `✦` de
+« Les Mondes » reste à 2,66:1, décoratif déclaré (`aria-hidden`), hors du champ
+de WCAG 1.4.11 ; un cas de `test_cadrages.py` refuse la suite si la déclaration
+disparaît. `C1` — les quatre écarts de colonnes inférieurs au pixel restent
+**comptés** : absorber un écart le rendrait indistinguable d'un écart absent.

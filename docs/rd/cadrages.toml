@@ -84,6 +84,13 @@ déclaré ; c'est un outil de conception, pas le contrôle, et les deux nombres
 peuvent donc différer sans que l'un des deux mente — le contrôle, lui, lit le
 nombre réel.
 """
+[divergences_colonnes]
+# Décision C1 du 4 novembre 2026 : elles restent comptées, jamais absorbées.
+seuil_px = 1.0
+resultat = "Quatre divergences au 3 novembre 2026, toutes sous le pixel : `.mission-grid` (0,78 px, annoncé 1, vu 2 à 743 px), `.home-share-panel` (0,60 px, annoncé 2, vu 1 à 615 px), `.hero-grid` (0,28 px), `.english-promo-panel` (0,20 px) — sur 722 points annoncés, 718 confirmés, 0 non mesuré."
+decision = """**Tranchée le 4 novembre 2026 : comptées comme aujourd'hui (C1).** La personne responsable a choisi de ne rien absorber. Motif, écrit avec la décision : la tolérance de 0,5 px existe pour le **débordement**, où elle protège d'un arrondi de navigateur ; l'appliquer aussi au **nombre de colonnes** effacerait la seule trace d'un désaccord entre ce que la feuille promet et ce que la page fait — or c'est précisément ce que le contrôle est là pour voir. Une divergence absorbée ne se distingue plus d'une divergence absente. Elles restent donc nommées, chiffrées, et l'annotation de CI les imprime."""
+limite = """Ce que cela coûte, dit franchement : quatre lignes de bruit dans chaque rapport, pour quatre écarts que personne ne voit à l'écran. Si la liste s'allonge — plus de quatre, ou des écarts qui se répètent sur les mêmes sélecteurs — la décision devra être revue : beaucoup de bruit finit par cacher un vrai écart. Le seuil de 1 px reste écrit ici comme borne de lecture, pas comme tolérance appliquée."""
+condition_de_revision = """Plus de six divergences, ou une divergence qui dépasse 0,5 px sans atteindre 1 px : la décision C1 est réexaminée sur pièces, avec la liste et ses cadrages."""
 
 [contraste]
 # Ce que la mesure calcule, et ce que le contrôle exige.
@@ -100,12 +107,70 @@ jamais jugé : un glyphe ornemental n'a pas à tenir un rapport de lecture, et
 l'écarter est un choix explicite plutôt qu'un angle mort.
 """
 angle_mort = """
-Un fond en image ou en dégradé n'est pas mesuré : la méthode ne lit que des
-couleurs de fond unies, et un aplat transparent sur une photographie ne se
-calcule pas. Ces textes sont **comptés** dans le rapport, jamais supposés bons.
-Les états de survol, de focus et les éléments révélés par script ne sont pas
-mesurés non plus : le relevé voit l'état affiché, pas tous les états.
+Un fond en **image** — une photographie, un `url(...)` — n'est pas mesuré : la
+méthode ne lit que des couleurs. Ces textes sont **comptés** dans le rapport,
+jamais supposés bons. Un **dégradé**, en revanche, est une plage de couleurs que
+le navigateur rend exactement : ses arrêts sont relevés, et le pire contraste de
+la plage est calculé puis comparé au seuil. Les états de survol, de focus et les
+éléments révélés par script ne sont pas mesurés non plus : le relevé voit l'état
+affiché, pas tous les états.
 """
+note_degrade = """
+Un dégradé n'est pas une couleur mais une étendue. Le navigateur rend les arrêts
+de chaque couche ; `cadrages.py` projette la boîte du texte sur l'axe du dégradé
+et n'échantillonne que la **portion réellement sous le texte** (neuf points
+régulièrement espacés, plus chaque arrêt qui tombe dans cette portion). Les
+couches sont composées dans l'ordre, arrêts transparents compris, sur le fond
+opaque le plus proche, et le **pire** rapport est retenu. La remontée s'arrête au
+premier fond **opaque** : un bouton plein sur un bandeau dégradé ne laisse pas
+voir le bandeau, et continuer faisait accuser 24 boutons d'un contraste de
+1,06:1 contre une couleur qu'ils recouvrent.
+
+Deux fautes ont été corrigées le 3 novembre 2026, avant que le chiffre soit
+publié. La première : la découpe des couches se faisait sur une expression
+régulière, et la virgule entre deux **arrêts** d'un même dégradé ressemble à
+celle entre deux **couches** — chaque arrêt devenait un calque, et la plage
+calculée portait sur des aplats qui n'existent nulle part. La découpe se fait
+maintenant sur la profondeur des parenthèses. La seconde : retenir le pire point
+de l'étendue entière est un majorant ; la géométrie le resserre, et sur les
+17 500 textes concernés 16 515 verdicts deviennent plus permissifs, aucun plus
+sévère.
+
+Ce qu'il ne sait pas : une image, un `conic-gradient`, un `repeating-*`, une
+`color-mix()` — ceux-là sont comptés et nommés, jamais supposés conformes. Un
+dégradé radial n'est situé que si son centre est écrit en pourcentage et son
+rayon en pixels ; sinon la zone vaut la plage entière, ce qui est un majorant et
+non un silence. L'interpolation suivie est celle de sRGB. La boîte du dégradé est
+prise au `border-box` : une bordure épaisse décalerait l'axe de quelques pixels.
+"""
+resultat_degrade = """Relevé du 3 novembre 2026, sur les 1 060 combinaisons : **17 500 textes** posés sur un dégradé, jugés un par un contre la portion de plage qui les couvre. Le relevé compte aussi **385 810 textes** sur fond uni, 3 460 décoratifs écartés et 4 240 textes volontairement masqués ; aucun texte sur fond d'image, car le site n'en pose aucun derrière du texte. Le pire rapport mesuré sur un dégradé est **4,782:1** ; aucun texte n'est sous son seuil. Avec l'ancienne valeur du jeton `--muted` (`#647086`), le même relevé refuserait **732 textes** répartis sur **cinq** sélecteurs (le pire : `p.page-lead`, à **4,444:1**) — le jeton est donc bien la cause, et c'est en le mesurant qu'on l'a su, pas en le supposant."""
+decision_humaine_du_4_novembre = """
+Tranchée le 4 novembre 2026 par la personne responsable, sur pièce visuelle et
+non sur un tableau : « de ce que je vois, c'est bon ». La planche
+`Planche-1-jeton-muted-avant-apres.png` (Drive de passation, dossier 46, fichier
+`14xeIsVfZmMR1bk54Q-cROHHGdft3SRdU`) montre le même paragraphe du site sur les
+quatre fonds réellement posés derrière du texte secondaire — crème
+`#f8f1df`, bleu pâle `rgb(237, 242, 250)`, vert pâle `#eff5e9`, blanc — avec,
+pour chacun, l’ancienne et la nouvelle valeur. Les rapports y sont ceux du
+calcul, pas d’une capture : 4,434 → 4,771 · 4,444 → 4,782 · 4,498 → 4,840 ·
+4,996 → 5,375. La teinte est conservée (même angle de gris-bleu, clarté −4 %) :
+la planche ne sert pas à choisir une couleur, elle sert à vérifier qu’un
+assombrissement de 4 % ne change pas la lecture du site. Ce qu’elle ne prouve
+pas : l’accord porte sur une **reconstitution mesurée**, pas sur une capture du
+navigateur, et aucune personne extérieure n’a relu la page. La planche est
+refaite à l’identique par `outils/planches-rd.py` (fichiers identiques au
+bit près, vérifié par empreinte MD5 le 4 novembre 2026).
+"""
+[glyphe_decoratif]
+# Décision B1 du 4 novembre 2026 : le glyphe reste tel quel.
+selecteur = "span.adventure-map-mark"
+feuille = "assets/css/anglais-aventure.css"
+valeur = "#d29236"
+rapport_sur_blanc = 2.66
+declaration = "aria-hidden=\"true\" — décoratif déclaré, jamais jugé comme du texte"
+decision = """**Tranchée le 4 novembre 2026 : assumé tel quel (B1).** La personne responsable a choisi de ne pas foncer le glyphe. Motif, écrit avec la décision : le glyphe est une **étoile d'ornement** dans l'en-tête de « Tes destinations » — il ne porte aucune information, le titre voisin dit tout, et il est déclaré `aria-hidden`. WCAG 2.2 AA n'exige un rapport de 3:1 pour un élément non textuel que s'il est **nécessaire à la compréhension** (1.4.11) ; un ornement purement décoratif en est exclu, et le contrôle le compte déjà comme décoratif par `--ecartes`. Les alternatives chiffrées sur la planche 3 — 3,06:1 à `#b57c26`, 4,20:1 à `#a8701f`, 4,99:1 à `#9a6415`, 6,68:1 à `#835100` — auraient toutes éteint l'or du jeu au profit d'un brun administratif, pour un élément qui ne se lit pas."""
+limite = """Ce que la décision ne règle pas, et qui reste à surveiller : si le glyphe venait à porter un sens — un état, une progression, une action — il tomberait sous 1.4.11 à 3:1 et la décision serait caduque. Rien dans le HTML ne le dit : le contrôle le compte comme décoratif parce qu'il est `aria-hidden`, pas parce qu'on a vérifié qu'il ne signifie rien. Un futur lot qui le rendrait signifiant doit relire cette entrée."""
+condition_de_revision = """Le jour où `span.adventure-map-mark` n'est plus `aria-hidden`, ou reçoit un `title`, un état, ou une interaction : la décision B1 est révisée d'office, et le glyphe passe au seuil 3:1."""
 
 [focus]
 # Le focus au clavier se mesure comme le texte : même navigateur, même méthode,
@@ -133,8 +198,30 @@ téléphone en plein soleil : la mesure donne un chiffre, pas une impression.
 outil = "python3 outils/cadrages.py --orphelins PLAN RAPPORT"
 definition = "Une grille laisse un vide quand ce que sa dernière rangée occupe, gouttières déduites, laisse plus de 0,5 px libres sur la largeur utile — seuil identique à celui du débordement, pour la même raison : c'est le plus petit écart qu'un navigateur puisse produire en arrondissant une longueur."
 seuil_px = 0.5
-resultat = "16 couples page/grille laissent un vide dans au moins un cadrage. Le pire : `apprendre.html · .learning-catalogue-grid`, 35 cadrages, 1 176,50 px libres en « Compacte » à 75 % sur 1 440 px (une carte sur six colonnes). Puis `ia-societe.html · .ai-fraud-lesson-list` et `liens-utiles.html · .link-grid`, 35 cadrages, 1 048,19 px chacun. Huit grilles partagent le même cas à trois colonnes en « Vitrine » à 115 % : 15 cadrages, 850,67 px libres. Le nombre est passé de 13 à 16 le 3 novembre 2026, quand le contrôle a cessé de ne visiter que quatre pages."
-decision = "Non tranchée. Les nombres sont publiés, l'annotation de CI les imprime à chaque passage ; toute correction qui ajouterait un palier de largeur serait un raccommodage, refusé depuis le 30 octobre 2026."
+resultat = "16 couples page/grille laissent un vide dans au moins un cadrage. Le pire : `apprendre.html · .learning-catalogue-grid`, 35 cadrages, 1 176,50 px libres en « Compacte » à 75 % sur 1 440 px (une carte sur six colonnes). Puis `ia-societe.html · .ai-fraud-lesson-list` et `liens-utiles.html · .link-grid`, 35 cadrages, 1 048,19 px chacun. Sept grilles partagent le même cas à trois colonnes en « Vitrine » à 115 % : 15 cadrages, 850,67 px libres — `.ai-forms-grid`, `.principle-grid`, `.learning-level-grid`, `.learning-ecosystem-grid`, `.home-action-grid`, `.document-grid`, `.ai-metric-grid`. Ce nombre était écrit « huit » avant le 4 novembre 2026 ; la liste nominative, publiée par le résumé de CI, en donne sept, et le compte se corrige avec sa liste plutôt qu'en silence. Le nombre est passé de 13 à 16 le 3 novembre 2026, quand le contrôle a cessé de ne visiter que quatre pages."
+decision = """**Tranchée le 4 novembre 2026 : carte seule assumée, motif écrit (A2).** La personne responsable a choisi, sur la planche 3, de garder les grilles telles quelles et d'écrire le motif de chaque vide plutôt que de changer un nombre de colonnes. Conséquence de méthode : un vide qui n'a pas de motif écrit est désormais **nommé comme tel** par `--orphelins` (« SANS MOTIF ÉCRIT »), et non compté comme assumé. Un vide assumé sans motif serait une dérogation en blanc. Toute correction qui ajouterait un palier de largeur resterait un raccommodage, refusé depuis le 30 octobre 2026 : le motif explique le dessin, il ne rachète pas une cascade."""
+
+[rangees.motifs]
+# La décision A2 du 4 novembre 2026 : chaque vide porte son motif, écrit ici,
+# à côté de son chiffre. Les cartes viennent du registre des grilles
+# (`docs/rd/grilles-dynamiques.toml`), les colonnes du relevé.
+"apprendre.html · .learning-catalogue-grid" = """85 fiches déclarées, 6 colonnes au plus à 75 % en Compacte sur 1 440 px : la dernière rangée en porte une, d'où 1 176,50 px libres. Aucun nombre de colonnes ne remplit 85 fiches : 85 n'est divisible ni par 2, ni par 4, ni par 6. Le vide est arithmétique, pas un défaut de réglage."""
+"liens-utiles.html · .link-grid" = """Le registre déclare de 1 à 7 liens ; 4 colonnes au plus à 130 % en Panorama, et une carte seule dès que le nombre de liens n'est pas un multiple de quatre (5, 6, 7). Le vide suit le nombre de liens, que la page ne choisit pas : il est assumé pour toute la plage 1–7."""
+"ia-societe.html · .ai-fraud-lesson-list" = """5 leçons, 4 colonnes au plus à 130 % en Panorama : la cinquième tombe seule, 1 048,19 px libres. Descendre à 3 colonnes donnerait 3 + 2, soit deux cartes seules au lieu d'une ; à 2 colonnes, 2 + 2 + 1, même compte. Le vide est le plus petit que ce nombre de leçons permette à cette largeur."""
+"ia-societe.html · .ai-fraud-steps" = """4 étapes, 3 colonnes au plus en Panorama à 75 % : la quatrième tombe seule, 906,06 px libres. C'est la conséquence directe de la décision du 2 novembre 2026 qui a retiré la paire « 270 → 3 colonnes » et fixé la piste à 360 px : à cette piste, trois colonnes tiennent, quatre non. Aux largeurs plus étroites la grille est en 2 × 2 et ne laisse aucun vide."""
+"ia-societe.html · .ai-forms-grid" = """4 formulaires, 3 colonnes au plus en Vitrine à 115 % : le quatrième tombe seul, 850,67 px libres. Quatre colonnes demanderaient une piste plus étroite que celle qui garde le libellé sur une ligne ; le vide est le prix de la lisibilité des champs."""
+"ia-societe.html · .ai-lives-grid" = """6 rendez-vous, 5 colonnes au plus en Panorama à 75 % : le sixième tombe seul, 1 136,16 px libres. À 6 colonnes la piste descendrait sous la largeur d'un titre de rendez-vous ; à 3 colonnes, la grille serait en 3 × 2 sans vide, mais avec des cartes deux fois plus larges que leur contenu."""
+"ia-societe.html · .ai-fraud-grid" = """6 fiches, 5 colonnes au plus en Panorama à 75 % : la sixième tombe seule, 1 136,16 px libres. Même forme que `.ai-lives-grid` sur la même page : deux grilles voisines, un seul réglage de piste, et le même vide au même cadrage."""
+"simulateur.html · .simulateur-passeport" = """4 étapes de passeport, 3 colonnes au plus en Panorama à 75 % : la quatrième tombe seule, 944,80 px libres. À 2 colonnes la grille est en 2 × 2 sans vide, mais chaque étape occupe alors la moitié de la largeur de lecture pour deux lignes de texte."""
+"index.html · .home-voice-grid" = """3 témoignages, 2 colonnes au plus en Vitrine à 75 % sur 768 px : le troisième tombe seul, 375,59 px libres. Trois n'est pas un multiple de deux ; à 3 colonnes la cascade ne descend pas à cette largeur, la piste minimale l'interdit. C'est le seul des seize vides qui apparaisse sur une largeur de tablette, pas de bureau."""
+"transparence.html · .principle-grid" = """4 principes affichés (le registre en déclare 4 ou 6), 3 colonnes au plus en Vitrine à 115 % sur 1 440 px : le quatrième tombe seul, 850,67 px libres. Avec six principes la grille serait pleine ; le vide n'apparaît que sur la version à quatre. À 2 colonnes elle serait pleine aussi, mais chaque principe occuperait deux fois la largeur de son texte."""
+"apprendre.html · .learning-level-grid" = """4 niveaux, 3 colonnes au plus en Vitrine à 115 % : le quatrième tombe seul, 850,67 px libres. La cascade ne permet pas quatre colonnes à 1 440 px — la piste minimale passerait sous la largeur du libellé d'un niveau — donc 4 n'est pas un multiple de 3, et la dernière rangée en porte un."""
+"apprendre.html · .learning-ecosystem-grid" = """4 acteurs de l'écosystème, 3 colonnes au plus en Vitrine à 115 % : le quatrième tombe seul, 850,67 px libres. Même réglage de piste que `.learning-level-grid` sur la même page : deux grilles voisines, un seul vide au même cadrage, pour les mêmes raisons arithmétiques."""
+"index.html · .home-action-grid" = """4 appels à l'action, 3 colonnes au plus en Vitrine à 115 % : le quatrième tombe seul, 850,67 px libres. Le registre en déclare 4 ; à 2 colonnes la grille serait pleine en 2 + 2, mais les quatre cartes sont conçues pour tenir sur une rangée aux largeurs de bureau."""
+"documents.html · .document-grid" = """4 documents, 3 colonnes au plus en Vitrine à 115 % : le quatrième tombe seul, 850,67 px libres. Le registre en déclare 2 colonnes, la cascade en donne 3 à ce cadrage : c'est le seul des seize couples où le nombre mesuré dépasse le nombre déclaré, et le vide vient de cet écart-là."""
+"ia-societe.html · .ai-metric-grid" = """4 indicateurs, 3 colonnes au plus en Vitrine à 115 % : le quatrième tombe seul, 850,67 px libres. Le registre en déclare 4 colonnes ; la cascade n'en donne que 3 à 1 440 px, faute de piste assez étroite pour quatre. Le vide est la conséquence directe de cette limite de piste."""
+"apprendre.html · .knowledge-compass" = """10 repères, 4 colonnes au plus en Mosaïque à 130 % : la dernière rangée en porte deux, 1 046,86 px libres. Dix n'est divisible ni par 4 ni par 3 ; à 5 colonnes la piste tombe sous la largeur d'un libellé. Le vide est borné par le nombre de repères."""
+
 
 [limites]
 texte = """

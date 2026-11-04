@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 82 |
-| Période couverte | du 2026-10-20 au 2026-11-03 |
-| Contrôles exécutables cités | 95 |
+| Avancées consignées | 84 |
+| Période couverte | du 2026-10-20 au 2026-11-04 |
+| Contrôles exécutables cités | 97 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1938,6 +1938,34 @@ Initiatives liées : `optimisation-du-site`, `ecouter-la-page`, `coherence-texte
 
 Initiatives liées : `ecouter-la-page`, `optimisation-du-site`, `coherence-textes-publics`.
 
+### `un-degrade-est-une-plage-de-contraste` — Un texte sur un dégradé n'est pas un texte sans fond : la plage a un pire point, sous le texte
+
+*Consignée le 2026-11-03.*
+
+**Constat.** 27 700 textes étaient posés sur un « fond d'image » et **comptés, jamais jugés** : la méthode ne lisait que des couleurs unies, et un dégradé n'en est pas une. Le classement était pourtant faux dès le départ — le site ne pose aucune image en fond de texte, il pose des dégradés : bandeaux, panneaux d'appel, héros, cartes teintées. Un fond qu'on ne sait pas lire n'est pas un fond conforme, mais ce n'était pas une raison pour le déclarer illisible : c'était une raison de le lire.
+
+**Ce que cela change.** Le relevé lit les **arrêts** de chaque couche — Chromium les normalise en `rgb(…)`, la lecture est donc exacte — et retient la **boîte** de la couche. `cadrages.py` projette la boîte du texte sur l'axe du dégradé, n'échantillonne que la **portion réellement sous le texte** (neuf points régulièrement espacés, plus chaque arrêt qui y tombe), compose les couches avec leurs transparences sur le fond opaque le plus proche et retient le **pire** rapport, nommé avec son point : « small contraste 4.444:1 sur un dégradé, seuil 4.5:1 pour 12 px — pire point rgb(237, 242, 250) ». Trois fautes corrigées en chemin. La remontée s'arrête au premier fond **opaque** (un bouton plein sur un bandeau dégradé était jugé contre le bandeau qu'il recouvre : 24 faux refus à 1,06:1). Le classement « image » tombe à **0**. Et la découpe des couches, faite d'abord sur une expression régulière, confondait la virgule entre deux **arrêts** et celle entre deux **couches** : chaque arrêt devenait un calque, la plage portait sur des aplats qui n'existent nulle part. La découpe se fait maintenant sur la **profondeur des parenthèses**, et un banc la rejoue. Résultat mesuré sur 1 060 cadrages : **385 810** textes sur fond uni, **17 500** sur dégradé, pire rapport **4,782:1**, aucun refus. La géométrie resserre le majorant — 16 515 verdicts plus permissifs, 985 identiques, **aucun** plus sévère. Avec l'ancienne valeur du jeton `--muted` (`#647086`), le même relevé refuserait **732 textes** sur **cinq** sélecteurs (pire : 4,444:1) : assombri à `#5f6b81`, le pire remonte à 4,782:1 et **0 refus** subsiste.
+
+**Preuves dans le dépôt :**
+
+- `outils/mesurer-cadrages.cjs`
+- `outils/cadrages.py`
+- `outils/test_cadrages.py`
+- `outils/test_contraste-degrade.py`
+- `assets/css/site.css`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/cadrages.toml`
+- `docs/rd/inventaire-couleurs-jetons.md`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `MRSC_BROWSER_NODE_MODULES=… node outils/mesurer-cadrages.cjs /tmp/plan.json /tmp/rapport.json && python3 outils/cadrages.py --controler /tmp/plan.json /tmp/rapport.json && python3 outils/test_cadrages.py && MRSC_BROWSER_NODE_MODULES=… python3 outils/test_contraste-degrade.py`
+
+**Limite — ce que cela ne prouve pas.** La mesure suit la géométrie du dégradé, pas celle du glyphe : la zone est celle de la boîte du texte, ligne à ligne non. Un dégradé **radial** n'est situé que si son centre est écrit en pourcentage et son rayon en pixels ; sinon la zone vaut la plage entière, majorant assumé et non silence. Une image `url(...)`, un `conic-gradient`, un `repeating-*` ou une `color-mix()` restent comptés et nommés, jamais jugés (le site n'en pose aucun). L'interpolation suivie est celle de sRGB ; la boîte du dégradé est prise au `border-box`, qu'une bordure épaisse décalerait. Le banc couvre un dégradé linéaire à arrêts en pourcentage et un halo circulaire à arrêt en pixels ; les formes `ellipse`, les tailles en mots-clés et les arrêts radiaux en pourcentage retombent sur la plage entière, sans cas qui le chiffre. La capture de pixels, qui lèverait la limite de géométrie, a été chiffrée à 690 ms par élément : hors budget pour 17 500 textes.
+
+**Suite.** Chiffrer ce que coûte l'absence de zone pour les formes `ellipse` et les arrêts radiaux en pourcentage — combien de textes sont jugés contre une plage qu'ils ne voient pas — puis descendre à la ligne de texte plutôt qu'à la boîte.
+
+Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`, `ecouter-la-page`.
+
 ### `un-yaml-casse-n-etait-pas-une-erreur` — Un workflow illisible n'était pas une erreur : c'était un silence, et il ressemblait à un succès
 
 *Consignée le 2026-11-03.*
@@ -1961,6 +1989,32 @@ Initiatives liées : `ecouter-la-page`, `optimisation-du-site`, `coherence-texte
 **Suite.** Vérifier la validité des workflows dans les autres dépôts du projet, et étendre la garde aux déclencheurs (`on:`) et aux versions d'actions épinglées, que `verifier-securite.py` couvre en partie.
 
 Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
+
+### `un-vide-assume-porte-son-motif` — Un vide assumé porte son motif écrit — et un vide sans motif n'est pas assumé
+
+*Consignée le 2026-11-04.*
+
+**Constat.** Seize couples page/grille laissent un vide dans leur dernière rangée, et **sept de ces vides étaient invisibles** : l'annotation de CI est plafonnée à douze lignes, donc neuf couples s'y montraient. Un diagnostic qui n'imprime qu'une partie de sa liste ne vaut pas mieux qu'un diagnostic muet — celui qui décide croit avoir tout vu.
+
+**Ce que cela change.** Trois décisions du 4 novembre 2026, prises par une personne sur une planche visuelle, et **rendues exécutoires**. **A2** : le vide reste, et son motif s'écrit dans `docs/rd/cadrages.toml` (`[rangees.motifs]`), à côté de son chiffre ; `--orphelins` lit ces motifs et imprime `SANS MOTIF ÉCRIT` pour tout vide qui n'en a pas — une dérogation en blanc n'est plus comptée comme assumée. **Les seize motifs sont écrits et chiffrés** (le plus fort : 85 fiches en six colonnes, 1 176,50 px, arithmétique et non réglable). Les sept derniers ont exigé deux corrections du diagnostic lui-même : les noms manquants tombaient après le plafond de l'annotation, puis sortaient sans leur chiffre — un motif écrit sans son nombre s'écrit de mémoire. Chaque vide sans motif sort désormais sur sa propre ligne avec ses cadrages, son vide maximal et son cadrage, et la liste entière part dans le **résumé d'étape**, qui n'a pas ce plafond. L'écriture a révélé que cinq des sept ont la même forme arithmétique et que deux tiennent à un écart entre le registre et la cascade (`.document-grid` 2 déclarées → 3 reçues, `.ai-metric-grid` 4 → 3). **B1** : le glyphe ✦ de « Les Mondes » reste à 2,66:1 — décoratif déclaré (`aria-hidden`), hors du champ de WCAG 1.4.11 — et un cas de `test_cadrages.py` refuse la suite si la déclaration disparaît ou si la couleur change : la décision a une condition de révision qui se vérifie. **C1** : les quatre écarts de colonnes inférieurs au pixel restent comptés, parce qu'absorber un écart le rendrait indistinguable d'un écart absent.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/cadrages.toml`
+- `outils/cadrages.py`
+- `outils/test_cadrages.py`
+- `.github/workflows/verification.yml`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/journal.md`
+- `outils/planches-rd.py`
+
+**Contrôle qui la maintient :** `python3 outils/cadrages.py --orphelins /tmp/plan.json /tmp/rapport.json && python3 outils/test_cadrages.py`
+
+**Limite — ce que cela ne prouve pas.** Les seize motifs décrivent ce que la mesure permet de dire : le nombre de cartes vient du registre des grilles, le nombre de colonnes du relevé. Pour `.link-grid`, qui déclare de 1 à 7 liens, le motif couvre la plage entière et pas un cas. Deux couples portent un motif qui pointe un **désaccord** entre registre et cascade plutôt qu'un choix de dessin : c'est un fait relevé, pas une justification — si la cascade changeait, ces deux motifs seraient à réécrire. Les motifs s'appuient sur le nombre de cartes du registre des grilles ; pour `.link-grid`, qui déclare de 1 à 7 liens, le motif couvre la plage entière et pas un cas. Pour B1, la décision ne tient que si le glyphe reste sans signification : le contrôle vérifie `aria-hidden`, pas l'intention — un futur lot qui lui donnerait un sens devrait relire l'entrée. Pour C1, quatre divergences font quatre lignes de bruit par rapport ; au-delà de six, la décision sera réexaminée.
+
+**Suite.** Écrire les sept motifs restants sur la liste entière du résumé d'étape, puis vérifier que l'annotation et le résumé ne divergent jamais : deux listes qui se contredisent valent moins qu'une seule.
+
+Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 
 ## 3. Ce que ce registre ne dit pas
 

@@ -681,6 +681,28 @@ jobs:
             | cut -c1-900 | while IFS= read -r ligne; do
             echo "::notice title=Rangées incomplètes::$ligne"
           done
+          # L'annotation est plafonnée : neuf couples sur seize s'y voyaient le
+          # 4 novembre 2026, et sept vides restaient invisibles. Le résumé de
+          # l'étape n'a pas ce plafond — c'est là que la liste entière est
+          # publiée, motifs compris, pour qu'une décision se prenne sur les seize.
+          # Un vide assumé sans motif est une dérogation en blanc : la décision
+          # A2 du 4 novembre 2026 le refuse. Ces lignes vivent sur la sortie
+          # d'erreur, avec le chiffre de chaque vide — un motif écrit sans son
+          # nombre s'écrit de mémoire. Les seize sont écrits depuis le
+          # 4 novembre 2026 : cette boucle ne doit plus rien afficher, et le
+          # jour où elle affichera quelque chose, ce sera un vide neuf.
+          # (L'annotation est plafonnée : ces lignes tombent après `head -n 12`.)
+          grep '^  ! ' "$RUNNER_TEMP/graphismes/cadrages/orphelins.log" \
+            | cut -c1-900 | while IFS= read -r ligne; do
+            echo "::warning title=Vides assumés sans motif::$ligne"
+          done || true
+          {
+            echo "### Rangées incomplètes — liste entière"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/graphismes/cadrages/orphelins.log"
+            echo '```'
+          } >>"$GITHUB_STEP_SUMMARY"
           # Ce que le contraste écarte — décoratif déclaré, fond en image — est
           # nommé ici : une exemption qui ne se nomme jamais devient un angle mort.
           python3 outils/cadrages.py --ecartes "$RUNNER_TEMP/graphismes/cadrages/rapport.json" \
@@ -765,6 +787,19 @@ jobs:
         env:
           MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
         run: python3 outils/test_mutations_cadrages.py
+
+      # Et ce banc-ci éprouve la lecture elle-même : un dégradé doit sortir comme
+      # une couche à deux arrêts (la découpe d'expression régulière en faisait
+      # deux calques, et publiait des rapports calculés sur des aplats qui
+      # n'existent nulle part), et un texte posé à droite d'un dégradé horizontal
+      # doit être jugé contre la fin de la plage, pas contre son début.
+      # Trois cas, deux secondes — dont la zone radiale, sans laquelle un halo
+      # de 100 px serait jugé comme s'il colorait toute la page. Sans
+      # navigateur : code 2.
+      - name: Éprouver que la lecture d'un dégradé garde ses arrêts et la zone du texte
+        env:
+          MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
+        run: python3 outils/test_contraste-degrade.py
 
       # Les contrôles précédents disent qu'une mutation produit l'erreur
       # annoncée. Aucun ne dit que la géométrie relevée est la bonne : un

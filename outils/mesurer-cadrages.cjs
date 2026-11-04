@@ -300,12 +300,141 @@ function mesurer(selecteurs) {
     const lb = luminance(b);
     return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
   };
+  // --- Géométrie du dégradé ------------------------------------------------
+  // Un dégradé n'est pas une couleur, c'est une **étendue**. Chercher le pire
+  // point de l'étendue entière est sûr, mais faux quand le texte n'occupe
+  // qu'une bande : un paragraphe posé sur le haut clair d'un bandeau
+  // clair→sombre était jugé contre le bas sombre. On projette donc la boîte du
+  // texte sur l'axe du dégradé et l'on ne rend que la portion qui est vraiment
+  // sous lui. Ce qui n'est pas projetable (ellipse, `color-mix`, image) garde la
+  // plage entière et le dit.
+  // Une liste de fonds se découpe sur les virgules de **niveau zéro** : une
+  // regex ne suffit pas, car la virgule entre deux arrêts d'un même dégradé est
+  // suivie d'une couleur, exactement comme celle entre deux couches. Découper
+  // au mauvais niveau transformait chaque arrêt en calque — le dégradé fondait
+  // alors en une superposition de ses propres arrêts.
+  const decouperCouches = (texte) => {
+    const morceaux = [];
+    let profondeur = 0;
+    let debut = 0;
+    for (let i = 0; i < texte.length; i += 1) {
+      const c = texte[i];
+      if (c === '(') profondeur += 1;
+      else if (c === ')') profondeur -= 1;
+      else if (c === ',' && profondeur === 0) {
+        morceaux.push(texte.slice(debut, i));
+        debut = i + 1;
+      }
+    }
+    morceaux.push(texte.slice(debut));
+    return morceaux;
+  };
+  const coins = (boite) => [
+    [boite.left, boite.top],
+    [boite.right, boite.top],
+    [boite.left, boite.bottom],
+    [boite.right, boite.bottom],
+  ];
+  const direction = (angle) => {
+    const radians = (angle * Math.PI) / 180;
+    return [Math.sin(radians), -Math.cos(radians)];
+  };
+  const angleDuMotCle = (texte) => {
+    const cote = { top: [0, -1], right: [1, 0], bottom: [0, 1], left: [-1, 0] };
+    const mots = String(texte).match(/to\s+(top|right|bottom|left)(?:\s+(top|right|bottom|left))?/);
+    if (!mots) return 180;
+    const [dx1, dy1] = cote[mots[1]] || [0, 1];
+    const [dx2, dy2] = mots[2] ? cote[mots[2]] : [0, 0];
+    return (Math.atan2(dx1 + dx2, -(dy1 + dy2)) * 180) / Math.PI;
+  };
+  const angleDuDegrade = (entete) => {
+    const degres = String(entete).match(/(-?[\d.]+)deg/);
+    if (degres) return Number(degres[1]);
+    const tours = String(entete).match(/(-?[\d.]+)turn/);
+    if (tours) return Number(tours[1]) * 360;
+    return angleDuMotCle(entete);
+  };
+  const portion = (mini, maxi) => [Math.max(0, Math.min(1, mini)), Math.max(0, Math.min(1, maxi))];
+  const zoneLineaire = (angle, boite, texte) => {
+    const [dx, dy] = direction(angle);
+    const longueur = Math.abs(boite.width * dx) + Math.abs(boite.height * dy) || 1;
+    const centreX = boite.left + boite.width / 2;
+    const centreY = boite.top + boite.height / 2;
+    let mini = Infinity;
+    let maxi = -Infinity;
+    for (const [x, y] of coins(texte)) {
+      const t = ((x - centreX) * dx + (y - centreY) * dy) / longueur + 0.5;
+      mini = Math.min(mini, t);
+      maxi = Math.max(maxi, t);
+    }
+    return portion(mini, maxi);
+  };
+  const zoneRadiale = (entete, boite, texte, rayon) => {
+    const centre = String(entete).match(/at\s+(-?[\d.]+)%\s+(-?[\d.]+)%/);
+    if (!centre || !(rayon > 0)) return [0, 1];
+    const cx = boite.left + (Number(centre[1]) / 100) * boite.width;
+    const cy = boite.top + (Number(centre[2]) / 100) * boite.height;
+    let mini = Infinity;
+    let maxi = -Infinity;
+    for (const [x, y] of coins(texte)) {
+      const d = Math.hypot(x - cx, y - cy) / rayon;
+      mini = Math.min(mini, d);
+      maxi = Math.max(maxi, d);
+    }
+    return portion(mini, maxi);
+  };
+  // Une couche : ses arrêts (couleur + position) et la portion de l'axe que le
+  // texte recouvre. `position: null` quand le CSS ne l'écrit pas — c'est le
+  // relevé qui le dit, la mise à l'échelle se fait à la lecture.
+  const lireCouche = (morceau, boite, texte) => {
+    const ouvrant = morceau.indexOf('(');
+    if (ouvrant < 0) return null;
+    // L'en-tête utile — angle, `at`, forme — s'arrête à la première couleur :
+    // `linear-gradient(110deg, rgb(…))` met l'angle **dans** la parenthèse.
+    const premiere = morceau.search(/rgba?\(/);
+    const entete = morceau.slice(0, premiere < 0 ? morceau.length : premiere);
+    // Chaque arrêt est « couleur » suivie, ou non, de sa position. On les
+    // cherche d'un seul geste : découper sur les virgules reviendrait à couper
+    // les couleurs elles-mêmes, qui en contiennent.
+    const arrets = [];
+    for (const trouve of morceau.matchAll(/(rgba?\([^)]+\))(?:\s+(-?[\d.]+)(%|px))?/g)) {
+      const couleur = lireCouleur(trouve[1]);
+      if (!couleur) continue;
+      const position = trouve[2] ? { valeur: Number(trouve[2]), unite: trouve[3] } : null;
+      arrets.push({ ...couleur, pos: position });
+    }
+    if (!arrets.length) return null;
+    const radial = /radial-gradient/i.test(entete);
+    const [dx, dy] = direction(angleDuDegrade(entete));
+    const longueur = Math.abs(boite.width * dx) + Math.abs(boite.height * dy) || 1;
+    const dernierPx = [...arrets].reverse().find((a) => a.pos && a.pos.unite === 'px');
+    const rayon = radial && dernierPx ? dernierPx.pos.valeur : 0;
+    // Positions ramenées à l'axe : pourcentage tel quel, pixels divisés par la
+    // longueur de l'axe (linéaire) ou par le rayon (radial). Illisible : null.
+    for (const arret of arrets) {
+      if (!arret.pos) {
+        arret.t = null;
+      } else if (arret.pos.unite === '%') {
+        arret.t = arret.pos.valeur / 100;
+      } else if (radial && rayon > 0) {
+        arret.t = arret.pos.valeur / rayon;
+      } else {
+        arret.t = arret.pos.valeur / longueur;
+      }
+      delete arret.pos;
+    }
+    const zone = radial ? zoneRadiale(entete, boite, texte, rayon) : zoneLineaire(angleDuDegrade(entete), boite, texte);
+    return { type: radial ? 'radial' : 'lineaire', zone, arrets };
+  };
+
   const decor = '[aria-hidden="true"],[hidden],[role="presentation"],[role="none"]';
   const sansRendu = 'script,style,noscript,template,title';
   const contraste = {
     mesures: 0,
     decoratifs: 0,
     fond_image: 0,
+    degrades: 0,
+    candidats_degrade: [],
     sans_texte: 0,
     minimum: null,
     candidats: [],
@@ -340,19 +469,71 @@ function mesurer(selecteurs) {
     let fond = { r: 255, g: 255, b: 255, a: 1 };
     const piles = [];
     let image = null;
+    // Les couches de dégradé rencontrées, de la plus haute à la plus basse.
+    let couches = [];
+    let indechiffrable = null;
     while (courant) {
       const st = getComputedStyle(courant);
-      if (!image && st.backgroundImage && st.backgroundImage !== 'none') {
-        const nom = String(courant.className || '').split(' ')[0];
-        image = `${courant.tagName.toLowerCase()}${nom ? `.${nom}` : ''}`;
+      if (st.backgroundImage && st.backgroundImage !== 'none') {
+        if (!image) {
+          const nom = String(courant.className || '').split(' ')[0];
+          image = `${courant.tagName.toLowerCase()}${nom ? `.${nom}` : ''}`;
+        }
+        // Ce que le script sait lire : des dégradés dont tous les arrêts sont
+        // des couleurs. Ce qu'il ne sait pas : une image, un `conic-gradient`,
+        // un `repeating-*`, une `color-mix()`. Il le dit au lieu de le taire —
+        // un fond qu'on ne sait pas calculer n'est pas un fond conforme.
+        const brute = st.backgroundImage;
+        if (!indechiffrable) {
+          if (/url\(/i.test(brute) || /conic-gradient|repeating-/i.test(brute) || /color-mix\(/i.test(brute)) {
+            indechiffrable = brute.includes('url(') ? 'image' : 'degrade_non_lu';
+          } else {
+            const lues = [];
+            const boiteCouche = courant.getBoundingClientRect();
+            for (const morceau of decouperCouches(brute)) {
+              const couche = lireCouche(morceau, boiteCouche, boite);
+              if (couche) lues.push(couche);
+            }
+            couches = lues.concat(couches);
+          }
+        }
       }
       const couleur = lireCouleur(st.backgroundColor);
       if (couleur && couleur.a > 0) piles.push(couleur);
+      // Un fond **opaque** masque tout ce qui est dessous : un bouton plein sur
+      // un bandeau dégradé ne laisse pas voir le bandeau. Continuer à remonter
+      // faisait accuser 24 boutons d'un contraste de 1,06:1 contre le dégradé de
+      // leur section, alors que leur propre fond les couvre. C'est le navigateur
+      // qui a raison, pas la remontée naïve.
+      if (couleur && couleur.a >= 1) break;
       courant = courant.parentElement;
     }
     if (image) {
-      contraste.fond_image += 1;
-      nommer(contraste.fond_image_selecteurs, image);
+      if (indechiffrable || !couches.length) {
+        contraste.fond_image += 1;
+        nommer(contraste.fond_image_selecteurs, image);
+        continue;
+      }
+      // Un dégradé est calculable : le fond n'est pas « hors de portée », il est
+      // une plage. Le script rend les couleurs d'arrêt et la base unie ; c'est
+      // `cadrages.py` qui cherche le pire contraste de la plage et décide.
+      let base = fond;
+      for (let i = piles.length - 1; i >= 0; i -= 1) base = poser(piles[i], base);
+      const gras = Number(style.fontWeight) >= 700;
+      contraste.degrades += 1;
+      if (contraste.candidats_degrade.length < 200) {
+        contraste.candidats_degrade.push({
+          tag: element.tagName.toLowerCase(),
+          id: element.id || null,
+          classe: String(element.className || '').slice(0, 60),
+          couleur: avant,
+          base,
+          couches,
+          taille,
+          gras,
+          texte: (element.textContent || '').trim().slice(0, 40),
+        });
+      }
       continue;
     }
     for (let i = piles.length - 1; i >= 0; i -= 1) fond = poser(piles[i], fond);
@@ -506,6 +687,7 @@ function mesurer(selecteurs) {
   );
   const textes = rapport.mesures.reduce((total, mesure) => total + ((mesure.contraste || {}).mesures || 0), 0);
   const surImage = rapport.mesures.reduce((total, mesure) => total + ((mesure.contraste || {}).fond_image || 0), 0);
+  const degrades = rapport.mesures.reduce((total, mesure) => total + ((mesure.contraste || {}).degrades || 0), 0);
   const decoratifs = rapport.mesures.reduce((total, mesure) => total + ((mesure.contraste || {}).decoratifs || 0), 0);
   const masques = rapport.mesures.reduce((total, mesure) => total + (mesure.masques || 0), 0);
   console.log(
@@ -514,8 +696,10 @@ function mesurer(selecteurs) {
       `${rapport.erreurs.length} erreur(s) — rapport écrit dans ${destination}.`
   );
   console.log(
-    `Contraste : ${textes} texte(s) mesuré(s) sur fond uni, ${surImage} sur fond d'image (non mesurable ` +
-      `par cette méthode), ${decoratifs} décoratif(s) écarté(s). Textes volontairement masqués : ${masques}.`
+    `Contraste : ${textes} texte(s) mesuré(s) sur fond uni, ${degrades} sur dégradé (portion sous le ` +
+      `texte, plage rendue à ` +
+      `\`cadrages.py\`), ${surImage} sur image (non calculable par cette méthode), ` +
+      `${decoratifs} décoratif(s) écarté(s). Textes volontairement masqués : ${masques}.`
   );
   if (rapport.erreurs.length) {
     for (const erreur of rapport.erreurs.slice(0, 20)) {

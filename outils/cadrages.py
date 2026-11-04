@@ -291,6 +291,22 @@ def controler(plan: dict, rapport: dict) -> list[str]:
                     + (" gras" if candidat.get("gras") else "")
                     + (f" (« {texte} »)" if texte else "")
                 )
+            for candidat in contraste.get("candidats_degrade") or []:
+                seuil = seuil_de_contraste(float(candidat.get("taille") or 0), bool(candidat.get("gras")))
+                pire, fond = pire_contraste_degrade(candidat)
+                if pire >= seuil:
+                    continue
+                nom = candidat.get("tag", "?") + (
+                    f".{candidat['classe']}" if candidat.get("classe") else ""
+                )
+                texte = (candidat.get("texte") or "").strip()
+                erreurs.append(
+                    f"{libelle} : {nom} contraste {pire}:1 sur un dégradé, seuil {seuil}:1 "
+                    f"pour {candidat.get('taille')} px"
+                    + (" gras" if candidat.get("gras") else "")
+                    + f" — pire point rgb({fond['r']:.0f}, {fond['g']:.0f}, {fond['b']:.0f})"
+                    + (f" (« {texte} »)" if texte else "")
+                )
         # Le plan annonce une **capacité** ; ce que le visiteur voit en dépend
         # aussi du nombre de cartes. Chaque exemplaire est donc confronté avec
         # son propre compte : cinq cartes dans une grille qui permet six colonnes
@@ -366,6 +382,163 @@ def seuil_de_contraste(taille: float, gras: bool) -> float:
     return CONTRASTE_PETIT_TEXTE
 
 
+def luminance_wcag(couleur: dict) -> float:
+    """Luminance relative WCAG d'une couleur `{r, g, b}` en 0–255."""
+
+    def canal(valeur: float) -> float:
+        v = float(valeur) / 255
+        return v / 12.92 if v <= 0.03928 else ((v + 0.055) / 1.055) ** 2.4
+
+    return 0.2126 * canal(couleur["r"]) + 0.7152 * canal(couleur["g"]) + 0.0722 * canal(couleur["b"])
+
+
+def rapport_wcag(une: dict, autre: dict) -> float:
+    l1, l2 = luminance_wcag(une), luminance_wcag(autre)
+    return (max(l1, l2) + 0.05) / (min(l1, l2) + 0.05)
+
+
+def poser(dessus: dict, dessous: dict) -> dict:
+    """Compose une couleur sur une autre, comme le fait un navigateur."""
+    alpha = float(dessus.get("a", 1))
+    return {
+        "r": dessus["r"] * alpha + dessous["r"] * (1 - alpha),
+        "g": dessus["g"] * alpha + dessous["g"] * (1 - alpha),
+        "b": dessus["b"] * alpha + dessous["b"] * (1 - alpha),
+        "a": 1,
+    }
+
+
+#: Points échantillonnés entre deux arrêts d'un dégradé. Neuf suffisent à suivre
+#: une interpolation en sRGB sans prétendre la prouver : entre deux couleurs, la
+#: luminance varie de façon monotone par canal, et le pire cas d'un texte est
+#: toujours à l'un des extrêmes ou près d'eux. C'est une borne **pratique**,
+#: écrite comme telle dans la limite du registre.
+ECHANTILLONS_DEGRADE = 9
+
+
+def _arrets_et_zone(couche) -> tuple[list[dict], tuple[float, float]]:
+    """Rend les arrêts d'une couche et la portion de l'axe couverte par le texte.
+
+    Le relevé donne des arrêts `{r, g, b, a, t}` et une zone `[début, fin]` sur
+    l'axe du dégradé — la projection de la boîte du texte. Une couche d'ancienne
+    forme (simple liste de couleurs) reste lue : zone entière, positions
+    implicites. Une zone illisible vaut la plage entière : c'est un majorant,
+    jamais un silence.
+    """
+    if isinstance(couche, dict):
+        arrets = list(couche.get("arrets") or [])
+        zone = couche.get("zone") or [0.0, 1.0]
+    else:
+        arrets, zone = list(couche or []), [0.0, 1.0]
+    if len(arrets) < 2:
+        return arrets, (0.0, 1.0)
+    positions = [a.get("t") if isinstance(a, dict) else None for a in arrets]
+    if any(p is None for p in positions):
+        # Positions partiellement écrites : on revient à l'hypothèse uniforme,
+        # qui couvre le même chemin de couleurs — elle ne le situe simplement
+        # pas au pixel près. Le relevé dit lesquelles il n'a pas pu lire.
+        positions = [i / (len(arrets) - 1) for i in range(len(arrets))]
+    try:
+        debut, fin = float(zone[0]), float(zone[1])
+    except (TypeError, ValueError, IndexError):
+        debut, fin = 0.0, 1.0
+    debut, fin = max(0.0, min(1.0, debut)), max(0.0, min(1.0, fin))
+    if fin < debut:
+        debut, fin = fin, debut
+    return arrets, (debut, fin)
+
+
+def _couleur_a(arrets: list[dict], positions: list[float], t: float) -> dict:
+    if t <= positions[0]:
+        return dict(arrets[0])
+    if t >= positions[-1]:
+        return dict(arrets[-1])
+    for i in range(1, len(positions)):
+        if t <= positions[i]:
+            largeur = positions[i] - positions[i - 1] or 1e-9
+            part = (t - positions[i - 1]) / largeur
+            a, b = arrets[i - 1], arrets[i]
+            return {
+                "r": a["r"] + (b["r"] - a["r"]) * part,
+                "g": a["g"] + (b["g"] - a["g"]) * part,
+                "b": a["b"] + (b["b"] - a["b"]) * part,
+                "a": a.get("a", 1) + (b.get("a", 1) - a.get("a", 1)) * part,
+            }
+    return dict(arrets[-1])
+
+
+def plage_degrade(base: dict, couches: list, seuil_points: int = 64) -> list[dict]:
+    """Rend les couleurs que le fond peut prendre, du plus sombre au plus clair.
+
+    Chaque couche est un dégradé posé au-dessus du précédent, réduit à la
+    **portion réellement sous le texte**. Une couche peut contenir des arrêts
+    transparents : ils laissent voir ce qui est dessous, et c'est justement le
+    cas des halos radiaux du site.
+    """
+    couleurs = [base]
+    for couche in couches:
+        arrets, (debut, fin) = _arrets_et_zone(couche)
+        if not arrets:
+            continue
+        positions = [a.get("t") if isinstance(a, dict) else None for a in arrets]
+        if len(arrets) == 1:
+            positions = [0.0]
+        elif any(p is None for p in positions):
+            positions = [i / (len(arrets) - 1) for i in range(len(arrets))]
+        positions = [float(p) for p in positions]
+        if fin <= debut:
+            fin = min(1.0, debut + 0.001)
+        points = {debut, fin}
+        points.update(p for p in positions if debut <= p <= fin)
+        for rang in range(ECHANTILLONS_DEGRADE):
+            points.add(debut + (fin - debut) * rang / (ECHANTILLONS_DEGRADE - 1))
+        echantillons = [_couleur_a(arrets, positions, p) for p in sorted(points)]
+        composees = [poser(echantillon, fond) for fond in couleurs for echantillon in echantillons]
+        # Les compositions sont ramenées aux deux extrêmes de luminance plus la
+        # médiane : garder les 81 compositions de trois couches rendrait le
+        # contrôle lent sans rien prouver de plus.
+        composees.sort(key=luminance_wcag)
+        if len(composees) > 3:
+            composees = [composees[0], composees[len(composees) // 2], composees[-1]]
+        couleurs = composees
+        if len(couleurs) > seuil_points:  # garde-fou : jamais atteint avec 3 couleurs
+            couleurs = couleurs[:seuil_points]
+    return couleurs
+
+
+def pire_contraste_degrade(candidat: dict) -> tuple[float, dict]:
+    """Le pire rapport de contraste d'un texte sur une plage de dégradé."""
+    texte = dict(candidat.get("couleur") or {})
+    base = dict(candidat.get("base") or {"r": 255, "g": 255, "b": 255, "a": 1})
+    couches = candidat.get("couches") or []
+    plage = plage_degrade(base, couches)
+    pire, pire_fond = None, base
+    for fond in plage:
+        couleur = poser(texte, fond) if float(texte.get("a", 1)) < 1 else texte
+        ratio = rapport_wcag(couleur, fond)
+        if pire is None or ratio < pire:
+            pire, pire_fond = ratio, fond
+    return round(pire or 0, 3), pire_fond
+
+
+def lire_motifs(chemin: Path | None = None) -> dict[str, str]:
+    """Rend les motifs écrits pour les rangées incomplètes assumées.
+
+    Le 4 novembre 2026, une personne a tranché : une rangée incomplète reste un
+    fait de dessin, mais un vide **assumé** doit porter son motif, écrit dans
+    `docs/rd/cadrages.toml` à côté de son chiffre. Un motif qui n'existe que
+    dans une conversation ne survit pas à la conversation.
+
+    Un registre illisible n'est pas un registre vide : le diagnostic le dit
+    plutôt que de déclarer tous les vides « sans motif ».
+    """
+    chemin = chemin or (RACINE / REGISTRE_CADRAGES)
+    registre = lire_registre(chemin)
+    rangees = registre.get("rangees") or {}
+    motifs = rangees.get("motifs") or {}
+    return {str(cle): str(valeur) for cle, valeur in motifs.items()}
+
+
 def orphelins(plan: dict, rapport: dict) -> tuple[list[dict], list[str]]:
     """Nomme les grilles dont la dernière rangée laisse un vide visible.
 
@@ -375,6 +548,7 @@ def orphelins(plan: dict, rapport: dict) -> tuple[list[dict], list[str]]:
     laisse la décision à une personne. Il rend aussi les grilles dont la rangée
     n'a pas été relevée : un diagnostic incomplet se dit, il ne se tait pas.
     """
+    motifs = lire_motifs()
     mesures = rapport.get("mesures") or []
     index = {(m.get("page"), m.get("layout"), m.get("cran"), m.get("largeur")): m for m in mesures}
     trouvees: dict[tuple[str, str], dict] = {}
@@ -406,6 +580,7 @@ def orphelins(plan: dict, rapport: dict) -> tuple[list[dict], list[str]]:
                     "exemple": None,
                 },
             )
+            entree["motif"] = motifs.get(f"{combinaison['page']} · {selecteur}")
             entree["cadrages"] += 1
             if float(fait.get("manque") or 0) > entree["pire_manque"]:
                 entree["pire_manque"] = float(fait.get("manque") or 0)
@@ -518,12 +693,31 @@ def principal(arguments: list[str] | None = None) -> int:
                 "Rangées : aucune grille ne laisse de vide visible dans les cadrages mesurés "
                 f"— {len(rapport.get('mesures') or [])} relevé(s) lu(s)."
             )
+        sans_motif = []
         for entree in liste:
+            motif = entree.get("motif")
+            if not motif:
+                sans_motif.append(f"{entree['page']} · {entree['selecteur']}")
             print(
                 f"  - {entree['page']} · {entree['selecteur']} : {entree['cadrages']} cadrage(s) "
                 f"avec une dernière rangée incomplète, vide maximal {entree['pire_manque']:.2f} px "
                 f"({entree['exemple']})"
+                + (f" — assumée : {motif}" if motif else " — SANS MOTIF ÉCRIT")
             )
+        if sans_motif:
+            # Chaque vide sans motif sort avec son chiffre : un manque nommé sans
+            # son nombre oblige à rouvrir le rapport pour écrire le motif, et
+            # c'est ainsi qu'un motif s'écrit de mémoire — donc faux.
+            for entree in liste:
+                if entree.get("motif"):
+                    continue
+                print(
+                    f"  ! sans motif : {entree['page']} · {entree['selecteur']} : "
+                    f"{entree['cadrages']} cadrage(s), vide maximal {entree['pire_manque']:.2f} px "
+                    f"({entree['exemple']}) — décision A2 du 4 novembre 2026 : le motif s'écrit "
+                    "dans [rangees.motifs].",
+                    file=sys.stderr,
+                )
         if sans_releve:
             print(
                 f"  ! {len(sans_releve)} grille(s) sans relevé de rangée : "
