@@ -2550,9 +2550,10 @@ Une **image** (`url(...)`), un `conic-gradient`, un `repeating-*`, une
 `color-mix()` restent comptés et nommés par `--ecartes` — le site n'en pose
 aucun : les 27 700 « textes sur fond d'image » d'hier étaient tous des dégradés.
 
-Un dégradé **radial** n'est situé que si son centre est écrit en pourcentage et
-son rayon en pixels ; sinon la zone vaut la plage entière, majorant assumé et
-non silence. **Depuis le 4 novembre 2026, ce majorant est chiffré** au lieu
+Un dégradé **radial** est situé quand son centre est lisible — écrit en
+pourcentage, ou **omis**, car `50% 50%` est alors le centre par défaut du CSS et
+Chromium ne l'écrit pas dans la valeur calculée — et quand son rayon est en
+pixels. Sinon la zone vaut la plage entière, majorant assumé et non silence. **Depuis le 4 novembre 2026, ce majorant est chiffré** au lieu
 d'être seulement écrit : la couche dit si elle est située et, sinon, pourquoi ;
 le relevé compte les textes concernés sur la population entière (ses compteurs
 ne sont pas plafonnés, contrairement à l'échantillon joint) et

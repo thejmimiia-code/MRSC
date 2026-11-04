@@ -374,11 +374,26 @@ function mesurer(selecteurs) {
   // que le majorant coûte. Le 4 novembre 2026, le relevé retombait sur la plage
   // entière sans jamais dire pourquoi.
   const zoneRadiale = (entete, boite, texte, rayon) => {
-    const centre = String(entete).match(/at\s+(-?[\d.]+)%\s+(-?[\d.]+)%/);
-    if (!centre) return { zone: [0, 1], motif: 'centre-absent' };
+    const texteEntete = String(entete);
+    const centre = texteEntete.match(/at\s+(-?[\d.]+)%\s+(-?[\d.]+)%/);
+    // Le centre **par défaut** du CSS est `50% 50%`, et Chromium ne l'écrit pas
+    // dans la valeur calculée : `radial-gradient(circle at 50% 50%, …)` ressort
+    // sans `at`. Le 4 novembre 2026, le banc l'a montré — ces halos étaient
+    // comptés « centre absent » alors que leur centre est parfaitement connu.
+    // Un `at` écrit autrement (pixels, mots-clés) reste, lui, non lu : c'est un
+    // fait différent, et il porte son propre motif.
+    let cx;
+    let cy;
+    if (centre) {
+      cx = boite.left + (Number(centre[1]) / 100) * boite.width;
+      cy = boite.top + (Number(centre[2]) / 100) * boite.height;
+    } else if (!/\bat\b/.test(texteEntete)) {
+      cx = boite.left + boite.width / 2;
+      cy = boite.top + boite.height / 2;
+    } else {
+      return { zone: [0, 1], motif: 'centre-non-lu' };
+    }
     if (!(rayon > 0)) return { zone: [0, 1], motif: 'rayon-absent-ou-en-pourcentage' };
-    const cx = boite.left + (Number(centre[1]) / 100) * boite.width;
-    const cy = boite.top + (Number(centre[2]) / 100) * boite.height;
     let mini = Infinity;
     let maxi = -Infinity;
     for (const [x, y] of coins(texte)) {

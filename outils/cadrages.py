@@ -624,8 +624,14 @@ def nommer_candidat(candidat: dict) -> str:
 
 #: Motifs pour lesquels une zone radiale n'a pas pu être située. Le relevé les
 #: écrit ; un motif inconnu n'est pas ignoré, il est nommé tel quel.
+#:
+#: `centre-absent` a disparu le 4 novembre 2026 : le banc a montré que Chromium
+#: n'écrit pas `at 50% 50%`, qui est le centre **par défaut** du CSS. Ces halos
+#: ont donc un centre connu et sont désormais situés. Reste `centre-non-lu`
+#: quand un `at` est écrit autrement qu'en pourcentage, et
+#: `rayon-absent-ou-en-pourcentage` quand aucun arrêt n'est en pixels.
 MOTIFS_RADIAUX = (
-    "centre-absent",
+    "centre-non-lu",
     "rayon-absent-ou-en-pourcentage",
 )
 

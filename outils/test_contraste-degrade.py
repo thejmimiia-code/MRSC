@@ -22,10 +22,12 @@ copie jetable du dépôt :
    que le dernier arrêt — et la zone doit le dire (`[1, 1]`).
 
 Ce que ce banc ne dit pas : il éprouve un `linear-gradient` à arrêts en
-pourcentage et un `radial-gradient` **circulaire** à arrêt en pixels, sur une
-page de banc. Il ne dit rien des formes `ellipse`, des tailles en mots-clés, des
-arrêts radiaux en pourcentage ni des dégradés répétés : ces cas-là retombent sur
-la plage entière, et aucun cas ne chiffre ici ce que ce majorant coûte. Il ne tourne pas sans navigateur — il sort alors en **code 2**
+pourcentage, un `radial-gradient` **circulaire** à arrêt en pixels, un halo au
+centre **par défaut** (que Chromium écrit sans `at`) et un halo **ambigu** dont
+l'arrêt est en pourcentage, donc sans rayon. Il ne dit rien des formes
+`ellipse`, des tailles en mots-clés, des centres écrits en pixels ni des
+dégradés répétés : ces cas-là retombent sur la plage entière. Depuis le
+4 novembre 2026, ce majorant n'est plus tu — il est compté, motif par motif. Il ne tourne pas sans navigateur — il sort alors en **code 2**
 et le dit, parce qu'un banc navigateur muet passerait pour vert.
 
 Usage :
@@ -81,6 +83,14 @@ PAGE_DE_BANC = """<!doctype html>
   .banc-halo-ambigu { width: 1000px; height: 200px; margin: 0; display: flex; align-items: center;
     background-image: radial-gradient(circle at 50% 50%, rgb(255, 255, 255), rgb(0, 0, 0) 60%); }
   .banc-halo-ambigu p { margin: 0; width: 200px; color: rgb(17, 17, 17); font-size: 16px; }
+  /* Halo au centre **par défaut** : `at 50% 50%` est omis, ce qui est la valeur
+     du CSS — et Chromium ne l'écrit pas dans la valeur calculée. Le rayon est en
+     pixels, donc cette fois la zone est situable : le 4 novembre 2026, ce cas a
+     montré que le relevé renonçait à situer des halos dont il connaissait le
+     centre. */
+  .banc-halo-defaut { width: 1000px; height: 200px; margin: 0; display: flex; align-items: center;
+    background-image: radial-gradient(circle, rgb(255, 255, 255), rgb(0, 0, 0) 100px); }
+  .banc-halo-defaut p { margin: 0 0 0 450px; width: 100px; color: rgb(17, 17, 17); font-size: 16px; }
 </style>
 </head>
 <body>
@@ -88,6 +98,7 @@ PAGE_DE_BANC = """<!doctype html>
   <div class="banc-bande"><p id="droite" class="banc-a-droite">Texte à droite</p></div>
   <div class="banc-halo"><p id="pres">Près</p><p id="loin" class="banc-loin">Loin</p></div>
   <div class="banc-halo-ambigu"><p id="ambigu">Halo ambigu</p></div>
+  <div class="banc-halo-defaut"><p id="defaut">Centre par défaut</p></div>
 </body>
 </html>
 """
@@ -216,6 +227,38 @@ class TestContrasteDegrade(unittest.TestCase):
             "dans la moitié intérieure du halo, le texte presque noir garde son contraste",
         )
         self.assertLess(pire_loin, 1.5, "au-delà du rayon, le même texte est sur du noir")
+
+    def test_le_centre_par_defaut_est_lu(self) -> None:
+        """`at 50% 50%` omis par Chromium n'est pas un centre inconnu.
+
+        Le CSS pose le centre à `50% 50%` par défaut, et la valeur calculée ne
+        l'écrit pas. Le relevé comptait pourtant ces halos « centre absent » et
+        renonçait à les situer. Le 4 novembre 2026, le banc a produit ce fait ;
+        le relevé le lit maintenant.
+        """
+        defaut = None
+        for candidat in self.candidats():
+            if str(candidat.get("id") or "") == "defaut":
+                defaut = candidat
+        if defaut is None:
+            self.fail("le relevé ne nomme pas le texte du halo au centre par défaut")
+        couche = defaut["couches"][0]
+        self.assertEqual(couche["type"], "radial")
+        self.assertIs(
+            couche.get("situe"),
+            True,
+            f"un halo dont le centre est le centre par défaut est situable — couche relevée {couche}",
+        )
+        self.assertLess(
+            couche["zone"][0],
+            0.1,
+            f"le texte est au centre du halo, la zone doit partir de zéro — zone {couche['zone']}",
+        )
+        self.assertGreater(
+            couche["zone"][1],
+            0.0,
+            "la zone d'un halo de 100 px ne doit pas être réduite à un point",
+        )
 
     def test_un_halo_sans_rayon_est_compte_comme_non_situe(self) -> None:
         """Le majorant cesse d'être tu : la couche dit qu'elle n'est pas située.
