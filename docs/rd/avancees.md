@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 85 |
+| Avancées consignées | 86 |
 | Période couverte | du 2026-10-20 au 2026-11-04 |
-| Contrôles exécutables cités | 99 |
+| Contrôles exécutables cités | 100 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -1989,6 +1989,33 @@ Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`, `ecoute
 **Suite.** Vérifier la validité des workflows dans les autres dépôts du projet, et étendre la garde aux déclencheurs (`on:`) et aux versions d'actions épinglées, que `verifier-securite.py` couvre en partie.
 
 Initiatives liées : `coordination-de-tous-les-agents`, `optimisation-du-site`.
+
+### `un-majorant-qu-on-ne-chiffre-pas-se-lit-comme-une-mesure` — Un majorant radial cesse d'être tu : 600 textes jugés sans être situés, et aucun verdict qui en dépende
+
+*Consignée le 2026-11-04.*
+
+**Constat.** Depuis le 3 novembre 2026, les limites du registre disaient qu'un dégradé **radial** n'est situé que si son centre est écrit en pourcentage et son rayon en pixels — sinon la zone vaut la plage entière. C'était un majorant assumé, écrit avec honnêteté, et **jamais chiffré**. Un majorant qu'on ne chiffre pas se lit comme une mesure : personne ne savait s'il touchait trois textes ou trois mille, ni s'il faisait refuser quelqu'un.
+
+**Ce que cela change.** Le relevé dit maintenant, couche par couche, si la zone est située et sinon **pourquoi** ; il compte les textes concernés sur **tous** les textes mesurés, et non sur l'échantillon plafonné joint au rapport ; `cadrages.py --radiaux` publie le compte, la répartition des motifs et, sur l'échantillon, combien de **verdicts** tiennent au majorant seul. Un rapport d'avant ce chiffrage est refusé (code 2) plutôt que lu comme zéro. Le banc a ensuite appris, en sortant rouge, que **Chromium n'écrit pas `at 50% 50%`** — c'est le centre par défaut du CSS : ces halos étaient comptés « centre absent » alors que leur centre est connu. Corrigé, et le motif `centre-absent` a disparu. Résultat mesuré sur 1 060 cadrages : **17 500** textes sur un dégradé, dont **6 400** sur un radial ; **600** jugés contre une plage qu'ils ne voient pas, tous par absence de rayon en pixels ; **600** portent un halo au centre implicite, situés depuis la correction. Sur l'échantillon joint, les 600 voient leur pire rapport changer si l'on retire la couche ambiguë — tous de plus d'un point, le pire de **3,267** points (`span.ai-node`, 12,367:1 avec la couche, 15,634:1 sans) — mais **aucun verdict ne tient au majorant** : la ligne « verdicts en jeu » n'apparaît que s'il y en a, et elle n'est pas apparue.
+
+**Preuves dans le dépôt :**
+
+- `outils/mesurer-cadrages.cjs`
+- `outils/cadrages.py`
+- `outils/test_cadrages.py`
+- `outils/test_contraste-degrade.py`
+- `.github/workflows/verification.yml`
+- `docs/rd/cadrages.toml`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_cadrages.py && python3 outils/cadrages.py --radiaux RAPPORT.json`
+
+**Limite — ce que cela ne prouve pas.** Le chiffrage mesure un **écart** entre deux bornes, pas la vraie zone : celle d'un halo à arrêt en pourcentage reste entre les deux, et le diagnostic ne refuse ni ne corrige rien. Les formes `ellipse`, les tailles en mots-clés et les centres écrits en pixels retombent encore sur la plage entière — le site n'en pose pas aujourd'hui (aucun `centre-non-lu` relevé), mais le cas n'est pas chiffré séparément. Le croisement « non situé et centre implicite » n'est pas compté : les deux nombres sont indépendants et ne disent pas qu'il s'agit des mêmes textes.
+
+**Suite.** Laisser la géométrie en l'état tant qu'aucun refus n'en dépend ; le jour où un refus en dépendrait, `ellipse` et le rayon en pourcentage deviendront le sujet — et « verdicts en jeu » le dira avant qu'on le suppose.
+
+Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 
 ### `un-vide-assume-porte-son-motif` — Un vide assumé porte son motif écrit — et un vide sans motif n'est pas assumé
 

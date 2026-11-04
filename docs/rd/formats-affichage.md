@@ -2559,7 +2559,18 @@ le relevé compte les textes concernés sur la population entière (ses compteur
 ne sont pas plafonnés, contrairement à l'échantillon joint) et
 `cadrages.py --radiaux` chiffre, sur l'échantillon, combien de verdicts tiennent
 au majorant seul. Un relevé d'avant ce chiffrage ne vaut pas « zéro » : le
-diagnostic le refuse et sort en code 2. L'interpolation suivie est celle de sRGB. La boîte du dégradé est
+diagnostic le refuse et sort en code 2.
+
+**Ce que le chiffrage a trouvé, sur les 1 060 cadrages du 4 novembre 2026 :**
+sur **17 500** textes posés sur un dégradé, **6 400** sont sur un dégradé
+**radial**, et **600** sont jugés contre une plage qu'ils ne voient pas — tous
+pour la même raison, `rayon-absent-ou-en-pourcentage`, aucun pour un centre
+illisible. **Aucun refus ne tient à ce majorant** : sur l'échantillon joint, les
+600 textes voient leur pire rapport changer si l'on retire la couche ambiguë —
+tous de plus d'un point, le pire de **3,267** points (`span.ai-node`, 12,367:1
+avec la couche, 15,634:1 sans elle) — mais tous restent au-dessus de leur seuil.
+Le majorant n'a donc rien fait refuser : il a seulement rendu six cents verdicts
+plus prudents qu'ils ne devaient l'être. L'interpolation suivie est celle de sRGB. La boîte du dégradé est
 prise au `border-box` : une bordure épaisse décalerait l'axe de quelques pixels.
 
 ### Limite de la méthode

@@ -146,7 +146,12 @@ relevé compte, sur tous les textes et non sur l'échantillon joint, combien son
 jugés contre une plage qu'ils ne voient pas et pour quel motif (centre absent,
 rayon absent ou en pourcentage) ; `cadrages.py --radiaux` en publie le compte et,
 sur l'échantillon, combien de verdicts tiennent à lui seul. Un majorant qu'on ne
-chiffre pas se lit comme une mesure. L'interpolation suivie est celle de sRGB. La boîte du dégradé est
+chiffre pas se lit comme une mesure. Mesuré le 4 novembre 2026 sur 1 060
+cadrages : 17 500 textes sur un dégradé, dont 6 400 sur un radial ; 600 jugés
+contre une plage qu'ils ne voient pas, tous par absence de rayon en pixels ;
+aucun refus ne tient à ce majorant (le pire déplacement est de 3,267 points, sur
+`span.ai-node`, de 12,367:1 à 15,634:1 sans la couche ambiguë, et les deux
+valeurs passent). L'interpolation suivie est celle de sRGB. La boîte du dégradé est
 prise au `border-box` : une bordure épaisse décalerait l'axe de quelques pixels.
 """
 resultat_degrade = """Relevé du 3 novembre 2026, sur les 1 060 combinaisons : **17 500 textes** posés sur un dégradé, jugés un par un contre la portion de plage qui les couvre. Le relevé compte aussi **385 810 textes** sur fond uni, 3 460 décoratifs écartés et 4 240 textes volontairement masqués ; aucun texte sur fond d'image, car le site n'en pose aucun derrière du texte. Le pire rapport mesuré sur un dégradé est **4,782:1** ; aucun texte n'est sous son seuil. Avec l'ancienne valeur du jeton `--muted` (`#647086`), le même relevé refuserait **732 textes** répartis sur **cinq** sélecteurs (le pire : `p.page-lead`, à **4,444:1**) — le jeton est donc bien la cause, et c'est en le mesurant qu'on l'a su, pas en le supposant."""
