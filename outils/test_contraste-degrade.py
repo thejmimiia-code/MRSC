@@ -75,12 +75,19 @@ PAGE_DE_BANC = """<!doctype html>
     background-image: radial-gradient(circle at 0% 50%, rgb(255, 255, 255), rgb(0, 0, 0) 100px); }
   .banc-halo p { margin: 0; width: 40px; color: rgb(17, 17, 17); font-size: 16px; }
   div.banc-halo p.banc-loin { margin-left: 800px; }
+  /* Halo **ambigu** : un arrêt en pourcentage, donc aucun rayon en pixels. La
+     mesure ne sait pas où passe la limite du disque et retombe sur la plage
+     entière. C'est ce majorant que le 4 novembre 2026 on a cessé de taire. */
+  .banc-halo-ambigu { width: 1000px; height: 200px; margin: 0; display: flex; align-items: center;
+    background-image: radial-gradient(circle at 50% 50%, rgb(255, 255, 255), rgb(0, 0, 0) 60%); }
+  .banc-halo-ambigu p { margin: 0; width: 200px; color: rgb(17, 17, 17); font-size: 16px; }
 </style>
 </head>
 <body>
   <div class="banc-bande"><p id="gauche">Texte à gauche</p></div>
   <div class="banc-bande"><p id="droite" class="banc-a-droite">Texte à droite</p></div>
   <div class="banc-halo"><p id="pres">Près</p><p id="loin" class="banc-loin">Loin</p></div>
+  <div class="banc-halo-ambigu"><p id="ambigu">Halo ambigu</p></div>
 </body>
 </html>
 """
@@ -209,6 +216,49 @@ class TestContrasteDegrade(unittest.TestCase):
             "dans la moitié intérieure du halo, le texte presque noir garde son contraste",
         )
         self.assertLess(pire_loin, 1.5, "au-delà du rayon, le même texte est sur du noir")
+
+    def test_un_halo_sans_rayon_est_compte_comme_non_situe(self) -> None:
+        """Le majorant cesse d'être tu : la couche dit qu'elle n'est pas située.
+
+        Un `radial-gradient` dont l'arrêt est en pourcentage n'a pas de rayon en
+        pixels : la zone ne peut pas être projetée, et la mesure retombait sur la
+        plage entière **sans le dire**. Elle le dit maintenant — motif compris —
+        et la page le compte pour **tous** ses textes, pas seulement pour ceux
+        joints au rapport.
+        """
+        ambigu = None
+        for candidat in self.candidats():
+            if str(candidat.get("id") or "") == "ambigu":
+                ambigu = candidat
+        if ambigu is None:
+            self.fail("le relevé ne nomme pas le texte du halo ambigu : le banc ne peut pas conclure")
+        couche = ambigu["couches"][0]
+        self.assertEqual(couche["type"], "radial", "la couche du halo ambigu est radiale")
+        self.assertIs(
+            couche.get("situe"),
+            False,
+            f"un halo sans rayon en pixels n'est pas situé, couche relevée {couche}",
+        )
+        self.assertEqual(couche.get("motif"), "rayon-absent-ou-en-pourcentage")
+        self.assertEqual(couche["zone"], [0, 1], "non située, la zone vaut la plage entière — majorant assumé")
+
+        contraste = (self.donnees.get("mesures") or [{}])[0].get("contraste") or {}
+        self.assertEqual(contraste.get("degrades_radiaux_non_situes"), 1,
+                         "la page compte un texte jugé contre une plage qu'il ne voit pas")
+        self.assertEqual(
+            (contraste.get("couches_radiales_non_situees") or {}),
+            {"rayon-absent-ou-en-pourcentage": 1},
+            "le motif du majorant doit être compté, pas seulement le total",
+        )
+
+    def test_le_diagnostic_chiffre_le_majorant_du_banc(self) -> None:
+        """Le chiffrage lit le vrai rapport du banc : il ne peut pas mentir sur zéro."""
+        bilan = self.cadrages.majorant_radial(self.donnees)
+        self.assertTrue(bilan.get("lisible"), f"le rapport du banc doit être lisible : {bilan.get('raison')}")
+        self.assertEqual(bilan["textes_non_situes"], 1)
+        self.assertEqual(bilan["couches_par_motif"], {"rayon-absent-ou-en-pourcentage": 1})
+        self.assertEqual(bilan["echantillon"], 1, "le texte du halo ambigu est joint au rapport")
+
 
 def raison_d_un_banc_muet() -> int:
     """Sans navigateur, ce banc sort en code 2 et le dit — jamais en vert."""

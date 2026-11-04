@@ -369,9 +369,14 @@ function mesurer(selecteurs) {
     }
     return portion(mini, maxi);
   };
+  // Une zone radiale non située n'est pas une zone inconnue « en général » : elle
+  // a une cause précise, et c'est cette cause qu'il faut compter pour savoir ce
+  // que le majorant coûte. Le 4 novembre 2026, le relevé retombait sur la plage
+  // entière sans jamais dire pourquoi.
   const zoneRadiale = (entete, boite, texte, rayon) => {
     const centre = String(entete).match(/at\s+(-?[\d.]+)%\s+(-?[\d.]+)%/);
-    if (!centre || !(rayon > 0)) return [0, 1];
+    if (!centre) return { zone: [0, 1], motif: 'centre-absent' };
+    if (!(rayon > 0)) return { zone: [0, 1], motif: 'rayon-absent-ou-en-pourcentage' };
     const cx = boite.left + (Number(centre[1]) / 100) * boite.width;
     const cy = boite.top + (Number(centre[2]) / 100) * boite.height;
     let mini = Infinity;
@@ -381,7 +386,7 @@ function mesurer(selecteurs) {
       mini = Math.min(mini, d);
       maxi = Math.max(maxi, d);
     }
-    return portion(mini, maxi);
+    return { zone: portion(mini, maxi), motif: null };
   };
   // Une couche : ses arrêts (couleur + position) et la portion de l'axe que le
   // texte recouvre. `position: null` quand le CSS ne l'écrit pas — c'est le
@@ -423,8 +428,11 @@ function mesurer(selecteurs) {
       }
       delete arret.pos;
     }
-    const zone = radial ? zoneRadiale(entete, boite, texte, rayon) : zoneLineaire(angleDuDegrade(entete), boite, texte);
-    return { type: radial ? 'radial' : 'lineaire', zone, arrets };
+    if (radial) {
+      const lue = zoneRadiale(entete, boite, texte, rayon);
+      return { type: 'radial', zone: lue.zone, situe: lue.motif === null, motif: lue.motif, arrets };
+    }
+    return { type: 'lineaire', zone: zoneLineaire(angleDuDegrade(entete), boite, texte), situe: true, motif: null, arrets };
   };
 
   const decor = '[aria-hidden="true"],[hidden],[role="presentation"],[role="none"]';
@@ -434,6 +442,12 @@ function mesurer(selecteurs) {
     decoratifs: 0,
     fond_image: 0,
     degrades: 0,
+    // Ce que le majorant coûte, compté sur **tous** les textes et non sur
+    // l'échantillon joint au rapport : un dénominateur estimé n'est pas une
+    // couverture. `candidats_degrade` est plafonné, ces compteurs non.
+    degrades_radiaux: 0,
+    degrades_radiaux_non_situes: 0,
+    couches_radiales_non_situees: {},
     candidats_degrade: [],
     sans_texte: 0,
     minimum: null,
@@ -521,6 +535,19 @@ function mesurer(selecteurs) {
       for (let i = piles.length - 1; i >= 0; i -= 1) base = poser(piles[i], base);
       const gras = Number(style.fontWeight) >= 700;
       contraste.degrades += 1;
+      const radiales = couches.filter((c) => c.type === 'radial');
+      if (radiales.length) {
+        contraste.degrades_radiaux += 1;
+        const nonSituees = radiales.filter((c) => c.situe === false);
+        if (nonSituees.length) {
+          contraste.degrades_radiaux_non_situes += 1;
+          for (const couche of nonSituees) {
+            const motif = couche.motif || 'motif-non-dit';
+            contraste.couches_radiales_non_situees[motif] =
+              (contraste.couches_radiales_non_situees[motif] || 0) + 1;
+          }
+        }
+      }
       if (contraste.candidats_degrade.length < 200) {
         contraste.candidats_degrade.push({
           tag: element.tagName.toLowerCase(),

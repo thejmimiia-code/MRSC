@@ -615,6 +615,111 @@ def ecartes(rapport: dict) -> dict:
     }
 
 
+def nommer_candidat(candidat: dict) -> str:
+    """Un nom lisible pour un texte mesuré : la balise et sa première classe."""
+    classe = str(candidat.get("classe") or "").split(" ")[0]
+    nom = str(candidat.get("tag") or "?")
+    return f"{nom}.{classe}" if classe else nom
+
+
+#: Motifs pour lesquels une zone radiale n'a pas pu être située. Le relevé les
+#: écrit ; un motif inconnu n'est pas ignoré, il est nommé tel quel.
+MOTIFS_RADIAUX = (
+    "centre-absent",
+    "rayon-absent-ou-en-pourcentage",
+)
+
+
+def majorant_radial(rapport: dict) -> dict:
+    """Chiffre ce que coûte un dégradé radial dont la zone n'a pas pu être située.
+
+    Un dégradé **linéaire** est projeté sur son axe : le texte ne voit que la
+    portion de plage qui est vraiment sous lui. Un dégradé **radial** l'est
+    aussi — mais seulement si son centre est écrit en pourcentage et son rayon
+    en pixels. Sinon la mesure retombe sur la plage **entière** : c'est un
+    majorant assumé, écrit comme tel dans les limites du registre depuis le
+    3 novembre 2026, et jamais chiffré. Un majorant qu'on ne chiffre pas se lit
+    comme une mesure.
+
+    Ce diagnostic ne juge rien et ne corrige rien : il compte. Combien de textes
+    sont jugés contre une plage qu'ils ne voient pas, pour quel motif, et — sur
+    l'échantillon joint au rapport, qui est plafonné — combien de **verdicts**
+    tiennent à ce majorant seul : des textes refusés avec la plage entière qui
+    passeraient si la couche ambiguë ne comptait pas. Ce second chiffre est une
+    borne, pas une vérité : la vraie zone est quelque part entre les deux.
+    """
+    mesures = rapport.get("mesures") or []
+    if not mesures:
+        return {"lisible": False, "raison": "le rapport ne contient aucun relevé"}
+
+    sans_compteur = [
+        mesure.get("nom") or mesure.get("page") or "?"
+        for mesure in mesures
+        if "degrades_radiaux_non_situes" not in (mesure.get("contraste") or {})
+    ]
+    if sans_compteur:
+        return {
+            "lisible": False,
+            "raison": (
+                "le relevé ne porte pas les compteurs radiaux : il a été produit par une "
+                "version antérieure du relevé, qui ne distinguait pas une zone non située "
+                "d'une zone entière. Relever à nouveau, plutôt que compter zéro."
+            ),
+            "exemples": sans_compteur[:3],
+        }
+
+    bilan = {
+        "lisible": True,
+        "releves": len(mesures),
+        "textes_degrades": 0,
+        "textes_radiaux": 0,
+        "textes_non_situes": 0,
+        "couches_par_motif": {},
+        "echantillon": 0,
+        "deplaces": 0,
+        "deplaces_forts": 0,
+        "verdicts_en_jeu": 0,
+        "pire_ecart": None,
+    }
+    for mesure in mesures:
+        contraste = mesure.get("contraste") or {}
+        bilan["textes_degrades"] += int(contraste.get("degrades") or 0)
+        bilan["textes_radiaux"] += int(contraste.get("degrades_radiaux") or 0)
+        bilan["textes_non_situes"] += int(contraste.get("degrades_radiaux_non_situes") or 0)
+        for motif, compte in (contraste.get("couches_radiales_non_situees") or {}).items():
+            bilan["couches_par_motif"][motif] = bilan["couches_par_motif"].get(motif, 0) + int(compte)
+        for candidat in contraste.get("candidats_degrade") or []:
+            couches = candidat.get("couches") or []
+            ambigues = [c for c in couches if isinstance(c, dict) and c.get("situe") is False]
+            if not ambigues:
+                continue
+            bilan["echantillon"] += 1
+            avec, _ = pire_contraste_degrade(candidat)
+            sans_candidat = dict(candidat)
+            sans_candidat["couches"] = [
+                c for c in couches if not (isinstance(c, dict) and c.get("situe") is False)
+            ]
+            sans, _ = pire_contraste_degrade(sans_candidat)
+            ecart = round(sans - avec, 3)
+            if ecart <= 0:
+                continue
+            bilan["deplaces"] += 1
+            if ecart >= 1.0:
+                bilan["deplaces_forts"] += 1
+            seuil = seuil_de_contraste(float(candidat.get("taille") or 0), bool(candidat.get("gras")))
+            if avec < seuil <= sans:
+                bilan["verdicts_en_jeu"] += 1
+            if bilan["pire_ecart"] is None or ecart > bilan["pire_ecart"]["ecart"]:
+                bilan["pire_ecart"] = {
+                    "ecart": ecart,
+                    "avec": avec,
+                    "sans": sans,
+                    "selecteur": nommer_candidat(candidat),
+                    "texte": (candidat.get("texte") or "")[:40],
+                }
+    return bilan
+
+
 def principal(arguments: list[str] | None = None) -> int:
     analyseur = argparse.ArgumentParser(description="Confronte le dessin dans tous les cadrages personnalisés.")
     analyseur.add_argument("--releve-json", metavar="CHEMIN", help="écrire le plan à mesurer")
@@ -635,6 +740,12 @@ def principal(arguments: list[str] | None = None) -> int:
         nargs=2,
         metavar=("PLAN", "RAPPORT"),
         help="nommer les grilles dont la dernière rangée laisse un vide visible",
+    )
+    analyseur.add_argument(
+        "--radiaux",
+        nargs=1,
+        metavar="RAPPORT",
+        help="chiffrer ce que coûte un dégradé radial dont la zone n'a pas été située",
     )
     options = analyseur.parse_args(arguments)
 
@@ -657,6 +768,57 @@ def principal(arguments: list[str] | None = None) -> int:
         print(
             f"Plan de cadrage écrit : {destination} — {len(plan['combinaisons'])} combinaison(s), "
             f"{attendus} grille(s) à confronter, tolérance {plan['tolerance_px']} px."
+        )
+        return 0
+
+    if options.radiaux:
+        try:
+            rapport = json.loads(Path(options.radiaux[0]).read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as erreur:
+            print(f"Lecture impossible ({erreur}) — aucun chiffre.", file=sys.stderr)
+            return 2
+        bilan = majorant_radial(rapport)
+        if not bilan.get("lisible"):
+            print(f"Majorant radial : illisible — {bilan['raison']}", file=sys.stderr)
+            for exemple in bilan.get("exemples") or []:
+                print(f"  - relevé sans compteurs : {exemple}", file=sys.stderr)
+            return 2
+        part = (
+            f"{bilan['textes_non_situes']} texte(s) sur {bilan['textes_degrades']} posés sur un "
+            f"dégradé"
+        )
+        if bilan["textes_radiaux"]:
+            part += f", dont {bilan['textes_radiaux']} sur un dégradé radial"
+        print(f"Majorant radial : {part}.")
+        if not bilan["textes_non_situes"]:
+            print(
+                "Aucun texte n'est jugé contre une plage qu'il ne voit pas : "
+                "toutes les zones radiales ont été situées."
+            )
+            return 0
+        motifs = ", ".join(
+            f"{motif} ({compte})" for motif, compte in sorted(bilan["couches_par_motif"].items())
+        )
+        print(f"  - motifs des couches non situées : {motifs or 'aucun motif écrit'}")
+        print(
+            f"  - sur l'échantillon joint, {bilan['echantillon']} texte(s) portent une couche "
+            f"non située ; {bilan['deplaces']} voient leur pire rapport changer si on la retire, "
+            f"dont {bilan['deplaces_forts']} de plus d'un point."
+        )
+        if bilan["verdicts_en_jeu"]:
+            print(
+                f"  - {bilan['verdicts_en_jeu']} verdict(s) tiennent au majorant seul : refusés "
+                "avec la plage entière, conformes si la couche ambiguë ne comptait pas."
+            )
+        if bilan["pire_ecart"]:
+            pire = bilan["pire_ecart"]
+            print(
+                f"  - pire écart : {pire['selecteur']} — {pire['avec']}:1 avec la couche, "
+                f"{pire['sans']}:1 sans elle ({pire['ecart']} point(s))."
+            )
+        print(
+            "Ce chiffre est une borne, pas une mesure : la vraie zone d'un halo ambigu est "
+            "quelque part entre les deux. Il ne refuse rien."
         )
         return 0
 

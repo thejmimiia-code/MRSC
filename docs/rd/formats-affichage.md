@@ -2552,7 +2552,13 @@ aucun : les 27 700 « textes sur fond d'image » d'hier étaient tous des dégra
 
 Un dégradé **radial** n'est situé que si son centre est écrit en pourcentage et
 son rayon en pixels ; sinon la zone vaut la plage entière, majorant assumé et
-non silence. L'interpolation suivie est celle de sRGB. La boîte du dégradé est
+non silence. **Depuis le 4 novembre 2026, ce majorant est chiffré** au lieu
+d'être seulement écrit : la couche dit si elle est située et, sinon, pourquoi ;
+le relevé compte les textes concernés sur la population entière (ses compteurs
+ne sont pas plafonnés, contrairement à l'échantillon joint) et
+`cadrages.py --radiaux` chiffre, sur l'échantillon, combien de verdicts tiennent
+au majorant seul. Un relevé d'avant ce chiffrage ne vaut pas « zéro » : le
+diagnostic le refuse et sort en code 2. L'interpolation suivie est celle de sRGB. La boîte du dégradé est
 prise au `border-box` : une bordure épaisse décalerait l'axe de quelques pixels.
 
 ### Limite de la méthode

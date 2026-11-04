@@ -711,6 +711,40 @@ jobs:
             | cut -c1-900 | while IFS= read -r ligne; do
             echo "::notice title=Écartés du contraste::$ligne"
           done
+          # Un dégradé **radial** dont le centre ou le rayon n'est pas lisible est
+          # jugé contre la plage entière : majorant assumé depuis le 3 novembre
+          # 2026, et jamais chiffré — un majorant qu'on ne chiffre pas se lit
+          # comme une mesure. Ce diagnostic le compte sur **tous** les textes (les
+          # compteurs du relevé ne sont pas plafonnés) et chiffre, sur
+          # l'échantillon joint, combien de verdicts tiennent à lui seul. Il ne
+          # refuse rien : si le relevé ne porte pas les compteurs, il le dit et
+          # sort en code 2 — jamais zéro par défaut.
+          set +e
+          python3 outils/cadrages.py --radiaux \
+            "$RUNNER_TEMP/graphismes/cadrages/rapport.json" \
+            >"$RUNNER_TEMP/graphismes/cadrages/radiaux.log" 2>&1
+          radiaux=$?
+          set -e
+          cat "$RUNNER_TEMP/graphismes/cadrages/radiaux.log"
+          if [ "$radiaux" -eq 0 ]; then
+            head -n 12 "$RUNNER_TEMP/graphismes/cadrages/radiaux.log" \
+              | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::notice title=Majorant radial::$ligne"
+            done
+          else
+            # Il n'a pas pu lire sa source : il le dit, et l'annotation aussi.
+            head -n 4 "$RUNNER_TEMP/graphismes/cadrages/radiaux.log" \
+              | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::warning title=Majorant radial non chiffré::$ligne"
+            done
+          fi
+          {
+            echo "### Majorant radial — ce qui est jugé sans être situé"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/graphismes/cadrages/radiaux.log"
+            echo '```'
+          } >>"$GITHUB_STEP_SUMMARY"
           exit "$controle"
 
       # Le contraste du texte était mesuré depuis la veille ; l'anneau de focus ne
