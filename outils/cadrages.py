@@ -705,11 +705,19 @@ def principal(arguments: list[str] | None = None) -> int:
                 + (f" — assumée : {motif}" if motif else " — SANS MOTIF ÉCRIT")
             )
         if sans_motif:
-            print(
-                f"  ! {len(sans_motif)} vide(s) sans motif écrit : " + ", ".join(sans_motif)
-                + " — la décision du 4 novembre 2026 demande le motif dans [rangees.motifs].",
-                file=sys.stderr,
-            )
+            # Chaque vide sans motif sort avec son chiffre : un manque nommé sans
+            # son nombre oblige à rouvrir le rapport pour écrire le motif, et
+            # c'est ainsi qu'un motif s'écrit de mémoire — donc faux.
+            for entree in liste:
+                if entree.get("motif"):
+                    continue
+                print(
+                    f"  ! sans motif : {entree['page']} · {entree['selecteur']} : "
+                    f"{entree['cadrages']} cadrage(s), vide maximal {entree['pire_manque']:.2f} px "
+                    f"({entree['exemple']}) — décision A2 du 4 novembre 2026 : le motif s'écrit "
+                    "dans [rangees.motifs].",
+                    file=sys.stderr,
+                )
         if sans_releve:
             print(
                 f"  ! {len(sans_releve)} grille(s) sans relevé de rangée : "
