@@ -830,10 +830,26 @@ jobs:
       # Trois cas, deux secondes — dont la zone radiale, sans laquelle un halo
       # de 100 px serait jugé comme s'il colorait toute la page. Sans
       # navigateur : code 2.
+      # Le 4 novembre 2026, ce banc est devenu rouge sans que l'annotation dise
+      # pourquoi : le journal n'est pas lisible depuis cette session, et
+      # « exit code 1 » ne nomme rien. Une CI rouge doit dire ce qu'elle a vu —
+      # l'étape capture donc ses échecs et les publie en annotations.
       - name: Éprouver que la lecture d'un dégradé garde ses arrêts et la zone du texte
         env:
           MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
-        run: python3 outils/test_contraste-degrade.py
+        run: |
+          set +e
+          python3 outils/test_contraste-degrade.py >"$RUNNER_TEMP/degrade.log" 2>&1
+          statut=$?
+          set -e
+          cat "$RUNNER_TEMP/degrade.log"
+          if [ "$statut" -ne 0 ]; then
+            grep -E -A6 '^(FAIL|ERROR|AssertionError)' "$RUNNER_TEMP/degrade.log" \
+              | head -n 40 | cut -c1-900 | grep -v '^--$' | while IFS= read -r ligne; do
+              echo "::error title=Banc du contraste des dégradés::$ligne"
+            done
+            exit "$statut"
+          fi
 
       # Les contrôles précédents disent qu'une mutation produit l'erreur
       # annoncée. Aucun ne dit que la géométrie relevée est la bonne : un

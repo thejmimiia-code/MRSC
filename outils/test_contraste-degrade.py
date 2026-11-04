@@ -243,21 +243,27 @@ class TestContrasteDegrade(unittest.TestCase):
         self.assertEqual(couche["zone"], [0, 1], "non située, la zone vaut la plage entière — majorant assumé")
 
         contraste = (self.donnees.get("mesures") or [{}])[0].get("contraste") or {}
-        self.assertEqual(contraste.get("degrades_radiaux_non_situes"), 1,
-                         "la page compte un texte jugé contre une plage qu'il ne voit pas")
+        self.assertEqual(
+            contraste.get("degrades_radiaux_non_situes"),
+            1,
+            "la page compte un texte jugé contre une plage qu'il ne voit pas — "
+            f"compteur relevé : {contraste.get('degrades_radiaux_non_situes')}, "
+            f"textes radiaux : {contraste.get('degrades_radiaux')}",
+        )
         self.assertEqual(
             (contraste.get("couches_radiales_non_situees") or {}),
             {"rayon-absent-ou-en-pourcentage": 1},
-            "le motif du majorant doit être compté, pas seulement le total",
+            "le motif du majorant doit être compté, pas seulement le total — "
+            f"compteurs relevés : {contraste.get('couches_radiales_non_situees')}",
         )
 
     def test_le_diagnostic_chiffre_le_majorant_du_banc(self) -> None:
         """Le chiffrage lit le vrai rapport du banc : il ne peut pas mentir sur zéro."""
         bilan = self.cadrages.majorant_radial(self.donnees)
         self.assertTrue(bilan.get("lisible"), f"le rapport du banc doit être lisible : {bilan.get('raison')}")
-        self.assertEqual(bilan["textes_non_situes"], 1)
-        self.assertEqual(bilan["couches_par_motif"], {"rayon-absent-ou-en-pourcentage": 1})
-        self.assertEqual(bilan["echantillon"], 1, "le texte du halo ambigu est joint au rapport")
+        self.assertEqual(bilan["textes_non_situes"], 1, f"bilan relevé : {bilan}")
+        self.assertEqual(bilan["couches_par_motif"], {"rayon-absent-ou-en-pourcentage": 1}, f"bilan relevé : {bilan}")
+        self.assertEqual(bilan["echantillon"], 1, f"le texte du halo ambigu est joint au rapport — bilan relevé : {bilan}")
 
 
 def raison_d_un_banc_muet() -> int:
