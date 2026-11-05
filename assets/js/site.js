@@ -341,7 +341,11 @@
     const segments = [];
     let reste = texte;
     while (reste.length > LONGUEUR_MAX_SEGMENT) {
-      let coupe = reste.lastIndexOf(" ", LONGUEUR_MAX_SEGMENT);
+      // La virgule de continuation ajoutée plus bas compte dans la limite : la
+      // coupe se fait donc un caractère avant, pour qu'aucun segment ne dépasse
+      // 220. Mesuré le 5 novembre 2026 dans la CI : une coupe à 220 pile donnait
+      // un segment de 221, que le moteur interrompt en pleine phrase.
+      let coupe = reste.lastIndexOf(" ", LONGUEUR_MAX_SEGMENT - 1);
       const ponctuation = Math.max(
         reste.lastIndexOf(". ", LONGUEUR_MAX_SEGMENT),
         reste.lastIndexOf("? ", LONGUEUR_MAX_SEGMENT),
@@ -349,7 +353,7 @@
         reste.lastIndexOf("; ", LONGUEUR_MAX_SEGMENT),
       );
       if (ponctuation > LONGUEUR_MAX_SEGMENT / 3) coupe = ponctuation + 1;
-      if (coupe <= 0) coupe = LONGUEUR_MAX_SEGMENT;
+      if (coupe <= 0) coupe = LONGUEUR_MAX_SEGMENT - 1;
       // Une coupe tombe le plus souvent sur une espace, donc au milieu d'une
       // phrase : le morceau se terminait sur un mot nu. Mesuré le 24 octobre
       // 2026 sur les 98 pages du site : 41 segments sur 5 485 finissaient sans
@@ -370,12 +374,7 @@
             morceau = morceau.slice(0, espace).trimEnd();
           }
         }
-        // La virgule ne s'ajoute que si elle tient : mesuré le 5 novembre 2026,
-        // un paragraphe de `transparence.html` produisait un segment de
-        // 221 caractères parce que le recul sur l'espace avait échoué et que la
-        // virgule s'ajoutait quand même. Un morceau sans respiration vaut mieux
-        // qu'un morceau que le moteur interrompt en pleine phrase.
-        if (morceau.length < LONGUEUR_MAX_SEGMENT) morceau += ",";
+        morceau += ",";
       }
       segments.push(morceau);
     }
