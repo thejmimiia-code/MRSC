@@ -858,6 +858,20 @@ dans le panneau, aux largeurs et aux crans de texte les plus serrés.
   morceau suivant. Après correction, **0 segment sur 6 462** finit sur un mot nu,
   et aucun ne dépasse 220 caractères.
 
+- **La limite de 220 tenait mal, et c'est la CI qui l'a vue (5 novembre 2026).**
+  Un paragraphe de `transparence.html` allongé ce jour a produit un segment de
+  **221 caractères**, un seul sur 281, avec le relevé `longueurMax: 221`. La
+  cause : la coupe tombait à 220 pile, puis la virgule de continuation était
+  ajoutée sans place. Deux corrections ont été essayées ; la première —
+  n'ajouter la virgule que si elle tient — a été **refusée par le garde-fou
+  `verifier-affichages.py`**, qui exige que la ligne `morceau += ",";` reste
+  intacte. La coupe se fait donc **un caractère avant** (219), et le repli sans
+  espace aussi : la virgule retrouve sa place dans la limite. Vérifié hors
+  navigateur sur quatre cas, dont un mot de 300 caractères sans espace :
+  maximum mesuré **220**. L'assertion `aucun segment ne doit dépasser 220
+  caractères` de `test-experience.cjs` reste la régression, et elle tourne dans
+  la CI, seul endroit où Chromium existe.
+
 Garde-fou : 15ᵉ contrôle `controler_lecture_a_voix_haute`, désormais **dix-sept
 mutations rejouées, dix-sept détectées**. Sept concernent le premier lot (langue
 du bloc ignorée, arrêt sans annulation, contenus masqués lus, `fetch` ajouté,

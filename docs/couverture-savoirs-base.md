@@ -106,9 +106,10 @@ Lire des cartes et comprendre comment les lieux, les distances et les activités
 | Lire une échelle et une distance sur une carte | Début de couverture — à approfondir | [`geo-echelle-carte`](../apprendre/fiches/geo-echelle-carte.html) |
 | S’orienter, lire un itinéraire et anticiper l’accessibilité | Début de couverture — à approfondir | [`geo-points-cardinaux`](../apprendre/fiches/geo-points-cardinaux.html) |
 | Territoires, paysages, populations et mobilités | Début de couverture — à approfondir | [`geo-decrire-paysage`](../apprendre/fiches/geo-decrire-paysage.html) |
+| Lire une projection cartographique et savoir ce qu’elle déforme | Début de couverture — à approfondir | [`geo-choisir-une-projection`](../apprendre/fiches/geo-choisir-une-projection.html) |
 | Lire les symboles et la légende d’une carte | Début de couverture — à approfondir | [`geo-lire-legende-carte`](../apprendre/fiches/geo-lire-legende-carte.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 5 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 5 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Histoire, chronologie et mémoire
 
@@ -118,9 +119,10 @@ Situer des faits dans le temps, lire des sources et comprendre qu’un récit d�
 | --- | --- | --- |
 | Lire une frise, des dates et des périodes historiques | Début de couverture — à approfondir | [`histoire-lire-frise`](../apprendre/fiches/histoire-lire-frise.html)<br>[`histoire-situer-siecle`](../apprendre/fiches/histoire-situer-siecle.html) |
 | Comparer des sources, témoignages et points de vue | Début de couverture — à approfondir | [`histoire-comparer-sources`](../apprendre/fiches/histoire-comparer-sources.html) |
+| Lire la cote d’une archive et retrouver un document | Début de couverture — à approfondir | [`histoire-lire-une-cote`](../apprendre/fiches/histoire-lire-une-cote.html) |
 | Repères d’histoire de France et du monde | Début de couverture — à approfondir | [`histoire-reperer-echelle-france-monde`](../apprendre/fiches/histoire-reperer-echelle-france-monde.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 3 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Citoyenneté, médias et information
 
@@ -129,12 +131,13 @@ Vérifier les affirmations, comprendre les institutions et participer sans confo
 | Sujet | Statut | Fiches de première version / suite à donner |
 | --- | --- | --- |
 | Vérifier l’auteur, la date, la source et l’affirmation | Début de couverture — à approfondir | [`civ-verifier-information`](../apprendre/fiches/civ-verifier-information.html) |
+| Lire un sondage publié et ses mentions obligatoires | Début de couverture — à approfondir | [`civ-lire-un-sondage`](../apprendre/fiches/civ-lire-un-sondage.html) |
 | Choisir une source publique selon la question et vérifier sa portée | Début de couverture — à approfondir | [`civ-choisir-source-publique`](../apprendre/fiches/civ-choisir-source-publique.html) |
 | Distinguer image, légende, montage et interprétation | Début de couverture — à approfondir | [`arts-lire-image`](../apprendre/fiches/arts-lire-image.html) |
 | Institutions françaises et européennes, droits et responsabilités | Début de couverture — à approfondir | [`civ-reperer-echelle-institution`](../apprendre/fiches/civ-reperer-echelle-institution.html) |
 | Élections, décisions publiques et participation citoyenne | Début de couverture — à approfondir | [`civ-reperer-info-electorale`](../apprendre/fiches/civ-reperer-info-electorale.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 5 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 5 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 6 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 6 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Démarches, droits, sécurité et vie professionnelle
 
@@ -144,10 +147,11 @@ Lire un document et agir en sécurité ; les règles de droit et les dispositifs
 | --- | --- | --- |
 | Repérer l’émetteur, l’action et l’échéance d’un document | Début de couverture — à approfondir | [`civ-lire-document`](../apprendre/fiches/civ-lire-document.html) |
 | Trouver un service public et utiliser un formulaire numérique | Début de couverture — à approfondir | [`civ-trouver-service-public`](../apprendre/fiches/civ-trouver-service-public.html) |
+| Obtenir un acte d’état civil au bon service | Début de couverture — à approfondir | [`demarche-obtenir-acte-naissance`](../apprendre/fiches/demarche-obtenir-acte-naissance.html) |
 | Droits au travail, contrats, sécurité et interlocuteurs | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
 | Planning, consignes, coopération et compétences de travail | Début de couverture — à approfondir | [`maths-lire-planning`](../apprendre/fiches/maths-lire-planning.html)<br>[`fr-lire-consigne`](../apprendre/fiches/fr-lire-consigne.html)<br>[`fr-ecrire-message`](../apprendre/fiches/fr-ecrire-message.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 3 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 1 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 5 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Numérique, données, cybersécurité et intelligence artificielle
 
@@ -208,10 +212,13 @@ Développer des repères d’information sans fournir de diagnostic, de traiteme
 | --- | --- | --- |
 | Repérer quantité, ingrédients, allergènes et dates sur une étiquette | Début de couverture — à approfondir | [`sante-lire-etiquette`](../apprendre/fiches/sante-lire-etiquette.html) |
 | Trouver une source de santé fiable et demander de l’aide | Début de couverture — à approfondir | [`sante-reperer-source-publique`](../apprendre/fiches/sante-reperer-source-publique.html) |
+| Comprendre le parcours de soins coordonnés et le rôle du médecin traitant | Début de couverture — à approfondir | [`sante-comprendre-parcours-soins`](../apprendre/fiches/sante-comprendre-parcours-soins.html) |
+| Lire l’étiquette d’un produit ménager, d’un produit de bricolage ou de jardinage | Début de couverture — à approfondir | [`sante-lire-etiquette-produit-menager`](../apprendre/fiches/sante-lire-etiquette-produit-menager.html) |
+| Aménager un logement pour limiter les chutes, avec l’avis d’un professionnel | Début de couverture — à approfondir | [`sante-amenager-logement-chutes`](../apprendre/fiches/sante-amenager-logement-chutes.html) |
 | Premiers secours et conduites à tenir | À créer avec une relecture spécialisée | À cadrer avec une personne compétente, puis rechercher des sources officielles à jour. |
 | Activité physique, repos, mobilité et sécurité | À créer avec une relecture spécialisée | À cadrer avec une personne compétente, puis rechercher des sources officielles à jour. |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 2 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 2 sujet(s) demandant une relecture spécialisée sur 4 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 5 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 2 sujet(s) demandant une relecture spécialisée sur 7 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ### Apprendre à apprendre, autonomie et relations
 
@@ -219,7 +226,7 @@ Proposer plusieurs façons de s’engager, comprendre, s’exercer et exprimer c
 
 | Sujet | Statut | Fiches de première version / suite à donner |
 | --- | --- | --- |
-| Partir d’une situation connue, essayer et réutiliser | Début de couverture — à approfondir | [`apprendre-methode`](../apprendre/fiches/apprendre-methode.html) |
+| Partir d’une situation connue, essayer et réutiliser | Début de couverture — à approfondir | [`apprendre-methode`](../apprendre/fiches/apprendre-methode.html)<br>[`methode-verbaliser-sa-methode`](../apprendre/fiches/methode-verbaliser-sa-methode.html) |
 | Choisir une forme de lecture, écoute, manipulation ou expression | Début de couverture — à approfondir | [`apprendre-methode`](../apprendre/fiches/apprendre-methode.html) |
 | Écoute, coopération, désaccord et résolution de problème | Début de couverture — à approfondir | [`methodes-demander-clarification`](../apprendre/fiches/methodes-demander-clarification.html) |
 | Planifier une tâche et demander de l’aide au bon moment | Début de couverture — à approfondir | [`apprendre-methode`](../apprendre/fiches/apprendre-methode.html)<br>[`maths-lire-planning`](../apprendre/fiches/maths-lire-planning.html) |

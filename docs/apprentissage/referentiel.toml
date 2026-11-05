@@ -266,6 +266,12 @@ statut = "partiel"
 fiches = ["geo-decrire-paysage"]
 
 [[domaine.sujet]]
+id = "projections-cartes"
+titre = "Lire une projection cartographique et savoir ce qu’elle déforme"
+statut = "partiel"
+fiches = ["geo-choisir-une-projection"]
+
+[[domaine.sujet]]
 id = "legende-symboles-cartes"
 titre = "Lire les symboles et la légende d’une carte"
 statut = "partiel"
@@ -289,6 +295,12 @@ statut = "partiel"
 fiches = ["histoire-comparer-sources"]
 
 [[domaine.sujet]]
+id = "archives-cotes"
+titre = "Lire la cote d’une archive et retrouver un document"
+statut = "partiel"
+fiches = ["histoire-lire-une-cote"]
+
+[[domaine.sujet]]
 id = "histoire-monde-france"
 titre = "Repères d’histoire de France et du monde"
 statut = "partiel"
@@ -304,6 +316,12 @@ id = "verification-information"
 titre = "Vérifier l’auteur, la date, la source et l’affirmation"
 statut = "partiel"
 fiches = ["civ-verifier-information"]
+
+[[domaine.sujet]]
+id = "sondages"
+titre = "Lire un sondage publié et ses mentions obligatoires"
+statut = "partiel"
+fiches = ["civ-lire-un-sondage"]
 
 [[domaine.sujet]]
 id = "sources-publiques"
@@ -345,6 +363,12 @@ id = "services-publics"
 titre = "Trouver un service public et utiliser un formulaire numérique"
 statut = "partiel"
 fiches = ["civ-trouver-service-public"]
+
+[[domaine.sujet]]
+id = "etat-civil"
+titre = "Obtenir un acte d’état civil au bon service"
+statut = "partiel"
+fiches = ["demarche-obtenir-acte-naissance"]
 
 [[domaine.sujet]]
 id = "droits-travail"
@@ -535,6 +559,24 @@ statut = "partiel"
 fiches = ["sante-reperer-source-publique"]
 
 [[domaine.sujet]]
+id = "parcours-soins"
+titre = "Comprendre le parcours de soins coordonnés et le rôle du médecin traitant"
+statut = "partiel"
+fiches = ["sante-comprendre-parcours-soins"]
+
+[[domaine.sujet]]
+id = "produits-menagers"
+titre = "Lire l’étiquette d’un produit ménager, d’un produit de bricolage ou de jardinage"
+statut = "partiel"
+fiches = ["sante-lire-etiquette-produit-menager"]
+
+[[domaine.sujet]]
+id = "prevention-chutes"
+titre = "Aménager un logement pour limiter les chutes, avec l’avis d’un professionnel"
+statut = "partiel"
+fiches = ["sante-amenager-logement-chutes"]
+
+[[domaine.sujet]]
 id = "premiers-secours"
 titre = "Premiers secours et conduites à tenir"
 statut = "revue-experte"
@@ -555,7 +597,7 @@ intention = "Proposer plusieurs façons de s’engager, comprendre, s’exercer 
 id = "apprendre-situation"
 titre = "Partir d’une situation connue, essayer et réutiliser"
 statut = "partiel"
-fiches = ["apprendre-methode"]
+fiches = ["apprendre-methode", "methode-verbaliser-sa-methode"]
 
 [[domaine.sujet]]
 id = "choisir-formats"

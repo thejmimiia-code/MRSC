@@ -12,9 +12,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Prototypes audités | 70 |
+| Prototypes audités | 78 |
 | Contrôles automatiques par fiche | 17 |
-| Fiches sans aucun échec mécanique | 70 |
+| Fiches sans aucun échec mécanique | 78 |
 | Fiches avec au moins un échec | 0 |
 | Échecs mécaniques au total | 0 |
 | Fiches avec un constat à trancher par une personne | 1 |
@@ -34,8 +34,8 @@ Pour la ligne « page précise » : ces fiches ne citent que des portails (racin
 
 | Fait mesuré | Valeur |
 | --- | ---: |
-| Sources déclarées au total | 125 |
-| dont licence déclarée « non vérifiée » | 123 |
+| Sources déclarées au total | 135 |
+| dont licence déclarée « non vérifiée » | 132 |
 | Fiches sans aucune source | 0 |
 | Prochaine revue la plus proche | 2027-01-09 (info-lire-adresse-web) |
 | Fiches dont la revue de contenu est échue à la date de référence | 0 |
@@ -49,9 +49,11 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 16 | 0 | 1 | constat : Au moins une source pointe une page précise, pas seulement un portail (1 portail(s) assumé(s) par écrit : rien à confronter, à trancher par une personne) |
 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 17 | 0 | 0 | — |
 | [Choisir une source publique adaptée à sa question](fiches/civ-choisir-source-publique.html) | Citoyenneté, médias et information | 17 | 0 | 0 | — |
+| [Lire un sondage : vérifier les mentions avant de retenir le chiffre](fiches/civ-lire-un-sondage.html) | Citoyenneté, médias et information | 17 | 0 | 0 | — |
 | [Repérer l’échelle d’une institution avant de chercher le bon service](fiches/civ-reperer-echelle-institution.html) | Citoyenneté, médias et information | 17 | 0 | 0 | — |
 | [Repérer une information électorale officielle](fiches/civ-reperer-info-electorale.html) | Citoyenneté, médias et information | 17 | 0 | 0 | — |
 | [Trouver un service public et préparer un formulaire](fiches/civ-trouver-service-public.html) | Démarches, droits, sécurité et vie professionnelle | 17 | 0 | 0 | — |
+| [Demander un acte de naissance : la bonne mairie, la bonne forme](fiches/demarche-obtenir-acte-naissance.html) | Démarches, droits, sécurité et vie professionnelle | 17 | 0 | 0 | — |
 | [Comparer deux prix à quantité égale](fiches/econ-comparer-prix-unitaires.html) | Budget, économie, consommation et travail | 17 | 0 | 0 | — |
 | [Distinguer un intérêt d’un frais sur un crédit fictif](fiches/econ-distinguer-interet-frais.html) | Budget, économie, consommation et travail | 17 | 0 | 0 | — |
 | [Lire une facture et repérer une échéance](fiches/econ-lire-facture.html) | Budget, économie, consommation et travail | 17 | 0 | 0 | — |
@@ -71,11 +73,13 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [AOP, IGP, STG, Label rouge : ce que chaque signe garantit](fiches/sante-reperer-signes-qualite-origine.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
 | [Lire une fiche d’isolation : résistance R et coefficient U](fiches/sciences-comprendre-isolation-r-et-u.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
 | [Lire un cumul de pluie : millimètres, litres et surface](fiches/sciences-comprendre-pluie-millimetres.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
+| [Choisir une projection : ce que la carte garde et ce qu’elle déforme](fiches/geo-choisir-une-projection.html) | Géographie, territoire et espace | 17 | 0 | 0 | — |
 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 17 | 0 | 0 | — |
 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 17 | 0 | 0 | — |
 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 17 | 0 | 0 | — |
 | [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 17 | 0 | 0 | — |
 | [Lire une frise chronologique et ordonner des événements](fiches/histoire-lire-frise.html) | Histoire, chronologie et mémoire | 17 | 0 | 0 | — |
+| [Lire la cote d’une archive avant de commander le document](fiches/histoire-lire-une-cote.html) | Histoire, chronologie et mémoire | 17 | 0 | 0 | — |
 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 17 | 0 | 0 | — |
 | [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 17 | 0 | 0 | — |
 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
@@ -106,9 +110,13 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Moyenne et médiane : deux façons de résumer une série](fiches/maths-moyenne-mediane.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
+| [Nommer sa méthode après un exercice, pour comprendre ce qui a marché](fiches/methode-verbaliser-sa-methode.html) | Apprendre à apprendre, autonomie et relations | 17 | 0 | 0 | — |
 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 17 | 0 | 0 | — |
 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 17 | 0 | 0 | — |
 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 17 | 0 | 0 | — |
+| [Aménager son logement pour limiter les chutes, sans se mettre en danger](fiches/sante-amenager-logement-chutes.html) | Santé, alimentation, corps et sécurité | 17 | 0 | 0 | — |
+| [Parcours de soins coordonnés : médecin traitant et remboursement](fiches/sante-comprendre-parcours-soins.html) | Santé, alimentation, corps et sécurité | 17 | 0 | 0 | — |
+| [Lire l’étiquette d’un produit ménager : pictogrammes et mentions](fiches/sante-lire-etiquette-produit-menager.html) | Santé, alimentation, corps et sécurité | 17 | 0 | 0 | — |
 | [Repérer une source de santé publique avant d’agir](fiches/sante-reperer-source-publique.html) | Santé, alimentation, corps et sécurité | 17 | 0 | 0 | — |
 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 17 | 0 | 0 | — |
 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 17 | 0 | 0 | — |

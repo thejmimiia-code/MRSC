@@ -23,6 +23,7 @@ digraph memoire {
   "avancee:boite-non-nulle-nest-pas-affichee" [shape=note, label="avancee:boite-non-nulle-nest-pas-affichee"];
   "avancee:cadrages-personnalises-au-pixel" [shape=note, label="avancee:cadrages-personnalises-au-pixel"];
   "avancee:carte-de-sujet-avant-premiere-fiche" [shape=note, label="avancee:carte-de-sujet-avant-premiere-fiche"];
+  "avancee:cinq-domaines-points-entree" [shape=note, label="avancee:cinq-domaines-points-entree"];
   "avancee:classes-mortes-relevees" [shape=note, label="avancee:classes-mortes-relevees"];
   "avancee:compteur-paliers-avoue" [shape=note, label="avancee:compteur-paliers-avoue"];
   "avancee:conteneur-jamais-mesure" [shape=note, label="avancee:conteneur-jamais-mesure"];
@@ -301,6 +302,10 @@ digraph memoire {
   "avancee:carte-de-sujet-avant-premiere-fiche" -> "docs/rd/sujet-ecoute-prononciation.md" [label="prouvée par"];
   "avancee:carte-de-sujet-avant-premiere-fiche" -> "docs/rd/sujet-securite-sciences.md" [label="prouvée par"];
   "avancee:carte-de-sujet-avant-premiere-fiche" -> "docs/rd/sujet-systemes-embarques.md" [label="prouvée par"];
+  "avancee:cinq-domaines-points-entree" -> "docs/apprentissage/audit-automatique.md" [label="prouvée par"];
+  "avancee:cinq-domaines-points-entree" -> "docs/apprentissage/catalogue.toml" [label="prouvée par"];
+  "avancee:cinq-domaines-points-entree" -> "docs/apprentissage/referentiel.toml" [label="prouvée par"];
+  "avancee:cinq-domaines-points-entree" -> "docs/rd/carte-lacunes.md" [label="prouvée par"];
   "avancee:classes-mortes-relevees" -> "assets/css/site.css" [label="prouvée par"];
   "avancee:classes-mortes-relevees" -> "docs/rd/paliers-affichage.toml" [label="prouvée par"];
   "avancee:classes-mortes-relevees" -> "outils/auditer-selecteurs-morts.py" [label="prouvée par"];
@@ -601,6 +606,7 @@ digraph memoire {
   "avancee:une-sentinelle-reseau-se-teste-sans-reseau" -> "simulateur/PROVENANCE.json" [label="prouvée par"];
   "branche:autres-langues-et-contextes" -> "phase:apprentissages-et-relecture" [label="servie par"];
   "branche:cartographier-les-lacunes" -> "avancee:carte-de-sujet-avant-premiere-fiche" [label="a produit"];
+  "branche:cartographier-les-lacunes" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:controle-preventif-qui-prouve-qu-il-mord" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:inventaire-des-controles-tenu-par-un-garde" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:memoire-index-regenerer-en-dernier" [label="a produit"];
@@ -615,6 +621,7 @@ digraph memoire {
   "branche:co-conception-et-essais" -> "avancee:un-banc-coute-le-prix-de-ce-qu-il-eprouve" [label="a produit"];
   "branche:co-conception-et-essais" -> "phase:apprentissages-et-relecture" [label="servie par"];
   "branche:coherence-textes-publics" -> "avancee:cadrages-personnalises-au-pixel" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:contraste-et-pages-oubliees" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-chaine-des-ancetres" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-comparaison-largeur-par-largeur" [label="a produit"];
@@ -794,6 +801,7 @@ digraph memoire {
   "branche:relire-les-44-prototypes" -> "phase:apprentissages-et-relecture" [label="servie par"];
   "branche:sources-fermees-et-registre-des-refus" -> "avancee:registre-des-refus-verifie" [label="a produit"];
   "branche:sources-fermees-et-registre-des-refus" -> "phase:verite-et-refus" [label="servie par"];
+  "branche:veille-savoirs-evolutifs" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:memoire-a-trois-horizons" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:onze-champs-iscdf-ouverts" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:portail-declare-ou-erreur" [label="a produit"];
