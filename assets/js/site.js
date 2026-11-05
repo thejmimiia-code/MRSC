@@ -370,7 +370,12 @@
             morceau = morceau.slice(0, espace).trimEnd();
           }
         }
-        morceau += ",";
+        // La virgule ne s'ajoute que si elle tient : mesuré le 5 novembre 2026,
+        // un paragraphe de `transparence.html` produisait un segment de
+        // 221 caractères parce que le recul sur l'espace avait échoué et que la
+        // virgule s'ajoutait quand même. Un morceau sans respiration vaut mieux
+        // qu'un morceau que le moteur interrompt en pleine phrase.
+        if (morceau.length < LONGUEUR_MAX_SEGMENT) morceau += ",";
       }
       segments.push(morceau);
     }
