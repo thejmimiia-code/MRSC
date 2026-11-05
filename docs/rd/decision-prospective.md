@@ -1,6 +1,6 @@
 # Brief de décision — Boussole des savoirs et pilote d'apprentissage
 
-**Date : 20 octobre 2026. Statut : à décider par l'association. Rédigé par un agent, sans mandat pour trancher.** Ce brief ne remplace ni une délibération, ni une revue de contenu, ni un essai avec des personnes. Il rassemble ce qui est établi, ce qui manque et trois options bornées, pour que la décision soit prise sur des faits vérifiables plutôt que sur une impression.
+**Date : 5 novembre 2026. Statut : à décider par l'association. Rédigé par un agent, sans mandat pour trancher.** Ce brief ne remplace ni une délibération, ni une revue de contenu, ni un essai avec des personnes. Il rassemble ce qui est établi, ce qui manque et trois options bornées, pour que la décision soit prise sur des faits vérifiables plutôt que sur une impression.
 
 ## 1. Décision à prendre
 
@@ -10,20 +10,22 @@ La décision porte sur l'allocation du temps de relecture, pas sur l'ajout d'une
 
 ## 2. Ce qui est établi
 
-| Fait vérifiable | Valeur au 20 octobre 2026 | Où le vérifier |
+| Fait vérifiable | Valeur au 5 novembre 2026 | Où le vérifier |
 | --- | --- | --- |
-| Fiches d'apprentissage publiées | 85 dans 15 domaines | `docs/apprentissage/catalogue.toml` |
-| Fiches explicitement « prototypes à relire » | **59** | Statuts du catalogue |
+| Fiches d'apprentissage publiées | 96 dans 15 domaines | `docs/apprentissage/catalogue.toml` |
+| Fiches explicitement « prototypes à relire » | **70** | Statuts du catalogue |
 | Fiches dont la date de revue est échue | **0** | `python3 outils/construire-apprentissages.py --verifier` |
 | Prochaine revue du portefeuille R&D | **2026-11-19** | `docs/rd/portefeuille.toml` |
 | Initiatives R&D suivies | 19, dont 6 en priorité P0 | Portefeuille |
-| Sujets du référentiel sans aucune fiche | **17**, dont **3** à relecture experte | `docs/rd/carte-lacunes.md` |
+| Sujets du référentiel sans aucune fiche | **6**, dont **3** à relecture experte | `docs/rd/carte-lacunes.md` |
 | Boussole publiée | 10 questions statiques, liens édités à la main, aucune collecte | `apprendre.html#boussole-savoirs` |
-| Poids estimé de la page Apprendre | 218 Kio mobile / 406 Kio grand écran (gzip estimé) | `docs/rd/poids-pages.md` |
+| Poids estimé de la page Apprendre | 230 Kio mobile / 418 Kio grand écran (gzip estimé) | `docs/rd/poids-pages.md` |
 | En-têtes servis par GitHub Pages | types AVIF/WebP corrects, gzip sur le texte, cache 600 s | Issue #90 |
 | Essais navigateur | 8/8, dont 320 px, zoom 150 %, contraste renforcé | `outils/test-experience.cjs` |
 
-Reproduire l'essentiel : `python3 outils/etat-rd.py`. Vérifier que huit repères internes de ce tableau suivent encore leurs sources (corpus, revues, portefeuille, Boussole et poids local) : `python3 outils/verifier-decision-prospective.py`. Les dates et échéances sont recalculées à la date lue dans l’en-tête — ici le **20 octobre 2026** — et le contrôle refuse une date différente dans le tableau. Elles ne dépendent pas de la date d’exécution. Le même outil accepte une trace entièrement vide (« en attente ») ou entièrement renseignée, mais refuse une décision partielle, une option autre que A/B/C et des dates non normalisées. Pour une trace complète, la décision ne peut pas précéder le brief et le réexamen doit être postérieur à la décision. Il exige aussi que « en attente » corresponde à l’état `a-cadrer` du portefeuille, et qu’une décision consignée fasse évoluer cet état dans le même changement. Ce contrôle de cohérence ne valide ni le cadrage ni une option.
+Révision du 5 novembre 2026 : onze fiches ont ouvert les onze champs ISCED-F du domaine supérieur, d'où 96 fiches, 70 prototypes et 6 sujets sans fiche. Les autres repères de ce tableau ont été revérifiés le même jour par `python3 outils/verifier-decision-prospective.py`.
+
+Reproduire l'essentiel : `python3 outils/etat-rd.py`. Vérifier que huit repères internes de ce tableau suivent encore leurs sources (corpus, revues, portefeuille, Boussole et poids local) : `python3 outils/verifier-decision-prospective.py`. Les dates et échéances sont recalculées à la date lue dans l’en-tête — ici le **5 novembre 2026** — et le contrôle refuse une date différente dans le tableau. Elles ne dépendent pas de la date d’exécution. Le même outil accepte une trace entièrement vide (« en attente ») ou entièrement renseignée, mais refuse une décision partielle, une option autre que A/B/C et des dates non normalisées. Pour une trace complète, la décision ne peut pas précéder le brief et le réexamen doit être postérieur à la décision. Il exige aussi que « en attente » corresponde à l’état `a-cadrer` du portefeuille, et qu’une décision consignée fasse évoluer cet état dans le même changement. Ce contrôle de cohérence ne valide ni le cadrage ni une option.
 
 ## 3. Ce qui n'est pas établi
 
@@ -37,7 +39,7 @@ Reproduire l'essentiel : `python3 outils/etat-rd.py`. Vérifier que huit repère
 
 | | Option A — Ne rien construire de plus | Option B — Relire, puis pilote papier | Option C — Pilote en ligne |
 | --- | --- | --- | --- |
-| **Contenu** | Garder la Boussole telle quelle, sans la promouvoir. Consacrer le temps disponible à la relecture des 59 prototypes. | Faire relire les 10 questions et 3 fiches reliées, puis tester la Boussole sur papier avec 5 personnes volontaires, sans compte ni collecte. | Ouvrir un parcours mesuré (temps, clics, chemins), avec consentement, journal minimal et suppression planifiée. |
+| **Contenu** | Garder la Boussole telle quelle, sans la promouvoir. Consacrer le temps disponible à la relecture des 70 prototypes. | Faire relire les 10 questions et 3 fiches reliées, puis tester la Boussole sur papier avec 5 personnes volontaires, sans compte ni collecte. | Ouvrir un parcours mesuré (temps, clics, chemins), avec consentement, journal minimal et suppression planifiée. |
 | **Coût** | Nul en développement ; concentré sur la relecture. | Faible : une relecture éditoriale, une impression, une séance. | Moyen : instrumentation, notice de confidentialité, analyse, correctifs. |
 | **Risque principal** | Laisser une fonction visible que personne n'a validée. | Confondre une séance de 5 personnes avec une preuve d'utilité. | Collecter des données personnelles pour un bénéfice non démontré. |
 | **Preuve apportée** | Aucune nouvelle ; le corpus reste le seul actif. | Des obstacles concrets, des formulations incomprises, des questions de méthode. | Des comportements agrégés, mais pas nécessairement une amélioration de la compréhension. |
