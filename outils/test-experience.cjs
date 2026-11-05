@@ -883,13 +883,35 @@ async function main() {
       // le travail des écoutes partagées avec « Personnalisation ».
       for (const [largeur, hauteur, nom] of [
         [1180, 900, 'élargi sans changer de régime'],
-        [900, 420, 'écrasé en hauteur'],
-        [420, 900, 'rétréci en largeur'],
+        [980, 460, 'écrasé en hauteur'],
+        [900, 420, 'portable posé à plat'],
       ]) {
         await page.setViewport({ width: largeur, height: hauteur, deviceScaleFactor: 1 });
         await page.evaluate(() => new Promise((suite) => requestAnimationFrame(() => requestAnimationFrame(suite))));
         verifierMenu(await mesurerPanneauFlottant(page, nav), `redimensionné vers ${nom} (${largeur} × ${hauteur})`);
       }
+
+      // Franchir le seuil du mode compact n'est pas un redimensionnement
+      // ordinaire : le site referme alors le menu lui-même (comportement
+      // délibéré, celui du 23 octobre 2026 sur l'en-tête). L'essai le dit au
+      // lieu de l'appeler un écrasement — et vérifie que la fermeture **rend les
+      // coordonnées**, sinon la réouverture montrerait une image du panneau à la
+      // taille du format précédent.
+      await page.setViewport({ width: 420, height: 900, deviceScaleFactor: 1 });
+      await page.evaluate(() => new Promise((suite) => requestAnimationFrame(() => requestAnimationFrame(suite))));
+      const franchissement = await page.evaluate(() => ({
+        ouvert: document.querySelector('[data-primary-navigation]')?.classList.contains('is-open'),
+        style: (document.querySelector('[data-primary-navigation]')?.getAttribute('style') || '').trim(),
+        placement: document.querySelector('[data-primary-navigation]')?.dataset.placement || null,
+      }));
+      assert.equal(franchissement.ouvert, false,
+        `le menu reste ouvert après un changement de mode d'en-tête : ${JSON.stringify(franchissement)}`);
+      assert.equal(franchissement.style, '',
+        `le panneau fermé garde des coordonnées mesurées : ${JSON.stringify(franchissement)}`);
+      assert.equal(franchissement.placement, null,
+        `le panneau fermé annonce encore un placement mesuré : ${JSON.stringify(franchissement)}`);
+      await ouvrirMenu();
+      verifierMenu(await mesurerPanneauFlottant(page, nav), 'rouvert à 420 × 900 après franchissement du seuil compact');
 
       // Au-delà du seuil de repli, la navigation reprend sa place en ligne : le
       // panneau doit se refermer et rendre les coordonnées qu'il tenait du
@@ -901,11 +923,13 @@ async function main() {
         ouvert: document.querySelector('[data-primary-navigation]')?.classList.contains('is-open'),
         style: document.querySelector('[data-primary-navigation]')?.getAttribute('style') || '',
         expanded: document.querySelector('[data-menu-toggle]')?.getAttribute('aria-expanded'),
+        placement: document.querySelector('[data-primary-navigation]')?.dataset.placement || null,
       }));
       assert.equal(apres.flottant, false, `la classe « menu-flottant » survit à 1440 px : ${JSON.stringify(apres)}`);
       assert.equal(apres.ouvert, false, `le menu reste ouvert alors que la navigation est en ligne : ${JSON.stringify(apres)}`);
       assert.equal(apres.expanded, 'false', `« Menu » annonce encore un panneau ouvert : ${JSON.stringify(apres)}`);
       assert.equal(apres.style.trim(), '', `des coordonnées mesurées restent sur la navigation en ligne : ${JSON.stringify(apres)}`);
+      assert.equal(apres.placement, null, `le panneau refermé annonce encore un placement mesuré : ${JSON.stringify(apres)}`);
 
       // Le second régime de repli : à 130 % de taille de texte, les dix entrées
       // ne tiennent plus sur une ligne, même à 1440 px. La classe doit suivre.

@@ -885,6 +885,20 @@
       return true;
     }
 
+    // Fermer un panneau, c'est aussi lui rendre ses coordonnées : laissées en
+    // place, elles s'appliqueraient telles quelles à la réouverture, dans un
+    // format qui a pu changer entre-temps — une image du panneau au mauvais
+    // endroit, puis son replacement. Deux fois la même liste écrite à deux
+    // endroits finirait par diverger : elle est ici, une seule fois.
+    const PROPRIETES_PLACEES = ["left", "top", "right", "width", "max-height"];
+    function rendreCoordonnees(panneau) {
+      if (!panneau) return;
+      PROPRIETES_PLACEES.forEach((propriete) => {
+        panneau.style.removeProperty(propriete);
+      });
+      delete panneau.dataset.placement;
+    }
+
     function placerPanneauPersonnalisation() {
       if (!personnalisation || !panneauPersonnalisation || !personnalisation.open) return;
       placerPanneauFlottant(panneauPersonnalisation, personnalisation.querySelector("summary"));
@@ -919,9 +933,7 @@
       if (!flottant && navigation.classList.contains("is-open")) {
         toggle.setAttribute("aria-expanded", "false");
         navigation.classList.remove("is-open");
-        ["left", "top", "right", "width", "max-height"].forEach((propriete) => {
-          navigation.style.removeProperty(propriete);
-        });
+        rendreCoordonnees(navigation);
       }
       return flottant;
     }
@@ -1027,6 +1039,7 @@
     const closeMenu = () => {
       toggle.setAttribute("aria-expanded", "false");
       navigation.classList.remove("is-open");
+      rendreCoordonnees(navigation);
     };
 
     // Ouverture : les mêmes règles que « Personnalisation ». Un seul panneau
