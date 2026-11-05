@@ -10,13 +10,13 @@
 | --- | ---: |
 | Sujets du référentiel | 99 |
 | dont `actif` | 8 |
-| dont `partiel` | 74 |
-| dont `a-creer` | 14 |
+| dont `partiel` | 85 |
+| dont `a-creer` | 3 |
 | dont `revue-experte` | 3 |
 | Domaines | 15 |
-| Fiches publiées | 85 |
-| dont prototypes à relire | 59 |
-| Sujets sans aucune fiche | 17 |
+| Fiches publiées | 96 |
+| dont prototypes à relire | 70 |
+| Sujets sans aucune fiche | 6 |
 | Sujets ouverts par une carte de sujet | 4 |
 | Lesquels | `ecoute-prononciation`, `revenus-salaire-impots`, `securite-sciences`, `systemes-embarques` |
 
@@ -38,11 +38,11 @@
 | Arts, musique, création et culture | 4 | 0 | 4 | 0 | 0 | 0 |
 | Santé, alimentation, corps et sécurité | 4 | 0 | 2 | 0 | 2 | 2 |
 | Apprendre à apprendre, autonomie et relations | 4 | 0 | 4 | 0 | 0 | 0 |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | 15 | 0 | 4 | 11 | 0 | 11 |
+| Études supérieures, spécialités et recherche — post-bac au doctorat | 15 | 0 | 15 | 0 | 0 | 0 |
 
-## 3. Les 17 sujets sans aucune fiche
+## 3. Les 6 sujets sans aucune fiche
 
-Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Les 74 sujets `partiel` ont déjà au moins une fiche : leur manque est à qualifier sujet par sujet, il n'est pas listé ici.
+Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Les 85 sujets `partiel` ont déjà au moins une fiche : leur manque est à qualifier sujet par sujet, il n'est pas listé ici.
 
 | Domaine | Sujet | Statut | Exigence de preuve avant publication | Travail ouvert |
 | --- | --- | --- | --- | --- |
@@ -52,22 +52,11 @@ Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Le
 | Démarches, droits, sécurité et vie professionnelle | Droits au travail, contrats, sécurité et interlocuteurs | `a-creer` | Relecture par une personne compétente en droit, démarches et travail, puis sources primaires datées | — |
 | Santé, alimentation, corps et sécurité | Premiers secours et conduites à tenir | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées | — |
 | Santé, alimentation, corps et sécurité | Activité physique, repos, mobilité et sécurité | `revue-experte` | Relecture par une personne experte du sujet, puis sources primaires datées | — |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 00 — programmes et qualifications génériques, interdisciplinarité et compétences transversales | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 01 — sciences de l’éducation, formation et recherche en pédagogie | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 02 — arts, lettres, langues, philosophie et humanités | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 03 — sciences sociales, journalisme, information et communication | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 04 — commerce, administration, gestion et droit | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 05 — sciences naturelles, mathématiques et statistiques | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 06 — technologies de l’information et de la communication | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 07 — ingénierie, industrie de transformation et construction | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 08 — agriculture, foresterie, pêcheries et médecine vétérinaire | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 09 — santé et protection sociale | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
-| Études supérieures, spécialités et recherche — post-bac au doctorat | ISCED-F 10 — services, transport, tourisme, sécurité et services à la personne | `a-creer` | Sources primaires datées, relecture éditoriale, puis contrôle d'accessibilité | — |
 
 ## 4. Ce que cette carte ne dit pas
 
 - Elle ne dit pas qu'un sujet absent du référentiel n'existe pas : le référentiel est une carte de travail, pas un inventaire du savoir.
-- Elle ne dit rien de la qualité des 85 fiches publiées ni de l'exactitude de leur contenu.
+- Elle ne dit rien de la qualité des 96 fiches publiées ni de l'exactitude de leur contenu.
 - Elle ne fournit aucune source : chaque sujet ouvert doit encore être documenté auprès de sources primaires, avec leur date, leur périmètre et leurs droits.
 - Elle ne hiérarchise pas les domaines : un domaine à onze sujets à créer n'est pas « plus important » qu'un domaine à un sujet.
 - Elle applique l'exigence de preuve du domaine déclaré : un sujet de santé rangé sous « études supérieures » (ISCED-F 09) reçoit l'exigence générale. Ce classement est à corriger au cas par cas, pas à lire comme une règle de risque.

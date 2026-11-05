@@ -1,6 +1,6 @@
 # Couverture des savoirs de base — carte éditoriale vivante
 
-**Dernière revue éditoriale déclarée : 2026-10-24.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
+**Dernière revue éditoriale déclarée : 2026-11-05.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
 
 L’objectif de couverture est d’élargir progressivement des premiers pas utiles vers les matières générales et professionnelles, les études supérieures, les spécialisations et la recherche. Cet objectif n’est pas l’état actuel du catalogue : les lacunes sont indiquées et la carte reste évolutive.
 
@@ -236,19 +236,19 @@ Construire progressivement des passerelles des savoirs fondamentaux vers les mé
 | Lire, résumer et examiner une publication scientifique sans la prendre pour une preuve définitive | Début de couverture — à approfondir | [`recherche-lire-etude`](../apprendre/fiches/recherche-lire-etude.html) |
 | Intégrité de la recherche, citations, données, reproductibilité et science ouverte | Début de couverture — à approfondir | [`recherche-conserver-reference`](../apprendre/fiches/recherche-conserver-reference.html) |
 | Méthodes de travail avancées : revue de littérature, écriture académique et présentation orale | Début de couverture — à approfondir | [`recherche-distinguer-resume-citation`](../apprendre/fiches/recherche-distinguer-resume-citation.html) |
-| ISCED-F 00 — programmes et qualifications génériques, interdisciplinarité et compétences transversales | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| ISCED-F 01 — sciences de l’éducation, formation et recherche en pédagogie | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| ISCED-F 02 — arts, lettres, langues, philosophie et humanités | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| ISCED-F 03 — sciences sociales, journalisme, information et communication | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| ISCED-F 04 — commerce, administration, gestion et droit | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| ISCED-F 05 — sciences naturelles, mathématiques et statistiques | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| ISCED-F 06 — technologies de l’information et de la communication | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| ISCED-F 07 — ingénierie, industrie de transformation et construction | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| ISCED-F 08 — agriculture, foresterie, pêcheries et médecine vétérinaire | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| ISCED-F 09 — santé et protection sociale | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
-| ISCED-F 10 — services, transport, tourisme, sécurité et services à la personne | À créer | Lacune identifiée ; fiche à définir et à relire avant publication. |
+| ISCED-F 00 — programmes et qualifications génériques, interdisciplinarité et compétences transversales | Début de couverture — à approfondir | [`etudes-lire-fiche-rncp`](../apprendre/fiches/etudes-lire-fiche-rncp.html) |
+| ISCED-F 01 — sciences de l’éducation, formation et recherche en pédagogie | Début de couverture — à approfondir | [`apprendre-se-tester-plutot-que-relire`](../apprendre/fiches/apprendre-se-tester-plutot-que-relire.html) |
+| ISCED-F 02 — arts, lettres, langues, philosophie et humanités | Début de couverture — à approfondir | [`arts-lire-generique-film`](../apprendre/fiches/arts-lire-generique-film.html) |
+| ISCED-F 03 — sciences sociales, journalisme, information et communication | Début de couverture — à approfondir | [`recherche-verifier-chiffre-public`](../apprendre/fiches/recherche-verifier-chiffre-public.html) |
+| ISCED-F 04 — commerce, administration, gestion et droit | Début de couverture — à approfondir | [`demarche-lire-devis-travaux`](../apprendre/fiches/demarche-lire-devis-travaux.html) |
+| ISCED-F 05 — sciences naturelles, mathématiques et statistiques | Début de couverture — à approfondir | [`sciences-comprendre-pluie-millimetres`](../apprendre/fiches/sciences-comprendre-pluie-millimetres.html) |
+| ISCED-F 06 — technologies de l’information et de la communication | Début de couverture — à approfondir | [`numerique-preparer-sauvegarde`](../apprendre/fiches/numerique-preparer-sauvegarde.html) |
+| ISCED-F 07 — ingénierie, industrie de transformation et construction | Début de couverture — à approfondir | [`sciences-comprendre-isolation-r-et-u`](../apprendre/fiches/sciences-comprendre-isolation-r-et-u.html) |
+| ISCED-F 08 — agriculture, foresterie, pêcheries et médecine vétérinaire | Début de couverture — à approfondir | [`sante-reperer-signes-qualite-origine`](../apprendre/fiches/sante-reperer-signes-qualite-origine.html) |
+| ISCED-F 09 — santé et protection sociale | Début de couverture — à approfondir | [`sante-comprendre-depistage-organise`](../apprendre/fiches/sante-comprendre-depistage-organise.html) |
+| ISCED-F 10 — services, transport, tourisme, sécurité et services à la personne | Début de couverture — à approfondir | [`geographie-preparer-trajet-horaires`](../apprendre/fiches/geographie-preparer-trajet-horaires.html) |
 
-**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 11 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 15 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
+**Bilan indicatif :** 0 sujet(s) avec une fiche signalée comme disponible, 15 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 15 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
 ## Règles de suivi et de publication
 

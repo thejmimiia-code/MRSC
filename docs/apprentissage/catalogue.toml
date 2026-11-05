@@ -5016,3 +5016,654 @@ licence_source = "Non vérifiée pour une reprise documentaire ; référence fac
 droits_controles_le = "2026-10-24"
 mode_utilisation = "reference-factuelle"
 utilisation = "Sections mean et median ouvertes et lues le 24 octobre 2026 : somme divisée par l’effectif, sensibilité de la moyenne aux valeurs éloignées, valeur centrale pour un effectif impair et moyenne des deux centrales pour un effectif pair. Documentation technique, pas preuve d’efficacité pédagogique ; exemples et formulation M.R.S.C. originaux. Aucun texte ni exercice de la source n’est reproduit."
+
+[[fiche]]
+id = "etudes-lire-fiche-rncp"
+titre = "Lire une fiche RNCP : la certification, son auteur et sa durée"
+matiere = "Études supérieures — certifications et qualifications (ISCED-F 00)"
+matiere_id = "recherche"
+domaine = "etudes-superieures-recherche"
+niveau = 3
+horizon_contenu = "Post-bac et formation professionnelle — au moment où l’on compare des certifications"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. Les mentions attendues sur une fiche publiée sont confrontées au vademecum 2026 de France Compétences, réellement consulté ce jour. Les deux fiches comparées dans l’exercice sont fictives. Ce contrôle ne remplace ni une relecture par une personne compétente en certification, ni un essai de compréhension avec des personnes en reconversion."
+minutes = 12
+resume = "Repérer qui délivre une certification, ce qu’elle évalue, à quel niveau et pour combien de temps, avant de s’inscrire."
+objectif = "Distinguer le certificateur, les blocs de compétences, le niveau et la période d’enregistrement sur une fiche RNCP."
+situation = "Deux affiches de formation promettent « un diplôme reconnu » et citent chacune un code RNCP. L’une nomme l’organisme qui délivre la certification, l’autre non. Aucune ne dit jusqu’à quand l’enregistrement est valable. Que vérifier avant de s’engager ?"
+analogie_titre = "Comme l’étiquette d’un produit"
+analogie = "Une étiquette sérieuse ne dit pas seulement « bon produit ». Elle indique qui le fabrique, ce qu’il contient, pour quel usage et jusqu’à quelle date. Une fiche de certification suit la même logique : elle nomme l’organisme, la compétence évaluée, le niveau et la période de validité."
+limite_analogie = "Une certification n’est pas un objet garanti. Elle atteste que des compétences ont été évaluées selon un référentiel, pas qu’un emploi suivra. Deux fiches de même niveau peuvent préparer des métiers très différents. L’image aide à poser des questions ; elle ne remplace pas la lecture du référentiel d’évaluation."
+notions = [
+  "Certificateur — organisme qui délivre la certification et signe la fiche.",
+  "Bloc de compétences — ensemble de compétences évalué et certifié séparément dans une certification enregistrée au RNCP.",
+  "Niveau de qualification — position de la certification dans le cadre national des certifications professionnelles.",
+  "Période d’enregistrement — dates de début et de fin pendant lesquelles la fiche est valable au répertoire.",
+  "Référentiel d’évaluation — document qui décrit ce qui est évalué et comment, pour chaque bloc."
+]
+demarche = [
+  "Relève d’abord l’intitulé exact de la certification et le code de la fiche. Un nom de formation commercial ne suffit pas : c’est la certification enregistrée qui est décrite, avec son propre intitulé.",
+  "Cherche le nom légal du certificateur. Ce n’est pas toujours l’organisme de formation qui vend la formation : une école peut préparer à une certification délivrée par une autre institution.",
+  "Lis la date et la durée d’enregistrement. Une fiche proche de son échéance peut encore être valable, mais la question du renouvellement mérite d’être posée à l’organisme.",
+  "Repère le niveau de qualification et compare-le à ce que tu cherches. Le niveau situe la certification dans un cadre national ; il ne classe pas les personnes et ne garantit pas un salaire.",
+  "Parcours la liste des blocs de compétences. Chaque bloc doit pouvoir être évalué séparément, ce qui permet de comprendre ce qui est réellement certifié et ce qui ne l’est pas.",
+  "Cherche le référentiel d’évaluation. Il indique les modalités de contrôle de chaque bloc : examen écrit, mise en situation, dossier, soutenance. Une formation qui annonce un bloc sans évaluation correspondante laisse une question ouverte."
+]
+exercice = "Fictif. Fiche A : code RNCP, intitulé, certificateur nommé, niveau 5, enregistrement jusqu’au 31 décembre 2027, six blocs listés. Fiche B : code RNCP, intitulé proche, aucun certificateur nommé, niveau 5, aucune date d’enregistrement, un seul « bloc global ». Laquelle est la plus lisible, et quelles trois questions poser à l’organisme de la fiche B ?"
+aide = "Reprends la liste des mentions attendues sur une fiche publiée. Compare les deux fiches ligne par ligne, puis demande-toi ce qui manque pour vérifier l’existence et la validité de la certification."
+correction = [
+  "La fiche A est la plus lisible : elle nomme le certificateur, donne le code, le niveau, une période d’enregistrement et des blocs distincts. Ces éléments permettent de retrouver la fiche et de comprendre ce qui est évalué.",
+  "La fiche B laisse trois manques : le certificateur, la date ou la durée d’enregistrement, et la structuration en blocs évaluables séparément. Un « bloc global » ne permet pas de savoir quelle compétence est certifiée.",
+  "Trois questions utiles : quel organisme délivre la certification, quel est le code exact de la fiche, et jusqu’à quand l’enregistrement est-il valable ? On peut ajouter : quelles sont les modalités d’évaluation de chaque bloc ?",
+  "Piège à éviter : confondre le nom de la formation, souvent commercial, avec l’intitulé de la certification. Un même certificateur peut proposer plusieurs fiches proches ; seul le code permet de savoir de laquelle on parle."
+]
+a_retenir = [
+  "Une fiche publiée nomme l’intitulé exact, le certificateur, le niveau, le code et la période d’enregistrement.",
+  "Les blocs de compétences décrivent ce qui est évalué séparément ; un bloc global cache souvent une évaluation imprécise.",
+  "Le niveau de qualification situe une certification, il ne prédit ni emploi ni salaire.",
+  "Le vademecum de France Compétences décrit ces mentions ; il ne garantit pas la qualité pédagogique d’une formation."
+]
+transferer = "Cette démarche sert aussi pour une certification plus courte, un titre professionnel ou un bilan de compétences. Elle ne tranche ni la valeur d’un diplôme pour un employeur précis, ni la qualité des enseignements. Pour un projet de reconversion, une personne conseillère ou l’organisme certificateur reste à consulter."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "France Compétences — Vademecum relatif à la certification professionnelle, édition janvier 2026"
+url = "https://www.francecompetences.fr/app/uploads/2026/01/Vademecum-VF_2026.pdf"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Vademecum consulté le 5 novembre 2026 : mentions attendues sur une fiche publiée (intitulé exact, nom légal du certificateur, date et durée d’enregistrement, niveau de qualification, code de la fiche), structuration en blocs de compétences et exigence d’une évaluation individualisée de chaque bloc. Exemples et formulation M.R.S.C. originaux. Aucun texte ni exercice de la source n’est reproduit."
+
+[[fiche]]
+id = "apprendre-se-tester-plutot-que-relire"
+titre = "Se tester plutôt que relire : ce que la recherche dit vraiment"
+matiere = "Études supérieures — sciences de l’éducation (ISCED-F 01)"
+matiere_id = "apprendre"
+domaine = "etudes-superieures-recherche"
+niveau = 2
+horizon_contenu = "Lycée, formation professionnelle et post-bac — méthodes de révision"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026 à partir d’une synthèse de recherche de la Fondation La main à la pâte, consultée ce jour. Les études citées par la synthèse n’ont pas été relues directement, et aucune ne prouve un effet garanti sur un parcours individuel. Une relecture par une personne formée aux sciences de l’apprentissage reste nécessaire."
+minutes = 12
+resume = "Comprendre pourquoi un petit test avec correction aide davantage qu’une relecture, et dans quelles limites."
+objectif = "Distinguer la récupération active, la relecture et la pratique espacée, puis choisir une manière de réviser qui laisse une trace vérifiable."
+situation = "Avant un contrôle, deux personnes disposent du même temps. La première relit trois fois son cours. La seconde ferme le cours, écrit ce qu’elle retient, vérifie, puis recommence deux jours plus tard. Que disent les recherches comparatives, et qu’est-ce qui reste incertain ?"
+analogie_titre = "Comme retrouver un chemin sans regarder la carte"
+analogie = "Lire la carte, c’est se réexposer au cours. Chercher seul le chemin, c’est récupérer une information en mémoire. Le second geste est plus difficile, et c’est cet effort qui rend le souvenir plus accessible ensuite. Un test sans correction serait pourtant un chemin parcouru à l’aveugle."
+limite_analogie = "Un chemin a souvent une seule bonne réponse, alors qu’une notion peut s’exprimer de plusieurs façons justes. La récupération peut aussi renforcer une erreur si aucune correction n’arrive. L’image décrit un mécanisme, pas une recette universelle : la difficulté utile dépend des connaissances déjà présentes."
+notions = [
+  "Récupération en mémoire — effort pour retrouver une information sans la relire.",
+  "Effet test — amélioration de la rétention observée après des tests répétés, comparés à une simple réexposition au contenu.",
+  "Retour d’information — correction apportée après la réponse, qui permet de distinguer ce qui est juste de ce qui est faux.",
+  "Pratique espacée — répartition des épisodes d’étude ou de récupération dans le temps, plutôt qu’une seule séance.",
+  "Difficulté désirable — difficulté surmontable pour la personne, qui ralentit la performance immédiate et améliore la rétention."
+]
+demarche = [
+  "Choisis un contenu court et ferme le document. Écris de mémoire les points principaux, les définitions et un exemple. L’objectif n’est pas d’être rapide mais de produire quelque chose de vérifiable.",
+  "Compare ensuite avec le cours et note les écarts. La correction est ce qui distingue un test utile d’un exercice d’humiliation : sans elle, une erreur peut se consolider.",
+  "Refais l’exercice à distance, par exemple quelques jours plus tard, sans relire d’abord. La littérature cite souvent des intervalles allant d’un jour à un mois, sans établir d’intervalle optimal généralisable.",
+  "Varie les formes de récupération : expliquer à voix haute, refaire un calcul, dessiner un schéma, répondre à une question ouverte. Reconnaître une réponse n’est pas la produire.",
+  "Méfie-toi du sentiment de facilité. Relire donne une impression de maîtrise qui ne prédit pas toujours la capacité à retrouver l’information le jour de l’épreuve.",
+  "Garde une trace écrite de ce qui a été testé et des erreurs corrigées. C’est cette trace qui permet de vérifier, plus tard, si la méthode a réellement déplacé quelque chose."
+]
+exercice = "Sur une fiche de cours de ton choix, applique trois gestes dans cet ordre : A) écris de mémoire trois notions et un exemple ; B) vérifie et corrige avec le cours ; C) note une question à te reposer dans trois jours. Puis réponds : qu’est-ce qui a été récupéré, qu’est-ce qui a été reconnu seulement, et quelle erreur a été corrigée ?"
+aide = "Le troisième geste compte autant que les deux premiers : sans délai, tu mesures surtout la mémoire immédiate. Écris la question maintenant, avec sa date, pour ne pas la remplacer par une relecture."
+correction = [
+  "Un bilan valable mentionne ce qui a été produit sans aide, ce qui a été corrigé, puis ce qui reste fragile. Il ne se contente pas de « j’ai relu et je connais ».",
+  "Une notion seulement reconnue dans le cours n’a pas été récupérée. La différence se voit quand on ferme le document et qu’on doit la formuler.",
+  "La question différée doit être réellement reposée, sans relire d’abord. Si la réponse revient avec le cours ouvert sous les yeux, c’est la lecture qui travaille, pas la récupération.",
+  "Piège à éviter : multiplier les tests sans jamais corriger, ou transformer l’auto-test en évaluation notée. La recherche citée porte sur des tests courts et corrigés, souvent non notés."
+]
+a_retenir = [
+  "Se tester avec correction aide souvent davantage que relire, pour une même durée de travail.",
+  "La correction est indispensable : sans elle, une erreur peut être renforcée.",
+  "Espacer les épisodes aide la rétention ; aucun intervalle optimal unique n’est établi.",
+  "Le sentiment de facilité ne prouve pas l’apprentissage durable."
+]
+transferer = "La même logique éclaire la lecture d’une synthèse de recherche : vérifie ce qui a été comparé, pendant combien de temps et avec quel retour d’information. Elle ne permet ni de diagnostiquer une difficulté d’apprentissage, ni de promettre une réussite à un examen. Les cas particuliers relèvent d’un professionnel."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Fondation La main à la pâte — « La récupération en mémoire », éclairage scientifique"
+url = "https://fondation-lamap.org/sites/default/files/pdf/La%20re%CC%81cupe%CC%81ration%20en%20me%CC%81moire.pdf"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Synthèse consultée le 5 novembre 2026 : effet test, comparaison avec la réexposition au contenu, rôle du retour d’information, pratique espacée, absence d’intervalle optimal généralisable, débat sur le test avant apprentissage et limites de l’entremêlement. Formulation et exercice M.R.S.C. originaux. Aucun extrait n’est reproduit."
+
+[[fiche]]
+id = "arts-lire-generique-film"
+titre = "Lire un générique de film : qui décide quoi dans l’image"
+matiere = "Études supérieures — arts, lettres et humanités (ISCED-F 02)"
+matiere_id = "arts"
+domaine = "etudes-superieures-recherche"
+niveau = 2
+horizon_contenu = "Collège, lycée et post-bac — éducation à l’image et analyse de film"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. Les définitions de métiers et de cadrage sont confrontées à un glossaire d’atelier cinéma publié par éduscol, consulté ce jour. Aucun film n’est cité : les exemples sont inventés. Une relecture par une personne enseignante en éducation à l’image reste nécessaire."
+minutes = 11
+resume = "Relier les métiers du générique aux choix visibles à l’écran, pour regarder un film en sachant qui fabrique quoi."
+objectif = "Identifier le rôle du réalisateur, du chef opérateur, du décorateur, du costumier et de la scripte à partir de ce que montre une scène."
+situation = "Deux personnes regardent la même scène : une chambre sombre, un personnage en manteau clair, un cadre serré sur un visage. L’une dit que tout vient du réalisateur, l’autre que l’image est l’affaire du chef opérateur. Comment le générique aide-t-il à trancher ?"
+analogie_titre = "Comme les corps de métier d’un chantier"
+analogie = "Sur un chantier, le gros œuvre, l’électricité et les finitions ne produisent pas le même résultat visible. Pourtant, à la fin, tout tient ensemble et le passant ne voit qu’un bâtiment. Un générique de film liste de la même façon des métiers différents qui contribuent à une seule image finale."
+limite_analogie = "Un film n’est pas construit pour un usage stable : chaque spectateur l’interprète, et la même scène peut être tournée de cent façons. Les métiers se recouvrent parfois, une même personne peut cumuler deux rôles, et le générique liste aussi des fonctions de production, de distribution ou de musique sans effet direct sur l’image."
+notions = [
+  "Réalisateur — responsable des choix artistiques et techniques du film, qui porte le point de vue de l’histoire.",
+  "Chef opérateur — responsable de l’image, de la lumière et des choix de prise de vue, en lien avec la mise en scène.",
+  "Cadreur — personne qui applique le cadrage et les mouvements de caméra décidés.",
+  "Scripte — personne qui note les détails de chaque plan et vérifie la continuité entre les prises.",
+  "Accessoiriste et décorateur — personnes qui choisissent les objets et construisent les décors qui racontent le personnage.",
+  "Cadrage — choix de ce qui entre dans l’image et de ce qui reste hors champ."
+]
+demarche = [
+  "Repère d’abord le cadre. La distance, l’angle et ce qui est laissé hors champ orientent l’émotion avant tout dialogue. Un gros plan sur un visage et un plan large de la même scène ne racontent pas la même chose.",
+  "Cherche la lumière et les couleurs. Un chef opérateur choisit des projecteurs, des filtres et une caméra pour rendre une atmosphère. Ces choix se voient dans les contrastes et dans la palette, pas seulement dans la netteté.",
+  "Observe les objets et les vêtements. Un verre en cristal et un verre en plastique ne disent pas la même chose du personnage. Ces détails relèvent de l’accessoiriste, du costumier ou du décorateur.",
+  "Écoute le son. Les bruits d’ambiance, les pas et les voix sont enregistrés ou fabriqués, puis assemblés. Le générique indique souvent qui dirige ce travail.",
+  "Pense à la continuité. Les scènes ne sont pas tournées dans l’ordre de l’histoire et les plans sont remontés ensuite. Une personne vérifie que les vêtements, la lumière et les objets restent cohérents d’un plan à l’autre.",
+  "Relie enfin ces observations aux noms du générique. Tu ne sauras pas qui a décidé quoi à coup sûr, mais tu peux formuler des hypothèses et les confronter aux autres crédits, aux entretiens ou aux documents pédagogiques."
+]
+exercice = "Scène inventée : une cuisine éclairée par une seule fenêtre, un personnage qui coupe du pain avec un couteau ébréché, une tasse fêlée posée devant lui, un plan fixe assez large. Propose trois éléments visibles et rattache chacun à un métier possible. Ajoute une question que cette scène ne permet pas de trancher."
+aide = "Pars de ce que tu vois, pas de ce que tu supposes. Un objet abîmé peut relever des accessoires, de la décoration ou du jeu de l’acteur. Écris toujours « possible » plutôt qu’une attribution certaine."
+correction = [
+  "La lumière venant d’une seule fenêtre et le plan fixe peuvent relever des choix de mise en scène et du travail de l’image. On peut citer le réalisateur, le chef opérateur ou la personne au cadrage.",
+  "Le couteau ébréché et la tasse fêlée sont des objets choisis : ils peuvent relever de l’accessoiriste. Leur présence peut aussi avoir été demandée par la mise en scène ou le décor.",
+  "Une question non tranchable : qui a eu l’idée du couteau ébréché ? Le générique donne des fonctions, pas la chronologie des décisions. Seuls un entretien, un dossier de production ou des notes de tournage peuvent répondre.",
+  "Piège à éviter : attribuer tout le film au réalisateur ou tout attribuer au chef opérateur. Le cinéma est un travail collectif, et le générique sert justement à rendre cette répartition visible."
+]
+a_retenir = [
+  "Le générique nomme des fonctions ; il ne raconte pas qui a décidé quoi.",
+  "Le cadrage choisit ce que l’on montre et ce que l’on cache.",
+  "Lumière, objets, costumes et son portent aussi du sens.",
+  "Les scènes sont tournées dans le désordre : la continuité est un travail à part."
+]
+transferer = "Cette lecture sert aussi pour une photographie de presse, une affiche ou une courte vidéo : demande qui a cadré, qui a éclairé, ce qui a été laissé hors champ. Elle ne remplace ni l’analyse d’une œuvre entière, ni le droit d’auteur. Aucun jugement définitif sur un film ne se déduit d’un seul plan."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "éduscol — Atelier cinéma, glossaire des métiers et du cadrage"
+url = "https://eduscol.education.gouv.fr/sites/default/files/document/ateliercinemaglossaire1277577pdf-81519.pdf"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Glossaire consulté le 5 novembre 2026 : définitions du réalisateur, du chef opérateur, du cadreur, de la scripte, de l’accessoiriste, du décorateur et du costumier, rôle de la lumière et du cadrage, notion de champ. Les exemples de la fiche sont inventés. Aucune phrase du glossaire n’est reproduite."
+
+[[fiche]]
+id = "recherche-verifier-chiffre-public"
+titre = "Vérifier un chiffre public : périmètre, unité et producteur"
+matiere = "Études supérieures — sciences sociales et information (ISCED-F 03)"
+matiere_id = "recherche"
+domaine = "etudes-superieures-recherche"
+niveau = 3
+horizon_contenu = "Lycée et post-bac — lecture de données publiques et esprit critique"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. Les éléments qu’une page d’indicateur doit déclarer sont confrontés au guide « Comprendre un indicateur » de guides.data.gouv.fr, consulté ce jour. Les chiffres de l’exercice sont inventés et signalés comme tels. Une relecture par une personne formée aux statistiques publiques reste nécessaire."
+minutes = 13
+resume = "Poser quatre questions à un chiffre avant de le citer : sur quoi, en quelle unité, calculé par qui et à quelle date."
+objectif = "Lire la fiche d’un indicateur public et repérer le périmètre, l’unité, la maille, la date et le producteur avant de reprendre un chiffre."
+situation = "Deux messages partagent le même chiffre : « 12 % de plus ». Le premier parle de mètres carrés construits dans une commune, le second de la même évolution à l’échelle du département. Les deux peuvent être exacts. Comment le vérifier sans accuser personne de mensonge ?"
+analogie_titre = "Comme une photo recadrée"
+analogie = "Deux photos de la même foule peuvent sembler contradictoires selon le cadrage. L’une montre un groupe serré, l’autre un espace presque vide, et pourtant les deux sont prises le même jour. Un indicateur fonctionne ainsi : le périmètre et la maille décident de ce qui apparaît."
+limite_analogie = "Un indicateur n’est pas une photo : il est calculé, parfois à partir de plusieurs sources, et son unité peut être rapportée à une population ou à une surface. Le cadrage explique une partie des écarts, pas la méthode de calcul, les corrections ni les données manquantes. L’image donne un réflexe, pas une preuve."
+notions = [
+  "Périmètre — population, territoire ou activité réellement couverts par le chiffre.",
+  "Unité — grandeur dans laquelle le chiffre est exprimé : nombre, pourcentage, euros, litres, tonnes.",
+  "Maille — échelle géographique de publication : commune, département, région, France.",
+  "Indicateur composite — indicateur calculé à partir de plusieurs sources, par exemple un tonnage rapporté au nombre d’habitants.",
+  "Producteur — organisme qui calcule ou publie la donnée, qui n’est pas toujours celui qui la commente.",
+  "Date de mise à jour — moment du dernier calcul publié, distinct de la période que le chiffre décrit."
+]
+demarche = [
+  "Cherche la page de l’indicateur, pas seulement le graphique partagé. Une page d’indicateur déclare en principe son libellé, son périmètre, son unité, ses axes d’analyse et ses sources.",
+  "Note l’unité et la maille. Un pourcentage, un nombre absolu et un montant par habitant ne se comparent pas. Une évolution communale et une évolution départementale ne mesurent pas la même chose.",
+  "Repère la période et la date de mise à jour. Un chiffre peut décrire une année ancienne tout en étant publié récemment ; l’inverse est plus rare et doit alerter.",
+  "Identifie le producteur. Si l’indicateur est composite, cherche aussi la source du dénominateur : population, surface ou nombre de logements.",
+  "Regarde les axes d’analyse disponibles. Un même indicateur peut varier selon le type de logement, le secteur ou la technologie ; une moyenne globale peut masquer ces écarts.",
+  "Avant de citer, écris ce que le chiffre ne dit pas. Cette phrase protège d’une conclusion trop rapide et rend la citation vérifiable par une autre personne."
+]
+exercice = "Fictif. Titre A : « La construction a bondi de 12 % dans la commune ». Titre B : « La construction progresse de 12 % dans le département ». Tous deux citent le même indicateur, la même année. Rédige trois questions à poser avant de reprendre l’un de ces titres, puis indique ce qui manque pour comparer les deux affirmations."
+aide = "Une question porte sur le périmètre, une autre sur l’unité, une troisième sur le producteur ou la date. Pour comparer deux affirmations, il faut savoir si elles parlent du même territoire et de la même période."
+correction = [
+  "Première question : quel périmètre exact ? S’agit-il de mètres carrés autorisés, de chantiers commencés ou de logements terminés ? Ces mesures ne bougent pas au même rythme.",
+  "Deuxième question : quelle unité et quelle base de comparaison ? Un pourcentage calculé sur une petite commune peut représenter très peu de logements, alors que le même pourcentage départemental porte sur des volumes différents.",
+  "Troisième question : qui produit le chiffre, à quelle date, et sur quelle période ? Sans le producteur et la date de mise à jour, le chiffre ne peut pas être rattaché à une version précise de la donnée.",
+  "Pour comparer les deux titres, il faudrait les valeurs absolues de départ, la définition de la construction retenue et la maille. Deux pourcentages identiques peuvent décrire des réalités très différentes."
+]
+a_retenir = [
+  "Un chiffre sans périmètre, unité et date n’est pas encore une information utilisable.",
+  "Une évolution communale et une évolution départementale ne se comparent pas directement.",
+  "Un indicateur composite dépend aussi de la source de son dénominateur.",
+  "Dire ce que le chiffre ne dit pas rend la citation plus solide."
+]
+transferer = "Ces réflexes servent pour un rapport d’activité, un article de presse ou une publication sur les réseaux. Ils ne permettent pas de refaire le calcul ni de trancher un désaccord entre deux producteurs. Pour une décision publique ou un litige, la méthodologie complète et les personnes responsables de la donnée doivent être consultées."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "guides.data.gouv.fr — « Comprendre un indicateur », documentation ecologie.data.gouv.fr"
+url = "https://guides.data.gouv.fr/ecologie.data.gouv.fr/ecologie.data.gouv.fr/indicateurs-phares/utiliser-un-indicateur/comprendre-un-indicateur"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 5 novembre 2026 : nécessité de comprendre les hypothèses de calcul, éléments déclarés sur une page d’indicateur (libellé, description, périmètre, unité, axes d’analyse, date de mise à jour, licence, maille, sources), cas d’un indicateur composite rapporté à la population ou à la surface, producteur variable selon l’axe. Les exemples chiffrés de la fiche sont inventés. Aucun extrait n’est reproduit."
+
+[[fiche]]
+id = "demarche-lire-devis-travaux"
+titre = "Lire un devis de travaux : ce qui doit y figurer avant de dire oui"
+matiere = "Études supérieures — droit, gestion et administration (ISCED-F 04)"
+matiere_id = "economie"
+domaine = "etudes-superieures-recherche"
+niveau = 2
+horizon_contenu = "Vie quotidienne et vie active — achat de travaux ou de dépannage à domicile"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. La liste des informations attendues sur un devis est confrontée à la fiche « Devis obligatoire : activités concernées » de service-public.fr, consultée ce jour. Le devis de l’exercice est fictif. Cette fiche ne traite ni litige, ni contestation, ni droit du travail ; une relecture par une personne compétente en droit de la consommation reste nécessaire."
+minutes = 12
+resume = "Repérer les mentions utiles d’un devis de travaux, comparer deux propositions et savoir ce que le document ne règle pas."
+objectif = "Vérifier qu’un devis de travaux décrit la prestation, les quantités, les prix unitaires et le lieu d’exécution avant de l’accepter."
+situation = "Un devis tient sur une demi-page : « rénovation salle de bain, 4 800 euros ». Une date, un nom d’entreprise et un numéro de téléphone figurent en haut. Le prix global est inférieur à celui d’un concurrent. Quelles informations manquent pour comparer réellement les deux propositions ?"
+analogie_titre = "Comme une liste de courses chiffrée"
+analogie = "Une liste de courses utile indique quoi acheter, en quelle quantité et à quel prix. Sans quantité, deux listes au même total peuvent correspondre à des achats très différents. Un devis détaille de la même façon les prestations et les produits nécessaires."
+limite_analogie = "Un devis n’est pas une liste de courses : il engage le professionnel et le client, inclut de la main-d’œuvre, parfois des assurances ou des conditions, et peut être payant. Les prix unitaires ne suffisent pas à comparer deux entreprises si le contenu des prestations diffère. Cette fiche ne dit pas si un prix est abusif."
+notions = [
+  "Devis — document qui décrit une prestation et son prix avant exécution ; il peut être gratuit ou payant selon le professionnel.",
+  "Prix unitaire — prix d’une unité de prestation, par exemple une heure de main-d’œuvre ou un mètre carré.",
+  "Quantité prévue — nombre d’unités estimées pour réaliser la prestation.",
+  "Lieu d’exécution — adresse où les travaux ou le dépannage doivent avoir lieu.",
+  "Décompte détaillé — liste des prestations et produits avec dénomination, prix unitaire, unité et quantité."
+]
+demarche = [
+  "Vérifie l’identification : date de rédaction, nom et adresse de l’entreprise, nom du client et lieu d’exécution. Un devis sans date ou sans adresse de chantier ne permet pas de savoir à quoi il s’engage.",
+  "Cherche la nature exacte des réparations ou des travaux. Une formule générale comme « rénovation » ne dit pas ce qui sera fait, ni ce qui ne le sera pas.",
+  "Regarde le décompte des prestations et des produits. Pour chaque ligne, il faut une dénomination, un prix unitaire, l’unité et la quantité prévue.",
+  "Repère l’unité employée : heure de main-d’œuvre, mètre linéaire, mètre carré. Comparer un forfait et un prix au mètre carré sans conversion mène à des conclusions fausses.",
+  "Vérifie si le devis est payant ou gratuit, et ce que tu signes. Une signature peut valoir acceptation ; ce point dépend du document et du contexte, et mérite une lecture attentive.",
+  "Garde une copie datée. Pour comparer deux devis, aligne les mêmes lignes, les mêmes quantités et les mêmes unités avant de comparer les totaux."
+]
+exercice = "Fictif. Devis A : date, entreprise et adresse du chantier, « remplacement du receveur de douche » avec un prix global de 1 900 euros. Devis B : mêmes identifiants, réception et pose détaillées, 3 mètres carrés de faïence à 45 euros le mètre carré, 6 heures de main-d’œuvre à 55 euros, total 1 200 euros. Que manque-t-il au devis A, et pourquoi les deux totaux ne sont-ils pas comparables en l’état ?"
+aide = "Compte les lignes du décompte dans chaque devis. Le prix global du devis A peut inclure, ou non, la dépose de l’ancien receveur, l’évacuation et les matériaux."
+correction = [
+  "Le devis A ne contient pas de décompte détaillé : ni produits, ni quantités, ni prix unitaires. Il ne permet donc pas de savoir ce qui est inclus dans les 1 900 euros.",
+  "Le devis B détaille une partie du travail seulement. Il faudrait aussi vérifier la dépose, l’évacuation des gravats, les matériaux non cités et le traitement des murs.",
+  "Les totaux ne sont pas comparables : l’un est global, l’autre partiel et détaillé. Comparer les prix suppose de demander à chaque entreprise un décompte sur les mêmes lignes et les mêmes quantités.",
+  "Piège à éviter : choisir le total le plus bas sans regarder le contenu. Un devis moins cher peut exclure des étapes nécessaires, qui reviendront plus tard sous forme de travaux supplémentaires."
+]
+a_retenir = [
+  "Un devis de travaux se lit ligne par ligne : dénomination, unité, quantité, prix unitaire.",
+  "Date, entreprise, client et lieu d’exécution sont des repères de base.",
+  "Deux totaux ne se comparent que si le contenu et les quantités se correspondent.",
+  "Un devis n’est pas un jugement sur sa légalité ni sur le prix juste."
+]
+transferer = "La méthode vaut pour un devis de réparation automobile, de déménagement ou de formation, en vérifiant à chaque fois les mentions propres au secteur. Elle ne remplace pas un conseil juridique : en cas de désaccord, de démarchage ou de travaux déjà commencés, une association de consommateurs ou le service public doit être consulté."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "service-public.fr — « Devis obligatoire : activités concernées »"
+url = "https://www.service-public.fr/particuliers/vosdroits/F31144"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Fiche consultée le 5 novembre 2026 : activités du bâtiment et de l’équipement de la maison concernées, informations attendues sur un devis (date, entreprise, client, lieu d’exécution, nature des réparations, décompte détaillé en quantité et prix avec unité), caractère gratuit ou payant selon les cas. Le devis de l’exercice est inventé. Aucun extrait n’est reproduit."
+
+[[fiche]]
+id = "sciences-comprendre-pluie-millimetres"
+titre = "Lire un cumul de pluie : millimètres, litres et surface"
+matiere = "Études supérieures — sciences de la nature et de la Terre (ISCED-F 05)"
+matiere_id = "sciences"
+domaine = "etudes-superieures-recherche"
+niveau = 2
+horizon_contenu = "Collège, lycée et vie quotidienne — mesures et climat"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. L’équivalence entre millimètres de pluie et litres par mètre carré ainsi que le principe de mesure sont confrontés à une page de Météo-France consultée ce jour. Les calculs de l’exercice sont inventés et vérifiés à la main. Une relecture par une personne enseignante en sciences reste nécessaire."
+minutes = 11
+resume = "Passer d’un cumul en millimètres à un volume en litres, et distinguer une quantité de pluie de son intensité."
+objectif = "Convertir un cumul de pluie en volume pour une surface donnée et repérer ce qu’un chiffre de pluie ne dit pas."
+situation = "Un bulletin annonce 12 millimètres de pluie. Une personne vide son pluviomètre et se demande si cela suffit à remplir une cuve de 200 litres alimentée par un toit de 20 mètres carrés. Le chiffre seul ne répond pas : il faut le convertir."
+analogie_titre = "Comme une hauteur d’eau dans un récipient à bords droits"
+analogie = "Versée dans un récipient à bords droits, la pluie forme une couche d’une certaine hauteur. Un millimètre de hauteur correspond à un litre d’eau répandu sur un mètre carré. Pour connaître le volume total, on multiplie cette hauteur par la surface qui reçoit la pluie."
+limite_analogie = "La pluie ne tombe pas uniformément et le récipient n’est pas toujours droit. Une hauteur mesurée au millimètre ne renseigne ni sur l’intensité, ni sur la durée, ni sur la répartition locale. Un toit ne récupère pas non plus toute l’eau : une partie s’écoule ailleurs, s’évapore ou est perdue par le trop-plein."
+notions = [
+  "Cumul de pluie — hauteur d’eau recueillie pendant une période, exprimée en millimètres.",
+  "Équivalence de base — un millimètre de pluie correspond à un litre d’eau par mètre carré.",
+  "Volume — quantité totale d’eau, obtenue en multipliant la hauteur par la surface réceptrice.",
+  "Intensité — débit de pluie pendant un temps court, souvent exprimé en millimètres par heure.",
+  "Pluviomètre — instrument qui recueille la pluie pour en mesurer la hauteur ; les radars complètent les mesures au sol."
+]
+demarche = [
+  "Lis le chiffre avec sa période : 12 millimètres en une heure et 12 millimètres en une semaine ne décrivent pas le même épisode. Cherche la durée et, si possible, l’intensité.",
+  "Convertis en litres par mètre carré. Chaque millimètre vaut un litre par mètre carré, donc 12 millimètres valent 12 litres par mètre carré.",
+  "Multiplie par la surface réceptrice. Pour 20 mètres carrés : 12 fois 20, soit 240 litres. Ce calcul suppose une répartition uniforme et une récupération complète.",
+  "Compare le résultat à la capacité de stockage. Une cuve de 200 litres peut déborder si l’épisode apporte 240 litres, même si une partie de l’eau est perdue avant le remplissage.",
+  "Vérifie la cohérence des unités. Un mètre carré donne des litres ; un hectare demande de convertir : mille mètres carrés, donc dix mètres cubes pour un millimètre.",
+  "Note ce que le chiffre ne dit pas : la pluie réellement utile pour les plantes dépend aussi du sol, de l’évaporation et de la répartition dans le temps."
+]
+exercice = "A) Il tombe 8 millimètres sur un toit de 25 mètres carrés : quel volume, en litres ? B) Le même cumul tombe en vingt minutes, puis 8 millimètres tombent en deux jours : quelle différence pour une cuve et pour un sol ? C) Un hectare reçoit 1 millimètre : combien de mètres cubes ?"
+aide = "Pour A, multiplie la hauteur en millimètres par la surface en mètres carrés. Pour B, pense à l’intensité et à la vitesse d’arrivée de l’eau. Pour C, convertis d’abord l’hectare en mètres carrés."
+correction = [
+  "A — 8 millimètres valent 8 litres par mètre carré. Sur 25 mètres carrés : 8 fois 25, soit 200 litres, si toute l’eau est récupérée.",
+  "B — Le volume théorique est le même, mais l’arrivée diffère. Une pluie intense en vingt minutes peut déborder une cuve et ruisseler, alors qu’un cumul étalé sur deux jours pénètre mieux un sol. La quantité ne suffit pas à décrire l’effet.",
+  "C — Un hectare vaut dix mille mètres carrés. Un millimètre apporte donc dix mille litres, soit dix mètres cubes.",
+  "Piège à éviter : additionner des millimètres comme des volumes, ou comparer un cumul journalier à une intensité horaire. Les unités se ressemblent, les phénomènes mesurés ne sont pas les mêmes."
+]
+a_retenir = [
+  "Un millimètre de pluie correspond à un litre d’eau par mètre carré.",
+  "Le volume se calcule en multipliant la hauteur par la surface réceptrice.",
+  "Un cumul ne dit rien de l’intensité ni de la répartition dans le temps.",
+  "Un hectare recevant un millimètre reçoit dix mètres cubes."
+]
+transferer = "Le même raisonnement sert pour une toiture, un jardin ou une cuve de récupération, et pour lire un arrêté de restriction d’eau. Il ne remplace pas une prévision météorologique ni un diagnostic d’inondation. Les décisions de sécurité et d’urbanisme relèvent des services compétents."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Météo-France — « Les précipitations : pluie, neige, grêle »"
+url = "https://meteofrance.com/meteo-a-z/les-precipitations-pluie-neige-grele"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 5 novembre 2026 : mesure des précipitations en millimètres, équivalence d’un millimètre avec un litre d’eau par mètre carré, réseau de pluviomètres et radars météorologiques pour estimer la pluie. Les calculs et l’exercice de la fiche sont inventés. Aucun extrait n’est reproduit."
+
+[[fiche]]
+id = "numerique-preparer-sauvegarde"
+titre = "Préparer une sauvegarde que l’on saura réellement restaurer"
+matiere = "Études supérieures — technologies de l’information (ISCED-F 06)"
+matiere_id = "numerique"
+domaine = "etudes-superieures-recherche"
+niveau = 2
+horizon_contenu = "Vie quotidienne et vie active — protection des données personnelles et professionnelles"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. Les gestes décrits sont confrontés à deux fiches réflexes de Cybermalveillance.gouv.fr, consultées ce jour : l’une destinée aux particuliers, l’autre aux organisations. Les situations de l’exercice sont inventées. Une relecture par une personne compétente en sécurité informatique reste nécessaire."
+minutes = 13
+resume = "Choisir ce qui doit être sauvegardé, à quelle fréquence, et vérifier qu’une restauration fonctionne vraiment."
+objectif = "Construire une sauvegarde utile en partant de la perte acceptable, puis la tester par une restauration réelle."
+situation = "Un ordinateur contient des photos de famille, un mémoire en cours et des factures. Une copie existe sur un disque externe branché en permanence. Un rançongiciel chiffre l’ordinateur : le disque externe est atteint lui aussi. Que fallait-il préparer autrement ?"
+analogie_titre = "Comme un double de clé rangé ailleurs"
+analogie = "Un double de clé n’aide que s’il est rangé loin de la porte qu’il ouvre et s’il a été essayé. Une sauvegarde suit la même règle : elle doit être séparée de l’appareil d’origine, et son usage doit avoir été vérifié au moins une fois."
+limite_analogie = "Une clé ouvre une seule porte et ne vieillit pas ; une sauvegarde dépend d’un support, d’un logiciel et d’un format qui peuvent évoluer. Une copie connectée en permanence peut être chiffrée avec le reste, et une sauvegarde jamais restaurée reste une hypothèse. La fréquence des copies dépend de la perte que l’on accepte."
+notions = [
+  "Sauvegarde — copie conservée séparément pour pouvoir restaurer des données après une perte.",
+  "Perte acceptable — quantité de travail ou de données qu’une personne accepte de perdre entre deux copies.",
+  "Copie déconnectée — copie conservée hors du réseau et du poste de travail, pour qu’une attaque ne l’atteigne pas.",
+  "Test de restauration — essai réel de récupération de fichiers depuis la sauvegarde.",
+  "Chiffrement par rançongiciel — attaque qui rend des fichiers inutilisables et réclame un paiement."
+]
+demarche = [
+  "Liste ce qui ne peut pas être reconstruit : documents personnels, travaux en cours, factures, photos. Ce qui peut être retéléchargé n’a pas la même priorité qu’un fichier unique.",
+  "Estime la perte acceptable. Si perdre une journée de travail est trop, une copie quotidienne ne suffit pas ; il faut une copie plus fréquente ou un enregistrement continu.",
+  "Choisis un emplacement séparé. Un disque branché en permanence reste exposé ; une copie déconnectée après usage ou un service distant protège mieux contre un chiffreur de fichiers.",
+  "Vérifie ce que fait réellement l’outil : copies complètes ou différentielles, versions conservées, durée de rétention. Une synchronisation n’est pas toujours une sauvegarde : elle peut propager une suppression.",
+  "Teste une restauration sur un fichier ou un dossier, sans écraser l’original. Ce test est le seul élément qui prouve que la sauvegarde existe vraiment.",
+  "Écris la procédure en quelques lignes : où se trouve la copie, comment on la restaure, qui peut le faire. Une sauvegarde dépendante d’une seule personne est fragile."
+]
+exercice = "Fictif. Trois personnes décrivent leur sauvegarde. A : copie automatique sur un disque externe toujours branché. B : copie hebdomadaire sur une clé, déconnectée le reste du temps, jamais testée. C : copie quotidienne sur un service distant, testée une fois par mois. Pour chacune, indique le risque principal et un geste simple d’amélioration."
+aide = "Pense à trois questions : la copie est-elle séparée de l’appareil, à quelle fréquence, et a-t-elle déjà servi à restaurer quelque chose ?"
+correction = [
+  "A — La copie est séparée physiquement, mais reste connectée : une attaque qui chiffre le poste peut atteindre le disque. Gestes utiles : débrancher le disque après la copie, ou conserver une version déconnectée en plus.",
+  "B — La copie est déconnectée, ce qui protège contre une attaque en ligne, mais elle est hebdomadaire et jamais testée. Gestes utiles : tester une restauration dès maintenant et vérifier la perte acceptable entre deux copies.",
+  "C — La copie est fréquente et testée, ce qui est solide. Le risque principal est la dépendance à un compte et à un accès réseau. Gestes utiles : conserver les codes d’accès ailleurs et vérifier les versions conservées.",
+  "Piège à éviter : croire qu’une synchronisation continue est une sauvegarde. Si un fichier est supprimé ou chiffré, la synchronisation peut le supprimer ou le chiffrer partout."
+]
+a_retenir = [
+  "Une sauvegarde se juge à sa restauration, pas à son existence.",
+  "Une copie connectée en permanence peut être atteinte par la même attaque.",
+  "La fréquence dépend de la perte que l’on accepte, pas d’un rythme universel.",
+  "En cas d’attaque, on débranche et on ne paie pas ; on restaure une copie réputée saine."
+]
+transferer = "Cette préparation concerne aussi un téléphone, un carnet de contacts ou un dossier professionnel. Elle ne garantit pas l’absence de perte ni la sécurité complète d’un système. Pour une organisation, une politique de sauvegarde et des personnes responsables restent nécessaires."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — « Rançongiciel ou ransomware, que faire ? » (particuliers)"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/rancongiciel-ransomware-particuliers"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Fiche réflexe consultée le 5 novembre 2026 : sauvegardes régulières des données et du système, débranchement de l’appareil en cas d’attaque, refus de payer la rançon, restauration depuis une sauvegarde réputée saine. Les situations de l’exercice sont inventées. Aucun extrait n’est reproduit."
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — « Rançongiciel ou ransomware » (organisations)"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/rancongiciels-ransomwares"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Fiche réflexe consultée le 5 novembre 2026 : copies déconnectées, vérification périodique du bon fonctionnement de la restauration, fréquence dépendant du risque acceptable de perte de données. Aucun extrait n’est reproduit."
+
+[[fiche]]
+id = "sciences-comprendre-isolation-r-et-u"
+titre = "Lire une fiche d’isolation : résistance R et coefficient U"
+matiere = "Études supérieures — ingénierie et construction (ISCED-F 07)"
+matiere_id = "sciences"
+domaine = "etudes-superieures-recherche"
+niveau = 3
+horizon_contenu = "Lycée professionnel, BTS et vie active — rénovation et performance d’un logement"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. Les définitions de la résistance thermique R et du coefficient de transmission thermique U sont confrontées à un document de l’ADEME sur les exigences réglementaires des travaux de rénovation, consulté ce jour. Les valeurs de l’exercice sont inventées. Une relecture par une personne compétente en thermique du bâtiment reste nécessaire."
+minutes = 14
+resume = "Distinguer la résistance d’une couche et le coefficient d’une paroi, puis éviter de comparer deux nombres qui ne parlent pas de la même chose."
+objectif = "Identifier l’unité et la signification de R et de U sur une fiche produit, et repérer ce qu’un seul de ces nombres ne dit pas."
+situation = "Deux paquets d’isolant annoncent « R = 4 » et « R = 7 ». Un devis promet une paroi « U = 0,20 ». Une personne conclut que la seconde solution est la meilleure. Les trois nombres sont-ils comparables ?"
+analogie_titre = "Comme l’épaisseur d’un manteau"
+analogie = "Un manteau épais protège mieux du froid qu’un manteau fin, pour un même tissu. La résistance thermique décrit cette capacité à ralentir le passage de la chaleur pour une épaisseur donnée. Le coefficient U décrit la paroi entière, une fois le manteau cousu avec ses coutures et ses ouvertures."
+limite_analogie = "Un mur n’est pas un corps : il subit l’humidité, les ponts thermiques, les fissures et le renouvellement d’air. La résistance d’une couche ne tient pas compte de la pose ni des jonctions. Le coefficient d’une paroi dépend de toutes ses couches, y compris les résistances de surface, et ne se déduit pas d’un R de matériau seul."
+notions = [
+  "Résistance thermique R — capacité d’un matériau, pour une épaisseur donnée, à s’opposer au passage de la chaleur ; elle s’exprime en mètres carrés kelvin par watt.",
+  "Coefficient de transmission thermique U — performance thermique d’une paroi entière, exprimée en watts par mètre carré et par kelvin.",
+  "Sens de lecture — plus R est grand, plus la couche isole ; plus U est faible, plus la paroi isole.",
+  "Exigence réglementaire — valeur minimale de R ou de U à respecter, qui dépend notamment de la zone climatique et du type de travaux.",
+  "Pont thermique — zone où l’isolation est interrompue et où la chaleur passe plus facilement."
+]
+demarche = [
+  "Repère d’abord la lettre et l’unité. R se lit en mètres carrés kelvin par watt et concerne une couche ; U se lit en watts par mètre carré et par kelvin et concerne une paroi.",
+  "Vérifie le sens de lecture. Un R plus grand annonce une meilleure isolation de la couche ; un U plus faible annonce une meilleure performance de la paroi. Comparer deux R entre eux est possible, comparer un R et un U ne l’est pas.",
+  "Cherche l’épaisseur et le matériau associés à R. Une même résistance peut être obtenue avec des épaisseurs très différentes ; cela change l’encombrement et la pose.",
+  "Regarde la paroi complète quand un U est annoncé. Un U dépend de l’isolant, du mur support, des doublages et des résistances de surface. Il ne se calcule pas en inversant simplement le R d’un matériau.",
+  "Cherche les ponts thermiques et l’étanchéité à l’air. Une paroi performante peut être affaiblie par les jonctions, les menuiseries et les percements.",
+  "Compare ce qui est comparable : même type de paroi, même zone climatique, mêmes exigences. Un chiffre isolé ne dit pas si le logement sera confortable ni quelle sera la facture."
+]
+exercice = "A) Un isolant annonce R = 4, un autre R = 7 : lequel isole le mieux, et que manque-t-il pour comparer les deux produits ? B) Un devis annonce U = 0,20 pour un mur et U = 0,40 pour un autre : lequel est le plus performant ? C) Peut-on déduire le U d’une paroi à partir du R d’un seul isolant ?"
+aide = "Pour A, regarde le sens de lecture de R et cherche l’épaisseur. Pour B, rappelle-toi que U se lit à l’envers. Pour C, pense aux autres couches et aux résistances de surface."
+correction = [
+  "A — Le produit à R = 7 isole mieux, à condition de comparer des couches de même nature et de vérifier l’épaisseur et la mise en œuvre. Il manque l’épaisseur, le matériau, la conductivité et les conditions de pose.",
+  "B — La paroi à U = 0,20 est la plus performante, car un U plus faible indique moins de transmission de chaleur. Cette comparaison ne vaut que pour des parois de même type et dans des conditions comparables.",
+  "C — Non. Le U d’une paroi dépend de l’ensemble des couches et des résistances de surface. Le R d’un isolant seul est une information partielle.",
+  "Piège à éviter : comparer un R et un U, ou conclure sur la facture à partir d’un seul coefficient. Le confort, la ventilation et les ponts thermiques comptent aussi."
+]
+a_retenir = [
+  "R et U ne mesurent pas la même chose : une couche contre une paroi.",
+  "Plus R est grand, mieux la couche isole ; plus U est faible, mieux la paroi isole.",
+  "Un U ne se déduit pas du R d’un seul matériau.",
+  "Une exigence réglementaire dépend du type de travaux et de la zone climatique."
+]
+transferer = "Ces notions servent à lire une étiquette de produit, un devis ou un diagnostic de performance énergétique. Elles ne remplacent ni une étude thermique, ni un avis sur la ventilation et l’humidité. Pour des travaux importants, une personne qualifiée reste indispensable."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "ADEME — document sur les exigences réglementaires des travaux de rénovation"
+url = "https://librairie.ademe.fr/index.php?controller=attachment&id_attachment=2645"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Document consulté le 5 novembre 2026 : définition de la résistance thermique R comme capacité à empêcher le passage du froid ou de la chaleur pour une épaisseur donnée, sens de lecture de R, définition du coefficient de transmission thermique U exprimé en watts par mètre carré et par kelvin, valeur minimale de R dépendant de la zone climatique, prise en compte de la paroi et de l’isolant. Les valeurs de l’exercice sont inventées. Aucun extrait n’est reproduit."
+
+[[fiche]]
+id = "sante-reperer-signes-qualite-origine"
+titre = "AOP, IGP, STG, Label rouge : ce que chaque signe garantit"
+matiere = "Études supérieures — agriculture et alimentation (ISCED-F 08)"
+matiere_id = "sante"
+domaine = "etudes-superieures-recherche"
+niveau = 2
+horizon_contenu = "Collège, lycée et vie quotidienne — étiquetage alimentaire"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. Les définitions des signes officiels d’identification de la qualité et de l’origine sont confrontées à une plaquette de l’INAO consultée ce jour. Les produits cités dans l’exercice sont inventés. Une relecture par une personne compétente en droit alimentaire reste nécessaire, car les cahiers des charges évoluent."
+minutes = 11
+resume = "Distinguer quatre signes officiels qui ne garantissent ni la même origine, ni la même tradition, ni le même niveau de qualité."
+objectif = "Associer un signe officiel à ce qu’il garantit, et repérer ce que l’étiquette ne dit pas sur la valeur nutritionnelle."
+situation = "Sur un même étal, trois fromages portent des logos différents : l’un affiche AOP, l’autre IGP, le troisième Label rouge. Une personne demande lequel est « le meilleur ». La question mélange plusieurs garanties qui ne portent pas sur les mêmes critères."
+analogie_titre = "Comme plusieurs garanties sur un même appareil"
+analogie = "Un appareil peut être couvert par une garantie de fabrication, une extension de garantie et un label de performance. Chaque document protège un aspect différent, et aucun ne résume l’appareil entier. Les signes officiels fonctionnent de la même façon : chacun certifie un aspect précis."
+limite_analogie = "Un appareil est identique d’un exemplaire à l’autre, alors qu’un produit alimentaire dépend d’un terroir, d’une saison et d’un savoir-faire. Les signes certifient une origine, une tradition ou un niveau de qualité, jamais la valeur nutritionnelle ni l’absence de risque. Ils ne rendent pas non plus un produit supérieur pour tous les usages."
+notions = [
+  "AOP — appellation d’origine protégée : qualité liée à un terroir, avec des étapes de production définies.",
+  "AOC — appellation d’origine contrôlée, signe français correspondant à l’AOP pour certains produits.",
+  "IGP — indication géographique protégée : lien entre le produit et un territoire, au moins une étape y ayant lieu.",
+  "STG — spécialité traditionnelle garantie : qualité liée à une composition ou à une méthode traditionnelle, sans lien d’origine.",
+  "Label rouge — signe national qui désigne un niveau de qualité supérieur à des produits courants similaires.",
+  "Cahier des charges — document qui fixe les conditions que le produit doit respecter."
+]
+demarche = [
+  "Repère le logo et son intitulé exact. AOP, IGP, STG et Label rouge ne sont pas des synonymes et ne se cumulent pas de la même façon.",
+  "Demande-toi ce qui est garanti. Les signes d’origine portent sur le lien au territoire et les conditions de production ; la STG porte sur une tradition de composition ou de méthode ; le Label rouge porte sur un niveau de qualité.",
+  "Cherche le nom du produit et son aire géographique quand le signe est une indication géographique. Un même nom ne peut pas être utilisé librement par n’importe quel producteur.",
+  "Regarde les autres mentions de l’étiquette : ingrédients, origine des matières premières, allergènes, durée de conservation. Un signe de qualité ne dispense pas de les lire.",
+  "Distingue les logos officiels d’autres mentions commerciales, qui peuvent ressembler à des labels sans être contrôlées de la même manière.",
+  "Garde en tête la question posée. Si elle porte sur le goût, le prix ou l’apport nutritionnel, le signe officiel ne répond pas à lui seul."
+]
+exercice = "Fictif. Trois étiquettes : A) « Beurre fermier » sans logo, B) « Fromage AOP des Bauges » avec logo, C) « Saucisson Label rouge » avec logo. Pour chacune, indique ce qui est certifié, ce qui ne l’est pas, et une information qu’il faudrait chercher ailleurs sur l’emballage."
+aide = "Un logo officiel renvoie à un cahier des charges ; une mention sans logo ne renvoie à rien d’homologué. Pense ensuite aux informations nutritionnelles et aux ingrédients."
+correction = [
+  "A — Aucun signe officiel n’est affiché. « Fermier » n’est pas, à lui seul, un signe d’identification de la qualité et de l’origine. Il faut lire les ingrédients et l’origine déclarée.",
+  "B — L’AOP certifie un lien au terroir et des conditions de production définies. Elle ne certifie ni la valeur nutritionnelle, ni le goût pour une personne donnée, ni l’absence d’allergènes.",
+  "C — Le Label rouge certifie un niveau de qualité supérieur à des produits courants similaires, selon un cahier des charges. Il ne garantit pas une origine géographique particulière.",
+  "Piège à éviter : prendre un logo pour une garantie de santé ou de supériorité globale. Les signes officiels répondent à des questions précises, et l’étiquette doit être lue en entier."
+]
+a_retenir = [
+  "AOP et IGP garantissent un lien à l’origine ; la STG garantit une tradition, pas une origine.",
+  "Le Label rouge porte sur un niveau de qualité, pas sur une aire géographique.",
+  "Un signe officiel ne dit rien de la valeur nutritionnelle ni de l’absence d’allergènes.",
+  "Un logo se vérifie par son intitulé exact et renvoie à un cahier des charges."
+]
+transferer = "Ces repères servent aussi pour un vin, une viande ou un produit transformé, et pour repérer une mention qui imite un label sans en être un. Ils ne remplacent ni les recommandations nutritionnelles, ni un avis médical en cas d’allergie. Les cahiers des charges et les aires peuvent évoluer : la fiche de l’opérateur reste à consulter."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "INAO — plaquette « Les signes d’identification de la qualité et de l’origine »"
+url = "https://extranet.inao.gouv.fr/fichier/Plaquette-SIQO-francais.pdf"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Plaquette consultée le 5 novembre 2026 : définitions de l’AOC et de l’AOP liées à un terroir, de l’IGP liée à un territoire d’élaboration, de la STG liée à une tradition, du Label rouge désignant un niveau de qualité supérieur à des produits courants similaires. Les étiquettes de l’exercice sont inventées. Aucun extrait n’est reproduit."
+
+[[fiche]]
+id = "sante-comprendre-depistage-organise"
+titre = "Comprendre un programme de dépistage organisé, sans en faire une ordonnance"
+matiere = "Études supérieures — santé et protection sociale (ISCED-F 09)"
+matiere_id = "sante"
+domaine = "etudes-superieures-recherche"
+niveau = 3
+horizon_contenu = "Vie adulte — lecture d’une invitation de dépistage et d’un document de prévention"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. La description du programme de dépistage organisé du cancer du sein est confrontée à une page de Santé publique France consultée ce jour. Aucun chiffre de participation n’est repris. Les situations de l’exercice sont inventées. Cette fiche ne donne aucun avis médical ; une relecture par un professionnel de santé reste indispensable."
+minutes = 13
+resume = "Lire ce qu’un programme de dépistage propose, à qui, à quel rythme, et quelles questions poser avant de participer."
+objectif = "Décrire un programme de dépistage organisé à partir de sa documentation, puis distinguer dépistage, diagnostic et prévention."
+situation = "Une personne de 52 ans reçoit une invitation à une mammographie tous les deux ans, avec un examen clinique. Elle demande si ce courrier signifie qu’elle doit y aller et si un résultat normal garantit l’absence de maladie. Les deux questions ne relèvent pas du même document."
+analogie_titre = "Comme un contrôle périodique, sans panne visible"
+analogie = "Un contrôle technique vérifie à intervalle fixe des points précis, même quand rien ne semble anormal. Il peut repérer un défaut invisible à l’usage, ou signaler un point à examiner de plus près. Un programme de dépistage organisé fonctionne de manière comparable."
+limite_analogie = "Un véhicule est standardisé, un corps ne l’est pas. Un contrôle peut manquer un défaut, et un signalement peut concerner une anomalie bénigne. Le dépistage ne remplace ni les symptômes ressentis, ni un diagnostic, ni un suivi médical. La décision de participer appartient à la personne, avec un professionnel."
+notions = [
+  "Dépistage organisé — programme qui invite une population définie, à intervalle régulier, à un examen de dépistage.",
+  "Population invitée — tranche d’âge définie par le programme, ici les femmes de 50 à 74 ans.",
+  "Examen clinique — examen des seins par palpation et observation, associé à la mammographie dans ce programme.",
+  "Deuxième lecture — relecture d’une mammographie jugée normale en première lecture, pour réduire le risque d’anomalie manquée.",
+  "Faux positif et faux négatif — résultat qui signale à tort, ou qui ne signale pas une anomalie présente.",
+  "Diagnostic — démarche qui confirme ou écarte une maladie après un résultat suspect."
+]
+demarche = [
+  "Identifie la population invitée et le rythme du programme. Ces deux éléments figurent dans le courrier et déterminent à qui le dispositif s’adresse.",
+  "Repère les examens proposés. Dans le programme décrit par Santé publique France, il s’agit d’une mammographie et d’un examen clinique des seins.",
+  "Lis la suite prévue en cas de résultat. Le programme prévoit un bilan diagnostique immédiat si un résultat est suspect, et une deuxième lecture des mammographies normales.",
+  "Distingue dépistage, diagnostic et prévention. Le dépistage cherche une anomalie chez des personnes sans symptôme ; le diagnostic explique un résultat ; la prévention regroupe des actions plus larges.",
+  "Demande les bénéfices et les limites : faux positifs, faux négatifs, examens supplémentaires, anxiété possible. Ces éléments font partie d’une décision éclairée.",
+  "Adresse les questions personnelles à un professionnel de santé. Un document de programme ne dit pas ce qui est indiqué pour une personne donnée."
+]
+exercice = "Fictif. Une personne de 45 ans demande si elle recevra l’invitation. Une autre, invitée, obtient une mammographie jugée normale en première lecture et se demande pourquoi le document parle d’une deuxième lecture. Une troisième ressent une douleur et attend l’invitation pour en parler. Classe ces trois situations : qui relève du programme, qui relève du diagnostic, et quelle question poser à un professionnel ?"
+aide = "Reprends la population invitée et la définition du dépistage. Un symptôme ne relève pas de l’attente d’une invitation. La deuxième lecture concerne une mammographie déjà jugée normale en première lecture."
+correction = [
+  "La personne de 45 ans n’entre pas dans la population invitée décrite par ce programme. Cela ne dit rien de ce qui est médicalement utile pour elle : cette question se pose avec un professionnel.",
+  "La mammographie normale en première lecture passe par une deuxième lecture, prévue pour renforcer la détection. Ce n’est pas une erreur ni une suspicion à son sujet.",
+  "La douleur ressentie ne relève pas de l’attente d’une invitation : c’est un symptôme, qui appelle un avis médical sans attendre le calendrier du programme.",
+  "Piège à éviter : transformer une invitation en obligation, ou un résultat normal en certitude d’absence de maladie. Le dépistage réduit un risque, il ne le supprime pas."
+]
+a_retenir = [
+  "Un programme de dépistage définit une population, un rythme et des examens précis.",
+  "La deuxième lecture d’une mammographie normale fait partie du dispositif décrit.",
+  "Un faux positif ou un faux négatif est possible ; le dépistage n’est pas un diagnostic.",
+  "Un symptôme ne se gère pas en attendant une invitation."
+]
+transferer = "Cette grille de lecture aide à comprendre d’autres invitations de dépistage ou de vaccination, en cherchant à chaque fois la population concernée, le rythme et la suite prévue. Elle ne permet ni d’évaluer un risque individuel, ni de décider à la place d’une personne. Un professionnel de santé reste la seule référence pour une question personnelle."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Santé publique France — « Taux de participation au programme de dépistage organisé du cancer du sein en 2022-2023 et évolution depuis 2005 »"
+url = "https://www.santepubliquefrance.fr/maladies-et-traumatismes/cancers/cancer-du-sein/articles/taux-de-participation-au-programme-de-depistage-organise-du-cancer-du-sein-en-2022-2023-et-evolution-depuis-2005"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 5 novembre 2026 : invitation biennale des femmes de 50 à 74 ans à un examen clinique des seins et une mammographie, bilan diagnostique immédiat en cas de résultat suspect, deuxième lecture de chaque mammographie normale en première lecture, programme généralisé depuis 2004. Aucun taux de participation n’est repris. Les situations de l’exercice sont inventées. Aucun extrait n’est reproduit."
+
+[[fiche]]
+id = "geographie-preparer-trajet-horaires"
+titre = "Préparer un trajet : horaires théoriques, temps réel et correspondance"
+matiere = "Études supérieures — services, transport et mobilité (ISCED-F 10)"
+matiere_id = "geographie"
+domaine = "etudes-superieures-recherche"
+niveau = 2
+horizon_contenu = "Vie quotidienne et vie active — déplacements en transport collectif"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. La distinction entre horaires théoriques et information en temps réel est confrontée à une page de transport.data.gouv.fr consacrée aux données d’un réseau francilien, consultée ce jour. Les trajets de l’exercice sont inventés. Une relecture par une personne connaissant l’information voyageur reste nécessaire."
+minutes = 12
+resume = "Lire une fiche horaire en repérant le jour, l’arrêt, la direction et la marge de correspondance, puis distinguer le prévu du réel."
+objectif = "Construire un trajet à partir d’horaires théoriques, prévoir une correspondance et savoir quand consulter l’information en temps réel."
+situation = "Un trajet comporte un bus puis un train, avec huit minutes annoncées entre l’arrêt et le quai. Un jour férié, le bus passe toutes les trente minutes au lieu de dix. Le train, lui, est annoncé à l’heure. Le calcul fait la veille reste-t-il valable ?"
+analogie_titre = "Comme un plan affiché à l’arrêt"
+analogie = "Le plan affiché décrit le réseau tel qu’il est prévu. Il indique les lignes et les arrêts, mais pas le bus qui a deux minutes de retard. Les horaires théoriques jouent ce rôle : ils décrivent l’offre prévue, que l’information en temps réel vient ensuite préciser."
+limite_analogie = "Un plan ne dit pas si le service fonctionne un jour férié, ni si un arrêt est déplacé pour des travaux. L’information en temps réel peut elle aussi être incomplète ou en retard. Aucun des deux documents ne garantit une correspondance, et les temps de marche dépendent du quai et de l’affluence."
+notions = [
+  "Horaire théorique — horaire prévu par l’offre de transport, avant tout incident.",
+  "Information en temps réel — information sur l’état du trafic ou les passages annoncés, distincte des horaires prévus.",
+  "Direction — sens de circulation d’une ligne, souvent indiqué par le terminus.",
+  "Correspondance — passage d’une ligne à une autre, avec une marge de temps à prévoir.",
+  "Jour de service — jour auquel un horaire s’applique : semaine, week-end, vacances, jour férié.",
+  "Dernier départ — dernier passage prévu, à vérifier séparément pour chaque ligne."
+]
+demarche = [
+  "Choisis le bon jour de service. Une fiche de semaine ne vaut ni pour un samedi, ni pour un dimanche, ni pour les vacances scolaires. Cherche la mention qui correspond à ta date.",
+  "Lis l’horaire à ton arrêt, pas au terminus. Le passage au terminus donne une idée de la fréquence, pas l’heure à laquelle tu dois être sur le quai.",
+  "Vérifie la direction et le terminus affiché. Deux bus peuvent desservir le même arrêt dans des directions opposées, avec des horaires proches.",
+  "Prévois la correspondance avec une marge. Huit minutes annoncées ne garantissent rien si la marche, l’attente et l’affluence s’ajoutent ; compare avec d’autres trajets possibles.",
+  "Regarde le dernier départ et un trajet de secours. Cette vérification est utile le soir et les jours de service réduit.",
+  "Consulte l’information en temps réel au moment du départ. Elle complète les horaires prévus ; elle ne les remplace pas pour préparer un itinéraire."
+]
+exercice = "Fictif. Un bus passe à 8 h 02, 8 h 12 et 8 h 22 à ton arrêt. Le train part à 8 h 30. La marche jusqu’au quai prend cinq minutes et il faut arriver deux minutes avant le départ. A) Quel bus choisis-tu un jour ordinaire ? B) Un jour férié, le bus ne passe qu’à 8 h 12 et 8 h 42 : que se passe-t-il ? C) Quelle information vérifier avant de partir ?"
+aide = "Pour chaque bus, ajoute la marche et l’avance demandée. Compare l’heure d’arrivée sur le quai avec 8 h 28. Pour le jour férié, fais le même calcul avec les deux passages restants."
+correction = [
+  "A — Le bus de 8 h 02 arrive à 8 h 07, puis 8 h 12 sur le quai : trop tôt par rapport à l’avance de deux minutes, mais sans risque. Le bus de 8 h 12 arrive à 8 h 17, puis 8 h 22 sur le quai, ce qui laisse six minutes. C’est le choix confortable.",
+  "B — Le bus de 8 h 12 permet encore d’être sur le quai vers 8 h 22. Le suivant, à 8 h 42, arrive après le départ du train. Il faut prévoir un autre trajet ou partir plus tôt.",
+  "C — À vérifier : le jour de service réel, le dernier départ, l’état du trafic et le quai annoncé. Les horaires théoriques ne disent pas si le train circule normalement ce jour-là.",
+  "Piège à éviter : utiliser une fiche de semaine un jour férié, ou compter la correspondance sans la marche et sans l’avance demandée."
+]
+a_retenir = [
+  "Un horaire théorique décrit une offre prévue, pas une promesse de passage.",
+  "Le jour de service change la fiche à consulter.",
+  "Une correspondance se calcule avec la marche, l’attente et une marge.",
+  "L’information en temps réel complète les horaires ; elle ne les remplace pas."
+]
+transferer = "La même méthode vaut pour un train régional, un car ou un trajet à vélo combiné. Elle ne garantit ni l’heure d’arrivée, ni la disponibilité d’une correspondance. Pour un déplacement important, les conditions du transporteur et les informations du jour restent à vérifier."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "transport.data.gouv.fr — Réseaux urbains et interurbains d’Île-de-France Mobilités, horaires au format GTFS"
+url = "https://transport.data.gouv.fr/datasets/reseau-urbain-et-interurbain-dile-de-france-mobilites"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 5 novembre 2026 : distinction entre jeux de données statiques décrivant l’offre théorique et interfaces informant l’état du trafic en temps réel ou recherchant un itinéraire, horaires transmis par les opérateurs et mise à jour plusieurs fois par jour. Les trajets de l’exercice sont inventés. Aucun extrait n’est reproduit."
