@@ -346,11 +346,15 @@
       // 220. Mesuré le 5 novembre 2026 dans la CI : une coupe à 220 pile donnait
       // un segment de 221, que le moteur interrompt en pleine phrase.
       let coupe = reste.lastIndexOf(" ", LONGUEUR_MAX_SEGMENT - 1);
+      // La recherche de ponctuation s'arrête elle aussi un caractère avant la
+      // limite : une coupe trouvée à 220 donnait `ponctuation + 1`, soit un
+      // segment de 221 caractères terminé par son point. Relevé par la CI le
+      // 5 novembre 2026, sur un paragraphe de `transparence.html`.
       const ponctuation = Math.max(
-        reste.lastIndexOf(". ", LONGUEUR_MAX_SEGMENT),
-        reste.lastIndexOf("? ", LONGUEUR_MAX_SEGMENT),
-        reste.lastIndexOf("! ", LONGUEUR_MAX_SEGMENT),
-        reste.lastIndexOf("; ", LONGUEUR_MAX_SEGMENT),
+        reste.lastIndexOf(". ", LONGUEUR_MAX_SEGMENT - 1),
+        reste.lastIndexOf("? ", LONGUEUR_MAX_SEGMENT - 1),
+        reste.lastIndexOf("! ", LONGUEUR_MAX_SEGMENT - 1),
+        reste.lastIndexOf("; ", LONGUEUR_MAX_SEGMENT - 1),
       );
       if (ponctuation > LONGUEUR_MAX_SEGMENT / 3) coupe = ponctuation + 1;
       if (coupe <= 0) coupe = LONGUEUR_MAX_SEGMENT - 1;
