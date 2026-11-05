@@ -748,6 +748,11 @@ def fichiers_du_site() -> None:
         and "setHeaderCompact(true);" in script_site
         and "headerDetails.some(" in script_site
         and "if (focusWouldBeHidden) headerCompactToggle.focus();" in script_site
+        and 'const CLE_ENTETE_COMPACTE = "mrsc-entete-compacte";' in script_site
+        and "preferenceCompacte ?? Boolean(compactViewport?.matches)" in script_site
+        and 'savePreference(CLE_ENTETE_COMPACTE, compact ? "oui" : "non");' in script_site
+        and "Mode réduit : une entrée du menu ne fait pas sauter" in test_experience
+        and "le mode réduit a sauté au clic sur une entrée du menu" in test_experience
         and "En-tête compact : deux commandes, réglages groupés et bascule réversible" in test_experience
         and "les deux commandes gardent leur libellé entier" in test_experience
         and "l’en-tête doit garder deux commandes" in test_experience

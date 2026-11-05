@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 88 |
+| Avancées consignées | 89 |
 | Période couverte | du 2026-10-20 au 2026-11-05 |
 | Contrôles exécutables cités | 100 |
 | Initiatives du portefeuille concernées | 15 |
@@ -2117,6 +2117,31 @@ Initiatives liées : `cartographier-les-lacunes`, `veille-savoirs-evolutifs`, `c
 **Suite.** Ouvrir un deuxième lot par domaine mince plutôt que par champ disciplinaire, en commençant par santé, méthodes et démarches ; vérifier au passage si le nombre d’entrées par champ ISCED-F mérite un quota propre dans `plan-1000.toml`.
 
 Initiatives liées : `cartographier-les-lacunes`, `veille-savoirs-evolutifs`, `coherence-textes-publics`.
+
+### `un-choix-nest-pas-un-defaut-recalculable` — Un choix explicite n'est pas un défaut recalculable — le mode réduit sautait au clic dans le menu
+
+*Consignée le 2026-11-05.*
+
+**Constat.** Retour d'usage : « le mode réduit saute au moment où l'on clic sur un élément du menu » en vue ordinateur. Mesuré en Chromium headless sur l'aperçu local : à 1 440 × 900, l'en-tête passe de 198 px à 49 px quand la personne clique « Réduire », reste à 49 px le menu ouvert, puis repasse à **198 px** sur la page chargée par l'entrée du menu ; à 980 × 440 (aperçu ordinateur d'un smartphone), 194 → 49 → **194 px**. Le libellé, `aria-expanded` et `html.entete-compacte` repartent tous en arrière. La cause n'est ni le panneau ni la cascade CSS : `setHeaderCompact(Boolean(compactViewport?.matches))` était la seule vérité au chargement, et chaque entrée du menu est un lien vers une autre page. Une décision du 16 octobre (« ne persiste pas de préférence ») protégeait le compactage automatique sans distinguer le **défaut**, recalculable, du **choix**, qui ne l'est pas.
+
+**Ce que cela change.** La préférence `mrsc-entete-compacte` (`oui` / `non`) rejoint les réglages locaux : lue au chargement, écrite par la bascule « Réduire » / « Agrandir », suivie d'un onglet à l'autre par `storage`, et **prioritaire** sur les changements de format — une rotation ou la barre d'adresse d'un téléphone ne doivent pas défaire un choix. Sans préférence écrite, le format redevient le seul décideur : l'automaticité d'octobre est conservée pour une première visite. `setHeaderCompact` reste l'unique endroit qui pose les classes, le libellé, le focus et le replacement des panneaux. Le douzième essai navigateur rejoue le geste aux deux formats et dans les deux sens de la bascule ; `verifier-affichages.py` gagne un dix-septième garde-fou et trois mutations du banc retirent séparément la lecture, l'écriture et l'application à la page d'arrivée.
+
+**Preuves dans le dépôt :**
+
+- `assets/js/site.js`
+- `outils/test-experience.cjs`
+- `outils/verifier-affichages.py`
+- `outils/test_mutations_affichages.py`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py && python3 outils/verifier-integration.py && node outils/test_test_experience.mjs && node outils/test-experience.cjs`
+
+**Limite — ce que cela ne prouve pas.** La préférence est locale à l'appareil et au navigateur : un stockage effacé ou bloqué reprend le format de fenêtre, et la bascule ne reste alors utilisable que pendant la visite — l'essai navigateur avec stockage bloqué le vérifie, mais la page suivante y perd encore le mode réduit. `site.js` est chargé avec `defer` : la classe est posée à 74,8 ms pour une première peinture à 448,6 ms sur ce Chromium et ce réseau local, donc pas d'éclair d'en-tête agrandi ici, mais un réseau très lent pourrait peindre avant lui ; une garantie absolue demanderait un script en ligne dans les 117 pages. Aucune vérification humaine sur l'appareil de la personne n'a eu lieu, et la correction n'a pas été publiée à ce stade.
+
+**Suite.** Confirmer à l'écran, sur le site publié, le clic dans le menu à 1 440 px et en aperçu ordinateur ; puis relire le relevé `graphismes` de la CI. Si un éclair d'en-tête agrandi est vu sur un réseau lent, mesurer la première peinture avant d'envisager un script en ligne.
+
+Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 
 ## 3. Ce que ce registre ne dit pas
 

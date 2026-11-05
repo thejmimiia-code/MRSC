@@ -245,6 +245,59 @@ def controler_en_tete_compact() -> list[str]:
     return erreurs
 
 
+def controler_entete_reduit_persistant() -> list[str]:
+    """Le mode réduit survit au clic sur une entrée du menu.
+
+    Le 5 novembre 2026, « Réduire » n'était pas mémorisé. Chaque entrée du menu
+    charge une autre page, où `setHeaderCompact` repartait du seul format de
+    fenêtre : mesuré en Chromium à 1 440 px, l'en-tête passait de 49 px à
+    198 px au moment du clic, et à 980 × 440 de 49 px à 194 px. La préférence
+    doit être lue au chargement, écrite par la bascule, suivie quand un autre
+    onglet la change, et gagner sur les changements de format — sinon le saut
+    revient par une porte différente.
+
+    Ce contrôle ne mesure pas le rendu : il tient les cinq bouts de `site.js`
+    que l'essai navigateur (`test-experience.cjs`) a vus corriger le défaut.
+    """
+    erreurs: list[str] = []
+    script = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+    marqueurs = (
+        (
+            'const CLE_ENTETE_COMPACTE = "mrsc-entete-compacte";',
+            "la clé de la préférence d'en-tête compact a disparu",
+        ),
+        (
+            "preferenceCompacte = lirePreferenceEnteteCompacte();",
+            "la préférence d'en-tête compact n'est plus lue au chargement",
+        ),
+        (
+            "const etatCompactVoulu = () => preferenceCompacte ?? Boolean(compactViewport?.matches);",
+            "la préférence d'en-tête compact ne gagne plus sur le format de fenêtre",
+        ),
+        (
+            'savePreference(CLE_ENTETE_COMPACTE, compact ? "oui" : "non");',
+            "le choix de « Réduire » / « Agrandir » n'est plus enregistré",
+        ),
+        (
+            "if (event.key === null || event.key === CLE_ENTETE_COMPACTE) {",
+            "la préférence d'en-tête compact n'est plus suivie d'un onglet à l'autre",
+        ),
+    )
+    for fragment, message in marqueurs:
+        if fragment not in script:
+            erreurs.append(f"site.js — {message} : le mode réduit sauterait au clic dans le menu")
+    # Trois appels : chargement, rappel de stockage, franchissement du seuil de
+    # format. Un seul ne suffit pas : la page d'arrivée serait la seule corrigée.
+    appels = script.count("setHeaderCompact(etatCompactVoulu());")
+    if appels < 3:
+        erreurs.append(
+            f"site.js — la préférence d'en-tête compact n'est relue que {appels} fois "
+            "sur 3 (chargement, autre onglet, changement de format) : le mode réduit "
+            "sauterait au clic dans le menu ou au premier redimensionnement"
+        )
+    return erreurs
+
+
 def controler_mesure_de_lecture() -> list[str]:
     texte = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
     blocs = blocs_de(texte, "main .container p")
@@ -1498,6 +1551,7 @@ CONTROLES = (
     ("tailles de texte", controler_tailles_de_texte),
     ("cibles tactiles", controler_cibles_tactiles),
     ("en-tête compact", controler_en_tete_compact),
+    ("mode réduit persistant", controler_entete_reduit_persistant),
     ("panneau du menu", controler_panneau_du_menu),
     ("mesure de lecture", controler_mesure_de_lecture),
     ("plafonds d'images par densité", controler_plafonds_d_images),
