@@ -545,6 +545,125 @@ def corps_de_fonction(script: str, nom: str) -> str | None:
     return None
 
 
+#: Ce qui fait qu'un panneau en est un : sa surface, son contour, sa profondeur
+#: et son animation. C'est exactement la liste que le lot du 5 novembre 2026 a
+#: rendue commune aux deux panneaux flottants du site. La géométrie (`left`,
+#: `top`, `width`, `max-height`) n'y figure pas : elle est écrite par le calcul
+#: dans `site.js`, et les deux la reçoivent par le même appel.
+HABILLAGE_COMMUN = (
+    "background",
+    "border",
+    "border-radius",
+    "box-shadow",
+    "padding",
+    "width",
+    "animation",
+)
+
+
+def sans_commentaires_css(corps: str) -> str:
+    """La règle privée de ses commentaires : une prose n'est pas une déclaration.
+
+    Sans cela, le commentaire qui explique « le centrage venait de
+    `justify-content: center` » se lit comme une déclaration, et le contrôle
+    accuse la règle d'un défaut qu'elle ne porte pas.
+    """
+    return re.sub(r"/\*.*?\*/", " ", corps, flags=re.S)
+
+
+def declarations(corps: str) -> dict[str, str]:
+    """Déclarations d'une règle, la dernière l'emportant : `propriété` → valeur."""
+    trouvees: dict[str, str] = {}
+    for ligne in sans_commentaires_css(corps).splitlines():
+        ligne = ligne.strip()
+        if ":" not in ligne or ligne.startswith("/*") or ligne.startswith("*"):
+            continue
+        propriete, _, valeur = ligne.partition(":")
+        trouvees[propriete.strip()] = " ".join(valeur.split()).rstrip(";").strip()
+    return trouvees
+
+
+def controler_habillage_identique_du_menu(texte: str, panneaux: list[str]) -> list[str]:
+    """Le panneau du menu porte l'habillage du panneau « Personnalisation ».
+
+    Le 5 novembre 2026, la géométrie des deux panneaux a été unifiée la première.
+    L'habillage, lui, ne l'était pas : le panneau du menu restait une dalle
+    marine à bordure claire, quand son voisin dans le même en-tête était une
+    carte de papier. Deux panneaux posés côte à côte qui ne se ressemblent pas
+    n'ont pas le même comportement, quelle que soit leur géométrie.
+
+    Ce contrôle ne cherche pas des mots dans le fichier : il lit les deux règles
+    et compare les déclarations qui font l'habillage. C'est la seule façon de
+    vérifier « à l'identique » — une valeur recopiée à la main finirait par
+    diverger sans que rien ne le dise.
+    """
+    erreurs: list[str] = []
+    if not panneaux:
+        return erreurs
+    reference = [
+        declarations(corps) for corps in blocs_de(texte, ".customize-settings-panel")
+        if "background" in corps and "box-shadow" in corps
+    ]
+    if not reference:
+        return [
+            "site.css — le panneau « Personnalisation » n'a plus d'habillage lisible "
+            "(background et box-shadow) : l'unité des deux panneaux ne peut plus être vérifiée"
+        ]
+    attendu = reference[0]
+    reel = declarations(panneaux[0])
+    for propriete in HABILLAGE_COMMUN:
+        if propriete not in attendu:
+            continue
+        if propriete not in reel:
+            erreurs.append(
+                f"site.css — le panneau du menu n'a plus `{propriete}` dans sa règle : "
+                f"il perd l'habillage du panneau « Personnalisation » ({attendu[propriete]})"
+            )
+        elif reel[propriete] != attendu[propriete]:
+            erreurs.append(
+                f"site.css — `{propriete}` du panneau du menu diverge de celui de "
+                f"« Personnalisation » : « {reel[propriete]} » au lieu de "
+                f"« {attendu[propriete]} »"
+            )
+    # Les entrées du panneau se comportent comme les lignes du panneau voisin :
+    # même allumage au survol et sur la page courante (fond `--blue-soft`, encre
+    # `--blue`), même anneau de focus bleu — l'anneau clair des surfaces marines
+    # serait invisible sur du papier —, et pas de trait doré, qui ne tient pas
+    # 3:1 sur une surface claire (mesuré : 2,21:1).
+    regles = regles_indexees(texte)
+    survol = regles.get('html.has-js.menu-flottant .nav-links a:hover, html.has-js.menu-flottant .nav-links a[aria-current="page"]', "")
+    if "background: var(--blue-soft)" not in survol or "color: var(--blue)" not in survol:
+        erreurs.append(
+            "site.css — le survol et la page courante du panneau du menu n'ont plus "
+            "l'allumage des lignes de « Personnalisation » (background: var(--blue-soft); "
+            "color: var(--blue)) : le panneau perd son repère de navigation"
+        )
+    focus = regles.get("html.has-js.menu-flottant .nav-links a:focus-visible", "")
+    if "outline: 2px solid var(--blue)" not in focus:
+        erreurs.append(
+            "site.css — l'anneau de focus d'une entrée du panneau n'est plus celui des "
+            "lignes de « Personnalisation » (outline: 2px solid var(--blue)) : l'anneau "
+            "clair des surfaces marines est invisible sur la surface du panneau"
+        )
+    trait = regles.get("html.has-js.menu-flottant .nav-links a::after", "")
+    if "content: none" not in trait:
+        erreurs.append(
+            "site.css — le trait doré de la barre en ligne est revenu dans le panneau "
+            "(html.has-js.menu-flottant .nav-links a::after { content: none; }) : il ne "
+            "tient que 2,21:1 sur la surface claire, sous le 3:1 du critère 1.4.11"
+        )
+    return erreurs
+
+
+def regles_indexees(texte: str) -> dict[str, str]:
+    """Habillage : règles indexées par sélecteur normalisé (espaces et retours)."""
+    index: dict[str, str] = {}
+    for selecteur, corps in regles(texte):
+        cle = " ".join(selecteur.split())
+        index.setdefault(cle, corps)
+    return index
+
+
 def controler_panneau_du_menu() -> list[str]:
     """Le panneau du menu se déploie comme « Personnalisation », et reste atteignable.
 
@@ -576,6 +695,7 @@ def controler_panneau_du_menu() -> list[str]:
             "site.css — le panneau du menu n'a plus de défilement interne "
             "(overflow-y: auto) : sur un écran court, ses derniers liens sortent de l'écran"
         )
+    erreurs.extend(controler_habillage_identique_du_menu(texte, panneaux))
     # Une deuxième règle de géométrie pour le même panneau, c'est deux vérités à
     # tenir d'accord : c'est exactement ce que le lot du 5 novembre 2026 a retiré.
     autres = [
@@ -591,24 +711,37 @@ def controler_panneau_du_menu() -> list[str]:
     else:
         # Une seule règle doit réunir les trois protections : réparties sur deux
         # blocs, l'une des deux peut disparaître sans que l'autre s'en aperçoive.
-        proteges = [
-            corps for corps in panneaux
-            if "100dvh - var(--hauteur-entete" in corps
-            and "justify-content: safe center" in corps
+        corps = "\n".join(panneaux)
+        if "100dvh - var(--hauteur-entete" not in corps:
+            erreurs.append(
+                "site.css — le panneau du menu n'est plus plafonné à la place "
+                "restante sous l'en-tête (calc(100dvh - var(--hauteur-entete)))"
+            )
+        # Le centrage a changé de réponse le 5 novembre 2026, en même temps que
+        # l'habillage. La barre en ligne a une seule rangée : `center` y répartit
+        # ce qui reste, et c'était la règle de base. Dans une **colonne**, le même
+        # `center` répartit le vide *entre* les entrées dès que le panneau est plus
+        # haut qu'elles — les liens se dispersent —, ce que `safe center` ne
+        # corrigeait qu'au-delà du bord haut. `flex-start` supprime les deux
+        # défauts d'un coup : premier lien en haut, entrées alignées. On refuse
+        # donc explicitement tout centrage vertical ici.
+        centrages = [
+            ligne for ligne in sans_commentaires_css(corps).splitlines()
+            if "justify-content" in ligne and "flex-start" not in ligne
+            and "justify-content:" in ligne
         ]
-        if not proteges:
-            corps = "\n".join(panneaux)
-            if "100dvh - var(--hauteur-entete" not in corps:
-                erreurs.append(
-                    "site.css — le panneau du menu n'est plus plafonné à la place "
-                    "restante sous l'en-tête (calc(100dvh - var(--hauteur-entete)))"
-                )
-            if "justify-content: safe center" not in corps:
-                erreurs.append(
-                    "site.css — le panneau défilable centre de nouveau ses liens : le "
-                    "premier lien sort par le haut et devient inatteignable "
-                    "(justify-content: safe center)"
-                )
+        if "justify-content: flex-start" not in corps:
+            erreurs.append(
+                "site.css — le panneau du menu ne s'aligne plus depuis le haut "
+                "(justify-content: flex-start) : en colonne, un centrage disperse les "
+                "entrées et pousse la première hors du panneau défilable"
+            )
+        elif centrages:
+            erreurs.append(
+                "site.css — le panneau du menu porte un second alignement vertical "
+                f"({', '.join(ligne.strip() for ligne in centrages)}) : la dernière "
+                "déclaration l'emporte, et c'est celle qui pousse les liens hors du cadre"
+            )
     # La hauteur de l'en-tête varie (logo, cran de texte, paysage) : elle doit être
     # mesurée, pas devinée par une constante.
     script = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
