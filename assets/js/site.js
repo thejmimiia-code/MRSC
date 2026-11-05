@@ -53,6 +53,10 @@
   let textLevel = 100;
   let contrastEnabled = false;
   let spacingEnabled = false;
+  // Rappels exécutés après un changement de réglage d'affichage. La taille du
+  // texte et l'espacement changent la largeur des entrées de navigation : le
+  // panneau du menu doit alors réévaluer s'il est flottant, et se replacer.
+  const apresChangementReglages = [];
 
   const readPreference = (key) => {
     try {
@@ -99,6 +103,7 @@
     if (textDecrease) textDecrease.disabled = textLevel === textLevels[0];
     if (textIncrease) textIncrease.disabled = textLevel === textLevels[textLevels.length - 1];
     synchroniserSimulateurs();
+    apresChangementReglages.forEach((rappel) => rappel());
   };
 
   const applyContrast = (enabled) => {
@@ -117,6 +122,7 @@
       spacingToggle.setAttribute("aria-pressed", String(spacingEnabled));
     }
     synchroniserSimulateurs();
+    apresChangementReglages.forEach((rappel) => rappel());
   };
 
   const loadPreferences = () => {
@@ -783,18 +789,7 @@
   if (toggle && navigation) {
     root.classList.add("has-js");
 
-    // La hauteur de l'en-tête dépend du logo, du cran de texte et du mode
-    // compact : le panneau du menu s'y accroche pour ne jamais dépasser le bas
-    // de l'écran, même en paysage ou en texte très agrandi.
-    if (header && typeof ResizeObserver === "function") {
-      const publierHauteurEntete = () => {
-        root.style.setProperty("--hauteur-entete", `${Math.round(header.getBoundingClientRect().height)}px`);
-      };
-      publierHauteurEntete();
-      new ResizeObserver(publierHauteurEntete).observe(header);
-    }
-
-    // --- Placement mesuré du panneau « Personnalisation » ------------------
+    // --- Placement mesuré des panneaux flottants ---------------------------
     // Personne ne garde plus une fenêtre à une taille fixe : on la redimensionne,
     // on la coupe en deux, on zoome, on passe du portrait au paysage, et sur
     // téléphone la barre d'adresse change la hauteur utile. Un point de rupture
@@ -805,7 +800,7 @@
     // la gauche, libellés rognés. Empiler des points de rupture, c'est courir
     // après les formats ; mesurer, c'est n'en avoir aucun à courir après.
     //
-    // Le panneau est donc placé **à la mesure**, à chaque ouverture et à chaque
+    // Un panneau est donc placé **à la mesure**, à chaque ouverture et à chaque
     // changement de fenêtre :
     //   1. la largeur voulue par la feuille de style est relue, puis bornée à
     //      la fenêtre moins deux marges ;
@@ -816,29 +811,38 @@
     //   3. sa hauteur descend sous l'en-tête, bornée pour laisser au moins
     //      160 px de panneau visible, avec défilement interne au-delà.
     //
-    // Le positionnement reste `absolute` dans `.customize-settings`, qui porte
-    // le bouton : les coordonnées calculées sont donc ramenées à ce bouton. On
-    // évite ainsi `position: fixed` dans l'en-tête, dont le `backdrop-filter`
-    // fait de lui le référentiel des descendants fixes — un piège qui rendrait
-    // les coordonnées fausses sans que rien ne le signale.
+    // Depuis le 5 novembre 2026, **les deux panneaux du site passent par ce même
+    // calcul** : « Personnalisation » et le menu. Le menu était le dernier à
+    // s'ouvrir par une cascade de points de rupture — pleine largeur sous
+    // 1260 px, gouttières négatives sous 760 et 520, plafond de hauteur dans une
+    // troisième règle. Il se déploie désormais comme l'autre : ancré à son
+    // bouton, borné aux deux marges, défilable, avec la même animation. Une
+    // seule différence reste voulue : sa couleur, qui est celle de la barre de
+    // navigation.
+    //
+    // Le positionnement reste `absolute` dans le parent positionné du panneau
+    // (`.customize-settings` ou `.nav-inner`) : les coordonnées calculées sont
+    // donc ramenées à ce parent. On évite ainsi `position: fixed` dans l'en-tête,
+    // dont le `backdrop-filter` fait de lui le référentiel des descendants
+    // fixes — un piège qui rendrait les coordonnées fausses sans que rien ne le
+    // signale.
     const MARGE_PANNEAU = 8;
     const HAUTEUR_MINIMALE_PANNEAU = 160;
-    function placerPanneauPersonnalisation() {
-      if (!personnalisation || !panneauPersonnalisation || !personnalisation.open) return;
+
+    function placerPanneauFlottant(panneau, bouton) {
+      if (!panneau || !bouton) return false;
       // Marqueur lisible par les essais : sans lui, un placement qui ne
       // s'exécute pas ressemble à un placement juste. C'est exactement ce qui
       // s'est produit le 30 octobre 2026 — le panneau gardait la géométrie de
       // la feuille de style, et rien ne le disait.
-      panneauPersonnalisation.dataset.placement = "mesure";
-      const bouton = personnalisation.querySelector("summary");
-      if (!bouton) return;
+      panneau.dataset.placement = "mesure";
       const vue = window.visualViewport;
       const largeurFenetre = Math.round(vue ? vue.width : document.documentElement.clientWidth);
       const hauteurFenetre = Math.round(vue ? vue.height : window.innerHeight);
       // Largeur voulue : celle de la feuille de style, relue à chaque fois
       // plutôt que devinée — une largeur fixe ici contredirait le CSS.
-      panneauPersonnalisation.style.width = "";
-      const voulue = panneauPersonnalisation.getBoundingClientRect().width || 352;
+      panneau.style.width = "";
+      const voulue = panneau.getBoundingClientRect().width || 352;
       const largeur = Math.round(
         Math.max(160, Math.min(voulue, largeurFenetre - 2 * MARGE_PANNEAU))
       );
@@ -867,12 +871,109 @@
         HAUTEUR_MINIMALE_PANNEAU,
         hauteurFenetre - haut - MARGE_PANNEAU
       );
-      panneauPersonnalisation.style.right = "auto";
-      panneauPersonnalisation.style.width = `${largeur}px`;
-      panneauPersonnalisation.style.left = `${Math.round(gauche - cadreBouton.left)}px`;
-      panneauPersonnalisation.style.top = `${Math.round(haut - cadreBouton.top)}px`;
-      panneauPersonnalisation.style.maxHeight = `${Math.round(hauteurDisponible)}px`;
+      // Les coordonnées sont relatives au parent positionné du panneau, pas au
+      // bouton : c'est lui qui sert de référentiel à `left` et `top`. Le panneau
+      // du menu vit dans `.nav-inner`, celui de « Personnalisation » dans son
+      // propre `<details>` ; les deux n'ont pas le même parent.
+      const parent = panneau.offsetParent;
+      const cadreParent = parent ? parent.getBoundingClientRect() : { left: 0, top: 0 };
+      panneau.style.right = "auto";
+      panneau.style.width = `${largeur}px`;
+      panneau.style.left = `${Math.round(gauche - cadreParent.left)}px`;
+      panneau.style.top = `${Math.round(haut - cadreParent.top)}px`;
+      panneau.style.maxHeight = `${Math.round(hauteurDisponible)}px`;
+      return true;
     }
+
+    // Fermer un panneau, c'est aussi lui rendre ses coordonnées : laissées en
+    // place, elles s'appliqueraient telles quelles à la réouverture, dans un
+    // format qui a pu changer entre-temps — une image du panneau au mauvais
+    // endroit, puis son replacement. Deux fois la même liste écrite à deux
+    // endroits finirait par diverger : elle est ici, une seule fois.
+    const PROPRIETES_PLACEES = ["left", "top", "right", "width", "max-height"];
+    function rendreCoordonnees(panneau) {
+      if (!panneau) return;
+      PROPRIETES_PLACEES.forEach((propriete) => {
+        panneau.style.removeProperty(propriete);
+      });
+      delete panneau.dataset.placement;
+    }
+
+    function placerPanneauPersonnalisation() {
+      if (!personnalisation || !panneauPersonnalisation || !personnalisation.open) return;
+      placerPanneauFlottant(panneauPersonnalisation, personnalisation.querySelector("summary"));
+    }
+
+    // Le panneau du menu n'est pas un `<details>` : sa bascule est un bouton et
+    // son ouverture une classe. Le placement, lui, ne le sait pas.
+    function placerPanneauMenu() {
+      if (!navigation || !navigation.classList.contains("is-open")) return;
+      placerPanneauFlottant(navigation, toggle);
+    }
+
+    function placerPanneauxFlottants() {
+      placerPanneauPersonnalisation();
+      placerPanneauMenu();
+    }
+
+    // La feuille de style a besoin de savoir si la navigation est repliée
+    // derrière « Menu » : sous 1260 px, et aussi au-delà à 115 et 130 % de
+    // taille de texte. Ces deux conditions vivent dans le CSS, sous forme de
+    // paliers et de classes ; les réécrire ici en JavaScript serait une seconde
+    // vérité. On demande donc au bouton s'il est affiché — c'est exactement la
+    // question à laquelle la feuille a déjà répondu — et on publie la réponse
+    // sous forme de classe.
+    function synchroniserMenuFlottant() {
+      const flottant = window.getComputedStyle(toggle).display !== "none";
+      root.classList.toggle("menu-flottant", flottant);
+      // Un panneau ouvert qui n'a plus de bouton — fenêtre élargie, texte ramené
+      // à 100 % — n'a plus rien à montrer : il se referme, et rend au passage
+      // les coordonnées qu'il tenait du calcul, sans quoi elles
+      // s'appliqueraient à la navigation en ligne.
+      if (!flottant && navigation.classList.contains("is-open")) {
+        toggle.setAttribute("aria-expanded", "false");
+        navigation.classList.remove("is-open");
+        rendreCoordonnees(navigation);
+      }
+      return flottant;
+    }
+
+    // Ce que fait un redimensionnement : d'abord la classe, puis le placement.
+    // L'ordre compte — placer avant de savoir si le panneau est flottant
+    // donnerait des coordonnées que la feuille n'utilise pas encore.
+    function ajusterPanneauxFlottants() {
+      synchroniserMenuFlottant();
+      placerPanneauxFlottants();
+    }
+
+    // La hauteur de l'en-tête dépend du logo, du cran de texte et du mode
+    // compact : les deux panneaux s'y accrochent pour ne jamais dépasser le bas
+    // de l'écran, même en paysage ou en texte très agrandi.
+    if (header && typeof ResizeObserver === "function") {
+      const publierHauteurEntete = () => {
+        root.style.setProperty("--hauteur-entete", `${Math.round(header.getBoundingClientRect().height)}px`);
+        ajusterPanneauxFlottants();
+      };
+      publierHauteurEntete();
+      new ResizeObserver(publierHauteurEntete).observe(header);
+    }
+
+    // Le placement suit tous les changements qui déplacent un bouton ou
+    // réduisent la place : fenêtre redimensionnée, rotation, barre d'adresse du
+    // téléphone, clavier virtuel, changement de taille de texte ou d'en-tête.
+    // Rien de tout cela n'est un format nommé. Le défilement de la fenêtre
+    // visuelle ne déplace pas le bouton : il replace, sans resynchroniser.
+    window.addEventListener("resize", ajusterPanneauxFlottants, { passive: true });
+    window.addEventListener("orientationchange", ajusterPanneauxFlottants);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", ajusterPanneauxFlottants, { passive: true });
+      window.visualViewport.addEventListener("scroll", placerPanneauxFlottants, { passive: true });
+    }
+    if (document.readyState !== "complete") {
+      window.addEventListener("load", ajusterPanneauxFlottants, { once: true });
+    }
+    apresChangementReglages.push(ajusterPanneauxFlottants);
+    ajusterPanneauxFlottants();
 
     // Un seul bouton « Personnalisation » regroupe les commandes de préférence :
     // taille de l'en-tête, parcours, affichage et présentation. L'en-tête ne garde
@@ -922,29 +1023,42 @@
       // 800 × 500, panneau ouvert avec un style en ligne nul.
       new MutationObserver(placerPanneauPersonnalisation)
         .observe(personnalisation, { attributeFilter: ["open"] });
-      window.addEventListener("resize", placerPanneauPersonnalisation, { passive: true });
-      window.addEventListener("orientationchange", placerPanneauPersonnalisation);
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener("resize", placerPanneauPersonnalisation, { passive: true });
-        window.visualViewport.addEventListener("scroll", placerPanneauPersonnalisation, { passive: true });
-      }
-      if (header && typeof ResizeObserver === "function") {
-        new ResizeObserver(placerPanneauPersonnalisation).observe(header);
-      }
-      // Le navigateur peut restaurer `<details open>` au chargement (rechargement,
-      // retour arrière) : le panneau est alors ouvert sans qu'aucun événement
-      // `toggle` n'ait eu lieu, et il garderait la géométrie du repli. Constaté
-      // le 30 octobre 2026 par l'essai à 667 × 375 : panneau ouvert, style en
-      // ligne nul. On place donc aussi au chargement.
+      // Les écoutes de fenêtre, de fenêtre visuelle et d'en-tête sont posées
+      // une seule fois plus haut, pour les deux panneaux : un panneau qui
+      // n'écoute pas les mêmes changements se replace moins bien que l'autre,
+      // et la différence ne se voit qu'au moment du défaut.
+      //
+      // Le navigateur peut aussi restaurer `<details open>` au chargement
+      // (rechargement, retour arrière) : le panneau est alors ouvert sans
+      // qu'aucun événement `toggle` n'ait eu lieu. Constaté le 30 octobre 2026
+      // par l'essai à 667 × 375 : panneau ouvert, style en ligne nul. On place
+      // donc aussi ici, tout de suite.
       placerPanneauPersonnalisation();
-      if (document.readyState !== "complete") {
-        window.addEventListener("load", placerPanneauPersonnalisation, { once: true });
-      }
     }
 
     const closeMenu = () => {
       toggle.setAttribute("aria-expanded", "false");
       navigation.classList.remove("is-open");
+      rendreCoordonnees(navigation);
+    };
+
+    // Ouverture : les mêmes règles que « Personnalisation ». Un seul panneau
+    // flottant à la fois — fermer l'autre évite deux panneaux superposés, dont
+    // le second masque le premier sans qu'on sache lequel répond. Et le panneau
+    // est placé dans le même geste : attendre le prochain redimensionnement
+    // laisserait la géométrie de repli de la feuille de style.
+    const openMenu = () => {
+      toggle.setAttribute("aria-expanded", "true");
+      navigation.classList.add("is-open");
+      if (personnalisation && personnalisation.open) personnalisation.open = false;
+      if (settings) settings.open = false;
+      if (layoutSettings) layoutSettings.open = false;
+      const journeySettings = document.querySelector("[data-site-journey]");
+      if (journeySettings) journeySettings.open = false;
+      // La synchronisation passe avant le placement : ouvrir dans un format où
+      // le panneau n'est pas encore flottant poserait des coordonnées que la
+      // feuille de style n'applique pas.
+      ajusterPanneauxFlottants();
     };
 
     if (header && headerCompactToggle) {
@@ -989,7 +1103,7 @@
         // explicitement — s'en remettre au seul ResizeObserver laissait le
         // panneau aux coordonnées de l'en-tête agrandi (mesuré le 30 octobre
         // 2026 : left = −203 px pour un bouton désormais à 169 px).
-        placerPanneauPersonnalisation();
+        ajusterPanneauxFlottants();
       };
 
       headerCompactToggle.hidden = false;
@@ -1035,14 +1149,17 @@
 
     toggle.addEventListener("click", () => {
       const isOpen = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!isOpen));
-      navigation.classList.toggle("is-open", !isOpen);
-      if (!isOpen) {
-        if (settings) settings.open = false;
-        if (layoutSettings) layoutSettings.open = false;
-        const journeySettings = document.querySelector("[data-site-journey]");
-        if (journeySettings) journeySettings.open = false;
-      }
+      if (isOpen) closeMenu();
+      else openMenu();
+    });
+
+    // Fermeture au clic extérieur, comme « Personnalisation ». Le menu restait
+    // ouvert quand on cliquait ailleurs dans la page : il fallait retrouver le
+    // bouton pour le refermer, alors que l'autre panneau se fermait seul.
+    document.addEventListener("click", (event) => {
+      if (!navigation.classList.contains("is-open")) return;
+      if (toggle.contains(event.target) || navigation.contains(event.target)) return;
+      closeMenu();
     });
 
     navigation.addEventListener("click", (event) => {

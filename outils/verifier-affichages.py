@@ -137,11 +137,37 @@ def regles(texte: str) -> list[tuple[str, str]]:
 
     `blocs_de` exige un sélecteur exact ; ici les sélecteurs s'étalent sur
     plusieurs lignes (`:is(` + une liste), d'où cette recherche par fragment.
+
+    Le 5 novembre 2026, ce lecteur appariait les accolades avec une expression
+    régulière. Il le faisait mal, et il le savait : un commentaire de ce fichier
+    disait déjà « après un bloc média, le balayage générique regles() démarre
+    sur une accolade fermante et manque la règle suivante ». Ce jour-là, la
+    suppression d'un bloc média voisin a fait disparaître de la lecture la règle
+    de grille de `.header-compact-tools` — fichier intact, contenu intact,
+    appariement différent — et le contrôle a crié au lieu de lire. On parcourt
+    donc les accolades en profondeur : chaque corps va avec son préambule, et un
+    bloc média refermé ne fabrique pas de règle.
     """
-    return [
-        (correspondance.group(1).strip(), correspondance.group(2))
-        for correspondance in re.finditer(r"([^{}]+)\{([^}]*)\}", texte)
-    ]
+    sans_commentaires = re.sub(r"/\*.*?\*/", " ", texte, flags=re.S)
+    resultat: list[tuple[str, str]] = []
+    pile: list[str] = []
+    tampon: list[str] = []
+    for caractere in sans_commentaires:
+        if caractere == "{":
+            pile.append("".join(tampon).strip())
+            tampon = []
+        elif caractere == "}":
+            corps = "".join(tampon)
+            preambule = pile.pop() if pile else ""
+            # Un préambule d'arobase (`@media`, `@keyframes`) ouvre un bloc qui
+            # contient des règles : son corps, à la fermeture, est vide. Un corps
+            # vide n'est pas une règle, et un `@media` n'a pas de déclarations.
+            if corps.strip() and preambule and not preambule.startswith("@"):
+                resultat.append((preambule, corps))
+            tampon = []
+        else:
+            tampon.append(caractere)
+    return resultat
 
 
 def hauteur_minimale_effective(blocs: list[str]) -> float | None:
@@ -520,7 +546,7 @@ def corps_de_fonction(script: str, nom: str) -> str | None:
 
 
 def controler_panneau_du_menu() -> list[str]:
-    """Le panneau du menu doit rester atteignable sur un écran court.
+    """Le panneau du menu se déploie comme « Personnalisation », et reste atteignable.
 
     Le 23 octobre 2026, en paysage sur téléphone (844 × 390), le panneau partait
     de `top: 100%` sans plafond : il descendait à 522 px sur un écran de 390 px,
@@ -528,17 +554,39 @@ def controler_panneau_du_menu() -> list[str]:
     rester dans la même règle, faute de quoi le défaut revient silencieusement :
     un plafond mesuré, un défilement interne et un centrage qui ne pousse rien
     hors du cadre.
+
+    Le 5 novembre 2026, ce panneau a cessé d'avoir sa propre géométrie : elle
+    était écrite en double — pleine largeur sous 1260 px, gouttières négatives
+    sous 760 et 520, plafond dans une troisième règle — et il ne se déployait
+    pas comme le panneau « Personnalisation » posé à côté de lui. Les deux
+    passent désormais par `placerPanneauFlottant` dans `site.js`. Ce contrôle
+    vérifie donc aussi cette unité : la même fonction pour les deux panneaux,
+    une seule règle de géométrie, et une classe `menu-flottant` publiée par le
+    script — sans elle, la feuille appliquerait une géométrie flottante à une
+    navigation en ligne.
     """
     erreurs: list[str] = []
     texte = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
     panneaux = [
-        corps for corps in blocs_de(texte, ".has-js .nav-links")
+        corps for corps in blocs_de(texte, "html.has-js.menu-flottant .nav-links")
         if "overflow-y: auto" in corps
     ]
     if not panneaux:
         erreurs.append(
             "site.css — le panneau du menu n'a plus de défilement interne "
             "(overflow-y: auto) : sur un écran court, ses derniers liens sortent de l'écran"
+        )
+    # Une deuxième règle de géométrie pour le même panneau, c'est deux vérités à
+    # tenir d'accord : c'est exactement ce que le lot du 5 novembre 2026 a retiré.
+    autres = [
+        corps for corps in blocs_de(texte, ".has-js .nav-links")
+        if "position: absolute" in corps
+    ]
+    if autres:
+        erreurs.append(
+            "site.css — le panneau du menu a de nouveau une géométrie par palier "
+            f"({len(autres)} règle(s) `position: absolute` hors de la règle mesurée) : "
+            "il se déploierait autrement que le panneau « Personnalisation »"
         )
     else:
         # Une seule règle doit réunir les trois protections : réparties sur deux
@@ -564,6 +612,20 @@ def controler_panneau_du_menu() -> list[str]:
     # La hauteur de l'en-tête varie (logo, cran de texte, paysage) : elle doit être
     # mesurée, pas devinée par une constante.
     script = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+    # Les deux panneaux, une seule fonction de placement. Deux calculs séparés
+    # divergeraient au premier format oublié, et rien ne le dirait : le panneau
+    # du menu était dans ce cas jusqu'au 5 novembre 2026.
+    for appel in ("placerPanneauFlottant(panneauPersonnalisation", "placerPanneauFlottant(navigation, toggle)"):
+        if appel not in script:
+            erreurs.append(
+                f"site.js — le panneau du menu n'est plus placé comme « Personnalisation » : "
+                f"appel attendu absent ({appel})"
+            )
+    if 'classList.toggle("menu-flottant"' not in script:
+        erreurs.append(
+            "site.js — la classe `menu-flottant` n'est plus publiée : la feuille de style "
+            "appliquerait la géométrie flottante à une navigation en ligne"
+        )
     if "--hauteur-entete" not in script:
         erreurs.append(
             "site.js — la hauteur de l'en-tête n'est plus publiée dans --hauteur-entete : "
@@ -666,13 +728,13 @@ def controler_panneau_du_menu() -> list[str]:
     # placement mesure, borne et se rebranche sur tous les changements qui
     # déplacent le bouton. Et l'inverse, aussi important : qu'aucune règle de
     # format ne réintroduise un ancrage fixe qui contredirait la mesure.
-    placement = corps_de_fonction(script, "placerPanneauPersonnalisation")
+    placement = corps_de_fonction(script, "placerPanneauFlottant")
     if placement is None:
         erreurs.append(
-            "site.js — le panneau « Personnalisation » n'est plus placé à la mesure "
-            "(aucune fonction placerPanneauPersonnalisation) : il retombe sur un ancrage "
-            "fixe de la feuille de style et ressort de l'écran dès que la fenêtre n'est "
-            "pas celle qu'imaginait le point de rupture"
+            "site.js — les panneaux ne sont plus placés à la mesure "
+            "(aucune fonction placerPanneauFlottant) : ils retombent sur un ancrage "
+            "fixe de la feuille de style et ressortent de l'écran dès que la fenêtre "
+            "n'est pas celle qu'imaginait le point de rupture"
         )
     else:
         bornes = {
@@ -694,14 +756,21 @@ def controler_panneau_du_menu() -> list[str]:
     rebranchements = {
         "personnalisation.addEventListener(\"toggle\", placerPanneauPersonnalisation)":
             "il n'est plus placé à l'ouverture du panneau",
-        'window.addEventListener("resize", placerPanneauPersonnalisation':
+        # Depuis le 5 novembre 2026, les écoutes appellent `ajusterPanneauxFlottants`,
+        # qui pose la classe `menu-flottant` avant de placer : la classe décide si
+        # la feuille applique la géométrie mesurée, placer avant elle donnerait
+        # des coordonnées que rien n'utilise.
+        'window.addEventListener("resize", ajusterPanneauxFlottants':
             "il ne se replace plus quand la fenêtre change de taille",
-        'window.visualViewport.addEventListener("resize", placerPanneauPersonnalisation':
+        'window.visualViewport.addEventListener("resize", ajusterPanneauxFlottants':
             "il ne se replace plus quand la fenêtre visuelle change (barre d'adresse)",
-        "new ResizeObserver(placerPanneauPersonnalisation)":
+        "new ResizeObserver(publierHauteurEntete)":
             "il ne se replace plus quand l'en-tête change de hauteur (texte agrandi, en-tête réduit)",
         "new MutationObserver(placerPanneauPersonnalisation)":
             "il ne voit plus un panneau restauré ouvert par le navigateur (attribut open posé après load)",
+        "apresChangementReglages.push(ajusterPanneauxFlottants)":
+            "il ne se replace plus quand la taille du texte ou l'espacement change : "
+            "la navigation peut passer sous le bouton « Menu » sans que le panneau le sache",
     }
     for appel, raison in rebranchements.items():
         if appel not in script:
