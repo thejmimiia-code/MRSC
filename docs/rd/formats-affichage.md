@@ -2684,7 +2684,9 @@ html.has-js.menu-flottant .nav-links {
   position: absolute; … top: calc(100% + .5rem); right: 0;
   width: min(clamp(300px, 22rem, 380px), calc(100vw - 1rem));
   max-height: calc(100dvh - var(--hauteur-entete, 5rem) - 1rem);
-  overflow-y: auto; justify-content: safe center;
+  overflow-y: auto; justify-content: flex-start;
+  border: 1px solid rgba(29, 50, 104, .12); border-radius: 16px;
+  background: var(--surface); /* la même surface que « Personnalisation » */
 }
 ```
 
@@ -2755,15 +2757,85 @@ lieu de lire. Le lecteur parcourt maintenant les accolades **en profondeur**,
 avec les commentaires retirés : un corps va avec son préambule, et un bloc média
 refermé ne fabrique pas de règle.
 
+### L'habillage, après la géométrie (même jour, second passage)
+
+La géométrie unifiée ne faisait pas tout : **l'habillage** ne l'était pas. Le
+panneau du menu restait une dalle marine à bordure claire, quand son voisin,
+dans le même en-tête, était une carte de papier. Deux panneaux côte à côte qui
+ne se ressemblent pas n'ont pas le même comportement, quelle que soit leur
+géométrie — la personne qui ouvre l'un puis l'autre le voit tout de suite.
+
+| Ce qui divergeait | « Personnalisation » | Panneau du menu, avant |
+| --- | --- | --- |
+| Surface | `var(--surface)` | `var(--navy)` |
+| Bordure | `rgba(29, 50, 104, .12)` | `var(--on-navy-border)` (claire) |
+| Entrée au repos | encre `var(--navy-ink)`, 12,29:1 | blanc à 86 %, encre de barre |
+| Survol et page courante | fond `var(--blue-soft)`, encre `var(--blue)` | changement de couleur + trait doré de 3 px |
+| Anneau de focus | bleu 2 px, 6,97:1 | anneau clair global, sur du papier |
+
+Le panneau du menu porte désormais l'habillage de « Personnalisation », à
+l'identique : même surface, même bordure, même rayon, même ombre, même `padding`,
+même largeur, même animation. Ses entrées reprennent l'habillage d'une **ligne**
+du panneau voisin — 44 px, rayon 11 px, encre marine, transition de 150 ms — et
+s'allument au survol et sur la page courante par le même fond `--blue-soft` et la
+même encre `--blue`. Le trait doré de la barre en ligne disparaît du panneau :
+sur une surface claire, l'or du site ne tient que **2,21:1**, sous les 3:1 du
+critère 1.4.11 (mesuré). La page courante se marque donc par l'allumage, comme
+une ligne du panneau voisin, et garde `aria-current="page"` pour les lecteurs
+d'écran.
+
+**Les rapports sont mesurés, pas supposés** — pire état de chaque emploi, sur la
+surface réelle du panneau :
+
+| Emploi | Couleurs | Rapport | Seuil |
+| --- | --- | --- | --- |
+| Encre d'une entrée | `#1d3268` sur `#fff` | **12,29:1** | 4,5:1 (1.4.3) |
+| Encre d'une entrée en contraste renforcé | `#13244b` sur `#fff` | **15,20:1** | 4,5:1 |
+| Survol / page courante | `#2958a2` sur `#eaf0fa` | **6,09:1** | 4,5:1 |
+| Idem en contraste renforcé | `#174a87` sur `#e2eaf6` | **7,33:1** | 4,5:1 |
+| Anneau de focus | `#2958a2` sur `#fff` | **6,97:1** | 3:1 (1.4.11) |
+| Trait doré retiré | `#e7a126` sur `#fff` | 2,21:1 | 3:1 — **retiré** |
+| Anneau des boutons d'en-tête | `#e7a126` sur `#1d3268` | **5,57:1** | 3:1 |
+| Idem en contraste renforcé | `#835100` sur `#13244b` | 2,27:1 | **passé au blanc** |
+
+**Une asymétrie trouvée en chemin, corrigée :** « Menu » et « Personnalisation »
+se ressemblaient au survol et à l'ouverture, mais pas au clavier — l'un prenait
+l'anneau global (blanc sur la barre marine), l'autre un anneau doré. Les six
+commandes d'en-tête partagent maintenant un seul anneau : or sur la barre marine
+(5,57:1), blanc en contraste renforcé (où `--gold` descend à 2,27:1). Une seule
+règle, un seul dessin, et un thème qui ne se contente pas de recopier l'autre.
+
+**Ce que `justify-content` avait à voir avec l'habillage.** En colonne, le
+`justify-content: safe center` hérité de la barre répartissait le vide *entre*
+les entrées dès que le panneau était plus haut qu'elles : les liens se
+dispersaient au lieu de s'aligner. `safe` ne corrigeait que le débordement par le
+haut. Le panneau passe à `flex-start`, qui supprime les deux défauts d'un coup, et
+le contrôle refuse désormais explicitement tout centrage vertical sur ce panneau
+— un commentaire qui cite « `justify-content: center` » ne compte pas : les
+helpers de lecture retirent les commentaires avant de lire les déclarations.
+
+**Le contrôle ne cherche pas des mots, il compare les deux règles.**
+`verifier-affichages.py` lit la règle du panneau du menu et celle de
+`.customize-settings-panel`, puis compare sept déclarations d'habillage
+(`background`, `border`, `border-radius`, `box-shadow`, `padding`, `width`,
+`animation`). Si l'une diverge, le message nomme la propriété et **les deux
+valeurs**. C'est la seule façon de tenir « à l'identique » : une valeur recopiée
+à la main finirait par diverger sans que rien ne le dise. Cinq mutations neuves
+éprouvent ce contrôle ; le banc en compte désormais dix-sept.
+
 ### Ce que ce lot ne promet pas
 
-Le déploiement est identique **par le calcul**, pas par la couleur ni par le
-contenu : la barre de navigation reste marine, et ses entrées gardent leur
-soulignement doré au survol. Le menu se referme quand le **mode d'en-tête**
+Le déploiement et l'habillage sont identiques — même calcul, même surface, mêmes
+états, même anneau — mais **le contenu n'est pas le même** : le panneau du menu
+liste les entrées de navigation, celui de « Personnalisation » des réglages. La
+barre de navigation en ligne reste marine avec son soulignement doré : c'est le
+bouton, pas le panneau. Le menu se referme quand le **mode d'en-tête**
 change — le site le faisait déjà avant ce lot, sur téléphone et en paysage
 court : ce n'est pas une conséquence du placement mesuré, et l'essai le vérifie
 plutôt que de le subir. Le panneau du menu ne se ferme pas au défilement de
 la page — c'est le comportement d'un panneau ancré, pas une fenêtre modale, et
-c'est aussi celui de « Personnalisation ». Aucune mesure de contraste n'a été
-refaite : les couleurs ne changent pas, seules la géométrie et l'animation
-changent. Enfin, l'essai navigateur neuf n'a pas tourné ici : il attend la CI.
+c'est aussi celui de « Personnalisation ». Les rapports de contraste écrits plus
+haut sont **calculés** depuis les jetons de la feuille, pas relevés par la sonde
+de contraste du navigateur : celle-ci n'existe pas dans cet environnement, et
+c'est la CI qui les confrontera au rendu. Le relevé du focus y passe aussi, sur
+les six commandes d'en-tête dont l'anneau change.

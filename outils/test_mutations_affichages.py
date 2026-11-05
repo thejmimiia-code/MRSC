@@ -127,6 +127,67 @@ MUTATIONS = (
         '      void flottant;\n',
         "la classe `menu-flottant` n'est plus publiée",
     ),
+    # Le 5 novembre 2026, après la géométrie, l'habillage. Le panneau du menu est
+    # devenu la même carte que « Personnalisation » : même surface, mêmes états,
+    # même anneau. Ces cinq mutations vérifient que le contrôle compare vraiment
+    # les deux règles, et ne se contente pas de retrouver des mots connus.
+    (
+        "panneau du menu rendu à sa surface marine",
+        "assets/css/site.css",
+        "  background: var(--surface);\n"
+        "  box-shadow:\n"
+        "    0 24px 48px -24px rgba(16, 36, 74, .34),\n"
+        "    0 10px 20px -12px rgba(16, 36, 74, .18),\n"
+        "    0 1px 2px rgba(16, 36, 74, .08);\n"
+        "  animation: panneau-deploiement .16s ease-out both;\n"
+        "}\n"
+        "html.has-js.menu-flottant .nav-links.is-open { display: flex; }",
+        "  background: var(--navy);\n"
+        "  box-shadow:\n"
+        "    0 24px 48px -24px rgba(16, 36, 74, .34),\n"
+        "    0 10px 20px -12px rgba(16, 36, 74, .18),\n"
+        "    0 1px 2px rgba(16, 36, 74, .08);\n"
+        "  animation: panneau-deploiement .16s ease-out both;\n"
+        "}\n"
+        "html.has-js.menu-flottant .nav-links.is-open { display: flex; }",
+        "diverge de celui de « Personnalisation »",
+    ),
+    (
+        "trait doré de la barre rendu au panneau du menu",
+        "assets/css/site.css",
+        "html.has-js.menu-flottant .nav-links a::after { content: none; }",
+        "html.has-js.menu-flottant .nav-links a::after { width: auto; }",
+        "le trait doré de la barre en ligne est revenu dans le panneau",
+    ),
+    (
+        "survol du panneau du menu sans allumage",
+        "assets/css/site.css",
+        "html.has-js.menu-flottant .nav-links a:hover,\n"
+        'html.has-js.menu-flottant .nav-links a[aria-current="page"] {\n'
+        "  border-color: var(--border-soft-2);\n"
+        "  background: var(--blue-soft);",
+        "html.has-js.menu-flottant .nav-links a:hover,\n"
+        'html.has-js.menu-flottant .nav-links a[aria-current="page"] {\n'
+        "  border-color: var(--border-soft-2);\n"
+        "  background: transparent;",
+        "n'ont plus l'allumage des lignes de « Personnalisation »",
+    ),
+    (
+        "anneau de focus du panneau rendu à l'or de la barre",
+        "assets/css/site.css",
+        "html.has-js.menu-flottant .nav-links a:focus-visible {\n"
+        "  outline: 2px solid var(--blue);",
+        "html.has-js.menu-flottant .nav-links a:focus-visible {\n"
+        "  outline: 2px solid var(--gold);",
+        "l'anneau de focus d'une entrée du panneau n'est plus celui des",
+    ),
+    (
+        "panneau du menu de nouveau centré verticalement",
+        "assets/css/site.css",
+        "  justify-content: flex-start;\n  gap: .1rem;",
+        "  justify-content: safe center;\n  gap: .1rem;",
+        "ne s'aligne plus depuis le haut",
+    ),
     (
         "géométrie de panneau réintroduite par un palier",
         "assets/css/site.css",

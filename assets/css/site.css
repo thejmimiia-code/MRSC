@@ -4632,9 +4632,36 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
   border-color: var(--gold);
   background: var(--on-navy-fill-strong);
 }
-.customize-settings > summary:focus-visible {
+/* Anneau de focus des commandes d'en-tête : un seul dessin, une seule couleur.
+   Le 5 novembre 2026, « Menu » et « Personnalisation » se ressemblaient au
+   survol et à l'ouverture, mais pas au clavier : l'un prenait l'anneau global,
+   l'autre un anneau doré de 2 px. Deux boutons voisins qui répondent
+   différemment au même geste n'ont pas le même comportement.
+
+   Mesuré (et non supposé) : l'or du site sur la barre marine donne **5,57:1**,
+   au-dessus des 3:1 du critère 1.4.11. En contraste renforcé, `--gold` devient
+   #835100 et ne donne plus que **2,27:1** sur #13244b : l'anneau y passe donc
+   au blanc de la barre, qui tient le seuil dans les deux thèmes. */
+.site-header :is(
+  .nav-toggle,
+  .header-compact-toggle,
+  .display-settings > summary,
+  .site-journey-settings > summary,
+  .layout-settings > summary,
+  .customize-settings > summary
+):focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
+}
+html.contraste-renforce .site-header :is(
+  .nav-toggle,
+  .header-compact-toggle,
+  .display-settings > summary,
+  .site-journey-settings > summary,
+  .layout-settings > summary,
+  .customize-settings > summary
+):focus-visible {
+  outline-color: var(--on-navy);
 }
 
 /* Chevrons : un même dessin partagé par les quatre panneaux du site. La taille
@@ -4722,8 +4749,13 @@ html.has-js.menu-flottant .nav-links {
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: stretch;
+  /* Le centrage venait du `justify-content: center` de la barre en ligne, où il
+     n'y a qu'une rangée à répartir. Dans une colonne, il répartit le vide entre
+     les entrées dès que le panneau est plus haut qu'elles : les liens se
+     dispersaient au lieu de s'aligner, et le premier sortait par le haut sur un
+     écran court. `safe center` gardait le second défaut de côté sans corriger le
+     premier — la même erreur avait été corrigée sur le panneau voisin. */
   justify-content: flex-start;
-  justify-content: safe center;
   gap: .1rem;
   width: min(clamp(300px, 22rem, 380px), calc(100vw - 1rem));
   max-height: calc(100vh - var(--hauteur-entete, 5rem) - 1rem);
@@ -4731,9 +4763,14 @@ html.has-js.menu-flottant .nav-links {
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: .45rem;
-  border: 1px solid var(--on-navy-border);
+  /* L'habillage du panneau « Personnalisation », à l'identique : même bordure,
+     même rayon, même surface, même encre, même ombre. Le 5 novembre 2026, la
+     géométrie avait été unifiée la première ; la surface, elle, était restée
+     marine, et deux panneaux voisins dans le même en-tête ne se ressemblaient
+     pas. La barre de navigation reste marine — c'est le bouton, pas le panneau. */
+  border: 1px solid rgba(29, 50, 104, .12);
   border-radius: 16px;
-  background: var(--navy);
+  background: var(--surface);
   box-shadow:
     0 24px 48px -24px rgba(16, 36, 74, .34),
     0 10px 20px -12px rgba(16, 36, 74, .18),
@@ -4741,18 +4778,51 @@ html.has-js.menu-flottant .nav-links {
   animation: panneau-deploiement .16s ease-out both;
 }
 html.has-js.menu-flottant .nav-links.is-open { display: flex; }
+/* Une entrée du panneau reprend l'habillage d'une **ligne** du panneau voisin
+   (`.customize-settings-panel … > summary`) : même 44 px, même rayon de 11 px,
+   même encre marine, même poids, même transition. Une entrée de barre et une
+   ligne de panneau ne sont pas le même objet : l'une se souligne, l'autre
+   s'allume. */
 html.has-js.menu-flottant .nav-links a {
   width: 100%;
   min-height: 44px;
-  padding: .55rem .7rem;
-  border-radius: 10px;
-  white-space: nowrap;
+  padding: .45rem .55rem;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  color: var(--navy-ink);
+  font-size: max(13px, .86rem);
+  font-weight: 650;
+  letter-spacing: .005em;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
 }
-html.has-js.menu-flottant .nav-links a::after {
-  right: .7rem;
-  left: .7rem;
-  width: auto;
+/* Survol et page courante : le même allumage que les lignes du panneau voisin —
+   fond `--blue-soft`, encre `--blue`. */
+html.has-js.menu-flottant .nav-links a:hover,
+html.has-js.menu-flottant .nav-links a[aria-current="page"] {
+  border-color: var(--border-soft-2);
+  background: var(--blue-soft);
+  color: var(--blue);
 }
+/* Le focus se juge sur la surface réelle du panneau, qui est claire : le bleu
+   du site y tient le seuil de 3:1 des éléments non textuels, alors que l'anneau
+   clair des surfaces marines y serait invisible. C'est la règle du panneau
+   voisin, à l'identique — bleu, pas or : l'or du bouton « Menu » est l'anneau
+   d'un bouton posé sur la barre marine, pas celui d'une ligne posée sur du
+   papier. Le rapport exact se relève par la mesure, il ne s'écrit pas de
+   mémoire. */
+html.has-js.menu-flottant .nav-links a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+/* Le trait doré de la barre en ligne n'a pas d'objet dans le panneau : sur une
+   surface claire, un trait décoratif de 3 px ne tient pas le 3:1 du critère
+   1.4.11, et la page courante se marque par l'allumage ci-dessus, pas par un
+   soulignement. */
+html.has-js.menu-flottant .nav-links a::after { content: none; }
 
 /* L'animation est partagée : le panneau « Personnalisation » ne définit plus
    la sienne, il appelle la même. */

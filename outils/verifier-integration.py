@@ -639,13 +639,16 @@ def fichiers_du_site() -> None:
         and styles.count("var(--white)") == 0
         # Compte daté : 13 jusqu'au 1er novembre 2026, 12 depuis le retrait des
         # 25 classes qu'aucune page n'ouvre — le noyau de la constellation
-        # `.ai-feature-core` en portait un —, 10 depuis le 5 novembre 2026 : le
-        # panneau du menu n'a plus de règle propre sous 1260 px ni dans le bloc
-        # du texte agrandi, et chacune de ces deux règles peignait un fond
-        # `var(--navy)` que la règle partagée remplace. Le nombre reste exact :
-        # il doit baisser quand une règle disparaît, pas quand on ajoute un
-        # littéral.
-        and styles.count("var(--navy)") == 10
+        # `.ai-feature-core` en portait un —, 10 depuis que le panneau du menu n'a
+        # plus de règle propre sous 1260 px ni dans le bloc du texte agrandi
+        # (chacune peignait un fond `var(--navy)`), et **9** depuis que ce
+        # panneau a reçu l'habillage de « Personnalisation » : sa surface est
+        # `var(--surface)`, comme celle de son voisin, parce que deux panneaux
+        # posés côte à côte dans le même en-tête doivent se ressembler. La barre
+        # de navigation, elle, reste marine — c'est le bouton, pas le panneau.
+        # Le nombre reste exact : il doit baisser quand une règle disparaît, pas
+        # quand on ajoute un littéral.
+        and styles.count("var(--navy)") == 9
         and styles.count("rgba(255, 255, 255, .97)") == 1
         and styles.count("#121f43") == 1
         and (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8").count("var(--navy)") == 1,
