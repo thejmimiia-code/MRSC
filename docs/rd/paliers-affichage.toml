@@ -15,13 +15,27 @@
 # le site présume. Une diminution échoue aussi, avec un autre message : c'est une
 # avancée à dater, pas un détail à laisser filer. Le 31 octobre 2026, le relevé
 # donnait 17 conditions de format pour 45 blocs, dont 15 en dette.
+#
+# Baisse datée du 5 novembre 2026 : 35 blocs → 34, 175 règles → 164. Le panneau
+# du menu avait une géométrie par palier — pleine largeur sous 1260 px,
+# gouttières négatives sous 760 et sous 520, plafond de hauteur dans une
+# troisième règle — et ne se déployait donc pas comme le panneau
+# « Personnalisation » posé à côté de lui. Il est désormais placé par la même
+# fonction mesurée (`placerPanneauFlottant` dans `site.js`) : le bloc de 1260 px
+# ne garde que l'affichage (`display`), et dix règles de dessin réparties sur
+# quatre blocs disparaissent. Les deux `presume` qui décrivaient encore cette
+# géométrie sont réécrits, pas seulement recomptés : un registre qui garde la
+# description d'un dessin retiré couvre un palier qui n'existe plus. La preuve
+# du déploiement n'est pas ce commentaire : c'est `outils/test_placement_panneau.mjs`,
+# qui place les deux panneaux sur 7 200 positions et vérifie que les coordonnées
+# écrites sont relatives à leur parent positionné.
 
 [releve]
 date = 2026-11-01
 feuille = "assets/css/site.css"
 condition_total = 17
-bloc_total = 35
-regles_total = 175
+bloc_total = 34
+regles_total = 164
 
 # Baisse datée du 31 octobre 2026 : 66 blocs → 62, puis 41 blocs de format.
 # Quatre blocs ont disparu parce que quatre grilles (`.principle-grid`,
@@ -97,7 +111,7 @@ regles_total = 175
 condition = "(max-width: 760px)"
 classe = "format"
 occurrences = 11
-regles = 60
+regles = 56
 presume = "Sous 760 px, la fenêtre est un téléphone ou une tablette étroite. Le palier décide du repli du menu, de la grille des commandes d'en-tête, des colonnes de fiches et de la largeur du panneau de personnalisation. Rien ici n'a été mesuré : 760 px est une valeur choisie, et onze blocs en dépendent."
 decision = "dette"
 
@@ -105,7 +119,7 @@ decision = "dette"
 condition = "(max-width: 520px)"
 classe = "format"
 occurrences = 8
-regles = 63
+regles = 62
 presume = "Sous 520 px, une rangée de deux boutons ne tient plus côte à côte : les commandes d'en-tête passent sur deux colonnes égales et les grilles se réduisent à une colonne. La limite vient d'un calcul de libellés (Menu, Personnalisation) à la police par défaut, pas d'une mesure de la rangée réelle."
 decision = "dette"
 
@@ -124,8 +138,8 @@ decision = "dette"
 [[condition]]
 condition = "(max-width: 1260px)"
 classe = "format"
-occurrences = 2
-regles = 11
+occurrences = 1
+regles = 8
 presume = "Sous 1260 px, la rangée de liens du menu ne tient plus sur une ligne avec ses dix entrées, et la bascule « Menu » remplace la rangée. Le seuil dépend du nombre de liens et de la police, deux choses qui changent — il est écrit une fois pour toutes, puis répété en `min-width: 1261px`."
 decision = "dette"
 
@@ -133,7 +147,7 @@ decision = "dette"
 condition = "(min-width: 1261px)"
 classe = "format"
 occurrences = 1
-regles = 10
+regles = 8
 presume = "Au-dessus de 1260 px, la rangée de liens reprend toute la largeur disponible et peut passer sur deux lignes plutôt que tronquer le premier et le dernier lien. C'est la moitié haute d'un seuil dont la moitié basse est `(max-width: 1260px)` : deux conditions à tenir ensemble, à la main."
 decision = "dette"
 
@@ -216,8 +230,8 @@ decision = "dette"
 condition = "(max-width: 760px), (orientation: landscape) and (max-height: 560px) and (max-width: 920px)"
 classe = "format"
 occurrences = 1
-regles = 2
-presume = "Le panneau du menu et la rangée de commandes d'en-tête cumulent les deux conditions précédentes pour se placer sous une barre parfois haute. Ce bloc répète à la main une décision déjà écrite deux fois ; il se désynchronisera au premier changement."
+regles = 1
+presume = "La rangée de commandes de l'en-tête compact resserre ses libellés et son interligne en paysage court et sous 760 px, parce qu'une barre haute y mange la moitié de la hauteur. Le panneau du menu ne se place plus ici depuis le 5 novembre 2026 : il est mesuré dans `site.js`, comme celui de « Personnalisation », et ce bloc ne lui écrit plus de géométrie."
 decision = "dette"
 
 # Deux planchers de survie assumés : en dessous, ce n'est plus un écran réel,

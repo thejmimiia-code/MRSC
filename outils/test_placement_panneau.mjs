@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 /**
- * Banc du placement mesuré du panneau « Personnalisation » (site.js).
+ * Banc du placement mesuré des panneaux flottants du site (site.js).
  *
- * Depuis le 30 octobre 2026, ce panneau n'est plus ancré par un point de rupture
- * mais **placé à la mesure** : `placerPanneauPersonnalisation()` lit la largeur
- * de la fenêtre (`visualViewport` quand il existe), la position du bouton et la
- * hauteur de l'en-tête, puis borne le panneau aux deux marges. C'est ce calcul
- * — et non un format nommé — qui décide.
+ * Depuis le 30 octobre 2026, le panneau « Personnalisation » n'est plus ancré par
+ * un point de rupture mais **placé à la mesure** : `placerPanneauFlottant()` lit
+ * la largeur de la fenêtre (`visualViewport` quand il existe), la position du
+ * bouton et la hauteur de l'en-tête, puis borne le panneau aux deux marges.
+ * C'est ce calcul — et non un format nommé — qui décide.
+ *
+ * Depuis le 5 novembre 2026, le **panneau du menu** passe par la même fonction :
+ * le banc l'éprouve donc aussi, avec sa propre largeur voulue et un parent
+ * positionné qui n'est pas le bouton (`.nav-inner`), pour que la conversion des
+ * coordonnées soit vérifiée et pas seulement supposée.
  *
  * Le défaut d'avant tenait à trois règles successives, chacune laissant passer
  * un format. Une quatrième règle aurait eu le même destin : elle n'aurait été
@@ -49,8 +54,8 @@ const SCRIPT = path.join(RACINE, 'assets', 'js', 'site.js');
 function extrairePlacement(source) {
   const debutConstante = source.indexOf('const MARGE_PANNEAU');
   if (debutConstante < 0) throw new Error('const MARGE_PANNEAU introuvable dans site.js');
-  const debutFonction = source.indexOf('function placerPanneauPersonnalisation(');
-  if (debutFonction < 0) throw new Error('function placerPanneauPersonnalisation introuvable dans site.js');
+  const debutFonction = source.indexOf('function placerPanneauFlottant(');
+  if (debutFonction < 0) throw new Error('function placerPanneauFlottant introuvable dans site.js');
   const ouverture = source.indexOf('{', debutFonction);
   let profondeur = 0;
   let fin = ouverture;
@@ -61,7 +66,7 @@ function extrairePlacement(source) {
       if (profondeur === 0) break;
     }
   }
-  if (profondeur !== 0) throw new Error('accolades non équilibrées dans placerPanneauPersonnalisation');
+  if (profondeur !== 0) throw new Error('accolades non équilibrées dans placerPanneauFlottant');
   const constantes = source.slice(debutConstante, debutFonction);
   return `${constantes}\n${source.slice(debutFonction, fin + 1)}`;
 }
@@ -72,7 +77,7 @@ const placement = extrairePlacement(readFileSync(SCRIPT, 'utf8'));
  * Exécute le placement dans un décor simulé et rend la géométrie obtenue, en
  * pixels de fenêtre (le panneau est positionné relativement à son bouton).
  */
-function placer({ largeurFenetre, hauteurFenetre, bouton, hauteurEntete, largeurVoulue, avecVisualViewport }) {
+function placer({ largeurFenetre, hauteurFenetre, bouton, hauteurEntete, largeurVoulue, avecVisualViewport, parentLeft = 0, parentTop = 0 }) {
   const cadreBouton = {
     left: bouton.left,
     right: bouton.left + bouton.largeur,
@@ -94,18 +99,17 @@ function placer({ largeurFenetre, hauteurFenetre, bouton, hauteurEntete, largeur
     style,
     // Le vrai panneau porte le marqueur `data-placement` que pose le placement.
     dataset: {},
+    // Les coordonnées sont écrites relativement au parent positionné : pour
+    // « Personnalisation » son `<details>`, pour le menu `.nav-inner`.
+    offsetParent: { getBoundingClientRect: () => ({ left: parentLeft, top: parentTop }) },
     getBoundingClientRect: () => ({
       width: style.width === '' || style.width === undefined ? largeurVoulue : parseFloat(style.width),
       left: 0, right: 0, top: 0, bottom: 0, height: 0,
     }),
   };
-  const personnalisation = {
-    open: true,
-    querySelector: (selecteur) => (selecteur === 'summary' ? {} : null),
-  };
   const contexte = {
-    personnalisation,
-    panneauPersonnalisation: panneau,
+    panneau,
+    bouton: { getBoundingClientRect: () => cadreBouton },
     header: { getBoundingClientRect: () => cadreEntete },
     document: { documentElement: { clientWidth: largeurFenetre } },
     window: {
@@ -118,20 +122,20 @@ function placer({ largeurFenetre, hauteurFenetre, bouton, hauteurEntete, largeur
     Math,
     Number,
   };
-  // `placerPanneauPersonnalisation` lit `bouton.getBoundingClientRect()`.
-  personnalisation.querySelector = () => ({ getBoundingClientRect: () => cadreBouton });
-  vm.runInNewContext(`${placement}\nplacerPanneauPersonnalisation();`, contexte);
+  vm.runInNewContext(`${placement}\nplacerPanneauFlottant(panneau, bouton);`, contexte);
 
   const nombre = (valeur) => Number.parseFloat(String(valeur ?? '0'));
   return {
-    gauche: cadreBouton.left + nombre(style.left),
-    droite: cadreBouton.left + nombre(style.left) + nombre(style.width),
-    haut: cadreBouton.top + nombre(style.top),
-    bas: cadreBouton.top + nombre(style.top) + nombre(style.maxHeight),
+    marqueur: panneau.dataset.placement,
+    gauche: parentLeft + nombre(style.left),
+    droite: parentLeft + nombre(style.left) + nombre(style.width),
+    haut: parentTop + nombre(style.top),
+    bas: parentTop + nombre(style.top) + nombre(style.maxHeight),
     largeur: nombre(style.width),
     hauteurVisible: nombre(style.maxHeight),
     position: style.position,
     droite_auto: style.right,
+    relatif: { gauche: nombre(style.left), haut: nombre(style.top) },
   };
 }
 
@@ -146,6 +150,17 @@ const MARGE = 8;
 const HAUTEUR_MINIMALE = 160;
 const LARGEUR_VOULUE = 352;
 
+// Les deux panneaux du site, avec ce qui les distingue réellement : la largeur
+// que la feuille leur souhaite, et le parent positionné qui leur sert de
+// référentiel. Pour « Personnalisation », ce parent est le `<details>` qui porte
+// le bouton ; pour le menu, c'est `.nav-inner`, qui commence à gauche du bouton
+// et sous le haut de l'en-tête. Si la conversion des coordonnées était fausse,
+// le panneau du menu sortirait de la fenêtre dans un seul de ces deux cas.
+const panneaux = [
+  { nom: 'Personnalisation', largeurVoulue: 352, parentLeft: 0, parentTop: 0 },
+  { nom: 'menu', largeurVoulue: 380, parentLeft: 24, parentTop: 61 },
+];
+
 // Trois positions de bouton : au début de la barre (en-tête compact, celle du
 // défaut du 30 octobre), au centre, et tout à droite.
 const boutons = [
@@ -156,6 +171,7 @@ const boutons = [
 const hauteursEntete = [48, 96, 180];
 
 let cas = 0;
+for (const panneau of panneaux) {
 for (let largeurFenetre = 240; largeurFenetre <= 2560; largeurFenetre += 40) {
   for (const hauteurFenetre of [320, 375, 440, 768, 1000]) {
     for (const hauteurEntete of hauteursEntete) {
@@ -164,15 +180,19 @@ for (let largeurFenetre = 240; largeurFenetre <= 2560; largeurFenetre += 40) {
         if (bouton.left + bouton.largeur > largeurFenetre) continue;
         for (const avecVisualViewport of [true, false]) {
           cas += 1;
-          const geographie = `fenêtre ${largeurFenetre}×${hauteurFenetre}, en-tête ${hauteurEntete}, bouton ${bouton.nom}, visualViewport ${avecVisualViewport ? 'oui' : 'non'}`;
+          const geographie = `panneau ${panneau.nom}, fenêtre ${largeurFenetre}×${hauteurFenetre}, en-tête ${hauteurEntete}, bouton ${bouton.nom}, visualViewport ${avecVisualViewport ? 'oui' : 'non'}`;
           const mesure = placer({
             largeurFenetre,
             hauteurFenetre,
             bouton,
             hauteurEntete,
-            largeurVoulue: LARGEUR_VOULUE,
+            largeurVoulue: panneau.largeurVoulue,
             avecVisualViewport,
+            parentLeft: panneau.parentLeft,
+            parentTop: panneau.parentTop,
           });
+          verifier(mesure.marqueur === 'mesure',
+            `le placement n'a pas laissé son marqueur — ${geographie}`);
           verifier(mesure.gauche >= MARGE - 0.51, `sort par la gauche (${mesure.gauche} px) — ${geographie}`);
           verifier(mesure.droite <= largeurFenetre - MARGE + 0.51,
             `sort par la droite (${mesure.droite} > ${largeurFenetre - MARGE}) — ${geographie}`);
@@ -191,6 +211,7 @@ for (let largeurFenetre = 240; largeurFenetre <= 2560; largeurFenetre += 40) {
       }
     }
   }
+}
 }
 
 // Quatrième garantie, sur quatre cas lisibles plutôt que sur toute la plage :
@@ -226,8 +247,28 @@ const bas = placer({
 verifier(bas.hauteurVisible >= HAUTEUR_MINIMALE - 0.51,
   `un en-tête de 300 px dans une fenêtre de 360 ne doit pas écraser le panneau : ${JSON.stringify(bas)}`);
 
+// Le même cadre, deux parents positionnés différents : les coordonnées écrites
+// changent, la position dans la fenêtre ne change pas. C'est ce qui permet au
+// panneau du menu (dans `.nav-inner`) et à celui de « Personnalisation » (dans
+// son `<details>`) d'être placés par le même calcul.
+const sansDecalage = placer({
+  largeurFenetre: 1440, hauteurFenetre: 900, bouton: boutons[1], hauteurEntete: 48,
+  largeurVoulue: 380, avecVisualViewport: true,
+});
+const avecDecalage = placer({
+  largeurFenetre: 1440, hauteurFenetre: 900, bouton: boutons[1], hauteurEntete: 48,
+  largeurVoulue: 380, avecVisualViewport: true,
+  parentLeft: 24, parentTop: 61,
+});
+verifier(Math.abs(sansDecalage.gauche - avecDecalage.gauche) < 0.51
+  && Math.abs(sansDecalage.haut - avecDecalage.haut) < 0.51,
+  `le parent positionné déplace le panneau dans la fenêtre : ${JSON.stringify({ sansDecalage, avecDecalage })}`);
+verifier(Math.abs((sansDecalage.relatif.gauche - avecDecalage.relatif.gauche) - 24) < 0.51
+  && Math.abs((sansDecalage.relatif.haut - avecDecalage.relatif.haut) - 61) < 0.51,
+  `les coordonnées écrites ne sont pas relatives au parent : ${JSON.stringify({ sansDecalage, avecDecalage })}`);
+
 if (echecs) {
   console.error(`\n${echecs} échec(s) sur ${cas} positions — le placement du panneau n'est pas borné.`);
   process.exit(1);
 }
-console.log(`\nOK — ${cas} positions (largeurs 240 à 2 560, cinq hauteurs, trois boutons) : le panneau reste dans la fenêtre, sa hauteur ne descend pas sous ${HAUTEUR_MINIMALE} px, et son bord droit suit le bouton.`);
+console.log(`\nOK — ${cas} positions (deux panneaux, largeurs 240 à 2 560, cinq hauteurs, trois boutons) : les panneaux restent dans la fenêtre, leur hauteur ne descend pas sous ${HAUTEUR_MINIMALE} px, leur bord droit suit le bouton, et les coordonnées écrites sont relatives au parent positionné.`);

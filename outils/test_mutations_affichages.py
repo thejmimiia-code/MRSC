@@ -109,6 +109,32 @@ MUTATIONS = (
         ".english-promo-art { width: min(100%, 520px); }",
         "le plafond de 520 px de .english-promo-art a disparu",
     ),
+    # Le 5 novembre 2026, le panneau du menu a reçu le déploiement de
+    # « Personnalisation » : même calcul, même classe, une seule géométrie. Ces
+    # trois mutations vérifient que le contrôle le voit, et pas seulement que le
+    # fichier contient les mots qu'il cherche.
+    (
+        "panneau du menu placé par un autre calcul que « Personnalisation »",
+        "assets/js/site.js",
+        "      placerPanneauFlottant(navigation, toggle);\n",
+        "      void navigation;\n",
+        "le panneau du menu n'est plus placé comme « Personnalisation »",
+    ),
+    (
+        "classe `menu-flottant` plus publiée par le script",
+        "assets/js/site.js",
+        '      root.classList.toggle("menu-flottant", flottant);\n',
+        '      void flottant;\n',
+        "la classe `menu-flottant` n'est plus publiée",
+    ),
+    (
+        "géométrie de panneau réintroduite par un palier",
+        "assets/css/site.css",
+        "html.has-js.menu-flottant .nav-links.is-open { display: flex; }",
+        "html.has-js.menu-flottant .nav-links.is-open { display: flex; }\n"
+        ".has-js .nav-links { position: absolute; right: 0; left: 0; width: auto; }",
+        "le panneau du menu a de nouveau une géométrie par palier",
+    ),
 )
 
 
@@ -144,8 +170,11 @@ class TestMutationsAffichages(unittest.TestCase):
             banc_mutations.muter(
                 copie,
                 "assets/js/site.js",
-                "      panneauPersonnalisation.style.maxHeight = ",
-                "      panneauPersonnalisation.style.heightInutile = ",
+                # La mutation vise la ligne que le placement partagé écrit pour
+                # les deux panneaux : depuis le 5 novembre 2026, il n'y a plus de
+                # `panneauPersonnalisation.style` distinct.
+                "      panneau.style.maxHeight = ",
+                "      panneau.style.heightInutile = ",
             )
             banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(avant, (RACINE / "assets" / "css" / "site.css").read_bytes())

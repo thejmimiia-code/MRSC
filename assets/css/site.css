@@ -1618,35 +1618,9 @@ html.contraste-renforce .resource-scope-note {
     display: inline-flex;
   }
 
-  .has-js .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    flex-direction: column;
-    width: 100%;
-    padding: .45rem 1rem .8rem;
-    background: var(--navy);
-    box-shadow: 0 12px 18px rgba(21, 35, 62, .15);
-  }
-
-  .has-js .nav-links.is-open {
-    display: flex;
-  }
-
-  .has-js .nav-links a {
-    width: min(var(--content), 100%);
-    min-height: 45px;
-    margin-inline: auto;
-    padding-inline: .35rem;
-  }
-
-  .has-js .nav-links a::after {
-    right: auto;
-    left: .35rem;
-    width: 35px;
-  }
+  /* Le panneau lui-même n'est plus dessiné ici : il l'est une seule fois sous
+     1260 px, et placé à la mesure par `site.js`. Deux dessins du même panneau
+     dans deux paliers différents, c'est deux géométries à tenir d'accord. */
 
   /* `.contact-grid` ne figure plus ici : sa règle de base est déjà une seule
      colonne, la déclaration ne décidait rien. Trouvé le 31 octobre 2026 en
@@ -3027,18 +3001,13 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
   .nav-inner { justify-content: center; min-height: 50px; gap: clamp(6px,.5rem,10px); }
   .has-js .nav-toggle { display: inline-flex; min-height: 44px; }
   .has-js .header-compact-toggle:not([hidden]) { display: inline-flex; min-height: 44px; }
-  .has-js .nav-links {
-    position: absolute; z-index: 2; top: 100%; right: 0; left: 0;
-    display: none; flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 0;
-    width: 100%; padding: .45rem 1rem .8rem; background: var(--navy);
-    box-shadow: 0 12px 18px rgba(21,35,62,.15);
-  }
+  /* Ce palier ne décide plus que d'une chose : sous 1260 px, la navigation se
+     replie derrière « Menu ». La géométrie du panneau est écrite une seule
+     fois, pour les deux panneaux flottants du site (voir `.menu-flottant`
+     plus loin) : elle était ici en double avec le palier de 760 px, et les
+     deux copies pouvaient diverger sans que rien ne le dise. */
+  .has-js .nav-links { display: none; flex-direction: column; align-items: stretch; }
   .has-js .nav-links.is-open { display: flex; }
-  .has-js .nav-links a {
-    width: min(var(--content),100%); min-height: 45px; margin-inline: auto;
-    padding-inline: .35rem; white-space: nowrap;
-  }
-  .has-js .nav-links a::after { right: auto; left: .35rem; width: 35px; }
   html:not(.has-js) .nav-inner { flex-wrap: wrap; justify-content: flex-start; padding-block: .2rem; }
   html:not(.has-js) .nav-links { flex: 1 1 100%; flex-wrap: wrap; justify-content: flex-start; gap: 0; width: 100%; }
   html:not(.has-js) .nav-links a { min-height: 42px; padding: .45rem .6rem; white-space: nowrap; }
@@ -3110,34 +3079,12 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
     display: inline-flex;
     min-height: 44px;
   }
-  html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links {
-    position: absolute;
-    z-index: 2;
-    top: 100%;
-    right: 0;
-    left: 0;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    width: 100%;
-    padding: .45rem 1rem .8rem;
-    background: var(--navy);
-    box-shadow: 0 12px 18px rgba(21,35,62,.15);
-  }
+  /* À 115 et 130 %, les neuf entrées ne tiennent plus sur une ligne : la
+     navigation se replie derrière « Menu », même au-delà de 1260 px. Ce palier
+     ne décide donc que de l'affichage ; la géométrie du panneau est écrite une
+     seule fois, avec celle de « Personnalisation » (`.menu-flottant`). */
+  html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links { display: none; flex-direction: column; align-items: stretch; }
   html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links.is-open { display: flex; }
-  html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links a {
-    width: min(var(--content),100%);
-    min-height: 45px;
-    margin-inline: auto;
-    padding-inline: .35rem;
-    white-space: nowrap;
-  }
-  html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links a::after {
-    right: auto;
-    left: .35rem;
-    width: 35px;
-  }
 }
 html.entete-compacte { scroll-padding-top: 8rem; }
 @media (orientation: landscape) and (max-height: 560px) and (max-width: 920px) {
@@ -4546,38 +4493,7 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
    44 px partout où l'en-tête est compact, la grille remplace l'empilement sous
    520 px, et le panneau rejoint les bords en restant borné à la hauteur de
    l'écran, donc défilable. */
-@media (max-width: 1260px) {
-  /* Sous 1260 px, le panneau du menu est en position absolue sous l'en-tête
-     collant : sans plafond, il débordait sous la ligne de flottaison dès que
-     l'écran était court (844 × 390 : bas du panneau à 522 px pour 390 px de
-     haut). Il est borné à la place restante et devient défilable. */
-  .has-js .nav-links {
-    /* `.nav-links` porte une largeur explicite : sans cela, l'étirement par
-       `left`/`right` est ignoré. */
-    width: auto;
-    max-width: none;
-    min-width: 0;
-    max-height: calc(100vh - var(--hauteur-entete, 5rem) - .5rem);
-    max-height: calc(100dvh - var(--hauteur-entete, 5rem) - .5rem);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    /* Le panneau centre ses liens. Dès qu'il devient défilable, ce centrage
-       poussait le premier lien au-dessus du bord haut : en paysage, « Accueil »
-       était hors d'atteinte, même en remontant. `safe` aligne alors depuis le
-       début, et `flex-start` sert de repli aux navigateurs sans `safe`. */
-    justify-content: flex-start;
-    justify-content: safe center;
-  }
-}
-
 @media (max-width: 760px), (orientation: landscape) and (max-height: 560px) and (max-width: 920px) {
-  .has-js .nav-links {
-    /* La gouttière de `.nav-inner` vaut 8, 16 ou 24 px selon le palier : la
-       deviner produisait un débordement de 16 px hors écran en paysage. Elle se
-       calcule ici : moitié de l'écart entre la fenêtre et le conteneur. */
-    left: calc((100vw - 100%) / -2);
-    right: calc((100vw - 100%) / -2);
-  }
   html.has-js .site-header.is-compact .nav-toggle,
   html.has-js .site-header.is-compact .header-compact-toggle:not([hidden]),
   html.has-js .site-header.is-compact :is(.display-settings > summary, .site-journey-settings > summary, .layout-settings > summary) {
@@ -4589,12 +4505,6 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
 }
 
 @media (max-width: 520px) {
-  .has-js .nav-links {
-    left: calc((100vw - 100%) / -2);
-    right: calc((100vw - 100%) / -2);
-    max-height: calc(100vh - var(--hauteur-entete, 7rem) - .5rem);
-    max-height: calc(100dvh - var(--hauteur-entete, 7rem) - .5rem);
-  }
   html.has-js .site-header.is-compact .header-compact-tools {
     display: grid;
     /* Deux colonnes, pas davantage : `auto-fit` en ouvrait trois à 430 px et
@@ -4767,12 +4677,90 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
     0 24px 48px -24px rgba(16, 36, 74, .34),
     0 10px 20px -12px rgba(16, 36, 74, .18),
     0 1px 2px rgba(16, 36, 74, .08);
-  animation: panneau-personnalisation .16s ease-out both;
+  animation: panneau-deploiement .16s ease-out both;
 }
 
-@keyframes panneau-personnalisation {
+/* Le déploiement est le même pour les deux panneaux flottants du site : celui
+   de « Personnalisation » et celui du menu. Une seule animation, donc une seule
+   durée, une seule courbe, et un seul endroit à corriger si l'une des deux doit
+   changer. */
+@keyframes panneau-deploiement {
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: none; }
+}
+
+/* --- Panneau du menu : le même déploiement que « Personnalisation » -------
+   Jusqu'au 5 novembre 2026, ce panneau s'ouvrait par paliers, et le résultat
+   tenait par trois exceptions à tenir d'accord : pleine largeur sous 1260 px,
+   gouttières négatives sous 760 et 520 px pour rejoindre les bords de la
+   fenêtre (`left: calc((100vw - 100%) / -2)`), et un plafond de hauteur écrit
+   dans une troisième règle. Il ne ressemblait pas au panneau posé juste à côté
+   de lui dans le même en-tête, et chaque nouveau format demandait de vérifier
+   les trois.
+
+   Les deux panneaux passent désormais par le **même calcul** dans `site.js`
+   (`placerPanneauFlottant`) : largeur relue dans la feuille puis bornée à la
+   fenêtre moins deux marges, bord droit aligné sur le bouton puis rabattu à
+   gauche s'il déborde, hauteur bornée sous l'en-tête avec un plancher de
+   160 px. La classe `menu-flottant`, posée par le script quand le bouton
+   « Menu » est réellement affiché, décide seulement si cette géométrie
+   s'applique : au-dessus de 1260 px et à taille de texte normale, la
+   navigation reste en ligne et cette règle ne la touche pas.
+
+   Ce que la feuille garde ici est donc un **repli**, pas une décision : sans
+   script, le panneau resterait lisible sous son bouton, avec les trois
+   protections du 23 octobre 2026 réunies dans une seule règle — un plafond
+   mesuré (`100dvh - var(--hauteur-entete…)`), un défilement interne, et un
+   centrage `safe` pour que le premier lien ne sorte pas par le haut d'un
+   panneau défilable. */
+html.has-js.menu-flottant .nav-links {
+  position: absolute;
+  z-index: 100;
+  top: calc(100% + .5rem);
+  right: 0;
+  display: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  justify-content: safe center;
+  gap: .1rem;
+  width: min(clamp(300px, 22rem, 380px), calc(100vw - 1rem));
+  max-height: calc(100vh - var(--hauteur-entete, 5rem) - 1rem);
+  max-height: calc(100dvh - var(--hauteur-entete, 5rem) - 1rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: .45rem;
+  border: 1px solid var(--on-navy-border);
+  border-radius: 16px;
+  background: var(--navy);
+  box-shadow:
+    0 24px 48px -24px rgba(16, 36, 74, .34),
+    0 10px 20px -12px rgba(16, 36, 74, .18),
+    0 1px 2px rgba(16, 36, 74, .08);
+  animation: panneau-deploiement .16s ease-out both;
+}
+html.has-js.menu-flottant .nav-links.is-open { display: flex; }
+html.has-js.menu-flottant .nav-links a {
+  width: 100%;
+  min-height: 44px;
+  padding: .55rem .7rem;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+html.has-js.menu-flottant .nav-links a::after {
+  right: .7rem;
+  left: .7rem;
+  width: auto;
+}
+
+/* L'animation est partagée : le panneau « Personnalisation » ne définit plus
+   la sienne, il appelle la même. */
+@media (prefers-reduced-motion: reduce) {
+  html.has-js.menu-flottant .nav-links,
+  .customize-settings-panel {
+    animation: none;
+  }
 }
 
 /* --- Le panneau est placé à la mesure, pas par points de rupture -----------

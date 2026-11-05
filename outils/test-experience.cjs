@@ -188,6 +188,48 @@ async function ouvrirPanneau(page) {
   }
 }
 
+// Mesure commune aux deux panneaux flottants du site. Depuis le 5 novembre 2026,
+// le panneau du menu et celui de « Personnalisation » sont placés par la même
+// fonction : la mesure qui les éprouve doit donc être la même aussi, sinon un
+// essai plus indulgent que l'autre laisserait passer exactement la différence
+// qu'on veut interdire.
+async function mesurerPanneauFlottant(page, selecteurPanneau) {
+  return page.evaluate((selecteur) => {
+    const panneau = document.querySelector(selecteur);
+    if (!panneau) return null;
+    const cadre = panneau.getBoundingClientRect();
+    const fenetreVisuelle = window.visualViewport;
+    const largeurVue = Math.round(fenetreVisuelle ? fenetreVisuelle.width : document.documentElement.clientWidth);
+    const hauteurVue = Math.round(fenetreVisuelle ? fenetreVisuelle.height : window.innerHeight);
+    const lignes = Array.from(panneau.children)
+      .filter((element) => element.getBoundingClientRect().height > 0)
+      .map((element) => {
+        const boite = element.getBoundingClientRect();
+        return {
+          nom: (typeof element.className === 'string' ? element.className : element.tagName) || element.tagName,
+          gauche: Math.round(boite.left),
+          droite: Math.round(boite.right),
+        };
+      });
+    return {
+      styleEnLigne: panneau.getAttribute('style'),
+      placement: panneau.dataset.placement || null,
+      // Le défilement interne est une des trois protections du 23 octobre 2026 :
+      // il se lit dans le style calculé, pas dans la déclaration de la feuille.
+      defilant: getComputedStyle(panneau).overflowY,
+      largeurVue,
+      hauteurVue,
+      gauche: Math.round(cadre.left),
+      droite: Math.round(cadre.right),
+      haut: Math.round(cadre.top),
+      bas: Math.round(cadre.bottom),
+      largeur: Math.round(cadre.width),
+      hauteur: Math.round(cadre.height),
+      lignes,
+    };
+  }, selecteurPanneau);
+}
+
 async function verifierPanneauDansViewport(page, selecteur) {
   const mesure = await page.$eval(selecteur, (element) => {
     const rectangle = element.getBoundingClientRect();
@@ -691,36 +733,11 @@ async function main() {
     // l'échec parlerait de positions au lieu de parler de la cause.
     const erreursPage = [];
     page.on('pageerror', (erreur) => erreursPage.push(String(erreur && erreur.message ? erreur.message : erreur)));
-    const mesurerPanneau = () => page.evaluate(() => {
-      const panneau = document.querySelector('.customize-settings-panel');
-      const cadre = panneau.getBoundingClientRect();
-      const fenetreVisuelle = window.visualViewport;
-      const largeurVue = Math.round(fenetreVisuelle ? fenetreVisuelle.width : document.documentElement.clientWidth);
-      const hauteurVue = Math.round(fenetreVisuelle ? fenetreVisuelle.height : window.innerHeight);
-      const lignes = Array.from(panneau.children)
-        .filter((element) => element.getBoundingClientRect().height > 0)
-        .map((element) => {
-          const boite = element.getBoundingClientRect();
-          return {
-            nom: (typeof element.className === 'string' ? element.className : element.tagName) || element.tagName,
-            gauche: Math.round(boite.left),
-            droite: Math.round(boite.right),
-          };
-        });
-      return {
-        ouvert: document.querySelector('[data-customize-settings]')?.open === true,
-        styleEnLigne: panneau.getAttribute('style'),
-        placement: panneau.dataset.placement || null,
-        largeurVue,
-        hauteurVue,
-        gauche: Math.round(cadre.left),
-        droite: Math.round(cadre.right),
-        haut: Math.round(cadre.top),
-        bas: Math.round(cadre.bottom),
-        largeur: Math.round(cadre.width),
-        hauteur: Math.round(cadre.height),
-        lignes,
-      };
+    const mesurerPanneau = async () => ({
+      // L'état ouvert est propre au `<details>` de « Personnalisation » : il dit
+      // si l'essai a ouverture ou restauration, et l'échec le nomme.
+      ouvert: await page.evaluate(() => document.querySelector('[data-customize-settings]')?.open === true),
+      ...(await mesurerPanneauFlottant(page, '.customize-settings-panel')),
     });
     const verifierPlacement = (mesure, contexte) => {
       assert.equal(mesure.ouvert, true, `le panneau doit rester ouvert — ${contexte}`);
@@ -798,6 +815,109 @@ async function main() {
         await page.evaluate(() => new Promise((suite) => requestAnimationFrame(() => requestAnimationFrame(suite))));
         verifierPlacement(await mesurerPanneau(), `redimensionné vers ${nom} (${largeur} × ${hauteur})`);
       }
+    } finally {
+      await page.close();
+    }
+  });
+
+  // Le 5 novembre 2026, le panneau du menu s'ouvrait encore par paliers : pleine
+  // largeur sous 1260 px, gouttières négatives sous 760 et 520, plafond de
+  // hauteur dans une troisième règle. Il ne se déployait donc pas comme le
+  // panneau posé à côté de lui dans le même en-tête. Cet essai vérifie la
+  // promesse qui remplace ces règles : **même déploiement**, mesuré, borné,
+  // défilable, ancré au bouton — et une seule conséquence voulue, la couleur.
+  await executer('Panneau du menu placé à la mesure, comme « Personnalisation »', async () => {
+    const page = await creerPage({ width: 980, height: 440 });
+    const erreursPage = [];
+    page.on('pageerror', (erreur) => erreursPage.push(String(erreur && erreur.message ? erreur.message : erreur)));
+    const nav = '[data-primary-navigation]';
+    const ouvrirMenu = async () => {
+      await page.click('[data-menu-toggle]');
+      await attendre(page, () => document.querySelector('[data-primary-navigation]')?.classList.contains('is-open'));
+    };
+    const verifierMenu = (mesure, contexte) => {
+      assert.ok(mesure, `le panneau du menu est introuvable — ${contexte}`);
+      assert.equal(mesure.placement, 'mesure',
+        `le placement mesuré ne s'est pas exécuté — ${contexte} : style « ${mesure.styleEnLigne} »`
+        + (erreursPage.length ? ` · exceptions de page : ${erreursPage.join(' | ')}` : ' · aucune exception de page'));
+      // Les mêmes bornes que pour « Personnalisation », à la marge près : si ce
+      // panneau avait gardé une géométrie propre, c'est ici qu'elle se verrait.
+      assert.ok(mesure.gauche >= -1, `le menu sort par la gauche — ${contexte} : ${JSON.stringify(mesure)}`);
+      assert.ok(mesure.droite <= mesure.largeurVue + 1, `le menu sort par la droite — ${contexte} : ${JSON.stringify(mesure)}`);
+      assert.ok(mesure.haut >= -1, `le menu sort par le haut — ${contexte} : ${JSON.stringify(mesure)}`);
+      assert.ok(mesure.bas <= mesure.hauteurVue + 1, `le menu sort par le bas — ${contexte} : ${JSON.stringify(mesure)}`);
+      assert.ok(mesure.hauteur >= 160, `le menu est écrasé — ${contexte} : ${JSON.stringify(mesure)}`);
+      // La largeur voulue par la feuille est `clamp(300px, 22rem, 380px)`, bornée
+      // à la fenêtre moins deux marges de 8 px : c'est le plancher à tenir.
+      const plancher = Math.min(300, mesure.largeurVue - 16);
+      assert.ok(mesure.largeur >= plancher, `le menu est trop étroit — ${contexte} : ${JSON.stringify(mesure)}`);
+      assert.deepEqual(
+        mesure.lignes.filter((ligne) => ligne.gauche < -1 || ligne.droite > mesure.largeurVue + 1),
+        [],
+        `des entrées de menu sortent de la fenêtre — ${contexte}`
+      );
+      assert.ok(['auto', 'scroll'].includes(mesure.defilant),
+        `le menu n'est pas défilable (overflow-y: ${mesure.defilant}) : sur un écran court, `
+        + `ses dernières entrées seraient inatteignables — ${contexte}`);
+    };
+    try {
+      // Des formats où la navigation est réellement repliée : tous sous 1260 px.
+      for (const [largeur, hauteur, nom] of [
+        [1260, 800, 'juste au seuil de repli'],
+        [980, 440, 'fenêtre large et basse'],
+        [844, 390, 'téléphone en paysage, le format du défaut du 23 octobre'],
+        [667, 375, 'téléphone en paysage court'],
+        [390, 844, 'téléphone en portrait'],
+        [240, 800, 'fenêtre étroite'],
+      ]) {
+        await page.setViewport({ width: largeur, height: hauteur, deviceScaleFactor: 1 });
+        await ouvrirPageSite(page, 'index.html');
+        const flottant = await page.evaluate(() => document.documentElement.classList.contains('menu-flottant'));
+        assert.equal(flottant, true,
+          `la classe « menu-flottant » manque alors que le bouton « Menu » est affiché — ${nom} (${largeur} × ${hauteur})`);
+        await ouvrirMenu();
+        verifierMenu(await mesurerPanneauFlottant(page, nav), `${nom} (${largeur} × ${hauteur})`);
+      }
+
+      // Le panneau reste ouvert : c'est la fenêtre qui change. Le replacer est
+      // le travail des écoutes partagées avec « Personnalisation ».
+      for (const [largeur, hauteur, nom] of [
+        [1180, 900, 'élargi sans changer de régime'],
+        [900, 420, 'écrasé en hauteur'],
+        [420, 900, 'rétréci en largeur'],
+      ]) {
+        await page.setViewport({ width: largeur, height: hauteur, deviceScaleFactor: 1 });
+        await page.evaluate(() => new Promise((suite) => requestAnimationFrame(() => requestAnimationFrame(suite))));
+        verifierMenu(await mesurerPanneauFlottant(page, nav), `redimensionné vers ${nom} (${largeur} × ${hauteur})`);
+      }
+
+      // Au-delà du seuil de repli, la navigation reprend sa place en ligne : le
+      // panneau doit se refermer et rendre les coordonnées qu'il tenait du
+      // calcul, sans quoi elles s'appliqueraient à une barre en ligne.
+      await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
+      await page.evaluate(() => new Promise((suite) => requestAnimationFrame(() => requestAnimationFrame(suite))));
+      const apres = await page.evaluate(() => ({
+        flottant: document.documentElement.classList.contains('menu-flottant'),
+        ouvert: document.querySelector('[data-primary-navigation]')?.classList.contains('is-open'),
+        style: document.querySelector('[data-primary-navigation]')?.getAttribute('style') || '',
+        expanded: document.querySelector('[data-menu-toggle]')?.getAttribute('aria-expanded'),
+      }));
+      assert.equal(apres.flottant, false, `la classe « menu-flottant » survit à 1440 px : ${JSON.stringify(apres)}`);
+      assert.equal(apres.ouvert, false, `le menu reste ouvert alors que la navigation est en ligne : ${JSON.stringify(apres)}`);
+      assert.equal(apres.expanded, 'false', `« Menu » annonce encore un panneau ouvert : ${JSON.stringify(apres)}`);
+      assert.equal(apres.style.trim(), '', `des coordonnées mesurées restent sur la navigation en ligne : ${JSON.stringify(apres)}`);
+
+      // Le second régime de repli : à 130 % de taille de texte, les dix entrées
+      // ne tiennent plus sur une ligne, même à 1440 px. La classe doit suivre.
+      await ouvrirPersonnalisation(page);
+      await page.click('[data-text-increase]');
+      await page.click('[data-text-increase]');
+      await attendre(page, () => document.documentElement.classList.contains('menu-flottant'));
+      await ouvrirMenu();
+      verifierMenu(
+        await mesurerPanneauFlottant(page, nav),
+        '1440 px à 130 % de taille de texte, navigation repliée par le texte'
+      );
     } finally {
       await page.close();
     }

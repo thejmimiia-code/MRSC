@@ -551,7 +551,15 @@ def fichiers_du_site() -> None:
                 "html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-inner",
                 "html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-toggle",
                 "html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links.is-open { display: flex; }",
-                "min-height: 45px",
+                # Jusqu'au 5 novembre 2026, les liens du menu replié recevaient
+                # 45 px de haut par une règle propre au texte agrandi. Cette
+                # règle dessinait une seconde géométrie du panneau, qui ne se
+                # déployait donc pas comme celui de « Personnalisation ». Les
+                # deux panneaux partagent désormais une seule règle, et ses
+                # liens gardent 44 px — le plancher de la cible tactile WCAG
+                # 2.2 (2.5.8), avec le texte qui grandit par-dessus.
+                "html.has-js.menu-flottant .nav-links a {",
+                "min-height: 44px",
                 "padding: clamp(6px,.4rem,8px) clamp(10px,.65rem,14px)",
                 "white-space: normal",
             )
@@ -631,9 +639,13 @@ def fichiers_du_site() -> None:
         and styles.count("var(--white)") == 0
         # Compte daté : 13 jusqu'au 1er novembre 2026, 12 depuis le retrait des
         # 25 classes qu'aucune page n'ouvre — le noyau de la constellation
-        # `.ai-feature-core` en portait un. Le nombre reste exact : il doit
-        # baisser quand une règle disparaît, pas quand on ajoute un littéral.
-        and styles.count("var(--navy)") == 12
+        # `.ai-feature-core` en portait un —, 10 depuis le 5 novembre 2026 : le
+        # panneau du menu n'a plus de règle propre sous 1260 px ni dans le bloc
+        # du texte agrandi, et chacune de ces deux règles peignait un fond
+        # `var(--navy)` que la règle partagée remplace. Le nombre reste exact :
+        # il doit baisser quand une règle disparaît, pas quand on ajoute un
+        # littéral.
+        and styles.count("var(--navy)") == 10
         and styles.count("rgba(255, 255, 255, .97)") == 1
         and styles.count("#121f43") == 1
         and (RACINE / "assets" / "css" / "anglais-aventure.css").read_text(encoding="utf-8").count("var(--navy)") == 1,

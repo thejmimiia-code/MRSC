@@ -2638,3 +2638,127 @@ la raison arithmétique est écrite couple par couple.
 de WCAG 1.4.11 ; un cas de `test_cadrages.py` refuse la suite si la déclaration
 disparaît. `C1` — les quatre écarts de colonnes inférieurs au pixel restent
 **comptés** : absorber un écart le rendrait indistinguable d'un écart absent.
+
+## 15. Le menu se déploie comme « Personnalisation » (5 novembre 2026)
+
+Le panneau du menu était le dernier panneau du site à devoir son déploiement à
+des points de rupture, quand le panneau posé juste à côté de lui dans le même
+en-tête était **placé à la mesure** depuis le 30 octobre 2026. La demande était
+simple à énoncer — « rendre le déploiement des boutons du menu identique au
+comportement de "personnalisation" » — et elle ne se satisfaisait pas d'un
+palier de plus : un correctif qui ajoute un palier est un raccommodage, et deux
+copies d'une même géométrie finissent par diverger.
+
+### Ce qui était écrit, et qui ne tenait ensemble que par surveillance
+
+Trois endroits décrivaient le même panneau, chacun avec sa part de vérité :
+
+| Règle | Ce qu'elle décidait |
+| --- | --- |
+| `@media (max-width: 1260px) .has-js .nav-links` | largeur rendue automatique, plafond `calc(100dvh - var(--hauteur-entete…))`, `overflow-y: auto`, centrage `safe` |
+| `@media (max-width: 760px) … .has-js .nav-links` | `left`/`right: calc((100vw - 100%) / -2)` — la gouttière négative qui rejoignait les bords de la fenêtre |
+| `@media (max-width: 520px) .has-js .nav-links` | les mêmes gouttières et un second plafond, avec `7rem` au lieu de `5rem` en repli |
+| `html.has-js:is(.texte-agrandi,.texte-tres-agrandi) .nav-links` | une **seconde** géométrie complète, écrite à la main, pour la navigation repliée à 115 et 130 % au-delà de 1260 px |
+
+La conséquence se voyait à l'usage : à 115 % sur un écran large, le panneau
+s'ouvrait en pleine largeur sous la barre, avec son propre plafond, quand
+« Personnalisation » s'ouvrait en carte ancrée à son bouton, bornée aux deux
+marges et animée. Deux panneaux voisins, deux comportements.
+
+### Ce qui remplace les quatre règles
+
+Un seul calcul, dans `site.js` : `placerPanneauFlottant(panneau, bouton)`, que
+les deux panneaux appellent (`.customize-settings-panel` avec son `<summary>`,
+`.nav-links` avec le bouton « Menu »). Il relit la largeur voulue par la feuille
+puis la borne à la fenêtre moins deux marges de 8 px, aligne le bord droit sur
+celui du bouton et rabat à gauche s'il déborde, borne la position, et plafonne
+la hauteur sous l'en-tête en réservant un plancher de 160 px, avec défilement
+au-delà. Les coordonnées sont ramenées au parent positionné du panneau, qui
+n'est pas le même pour les deux : le `<details>` de « Personnalisation » d'un
+côté, `.nav-inner` de l'autre.
+
+Une seule règle de dessin les réunit :
+
+```css
+html.has-js.menu-flottant .nav-links {
+  position: absolute; … top: calc(100% + .5rem); right: 0;
+  width: min(clamp(300px, 22rem, 380px), calc(100vw - 1rem));
+  max-height: calc(100dvh - var(--hauteur-entete, 5rem) - 1rem);
+  overflow-y: auto; justify-content: safe center;
+}
+```
+
+La classe `menu-flottant` est posée par le script, et sa règle est volontaire :
+elle ne réécrit pas la condition de repli en JavaScript — le script demande au
+bouton « Menu » s'il est **affiché** (`getComputedStyle(toggle).display`), ce
+qui est exactement la question à laquelle les deux paliers de la feuille ont
+déjà répondu. Palier de 1260 px, taille de texte, en-tête compact : une seule
+vérité, celle du CSS, et le script la lit au lieu de la répéter. Quand la
+navigation reprend sa place en ligne — fenêtre élargie, texte ramené à 100 % —
+le panneau ouvert se referme et **rend les coordonnées** qu'il tenait du calcul,
+sans quoi elles s'appliqueraient à une barre en ligne.
+
+Ce qui reste voulu, et une seule chose : la couleur. Le fond du panneau du menu
+est `var(--navy)`, celui de la barre qu'il prolonge ; l'habillage du panneau
+« Personnalisation » garde le sien. Tout le reste — animation partagée
+(`@keyframes panneau-deploiement`, neutralisée sous `prefers-reduced-motion`),
+fermeture au clic extérieur et à Échap, un seul panneau flottant ouvert à la
+fois — est commun.
+
+### Ce que la feuille garde, et pourquoi ce n'est pas une dette
+
+La règle flottante porte encore un plafond `100dvh - var(--hauteur-entete…)`,
+un défilement interne et un centrage `safe`. Ce ne sont pas des restes du
+palier : ce sont les trois protections du 23 octobre 2026, et elles servent de
+**repli sans script**. Le contrôle les cherche dans un seul et même bloc, à
+dessein : réparties sur deux règles, l'une peut disparaître sans que l'autre
+s'en aperçoive — c'est ce qui s'était produit.
+
+### Les preuves, et où elles vivent
+
+- `outils/test_placement_panneau.mjs` — **7 200 positions** (deux panneaux ×
+  largeurs 240 à 2 560 px × cinq hauteurs × trois positions de bouton × avec et
+  sans `visualViewport`). Le banc éprouve les deux panneaux, avec deux parents
+  positionnés différents, et vérifie que les coordonnées écrites sont bien
+  relatives au parent : le même cadre, décalé de 24 px et de 61 px, doit donner
+  les mêmes positions dans la fenêtre. Sans lui, la conversion n'aurait été que
+  supposée.
+- `outils/verifier-affichages.py` — le contrôle « panneau du menu » lit
+  désormais la règle `html.has-js.menu-flottant .nav-links`, exige les trois
+  protections **dans un même bloc**, refuse toute autre règle qui redonnerait
+  une géométrie par palier (`.has-js .nav-links { position: absolute }`), et
+  vérifie que les deux panneaux passent par la même fonction.
+- `outils/test_mutations_affichages.py` — trois mutations neuves : un menu placé
+  par un autre calcul, une classe `menu-flottant` qui n'est plus publiée, une
+  géométrie de panneau réintroduite par un palier. Chacune doit faire échouer la
+  porte, avec son message.
+- `outils/test-experience.cjs` — un essai navigateur neuf : six formats repliés
+  (1 260, 980 × 440, 844 × 390, 667 × 375, 390 × 844, 240 × 800), trois
+  redimensionnements panneau ouvert, la fermeture au retour en ligne à 1 440 px
+  avec les coordonnées rendues, et le second régime de repli à 130 % de texte.
+  La mesure est la **même fonction** que celle de l'essai « Personnalisation » :
+  deux essais séparés auraient divergé. Chromium n'existe pas dans cet
+  environnement : cet essai s'exécute dans la CI, et il est le seul à voir le
+  rendu.
+
+### Une cécité avouée, corrigée au passage
+
+Le lecteur de règles de `verifier-affichages.py` appariait les accolades par
+expression régulière. Il le disait lui-même dans un commentaire : « après un
+bloc média, le balayage générique `regles()` démarre sur une accolade fermante
+et manque la règle suivante ». Supprimer un bloc média voisin a suffi à faire
+disparaître de sa lecture la règle de grille de `.header-compact-tools` —
+fichier intact, contenu intact, appariement différent — et le contrôle a crié au
+lieu de lire. Le lecteur parcourt maintenant les accolades **en profondeur**,
+avec les commentaires retirés : un corps va avec son préambule, et un bloc média
+refermé ne fabrique pas de règle.
+
+### Ce que ce lot ne promet pas
+
+Le déploiement est identique **par le calcul**, pas par la couleur ni par le
+contenu : la barre de navigation reste marine, et ses entrées gardent leur
+soulignement doré au survol. Le panneau du menu ne se ferme pas au défilement de
+la page — c'est le comportement d'un panneau ancré, pas une fenêtre modale, et
+c'est aussi celui de « Personnalisation ». Aucune mesure de contraste n'a été
+refaite : les couleurs ne changent pas, seules la géométrie et l'animation
+changent. Enfin, l'essai navigateur neuf n'a pas tourné ici : il attend la CI.
