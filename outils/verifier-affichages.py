@@ -655,6 +655,49 @@ def controler_habillage_identique_du_menu(texte: str, panneaux: list[str]) -> li
     return erreurs
 
 
+def controler_habillage_petit_ecran(texte: str) -> list[str]:
+    """À 520 px, les deux panneaux restent la même carte, avec les mêmes lignes.
+
+    Le 5 novembre 2026, l'habillage a été rendu commun dans la règle de base,
+    mais le palier de 520 px ne l'était pas : « Personnalisation » y passait à
+    un padding de .35rem, un rayon de 14 px et des lignes de 40 px, tandis que
+    le menu gardait .45rem, 16 px et 44 px. Sur un téléphone — là où le menu
+    sert le plus — les deux panneaux voisins ne se ressemblaient toujours pas.
+
+    Le contrôle exige une **seule règle** pour les deux sélecteurs : deux valeurs
+    recopiées dans deux règles finiraient par diverger sans que rien ne le dise.
+    """
+    communes = [
+        (selecteur, corps)
+        for selecteur, corps in regles(texte)
+        if ".customize-settings-panel" in selecteur
+    ]
+    carte = [
+        corps for selecteur, corps in communes
+        if "html.has-js.menu-flottant .nav-links" in selecteur
+        and "padding:" in corps and "border-radius:" in corps
+    ]
+    if not carte:
+        return [
+            "site.css — à 520 px, les deux panneaux n'ont plus la même règle de carte "
+            "(.customize-settings-panel et html.has-js.menu-flottant .nav-links dans un "
+            "seul sélecteur, avec padding et border-radius) : le menu garde son ancien "
+            "rayon et son ancien espacement sur téléphone"
+        ]
+    lignes = [
+        corps for selecteur, corps in communes
+        if "html.has-js.menu-flottant .nav-links a" in selecteur
+        and "min-height:" in corps
+    ]
+    if not lignes:
+        return [
+            "site.css — à 520 px, les entrées du menu ne partagent plus la règle des "
+            "lignes de « Personnalisation » (min-height, padding, gap, font-size) : "
+            "les deux panneaux n'ont plus la même hauteur de ligne"
+        ]
+    return []
+
+
 def regles_indexees(texte: str) -> dict[str, str]:
     """Habillage : règles indexées par sélecteur normalisé (espaces et retours)."""
     index: dict[str, str] = {}
@@ -696,6 +739,9 @@ def controler_panneau_du_menu() -> list[str]:
             "(overflow-y: auto) : sur un écran court, ses derniers liens sortent de l'écran"
         )
     erreurs.extend(controler_habillage_identique_du_menu(texte, panneaux))
+    # L'habillage commun vaut à tous les formats, y compris sous 520 px : un
+    # ajustement appliqué à un seul des deux panneaux les désaccorde à nouveau.
+    erreurs.extend(controler_habillage_petit_ecran(texte))
     # Une deuxième règle de géométrie pour le même panneau, c'est deux vérités à
     # tenir d'accord : c'est exactement ce que le lot du 5 novembre 2026 a retiré.
     autres = [

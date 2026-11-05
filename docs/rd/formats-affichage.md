@@ -2839,3 +2839,73 @@ haut sont **calculés** depuis les jetons de la feuille, pas relevés par la son
 de contraste du navigateur : celle-ci n'existe pas dans cet environnement, et
 c'est la CI qui les confrontera au rendu. Le relevé du focus y passe aussi, sur
 les six commandes d'en-tête dont l'anneau change.
+
+## 16. Une feuille corrigée n'est pas une feuille servie (5 novembre 2026)
+
+Le constat est revenu après les deux lots précédents : « le comportement du
+bouton menu n'était pas fidèle en terme de rendu ni visuels par rapport au
+comportement du menu du bouton "personnalisation" ». Dans la **source**, les
+deux panneaux partagent le même calcul, la même carte et les mêmes états. Sur le
+**site publié**, le panneau du menu reste une dalle marine à liens blancs, avec
+le trait doré de la barre en ligne. Les deux affirmations sont vraies en même
+temps, et c'est tout le problème.
+
+### Ce qui était servi
+
+`verifier-publication.py` relevait des en-têtes : tous les fichiers répondaient
+200, le type MIME était `text/css`, le contrôle était vert. Il ne lisait pas les
+octets. La feuille téléchargée depuis
+`https://thejmimiia-code.github.io/MRSC/assets/css/site.css` contenait encore :
+
+| Déclaration | Source (après #276) | Feuille servie (état #275) |
+| --- | --- | --- |
+| Surface du panneau | `var(--surface)` | `var(--navy)` |
+| Bordure | `rgba(29, 50, 104, .12)` | `var(--on-navy-border)` |
+| Alignement | `justify-content: flex-start` | `flex-start` puis `safe center` |
+| Entrée | encre `--navy-ink`, retour à la ligne autorisé | `white-space: nowrap`, `border-radius: 10px` |
+| Page courante | fond `--blue-soft`, encre `--blue` | `::after` doré remis en place |
+
+Quatre déploiements GitHub Pages consécutifs ont échoué à l'étape
+`deploy-pages` le 5 novembre (17 h 03, 17 h 27, 17 h 30, 17 h 33 UTC) ; le
+dernier succès est celui de #275 à 15 h 36. Autrement dit : la géométrie commune
+était publiée, l'habillage commun ne l'était pas. Une personne qui ouvre les
+deux panneaux sur le site voit exactement ce décalage, et aucun contrôle du
+dépôt ne pouvait le nommer.
+
+### Un contrôle qui lit les octets
+
+`outils/verifier-feuille-servie.py` télécharge la feuille publiée avec une
+adresse portant l'empreinte de la feuille locale, décompresse la réponse si
+l'hébergeur l'a compressée, et compare les deux suites d'octets. Il ne juge pas
+le rendu : il dit si le navigateur peut charger ce que la source contient.
+
+- **0** — identique : le rendu publié peut être lu comme le code.
+- **1** — divergence : le message donne les deux empreintes et le premier octet
+  différent, et nomme les deux causes possibles (déploiement échoué, cache à
+  renouveler).
+- **2** — relevé impossible : aucun verdict, surtout pas « identique ». Une
+  feuille absente ou une source illisible ne se lit pas comme une conformité.
+
+Le contrôle est appelé par `.github/workflows/verifier-publication.yml` après la
+lecture des en-têtes, avec trois essais espacés de 20 s : juste après une
+publication réussie, un CDN peut encore répondre avec l'ancienne copie. Son banc
+`test_verifier_feuille_servie.py` tourne hors ligne sur un serveur local, avec
+une feuille périmée, une feuille absente, une source absente et une réponse
+`gzip` : c'est la faute du jour, rejouée avant d'être confiée à la CI.
+
+Ce contrôle **ne répare pas** l'infrastructure de déploiement. Il empêche
+seulement qu'une publication en retard ressemble à une publication réussie.
+
+### Le dernier écart, dans la source cette fois
+
+Le palier de 520 px ajustait « Personnalisation » — padding `.35rem`, rayon
+`14px`, lignes de `40px`, icônes de `17px` — sans ajuster le menu, qui gardait
+`.45rem`, `16px` et `44px`. Sur téléphone, là où le menu sert le plus, les deux
+cartes voisines se désaccordaient à nouveau. Les deux sélecteurs partagent
+maintenant **une seule règle** pour la carte et **une seule règle** pour les
+lignes : il n'y a plus deux valeurs à tenir d'accord. Le `font-size: 13px` nu de
+cette règle figeait le texte : au réglage « 130 % », les lignes ne grandissaient
+pas. Il devient `max(13px, .82rem)` pour les deux panneaux — même dessin à
+100 %, cran de texte respecté ensuite. `verifier-affichages.py` exige l'une et
+l'autre, et une mutation du banc retire le sélecteur du menu pour prouver que le
+contrôle le voit.

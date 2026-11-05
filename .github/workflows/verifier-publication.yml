@@ -72,6 +72,25 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit "$statut"
 
+      # Un déploiement qui échoue laisse tous les fichiers répondre 200 : le
+      # tableau d'en-têtes reste vert alors que le navigateur charge l'ancienne
+      # feuille. Le 5 novembre 2026, quatre publications consécutives ont échoué
+      # à l'étape `deploy-pages` ; le panneau du menu, corrigé dans la source,
+      # restait une dalle marine sur le site. On lit donc les octets servis, pas
+      # seulement leur statut. Trois essais espacés laissent au CDN le temps de
+      # se renouveler après une publication réussie.
+      - name: Compare the served stylesheet with the source
+        shell: bash
+        env:
+          BASE_URL: ${{ inputs.base-url || 'https://thejmimiia-code.github.io/MRSC/' }}
+        run: |
+          set -uo pipefail
+          rapport="$RUNNER_TEMP/feuille-servie.md"
+          python3 outils/verifier-feuille-servie.py --base-url "$BASE_URL" --tentatives 3 --attente 20 | tee "$rapport"
+          statut=${PIPESTATUS[0]}
+          { echo; cat "$rapport"; } >> "$GITHUB_STEP_SUMMARY"
+          exit "$statut"
+
       # Une seule issue de suivi, volontairement laissée ouverte : elle est
       # réécrite à chaque mesure au lieu d’être recréée. La fermer ne
       # l’archiverait pas, elle ferait ouvrir une nouvelle issue au passage
@@ -95,6 +114,14 @@ jobs:
               cat "$rapport"
             else
               echo "Le tableau est indisponible ; consulter le journal du run."
+            fi
+            echo
+            echo "## Feuille de style servie"
+            echo
+            if [ -f "$RUNNER_TEMP/feuille-servie.md" ]; then
+              cat "$RUNNER_TEMP/feuille-servie.md"
+            else
+              echo "Comparaison indisponible ; consulter le journal du run."
             fi
             echo
             echo "---"

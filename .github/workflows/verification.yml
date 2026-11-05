@@ -204,6 +204,14 @@ jobs:
       - name: Vérifier le contrôle du périmètre de publication
         run: python3 outils/test_verifier_publication.py
 
+      # Le contrôle de la feuille servie interroge le site publié : hors de cette
+      # porte, c'est sa décision qu'on éprouve sur un serveur local (feuille
+      # périmée, absente, compressée). Le 5 novembre 2026, une feuille périmée
+      # est restée servie après quatre déploiements échoués sans qu'aucun
+      # contrôle ne le dise.
+      - name: Vérifier le contrôle de la feuille servie
+        run: python3 outils/test_verifier_feuille_servie.py
+
       # Le script écrit ses refus sur la sortie d’erreur : sans ce relais, un
       # échec n’affichait que « exit code 1 » dans l’onglet des vérifications,
       # ce qui interdisait de savoir quel fichier ou quelle largeur posait

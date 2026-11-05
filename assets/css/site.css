@@ -5018,7 +5018,13 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
 }
 
 @media (max-width: 520px) {
-  .customize-settings-panel {
+  /* Les deux panneaux restent la même carte à 520 px. Seul « Personnalisation »
+     recevait ces ajustements : le menu gardait son rayon de 16 px, son padding
+     de .45rem et des entrées de 44 px, alors qu'il est posé juste à côté. Une
+     seule règle pour les deux sélecteurs : deux valeurs recopiées finiraient
+     par diverger au prochain réglage. */
+  .customize-settings-panel,
+  html.has-js.menu-flottant .nav-links {
     padding: .35rem;
     border-radius: 14px;
   }
@@ -5027,11 +5033,15 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
     .layout-settings > summary,
     .site-journey-settings > summary
   ),
-  html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]) {
+  html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]),
+  html.has-js.menu-flottant .nav-links a {
     min-height: 40px;
     padding: .35rem .5rem;
     gap: .5rem;
-    font-size: 13px;
+    /* Le 13 px nu de la version précédente figeait ces lignes : le réglage
+       « texte 130 % » ne les agrandissait pas. `max()` garde le même dessin à
+       100 % et laisse les deux panneaux suivre le cran de texte choisi. */
+    font-size: max(13px, .82rem);
   }
   html.has-js .site-header .customize-settings-panel :is(
     .display-settings,
