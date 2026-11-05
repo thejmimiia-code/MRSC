@@ -8,14 +8,14 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Sujets du référentiel | 99 |
+| Sujets du référentiel | 106 |
 | dont `actif` | 8 |
-| dont `partiel` | 85 |
+| dont `partiel` | 92 |
 | dont `a-creer` | 3 |
 | dont `revue-experte` | 3 |
 | Domaines | 15 |
-| Fiches publiées | 96 |
-| dont prototypes à relire | 70 |
+| Fiches publiées | 104 |
+| dont prototypes à relire | 78 |
 | Sujets sans aucune fiche | 6 |
 | Sujets ouverts par une carte de sujet | 4 |
 | Lesquels | `ecoute-prononciation`, `revenus-salaire-impots`, `securite-sciences`, `systemes-embarques` |
@@ -29,20 +29,20 @@
 | Mathématiques, mesures et données | 11 | 5 | 6 | 0 | 0 | 0 |
 | Budget, économie, consommation et travail | 5 | 0 | 4 | 1 | 0 | 1 |
 | Sciences, technologie et environnement | 10 | 1 | 7 | 1 | 1 | 2 |
-| Géographie, territoire et espace | 4 | 0 | 4 | 0 | 0 | 0 |
-| Histoire, chronologie et mémoire | 3 | 0 | 3 | 0 | 0 | 0 |
-| Citoyenneté, médias et information | 5 | 0 | 5 | 0 | 0 | 0 |
-| Démarches, droits, sécurité et vie professionnelle | 4 | 0 | 3 | 1 | 0 | 1 |
+| Géographie, territoire et espace | 5 | 0 | 5 | 0 | 0 | 0 |
+| Histoire, chronologie et mémoire | 4 | 0 | 4 | 0 | 0 | 0 |
+| Citoyenneté, médias et information | 6 | 0 | 6 | 0 | 0 | 0 |
+| Démarches, droits, sécurité et vie professionnelle | 5 | 0 | 4 | 1 | 0 | 1 |
 | Numérique, données, cybersécurité et intelligence artificielle | 10 | 0 | 10 | 0 | 0 | 0 |
 | Informatique, algorithmique et langages de programmation | 10 | 0 | 10 | 0 | 0 | 0 |
 | Arts, musique, création et culture | 4 | 0 | 4 | 0 | 0 | 0 |
-| Santé, alimentation, corps et sécurité | 4 | 0 | 2 | 0 | 2 | 2 |
+| Santé, alimentation, corps et sécurité | 7 | 0 | 5 | 0 | 2 | 2 |
 | Apprendre à apprendre, autonomie et relations | 4 | 0 | 4 | 0 | 0 | 0 |
 | Études supérieures, spécialités et recherche — post-bac au doctorat | 15 | 0 | 15 | 0 | 0 | 0 |
 
 ## 3. Les 6 sujets sans aucune fiche
 
-Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Les 85 sujets `partiel` ont déjà au moins une fiche : leur manque est à qualifier sujet par sujet, il n'est pas listé ici.
+Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Les 92 sujets `partiel` ont déjà au moins une fiche : leur manque est à qualifier sujet par sujet, il n'est pas listé ici.
 
 | Domaine | Sujet | Statut | Exigence de preuve avant publication | Travail ouvert |
 | --- | --- | --- | --- | --- |
@@ -56,7 +56,7 @@ Ce sont les seuls sujets dont l'absence est déclarée dans le référentiel. Le
 ## 4. Ce que cette carte ne dit pas
 
 - Elle ne dit pas qu'un sujet absent du référentiel n'existe pas : le référentiel est une carte de travail, pas un inventaire du savoir.
-- Elle ne dit rien de la qualité des 96 fiches publiées ni de l'exactitude de leur contenu.
+- Elle ne dit rien de la qualité des 104 fiches publiées ni de l'exactitude de leur contenu.
 - Elle ne fournit aucune source : chaque sujet ouvert doit encore être documenté auprès de sources primaires, avec leur date, leur périmètre et leurs droits.
 - Elle ne hiérarchise pas les domaines : un domaine à onze sujets à créer n'est pas « plus important » qu'un domaine à un sujet.
 - Elle applique l'exigence de preuve du domaine déclaré : un sujet de santé rangé sous « études supérieures » (ISCED-F 09) reçoit l'exigence générale. Ce classement est à corriger au cas par cas, pas à lire comme une règle de risque.

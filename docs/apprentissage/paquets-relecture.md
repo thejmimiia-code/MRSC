@@ -16,87 +16,95 @@ Un verdict « conforme » fait passer la fiche au statut « Relu — relecture c
 
 | Priorité | Signification | Prototypes |
 | ---: | --- | ---: |
-| 1 | domaine exigeant une personne compétente du domaine | 9 |
-| 2 | hors domaine sensible, mais mots-clés à vérifier | 18 |
-| 3 | aucun signal automatique — reste à relire | 43 |
-|  | **Total des prototypes** | **70** |
+| 1 | domaine exigeant une personne compétente du domaine | 14 |
+| 2 | hors domaine sensible, mais mots-clés à vérifier | 19 |
+| 3 | aucun signal automatique — reste à relire | 45 |
+|  | **Total des prototypes** | **78** |
 
-Les 27 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres prototypes apparaissent dans le tableau et se détaillent avec `--fiche <identifiant>`.
+Les 33 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres prototypes apparaissent dans le tableau et se détaillent avec `--fiche <identifiant>`.
 
 ## 2. Tableau de suivi
 
 | # | Fiche | Domaine | Priorité | Sources | Droits déclarés | Revue prévue le | Relecture consignée |
 | ---: | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | [Choisir une source publique adaptée à sa question](fiches/civ-choisir-source-publique.html) | Citoyenneté, médias et information | 1 | 6 | 6 non vérifiée(s) | 2026-10-08 | aucune |
-| 2 | [Repérer l’échelle d’une institution avant de chercher le bon service](fiches/civ-reperer-echelle-institution.html) | Citoyenneté, médias et information | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
-| 3 | [Repérer une information électorale officielle](fiches/civ-reperer-info-electorale.html) | Citoyenneté, médias et information | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
-| 4 | [Trouver un service public et préparer un formulaire](fiches/civ-trouver-service-public.html) | Démarches, droits, sécurité et vie professionnelle | 1 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
-| 5 | [Comparer deux prix à quantité égale](fiches/econ-comparer-prix-unitaires.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 6 | [Distinguer un intérêt d’un frais sur un crédit fictif](fiches/econ-distinguer-interet-frais.html) | Budget, économie, consommation et travail | 1 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
-| 7 | [Lire une facture et repérer une échéance](fiches/econ-lire-facture.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 8 | [Lire une mention de garantie sur un ticket fictif](fiches/econ-lire-mention-garantie.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
-| 9 | [Repérer une source de santé publique avant d’agir](fiches/sante-reperer-source-publique.html) | Santé, alimentation, corps et sécurité | 1 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
-| 10 | [Lire un devis de travaux : ce qui doit y figurer avant de dire oui](fiches/demarche-lire-devis-travaux.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 11 | [Lire une fiche RNCP : la certification, son auteur et sa durée](fiches/etudes-lire-fiche-rncp.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 12 | [Lire une étude sans confondre résultats et certitudes](fiches/recherche-lire-etude.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | aucune à vérifier | 2026-10-08 | aucune |
-| 13 | [Formuler une question et une hypothèse de recherche](fiches/recherche-question-hypothese.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 14 | [Vérifier un chiffre public : périmètre, unité et producteur](fiches/recherche-verifier-chiffre-public.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 15 | [Comprendre un programme de dépistage organisé, sans en faire une ordonnance](fiches/sante-comprendre-depistage-organise.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 16 | [AOP, IGP, STG, Label rouge : ce que chaque signe garantit](fiches/sante-reperer-signes-qualite-origine.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 17 | [Lire une fiche d’isolation : résistance R et coefficient U](fiches/sciences-comprendre-isolation-r-et-u.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 18 | [Lire un cumul de pluie : millimètres, litres et surface](fiches/sciences-comprendre-pluie-millimetres.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 19 | [Lire une frise chronologique et ordonner des événements](fiches/histoire-lire-frise.html) | Histoire, chronologie et mémoire | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 20 | [Repérer les parties d’une adresse Web](fiches/info-lire-adresse-web.html) | Informatique, algorithmique et langages de programmation | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 21 | [Distinguer programme embarqué local et liaison réseau d’un objet connecté](fiches/info-objet-connecte-local-distant.html) | Informatique, algorithmique et langages de programmation | 2 | 3 | 2 non vérifiée(s) | 2026-10-20 | aucune |
-| 22 | [Lire une licence avant de réutiliser un programme](fiches/prog-lire-licence-logiciel.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
-| 23 | [Présenter une idée avec une raison et un exemple](fiches/fr-argumenter-avec-exemple.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 24 | [Repérer l’idée principale et les informations utiles](fiches/fr-reperer-idee-texte.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 25 | [Moyenne et médiane : deux façons de résumer une série](fiches/maths-moyenne-mediane.html) | Mathématiques, mesures et données | 2 | 1 | 1 non vérifiée(s) | 2026-10-24 | aucune |
-| 26 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 27 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 28 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 29 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 30 | [Se tester plutôt que relire : ce que la recherche dit vraiment](fiches/apprendre-se-tester-plutot-que-relire.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 31 | [Lire un générique de film : qui décide quoi dans l’image](fiches/arts-lire-generique-film.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 32 | [Préparer un trajet : horaires théoriques, temps réel et correspondance](fiches/geographie-preparer-trajet-horaires.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 33 | [Préparer une sauvegarde que l’on saura réellement restaurer](fiches/numerique-preparer-sauvegarde.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 2 | 2 non vérifiée(s) | 2026-11-05 | aucune |
-| 34 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 35 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
-| 36 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 37 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 38 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 39 | [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 40 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
-| 41 | [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 42 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 43 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
-| 44 | [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 45 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
-| 46 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 3 | 3 | 3 non vérifiée(s) | 2026-10-08 | aucune |
-| 47 | [Tester un programme avec des cas simples](fiches/prog-tester-exemples.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 48 | [Comprendre un mot grâce à son contexte](fiches/fr-comprendre-mot-contexte.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 49 | [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 50 | [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 51 | [Demander de l’aide ou une répétition en anglais](fiches/langue-anglais-demander-aide.html) | Langues étrangères et interculturel | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 52 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 53 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-20 | aucune |
-| 54 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 3 | 6 | 6 non vérifiée(s) | 2026-10-20 | aucune |
-| 55 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
-| 56 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
-| 57 | [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 58 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
-| 59 | [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 60 | [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 61 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-24 | aucune |
-| 62 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 63 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 64 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 65 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 66 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 67 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
-| 68 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
-| 69 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
-| 70 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 2 | [Lire un sondage : vérifier les mentions avant de retenir le chiffre](fiches/civ-lire-un-sondage.html) | Citoyenneté, médias et information | 1 | 1 | aucune à vérifier | 2026-11-05 | aucune |
+| 3 | [Repérer l’échelle d’une institution avant de chercher le bon service](fiches/civ-reperer-echelle-institution.html) | Citoyenneté, médias et information | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 4 | [Repérer une information électorale officielle](fiches/civ-reperer-info-electorale.html) | Citoyenneté, médias et information | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 5 | [Trouver un service public et préparer un formulaire](fiches/civ-trouver-service-public.html) | Démarches, droits, sécurité et vie professionnelle | 1 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
+| 6 | [Demander un acte de naissance : la bonne mairie, la bonne forme](fiches/demarche-obtenir-acte-naissance.html) | Démarches, droits, sécurité et vie professionnelle | 1 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 7 | [Comparer deux prix à quantité égale](fiches/econ-comparer-prix-unitaires.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 8 | [Distinguer un intérêt d’un frais sur un crédit fictif](fiches/econ-distinguer-interet-frais.html) | Budget, économie, consommation et travail | 1 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
+| 9 | [Lire une facture et repérer une échéance](fiches/econ-lire-facture.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 10 | [Lire une mention de garantie sur un ticket fictif](fiches/econ-lire-mention-garantie.html) | Budget, économie, consommation et travail | 1 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 11 | [Aménager son logement pour limiter les chutes, sans se mettre en danger](fiches/sante-amenager-logement-chutes.html) | Santé, alimentation, corps et sécurité | 1 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 12 | [Parcours de soins coordonnés : médecin traitant et remboursement](fiches/sante-comprendre-parcours-soins.html) | Santé, alimentation, corps et sécurité | 1 | 2 | 2 non vérifiée(s) | 2026-11-05 | aucune |
+| 13 | [Lire l’étiquette d’un produit ménager : pictogrammes et mentions](fiches/sante-lire-etiquette-produit-menager.html) | Santé, alimentation, corps et sécurité | 1 | 2 | 2 non vérifiée(s) | 2026-11-05 | aucune |
+| 14 | [Repérer une source de santé publique avant d’agir](fiches/sante-reperer-source-publique.html) | Santé, alimentation, corps et sécurité | 1 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
+| 15 | [Lire un devis de travaux : ce qui doit y figurer avant de dire oui](fiches/demarche-lire-devis-travaux.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 16 | [Lire une fiche RNCP : la certification, son auteur et sa durée](fiches/etudes-lire-fiche-rncp.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 17 | [Lire une étude sans confondre résultats et certitudes](fiches/recherche-lire-etude.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | aucune à vérifier | 2026-10-08 | aucune |
+| 18 | [Formuler une question et une hypothèse de recherche](fiches/recherche-question-hypothese.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 19 | [Vérifier un chiffre public : périmètre, unité et producteur](fiches/recherche-verifier-chiffre-public.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 20 | [Comprendre un programme de dépistage organisé, sans en faire une ordonnance](fiches/sante-comprendre-depistage-organise.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 21 | [AOP, IGP, STG, Label rouge : ce que chaque signe garantit](fiches/sante-reperer-signes-qualite-origine.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 22 | [Lire une fiche d’isolation : résistance R et coefficient U](fiches/sciences-comprendre-isolation-r-et-u.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 23 | [Lire un cumul de pluie : millimètres, litres et surface](fiches/sciences-comprendre-pluie-millimetres.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 24 | [Lire une frise chronologique et ordonner des événements](fiches/histoire-lire-frise.html) | Histoire, chronologie et mémoire | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 25 | [Repérer les parties d’une adresse Web](fiches/info-lire-adresse-web.html) | Informatique, algorithmique et langages de programmation | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 26 | [Distinguer programme embarqué local et liaison réseau d’un objet connecté](fiches/info-objet-connecte-local-distant.html) | Informatique, algorithmique et langages de programmation | 2 | 3 | 2 non vérifiée(s) | 2026-10-20 | aucune |
+| 27 | [Lire une licence avant de réutiliser un programme](fiches/prog-lire-licence-logiciel.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 28 | [Présenter une idée avec une raison et un exemple](fiches/fr-argumenter-avec-exemple.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 29 | [Repérer l’idée principale et les informations utiles](fiches/fr-reperer-idee-texte.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 30 | [Moyenne et médiane : deux façons de résumer une série](fiches/maths-moyenne-mediane.html) | Mathématiques, mesures et données | 2 | 1 | 1 non vérifiée(s) | 2026-10-24 | aucune |
+| 31 | [Nommer sa méthode après un exercice, pour comprendre ce qui a marché](fiches/methode-verbaliser-sa-methode.html) | Apprendre à apprendre, autonomie et relations | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 32 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 33 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 34 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 35 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 36 | [Se tester plutôt que relire : ce que la recherche dit vraiment](fiches/apprendre-se-tester-plutot-que-relire.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 37 | [Lire un générique de film : qui décide quoi dans l’image](fiches/arts-lire-generique-film.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 38 | [Préparer un trajet : horaires théoriques, temps réel et correspondance](fiches/geographie-preparer-trajet-horaires.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 39 | [Préparer une sauvegarde que l’on saura réellement restaurer](fiches/numerique-preparer-sauvegarde.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 2 | 2 non vérifiée(s) | 2026-11-05 | aucune |
+| 40 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 41 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
+| 42 | [Choisir une projection : ce que la carte garde et ce qu’elle déforme](fiches/geo-choisir-une-projection.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 43 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 44 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 45 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 46 | [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 47 | [Lire la cote d’une archive avant de commander le document](fiches/histoire-lire-une-cote.html) | Histoire, chronologie et mémoire | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 48 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 49 | [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 50 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 51 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 52 | [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 53 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 54 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 3 | 3 | 3 non vérifiée(s) | 2026-10-08 | aucune |
+| 55 | [Tester un programme avec des cas simples](fiches/prog-tester-exemples.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 56 | [Comprendre un mot grâce à son contexte](fiches/fr-comprendre-mot-contexte.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 57 | [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 58 | [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 59 | [Demander de l’aide ou une répétition en anglais](fiches/langue-anglais-demander-aide.html) | Langues étrangères et interculturel | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 60 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 61 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-20 | aucune |
+| 62 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 3 | 6 | 6 non vérifiée(s) | 2026-10-20 | aucune |
+| 63 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
+| 64 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
+| 65 | [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 66 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 67 | [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 68 | [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 69 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-24 | aucune |
+| 70 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 71 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 72 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 73 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 74 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 75 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
+| 76 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
+| 77 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
+| 78 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
 
 ## 3. Paquets détaillés
 
@@ -142,6 +150,55 @@ Les 27 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 ```toml
 [[relecture]]
 fiche = "civ-choisir-source-publique"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
+```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+
+### `civ-lire-un-sondage` — Lire un sondage : vérifier les mentions avant de retenir le chiffre
+
+| Élément | Valeur |
+| --- | --- |
+| Domaine | Citoyenneté, médias et information |
+| Repère de difficulté | 3 |
+| Horizon du contenu | Lycée, études supérieures et lecture de presse — avant de reprendre un pourcentage |
+| Priorité de tri | 1 — domaine à relecture spécialisée — politique publique, médias et information |
+| Termes repérés | politique publique : scrutin, vote |
+| Fiche publiée | [lire la fiche](fiches/civ-lire-un-sondage.html) |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
+| Relecture consignée | aucune à ce jour |
+
+**Sources enregistrées dans le catalogue**
+
+| Source | Licence déclarée | Mode | Droits contrôlés le |
+| --- | --- | --- | --- |
+| [Commission des sondages — « Les indications obligatoires » (articles 2 et 11 de la loi du 19 juillet 1977 modifiée)](https://www.commission-des-sondages.fr/oblig/obligations.htm) | Texte légal reproduit par l’autorité publique ; aucun extrait n’est repris dans la fiche | reference-factuelle | 2026-11-05 |
+
+**Ce que la fiche dit déjà de ses limites**
+
+> Un thermomètre mesure un état physique et se trompe surtout par son emplacement, alors qu’un sondage mesure des opinions déclarées, à une date, avec une marge d’erreur et un effet possible de la formulation. La comparaison ne dit rien non plus de l’usage qui sera fait du chiffre une fois publié.
+
+**Points à trancher par une personne**
+
+- [ ] Ouvrir les 1 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
+- [ ] Vérifier l’exemple et la correction : aucun exemple ne doit induire en erreur si l’énoncé est mal lu.
+- [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
+- [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
+- [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
+
+**Relecture à consigner dans `relectures.toml`**
+
+```toml
+[[relecture]]
+fiche = "civ-lire-un-sondage"
 date = AAAA-MM-JJ
 role = "expertise du domaine — préciser lequel"
 perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
@@ -296,6 +353,56 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 ```toml
 [[relecture]]
 fiche = "civ-trouver-service-public"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
+```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+
+### `demarche-obtenir-acte-naissance` — Demander un acte de naissance : la bonne mairie, la bonne forme
+
+| Élément | Valeur |
+| --- | --- |
+| Domaine | Démarches, droits, sécurité et vie professionnelle |
+| Repère de difficulté | 1 |
+| Horizon du contenu | Dès qu’un dossier administratif demande un acte d’état civil |
+| Priorité de tri | 1 — domaine à relecture spécialisée — droit, démarches et travail |
+| Termes repérés | — |
+| Fiche publiée | [lire la fiche](fiches/demarche-obtenir-acte-naissance.html) |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
+| Relecture consignée | aucune à ce jour |
+
+**Sources enregistrées dans le catalogue**
+
+| Source | Licence déclarée | Mode | Droits contrôlés le |
+| --- | --- | --- | --- |
+| [service-public.gouv.fr — « Acte de naissance : demande de copie intégrale ou d’extrait » (F1427, vérifié le 14 août 2026)](https://www.service-public.gouv.fr/particuliers/vosdroits/F1427) | Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait reproduit | reference-factuelle | 2026-11-05 |
+
+**Ce que la fiche dit déjà de ses limites**
+
+> Un colis est unique et attend son destinataire, alors qu’un acte est une copie délivrée à la demande depuis un registre tenu à jour, et que d’autres personnes peuvent en demander une sous conditions. La forme demandée change aussi ce qui sera visible, ce que la comparaison ne montre pas.
+
+**Points à trancher par une personne**
+
+- [ ] Ouvrir les 1 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
+- [ ] Trancher les droits : 1 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
+- [ ] Vérifier l’exemple et la correction : aucun exemple ne doit induire en erreur si l’énoncé est mal lu.
+- [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
+- [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
+- [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
+
+**Relecture à consigner dans `relectures.toml`**
+
+```toml
+[[relecture]]
+fiche = "demarche-obtenir-acte-naissance"
 date = AAAA-MM-JJ
 role = "expertise du domaine — préciser lequel"
 perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
@@ -501,6 +608,158 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 ```toml
 [[relecture]]
 fiche = "econ-lire-mention-garantie"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
+```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+
+### `sante-amenager-logement-chutes` — Aménager son logement pour limiter les chutes, sans se mettre en danger
+
+| Élément | Valeur |
+| --- | --- |
+| Domaine | Santé, alimentation, corps et sécurité |
+| Repère de difficulté | 2 |
+| Horizon du contenu | À partir de 65 ans, et pour l’entourage qui aide à aménager un logement |
+| Priorité de tri | 1 — domaine à relecture spécialisée — santé et sécurité |
+| Termes repérés | santé : diagnostic, médecin |
+| Fiche publiée | [lire la fiche](fiches/sante-amenager-logement-chutes.html) |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
+| Relecture consignée | aucune à ce jour |
+
+**Sources enregistrées dans le catalogue**
+
+| Source | Licence déclarée | Mode | Droits contrôlés le |
+| --- | --- | --- | --- |
+| [ameli.fr — « Comment prévenir les chutes des personnes âgées ? » (mise à jour du 24 décembre 2024)](https://www.ameli.fr/assure/sante/bons-gestes/seniors/prevenir-chutes-personnes-agees) | Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait reproduit | reference-factuelle | 2026-11-05 |
+
+**Ce que la fiche dit déjà de ses limites**
+
+> Un sentier est préparé une fois pour une personne qui choisit d’y passer, alors qu’un logement se vit tous les jours et que l’équilibre change avec l’âge, les médicaments ou la vue. Aucun aménagement ne remplace l’avis du médecin traitant ni ne supprime le risque de chute.
+
+**Points à trancher par une personne**
+
+- [ ] Ouvrir les 1 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
+- [ ] Trancher les droits : 1 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
+- [ ] Vérifier l’exemple et la correction : aucun exemple ne doit induire en erreur si l’énoncé est mal lu.
+- [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
+- [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
+- [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
+
+**Relecture à consigner dans `relectures.toml`**
+
+```toml
+[[relecture]]
+fiche = "sante-amenager-logement-chutes"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
+```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+
+### `sante-comprendre-parcours-soins` — Parcours de soins coordonnés : médecin traitant et remboursement
+
+| Élément | Valeur |
+| --- | --- |
+| Domaine | Santé, alimentation, corps et sécurité |
+| Repère de difficulté | 2 |
+| Horizon du contenu | Vie adulte — comprendre un courrier d’assurance maladie et le rôle du médecin traitant |
+| Priorité de tri | 1 — domaine à relecture spécialisée — santé et sécurité |
+| Termes repérés | santé : médecin, soins, traitement ; argent : assurance |
+| Fiche publiée | [lire la fiche](fiches/sante-comprendre-parcours-soins.html) |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
+| Relecture consignée | aucune à ce jour |
+
+**Sources enregistrées dans le catalogue**
+
+| Source | Licence déclarée | Mode | Droits contrôlés le |
+| --- | --- | --- | --- |
+| [Assurance Maladie — « Consultations en métropole : vos remboursements »](https://www.ameli.fr/assure/remboursements/rembourse/consultations-telemedecine/metropole) | Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit | reference-factuelle | 2026-11-05 |
+| [Assurance Maladie — « Présentation du dispositif du médecin traitant »](https://www.assurance-maladie.ameli.fr/index.php/medecin/exercice-liberal/facturation-remuneration/dispositif-medecin-traitant/dispositif-medecin-traitant) | Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit | reference-factuelle | 2026-11-05 |
+
+**Ce que la fiche dit déjà de ses limites**
+
+> Un carnet ne soigne pas et ne remplace personne : le médecin traitant coordonne, il ne décide pas seul de tout. Le parcours comporte des exceptions, notamment pour les enfants et pour certains spécialistes consultés en accès direct. Les règles et les montants évoluent, et un accident ou une urgence ne se gère pas en vérifiant d’abord une déclaration.
+
+**Points à trancher par une personne**
+
+- [ ] Ouvrir les 2 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
+- [ ] Trancher les droits : 2 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
+- [ ] Vérifier l’exemple et la correction : aucun exemple ne doit induire en erreur si l’énoncé est mal lu.
+- [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
+- [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
+- [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
+
+**Relecture à consigner dans `relectures.toml`**
+
+```toml
+[[relecture]]
+fiche = "sante-comprendre-parcours-soins"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
+```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+
+### `sante-lire-etiquette-produit-menager` — Lire l’étiquette d’un produit ménager : pictogrammes et mentions
+
+| Élément | Valeur |
+| --- | --- |
+| Domaine | Santé, alimentation, corps et sécurité |
+| Repère de difficulté | 2 |
+| Horizon du contenu | Vie quotidienne — produits d’entretien, bricolage et jardinage |
+| Priorité de tri | 1 — domaine à relecture spécialisée — santé et sécurité |
+| Termes repérés | santé : médecin |
+| Fiche publiée | [lire la fiche](fiches/sante-lire-etiquette-produit-menager.html) |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
+| Relecture consignée | aucune à ce jour |
+
+**Sources enregistrées dans le catalogue**
+
+| Source | Licence déclarée | Mode | Droits contrôlés le |
+| --- | --- | --- | --- |
+| [INRS — « L’étiquetage des produits chimiques »](https://www.inrs.fr/publications/essentiels/CLP.html) | Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit | reference-factuelle | 2026-11-05 |
+| [INRS — « Dans mon entreprise, j’étiquette les produits chimiques » (ED 6197)](https://www.inrs.fr/dam/inrs/CataloguePapier/ED/TI-ED-6197.pdf) | Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit | reference-factuelle | 2026-11-05 |
+
+**Ce que la fiche dit déjà de ses limites**
+
+> Un panneau est le même pour tous et pour un seul danger, alors qu’un produit peut cumuler plusieurs dangers et porter plusieurs pictogrammes. Un même pictogramme couvre plusieurs classes de danger, et l’absence de flamme ne signifie pas l’absence de risque. L’image n’apprend rien sur la concentration, le stockage ni l’élimination du produit.
+
+**Points à trancher par une personne**
+
+- [ ] Ouvrir les 2 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
+- [ ] Trancher les droits : 2 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
+- [ ] Vérifier l’exemple et la correction : aucun exemple ne doit induire en erreur si l’énoncé est mal lu.
+- [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
+- [ ] Faire relire par une personne compétente du domaine : la fiche ne doit contenir ni conseil personnalisé, ni procédure présentée comme universelle.
+- [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
+
+**Relecture à consigner dans `relectures.toml`**
+
+```toml
+[[relecture]]
+fiche = "sante-lire-etiquette-produit-menager"
 date = AAAA-MM-JJ
 role = "expertise du domaine — préciser lequel"
 perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
@@ -1339,6 +1598,55 @@ Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige qu
 ```toml
 [[relecture]]
 fiche = "maths-moyenne-mediane"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
+```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+
+### `methode-verbaliser-sa-methode` — Nommer sa méthode après un exercice, pour comprendre ce qui a marché
+
+| Élément | Valeur |
+| --- | --- |
+| Domaine | Apprendre à apprendre, autonomie et relations |
+| Repère de difficulté | 2 |
+| Horizon du contenu | Collège, lycée, formation professionnelle et autoformation — après un exercice ou un projet |
+| Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
+| Termes repérés | santé : diagnostic |
+| Fiche publiée | [lire la fiche](fiches/methode-verbaliser-sa-methode.html) |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
+| Relecture consignée | aucune à ce jour |
+
+**Sources enregistrées dans le catalogue**
+
+| Source | Licence déclarée | Mode | Droits contrôlés le |
+| --- | --- | --- | --- |
+| [éduscol — « Évaluer en arts plastiques », fiche d’accompagnement cycles 2, 3 et 4](https://eduscol.education.gouv.fr/sites/default/files/document/ra16c4apevalfiche2708865pdf-78576.pdf) | Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit | reference-factuelle | 2026-11-05 |
+
+**Ce que la fiche dit déjà de ses limites**
+
+> Un trajet a un seul bon itinéraire, alors qu’un exercice admet souvent plusieurs méthodes valables. Revenir sur son travail peut aussi tourner à l’auto-accusation et décourager : la verbalisation décrit des gestes et des choix, pas la valeur d’une personne. Elle demande un critère de réussite, sans quoi elle ne compare que des impressions.
+
+**Points à trancher par une personne**
+
+- [ ] Ouvrir les 1 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
+- [ ] Trancher les droits : 1 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
+- [ ] Vérifier l’exemple et la correction : aucun exemple ne doit induire en erreur si l’énoncé est mal lu.
+- [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
+- [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
+
+**Relecture à consigner dans `relectures.toml`**
+
+```toml
+[[relecture]]
+fiche = "methode-verbaliser-sa-methode"
 date = AAAA-MM-JJ
 role = "expertise du domaine — préciser lequel"
 perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]

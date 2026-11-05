@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 87 |
+| Avancées consignées | 88 |
 | Période couverte | du 2026-10-20 au 2026-11-05 |
 | Contrôles exécutables cités | 100 |
 | Initiatives du portefeuille concernées | 15 |
@@ -2065,6 +2065,32 @@ Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 **Suite.** Faire lire au dessin la liste nominative des seize motifs plutôt que leur seul nombre, pour qu'un couple ajouté au registre apparaisse sur la planche sans retoucher le code.
 
 Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
+
+### `cinq-domaines-points-entree` — Cinq domaines sans point d’entrée reçoivent leur première fiche
+
+*Consignée le 2026-11-05.*
+
+**Constat.** Le lot précédent avait servi le domaine le mieux planifié, pas les plus minces : géographie, histoire, citoyenneté et santé comptaient quatre fiches chacune, les démarches deux, et aucune de ces fiches n’ouvrait les thèmes qui manquaient — projection cartographique, cote d’archive, lecture d’un sondage, prévention des chutes à domicile, acte d’état civil. Un domaine qui n’a pas de point d’entrée n’est pas servi, quel que soit son compteur.
+
+**Ce que cela change.** Cinq fiches ont été rédigées, une par domaine, chacune avec une situation concrète, une démarche en six ou sept gestes, un exercice corrigé, une analogie et sa limite, une source institutionnelle précise ouverte le 5 novembre 2026 et une note de statut datée : lire une projection et savoir ce qu’elle déforme ; décomposer une cote d’archive avant de commander ; vérifier les huit mentions obligatoires d’un sondage avant de retenir le chiffre ; aménager un logement pour limiter les chutes sans se substituer au médecin traitant ; demander un acte de naissance à la bonne mairie, dans la bonne forme. Cinq sujets du référentiel sont créés en `partiel` et nomment leur fiche ; le catalogue passe de 99 à 104 fiches, dont 26 du corpus initial et 78 prototypes. Le registre des grilles suit dans le même changement, et le motif de rangée incomplète du catalogue est réécrit avec un chiffre déduit de la géométrie mesurée à 96 fiches — 284,04 px — et signalé comme déduit jusqu’au relevé de CI.
+
+**Preuves dans le dépôt :**
+
+- `docs/apprentissage/catalogue.toml`
+- `docs/apprentissage/referentiel.toml`
+- `docs/apprentissage/audit-automatique.md`
+- `docs/rd/carte-lacunes.md`
+- `docs/rd/grilles-dynamiques.toml`
+- `docs/rd/cadrages.toml`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/auditer-prototypes.py --verifier && python3 outils/construire-carte-lacunes.py --verifier && python3 outils/modele-grilles.py --verifier && python3 outils/test_cadrages.py && python3 outils/verifier-site-statique.py && python3 outils/verifier-integration.py`
+
+**Limite — ce que cela ne prouve pas.** Une fiche ouvre un point d’entrée, elle ne couvre pas un domaine : cinq domaines restent à quatre ou cinq fiches sur des cibles de plusieurs dizaines. Les sources ont été lues le 5 novembre 2026 et peuvent changer — résolution onusienne, loi, recommandation de prévention. Aucune relecture humaine n’est consignée, et la fiche sur les chutes dit explicitement qu’elle ne pose aucun diagnostic. Le chiffre de 284,04 px reste déduit, et le classement du plus grand vide reste à relever : la mesure de CI fait foi, pas la déduction.
+
+**Suite.** Lire l’annotation de cadrages de la CI, y remplacer la déduction par la mesure et le classement par le relevé, puis ouvrir un lot sur les domaines encore à quatre fiches en commençant par les arts et les langues.
+
+Initiatives liées : `cartographier-les-lacunes`, `veille-savoirs-evolutifs`, `coherence-textes-publics`.
 
 ### `onze-champs-iscdf-ouverts` — Onze champs ISCED-F ouverts : le domaine le mieux planifié était le plus vide
 

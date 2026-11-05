@@ -5667,3 +5667,467 @@ licence_source = "Non vérifiée pour une reprise documentaire ; référence fac
 droits_controles_le = "2026-11-05"
 mode_utilisation = "reference-factuelle"
 utilisation = "Page consultée le 5 novembre 2026 : distinction entre jeux de données statiques décrivant l’offre théorique et interfaces informant l’état du trafic en temps réel ou recherchant un itinéraire, horaires transmis par les opérateurs et mise à jour plusieurs fois par jour. Les trajets de l’exercice sont inventés. Aucun extrait n’est reproduit."
+
+[[fiche]]
+id = "sante-comprendre-parcours-soins"
+titre = "Parcours de soins coordonnés : médecin traitant et remboursement"
+matiere = "Santé, corps et protection sociale"
+matiere_id = "sante"
+domaine = "sante-securite-corps"
+niveau = 2
+horizon_contenu = "Vie adulte — comprendre un courrier d’assurance maladie et le rôle du médecin traitant"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. Les règles décrites sont confrontées à deux pages de l’Assurance Maladie consultées ce jour. Aucun taux de remboursement n’est recopié : les montants changent et dépendent de la situation. Les situations de l’exercice sont inventées. Cette fiche ne donne aucun conseil médical et ne remplace pas une réponse de la caisse d’assurance maladie."
+minutes = 11
+resume = "Comprendre ce que change la déclaration d’un médecin traitant, ce qu’est le hors-parcours et ce que la règle ne dit pas."
+objectif = "Expliquer le parcours de soins coordonnés à partir de sources publiques, puis repérer dans une situation les éléments qui déterminent le remboursement."
+situation = "Une personne consulte directement un spécialiste sans passer par un médecin, puis déclare un médecin traitant la semaine suivante. Elle pense que la déclaration s’appliquera à la consultation déjà payée. Qu’en disent les règles publiées ?"
+analogie_titre = "Comme un carnet de route tenu par une seule personne"
+analogie = "Imagine un carnet de route où un même référent note les étapes, les examens et les avis des autres professionnels. Ce carnet évite de répéter les mêmes questions et permet de savoir où l’on en est. Le parcours de soins coordonnés décrit ce rôle de référent et la manière d’y entrer."
+limite_analogie = "Un carnet ne soigne pas et ne remplace personne : le médecin traitant coordonne, il ne décide pas seul de tout. Le parcours comporte des exceptions, notamment pour les enfants et pour certains spécialistes consultés en accès direct. Les règles et les montants évoluent, et un accident ou une urgence ne se gère pas en vérifiant d’abord une déclaration."
+notions = [
+  "Médecin traitant — médecin choisi par la personne et déclaré à sa caisse, qui coordonne le parcours de soins.",
+  "Déclaration de choix — formulaire rempli avec le médecin et transmis à la caisse d’assurance maladie.",
+  "Parcours de soins coordonnés — organisation dans laquelle la personne consulte d’abord son médecin traitant, qui l’oriente si besoin.",
+  "Hors-parcours — situation d’une personne sans médecin traitant déclaré, ou consultant un autre médecin sans avoir été orientée.",
+  "Accès direct spécifique — consultation de certains spécialistes sans passer d’abord par le médecin traitant.",
+  "Réduction de remboursement — conséquence possible d’une consultation hors parcours ; le montant dépend de la situation et de la règle en vigueur."
+]
+demarche = [
+  "Cherche d’abord si une déclaration de médecin traitant existe et à quelle date. Une déclaration faite après une consultation ne change pas, en général, le traitement d’une dépense déjà engagée.",
+  "Repère le médecin consulté : était-ce le médecin traitant, un autre médecin orienté par lui, ou un médecin consulté directement ? C’est cet enchaînement qui situe la consultation dans ou hors parcours.",
+  "Vérifie les exceptions prévues. Certains spécialistes peuvent être consultés en accès direct, et les règles diffèrent pour les enfants de moins de 16 ans.",
+  "Lis le décompte de la caisse plutôt que de calculer toi-même. Le document indique le montant remboursé, la part laissée à charge et parfois le motif du calcul.",
+  "Si une phrase du courrier reste obscure, note la question précise et l’identifiant du dossier, puis contacte la caisse. Une réponse écrite vaut mieux qu’une reconstitution de mémoire.",
+  "Ne déduis pas de cette fiche une règle générale sur les montants : elle explique l’organisation, pas le barème, et les tarifs comme les participations changent."
+]
+exercice = "Fictif. Trois situations. A : une personne de 30 ans, sans médecin traitant déclaré, consulte directement un dermatologue. B : une personne de 40 ans, avec médecin traitant déclaré, consulte ce médecin. C : un enfant de 8 ans, dont les parents ont déclaré un médecin traitant, consulte un pédiatre. Pour chacune, indique ce qui détermine le cadre de remboursement, puis nomme une information qui manque."
+aide = "Pour chaque cas, demande-toi : y a-t-il une déclaration ? Le médecin consulté est-il le médecin traitant ou un médecin vers lequel la personne a été orientée ? S’agit-il d’un enfant de moins de 16 ans ?"
+correction = [
+  "A — Sans médecin traitant déclaré et sans orientation préalable, la consultation se situe hors du parcours de soins coordonnés. Les sources publiques indiquent alors un remboursement moins favorable, sans qu’il soit possible d’annoncer un montant sans le barème en vigueur.",
+  "B — La consultation du médecin traitant déclaré se situe dans le parcours. Le décompte de la caisse reste le document qui dit le montant réellement remboursé.",
+  "C — Pour un enfant de moins de 16 ans, une déclaration de médecin traitant est demandée, mais les sources publiques précisent qu’il n’y a pas de réduction de remboursement en l’absence de déclaration ou en cas de non-respect du parcours.",
+  "Information manquante dans les trois cas : la date et l’existence effective de la déclaration, le tarif applicable et la situation de la personne au regard de son organisme. Aucune ne se déduit du seul récit."
+]
+a_retenir = [
+  "Le médecin traitant est déclaré à la caisse ; sans déclaration, une consultation peut être hors parcours.",
+  "Le hors-parcours ne veut pas dire « pas remboursé » : il veut dire « remboursé moins favorablement ».",
+  "Les enfants de moins de 16 ans suivent des règles propres.",
+  "Le décompte de la caisse, pas un calcul personnel, dit le montant remboursé."
+]
+transferer = "Cette lecture aide à comprendre un courrier d’assurance maladie ou une question sur le choix d’un médecin référent. Elle ne dit ni quel médecin choisir, ni ce qui est médicalement utile, et ne remplace pas une réponse de la caisse. Une situation d’urgence ne se traite pas en vérifiant le parcours de soins."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "Assurance Maladie — « Consultations en métropole : vos remboursements »"
+url = "https://www.ameli.fr/assure/remboursements/rembourse/consultations-telemedecine/metropole"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 5 novembre 2026 : déclaration du médecin traitant à partir de 16 ans, remboursement moins favorable hors parcours, définition du hors-parcours, accès direct spécifique pour certains spécialistes, règles propres aux enfants de moins de 16 ans. Aucun montant n’est repris. Les situations de l’exercice sont inventées. Aucun extrait n’est reproduit."
+
+[[fiche.sources]]
+titre = "Assurance Maladie — « Présentation du dispositif du médecin traitant »"
+url = "https://www.assurance-maladie.ameli.fr/index.php/medecin/exercice-liberal/facturation-remuneration/dispositif-medecin-traitant/dispositif-medecin-traitant"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 5 novembre 2026 : rôle du médecin traitant (tenue du dossier médical, coordination du parcours, centralisation des avis des autres soignants), modalités de la déclaration de choix, cas des enfants de moins de 16 ans et situations non concernées par le parcours. Aucun extrait n’est reproduit."
+
+[[fiche]]
+id = "sante-lire-etiquette-produit-menager"
+titre = "Lire l’étiquette d’un produit ménager : pictogrammes et mentions"
+matiere = "Santé, corps et prévention des risques"
+matiere_id = "sante"
+domaine = "sante-securite-corps"
+niveau = 2
+horizon_contenu = "Vie quotidienne — produits d’entretien, bricolage et jardinage"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. La composition d’une étiquette de danger et le cadre du règlement CLP sont confrontés à deux publications de l’INRS consultées ce jour. Aucune consigne de premiers secours ni de dosage n’est donnée. Les étiquettes de l’exercice sont inventées. Une relecture par une personne compétente en prévention des risques chimiques reste nécessaire."
+minutes = 12
+resume = "Repérer sur une étiquette les pictogrammes, la mention d’avertissement et les conseils, puis savoir ce que l’étiquette ne remplace pas."
+objectif = "Identifier les éléments obligatoires d’une étiquette de produit chimique et distinguer un danger d’une précaution d’emploi."
+situation = "Deux bidons sans nom de marque visible portent chacun un losange orange. L’un montre une flamme, l’autre un point d’exclamation. Une personne conclut que le second est sans danger puisqu’il n’y a pas de flamme. Que dit réellement l’étiquette ?"
+analogie_titre = "Comme un panneau de signalisation routière"
+analogie = "Un panneau de signalisation ne raconte pas la route : il annonce un danger précis et une conduite à tenir. Les pictogrammes d’une étiquette de produit fonctionnent de la même façon. Ils signalent une famille de dangers, et les mentions écrites à côté précisent lesquels et quelles précautions prennent sens."
+limite_analogie = "Un panneau est le même pour tous et pour un seul danger, alors qu’un produit peut cumuler plusieurs dangers et porter plusieurs pictogrammes. Un même pictogramme couvre plusieurs classes de danger, et l’absence de flamme ne signifie pas l’absence de risque. L’image n’apprend rien sur la concentration, le stockage ni l’élimination du produit."
+notions = [
+  "CLP — règlement européen qui fixe la classification, l’étiquetage et l’emballage des produits chimiques.",
+  "Pictogramme de danger — losange à bord rouge, symbole noir sur fond blanc, qui signale une famille de dangers.",
+  "Mention d’avertissement — mot « Danger » ou « Attention » qui indique le niveau relatif de danger.",
+  "Mention de danger — phrase codée, souvent précédée de la lettre H, qui décrit le danger.",
+  "Conseil de prudence — phrase codée, souvent précédée de la lettre P, qui décrit une précaution d’emploi ou de stockage.",
+  "Fiche de données de sécurité — document destiné aux usages professionnels, plus détaillé que l’étiquette."
+]
+demarche = [
+  "Lis d’abord le nom du produit et le nom, l’adresse et le téléphone du fabricant, du distributeur ou de l’importateur. Une étiquette sans ces éléments ne permet ni d’identifier le produit ni de joindre un responsable.",
+  "Repère les pictogrammes : combien, lesquels, et à quels dangers ils renvoient. Un produit peut en porter plusieurs, et chacun ajoute une information.",
+  "Cherche la mention d’avertissement. « Danger » et « Attention » ne situent pas le risque au même niveau, et cette distinction vient du règlement, pas du vendeur.",
+  "Lis les mentions de danger, souvent codées H, puis les conseils de prudence, souvent codés P. Les unes décrivent ce que le produit peut provoquer, les autres ce qu’il faut faire ou éviter.",
+  "Vérifie ce qui est écrit sur le stockage et l’élimination. Ces indications ne sont pas décoratives : elles disent ce qui est prévu pour le produit et son récipient.",
+  "Garde l’étiquette lisible et le produit dans son emballage d’origine. Un produit transvasé perd l’information qui permet de réagir en cas d’exposition ou d’ingestion."
+]
+exercice = "Fictif. Trois étiquettes. A : pictogramme de flamme, mention « Danger », mention de danger sur un liquide très inflammable, conseils de prudence sur le stockage. B : pictogramme d’exclamation, mention « Attention », mention de danger sur une irritation cutanée. C : aucun pictogramme, nom du fabricant présent, mention « produit de nettoyage ». Pour chacune, indique ce que l’étiquette permet d’affirmer, ce qu’elle n’autorise pas à conclure, et l’élément qu’il faudrait chercher en plus."
+aide = "Distingue trois questions : quel danger est signalé, à quel niveau, et quelles précautions sont écrites. L’absence de pictogramme ne prouve pas l’innocuité : elle indique seulement qu’aucun danger relevant de la classification n’impose ce pictogramme."
+correction = [
+  "A — L’étiquette signale un danger d’inflammabilité et un niveau élevé. Elle permet d’affirmer que le produit peut s’enflammer et qu’il existe des précautions de stockage. Elle ne dit pas à quelle distance d’une source de chaleur le produit est sûr.",
+  "B — Le pictogramme d’exclamation et la mention « Attention » signalent un danger plus modéré, par exemple une irritation cutanée. « Modéré » ne veut pas dire « sans risque » : la mention de danger précise l’effet concerné.",
+  "C — Sans pictogramme, l’étiquette n’en reste pas moins une étiquette de produit d’entretien. Il faut vérifier la composition, les mentions de danger éventuelles et les conseils d’emploi. L’absence de pictogramme ne fonde aucune conclusion d’innocuité.",
+  "Piège à éviter : comparer deux produits au seul nombre de pictogrammes, ou transvaser un produit dans une bouteille sans étiquette. Ces deux erreurs suppriment l’information au moment où elle servirait."
+]
+a_retenir = [
+  "Une étiquette de danger identifie le produit, son responsable et ses dangers.",
+  "Les pictogrammes signalent des familles de dangers ; les mentions H et P précisent.",
+  "L’absence de pictogramme ne prouve jamais l’absence de risque.",
+  "Un produit transvasé perd son étiquette, donc l’information utile en cas d’incident."
+]
+transferer = "La même grille sert pour un produit de bricolage, un désherbant ou un produit professionnel, en vérifiant à chaque fois l’usage prévu et la fiche de données de sécurité quand elle existe. Elle ne remplace ni les consignes d’un médecin ou d’un centre antipoison, ni la réglementation propre à une activité."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "INRS — « L’étiquetage des produits chimiques »"
+url = "https://www.inrs.fr/publications/essentiels/CLP.html"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page consultée le 5 novembre 2026 : obligation d’une étiquette de danger conforme au règlement CLP, définition du sigle CLP et référence au règlement (CE) n° 1272/2008, classes de danger, existence de neuf pictogrammes de danger, mentions d’avertissement et de danger, conseils de prudence. Aucun extrait n’est reproduit."
+
+[[fiche.sources]]
+titre = "INRS — « Dans mon entreprise, j’étiquette les produits chimiques » (ED 6197)"
+url = "https://www.inrs.fr/dam/inrs/CataloguePapier/ED/TI-ED-6197.pdf"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Document consulté le 5 novembre 2026 : rôle de l’étiquette pour identifier le produit et signaler les dangers pour l’homme et l’environnement, précautions d’emploi et recommandations de stockage ou d’élimination, présence du nom et des coordonnées du fabricant, du distributeur ou de l’importateur, pictogrammes de danger. Aucun dosage ni consigne de premiers secours n’est repris. Aucun extrait n’est reproduit."
+
+[[fiche]]
+id = "methode-verbaliser-sa-methode"
+titre = "Nommer sa méthode après un exercice, pour comprendre ce qui a marché"
+matiere = "Méthodes pour apprendre — métacognition"
+matiere_id = "apprendre"
+domaine = "methodes-communication"
+niveau = 2
+horizon_contenu = "Collège, lycée, formation professionnelle et autoformation — après un exercice ou un projet"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. La définition de la métacognition, le rôle de la verbalisation et celui de l’auto-évaluation sont confrontés à une fiche d’accompagnement d’éduscol consultée ce jour. Cette fiche porte sur des pratiques de classe ; son adaptation à une personne seule est une proposition M.R.S.C., pas une pratique évaluée. Aucun essai avec des personnes n’a eu lieu."
+minutes = 12
+resume = "Après un exercice, écrire ce qu’on a fait, ce qui a produit le résultat et ce qu’on changerait la fois suivante."
+objectif = "Décrire sa propre méthode après coup, en mettant en rapport les moyens utilisés et le résultat obtenu, puis en tirer une décision pour la prochaine fois."
+situation = "Deux personnes obtiennent la même note à un exercice. La première conclut « je suis nul en calcul ». La seconde écrit : « j’ai posé l’opération, j’ai oublié une conversion, je vérifierai les unités avant de calculer ». Laquelle risque de progresser, et pourquoi ?"
+analogie_titre = "Comme refaire le trajet après une livraison"
+analogie = "Après une livraison, revenir sur le trajet ne change pas la tournée déjà faite. Mais cela permet de repérer le carrefour manqué et de choisir un autre itinéraire la fois suivante. Revenir sur sa méthode fonctionne de la même manière : le détour est court, et il porte sur la prochaine tentative."
+limite_analogie = "Un trajet a un seul bon itinéraire, alors qu’un exercice admet souvent plusieurs méthodes valables. Revenir sur son travail peut aussi tourner à l’auto-accusation et décourager : la verbalisation décrit des gestes et des choix, pas la valeur d’une personne. Elle demande un critère de réussite, sans quoi elle ne compare que des impressions."
+notions = [
+  "Métacognition — activité par laquelle une personne s’interroge sur ses stratégies d’apprentissage et met en rapport les moyens utilisés avec les résultats obtenus.",
+  "Verbalisation — mise en mots, à l’oral ou à l’écrit, de ce qui a été fait et de ce qui a été compris.",
+  "Auto-évaluation — comparaison de son travail à un critère connu, pour repérer les acquis et les manques.",
+  "Co-évaluation — échange avec une autre personne sur le même travail, à partir des mêmes critères.",
+  "Critère de réussite — élément observable qui permet de dire si le travail est abouti."
+]
+demarche = [
+  "Écris d’abord le critère de réussite de l’exercice, ou demande-le s’il n’est pas donné. Sans critère, il n’y a rien à comparer : seulement une impression de facilité ou d’échec.",
+  "Décris les gestes réellement effectués, dans l’ordre. « J’ai lu l’énoncé, j’ai surligné les données, j’ai converti, j’ai calculé » est une description ; « j’ai essayé » n’en est pas une.",
+  "Relie chaque geste au résultat. Quel geste a produit la bonne réponse ? Lequel a introduit l’erreur ? Cette mise en rapport est exactement ce que la fiche d’éduscol décrit sous le nom de métacognition.",
+  "Nomme une décision pour la fois suivante, en un geste vérifiable : vérifier les unités avant de calculer, relire la consigne avant de conclure, refaire un exemple sans le corrigé.",
+  "Garde une trace courte, trois lignes suffisent. Une note illisible ou trop longue ne sera pas relue, et la verbalisation ne sert que si elle revient au moment utile.",
+  "Si tu peux, fais relire ces trois lignes par une autre personne : une co-évaluation sur les mêmes critères repère souvent un geste qu’on ne voit pas soi-même."
+]
+exercice = "Reprends un exercice déjà corrigé, réussi ou non. Écris trois lignes : A) ce que tu as fait, dans l’ordre ; B) le geste qui explique le résultat ; C) la vérification que tu feras la prochaine fois. Puis ajoute une phrase qui dit ce que tu ne sais pas encore expliquer."
+aide = "Commence par le critère de réussite, puis décris les gestes sans juger la personne. La quatrième phrase est la plus utile : elle nomme un manque au lieu de le couvrir par une formule générale."
+correction = [
+  "Une verbalisation utile ressemble à ceci : « j’ai lu l’énoncé, j’ai repéré trois données, j’ai converti les minutes en heures, j’ai divisé ». Elle décrit des gestes observables, pas un niveau général.",
+  "Le geste qui explique le résultat doit être nommé : une conversion oubliée, un ordre de priorité des opérations, une consigne mal lue. Sans ce geste, la conclusion reste une impression.",
+  "La décision pour la prochaine fois doit être vérifiable : « je relis les unités avant de calculer » se voit ; « je ferai plus attention » ne se voit pas.",
+  "La phrase sur ce qui reste inexpliqué évite deux erreurs opposées : croire qu’on a tout compris parce que la réponse est juste, et croire qu’on n’a rien compris parce que la réponse est fausse."
+]
+a_retenir = [
+  "La métacognition met en rapport les moyens utilisés et le résultat obtenu.",
+  "Décrire ses gestes vaut mieux que juger son niveau.",
+  "Une décision pour la prochaine fois doit être observable.",
+  "Nommer ce qui reste inexpliqué protège des conclusions trop rapides."
+]
+transferer = "Cette pratique vaut pour un exercice de calcul, une rédaction, un geste professionnel ou un projet. Elle ne remplace ni une correction par une personne compétente, ni un diagnostic en cas de difficulté persistante. Une difficulté qui résiste à plusieurs tentatives relève d’un accompagnement, pas d’un effort supplémentaire."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+
+[[fiche.sources]]
+titre = "éduscol — « Évaluer en arts plastiques », fiche d’accompagnement cycles 2, 3 et 4"
+url = "https://eduscol.education.gouv.fr/sites/default/files/document/ra16c4apevalfiche2708865pdf-78576.pdf"
+licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exercice reproduit"
+droits_controles_le = "2026-11-05"
+mode_utilisation = "reference-factuelle"
+utilisation = "Fiche consultée le 5 novembre 2026 : définition de la métacognition comme activité par laquelle le sujet s’interroge sur ses stratégies et met en rapport les moyens utilisés avec les résultats obtenus, verbalisation comme moment privilégié de l’évaluation formative, co-évaluation et auto-évaluation pour prendre conscience des acquis et des manques. L’adaptation à une personne seule est une proposition M.R.S.C. Aucun extrait n’est reproduit."
+
+[[fiche]]
+id = "geo-choisir-une-projection"
+titre = "Choisir une projection : ce que la carte garde et ce qu’elle déforme"
+matiere = "Géographie et espace"
+matiere_id = "geographie"
+domaine = "geographie"
+niveau = 3
+horizon_contenu = "Collège, lycée, études supérieures et lecture de presse — dès qu’une carte sert à comparer des superficies"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. L’histoire de la projection de Mercator, la déformation des superficies et la résolution des Nations unies du 4 septembre 2026 sont confrontées à un article de Vincent Capdepuy publié par Visionscarto, consulté ce jour. Aucun extrait n’est reproduit ; la démarche et l’exercice sont des propositions M.R.S.C."
+minutes = 14
+resume = "Sur un planisphère, le Groenland paraît presque aussi grand que l’Afrique, quatorze fois plus vaste. Comprendre pourquoi évite de lire une carte comme une photographie."
+objectif = "Distinguer ce qu’une projection conserve, les angles ou les surfaces, et repérer les déformations d’une carte avant de comparer deux territoires."
+situation = "Deux personnes regardent le planisphère d’une salle de classe. L’une dit que le Groenland est presque un continent. L’autre objecte que l’Afrique est quatorze fois plus grande. Les deux lisent pourtant la même carte, et aucune ne se trompe sur ce qu’elle voit."
+analogie_titre = "Comme peler une orange pour la poser à plat"
+analogie = "On ne peut pas poser une peau d’orange à plat sans la déchirer ou l’étirer. Toute carte choisit donc ce qu’elle étire et ce qu’elle sacrifie. Un planisphère n’est pas une photographie ratée du monde, c’est une solution à un problème posé."
+limite_analogie = "Une peau d’orange se déchire parce qu’elle est solide, alors qu’un calcul de projection étire sans arracher : la comparaison suggère un accident là où il y a une formule choisie. Elle laisse aussi croire qu’une carte pourrait être fidèle si l’on s’y prenait mieux, alors qu’aucune projection plane ne conserve à la fois les surfaces et les angles."
+notions = [
+  "Projection cartographique — opération mathématique qui reporte la surface du globe sur un plan, en choisissant ce qui est conservé.",
+  "Projection conforme — elle conserve localement les angles ; c’est le cas de Mercator, utile pour suivre un cap.",
+  "Projection équivalente — elle conserve les rapports de superficie, au prix de la forme des territoires.",
+  "Loxodromie — ligne suivie à cap constant ; sur un planisphère de Mercator, elle s’y dessine comme une droite.",
+  "Web Mercator — variante utilisée par les fonds de carte numériques ; elle hérite de la même déformation des hautes latitudes.",
+]
+demarche = [
+  "Demande d’abord à quoi sert la carte : suivre un itinéraire, comparer des superficies, montrer une population. Ces usages ne désignent pas la même projection.",
+  "Cherche le nom de la projection, souvent absent. S’il manque, compare la carte à une autre représentation du même espace avant de conclure sur les tailles.",
+  "Regarde les hautes latitudes : si le Groenland occupe presque autant de place que l’Afrique, la projection privilégie les angles, pas les surfaces.",
+  "Sépare trois choses que l’on confond souvent : la projection, le centrage et l’orientation. Une carte peut être équivalente et rester centrée sur l’Europe.",
+  "Rappelle-toi que la projection de Mercator a été mise au point en 1569 pour la navigation à cap constant, et non pour comparer des continents.",
+  "Si la comparaison de superficies est l’enjeu, cherche une projection équivalente, par exemple Equal Earth, et dis ce que tu changes en la choisissant.",
+]
+exercice = "Prends une carte du monde et repère le Groenland et l’Afrique. Écris A) ce que tu observes sur leurs tailles ; B) ce que dit une source de la superficie réelle des deux territoires ; C) ce que tu conclurais de l’usage de cette carte."
+aide = "La comparaison des deux territoires suffit à repérer une projection qui privilégie les angles. Ne cherche pas à calculer la déformation : note seulement ce que la carte rend difficile à voir."
+correction = [
+  "Sur un planisphère de type Mercator, le Groenland paraît presque aussi grand que l’Afrique, alors que l’Afrique est quatorze fois plus vaste : l’écart visuel vient de la projection, pas d’une erreur de dessin.",
+  "Une carte qui conserve les angles agrandit les régions proches des pôles. L’Afrique, proche de l’équateur, y paraît réduite : c’est la contrepartie d’un choix géométrique.",
+  "La conclusion utile ne condamne pas la carte : elle précise l’usage. Mercator répond à un problème de navigation à cap constant, et non à une comparaison de superficies.",
+  "Le centrage et l’orientation sont d’autres choix, distincts de la projection. Une carte équivalente peut rester centrée sur l’Europe : les deux questions se traitent séparément.",
+]
+a_retenir = [
+  "Aucune projection plane ne conserve à la fois les surfaces et les angles.",
+  "Mercator conserve les angles et agrandit les hautes latitudes.",
+  "Comparer des superficies demande une projection équivalente.",
+  "Le centrage et l’orientation sont des choix distincts de la projection.",
+]
+transferer = "Cette lecture sert devant un planisphère de manuel, une carte de presse, un fond de carte numérique ou une carte électorale. Elle ne dit rien de la qualité des données représentées : une projection honnête peut porter des chiffres faux."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+sources = [
+  { titre = "Visionscarto — « Peut-on corriger la carte du monde ? La projection de Mercator en question », Vincent Capdepuy", url = "https://www.visionscarto.net/peut-on-corriger-la-carte-du-monde", licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni carte reproduits", droits_controles_le = "2026-11-05", mode_utilisation = "reference-factuelle", utilisation = "Article consulté le 5 novembre 2026 : projection mise au point par Gérard Mercator en 1569 pour la navigation à cap constant ; déformation des surfaces comme contrepartie d’un choix géométrique ; Groenland paraissant presque aussi grand que l’Afrique, quatorze fois plus vaste ; résolution de l’Assemblée générale des Nations unies du 4 septembre 2026 intitulée Correct the Map, adoptée par 164 voix contre une et six abstentions, qui mentionne la projection Equal Earth ; usage de Mercator comme Web Mercator dans la cartographie numérique ; thèse de l’auteur selon laquelle il n’existe pas de carte « vraie ». Aucun extrait n’est reproduit." },
+]
+
+[[fiche]]
+id = "histoire-lire-une-cote"
+titre = "Lire la cote d’une archive avant de commander le document"
+matiere = "Histoire et mémoire"
+matiere_id = "histoire"
+domaine = "histoire-memoire"
+niveau = 3
+horizon_contenu = "Lycée, études supérieures, histoire locale et généalogie — dès la première commande en salle de lecture"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. La définition de la cote, le cadre de classement et la cotation continue sont confrontés à la page de méthodologie de recherche en salle de lecture virtuelle des Archives nationales, consultée ce jour. Aucun extrait n’est reproduit ; la troisième cote de l’exercice est fictive et signalée comme telle."
+minutes = 12
+resume = "F/21/5284 n’est pas un numéro au hasard : une série, une sous-série, un carton. Comprendre la cote évite de commander un document que l’on ne saurait pas retrouver."
+objectif = "Décomposer une cote d’archive en série, sous-série et contenant, puis noter la référence complète pour qu’une autre personne retrouve le document."
+situation = "Dans un inventaire, une ligne indique F/21/5284 et un titre. Une personne note seulement « carton 5284 » dans sa demande. Le formulaire refuse la commande, et l’archiviste explique que la cote doit être recopiée exactement."
+analogie_titre = "Comme l’adresse d’un immeuble"
+analogie = "Une cote se lit comme une adresse : d’abord l’ensemble, la série ; puis la partie, la sous-série ; enfin le contenant, le carton ou le registre. Changer un élément change de destinataire, et le document ne se trouve plus."
+limite_analogie = "Une adresse désigne un lieu stable, alors qu’une cote désigne un ensemble de documents dont le contenu peut varier avec l’état des fonds. Deux documents différents peuvent partager une même cote, et un fonds reclassé peut changer de cote : l’adresse, elle, ne bouge pas."
+notions = [
+  "Cote — ensemble de lettres, de chiffres ou de signes qui identifie une unité archivistique et permet de la retrouver et de la commander.",
+  "Cadre de classement — organisation des archives par grand type d’administration, en séries désignées par des lettres de A à Z et de AA à ZZ.",
+  "Sous-série — subdivision d’une série ; la cote F/21 désigne ainsi l’administration des Beaux-Arts dans la série F.",
+  "Producteur d’archives — administration ou organisme qui a produit les documents conservés.",
+  "Versement — transfert de documents vers un service d’archives, accompagné d’un bordereau descriptif.",
+  "Cotation continue — cotation par année de versement appliquée aux archives publiques postérieures à 1975, avec un numéro de versement à huit chiffres.",
+]
+demarche = [
+  "Recopie la cote entière, lettres, chiffres et barres obliques comprises : c’est un identifiant unique, et son libellé doit être respecté pour réserver un document.",
+  "Décompose-la : une lettre pour la série, un chiffre pour la sous-série, puis le numéro de carton ou de registre. F/21/5284 désigne la série F, la sous-série F/21 et le 5 284e carton de cette sous-série.",
+  "Cherche le producteur : avant 1975, les archives sont classées par grand type d’administration ou d’établissement. La lettre indique de quel ensemble provient le document.",
+  "Pour les versements postérieurs à 1976, la cote est continue : un numéro de versement à huit chiffres, l’année suivie du rang, puis un numéro de carton. 20130510/1 désigne le premier carton du 510e versement arrivé en 2013.",
+  "Lis l’instrument de recherche avant de commander : la description annoncée peut couvrir un ensemble plus large que le document qui t’intéresse.",
+  "Note la cote avec le service d’archives, l’instrument de recherche et la date de consultation, sans quoi la référence ne sera pas retrouvable par une autre personne.",
+]
+exercice = "Voici trois cotes : F/21/5284, 20130510/1 et AB/XX/12, cette dernière étant fictive. Pour chacune, écris A) la série ou le versement ; B) le contenant ; C) ce qu’il faudrait ajouter pour retrouver le document dans un an."
+aide = "Les deux premières cotes viennent de la page de méthodologie des Archives nationales. La troisième est inventée et sert seulement à vérifier que tu repères la structure, pas à commander quoi que ce soit."
+correction = [
+  "F/21/5284 : série F pour les archives des ministères et administrations, sous-série F/21 pour l’administration des Beaux-Arts, puis le 5 284e carton de cette sous-série.",
+  "20130510/1 : cotation continue, numéro de versement 20130510, soit le 510e versement arrivé en 2013, et premier carton de ce versement.",
+  "AB/XX/12 est fictive : elle ne désigne aucun fonds réel, mais sa forme montre qu’une cote se lit de l’ensemble vers le contenant.",
+  "Pour retrouver un document, la cote ne suffit pas : il faut le service d’archives, l’instrument de recherche utilisé et la date de consultation.",
+]
+a_retenir = [
+  "Une cote est un identifiant unique, recopié sans modification.",
+  "Une cote se lit de l’ensemble vers le contenant.",
+  "Avant 1975, le classement suit le producteur d’archives.",
+  "Une référence complète ajoute le service, l’instrument de recherche et la date de consultation.",
+]
+transferer = "Cette lecture sert aux Archives nationales, aux archives départementales et municipales, en histoire locale comme en généalogie. Elle ne dit pas si le document est librement communicable : les délais et conditions d’accès relèvent du Code du patrimoine."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+sources = [
+  { titre = "Archives nationales — « Méthodologie de recherche en salle de lecture virtuelle »", url = "https://www.archives-nationales.culture.gouv.fr/methodologie-de-recherche-en-salle-de-lecture-virtuelle", licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait reproduit", droits_controles_le = "2026-11-05", mode_utilisation = "reference-factuelle", utilisation = "Page consultée le 5 novembre 2026 : la cote est un identifiant unique, sous forme de lettres, de chiffres ou de signes, indispensable à la commande et dont le libellé doit être respecté ; archives antérieures à 1975 classées par producteur dans un cadre de classement de A à Z et de AA à ZZ ; exemple F/21/5284, série F pour les ministères, sous-série F/21 pour les Beaux-Arts, 5 284e carton ; à partir de 1976, cotation continue avec numéro de versement à huit chiffres et numéro de carton, exemple 20130510/1. Aucun extrait n’est reproduit." },
+]
+
+[[fiche]]
+id = "civ-lire-un-sondage"
+titre = "Lire un sondage : vérifier les mentions avant de retenir le chiffre"
+matiere = "Citoyenneté et médias"
+matiere_id = "citoyennete"
+domaine = "citoyennete-medias"
+niveau = 3
+horizon_contenu = "Lycée, études supérieures et lecture de presse — avant de reprendre un pourcentage"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. La liste des mentions obligatoires et l’interdiction de publication la veille et le jour d’un scrutin sont confrontées à la page de la Commission des sondages, qui reproduit les articles 2 et 11 de la loi du 19 juillet 1977 modifiée, consultée ce jour. Aucun extrait n’est reproduit."
+minutes = 13
+resume = "Un pourcentage ne dit rien sans le nombre de personnes interrogées, la date, la question exacte et la marge d’erreur. La loi impose de publier ces informations."
+objectif = "Repérer les mentions obligatoires d’un sondage publié, puis lire un résultat avec sa marge d’erreur, sa date et la question réellement posée."
+situation = "Une publication annonce que 52 % des personnes interrogées sont favorables à une mesure. Ni la date, ni le nombre de personnes interrogées, ni la question posée n’apparaissent. Le chiffre circule pourtant, et il est repris sans que personne sache ce qui a été demandé."
+analogie_titre = "Comme un thermomètre posé au soleil"
+analogie = "Un thermomètre affiche un chiffre, mais ce chiffre dépend de l’endroit où il est posé. Un sondage affiche aussi un chiffre, qui dépend de qui a été interrogé et de la question posée. Lire la méthode, c’est regarder où se trouve le thermomètre."
+limite_analogie = "Un thermomètre mesure un état physique et se trompe surtout par son emplacement, alors qu’un sondage mesure des opinions déclarées, à une date, avec une marge d’erreur et un effet possible de la formulation. La comparaison ne dit rien non plus de l’usage qui sera fait du chiffre une fois publié."
+notions = [
+  "Échantillon — ensemble des personnes interrogées, dont la taille détermine en partie la marge d’erreur.",
+  "Marge d’erreur — intervalle dans lequel le résultat réel a une forte probabilité de se situer, pour un résultat et un échantillon donnés.",
+  "Sous-échantillon — partie des personnes interrogées sur laquelle un résultat est établi ; sa marge d’erreur est plus large que celle de l’ensemble.",
+  "Commanditaire et acheteur — personne ou organisme qui commande le sondage, distinct de l’institut qui le réalise.",
+  "Notice technique — document décrivant la méthode, que toute personne a le droit de consulter.",
+  "Période d’interdiction — veille et jour d’un scrutin, où la publication et le commentaire des sondages électoraux sont interdits.",
+]
+demarche = [
+  "Cherche les indications que la loi impose : nom de l’organisme, commanditaire et acheteur s’il diffère, nombre de personnes interrogées, dates, texte des questions, mention de marges d’erreur, marges, droit de consulter la notice.",
+  "Regarde le nombre de personnes interrogées et les dates avant le résultat : un échantillon petit ou ancien ne porte pas la même information.",
+  "Lis la question telle qu’elle a été posée. Deux formulations proches peuvent produire deux majorités opposées, et la notice permet de comparer.",
+  "Cherche la marge d’erreur du résultat publié, et pas seulement celle de l’ensemble : la commission demande aussi celle du sous-échantillon qui a servi au résultat.",
+  "Identifie qui a payé et qui a commandé : ce n’est pas la même information que le nom de l’institut qui a réalisé l’enquête.",
+  "Vérifie la date par rapport à un scrutin : la veille et le jour du vote, la publication et le commentaire des sondages électoraux sont interdits.",
+  "Si une partie seulement des résultats est publiée, demande-toi ce qui manque : la commission rappelle qu’une publication partielle ne doit pas travestir le sens de l’enquête.",
+]
+exercice = "Prends un sondage publié par un média et réponds par écrit : A) quelles mentions obligatoires figurent ; B) lesquelles manquent ; C) ce que tu peux honnêtement en conclure, et ce que tu ne peux pas."
+aide = "Compte les mentions plutôt que de les juger une par une. Une mention peut renvoyer à la notice en ligne : dans ce cas, note l’adresse indiquée et va la chercher avant de conclure qu’elle manque."
+correction = [
+  "L’article 2 de la loi impose huit indications, dont le nombre de personnes interrogées, les dates, le texte intégral des questions et les marges d’erreur des résultats publiés.",
+  "Sans ces mentions, la publication est irrégulière : la commission des sondages l’écrit, et elle estime qu’un journal commet une infraction en donnant des résultats dont il ne peut pas établir l’origine.",
+  "La marge d’erreur dépend de la taille de l’échantillon et du résultat observé, et celle du sous-échantillon est plus large : un écart de quelques points peut donc ne rien départager.",
+  "La sincérité ne s’arrête pas aux mentions : la commission rappelle qu’une publication partielle ne doit pas travestir le sens général de l’enquête.",
+]
+a_retenir = [
+  "Un pourcentage sans taille d’échantillon, date ni question ne se lit pas.",
+  "La loi impose huit mentions, dont la marge d’erreur du résultat publié.",
+  "La marge d’un sous-échantillon est plus large que celle de l’ensemble.",
+  "La veille et le jour d’un scrutin, publier ou commenter un sondage électoral est interdit.",
+]
+transferer = "Cette lecture sert devant un sondage d’opinion, une intention de vote ou une enquête commandée par une entreprise. Elle ne permet pas de juger de la qualité statistique d’une enquête : redressements et méthode d’échantillonnage demandent une lecture plus technique que la notice résumée."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+sources = [
+  { titre = "Commission des sondages — « Les indications obligatoires » (articles 2 et 11 de la loi du 19 juillet 1977 modifiée)", url = "https://www.commission-des-sondages.fr/oblig/obligations.htm", licence_source = "Texte légal reproduit par l’autorité publique ; aucun extrait n’est repris dans la fiche", droits_controles_le = "2026-11-05", mode_utilisation = "reference-factuelle", utilisation = "Page consultée le 5 novembre 2026 : article 2 modifié par la loi n° 2016-508 du 25 avril 2016, huit indications obligatoires dont le nombre de personnes interrogées, les dates, le texte intégral des questions, la mention de marges d’erreur et les marges des résultats publiés ; publication irrégulière à défaut de ces mentions ; article 11, interdiction de publier ou commenter un sondage électoral la veille et le jour du scrutin, prenant effet le samedi précédent à zéro heure pour l’élection présidentielle, les législatives, les européennes et les référendums nationaux ; droit de ne pas publier mais obligation de sincérité ; mise au point sous peine d’amende de 75 000 euros. Aucun extrait n’est reproduit." },
+]
+
+[[fiche]]
+id = "sante-amenager-logement-chutes"
+titre = "Aménager son logement pour limiter les chutes, sans se mettre en danger"
+matiere = "Santé, corps et prévention des risques"
+matiere_id = "sante"
+domaine = "sante-securite-corps"
+niveau = 2
+horizon_contenu = "À partir de 65 ans, et pour l’entourage qui aide à aménager un logement"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. La fréquence des chutes après 65 ans, les causes et les aménagements conseillés sont confrontés à une page d’ameli.fr mise à jour le 24 décembre 2024 et consultée ce jour. La fiche ne pose aucun diagnostic et renvoie au médecin traitant ; une relecture par un professionnel de santé reste nécessaire."
+minutes = 15
+resume = "Une personne de plus de 65 ans sur trois tombe au moins une fois par an. Dégager les passages, éclairer et fixer des appuis réduit une partie du risque, sans le supprimer."
+objectif = "Repérer les aménagements simples qui réduisent le risque de chute à domicile, et distinguer ce qui relève du logement de ce qui relève d’un avis médical."
+situation = "Une personne âgée vit seule dans un appartement. Un tapis au bord relevé borde le couloir, les câbles de la télévision traversent le passage et l’escalier n’a qu’une lampe en haut. Rien de tout cela ne l’a fait tomber : c’est précisément pourquoi personne ne s’en occupe."
+analogie_titre = "Comme baliser un sentier avant une randonnée"
+analogie = "Avant une randonnée, on enlève les branches du chemin et on balise les passages difficiles. Dans un logement, on dégage les couloirs, on éclaire les marches et on fixe des barres d’appui. Ce sont des préparatifs, pas des exploits."
+limite_analogie = "Un sentier est préparé une fois pour une personne qui choisit d’y passer, alors qu’un logement se vit tous les jours et que l’équilibre change avec l’âge, les médicaments ou la vue. Aucun aménagement ne remplace l’avis du médecin traitant ni ne supprime le risque de chute."
+notions = [
+  "Facteur de risque — élément qui augmente la probabilité de chute : troubles de l’équilibre, faiblesse musculaire, médicaments, logement encombré.",
+  "Point d’appui — élément fixé solidement qui aide à se lever, s’asseoir ou se redresser.",
+  "Revêtement antidérapant — surface conçue pour limiter les glissades, dans la baignoire, le bac de douche ou sur un sol lisse.",
+  "Aide technique — canne, déambulateur ou siège de douche fixé au mur, qui sécurise un geste quotidien.",
+  "Télé-alarme — dispositif permettant d’appeler des proches ou les secours après une chute.",
+  "Dénutrition — perte de poids et de force musculaire qui augmente le risque de chute et se surveille avec un professionnel.",
+]
+demarche = [
+  "Commence par les passages : retire les objets et les meubles gênants des couloirs, et fixe les câbles au mur ou dans un range-fils.",
+  "Augmente l’éclairage là où l’on circule, et signale d’une bande claire le bord des marches si la vue baisse.",
+  "Regarde les sols : tapis aux bords relevés, descentes de lit et tapis de bain font trébucher. Retire-les ou choisis des matières antidérapantes.",
+  "Range les objets usuels à portée de main pour éviter de monter sur une chaise ; un marchepied stable à deux ou trois marches reste préférable à un tabouret.",
+  "Fais poser des barres d’appui bien fixées près du lit, des toilettes et de la baignoire, et n’utilise jamais un porte-serviettes comme appui.",
+  "Dans la salle de bains, vérifie le fond antidérapant, préfère un siège fixé au mur à une chaise en plastique, et demande conseil pour un rehausseur de toilettes.",
+  "Signale à ton médecin traitant les chutes, même sans gravité : tension, rythme cardiaque, vue, médicaments et perte de poids font partie des causes.",
+]
+exercice = "Parcours ton logement avec cette fiche et écris, pour chaque pièce : A) un risque que tu vois ; B) un aménagement possible sans travaux ; C) un aménagement qui demande un professionnel ou un avis."
+aide = "Ne cherche pas à tout traiter le même jour : choisis la pièce où l’on passe le plus de temps. Ce qui touche à la santé ou à des travaux se note sans se décider seul."
+correction = [
+  "Dégager les passages et fixer les câbles sont des gestes sans travaux : ils relèvent de l’organisation du logement, pas d’un diagnostic.",
+  "Un tapis au bord relevé ou une descente de lit se retire ou se remplace ; une barre d’appui, elle, doit être fixée solidement et à l’endroit où l’on s’en servira.",
+  "Ce qui touche à l’équilibre, à la vue, aux médicaments ou à la perte de poids se discute avec le médecin traitant : un aménagement ne le remplace pas.",
+  "Certaines aides existent localement, par exemple auprès de la mairie ou du centre communal d’action sociale, pour l’aide à domicile ou le portage de repas.",
+]
+a_retenir = [
+  "Une personne de plus de 65 ans sur trois tombe au moins une fois par an.",
+  "Dégager, éclairer et fixer des appuis réduisent une partie du risque.",
+  "Un appui doit être solide : un porte-serviettes n’en est pas un.",
+  "Les causes médicales se discutent avec le médecin traitant, pas avec une fiche.",
+]
+transferer = "Cette fiche sert à préparer une visite chez un parent âgé ou à relire son propre logement. Elle ne dit pas si une chute est due à une maladie : ce diagnostic appartient à un professionnel de santé."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+sources = [
+  { titre = "ameli.fr — « Comment prévenir les chutes des personnes âgées ? » (mise à jour du 24 décembre 2024)", url = "https://www.ameli.fr/assure/sante/bons-gestes/seniors/prevenir-chutes-personnes-agees", licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait reproduit", droits_controles_le = "2026-11-05", mode_utilisation = "reference-factuelle", utilisation = "Page consultée le 5 novembre 2026 : une personne de plus de 65 ans sur trois tombe au moins une fois par an ; causes multiples, dont troubles de l’équilibre, faiblesse musculaire, médicaments, dénutrition et logement inadapté ; conseils d’aménagement portant sur le dégagement des passages, la fixation des câbles, l’éclairage, les tapis aux bords relevés, les barres d’appui solidement fixées, le fond de baignoire antidérapant, le siège de douche fixé au mur et le rehausseur de toilettes ; se lever lentement, chausser des talons larges et bas, prévoir une télé-alarme, faire contrôler tension et rythme cardiaque ; recours possible à la mairie ou au centre communal d’action sociale. Aucun extrait n’est reproduit." },
+]
+
+[[fiche]]
+id = "demarche-obtenir-acte-naissance"
+titre = "Demander un acte de naissance : la bonne mairie, la bonne forme"
+matiere = "Citoyenneté et démarches"
+matiere_id = "citoyennete"
+domaine = "demarches-droits-travail"
+niveau = 1
+horizon_contenu = "Dès qu’un dossier administratif demande un acte d’état civil"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 5 novembre 2026. La gratuité, la mairie compétente, les trois formes d’acte et les pièces à indiquer sont confrontées à la fiche F1427 de service-public.gouv.fr, vérifiée le 14 août 2026 et consultée ce jour. Les durées de validité exigées par les administrations ne sont pas reprises : elles dépendent de chaque démarche."
+minutes = 11
+resume = "L’acte de naissance se demande gratuitement à la mairie du lieu de naissance. La forme choisie, copie intégrale ou extrait avec ou sans filiation, change ce qui y figure."
+objectif = "Choisir la forme d’acte de naissance adaptée au dossier, préparer les informations à indiquer et adresser la demande au bon service."
+situation = "Pour un dossier, on demande une copie d’acte de naissance. La personne écrit à la mairie où elle habite, joint une enveloppe et attend. Trois semaines plus tard, elle apprend que la demande devait partir de la mairie du lieu de naissance."
+analogie_titre = "Comme retirer un colis au bon guichet"
+analogie = "Un colis s’obtient au guichet qui le détient, avec la référence qui permet de le retrouver. Un acte de naissance s’obtient auprès de la mairie du lieu de naissance, avec les informations qui permettent de retrouver l’acte dans le registre."
+limite_analogie = "Un colis est unique et attend son destinataire, alors qu’un acte est une copie délivrée à la demande depuis un registre tenu à jour, et que d’autres personnes peuvent en demander une sous conditions. La forme demandée change aussi ce qui sera visible, ce que la comparaison ne montre pas."
+notions = [
+  "État civil — registres tenus par les communes où sont inscrits naissances, mariages et décès.",
+  "Copie intégrale — reproduction de tous les éléments de l’acte, y compris les mentions en marge.",
+  "Extrait avec filiation — extrait qui reprend les informations essentielles et celles des parents.",
+  "Extrait sans filiation — extrait limité à l’identité de la personne concernée, sans informations sur les parents.",
+  "Mairie du lieu de naissance — service compétent pour délivrer l’acte, quel que soit le domicile actuel.",
+  "Service central d’état civil — service compétent pour les personnes nées à l’étranger.",
+]
+demarche = [
+  "Demande l’acte à la mairie du lieu de naissance, et non à la mairie où tu habites : c’est le registre de naissance qui est consulté.",
+  "Choisis la forme selon le besoin : la copie intégrale reproduit tous les éléments de l’acte, l’extrait avec filiation reprend l’essentiel avec les parents.",
+  "Si l’extrait sans filiation suffit, tu n’indiques que tes nom, prénoms et date de naissance : c’est la forme la plus protectrice de la vie privée.",
+  "Pour une copie intégrale ou un extrait avec filiation, prépare nom, prénoms, date et lieu de naissance, adresse, ainsi que les nom et prénoms des parents.",
+  "Passe par le service en ligne gratuit, ou présente-toi au guichet avec une pièce d’identité : le document est alors délivré immédiatement.",
+  "Si la personne est née à l’étranger, la demande passe par le service en ligne dédié, et non par la mairie ; les personnes nées dans un État devenu indépendant passent par ce même service.",
+  "Vérifie dans la démarche qui réclame l’acte si une date de délivrance récente est exigée : cette durée dépend du dossier, et redemander l’acte reste gratuit.",
+]
+exercice = "Pour un dossier de location, on te demande un extrait d’acte de naissance. Écris A) la forme que tu demandes ; B) les informations à fournir ; C) le service à qui adresser la demande, et par quel moyen."
+aide = "La forme la plus légère suffit souvent pour un dossier privé. Si la démarche exige la filiation, c’est écrit dans la liste des pièces à fournir : lis-la avant de choisir."
+correction = [
+  "Un extrait sans filiation se demande avec les nom, prénoms et date de naissance ; il ne comporte pas les informations sur les parents.",
+  "Un extrait avec filiation ou une copie intégrale demandent en plus le lieu de naissance, l’adresse et les nom et prénoms des parents.",
+  "La demande s’adresse à la mairie du lieu de naissance, par le service en ligne gratuit, par courrier sur papier libre ou sur place avec une pièce d’identité.",
+  "Pour une personne née à l’étranger, la demande passe par le service en ligne dédié, et non par la mairie du domicile.",
+]
+a_retenir = [
+  "L’acte de naissance est gratuit, en ligne comme en mairie.",
+  "La demande s’adresse à la mairie du lieu de naissance.",
+  "Trois formes existent : copie intégrale, extrait avec filiation, extrait sans filiation.",
+  "Né à l’étranger : la demande passe par un service en ligne dédié.",
+]
+transferer = "Cette démarche vaut aussi pour un acte de mariage ou de décès, et pour les dossiers qui en réclament un. Elle ne garantit pas qu’un acte ancien sera accepté : la durée de validité exigée dépend de la démarche qui le demande."
+revue_le = "2026-11-05"
+intervalle_revue_jours = 180
+sources = [
+  { titre = "service-public.gouv.fr — « Acte de naissance : demande de copie intégrale ou d’extrait » (F1427, vérifié le 14 août 2026)", url = "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait reproduit", droits_controles_le = "2026-11-05", mode_utilisation = "reference-factuelle", utilisation = "Fiche consultée le 5 novembre 2026 : demande gratuite dans tous les cas ; la démarche varie selon le lieu de naissance ; pour une naissance en France, demande en ligne, par courrier sur papier libre ou sur place à la mairie du lieu de naissance, avec pièce d’identité et délivrance immédiate au guichet ; informations à indiquer selon la forme demandée ; pour une personne née à l’étranger, service en ligne dédié, y compris pour les personnes nées dans un État devenu indépendant. Aucun extrait n’est reproduit." },
+]

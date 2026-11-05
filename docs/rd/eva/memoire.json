@@ -1372,7 +1372,7 @@
   {
    "id": "moyen:branche:relire-les-44-prototypes",
    "horizon": "moyen",
-   "titre": "Faire relire les 70 prototypes d'apprentissage",
+   "titre": "Faire relire les 78 prototypes d'apprentissage",
    "resume": "Quels contenus sont exacts, utiles, accessibles, originaux et suffisamment délimités pour franchir leurs revues spécialisées?",
    "source": "docs/rd/portefeuille.toml",
    "ligne": 13,
@@ -3667,5 +3667,5 @@
   "moyen": 388,
   "long": 43
  },
- "poids_corpus": 1718818
+ "poids_corpus": 1719621
 }
