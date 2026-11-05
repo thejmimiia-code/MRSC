@@ -32,6 +32,7 @@ import re as _re
 import json
 import sys
 import tempfile
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -294,12 +295,13 @@ class TestCadrages(unittest.TestCase):
     def test_les_motifs_du_registre_sont_lus(self) -> None:
         """Les motifs publiés sont réellement lus, et chacun nomme son vide.
 
-        Le 5 novembre 2026, le catalogue est passé de 85 à 96 fiches. Le motif
-        du catalogue a d'abord été retiré plutôt que laissé faux, puis réécrit
-        avec le chiffre du relevé suivant : 96 = 19 × 5 + 1 laisse une carte
-        seule aux cadrages à cinq colonnes, et le vide maximal est passé de
-        1 176,50 px sur 35 cadrages à 1 136,16 px sur 9 cadrages. Ce chiffre
-        vient du résumé de CI, pas d'une estimation hors navigateur.
+        Le nombre de fiches ne s'écrit pas ici : il se lit dans
+        `docs/apprentissage/catalogue.toml`. Le 5 novembre 2026, le motif du
+        catalogue a suivi le catalogue deux fois le même jour — 96 fiches,
+        1 136,16 px sur 9 cadrages, puis 104 fiches, 941,20 px sur 29 cadrages.
+        Un banc qui recopie le chiffre mesuré devient faux au lot suivant, et
+        il devient faux en silence : il vérifie donc que le motif nomme le
+        total du jour, et qu'aucun chiffre périmé n'y survit.
         """
         motifs = self.cadrages.lire_motifs()
         self.assertEqual(
@@ -312,12 +314,22 @@ class TestCadrages(unittest.TestCase):
             self.assertIn(" · ", cle, f"clé sans page ni sélecteur : {cle}")
             self.assertGreater(len(motif), 80, f"motif trop court pour dire quoi que ce soit : {cle}")
         self.assertIn("apprendre.html · .learning-catalogue-grid", motifs)
-        self.assertIn("1 136,16", motifs["apprendre.html · .learning-catalogue-grid"])
-        self.assertNotIn(
-            "1 176,50",
-            motifs["apprendre.html · .learning-catalogue-grid"],
-            "l'ancien chiffre décrivait 85 fiches : il ne doit pas survivre au catalogue de 96",
+        catalogue = tomllib.loads(
+            (RACINE / "docs" / "apprentissage" / "catalogue.toml").read_text(encoding="utf-8")
         )
+        total = len(catalogue["fiche"])
+        motif_catalogue = motifs["apprendre.html · .learning-catalogue-grid"]
+        self.assertIn(
+            f"{total} fiches",
+            motif_catalogue,
+            f"le motif doit nommer le total du jour ({total} fiches), pas un total périmé",
+        )
+        for perime in ("1 176,50", "1 136,16"):
+            self.assertNotIn(
+                perime,
+                motif_catalogue,
+                f"{perime} décrivait un autre catalogue : il ne doit pas survivre au total de {total}",
+            )
 
     def test_une_rangee_pleine_ne_dit_rien(self) -> None:
         plan = self.plan({".document-grid": 3})
