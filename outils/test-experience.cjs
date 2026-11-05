@@ -880,11 +880,14 @@ async function main() {
       }
 
       // Le panneau reste ouvert : c'est la fenêtre qui change. Le replacer est
-      // le travail des écoutes partagées avec « Personnalisation ».
+      // le travail des écoutes partagées avec « Personnalisation ». Tous ces
+      // formats restent **dans le même mode d'en-tête** que le dernier de la
+      // boucle précédente (240 × 800) : franchir ce seuil referme le menu, et
+      // c'est un autre cas, éprouvé juste après.
       for (const [largeur, hauteur, nom] of [
-        [1180, 900, 'élargi sans changer de régime'],
-        [980, 460, 'écrasé en hauteur'],
-        [900, 420, 'portable posé à plat'],
+        [420, 900, 'élargi de 180 px'],
+        [600, 800, 'portable étroit'],
+        [760, 500, 'juste au seuil du mode compact'],
       ]) {
         await page.setViewport({ width: largeur, height: hauteur, deviceScaleFactor: 1 });
         await page.evaluate(() => new Promise((suite) => requestAnimationFrame(() => requestAnimationFrame(suite))));
@@ -897,7 +900,7 @@ async function main() {
       // lieu de l'appeler un écrasement — et vérifie que la fermeture **rend les
       // coordonnées**, sinon la réouverture montrerait une image du panneau à la
       // taille du format précédent.
-      await page.setViewport({ width: 420, height: 900, deviceScaleFactor: 1 });
+      await page.setViewport({ width: 900, height: 700, deviceScaleFactor: 1 });
       await page.evaluate(() => new Promise((suite) => requestAnimationFrame(() => requestAnimationFrame(suite))));
       const franchissement = await page.evaluate(() => ({
         ouvert: document.querySelector('[data-primary-navigation]')?.classList.contains('is-open'),
@@ -911,7 +914,7 @@ async function main() {
       assert.equal(franchissement.placement, null,
         `le panneau fermé annonce encore un placement mesuré : ${JSON.stringify(franchissement)}`);
       await ouvrirMenu();
-      verifierMenu(await mesurerPanneauFlottant(page, nav), 'rouvert à 420 × 900 après franchissement du seuil compact');
+      verifierMenu(await mesurerPanneauFlottant(page, nav), 'rouvert à 900 × 700 après franchissement du seuil compact');
 
       // Au-delà du seuil de repli, la navigation reprend sa place en ligne : le
       // panneau doit se refermer et rendre les coordonnées qu'il tenait du

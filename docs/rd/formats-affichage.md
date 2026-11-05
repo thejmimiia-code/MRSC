@@ -2734,8 +2734,10 @@ s'en aperçoive — c'est ce qui s'était produit.
   porte, avec son message.
 - `outils/test-experience.cjs` — un essai navigateur neuf : six formats repliés
   (1 260, 980 × 440, 844 × 390, 667 × 375, 390 × 844, 240 × 800), trois
-  redimensionnements panneau ouvert, la fermeture au retour en ligne à 1 440 px
-  avec les coordonnées rendues, et le second régime de repli à 130 % de texte.
+  redimensionnements panneau ouvert **dans le même mode d'en-tête**, le
+  franchissement du seuil de mode compact qui referme le menu et lui rend ses
+  coordonnées, la fermeture au retour en ligne à 1 440 px, et le second régime de
+  repli à 130 % de texte.
   La mesure est la **même fonction** que celle de l'essai « Personnalisation » :
   deux essais séparés auraient divergé. Chromium n'existe pas dans cet
   environnement : cet essai s'exécute dans la CI, et il est le seul à voir le
@@ -2757,7 +2759,10 @@ refermé ne fabrique pas de règle.
 
 Le déploiement est identique **par le calcul**, pas par la couleur ni par le
 contenu : la barre de navigation reste marine, et ses entrées gardent leur
-soulignement doré au survol. Le panneau du menu ne se ferme pas au défilement de
+soulignement doré au survol. Le menu se referme quand le **mode d'en-tête**
+change — le site le faisait déjà avant ce lot, sur téléphone et en paysage
+court : ce n'est pas une conséquence du placement mesuré, et l'essai le vérifie
+plutôt que de le subir. Le panneau du menu ne se ferme pas au défilement de
 la page — c'est le comportement d'un panneau ancré, pas une fenêtre modale, et
 c'est aussi celui de « Personnalisation ». Aucune mesure de contraste n'a été
 refaite : les couleurs ne changent pas, seules la géométrie et l'animation
