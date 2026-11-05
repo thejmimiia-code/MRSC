@@ -189,6 +189,16 @@ MUTATIONS = (
         "ne s'aligne plus depuis le haut",
     ),
     (
+        "panneau du menu écarté de la carte commune à 520 px",
+        "assets/css/site.css",
+        "  .customize-settings-panel,\n"
+        "  html.has-js.menu-flottant .nav-links {\n"
+        "    padding: .35rem;",
+        "  .customize-settings-panel {\n"
+        "    padding: .35rem;",
+        "à 520 px, les deux panneaux n'ont plus la même règle de carte",
+    ),
+    (
         "géométrie de panneau réintroduite par un palier",
         "assets/css/site.css",
         "html.has-js.menu-flottant .nav-links.is-open { display: flex; }",
