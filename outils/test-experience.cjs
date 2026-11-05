@@ -936,7 +936,12 @@ async function main() {
 
       // Le second régime de repli : à 130 % de taille de texte, les dix entrées
       // ne tiennent plus sur une ligne, même à 1440 px. La classe doit suivre.
+      // La taille du texte se règle dans le sous-panneau « Affichage » : sans
+      // l'ouvrir, les boutons ne sont pas atteignables, et le clic échouerait
+      // sur un nœud caché au lieu de parler du sujet de l'essai.
       await ouvrirPersonnalisation(page);
+      await page.click('[data-display-settings] > summary');
+      await attendre(page, () => document.querySelector('[data-display-settings]')?.open === true);
       await page.click('[data-text-increase]');
       await page.click('[data-text-increase]');
       await attendre(page, () => document.documentElement.classList.contains('menu-flottant'));
