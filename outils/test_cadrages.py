@@ -292,19 +292,38 @@ class TestCadrages(unittest.TestCase):
         self.assertFalse(trouves[0].get("motif"), "ce couple n'a pas de motif : il doit être signalé")
 
     def test_les_motifs_du_registre_sont_lus(self) -> None:
-        """Les motifs publiés sont réellement lus, et chacun nomme son vide."""
+        """Les motifs publiés sont réellement lus, et chacun nomme son vide.
+
+        Le compte n'est plus figé à seize : le 5 novembre 2026, le catalogue est
+        passé de 85 à 96 fiches et le motif de `.learning-catalogue-grid` a été
+        retiré du registre au lieu d'être laissé faux. 96 remplit exactement les
+        cadrages à six colonnes, mais 96 = 19 × 5 + 1 laisse une carte seule là
+        où 85 remplissait cinq colonnes : le nombre du nouveau vide n'est pas
+        connue hors navigateur, et un motif écrit sans son nombre s'écrirait de
+        mémoire. Le retrait est donc écrit dans le registre, et `--orphelins`
+        nomme la rangée « SANS MOTIF ÉCRIT » jusqu'au relevé qui la chiffrera.
+        """
         motifs = self.cadrages.lire_motifs()
-        self.assertEqual(
+        self.assertGreaterEqual(
             len(motifs),
-            16,
-            f"{len(motifs)} motif(s) lu(s) : les seize couples du diagnostic doivent en avoir un "
+            15,
+            f"{len(motifs)} motif(s) lu(s) : les couples du diagnostic doivent en avoir un "
             "(décision A2 du 4 novembre 2026)",
         )
         for cle, motif in motifs.items():
             self.assertIn(" · ", cle, f"clé sans page ni sélecteur : {cle}")
             self.assertGreater(len(motif), 80, f"motif trop court pour dire quoi que ce soit : {cle}")
-        self.assertIn("apprendre.html · .learning-catalogue-grid", motifs)
-        self.assertIn("1 176,50", motifs["apprendre.html · .learning-catalogue-grid"])
+        self.assertNotIn(
+            "apprendre.html · .learning-catalogue-grid",
+            motifs,
+            "ce motif décrivait 85 fiches : il revient quand le relevé aura chiffré la rangée de 96",
+        )
+        registre = (RACINE / "docs" / "rd" / "cadrages.toml").read_text(encoding="utf-8")
+        self.assertIn(
+            "le catalogue est passé de 85 à 96 fiches",
+            registre,
+            "le retrait du motif doit être écrit dans le registre, pas seulement appliqué",
+        )
 
     def test_une_rangee_pleine_ne_dit_rien(self) -> None:
         plan = self.plan({".document-grid": 3})
