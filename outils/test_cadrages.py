@@ -292,7 +292,15 @@ class TestCadrages(unittest.TestCase):
         self.assertFalse(trouves[0].get("motif"), "ce couple n'a pas de motif : il doit être signalé")
 
     def test_les_motifs_du_registre_sont_lus(self) -> None:
-        """Les motifs publiés sont réellement lus, et chacun nomme son vide."""
+        """Les motifs publiés sont réellement lus, et chacun nomme son vide.
+
+        Le 5 novembre 2026, le catalogue est passé de 85 à 96 fiches. Le motif
+        du catalogue a d'abord été retiré plutôt que laissé faux, puis réécrit
+        avec le chiffre du relevé suivant : 96 = 19 × 5 + 1 laisse une carte
+        seule aux cadrages à cinq colonnes, et le vide maximal est passé de
+        1 176,50 px sur 35 cadrages à 1 136,16 px sur 9 cadrages. Ce chiffre
+        vient du résumé de CI, pas d'une estimation hors navigateur.
+        """
         motifs = self.cadrages.lire_motifs()
         self.assertEqual(
             len(motifs),
@@ -304,7 +312,12 @@ class TestCadrages(unittest.TestCase):
             self.assertIn(" · ", cle, f"clé sans page ni sélecteur : {cle}")
             self.assertGreater(len(motif), 80, f"motif trop court pour dire quoi que ce soit : {cle}")
         self.assertIn("apprendre.html · .learning-catalogue-grid", motifs)
-        self.assertIn("1 176,50", motifs["apprendre.html · .learning-catalogue-grid"])
+        self.assertIn("1 136,16", motifs["apprendre.html · .learning-catalogue-grid"])
+        self.assertNotIn(
+            "1 176,50",
+            motifs["apprendre.html · .learning-catalogue-grid"],
+            "l'ancien chiffre décrivait 85 fiches : il ne doit pas survivre au catalogue de 96",
+        )
 
     def test_une_rangee_pleine_ne_dit_rien(self) -> None:
         plan = self.plan({".document-grid": 3})

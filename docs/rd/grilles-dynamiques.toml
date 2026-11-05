@@ -76,8 +76,8 @@ raison = "Six domaines de vie : trois colonnes au conteneur maximal, deux dès q
 selecteur = ".learning-catalogue-grid"
 colonnes = 3
 minimum = 370
-items = [85]
-raison = "Catalogue des apprentissages : trois colonnes au conteneur maximal, puis deux, puis une. La carte mesure 250 px de haut : elle pouvait descendre plus étroitement que 370 sans se tasser, mais la règle garde les trois colonnes de la conception."
+items = [96]
+raison = "Catalogue des apprentissages : trois colonnes au conteneur maximal, puis deux, puis une. Capacité portée de 85 à 96 le 5 novembre 2026, quand onze fiches ISCED-F ont rejoint le catalogue ; le nombre de cartes vient du catalogue, jamais d'une saisie. La carte mesure 250 px de haut : elle pouvait descendre plus étroitement que 370 sans se tasser, mais la règle garde les trois colonnes de la conception."
 
 [[grille]]
 selecteur = ".learning-level-grid"

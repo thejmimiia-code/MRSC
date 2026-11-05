@@ -10,8 +10,8 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 86 |
-| Période couverte | du 2026-10-20 au 2026-11-04 |
+| Avancées consignées | 87 |
+| Période couverte | du 2026-10-20 au 2026-11-05 |
 | Contrôles exécutables cités | 100 |
 | Initiatives du portefeuille concernées | 15 |
 
@@ -2065,6 +2065,32 @@ Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 **Suite.** Faire lire au dessin la liste nominative des seize motifs plutôt que leur seul nombre, pour qu'un couple ajouté au registre apparaisse sur la planche sans retoucher le code.
 
 Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
+
+### `onze-champs-iscdf-ouverts` — Onze champs ISCED-F ouverts : le domaine le mieux planifié était le plus vide
+
+*Consignée le 2026-11-05.*
+
+**Constat.** Le domaine « études supérieures, spécialités et recherche » comptait quatre fiches, et ses onze sujets ISCED-F (`iscdf-00-generique` à `iscdf-10-services`) en comptaient zéro, tous marqués `a-creer`. Le plan de travail lui alloue pourtant 75 fiches et l’objectif de 1 000 entrées le décrivait comme la porte des études supérieures. Les domaines les plus minces en nombre — santé, méthodes, démarches, deux fiches chacun — attiraient l’œil ; le trou le plus large était ailleurs : un domaine qui existait, avec sa carte complète, et aucun contenu derrière ses onze entrées déclarées.
+
+**Ce que cela change.** Onze fiches ont été rédigées, une par champ ISCED-F, chacune prolongée par une situation concrète et un geste vérifiable : lire une fiche RNCP et repérer certificateur, niveau et période d’enregistrement ; se tester au lieu de relire ; relier les métiers d’un générique de film aux choix visibles ; vérifier un chiffre public par son périmètre, son unité et son producteur ; lire un devis de travaux ligne par ligne ; convertir un cumul de pluie en litres ; préparer une sauvegarde que l’on sait restaurer ; distinguer R et U sur une fiche d’isolation ; séparer AOP, IGP, STG et Label rouge ; décrire un dépistage organisé sans en faire une ordonnance ; préparer un trajet entre horaires théoriques et temps réel. Chaque fiche déclare une source institutionnelle précise, ouverte le 5 novembre 2026, et une note de statut datée ; les onze sujets du référentiel passent de `a-creer` à `partiel`, avec leur fiche nommée. Le catalogue passe de 85 à 96 fiches et de 59 à 70 prototypes. La page `objectif-1000.md`, la carte des lacunes, l’audit automatique, la file de relecture et les paquets sont régénérés depuis les sources, jamais recopiés. Le registre des grilles déclarait 85 cartes pour `.learning-catalogue-grid` : la capacité suit désormais le catalogue, et le motif de rangée incomplète a été réécrit avec le chiffre mesuré par la CI — 1 136,16 px sur 9 cadrages, contre 1 176,50 px auparavant, parce que 96 = 19 × 5 + 1 ne laisse pas le vide au même cadrage.
+
+**Preuves dans le dépôt :**
+
+- `docs/apprentissage/catalogue.toml`
+- `docs/apprentissage/referentiel.toml`
+- `docs/apprentissage/audit-automatique.md`
+- `docs/rd/carte-lacunes.md`
+- `apprendre.html`
+- `docs/rd/journal.md`
+- `outils/test_mutations_integration.py`
+
+**Contrôle qui la maintient :** `python3 outils/auditer-prototypes.py --verifier && python3 outils/construire-carte-lacunes.py --verifier && python3 outils/modele-grilles.py --verifier && python3 outils/test_cadrages.py && python3 outils/verifier-site-statique.py && python3 outils/verifier-integration.py && python3 outils/test_mutations_integration.py`
+
+**Limite — ce que cela ne prouve pas.** Une fiche par champ ISCED-F ouvre un point d’entrée, elle ne couvre pas une discipline : les onze sujets restent `partiel`, et le domaine garde 71 fiches d’écart sur sa cible de 75. Les sources ont été lues le 5 novembre 2026 et peuvent changer — cahiers des charges, programmes, recommandations de dépistage. Aucune relecture spécialisée n’a eu lieu, et les fiches de santé, de droit de la consommation et de sécurité informatique gardent un statut de prototype explicite. La page du portail EESR a répondu 503 deux fois : elle n’est citée nulle part et le sujet 00 s’appuie sur le vademecum de France Compétences. Les trois domaines les plus minces en nombre de fiches n’ont pas été servis par ce lot : le vide le plus large n’était pas le plus visible.
+
+**Suite.** Ouvrir un deuxième lot par domaine mince plutôt que par champ disciplinaire, en commençant par santé, méthodes et démarches ; vérifier au passage si le nombre d’entrées par champ ISCED-F mérite un quota propre dans `plan-1000.toml`.
+
+Initiatives liées : `cartographier-les-lacunes`, `veille-savoirs-evolutifs`, `coherence-textes-publics`.
 
 ## 3. Ce que ce registre ne dit pas
 

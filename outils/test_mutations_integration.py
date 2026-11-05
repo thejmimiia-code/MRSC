@@ -28,6 +28,7 @@ from __future__ import annotations
 import subprocess
 import sys
 import tempfile
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -68,11 +69,18 @@ class TestIntegration(unittest.TestCase):
         """Le total est recalculé depuis `catalogue.toml`, jamais recopié : il doit mordre."""
 
         def mentir(copie: Path) -> None:
+            # Le total et le nombre d'univers se recalculent depuis les sources :
+            # recopier le compte ici ferait de ce banc un contrôle qui se cite lui-même.
+            donnees = copie / "docs" / "apprentissage"
+            with (donnees / "catalogue.toml").open("rb") as source:
+                total = len(tomllib.load(source)["fiche"])
+            with (donnees / "referentiel.toml").open("rb") as source:
+                univers = len(tomllib.load(source)["domaine"])
             banc_mutations.muter(
                 copie,
                 "apprendre.html",
-                "85 fiches du catalogue à 15 univers",
-                "86 fiches du catalogue à 15 univers",
+                f"{total} fiches du catalogue à {univers} univers",
+                f"{total + 1} fiches du catalogue à {univers} univers",
             )
 
         resultat = executer(mentir)

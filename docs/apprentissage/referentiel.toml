@@ -607,65 +607,65 @@ fiches = ["recherche-distinguer-resume-citation"]
 [[domaine.sujet]]
 id = "iscdf-00-generique"
 titre = "ISCED-F 00 — programmes et qualifications génériques, interdisciplinarité et compétences transversales"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["etudes-lire-fiche-rncp"]
 
 [[domaine.sujet]]
 id = "iscdf-01-education"
 titre = "ISCED-F 01 — sciences de l’éducation, formation et recherche en pédagogie"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["apprendre-se-tester-plutot-que-relire"]
 
 [[domaine.sujet]]
 id = "iscdf-02-arts-humanites"
 titre = "ISCED-F 02 — arts, lettres, langues, philosophie et humanités"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["arts-lire-generique-film"]
 
 [[domaine.sujet]]
 id = "iscdf-03-sciences-sociales"
 titre = "ISCED-F 03 — sciences sociales, journalisme, information et communication"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["recherche-verifier-chiffre-public"]
 
 [[domaine.sujet]]
 id = "iscdf-04-gestion-droit"
 titre = "ISCED-F 04 — commerce, administration, gestion et droit"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["demarche-lire-devis-travaux"]
 
 [[domaine.sujet]]
 id = "iscdf-05-sciences-naturelles"
 titre = "ISCED-F 05 — sciences naturelles, mathématiques et statistiques"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["sciences-comprendre-pluie-millimetres"]
 
 [[domaine.sujet]]
 id = "iscdf-06-tic"
 titre = "ISCED-F 06 — technologies de l’information et de la communication"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["numerique-preparer-sauvegarde"]
 
 [[domaine.sujet]]
 id = "iscdf-07-ingenierie"
 titre = "ISCED-F 07 — ingénierie, industrie de transformation et construction"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["sciences-comprendre-isolation-r-et-u"]
 
 [[domaine.sujet]]
 id = "iscdf-08-agriculture"
 titre = "ISCED-F 08 — agriculture, foresterie, pêcheries et médecine vétérinaire"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["sante-reperer-signes-qualite-origine"]
 
 [[domaine.sujet]]
 id = "iscdf-09-sante-social"
 titre = "ISCED-F 09 — santé et protection sociale"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["sante-comprendre-depistage-organise"]
 
 [[domaine.sujet]]
 id = "iscdf-10-services"
 titre = "ISCED-F 10 — services, transport, tourisme, sécurité et services à la personne"
-statut = "a-creer"
-fiches = []
+statut = "partiel"
+fiches = ["geographie-preparer-trajet-horaires"]

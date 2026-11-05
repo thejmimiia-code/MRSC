@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fr" data-print-url="https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-preparer-sauvegarde.html">
+<head>
+  <meta name="mrsc-fiche-id" content="numerique-preparer-sauvegarde">
+  <meta name="mrsc-matiere" content="numerique">
+  <meta name="mrsc-niveau" content="2">
+  <meta name="mrsc-revue" content="2026-11-05">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choisir ce qui doit être sauvegardé, à quelle fréquence, et vérifier qu’une restauration fonctionne vraiment.">
+  <meta name="theme-color" content="#1d3268">
+  <title>Préparer une sauvegarde que l’on saura réellement restaurer — Fiche d’apprentissage | M.R.S.C</title>
+  <link rel="canonical" href="https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-preparer-sauvegarde.html">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../../assets/images/favicon-192.png">
+  <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <script src="../../assets/js/site.js" defer></script>
+  <script src="../../assets/js/navigation-parcours.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+  <header class="site-header">
+    <p class="site-status-note" id="site-header-status" role="note">Version R&amp;D — le site est en cours de développement.</p>
+    <div class="identity" id="site-header-identity">
+      <a href="../../index.html" data-site-home aria-label="M.R.S.C — Accueil">
+        <img class="brand-logo" src="../../assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
+      </a>
+      <div class="brand-copy">
+        <p class="brand-kicker">Association loi 1901</p>
+        <p class="brand-name">Mouvement Représentatif de la Société Civile</p>
+        <p class="brand-tagline">La force citoyenne</p>
+      </div>
+      <a class="identity-contact" href="mailto:assomrsc@gmail.com" aria-label="Écrire à assomrsc@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg>
+        assomrsc@gmail.com
+      </a>
+    </div>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <div class="nav-inner">
+        <a class="header-compact-brand" href="../../index.html" data-site-home aria-label="M.R.S.C — Accueil"><img src="../../assets/images/logo-mrsc.jpg" alt=""></a>
+        <div class="header-compact-tools">
+        <button class="nav-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="navigation-principale">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          Menu
+        </button>
+        <button class="header-compact-toggle" type="button" data-header-compact-toggle aria-expanded="true" aria-controls="site-header-status site-header-identity" hidden>Réduire</button>
+        <div class="nav-links" id="navigation-principale" data-primary-navigation>
+          <a href="../../index.html">Accueil</a>
+          <a href="../../ia-societe.html">IA &amp; société</a>
+          <a href="../../apprendre.html" aria-current="page">Apprendre</a>
+          <a href="../../simulateur.html">Simulateur</a>
+          <a href="../../documents.html">Documents</a>
+          <a href="../../liens-utiles.html">Liens utiles</a>
+          <a href="../../localisation.html">Localisation</a>
+          <a href="../../transparence.html">Transparence</a>
+          <a href="../../confidentialite.html">Vie privée et données</a>
+          <a href="../../nous-contacter.html">Nous contacter</a>
+        </div>
+        <details class="display-settings" data-display-settings hidden>
+          <summary title="Options d’affichage">Affichage <span class="display-settings-chevron" aria-hidden="true">⌄</span></summary>
+          <div class="display-settings-panel">
+            <p class="display-settings-title"><strong>Ajuster la lisibilité</strong></p>
+            <div class="display-settings-row" role="group" aria-label="Taille du texte">
+              <button class="display-control" type="button" data-text-decrease aria-label="A− — réduire la taille du texte" title="Réduire le texte">A−</button>
+              <span class="display-text-level" data-text-size-level role="status" aria-live="polite" aria-atomic="true">100 %</span>
+              <button class="display-control" type="button" data-text-increase aria-label="A+ — agrandir la taille du texte" title="Agrandir le texte">A+</button>
+            </div>
+            <div class="display-settings-actions">
+              <button class="display-control display-control-wide" type="button" data-contrast-toggle aria-pressed="false">Contraste renforcé</button>
+              <button class="display-control display-control-wide" type="button" data-spacing-toggle aria-pressed="false">Espacement du texte</button>
+            </div>
+            <p class="display-settings-note">Ces choix restent enregistrés sur cet appareil. Le zoom du navigateur reste disponible.</p>
+          </div>
+        </details>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main id="contenu">
+    <section class="learning-lesson-hero">
+      <div class="container">
+        <nav class="learning-breadcrumb" aria-label="Fil d’Ariane"><a href="../../index.html">Accueil</a><span aria-hidden="true">›</span><a href="../../apprendre.html">Apprendre</a><span aria-hidden="true">›</span><span aria-current="page">Fiche</span></nav>
+        <p class="eyebrow">Fiche autonome · Études supérieures — technologies de l’information (ISCED-F 06)</p>
+        <h1>Préparer une sauvegarde que l’on saura réellement restaurer</h1>
+        <p class="learning-lesson-lead">Choisir ce qui doit être sauvegardé, à quelle fréquence, et vérifier qu’une restauration fonctionne vraiment.</p>
+        <div class="learning-lesson-meta" aria-label="Repères de la fiche"><span>Études supérieures — technologies de l’information (ISCED-F 06)</span><span>Repère 2 · consolider</span><span>13 minutes environ</span><span>Horizon du contenu : Vie quotidienne et vie active — protection des données personnelles et professionnelles</span><span>Statut éditorial : Prototype à relire</span></div>
+        <p class="learning-level-note"><strong>État éditorial :</strong> Prototype rédigé le 5 novembre 2026. Les gestes décrits sont confrontés à deux fiches réflexes de Cybermalveillance.gouv.fr, consultées ce jour : l’une destinée aux particuliers, l’autre aux organisations. Les situations de l’exercice sont inventées. Une relecture par une personne compétente en sécurité informatique reste nécessaire.</p>
+        <p class="learning-level-note"><strong>Repère, pas étiquette :</strong> Relier des notions et s’entraîner dans de nouveaux exemples. Tu peux essayer la fiche sans prérequis, demander de l’aide ou choisir une autre matière.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container learning-article-layout">
+        <article class="learning-lesson-article">
+          <section aria-labelledby="objectif-fiche"><h2 id="objectif-fiche">Ce que tu vas essayer</h2><p>Construire une sauvegarde utile en partant de la perte acceptable, puis la tester par une restauration réelle.</p></section>
+          <section aria-labelledby="situation-fiche"><h2 id="situation-fiche">Une situation de départ</h2><p class="learning-example">Un ordinateur contient des photos de famille, un mémoire en cours et des factures. Une copie existe sur un disque externe branché en permanence. Un rançongiciel chiffre l’ordinateur : le disque externe est atteint lui aussi. Que fallait-il préparer autrement ?</p></section>
+          <aside class="learning-analogy" data-analogie aria-labelledby="analogie-fiche"><p class="eyebrow">Analogie du quotidien</p><h2 id="analogie-fiche">Comme un double de clé rangé ailleurs</h2><p>Un double de clé n’aide que s’il est rangé loin de la porte qu’il ouvre et s’il a été essayé. Une sauvegarde suit la même règle : elle doit être séparée de l’appareil d’origine, et son usage doit avoir été vérifié au moins une fois.</p><p class="learning-analogy-limit"><strong>Limite de l’image :</strong> Une clé ouvre une seule porte et ne vieillit pas ; une sauvegarde dépend d’un support, d’un logiciel et d’un format qui peuvent évoluer. Une copie connectée en permanence peut être chiffrée avec le reste, et une sauvegarde jamais restaurée reste une hypothèse. La fréquence des copies dépend de la perte que l’on accepte.</p></aside>
+          <section aria-labelledby="notions-fiche"><h2 id="notions-fiche">Quelques mots utiles</h2><ul class="learning-vocabulary"><li><strong>Sauvegarde</strong> — copie conservée séparément pour pouvoir restaurer des données après une perte.</li><li><strong>Perte acceptable</strong> — quantité de travail ou de données qu’une personne accepte de perdre entre deux copies.</li><li><strong>Copie déconnectée</strong> — copie conservée hors du réseau et du poste de travail, pour qu’une attaque ne l’atteigne pas.</li><li><strong>Test de restauration</strong> — essai réel de récupération de fichiers depuis la sauvegarde.</li><li><strong>Chiffrement par rançongiciel</strong> — attaque qui rend des fichiers inutilisables et réclame un paiement.</li></ul></section>
+          <section aria-labelledby="methode-fiche"><h2 id="methode-fiche">Une méthode possible</h2><ol class="learning-steps"><li>Liste ce qui ne peut pas être reconstruit : documents personnels, travaux en cours, factures, photos. Ce qui peut être retéléchargé n’a pas la même priorité qu’un fichier unique.</li><li>Estime la perte acceptable. Si perdre une journée de travail est trop, une copie quotidienne ne suffit pas ; il faut une copie plus fréquente ou un enregistrement continu.</li><li>Choisis un emplacement séparé. Un disque branché en permanence reste exposé ; une copie déconnectée après usage ou un service distant protège mieux contre un chiffreur de fichiers.</li><li>Vérifie ce que fait réellement l’outil : copies complètes ou différentielles, versions conservées, durée de rétention. Une synchronisation n’est pas toujours une sauvegarde : elle peut propager une suppression.</li><li>Teste une restauration sur un fichier ou un dossier, sans écraser l’original. Ce test est le seul élément qui prouve que la sauvegarde existe vraiment.</li><li>Écris la procédure en quelques lignes : où se trouve la copie, comment on la restaure, qui peut le faire. Une sauvegarde dépendante d’une seule personne est fragile.</li></ol></section>
+
+          <section aria-labelledby="exercice-fiche"><h2 id="exercice-fiche">À toi d’essayer</h2><p>Fictif. Trois personnes décrivent leur sauvegarde. A : copie automatique sur un disque externe toujours branché. B : copie hebdomadaire sur une clé, déconnectée le reste du temps, jamais testée. C : copie quotidienne sur un service distant, testée une fois par mois. Pour chacune, indique le risque principal et un geste simple d’amélioration.</p><details class="learning-answer"><summary>Afficher une aide</summary><p>Pense à trois questions : la copie est-elle séparée de l’appareil, à quelle fréquence, et a-t-elle déjà servi à restaurer quelque chose ?</p></details><details class="learning-answer"><summary>Afficher une correction possible</summary><ol class="learning-answer-list"><li>A — La copie est séparée physiquement, mais reste connectée : une attaque qui chiffre le poste peut atteindre le disque. Gestes utiles : débrancher le disque après la copie, ou conserver une version déconnectée en plus.</li><li>B — La copie est déconnectée, ce qui protège contre une attaque en ligne, mais elle est hebdomadaire et jamais testée. Gestes utiles : tester une restauration dès maintenant et vérifier la perte acceptable entre deux copies.</li><li>C — La copie est fréquente et testée, ce qui est solide. Le risque principal est la dépendance à un compte et à un accès réseau. Gestes utiles : conserver les codes d’accès ailleurs et vérifier les versions conservées.</li><li>Piège à éviter : croire qu’une synchronisation continue est une sauvegarde. Si un fichier est supprimé ou chiffré, la synchronisation peut le supprimer ou le chiffrer partout.</li></ol><p>La correction montre un chemin possible. Pour un calcul, vérifie aussi chaque étape et le résultat.</p></details></section>
+          <section aria-labelledby="retenir-fiche"><h2 id="retenir-fiche">Pour retenir</h2><ul class="learning-takeaways"><li>Une sauvegarde se juge à sa restauration, pas à son existence.</li><li>Une copie connectée en permanence peut être atteinte par la même attaque.</li><li>La fréquence dépend de la perte que l’on accepte, pas d’un rythme universel.</li><li>En cas d’attaque, on débranche et on ne paie pas ; on restaure une copie réputée saine.</li></ul><p><strong>Et dans une autre situation :</strong> Cette préparation concerne aussi un téléphone, un carnet de contacts ou un dossier professionnel. Elle ne garantit pas l’absence de perte ni la sécurité complète d’un système. Pour une organisation, une politique de sauvegarde et des personnes responsables restent nécessaires.</p></section>
+          <section class="learning-sources" aria-labelledby="sources-fiche"><h2 id="sources-fiche">Sources facultatives et limites</h2><p>Tu peux suivre cette fiche sans ouvrir ces liens : les notions, les exemples, la démarche, l’aide et la correction sont présentés sur cette page. Les sources facultatives servent à vérifier ou approfondir. Pour une décision ou une démarche réelle où les règles peuvent changer, vérifie les consignes actuelles d’un service compétent avant d’agir.</p><ul><li><a href="https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/rancongiciel-ransomware-particuliers" target="_blank" rel="noopener noreferrer">Cybermalveillance.gouv.fr — « Rançongiciel ou ransomware, que faire ? » (particuliers)</a> — Droits examinés le 2026-11-05 : licence source non vérifiée. Mode d’utilisation : référence factuelle uniquement, sans reprise de contenu. Fiche réflexe consultée le 5 novembre 2026 : sauvegardes régulières des données et du système, débranchement de l’appareil en cas d’attaque, refus de payer la rançon, restauration depuis une sauvegarde réputée saine. Les situations de l’exercice sont inventées. Aucun extrait n’est reproduit.</li><li><a href="https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/rancongiciels-ransomwares" target="_blank" rel="noopener noreferrer">Cybermalveillance.gouv.fr — « Rançongiciel ou ransomware » (organisations)</a> — Droits examinés le 2026-11-05 : licence source non vérifiée. Mode d’utilisation : référence factuelle uniquement, sans reprise de contenu. Fiche réflexe consultée le 5 novembre 2026 : copies déconnectées, vérification périodique du bon fonctionnement de la restauration, fréquence dépendant du risque acceptable de perte de données. Aucun extrait n’est reproduit.</li></ul><p class="learning-review-note">Date du contrôle initial indiqué : 2026-11-05. Une relecture indépendante reste à faire ; cette date ne garantit pas l’actualité future.</p></section>
+        </article>
+        <aside class="learning-lesson-aside" aria-label="Poursuivre l’apprentissage"><p class="eyebrow">Tu choisis la suite</p><h2>Un autre point de départ ?</h2><p>Change de matière, de repère ou de format quand tu le souhaites. La page ne note pas et ne suit pas ta progression.</p><a class="button" href="../../anglais-aventure.html#mondes">Retour aux mondes et parcours</a><div class="learning-voisines"><p><strong>Dans le même domaine</strong> — pistes facultatives, pas un cursus.</p><ul><li><a href="numerique-proteger-donnees.html">Choisir quelles informations partager en ligne</a><small>Fiche du corpus initial</small></li><li><a href="numerique-ia-usages.html">Choisir un usage de l’IA et garder la main</a><small>Fiche du corpus initial</small></li><li><a href="numerique-organiser-fichiers.html">Nommer et retrouver ses fichiers sans exposer ses données</a><small>Prototype à relire</small></li></ul><p><a href="../../apprendre.html#catalogue-fiches">Parcourir toutes les fiches</a></p><p><a href="../../simulateur.html">Découvrir le simulateur M.R.S.C</a></p></div></aside>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img class="footer-logo" src="../../assets/images/logo-mrsc.jpg" alt="Logo M.R.S.C — Mouvement Représentatif de la Société Civile">
+          <div><strong>Mouvement Représentatif de la Société Civile (M.R.S.C)</strong><p class="footer-tagline">La force citoyenne · Association loi 1901</p></div>
+        </div>
+        <nav class="footer-nav" aria-label="Navigation de pied de page">
+          <p class="footer-heading">Naviguer</p>
+          <ul>
+            <li><a href="../../index.html">Accueil</a></li>
+            <li><a href="../../ia-societe.html">IA &amp; société</a></li>
+            <li><a href="../../apprendre.html">Apprendre</a></li>
+            <li><a href="../../simulateur.html">Simulateur</a></li>
+            <li><a href="../../documents.html">Documents</a></li>
+            <li><a href="../../transparence.html">Transparence</a></li>
+            <li><a href="../../confidentialite.html">Vie privée et données</a></li>
+          </ul>
+        </nav>
+        <div class="footer-contact">
+          <p class="footer-heading">Nous contacter</p>
+          <a class="footer-mail" href="mailto:assomrsc@gmail.com">assomrsc@gmail.com</a>
+        </div>
+        <div class="footer-docs">
+          <p class="footer-heading">Documents</p>
+          <ul>
+            <li><a href="../../assets/documents/statuts-2020.pdf" target="_blank" rel="noopener noreferrer">Nos statuts</a></li>
+            <li><a href="../../documents.html">Tous les documents</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span data-year>2026</span> Mouvement Représentatif de la Société Civile (M.R.S.C).</p>
+        <ul class="footer-legal">
+          <li><a href="../../confidentialite.html">Vie privée et données</a></li>
+          <li><a href="../../nous-contacter.html">Contact</a></li>
+          <li><a href="../../transparence.html#licence">Licence</a></li>
+          <li><a href="#contenu">Haut de page</a></li>
+        </ul>
+        <p class="footer-rd">Version R&amp;D : les pages portent leur statut. <a href="../../transparence.html#rd-innovation">Méthode</a>&nbsp;·&nbsp;<a href="../../apprendre.html#boussole-savoirs">Boussole des savoirs</a>. <span class="footer-rd-print">Une copie imprimée n’est pas une version certifiée.</span></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

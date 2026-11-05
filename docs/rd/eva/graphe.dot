@@ -54,6 +54,7 @@ digraph memoire {
   "avancee:mesurer-avant-d-ecrire-ce-qu-un-flex-wrap-ferait-des-pistes-inegales" [shape=note, label="avancee:mesurer-avant-d-ecrire-ce-qu-un-flex-wrap-ferait-des-pistes-inegales"];
   "avancee:modele-confronte-au-navigateur" [shape=note, label="avancee:modele-confronte-au-navigateur"];
   "avancee:ni-mot-coupe-ni-carte-superposee" [shape=note, label="avancee:ni-mot-coupe-ni-carte-superposee"];
+  "avancee:onze-champs-iscdf-ouverts" [shape=note, label="avancee:onze-champs-iscdf-ouverts"];
   "avancee:onze-verifications-internes-jamais-vues-en-echec" [shape=note, label="avancee:onze-verifications-internes-jamais-vues-en-echec"];
   "avancee:page-ouverte-avant-citation" [shape=note, label="avancee:page-ouverte-avant-citation"];
   "avancee:phrase-publique-recalculee" [shape=note, label="avancee:phrase-publique-recalculee"];
@@ -123,6 +124,7 @@ digraph memoire {
   "docs/apprentissage/catalogue.toml" [shape=plaintext, label="docs/apprentissage/catalogue.toml"];
   "docs/apprentissage/file-relecture.md" [shape=plaintext, label="docs/apprentissage/file-relecture.md"];
   "docs/apprentissage/paquets-relecture.md" [shape=plaintext, label="docs/apprentissage/paquets-relecture.md"];
+  "docs/apprentissage/referentiel.toml" [shape=plaintext, label="docs/apprentissage/referentiel.toml"];
   "docs/apprentissage/sources-refusees.md" [shape=plaintext, label="docs/apprentissage/sources-refusees.md"];
   "docs/apprentissage/sources-refusees.toml" [shape=plaintext, label="docs/apprentissage/sources-refusees.toml"];
   "docs/rd/archives-et-poids-du-depot.md" [shape=plaintext, label="docs/rd/archives-et-poids-du-depot.md"];
@@ -418,6 +420,10 @@ digraph memoire {
   "avancee:ni-mot-coupe-ni-carte-superposee" -> "outils/mesurer-cadrages.cjs" [label="prouvée par"];
   "avancee:ni-mot-coupe-ni-carte-superposee" -> "outils/test_cadrages.py" [label="prouvée par"];
   "avancee:ni-mot-coupe-ni-carte-superposee" -> "outils/test_mutations_cadrages.py" [label="prouvée par"];
+  "avancee:onze-champs-iscdf-ouverts" -> "docs/apprentissage/audit-automatique.md" [label="prouvée par"];
+  "avancee:onze-champs-iscdf-ouverts" -> "docs/apprentissage/catalogue.toml" [label="prouvée par"];
+  "avancee:onze-champs-iscdf-ouverts" -> "docs/apprentissage/referentiel.toml" [label="prouvée par"];
+  "avancee:onze-champs-iscdf-ouverts" -> "docs/rd/carte-lacunes.md" [label="prouvée par"];
   "avancee:onze-verifications-internes-jamais-vues-en-echec" -> "docs/rd/inventaire-controles.md" [label="prouvée par"];
   "avancee:onze-verifications-internes-jamais-vues-en-echec" -> "outils/banc_mutations.py" [label="prouvée par"];
   "avancee:onze-verifications-internes-jamais-vues-en-echec" -> "outils/test_mutations_securite.py" [label="prouvée par"];
@@ -598,6 +604,7 @@ digraph memoire {
   "branche:cartographier-les-lacunes" -> "avancee:controle-preventif-qui-prouve-qu-il-mord" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:inventaire-des-controles-tenu-par-un-garde" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:memoire-index-regenerer-en-dernier" [label="a produit"];
+  "branche:cartographier-les-lacunes" -> "avancee:onze-champs-iscdf-ouverts" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:onze-verifications-internes-jamais-vues-en-echec" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:plan-eva-qui-se-laisse-contredire" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:taux-date-hors-de-la-fiche" [label="a produit"];
@@ -619,6 +626,7 @@ digraph memoire {
   "branche:coherence-textes-publics" -> "avancee:grilles-qualite-tracés-tranches" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:memoire-index-regenerer-en-dernier" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:ni-mot-coupe-ni-carte-superposee" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:onze-champs-iscdf-ouverts" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:phrase-publique-recalculee" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:plan-eva-qui-se-laisse-contredire" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:rangees-incompletes-chiffrees" [label="a produit"];
@@ -787,6 +795,7 @@ digraph memoire {
   "branche:sources-fermees-et-registre-des-refus" -> "avancee:registre-des-refus-verifie" [label="a produit"];
   "branche:sources-fermees-et-registre-des-refus" -> "phase:verite-et-refus" [label="servie par"];
   "branche:veille-savoirs-evolutifs" -> "avancee:memoire-a-trois-horizons" [label="a produit"];
+  "branche:veille-savoirs-evolutifs" -> "avancee:onze-champs-iscdf-ouverts" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:portail-declare-ou-erreur" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:refus-de-source-illisible" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:registre-des-refus-verifie" [label="a produit"];

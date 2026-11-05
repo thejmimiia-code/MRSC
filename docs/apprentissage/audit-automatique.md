@@ -6,15 +6,15 @@
 
 **Trois états, pas deux.** Un contrôle est `ok`, `à corriger` — le fait est faux et réparable sans jugement — ou `constat` : la machine voit un fait exact, mais elle ne peut pas dire s'il est acceptable. Un constat n'est pas un défaut : il se nomme ici pour qu'une personne tranche, et il n'empêche pas la page publique de dire la vérité, à condition qu'elle le dise.
 
-**Date de référence :** 2026-10-24 — dernière revue de contenu consignée au catalogue. Les contrôles, eux, sont exécutés au jour de lancement ; cette sortie ne dépend pas de ce jour.
+**Date de référence :** 2026-11-05 — dernière revue de contenu consignée au catalogue. Les contrôles, eux, sont exécutés au jour de lancement ; cette sortie ne dépend pas de ce jour.
 
 ## 1. État d'ensemble
 
 | Mesure | Valeur |
 | --- | ---: |
-| Prototypes audités | 59 |
+| Prototypes audités | 70 |
 | Contrôles automatiques par fiche | 17 |
-| Fiches sans aucun échec mécanique | 59 |
+| Fiches sans aucun échec mécanique | 70 |
 | Fiches avec au moins un échec | 0 |
 | Échecs mécaniques au total | 0 |
 | Fiches avec un constat à trancher par une personne | 1 |
@@ -34,8 +34,8 @@ Pour la ligne « page précise » : ces fiches ne citent que des portails (racin
 
 | Fait mesuré | Valeur |
 | --- | ---: |
-| Sources déclarées au total | 113 |
-| dont licence déclarée « non vérifiée » | 111 |
+| Sources déclarées au total | 125 |
+| dont licence déclarée « non vérifiée » | 123 |
 | Fiches sans aucune source | 0 |
 | Prochaine revue la plus proche | 2027-01-09 (info-lire-adresse-web) |
 | Fiches dont la revue de contenu est échue à la date de référence | 0 |
@@ -56,10 +56,21 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Distinguer un intérêt d’un frais sur un crédit fictif](fiches/econ-distinguer-interet-frais.html) | Budget, économie, consommation et travail | 17 | 0 | 0 | — |
 | [Lire une facture et repérer une échéance](fiches/econ-lire-facture.html) | Budget, économie, consommation et travail | 17 | 0 | 0 | — |
 | [Lire une mention de garantie sur un ticket fictif](fiches/econ-lire-mention-garantie.html) | Budget, économie, consommation et travail | 17 | 0 | 0 | — |
+| [Se tester plutôt que relire : ce que la recherche dit vraiment](fiches/apprendre-se-tester-plutot-que-relire.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
+| [Lire un générique de film : qui décide quoi dans l’image](fiches/arts-lire-generique-film.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
+| [Lire un devis de travaux : ce qui doit y figurer avant de dire oui](fiches/demarche-lire-devis-travaux.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
+| [Lire une fiche RNCP : la certification, son auteur et sa durée](fiches/etudes-lire-fiche-rncp.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
+| [Préparer un trajet : horaires théoriques, temps réel et correspondance](fiches/geographie-preparer-trajet-horaires.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
+| [Préparer une sauvegarde que l’on saura réellement restaurer](fiches/numerique-preparer-sauvegarde.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
 | [Lire une étude sans confondre résultats et certitudes](fiches/recherche-lire-etude.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
 | [Formuler une question et une hypothèse de recherche](fiches/recherche-question-hypothese.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
+| [Vérifier un chiffre public : périmètre, unité et producteur](fiches/recherche-verifier-chiffre-public.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
+| [Comprendre un programme de dépistage organisé, sans en faire une ordonnance](fiches/sante-comprendre-depistage-organise.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
+| [AOP, IGP, STG, Label rouge : ce que chaque signe garantit](fiches/sante-reperer-signes-qualite-origine.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
+| [Lire une fiche d’isolation : résistance R et coefficient U](fiches/sciences-comprendre-isolation-r-et-u.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
+| [Lire un cumul de pluie : millimètres, litres et surface](fiches/sciences-comprendre-pluie-millimetres.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 17 | 0 | 0 | — |
 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 17 | 0 | 0 | — |
 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 17 | 0 | 0 | — |
 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 17 | 0 | 0 | — |
