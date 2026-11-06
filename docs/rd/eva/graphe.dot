@@ -100,6 +100,7 @@ digraph memoire {
   "avancee:une-copie-de-banc-ne-se-mute-pas-par-ses-liens" [shape=note, label="avancee:une-copie-de-banc-ne-se-mute-pas-par-ses-liens"];
   "avancee:une-dette-d-affichage-se-compte-ou-se-perd" [shape=note, label="avancee:une-dette-d-affichage-se-compte-ou-se-perd"];
   "avancee:une-ecriture-n-est-pas-un-dessin-et-ce-qui-doit-rester-fixe-se-declare" [shape=note, label="avancee:une-ecriture-n-est-pas-un-dessin-et-ce-qui-doit-rester-fixe-se-declare"];
+  "avancee:une-formule-ancienne-nest-pas-une-explication" [shape=note, label="avancee:une-formule-ancienne-nest-pas-une-explication"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" [shape=note, label="avancee:une-largeur-de-piste-se-calcule-pas-se-choisit"];
   "avancee:une-planche-qui-repond-lit-le-registre" [shape=note, label="avancee:une-planche-qui-repond-lit-le-registre"];
   "avancee:une-sentinelle-reseau-se-teste-sans-reseau" [shape=note, label="avancee:une-sentinelle-reseau-se-teste-sans-reseau"];
@@ -599,6 +600,10 @@ digraph memoire {
   "avancee:une-ecriture-n-est-pas-un-dessin-et-ce-qui-doit-rester-fixe-se-declare" -> "docs/rd/grilles-dynamiques.toml" [label="prouvée par"];
   "avancee:une-ecriture-n-est-pas-un-dessin-et-ce-qui-doit-rester-fixe-se-declare" -> "outils/modele-grilles.py" [label="prouvée par"];
   "avancee:une-ecriture-n-est-pas-un-dessin-et-ce-qui-doit-rester-fixe-se-declare" -> "outils/test_modele_grilles.py" [label="prouvée par"];
+  "avancee:une-formule-ancienne-nest-pas-une-explication" -> "docs/rd/inventaire-controles.md" [label="prouvée par"];
+  "avancee:une-formule-ancienne-nest-pas-une-explication" -> "outils/test_mutations_integration.py" [label="prouvée par"];
+  "avancee:une-formule-ancienne-nest-pas-une-explication" -> "outils/verifier-integration.py" [label="prouvée par"];
+  "avancee:une-formule-ancienne-nest-pas-une-explication" -> "transparence.html" [label="prouvée par"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" -> "docs/rd/grilles-dynamiques.toml" [label="prouvée par"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" -> "docs/rd/paliers-affichage.toml" [label="prouvée par"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" -> "outils/modele-grilles.py" [label="prouvée par"];
@@ -630,6 +635,7 @@ digraph memoire {
   "branche:co-conception-et-essais" -> "avancee:reponse-chiffree-reliee-au-test" [label="a produit"];
   "branche:co-conception-et-essais" -> "avancee:un-balayage-vide-ne-vaut-pas-un-site-sans-violation" [label="a produit"];
   "branche:co-conception-et-essais" -> "avancee:un-banc-coute-le-prix-de-ce-qu-il-eprouve" [label="a produit"];
+  "branche:co-conception-et-essais" -> "avancee:une-formule-ancienne-nest-pas-une-explication" [label="a produit"];
   "branche:co-conception-et-essais" -> "phase:apprentissages-et-relecture" [label="servie par"];
   "branche:coherence-textes-publics" -> "avancee:cadrages-personnalises-au-pixel" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
@@ -654,6 +660,7 @@ digraph memoire {
   "branche:coherence-textes-publics" -> "avancee:un-majorant-qu-on-ne-chiffre-pas-se-lit-comme-une-mesure" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-titre-tronque-n-est-pas-une-faute-de-gout" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-vide-assume-porte-son-motif" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:une-formule-ancienne-nest-pas-une-explication" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:une-planche-qui-repond-lit-le-registre" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" [label="a produit"];
   "branche:coherence-textes-publics" -> "phase:couverture-des-branches" [label="servie par"];

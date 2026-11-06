@@ -1005,6 +1005,27 @@ def fichiers_du_site() -> None:
     )
     transparence = (RACINE / "transparence.html").read_text(encoding="utf-8")
     transparence_texte = unescape(transparence)
+    # 6 novembre 2026 : la personne utilisatrice demande que cette page parle
+    # aux citoyennes et aux citoyens avec des mots d'aujourd'hui, ancrés dans
+    # la vie de tous les jours, plutôt que de reprendre une formule ancienne
+    # qui « pose des questions » au lieu d'expliquer. Le contrôle refuse son
+    # retour, y compris dans l'encadré signé, et exige le titre et l'ancrage.
+    # La formule reste dans l'adresse du dépôt externe du simulateur : c'est un
+    # lien vers un dépôt tiers, pas une parole du site, et on ne le réécrit pas.
+    verifier(
+        "La page Transparence parle aux citoyennes et aux citoyens sans ancienne formule",
+        "Un outil au service des citoyennes et des citoyens" in transparence_texte
+        and "la vie de tous les jours" in transparence_texte
+        and "citoyenne et chaque citoyen" in transparence_texte
+        and not any(
+            formule in transparence_texte
+            for formule in (
+                "Un outil du peuple, pour le peuple",
+                "par le peuple et pour le peuple",
+                "par la voix de son fondateur",
+            )
+        ),
+    )
     verifier(
         "Le registre de transparence identifie ÉVA comme proposition IA à relire",
         all(

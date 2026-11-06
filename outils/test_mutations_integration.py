@@ -13,11 +13,18 @@ Trois fautes sont plantées dans une copie complète du dépôt :
 2. un nombre annoncé dans `apprendre.html` qui ne correspond plus au catalogue ;
 3. une page publique supprimée du dépôt.
 
+Trois autres fautes plantent le retour de l'ancienne formule de la page
+Transparence, la disparition du titre qui nomme les citoyennes et les citoyens,
+et celle de la phrase ancrée dans la vie de tous les jours : le 6 novembre 2026,
+cette page a été réécrite à la demande de la personne utilisatrice, et un
+contrôle qui ne mord pas sur sa propre formulation ne protège rien.
+
 Ce banc est le plus lent du dépôt : `verifier-integration.py` lance lui-même
 quatre outils et monte un serveur, soit une vingtaine de secondes par exécution.
-Trois fautes suffisent — elles couvrent les trois familles que la porte vérifie
-elle-même : le périmètre publié, les chiffres recalculés, la présence des pages.
-Les routes HTTP, elles, ont déjà leur propre contrôle (`verifier-securite.py`).
+Six fautes couvrent les familles que la porte vérifie elle-même : le périmètre
+publié, les chiffres recalculés, la présence des pages et les trois clauses du
+contrôle éditorial. Les routes HTTP, elles, ont déjà leur propre contrôle
+(`verifier-securite.py`).
 
 Usage :
     python3 outils/test_mutations_integration.py
@@ -92,6 +99,61 @@ class TestIntegration(unittest.TestCase):
         resultat = executer(lambda copie: (copie / "eva.html").unlink())
         self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
         self.assertIn("ÉCHEC Page présente : eva.html", resultat.stdout)
+
+    def test_ancienne_formule_refusee(self) -> None:
+        """Remettre « Un outil du peuple, pour le peuple » doit faire échouer la porte."""
+
+        def revenir(copie: Path) -> None:
+            banc_mutations.muter(
+                copie,
+                "transparence.html",
+                "<h2>Un outil au service des citoyennes et des citoyens</h2>",
+                "<h2>Un outil du peuple, pour le peuple</h2>",
+            )
+
+        resultat = executer(revenir)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn(
+            "ÉCHEC La page Transparence parle aux citoyennes et aux citoyens sans ancienne formule",
+            resultat.stdout,
+        )
+
+    def test_formule_signee_reintroduite_refusee(self) -> None:
+        """L'ancienne formule ne doit pas revenir non plus dans l'encadré mis en avant."""
+
+        def citer(copie: Path) -> None:
+            banc_mutations.muter(
+                copie,
+                "transparence.html",
+                "Pas de formule &agrave; reprendre :",
+                "&laquo; Nous portons cet outil pour une gestion de la nation "
+                "r&eacute;ellement faite &ldquo;par le peuple et pour le peuple&rdquo;. &raquo;",
+            )
+
+        resultat = executer(citer)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn(
+            "ÉCHEC La page Transparence parle aux citoyennes et aux citoyens sans ancienne formule",
+            resultat.stdout,
+        )
+
+    def test_ancrage_quotidien_retire_refuse(self) -> None:
+        """Un titre juste ne suffit pas : la phrase d'ancrage concret doit rester."""
+
+        def generaliser(copie: Path) -> None:
+            banc_mutations.muter(
+                copie,
+                "transparence.html",
+                "la vie de tous les jours",
+                "les grandes orientations",
+            )
+
+        resultat = executer(generaliser)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn(
+            "ÉCHEC La page Transparence parle aux citoyennes et aux citoyens sans ancienne formule",
+            resultat.stdout,
+        )
 
 
 if __name__ == "__main__":
