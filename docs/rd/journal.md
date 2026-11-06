@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-11-06 — Un helper d'essai ne doit pas faire tomber une mesure qui n'est pas la sienne
+
+- **Initiative :** `coherence-textes-publics`.
+- **Signal :** la vérification de la PR #279 (`42203805424`, job `graphismes`) sort **12/13** : le premier essai, « Choix immédiat, contenu préservé, réglages existants et persistance entre pages », expire après 30 s dans `ouvrirPanneau` sur `apprendre.html`, en attendant `[data-site-layout-settings].open === true`. Le même dépôt, relancé en local sur deux serveurs neufs (4173 et 4180, moteur interne actif), sort **13/13** à deux reprises. Les journaux du job ne sont pas joignables depuis cet atelier : la cause a été lue dans les **annotations** du check-run (`127845301731`), puis confirmée dans le journal du job par `fetch_page`.
+- **Cause :** `ouvrirPanneau` n'est pas un essai de l'ouverture, c'est le chemin vers les réglages que d'autres essais mesurent. Il cliquait sur le `<summary>` aux coordonnées, puis au clavier avec `Entrée`, puis attendait 30 s. Un élément superposé peut avaler les deux gestes ; l'attente par défaut masquait en plus le palier qui avait échoué. Ce n'est pas le correctif du 5 novembre : l'essai échoue avant lui, et les douze autres, dont les deux nouveaux, sont verts en CI.
+- **Décision :** trois paliers, dont deux gardent les gestes réels — clic puis clavier — avec une attente courte de 2 s chacun ; dernier recours, un clic DOM sans coordonnées, appliqué **seulement si le panneau est encore fermé** pour ne pas le refermer après une ouverture tardive du clavier. Le nombre d'essais, de garde-fous et de mutations ne change pas : c'est la résistance du banc, pas un nouveau contrôle produit.
+- **Contrôles exécutés :** suite Chromium locale **13/13** après le durcissement · `node outils/test_test_experience.mjs` → 13 essais comptés et nommés · `node --check outils/test-experience.cjs` · porte courante du dépôt rejouée.
+- **Limites :** un helper plus tolérant peut masquer une vraie régression de l'ouverture au clic ; aucun essai dédié ne mesure précisément ce geste, et ce n'est pas ajouté ici. Le clic DOM de dernier recours est un geste de préparation, pas une preuve d'accessibilité du `<summary>`.
+- **Suite :** relancer la CI de la PR #279, puis seulement fusionner, attendre le déploiement Pages et relire `verifier-feuille-servie.py` contre l'URL publique. À ce stade, le correctif n'est toujours **pas publié**.
+
 ## 2026-11-05 — Les deux boutons de l'en-tête sont enfin le même bouton
 
 - **Initiative :** `coherence-textes-publics`.

@@ -172,20 +172,39 @@ async function ouvrirPanneau(page) {
   // Les réglages sont désormais des lignes du panneau « Personnalisation » :
   // il faut l'ouvrir avant de pouvoir atteindre « Présentation ».
   await ouvrirPersonnalisation(page);
-  const ouvert = await page.$eval('[data-site-layout-settings]', (element) => element.open);
-  if (ouvert) return;
+  const details = '[data-site-layout-settings]';
   const resume = '[data-site-layout-settings] > summary';
+  const estOuvert = () => document.querySelector('[data-site-layout-settings]')?.open === true;
+  if (await page.$eval(details, (element) => element.open)) return;
   await page.click(resume);
   try {
-    await attendre(page, () => document.querySelector('[data-site-layout-settings]')?.open === true, { timeout: 2000 });
+    await attendre(page, estOuvert, { timeout: 2000 });
+    return;
   } catch (_erreur) {
     // Sur le simulateur, la barre de retour est collante : au clic suivant, un
     // élément peut recouvrir le résumé et avaler le clic. L'activation au
     // clavier vise le contrôle, pas ses coordonnées.
-    await page.focus(resume);
-    await page.keyboard.press('Enter');
-    await attendre(page, () => document.querySelector('[data-site-layout-settings]')?.open === true);
   }
+  await page.focus(resume);
+  await page.keyboard.press('Enter');
+  try {
+    await attendre(page, estOuvert, { timeout: 2000 });
+    return;
+  } catch (_erreur) {
+    // Le 6 novembre 2026, la CI a perdu le premier essai sur `apprendre.html` :
+    // ni le clic ni Entrée n'avaient ouvert le <details>, et l'attente de 30 s
+    // masquait la cause (12/13 en CI, 13/13 en local sur deux serveurs neufs).
+    // Ce helper ne mesure pas l'ouverture : il sert à atteindre les réglages
+    // qu'un autre essai mesure. Un dernier clic DOM, sans coordonnées, évite
+    // qu'un élément superposé fasse échouer une mesure qui n'est pas la sienne.
+    // Il ne s'applique que si le panneau est encore fermé, pour ne pas le
+    // refermer après une ouverture tardive du clavier.
+  }
+  await page.evaluate(() => {
+    const bloc = document.querySelector('[data-site-layout-settings]');
+    if (bloc && !bloc.open) bloc.querySelector('summary').click();
+  });
+  await attendre(page, estOuvert);
 }
 
 // Mesure commune aux deux panneaux flottants du site. Depuis le 5 novembre 2026,
