@@ -107,6 +107,7 @@ digraph memoire {
   "avancee:une-page-de-transparence-se-lit-dans-un-ordre" [shape=note, label="avancee:une-page-de-transparence-se-lit-dans-un-ordre"];
   "avancee:une-planche-qui-repond-lit-le-registre" [shape=note, label="avancee:une-planche-qui-repond-lit-le-registre"];
   "avancee:une-sentinelle-reseau-se-teste-sans-reseau" [shape=note, label="avancee:une-sentinelle-reseau-se-teste-sans-reseau"];
+  "avancee:une-structure-qui-convient-nest-pas-un-texte-relu" [shape=note, label="avancee:une-structure-qui-convient-nest-pas-un-texte-relu"];
   "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" [shape=note, label="avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques"];
   "branche:autres-langues-et-contextes" [shape=ellipse, label="branche:autres-langues-et-contextes"];
   "branche:cartographier-les-lacunes" [shape=ellipse, label="branche:cartographier-les-lacunes"];
@@ -632,6 +633,10 @@ digraph memoire {
   "avancee:une-sentinelle-reseau-se-teste-sans-reseau" -> "outils/test_verifier_maj_amont.py" [label="prouvée par"];
   "avancee:une-sentinelle-reseau-se-teste-sans-reseau" -> "outils/verifier-maj-amont.py" [label="prouvée par"];
   "avancee:une-sentinelle-reseau-se-teste-sans-reseau" -> "simulateur/PROVENANCE.json" [label="prouvée par"];
+  "avancee:une-structure-qui-convient-nest-pas-un-texte-relu" -> "docs/rd/journal.md" [label="prouvée par"];
+  "avancee:une-structure-qui-convient-nest-pas-un-texte-relu" -> "docs/rd/portefeuille.toml" [label="prouvée par"];
+  "avancee:une-structure-qui-convient-nest-pas-un-texte-relu" -> "outils/verifier-integration.py" [label="prouvée par"];
+  "avancee:une-structure-qui-convient-nest-pas-un-texte-relu" -> "transparence.html" [label="prouvée par"];
   "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" -> "assets/css/site.css" [label="prouvée par"];
   "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" -> "outils/test-experience.cjs" [label="prouvée par"];
   "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" -> "outils/test_mutations_affichages.py" [label="prouvée par"];
@@ -654,6 +659,7 @@ digraph memoire {
   "branche:co-conception-et-essais" -> "avancee:un-banc-coute-le-prix-de-ce-qu-il-eprouve" [label="a produit"];
   "branche:co-conception-et-essais" -> "avancee:une-formule-ancienne-nest-pas-une-explication" [label="a produit"];
   "branche:co-conception-et-essais" -> "avancee:une-page-de-transparence-se-lit-dans-un-ordre" [label="a produit"];
+  "branche:co-conception-et-essais" -> "avancee:une-structure-qui-convient-nest-pas-un-texte-relu" [label="a produit"];
   "branche:co-conception-et-essais" -> "phase:apprentissages-et-relecture" [label="servie par"];
   "branche:coherence-textes-publics" -> "avancee:cadrages-personnalises-au-pixel" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
@@ -682,6 +688,7 @@ digraph memoire {
   "branche:coherence-textes-publics" -> "avancee:une-formule-ancienne-nest-pas-une-explication" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:une-page-de-transparence-se-lit-dans-un-ordre" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:une-planche-qui-repond-lit-le-registre" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:une-structure-qui-convient-nest-pas-un-texte-relu" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" [label="a produit"];
   "branche:coherence-textes-publics" -> "phase:couverture-des-branches" [label="servie par"];
   "branche:coherence-textes-publics" -> "phase:persona-de-conception" [label="servie par"];

@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-11-06 — « Cela correspond » : validation humaine de la structure publiée
+
+- **Initiative :** `coherence-textes-publics`, `co-conception-et-essais`.
+- **Signal :** après la fusion de la PR #281, le déploiement Pages et la relecture du HTML réellement servi, la personne utilisatrice répond « Cela correspond » à la question « dites-moi ce que donne la page à l'écran ». Elle clôt le signal du même jour : « la page transparence.html mélange tous les sujets … c'est vraiment incompréhensible ».
+- **Décision :** consigner cette validation **pour ce qu'elle dit**, sans l'étendre. Elle porte sur la structure de `transparence.html` telle qu'elle est publiée : sommaire de six questions, sept parties numérotées, registre de traçabilité remonté en partie 3, prospective et relevés mesurés séparés en parties 6 et 7. Ce n'est **pas** une relecture éditoriale du fond : aucun statut de fiche n'est modifié, aucune entrée n'est ajoutée à `relectures.toml`, et le texte du 6 novembre (titre, déclaration collective, signature) reste à faire relire par l'association. Le contrôle humain du bouton « Menu » consigné le même jour est un autre signal, avec un autre périmètre ; les deux ne se cumulent pas en une validation générale du site.
+- **Contrôles exécutés :** aucun nouveau contrôle technique n'est lancé pour cette réponse. La chaîne déjà consignée — CI `42257744930`, déploiement `42262076783`, en-têtes `42263372965`, vérification post-fusion `42262076779` — et la relecture du HTML public (sommaire, parties 1 à 3, 6 et 7, 107 fiches / 81 prototypes, première des trois fiches servie) restent les preuves. Les portes du dépôt sont relancées après cette seule trace documentaire.
+- **Limites :** une validation de lisibilité sur un appareil et un navigateur ne vaut ni essai multi-navigateurs, ni lecture avec lecteur d'écran, ni mesure à 320 px / 130 % de texte. Le débordement horizontal préexistant de 24 px à `320-130` reste ouvert. Les trois fiches du lot R&D, la note de prospective non tranchée et la décision d'atelier sur la citation signée restent sans relecture humaine consignée.
+- **Suite :** si l'association veut aller plus loin, faire relire le **fond** des textes par une personne compétente et consigner cette relecture dans `relectures.toml` pour les fiches concernées ; remesurer les six configurations dès qu'un navigateur est disponible ; traiter séparément `320-130`. Ne rien déclarer « validé » au-delà de la structure confirmée ici.
+
 ## 2026-11-06 — La page Transparence remet chaque sujet à sa place
 
 - **Initiative :** `coherence-textes-publics`.
