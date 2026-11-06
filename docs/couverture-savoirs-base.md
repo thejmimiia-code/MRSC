@@ -1,6 +1,6 @@
 # Couverture des savoirs de base — carte éditoriale vivante
 
-**Dernière revue éditoriale déclarée : 2026-11-05.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
+**Dernière revue éditoriale déclarée : 2026-11-06.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
 
 L’objectif de couverture est d’élargir progressivement des premiers pas utiles vers les matières générales et professionnelles, les études supérieures, les spécialisations et la recherche. Cet objectif n’est pas l’état actuel du catalogue : les lacunes sont indiquées et la carte reste évolutive.
 
@@ -27,7 +27,7 @@ Lire, comprendre, écrire et échanger dans des situations variées.
 | Lire des textes plus longs, des formulaires et des documents | Début de couverture — à approfondir | [`fr-reperer-idee-texte`](../apprendre/fiches/fr-reperer-idee-texte.html) |
 | Vocabulaire, phrases, grammaire et orthographe en contexte | Début de couverture — à approfondir | [`fr-comprendre-mot-contexte`](../apprendre/fiches/fr-comprendre-mot-contexte.html)<br>[`fr-lire-ponctuation`](../apprendre/fiches/fr-lire-ponctuation.html) |
 | Prendre la parole, expliquer et dialoguer | Début de couverture — à approfondir | [`fr-preparer-explication-orale`](../apprendre/fiches/fr-preparer-explication-orale.html) |
-| Résumer, argumenter et adapter le ton au destinataire | Début de couverture — à approfondir | [`fr-argumenter-avec-exemple`](../apprendre/fiches/fr-argumenter-avec-exemple.html) |
+| Résumer, argumenter et adapter le ton au destinataire | Début de couverture — à approfondir | [`fr-argumenter-avec-exemple`](../apprendre/fiches/fr-argumenter-avec-exemple.html)<br>[`fr-distinguer-fait-interpretation`](../apprendre/fiches/fr-distinguer-fait-interpretation.html) |
 
 **Bilan indicatif :** 2 sujet(s) avec une fiche signalée comme disponible, 4 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 6 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
 
@@ -59,7 +59,7 @@ Développer les nombres, le calcul, la géométrie, les mesures, les estimations
 | Géométrie de base et mesure d’une surface | Début de couverture — à approfondir | [`maths-surface`](../apprendre/fiches/maths-surface.html)<br>[`maths-reperer-angle-droit`](../apprendre/fiches/maths-reperer-angle-droit.html) |
 | Mesures, unités et conversions dans plusieurs domaines | Début de couverture — à approfondir | [`maths-convertir-unites`](../apprendre/fiches/maths-convertir-unites.html) |
 | Estimation, arrondis et vérification d’un ordre de grandeur | Début de couverture — à approfondir | [`maths-estimer-calcul`](../apprendre/fiches/maths-estimer-calcul.html) |
-| Probabilités, hasard et incertitude | Début de couverture — à approfondir | [`maths-probabilite-tirage`](../apprendre/fiches/maths-probabilite-tirage.html) |
+| Probabilités, hasard et incertitude | Début de couverture — à approfondir | [`maths-probabilite-tirage`](../apprendre/fiches/maths-probabilite-tirage.html)<br>[`maths-comparer-deux-releves`](../apprendre/fiches/maths-comparer-deux-releves.html) |
 | Algèbre, équations et raisonnement plus avancé | Début de couverture — à approfondir | [`maths-equation-simple`](../apprendre/fiches/maths-equation-simple.html) |
 
 **Bilan indicatif :** 5 sujet(s) avec une fiche signalée comme disponible, 6 sujet(s) commencés mais incomplets, 0 sujet(s) à créer, 0 sujet(s) demandant une relecture spécialisée sur 11 sujets suivis. Ces comptes décrivent la carte éditoriale, pas une mesure du niveau d’apprentissage.
@@ -185,7 +185,7 @@ Comprendre les fonctions d’un système informatique, représenter des informat
 | Systèmes d’exploitation, fichiers, permissions et processus | Début de couverture — à approfondir | [`info-systeme-exploitation`](../apprendre/fiches/info-systeme-exploitation.html) |
 | Réseaux, Internet, adressage, noms de domaine et protocoles | Début de couverture — à approfondir | [`info-lire-adresse-web`](../apprendre/fiches/info-lire-adresse-web.html) |
 | Bases de données, requêtes, Web et échanges de données | Début de couverture — à approfondir | [`info-table-requete-web`](../apprendre/fiches/info-table-requete-web.html) |
-| Tester, déboguer, documenter et faire évoluer un programme | Début de couverture — à approfondir | [`prog-tester-exemples`](../apprendre/fiches/prog-tester-exemples.html) |
+| Tester, déboguer, documenter et faire évoluer un programme | Début de couverture — à approfondir | [`prog-tester-exemples`](../apprendre/fiches/prog-tester-exemples.html)<br>[`prog-lire-trace-erreur`](../apprendre/fiches/prog-lire-trace-erreur.html) |
 | Conception logicielle, travail collectif, licences et code ouvert | Début de couverture — à approfondir | [`prog-lire-licence-logiciel`](../apprendre/fiches/prog-lire-licence-logiciel.html) |
 | Microcontrôleurs, objets connectés et systèmes embarqués | Début de couverture — à approfondir | [`info-objet-connecte-local-distant`](../apprendre/fiches/info-objet-connecte-local-distant.html) |
 

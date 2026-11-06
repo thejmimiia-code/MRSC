@@ -19,12 +19,17 @@ et celle de la phrase ancrée dans la vie de tous les jours : le 6 novembre 2026
 cette page a été réécrite à la demande de la personne utilisatrice, et un
 contrôle qui ne mord pas sur sa propre formulation ne protège rien.
 
+Quatre fautes de plus éprouvent la restructuration du 6 novembre 2026, après le
+retour « la page mélange tous les sujets » : sommaire retiré, registre des
+sources à nouveau enterré sous la R&D, repère de partie effacé et ancre du
+sommaire morte. Sans elles, une page qui redeviendrait illisible resterait verte.
+
 Ce banc est le plus lent du dépôt : `verifier-integration.py` lance lui-même
 quatre outils et monte un serveur, soit une vingtaine de secondes par exécution.
-Six fautes couvrent les familles que la porte vérifie elle-même : le périmètre
-publié, les chiffres recalculés, la présence des pages et les trois clauses du
-contrôle éditorial. Les routes HTTP, elles, ont déjà leur propre contrôle
-(`verifier-securite.py`).
+Onze fautes couvrent les familles que la porte vérifie elle-même : le périmètre
+publié, les chiffres recalculés, la présence des pages, les trois clauses du
+contrôle éditorial et l'ordre de lecture. Les routes HTTP, elles, ont déjà leur
+propre contrôle (`verifier-securite.py`).
 
 Usage :
     python3 outils/test_mutations_integration.py
@@ -154,6 +159,46 @@ class TestIntegration(unittest.TestCase):
             "ÉCHEC La page Transparence parle aux citoyennes et aux citoyens sans ancienne formule",
             resultat.stdout,
         )
+
+    def test_sommaire_retire_refuse(self) -> None:
+        """Sans le sommaire, la page n'a plus de fil : la porte doit le dire."""
+
+        def retirer(copie: Path) -> None:
+            banc_mutations.muter(copie, "transparence.html", 'id="lire-cette-page"', 'id="sans-sommaire"')
+
+        resultat = executer(retirer)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn("La page Transparence remet chaque sujet", resultat.stdout)
+
+    def test_registre_a_nouveau_enterre_refuse(self) -> None:
+        """Le registre des sources ne doit plus être une section anonyme en fin de page."""
+
+        def enterrer(copie: Path) -> None:
+            banc_mutations.muter(copie, "transparence.html", 'id="registre-tracabilite"', 'id="registre-decale"')
+
+        resultat = executer(enterrer)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn("ancre(s) morte(s)", resultat.stdout)
+
+    def test_repere_de_partie_efface_refuse(self) -> None:
+        """Une partie sans son repère « Partie n / 7 » redevient un bloc sans contexte."""
+
+        def effacer(copie: Path) -> None:
+            banc_mutations.muter(copie, "transparence.html", "Partie 6 / 7 &middot;", "Prospective &middot;")
+
+        resultat = executer(effacer)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn("parties numérotées", resultat.stdout)
+
+    def test_ancre_du_sommaire_morte_refusee(self) -> None:
+        """Un lien du sommaire qui ne mène nulle part est un sommaire qui ment."""
+
+        def casser(copie: Path) -> None:
+            banc_mutations.muter(copie, "transparence.html", 'href="#signaler"', 'href="#signalement-absent"')
+
+        resultat = executer(casser)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn("ancre(s) morte(s)", resultat.stdout)
 
 
 if __name__ == "__main__":

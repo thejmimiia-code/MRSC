@@ -6,15 +6,15 @@
 
 **Trois états, pas deux.** Un contrôle est `ok`, `à corriger` — le fait est faux et réparable sans jugement — ou `constat` : la machine voit un fait exact, mais elle ne peut pas dire s'il est acceptable. Un constat n'est pas un défaut : il se nomme ici pour qu'une personne tranche, et il n'empêche pas la page publique de dire la vérité, à condition qu'elle le dise.
 
-**Date de référence :** 2026-11-05 — dernière revue de contenu consignée au catalogue. Les contrôles, eux, sont exécutés au jour de lancement ; cette sortie ne dépend pas de ce jour.
+**Date de référence :** 2026-11-06 — dernière revue de contenu consignée au catalogue. Les contrôles, eux, sont exécutés au jour de lancement ; cette sortie ne dépend pas de ce jour.
 
 ## 1. État d'ensemble
 
 | Mesure | Valeur |
 | --- | ---: |
-| Prototypes audités | 78 |
+| Prototypes audités | 81 |
 | Contrôles automatiques par fiche | 17 |
-| Fiches sans aucun échec mécanique | 78 |
+| Fiches sans aucun échec mécanique | 81 |
 | Fiches avec au moins un échec | 0 |
 | Échecs mécaniques au total | 0 |
 | Fiches avec un constat à trancher par une personne | 1 |
@@ -34,8 +34,8 @@ Pour la ligne « page précise » : ces fiches ne citent que des portails (racin
 
 | Fait mesuré | Valeur |
 | --- | ---: |
-| Sources déclarées au total | 135 |
-| dont licence déclarée « non vérifiée » | 132 |
+| Sources déclarées au total | 138 |
+| dont licence déclarée « non vérifiée » | 135 |
 | Fiches sans aucune source | 0 |
 | Prochaine revue la plus proche | 2027-01-09 (info-lire-adresse-web) |
 | Fiches dont la revue de contenu est échue à la date de référence | 0 |
@@ -90,9 +90,11 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Lire une licence avant de réutiliser un programme](fiches/prog-lire-licence-logiciel.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
+| [Lire une trace d’erreur et isoler la plus petite modification](fiches/prog-lire-trace-erreur.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Tester un programme avec des cas simples](fiches/prog-tester-exemples.html) | Informatique, algorithmique et langages de programmation | 17 | 0 | 0 | — |
 | [Présenter une idée avec une raison et un exemple](fiches/fr-argumenter-avec-exemple.html) | Français, lecture, écriture et communication | 17 | 0 | 0 | — |
 | [Comprendre un mot grâce à son contexte](fiches/fr-comprendre-mot-contexte.html) | Français, lecture, écriture et communication | 17 | 0 | 0 | — |
+| [Distinguer un fait, une interprétation et une recommandation](fiches/fr-distinguer-fait-interpretation.html) | Français, lecture, écriture et communication | 17 | 0 | 0 | — |
 | [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 17 | 0 | 0 | — |
 | [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 17 | 0 | 0 | — |
 | [Repérer l’idée principale et les informations utiles](fiches/fr-reperer-idee-texte.html) | Français, lecture, écriture et communication | 17 | 0 | 0 | — |
@@ -101,6 +103,7 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 17 | 0 | 0 | — |
 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 17 | 0 | 0 | — |
 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 17 | 0 | 0 | — |
+| [Comparer deux relevés sans conclure trop vite](fiches/maths-comparer-deux-releves.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |

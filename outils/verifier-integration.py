@@ -288,6 +288,60 @@ def chiffres_accueil_coherents() -> None:
     )
 
 
+#: Repères de lecture de la page Transparence, dans l'ordre attendu. Le 6
+#: novembre 2026, la personne utilisatrice a signalé que la page « mélange
+#: tous les sujets » : le registre des sources arrivait après un long bloc R&D
+#: qui enchaînait méthode, prospective, sobriété et accessibilité.
+PARTIES_TRANSPARENCE = (
+    "lire-cette-page", "le-projet", "notre-methode", "registre-tracabilite",
+    "conditions-reutilisation", "rd-innovation", "travaux-en-debat",
+    "mesures-en-cours", "signaler",
+)
+
+
+def structure_transparence() -> tuple[bool, str]:
+    """Vérifie l'ordre et la séparation des sujets, pas la qualité du style.
+
+    Les ancres du sommaire doivent résoudre, les sept parties doivent rester
+    numérotées et ordonnées, et les trois familles de travaux (entretien du
+    site, prospective, relevés mesurés) ne doivent plus être empilées dans une
+    seule section. Une page claire ne se décrète pas : ces repères, au moins,
+    sont vérifiables.
+    """
+    texte = (RACINE / "transparence.html").read_text(encoding="utf-8")
+    identifiants = set(re.findall(r'\bid="([^"]+)"', texte))
+    ancres = set(re.findall(r'href="#([^"]+)"', texte))
+    orphelines = sorted(ancres - identifiants)
+    positions = {ident: texte.find(f'id="{ident}"') for ident in PARTIES_TRANSPARENCE}
+    absentes = [ident for ident, pos in positions.items() if pos < 0]
+    ordre = [pos for pos in positions.values() if pos >= 0]
+    desordre = ordre != sorted(ordre)
+    reperes = len(re.findall(r"Partie [1-7] / 7", texte))
+    sommaire = texte.count('href="#le-projet"') == 1 and texte.count('href="#signaler"') == 1
+
+    def entre(ident: str, debut: str, fin: str) -> bool:
+        p = texte.find(f'id="{ident}"')
+        return positions.get(debut, -1) >= 0 and positions.get(debut, -1) < p < positions.get(fin, -1)
+
+    poids = texte.find('id="poids-et-sobriete"')
+    ecoute = texte.find('id="accessibilite-releve"')
+    melange = not (
+        entre("prospective-2030", "travaux-en-debat", "mesures-en-cours")
+        and poids > positions["mesures-en-cours"] > 0
+        and ecoute > poids > 0
+        and 0 <= texte.find('id="registre-title"') < positions["conditions-reutilisation"]
+    )
+    detail = (
+        f"{len(PARTIES_TRANSPARENCE)} repères, {reperes} parties numérotées, "
+        f"{len(orphelines)} ancre(s) morte(s)"
+        + (f" — {', '.join(orphelines)}" if orphelines else "")
+        + (f" — repères absents : {', '.join(absentes)}" if absentes else "")
+        + (" — ordre des parties inversé" if desordre else "")
+        + (" — sujets à nouveau mélangés" if melange else "")
+    )
+    return not (orphelines or absentes or desordre or melange) and reperes == 7 and sommaire, detail
+
+
 def _chiffres_du_catalogue() -> tuple[str, str, str]:
     """Trois phrases de la page de transparence, calculées depuis le catalogue.
 
@@ -835,6 +889,17 @@ def fichiers_du_site() -> None:
     verifier(
         "La page de transparence explique le défilement local du tableau large",
         'class="table-scroll-hint"' in (RACINE / "transparence.html").read_text(encoding="utf-8"),
+    )
+    # 6 novembre 2026, second retour : « la page mélange tous les sujets, il
+    # faut bien remettre les choses en contexte ». Le registre des sources est
+    # remonté avant la licence et la R&D ; prospective, sobriété et
+    # accessibilité ne sont plus empilées dans la même section. Une porte
+    # vérifie l'ordre, les ancres et les repères, sans juger du style.
+    lisible, detail_lecture = structure_transparence()
+    verifier(
+        "La page Transparence remet chaque sujet à sa place : sommaire, sources, licence, entretien, débat, mesures",
+        lisible,
+        detail_lecture,
     )
     apprentissage = (RACINE / "apprendre.html").read_text(encoding="utf-8")
     verifier(
