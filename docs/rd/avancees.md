@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 90 |
-| Période couverte | du 2026-10-20 au 2026-11-05 |
-| Contrôles exécutables cités | 101 |
+| Avancées consignées | 91 |
+| Période couverte | du 2026-10-20 au 2026-11-06 |
+| Contrôles exécutables cités | 102 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -2168,6 +2168,31 @@ Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 **Suite.** Publier la feuille, relire les octets servis, puis décider si les lignes et les icônes doivent converger aussi ; une comparaison humaine des états fermé, ouvert, survol, focus, actif et page courante reste à faire.
 
 Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
+
+### `une-formule-ancienne-nest-pas-une-explication` — Une formule ancienne n'est pas une explication — la page Transparence parle aux citoyennes et aux citoyens
+
+*Consignée le 2026-11-06.*
+
+**Constat.** Retour d'usage sur la page « Transparence, sources & licence » : « il faudrait changer "Un outil du peuple, pour le peuple" pour plus de clarté et d'ancrage dans la réalité de la société, parler de citoyennes et citoyens au lieu de reprendre de vieilles paroles qui portaient en leur temps mais qui ne font que poser des questions aux gens qui lisent ces lignes ». Le titre n'était pas seul : l'encadré mis en avant citait « par le peuple et pour le peuple » sous la signature « par la voix de son fondateur », et la note de traçabilité de la page attribuait elle aussi la prise de parole à cette voix. Trois endroits disaient la même formule, et aucun contrôle du dépôt ne la lisait.
+
+**Ce que cela change.** Le titre devient « Un outil au service des citoyennes et des citoyens ». Une phrase courte ouvre la section sur ce que les gens voient réellement — un loyer, un trajet, une feuille de soins — avant de dire à quoi sert la page : chaque chiffre a une source que l'on peut vérifier. L'encadré n'est plus une citation entre guillemets : « Pas de formule à reprendre : des faits sourcés, des méthodes lisibles et des résultats à vérifier, discuter et corriger. » La signature devient collective, « — L'association M.R.S.C », parce qu'on ne peut pas laisser une citation signée sur des mots réécrits ; la note de traçabilité dit la révision du 6 novembre 2026. Un garde-fou de `verifier-integration.py` exige le titre, l'ancrage et les citoyennes et citoyens, et refuse le retour des trois anciennes formulations. Trois mutations du banc d'intégration plantent séparément l'ancien titre, la formule citée et la disparition de l'ancrage : les 7 cas du banc passent. Mesure Chromium sur cinq configurations, de 320 à 1 440 px et jusqu'à 130 % de texte : aucun débordement horizontal, et les deux nouveaux textes raccourcis après une première passe qui ajoutait 11 lignes à un bloc déjà long à 320 px.
+
+**Preuves dans le dépôt :**
+
+- `transparence.html`
+- `outils/verifier-integration.py`
+- `outils/test_mutations_integration.py`
+- `docs/rd/inventaire-controles.md`
+- `docs/rd/journal.md`
+- `/home/user/captures-transparence-2026-11-06/releve.json`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-integration.py && python3 outils/test_mutations_integration.py && python3 outils/verifier-inventaire-controles.py && python3 outils/verifier-site-statique.py && python3 outils/test_protocole_editorial.py`
+
+**Limite — ce que cela ne prouve pas.** Le garde-fou lit des mots, pas une compréhension : il ne prouve ni que la nouvelle formulation est claire pour une personne, ni qu'elle est accessible à toutes et tous, ni qu'elle colle à ce que vivent les gens aujourd'hui. La formule reste dans l'adresse du dépôt tiers du simulateur (`D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple`), dans le titre du simulateur et dans `README.md` : ce sont des noms propres et des citations, pas la parole de cette page, et ils n'ont pas été réécrits. Les deux longs paragraphes préexistants de l'encadré restent tels quels : à 320 px le bloc fait encore une soixantaine de lignes. Aucune relecture par une personne de l'association n'est consignée, et aucun lecteur d'écran ni autre navigateur n'a été essayé.
+
+**Suite.** Faire relire la nouvelle formulation par une personne de l'association et par des lecteurs et lectrices extérieurs ; raccourcir les deux paragraphes préexistants si la longueur à 320 px gêne ; décider ensuite, séparément, du titre du simulateur et de la citation juridique qu'il reprend.
+
+Initiatives liées : `coherence-textes-publics`, `co-conception-et-essais`.
 
 ## 3. Ce que ce registre ne dit pas
 
