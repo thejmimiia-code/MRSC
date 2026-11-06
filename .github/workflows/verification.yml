@@ -115,6 +115,16 @@ jobs:
           python3 outils/verifier-rd-continue.py
           python3 outils/test_mutations_rd_continue.py
 
+      # Le 6 novembre 2026, les chiffres de prospective vieillissaient sans
+      # garde : « dix-sept sujets sans fiche » dans le portefeuille contre six
+      # dans la carte générée. Le relevé qualifié est désormais régénéré, son
+      # bloc prospectif vérifié, et onze mutations prouvent que la porte refuse
+      # une carte périmée, un statut embelli et un chiffre désynchronisé.
+      - name: Vérifier la couverture qualifiée des sujets et le relevé prospectif
+        run: |
+          python3 outils/test_mutations_couverture_sujets.py
+          python3 outils/construire-couverture-sujets.py --verifier
+
       # L'inventaire `docs/rd/inventaire-controles.md` répond, outil par outil,
       # à « qu'est-ce qui prouve que ce contrôle peut échouer ? ». Ce garde-là
       # empêche l'oubli ; son banc plante neuf fautes dans une copie du dépôt,

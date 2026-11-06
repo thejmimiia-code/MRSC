@@ -8,10 +8,10 @@ Deux règles explicites servent au tri. La première reprend le domaine déclar�
 
 | Indicateur | Valeur |
 | --- | --- |
-| Prototypes (statut « Prototype à relire ») | 78 |
+| Prototypes (statut « Prototype à relire ») | 81 |
 | Dont domaines à relecture spécialisée (règle 1) | 14 |
-| Dont hors domaines sensibles mais signalés par mots-clés (règle 2) | 19 |
-| Sans aucun signal automatique | 45 |
+| Dont hors domaines sensibles mais signalés par mots-clés (règle 2) | 20 |
+| Sans aucun signal automatique | 47 |
 | Domaines concernés | 15 |
 
 ## Répartition par domaine
@@ -19,11 +19,11 @@ Deux règles explicites servent au tri. La première reprend le domaine déclar�
 | Domaine | Prototypes | Relecture spécialisée | Signalés par mots-clés |
 | --- | ---: | ---: | ---: |
 | Études supérieures, spécialités et recherche — post-bac au doctorat | 15 | 0 | 9 |
-| Informatique, algorithmique et langages de programmation | 9 | 0 | 3 |
-| Mathématiques, mesures et données | 9 | 0 | 1 |
+| Informatique, algorithmique et langages de programmation | 10 | 0 | 3 |
+| Mathématiques, mesures et données | 10 | 0 | 1 |
+| Français, lecture, écriture et communication | 6 | 0 | 3 |
 | Sciences, technologie et environnement | 6 | 0 | 0 |
 | Histoire, chronologie et mémoire | 5 | 0 | 1 |
-| Français, lecture, écriture et communication | 5 | 0 | 2 |
 | Langues étrangères et interculturel | 5 | 0 | 0 |
 | Citoyenneté, médias et information | 4 | 4 | 0 |
 | Budget, économie, consommation et travail | 4 | 4 | 0 |
@@ -66,58 +66,61 @@ Tri : domaines à relecture spécialisée d’abord, puis fiches signalées par 
 | 24 | [Lire une frise chronologique et ordonner des événements](fiches/histoire-lire-frise.html) | Histoire, chronologie et mémoire | 1 | 1 | — | droit et démarches : succession |
 | 25 | [Repérer les parties d’une adresse Web](fiches/info-lire-adresse-web.html) | Informatique, algorithmique et langages de programmation | 2 | 1 | — | données personnelles : donnée personnelle, données personnelles, mot de passe |
 | 26 | [Présenter une idée avec une raison et un exemple](fiches/fr-argumenter-avec-exemple.html) | Français, lecture, écriture et communication | 2 | 1 | — | droit et démarches : juridique |
-| 27 | [Repérer l’idée principale et les informations utiles](fiches/fr-reperer-idee-texte.html) | Français, lecture, écriture et communication | 2 | 1 | — | droit et démarches : juridique |
-| 28 | [Moyenne et médiane : deux façons de résumer une série](fiches/maths-moyenne-mediane.html) | Mathématiques, mesures et données | 2 | 1 | — | droit et démarches : juridique |
-| 29 | [Nommer sa méthode après un exercice, pour comprendre ce qui a marché](fiches/methode-verbaliser-sa-methode.html) | Apprendre à apprendre, autonomie et relations | 2 | 1 | — | santé : diagnostic |
-| 30 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 1 | 1 | — | données personnelles : donnée personnelle |
-| 31 | [Lire une licence avant de réutiliser un programme](fiches/prog-lire-licence-logiciel.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | — | droit et démarches : juridique |
-| 32 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 2 | — | données personnelles : données personnelles |
-| 33 | [Distinguer programme embarqué local et liaison réseau d’un objet connecté](fiches/info-objet-connecte-local-distant.html) | Informatique, algorithmique et langages de programmation | 2 | 3 | — | santé : traitement |
-| 34 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 1 | 1 | — | — |
-| 35 | [Se tester plutôt que relire : ce que la recherche dit vraiment](fiches/apprendre-se-tester-plutot-que-relire.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | — | — |
-| 36 | [Lire un générique de film : qui décide quoi dans l’image](fiches/arts-lire-generique-film.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | — | — |
-| 37 | [Préparer un trajet : horaires théoriques, temps réel et correspondance](fiches/geographie-preparer-trajet-horaires.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | — | — |
-| 38 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | — | — |
-| 39 | [Choisir une projection : ce que la carte garde et ce qu’elle déforme](fiches/geo-choisir-une-projection.html) | Géographie, territoire et espace | 3 | 1 | — | — |
-| 40 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 1 | 1 | — | — |
-| 41 | [Lire la cote d’une archive avant de commander le document](fiches/histoire-lire-une-cote.html) | Histoire, chronologie et mémoire | 3 | 1 | — | — |
-| 42 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 2 | 1 | — | — |
-| 43 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 1 | 1 | — | — |
-| 44 | [Tester un programme avec des cas simples](fiches/prog-tester-exemples.html) | Informatique, algorithmique et langages de programmation | 2 | 1 | — | — |
-| 45 | [Comprendre un mot grâce à son contexte](fiches/fr-comprendre-mot-contexte.html) | Français, lecture, écriture et communication | 1 | 1 | — | — |
-| 46 | [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 1 | 1 | — | — |
-| 47 | [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 1 | 1 | — | — |
-| 48 | [Demander de l’aide ou une répétition en anglais](fiches/langue-anglais-demander-aide.html) | Langues étrangères et interculturel | 1 | 1 | — | — |
-| 49 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 1 | 1 | — | — |
-| 50 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 2 | 1 | — | — |
-| 51 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 1 | 1 | — | — |
-| 52 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 2 | 1 | — | — |
-| 53 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 2 | 2 | — | — |
-| 54 | [Préparer une sauvegarde que l’on saura réellement restaurer](fiches/numerique-preparer-sauvegarde.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 2 | — | — |
-| 55 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 1 | 2 | — | — |
-| 56 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 1 | 2 | — | — |
-| 57 | [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 2 | 2 | — | — |
-| 58 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 2 | 2 | — | — |
-| 59 | [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 2 | 2 | — | — |
-| 60 | [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | — | — |
-| 61 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | — | — |
-| 62 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 1 | 2 | — | — |
-| 63 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 2 | 2 | — | — |
-| 64 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
-| 65 | [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 2 | 2 | — | — |
-| 66 | [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 2 | 2 | — | — |
-| 67 | [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
-| 68 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
-| 69 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
-| 70 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 2 | 2 | — | — |
-| 71 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 2 | 2 | — | — |
-| 72 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 1 | 2 | — | — |
-| 73 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 3 | — | — |
-| 74 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 1 | 3 | — | — |
-| 75 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 1 | 3 | — | — |
-| 76 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 2 | 3 | — | — |
-| 77 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 2 | 3 | — | — |
-| 78 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 2 | 6 | — | — |
+| 27 | [Distinguer un fait, une interprétation et une recommandation](fiches/fr-distinguer-fait-interpretation.html) | Français, lecture, écriture et communication | 3 | 1 | — | argent : assurance |
+| 28 | [Repérer l’idée principale et les informations utiles](fiches/fr-reperer-idee-texte.html) | Français, lecture, écriture et communication | 2 | 1 | — | droit et démarches : juridique |
+| 29 | [Moyenne et médiane : deux façons de résumer une série](fiches/maths-moyenne-mediane.html) | Mathématiques, mesures et données | 2 | 1 | — | droit et démarches : juridique |
+| 30 | [Nommer sa méthode après un exercice, pour comprendre ce qui a marché](fiches/methode-verbaliser-sa-methode.html) | Apprendre à apprendre, autonomie et relations | 2 | 1 | — | santé : diagnostic |
+| 31 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 1 | 1 | — | données personnelles : donnée personnelle |
+| 32 | [Lire une licence avant de réutiliser un programme](fiches/prog-lire-licence-logiciel.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | — | droit et démarches : juridique |
+| 33 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 2 | — | données personnelles : données personnelles |
+| 34 | [Distinguer programme embarqué local et liaison réseau d’un objet connecté](fiches/info-objet-connecte-local-distant.html) | Informatique, algorithmique et langages de programmation | 2 | 3 | — | santé : traitement |
+| 35 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 1 | 1 | — | — |
+| 36 | [Se tester plutôt que relire : ce que la recherche dit vraiment](fiches/apprendre-se-tester-plutot-que-relire.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | — | — |
+| 37 | [Lire un générique de film : qui décide quoi dans l’image](fiches/arts-lire-generique-film.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | — | — |
+| 38 | [Préparer un trajet : horaires théoriques, temps réel et correspondance](fiches/geographie-preparer-trajet-horaires.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | — | — |
+| 39 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 1 | — | — |
+| 40 | [Choisir une projection : ce que la carte garde et ce qu’elle déforme](fiches/geo-choisir-une-projection.html) | Géographie, territoire et espace | 3 | 1 | — | — |
+| 41 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 1 | 1 | — | — |
+| 42 | [Lire la cote d’une archive avant de commander le document](fiches/histoire-lire-une-cote.html) | Histoire, chronologie et mémoire | 3 | 1 | — | — |
+| 43 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 2 | 1 | — | — |
+| 44 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 1 | 1 | — | — |
+| 45 | [Lire une trace d’erreur et isoler la plus petite modification](fiches/prog-lire-trace-erreur.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | — | — |
+| 46 | [Tester un programme avec des cas simples](fiches/prog-tester-exemples.html) | Informatique, algorithmique et langages de programmation | 2 | 1 | — | — |
+| 47 | [Comprendre un mot grâce à son contexte](fiches/fr-comprendre-mot-contexte.html) | Français, lecture, écriture et communication | 1 | 1 | — | — |
+| 48 | [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 1 | 1 | — | — |
+| 49 | [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 1 | 1 | — | — |
+| 50 | [Demander de l’aide ou une répétition en anglais](fiches/langue-anglais-demander-aide.html) | Langues étrangères et interculturel | 1 | 1 | — | — |
+| 51 | [Comparer deux relevés sans conclure trop vite](fiches/maths-comparer-deux-releves.html) | Mathématiques, mesures et données | 4 | 1 | — | — |
+| 52 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 1 | 1 | — | — |
+| 53 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 2 | 1 | — | — |
+| 54 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 1 | 1 | — | — |
+| 55 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 2 | 1 | — | — |
+| 56 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 2 | 2 | — | — |
+| 57 | [Préparer une sauvegarde que l’on saura réellement restaurer](fiches/numerique-preparer-sauvegarde.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 2 | 2 | — | — |
+| 58 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 1 | 2 | — | — |
+| 59 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 1 | 2 | — | — |
+| 60 | [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 2 | 2 | — | — |
+| 61 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 2 | 2 | — | — |
+| 62 | [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 2 | 2 | — | — |
+| 63 | [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | — | — |
+| 64 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 2 | 2 | — | — |
+| 65 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 1 | 2 | — | — |
+| 66 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 2 | 2 | — | — |
+| 67 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
+| 68 | [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 2 | 2 | — | — |
+| 69 | [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 2 | 2 | — | — |
+| 70 | [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
+| 71 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
+| 72 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 1 | 2 | — | — |
+| 73 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 2 | 2 | — | — |
+| 74 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 2 | 2 | — | — |
+| 75 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 1 | 2 | — | — |
+| 76 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 3 | — | — |
+| 77 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 1 | 3 | — | — |
+| 78 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 1 | 3 | — | — |
+| 79 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 2 | 3 | — | — |
+| 80 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 2 | 3 | — | — |
+| 81 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 2 | 6 | — | — |
 
 ## Ce que cette file ne remplace pas
 

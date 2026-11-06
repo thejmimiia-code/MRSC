@@ -40,7 +40,7 @@ fiches = ["fr-preparer-explication-orale"]
 id = "argumentation"
 titre = "Résumer, argumenter et adapter le ton au destinataire"
 statut = "partiel"
-fiches = ["fr-argumenter-avec-exemple"]
+fiches = ["fr-argumenter-avec-exemple", "fr-distinguer-fait-interpretation"]
 
 [[domaine]]
 id = "langues-etrangeres"
@@ -134,7 +134,7 @@ fiches = ["maths-estimer-calcul"]
 id = "probabilites-incertitude"
 titre = "Probabilités, hasard et incertitude"
 statut = "partiel"
-fiches = ["maths-probabilite-tirage"]
+fiches = ["maths-probabilite-tirage", "maths-comparer-deux-releves"]
 
 [[domaine.sujet]]
 id = "algebre-equations"
@@ -498,7 +498,7 @@ fiches = ["info-table-requete-web"]
 id = "tests-debogage"
 titre = "Tester, déboguer, documenter et faire évoluer un programme"
 statut = "partiel"
-fiches = ["prog-tester-exemples"]
+fiches = ["prog-tester-exemples", "prog-lire-trace-erreur"]
 
 [[domaine.sujet]]
 id = "genie-logiciel-droits"

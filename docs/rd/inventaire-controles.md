@@ -31,6 +31,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/construire-apprentissages.py` | Génère les fiches et le catalogue | `--verifier` plus `test_reproductibilite_artefacts.py` | `hors-portee` |
 | `outils/construire-avancees.py` | Génère `avancees.md` depuis le registre | `test_avancees.py` (15 tests) | `faute-en-memoire` |
 | `outils/construire-carte-lacunes.py` | Génère la carte des lacunes | `--verifier` plus `test_reproductibilite_artefacts.py` | `hors-portee` |
+| `outils/construire-couverture-sujets.py` | Qualifie les manques du catalogue sujet par sujet, et tient à jour le relevé chiffré de `docs/rd/prospective-lacunes-2027.md` | `test_mutations_couverture_sujets.py` (11 fautes dans une copie complète : carte éditée ou supprimée, repère modifié ou hors 1–4, fiche détachée du référentiel, statut embelli, carte de sujet supprimée, chiffre prospectif désynchronisé, bornes effacées, note absente ; copie intacte verte) | `banc` |
 | `outils/construire-paquets-relecture.py` | Prépare les paquets de relecture | `test_mutations_files_relecture.py` (même banc : les deux outils partagent le même tri) | `banc` |
 | `outils/construire-simulateur.py` | Génère `simulateur/index.html` | `--verifier` plus `verifier-integration.py` | `hors-portee` |
 | `outils/construire-sources-refusees.py` | Registre des sources tentées et refusées | `test_sources_refusees.py` (10 tests) | `faute-en-memoire` |
@@ -54,7 +55,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 | `outils/verifier-fichiers-servis.py` | Relevé d'en-têtes confronté aux fichiers | `test_fichiers_servis.py` (28 tests) | `test` |
 | `outils/verifier-fusions.py` | Fusion et suppression de branche sans perte | `test_mutations_fusions.py` (6 fautes dans de petits dépôts git neufs) | `banc` |
 | `outils/verifier-graphismes.cjs` | Mesure navigateur de trois visuels | `test_mesure_graphismes.mjs` (3 pages de contrôle aux dimensions connues, nombres confrontés à l'arithmétique) · `verifier-mutation-graphismes.py` (les 3 mutations produisent l'erreur annoncée) | `banc` |
-| `outils/verifier-integration.py` | Intégration du simulateur au site et formulation de la page Transparence, sans navigateur | `test_mutations_integration.py` (6 fautes : ressource orpheline, chiffre annoncé, page absente, ancienne formule revenue, formule signée réintroduite, ancrage quotidien retiré) | `banc` |
+| `outils/verifier-integration.py` | Intégration du simulateur au site et formulation de la page Transparence, sans navigateur | `test_mutations_integration.py` (11 fautes : ressource orpheline, chiffre annoncé, page absente, ancienne formule revenue, formule signée réintroduite, ancrage quotidien retiré, sommaire retiré, registre des sources à nouveau enterré sous la R&D, repère de partie effacé, ancre du sommaire morte ; la onzième vérifie que la copie intacte passe) | `banc` |
 | `outils/verifier-inventaire-controles.py` | Tient ce document : couverture, existence, vocabulaire des statuts, **et les comptes** du tableau « Combien » confrontés aux lignes réelles | `test_verifier_inventaire_controles.py` (9 fautes dans une copie : outil ajouté, ligne retirée, test annoncé absent, statut inconnu, compte faux, phrase de synthèse fausse puis effacée, statut absent du tableau) | `banc` |
 | `outils/memoire-eva.py` | Mémoire à trois horizons d'ÉVA : index, recherche par pointeurs, graphe Mermaid et DOT, contrôle de fraîcheur | `test_memoire_eva.py` (10 cas dans une vraie copie : pointeur mort, ligne hors fichier, résumé trop long, fait écrit deux fois, renvoi qui ne résout plus, index absent en code 2, déterminisme, source disparue) | `banc` |
 | `outils/verifier-plan-eva.py` | Aucune capacité sans test, aucun refus sans condition : statuts, dépendances, cycles, couverture des 19 branches du portefeuille | `test_verifier_plan_eva.py` (9 cas : phase faite sans test, phase faite sans citation au journal, hors-portée sans condition, condition trop courte, cycle, dépendance inconnue, branche non servie, plan illisible en code 2) | `banc` |
@@ -85,7 +86,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 
 ## Ce que l'inventaire dit en clair
 
-63 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
+64 fichiers d'`outils/` (hors `test_*`), répartis ainsi :
 
 ### Combien, et pourquoi ces nombres ne sont pas recopiés à la main
 
@@ -96,14 +97,14 @@ celui-ci ne le peut plus.
 
 | Statut | Nombre | Ce que cela veut dire ici |
 | --- | --- | --- |
-| `banc` | 33 | Le contrôle a été vu échouer sur une faute plantée, dont voici les plus récents : les cadrages (`test_mutations_cadrages.py`, 3 cas, navigateur), la lecture des dégradés (`test_contraste-degrade.py`, 2 cas, navigateur), les workflows (`test_verifier_workflows.py`, 8 cas), la feuille servie périmée (`test_verifier_feuille_servie.py`, 5 cas, serveur local) et cet inventaire lui-même. |
+| `banc` | 34 | Le contrôle a été vu échouer sur une faute plantée, dont voici les plus récents : les cadrages (`test_mutations_cadrages.py`, 3 cas, navigateur), la lecture des dégradés (`test_contraste-degrade.py`, 2 cas, navigateur), les workflows (`test_verifier_workflows.py`, 8 cas), la feuille servie périmée (`test_verifier_feuille_servie.py`, 5 cas, serveur local) et cet inventaire lui-même. |
 | `faute-en-memoire` | 12 | Des données sont cassées en mémoire ou un service est simulé ; la lecture du fichier sur disque, ou la sonde réseau, n'est pas éprouvée. `verifier-maj-amont.py` n'interroge jamais réellement l'amont ; les quatre scripts navigateur (`auditer-criteres-22.mjs`, `verifier-fiches-statistiques.cjs`, `verifier-accessibilite.cjs`, `auditer-affichages.mjs`) ne voient jamais un vrai Chromium — leurs bancs éprouvent ce qu'ils font de mesures qu'on leur donne, pas la justesse de ce qu'ils mesurent. |
 | `test` | 6 | Un test existe, mais il n'injecte aucune faute. |
 | `test-en-soi` | 1 | Le fichier **est** le test : `test_focus.py`, lancé par le job `qualite`. S'il cesse de mordre, seule sa lecture le dit — c'est pourquoi la mesure elle-même a son banc dans `graphismes`. |
 | `aucun-test` | 0 | Plus aucun : c'était du travail nommé, il est fait. |
 | `hors-portee` | 11 | Générateurs, aides partagées, serveur local : ce ne sont pas des contrôles. Ils relèvent de `--verifier` et de `test_reproductibilite_artefacts.py`. |
 
-Autrement dit : **51 contrôles sur 52** s'appuient sur un test capable d'échouer.
+Autrement dit : **52 contrôles sur 53** s'appuient sur un test capable d'échouer.
 
 ## Par où continuer, par ordre de rentabilité
 

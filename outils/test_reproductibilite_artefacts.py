@@ -54,6 +54,8 @@ ARTEFACTS = (
     "docs/rd/avancees.md",
     "docs/rd/carte-lacunes.md",
     "docs/rd/confrontations-sources.md",
+    "docs/rd/couverture-sujets.md",
+    "docs/rd/prospective-lacunes-2027.md",
     "simulateur/index.html",
 )
 
@@ -67,6 +69,7 @@ PORTES = (
     ("construire-sources-refusees.py", ("--verifier",)),
     ("confronter-sources.py", ("--verifier",)),
     ("construire-avancees.py", ("--verifier",)),
+    ("construire-couverture-sujets.py", ("--verifier",)),
     ("registre-relecture.py", ()),
     ("verifier-rd-continue.py", ()),
 )

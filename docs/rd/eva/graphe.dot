@@ -79,6 +79,7 @@ digraph memoire {
   "avancee:un-choix-nest-pas-un-defaut-recalculable" [shape=note, label="avancee:un-choix-nest-pas-un-defaut-recalculable"];
   "avancee:un-code-de-sortie-ne-dit-pas-pourquoi" [shape=note, label="avancee:un-code-de-sortie-ne-dit-pas-pourquoi"];
   "avancee:un-conteneur-flex-ne-lit-pas-les-declarations-de-grille" [shape=note, label="avancee:un-conteneur-flex-ne-lit-pas-les-declarations-de-grille"];
+  "avancee:un-controle-humain-ne-vaut-que-pour-ce-quil-a-regarde" [shape=note, label="avancee:un-controle-humain-ne-vaut-que-pour-ce-quil-a-regarde"];
   "avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer" [shape=note, label="avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer"];
   "avancee:un-degrade-est-une-plage-de-contraste" [shape=note, label="avancee:un-degrade-est-une-plage-de-contraste"];
   "avancee:un-espacement-impose-casse-la-page" [shape=note, label="avancee:un-espacement-impose-casse-la-page"];
@@ -101,7 +102,9 @@ digraph memoire {
   "avancee:une-dette-d-affichage-se-compte-ou-se-perd" [shape=note, label="avancee:une-dette-d-affichage-se-compte-ou-se-perd"];
   "avancee:une-ecriture-n-est-pas-un-dessin-et-ce-qui-doit-rester-fixe-se-declare" [shape=note, label="avancee:une-ecriture-n-est-pas-un-dessin-et-ce-qui-doit-rester-fixe-se-declare"];
   "avancee:une-formule-ancienne-nest-pas-une-explication" [shape=note, label="avancee:une-formule-ancienne-nest-pas-une-explication"];
+  "avancee:une-lacune-qualifiee-nest-pas-un-compteur" [shape=note, label="avancee:une-lacune-qualifiee-nest-pas-un-compteur"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" [shape=note, label="avancee:une-largeur-de-piste-se-calcule-pas-se-choisit"];
+  "avancee:une-page-de-transparence-se-lit-dans-un-ordre" [shape=note, label="avancee:une-page-de-transparence-se-lit-dans-un-ordre"];
   "avancee:une-planche-qui-repond-lit-le-registre" [shape=note, label="avancee:une-planche-qui-repond-lit-le-registre"];
   "avancee:une-sentinelle-reseau-se-teste-sans-reseau" [shape=note, label="avancee:une-sentinelle-reseau-se-teste-sans-reseau"];
   "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" [shape=note, label="avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques"];
@@ -174,6 +177,7 @@ digraph memoire {
   "outils/compter-paliers.py" [shape=plaintext, label="outils/compter-paliers.py"];
   "outils/confronter-sources.py" [shape=plaintext, label="outils/confronter-sources.py"];
   "outils/construire-avancees.py" [shape=plaintext, label="outils/construire-avancees.py"];
+  "outils/construire-couverture-sujets.py" [shape=plaintext, label="outils/construire-couverture-sujets.py"];
   "outils/construire-paquets-relecture.py" [shape=plaintext, label="outils/construire-paquets-relecture.py"];
   "outils/construire-sources-refusees.py" [shape=plaintext, label="outils/construire-sources-refusees.py"];
   "outils/etat-rd.py" [shape=plaintext, label="outils/etat-rd.py"];
@@ -210,6 +214,7 @@ digraph memoire {
   "outils/test_mutations_affichages.py" [shape=plaintext, label="outils/test_mutations_affichages.py"];
   "outils/test_mutations_budgets_visuels.py" [shape=plaintext, label="outils/test_mutations_budgets_visuels.py"];
   "outils/test_mutations_cadrages.py" [shape=plaintext, label="outils/test_mutations_cadrages.py"];
+  "outils/test_mutations_couverture_sujets.py" [shape=plaintext, label="outils/test_mutations_couverture_sujets.py"];
   "outils/test_mutations_files_relecture.py" [shape=plaintext, label="outils/test_mutations_files_relecture.py"];
   "outils/test_mutations_focus.py" [shape=plaintext, label="outils/test_mutations_focus.py"];
   "outils/test_mutations_fusions.py" [shape=plaintext, label="outils/test_mutations_fusions.py"];
@@ -517,6 +522,9 @@ digraph memoire {
   "avancee:un-conteneur-flex-ne-lit-pas-les-declarations-de-grille" -> "docs/rd/grilles-dynamiques.toml" [label="prouvée par"];
   "avancee:un-conteneur-flex-ne-lit-pas-les-declarations-de-grille" -> "outils/modele-grilles.py" [label="prouvée par"];
   "avancee:un-conteneur-flex-ne-lit-pas-les-declarations-de-grille" -> "outils/test_modele_grilles.py" [label="prouvée par"];
+  "avancee:un-controle-humain-ne-vaut-que-pour-ce-quil-a-regarde" -> "docs/rd/journal.md" [label="prouvée par"];
+  "avancee:un-controle-humain-ne-vaut-que-pour-ce-quil-a-regarde" -> "docs/rd/portefeuille.toml" [label="prouvée par"];
+  "avancee:un-controle-humain-ne-vaut-que-pour-ce-quil-a-regarde" -> "outils/verifier-rd-continue.py" [label="prouvée par"];
   "avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer" -> "docs/rd/plan-statuts-animation.md" [label="prouvée par"];
   "avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer" -> "outils/banc_mutations.py" [label="prouvée par"];
   "avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer" -> "outils/test_mutations_planches_statuts.py" [label="prouvée par"];
@@ -604,10 +612,18 @@ digraph memoire {
   "avancee:une-formule-ancienne-nest-pas-une-explication" -> "outils/test_mutations_integration.py" [label="prouvée par"];
   "avancee:une-formule-ancienne-nest-pas-une-explication" -> "outils/verifier-integration.py" [label="prouvée par"];
   "avancee:une-formule-ancienne-nest-pas-une-explication" -> "transparence.html" [label="prouvée par"];
+  "avancee:une-lacune-qualifiee-nest-pas-un-compteur" -> "docs/apprentissage/catalogue.toml" [label="prouvée par"];
+  "avancee:une-lacune-qualifiee-nest-pas-un-compteur" -> "docs/apprentissage/referentiel.toml" [label="prouvée par"];
+  "avancee:une-lacune-qualifiee-nest-pas-un-compteur" -> "outils/construire-couverture-sujets.py" [label="prouvée par"];
+  "avancee:une-lacune-qualifiee-nest-pas-un-compteur" -> "outils/test_mutations_couverture_sujets.py" [label="prouvée par"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" -> "docs/rd/grilles-dynamiques.toml" [label="prouvée par"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" -> "docs/rd/paliers-affichage.toml" [label="prouvée par"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" -> "outils/modele-grilles.py" [label="prouvée par"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" -> "outils/test_modele_grilles.py" [label="prouvée par"];
+  "avancee:une-page-de-transparence-se-lit-dans-un-ordre" -> "docs/rd/inventaire-controles.md" [label="prouvée par"];
+  "avancee:une-page-de-transparence-se-lit-dans-un-ordre" -> "outils/test_mutations_integration.py" [label="prouvée par"];
+  "avancee:une-page-de-transparence-se-lit-dans-un-ordre" -> "outils/verifier-integration.py" [label="prouvée par"];
+  "avancee:une-page-de-transparence-se-lit-dans-un-ordre" -> "transparence.html" [label="prouvée par"];
   "avancee:une-planche-qui-repond-lit-le-registre" -> "docs/rd/cadrages.toml" [label="prouvée par"];
   "avancee:une-planche-qui-repond-lit-le-registre" -> "docs/rd/inventaire-controles.md" [label="prouvée par"];
   "avancee:une-planche-qui-repond-lit-le-registre" -> "docs/rd/journal.md" [label="prouvée par"];
@@ -630,12 +646,14 @@ digraph memoire {
   "branche:cartographier-les-lacunes" -> "avancee:onze-verifications-internes-jamais-vues-en-echec" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:plan-eva-qui-se-laisse-contredire" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:taux-date-hors-de-la-fiche" [label="a produit"];
+  "branche:cartographier-les-lacunes" -> "avancee:une-lacune-qualifiee-nest-pas-un-compteur" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "phase:graphe-de-memoire" [label="servie par"];
   "branche:co-conception-et-essais" -> "avancee:la-file-de-relecture-prouve-son-tri" [label="a produit"];
   "branche:co-conception-et-essais" -> "avancee:reponse-chiffree-reliee-au-test" [label="a produit"];
   "branche:co-conception-et-essais" -> "avancee:un-balayage-vide-ne-vaut-pas-un-site-sans-violation" [label="a produit"];
   "branche:co-conception-et-essais" -> "avancee:un-banc-coute-le-prix-de-ce-qu-il-eprouve" [label="a produit"];
   "branche:co-conception-et-essais" -> "avancee:une-formule-ancienne-nest-pas-une-explication" [label="a produit"];
+  "branche:co-conception-et-essais" -> "avancee:une-page-de-transparence-se-lit-dans-un-ordre" [label="a produit"];
   "branche:co-conception-et-essais" -> "phase:apprentissages-et-relecture" [label="servie par"];
   "branche:coherence-textes-publics" -> "avancee:cadrages-personnalises-au-pixel" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
@@ -656,11 +674,13 @@ digraph memoire {
   "branche:coherence-textes-publics" -> "avancee:rangees-incompletes-chiffrees" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-anneau-de-focus-se-mesure-comme-un-texte" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-choix-nest-pas-un-defaut-recalculable" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:un-controle-humain-ne-vaut-que-pour-ce-quil-a-regarde" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-degrade-est-une-plage-de-contraste" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-majorant-qu-on-ne-chiffre-pas-se-lit-comme-une-mesure" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-titre-tronque-n-est-pas-une-faute-de-gout" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-vide-assume-porte-son-motif" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:une-formule-ancienne-nest-pas-une-explication" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:une-page-de-transparence-se-lit-dans-un-ordre" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:une-planche-qui-repond-lit-le-registre" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" [label="a produit"];
   "branche:coherence-textes-publics" -> "phase:couverture-des-branches" [label="servie par"];
@@ -704,6 +724,7 @@ digraph memoire {
   "branche:documentation-rd-eva" -> "avancee:un-releve-qui-n-existe-pas-ne-dit-pas-zero-defaut" [label="a produit"];
   "branche:documentation-rd-eva" -> "avancee:un-test-de-cache-qui-ne-sert-plus-rien-reste-vert" [label="a produit"];
   "branche:documentation-rd-eva" -> "avancee:un-test-que-personne-ne-lancait" [label="a produit"];
+  "branche:documentation-rd-eva" -> "avancee:une-lacune-qualifiee-nest-pas-un-compteur" [label="a produit"];
   "branche:documentation-rd-eva" -> "avancee:une-sentinelle-reseau-se-teste-sans-reseau" [label="a produit"];
   "branche:documentation-rd-eva" -> "phase:couverture-des-branches" [label="servie par"];
   "branche:documentation-rd-eva" -> "phase:memoire-trois-horizons" [label="servie par"];
@@ -765,6 +786,7 @@ digraph memoire {
   "branche:optimisation-du-site" -> "avancee:un-choix-nest-pas-un-defaut-recalculable" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:un-code-de-sortie-ne-dit-pas-pourquoi" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:un-conteneur-flex-ne-lit-pas-les-declarations-de-grille" [label="a produit"];
+  "branche:optimisation-du-site" -> "avancee:un-controle-humain-ne-vaut-que-pour-ce-quil-a-regarde" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:un-degrade-est-une-plage-de-contraste" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:un-espacement-impose-casse-la-page" [label="a produit"];
@@ -830,6 +852,7 @@ digraph memoire {
   "branche:veille-savoirs-evolutifs" -> "avancee:refus-de-source-illisible" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:registre-des-refus-verifie" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:un-etat-qui-perd-une-source-garde-l-air-complet" [label="a produit"];
+  "branche:veille-savoirs-evolutifs" -> "avancee:une-lacune-qualifiee-nest-pas-un-compteur" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:une-sentinelle-reseau-se-teste-sans-reseau" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "phase:graphe-de-memoire" [label="servie par"];
   "branche:veille-savoirs-evolutifs" -> "phase:memoire-trois-horizons" [label="servie par"];

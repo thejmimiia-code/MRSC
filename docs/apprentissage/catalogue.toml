@@ -6131,3 +6131,162 @@ intervalle_revue_jours = 180
 sources = [
   { titre = "service-public.gouv.fr — « Acte de naissance : demande de copie intégrale ou d’extrait » (F1427, vérifié le 14 août 2026)", url = "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait reproduit", droits_controles_le = "2026-11-05", mode_utilisation = "reference-factuelle", utilisation = "Fiche consultée le 5 novembre 2026 : demande gratuite dans tous les cas ; la démarche varie selon le lieu de naissance ; pour une naissance en France, demande en ligne, par courrier sur papier libre ou sur place à la mairie du lieu de naissance, avec pièce d’identité et délivrance immédiate au guichet ; informations à indiquer selon la forme demandée ; pour une personne née à l’étranger, service en ligne dédié, y compris pour les personnes nées dans un État devenu indépendant. Aucun extrait n’est reproduit." },
 ]
+
+[[fiche]]
+id = "fr-distinguer-fait-interpretation"
+titre = "Distinguer un fait, une interprétation et une recommandation"
+matiere = "Français et communication"
+matiere_id = "francais"
+domaine = "langue-communication"
+niveau = 3
+horizon_contenu = "Lecture d’un court texte d’information ; aucune connaissance spécialisée requise"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 6 novembre 2026. La note fictive, les trois étiquettes et la correction sont originales. La page institutionnelle citée a été ouverte et lue ce jour comme repère général, sans reprise de son contenu. Ce contrôle ne remplace ni une relecture éditoriale indépendante, ni un essai de compréhension avec des personnes."
+minutes = 12
+resume = "Repérer ce qui est observé, ce qui est expliqué et ce qui est proposé dans un court texte."
+objectif = "Classer chaque phrase d’une note fictive comme fait, interprétation ou recommandation, puis nommer ce qu’il faudrait vérifier."
+situation = "Une note fictive tient en trois phrases. « Le carnet indique huit passages en mars. » « Le service est donc jugé peu utilisé. » « Il faudrait le fermer. » Une personne en conclut que la fermeture est décidée. Est-ce vraiment ce que le texte dit ?"
+analogie_titre = "Comme trois étiquettes sur une même boîte"
+analogie = "Sur une boîte, une étiquette dit ce qu’il y a dedans. Une seconde propose une manière de le comprendre. Une troisième suggère ce qu’on pourrait en faire. Les trois se ressemblent, mais elles ne demandent pas la même vérification."
+limite_analogie = "Une étiquette de boîte est posée par une personne identifiable. Dans un texte, l’auteur d’une interprétation n’est pas toujours nommé. Une recommandation peut être formulée sans que la décision soit prise. L’image aide à séparer les phrases ; elle ne dit pas si le fait est exact."
+notions = [
+  "Fait observable — phrase qui décrit ce qu’une source donnée permet de relever, avec son unité et sa période.",
+  "Interprétation — phrase qui propose un sens, une cause ou un jugement à partir du fait.",
+  "Recommandation — phrase qui propose une action, sans être elle-même une décision.",
+  "Vérification — question à poser avant d’accorder sa confiance : qui relève, quand, sur quoi, et que manque-t-il ?",
+]
+demarche = [
+  "Découpe la note en phrases et numérote-les. Ne regroupe pas deux idées différentes.",
+  "Pour chaque phrase, demande-toi si elle décrit un relevé, propose un sens ou propose une action.",
+  "Repère les mots qui signalent un raisonnement : « donc », « semble », « à mon avis ».",
+  "Repère les mots qui signalent une proposition : « il faudrait », « on pourrait », « à envisager ».",
+  "Écris trois questions distinctes : une pour vérifier le relevé, une pour discuter le sens, une pour savoir qui décide.",
+  "Relis la conclusion de la personne : elle a traité une proposition comme une décision. Corrige-la sans accuser la personne.",
+]
+exercice = "À ton rythme : classe les trois phrases de la note. Puis réécris la dernière phrase pour qu’elle reste une proposition explicite. Enfin, cite une information qui manque pour juger le relevé de huit passages."
+aide = "La première phrase parle d’un carnet et d’un mois. La deuxième contient « donc ». La troisième contient « il faudrait ». Pour finir, cherche ce que le carnet ne dit pas : période de comparaison, définition d’un passage, personnes concernées."
+correction = [
+  "Phrase 1 : fait observable, à condition de pouvoir lire le carnet et de connaître la définition d’un passage.",
+  "Phrase 2 : interprétation. « Peu utilisé » est un jugement. Il faudrait un point de comparaison pour le discuter.",
+  "Phrase 3 : recommandation. « Il faudrait le fermer » propose une action ; aucune décision n’est relatée.",
+  "Réécriture possible : « Une piste à examiner serait de fermer le service, après comparaison et discussion. » La conclusion initiale confond proposition et décision.",
+  "Il manque au moins la période de référence, la taille du groupe concerné et la manière dont un passage est compté.",
+]
+a_retenir = [
+  "Un fait se vérifie auprès d’une source ; une interprétation se discute avec des éléments de comparaison.",
+  "Une recommandation n’est pas une décision, même quand elle est écrite avec assurance.",
+  "Les petits mots comme « donc » ou « il faudrait » aident à repérer le changement de nature.",
+  "Séparer les trois niveaux ne prouve pas que le fait est vrai : la vérification reste à faire.",
+]
+transferer = "Cette lecture sert pour une note de service, un article, une annonce ou un message de discussion. Elle ne remplace ni la consultation de la source, ni l’avis des personnes concernées."
+revue_le = "2026-11-06"
+intervalle_revue_jours = 365
+sources = [
+  { titre = "Ministère de l’Éducation nationale — Le socle commun de connaissances, de compétences et de culture (page mise à jour le 19 février 2026)", url = "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512", licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait reproduit", droits_controles_le = "2026-11-06", mode_utilisation = "reference-factuelle", utilisation = "Page ouverte et lue le 6 novembre 2026 comme repère institutionnel général sur les langages pour penser et communiquer et sur la préparation à l’exercice de la citoyenneté. Aucune phrase, consigne, activité ou illustration de la page n’est reprise ; les trois étiquettes, la note fictive et les questions de la fiche sont originales. La page ne valide ni la méthode proposée ni son efficacité." },
+]
+
+[[fiche]]
+id = "maths-comparer-deux-releves"
+titre = "Comparer deux relevés sans conclure trop vite"
+matiere = "Mathématiques — statistiques simples"
+matiere_id = "mathematiques"
+domaine = "mathematiques"
+niveau = 4
+horizon_contenu = "Après moyenne et médiane ; petites séries de mesures fictives, sans logiciel"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 6 novembre 2026. Les séries, leurs unités et les calculs sont inventés et vérifiables à la main. La documentation du module statistics a été ouverte et lue ce jour pour distinguer résumés de position centrale et mesures de dispersion, sans aucun extrait repris. Ce contrôle ne remplace ni une relecture mathématique indépendante, ni un essai de compréhension avec des personnes."
+minutes = 15
+resume = "Comparer moyenne, médiane et étendue de deux séries fictives, puis dire ce que la comparaison ne prouve pas."
+objectif = "Calculer trois résumés pour deux séries de huit mesures, et refuser une conclusion qui dépasse les données."
+situation = "Deux séries fictives de durées de trajet, en minutes. Série A : 12, 14, 13, 15, 12, 14, 13, 15. Série B : 12, 14, 13, 15, 12, 14, 13, 35. Une note affirme : « Le trajet B est toujours plus long. » Les nombres permettent-ils de l’écrire ?"
+analogie_titre = "Comme deux photos d’un même couloir"
+analogie = "Une photo prise à midi et une photo prise un soir d’orage montrent le même couloir. Le décor ne change pas ; un seul détail suffit à donner une impression différente. Résumer une série par un seul nombre ressemble à ne regarder qu’une photo."
+limite_analogie = "Une photo montre un instant réel. Ici, les huit durées sont inventées et ne mesurent aucun trajet. L’image aide à se méfier d’une impression globale ; elle ne dit pas comment calculer, ni ce qui a produit la valeur la plus élevée. Aucune cause n’est établie."
+notions = [
+  "Moyenne arithmétique — somme des valeurs divisée par leur nombre ; elle réagit à chaque valeur.",
+  "Médiane — valeur centrale après tri ; avec huit valeurs, on prend ici la moyenne des deux centrales.",
+  "Étendue — différence entre la plus grande et la plus petite valeur de la série.",
+  "Conclusion permise — énoncé que les données et leur mode de relevé suffisent à soutenir.",
+]
+demarche = [
+  "Vérifie l’unité et compte les relevés : deux séries de huit durées en minutes.",
+  "Pour A, la somme vaut 108. La moyenne vaut 108 ÷ 8 = 13,5 minutes.",
+  "Trie A : 12, 12, 13, 13, 14, 14, 15, 15. Les deux centrales sont 13 et 14 ; la médiane vaut 13,5 minutes. L’étendue vaut 15 − 12 = 3 minutes.",
+  "Pour B, remplace seulement la dernière valeur : la somme passe de 108 à 128. La moyenne vaut 128 ÷ 8 = 16 minutes.",
+  "Trie B : 12, 12, 13, 13, 14, 14, 15, 35. Les deux centrales restent 13 et 14 ; la médiane vaut 13,5 minutes. L’étendue vaut 35 − 12 = 23 minutes.",
+  "Compare : sept relevés sur huit sont identiques. La moyenne a bougé, la médiane non, l’étendue a beaucoup grandi.",
+  "Formule ce qui est permis : « une valeur élevée est présente dans B ». Formule ce qui ne l’est pas : « B est toujours plus long » ou « un incident se répète ».",
+]
+exercice = "À ton rythme : A) calcule moyenne, médiane et étendue de la série C : 10, 12, 11, 13, 10, 12, 11, 13. B) dans la série B, remplace 35 par 15 : que deviennent la moyenne et l’étendue ? C) cite deux informations qui manquent pour parler de trajets réels."
+aide = "Pour A, la somme vaut 92 et les deux valeurs centrales après tri sont 11 et 12. Pour B, la somme revient à 108. Pour C, pense à la période, au nombre de personnes, à la manière dont la durée a été mesurée."
+correction = [
+  "A — Somme 92, moyenne 92 ÷ 8 = 11,5 minutes. Série triée : 10, 10, 11, 11, 12, 12, 13, 13. Médiane (11 + 12) ÷ 2 = 11,5 minutes. Étendue 13 − 10 = 3 minutes.",
+  "B — La somme revient à 108, donc la moyenne vaut 13,5 minutes. L’étendue revient à 3 minutes. La médiane reste 13,5 minutes.",
+  "C — Il manque au moins la période et le lieu des relevés, le nombre de personnes, et la définition de la durée mesurée. Sans cela, aucun trajet réel n’est décrit.",
+  "Piège : une moyenne plus élevée ne décrit pas chaque valeur. Ici, sept valeurs sur huit sont identiques d’une série à l’autre.",
+]
+a_retenir = [
+  "La moyenne utilise le total ; la médiane utilise les positions ; l’étendue regarde les extrêmes.",
+  "Une seule valeur très éloignée peut déplacer la moyenne sans déplacer la médiane.",
+  "Une comparaison de deux séries fictives n’établit ni cause, ni fréquence, ni situation vécue.",
+  "Avant de conclure, nommer l’unité, l’effectif, la période et la façon dont les valeurs ont été obtenues.",
+]
+transferer = "Cette prudence sert devant deux graphiques, deux tableaux ou deux relevés de temps. Elle ne donne aucune règle de décision pour un budget, un soin ou une démarche. Les valeurs de cette fiche sont fictives."
+revue_le = "2026-11-06"
+intervalle_revue_jours = 365
+sources = [
+  { titre = "Python Software Foundation — statistics, documentation Python 3.15.2, sections Averages and measures of central location et Measures of spread", url = "https://docs.python.org/3/library/statistics.html", licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exemple reproduit", droits_controles_le = "2026-11-06", mode_utilisation = "reference-factuelle", utilisation = "Page ouverte et lue le 6 novembre 2026 : elle sépare les résumés de position centrale des mesures de dispersion. Aucun texte, tableau, formule ou exemple de la page n’est repris ; les deux séries, les calculs, les exercices et les limites de la fiche sont originaux et fictifs. Une documentation technique ne valide pas la démarche pédagogique proposée." },
+]
+
+[[fiche]]
+id = "prog-lire-trace-erreur"
+titre = "Lire une trace d’erreur et isoler la plus petite modification"
+matiere = "Informatique et programmation"
+matiere_id = "informatique"
+domaine = "informatique-programmation"
+niveau = 3
+horizon_contenu = "Premiers programmes et premiers tests ; lecture d’un message d’erreur fictif, sans outil particulier"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Prototype rédigé le 6 novembre 2026. La trace, le programme imaginaire et la correction sont originaux et fictifs. Le chapitre de la documentation Python a été ouvert et lu ce jour pour situer la distinction entre erreur de syntaxe et exception, sans aucun extrait repris. Ce contrôle ne remplace ni une relecture par une personne compétente en programmation, ni un essai de compréhension avec des personnes."
+minutes = 12
+resume = "Lire un message d’erreur de la fin vers le début, former une hypothèse, puis ne changer qu’une chose."
+objectif = "Repérer le type d’erreur, le fichier et la ligne dans une trace fictive, et proposer une modification minimale à retester."
+situation = "Une exécution fictive affiche ceci : fichier « releves.py », ligne 7, fonction moyenne ; puis « Erreur : division par un effectif nul ». La personne qui lit la trace propose aussitôt de réécrire tout le programme. Que peut-on faire de plus prudent ?"
+analogie_titre = "Comme une étiquette sur une porte fermée"
+analogie = "Une étiquette indique quelle porte est bloquée et pourquoi. On commence par lire l’étiquette, puis on regarde cette porte seulement. Changer toutes les portes d’un coup empêcherait de savoir laquelle posait problème."
+limite_analogie = "Une porte bloquée a une cause matérielle visible. Une trace d’erreur indique où le programme s’est arrêté, pas forcément pourquoi la donnée est mauvaise. Le message peut aussi venir d’un autre fichier. L’image aide à isoler un geste ; elle ne remplace pas la lecture du code."
+notions = [
+  "Trace d’erreur — suite de lignes qui indique où l’exécution s’est arrêtée et quel message a été produit.",
+  "Type d’erreur — dernière ligne du message ; elle décrit la catégorie du problème rencontré.",
+  "Hypothèse — explication courte que l’on va tester, et non une certitude.",
+  "Modification minimale — un seul changement à la fois, pour pouvoir relier le résultat au geste.",
+]
+demarche = [
+  "Lis la dernière ligne d’abord : elle nomme le type d’erreur, ici une division par un effectif nul.",
+  "Remonte aux lignes précédentes : fichier « releves.py », ligne 7, fonction moyenne.",
+  "Formule une hypothèse courte : la liste des relevés est peut-être vide à cet endroit.",
+  "Vérifie une seule chose avant de modifier : affiche ou compte les relevés reçus par la fonction.",
+  "Modifie une seule ligne, puis relance exactement le même essai. Note ce qui a changé.",
+  "Si l’erreur reste, garde la première observation et forme une autre hypothèse. N’efface pas la trace.",
+]
+exercice = "À ton rythme : A) recopie, dans l’ordre de lecture, les trois informations de la trace. B) écris une hypothèse en une phrase. C) propose une modification minimale et dis ce que tu relancerais pour la tester."
+aide = "Commence par la fin, pas par le début. Pour B, une hypothèse commence souvent par « peut-être ». Pour C, cherche un seul changement : ajouter un contrôle, corriger une donnée ou corriger un appel."
+correction = [
+  "A — D’abord le message « division par un effectif nul », puis la ligne 7, puis le fichier « releves.py » et la fonction moyenne.",
+  "B — Hypothèse possible : « Peut-être que la fonction reçoit une liste sans aucun relevé. » Ce n’est pas encore une conclusion.",
+  "C — Modification minimale possible : vérifier que le nombre de relevés est supérieur à zéro avant de diviser, puis relancer le même essai avec la même liste vide.",
+  "Ce que la trace ne dit pas : pourquoi la liste est vide, d’où viennent les données, ni si d’autres essais échoueraient ailleurs.",
+  "Réécrire tout le programme d’un coup ferait perdre le lien entre le geste et le résultat. La trace sert à garder ce lien.",
+]
+a_retenir = [
+  "Lire la fin du message avant les lignes de contexte.",
+  "Une hypothèse se teste ; une certitude ne se teste plus.",
+  "Un seul changement à la fois rend le résultat interprétable.",
+  "Conserver la trace et l’essai permet de revenir en arrière sans deviner.",
+]
+transferer = "Cette démarche sert pour un script, une feuille de calcul ou un outil qui produit un message d’erreur. Elle ne garantit pas que la cause profonde est trouvée. La trace de cette fiche est fictive."
+revue_le = "2026-11-06"
+intervalle_revue_jours = 365
+sources = [
+  { titre = "Python Software Foundation — The Python Tutorial, chapitre 8 « Errors and Exceptions », documentation 3.15.2", url = "https://docs.python.org/3/tutorial/errors.html", licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exemple reproduit", droits_controles_le = "2026-11-06", mode_utilisation = "reference-factuelle", utilisation = "Page ouverte et lue le 6 novembre 2026 : elle distingue les erreurs de syntaxe des exceptions et décrit le rôle du contexte et de la dernière ligne d’un message d’erreur. Aucun texte, ligne de code ni exemple de la page n’est repris ; la trace, le programme imaginaire, l’exercice et la correction de la fiche sont originaux et fictifs. La documentation ne valide pas la démarche pédagogique proposée." },
+]
