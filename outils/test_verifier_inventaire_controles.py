@@ -84,8 +84,12 @@ class TestInventaireControles(unittest.TestCase):
             banc_mutations.muter(
                 copie,
                 DOC,
-                "`test_placement_panneau.mjs` (3 600 positions, sans navigateur)",
-                "`test_qui_n_existe_pas.py` (3 600 positions, sans navigateur)",
+                # Le 5 novembre 2026, le banc est passé de 3 600 à 7 200
+                # positions (deux panneaux au lieu d'un). Une mutation qui ne
+                # trouve plus son fragment ne mordrait pas : le texte visé suit
+                # la ligne réelle de l'inventaire, il n'est pas recopié d'octobre.
+                "`test_placement_panneau.mjs` (7 200 positions, sans navigateur)",
+                "`test_qui_n_existe_pas.py` (7 200 positions, sans navigateur)",
             )
             resultat = banc_mutations.lancer(OUTIL, copie)
         self.assertEqual(resultat.returncode, 1, resultat.stdout)

@@ -172,20 +172,39 @@ async function ouvrirPanneau(page) {
   // Les réglages sont désormais des lignes du panneau « Personnalisation » :
   // il faut l'ouvrir avant de pouvoir atteindre « Présentation ».
   await ouvrirPersonnalisation(page);
-  const ouvert = await page.$eval('[data-site-layout-settings]', (element) => element.open);
-  if (ouvert) return;
+  const details = '[data-site-layout-settings]';
   const resume = '[data-site-layout-settings] > summary';
+  const estOuvert = () => document.querySelector('[data-site-layout-settings]')?.open === true;
+  if (await page.$eval(details, (element) => element.open)) return;
   await page.click(resume);
   try {
-    await attendre(page, () => document.querySelector('[data-site-layout-settings]')?.open === true, { timeout: 2000 });
+    await attendre(page, estOuvert, { timeout: 2000 });
+    return;
   } catch (_erreur) {
     // Sur le simulateur, la barre de retour est collante : au clic suivant, un
     // élément peut recouvrir le résumé et avaler le clic. L'activation au
     // clavier vise le contrôle, pas ses coordonnées.
-    await page.focus(resume);
-    await page.keyboard.press('Enter');
-    await attendre(page, () => document.querySelector('[data-site-layout-settings]')?.open === true);
   }
+  await page.focus(resume);
+  await page.keyboard.press('Enter');
+  try {
+    await attendre(page, estOuvert, { timeout: 2000 });
+    return;
+  } catch (_erreur) {
+    // Le 6 novembre 2026, la CI a perdu le premier essai sur `apprendre.html` :
+    // ni le clic ni Entrée n'avaient ouvert le <details>, et l'attente de 30 s
+    // masquait la cause (12/13 en CI, 13/13 en local sur deux serveurs neufs).
+    // Ce helper ne mesure pas l'ouverture : il sert à atteindre les réglages
+    // qu'un autre essai mesure. Un dernier clic DOM, sans coordonnées, évite
+    // qu'un élément superposé fasse échouer une mesure qui n'est pas la sienne.
+    // Il ne s'applique que si le panneau est encore fermé, pour ne pas le
+    // refermer après une ouverture tardive du clavier.
+  }
+  await page.evaluate(() => {
+    const bloc = document.querySelector('[data-site-layout-settings]');
+    if (bloc && !bloc.open) bloc.querySelector('summary').click();
+  });
+  await attendre(page, estOuvert);
 }
 
 // Mesure commune aux deux panneaux flottants du site. Depuis le 5 novembre 2026,
@@ -664,6 +683,181 @@ async function main() {
     }
   });
 
+  // Retour d'usage du 5 novembre 2026 : « le mode réduit saute au moment où l'on
+  // clic sur un élément du menu » en vue ordinateur. Chaque entrée du menu
+  // charge une autre page ; l'en-tête y repartait du seul format de fenêtre, et
+  // passait de 49 px à 198 px à 1 440 px. L'essai rejoue le geste, mesure la
+  // hauteur au chargement de la page d'arrivée, et vérifie les deux sens de la
+  // bascule : « Réduire » mémorisé, puis « Agrandir » mémorisé.
+  await executer('Mode réduit : une entrée du menu ne fait pas sauter l’en-tête sur ordinateur', async () => {
+    const page = await creerPage({ width: 1440, height: 900 });
+    const etatEntete = () => page.evaluate(() => {
+      const entete = document.querySelector('.site-header');
+      const bascule = document.querySelector('[data-header-compact-toggle]');
+      const navigation = document.querySelector('[data-primary-navigation]');
+      let preference = null;
+      try { preference = localStorage.getItem('mrsc-entete-compacte'); } catch (_erreur) { /* stockage refusé */ }
+      return {
+        compact: entete?.classList.contains('is-compact'),
+        racine: document.documentElement.classList.contains('entete-compacte'),
+        hauteur: Math.round(entete?.getBoundingClientRect().height || 0),
+        libelle: bascule?.textContent.trim(),
+        aria: bascule?.getAttribute('aria-expanded'),
+        menuOuvert: navigation?.classList.contains('is-open'),
+        preference,
+      };
+    });
+    const naviguerParLeMenu = async (lien) => {
+      await page.click('[data-menu-toggle]');
+      await attendre(page, () => document.querySelector('[data-primary-navigation]')?.classList.contains('is-open'));
+      await Promise.all([
+        page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 60000 }),
+        page.click(`[data-primary-navigation] a[href="${lien}"]`),
+      ]);
+    };
+    try {
+      await ouvrirPageSite(page, 'index.html');
+      const initial = await etatEntete();
+      assert.equal(initial.compact, false, 'sans choix explicite, l’en-tête démarre agrandi sur ordinateur');
+      assert.equal(initial.preference, null, 'aucune préférence ne doit être écrite au premier chargement');
+
+      await ouvrirPersonnalisation(page);
+      await page.click('[data-header-compact-toggle]');
+      await attendre(page, () => document.querySelector('.site-header')?.classList.contains('is-compact'));
+      const reduit = await etatEntete();
+      assert.equal(reduit.compact, true, '« Réduire » doit compacter l’en-tête');
+      assert.equal(reduit.racine, true, 'la racine doit porter « entete-compacte »');
+      assert.equal(reduit.libelle, 'Agrandir');
+      assert.equal(reduit.aria, 'false');
+      assert.equal(reduit.preference, 'oui', 'le choix doit être écrit pour la page suivante');
+      assert.ok(reduit.hauteur < 100, `l’en-tête réduit mesure ${reduit.hauteur} px`);
+
+      // Le geste signalé : ouvrir le menu, cliquer une entrée, lire la page
+      // d'arrivée dès DOMContentLoaded — pas après un délai qui masquerait un
+      // éclair d'en-tête agrandi.
+      await naviguerParLeMenu('documents.html');
+      const apres = await etatEntete();
+      assert.equal(apres.compact, true,
+        `le mode réduit a sauté au clic sur une entrée du menu : ${JSON.stringify(apres)}`);
+      assert.equal(apres.racine, true, 'la classe de racine a sauté aussi');
+      assert.equal(apres.hauteur, reduit.hauteur,
+        `l’en-tête est passé de ${reduit.hauteur} px à ${apres.hauteur} px au clic`);
+      assert.equal(apres.libelle, 'Agrandir', 'la bascule annonce encore « Réduire » sur la page d’arrivée');
+      assert.equal(apres.aria, 'false');
+      assert.equal(apres.menuOuvert, false, 'le menu doit arriver fermé sur la nouvelle page');
+      assert.equal(apres.preference, 'oui');
+
+      // Le format du signalement d'octobre : un téléphone en « aperçu
+      // ordinateur » annonce une fenêtre large et basse (980 × 440).
+      await page.setViewport({ width: 980, height: 440, deviceScaleFactor: 1 });
+      await naviguerParLeMenu('apprendre.html');
+      const apercu = await etatEntete();
+      assert.equal(apercu.compact, true,
+        `le mode réduit a sauté à 980 × 440 : ${JSON.stringify(apercu)}`);
+      assert.equal(apercu.hauteur, reduit.hauteur,
+        `l’en-tête a sauté de ${reduit.hauteur} px à ${apercu.hauteur} px en aperçu ordinateur`);
+
+      // Le choix inverse ne doit pas ressusciter l'en-tête réduit : « Agrandir »
+      // vaut décision, pas simple état de la page en cours.
+      await ouvrirPersonnalisation(page);
+      await page.click('[data-header-compact-toggle]');
+      await attendre(page, () => !document.querySelector('.site-header')?.classList.contains('is-compact'));
+      const agrandi = await etatEntete();
+      assert.equal(agrandi.preference, 'non', '« Agrandir » doit être mémorisé aussi');
+      assert.ok(agrandi.hauteur > reduit.hauteur + 50, `l’en-tête agrandi mesure ${agrandi.hauteur} px`);
+      await naviguerParLeMenu('index.html');
+      const retour = await etatEntete();
+      assert.equal(retour.compact, false,
+        `l’en-tête réduit est revenu sans que la personne le redemande : ${JSON.stringify(retour)}`);
+      assert.equal(retour.libelle, 'Réduire');
+      assert.equal(retour.preference, 'non');
+    } finally {
+      await page.close();
+    }
+  });
+
+  // Retour d'usage du 5 novembre 2026 : « le comportement du bouton menu
+  // n'était pas Fidel en terme de rendu ni visuels » face à « Personnalisation ».
+  // Les deux panneaux avaient été unifiés, pas les deux commandes : relevé en
+  // Chromium, 14 px contre 12,8 px de police, 10,4 px contre 10 px de
+  // gouttière, `nowrap` d'un seul côté, deux transitions de durées différentes.
+  // L'essai compare les styles **calculés**, pas les déclarations, et comme un
+  // seul panneau peut être ouvert à la fois, il compare fermé à fermé puis
+  // ouvert à ouvert — jamais un bouton ouvert à un bouton fermé.
+  await executer('Boutons « Menu » et « Personnalisation » : même habillage mesuré', async () => {
+    const proprietes = [
+      'background-color', 'color', 'border-top-width', 'border-right-width',
+      'border-bottom-width', 'border-left-width', 'border-top-color',
+      'border-radius', 'box-shadow', 'padding-top', 'padding-right',
+      'padding-bottom', 'padding-left', 'min-width', 'min-height',
+      'font-family', 'font-size', 'font-weight', 'line-height',
+      'letter-spacing', 'text-align', 'white-space', 'cursor',
+      'transition-property', 'transition-duration', 'outline-width',
+      'outline-color', 'outline-offset',
+    ];
+    const lire = (page) => page.evaluate((props) => {
+      const relever = (selecteur) => {
+        const style = getComputedStyle(document.querySelector(selecteur));
+        const valeurs = {};
+        for (const p of props) valeurs[p] = style.getPropertyValue(p).trim();
+        return valeurs;
+      };
+      return {
+        menu: relever('.nav-toggle'),
+        personnalisation: relever('.customize-settings > summary'),
+      };
+    }, proprietes);
+    const basculer = (page, cible) => page.evaluate((nom) => {
+      const navigation = document.querySelector('.nav-links');
+      const bouton = document.querySelector('.nav-toggle');
+      const details = document.querySelector('.customize-settings');
+      if (details.open) details.querySelector('summary').click();
+      if (navigation.classList.contains('is-open')) bouton.click();
+      if (nom === 'menu') bouton.click();
+      else details.querySelector('summary').click();
+    }, cible);
+    const formats = [
+      { width: 390, height: 844, texte: null },
+      { width: 980, height: 440, texte: null },
+      { width: 1440, height: 900, texte: '130' },
+    ];
+    for (const format of formats) {
+      const page = await creerPage({ width: format.width, height: format.height });
+      try {
+        if (format.texte) {
+          await page.evaluateOnNewDocument((niveau) => {
+            try { localStorage.setItem('mrsc-texte-cran', niveau); } catch (_e) { /* stockage refusé */ }
+          }, format.texte);
+        }
+        await ouvrirPageSite(page, 'index.html');
+        await attendre(page, () => getComputedStyle(document.querySelector('.nav-toggle')).display !== 'none');
+        const fermes = await lire(page);
+        for (const p of proprietes) {
+          assert.equal(
+            fermes.menu[p], fermes.personnalisation[p],
+            `commandes fermées à ${format.width} px : ${p} diverge (${fermes.menu[p]} / ${fermes.personnalisation[p]})`
+          );
+        }
+        await basculer(page, 'menu');
+        await attendre(page, () => document.querySelector('.nav-links')?.classList.contains('is-open'));
+        await new Promise((resoudre) => setTimeout(resoudre, 320));
+        const menuOuvert = (await lire(page)).menu;
+        await basculer(page, 'perso');
+        await attendre(page, () => document.querySelector('.customize-settings')?.open === true);
+        await new Promise((resoudre) => setTimeout(resoudre, 320));
+        const personnalisationOuverte = (await lire(page)).personnalisation;
+        for (const p of proprietes) {
+          assert.equal(
+            menuOuvert[p], personnalisationOuverte[p],
+            `commandes ouvertes à ${format.width} px : ${p} diverge (${menuOuvert[p]} / ${personnalisationOuverte[p]})`
+          );
+        }
+      } finally {
+        await page.close();
+      }
+    }
+  });
+
   await executer('Panneaux Affichage et Présentation visibles aux largeurs 320 et 1440 px', async () => {
     const page = await creerPage({ width: 320, height: 800 });
     try {
@@ -1064,6 +1258,22 @@ async function main() {
         catch (_error) { return true; }
       });
       assert.equal(acces, true, 'le navigateur doit bien simuler un stockage refusé');
+      // Le 5 novembre 2026 : la préférence du mode réduit rejoint les réglages
+      // locaux. Sans stockage, le format décide seul au chargement (à 320 px,
+      // « Agrandir »), mais la bascule doit rester utilisable pendant la visite
+      // et l'échec d'écriture ne doit lever aucune exception de page.
+      assert.equal(
+        await page.$eval('[data-header-compact-toggle]', (element) => element.textContent.trim()),
+        'Agrandir',
+        'sans préférence écrite, le format de fenêtre décide du mode réduit'
+      );
+      await page.click('[data-header-compact-toggle]');
+      await attendre(page, () => !document.querySelector('.site-header')?.classList.contains('is-compact'));
+      assert.equal(
+        await page.$eval('[data-header-compact-toggle]', (element) => element.textContent.trim()),
+        'Réduire',
+        'sans stockage, la bascule du mode réduit reste utilisable pendant la visite'
+      );
       assert.deepEqual(erreursPage, [], 'le blocage ne doit pas casser le script de la page');
     } finally {
       await page.close();

@@ -748,6 +748,11 @@ def fichiers_du_site() -> None:
         and "setHeaderCompact(true);" in script_site
         and "headerDetails.some(" in script_site
         and "if (focusWouldBeHidden) headerCompactToggle.focus();" in script_site
+        and 'const CLE_ENTETE_COMPACTE = "mrsc-entete-compacte";' in script_site
+        and "preferenceCompacte ?? Boolean(compactViewport?.matches)" in script_site
+        and 'savePreference(CLE_ENTETE_COMPACTE, compact ? "oui" : "non");' in script_site
+        and "Mode réduit : une entrée du menu ne fait pas sauter" in test_experience
+        and "le mode réduit a sauté au clic sur une entrée du menu" in test_experience
         and "En-tête compact : deux commandes, réglages groupés et bascule réversible" in test_experience
         and "les deux commandes gardent leur libellé entier" in test_experience
         and "l’en-tête doit garder deux commandes" in test_experience
@@ -759,6 +764,13 @@ def fichiers_du_site() -> None:
         and "mesureLignes.every((ligne) => ligne.hauteur >= 32)" in test_experience
         and "etat.lignes.every((ligne) => ligne.left >= etat.gauche - 1" in test_experience
         and "le cadre de la commande ne change pas quand le libellé bascule" in test_experience,
+    )
+    verifier(
+        "« Menu » et « Personnalisation » partagent une seule règle de bouton, mesurée en navigateur",
+        ".nav-toggle,\n.customize-settings > summary {" in styles
+        and "Boutons « Menu » et « Personnalisation » : même habillage mesuré" in test_experience
+        and "commandes ouvertes à ${format.width} px : ${p} diverge" in test_experience
+        and 'BOUTONS_PARTAGES' in (RACINE / "outils" / "verifier-affichages.py").read_text(encoding="utf-8"),
     )
     verifier(
         "La navigation permet retour, avance, accueil et reprise du dernier point",

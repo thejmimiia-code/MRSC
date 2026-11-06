@@ -206,6 +206,56 @@ MUTATIONS = (
         ".has-js .nav-links { position: absolute; right: 0; left: 0; width: auto; }",
         "le panneau du menu a de nouveau une géométrie par palier",
     ),
+    # Le 5 novembre 2026 au soir, « le mode réduit saute au moment où l'on clic
+    # sur un élément du menu » en vue ordinateur. Trois façons de faire revenir
+    # le saut, mesuré en Chromium de 49 px à 198 px à 1 440 px : ne plus lire la
+    # préférence, ne plus l'écrire, ou ne l'appliquer qu'à certaines pages.
+    (
+        "préférence de l’en-tête compact ignorée au chargement",
+        "assets/js/site.js",
+        "const etatCompactVoulu = () => preferenceCompacte ?? Boolean(compactViewport?.matches);",
+        "const etatCompactVoulu = () => Boolean(compactViewport?.matches);",
+        "ne gagne plus sur le format de fenêtre",
+    ),
+    (
+        "choix « Réduire » / « Agrandir » non enregistré",
+        "assets/js/site.js",
+        '        savePreference(CLE_ENTETE_COMPACTE, compact ? "oui" : "non");\n',
+        "",
+        "n'est plus enregistré",
+    ),
+    (
+        "page d’arrivée repart du seul format de fenêtre",
+        "assets/js/site.js",
+        "      setHeaderCompact(etatCompactVoulu());\n",
+        "      setHeaderCompact(Boolean(compactViewport?.matches));\n",
+        "n'est relue que 2 fois",
+    ),
+    # Le 5 novembre 2026, les deux panneaux de l'en-tête avaient été unifiés
+    # mais pas les deux boutons : un relevé Chromium montrait 14 px contre
+    # 12,8 px de police et deux transitions de durées différentes. Trois façons
+    # de refaire diverger « Menu » et « Personnalisation ».
+    (
+        "règle commune des deux boutons réduite à « Menu »",
+        "assets/css/site.css",
+        ".nav-toggle,\n.customize-settings > summary {\n",
+        ".nav-toggle {\n",
+        "la règle commune aux deux commandes",
+    ),
+    (
+        "« Menu » reprend sa police à lui tout seul",
+        "assets/css/site.css",
+        ".nav-toggle {\n  display: none;\n  flex: 0 0 auto;\n}\n",
+        ".nav-toggle {\n  display: none;\n  flex: 0 0 auto;\n  font-size: clamp(13px,.875rem,18px);\n}\n",
+        "redéclare `font-size` pour lui seul",
+    ),
+    (
+        "ouverture de « Menu » retirée de l'allumage commun",
+        "assets/css/site.css",
+        '.nav-toggle:hover,\n.nav-toggle[aria-expanded="true"],\n.customize-settings > summary:hover,\n',
+        ".nav-toggle:hover,\n.customize-settings > summary:hover,\n",
+        "ne sont plus portés par une seule règle",
+    ),
 )
 
 

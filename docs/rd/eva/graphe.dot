@@ -76,6 +76,7 @@ digraph memoire {
   "avancee:un-banc-a-dix-minutes-se-reduit-en-lecrivant" [shape=note, label="avancee:un-banc-a-dix-minutes-se-reduit-en-lecrivant"];
   "avancee:un-banc-coute-le-prix-de-ce-qu-il-eprouve" [shape=note, label="avancee:un-banc-coute-le-prix-de-ce-qu-il-eprouve"];
   "avancee:un-budget-qui-se-prouve-en-le-baissant" [shape=note, label="avancee:un-budget-qui-se-prouve-en-le-baissant"];
+  "avancee:un-choix-nest-pas-un-defaut-recalculable" [shape=note, label="avancee:un-choix-nest-pas-un-defaut-recalculable"];
   "avancee:un-code-de-sortie-ne-dit-pas-pourquoi" [shape=note, label="avancee:un-code-de-sortie-ne-dit-pas-pourquoi"];
   "avancee:un-conteneur-flex-ne-lit-pas-les-declarations-de-grille" [shape=note, label="avancee:un-conteneur-flex-ne-lit-pas-les-declarations-de-grille"];
   "avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer" [shape=note, label="avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer"];
@@ -102,6 +103,7 @@ digraph memoire {
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" [shape=note, label="avancee:une-largeur-de-piste-se-calcule-pas-se-choisit"];
   "avancee:une-planche-qui-repond-lit-le-registre" [shape=note, label="avancee:une-planche-qui-repond-lit-le-registre"];
   "avancee:une-sentinelle-reseau-se-teste-sans-reseau" [shape=note, label="avancee:une-sentinelle-reseau-se-teste-sans-reseau"];
+  "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" [shape=note, label="avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques"];
   "branche:autres-langues-et-contextes" [shape=ellipse, label="branche:autres-langues-et-contextes"];
   "branche:cartographier-les-lacunes" [shape=ellipse, label="branche:cartographier-les-lacunes"];
   "branche:co-conception-et-essais" [shape=ellipse, label="branche:co-conception-et-essais"];
@@ -204,6 +206,7 @@ digraph memoire {
   "outils/test_memoire_eva.py" [shape=plaintext, label="outils/test_memoire_eva.py"];
   "outils/test_mesure_graphismes.mjs" [shape=plaintext, label="outils/test_mesure_graphismes.mjs"];
   "outils/test_modele_grilles.py" [shape=plaintext, label="outils/test_modele_grilles.py"];
+  "outils/test_mutations_affichages.py" [shape=plaintext, label="outils/test_mutations_affichages.py"];
   "outils/test_mutations_budgets_visuels.py" [shape=plaintext, label="outils/test_mutations_budgets_visuels.py"];
   "outils/test_mutations_cadrages.py" [shape=plaintext, label="outils/test_mutations_cadrages.py"];
   "outils/test_mutations_files_relecture.py" [shape=plaintext, label="outils/test_mutations_files_relecture.py"];
@@ -501,6 +504,10 @@ digraph memoire {
   "avancee:un-budget-qui-se-prouve-en-le-baissant" -> "docs/rd/poids-pages.md" [label="prouvée par"];
   "avancee:un-budget-qui-se-prouve-en-le-baissant" -> "outils/test_mutations_poids_pages.py" [label="prouvée par"];
   "avancee:un-budget-qui-se-prouve-en-le-baissant" -> "outils/verifier-poids-pages.py" [label="prouvée par"];
+  "avancee:un-choix-nest-pas-un-defaut-recalculable" -> "assets/js/site.js" [label="prouvée par"];
+  "avancee:un-choix-nest-pas-un-defaut-recalculable" -> "outils/test-experience.cjs" [label="prouvée par"];
+  "avancee:un-choix-nest-pas-un-defaut-recalculable" -> "outils/test_mutations_affichages.py" [label="prouvée par"];
+  "avancee:un-choix-nest-pas-un-defaut-recalculable" -> "outils/verifier-affichages.py" [label="prouvée par"];
   "avancee:un-code-de-sortie-ne-dit-pas-pourquoi" -> ".github/workflows/verification.yml" [label="prouvée par"];
   "avancee:un-code-de-sortie-ne-dit-pas-pourquoi" -> "outils/test_verifier_mutation_graphismes.py" [label="prouvée par"];
   "avancee:un-code-de-sortie-ne-dit-pas-pourquoi" -> "outils/verifier-graphismes.cjs" [label="prouvée par"];
@@ -604,6 +611,10 @@ digraph memoire {
   "avancee:une-sentinelle-reseau-se-teste-sans-reseau" -> "outils/test_verifier_maj_amont.py" [label="prouvée par"];
   "avancee:une-sentinelle-reseau-se-teste-sans-reseau" -> "outils/verifier-maj-amont.py" [label="prouvée par"];
   "avancee:une-sentinelle-reseau-se-teste-sans-reseau" -> "simulateur/PROVENANCE.json" [label="prouvée par"];
+  "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" -> "assets/css/site.css" [label="prouvée par"];
+  "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" -> "outils/test-experience.cjs" [label="prouvée par"];
+  "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" -> "outils/test_mutations_affichages.py" [label="prouvée par"];
+  "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" -> "outils/verifier-affichages.py" [label="prouvée par"];
   "branche:autres-langues-et-contextes" -> "phase:apprentissages-et-relecture" [label="servie par"];
   "branche:cartographier-les-lacunes" -> "avancee:carte-de-sujet-avant-premiere-fiche" [label="a produit"];
   "branche:cartographier-les-lacunes" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
@@ -638,11 +649,13 @@ digraph memoire {
   "branche:coherence-textes-publics" -> "avancee:plan-eva-qui-se-laisse-contredire" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:rangees-incompletes-chiffrees" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-anneau-de-focus-se-mesure-comme-un-texte" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:un-choix-nest-pas-un-defaut-recalculable" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-degrade-est-une-plage-de-contraste" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-majorant-qu-on-ne-chiffre-pas-se-lit-comme-une-mesure" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-titre-tronque-n-est-pas-une-faute-de-gout" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:un-vide-assume-porte-son-motif" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:une-planche-qui-repond-lit-le-registre" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" [label="a produit"];
   "branche:coherence-textes-publics" -> "phase:couverture-des-branches" [label="servie par"];
   "branche:coherence-textes-publics" -> "phase:persona-de-conception" [label="servie par"];
   "branche:confronter-une-affirmation-a-sa-source" -> "avancee:indice-de-confrontation-non-certifiant" [label="a produit"];
@@ -742,6 +755,7 @@ digraph memoire {
   "branche:optimisation-du-site" -> "avancee:un-banc-a-dix-minutes-se-reduit-en-lecrivant" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:un-banc-coute-le-prix-de-ce-qu-il-eprouve" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:un-budget-qui-se-prouve-en-le-baissant" [label="a produit"];
+  "branche:optimisation-du-site" -> "avancee:un-choix-nest-pas-un-defaut-recalculable" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:un-code-de-sortie-ne-dit-pas-pourquoi" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:un-conteneur-flex-ne-lit-pas-les-declarations-de-grille" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:un-controle-qui-n-a-pas-pu-chercher-ne-doit-pas-rassurer" [label="a produit"];
@@ -765,6 +779,7 @@ digraph memoire {
   "branche:optimisation-du-site" -> "avancee:une-ecriture-n-est-pas-un-dessin-et-ce-qui-doit-rester-fixe-se-declare" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:une-planche-qui-repond-lit-le-registre" [label="a produit"];
+  "branche:optimisation-du-site" -> "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" [label="a produit"];
   "branche:optimisation-du-site" -> "phase:continuite-du-support" [label="servie par"];
   "branche:optimisation-du-site" -> "phase:economie-de-contexte" [label="servie par"];
   "branche:poids-et-sobriete-numerique" -> "avancee:cadrages-personnalises-au-pixel" [label="a produit"];

@@ -45,6 +45,12 @@
     contrast: "mrsc-contraste-renforce",
     spacing: "mrsc-espacement-renforce",
   };
+  // Réduire l'en-tête est un choix de la personne, pas un effet du format de
+  // fenêtre. Le 5 novembre 2026, ce choix n'était pas mémorisé : chaque entrée
+  // du menu charge une autre page, et l'en-tête y repartait agrandi — mesuré en
+  // navigateur à 1 440 px, de 49 px à 198 px au moment du clic. La préférence
+  // est donc lue au chargement, comme celles du texte et du contraste.
+  const CLE_ENTETE_COMPACTE = "mrsc-entete-compacte";
   const textLevels = [75, 85, 100, 115, 130];
   // Ancienne échelle en pourcentage, puis anciens crans indexés 0/1/2.
   const anciensCrans = { 50: 75, 75: 85, 100: 100, 125: 115, 150: 130 };
@@ -57,6 +63,10 @@
   // texte et l'espacement changent la largeur des entrées de navigation : le
   // panneau du menu doit alors réévaluer s'il est flottant, et se replacer.
   const apresChangementReglages = [];
+  // Rappel branché plus bas, quand l'en-tête et sa bascule existent : le
+  // chargement des préférences précède leur mise en place dans le script.
+  let appliquerPreferenceEntete = null;
+  let preferenceCompacte = null;
 
   const readPreference = (key) => {
     try {
@@ -73,6 +83,18 @@
       // Les contrôles restent utilisables pendant la visite si le stockage est bloqué.
     }
   };
+
+  // `null` = aucun choix explicite : c'est alors le format de fenêtre qui
+  // décide. Les deux valeurs acceptées sont écrites par la bascule elle-même ;
+  // une valeur inconnue ou un stockage indisponible reviennent à ce défaut.
+  const lirePreferenceEnteteCompacte = () => {
+    const valeur = readPreference(CLE_ENTETE_COMPACTE);
+    if (valeur === "oui") return true;
+    if (valeur === "non") return false;
+    return null;
+  };
+
+  preferenceCompacte = lirePreferenceEnteteCompacte();
 
   const niveauTexteEnregistre = (value) => {
     if (value === null) return null;
@@ -779,6 +801,12 @@
     ) {
       loadPreferences();
     }
+    // Un autre onglet a réduit ou agrandi l'en-tête : cette page suit, au lieu
+    // de garder une image qui contredit la préférence lue au prochain clic.
+    if (event.key === null || event.key === CLE_ENTETE_COMPACTE) {
+      preferenceCompacte = lirePreferenceEnteteCompacte();
+      appliquerPreferenceEntete?.();
+    }
   });
 
   const toggle = document.querySelector("[data-menu-toggle]");
@@ -1075,6 +1103,12 @@
         header.querySelector("#site-header-identity"),
       ];
 
+      // Une préférence explicite gagne sur le format de fenêtre : sinon un
+      // redimensionnement, une rotation ou la barre d'adresse d'un téléphone
+      // referaient « sauter » le mode réduit sans que la personne ait rien
+      // demandé. Sans préférence, le format reste le seul décideur, comme avant.
+      const etatCompactVoulu = () => preferenceCompacte ?? Boolean(compactViewport?.matches);
+
       const setHeaderCompact = (compact) => {
         const label = compact ? "Agrandir" : "Réduire";
         const expanded = String(!compact);
@@ -1107,7 +1141,8 @@
       };
 
       headerCompactToggle.hidden = false;
-      setHeaderCompact(Boolean(compactViewport?.matches));
+      setHeaderCompact(etatCompactVoulu());
+      appliquerPreferenceEntete = () => setHeaderCompact(etatCompactVoulu());
       headerCompactToggle.addEventListener("click", () => {
         closeMenu();
         // Ne pas fermer « Personnalisation » : le bouton est dans son panneau, et
@@ -1117,13 +1152,16 @@
         if (layoutSettings) layoutSettings.open = false;
         const journeySettings = document.querySelector("[data-site-journey]");
         if (journeySettings) journeySettings.open = false;
-        setHeaderCompact(!header.classList.contains("is-compact"));
+        const compact = !header.classList.contains("is-compact");
+        preferenceCompacte = compact;
+        savePreference(CLE_ENTETE_COMPACTE, compact ? "oui" : "non");
+        setHeaderCompact(compact);
       });
 
       if (compactViewport) {
         const onViewportModeChange = () => {
           closeMenu();
-          setHeaderCompact(compactViewport.matches);
+          setHeaderCompact(etatCompactVoulu());
         };
         if (typeof compactViewport.addEventListener === "function") {
           compactViewport.addEventListener("change", onViewportModeChange);
@@ -1134,13 +1172,16 @@
 
       // Sous 520 px, une réduction de fenêtre rétablit le format compact après
       // un agrandissement manuel. Une fois compact, ne pas réécrire son libellé
-      // à chaque pixel de redimensionnement.
+      // à chaque pixel de redimensionnement. Ce rattrapage ne vaut que sans
+      // choix explicite : une personne qui a demandé l'en-tête agrandi ne doit
+      // pas le voir refermer sous ses doigts au premier pixel gagné.
       if (narrowViewport) {
         let previousViewportWidth = window.innerWidth;
         window.addEventListener("resize", () => {
           const widthIsShrinking = window.innerWidth < previousViewportWidth;
           previousViewportWidth = window.innerWidth;
           if (!widthIsShrinking || !narrowViewport.matches || header.classList.contains("is-compact")) return;
+          if (preferenceCompacte !== null) return;
           closeMenu();
           setHeaderCompact(true);
         });

@@ -2909,3 +2909,114 @@ pas. Il devient `max(13px, .82rem)` pour les deux panneaux — même dessin à
 100 %, cran de texte respecté ensuite. `verifier-affichages.py` exige l'une et
 l'autre, et une mutation du banc retire le sélecteur du menu pour prouver que le
 contrôle le voit.
+
+## 17. Le mode réduit est un choix, pas un effet de la fenêtre (5 novembre 2026)
+
+**Retour d'usage :** « j'ai repéré un décrochage du mode réduit dans le menu
+quand on est en vu ordinateur, le mode réduit saute au moment où l'on clic sur
+un élément du menu ». Ce n'est pas le panneau qui se décroche : c'est l'en-tête
+qui change de hauteur sur la page chargée par le lien.
+
+Le relevé, en Chromium headless sur l'aperçu local :
+
+| Format | Agrandi | Après « Réduire » | Menu ouvert | Après le clic sur une entrée |
+| --- | ---: | ---: | ---: | ---: |
+| 1 440 × 900 | 198 px | 49 px | 49 px | **198 px** |
+| 980 × 440 (aperçu ordinateur) | 194 px | 49 px | 49 px | **194 px** |
+
+Le libellé repasse de « Agrandir » à « Réduire », `aria-expanded` de `false` à
+`true`, `html.entete-compacte` disparaît. La requête qui compacte
+automatiquement l'en-tête (`(max-width: 760px)` ou paysage court) ne reconnaît
+pas un mode réduit **demandé** sur ordinateur ; au chargement de la page
+d'arrivée, `setHeaderCompact(Boolean(compactViewport?.matches))` repartait donc
+de zéro. L'état n'était écrit nulle part.
+
+**Décision.** `mrsc-entete-compacte` (`oui` / `non`) rejoint les préférences
+locales, au même titre que `mrsc-texte-cran`. Elle est lue au chargement, écrite
+par la bascule elle-même, et suivie d'un onglet à l'autre par l'événement
+`storage`. Une préférence explicite **gagne** sur le format de fenêtre : une
+rotation, la barre d'adresse d'un téléphone ou un redimensionnement ne doivent
+pas refermer un en-tête que la personne a choisi d'agrandir, ni agrandir celui
+qu'elle a réduit. Sans préférence, le format redevient le seul décideur :
+l'automaticité du 16 octobre est conservée pour une première visite. Le
+rattrapage « rétrécissement sous 520 px » ne joue plus que dans ce cas.
+
+Ce renversement est écrit parce que la décision d'origine l'était : le 16
+octobre, le bouton « ne persiste pas de préférence ». Elle protégeait le
+compactage automatique ; elle ne distinguait pas le **défaut** du **choix**. Un
+défaut peut être recalculé à chaque page, un choix non.
+
+**Première peinture.** `assets/js/site.js` est chargé avec `defer` depuis
+l'en-tête. Avec la préférence `oui`, la classe `is-compact` est posée à 74,8 ms,
+`DOMContentLoaded` à 76,8 ms et la première peinture à 448,6 ms sur
+`documents.html` à 1 440 × 900 : l'état est appliqué avant la première image, il
+n'y a pas d'éclair d'en-tête agrandi. Le douzième essai navigateur lit l'état
+dès `DOMContentLoaded`, justement pour qu'un retour à une application plus
+tardive soit vu.
+
+**Ce que tiennent les contrôles.** `verifier-affichages.py` exige les cinq bouts
+de la chaîne (clé, lecture, priorité, écriture, écoute `storage`) et les trois
+appels à `etatCompactVoulu()` ; trois mutations du banc retirent séparément la
+lecture, l'écriture et l'application à la page d'arrivée, et doivent faire
+tomber la porte. L'essai navigateur, lui, mesure la hauteur et le libellé après
+le clic, aux deux formats, dans les deux sens de la bascule.
+
+**Limites.** La préférence est locale à l'appareil : un autre navigateur, un
+stockage effacé ou bloqué reprend le format de fenêtre. Le script `defer` passe
+après la fin de l'analyse HTML ; sur un réseau très lent, une première peinture
+plus précoce que lui reste possible — une garantie absolue demanderait un
+script en ligne dans les 117 pages, ce que ce lot ne fait pas. Aucun contrôle
+ici ne remplace la vérification à l'écran sur l'appareil de la personne.
+
+## 18. Les deux boutons sont le même bouton (5 novembre 2026)
+
+Le 5 novembre, les deux panneaux flottants de l'en-tête partageaient déjà leur
+surface, leur géométrie et leur animation. Les deux commandes qui les ouvrent,
+non. « Menu » était un `<button>` dessiné par `.nav-toggle`, « Personnalisation »
+un `<summary>` dessiné par `.customize-settings > summary`, et les deux règles
+avaient été écrites à des moments différents.
+
+**Relevé des styles calculés** (Chromium headless, `getComputedStyle`, cinq
+configurations — 390 × 844, 980 × 440, 1 440 × 900 à 130 %, mouvement normal et
+réduit — et quatre états : repos, survol, focus, page courante) :
+
+| Propriété | « Menu » | « Personnalisation » |
+|---|---|---|
+| `font-size` à 100 % | 14 px (`clamp(13px,.875rem,18px)`) | 12,8 px (`clamp(12px,.8rem,18px)`) |
+| `line-height` à 100 % | 16,8 px | 15,36 px |
+| `padding-inline` | 10,4 px (`.65rem`) | 10 px (`.6rem`) |
+| `white-space` | `nowrap` | `normal` |
+| `min-width` | `auto` | `44px` |
+| `transition` | `background .18s ease` | `background-color .15s ease` |
+| À 130 % de texte | 18 px | 16,64 px |
+| En-tête compact à 980 px | `min-width: 0` | `min-width: 44px` |
+
+Ce n'était pas une question de goût : deux boutons voisins dans la même barre
+marine ne répondaient pas de la même façon au même geste, et le garde-fou
+`HABILLAGE_COMMUN` ne lisait que les panneaux.
+
+**Une seule source.** La règle `.nav-toggle, .customize-settings > summary`
+porte désormais les vingt propriétés communes ; une seconde règle porte
+l'allumage au survol **et** à l'ouverture pour les deux. Les règles propres ne
+gardent que ce qui distingue un bouton d'un résumé de `<details>` : l'affichage
+initial, `flex` et `list-style`. Trois paliers qui ne nommaient qu'un seul des
+deux boutons sont alignés : police à 115/130 %, `min-width` de l'en-tête compact,
+et le même au-delà de 1 261 px.
+
+**Ce que tiennent les contrôles.** `verifier-affichages.py` n'impose aucune
+valeur de couleur ou de taille : un dessin peut changer tant qu'il change pour
+les deux. Il exige que la règle commune existe, qu'elle contienne les vingt
+propriétés, et qu'aucune règle propre n'en reprenne une à son compte. Trois
+mutations du banc rejouent exactement les trois façons de refaire diverger les
+boutons. Le treizième essai navigateur relit 27 propriétés **calculées**, fermé
+à fermé puis ouvert à ouvert — le site n'autorise qu'un panneau ouvert à la
+fois, comparer un bouton ouvert à un bouton fermé donnerait un faux écart.
+
+**Limites.** Les lignes à l'intérieur des panneaux gardent des écarts mesurés :
+`min-width`, `line-height`, et des allumages différents au focus et sur la page
+courante. `text-align: start` et `text-align: left` sont identiques en écriture
+latine. L'icône hamburger (SVG 20 px) et le chevron masqué (13 px) restent deux
+dessins choisis. Aucun de ces écarts n'est effacé ni présenté comme corrigé.
+Enfin, la feuille corrigée n'est pas encore celle que le site publié sert : la
+fidélité visuelle **sur le site en ligne** reste à confirmer après déploiement et
+relevé des octets servis.
