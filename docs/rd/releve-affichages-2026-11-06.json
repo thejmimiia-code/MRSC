@@ -1,0 +1,172 @@
+{
+  "date": "2026-11-06",
+  "outil": "outils/auditer-affichages.mjs",
+  "navigateur": "HeadlessChrome/153.0.8010.0",
+  "pilote": "puppeteer-core 25.16.0",
+  "binaire": "@sparticuz/chromium 153.0.0 + bibliothèques al2023.tar.br",
+  "serveur": "python3 -m http.server 4180 --bind 0.0.0.0 (fichiers statiques du dépôt)",
+  "combinaisons": {
+    "modes": 10,
+    "pages": 13,
+    "formats": 19,
+    "mesures": 2470
+  },
+  "compteurs": {
+    "nbDehors": 0,
+    "nbTexteFin": 2470,
+    "nbCiblesPetites": 0,
+    "nbImagesAgrandies": 10,
+    "nbTextesCoupes": 0
+  },
+  "defilement_horizontal_max_px": 0,
+  "faux_positifs_texte_fin": {
+    "selecteur": "span.customize-settings-chevron",
+    "corps_px": 0,
+    "occurrences": 2470,
+    "cause": "glyphe décoratif aria-hidden, dessiné par un masque CSS ; font-size: 0 annule le caractère d'origine"
+  },
+  "images_agrandies": [
+    {
+      "mode": "équilibrée",
+      "page": "index.html",
+      "format": "tel paysage 844",
+      "fichier": "accueil-logo-mrsc-3d-1400.avif",
+      "reelle": 1400,
+      "besoin": 2094,
+      "facteur": 1.5
+    },
+    {
+      "mode": "lecture",
+      "page": "index.html",
+      "format": "tel paysage 844",
+      "fichier": "accueil-logo-mrsc-3d-1400.avif",
+      "reelle": 1400,
+      "besoin": 2094,
+      "facteur": 1.5
+    },
+    {
+      "mode": "vitrine",
+      "page": "index.html",
+      "format": "tel paysage 844",
+      "fichier": "accueil-logo-mrsc-3d-1400.avif",
+      "reelle": 1400,
+      "besoin": 2094,
+      "facteur": 1.5
+    },
+    {
+      "mode": "mosaïque",
+      "page": "index.html",
+      "format": "tel paysage 844",
+      "fichier": "accueil-logo-mrsc-3d-1400.avif",
+      "reelle": 1400,
+      "besoin": 2094,
+      "facteur": 1.5
+    },
+    {
+      "mode": "panorama",
+      "page": "index.html",
+      "format": "tel paysage 844",
+      "fichier": "accueil-logo-mrsc-3d-1400.avif",
+      "reelle": 1400,
+      "besoin": 2094,
+      "facteur": 1.5
+    },
+    {
+      "mode": "compacte",
+      "page": "index.html",
+      "format": "tel paysage 844",
+      "fichier": "accueil-logo-mrsc-3d-1400.avif",
+      "reelle": 1400,
+      "besoin": 2094,
+      "facteur": 1.5
+    },
+    {
+      "mode": "texte 150 %",
+      "page": "index.html",
+      "format": "tel paysage 844",
+      "fichier": "accueil-logo-mrsc-3d-1400.avif",
+      "reelle": 1400,
+      "besoin": 2094,
+      "facteur": 1.5
+    },
+    {
+      "mode": "texte 50 %",
+      "page": "index.html",
+      "format": "tel paysage 844",
+      "fichier": "accueil-logo-mrsc-3d-1400.avif",
+      "reelle": 1400,
+      "besoin": 2094,
+      "facteur": 1.5
+    },
+    {
+      "mode": "contraste renforcé",
+      "page": "index.html",
+      "format": "tel paysage 844",
+      "fichier": "accueil-logo-mrsc-3d-1400.avif",
+      "reelle": 1400,
+      "besoin": 2094,
+      "facteur": 1.5
+    },
+    {
+      "mode": "espacement renforcé",
+      "page": "index.html",
+      "format": "tel paysage 844",
+      "fichier": "accueil-logo-mrsc-3d-1400.avif",
+      "reelle": 1400,
+      "besoin": 2094,
+      "facteur": 1.5
+    }
+  ],
+  "transparence_tel_320": [
+    {
+      "mode": "équilibrée",
+      "defilement_horizontal_px": 0,
+      "hors_cadre": 0
+    },
+    {
+      "mode": "lecture",
+      "defilement_horizontal_px": 0,
+      "hors_cadre": 0
+    },
+    {
+      "mode": "vitrine",
+      "defilement_horizontal_px": 0,
+      "hors_cadre": 0
+    },
+    {
+      "mode": "mosaïque",
+      "defilement_horizontal_px": 0,
+      "hors_cadre": 0
+    },
+    {
+      "mode": "panorama",
+      "defilement_horizontal_px": 0,
+      "hors_cadre": 0
+    },
+    {
+      "mode": "compacte",
+      "defilement_horizontal_px": 0,
+      "hors_cadre": 0
+    },
+    {
+      "mode": "texte 150 %",
+      "defilement_horizontal_px": 0,
+      "hors_cadre": 0
+    },
+    {
+      "mode": "texte 50 %",
+      "defilement_horizontal_px": 0,
+      "hors_cadre": 0
+    },
+    {
+      "mode": "contraste renforcé",
+      "defilement_horizontal_px": 0,
+      "hors_cadre": 0
+    },
+    {
+      "mode": "espacement renforcé",
+      "defilement_horizontal_px": 0,
+      "hors_cadre": 0
+    }
+  ]
+}

@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 95 |
+| Avancées consignées | 96 |
 | Période couverte | du 2026-10-20 au 2026-11-06 |
 | Contrôles exécutables cités | 106 |
 | Initiatives du portefeuille concernées | 15 |
@@ -2168,6 +2168,30 @@ Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 **Suite.** Publier la feuille, relire les octets servis, puis décider si les lignes et les icônes doivent converger aussi ; une comparaison humaine des états fermé, ouvert, survol, focus, actif et page courante reste à faire.
 
 Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
+
+### `remesurer-avant-de-conclure-quun-defaut-est-la` — Un relevé qui ne reproduit pas un défaut ne prouve pas qu'il a été corrigé
+
+*Consignée le 2026-11-06.*
+
+**Constat.** Le 6 novembre 2026, la page Transparence avait été publiée sans navigateur : un relevé A/B y notait un débordement horizontal préexistant de 24 px à `320-130`, attribué à `.section-heading` et `.licence-callout`, et la trace demandait de remesurer les six configurations. Chromium 153 a été rétabli hors du dépôt (`@sparticuz/chromium` 153.0.0, `puppeteer-core` 25.16.0, bibliothèques `al2023.tar.br`).
+
+**Ce que cela change.** Trois relevés datés, sans aucune modification du site : 2 470 mesures de `outils/auditer-affichages.mjs` (10 modes × 13 pages × 19 formats), 272 mesures ciblées à 320 px avec 100/130 % de texte, six présentations, contraste et espacement renforcés, et 144 mesures d'A/B entre `transparence.html` d'avant #281 (45 759 o, récupérée par l'API GitHub) et d'après (50 876 o) avec les mêmes CSS/JS. Défilement horizontal maximal 0 px, zéro élément hors cadre, zéro texte rogné, zéro cible sous 24 px ; `outils/test-experience.cjs` repasse 13/13 avec `serveur-local.py`. Le débordement de 24 px n'est reproduit nulle part. Le relevé est consigné dans `docs/rd/releve-affichages-2026-11-06.md` et son résumé machine, et les entrées plus anciennes gardent leur date : aucune conclusion « corrigé » n'est tirée, puisqu'aucune règle CSS n'a changé et que le réglage exact du harnais A/B d'origine n'a pas été reconstitué.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/releve-affichages-2026-11-06.md`
+- `docs/rd/releve-affichages-2026-11-06.json`
+- `outils/auditer-affichages.mjs`
+- `outils/test-experience.cjs`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-rd-continue.py && python3 outils/verifier-integration.py && node outils/test_auditer_affichages.mjs && python3 outils/construire-avancees.py --verifier && python3 outils/memoire-eva.py --verifier`
+
+**Limite — ce que cela ne prouve pas.** La mesure a aussi révélé deux limites qu'elle ne résout pas. L'auditeur sort en code 1 sur les 2 470 mesures à cause d'un faux positif : `span.customize-settings-chevron`, décor `aria-hidden` dessiné par masque avec `font-size: 0`, est compté comme « texte sous 12 px » ; le banc actuel remplace le navigateur par un faux qui renvoie directement les compteurs et ne peut donc pas éprouver un filtre. Dix mesures réelles montrent l'emblème bitmap de l'accueil agrandi 1,50× à 844 px en densité 3× (2 094 pixels d'appareil pour 1 400 de source), tandis qu'un commentaire CSS le dit encore « vectoriel » ; réintroduire un plafond de densité est un arbitrage de dessin laissé à l'association. Un seul navigateur, aucun lecteur d'écran, aucune personne, aucun zoom natif, aucune mesure de contraste : ces compteurs ne disent rien de la lisibilité réelle ni de la fidélité visuelle des deux commandes de l'en-tête.
+
+**Suite.** Corriger la sonde en écartant les décors `aria-hidden` à corps nul, avec un banc qui exécute réellement le filtre ; soumettre à l'association l'arbitrage netteté / taille de l'emblème avant toute règle de densité ; conserver la mesure `320-130` comme relevé daté sans la présenter comme un défaut constaté sur la version publiée.
+
+Initiatives liées : `optimisation-du-site`, `poids-et-sobriete-numerique`, `coherence-textes-publics`.
 
 ### `un-controle-humain-ne-vaut-que-pour-ce-quil-a-regarde` — Un contrôle humain ne vaut que pour ce qu'il a regardé — le bouton Menu est confirmé sur le comportement
 
