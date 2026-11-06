@@ -231,6 +231,31 @@ MUTATIONS = (
         "      setHeaderCompact(Boolean(compactViewport?.matches));\n",
         "n'est relue que 2 fois",
     ),
+    # Le 5 novembre 2026, les deux panneaux de l'en-tête avaient été unifiés
+    # mais pas les deux boutons : un relevé Chromium montrait 14 px contre
+    # 12,8 px de police et deux transitions de durées différentes. Trois façons
+    # de refaire diverger « Menu » et « Personnalisation ».
+    (
+        "règle commune des deux boutons réduite à « Menu »",
+        "assets/css/site.css",
+        ".nav-toggle,\n.customize-settings > summary {\n",
+        ".nav-toggle {\n",
+        "la règle commune aux deux commandes",
+    ),
+    (
+        "« Menu » reprend sa police à lui tout seul",
+        "assets/css/site.css",
+        ".nav-toggle {\n  display: none;\n  flex: 0 0 auto;\n}\n",
+        ".nav-toggle {\n  display: none;\n  flex: 0 0 auto;\n  font-size: clamp(13px,.875rem,18px);\n}\n",
+        "redéclare `font-size` pour lui seul",
+    ),
+    (
+        "ouverture de « Menu » retirée de l'allumage commun",
+        "assets/css/site.css",
+        '.nav-toggle:hover,\n.nav-toggle[aria-expanded="true"],\n.customize-settings > summary:hover,\n',
+        ".nav-toggle:hover,\n.customize-settings > summary:hover,\n",
+        "ne sont plus portés par une seule règle",
+    ),
 )
 
 

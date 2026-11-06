@@ -170,7 +170,7 @@ Distinguer deux choses que la demande mélange : le temps de **rappel** de l'ind
 
 ## Le graphe
 
-264 nœuds et 589 arêtes, dérivés de ce plan, du portefeuille et des avancées.
+265 nœuds et 595 arêtes, dérivés de ce plan, du portefeuille et des avancées.
 
 - `graphe.md` — diagramme Mermaid, lisible dans Obsidian ou Graphify ;
 - `graphe.dot` — même graphe, fichiers compris, pour les outils de graphe ;

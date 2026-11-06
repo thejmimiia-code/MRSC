@@ -438,7 +438,7 @@ html.contraste-renforce .site-status-note {
   min-width: 0;
 }
 
-.site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings, .site-journey-settings, .layout-settings) {
+.site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings, .site-journey-settings, .layout-settings, .customize-settings > summary) {
   display: inline-flex;
   flex: 0 0 auto;
   min-width: 0;
@@ -490,31 +490,51 @@ html.contraste-renforce .site-status-note {
   margin-inline: auto;
 }
 
-.nav-toggle {
-  display: none;
-  flex: 0 0 auto;
+/* « Menu » et « Personnalisation » sont le même bouton, pas deux dessins
+   voisins. Le 5 novembre 2026, un relevé des styles calculés en Chromium a
+   montré qu'ils ne l'étaient pas : 14 px contre 12,8 px de police, 10,4 px
+   contre 10 px de gouttière, `white-space: nowrap` d'un seul côté, un
+   `min-width` seulement sur l'un, et deux transitions de durées différentes
+   (0,18 s contre 0,15 s). Les panneaux avaient été unifiés, les boutons non —
+   c'est pourtant la première chose que l'on voit. Une seule règle porte
+   désormais l'habillage ; les deux règles propres ne gardent que ce qui
+   distingue un `<button>` d'un `<summary>`. */
+.nav-toggle,
+.customize-settings > summary {
   align-items: center;
   justify-content: center;
-  gap: clamp(6px,.35rem,8px);
+  gap: clamp(6px, .35rem, 8px);
+  min-width: 44px;
   min-height: 44px;
-  padding: clamp(6px,.4rem,8px) clamp(10px,.65rem,14px);
+  padding: clamp(6px, .4rem, 8px) clamp(10px, .6rem, 14px);
   border: 1px solid var(--on-navy-border);
   border-radius: var(--button-radius);
   background: var(--on-navy-fill);
   color: var(--on-navy);
-  font: inherit;
-  font-size: clamp(13px,.875rem,18px);
+  font-family: inherit;
+  font-size: clamp(12px, .8rem, 18px);
   font-weight: 700;
   line-height: 1.2;
-  white-space: nowrap;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: normal;
+  hyphens: none;
   cursor: pointer;
-  transition: background .18s ease, border-color .18s ease;
+  transition: background-color .15s ease, border-color .15s ease;
 }
 
+/* Même allumage au survol et à l'ouverture, quelle que soit la commande. */
 .nav-toggle:hover,
-.nav-toggle[aria-expanded="true"] {
+.nav-toggle[aria-expanded="true"],
+.customize-settings > summary:hover,
+.customize-settings[open] > summary {
   border-color: var(--gold);
   background: var(--on-navy-fill-strong);
+}
+
+.nav-toggle {
+  display: none;
+  flex: 0 0 auto;
 }
 
 .nav-toggle svg {
@@ -2849,7 +2869,7 @@ html.texte-tres-agrandi { font-size: 130%; }
 html:is(.texte-tres-reduit,.texte-reduit,.texte-agrandi,.texte-tres-agrandi) body { font-size: 1rem; }
 html:is(.texte-tres-reduit,.texte-reduit) :is(button,input,select,textarea) { font-size: max(12px,1em); }
 html:is(.texte-agrandi,.texte-tres-agrandi) :is(button,input,select,textarea) { font-size: clamp(12px,1em,20px); }
-html:is(.texte-tres-reduit,.texte-reduit,.texte-agrandi,.texte-tres-agrandi) :is(.nav-toggle,.header-compact-toggle) { font-size: clamp(13px,.875rem,18px); }
+html:is(.texte-tres-reduit,.texte-reduit,.texte-agrandi,.texte-tres-agrandi) :is(.nav-toggle,.header-compact-toggle,.customize-settings > summary) { font-size: clamp(13px,.875rem,18px); }
 html:is(.texte-tres-reduit,.texte-reduit,.texte-agrandi,.texte-tres-agrandi) .display-settings-panel .display-control { font-size: clamp(14px,1rem,18px); }
 
 html.espacement-renforce :is(main, .site-footer) :is(h1,h2,h3,p,li,dd,dt,figcaption,blockquote,address,th,td) {
@@ -3063,7 +3083,7 @@ html.espacement-renforce .site-journey-navigation :is(button,p) {
     flex-wrap: nowrap;
     align-items: center;
   }
-  html.has-js:not(.texte-agrandi):not(.texte-tres-agrandi) .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings, .site-journey-settings, .layout-settings) {
+  html.has-js:not(.texte-agrandi):not(.texte-tres-agrandi) .site-header.is-compact :is(.nav-toggle, .header-compact-toggle, .display-settings, .site-journey-settings, .layout-settings, .customize-settings > summary) {
     flex: 0 0 auto;
     min-width: 0;
   }
@@ -4604,34 +4624,10 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
 
 .customize-settings > summary {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(6px, .35rem, 8px);
-  min-width: 44px;
-  min-height: 44px;
-  padding: clamp(6px, .4rem, 8px) clamp(10px, .6rem, 14px);
-  border: 1px solid var(--on-navy-border);
-  border-radius: var(--button-radius);
-  background: var(--on-navy-fill);
-  color: var(--on-navy);
-  font-size: clamp(12px, .8rem, 18px);
-  font-weight: 700;
-  line-height: 1.2;
   list-style: none;
-  cursor: pointer;
-  white-space: normal;
-  overflow-wrap: normal;
-  hyphens: none;
-  text-align: center;
-  transition: background-color .15s ease, border-color .15s ease;
 }
 .customize-settings > summary::-webkit-details-marker { display: none; }
 .customize-settings > summary::marker { content: ""; }
-.customize-settings > summary:hover,
-.customize-settings[open] > summary {
-  border-color: var(--gold);
-  background: var(--on-navy-fill-strong);
-}
 /* Anneau de focus des commandes d'en-tête : un seul dessin, une seule couleur.
    Le 5 novembre 2026, « Menu » et « Personnalisation » se ressemblaient au
    survol et à l'ouverture, mais pas au clavier : l'un prenait l'anneau global,

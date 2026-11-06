@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 89 |
+| Avancées consignées | 90 |
 | Période couverte | du 2026-10-20 au 2026-11-05 |
-| Contrôles exécutables cités | 100 |
+| Contrôles exécutables cités | 101 |
 | Initiatives du portefeuille concernées | 15 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -2140,6 +2140,32 @@ Initiatives liées : `cartographier-les-lacunes`, `veille-savoirs-evolutifs`, `c
 **Limite — ce que cela ne prouve pas.** La préférence est locale à l'appareil et au navigateur : un stockage effacé ou bloqué reprend le format de fenêtre, et la bascule ne reste alors utilisable que pendant la visite — l'essai navigateur avec stockage bloqué le vérifie, mais la page suivante y perd encore le mode réduit. `site.js` est chargé avec `defer` : la classe est posée à 74,8 ms pour une première peinture à 448,6 ms sur ce Chromium et ce réseau local, donc pas d'éclair d'en-tête agrandi ici, mais un réseau très lent pourrait peindre avant lui ; une garantie absolue demanderait un script en ligne dans les 117 pages. Aucune vérification humaine sur l'appareil de la personne n'a eu lieu, et la correction n'a pas été publiée à ce stade.
 
 **Suite.** Confirmer à l'écran, sur le site publié, le clic dans le menu à 1 440 px et en aperçu ordinateur ; puis relire le relevé `graphismes` de la CI. Si un éclair d'en-tête agrandi est vu sur un réseau lent, mesurer la première peinture avant d'envisager un script en ligne.
+
+Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
+
+### `unifier-les-panneaux-ne-rend-pas-les-boutons-identiques` — Unifier les panneaux ne rend pas les boutons identiques — les styles calculés l'ont dit
+
+*Consignée le 2026-11-05.*
+
+**Constat.** Le retour d'usage « le comportement du bouton menu n'était pas Fidel en terme de rendu ni visuels par rapport au comportement du menu du bouton personnalisation » restait ouvert après trois lots : géométrie commune, habillage commun des panneaux, puis déploiement et fraîcheur des octets servis. Chaque lot répondait à une partie du signal, et les garde-fous étaient verts. Un relevé de `getComputedStyle` dans Chromium, sur cinq configurations (390 × 844, 980 × 440, 1 440 × 900 à 130 %, mouvement normal et réduit) et quatre états, a montré pourquoi : les deux **commandes** n'avaient jamais été comparées. À 100 % de texte, « Menu » avait 14 px de police, 16,8 px d'interligne, 10,4 px de gouttière, `white-space: nowrap`, `min-width: auto` et une transition de 0,18 s ; « Personnalisation » avait 12,8 px, 15,36 px, 10 px, `normal`, 44 px et 0,15 s. À 130 % et en en-tête compact, deux paliers asymétriques ajoutaient 18 px contre 16,64 px et `min-width: 0` contre 44 px.
+
+**Ce que cela change.** Une seule règle `.nav-toggle, .customize-settings > summary` porte les vingt propriétés communes, et une seule règle l'allumage au survol comme à l'ouverture ; les règles propres ne gardent que `display`/`flex` et `list-style`. Trois paliers qui ne nommaient qu'un bouton sont alignés. Le nouveau garde-fou n'impose aucune valeur : il refuse qu'une règle propre reprenne une propriété commune — un dessin peut changer librement, mais pas d'un seul côté. Trois mutations rejouent les trois façons de refaire diverger, et un treizième essai navigateur relit 27 styles calculés, fermé à fermé puis ouvert à ouvert, parce qu'un seul panneau peut être ouvert à la fois. `versionner-css-ia.py` suit le changement de feuille.
+
+**Preuves dans le dépôt :**
+
+- `assets/css/site.css`
+- `outils/verifier-affichages.py`
+- `outils/test_mutations_affichages.py`
+- `outils/test-experience.cjs`
+- `outils/verifier-integration.py`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py && python3 outils/verifier-integration.py && python3 outils/versionner-css-ia.py --verifier && node outils/test_test_experience.mjs && node outils/test-experience.cjs`
+
+**Limite — ce que cela ne prouve pas.** Le relevé compare des styles calculés, pas une perception : aucune validation humaine côte à côte n'a eu lieu. Les lignes à l'intérieur des deux panneaux gardent des écarts mesurés (`min-width`, `line-height`, allumages au focus et sur la page courante) et l'icône hamburger reste un SVG de 20 px quand le chevron est un masque de 13 px — ce lot ne les unifie pas et ne le prétend pas. Trois couleurs relevées pendant la transition de 150 ms et une opacité d'animation restent des artefacts de mon propre banc, pas des divergences de source. Surtout, la feuille corrigée n'est pas publiée : le site en ligne sert encore l'ancienne empreinte, donc la fidélité visuelle publiée n'est pas établie.
+
+**Suite.** Publier la feuille, relire les octets servis, puis décider si les lignes et les icônes doivent converger aussi ; une comparaison humaine des états fermé, ouvert, survol, focus, actif et page courante reste à faire.
 
 Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 

@@ -757,6 +757,88 @@ async function main() {
     }
   });
 
+  // Retour d'usage du 5 novembre 2026 : « le comportement du bouton menu
+  // n'était pas Fidel en terme de rendu ni visuels » face à « Personnalisation ».
+  // Les deux panneaux avaient été unifiés, pas les deux commandes : relevé en
+  // Chromium, 14 px contre 12,8 px de police, 10,4 px contre 10 px de
+  // gouttière, `nowrap` d'un seul côté, deux transitions de durées différentes.
+  // L'essai compare les styles **calculés**, pas les déclarations, et comme un
+  // seul panneau peut être ouvert à la fois, il compare fermé à fermé puis
+  // ouvert à ouvert — jamais un bouton ouvert à un bouton fermé.
+  await executer('Boutons « Menu » et « Personnalisation » : même habillage mesuré', async () => {
+    const proprietes = [
+      'background-color', 'color', 'border-top-width', 'border-right-width',
+      'border-bottom-width', 'border-left-width', 'border-top-color',
+      'border-radius', 'box-shadow', 'padding-top', 'padding-right',
+      'padding-bottom', 'padding-left', 'min-width', 'min-height',
+      'font-family', 'font-size', 'font-weight', 'line-height',
+      'letter-spacing', 'text-align', 'white-space', 'cursor',
+      'transition-property', 'transition-duration', 'outline-width',
+      'outline-color', 'outline-offset',
+    ];
+    const lire = (page) => page.evaluate((props) => {
+      const relever = (selecteur) => {
+        const style = getComputedStyle(document.querySelector(selecteur));
+        const valeurs = {};
+        for (const p of props) valeurs[p] = style.getPropertyValue(p).trim();
+        return valeurs;
+      };
+      return {
+        menu: relever('.nav-toggle'),
+        personnalisation: relever('.customize-settings > summary'),
+      };
+    }, proprietes);
+    const basculer = (page, cible) => page.evaluate((nom) => {
+      const navigation = document.querySelector('.nav-links');
+      const bouton = document.querySelector('.nav-toggle');
+      const details = document.querySelector('.customize-settings');
+      if (details.open) details.querySelector('summary').click();
+      if (navigation.classList.contains('is-open')) bouton.click();
+      if (nom === 'menu') bouton.click();
+      else details.querySelector('summary').click();
+    }, cible);
+    const formats = [
+      { width: 390, height: 844, texte: null },
+      { width: 980, height: 440, texte: null },
+      { width: 1440, height: 900, texte: '130' },
+    ];
+    for (const format of formats) {
+      const page = await creerPage({ width: format.width, height: format.height });
+      try {
+        if (format.texte) {
+          await page.evaluateOnNewDocument((niveau) => {
+            try { localStorage.setItem('mrsc-texte-cran', niveau); } catch (_e) { /* stockage refusé */ }
+          }, format.texte);
+        }
+        await ouvrirPageSite(page, 'index.html');
+        await attendre(page, () => getComputedStyle(document.querySelector('.nav-toggle')).display !== 'none');
+        const fermes = await lire(page);
+        for (const p of proprietes) {
+          assert.equal(
+            fermes.menu[p], fermes.personnalisation[p],
+            `commandes fermées à ${format.width} px : ${p} diverge (${fermes.menu[p]} / ${fermes.personnalisation[p]})`
+          );
+        }
+        await basculer(page, 'menu');
+        await attendre(page, () => document.querySelector('.nav-links')?.classList.contains('is-open'));
+        await new Promise((resoudre) => setTimeout(resoudre, 320));
+        const menuOuvert = (await lire(page)).menu;
+        await basculer(page, 'perso');
+        await attendre(page, () => document.querySelector('.customize-settings')?.open === true);
+        await new Promise((resoudre) => setTimeout(resoudre, 320));
+        const personnalisationOuverte = (await lire(page)).personnalisation;
+        for (const p of proprietes) {
+          assert.equal(
+            menuOuvert[p], personnalisationOuverte[p],
+            `commandes ouvertes à ${format.width} px : ${p} diverge (${menuOuvert[p]} / ${personnalisationOuverte[p]})`
+          );
+        }
+      } finally {
+        await page.close();
+      }
+    }
+  });
+
   await executer('Panneaux Affichage et Présentation visibles aux largeurs 320 et 1440 px', async () => {
     const page = await creerPage({ width: 320, height: 800 });
     try {

@@ -1547,6 +1547,73 @@ def controler_pied_de_page() -> list[str]:
     return erreurs
 
 
+#: Ce qui fait que « Menu » et « Personnalisation » sont le même bouton. Le
+#: 5 novembre 2026, les deux panneaux avaient été unifiés mais pas les deux
+#: commandes : un relevé de styles calculés dans Chromium montrait 14 px contre
+#: 12,8 px de police, 10,4 px contre 10 px de gouttière, `nowrap` d'un seul
+#: côté et deux transitions de durées différentes. La porte ne voit pas les
+#: pixels : elle exige que ces propriétés soient écrites **une seule fois**,
+#: dans une règle qui nomme les deux sélecteurs, et qu'aucune règle propre ne
+#: les redéclare. Les valeurs restent libres ; la divergence, elle, ne l'est pas.
+BOUTONS_PARTAGES = (
+    "align-items", "justify-content", "gap", "min-width", "min-height",
+    "padding", "border", "border-radius", "background", "color",
+    "font-family", "font-size", "font-weight", "line-height",
+    "text-align", "white-space", "overflow-wrap", "hyphens",
+    "cursor", "transition",
+)
+
+
+def controler_boutons_entete_identiques() -> list[str]:
+    """Les deux commandes de l'en-tête partagent une seule règle d'habillage.
+
+    Le contrôle ne recopie aucune valeur de couleur ou de taille : un dessin
+    peut changer sans casser la parité, tant qu'il change pour les deux. Il
+    refuse en revanche qu'une des deux règles propres reprenne une propriété
+    commune à son compte — c'est exactement ainsi que la divergence du 5
+    novembre était née, sans que le garde-fou des panneaux la voie.
+    """
+    erreurs: list[str] = []
+    texte = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+    index = regles_indexees(texte)
+    commune = index.get(".nav-toggle, .customize-settings > summary", "")
+    if not commune:
+        return [
+            "site.css — la règle commune aux deux commandes d'en-tête « Menu » et "
+            "« Personnalisation » a disparu : elles ne partagent plus leur habillage"
+        ]
+    presentes = declarations(commune)
+    for propriete in BOUTONS_PARTAGES:
+        if propriete not in presentes:
+            erreurs.append(
+                f"site.css — la règle commune des boutons d'en-tête n'a plus "
+                f"`{propriete}` : une valeur recopiée d'un seul côté peut diverger"
+            )
+    for selecteur in (".nav-toggle", ".customize-settings > summary"):
+        # `blocs_de` cherche un sélecteur exact mais `^` de son motif matche
+        # aussi un début de ligne : la seconde ligne du sélecteur commun se
+        # lirait comme une règle propre. L'index des règles, lui, tient le
+        # préambule entier.
+        propre = declarations(index.get(selecteur, ""))
+        for propriete in BOUTONS_PARTAGES:
+            if propriete in propre:
+                erreurs.append(
+                    f"site.css — `{selecteur}` redéclare `{propriete}` pour lui seul : "
+                    "les deux commandes de l'en-tête ne sont plus le même bouton"
+                )
+    allumage = index.get(
+        '.nav-toggle:hover, .nav-toggle[aria-expanded="true"], '
+        '.customize-settings > summary:hover, .customize-settings[open] > summary',
+        "",
+    )
+    if not allumage or "border-color: var(--gold)" not in allumage or "background: var(--on-navy-fill-strong)" not in allumage:
+        erreurs.append(
+            "site.css — le survol et l'ouverture des deux commandes d'en-tête ne "
+            "sont plus portés par une seule règle : l'une peut s'allumer sans l'autre"
+        )
+    return erreurs
+
+
 CONTROLES = (
     ("tailles de texte", controler_tailles_de_texte),
     ("cibles tactiles", controler_cibles_tactiles),
@@ -1562,6 +1629,7 @@ CONTROLES = (
     ("décor du héros et son repli", controler_decor_du_heros),
     ("qualité d'encodage des images", controler_qualite_d_encodage),
     ("habillage du panneau", controler_habillage_du_panneau),
+    ("boutons de l’en-tête identiques", controler_boutons_entete_identiques),
     ("pied de page et copie imprimée", controler_pied_de_page),
     ("lecture à voix haute", controler_lecture_a_voix_haute),
     ("espacement du texte (WCAG 1.4.12)", controler_espacement_du_texte),

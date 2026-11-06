@@ -766,6 +766,13 @@ def fichiers_du_site() -> None:
         and "le cadre de la commande ne change pas quand le libellé bascule" in test_experience,
     )
     verifier(
+        "« Menu » et « Personnalisation » partagent une seule règle de bouton, mesurée en navigateur",
+        ".nav-toggle,\n.customize-settings > summary {" in styles
+        and "Boutons « Menu » et « Personnalisation » : même habillage mesuré" in test_experience
+        and "commandes ouvertes à ${format.width} px : ${p} diverge" in test_experience
+        and 'BOUTONS_PARTAGES' in (RACINE / "outils" / "verifier-affichages.py").read_text(encoding="utf-8"),
+    )
+    verifier(
         "La navigation permet retour, avance, accueil et reprise du dernier point",
         all(marqueur in parcours for marqueur in ('"precedent"', '"suivant"', '"accueil"', '"dernier"', "sessionStorage")),
     )

@@ -2967,3 +2967,56 @@ après la fin de l'analyse HTML ; sur un réseau très lent, une première peint
 plus précoce que lui reste possible — une garantie absolue demanderait un
 script en ligne dans les 117 pages, ce que ce lot ne fait pas. Aucun contrôle
 ici ne remplace la vérification à l'écran sur l'appareil de la personne.
+
+## 18. Les deux boutons sont le même bouton (5 novembre 2026)
+
+Le 5 novembre, les deux panneaux flottants de l'en-tête partageaient déjà leur
+surface, leur géométrie et leur animation. Les deux commandes qui les ouvrent,
+non. « Menu » était un `<button>` dessiné par `.nav-toggle`, « Personnalisation »
+un `<summary>` dessiné par `.customize-settings > summary`, et les deux règles
+avaient été écrites à des moments différents.
+
+**Relevé des styles calculés** (Chromium headless, `getComputedStyle`, cinq
+configurations — 390 × 844, 980 × 440, 1 440 × 900 à 130 %, mouvement normal et
+réduit — et quatre états : repos, survol, focus, page courante) :
+
+| Propriété | « Menu » | « Personnalisation » |
+|---|---|---|
+| `font-size` à 100 % | 14 px (`clamp(13px,.875rem,18px)`) | 12,8 px (`clamp(12px,.8rem,18px)`) |
+| `line-height` à 100 % | 16,8 px | 15,36 px |
+| `padding-inline` | 10,4 px (`.65rem`) | 10 px (`.6rem`) |
+| `white-space` | `nowrap` | `normal` |
+| `min-width` | `auto` | `44px` |
+| `transition` | `background .18s ease` | `background-color .15s ease` |
+| À 130 % de texte | 18 px | 16,64 px |
+| En-tête compact à 980 px | `min-width: 0` | `min-width: 44px` |
+
+Ce n'était pas une question de goût : deux boutons voisins dans la même barre
+marine ne répondaient pas de la même façon au même geste, et le garde-fou
+`HABILLAGE_COMMUN` ne lisait que les panneaux.
+
+**Une seule source.** La règle `.nav-toggle, .customize-settings > summary`
+porte désormais les vingt propriétés communes ; une seconde règle porte
+l'allumage au survol **et** à l'ouverture pour les deux. Les règles propres ne
+gardent que ce qui distingue un bouton d'un résumé de `<details>` : l'affichage
+initial, `flex` et `list-style`. Trois paliers qui ne nommaient qu'un seul des
+deux boutons sont alignés : police à 115/130 %, `min-width` de l'en-tête compact,
+et le même au-delà de 1 261 px.
+
+**Ce que tiennent les contrôles.** `verifier-affichages.py` n'impose aucune
+valeur de couleur ou de taille : un dessin peut changer tant qu'il change pour
+les deux. Il exige que la règle commune existe, qu'elle contienne les vingt
+propriétés, et qu'aucune règle propre n'en reprenne une à son compte. Trois
+mutations du banc rejouent exactement les trois façons de refaire diverger les
+boutons. Le treizième essai navigateur relit 27 propriétés **calculées**, fermé
+à fermé puis ouvert à ouvert — le site n'autorise qu'un panneau ouvert à la
+fois, comparer un bouton ouvert à un bouton fermé donnerait un faux écart.
+
+**Limites.** Les lignes à l'intérieur des panneaux gardent des écarts mesurés :
+`min-width`, `line-height`, et des allumages différents au focus et sur la page
+courante. `text-align: start` et `text-align: left` sont identiques en écriture
+latine. L'icône hamburger (SVG 20 px) et le chevron masqué (13 px) restent deux
+dessins choisis. Aucun de ces écarts n'est effacé ni présenté comme corrigé.
+Enfin, la feuille corrigée n'est pas encore celle que le site publié sert : la
+fidélité visuelle **sur le site en ligne** reste à confirmer après déploiement et
+relevé des octets servis.
