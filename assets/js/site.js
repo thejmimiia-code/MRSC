@@ -23,6 +23,8 @@
           simulatorRoot.classList.toggle(classe, root.classList.contains(classe));
         });
         simulatorRoot.dataset.layout = root.dataset.layout || "equilibree";
+        simulatorRoot.dataset.apparence = root.dataset.apparence || "systeme";
+        simulatorRoot.dataset.apparenceFond = root.dataset.apparenceFond || "clair";
       } catch (erreur) {
         // Une page parente ne peut pas modifier une iframe d’une autre origine.
       }
@@ -330,6 +332,7 @@
     layoutSettings.addEventListener("toggle", () => {
       if (!layoutSettings.open) return;
       if (settings) settings.open = false;
+      if (apparenceSettings) apparenceSettings.open = false;
       const journeySettings = document.querySelector("[data-site-journey]");
       if (journeySettings) journeySettings.open = false;
       if (toggle && navigation) {
@@ -343,6 +346,202 @@
         applyLayout(readPreference(layoutPreferenceKey));
       }
     });
+  }
+
+  // --- Apparences -----------------------------------------------------------
+  // Six thèmes d'affichage : les trois réglages les plus courants sur le Web,
+  // puis trois palettes originales inspirées d'ambiances de bande magnétique,
+  // de tableau de bord rétro-futuriste et de salle d'arcade. Les noms, couleurs
+  // et décors sont originaux : aucune œuvre, marque, personnage ni logotype
+  // n'est repris et aucune affiliation n'est suggérée. Le choix des noms et des
+  // palettes reste une proposition d'agent, à faire relire par l'association ;
+  // voir docs/rd/apparences-themes.md.
+  const CLE_APPARENCE = "mrsc-apparence";
+  const APPAREIL_SOMBRE = window.matchMedia
+    ? window.matchMedia("(prefers-color-scheme: dark)")
+    : null;
+  const APPARENCES = [
+    {
+      value: "systeme", label: "Suivre l'appareil", fond: "clair", themeColor: "#1d3268",
+      description: "Le réglage clair ou sombre choisi sur votre appareil.",
+      swatchFond: "#f5f7fa", swatchAccent: "#1d3268",
+    },
+    {
+      value: "clair", label: "Papier clair", fond: "clair", themeColor: "#f5f7fa",
+      description: "Fond clair et texte marine : la présentation habituelle.",
+      swatchFond: "#ffffff", swatchAccent: "#2958a2",
+    },
+    {
+      value: "sombre", label: "Nuit sobre", fond: "sombre", themeColor: "#111827",
+      description: "Fond sombre, même hiérarchie, sans décor ajouté.",
+      swatchFond: "#111827", swatchAccent: "#8fbaff",
+    },
+    {
+      value: "bobine", label: "Bobine nocturne", fond: "sombre", themeColor: "#1a1018",
+      description: "Bleu nuit, néon rouge et fines lignes de bande magnétique.",
+      swatchFond: "#1a1018", swatchAccent: "#ff6b6b",
+    },
+    {
+      value: "horizon", label: "Cap horizon", fond: "sombre", themeColor: "#1b1620",
+      description: "Cuivre et ambre, comme un tableau de bord rétro.",
+      swatchFond: "#1b1620", swatchAccent: "#ff9e42",
+    },
+    {
+      value: "arcade", label: "Salle d'arcade", fond: "sombre", themeColor: "#0d1424",
+      description: "Grille lumineuse cyan et magenta sur fond profond.",
+      swatchFond: "#0d1424", swatchAccent: "#6ce4ff",
+    },
+  ];
+  const apparitionConnue = (valeur) =>
+    APPARENCES.find((apparence) => apparence.value === valeur) || APPARENCES[0];
+  const fondEffectif = (valeur) => {
+    const apparence = apparitionConnue(valeur);
+    if (apparence.value === "systeme") {
+      return APPAREIL_SOMBRE && APPAREIL_SOMBRE.matches ? "sombre" : "clair";
+    }
+    return apparence.fond;
+  };
+  const lireApparence = () => apparitionConnue(readPreference(CLE_APPARENCE)).value;
+
+  let apparenceCourante = "systeme";
+  let apparenceInputs = [];
+  let apparenceStatus = null;
+  const apparenceSettings = settings ? document.createElement("details") : null;
+
+  const appliquerApparence = (valeur, options = {}) => {
+    const apparence = apparitionConnue(valeur);
+    const choix = apparence.value;
+    apparenceCourante = choix;
+    // Deux attributs distincts : le choix nominal pour les accents et le décor,
+    // le fond résolu pour le bloc de jetons sombres. Ainsi « Suivre l'appareil »
+    // partage exactement la même palette que « Nuit sobre ».
+    root.dataset.apparence = choix;
+    root.dataset.apparenceFond = fondEffectif(choix);
+    const metaCouleur = document.querySelector('meta[name="theme-color"]');
+    if (metaCouleur) metaCouleur.setAttribute("content", apparence.themeColor);
+    apparenceInputs.forEach(({ input, label }) => {
+      input.checked = input.value === choix;
+      label.classList.toggle("is-selected", input.checked);
+    });
+    if (apparenceStatus) {
+      apparenceStatus.textContent = `Apparence « ${apparence.label} » appliquée.`;
+    }
+    if (options.memoriser) savePreference(CLE_APPARENCE, choix);
+    synchroniserSimulateurs();
+    apresChangementReglages.forEach((rappel) => rappel());
+  };
+
+  if (apparenceSettings) {
+    apparenceSettings.className = "apparence-settings";
+    apparenceSettings.dataset.apparenceSettings = "";
+
+    const resume = document.createElement("summary");
+    resume.className = "apparence-settings-summary";
+    resume.title = "Ouvrir ou fermer les thèmes d'affichage";
+    resume.append(document.createTextNode("Apparence"));
+    const chevron = document.createElement("span");
+    chevron.className = "apparence-settings-chevron";
+    chevron.setAttribute("aria-hidden", "true");
+    chevron.textContent = "⌄";
+    resume.append(" ", chevron);
+
+    const panneau = document.createElement("div");
+    panneau.className = "apparence-settings-panel";
+    panneau.id = "site-apparence-settings-panel";
+    panneau.setAttribute("aria-label", "Choisir un thème d'affichage");
+    resume.setAttribute("aria-controls", panneau.id);
+
+    const titre = document.createElement("p");
+    titre.className = "apparence-settings-title";
+    const titreFort = document.createElement("strong");
+    titreFort.textContent = "Choisir une apparence";
+    titre.appendChild(titreFort);
+
+    const options = document.createElement("fieldset");
+    options.className = "apparence-settings-options";
+    const legende = document.createElement("legend");
+    legende.textContent = "Thème d'affichage";
+    options.appendChild(legende);
+
+    APPARENCES.forEach((apparence) => {
+      const label = document.createElement("label");
+      label.className = "apparence-choice";
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "mrsc-apparence";
+      input.value = apparence.value;
+      input.id = `site-apparence-${apparence.value}`;
+      input.addEventListener("change", () => {
+        if (!input.checked) return;
+        appliquerApparence(input.value, { memoriser: true });
+      });
+
+      // L'aperçu est décoratif : le nom et la description portent l'information.
+      const apercu = document.createElement("span");
+      apercu.className = "apparence-swatch";
+      apercu.setAttribute("aria-hidden", "true");
+      apercu.style.setProperty("--swatch-fond", apparence.swatchFond);
+      apercu.style.setProperty("--swatch-accent", apparence.swatchAccent);
+
+      const copie = document.createElement("span");
+      copie.className = "apparence-choice-copy";
+      const nom = document.createElement("strong");
+      nom.textContent = apparence.label;
+      const description = document.createElement("span");
+      description.textContent = apparence.description;
+      copie.append(nom, description);
+
+      label.htmlFor = input.id;
+      label.append(input, apercu, copie);
+      options.appendChild(label);
+      apparenceInputs.push({ input, label });
+    });
+
+    apparenceStatus = document.createElement("p");
+    apparenceStatus.className = "apparence-settings-status";
+    apparenceStatus.setAttribute("role", "status");
+    apparenceStatus.setAttribute("aria-live", "polite");
+    apparenceStatus.setAttribute("aria-atomic", "true");
+
+    const note = document.createElement("p");
+    note.className = "apparence-settings-note";
+    note.textContent = "Noms et couleurs originaux, sans lien avec une œuvre ou une marque. Le changement est immédiat et, si le stockage local est autorisé, mémorisé sur cet appareil. Aucune donnée n'est envoyée.";
+
+    const retour = document.createElement("button");
+    retour.type = "button";
+    retour.className = "display-control display-control-wide apparence-settings-reset";
+    retour.textContent = "Revenir à « Suivre l'appareil »";
+    retour.addEventListener("click", () => appliquerApparence("systeme", { memoriser: true }));
+
+    panneau.append(titre, options, apparenceStatus, note, retour);
+    apparenceSettings.append(resume, panneau);
+    settings.insertAdjacentElement("afterend", apparenceSettings);
+    appliquerApparence(lireApparence());
+
+    // Un seul réglage ouvert à la fois, et le panneau flottant est replacé :
+    // ouvrir une section change sa hauteur, donc sa position sous le bouton.
+    apparenceSettings.addEventListener("toggle", () => {
+      if (!apparenceSettings.open) return;
+      if (settings) settings.open = false;
+      if (layoutSettings) layoutSettings.open = false;
+      const journeySettings = document.querySelector("[data-site-journey]");
+      if (journeySettings) journeySettings.open = false;
+      ajusterPanneauxFlottants();
+    });
+
+    window.addEventListener("storage", (event) => {
+      if (event.key === null || event.key === CLE_APPARENCE) {
+        appliquerApparence(lireApparence());
+      }
+    });
+    if (APPAREIL_SOMBRE && APPAREIL_SOMBRE.addEventListener) {
+      APPAREIL_SOMBRE.addEventListener("change", () => {
+        if (apparenceCourante === "systeme") appliquerApparence("systeme");
+      });
+    }
+  } else {
+    appliquerApparence(lireApparence());
   }
 
   // --- Écouter la page -------------------------------------------------------
@@ -788,6 +987,7 @@
   document.addEventListener("click", (event) => {
     if (settings && !settings.contains(event.target)) settings.open = false;
     if (layoutSettings && !layoutSettings.contains(event.target)) layoutSettings.open = false;
+    if (apparenceSettings && !apparenceSettings.contains(event.target)) apparenceSettings.open = false;
     if (personnalisation && !personnalisation.contains(event.target)) personnalisation.open = false;
   });
 
@@ -1034,7 +1234,7 @@
       const lectureVocale = construireLectureVocale();
       // L'écoute vient en dernier : elle ne fait pas partie des réglages de
       // présentation, et l'intercaler coupait le groupe en deux.
-      [headerCompactToggle, settings, layoutSettings, lectureVocale].forEach((element) => {
+      [headerCompactToggle, settings, apparenceSettings, layoutSettings, lectureVocale].forEach((element) => {
         if (element) panneauPersonnalisation.append(element);
       });
       outilsEntete.append(personnalisation);
@@ -1080,6 +1280,7 @@
       navigation.classList.add("is-open");
       if (personnalisation && personnalisation.open) personnalisation.open = false;
       if (settings) settings.open = false;
+      if (apparenceSettings) apparenceSettings.open = false;
       if (layoutSettings) layoutSettings.open = false;
       const journeySettings = document.querySelector("[data-site-journey]");
       if (journeySettings) journeySettings.open = false;
@@ -1149,6 +1350,7 @@
         // le refermer rendrait « Réduire » inatteignable une fois l'en-tête
         // agrandi.
         if (settings) settings.open = false;
+        if (apparenceSettings) apparenceSettings.open = false;
         if (layoutSettings) layoutSettings.open = false;
         const journeySettings = document.querySelector("[data-site-journey]");
         if (journeySettings) journeySettings.open = false;
@@ -1237,6 +1439,11 @@
         const focusInsideLayoutSettings = layoutSettings.contains(document.activeElement);
         layoutSettings.open = false;
         if (focusInsideLayoutSettings) layoutSettings.querySelector("summary")?.focus();
+      }
+      if (apparenceSettings?.open) {
+        const focusDansApparence = apparenceSettings.contains(document.activeElement);
+        apparenceSettings.open = false;
+        if (focusDansApparence) apparenceSettings.querySelector("summary")?.focus();
       }
     });
   }

@@ -1176,7 +1176,7 @@ def controler_lecture_a_voix_haute() -> list[str]:
     # La commande vit dans le panneau, pas dans l'en-tête : celui-ci garde deux boutons.
     # La commande doit être *ajoutée* à la liste des blocs du panneau, et non
     # seulement construite : une fonction jamais appelée ne s'affiche nulle part.
-    if not re.search(r"\[headerCompactToggle, settings, layoutSettings, lectureVocale\]", script):
+    if not re.search(r"\[headerCompactToggle, settings, apparenceSettings, layoutSettings, lectureVocale\]", script):
         erreurs.append(
             "site.js — la lecture à voix haute n'est plus placée dans le panneau Personnalisation : "
             "la commande est construite mais jamais affichée"
