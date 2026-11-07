@@ -115,8 +115,18 @@ jobs:
           python3 outils/verifier-rd-continue.py
           python3 outils/test_mutations_rd_continue.py
 
+      # 7 novembre 2026, seconde passe : la personne garde le rendu à l'oeil,
+      # l'agent relit les contenus. La porte refuse une source non primaire ou
+      # non datée, une chaîne publique non couverte, une correction WCAG qui
+      # régresse et toute promotion en relecture humaine. Son banc plante les
+      # fautes dans une copie pour prouver qu'elle mord.
+      - name: Vérifier la relecture par agent et ses sources primaires
+        run: |
+          python3 outils/test_mutations_relecture_contenus.py
+          python3 outils/verifier-relecture-contenus.py
+
       # Six apparences ajoutées le 7 novembre 2026. La porte refuse un jeton de
-      # couleur oublié, un contraste sous le seuil, un nom d'œuvre réapparu et
+      # couleur oublié, un contraste sous le seuil, un nom d'oeuvre réapparu et
       # une animation qui contournerait prefers-reduced-motion. Douze fautes
       # sont plantées dans une copie du dépôt pour prouver qu'elle mord.
       - name: Vérifier les thèmes d'affichage et leurs contrastes

@@ -48,6 +48,7 @@ digraph memoire {
   "avancee:la-mesure-se-confrontait-a-sa-propre-mutation" [shape=note, label="avancee:la-mesure-se-confrontait-a-sa-propre-mutation"];
   "avancee:la-porte-de-publication-se-prouve-en-retirant-un-fichier" [shape=note, label="avancee:la-porte-de-publication-se-prouve-en-retirant-un-fichier"];
   "avancee:la-premiere-grille-a-pistes-inegales-quitte-son-palier" [shape=note, label="avancee:la-premiere-grille-a-pistes-inegales-quitte-son-palier"];
+  "avancee:la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider" [shape=note, label="avancee:la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider"];
   "avancee:le-reseau-se-teste-sur-la-boucle-locale" [shape=note, label="avancee:le-reseau-se-teste-sur-la-boucle-locale"];
   "avancee:memoire-a-trois-horizons" [shape=note, label="avancee:memoire-a-trois-horizons"];
   "avancee:memoire-index-regenerer-en-dernier" [shape=note, label="avancee:memoire-index-regenerer-en-dernier"];
@@ -165,6 +166,8 @@ digraph memoire {
   "docs/rd/plan-statuts-animation.md" [shape=plaintext, label="docs/rd/plan-statuts-animation.md"];
   "docs/rd/poids-pages.md" [shape=plaintext, label="docs/rd/poids-pages.md"];
   "docs/rd/portefeuille.toml" [shape=plaintext, label="docs/rd/portefeuille.toml"];
+  "docs/rd/relecture-apparences-2026-11-07.md" [shape=plaintext, label="docs/rd/relecture-apparences-2026-11-07.md"];
+  "docs/rd/relecture-contenus.toml" [shape=plaintext, label="docs/rd/relecture-contenus.toml"];
   "docs/rd/releve-affichages-2026-11-06.json" [shape=plaintext, label="docs/rd/releve-affichages-2026-11-06.json"];
   "docs/rd/releve-affichages-2026-11-06.md" [shape=plaintext, label="docs/rd/releve-affichages-2026-11-06.md"];
   "docs/rd/releve-apparences-2026-11-07.md" [shape=plaintext, label="docs/rd/releve-apparences-2026-11-07.md"];
@@ -230,6 +233,7 @@ digraph memoire {
   "outils/test_mutations_poids_pages.py" [shape=plaintext, label="outils/test_mutations_poids_pages.py"];
   "outils/test_mutations_publication_locale.py" [shape=plaintext, label="outils/test_mutations_publication_locale.py"];
   "outils/test_mutations_rd_continue.py" [shape=plaintext, label="outils/test_mutations_rd_continue.py"];
+  "outils/test_mutations_relecture_contenus.py" [shape=plaintext, label="outils/test_mutations_relecture_contenus.py"];
   "outils/test_mutations_securite.py" [shape=plaintext, label="outils/test_mutations_securite.py"];
   "outils/test_paliers_affichage.py" [shape=plaintext, label="outils/test_paliers_affichage.py"];
   "outils/test_placement_panneau.mjs" [shape=plaintext, label="outils/test_placement_panneau.mjs"];
@@ -263,6 +267,7 @@ digraph memoire {
   "outils/verifier-poids-pages.py" [shape=plaintext, label="outils/verifier-poids-pages.py"];
   "outils/verifier-publication-locale.py" [shape=plaintext, label="outils/verifier-publication-locale.py"];
   "outils/verifier-rd-continue.py" [shape=plaintext, label="outils/verifier-rd-continue.py"];
+  "outils/verifier-relecture-contenus.py" [shape=plaintext, label="outils/verifier-relecture-contenus.py"];
   "outils/verifier-securite.py" [shape=plaintext, label="outils/verifier-securite.py"];
   "outils/verifier-site-statique.py" [shape=plaintext, label="outils/verifier-site-statique.py"];
   "outils/verifier-source-distante.py" [shape=plaintext, label="outils/verifier-source-distante.py"];
@@ -416,6 +421,10 @@ digraph memoire {
   "avancee:la-premiere-grille-a-pistes-inegales-quitte-son-palier" -> "docs/rd/grilles-dynamiques.toml" [label="prouvée par"];
   "avancee:la-premiere-grille-a-pistes-inegales-quitte-son-palier" -> "outils/modele-grilles.py" [label="prouvée par"];
   "avancee:la-premiere-grille-a-pistes-inegales-quitte-son-palier" -> "outils/test_modele_grilles.py" [label="prouvée par"];
+  "avancee:la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider" -> "docs/rd/relecture-apparences-2026-11-07.md" [label="prouvée par"];
+  "avancee:la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider" -> "docs/rd/relecture-contenus.toml" [label="prouvée par"];
+  "avancee:la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider" -> "outils/test_mutations_relecture_contenus.py" [label="prouvée par"];
+  "avancee:la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider" -> "outils/verifier-relecture-contenus.py" [label="prouvée par"];
   "avancee:le-reseau-se-teste-sur-la-boucle-locale" -> "api/verifier-source.py" [label="prouvée par"];
   "avancee:le-reseau-se-teste-sur-la-boucle-locale" -> "outils/test_verifier_source_distante.py" [label="prouvée par"];
   "avancee:le-reseau-se-teste-sur-la-boucle-locale" -> "outils/verifier-integration.py" [label="prouvée par"];
@@ -686,6 +695,7 @@ digraph memoire {
   "branche:coherence-textes-publics" -> "avancee:grilles-presentations-contradictions" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-presentations-declarees" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-qualite-tracés-tranches" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:memoire-index-regenerer-en-dernier" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:ni-mot-coupe-ni-carte-superposee" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:onze-champs-iscdf-ouverts" [label="a produit"];
@@ -712,6 +722,7 @@ digraph memoire {
   "branche:coordination-de-tous-les-agents" -> "avancee:aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran" [label="a produit"];
   "branche:coordination-de-tous-les-agents" -> "avancee:la-memoire-du-projet-a-son-banc" [label="a produit"];
   "branche:coordination-de-tous-les-agents" -> "avancee:la-premiere-grille-a-pistes-inegales-quitte-son-palier" [label="a produit"];
+  "branche:coordination-de-tous-les-agents" -> "avancee:la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider" [label="a produit"];
   "branche:coordination-de-tous-les-agents" -> "avancee:memoire-a-trois-horizons" [label="a produit"];
   "branche:coordination-de-tous-les-agents" -> "avancee:mesurer-avant-d-ecrire-ce-qu-un-flex-wrap-ferait-des-pistes-inegales" [label="a produit"];
   "branche:coordination-de-tous-les-agents" -> "avancee:phrase-publique-recalculee" [label="a produit"];
@@ -728,6 +739,7 @@ digraph memoire {
   "branche:coordination-de-tous-les-agents" -> "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" [label="a produit"];
   "branche:coordination-de-tous-les-agents" -> "phase:economie-de-contexte" [label="servie par"];
   "branche:coordination-de-tous-les-agents" -> "phase:memoire-trois-horizons" [label="servie par"];
+  "branche:direction-artistique-motion" -> "avancee:la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider" [label="a produit"];
   "branche:direction-artistique-motion" -> "avancee:un-theme-est-une-promesse-sur-toutes-les-surfaces" [label="a produit"];
   "branche:direction-artistique-motion" -> "phase:conscience-et-corps" [label="servie par"];
   "branche:direction-artistique-motion" -> "phase:voix-et-ecoute" [label="servie par"];
