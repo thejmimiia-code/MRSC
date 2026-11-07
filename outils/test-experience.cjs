@@ -526,8 +526,8 @@ async function main() {
       const largeurInterieure = lignes[lignes.length - 1].interieur;
       assert.equal(
         mesureLignes.length,
-        5,
-        `les quatre réglages et la lecture à voix haute doivent être dans le panneau : ${JSON.stringify(mesureLignes)}`
+        6,
+        `les cinq réglages et la lecture à voix haute doivent être dans le panneau : ${JSON.stringify(mesureLignes)}`
       );
       assert.equal(
         mesureLignes.filter((ligne) => ligne.nom.includes('read-aloud')).length,
@@ -546,7 +546,7 @@ async function main() {
             masque: getComputedStyle(element, '::before').maskImage || getComputedStyle(element, '::before').webkitMaskImage,
           }));
       });
-      assert.equal(icones.length, 4, JSON.stringify(icones));
+      assert.equal(icones.length, 5, JSON.stringify(icones));
       assert.ok(
         icones.every((icone) => icone.masque && icone.masque !== 'none'),
         `chaque réglage doit porter une icône : ${JSON.stringify(icones)}`
@@ -666,8 +666,9 @@ async function main() {
           };
         });
         assert.ok(etat.gauche >= -1 && etat.droite <= etat.viewport + 1, `${largeur}px : ${JSON.stringify(etat)}`);
-        // Quatre réglages et la lecture à voix haute, ajoutée le 23 octobre 2026.
-        assert.ok(etat.lignes.length === 5, `${largeur}px : ${JSON.stringify(etat.lignes)}`);
+        // Cinq réglages (dont « Apparence », ajoutée le 7 novembre 2026) et la
+        // lecture à voix haute, ajoutée le 23 octobre 2026.
+        assert.ok(etat.lignes.length === 6, `${largeur}px : ${JSON.stringify(etat.lignes)}`);
         assert.ok(
           etat.lignes.every((ligne) => ligne.left >= etat.gauche - 1 && ligne.right <= etat.droite + 1),
           `${largeur}px : une ligne sort du panneau ${JSON.stringify(etat.lignes)}`

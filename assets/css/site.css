@@ -2887,7 +2887,7 @@ html.contraste-renforce {
 html.contraste-renforce main a:not(.button),
 html.contraste-renforce .site-footer a { text-decoration: underline; text-decoration-thickness: .12em; }
 html.contraste-renforce :focus-visible { outline-width: 4px; }
-html.contraste-renforce :is(button,.button,.display-control,.display-settings > summary,.header-compact-toggle,.site-journey-settings > summary) { border: 2px solid currentColor; }
+html.contraste-renforce :is(button,.button,.display-control,.display-settings > summary,.apparence-settings > summary,.header-compact-toggle,.site-journey-settings > summary) { border: 2px solid currentColor; }
 
 .site-journey-settings {
   position: static;
@@ -4644,6 +4644,7 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
   .display-settings > summary,
   .site-journey-settings > summary,
   .layout-settings > summary,
+  .apparence-settings > summary,
   .customize-settings > summary
 ):focus-visible {
   outline: 2px solid var(--gold);
@@ -4655,6 +4656,7 @@ html.contraste-renforce .site-header :is(
   .display-settings > summary,
   .site-journey-settings > summary,
   .layout-settings > summary,
+  .apparence-settings > summary,
   .customize-settings > summary
 ):focus-visible {
   outline-color: var(--on-navy);
@@ -4667,7 +4669,8 @@ html.contraste-renforce .site-header :is(
 .display-settings-chevron,
 .layout-settings-chevron,
 .site-journey-chevron,
-.customize-settings-chevron {
+.customize-settings-chevron,
+.apparence-settings-chevron {
   display: inline-block;
   flex: 0 0 auto;
   width: 13px;
@@ -4864,7 +4867,8 @@ html.has-js .site-header .customize-settings-panel .site-journey-settings {
 html.has-js .site-header .customize-settings-panel :is(
   .display-settings > summary,
   .layout-settings > summary,
-  .site-journey-settings > summary
+  .site-journey-settings > summary,
+  .apparence-settings > summary
 ) {
   display: flex;
   width: 100%;
@@ -4890,7 +4894,8 @@ html.has-js .site-header .customize-settings-panel :is(
 html.has-js .site-header .customize-settings-panel :is(
   .display-settings,
   .layout-settings,
-  .site-journey-settings
+  .site-journey-settings,
+  .apparence-settings
 ) > summary::before {
   content: "";
   flex: 0 0 auto;
@@ -4916,24 +4921,25 @@ html.has-js .site-header .customize-settings-panel .layout-settings > summary::b
 html.has-js .site-header .customize-settings-panel :is(
   .display-settings,
   .layout-settings,
-  .site-journey-settings
-) > summary > :is(.display-settings-chevron, .layout-settings-chevron, .site-journey-chevron) {
+  .site-journey-settings,
+  .apparence-settings
+) > summary > :is(.display-settings-chevron, .layout-settings-chevron, .site-journey-chevron, .apparence-settings-chevron) {
   margin-left: auto;
   color: var(--muted);
 }
 
-html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings) > summary:hover,
-html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings)[open] > summary {
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings) > summary:hover,
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings)[open] > summary {
   background: var(--blue-soft);
 }
-html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings) > summary:hover::before,
-html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings)[open] > summary::before {
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings) > summary:hover::before,
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings)[open] > summary::before {
   opacity: 1;
 }
-html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings)[open] > summary {
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings)[open] > summary {
   color: var(--blue);
 }
-html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings) > summary:focus-visible {
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings) > summary:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
   background: var(--blue-soft);
@@ -4997,7 +5003,7 @@ html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([h
   border-top: 1px solid var(--line);
 }
 
-html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, .layout-settings-panel, .site-journey-panel) {
+html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, .layout-settings-panel, .site-journey-panel, .apparence-settings-panel) {
   position: static;
   width: 100%;
   max-width: none;
@@ -5027,7 +5033,8 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
   html.has-js .site-header .customize-settings-panel :is(
     .display-settings > summary,
     .layout-settings > summary,
-    .site-journey-settings > summary
+    .site-journey-settings > summary,
+    .apparence-settings > summary
   ),
   html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]),
   html.has-js.menu-flottant .nav-links a {
@@ -5042,7 +5049,8 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
   html.has-js .site-header .customize-settings-panel :is(
     .display-settings,
     .layout-settings,
-    .site-journey-settings
+    .site-journey-settings,
+    .apparence-settings
   ) > summary::before,
   html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden])::before {
     width: 17px;
@@ -5070,7 +5078,7 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
 /* Le contenu d'un réglage ouvert s'aligne sur son libellé, pas sur son icône :
    l'icône fait 19 px et l'écart 9,6 px, d'où un retrait de 28,6 px. */
 
-html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, .layout-settings-panel, .site-journey-panel) {
+html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, .layout-settings-panel, .site-journey-panel, .apparence-settings-panel) {
   padding-left: 1.8rem;
   border-left-color: var(--border-soft-2);
 }
@@ -5078,7 +5086,7 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
 /* Les titres de section deviennent des étiquettes discrètes : dans un panneau
    étroit, un gros titre en gras concurrence les lignes du menu. */
 
-html.has-js .site-header .customize-settings-panel :is(.display-settings-title, .layout-settings-title) {
+html.has-js .site-header .customize-settings-panel :is(.display-settings-title, .layout-settings-title, .apparence-settings-title) {
   margin: 0 0 .45rem;
   color: var(--text-soft);
   font-size: max(12px, .72rem);
@@ -5268,4 +5276,220 @@ html.has-js .site-header.is-compact .nav-toggle svg {
 .ai-path-panel,
 .ai-node {
   --focus-ring: var(--on-navy);
+}
+
+
+/* ===========================================================================
+   Apparences du site — 7 novembre 2026
+   ---------------------------------------------------------------------------
+   Six thèmes proposés dans « Personnalisation » : les trois réglages les plus
+   courants sur le Web (suivre l'appareil, clair, sombre), puis trois palettes
+   originales inspirées d'ambiances de bande magnétique, de tableau de bord
+   rétro-futuriste et de salle d'arcade. Les noms, les couleurs et les décors
+   sont originaux : aucune œuvre, marque, personnage ni logotype n'est repris,
+   et aucune affiliation n'est suggérée.
+
+   `site.js` écrit deux attributs : `data-apparence` (le choix nominal, pour
+   les accents et le décor) et `data-apparence-fond` (`clair` ou `sombre`,
+   résolu aussi pour « Suivre l'appareil »). Un seul bloc de jetons sombres
+   porte donc les quatre variantes foncées : impossible d'oublier une surface
+   et de laisser du texte clair sur une carte restée claire.
+
+   Aucune animation n'est ajoutée : les décors sont des dégradés statiques.
+   `prefers-reduced-motion` n'a donc rien à désactiver ici, et les couleurs
+   forcées du système reprennent la main plus bas. Le contraste des paires
+   texte/fond est vérifié hors ligne par `outils/verifier-apparences.py`.
+   =========================================================================== */
+
+/* 1. Le fond sombre commun : tous les jetons de couleur de :root. */
+html[data-apparence-fond="sombre"] {
+  color-scheme: dark;
+  /* Deux jetons ne sont pas des couleurs de :root : ils sont écrits après le
+     bloc généré, pour qu'aucune valeur héritée ne les remette en blanc. */
+  --blue: #8fbaff;
+  --blue-soft: #1c2a45;
+  --border-blue-soft: rgba(214, 167, 93, 0.12);
+  --border-gold: #6b5528;
+  --border-soft: #2e4056;
+  --border-soft-10: rgba(40, 31, 17, 0.96);
+  --border-soft-2: #2e3b56;
+  --border-soft-3: #2e3d56;
+  --border-soft-4: #2e3f56;
+  --border-soft-5: #2e3f56;
+  --border-soft-6: #2e3e56;
+  --border-soft-7: #2e3f56;
+  --border-soft-8: #425331;
+  --border-soft-9: #313e53;
+  --border-strong: #313e54;
+  --border-strong-2: #314154;
+  --border-strong-3: #2e3e56;
+  --code-border: #34435e;
+  --code-surface: #0b1220;
+  --code-text: #eef2fb;
+  --gold: #ffc766;
+  --gold-ink: #ded0ba;
+  --gold-ink-2: #ded2ba;
+  --green: #a6d984;
+  --green-ink: #c8deba;
+  --green-ink-2: #c9deba;
+  --ink: #eef2fb;
+  --line: #34435e;
+  --muted: #c2cee2;
+  --navy-ink: #bac4de;
+  --paper: #0e1523;
+  --red: #ff9aa0;
+  --red-ink: #debabd;
+  --red-ink-2: #debabc;
+  --red-ink-3: #debabc;
+  --status-border: #e0b558;
+  --status-ink: #ffe6ab;
+  --status-surface: #3b2d12;
+  --surface: #111827;
+  --surface-frame: #050912;
+  --surface-header: rgba(17, 24, 39, .97);
+  --surface-soft: #141824;
+  --surface-soft-2: #141b24;
+  --surface-soft-3: #141a24;
+  --surface-soft-4: #141a24;
+  --surface-soft-5: #141c24;
+  --surface-soft-6: #151b25;
+  --surface-veil: rgba(17, 24, 39, .86);
+  --surface-veil-2: rgba(17, 24, 39, .88);
+  --surface-veil-border: rgba(17, 24, 39, .85);
+  --surface-veil-faint: rgba(17, 24, 39, .68);
+  --surface-veil-soft: rgba(17, 24, 39, .72);
+  --surface-veil-strong: rgba(17, 24, 39, .94);
+  --text-soft: #c3c9d5;
+  --text-soft-10: #bdc9db;
+  --text-soft-11: #c1c9d7;
+  --text-soft-12: #c5c9d3;
+  --text-soft-13: #c0cad8;
+  --text-soft-14: #bfc9d9;
+  --text-soft-15: #c3cad5;
+  --text-soft-2: #c3cad5;
+  --text-soft-3: #c1c9d7;
+  --text-soft-4: #c4cad4;
+  --text-soft-5: #c3cad5;
+  --text-soft-6: #c1c9d7;
+  --text-soft-7: #bdc8db;
+  --text-soft-8: #c3cad5;
+  --text-soft-9: #c3cad5;
+  --tint-blue: #151c25;
+  --tint-blue-2: #151b25;
+  --tint-blue-3: #151b25;
+  --tint-blue-4: #151a25;
+  --tint-blue-5: #151b25;
+  --tint-blue-6: #151a25;
+  --tint-blue-7: #151c25;
+  --tint-blue-8: #151c25;
+  --tint-blue-9: #151b25;
+  --tint-gold: #252115;
+  --tint-gold-2: #252015;
+  --tint-gold-3: #252015;
+  --tint-gold-4: #252015;
+  --tint-gold-5: #251f15;
+  --tint-green: #1d2515;
+  --tint-green-2: #1d2515;
+  --tint-green-3: #1f2515;
+  --tint-green-4: #1e2515;
+  --tint-green-5: #1e2515;
+  --tint-green-6: #1f2515;
+  --tint-green-7: #1d2515;
+  --tint-red: #341c22;
+  --on-accent: #0b1220;
+  --shadow: 0 18px 55px rgba(0, 0, 0, .55);
+}
+
+/* Le bleu devient un accent lumineux : le texte des boutons passe donc à
+   l'encre sombre (--on-accent). Trois règles écrivaient pourtant --on-navy
+   sur un fond bleu ; elles sont reprises ici, et seulement en fond sombre. */
+html[data-apparence-fond="sombre"] .button:hover { color: var(--on-navy); }
+html[data-apparence-fond="sombre"] .display-control[aria-pressed="true"] { color: var(--on-accent); }
+html[data-apparence-fond="sombre"] .site-journey-button[data-journey-action="accueil"]:hover:not(:disabled) { color: var(--on-accent); }
+
+/* 2. Trois palettes originales : accents, rayons et décors statiques. */
+html[data-apparence="bobine"] {
+  --blue: #ff9a97; --green: #ffc08a; --gold: #ff6b6b; --red: #ff5d6c;
+  --focus-ring: #ff6b6b; --radius: 9px; --button-radius: 6px;
+  /* La barre de navigation change avec la palette : sans cela, les trois
+     ambiances ne se distingueraient que par un liseré. Toutes restent des
+     surfaces sombres, donc --on-navy (blanc) garde son contraste. */
+  --navy: #3a1424; --navy-deep: #260b18; --navy-deep-2: #2b1020;
+}
+html[data-apparence="horizon"] {
+  --blue: #ffbd6b; --green: #ffd98a; --gold: #ff9e42; --red: #ff8161;
+  --focus-ring: #ff9e42; --radius: 15px; --button-radius: 10px;
+  --navy: #3a2410; --navy-deep: #241608; --navy-deep-2: #2b1c0c;
+}
+html[data-apparence="arcade"] {
+  --blue: #6ce4ff; --green: #b992ff; --gold: #ffd166; --red: #ff6ad5;
+  --focus-ring: #6ce4ff; --radius: 5px; --button-radius: 4px;
+  --navy: #141d46; --navy-deep: #0c1230; --navy-deep-2: #101838;
+}
+
+/* Décors : posés sur le fond du corps, derrière les cartes qui gardent leur
+   propre surface. Aucun mouvement, aucun clic intercepté, aucune image. */
+html[data-apparence="bobine"] body {
+  background-image:
+    radial-gradient(ellipse at 18% 0%, rgba(255, 80, 90, .18), transparent 62%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 4px);
+}
+html[data-apparence="horizon"] body {
+  background-image:
+    radial-gradient(ellipse at 82% 8%, rgba(255, 158, 66, .19), transparent 58%),
+    repeating-linear-gradient(115deg, rgba(255, 189, 107, .05) 0 1px, transparent 1px 9px);
+}
+html[data-apparence="arcade"] body {
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(108, 228, 255, .16), transparent 60%),
+    linear-gradient(90deg, rgba(185, 146, 255, .065) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(185, 146, 255, .065) 1px, transparent 1px);
+  background-size: auto, 34px 34px, 34px 34px;
+}
+
+/* 3. Le système garde le dernier mot : couleurs forcées et contraste renforcé. */
+@media (forced-colors: active) {
+  html[data-apparence] body { background-image: none !important; }
+}
+html.contraste-renforce[data-apparence] body { background-image: none; }
+
+/* 4. La liste de choix dans « Personnalisation ». */
+.apparence-settings-panel { padding: .35rem .1rem .15rem; }
+.apparence-settings-title { margin: 0 0 .5rem; color: var(--navy-ink); font-size: max(12px, .86rem); font-weight: 700; }
+.apparence-settings-options { display: grid; gap: .35rem; margin: 0; padding: 0; border: 0; }
+.apparence-settings-options legend { padding: 0; margin-bottom: .35rem; color: var(--text-soft); font-size: max(12px, .8rem); font-weight: 650; }
+.apparence-choice {
+  display: flex; align-items: center; gap: .55rem; min-height: 44px;
+  padding: .35rem .5rem; border: 1px solid var(--border-soft);
+  border-radius: 10px; background: var(--surface); color: var(--ink); cursor: pointer;
+}
+.apparence-choice:hover { border-color: var(--blue); }
+.apparence-choice.is-selected { border-color: var(--blue); background: var(--blue-soft); box-shadow: inset 0 0 0 1px var(--blue); }
+.apparence-choice:focus-within { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+.apparence-choice input { flex: 0 0 auto; width: 18px; height: 18px; margin: 0; accent-color: var(--blue); }
+.apparence-swatch {
+  flex: 0 0 auto; width: 34px; height: 24px; border: 1px solid var(--border-strong);
+  border-radius: 5px; background: var(--swatch-fond, var(--paper));
+  box-shadow: inset 6px 0 0 var(--swatch-accent, var(--blue));
+}
+.apparence-choice-copy { display: block; min-width: 0; }
+.apparence-choice-copy strong { display: block; color: var(--navy-ink); font-size: max(12px, .88rem); line-height: 1.3; }
+.apparence-choice-copy span { display: block; color: var(--text-soft); font-size: max(12px, .78rem); line-height: 1.4; }
+.apparence-settings-status { min-height: 1.3em; margin: .5rem 0 0; color: var(--navy-ink); font-size: max(12px, .82rem); font-weight: 700; }
+.apparence-settings-note { margin: .35rem 0 0; color: var(--muted); font-size: max(12px, .76rem); line-height: 1.45; }
+.apparence-settings-reset { width: 100%; margin-top: .5rem; }
+
+/* La cinquième ligne du panneau porte la même icône en masque que ses voisines. */
+html.has-js .site-header .customize-settings-panel .apparence-settings > summary {
+  display: flex; width: 100%; min-height: 44px; margin: 0; padding: .45rem .55rem;
+  align-items: center; gap: .6rem; border: 1px solid transparent; border-radius: 11px;
+  background: transparent; color: var(--navy-ink); font-size: max(13px, .86rem);
+  font-weight: 650; letter-spacing: .005em; text-align: left; cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+html.has-js .site-header .customize-settings-panel .apparence-settings > summary::before {
+  content: ""; flex: 0 0 auto; width: 19px; height: 19px;
+  background-color: currentColor; opacity: .78;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 3a9 9 0 0 0 0 18'/%3E%3Ccircle cx='8' cy='9' r='1.4'/%3E%3Ccircle cx='15' cy='8' r='1.4'/%3E%3Ccircle cx='9' cy='15' r='1.4'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 3a9 9 0 0 0 0 18'/%3E%3Ccircle cx='8' cy='9' r='1.4'/%3E%3Ccircle cx='15' cy='8' r='1.4'/%3E%3Ccircle cx='9' cy='15' r='1.4'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
 }

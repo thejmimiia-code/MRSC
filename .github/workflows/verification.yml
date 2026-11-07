@@ -115,6 +115,15 @@ jobs:
           python3 outils/verifier-rd-continue.py
           python3 outils/test_mutations_rd_continue.py
 
+      # Six apparences ajoutées le 7 novembre 2026. La porte refuse un jeton de
+      # couleur oublié, un contraste sous le seuil, un nom d'œuvre réapparu et
+      # une animation qui contournerait prefers-reduced-motion. Douze fautes
+      # sont plantées dans une copie du dépôt pour prouver qu'elle mord.
+      - name: Vérifier les thèmes d'affichage et leurs contrastes
+        run: |
+          python3 outils/test_mutations_apparences.py
+          python3 outils/verifier-apparences.py
+
       # Le 6 novembre 2026, les chiffres de prospective vieillissaient sans
       # garde : « dix-sept sujets sans fiche » dans le portefeuille contre six
       # dans la carte générée. Le relevé qualifié est désormais régénéré, son

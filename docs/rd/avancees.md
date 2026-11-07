@@ -10,10 +10,10 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 96 |
-| Période couverte | du 2026-10-20 au 2026-11-06 |
-| Contrôles exécutables cités | 106 |
-| Initiatives du portefeuille concernées | 15 |
+| Avancées consignées | 97 |
+| Période couverte | du 2026-10-20 au 2026-11-07 |
+| Contrôles exécutables cités | 108 |
+| Initiatives du portefeuille concernées | 16 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
 
@@ -2314,6 +2314,31 @@ Initiatives liées : `coherence-textes-publics`, `co-conception-et-essais`.
 **Suite.** Faire relire le fond des textes par une personne compétente, puis consigner cette relecture dans `relectures.toml` pour les fiches concernées ; remesurer les six configurations dès qu'un navigateur est disponible ; traiter séparément `320-130`.
 
 Initiatives liées : `coherence-textes-publics`, `co-conception-et-essais`.
+
+### `un-theme-est-une-promesse-sur-toutes-les-surfaces` — Un thème n'est pas un accent : promettre toutes les surfaces à la fois
+
+*Consignée le 2026-11-07.*
+
+**Constat.** Le 7 novembre 2026, la demande était de proposer plusieurs apparences dans « Personnalisation », en commençant par les réglages les plus courants puis en ajoutant des palettes inspirées d'ambiances de série, de rétro-futurisme et d'arcade, mais nommées différemment. Le dépôt avait 108 jetons de couleur dans `:root` et un panneau construit une seule fois par `site.js` pour les 13 pages et les fiches.
+
+**Ce que cela change.** Six thèmes livrés : « Suivre l'appareil », « Papier clair », « Nuit sobre », puis « Bobine nocturne », « Cap horizon » et « Salle d'arcade ». Deux attributs sur `<html>` séparent le choix nominal (accents, décor) du fond résolu ; un seul bloc de 108 jetons sombres porte les quatre variantes foncées, généré depuis `:root` pour qu'aucune surface ne reste claire sous un texte clair. Les décors sont des dégradés statiques : aucune animation, donc rien à contourner avec `prefers-reduced-motion`. Préférence locale avec repli sans stockage, synchronisation entre onglets et vers l'iframe, bouton de retour, `theme-color` mis à jour. Aucun nom d'œuvre ni de marque dans le produit ; « les plus utilisés sur le net » est repris de la demande sans être présenté comme une statistique.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/apparences-themes.md`
+- `docs/rd/releve-apparences-2026-11-07.md`
+- `assets/css/site.css`
+- `assets/js/site.js`
+- `outils/verifier-apparences.py`
+- `outils/test_mutations_apparences.py`
+
+**Contrôle qui la maintient :** `python3 outils/test_mutations_apparences.py && python3 outils/verifier-apparences.py && python3 outils/versionner-css-ia.py --verifier && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le premier relevé navigateur a mesuré 1,48:1 à 2,03:1 sur le texte des boutons en fond sombre : le bloc de jetons généré réécrivait `--on-accent` en blanc après la surcharge. Corrigé puis remesuré à 9,20:1 – 12,64:1 ; le minimum de toutes les paires mesurées est 6,97:1. La porte vérifie les paires de jetons déclarées et le relevé quelques styles calculés sur l'accueil, pas les 13 pages dans tous leurs états. Un seul navigateur, aucun lecteur d'écran, aucune personne : les noms, palettes et libellés restent une proposition d'agent à faire relire. L'iframe du simulateur garde sa feuille générée, et `site.js` en `defer` laisse un bref rendu clair avant un thème sombre mémorisé. La charte de l'association et la décision sur la citation signée restent deux choix distincts, toujours ouverts.
+
+**Suite.** Faire relire les six choix par l'association ; étendre les thèmes au simulateur via son générateur si le choix est retenu ; arbitrer un script de démarrage en en-tête ; corriger la sonde d'affichage avec un banc qui exécute réellement le filtre des décors.
+
+Initiatives liées : `direction-artistique-motion`, `optimisation-du-site`.
 
 ## 3. Ce que ce registre ne dit pas
 

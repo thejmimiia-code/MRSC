@@ -1,0 +1,214 @@
+{
+  "date": "2026-11-07",
+  "outil": "sonde Puppeteer locale /tmp/verifier-themes.mjs",
+  "navigateur": "HeadlessChrome/153.0.8010.0",
+  "pilote": "puppeteer-core 25.16.0",
+  "serveur": "outils/serveur-local.py sur 127.0.0.1:4180",
+  "themes": [
+    "systeme",
+    "clair",
+    "sombre",
+    "bobine",
+    "horizon",
+    "arcade"
+  ],
+  "mesures": [
+    {
+      "theme": "systeme",
+      "largeur_px": 320,
+      "choix": "systeme",
+      "fond": "clair",
+      "defilement_px": 0,
+      "contraste_corps": 15.51,
+      "contraste_lien": 6.97,
+      "contraste_bouton": 6.97,
+      "fond_corps": "rgb(255, 255, 255)",
+      "theme_color": "#1d3268"
+    },
+    {
+      "theme": "systeme",
+      "largeur_px": 1440,
+      "choix": "systeme",
+      "fond": "clair",
+      "defilement_px": 0,
+      "contraste_corps": 15.51,
+      "contraste_lien": 6.97,
+      "contraste_bouton": 6.97,
+      "fond_corps": "rgb(255, 255, 255)",
+      "theme_color": "#1d3268"
+    },
+    {
+      "theme": "clair",
+      "largeur_px": 320,
+      "choix": "clair",
+      "fond": "clair",
+      "defilement_px": 0,
+      "contraste_corps": 15.51,
+      "contraste_lien": 6.97,
+      "contraste_bouton": 6.97,
+      "fond_corps": "rgb(255, 255, 255)",
+      "theme_color": "#f5f7fa"
+    },
+    {
+      "theme": "clair",
+      "largeur_px": 1440,
+      "choix": "clair",
+      "fond": "clair",
+      "defilement_px": 0,
+      "contraste_corps": 15.51,
+      "contraste_lien": 6.97,
+      "contraste_bouton": 6.97,
+      "fond_corps": "rgb(255, 255, 255)",
+      "theme_color": "#f5f7fa"
+    },
+    {
+      "theme": "sombre",
+      "largeur_px": 320,
+      "choix": "sombre",
+      "fond": "sombre",
+      "defilement_px": 0,
+      "contraste_corps": 15.82,
+      "contraste_lien": 8.98,
+      "contraste_bouton": 9.48,
+      "fond_corps": "rgb(17, 24, 39)",
+      "theme_color": "#111827"
+    },
+    {
+      "theme": "sombre",
+      "largeur_px": 1440,
+      "choix": "sombre",
+      "fond": "sombre",
+      "defilement_px": 0,
+      "contraste_corps": 15.82,
+      "contraste_lien": 8.98,
+      "contraste_bouton": 9.48,
+      "fond_corps": "rgb(17, 24, 39)",
+      "theme_color": "#111827"
+    },
+    {
+      "theme": "bobine",
+      "largeur_px": 320,
+      "choix": "bobine",
+      "fond": "sombre",
+      "defilement_px": 0,
+      "contraste_corps": 15.82,
+      "contraste_lien": 8.72,
+      "contraste_bouton": 9.2,
+      "fond_corps": "rgb(17, 24, 39)",
+      "theme_color": "#1a1018"
+    },
+    {
+      "theme": "bobine",
+      "largeur_px": 1440,
+      "choix": "bobine",
+      "fond": "sombre",
+      "defilement_px": 0,
+      "contraste_corps": 15.82,
+      "contraste_lien": 8.72,
+      "contraste_bouton": 9.2,
+      "fond_corps": "rgb(17, 24, 39)",
+      "theme_color": "#1a1018"
+    },
+    {
+      "theme": "horizon",
+      "largeur_px": 320,
+      "choix": "horizon",
+      "fond": "sombre",
+      "defilement_px": 0,
+      "contraste_corps": 15.82,
+      "contraste_lien": 10.76,
+      "contraste_bouton": 11.36,
+      "fond_corps": "rgb(17, 24, 39)",
+      "theme_color": "#1b1620"
+    },
+    {
+      "theme": "horizon",
+      "largeur_px": 1440,
+      "choix": "horizon",
+      "fond": "sombre",
+      "defilement_px": 0,
+      "contraste_corps": 15.82,
+      "contraste_lien": 10.76,
+      "contraste_bouton": 11.36,
+      "fond_corps": "rgb(17, 24, 39)",
+      "theme_color": "#1b1620"
+    },
+    {
+      "theme": "arcade",
+      "largeur_px": 320,
+      "choix": "arcade",
+      "fond": "sombre",
+      "defilement_px": 0,
+      "contraste_corps": 15.82,
+      "contraste_lien": 11.98,
+      "contraste_bouton": 12.64,
+      "fond_corps": "rgb(17, 24, 39)",
+      "theme_color": "#0d1424"
+    },
+    {
+      "theme": "arcade",
+      "largeur_px": 1440,
+      "choix": "arcade",
+      "fond": "sombre",
+      "defilement_px": 0,
+      "contraste_corps": 15.82,
+      "contraste_lien": 11.98,
+      "contraste_bouton": 12.64,
+      "fond_corps": "rgb(17, 24, 39)",
+      "theme_color": "#0d1424"
+    }
+  ],
+  "contraste_bouton_avant_correction": {
+    "sombre": 1.97,
+    "bobine": 2.03,
+    "horizon": 1.65,
+    "arcade": 1.48
+  },
+  "scenarios": [
+    {
+      "nom": "persistance + clavier",
+      "radios": [
+        "systeme",
+        "clair",
+        "sombre",
+        "bobine",
+        "horizon",
+        "arcade"
+      ],
+      "applique": {
+        "choix": "arcade",
+        "fond": "sombre",
+        "statut": "Apparence « Salle d'arcade » appliquée.",
+        "memorise": "arcade",
+        "radios": 6
+      },
+      "apres": "arcade",
+      "apresEchap": {
+        "ouvert": false,
+        "focus": "apparence-settings-summary"
+      }
+    },
+    {
+      "nom": "stockage bloqué",
+      "etat": {
+        "choix": "horizon",
+        "fond": "sombre"
+      }
+    },
+    {
+      "nom": "suivre appareil",
+      "sombre": {
+        "fond": "sombre",
+        "corps": "rgb(17, 24, 39)"
+      },
+      "clair": {
+        "fond": "clair",
+        "corps": "rgb(255, 255, 255)"
+      }
+    }
+  ],
+  "suite_navigateur": {
+    "outil": "outils/test-experience.cjs",
+    "resultat": "13/13"
+  }
+}
