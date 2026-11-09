@@ -1,0 +1,11 @@
+id = mdn-prefers-color-scheme
+url = https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme
+date = 2026-11-07
+empreinte = e4752d68faf0cc153101eaea7dccd3d84b94f720d54667f60e6e538aa5a7b63d
+---
+The prefers-color-scheme CSS media feature is used to detect if a user has requested light or dark color themes. A user indicates their preference through an operating system setting (e.g., light or dark mode) or a user agent setting.
+
+light: Indicates that user has notified that they prefer an interface that has a light theme, or has not expressed an active preference.
+dark: Indicates that user has notified that they prefer an interface that has a dark theme.
+
+For SVG and iframes, prefers-color-scheme lets you set a CSS style for the SVG or iframe based on the color-scheme of the parent element in the web page.

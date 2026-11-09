@@ -1,0 +1,12 @@
+id = w3c-contrast-minimum
+url = https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html
+date = 2026-11-07
+empreinte = 0ab39a30ce771c5c561df286c79dc0cc028bbb9badd8bd9660c570107abe7d2a
+---
+The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, except for the following: Large Text — large-scale text and images of large-scale text have a contrast ratio of at least 3:1; Incidental; Logotypes.
+
+The 3:1 and 4.5:1 contrast ratios referenced in this success criterion are intended to be treated as threshold values. When comparing the computed contrast ratio to the Success Criterion ratio, the computed values should not be rounded (e.g., 4.499:1 would not meet the 4.5:1 threshold).
+
+Because authors do not have control over user settings for font smoothing/anti-aliasing, when evaluating this Success Criterion, refer to the foreground and background colors obtained from the user agent, or the underlying markup and stylesheets, rather than the text as presented on screen.
+
+This success criterion applies to text in the page, including placeholder text and text that is shown when a pointer is hovering over an object or when an object has keyboard focus.

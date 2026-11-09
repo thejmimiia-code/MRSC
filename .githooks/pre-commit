@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Relecture de contenu à chaque édition — 9 novembre 2026.
+# L'agent relit et confronte les sources ; la personne garde le rendu à l'œil.
+# Ce crochet ne signe rien : il vérifie. Un --no-verify local ne contourne pas
+# la CI, qui relit la même sentinelle sur chaque push et chaque pull request.
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+python3 outils/relire-contenus.py

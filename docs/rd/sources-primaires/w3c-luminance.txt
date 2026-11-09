@@ -1,0 +1,10 @@
+id = w3c-luminance
+url = https://github.com/w3c/wcag/blob/main/guidelines/terms/20/relative-luminance.html
+date = 2026-11-07
+empreinte = 4dbd6e9cf4079bc1969a72baa917a1916391aff2a9bc07345d5b3a528d85649e
+---
+For the sRGB colorspace, the relative luminance of a color is defined as L = 0.2126 * R + 0.7152 * G + 0.0722 * B where R, G and B are defined as: if RsRGB <= 0.04045 then R = RsRGB/12.92 else R = ((RsRGB+0.055)/1.055) ^ 2.4 (and the same for G and B); RsRGB = R8bit/255, GsRGB = G8bit/255, BsRGB = B8bit/255.
+
+Before May 2021 the value of 0.04045 in the definition was different (0.03928). It was taken from an older version of the specification and has been updated. It has no practical effect on the calculations in the context of these guidelines.
+
+Almost all systems used today to view web content assume sRGB encoding. Unless it is known that another color space will be used to process and display the content, authors should evaluate using sRGB colorspace.

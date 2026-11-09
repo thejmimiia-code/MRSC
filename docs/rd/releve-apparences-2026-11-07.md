@@ -47,4 +47,4 @@ Le premier passage donnait **1,97:1** (Nuit sobre), **2,03:1** (Bobine nocturne)
 - Les états de survol, de focus et de panneau ouvert ne sont pas mesurés thème par thème ; la porte hors ligne vérifie les paires de jetons déclarées, pas toutes les combinaisons rendues.
 - L'iframe du simulateur reçoit les attributs mais garde sa propre feuille générée : elle ne suit pas les thèmes.
 - `site.js` est chargé en `defer` : un thème sombre mémorisé peut s'appliquer après un bref rendu clair.
-- Aucune validation humaine des noms, des palettes, de leur ordre ou de leur intérêt. Ce relevé ne transforme aucune proposition en décision de l'association.
+- Aucune validation humaine des noms, des palettes, de leur ordre ou de leur intérêt. La relecture de contenu et des sources a été prise en charge par l'agent le 7 novembre 2026 (`relecture-apparences-2026-11-07.md`) ; elle n'est pas une validation humaine et n'écrit rien dans `relectures.toml`. Ce relevé ne transforme aucune proposition en décision de l'association.

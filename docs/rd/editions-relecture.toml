@@ -1,0 +1,182 @@
+# Éditions relues par agent. Fichier généré par `outils/relire-contenus.py --appliquer`.
+# Ne pas éditer à la main : chaque bloc est confronté à l'empreinte du manifeste.
+
+[[edition]]
+chemin = "docs/protocole-editorial.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "a9897c71156c2a737b43c0ec56bd4b202c14279578a038228311e46344e90b2d"
+empreinte_apres = "cf76c9e0c850bcc05d61389c9ef49f52be794ed2069a3dbc4b6d75d9b629258f"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "8ccddca26cf9ab13d439c822831aa5a51f9445739230cc46b477f905272b2f28"
+empreinte_apres = "f340aba01a616f643fbeafd8d1e05795f3fd6833bc7ae905c2fc317859cc2cb9"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "4ebf0d5211be5dffa9591273418a346b12ed90bbfecfc185c40db95e317e9a88"
+empreinte_apres = "3ee2ba33777d4f8c28983752cf4a931179a398bf3377de8c449464ba44ebe36c"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "69000e448a54f0ca86b58a84bcc1cdcf107e46431f2845c026a12695224a10c7"
+empreinte_apres = "dc58dd9c762155fef55fd29a548b64d17fce5dce5964285cec86b502b1c5c4f8"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "34d7a17baa50bf636054577d5fd7bf0cf7cc67fc3cca98130168aecfc3fc16fa"
+empreinte_apres = "b6c24afed0bb5e1c2a0e8c8f78585a13995533e7af3650bc67ba26ff5c0f88a8"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "76cb1bc35950df2a01fbf6e12975a094d3e137c8c6fc5fccb7fe6e0c378d1b8e"
+empreinte_apres = "2813a17ac69c3ceb9f7f6be49773ed241936c04faa46b9e83d23c8b3a1fee505"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "89e8832cd11f90fa58369b9b0cf0fe98b75f871d261c9950a44cf49fa4f32bce"
+empreinte_apres = "c885acc4f1ca2cb0243eb92e4ca3c8beacdfc20d6b24186523d0d2dd4a4b2f72"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "37a303767d118331587172204776f7405d114a67fe67f6849f1a76b4e6d1fbba"
+empreinte_apres = "ec283456957cc3bdf1ff1afad025f8cb29c06b51f9132334b92af3ca9afa8ba2"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+[[edition]]
+chemin = "docs/rd/portefeuille.toml"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "ee2e34ecccb6dceb14298ce5d0bc9f1949f01a2d4512f157179ea8de5b9bf25d"
+empreinte_apres = "c3f82a933326a3af80ee182fa25a38b08fd39ef67f39c13c9d34d3e5a9fc4645"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+[[edition]]
+chemin = "docs/rd/relecture-apparences-2026-11-07.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "322858c66a595f7ad9db16c611901aa4c55419ea40a1db4eca53a2717f55992b"
+empreinte_apres = "27d97adbc2473d4a7bfa39989c2758875541cad6f0a66d1637b54d1d675ced9e"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+[[edition]]
+chemin = "docs/rd/relecture-automatique.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "absente-au-9-novembre-2026"
+empreinte_apres = "6a6151c11947ef8a0bc04dfc7f5b34b12b89f933725ec923b4f9f426672505e6"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "480418808ec4beb6495a71eb15e6b964c9dcb1da20398722c452f594c7b96c5c"
+empreinte_apres = "03a43218b0ac31571baf569f40fc05311032386a40dd4d5a9dd70e5e82b54de3"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+[[edition]]
+chemin = "outils/test_mutations_relire_contenus.py"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "absente-au-9-novembre-2026"
+empreinte_apres = "e9f20324a85b95aa5874511b30c933e58cd11dc32baa910c2012ac848286b713"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme", "mdn-forced-colors", "mdn-prefers-reduced-motion", "mdn-theme-color", "w3c-contrast-minimum", "w3c-non-text-contrast", "w3c-luminance"]
+mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/verifier-relecture-contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Relecture du lot d'automatisation du 9 novembre 2026 : chaque fait externe invoqué (schémas clair/sombre, couleurs forcées, mouvement réduit, theme-color, seuils WCAG 1.4.3 et 1.4.11, définition de la luminance relative) a été confronté aux huit sources primaires datées et à leurs extraits mis en cache ; les chiffres internes (494 unités, 122 pages HTML, 17 fautes plantées, 99 avancées) sont produits par les outils et registres cités en mesures. Les liens, ancres, TOML, typographie et câblage ont été revérifiés sur l'ensemble du corpus."
+limite = "Cette relecture porte sur les fichiers de méthode, de trace et d'outillage modifiés le 9 novembre, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : ceux-ci restent une dette consignée dans le manifeste. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes, ni une validation visuelle. La porte vérifie des extraits datés, pas la vérité du monde, et une page source peut changer après sa consultation."
+
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "03a43218b0ac31571baf569f40fc05311032386a40dd4d5a9dd70e5e82b54de3"
+empreinte_apres = "8339a1d809202498fae0d95ea239b42d84793e814fb3e0650c7d96028ea96a8f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_mutations_relire_contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Ajout de la garde interdisant à --appliquer d'écrire dans une racine de banc de mutations : la signature ne peut être produite que dans le dépôt de travail, jamais à travers un lien symbolique d'une copie jetable. Aucun fait externe nouveau."
+limite = "Cette relecture ne couvre que la garde ajoutée au script ; elle ne juge pas la vérité des sources externes et ne constitue ni validation humaine, ni expertise, ni avis juridique, ni validation visuelle."
+
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "8339a1d809202498fae0d95ea239b42d84793e814fb3e0650c7d96028ea96a8f"
+empreinte_apres = "bc3bd67e4dd533d5f52a711d3edf76c23b8fea11dae13ac677db038f1365c1f6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_mutations_relire_contenus.py", "docs/rd/relecture-contenus.toml"]
+constat = "Dernières corrections de la sentinelle : la fraîcheur des sources se mesure désormais aussi sur les éditions signées, l'ajout d'une édition ne recopie plus l'entête du registre, et l'orthographe du bilan est corrigée. Le banc de mutations reste la preuve de ces trois gardes."
+limite = "Cette relecture ne couvre que le script de la sentinelle ; elle ne valide ni la vérité des pages sources, ni le fond du corpus existant, et ne constitue aucune validation humaine, expertise, avis juridique ou contrôle visuel."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "b6c24afed0bb5e1c2a0e8c8f78585a13995533e7af3650bc67ba26ff5c0f88a8"
+empreinte_apres = "b1af55091f5b141ce997fd6b4f35910158165a482af5d03a83b34987ffbb5812"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py", "docs/rd/journal.md", "docs/rd/avancees.md"]
+constat = "Régénération de l'index ÉVA après les dernières entrées du journal, de la 99e avancée, du protocole éditorial et de la note de méthode : 477 entrées, 287 noeuds, 652 arêtes, corpus de 1 952 953 octets. Le contrôle --verifier est repassé après génération."
+limite = "Cet index est un outil de recherche interne, pas une relecture du fond des documents qu'il pointe ; il ne constitue ni validation humaine, ni expertise, ni avis juridique, ni mesure d'usage."

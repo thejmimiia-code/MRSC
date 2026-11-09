@@ -1,0 +1,10 @@
+id = w3c-non-text-contrast
+url = https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html
+date = 2026-11-07
+empreinte = 638f01a74436dba13be32a5adc4ad96337b7d852da95e09156e246cbfac31d54
+---
+The visual presentation of the following have a contrast ratio of at least 3:1 against adjacent color(s): User Interface Components — visual information required to identify user interface components and states, except for inactive components or where the appearance of the component is determined by the user agent and not modified by the author; Graphical Objects — parts of graphics required to understand the content.
+
+Note: The 3:1 contrast ratios referenced in this success criterion is intended to be treated as threshold values. When comparing the computed contrast ratio to the success criterion ratio, the computed values should not be rounded (e.g. 2.999:1 would not meet the 3:1 threshold).
+
+Because authors do not have control over user settings for font smoothing and anti-aliasing, when evaluating this Success Criterion, refer to the colors obtained from the user agent, or the underlying markup and stylesheets, rather than the non-text elements as presented on screen.

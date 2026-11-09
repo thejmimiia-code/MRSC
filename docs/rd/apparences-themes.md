@@ -1,7 +1,7 @@
 # Apparences du site — six thèmes dans « Personnalisation »
 
-**Note de travail du 7 novembre 2026. État : proposition d'agent, à faire relire par l'association.**
-Ce document n'est ni une charte graphique adoptée, ni une validation visuelle, ni un essai avec des personnes. Il sépare ce qui a été demandé, ce qui a été mesuré et ce qui reste un choix humain.
+**Note de travail du 7 novembre 2026. État : proposition d'agent, contenu relu par agent le 7 novembre 2026 avec sources primaires confrontées.**
+Ce document n'est ni une charte graphique adoptée, ni une validation visuelle, ni un essai avec des personnes. La relecture de contenu et des sources a été prise en charge par la nouvelle étape `outils/verifier-relecture-contenus.py` (rapport : [`relecture-apparences-2026-11-07.md`](relecture-apparences-2026-11-07.md)) ; la personne garde la validation du rendu à l'œil — placement, style, construction — sans avoir à lire les registres. Il sépare ce qui a été demandé, ce qui a été mesuré, ce qui a été corrigé et ce qui reste un choix humain.
 
 ## 1. Signal, fait, hypothèse, proposition
 
@@ -11,9 +11,9 @@ Ce document n'est ni une charte graphique adoptée, ni une validation visuelle, 
 | **Fait mesuré** | Le dépôt disposait déjà de 108 jetons de couleur dans `:root`, d'un panneau « Personnalisation » construit par `assets/js/site.js` et partagé par les 13 pages et les fiches, d'un réglage de contraste renforcé et de règles `@media (forced-colors: active)`. |
 | **Hypothèse de conception** | Un thème peut être porté par les seuls jetons, sans réécrire les pages : deux attributs sur `<html>` suffisent, l'un pour le choix nominal, l'autre pour le fond résolu. |
 | **Proposition livrée** | Six thèmes, une seule feuille CSS et un seul script. Aucune page HTML ne fige d'apparence. |
-| **Non fait** | Aucune étude de fréquentation, aucun sondage, aucun essai avec des personnes, aucune relecture éditoriale des libellés, aucune comparaison visuelle validée par une personne, aucun lecteur d'écran. |
+| **Non fait** | Aucune étude de fréquentation, aucun sondage, aucun essai avec des personnes, aucune **relecture humaine** des libellés (la relecture de contenu par agent est faite, voir § 5), aucune comparaison visuelle validée par une personne, aucun lecteur d'écran. |
 
-« Les plus utilisés sur le net » est repris de la demande : le lot retient les trois réglages d'apparence couramment proposés (**suivre l'appareil**, **clair**, **sombre**), mais **aucune source ni mesure de fréquence n'a été consultée** pour les classer. Ce n'est pas une statistique.
+L'expression « les plus utilisés sur le net » vient de la demande et n'est citée ici que comme signal. La relecture par agent du 7 novembre 2026 a confronté cette formulation à MDN : `color-scheme` documente `light` et `dark` comme schémas **du système d'exploitation**, et `prefers-color-scheme` comme préférence exprimée par le système ou le navigateur — rien n'y mesure la fréquence des réglages proposés par les sites Web. **Aucune allégation de fréquence n'est donc retenue.** Les trois réglages documentés (**suivre l'appareil**, **clair**, **sombre**) sont placés en tête par décision de conception, sans statistique. Détail et source : `docs/rd/relecture-apparences-2026-11-07.md`, correction n° 3.
 
 ## 2. Les six choix
 
@@ -40,7 +40,7 @@ Les trois derniers noms, couleurs, dégradés et libellés sont **originaux**. L
 
 ## 4. Ce qui reste ouvert
 
-- **Relecture humaine** des six noms, des descriptions, des palettes et de leur intérêt réel. Aucune validation visuelle côte à côte n'a eu lieu.
+- **Validation visuelle à l'œil** du placement, du style et de la construction, ainsi qu'une comparaison côte à côte si la personne le souhaite. La relecture de contenu, des noms et des sources n'est plus à sa charge : elle a été faite par l'étape dédiée le 7 novembre 2026 (**22 concordant, 3 corrige**, zéro chaîne publique non couverte). Aucune validation humaine du fond n'a été consignée et aucune entrée n'a été ajoutée à `relectures.toml`.
 - **Simulateur** : l'attribut est propagé à l'iframe locale, mais la page du simulateur est générée avec sa propre feuille ; elle ne suit pas encore les thèmes. À traiter dans un lot séparé, avec le générateur.
 - **Éclair de thème clair au rechargement** : `site.js` est chargé en `defer`, comme les autres préférences du site. Un thème sombre mémorisé peut donc s'appliquer après un premier rendu clair. Corriger demanderait un script de démarrage dans l'en-tête des pages, soit un changement de gabarit à arbitrer.
 - **Portée du contraste** : la porte mesure les paires de jetons déclarées, et le relevé navigateur mesure quelques styles calculés sur l'accueil. Les 13 pages, tous les états (survol, focus, ouvert) et les lecteurs d'écran ne sont pas couverts.
@@ -52,3 +52,6 @@ Les trois derniers noms, couleurs, dégradés et libellés sont **originaux**. L
 - `python3 outils/test_mutations_apparences.py` — 12 fautes plantées, toutes refusées ; copie intacte verte.
 - `node outils/test-experience.cjs` — 13/13 essais navigateur avec le panneau à cinq réglages.
 - [`releve-apparences-2026-11-07.md`](releve-apparences-2026-11-07.md) — mesures Chromium 153 des six thèmes.
+- `python3 outils/verifier-relecture-contenus.py` — 8 sources primaires datées, 25 affirmations rattachées, 20 chaînes publiques couvertes, 0 promotion humaine.
+- `python3 outils/test_mutations_relecture_contenus.py` — 19 fautes plantées, toutes refusées ; copie intacte verte.
+- [`relecture-apparences-2026-11-07.md`](relecture-apparences-2026-11-07.md) — rapport de relecture par agent et trois corrections issues des sources (constante de luminance, tolérance de seuil, allégation de fréquence).

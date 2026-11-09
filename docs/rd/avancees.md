@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 97 |
-| Période couverte | du 2026-10-20 au 2026-11-07 |
-| Contrôles exécutables cités | 108 |
+| Avancées consignées | 99 |
+| Période couverte | du 2026-10-20 au 2026-11-09 |
+| Contrôles exécutables cités | 113 |
 | Initiatives du portefeuille concernées | 16 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -2315,6 +2315,32 @@ Initiatives liées : `coherence-textes-publics`, `co-conception-et-essais`.
 
 Initiatives liées : `coherence-textes-publics`, `co-conception-et-essais`.
 
+### `la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider` — Relire n'est pas faire valider : l'étape de vérification change de main
+
+*Consignée le 2026-11-07.*
+
+**Constat.** Le 7 novembre 2026, après la publication des six apparences, la consigne a été explicite : la relecture doit être faite par l'agent dans une nouvelle étape de vérification avec des sources sûres, parce que la personne ne va pas « se cogner la lecture de millier de lignes » ; elle peut en revanche valider à l'oeil un placement, un style, une construction. Le dépôt savait compter les contrôles et refuser un jeton de couleur oublié, mais rien n'y prenait en charge la lecture de contenu : `outils/registre-relecture.py` ne relit rien, ne note rien, ne valide rien, et `outils/confronter-sources.py` restait un prototype hors porte de publication, avec un taux d'erreur non mesuré.
+
+**Ce que cela change.** Création d'une étape exécutable distincte : `outils/verifier-relecture-contenus.py` câblé en CI, `outils/test_mutations_relecture_contenus.py` (19 fautes plantées, copie intacte verte), un registre daté `docs/rd/relecture-contenus.toml` et un rapport `docs/rd/relecture-apparences-2026-11-07.md`. Huit sources primaires consultées le 7 novembre 2026 (MDN color-scheme, prefers-color-scheme, forced-colors, prefers-reduced-motion, theme-color ; W3C/WAI 1.4.3 et 1.4.11 ; définition W3C de la luminance relative) ; 25 affirmations rattachées ; les 20 chaînes publiques du lot couvertes une à une et confrontées littéralement au fichier cité. Trois natures : fait-source, mesure-interne, proposition — cette dernière doit dire « aucun fait externe ». La confrontation a produit trois corrections réelles, pas une relecture décorative : seuil de luminance 0,03928 → 0,04045 (WCAG 2.2, mai 2021), tolérance de 0,01 sur les seuils de contraste → comparaison sans arrondi (4,499:1 échoue), et retrait de l'allégation de fréquence « les plus utilisés sur le net » que MDN ne permet pas d'affirmer. Le protocole éditorial reçoit une section sur la frontière : la personne garde le rendu à l'oeil, l'agent porte la lecture, et `relectures.toml` reste vide.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/relecture-contenus.toml`
+- `docs/rd/relecture-apparences-2026-11-07.md`
+- `outils/verifier-relecture-contenus.py`
+- `outils/test_mutations_relecture_contenus.py`
+- `outils/verifier-apparences.py`
+- `docs/protocole-editorial.md`
+- `.github/workflows/verification.yml`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-relecture-contenus.py && python3 outils/test_mutations_relecture_contenus.py && python3 outils/verifier-apparences.py && python3 outils/verifier-inventaire-controles.py && python3 outils/registre-relecture.py`
+
+**Limite — ce que cela ne prouve pas.** La porte éprouve la discipline de la relecture et la couverture des chaînes, pas la vérité du Web : la lecture effective est consignée dans un rapport daté, et un domaine non primaire, une date absente, une limite trop courte ou une chaîne non couverte font échouer la CI. Le périmètre est le seul lot des apparences : les 107 fiches, les 81 prototypes, le fond de `transparence.html`, la prospective et la citation signée ne sont pas relus, et aucune fiche n'est promue. Ce n'est ni une validation humaine, ni une expertise de domaine, ni un avis juridique : trois recherches Web sur les noms inventés ne remplacent pas une consultation INPI/EUIPO. Aucun lecteur d'écran, aucun autre navigateur que Chromium 153, aucun essai avec des personnes et aucune validation visuelle nouvelle. La porte ne vérifie pas non plus que la source n'a pas changé depuis le 7 novembre 2026.
+
+**Suite.** Étendre le même mécanisme à un prochain lot de contenu en ajoutant ses affirmations au registre, sans jamais le pré-remplir au nom d'une personne ; garder les sources primaires datées et réévaluer leur fraîcheur lors d'une revue ; laisser la personne valider à l'oeil le placement, le style et la construction si elle le souhaite, sans lui demander de lire les registres.
+
+Initiatives liées : `coherence-textes-publics`, `coordination-de-tous-les-agents`, `direction-artistique-motion`.
+
 ### `un-theme-est-une-promesse-sur-toutes-les-surfaces` — Un thème n'est pas un accent : promettre toutes les surfaces à la fois
 
 *Consignée le 2026-11-07.*
@@ -2339,6 +2365,34 @@ Initiatives liées : `coherence-textes-publics`, `co-conception-et-essais`.
 **Suite.** Faire relire les six choix par l'association ; étendre les thèmes au simulateur via son générateur si le choix est retenu ; arbitrer un script de démarrage en en-tête ; corriger la sonde d'affichage avec un banc qui exécute réellement le filtre des décors.
 
 Initiatives liées : `direction-artistique-motion`, `optimisation-du-site`.
+
+### `une-edition-non-relue-ne-peut-plus-etre-publiee` — Une édition non relue ne peut plus être publiée
+
+*Consignée le 2026-11-09.*
+
+**Constat.** Le 7 novembre 2026, la relecture de contenu était devenue une étape exécutable, mais elle restait bornée au seul lot des six apparences : `outils/verifier-relecture-contenus.py` vérifiait 8 sources et 25 affirmations, sans rien savoir d’une modification apportée ailleurs. Le 9 novembre, la consigne a été de rendre la chose « automatiquement lors de toutes éditions », pour « avoir toujours du contenu qui soit propre, pro et sourcé sans erreurs ». Un programme ne peut pas décider qu’une phrase est vraie ; il peut empêcher qu’une phrase change sans passer par la lecture de l’agent.
+
+**Ce que cela change.** Sentinelle `outils/relire-contenus.py` : SHA-256 des 494 fichiers texte du dépôt dans `docs/rd/empreintes-contenus.toml`, `[[edition]]` datée et attribuée à l’agent dans `docs/rd/editions-relecture.toml`, et `--appliquer` qui refuse de signer si une URL externe nouvelle n’est pas couverte par une source primaire enregistrée, si une apostrophe droite apparaît ou si une autre porte est en faute. Trois déclencheurs : workflow dédié sur chaque push de toutes les branches et chaque proposition, étape ajoutée à la CI principale, crochet `pre-commit` activé. Huit extraits de sources primaires déposés dans `docs/rd/sources-primaires/` avec URL, date et empreinte du corps : à chaque lancement, l’ancre du registre est confrontée au texte réel, un extrait modifié est refusé et une consultation de plus de 366 jours est signalée. Batterie rejouée sur tout le corpus : ancres et liens locaux des 122 pages HTML, TOML lisibles, brouillons, conflits, typographie, câblage, registre humain vide et porte du lot. `outils/test_mutations_relire_contenus.py` plante 17 fautes et exige leur refus nommé.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/relecture-automatique.md`
+- `docs/rd/empreintes-contenus.toml`
+- `docs/rd/editions-relecture.toml`
+- `docs/rd/relecture-contenus.toml`
+- `outils/relire-contenus.py`
+- `outils/test_mutations_relire_contenus.py`
+- `.github/workflows/relecture-contenus.yml`
+- `.githooks/pre-commit`
+- `docs/protocole-editorial.md`
+
+**Contrôle qui la maintient :** `python3 outils/relire-contenus.py && python3 outils/test_mutations_relire_contenus.py && python3 outils/verifier-relecture-contenus.py && python3 outils/verifier-inventaire-controles.py && python3 outils/verifier-workflows.py && python3 outils/verifier-fusions.py`
+
+**Limite — ce que cela ne prouve pas.** L’automatisation ne juge pas la vérité d’une phrase, ne fabrique ni relecture humaine, ni expertise de domaine, ni avis juridique, ni essai avec des personnes, ni validation visuelle. Les 494 empreintes du 9 novembre sont une référence de départ : `limite_reference` consigne que la relecture de fond du corpus existant (107 fiches, 81 prototypes, fond de `transparence.html`, prospective, citation signée) reste une dette visible, pas un contenu déclaré validé. Le crochet local est contournable par `--no-verify` ; la CI ne l’est pas. `relectures.toml` reste vide et `confronter-sources.py` reste hors porte de publication. Une URL seule ne suffisait plus : huit extraits sont vérifiés, mais une page source peut changer après sa consultation, et la fraîcheur ne remplace pas une nouvelle lecture.
+
+**Suite.** À chaque édition, relire le delta, confronter les faits aux sources primaires datées, consigner la `[[edition]]` avec ses limites, puis laisser la personne juger le rendu à l’oeil ; réévaluer la fraîcheur des extraits en revue ; résorber la dette de relecture de fond par lots, sans promouvoir de statut.
+
+Initiatives liées : `coherence-textes-publics`, `coordination-de-tous-les-agents`, `optimisation-du-site`.
 
 ## 3. Ce que ce registre ne dit pas
 

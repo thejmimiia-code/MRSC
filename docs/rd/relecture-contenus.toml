@@ -1,0 +1,393 @@
+# Registre de relecture PAR AGENT, distinct du registre des relectures humaines.
+#
+# Le 7 novembre 2026, la personne a explicitement confié à l'agent la relecture
+# de contenu et la vérification des sources, en gardant pour elle la validation
+# du rendu à l'oeil (placement, style, construction). Ce fichier consigne cette
+# relecture d'agent : elle n'écrit PAS dans docs/apprentissage/relectures.toml,
+# ne promeut aucune fiche et ne se présente jamais comme une validation humaine,
+# une expertise de domaine, un avis juridique ni un essai auprès de personnes.
+#
+# Chaque [[affirmation]] rattache une chaîne publique ou une affirmation de
+# méthode à des sources primaires datées ou à une mesure interne reproductible.
+# outils/verifier-relecture-contenus.py éprouve ce registre et sa couverture.
+
+[meta]
+version = 1
+date_relecture = 2026-11-07
+auteur = "agent"
+lot = "apparences-du-7-novembre-2026"
+statut = "relu-par-agent-sources-confrontees"
+regle = "La personne valide le rendu à l'oeil ; l'agent relit les contenus, confronte chaque fait à une source primaire datée et consigne les limites. Aucune chaîne publique du lot sans entrée ici."
+rapport = "docs/rd/relecture-apparences-2026-11-07.md"
+
+
+[portee]
+regle = "Le 9 novembre 2026, la relecture de contenu et la vérification des sources sûres sont rendues automatiques à toutes les éditions : l'agent relit, la personne garde le rendu à l'oeil."
+declencheurs = [".github/workflows/relecture-contenus.yml", ".github/workflows/verification.yml", ".githooks/pre-commit"]
+manifeste = "docs/rd/empreintes-contenus.toml"
+editions = "docs/rd/editions-relecture.toml"
+extraits = "docs/rd/sources-primaires"
+limite = "L'automatisation vérifie des empreintes, des liens, des extraits datés et des sources primaires ; elle ne juge pas la vérité d'une phrase, ne fabrique aucune expertise humaine et n'écrit jamais dans docs/apprentissage/relectures.toml. Le corpus existant reste une dette de relecture de fond consignée, pas un contenu déclaré validé."
+
+[[source]]
+id = "mdn-color-scheme"
+extrait = "docs/rd/sources-primaires/mdn-color-scheme.txt"
+editeur = "MDN Web Docs (Mozilla)"
+titre = "color-scheme CSS property"
+url = "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color-scheme"
+consulte_le = 2026-11-07
+ancre = "\"light\" and \"dark\""
+permet = "Confirmer que light et dark sont les deux schémas de couleur courants des systèmes, que color-scheme les déclare et qu'une balise meta placée avant le CSS aide à éviter un éclair de thème au chargement."
+limites = "Page de référence maintenue par Mozilla, documentation et non texte normatif ; elle décrit les schémas du système d'exploitation, pas la fréquence des réglages proposés par les sites Web. Elle ne fournit aucune statistique d'usage et ne valide aucun choix éditorial du M.R.S.C."
+
+[[source]]
+id = "mdn-prefers-color-scheme"
+extrait = "docs/rd/sources-primaires/mdn-prefers-color-scheme.txt"
+editeur = "MDN Web Docs (Mozilla)"
+titre = "prefers-color-scheme CSS media feature"
+url = "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme"
+consulte_le = 2026-11-07
+ancre = "light or dark color themes"
+permet = "Confirmer que la préférence clair/sombre est exprimée par un réglage du système ou du navigateur, et que la valeur light couvre aussi l'absence de préférence active."
+limites = "Documentation de référence, non spécification normative ; le comportement exact dépend du navigateur et du système. Elle n'atteste pas que le script du site suit effectivement cette préférence : cette vérification-là est une mesure interne."
+
+[[source]]
+id = "mdn-forced-colors"
+extrait = "docs/rd/sources-primaires/mdn-forced-colors.txt"
+editeur = "MDN Web Docs (Mozilla)"
+titre = "forced-colors CSS media feature"
+url = "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/forced-colors"
+consulte_le = 2026-11-07
+ancre = "forced to 'none'"
+permet = "Confirmer qu'en mode couleurs forcées le navigateur remplace les couleurs auteur et force background-image à none pour les valeurs non-URL, et que la fonction sert à de petits ajustements, pas à un second design."
+limites = "Le comportement varie selon le navigateur et la plateforme ; MDN recommande de ne pas créer un design séparé. La règle du dépôt qui neutralise les décors reste donc un ajustement prudent, pas une garantie de conformité."
+
+[[source]]
+id = "mdn-prefers-reduced-motion"
+extrait = "docs/rd/sources-primaires/mdn-prefers-reduced-motion.txt"
+editeur = "MDN Web Docs (Mozilla)"
+titre = "prefers-reduced-motion CSS media feature"
+url = "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion"
+consulte_le = 2026-11-07
+ancre = "non-essential motion"
+permet = "Confirmer que reduce demande à réduire ou remplacer les animations non essentielles, et qu'aucune animation ajoutée est la réponse la plus sûre."
+limites = "La page documente la préférence, pas son application dans ce dépôt ; l'absence d'animation dans les décors est vérifiée séparément par une porte locale. Elle ne dit rien des transitions déjà présentes sur le site."
+
+[[source]]
+id = "mdn-theme-color"
+extrait = "docs/rd/sources-primaires/mdn-theme-color.txt"
+editeur = "MDN Web Docs (Mozilla)"
+titre = "meta name=theme-color"
+url = "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/theme-color"
+consulte_le = 2026-11-07
+ancre = "a suggested color"
+permet = "Confirmer que theme-color est une couleur suggérée à l'agent utilisateur pour l'interface autour de la page, définie par l'attribut content."
+limites = "MDN classe cette fonctionnalité en disponibilité limitée : Firefox bureau et plusieurs navigateurs ne la prennent pas en charge. La mise à jour de la balise par le script est donc une suggestion, jamais un rendu garanti."
+
+[[source]]
+id = "w3c-contrast-minimum"
+extrait = "docs/rd/sources-primaires/w3c-contrast-minimum.txt"
+editeur = "W3C / Web Accessibility Initiative"
+titre = "Understanding SC 1.4.3 Contrast (Minimum), WCAG 2.2"
+url = "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
+consulte_le = 2026-11-07
+ancre = "at least 4.5:1"
+permet = "Confirmer le seuil de 4,5:1 pour le texte normal, 3:1 pour le grand texte, l'absence d'arrondi des seuils (4,499:1 échoue) et l'usage des couleurs déclarées plutôt que du rendu à l'écran."
+limites = "Document d'accompagnement (Understanding), non texte normatif ; il ne couvre pas les états de survol, de focus, les dégradés ni les combinaisons particulières du site. Le contrôle local mesure des paires de jetons déclarées."
+
+[[source]]
+id = "w3c-non-text-contrast"
+extrait = "docs/rd/sources-primaires/w3c-non-text-contrast.txt"
+editeur = "W3C / Web Accessibility Initiative"
+titre = "Understanding SC 1.4.11 Non-text Contrast, WCAG 2.2"
+url = "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html"
+consulte_le = 2026-11-07
+ancre = "at least 3:1"
+permet = "Confirmer le seuil de 3:1 pour les composants d'interface et les objets graphiques porteurs d'information, là aussi sans arrondi."
+limites = "Le document précise que le seuil porte sur les couleurs adjacentes et que certains éléments (composants inactifs, décoration) en sont exclus ; appliquer 3:1 à une paire de jetons ne prouve pas la conformité de tous les états d'interface."
+
+[[source]]
+id = "w3c-luminance"
+extrait = "docs/rd/sources-primaires/w3c-luminance.txt"
+editeur = "W3C / groupe de travail WCAG (dépôt w3c/wcag)"
+titre = "Définition de relative luminance, WCAG 2.2"
+url = "https://github.com/w3c/wcag/blob/main/guidelines/terms/20/relative-luminance.html"
+consulte_le = 2026-11-07
+ancre = "0.04045"
+permet = "Confirmer la formule L = 0,2126 R + 0,7152 G + 0,0722 B et le seuil de linéarisation 0,04045, qui remplace 0,03928 depuis mai 2021."
+limites = "Fichier source du glossaire WCAG lu le 7 novembre 2026 ; la note du W3C précise que le changement de seuil n'a pas d'effet pratique sur les calculs dans le contexte de ces règles. La correction faite ici aligne la porte sur la définition actuelle, elle ne change aucun résultat mesuré."
+
+[[affirmation]]
+id = "chaine-01"
+texte = "Suivre l'appareil"
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Libellé examiné : orthographe, casse, absence de nom protégé, cohérence avec la valeur du thème."
+limite = "Dénomination fonctionnelle, sans fait externe : « aucun fait externe ». Une recherche Web n'est pas une consultation de l'INPI ni de l'EUIPO ; « Salle d'arcade » est aussi une expression courante du français."
+
+[[affirmation]]
+id = "chaine-02"
+texte = "Papier clair"
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Libellé examiné : orthographe, casse, absence de nom protégé, cohérence avec la valeur du thème."
+limite = "Dénomination descriptive, sans fait externe : « aucun fait externe ». Une recherche Web n'est pas une consultation de l'INPI ni de l'EUIPO ; « Salle d'arcade » est aussi une expression courante du français."
+
+[[affirmation]]
+id = "chaine-03"
+texte = "Nuit sobre"
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Libellé examiné : orthographe, casse, absence de nom protégé, cohérence avec la valeur du thème."
+limite = "Dénomination descriptive, sans fait externe : « aucun fait externe ». Une recherche Web n'est pas une consultation de l'INPI ni de l'EUIPO ; « Salle d'arcade » est aussi une expression courante du français."
+
+[[affirmation]]
+id = "chaine-04"
+texte = "Bobine nocturne"
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Libellé examiné : orthographe, casse, absence de nom protégé, cohérence avec la valeur du thème."
+limite = "Nom inventé pour le lot ; recherche Web du 7 novembre 2026 sans œuvre homonyme : aucun fait externe. Une recherche Web n'est pas une consultation de l'INPI ni de l'EUIPO ; « Salle d'arcade » est aussi une expression courante du français."
+
+[[affirmation]]
+id = "chaine-05"
+texte = "Cap horizon"
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Libellé examiné : orthographe, casse, absence de nom protégé, cohérence avec la valeur du thème."
+limite = "Nom inventé pour le lot ; recherche Web du 7 novembre 2026 sans œuvre homonyme : aucun fait externe. Une recherche Web n'est pas une consultation de l'INPI ni de l'EUIPO ; « Salle d'arcade » est aussi une expression courante du français."
+
+[[affirmation]]
+id = "chaine-06"
+texte = "Salle d'arcade"
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Libellé examiné : orthographe, casse, absence de nom protégé, cohérence avec la valeur du thème."
+limite = "Expression courante du français, employée comme nom de thème ; aucun fait externe. Une recherche Web n'est pas une consultation de l'INPI ni de l'EUIPO ; « Salle d'arcade » est aussi une expression courante du français."
+
+[[affirmation]]
+id = "chaine-07"
+texte = "Le réglage clair ou sombre choisi sur votre appareil."
+ou = "assets/js/site.js"
+nature = "fait-source"
+sources = ["mdn-prefers-color-scheme"]
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "La préférence est bien exprimée par le système ou le navigateur ; le script la lit avec matchMedia et applique le fond correspondant, mesuré en navigateur."
+limite = "La source documente la préférence, pas l'implémentation du site. Le suivi effectif a été mesuré par la sonde Chromium 153 (relevé du 7 novembre 2026), sur un seul navigateur."
+
+[[affirmation]]
+id = "chaine-08"
+texte = "Fond clair et texte marine : la présentation habituelle."
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/css/site.css"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le fond par défaut est bien --surface: #fff et l'encre --ink: #18243b dans :root ; le thème clair ne redéclare aucun jeton."
+limite = "La comparaison porte sur les jetons déclarés, pas sur toutes les cartes, ni sur les états de survol et de focus."
+
+[[affirmation]]
+id = "chaine-09"
+texte = "Fond sombre, même hiérarchie, sans décor ajouté."
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/css/site.css"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le thème sombre ne pose aucun background-image et reprend le bloc de jetons commun ; la hiérarchie des titres n'est pas modifiée."
+limite = "Vérification statique de la feuille et de la structure ; aucun lecteur d'écran ni personne n'a comparé la hiérarchie ressentie."
+
+[[affirmation]]
+id = "chaine-10"
+texte = "Bleu nuit, néon rouge et fines lignes de bande magnétique."
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Description d'une ambiance, sans fait externe : la palette et le décor sont originaux et déclarés dans la feuille."
+limite = "Aucun fait externe ; une recherche Web ne remplace pas un registre de marques, et la ressemblance perçue avec une œuvre reste un jugement de la personne qui regarde le rendu."
+
+[[affirmation]]
+id = "chaine-11"
+texte = "Cuivre et ambre, comme un tableau de bord rétro."
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Description d'une ambiance, sans fait externe : la palette et le décor sont originaux et déclarés dans la feuille."
+limite = "Aucun fait externe ; la comparaison est une image, pas une référence à un objet ou une œuvre existante."
+
+[[affirmation]]
+id = "chaine-12"
+texte = "Grille lumineuse cyan et magenta sur fond profond."
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Description d'une ambiance, sans fait externe : la grille est un dégradé CSS statique, sans image ni animation."
+limite = "Aucun fait externe ; la régularité de la grille et son intensité relèvent du rendu visuel, que la personne valide à l'œil."
+
+[[affirmation]]
+id = "chaine-13"
+texte = "Choisir une apparence"
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Libellé d'interface examiné : formulation accessible, absence de fait externe et de nom protégé."
+limite = "Aucun fait externe ; il s'agit d'un libellé de commande, dont l'emplacement et la lisibilité relèvent du rendu que la personne valide à l'œil."
+
+[[affirmation]]
+id = "chaine-14"
+texte = "Thème d'affichage"
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Libellé d'interface examiné : formulation accessible, absence de fait externe et de nom protégé."
+limite = "Aucun fait externe ; il s'agit d'un libellé de commande, dont l'emplacement et la lisibilité relèvent du rendu que la personne valide à l'œil."
+
+[[affirmation]]
+id = "chaine-15"
+texte = "Noms et couleurs originaux, sans lien avec une œuvre ou une marque. Le changement est immédiat et, si le stockage local est autorisé, mémorisé sur cet appareil. Aucune donnée n'est envoyée."
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = ["mdn-color-scheme"]
+mesures = ["assets/js/site.js"]
+verdict = "concordant"
+ce_qui_est_verifie = "Quatre points confrontés : noms protégés absents de site.css et site.js (porte dédiée) ; application immédiate mesurée en navigateur ; lecture/écriture localStorage entourée de try/catch avec repli pour la visite ; aucun fetch, XMLHttpRequest, sendBeacon ou WebSocket dans le bloc des apparences."
+limite = "L'absence d'envoi est vérifiée par lecture du code du lot, pas par une capture réseau de toutes les pages du site. La balise meta évoquée par MDN est une suggestion à l'agent utilisateur, jamais une garantie de rendu."
+
+[[affirmation]]
+id = "chaine-16"
+texte = "Revenir à « Suivre l'appareil »"
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Libellé d'interface examiné : formulation accessible, absence de fait externe et de nom protégé."
+limite = "Aucun fait externe ; il s'agit d'un libellé de commande, dont l'emplacement et la lisibilité relèvent du rendu que la personne valide à l'œil."
+
+[[affirmation]]
+id = "chaine-17"
+texte = "Ouvrir ou fermer les thèmes d'affichage"
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Libellé d'interface examiné : formulation accessible, absence de fait externe et de nom protégé."
+limite = "Aucun fait externe ; il s'agit d'un libellé de commande, dont l'emplacement et la lisibilité relèvent du rendu que la personne valide à l'œil."
+
+[[affirmation]]
+id = "chaine-18"
+texte = "Apparence"
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Libellé d'interface examiné : formulation accessible, absence de fait externe et de nom protégé."
+limite = "Aucun fait externe ; il s'agit d'un libellé de commande, dont l'emplacement et la lisibilité relèvent du rendu que la personne valide à l'œil."
+
+[[affirmation]]
+id = "chaine-19"
+texte = "Choisir un thème d'affichage"
+ou = "assets/js/site.js"
+nature = "proposition"
+sources = []
+mesures = []
+verdict = "concordant"
+ce_qui_est_verifie = "Libellé d'interface examiné : formulation accessible, absence de fait externe et de nom protégé."
+limite = "Aucun fait externe ; il s'agit d'un libellé de commande, dont l'emplacement et la lisibilité relèvent du rendu que la personne valide à l'œil."
+
+[[affirmation]]
+id = "chaine-20"
+texte = "Apparence « ${apparence.label} » appliquée."
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/js/site.js"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le statut est construit depuis le libellé du thème choisi et annoncé dans un élément role=status aria-live=polite."
+limite = "Vérification statique du modèle de chaîne ; aucune personne utilisant un lecteur d'écran n'a confirmé l'annonce vocale."
+
+[[affirmation]]
+id = "ordre-des-trois-reglages"
+texte = "Les trois réglages documentés (suivre l'appareil, clair, sombre) sont placés en tête, sans allégation de fréquence."
+ou = "docs/rd/apparences-themes.md"
+nature = "fait-source"
+sources = ["mdn-color-scheme", "mdn-prefers-color-scheme"]
+mesures = []
+verdict = "corrige"
+ce_qui_est_verifie = "MDN confirme que light et dark sont les deux schémas courants des systèmes et que prefers-color-scheme expose la préférence ; la mention « les plus utilisés sur le net », reprise de la demande sans source, est retirée des documents du lot."
+limite = "MDN décrit des schémas de système, pas une mesure de ce que proposent les sites Web. Aucune statistique de fréquence n'est avancée en remplacement ; l'ordre des trois choix reste une décision de conception."
+
+[[affirmation]]
+id = "seuils-de-contraste"
+texte = "Seuils 4,5:1 pour le texte et 3:1 pour les repères d'interface, sans arrondi."
+ou = "outils/verifier-apparences.py"
+nature = "fait-source"
+sources = ["w3c-contrast-minimum", "w3c-non-text-contrast"]
+mesures = ["outils/verifier-apparences.py"]
+verdict = "corrige"
+ce_qui_est_verifie = "Les deux documents W3C confirment les seuils et l'absence d'arrondi (4,499:1 et 2,999:1 échouent). La porte locale appliquait une tolérance de 0,01 qui laissait passer un contraste insuffisant : elle compare désormais avec une marge de calcul de 1e-9."
+limite = "Les documents Understanding ne sont pas le texte normatif et ne couvrent pas tous les états d'interface ; le contrôle local mesure les paires de jetons déclarées, pas le rendu anti-aliasé à l'écran."
+
+[[affirmation]]
+id = "constante-de-luminance"
+texte = "Formule de luminance relative WCAG 2.2 avec le seuil 0,04045."
+ou = "outils/verifier-apparences.py"
+nature = "fait-source"
+sources = ["w3c-luminance"]
+mesures = ["outils/verifier-apparences.py"]
+verdict = "corrige"
+ce_qui_est_verifie = "La définition W3C lue le 7 novembre 2026 donne 0,04045 (0,03928 avant mai 2021) et L = 0,2126 R + 0,7152 G + 0,0722 B. La porte utilisait l'ancienne constante ; elle est alignée."
+limite = "Le W3C précise que ce changement n'a pas d'effet pratique sur les calculs dans ce contexte : aucun résultat mesuré n'est modifié. La correction porte sur la conformité de la méthode, pas sur les chiffres du relevé."
+
+[[affirmation]]
+id = "noms-proteges-absents"
+texte = "Aucun nom d'œuvre, de marque ou de personnage repris dans le produit."
+ou = "docs/rd/apparences-themes.md"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-apparences.py"]
+verdict = "concordant"
+ce_qui_est_verifie = "La porte refuse la réapparition de huit chaînes protégées dans site.css et site.js ; les trois noms inventés ont fait l'objet d'une recherche Web datée du 7 novembre 2026 sans œuvre homonyme."
+limite = "Une recherche Web et une porte de chaînes ne valent pas une consultation des registres INPI/EUIPO ni un avis juridique ; l'appréciation d'une ressemblance reste humaine et visuelle."
+
+[[affirmation]]
+id = "aucune-animation-ajoutee"
+texte = "Les décors sont statiques : prefers-reduced-motion n'a rien à désactiver."
+ou = "assets/css/site.css"
+nature = "fait-source"
+sources = ["mdn-prefers-reduced-motion", "mdn-forced-colors"]
+mesures = ["outils/verifier-apparences.py"]
+verdict = "concordant"
+ce_qui_est_verifie = "MDN confirme que reduce demande à supprimer les animations non essentielles et que forced-colors force déjà background-image à none pour les dégradés. La porte refuse toute propriété animation dans les trois règles de décor, et une mesure navigateur en couleurs forcées donne background-image: none."
+limite = "Cela ne couvre pas les transitions déjà présentes ailleurs sur le site, ni un essai avec une personne sensible au mouvement. La conformité globale à la préférence de mouvement n'est pas revendiquée."

@@ -91,7 +91,11 @@ def contraste(clair: str, fond: str) -> float:
     def luminance(couleur: str) -> float:
         canaux = []
         for valeur in rgb(couleur):
-            canaux.append(valeur / 12.92 if valeur <= 0.03928 else ((valeur + 0.055) / 1.055) ** 2.4)
+            # Seuil normatif 0.04045, pas 0.03928 : la définition W3C de la
+            # luminance relative a été corrigée en mai 2021. Vérifié le
+            # 7 novembre 2026 sur w3c/wcag (guidelines/terms/20/relative-luminance.html)
+            # et consigné dans docs/rd/relecture-contenus.toml (source w3c-luminance).
+            canaux.append(valeur / 12.92 if valeur <= 0.04045 else ((valeur + 0.055) / 1.055) ** 2.4)
         return 0.2126 * canaux[0] + 0.7152 * canaux[1] + 0.0722 * canaux[2]
 
     l1, l2 = luminance(clair), luminance(fond)
@@ -170,7 +174,11 @@ def verifier() -> list[str]:
                 erreurs.append(f"{theme} — paire {texte}/{fond} non mesurable ({a} sur {b})")
                 continue
             mesure = contraste(a, b)
-            if mesure < seuil - 0.01:
+            # W3C, Understanding 1.4.3 et 1.4.11 : les seuils 4,5:1 et 3:1 ne
+            # doivent pas être arrondis (4,499:1 échoue). La tolérance de 0,01
+            # d'origine laissait passer un contraste insuffisant ; seule une
+            # marge de calcul à virgule flottante reste tolérée.
+            if mesure + 1e-9 < seuil:
                 erreurs.append(f"{theme} — {texte} sur {fond} : {mesure:.2f}:1 sous le seuil {seuil}:1")
 
     # 5. Décors statiques, couleurs forcées, contraste renforcé.

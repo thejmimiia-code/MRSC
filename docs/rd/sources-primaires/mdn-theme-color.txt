@@ -1,0 +1,10 @@
+id = mdn-theme-color
+url = https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/theme-color
+date = 2026-11-07
+empreinte = 52f39215eb220e443f6ca1eb767a4c18628cd42a7b019a00b0605ceec0a6fbe8
+---
+The theme-color value for the name attribute of the <meta> element indicates a suggested color that user agents should use to customize the display of the page or of the surrounding user interface. If specified, you define a theme color using a content attribute in the <meta> element as a CSS <color> value.
+
+A <meta name="theme-color"> element has the following additional attributes: content — a <meta> element with name=theme-color must have a content attribute that defines the theme color; media — any valid media type or query. If provided, the options for the document's theme color defined in the content attribute are suggested to the browser when the media query matches.
+
+This feature is not Baseline because it does not work in some of the most widely-used browsers.
