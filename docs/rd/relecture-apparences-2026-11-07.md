@@ -175,3 +175,9 @@ affirmation n'est pas rattachée, si une chaîne publique n'est pas couverte, si
 l'une des trois corrections régresse, si une entrée apparaît dans le registre
 humain, ou si l'étape disparaît de la CI ou de l'inventaire des contrôles.
 
+## 9. Devenir automatique à toutes les éditions (9 novembre 2026)
+
+La porte décrite ci-dessus restait bornée au lot des apparences. Le 9 novembre, la demande a été de l’appliquer « automatiquement lors de toutes éditions ». `outils/relire-contenus.py` reprend les mêmes exigences et les étend : empreinte de chaque fichier texte du dépôt, signature d’agent pour chaque modification, extraits de sources primaires vérifiés hors ligne, batterie mécanique rejouée, câblage sur chaque branche et crochet local. Les huit sources de ce rapport reçoivent un extrait daté dans `docs/rd/sources-primaires/` : une URL seule ne suffit plus, l’ancre doit être présente dans le texte consulté.
+
+Ce changement ne transforme pas les limites des sections 6 et 7 : aucune relecture humaine, aucune expertise, aucun avis juridique, aucune validation visuelle, et le corpus existant reste une dette consignée. Il rend seulement l’étape incontournable. Voir [`relecture-automatique.md`](relecture-automatique.md).
+

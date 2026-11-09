@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 98 |
-| Période couverte | du 2026-10-20 au 2026-11-07 |
-| Contrôles exécutables cités | 111 |
+| Avancées consignées | 99 |
+| Période couverte | du 2026-10-20 au 2026-11-09 |
+| Contrôles exécutables cités | 113 |
 | Initiatives du portefeuille concernées | 16 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -2365,6 +2365,34 @@ Initiatives liées : `coherence-textes-publics`, `coordination-de-tous-les-agent
 **Suite.** Faire relire les six choix par l'association ; étendre les thèmes au simulateur via son générateur si le choix est retenu ; arbitrer un script de démarrage en en-tête ; corriger la sonde d'affichage avec un banc qui exécute réellement le filtre des décors.
 
 Initiatives liées : `direction-artistique-motion`, `optimisation-du-site`.
+
+### `une-edition-non-relue-ne-peut-plus-etre-publiee` — Une édition non relue ne peut plus être publiée
+
+*Consignée le 2026-11-09.*
+
+**Constat.** Le 7 novembre 2026, la relecture de contenu était devenue une étape exécutable, mais elle restait bornée au seul lot des six apparences : `outils/verifier-relecture-contenus.py` vérifiait 8 sources et 25 affirmations, sans rien savoir d’une modification apportée ailleurs. Le 9 novembre, la consigne a été de rendre la chose « automatiquement lors de toutes éditions », pour « avoir toujours du contenu qui soit propre, pro et sourcé sans erreurs ». Un programme ne peut pas décider qu’une phrase est vraie ; il peut empêcher qu’une phrase change sans passer par la lecture de l’agent.
+
+**Ce que cela change.** Sentinelle `outils/relire-contenus.py` : SHA-256 des 494 fichiers texte du dépôt dans `docs/rd/empreintes-contenus.toml`, `[[edition]]` datée et attribuée à l’agent dans `docs/rd/editions-relecture.toml`, et `--appliquer` qui refuse de signer si une URL externe nouvelle n’est pas couverte par une source primaire enregistrée, si une apostrophe droite apparaît ou si une autre porte est en faute. Trois déclencheurs : workflow dédié sur chaque push de toutes les branches et chaque proposition, étape ajoutée à la CI principale, crochet `pre-commit` activé. Huit extraits de sources primaires déposés dans `docs/rd/sources-primaires/` avec URL, date et empreinte du corps : à chaque lancement, l’ancre du registre est confrontée au texte réel, un extrait modifié est refusé et une consultation de plus de 366 jours est signalée. Batterie rejouée sur tout le corpus : ancres et liens locaux des 122 pages HTML, TOML lisibles, brouillons, conflits, typographie, câblage, registre humain vide et porte du lot. `outils/test_mutations_relire_contenus.py` plante 17 fautes et exige leur refus nommé.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/relecture-automatique.md`
+- `docs/rd/empreintes-contenus.toml`
+- `docs/rd/editions-relecture.toml`
+- `docs/rd/relecture-contenus.toml`
+- `outils/relire-contenus.py`
+- `outils/test_mutations_relire_contenus.py`
+- `.github/workflows/relecture-contenus.yml`
+- `.githooks/pre-commit`
+- `docs/protocole-editorial.md`
+
+**Contrôle qui la maintient :** `python3 outils/relire-contenus.py && python3 outils/test_mutations_relire_contenus.py && python3 outils/verifier-relecture-contenus.py && python3 outils/verifier-inventaire-controles.py && python3 outils/verifier-workflows.py && python3 outils/verifier-fusions.py`
+
+**Limite — ce que cela ne prouve pas.** L’automatisation ne juge pas la vérité d’une phrase, ne fabrique ni relecture humaine, ni expertise de domaine, ni avis juridique, ni essai avec des personnes, ni validation visuelle. Les 494 empreintes du 9 novembre sont une référence de départ : `limite_reference` consigne que la relecture de fond du corpus existant (107 fiches, 81 prototypes, fond de `transparence.html`, prospective, citation signée) reste une dette visible, pas un contenu déclaré validé. Le crochet local est contournable par `--no-verify` ; la CI ne l’est pas. `relectures.toml` reste vide et `confronter-sources.py` reste hors porte de publication. Une URL seule ne suffisait plus : huit extraits sont vérifiés, mais une page source peut changer après sa consultation, et la fraîcheur ne remplace pas une nouvelle lecture.
+
+**Suite.** À chaque édition, relire le delta, confronter les faits aux sources primaires datées, consigner la `[[edition]]` avec ses limites, puis laisser la personne juger le rendu à l’oeil ; réévaluer la fraîcheur des extraits en revue ; résorber la dette de relecture de fond par lots, sans promouvoir de statut.
+
+Initiatives liées : `coherence-textes-publics`, `coordination-de-tous-les-agents`, `optimisation-du-site`.
 
 ## 3. Ce que ce registre ne dit pas
 

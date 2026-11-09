@@ -157,8 +157,16 @@ def verifier() -> list[str]:
             erreurs.append(f"source {identifiant} : URL doit être en https")
         if not any(str(source.get("editeur", "")).startswith(e) for e in EDITEURS_ATTENDUS):
             erreurs.append(f"source {identifiant} : éditeur primaire attendu (MDN ou W3C)")
-        if source.get("consulte_le") != DATE_ATTENDUE:
-            erreurs.append(f"source {identifiant} : date de consultation attendue : 2026-11-07")
+        # Une source ajoutée après le lot du 7 novembre 2026 peut être datée du
+        # jour de sa consultation. Ce qui est refusé : une source non datée, une
+        # date antérieure au lot, ou une date qui n'a pas encore eu lieu (la
+        # fraîcheur et la fenêtre sont vérifiées par `relire-contenus.py`).
+        consultee = source.get("consulte_le")
+        if (not isinstance(consultee, dt.date) or consultee < DATE_ATTENDUE
+                or consultee > dt.date.today() + dt.timedelta(days=1)):
+            erreurs.append(
+                f"source {identifiant} : date de consultation absente ou hors fenêtre : {consultee}"
+            )
         ancre = str(source.get("ancre", ""))
         if len(ancre) > 40 or len(ancre.split()) > 5:
             erreurs.append(f"source {identifiant} : ancre trop longue (extrait bref, 5 mots au plus)")

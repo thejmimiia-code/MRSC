@@ -124,6 +124,8 @@ jobs:
         run: |
           python3 outils/test_mutations_relecture_contenus.py
           python3 outils/verifier-relecture-contenus.py
+          python3 outils/test_mutations_relire_contenus.py
+          python3 outils/relire-contenus.py
 
       # Six apparences ajoutées le 7 novembre 2026. La porte refuse un jeton de
       # couleur oublié, un contraste sous le seuil, un nom d'oeuvre réapparu et

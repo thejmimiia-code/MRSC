@@ -1,0 +1,41 @@
+name: Relecture des contenus à chaque édition
+
+# Le 9 novembre 2026 : la relecture de contenu et la vérification des sources
+# sûres ne doivent plus dépendre d'une demande ponctuelle. Ce workflow léger
+# tourne sur CHAQUE commit poussé, sur CHAQUE proposition et à chaque nouvelle
+# poussée dans une proposition. La CI « Vérification du site M.R.S.C » garde
+# ses contrôles lourds ; celui-ci ne fait que la sentinelle, en quelques
+# secondes, pour qu'une édition non relue soit rouge immédiatement.
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: relecture-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  relecture:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Récupérer les sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Installer Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Vérifier que chaque édition est passée par la relecture
+        run: |
+          python3 outils/relire-contenus.py
+          python3 outils/verifier-relecture-contenus.py
+
+      - name: Éprouver la sentinelle par des fautes plantées
+        run: |
+          python3 outils/test_mutations_relire_contenus.py

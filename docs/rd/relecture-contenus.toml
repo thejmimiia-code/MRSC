@@ -21,8 +21,17 @@ regle = "La personne valide le rendu à l'oeil ; l'agent relit les contenus, con
 rapport = "docs/rd/relecture-apparences-2026-11-07.md"
 
 
+[portee]
+regle = "Le 9 novembre 2026, la relecture de contenu et la vérification des sources sûres sont rendues automatiques à toutes les éditions : l'agent relit, la personne garde le rendu à l'oeil."
+declencheurs = [".github/workflows/relecture-contenus.yml", ".github/workflows/verification.yml", ".githooks/pre-commit"]
+manifeste = "docs/rd/empreintes-contenus.toml"
+editions = "docs/rd/editions-relecture.toml"
+extraits = "docs/rd/sources-primaires"
+limite = "L'automatisation vérifie des empreintes, des liens, des extraits datés et des sources primaires ; elle ne juge pas la vérité d'une phrase, ne fabrique aucune expertise humaine et n'écrit jamais dans docs/apprentissage/relectures.toml. Le corpus existant reste une dette de relecture de fond consignée, pas un contenu déclaré validé."
+
 [[source]]
 id = "mdn-color-scheme"
+extrait = "docs/rd/sources-primaires/mdn-color-scheme.txt"
 editeur = "MDN Web Docs (Mozilla)"
 titre = "color-scheme CSS property"
 url = "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color-scheme"
@@ -33,6 +42,7 @@ limites = "Page de référence maintenue par Mozilla, documentation et non texte
 
 [[source]]
 id = "mdn-prefers-color-scheme"
+extrait = "docs/rd/sources-primaires/mdn-prefers-color-scheme.txt"
 editeur = "MDN Web Docs (Mozilla)"
 titre = "prefers-color-scheme CSS media feature"
 url = "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme"
@@ -43,6 +53,7 @@ limites = "Documentation de référence, non spécification normative ; le compo
 
 [[source]]
 id = "mdn-forced-colors"
+extrait = "docs/rd/sources-primaires/mdn-forced-colors.txt"
 editeur = "MDN Web Docs (Mozilla)"
 titre = "forced-colors CSS media feature"
 url = "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/forced-colors"
@@ -53,6 +64,7 @@ limites = "Le comportement varie selon le navigateur et la plateforme ; MDN reco
 
 [[source]]
 id = "mdn-prefers-reduced-motion"
+extrait = "docs/rd/sources-primaires/mdn-prefers-reduced-motion.txt"
 editeur = "MDN Web Docs (Mozilla)"
 titre = "prefers-reduced-motion CSS media feature"
 url = "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion"
@@ -63,6 +75,7 @@ limites = "La page documente la préférence, pas son application dans ce dépô
 
 [[source]]
 id = "mdn-theme-color"
+extrait = "docs/rd/sources-primaires/mdn-theme-color.txt"
 editeur = "MDN Web Docs (Mozilla)"
 titre = "meta name=theme-color"
 url = "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/theme-color"
@@ -73,6 +86,7 @@ limites = "MDN classe cette fonctionnalité en disponibilité limitée : Firefox
 
 [[source]]
 id = "w3c-contrast-minimum"
+extrait = "docs/rd/sources-primaires/w3c-contrast-minimum.txt"
 editeur = "W3C / Web Accessibility Initiative"
 titre = "Understanding SC 1.4.3 Contrast (Minimum), WCAG 2.2"
 url = "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
@@ -83,6 +97,7 @@ limites = "Document d'accompagnement (Understanding), non texte normatif ; il ne
 
 [[source]]
 id = "w3c-non-text-contrast"
+extrait = "docs/rd/sources-primaires/w3c-non-text-contrast.txt"
 editeur = "W3C / Web Accessibility Initiative"
 titre = "Understanding SC 1.4.11 Non-text Contrast, WCAG 2.2"
 url = "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html"
@@ -93,6 +108,7 @@ limites = "Le document précise que le seuil porte sur les couleurs adjacentes e
 
 [[source]]
 id = "w3c-luminance"
+extrait = "docs/rd/sources-primaires/w3c-luminance.txt"
 editeur = "W3C / groupe de travail WCAG (dépôt w3c/wcag)"
 titre = "Définition de relative luminance, WCAG 2.2"
 url = "https://github.com/w3c/wcag/blob/main/guidelines/terms/20/relative-luminance.html"

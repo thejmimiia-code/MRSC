@@ -1,0 +1,3483 @@
+# Empreintes de toutes les unités de contenu. Fichier généré :
+# ne pas éditer à la main, utiliser `outils/relire-contenus.py --appliquer`.
+# Une édition qui change une empreinte fait échouer la CI tant qu'une
+# [[edition]] datée n'a pas été consignée dans relecture-contenus.toml.
+
+[meta]
+version = 1
+auteur = "agent"
+date_reference = 2026-11-09
+regle = "La personne valide le rendu à l'oeil ; l'agent relit chaque édition, confronte les faits à des sources primaires datées et consigne les limites."
+limite_reference = "Les empreintes du 9 novembre 2026 sont une référence de départ, pas une relecture de fond : le corpus existant reste couvert par les contrôles mécaniques déjà en place, et sa relecture éditoriale par agent reste une dette visible. Seules les éditions postérieures à cette date sont soumises à une [[edition]] consignée. Aucune écriture dans relectures.toml."
+
+[[unite]]
+chemin = ".agents/skills/README.md"
+empreinte = "d862e23fd8513d889e723e73d83a03e53c57a4234f7c19614e94262c13dd5f25"
+etat = "reference-initiale"
+apostrophes = 7
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/accessibilite-co-conception/SKILL.md"
+empreinte = "5609867ef60499f2b96f77e05a06cd25b8260f726103f42569f9a2491d433c44"
+etat = "reference-initiale"
+apostrophes = 10
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/analyse-donnees-reproductible/SKILL.md"
+empreinte = "b8916ab404e9082490a171d0fafb7f67044ce1e82cb9eccea884553dc265de4a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/cartographie-connaissances/SKILL.md"
+empreinte = "d8ed683c44fce84a0276170c9393df93a8620ed5edb36fab4827c33ab7674d21"
+etat = "reference-initiale"
+apostrophes = 6
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/conception-innovation/SKILL.md"
+empreinte = "d05a5713c1c7d59f2e1fbc9df1aa9ee49769b74d3a98bb5481e927010990b579"
+etat = "reference-initiale"
+apostrophes = 12
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/conception-jeu/SKILL.md"
+empreinte = "9e58ccf0fdcecbebb4b5b37ec26d6a0f996907ce3d2d2ae4ae2950ee4c2b8c6e"
+etat = "reference-initiale"
+apostrophes = 9
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/conception-pedagogique/SKILL.md"
+empreinte = "1af412f06915010ad21613b3a88e0c9cbcd1876e09830df99a7f5ecfc8ae3b97"
+etat = "reference-initiale"
+apostrophes = 9
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/curation-skills-securisee/SKILL.md"
+empreinte = "f8faa634551e6bad4b0fe0c0b773ec9f92e520aeeb3163f4442664a1b8bac700"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/debugging-methodique/SKILL.md"
+empreinte = "0f30bcdb3eb7d155afeb55c4460bbaf648a39894ab6273f4dcd9ed193bbcd01f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/debugging-methodique/SOURCE.md"
+empreinte = "cb14c1eff5a972c7a556d81d19c3ff268290c14969aacba19fda588966313ec3"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/debugging-methodique/upstream/SKILL.md"
+empreinte = "21f3960f5d7ae2cc95c40896545004dbbcbbd752ea65fc2d53962554d4174220"
+etat = "reference-initiale"
+apostrophes = 15
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/direction-artistique-motion/SKILL.md"
+empreinte = "17ca2c58a33ae00b73b5f11707eeb51b18a608704ecbd3bc69a5d49619c701d2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/documentation-technique/SKILL.md"
+empreinte = "deaa1850143d4ede40e95c5b93218789e97c6e916e7210e8a95746b00c144a09"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/evaluation-maintenance/SKILL.md"
+empreinte = "e86992ee56a4a2a5f6afcd432e246fff9a3554f58b30104fbafa1135b48b06dd"
+etat = "reference-initiale"
+apostrophes = 5
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/integration-securite/SKILL.md"
+empreinte = "b3a5f46cf6b9b2f3388bb1e683527f9190848a088117e46841a5502dbf6cc7fb"
+etat = "reference-initiale"
+apostrophes = 6
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/localisation-culturelle/SKILL.md"
+empreinte = "c8dc1393fffb0ada1888d1fe0937c72c33b90bb391a0eb1d87d2d690fbe7bcac"
+etat = "reference-initiale"
+apostrophes = 9
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/orchestration-taches/SKILL.md"
+empreinte = "32d042f6088ff34fdfa7f64e60b15b2cb30515e13357c169c3ee7722c77c43a8"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/recherche-sources/SKILL.md"
+empreinte = "71a9a70ab26531445288c1fb8d3ecf2e1525f44d3ece5bd559428487c2e5868a"
+etat = "reference-initiale"
+apostrophes = 10
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/revue-contradictoire/SKILL.md"
+empreinte = "81c8f398b33c702a1dbbaa59d49657e8d1cc5c21c95a8168cd183fa82aa5983c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/strategie-tests/SKILL.md"
+empreinte = "30b1728e1dfa94d17a7f006e24201a86427b6ebf0957224012d3e4e464c1269f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/strategie-tests/SOURCE.md"
+empreinte = "3368562dab435c5eb9f9aa5a4d85666c24a6f62206531acc4ffffcfec48005ae"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/strategie-tests/upstream/SKILL.md"
+empreinte = "5505d25bbaa8fc14a79e4d20163936958992a2995b7f1dd1d6197edc9ed722e0"
+etat = "reference-initiale"
+apostrophes = 8
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/strategie-tests/upstream/mocking.md"
+empreinte = "3ceb807fdf4a47d6a93d4d9a891e5ba6d362a6247bd08adc451feebfc17361ef"
+etat = "reference-initiale"
+apostrophes = 1
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".agents/skills/strategie-tests/upstream/tests.md"
+empreinte = "859f9e592c188fda4fc7277dd180e4ce9c7a2e13f6efe1f6f29eccc9d28c106a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/direction-artistique-motion/SKILL.md"
+empreinte = "dbb1c9bcc68bd2f5b3f594896ffa74d5eaa8ed1b05f54167717635ab366517dc"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/frontend-design/LICENSE.txt"
+empreinte = "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/frontend-design/SKILL.md"
+empreinte = "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3"
+etat = "reference-initiale"
+apostrophes = 30
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/frontend-design/SOURCE.md"
+empreinte = "a21d66f073c4089efb8cf5e97ddf5c1b098a515555ac644068ddb8ad18955c25"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/SKILL.md"
+empreinte = "0bb69e750aefe0314c225166d846f0c4f58ad8526416f6ddc013d6299f7e6a61"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/SOURCE.md"
+empreinte = "80c76296224ea9def17fb4cb01773ecd9d9deb416fa900a1fc7b6a4bbc65bb6a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/UPSTREAM-SKILL.md"
+empreinte = "8729ecbc7e5736c1295baaa8ba0384bb4b1aac9cf91b83fcdc64d9548a57bb19"
+etat = "reference-initiale"
+apostrophes = 1
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/director/choreography.md"
+empreinte = "c81257b56160b9b2f3d99f78d4b8172b425c22d9ca73be06d3ffaa7305a34deb"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/director/context-adaptation.md"
+empreinte = "550e96a1c8c369513304ee74c0e89b63168bc7287b83e9ed5685bb65609986b3"
+etat = "reference-initiale"
+apostrophes = 2
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/director/core-philosophy.md"
+empreinte = "7aaa8a065d9940dad0198cf9cfe74979008495e6daf87f46f9022fff1b6a85e9"
+etat = "reference-initiale"
+apostrophes = 1
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/director/decision-framework.md"
+empreinte = "4b6758da6742475c928b4f8be8c662f4b5ed0964468ba7760df8f7635c779358"
+etat = "reference-initiale"
+apostrophes = 1
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/director/disney-principles.md"
+empreinte = "39024711890c2684a3434659a4d95a52ca8231facea74e87e79503054aaca671"
+etat = "reference-initiale"
+apostrophes = 1
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/director/emotion-mapping.md"
+empreinte = "a279e55a3f52a9f5830d38dc54679c652d9a5c26f0dd360700c16e23766d468b"
+etat = "reference-initiale"
+apostrophes = 2
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/director/motion-personality.md"
+empreinte = "66a3623b6654869482c02157ca791034a614ca6dcb02a8112049e28d292ee18a"
+etat = "reference-initiale"
+apostrophes = 2
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/director/narrative-structure.md"
+empreinte = "d49db19db40425dec027c3012d553b50fd74ed79e27ace9dec1226796469061b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/patterns/ambient-continuous.md"
+empreinte = "f9cfa00d3325dceadcb9ffd77dcb5dcbc51d34121f3b1f162979939006056773"
+etat = "reference-initiale"
+apostrophes = 1
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/patterns/entrance-exit.md"
+empreinte = "70b3fc3a8d58ebe58e293e643b78fd13750d9c8ef1c8fc5fe85e52f7378cbd91"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/patterns/multi-element.md"
+empreinte = "46c8da91843c593deb763a4a7fa32849bdaeb7a7ecd4d559e3b21bcc976f2c46"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/patterns/state-feedback.md"
+empreinte = "dac86388c2d8fcdfc2f194b4f8877caedcdc010df9ce29d27dfc99d08cf8c60e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/reference/property-selection.md"
+empreinte = "053d830795fc824fed27618fbd18084207af6aeed55b73c0a6e1d5665de894ae"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/reference/quality-checklist.md"
+empreinte = "c11bf193b700d9c9ebc5d871f1d5f193bccc441c4eccc0509b53a40d6e8dc558"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/reference/timing-easing-tables.md"
+empreinte = "e478f3b99c4cac3f96eca008e20f8808d4cfae165f5799f260092baf9b6ebcff"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".claude/skills/motion-design/reference/troubleshooting.md"
+empreinte = "69e5aaeee108231d51187143ae3fce4db7a42936f10682908ca9462a008a047a"
+etat = "reference-initiale"
+apostrophes = 1
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".github/ISSUE_TEMPLATE/proposition-rd.yml"
+empreinte = "03185dc3d266d139517e57020fe8430fdf89027eda3802a83d23241f69b2ef7c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".github/dependabot.yml"
+empreinte = "5f5f8972fb13febe2281f882ee78f324bea60f4cf4a8b3b079681d71f1178291"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".github/workflows/audit-branches.yml"
+empreinte = "bcb0fedfc7379971161bd8bcb5ae4215368a4cf4eaec77b62c62a9fc3e08ccbe"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".github/workflows/deploy-pages.yml"
+empreinte = "c08787802b598f41e5eec5b0a0ebf90630449f22afb403ab5559d5a6854e6e95"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".github/workflows/maj-simulateur.yml"
+empreinte = "3d1af35acc4b2e456f4a6c0752c72e72908b6cc9232f2412c823d7de100c8237"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".github/workflows/relecture-contenus.yml"
+empreinte = "af775ab0138ef0dc3b93decd4d6fbedd956a74fb0444537fb2465445c4559673"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".github/workflows/veille-apprentissages.yml"
+empreinte = "0056758ffc9fa8fc601abcfc94c8785955b15c66e5902d465bea4f05432b562e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".github/workflows/verification.yml"
+empreinte = "51cd7c1febf1e20e44b2aa58155675adaffe556b7b93ca5c5a4ab13109cd3a10"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".github/workflows/verifier-publication.yml"
+empreinte = "580f11b8fffd5de055d63716632ace76ae088389c0c38d92fbc1a52dcf0927fb"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".gitignore"
+empreinte = "2f14ae639c9b4ec45f071f8c66597d5a9da22b8b89c54ca8589172e47bec5ef8"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = ".vercelignore"
+empreinte = "78e56a6150ae417314592f6a21d3ed1a4c3f33e6274fe93342d8e9f4f391e0a4"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "404.html"
+empreinte = "2ce55265971a7f54adf1ea0b048f3220431bcd566f95d46504f3a75ba399f619"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "AGENTS.md"
+empreinte = "ae15fb113e81e993c5ca9c4b2dc76c42fa8977539f463cd7348df0cafe255dc1"
+etat = "reference-initiale"
+apostrophes = 100
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "README.md"
+empreinte = "4f8e341c68c63ff77c6844939aee848866963e98bae5a136d6917540d00f279c"
+etat = "reference-initiale"
+apostrophes = 14
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "anglais-aventure.html"
+empreinte = "1a97f406ecc687325b4b513125c890d00b6664359e6f76878dd0eb234afdaeb0"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/bulle.py"
+empreinte = "0144909ff6f31b7af2c4863e995b7c445e422e1a182d0e860eabfab98332f6d8"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/bulles.py"
+empreinte = "e71f290dc60ae96ce2dc0c6487e83d03ce9bdae484c7a5b72262604d39e9e7d0"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/catalogue.py"
+empreinte = "bbc3f5f8ba341adfee18ab8cce3f94ffaf8e10439e7c4fd74540a63dd78f0ad2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/comparer.py"
+empreinte = "737c22c22b3cdb2d78faeea2ff59bc2ddfdba76fbef898c4ab8024e8ece10c88"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/conseil.py"
+empreinte = "7a13a618f94cbc7711d42be4350d545f7fdb81f0c57517503648997fdcd310de"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/contexte.py"
+empreinte = "567e51dd18eccb4263d09b7cd8561bd2d62671e0098cb73583aee819a2a29bbb"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/donnees.py"
+empreinte = "c0f752900c5b0090d93b633b3408f867c33599611ebad66e8b00593e76aa1fd2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/export.py"
+empreinte = "1d494f93c113d5d6b37df4948259691ffc14332264624cdc547ebc43dd7279b4"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/garde_fous.py"
+empreinte = "0351a1d2fef9fdad1a7cb3abcd0c462efd6171c3df3ec8229983abe4a136018d"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/lexique.py"
+empreinte = "ec0f27d284317750c26ac0e2229e689b8437d454767de90914412be83adc5041"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/marches.py"
+empreinte = "7eeb2797eb0f6100382c3cdda7901763fe730371b7997bd7bd4ffb69c3299663"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/presets.py"
+empreinte = "3a1e25b9618d6bb450740a9d5e49a842accf54e9a53564fc75424a1c70a2d92f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/proxy.py"
+empreinte = "edc2c9ccad8bf4438e3b4e619833984fc650e8bacc78ffda3c76fbfec9c60553"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/run.py"
+empreinte = "9513928f33a97658f242638b5aa234812eceaddf3a1191d1d161e0f398ec6904"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/scenarios.py"
+empreinte = "e2526377605a836ed7a158d04b3e130fa82ade0254a6db77ac54e15d750d3164"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/simuler.py"
+empreinte = "bd9eaed38ef9e3b07663d131b672e040d22690b1331f91c686da6fa57708fb42"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "api/verifier-source.py"
+empreinte = "17008e4afaf1637d4beec90bb1db9fa73f13fa1e995846a7f65d9fd9a205fc5d"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre.html"
+empreinte = "21980bd3924d6ef8b8b18ba2a510685a69cb558f43e989b1be90edc79f475b60"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/apprendre-methode.html"
+empreinte = "1830dc5659a152fb168efd3e02b706f182d7dab8bdedc9a136e3fb9562104a17"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/apprendre-se-tester-plutot-que-relire.html"
+empreinte = "50601252ba07abe25ad2e3b4255eaa3fc39d0a09bc5f431346c447ce8a8123c0"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/arts-composer-formes.html"
+empreinte = "a7a151d8d2b5c3e0dd3b4a9eaafca27315df7dbe25f8b1ab22a0b4cddf1d6e3b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/arts-lire-cartel.html"
+empreinte = "35394536caf29c92838d221964a21bdd529e1d4e73dd32bd0d635cf678ae6705"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/arts-lire-generique-film.html"
+empreinte = "f5d03cc23abd5f537419a042e642969668a6a7dc8f75f22d66800a6b4d7b53ba"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/arts-lire-image.html"
+empreinte = "73778969b6d8f70ee062fc0dafe0c18e67eb783fef7763ad477042e47c99e006"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/arts-rythme-musique.html"
+empreinte = "b51d5e8a062bc1f29d6e737cbb00e3bbea75e4d046e3f081562fb278d2941b25"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/civ-choisir-source-publique.html"
+empreinte = "443f8bdf0834d900ddce79666f7cd9a322160eb5b6a95a60f62d67a348c83e32"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/civ-lire-document.html"
+empreinte = "149c0ed9cbec3104721a676f4aad9ca4b5836a1cef048e907a4d37dfa268ed8c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/civ-lire-un-sondage.html"
+empreinte = "2b055e892f062e76bcb9a4535ea385e07e5175cdb1b05fec4df336ee83159391"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/civ-reperer-echelle-institution.html"
+empreinte = "873395967a092f41b4ed00ef61b2cb168fb3458ac028c87d4ad6eb7cc55fd516"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/civ-reperer-info-electorale.html"
+empreinte = "3a031b6a5888015d12234160b1b80200321a63294aef8eab23afa3724585a039"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/civ-trouver-service-public.html"
+empreinte = "6f0e3c1e26782ce3b4315f694d763ed0197a836425b4930cd2884ab1f41f3874"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/civ-verifier-information.html"
+empreinte = "ff79b19f70e586fbf73372ad1eb3b54b5eecc5bf142ae5e7176b38c7cf3b2c62"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/demarche-lire-devis-travaux.html"
+empreinte = "d8c32f64b6f73d6ad407d2757534ddb921c99a6c930a444a915a10a9e4e7873b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/demarche-obtenir-acte-naissance.html"
+empreinte = "3b12a0f0607dd7258cc6d8d2cc6489e5bc79300d4d1267c1c5e219492d306300"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/econ-comparer-prix-unitaires.html"
+empreinte = "6c62f99491e99f29571ed9e9fbdf008003631fa40667b1beab26aa9cc5d84b59"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/econ-distinguer-interet-frais.html"
+empreinte = "9aa1f71cecc343ed8be63b7b0ceca4f09d201ae0478dc23248f7d85fadce0ade"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/econ-lire-facture.html"
+empreinte = "76d36f3d9c9e44549508a04cf8179675c9fe80e674f3673be2d70ca875baa4a6"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/econ-lire-mention-garantie.html"
+empreinte = "cf0511a90ad63a0454dafb8d1a0208daf952aef0f29215a429a843cbc4024675"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/etudes-lire-fiche-rncp.html"
+empreinte = "d2d7c5c7deb69328ae2dca886814075af154f8443f958ec16acafed20f2df089"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/fr-argumenter-avec-exemple.html"
+empreinte = "e24666210f41c84123247213393524fa0a3d220530220f654584453deaeabb1b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/fr-comprendre-mot-contexte.html"
+empreinte = "64b22c3f8bc19fb1385068698fb275e8ac82bf430ceef96507abde71c9754888"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/fr-distinguer-fait-interpretation.html"
+empreinte = "12fa0517360f4b6634a65cde8fb91d60950cf49f3199c285f2e3fc891d89202d"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/fr-ecrire-message.html"
+empreinte = "9499cea0ad8e4e14f1b74eb0533f858be6e1df462f55061f997026f858bffd6c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/fr-lire-consigne.html"
+empreinte = "fb347fb7d9211f573140fea74cb54abf4167672d10ab6e1ec2006c9de98230d3"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/fr-lire-ponctuation.html"
+empreinte = "1f42b16fcb376534c5d025e31ea50f3fc23a108f869b8f597ba375b7e63f41fa"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/fr-preparer-explication-orale.html"
+empreinte = "a0507246d3728f6676adbb6dc00ad406610c95d927988fa26a035a9c6e07ded0"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/fr-reperer-idee-texte.html"
+empreinte = "5d29b8f683eaa8b70d7473f3f8b9cb0591f1e7e19913e96570945c7bc9a1e987"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/geo-choisir-une-projection.html"
+empreinte = "221f6f098a05ecdf87f45492e7840224a92348a91a1457d7780b646a28932a48"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/geo-decrire-paysage.html"
+empreinte = "69d25e9bb918ec3574df6a6f9b012b61bbc8236bef43300d1295bbfa2a6a7235"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/geo-echelle-carte.html"
+empreinte = "b84742c5ff9abbb36247fb58c76a9f58af75bbee069c7eb57f4da45924010469"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/geo-lire-legende-carte.html"
+empreinte = "5fadc9565e4ef50275aa9d1ec7a9c86603c697e2f5586afd5943caebf95ac0db"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/geo-points-cardinaux.html"
+empreinte = "3d63ae595bbb811a4e4a4e9671803974fef6cd058be06ab5d54087c609cc3e6a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/geographie-preparer-trajet-horaires.html"
+empreinte = "ace06dbedbe7e25194cdfe4b89a175a08513a7baa0b7cee2371fda0712be04ec"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/histoire-comparer-sources.html"
+empreinte = "43a38619bd71ceb0950d9c63ea1af37ed5df2ad9d90e55559c2d3948b6e018f1"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/histoire-lire-frise.html"
+empreinte = "70a3346f8bd9fba44f06750c8a68c5b877ed97b4f506c28d6f44e45c07b98f3e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/histoire-lire-une-cote.html"
+empreinte = "3e3f11db461979f4ebf6fd9f9acae53bf2fb6231eb054dde3f18a8f1d3151751"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/histoire-reperer-echelle-france-monde.html"
+empreinte = "a01ed816bf8bbc9058d07f292c34d31913218d314b3a0055be24317a3513e803"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/histoire-situer-siecle.html"
+empreinte = "dc5100fc7a053074f4a32f7eb1b4cc420bcd809c4aac2107f64e046fbc84a0e5"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/info-bits-octets.html"
+empreinte = "d2bc58d017ef09adea61b62e6701ad631d083a40990bf44b497a24e923440f1b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/info-lire-adresse-web.html"
+empreinte = "b01e7293f73f84f0b615029cc264503446b1e46db6e2903795062f68fb65a5f0"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/info-objet-connecte-local-distant.html"
+empreinte = "9d7b0a812956274b8804139e4d6b0f1ac9df3c8b5d8cf21d7365a627e0e008d7"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/info-ordinateur-fonctions.html"
+empreinte = "fe9e95fd5b3a404000f8e37556010ae22af321572d49a7ce697312f533141e18"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/info-systeme-exploitation.html"
+empreinte = "25a3609f40e5e037544008f465949c2642994c4d0e5dba7a0d8dd638f61aad04"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/info-table-requete-web.html"
+empreinte = "805debea4a5195fa5b5dced71346347f4b841b74dedf58c87fa19bd0ba325f9b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/langue-anglais-demander-aide.html"
+empreinte = "11fad4960dfc7bc758485a2788ad7108d15efc71417e880c381821f81811d256"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/langue-anglais-direction.html"
+empreinte = "4d663461af1fce158a879f7b45baf7dce6d08f6d79e7624f3aa800ef823446de"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/langue-anglais-epeler.html"
+empreinte = "d0f4006728aa827776ece15837d1480eb881449452681fb4e0645d452860497d"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/langue-anglais-prononcer-ed.html"
+empreinte = "f9c195bf9d10f2fbabde457c284274c53e81b4cd3e39a0da00f677ecc1a198ef"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/langue-anglais-prononcer-th.html"
+empreinte = "a9424cbaccec309c68ff722553561da437c97c4ad6edb4b6f434491275a0e777"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/langue-reperer-mot-deja-connu.html"
+empreinte = "92900491a0cd7cd2da605b1c1d6450ff60fca2ebe3fde747e139d295a22f3932"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-budget.html"
+empreinte = "0bf4f4cf364d430fa1f237715b9111406ba9f6e19ff9304c95b7f6d254ca5342"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-comparer-deux-releves.html"
+empreinte = "927280ef02fbdbf7a7c18b8a123c32622d8081fd617f2fc0aa1046e8d2102e72"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-convertir-unites.html"
+empreinte = "2f29be36316cb4b42d7e0a6be97e83e06844002cc0ec3053feb88283f548d15d"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-equation-simple.html"
+empreinte = "13a5fc8b038e6d1892d3ad5e2950e2f33426703488fe4c396712572a53f010c0"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-estimer-calcul.html"
+empreinte = "d5347fe25752c00552513e5e32d2beccacf83171a02344bea6a8a08d617d793e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-fractions-recette.html"
+empreinte = "addccba88b149a2a0c069d3c491e3c1ee4b8bc2625c033980c327432af26bd2f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-lire-echelle-graphique.html"
+empreinte = "6fdd2c21639e3481d6541ab569e30e45e8fa1aa38edeb59af6f4b754877c4457"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-lire-graphique.html"
+empreinte = "a6cb9a65622323cf10292c0f6b8d0e6727198d686d2dc17b90b7478832cd99d2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-lire-planning.html"
+empreinte = "107e9c6e9d1511eecede94c7c8d7fd6e6d59fa9cdb316139fc36364b39be3637"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-lire-tableau-croise.html"
+empreinte = "33a86e6d21d096e77ce76740e4c978621f10ea76d09cc07cdc4337518419e78e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-moyenne-mediane.html"
+empreinte = "cd346af1bb4b08e462ac8190cbd050d0fc154e172114fafae1dcb2472e0928ac"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-moyenne.html"
+empreinte = "4cd67f481fdcedee4f390187f61ed7814903a671ab3bc654fb534f7483d8dba8"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-partager.html"
+empreinte = "ba7a38c76b1fcd4de30fdca0019e85eed40d5f223b39c19316ffb2f7ea78fbdb"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-pourcentage.html"
+empreinte = "1325de7ceb1db59a853e99a5748dc2c04108682184f26218039a6da5a6b86c2f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-probabilite-tirage.html"
+empreinte = "87d192b848eab9f0457a77c14f2456d1bf2cc3ea9ee0b03da63dff8fa83ca3f8"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-reperer-angle-droit.html"
+empreinte = "5d2bc4bf3836b13659f230e8f3b7d435961d9d1a64a4633bbcfdc5c54874ce0a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/maths-surface.html"
+empreinte = "8b71db5b643aa6599452e47c522692895612186a2484f1c59b21ed70bd13c333"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/methode-verbaliser-sa-methode.html"
+empreinte = "f87522ffecd3a059a251f2e92fec56d126eaf0ae645de4f5c8eaf7b1b895e584"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/methodes-demander-clarification.html"
+empreinte = "bfe20928956a61a8c49efbcb7b59ffadff451fa7b157a90ed34e4e6039560f70"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/numerique-formuler-recherche.html"
+empreinte = "8d7f22886575d24bd5ba95081808bd906818a48aa120190828f465621fbb4f98"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/numerique-hameconnage.html"
+empreinte = "b50edf17778d682e4cbf834c8d80411b7da134fde7980583bf41809f8742a935"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/numerique-ia-usages.html"
+empreinte = "2b3e8e3ed3d6103521e123a38dc0e40a678e4a2c65e0afbf2b1f171ee415cd32"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/numerique-organiser-fichiers.html"
+empreinte = "5edb24ba7f1c353fb79d7010f4d1bed0215e88c4c9ec5cc87b316a6273e33d87"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/numerique-preparer-sauvegarde.html"
+empreinte = "e043800296e05bd2b41cc3f7c37c0532ff3f2245ce1cf0b7f5d3538a4e195c4e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/numerique-proteger-donnees.html"
+empreinte = "487aea22ce02b655549a73bc2dd1652b84f14e74a1aa5cbea00da10ccd454671"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/numerique-reagir-fraude.html"
+empreinte = "849a06c4bff4b37ee2b8f731514990f7098d23b2ad04dd2e154ed81059686b89"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/numerique-verifier-demande.html"
+empreinte = "4773ea3c3be576847977f79923a2034634c4c969ee35d37f8f6e9cd3ce5f092f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/numerique-verifier-ia.html"
+empreinte = "8392df952da339da6296538f06cec5c1df9853390973bfa94d41e2c7ad417302"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/numerique-verifier-media.html"
+empreinte = "a167d85192a2b71f9e02764932c22bf32924ce8c0316557091f6f065e274e3ea"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/prog-comparer-langages.html"
+empreinte = "d6bad57eb4fd781a3e4fb013766ecfc739d4c08ce0e10f6314996d6bba34d855"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/prog-lire-licence-logiciel.html"
+empreinte = "a05d6a71ee8a2e34ed332a245fc3ead028bf017230b8b9aaf59ea5956d30da06"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/prog-lire-trace-erreur.html"
+empreinte = "ecf41f80d56f1f9c2f0f6e9d34abf854ca3ebd5b40dcc1e37a15fccd17e8fd3a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/prog-tester-exemples.html"
+empreinte = "0a12f74bfdbd5299282079127be47296e02bee7233ab8982c48125f3650552e8"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/recherche-conserver-reference.html"
+empreinte = "e74b58fab5366c2fcce8a708193ebcb8b541754417d37953734ac10c8c8aef95"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/recherche-distinguer-resume-citation.html"
+empreinte = "d9033fc745d8906ff0e745e8f7e1172691de2f5552d6b50c64e2bbc868d244be"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/recherche-lire-etude.html"
+empreinte = "2043a94ef8096dc260a88d5ab6e7074a645fbf5a830a62b4ab4a6720c2f3a6b5"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/recherche-question-hypothese.html"
+empreinte = "976bdbc19c68ecc6cbeb96055dedb675f071aae8ddd63fe1a7d5004dace75e08"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/recherche-verifier-chiffre-public.html"
+empreinte = "241f75e3a9e916a7607d96f1e1e26d0bab9077618d3f688b4f273760e1ca93bd"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sante-amenager-logement-chutes.html"
+empreinte = "e819c65785d03c0cf0040de50b94b7033d9755deb7f580309edc3cc6c3f37cbe"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sante-comprendre-depistage-organise.html"
+empreinte = "e690e97d990fcc535c109c7a08286a2773d242179a5a8ef4b0b70916a4e725f7"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sante-comprendre-parcours-soins.html"
+empreinte = "888a895fd09a317ba1fbf4f0c239ad7e2bffd9d1b3152eedd85a21187945641a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sante-lire-etiquette-produit-menager.html"
+empreinte = "44617ebfbe625f6fa58594ea6f1fca009e7796b0a9c69cf5f72c9b9ef5148e4e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sante-lire-etiquette.html"
+empreinte = "5dd429889bd555e405a0332b44545200b80c2d8cbba66f231aac306544c0a537"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sante-reperer-signes-qualite-origine.html"
+empreinte = "bde7a60bcc07c8c6654c834900637d251c037d372f082fe15d65fb7ff562cc48"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sante-reperer-source-publique.html"
+empreinte = "b1e4615854b3dac3cff1f04f4c9622e0134726cf12fd2cb009b76230bef6fb3f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sciences-calculer-vitesse-moyenne.html"
+empreinte = "add150f1e64a8d7c4d980b475e871728b927994544da90af66c597d00ca3b2ce"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sciences-comprendre-isolation-r-et-u.html"
+empreinte = "63ce9ef3e683eda272305093a56ca920eb306a8dff24425452f563c52e6637d1"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sciences-comprendre-pluie-millimetres.html"
+empreinte = "99ff51ac917b2fc536ce441666c4c1e890542fb295fa41043bde9860ac802bb6"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sciences-cycle-vie-plante.html"
+empreinte = "a8dd0626cbc4a1b9b0ff0674b9a8816ff7b85783b91b09e979642f3c69fe4c75"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sciences-demarche.html"
+empreinte = "1b1c8dfbc7283aba6afb4ed2a525b20cc0b4b905ba4c79a1fb4c8ac7c5dfd0f4"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sciences-distinguer-melange-changement-etat.html"
+empreinte = "7b9f1d9483fb3f693d140f4eee10661965d160976d8abe3562aa6d7e45d43242"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/sciences-meteo-climat.html"
+empreinte = "7d0dd0d168445885b68fe4ed8f86c3cf95d953a2fe638633bf725d5b3e6153f2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/tech-circuit-ouvert-ferme.html"
+empreinte = "fe9b878867b5f257d73dfa8a3dd9a8585a7362620de8f360e250ab7c70722779"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/tech-electronique-capteur.html"
+empreinte = "dbb778b5755747e70403577f1ebd7eda2d9f5d5532fb5ef54d337078ac743494"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "apprendre/fiches/tech-kwh.html"
+empreinte = "ccb2c97b1ad14e1db79b6b7273d7350bfb863711611e5191a5339405d6a90374"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "assets/css/anglais-aventure.css"
+empreinte = "09c946d48904070ea9321ad63ede22c7fc7d20f5d0ad031819296ad0a97e26c6"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "assets/css/site.css"
+empreinte = "923d56540aa970b8ff8cdece549454b4a26a3a1eb19adf72408357eaf3f70073"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "assets/js/anglais-aventure-data.js"
+empreinte = "79c07ce53d8f678badfb0d145dc670b221a7a5b8784829bfc162c8c85f71d780"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "assets/js/anglais-aventure.js"
+empreinte = "538ff66c94bc772f66f8304ab89354f4b159b3caa3d800465a3cdcf5ad3b6c35"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "assets/js/apprentissage-aventure-data.js"
+empreinte = "d4cb4843323b97e1ccd497a11f265463ac8f66cf4bbee81e7bd024668e33f0b0"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "assets/js/apprentissage.js"
+empreinte = "2c8f1954c5ddd039a3bd15614619089220b122625324ecf2b1e1068c037796db"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "assets/js/decor-atlas.js"
+empreinte = "2fbc68523b824d045531bf2a33392d7971ad9c0da0f11d4cd53639aa026d427a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "assets/js/navigation-parcours.js"
+empreinte = "e4732a0f338cca1bb0b1785dfeac18f9e38fe7c2efc48e52b4cf62d101afe442"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "assets/js/site.js"
+empreinte = "d7bda79d2f5bdf8f42469d9b48af169da380a118a500a9ce341c41d1edd508f3"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "confidentialite.html"
+empreinte = "6e33ba4f51abe03f70389110406de1a56f46eb27f6611113e0b79fa9f22f7acc"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/audit-automatique.md"
+empreinte = "2ac8d24bf41e93039f13a751dac2a0dbfd761179255d749e6d6bd4bb59d43bac"
+etat = "reference-initiale"
+apostrophes = 28
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/catalogue.toml"
+empreinte = "9ad245e350dc06603e602f7c2712cdae5814aaad0c1919110fa4fd38c064938b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/file-relecture.md"
+empreinte = "22b89a4d13bed311d3efd0b024bfac451a22720d16a7ab155e51ca65ef51da1a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/grille-relecture.md"
+empreinte = "e725324ed6ba6122554d665ff10082a7bb22a28e67452a695d68631ba5117564"
+etat = "reference-initiale"
+apostrophes = 11
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/objectif-1000.md"
+empreinte = "2e874da1feea8e85feff1f3481f415f59483bb32634691055dc50d016fc78d0e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/paquets-relecture.md"
+empreinte = "2b378e32ee2a5d77e6a720fee0b56e1698c14d9e95c4c9d0ba78f35ff767e938"
+etat = "reference-initiale"
+apostrophes = 68
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/plan-1000.toml"
+empreinte = "f27a058047043f95c168f85ebac7f408c8577b88950569976b267e27188e2a93"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/referentiel.toml"
+empreinte = "d3bc4c60a98b8ae14daaa68282851abcb0d9d19e658b30d821c24397ca2752bf"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/relectures.toml"
+empreinte = "76c1f2e34ae4d7d1d69dd4dfba00ffc56bc1c6477341130ef2583c776fe1291a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/revue-interne-prototypes-2026-10-11.md"
+empreinte = "29dfe39dac2056d65fd8a0cc94214811896e2aaddbabb6b3e769ea9cd35d5fb4"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/sources-refusees.md"
+empreinte = "bc9c5c8c15501f3ab3b12bc16ee1dddb9d37117aa90978a84b53c9684b48555a"
+etat = "reference-initiale"
+apostrophes = 51
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/sources-refusees.toml"
+empreinte = "2bce6cce4a91f9f563e384b3ae0d8814a68cca22d0d5663376c0244543a11020"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/apprentissage/sources-utilite-publique.md"
+empreinte = "c82ca98db56c93448bba20a6b64fc70c9ed074456f65379d6519b7cbf330d04f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/couverture-savoirs-base.md"
+empreinte = "f78d25aa6b02188be1fdb5030bac7874f4500511ff48dc9f64976bf8f6ffa3c7"
+etat = "reference-initiale"
+apostrophes = 1
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/diagnostic-404-vercel.md"
+empreinte = "cd4e38a33ab5fc3623d9a2b9cd5a66a0d58204f37decaf347b2edae76e1918ab"
+etat = "reference-initiale"
+apostrophes = 25
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/gabarits/contenu-editorial.md"
+empreinte = "f1b940ddf47a1a2d5b30c74334a22c26adacd07eb0f0142dd2fe75beba4032b9"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/integration-simulateur.md"
+empreinte = "54dff283edfe09d8458552223ab11bcbe81b9dfa58ab2be322f3930aa0f83e46"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/pistes-visuelles-ia.html"
+empreinte = "d9f9fcab1820f8c2d725e23533a60af218dc2de9e6c672178760f0505c05b054"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/prompt-session-simulateur.md"
+empreinte = "7cc7d73612e199100c32d5e043c1bf33ad67330065ddbd35929690c9f7e75a31"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/protocole-editorial.md"
+empreinte = "cf76c9e0c850bcc05d61389c9ef49f52be794ed2069a3dbc4b6d75d9b629258f"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd-affichage-adaptatif.md"
+empreinte = "a14b2f42ac83c8bc5f4e0646c2c37809bedf480391d48463bc4643a5cfe3e054"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd-anglais-aventure.md"
+empreinte = "fe4ea4f8e74233a1616e9d51f4c995fd063385337a08253b4466e5d4658bcde0"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd-audit-securite-optimisation.md"
+empreinte = "128b547294325ffa96dac563f54c03e4ce9a80ac880bc5bacb52aa25d7da3e44"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd-coherence-visuelle-editoriale.md"
+empreinte = "68cd789f87f5ee93dd359d9313872e09a89d7abf8a05d54f6d3a4fcf48fa800a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd-confidentialite-rgpd.md"
+empreinte = "a666e2e2ac31e8e9b9c317b3b118a559c6034b4e48ae9a328681f2f461155889"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd-ia-usages-fraudes.md"
+empreinte = "eecc3f9ee7c9a799e88577958525d8961d6e74abfbbb9db8146e304bc2a3a079"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd-innovation-continue.md"
+empreinte = "e5f89faced467803a85fd0aed8797dfad46aaa3e564972642dbc1fe77da06c9b"
+etat = "reference-initiale"
+apostrophes = 93
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd-parcours-apprentissage.md"
+empreinte = "8439107ca2727bbb26868f6e71818b05426e7ef12899b816d88cba6a0e91910b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd-plan-global-consolidation.md"
+empreinte = "6d7bcc73f317177dbfd40a41e65e3f74c5eeaf1e0cf9a0e438779b9cee53456c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/accessibilite-2026-10-17.md"
+empreinte = "269f3778c5ae4bba71d97deecc1b96715bde80d29d034b04d174bddd65bede57"
+etat = "reference-initiale"
+apostrophes = 34
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/apparences-themes.md"
+empreinte = "84192cda3c1ca158da5ebc308b245c5ebbacbac26d7ecc80dddec27ffb617c44"
+etat = "reference-initiale"
+apostrophes = 55
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/archives-et-poids-du-depot.md"
+empreinte = "ae45840b1f89f6ceec1222818287889ad535319df0f485f7ed2a30ef2c6283f0"
+etat = "reference-initiale"
+apostrophes = 19
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/audit-cache-css-ia-2026-10-24.json"
+empreinte = "8bd53b64e1ee8e994cfbf62d48a80c2dc04a642a5c98c6722a77dfff20ba5ce5"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/audit-criteres-22-2026-10-24.json"
+empreinte = "527488e35e71693d1d4268995e9aac3cb69d48e0f38d4514fc580b5ee05f0edb"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/audit-fiches-statistiques-2026-10-24.json"
+empreinte = "849de5467c025459b75ecaa0fced6f9524401bf91529d975b7a77af404023fb6"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/audit-graphismes-2026-10-24.json"
+empreinte = "8f9280eb0769a36ba4ea4b4ee8066828b92554f14ead8466aacb1efc23e6b3b7"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/audit-groupes-statistiques-2026-10-24.json"
+empreinte = "849de5467c025459b75ecaa0fced6f9524401bf91529d975b7a77af404023fb6"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/avancees.md"
+empreinte = "f340aba01a616f643fbeafd8d1e05795f3fd6833bc7ae905c2fc317859cc2cb9"
+etat = "relu-par-agent"
+apostrophes = 1240
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/avancees.toml"
+empreinte = "3ee2ba33777d4f8c28983752cf4a931179a398bf3377de8c449464ba44ebe36c"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/bibliotheque-skills.md"
+empreinte = "c90d68395800c4db0616f1633b8d664c2c0df10df597bf255d0f99c5146431ae"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/cadrages.toml"
+empreinte = "383bbe401ec4da7bcd2559c3271c208a31bd07b0d15b1385864f50834666a292"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/carte-lacunes.md"
+empreinte = "031b3348644827ac74d0a00874c997adfdb6d7e63abf03b6de15461f58fc9857"
+etat = "reference-initiale"
+apostrophes = 15
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/confrontations-sources.md"
+empreinte = "7bb1125c6ccc536ade6c1da766e6d74ddc7470655b10201e204b92021f738ce9"
+etat = "reference-initiale"
+apostrophes = 73
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/confrontations-sources.toml"
+empreinte = "c48d525d6259042387a2b515de3e5d3be1c726a5f8d720d67ae7c268e5d7e55c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/couverture-sujets.md"
+empreinte = "81500207f2f910a08a096694378a534bad2f3acb0c93470f37c35959e7cdbd95"
+etat = "reference-initiale"
+apostrophes = 30
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/decision-prospective.md"
+empreinte = "df52266a3c8acc8f8cdd91a95919c6bf48088447a570886625a759383d736df9"
+etat = "reference-initiale"
+apostrophes = 67
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/derives-images.json"
+empreinte = "6227e3aec0e97b82e5691866ef8f1a08cc39c63b5500ab4c7e33d393c84a902e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/en-tetes-servis-2026-10-20.toml"
+empreinte = "ebe871884691885169957d718d8af62000da9d4e0a19f20527e5cc4eaf2a9a9b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/eva/graphe.dot"
+empreinte = "dc58dd9c762155fef55fd29a548b64d17fce5dce5964285cec86b502b1c5c4f8"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/eva/graphe.md"
+empreinte = "88d191ef2849c70ab498c1bb05d06332309061a18d5d9b16e48849983f5e5b0a"
+etat = "reference-initiale"
+apostrophes = 1
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/eva/memoire.json"
+empreinte = "b1af55091f5b141ce997fd6b4f35910158165a482af5d03a83b34987ffbb5812"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/eva/plan.md"
+empreinte = "2813a17ac69c3ceb9f7f6be49773ed241936c04faa46b9e83d23c8b3a1fee505"
+etat = "relu-par-agent"
+apostrophes = 72
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/eva/plan.toml"
+empreinte = "4d867ef2989a742bb405e0b296f6d256943f754974e8d37b94a182052cb4c2cb"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/formats-affichage.md"
+empreinte = "fd22b5236e6c3bb45ad39d9c3e4609c2410a91300eb668b5f64ea375b9eeb39b"
+etat = "reference-initiale"
+apostrophes = 950
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/fusions-du-19-octobre-2026.md"
+empreinte = "e84190d8ad6497b680b2f5b12b34a35c5cc2f8d6fb85ccf63005ff9b9739b1e8"
+etat = "reference-initiale"
+apostrophes = 76
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/gabarit-initiative.md"
+empreinte = "6f845b8d5dcc034ce2a40cdd8480f7dc903da038d43e5b7a74f0a0e4b262f7dc"
+etat = "reference-initiale"
+apostrophes = 10
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/grilles-dynamiques.toml"
+empreinte = "4e920573d31d84a5d2251047420abc8e91b98fde48f0a64f30c3f4b4a7b3da37"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/groupes-statistiques-2026-10-24.md"
+empreinte = "cdb8c36c59a01a1771c4fe544946afaf132adb69f4d6252de45247ca37762c41"
+etat = "reference-initiale"
+apostrophes = 19
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/inclusion-criteres-wcag-22.md"
+empreinte = "34d6d5fc41e0aaec7661643b015197a3863442b0963f96de588b1137f5918784"
+etat = "reference-initiale"
+apostrophes = 58
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/inclusion-lecture-vocale.md"
+empreinte = "163fbae588beb08899348149e4006bddf57f697376aa286aea01198f8b7fd929"
+etat = "reference-initiale"
+apostrophes = 112
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/inventaire-controles.md"
+empreinte = "c885acc4f1ca2cb0243eb92e4ca3c8beacdfc20d6b24186523d0d2dd4a4b2f72"
+etat = "relu-par-agent"
+apostrophes = 104
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/inventaire-couleurs-jetons.md"
+empreinte = "8ab627b5d987886e633ba4fd9ad944bc2da3955b6ab6ca8e1eb725f60fad5d93"
+etat = "reference-initiale"
+apostrophes = 1
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/journal.md"
+empreinte = "ec283456957cc3bdf1ff1afad025f8cb29c06b51f9132334b92af3ca9afa8ba2"
+etat = "relu-par-agent"
+apostrophes = 2405
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/ligne-graphique.md"
+empreinte = "3339eb406b17af32735c70ccb935420f28df987eb103cde6265f115139d04522"
+etat = "reference-initiale"
+apostrophes = 28
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/listes-eva-materiel.md"
+empreinte = "14c46dc035d2ca1cf9a31dccfb40bf56ef8c44c97c4f6b9764b3e1beb7518bda"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/lot-statistiques-2026-10-24.md"
+empreinte = "189c179b4a9d20bbd8a63cf849f803b0a402ab94e4ea32abefb104b0742621b4"
+etat = "reference-initiale"
+apostrophes = 32
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/materiel-spark-serveur-dons.md"
+empreinte = "42ebe8bb0e595717cacb8918b3e05b90fa67bf17c323383904621ce618420fe7"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/paliers-affichage.toml"
+empreinte = "ddecd92cfc1cada62b59c68b106ae5b4ad10f342260b0362bfe33d792274862a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/plan-statuts-animation.md"
+empreinte = "920f0cb82fdd5c04ae0690ad033a6d145e81f041677094c8b863059331aed159"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/poids-et-sobriete-numerique.md"
+empreinte = "5063554bef492fdf8be4305c7c0fa582654735e242ab05303e32016549c20764"
+etat = "reference-initiale"
+apostrophes = 92
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/poids-pages.md"
+empreinte = "753a00986876c3f4873dee5c35541e8bf967b7bdb215845cac7ceae6444911fa"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/portefeuille.toml"
+empreinte = "c3f82a933326a3af80ee182fa25a38b08fd39ef67f39c13c9d34d3e5a9fc4645"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/presentations-personnalisees.md"
+empreinte = "f482b0179f4591f0ea6db9c41d90227acb9ff3f513cc6fe14f7f8fa616deb7e2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/prospective-2027-2030.md"
+empreinte = "047e011911712f08070679192a985932e7401ee4873e0ecb0a445e2804631061"
+etat = "reference-initiale"
+apostrophes = 198
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/prospective-lacunes-2027.md"
+empreinte = "6f14e1ba7585e216d01f2bb6ad98aa3d5ac9b810059a96f53df26b9d240317b1"
+etat = "reference-initiale"
+apostrophes = 69
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/protocole-essais-usage.md"
+empreinte = "283de211f52c780d5dbfa30d0d1749841e4fff573401a931f50e90d99900c2a1"
+etat = "reference-initiale"
+apostrophes = 50
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/rapport-coherence-editoriale-2026-10-13.md"
+empreinte = "e2c4b24672c6682bd0a5acccfe1a1e80c197803c1f291388ab4275f7bd604c86"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/reglement-fiches-redaction.toml"
+empreinte = "7b3ca6fde8ef92a43263c7081a6ed0e15ab0f7b29f517140d2e0c609909410e4"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/reglement-interieur-projet.md"
+empreinte = "34c18b1b3afa0093c52469134eba51075b85489784d0fdf47400ebf2c39de99a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/relecture-apparences-2026-11-07.md"
+empreinte = "27d97adbc2473d4a7bfa39989c2758875541cad6f0a66d1637b54d1d675ced9e"
+etat = "relu-par-agent"
+apostrophes = 98
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/relecture-automatique.md"
+empreinte = "6a6151c11947ef8a0bc04dfc7f5b34b12b89f933725ec923b4f9f426672505e6"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/relecture-contenus.toml"
+empreinte = "e9da687eed9ac39e37d2a91ed28d44ad5140e675c3c93bd5b66dc05dda979b9a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/releve-affichages-2026-11-06.json"
+empreinte = "cbc69b82b8570d3df96e2191f75a70b4016fb7fbdff496eb017c2835c816f5da"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/releve-affichages-2026-11-06.md"
+empreinte = "804dc97ac7067d36af50e2cb7bee364217276971328277dcb634202da58313e3"
+etat = "reference-initiale"
+apostrophes = 49
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/releve-apparences-2026-11-07.json"
+empreinte = "69a5939fabe85fe490891923c13e08e92278085495f38cb53b28a6c27d0bc905"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/releve-apparences-2026-11-07.md"
+empreinte = "370ef110e39a842410aa5e7689a56aac874e16a8cf5139201c292460e91ff77a"
+etat = "reference-initiale"
+apostrophes = 19
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/statuts-animation/ARCHIVE-film-associatif.sha256"
+empreinte = "f3aa86c89a2f05959cece32e4532caf984443a32ae7b0b01ba55bf3e4daa0c77"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/statuts-animation/bible-fil-et-video-01.md"
+empreinte = "e6c9d68cd8aec46f237a9c0e3214fabd252f4b68421b40ca3b87a12ddae940c3"
+etat = "reference-initiale"
+apostrophes = 5
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/statuts-couverture-angles-morts.toml"
+empreinte = "6e0ebf77df220762c3243341e80af1d71c0857fe61cfc02f45b963ff2849235e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/statuts-matrice-tracabilite.toml"
+empreinte = "fc3302d6b3e6e80e8095d55127b6f57fa062388f3eab8ad5a9148476489112a1"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/statuts-mouture-globale-candidate.md"
+empreinte = "aa9af0138e96e86d8f6c2f3604d0ce1c4ba8f67f02dc7bf95c219be423a6ae01"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/statuts-plan-global-resilience.md"
+empreinte = "70a5c1d629c3e416b6ab36090be4057112216e6c836a6d662cfae9111ae5b52e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/statuts-revue-juridique.md"
+empreinte = "1c16b8a882f0e882cc4af679aa7b45db1166e199ab210db250ba6e093b725dee"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/statuts-risques.toml"
+empreinte = "f100c0d3fadd790373a8c788e2dde90e1a3ab1832a7e8d21325ecdaa47a03bbe"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/statuts-variantes-consolidation.toml"
+empreinte = "9aec708f734ac5246409c7a5df47449bf16a450de2f1df63815ee5915cde0bb3"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/sujet-ecoute-prononciation.md"
+empreinte = "8c40c610a1c811070021534e7495593507cb6cd2c22d5ffff06ce9f2db664c42"
+etat = "reference-initiale"
+apostrophes = 114
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/sujet-revenus-salaire-impots.md"
+empreinte = "bccdab467bcf25053bee25196332124a2c067d0776f6718a3bd6bb5a80f9fa95"
+etat = "reference-initiale"
+apostrophes = 97
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/sujet-securite-sciences.md"
+empreinte = "187024b8ce67a0135bfe5e17ea2451ba0720c62203359452fb7d2d795fd854ed"
+etat = "reference-initiale"
+apostrophes = 84
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/sujet-systemes-embarques.md"
+empreinte = "fa2793f5e4b31c0be952b40031c5f754238055b337d1339b576d91d6ec20e6be"
+etat = "reference-initiale"
+apostrophes = 73
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/veille-2026-10-17.md"
+empreinte = "1e5435dc0d1cd94065561c1a78f30eaa9d21bbffb7035bf97aadc81b2aff1f5c"
+etat = "reference-initiale"
+apostrophes = 73
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/visuel-motion.md"
+empreinte = "42670fb3c19838fe5b21f71379ce040c6886a1cb724c8514bf71e36db1b329a9"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-accessibilite.toml"
+empreinte = "480eb3b9d966df219360b9d7c9020227891002a1e0a9a856f95b377187181dee"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-assistance.toml"
+empreinte = "b54bded3ce90afd674454360f22869f958c401faf81433c9ed4a3fdd1b8bf83b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-cas-essai.toml"
+empreinte = "f8cf9868aa7d43acefc3f3f6520050117d4a6078fe3d863247ef886da242dbc1"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-chaine-logicielle.toml"
+empreinte = "d16f3ba2c7269125eb8f7b363ab9706ef317b839cb29c595ca8721a5bcf44556"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-cles.toml"
+empreinte = "335cfe349b164b82b5367631322fd1346fd829534840f1ff9785e0e02134c274"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-comparaison.toml"
+empreinte = "180224acc898035a035da0a9e17d7813c81edd78da727be542cf5c7b169563ee"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-continuite.toml"
+empreinte = "b85c21ce443fefb364470029aebc2910785420d8564471db08c6754683d728d2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-convocation.md"
+empreinte = "f5d192c4c0e4ec5373079aeaa885abf2655ddce988b849139b1e81cf70cb551d"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-correlation.toml"
+empreinte = "af9ca50b0aa7a54d1ae029db57179b559de086744276fef72bf12bcec19b58b9"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-decision.md"
+empreinte = "c0c5f14d80fa58b0297eaaf2d1a1ffbf539a0a3ee6973888c053233b22b76865"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-donnees.toml"
+empreinte = "e58f053bfce13ecdcaf51b22d08f275ff085a4e9408fbd2bcac0bce05b0148df"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-dossier-deliberation.md"
+empreinte = "cab77307e7010990fc1671b7a47363cff31b5e8640c68a93e46349dd4e2f995e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-menaces.toml"
+empreinte = "baa088f2da3d3a08e90f87b1353725840e511cf5747cad91dcdaacf7f3e810fe"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-premiers-ecarts.md"
+empreinte = "d9b767d59fba56d292c6d5e1fc3c0ee5e34b4e3a06941f4d9c3258de24efcb72"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-profils.toml"
+empreinte = "de1b1aa83b4569492c65deba9f1e0f8c9bbb30dda1f106974d7d9c7be2fdd38f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-protocole-banc.md"
+empreinte = "535782e625ca86afadd3e10e11835096e3094cef940da82b01238dc97f8d5fbd"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-regles.toml"
+empreinte = "31bfebb969f77d51969dc71d5eef3656ee48f7b65f10c89623798a405a2fc50c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-resultats.toml"
+empreinte = "880eaa2396cbf82c161e24def165661c9e3837d5d3fa3505d077f0ea18605283"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-revues.toml"
+empreinte = "8551f9ed82050d9a0ca4373981ff0e80db43be3e5b0018b1bf6a07a55fd3129e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-sources.toml"
+empreinte = "b695f2b7bc8da014f080181219c61637fb1a70979319724d7aeb4778aaff4a88"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-statuts.md"
+empreinte = "be062e42432f2ce5e548b37b163773d39baac4f844d27551ae044e2ce8e02cd9"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-verifiable.md"
+empreinte = "d56cb26d12152756e0f6afac8a4473d35daccb0fd7540081b439518c2ed3958e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/rd/vote-distanciel-vie-privee.md"
+empreinte = "848b48059342f9e6e8f306184671b3db905bc64bfea9cad67a73b5cc2b648c3b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "docs/veille-rd-mrsc.md"
+empreinte = "4736ca2e9100fcd8bcaeb5334ea3530ce08adc83c8fc6b4c460534e6d631acd3"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "documents.html"
+empreinte = "081d6d3114e4a7f7311453abfc7f7f6ba1ef510533a88b913000f060e482a31a"
+etat = "reference-initiale"
+apostrophes = 5
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "eva.html"
+empreinte = "ac61baf4f41f8ab9a1333769762d85a0b036e6554dd34303f9e40dd294cd2d9a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "ia-societe.html"
+empreinte = "d24960284df348ebd6cfe68751a5d9067d3e2c7e980b7d658db5ff2c42efaad1"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "index.html"
+empreinte = "b31c9ffbd67d44b60ec4001c23b6c51e7c3eef1ac5fec3b1712fca43979c79a2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "liens-utiles.html"
+empreinte = "e8bf281791a0822562563090cfafcabc966ca845b6679b8843fddf7533fdbfbf"
+etat = "reference-initiale"
+apostrophes = 3
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "llms.txt"
+empreinte = "e6383fde4d17c91dc5213263dfb9dc287a67f132e1dc60cda4286f5a9e0d9010"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "localisation.html"
+empreinte = "1213fc5e958ee91bc3985c0aa173bc74d7671133907daf8e0c551a6c444854b2"
+etat = "reference-initiale"
+apostrophes = 4
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "nous-contacter.html"
+empreinte = "2db9c22caf24c4eb35e1b80f683b1e59079209318184270b1910d61dc61fc835"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/annoncer-echec-graphismes.py"
+empreinte = "a13a16f91f277d2eeffc097923fb257228c11e89ea5f03c7b961e38b4e46d517"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/attente-navigateur.cjs"
+empreinte = "d0852237f020fbfe45cc3921cd0525a25849b320479b46ef78f05d3fdbe0edcd"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/auditer-affichages.mjs"
+empreinte = "d2920ec84faf06d2f8c57eab57710e35c2f57f8698b6727f0427bb2b40f91f2d"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/auditer-criteres-22.mjs"
+empreinte = "7c0da6fa8e4ce39ed343b775237373aed55e88aab07a2f19e50d4ef7e8ff1de4"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/auditer-prototypes.py"
+empreinte = "5d497e0f0a8c760f3fcef9cf8fad149a3267b83b39667f6178a3e9f07a63e185"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/auditer-selecteurs-morts.py"
+empreinte = "28fdc206bebb42aa279a57c77c00fc3ad5b98ad4293b7df0bb9f1022e0d58b95"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/banc_mutations.py"
+empreinte = "1594e6ff16274fc5cd797c0ea3520d90680eff94c84d1a893d0b6ec56bf9b69e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/cadrages.py"
+empreinte = "8a2a571bf0cc980883767f1cd80500007595547fd7c2020d0387319c484cfd19"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/compter-paliers.py"
+empreinte = "78977968a596ffae45cdc080f1d287873b11a03ad4c633dbba64578dfa94a4e8"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/confronter-sources.py"
+empreinte = "673125b8e1cf5d309de3403b54fa5ecbefc1c4e5c459173779438b84163d3c50"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/construire-apprentissages.py"
+empreinte = "4b680512822dadcfeb5d82d572478835dc951f02efde6e9691641a3e7d5ab754"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/construire-avancees.py"
+empreinte = "6931476d72c2a16c5e9e795e9c0610dd3bb75f5d86eee17db864a00e91baca7a"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/construire-carte-lacunes.py"
+empreinte = "2f41ffe9bcbe757b97fe166c839ad36ae91eaa0b9d59307b08cd56053ce033a1"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/construire-couverture-sujets.py"
+empreinte = "e9d1ae9f813dcf1dfdc8a767cd9723239b3d2f5edcb0611d05540b3e4f78e113"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/construire-paquets-relecture.py"
+empreinte = "72bfe6f1a33d2b60d4db8f5aa60dab53320345df0cd5c0df6aa89d6f324637b9"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/construire-simulateur.py"
+empreinte = "746f86c65813fbdaba43a476148c74df75e85ae6790946c1513a6fec0e039a5c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/construire-sources-refusees.py"
+empreinte = "e95b81a75ba640d96df3ab3fbf3ecaf769c119ab0e85d3cf56a6f7d7c83526b1"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/etat-rd.py"
+empreinte = "0144f3a37eefcb296018ad2784a8019b3c6c50ac54c2db7ad3ec9714afe8fb26"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/faux-navigateur/@sparticuz/chromium/index.js"
+empreinte = "e7e84fb42023efd3ab602ba90397b61f4c76c032c3dfb2efd0e8649fe9fd2e18"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/faux-navigateur/axe-core/axe.min.js"
+empreinte = "1965316f41da556b800da4bf4ff18e39a8749a9d254d24e0077ad7d1a5269737"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/faux-navigateur/axe-core/package.json"
+empreinte = "606dd2454433303f6ef37f6c7abc9e5c63ccc32194840cb92a6bbccefa51f7bb"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/faux-navigateur/puppeteer-core/index.js"
+empreinte = "35dd8fb883f977744b6a9ee7b05b92c80a83c441308660b5da2bfb7f4d6c02af"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/file-relecture.py"
+empreinte = "32c9101da140840f7a0dea58637ed354aa6ad6dad5ad67e3234e74095206fbe9"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/focus.py"
+empreinte = "381b214db95f4d4547c0b1d54481a75332e7d140f6ff45e3793c44ff1f908863"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/generer-fonctions-api.py"
+empreinte = "04751f8f407c773fb9404d88ee338b658d8a94fc9c5b5dc4d869a80f99eff3ec"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/memoire-eva.py"
+empreinte = "e97c66c5188cbc853ed48bf0e008ab4998b5a020dad11c432390930a085aaa3e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/mesurer-cadrages.cjs"
+empreinte = "d1175951bf1240dc7910355d17cf2905ee558e4ca3e88c374aee1f30027ccc5f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/mesurer-focus.cjs"
+empreinte = "cabe96a3c84c51838516555ba917ba8cdeeb6c45bc75cfab40ac1b50be5040e6"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/mesurer-grilles.cjs"
+empreinte = "1fc40268d47ed8267ec47d83eb0bf9320ce5b510d7496d4b4a742e4165913f84"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/mettre-a-jour-simulateur.py"
+empreinte = "e92cf1111be86e89306f4b3a40b179f0ab4e5d95f9a6e17bdbc8e0dffc978eb6"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/modele-grilles.py"
+empreinte = "2dcad8538aa2678e48d22b37829a785436b5ac2947f1346ae02e44fc301d2c5f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/optimiser-images.py"
+empreinte = "f3ef1778103efb32da08bbb188ad0b63142591be1ba5fc6fda0f50fc67a350ff"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/patchs/simulateur-securite-mrsc.patch"
+empreinte = "2d8b04808a6f557c9358c5e3435866e318383ef7b5ce011d492fece1555bf794"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/planches-rd.py"
+empreinte = "4ed7de1fe61a9b4a7dbc3029bd7d0f62f12561860883de7ae01de3b1eae28862"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/rapporter-mesure-grilles.py"
+empreinte = "76ad19d3c0c2b7058289458bf001c6149a61ef68aa0243f53ab9b141faad6afe"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/registre-relecture.py"
+empreinte = "04f54553af689c58e583fd20670eb5dc1ea7f8ebc10dd39582374fa4442201ae"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/relire-contenus.py"
+empreinte = "bc3bd67e4dd533d5f52a711d3edf76c23b8fea11dae13ac677db038f1365c1f6"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "outils/serveur-local.py"
+empreinte = "171ec6389ac5c8761c3d5b25d80afbea0884192b3627c92a8b509321f0496d01"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/statuts_editoriaux.py"
+empreinte = "75169bb1b1fdbf1a45b6e4ef5c0c90e115c20379e6e8a74f676e31e5d74d0775"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test-cache-css-ia.cjs"
+empreinte = "a9438da8877cb04cf0a1b5317d27eb3da7a0c33b3759b45310bf7af6c4d454e5"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test-experience.cjs"
+empreinte = "26ea66693863e70acde6ee3b103d16f65760015964d1359a62dcd3e70bd147df"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_annoncer_echec_graphismes.py"
+empreinte = "dceb9f1ae316e16c88403b1993ed7e30d9a599f40f96b45668de1ff7266f18fd"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_attente_navigateur.cjs"
+empreinte = "22fd278e2c10e0b8ada7b6f8f0e7de49ba013e6bf9c6461b125def2c4cc053d8"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_audit_prototypes.py"
+empreinte = "a925ded8e4239909f4cf505f5b4272b34c4398e02b0248decab1dc1c0b29b26c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_auditer_affichages.mjs"
+empreinte = "eb0ad2c915844431083eec49ad6f6cb0ba675f21407c5d722b74be352adb1947"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_auditer_criteres_22.mjs"
+empreinte = "01149ec018cfede76efb33d4554994849870d99cf376e70c46c0e1b5bc88c1be"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_auditer_selecteurs_morts.py"
+empreinte = "531127c44f1d9c24a717c549a03828b44f61179b8596d89b534cc92721d66152"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_avancees.py"
+empreinte = "3b71e8a5993e59ca3d5e1a1b2cfd388a57a4b440d7e0bcec6b9285c25be1f7bc"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_cadrages.py"
+empreinte = "f1c0f195c18d3fc80538f3225931852c8649bb3ea28b6b707f36eeb32336f695"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_confronter_sources.py"
+empreinte = "859fbeca6670643a359b73a02052af8f858b7217e05afeb4599aa4bd87bbd05d"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_contraste-degrade.py"
+empreinte = "a77bf3676bf1208ba4ca120df7276f13a16b581bef040cf8eee6c15c04d79a38"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_etat_rd.py"
+empreinte = "988fdc336e0d57fdf691ccbb033b5d9d20aca1bcdd962ccaca71bac88af4d4c6"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_exemples_statistiques.py"
+empreinte = "2c57ed6c1e38ddba7fb88d13259d318cc5016a8d19f7d270bde7d4daf465751d"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_fichiers_servis.py"
+empreinte = "efe6189423d2aef6751594ad331bcbe55111cf65874bf210173aa4d635792e0b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_focus.py"
+empreinte = "5e88bffd140570c878d33f0085b6f97eba7c8ca06026bd74581fd05c2efd5624"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_manifeste_sans_imagemagick.py"
+empreinte = "deb1e7882776cb275fb85d307e9bb71ee7f5a2015d01d9feb8538f639b7f206c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_memoire_eva.py"
+empreinte = "168fdc8a8450f029118d2a5a210edc2bbbbf486fd3112c5d7461039f4b609410"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mesure_graphismes.mjs"
+empreinte = "f3d244ca82564d9606d44e9e0c6f4ba9736eedeaf0c7f325490dc13d2279a89b"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_modele_grilles.py"
+empreinte = "8b07f7507f8936b7413dd073200009def368401c7bb4e8c318ad7a1e02725030"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_affichages.py"
+empreinte = "0c4b6ab9b06b15476e6baf83e9109c2381d22b63d9064492b066f5a5dfbaeb80"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_apparences.py"
+empreinte = "918a6591b2327e7bd975eb355718885e38d1cf41eccd064fe25edf380afe995c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_budgets_visuels.py"
+empreinte = "6dcc821809a3618d5202153bfa8f0072b56bc3c99706db2736e394bbc27e727f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_cadrages.py"
+empreinte = "f33a8882a39b615666b0707d1f92aa5e1045d7bf5412afd6cf789265318273f1"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_couverture_sujets.py"
+empreinte = "5929999fdf0c3b15628547409a9f7b78dc4ea6c72b11bf291c42c11bdbf19900"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_files_relecture.py"
+empreinte = "fa928336b454979eba134e7be7a3b0122641cef74538c648d1ec88bdaef7b4fb"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_focus.py"
+empreinte = "12177a5f192762cc2780fac982d5b401d3d9f5be853e0bb83fb527111d82ff9e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_fusions.py"
+empreinte = "1049734198ad358dab10a36605517e633fa30e6714bbaf2c1b3ef6772e0a19e0"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_integration.py"
+empreinte = "07936b71b6dbecec2669b1f4b98e84b9a32d0d8b20ee9367de3c7cb2c147841c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_planches_statuts.py"
+empreinte = "9411939588751220fdb64185482f5a830f6841da96ea36eaf11583dab2155693"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_poids_pages.py"
+empreinte = "d1726a616077e60a4965a7d016a762f719bc9538e1803316ca076652485277f0"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_publication_locale.py"
+empreinte = "aa39f092483c5e609e8152a737df96874f8b421cfbc18e50f2b7002fe32cd193"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_rd_continue.py"
+empreinte = "0fe9e43309451e20a0b0b9086918c8d4127e28b3d50aeca9ba80914191228d2e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_relecture_contenus.py"
+empreinte = "32064838b852ddf08d886f6ac52d21f3d876664114a031e477bacb270f866061"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_relire_contenus.py"
+empreinte = "e9f20324a85b95aa5874511b30c933e58cd11dc32baa910c2012ac848286b713"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_securite.py"
+empreinte = "6f283117ae9f5f20cb1bd118a252466fe8e710a46fff5c274d9904cdb62c03cf"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_mutations_site_statique.py"
+empreinte = "2fb7859bd402eb2b932a5d04858713bc827c12521cff8140b0bf0150a8829573"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_paliers_affichage.py"
+empreinte = "c31f503a6404a3d17bdf366c0cee37eb7f95c049d88406cb11b96518e310ec7f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_placement_panneau.mjs"
+empreinte = "89c3c5b120c1b737a771c302ef0d2d0b3437e1224fcc355308428abcfc6230a8"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_protocole_editorial.py"
+empreinte = "29615b034ae423fc0944aa0d5a1728df5ef35922e58e3b4e0086a3190f2dc7e4"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_rapporter_mesure_grilles.py"
+empreinte = "974d37d0e3d7ffd07d4b9acd49ac1cd20626c07c0343e98de273047e220cd878"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_registre_relecture.py"
+empreinte = "7897d231bb42ba12aef98b6e71a76816c437aecced3bf4a046a6eb4f25838f84"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_reproductibilite_artefacts.py"
+empreinte = "b60ad2038873958d9ad3d187f6250245ac9a17f1800865d8712462a728c57534"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_separation_contenus.py"
+empreinte = "c1592d16fb2dc7b7505dd035004b7b78525186c05c07d1817be6cc579512abfc"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_sources_refusees.py"
+empreinte = "bcd2f936f6c59c8582f982ba839a68c2f99d9a2ab5551db8db99ef8bb2a4b491"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_test_cache_css_ia.mjs"
+empreinte = "7aaed65cb65d584cce60973bdcfd862387d97ef9be535d5e5f2b6710190ff8a2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_test_experience.mjs"
+empreinte = "75350a8f14e536b159f21e89328c511e6ce63279a9de7ab60e5cb6b8264cfe80"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_accessibilite.mjs"
+empreinte = "cdcba7f031192cfcdf308964b3acbad7d5486cb5aa3f23a95ad972b420d2a70f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_decision_prospective.py"
+empreinte = "39a6bce8e3d9d46b05a36c3569b7b4792c90cea959a4aefb442d25472dcfda96"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_feuille_servie.py"
+empreinte = "a9b6d352d1ae0b29c020be54f6918bf5fec2dadc79c14bd6ca301db12ef0a780"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_fiches_statistiques.mjs"
+empreinte = "70a300da2d2a1ed2c78417dc1391d6fabb1b906952824ebd8dc815917a33c5fd"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_inventaire_controles.py"
+empreinte = "b19329fc141533e79af4b3c1733cea7feadbcede702c556c17141f974ffc2dde"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_maj_amont.py"
+empreinte = "673d9e63184679d93352c3228181a632ae1249cf601a170050ae6e0ecdacbeb0"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_mutation_graphismes.py"
+empreinte = "911effeb7d817691b81fb0932fa865b6bc64e776d791782ee7b5ea9bbca35d73"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_plan_eva.py"
+empreinte = "aae694ffb2c94235315c564109f6dd1677ba18af97374e0c1735ec2fa21bb8ff"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_publication.py"
+empreinte = "18debc48730ade7d4563f770d356e51befc4752a326a2f48393b5a466227e6bb"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_resilience_statutaire.py"
+empreinte = "ae40e7f5e8087e7f0716299932589f6fd6b1758c9b792f99d5166659a98cab22"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_source_distante.py"
+empreinte = "5bd59c25581d1f4a02411eb61690ec24f4ef0e22e03f70800a85e9012bf83323"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_taux_dates.py"
+empreinte = "33dc026d6088a854af898b77b6f4ff7d9c95cf9cf90e8be059e3521d58ffa0fa"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_vote_distanciel.py"
+empreinte = "714d3bfc8e2000a1e943c44740db8dd1f576fc0e1675f11c87f54236ac978805"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_verifier_workflows.py"
+empreinte = "1e25e663a68d09ac098c553347db36e85a7eba0bd2870d41613998f380e88b78"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/test_version_css_ia.py"
+empreinte = "3c5b6f83af1dafac277d65d688cbbef4635c4ba28701b5b3b541e52321d65bb5"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-accessibilite.cjs"
+empreinte = "676151e79822eb4d4867ce7e3d060c67b171559508a0bd223f1133df71235f9d"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-affichages.py"
+empreinte = "acd119e117afbd7a9423f952c20cc44d8733506b02eec4a166f4aebb057e3a36"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-apparences.py"
+empreinte = "750ba613cc8e476f789466ae36c4f57132148bb9f2b7d206b6fe0b82804a4ca7"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-budgets-visuels.py"
+empreinte = "35028845d177be17c6b2fca44059e1b4b7c7255bc10da0e6fc28495e42780826"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-decision-prospective.py"
+empreinte = "1d40eab8fa4105f0e77c47918507b88bfb41b41eb42ec690b86e5a15f91d9278"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-feuille-servie.py"
+empreinte = "618e341ec428a4aefa247b4851722b0755d6f759c3ca6823e62925f91b86dba8"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-fiches-statistiques.cjs"
+empreinte = "5a5786259dba1bab75054b866dfb639e39b07bce12ee82b1eb3441e051ee81db"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-fichiers-servis.py"
+empreinte = "ffbaaeee1c00189e4026d4e48ebea646fa90920e0eabc96bd8360297b1e6d686"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-fusions.py"
+empreinte = "7dcedfa21c381d6b3104589bb4921e74d05d85d4e1ada47ad8c140059e8c7bc3"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-graphismes.cjs"
+empreinte = "27711c8689352fffadc4b726b7bba1a55c69e20ddcfdd5800126361e3ab723a3"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-integration.py"
+empreinte = "a05d689abca5c635e973b6c9c7f4d42a9044705e8804eddaa41ed13330933001"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-inventaire-controles.py"
+empreinte = "eb96d5abbcb5974dcce622a91352ec5ec84a52173f425969e4117a879940798e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-maj-amont.py"
+empreinte = "e3ae50836736d99499dcd529112f5d006076a645e5245eeee4ca09b8b5baee59"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-mutation-graphismes.py"
+empreinte = "9a57bd145f3eb4e0bb75383e121b435343f88a4c1369a98e35d32aed2a52df27"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-plan-eva.py"
+empreinte = "1251dd424b4460abb44b836dfb7cf8a37fd954094296ce9929f16bc101c12aab"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-planches-statuts.py"
+empreinte = "cfbe34c724c272f6b4405f14bf03c2769f1ed3942bde9c6906e875809e5648f2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-poids-pages.py"
+empreinte = "a422d9123eaa84ca6ec1a52ef103511209329d773ad18b97c89db85cafc49d88"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-publication-locale.py"
+empreinte = "59866c4358d4bd2b16dffd7951374ac36f32831e4a1df9d7dbc961574cc4a1ec"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-publication.py"
+empreinte = "b229704b96a08818909180f60dd49e599f3b75800b7e76a19cf85732c0952ac2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-rd-continue.py"
+empreinte = "f64e486cf6c1ed58f5f68e5d49b6feb7e1f8a35780a56e83518859c58b928658"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-relecture-contenus.py"
+empreinte = "84e760cf8c9efdde73de28a76c1fea9388b6e58cf44692d366218535784cf9eb"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-resilience-statutaire.py"
+empreinte = "3aee902499a761b29f6ff2b68d66f7004702a54e00108114859e4205daef5348"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-securite.py"
+empreinte = "4ce1261446a44c4e5057a18497216a2895015a29e693bb0de6ccbcc006f0c998"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-separation-contenus.py"
+empreinte = "eec574d226daa0c4b6e402d614cea5bfd02dad1c44ae84bc46c192ba7a4ebd68"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-site-statique.py"
+empreinte = "5496eb3a3c797246f8123d0b39a0a9f19a09d8186afbac6722ef1b3cf521f7fe"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-source-distante.py"
+empreinte = "85a5060c357c40e0884758d4ecf494b767515934c5d9749ceabfb4263fa1e940"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-taux-dates.py"
+empreinte = "c8491ec0c294686c0f404a0d8863e25349868064f3a032313676c3983af9de03"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-vote-distanciel.py"
+empreinte = "83920190b63c1a45c7343f7b6a81cef118c721c91f875bfb32cdbc47dd4ee856"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/verifier-workflows.py"
+empreinte = "5f2cf9806c98964b0d33c00aaf8016b783a2bc118c92d3923d3bd242106648e4"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/versionner-css-ia.py"
+empreinte = "77801e7d4c78993779cf2cf4b4819d471ffad4b68ecf9c9903d53d5e25638255"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur.html"
+empreinte = "492d0529fb3259c5031b66a35a4af1a482dd06ce866c0fa524d32cce2c8859ba"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/PROVENANCE.json"
+empreinte = "83a3200d6b254551ff8186697b63233dce60f06dd04b9e5c2054d41a752954c2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/__init__.py"
+empreinte = "ee438ba8996bd18c90cc9bc105c778d7bd714717aeabdc39555fe4e43804e68f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/audit_geopolitique.py"
+empreinte = "5b7bea7bda8e8578e07ba14b93df8e657ad4a23c8f0924c0ba477a08c56494b5"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/bulles.py"
+empreinte = "e23c095995a0a524121e421356fdb432b537fcd34004d2d7ce69a2b1679bcb1d"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/clarte.py"
+empreinte = "c6318534e85c1489ca2840214c79ef3a720b9fcd55d73c7cf4ad9dfaab20e243"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/cli.py"
+empreinte = "632c5eaee8a8f15f55a843243a20dc3e53055e18598d3e222344528315e569ff"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/compression.py"
+empreinte = "ba547585bcb52e7a0a27d211cf4b68a0559d93127f4ae91a11f0d125263c1a9c"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/conseil.py"
+empreinte = "dbf44495b542fea50cb05054d3620cab50cec9dcdbc9d55875df0ce6266dfbb9"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/dashboard.py"
+empreinte = "da9492b74ee742d7fedfab033f010d06ef32c2164e6cc636fb5971417f5f7cd3"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/domaines.py"
+empreinte = "a08c813421e7b4ca8ee595ac7fc71bd1527c15e7b4a4ea6964b200cc89a86fee"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/donnees_live.py"
+empreinte = "a9f5dedb63e5f409038edc9330d66c1959837e367b834bceeeb5d46389e419d0"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/fichiers.py"
+empreinte = "0963ee94badd51873d873fa06024109dabffd0089ed9c6c5ea2e64ba73beb9b1"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/geopolitique.py"
+empreinte = "7e3935ec4bb26880a120e47d3e93c6725cc6f65c0d24edd90e1193383a69ef1f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/geopolitique_annuelle.py"
+empreinte = "a39c8aa26519fe3d86c6765d520096e225fb245ad3a900c5bad397010620d02e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/import_ucdp.py"
+empreinte = "9d86d9cb4dbc2b350e9f1f8901309b9d15db22eac3be38185e05bfbe44021def"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/index.html"
+empreinte = "e005523395cad121b6ac12056c4e45710d289458f9881cef9620e82c9571c28b"
+etat = "reference-initiale"
+apostrophes = 166
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/interface.py"
+empreinte = "98aa27a6d31123823780dc1b1e451be6dbdf205e600550483bd59d433d1a9728"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/laboratoire.py"
+empreinte = "ef3eee9d64022e6af8d0984677ffb5c291e52e15aa89e140746609775f9a6f00"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/lexique.py"
+empreinte = "460e1976568c78496ba81cea42b3a30df3187b2e480aa8782053dbd1256e0599"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/marches.py"
+empreinte = "a63d4d0d4249ad9ba7b1af2a82ba73a1a26656a69c416b3e60694617ffa6db74"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/model.py"
+empreinte = "ebd8ae7c3d132ea722195cdc43019b78ba49ca4896a447f74c78ac6f0f804c84"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/moteur.py"
+empreinte = "61e792e962d6bc66761e78ec0e10baea2b67b41be8f62f40be20b8e4f49fad8f"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/moteur_parametrique.py"
+empreinte = "c17c27953c3a9c4bf8a39409f8223709a2c6a06df61e53fbadc99b02fbd23467"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/observatoire.py"
+empreinte = "ca4849812957d8a0315ab2b110574bd1e29c9bf1cbb28921eaf35394e2fa43d1"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/parametres.py"
+empreinte = "1d1f876fad9fc5892bb33e9a2f1feee4365807d485fb697f938ca535006de4a7"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/pont_api.py"
+empreinte = "fdfe5736b01a53578b0dcd7427a8a223dc08129cd326e1c6d67b5ad6a6c03858"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/reglements_lois.py"
+empreinte = "816f23cd8e0cfc2251780dd9090942be45a185ea9c10470040bc1818d49e8137"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/scenarios.py"
+empreinte = "819df23e381fe819406b6e9177fd6db3c1ed11ded06919d9c68714592462c3bb"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/seuils.py"
+empreinte = "999acbacafa1aa4150432713b3af1afc800042178636d9e804174f5f856b2a71"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/validation_temporelle.py"
+empreinte = "8ac93d43af309af2c90816b9148514ed1cf61b184b049443a363a129619b6033"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "simulateur/wsgi.py"
+empreinte = "9b98593b7ff430d75576b3730fd161dca95fcb189ddec315c8e5f39ed6d72903"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "sitemap.xml"
+empreinte = "1fe0d0a61955f024f5c312cb62c35bfa4da77342b229fe073775033ebcdbd6b2"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "transparence.html"
+empreinte = "a6dfa35c2de34504aaaccf2c09c67cb1d592e4fedca37d4138bc77cf2335f046"
+etat = "reference-initiale"
+apostrophes = 1
+date_reference = 2026-11-09
+
+[[unite]]
+chemin = "vercel.json"
+empreinte = "2de1e2de337e6200821d7e751078b6a58fe5e2e270887f907db8f125845d6212"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-09

@@ -1,0 +1,11 @@
+id = mdn-prefers-reduced-motion
+url = https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion
+date = 2026-11-07
+empreinte = 799678397c11e5f6a3f26b34bd236f5d24494365f44b67329e265d09466d1e0e
+---
+The prefers-reduced-motion CSS media feature is used to detect if a user has enabled a setting on their device to minimize the amount of non-essential motion. The setting is used to convey to the browser on the device that the user prefers an interface that removes, reduces, or replaces motion-based animations.
+
+reduce: Indicates that a user has enabled the setting on their device for reduced motion. The reduce keyword value evaluates as true.
+no-preference: Indicates that a user has made no preference known on the device. This keyword value evaluates as false.
+
+Animations such as scaling or panning large objects can be vestibular motion triggers.

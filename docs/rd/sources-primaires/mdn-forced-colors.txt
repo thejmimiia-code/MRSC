@@ -1,0 +1,12 @@
+id = mdn-forced-colors
+url = https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/forced-colors
+date = 2026-11-07
+empreinte = 8b704acd1a7d3e0cf1ac943542fd80d3ec0d02d87b756f6b70bcc9181d9a3d24
+---
+The forced-colors CSS media feature is used to detect if the user agent has enabled a forced colors mode where it enforces a user-chosen limited color palette on the page. An example of a forced colors mode is Windows High Contrast mode.
+
+In forced colors mode, the values of the following properties are treated as if they have no author-level values specified. That is, browser-specified values are used instead. These browser-specified values are selected from the set of system colors — this ensures a consistent contrast for common UI elements for users that have forced colors enabled.
+
+Additionally the following properties have special behavior in forced colors mode: box-shadow is forced to 'none'; text-shadow is forced to 'none'; background-image is forced to 'none' for values that are not url-based; color-scheme is forced to 'light dark'.
+
+In general, web authors should not be using the forced-colors media feature to create a separate design for users with this feature enabled. Instead, its intended usage is to make small tweaks to improve usability or legibility.

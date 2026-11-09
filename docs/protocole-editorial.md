@@ -96,6 +96,12 @@ L’étape correspondante est `outils/verifier-relecture-contenus.py`, câblée 
 
 Cette étape **n’écrit jamais** dans `docs/apprentissage/relectures.toml`, qui reste le seul registre des relectures humaines et ne doit pas être pré-rempli par un agent. Elle ne promeut aucune fiche, n’embellit aucun statut et ne transforme pas un prototype en contenu validé. Le prototype `outils/confronter-sources.py` reste hors de la porte de publication : un relevé lexical automatique n’est pas une validation. La personne peut toujours valider visuellement un placement, un style ou une construction ; on ne lui demande pas de lire le registre pour « valider » à sa place.
 
+### Toutes les éditions passent par la relecture d’agent
+
+Le 9 novembre 2026, la consigne a été que ce soit fait **automatiquement lors de toutes éditions**, pour « avoir toujours du contenu qui soit propre, pro et sourcé sans erreurs ». La sentinelle `outils/relire-contenus.py` tient une empreinte SHA-256 de chaque fichier texte du dépôt (`docs/rd/empreintes-contenus.toml`) : un fichier nouveau, disparu ou modifié sans `[[edition]]` datée dans `docs/rd/editions-relecture.toml` fait échouer la porte. Elle est lancée par un workflow dédié sur chaque `push` de chaque branche, par chaque proposition, par la CI principale et par le crochet `pre-commit` ; elle rejoue à chaque fois les liens, les ancres, les TOML, la typographie, les extraits de sources primaires mis en cache, leur fraîcheur et l’absence d’écriture dans `relectures.toml`. Le détail et les limites sont dans [`docs/rd/relecture-automatique.md`](rd/relecture-automatique.md).
+
+L’automatisation **ne juge pas la vérité** d’une phrase et ne remplace ni une relecture humaine consignée, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Elle rend l’étape obligatoire : `--appliquer` n’est signé qu’après lecture effective par l’agent, avec sources primaires datées ou mesure interne reproductible, constat et limites. Le corpus existant reste une dette de relecture de fond écrite noir sur blanc dans le manifeste ; il n’est pas déclaré validé. La personne garde la validation du rendu à l’oeil et n’a aucun registre à lire.
+
 ## 6. Méthode de production et d’entretien
 
 Suivre les étapes ci-dessous et consigner les décisions importantes dans le portefeuille ou le journal R&D, plutôt que d’ajouter une procédure différente à chaque page.
