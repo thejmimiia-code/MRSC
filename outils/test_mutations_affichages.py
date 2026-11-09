@@ -256,6 +256,30 @@ MUTATIONS = (
         ".nav-toggle:hover,\n.customize-settings > summary:hover,\n",
         "ne sont plus portés par une seule règle",
     ),
+    # 9 novembre 2026 : les collages de l'ouverture de l'accueil n'étaient pas
+    # des coquilles. Trois causes mesurées, trois corrections, trois mutations
+    # pour qu'un futur lot ne les défasse pas sans que la porte le dise.
+    (
+        "gras de l'ouverture remis en bloc",
+        "assets/css/site.css",
+        "  display: inline; color: var(--navy-ink); font-weight: 700;",
+        "  display: block; color: var(--navy-ink); font-weight: 700;",
+        "n'est plus remis dans la ligne",
+    ),
+    (
+        "ouverture de l'accueil de nouveau découpée en phrases",
+        "assets/js/site.js",
+        '      if (bloc.closest(".home-hero-civic")) return;\n',
+        "",
+        "de nouveau découpée en blocs",
+    ),
+    (
+        "repères chiffrés repassés en grille auto-fit",
+        "assets/css/site.css",
+        "  display: flex;\n  flex-wrap: wrap;\n  gap: .6rem;",
+        "  display: grid;\n  grid-template-columns: repeat(auto-fit,minmax(min(190px,100%),1fr));\n  gap: .6rem;",
+        "ne sont plus une bande souple",
+    ),
 )
 
 

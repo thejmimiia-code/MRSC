@@ -1614,6 +1614,49 @@ def controler_boutons_entete_identiques() -> list[str]:
     return erreurs
 
 
+def controler_ouverture_accueil() -> list[str]:
+    """L'ouverture de l'accueil garde ses phrases et ses gras dans la ligne.
+
+    Le 9 novembre 2026, la personne a signalé une présentation peu
+    professionnelle avec des collages à la copie (« compréhensibles.Ce »,
+    « différent :des fiches pour », « publique.Vous »). Trois causes ont été
+    mesurées dans le rendu, aucune n'était une coquille : la règle globale
+    `main p > strong:first-child` mettait le gras en bloc, le découpage en
+    `span.phrase` de `site.js` supprimait les espaces entre phrases, et une
+    grille `auto-fit` laissait le repère « 0 » seul dans une demi-carte.
+    """
+    erreurs: list[str] = []
+    css = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+    js = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+
+    gras = re.search(
+        r"\.home-hero-civic\s+\.hero-copy\s*>\s*p\s*>\s*strong:first-child\s*\{[^}]*display:\s*inline",
+        css,
+    )
+    if not gras:
+        erreurs.append(
+            "site.css — le gras de l'ouverture de l'accueil n'est plus remis dans la ligne : "
+            "`main p > strong:first-child` le coupe à nouveau du reste de la phrase"
+        )
+
+    _, _, decoupage = js.partition("Chaque phrase de contenu")
+    if 'if (bloc.closest(".home-hero-civic")) return;' not in decoupage:
+        erreurs.append(
+            "site.js — l'ouverture de l'accueil est de nouveau découpée en blocs `.phrase` : "
+            "les phrases se recollent à la copie"
+        )
+
+    # Ancrer en début de ligne : la règle composée `.home-hero-civic
+    # .home-hero-facts { gap: … }` ne décide pas de la bande.
+    bande = re.search(r"(?m)^\.home-hero-facts\s*\{([^}]*)\}", css)
+    if not bande or "flex-wrap: wrap" not in bande.group(1):
+        erreurs.append(
+            "site.css — les repères chiffrés de l'accueil ne sont plus une bande souple : "
+            "la carte « 0 » redevient orpheline"
+        )
+    return erreurs
+
+
 CONTROLES = (
     ("tailles de texte", controler_tailles_de_texte),
     ("cibles tactiles", controler_cibles_tactiles),
@@ -1633,6 +1676,7 @@ CONTROLES = (
     ("pied de page et copie imprimée", controler_pied_de_page),
     ("lecture à voix haute", controler_lecture_a_voix_haute),
     ("espacement du texte (WCAG 1.4.12)", controler_espacement_du_texte),
+    ("ouverture de l'accueil sans collage", controler_ouverture_accueil),
 )
 
 

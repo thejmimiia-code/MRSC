@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 99 |
+| Avancées consignées | 100 |
 | Période couverte | du 2026-10-20 au 2026-11-09 |
 | Contrôles exécutables cités | 113 |
 | Initiatives du portefeuille concernées | 16 |
@@ -2365,6 +2365,32 @@ Initiatives liées : `coherence-textes-publics`, `coordination-de-tous-les-agent
 **Suite.** Faire relire les six choix par l'association ; étendre les thèmes au simulateur via son générateur si le choix est retenu ; arbitrer un script de démarrage en en-tête ; corriger la sonde d'affichage avec un banc qui exécute réellement le filtre des décors.
 
 Initiatives liées : `direction-artistique-motion`, `optimisation-du-site`.
+
+### `un-collage-a-la-copie-est-un-defaut-de-rendu-pas-une-coquille` — Un collage à la copie est un défaut de rendu, pas une coquille
+
+*Consignée le 2026-11-09.*
+
+**Constat.** Le 9 novembre 2026, la présentation de l’ouverture de l’accueil a été jugée « pas vraiment profesionnel », avec trois collages cités : « compréhensibles.Ce », « différent :**des fiches**pour » et « publique.Vous ». Le réflexe aurait été de corriger le HTML. La mesure dans Chromium 153 a montré trois causes distinctes : `main p > strong:first-child { display: block; }` s’applique aussi quand une phrase commence par du texte avant son gras ; le découpage en `<span class="phrase">` de `site.js` remplace les paragraphes sans conserver l’espace entre phrases ; et une grille `auto-fit` à 190 px laisse le troisième repère chiffré seul dans une demi-carte. S’y ajoutaient un H1 sur six lignes (80 px, `max-width: 20ch`), une colonne de 1 791 px et des graisses `550`/`650` arrondies en gras par la police système.
+
+**Ce que cela change.** L’ouverture est reprise : association loi 1901 en introduction courte, trois ressources en liste aérée, documents officiels et contact en phrases distinctes, label « Repères recalculés depuis les registres », H2 « Trois ressources et un chantier en cours. » (quatre entrées conservées dans l’encadré). Le titre passe à `26ch` et `clamp(2.2rem, 3.8vw, 3.5rem)` : 542 → 247 px de haut, six → quatre lignes réelles. Le gras est remis dans la ligne pour le seul hero, les graisses redescendent à 400, l’encadré s’aligne en haut et les trois repères forment une bande `flex-wrap` sans carte orpheline, avec une règle explicite pour le mode « Lecture ». `site.js` exempte `.home-hero-civic` du découpage en phrases, sans toucher au reste du site. Un 19e garde-fou dans `verifier-affichages.py` tient les trois corrections et trois mutations de plus dans son banc prouvent qu’il mord. Quatre unités sont signées par la sentinelle de relecture, nature `mesure-interne`.
+
+**Preuves dans le dépôt :**
+
+- `index.html`
+- `assets/css/site.css`
+- `assets/js/site.js`
+- `outils/verifier-affichages.py`
+- `outils/test_mutations_affichages.py`
+- `docs/rd/editions-relecture.toml`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py && python3 outils/verifier-integration.py && python3 outils/verifier-site-statique.py && python3 outils/verifier-budgets-visuels.py && python3 outils/relire-contenus.py`
+
+**Limite — ce que cela ne prouve pas.** Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes : la personne s’est réservé le jugement du rendu à l’oeil. Les mesures couvrent cinq largeurs et huit réglages sur Chromium 153 seulement ; aucun autre navigateur, aucun lecteur d’écran. Les faits (107 fiches, 15 domaines, 26 + 81, 100+ leviers, 5 échelons, 20 domaines, zéro compte) sont recalculés depuis les registres, pas relus dans leur fond ; la dette de relecture initiale du corpus reste consignée. Le grand visuel garde son plafond de 700 px contrôlé par la porte d’affichage, et un vide subsiste sous l’encadré à droite : deux choix de composition non tranchés. Rien n’est publié : la branche de travail et sa proposition de contrôle ne modifient pas le site en ligne.
+
+**Suite.** Laisser la personne juger le rendu à l’oeil ; si elle le demande, arbitrer la place du grand visuel et le vide sous l’encadré, puis seulement publier. Ne pas étendre l’exemption du découpage en phrases à d’autres pages sans mesure préalable.
+
+Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 
 ### `une-edition-non-relue-ne-peut-plus-etre-publiee` — Une édition non relue ne peut plus être publiée
 

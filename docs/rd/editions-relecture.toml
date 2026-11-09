@@ -228,3 +228,111 @@ sources = []
 mesures = ["outils/verifier-integration.py", "outils/verifier-site-statique.py", "outils/verifier-budgets-visuels.py", "outils/versionner-css-ia.py", "docs/apprentissage/catalogue.toml", "simulateur/parametres.py", "confidentialite.html"]
 constat = "Ouverture de l’accueil reprise après le retour sur la présentation. Les collages ont été mesurés dans Chromium 153 : main p > strong:first-child mettait le gras d’une phrase en bloc, et site.js découpait les paragraphes en span.phrase sans espace entre eux. Le H1 passe de six à quatre lignes réelles, les trois ressources deviennent une liste, les trois repères forment une bande sans carte orpheline et l’encadré s’aligne en haut. Les faits conservés (association loi 1901, 107 fiches dans 15 domaines dont 26 du corpus initial et 81 prototypes, 100+ leviers sur 5 échelons et 20 domaines, zéro compte ni mesure d’audience) sont recalculés depuis le catalogue, le moteur et la notice vie privée par les outils cités en mesures. Aucune affirmation externe nouvelle."
 limite = "Cette relecture porte sur les quatre fichiers de l’ouverture de l’accueil, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette de relecture initiale reste consignée dans le manifeste. Elle ne constitue ni validation humaine du texte, ni expertise de domaine, ni avis juridique, ni essai avec des personnes. Les mesures Chromium couvrent cinq largeurs et huit réglages sur un seul moteur et ne prouvent ni l’accessibilité complète, ni le rendu dans un autre navigateur, ni le professionnalisme du résultat : la personne garde le jugement du rendu à l’œil."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "f340aba01a616f643fbeafd8d1e05795f3fd6833bc7ae905c2fc317859cc2cb9"
+empreinte_apres = "ac0384d3c58881de6e3f817dc401f81a7ca0365a02b63f1d4689d2777e54c431"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-fusions.py", "docs/rd/avancees.toml", "docs/rd/journal.md"]
+constat = "Second temps du lot de l’accueil : la correction des trois collages est désormais tenue par un 19e garde-fou dans verifier-affichages.py, avec trois mutations de plus dans son banc (27 au total) qui retirent séparément le gras en ligne, l’exemption du découpage en phrases et la bande souple des repères ; chacune est refusée en la nommant, et la copie intacte reste verte. L’inventaire des contrôles, le journal et la 100e avancée consignent la cause mesurée, les changements et les limites ; avancees.md, memoire.json, graphe.dot et plan.md sont régénérés par leurs outils puis revérifiés. Aucun fait externe nouveau, aucune URL nouvelle non couverte, aucune écriture dans relectures.toml."
+limite = "Cette relecture porte sur les neuf fichiers d’outillage et de trace du lot, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette initiale reste consignée dans le manifeste. Le garde-fou est statique : il vérifie trois chaînes dans le CSS et le JS, pas le rendu dans un navigateur, et il ne couvre pas toutes les façons de casser l’ouverture. Les mesures Chromium restent limitées à un seul moteur. Ce n’est ni une validation humaine du texte ou du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Rien n’est publié : aucune fusion, aucun déploiement Pages, le site en ligne reste l’état de #284 ; la proposition de contrôle n’attend qu’un jugement à l’oeil."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "3ee2ba33777d4f8c28983752cf4a931179a398bf3377de8c449464ba44ebe36c"
+empreinte_apres = "554fdb89f3482017aa5563c0886ea2820d6749d0ce12e62d98cf8aeacbfcb1ff"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-fusions.py", "docs/rd/avancees.toml", "docs/rd/journal.md"]
+constat = "Second temps du lot de l’accueil : la correction des trois collages est désormais tenue par un 19e garde-fou dans verifier-affichages.py, avec trois mutations de plus dans son banc (27 au total) qui retirent séparément le gras en ligne, l’exemption du découpage en phrases et la bande souple des repères ; chacune est refusée en la nommant, et la copie intacte reste verte. L’inventaire des contrôles, le journal et la 100e avancée consignent la cause mesurée, les changements et les limites ; avancees.md, memoire.json, graphe.dot et plan.md sont régénérés par leurs outils puis revérifiés. Aucun fait externe nouveau, aucune URL nouvelle non couverte, aucune écriture dans relectures.toml."
+limite = "Cette relecture porte sur les neuf fichiers d’outillage et de trace du lot, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette initiale reste consignée dans le manifeste. Le garde-fou est statique : il vérifie trois chaînes dans le CSS et le JS, pas le rendu dans un navigateur, et il ne couvre pas toutes les façons de casser l’ouverture. Les mesures Chromium restent limitées à un seul moteur. Ce n’est ni une validation humaine du texte ou du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Rien n’est publié : aucune fusion, aucun déploiement Pages, le site en ligne reste l’état de #284 ; la proposition de contrôle n’attend qu’un jugement à l’oeil."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "dc58dd9c762155fef55fd29a548b64d17fce5dce5964285cec86b502b1c5c4f8"
+empreinte_apres = "9a1885d4b1875abd0a4360ddc2c9adfc1bfd7b813f689c68be9f8cd33905c3ec"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-fusions.py", "docs/rd/avancees.toml", "docs/rd/journal.md"]
+constat = "Second temps du lot de l’accueil : la correction des trois collages est désormais tenue par un 19e garde-fou dans verifier-affichages.py, avec trois mutations de plus dans son banc (27 au total) qui retirent séparément le gras en ligne, l’exemption du découpage en phrases et la bande souple des repères ; chacune est refusée en la nommant, et la copie intacte reste verte. L’inventaire des contrôles, le journal et la 100e avancée consignent la cause mesurée, les changements et les limites ; avancees.md, memoire.json, graphe.dot et plan.md sont régénérés par leurs outils puis revérifiés. Aucun fait externe nouveau, aucune URL nouvelle non couverte, aucune écriture dans relectures.toml."
+limite = "Cette relecture porte sur les neuf fichiers d’outillage et de trace du lot, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette initiale reste consignée dans le manifeste. Le garde-fou est statique : il vérifie trois chaînes dans le CSS et le JS, pas le rendu dans un navigateur, et il ne couvre pas toutes les façons de casser l’ouverture. Les mesures Chromium restent limitées à un seul moteur. Ce n’est ni une validation humaine du texte ou du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Rien n’est publié : aucune fusion, aucun déploiement Pages, le site en ligne reste l’état de #284 ; la proposition de contrôle n’attend qu’un jugement à l’oeil."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "b1af55091f5b141ce997fd6b4f35910158165a482af5d03a83b34987ffbb5812"
+empreinte_apres = "3639e35e6e463c31f119c7d39d695725d0b039699e2fdb831beb14e080709820"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-fusions.py", "docs/rd/avancees.toml", "docs/rd/journal.md"]
+constat = "Second temps du lot de l’accueil : la correction des trois collages est désormais tenue par un 19e garde-fou dans verifier-affichages.py, avec trois mutations de plus dans son banc (27 au total) qui retirent séparément le gras en ligne, l’exemption du découpage en phrases et la bande souple des repères ; chacune est refusée en la nommant, et la copie intacte reste verte. L’inventaire des contrôles, le journal et la 100e avancée consignent la cause mesurée, les changements et les limites ; avancees.md, memoire.json, graphe.dot et plan.md sont régénérés par leurs outils puis revérifiés. Aucun fait externe nouveau, aucune URL nouvelle non couverte, aucune écriture dans relectures.toml."
+limite = "Cette relecture porte sur les neuf fichiers d’outillage et de trace du lot, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette initiale reste consignée dans le manifeste. Le garde-fou est statique : il vérifie trois chaînes dans le CSS et le JS, pas le rendu dans un navigateur, et il ne couvre pas toutes les façons de casser l’ouverture. Les mesures Chromium restent limitées à un seul moteur. Ce n’est ni une validation humaine du texte ou du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Rien n’est publié : aucune fusion, aucun déploiement Pages, le site en ligne reste l’état de #284 ; la proposition de contrôle n’attend qu’un jugement à l’oeil."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "2813a17ac69c3ceb9f7f6be49773ed241936c04faa46b9e83d23c8b3a1fee505"
+empreinte_apres = "e432d37ecbf87b55c43d9439e0c00121bf0cccc645e2b3d84eed83a62ba7aeda"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-fusions.py", "docs/rd/avancees.toml", "docs/rd/journal.md"]
+constat = "Second temps du lot de l’accueil : la correction des trois collages est désormais tenue par un 19e garde-fou dans verifier-affichages.py, avec trois mutations de plus dans son banc (27 au total) qui retirent séparément le gras en ligne, l’exemption du découpage en phrases et la bande souple des repères ; chacune est refusée en la nommant, et la copie intacte reste verte. L’inventaire des contrôles, le journal et la 100e avancée consignent la cause mesurée, les changements et les limites ; avancees.md, memoire.json, graphe.dot et plan.md sont régénérés par leurs outils puis revérifiés. Aucun fait externe nouveau, aucune URL nouvelle non couverte, aucune écriture dans relectures.toml."
+limite = "Cette relecture porte sur les neuf fichiers d’outillage et de trace du lot, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette initiale reste consignée dans le manifeste. Le garde-fou est statique : il vérifie trois chaînes dans le CSS et le JS, pas le rendu dans un navigateur, et il ne couvre pas toutes les façons de casser l’ouverture. Les mesures Chromium restent limitées à un seul moteur. Ce n’est ni une validation humaine du texte ou du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Rien n’est publié : aucune fusion, aucun déploiement Pages, le site en ligne reste l’état de #284 ; la proposition de contrôle n’attend qu’un jugement à l’oeil."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "c885acc4f1ca2cb0243eb92e4ca3c8beacdfc20d6b24186523d0d2dd4a4b2f72"
+empreinte_apres = "015e8b63dbdcc31d6a3d87eabad882f99fa48bd79b88c47e752b70470584312d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-fusions.py", "docs/rd/avancees.toml", "docs/rd/journal.md"]
+constat = "Second temps du lot de l’accueil : la correction des trois collages est désormais tenue par un 19e garde-fou dans verifier-affichages.py, avec trois mutations de plus dans son banc (27 au total) qui retirent séparément le gras en ligne, l’exemption du découpage en phrases et la bande souple des repères ; chacune est refusée en la nommant, et la copie intacte reste verte. L’inventaire des contrôles, le journal et la 100e avancée consignent la cause mesurée, les changements et les limites ; avancees.md, memoire.json, graphe.dot et plan.md sont régénérés par leurs outils puis revérifiés. Aucun fait externe nouveau, aucune URL nouvelle non couverte, aucune écriture dans relectures.toml."
+limite = "Cette relecture porte sur les neuf fichiers d’outillage et de trace du lot, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette initiale reste consignée dans le manifeste. Le garde-fou est statique : il vérifie trois chaînes dans le CSS et le JS, pas le rendu dans un navigateur, et il ne couvre pas toutes les façons de casser l’ouverture. Les mesures Chromium restent limitées à un seul moteur. Ce n’est ni une validation humaine du texte ou du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Rien n’est publié : aucune fusion, aucun déploiement Pages, le site en ligne reste l’état de #284 ; la proposition de contrôle n’attend qu’un jugement à l’oeil."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "ec283456957cc3bdf1ff1afad025f8cb29c06b51f9132334b92af3ca9afa8ba2"
+empreinte_apres = "a78b6e48dc8e3d8eb571ab32807a4d7e54c581b716c4eabb585f9d7ff4a2b11a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-fusions.py", "docs/rd/avancees.toml", "docs/rd/journal.md"]
+constat = "Second temps du lot de l’accueil : la correction des trois collages est désormais tenue par un 19e garde-fou dans verifier-affichages.py, avec trois mutations de plus dans son banc (27 au total) qui retirent séparément le gras en ligne, l’exemption du découpage en phrases et la bande souple des repères ; chacune est refusée en la nommant, et la copie intacte reste verte. L’inventaire des contrôles, le journal et la 100e avancée consignent la cause mesurée, les changements et les limites ; avancees.md, memoire.json, graphe.dot et plan.md sont régénérés par leurs outils puis revérifiés. Aucun fait externe nouveau, aucune URL nouvelle non couverte, aucune écriture dans relectures.toml."
+limite = "Cette relecture porte sur les neuf fichiers d’outillage et de trace du lot, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette initiale reste consignée dans le manifeste. Le garde-fou est statique : il vérifie trois chaînes dans le CSS et le JS, pas le rendu dans un navigateur, et il ne couvre pas toutes les façons de casser l’ouverture. Les mesures Chromium restent limitées à un seul moteur. Ce n’est ni une validation humaine du texte ou du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Rien n’est publié : aucune fusion, aucun déploiement Pages, le site en ligne reste l’état de #284 ; la proposition de contrôle n’attend qu’un jugement à l’oeil."
+
+[[edition]]
+chemin = "outils/test_mutations_affichages.py"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "0c4b6ab9b06b15476e6baf83e9109c2381d22b63d9064492b066f5a5dfbaeb80"
+empreinte_apres = "13ee71035edad5d9729516adae4d35b23d4572ca6b64a064cd11e148ea1fb751"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-fusions.py", "docs/rd/avancees.toml", "docs/rd/journal.md"]
+constat = "Second temps du lot de l’accueil : la correction des trois collages est désormais tenue par un 19e garde-fou dans verifier-affichages.py, avec trois mutations de plus dans son banc (27 au total) qui retirent séparément le gras en ligne, l’exemption du découpage en phrases et la bande souple des repères ; chacune est refusée en la nommant, et la copie intacte reste verte. L’inventaire des contrôles, le journal et la 100e avancée consignent la cause mesurée, les changements et les limites ; avancees.md, memoire.json, graphe.dot et plan.md sont régénérés par leurs outils puis revérifiés. Aucun fait externe nouveau, aucune URL nouvelle non couverte, aucune écriture dans relectures.toml."
+limite = "Cette relecture porte sur les neuf fichiers d’outillage et de trace du lot, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette initiale reste consignée dans le manifeste. Le garde-fou est statique : il vérifie trois chaînes dans le CSS et le JS, pas le rendu dans un navigateur, et il ne couvre pas toutes les façons de casser l’ouverture. Les mesures Chromium restent limitées à un seul moteur. Ce n’est ni une validation humaine du texte ou du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Rien n’est publié : aucune fusion, aucun déploiement Pages, le site en ligne reste l’état de #284 ; la proposition de contrôle n’attend qu’un jugement à l’oeil."
+
+[[edition]]
+chemin = "outils/verifier-affichages.py"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "acd119e117afbd7a9423f952c20cc44d8733506b02eec4a166f4aebb057e3a36"
+empreinte_apres = "5fe5f5b54d461c362c148028122c6e4e50c5a5c2ca02ca27ccadd434bb009f5f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-fusions.py", "docs/rd/avancees.toml", "docs/rd/journal.md"]
+constat = "Second temps du lot de l’accueil : la correction des trois collages est désormais tenue par un 19e garde-fou dans verifier-affichages.py, avec trois mutations de plus dans son banc (27 au total) qui retirent séparément le gras en ligne, l’exemption du découpage en phrases et la bande souple des repères ; chacune est refusée en la nommant, et la copie intacte reste verte. L’inventaire des contrôles, le journal et la 100e avancée consignent la cause mesurée, les changements et les limites ; avancees.md, memoire.json, graphe.dot et plan.md sont régénérés par leurs outils puis revérifiés. Aucun fait externe nouveau, aucune URL nouvelle non couverte, aucune écriture dans relectures.toml."
+limite = "Cette relecture porte sur les neuf fichiers d’outillage et de trace du lot, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette initiale reste consignée dans le manifeste. Le garde-fou est statique : il vérifie trois chaînes dans le CSS et le JS, pas le rendu dans un navigateur, et il ne couvre pas toutes les façons de casser l’ouverture. Les mesures Chromium restent limitées à un seul moteur. Ce n’est ni une validation humaine du texte ou du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Rien n’est publié : aucune fusion, aucun déploiement Pages, le site en ligne reste l’état de #284 ; la proposition de contrôle n’attend qu’un jugement à l’oeil."
