@@ -269,7 +269,7 @@ MUTATIONS = (
     (
         "ouverture de l'accueil de nouveau découpée en phrases",
         "assets/js/site.js",
-        '      if (bloc.closest(".home-hero-civic")) return;\n',
+        '      if (bloc.closest(".home-hero-civic, .home-association, .association-reperes")) return;\n',
         "",
         "de nouveau découpée en blocs",
     ),
@@ -279,6 +279,37 @@ MUTATIONS = (
         "  display: flex;\n  flex-wrap: wrap;\n  gap: .6rem;",
         "  display: grid;\n  grid-template-columns: repeat(auto-fit,minmax(min(190px,100%),1fr));\n  gap: .6rem;",
         "ne sont plus une bande souple",
+    ),
+    # 9 novembre 2026, second temps : la présentation de l'association était
+    # un bloc de prose et trois cartes inertes, et la page Documents répétait
+    # la même notice deux fois. Quatre façons de défaire le parcours lié.
+    (
+        "présentation de l’association de nouveau découpée en phrases",
+        "assets/js/site.js",
+        '      if (bloc.closest(".home-hero-civic, .home-association, .association-reperes")) return;\n',
+        '      if (bloc.closest(".home-hero-civic")) return;\n',
+        "de nouveau découpée en blocs",
+    ),
+    (
+        "une porte d’entrée de la présentation sans lien",
+        "index.html",
+        '              <a class="home-discover-link" href="apprendre.html#catalogue-fiches">Parcourir les fiches <span aria-hidden="true">→</span></a>\n',
+        '',
+        "n'ont pas toutes un lien explicite",
+    ),
+    (
+        "repères de l’association sans renvoi aux statuts",
+        "index.html",
+        '            <a class="statute-link" href="assets/documents/statuts-2020.pdf" target="_blank" rel="noopener noreferrer">Lire les statuts (PDF)\n',
+        '            <span class="statute-link">Lire les statuts (PDF)\n',
+        "ne renvoient plus aux statuts",
+    ),
+    (
+        "deux notices de documents à nouveau identiques",
+        "documents.html",
+        '              <p>Formulaire distinct pour un don ponctuel, avec les modalités de versement indiquées.</p>',
+        '              <p>Formulaire pour demander à devenir membre, avec les pièces à fournir et la reconnaissance des statuts.</p>',
+        "deux notices de documents sont à nouveau identiques",
     ),
 )
 

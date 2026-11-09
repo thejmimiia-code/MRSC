@@ -1702,10 +1702,12 @@
   racines.forEach((racine) => {
     racine.querySelectorAll("p, li, dd, dt, td, th, figcaption, blockquote, small").forEach((bloc) => {
       if (bloc.closest("nav, pre, code, button, label, summary, form")) return;
-      // L’ouverture de l’accueil reste un texte suivi : le découpage en blocs
-      // `.phrase` y collait les phrases à la copie et isolait les mots en gras.
-      // Le reste du site garde sa présentation phrase par phrase.
-      if (bloc.closest(".home-hero-civic")) return;
+      // L’ouverture de l’accueil et la présentation de l’association
+      // restent des textes suivis : le découpage en blocs `.phrase` y
+      // collait les phrases à la copie et isolait les mots en gras. Les
+      // repères de la page Documents suivent la même règle. Le reste du
+      // site garde sa présentation phrase par phrase.
+      if (bloc.closest(".home-hero-civic, .home-association, .association-reperes")) return;
       if (bloc.querySelector(".phrase")) return;
       const parcours = document.createTreeWalker(bloc, NodeFilter.SHOW_TEXT, {
         acceptNode(noeud) {

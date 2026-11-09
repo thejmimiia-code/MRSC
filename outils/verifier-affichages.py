@@ -1640,7 +1640,7 @@ def controler_ouverture_accueil() -> list[str]:
         )
 
     _, _, decoupage = js.partition("Chaque phrase de contenu")
-    if 'if (bloc.closest(".home-hero-civic")) return;' not in decoupage:
+    if 'if (bloc.closest(".home-hero-civic, .home-association, .association-reperes")) return;' not in decoupage:
         erreurs.append(
             "site.js — l'ouverture de l'accueil est de nouveau découpée en blocs `.phrase` : "
             "les phrases se recollent à la copie"
@@ -1655,6 +1655,66 @@ def controler_ouverture_accueil() -> list[str]:
             "la carte « 0 » redevient orpheline"
         )
     return erreurs
+
+
+def controler_presentation_association() -> list[str]:
+    """Le parcours « découvrir l'association » reste lisible et lié.
+
+    Le 9 novembre 2026, après la refonte de l'ouverture, la section
+    « L'association » de l'accueil était encore un bloc de neuf paragraphes
+    avec trois cartes sans aucun lien, et la page Documents répétait deux fois
+    la même notice. Ce garde-fou tient ce qui a été mesuré : des repères
+    rattachés aux statuts, trois portes d'entrée réellement liées, un texte
+    suivi (pas de `.phrase` collées) et quatre notices distinctes. Il ne juge
+    ni la vérité des statuts ni l'esthétique du rendu.
+    """
+    erreurs: list[str] = []
+    accueil = (RACINE / "index.html").read_text(encoding="utf-8")
+    documents = (RACINE / "documents.html").read_text(encoding="utf-8")
+    js = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+
+    mission = re.search(
+        r'<section class="section home-association" id="mission".*?</section>',
+        accueil,
+        flags=re.DOTALL,
+    )
+    if not mission:
+        erreurs.append(
+            "index.html — la section de présentation de l'association a perdu son point d'ancrage : "
+            "le parcours n'est plus vérifiable"
+        )
+        return erreurs
+    bloc = mission.group(0)
+    if bloc.count('class="home-discover-link"') != 3:
+        erreurs.append(
+            "index.html — les trois portes d'entrée de la présentation n'ont pas toutes un lien explicite : "
+            "la découverte redevient une suite de cartes inertes"
+        )
+    if 'href="assets/documents/statuts-2020.pdf"' not in bloc:
+        erreurs.append(
+            "index.html — les repères de l'association ne renvoient plus aux statuts : "
+            "le fait affiché n'est plus traçable"
+        )
+    if bloc.count("<dt>") != 4:
+        erreurs.append(
+            "index.html — les repères vérifiables de l'association ne sont plus au nombre de quatre"
+        )
+    _, _, decoupage = js.partition("Chaque phrase de contenu")
+    if '.home-association, .association-reperes' not in decoupage:
+        erreurs.append(
+            "site.js — la présentation de l'association est de nouveau découpée en blocs `.phrase` : "
+            "les paragraphes se collent à la copie"
+        )
+    cartes = re.findall(r'<article class="document-card">.*?</article>', documents, flags=re.DOTALL)
+    notices = [re.search(r"<p>(.*?)</p>", carte, flags=re.DOTALL) for carte in cartes]
+    textes = [n.group(1).strip() for n in notices if n]
+    if len(cartes) != 4 or len(textes) != 4 or len(set(textes)) != 4:
+        erreurs.append(
+            "documents.html — deux notices de documents sont à nouveau identiques : "
+            "on ne peut plus savoir ce que l'on ouvre"
+        )
+    return erreurs
+
 
 
 CONTROLES = (
@@ -1677,6 +1737,7 @@ CONTROLES = (
     ("lecture à voix haute", controler_lecture_a_voix_haute),
     ("espacement du texte (WCAG 1.4.12)", controler_espacement_du_texte),
     ("ouverture de l'accueil sans collage", controler_ouverture_accueil),
+    ("parcours de présentation de l'association", controler_presentation_association),
 )
 
 
