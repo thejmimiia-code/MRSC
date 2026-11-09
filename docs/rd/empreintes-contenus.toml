@@ -1328,7 +1328,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/css/site.css"
-empreinte = "9ffb70bba7ef491f3f21a309f3aa0fd756f0d8629d1fd6f12bc10fdbd60d4243"
+empreinte = "22f9aa4d515f6a7e66c62f3bc34b28b9bd261b28c64a30323ff761828b794ba7"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-09
@@ -1377,7 +1377,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/js/site.js"
-empreinte = "1f3ca1b2399a7ae1d738f4db175057270dfde521b209b20a6092ea3293dfb11b"
+empreinte = "d1f342c392520945e0c8da18dd2dcff623970d2f64b703c2cf6f4fd76868d976"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-09
@@ -1650,14 +1650,14 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/avancees.md"
-empreinte = "ac0384d3c58881de6e3f817dc401f81a7ca0365a02b63f1d4689d2777e54c431"
+empreinte = "0e30d1cac975c6729788c0f1554cde5c707f40ca25def834cbcc223c615b31af"
 etat = "relu-par-agent"
 apostrophes = 1240
 date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/avancees.toml"
-empreinte = "554fdb89f3482017aa5563c0886ea2820d6749d0ce12e62d98cf8aeacbfcb1ff"
+empreinte = "716cf4c40f9020cb661eaa682f4bcc1ad3f3a3a0531c56df9be2eee034b82ee1"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-09
@@ -1727,7 +1727,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/graphe.dot"
-empreinte = "9a1885d4b1875abd0a4360ddc2c9adfc1bfd7b813f689c68be9f8cd33905c3ec"
+empreinte = "698b9deac5b1cde809bd21b77ce2ad9d5d092f65f94fad3e9d7c8c2fa220ff96"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-09
@@ -1741,14 +1741,14 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "3639e35e6e463c31f119c7d39d695725d0b039699e2fdb831beb14e080709820"
+empreinte = "49fe388a4e18e221b703586c10352e06903ec7b0042038b2278171e7d54cdbdb"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/plan.md"
-empreinte = "e432d37ecbf87b55c43d9439e0c00121bf0cccc645e2b3d84eed83a62ba7aeda"
+empreinte = "57ea76f233fbee4348546a0714b81f11ae6e089c5bde597e096557b53fe9e1ee"
 etat = "relu-par-agent"
 apostrophes = 72
 date_derniere_relecture = 2026-11-09
@@ -1811,7 +1811,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/inventaire-controles.md"
-empreinte = "015e8b63dbdcc31d6a3d87eabad882f99fa48bd79b88c47e752b70470584312d"
+empreinte = "3a1af8c0525e1768eebe454425c216305af7140fab09fdb6df27cef8f468de50"
 etat = "relu-par-agent"
 apostrophes = 101
 date_derniere_relecture = 2026-11-09
@@ -1825,7 +1825,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "a78b6e48dc8e3d8eb571ab32807a4d7e54c581b716c4eabb585f9d7ff4a2b11a"
+empreinte = "b3b3d224f7ea78b323917648f31961595cf2aad08b37550c51e342d395673ead"
 etat = "relu-par-agent"
 apostrophes = 2405
 date_derniere_relecture = 2026-11-09
@@ -1860,10 +1860,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/paliers-affichage.toml"
-empreinte = "ddecd92cfc1cada62b59c68b106ae5b4ad10f342260b0362bfe33d792274862a"
-etat = "reference-initiale"
+empreinte = "6783f6edf9e128045f00f692260b518af01f283df625a0e7aac19f9a65d3607c"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/plan-statuts-animation.md"
@@ -2266,10 +2266,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "documents.html"
-empreinte = "081d6d3114e4a7f7311453abfc7f7f6ba1ef510533a88b913000f060e482a31a"
-etat = "reference-initiale"
-apostrophes = 5
-date_reference = 2026-11-09
+empreinte = "207b30afc9b4f300c5667e507c0047bbd2eb9c71fe89c38255ad32c5b4d1330d"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "eva.html"
@@ -2280,14 +2280,14 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "ia-societe.html"
-empreinte = "ebc05c7043bc2f516b34b00d8d7420a12f1f634830493fd47a8cd32c00d15628"
+empreinte = "a5d9057d9e4d09fb5491c48660194d6d15d844c4f843282a49229ed41c5fdf00"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "index.html"
-empreinte = "1efc61f8e70b8452bf98b9aa2d1c64227bbeab162aede6fbb45a17c31e0d555a"
+empreinte = "094380913117ea69c5787781f2d474646f3204eab35e4270d5f154ee8e70b8d1"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-09
@@ -2735,7 +2735,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test_mutations_affichages.py"
-empreinte = "13ee71035edad5d9729516adae4d35b23d4572ca6b64a064cd11e148ea1fb751"
+empreinte = "d3a77247b990c9033401c218582888828b205c90bd2563f2af0a51337a52724f"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-09
@@ -3036,7 +3036,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/verifier-affichages.py"
-empreinte = "5fe5f5b54d461c362c148028122c6e4e50c5a5c2ca02ca27ccadd434bb009f5f"
+empreinte = "0a562c11cb65d4e7914bb138c0445cf02a60148172376e27c02525515b246747"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-09

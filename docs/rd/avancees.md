@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 100 |
+| Avancées consignées | 101 |
 | Période couverte | du 2026-10-20 au 2026-11-09 |
 | Contrôles exécutables cités | 113 |
 | Initiatives du portefeuille concernées | 16 |
@@ -2365,6 +2365,32 @@ Initiatives liées : `coherence-textes-publics`, `coordination-de-tous-les-agent
 **Suite.** Faire relire les six choix par l'association ; étendre les thèmes au simulateur via son générateur si le choix est retenu ; arbitrer un script de démarrage en en-tête ; corriger la sonde d'affichage avec un banc qui exécute réellement le filtre des décors.
 
 Initiatives liées : `direction-artistique-motion`, `optimisation-du-site`.
+
+### `la-presentation-de-lassociation-devient-un-parcours` — La présentation de l’association devient un parcours
+
+*Consignée le 2026-11-09.*
+
+**Constat.** Le 9 novembre 2026, la section « L’association » de l’accueil restait un bloc de neuf paragraphes : 1 215 px de haut à 1 440 px, 1 944 px à 390 px, dix phrases découpées en blocs par `site.js` et trois cartes sans aucun lien. La page Documents, pourtant destination du bouton « Découvrir l’association », répétait deux fois la même notice et n’expliquait aucune de ses quatre pièces. Le défaut était de composition et de hiérarchie, pas une coquille.
+
+**Ce que cela change.** L’accueil présente désormais une introduction courte, un lien explicite vers les statuts, quatre repères vérifiables (régime loi 1901, version des statuts, siège, accès sans compte) et trois portes d’entrée réellement liées vers les fiches, le dossier IA et le simulateur. La page Documents reçoit un bandeau « L’association en bref », quatre notices distinctes fondées sur les statuts et les bulletins du dépôt, et une section « Par où continuer ? ». `site.js` exempte ce parcours du découpage en phrases. Un 20e garde-fou dans `verifier-affichages.py` tient les repères, les liens, l’exemption et l’unicité des notices ; quatre mutations supplémentaires (31 au total) prouvent qu’il mord.
+
+**Preuves dans le dépôt :**
+
+- `index.html`
+- `documents.html`
+- `assets/css/site.css`
+- `assets/js/site.js`
+- `outils/verifier-affichages.py`
+- `outils/test_mutations_affichages.py`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py && python3 outils/verifier-integration.py && python3 outils/relire-contenus.py`
+
+**Limite — ce que cela ne prouve pas.** Ce n’est ni une validation humaine du texte ou du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères sont repris des statuts et des bulletins conservés dans le dépôt ; leur validité juridique actuelle n’a pas été vérifiée auprès d’une source externe, et la page renvoie au texte statutaire. Le garde-fou est statique : il vérifie des chaînes et une structure, pas la vérité des faits ni l’esthétique. Mesures sur Chromium 153 uniquement ; un seul moteur. La dette de relecture de fond du corpus reste consignée et `relectures.toml` reste vide.
+
+**Suite.** Laisser la personne juger le rendu publié ; ne pas étendre l’exemption du découpage en phrases à d’autres pages sans mesure préalable ; résorber la dette de relecture par lots datés.
+
+Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 
 ### `un-collage-a-la-copie-est-un-defaut-de-rendu-pas-une-coquille` — Un collage à la copie est un défaut de rendu, pas une coquille
 

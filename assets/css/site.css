@@ -5530,3 +5530,137 @@ html.has-js .site-header .customize-settings-panel .apparence-settings > summary
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 3a9 9 0 0 0 0 18'/%3E%3Ccircle cx='8' cy='9' r='1.4'/%3E%3Ccircle cx='15' cy='8' r='1.4'/%3E%3Ccircle cx='9' cy='15' r='1.4'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 3a9 9 0 0 0 0 18'/%3E%3Ccircle cx='8' cy='9' r='1.4'/%3E%3Ccircle cx='15' cy='8' r='1.4'/%3E%3Ccircle cx='9' cy='15' r='1.4'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
 }
+
+/* Présentation de l'association : un parcours, pas un bloc de prose.
+   Le 9 novembre 2026, la section « L'association » de l'accueil mesurait
+   1 215 px de haut pour 9 paragraphes, 10 phrases découpées en blocs et
+   3 cartes sans aucun lien ; la page Documents répétait deux fois la même
+   notice. Les repères ci-dessous viennent des statuts PDF (articles 1, 1.3,
+   2 et 4) et les trois cartes deviennent de vraies portes d'entrée. Les
+   classes sont partagées par l'accueil et la page Documents ; `site.js`
+   exempte ce parcours du découpage en phrases pour garder un texte suivi.
+   Ni fait externe nouveau, ni statistique recopiée : voir le registre des
+   éditions signées. */
+/* L'introduction s'aligne sur les repères et les cartes : le centrage
+   hérité de `.home-association-intro` décalait le titre de 150 px. */
+.home-association .home-association-intro { margin-inline: 0; }
+.association-intro > p:not(.eyebrow):not(.association-proof) {
+  color: var(--text-soft-2);
+  font-size: clamp(1rem, 1.3vw, 1.08rem);
+  line-height: 1.6;
+}
+.association-intro > p.association-lead {
+  color: var(--ink);
+  font-size: clamp(1.06rem, 1.5vw, 1.18rem);
+  font-weight: 400;
+  line-height: 1.55;
+}
+.association-proof {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .55rem .9rem;
+  margin-top: .9rem;
+  font-size: max(12px, .86rem);
+}
+.association-reperes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: .75rem;
+  margin: 1.6rem 0 0;
+}
+.association-reperes > div {
+  min-width: 0;
+  padding: .85rem 1rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  background: var(--surface-soft);
+}
+.association-reperes dt {
+  color: var(--navy-ink);
+  font-size: max(12px, .78rem);
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.association-reperes dd {
+  margin: .35rem 0 0;
+  color: var(--ink);
+  font-size: max(12px, .9rem);
+  line-height: 1.5;
+}
+.association-reperes dd a { font-weight: 700; }
+html[data-layout="lecture"] .association-reperes { grid-template-columns: minmax(0, 1fr); }
+.association-decouvrir { margin-top: 1.6rem; }
+.home-discover-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  margin-top: auto;
+  padding-top: .7rem;
+  border-top: 1px solid var(--line);
+  color: var(--navy-ink);
+  font-size: max(12px, .9rem);
+  font-weight: 750;
+  text-decoration: none;
+}
+.home-discover-link:hover { color: var(--blue); text-decoration: underline; text-underline-offset: .2em; }
+.home-discover-link > span { color: var(--green); font-size: 1.1rem; }
+.association-suite {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .9rem 1.5rem;
+  margin-top: 1.6rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+}
+.association-suite .hero-actions { margin: 0; }
+.association-suite > p {
+  flex: 1 1 320px;
+  min-width: 0;
+  margin: 0;
+  color: var(--muted);
+  font-size: max(12px, .86rem);
+}
+.association-suite > p a { font-weight: 700; }
+.association-en-bref { padding-block: clamp(2.25rem, 4vw, 3.5rem); }
+.association-en-bref h2 { max-width: 30ch; }
+.association-en-bref-lead { max-width: 72ch; color: var(--text-soft-2); font-size: clamp(1rem, 1.4vw, 1.1rem); }
+.association-en-bref-note { max-width: 78ch; margin-top: 1rem; color: var(--muted); font-size: max(12px, .88rem); }
+.association-en-bref-note a { font-weight: 700; }
+.association-suite-page h2 { max-width: 30ch; }
+.association-suite-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: .75rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.association-suite-grid li {
+  min-width: 0;
+  padding: .9rem 1rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.association-suite-grid a { display: block; font-weight: 750; }
+.association-suite-grid span { display: block; margin-top: .25rem; color: var(--muted); font-size: max(12px, .84rem); }
+.document-note { max-width: 78ch; }
+html.contraste-renforce .association-reperes > div,
+html.contraste-renforce .association-suite-grid li { border-color: currentColor; background: var(--surface); }
+@media (max-width: 520px) {
+  .association-suite .hero-actions { width: 100%; align-items: stretch; }
+  .association-suite .hero-actions .button { width: 100%; }
+}
+@media (forced-colors: active) {
+  .association-reperes > div,
+  .association-suite-grid li {
+    border-color: CanvasText !important;
+    background: Canvas !important;
+    color: CanvasText !important;
+  }
+  .home-discover-link { border-top-color: CanvasText; }
+}

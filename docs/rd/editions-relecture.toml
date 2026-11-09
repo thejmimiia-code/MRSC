@@ -336,3 +336,231 @@ sources = []
 mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-fusions.py", "docs/rd/avancees.toml", "docs/rd/journal.md"]
 constat = "Second temps du lot de l’accueil : la correction des trois collages est désormais tenue par un 19e garde-fou dans verifier-affichages.py, avec trois mutations de plus dans son banc (27 au total) qui retirent séparément le gras en ligne, l’exemption du découpage en phrases et la bande souple des repères ; chacune est refusée en la nommant, et la copie intacte reste verte. L’inventaire des contrôles, le journal et la 100e avancée consignent la cause mesurée, les changements et les limites ; avancees.md, memoire.json, graphe.dot et plan.md sont régénérés par leurs outils puis revérifiés. Aucun fait externe nouveau, aucune URL nouvelle non couverte, aucune écriture dans relectures.toml."
 limite = "Cette relecture porte sur les neuf fichiers d’outillage et de trace du lot, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette initiale reste consignée dans le manifeste. Le garde-fou est statique : il vérifie trois chaînes dans le CSS et le JS, pas le rendu dans un navigateur, et il ne couvre pas toutes les façons de casser l’ouverture. Les mesures Chromium restent limitées à un seul moteur. Ce n’est ni une validation humaine du texte ou du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Rien n’est publié : aucune fusion, aucun déploiement Pages, le site en ligne reste l’état de #284 ; la proposition de contrôle n’attend qu’un jugement à l’oeil."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "9ffb70bba7ef491f3f21a309f3aa0fd756f0d8629d1fd6f12bc10fdbd60d4243"
+empreinte_apres = "22f9aa4d515f6a7e66c62f3bc34b28b9bd261b28c64a30323ff761828b794ba7"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "assets/js/site.js"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "1f3ca1b2399a7ae1d738f4db175057270dfde521b209b20a6092ea3293dfb11b"
+empreinte_apres = "d1f342c392520945e0c8da18dd2dcff623970d2f64b703c2cf6f4fd76868d976"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "ac0384d3c58881de6e3f817dc401f81a7ca0365a02b63f1d4689d2777e54c431"
+empreinte_apres = "0e30d1cac975c6729788c0f1554cde5c707f40ca25def834cbcc223c615b31af"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "554fdb89f3482017aa5563c0886ea2820d6749d0ce12e62d98cf8aeacbfcb1ff"
+empreinte_apres = "716cf4c40f9020cb661eaa682f4bcc1ad3f3a3a0531c56df9be2eee034b82ee1"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "9a1885d4b1875abd0a4360ddc2c9adfc1bfd7b813f689c68be9f8cd33905c3ec"
+empreinte_apres = "698b9deac5b1cde809bd21b77ce2ad9d5d092f65f94fad3e9d7c8c2fa220ff96"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "3639e35e6e463c31f119c7d39d695725d0b039699e2fdb831beb14e080709820"
+empreinte_apres = "8330cc87f6573f4e6c2b273d860bf8610013bc18c59054395bf0283485a76a67"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "e432d37ecbf87b55c43d9439e0c00121bf0cccc645e2b3d84eed83a62ba7aeda"
+empreinte_apres = "57ea76f233fbee4348546a0714b81f11ae6e089c5bde597e096557b53fe9e1ee"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "015e8b63dbdcc31d6a3d87eabad882f99fa48bd79b88c47e752b70470584312d"
+empreinte_apres = "3a1af8c0525e1768eebe454425c216305af7140fab09fdb6df27cef8f468de50"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "a78b6e48dc8e3d8eb571ab32807a4d7e54c581b716c4eabb585f9d7ff4a2b11a"
+empreinte_apres = "2bc350d105ca2771faa59f35e5433c5cf9b1c0918d1bd81cfca237037e131641"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "documents.html"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "081d6d3114e4a7f7311453abfc7f7f6ba1ef510533a88b913000f060e482a31a"
+empreinte_apres = "207b30afc9b4f300c5667e507c0047bbd2eb9c71fe89c38255ad32c5b4d1330d"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "ebc05c7043bc2f516b34b00d8d7420a12f1f634830493fd47a8cd32c00d15628"
+empreinte_apres = "a5d9057d9e4d09fb5491c48660194d6d15d844c4f843282a49229ed41c5fdf00"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "1efc61f8e70b8452bf98b9aa2d1c64227bbeab162aede6fbb45a17c31e0d555a"
+empreinte_apres = "094380913117ea69c5787781f2d474646f3204eab35e4270d5f154ee8e70b8d1"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "outils/test_mutations_affichages.py"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "13ee71035edad5d9729516adae4d35b23d4572ca6b64a064cd11e148ea1fb751"
+empreinte_apres = "d3a77247b990c9033401c218582888828b205c90bd2563f2af0a51337a52724f"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "outils/verifier-affichages.py"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "5fe5f5b54d461c362c148028122c6e4e50c5a5c2ca02ca27ccadd434bb009f5f"
+empreinte_apres = "0a562c11cb65d4e7914bb138c0445cf02a60148172376e27c02525515b246747"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
+constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
+limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "8330cc87f6573f4e6c2b273d860bf8610013bc18c59054395bf0283485a76a67"
+empreinte_apres = "2b73d4406ce718f82f63fddc4ca093a9e74a6df38b5fa42fae2f6cabf514ac44"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/test_paliers_affichage.py", "outils/memoire-eva.py", "docs/rd/journal.md"]
+constat = "Correction de CI : compter-paliers.py a refusé le nouveau bloc à 520 px, car la dette de format augmentait de 2 règles et d'1 bloc. Le registre des paliers est mis à jour avec les comptes réels (9 blocs, 64 règles) et une raison datée : sous 520 px, les deux boutons du parcours de présentation passent chacun sur toute la largeur, mesurés à 320 et 390 px dans Chromium 153. Le journal consigne explicitement que ce n'est pas une avancée de palier. compter-paliers.py --releve et ses 20 tests sont verts ; la mémoire ÉVA est régénérée depuis les sources. Aucun fait externe nouveau, aucune URL externe nouvelle."
+limite = "Ce n'est ni une validation humaine du rendu, ni une expertise de domaine, ni un avis juridique. La dette de format augmente, elle est consignée, pas absorbée ; le registre des paliers ne juge pas la raison. Mesures sur Chromium 153 uniquement. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "2bc350d105ca2771faa59f35e5433c5cf9b1c0918d1bd81cfca237037e131641"
+empreinte_apres = "d0145cea1824c1eb3f904d155b1b5e1b9b8b5c641cdf9d5ded993c3199c17dc0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/test_paliers_affichage.py", "outils/memoire-eva.py", "docs/rd/journal.md"]
+constat = "Correction de CI : compter-paliers.py a refusé le nouveau bloc à 520 px, car la dette de format augmentait de 2 règles et d'1 bloc. Le registre des paliers est mis à jour avec les comptes réels (9 blocs, 64 règles) et une raison datée : sous 520 px, les deux boutons du parcours de présentation passent chacun sur toute la largeur, mesurés à 320 et 390 px dans Chromium 153. Le journal consigne explicitement que ce n'est pas une avancée de palier. compter-paliers.py --releve et ses 20 tests sont verts ; la mémoire ÉVA est régénérée depuis les sources. Aucun fait externe nouveau, aucune URL externe nouvelle."
+limite = "Ce n'est ni une validation humaine du rendu, ni une expertise de domaine, ni un avis juridique. La dette de format augmente, elle est consignée, pas absorbée ; le registre des paliers ne juge pas la raison. Mesures sur Chromium 153 uniquement. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide."
+
+[[edition]]
+chemin = "docs/rd/paliers-affichage.toml"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "ddecd92cfc1cada62b59c68b106ae5b4ad10f342260b0362bfe33d792274862a"
+empreinte_apres = "6783f6edf9e128045f00f692260b518af01f283df625a0e7aac19f9a65d3607c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/test_paliers_affichage.py", "outils/memoire-eva.py", "docs/rd/journal.md"]
+constat = "Correction de CI : compter-paliers.py a refusé le nouveau bloc à 520 px, car la dette de format augmentait de 2 règles et d'1 bloc. Le registre des paliers est mis à jour avec les comptes réels (9 blocs, 64 règles) et une raison datée : sous 520 px, les deux boutons du parcours de présentation passent chacun sur toute la largeur, mesurés à 320 et 390 px dans Chromium 153. Le journal consigne explicitement que ce n'est pas une avancée de palier. compter-paliers.py --releve et ses 20 tests sont verts ; la mémoire ÉVA est régénérée depuis les sources. Aucun fait externe nouveau, aucune URL externe nouvelle."
+limite = "Ce n'est ni une validation humaine du rendu, ni une expertise de domaine, ni un avis juridique. La dette de format augmente, elle est consignée, pas absorbée ; le registre des paliers ne juge pas la raison. Mesures sur Chromium 153 uniquement. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "2b73d4406ce718f82f63fddc4ca093a9e74a6df38b5fa42fae2f6cabf514ac44"
+empreinte_apres = "49fe388a4e18e221b703586c10352e06903ec7b0042038b2278171e7d54cdbdb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/test_paliers_affichage.py", "outils/memoire-eva.py", "docs/rd/journal.md"]
+constat = "Correction de CI : compter-paliers.py a refusé le nouveau bloc à 520 px, car la dette de format augmentait de 2 règles et d'1 bloc. Le registre des paliers est mis à jour avec les comptes réels (9 blocs, 64 règles) et une raison datée : sous 520 px, les deux boutons du parcours de présentation passent chacun sur toute la largeur, mesurés à 320 et 390 px dans Chromium 153. Le journal consigne explicitement que ce n'est pas une avancée de palier, corrige le compte des 14 éditions du lot et ajoute la porte CI franchie. compter-paliers.py --releve et ses 20 tests sont verts ; la mémoire ÉVA est régénérée depuis les sources. Aucun fait externe nouveau, aucune URL externe nouvelle."
+limite = "Ce n'est ni une validation humaine du rendu, ni une expertise de domaine, ni un avis juridique. La dette de format augmente, elle est consignée, pas absorbée ; le registre des paliers ne juge pas la raison. Mesures sur Chromium 153 uniquement. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "d0145cea1824c1eb3f904d155b1b5e1b9b8b5c641cdf9d5ded993c3199c17dc0"
+empreinte_apres = "b3b3d224f7ea78b323917648f31961595cf2aad08b37550c51e342d395673ead"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/test_paliers_affichage.py", "outils/memoire-eva.py", "docs/rd/journal.md"]
+constat = "Correction de CI : compter-paliers.py a refusé le nouveau bloc à 520 px, car la dette de format augmentait de 2 règles et d'1 bloc. Le registre des paliers est mis à jour avec les comptes réels (9 blocs, 64 règles) et une raison datée : sous 520 px, les deux boutons du parcours de présentation passent chacun sur toute la largeur, mesurés à 320 et 390 px dans Chromium 153. Le journal consigne explicitement que ce n'est pas une avancée de palier, corrige le compte des 14 éditions du lot et ajoute la porte CI franchie. compter-paliers.py --releve et ses 20 tests sont verts ; la mémoire ÉVA est régénérée depuis les sources. Aucun fait externe nouveau, aucune URL externe nouvelle."
+limite = "Ce n'est ni une validation humaine du rendu, ni une expertise de domaine, ni un avis juridique. La dette de format augmente, elle est consignée, pas absorbée ; le registre des paliers ne juge pas la raison. Mesures sur Chromium 153 uniquement. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide."
