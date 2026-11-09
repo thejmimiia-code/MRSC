@@ -500,7 +500,7 @@ jobs:
       # écrit que si l'installation réussit.
       - name: Restaurer le navigateur de mesure
         id: cache-navigateur
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ runner.temp }}/mrsc-browser
           key: mrsc-browser-puppeteer-core-25.16.0-sparticuz-chromium-153.0.0
