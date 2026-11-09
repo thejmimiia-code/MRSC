@@ -3659,8 +3659,37 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 
 /* Accueil M.R.S.C : une hiérarchie commune entre mission, ressources et participation. */
 
-.home-hero-civic .hero-grid { align-items: center; }
-.home-hero-civic .hero-title { max-width: 20ch; }
+/* Ouverture revue après le retour sur la présentation. Trois causes mesurées
+   dans le rendu, et non de simples coquilles : `main p > strong:first-child`
+   mettait le gras d'une phrase sur sa propre ligne ; `site.js` découpait chaque
+   paragraphe en blocs `.phrase` sans espace entre eux ; la grille des repères
+   laissait la troisième carte seule sur une ligne. Le hero est donc exempté du
+   découpage en phrases (voir site.js), le gras y reste dans la ligne, et les
+   repères passent en bande souple. Le plafond de 26ch est lu par
+   `verifier-budgets-visuels.py`. */
+.home-hero-civic .hero-grid { align-items: start; }
+.home-hero-civic .hero-title { max-width: 26ch; font-size: clamp(2.2rem, 3.8vw, 3.5rem); }
+.home-hero-civic .hero-copy > p { font-size: clamp(1rem, 1.3vw, 1.1rem); line-height: 1.62; }
+.home-hero-civic .hero-copy > p.home-hero-lede {
+  color: var(--ink); font-size: clamp(1.06rem, 1.5vw, 1.18rem); font-weight: 400;
+}
+.home-hero-civic .hero-copy > p > strong:first-child {
+  display: inline; color: var(--navy-ink); font-weight: 700;
+}
+.home-hero-civic .home-hero-resources {
+  margin: 0 0 1rem; padding-left: 1.4rem;
+  color: var(--text-soft-3); font-size: clamp(1rem, 1.3vw, 1.1rem);
+}
+.home-hero-civic .home-hero-resources li { margin: 0 0 .35rem; line-height: 1.55; }
+.home-hero-civic .home-hero-resources li::marker { color: var(--green); }
+.home-hero-civic .home-hero-resources strong { color: var(--navy-ink); font-weight: 700; }
+.home-hero-civic .hero-copy > p.home-hero-facts-label {
+  margin: 1.1rem 0 .4rem; color: var(--muted);
+  font-size: max(12px, .76rem); font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+}
+.home-hero-civic .home-hero-facts { gap: .5rem; margin-top: 0; }
+.home-hero-civic .home-hero-facts dt { font-size: max(12px, 1.35rem); }
+.home-hero-civic .home-hero-facts dd { font-size: max(12px, .78rem); }
 
 .home-hero-visual {
   position: relative;
@@ -3699,13 +3728,18 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
    moteur du simulateur, jamais recopiés à la main (voir verifier-integration.py). */
 
 .home-hero-facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(min(190px,100%),1fr));
-  gap: .7rem;
+  /* Bande souple : trois cartes sur une ligne quand la colonne le permet, et
+     une carte pleine largeur quand la troisième passe à la ligne. Une grille
+     `auto-fit` laissait le repère « 0 » seul dans une demi-carte orpheline. */
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
   max-width: 660px;
   margin: 1.3rem 0 0;
 }
 .home-hero-facts > div {
+  flex: 1 1 170px;
+  min-width: 0;
   padding: .85rem .95rem;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -3715,13 +3749,13 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
 .home-hero-facts dd { margin: .4rem 0 0; color: var(--muted); font-size: max(12px, .82rem); line-height: 1.45; }
 .home-hero-civic .home-hero-promise {
   margin-top: 1rem;
-  padding: .9rem 1rem;
+  padding: .85rem 1rem;
   border-left: 4px solid var(--green);
   border-radius: 0 10px 10px 0;
   background: var(--surface-veil-faint);
   color: var(--navy-ink);
-  font-size: 1rem;
-  font-weight: 650;
+  font-size: .94rem;
+  font-weight: 400;
 }
 .home-hero-aside {
   padding: clamp(1.25rem,3vw,1.75rem);
@@ -4072,6 +4106,9 @@ html.contraste-renforce .layout-choice.is-selected { background: var(--blue-soft
 /* Lecture : largeur de lecture maîtrisée et composition en colonne. */
 
 html[data-layout="lecture"] { --content: 940px; }
+/* Le mode « Lecture » compose en colonne : les repères suivent, même si la
+   bande est passée en flex pour éviter la carte orpheline. */
+html[data-layout="lecture"] .home-hero-facts > div { flex: 1 1 100%; }
 html[data-layout="lecture"] main :is(
   .join-panel,.document-grid,.link-grid,.contact-grid,.map-layout,
   .home-action-grid,.home-voice-grid,.ai-metric-grid,.ai-forms-grid,.ai-balance-grid,.ai-lives-grid,

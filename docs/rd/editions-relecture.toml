@@ -180,3 +180,51 @@ sources = []
 mesures = ["outils/memoire-eva.py", "docs/rd/journal.md", "docs/rd/avancees.md"]
 constat = "Régénération de l'index ÉVA après les dernières entrées du journal, de la 99e avancée, du protocole éditorial et de la note de méthode : 477 entrées, 287 noeuds, 652 arêtes, corpus de 1 952 953 octets. Le contrôle --verifier est repassé après génération."
 limite = "Cet index est un outil de recherche interne, pas une relecture du fond des documents qu'il pointe ; il ne constitue ni validation humaine, ni expertise, ni avis juridique, ni mesure d'usage."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "923d56540aa970b8ff8cdece549454b4a26a3a1eb19adf72408357eaf3f70073"
+empreinte_apres = "9ffb70bba7ef491f3f21a309f3aa0fd756f0d8629d1fd6f12bc10fdbd60d4243"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-site-statique.py", "outils/verifier-budgets-visuels.py", "outils/versionner-css-ia.py", "docs/apprentissage/catalogue.toml", "simulateur/parametres.py", "confidentialite.html"]
+constat = "Ouverture de l’accueil reprise après le retour sur la présentation. Les collages ont été mesurés dans Chromium 153 : main p > strong:first-child mettait le gras d’une phrase en bloc, et site.js découpait les paragraphes en span.phrase sans espace entre eux. Le H1 passe de six à quatre lignes réelles, les trois ressources deviennent une liste, les trois repères forment une bande sans carte orpheline et l’encadré s’aligne en haut. Les faits conservés (association loi 1901, 107 fiches dans 15 domaines dont 26 du corpus initial et 81 prototypes, 100+ leviers sur 5 échelons et 20 domaines, zéro compte ni mesure d’audience) sont recalculés depuis le catalogue, le moteur et la notice vie privée par les outils cités en mesures. Aucune affirmation externe nouvelle."
+limite = "Cette relecture porte sur les quatre fichiers de l’ouverture de l’accueil, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette de relecture initiale reste consignée dans le manifeste. Elle ne constitue ni validation humaine du texte, ni expertise de domaine, ni avis juridique, ni essai avec des personnes. Les mesures Chromium couvrent cinq largeurs et huit réglages sur un seul moteur et ne prouvent ni l’accessibilité complète, ni le rendu dans un autre navigateur, ni le professionnalisme du résultat : la personne garde le jugement du rendu à l’œil."
+
+[[edition]]
+chemin = "assets/js/site.js"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "d7bda79d2f5bdf8f42469d9b48af169da380a118a500a9ce341c41d1edd508f3"
+empreinte_apres = "1f3ca1b2399a7ae1d738f4db175057270dfde521b209b20a6092ea3293dfb11b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-site-statique.py", "outils/verifier-budgets-visuels.py", "outils/versionner-css-ia.py", "docs/apprentissage/catalogue.toml", "simulateur/parametres.py", "confidentialite.html"]
+constat = "Ouverture de l’accueil reprise après le retour sur la présentation. Les collages ont été mesurés dans Chromium 153 : main p > strong:first-child mettait le gras d’une phrase en bloc, et site.js découpait les paragraphes en span.phrase sans espace entre eux. Le H1 passe de six à quatre lignes réelles, les trois ressources deviennent une liste, les trois repères forment une bande sans carte orpheline et l’encadré s’aligne en haut. Les faits conservés (association loi 1901, 107 fiches dans 15 domaines dont 26 du corpus initial et 81 prototypes, 100+ leviers sur 5 échelons et 20 domaines, zéro compte ni mesure d’audience) sont recalculés depuis le catalogue, le moteur et la notice vie privée par les outils cités en mesures. Aucune affirmation externe nouvelle."
+limite = "Cette relecture porte sur les quatre fichiers de l’ouverture de l’accueil, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette de relecture initiale reste consignée dans le manifeste. Elle ne constitue ni validation humaine du texte, ni expertise de domaine, ni avis juridique, ni essai avec des personnes. Les mesures Chromium couvrent cinq largeurs et huit réglages sur un seul moteur et ne prouvent ni l’accessibilité complète, ni le rendu dans un autre navigateur, ni le professionnalisme du résultat : la personne garde le jugement du rendu à l’œil."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "d24960284df348ebd6cfe68751a5d9067d3e2c7e980b7d658db5ff2c42efaad1"
+empreinte_apres = "ebc05c7043bc2f516b34b00d8d7420a12f1f634830493fd47a8cd32c00d15628"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-site-statique.py", "outils/verifier-budgets-visuels.py", "outils/versionner-css-ia.py", "docs/apprentissage/catalogue.toml", "simulateur/parametres.py", "confidentialite.html"]
+constat = "Ouverture de l’accueil reprise après le retour sur la présentation. Les collages ont été mesurés dans Chromium 153 : main p > strong:first-child mettait le gras d’une phrase en bloc, et site.js découpait les paragraphes en span.phrase sans espace entre eux. Le H1 passe de six à quatre lignes réelles, les trois ressources deviennent une liste, les trois repères forment une bande sans carte orpheline et l’encadré s’aligne en haut. Les faits conservés (association loi 1901, 107 fiches dans 15 domaines dont 26 du corpus initial et 81 prototypes, 100+ leviers sur 5 échelons et 20 domaines, zéro compte ni mesure d’audience) sont recalculés depuis le catalogue, le moteur et la notice vie privée par les outils cités en mesures. Aucune affirmation externe nouvelle."
+limite = "Cette relecture porte sur les quatre fichiers de l’ouverture de l’accueil, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette de relecture initiale reste consignée dans le manifeste. Elle ne constitue ni validation humaine du texte, ni expertise de domaine, ni avis juridique, ni essai avec des personnes. Les mesures Chromium couvrent cinq largeurs et huit réglages sur un seul moteur et ne prouvent ni l’accessibilité complète, ni le rendu dans un autre navigateur, ni le professionnalisme du résultat : la personne garde le jugement du rendu à l’œil."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "b31c9ffbd67d44b60ec4001c23b6c51e7c3eef1ac5fec3b1712fca43979c79a2"
+empreinte_apres = "1efc61f8e70b8452bf98b9aa2d1c64227bbeab162aede6fbb45a17c31e0d555a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-site-statique.py", "outils/verifier-budgets-visuels.py", "outils/versionner-css-ia.py", "docs/apprentissage/catalogue.toml", "simulateur/parametres.py", "confidentialite.html"]
+constat = "Ouverture de l’accueil reprise après le retour sur la présentation. Les collages ont été mesurés dans Chromium 153 : main p > strong:first-child mettait le gras d’une phrase en bloc, et site.js découpait les paragraphes en span.phrase sans espace entre eux. Le H1 passe de six à quatre lignes réelles, les trois ressources deviennent une liste, les trois repères forment une bande sans carte orpheline et l’encadré s’aligne en haut. Les faits conservés (association loi 1901, 107 fiches dans 15 domaines dont 26 du corpus initial et 81 prototypes, 100+ leviers sur 5 échelons et 20 domaines, zéro compte ni mesure d’audience) sont recalculés depuis le catalogue, le moteur et la notice vie privée par les outils cités en mesures. Aucune affirmation externe nouvelle."
+limite = "Cette relecture porte sur les quatre fichiers de l’ouverture de l’accueil, pas sur le fond des 107 fiches, des 81 prototypes, de transparence.html, de la prospective ni de la citation signée : la dette de relecture initiale reste consignée dans le manifeste. Elle ne constitue ni validation humaine du texte, ni expertise de domaine, ni avis juridique, ni essai avec des personnes. Les mesures Chromium couvrent cinq largeurs et huit réglages sur un seul moteur et ne prouvent ni l’accessibilité complète, ni le rendu dans un autre navigateur, ni le professionnalisme du résultat : la personne garde le jugement du rendu à l’œil."

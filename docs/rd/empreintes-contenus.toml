@@ -1328,10 +1328,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/css/site.css"
-empreinte = "923d56540aa970b8ff8cdece549454b4a26a3a1eb19adf72408357eaf3f70073"
-etat = "reference-initiale"
+empreinte = "9ffb70bba7ef491f3f21a309f3aa0fd756f0d8629d1fd6f12bc10fdbd60d4243"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "assets/js/anglais-aventure-data.js"
@@ -1377,10 +1377,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/js/site.js"
-empreinte = "d7bda79d2f5bdf8f42469d9b48af169da380a118a500a9ce341c41d1edd508f3"
-etat = "reference-initiale"
+empreinte = "1f3ca1b2399a7ae1d738f4db175057270dfde521b209b20a6092ea3293dfb11b"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "confidentialite.html"
@@ -2280,17 +2280,17 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "ia-societe.html"
-empreinte = "d24960284df348ebd6cfe68751a5d9067d3e2c7e980b7d658db5ff2c42efaad1"
-etat = "reference-initiale"
+empreinte = "ebc05c7043bc2f516b34b00d8d7420a12f1f634830493fd47a8cd32c00d15628"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "index.html"
-empreinte = "b31c9ffbd67d44b60ec4001c23b6c51e7c3eef1ac5fec3b1712fca43979c79a2"
-etat = "reference-initiale"
+empreinte = "1efc61f8e70b8452bf98b9aa2d1c64227bbeab162aede6fbb45a17c31e0d555a"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "liens-utiles.html"
