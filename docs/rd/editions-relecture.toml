@@ -504,3 +504,63 @@ sources = []
 mesures = ["assets/documents/statuts-2020.pdf", "assets/documents/bulletin-adhesion-2020.pdf", "assets/documents/bulletin-don-2020.pdf", "outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py", "outils/construire-avancees.py", "outils/verifier-integration.py"]
 constat = "Lot de la présentation de l’association : la section « L’association » de l’accueil et la page Documents sont reprises comme un seul parcours. Les faits affichés ont été relus dans les statuts PDF du dépôt (articles 1, 1.3, 2 et 4 : association régie par la loi du 1er juillet 1901, version du 24 mars 2016 modifiée et validée le 2 octobre 2020, siège à Beaurepaire, adhésion ouverte et participation selon les disponibilités) et dans les deux bulletins PDF ; l’annonce du Journal officiel et les trois liens PDF locaux restent à l’identique. Aucune URL externe nouvelle, aucune statistique recopiée, aucun fait présenté comme validé par l’association ou par une expertise externe. Le CSS et le JS partagés sont resynchronisés (version CSS IA 22f9aa4d515f6a7e) ; le 20e garde-fou et ses 4 mutations (31 au total) ont été éprouvés, ainsi que 60 combinaisons navigateur, l’accessibilité axe, les 13 essais navigateur et les portes locales. Journal, 101e avancée, inventaire et mémoire ÉVA régénérés."
 limite = "Relecture d’agent, non validation humaine du texte ni du rendu ; pas d’expertise de domaine, pas d’avis juridique, pas d’essai avec des personnes. Les statuts et bulletins sont des copies locales : la validité juridique actuelle de leurs mentions, l’exactitude de l’adresse du siège et la situation de l’association ne sont pas vérifiées auprès d’une source externe ; la page renvoie au texte statutaire et le dit. Le garde-fou est statique et ne juge ni la vérité ni l’esthétique. Mesures sur Chromium 153 uniquement, un seul moteur ; les constats de densité d’image à 768 px / dpr 2 sont antérieurs et non corrigés. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide, aucun statut de fiche promu, aucune écriture dans le registre des relectures humaines. Aucune publication avant demande explicite."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "8330cc87f6573f4e6c2b273d860bf8610013bc18c59054395bf0283485a76a67"
+empreinte_apres = "2b73d4406ce718f82f63fddc4ca093a9e74a6df38b5fa42fae2f6cabf514ac44"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/test_paliers_affichage.py", "outils/memoire-eva.py", "docs/rd/journal.md"]
+constat = "Correction de CI : compter-paliers.py a refusé le nouveau bloc à 520 px, car la dette de format augmentait de 2 règles et d'1 bloc. Le registre des paliers est mis à jour avec les comptes réels (9 blocs, 64 règles) et une raison datée : sous 520 px, les deux boutons du parcours de présentation passent chacun sur toute la largeur, mesurés à 320 et 390 px dans Chromium 153. Le journal consigne explicitement que ce n'est pas une avancée de palier. compter-paliers.py --releve et ses 20 tests sont verts ; la mémoire ÉVA est régénérée depuis les sources. Aucun fait externe nouveau, aucune URL externe nouvelle."
+limite = "Ce n'est ni une validation humaine du rendu, ni une expertise de domaine, ni un avis juridique. La dette de format augmente, elle est consignée, pas absorbée ; le registre des paliers ne juge pas la raison. Mesures sur Chromium 153 uniquement. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "2bc350d105ca2771faa59f35e5433c5cf9b1c0918d1bd81cfca237037e131641"
+empreinte_apres = "d0145cea1824c1eb3f904d155b1b5e1b9b8b5c641cdf9d5ded993c3199c17dc0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/test_paliers_affichage.py", "outils/memoire-eva.py", "docs/rd/journal.md"]
+constat = "Correction de CI : compter-paliers.py a refusé le nouveau bloc à 520 px, car la dette de format augmentait de 2 règles et d'1 bloc. Le registre des paliers est mis à jour avec les comptes réels (9 blocs, 64 règles) et une raison datée : sous 520 px, les deux boutons du parcours de présentation passent chacun sur toute la largeur, mesurés à 320 et 390 px dans Chromium 153. Le journal consigne explicitement que ce n'est pas une avancée de palier. compter-paliers.py --releve et ses 20 tests sont verts ; la mémoire ÉVA est régénérée depuis les sources. Aucun fait externe nouveau, aucune URL externe nouvelle."
+limite = "Ce n'est ni une validation humaine du rendu, ni une expertise de domaine, ni un avis juridique. La dette de format augmente, elle est consignée, pas absorbée ; le registre des paliers ne juge pas la raison. Mesures sur Chromium 153 uniquement. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide."
+
+[[edition]]
+chemin = "docs/rd/paliers-affichage.toml"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "ddecd92cfc1cada62b59c68b106ae5b4ad10f342260b0362bfe33d792274862a"
+empreinte_apres = "6783f6edf9e128045f00f692260b518af01f283df625a0e7aac19f9a65d3607c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/test_paliers_affichage.py", "outils/memoire-eva.py", "docs/rd/journal.md"]
+constat = "Correction de CI : compter-paliers.py a refusé le nouveau bloc à 520 px, car la dette de format augmentait de 2 règles et d'1 bloc. Le registre des paliers est mis à jour avec les comptes réels (9 blocs, 64 règles) et une raison datée : sous 520 px, les deux boutons du parcours de présentation passent chacun sur toute la largeur, mesurés à 320 et 390 px dans Chromium 153. Le journal consigne explicitement que ce n'est pas une avancée de palier. compter-paliers.py --releve et ses 20 tests sont verts ; la mémoire ÉVA est régénérée depuis les sources. Aucun fait externe nouveau, aucune URL externe nouvelle."
+limite = "Ce n'est ni une validation humaine du rendu, ni une expertise de domaine, ni un avis juridique. La dette de format augmente, elle est consignée, pas absorbée ; le registre des paliers ne juge pas la raison. Mesures sur Chromium 153 uniquement. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "2b73d4406ce718f82f63fddc4ca093a9e74a6df38b5fa42fae2f6cabf514ac44"
+empreinte_apres = "49fe388a4e18e221b703586c10352e06903ec7b0042038b2278171e7d54cdbdb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/test_paliers_affichage.py", "outils/memoire-eva.py", "docs/rd/journal.md"]
+constat = "Correction de CI : compter-paliers.py a refusé le nouveau bloc à 520 px, car la dette de format augmentait de 2 règles et d'1 bloc. Le registre des paliers est mis à jour avec les comptes réels (9 blocs, 64 règles) et une raison datée : sous 520 px, les deux boutons du parcours de présentation passent chacun sur toute la largeur, mesurés à 320 et 390 px dans Chromium 153. Le journal consigne explicitement que ce n'est pas une avancée de palier, corrige le compte des 14 éditions du lot et ajoute la porte CI franchie. compter-paliers.py --releve et ses 20 tests sont verts ; la mémoire ÉVA est régénérée depuis les sources. Aucun fait externe nouveau, aucune URL externe nouvelle."
+limite = "Ce n'est ni une validation humaine du rendu, ni une expertise de domaine, ni un avis juridique. La dette de format augmente, elle est consignée, pas absorbée ; le registre des paliers ne juge pas la raison. Mesures sur Chromium 153 uniquement. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-09
+auteur = "agent"
+empreinte_avant = "d0145cea1824c1eb3f904d155b1b5e1b9b8b5c641cdf9d5ded993c3199c17dc0"
+empreinte_apres = "b3b3d224f7ea78b323917648f31961595cf2aad08b37550c51e342d395673ead"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/test_paliers_affichage.py", "outils/memoire-eva.py", "docs/rd/journal.md"]
+constat = "Correction de CI : compter-paliers.py a refusé le nouveau bloc à 520 px, car la dette de format augmentait de 2 règles et d'1 bloc. Le registre des paliers est mis à jour avec les comptes réels (9 blocs, 64 règles) et une raison datée : sous 520 px, les deux boutons du parcours de présentation passent chacun sur toute la largeur, mesurés à 320 et 390 px dans Chromium 153. Le journal consigne explicitement que ce n'est pas une avancée de palier, corrige le compte des 14 éditions du lot et ajoute la porte CI franchie. compter-paliers.py --releve et ses 20 tests sont verts ; la mémoire ÉVA est régénérée depuis les sources. Aucun fait externe nouveau, aucune URL externe nouvelle."
+limite = "Ce n'est ni une validation humaine du rendu, ni une expertise de domaine, ni un avis juridique. La dette de format augmente, elle est consignée, pas absorbée ; le registre des paliers ne juge pas la raison. Mesures sur Chromium 153 uniquement. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide."

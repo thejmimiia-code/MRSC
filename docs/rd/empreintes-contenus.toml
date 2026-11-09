@@ -1741,7 +1741,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "8330cc87f6573f4e6c2b273d860bf8610013bc18c59054395bf0283485a76a67"
+empreinte = "49fe388a4e18e221b703586c10352e06903ec7b0042038b2278171e7d54cdbdb"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-09
@@ -1825,7 +1825,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "2bc350d105ca2771faa59f35e5433c5cf9b1c0918d1bd81cfca237037e131641"
+empreinte = "b3b3d224f7ea78b323917648f31961595cf2aad08b37550c51e342d395673ead"
 etat = "relu-par-agent"
 apostrophes = 2405
 date_derniere_relecture = 2026-11-09
@@ -1860,10 +1860,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/paliers-affichage.toml"
-empreinte = "ddecd92cfc1cada62b59c68b106ae5b4ad10f342260b0362bfe33d792274862a"
-etat = "reference-initiale"
+empreinte = "6783f6edf9e128045f00f692260b518af01f283df625a0e7aac19f9a65d3607c"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/plan-statuts-animation.md"
