@@ -26,10 +26,13 @@ sommaire morte. Sans elles, une page qui redeviendrait illisible resterait verte
 
 Ce banc est le plus lent du dépôt : `verifier-integration.py` lance lui-même
 quatre outils et monte un serveur, soit une vingtaine de secondes par exécution.
-Onze fautes couvrent les familles que la porte vérifie elle-même : le périmètre
+Treize cas couvrent les familles que la porte vérifie elle-même : le périmètre
 publié, les chiffres recalculés, la présence des pages, les trois clauses du
-contrôle éditorial et l'ordre de lecture. Les routes HTTP, elles, ont déjà leur
-propre contrôle (`verifier-securite.py`).
+contrôle éditorial et l'ordre de lecture. Deux fautes de plus, plantées le
+10 novembre 2026, éprouvent le retrait demandé de « Ce résumé n’est pas un
+appel aux dons » et de la carte du siège social ; la copie intacte doit rester
+verte. Les routes HTTP, elles, ont déjà leur propre contrôle
+(`verifier-securite.py`).
 
 Usage :
     python3 outils/test_mutations_integration.py
@@ -199,6 +202,37 @@ class TestIntegration(unittest.TestCase):
         resultat = executer(casser)
         self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
         self.assertIn("ancre(s) morte(s)", resultat.stdout)
+
+
+    def test_appel_aux_dons_reintroduit_refuse(self) -> None:
+        """Remettre la phrase retirée doit faire échouer la porte."""
+
+        def revenir(copie: Path) -> None:
+            banc_mutations.muter(
+                copie,
+                "index.html",
+                "Le budget et les besoins précis restent à définir.</p>",
+                "Le budget et les besoins précis restent à définir. Ce résumé n’est pas un appel aux dons.</p>",
+            )
+
+        resultat = executer(revenir)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn("L’accueil ne remet ni l’appel aux dons ni la carte du siège social", resultat.stdout)
+
+    def test_carte_siege_reintroduite_refuse(self) -> None:
+        """Remettre la carte du siège doit faire échouer la porte."""
+
+        def revenir(copie: Path) -> None:
+            banc_mutations.muter(
+                copie,
+                "index.html",
+                "            <dt>Accès au site</dt>",
+                "            <dt>Siège</dt>\n            <dd>Siège social fixé à Beaurepaire — article 1.3 des statuts.</dd>\n          </div>\n          <div>\n            <dt>Accès au site</dt>",
+            )
+
+        resultat = executer(revenir)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn("L’accueil ne remet ni l’appel aux dons ni la carte du siège social", resultat.stdout)
 
 
 if __name__ == "__main__":

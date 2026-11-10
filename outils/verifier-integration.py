@@ -1032,13 +1032,18 @@ def fichiers_du_site() -> None:
                 "Recherche en cours",
                 "Matériel et financements nécessaires.",
                 "Le budget et les besoins précis restent à définir",
-                "Ce résumé n’est pas un appel aux dons",
                 "ne constitue pas une position officielle de l’association",
                 'href="eva.html"',
                 "proposition de présentation (à relire)",
                 "href=\"transparence.html#rd-innovation\"",
             )
         ),
+    )
+    verifier(
+        "L’accueil ne remet ni l’appel aux dons ni la carte du siège social",
+        "Ce résumé n’est pas un appel aux dons" not in accueil
+        and "<dt>Siège</dt>" not in accueil
+        and "Siège social fixé à Beaurepaire" not in accueil,
     )
     eva = (RACINE / "eva.html").read_text(encoding="utf-8")
     eva_texte = unescape(eva)

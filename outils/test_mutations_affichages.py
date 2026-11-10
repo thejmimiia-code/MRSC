@@ -282,7 +282,9 @@ MUTATIONS = (
     ),
     # 9 novembre 2026, second temps : la présentation de l'association était
     # un bloc de prose et trois cartes inertes, et la page Documents répétait
-    # la même notice deux fois. Quatre façons de défaire le parcours lié.
+    # la même notice deux fois. Cinq façons de défaire le parcours lié : la
+    # dernière, ajoutée le 10 novembre 2026, remet la carte du siège social
+    # retirée à la demande de la personne.
     (
         "présentation de l’association de nouveau découpée en phrases",
         "assets/js/site.js",
@@ -310,6 +312,13 @@ MUTATIONS = (
         '              <p>Formulaire distinct pour un don ponctuel, avec les modalités de versement indiquées.</p>',
         '              <p>Formulaire pour demander à devenir membre, avec les pièces à fournir et la reconnaissance des statuts.</p>',
         "deux notices de documents sont à nouveau identiques",
+    ),
+    (
+        "carte du siège social réintroduite dans les repères",
+        "index.html",
+        "            <dt>Accès au site</dt>",
+        "            <dt>Siège</dt>\n            <dd>Siège social fixé à Beaurepaire — article 1.3 des statuts.</dd>\n          </div>\n          <div>\n            <dt>Accès au site</dt>",
+        "la carte du siège social est revenue",
     ),
 )
 
