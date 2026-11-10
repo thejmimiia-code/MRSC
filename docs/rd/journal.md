@@ -2,6 +2,15 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-11-10 — Deux retraits demandés sur la présentation publiée
+
+- **Initiative :** `coherence-textes-publics`, `optimisation-du-site`.
+- **Signal :** « Il faut supprimer "Ce résumé n’est pas un appel aux dons." et aussi la carte qui présente le siège social ». La personne a choisi l’option « Publier en ligne » pour ce lot.
+- **Décision :** retirer du seul `index.html` la phrase finale du paragraphe ÉVA et la carte `<dt>Siège</dt>` des repères de l’association. Il reste trois repères (régime, statuts, accès au site) ; la page Documents, les trois PDF locaux, l’URL du Journal officiel, le CSS, le JS et la dette de paliers ne sont pas touchés. Aucun fait nouveau, aucune URL externe nouvelle.
+- **Contrôles exécutés :** le 20e garde-fou passe de quatre à trois repères et refuse explicitement le retour de la carte ; `verifier-integration.py` ne verrouille plus la phrase et refuse sa réapparition, ainsi que celle de la carte. Une mutation de plus dans `test_mutations_affichages.py` (32 au total) et deux cas de plus dans `test_mutations_integration.py` (13 au total) nomment ces retours. Batterie locale, `relire-contenus.py`, `construire-avancees.py --verifier`, `memoire-eva.py --verifier`, `versionner-css-ia.py --verifier`, `compter-paliers.py --releve` et ses 20 tests, accessibilité axe, 13/13 essais navigateur et mesures Chromium 153 sur les formats d’écran. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés. Les fichiers modifiés sont signés par la sentinelle de relecture.
+- **Limites :** ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique. Le retrait du siège ne corrige pas le statut juridique des mentions restantes : elles viennent toujours des copies locales des statuts et la page renvoie au texte statutaire. Aucun essai avec des personnes, un seul moteur de rendu. La dette de relecture de fond du corpus reste consignée, `relectures.toml` reste vide. Le jugement du rendu reste à l’œil.
+- **Suite :** après fusion, suivre le déploiement Pages, relire les octets servis avec un paramètre de cache, régénérer les captures et consigner les identifiants de runs dans le constat ; ne pas étendre le retrait à d’autres pages sans demande.
+
 ## 2026-11-09 — La présentation de l’association devient un parcours vérifiable
 
 - **Initiative :** `coherence-textes-publics`, `optimisation-du-site`.

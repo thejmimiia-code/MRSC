@@ -10,8 +10,8 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 101 |
-| Période couverte | du 2026-10-20 au 2026-11-09 |
+| Avancées consignées | 102 |
+| Période couverte | du 2026-10-20 au 2026-11-10 |
 | Contrôles exécutables cités | 113 |
 | Initiatives du portefeuille concernées | 16 |
 
@@ -2445,6 +2445,32 @@ Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 **Suite.** À chaque édition, relire le delta, confronter les faits aux sources primaires datées, consigner la `[[edition]]` avec ses limites, puis laisser la personne juger le rendu à l’oeil ; réévaluer la fraîcheur des extraits en revue ; résorber la dette de relecture de fond par lots, sans promouvoir de statut.
 
 Initiatives liées : `coherence-textes-publics`, `coordination-de-tous-les-agents`, `optimisation-du-site`.
+
+### `retraits-demandes-sur-la-presentation-publiee` — Deux retraits demandés sur la présentation publiée
+
+*Consignée le 2026-11-10.*
+
+**Constat.** Le 10 novembre 2026, après la publication du parcours de présentation de l’association, la personne a demandé de supprimer deux éléments visibles sur l’accueil : la phrase « Ce résumé n’est pas un appel aux dons. » dans le paragraphe ÉVA et la carte « Siège » des repères. Le site contenait encore quatre repères, dont un extrait de l’article 1.3 des statuts, et une phrase de mise en garde que la personne ne souhaitait plus voir. Il ne s’agissait pas d’une coquille mais d’un arbitrage éditorial sur ce qui doit rester affiché.
+
+**Ce que cela change.** `index.html` perd la phrase finale du paragraphe ÉVA et la carte `<dt>Siège</dt>` ; il reste trois repères (régime, statuts, accès au site). `verifier-integration.py` retire la phrase de ses chaînes verrouillées et refuse désormais sa réapparition comme celle de la carte. Le 20e garde-fou de `verifier-affichages.py` passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total). Aucun CSS, aucun JS, aucune URL externe, aucun fait nouveau : la dette de paliers reste inchangée. Journal, inventaire, 102e avancée et mémoire ÉVA régénérés ; éditions signées par la sentinelle.
+
+**Preuves dans le dépôt :**
+
+- `index.html`
+- `outils/verifier-integration.py`
+- `outils/test_mutations_integration.py`
+- `outils/verifier-affichages.py`
+- `outils/test_mutations_affichages.py`
+- `docs/rd/journal.md`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py && python3 outils/verifier-integration.py && python3 outils/test_mutations_integration.py && python3 outils/relire-contenus.py && python3 outils/construire-avancees.py --verifier && python3 outils/memoire-eva.py --verifier`
+
+**Limite — ce que cela ne prouve pas.** Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’a pas été vérifiée auprès d’une source externe, et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : il dit qu’elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, `relectures.toml` reste vide. Le jugement du rendu publié reste à l’œil.
+
+**Suite.** Après fusion, suivre le déploiement Pages, relire les octets servis avec un paramètre de cache, régénérer les captures et laisser la personne juger le rendu ; ne pas étendre le retrait à d’autres pages sans demande.
+
+Initiatives liées : `coherence-textes-publics`, `optimisation-du-site`.
 
 ## 3. Ce que ce registre ne dit pas
 

@@ -564,3 +564,147 @@ sources = []
 mesures = ["outils/compter-paliers.py", "outils/test_paliers_affichage.py", "outils/memoire-eva.py", "docs/rd/journal.md"]
 constat = "Correction de CI : compter-paliers.py a refusé le nouveau bloc à 520 px, car la dette de format augmentait de 2 règles et d'1 bloc. Le registre des paliers est mis à jour avec les comptes réels (9 blocs, 64 règles) et une raison datée : sous 520 px, les deux boutons du parcours de présentation passent chacun sur toute la largeur, mesurés à 320 et 390 px dans Chromium 153. Le journal consigne explicitement que ce n'est pas une avancée de palier, corrige le compte des 14 éditions du lot et ajoute la porte CI franchie. compter-paliers.py --releve et ses 20 tests sont verts ; la mémoire ÉVA est régénérée depuis les sources. Aucun fait externe nouveau, aucune URL externe nouvelle."
 limite = "Ce n'est ni une validation humaine du rendu, ni une expertise de domaine, ni un avis juridique. La dette de format augmente, elle est consignée, pas absorbée ; le registre des paliers ne juge pas la raison. Mesures sur Chromium 153 uniquement. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-10
+auteur = "agent"
+empreinte_avant = "0e30d1cac975c6729788c0f1554cde5c707f40ca25def834cbcc223c615b31af"
+empreinte_apres = "5f96387a823c31225b8ba84a062546fed5dcb7432f9c0afce307545a604338f4"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/verifier-integration.py", "outils/test_mutations_integration.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-rd-continue.py", "docs/rd/journal.md"]
+constat = "Retrait éditorial demandé après la publication du parcours de présentation : la phrase « Ce résumé n’est pas un appel aux dons. » et la carte « Siège » sont supprimées du seul index.html. Il reste trois repères (régime, statuts, accès au site). verifier-integration.py ne verrouille plus la phrase et refuse sa réapparition ; le 20e garde-fou passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total) ; verifier-integration.py, ses 13 cas, verifier-affichages.py, ses 32 mutations, construire-avancees.py --verifier, memoire-eva.py --verifier et verifier-rd-continue.py sont verts. Aucun CSS, aucun JS, aucune URL externe nouvelle, aucun fait externe nouveau : la dette de paliers reste inchangée. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés (483 entrées, 292 nœuds, 670 arêtes). Publication choisie explicitement par la personne ; déploiement et relecture des octets servis à confirmer après fusion."
+limite = "Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’est pas vérifiée auprès d’une source externe et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide. Le jugement du rendu publié reste à l’œil."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-10
+auteur = "agent"
+empreinte_avant = "716cf4c40f9020cb661eaa682f4bcc1ad3f3a3a0531c56df9be2eee034b82ee1"
+empreinte_apres = "367eec3b909bedcf0fd18819532a1eada0072cd12630b5f256b584ebe44f93dd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/verifier-integration.py", "outils/test_mutations_integration.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-rd-continue.py", "docs/rd/journal.md"]
+constat = "Retrait éditorial demandé après la publication du parcours de présentation : la phrase « Ce résumé n’est pas un appel aux dons. » et la carte « Siège » sont supprimées du seul index.html. Il reste trois repères (régime, statuts, accès au site). verifier-integration.py ne verrouille plus la phrase et refuse sa réapparition ; le 20e garde-fou passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total) ; verifier-integration.py, ses 13 cas, verifier-affichages.py, ses 32 mutations, construire-avancees.py --verifier, memoire-eva.py --verifier et verifier-rd-continue.py sont verts. Aucun CSS, aucun JS, aucune URL externe nouvelle, aucun fait externe nouveau : la dette de paliers reste inchangée. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés (483 entrées, 292 nœuds, 670 arêtes). Publication choisie explicitement par la personne ; déploiement et relecture des octets servis à confirmer après fusion."
+limite = "Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’est pas vérifiée auprès d’une source externe et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide. Le jugement du rendu publié reste à l’œil."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-10
+auteur = "agent"
+empreinte_avant = "698b9deac5b1cde809bd21b77ce2ad9d5d092f65f94fad3e9d7c8c2fa220ff96"
+empreinte_apres = "d34e440d941ef4a7ab7452abfa0ebe65bccdc08d714f4ebf756ac4c40ff08544"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/verifier-integration.py", "outils/test_mutations_integration.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-rd-continue.py", "docs/rd/journal.md"]
+constat = "Retrait éditorial demandé après la publication du parcours de présentation : la phrase « Ce résumé n’est pas un appel aux dons. » et la carte « Siège » sont supprimées du seul index.html. Il reste trois repères (régime, statuts, accès au site). verifier-integration.py ne verrouille plus la phrase et refuse sa réapparition ; le 20e garde-fou passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total) ; verifier-integration.py, ses 13 cas, verifier-affichages.py, ses 32 mutations, construire-avancees.py --verifier, memoire-eva.py --verifier et verifier-rd-continue.py sont verts. Aucun CSS, aucun JS, aucune URL externe nouvelle, aucun fait externe nouveau : la dette de paliers reste inchangée. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés (483 entrées, 292 nœuds, 670 arêtes). Publication choisie explicitement par la personne ; déploiement et relecture des octets servis à confirmer après fusion."
+limite = "Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’est pas vérifiée auprès d’une source externe et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide. Le jugement du rendu publié reste à l’œil."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-10
+auteur = "agent"
+empreinte_avant = "49fe388a4e18e221b703586c10352e06903ec7b0042038b2278171e7d54cdbdb"
+empreinte_apres = "ef32788d8097075b65c45f02f763973a989863031c0d06d65a3ac826ced6ce9a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/verifier-integration.py", "outils/test_mutations_integration.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-rd-continue.py", "docs/rd/journal.md"]
+constat = "Retrait éditorial demandé après la publication du parcours de présentation : la phrase « Ce résumé n’est pas un appel aux dons. » et la carte « Siège » sont supprimées du seul index.html. Il reste trois repères (régime, statuts, accès au site). verifier-integration.py ne verrouille plus la phrase et refuse sa réapparition ; le 20e garde-fou passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total) ; verifier-integration.py, ses 13 cas, verifier-affichages.py, ses 32 mutations, construire-avancees.py --verifier, memoire-eva.py --verifier et verifier-rd-continue.py sont verts. Aucun CSS, aucun JS, aucune URL externe nouvelle, aucun fait externe nouveau : la dette de paliers reste inchangée. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés (483 entrées, 292 nœuds, 670 arêtes). Publication choisie explicitement par la personne ; déploiement et relecture des octets servis à confirmer après fusion."
+limite = "Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’est pas vérifiée auprès d’une source externe et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide. Le jugement du rendu publié reste à l’œil."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-10
+auteur = "agent"
+empreinte_avant = "57ea76f233fbee4348546a0714b81f11ae6e089c5bde597e096557b53fe9e1ee"
+empreinte_apres = "a642ef9f92165edcbb433d6110e22a97c9a3f4b2fda03f4525c961d52909f11c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/verifier-integration.py", "outils/test_mutations_integration.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-rd-continue.py", "docs/rd/journal.md"]
+constat = "Retrait éditorial demandé après la publication du parcours de présentation : la phrase « Ce résumé n’est pas un appel aux dons. » et la carte « Siège » sont supprimées du seul index.html. Il reste trois repères (régime, statuts, accès au site). verifier-integration.py ne verrouille plus la phrase et refuse sa réapparition ; le 20e garde-fou passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total) ; verifier-integration.py, ses 13 cas, verifier-affichages.py, ses 32 mutations, construire-avancees.py --verifier, memoire-eva.py --verifier et verifier-rd-continue.py sont verts. Aucun CSS, aucun JS, aucune URL externe nouvelle, aucun fait externe nouveau : la dette de paliers reste inchangée. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés (483 entrées, 292 nœuds, 670 arêtes). Publication choisie explicitement par la personne ; déploiement et relecture des octets servis à confirmer après fusion."
+limite = "Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’est pas vérifiée auprès d’une source externe et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide. Le jugement du rendu publié reste à l’œil."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-10
+auteur = "agent"
+empreinte_avant = "3a1af8c0525e1768eebe454425c216305af7140fab09fdb6df27cef8f468de50"
+empreinte_apres = "f38aa65d91bfc0673468679fb9e541e0f01ff7761887f36322324fa2474cbf24"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/verifier-integration.py", "outils/test_mutations_integration.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-rd-continue.py", "docs/rd/journal.md"]
+constat = "Retrait éditorial demandé après la publication du parcours de présentation : la phrase « Ce résumé n’est pas un appel aux dons. » et la carte « Siège » sont supprimées du seul index.html. Il reste trois repères (régime, statuts, accès au site). verifier-integration.py ne verrouille plus la phrase et refuse sa réapparition ; le 20e garde-fou passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total) ; verifier-integration.py, ses 13 cas, verifier-affichages.py, ses 32 mutations, construire-avancees.py --verifier, memoire-eva.py --verifier et verifier-rd-continue.py sont verts. Aucun CSS, aucun JS, aucune URL externe nouvelle, aucun fait externe nouveau : la dette de paliers reste inchangée. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés (483 entrées, 292 nœuds, 670 arêtes). Publication choisie explicitement par la personne ; déploiement et relecture des octets servis à confirmer après fusion."
+limite = "Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’est pas vérifiée auprès d’une source externe et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide. Le jugement du rendu publié reste à l’œil."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-10
+auteur = "agent"
+empreinte_avant = "b3b3d224f7ea78b323917648f31961595cf2aad08b37550c51e342d395673ead"
+empreinte_apres = "97979cd90c92accae6fdcace6659b363f221bad2feb17afcf1750afa2f398fb2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/verifier-integration.py", "outils/test_mutations_integration.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-rd-continue.py", "docs/rd/journal.md"]
+constat = "Retrait éditorial demandé après la publication du parcours de présentation : la phrase « Ce résumé n’est pas un appel aux dons. » et la carte « Siège » sont supprimées du seul index.html. Il reste trois repères (régime, statuts, accès au site). verifier-integration.py ne verrouille plus la phrase et refuse sa réapparition ; le 20e garde-fou passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total) ; verifier-integration.py, ses 13 cas, verifier-affichages.py, ses 32 mutations, construire-avancees.py --verifier, memoire-eva.py --verifier et verifier-rd-continue.py sont verts. Aucun CSS, aucun JS, aucune URL externe nouvelle, aucun fait externe nouveau : la dette de paliers reste inchangée. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés (483 entrées, 292 nœuds, 670 arêtes). Publication choisie explicitement par la personne ; déploiement et relecture des octets servis à confirmer après fusion."
+limite = "Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’est pas vérifiée auprès d’une source externe et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide. Le jugement du rendu publié reste à l’œil."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-10
+auteur = "agent"
+empreinte_avant = "094380913117ea69c5787781f2d474646f3204eab35e4270d5f154ee8e70b8d1"
+empreinte_apres = "a7f1d64df0c8759d9cb50ba49d3b45a2b6a2e0c233f683f6734e9ecc1c4e83e7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/verifier-integration.py", "outils/test_mutations_integration.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-rd-continue.py", "docs/rd/journal.md"]
+constat = "Retrait éditorial demandé après la publication du parcours de présentation : la phrase « Ce résumé n’est pas un appel aux dons. » et la carte « Siège » sont supprimées du seul index.html. Il reste trois repères (régime, statuts, accès au site). verifier-integration.py ne verrouille plus la phrase et refuse sa réapparition ; le 20e garde-fou passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total) ; verifier-integration.py, ses 13 cas, verifier-affichages.py, ses 32 mutations, construire-avancees.py --verifier, memoire-eva.py --verifier et verifier-rd-continue.py sont verts. Aucun CSS, aucun JS, aucune URL externe nouvelle, aucun fait externe nouveau : la dette de paliers reste inchangée. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés (483 entrées, 292 nœuds, 670 arêtes). Publication choisie explicitement par la personne ; déploiement et relecture des octets servis à confirmer après fusion."
+limite = "Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’est pas vérifiée auprès d’une source externe et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide. Le jugement du rendu publié reste à l’œil."
+
+[[edition]]
+chemin = "outils/test_mutations_affichages.py"
+date = 2026-11-10
+auteur = "agent"
+empreinte_avant = "d3a77247b990c9033401c218582888828b205c90bd2563f2af0a51337a52724f"
+empreinte_apres = "e63a4c5e544cf08ba9bd4c88bd2bdad67a8d93e611f4ac60ce4e02ae38be5353"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/verifier-integration.py", "outils/test_mutations_integration.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-rd-continue.py", "docs/rd/journal.md"]
+constat = "Retrait éditorial demandé après la publication du parcours de présentation : la phrase « Ce résumé n’est pas un appel aux dons. » et la carte « Siège » sont supprimées du seul index.html. Il reste trois repères (régime, statuts, accès au site). verifier-integration.py ne verrouille plus la phrase et refuse sa réapparition ; le 20e garde-fou passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total) ; verifier-integration.py, ses 13 cas, verifier-affichages.py, ses 32 mutations, construire-avancees.py --verifier, memoire-eva.py --verifier et verifier-rd-continue.py sont verts. Aucun CSS, aucun JS, aucune URL externe nouvelle, aucun fait externe nouveau : la dette de paliers reste inchangée. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés (483 entrées, 292 nœuds, 670 arêtes). Publication choisie explicitement par la personne ; déploiement et relecture des octets servis à confirmer après fusion."
+limite = "Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’est pas vérifiée auprès d’une source externe et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide. Le jugement du rendu publié reste à l’œil."
+
+[[edition]]
+chemin = "outils/test_mutations_integration.py"
+date = 2026-11-10
+auteur = "agent"
+empreinte_avant = "07936b71b6dbecec2669b1f4b98e84b9a32d0d8b20ee9367de3c7cb2c147841c"
+empreinte_apres = "2411192bcde2beee3820b99a6b1d96bd29ca6c774fd9b0aff916654529771a24"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/verifier-integration.py", "outils/test_mutations_integration.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-rd-continue.py", "docs/rd/journal.md"]
+constat = "Retrait éditorial demandé après la publication du parcours de présentation : la phrase « Ce résumé n’est pas un appel aux dons. » et la carte « Siège » sont supprimées du seul index.html. Il reste trois repères (régime, statuts, accès au site). verifier-integration.py ne verrouille plus la phrase et refuse sa réapparition ; le 20e garde-fou passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total) ; verifier-integration.py, ses 13 cas, verifier-affichages.py, ses 32 mutations, construire-avancees.py --verifier, memoire-eva.py --verifier et verifier-rd-continue.py sont verts. Aucun CSS, aucun JS, aucune URL externe nouvelle, aucun fait externe nouveau : la dette de paliers reste inchangée. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés (483 entrées, 292 nœuds, 670 arêtes). Publication choisie explicitement par la personne ; déploiement et relecture des octets servis à confirmer après fusion."
+limite = "Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’est pas vérifiée auprès d’une source externe et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide. Le jugement du rendu publié reste à l’œil."
+
+[[edition]]
+chemin = "outils/verifier-affichages.py"
+date = 2026-11-10
+auteur = "agent"
+empreinte_avant = "0a562c11cb65d4e7914bb138c0445cf02a60148172376e27c02525515b246747"
+empreinte_apres = "e2219e529c128bc1577b180ac5a50f481fdbfb44127d884faa8878839e8de591"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/verifier-integration.py", "outils/test_mutations_integration.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-rd-continue.py", "docs/rd/journal.md"]
+constat = "Retrait éditorial demandé après la publication du parcours de présentation : la phrase « Ce résumé n’est pas un appel aux dons. » et la carte « Siège » sont supprimées du seul index.html. Il reste trois repères (régime, statuts, accès au site). verifier-integration.py ne verrouille plus la phrase et refuse sa réapparition ; le 20e garde-fou passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total) ; verifier-integration.py, ses 13 cas, verifier-affichages.py, ses 32 mutations, construire-avancees.py --verifier, memoire-eva.py --verifier et verifier-rd-continue.py sont verts. Aucun CSS, aucun JS, aucune URL externe nouvelle, aucun fait externe nouveau : la dette de paliers reste inchangée. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés (483 entrées, 292 nœuds, 670 arêtes). Publication choisie explicitement par la personne ; déploiement et relecture des octets servis à confirmer après fusion."
+limite = "Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’est pas vérifiée auprès d’une source externe et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide. Le jugement du rendu publié reste à l’œil."
+
+[[edition]]
+chemin = "outils/verifier-integration.py"
+date = 2026-11-10
+auteur = "agent"
+empreinte_avant = "a05d689abca5c635e973b6c9c7f4d42a9044705e8804eddaa41ed13330933001"
+empreinte_apres = "2c61f477f070ecc0acdce0ce32c78f5bed03b61db5ac8aa06486f23565ec4774"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/verifier-integration.py", "outils/test_mutations_integration.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-rd-continue.py", "docs/rd/journal.md"]
+constat = "Retrait éditorial demandé après la publication du parcours de présentation : la phrase « Ce résumé n’est pas un appel aux dons. » et la carte « Siège » sont supprimées du seul index.html. Il reste trois repères (régime, statuts, accès au site). verifier-integration.py ne verrouille plus la phrase et refuse sa réapparition ; le 20e garde-fou passe de quatre à trois repères et nomme le retour de la carte. Une mutation de plus dans le banc d’affichages (32 au total), deux cas de plus dans le banc d’intégration (13 au total) ; verifier-integration.py, ses 13 cas, verifier-affichages.py, ses 32 mutations, construire-avancees.py --verifier, memoire-eva.py --verifier et verifier-rd-continue.py sont verts. Aucun CSS, aucun JS, aucune URL externe nouvelle, aucun fait externe nouveau : la dette de paliers reste inchangée. Journal, 102e avancée, inventaire et mémoire ÉVA régénérés (483 entrées, 292 nœuds, 670 arêtes). Publication choisie explicitement par la personne ; déploiement et relecture des octets servis à confirmer après fusion."
+limite = "Ce n’est ni une validation humaine du texte ni du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Les repères restants viennent des copies locales des statuts ; leur validité juridique actuelle n’est pas vérifiée auprès d’une source externe et la page renvoie au texte statutaire. Le retrait du siège ne dit pas que l’information est fausse : elle n’est plus affichée à la demande de la personne. Un seul moteur de rendu, aucun lecteur d’écran. La dette de relecture de fond du corpus reste consignée, relectures.toml reste vide. Le jugement du rendu publié reste à l’œil."

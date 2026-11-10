@@ -1663,10 +1663,12 @@ def controler_presentation_association() -> list[str]:
     Le 9 novembre 2026, après la refonte de l'ouverture, la section
     « L'association » de l'accueil était encore un bloc de neuf paragraphes
     avec trois cartes sans aucun lien, et la page Documents répétait deux fois
-    la même notice. Ce garde-fou tient ce qui a été mesuré : des repères
+    la même notice. Ce garde-fou tient ce qui a été mesuré : trois repères
     rattachés aux statuts, trois portes d'entrée réellement liées, un texte
-    suivi (pas de `.phrase` collées) et quatre notices distinctes. Il ne juge
-    ni la vérité des statuts ni l'esthétique du rendu.
+    suivi (pas de `.phrase` collées) et quatre notices distinctes. Le 10
+    novembre 2026, la carte du siège social a été retirée à la demande de la
+    personne : il ne reste que trois repères, et le garde-fou refuse leur
+    retour. Il ne juge ni la vérité des statuts ni l'esthétique du rendu.
     """
     erreurs: list[str] = []
     accueil = (RACINE / "index.html").read_text(encoding="utf-8")
@@ -1695,9 +1697,14 @@ def controler_presentation_association() -> list[str]:
             "index.html — les repères de l'association ne renvoient plus aux statuts : "
             "le fait affiché n'est plus traçable"
         )
-    if bloc.count("<dt>") != 4:
+    if bloc.count("<dt>") != 3:
         erreurs.append(
-            "index.html — les repères vérifiables de l'association ne sont plus au nombre de quatre"
+            "index.html — les repères vérifiables de l'association ne sont plus au nombre de trois"
+        )
+    if "<dt>Siège</dt>" in bloc or "Siège social fixé à Beaurepaire" in bloc:
+        erreurs.append(
+            "index.html — la carte du siège social est revenue dans les repères : "
+            "ce détail a été retiré à la demande de la personne"
         )
     _, _, decoupage = js.partition("Chaque phrase de contenu")
     if '.home-association, .association-reperes' not in decoupage:

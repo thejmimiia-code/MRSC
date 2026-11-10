@@ -1650,17 +1650,17 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/avancees.md"
-empreinte = "0e30d1cac975c6729788c0f1554cde5c707f40ca25def834cbcc223c615b31af"
+empreinte = "5f96387a823c31225b8ba84a062546fed5dcb7432f9c0afce307545a604338f4"
 etat = "relu-par-agent"
 apostrophes = 1240
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-10
 
 [[unite]]
 chemin = "docs/rd/avancees.toml"
-empreinte = "716cf4c40f9020cb661eaa682f4bcc1ad3f3a3a0531c56df9be2eee034b82ee1"
+empreinte = "367eec3b909bedcf0fd18819532a1eada0072cd12630b5f256b584ebe44f93dd"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-10
 
 [[unite]]
 chemin = "docs/rd/bibliotheque-skills.md"
@@ -1727,10 +1727,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/graphe.dot"
-empreinte = "698b9deac5b1cde809bd21b77ce2ad9d5d092f65f94fad3e9d7c8c2fa220ff96"
+empreinte = "d34e440d941ef4a7ab7452abfa0ebe65bccdc08d714f4ebf756ac4c40ff08544"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-10
 
 [[unite]]
 chemin = "docs/rd/eva/graphe.md"
@@ -1741,17 +1741,17 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "49fe388a4e18e221b703586c10352e06903ec7b0042038b2278171e7d54cdbdb"
+empreinte = "ef32788d8097075b65c45f02f763973a989863031c0d06d65a3ac826ced6ce9a"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-10
 
 [[unite]]
 chemin = "docs/rd/eva/plan.md"
-empreinte = "57ea76f233fbee4348546a0714b81f11ae6e089c5bde597e096557b53fe9e1ee"
+empreinte = "a642ef9f92165edcbb433d6110e22a97c9a3f4b2fda03f4525c961d52909f11c"
 etat = "relu-par-agent"
 apostrophes = 72
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-10
 
 [[unite]]
 chemin = "docs/rd/eva/plan.toml"
@@ -1811,10 +1811,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/inventaire-controles.md"
-empreinte = "3a1af8c0525e1768eebe454425c216305af7140fab09fdb6df27cef8f468de50"
+empreinte = "f38aa65d91bfc0673468679fb9e541e0f01ff7761887f36322324fa2474cbf24"
 etat = "relu-par-agent"
 apostrophes = 101
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-10
 
 [[unite]]
 chemin = "docs/rd/inventaire-couleurs-jetons.md"
@@ -1825,10 +1825,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "b3b3d224f7ea78b323917648f31961595cf2aad08b37550c51e342d395673ead"
+empreinte = "97979cd90c92accae6fdcace6659b363f221bad2feb17afcf1750afa2f398fb2"
 etat = "relu-par-agent"
 apostrophes = 2405
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-10
 
 [[unite]]
 chemin = "docs/rd/ligne-graphique.md"
@@ -2287,10 +2287,10 @@ date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "index.html"
-empreinte = "094380913117ea69c5787781f2d474646f3204eab35e4270d5f154ee8e70b8d1"
+empreinte = "a7f1d64df0c8759d9cb50ba49d3b45a2b6a2e0c233f683f6734e9ecc1c4e83e7"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-10
 
 [[unite]]
 chemin = "liens-utiles.html"
@@ -2735,10 +2735,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test_mutations_affichages.py"
-empreinte = "d3a77247b990c9033401c218582888828b205c90bd2563f2af0a51337a52724f"
+empreinte = "e63a4c5e544cf08ba9bd4c88bd2bdad67a8d93e611f4ac60ce4e02ae38be5353"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-10
 
 [[unite]]
 chemin = "outils/test_mutations_apparences.py"
@@ -2791,10 +2791,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test_mutations_integration.py"
-empreinte = "07936b71b6dbecec2669b1f4b98e84b9a32d0d8b20ee9367de3c7cb2c147841c"
-etat = "reference-initiale"
+empreinte = "2411192bcde2beee3820b99a6b1d96bd29ca6c774fd9b0aff916654529771a24"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-10
 
 [[unite]]
 chemin = "outils/test_mutations_planches_statuts.py"
@@ -3036,10 +3036,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/verifier-affichages.py"
-empreinte = "0a562c11cb65d4e7914bb138c0445cf02a60148172376e27c02525515b246747"
+empreinte = "e2219e529c128bc1577b180ac5a50f481fdbfb44127d884faa8878839e8de591"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-10
 
 [[unite]]
 chemin = "outils/verifier-apparences.py"
@@ -3099,10 +3099,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/verifier-integration.py"
-empreinte = "a05d689abca5c635e973b6c9c7f4d42a9044705e8804eddaa41ed13330933001"
-etat = "reference-initiale"
+empreinte = "2c61f477f070ecc0acdce0ce32c78f5bed03b61db5ac8aa06486f23565ec4774"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-10
 
 [[unite]]
 chemin = "outils/verifier-inventaire-controles.py"
