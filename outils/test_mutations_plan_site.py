@@ -149,6 +149,17 @@ class TestPlanSite(unittest.TestCase):
         self.assertEqual(resultat.returncode, 1, resultat.stdout + resultat.stderr)
         self.assertIn("section absente du plan du site", resultat.stderr)
 
+    def test_repere_statutaire_retire_refuse(self) -> None:
+        """La « pépinière d’idées » de l’article 2 ne doit pas disparaître en silence.
+
+        Sans elle, l’ouverture redevient une description de site : c’est la faute
+        que la personne a signalée le 11 novembre 2026 à 19 h 45 UTC.
+        """
+        resultat = executer(lambda copie: remplacer(
+            copie, ACCUEIL, "<strong>pépinière d’idées</strong>", "<strong>boîte à idées</strong>"))
+        self.assertEqual(resultat.returncode, 1, resultat.stdout + resultat.stderr)
+        self.assertIn("repère d’accueil exigé par une autre garde, absent", resultat.stderr)
+
     def test_relecture_humaine_fabriquee_refusee(self) -> None:
         resultat = executer(lambda copie: ajouter(
             copie, HUMAIN, '[[relecture]]\nfiche = "test"\ndate = 2026-11-11\n'))

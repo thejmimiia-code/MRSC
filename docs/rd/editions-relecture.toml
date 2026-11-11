@@ -3713,3 +3713,291 @@ sources = []
 mesures = ["outils/verifier-plan-site.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
 constat = "Relecture de l’enregistrement de la publication demandée par la personne le 11 novembre 2026 : entrée de journal datée, 110e avancée, phrase « aucun commit, poussage, fusion, déploiement » du plan du site remplacée par le fait de publication avec la chaîne deploy-pages.yml et le périmètre réellement servi, limite du plan du projet datée à 16 h 48 UTC, avancées et mémoire ÉVA régénérées puis vérifiées à 110 entrées et 510 nœuds d’index. Les 34 commandes de publication ont été jouées en local avant la poussée. Aucun fait externe nouveau : tout provient des fichiers locaux, des gardes reproductibles citées en mesures et du workflow de publication du dépôt."
 limite = "Cette signature atteste une lecture d’agent et des exécutions locales reproductibles, pas une validation humaine du texte ou du rendu, ni une expertise de domaine, ni un avis juridique, ni un essai avec des personnes. Elle ne prouve pas qu’un visiteur trouve plus vite ni que l’affichage plaît sur téléphone, clavier, zoom ou lecteur d’écran. Elle ne certifie ni la fusion ni le déploiement : leur état réel est lu après coup sur l’API du dépôt. Elle ne couvre ni www.ign.fr/ (HTTP 403) ni aucune date ultérieure, ne promeut aucun statut et n’écrit aucun registre humain."
+
+[[edition]]
+chemin = "docs/protocole-editorial.md"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "cf76c9e0c850bcc05d61389c9ef49f52be794ed2069a3dbc4b6d75d9b629258f"
+empreinte_apres = "a21306da463c93e240985ff47f12e290be787192ab865608cceca58af259c136"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "docs/rd-coherence-visuelle-editoriale.md"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "68cd789f87f5ee93dd359d9313872e09a89d7abf8a05d54f6d3a4fcf48fa800a"
+empreinte_apres = "b4fe43844679960d0eff29de497a783358a8eb88836837749b85f79830c1bbbd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "405b97cfe0c5026b1b64902e3582879d0bed22ac854ce029208a405e87fc05a0"
+empreinte_apres = "6c062831bd51b64bc04c08c2131ef9cbfe251574aacf42b208563cb8f83ec17b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "cad2159ef8300e136b55d9be95c03a5175988f33128120f5aca4d3250b694665"
+empreinte_apres = "e839f1529d64f56adad0b8329c6e65a29ad5683a81beb61b5bbbf69186d03ff3"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "c4c363142157b5ee52748f4f624719e2666292c0956753f122d8b1e054390287"
+empreinte_apres = "0f0ff7297a5aa911f66d211455fa1aa4815a7f2ccf71d3bb25391d67da717e77"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "0b86abca904578da8e46bb55637ea552f40a77169c34a99d6412fcf986766e90"
+empreinte_apres = "47fb8b0a17ce4e40fb6701aa318c294c6c07c95d0388edb65978e12e9aa2b385"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "4011737836818bf06a6ad742ba06749f9d78840e65c117043d4ea5f852f662b5"
+empreinte_apres = "8b09062ec70374082d78a7c5f26ac730a5d818c5afc97624455f74e39aea8dc9"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "35cdb746d6f735bfd17a664ff971c5917b622482b135b1d144e5363b3cd23d79"
+empreinte_apres = "53253e2f1b6af1acf86620701bd0c65636b4332e288b9fbcb5d78fef2a9d725f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "docs/rd/plan-complet-rd-innovation-prospective.md"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "2cec23b1f789a09a03742055271a17aea3bfea02524d298e880e58f7eb4d315d"
+empreinte_apres = "51636d55c2169a4aa92f0a98530c1e647bc635a78e7e91b75dce073e8504d5c7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "docs/rd/plan-site-complet-2026-11-11.md"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "3dfb4995cebcb45cf8164ceb2111b5d036e8026b29e08f68fccbdeb17698be18"
+empreinte_apres = "578ef04fda5aca5bab7cbd2f72b905fb41e82b848539b2577545ce85830e8b0c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "docs/rd/plan-site-complet-2026-11-11.toml"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "94b3e2319ad2946b8495f95868144b9e41689d317b7d11d1ef7a27da16457ba8"
+empreinte_apres = "0903b1df2d8052e451470d7a507bede1500f3d6e3d15a36ac2c6b1e956168bd3"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "0790e676f5e11d18a6b51af2381b6ab09b571c6be491cdff43b024460ff7dc0e"
+empreinte_apres = "a464017cc7e6c4b586db5ce0fe288ed6f5b93f4e229805ffbfc23f1bf8927954"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "llms.txt"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "e6383fde4d17c91dc5213263dfb9dc287a67f132e1dc60cda4286f5a9e0d9010"
+empreinte_apres = "e7572d8fbf698ab44517cf7642bc3f6d1c7ef847967b81b2645bad2ff620e314"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "outils/test_mutations_integration.py"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "9ee927f83ed50ae7f28ebdba04875037ebe497f4fd37c74cc3902dc8ae105b60"
+empreinte_apres = "aec5d8077577b45752f7b6245aaca47c44cffec11412e45d52c858caf553913d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "outils/test_mutations_plan_site.py"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "f0da91915b94110180706e1839980fe5446eb9ed90ad301e1a9e72a26b8bc8f5"
+empreinte_apres = "378649d55cae06233f13192e579e52b778b149a44709782bf28e385f8aa4b378"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "outils/verifier-budgets-visuels.py"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "35028845d177be17c6b2fca44059e1b4b7c7255bc10da0e6fc28495e42780826"
+empreinte_apres = "74d9c8f777b072e929f34888007b11315baa6d936317605f4f8ecdaca61a614c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "outils/verifier-integration.py"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "2c61f477f070ecc0acdce0ce32c78f5bed03b61db5ac8aa06486f23565ec4774"
+empreinte_apres = "1ee54fcb9e765cf29ffb3fcace6f283ecfb440521188044050187d083a26829f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "outils/verifier-plan-site.py"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "7e1ae4cc8b4fc7decd89f0edc396df885232c862014f354c9d034b7bd860c765"
+empreinte_apres = "6475cb6699d281b153f1d33ac99676f6cc10672497ea797e30839bf656f24675"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-budgets-visuels.py"]
+constat = "Relecture de la réécriture de l’accueil d’après les statuts : lecture intégrale de assets/documents/statuts-2020.pdf (25 pages, empreinte sha256 identique à docs/rd/statuts-matrice-tracabilite.toml), comparaison article par article avec l’ouverture et la présentation, sept repères statutaires manquants relevés, nouvelle formule de H1 propagée au titre, à og:title, aux noms JSON-LD et aux deux descriptions, redite de l’énumération de l’objet trouvée par les bancs puis retirée, repères d’accueil ajoutés aux deux gardes, plafonds de longueur abaissés et non relevés, dix compteurs de redondance remesurés dont sources à 15 sous un seuil abaissé, llms.txt et les deux documents de méthode mis à jour, journal et 111e avancée écrits, mémoire ÉVA régénérée à 512 entrées. Aucun fait externe : tout vient du PDF local, des registres du dépôt et des gardes reproductibles citées en mesures."
+limite = "Cette signature atteste une lecture d’agent du PDF des statuts et des exécutions locales reproductibles, pas une interprétation juridique, ni un avis de droit, ni une expertise, ni une approbation éditoriale ou une validation humaine de la nouvelle formulation, ni un essai avec des personnes. Aucun navigateur n’a été lancé : ni rendu à l’œil, ni lisibilité à 320 px, ni mesure de compréhension, ni lecture d’écran ; longueurs et lignes restent des estimations hors ligne. Les statuts sont a-faire-relire dans la matrice de traçabilité et leur revue juridique liste quinze points à vérifier : dire ce qu’ils écrivent ne dit pas que le fonctionnement est en vigueur. Aucun statut promu, aucun registre humain écrit, aucune page Web externe ouverte."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "47fb8b0a17ce4e40fb6701aa318c294c6c07c95d0388edb65978e12e9aa2b385"
+empreinte_apres = "46ac78fc209d3bfe270d336909e65710363456bf800d42152ee9ffc603793e0b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py", "outils/relire-contenus.py"]
+constat = "Relecture du complément de traçabilité du lot statutaire : les compteurs réellement observés après signature sont écrits dans l’entrée de journal — 523 unités sous empreinte, 139 relues par agent, 384 en dette initiale consignée, mémoire ÉVA régénérée à 512 entrées, 324 nœuds et 734 arêtes, 111 avancées au registre — et la mémoire rendue depuis ses sources est relue ligne à ligne avant d’être resignée. Aucun fait externe : ces nombres viennent des registres locaux et des outils reproductibles cités en mesures."
+limite = "Cette signature atteste une lecture d’agent et des exécutions locales reproductibles, pas une validation humaine du texte ou du rendu, ni une expertise, ni un avis juridique, ni une interprétation des statuts, ni un essai avec des personnes. Elle ne prouve ni qu’un visiteur trouve plus vite, ni que la nouvelle ouverture plaît à l’œil sur téléphone, clavier, zoom ou lecteur d’écran. Elle ne couvre ni www.ign.fr/ (HTTP 403) ni aucune date ultérieure, ne promeut aucun statut, n’écrit aucun registre humain et ne publie, pousse, fusionne, déploie ou certifie rien par elle-même."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "53253e2f1b6af1acf86620701bd0c65636b4332e288b9fbcb5d78fef2a9d725f"
+empreinte_apres = "7a70efd63abfc2aba3f6572b7dfa035b65a1336c30deb2e8cc98f8fa7411db56"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py", "outils/relire-contenus.py"]
+constat = "Relecture du complément de traçabilité du lot statutaire : les compteurs réellement observés après signature sont écrits dans l’entrée de journal — 523 unités sous empreinte, 139 relues par agent, 384 en dette initiale consignée, mémoire ÉVA régénérée à 512 entrées, 324 nœuds et 734 arêtes, 111 avancées au registre — et la mémoire rendue depuis ses sources est relue ligne à ligne avant d’être resignée. Aucun fait externe : ces nombres viennent des registres locaux et des outils reproductibles cités en mesures."
+limite = "Cette signature atteste une lecture d’agent et des exécutions locales reproductibles, pas une validation humaine du texte ou du rendu, ni une expertise, ni un avis juridique, ni une interprétation des statuts, ni un essai avec des personnes. Elle ne prouve ni qu’un visiteur trouve plus vite, ni que la nouvelle ouverture plaît à l’œil sur téléphone, clavier, zoom ou lecteur d’écran. Elle ne couvre ni www.ign.fr/ (HTTP 403) ni aucune date ultérieure, ne promeut aucun statut, n’écrit aucun registre humain et ne publie, pousse, fusionne, déploie ou certifie rien par elle-même."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "6c062831bd51b64bc04c08c2131ef9cbfe251574aacf42b208563cb8f83ec17b"
+empreinte_apres = "13cf1dacf257d6812355f96579a6833b35add86a4fc10cbc020a510673bb07c0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py", "outils/relire-contenus.py"]
+constat = "Relecture de la consignation de publication du lot statutaire : la chaîne réellement suivie est écrite dans le journal — commit sur la branche de session, poussage sur origin, demande de fusion vers main, contrôles attendus, fusion, puis lecture de l’état du run de publication et du déploiement sur l’API du dépôt — et la suite de la 111e avancée est alignée sur cette chaîne au lieu d’attendre une demande séparée. Les avancées sont régénérées à 111 entrées, la mémoire ÉVA à 512 entrées, 324 nœuds et 734 arêtes, puis toutes deux vérifiées. Aucun fait externe : la règle de publication citée est la demande verbatim de la personne à 18 h 55 UTC et les compteurs viennent des outils reproductibles cités en mesures."
+limite = "Cette signature atteste une lecture d’agent et des exécutions locales reproductibles, pas une validation humaine du texte ou du rendu, ni une expertise, ni un avis juridique, ni une interprétation des statuts, ni un essai avec des personnes. Elle ne certifie ni la fusion ni le déploiement : leur état réel est lu après coup sur l’API du dépôt et rapporté. Elle ne prouve pas que la nouvelle ouverture plaît à l’œil sur téléphone, clavier, zoom ou lecteur d’écran, ne couvre ni www.ign.fr/ (HTTP 403) ni aucune date ultérieure, ne promeut aucun statut et n’écrit aucun registre humain."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "e839f1529d64f56adad0b8329c6e65a29ad5683a81beb61b5bbbf69186d03ff3"
+empreinte_apres = "39456dfafef219e62683466b7bbd08335eb81de543689e9d46b6a6b6252f855a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py", "outils/relire-contenus.py"]
+constat = "Relecture de la consignation de publication du lot statutaire : la chaîne réellement suivie est écrite dans le journal — commit sur la branche de session, poussage sur origin, demande de fusion vers main, contrôles attendus, fusion, puis lecture de l’état du run de publication et du déploiement sur l’API du dépôt — et la suite de la 111e avancée est alignée sur cette chaîne au lieu d’attendre une demande séparée. Les avancées sont régénérées à 111 entrées, la mémoire ÉVA à 512 entrées, 324 nœuds et 734 arêtes, puis toutes deux vérifiées. Aucun fait externe : la règle de publication citée est la demande verbatim de la personne à 18 h 55 UTC et les compteurs viennent des outils reproductibles cités en mesures."
+limite = "Cette signature atteste une lecture d’agent et des exécutions locales reproductibles, pas une validation humaine du texte ou du rendu, ni une expertise, ni un avis juridique, ni une interprétation des statuts, ni un essai avec des personnes. Elle ne certifie ni la fusion ni le déploiement : leur état réel est lu après coup sur l’API du dépôt et rapporté. Elle ne prouve pas que la nouvelle ouverture plaît à l’œil sur téléphone, clavier, zoom ou lecteur d’écran, ne couvre ni www.ign.fr/ (HTTP 403) ni aucune date ultérieure, ne promeut aucun statut et n’écrit aucun registre humain."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "46ac78fc209d3bfe270d336909e65710363456bf800d42152ee9ffc603793e0b"
+empreinte_apres = "c8194f7c046f8898015a3e10318339fa0861e3dcff08e1e9305a5bc6604214a5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py", "outils/relire-contenus.py"]
+constat = "Relecture de la consignation de publication du lot statutaire : la chaîne réellement suivie est écrite dans le journal — commit sur la branche de session, poussage sur origin, demande de fusion vers main, contrôles attendus, fusion, puis lecture de l’état du run de publication et du déploiement sur l’API du dépôt — et la suite de la 111e avancée est alignée sur cette chaîne au lieu d’attendre une demande séparée. Les avancées sont régénérées à 111 entrées, la mémoire ÉVA à 512 entrées, 324 nœuds et 734 arêtes, puis toutes deux vérifiées. Aucun fait externe : la règle de publication citée est la demande verbatim de la personne à 18 h 55 UTC et les compteurs viennent des outils reproductibles cités en mesures."
+limite = "Cette signature atteste une lecture d’agent et des exécutions locales reproductibles, pas une validation humaine du texte ou du rendu, ni une expertise, ni un avis juridique, ni une interprétation des statuts, ni un essai avec des personnes. Elle ne certifie ni la fusion ni le déploiement : leur état réel est lu après coup sur l’API du dépôt et rapporté. Elle ne prouve pas que la nouvelle ouverture plaît à l’œil sur téléphone, clavier, zoom ou lecteur d’écran, ne couvre ni www.ign.fr/ (HTTP 403) ni aucune date ultérieure, ne promeut aucun statut et n’écrit aucun registre humain."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-11
+auteur = "agent"
+empreinte_avant = "7a70efd63abfc2aba3f6572b7dfa035b65a1336c30deb2e8cc98f8fa7411db56"
+empreinte_apres = "466c69bc480148f1473195d2b989cfa4a8be13bd1abbd90905ea23845607605f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py", "outils/relire-contenus.py"]
+constat = "Relecture de la consignation de publication du lot statutaire : la chaîne réellement suivie est écrite dans le journal — commit sur la branche de session, poussage sur origin, demande de fusion vers main, contrôles attendus, fusion, puis lecture de l’état du run de publication et du déploiement sur l’API du dépôt — et la suite de la 111e avancée est alignée sur cette chaîne au lieu d’attendre une demande séparée. Les avancées sont régénérées à 111 entrées, la mémoire ÉVA à 512 entrées, 324 nœuds et 734 arêtes, puis toutes deux vérifiées. Aucun fait externe : la règle de publication citée est la demande verbatim de la personne à 18 h 55 UTC et les compteurs viennent des outils reproductibles cités en mesures."
+limite = "Cette signature atteste une lecture d’agent et des exécutions locales reproductibles, pas une validation humaine du texte ou du rendu, ni une expertise, ni un avis juridique, ni une interprétation des statuts, ni un essai avec des personnes. Elle ne certifie ni la fusion ni le déploiement : leur état réel est lu après coup sur l’API du dépôt et rapporté. Elle ne prouve pas que la nouvelle ouverture plaît à l’œil sur téléphone, clavier, zoom ou lecteur d’écran, ne couvre ni www.ign.fr/ (HTTP 403) ni aucune date ultérieure, ne promeut aucun statut et n’écrit aucun registre humain."

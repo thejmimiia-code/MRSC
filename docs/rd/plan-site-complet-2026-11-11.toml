@@ -7,12 +7,18 @@ version = 1
 auteur = "agent"
 date = "2026-11-11"
 heure_utc = "17:24"
+revision_utc = "19:45"
+revision_demande = "« ça ne représente pas l’association donc relis les statuts et fait quelque chose qui correspond »"
+revision_source = "assets/documents/statuts-2020.pdf"
+revision_sha256 = "938bd5b72d70ab4e3737f61b91818a6813b29cc5453da44c81d5b7f33ca143c3"
+revision_articles = ["préambule", "1", "1.2", "2", "3", "4", "5", "11.1", "11.6", "11.8", "11.9"]
 demande = "plan complet du site, vérification des redondances, brainstorming et page d’accueil entièrement revue en une seule fois"
 page = "index.html"
 sections_avant = 8
 sections_apres = 6
 caracteres_main_avant = 21310
-caracteres_main_apres = 18112
+caracteres_main_apres = 20034
+caracteres_main_refonte_seule = 18112
 ordre_avant = ["mission", "rd-eva", "actions", "rejoindre"]
 ordre_apres = ["mission", "actions", "rd-eva", "rejoindre"]
 classes_conservees = 110
@@ -34,9 +40,9 @@ id = "sources"
 libelle = "Mention des sources, limites et statut"
 motif = "(?i)sources?"
 avant = 26
-apres = 16
-seuil = 16
-decision = "Une seule promesse dans l’ouverture et une seule liste de sources en fin de parcours ; les cartes ne répètent plus la promesse."
+apres = 15
+seuil = 15
+decision = "Une seule promesse dans l’ouverture et une seule liste de sources en fin de parcours ; les cartes ne répètent plus la promesse. La réécriture statutaire du 19 h 45 UTC retire la dernière reprise dans un principe de l’association : le seuil descend de 16 à 15."
 
 [[redondance]]
 id = "invitation"
@@ -113,14 +119,14 @@ decision = "Une seule description, dans l’ouverture ; les trois autres blocs d
 [[section]]
 ancre = "accueil"
 role = "Ouverture"
-information_unique = "La seule présentation des trois ressources, les repères chiffrés et la promesse de traçabilité"
+information_unique = "L’identité de l’association en mots simples d’après ses statuts : slogan de l’article 1, territoires de vie, assemblées territoriales et règle de vote des articles 3 et 5, pépinière d’idées et outils de l’article 2 ; la place du site comme un de ces outils, la seule présentation des trois ressources, les repères chiffrés et la promesse de traçabilité"
 destinations = "#mission, apprendre.html#catalogue-fiches"
 classes = "home-hero, home-hero-resources, home-hero-facts, home-hero-aside, home-entry-list"
 
 [[section]]
 ancre = "mission"
 role = "L’association"
-information_unique = "Qui nous sommes, les statuts, trois principes et la hiérarchie de preuve"
+information_unique = "L’objet complet de l’article 2 écrit une seule fois, les valeurs de l’article 3, les phases de l’article 11.9, le format des propositions de l’article 11.8, trois repères vérifiables citant leurs articles, trois principes et la hiérarchie de preuve"
 destinations = "documents.html, #actions"
 classes = "home-association, association-reperes, home-voice-grid, association-suite"
 
@@ -158,7 +164,7 @@ role = "Accueil : présenter l’association une fois et orienter vers les quatr
 public = "Tous les visiteurs"
 entree_depuis = "navigation, footer, llms.txt, sitemap.xml"
 destination = "#contenu, #mission, #actions, #rd-eva, #rejoindre"
-statut = "page refondue"
+statut = "page refondue puis réécrite d’après les statuts"
 limite = "Le plan ne juge pas le rendu à l’œil ni la compréhension réelle des visiteurs."
 
 [[page]]
