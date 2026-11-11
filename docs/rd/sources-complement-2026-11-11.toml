@@ -1,0 +1,257 @@
+# Complément de la passe de sources du 11 novembre 2026, seconde passe de l’agent.
+# Les adresses exactes restent dans le catalogue ; les références ici sont sans schéma.
+# Ce registre n’est ni le catalogue, ni docs/apprentissage/relectures.toml.
+
+[meta]
+version = 1
+auteur = "agent"
+date = 2026-11-11
+portee = "retenter les 3 erreurs de récupération et chercher des pages officielles pour les 3 pages d’erreur servies"
+registre_principal = "docs/rd/sources-ouvertes-2026-11-11.toml"
+rapport_principal = "docs/rd/sources-ouvertes-2026-11-11.md"
+registre_agent = "docs/rd/relecture-agent-prototypes.toml"
+catalogue = "docs/apprentissage/catalogue.toml"
+anciennes_adresses_sans_contenu = 6
+retentatives_effectuees = 3
+erreurs_servies_traitees = 3
+dossiers = 6
+lectures = 16
+remplacements_exacts = 2
+remplacements_partiels = 2
+contextes_officiels = 1
+sans_page_lue = 1
+pages_officielles_lues = 16
+fiches_modifiees = 0
+statuts_promus = 0
+urls_externes_recopiees = 0
+limite_globale = "Une page de remplacement lue ne rend pas l’adresse d’origine lisible et ne vaut ni expertise de domaine, ni avis juridique, ni validation de personne."
+
+[[dossier]]
+reference = "extranet.inao.gouv.fr/fichier/Plaquette-SIQO-francais.pdf"
+ancien_statut = "echec-recuperation"
+fiches = ["sante-reperer-signes-qualite-origine"]
+nouveau_statut = "remplacement-partiel"
+pages_lues = ["www.inao.gouv.fr/", "www.inao.gouv.fr/aop-appellation-origine-protegee", "www.inao.gouv.fr/label-rouge", "www.inao.gouv.fr/igp-indication-geographique-protegee"]
+repere = "HTTP 500 sur trois tentatives, dont deux tranches avec paramètre de relecture ; aucun PDF lu. Le portail officiel INAO et trois pages de signes ont été lus à la place."
+limite = "Le PDF déclaré dans le catalogue reste illisible ; les pages lues ne sont pas encore attachées à la fiche."
+
+[[dossier]]
+reference = "www.education.gouv.fr/media/199172/download"
+ancien_statut = "echec-recuperation"
+fiches = ["maths-convertir-unites"]
+nouveau_statut = "remplacement-partiel"
+pages_lues = ["eduscol.education.gouv.fr/5712/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-3", "www.education.gouv.fr/sites/default/files/programme-de-math-matiques-pour-le-cycle-3-439827.pdf"]
+repere = "Échec de récupération sur trois tentatives ; la variante éduscol du même identifiant affiche un bandeau cookies puis « Page non trouvée ». La page de ressources d’octobre 2026 et le PDF officiel du programme ont été lus."
+limite = "Le fichier media/199172 reste illisible ; le PDF de remplacement porte une autre référence et n’est pas encore attaché à la fiche."
+
+[[dossier]]
+reference = "www.ign.fr/"
+ancien_statut = "echec-recuperation"
+fiches = ["geo-decrire-paysage", "geo-lire-legende-carte"]
+nouveau_statut = "aucune-page-lue"
+pages_lues = []
+repere = "HTTP 403 sur toutes les variantes tentées : racine, deux tranches avec paramètre de relecture, variantes avec et sans www, chemins internes et page de presse. Les résultats de recherche signalent des pages officielles, mais aucune n’a pu être lue."
+limite = "Aucune page de remplacement n’est consignée pour les deux fiches de géographie ; l’accueil IGN reste à retenter à une date ultérieure."
+
+[[dossier]]
+reference = "developer.mozilla.org/fr/docs/Glossary/Byte"
+ancien_statut = "page-erreur-servie"
+fiches = ["info-bits-octets"]
+nouveau_statut = "contexte-officiel"
+pages_lues = ["developer.mozilla.org/en-US/docs/Glossary/Endianness", "developer.mozilla.org/en-US/docs/Glossary/Base64", "developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/TypedArray"]
+repere = "La page 404 est celle déjà consignée dans la passe principale ; aucune entrée de glossaire « Byte » lue. Trois pages MDN officielles donnent le repère : chaque octet stocke un nombre de 8 bits, 3 octets de 8 bits font 24 bits, Int8Array et Uint8Array occupent 1 octet."
+limite = "Ces pages ne remplacent pas l’entrée de glossaire déclarée ; le titre « MDN — définition du byte et notions du Web » reste dans sources_indisponibles."
+
+[[dossier]]
+reference = "www.assurance-maladie.ameli.fr/index.php/medecin/exercice-liberal/facturation-remuneration/dispositif-medecin-traitant/dispositif-medecin-traitant"
+ancien_statut = "page-erreur-servie"
+fiches = ["sante-comprendre-parcours-soins"]
+nouveau_statut = "remplacement-exact"
+pages_lues = ["www.ameli.fr/medecin/exercice-liberal/facturation-remuneration/dispositif-medecin-traitant/dispositif-medecin-traitant", "www.ameli.fr/assure/remboursements/etre-bien-rembourse/medecin-traitant-parcours-soins-coordonnes"]
+repere = "404 sur l’ancien domaine ; le même chemin sous www.ameli.fr répond avec le titre déclaré, daté du 21 février 2025. Une page assuré du 23 avril 2026 précise le remboursement à 70 % du tarif de base moins 2 euros dans le parcours et 8,40 euros hors parcours."
+limite = "Le changement de domaine est consigné comme un alias, pas comme une vérité de plus ; aucune fiche n’est modifiée."
+
+[[dossier]]
+reference = "www.hceres.fr/fr/ofis"
+ancien_statut = "page-erreur-servie"
+fiches = ["recherche-conserver-reference"]
+nouveau_statut = "remplacement-exact"
+pages_lues = ["www.hceres.fr/fr/office-francais-de-lintegrite-scientifique", "www.hceres.fr/fr/integrite-scientifique", "www.hceres.fr/fr/dossiers-et-communiques/le-college-du-hceres-valide-la-creation-de-loffice-francais-dintegrite", "www.hceres.fr/fr/sitemap", "www.ofis-france.fr/"]
+repere = "404 sur l’ancienne adresse ; le plan du site renvoie vers la page courante de l’Ofis. Celle-ci cite l’article L. 211-2 du code de la recherche et la loi de programmation du 24 décembre 2020 ; le dossier de 2017 détaille la triple mission expertise, observation, animation."
+limite = "Une piste « Des jalons fondateurs » renvoyée par la recherche a aussi répondu 404 ; elle n’est pas consignée comme page lue."
+
+[[lecture]]
+reference = "www.inao.gouv.fr/"
+organisme = "INAO"
+titre = "Accueil | INAO"
+date_page = "actualités du 12/10/2026"
+fiches = ["sante-reperer-signes-qualite-origine"]
+pour = "retentative"
+ancienne_reference = "extranet.inao.gouv.fr/fichier/Plaquette-SIQO-francais.pdf"
+tranche = "0,1"
+repere = "Portail des signes officiels : AOP, IGP, STG, agriculture biologique, Label Rouge ; plus de 1200 produits sous SIQO ; recherche par signe et par territoire."
+
+[[lecture]]
+reference = "www.inao.gouv.fr/aop-appellation-origine-protegee"
+organisme = "INAO"
+titre = "Appellation d’origine protégée / contrôlée (AOP / AOC)"
+date_page = "page sans date affichée"
+fiches = ["sante-reperer-signes-qualite-origine"]
+pour = "retentative"
+ancienne_reference = "extranet.inao.gouv.fr/fichier/Plaquette-SIQO-francais.pdf"
+tranche = "0"
+repere = "Toutes les étapes de production dans une même aire géographique, savoir-faire reconnu, cahier des charges homologué par l’Union européenne, contrôles par organisme certifié par l’État."
+
+[[lecture]]
+reference = "www.inao.gouv.fr/label-rouge"
+organisme = "INAO"
+titre = "Label Rouge"
+date_page = "page sans date affichée"
+fiches = ["sante-reperer-signes-qualite-origine"]
+pour = "retentative"
+ancienne_reference = "extranet.inao.gouv.fr/fichier/Plaquette-SIQO-francais.pdf"
+tranche = "0"
+repere = "Signe national désignant un niveau de qualité supérieur ; cahier des charges validé par l’INAO, homologué par arrêté interministériel, contrôles indépendants et analyses sensorielles régulières."
+
+[[lecture]]
+reference = "www.inao.gouv.fr/igp-indication-geographique-protegee"
+organisme = "INAO"
+titre = "Indication géographique protégée (IGP)"
+date_page = "page sans date affichée"
+fiches = ["sante-reperer-signes-qualite-origine"]
+pour = "retentative"
+ancienne_reference = "extranet.inao.gouv.fr/fichier/Plaquette-SIQO-francais.pdf"
+tranche = "0"
+repere = "Au moins une étape de production, transformation ou élaboration dans l’aire géographique délimitée ; signe européen, cahier des charges, contrôles rigoureux."
+
+[[lecture]]
+reference = "eduscol.education.gouv.fr/5712/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-3"
+organisme = "Éduscol"
+titre = "Ressources d’accompagnement du programme de mathématiques au cycle 3"
+date_page = "octobre 2026"
+fiches = ["maths-convertir-unites"]
+pour = "retentative"
+ancienne_reference = "www.education.gouv.fr/media/199172/download"
+tranche = "0,1"
+repere = "Programme publié au Bulletin officiel n° 16 du 17 avril 2025, application à tous les niveaux à la rentrée 2026-2027 ; transcription « Regards sur le programme » sur progressivité structurée, erreur comme axe d’apprentissage et adaptation à la diversité des élèves."
+
+[[lecture]]
+reference = "www.education.gouv.fr/sites/default/files/programme-de-math-matiques-pour-le-cycle-3-439827.pdf"
+organisme = "Ministère de l’Éducation nationale"
+titre = "Programme de mathématiques pour le cycle 3"
+date_page = "sans date propre ; BO n° 16 du 17 avril 2025 (Éduscol 5712)"
+fiches = ["maths-convertir-unites"]
+pour = "retentative"
+ancienne_reference = "www.education.gouv.fr/media/199172/download"
+tranche = "0,1"
+repere = "Sommaire par cours moyen première année, cours moyen deuxième année et sixième ; principes, résolution de problèmes, mémorisation et automatismes, place de l’oral, écrits, évaluation, initiation à la pensée algébrique et à la pensée informatique."
+
+[[lecture]]
+reference = "www.ameli.fr/medecin/exercice-liberal/facturation-remuneration/dispositif-medecin-traitant/dispositif-medecin-traitant"
+organisme = "Assurance Maladie"
+titre = "Le dispositif du médecin traitant"
+date_page = "21 février 2025"
+fiches = ["sante-comprendre-parcours-soins"]
+pour = "remplacement"
+ancienne_reference = "www.assurance-maladie.ameli.fr/index.php/medecin/exercice-liberal/facturation-remuneration/dispositif-medecin-traitant/dispositif-medecin-traitant"
+tranche = "0,1"
+repere = "Le médecin traitant tient à jour le dossier médical, coordonne le parcours de soins, centralise les avis, oriente vers le médecin correspondant ; refus, changement et libre choix, sans durée imposée ; code MTO sur la feuille de soins électronique."
+
+[[lecture]]
+reference = "www.ameli.fr/assure/remboursements/etre-bien-rembourse/medecin-traitant-parcours-soins-coordonnes"
+organisme = "Assurance Maladie"
+titre = "Le rôle du médecin traitant et le parcours de soins coordonnés"
+date_page = "23 avril 2026"
+fiches = ["sante-comprendre-parcours-soins"]
+pour = "remplacement"
+ancienne_reference = "www.assurance-maladie.ameli.fr/index.php/medecin/exercice-liberal/facturation-remuneration/dispositif-medecin-traitant/dispositif-medecin-traitant"
+tranche = "0,1"
+repere = "Consultation à 30 euros : 70 % du tarif moins 2 euros de participation forfaitaire, soit 19 euros remboursés dans le parcours contre 8,40 euros hors parcours ; dossier médical, prévention personnalisée, médecin correspondant et cas de remboursement normal hors parcours."
+
+[[lecture]]
+reference = "www.hceres.fr/fr/office-francais-de-lintegrite-scientifique"
+organisme = "Hcéres"
+titre = "Office Français de l’intégrité scientifique"
+date_page = "page sans date affichée"
+fiches = ["recherche-conserver-reference"]
+pour = "remplacement"
+ancienne_reference = "www.hceres.fr/fr/ofis"
+tranche = "0,1"
+repere = "Intégrité scientifique définie à l’article L. 211-2 du code de la recherche ; missions confiées au Hcéres par la loi de programmation de la recherche du 24 décembre 2020 ; renvoi vers le site de l’Ofis."
+
+[[lecture]]
+reference = "www.hceres.fr/fr/integrite-scientifique"
+organisme = "Hcéres"
+titre = "Intégrité scientifique"
+date_page = "page sans date affichée"
+fiches = ["recherche-conserver-reference"]
+pour = "remplacement"
+ancienne_reference = "www.hceres.fr/fr/ofis"
+tranche = "0,1"
+repere = "Page carrefour du site Hcéres qui renvoie vers la page courante de l’Office français de l’intégrité scientifique."
+
+[[lecture]]
+reference = "www.hceres.fr/fr/dossiers-et-communiques/le-college-du-hceres-valide-la-creation-de-loffice-francais-dintegrite"
+organisme = "Hcéres"
+titre = "Le collège du Hcéres valide la création de l’Office français d’intégrité scientifique"
+date_page = "communiqué du 20 mars 2017 ; page sans date propre"
+fiches = ["recherche-conserver-reference"]
+pour = "remplacement"
+ancienne_reference = "www.hceres.fr/fr/ofis"
+tranche = "0"
+repere = "Le collège du Hcéres valide la création de l’OFIS ; communiqué de presse du 20 mars 2017 joint ; première conférence annuelle des signataires à Paris le 22 mars 2017 ; triple mission expertise, observation, animation ; Conseil de l’intégrité scientifique de 12 experts."
+
+[[lecture]]
+reference = "www.hceres.fr/fr/sitemap"
+organisme = "Hcéres"
+titre = "Plan du site"
+date_page = "page sans date affichée"
+fiches = ["recherche-conserver-reference"]
+pour = "remplacement"
+ancienne_reference = "www.hceres.fr/fr/ofis"
+tranche = "0,1"
+repere = "Le plan du site nomme la rubrique « Intégrité scientifique » et la page courante « Office Français de l’intégrité scientifique (Ofis) », ce qui remplace l’ancienne adresse /fr/ofis."
+
+[[lecture]]
+reference = "www.ofis-france.fr/"
+organisme = "Ofis"
+titre = "Office français de l’intégrité scientifique"
+date_page = "actualités du 8 octobre 2026, 18 septembre 2026, 30 juin 2026"
+fiches = ["recherche-conserver-reference"]
+pour = "remplacement"
+ancienne_reference = "www.hceres.fr/fr/ofis"
+tranche = "0"
+repere = "Annuaire des référents, textes de référence, FAQ ; actualités sur la formation des référents, l’intelligence artificielle pour la recherche et le colloque 2026 ; agendas 2026."
+
+[[lecture]]
+reference = "developer.mozilla.org/en-US/docs/Glossary/Endianness"
+organisme = "MDN Web Docs"
+titre = "Endianness"
+date_page = "dernière modification le 11 juillet 2025"
+fiches = ["info-bits-octets"]
+pour = "contexte"
+ancienne_reference = "developer.mozilla.org/fr/docs/Glossary/Byte"
+tranche = "0"
+repere = "Chaque octet peut stocker un nombre de 8 bits, entre 0x00 et 0xff ; plusieurs octets sont nécessaires pour un nombre plus grand ; little-endian et big-endian."
+
+[[lecture]]
+reference = "developer.mozilla.org/en-US/docs/Glossary/Base64"
+organisme = "MDN Web Docs"
+titre = "Base64"
+date_page = "page sans date affichée"
+fiches = ["info-bits-octets"]
+pour = "contexte"
+ancienne_reference = "developer.mozilla.org/fr/docs/Glossary/Byte"
+tranche = "0"
+repere = "Trois octets de 8 bits font 24 bits, représentés par quatre chiffres Base64 de 6 bits ; le dernier bloc de 2 caractères code 1 octet de 8 bits."
+
+[[lecture]]
+reference = "developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/TypedArray"
+organisme = "MDN Web Docs"
+titre = "TypedArray"
+date_page = "disponible depuis juillet 2015"
+fiches = ["info-bits-octets"]
+pour = "contexte"
+ancienne_reference = "developer.mozilla.org/fr/docs/Glossary/Byte"
+tranche = "0"
+repere = "Le tableau des objets TypedArray donne 1 octet pour Int8Array, Uint8Array et Uint8ClampedArray, avec des entiers sur 8 bits ; la fonctionnalité est disponible depuis juillet 2015."

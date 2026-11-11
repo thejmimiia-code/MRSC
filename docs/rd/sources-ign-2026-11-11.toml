@@ -1,0 +1,284 @@
+# Troisième passe du 11 novembre 2026 : l’accueil IGN, retenté, et les services officiels de l’IGN.
+# Références sans schéma : les adresses exactes restent dans docs/apprentissage/catalogue.toml.
+# Ce registre n’est ni le catalogue, ni docs/apprentissage/relectures.toml, ni une fiche modifiée.
+
+[meta]
+version = 1
+auteur = "agent"
+date = 2026-11-11
+heure_utc = "16:14"
+passe = "troisième passe du 11 novembre 2026"
+portee = "retenter l’accueil IGN déclaré et lire des pages officielles de l’IGN pour les deux fiches de géographie"
+registre_principal = "docs/rd/sources-ouvertes-2026-11-11.toml"
+registre_complement = "docs/rd/sources-complement-2026-11-11.toml"
+catalogue = "docs/apprentissage/catalogue.toml"
+registre_agent = "docs/rd/relecture-agent-prototypes.toml"
+adresse_declaree = "www.ign.fr/"
+fiches = ["geo-decrire-paysage", "geo-lire-legende-carte"]
+tentatives = 17
+http_403 = 13
+redirections = 1
+pages_erreur_servies = 1
+contenus_generiques = 2
+pages_lues = 10
+confrontations = 2
+fiches_modifiees = 0
+adresses_ajoutees_catalogue = 0
+rattachements_agent_modifies = 0
+statuts_promus = 0
+urls_externes_recopiees = 0
+limite_globale = "Une page officielle lue sur un autre domaine de l’IGN ne rend pas l’accueil déclaré lisible et ne vaut ni résolution de source-portail, ni expertise de domaine, ni validation de personne."
+
+[[tentative]]
+reference = "www.ign.fr/"
+statut = "http-403"
+tranche = "0"
+repere = "Accueil déclaré dans le catalogue : HTTP 403, sans contenu ni bandeau de maintenance. Retenté sans paramètre puis avec un paramètre de relecture daté."
+
+[[tentative]]
+reference = "www.ign.fr/?relecture-2026-11-11-3=1"
+statut = "http-403"
+tranche = "0"
+repere = "Troisième retentative datée de l’accueil déclaré : HTTP 403, aucune page servie."
+
+[[tentative]]
+reference = "www.ign.fr/institut/institut/statut-et-missions"
+statut = "http-403"
+tranche = "0"
+repere = "Page de statut et de missions signalée par la recherche : HTTP 403."
+
+[[tentative]]
+reference = "geoservices.ign.fr/"
+statut = "http-403"
+tranche = "0"
+repere = "Ancien portail des géoservices : HTTP 403."
+
+[[tentative]]
+reference = "macarte.ign.fr/cgu"
+statut = "http-403"
+tranche = "0"
+repere = "Conditions générales de Ma carte IGN : HTTP 403."
+
+[[tentative]]
+reference = "inventaire-forestier.ign.fr/spip.php?rubrique4="
+statut = "http-403"
+tranche = "0"
+repere = "Sous-domaine de l’inventaire forestier national : HTTP 403."
+
+[[tentative]]
+reference = "education.ign.fr/dossiers/lire-une-carte-et-sorienter"
+statut = "http-403"
+tranche = "0"
+repere = "Ressources pédagogiques IGN : HTTP 403."
+
+[[tentative]]
+reference = "www.ign.fr/mag/"
+statut = "http-403"
+tranche = "0"
+repere = "Rubrique magazine du portail : HTTP 403."
+
+[[tentative]]
+reference = "www.ign.fr/mag/apprendre-lire-une-carte-en-cinq-etapes"
+statut = "http-403"
+tranche = "0"
+repere = "Dossier « Apprendre à lire une carte en cinq étapes » signalé par la recherche : HTTP 403 ; l’extrait de recherche n’est pas une page lue."
+
+[[tentative]]
+reference = "www.ign.fr/mag/apprendre-lire-une-carte-en-cinq-etapes?relecture-2026-11-11=3"
+statut = "http-403"
+tranche = "0"
+repere = "Même dossier avec paramètre de relecture : HTTP 403."
+
+[[tentative]]
+reference = "ign.fr/mag/apprendre-lire-une-carte-en-cinq-etapes"
+statut = "http-403"
+tranche = "0"
+repere = "Même dossier sans www : HTTP 403."
+
+[[tentative]]
+reference = "ign.fr/reperes/comment-fabrique-t-les-cartes"
+statut = "http-403"
+tranche = "0"
+repere = "Page « Comment fabrique-t-on les cartes ? » : HTTP 403."
+
+[[tentative]]
+reference = "www.ign.fr/publications-de-l-ign/institut/Ressources_pedagogiques/livret_decouvrez_LMDC.pdf"
+statut = "http-403"
+tranche = "0"
+repere = "Livret pédagogique « Découvrez le monde des cartes » : HTTP 403 ; le PDF n’a pas été lu."
+
+[[tentative]]
+reference = "www.geoportail.gouv.fr/"
+statut = "redirection"
+tranche = "0"
+repere = "L’ancienne adresse du Géoportail répond et renvoie sur l’explorateur de cartes de cartes.gouv.fr ; ce n’est pas une page indépendante et elle n’est pas comptée deux fois."
+
+[[tentative]]
+reference = "data.geopf.fr/"
+statut = "page-erreur-servie"
+tranche = "0"
+repere = "La racine du domaine de données répond « no Route matched with those values » : page d’erreur servie, aucun contenu de catalogue."
+
+[[tentative]]
+reference = "cartes.gouv.fr/rechercher-une-donnee/dataset/IGNF_SCAN-25"
+statut = "contenu-generique"
+tranche = "0"
+repere = "La fiche de donnée attendue n’est pas servie : seulement le bandeau « Bienvenue sur cartes.gouv.fr » et « Géoservices converge vers cartes.gouv.fr ». Aucune description du SCAN 25 lue à cette adresse."
+
+[[tentative]]
+reference = "cartes.gouv.fr/catalogue/dataset/IGNF_PLAN-IGN"
+statut = "contenu-generique"
+tranche = "0"
+repere = "Même bandeau générique, titre « entityTitle | Rechercher une donnée ». Aucune fiche de donnée lisible."
+
+[[lecture]]
+reference = "cartes.gouv.fr/explorer-les-cartes/"
+organisme = "IGN — Géoplateforme"
+titre = "Explorer les cartes"
+date_page = "éditions 2026-10-15 et 2026-06-01 visibles dans le catalogue de couches"
+fiches = ["geo-decrire-paysage", "geo-lire-legende-carte"]
+pour = "contexte-officiel"
+tranche = "0"
+repere = "Catalogue de couches : Plan IGN, photographies aériennes, Carte TOP 25 (SCAN 25), parcelles cadastrales. La fiche SCAN 25 dit que la carte topographique représente le relief par des courbes de niveaux et les détails du terrain : routes, sentiers, constructions, bois, arbre isolé, rivière, source. Un panneau « Légendes » permet d’ouvrir la légende d’une couche."
+limite = "C’est un catalogue de couches et une interface, pas un passage pédagogique sur la lecture d’une légende."
+
+[[lecture]]
+reference = "cartes.gouv.fr/actualites/clap-de-fin-pour-le-geoportail-bienvenue-sur-cartesgouvfr"
+organisme = "IGN — Géoplateforme"
+titre = "Clap de fin pour le Géoportail : bienvenue sur cartes.gouv.fr"
+date_page = "publié le 30 septembre 2026"
+fiches = ["geo-decrire-paysage", "geo-lire-legende-carte"]
+pour = "contexte-officiel"
+tranche = "0"
+repere = "Le Géoportail a fermé le 30 septembre après vingt ans ; la quasi-totalité des services, données et fonctionnalités sont accessibles sur cartes.gouv.fr. Un convertisseur de liens est actif jusqu’au 31 décembre 2026. Le message est signé « L’équipe de l’IGN »."
+limite = "Cette page explique une migration de service, pas le contenu d’une carte ni d’une légende."
+
+[[lecture]]
+reference = "cartes.gouv.fr/aide/fr/partenaires/ign/generalites-ign/actualites/2026-01-scan-25/"
+organisme = "IGN — Aide"
+titre = "Évolution de la légende du SCAN 25® en 2026"
+date_page = "modifié le 26 janvier 2026"
+fiches = ["geo-lire-legende-carte"]
+pour = "contexte-officiel"
+tranche = "0"
+repere = "Le SCAN 25® est publié chaque année à partir du fond cartographique au 1:25 000 ; c’est la version numérique de la carte papier. « Même si le contenu est identique entre la carte papier et le SCAN 25, la légende utilisée n’est pas identique. » L’IGN prévoit de rapprocher les deux légendes et de retravailler couleurs et police."
+limite = "La page annonce une évolution en cours et sollicite des retours ; elle ne fixe pas une légende définitive."
+
+[[lecture]]
+reference = "cartes.gouv.fr/aide/fr/guides-utilisateur/visualiseur-cartographique/generalites-visualiseur/"
+organisme = "IGN — Aide"
+titre = "Généralités du visualiseur cartographique"
+date_page = "modifié le 7 octobre 2026"
+fiches = ["geo-lire-legende-carte"]
+pour = "contexte-officiel"
+tranche = "0"
+repere = "Le service « Explorer les cartes » succède au Géoportail ; parmi les outils cités figure « afficher la légende des couches », à côté de la mesure de distances, du profil altimétrique et de la recherche de lieux."
+limite = "Page de présentation d’un outil, sans exemple de signe ni de correspondance signe / réalité."
+
+[[lecture]]
+reference = "cartes.gouv.fr/decouvrir/explorer-les-cartes/"
+organisme = "IGN — Géoplateforme"
+titre = "Explorer les cartes"
+date_page = "page sans date affichée"
+fiches = ["geo-decrire-paysage", "geo-lire-legende-carte"]
+pour = "contexte-officiel"
+tranche = "0"
+repere = "Les cartes de l’IGN sont dites « référence du territoire français » ; la page invite à « Consulter leur légende, leurs métadonnées ou encore interroger directement les données sur la carte ». Elle cite les fonds IGN, les prises de vues aériennes, le SCAN 25, le cadastre et les données d’occupation du sol."
+limite = "Page de découverte commerciale et fonctionnelle, pas un document d’apprentissage."
+
+[[lecture]]
+reference = "cartes.gouv.fr/decouvrir/"
+organisme = "IGN — Géoplateforme"
+titre = "Découvrir cartes.gouv.fr"
+date_page = "page sans date affichée"
+fiches = ["geo-decrire-paysage", "geo-lire-legende-carte"]
+pour = "contexte-officiel"
+tranche = "0"
+repere = "Quatre entrées : Explorer les cartes, Rechercher une donnée, Publier une donnée, Collaborer. La page nomme les jeux de données de référence (BD ORTHO, SCAN 25, OCS GE, forêts publiques ONF) et leurs producteurs."
+limite = "Page d’accueil de rubrique : elle ne donne aucun repère sur la lecture d’une légende."
+
+[[lecture]]
+reference = "cartes.gouv.fr/aide/fr/partenaires/ign/referentiels-description-territoire/occupation-sol-topographie/ocs-ge-nouvelle-generation/"
+organisme = "IGN — Aide"
+titre = "OCS GE nouvelle génération"
+date_page = "modifié le 16 décembre 2025"
+fiches = ["geo-decrire-paysage"]
+pour = "contexte-officiel"
+tranche = "0"
+repere = "« 2 dimensions pour décrire le sol : couverture (c’est quoi ?) / usage (à quoi ça sert ?) » ; la page renvoie à la nomenclature du CNIG et aux seuils appliqués."
+limite = "La distinction couverture / usage est celle d’une nomenclature de données, pas d’un exercice de description d’un paysage fictif."
+
+[[lecture]]
+reference = "cartes.gouv.fr/aide/fr/partenaires/ign/generalites-ign/actualites/2026-07-plan-ign-hd-et-sentiers/"
+organisme = "IGN — Aide"
+titre = "Cet été l’IGN teste l’intérêt des utilisateurs pour deux nouvelles cartes"
+date_page = "modifié le 9 juillet 2026"
+fiches = ["geo-decrire-paysage"]
+pour = "contexte-officiel"
+tranche = "0"
+repere = "Le Plan IGN HD est présenté comme une « cartographie des paysages » qui met en avant les éléments au-dessus du sol : végétation, bâtiments, ombres portées. Le rendu distingue la structure du relief, les silhouettes du bâti et de la végétation, l’occupation du sol, puis les données vectorielles BD TOPO « représentées selon la symbolisation utilisée sur Plan IGN »."
+limite = "Il s’agit d’un test estival dans une application mobile, avec une disponibilité annoncée sous condition ; ce n’est pas une règle stable de description."
+
+[[lecture]]
+reference = "data.geopf.fr/annexes/ressources/documentation/Legende2026.pdf"
+organisme = "IGN — documentation Géoplateforme"
+titre = "Légende 2026 (cartes aéronautiques OACI)"
+date_page = "prochaine édition annoncée pour le printemps 2027 ; lignes d’égale déclinaison au 1er janvier 2025"
+fiches = ["geo-lire-legende-carte"]
+pour = "contexte-officiel"
+tranche = "0"
+repere = "Le document est une table de correspondance explicite entre des signes et ce qu’ils représentent : aérodromes, espaces aériens, obstacles, et un « FONDS CARTOGRAPHIQUE » où autoroute, route principale, route secondaire, végétation, point coté et monuments ont chacun un figuré. Il précise que l’IGN transcrit des renseignements collectés sans être habilité à vérifier sur le terrain leur nature, position et hauteur."
+limite = "C’est une légende de cartes aéronautiques OACI, pas une légende de carte topographique grand public ; son domaine n’est pas celui de la fiche. Elle illustre le principe d’une légende, elle ne la remplace pas."
+
+[[lecture]]
+reference = "data.geopf.fr/annexes/ressources/fiches/cartesIGN/composition_donnee_cartes_ign_classiques.pdf"
+organisme = "IGN — documentation Géoplateforme"
+titre = "Composition des données Cartes IGN"
+date_page = "date de mise à jour : 20/10/2026"
+fiches = ["geo-lire-legende-carte"]
+pour = "contexte-officiel"
+tranche = "0"
+repere = "Tableau des territoires, échelles, produits et dates d’édition : PLAN IGN au 1:1 066 à 1:4 265, SCAN 25 Touristique au 1:8 531 à 1:17 061, SCAN 100, SCAN régional, SCAN 1000 ; éditions 2026 pour la métropole et plusieurs territoires ultramarins."
+limite = "Malgré son extension, la ressource servie est un tableau d’éditions et d’échelles, pas une légende de symboles. Elle ne dit pas ce que représente un trait bleu ou une zone verte."
+
+[[confrontation]]
+fiche = "geo-decrire-paysage"
+champ = "objectif"
+repere = "Décrire un paysage à partir d’indices visibles et nommer une information qui demanderait une autre source."
+extrait = "La situation nomme une rivière, un pont, des maisons près d’une route et des parcelles cultivées sur les pentes."
+confrontation = "Le catalogue de couches de cartes.gouv.fr cite routes, sentiers, constructions, bois, arbre isolé, rivière et source comme détails représentés sur une carte topographique ; la page OCS GE distingue couverture (« c’est quoi ? ») et usage (« à quoi ça sert ? »). Le second terme demande une autre source que la seule observation."
+verdict = "contexte-officiel-consigne"
+suite = "Ne pas transformer ce rapprochement en correction de la fiche : le statut reste « Prototype à relire » et l’adresse IGN reste dans sources_indisponibles."
+
+[[confrontation]]
+fiche = "geo-lire-legende-carte"
+champ = "objectif"
+repere = "Retrouver deux éléments sur une carte fictive en lisant d’abord la légende et les symboles correspondants."
+extrait = "La légende fictive associe une ligne bleue à une rivière, une zone verte à un parc et une ligne grise épaisse à une route."
+confrontation = "La page « Évolution de la légende du SCAN 25® en 2026 » dit qu’une légende est une convention qui peut différer entre version papier et version numérique ; la légende OACI 2026 montre une table explicite signe / signification ; le visualiseur permet d’« afficher la légende des couches »."
+verdict = "contexte-officiel-consigne"
+suite = "Ne pas importer les couleurs de la légende OACI dans la fiche : le domaine aéronautique n’est pas celui de la carte fictive."
+
+[[limite]]
+ordre = 1
+texte = "L’adresse déclarée www.ign.fr/ reste en HTTP 403 sur les trois passes du 11 novembre 2026. Les pages lues sur cartes.gouv.fr et data.geopf.fr sont des pages officielles de l’IGN, pas l’ouverture de l’accueil déclaré : aucune source-portail n’est déclarée résolue."
+
+[[limite]]
+ordre = 2
+texte = "La date de cette troisième passe est encore le 11 novembre 2026 (16 h 14 UTC dans l’environnement de travail). La retentative « à une date ultérieure » annoncée dans le complément reste donc à faire ; ce registre ne la remplace pas."
+
+[[limite]]
+ordre = 3
+texte = "Les extraits de recherche concernant les dossiers du magazine IGN, le livret pédagogique et la page « Statut et missions » n’ont pas été lus : fetch_page a répondu HTTP 403 pour chacun. Ils ne sont pas consignés comme lectures."
+
+[[limite]]
+ordre = 4
+texte = "Deux fiches de données de cartes.gouv.fr ne servent qu’un bandeau générique « Bienvenue sur cartes.gouv.fr » : elles sont consignées en contenu générique, sans description de donnée inventée."
+
+[[limite]]
+ordre = 5
+texte = "La racine data.geopf.fr/ sert une page d’erreur « no Route matched with those values » : elle est consignée comme page d’erreur servie, pas comme contenu."
+
+[[limite]]
+ordre = 6
+texte = "Aucune adresse de remplacement n’est ajoutée au catalogue, aucune fiche n’est modifiée, aucun rattachement du registre d’agent n’est changé, aucun statut promu. Ces pages donnent un contexte officiel, elles ne valident pas le contenu pédagogique des deux fiches."

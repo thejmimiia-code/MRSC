@@ -146,6 +146,26 @@ jobs:
           python3 outils/test_mutations_couverture_sujets.py
           python3 outils/construire-couverture-sujets.py --verifier
 
+      # Le plan du projet recalcule le nombre de fichiers de chaque zone
+      # depuis l'arbre réel, exige une action par initiative et refuse qu'une
+      # porte humaine soit racontée comme franchie. Son banc plante douze
+      # situations dans une copie complète, dont une zone retirée et un total
+      # falsifié. Sans cette étape, la carte pourrait vieillir en silence.
+      - name: Vérifier le plan complet du projet et son banc
+        run: |
+          python3 outils/test_mutations_plan_projet.py
+          python3 outils/verifier-plan-projet.py
+
+      # L'accueil refondu le 11 novembre 2026 ne doit pas recommencer à
+      # rabâcher les mêmes informations. Cette garde recalcule les dix reprises
+      # dans index.html, vérifie l'ordre des six sections et les quatre portes,
+      # et refuse qu'une classe CSS de l'ancienne page ait disparu. Son banc
+      # plante treize situations dans une copie complète du dépôt.
+      - name: Vérifier le plan complet du site et son banc
+        run: |
+          python3 outils/test_mutations_plan_site.py
+          python3 outils/verifier-plan-site.py
+
       # L'inventaire `docs/rd/inventaire-controles.md` répond, outil par outil,
       # à « qu'est-ce qui prouve que ce contrôle peut échouer ? ». Ce garde-là
       # empêche l'oubli ; son banc plante neuf fautes dans une copie du dépôt,

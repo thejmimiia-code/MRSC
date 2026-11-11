@@ -31,7 +31,7 @@ Relevé généré depuis le catalogue, le référentiel, le registre des relectu
 | Sujets sans aucune fiche | 6 | référentiel |
 | Sujets à une seule fiche | 86 | référentiel × catalogue |
 | Sujets sans repère 3 ou 4 | 87 | référentiel × catalogue |
-| Sujets à créer sans carte de sujet | 4 | fichiers `sujet-*.md` |
+| Sujets à créer sans carte de sujet | 0 | fichiers `sujet-*.md` |
 | Fiches de repère 4 | 2 | `catalogue.toml` |
 | Cap indicatif de fiches | 1000 | `plan-1000.toml` |
 | Écart arithmétique au cap | 893 | cap moins fiches |
@@ -42,7 +42,7 @@ Relevé généré depuis le catalogue, le référentiel, le registre des relectu
 | --- | --- | --- |
 | A — Tenir le cap du nombre | 893 fiches manquantes ; à 3 fiches par lot, 298 lots ; si chaque nouvelle fiche reste un prototype, 974 prototypes à relire. | Ni le rythme réel, ni la disponibilité des relecteurs, ni l'utilité des fiches. |
 | B — Relire d'abord | 81 prototypes en attente pour 0 relecture(s) consignée(s) ; le cap reste inchangé et aucune fiche nouvelle n'est nécessaire au calcul. | Le temps nécessaire, la compétence requise par domaine ni l'ordre des fiches. |
-| C — Combler les manques mesurés | 6 sujets sans fiche, 86 sujets à une seule fiche, 87 sujets sans repère 3 ou 4, 4 carte(s) de sujet manquante(s). | Qu'un sujet est plus important qu'un autre, ni qu'une fiche comble son manque. |
+| C — Combler les manques mesurés | 6 sujets sans fiche, 86 sujets à une seule fiche, 87 sujets sans repère 3 ou 4, 0 carte(s) de sujet manquante(s). | Qu'un sujet est plus important qu'un autre, ni qu'une fiche comble son manque. |
 
 Ces trois lignes sont des conséquences des seuls nombres du dépôt. Aucune probabilité, aucune échéance et aucune recommandation ne s'en déduit ; l'arbitrage reste à l'association.
 

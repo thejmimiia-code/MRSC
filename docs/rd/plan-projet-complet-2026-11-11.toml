@@ -1,0 +1,862 @@
+# Plan complet du projet M.R.S.C. — matrice d’exécution du 11 novembre 2026.
+# Les compteurs sont recalculés depuis l’arbre réel par outils/verifier-plan-projet.py.
+# Aucune URL externe, aucune validation humaine, aucun statut promu.
+
+[meta]
+version = 1
+auteur = "agent"
+date = "2026-11-11"
+heure_utc = "16:48"
+demande = "continues et fais toute la R et D, l’innovation et la prospective, avec un plan complet sur l’ensemble du projet"
+total = 579
+zones = 11
+initiatives = 19
+actions = 39
+portes = 9
+horizons = 5
+fait_agent = 21
+a_faire_agent = 3
+bloquee_humain = 11
+en_attente_date = 4
+limite_globale = "Une carte qui couvre tous les fichiers ne couvre ni tous les besoins, ni la vérité du monde ; aucune porte humaine n’est franchie par un programme."
+
+[[zone]]
+id = "racine"
+surface = "Site public et entrées du dépôt"
+source_verite = "index.html"
+garde = "outils/verifier-site-statique.py"
+etat = "mesuré, non validé"
+prochaine_action = "Tenir les 121 pages servies et les 16 fichiers racine alignés"
+limite = "Un lien résolu ne dit pas que le rendu plaît ni que le contenu est à jour."
+nombre = 22
+
+[[zone]]
+id = ".agents"
+surface = "Bibliothèque de skills méthodologiques"
+source_verite = "docs/rd/bibliotheque-skills.md"
+garde = "outils/verifier-rd-continue.py"
+etat = "mesuré, non validé"
+prochaine_action = "Ne charger que les cartes utiles, une à trois par tâche"
+limite = "Une skill est un guide de méthode, pas une qualification ni une expertise."
+nombre = 28
+
+[[zone]]
+id = ".claude"
+surface = "Point d’entrée visuel et skills amont licenciées"
+source_verite = "docs/rd/bibliotheque-skills.md"
+garde = "outils/verifier-rd-continue.py"
+etat = "mesuré, non validé"
+prochaine_action = "Vérifier les fichiers de provenance et les empreintes des skills amont"
+limite = "Les règles M.R.S.C. priment sur les références amont facultatives."
+nombre = 26
+
+[[zone]]
+id = ".github"
+surface = "CI, publication, veille et crochets"
+source_verite = "docs/rd/inventaire-controles.md"
+garde = "outils/verifier-workflows.py"
+etat = "7 workflows conformes"
+prochaine_action = "Garder la sentinelle câblée sur chaque push et chaque PR"
+limite = "Un workflow vert ne prouve ni la qualité éditoriale ni un déploiement réussi."
+nombre = 9
+
+[[zone]]
+id = ".githooks"
+surface = "Crochet local pre-commit"
+source_verite = "docs/rd/relecture-automatique.md"
+garde = "outils/verifier-relecture-contenus.py"
+etat = "exécutable, câblé"
+prochaine_action = "Refuser toute édition non signée localement"
+limite = "Un crochet local peut être contourné ; la CI reste la porte de vérité."
+nombre = 1
+
+[[zone]]
+id = "api"
+surface = "API du simulateur, servie par Vercel"
+source_verite = "api/donnees.py"
+garde = "outils/verifier-securite.py"
+etat = "mesuré, non validé"
+prochaine_action = "Séparer paramètres, modèle, calcul et résultat"
+limite = "Aucune API n’est interrogée ici : les contrôles sont hors ligne."
+nombre = 17
+
+[[zone]]
+id = "apprendre"
+surface = "107 pages de fiches générées"
+source_verite = "docs/apprentissage/catalogue.toml"
+garde = "outils/construire-apprentissages.py"
+etat = "81 prototypes à relire"
+prochaine_action = "Ne jamais éditer une page générée à la main"
+limite = "Une page générée n’est pas une preuve de justesse du contenu."
+nombre = 107
+
+[[zone]]
+id = "assets"
+surface = "CSS, JavaScript, images et documents"
+source_verite = "assets/css/site.css"
+garde = "outils/verifier-integration.py"
+etat = "ressources non orphelines"
+prochaine_action = "Maintenir les relevés de poids et les variantes d’images"
+limite = "Les six relevés binaires périmés restent à remesurer après publication."
+nombre = 33
+
+[[zone]]
+id = "docs"
+surface = "R&D, apprentissage, gouvernance et prospective"
+source_verite = "docs/rd/portefeuille.toml"
+garde = "outils/verifier-rd-continue.py"
+etat = "19 initiatives suivies"
+prochaine_action = "Régénérer toute sortie dérivée depuis son générateur"
+limite = "Un document de travail n’est ni une décision ni une validation."
+nombre = 164
+
+[[zone]]
+id = "outils"
+surface = "Gardes, générateurs et bancs de mutation"
+source_verite = "outils/verifier-rd-continue.py"
+garde = "outils/verifier-inventaire-controles.py"
+etat = "contrôles classés"
+prochaine_action = "Tout nouvel outil doit entrer dans l’inventaire avec son banc"
+limite = "Un banc prouve qu’une porte peut échouer, pas qu’elle voit toutes les fautes."
+nombre = 141
+
+[[zone]]
+id = "simulateur"
+surface = "Moteur embarqué et pages du simulateur"
+source_verite = "simulateur/donnees_live.py"
+garde = "outils/construire-simulateur.py"
+etat = "moteur amont non synchronisé"
+prochaine_action = "Comparer l’amont avant toute mise à jour du moteur"
+limite = "Le résultat d’une simulation n’est ni une prévision ni un fait observé."
+nombre = 31
+
+[[initiative]]
+id = "relire-les-44-prototypes"
+priorite = "P0"
+etat = "a-valider"
+phase = "relecture"
+chantier = "B"
+action_agent = "Relire les 81 prototypes et consigner 131 rattachements de sources ouvertes"
+porte_humaine = "expertise-domaine"
+preuve = "docs/rd/relecture-agent-prototypes.toml"
+echeance = "revue du 2026-11-19"
+
+[[initiative]]
+id = "co-conception-et-essais"
+priorite = "P0"
+etat = "a-cadrer"
+phase = "cadrage"
+chantier = "F"
+action_agent = "Préparer le protocole et les tâches B1 à B6 sans volontaire"
+porte_humaine = "essais-volontaires"
+preuve = "docs/rd/protocole-essais-usage.md"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "autres-langues-et-contextes"
+priorite = "P1"
+etat = "a-cadrer"
+phase = "recherche"
+chantier = "D"
+action_agent = "Cartographier langues, variétés et licences sans universaliser"
+porte_humaine = "expertise-domaine"
+preuve = "docs/rd/portefeuille.toml"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "mondes-3d-pluridisciplinaires"
+priorite = "P1"
+etat = "a-cadrer"
+phase = "conception"
+chantier = "D"
+action_agent = "Poser un objectif pédagogique mesurable avant tout décor"
+porte_humaine = "expertise-domaine"
+preuve = "docs/rd/portefeuille.toml"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "veille-savoirs-evolutifs"
+priorite = "P0"
+etat = "en-cours"
+phase = "maintien"
+chantier = "G"
+action_agent = "Tenir le journal, les dates de revue et la veille datée"
+porte_humaine = "aucune"
+preuve = "docs/rd/journal.md"
+echeance = "relevé externe de janvier 2027"
+
+[[initiative]]
+id = "optimisation-du-site"
+priorite = "P1"
+etat = "a-tester"
+phase = "essai"
+chantier = "C"
+action_agent = "Mesurer six apparences et la dette de format sans juger le rendu"
+porte_humaine = "jugement-rendu"
+preuve = "docs/rd/releve-affichages-2026-11-06.md"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "indexation-et-lecteurs-de-contenu"
+priorite = "P1"
+etat = "a-tester"
+phase = "prototype"
+chantier = "C"
+action_agent = "Vérifier l’indexation dans les outils administrés par l’association"
+porte_humaine = "aucune"
+preuve = "docs/rd/portefeuille.toml"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "direction-artistique-motion"
+priorite = "P1"
+etat = "en-cours"
+phase = "recherche"
+chantier = "D"
+action_agent = "Comparer quatre chartes sans en imposer une"
+porte_humaine = "decision-editoriale"
+preuve = "docs/rd/ligne-graphique.md"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "documentation-rd-eva"
+priorite = "P1"
+etat = "en-cours"
+phase = "recherche"
+chantier = "D"
+action_agent = "Tenir les 12 phases, la mémoire à trois horizons et le cycle de cagnotte"
+porte_humaine = "achat-materiel-eva"
+preuve = "docs/rd/eva/plan.toml"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "coordination-de-tous-les-agents"
+priorite = "P0"
+etat = "en-cours"
+phase = "mise-en-place"
+chantier = "A"
+action_agent = "Garder la sentinelle, le journal, les avancées et les bancs"
+porte_humaine = "publication"
+preuve = "AGENTS.md"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "coherence-textes-publics"
+priorite = "P1"
+etat = "a-valider"
+phase = "relecture"
+chantier = "B"
+action_agent = "Relire l’ouverture, les repères et la page Transparence"
+porte_humaine = "decision-editoriale"
+preuve = "docs/rd/rapport-coherence-editoriale-2026-10-13.md"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "vote-distanciel-verifiable"
+priorite = "P0"
+etat = "a-cadrer"
+phase = "recherche"
+chantier = "F"
+action_agent = "Consigner 18 relevés et six rôles de revue sans règle de droit"
+porte_humaine = "avis-juridique"
+preuve = "docs/rd/vote-distanciel-accessibilite.toml"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "prospective-apprentissages-2030"
+priorite = "P1"
+etat = "a-cadrer"
+phase = "conception"
+chantier = "E"
+action_agent = "Tenir quatre scénarios, trois options et dix décisions sans regret"
+porte_humaine = "decision-prospective"
+preuve = "docs/rd/decision-prospective.md"
+echeance = "avant le 31 janvier 2027"
+
+[[initiative]]
+id = "raccordement-domaine-www"
+priorite = "P1"
+etat = "bloquee"
+phase = "mise-en-place"
+chantier = "G"
+action_agent = "Laisser le CNAME à l’administrateur de la zone DNS"
+porte_humaine = "dns-www"
+preuve = "vercel.json"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "poids-et-sobriete-numerique"
+priorite = "P1"
+etat = "a-tester"
+phase = "essai"
+chantier = "C"
+action_agent = "Compter les octets estimés et les octets réellement servis"
+porte_humaine = "jugement-rendu"
+preuve = "docs/rd/poids-pages.md"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "cartographier-les-lacunes"
+priorite = "P1"
+etat = "en-cours"
+phase = "veille"
+chantier = "B"
+action_agent = "Régénérer carte des lacunes, couverture qualifiée et relevé prospectif"
+porte_humaine = "aucune"
+preuve = "docs/rd/carte-lacunes.md"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "confronter-une-affirmation-a-sa-source"
+priorite = "P0"
+etat = "a-tester"
+phase = "prototype"
+chantier = "A"
+action_agent = "Tenter les 89 adresses, puis consigner trois passes datées"
+porte_humaine = "aucune"
+preuve = "docs/rd/sources-ouvertes-2026-11-11.toml"
+echeance = "retentative IGN à une date ultérieure"
+
+[[initiative]]
+id = "ecouter-la-page"
+priorite = "P1"
+etat = "a-valider"
+phase = "prototype"
+chantier = "D"
+action_agent = "Garder un repli texte et une écoute sur l’appareil"
+porte_humaine = "essais-volontaires"
+preuve = "docs/rd/inclusion-lecture-vocale.md"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "sources-fermees-et-registre-des-refus"
+priorite = "P1"
+etat = "en-cours"
+phase = "maintien"
+chantier = "B"
+action_agent = "Tenir sept sources tentées et refusées, arbitrer arts-composer-formes"
+porte_humaine = "aucune"
+preuve = "docs/apprentissage/sources-refusees.toml"
+echeance = "sans échéance"
+
+[[action]]
+id = "rd-relecture-81"
+type = "rd"
+initiative = "relire-les-44-prototypes"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/relecture-agent-prototypes.toml"
+dependance = "aucune"
+critere = "81 relectures de contenu datées, 131 rattachements et 20 égalités recalculées sans écart."
+limite = "Ne remplace pas une expertise compétente sur les 14 fiches de domaines sensibles."
+
+[[action]]
+id = "rd-sources-89"
+type = "rd"
+initiative = "confronter-une-affirmation-a-sa-source"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/sources-ouvertes-2026-11-11.toml"
+dependance = "rd-relecture-81"
+critere = "89 adresses uniques tentées, 105 / 105 adresses du catalogue couvertes, 83 contenus consignés."
+limite = "6 adresses sans contenu confrontable ne sont pas transformées en sources lues."
+
+[[action]]
+id = "rd-sources-complement"
+type = "rd"
+initiative = "confronter-une-affirmation-a-sa-source"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/sources-complement-2026-11-11.toml"
+dependance = "rd-sources-89"
+critere = "16 pages officielles lues et datées, 2 remplacements exacts, 2 partiels, 1 contexte."
+limite = "Aucune adresse de remplacement n’est ajoutée au catalogue."
+
+[[action]]
+id = "rd-sources-ign"
+type = "rd"
+initiative = "confronter-une-affirmation-a-sa-source"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/sources-ign-2026-11-11.toml"
+dependance = "rd-sources-complement"
+critere = "17 tentatives, 13 HTTP 403, 10 pages de l’IGN lues et 2 confrontations consignées avant toute fiche."
+limite = "L’accueil www.ign.fr/ reste fermé ; aucune source-portail n’est déclarée résolue."
+
+[[action]]
+id = "rd-cartes-sujet"
+type = "rd"
+initiative = "cartographier-les-lacunes"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/carte-lacunes.md"
+dependance = "aucune"
+critere = "4 cartes de cadrage écrites pour les 4 sujets qui en étaient dépourvus, 0 fiche créée."
+limite = "Les 3 sujets en revue-experte gardent leur porte ; aucune règle de droit, de santé ou de sécurité n’est avancée."
+
+[[action]]
+id = "rd-couverture-regeneree"
+type = "rd"
+initiative = "cartographier-les-lacunes"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/couverture-sujets.md"
+dependance = "rd-cartes-sujet"
+critere = "Carte des lacunes, couverture qualifiée et relevé prospectif régénérés puis vérifiés."
+limite = "Le manque « sans-carte-de-sujet » passe à 0 ; les 6 sujets restent sans fiche."
+
+[[action]]
+id = "rd-plan-complet"
+type = "rd"
+initiative = "coordination-de-tous-les-agents"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/plan-complet-rd-innovation-prospective.md"
+dependance = "aucune"
+critere = "19 initiatives, 7 chantiers, 5 horizons et 7 portes cartographiés et gardés."
+limite = "Le plan de R&D ne couvrait pas encore la totalité des fichiers du dépôt."
+
+[[action]]
+id = "rd-plan-projet"
+type = "rd"
+initiative = "coordination-de-tous-les-agents"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/plan-projet-complet-2026-11-11.toml"
+dependance = "rd-plan-complet"
+critere = "579 fichiers répartis en 11 zones, 19 initiatives et une action par état d’exécution."
+limite = "Une couverture de fichiers n’est pas une couverture de besoins ni une validation."
+
+[[action]]
+id = "rd-sentinelle"
+type = "rd"
+initiative = "coordination-de-tous-les-agents"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/empreintes-contenus.toml"
+dependance = "aucune"
+critere = "Chaque édition passe par une signature d’agent datée, avec constat et limite."
+limite = "Au 16 h 48 UTC, 387 unités restaient en dette initiale consignée ; le lot site du 17 h 24 UTC tient ses propres compteurs."
+
+[[action]]
+id = "rd-eva"
+type = "rd"
+initiative = "documentation-rd-eva"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/eva/memoire.json"
+dependance = "rd-sentinelle"
+critere = "Mémoire à trois horizons, graphe et plan régénérés puis vérifiés."
+limite = "Les phases conscience-et-corps et parite-humaine-des-delais restent hors de portée."
+
+[[action]]
+id = "rd-inventaire"
+type = "rd"
+initiative = "coordination-de-tous-les-agents"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/inventaire-controles.md"
+dependance = "aucune"
+critere = "Le nouvel outil et son banc entrent dans l’inventaire avec des comptes recalculés."
+limite = "Un statut banc ne garantit pas que la porte voit toutes les régressions."
+
+[[action]]
+id = "rd-journal-avancee"
+type = "rd"
+initiative = "coordination-de-tous-les-agents"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/avancees.toml"
+dependance = "aucune"
+critere = "Une entrée de journal datée et une 108e avancée avec preuve, contrôle, limite et suite."
+limite = "Une avancée ne certifie pas un résultat d’usage."
+
+[[action]]
+id = "rd-veille-interne"
+type = "rd"
+initiative = "veille-savoirs-evolutifs"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/journal.md"
+dependance = "aucune"
+critere = "Les dates de revue, les statuts et les sources refusées restent traçables."
+limite = "Aucune collecte d’audience ni profil de personne."
+
+[[action]]
+id = "rd-ign-date-ulterieure"
+type = "rd"
+initiative = "confronter-une-affirmation-a-sa-source"
+etat = "en-attente-date"
+porte = "aucune"
+preuve = "docs/rd/sources-ign-2026-11-11.md"
+dependance = "rd-sources-ign"
+critere = "Retenter www.ign.fr/ à une date ultérieure et consigner la page lue avec sa date et son repère."
+limite = "L’horloge du 11 novembre 2026 n’a pas changé : simuler une date ultérieure falsifierait le relevé."
+
+[[action]]
+id = "rd-revue-portefeuille"
+type = "rd"
+initiative = "veille-savoirs-evolutifs"
+etat = "en-attente-date"
+porte = "decision-editoriale"
+preuve = "docs/rd/portefeuille.toml"
+dependance = "aucune"
+critere = "Revue du 2026-11-19 réellement effectuée et résumée avant de déplacer derniere_revue."
+limite = "Une revue non tenue ne peut pas être marquée comme faite."
+
+[[action]]
+id = "rd-veille-janvier-2027"
+type = "rd"
+initiative = "veille-savoirs-evolutifs"
+etat = "en-attente-date"
+porte = "aucune"
+preuve = "docs/rd/veille-2026-10-17.md"
+dependance = "aucune"
+critere = "Relevé externe daté de janvier 2027, avec auteur, organisme, date et périmètre."
+limite = "Aucune tendance n’est présentée comme établie avant la lecture des sources."
+
+[[action]]
+id = "rd-revue-sources-90j"
+type = "rd"
+initiative = "sources-fermees-et-registre-des-refus"
+etat = "a-faire-agent"
+porte = "aucune"
+preuve = "docs/rd/sources-ouvertes-2026-11-11.md"
+dependance = "rd-sources-89"
+critere = "Reconfirmer les sources sensibles à 90 ou 180 jours et consigner les pages réellement lues."
+limite = "Un lien vivant ne prouve pas que le contenu est à jour."
+
+[[action]]
+id = "rd-coherence-textes"
+type = "rd"
+initiative = "coherence-textes-publics"
+etat = "a-faire-agent"
+porte = "decision-editoriale"
+preuve = "docs/rd/rapport-coherence-editoriale-2026-10-13.md"
+dependance = "aucune"
+critere = "Relire l’ouverture, les repères et la Transparence, puis consigner les écarts."
+limite = "La décision éditoriale finale reste à l’association."
+
+[[action]]
+id = "rd-expertise-14"
+type = "rd"
+initiative = "relire-les-44-prototypes"
+etat = "bloquee-humain"
+porte = "expertise-domaine"
+preuve = "docs/apprentissage/grille-relecture.md"
+dependance = "rd-relecture-81"
+critere = "14 fiches de santé, droit, argent et politique publique relues par une personne compétente."
+limite = "Un agent ne peut pas fabriquer une expertise de domaine ni écrire dans le registre humain."
+
+[[action]]
+id = "rd-essais-volontaires"
+type = "rd"
+initiative = "co-conception-et-essais"
+etat = "bloquee-humain"
+porte = "essais-volontaires"
+preuve = "docs/rd/protocole-essais-usage.md"
+dependance = "aucune"
+critere = "Protocole relu, consentement, conservation et suppression des notes fixés avant toute séance."
+limite = "Aucun volontaire n’a été observé à ce jour."
+
+[[action]]
+id = "rd-avis-juridique"
+type = "rd"
+initiative = "vote-distanciel-verifiable"
+etat = "bloquee-humain"
+porte = "avis-juridique"
+preuve = "docs/rd/statuts-revue-juridique.md"
+dependance = "aucune"
+critere = "Version applicable des statuts, quorum, majorité et charte confirmés par une personne compétente."
+limite = "Aucune règle de vote n’est adoptée par défaut."
+
+[[action]]
+id = "rd-dns"
+type = "rd"
+initiative = "raccordement-domaine-www"
+etat = "bloquee-humain"
+porte = "dns-www"
+preuve = "vercel.json"
+dependance = "aucune"
+critere = "CNAME de www posé par l’administrateur de la zone, certificat et canoniques relus."
+limite = "Un changement de canonique sans CNAME casserait le site servi."
+
+[[action]]
+id = "rd-publication"
+type = "rd"
+initiative = "coordination-de-tous-les-agents"
+etat = "bloquee-humain"
+porte = "publication"
+preuve = "docs/rd/relecture-automatique.md"
+dependance = "aucune"
+critere = "CI, Pages et octets servis relus par un rôle éditorial humain."
+limite = "Aucun poussage, fusion, déploiement ou certification dans ce lot."
+
+[[action]]
+id = "in-boussole"
+type = "innovation"
+initiative = "prospective-apprentissages-2030"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/decision-prospective.md"
+dependance = "aucune"
+critere = "10 questions statiques, aucun compte, aucune collecte, aucun service tiers."
+limite = "Aucune preuve que la Boussole aide à trouver une deuxième fiche."
+
+[[action]]
+id = "in-passeport"
+type = "innovation"
+initiative = "confronter-une-affirmation-a-sa-source"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/prospective-2027-2030.md"
+dependance = "aucune"
+critere = "Grille de lecture distinguant paramètres, version, hypothèses, calcul et limites."
+limite = "Ce n’est pas un audit du modèle ni une vérification de l’API distante."
+
+[[action]]
+id = "in-six-apparences"
+type = "innovation"
+initiative = "optimisation-du-site"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/releve-apparences-2026-11-07.md"
+dependance = "aucune"
+critere = "Six apparences mesurées le 7 novembre 2026 et dette de format comptée."
+limite = "Le rendu à l’œil, le zoom natif et le lecteur d’écran restent à juger."
+
+[[action]]
+id = "in-eva-12-phases"
+type = "innovation"
+initiative = "documentation-rd-eva"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/eva/plan.toml"
+dependance = "aucune"
+critere = "12 phases déclarées, dont deux explicitement hors de portée."
+limite = "Aucune conscience, aucun exosquelette, aucune parité humaine des délais démontrée."
+
+[[action]]
+id = "in-charte-unique"
+type = "innovation"
+initiative = "direction-artistique-motion"
+etat = "bloquee-humain"
+porte = "decision-editoriale"
+preuve = "docs/rd/ligne-graphique.md"
+dependance = "aucune"
+critere = "Une seule charte choisie avant le storyboard de l’article 1."
+limite = "Quatre chartes comparées ne valent pas un choix éditorial."
+
+[[action]]
+id = "in-mondes-3d"
+type = "innovation"
+initiative = "mondes-3d-pluridisciplinaires"
+etat = "bloquee-humain"
+porte = "expertise-domaine"
+preuve = "docs/rd/portefeuille.toml"
+dependance = "aucune"
+critere = "Objectif pédagogique mesurable écrit avant tout décor 3D."
+limite = "Un décor sans objectif reste une promesse générale."
+
+[[action]]
+id = "in-materiel-eva"
+type = "innovation"
+initiative = "documentation-rd-eva"
+etat = "bloquee-humain"
+porte = "achat-materiel-eva"
+preuve = "docs/rd/materiel-spark-serveur-dons.md"
+dependance = "aucune"
+critere = "Décision associative et devis daté avant tout achat ou cagnotte."
+limite = "Aucun matériel acheté, aucune collecte de bulletin réel."
+
+[[action]]
+id = "in-rendu-oeil"
+type = "innovation"
+initiative = "optimisation-du-site"
+etat = "bloquee-humain"
+porte = "jugement-rendu"
+preuve = "docs/rd/releve-affichages-2026-11-06.md"
+dependance = "aucune"
+critere = "Revue visuelle dans Chrome, lecteur d’écran, zoom et tactile sur pages types."
+limite = "13 essais navigateur et 0 violation axe ne valent pas le rendu pour une personne."
+
+[[action]]
+id = "pr-scenarios-a-d"
+type = "prospective"
+initiative = "prospective-apprentissages-2030"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/prospective-2027-2030.md"
+dependance = "aucune"
+critere = "Quatre futurs plausibles A à D, sans probabilité ni tendance établie."
+limite = "Un scénario n’est pas une prévision."
+
+[[action]]
+id = "pr-options-abc"
+type = "prospective"
+initiative = "prospective-apprentissages-2030"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/decision-prospective.md"
+dependance = "pr-scenarios-a-d"
+critere = "Trois options bornées A, B et C, dont « ne rien construire », avec coût et réversibilité."
+limite = "La recommandation de travail n’est pas une décision."
+
+[[action]]
+id = "pr-10-decisions"
+type = "prospective"
+initiative = "prospective-apprentissages-2030"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/prospective-2027-2030.md"
+dependance = "aucune"
+critere = "Dix décisions sans regret écrites avec condition de réexamen et preuve nécessaire."
+limite = "Ce sont des propositions de conception, pas des résultats démontrés."
+
+[[action]]
+id = "pr-lacunes-2027"
+type = "prospective"
+initiative = "cartographier-les-lacunes"
+etat = "fait-agent"
+porte = "aucune"
+preuve = "docs/rd/prospective-lacunes-2027.md"
+dependance = "rd-couverture-regeneree"
+critere = "Trois conséquences arithmétiques recalculées, aucune projection de fréquentation."
+limite = "Le calcul ne hiérarchise pas les sujets."
+
+[[action]]
+id = "pr-decision-abc"
+type = "prospective"
+initiative = "prospective-apprentissages-2030"
+etat = "bloquee-humain"
+porte = "decision-prospective"
+preuve = "docs/rd/decision-prospective.md"
+dependance = "pr-options-abc"
+critere = "Option A, B ou C consignée avec date, instance et conditions de réexamen avant le 31 janvier 2027."
+limite = "La trace de décision reste vide : l’agent ne tranche pas à la place de l’association."
+
+[[action]]
+id = "pr-pilote-papier"
+type = "prospective"
+initiative = "prospective-apprentissages-2030"
+etat = "en-attente-date"
+porte = "essais-volontaires"
+preuve = "docs/rd/protocole-essais-usage.md"
+dependance = "pr-decision-abc"
+critere = "Pilote papier uniquement si l’option B est choisie et si le protocole est relu."
+limite = "Aucune séance avant la décision ; aucune donnée personnelle collectée."
+
+[[action]]
+id = "pr-langues-contextes"
+type = "prospective"
+initiative = "autres-langues-et-contextes"
+etat = "bloquee-humain"
+porte = "expertise-domaine"
+preuve = "docs/rd/portefeuille.toml"
+dependance = "aucune"
+critere = "Relectures locales par langue et région, licences audio établies."
+limite = "Aucune traduction présentée comme universelle."
+
+[[action]]
+id = "pr-kit-autonome"
+type = "prospective"
+initiative = "poids-et-sobriete-numerique"
+etat = "a-faire-agent"
+porte = "aucune"
+preuve = "docs/rd/poids-et-sobriete-numerique.md"
+dependance = "aucune"
+critere = "Feuille d’impression maintenue ; un kit de fiches versionnées reste à concevoir."
+limite = "Une copie imprimée peut devenir périmée sans date de révision."
+
+[[porte]]
+id = "expertise-domaine"
+role = "Personne compétente du domaine"
+preuve = "docs/apprentissage/relectures.toml"
+limite = "Une relecture compétente ne vaut ni avis juridique ni preuve d’apprentissage."
+etat = "ouverte"
+
+[[porte]]
+id = "essais-volontaires"
+role = "Volontaires, accessibilité et confidentialité"
+preuve = "docs/rd/protocole-essais-usage.md"
+limite = "Cinq volontaires ne donnent pas une mesure représentative."
+etat = "ouverte"
+
+[[porte]]
+id = "avis-juridique"
+role = "Personne compétente en droit"
+preuve = "docs/rd/statuts-revue-juridique.md"
+limite = "Un avis ne numérise pas un scrutin et ne confirme pas une version de statuts."
+etat = "ouverte"
+
+[[porte]]
+id = "decision-editoriale"
+role = "Rôle éditorial de l’association"
+preuve = "docs/rd/journal.md"
+limite = "Une décision éditoriale n’est pas une preuve de qualité du contenu."
+etat = "ouverte"
+
+[[porte]]
+id = "decision-prospective"
+role = "Instance décisionnaire de l’association"
+preuve = "docs/rd/decision-prospective.md"
+limite = "Le choix d’une option n’est pas un résultat de pilote."
+etat = "ouverte"
+
+[[porte]]
+id = "dns-www"
+role = "Administrateur de la zone DNS"
+preuve = "vercel.json"
+limite = "Un CNAME posé ne valide pas le contenu servi."
+etat = "ouverte"
+
+[[porte]]
+id = "achat-materiel-eva"
+role = "Décision associative et devis daté"
+preuve = "docs/rd/materiel-spark-serveur-dons.md"
+limite = "Aucun achat, aucune cagnotte et aucune collecte sans décision."
+etat = "ouverte"
+
+[[porte]]
+id = "jugement-rendu"
+role = "Regard de la personne sur le rendu"
+preuve = "docs/rd/releve-affichages-2026-11-06.md"
+limite = "Zéro débordement mesuré ne dit pas que le rendu est jugé bon."
+etat = "ouverte"
+
+[[porte]]
+id = "publication"
+role = "Rôle éditorial humain"
+preuve = "docs/rd/relecture-automatique.md"
+limite = "Un déploiement réussi ne certifie ni la qualité ni l’accessibilité."
+etat = "ouverte"
+
+[[horizon]]
+id = "H0"
+fenetre = "déjà servi"
+contenu = "main à 3b76f6d, PR #288 fusionnée, 121 pages mesurées"
+limite = "Le jugement visuel du rendu reste ouvert."
+
+[[horizon]]
+id = "H1"
+fenetre = "11 novembre 2026, immédiat et mécanique"
+contenu = "Ce lot : 4 cartes de cadrage, matrice exhaustive, garde, banc, plan du projet, signatures et batterie"
+limite = "Aucune porte humaine n’est franchie."
+
+[[horizon]]
+id = "H2"
+fenetre = "portes à réunir"
+contenu = "Dossiers d’expertise, planches, comparatifs, devis et briefs préparés par l’agent"
+limite = "Expertise, essais, avis juridique, DNS, charte et décision A/B/C restent à des personnes."
+
+[[horizon]]
+id = "H3"
+fenetre = "2027, sous condition de décision"
+contenu = "Si l’option B est choisie : pilote papier, veille de janvier 2027, revue des sources à 90 jours"
+limite = "Sans décision avant le 31 janvier 2027, rester sur l’option A."
+
+[[horizon]]
+id = "H4"
+fenetre = "2027 à 2030"
+contenu = "Scénarios A à D, langues et contextes, mondes pluridisciplinaires, phases ÉVA conditionnelles, kit autonome"
+limite = "Toute capacité annoncée exige une démonstration datée."
