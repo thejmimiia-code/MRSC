@@ -1,0 +1,1397 @@
+# Relecture de contenu des prototypes par l’agent. Registre généré et daté :
+# ne pas éditer à la main. La porte `outils/relecture-agent-prototypes.py`
+# vérifie la couverture, les constats, les limites et l’absence de validation
+# humaine inventée. Ce registre n’est PAS `docs/apprentissage/relectures.toml`.
+
+[meta]
+version = 1
+auteur = "agent"
+date = 2026-11-10
+portee = "relecture de contenu et vérification des sources des 81 prototypes"
+registre_humain = "docs/apprentissage/relectures.toml"
+rapport = "docs/rd/relecture-agent-prototypes-2026-11-10.md"
+limite_globale = "Une relecture d’agent ne vaut ni expertise du domaine, ni avis juridique, ni essai avec des personnes, ni validation du rendu à l’œil, ni promotion de statut."
+passe_sources = 2026-11-11
+registre_sources = "docs/rd/sources-ouvertes-2026-11-11.toml"
+rapport_sources = "docs/rd/sources-ouvertes-2026-11-11.md"
+sources_tentees = 89
+sources_contenu = 83
+sources_erreurs_servies = 3
+sources_echecs = 3
+
+[[relecture]]
+fiche = "recherche-lire-etude"
+chemin = "apprendre/fiches/recherche-lire-etude.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de recherche-lire-etude « Lire une étude sans confondre résultats et certitudes » (domaine etudes-superieures-recherche, repère 4, revue du 2026-10-08) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Carey, Steiner et Petri — Ten simple rules for reading a scientific paper, PLOS Computational Biology (2020)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "maths-convertir-unites"
+chemin = "apprendre/fiches/maths-convertir-unites.html"
+domaine = "mathematiques"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de maths-convertir-unites « Convertir des mesures sans changer leur quantité » (domaine mathematiques, repère 1, revue du 2026-10-08) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 2 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 1 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Bureau international des poids et mesures — The International System of Units"]
+sources_indisponibles = ["Ministère de l’Éducation nationale — programme de mathématiques du cycle 3, version publiée en janvier 2025"]
+sources_non_ouvertes = 1
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 1 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "maths-moyenne"
+chemin = "apprendre/fiches/maths-moyenne.html"
+domaine = "mathematiques"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de maths-moyenne « Comprendre une moyenne comme un partage égal » (domaine mathematiques, repère 1, revue du 2026-10-24) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 6 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — programme de mathématiques du cycle 4", "Python Software Foundation — statistics, Python 3.14.0, fmean et pondération"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "maths-estimer-calcul"
+chemin = "apprendre/fiches/maths-estimer-calcul.html"
+domaine = "mathematiques"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de maths-estimer-calcul « Estimer un résultat pour vérifier un calcul » (domaine mathematiques, repère 1, revue du 2026-10-08) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 3 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — mathématiques au quotidien, ressources cycles 3 et 4"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "info-ordinateur-fonctions"
+chemin = "apprendre/fiches/info-ordinateur-fonctions.html"
+domaine = "informatique-programmation"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de info-ordinateur-fonctions « Comprendre les rôles d’un ordinateur » (domaine informatique-programmation, repère 1, revue du 2026-10-08) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — Numérique et sciences informatiques : présentation des domaines étudiés"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "prog-comparer-langages"
+chemin = "apprendre/fiches/prog-comparer-langages.html"
+domaine = "informatique-programmation"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de prog-comparer-langages « Un même algorithme, plusieurs langages : Python et JavaScript » (domaine informatique-programmation, repère 1, revue du 2026-10-08) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 3 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 3 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — Numérique et sciences informatiques : algorithmique et langages", "Documentation officielle Python — More Control Flow Tools", "MDN Web Docs — Loops and iteration"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["L’adresse /3/ de la documentation Python suit la version courante : son contenu peut changer sans que l’URL change, et toute version figée dans le titre doit être revérifiée à chaque revue."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "tech-circuit-ouvert-ferme"
+chemin = "apprendre/fiches/tech-circuit-ouvert-ferme.html"
+domaine = "sciences-techniques-environnement"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de tech-circuit-ouvert-ferme « Comprendre un circuit électrique ouvert ou fermé » (domaine sciences-techniques-environnement, repère 1, revue du 2026-10-08) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Prévention du risque électrique : champ du Code du travail et des installations professionnelles, pas d’un circuit d’école. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — ressources d’accompagnement du programme de technologie au cycle 4", "INRS — prévention du risque électrique"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["La source INRS porte sur la prévention en milieu professionnel ; son adéquation à un circuit simple d’apprentissage reste à apprécier."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "tech-electronique-capteur"
+chemin = "apprendre/fiches/tech-electronique-capteur.html"
+domaine = "sciences-techniques-environnement"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de tech-electronique-capteur « Distinguer capteur, commande et action dans un objet électronique » (domaine sciences-techniques-environnement, repère 2, revue du 2026-10-08) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — programme et ressources de technologie au cycle 4"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "civ-choisir-source-publique"
+chemin = "apprendre/fiches/civ-choisir-source-publique.html"
+domaine = "citoyennete-medias"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de civ-choisir-source-publique « Choisir une source publique adaptée à sa question » (domaine citoyennete-medias, repère 2, revue du 2026-10-08) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 6 source(s) déclarée(s), 2 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Accueil officiel : fiches par événement de vie, démarches, actualités ; aucun passage précis. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 4 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Service-Public.fr — information officielle sur les droits et démarches", "Légifrance — diffusion du droit français", "data.gouv.fr — plateforme de données publiques françaises", "INSEE — Institut national de la statistique et des études économiques", "data.gouv.fr — « Licences de réutilisation »", "Vie-publique.fr — repères sur les institutions et politiques publiques"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["5 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires.", "Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "econ-lire-facture"
+chemin = "apprendre/fiches/econ-lire-facture.html"
+domaine = "economie-finances"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de econ-lire-facture « Lire une facture et repérer une échéance » (domaine economie-finances, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 1 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 2 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Accueil officiel : fiches par événement de vie, démarches, actualités ; aucun passage précis. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Service-Public.fr — information officielle sur les droits et démarches", "DGCCRF — information sur la consommation"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires.", "Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "econ-comparer-prix-unitaires"
+chemin = "apprendre/fiches/econ-comparer-prix-unitaires.html"
+domaine = "economie-finances"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de econ-comparer-prix-unitaires « Comparer deux prix à quantité égale » (domaine economie-finances, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Accueil de la DGCCRF : fiches pratiques et actualités, aucune page précise sur un prix unitaire ou une mention de garantie. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["DGCCRF — information sur la consommation", "Éduscol — programmes et ressources de mathématiques au cycle 2"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "fr-reperer-idee-texte"
+chemin = "apprendre/fiches/fr-reperer-idee-texte.html"
+domaine = "langue-communication"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de fr-reperer-idee-texte « Repérer l’idée principale et les informations utiles » (domaine langue-communication, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Page mise à jour le 19 février 2026 : cinq domaines et quatre cycles du socle commun. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — socle commun et apprentissages"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "langue-anglais-demander-aide"
+chemin = "apprendre/fiches/langue-anglais-demander-aide.html"
+domaine = "langues-etrangeres"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de langue-anglais-demander-aide « Demander de l’aide ou une répétition en anglais » (domaine langues-etrangeres, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — programmes et enseignements"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "geo-points-cardinaux"
+chemin = "apprendre/fiches/geo-points-cardinaux.html"
+domaine = "geographie"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de geo-points-cardinaux « S’orienter avec les points cardinaux » (domaine geographie, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Page mise à jour le 19 février 2026 : cinq domaines et quatre cycles du socle commun. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — socle commun et compétences"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "histoire-lire-frise"
+chemin = "apprendre/fiches/histoire-lire-frise.html"
+domaine = "histoire-memoire"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de histoire-lire-frise « Lire une frise chronologique et ordonner des événements » (domaine histoire-memoire, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — programmes et horaires de l’école élémentaire"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "maths-probabilite-tirage"
+chemin = "apprendre/fiches/maths-probabilite-tirage.html"
+domaine = "mathematiques"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de maths-probabilite-tirage « Comprendre une chance dans un tirage simple » (domaine mathematiques, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — programme de mathématiques du cycle 4"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "numerique-organiser-fichiers"
+chemin = "apprendre/fiches/numerique-organiser-fichiers.html"
+domaine = "numerique-ia"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de numerique-organiser-fichiers « Nommer et retrouver ses fichiers sans exposer ses données » (domaine numerique-ia, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : « Pourquoi et comment bien gérer ses sauvegardes ? » : déconnexion du support et test de restauration au sommaire. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Cybermalveillance.gouv.fr — « Pourquoi et comment bien gérer ses sauvegardes ? »", "Cybermalveillance.gouv.fr — prévention et assistance face aux actes de cybermalveillance"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "methodes-demander-clarification"
+chemin = "apprendre/fiches/methodes-demander-clarification.html"
+domaine = "methodes-communication"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de methodes-demander-clarification « Reformuler une demande avant de commencer » (domaine methodes-communication, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Certificat CléA — domaines du socle de compétences professionnelles"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "fr-preparer-explication-orale"
+chemin = "apprendre/fiches/fr-preparer-explication-orale.html"
+domaine = "langue-communication"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de fr-preparer-explication-orale « Préparer une explication courte » (domaine langue-communication, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Page mise à jour le 19 février 2026 : cinq domaines et quatre cycles du socle commun. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — socle commun de connaissances, de compétences et de culture"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "fr-argumenter-avec-exemple"
+chemin = "apprendre/fiches/fr-argumenter-avec-exemple.html"
+domaine = "langue-communication"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de fr-argumenter-avec-exemple « Présenter une idée avec une raison et un exemple » (domaine langue-communication, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Page mise à jour le 19 février 2026 : cinq domaines et quatre cycles du socle commun. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — socle commun de connaissances, de compétences et de culture"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "maths-equation-simple"
+chemin = "apprendre/fiches/maths-equation-simple.html"
+domaine = "mathematiques"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de maths-equation-simple « Résoudre une équation simple en gardant l’égalité » (domaine mathematiques, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 2 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — ressources et programmes de mathématiques", "Éduscol — « Résolution d’équations du premier degré à une inconnue » (groupes à effectif réduit)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "sciences-meteo-climat"
+chemin = "apprendre/fiches/sciences-meteo-climat.html"
+domaine = "sciences-techniques-environnement"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de sciences-meteo-climat « Distinguer météo et climat » (domaine sciences-techniques-environnement, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 3 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Article du 22 mars 2026 : météo à court terme, climat en moyenne sur plusieurs décennies, période de référence de 30 ans. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Météo-France — portail météorologique et climatique", "Météo-France — « Quelle différence entre météo et climat ? »", "Groupe d’experts intergouvernemental sur l’évolution du climat — rapports et ressources"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["2 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "histoire-comparer-sources"
+chemin = "apprendre/fiches/histoire-comparer-sources.html"
+domaine = "histoire-memoire"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de histoire-comparer-sources « Comparer deux sources sur un même événement » (domaine histoire-memoire, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Archives nationales — ressources et fonds d’archives", "Éduscol — Histoire-géographie cycles 3 et 4 : Analyser et comprendre un document (PDF)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "info-bits-octets"
+chemin = "apprendre/fiches/info-bits-octets.html"
+domaine = "informatique-programmation"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de info-bits-octets « Comprendre les bits et les octets » (domaine informatique-programmation, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 1 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 1 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = []
+sources_indisponibles = ["MDN — définition du byte et notions du Web"]
+sources_non_ouvertes = 1
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 1 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "prog-tester-exemples"
+chemin = "apprendre/fiches/prog-tester-exemples.html"
+domaine = "informatique-programmation"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de prog-tester-exemples « Tester un programme avec des cas simples » (domaine informatique-programmation, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Documentation Python — tests unitaires"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "arts-composer-formes"
+chemin = "apprendre/fiches/arts-composer-formes.html"
+domaine = "arts-culture"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de arts-composer-formes « Composer une image avec quelques formes » (domaine arts-culture, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — programmes et ressources pour les apprentissages artistiques"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "fr-comprendre-mot-contexte"
+chemin = "apprendre/fiches/fr-comprendre-mot-contexte.html"
+domaine = "langue-communication"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de fr-comprendre-mot-contexte « Comprendre un mot grâce à son contexte » (domaine langue-communication, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Page mise à jour le 19 février 2026 : cinq domaines et quatre cycles du socle commun. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — socle commun de connaissances, de compétences et de culture"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "maths-lire-echelle-graphique"
+chemin = "apprendre/fiches/maths-lire-echelle-graphique.html"
+domaine = "mathematiques"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de maths-lire-echelle-graphique « Lire les graduations d’un graphique » (domaine mathematiques, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — ressources et programmes de mathématiques", "Éduscol — « Séquence - Organisation et gestion de données - séance 3 : Résoudre des problèmes en prélevant des informations dans des diagrammes »"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "sciences-calculer-vitesse-moyenne"
+chemin = "apprendre/fiches/sciences-calculer-vitesse-moyenne.html"
+domaine = "sciences-techniques-environnement"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de sciences-calculer-vitesse-moyenne « Calculer une vitesse moyenne simple » (domaine sciences-techniques-environnement, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — « Déterminer une vitesse », matière, mouvement, énergie, information (cycles 2 et 3)", "Éduscol — ressources et programmes de sciences physiques"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "sciences-distinguer-melange-changement-etat"
+chemin = "apprendre/fiches/sciences-distinguer-melange-changement-etat.html"
+domaine = "sciences-techniques-environnement"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de sciences-distinguer-melange-changement-etat « Distinguer fusion et dissolution » (domaine sciences-techniques-environnement, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 3 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 3 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — « Qu’est-ce que la matière ? (2) » : états de la matière et changements d’état (évaluation cycle 2)", "Éduscol — « L’eau, un bien commun à préserver » : les solides et l’eau, dissolution et solubilité", "Éduscol — ressources et programmes de sciences et technologie"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "geo-decrire-paysage"
+chemin = "apprendre/fiches/geo-decrire-paysage.html"
+domaine = "geographie"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de geo-decrire-paysage « Décrire un paysage sans lui faire dire trop » (domaine geographie, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 1 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — Pratiquer différents langages en histoire et en géographie : Écrire et pratiquer l’oral (PDF)"]
+sources_indisponibles = ["Institut national de l’information géographique et forestière — IGN"]
+sources_non_ouvertes = 1
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 1 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "info-lire-adresse-web"
+chemin = "apprendre/fiches/info-lire-adresse-web.html"
+domaine = "informatique-programmation"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de info-lire-adresse-web « Repérer les parties d’une adresse Web » (domaine informatique-programmation, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["MDN — documentation Web et structure des URL"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "arts-lire-cartel"
+chemin = "apprendre/fiches/arts-lire-cartel.html"
+domaine = "arts-culture"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de arts-lire-cartel « Lire une notice d’œuvre en séparant faits et interprétations » (domaine arts-culture, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de la Culture — portail des arts et du patrimoine", "Ministère de la Culture — « Rédiger des cartels »"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "recherche-question-hypothese"
+chemin = "apprendre/fiches/recherche-question-hypothese.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de recherche-question-hypothese « Formuler une question et une hypothèse de recherche » (domaine etudes-superieures-recherche, repère 3, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Centre national de la recherche scientifique — ressources et actualités scientifiques"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "fr-lire-ponctuation"
+chemin = "apprendre/fiches/fr-lire-ponctuation.html"
+domaine = "langue-communication"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de fr-lire-ponctuation « Lire la ponctuation pour comprendre une phrase » (domaine langue-communication, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Page mise à jour le 19 février 2026 : cinq domaines et quatre cycles du socle commun. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — socle commun de connaissances, de compétences et de culture"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "langue-anglais-epeler"
+chemin = "apprendre/fiches/langue-anglais-epeler.html"
+domaine = "langues-etrangeres"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de langue-anglais-epeler « Demander comment épeler un mot en anglais » (domaine langues-etrangeres, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — programmes et ressources pour les langues vivantes", "Cambridge Dictionary — entrée « spell »"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "maths-lire-tableau-croise"
+chemin = "apprendre/fiches/maths-lire-tableau-croise.html"
+domaine = "mathematiques"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de maths-lire-tableau-croise « Lire une information à l’intersection d’un tableau » (domaine mathematiques, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — ressources et programmes de mathématiques", "Éduscol — « Séquence - Organisation et gestion de données - séance 2 : Organiser des données dans un tableau à double entrée »"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "maths-reperer-angle-droit"
+chemin = "apprendre/fiches/maths-reperer-angle-droit.html"
+domaine = "mathematiques"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de maths-reperer-angle-droit « Repérer un angle droit » (domaine mathematiques, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — « Espace et géométrie au cycle 3 : les angles »", "Éduscol — ressources et programmes de mathématiques"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "sciences-cycle-vie-plante"
+chemin = "apprendre/fiches/sciences-cycle-vie-plante.html"
+domaine = "sciences-techniques-environnement"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de sciences-cycle-vie-plante « Repérer les grandes étapes de vie d’une plante à fleurs » (domaine sciences-techniques-environnement, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — « Proposition de progression pour chaque attendu de fin de cycle 2 : le vivant »", "Éduscol — ressources et programmes de sciences de la vie et de la Terre"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "geo-lire-legende-carte"
+chemin = "apprendre/fiches/geo-lire-legende-carte.html"
+domaine = "geographie"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de geo-lire-legende-carte « Lire une légende sur une carte » (domaine geographie, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 1 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — « Pratiquer différents langages en histoire et en géographie : Réaliser des productions graphiques et cartographiques »"]
+sources_indisponibles = ["Institut national de l’information géographique et forestière — IGN"]
+sources_non_ouvertes = 1
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 1 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "histoire-situer-siecle"
+chemin = "apprendre/fiches/histoire-situer-siecle.html"
+domaine = "histoire-memoire"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de histoire-situer-siecle « Situer une année dans un siècle » (domaine histoire-memoire, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — programmes et ressources d’histoire", "IMCCE / Observatoire de Paris — Comprendre : Chronologie, ères et calendriers"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "info-systeme-exploitation"
+chemin = "apprendre/fiches/info-systeme-exploitation.html"
+domaine = "informatique-programmation"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de info-systeme-exploitation « Comprendre le rôle d’un système d’exploitation » (domaine informatique-programmation, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — ressources d’informatique et de numérique", "Éduscol — « Systèmes de type UNIX : structures de données et algorithmes » (NSI première)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "numerique-formuler-recherche"
+chemin = "apprendre/fiches/numerique-formuler-recherche.html"
+domaine = "numerique-ia"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de numerique-formuler-recherche « Formuler une recherche sur le Web » (domaine numerique-ia, repère 1, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Accueil de la CNIL, actualités du 10 novembre 2026 ; aucun passage précis sur les données personnelles. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["CNIL — données personnelles et bons réflexes numériques"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "recherche-conserver-reference"
+chemin = "apprendre/fiches/recherche-conserver-reference.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de recherche-conserver-reference « Garder la trace d’une source pour la retrouver » (domaine etudes-superieures-recherche, repère 2, revue du 2026-10-11) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 1 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = []
+sources_indisponibles = ["Office français de l’intégrité scientifique — ressources sur l’intégrité en recherche"]
+sources_non_ouvertes = 1
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 1 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "civ-trouver-service-public"
+chemin = "apprendre/fiches/civ-trouver-service-public.html"
+domaine = "demarches-droits-travail"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de civ-trouver-service-public « Trouver un service public et préparer un formulaire » (domaine demarches-droits-travail, repère 2, revue du 2026-10-15) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 3 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Accueil officiel : fiches par événement de vie, démarches, actualités ; aucun passage précis. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Service-Public — accueil d’information officielle sur les droits et démarches", "France services — accueil du réseau d’accompagnement aux démarches", "Cybermalveillance.gouv.fr — hameçonnage : prévention et conduite à tenir"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["2 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires.", "Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "info-table-requete-web"
+chemin = "apprendre/fiches/info-table-requete-web.html"
+domaine = "informatique-programmation"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de info-table-requete-web « Distinguer une table, une requête et une page Web » (domaine informatique-programmation, repère 2, revue du 2026-10-15) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["MDN Web Docs — La relation client-serveur", "data.gouv.fr — plateforme des données publiques françaises"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "prog-lire-licence-logiciel"
+chemin = "apprendre/fiches/prog-lire-licence-logiciel.html"
+domaine = "informatique-programmation"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de prog-lire-licence-logiciel « Lire une licence avant de réutiliser un programme » (domaine informatique-programmation, repère 2, revue du 2026-10-15) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Open Source Initiative — The Open Source Definition", "SPDX License List"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "civ-reperer-echelle-institution"
+chemin = "apprendre/fiches/civ-reperer-echelle-institution.html"
+domaine = "citoyennete-medias"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de civ-reperer-echelle-institution « Repérer l’échelle d’une institution avant de chercher le bon service » (domaine citoyennete-medias, repère 2, revue du 2026-10-15) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Accueil officiel : fiches par événement de vie, démarches, actualités ; aucun passage précis. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Vie publique — les fiches sur les institutions", "Service-Public — accueil d’information officielle sur les droits et démarches"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires.", "Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "econ-lire-mention-garantie"
+chemin = "apprendre/fiches/econ-lire-mention-garantie.html"
+domaine = "economie-finances"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de econ-lire-mention-garantie « Lire une mention de garantie sur un ticket fictif » (domaine economie-finances, repère 2, revue du 2026-10-15) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Accueil de la DGCCRF : fiches pratiques et actualités, aucune page précise sur un prix unitaire ou une mention de garantie. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["DGCCRF — accueil de la direction de la concurrence, de la consommation et de la répression des fraudes", "SignalConso — service public d’information et de signalement pour les consommateurs"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "civ-reperer-info-electorale"
+chemin = "apprendre/fiches/civ-reperer-info-electorale.html"
+domaine = "citoyennete-medias"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de civ-reperer-info-electorale « Repérer une information électorale officielle » (domaine citoyennete-medias, repère 2, revue du 2026-10-15) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Accueil officiel : fiches par événement de vie, démarches, actualités ; aucun passage précis. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Vie publique — les fiches sur les institutions et la citoyenneté", "Service-Public — accueil d’information officielle sur les droits et démarches"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires.", "Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "econ-distinguer-interet-frais"
+chemin = "apprendre/fiches/econ-distinguer-interet-frais.html"
+domaine = "economie-finances"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de econ-distinguer-interet-frais « Distinguer un intérêt d’un frais sur un crédit fictif » (domaine economie-finances, repère 2, revue du 2026-10-15) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 3 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Accueil officiel : fiches par événement de vie, démarches, actualités ; aucun passage précis. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Banque de France — accueil de l’institution", "Service-Public — accueil d’information officielle sur les droits et démarches", "Service-Public.fr — « Crédit à la consommation : règles du contrat » (F2451)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["2 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires.", "Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "langue-reperer-mot-deja-connu"
+chemin = "apprendre/fiches/langue-reperer-mot-deja-connu.html"
+domaine = "langues-etrangeres"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de langue-reperer-mot-deja-connu « Reconnaître un mot que tu connais déjà sur une affiche bilingue » (domaine langues-etrangeres, repère 1, revue du 2026-10-15) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 3 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 3 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de la Culture — accueil", "Ministère de l’Éducation nationale — accueil", "Conseil de l’Europe — CECR, « Le plurilinguisme dans la classe »"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["2 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "recherche-distinguer-resume-citation"
+chemin = "apprendre/fiches/recherche-distinguer-resume-citation.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de recherche-distinguer-resume-citation « Distinguer un résumé et une citation sur une fiche fictive » (domaine etudes-superieures-recherche, repère 3, revue du 2026-10-15) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 3 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 3 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["HAL — archive ouverte pluridisciplinaire", "Ministère de l’Enseignement supérieur et de la Recherche — accueil", "HAL — documentation, « Visualisation d’un dépôt »"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["2 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "histoire-reperer-echelle-france-monde"
+chemin = "apprendre/fiches/histoire-reperer-echelle-france-monde.html"
+domaine = "histoire-memoire"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de histoire-reperer-echelle-france-monde « Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays » (domaine histoire-memoire, repère 2, revue du 2026-10-15) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Vie publique — les fiches sur les institutions et la citoyenneté", "Ministère de l’Éducation nationale — accueil"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["1 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "sante-reperer-source-publique"
+chemin = "apprendre/fiches/sante-reperer-source-publique.html"
+domaine = "sante-securite-corps"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de sante-reperer-source-publique « Repérer une source de santé publique avant d’agir » (domaine sante-securite-corps, repère 2, revue du 2026-10-15) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 3 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 3 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de la Santé — accueil", "Santé publique France — « Qui sommes-nous ? »", "Santé publique France — accueil"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["2 source(s) sont des pages d’accueil : aucun passage précis n’est confrontable ; la fiche les déclare comme simples renvois documentaires.", "Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "langue-anglais-prononcer-ed"
+chemin = "apprendre/fiches/langue-anglais-prononcer-ed.html"
+domaine = "langues-etrangeres"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de langue-anglais-prononcer-ed « Prononcer la fin -ed des verbes anglais » (domaine langues-etrangeres, repère 2, revue du 2026-10-20) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Britannica Dictionary — « Pronunciation of -ed Endings on Verbs »", "Conseil de l’Europe — CEFR, compétence phonologique"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "langue-anglais-prononcer-th"
+chemin = "apprendre/fiches/langue-anglais-prononcer-th.html"
+domaine = "langues-etrangeres"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de langue-anglais-prononcer-th « Lire « th » dans un dictionnaire : /θ/ ou /ð/ ? » (domaine langues-etrangeres, repère 2, revue du 2026-10-20) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 6 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 6 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Cambridge Dictionary — « Pronunciation symbols »", "Cambridge Dictionary — entrée « three »", "Cambridge Dictionary — entrée « mother »", "Cambridge Dictionary — entrée « breath »", "Cambridge Dictionary — entrée « breathe »", "Conseil de l’Europe — CEFR, échelle de contrôle phonologique (chapitre 5 du Companion Volume)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "info-objet-connecte-local-distant"
+chemin = "apprendre/fiches/info-objet-connecte-local-distant.html"
+domaine = "informatique-programmation"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de info-objet-connecte-local-distant « Distinguer programme embarqué local et liaison réseau d’un objet connecté » (domaine informatique-programmation, repère 2, revue du 2026-10-20) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 3 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 3 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Éduscol — Programme de sciences numériques et technologie de seconde générale et technologique (BO spécial n° 1 du 22 janvier 2019)", "Éduscol — « SNT seconde : Informatique embarquée et objets connectés — Activité 2 : Impact et importance de l’informatisation des objets »", "ANSSI — « Recommandations relatives à la sécurité des (systèmes d’)objets connectés » (ANSSI-PA-087)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "maths-moyenne-mediane"
+chemin = "apprendre/fiches/maths-moyenne-mediane.html"
+domaine = "mathematiques"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de maths-moyenne-mediane « Moyenne et médiane : deux façons de résumer une série » (domaine mathematiques, repère 2, revue du 2026-10-24) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Python Software Foundation — statistics, documentation Python 3.14.0, sections mean et median"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "etudes-lire-fiche-rncp"
+chemin = "apprendre/fiches/etudes-lire-fiche-rncp.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de etudes-lire-fiche-rncp « Lire une fiche RNCP : la certification, son auteur et sa durée » (domaine etudes-superieures-recherche, repère 3, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Vademecum de janvier 2026 : sommaire sur le RNCP, le certificateur, le niveau et les blocs de compétences. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["France Compétences — Vademecum relatif à la certification professionnelle, édition janvier 2026"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "apprendre-se-tester-plutot-que-relire"
+chemin = "apprendre/fiches/apprendre-se-tester-plutot-que-relire.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de apprendre-se-tester-plutot-que-relire « Se tester plutôt que relire : ce que la recherche dit vraiment » (domaine etudes-superieures-recherche, repère 2, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Fondation La main à la pâte — « La récupération en mémoire », éclairage scientifique"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "arts-lire-generique-film"
+chemin = "apprendre/fiches/arts-lire-generique-film.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de arts-lire-generique-film « Lire un générique de film : qui décide quoi dans l’image » (domaine etudes-superieures-recherche, repère 2, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["éduscol — Atelier cinéma, glossaire des métiers et du cadrage"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "recherche-verifier-chiffre-public"
+chemin = "apprendre/fiches/recherche-verifier-chiffre-public.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de recherche-verifier-chiffre-public « Vérifier un chiffre public : périmètre, unité et producteur » (domaine etudes-superieures-recherche, repère 3, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : « Comprendre un indicateur » nomme libellé, périmètre, unité, maille, date de mise à jour, licence et sources. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["guides.data.gouv.fr — « Comprendre un indicateur », documentation ecologie.data.gouv.fr"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "demarche-lire-devis-travaux"
+chemin = "apprendre/fiches/demarche-lire-devis-travaux.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de demarche-lire-devis-travaux « Lire un devis de travaux : ce qui doit y figurer avant de dire oui » (domaine etudes-superieures-recherche, repère 2, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["service-public.fr — « Devis obligatoire : activités concernées »"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "sciences-comprendre-pluie-millimetres"
+chemin = "apprendre/fiches/sciences-comprendre-pluie-millimetres.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de sciences-comprendre-pluie-millimetres « Lire un cumul de pluie : millimètres, litres et surface » (domaine etudes-superieures-recherche, repère 2, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Météo-France — « Les précipitations : pluie, neige, grêle »"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "numerique-preparer-sauvegarde"
+chemin = "apprendre/fiches/numerique-preparer-sauvegarde.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de numerique-preparer-sauvegarde « Préparer une sauvegarde que l’on saura réellement restaurer » (domaine etudes-superieures-recherche, repère 2, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 2 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Cybermalveillance.gouv.fr — « Rançongiciel ou ransomware, que faire ? » (particuliers)", "Cybermalveillance.gouv.fr — « Rançongiciel ou ransomware » (organisations)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "sciences-comprendre-isolation-r-et-u"
+chemin = "apprendre/fiches/sciences-comprendre-isolation-r-et-u.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de sciences-comprendre-isolation-r-et-u « Lire une fiche d’isolation : résistance R et coefficient U » (domaine etudes-superieures-recherche, repère 3, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["ADEME — document sur les exigences réglementaires des travaux de rénovation"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "sante-reperer-signes-qualite-origine"
+chemin = "apprendre/fiches/sante-reperer-signes-qualite-origine.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de sante-reperer-signes-qualite-origine « AOP, IGP, STG, Label rouge : ce que chaque signe garantit » (domaine etudes-superieures-recherche, repère 2, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 1 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = []
+sources_indisponibles = ["INAO — plaquette « Les signes d’identification de la qualité et de l’origine »"]
+sources_non_ouvertes = 1
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 1 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "sante-comprendre-depistage-organise"
+chemin = "apprendre/fiches/sante-comprendre-depistage-organise.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de sante-comprendre-depistage-organise « Comprendre un programme de dépistage organisé, sans en faire une ordonnance » (domaine etudes-superieures-recherche, repère 3, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Article du 30 avril 2024 servi après redirection : 50 à 74 ans, tous les deux ans, examen clinique, mammographie et deuxième lecture. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Santé publique France — « Taux de participation au programme de dépistage organisé du cancer du sein en 2022-2023 et évolution depuis 2005 »"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["L’adresse longue déclarée de Santé publique France redirige vers un chemin plus court : la page est servie, mais l’URL mérite d’être mise à jour."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "geographie-preparer-trajet-horaires"
+chemin = "apprendre/fiches/geographie-preparer-trajet-horaires.html"
+domaine = "etudes-superieures-recherche"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de geographie-preparer-trajet-horaires « Préparer un trajet : horaires théoriques, temps réel et correspondance » (domaine etudes-superieures-recherche, repère 2, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["transport.data.gouv.fr — Réseaux urbains et interurbains d’Île-de-France Mobilités, horaires au format GTFS"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "sante-comprendre-parcours-soins"
+chemin = "apprendre/fiches/sante-comprendre-parcours-soins.html"
+domaine = "sante-securite-corps"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de sante-comprendre-parcours-soins « Parcours de soins coordonnés : médecin traitant et remboursement » (domaine sante-securite-corps, repère 2, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Article du 2 octobre 2026 : 70 % du tarif conventionnel dans le parcours, remboursement moins favorable hors parcours. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 1 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Assurance Maladie — « Consultations en métropole : vos remboursements »"]
+sources_indisponibles = ["Assurance Maladie — « Présentation du dispositif du médecin traitant »"]
+sources_non_ouvertes = 1
+objections = ["Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 1 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "sante-lire-etiquette-produit-menager"
+chemin = "apprendre/fiches/sante-lire-etiquette-produit-menager.html"
+domaine = "sante-securite-corps"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de sante-lire-etiquette-produit-menager « Lire l’étiquette d’un produit ménager : pictogrammes et mentions » (domaine sante-securite-corps, repère 2, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 2 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Dossier d’étiquetage CLP : neuf pictogrammes, mentions d’avertissement, mentions de danger, conseils de prudence. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["INRS — « L’étiquetage des produits chimiques »", "INRS — « Dans mon entreprise, j’étiquette les produits chimiques » (ED 6197)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "methode-verbaliser-sa-methode"
+chemin = "apprendre/fiches/methode-verbaliser-sa-methode.html"
+domaine = "methodes-communication"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de methode-verbaliser-sa-methode « Nommer sa méthode après un exercice, pour comprendre ce qui a marché » (domaine methodes-communication, repère 2, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["éduscol — « Évaluer en arts plastiques », fiche d’accompagnement cycles 2, 3 et 4"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "geo-choisir-une-projection"
+chemin = "apprendre/fiches/geo-choisir-une-projection.html"
+domaine = "geographie"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de geo-choisir-une-projection « Choisir une projection : ce que la carte garde et ce qu’elle déforme » (domaine geographie, repère 3, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Visionscarto — « Peut-on corriger la carte du monde ? La projection de Mercator en question », Vincent Capdepuy"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "histoire-lire-une-cote"
+chemin = "apprendre/fiches/histoire-lire-une-cote.html"
+domaine = "histoire-memoire"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de histoire-lire-une-cote « Lire la cote d’une archive avant de commander le document » (domaine histoire-memoire, repère 3, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Archives nationales — « Méthodologie de recherche en salle de lecture virtuelle »"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "civ-lire-un-sondage"
+chemin = "apprendre/fiches/civ-lire-un-sondage.html"
+domaine = "citoyennete-medias"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de civ-lire-un-sondage « Lire un sondage : vérifier les mentions avant de retenir le chiffre » (domaine citoyennete-medias, repère 3, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Commission des sondages — « Les indications obligatoires » (articles 2 et 11 de la loi du 19 juillet 1977 modifiée)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "sante-amenager-logement-chutes"
+chemin = "apprendre/fiches/sante-amenager-logement-chutes.html"
+domaine = "sante-securite-corps"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de sante-amenager-logement-chutes « Aménager son logement pour limiter les chutes, sans se mettre en danger » (domaine sante-securite-corps, repère 2, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Article du 24 décembre 2024 : une personne sur trois parmi les plus de 65 ans, dégager les passages, fixer les appuis. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["ameli.fr — « Comment prévenir les chutes des personnes âgées ? » (mise à jour du 24 décembre 2024)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "demarche-obtenir-acte-naissance"
+chemin = "apprendre/fiches/demarche-obtenir-acte-naissance.html"
+domaine = "demarches-droits-travail"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de demarche-obtenir-acte-naissance « Demander un acte de naissance : la bonne mairie, la bonne forme » (domaine demarches-droits-travail, repère 1, revue du 2026-11-05) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Fiche F1427 vérifiée le 14 août 2026 : gratuité, mairie du lieu de naissance pour une naissance en France, trois formes, canal dédié à l’étranger. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["service-public.gouv.fr — « Acte de naissance : demande de copie intégrale ou d’extrait » (F1427, vérifié le 14 août 2026)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["Fiche de domaine sensible : une expertise compétente reste nécessaire avant toute promotion ou diffusion."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "fr-distinguer-fait-interpretation"
+chemin = "apprendre/fiches/fr-distinguer-fait-interpretation.html"
+domaine = "langue-communication"
+date = 2026-11-10
+auteur = "agent"
+verdict = "relue-sans-ecart"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de fr-distinguer-fait-interpretation « Distinguer un fait, une interprétation et une recommandation » (domaine langue-communication, repère 3, revue du 2026-11-06) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : Page mise à jour le 19 février 2026 : cinq domaines et quatre cycles du socle commun. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Ministère de l’Éducation nationale — Le socle commun de connaissances, de compétences et de culture (page mise à jour le 19 février 2026)"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = []
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "maths-comparer-deux-releves"
+chemin = "apprendre/fiches/maths-comparer-deux-releves.html"
+domaine = "mathematiques"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de maths-comparer-deux-releves « Comparer deux relevés sans conclure trop vite » (domaine mathematiques, repère 4, revue du 2026-11-06) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 5 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 1 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Page ouverte et confrontée : La page sert la « Python 3.15.2 documentation » et les sections Averages et Measures of spread. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 0 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Python Software Foundation — statistics, documentation Python 3.15.2, sections Averages and measures of central location et Measures of spread"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["L’adresse /3/ de la documentation Python suit la version courante : son contenu peut changer sans que l’URL change, et toute version figée dans le titre doit être revérifiée à chaque revue."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."
+
+[[relecture]]
+fiche = "prog-lire-trace-erreur"
+chemin = "apprendre/fiches/prog-lire-trace-erreur.html"
+domaine = "informatique-programmation"
+date = 2026-11-10
+auteur = "agent"
+verdict = "a-trancher"
+controles = ["champs-editoriaux", "coherence-enonce-aide-correction", "arithmetique-simple", "sources-declarées", "audit-mecanique"]
+constat = "Lecture des champs éditoriaux de prog-lire-trace-erreur « Lire une trace d’erreur et isoler la plus petite modification » (domaine informatique-programmation, repère 3, revue du 2026-11-06) : objectif, situation, analogie et sa limite, notions, démarche, exercice, aide, correction, points à retenir et transfert. 0 expression(s) arithmétique(s) simple(s) recalculée(s) sans écart ; 1 source(s) déclarée(s), 0 ouverte(s) le 10 novembre 2026 ; énoncé, aide et correction confrontés, aucune incohérence repérée dans ce périmètre. Le 11 novembre 2026, la passe de sources a tenté les 89 adresses uniques encore non ouvertes : 83 pages de contenu lues en première tranche, 3 pages d’erreur servies et 3 erreurs de récupération. Pour cette fiche, 1 source(s) supplémentaire(s) avec contenu et 0 adresse(s) sans contenu confrontable. Aucune contradiction factuelle repérée dans ce périmètre ; aucune URL externe nouvelle."
+passe_sources = 2026-11-11
+sources_ouvertes = ["Python Software Foundation — The Python Tutorial, chapitre 8 « Errors and Exceptions », documentation 3.15.2"]
+sources_indisponibles = []
+sources_non_ouvertes = 0
+objections = ["L’adresse /3/ de la documentation Python suit la version courante : son contenu peut changer sans que l’URL change, et toute version figée dans le titre doit être revérifiée à chaque revue."]
+limite = "Relecture de contenu par agent : elle ne couvre ni l’expertise du domaine, ni un avis juridique, ni un essai avec des personnes, ni la validation du rendu à l’œil, ni les 0 adresse(s) sans contenu confrontable après la passe du 11 novembre 2026. Elle ne vérifie pas la vérité du monde, ne promeut pas la fiche et n’écrit pas dans docs/apprentissage/relectures.toml."
+suite = "Conserver le statut « Prototype à relire ». Ouvrir les sources non consultées, trancher les objections avec une expertise compétente si une promotion est envisagée, et consigner toute relecture humaine dans le registre prévu à cet effet. La passe du 11 novembre 2026 est consignée dans docs/rd/sources-ouvertes-2026-11-11.md ; retenter les adresses sans contenu à une date écrite, sans inventer de page de remplacement."

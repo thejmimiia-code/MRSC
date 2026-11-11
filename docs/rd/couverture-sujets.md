@@ -27,7 +27,6 @@
 | Sujets avec le manque `aucun-repere-1` | 74 |
 | Sujets avec le manque `relecture-specialisee` | 23 |
 | Sujets avec le manque `aucune-fiche` | 6 |
-| Sujets avec le manque `sans-carte-de-sujet` | 4 |
 
 Le repère 4 (« Approfondir ») est le plus mince du corpus. Ce n'est pas un défaut en soi : c'est un fait mesuré, à rapprocher du cap indicatif de `docs/apprentissage/plan-1000.toml`, qui n'est ni une obligation ni une promesse.
 
@@ -67,7 +66,7 @@ Un manque est une case mesurable, pas un jugement de qualité. La colonne « Rep
 | Citoyenneté, médias et information | `sondages` — Lire un sondage publié et ses mentions obligatoires | `partiel` | 1 | 3 | `une-seule-fiche`, `aucun-repere-1`, `relecture-specialisee` |
 | Citoyenneté, médias et information | `sources-publiques` — Choisir une source publique selon la question et vérifier sa portée | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
 | Citoyenneté, médias et information | `verification-information` — Vérifier l’auteur, la date, la source et l’affirmation | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
-| Démarches, droits, sécurité et vie professionnelle | `droits-travail` — Droits au travail, contrats, sécurité et interlocuteurs | `a-creer` | 0 | — | `aucune-fiche`, `sans-carte-de-sujet`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
+| Démarches, droits, sécurité et vie professionnelle | `droits-travail` — Droits au travail, contrats, sécurité et interlocuteurs | `a-creer` | 0 | — | `aucune-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
 | Démarches, droits, sécurité et vie professionnelle | `etat-civil` — Obtenir un acte d’état civil au bon service | `partiel` | 1 | 1 | `une-seule-fiche`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
 | Démarches, droits, sécurité et vie professionnelle | `lire-demarche` — Repérer l’émetteur, l’action et l’échéance d’un document | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
 | Démarches, droits, sécurité et vie professionnelle | `organisation-travail` — Planning, consignes, coopération et compétences de travail | `partiel` | 3 | 1 | `aucun-repere-3-ou-4`, `relecture-specialisee` |
@@ -146,10 +145,10 @@ Un manque est une case mesurable, pas un jugement de qualité. La colonne « Rep
 | Numérique, données, cybersécurité et intelligence artificielle | `recherche-communication-numerique` — Rechercher, communiquer et résoudre un problème numérique | `partiel` | 1 | 1 | `une-seule-fiche`, `aucun-repere-3-ou-4` |
 | Numérique, données, cybersécurité et intelligence artificielle | `typologie-fraudes-numeriques` — Hameçonnage, faux support ou conseiller, urgences, faux achats, emplois et placements | `partiel` | 2 | 2 | `aucun-repere-1`, `aucun-repere-3-ou-4` |
 | Numérique, données, cybersécurité et intelligence artificielle | `usurpation-demande-urgente` — Contrôler une identité usurpée et une sollicitation urgente par un canal indépendant | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4` |
-| Santé, alimentation, corps et sécurité | `activite-corps-securite` — Activité physique, repos, mobilité et sécurité | `revue-experte` | 0 | — | `aucune-fiche`, `sans-carte-de-sujet`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
+| Santé, alimentation, corps et sécurité | `activite-corps-securite` — Activité physique, repos, mobilité et sécurité | `revue-experte` | 0 | — | `aucune-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
 | Santé, alimentation, corps et sécurité | `lire-etiquette` — Repérer quantité, ingrédients, allergènes et dates sur une étiquette | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
 | Santé, alimentation, corps et sécurité | `parcours-soins` — Comprendre le parcours de soins coordonnés et le rôle du médecin traitant | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
-| Santé, alimentation, corps et sécurité | `premiers-secours` — Premiers secours et conduites à tenir | `revue-experte` | 0 | — | `aucune-fiche`, `sans-carte-de-sujet`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
+| Santé, alimentation, corps et sécurité | `premiers-secours` — Premiers secours et conduites à tenir | `revue-experte` | 0 | — | `aucune-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
 | Santé, alimentation, corps et sécurité | `prevention-chutes` — Aménager un logement pour limiter les chutes, avec l’avis d’un professionnel | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
 | Santé, alimentation, corps et sécurité | `produits-menagers` — Lire l’étiquette d’un produit ménager, d’un produit de bricolage ou de jardinage | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
 | Santé, alimentation, corps et sécurité | `sources-sante` — Trouver une source de santé fiable et demander de l’aide | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4`, `relecture-specialisee` |
@@ -160,7 +159,7 @@ Un manque est une case mesurable, pas un jugement de qualité. La colonne « Rep
 | Sciences, technologie et environnement | `demarche-scientifique` — Observation, hypothèse et comparaison équitable | `actif` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4` |
 | Sciences, technologie et environnement | `energie-electricite` — Puissance, énergie et kilowattheure | `partiel` | 1 | 3 | `une-seule-fiche`, `aucun-repere-1` |
 | Sciences, technologie et environnement | `physique-technique` — Forces, mouvement, chaleur, lumière, son et objets techniques | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4` |
-| Sciences, technologie et environnement | `securite-electricite` — Sécurité électrique, protections et limites des interventions | `revue-experte` | 0 | — | `aucune-fiche`, `sans-carte-de-sujet`, `aucun-repere-1`, `aucun-repere-3-ou-4` |
+| Sciences, technologie et environnement | `securite-electricite` — Sécurité électrique, protections et limites des interventions | `revue-experte` | 0 | — | `aucune-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4` |
 | Sciences, technologie et environnement | `securite-sciences` — Risques, consignes et usages sûrs des outils et produits | `a-creer` | 0 | — | `aucune-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4` |
 | Sciences, technologie et environnement | `systemes-electroniques` — Systèmes électroniques, capteurs, signaux et actionneurs | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4` |
 
@@ -170,11 +169,10 @@ Les douze premières lignes du tri par **nombre de manques mesurés**, puis par 
 
 | Sujet | Manques | Détail |
 | --- | ---: | --- |
-| `activite-corps-securite` — Activité physique, repos, mobilité et sécurité | 5 | aucune fiche, sujet à créer sans carte de sujet, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
-| `droits-travail` — Droits au travail, contrats, sécurité et interlocuteurs | 5 | aucune fiche, sujet à créer sans carte de sujet, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
-| `premiers-secours` — Premiers secours et conduites à tenir | 5 | aucune fiche, sujet à créer sans carte de sujet, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
+| `activite-corps-securite` — Activité physique, repos, mobilité et sécurité | 4 | aucune fiche, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
 | `banque-credit-interets` — Compte bancaire, frais, crédit et intérêts | 4 | une seule fiche, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
 | `consommation-contrats` — Achats, contrats, garanties et recours du consommateur | 4 | une seule fiche, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
+| `droits-travail` — Droits au travail, contrats, sécurité et interlocuteurs | 4 | aucune fiche, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
 | `elections-participation` — Élections, décisions publiques et participation citoyenne | 4 | une seule fiche, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
 | `factures-abonnements` — Lire une facture, un abonnement et une échéance | 4 | une seule fiche, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
 | `institutions-droits` — Institutions françaises et européennes, droits et responsabilités | 4 | une seule fiche, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
@@ -182,6 +180,7 @@ Les douze premières lignes du tri par **nombre de manques mesurés**, puis par 
 | `lire-demarche` — Repérer l’émetteur, l’action et l’échéance d’un document | 4 | une seule fiche, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
 | `lire-etiquette` — Repérer quantité, ingrédients, allergènes et dates sur une étiquette | 4 | une seule fiche, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
 | `parcours-soins` — Comprendre le parcours de soins coordonnés et le rôle du médecin traitant | 4 | une seule fiche, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
+| `premiers-secours` — Premiers secours et conduites à tenir | 4 | aucune fiche, aucun point d'entrée de repère 1, aucune fiche de repère 3 ou 4, relecture spécialisée exigée |
 
 ## 5. Ce que cette carte ne dit pas
 

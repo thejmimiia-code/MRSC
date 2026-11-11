@@ -295,7 +295,7 @@ MUTATIONS = (
     (
         "une porte d’entrée de la présentation sans lien",
         "index.html",
-        '              <a class="home-discover-link" href="apprendre.html#catalogue-fiches">Parcourir les fiches <span aria-hidden="true">→</span></a>\n',
+        '              <a class="home-discover-link" href="documents.html">Lire les documents officiels <span aria-hidden="true">→</span></a>\n',
         '',
         "n'ont pas toutes un lien explicite",
     ),
@@ -316,8 +316,8 @@ MUTATIONS = (
     (
         "carte du siège social réintroduite dans les repères",
         "index.html",
-        "            <dt>Accès au site</dt>",
-        "            <dt>Siège</dt>\n            <dd>Siège social fixé à Beaurepaire — article 1.3 des statuts.</dd>\n          </div>\n          <div>\n            <dt>Accès au site</dt>",
+        "            <dt>Réutilisation</dt>",
+        "            <dt>Siège</dt>\n            <dd>Siège social fixé à Beaurepaire — article 1.3 des statuts.</dd>\n          </div>\n          <div>\n            <dt>Réutilisation</dt>",
         "la carte du siège social est revenue",
     ),
 )

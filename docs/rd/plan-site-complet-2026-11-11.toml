@@ -1,0 +1,373 @@
+# Plan complet du site M.R.S.C. et refonte de l’accueil — 11 novembre 2026.
+# Les compteurs de redondance sont recalculés depuis index.html par outils/verifier-plan-site.py.
+# Aucune décision éditoriale humaine, aucune publication, aucune URL externe nouvelle.
+
+[meta]
+version = 1
+auteur = "agent"
+date = "2026-11-11"
+heure_utc = "17:24"
+demande = "plan complet du site, vérification des redondances, brainstorming et page d’accueil entièrement revue en une seule fois"
+page = "index.html"
+sections_avant = 8
+sections_apres = 6
+caracteres_main_avant = 21310
+caracteres_main_apres = 18112
+ordre_avant = ["mission", "rd-eva", "actions", "rejoindre"]
+ordre_apres = ["mission", "actions", "rd-eva", "rejoindre"]
+classes_conservees = 110
+navigation = ["index.html", "ia-societe.html", "apprendre.html", "simulateur.html", "documents.html", "liens-utiles.html", "localisation.html", "transparence.html", "nous-contacter.html"]
+limite_globale = "Une page plus courte et mieux ordonnée ne prouve ni que le visiteur trouve plus vite, ni que le rendu plaît : ces jugements restent à une personne."
+classes_css = ["association-decouvrir", "association-intro", "association-lead", "association-proof", "association-reperes", "association-suite", "brand-copy", "brand-kicker", "brand-logo", "brand-name", "brand-tagline", "button", "button-secondary", "container", "copy-block", "display-control", "display-control-wide", "display-settings", "display-settings-actions", "display-settings-chevron", "display-settings-note", "display-settings-panel", "display-settings-row", "display-settings-title", "display-text-level", "eyebrow", "footer-bottom", "footer-brand", "footer-contact", "footer-docs", "footer-grid", "footer-heading", "footer-legal", "footer-logo", "footer-mail", "footer-nav", "footer-rd", "footer-rd-print", "footer-tagline", "header-compact-brand", "header-compact-toggle", "header-compact-tools", "hero-actions", "hero-copy", "hero-grid", "hero-title", "home-action-card", "home-action-debate", "home-action-grid", "home-action-information", "home-action-kicker", "home-action-learning", "home-action-link", "home-action-note", "home-action-simulator", "home-association", "home-association-intro", "home-association-themes", "home-association-themes-label", "home-discover-link", "home-entry-list", "home-entry-mark", "home-eva-status", "home-hero", "home-hero-aside", "home-hero-civic", "home-hero-facts", "home-hero-facts-label", "home-hero-lede", "home-hero-note", "home-hero-promise", "home-hero-resources", "home-hero-visual", "home-join-actions", "home-join-panel", "home-public-url", "home-share-actions", "home-share-fallback", "home-share-panel", "home-share-status", "home-voice-card", "home-voice-grid", "home-voice-mark", "identity", "identity-contact", "inline-note", "join-panel", "main-nav", "mission-grid", "nav-inner", "nav-links", "nav-toggle", "participation-grid", "quote-card", "quote-mark", "scope-card", "section", "section-heading", "section-muted", "site-footer", "site-header", "site-status-note", "skip-link", "statute-link", "trace-list", "trace-panel", "trace-section", "trace-tag", "trace-tag-original", "values-card"]
+
+[[redondance]]
+id = "compte"
+libelle = "Absence de compte, d’abonnement et de mesure d’audience"
+motif = "(?i)(?:sans compte|aucun compte|compte à créer|pas de compte)"
+avant = 5
+apres = 2
+seuil = 2
+decision = "Une seule promesse dans l’ouverture et un seul repère chiffré ; les trois autres reprises sont retirées."
+
+[[redondance]]
+id = "sources"
+libelle = "Mention des sources, limites et statut"
+motif = "(?i)sources?"
+avant = 26
+apres = 16
+seuil = 16
+decision = "Une seule promesse dans l’ouverture et une seule liste de sources en fin de parcours ; les cartes ne répètent plus la promesse."
+
+[[redondance]]
+id = "invitation"
+libelle = "Invitation à écrire ou à poser une question"
+motif = "(?i)(?:contacter l’association|écrire à l’association|poser une question ou proposer une idée|une question ou une idée|une question ou l’envie de participer)"
+avant = 7
+apres = 5
+seuil = 5
+decision = "Une phrase dans l’ouverture et une section « Participer » ; les invitations de la section association et de l’ancienne section « Participer » sont retirées."
+
+[[redondance]]
+id = "predit"
+libelle = "Le simulateur ne prédit pas"
+motif = "(?i)prédi(?:t|re|ction)"
+avant = 3
+apres = 1
+seuil = 1
+decision = "Une seule mise au point dans l’ouverture ; les deux reformulations du simulateur sont retirées."
+
+[[redondance]]
+id = "position"
+libelle = "Le dossier / ÉVA ne sont pas une position votée"
+motif = "(?i)(?:position votée|position officielle|décisions de l’association)"
+avant = 4
+apres = 1
+seuil = 1
+decision = "Une seule réserve, dans la section ÉVA ; les trois reformulations du dossier IA sont retirées."
+
+[[redondance]]
+id = "dossier"
+libelle = "Le dossier sur l’intelligence artificielle"
+motif = "(?i)(?:dossier sur l’IA|dossier sur l’intelligence artificielle|le dossier)"
+avant = 9
+apres = 4
+seuil = 4
+decision = "Présenté une fois dans l’ouverture, puis uniquement par des libellés de destination."
+
+[[redondance]]
+id = "fiches"
+libelle = "Les fiches d’apprentissage"
+motif = "(?i)fiches?"
+avant = 14
+apres = 8
+seuil = 8
+decision = "Présentées une fois dans l’ouverture, puis uniquement par des gestes et des destinations."
+
+[[redondance]]
+id = "simulateur"
+libelle = "Le simulateur"
+motif = "(?i)simulateur"
+avant = 17
+apres = 9
+seuil = 9
+decision = "Présenté une fois dans l’ouverture, puis uniquement par des gestes et des destinations."
+
+[[redondance]]
+id = "association1901"
+libelle = "Le régime associatif loi 1901"
+motif = "(?i)association loi 1901"
+avant = 3
+apres = 2
+seuil = 2
+decision = "Une mention dans le bandeau d’ouverture et une dans la présentation de l’association ; la lede ne la répète plus."
+
+[[redondance]]
+id = "description_ressource"
+libelle = "Description de ce qu’est une ressource"
+motif = "(?i)(?:pour apprendre une notion|séparer les usages documentés|comparer les effets de décisions de politique publique|Le dossier présente|Chaque fiche explique|Un dossier sur l’intelligence artificielle qui|Un simulateur pour comparer|Changez les options et observez)"
+avant = 8
+apres = 3
+seuil = 3
+decision = "Une seule description, dans l’ouverture ; les trois autres blocs deviennent des questions de visiteur, des principes ou des gestes."
+
+[[section]]
+ancre = "accueil"
+role = "Ouverture"
+information_unique = "La seule présentation des trois ressources, les repères chiffrés et la promesse de traçabilité"
+destinations = "#mission, apprendre.html#catalogue-fiches"
+classes = "home-hero, home-hero-resources, home-hero-facts, home-hero-aside, home-entry-list"
+
+[[section]]
+ancre = "mission"
+role = "L’association"
+information_unique = "Qui nous sommes, les statuts, trois principes et la hiérarchie de preuve"
+destinations = "documents.html, #actions"
+classes = "home-association, association-reperes, home-voice-grid, association-suite"
+
+[[section]]
+ancre = "actions"
+role = "Les quatre gestes"
+information_unique = "Une tâche, une destination : aucune redescription des ressources"
+destinations = "apprendre.html, ia-societe.html, simulateur.html, transparence.html"
+classes = "section-heading, home-action-grid, home-action-card"
+
+[[section]]
+ancre = "rd-eva"
+role = "Le chantier"
+information_unique = "ÉVA, son état et ses limites, après les ressources et non avant"
+destinations = "eva.html, transparence.html#rd-innovation"
+classes = "mission-grid, copy-block, values-card"
+
+[[section]]
+ancre = "rejoindre"
+role = "Participer et faire circuler"
+information_unique = "Une seule section de contact, d’adhésion et de partage"
+destinations = "nous-contacter.html, bulletin, courriel, partage"
+classes = "participation-grid, quote-card, scope-card, join-panel, home-share-panel"
+
+[[section]]
+ancre = "sources"
+role = "Sources et méthode"
+information_unique = "Une seule liste de provenance, en fin de parcours"
+destinations = "transparence.html"
+classes = "trace-section, trace-panel, trace-list"
+
+[[page]]
+chemin = "index.html"
+role = "Accueil : présenter l’association une fois et orienter vers les quatre portes"
+public = "Tous les visiteurs"
+entree_depuis = "navigation, footer, llms.txt, sitemap.xml"
+destination = "#contenu, #mission, #actions, #rd-eva, #rejoindre"
+statut = "page refondue"
+limite = "Le plan ne juge pas le rendu à l’œil ni la compréhension réelle des visiteurs."
+
+[[page]]
+chemin = "apprendre.html"
+role = "Catalogue des 107 fiches, boussole et parcours"
+public = "Visiteur qui veut comprendre une notion"
+entree_depuis = "accueil, navigation, footer, fiches"
+destination = "#catalogue-fiches, #boussole-savoirs"
+statut = "page servie"
+limite = "Un catalogue n’est pas une preuve de qualité éditoriale."
+
+[[page]]
+chemin = "apprendre/fiches/"
+role = "107 fiches autonomes générées depuis le catalogue"
+public = "Visiteur en situation d’apprentissage"
+entree_depuis = "apprendre.html, atlas, sitemap.xml"
+destination = "une fiche = une notion"
+statut = "pages générées"
+limite = "81 prototypes restent à relire par une personne compétente."
+
+[[page]]
+chemin = "anglais-aventure.html"
+role = "Les Mondes : atlas et aventure d’apprentissage libre"
+public = "Visiteur qui veut explorer par le jeu"
+entree_depuis = "apprendre.html, navigation, footer"
+destination = "5 escales, 15 échanges"
+statut = "prototype"
+limite = "Aucun résultat d’apprentissage mesuré."
+
+[[page]]
+chemin = "ia-societe.html"
+role = "Dossier sur les usages de l’IA et les questions à débattre"
+public = "Visiteur qui veut démêler une affirmation"
+entree_depuis = "accueil, navigation, footer"
+destination = "#questions"
+statut = "dossier"
+limite = "Aucune position votée de l’association."
+
+[[page]]
+chemin = "simulateur.html"
+role = "Présentation du simulateur et de ses limites"
+public = "Visiteur qui veut comparer des choix publics"
+entree_depuis = "accueil, navigation, footer"
+destination = "simulateur/"
+statut = "page servie"
+limite = "Le modèle ne prédit rien."
+
+[[page]]
+chemin = "simulateur/index.html"
+role = "Interface du moteur embarqué"
+public = "Visiteur qui veut régler des leviers"
+entree_depuis = "simulateur.html"
+destination = "API locale"
+statut = "page générée"
+limite = "Les résultats dépendent des hypothèses affichées."
+
+[[page]]
+chemin = "eva.html"
+role = "Proposition de présentation du projet ÉVA, à relire"
+public = "Visiteur qui suit la recherche"
+entree_depuis = "accueil #rd-eva, footer, llms.txt"
+destination = "#listes-rd-eva, #materiel-spark-serveur"
+statut = "proposition à relire"
+limite = "Aucune conscience, aucun budget voté, aucun achat."
+
+[[page]]
+chemin = "documents.html"
+role = "Documents officiels de l’association"
+public = "Visiteur qui veut vérifier un texte"
+entree_depuis = "accueil, navigation, footer"
+destination = "statuts, bulletin"
+statut = "documents locaux"
+limite = "Le texte officiel fait foi."
+
+[[page]]
+chemin = "liens-utiles.html"
+role = "Ressources externes sélectionnées"
+public = "Visiteur qui veut aller plus loin"
+entree_depuis = "navigation, footer"
+destination = "liens externes datés"
+statut = "page servie"
+limite = "Un lien externe n’est pas une validation."
+
+[[page]]
+chemin = "localisation.html"
+role = "Informations de localisation"
+public = "Visiteur qui cherche le territoire"
+entree_depuis = "navigation, footer"
+destination = "repères de territoire"
+statut = "page servie"
+limite = "Aucune carte du siège sur l’accueil."
+
+[[page]]
+chemin = "nous-contacter.html"
+role = "Moyens de contacter l’association"
+public = "Visiteur qui veut écrire"
+entree_depuis = "accueil, navigation, footer"
+destination = "courriel"
+statut = "page servie"
+limite = "Aucune collecte de récit personnel."
+
+[[page]]
+chemin = "transparence.html"
+role = "Méthode, registre des sources et licence"
+public = "Visiteur qui vérifie une information"
+entree_depuis = "accueil, navigation, footer"
+destination = "#rd-innovation, #conditions-reutilisation, #licence"
+statut = "page servie"
+limite = "Un registre ne vaut pas une expertise."
+
+[[page]]
+chemin = "confidentialite.html"
+role = "Vie privée et données"
+public = "Visiteur qui veut savoir ce qui est collecté"
+entree_depuis = "footer, accueil (repère chiffré)"
+destination = "notice vie privée"
+statut = "page servie"
+limite = "Aucune mesure d’audience."
+
+[[page]]
+chemin = "404.html"
+role = "Page d’erreur avec retour à l’accueil"
+public = "Visiteur arrivé sur une adresse absente"
+entree_depuis = "serveur"
+destination = "index.html"
+statut = "page servie"
+limite = "Ne remplace pas une recherche."
+
+[[page]]
+chemin = "api/"
+role = "Fonctions serveur du simulateur"
+public = "Interface du simulateur"
+entree_depuis = "simulateur/index.html"
+destination = "/api/*"
+statut = "hors accueil"
+limite = "Aucune API n’est appelée depuis l’accueil."
+
+[[page]]
+chemin = "assets/"
+role = "Feuilles, scripts, images et documents locaux"
+public = "Toutes les pages"
+entree_depuis = "toutes les pages"
+destination = "site.css, site.js et images locales"
+statut = "ressources"
+limite = "Aucune ressource orpheline."
+
+[[page]]
+chemin = "sitemap.xml"
+role = "Liste des URL publiques"
+public = "Moteurs et outils"
+entree_depuis = "llms.txt"
+destination = "120 URL"
+statut = "fichier servi"
+limite = "Ne garantit pas l’indexation."
+
+[[page]]
+chemin = "llms.txt"
+role = "Sommaire facultatif pour les lecteurs de contenu"
+public = "Assistants et lecteurs"
+entree_depuis = "index.html (rel=\"describedby\")"
+destination = "15 liens internes"
+statut = "fichier servi"
+limite = "Ne remplace pas les pages HTML."
+
+[[option]]
+id = "A"
+titre = "Réordonner sans réécrire"
+contenu = "Déplacer ÉVA après les ressources et fusionner les deux sections de contact."
+cout = "Très faible : quelques blocs déplacés."
+risque = "Les cinq descriptions des ressources restent ; le rabâchage signalé persiste."
+decision = "écartée"
+
+[[option]]
+id = "B"
+titre = "Une seule porte par intention"
+contenu = "L’ouverture décrit une fois les trois ressources ; l’orienteur pose quatre questions ; les cartes deviennent des gestes ; les principes ne renvoient plus aux ressources ; ÉVA est déplacé ; contact et partage fusionnent ; sources une seule fois."
+cout = "Moyen : réécriture du seul <main>, head, header, footer et toutes les classes CSS conservés."
+risque = "Le ton des nouvelles questions reste à juger à l’œil ; aucun essai avec des personnes."
+decision = "retenue"
+
+[[option]]
+id = "C"
+titre = "Page-portail minimale"
+contenu = "Ne garder que le H1 et quatre gros boutons, supprimer les autres sections."
+cout = "Élevé : une vingtaine de contrôles d’intégration et une partie de la feuille CSS seraient à réécrire."
+risque = "Perdre les repères chiffrés, les statuts, les sources et les replis de partage contredirait les gardes existantes."
+decision = "écartée"
+
+[[porte]]
+numero = "01"
+question = "Comprendre une notion"
+destination = "apprendre.html"
+indice = "Une fiche courte, un exemple, un exercice si vous voulez."
+
+[[porte]]
+numero = "02"
+question = "Démêler une info sur l’IA"
+destination = "ia-societe.html"
+indice = "Ce qui est documenté, ce qui se discute, ce qui reste ouvert."
+
+[[porte]]
+numero = "03"
+question = "Comparer des choix publics"
+destination = "simulateur.html"
+indice = "Régler un levier et lire les effets, échelon par échelon."
+
+[[porte]]
+numero = "04"
+question = "Suivre le chantier ÉVA"
+destination = "#rd-eva"
+indice = "Ce qui est documenté, ce qui reste à tester."
+

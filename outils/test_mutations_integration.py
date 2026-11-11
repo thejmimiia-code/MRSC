@@ -226,8 +226,8 @@ class TestIntegration(unittest.TestCase):
             banc_mutations.muter(
                 copie,
                 "index.html",
-                "            <dt>Accès au site</dt>",
-                "            <dt>Siège</dt>\n            <dd>Siège social fixé à Beaurepaire — article 1.3 des statuts.</dd>\n          </div>\n          <div>\n            <dt>Accès au site</dt>",
+                "            <dt>Réutilisation</dt>",
+                "            <dt>Siège</dt>\n            <dd>Siège social fixé à Beaurepaire — article 1.3 des statuts.</dd>\n          </div>\n          <div>\n            <dt>Réutilisation</dt>",
             )
 
         resultat = executer(revenir)

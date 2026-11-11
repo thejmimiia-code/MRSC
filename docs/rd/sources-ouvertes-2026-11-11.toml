@@ -1,0 +1,733 @@
+# Ouverture des 89 adresses uniques de source encore non ouvertes le 10 novembre 2026.
+# Passe de relecture de contenu et de vérification des sources par l’agent, datée du 11 novembre 2026.
+# Les adresses exactes restent dans `docs/apprentissage/catalogue.toml` ; `reference` en retire le schéma
+# pour ne pas figer une URL externe de plus. Ce registre n’est pas `docs/apprentissage/relectures.toml`.
+
+[meta]
+version = 1
+auteur = "agent"
+date = 2026-11-11
+portee = "89 adresses uniques de source non ouvertes lors de la passe du 10 novembre 2026"
+catalogue = "docs/apprentissage/catalogue.toml"
+registre_agent = "docs/rd/relecture-agent-prototypes.toml"
+rapport = "docs/rd/sources-ouvertes-2026-11-11.md"
+adresses_deja_ouvertes = 16
+adresses_tentees = 89
+pages_contenu = 83
+pages_erreur_servies = 3
+echecs_recuperation = 3
+adresses_sans_contenu = 6
+adresses_uniques_catalogue = 105
+limite_globale = "Une première tranche de page lue ne prouve ni la vérité du monde, ni l’actualité durable, ni les droits, ni une validation de personne."
+
+[[ouverture]]
+reference = "cache.media.eduscol.education.fr/file/HG_Competences/11/4/RA16_C3C4_HIGE_Analyser_comprendre_document_819114.pdf"
+titres = ["Éduscol — Histoire-géographie cycles 3 et 4 : Analyser et comprendre un document (PDF)"]
+fiches = ["histoire-comparer-sources"]
+statut = "contenu"
+tranche = 0
+repere = "PDF Éduscol Histoire-géographie : analyser et comprendre un document, contextualisation, point de vue et implicite."
+
+[[ouverture]]
+reference = "developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration"
+titres = ["MDN Web Docs — Loops and iteration"]
+fiches = ["prog-comparer-langages"]
+statut = "contenu"
+tranche = 0
+repere = "MDN : boucles for, while, do…while, break et continue."
+
+[[ouverture]]
+reference = "developer.mozilla.org/fr/docs/Glossary/Byte"
+titres = ["MDN — définition du byte et notions du Web"]
+fiches = ["info-bits-octets"]
+statut = "page-erreur-servie"
+tranche = 0
+repere = "MDN : « Page non trouvée », aucune définition du byte lue ; la variante anglaise du glossaire répond aussi par une page introuvable."
+
+[[ouverture]]
+reference = "developer.mozilla.org/fr/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview"
+titres = ["MDN Web Docs — La relation client-serveur"]
+fiches = ["info-table-requete-web"]
+statut = "contenu"
+tranche = 0
+repere = "MDN : relation client-serveur, HTTP, requête et réponse, GET et POST."
+
+[[ouverture]]
+reference = "developer.mozilla.org/fr/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_URL"
+titres = ["MDN — documentation Web et structure des URL"]
+fiches = ["info-lire-adresse-web"]
+statut = "contenu"
+tranche = 0
+repere = "MDN : schéma, autorité, domaine, port, chemin, paramètres et ancre d’une adresse Web."
+
+[[ouverture]]
+reference = "dictionary.cambridge.org/dictionary/english/breath"
+titres = ["Cambridge Dictionary — entrée « breath »"]
+fiches = ["langue-anglais-prononcer-th"]
+statut = "contenu"
+tranche = 0
+repere = "Cambridge : entrée breath, prononciation /breθ/."
+
+[[ouverture]]
+reference = "dictionary.cambridge.org/dictionary/english/breathe"
+titres = ["Cambridge Dictionary — entrée « breathe »"]
+fiches = ["langue-anglais-prononcer-th"]
+statut = "contenu"
+tranche = 0
+repere = "Cambridge : entrée breathe, prononciation /briːð/."
+
+[[ouverture]]
+reference = "dictionary.cambridge.org/dictionary/english/mother"
+titres = ["Cambridge Dictionary — entrée « mother »"]
+fiches = ["langue-anglais-prononcer-th"]
+statut = "contenu"
+tranche = 0
+repere = "Cambridge : entrée mother, prononciation /ˈmʌð.ər/."
+
+[[ouverture]]
+reference = "dictionary.cambridge.org/dictionary/english/spell"
+titres = ["Cambridge Dictionary — entrée « spell »"]
+fiches = ["langue-anglais-epeler"]
+statut = "contenu"
+tranche = 0
+repere = "Cambridge : entrée spell, prononciation /spel/."
+
+[[ouverture]]
+reference = "dictionary.cambridge.org/dictionary/english/three"
+titres = ["Cambridge Dictionary — entrée « three »"]
+fiches = ["langue-anglais-prononcer-th"]
+statut = "contenu"
+tranche = 0
+repere = "Cambridge : entrée three, prononciation /θriː/."
+
+[[ouverture]]
+reference = "dictionary.cambridge.org/help/phonetics.html"
+titres = ["Cambridge Dictionary — « Pronunciation symbols »"]
+fiches = ["langue-anglais-prononcer-th"]
+statut = "contenu"
+tranche = 0
+repere = "Cambridge : symboles phonétiques et phonèmes UK/US."
+
+[[ouverture]]
+reference = "doc.hal.science/visualisation-dun-depot/"
+titres = ["HAL — documentation, « Visualisation d’un dépôt »"]
+fiches = ["recherche-distinguer-resume-citation"]
+statut = "contenu"
+tranche = 0
+repere = "HAL : notice, métadonnées, fichier facultatif, accès restreint, littérature citée et GROBID."
+
+[[ouverture]]
+reference = "docs.python.org/3/tutorial/controlflow.html"
+titres = ["Documentation officielle Python — More Control Flow Tools"]
+fiches = ["prog-comparer-langages"]
+statut = "contenu"
+tranche = 0
+repere = "Python 3.15.2 : if, for, range, break et continue."
+
+[[ouverture]]
+reference = "docs.python.org/3/tutorial/errors.html"
+titres = ["Python Software Foundation — The Python Tutorial, chapitre 8 « Errors and Exceptions », documentation 3.15.2"]
+fiches = ["prog-lire-trace-erreur"]
+statut = "contenu"
+tranche = 0
+repere = "Python 3.15.2 : erreurs de syntaxe, exceptions, try et except."
+
+[[ouverture]]
+reference = "docs.python.org/fr/3/library/unittest.html"
+titres = ["Documentation Python — tests unitaires"]
+fiches = ["prog-tester-exemples"]
+statut = "contenu"
+tranche = 0
+repere = "Documentation Python : unittest, TestCase, assertions, setUp et tearDown."
+
+[[ouverture]]
+reference = "eduscol.education.fr/"
+titres = ["Ministère de l’Éducation nationale — programmes et ressources d’histoire", "Ministère de l’Éducation nationale — programmes et ressources pour les langues vivantes", "Éduscol — ressources d’informatique et de numérique", "Éduscol — ressources et programmes de mathématiques", "Éduscol — ressources et programmes de sciences de la vie et de la Terre", "Éduscol — ressources et programmes de sciences et technologie", "Éduscol — ressources et programmes de sciences physiques"]
+fiches = ["histoire-situer-siecle", "info-systeme-exploitation", "langue-anglais-epeler", "maths-equation-simple", "maths-lire-echelle-graphique", "maths-lire-tableau-croise", "maths-reperer-angle-droit", "sciences-calculer-vitesse-moyenne", "sciences-cycle-vie-plante", "sciences-distinguer-melange-changement-etat"]
+statut = "contenu"
+tranche = 0
+repere = "Éduscol redirige vers education.gouv.fr : accueil et actualités 2026."
+
+[[ouverture]]
+reference = "eduscol.education.fr/document/15199/download"
+titres = ["Éduscol — « Qu’est-ce que la matière ? (2) » : états de la matière et changements d’état (évaluation cycle 2)"]
+fiches = ["sciences-distinguer-melange-changement-etat"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : matière, 57 g et 62 g, états de la matière et changements d’état."
+
+[[ouverture]]
+reference = "eduscol.education.fr/document/16804/download"
+titres = ["Éduscol — Pratiquer différents langages en histoire et en géographie : Écrire et pratiquer l’oral (PDF)"]
+fiches = ["geo-decrire-paysage"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : récits historiques et géographiques, écrire et pratiquer l’oral."
+
+[[ouverture]]
+reference = "eduscol.education.fr/document/16807/download"
+titres = ["Éduscol — « Pratiquer différents langages en histoire et en géographie : Réaliser des productions graphiques et cartographiques »"]
+fiches = ["geo-lire-legende-carte"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : productions graphiques et cartographiques, cartes non neutres."
+
+[[ouverture]]
+reference = "eduscol.education.fr/document/16837/download"
+titres = ["Éduscol — « Déterminer une vitesse », matière, mouvement, énergie, information (cycles 2 et 3)"]
+fiches = ["sciences-calculer-vitesse-moyenne"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : vitesse égale distance divisée par durée."
+
+[[ouverture]]
+reference = "eduscol.education.fr/document/23494/download"
+titres = ["Éduscol — Programme de sciences numériques et technologie de seconde générale et technologique (BO spécial n° 1 du 22 janvier 2019)"]
+fiches = ["info-objet-connecte-local-distant"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : programme SNT de seconde, objets connectés et capteurs."
+
+[[ouverture]]
+reference = "eduscol.education.fr/document/23560/download"
+titres = ["Éduscol — « SNT seconde : Informatique embarquée et objets connectés — Activité 2 : Impact et importance de l’informatisation des objets »"]
+fiches = ["info-objet-connecte-local-distant"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : activité SNT, impact et importance de l’informatisation des objets."
+
+[[ouverture]]
+reference = "eduscol.education.fr/document/30046/download"
+titres = ["Éduscol — « Systèmes de type UNIX : structures de données et algorithmes » (NSI première)"]
+fiches = ["info-systeme-exploitation"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : systèmes UNIX, i-nœuds et processus en NSI première."
+
+[[ouverture]]
+reference = "eduscol.education.fr/document/36614/download"
+titres = ["Éduscol — « Espace et géométrie au cycle 3 : les angles »"]
+fiches = ["maths-reperer-angle-droit"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : angles de 0°, 90°, 180° et 360° au cycle 3."
+
+[[ouverture]]
+reference = "eduscol.education.fr/document/58956/download"
+titres = ["Éduscol — « Séquence - Organisation et gestion de données - séance 2 : Organiser des données dans un tableau à double entrée »"]
+fiches = ["maths-lire-tableau-croise"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : organiser des données dans un tableau à double entrée."
+
+[[ouverture]]
+reference = "eduscol.education.fr/document/58959/download"
+titres = ["Éduscol — « Séquence - Organisation et gestion de données - séance 3 : Résoudre des problèmes en prélevant des informations dans des diagrammes »"]
+fiches = ["maths-lire-echelle-graphique"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : résoudre des problèmes en prélevant des informations dans des diagrammes."
+
+[[ouverture]]
+reference = "eduscol.education.fr/document/59725/download"
+titres = ["Éduscol — « Résolution d’équations du premier degré à une inconnue » (groupes à effectif réduit)"]
+fiches = ["maths-equation-simple"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : résolution d’équations du premier degré à une inconnue."
+
+[[ouverture]]
+reference = "eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"
+titres = ["Éduscol — programmes et ressources de mathématiques au cycle 2"]
+fiches = ["econ-comparer-prix-unitaires"]
+statut = "contenu"
+tranche = 0
+repere = "Éduscol cycle 2 : page de février 2026, programme du BO du 31 octobre 2024, rentrée 2025."
+
+[[ouverture]]
+reference = "eduscol.education.gouv.fr/5745/ressources-d-accompagnement-du-programme-de-technologie-au-cycle-4"
+titres = ["Éduscol — programme et ressources de technologie au cycle 4", "Éduscol — ressources d’accompagnement du programme de technologie au cycle 4"]
+fiches = ["tech-circuit-ouvert-ferme", "tech-electronique-capteur"]
+statut = "contenu"
+tranche = "0,1"
+repere = "Éduscol cycle 4 : première tranche surtout occupée par le bandeau cookies ; deuxième tranche lue, programme du BO n° 9 du 29 février 2024, 5e et 4e applicables, 3e à la rentrée 2026-2027."
+
+[[ouverture]]
+reference = "eduscol.education.gouv.fr/sites/default/files/document/ateliercinemaglossaire1277577pdf-81519.pdf"
+titres = ["éduscol — Atelier cinéma, glossaire des métiers et du cadrage"]
+fiches = ["arts-lire-generique-film"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : atelier cinéma, glossaire des métiers et du cadrage."
+
+[[ouverture]]
+reference = "eduscol.education.gouv.fr/sites/default/files/document/ra16c3c4mathmathetquotidien600998pdf-77574.pdf"
+titres = ["Éduscol — mathématiques au quotidien, ressources cycles 3 et 4"]
+fiches = ["maths-estimer-calcul"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : mathématiques au quotidien, ressources cycles 3 et 4."
+
+[[ouverture]]
+reference = "eduscol.education.gouv.fr/sites/default/files/document/ra16c4apevalfiche2708865pdf-78576.pdf"
+titres = ["éduscol — « Évaluer en arts plastiques », fiche d’accompagnement cycles 2, 3 et 4"]
+fiches = ["methode-verbaliser-sa-methode"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : évaluation diagnostique, formative, sommative et certificative."
+
+[[ouverture]]
+reference = "eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegnsi1-tpourquoi-choisir-nsi1243842pdf-89505.pdf"
+titres = ["Éduscol — Numérique et sciences informatiques : présentation des domaines étudiés"]
+fiches = ["info-ordinateur-fonctions"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : numérique et sciences informatiques, 25 % de projets en NSI."
+
+[[ouverture]]
+reference = "eduscol.education.gouv.fr/sites/default/files/document/ra22c3sciencestechnogriesppreservereaupdf-95295.pdf"
+titres = ["Éduscol — « L’eau, un bien commun à préserver » : les solides et l’eau, dissolution et solubilité"]
+fiches = ["sciences-distinguer-melange-changement-etat"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : eau, solubilité, dissolution et séparation."
+
+[[ouverture]]
+reference = "eduscol.education.gouv.fr/sites/default/files/document/ra23c2progressionintercyclesvivantpdf-100509.pdf"
+titres = ["Éduscol — « Proposition de progression pour chaque attendu de fin de cycle 2 : le vivant »"]
+fiches = ["sciences-cycle-vie-plante"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : monde vivant, progressions intercycles au cycle 2."
+
+[[ouverture]]
+reference = "eduscol.education.gouv.fr/sites/default/files/document/vademecum-sciences-numeriques-et-technologie-numerique-et-sciences-informatiques-101937.pdf"
+titres = ["Éduscol — Numérique et sciences informatiques : algorithmique et langages"]
+fiches = ["prog-comparer-langages"]
+statut = "contenu"
+tranche = 0
+repere = "PDF : vademecum SNT et NSI, août 2023."
+
+[[ouverture]]
+reference = "extranet.inao.gouv.fr/fichier/Plaquette-SIQO-francais.pdf"
+titres = ["INAO — plaquette « Les signes d’identification de la qualité et de l’origine »"]
+fiches = ["sante-reperer-signes-qualite-origine"]
+statut = "echec-recuperation"
+tranche = 0
+repere = "INAO : HTTP 500 au premier essai, nouvel échec de récupération et deuxième tranche indisponible ; aucun PDF lu."
+
+[[ouverture]]
+reference = "fondation-lamap.org/sites/default/files/pdf/La%20re%CC%81cupe%CC%81ration%20en%20me%CC%81moire.pdf"
+titres = ["Fondation La main à la pâte — « La récupération en mémoire », éclairage scientifique"]
+fiches = ["apprendre-se-tester-plutot-que-relire"]
+statut = "contenu"
+tranche = 0
+repere = "PDF La main à la pâte : encodage, stockage, récupération, effet test, quiz plus efficaces que des relectures."
+
+[[ouverture]]
+reference = "github.com/python/cpython/blob/v3.14.0/Doc/library/statistics.rst"
+titres = ["Python Software Foundation — statistics, Python 3.14.0, fmean et pondération", "Python Software Foundation — statistics, documentation Python 3.14.0, sections mean et median"]
+fiches = ["maths-moyenne", "maths-moyenne-mediane"]
+statut = "contenu"
+tranche = 0
+repere = "CPython v3.14.0 statistics.rst : fmean avec pondération optionnelle, module non concurrent de NumPy et SciPy."
+
+[[ouverture]]
+reference = "hal.science/"
+titres = ["HAL — archive ouverte pluridisciplinaire"]
+fiches = ["recherche-distinguer-resume-citation"]
+statut = "contenu"
+tranche = 0
+repere = "HAL : archive ouverte, 1 706 363 papers et 4 634 731 références affichés."
+
+[[ouverture]]
+reference = "journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008032"
+titres = ["Carey, Steiner et Petri — Ten simple rules for reading a scientific paper, PLOS Computational Biology (2020)"]
+fiches = ["recherche-lire-etude"]
+statut = "contenu"
+tranche = 0
+repere = "PLOS : Carey, Steiner et Petri 2020, dix règles pour lire un article scientifique, licence CC BY."
+
+[[ouverture]]
+reference = "librairie.ademe.fr/index.php?controller=attachment&id_attachment=2645"
+titres = ["ADEME — document sur les exigences réglementaires des travaux de rénovation"]
+fiches = ["sciences-comprendre-isolation-r-et-u"]
+statut = "contenu"
+tranche = 0
+repere = "ADEME : exigences réglementaires pour les travaux de rénovation, juillet 2023, R minimal par paroi et zones H1 à H3, arrêté du 3 mai 2007 modifié le 22 mars 2017."
+
+[[ouverture]]
+reference = "messervices.cyber.gouv.fr/documents-guides/anssi-guide-securite_des_systemes_objets_connectes_iot-v1.0.pdf"
+titres = ["ANSSI — « Recommandations relatives à la sécurité des (systèmes d’)objets connectés » (ANSSI-PA-087)"]
+fiches = ["info-objet-connecte-local-distant"]
+statut = "contenu"
+tranche = 0
+repere = "ANSSI-PA-087 du 27 août 2021 : recommandations non normatives, analyse de risques, clés, mises à jour et journalisation."
+
+[[ouverture]]
+reference = "meteofrance.com/"
+titres = ["Météo-France — portail météorologique et climatique"]
+fiches = ["sciences-meteo-climat"]
+statut = "contenu"
+tranche = 0
+repere = "Météo-France : accueil, bulletin du 10 novembre 2026, « pluvieux mais doux », actualités du 5 au 10 novembre."
+
+[[ouverture]]
+reference = "meteofrance.com/meteo-a-z/les-precipitations-pluie-neige-grele"
+titres = ["Météo-France — « Les précipitations : pluie, neige, grêle »"]
+fiches = ["sciences-comprendre-pluie-millimetres"]
+statut = "contenu"
+tranche = 0
+repere = "Météo-France : pluie, neige et grêle ; 1 mm égale 1 L/m² ; radars."
+
+[[ouverture]]
+reference = "opensource.org/osd"
+titres = ["Open Source Initiative — The Open Source Definition"]
+fiches = ["prog-lire-licence-logiciel"]
+statut = "contenu"
+tranche = 0
+repere = "Open Source Initiative : définition en dix critères, version 1.9 du 22 mars 2007."
+
+[[ouverture]]
+reference = "promenade.imcce.fr/fr/pages2/277.html"
+titres = ["IMCCE / Observatoire de Paris — Comprendre : Chronologie, ères et calendriers"]
+fiches = ["histoire-situer-siecle"]
+statut = "contenu"
+tranche = 0
+repere = "IMCCE : chronologie, ères, calendriers julien et grégorien, année 0 astronomique."
+
+[[ouverture]]
+reference = "rm.coe.int/chapter-5-communicative-language-competences/1680a084c3"
+titres = ["Conseil de l’Europe — CEFR, échelle de contrôle phonologique (chapitre 5 du Companion Volume)"]
+fiches = ["langue-anglais-prononcer-th"]
+statut = "contenu"
+tranche = 0
+repere = "CECR chapitre 5 : Phonological control et grilles A1 à C2."
+
+[[ouverture]]
+reference = "sante.gouv.fr/"
+titres = ["Ministère de la Santé — accueil"]
+fiches = ["sante-reperer-source-publique"]
+statut = "contenu"
+tranche = 0
+repere = "Ministère de la Santé : accueil, panneau cookies et actualités 2026."
+
+[[ouverture]]
+reference = "signal.conso.gouv.fr/fr"
+titres = ["SignalConso — service public d’information et de signalement pour les consommateurs"]
+fiches = ["econ-lire-mention-garantie"]
+statut = "contenu"
+tranche = 0
+repere = "SignalConso : quatre étapes, catégories de signalement et rattachement à la DGCCRF."
+
+[[ouverture]]
+reference = "spdx.org/licenses/"
+titres = ["SPDX License List"]
+fiches = ["prog-lire-licence-logiciel"]
+statut = "contenu"
+tranche = 0
+repere = "SPDX License List : identifiants courts, noms complets, texte, URL canonique et version 3.29.0 du 16 septembre 2026."
+
+[[ouverture]]
+reference = "transport.data.gouv.fr/datasets/reseau-urbain-et-interurbain-dile-de-france-mobilites"
+titres = ["transport.data.gouv.fr — Réseaux urbains et interurbains d’Île-de-France Mobilités, horaires au format GTFS"]
+fiches = ["geographie-preparer-trajet-horaires"]
+statut = "contenu"
+tranche = 0
+repere = "transport.data.gouv.fr : GTFS et NeTEx, 75 opérateurs, trois mises à jour par jour, API SIRI Lite et quotas."
+
+[[ouverture]]
+reference = "www.archives-nationales.culture.gouv.fr/"
+titres = ["Archives nationales — ressources et fonds d’archives"]
+fiches = ["histoire-comparer-sources"]
+statut = "contenu"
+tranche = 0
+repere = "Archives nationales : accueil, visiter, rechercher, explorer, 31 300 inventaires et plus de 14 millions d’images en ligne."
+
+[[ouverture]]
+reference = "www.archives-nationales.culture.gouv.fr/methodologie-de-recherche-en-salle-de-lecture-virtuelle"
+titres = ["Archives nationales — « Méthodologie de recherche en salle de lecture virtuelle »"]
+fiches = ["histoire-lire-une-cote"]
+statut = "contenu"
+tranche = 0
+repere = "Archives nationales : cote comme identifiant unique, fonds avant et depuis 1789, salle de lecture virtuelle."
+
+[[ouverture]]
+reference = "www.assurance-maladie.ameli.fr/index.php/medecin/exercice-liberal/facturation-remuneration/dispositif-medecin-traitant/dispositif-medecin-traitant"
+titres = ["Assurance Maladie — « Présentation du dispositif du médecin traitant »"]
+fiches = ["sante-comprendre-parcours-soins"]
+statut = "page-erreur-servie"
+tranche = 0
+repere = "Assurance Maladie : « Page non trouvée », erreur 404 ; aucune présentation du dispositif du médecin traitant lue."
+
+[[ouverture]]
+reference = "www.banque-france.fr/"
+titres = ["Banque de France — accueil de l’institution"]
+fiches = ["econ-distinguer-interet-frais"]
+statut = "contenu"
+tranche = 0
+repere = "Banque de France : accueil, enquête mensuelle de conjoncture du 9 novembre 2026 et services aux particuliers."
+
+[[ouverture]]
+reference = "www.bipm.org/en/measurement-units"
+titres = ["Bureau international des poids et mesures — The International System of Units"]
+fiches = ["maths-convertir-unites"]
+statut = "contenu"
+tranche = 0
+repere = "BIPM : sept unités de base, sept constantes de définition et SI défini par ces constantes depuis le 20 mai 2019."
+
+[[ouverture]]
+reference = "www.britannica.com/dictionary/eb/qa/Pronunciation-of-ed-Endings-on-Verbs"
+titres = ["Britannica Dictionary — « Pronunciation of -ed Endings on Verbs »"]
+fiches = ["langue-anglais-prononcer-ed"]
+statut = "contenu"
+tranche = 0
+repere = "Britannica : -ed se prononce /ɪd/, /d/ ou /t/ selon le dernier son et son voisement."
+
+[[ouverture]]
+reference = "www.certificat-clea.fr/employeurs/le-socle/"
+titres = ["Certificat CléA — domaines du socle de compétences professionnelles"]
+fiches = ["methodes-demander-clarification"]
+statut = "contenu"
+tranche = 0
+repere = "CléA : sept domaines et 106 critères d’évaluation."
+
+[[ouverture]]
+reference = "www.cnrs.fr/fr"
+titres = ["Centre national de la recherche scientifique — ressources et actualités scientifiques"]
+fiches = ["recherche-question-hypothese"]
+statut = "contenu"
+tranche = 0
+repere = "CNRS : accueil, actualités du 10 novembre 2026, dossiers climat et transports."
+
+[[ouverture]]
+reference = "www.coe.int/en/web/common-european-framework-reference-languages/phonological-competence"
+titres = ["Conseil de l’Europe — CEFR, compétence phonologique"]
+fiches = ["langue-anglais-prononcer-ed"]
+statut = "contenu"
+tranche = 0
+repere = "CECR : compétence phonologique, trois sous-échelles, intelligibilité plutôt que modèle du locuteur natif."
+
+[[ouverture]]
+reference = "www.coe.int/fr/web/common-european-framework-reference-languages/plurilingualism-in-the-classroom"
+titres = ["Conseil de l’Europe — CECR, « Le plurilinguisme dans la classe »"]
+fiches = ["langue-reperer-mot-deja-connu"]
+statut = "contenu"
+tranche = 0
+repere = "CECR : plurilinguisme, répertoires linguistiques et culturels, approches plurilingues."
+
+[[ouverture]]
+reference = "www.commission-des-sondages.fr/oblig/obligations.htm"
+titres = ["Commission des sondages — « Les indications obligatoires » (articles 2 et 11 de la loi du 19 juillet 1977 modifiée)"]
+fiches = ["civ-lire-un-sondage"]
+statut = "contenu"
+tranche = 0
+repere = "Commission des sondages : article 2, huit mentions obligatoires ; article 11, interdiction en période électorale."
+
+[[ouverture]]
+reference = "www.culture.gouv.fr/"
+titres = ["Ministère de la Culture — accueil", "Ministère de la Culture — portail des arts et du patrimoine"]
+fiches = ["arts-lire-cartel", "langue-reperer-mot-deja-connu"]
+statut = "contenu"
+tranche = 0
+repere = "Ministère de la Culture : accueil, actualités du 10 novembre 2026 et dossiers thématiques."
+
+[[ouverture]]
+reference = "www.culture.gouv.fr/thematiques/photographie/gerer-un-fonds-photographique/rediger-des-cartels"
+titres = ["Ministère de la Culture — « Rédiger des cartels »"]
+fiches = ["arts-lire-cartel"]
+statut = "contenu"
+tranche = 0
+repere = "Ministère de la Culture : cartel simple, auteur, titre, technique ou matériaux, date et lieu de conservation."
+
+[[ouverture]]
+reference = "www.cybermalveillance.gouv.fr/"
+titres = ["Cybermalveillance.gouv.fr — prévention et assistance face aux actes de cybermalveillance"]
+fiches = ["numerique-organiser-fichiers"]
+statut = "contenu"
+tranche = 0
+repere = "Cybermalveillance.gouv.fr : accueil, 17Cyber, prévention, fiches réflexes et panneau cookies."
+
+[[ouverture]]
+reference = "www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing"
+titres = ["Cybermalveillance.gouv.fr — hameçonnage : prévention et conduite à tenir"]
+fiches = ["civ-trouver-service-public"]
+statut = "contenu"
+tranche = 0
+repere = "Cybermalveillance : hameçonnage, SMS ou courriel frauduleux, opposition, plainte et signalement."
+
+[[ouverture]]
+reference = "www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/rancongiciel-ransomware-particuliers"
+titres = ["Cybermalveillance.gouv.fr — « Rançongiciel ou ransomware, que faire ? » (particuliers)"]
+fiches = ["numerique-preparer-sauvegarde"]
+statut = "contenu"
+tranche = 0
+repere = "Cybermalveillance : rançongiciel pour particuliers, blocage des fichiers et demande de paiement."
+
+[[ouverture]]
+reference = "www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/rancongiciels-ransomwares"
+titres = ["Cybermalveillance.gouv.fr — « Rançongiciel ou ransomware » (organisations)"]
+fiches = ["numerique-preparer-sauvegarde"]
+statut = "contenu"
+tranche = 0
+repere = "Cybermalveillance : rançongiciel pour organisations, définition, prévention, conduite à tenir et droit."
+
+[[ouverture]]
+reference = "www.data.gouv.fr/"
+titres = ["data.gouv.fr — plateforme de données publiques françaises", "data.gouv.fr — plateforme des données publiques françaises"]
+fiches = ["civ-choisir-source-publique", "info-table-requete-web"]
+statut = "contenu"
+tranche = 0
+repere = "data.gouv.fr : 77K jeux de données et API, 397K fichiers, 7K organisations et plateformes thématiques."
+
+[[ouverture]]
+reference = "www.data.gouv.fr/pages/legal/licences"
+titres = ["data.gouv.fr — « Licences de réutilisation »"]
+fiches = ["civ-choisir-source-publique"]
+statut = "contenu"
+tranche = 0
+repere = "data.gouv.fr : licences de réutilisation, Licence Ouverte 2.0, ODbL, identifiants SPDX et licences homologuées."
+
+[[ouverture]]
+reference = "www.education.gouv.fr/"
+titres = ["Ministère de l’Éducation nationale — accueil", "Ministère de l’Éducation nationale — programmes et ressources pour les apprentissages artistiques"]
+fiches = ["arts-composer-formes", "histoire-reperer-echelle-france-monde", "langue-reperer-mot-deja-connu"]
+statut = "contenu"
+tranche = 0
+repere = "Éducation nationale : accueil, panneau cookies, journée nationale de lutte contre le harcèlement."
+
+[[ouverture]]
+reference = "www.education.gouv.fr/media/199172/download"
+titres = ["Ministère de l’Éducation nationale — programme de mathématiques du cycle 3, version publiée en janvier 2025"]
+fiches = ["maths-convertir-unites"]
+statut = "echec-recuperation"
+tranche = 0
+repere = "Éducation nationale media/199172 : échec de récupération à la première et à la deuxième tranche ; aucun PDF lu."
+
+[[ouverture]]
+reference = "www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011"
+titres = ["Ministère de l’Éducation nationale — programmes et enseignements", "Ministère de l’Éducation nationale — programmes et horaires de l’école élémentaire"]
+fiches = ["histoire-lire-frise", "langue-anglais-demander-aide"]
+statut = "contenu"
+tranche = 0
+repere = "Éducation nationale : 24 heures sur neuf demi-journées, cinq niveaux, 36 semaines et programmes révisés en septembre 2026."
+
+[[ouverture]]
+reference = "www.education.gouv.fr/sites/default/files/document/Annexe%202%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20pour%20le%20cycle%204-480716.pdf"
+titres = ["Ministère de l’Éducation nationale — programme de mathématiques du cycle 4"]
+fiches = ["maths-moyenne", "maths-probabilite-tirage"]
+statut = "contenu"
+tranche = 0
+repere = "Programme de mathématiques du cycle 4 : résolution de problèmes, définition, propriété, conjecture et énoncé prouvé."
+
+[[ouverture]]
+reference = "www.enseignementsup-recherche.gouv.fr/"
+titres = ["Ministère de l’Enseignement supérieur et de la Recherche — accueil"]
+fiches = ["recherche-distinguer-resume-citation"]
+statut = "contenu"
+tranche = 0
+repere = "Enseignement supérieur : accueil, prix science ouverte 2026 et bulletin officiel n° 42 du 5 novembre 2026."
+
+[[ouverture]]
+reference = "www.france-services.gouv.fr/"
+titres = ["France services — accueil du réseau d’accompagnement aux démarches"]
+fiches = ["civ-trouver-service-public"]
+statut = "contenu"
+tranche = 0
+repere = "France services : 2 800 maisons, 144 bus, accompagnement gratuit et sans rendez-vous."
+
+[[ouverture]]
+reference = "www.hceres.fr/fr/ofis"
+titres = ["Office français de l’intégrité scientifique — ressources sur l’intégrité en recherche"]
+fiches = ["recherche-conserver-reference"]
+statut = "page-erreur-servie"
+tranche = 0
+repere = "Hcéres /fr/ofis : « Oups ! Il n’y a rien ici ! », page 404 ; aucune ressource OFIS lue."
+
+[[ouverture]]
+reference = "www.ign.fr/"
+titres = ["Institut national de l’information géographique et forestière — IGN"]
+fiches = ["geo-decrire-paysage", "geo-lire-legende-carte"]
+statut = "echec-recuperation"
+tranche = 0
+repere = "IGN : HTTP 403 à la première et à la deuxième tranche ; aucune page lue."
+
+[[ouverture]]
+reference = "www.inrs.fr/dam/inrs/CataloguePapier/ED/TI-ED-6197.pdf"
+titres = ["INRS — « Dans mon entreprise, j’étiquette les produits chimiques » (ED 6197)"]
+fiches = ["sante-lire-etiquette-produit-menager"]
+statut = "contenu"
+tranche = 0
+repere = "INRS ED 6197 : étiquetage des produits chimiques, règlement CLP, symboles, reconditionnement et obligations."
+
+[[ouverture]]
+reference = "www.insee.fr/"
+titres = ["INSEE — Institut national de la statistique et des études économiques"]
+fiches = ["civ-choisir-source-publique"]
+statut = "contenu"
+tranche = 0
+repere = "INSEE : population 69,08 millions au 1er janvier 2026, chômage 8,2 % au troisième trimestre 2026, publications du 10 novembre."
+
+[[ouverture]]
+reference = "www.ipcc.ch/"
+titres = ["Groupe d’experts intergouvernemental sur l’évolution du climat — rapports et ressources"]
+fiches = ["sciences-meteo-climat"]
+statut = "contenu"
+tranche = 0
+repere = "IPCC : évalue l’état des connaissances, ne mène pas ses propres recherches, rapports utiles aux politiques sans les prescrire, 195 États membres."
+
+[[ouverture]]
+reference = "www.santepubliquefrance.fr/"
+titres = ["Santé publique France — accueil"]
+fiches = ["sante-reperer-source-publique"]
+statut = "contenu"
+tranche = 0
+repere = "Santé publique France : accueil, Rencontres 2026 et bulletins du 4 novembre 2026 sur les infections respiratoires aiguës."
+
+[[ouverture]]
+reference = "www.santepubliquefrance.fr/a-propos/sante-publique-france-qui-sommes-nous"
+titres = ["Santé publique France — « Qui sommes-nous ? »"]
+fiches = ["sante-reperer-source-publique"]
+statut = "contenu"
+tranche = 0
+repere = "Santé publique France : agence créée en 2016, missions anticiper, comprendre et agir, page mise à jour le 16 juillet 2025."
+
+[[ouverture]]
+reference = "www.service-public.fr/particuliers/vosdroits/F31144"
+titres = ["service-public.fr — « Devis obligatoire : activités concernées »"]
+fiches = ["demarche-lire-devis-travaux"]
+statut = "contenu"
+tranche = 0
+repere = "Service Public F31144 : devis obligatoire, liste des travaux, mentions du devis, page vérifiée le 9 septembre 2022 ; la variante .fr redirige vers .gouv.fr."
+
+[[ouverture]]
+reference = "www.service-public.gouv.fr/particuliers/vosdroits/F2451"
+titres = ["Service-Public.fr — « Crédit à la consommation : règles du contrat » (F2451)"]
+fiches = ["econ-distinguer-interet-frais"]
+statut = "contenu"
+tranche = 0
+repere = "Service Public F2451 : crédit à la consommation de 200 € à 75 000 €, contrat écrit, publicité encadrée, page vérifiée le 7 août 2024."
+
+[[ouverture]]
+reference = "www.vie-publique.fr/"
+titres = ["Vie-publique.fr — repères sur les institutions et politiques publiques"]
+fiches = ["civ-choisir-source-publique"]
+statut = "contenu"
+tranche = 0
+repere = "Vie publique : accueil, questions-réponses, actualités du 10 novembre 2026 et panorama des lois."
+
+[[ouverture]]
+reference = "www.vie-publique.fr/fiches"
+titres = ["Vie publique — les fiches sur les institutions", "Vie publique — les fiches sur les institutions et la citoyenneté"]
+fiches = ["civ-reperer-echelle-institution", "civ-reperer-info-electorale", "histoire-reperer-echelle-france-monde"]
+statut = "contenu"
+tranche = 0
+repere = "Vie publique : fiches par thèmes, institutions, citoyenneté, collectivités, justice et Union européenne."
+
+[[ouverture]]
+reference = "www.visionscarto.net/peut-on-corriger-la-carte-du-monde"
+titres = ["Visionscarto — « Peut-on corriger la carte du monde ? La projection de Mercator en question », Vincent Capdepuy"]
+fiches = ["geo-choisir-une-projection"]
+statut = "contenu"
+tranche = 0
+repere = "Visionscarto : Mercator, résolution de l’ONU du 4 septembre 2026, Equal Earth, déformations, centrage et orientation."
