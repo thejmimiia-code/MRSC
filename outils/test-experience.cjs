@@ -526,8 +526,8 @@ async function main() {
       const largeurInterieure = lignes[lignes.length - 1].interieur;
       assert.equal(
         mesureLignes.length,
-        6,
-        `les cinq réglages et la lecture à voix haute doivent être dans le panneau : ${JSON.stringify(mesureLignes)}`
+        7,
+        `les six réglages et la lecture à voix haute doivent être dans le panneau : ${JSON.stringify(mesureLignes)}`
       );
       assert.equal(
         mesureLignes.filter((ligne) => ligne.nom.includes('read-aloud')).length,
@@ -546,7 +546,7 @@ async function main() {
             masque: getComputedStyle(element, '::before').maskImage || getComputedStyle(element, '::before').webkitMaskImage,
           }));
       });
-      assert.equal(icones.length, 5, JSON.stringify(icones));
+      assert.equal(icones.length, 6, JSON.stringify(icones));
       assert.ok(
         icones.every((icone) => icone.masque && icone.masque !== 'none'),
         `chaque réglage doit porter une icône : ${JSON.stringify(icones)}`
@@ -666,9 +666,10 @@ async function main() {
           };
         });
         assert.ok(etat.gauche >= -1 && etat.droite <= etat.viewport + 1, `${largeur}px : ${JSON.stringify(etat)}`);
-        // Cinq réglages (dont « Apparence », ajoutée le 7 novembre 2026) et la
-        // lecture à voix haute, ajoutée le 23 octobre 2026.
-        assert.ok(etat.lignes.length === 6, `${largeur}px : ${JSON.stringify(etat.lignes)}`);
+        // Six réglages — dont « Apparence » (7 novembre 2026) et
+        // « Accessibilité » (12 novembre 2026) — et la lecture à voix haute
+        // du 23 octobre 2026.
+        assert.ok(etat.lignes.length === 7, `${largeur}px : ${JSON.stringify(etat.lignes)}`);
         assert.ok(
           etat.lignes.every((ligne) => ligne.left >= etat.gauche - 1 && ligne.right <= etat.droite + 1),
           `${largeur}px : une ligne sort du panneau ${JSON.stringify(etat.lignes)}`
@@ -1669,6 +1670,103 @@ async function main() {
       assert.ok(anglais.length >= 1);
       assert.match(anglais[0].texte, /^[A-Za-z]/);
       await page.click('[data-read-aloud-toggle]');
+    } finally {
+      await page.close();
+    }
+  });
+
+  await executer('Accessibilité : trois modules, effet mesuré, mémoire et clavier', async () => {
+    const page = await creerPage({ width: 390, height: 820 });
+    try {
+      await ouvrirPageSite(page, 'index.html');
+      await ouvrirPersonnalisation(page);
+      assert.equal(
+        await page.$eval('[data-accessibilite-settings] > summary', (element) => element.textContent.trim().replace(/⌄$/, '').trim()),
+        'Accessibilité',
+        'la ligne « Accessibilité » doit être dans « Personnalisation »'
+      );
+      await page.click('[data-accessibilite-settings] > summary');
+      await attendre(page, () => document.querySelector('[data-accessibilite-settings]')?.open === true);
+
+      const avant = await page.evaluate(() => ({
+        classes: Array.from(document.documentElement.classList),
+        police: getComputedStyle(document.querySelector('main p')).fontFamily,
+        transition: getComputedStyle(document.querySelector('.customize-settings-chevron')).transitionDuration,
+        eviter: getComputedStyle(document.querySelector('.skip-link')).transform,
+        boutons: document.querySelectorAll('[data-accessibilite-toggle]').length,
+      }));
+      assert.equal(avant.boutons, 3, 'trois modules, pas plus : chacun couvre un besoin distinct');
+      assert.ok(!avant.classes.some((classe) => ['aide-lecture', 'mouvement-attenue', 'reperes-visibles'].includes(classe)));
+      assert.notEqual(avant.eviter, 'none', 'sans le module, le lien d’évitement reste hors écran');
+
+      for (const cle of ['langue', 'mouvement', 'reperes']) {
+        await page.click(`[data-accessibilite-toggle="${cle}"]`);
+      }
+      const apres = await page.evaluate(() => ({
+        classes: Array.from(document.documentElement.classList),
+        police: getComputedStyle(document.querySelector('main p')).fontFamily,
+        entrelettres: parseFloat(getComputedStyle(document.querySelector('main p')).letterSpacing),
+        transition: parseFloat(getComputedStyle(document.querySelector('.customize-settings-chevron')).transitionDuration),
+        eviter: getComputedStyle(document.querySelector('.skip-link')).transform,
+        eviterBoite: (() => { const b = document.querySelector('.skip-link').getBoundingClientRect(); return { haut: b.top, hauteur: b.height }; })(),
+        annonce: document.querySelector('[data-accessibilite-settings] [role="status"]').textContent,
+        appuye: Array.from(document.querySelectorAll('[data-accessibilite-toggle]')).map((bouton) => bouton.getAttribute('aria-pressed')),
+        memoire: {
+          langue: localStorage.getItem('mrsc-lecture-aide'),
+          mouvement: localStorage.getItem('mrsc-mouvement-attenue'),
+          reperes: localStorage.getItem('mrsc-reperes-visibles'),
+        },
+      }));
+      assert.deepEqual(apres.appuye, ['true', 'true', 'true'], 'chaque bouton porte son état par aria-pressed');
+      assert.match(apres.annonce, /Repères clavier visibles : activé/);
+      // Lecture facilitée : la police change réellement et les lettres sont espacées.
+      assert.match(apres.police, /Verdana|Trebuchet/, `la police de lecture doit changer : ${apres.police}`);
+      assert.ok(apres.entrelettres >= 0.3, `les lettres doivent être espacées : ${apres.entrelettres}px`);
+      // Réduire les mouvements : la durée de transition tombe sous la milliseconde.
+      assert.ok(apres.transition < 1, `les transitions doivent être coupées : ${apres.transition}s`);
+      // Repères visibles : le lien d'évitement est affiché, sans focus.
+      assert.equal(apres.eviter, 'none', 'le lien d’évitement est ramené à l’écran');
+      assert.ok(apres.eviterBoite.hauteur >= 32, 'le lien d’évitement affiché reste cliquable');
+      assert.deepEqual(apres.memoire, { langue: 'oui', mouvement: 'oui', reperes: 'oui' });
+
+      // La mémoire traverse les pages : c'est la moitié du service rendu.
+      await page.goto(adresse('apprendre.html'), { waitUntil: 'domcontentloaded' });
+      await attendre(page, () => document.documentElement.classList.contains('aide-lecture')
+        && document.documentElement.classList.contains('mouvement-attenue')
+        && document.documentElement.classList.contains('reperes-visibles'));
+
+      // Le bouton de retour éteint les trois modules et le dit.
+      await ouvrirPageSite(page, 'index.html');
+      await ouvrirPersonnalisation(page);
+      await page.click('[data-accessibilite-settings] > summary');
+      await attendre(page, () => document.querySelector('[data-accessibilite-settings]')?.open === true);
+      await page.click('.accessibilite-settings-reset');
+      const apresRetour = await page.evaluate(() => ({
+        classes: Array.from(document.documentElement.classList).filter((classe) => ['aide-lecture', 'mouvement-attenue', 'reperes-visibles'].includes(classe)),
+        annonce: document.querySelector('[data-accessibilite-settings] [role="status"]').textContent,
+        appuye: Array.from(document.querySelectorAll('[data-accessibilite-toggle]')).map((bouton) => bouton.getAttribute('aria-pressed')),
+      }));
+      assert.deepEqual(apresRetour.classes, []);
+      assert.deepEqual(apresRetour.appuye, ['false', 'false', 'false']);
+      assert.match(apresRetour.annonce, /désactivés/);
+
+      // Clavier : Entrée ouvre la ligne, Échap la referme avant le panneau.
+      // La ligne est encore ouverte après le bouton de retour : on la referme
+      // d'abord, sinon l'essai mesurerait la fermeture, pas l'ouverture.
+      await page.click('[data-accessibilite-settings] > summary');
+      await attendre(page, () => document.querySelector('[data-accessibilite-settings]')?.open === false);
+      await ouvrirPersonnalisation(page);
+      await page.focus('.customize-settings > summary');
+      await page.focus('[data-accessibilite-settings] > summary');
+      await page.keyboard.press('Enter');
+      await attendre(page, () => document.querySelector('[data-accessibilite-settings]')?.open === true);
+      await page.keyboard.press('Escape');
+      await attendre(page, () => document.querySelector('[data-accessibilite-settings]')?.open === false);
+      assert.equal(
+        await page.evaluate(() => document.querySelector('[data-customize-settings]')?.open),
+        true,
+        'le premier Échap ne referme que la ligne « Accessibilité »'
+      );
     } finally {
       await page.close();
     }

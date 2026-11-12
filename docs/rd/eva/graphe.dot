@@ -15,6 +15,7 @@ digraph memoire {
   "assets/images/accueil-logo-mrsc-3d.jpg" [shape=plaintext, label="assets/images/accueil-logo-mrsc-3d.jpg"];
   "assets/images/mondes-savoirs-hero.jpg" [shape=plaintext, label="assets/images/mondes-savoirs-hero.jpg"];
   "assets/js/site.js" [shape=plaintext, label="assets/js/site.js"];
+  "avancee:accessibilite-modules-originaux-2026-11-12" [shape=note, label="avancee:accessibilite-modules-originaux-2026-11-12"];
   "avancee:accueil-d-apres-les-statuts-2026-11-11" [shape=note, label="avancee:accueil-d-apres-les-statuts-2026-11-11"];
   "avancee:attente-navigateur-nommee" [shape=note, label="avancee:attente-navigateur-nommee"];
   "avancee:aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran" [shape=note, label="avancee:aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran"];
@@ -332,6 +333,10 @@ digraph memoire {
   "phase:voix-et-ecoute" [shape=box, label="phase:voix-et-ecoute"];
   "simulateur/PROVENANCE.json" [shape=plaintext, label="simulateur/PROVENANCE.json"];
   "transparence.html" [shape=plaintext, label="transparence.html"];
+  "avancee:accessibilite-modules-originaux-2026-11-12" -> "assets/css/site.css" [label="prouvée par"];
+  "avancee:accessibilite-modules-originaux-2026-11-12" -> "assets/js/site.js" [label="prouvée par"];
+  "avancee:accessibilite-modules-originaux-2026-11-12" -> "outils/test_mutations_affichages.py" [label="prouvée par"];
+  "avancee:accessibilite-modules-originaux-2026-11-12" -> "outils/verifier-affichages.py" [label="prouvée par"];
   "avancee:accueil-d-apres-les-statuts-2026-11-11" -> "assets/documents/statuts-2020.pdf" [label="prouvée par"];
   "avancee:accueil-d-apres-les-statuts-2026-11-11" -> "docs/rd/statuts-matrice-tracabilite.toml" [label="prouvée par"];
   "avancee:accueil-d-apres-les-statuts-2026-11-11" -> "docs/rd/statuts-revue-juridique.md" [label="prouvée par"];
@@ -791,6 +796,7 @@ digraph memoire {
   "branche:co-conception-et-essais" -> "avancee:une-page-de-transparence-se-lit-dans-un-ordre" [label="a produit"];
   "branche:co-conception-et-essais" -> "avancee:une-structure-qui-convient-nest-pas-un-texte-relu" [label="a produit"];
   "branche:co-conception-et-essais" -> "phase:apprentissages-et-relecture" [label="servie par"];
+  "branche:coherence-textes-publics" -> "avancee:accessibilite-modules-originaux-2026-11-12" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:cadrages-personnalises-au-pixel" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:contraste-et-pages-oubliees" [label="a produit"];
@@ -909,6 +915,7 @@ digraph memoire {
   "branche:indexation-et-lecteurs-de-contenu" -> "phase:graphe-de-memoire" [label="servie par"];
   "branche:indexation-et-lecteurs-de-contenu" -> "phase:rappel-mesure" [label="servie par"];
   "branche:mondes-3d-pluridisciplinaires" -> "phase:conscience-et-corps" [label="servie par"];
+  "branche:optimisation-du-site" -> "avancee:accessibilite-modules-originaux-2026-11-12" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:attente-navigateur-nommee" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:badges-en-rem" [label="a produit"];

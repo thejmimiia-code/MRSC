@@ -1176,7 +1176,12 @@ def controler_lecture_a_voix_haute() -> list[str]:
     # La commande vit dans le panneau, pas dans l'en-tête : celui-ci garde deux boutons.
     # La commande doit être *ajoutée* à la liste des blocs du panneau, et non
     # seulement construite : une fonction jamais appelée ne s'affiche nulle part.
-    if not re.search(r"\[headerCompactToggle, settings, apparenceSettings, layoutSettings, lectureVocale\]", script):
+    # La liste a gagné « accessibiliteSettings » le 12 novembre 2026 ; le contrôle
+    # vise la présence de chaque bloc, pas l'ordre exact, pour ne pas casser à
+    # chaque réglage ajouté — mais il exige que « lectureVocale » y soit.
+    if not re.search(r"\[[^\]]*lectureVocale[^\]]*\]\.forEach", script) or not re.search(
+        r"\[[^\]]*apparenceSettings[^\]]*\]\.forEach", script
+    ):
         erreurs.append(
             "site.js — la lecture à voix haute n'est plus placée dans le panneau Personnalisation : "
             "la commande est construite mais jamais affichée"
@@ -1336,6 +1341,105 @@ def controler_espacement_du_texte() -> list[str]:
             f"site.css — l'espacement des mots du réglage vaut {espacement_mots} em : "
             "le critère 1.4.12 en demande 0,16 em"
         )
+    return erreurs
+
+
+def controler_modules_accessibilite() -> list[str]:
+    """Les trois modules destinés aux personnes handicapées ne peuvent pas s'effacer.
+
+    Ajoutés le 12 novembre 2026, ils répondent à trois besoins qu'aucun réglage
+    existant ne couvrait : lecture avec une police ouverte, arrêt des
+    mouvements, repères clavier visibles. Une feuille de style peut perdre une
+    de ces règles sans qu'aucune page ne casse : c'est exactement le genre de
+    disparition qu'un contrôle de source doit nommer. Les effets mesurés sont
+    vérifiés en navigateur par `outils/test-experience.cjs` ; ce contrôle-ci
+    vérifie que les règles existent encore et gardent leurs valeurs.
+    """
+    erreurs: list[str] = []
+    feuille = (RACINE / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+    regles_feuille = list(regles(feuille))
+
+    def corps_des(marqueur: str) -> str:
+        return " ".join(corps for selecteur, corps in regles_feuille if marqueur in selecteur)
+
+    # La police doit être posée sur les paragraphes **et** sur les titres :
+    # mesuré le 12 novembre 2026, retirer la première règle laissait la seconde
+    # verdana et le module semblait intact alors que les titres seuls suivaient.
+    lecture = corps_des("aide-lecture")
+    if not lecture:
+        erreurs.append("site.css — le module « lecture facilitée » (aide-lecture) a disparu")
+    else:
+        regles_lecture = [corps for selecteur, corps in regles_feuille if "aide-lecture" in selecteur]
+        if not any(
+            re.search(r"font-family:\s*Verdana", corps) and re.search(r"\bp\b|li", selecteur)
+            for selecteur, corps in regles_feuille
+            if "aide-lecture" in selecteur
+        ):
+            erreurs.append(
+                "site.css — « lecture facilitée » ne change plus la police du texte suivi : sans "
+                "elle, le module n'offre rien de plus que la taille et l'espacement"
+            )
+        interlettrage = re.search(r"letter-spacing:\s*([0-9.]+)em", lecture)
+        if not interlettrage or float(interlettrage.group(1)) < 0.03:
+            erreurs.append(
+                "site.css — « lecture facilitée » n'espace plus les lettres : le module "
+                "perd ce qui aide à distinguer les mots"
+            )
+        if not re.search(r"text-align:\s*left", lecture):
+            erreurs.append(
+                "site.css — « lecture facilitée » ne désjustifie plus le texte : une "
+                "justification ouvre des rivières blanches qui gênent la lecture dyslexique"
+            )
+
+    mouvement = corps_des("mouvement-attenue")
+    if not mouvement:
+        erreurs.append("site.css — le module « réduire les mouvements » (mouvement-attenue) a disparu")
+    else:
+        # On lit la valeur, pas seulement le nom de la propriété : « transition-
+        # duration » présente avec 1s ne coupe rien. Mesuré le 12 novembre 2026.
+        for propriete, plafond in (
+            ("animation-duration", 0.002),
+            ("transition-duration", 0.002),
+        ):
+            valeurs = [
+                float(valeur)
+                for valeur in re.findall(propriete + r":\s*([0-9.]+)\s*(?:ms|s)", mouvement)
+            ]
+            if not valeurs or any(valeur > plafond for valeur in valeurs):
+                erreurs.append(
+                    f"site.css — « réduire les mouvements » ne coupe plus {propriete} : "
+                    "un mouvement résiduel reste joué malgré le choix de la personne"
+                )
+        if "scroll-behavior: auto" not in mouvement:
+            erreurs.append(
+                "site.css — « réduire les mouvements » laisse le défilement animé : "
+                "le module ne tient pas sa promesse"
+            )
+
+    reperes = corps_des("reperes-visibles")
+    if not reperes:
+        erreurs.append("site.css — le module « repères clavier visibles » (reperes-visibles) a disparu")
+    elif "transform: none" not in reperes:
+        erreurs.append(
+            "site.css — « repères clavier visibles » ne ramène plus le lien d'évitement à "
+            "l'écran : le module ne montre plus rien"
+        )
+
+    # Le réglage doit être exposé dans le panneau, sinon les règles ci-dessus
+    # sont inatteignables. Le libellé et l'état sont portés par le script.
+    script = (RACINE / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+    for marqueur in (
+        'dataset.accessibiliteToggle',
+        '"mrsc-lecture-aide"',
+        '"mrsc-mouvement-attenue"',
+        '"mrsc-reperes-visibles"',
+        '"Accessibilité"',
+    ):
+        if marqueur not in script:
+            erreurs.append(
+                f"assets/js/site.js — le panneau d'accessibilité a perdu {marqueur} : "
+                "un module sans commande n'est pas un module"
+            )
     return erreurs
 
 
@@ -1792,6 +1896,7 @@ CONTROLES = (
     ("pied de page et copie imprimée", controler_pied_de_page),
     ("lecture à voix haute", controler_lecture_a_voix_haute),
     ("espacement du texte (WCAG 1.4.12)", controler_espacement_du_texte),
+    ("modules d’accessibilité pour les personnes handicapées", controler_modules_accessibilite),
     ("ouverture de l'accueil sans collage", controler_ouverture_accueil),
     ("parcours de présentation de l'association", controler_presentation_association),
     ("filtre du texte fin (décor aria-hidden)", controler_filtre_texte_fin),

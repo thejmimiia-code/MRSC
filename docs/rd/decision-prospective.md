@@ -19,7 +19,7 @@ La décision porte sur l'allocation du temps de relecture, pas sur l'ajout d'une
 | Initiatives R&D suivies | 19, dont 6 en priorité P0 | Portefeuille |
 | Sujets du référentiel sans aucune fiche | **6**, dont **3** à relecture experte | `docs/rd/carte-lacunes.md` |
 | Boussole publiée | 10 questions statiques, liens édités à la main, aucune collecte | `apprendre.html#boussole-savoirs` |
-| Poids estimé de la page Apprendre | 244 Kio mobile / 432 Kio grand écran (gzip estimé) | `docs/rd/poids-pages.md` |
+| Poids estimé de la page Apprendre | 250 Kio mobile / 438 Kio grand écran (gzip estimé) | `docs/rd/poids-pages.md` |
 | En-têtes servis par GitHub Pages | types AVIF/WebP corrects, gzip sur le texte, cache 600 s | Issue #90 |
 | Essais navigateur | 13/13, dont 320 px, zoom 150 %, contraste renforcé | `outils/test-experience.cjs` |
 

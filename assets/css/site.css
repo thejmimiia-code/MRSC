@@ -2887,7 +2887,7 @@ html.contraste-renforce {
 html.contraste-renforce main a:not(.button),
 html.contraste-renforce .site-footer a { text-decoration: underline; text-decoration-thickness: .12em; }
 html.contraste-renforce :focus-visible { outline-width: 4px; }
-html.contraste-renforce :is(button,.button,.display-control,.display-settings > summary,.apparence-settings > summary,.header-compact-toggle,.site-journey-settings > summary) { border: 2px solid currentColor; }
+html.contraste-renforce :is(button,.button,.display-control,.display-settings > summary,.apparence-settings > summary,.accessibilite-settings > summary,.header-compact-toggle,.site-journey-settings > summary) { border: 2px solid currentColor; }
 
 .site-journey-settings {
   position: static;
@@ -4700,6 +4700,7 @@ html:is(.texte-agrandi,.texte-tres-agrandi) .ai-node { max-width: calc(100% - 1r
   .site-journey-settings > summary,
   .layout-settings > summary,
   .apparence-settings > summary,
+  .accessibilite-settings > summary,
   .customize-settings > summary
 ):focus-visible {
   outline: 2px solid var(--gold);
@@ -4712,6 +4713,7 @@ html.contraste-renforce .site-header :is(
   .site-journey-settings > summary,
   .layout-settings > summary,
   .apparence-settings > summary,
+  .accessibilite-settings > summary,
   .customize-settings > summary
 ):focus-visible {
   outline-color: var(--on-navy);
@@ -4725,7 +4727,8 @@ html.contraste-renforce .site-header :is(
 .layout-settings-chevron,
 .site-journey-chevron,
 .customize-settings-chevron,
-.apparence-settings-chevron {
+.apparence-settings-chevron,
+.accessibilite-settings-chevron {
   display: inline-block;
   flex: 0 0 auto;
   width: 13px;
@@ -4912,7 +4915,8 @@ html.has-js.menu-flottant .nav-links a::after { content: none; }
    la largeur, leurs panneaux s'ouvrent dans le flux au lieu de flotter. */
 html.has-js .site-header .customize-settings-panel .display-settings,
 html.has-js .site-header .customize-settings-panel .layout-settings,
-html.has-js .site-header .customize-settings-panel .site-journey-settings {
+html.has-js .site-header .customize-settings-panel .site-journey-settings,
+html.has-js .site-header .customize-settings-panel .accessibilite-settings {
   position: static;
   display: block;
   width: 100%;
@@ -4923,7 +4927,8 @@ html.has-js .site-header .customize-settings-panel :is(
   .display-settings > summary,
   .layout-settings > summary,
   .site-journey-settings > summary,
-  .apparence-settings > summary
+  .apparence-settings > summary,
+  .accessibilite-settings > summary
 ) {
   display: flex;
   width: 100%;
@@ -4950,7 +4955,8 @@ html.has-js .site-header .customize-settings-panel :is(
   .display-settings,
   .layout-settings,
   .site-journey-settings,
-  .apparence-settings
+  .apparence-settings,
+  .accessibilite-settings
 ) > summary::before {
   content: "";
   flex: 0 0 auto;
@@ -4977,24 +4983,25 @@ html.has-js .site-header .customize-settings-panel :is(
   .display-settings,
   .layout-settings,
   .site-journey-settings,
-  .apparence-settings
-) > summary > :is(.display-settings-chevron, .layout-settings-chevron, .site-journey-chevron, .apparence-settings-chevron) {
+  .apparence-settings,
+  .accessibilite-settings
+) > summary > :is(.display-settings-chevron, .layout-settings-chevron, .site-journey-chevron, .apparence-settings-chevron, .accessibilite-settings-chevron) {
   margin-left: auto;
   color: var(--muted);
 }
 
-html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings) > summary:hover,
-html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings)[open] > summary {
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings, .accessibilite-settings) > summary:hover,
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings, .accessibilite-settings)[open] > summary {
   background: var(--blue-soft);
 }
-html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings) > summary:hover::before,
-html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings)[open] > summary::before {
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings, .accessibilite-settings) > summary:hover::before,
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings, .accessibilite-settings)[open] > summary::before {
   opacity: 1;
 }
-html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings)[open] > summary {
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings, .accessibilite-settings)[open] > summary {
   color: var(--blue);
 }
-html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings) > summary:focus-visible {
+html.has-js .site-header .customize-settings-panel :is(.display-settings, .layout-settings, .site-journey-settings, .apparence-settings, .accessibilite-settings) > summary:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
   background: var(--blue-soft);
@@ -5058,7 +5065,7 @@ html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([h
   border-top: 1px solid var(--line);
 }
 
-html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, .layout-settings-panel, .site-journey-panel, .apparence-settings-panel) {
+html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, .layout-settings-panel, .site-journey-panel, .apparence-settings-panel, .accessibilite-settings-panel) {
   position: static;
   width: 100%;
   max-width: none;
@@ -5089,7 +5096,8 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
     .display-settings > summary,
     .layout-settings > summary,
     .site-journey-settings > summary,
-    .apparence-settings > summary
+    .apparence-settings > summary,
+    .accessibilite-settings > summary
   ),
   html.has-js .site-header .customize-settings-panel .header-compact-toggle:not([hidden]),
   html.has-js.menu-flottant .nav-links a {
@@ -5133,7 +5141,7 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
 /* Le contenu d'un réglage ouvert s'aligne sur son libellé, pas sur son icône :
    l'icône fait 19 px et l'écart 9,6 px, d'où un retrait de 28,6 px. */
 
-html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, .layout-settings-panel, .site-journey-panel, .apparence-settings-panel) {
+html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, .layout-settings-panel, .site-journey-panel, .apparence-settings-panel, .accessibilite-settings-panel) {
   padding-left: 1.8rem;
   border-left-color: var(--border-soft-2);
 }
@@ -5141,7 +5149,7 @@ html.has-js .site-header .customize-settings-panel :is(.display-settings-panel, 
 /* Les titres de section deviennent des étiquettes discrètes : dans un panneau
    étroit, un gros titre en gras concurrence les lignes du menu. */
 
-html.has-js .site-header .customize-settings-panel :is(.display-settings-title, .layout-settings-title, .apparence-settings-title) {
+html.has-js .site-header .customize-settings-panel :is(.display-settings-title, .layout-settings-title, .apparence-settings-title, .accessibilite-settings-title) {
   margin: 0 0 .45rem;
   color: var(--text-soft);
   font-size: max(12px, .72rem);
@@ -5534,6 +5542,15 @@ html.contraste-renforce[data-apparence] body { background-image: none; }
 .apparence-settings-note { margin: .35rem 0 0; color: var(--muted); font-size: max(12px, .76rem); line-height: 1.45; }
 .apparence-settings-reset { width: 100%; margin-top: .5rem; }
 
+/* La ligne « Accessibilité » a sa propre icône : une silhouette aux bras
+   ouverts, dessinée pour ce site, sans reprise d'un pictogramme existant. */
+html.has-js .site-header .customize-settings-panel .accessibilite-settings > summary::before {
+  content: ""; flex: 0 0 auto; width: 19px; height: 19px;
+  background-color: currentColor; opacity: .78;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='4.6' r='1.9'/%3E%3Cpath d='M4.5 8.4l7.5 1.4 7.5-1.4'/%3E%3Cpath d='M12 9.8v4.4'/%3E%3Cpath d='M12 14.2l-3 6.4'/%3E%3Cpath d='M12 14.2l3 6.4'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='4.6' r='1.9'/%3E%3Cpath d='M4.5 8.4l7.5 1.4 7.5-1.4'/%3E%3Cpath d='M12 9.8v4.4'/%3E%3Cpath d='M12 14.2l-3 6.4'/%3E%3Cpath d='M12 14.2l3 6.4'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+}
+
 /* La cinquième ligne du panneau porte la même icône en masque que ses voisines. */
 html.has-js .site-header .customize-settings-panel .apparence-settings > summary {
   display: flex; width: 100%; min-height: 44px; margin: 0; padding: .45rem .55rem;
@@ -5548,6 +5565,66 @@ html.has-js .site-header .customize-settings-panel .apparence-settings > summary
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 3a9 9 0 0 0 0 18'/%3E%3Ccircle cx='8' cy='9' r='1.4'/%3E%3Ccircle cx='15' cy='8' r='1.4'/%3E%3Ccircle cx='9' cy='15' r='1.4'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 3a9 9 0 0 0 0 18'/%3E%3Ccircle cx='8' cy='9' r='1.4'/%3E%3Ccircle cx='15' cy='8' r='1.4'/%3E%3Ccircle cx='9' cy='15' r='1.4'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
 }
+
+/* 5. Les trois modules d'accessibilité pour les personnes handicapées.
+   Chaque réglage est une classe sur `<html>`, appliquée par `site.js` et
+   mémorisée sur l'appareil. Aucune règle ne suppose un format de fenêtre :
+   `compter-paliers.py` n'a donc rien de plus à déclarer. Les noms, les textes
+   et les icônes sont écrits pour ce site ; aucun produit tiers n'est copié.
+   Ce que chaque module fait est mesuré dans outils/test-experience.cjs. */
+
+/* Lecture facilitée : police à empattements ouverts, lettres et mots espacés,
+   interlignes larges. On ne remplace pas la police par une police « spéciale
+   dyslexie » payante : Verdana, Trebuchet MS puis la police système offrent
+   des formes distinctes, largement disponibles et sans téléchargement. */
+html.aide-lecture :is(main, .site-footer) :is(p, li, dd, dt, blockquote, figcaption, th, td) {
+  font-family: Verdana, "Trebuchet MS", "DejaVu Sans", system-ui, sans-serif;
+  letter-spacing: .035em;
+  word-spacing: .12em;
+  line-height: 1.75;
+}
+html.aide-lecture :is(main, .site-footer) :is(h1, h2, h3, h4) {
+  font-family: Verdana, "Trebuchet MS", "DejaVu Sans", system-ui, sans-serif;
+  letter-spacing: .01em;
+}
+/* Le texte suit la colonne au lieu d'être justifié : une justification ouvre
+   des « rivières » blanches qui gênent la lecture dyslexique. */
+html.aide-lecture :is(main, .site-footer) p { text-align: left; hyphens: none; }
+html.aide-lecture :is(main, .site-footer) a { text-underline-offset: .18em; }
+
+/* Réduire les mouvements : le réglage de la personne prime sur les animations
+   du site, y compris si le système ne demande rien. Les propriétés animées
+   sont coupées, pas seulement accélérées. */
+html.mouvement-attenue *,
+html.mouvement-attenue *::before,
+html.mouvement-attenue *::after {
+  animation-duration: .001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .001ms !important;
+  scroll-behavior: auto !important;
+}
+html.mouvement-attenue .customize-settings-panel { animation: none !important; }
+
+/* Repères clavier visibles : le lien d'évitement reste affiché et le contour
+   de focus s'épaissit. Rien ne s'ouvre ni ne se ferme : c'est un repère, pas
+   une navigation parallèle. */
+html.reperes-visibles .skip-link {
+  transform: none;
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+html.reperes-visibles :focus-visible { outline-width: 4px; }
+html.reperes-visibles a:focus-visible { text-decoration: underline; }
+
+/* Le panneau et sa ligne, dans « Personnalisation ». */
+.accessibilite-settings-panel { padding: .35rem .1rem .15rem; }
+.accessibilite-settings-title { margin: 0 0 .5rem; color: var(--navy-ink); font-size: max(12px, .86rem); font-weight: 700; }
+.accessibilite-settings-actions { display: grid; gap: .55rem; }
+.accessibilite-settings-row { display: grid; gap: .2rem; }
+.accessibilite-settings-description { color: var(--text-soft); font-size: max(12px, .78rem); line-height: 1.45; }
+.accessibilite-settings-status { min-height: 1.3em; margin: .5rem 0 0; color: var(--navy-ink); font-size: max(12px, .82rem); font-weight: 700; }
+.accessibilite-settings-note { margin: .35rem 0 0; color: var(--muted); font-size: max(12px, .76rem); line-height: 1.45; }
+.accessibilite-settings-reset { width: 100%; margin-top: .5rem; }
 
 /* Présentation de l'association : un parcours, pas un bloc de prose.
    Le 9 novembre 2026, la section « L'association » de l'accueil mesurait

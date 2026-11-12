@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 113 |
+| Avancées consignées | 114 |
 | Période couverte | du 2026-10-20 au 2026-11-12 |
-| Contrôles exécutables cités | 127 |
+| Contrôles exécutables cités | 128 |
 | Initiatives du portefeuille concernées | 16 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -2723,6 +2723,34 @@ Initiatives liées : `relire-les-44-prototypes`, `coordination-de-tous-les-agent
 **Suite.** Retenter www.ign.fr/ à une date ultérieure ; si une page de l’Institut devient lisible, la consigner avec sa date et son repère avant de modifier l’une des deux fiches de géographie. Ne pas importer les couleurs de la légende OACI dans la fiche de lecture de légende. Laisser l’association trancher la revue du 2026-11-19 ou la décision prospective avant le 31 janvier 2027.
 
 Initiatives liées : `relire-les-44-prototypes`, `coordination-de-tous-les-agents`, `confronter-une-affirmation-a-sa-source`.
+
+### `accessibilite-modules-originaux-2026-11-12` — Un module d’accessibilité se juge sur l’effet mesuré, et un produit propriétaire n’est qu’une liste de besoins
+
+*Consignée le 2026-11-12.*
+
+**Constat.** La demande citait deux exemples : Lisio, une surcouche d’accessibilité, et le téléservice MDPH en ligne de la CNSA. Vérification faite le jour même, Lisio est un logiciel **propriétaire et payant** : aucune licence libre, aucun code réutilisable. Le site possédait pourtant déjà six réglages (taille, contraste, espacement WCAG 1.4.12, six apparences, six présentations, lecture vocale), et trois besoins documentés n’étaient couverts par aucun : lire avec des lettres plus distinctes, supprimer les mouvements quand le système ne le demande pas, et voir les repères clavier sans les découvrir au focus. Un module ajouté sans mesure d’effet aurait ressemblé à une case cochée : trois boutons de plus, aucune preuve qu’ils changent quelque chose.
+
+**Ce que cela change.** Trois modules originaux dans le panneau « Personnalisation » : `aide-lecture` (Verdana/Trebuchet, interlettrage 0,035 em, interligne 1,75, texte désjustifié), `mouvement-attenue` (durées à 0,001 ms, défilement non animé) et `reperes-visibles` (lien d’évitement ramené à l’écran, contour de focus à 4 px). Aucun texte, code, icône ni mise en page n’est repris des deux sites cités : une icône a été dessinée en SVG pour ce site, et les polices sont celles du système, donc sans téléchargement ni licence. Chaque module est une classe sur `<html>`, mémorisée en `localStorage`, annoncée en `role=status`, et **mesurée en navigateur** : police calculée, durée de transition calculée, `transform` du lien d’évitement, persistance entre pages, ordre des Échap. Un vingt-deuxième garde-fou lit la feuille et le script, et sept mutations prouvent qu’il mord.
+
+**Preuves dans le dépôt :**
+
+- `assets/js/site.js`
+- `assets/css/site.css`
+- `outils/verifier-affichages.py`
+- `outils/test_mutations_affichages.py`
+- `outils/test-experience.cjs`
+- `outils/verifier-integration.py`
+- `docs/rd/accessibilite-modules-2026-11-12.md`
+- `docs/rd/relecture-contenus.toml`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `MRSC_BROWSER_NODE_MODULES=/tmp/mrsc-browser/node_modules node outils/test-experience.cjs && python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py && python3 outils/verifier-integration.py && python3 outils/relire-contenus.py && python3 outils/verifier-relecture-contenus.py && python3 outils/verifier-poids-pages.py`
+
+**Limite — ce que cela ne prouve pas.** Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique : les trois modules répondent à des besoins documentés, pas à des besoins observés sur ce site. La police « lecture facilitée » n’est pas une police conçue pour la dyslexie, seulement une police à formes distinctes, disponible partout. Le contenu n’est pas traduit en FALC — un module d’affichage ne remplace pas une réécriture. Les mesures de contraste et de débordement sont celles de Chromium sans interface sur quatre largeurs, pas d’un panel d’appareils. Le poids partagé augmente de 3,3 Kio gzip : `apprendre.html` passe de 244 à 250 Kio mobile, sous le budget de 300 Kio mais plus près.
+
+**Suite.** Faire essayer les trois modules à des personnes concernées — dyslexie, troubles vestibulaires, navigation au clavier — et à une personne utilisant un lecteur d’écran, puis décider de garder, renommer ou retirer. Si un besoin réel apparaît, ouvrir un chantier FALC sur un petit lot de fiches plutôt que d’ajouter un quatrième module d’affichage.
+
+Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`.
 
 ### `declarer-fraude-demarches-distinctes-2026-11-12` — Déclarer n’est pas un réflexe de plus : quatre démarches, quatre interlocuteurs, et une source primaire pour chacune
 

@@ -814,7 +814,9 @@ def fichiers_du_site() -> None:
         and "le panneau ne doit pas se refermer sur son propre bouton" in test_experience
         and "le premier Échap ne referme que le réglage ouvert" in test_experience
         and "le focus revient sur la commande « Personnalisation »" in test_experience
-        and "les cinq réglages et la lecture à voix haute doivent être dans le panneau" in test_experience
+        and "les six réglages et la lecture à voix haute doivent être dans le panneau" in test_experience
+        and "Accessibilité : trois modules, effet mesuré, mémoire et clavier" in test_experience
+        and "le premier Échap ne referme que la ligne « Accessibilité »" in test_experience
         and "mesureLignes.every((ligne) => ligne.hauteur >= 32)" in test_experience
         and "etat.lignes.every((ligne) => ligne.left >= etat.gauche - 1" in test_experience
         and "le cadre de la commande ne change pas quand le libellé bascule" in test_experience,

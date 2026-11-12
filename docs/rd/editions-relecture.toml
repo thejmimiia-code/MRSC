@@ -5319,3 +5319,207 @@ sources = []
 mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
 constat = "Compteurs du plan du projet recalculés depuis l'arbre réel après le lot fraude : 589 fichiers en 11 zones (apprendre 108, docs 173), 108 pages de fiches et 82 prototypes annoncés. Les phrases du plan citent le lot du 12 novembre à côté du lot site du 11, sans réécrire l'histoire."
 limite = "Le comptage porte sur les fichiers présents, pas sur leur qualité ni sur l'avancement du projet ; un plan à jour ne prouve ni justesse éditoriale ni validation humaine."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "f2d93d5a18ac421cb08cb096817760ebd8f4f60d6c2933baed0c0b366a51ccc2"
+empreinte_apres = "bf9eb33a7a0f42d514cacf7232b8dc708946703d48546addc235ad13427efed9"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "assets/js/site.js"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d1f342c392520945e0c8da18dd2dcff623970d2f64b703c2cf6f4fd76868d976"
+empreinte_apres = "5d82d9ff8ef0ce4b32c98d5948cb001198a58a9614c8013101f7cb29643f00e5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "9ec033c8085d42fc943524e3d35c289b5ae97fc84dd119405daa475795d98c82"
+empreinte_apres = "b4822de48fdbf322179b07fce22b47640dee7e71a32b2b5f39b65ebe0f6100fb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "docs/rd/relecture-contenus.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "7b5c02ec879df102e5867b58709f7a22d6c1e990dfc36b26736b1477fcfa1e4a"
+empreinte_apres = "f25f0e0033ded1bb4f3b06afb71982ca81b078a461f41fe8d9d4f1549c7d0333"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "outils/test-experience.cjs"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "26ea66693863e70acde6ee3b103d16f65760015964d1359a62dcd3e70bd147df"
+empreinte_apres = "5b00606f7dd2237e64df288411832eb989d6e447df013894431c9cfa48226000"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "outils/test_mutations_affichages.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e5fe44d7e5bd7bdd748d46c4290a5b52b432e09272e4f52fcb066397b2b4c390"
+empreinte_apres = "f38546539dbf0518dc2ce84f47f1312192e833ae90345c1165ae812af87af12a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "outils/verifier-affichages.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "b1c2e60d005ea7603c25de6e588cd323180298508b312ae6c89b35ef07a14b30"
+empreinte_apres = "896cb4d71684bd8c56bbd77dd44bfafeb1dfdd449c9da57420a0de765e4ab814"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "outils/verifier-integration.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "1ee54fcb9e765cf29ffb3fcace6f283ecfb440521188044050187d083a26829f"
+empreinte_apres = "1ba77deed22f02c110c5c5283fbd1699e11fff39d141a46851e307680910ec3d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d5cbbdaa6b6d9f77ffa58f7ba7c1af783b41bdea974ec807a545619970c02b56"
+empreinte_apres = "4d54731ec89f96d954e399268ad2e6597ad5054a86f38c5f62f72b695c99b4bc"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "768ed82516fd0fece52fe68d75ba74bcb883022c450a3c5816510a4205196fb3"
+empreinte_apres = "a3362fa78238a2e682ec306d29dfeda540bbccb1e5239f388cff8c190a35a32b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/decision-prospective.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "5be66fef4863dc1b681dffa78d6fe36716298c378df51e0a8e6fe304906ea378"
+empreinte_apres = "46dcb8dd8bfccc17fe4b0ab581decf0960e543eb74c52a52ed4a6ac6be6895f2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "92f884705b729b42ea9dedb277b740944f8642402f8263dc26e7c0e35a430807"
+empreinte_apres = "aa718cac3bb01cc2eeb81f752c1a60f98d57504a65925fb58f400bee983e89bd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "8f5156004e3396417a7dcc1135128fb6fe37faf59bbabd3d6bb349ebeb35368a"
+empreinte_apres = "c59dd4847232e84bf4c4323e52f35df07abdc63ffb14485e733e504378234d42"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "6e3b07896178e3c18f58680e0635786a1a30e1e81401c68abf14024e8e1056af"
+empreinte_apres = "4e50c489c3f345e71c46ba839031ee067cd4e96f09ef911890143cb8915df79a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "93f375728b4b323a9edfa7f77bc50de59f2536f71d3c18cda3895d63399d52e0"
+empreinte_apres = "f865cc9f94ab828a3ea1ceb761c07973a79846a79d8b7a1ca1f6aca43fd6c4d7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/plan-complet-rd-innovation-prospective.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "51636d55c2169a4aa92f0a98530c1e647bc635a78e7e91b75dce073e8504d5c7"
+empreinte_apres = "d170fb42fdec70a79803cacb9d9b7a7e81f0b090d7bf25492061ecb683dda888"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/poids-pages.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "753a00986876c3f4873dee5c35541e8bf967b7bdb215845cac7ceae6444911fa"
+empreinte_apres = "e0b79d85835d80fba122697396671610b5acb448c8e5676a434e4d361e66c4a4"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."

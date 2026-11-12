@@ -433,6 +433,127 @@ ce_qui_est_verifie = "Le statut est construit depuis le libellé du thème chois
 limite = "Vérification statique du modèle de chaîne ; aucune personne utilisant un lecteur d'écran n'a confirmé l'annonce vocale."
 
 [[affirmation]]
+id = "chaine-21"
+texte = "Adapter le site à votre situation"
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/js/site.js", "outils/verifier-affichages.py"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le titre du panneau décrit ce que font les trois modules : changer la présentation, pas le contenu ni les droits de la personne. Il ne promet ni conformité RGAA ni diagnostic."
+limite = "Formulation choisie par l'agent ; aucune personne handicapée ne l'a relue. Elle ne vaut pas validation d'usage."
+
+[[affirmation]]
+id = "chaine-22"
+texte = "Ces réglages restent sur cet appareil et se combinent avec la taille du texte, le contraste et l’espacement. Les préférences de votre système (mouvement réduit, contraste élevé) continuent de s’appliquer."
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/js/site.js"]
+verdict = "concordant"
+ce_qui_est_verifie = "Les trois préférences sont écrites dans localStorage et lues au chargement ; les classes se cumulent sur html avec texte-*, contraste-renforce et espacement-renforce. Les blocs @media prefers-reduced-motion et prefers-contrast du CSS restent actifs quel que soit le choix."
+limite = "Le stockage local peut être refusé : le réglage tient alors pour la visite seulement. Aucun essai avec une personne utilisant un lecteur d'écran n'a confirmé l'annonce."
+
+[[affirmation]]
+id = "chaine-23"
+texte = "Désactiver les trois modules"
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le bouton éteint les trois classes, écrit les trois préférences à « non » et remet aria-pressed à false ; l'essai navigateur le mesure."
+limite = "Le bouton ne réinitialise pas les autres réglages (taille, contraste, espacement, apparence, présentation) : c'est un choix, pour ne pas effacer des réglages qui ne sont pas des modules d'accessibilité."
+
+[[affirmation]]
+id = "chaine-24"
+texte = "Modules d’accessibilité"
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py"]
+verdict = "concordant"
+ce_qui_est_verifie = "L'étiquette du groupe décrit les trois boutons et n'annonce ni un service tiers ni une conformité."
+limite = "Le libellé vieillira si les modules changent ; le contrôle de la feuille vérifie les marqueurs du script, pas la justesse du mot."
+
+[[affirmation]]
+id = "chaine-25"
+texte = "Modules d’accessibilité désactivés."
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "L'annonce est écrite dans un élément role=status aria-live=polite et reprend le libellé du bouton ; l'essai navigateur la lit après le clic de retour."
+limite = "Aucune personne utilisant un lecteur d'écran n'a confirmé l'annonce réelle ; l'essai lit le texte, pas la voix."
+
+[[affirmation]]
+id = "chaine-26"
+texte = "Lecture facilitée"
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/css/site.css", "outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le libellé décrit un effet vérifiable : la classe aide-lecture change la police, l'interlettrage et l'interligne ; l'essai navigateur mesure la police calculée et l'espacement des lettres. Aucune allégation de traitement ni de remède."
+limite = "« Facilitée » est un jugement, pas une mesure d'utilité : aucune personne dyslexique n'a essayé ce réglage. Le nom ne promet aucune police spécialisée."
+
+[[affirmation]]
+id = "chaine-27"
+texte = "Réduire les mouvements"
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = ["mdn-prefers-reduced-motion"]
+mesures = ["assets/css/site.css", "outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "MDN documente prefers-reduced-motion et la demande de supprimer les animations non essentielles ; le module coupe les durées d'animation et de transition, et l'essai navigateur lit une durée calculée de 1e-06s."
+limite = "Le module ne couvre pas les animations produites par une technologie d'assistance ni les vidéos ; aucun essai avec une personne sensible au mouvement."
+
+[[affirmation]]
+id = "chaine-28"
+texte = "Repères clavier visibles"
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/css/site.css", "outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le module ramène le lien d'évitement à l'écran (transform: none, mesuré à 45 px de haut) et épaissit le contour de focus à 4 px ; l'essai navigateur vérifie le lien et axe reste à 0 violation avec le module actif."
+limite = "Le contour de focus sert à qui navigue au clavier ; une personne qui n'utilise ni clavier ni lecteur d'écran n'en tire rien, et ce n'est pas son but."
+
+[[affirmation]]
+id = "chaine-29"
+texte = "Police plus ouverte, lettres espacées et interlignes larges, pour la dyslexie et les difficultés de lecture."
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/css/site.css"]
+verdict = "corrige"
+ce_qui_est_verifie = "La description dit ce que la feuille fait (Verdana ou Trebuchet, interlettrage 0,035 em, interligne 1,75) et nomme le public visé sans promettre d'amélioration. Aucune étude n'est citée, parce qu'aucune source primaire de ce lot ne porte sur la dyslexie."
+limite = "Aucune source médicale ou orthophonique n'appuie ce choix de police ; c'est une décision de conception fondée sur des formes distinctes et disponibles. Une relecture par des personnes concernées reste à faire."
+
+[[affirmation]]
+id = "chaine-30"
+texte = "Coupe les animations et les transitions, pour les troubles vestibulaires et la photosensibilité."
+ou = "assets/js/site.js"
+nature = "fait-source"
+sources = ["mdn-prefers-reduced-motion"]
+mesures = ["outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "MDN rattache prefers-reduced-motion à l'inconfort lié au mouvement ; la feuille coupe effectivement animation-duration et transition-duration, et l'essai navigateur le mesure."
+limite = "MDN décrit une préférence de média, pas un effet clinique ; la photosensibilité liée aux clignotements n'est pas mesurée ici. Aucun essai avec une personne concernée."
+
+[[affirmation]]
+id = "chaine-31"
+texte = "Le lien « Aller au contenu » et le contour de focus restent affichés, pour qui navigue sans souris."
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/css/site.css", "outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le lien d'évitement reste visible sans focus (transform: none) et le contour passe à 4 px ; les deux sont mesurés en navigateur à 390 px."
+limite = "Le module ajoute un repère permanent en haut de page ; aucune personne naviguant au clavier n'a dit si cela aide ou gêne la lecture à l'œil."
+
+[[affirmation]]
 id = "ordre-des-trois-reglages"
 texte = "Les trois réglages documentés (suivre l'appareil, clair, sombre) sont placés en tête, sans allégation de fréquence."
 ou = "docs/rd/apparences-themes.md"

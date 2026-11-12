@@ -1335,7 +1335,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/css/site.css"
-empreinte = "f2d93d5a18ac421cb08cb096817760ebd8f4f60d6c2933baed0c0b366a51ccc2"
+empreinte = "bf9eb33a7a0f42d514cacf7232b8dc708946703d48546addc235ad13427efed9"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
@@ -1384,10 +1384,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/js/site.js"
-empreinte = "d1f342c392520945e0c8da18dd2dcff623970d2f64b703c2cf6f4fd76868d976"
+empreinte = "5d82d9ff8ef0ce4b32c98d5948cb001198a58a9614c8013101f7cb29643f00e5"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "confidentialite.html"
@@ -1607,6 +1607,13 @@ apostrophes = 34
 date_reference = 2026-11-09
 
 [[unite]]
+chemin = "docs/rd/accessibilite-modules-2026-11-12.md"
+empreinte = "05661e2a7fc1582f5e37a933871b6aee41ca9e6cbbc5c765ee0dc9c85476e904"
+etat = "reference-initiale"
+apostrophes = 48
+date_reference = 2026-11-12
+
+[[unite]]
 chemin = "docs/rd/apparences-themes.md"
 empreinte = "84192cda3c1ca158da5ebc308b245c5ebbacbac26d7ecc80dddec27ffb617c44"
 etat = "reference-initiale"
@@ -1657,14 +1664,14 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/avancees.md"
-empreinte = "d5cbbdaa6b6d9f77ffa58f7ba7c1af783b41bdea974ec807a545619970c02b56"
+empreinte = "4d54731ec89f96d954e399268ad2e6597ad5054a86f38c5f62f72b695c99b4bc"
 etat = "relu-par-agent"
 apostrophes = 1240
 date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/avancees.toml"
-empreinte = "768ed82516fd0fece52fe68d75ba74bcb883022c450a3c5816510a4205196fb3"
+empreinte = "a3362fa78238a2e682ec306d29dfeda540bbccb1e5239f388cff8c190a35a32b"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
@@ -1713,7 +1720,7 @@ date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/decision-prospective.md"
-empreinte = "5be66fef4863dc1b681dffa78d6fe36716298c378df51e0a8e6fe304906ea378"
+empreinte = "46dcb8dd8bfccc17fe4b0ab581decf0960e543eb74c52a52ed4a6ac6be6895f2"
 etat = "relu-par-agent"
 apostrophes = 67
 date_derniere_relecture = 2026-11-12
@@ -1734,7 +1741,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/graphe.dot"
-empreinte = "92f884705b729b42ea9dedb277b740944f8642402f8263dc26e7c0e35a430807"
+empreinte = "aa718cac3bb01cc2eeb81f752c1a60f98d57504a65925fb58f400bee983e89bd"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
@@ -1748,14 +1755,14 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "8f5156004e3396417a7dcc1135128fb6fe37faf59bbabd3d6bb349ebeb35368a"
+empreinte = "c59dd4847232e84bf4c4323e52f35df07abdc63ffb14485e733e504378234d42"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/eva/plan.md"
-empreinte = "6e3b07896178e3c18f58680e0635786a1a30e1e81401c68abf14024e8e1056af"
+empreinte = "4e50c489c3f345e71c46ba839031ee067cd4e96f09ef911890143cb8915df79a"
 etat = "relu-par-agent"
 apostrophes = 72
 date_derniere_relecture = 2026-11-12
@@ -1818,7 +1825,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/inventaire-controles.md"
-empreinte = "9ec033c8085d42fc943524e3d35c289b5ae97fc84dd119405daa475795d98c82"
+empreinte = "b4822de48fdbf322179b07fce22b47640dee7e71a32b2b5f39b65ebe0f6100fb"
 etat = "relu-par-agent"
 apostrophes = 99
 date_derniere_relecture = 2026-11-12
@@ -1832,7 +1839,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "93f375728b4b323a9edfa7f77bc50de59f2536f71d3c18cda3895d63399d52e0"
+empreinte = "f865cc9f94ab828a3ea1ceb761c07973a79846a79d8b7a1ca1f6aca43fd6c4d7"
 etat = "relu-par-agent"
 apostrophes = 2405
 date_derniere_relecture = 2026-11-12
@@ -1874,10 +1881,10 @@ date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/plan-complet-rd-innovation-prospective.md"
-empreinte = "51636d55c2169a4aa92f0a98530c1e647bc635a78e7e91b75dce073e8504d5c7"
+empreinte = "d170fb42fdec70a79803cacb9d9b7a7e81f0b090d7bf25492061ecb683dda888"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-11
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
@@ -1923,10 +1930,10 @@ date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/poids-pages.md"
-empreinte = "753a00986876c3f4873dee5c35541e8bf967b7bdb215845cac7ceae6444911fa"
-etat = "reference-initiale"
+empreinte = "e0b79d85835d80fba122697396671610b5acb448c8e5676a434e4d361e66c4a4"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/portefeuille.toml"
@@ -2014,7 +2021,7 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "docs/rd/relecture-contenus.toml"
-empreinte = "7b5c02ec879df102e5867b58709f7a22d6c1e990dfc36b26736b1477fcfa1e4a"
+empreinte = "f25f0e0033ded1bb4f3b06afb71982ca81b078a461f41fe8d9d4f1549c7d0333"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
@@ -2742,10 +2749,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test-experience.cjs"
-empreinte = "26ea66693863e70acde6ee3b103d16f65760015964d1359a62dcd3e70bd147df"
-etat = "reference-initiale"
+empreinte = "5b00606f7dd2237e64df288411832eb989d6e447df013894431c9cfa48226000"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "outils/test_annoncer_echec_graphismes.py"
@@ -2875,7 +2882,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test_mutations_affichages.py"
-empreinte = "e5fe44d7e5bd7bdd748d46c4290a5b52b432e09272e4f52fcb066397b2b4c390"
+empreinte = "f38546539dbf0518dc2ce84f47f1312192e833ae90345c1165ae812af87af12a"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
@@ -3211,7 +3218,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/verifier-affichages.py"
-empreinte = "b1c2e60d005ea7603c25de6e588cd323180298508b312ae6c89b35ef07a14b30"
+empreinte = "896cb4d71684bd8c56bbd77dd44bfafeb1dfdd449c9da57420a0de765e4ab814"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
@@ -3274,10 +3281,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/verifier-integration.py"
-empreinte = "1ee54fcb9e765cf29ffb3fcace6f283ecfb440521188044050187d083a26829f"
+empreinte = "1ba77deed22f02c110c5c5283fbd1699e11fff39d141a46851e307680910ec3d"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-11
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "outils/verifier-inventaire-controles.py"
