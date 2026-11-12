@@ -8,7 +8,7 @@ auteur = "agent"
 date = "2026-11-11"
 heure_utc = "16:48"
 demande = "continues et fais toute la R et D, l’innovation et la prospective, avec un plan complet sur l’ensemble du projet"
-total = 579
+total = 589
 zones = 11
 initiatives = 19
 actions = 39
@@ -82,13 +82,13 @@ nombre = 17
 
 [[zone]]
 id = "apprendre"
-surface = "107 pages de fiches générées"
+surface = "108 pages de fiches générées"
 source_verite = "docs/apprentissage/catalogue.toml"
 garde = "outils/construire-apprentissages.py"
-etat = "81 prototypes à relire"
+etat = "82 prototypes à relire"
 prochaine_action = "Ne jamais éditer une page générée à la main"
 limite = "Une page générée n’est pas une preuve de justesse du contenu."
-nombre = 107
+nombre = 108
 
 [[zone]]
 id = "assets"
@@ -108,7 +108,7 @@ garde = "outils/verifier-rd-continue.py"
 etat = "19 initiatives suivies"
 prochaine_action = "Régénérer toute sortie dérivée depuis son générateur"
 limite = "Un document de travail n’est ni une décision ni une validation."
-nombre = 164
+nombre = 173
 
 [[zone]]
 id = "outils"

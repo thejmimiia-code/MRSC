@@ -5295,3 +5295,27 @@ sources = []
 mesures = ["outils/construire-couverture-sujets.py", "outils/verifier-decision-prospective.py", "outils/test_mutations_couverture_sujets.py"]
 constat = "Fichiers régénérés après l'ajout de la 108ᵉ fiche (numerique-declarer-fraude) et resynchronisation du brief prospectif : 108 fiches dans 15 domaines, 82 prototypes. Le banc de mutations lit désormais le compte réel du catalogue au lieu de coder 107 en dur, ce qui le rendait aveugle depuis la nouvelle fiche."
 limite = "Comptes et phrases produits par les outils et relus par l'agent ; aucune relecture humaine. Le banc de mutations n'éprouve que le compteur de fiches, pas la qualité éditoriale des fiches."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "ffb80175a00b67a4d9ebcd46be1864063d2ae001bcae01dc311b06a47e169225"
+empreinte_apres = "8abce9abd1a818ab76e2c919532bf847f716b5b6fb59cef3b47736d5304edb73"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
+constat = "Compteurs du plan du projet recalculés depuis l'arbre réel après le lot fraude : 589 fichiers en 11 zones (apprendre 108, docs 173), 108 pages de fiches et 82 prototypes annoncés. Les phrases du plan citent le lot du 12 novembre à côté du lot site du 11, sans réécrire l'histoire."
+limite = "Le comptage porte sur les fichiers présents, pas sur leur qualité ni sur l'avancement du projet ; un plan à jour ne prouve ni justesse éditoriale ni validation humaine."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "9bded1d9bfc0400d629d89c57062a7a09ea6fe0515863fa6be22b47070f55bb3"
+empreinte_apres = "cd8bf8c069044bdc7202aa219f162db38b9f860f61098c329bac593092f1c011"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
+constat = "Compteurs du plan du projet recalculés depuis l'arbre réel après le lot fraude : 589 fichiers en 11 zones (apprendre 108, docs 173), 108 pages de fiches et 82 prototypes annoncés. Les phrases du plan citent le lot du 12 novembre à côté du lot site du 11, sans réécrire l'histoire."
+limite = "Le comptage porte sur les fichiers présents, pas sur leur qualité ni sur l'avancement du projet ; un plan à jour ne prouve ni justesse éditoriale ni validation humaine."
