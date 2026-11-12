@@ -11,9 +11,11 @@ digraph memoire {
   "api/verifier-source.py" [shape=plaintext, label="api/verifier-source.py"];
   "assets/css/anglais-aventure.css" [shape=plaintext, label="assets/css/anglais-aventure.css"];
   "assets/css/site.css" [shape=plaintext, label="assets/css/site.css"];
+  "assets/documents/statuts-2020.pdf" [shape=plaintext, label="assets/documents/statuts-2020.pdf"];
   "assets/images/accueil-logo-mrsc-3d.jpg" [shape=plaintext, label="assets/images/accueil-logo-mrsc-3d.jpg"];
   "assets/images/mondes-savoirs-hero.jpg" [shape=plaintext, label="assets/images/mondes-savoirs-hero.jpg"];
   "assets/js/site.js" [shape=plaintext, label="assets/js/site.js"];
+  "avancee:accueil-d-apres-les-statuts-2026-11-11" [shape=note, label="avancee:accueil-d-apres-les-statuts-2026-11-11"];
   "avancee:attente-navigateur-nommee" [shape=note, label="avancee:attente-navigateur-nommee"];
   "avancee:aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran" [shape=note, label="avancee:aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran"];
   "avancee:badges-en-rem" [shape=note, label="avancee:badges-en-rem"];
@@ -202,6 +204,8 @@ digraph memoire {
   "docs/rd/sources-ouvertes-2026-11-11.md" [shape=plaintext, label="docs/rd/sources-ouvertes-2026-11-11.md"];
   "docs/rd/sources-ouvertes-2026-11-11.toml" [shape=plaintext, label="docs/rd/sources-ouvertes-2026-11-11.toml"];
   "docs/rd/statuts-animation/ARCHIVE-film-associatif.sha256" [shape=plaintext, label="docs/rd/statuts-animation/ARCHIVE-film-associatif.sha256"];
+  "docs/rd/statuts-matrice-tracabilite.toml" [shape=plaintext, label="docs/rd/statuts-matrice-tracabilite.toml"];
+  "docs/rd/statuts-revue-juridique.md" [shape=plaintext, label="docs/rd/statuts-revue-juridique.md"];
   "docs/rd/sujet-droits-travail.md" [shape=plaintext, label="docs/rd/sujet-droits-travail.md"];
   "docs/rd/sujet-ecoute-prononciation.md" [shape=plaintext, label="docs/rd/sujet-ecoute-prononciation.md"];
   "docs/rd/sujet-revenus-salaire-impots.md" [shape=plaintext, label="docs/rd/sujet-revenus-salaire-impots.md"];
@@ -328,6 +332,10 @@ digraph memoire {
   "phase:voix-et-ecoute" [shape=box, label="phase:voix-et-ecoute"];
   "simulateur/PROVENANCE.json" [shape=plaintext, label="simulateur/PROVENANCE.json"];
   "transparence.html" [shape=plaintext, label="transparence.html"];
+  "avancee:accueil-d-apres-les-statuts-2026-11-11" -> "assets/documents/statuts-2020.pdf" [label="prouvée par"];
+  "avancee:accueil-d-apres-les-statuts-2026-11-11" -> "docs/rd/statuts-matrice-tracabilite.toml" [label="prouvée par"];
+  "avancee:accueil-d-apres-les-statuts-2026-11-11" -> "docs/rd/statuts-revue-juridique.md" [label="prouvée par"];
+  "avancee:accueil-d-apres-les-statuts-2026-11-11" -> "index.html" [label="prouvée par"];
   "avancee:attente-navigateur-nommee" -> "outils/attente-navigateur.cjs" [label="prouvée par"];
   "avancee:attente-navigateur-nommee" -> "outils/test-experience.cjs" [label="prouvée par"];
   "avancee:attente-navigateur-nommee" -> "outils/test_attente_navigateur.cjs" [label="prouvée par"];
@@ -821,6 +829,7 @@ digraph memoire {
   "branche:coherence-textes-publics" -> "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" [label="a produit"];
   "branche:coherence-textes-publics" -> "phase:couverture-des-branches" [label="servie par"];
   "branche:coherence-textes-publics" -> "phase:persona-de-conception" [label="servie par"];
+  "branche:confronter-une-affirmation-a-sa-source" -> "avancee:accueil-d-apres-les-statuts-2026-11-11" [label="a produit"];
   "branche:confronter-une-affirmation-a-sa-source" -> "avancee:indice-de-confrontation-non-certifiant" [label="a produit"];
   "branche:confronter-une-affirmation-a-sa-source" -> "avancee:passe-sources-89-adresses-2026-11-11" [label="a produit"];
   "branche:confronter-une-affirmation-a-sa-source" -> "avancee:plan-projet-complet-2026-11-11" [label="a produit"];
@@ -829,6 +838,7 @@ digraph memoire {
   "branche:confronter-une-affirmation-a-sa-source" -> "avancee:sources-complement-2026-11-11" [label="a produit"];
   "branche:confronter-une-affirmation-a-sa-source" -> "avancee:sources-ign-2026-11-11" [label="a produit"];
   "branche:confronter-une-affirmation-a-sa-source" -> "phase:verite-et-refus" [label="servie par"];
+  "branche:coordination-de-tous-les-agents" -> "avancee:accueil-d-apres-les-statuts-2026-11-11" [label="a produit"];
   "branche:coordination-de-tous-les-agents" -> "avancee:aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran" [label="a produit"];
   "branche:coordination-de-tous-les-agents" -> "avancee:la-memoire-du-projet-a-son-banc" [label="a produit"];
   "branche:coordination-de-tous-les-agents" -> "avancee:la-premiere-grille-a-pistes-inegales-quitte-son-palier" [label="a produit"];
@@ -862,6 +872,7 @@ digraph memoire {
   "branche:direction-artistique-motion" -> "avancee:un-theme-est-une-promesse-sur-toutes-les-surfaces" [label="a produit"];
   "branche:direction-artistique-motion" -> "phase:conscience-et-corps" [label="servie par"];
   "branche:direction-artistique-motion" -> "phase:voix-et-ecoute" [label="servie par"];
+  "branche:documentation-rd-eva" -> "avancee:accueil-d-apres-les-statuts-2026-11-11" [label="a produit"];
   "branche:documentation-rd-eva" -> "avancee:des-points-de-rupture-aux-mesures" [label="a produit"];
   "branche:documentation-rd-eva" -> "avancee:la-hauteur-n-aurait-jamais-du-entrer-dans-la-requete" [label="a produit"];
   "branche:documentation-rd-eva" -> "avancee:la-memoire-du-projet-a-son-banc" [label="a produit"];

@@ -1531,10 +1531,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/protocole-editorial.md"
-empreinte = "cf76c9e0c850bcc05d61389c9ef49f52be794ed2069a3dbc4b6d75d9b629258f"
+empreinte = "a21306da463c93e240985ff47f12e290be787192ab865608cceca58af259c136"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "docs/rd-affichage-adaptatif.md"
@@ -1559,7 +1559,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd-coherence-visuelle-editoriale.md"
-empreinte = "5241dded58db0a2577de34831df0fa9ed2e1c0c6b983d682ae3fc63c4aaeaf0c"
+empreinte = "081d1167bf0e1d37f5888a290cf4650d8d168293e4425ff4d90456094a416923"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
@@ -1657,14 +1657,14 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/avancees.md"
-empreinte = "86f7f55742d64236ed4f0d7df812527e191ff7502b111b578f6a41d131028d21"
+empreinte = "d5cbbdaa6b6d9f77ffa58f7ba7c1af783b41bdea974ec807a545619970c02b56"
 etat = "relu-par-agent"
 apostrophes = 1240
 date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/avancees.toml"
-empreinte = "5fae6d9e7883aa5f4178f880137e3bcacfe380806f07d5f8e03227655fb78f0e"
+empreinte = "768ed82516fd0fece52fe68d75ba74bcb883022c450a3c5816510a4205196fb3"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
@@ -1734,7 +1734,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/graphe.dot"
-empreinte = "cddce7df39d6b55670605affbdbf0eb7dc88422474bb1542aa63b06c71517ab2"
+empreinte = "92f884705b729b42ea9dedb277b740944f8642402f8263dc26e7c0e35a430807"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
@@ -1748,14 +1748,14 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "6f444b66723b2a96aa50a370842d5ead8903c94f18ad6d14a2cea2548afcb21c"
+empreinte = "8f5156004e3396417a7dcc1135128fb6fe37faf59bbabd3d6bb349ebeb35368a"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/eva/plan.md"
-empreinte = "377c106084ad9ac228a9c426644d0d633ff8064bb191ac2a400815f2d7aac175"
+empreinte = "6e3b07896178e3c18f58680e0635786a1a30e1e81401c68abf14024e8e1056af"
 etat = "relu-par-agent"
 apostrophes = 72
 date_derniere_relecture = 2026-11-12
@@ -1832,7 +1832,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "e589c32510c196f20fc6cb5dc8680d1927ab07cbbf5e19bf5748e7b69a1fb84e"
+empreinte = "93f375728b4b323a9edfa7f77bc50de59f2536f71d3c18cda3895d63399d52e0"
 etat = "relu-par-agent"
 apostrophes = 2405
 date_derniere_relecture = 2026-11-12
@@ -1874,7 +1874,7 @@ date_derniere_relecture = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/plan-complet-rd-innovation-prospective.md"
-empreinte = "2cec23b1f789a09a03742055271a17aea3bfea02524d298e880e58f7eb4d315d"
+empreinte = "51636d55c2169a4aa92f0a98530c1e647bc635a78e7e91b75dce073e8504d5c7"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-11
@@ -1895,14 +1895,14 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "docs/rd/plan-site-complet-2026-11-11.md"
-empreinte = "3dfb4995cebcb45cf8164ceb2111b5d036e8026b29e08f68fccbdeb17698be18"
+empreinte = "578ef04fda5aca5bab7cbd2f72b905fb41e82b848539b2577545ce85830e8b0c"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "docs/rd/plan-site-complet-2026-11-11.toml"
-empreinte = "94b3e2319ad2946b8495f95868144b9e41689d317b7d11d1ef7a27da16457ba8"
+empreinte = "0903b1df2d8052e451470d7a507bede1500f3d6e3d15a36ac2c6b1e956168bd3"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-11
@@ -2420,7 +2420,7 @@ date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "index.html"
-empreinte = "517d1e2a6f89b3d2f9a563d0d12a24a597a907ccba3053c8c3fac461c68a2e11"
+empreinte = "697b7348ae3bd709fcac93051bb2c6504c2a16ff7e2a11e392619779d672a5c6"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
@@ -2434,10 +2434,10 @@ date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "llms.txt"
-empreinte = "e6383fde4d17c91dc5213263dfb9dc287a67f132e1dc60cda4286f5a9e0d9010"
-etat = "reference-initiale"
+empreinte = "e7572d8fbf698ab44517cf7642bc3f6d1c7ef847967b81b2645bad2ff620e314"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "localisation.html"
@@ -2931,7 +2931,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test_mutations_integration.py"
-empreinte = "9ee927f83ed50ae7f28ebdba04875037ebe497f4fd37c74cc3902dc8ae105b60"
+empreinte = "aec5d8077577b45752f7b6245aaca47c44cffec11412e45d52c858caf553913d"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-11
@@ -2952,7 +2952,7 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "outils/test_mutations_plan_site.py"
-empreinte = "f0da91915b94110180706e1839980fe5446eb9ed90ad301e1a9e72a26b8bc8f5"
+empreinte = "378649d55cae06233f13192e579e52b778b149a44709782bf28e385f8aa4b378"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-11
@@ -3225,10 +3225,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/verifier-budgets-visuels.py"
-empreinte = "35028845d177be17c6b2fca44059e1b4b7c7255bc10da0e6fc28495e42780826"
-etat = "reference-initiale"
+empreinte = "74d9c8f777b072e929f34888007b11315baa6d936317605f4f8ecdaca61a614c"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "outils/verifier-decision-prospective.py"
@@ -3274,10 +3274,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/verifier-integration.py"
-empreinte = "2c61f477f070ecc0acdce0ce32c78f5bed03b61db5ac8aa06486f23565ec4774"
+empreinte = "1ee54fcb9e765cf29ffb3fcace6f283ecfb440521188044050187d083a26829f"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "outils/verifier-inventaire-controles.py"
@@ -3323,7 +3323,7 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "outils/verifier-plan-site.py"
-empreinte = "7e1ae4cc8b4fc7decd89f0edc396df885232c862014f354c9d034b7bd860c765"
+empreinte = "6475cb6699d281b153f1d33ac99676f6cc10672497ea797e30839bf656f24675"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-11

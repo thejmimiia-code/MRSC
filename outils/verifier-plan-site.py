@@ -51,6 +51,20 @@ PAGES_OBLIGATOIRES = ("index.html", "apprendre.html", "simulateur.html",
 #: Repères exigés par les autres gardes du dépôt : cette porte les nomme pour
 #: qu’une future refonte ne les efface pas sans le dire.
 REPERES_ACCUEIL = (
+    # Repères statutaires ajoutés le 11 novembre 2026 à 19 h 45 UTC : sans eux,
+    # l’ouverture redevient une description de site et non une présentation de
+    # l’association telle que ses statuts l’écrivent.
+    "Préserver, défendre et représenter",
+    "« La force citoyenne » : le M.R.S.C. est un mouvement représentatif",
+    "les intérêts, l’histoire, les traditions, la culture et l’avenir",
+    "territoires de vie",
+    "seuls les membres concernés ou impactés votent",
+    "pépinière d’idées",
+    "Ce site est un de ces outils",
+    "<dt>Décision</dt>",
+    "s’informer, comprendre, informer, débattre, analyser, proposer",
+    "Ce n’est pas une compétition littéraire",
+    "pas une interprétation juridique",
     "trois ressources consultables sans compte",
     "Chaque page indique ses sources, ses limites et son statut",
     "Le simulateur ne prédit rien",
