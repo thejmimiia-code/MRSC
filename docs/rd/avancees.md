@@ -10,8 +10,8 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 110 |
-| Période couverte | du 2026-10-20 au 2026-11-11 |
+| Avancées consignées | 111 |
+| Période couverte | du 2026-10-20 au 2026-11-12 |
 | Contrôles exécutables cités | 126 |
 | Initiatives du portefeuille concernées | 16 |
 
@@ -2689,6 +2689,33 @@ Initiatives liées : `relire-les-44-prototypes`, `coordination-de-tous-les-agent
 **Suite.** Retenter www.ign.fr/ à une date ultérieure ; si une page de l’Institut devient lisible, la consigner avec sa date et son repère avant de modifier l’une des deux fiches de géographie. Ne pas importer les couleurs de la légende OACI dans la fiche de lecture de légende. Laisser l’association trancher la revue du 2026-11-19 ou la décision prospective avant le 31 janvier 2027.
 
 Initiatives liées : `relire-les-44-prototypes`, `coordination-de-tous-les-agents`, `confronter-une-affirmation-a-sa-source`.
+
+### `filtre-decor-aria-hidden-2026-11-12` — Un décor sans texte lisible n’est pas un texte trop petit — et le banc exécute enfin le filtre
+
+*Consignée le 2026-11-12.*
+
+**Constat.** Le relevé d’affichage du 6 novembre 2026 avait trouvé un faux positif : les 2 470 mesures comptaient chacune un « texte sous 12 px » qui était toujours `span.customize-settings-chevron`, un masque SVG à `font-size: 0` porteur du caractère `⌄` et déclaré `aria-hidden`. L’auditeur sortait donc en code 1 sur un site sain. Le relevé nommait la suite — « écarter les éléments aria-hidden dont le corps est nul, et nommer cet écart » — et disait pourquoi elle n’était pas faite : « elle demande un banc qui exécute réellement le filtre, alors que le banc actuel remplace le navigateur par un faux qui renvoie directement les compteurs ». Pendant ce temps, la correction la plus simple — élargir le filtre à tout `aria-hidden` — aurait tu un vrai texte visible trop petit masqué aux lecteurs d’écran.
+
+**Ce que cela change.** `outils/auditer-affichages.mjs` écarte un élément seulement quand les trois conditions tiennent : corps nul, texte présent, **et** `aria-hidden="true"`. L’écart n’est pas silencieux : chaque mesure le publie (`decorsEcartes`, `nbDecorsEcartes`) et le bilan de fin l’annonce avec son compte. Un `aria-hidden` visible et trop petit reste compté ; un élément vide ne compte ni comme défaut ni comme écart, pour que le chiffre ne mesure pas une non-mesure. `outils/test_auditer_affichages.mjs` passe de 3 à 7 cas : aux trois modes du faux navigateur s’ajoutent quatre DOM témoins — le décor à écarter, un vrai texte de 11 px à conserver, un `aria-hidden` visible de 11 px à conserver, un `aria-hidden` vide qui ne compte ni comme défaut ni comme écart — sur lesquels le banc exécute **le code du dépôt lui-même**, en extrayant par ancres exactes la fonction de mesure que le script envoie au navigateur. `outils/verifier-affichages.py` reçoit une 21e garde, `controler_filtre_texte_fin`, et `outils/test_mutations_affichages.py` trois mutations dont une fait mordre chacun des trois pièges. L’inventaire des contrôles, `docs/rd/formats-affichage.md` et le relevé du 6 novembre reçoivent la suite datée, sans réécrire le constat d’origine.
+
+**Preuves dans le dépôt :**
+
+- `outils/auditer-affichages.mjs`
+- `outils/test_auditer_affichages.mjs`
+- `outils/verifier-affichages.py`
+- `outils/test_mutations_affichages.py`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/releve-affichages-2026-11-06.md`
+- `docs/rd/inventaire-controles.md`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py && node outils/test_auditer_affichages.mjs && python3 outils/verifier-inventaire-controles.py && python3 outils/relire-contenus.py && python3 outils/construire-avancees.py --verifier && git diff --check`
+
+**Limite — ce que cela ne prouve pas.** Aucun navigateur n’a été lancé : les 2 470 mesures réelles ne sont pas rejouées, aucun rendu, aucun zoom, aucun lecteur d’écran, aucune mesure de contraste. Le banc exécute le filtre sur trois témoins écrits à la main, avec une géométrie et une cascade simulées : il prouve la règle et les trois pièges, pas la justesse d’une mesure réelle. La correction ne dit pas que le site est exempt de texte trop petit — elle retire un faux positif et laisse le critère s’appliquer à tout le reste. Aucun statut promu, aucune relecture humaine consignée, aucune publication.
+
+**Suite.** Rejouer les 2 470 mesures dans un vrai Chromium dès qu’un navigateur est disponible, confronter le total de « texte sous 12 px » au chiffre du 6 novembre et consigner le relevé daté. Puis traiter la seconde limite du même relevé, l’emblème d’accueil agrandi 1,50× à 844 px en densité 3×, qui reste un arbitrage de dessin laissé à l’association.
+
+Initiatives liées : `optimisation-du-site`, `poids-et-sobriete-numerique`.
 
 ## 3. Ce que ce registre ne dit pas
 

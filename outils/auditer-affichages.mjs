@@ -151,6 +151,7 @@ for (const [mode, preferences] of MODES) {
         const racine = document.documentElement;
         const dehors = [];
         const texteFin = [];
+        const decorsEcartes = [];
         const ciblesPetites = [];
         const imagesAgrandies = [];
         const textesCoupes = [];
@@ -187,7 +188,17 @@ for (const [mode, preferences] of MODES) {
 
           const corps = parseFloat(style.fontSize);
           const texte = (element.textContent || '').trim();
-          if (texte && element.children.length === 0 && corps < 12 && style.position !== 'fixed') {
+          // Un décor sans texte lisible n'est pas du texte : le chevron du
+          // panneau « Personnalisation » est un masque SVG à `font-size: 0`
+          // qui porte encore le caractère `⌄` pour être dessiné. Il est déclaré
+          // `aria-hidden="true"`. Sans cette exclusion, les 2 470 mesures du
+          // 6 novembre 2026 comptaient chacune un faux défaut et l'auditeur
+          // sortait en code 1 sur un site sain (docs/rd/releve-affichages-2026-11-06.md § 4.1).
+          // L'écart est **compté**, pas silencieux : `decorsEcartes` le dit.
+          const decorSansTexte = corps === 0 && Boolean(texte) && element.getAttribute('aria-hidden') === 'true';
+          if (decorSansTexte) {
+            decorsEcartes.push({ selecteur: nommer(element) });
+          } else if (texte && element.children.length === 0 && corps < 12 && style.position !== 'fixed') {
             texteFin.push({ selecteur: nommer(element), corps });
           }
 
@@ -234,6 +245,7 @@ for (const [mode, preferences] of MODES) {
           defilementHorizontal: racine.scrollWidth - racine.clientWidth,
           dehors: uniques(dehors), nbDehors: dehors.length,
           texteFin: uniques(texteFin), nbTexteFin: texteFin.length,
+          decorsEcartes: uniques(decorsEcartes), nbDecorsEcartes: decorsEcartes.length,
           ciblesPetites: uniques(ciblesPetites), nbCiblesPetites: ciblesPetites.length,
           imagesAgrandies: uniques(imagesAgrandies), nbImagesAgrandies: imagesAgrandies.length,
           textesCoupes: uniques(textesCoupes), nbTextesCoupes: textesCoupes.length,
@@ -255,6 +267,15 @@ const defauts = resultats.filter((mesure) =>
   mesure.nbImagesAgrandies || mesure.nbTextesCoupes || mesure.nbCiblesPetites
 );
 console.log(`\n${resultats.length} mesures · ${defauts.length} avec défaut`);
+const ecartes = resultats.reduce((total, mesure) => total + (mesure.nbDecorsEcartes || 0), 0);
+if (ecartes) {
+  // Un écart nommé n'est pas une mesure muette : sans cette ligne, le chiffre
+  // de « texte sous 12 px » baisserait sans que personne ne sache pourquoi.
+  console.log(
+    `${ecartes} décor(s) aria-hidden à font-size 0 écarté(s) du critère « texte sous 12 px » ` +
+    `(chevrons à masque SVG). Le critère ne s'applique pas à un décor sans texte lisible.`
+  );
+}
 for (const mesure of defauts) {
   const details = [];
   if (mesure.defilementHorizontal > 1) details.push(`débordement ${mesure.defilementHorizontal}px`);

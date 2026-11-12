@@ -19,7 +19,7 @@ Ce document ne dit pas que les contrôles « sans test » sont faux. Il dit qu'o
 
 | Outil | Rôle | Garde actuelle | Statut |
 | --- | --- | --- | --- |
-| `outils/auditer-affichages.mjs` | Audit navigateur des formats d'affichage | `test_auditer_affichages.mjs` (navigateur remplacé, périmètre réduit dans la copie ; 3 modes) | `faute-en-memoire` |
+| `outils/auditer-affichages.mjs` | Audit navigateur des formats d'affichage | `test_auditer_affichages.mjs` (navigateur remplacé, périmètre réduit dans la copie ; 7 cas : 3 modes du faux navigateur et, depuis le 12 novembre 2026, 4 DOM témoins qui exécutent le **vrai** filtre « texte sous 12 px » extrait du script) | `faute-en-memoire` |
 | `outils/auditer-criteres-22.mjs` | Comptage des critères WCAG 2.2 sur les pages | `test_auditer_criteres_22.mjs` (navigateur remplacé par deux faux ; 4 modes : nominal, échec total, échec partiel, défauts) | `faute-en-memoire` |
 | `outils/auditer-prototypes.py` | 17 contrôles mécaniques par fiche | `test_audit_prototypes.py` (30 tests, données copiées puis cassées) | `faute-en-memoire` |
 | `outils/attente-navigateur.cjs` | Une attente de navigateur qui expire nomme sa condition | `test_attente_navigateur.cjs` (4 cas : succès et arguments, délai dépassé nommé avec délai et cause, erreur qui n'est pas un délai, condition tronquée) | `banc` |

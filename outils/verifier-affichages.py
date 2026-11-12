@@ -1724,6 +1724,55 @@ def controler_presentation_association() -> list[str]:
 
 
 
+def controler_filtre_texte_fin() -> list[str]:
+    """Un décor sans texte lisible ne se compte pas comme du texte trop petit.
+
+    Le 6 novembre 2026, `auditer-affichages.mjs` sortait en code 1 sur un site
+    sain : ses 2 470 mesures comptaient chacune `span.customize-settings-chevron`,
+    un masque SVG à `font-size: 0` qui porte encore le caractère `⌄` et se
+    déclare `aria-hidden`. L'auditeur a été corrigé le 12 novembre 2026 —
+    l'écart est à faire dans l'outil, pas dans la feuille de style — et
+    `test_auditer_affichages.mjs` exécute désormais le filtre sur quatre DOM
+    témoins : le décor à écarter, un vrai texte à conserver, un `aria-hidden`
+    visible à conserver, et un élément vide qui ne compte ni comme défaut ni
+    comme écart.
+
+    Cette garde-ci ne remplace pas ce banc : elle tient la décision hors du
+    navigateur, pour qu'un futur passage ne puisse pas effacer le filtre, ni
+    le transformer en congé général pour tous les `aria-hidden`.
+    """
+    erreurs: list[str] = []
+    fichier = RACINE / "outils" / "auditer-affichages.mjs"
+    if not fichier.is_file():
+        return ["outils/auditer-affichages.mjs — l'auditeur d'affichage a disparu"]
+    texte = fichier.read_text(encoding="utf-8")
+    if "const decorSansTexte = corps === 0 && Boolean(texte) && element.getAttribute('aria-hidden') === 'true';" not in texte:
+        erreurs.append(
+            "auditer-affichages.mjs — le filtre du décor sans texte lisible a disparu : "
+            "le chevron aria-hidden à font-size 0 redevient un faux défaut de « texte sous 12 px »"
+        )
+    if (
+        "decorsEcartes.push" not in texte
+        or "decorsEcartes: uniques(decorsEcartes), nbDecorsEcartes: decorsEcartes.length," not in texte
+    ):
+        erreurs.append(
+            "auditer-affichages.mjs — l'écart n'est plus compté ni nommé (`nbDecorsEcartes`) : "
+            "le chiffre de « texte sous 12 px » baisserait sans que personne ne sache pourquoi"
+        )
+    # Les deux pièges de l'autre côté. Un filtre qui n'exigerait pas le corps nul
+    # écarterait un vrai texte visible de 11 px simplement masqué aux lecteurs
+    # d'écran ; un filtre qui n'exigerait pas la présence d'un texte gonflerait
+    # le compteur d'écarts avec des éléments qui n'avaient jamais été comptés
+    # comme défaut. Le banc éprouve les deux sur des DOM témoins ; cette garde
+    # refuse les formes qui les rouvriraient.
+    if "Boolean(texte)" not in texte:
+        erreurs.append(
+            "auditer-affichages.mjs — le filtre n'exige plus la présence d'un texte : "
+            "il écarte ou compte des éléments qui n'ont jamais porté de texte lisible"
+        )
+    return erreurs
+
+
 CONTROLES = (
     ("tailles de texte", controler_tailles_de_texte),
     ("cibles tactiles", controler_cibles_tactiles),
@@ -1745,6 +1794,7 @@ CONTROLES = (
     ("espacement du texte (WCAG 1.4.12)", controler_espacement_du_texte),
     ("ouverture de l'accueil sans collage", controler_ouverture_accueil),
     ("parcours de présentation de l'association", controler_presentation_association),
+    ("filtre du texte fin (décor aria-hidden)", controler_filtre_texte_fin),
 )
 
 

@@ -1047,6 +1047,25 @@ Le protocole complet est dans `outils/auditer-affichages.mjs` (facultatif, hors
 CI : il demande Chromium). Il rend un tableau par page et par format, avec les
 mêmes seuils que ceux décrits ici.
 
+**Un décor sans texte lisible n’est pas du texte trop petit (12 novembre 2026).**
+Le 6 novembre, les 2 470 mesures comptaient chacune un faux « texte sous 12 px » :
+`span.customize-settings-chevron`, un masque SVG à `font-size: 0` porteur du
+caractère `⌄` et déclaré `aria-hidden`. L’auditeur écarte désormais un
+`aria-hidden` **dont le corps est nul**, compte les décors écartés
+(`nbDecorsEcartes`) et nomme chacun dans le rapport ; un `aria-hidden` visible
+et trop petit reste compté. Ce n’est pas un congé pour tous les `aria-hidden`.
+Le banc `outils/test_auditer_affichages.mjs` ne se contente plus du faux
+navigateur : il extrait du script la fonction de mesure réellement envoyée au
+navigateur et l’exécute sur quatre DOM témoins (décor à écarter, texte réel de
+11 px à conserver, `aria-hidden` visible de 11 px à conserver, `aria-hidden`
+vide qui ne compte ni comme défaut ni comme écart), ce qui donne 7 cas. Trois mutations de `outils/test_mutations_affichages.py` et une garde
+`controler_filtre_texte_fin` de `verifier-affichages.py` tiennent la décision.
+
+Limite : **aucune mesure réelle n’a été rejouée** après la correction — le
+navigateur n’était pas disponible dans l’environnement du 12 novembre 2026. Le
+banc exécute le filtre sur des témoins écrits à la main, pas sur la géométrie
+du site : il prouve la règle, pas le relevé.
+
 Les trois critères WCAG se rejouent avec `outils/auditer-criteres-22.mjs`, qui a
 besoin d'un serveur local sur son port (`python3 -m http.server 4187`). Une passe
 complète — 98 pages × 390 et 1 280 px, taille des cibles, focus et espacement

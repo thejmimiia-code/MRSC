@@ -35,12 +35,33 @@
  * formats. La réduction se fait par ancres exactes : si le script était
  * reformaté, le banc échouerait bruyamment plutôt que de tester autre chose.
  *
- * Trois cas :
+ * Cinq cas :
  *
  * - `nominal` : code 0, chaque mesure annoncée écrite dans le rapport, aucun défaut ;
  * - `affichage-defauts` : code 1, mesure fautive nommée avec son mode, sa page
  *   et son format, six compteurs présents même à zéro ;
- * - `echec-total` : arrêt non nul et **aucun rapport écrit**.
+ * - `echec-total` : arrêt non nul et **aucun rapport écrit** ;
+ * - `texte-fin-decor` : code 0, le chevron décoratif `aria-hidden` à
+ *   `font-size: 0` n'est **pas** compté comme texte sous 12 px, et l'écart
+ *   laisse une trace chiffrée dans chaque mesure ;
+ * - `texte-fin-reel` : code 1, un vrai texte à corps réduit reste compté, le
+ *   filtre ne sert pas de congé général.
+ *
+ * Les deux derniers cas éprouvent un **filtre**, pas un compteur : le faux
+ * navigateur, lui, ne simule aucun DOM. Le banc **extrait du script, par
+ * ancres exactes, la fonction de mesure réellement envoyée au navigateur**, et
+ * l'exécute sur trois DOM témoins écrits ici (un décor `aria-hidden` à
+ * `font-size: 0`, un vrai texte à 11 px, un `aria-hidden` visible à 11 px). Ce
+ * n'est pas une mesure de navigateur — aucune géométrie n'est calculée — mais
+ * c'est bien le code du dépôt qui tranche, octet pour octet. C'est ce que le
+ * relevé du 6 novembre 2026 réclamait : la correction est « à faire dans
+ * l'outil, pas dans la feuille de style », et elle « demande un banc qui
+ * exécute réellement le filtre, alors que le banc actuel remplace le navigateur
+ * par un faux qui renvoie directement les compteurs ».
+ *
+ * Les trois DOM témoins portent chacun un piège : sans le filtre, le décor fait
+ * échouer le premier cas ; avec un filtre trop large, le troisième (visible
+ * mais masqué aux technologies d'assistance) disparaîtrait à tort.
  *
  * La mesure de netteté d'image dépend d'ImageMagick (`convert`) pour connaître
  * la largeur réelle des fichiers ; sans lui, le script met 0 et ne signale rien.
@@ -52,7 +73,7 @@
 
 import { spawn } from 'node:child_process';
 import { cp, mkdtemp, readdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
@@ -125,6 +146,91 @@ async function mesurer(mode) {
   return { ...execution, rapport: contenu };
 }
 
+/**
+ * Le filtre de « texte sous 12 px », éprouvé sur un DOM témoin.
+ *
+ * Le script réel n'est pas lancé ici : sa boucle exige un navigateur. Le banc
+ * extrait donc du fichier du dépôt la fonction `evaluate` qui **part dans le
+ * navigateur** (celle qui reçoit `largeurVue, densiteVue, largeursFichiers`),
+ * et la fait tourner dans un interpréteur minimal qui ne calcule aucune
+ * géométrie : chaque élément témoin déclare sa boîte et son style à la main.
+ *
+ * Ce n'est pas une mesure d'affichage. C'est l'exécution du vrai code du dépôt
+ * sur des entrées choisies, seule façon de prouver un filtre sans navigateur —
+ * le faux `puppeteer-core` renvoie des compteurs déjà calculés et ne peut rien
+ * prouver de tel.
+ */
+function extraireMesure(script) {
+  const source = readFileSync(script, 'utf8');
+  const debut = source.indexOf('const mesure = await onglet.evaluate((largeurVue, densiteVue, largeursFichiers) => {');
+  if (debut === -1) {
+    throw new Error('ancre introuvable : la fonction de mesure d’auditer-affichages.mjs a changé de forme');
+  }
+  const marqueur = '\n      }, largeur, densite, LARGEURS);';
+  const fin = source.indexOf(marqueur, debut);
+  if (fin === -1) {
+    throw new Error('ancre introuvable : la fin de l’appel onglet.evaluate a changé de forme');
+  }
+  const bloc = source.slice(debut, fin);
+  const ouverture = bloc.indexOf('=> {') + '=> {'.length;
+  return { bloc, corps: bloc.slice(ouverture) };
+}
+
+/**
+ * Interprète le corps de la fonction de mesure sur des éléments témoins.
+ *
+ * Trois écarts assumés, tous écrits ici :
+ *   - `getComputedStyle` lit un style déclaré à la main, jamais une cascade ;
+ *   - `getBoundingClientRect` lit une boîte déclarée ;
+ *   - `parentElement` remonte la liste plate fournie.
+ * Tout le reste — noms de défauts, compteurs, `uniques`, seuils — est le code
+ * du script, exécuté tel quel. Si une clé manquait dans un témoin, le banc
+ * échouerait bruyamment plutôt que de rendre un compteur trompeur.
+ */
+function executerMesure(corps, temoins, largeurVue = 320, densite = 1) {
+  const elements = temoins.map((t) => ({
+    tagName: t.tagName,
+    className: t.className || '',
+    children: t.children || [],
+    textContent: t.textContent || '',
+    parentElement: null,
+    naturalWidth: t.naturalWidth || 0,
+    currentSrc: t.currentSrc || '',
+    src: t.src || '',
+    style: {},
+    scrollWidth: t.scrollWidth || 0,
+    clientWidth: t.clientWidth || 0,
+    getBoundingClientRect: () => t.boite || { left: 0, top: 0, right: 100, bottom: 20, width: 100, height: 20 },
+    // Seuls les décors masqués aux technologies d'assistance déclarent un
+    // ancêtre `.visually-hidden` : c'est ce que `closest` sert à distinguer.
+    closest: (selecteur) => (selecteur === '.visually-hidden' && t.masqueAuxLecteurs ? t : null),
+    // `aria-hidden` tel que le DOM le rend : absent, donc `null`, ou « true ».
+    getAttribute: (nom) => (nom === 'aria-hidden' && t.ariaHidden ? 'true' : null),
+  }));
+  const cibles = elements.filter((e) => ['A', 'BUTTON', 'INPUT', 'SELECT', 'SUMMARY'].includes(e.tagName));
+  const document_ = {
+    documentElement: { scrollWidth: largeurVue, clientWidth: largeurVue },
+    body: { querySelectorAll: (selecteur) => (selecteur.startsWith('a,') ? cibles : elements) },
+  };
+  const getComputedStyle = (element) => {
+    const t = temoins[elements.indexOf(element)] || {};
+    return {
+      display: t.display || 'block',
+      visibility: t.visibility || 'visible',
+      opacity: t.opacity ?? '1',
+      position: t.position || 'static',
+      fontSize: `${t.fontSize ?? 16}px`,
+      overflowX: t.overflowX || 'visible',
+    };
+  };
+  // Les trois paramètres de la fonction réelle, liés au lieu d'être passés :
+  // `new Function` ne reçoit que ce qu'on lui nomme.
+  const fonction = new Function('document', 'getComputedStyle', 'Number',
+    `const largeurVue = ${largeurVue}; const densiteVue = ${densite};` +
+    ' const largeursFichiers = {};' + corps);
+  return fonction(document_, getComputedStyle, Number);
+}
+
 let echecs = 0;
 function verifier(condition, message, contexte = '') {
   if (condition) return;
@@ -188,6 +294,110 @@ const cas = [
   },
 ];
 
+/** Les trois DOM témoins du filtre « texte sous 12 px ». */
+const TEMOINS = {
+  // Le défaut réel du relevé du 6 novembre 2026 : le chevron du panneau de
+  // personnalisation est un masque SVG (`font-size: 0`) porteur d'un caractère,
+  // déclaré `aria-hidden`. Il n'affiche aucun texte : il ne doit pas compter.
+  decor: {
+    nom: 'chevron décoratif aria-hidden, font-size 0',
+    element: {
+      tagName: 'SPAN',
+      className: 'customize-settings-chevron',
+      textContent: '⌄',
+      fontSize: 0,
+      ariaHidden: true,
+    },
+    attendu: 0,
+  },
+  // Même condition de taille, mais aucune raison de l'écarter : 11 px de texte
+  // réel restent un défaut de lisibilité, et le filtre ne doit pas le taire.
+  texte: {
+    nom: 'vrai texte à 11 px',
+    element: { tagName: 'P', className: 'note', textContent: 'Une phrase', fontSize: 11 },
+    attendu: 1,
+  },
+  // Un élément qui ne portait aucun texte n'a jamais été un défaut de
+  // « texte sous 12 px » : l'écarter ne serait pas une correction, et le
+  // compter gonflerait le chiffre d'une non-mesure.
+  vide: {
+    nom: 'aria-hidden à corps nul et sans texte',
+    element: { tagName: 'SPAN', className: 'motif', textContent: '', fontSize: 0, ariaHidden: true },
+    attendu: 0,
+  },
+  // Le piège de l'autre côté : masqué aux lecteurs d'écran, mais visible à
+  // l'œil et trop petit. Un filtre qui écarte tout `aria-hidden` le perdrait.
+  visibleMasque: {
+    nom: 'aria-hidden visible à 11 px',
+    element: {
+      tagName: 'P',
+      className: 'apercu',
+      textContent: 'Rendu',
+      fontSize: 11,
+      ariaHidden: true,
+    },
+    attendu: 1,
+  },
+};
+
+cas.push(
+  {
+    nom: 'filtre : un aria-hidden vide ne gonfle pas le compte des décors écartés',
+    async verifier() {
+      const { corps } = extraireMesure(path.join(RACINE, 'outils', 'auditer-affichages.mjs'));
+      const mesure = executerMesure(corps, [TEMOINS.vide.element]);
+      verifier(mesure.nbTexteFin === 0,
+        'un élément sans texte ne devrait pas compter comme texte fin', JSON.stringify(mesure.texteFin));
+      verifier(mesure.nbDecorsEcartes === 0,
+        'un élément sans texte ne devrait pas compter comme décor écarté : l’écart ne mesure pas une non-mesure',
+        JSON.stringify(mesure.decorsEcartes));
+    },
+  },
+  {
+    nom: 'filtre : le décor aria-hidden à font-size 0 ne compte pas comme texte fin',
+    async verifier() {
+      const { corps } = extraireMesure(path.join(RACINE, 'outils', 'auditer-affichages.mjs'));
+      const mesure = executerMesure(corps, [
+        TEMOINS.decor.element,
+      ]);
+      verifier(mesure.nbTexteFin === TEMOINS.decor.attendu,
+        `le décor devrait compter ${TEMOINS.decor.attendu} texte(s) fin(s), il en compte ${mesure.nbTexteFin}`,
+        JSON.stringify(mesure.texteFin));
+      verifier(mesure.nbDecorsEcartes === 1,
+        'le décor écarté devrait laisser une trace chiffrée (`nbDecorsEcartes = 1`), sinon l’écart est invisible',
+        JSON.stringify(Object.keys(mesure)));
+      verifier(mesure.decorsEcartes?.length === 1 &&
+        mesure.decorsEcartes[0].selecteur === 'span.customize-settings-chevron',
+        'le décor écarté devrait être nommé, pas seulement compté', JSON.stringify(mesure.decorsEcartes));
+    },
+  },
+  {
+    nom: 'filtre : un vrai texte à 11 px reste compté',
+    async verifier() {
+      const { corps } = extraireMesure(path.join(RACINE, 'outils', 'auditer-affichages.mjs'));
+      const mesure = executerMesure(corps, [
+        TEMOINS.texte.element,
+      ]);
+      verifier(mesure.nbTexteFin === TEMOINS.texte.attendu,
+        `un texte réel de 11 px devrait compter ${TEMOINS.texte.attendu}, il compte ${mesure.nbTexteFin}`,
+        JSON.stringify(mesure.texteFin));
+    },
+  },
+  {
+    nom: 'filtre : un aria-hidden visible et trop petit reste compté',
+    async verifier() {
+      const { corps } = extraireMesure(path.join(RACINE, 'outils', 'auditer-affichages.mjs'));
+      const mesure = executerMesure(corps, [
+        TEMOINS.visibleMasque.element,
+      ]);
+      verifier(mesure.nbTexteFin === TEMOINS.visibleMasque.attendu,
+        `un texte visible de 11 px ne doit pas être écarté parce qu’il est aria-hidden : ` +
+        `attendu ${TEMOINS.visibleMasque.attendu}, obtenu ${mesure.nbTexteFin}`,
+        JSON.stringify(mesure.texteFin));
+    },
+  },
+);
+
 for (const un of cas) {
   const resultat = await mesurer(un.mode);
   const avant = echecs;
@@ -199,5 +409,8 @@ if (echecs) {
   console.error(`\n${echecs} vérification(s) en échec.`);
   process.exitCode = 1;
 } else {
-  console.log('\nOK — 3 cas : une mesure interrompue ne laisse pas de rapport à demi rempli.');
+  console.log(
+    `\nOK — ${cas.length} cas : une mesure interrompue ne laisse pas de rapport à demi rempli, ` +
+    'et le filtre « texte sous 12 px » écarte le décor sans texte lisible sans taire un vrai texte fin.'
+  );
 }
