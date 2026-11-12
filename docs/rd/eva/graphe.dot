@@ -29,6 +29,7 @@ digraph memoire {
   "avancee:conteneur-jamais-mesure" [shape=note, label="avancee:conteneur-jamais-mesure"];
   "avancee:contraste-et-pages-oubliees" [shape=note, label="avancee:contraste-et-pages-oubliees"];
   "avancee:controle-preventif-qui-prouve-qu-il-mord" [shape=note, label="avancee:controle-preventif-qui-prouve-qu-il-mord"];
+  "avancee:declarer-fraude-demarches-distinctes-2026-11-12" [shape=note, label="avancee:declarer-fraude-demarches-distinctes-2026-11-12"];
   "avancee:des-points-de-rupture-aux-mesures" [shape=note, label="avancee:des-points-de-rupture-aux-mesures"];
   "avancee:ecouter-sans-promettre-une-conformite" [shape=note, label="avancee:ecouter-sans-promettre-une-conformite"];
   "avancee:filtre-decor-aria-hidden-2026-11-12" [shape=note, label="avancee:filtre-decor-aria-hidden-2026-11-12"];
@@ -209,7 +210,9 @@ digraph memoire {
   "docs/rd/sujet-systemes-embarques.md" [shape=plaintext, label="docs/rd/sujet-systemes-embarques.md"];
   "documents.html" [shape=plaintext, label="documents.html"];
   "eva.html" [shape=plaintext, label="eva.html"];
+  "ia-societe.html" [shape=plaintext, label="ia-societe.html"];
   "index.html" [shape=plaintext, label="index.html"];
+  "liens-utiles.html" [shape=plaintext, label="liens-utiles.html"];
   "outils/attente-navigateur.cjs" [shape=plaintext, label="outils/attente-navigateur.cjs"];
   "outils/auditer-affichages.mjs" [shape=plaintext, label="outils/auditer-affichages.mjs"];
   "outils/auditer-criteres-22.mjs" [shape=plaintext, label="outils/auditer-criteres-22.mjs"];
@@ -384,6 +387,10 @@ digraph memoire {
   "avancee:controle-preventif-qui-prouve-qu-il-mord" -> "docs/rd/sujet-revenus-salaire-impots.md" [label="prouvée par"];
   "avancee:controle-preventif-qui-prouve-qu-il-mord" -> "outils/test_verifier_taux_dates.py" [label="prouvée par"];
   "avancee:controle-preventif-qui-prouve-qu-il-mord" -> "outils/verifier-taux-dates.py" [label="prouvée par"];
+  "avancee:declarer-fraude-demarches-distinctes-2026-11-12" -> "assets/css/site.css" [label="prouvée par"];
+  "avancee:declarer-fraude-demarches-distinctes-2026-11-12" -> "docs/apprentissage/catalogue.toml" [label="prouvée par"];
+  "avancee:declarer-fraude-demarches-distinctes-2026-11-12" -> "ia-societe.html" [label="prouvée par"];
+  "avancee:declarer-fraude-demarches-distinctes-2026-11-12" -> "liens-utiles.html" [label="prouvée par"];
   "avancee:des-points-de-rupture-aux-mesures" -> "assets/css/site.css" [label="prouvée par"];
   "avancee:des-points-de-rupture-aux-mesures" -> "assets/js/site.js" [label="prouvée par"];
   "avancee:des-points-de-rupture-aux-mesures" -> "outils/test_placement_panneau.mjs" [label="prouvée par"];
@@ -779,6 +786,7 @@ digraph memoire {
   "branche:coherence-textes-publics" -> "avancee:cadrages-personnalises-au-pixel" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:contraste-et-pages-oubliees" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:declarer-fraude-demarches-distinctes-2026-11-12" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-chaine-des-ancetres" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-comparaison-largeur-par-largeur" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:grilles-dessins-jamais-atteints" [label="a produit"];
@@ -1010,6 +1018,7 @@ digraph memoire {
   "branche:sources-fermees-et-registre-des-refus" -> "avancee:registre-des-refus-verifie" [label="a produit"];
   "branche:sources-fermees-et-registre-des-refus" -> "phase:verite-et-refus" [label="servie par"];
   "branche:veille-savoirs-evolutifs" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
+  "branche:veille-savoirs-evolutifs" -> "avancee:declarer-fraude-demarches-distinctes-2026-11-12" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:memoire-a-trois-horizons" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:onze-champs-iscdf-ouverts" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:portail-declare-ou-erreur" [label="a produit"];

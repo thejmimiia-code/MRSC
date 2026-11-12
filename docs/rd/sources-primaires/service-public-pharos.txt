@@ -1,0 +1,12 @@
+id = service-public-pharos
+url = https://www.service-public.gouv.fr/particuliers/vosdroits/R17674
+date = 2026-11-12
+empreinte = bd220891945915eb33a21d1cb2b85a61984b03bd40761556493255f67ae01365
+---
+Signaler un contenu internet illégal (internet-signalement : Pharos).
+
+Public concerné : « Victime ou témoin d’un contenu illicite publié sur internet (contenu violent, cyberharcèlement, incitation à la haine, etc.) et souhaitant le signaler ». Coût : « Service gratuit ». Cinq étapes : cliquer sur « Signaler un contenu », désigner le contenu illicite visé, expliquer la situation (date, heure, adresse URL), indiquer les coordonnées de l’auteur du signalement, valider.
+
+« À la suite du signalement, le contenu signalé est visualisé et sauvegardé par les agents de la plateforme PHAROS. Si le contenu ou le comportement signalé est illicite, le signalement est orienté vers un service d’enquête de la police, de la gendarmerie ou des douanes. Une enquête pénale peut être ouverte. »
+
+Texte recopié à la main depuis la page lue le 12 novembre 2026.

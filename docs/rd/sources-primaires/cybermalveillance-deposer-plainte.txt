@@ -1,0 +1,14 @@
+id = cybermalveillance-deposer-plainte
+url = https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance
+date = 2026-11-12
+empreinte = 9e7de3e4ef3682e273922f65d2208dab183c78512c270b8cde8ed81cf55074ad
+---
+Vous souhaitez déposer plainte suite à une cybermalveillance ?
+
+« Rendez-vous au commissariat de police ou à la brigade de gendarmerie dont vous dépendez, ou adressez votre plainte par écrit au procureur de la République du tribunal judiciaire de votre domicile. »
+
+« Si vous êtes un particulier victime d’une cybermalveillance à caractère financier (chantage, sextorsion, escroquerie commerciale ou sentimentale, piratage de messagerie ou réseaux sociaux...), vous pouvez déposer plainte en ligne sur la plateforme THESEE du ministère de l’Intérieur. »
+
+« Vous pouvez être accompagné gratuitement dans votre dépôt de plainte par l’association France Victimes qui opère le numéro d’aide aux victimes du ministère de la Justice : 116 006 (appel et service gratuits, ouvert 7 jours sur 7 de 9h à 19h). »
+
+Texte recopié à la main depuis la page lue le 12 novembre 2026 ; les visuels ne sont pas reproduits.

@@ -6290,3 +6290,119 @@ intervalle_revue_jours = 365
 sources = [
   { titre = "Python Software Foundation — The Python Tutorial, chapitre 8 « Errors and Exceptions », documentation 3.15.2", url = "https://docs.python.org/3/tutorial/errors.html", licence_source = "Non vérifiée pour une reprise documentaire ; référence factuelle uniquement, aucun extrait ni exemple reproduit", droits_controles_le = "2026-11-06", mode_utilisation = "reference-factuelle", utilisation = "Page ouverte et lue le 6 novembre 2026 : elle distingue les erreurs de syntaxe des exceptions et décrit le rôle du contexte et de la dernière ligne d’un message d’erreur. Aucun texte, ligne de code ni exemple de la page n’est repris ; la trace, le programme imaginaire, l’exercice et la correction de la fiche sont originaux et fictifs. La documentation ne valide pas la démarche pédagogique proposée." },
 ]
+
+[[fiche]]
+id = "numerique-declarer-fraude"
+titre = "Signaler, déclarer ou porter plainte : quelle démarche pour quelle fraude ?"
+matiere = "Numérique et sécurité"
+matiere_id = "numerique"
+domaine = "numerique-ia"
+niveau = 2
+horizon_contenu = "Démarches françaises au 12 novembre 2026 ; les services, numéros et formulaires évoluent et se revérifient à chaque revue"
+statut_editorial = "Prototype à relire"
+note_statut_editorial = "Nouvelle fiche du 12 novembre 2026 sur la distinction entre signalement, déclaration bancaire et plainte. Sources officielles lues et datées le jour même (Service-Public.fr, Cybermalveillance.gouv.fr, Pharos, Signal Spam, 33700). À faire relire par une personne compétente en droit et en accompagnement des victimes avant toute présentation comme repère abouti ; les exemples, la correction et l’accessibilité restent à contrôler."
+minutes = 11
+resume = "Distinguer quatre démarches souvent confondues : signaler à une plateforme, déclarer à sa banque, prévenir l’organisme imité et porter plainte."
+objectif = "Dans une situation fictive, choisir les démarches adaptées et les faire dans un ordre raisonnable, sans confondre signalement, opposition bancaire et plainte."
+situation = "Situation fictive : un SMS au nom d’une banque demandait de rappeler un numéro pour « sécuriser » un compte. Tu as rappelé, donné un code reçu par SMS et 240 € ont été débités. Tu as conservé le SMS, la capture d’écran et l’heure de l’appel."
+analogie_titre = "Comme prévenir quatre services différents après un cambriolage"
+analogie = "Après un cambriolage, on ne fait pas une seule chose : on sécurise la porte, on prévient l’assurance, on dépose plainte et on signale parfois un objet à une plateforme spécialisée. Aucune de ces démarches ne remplace les autres. Après une fraude, le même principe vaut : chaque interlocuteur a son rôle, et l’ordre dépend de ce qui a été exposé."
+limite_analogie = "Un cambriolage est un délit de même nature pour tout le monde ; une fraude numérique change de qualification selon les faits, le support et le préjudice. Les démarches décrites ici sont des repères français, pas une procédure universelle, et aucun de ces canaux ne garantit un remboursement."
+notions = [
+  "Signalement — information transmise à une plateforme ou à un organisme pour qu’il constate ou traite un fait. Ce n’est pas une plainte et cela n’ouvre pas forcément un droit à indemnisation.",
+  "Déclaration à la banque — demande faite à son établissement, notamment l’opposition, pour bloquer un moyen de paiement et enclencher l’examen du remboursement selon les règles applicables.",
+  "Plainte — acte juridique adressé à la police, à la gendarmerie ou au procureur de la République, qui peut mener à une enquête et à une condamnation.",
+  "Pré-plainte en ligne — déclaration préparée en ligne puis validée par un service d’enquête ; THESEE en est la plateforme pour certaines escroqueries commises sur internet.",
+  "Preuve conservée — message d’origine avec son en-tête, capture datée, numéro, adresse exacte, reçu ou relevé. Sans elle, une démarche reste difficile à instruire."
+]
+demarche = [
+  "Fais le point sur ce qui a circulé : données bancaires, mot de passe, code à usage unique, pièce d’identité, accès à un appareil ou simple clic sans saisie. C’est ce qui détermine l’urgence et le bon interlocuteur.",
+  "Pour de l’argent ou un moyen de paiement, contacte ta banque par un canal que tu as choisi toi-même : application officielle ou numéro figurant sur ta carte. Demande l’opposition et note le numéro ou la référence qu’on te remet pour la suite.",
+  "Si un achat en ligne a été fait avec ta carte alors que celle-ci est toujours en ta possession, la déclaration se fait sur Service-Public.fr via la plateforme Perceval, avec FranceConnect, muni du numéro d’opposition et de tes relevés. Un récépissé est délivré.",
+  "Conserve les preuves avant de nettoyer quoi que ce soit : le message d’origine complet, l’adresse du site, les numéros, les horaires, les captures et les références bancaires. Ne transfère pas le contenu douteux comme s’il était vérifié.",
+  "Préviens l’organisme dont l’identité a été utilisée en passant par un canal officiel que tu as vérifié toi-même, et demande-lui la marche à suivre qu’il prévoit.",
+  "Choisis le canal de signalement adapté au support : un courriel indésirable à Signal Spam, un SMS ou un appel indésirable au 33700, un site frauduleux à Phishing Initiative, un contenu illicite à Pharos, et le diagnostic d’orientation de 17Cyber pour faire le point.",
+  "Si les faits peuvent relever d’une infraction, prépare une plainte : pré-plainte en ligne THESEE pour les escroqueries commises sur internet, ou dépôt au commissariat ou à la brigade de gendarmerie, ou courrier au procureur de la République. Un signalement ne vaut pas plainte.",
+  "Demande de l’aide si besoin : 17Cyber pour l’orientation technique, Info Escroqueries au 0 805 805 817 pour les démarches, 116 006 de France Victimes pour l’accompagnement des victimes. Ces numéros et horaires se vérifient sur les sites officiels."
+]
+exercice = "Dans la situation fictive, tu as rappelé et donné un code. 240 € ont été débités, la carte est toujours en ta possession. Classe ces quatre actions dans un ordre raisonnable et dis laquelle n’est pas un signalement : faire opposition auprès de la banque ; déposer une pré-plainte THESEE ; envoyer un courriel de protestation à l’adresse indiquée dans le SMS ; conserver le message d’origine."
+aide = "Deux questions suffisent : quelle action bloque l’argent tout de suite, et laquelle prépare une enquête ? Méfie-toi de l’adresse fournie par le message suspect : elle n’est pas un canal officiel."
+correction = [
+  "Commencer par la banque, par un canal choisi soi-même, pour faire opposition et obtenir un numéro d’opposition ; demander comment la fraude sera examinée.",
+  "Les preuves se conservent tout du long : message d’origine, numéro appelé, heure, capture, relevé. Sans elles, la suite est plus difficile.",
+  "La plainte ou la pré-plainte THESEE vient ensuite, quand les faits sont stabilisés et les éléments réunis ; un signalement n’est pas une plainte.",
+  "Écrire à l’adresse indiquée dans le SMS n’est pas une démarche officielle : c’est souvent le fraudeur ou une boîte inutilisable. Ce n’est ni un signalement, ni une déclaration, ni une plainte."
+]
+a_retenir = [
+  "Quatre démarches différentes : signaler à une plateforme, déclarer à sa banque, prévenir l’organisme imité, porter plainte. Aucune ne remplace les autres.",
+  "L’urgence est bancaire et technique ; la plainte vient ensuite. Faire l’un ne dispense pas de l’autre.",
+  "Un signalement ne vaut pas plainte, et une opposition bancaire n’est pas une plainte non plus.",
+  "Aucun canal ne garantit un remboursement ni une condamnation : ce sont des démarches, pas des résultats promis."
+]
+transferer = "Ces repères valent pour une fraude en France. Si tu accompagnes un proche, une association ou une petite entreprise, préviens aussi la personne responsable de la sécurité ou de la comptabilité sans effacer les traces. Pour une fraude transfrontalière, une menace immédiate ou une personne mineure, la démarche change : demande un accompagnement compétent plutôt que d’improviser."
+revue_le = "2026-11-12"
+intervalle_revue_jours = 90
+
+[[fiche.sources]]
+titre = "Service-Public.gouv.fr — Hameçonnage (phishing ou vishing), page vérifiée le 10 avril 2026"
+url = "https://www.service-public.gouv.fr/particuliers/vosdroits/F34800"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche pratique n’est reproduite"
+droits_controles_le = "2026-11-12"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page lue le 12 novembre 2026 : qualification du hameçonnage comme délit, distinction entre signalement et plainte, voies de plainte et services en ligne. Aucun paragraphe, tableau ni liste n’est recopié ; les démarches sont reformulées et datées."
+
+[[fiche.sources]]
+titre = "Service-Public.gouv.fr — Arnaques sur internet (THESEE, Pharos)"
+url = "https://www.service-public.gouv.fr/particuliers/vosdroits/N31138"
+licence_source = "Non vérifiée — lien documentaire ; aucun formulaire n’est repris"
+droits_controles_le = "2026-11-12"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page lue le 12 novembre 2026 comme point d’entrée vers les situations traitées : hameçonnage, compte piraté, achat, location, rançongiciel, arnaque aux sentiments. Aucun extrait n’est reproduit et le parcours du formulaire n’est ni décrit ni enseigné."
+
+[[fiche.sources]]
+titre = "Service-Public.gouv.fr — Fraude à la carte bancaire, page vérifiée le 13 février 2026"
+url = "https://www.service-public.gouv.fr/particuliers/vosdroits/F31324"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche pratique n’est reproduite"
+droits_controles_le = "2026-11-12"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page lue le 12 novembre 2026 : opposition immédiate, déclaration sur Service-Public.fr via Perceval avec FranceConnect et récépissé, conditions de la fraude sur internet. Aucun texte n’est recopié ; les étapes sont résumées avec leur date."
+
+[[fiche.sources]]
+titre = "Service-Public.gouv.fr — Signaler un contenu internet illégal (internet-signalement : Pharos)"
+url = "https://www.service-public.gouv.fr/particuliers/vosdroits/R17674"
+licence_source = "Non vérifiée — lien documentaire ; le formulaire n’est pas reproduit"
+droits_controles_le = "2026-11-12"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page lue le 12 novembre 2026 : Pharos sert à signaler un contenu illégal, le signalement peut être orienté vers un service d’enquête. Aucune capture, aucun libellé de formulaire ni aucune étape détaillée n’est reprise."
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — Que faire en cas de phishing ou hameçonnage ?"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing"
+licence_source = "Non vérifiée — lien documentaire ; aucune fiche réflexe n’est reproduite"
+droits_controles_le = "2026-11-12"
+mode_utilisation = "reference-factuelle"
+utilisation = "Fiche réflexe lue le 12 novembre 2026 : opposition, conservation des preuves, plainte, Signal Spam, 33700, Phishing Initiative, Info Escroqueries et France Victimes. Aucun extrait n’est copié ; les numéros sont cités comme repères avec renvoi à la page d’origine."
+
+[[fiche.sources]]
+titre = "Cybermalveillance.gouv.fr — Déposer plainte après une cybermalveillance"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance"
+licence_source = "Non vérifiée — lien documentaire ; aucune illustration ni visuel n’est repris"
+droits_controles_le = "2026-11-12"
+mode_utilisation = "reference-factuelle"
+utilisation = "Page lue le 12 novembre 2026 : dépôt au commissariat ou à la brigade de gendarmerie, courrier au procureur de la République, pré-plainte THESEE pour les cybermalveillances financières, accompagnement gratuit par France Victimes au 116 006. Aucun logo ni image n’est repris."
+
+[[fiche.sources]]
+titre = "Signal Spam — plateforme nationale de signalement de courriels indésirables"
+url = "https://www.signal-spam.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucun module ni logo n’est repris"
+droits_controles_le = "2026-11-12"
+mode_utilisation = "reference-factuelle"
+utilisation = "Accueil lu le 12 novembre 2026 : la plateforme se présente comme associative, créée en 2005, et le signalement passe par un compte et un module de messagerie. Aucun visuel ni texte de présentation n’est recopié et le parcours d’inscription n’est pas enseigné."
+
+[[fiche.sources]]
+titre = "33700 — plateforme de lutte contre les SMS et appels indésirables"
+url = "https://www.33700.fr/"
+licence_source = "Non vérifiée — lien documentaire ; aucun formulaire n’est repris"
+droits_controles_le = "2026-11-12"
+mode_utilisation = "reference-factuelle"
+utilisation = "Accueil lu le 12 novembre 2026 : signalement d’un SMS ou d’un appel indésirable par formulaire ou capture d’écran, signalements transmis aux opérateurs. Aucun extrait n’est reproduit ; aucune procédure détaillée n’est enseignée."

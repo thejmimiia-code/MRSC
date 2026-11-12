@@ -3624,12 +3624,30 @@ html.contraste-renforce :is(.privacy-summary,.privacy-review-note) { border-colo
 .ai-fraud-evidence { max-width:100ch; margin-top:2rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--text-soft-2); font-size: max(12px, .92rem); }
 .ai-fraud-evidence p:last-child { margin-bottom:0; }
 .ai-fraud-review { font-weight:650; }
-html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,.ai-fraud-steps li,.ai-fraud-lesson-list li) { border-color:currentColor; background:var(--surface); }
+/* Déclaration : un bloc distinct des réflexes, parce que déclarer n’est pas un
+   réflexe de plus mais une chaîne de démarches avec des interlocuteurs
+   différents. Aucune largeur d’écran n’est présumée : les colonnes viennent de
+   la largeur de piste et le reste suit `clamp()`. */
+.ai-fraud-declare { margin-block:clamp(2.2rem,5vw,3.6rem); padding:clamp(1.3rem,4vw,2.2rem); border:1px solid var(--border-soft-4); border-top:6px solid var(--gold); border-radius:22px; background:var(--surface); }
+.ai-fraud-declare-head p { max-width:92ch; margin:.5rem 0 0; color:var(--text-soft-7); }
+.ai-fraud-declare-head h3 { max-width:40ch; color:var(--navy-ink); font-size:clamp(1.35rem,2.8vw,1.9rem); }
+.ai-fraud-declare-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr)); gap:.85rem; margin:1.4rem 0 0; padding:0; list-style:none; }
+.ai-fraud-declare-steps li { display:flex; flex-direction:column; gap:.4rem; padding:1rem; border:1px solid var(--line); border-radius:14px; background:var(--surface-soft); }
+.ai-fraud-declare-steps strong { color:var(--navy-ink); }
+.ai-fraud-declare-steps > li > span:last-child { color:var(--text-soft-2); font-size: max(12px, .92rem); }
+.ai-fraud-declare-channels { margin-top:1.5rem; padding-top:1.2rem; border-top:1px solid var(--line); }
+.ai-fraud-declare-channels h4 { margin:0 0 .7rem; color:var(--navy-ink); font-size: max(12px, 1.05rem); }
+.ai-fraud-declare-channels ul { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr)); gap:.55rem .9rem; margin:0; padding:0; list-style:none; }
+.ai-fraud-declare-channels li { display:grid; gap:.2rem; align-content:start; padding:.6rem .7rem; border-left:3px solid var(--border-soft-6); }
+.ai-fraud-declare-channels strong { color:var(--navy-ink); font-size: max(12px, .95rem); }
+.ai-fraud-declare-channels span { color:var(--text-soft); font-size: max(12px, .88rem); }
+.ai-fraud-declare-caveat { max-width:100ch; margin:1.4rem 0 0; color:var(--text-soft-2); font-size: max(12px, .9rem); }
+html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,.ai-fraud-steps li,.ai-fraud-lesson-list li,.ai-fraud-declare,.ai-fraud-declare-steps li) { border-color:currentColor; background:var(--surface); }
 @media (max-width: 760px) {
   .ai-fraud-steps li { min-height:0; }
 }
 @media (forced-colors: active) {
-  .ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,.ai-fraud-steps li,.ai-fraud-lesson-list li { border-color:CanvasText !important; background:Canvas !important; color:CanvasText !important; box-shadow:none !important; }
+  .ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,.ai-fraud-steps li,.ai-fraud-lesson-list li,.ai-fraud-declare,.ai-fraud-declare-steps li { border-color:CanvasText !important; background:Canvas !important; color:CanvasText !important; box-shadow:none !important; }
 }
 .learning-feedback { padding-block:clamp(2rem,5vw,3.5rem); }
 .map-privacy-notice {

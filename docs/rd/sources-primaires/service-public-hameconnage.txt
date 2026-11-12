@@ -1,0 +1,14 @@
+id = service-public-hameconnage
+url = https://www.service-public.gouv.fr/particuliers/vosdroits/F34800
+date = 2026-11-12
+empreinte = 1f02259834a918dcc27cb24e3f08c00235b52b4c9fd47c94614fe64f136e90fd
+---
+Hameçonnage (phishing ou vishing) — page vérifiée le 10 avril 2026.
+
+« Quelles que soient les intentions de l’auteur, le hameçonnage est considéré comme un délit. Si vous êtes témoin ou victime de tels agissements, vous pouvez faire un signalement. Attention : le signalement n’est pas une plainte. En tant que victime, vous pouvez déposer plainte. »
+
+« Si vous êtes mineur, vous pouvez porter plainte auprès du procureur de la République. »
+
+Services en ligne listés par la page : « Signaler un site de phishing », « Assistance pour les victimes de cybermalveillance - 17Cyber », « Signaler un contenu internet illégal (internet-signalement : Pharos) ».
+
+Texte recopié à la main depuis la page lue le 12 novembre 2026 ; la mise en page, les liens et les info-bulles ne sont pas reproduits.

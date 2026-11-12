@@ -1,0 +1,14 @@
+id = service-public-arnaques-internet
+url = https://www.service-public.gouv.fr/particuliers/vosdroits/N31138
+date = 2026-11-12
+empreinte = ee52fa4dc375353bdeec7826b2f9390988b9326d593a72827f2bb1afa717ab54
+---
+Arnaques sur internet (THESEE, Pharos ...) — point d’entrée par situation.
+
+Sous-titre de la page : « Certaines infractions relèvent de la cybercriminalité. Il peut notamment s’agir du piratage de votre boite mail, d’extorsion d’argent pour débloquer votre ordinateur ou d’un compte Facebook piraté. »
+
+Situations proposées : « Rançongiciel ou ransomware », « Piratage d’un compte d’utilisateur (boîte mail, compte de réseau social, etc.) », « Hameçonnage (phishing ou vishing) », « Fraude liée à un achat sur internet », « Arnaques à la location immobilière sur internet », « Arnaque aux sentiments : escroquerie, chantage, sextortion ».
+
+« Voir aussi : Fraude à la carte bancaire (Perceval) ».
+
+Texte recopié à la main depuis la page lue le 12 novembre 2026.

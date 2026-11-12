@@ -88,11 +88,25 @@ DOSSIERS_EXCLUS = {
 CHEMINS_EXCLUS = {"docs/rd/empreintes-contenus.toml", "docs/rd/editions-relecture.toml"}
 PREFIXES_EXCLUS = ("docs/rd/sources-primaires/",)
 
-DOMAINES_SURS = {"developer.mozilla.org", "www.w3.org", "w3.org", "github.com"}
+#: Sources primaires admises. Les domaines `.gouv.fr` sont ajoutés le
+#: 12 novembre 2026 pour le lot « déclarer » : la déclaration d'une fraude se
+#: documente auprès des administrations qui la reçoivent, pas ailleurs. La liste
+#: reste close — un domaine n'entre ici que pour une source lue, datée et
+#: extraite dans `docs/rd/sources-primaires/`. `signal-spam.fr` et `33700.fr`
+#: sont les deux plateformes nationales citées par la fiche réflexe de
+#: Cybermalveillance ; elles ne sont ni des blogs ni des revendeurs.
+DOMAINES_SURS = {
+    "developer.mozilla.org", "www.w3.org", "w3.org", "github.com",
+    "www.service-public.gouv.fr", "service-public.fr", "service-public.gouv.fr",
+    "www.cybermalveillance.gouv.fr", "cybermalveillance.gouv.fr",
+    "www.signal-spam.fr", "signal-spam.fr", "www.33700.fr", "33700.fr",
+}
 DOMAINES_PROPRES = {"thejmimiia-code.github.io"}
-#: Domaines réservés aux fixtures des bancs de mutation : une URL inventée pour
+#: Domaines réservés aux fixtures des bancs de mutation et aux exemples de fiche :
+#: `site-fictif.test` est l'adresse d'exercice de la fiche « lire une adresse web »,
+#: reproduite à l'identique dans les données d'aventure ; c'est une URL inventée pour
 #: planter une faute n'est pas une affirmation sur le monde.
-DOMAINES_FICTIFS = {"exemple.test", "exemple.fr", "example.com", "un-blog.test"}
+DOMAINES_FICTIFS = {"exemple.test", "exemple.fr", "example.com", "un-blog.test", "site-fictif.test"}
 MOTIF_BROUILLON = re.compile(r"\b(TODO|FIXME|Lorem ipsum|XXX)\b", re.I)
 MOTIF_CONFLIT = re.compile(r"^(<<<<<<< |>>>>>>> )", re.M)
 MOTIF_APOSTROPHE = re.compile(r"\b\w+'\w+\b")
@@ -144,6 +158,11 @@ def date_reference(donnees: dict) -> dt.date:
     meta = donnees.get("meta", {})
     if isinstance(meta.get("date_relecture"), dt.date):
         dates.append(meta["date_relecture"])
+    # `dates_lots` porte les lots postérieurs : la date de référence est la plus
+    # récente consultation consignée, pas la date du premier lot.
+    for brute in meta.get("dates_lots") or []:
+        if isinstance(brute, dt.date):
+            dates.append(brute)
     return max(dates)
 
 

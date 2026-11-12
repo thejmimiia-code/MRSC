@@ -2,14 +2,14 @@
 """Prépare les paquets de relecture des prototypes, sans relire à la place de personne.
 
 Ce script ne relit rien, ne note rien et ne valide rien. Il rassemble, pour chaque
-prototype du catalogue, ce qu'une personne doit avoir sous les yeux pour trancher :
+prototype du catalogue, ce qu’une personne doit avoir sous les yeux pour trancher :
 le besoin déclaré, les sources réellement enregistrées avec leur licence et leur
 date de contrôle, les limites que la fiche affirme déjà, et une trace de décision
 à remplir.
 
 Le tri reprend exactement les deux règles de `outils/file-relecture.py` — domaine
 à relecture spécialisée, puis mots-clés repérés — importées du même module pour
-qu'il n'existe pas deux classements différents. Un paquet détaillé est produit
+qu’il n’existe pas deux classements différents. Un paquet détaillé est produit
 pour les prototypes prioritaires ; les autres restent dans le tableau et peuvent
 être demandés par `--fiche`.
 
@@ -234,7 +234,7 @@ def paquet(item: dict, titres: dict[str, str], relecture: dict | None = None, au
     lignes.append(
         "Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au "
         "statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et "
-        "exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association."
+        "exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association."
     )
     lignes.append("")
     return lignes

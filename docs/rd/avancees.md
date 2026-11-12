@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 111 |
+| Avancées consignées | 112 |
 | Période couverte | du 2026-10-20 au 2026-11-12 |
 | Contrôles exécutables cités | 126 |
 | Initiatives du portefeuille concernées | 16 |
@@ -2689,6 +2689,38 @@ Initiatives liées : `relire-les-44-prototypes`, `coordination-de-tous-les-agent
 **Suite.** Retenter www.ign.fr/ à une date ultérieure ; si une page de l’Institut devient lisible, la consigner avec sa date et son repère avant de modifier l’une des deux fiches de géographie. Ne pas importer les couleurs de la légende OACI dans la fiche de lecture de légende. Laisser l’association trancher la revue du 2026-11-19 ou la décision prospective avant le 31 janvier 2027.
 
 Initiatives liées : `relire-les-44-prototypes`, `coordination-de-tous-les-agents`, `confronter-une-affirmation-a-sa-source`.
+
+### `declarer-fraude-demarches-distinctes-2026-11-12` — Déclarer n’est pas un réflexe de plus : quatre démarches, quatre interlocuteurs, et une source primaire pour chacune
+
+*Consignée le 2026-11-12.*
+
+**Constat.** La section `#fraudes-ia` traitait la prévention, la vérification et le signalement, mais la déclaration tenait en une phrase et quatre canaux. Le mot « déclarer » n’apparaissait qu’une fois dans la page. Or les quatre démarches que le public confond — signaler à une plateforme, déclarer à sa banque, prévenir l’organisme imité, porter plainte — n’ont ni le même destinataire, ni le même effet, ni le même ordre : une opposition précède toujours une déclaration Perceval, et aucune ne vaut plainte. Le registre des sources primaires ne contenait aucune source fraude : huit domaines seulement, tous de documentation web (MDN, W3C). Citer les pages officielles françaises était donc impossible sans élargir une porte fermée.
+
+**Ce que cela change.** Un bloc `.ai-fraud-declare` distinct dans `ia-societe.html` : six étapes ordonnées (faire le point, la banque, la déclaration en ligne, les preuves, l’organisme imité, la plainte), un tableau des sept canaux avec leur usage propre, et une mise en garde qui dit ce qu’aucune démarche ne garantit. La phrase de renvoi annonce le bloc au lieu de le résumer. Une fiche autonome `numerique-declarer-fraude` (108e du catalogue, revue à 90 jours, 8 sources documentaires) porte la même chaîne sous forme d’exercice. `relire-contenus.py` et `verifier-relecture-contenus.py` acceptent quatre éditeurs publics de plus (`service-public.gouv.fr`, `cybermalveillance.gouv.fr`, `signal-spam.fr`, `33700.fr`), nommés un par un, sans relâcher aucune exigence d’extrait, d’ancre, de « permet » ni de « limites ». La porte de relecture lit désormais **plusieurs** rapports datés, et `dates_lots` permet d’ajouter un lot sans réécrire la date du 7 novembre. Huit extraits sont mis en cache dans `docs/rd/sources-primaires/`, recopiés à la main depuis les pages lues, avec l’empreinte de leur corps.
+
+**Preuves dans le dépôt :**
+
+- `ia-societe.html`
+- `assets/css/site.css`
+- `liens-utiles.html`
+- `docs/apprentissage/catalogue.toml`
+- `docs/apprentissage/referentiel.toml`
+- `docs/rd-ia-usages-fraudes.md`
+- `docs/rd/relecture-contenus.toml`
+- `docs/rd/sources-primaires/`
+- `docs/rd/relecture-fraudes-declaration-2026-11-12.md`
+- `outils/relire-contenus.py`
+- `outils/verifier-relecture-contenus.py`
+- `outils/construire-paquets-relecture.py`
+- `apprendre/fiches/numerique-declarer-fraude.html`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-relecture-contenus.py && python3 outils/test_mutations_relecture_contenus.py && python3 outils/test_mutations_relire_contenus.py && python3 outils/relire-contenus.py && python3 outils/construire-apprentissages.py --verifier && python3 outils/verifier-site-statique.py && python3 outils/verifier-integration.py && python3 outils/compter-paliers.py && git diff --check`
+
+**Limite — ce que cela ne prouve pas.** Relecture d’agent, pas d’expertise juridique : aucune qualification de faits réels, aucune opportunité de plainte tranchée, rien sur la procédure propre aux mineurs ni sur les situations transfrontalières. Les extraits sont des recopies manuelles, pas des captures automatiques : l’outil de vérification n’a pas d’accès réseau, donc l’empreinte prouve que l’extrait n’a pas bougé depuis la lecture, pas qu’il reproduit la page à l’octet près. Aucun essai avec des personnes, aucune mesure d’accessibilité réelle du nouveau bloc, aucun rendu vérifié sous 360 px. Les numéros et horaires sont datés du 12 novembre 2026 et peuvent changer. La fiche reste « Prototype à relire », aucune relecture humaine consignée, aucune publication.
+
+**Suite.** Faire relire la fiche par une personne compétente en droit pénal ou en accompagnement des victimes, en particulier la pré-plainte THESEE et le courrier au procureur, puis vérifier à l’œil le bloc « déclarer » aux largeurs étroites. Ensuite seulement, envisager une promotion de statut — la sienne, pas celle des cinq fiches fraudes existantes.
+
+Initiatives liées : `veille-savoirs-evolutifs`, `coherence-textes-publics`.
 
 ### `filtre-decor-aria-hidden-2026-11-12` — Un décor sans texte lisible n’est pas un texte trop petit — et le banc exécute enfin le filtre
 

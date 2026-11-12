@@ -17,11 +17,11 @@ Un verdict « conforme » fait passer la fiche au statut « Relu — relecture c
 | Priorité | Signification | Prototypes |
 | ---: | --- | ---: |
 | 1 | domaine exigeant une personne compétente du domaine | 14 |
-| 2 | hors domaine sensible, mais mots-clés à vérifier | 20 |
+| 2 | hors domaine sensible, mais mots-clés à vérifier | 21 |
 | 3 | aucun signal automatique — reste à relire | 47 |
-|  | **Total des prototypes** | **81** |
+|  | **Total des prototypes** | **82** |
 
-Les 34 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres prototypes apparaissent dans le tableau et se détaillent avec `--fiche <identifiant>`.
+Les 35 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres prototypes apparaissent dans le tableau et se détaillent avec `--fiche <identifiant>`.
 
 ## 2. Tableau de suivi
 
@@ -59,55 +59,56 @@ Les 34 paquets détaillés ci-dessous couvrent les priorités 1 et 2. Les autres
 | 30 | [Repérer l’idée principale et les informations utiles](fiches/fr-reperer-idee-texte.html) | Français, lecture, écriture et communication | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
 | 31 | [Moyenne et médiane : deux façons de résumer une série](fiches/maths-moyenne-mediane.html) | Mathématiques, mesures et données | 2 | 1 | 1 non vérifiée(s) | 2026-10-24 | aucune |
 | 32 | [Nommer sa méthode après un exercice, pour comprendre ce qui a marché](fiches/methode-verbaliser-sa-methode.html) | Apprendre à apprendre, autonomie et relations | 2 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 33 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 34 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 35 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 36 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 37 | [Se tester plutôt que relire : ce que la recherche dit vraiment](fiches/apprendre-se-tester-plutot-que-relire.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 38 | [Lire un générique de film : qui décide quoi dans l’image](fiches/arts-lire-generique-film.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 39 | [Préparer un trajet : horaires théoriques, temps réel et correspondance](fiches/geographie-preparer-trajet-horaires.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 40 | [Préparer une sauvegarde que l’on saura réellement restaurer](fiches/numerique-preparer-sauvegarde.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 2 | 2 non vérifiée(s) | 2026-11-05 | aucune |
-| 41 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 42 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
-| 43 | [Choisir une projection : ce que la carte garde et ce qu’elle déforme](fiches/geo-choisir-une-projection.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 44 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 45 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 46 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 47 | [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 48 | [Lire la cote d’une archive avant de commander le document](fiches/histoire-lire-une-cote.html) | Histoire, chronologie et mémoire | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
-| 49 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
-| 50 | [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 51 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 52 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
-| 53 | [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 54 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
-| 55 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 3 | 3 | 3 non vérifiée(s) | 2026-10-08 | aucune |
-| 56 | [Lire une trace d’erreur et isoler la plus petite modification](fiches/prog-lire-trace-erreur.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-11-06 | aucune |
-| 57 | [Tester un programme avec des cas simples](fiches/prog-tester-exemples.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 58 | [Comprendre un mot grâce à son contexte](fiches/fr-comprendre-mot-contexte.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 59 | [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 60 | [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 61 | [Demander de l’aide ou une répétition en anglais](fiches/langue-anglais-demander-aide.html) | Langues étrangères et interculturel | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 62 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 63 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-20 | aucune |
-| 64 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 3 | 6 | 6 non vérifiée(s) | 2026-10-20 | aucune |
-| 65 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
-| 66 | [Comparer deux relevés sans conclure trop vite](fiches/maths-comparer-deux-releves.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-11-06 | aucune |
-| 67 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
-| 68 | [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 69 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
-| 70 | [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 71 | [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 72 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-24 | aucune |
-| 73 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 74 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 75 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
-| 76 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 77 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
-| 78 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
-| 79 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
-| 80 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
-| 81 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 33 | [Signaler, déclarer ou porter plainte : quelle démarche pour quelle fraude ?](fiches/numerique-declarer-fraude.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 8 | 8 non vérifiée(s) | 2026-11-12 | aucune |
+| 34 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 35 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 2 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 36 | [Composer une image avec quelques formes](fiches/arts-composer-formes.html) | Arts, musique, création et culture | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 37 | [Lire une notice d’œuvre en séparant faits et interprétations](fiches/arts-lire-cartel.html) | Arts, musique, création et culture | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 38 | [Se tester plutôt que relire : ce que la recherche dit vraiment](fiches/apprendre-se-tester-plutot-que-relire.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 39 | [Lire un générique de film : qui décide quoi dans l’image](fiches/arts-lire-generique-film.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 40 | [Préparer un trajet : horaires théoriques, temps réel et correspondance](fiches/geographie-preparer-trajet-horaires.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 41 | [Préparer une sauvegarde que l’on saura réellement restaurer](fiches/numerique-preparer-sauvegarde.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 2 | 2 non vérifiée(s) | 2026-11-05 | aucune |
+| 42 | [Garder la trace d’une source pour la retrouver](fiches/recherche-conserver-reference.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 43 | [Distinguer un résumé et une citation sur une fiche fictive](fiches/recherche-distinguer-resume-citation.html) | Études supérieures, spécialités et recherche — post-bac au doctorat | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
+| 44 | [Choisir une projection : ce que la carte garde et ce qu’elle déforme](fiches/geo-choisir-une-projection.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 45 | [Décrire un paysage sans lui faire dire trop](fiches/geo-decrire-paysage.html) | Géographie, territoire et espace | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 46 | [Lire une légende sur une carte](fiches/geo-lire-legende-carte.html) | Géographie, territoire et espace | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 47 | [S’orienter avec les points cardinaux](fiches/geo-points-cardinaux.html) | Géographie, territoire et espace | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 48 | [Comparer deux sources sur un même événement](fiches/histoire-comparer-sources.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 49 | [Lire la cote d’une archive avant de commander le document](fiches/histoire-lire-une-cote.html) | Histoire, chronologie et mémoire | 3 | 1 | 1 non vérifiée(s) | 2026-11-05 | aucune |
+| 50 | [Repérer l’échelle d’un événement : un lieu de France ou plusieurs pays](fiches/histoire-reperer-echelle-france-monde.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 51 | [Situer une année dans un siècle](fiches/histoire-situer-siecle.html) | Histoire, chronologie et mémoire | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 52 | [Comprendre les bits et les octets](fiches/info-bits-octets.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 53 | [Comprendre les rôles d’un ordinateur](fiches/info-ordinateur-fonctions.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 54 | [Comprendre le rôle d’un système d’exploitation](fiches/info-systeme-exploitation.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 55 | [Distinguer une table, une requête et une page Web](fiches/info-table-requete-web.html) | Informatique, algorithmique et langages de programmation | 3 | 2 | 2 non vérifiée(s) | 2026-10-15 | aucune |
+| 56 | [Un même algorithme, plusieurs langages : Python et JavaScript](fiches/prog-comparer-langages.html) | Informatique, algorithmique et langages de programmation | 3 | 3 | 3 non vérifiée(s) | 2026-10-08 | aucune |
+| 57 | [Lire une trace d’erreur et isoler la plus petite modification](fiches/prog-lire-trace-erreur.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-11-06 | aucune |
+| 58 | [Tester un programme avec des cas simples](fiches/prog-tester-exemples.html) | Informatique, algorithmique et langages de programmation | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 59 | [Comprendre un mot grâce à son contexte](fiches/fr-comprendre-mot-contexte.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 60 | [Lire la ponctuation pour comprendre une phrase](fiches/fr-lire-ponctuation.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 61 | [Préparer une explication courte](fiches/fr-preparer-explication-orale.html) | Français, lecture, écriture et communication | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 62 | [Demander de l’aide ou une répétition en anglais](fiches/langue-anglais-demander-aide.html) | Langues étrangères et interculturel | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 63 | [Demander comment épeler un mot en anglais](fiches/langue-anglais-epeler.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 64 | [Prononcer la fin -ed des verbes anglais](fiches/langue-anglais-prononcer-ed.html) | Langues étrangères et interculturel | 3 | 2 | 2 non vérifiée(s) | 2026-10-20 | aucune |
+| 65 | [Lire « th » dans un dictionnaire : /θ/ ou /ð/ ?](fiches/langue-anglais-prononcer-th.html) | Langues étrangères et interculturel | 3 | 6 | 6 non vérifiée(s) | 2026-10-20 | aucune |
+| 66 | [Reconnaître un mot que tu connais déjà sur une affiche bilingue](fiches/langue-reperer-mot-deja-connu.html) | Langues étrangères et interculturel | 3 | 3 | 3 non vérifiée(s) | 2026-10-15 | aucune |
+| 67 | [Comparer deux relevés sans conclure trop vite](fiches/maths-comparer-deux-releves.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-11-06 | aucune |
+| 68 | [Convertir des mesures sans changer leur quantité](fiches/maths-convertir-unites.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
+| 69 | [Résoudre une équation simple en gardant l’égalité](fiches/maths-equation-simple.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 70 | [Estimer un résultat pour vérifier un calcul](fiches/maths-estimer-calcul.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
+| 71 | [Lire les graduations d’un graphique](fiches/maths-lire-echelle-graphique.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 72 | [Lire une information à l’intersection d’un tableau](fiches/maths-lire-tableau-croise.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 73 | [Comprendre une moyenne comme un partage égal](fiches/maths-moyenne.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-24 | aucune |
+| 74 | [Comprendre une chance dans un tirage simple](fiches/maths-probabilite-tirage.html) | Mathématiques, mesures et données | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 75 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 76 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 3 | 1 | 1 non vérifiée(s) | 2026-10-11 | aucune |
+| 77 | [Calculer une vitesse moyenne simple](fiches/sciences-calculer-vitesse-moyenne.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 78 | [Repérer les grandes étapes de vie d’une plante à fleurs](fiches/sciences-cycle-vie-plante.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-11 | aucune |
+| 79 | [Distinguer fusion et dissolution](fiches/sciences-distinguer-melange-changement-etat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
+| 80 | [Distinguer météo et climat](fiches/sciences-meteo-climat.html) | Sciences, technologie et environnement | 3 | 3 | 3 non vérifiée(s) | 2026-10-11 | aucune |
+| 81 | [Comprendre un circuit électrique ouvert ou fermé](fiches/tech-circuit-ouvert-ferme.html) | Sciences, technologie et environnement | 3 | 2 | 2 non vérifiée(s) | 2026-10-08 | aucune |
+| 82 | [Distinguer capteur, commande et action dans un objet électronique](fiches/tech-electronique-capteur.html) | Sciences, technologie et environnement | 3 | 1 | 1 non vérifiée(s) | 2026-10-08 | aucune |
 
 ## 3. Paquets détaillés
 
@@ -164,7 +165,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `civ-lire-un-sondage` — Lire un sondage : vérifier les mentions avant de retenir le chiffre
 
@@ -213,7 +214,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `civ-reperer-echelle-institution` — Repérer l’échelle d’une institution avant de chercher le bon service
 
@@ -264,7 +265,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `civ-reperer-info-electorale` — Repérer une information électorale officielle
 
@@ -315,7 +316,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `civ-trouver-service-public` — Trouver un service public et préparer un formulaire
 
@@ -367,7 +368,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `demarche-obtenir-acte-naissance` — Demander un acte de naissance : la bonne mairie, la bonne forme
 
@@ -417,7 +418,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `econ-comparer-prix-unitaires` — Comparer deux prix à quantité égale
 
@@ -468,7 +469,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `econ-distinguer-interet-frais` — Distinguer un intérêt d’un frais sur un crédit fictif
 
@@ -520,7 +521,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `econ-lire-facture` — Lire une facture et repérer une échéance
 
@@ -571,7 +572,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `econ-lire-mention-garantie` — Lire une mention de garantie sur un ticket fictif
 
@@ -622,7 +623,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `sante-amenager-logement-chutes` — Aménager son logement pour limiter les chutes, sans se mettre en danger
 
@@ -672,7 +673,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `sante-comprendre-parcours-soins` — Parcours de soins coordonnés : médecin traitant et remboursement
 
@@ -723,7 +724,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `sante-lire-etiquette-produit-menager` — Lire l’étiquette d’un produit ménager : pictogrammes et mentions
 
@@ -774,7 +775,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `sante-reperer-source-publique` — Repérer une source de santé publique avant d’agir
 
@@ -826,7 +827,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `demarche-lire-devis-travaux` — Lire un devis de travaux : ce qui doit y figurer avant de dire oui
 
@@ -875,7 +876,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `etudes-lire-fiche-rncp` — Lire une fiche RNCP : la certification, son auteur et sa durée
 
@@ -924,7 +925,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `recherche-lire-etude` — Lire une étude sans confondre résultats et certitudes
 
@@ -972,7 +973,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `recherche-question-hypothese` — Formuler une question et une hypothèse de recherche
 
@@ -1021,7 +1022,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `recherche-verifier-chiffre-public` — Vérifier un chiffre public : périmètre, unité et producteur
 
@@ -1070,7 +1071,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `sante-comprendre-depistage-organise` — Comprendre un programme de dépistage organisé, sans en faire une ordonnance
 
@@ -1119,7 +1120,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `sante-reperer-signes-qualite-origine` — AOP, IGP, STG, Label rouge : ce que chaque signe garantit
 
@@ -1168,7 +1169,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `sciences-comprendre-isolation-r-et-u` — Lire une fiche d’isolation : résistance R et coefficient U
 
@@ -1217,7 +1218,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `sciences-comprendre-pluie-millimetres` — Lire un cumul de pluie : millimètres, litres et surface
 
@@ -1266,7 +1267,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `histoire-lire-frise` — Lire une frise chronologique et ordonner des événements
 
@@ -1315,7 +1316,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `info-lire-adresse-web` — Repérer les parties d’une adresse Web
 
@@ -1364,7 +1365,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `info-objet-connecte-local-distant` — Distinguer programme embarqué local et liaison réseau d’un objet connecté
 
@@ -1415,7 +1416,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `prog-lire-licence-logiciel` — Lire une licence avant de réutiliser un programme
 
@@ -1465,7 +1466,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `fr-argumenter-avec-exemple` — Présenter une idée avec une raison et un exemple
 
@@ -1514,7 +1515,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `fr-distinguer-fait-interpretation` — Distinguer un fait, une interprétation et une recommandation
 
@@ -1563,7 +1564,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `fr-reperer-idee-texte` — Repérer l’idée principale et les informations utiles
 
@@ -1612,7 +1613,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `maths-moyenne-mediane` — Moyenne et médiane : deux façons de résumer une série
 
@@ -1661,7 +1662,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `methode-verbaliser-sa-methode` — Nommer sa méthode après un exercice, pour comprendre ce qui a marché
 
@@ -1710,7 +1711,63 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
+
+### `numerique-declarer-fraude` — Signaler, déclarer ou porter plainte : quelle démarche pour quelle fraude ?
+
+| Élément | Valeur |
+| --- | --- |
+| Domaine | Numérique, données, cybersécurité et intelligence artificielle |
+| Repère de difficulté | 2 |
+| Horizon du contenu | Démarches françaises au 12 novembre 2026 ; les services, numéros et formulaires évoluent et se revérifient à chaque revue |
+| Priorité de tri | 2 — hors domaine sensible, signalé par mots-clés |
+| Termes repérés | santé : diagnostic ; droit et démarches : juridique ; données personnelles : mot de passe, phishing |
+| Fiche publiée | [lire la fiche](fiches/numerique-declarer-fraude.html) |
+| Contrôles automatiques | 17/17 — aucun défaut mécanique détecté |
+| Relecture consignée | aucune à ce jour |
+
+**Sources enregistrées dans le catalogue**
+
+| Source | Licence déclarée | Mode | Droits contrôlés le |
+| --- | --- | --- | --- |
+| [Service-Public.gouv.fr — Hameçonnage (phishing ou vishing), page vérifiée le 10 avril 2026](https://www.service-public.gouv.fr/particuliers/vosdroits/F34800) | Non vérifiée — lien documentaire ; aucune fiche pratique n’est reproduite | reference-factuelle | 2026-11-12 |
+| [Service-Public.gouv.fr — Arnaques sur internet (THESEE, Pharos)](https://www.service-public.gouv.fr/particuliers/vosdroits/N31138) | Non vérifiée — lien documentaire ; aucun formulaire n’est repris | reference-factuelle | 2026-11-12 |
+| [Service-Public.gouv.fr — Fraude à la carte bancaire, page vérifiée le 13 février 2026](https://www.service-public.gouv.fr/particuliers/vosdroits/F31324) | Non vérifiée — lien documentaire ; aucune fiche pratique n’est reproduite | reference-factuelle | 2026-11-12 |
+| [Service-Public.gouv.fr — Signaler un contenu internet illégal (internet-signalement : Pharos)](https://www.service-public.gouv.fr/particuliers/vosdroits/R17674) | Non vérifiée — lien documentaire ; le formulaire n’est pas reproduit | reference-factuelle | 2026-11-12 |
+| [Cybermalveillance.gouv.fr — Que faire en cas de phishing ou hameçonnage ?](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing) | Non vérifiée — lien documentaire ; aucune fiche réflexe n’est reproduite | reference-factuelle | 2026-11-12 |
+| [Cybermalveillance.gouv.fr — Déposer plainte après une cybermalveillance](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance) | Non vérifiée — lien documentaire ; aucune illustration ni visuel n’est repris | reference-factuelle | 2026-11-12 |
+| [Signal Spam — plateforme nationale de signalement de courriels indésirables](https://www.signal-spam.fr/) | Non vérifiée — lien documentaire ; aucun module ni logo n’est repris | reference-factuelle | 2026-11-12 |
+| [33700 — plateforme de lutte contre les SMS et appels indésirables](https://www.33700.fr/) | Non vérifiée — lien documentaire ; aucun formulaire n’est repris | reference-factuelle | 2026-11-12 |
+
+**Ce que la fiche dit déjà de ses limites**
+
+> Un cambriolage est un délit de même nature pour tout le monde ; une fraude numérique change de qualification selon les faits, le support et le préjudice. Les démarches décrites ici sont des repères français, pas une procédure universelle, et aucun de ces canaux ne garantit un remboursement.
+
+**Points à trancher par une personne**
+
+- [ ] Ouvrir les 8 source(s) et vérifier que chacune étaye réellement l’affirmation citée.
+- [ ] Trancher les droits : 8 source(s) déclarent une licence « non vérifiée ». Référence factuelle ou reprise autorisée, la décision doit être écrite.
+- [ ] Vérifier l’exemple et la correction : aucun exemple ne doit induire en erreur si l’énoncé est mal lu.
+- [ ] Vérifier l’accessibilité réelle (lecture d’écran, zoom, clavier) : les contrôles automatiques ne la remplacent pas.
+- [ ] Décider : conserver en prototype, corriger puis relire, ou retirer. Écrire la raison, pas une note.
+
+**Relecture à consigner dans `relectures.toml`**
+
+```toml
+[[relecture]]
+fiche = "numerique-declarer-fraude"
+date = AAAA-MM-JJ
+role = "expertise du domaine — préciser lequel"
+perimetre = ["exemples et corrections", "sources et droits", "accessibilité"]
+verdict = "conforme"          # conforme | a-corriger | insuffisant
+sources_ouvertes = []
+droits_verifies_le = AAAA-MM-JJ
+objections = []
+points_bloquants = []
+suite = "ce qui est décidé ensuite, et par qui"
+```
+
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `numerique-formuler-recherche` — Formuler une recherche sur le Web
 
@@ -1759,7 +1816,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ### `numerique-organiser-fichiers` — Nommer et retrouver ses fichiers sans exposer ses données
 
@@ -1809,7 +1866,7 @@ points_bloquants = []
 suite = "ce qui est décidé ensuite, et par qui"
 ```
 
-Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n'autorise une publication : cette décision reste à l'association.
+Puis `python3 outils/registre-relecture.py` : un verdict « conforme » exige que la fiche passe au statut « Relu — relecture consignée » ; un verdict « à corriger » laisse le prototype en place et exige une objection écrite. Aucun des deux n’autorise une publication : cette décision reste à l’association.
 
 ## 4. Ce que ces paquets ne font pas
 

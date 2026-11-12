@@ -35,7 +35,7 @@ python3 outils/verifier-poids-pages.py --rapport docs/rd/poids-pages.md
 
 Le script :
 
-1. parcourt les 121 pages publiques (13 pages d’information à la racine, dont l’accueil et la page 404, 107 fiches et la page du simulateur) ;
+1. parcourt les 122 pages publiques (13 pages d’information à la racine, dont l’accueil et la page 404, 108 fiches et la page du simulateur) ;
 2. additionne le HTML, les feuilles de style locales, les scripts locaux et l’image retenue pour chaque emplacement ;
 3. compresse chaque fichier avec gzip niveau 9 pour approcher le transfert ;
 4. estime deux scénarios : le plus petit candidat `srcset` (mobile ou petit écran) et le plus grand (grand écran à forte densité) ;
@@ -57,7 +57,7 @@ Mesure du 17 octobre 2026, avant et après la conversion des trois grandes illus
 | `ia-societe.html`, `transparence.html`, fiches types | 52–59 | 52–59 | inchangé | 52–59 | 52–59 | inchangé |
 | `simulateur/index.html` | 71,4 | 71,4 | inchangé | 71,4 | 71,4 | inchangé |
 
-Le détail page par page est régénéré dans [`poids-pages.md`](poids-pages.md). Les 121 pages restent sous les budgets de travail, dernière mesure du 6 novembre 2026.
+Le détail page par page est régénéré dans [`poids-pages.md`](poids-pages.md). Les 122 pages restent sous les budgets de travail, dernière mesure du 6 novembre 2026.
 
 ### 4.2 Images : formats et qualité
 
@@ -207,7 +207,7 @@ Le plafond passe à **4×** et le budget de tampon de 4 à **6 Mpx** (`DENSITE_M
 
 Le déficit était donc visible **parce que l'image est servie en 1:1** : à l'échelle exacte du pixel, un bloc de compression de 8 × 8 px se lit directement comme du pixel. Qualités portées à **AVIF 78 et WebP 88** (le WebP reste un repli ; au-delà de 88, la variante 1 672 px dépasserait son JPEG source, ce que l'outil refuse — et il a raison : un dérivé plus lourd que sa source n'a pas de sens).
 
-**Poids après la passe** (gzip estimé, `outils/verifier-poids-pages.py`) : `anglais-aventure.html` 227,6 Kio mobile / 415,9 Kio grand écran, `apprendre.html` 202,8 / 391,1, `index.html` 140,4 / 238,7. Les 121 pages restent sous 300 Kio et 450 Kio. Le total des variantes passe de 1 553 à **2 199 Kio** dans le dépôt, pour des fichiers servis plus lourds de 20 à 35 % sur les images — le prix explicite de la netteté.
+**Poids après la passe** (gzip estimé, `outils/verifier-poids-pages.py`) : `anglais-aventure.html` 227,6 Kio mobile / 415,9 Kio grand écran, `apprendre.html` 202,8 / 391,1, `index.html` 140,4 / 238,7. Les 122 pages restent sous 300 Kio et 450 Kio. Le total des variantes passe de 1 553 à **2 199 Kio** dans le dépôt, pour des fichiers servis plus lourds de 20 à 35 % sur les images — le prix explicite de la netteté.
 
 **Garde-fous ajoutés** (`outils/verifier-affichages.py`, joués en CI) :
 

@@ -4013,3 +4013,459 @@ sources = []
 mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
 constat = "Relecture finale de la 21ᵉ garde : sa docstring décrit les quatre DOM témoins réellement éprouvés par le banc et ses deux refus, et les deux commentaires empilés n’en font plus qu’un."
 limite = "Garde statique seulement : elle lit la forme du filtre dans l’auditeur, elle n’exécute ni la mesure ni le banc, qui restent seuls juges du comportement."
+
+[[edition]]
+chemin = "README.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "4f8e341c68c63ff77c6844939aee848866963e98bae5a136d6917540d00f279c"
+empreinte_apres = "ff09f6a54d1e2fe01e4a3e0042bdbb7cf7e1831ec5e7a80d533c32cc73e7d629"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "anglais-aventure.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "1a97f406ecc687325b4b513125c890d00b6664359e6f76878dd0eb234afdaeb0"
+empreinte_apres = "3306f3637b623a798d20a3075df5ed12bc6a76eca4d36605fb446f2f8e6be0c0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "apprendre.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "21980bd3924d6ef8b8b18ba2a510685a69cb558f43e989b1be90edc79f475b60"
+empreinte_apres = "905e5a9e063f2156bebb2f397e22a8c6f0c5ddc035dd0f9f1830990563f5adbd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "22f9aa4d515f6a7e66c62f3bc34b28b9bd261b28c64a30323ff761828b794ba7"
+empreinte_apres = "f2d93d5a18ac421cb08cb096817760ebd8f4f60d6c2933baed0c0b366a51ccc2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "assets/js/apprentissage-aventure-data.js"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d4cb4843323b97e1ccd497a11f265463ac8f66cf4bbee81e7bd024668e33f0b0"
+empreinte_apres = "d01dc827f7963dd31ac6fc9c9ee41eec0af360063eb16eef93e3d75df0728820"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/apprentissage/audit-automatique.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "2ac8d24bf41e93039f13a751dac2a0dbfd761179255d749e6d6bd4bb59d43bac"
+empreinte_apres = "a9627dcae49db8f1abc4df923652a1d011563fa277fa0931e7f673299ee6526c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/apprentissage/catalogue.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "9ad245e350dc06603e602f7c2712cdae5814aaad0c1919110fa4fd38c064938b"
+empreinte_apres = "82e518a81048df8ecc4074ead13e8812c2bd30f2c74114a9c09ef53b422492c7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/apprentissage/file-relecture.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "22b89a4d13bed311d3efd0b024bfac451a22720d16a7ab155e51ca65ef51da1a"
+empreinte_apres = "ac01c774000568585eacc1e91e465428f97a16c601e642665efc6dfc5899972e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/apprentissage/grille-relecture.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "f948e02008e2e0289bf41fc246bab4c1d52c72cc269c43d2e65db2e826a90703"
+empreinte_apres = "9ed677281fa311763ba02c2721c46068698523b1094b33e03d6d4a3c31083172"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/apprentissage/objectif-1000.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "2e874da1feea8e85feff1f3481f415f59483bb32634691055dc50d016fc78d0e"
+empreinte_apres = "37d20e7b29b34a7a6569e0f13f2b9b5815587365f0c3bc793b9774287428f356"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/apprentissage/paquets-relecture.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "2b378e32ee2a5d77e6a720fee0b56e1698c14d9e95c4c9d0ba78f35ff767e938"
+empreinte_apres = "f657459b8668416ec92235e4c9d68ddd18001c09848caaf0e2b9dc10d6101823"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/apprentissage/referentiel.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d3bc4c60a98b8ae14daaa68282851abcb0d9d19e658b30d821c24397ca2752bf"
+empreinte_apres = "f42d6b363b1d62d7b3f6db97a2d4631a0c6937db0bdac76e6c85aadeeba6d2e0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/couverture-savoirs-base.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "f78d25aa6b02188be1fdb5030bac7874f4500511ff48dc9f64976bf8f6ffa3c7"
+empreinte_apres = "a4b9d22970f60f256f22c576278ae979d904e64220ff8068b3a71ece7cc43822"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/rd-anglais-aventure.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "fe4ea4f8e74233a1616e9d51f4c995fd063385337a08253b4466e5d4658bcde0"
+empreinte_apres = "e7ac39b5634c018a499fb725d05b061ce42e2a2d0923f8f64838b1bfed8a5312"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/rd-coherence-visuelle-editoriale.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "68cd789f87f5ee93dd359d9313872e09a89d7abf8a05d54f6d3a4fcf48fa800a"
+empreinte_apres = "5241dded58db0a2577de34831df0fa9ed2e1c0c6b983d682ae3fc63c4aaeaf0c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/rd-ia-usages-fraudes.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "eecc3f9ee7c9a799e88577958525d8961d6e74abfbbb9db8146e304bc2a3a079"
+empreinte_apres = "ae68e1b282280a04183e3fe5b2f4237178f13c5965ff8784030760c9abb5c1ce"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/rd-innovation-continue.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e5f89faced467803a85fd0aed8797dfad46aaa3e564972642dbc1fe77da06c9b"
+empreinte_apres = "7c4aaff901ab702ffecf556e893fd8d558f5f12c2bdd7fbb121aa90f808879ff"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/rd-parcours-apprentissage.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "8439107ca2727bbb26868f6e71818b05426e7ef12899b816d88cba6a0e91910b"
+empreinte_apres = "4e4652b1781b354259b7373b577e78004f4a6ad1c32478144ce3ed7c6d6fb88d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/rd/carte-lacunes.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e7add6c1a9d899b883dccf3af09e67ed3e85c9ca950765c7c03f79d6c80bfd85"
+empreinte_apres = "adb743798fb1c98e6d70ab984b507a1003c1f52acb1e2e44c870ef414c3469c8"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/rd/poids-et-sobriete-numerique.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "5063554bef492fdf8be4305c7c0fa582654735e242ab05303e32016549c20764"
+empreinte_apres = "a640aaf86c40f04b9e84653d4109c7002fb8695adf5e6cb5703feeda35b9b2ee"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/rd/portefeuille.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "c3f82a933326a3af80ee182fa25a38b08fd39ef67f39c13c9d34d3e5a9fc4645"
+empreinte_apres = "cdb022a1bfb9cbbc62e9677160b88e9e25fdc177ebcfae6277ed43b9542373db"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/rd/prospective-2027-2030.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "047e011911712f08070679192a985932e7401ee4873e0ecb0a445e2804631061"
+empreinte_apres = "0ffdd1212020011d1599339c9321237e5af1070d7171d85ffb086d3c0d7c16c4"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/rd/relecture-contenus.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e9da687eed9ac39e37d2a91ed28d44ad5140e675c3c93bd5b66dc05dda979b9a"
+empreinte_apres = "7b5c02ec879df102e5867b58709f7a22d6c1e990dfc36b26736b1477fcfa1e4a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "a5d9057d9e4d09fb5491c48660194d6d15d844c4f843282a49229ed41c5fdf00"
+empreinte_apres = "67daa4fbd682d086d179f60c0c0022f0a3d1123ccffd230eb1efd925202d727b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "0790e676f5e11d18a6b51af2381b6ab09b571c6be491cdff43b024460ff7dc0e"
+empreinte_apres = "517d1e2a6f89b3d2f9a563d0d12a24a597a907ccba3053c8c3fac461c68a2e11"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "liens-utiles.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e8bf281791a0822562563090cfafcabc966ca845b6679b8843fddf7533fdbfbf"
+empreinte_apres = "e0d99f037a40ba6cd9eb51741bbe2b3e1918e9e77898569228fbd5c517cca7fb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "outils/construire-paquets-relecture.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "72bfe6f1a33d2b60d4db8f5aa60dab53320345df0cd5c0df6aa89d6f324637b9"
+empreinte_apres = "c214b4117ffdfcdf7b3e81282412535f5dbf5d44ec633b8bc2367e38edb31a73"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "bc3bd67e4dd533d5f52a711d3edf76c23b8fea11dae13ac677db038f1365c1f6"
+empreinte_apres = "1536938a33af356d669f0594126e6993bc853a508e1aeb3f83fb441824514ab0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "outils/verifier-relecture-contenus.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "84e760cf8c9efdde73de28a76c1fea9388b6e58cf44692d366218535784cf9eb"
+empreinte_apres = "e4caf59fed1d87858433aa96dc8f4de1feb693d6cdef1e073676b16152eda0b1"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "sitemap.xml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "1fe0d0a61955f024f5c312cb62c35bfa4da77342b229fe073775033ebcdbd6b2"
+empreinte_apres = "84b59e1ee0436e9022d04ecf751d8c9cd1fa1fc82c3688dd6d6b749e9adcdd3c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "transparence.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "a6dfa35c2de34504aaaccf2c09c67cb1d592e4fedca37d4138bc77cf2335f046"
+empreinte_apres = "8d1905e18d126a50e7c6d03673984fb4df599945260491bc5dd5dec5f926f703"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "f41acac8765a28e69ba81b6571313ea08395ebbf805d74a4ccb7ba08ca18372b"
+empreinte_apres = "86f7f55742d64236ed4f0d7df812527e191ff7502b111b578f6a41d131028d21"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Traçabilité du lot « déclarer » : le journal reçoit l'entrée datée du 12 novembre 2026 avec ses contrôles réels et ses limites, le registre des avancées reçoit une 113e entrée traçable vers deux initiatives existantes du portefeuille (veille-savoirs-evolutifs, coherence-textes-publics) — la première version citait deux identifiants inexistants et le générateur l'a refusée —, et ÉVA est régénérée : 515 entrées, 324 nœuds, 739 arêtes."
+limite = "Ces fichiers sont générés ou rédigés après coup : la signature atteste qu'ils décrivent le lot réellement exécuté, pas qu'ils en constituent une preuve indépendante. La vérification d'ÉVA --verifier passe, mais elle ne juge pas la pertinence des liens ; elle vérifie la cohérence des compteurs et de l'index. Aucune de ces entrées ne promeut un statut ni ne remplace une relecture humaine."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "333852be26b31dfa4749bc417e7d732491c01d2d5bc4c329f1dbdac5c80bf58d"
+empreinte_apres = "5fae6d9e7883aa5f4178f880137e3bcacfe380806f07d5f8e03227655fb78f0e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Traçabilité du lot « déclarer » : le journal reçoit l'entrée datée du 12 novembre 2026 avec ses contrôles réels et ses limites, le registre des avancées reçoit une 113e entrée traçable vers deux initiatives existantes du portefeuille (veille-savoirs-evolutifs, coherence-textes-publics) — la première version citait deux identifiants inexistants et le générateur l'a refusée —, et ÉVA est régénérée : 515 entrées, 324 nœuds, 739 arêtes."
+limite = "Ces fichiers sont générés ou rédigés après coup : la signature atteste qu'ils décrivent le lot réellement exécuté, pas qu'ils en constituent une preuve indépendante. La vérification d'ÉVA --verifier passe, mais elle ne juge pas la pertinence des liens ; elle vérifie la cohérence des compteurs et de l'index. Aucune de ces entrées ne promeut un statut ni ne remplace une relecture humaine."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "0f73a2f68e88ae0d87816ac7ea8e4423b2fa28f62eadb90a8c9791e5e3b493be"
+empreinte_apres = "cddce7df39d6b55670605affbdbf0eb7dc88422474bb1542aa63b06c71517ab2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Traçabilité du lot « déclarer » : le journal reçoit l'entrée datée du 12 novembre 2026 avec ses contrôles réels et ses limites, le registre des avancées reçoit une 113e entrée traçable vers deux initiatives existantes du portefeuille (veille-savoirs-evolutifs, coherence-textes-publics) — la première version citait deux identifiants inexistants et le générateur l'a refusée —, et ÉVA est régénérée : 515 entrées, 324 nœuds, 739 arêtes."
+limite = "Ces fichiers sont générés ou rédigés après coup : la signature atteste qu'ils décrivent le lot réellement exécuté, pas qu'ils en constituent une preuve indépendante. La vérification d'ÉVA --verifier passe, mais elle ne juge pas la pertinence des liens ; elle vérifie la cohérence des compteurs et de l'index. Aucune de ces entrées ne promeut un statut ni ne remplace une relecture humaine."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "3010caf313ab9cbf76dc5c008497f9f150b60d087c4c8372ab998bfca6b6deaf"
+empreinte_apres = "6f444b66723b2a96aa50a370842d5ead8903c94f18ad6d14a2cea2548afcb21c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Traçabilité du lot « déclarer » : le journal reçoit l'entrée datée du 12 novembre 2026 avec ses contrôles réels et ses limites, le registre des avancées reçoit une 113e entrée traçable vers deux initiatives existantes du portefeuille (veille-savoirs-evolutifs, coherence-textes-publics) — la première version citait deux identifiants inexistants et le générateur l'a refusée —, et ÉVA est régénérée : 515 entrées, 324 nœuds, 739 arêtes."
+limite = "Ces fichiers sont générés ou rédigés après coup : la signature atteste qu'ils décrivent le lot réellement exécuté, pas qu'ils en constituent une preuve indépendante. La vérification d'ÉVA --verifier passe, mais elle ne juge pas la pertinence des liens ; elle vérifie la cohérence des compteurs et de l'index. Aucune de ces entrées ne promeut un statut ni ne remplace une relecture humaine."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "666efe5c6f2ff82a7b61b0528fb76984510878e0c905f0b01251488e6e949781"
+empreinte_apres = "377c106084ad9ac228a9c426644d0d633ff8064bb191ac2a400815f2d7aac175"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Traçabilité du lot « déclarer » : le journal reçoit l'entrée datée du 12 novembre 2026 avec ses contrôles réels et ses limites, le registre des avancées reçoit une 113e entrée traçable vers deux initiatives existantes du portefeuille (veille-savoirs-evolutifs, coherence-textes-publics) — la première version citait deux identifiants inexistants et le générateur l'a refusée —, et ÉVA est régénérée : 515 entrées, 324 nœuds, 739 arêtes."
+limite = "Ces fichiers sont générés ou rédigés après coup : la signature atteste qu'ils décrivent le lot réellement exécuté, pas qu'ils en constituent une preuve indépendante. La vérification d'ÉVA --verifier passe, mais elle ne juge pas la pertinence des liens ; elle vérifie la cohérence des compteurs et de l'index. Aucune de ces entrées ne promeut un statut ni ne remplace une relecture humaine."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "00bd19cc598bdb770549ed7aec6497ef77c856eaea554b5af52af1886836335c"
+empreinte_apres = "e589c32510c196f20fc6cb5dc8680d1927ab07cbbf5e19bf5748e7b69a1fb84e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Traçabilité du lot « déclarer » : le journal reçoit l'entrée datée du 12 novembre 2026 avec ses contrôles réels et ses limites, le registre des avancées reçoit une 113e entrée traçable vers deux initiatives existantes du portefeuille (veille-savoirs-evolutifs, coherence-textes-publics) — la première version citait deux identifiants inexistants et le générateur l'a refusée —, et ÉVA est régénérée : 515 entrées, 324 nœuds, 739 arêtes."
+limite = "Ces fichiers sont générés ou rédigés après coup : la signature atteste qu'ils décrivent le lot réellement exécuté, pas qu'ils en constituent une preuve indépendante. La vérification d'ÉVA --verifier passe, mais elle ne juge pas la pertinence des liens ; elle vérifie la cohérence des compteurs et de l'index. Aucune de ces entrées ne promeut un statut ni ne remplace une relecture humaine."
+
+[[edition]]
+chemin = "docs/rd/grilles-dynamiques.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "4e920573d31d84a5d2251047420abc8e91b98fde48f0a64f30c3f4b4a7b3da37"
+empreinte_apres = "83f97758dc586ce2496e1aeda06eba33860f90ea5e5611db8d8579ddc622001b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py"]
+constat = "Trois capacités du registre des grilles étaient devenues fausses avec la nouvelle fiche : le catalogue passe de 107 à 108 cartes, la liste de leçons de la page fraude de 5 à 6, et une grille de liens de 7 à 8. La grille du nouveau bloc, .ai-fraud-declare-steps, est déclarée à 6 éléments, 3 colonnes et 300 px de minimum, avec un motif d'écart écrit contre la proposition de 350 px du modèle. Le relevé du modèle confirme l'ensemble : plus aucun écart refusé, et cinq minima adoptés sont désormais nommés avec leur motif."
+limite = "Aucune mesure de navigateur : les 300 px et le motif d'écart sont un raisonnement sur la place calculée par le modèle (1 087,6 px), pas un relevé de rendu. Le registre ne dit pas que le dessin est beau ni lisible à 320 px ; il dit seulement que la feuille et le registre s'accordent sur le nombre de cartes et le comportement des colonnes."

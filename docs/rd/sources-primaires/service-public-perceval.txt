@@ -1,0 +1,14 @@
+id = service-public-perceval
+url = https://www.service-public.gouv.fr/particuliers/vosdroits/F31324
+date = 2026-11-12
+empreinte = 4528b36e2b243cbb5d095b21fce9e1d27a03368ca1032f99778c16b644d988c5
+---
+Fraude à la carte bancaire — page vérifiée le 13 février 2026.
+
+« Vous devez ensuite contacter votre banque pour vous faire rembourser la somme concernée. »
+
+Réponse de la page à « Que faire si je suis victime d’une fraude à la carte bancaire sur internet ? » : « En priorité, je fais opposition à ma carte, auprès de ma banque qui me remettra un numéro d’opposition à conserver pour la suite de la procédure. Ensuite, je signale la fraude sur service-public.fr. À la fin de ce signalement, j’obtiendrai un récépissé, qui facilitera mes démarches de régularisation auprès de ma banque. »
+
+« Pour accéder à la démarche en ligne sur service-public, il faut obligatoirement que je m’identifie avec FranceConnect. » « Ma demande sera traitée par la gendarmerie nationale et je recevrai sous quelques heures un email accusant réception de la déclaration. »
+
+Texte recopié à la main depuis la page lue le 12 novembre 2026.

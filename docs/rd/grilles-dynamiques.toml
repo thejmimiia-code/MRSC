@@ -76,8 +76,8 @@ raison = "Six domaines de vie : trois colonnes au conteneur maximal, deux dès q
 selecteur = ".learning-catalogue-grid"
 colonnes = 3
 minimum = 370
-items = [107]
-raison = "Catalogue des apprentissages : trois colonnes au conteneur maximal, puis deux, puis une. Capacité portée de 96 à 104 le 5 novembre 2026, puis à 107 le 6 novembre 2026, quand trois fiches de repère 3 ou 4 ont complété trois sujets qui n'en avaient qu'une ; le nombre de cartes vient du catalogue, jamais d'une saisie. La carte mesure 250 px de haut : elle pouvait descendre plus étroitement que 370 sans se tasser, mais la règle garde les trois colonnes de la conception."
+items = [108]
+raison = "Catalogue des apprentissages : trois colonnes au conteneur maximal, puis deux, puis une. Capacité portée de 96 à 104 le 5 novembre 2026, puis à 107 le 6 novembre 2026, puis à 108 le 12 novembre 2026 (fiche sur la déclaration d’une fraude), quand trois fiches de repère 3 ou 4 ont complété trois sujets qui n'en avaient qu'une ; le nombre de cartes vient du catalogue, jamais d'une saisie. La carte mesure 250 px de haut : elle pouvait descendre plus étroitement que 370 sans se tasser, mais la règle garde les trois colonnes de la conception."
 
 [[grille]]
 selecteur = ".learning-level-grid"
@@ -97,7 +97,7 @@ raison = "Écosystème des ressources : même écriture que les niveaux, dont il
 selecteur = ".link-grid"
 colonnes = 3
 minimum = 370
-items = [1, 2, 3, 4, 5, 6, 7]
+items = [1, 2, 3, 4, 5, 6, 7, 8]
 raison = "Grilles de liens : trois colonnes au conteneur maximal, deux dès 1 132 px — la cascade attendait 920 px pour passer à deux, ce qui donnait des liens de 450 px à côté de liens de 150."
 
 [[grille]]
@@ -121,6 +121,14 @@ minimum = 360
 items = [4]
 raison = "Quatre réflexes en deux colonnes : la carte vaut 537 px au conteneur maximal, la grille passe de une à deux colonnes sans jamais traverser trois — 2 × 2, équilibré, sans carte orpheline."
 motif_ecart = "Le plafond du modèle pour deux colonnes (480 px) garderait la forme au conteneur maximal en repoussant la paire jusqu'à 973,6 px de place, donc une seule colonne sur presque tous les écrans ; 360 px donne 2 × 2 dès que les deux cartes tiennent, sans jamais traverser trois colonnes — et sans laisser la quatrième étape seule, ce que 270 px faisait de 958 à 2 560 px de fenêtre. Mesuré le 2 novembre 2026."
+
+[[grille]]
+selecteur = ".ai-fraud-declare-steps"
+colonnes = 3
+minimum = 300
+items = [6]
+raison = "Six étapes de déclaration : trois colonnes au conteneur maximal (6 = 2 × 3), deux quand la place manque (6 = 3 × 2), une seule en dessous — sans aucun palier de largeur, et sans carte orpheline dans les deux premiers cas."
+motif_ecart = "La règle proposerait 350 px pour trois colonnes dans les 1 087,6 px de la place réelle ; le registre adopte 300 px. Les six étapes portent un libellé court (un numéro et un mot) puis un titre et une phrase : à 350 px la piste laisserait 1 087 − 3 × 350 − 2 × 13,6 ≈ 20 px de reste, soit trois colonnes presque jointives ; à 300 px, la même place garde trois colonnes avec de l’air et retombe à deux colonnes plus tôt sur les écrans moyens, ce qui est le dessin voulu. Décision prise le 12 novembre 2026, sans mesure de navigateur : les valeurs sont des candidats, pas une correction mesurée."
 
 [[grille]]
 selecteur = ".home-voice-grid"
@@ -206,9 +214,9 @@ motif_ecart = "La règle, dans les 728 px reçus au seuil de 760, proposerait 36
 selecteur = ".ai-fraud-lesson-list"
 colonnes = 2
 minimum = 380
-items = [5]
+items = [6]
 seuil_une_colonne = 760
-raison = "Cinq leçons de la page fraude : trois colonnes feraient 3 + 2, deux colonnes font 2 + 2 + 1 — le dessin existant, que le minimum conserve."
+raison = "Six leçons de la page fraude depuis le 12 novembre 2026 (la fiche sur la déclaration s’ajoute aux cinq) : deux colonnes font 2 + 2 + 2, sans carte orpheline ; trois colonnes feraient 3 + 3, ce qui tasserait les libellés longs des fiches."
 
 # — Dernière grille égale sous palier, 31 octobre 2026 : `.ai-path-steps` passe
 # de cinq colonnes fixes à une largeur de piste. La cascade imposait

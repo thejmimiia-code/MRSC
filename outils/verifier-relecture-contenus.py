@@ -9,7 +9,8 @@ Ce script rend cette étape exécutable et vérifiable.
 Ce qu'il vérifie, mécaniquement :
   - le registre `docs/rd/relecture-contenus.toml` est daté, attribué à un agent
     et ne se présente pas comme une relecture humaine ;
-  - chaque source est un éditeur primaire (MDN, W3C, dépôt W3C), avec une URL,
+  - chaque source est un éditeur primaire (MDN, W3C, dépôt W3C, administrations
+    et plateformes nationales françaises), avec une URL,
     une date de consultation, une ancre courte, ce qu'elle permet d'affirmer et
     ses limites ;
   - chaque affirmation est rattachée à des sources primaires existantes ou à une
@@ -18,7 +19,7 @@ Ce qu'il vérifie, mécaniquement :
     chaque entrée de chaîne publique existe réellement dans le fichier cité ;
   - les corrections issues des sources sont encore en place (seuil 0,04045 de la
     luminance WCAG 2.2, comparaison sans arrondi des seuils de contraste) ;
-  - le rapport daté existe, cite toutes les sources et distingue relecture
+  - les rapports datés existent, citent toutes les sources et distinguent relecture
     d'agent, validation humaine, expertise et avis juridique ;
   - le registre des relectures HUMAINES reste vide : cette étape ne promeut
     aucune fiche, n'écrit aucune entrée et n'embellit aucun statut ;
@@ -50,14 +51,38 @@ REGISTRE = RACINE / "docs" / "rd" / "relecture-contenus.toml"
 REGISTRE_HUMAIN = RACINE / "docs" / "apprentissage" / "relectures.toml"
 OUTIL_HUMAIN = RACINE / "outils" / "registre-relecture.py"
 RAPPORT = RACINE / "docs" / "rd" / "relecture-apparences-2026-11-07.md"
+#: Rapports de relecture par agent. Le premier est celui du lot des apparences,
+#: dont les passages attendus ci-dessous sont vérifiés mot pour mot. Les suivants
+#: couvrent d'autres lots : la porte exige qu'ils citent **toutes** les sources du
+#: registre, y compris les leurs, plutôt que de faire grossir indéfiniment un
+#: rapport unique. Un lot sans rapport daté ne passe donc pas en silence : au
+#: moins un des rapports doit citer chaque source et chaque URL.
+RAPPORTS = (
+    RAPPORT,
+    RACINE / "docs" / "rd" / "relecture-fraudes-declaration-2026-11-12.md",
+)
 JS = RACINE / "assets" / "js" / "site.js"
 CSS = RACINE / "assets" / "css" / "site.css"
 PORTE_APPARENCES = RACINE / "outils" / "verifier-apparences.py"
 WORKFLOW = RACINE / ".github" / "workflows" / "verification.yml"
 INVENTAIRE = RACINE / "docs" / "rd" / "inventaire-controles.md"
 
-DOMAINES_SURS = {"developer.mozilla.org", "www.w3.org", "w3.org", "github.com"}
-EDITEURS_ATTENDUS = ("MDN Web Docs", "W3C")
+#: Domaines admis comme éditeurs primaires. Élargi le 12 novembre 2026 au lot
+#: « déclarer » : une procédure de déclaration de fraude ne se documente pas
+#: ailleurs que sur les sites des administrations qui la reçoivent. L'élargissement
+#: ne dispense d'aucun contrôle : extrait daté, ancre de cinq mots au plus,
+#: « permet » et « limites » explicites restent exigés pour chaque source.
+DOMAINES_SURS = {
+    "developer.mozilla.org", "www.w3.org", "w3.org", "github.com",
+    "www.service-public.gouv.fr", "service-public.fr", "service-public.gouv.fr",
+    "www.cybermalveillance.gouv.fr", "cybermalveillance.gouv.fr",
+    "www.signal-spam.fr", "signal-spam.fr", "www.33700.fr", "33700.fr",
+}
+EDITEURS_ATTENDUS = (
+    "MDN Web Docs", "W3C",
+    "Service-Public.gouv.fr", "Cybermalveillance.gouv.fr",
+    "Signal Spam", "33700",
+)
 NATURES = {"fait-source", "mesure-interne", "proposition"}
 VERDICTS = {"concordant", "corrige", "retire", "sans-objet"}
 DATE_ATTENDUE = dt.date(2026, 11, 7)
@@ -115,6 +140,15 @@ def verifier() -> list[str]:
         erreurs.append("meta : version attendue : 1")
     if meta.get("auteur") != "agent":
         erreurs.append("meta : auteur doit être « agent » (jamais une personne)")
+    # Le lot du 7 novembre 2026 garde sa date : elle date la lecture des
+    # apparences, pas la dernière édition du registre. Les lots postérieurs
+    # ajoutent leur date dans `dates_lots` et ne réécrivent pas l'histoire.
+    dates_lots = [DATE_ATTENDUE]
+    for brute in meta.get("dates_lots") or []:
+        if isinstance(brute, dt.date):
+            dates_lots.append(brute)
+        else:
+            erreurs.append(f"meta : dates_lots illisible : {brute!r}")
     if meta.get("date_relecture") != DATE_ATTENDUE:
         erreurs.append("meta : date_relecture attendue : 2026-11-07")
     statut = str(meta.get("statut", ""))
@@ -280,14 +314,22 @@ def verifier() -> list[str]:
                         "essai avec des personnes"):
             if morceau not in contenu:
                 erreurs.append(f"rapport : passage attendu absent : {morceau!r}")
-        for source in sources:
-            if str(source.get("id", "")) not in contenu:
-                erreurs.append(f"rapport : source non citée : {source.get('id')}")
-        for source in sources:
-            if str(source.get("url", "")) not in contenu:
-                erreurs.append(f"rapport : URL non citée : {source.get('id')}")
         if "validé par une personne" in contenu:
             erreurs.append("rapport : ne pas revendiquer une validation par une personne")
+
+    # Chaque source du registre doit être citée, identifiant ET URL, dans au moins
+    # un rapport daté. C'est ce qui relie une source à la lecture qui l'a faite.
+    textes_rapports = []
+    for chemin in RAPPORTS:
+        if not chemin.is_file():
+            erreurs.append(f"rapport de relecture daté absent : {chemin.name}")
+            continue
+        textes_rapports.append(chemin.read_text(encoding="utf-8"))
+    for source in sources:
+        if not any(str(source.get("id", "")) in texte for texte in textes_rapports):
+            erreurs.append(f"rapport : source non citée : {source.get('id')}")
+        if not any(str(source.get("url", "")) in texte for texte in textes_rapports):
+            erreurs.append(f"rapport : URL non citée : {source.get('id')}")
 
     # L'étape est câblée et inventoriée : elle ne peut pas disparaître en silence.
     workflow = WORKFLOW.read_text(encoding="utf-8") if WORKFLOW.is_file() else ""

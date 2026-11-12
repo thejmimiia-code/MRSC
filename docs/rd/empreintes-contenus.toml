@@ -432,17 +432,17 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "README.md"
-empreinte = "4f8e341c68c63ff77c6844939aee848866963e98bae5a136d6917540d00f279c"
-etat = "reference-initiale"
+empreinte = "ff09f6a54d1e2fe01e4a3e0042bdbb7cf7e1831ec5e7a80d533c32cc73e7d629"
+etat = "relu-par-agent"
 apostrophes = 14
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "anglais-aventure.html"
-empreinte = "1a97f406ecc687325b4b513125c890d00b6664359e6f76878dd0eb234afdaeb0"
-etat = "reference-initiale"
+empreinte = "3306f3637b623a798d20a3075df5ed12bc6a76eca4d36605fb446f2f8e6be0c0"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "api/bulle.py"
@@ -565,10 +565,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "apprendre.html"
-empreinte = "21980bd3924d6ef8b8b18ba2a510685a69cb558f43e989b1be90edc79f475b60"
-etat = "reference-initiale"
+empreinte = "905e5a9e063f2156bebb2f397e22a8c6f0c5ddc035dd0f9f1830990563f5adbd"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "apprendre/fiches/apprendre-methode.html"
@@ -1068,6 +1068,13 @@ apostrophes = 0
 date_derniere_relecture = 2026-11-10
 
 [[unite]]
+chemin = "apprendre/fiches/numerique-declarer-fraude.html"
+empreinte = "4c764a4648e40e04cb7eca7a987ae79f5961528080bd6f1e0883e2e344dcdc1e"
+etat = "reference-initiale"
+apostrophes = 0
+date_reference = 2026-11-12
+
+[[unite]]
 chemin = "apprendre/fiches/numerique-formuler-recherche.html"
 empreinte = "8d7f22886575d24bd5ba95081808bd906818a48aa120190828f465621fbb4f98"
 etat = "relu-par-agent"
@@ -1328,10 +1335,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/css/site.css"
-empreinte = "22f9aa4d515f6a7e66c62f3bc34b28b9bd261b28c64a30323ff761828b794ba7"
+empreinte = "f2d93d5a18ac421cb08cb096817760ebd8f4f60d6c2933baed0c0b366a51ccc2"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "assets/js/anglais-aventure-data.js"
@@ -1349,10 +1356,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/js/apprentissage-aventure-data.js"
-empreinte = "d4cb4843323b97e1ccd497a11f265463ac8f66cf4bbee81e7bd024668e33f0b0"
-etat = "reference-initiale"
+empreinte = "d01dc827f7963dd31ac6fc9c9ee41eec0af360063eb16eef93e3d75df0728820"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "assets/js/apprentissage.js"
@@ -1391,45 +1398,45 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/apprentissage/audit-automatique.md"
-empreinte = "2ac8d24bf41e93039f13a751dac2a0dbfd761179255d749e6d6bd4bb59d43bac"
-etat = "reference-initiale"
+empreinte = "a9627dcae49db8f1abc4df923652a1d011563fa277fa0931e7f673299ee6526c"
+etat = "relu-par-agent"
 apostrophes = 28
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/apprentissage/catalogue.toml"
-empreinte = "9ad245e350dc06603e602f7c2712cdae5814aaad0c1919110fa4fd38c064938b"
-etat = "reference-initiale"
+empreinte = "82e518a81048df8ecc4074ead13e8812c2bd30f2c74114a9c09ef53b422492c7"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/apprentissage/file-relecture.md"
-empreinte = "22b89a4d13bed311d3efd0b024bfac451a22720d16a7ab155e51ca65ef51da1a"
-etat = "reference-initiale"
+empreinte = "ac01c774000568585eacc1e91e465428f97a16c601e642665efc6dfc5899972e"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/apprentissage/grille-relecture.md"
-empreinte = "f948e02008e2e0289bf41fc246bab4c1d52c72cc269c43d2e65db2e826a90703"
+empreinte = "9ed677281fa311763ba02c2721c46068698523b1094b33e03d6d4a3c31083172"
 etat = "relu-par-agent"
 apostrophes = 11
-date_derniere_relecture = 2026-11-11
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/apprentissage/objectif-1000.md"
-empreinte = "2e874da1feea8e85feff1f3481f415f59483bb32634691055dc50d016fc78d0e"
-etat = "reference-initiale"
+empreinte = "37d20e7b29b34a7a6569e0f13f2b9b5815587365f0c3bc793b9774287428f356"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/apprentissage/paquets-relecture.md"
-empreinte = "2b378e32ee2a5d77e6a720fee0b56e1698c14d9e95c4c9d0ba78f35ff767e938"
-etat = "reference-initiale"
-apostrophes = 68
-date_reference = 2026-11-09
+empreinte = "f657459b8668416ec92235e4c9d68ddd18001c09848caaf0e2b9dc10d6101823"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/apprentissage/plan-1000.toml"
@@ -1440,10 +1447,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/apprentissage/referentiel.toml"
-empreinte = "d3bc4c60a98b8ae14daaa68282851abcb0d9d19e658b30d821c24397ca2752bf"
-etat = "reference-initiale"
+empreinte = "f42d6b363b1d62d7b3f6db97a2d4631a0c6937db0bdac76e6c85aadeeba6d2e0"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/apprentissage/relectures.toml"
@@ -1482,10 +1489,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/couverture-savoirs-base.md"
-empreinte = "f78d25aa6b02188be1fdb5030bac7874f4500511ff48dc9f64976bf8f6ffa3c7"
-etat = "reference-initiale"
+empreinte = "a4b9d22970f60f256f22c576278ae979d904e64220ff8068b3a71ece7cc43822"
+etat = "relu-par-agent"
 apostrophes = 1
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/diagnostic-404-vercel.md"
@@ -1538,10 +1545,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd-anglais-aventure.md"
-empreinte = "fe4ea4f8e74233a1616e9d51f4c995fd063385337a08253b4466e5d4658bcde0"
-etat = "reference-initiale"
+empreinte = "e7ac39b5634c018a499fb725d05b061ce42e2a2d0923f8f64838b1bfed8a5312"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd-audit-securite-optimisation.md"
@@ -1552,10 +1559,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd-coherence-visuelle-editoriale.md"
-empreinte = "68cd789f87f5ee93dd359d9313872e09a89d7abf8a05d54f6d3a4fcf48fa800a"
-etat = "reference-initiale"
+empreinte = "5241dded58db0a2577de34831df0fa9ed2e1c0c6b983d682ae3fc63c4aaeaf0c"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd-confidentialite-rgpd.md"
@@ -1566,24 +1573,24 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd-ia-usages-fraudes.md"
-empreinte = "eecc3f9ee7c9a799e88577958525d8961d6e74abfbbb9db8146e304bc2a3a079"
-etat = "reference-initiale"
+empreinte = "ae68e1b282280a04183e3fe5b2f4237178f13c5965ff8784030760c9abb5c1ce"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd-innovation-continue.md"
-empreinte = "e5f89faced467803a85fd0aed8797dfad46aaa3e564972642dbc1fe77da06c9b"
-etat = "reference-initiale"
+empreinte = "7c4aaff901ab702ffecf556e893fd8d558f5f12c2bdd7fbb121aa90f808879ff"
+etat = "relu-par-agent"
 apostrophes = 93
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd-parcours-apprentissage.md"
-empreinte = "8439107ca2727bbb26868f6e71818b05426e7ef12899b816d88cba6a0e91910b"
-etat = "reference-initiale"
+empreinte = "4e4652b1781b354259b7373b577e78004f4a6ad1c32478144ce3ed7c6d6fb88d"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd-plan-global-consolidation.md"
@@ -1650,14 +1657,14 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/avancees.md"
-empreinte = "f41acac8765a28e69ba81b6571313ea08395ebbf805d74a4ccb7ba08ca18372b"
+empreinte = "86f7f55742d64236ed4f0d7df812527e191ff7502b111b578f6a41d131028d21"
 etat = "relu-par-agent"
 apostrophes = 1240
 date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/avancees.toml"
-empreinte = "333852be26b31dfa4749bc417e7d732491c01d2d5bc4c329f1dbdac5c80bf58d"
+empreinte = "5fae6d9e7883aa5f4178f880137e3bcacfe380806f07d5f8e03227655fb78f0e"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
@@ -1678,10 +1685,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/carte-lacunes.md"
-empreinte = "e7add6c1a9d899b883dccf3af09e67ed3e85c9ca950765c7c03f79d6c80bfd85"
+empreinte = "adb743798fb1c98e6d70ab984b507a1003c1f52acb1e2e44c870ef414c3469c8"
 etat = "relu-par-agent"
 apostrophes = 15
-date_derniere_relecture = 2026-11-11
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/confrontations-sources.md"
@@ -1727,7 +1734,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/graphe.dot"
-empreinte = "0f73a2f68e88ae0d87816ac7ea8e4423b2fa28f62eadb90a8c9791e5e3b493be"
+empreinte = "cddce7df39d6b55670605affbdbf0eb7dc88422474bb1542aa63b06c71517ab2"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
@@ -1741,14 +1748,14 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "3010caf313ab9cbf76dc5c008497f9f150b60d087c4c8372ab998bfca6b6deaf"
+empreinte = "6f444b66723b2a96aa50a370842d5ead8903c94f18ad6d14a2cea2548afcb21c"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/eva/plan.md"
-empreinte = "666efe5c6f2ff82a7b61b0528fb76984510878e0c905f0b01251488e6e949781"
+empreinte = "377c106084ad9ac228a9c426644d0d633ff8064bb191ac2a400815f2d7aac175"
 etat = "relu-par-agent"
 apostrophes = 72
 date_derniere_relecture = 2026-11-12
@@ -1783,10 +1790,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/grilles-dynamiques.toml"
-empreinte = "4e920573d31d84a5d2251047420abc8e91b98fde48f0a64f30c3f4b4a7b3da37"
-etat = "reference-initiale"
+empreinte = "83f97758dc586ce2496e1aeda06eba33860f90ea5e5611db8d8579ddc622001b"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/groupes-statistiques-2026-10-24.md"
@@ -1825,7 +1832,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "00bd19cc598bdb770549ed7aec6497ef77c856eaea554b5af52af1886836335c"
+empreinte = "e589c32510c196f20fc6cb5dc8680d1927ab07cbbf5e19bf5748e7b69a1fb84e"
 etat = "relu-par-agent"
 apostrophes = 2405
 date_derniere_relecture = 2026-11-12
@@ -1909,10 +1916,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/poids-et-sobriete-numerique.md"
-empreinte = "5063554bef492fdf8be4305c7c0fa582654735e242ab05303e32016549c20764"
-etat = "reference-initiale"
+empreinte = "a640aaf86c40f04b9e84653d4109c7002fb8695adf5e6cb5703feeda35b9b2ee"
+etat = "relu-par-agent"
 apostrophes = 92
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/poids-pages.md"
@@ -1923,10 +1930,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/portefeuille.toml"
-empreinte = "c3f82a933326a3af80ee182fa25a38b08fd39ef67f39c13c9d34d3e5a9fc4645"
+empreinte = "cdb022a1bfb9cbbc62e9677160b88e9e25fdc177ebcfae6277ed43b9542373db"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/presentations-personnalisees.md"
@@ -1937,10 +1944,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/prospective-2027-2030.md"
-empreinte = "047e011911712f08070679192a985932e7401ee4873e0ecb0a445e2804631061"
-etat = "reference-initiale"
+empreinte = "0ffdd1212020011d1599339c9321237e5af1070d7171d85ffb086d3c0d7c16c4"
+etat = "relu-par-agent"
 apostrophes = 198
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/prospective-lacunes-2027.md"
@@ -2007,10 +2014,17 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "docs/rd/relecture-contenus.toml"
-empreinte = "e9da687eed9ac39e37d2a91ed28d44ad5140e675c3c93bd5b66dc05dda979b9a"
+empreinte = "7b5c02ec879df102e5867b58709f7a22d6c1e990dfc36b26736b1477fcfa1e4a"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-12
+
+[[unite]]
+chemin = "docs/rd/relecture-fraudes-declaration-2026-11-12.md"
+empreinte = "cd1c97b0d3ff314782454c859ed351f3f5a1c7139ca68fec8d0d209ea1d37254"
 etat = "reference-initiale"
 apostrophes = 0
-date_reference = 2026-11-09
+date_reference = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/releve-affichages-2026-11-06.json"
@@ -2399,24 +2413,24 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "ia-societe.html"
-empreinte = "a5d9057d9e4d09fb5491c48660194d6d15d844c4f843282a49229ed41c5fdf00"
+empreinte = "67daa4fbd682d086d179f60c0c0022f0a3d1123ccffd230eb1efd925202d727b"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "index.html"
-empreinte = "0790e676f5e11d18a6b51af2381b6ab09b571c6be491cdff43b024460ff7dc0e"
+empreinte = "517d1e2a6f89b3d2f9a563d0d12a24a597a907ccba3053c8c3fac461c68a2e11"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-11
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "liens-utiles.html"
-empreinte = "e8bf281791a0822562563090cfafcabc966ca845b6679b8843fddf7533fdbfbf"
-etat = "reference-initiale"
+empreinte = "e0d99f037a40ba6cd9eb51741bbe2b3e1918e9e77898569228fbd5c517cca7fb"
+etat = "relu-par-agent"
 apostrophes = 3
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "llms.txt"
@@ -2539,10 +2553,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/construire-paquets-relecture.py"
-empreinte = "72bfe6f1a33d2b60d4db8f5aa60dab53320345df0cd5c0df6aa89d6f324637b9"
-etat = "reference-initiale"
+empreinte = "c214b4117ffdfcdf7b3e81282412535f5dbf5d44ec633b8bc2367e38edb31a73"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "outils/construire-simulateur.py"
@@ -2700,10 +2714,10 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "outils/relire-contenus.py"
-empreinte = "bc3bd67e4dd533d5f52a711d3edf76c23b8fea11dae13ac677db038f1365c1f6"
+empreinte = "1536938a33af356d669f0594126e6993bc853a508e1aeb3f83fb441824514ab0"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "outils/serveur-local.py"
@@ -3351,10 +3365,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/verifier-relecture-contenus.py"
-empreinte = "84e760cf8c9efdde73de28a76c1fea9388b6e58cf44692d366218535784cf9eb"
-etat = "reference-initiale"
+empreinte = "e4caf59fed1d87858433aa96dc8f4de1feb693d6cdef1e073676b16152eda0b1"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "outils/verifier-resilience-statutaire.py"
@@ -3652,17 +3666,17 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "sitemap.xml"
-empreinte = "1fe0d0a61955f024f5c312cb62c35bfa4da77342b229fe073775033ebcdbd6b2"
-etat = "reference-initiale"
+empreinte = "84b59e1ee0436e9022d04ecf751d8c9cd1fa1fc82c3688dd6d6b749e9adcdd3c"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "transparence.html"
-empreinte = "a6dfa35c2de34504aaaccf2c09c67cb1d592e4fedca37d4138bc77cf2335f046"
-etat = "reference-initiale"
+empreinte = "8d1905e18d126a50e7c6d03673984fb4df599945260491bc5dd5dec5f926f703"
+etat = "relu-par-agent"
 apostrophes = 1
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "vercel.json"
