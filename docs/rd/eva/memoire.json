@@ -30,7 +30,7 @@
    "id": "court:3",
    "horizon": "court",
    "titre": "2026-11-12 — Accessibilité : trois modules pour les personnes handicapées, écrits ici",
-   "resume": "Signal : « Vois pour intégrer les modules inspiré de \"lisio\" si c'est pas libre de droit pour la partie PH, pour exemple le site internet de l'Isère…",
+   "resume": "Signal : « Vois pour intégrer les modules inspiré de \"lisio\" si c’est pas libre de droit pour la partie PH, pour exemple le site internet de l’Isère…",
    "source": "docs/rd/journal.md",
    "ligne": 5,
    "cache_de": "moyen:journal:2026-11-12:accessibilite-:-trois-modules-pour-les-personnes"
@@ -4292,7 +4292,7 @@
    "id": "moyen:journal:2026-11-12:accessibilite-:-trois-modules-pour-les-personnes",
    "horizon": "moyen",
    "titre": "2026-11-12 — Accessibilité : trois modules pour les personnes handicapées, écrits ici",
-   "resume": "Signal : « Vois pour intégrer les modules inspiré de \"lisio\" si c'est pas libre de droit pour la partie PH, pour exemple le site internet de l'Isère…",
+   "resume": "Signal : « Vois pour intégrer les modules inspiré de \"lisio\" si c’est pas libre de droit pour la partie PH, pour exemple le site internet de l’Isère…",
    "source": "docs/rd/journal.md",
    "ligne": 5
   },
@@ -4318,5 +4318,5 @@
   "moyen": 446,
   "long": 63
  },
- "poids_corpus": 2303716
+ "poids_corpus": 2303752
 }

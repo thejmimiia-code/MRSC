@@ -5523,3 +5523,15 @@ sources = []
 mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
 constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
 limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "c59dd4847232e84bf4c4323e52f35df07abdc63ffb14485e733e504378234d42"
+empreinte_apres = "098ea1996b375a109d85641422de7bb5ca99b45e46c90e87d579b1915753ee2f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Mémoire ÉVA régénérée depuis ses sources après la signature du journal et de l'avancée du 12 novembre : 520 entrées, 329 nœuds, 752 arêtes, index de 208028 octets pour un corpus de 2303752 octets (9,0 %). Le fichier est un rendu, pas une écriture à la main."
+limite = "Le rendu est recalculé par l'outil et non relu entrée par entrée ; un index de mémoire n'est ni une preuve d'apprentissage ni une validation de contenu."
