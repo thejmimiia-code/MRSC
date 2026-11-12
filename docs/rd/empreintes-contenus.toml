@@ -1706,17 +1706,17 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/couverture-sujets.md"
-empreinte = "246bf872d994c002bffa3a702c3189b1779c9704f6743a97a67230c0bd0c769d"
+empreinte = "ddf0d8e7be87455c5839bd583e8182e07d7f218bef5cb3ca476f48b3750417a3"
 etat = "relu-par-agent"
 apostrophes = 30
-date_derniere_relecture = 2026-11-11
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/decision-prospective.md"
-empreinte = "df52266a3c8acc8f8cdd91a95919c6bf48088447a570886625a759383d736df9"
-etat = "reference-initiale"
+empreinte = "5be66fef4863dc1b681dffa78d6fe36716298c378df51e0a8e6fe304906ea378"
+etat = "relu-par-agent"
 apostrophes = 67
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/derives-images.json"
@@ -1951,10 +1951,10 @@ date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/prospective-lacunes-2027.md"
-empreinte = "6148ea5fcd5600a89ee66689c8f8b400f5b3e384646d6d30a78ef69525ebab90"
+empreinte = "f19a4e0fdf6f7cfc3e343d630dd8eeb5d185bed88bf16884018bda9881554350"
 etat = "relu-par-agent"
 apostrophes = 69
-date_derniere_relecture = 2026-11-11
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/protocole-essais-usage.md"
@@ -2903,10 +2903,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test_mutations_couverture_sujets.py"
-empreinte = "5929999fdf0c3b15628547409a9f7b78dc4ea6c72b11bf291c42c11bdbf19900"
-etat = "reference-initiale"
+empreinte = "5e0517a3df8d34439e3eff8a77777e04258d53d9cc6bae1902b157754c2984fc"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "outils/test_mutations_files_relecture.py"
