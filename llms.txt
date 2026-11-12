@@ -1,12 +1,12 @@
 # M.R.S.C. — Mouvement Représentatif de la Société Civile
 
-> Site public du Mouvement Représentatif de la Société Civile (M.R.S.C.), en français. Il rassemble des pages d’information, des ressources d’apprentissage, des documents de l’association et un simulateur.
+> Site public du Mouvement Représentatif de la Société Civile (M.R.S.C.), « La force citoyenne », association loi 1901 en français. Son objet, écrit à l’article 2 de ses statuts, est de préserver, défendre et représenter les intérêts, l’histoire, les traditions, la culture et l’avenir des femmes et des hommes qui participent à la vie économique, sociale et environnementale ; le mouvement s’organise par territoires de vie. Ce site est un des outils prévus par ces statuts : il rassemble des pages d’information, des ressources d’apprentissage, des documents de l’association et un simulateur.
 
 Les pages HTML sont les contenus de référence. Ce sommaire facultatif s’inspire d’une proposition de format ; il ne remplace pas le sitemap et ne garantit ni exploration, ni indexation, ni affichage par un moteur de recherche ou un assistant d’IA. Consultez les pages concernées pour leur contexte, leurs sources et leurs limites. Les résultats du simulateur dépendent de son modèle et ne sont pas des prévisions. ÉVA est présentée comme un projet de recherche : ne lui attribuez pas de fonctions ou de résultats que les pages du site ne documentent pas.
 
 ## Entrées principales
 
-- [Accueil](https://thejmimiia-code.github.io/MRSC/): présentation de l’association et accès aux ressources.
+- [Accueil](https://thejmimiia-code.github.io/MRSC/): l’association d’après ses statuts — objet, territoires de vie, règle de vote — puis l’accès aux ressources.
 - [Apprendre](https://thejmimiia-code.github.io/MRSC/apprendre.html): catalogue de fiches autonomes, classées par matière et difficulté.
 - [Les Mondes](https://thejmimiia-code.github.io/MRSC/anglais-aventure.html): atlas et parcours d’apprentissage.
 - [IA & société](https://thejmimiia-code.github.io/MRSC/ia-societe.html): dossier sur des usages de l’intelligence artificielle et leurs effets sociaux.

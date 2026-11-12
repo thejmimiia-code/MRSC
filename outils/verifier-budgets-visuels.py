@@ -52,16 +52,22 @@ LONGUEUR_TITRE_CIBLE = 60
 # chiffre est un plafond, jamais une cible à atteindre.
 TITRES_EXCEPTIONNELS = {
     "index.html": (
-        73,
-        "titre aligné sur la formule du H1 « Apprendre, vérifier et débattre des sujets "
-        "qui nous concernent » à la demande de la personne responsable du site ; troncature "
-        "possible en résultats de recherche, arbitrage assumé et non mesuré",
+        # Plafond abaissé de 73 à 63 caractères le 11 novembre 2026 : la formule
+        # du H1 reprend l’objet de l’article 2 des statuts et raccourcit le titre.
+        63,
+        "titre aligné sur la formule du H1 « Préserver, défendre et représenter la société "
+        "civile », objet écrit à l’article 2 des statuts, à la demande de la personne "
+        "responsable du site le 11 novembre 2026 ; troncature possible en résultats de "
+        "recherche, arbitrage assumé et non mesuré",
     ),
 }
 
 # H1 de l'accueil : caractères, lignes estimées à 320 px, lignes estimées en grand
 # écran. Plafonds de non-régression, pas objectifs de conception.
-H1_BUDGET = {"index.html": (63, 6, 4)}
+# Plafonds abaissés le 11 novembre 2026 (63 → 53 caractères, 6 → 5 lignes à
+# 320 px, 4 → 3 en grand écran) après la réécriture de l’ouverture d’après les
+# statuts : un plafond ne peut que raccourcir, jamais servir de cible.
+H1_BUDGET = {"index.html": (53, 5, 3)}
 
 # Hypothèse de largeur moyenne d'un caractère, en em, pour la police système.
 AVANCE_MOYENNE_EM = 0.5

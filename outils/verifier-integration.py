@@ -930,13 +930,28 @@ def fichiers_du_site() -> None:
         "Aucune fonction d’EVA n’est annoncée" in apprentissage,
     )
     accueil = (RACINE / "index.html").read_text(encoding="utf-8")
+    # Le 11 novembre 2026 à 19 h 45 UTC, la personne a jugé que l’ouverture
+    # « ne représente pas l’association » : elle décrivait une fonction de site
+    # (« Apprendre, vérifier et débattre ») au lieu de l’objet écrit à l’article 2
+    # des statuts. Ce contrôle exige depuis les repères statutaires eux-mêmes,
+    # avec leurs numéros d’article, dans la copie locale du PDF
+    # `assets/documents/statuts-2020.pdf` (préambule, 1, 2, 3, 5, 11.1, 11.6,
+    # 11.8, 11.9). Il ne juge ni le ton, ni le rendu, ni une interprétation
+    # juridique : il vérifie que la page cite ce que les statuts disent.
     verifier(
-        "L’accueil présente clairement ce que propose le M.R.S.C",
+        "L’accueil représente l’association d’après ses statuts avant de présenter ses ressources",
         all(
             terme in accueil
             for terme in (
-                "Apprendre, vérifier et débattre",
-                "des sujets qui nous concernent",
+                "Préserver, défendre et représenter",
+                "la société civile",
+                "« La force citoyenne » : le M.R.S.C. est un mouvement représentatif de la société civile",
+                "les intérêts, l’histoire, les traditions, la culture et l’avenir",
+                "territoires de vie",
+                "s’informent, se conseillent, partagent, débattent et décident ensemble",
+                "seuls les membres concernés ou impactés votent",
+                "pépinière d’idées",
+                "Ce site est un de ces outils",
                 "des fiches",
                 "un dossier sur l’intelligence artificielle",
                 "un simulateur",
@@ -1013,9 +1028,27 @@ def fichiers_du_site() -> None:
                 "Nos expériences ont quelque chose à apporter.",
                 "a pour vocation de préserver, défendre et représenter les intérêts",
                 "Ses statuts placent au cœur de cette démarche le lien social",
+                # Article 2 : l’objet entier, pas ses seuls « intérêts ».
+                "l’histoire, les traditions, la culture et l’avenir des femmes et des hommes",
+                # Article 3 : les valeurs et la règle des minorités.
+                "humanité, liberté, égalité, fraternité, parité, accessibilité, laïcité, tolérance, respect, démocratie",
+                "Une minorité ne peut pas y diriger une majorité",
+                # Article 11.9 : les phases du fonctionnement.
+                "s’informer, comprendre, informer, débattre, analyser, proposer, contrôle d’éthique et synthèse, vote et mise en application",
+                # Article 11.8 : le format exigé d’une proposition.
+                "Ce n’est pas une compétition littéraire",
+                # Articles 3 et 5 : la règle de vote, dans les repères.
+                "<dt>Décision</dt>",
+                "Seuls les membres impactés et/ou concernés ont un droit de vote",
+                # Les trois angles de lecture, ancrés chacun dans un article.
                 "Partir de ce que nous vivons",
+                "article 11.1 des statuts",
                 "Mettre les savoirs en commun",
+                "articles 3 et 11.6 des statuts",
                 "Rendre les propositions compréhensibles",
+                "article 11.8 des statuts",
+                # La copie publique est une lecture, pas un avis juridique.
+                "pas une interprétation juridique",
                 'href="assets/documents/statuts-2020.pdf"',
                 'href="documents.html">Découvrir l’association</a>',
                 'href="#actions">Explorer les ressources</a>',

@@ -219,6 +219,70 @@ class TestIntegration(unittest.TestCase):
         self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
         self.assertIn("L’accueil ne remet ni l’appel aux dons ni la carte du siège social", resultat.stdout)
 
+    def test_slogan_des_statuts_retire_refuse(self) -> None:
+        """Retirer « La force citoyenne » de l’article 1 doit faire échouer la porte.
+
+        Le 11 novembre 2026 à 19 h 45 UTC, la personne a jugé que l’ouverture ne
+        représentait pas l’association. Le slogan écrit à l’article 1 des statuts
+        est un des repères qui l’ancre dans le document officiel.
+        """
+
+        def retirer(copie: Path) -> None:
+            banc_mutations.muter(
+                copie,
+                "index.html",
+                "« La force citoyenne » : le M.R.S.C. est un mouvement représentatif de la société civile",
+                "Le M.R.S.C. est un mouvement représentatif de la société civile",
+            )
+
+        resultat = executer(retirer)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn(
+            "ÉCHEC L’accueil représente l’association d’après ses statuts avant de présenter ses ressources",
+            resultat.stdout,
+        )
+
+    def test_objet_des_statuts_tronque_refuse(self) -> None:
+        """Réduire l’objet de l’article 2 aux seuls « intérêts » doit être refusé.
+
+        C’était la faute réelle de la page avant ce lot : l’objet était coupé de
+        l’histoire, des traditions, de la culture et de l’avenir.
+        """
+
+        def tronquer(copie: Path) -> None:
+            banc_mutations.muter(
+                copie,
+                "index.html",
+                "les intérêts, l’histoire, les traditions, la culture et l’avenir des femmes et des hommes "
+                "qui participent à la vie économique, sociale et environnementale.</p>",
+                "les intérêts des personnes qui participent à la vie économique, sociale et environnementale.</p>",
+            )
+
+        resultat = executer(tronquer)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn(
+            "ÉCHEC L’accueil relie la présentation de l’association aux statuts et aux trois repères de réflexion",
+            resultat.stdout,
+        )
+
+    def test_regle_de_vote_retiree_refusee(self) -> None:
+        """Effacer la règle des articles 3 et 5 — seuls les concernés ou impactés votent."""
+
+        def retirer(copie: Path) -> None:
+            banc_mutations.muter(
+                copie,
+                "index.html",
+                "<strong>seuls les membres concernés ou impactés votent</strong>",
+                "<strong>les membres votent</strong>",
+            )
+
+        resultat = executer(retirer)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn(
+            "ÉCHEC L’accueil représente l’association d’après ses statuts avant de présenter ses ressources",
+            resultat.stdout,
+        )
+
     def test_carte_siege_reintroduite_refuse(self) -> None:
         """Remettre la carte du siège doit faire échouer la porte."""
 

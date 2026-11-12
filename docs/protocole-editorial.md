@@ -13,7 +13,7 @@ La tonalité retenue est :
 - **ouverte aux expériences diverses**, sans supposer qu’un parcours, un territoire ou un point de vue représente tout le monde ;
 - **précise sur les rôles et les preuves** : association, réflexion, hypothèse, expérience testée et résultat documenté ne sont pas interchangeables.
 
-Le repère éditorial approuvé pour l’accueil est : **« Nos expériences ont quelque chose à apporter. »** Les trois angles de lecture sont **« Partir de ce que nous vivons »**, **« Mettre les savoirs en commun »** et **« Rendre les propositions compréhensibles »**. Ils inspirent les autres pages sans devenir des slogans à répéter mécaniquement.
+La formule d’ouverture de l’accueil reprend l’objet écrit à l’article 2 des statuts : **« Préserver, défendre et représenter la société civile. »** Elle a été proposée par l’agent le 11 novembre 2026 à la demande de la personne, qui jugeait que l’ouverture précédente ne représentait pas l’association ; elle reste à regarder à l’œil et ne vaut ni approbation éditoriale, ni interprétation juridique. Le repère éditorial approuvé pour l’accueil est : **« Nos expériences ont quelque chose à apporter. »** Les trois angles de lecture sont **« Partir de ce que nous vivons »**, **« Mettre les savoirs en commun »** et **« Rendre les propositions compréhensibles »**. Ils inspirent les autres pages sans devenir des slogans à répéter mécaniquement.
 
 Ne pas attribuer une position, une action, un résultat ou une décision officielle à l’association sans document ou validation qui l’atteste. Les propositions de rédaction, les pistes de débat et les travaux d’ÉVA restent identifiés comme tels.
 
