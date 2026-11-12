@@ -5235,3 +5235,15 @@ sources = []
 mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
 constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
 limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "67daa4fbd682d086d179f60c0c0022f0a3d1123ccffd230eb1efd925202d727b"
+empreinte_apres = "928279f6d787e037a8b74a752b8c5f9aa1b03b3ff4c63458206d530d6daf8767"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/versionner-css-ia.py"]
+constat = "Le lot « déclarer » a modifié assets/css/site.css sans régénérer la version de cache du CSS de la page IA : l'étape CI « Vérifier la version du CSS de la page IA » et, par ricochet, le contrôle navigateur des graphismes, échouaient. La version est régénérée par l'outil propriétaire (f2d93d5a18ac421c, sha256 tronqué du fichier) et la page ia-societe.html la porte."
+limite = "Cette signature couvre le réalignement d'une version de cache, pas une relecture nouvelle du contenu de la page : les phrases du bloc « déclarer » ont été signées séparément. Elle ne dit rien du rendu ni du cache réel d'un navigateur ; elle atteste seulement que le nom versionné correspond au fichier servi."
