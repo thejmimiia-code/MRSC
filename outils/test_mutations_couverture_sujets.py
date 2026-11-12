@@ -30,6 +30,7 @@ Usage :
 from __future__ import annotations
 
 import contextlib
+import re
 import sys
 import tempfile
 import unittest
@@ -70,7 +71,13 @@ class TestCouvertureSujets(unittest.TestCase):
 
     def test_carte_editee_a_la_main_refusee(self) -> None:
         def preparer(copie: Path) -> None:
-            banc_mutations.muter(copie, CARTE, "| Fiches du catalogue | 107 |", "| Fiches du catalogue | 108 |")
+            # Même règle que pour le relevé prospectif : le compte se lit dans
+            # le fichier, il ne se recopie pas. Une valeur figée cesse de mordre
+            # à la première fiche ajoutée.
+            carte = banc_mutations.cible(copie, CARTE).read_text(encoding="utf-8")
+            trouve = re.search(r"\| Fiches du catalogue \| (\d+) \|", carte)
+            assert trouve, "ligne « Fiches du catalogue » introuvable dans la carte"
+            banc_mutations.muter(copie, CARTE, trouve.group(0), f"| Fiches du catalogue | {int(trouve.group(1)) + 1} |")
 
         with copie_preparee(preparer) as copie:
             resultat = verifier(copie)
@@ -154,7 +161,15 @@ class TestCouvertureSujets(unittest.TestCase):
 
     def test_releve_prospectif_desynchronise_refuse(self) -> None:
         def preparer(copie: Path) -> None:
-            banc_mutations.muter(copie, NOTE, "| Fiches du catalogue | 107 |", "| Fiches du catalogue | 108 |")
+            # Le nombre de fiches vient du catalogue, il n'est pas recopié ici :
+            # la mutation lit le compte réel et le décale d'une unité. Un banc qui
+            # cite « 107 » en dur cesse de mordre dès la fiche suivante — c'est
+            # exactement ce qui est arrivé le 12 novembre 2026 à la 108e.
+            note = banc_mutations.cible(copie, NOTE).read_text(encoding="utf-8")
+            trouve = re.search(r"\| Fiches du catalogue \| (\d+) \|", note)
+            assert trouve, "ligne « Fiches du catalogue » introuvable dans le relevé prospectif"
+            reel = int(trouve.group(1))
+            banc_mutations.muter(copie, NOTE, trouve.group(0), f"| Fiches du catalogue | {reel + 1} |")
 
         with copie_preparee(preparer) as copie:
             resultat = verifier(copie)
