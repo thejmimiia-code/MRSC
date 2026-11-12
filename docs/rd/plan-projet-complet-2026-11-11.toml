@@ -8,7 +8,7 @@ auteur = "agent"
 date = "2026-11-11"
 heure_utc = "16:48"
 demande = "continues et fais toute la R et D, l’innovation et la prospective, avec un plan complet sur l’ensemble du projet"
-total = 589
+total = 590
 zones = 11
 initiatives = 19
 actions = 39
@@ -108,7 +108,7 @@ garde = "outils/verifier-rd-continue.py"
 etat = "19 initiatives suivies"
 prochaine_action = "Régénérer toute sortie dérivée depuis son générateur"
 limite = "Un document de travail n’est ni une décision ni une validation."
-nombre = 173
+nombre = 174
 
 [[zone]]
 id = "outils"

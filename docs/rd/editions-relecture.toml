@@ -5547,3 +5547,27 @@ sources = []
 mesures = ["outils/versionner-css-ia.py"]
 constat = "L'URL de la feuille de style de la page IA porte l'empreinte de contenu du CSS après le lot accessibilité : bf9eb33a7a0f42d5. Seul le paramètre de version change ; aucun texte de la page n'est modifié par ce geste."
 limite = "L'empreinte prouve que le cache du navigateur est invalidé, pas que la page est exacte ni que son rendu a été relu à l'œil. Aucun texte éditorial n'a été retouché ici."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "8abce9abd1a818ab76e2c919532bf847f716b5b6fb59cef3b47736d5304edb73"
+empreinte_apres = "769da923c34e056abeb54e1c72d0fd3e0ac24411780e2b0ddc19cd5a4a03bc9a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
+constat = "Compteurs du plan du projet recalculés depuis l'arbre réel après le lot accessibilité : 590 fichiers en 11 zones, dont 174 dans docs. La zone apprendre reste à 108 pages et docs à 174 fichiers ; les phrases du plan citent les trois lots du 12 novembre (fraude, plan, accessibilité) sans réécrire l'histoire."
+limite = "Le comptage porte sur les fichiers présents, pas sur leur qualité ni sur l'avancement du projet ; un plan à jour ne prouve ni justesse éditoriale ni validation humaine."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "cd8bf8c069044bdc7202aa219f162db38b9f860f61098c329bac593092f1c011"
+empreinte_apres = "8cc9c31edf48dfdb4b194d128d618b79593dc179ee94e43ff50d27814f6bcc12"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
+constat = "Compteurs du plan du projet recalculés depuis l'arbre réel après le lot accessibilité : 590 fichiers en 11 zones, dont 174 dans docs. La zone apprendre reste à 108 pages et docs à 174 fichiers ; les phrases du plan citent les trois lots du 12 novembre (fraude, plan, accessibilité) sans réécrire l'histoire."
+limite = "Le comptage porte sur les fichiers présents, pas sur leur qualité ni sur l'avancement du projet ; un plan à jour ne prouve ni justesse éditoriale ni validation humaine."
