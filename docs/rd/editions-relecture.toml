@@ -5535,3 +5535,15 @@ sources = []
 mesures = ["outils/memoire-eva.py"]
 constat = "Mémoire ÉVA régénérée depuis ses sources après la signature du journal et de l'avancée du 12 novembre : 520 entrées, 329 nœuds, 752 arêtes, index de 208028 octets pour un corpus de 2303752 octets (9,0 %). Le fichier est un rendu, pas une écriture à la main."
 limite = "Le rendu est recalculé par l'outil et non relu entrée par entrée ; un index de mémoire n'est ni une preuve d'apprentissage ni une validation de contenu."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "928279f6d787e037a8b74a752b8c5f9aa1b03b3ff4c63458206d530d6daf8767"
+empreinte_apres = "6163d4fa0c8aba170fa7a72422e8f6d79eed2adc88aeffe2b0bac74dc5485024"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/versionner-css-ia.py"]
+constat = "L'URL de la feuille de style de la page IA porte l'empreinte de contenu du CSS après le lot accessibilité : bf9eb33a7a0f42d5. Seul le paramètre de version change ; aucun texte de la page n'est modifié par ce geste."
+limite = "L'empreinte prouve que le cache du navigateur est invalidé, pas que la page est exacte ni que son rendu a été relu à l'œil. Aucun texte éditorial n'a été retouché ici."
