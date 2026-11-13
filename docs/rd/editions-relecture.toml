@@ -7983,3 +7983,15 @@ sources = []
 mesures = ["outils/relire-contenus.py", "outils/test_mutations_relire_contenus.py", "outils/mesurer-arbre-accessibilite.cjs", "outils/arbre-accessibilite.py"]
 constat = "Le journal consigne deux incidents du meme geste : la porte de relecture qui prenait une ligne reecrite pour une source nouvelle, corrigee par une memoire d'URL dans le manifeste avec un cas de banc qui mord, et un cas de banc qui a ecrit dans le vrai index.html a travers le lien symbolique de la copie jetable, corrige par banc_mutations.cible. L'inventaire des controles passe a 534 unites sous empreinte et nomme les deux cas de banc ajoutes."
 limite = "Ces lignes racontent ce que l'agent a mesure ; elles ne valent ni relecture humaine, ni audit, ni essai aupres de personnes. Les chiffres du releve sont ceux de Chromium seul, a une largeur, sur un etat par page."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "82930dc16301e79d0cf95281c04a208194a635c9fa6377f1e00d2e5d40089bb8"
+empreinte_apres = "fa9e1fd7cc3665befc16d3fb530ff1dcf3f1a7c35199ef7ab0970aa12329863c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py", "docs/rd/journal.md", "docs/rd/avancees.toml", "docs/rd/arbre-accessibilite-2026-11-13.md"]
+constat = "Index d'EVA regenere apres les dernieres editions : 529 entrees, 334 noeuds, 758 aretes, rappel mesure a 21,73 ms de mediane. Aucune promotion de statut, aucune relecture humaine inventee, aucune entree ajoutee qui ne soit dans les sources."
+limite = "L'index mesure un rappel, pas une pensee : aucune comparaison avec un temps de reponse humain, aucune validation de pertinence. Il peut citer un document que la personne n'a jamais lu."

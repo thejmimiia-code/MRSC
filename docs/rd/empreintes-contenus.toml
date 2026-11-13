@@ -1914,7 +1914,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "82930dc16301e79d0cf95281c04a208194a635c9fa6377f1e00d2e5d40089bb8"
+empreinte = "fa9e1fd7cc3665befc16d3fb530ff1dcf3f1a7c35199ef7ab0970aa12329863c"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
