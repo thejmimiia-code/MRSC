@@ -137,6 +137,17 @@ def verifier_skills(verificateur: Verificateur) -> set[str]:
         and "sans nom ni données personnelles" in protocole_text
         and "droit d'arrêter" in protocole_text,
     )
+    # Les trois modules d'accessibilité livrés le 12 novembre 2026 ne valent pas
+    # validation : leur complément d'essai doit rester dans le protocole, avec
+    # ce qui le distingue d'une séance déjà faite. Le garde-fou porte sur les
+    # quatre tâches candidates et sur la phrase qui dit leur état réel.
+    taches_modules = ("| C1 |", "| C2 |", "| C3 |", "| C4 |")
+    verificateur.verifier(
+        "Le protocole d'essai couvre les trois modules d'accessibilité sans les déclarer validés",
+        all(tache in protocole_text for tache in taches_modules)
+        and "aucune personne handicapée ne les a essayés" in protocole_text
+        and "C1–C4 sont des consignes candidates, pas des résultats" in protocole_text,
+    )
     return slugs
 
 
