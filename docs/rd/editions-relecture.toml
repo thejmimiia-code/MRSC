@@ -5571,3 +5571,75 @@ sources = []
 mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
 constat = "Compteurs du plan du projet recalculés depuis l'arbre réel après le lot accessibilité : 590 fichiers en 11 zones, dont 174 dans docs. La zone apprendre reste à 108 pages et docs à 174 fichiers ; les phrases du plan citent les trois lots du 12 novembre (fraude, plan, accessibilité) sans réécrire l'histoire."
 limite = "Le comptage porte sur les fichiers présents, pas sur leur qualité ni sur l'avancement du projet ; un plan à jour ne prouve ni justesse éditoriale ni validation humaine."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "bf9eb33a7a0f42d514cacf7232b8dc708946703d48546addc235ad13427efed9"
+empreinte_apres = "bf1f609e14a2a12c6d30035eac2a737bcbfbda62a582bc1efe1ef129487995bd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-graphismes.cjs", "outils/test_mesure_graphismes.mjs", "outils/verifier-poids-pages.py", "outils/optimiser-images.py"]
+constat = "Deux défauts de mesure corrigés après un échec de CI. D'abord, sizes annonçait 700 px alors que la boîte de contenu en fait 698 à cause des deux bordures, donc à 768 px et densité 2 le navigateur servait l'image 800 px pour 698 px rendus : le contrôle de densité refusait légitimement, et sizes annonce maintenant 698. Ensuite, la mesure lisait currentSrc avant que le navigateur n'échange son image après un changement de densité : elle attend désormais deux lectures stables, plafonnées à 1,5 s, et une image qui ne se décode pas produit un constat nommé au lieu d'un plantage. Mesures : 3 780 relevés, 0 échec ; banc de la mesure 4/4 ; poids de la page Apprendre 250,0 Kio mobile et 438,2 Kio grand écran."
+limite = "L'attente de stabilisation est bornée et ne garantit pas un échange au-delà de 1,5 s sur une machine très lente ; une densité insuffisante après stabilisation reste un échec. Le relevé ne couvre que trois pages et les largeurs du script, pas tous les appareils."
+
+[[edition]]
+chemin = "docs/rd/poids-pages.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "e0b79d85835d80fba122697396671610b5acb448c8e5676a434e4d361e66c4a4"
+empreinte_apres = "31eff8b149c38e783a549dbab4cdf8173533920ea709cf8ef04547ae24a82a25"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-graphismes.cjs", "outils/test_mesure_graphismes.mjs", "outils/verifier-poids-pages.py", "outils/optimiser-images.py"]
+constat = "Deux défauts de mesure corrigés après un échec de CI. D'abord, sizes annonçait 700 px alors que la boîte de contenu en fait 698 à cause des deux bordures, donc à 768 px et densité 2 le navigateur servait l'image 800 px pour 698 px rendus : le contrôle de densité refusait légitimement, et sizes annonce maintenant 698. Ensuite, la mesure lisait currentSrc avant que le navigateur n'échange son image après un changement de densité : elle attend désormais deux lectures stables, plafonnées à 1,5 s, et une image qui ne se décode pas produit un constat nommé au lieu d'un plantage. Mesures : 3 780 relevés, 0 échec ; banc de la mesure 4/4 ; poids de la page Apprendre 250,0 Kio mobile et 438,2 Kio grand écran."
+limite = "L'attente de stabilisation est bornée et ne garantit pas un échange au-delà de 1,5 s sur une machine très lente ; une densité insuffisante après stabilisation reste un échec. Le relevé ne couvre que trois pages et les largeurs du script, pas tous les appareils."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "697b7348ae3bd709fcac93051bb2c6504c2a16ff7e2a11e392619779d672a5c6"
+empreinte_apres = "280ad77c132c241731baa59e3753205ee1111ada846b6d9e3e18358ede0ef6fe"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-graphismes.cjs", "outils/test_mesure_graphismes.mjs", "outils/verifier-poids-pages.py", "outils/optimiser-images.py"]
+constat = "Deux défauts de mesure corrigés après un échec de CI. D'abord, sizes annonçait 700 px alors que la boîte de contenu en fait 698 à cause des deux bordures, donc à 768 px et densité 2 le navigateur servait l'image 800 px pour 698 px rendus : le contrôle de densité refusait légitimement, et sizes annonce maintenant 698. Ensuite, la mesure lisait currentSrc avant que le navigateur n'échange son image après un changement de densité : elle attend désormais deux lectures stables, plafonnées à 1,5 s, et une image qui ne se décode pas produit un constat nommé au lieu d'un plantage. Mesures : 3 780 relevés, 0 échec ; banc de la mesure 4/4 ; poids de la page Apprendre 250,0 Kio mobile et 438,2 Kio grand écran."
+limite = "L'attente de stabilisation est bornée et ne garantit pas un échange au-delà de 1,5 s sur une machine très lente ; une densité insuffisante après stabilisation reste un échec. Le relevé ne couvre que trois pages et les largeurs du script, pas tous les appareils."
+
+[[edition]]
+chemin = "outils/test_mesure_graphismes.mjs"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "f3d244ca82564d9606d44e9e0c6f4ba9736eedeaf0c7f325490dc13d2279a89b"
+empreinte_apres = "8bfe1ecde701b44022c3ba5ed2f1bcb626275115a3a6e58bc6eca064b7612cc5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-graphismes.cjs", "outils/test_mesure_graphismes.mjs", "outils/verifier-poids-pages.py", "outils/optimiser-images.py"]
+constat = "Deux défauts de mesure corrigés après un échec de CI. D'abord, sizes annonçait 700 px alors que la boîte de contenu en fait 698 à cause des deux bordures, donc à 768 px et densité 2 le navigateur servait l'image 800 px pour 698 px rendus : le contrôle de densité refusait légitimement, et sizes annonce maintenant 698. Ensuite, la mesure lisait currentSrc avant que le navigateur n'échange son image après un changement de densité : elle attend désormais deux lectures stables, plafonnées à 1,5 s, et une image qui ne se décode pas produit un constat nommé au lieu d'un plantage. Mesures : 3 780 relevés, 0 échec ; banc de la mesure 4/4 ; poids de la page Apprendre 250,0 Kio mobile et 438,2 Kio grand écran."
+limite = "L'attente de stabilisation est bornée et ne garantit pas un échange au-delà de 1,5 s sur une machine très lente ; une densité insuffisante après stabilisation reste un échec. Le relevé ne couvre que trois pages et les largeurs du script, pas tous les appareils."
+
+[[edition]]
+chemin = "outils/verifier-graphismes.cjs"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "27711c8689352fffadc4b726b7bba1a55c69e20ddcfdd5800126361e3ab723a3"
+empreinte_apres = "ba9bd2f08cb2d3ed3ab9ae44a990f7d614b08e51f727a32b1574e5934e2cbf93"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-graphismes.cjs", "outils/test_mesure_graphismes.mjs", "outils/verifier-poids-pages.py", "outils/optimiser-images.py"]
+constat = "Deux défauts de mesure corrigés après un échec de CI. D'abord, sizes annonçait 700 px alors que la boîte de contenu en fait 698 à cause des deux bordures, donc à 768 px et densité 2 le navigateur servait l'image 800 px pour 698 px rendus : le contrôle de densité refusait légitimement, et sizes annonce maintenant 698. Ensuite, la mesure lisait currentSrc avant que le navigateur n'échange son image après un changement de densité : elle attend désormais deux lectures stables, plafonnées à 1,5 s, et une image qui ne se décode pas produit un constat nommé au lieu d'un plantage. Mesures : 3 780 relevés, 0 échec ; banc de la mesure 4/4 ; poids de la page Apprendre 250,0 Kio mobile et 438,2 Kio grand écran."
+limite = "L'attente de stabilisation est bornée et ne garantit pas un échange au-delà de 1,5 s sur une machine très lente ; une densité insuffisante après stabilisation reste un échec. Le relevé ne couvre que trois pages et les largeurs du script, pas tous les appareils."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "098ea1996b375a109d85641422de7bb5ca99b45e46c90e87d579b1915753ee2f"
+empreinte_apres = "c04a6c7c3750fe20922e7b449d73339f8e912444998be1bb2d2c4902bd067546"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Mémoire ÉVA régénérée depuis ses sources après la correction du releveur de graphismes et du sizes de l'accueil : le fichier est un rendu recalculé, pas une écriture à la main."
+limite = "Le rendu est recalculé par l'outil et non relu entrée par entrée ; un index de mémoire n'est ni une preuve d'apprentissage ni une validation de contenu."

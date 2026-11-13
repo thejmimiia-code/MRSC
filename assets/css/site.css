@@ -3713,7 +3713,13 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
   position: relative;
   z-index: 1;
   /* Source 1400 px : plafond 700 CSS px pour conserver une densité 2,
-     sans agrandissement artificiel ni rognage du logo restauré. */
+     sans agrandissement artificiel ni rognage du logo restauré.
+     Mesuré le 12 novembre 2026 : `sizes` annonçait 700 px alors que la boîte
+     de contenu en fait 698 — `border-box` retire les deux bordures de 1 px.
+     À 768 px et densité 2, le navigateur croyait donc devoir 1 400 px et
+     servait l'image 800 px pour 698 px rendus (densité 1,15) : le contrôle de
+     densité le refusait. `sizes` annonce désormais la largeur réellement
+     occupée, et l'image 800 px suffit à densité 2 jusqu'à 400 px de boîte. */
   max-width: min(100%, 700px);
   margin: 0 auto clamp(1.4rem, 3vw, 2.2rem);
   overflow: hidden;

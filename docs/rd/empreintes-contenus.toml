@@ -1335,10 +1335,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/css/site.css"
-empreinte = "bf9eb33a7a0f42d514cacf7232b8dc708946703d48546addc235ad13427efed9"
+empreinte = "bf1f609e14a2a12c6d30035eac2a737bcbfbda62a582bc1efe1ef129487995bd"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "assets/js/anglais-aventure-data.js"
@@ -1755,10 +1755,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "098ea1996b375a109d85641422de7bb5ca99b45e46c90e87d579b1915753ee2f"
+empreinte = "c04a6c7c3750fe20922e7b449d73339f8e912444998be1bb2d2c4902bd067546"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/eva/plan.md"
@@ -1930,10 +1930,10 @@ date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/poids-pages.md"
-empreinte = "e0b79d85835d80fba122697396671610b5acb448c8e5676a434e4d361e66c4a4"
+empreinte = "31eff8b149c38e783a549dbab4cdf8173533920ea709cf8ef04547ae24a82a25"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/portefeuille.toml"
@@ -2427,10 +2427,10 @@ date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "index.html"
-empreinte = "697b7348ae3bd709fcac93051bb2c6504c2a16ff7e2a11e392619779d672a5c6"
+empreinte = "280ad77c132c241731baa59e3753205ee1111ada846b6d9e3e18358ede0ef6fe"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "liens-utiles.html"
@@ -2868,10 +2868,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test_mesure_graphismes.mjs"
-empreinte = "f3d244ca82564d9606d44e9e0c6f4ba9736eedeaf0c7f325490dc13d2279a89b"
-etat = "reference-initiale"
+empreinte = "8bfe1ecde701b44022c3ba5ed2f1bcb626275115a3a6e58bc6eca064b7612cc5"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "outils/test_modele_grilles.py"
@@ -3274,10 +3274,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/verifier-graphismes.cjs"
-empreinte = "27711c8689352fffadc4b726b7bba1a55c69e20ddcfdd5800126361e3ab723a3"
-etat = "reference-initiale"
+empreinte = "ba9bd2f08cb2d3ed3ab9ae44a990f7d614b08e51f727a32b1574e5934e2cbf93"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "outils/verifier-integration.py"
