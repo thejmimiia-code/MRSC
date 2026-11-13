@@ -1335,7 +1335,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/css/site.css"
-empreinte = "bf1f609e14a2a12c6d30035eac2a737bcbfbda62a582bc1efe1ef129487995bd"
+empreinte = "511a53e78e69e5192b31b7953779d7ec8344cfe7d45272d4a0ed1b6eab114af2"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
@@ -1755,7 +1755,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "5f6846df906b44afabf6e382a9496d657f66d3163b944ecbc1fcc3461d0be005"
+empreinte = "191fe3f6eaa5938b03531f147b68a1d0a707378cd0c62a5e41d604faae626611"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
@@ -1839,7 +1839,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "22f7e37e7f9efe7dff939ba87e3b1452f6aaab64467dc385c2404e71ff9376bf"
+empreinte = "6c5c877d7ea9f2dcbf116ac31f53f0c1b6eb2ba183255e6d70eb80bc2566baf0"
 etat = "relu-par-agent"
 apostrophes = 2405
 date_derniere_relecture = 2026-11-13
@@ -1909,10 +1909,10 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "docs/rd/plan-site-complet-2026-11-11.toml"
-empreinte = "0903b1df2d8052e451470d7a507bede1500f3d6e3d15a36ac2c6b1e956168bd3"
+empreinte = "9c429e28cdd00a980033b5b7e2351327396c37fa830294e96d1475f02c0a808d"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-11
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/plan-statuts-animation.md"
@@ -2420,14 +2420,14 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "ia-societe.html"
-empreinte = "9bb019eb49527afc7cc5f25899e4061c1780c0d3c8e09d848077d071704181a6"
+empreinte = "571cbf67425746fde7a395dd7011d6846b52010bc19484c90fb042a128f674bd"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "index.html"
-empreinte = "280ad77c132c241731baa59e3753205ee1111ada846b6d9e3e18358ede0ef6fe"
+empreinte = "1d1d5bacf2e826255fa2ea1b670c6af60521aa06a05424417f867f7c901b9e64"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
@@ -2938,10 +2938,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test_mutations_integration.py"
-empreinte = "aec5d8077577b45752f7b6245aaca47c44cffec11412e45d52c858caf553913d"
+empreinte = "3d5bbf20c28c9da9a4d364ef045fe57ac5eac8a5272ee94ceb40002f7fee457b"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-11
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "outils/test_mutations_plan_complet.py"

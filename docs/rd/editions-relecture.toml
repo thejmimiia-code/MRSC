@@ -5751,3 +5751,87 @@ sources = []
 mesures = ["outils/verifier-fusions.py", "outils/memoire-eva.py"]
 constat = "Aucun fait externe : l'entree du journal du 13 novembre 2026 a ete remontee en tete pour respecter l'ordre antichronologique que verifier-fusions.py exige, puis la memoire EVA a ete regeneree. 521 entrees, 329 noeuds, 752 aretes, index de 208472 octets pour un corpus de 2311049 octets."
 limite = "Le rendu de la memoire est recalcule par l'outil et non relu entree par entree ; la correction porte sur l'ordre des entrees, pas sur leur contenu."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "bf1f609e14a2a12c6d30035eac2a737bcbfbda62a582bc1efe1ef129487995bd"
+empreinte_apres = "511a53e78e69e5192b31b7953779d7ec8344cfe7d45272d4a0ed1b6eab114af2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "5f6846df906b44afabf6e382a9496d657f66d3163b944ecbc1fcc3461d0be005"
+empreinte_apres = "191fe3f6eaa5938b03531f147b68a1d0a707378cd0c62a5e41d604faae626611"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "22f7e37e7f9efe7dff939ba87e3b1452f6aaab64467dc385c2404e71ff9376bf"
+empreinte_apres = "6c5c877d7ea9f2dcbf116ac31f53f0c1b6eb2ba183255e6d70eb80bc2566baf0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "docs/rd/plan-site-complet-2026-11-11.toml"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "0903b1df2d8052e451470d7a507bede1500f3d6e3d15a36ac2c6b1e956168bd3"
+empreinte_apres = "9c429e28cdd00a980033b5b7e2351327396c37fa830294e96d1475f02c0a808d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "9bb019eb49527afc7cc5f25899e4061c1780c0d3c8e09d848077d071704181a6"
+empreinte_apres = "571cbf67425746fde7a395dd7011d6846b52010bc19484c90fb042a128f674bd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "280ad77c132c241731baa59e3753205ee1111ada846b6d9e3e18358ede0ef6fe"
+empreinte_apres = "1d1d5bacf2e826255fa2ea1b670c6af60521aa06a05424417f867f7c901b9e64"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "outils/test_mutations_integration.py"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "aec5d8077577b45752f7b6245aaca47c44cffec11412e45d52c858caf553913d"
+empreinte_apres = "3d5bbf20c28c9da9a4d364ef045fe57ac5eac8a5272ee94ceb40002f7fee457b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."

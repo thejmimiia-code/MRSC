@@ -3685,7 +3685,16 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
    découpage en phrases (voir site.js), le gras y reste dans la ligne, et les
    repères passent en bande souple. Le plafond de 26ch est lu par
    `verifier-budgets-visuels.py`. */
-.home-hero-civic .hero-grid { align-items: start; }
+.home-hero-civic .hero-grid {
+  /* Depuis le 13 novembre 2026, l'ouverture porte le texte de présentation de
+     l'association : 2 000 px de copie contre 400 px d'orienteur. Deux colonnes
+     inégales laissaient la carte de droite seule en haut d'un grand vide.
+     L'ouverture passe donc en une colonne bornée — la mesure de lecture prime
+     sur l'effet de grille. */
+  display: block;
+}
+.home-hero-civic .hero-copy { max-width: 68ch; }
+.home-hero-civic .home-hero-aside { max-width: 68ch; margin-top: clamp(1.6rem, 3vw, 2.4rem); }
 .home-hero-civic .hero-title { max-width: 26ch; font-size: clamp(2.2rem, 3.8vw, 3.5rem); }
 .home-hero-civic .hero-copy > p { font-size: clamp(1rem, 1.3vw, 1.1rem); line-height: 1.62; }
 .home-hero-civic .hero-copy > p.home-hero-lede {
@@ -3781,6 +3790,19 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
   font-size: .94rem;
   font-weight: 400;
 }
+/* L'appel à rejoindre l'association ferme l'ouverture, distinct des repères
+   chiffrés qui, eux, parlent du site. Même famille visuelle que la promesse,
+   mais avec l'accent doré de la section « Participer » : deux blocs voisins ne
+   doivent pas se lire comme un seul paragraphe. */
+.home-hero-civic .home-hero-join {
+  margin-top: 1rem;
+  padding: .9rem 1rem;
+  border-left: 4px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  background: var(--surface);
+  font-size: .96rem;
+}
+.home-hero-civic .home-hero-join a { font-weight: 700; }
 .home-hero-aside {
   padding: clamp(1.25rem,3vw,1.75rem);
   border: 1px solid var(--border-soft);
