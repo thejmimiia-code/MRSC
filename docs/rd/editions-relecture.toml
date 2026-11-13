@@ -5835,3 +5835,15 @@ sources = []
 mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
 constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
 limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "571cbf67425746fde7a395dd7011d6846b52010bc19484c90fb042a128f674bd"
+empreinte_apres = "5d343b47ab075b27babc04bc13df8935171eb4990091e16539f9279127d6f9a5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/versionner-css-ia.py"]
+constat = "Aucun fait externe. L'URL de la feuille de la page IA porte l'empreinte 511a53e78e69e519, recalculée apres le changement de colonne de lecture de l'ouverture, intervenu apres la premiere signature. Aucun style n'est modifie par cette edition : seule l'empreinte du cache change. Mesure : versionner-css-ia --verifier OK."
+limite = "L'empreinte prouve l'invalidation du cache, pas l'exactitude du rendu, qui reste regarde dans un Chromium sans interface seulement."
