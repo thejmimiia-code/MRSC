@@ -5751,3 +5751,375 @@ sources = []
 mesures = ["outils/verifier-fusions.py", "outils/memoire-eva.py"]
 constat = "Aucun fait externe : l'entree du journal du 13 novembre 2026 a ete remontee en tete pour respecter l'ordre antichronologique que verifier-fusions.py exige, puis la memoire EVA a ete regeneree. 521 entrees, 329 noeuds, 752 aretes, index de 208472 octets pour un corpus de 2311049 octets."
 limite = "Le rendu de la memoire est recalcule par l'outil et non relu entree par entree ; la correction porte sur l'ordre des entrees, pas sur leur contenu."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "bf1f609e14a2a12c6d30035eac2a737bcbfbda62a582bc1efe1ef129487995bd"
+empreinte_apres = "511a53e78e69e5192b31b7953779d7ec8344cfe7d45272d4a0ed1b6eab114af2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "5f6846df906b44afabf6e382a9496d657f66d3163b944ecbc1fcc3461d0be005"
+empreinte_apres = "191fe3f6eaa5938b03531f147b68a1d0a707378cd0c62a5e41d604faae626611"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "22f7e37e7f9efe7dff939ba87e3b1452f6aaab64467dc385c2404e71ff9376bf"
+empreinte_apres = "6c5c877d7ea9f2dcbf116ac31f53f0c1b6eb2ba183255e6d70eb80bc2566baf0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "docs/rd/plan-site-complet-2026-11-11.toml"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "0903b1df2d8052e451470d7a507bede1500f3d6e3d15a36ac2c6b1e956168bd3"
+empreinte_apres = "9c429e28cdd00a980033b5b7e2351327396c37fa830294e96d1475f02c0a808d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "9bb019eb49527afc7cc5f25899e4061c1780c0d3c8e09d848077d071704181a6"
+empreinte_apres = "571cbf67425746fde7a395dd7011d6846b52010bc19484c90fb042a128f674bd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "280ad77c132c241731baa59e3753205ee1111ada846b6d9e3e18358ede0ef6fe"
+empreinte_apres = "1d1d5bacf2e826255fa2ea1b670c6af60521aa06a05424417f867f7c901b9e64"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "outils/test_mutations_integration.py"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "aec5d8077577b45752f7b6245aaca47c44cffec11412e45d52c858caf553913d"
+empreinte_apres = "3d5bbf20c28c9da9a4d364ef045fe57ac5eac8a5272ee94ceb40002f7fee457b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-site.py", "outils/verifier-integration.py", "outils/verifier-budgets-visuels.py", "outils/verifier-affichages.py", "outils/test_mutations_integration.py", "outils/versionner-css-ia.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. L'ouverture de l'accueil reprend le texte de presentation fourni par la personne, phrase par phrase, et les reperes statutaires exiges par les controles sont recomposes autour de lui. La colonne de lecture de l'ouverture est bornee a 68 ch apres mesure d'un vide de composition. Deux mutations du banc d'integration sont reparees, l'empreinte CSS passe a 602a922ac9b71cd8 et la memoire EVA compte 522 entrees. Mesures : plan-site OK, integration OK, budgets visuels OK, affichages OK, selecteurs morts 0, axe 9 executions et 0 violation, contrastes 7,75 et 6,97, banc d'integration 16 tests OK."
+limite = "Aucune relecture humaine du texte fourni, aucune validation de sa conformite statutaire, aucune mesure de comprehension. Le rendu a ete regarde dans un Chromium sans interface seulement. La phrase a but non lucratif est publiee telle que fournie, avec sa reserve au journal."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "571cbf67425746fde7a395dd7011d6846b52010bc19484c90fb042a128f674bd"
+empreinte_apres = "5d343b47ab075b27babc04bc13df8935171eb4990091e16539f9279127d6f9a5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/versionner-css-ia.py"]
+constat = "Aucun fait externe. L'URL de la feuille de la page IA porte l'empreinte 511a53e78e69e519, recalculée apres le changement de colonne de lecture de l'ouverture, intervenu apres la premiere signature. Aucun style n'est modifie par cette edition : seule l'empreinte du cache change. Mesure : versionner-css-ia --verifier OK."
+limite = "L'empreinte prouve l'invalidation du cache, pas l'exactitude du rendu, qui reste regarde dans un Chromium sans interface seulement."
+
+[[edition]]
+chemin = "docs/rd/consignes-seance-imprimables.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "3037d461bb3b61100abce75196849ddb585f33385669649a087df2cfe1ebe61c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "191fe3f6eaa5938b03531f147b68a1d0a707378cd0c62a5e41d604faae626611"
+empreinte_apres = "6a11a603283fc77d2717d0b4868a9f2b0e8f26d607176fa1d820f743d6df83d5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "docs/rd/fiche-notes-seance.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "5e5b111160896c0298a0fb4e7679662f6618fae882bec5b28ab07b7b00a6fceb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "b4822de48fdbf322179b07fce22b47640dee7e71a32b2b5f39b65ebe0f6100fb"
+empreinte_apres = "6859b861c8de47f42c4a149c4bd3bfe227ab4598bccb16c430adfba6cfbe2ae0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "6c5c877d7ea9f2dcbf116ac31f53f0c1b6eb2ba183255e6d70eb80bc2566baf0"
+empreinte_apres = "5f6e918e013e02a30fac51e40a268f0eb2bb9bbb8c39afadd5597664353d2521"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "769da923c34e056abeb54e1c72d0fd3e0ac24411780e2b0ddc19cd5a4a03bc9a"
+empreinte_apres = "f91ed2c6b03ee98a2ed2caef2cf9abb60b75fb1122fde16d35b99635081720a2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "8cc9c31edf48dfdb4b194d128d618b79593dc179ee94e43ff50d27814f6bcc12"
+empreinte_apres = "e3ab6fbeedd2e64824a632ba9801cd43960508f38bd97bbc2b9a791c41998934"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "docs/rd/protocole-essais-usage.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "bb163c085cc2e34268e1fb5ed148197226c59a0ade1449b6410a194df444f5b2"
+empreinte_apres = "145d4c5d98c52c3bdcaafae07f3441205ce93203fedcbe6a92b69fc968d4e616"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "outils/profil-demonstration.mjs"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "72238ddc3d9b248cd2bcbfd28e983d3042693186afc4a9f07390110727ca4fbf"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "1536938a33af356d669f0594126e6993bc853a508e1aeb3f83fb441824514ab0"
+empreinte_apres = "0df6ec9b81d5b30516f2f3ab2fa85700e460bd3ac3bc705613af489900f3e04e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "outils/test_mutations_rd_continue.py"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "49b339fb18911dda2da2ef6c36ea2e037d650b8e1757598c0bb02a660f8045eb"
+empreinte_apres = "3c6b1072d37a87fbd75dcfb93130c838c1fb3d71b4b10dbab74f281dfbc95afc"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "outils/test_profil_demonstration.mjs"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "acf67a78f8d9eba5534a7430208f925c929eea01d5b77bd0860f4d5645497abf"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "outils/verifier-rd-continue.py"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "8a5a54a43097b16c69b57dd9c5dc92c9517be983a12c740e8a9306a6e31ce558"
+empreinte_apres = "04b2a091917b0736cc9beebaf02eae52ddd77641b02c82246432b7ce5cb2daf5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
+constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
+limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "511a53e78e69e5192b31b7953779d7ec8344cfe7d45272d4a0ed1b6eab114af2"
+empreinte_apres = "fa2aa17af75203530b3773348d2a8b649a3cf5749e402590e3e49bcbcd93cf82"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. La CI de la PR 293 tombait rouge sur le job graphismes : ses annotations nommaient mesurer-grilles.cjs refusant .hero-grid, en display block, ni grille ni flex. La surcharge display block posee le 13 novembre pour mettre l'ouverture en une colonne sortait la grille du modele des colonnes, qui ne pouvait plus la compter du tout. L'orienteur sort donc de .hero-grid : la grille n'a plus qu'un enfant, la capacite lue dans le HTML borne la prediction comme la mesure, et la surcharge disparait. Mesures locales, etapes de la CI rejouees a l'identique : 733 points predits, 733 mesures, 730 confirmes, 3 divergences au seuil, 0 non mesure ; 1 060 combinaisons de cadrage, 0 debordement, 0 mot coupe ; 3 780 releves de graphismes, 0 echec ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les mesures viennent d'un Chromium sans interface. Le journal de l'execution CI reste inaccessible depuis l'atelier : la cause de l'echec est lue dans les annotations d'etape, pas dans les traces d'execution."
+
+[[edition]]
+chemin = "docs/rd/cadrages.toml"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "383bbe401ec4da7bcd2559c3271c208a31bd07b0d15b1385864f50834666a292"
+empreinte_apres = "32ac50e8da4b22e01d4b3a4499c6335ff1f21082f306a1f3d2899b8a380bf4e8"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. La CI de la PR 293 tombait rouge sur le job graphismes : ses annotations nommaient mesurer-grilles.cjs refusant .hero-grid, en display block, ni grille ni flex. La surcharge display block posee le 13 novembre pour mettre l'ouverture en une colonne sortait la grille du modele des colonnes, qui ne pouvait plus la compter du tout. L'orienteur sort donc de .hero-grid : la grille n'a plus qu'un enfant, la capacite lue dans le HTML borne la prediction comme la mesure, et la surcharge disparait. Mesures locales, etapes de la CI rejouees a l'identique : 733 points predits, 733 mesures, 730 confirmes, 3 divergences au seuil, 0 non mesure ; 1 060 combinaisons de cadrage, 0 debordement, 0 mot coupe ; 3 780 releves de graphismes, 0 echec ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les mesures viennent d'un Chromium sans interface. Le journal de l'execution CI reste inaccessible depuis l'atelier : la cause de l'echec est lue dans les annotations d'etape, pas dans les traces d'execution."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "5f6e918e013e02a30fac51e40a268f0eb2bb9bbb8c39afadd5597664353d2521"
+empreinte_apres = "00df7a74fc8d9564cace89c578c8174a9a77a8e7dc7fe1d228b9e40000396fe6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. La CI de la PR 293 tombait rouge sur le job graphismes : ses annotations nommaient mesurer-grilles.cjs refusant .hero-grid, en display block, ni grille ni flex. La surcharge display block posee le 13 novembre pour mettre l'ouverture en une colonne sortait la grille du modele des colonnes, qui ne pouvait plus la compter du tout. L'orienteur sort donc de .hero-grid : la grille n'a plus qu'un enfant, la capacite lue dans le HTML borne la prediction comme la mesure, et la surcharge disparait. Mesures locales, etapes de la CI rejouees a l'identique : 733 points predits, 733 mesures, 730 confirmes, 3 divergences au seuil, 0 non mesure ; 1 060 combinaisons de cadrage, 0 debordement, 0 mot coupe ; 3 780 releves de graphismes, 0 echec ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les mesures viennent d'un Chromium sans interface. Le journal de l'execution CI reste inaccessible depuis l'atelier : la cause de l'echec est lue dans les annotations d'etape, pas dans les traces d'execution."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "5d343b47ab075b27babc04bc13df8935171eb4990091e16539f9279127d6f9a5"
+empreinte_apres = "835e00e09f1c107e878bc92211246ec7fc1b0b0a49dc3a86ce3cbffa6b3e0ad6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. La CI de la PR 293 tombait rouge sur le job graphismes : ses annotations nommaient mesurer-grilles.cjs refusant .hero-grid, en display block, ni grille ni flex. La surcharge display block posee le 13 novembre pour mettre l'ouverture en une colonne sortait la grille du modele des colonnes, qui ne pouvait plus la compter du tout. L'orienteur sort donc de .hero-grid : la grille n'a plus qu'un enfant, la capacite lue dans le HTML borne la prediction comme la mesure, et la surcharge disparait. Mesures locales, etapes de la CI rejouees a l'identique : 733 points predits, 733 mesures, 730 confirmes, 3 divergences au seuil, 0 non mesure ; 1 060 combinaisons de cadrage, 0 debordement, 0 mot coupe ; 3 780 releves de graphismes, 0 echec ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les mesures viennent d'un Chromium sans interface. Le journal de l'execution CI reste inaccessible depuis l'atelier : la cause de l'echec est lue dans les annotations d'etape, pas dans les traces d'execution."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "1d1d5bacf2e826255fa2ea1b670c6af60521aa06a05424417f867f7c901b9e64"
+empreinte_apres = "259a15e30c90842e75d488c5e87508a8a7f12aa8e8253bf1a2c2974466283175"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. La CI de la PR 293 tombait rouge sur le job graphismes : ses annotations nommaient mesurer-grilles.cjs refusant .hero-grid, en display block, ni grille ni flex. La surcharge display block posee le 13 novembre pour mettre l'ouverture en une colonne sortait la grille du modele des colonnes, qui ne pouvait plus la compter du tout. L'orienteur sort donc de .hero-grid : la grille n'a plus qu'un enfant, la capacite lue dans le HTML borne la prediction comme la mesure, et la surcharge disparait. Mesures locales, etapes de la CI rejouees a l'identique : 733 points predits, 733 mesures, 730 confirmes, 3 divergences au seuil, 0 non mesure ; 1 060 combinaisons de cadrage, 0 debordement, 0 mot coupe ; 3 780 releves de graphismes, 0 echec ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les mesures viennent d'un Chromium sans interface. Le journal de l'execution CI reste inaccessible depuis l'atelier : la cause de l'echec est lue dans les annotations d'etape, pas dans les traces d'execution."
+
+[[edition]]
+chemin = "outils/test_modele_grilles.py"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "8b07f7507f8936b7413dd073200009def368401c7bb4e8c318ad7a1e02725030"
+empreinte_apres = "bcae9cf7e0e20e34a1f853acb61d140c58c08c93c0f669ed02b91d579572824b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. La CI de la PR 293 tombait rouge sur le job graphismes : ses annotations nommaient mesurer-grilles.cjs refusant .hero-grid, en display block, ni grille ni flex. La surcharge display block posee le 13 novembre pour mettre l'ouverture en une colonne sortait la grille du modele des colonnes, qui ne pouvait plus la compter du tout. L'orienteur sort donc de .hero-grid : la grille n'a plus qu'un enfant, la capacite lue dans le HTML borne la prediction comme la mesure, et la surcharge disparait. Mesures locales, etapes de la CI rejouees a l'identique : 733 points predits, 733 mesures, 730 confirmes, 3 divergences au seuil, 0 non mesure ; 1 060 combinaisons de cadrage, 0 debordement, 0 mot coupe ; 3 780 releves de graphismes, 0 echec ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les mesures viennent d'un Chromium sans interface. Le journal de l'execution CI reste inaccessible depuis l'atelier : la cause de l'echec est lue dans les annotations d'etape, pas dans les traces d'execution."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "6a11a603283fc77d2717d0b4868a9f2b0e8f26d607176fa1d820f743d6df83d5"
+empreinte_apres = "67a9eacf437e489976704d1b95a08a885ac137ebbc87f20942e0b76a114f6c54"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/verifier-plan-site.py", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. Deux corrections du meme lot : le commentaire d'index.html qui explique la colonne unique employait le mot predit, deja compte une fois par l'accueil, et verifier-plan-site.py a refuse la seconde occurrence — phrase reformulee, seuil inchange. La memoire EVA est regeneree (526 entrees) et le journal gagne la ligne du controle de non-redondance parmi les controles reellement executes. Mesures : modele 733 points dont .hero-grid a une colonne aux trois tailles de texte, 733 mesures par le navigateur, 730 confirmees, 3 divergences au seuil ; 1 060 combinaisons de cadrage sans ecart ; 3 780 releves de graphismes sans echec ; 49 executions axe sans violation ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les captures viennent d'un Chromium sans interface a 1440 et 320 px. La reformulation du commentaire n'a pas ete relue par une personne : elle existe pour ne pas depasser un seuil, et ce motif est ecrit."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "00df7a74fc8d9564cace89c578c8174a9a77a8e7dc7fe1d228b9e40000396fe6"
+empreinte_apres = "9e2bc71dd893ce26f015485d537d30b63ec0dcc58cb9c727bc72250bdebcd239"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/verifier-plan-site.py", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. Deux corrections du meme lot : le commentaire d'index.html qui explique la colonne unique employait le mot predit, deja compte une fois par l'accueil, et verifier-plan-site.py a refuse la seconde occurrence — phrase reformulee, seuil inchange. La memoire EVA est regeneree (526 entrees) et le journal gagne la ligne du controle de non-redondance parmi les controles reellement executes. Mesures : modele 733 points dont .hero-grid a une colonne aux trois tailles de texte, 733 mesures par le navigateur, 730 confirmees, 3 divergences au seuil ; 1 060 combinaisons de cadrage sans ecart ; 3 780 releves de graphismes sans echec ; 49 executions axe sans violation ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les captures viennent d'un Chromium sans interface a 1440 et 320 px. La reformulation du commentaire n'a pas ete relue par une personne : elle existe pour ne pas depasser un seuil, et ce motif est ecrit."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "259a15e30c90842e75d488c5e87508a8a7f12aa8e8253bf1a2c2974466283175"
+empreinte_apres = "91805afc9491df85df735c116f29281399f8b04c5cb90b7577145d2bb6246d8f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/verifier-plan-site.py", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. Deux corrections du meme lot : le commentaire d'index.html qui explique la colonne unique employait le mot predit, deja compte une fois par l'accueil, et verifier-plan-site.py a refuse la seconde occurrence — phrase reformulee, seuil inchange. La memoire EVA est regeneree (526 entrees) et le journal gagne la ligne du controle de non-redondance parmi les controles reellement executes. Mesures : modele 733 points dont .hero-grid a une colonne aux trois tailles de texte, 733 mesures par le navigateur, 730 confirmees, 3 divergences au seuil ; 1 060 combinaisons de cadrage sans ecart ; 3 780 releves de graphismes sans echec ; 49 executions axe sans violation ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les captures viennent d'un Chromium sans interface a 1440 et 320 px. La reformulation du commentaire n'a pas ete relue par une personne : elle existe pour ne pas depasser un seuil, et ce motif est ecrit."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "67a9eacf437e489976704d1b95a08a885ac137ebbc87f20942e0b76a114f6c54"
+empreinte_apres = "d78282a33be551f640fd99f8131aab7b4b4c578906520cf758ca940ce6d81c9b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py", "outils/relire-contenus.py"]
+constat = "Aucun fait externe nouveau. La memoire EVA est regeneree apres l'ajout de l'entree de journal du 13 novembre sur la colonne unique de l'accueil : 526 entrees, 329 noeuds, 752 aretes. Aucune relecture humaine n'est inventee par cette regeneration, l'index ne fait que reprendre les entrees du corpus."
+limite = "L'index ne juge pas le contenu des entrees : il les relie. Une entree fausse dans le journal produirait une arete fausse sans qu'aucun controle ne s'en apercoive."

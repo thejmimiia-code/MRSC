@@ -17,7 +17,11 @@ page = "index.html"
 sections_avant = 8
 sections_apres = 6
 caracteres_main_avant = 21310
-caracteres_main_apres = 20034
+caracteres_main_apres = 21276
+# Le 13 novembre 2026, l’ouverture reprend le texte de présentation fourni par
+# la personne : le corps de l’accueil repasse de 20 034 à 21 276 caractères.
+# Le champ n’est pas lu par la porte (seuls sections_avant/sections_apres le
+# sont) : il est mis à jour pour ne pas laisser un chiffre faux dans la carte.
 caracteres_main_refonte_seule = 18112
 ordre_avant = ["mission", "rd-eva", "actions", "rejoindre"]
 ordre_apres = ["mission", "actions", "rd-eva", "rejoindre"]
@@ -49,9 +53,9 @@ id = "invitation"
 libelle = "Invitation à écrire ou à poser une question"
 motif = "(?i)(?:contacter l’association|écrire à l’association|poser une question ou proposer une idée|une question ou une idée|une question ou l’envie de participer)"
 avant = 7
-apres = 5
-seuil = 5
-decision = "Une phrase dans l’ouverture et une section « Participer » ; les invitations de la section association et de l’ancienne section « Participer » sont retirées."
+apres = 4
+seuil = 4
+decision = "Une phrase dans l’ouverture et une section « Participer » ; les invitations de la section association et de l’ancienne section « Participer » sont retirées. Le 13 novembre 2026, l’ouverture reprend le texte de présentation fourni par la personne, qui ne comporte aucune invitation à contacter : le compte descend de 5 à 4 et le seuil suit la mesure, il n’est pas maintenu pour faire joli."
 
 [[redondance]]
 id = "predit"

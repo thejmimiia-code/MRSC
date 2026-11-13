@@ -140,15 +140,17 @@
         <div class="hero-copy">
           <p class="eyebrow">Mouvement Représentatif de la Société Civile · Association loi 1901</p>
           <h1 class="hero-title" id="home-title">Préserver, défendre et représenter <span>la société civile.</span></h1>
-          <p class="home-hero-lede">« La force citoyenne » : le M.R.S.C. est un mouvement représentatif de la société civile qui s’organise par <strong>territoires de vie</strong> — la zone où se trouvent les services dont un foyer a besoin pour vivre et s’épanouir, du hameau à la métropole.</p>
-          <p>Dans chaque assemblée territoriale, les membres <strong>s’informent, se conseillent, partagent, débattent et décident ensemble</strong> des actions à mener sur tout ce qui les concerne ; <strong>seuls les membres concernés ou impactés votent</strong>.</p>
-          <p>Les statuts prévoient une <strong>pépinière d’idées</strong> — produire des études et élaborer des propositions, le plus souvent dans les domaines des politiques publiques, économique, sociale et environnementale — et des <strong>outils pour former et développer les compétences</strong> des membres. <strong>Ce site est un de ces outils</strong> : il donne accès à <strong>trois ressources consultables sans compte</strong>, chacune avec un usage distinct :</p>
+          <p class="home-hero-lede">« La force citoyenne » : le M.R.S.C. est un mouvement représentatif de la société civile, une association à but non lucratif.</p>
+          <p><strong>Notre but</strong> est de préserver, défendre et représenter les intérêts, l’histoire, les traditions, la culture et l’avenir des femmes et des hommes qui participent à la vie économique, sociale et environnementale.</p>
+          <p>Notre objectif est de créer du lien social, de mettre en avant les compétences, l’expérience et les savoir-faire de tous dans l’intérêt général. L’association rassemble ses membres qui partagent les mêmes valeurs <span class="inline-note">(article 3 des statuts)</span>.</p>
+          <p><strong>Chaque membre a un pouvoir.</strong> Toutes les décisions sont prises par l’ensemble des membres concernés. Le M.R.S.C. s’organise par <strong>territoires de vie</strong> : dans chaque assemblée territoriale, les membres s’informent, se conseillent, partagent, débattent et décident ensemble ; seuls les membres concernés ou impactés votent.</p>
+          <p>Le fonctionnement de l’association est fait de sorte que chaque membre, même celui qui a des horaires décalés, puisse participer s’il le souhaite, en fonction de ses disponibilités, <strong>sans obligation ni contrainte</strong>. L’objet de l’association est assez large pour couvrir plusieurs champs d’action <span class="inline-note">(article 2 des statuts)</span>.</p>
+          <p>L’article 2 prévoit aussi une <strong>pépinière d’idées</strong> — produire des études et élaborer des propositions — et des outils pour former les membres. <strong>Ce site est un de ces outils</strong> : il donne accès à <strong>trois ressources consultables sans compte</strong>, chacune avec un usage distinct :</p>
           <ul class="home-hero-resources">
             <li><strong>des fiches</strong> pour apprendre une notion ;</li>
             <li><strong>un dossier sur l’intelligence artificielle</strong> pour séparer les usages documentés des questions à débattre ;</li>
             <li><strong>un simulateur</strong> pour comparer les effets de décisions de politique publique.</li>
           </ul>
-          <p>Les documents officiels de l’association sont publiés à part. Vous pouvez aussi <a href="nous-contacter.html">contacter l’association</a> pour poser une question ou proposer une idée.</p>
           <p class="home-hero-facts-label">Repères recalculés depuis les registres</p>
           <dl class="home-hero-facts">
             <div>
@@ -165,12 +167,19 @@
             </div>
           </dl>
           <p class="home-hero-promise">Chaque page indique ses sources, ses limites et son statut : ce qui est relu, ce qui reste à vérifier. Le simulateur ne prédit rien, il sert à comparer des arbitrages avant une décision.</p>
+          <p class="home-hero-join">Vous pouvez rejoindre l’association pour nous soutenir : en adhérent simplement, sans engagement particulier, ou en adhérent et en participant selon votre mode de vie — si l’envie vous démange de faire, de vous réaliser et d’échanger vos savoirs. <a href="assets/documents/bulletin-adhesion-2020.pdf" target="_blank" rel="noopener noreferrer">Voir le bulletin d’adhésion</a>. <strong>Parlez-en autour de vous.</strong> Pour plus d’informations, <a href="assets/documents/statuts-2020.pdf" target="_blank" rel="noopener noreferrer">consultez les statuts</a>, et <a href="nous-contacter.html">contactez l’association</a> pour poser une question ou proposer une idée.</p>
           <div class="hero-actions">
             <a class="button" href="#mission">Présentation de l’association</a>
             <a class="button button-secondary" href="apprendre.html#catalogue-fiches">Parcourir les fiches</a>
           </div>
         </div>
-        <!-- 2. Orienteur : des questions de visiteur, pas une autre description des ressources. -->
+        </div>
+        <!-- 2. Orienteur : des questions de visiteur, pas une autre description des ressources.
+             Il vit hors de `.hero-grid` depuis le 13 novembre 2026 : la copie de
+             présentation fait 2 000 px de haut, l’orienteur 400, et deux colonnes
+             laissaient la carte seule en haut d’un grand vide. La grille n’a donc
+             plus qu’un enfant, et une grille souple à un enfant ne montre qu’une
+             colonne — la capacité lue dans le HTML le dit, sans exception dans la feuille. -->
         <aside class="home-hero-aside" aria-labelledby="home-entry-title">
           <p class="eyebrow">Vous cherchez… ?</p>
           <h2 id="home-entry-title">Une question, une porte.</h2>
@@ -182,7 +191,6 @@
           </ul>
           <p class="home-hero-note">Pas d’ordre de lecture : choisissez la question qui vous amène, le reste se déplie plus bas.</p>
         </aside>
-        </div>
       </div>
     </section>
 

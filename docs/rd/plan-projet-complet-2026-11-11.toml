@@ -8,7 +8,7 @@ auteur = "agent"
 date = "2026-11-11"
 heure_utc = "16:48"
 demande = "continues et fais toute la R et D, l’innovation et la prospective, avec un plan complet sur l’ensemble du projet"
-total = 590
+total = 594
 zones = 11
 initiatives = 19
 actions = 39
@@ -108,7 +108,7 @@ garde = "outils/verifier-rd-continue.py"
 etat = "19 initiatives suivies"
 prochaine_action = "Régénérer toute sortie dérivée depuis son générateur"
 limite = "Un document de travail n’est ni une décision ni une validation."
-nombre = 174
+nombre = 176
 
 [[zone]]
 id = "outils"
@@ -118,7 +118,7 @@ garde = "outils/verifier-inventaire-controles.py"
 etat = "contrôles classés"
 prochaine_action = "Tout nouvel outil doit entrer dans l’inventaire avec son banc"
 limite = "Un banc prouve qu’une porte peut échouer, pas qu’elle voit toutes les fautes."
-nombre = 141
+nombre = 143
 
 [[zone]]
 id = "simulateur"

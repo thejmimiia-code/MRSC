@@ -250,13 +250,18 @@ class TestIntegration(unittest.TestCase):
         """
 
         def tronquer(copie: Path) -> None:
-            banc_mutations.muter(
-                copie,
-                "index.html",
+            # Deux endroits portent l’objet depuis le 13 novembre 2026 : le
+            # paragraphe « Notre but » de l’ouverture et la lede de la
+            # présentation. Les deux sont tronqués, sinon la porte trouverait
+            # encore l’objet entier à l’autre endroit et le banc ne prouverait rien.
+            texte = (copie / "index.html").read_text(encoding="utf-8")
+            tronque = texte.replace(
                 "les intérêts, l’histoire, les traditions, la culture et l’avenir des femmes et des hommes "
-                "qui participent à la vie économique, sociale et environnementale.</p>",
-                "les intérêts des personnes qui participent à la vie économique, sociale et environnementale.</p>",
+                "qui participent à la vie économique, sociale et environnementale.",
+                "les intérêts des personnes qui participent à la vie économique, sociale et environnementale.",
             )
+            assert tronque != texte, "la mutation de l’objet n’a rien changé"
+            (copie / "index.html").write_text(tronque, encoding="utf-8")
 
         resultat = executer(tronquer)
         self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
@@ -272,8 +277,8 @@ class TestIntegration(unittest.TestCase):
             banc_mutations.muter(
                 copie,
                 "index.html",
-                "<strong>seuls les membres concernés ou impactés votent</strong>",
-                "<strong>les membres votent</strong>",
+                "seuls les membres concernés ou impactés votent",
+                "les membres votent",
             )
 
         resultat = executer(retirer)
