@@ -2420,10 +2420,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "ia-societe.html"
-empreinte = "6163d4fa0c8aba170fa7a72422e8f6d79eed2adc88aeffe2b0bac74dc5485024"
+empreinte = "9bb019eb49527afc7cc5f25899e4061c1780c0d3c8e09d848077d071704181a6"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "index.html"

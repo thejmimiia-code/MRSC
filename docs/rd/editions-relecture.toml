@@ -5643,3 +5643,15 @@ sources = []
 mesures = ["outils/memoire-eva.py"]
 constat = "Mémoire ÉVA régénérée depuis ses sources après la correction du releveur de graphismes et du sizes de l'accueil : le fichier est un rendu recalculé, pas une écriture à la main."
 limite = "Le rendu est recalculé par l'outil et non relu entrée par entrée ; un index de mémoire n'est ni une preuve d'apprentissage ni une validation de contenu."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "6163d4fa0c8aba170fa7a72422e8f6d79eed2adc88aeffe2b0bac74dc5485024"
+empreinte_apres = "9bb019eb49527afc7cc5f25899e4061c1780c0d3c8e09d848077d071704181a6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/versionner-css-ia.py"]
+constat = "L'URL de la feuille de la page IA porte la nouvelle empreinte du CSS : bf1f609e14a2a12c. Le changement de site.css est un commentaire daté qui explique le correctif de sizes à l'accueil ; aucun style n'est modifié par lui."
+limite = "L'empreinte prouve que le cache est invalidé, pas que la page est exacte ni que son rendu a été relu à l'œil."
