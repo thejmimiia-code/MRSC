@@ -3685,14 +3685,15 @@ html.contraste-renforce :is(.ai-fraud-callout,.ai-fraud-card,.ai-fraud-response,
    découpage en phrases (voir site.js), le gras y reste dans la ligne, et les
    repères passent en bande souple. Le plafond de 26ch est lu par
    `verifier-budgets-visuels.py`. */
-.home-hero-civic .hero-grid {
-  /* Depuis le 13 novembre 2026, l'ouverture porte le texte de présentation de
-     l'association : 2 000 px de copie contre 400 px d'orienteur. Deux colonnes
-     inégales laissaient la carte de droite seule en haut d'un grand vide.
-     L'ouverture passe donc en une colonne bornée — la mesure de lecture prime
-     sur l'effet de grille. */
-  display: block;
-}
+/* Depuis le 13 novembre 2026, l'ouverture porte le texte de présentation de
+   l'association : 2 000 px de copie contre 400 px d'orienteur. Deux colonnes
+   inégales laissaient la carte de droite seule en haut d'un grand vide.
+   L'orienteur est donc sorti de `.hero-grid` : la grille n'a plus qu'un enfant,
+   et la mesure de lecture prime sur l'effet de grille. Rien n'est forcé ici —
+   `flex-wrap` ne crée pas de colonne sans enfant à y mettre, et la capacité lue
+   dans le HTML (1) borne la prédiction du modèle comme la mesure du navigateur.
+   Une surcharge `display: block` a été essayée d'abord : elle sortait la grille
+   du modèle des colonnes, qui ne pouvait plus la mesurer du tout. */
 .home-hero-civic .hero-copy { max-width: 68ch; }
 .home-hero-civic .home-hero-aside { max-width: 68ch; margin-top: clamp(1.6rem, 3vw, 2.4rem); }
 .home-hero-civic .hero-title { max-width: 26ch; font-size: clamp(2.2rem, 3.8vw, 3.5rem); }

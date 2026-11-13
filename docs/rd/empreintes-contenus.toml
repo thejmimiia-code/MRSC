@@ -1335,7 +1335,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/css/site.css"
-empreinte = "511a53e78e69e5192b31b7953779d7ec8344cfe7d45272d4a0ed1b6eab114af2"
+empreinte = "fa2aa17af75203530b3773348d2a8b649a3cf5749e402590e3e49bcbcd93cf82"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
@@ -1685,10 +1685,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/cadrages.toml"
-empreinte = "383bbe401ec4da7bcd2559c3271c208a31bd07b0d15b1385864f50834666a292"
-etat = "reference-initiale"
+empreinte = "32ac50e8da4b22e01d4b3a4499c6335ff1f21082f306a1f3d2899b8a380bf4e8"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/carte-lacunes.md"
@@ -1762,7 +1762,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "6a11a603283fc77d2717d0b4868a9f2b0e8f26d607176fa1d820f743d6df83d5"
+empreinte = "d78282a33be551f640fd99f8131aab7b4b4c578906520cf758ca940ce6d81c9b"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
@@ -1853,7 +1853,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "5f6e918e013e02a30fac51e40a268f0eb2bb9bbb8c39afadd5597664353d2521"
+empreinte = "9e2bc71dd893ce26f015485d537d30b63ec0dcc58cb9c727bc72250bdebcd239"
 etat = "relu-par-agent"
 apostrophes = 2405
 date_derniere_relecture = 2026-11-13
@@ -2434,14 +2434,14 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "ia-societe.html"
-empreinte = "5d343b47ab075b27babc04bc13df8935171eb4990091e16539f9279127d6f9a5"
+empreinte = "835e00e09f1c107e878bc92211246ec7fc1b0b0a49dc3a86ce3cbffa6b3e0ad6"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "index.html"
-empreinte = "1d1d5bacf2e826255fa2ea1b670c6af60521aa06a05424417f867f7c901b9e64"
+empreinte = "91805afc9491df85df735c116f29281399f8b04c5cb90b7577145d2bb6246d8f"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
@@ -2896,10 +2896,10 @@ date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "outils/test_modele_grilles.py"
-empreinte = "8b07f7507f8936b7413dd073200009def368401c7bb4e8c318ad7a1e02725030"
-etat = "reference-initiale"
+empreinte = "bcae9cf7e0e20e34a1f853acb61d140c58c08c93c0f669ed02b91d579572824b"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "outils/test_mutations_affichages.py"

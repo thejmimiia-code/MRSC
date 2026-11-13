@@ -173,7 +173,13 @@
             <a class="button button-secondary" href="apprendre.html#catalogue-fiches">Parcourir les fiches</a>
           </div>
         </div>
-        <!-- 2. Orienteur : des questions de visiteur, pas une autre description des ressources. -->
+        </div>
+        <!-- 2. Orienteur : des questions de visiteur, pas une autre description des ressources.
+             Il vit hors de `.hero-grid` depuis le 13 novembre 2026 : la copie de
+             présentation fait 2 000 px de haut, l’orienteur 400, et deux colonnes
+             laissaient la carte seule en haut d’un grand vide. La grille n’a donc
+             plus qu’un enfant, et une grille souple à un enfant ne montre qu’une
+             colonne — la capacité lue dans le HTML le dit, sans exception dans la feuille. -->
         <aside class="home-hero-aside" aria-labelledby="home-entry-title">
           <p class="eyebrow">Vous cherchez… ?</p>
           <h2 id="home-entry-title">Une question, une porte.</h2>
@@ -185,7 +191,6 @@
           </ul>
           <p class="home-hero-note">Pas d’ordre de lecture : choisissez la question qui vous amène, le reste se déplie plus bas.</p>
         </aside>
-        </div>
       </div>
     </section>
 

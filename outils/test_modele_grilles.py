@@ -436,8 +436,16 @@ class TestModeleGrilles(unittest.TestCase):
 
         La feuille affirme qu'une base en `em` fait avancer le repli quand le
         texte grandit. Cette phrase n'était mesurée nulle part : le relevé
-        l'inscrit donc en clair, à 100 %, 115 % et 130 %, et à la largeur même
-        où le repli est annoncé — 760 et 761 px.
+        l'inscrit donc en clair, à 100 %, 115 % et 130 %.
+
+        C'est `.mission-grid` qui la démontre depuis le 13 novembre 2026, et non
+        plus `.hero-grid` : l'orienteur de l'accueil est sorti de la grille, qui
+        n'a donc plus qu'un enfant. Ce déplacement n'est pas un contournement —
+        une grille souple à un enfant ne montre jamais deux colonnes, et le
+        relevé borne sa prédiction par la capacité lue dans le HTML. Les deux
+        faits sont donc vérifiés ici, côte à côte : la colonne unique de
+        l'accueil reste prédite, et la promesse de la base en `em` reste
+        éprouvée sur une grille qui a vraiment deux enfants.
         """
         with tempfile.TemporaryDirectory() as dossier:
             copie = self.copie(dossier)
@@ -447,26 +455,29 @@ class TestModeleGrilles(unittest.TestCase):
             )
             self.assertEqual(resultat.returncode, 0, resultat.stderr)
             releve = json.loads(sortie.read_text(encoding="utf-8"))
-        grille = next(
-            g for g in releve["grilles"] if g["selecteur"] == ".hero-grid"
+        grilles = {g["selecteur"]: g for g in releve["grilles"]}
+
+        ouverture = grilles[".hero-grid"]
+        self.assertTrue(ouverture["suit_le_texte"], ouverture)
+        self.assertEqual(ouverture["items"], 1, ouverture)
+        self.assertEqual(
+            sorted({p["echelle"] for p in ouverture["points"]}), [1.0, 1.15, 1.3]
         )
-        self.assertTrue(grille["suit_le_texte"], grille)
-        self.assertEqual(sorted({p["echelle"] for p in grille["points"]}), [1.0, 1.15, 1.3])
-        largeurs = {p["largeur"] for p in grille["points"]}
-        self.assertIn(760, largeurs)
-        self.assertIn(761, largeurs)
-        # À 130 %, la base vaut 1,3 fois plus : la paire ne tient plus dans la
-        # même fenêtre, donc le repli arrive **plus tôt**. C'est exactement ce
-        # qu'une condition de largeur d'écran ne sait pas faire, et le relevé
-        # l'inscrit à 920 px : deux colonnes à 100 %, une seule à 130 %.
-        assise = {(p["largeur"], p["echelle"]): p["attendu"] for p in grille["points"]}
-        # Le repli réel de `.hero-grid` n'est plus 760 px : avec la gouttière que
-        # la feuille écrit vraiment, la paire tient jusqu'à 743 px. Le 1er
-        # novembre 2026, le navigateur l'a confirmé — deux colonnes à 760 px, là
-        # où le palier supprimé en imposait une.
-        self.assertIn(743, largeurs)
+        self.assertEqual({p["attendu"] for p in ouverture["points"]}, {1})
+
+        appui = grilles[".mission-grid"]
+        self.assertEqual(appui["items"], 2, appui)
+        self.assertEqual(sorted({p["echelle"] for p in appui["points"]}), [1.0, 1.15, 1.3])
+        assise = {(p["largeur"], p["echelle"]): p["attendu"] for p in appui["points"]}
+        # Avec la gouttière que la feuille écrit vraiment, la paire tient jusqu'à
+        # 744 px. À 743 px, une seule colonne — c'est la bande d'un pixel que le
+        # balayage au pas de 10 px ne voyait pas.
         self.assertEqual(assise[(743, 1.0)], 1)
-        self.assertEqual(assise[(760, 1.0)], 2)
+        self.assertEqual(assise[(744, 1.0)], 2)
+        # À 130 %, la base vaut 1,3 fois plus : la paire ne tient plus dans la
+        # même fenêtre, donc le repli arrive **plus tard**. C'est exactement ce
+        # qu'une condition de largeur d'écran ne sait pas faire : deux colonnes
+        # à 920 px à 100 %, une seule à 130 %.
         self.assertEqual(assise[(920, 1.0)], 2)
         self.assertEqual(assise[(920, 1.3)], 1)
 

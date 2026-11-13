@@ -6003,3 +6003,123 @@ sources = []
 mesures = ["outils/test_profil_demonstration.mjs", "outils/verifier-rd-continue.py", "outils/test_mutations_rd_continue.py", "outils/verifier-inventaire-controles.py", "outils/verifier-plan-projet.py", "outils/memoire-eva.py"]
 constat = "Aucun fait externe nouveau. Le materiel de seance est livre : profil de demonstration a six etats qui n'ecrit que les cles lues par site.js, fiche de notes vierge, consignes imprimables. Le protocole les nomme, deux garde-fous exigent leur existence et l'absence de vidage global du stockage, une sixieme mutation est plantee. relire-contenus.py accepte desormais une unite nouvelle sans effacer les relectures deja consignees : le mode --initialiser --forcer les remettait toutes en dette, constate puis evite. Mesures : banc du profil 70 controles OK et faute plantee vue echouer ; six etats verifies en navigateur avec rechargement ; banc de mutation 7 tests OK ; inventaire 75 outils dont 43 bancs ; plan 594 fichiers ; memoire 525 entrees."
 limite = "Aucun essai n'a eu lieu : ce lot prepare le materiel. Ni la fiche ni les consignes n'ont ete relues par une personne handicapee, par un role competent, ni validees sur le plan ethique ou juridique du consentement. Les six etats ont ete verifies dans un Chromium sans interface, pas sur appareil reel."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "511a53e78e69e5192b31b7953779d7ec8344cfe7d45272d4a0ed1b6eab114af2"
+empreinte_apres = "fa2aa17af75203530b3773348d2a8b649a3cf5749e402590e3e49bcbcd93cf82"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. La CI de la PR 293 tombait rouge sur le job graphismes : ses annotations nommaient mesurer-grilles.cjs refusant .hero-grid, en display block, ni grille ni flex. La surcharge display block posee le 13 novembre pour mettre l'ouverture en une colonne sortait la grille du modele des colonnes, qui ne pouvait plus la compter du tout. L'orienteur sort donc de .hero-grid : la grille n'a plus qu'un enfant, la capacite lue dans le HTML borne la prediction comme la mesure, et la surcharge disparait. Mesures locales, etapes de la CI rejouees a l'identique : 733 points predits, 733 mesures, 730 confirmes, 3 divergences au seuil, 0 non mesure ; 1 060 combinaisons de cadrage, 0 debordement, 0 mot coupe ; 3 780 releves de graphismes, 0 echec ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les mesures viennent d'un Chromium sans interface. Le journal de l'execution CI reste inaccessible depuis l'atelier : la cause de l'echec est lue dans les annotations d'etape, pas dans les traces d'execution."
+
+[[edition]]
+chemin = "docs/rd/cadrages.toml"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "383bbe401ec4da7bcd2559c3271c208a31bd07b0d15b1385864f50834666a292"
+empreinte_apres = "32ac50e8da4b22e01d4b3a4499c6335ff1f21082f306a1f3d2899b8a380bf4e8"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. La CI de la PR 293 tombait rouge sur le job graphismes : ses annotations nommaient mesurer-grilles.cjs refusant .hero-grid, en display block, ni grille ni flex. La surcharge display block posee le 13 novembre pour mettre l'ouverture en une colonne sortait la grille du modele des colonnes, qui ne pouvait plus la compter du tout. L'orienteur sort donc de .hero-grid : la grille n'a plus qu'un enfant, la capacite lue dans le HTML borne la prediction comme la mesure, et la surcharge disparait. Mesures locales, etapes de la CI rejouees a l'identique : 733 points predits, 733 mesures, 730 confirmes, 3 divergences au seuil, 0 non mesure ; 1 060 combinaisons de cadrage, 0 debordement, 0 mot coupe ; 3 780 releves de graphismes, 0 echec ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les mesures viennent d'un Chromium sans interface. Le journal de l'execution CI reste inaccessible depuis l'atelier : la cause de l'echec est lue dans les annotations d'etape, pas dans les traces d'execution."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "5f6e918e013e02a30fac51e40a268f0eb2bb9bbb8c39afadd5597664353d2521"
+empreinte_apres = "00df7a74fc8d9564cace89c578c8174a9a77a8e7dc7fe1d228b9e40000396fe6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. La CI de la PR 293 tombait rouge sur le job graphismes : ses annotations nommaient mesurer-grilles.cjs refusant .hero-grid, en display block, ni grille ni flex. La surcharge display block posee le 13 novembre pour mettre l'ouverture en une colonne sortait la grille du modele des colonnes, qui ne pouvait plus la compter du tout. L'orienteur sort donc de .hero-grid : la grille n'a plus qu'un enfant, la capacite lue dans le HTML borne la prediction comme la mesure, et la surcharge disparait. Mesures locales, etapes de la CI rejouees a l'identique : 733 points predits, 733 mesures, 730 confirmes, 3 divergences au seuil, 0 non mesure ; 1 060 combinaisons de cadrage, 0 debordement, 0 mot coupe ; 3 780 releves de graphismes, 0 echec ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les mesures viennent d'un Chromium sans interface. Le journal de l'execution CI reste inaccessible depuis l'atelier : la cause de l'echec est lue dans les annotations d'etape, pas dans les traces d'execution."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "5d343b47ab075b27babc04bc13df8935171eb4990091e16539f9279127d6f9a5"
+empreinte_apres = "835e00e09f1c107e878bc92211246ec7fc1b0b0a49dc3a86ce3cbffa6b3e0ad6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. La CI de la PR 293 tombait rouge sur le job graphismes : ses annotations nommaient mesurer-grilles.cjs refusant .hero-grid, en display block, ni grille ni flex. La surcharge display block posee le 13 novembre pour mettre l'ouverture en une colonne sortait la grille du modele des colonnes, qui ne pouvait plus la compter du tout. L'orienteur sort donc de .hero-grid : la grille n'a plus qu'un enfant, la capacite lue dans le HTML borne la prediction comme la mesure, et la surcharge disparait. Mesures locales, etapes de la CI rejouees a l'identique : 733 points predits, 733 mesures, 730 confirmes, 3 divergences au seuil, 0 non mesure ; 1 060 combinaisons de cadrage, 0 debordement, 0 mot coupe ; 3 780 releves de graphismes, 0 echec ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les mesures viennent d'un Chromium sans interface. Le journal de l'execution CI reste inaccessible depuis l'atelier : la cause de l'echec est lue dans les annotations d'etape, pas dans les traces d'execution."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "1d1d5bacf2e826255fa2ea1b670c6af60521aa06a05424417f867f7c901b9e64"
+empreinte_apres = "259a15e30c90842e75d488c5e87508a8a7f12aa8e8253bf1a2c2974466283175"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. La CI de la PR 293 tombait rouge sur le job graphismes : ses annotations nommaient mesurer-grilles.cjs refusant .hero-grid, en display block, ni grille ni flex. La surcharge display block posee le 13 novembre pour mettre l'ouverture en une colonne sortait la grille du modele des colonnes, qui ne pouvait plus la compter du tout. L'orienteur sort donc de .hero-grid : la grille n'a plus qu'un enfant, la capacite lue dans le HTML borne la prediction comme la mesure, et la surcharge disparait. Mesures locales, etapes de la CI rejouees a l'identique : 733 points predits, 733 mesures, 730 confirmes, 3 divergences au seuil, 0 non mesure ; 1 060 combinaisons de cadrage, 0 debordement, 0 mot coupe ; 3 780 releves de graphismes, 0 echec ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les mesures viennent d'un Chromium sans interface. Le journal de l'execution CI reste inaccessible depuis l'atelier : la cause de l'echec est lue dans les annotations d'etape, pas dans les traces d'execution."
+
+[[edition]]
+chemin = "outils/test_modele_grilles.py"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "8b07f7507f8936b7413dd073200009def368401c7bb4e8c318ad7a1e02725030"
+empreinte_apres = "bcae9cf7e0e20e34a1f853acb61d140c58c08c93c0f669ed02b91d579572824b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. La CI de la PR 293 tombait rouge sur le job graphismes : ses annotations nommaient mesurer-grilles.cjs refusant .hero-grid, en display block, ni grille ni flex. La surcharge display block posee le 13 novembre pour mettre l'ouverture en une colonne sortait la grille du modele des colonnes, qui ne pouvait plus la compter du tout. L'orienteur sort donc de .hero-grid : la grille n'a plus qu'un enfant, la capacite lue dans le HTML borne la prediction comme la mesure, et la surcharge disparait. Mesures locales, etapes de la CI rejouees a l'identique : 733 points predits, 733 mesures, 730 confirmes, 3 divergences au seuil, 0 non mesure ; 1 060 combinaisons de cadrage, 0 debordement, 0 mot coupe ; 3 780 releves de graphismes, 0 echec ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les mesures viennent d'un Chromium sans interface. Le journal de l'execution CI reste inaccessible depuis l'atelier : la cause de l'echec est lue dans les annotations d'etape, pas dans les traces d'execution."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "6a11a603283fc77d2717d0b4868a9f2b0e8f26d607176fa1d820f743d6df83d5"
+empreinte_apres = "67a9eacf437e489976704d1b95a08a885ac137ebbc87f20942e0b76a114f6c54"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/verifier-plan-site.py", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. Deux corrections du meme lot : le commentaire d'index.html qui explique la colonne unique employait le mot predit, deja compte une fois par l'accueil, et verifier-plan-site.py a refuse la seconde occurrence — phrase reformulee, seuil inchange. La memoire EVA est regeneree (526 entrees) et le journal gagne la ligne du controle de non-redondance parmi les controles reellement executes. Mesures : modele 733 points dont .hero-grid a une colonne aux trois tailles de texte, 733 mesures par le navigateur, 730 confirmees, 3 divergences au seuil ; 1 060 combinaisons de cadrage sans ecart ; 3 780 releves de graphismes sans echec ; 49 executions axe sans violation ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les captures viennent d'un Chromium sans interface a 1440 et 320 px. La reformulation du commentaire n'a pas ete relue par une personne : elle existe pour ne pas depasser un seuil, et ce motif est ecrit."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "00df7a74fc8d9564cace89c578c8174a9a77a8e7dc7fe1d228b9e40000396fe6"
+empreinte_apres = "9e2bc71dd893ce26f015485d537d30b63ec0dcc58cb9c727bc72250bdebcd239"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/verifier-plan-site.py", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. Deux corrections du meme lot : le commentaire d'index.html qui explique la colonne unique employait le mot predit, deja compte une fois par l'accueil, et verifier-plan-site.py a refuse la seconde occurrence — phrase reformulee, seuil inchange. La memoire EVA est regeneree (526 entrees) et le journal gagne la ligne du controle de non-redondance parmi les controles reellement executes. Mesures : modele 733 points dont .hero-grid a une colonne aux trois tailles de texte, 733 mesures par le navigateur, 730 confirmees, 3 divergences au seuil ; 1 060 combinaisons de cadrage sans ecart ; 3 780 releves de graphismes sans echec ; 49 executions axe sans violation ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les captures viennent d'un Chromium sans interface a 1440 et 320 px. La reformulation du commentaire n'a pas ete relue par une personne : elle existe pour ne pas depasser un seuil, et ce motif est ecrit."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "259a15e30c90842e75d488c5e87508a8a7f12aa8e8253bf1a2c2974466283175"
+empreinte_apres = "91805afc9491df85df735c116f29281399f8b04c5cb90b7577145d2bb6246d8f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py", "outils/mesurer-grilles.cjs", "outils/rapporter-mesure-grilles.py", "outils/mesurer-cadrages.cjs", "outils/verifier-graphismes.cjs", "outils/verifier-plan-site.py", "outils/test_modele_grilles.py"]
+constat = "Aucun fait externe nouveau. Deux corrections du meme lot : le commentaire d'index.html qui explique la colonne unique employait le mot predit, deja compte une fois par l'accueil, et verifier-plan-site.py a refuse la seconde occurrence — phrase reformulee, seuil inchange. La memoire EVA est regeneree (526 entrees) et le journal gagne la ligne du controle de non-redondance parmi les controles reellement executes. Mesures : modele 733 points dont .hero-grid a une colonne aux trois tailles de texte, 733 mesures par le navigateur, 730 confirmees, 3 divergences au seuil ; 1 060 combinaisons de cadrage sans ecart ; 3 780 releves de graphismes sans echec ; 49 executions axe sans violation ; test_modele_grilles.py 81 tests."
+limite = "Aucune validation humaine : rien n'a ete regarde sur un appareil reel, avec un lecteur d'ecran, ni a fort zoom. Les captures viennent d'un Chromium sans interface a 1440 et 320 px. La reformulation du commentaire n'a pas ete relue par une personne : elle existe pour ne pas depasser un seuil, et ce motif est ecrit."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "67a9eacf437e489976704d1b95a08a885ac137ebbc87f20942e0b76a114f6c54"
+empreinte_apres = "d78282a33be551f640fd99f8131aab7b4b4c578906520cf758ca940ce6d81c9b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py", "outils/relire-contenus.py"]
+constat = "Aucun fait externe nouveau. La memoire EVA est regeneree apres l'ajout de l'entree de journal du 13 novembre sur la colonne unique de l'accueil : 526 entrees, 329 noeuds, 752 aretes. Aucune relecture humaine n'est inventee par cette regeneration, l'index ne fait que reprendre les entrees du corpus."
+limite = "L'index ne juge pas le contenu des entrees : il les relie. Une entree fausse dans le journal produirait une arete fausse sans qu'aucun controle ne s'en apercoive."
