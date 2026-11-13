@@ -77,7 +77,7 @@ Le plan lui-même est une **sortie de synthèse**, pas une nouvelle source de v�
 | Relecture de contenu par agent | 81 fiches lues, 17 pages le 10 novembre puis 89 adresses tentées le 11 novembre : 83 contenus, 6 sans contenu confrontable, 131 rattachements de sources ouvertes, 20 égalités simples sans écart ; seconde passe : 16 pages officielles lues, 1 adresse toujours sans page lue ; troisième passe : 10 pages de l’IGN lues, accueil IGN toujours en HTTP 403 | Que la vérité du monde, les 6 adresses sans contenu ou l’expertise de domaine sont établies |
 | Fiches dont la revue est échue | 0 ; prochaine le 2027-01-05 pour `numerique-reagir-fraude` | Que les dates suffisent à garantir l’actualité |
 | Sujets du référentiel | 106 ; 6 sans aucune fiche, dont 3 en `revue-experte` | Qu’il faut ouvrir ces six sujets sans relecture |
-| Pages mesurées | 121 ; `apprendre.html` à 244,1 Kio mobile et 432,4 Kio grand écran | Le poids réellement servi sur le réseau |
+| Pages mesurées | 122 ; `apprendre.html` à 250,0 Kio mobile et 438,2 Kio grand écran | Le poids réellement servi sur le réseau |
 | Unités sous empreinte | 519 : 132 relues par agent, 387 en dette initiale consignée après le lot de plan complet du 11 novembre | Que la dette de relecture de fond est résorbée |
 | Avancées R&D | 102 avant le plan, 103 avec le plan, 104 avec la relecture d’agent, 105 avec la passe de sources, 106 avec le complément, 107 avec la troisième passe IGN, 108 avec le plan complet du projet | Qu’une avancée certifie un résultat d’usage |
 | Décision prospective | En attente ; initiative `prospective-apprentissages-2030` reste `a-cadrer` | Que l’option B est adoptée |

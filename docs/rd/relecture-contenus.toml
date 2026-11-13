@@ -14,8 +14,9 @@
 [meta]
 version = 1
 date_relecture = 2026-11-07
+dates_lots = [2026-11-07, 2026-11-12]
 auteur = "agent"
-lot = "apparences-du-7-novembre-2026"
+lot = "apparences-du-7-novembre-2026-et-declaration-fraudes-du-12-novembre-2026"
 statut = "relu-par-agent-sources-confrontees"
 regle = "La personne valide le rendu à l'oeil ; l'agent relit les contenus, confronte chaque fait à une source primaire datée et consigne les limites. Aucune chaîne publique du lot sans entrée ici."
 rapport = "docs/rd/relecture-apparences-2026-11-07.md"
@@ -116,6 +117,100 @@ consulte_le = 2026-11-07
 ancre = "0.04045"
 permet = "Confirmer la formule L = 0,2126 R + 0,7152 G + 0,0722 B et le seuil de linéarisation 0,04045, qui remplace 0,03928 depuis mai 2021."
 limites = "Fichier source du glossaire WCAG lu le 7 novembre 2026 ; la note du W3C précise que le changement de seuil n'a pas d'effet pratique sur les calculs dans le contexte de ces règles. La correction faite ici aligne la porte sur la définition actuelle, elle ne change aucun résultat mesuré."
+
+# Lot « déclarer » du 12 novembre 2026 : sources publiques françaises lues pour
+# la section #fraudes-ia et la fiche numerique-declarer-fraude. Chaque extrait
+# a été recopié à la main depuis la page, faute d'accès réseau depuis l'outil
+# de vérification ; l'empreinte porte sur le corps et l'ancre est courte.
+
+[[source]]
+id = "service-public-hameconnage"
+extrait = "docs/rd/sources-primaires/service-public-hameconnage.txt"
+editeur = "Service-Public.gouv.fr (DILA)"
+titre = "Hameçonnage (phishing ou vishing)"
+url = "https://www.service-public.gouv.fr/particuliers/vosdroits/F34800"
+consulte_le = 2026-11-12
+ancre = "pas une plainte"
+permet = "Confirmer que le hameçonnage est qualifié de délit, que le signalement n'est pas une plainte, que la plainte reste ouverte à la victime et que les services en ligne associés sont ceux cités."
+limites = "Page d'information administrative, pas un texte de loi : elle résume la qualification et les voies de plainte sans les rédiger. Elle ne dit rien du délai de traitement d'une plainte, ni du remboursement effectif par une banque, ni des cas où la qualification retenue serait différente. Elle ne remplace ni un avis juridique ni l'accompagnement d'une victime."
+
+[[source]]
+id = "service-public-arnaques-internet"
+extrait = "docs/rd/sources-primaires/service-public-arnaques-internet.txt"
+editeur = "Service-Public.gouv.fr (DILA)"
+titre = "Arnaques sur internet (THESEE, Pharos ...)"
+url = "https://www.service-public.gouv.fr/particuliers/vosdroits/N31138"
+consulte_le = 2026-11-12
+ancre = "cybercriminalité"
+permet = "Situer les familles d'escroqueries en ligne que l'administration distingue — rançongiciel, compte piraté, hameçonnage, achat, location, sentiments — et vérifier le renvoi vers Perceval et vers Pharos."
+limites = "Page d'aiguillage : elle liste des situations mais ne décrit aucune procédure complète et ne donne aucun chiffre. Les situations qu'elle omet ne sont pas inexistantes ; l'ordre de ses entrées n'indique ni fréquence ni gravité. Elle ne prouve pas qu'une situation donnée relève de la catégorie où on la range."
+
+[[source]]
+id = "service-public-perceval"
+extrait = "docs/rd/sources-primaires/service-public-perceval.txt"
+editeur = "Service-Public.gouv.fr (DILA)"
+titre = "Fraude à la carte bancaire"
+url = "https://www.service-public.gouv.fr/particuliers/vosdroits/F31324"
+consulte_le = 2026-11-12
+ancre = "opposition à ma carte"
+permet = "Vérifier l'ordre des démarches après une fraude à la carte : opposition d'abord, puis déclaration en ligne avec FranceConnect, récépissé délivré, traitement par la gendarmerie nationale."
+limites = "Page d'information administrative, vérifiée le 13 février 2026 : elle décrit le parcours tel qu'il est publié à cette date, sans garantir que le service reste disponible ni que le remboursement soit obtenu. Elle ne dit pas quel délai s'applique à chaque banque et ne traite pas les cartes perdues ou volées, qui relèvent d'une autre démarche."
+
+[[source]]
+id = "service-public-pharos"
+extrait = "docs/rd/sources-primaires/service-public-pharos.txt"
+editeur = "Service-Public.gouv.fr (DILA)"
+titre = "Signaler un contenu internet illégal (internet-signalement : Pharos)"
+url = "https://www.service-public.gouv.fr/particuliers/vosdroits/R17674"
+consulte_le = 2026-11-12
+ancre = "visualisé et sauvegardé"
+permet = "Confirmer que Pharos reçoit un signalement de contenu illicite, que le signalement est visualisé et sauvegardé, et qu'il peut être orienté vers un service d'enquête."
+limites = "Fiche de démarche : elle décrit cinq étapes sans dire ce que devient un signalement non retenu, ni les délais, ni les suites possibles pour la personne qui signale. Pharos n'est pas un canal de plainte et ne remplace pas le dépôt de plainte. Aucun formulaire, aucun libellé de champ et aucune capture ne sont reproduits."
+
+[[source]]
+id = "cybermalveillance-deposer-plainte"
+extrait = "docs/rd/sources-primaires/cybermalveillance-deposer-plainte.txt"
+editeur = "Cybermalveillance.gouv.fr (GIP ACYMA)"
+titre = "Déposer plainte après une cybermalveillance"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance"
+consulte_le = 2026-11-12
+ancre = "déposer plainte en ligne"
+permet = "Confirmer les trois voies de plainte — commissariat ou brigade, courrier au procureur, pré-plainte THESEE pour les cybermalveillances financières — et l'accompagnement gratuit par France Victimes au 116 006."
+limites = "Page d'orientation, pas une autorité judiciaire : elle indique où déposer plainte sans qualifier les faits ni promettre de suite. Les horaires et le numéro du 116 006 sont ceux publiés au 12 novembre 2026 et peuvent changer. Elle ne couvre pas les situations d'urgence immédiate ni les procédures propres aux mineurs."
+
+[[source]]
+id = "cybermalveillance-hameconnage-victime"
+extrait = "docs/rd/sources-primaires/cybermalveillance-hameconnage-victime.txt"
+editeur = "Cybermalveillance.gouv.fr (GIP ACYMA)"
+titre = "Que faire en cas de phishing ou hameçonnage ?"
+url = "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing"
+consulte_le = 2026-11-12
+ancre = "Conservez les preuves"
+permet = "Vérifier la suite de gestes après une victime d'hameçonnage : opposition immédiate, conservation des preuves, dépôt de plainte, et le renvoi vers Signal Spam, le 33700, Phishing Initiative et Info Escroqueries."
+limites = "Fiche réflexe destinée au grand public : elle conseille sans instruire et ne remplace aucune démarche auprès d'une banque, d'une police ou d'un tribunal. Le numéro d'Info Escroqueries et ses horaires sont ceux publiés au 12 novembre 2026. Elle ne mesure ni l'efficacité des signalements ni le taux de remboursement, et ne dit rien des fraudes qui ne passent pas par le courriel ou le SMS."
+
+[[source]]
+id = "signal-spam-accueil"
+extrait = "docs/rd/sources-primaires/signal-spam-accueil.txt"
+editeur = "Signal Spam (association loi 1901)"
+titre = "Signal Spam — plateforme nationale de signalement de courriels indésirables"
+url = "https://www.signal-spam.fr/"
+consulte_le = 2026-11-12
+ancre = "Je m’inscris"
+permet = "Confirmer que le signalement d'un courriel indésirable passe par un compte puis un module de messagerie, et que les signalements sont partagés avec les acteurs compétents."
+limites = "Page d'accueil d'une association, pas d'une administration : elle décrit le parcours d'inscription et l'usage des signalements, sans publier de statistiques de résultat. Elle ne dit pas ce qui est fait d'un signalement isolé, ni en combien de temps. Le module à installer impose un environnement de messagerie compatible, que la page ne détaille pas."
+
+[[source]]
+id = "33700-accueil"
+extrait = "docs/rd/sources-primaires/33700-accueil.txt"
+editeur = "33700 — opérateurs mobiles et associations professionnelles"
+titre = "33700 — plateforme de lutte contre les SMS et appels indésirables"
+url = "https://www.33700.fr/"
+consulte_le = 2026-11-12
+ancre = "opérateurs de télécommunication"
+permet = "Confirmer que le 33700 reçoit un signalement par formulaire ou capture d'écran et que les signalements sont transmis quotidiennement aux opérateurs de télécommunication."
+limites = "Page d'accueil d'une plateforme opérée par les opérateurs : elle dit que les signalements partent chaque jour vers les opérateurs, sans publier de suites ni de délais. Elle traite les SMS et appels indésirables, pas les courriels ni les sites. Elle ne remplace ni une plainte ni une opposition bancaire."
+
 
 [[affirmation]]
 id = "chaine-01"
@@ -336,6 +431,127 @@ mesures = ["assets/js/site.js"]
 verdict = "concordant"
 ce_qui_est_verifie = "Le statut est construit depuis le libellé du thème choisi et annoncé dans un élément role=status aria-live=polite."
 limite = "Vérification statique du modèle de chaîne ; aucune personne utilisant un lecteur d'écran n'a confirmé l'annonce vocale."
+
+[[affirmation]]
+id = "chaine-21"
+texte = "Adapter le site à votre situation"
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/js/site.js", "outils/verifier-affichages.py"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le titre du panneau décrit ce que font les trois modules : changer la présentation, pas le contenu ni les droits de la personne. Il ne promet ni conformité RGAA ni diagnostic."
+limite = "Formulation choisie par l'agent ; aucune personne handicapée ne l'a relue. Elle ne vaut pas validation d'usage."
+
+[[affirmation]]
+id = "chaine-22"
+texte = "Ces réglages restent sur cet appareil et se combinent avec la taille du texte, le contraste et l’espacement. Les préférences de votre système (mouvement réduit, contraste élevé) continuent de s’appliquer."
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/js/site.js"]
+verdict = "concordant"
+ce_qui_est_verifie = "Les trois préférences sont écrites dans localStorage et lues au chargement ; les classes se cumulent sur html avec texte-*, contraste-renforce et espacement-renforce. Les blocs @media prefers-reduced-motion et prefers-contrast du CSS restent actifs quel que soit le choix."
+limite = "Le stockage local peut être refusé : le réglage tient alors pour la visite seulement. Aucun essai avec une personne utilisant un lecteur d'écran n'a confirmé l'annonce."
+
+[[affirmation]]
+id = "chaine-23"
+texte = "Désactiver les trois modules"
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le bouton éteint les trois classes, écrit les trois préférences à « non » et remet aria-pressed à false ; l'essai navigateur le mesure."
+limite = "Le bouton ne réinitialise pas les autres réglages (taille, contraste, espacement, apparence, présentation) : c'est un choix, pour ne pas effacer des réglages qui ne sont pas des modules d'accessibilité."
+
+[[affirmation]]
+id = "chaine-24"
+texte = "Modules d’accessibilité"
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py"]
+verdict = "concordant"
+ce_qui_est_verifie = "L'étiquette du groupe décrit les trois boutons et n'annonce ni un service tiers ni une conformité."
+limite = "Le libellé vieillira si les modules changent ; le contrôle de la feuille vérifie les marqueurs du script, pas la justesse du mot."
+
+[[affirmation]]
+id = "chaine-25"
+texte = "Modules d’accessibilité désactivés."
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "L'annonce est écrite dans un élément role=status aria-live=polite et reprend le libellé du bouton ; l'essai navigateur la lit après le clic de retour."
+limite = "Aucune personne utilisant un lecteur d'écran n'a confirmé l'annonce réelle ; l'essai lit le texte, pas la voix."
+
+[[affirmation]]
+id = "chaine-26"
+texte = "Lecture facilitée"
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/css/site.css", "outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le libellé décrit un effet vérifiable : la classe aide-lecture change la police, l'interlettrage et l'interligne ; l'essai navigateur mesure la police calculée et l'espacement des lettres. Aucune allégation de traitement ni de remède."
+limite = "« Facilitée » est un jugement, pas une mesure d'utilité : aucune personne dyslexique n'a essayé ce réglage. Le nom ne promet aucune police spécialisée."
+
+[[affirmation]]
+id = "chaine-27"
+texte = "Réduire les mouvements"
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = ["mdn-prefers-reduced-motion"]
+mesures = ["assets/css/site.css", "outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "MDN documente prefers-reduced-motion et la demande de supprimer les animations non essentielles ; le module coupe les durées d'animation et de transition, et l'essai navigateur lit une durée calculée de 1e-06s."
+limite = "Le module ne couvre pas les animations produites par une technologie d'assistance ni les vidéos ; aucun essai avec une personne sensible au mouvement."
+
+[[affirmation]]
+id = "chaine-28"
+texte = "Repères clavier visibles"
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/css/site.css", "outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le module ramène le lien d'évitement à l'écran (transform: none, mesuré à 45 px de haut) et épaissit le contour de focus à 4 px ; l'essai navigateur vérifie le lien et axe reste à 0 violation avec le module actif."
+limite = "Le contour de focus sert à qui navigue au clavier ; une personne qui n'utilise ni clavier ni lecteur d'écran n'en tire rien, et ce n'est pas son but."
+
+[[affirmation]]
+id = "chaine-29"
+texte = "Police plus ouverte, lettres espacées et interlignes larges, pour la dyslexie et les difficultés de lecture."
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/css/site.css"]
+verdict = "corrige"
+ce_qui_est_verifie = "La description dit ce que la feuille fait (Verdana ou Trebuchet, interlettrage 0,035 em, interligne 1,75) et nomme le public visé sans promettre d'amélioration. Aucune étude n'est citée, parce qu'aucune source primaire de ce lot ne porte sur la dyslexie."
+limite = "Aucune source médicale ou orthophonique n'appuie ce choix de police ; c'est une décision de conception fondée sur des formes distinctes et disponibles. Une relecture par des personnes concernées reste à faire."
+
+[[affirmation]]
+id = "chaine-30"
+texte = "Coupe les animations et les transitions, pour les troubles vestibulaires et la photosensibilité."
+ou = "assets/js/site.js"
+nature = "fait-source"
+sources = ["mdn-prefers-reduced-motion"]
+mesures = ["outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "MDN rattache prefers-reduced-motion à l'inconfort lié au mouvement ; la feuille coupe effectivement animation-duration et transition-duration, et l'essai navigateur le mesure."
+limite = "MDN décrit une préférence de média, pas un effet clinique ; la photosensibilité liée aux clignotements n'est pas mesurée ici. Aucun essai avec une personne concernée."
+
+[[affirmation]]
+id = "chaine-31"
+texte = "Le lien « Aller au contenu » et le contour de focus restent affichés, pour qui navigue sans souris."
+ou = "assets/js/site.js"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/css/site.css", "outils/test-experience.cjs"]
+verdict = "concordant"
+ce_qui_est_verifie = "Le lien d'évitement reste visible sans focus (transform: none) et le contour passe à 4 px ; les deux sont mesurés en navigateur à 390 px."
+limite = "Le module ajoute un repère permanent en haut de page ; aucune personne naviguant au clavier n'a dit si cela aide ou gêne la lecture à l'œil."
 
 [[affirmation]]
 id = "ordre-des-trois-reglages"

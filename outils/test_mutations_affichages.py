@@ -320,6 +320,77 @@ MUTATIONS = (
         "            <dt>Siège</dt>\n            <dd>Siège social fixé à Beaurepaire — article 1.3 des statuts.</dd>\n          </div>\n          <div>\n            <dt>Réutilisation</dt>",
         "la carte du siège social est revenue",
     ),
+    # Le filtre du texte fin, corrigé le 12 novembre 2026. Le banc Node
+    # (`test_auditer_affichages.mjs`) exécute le filtre sur un DOM témoin ; ces
+    # deux mutations-ci tiennent la décision hors du banc Node, pour qu'une
+    # régression soit vue même si le banc n'est pas lancé.
+    (
+        "filtre du décor aria-hidden retiré",
+        "outils/auditer-affichages.mjs",
+        "const decorSansTexte = corps === 0 && Boolean(texte) && element.getAttribute('aria-hidden') === 'true';",
+        "const decorSansTexte = false;",
+        "le filtre du décor sans texte lisible a disparu",
+    ),
+    (
+        "filtre élargi à tout aria-hidden",
+        "outils/auditer-affichages.mjs",
+        "const decorSansTexte = corps === 0 && Boolean(texte) && element.getAttribute('aria-hidden') === 'true';",
+        "const decorSansTexte = element.getAttribute('aria-hidden') === 'true';",
+        "le filtre du décor sans texte lisible a disparu",
+    ),
+    # Ajout du 12 novembre 2026 : trois modules d'accessibilité pour les
+    # personnes handicapées. Chaque mutation retire ce qui rend le module utile,
+    # pas seulement sa décoration : une police, une coupure de mouvement, un
+    # lien d'évitement ramené à l'écran.
+    (
+        "police de lecture facilitée effacée",
+        "assets/css/site.css",
+        '  font-family: Verdana, "Trebuchet MS", "DejaVu Sans", system-ui, sans-serif;\n',
+        "",
+        "« lecture facilitée » ne change plus la police",
+    ),
+    (
+        "désjustification de la lecture facilitée retirée",
+        "assets/css/site.css",
+        "html.aide-lecture :is(main, .site-footer) p { text-align: left; hyphens: none; }\n",
+        "",
+        "« lecture facilitée » ne désjustifie plus le texte",
+    ),
+    (
+        "durée des transitions non coupée",
+        "assets/css/site.css",
+        "  transition-duration: .001ms !important;\n",
+        "  transition-duration: 1s !important;\n",
+        "« réduire les mouvements » ne coupe plus transition-duration",
+    ),
+    (
+        "lien d'évitement non ramené à l'écran",
+        "assets/css/site.css",
+        "html.reperes-visibles .skip-link {\n  transform: none;\n",
+        "html.reperes-visibles .skip-link {\n",
+        "ne ramène plus le lien d'évitement à l'écran",
+    ),
+    (
+        "commande d'accessibilité retirée du panneau",
+        "assets/js/site.js",
+        "      bouton.dataset.accessibiliteToggle = module.cle;\n",
+        "",
+        "le panneau d'accessibilité a perdu dataset.accessibiliteToggle",
+    ),
+    (
+        "préférence de lecture non mémorisée",
+        "assets/js/site.js",
+        '    langue: "mrsc-lecture-aide",\n',
+        "",
+        "le panneau d'accessibilité a perdu \"mrsc-lecture-aide\"",
+    ),
+    (
+        "compteur de l'écart supprimé",
+        "outils/auditer-affichages.mjs",
+        "          decorsEcartes: uniques(decorsEcartes), nbDecorsEcartes: decorsEcartes.length,\n",
+        "",
+        "l'écart n'est plus compté ni nommé",
+    ),
 )
 
 

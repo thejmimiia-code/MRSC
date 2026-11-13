@@ -1,0 +1,14 @@
+id = 33700-accueil
+url = https://www.33700.fr/
+date = 2026-11-12
+empreinte = c4b82fe811e83465f4a6a6b08edcb0849746732e051c316d8a59423cb536683d
+---
+33700 — la plateforme de lutte contre les SMS et appels indésirables.
+
+« La plateforme de lutte contre les SMS et appels indésirables qui vous informe et vous accompagne. » « D’une manière globale, on entend par messages et appels indésirables, les communications non sollicitées par le consommateur à des fins publicitaires, commerciales ou malveillantes... »
+
+« Signaler avec un formulaire », « Signaler avec une Capture d’écran ». « Que devient mon signalement? Les signalements effectués auprès de la plateforme 33700 sont envoyés tous les jours aux opérateurs de télécommunication. »
+
+« Qui est à l’initiative de la plateforme 33700 ? — Opérateurs mobiles, Associations d’opérateurs de télécommunication, Associations professionnelles. »
+
+Texte recopié à la main depuis la page lue le 12 novembre 2026.

@@ -59,14 +59,57 @@ const modes = mutation || reduit ? ['normal'] : ['normal', 'renforce', 'couleurs
           }, {texte, disposition, mode});
           const mesures=await page.evaluate(async target => {
             const el=document.querySelector(target), erreurs=[];
+            // Le navigateur ne réévalue pas `srcset` au pixel près : après un
+            // changement de densité ou de largeur, il garde un instant l'image
+            // déjà en cache puis échange. Mesuré le 12 novembre 2026 : à 768 px
+            // et densité 2, la mesure lisait encore l'image 800 px (densité
+            // 1,15) alors que le choix final était la 1400 px. On attend donc
+            // que la source se stabilise — deux lectures identiques séparées de
+            // 60 ms — sans dépasser 1,5 s. Ce n'est pas une tolérance sur le
+            // résultat : une densité insuffisante après stabilisation reste un
+            // échec, et le relevé dit combien de temps l'attente a duré.
+            const attendreSource = async (image, plafondMs = 1500) => {
+              const debut = Date.now();
+              let precedente = null, stable = 0;
+              while (Date.now() - debut < plafondMs) {
+                const courante = image.currentSrc + '|' + Math.round(image.getBoundingClientRect().width);
+                stable = courante === precedente ? stable + 1 : 0;
+                precedente = courante;
+                if (stable >= 2 && image.complete) return Date.now() - debut;
+                await new Promise((r) => setTimeout(r, 60));
+              }
+              return Date.now() - debut;
+            };
             const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height};};
             const overlap=(a,b)=>Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x)>1 && Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y)>1;
             const image=el.querySelector('img');
             if(image) {
               if(!image.checkVisibility())return {masque:true,erreurs};
-              await image.decode();
-              const src=image.currentSrc;window.sourcesGraphiques ||= {};
-              if(!window.sourcesGraphiques[src]) {const bitmap=await createImageBitmap(await (await fetch(src)).blob());window.sourcesGraphiques[src]={w:bitmap.width,h:bitmap.height};bitmap.close();}
+              const attenteMs = await attendreSource(image);
+              // Une image qui ne se décode pas doit être un **constat nommé**, pas
+              // une exception qui emporte toute la mesure. Le 12 novembre 2026, la
+              // CI est tombée sur « EncodingError: The source image cannot be
+              // decoded » sans qu'aucun relevé ne dise quelle page, quelle largeur
+              // ni quelle source ; le rapport n'était même pas écrit, et l'étape
+              // n'affichait qu'un code de sortie. Ici, le cas devient une erreur de
+              // mesure, située comme les autres.
+              const src=image.currentSrc;
+              try {
+                await image.decode();
+              } catch (erreur) {
+                erreurs.push('image non décodée ' + src.split('/').pop());
+                return {source: src.split('/').pop(), decode: String(erreur), erreurs};
+              }
+              window.sourcesGraphiques ||= {};
+              if(!window.sourcesGraphiques[src]) {
+                try {
+                  const bitmap=await createImageBitmap(await (await fetch(src)).blob());
+                  window.sourcesGraphiques[src]={w:bitmap.width,h:bitmap.height};bitmap.close();
+                } catch (erreur) {
+                  erreurs.push('source non mesurable ' + src.split('/').pop());
+                  return {source: src.split('/').pop(), decode: String(erreur), erreurs};
+                }
+              }
               const native=window.sourcesGraphiques[src],r=rect(image),cs=getComputedStyle(image);
               const ratio=r.w/r.h,distorsion=Math.abs(ratio-native.w/native.h);
               if(distorsion>.01)erreurs.push('ratio de boîte différent de la source');
@@ -75,7 +118,7 @@ const modes = mutation || reduit ? ['normal'] : ['normal', 'renforce', 'couleurs
               if(densite+.01<devicePixelRatio)erreurs.push('densité insuffisante');
               if(r.x<-.5||r.x+r.w>innerWidth+.5)erreurs.push('hors écran');
               const f=rect(el);if(r.x<f.x-1||r.x+r.w>f.x+f.w+1)erreurs.push('rognage horizontal');
-              return {source:src.split('/').pop(),native,rendu:{w:r.w,h:r.h},densite,distorsion,erreurs};
+              return {source:src.split('/').pop(),native,rendu:{w:r.w,h:r.h},densite,distorsion,attenteMs,erreurs};
             }
             const b=rect(el),nodes=[...el.querySelectorAll('.ai-node')],points=[...el.querySelectorAll('circle[r="4"]')],core=rect(el.querySelector('.ai-constellation-core'));
             const ancres=nodes.map((n,i)=>{const r=rect(n),p=rect(points[i]);const ecart=Math.hypot(r.x+r.w/2-p.x-p.w/2,r.y+r.h/2-p.y-p.h/2);if(ecart>2)erreurs.push('ancre '+n.textContent);if(r.x<b.x-1||r.x+r.w>b.x+b.w+1||r.y<b.y-1||r.y+r.h>b.y+b.h+1)erreurs.push('pastille hors cadre '+n.textContent);if(overlap(r,core))erreurs.push('pastille sur cœur '+n.textContent);if(n.scrollWidth>n.clientWidth+1)erreurs.push('texte rogné '+n.textContent);return ecart;});

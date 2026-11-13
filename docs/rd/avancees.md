@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 111 |
-| Période couverte | du 2026-10-20 au 2026-11-11 |
-| Contrôles exécutables cités | 127 |
+| Avancées consignées | 114 |
+| Période couverte | du 2026-10-20 au 2026-11-12 |
+| Contrôles exécutables cités | 128 |
 | Initiatives du portefeuille concernées | 16 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -2723,6 +2723,93 @@ Initiatives liées : `relire-les-44-prototypes`, `coordination-de-tous-les-agent
 **Suite.** Retenter www.ign.fr/ à une date ultérieure ; si une page de l’Institut devient lisible, la consigner avec sa date et son repère avant de modifier l’une des deux fiches de géographie. Ne pas importer les couleurs de la légende OACI dans la fiche de lecture de légende. Laisser l’association trancher la revue du 2026-11-19 ou la décision prospective avant le 31 janvier 2027.
 
 Initiatives liées : `relire-les-44-prototypes`, `coordination-de-tous-les-agents`, `confronter-une-affirmation-a-sa-source`.
+
+### `accessibilite-modules-originaux-2026-11-12` — Un module d’accessibilité se juge sur l’effet mesuré, et un produit propriétaire n’est qu’une liste de besoins
+
+*Consignée le 2026-11-12.*
+
+**Constat.** La demande citait deux exemples : Lisio, une surcouche d’accessibilité, et le téléservice MDPH en ligne de la CNSA. Vérification faite le jour même, Lisio est un logiciel **propriétaire et payant** : aucune licence libre, aucun code réutilisable. Le site possédait pourtant déjà six réglages (taille, contraste, espacement WCAG 1.4.12, six apparences, six présentations, lecture vocale), et trois besoins documentés n’étaient couverts par aucun : lire avec des lettres plus distinctes, supprimer les mouvements quand le système ne le demande pas, et voir les repères clavier sans les découvrir au focus. Un module ajouté sans mesure d’effet aurait ressemblé à une case cochée : trois boutons de plus, aucune preuve qu’ils changent quelque chose.
+
+**Ce que cela change.** Trois modules originaux dans le panneau « Personnalisation » : `aide-lecture` (Verdana/Trebuchet, interlettrage 0,035 em, interligne 1,75, texte désjustifié), `mouvement-attenue` (durées à 0,001 ms, défilement non animé) et `reperes-visibles` (lien d’évitement ramené à l’écran, contour de focus à 4 px). Aucun texte, code, icône ni mise en page n’est repris des deux sites cités : une icône a été dessinée en SVG pour ce site, et les polices sont celles du système, donc sans téléchargement ni licence. Chaque module est une classe sur `<html>`, mémorisée en `localStorage`, annoncée en `role=status`, et **mesurée en navigateur** : police calculée, durée de transition calculée, `transform` du lien d’évitement, persistance entre pages, ordre des Échap. Un vingt-deuxième garde-fou lit la feuille et le script, et sept mutations prouvent qu’il mord.
+
+**Preuves dans le dépôt :**
+
+- `assets/js/site.js`
+- `assets/css/site.css`
+- `outils/verifier-affichages.py`
+- `outils/test_mutations_affichages.py`
+- `outils/test-experience.cjs`
+- `outils/verifier-integration.py`
+- `docs/rd/accessibilite-modules-2026-11-12.md`
+- `docs/rd/relecture-contenus.toml`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `MRSC_BROWSER_NODE_MODULES=/tmp/mrsc-browser/node_modules node outils/test-experience.cjs && python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py && python3 outils/verifier-integration.py && python3 outils/relire-contenus.py && python3 outils/verifier-relecture-contenus.py && python3 outils/verifier-poids-pages.py`
+
+**Limite — ce que cela ne prouve pas.** Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique : les trois modules répondent à des besoins documentés, pas à des besoins observés sur ce site. La police « lecture facilitée » n’est pas une police conçue pour la dyslexie, seulement une police à formes distinctes, disponible partout. Le contenu n’est pas traduit en FALC — un module d’affichage ne remplace pas une réécriture. Les mesures de contraste et de débordement sont celles de Chromium sans interface sur quatre largeurs, pas d’un panel d’appareils. Le poids partagé augmente de 3,3 Kio gzip : `apprendre.html` passe de 244 à 250 Kio mobile, sous le budget de 300 Kio mais plus près.
+
+**Suite.** Faire essayer les trois modules à des personnes concernées — dyslexie, troubles vestibulaires, navigation au clavier — et à une personne utilisant un lecteur d’écran, puis décider de garder, renommer ou retirer. Si un besoin réel apparaît, ouvrir un chantier FALC sur un petit lot de fiches plutôt que d’ajouter un quatrième module d’affichage.
+
+Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`.
+
+### `declarer-fraude-demarches-distinctes-2026-11-12` — Déclarer n’est pas un réflexe de plus : quatre démarches, quatre interlocuteurs, et une source primaire pour chacune
+
+*Consignée le 2026-11-12.*
+
+**Constat.** La section `#fraudes-ia` traitait la prévention, la vérification et le signalement, mais la déclaration tenait en une phrase et quatre canaux. Le mot « déclarer » n’apparaissait qu’une fois dans la page. Or les quatre démarches que le public confond — signaler à une plateforme, déclarer à sa banque, prévenir l’organisme imité, porter plainte — n’ont ni le même destinataire, ni le même effet, ni le même ordre : une opposition précède toujours une déclaration Perceval, et aucune ne vaut plainte. Le registre des sources primaires ne contenait aucune source fraude : huit domaines seulement, tous de documentation web (MDN, W3C). Citer les pages officielles françaises était donc impossible sans élargir une porte fermée.
+
+**Ce que cela change.** Un bloc `.ai-fraud-declare` distinct dans `ia-societe.html` : six étapes ordonnées (faire le point, la banque, la déclaration en ligne, les preuves, l’organisme imité, la plainte), un tableau des sept canaux avec leur usage propre, et une mise en garde qui dit ce qu’aucune démarche ne garantit. La phrase de renvoi annonce le bloc au lieu de le résumer. Une fiche autonome `numerique-declarer-fraude` (108e du catalogue, revue à 90 jours, 8 sources documentaires) porte la même chaîne sous forme d’exercice. `relire-contenus.py` et `verifier-relecture-contenus.py` acceptent quatre éditeurs publics de plus (`service-public.gouv.fr`, `cybermalveillance.gouv.fr`, `signal-spam.fr`, `33700.fr`), nommés un par un, sans relâcher aucune exigence d’extrait, d’ancre, de « permet » ni de « limites ». La porte de relecture lit désormais **plusieurs** rapports datés, et `dates_lots` permet d’ajouter un lot sans réécrire la date du 7 novembre. Huit extraits sont mis en cache dans `docs/rd/sources-primaires/`, recopiés à la main depuis les pages lues, avec l’empreinte de leur corps.
+
+**Preuves dans le dépôt :**
+
+- `ia-societe.html`
+- `assets/css/site.css`
+- `liens-utiles.html`
+- `docs/apprentissage/catalogue.toml`
+- `docs/apprentissage/referentiel.toml`
+- `docs/rd-ia-usages-fraudes.md`
+- `docs/rd/relecture-contenus.toml`
+- `docs/rd/sources-primaires/`
+- `docs/rd/relecture-fraudes-declaration-2026-11-12.md`
+- `outils/relire-contenus.py`
+- `outils/verifier-relecture-contenus.py`
+- `outils/construire-paquets-relecture.py`
+- `apprendre/fiches/numerique-declarer-fraude.html`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-relecture-contenus.py && python3 outils/test_mutations_relecture_contenus.py && python3 outils/test_mutations_relire_contenus.py && python3 outils/relire-contenus.py && python3 outils/construire-apprentissages.py --verifier && python3 outils/verifier-site-statique.py && python3 outils/verifier-integration.py && python3 outils/compter-paliers.py && git diff --check`
+
+**Limite — ce que cela ne prouve pas.** Relecture d’agent, pas d’expertise juridique : aucune qualification de faits réels, aucune opportunité de plainte tranchée, rien sur la procédure propre aux mineurs ni sur les situations transfrontalières. Les extraits sont des recopies manuelles, pas des captures automatiques : l’outil de vérification n’a pas d’accès réseau, donc l’empreinte prouve que l’extrait n’a pas bougé depuis la lecture, pas qu’il reproduit la page à l’octet près. Aucun essai avec des personnes, aucune mesure d’accessibilité réelle du nouveau bloc, aucun rendu vérifié sous 360 px. Les numéros et horaires sont datés du 12 novembre 2026 et peuvent changer. La fiche reste « Prototype à relire », aucune relecture humaine consignée, aucune publication.
+
+**Suite.** Faire relire la fiche par une personne compétente en droit pénal ou en accompagnement des victimes, en particulier la pré-plainte THESEE et le courrier au procureur, puis vérifier à l’œil le bloc « déclarer » aux largeurs étroites. Ensuite seulement, envisager une promotion de statut — la sienne, pas celle des cinq fiches fraudes existantes.
+
+Initiatives liées : `veille-savoirs-evolutifs`, `coherence-textes-publics`.
+
+### `filtre-decor-aria-hidden-2026-11-12` — Un décor sans texte lisible n’est pas un texte trop petit — et le banc exécute enfin le filtre
+
+*Consignée le 2026-11-12.*
+
+**Constat.** Le relevé d’affichage du 6 novembre 2026 avait trouvé un faux positif : les 2 470 mesures comptaient chacune un « texte sous 12 px » qui était toujours `span.customize-settings-chevron`, un masque SVG à `font-size: 0` porteur du caractère `⌄` et déclaré `aria-hidden`. L’auditeur sortait donc en code 1 sur un site sain. Le relevé nommait la suite — « écarter les éléments aria-hidden dont le corps est nul, et nommer cet écart » — et disait pourquoi elle n’était pas faite : « elle demande un banc qui exécute réellement le filtre, alors que le banc actuel remplace le navigateur par un faux qui renvoie directement les compteurs ». Pendant ce temps, la correction la plus simple — élargir le filtre à tout `aria-hidden` — aurait tu un vrai texte visible trop petit masqué aux lecteurs d’écran.
+
+**Ce que cela change.** `outils/auditer-affichages.mjs` écarte un élément seulement quand les trois conditions tiennent : corps nul, texte présent, **et** `aria-hidden="true"`. L’écart n’est pas silencieux : chaque mesure le publie (`decorsEcartes`, `nbDecorsEcartes`) et le bilan de fin l’annonce avec son compte. Un `aria-hidden` visible et trop petit reste compté ; un élément vide ne compte ni comme défaut ni comme écart, pour que le chiffre ne mesure pas une non-mesure. `outils/test_auditer_affichages.mjs` passe de 3 à 7 cas : aux trois modes du faux navigateur s’ajoutent quatre DOM témoins — le décor à écarter, un vrai texte de 11 px à conserver, un `aria-hidden` visible de 11 px à conserver, un `aria-hidden` vide qui ne compte ni comme défaut ni comme écart — sur lesquels le banc exécute **le code du dépôt lui-même**, en extrayant par ancres exactes la fonction de mesure que le script envoie au navigateur. `outils/verifier-affichages.py` reçoit une 21e garde, `controler_filtre_texte_fin`, et `outils/test_mutations_affichages.py` trois mutations dont une fait mordre chacun des trois pièges. L’inventaire des contrôles, `docs/rd/formats-affichage.md` et le relevé du 6 novembre reçoivent la suite datée, sans réécrire le constat d’origine.
+
+**Preuves dans le dépôt :**
+
+- `outils/auditer-affichages.mjs`
+- `outils/test_auditer_affichages.mjs`
+- `outils/verifier-affichages.py`
+- `outils/test_mutations_affichages.py`
+- `docs/rd/formats-affichage.md`
+- `docs/rd/releve-affichages-2026-11-06.md`
+- `docs/rd/inventaire-controles.md`
+- `docs/rd/journal.md`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-affichages.py && python3 outils/test_mutations_affichages.py && node outils/test_auditer_affichages.mjs && python3 outils/verifier-inventaire-controles.py && python3 outils/relire-contenus.py && python3 outils/construire-avancees.py --verifier && git diff --check`
+
+**Limite — ce que cela ne prouve pas.** Aucun navigateur n’a été lancé : les 2 470 mesures réelles ne sont pas rejouées, aucun rendu, aucun zoom, aucun lecteur d’écran, aucune mesure de contraste. Le banc exécute le filtre sur trois témoins écrits à la main, avec une géométrie et une cascade simulées : il prouve la règle et les trois pièges, pas la justesse d’une mesure réelle. La correction ne dit pas que le site est exempt de texte trop petit — elle retire un faux positif et laisse le critère s’appliquer à tout le reste. Aucun statut promu, aucune relecture humaine consignée, aucune publication.
+
+**Suite.** Rejouer les 2 470 mesures dans un vrai Chromium dès qu’un navigateur est disponible, confronter le total de « texte sous 12 px » au chiffre du 6 novembre et consigner le relevé daté. Puis traiter la seconde limite du même relevé, l’emblème d’accueil agrandi 1,50× à 844 px en densité 3×, qui reste un arbitrage de dessin laissé à l’association.
+
+Initiatives liées : `optimisation-du-site`, `poids-et-sobriete-numerique`.
 
 ## 3. Ce que ce registre ne dit pas
 

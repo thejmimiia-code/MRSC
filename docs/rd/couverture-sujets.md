@@ -8,22 +8,22 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Fiches du catalogue | 107 |
-| dont prototypes à relire | 81 |
+| Fiches du catalogue | 108 |
+| dont prototypes à relire | 82 |
 | dont fiches marquées relues | 0 |
 | Relectures humaines consignées | 0 |
 | Domaines | 15 |
 | Sujets du référentiel | 106 |
 | Sujets sans aucune fiche | 6 |
-| Sujets à une seule fiche | 86 |
+| Sujets à une seule fiche | 85 |
 | Sujets sans fiche de repère 3 ou 4 | 87 |
 | Sujets d'un domaine à relecture spécialisée | 23 |
 | Fiches de repère 1 | 30 |
-| Fiches de repère 2 | 59 |
+| Fiches de repère 2 | 60 |
 | Fiches de repère 3 | 16 |
 | Fiches de repère 4 | 2 |
 | Sujets avec le manque `aucun-repere-3-ou-4` | 87 |
-| Sujets avec le manque `une-seule-fiche` | 86 |
+| Sujets avec le manque `une-seule-fiche` | 85 |
 | Sujets avec le manque `aucun-repere-1` | 74 |
 | Sujets avec le manque `relecture-specialisee` | 23 |
 | Sujets avec le manque `aucune-fiche` | 6 |
@@ -43,7 +43,7 @@ Le repère 4 (« Approfondir ») est le plus mince du corpus. Ce n'est pas un d�
 | Histoire, chronologie et mémoire | 4 | 5 | 1, 2, 3 | 0 | 3 | 3 |
 | Citoyenneté, médias et information | 6 | 6 | 2, 3 | 0 | 6 | 5 |
 | Démarches, droits, sécurité et vie professionnelle | 5 | 6 | 1, 2 | 1 | 3 | 5 |
-| Numérique, données, cybersécurité et intelligence artificielle | 10 | 11 | 1, 2, 3 | 0 | 9 | 8 |
+| Numérique, données, cybersécurité et intelligence artificielle | 10 | 12 | 1, 2, 3 | 0 | 8 | 8 |
 | Informatique, algorithmique et langages de programmation | 10 | 11 | 1, 2, 3 | 0 | 9 | 9 |
 | Arts, musique, création et culture | 4 | 4 | 1, 2 | 0 | 4 | 4 |
 | Santé, alimentation, corps et sécurité | 7 | 5 | 2 | 2 | 5 | 7 |
@@ -141,7 +141,7 @@ Un manque est une case mesurable, pas un jugement de qualité. La colonne « Rep
 | Numérique, données, cybersécurité et intelligence artificielle | `ia-verification` — Vérifier les réponses d’une IA et protéger ses informations | `partiel` | 1 | 3 | `une-seule-fiche`, `aucun-repere-1` |
 | Numérique, données, cybersécurité et intelligence artificielle | `media-synthetique-verifier` — Vérifier l’origine, le contexte et la demande d’une image, d’une voix ou d’une vidéo | `partiel` | 1 | 3 | `une-seule-fiche`, `aucun-repere-1` |
 | Numérique, données, cybersécurité et intelligence artificielle | `outils-fichiers-accessibilite` — Fichiers, logiciels, comptes, accessibilité et sauvegardes | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4` |
-| Numérique, données, cybersécurité et intelligence artificielle | `reagir-fraude-numerique` — Protéger ses comptes, conserver les preuves, contacter les services et signaler | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4` |
+| Numérique, données, cybersécurité et intelligence artificielle | `reagir-fraude-numerique` — Protéger ses comptes, conserver les preuves, contacter les services et signaler | `partiel` | 2 | 2 | `aucun-repere-1`, `aucun-repere-3-ou-4` |
 | Numérique, données, cybersécurité et intelligence artificielle | `recherche-communication-numerique` — Rechercher, communiquer et résoudre un problème numérique | `partiel` | 1 | 1 | `une-seule-fiche`, `aucun-repere-3-ou-4` |
 | Numérique, données, cybersécurité et intelligence artificielle | `typologie-fraudes-numeriques` — Hameçonnage, faux support ou conseiller, urgences, faux achats, emplois et placements | `partiel` | 2 | 2 | `aucun-repere-1`, `aucun-repere-3-ou-4` |
 | Numérique, données, cybersécurité et intelligence artificielle | `usurpation-demande-urgente` — Contrôler une identité usurpée et une sollicitation urgente par un canal indépendant | `partiel` | 1 | 2 | `une-seule-fiche`, `aucun-repere-1`, `aucun-repere-3-ou-4` |
@@ -185,7 +185,7 @@ Les douze premières lignes du tri par **nombre de manques mesurés**, puis par 
 ## 5. Ce que cette carte ne dit pas
 
 - Elle ne dit pas qu'un sujet absent du référentiel n'existe pas : le référentiel est une carte de travail, pas un inventaire du savoir.
-- Elle ne dit rien de la qualité des 107 fiches publiées ni de l'exactitude de leur contenu.
+- Elle ne dit rien de la qualité des 108 fiches publiées ni de l'exactitude de leur contenu.
 - Elle ne fournit aucune source : chaque sujet à documenter exige encore des sources primaires datées, avec leur périmètre et leurs droits.
 - Elle ne transforme aucun statut : un sujet `partiel` reste `partiel` même si une fiche de plus le rend moins mince. Elle ne peut pas davantage juger si un statut `actif` est mérité ; elle vérifie seulement qu'un changement de statut ne passe pas inaperçu.
 - Elle ne compte aucune relecture comme acquise : une fiche marquée « Prototype à relire » le reste tant qu'une personne n'a pas consigné sa revue.

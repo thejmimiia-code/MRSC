@@ -6,15 +6,15 @@
 
 **Trois états, pas deux.** Un contrôle est `ok`, `à corriger` — le fait est faux et réparable sans jugement — ou `constat` : la machine voit un fait exact, mais elle ne peut pas dire s'il est acceptable. Un constat n'est pas un défaut : il se nomme ici pour qu'une personne tranche, et il n'empêche pas la page publique de dire la vérité, à condition qu'elle le dise.
 
-**Date de référence :** 2026-11-06 — dernière revue de contenu consignée au catalogue. Les contrôles, eux, sont exécutés au jour de lancement ; cette sortie ne dépend pas de ce jour.
+**Date de référence :** 2026-11-12 — dernière revue de contenu consignée au catalogue. Les contrôles, eux, sont exécutés au jour de lancement ; cette sortie ne dépend pas de ce jour.
 
 ## 1. État d'ensemble
 
 | Mesure | Valeur |
 | --- | ---: |
-| Prototypes audités | 81 |
+| Prototypes audités | 82 |
 | Contrôles automatiques par fiche | 17 |
-| Fiches sans aucun échec mécanique | 81 |
+| Fiches sans aucun échec mécanique | 82 |
 | Fiches avec au moins un échec | 0 |
 | Échecs mécaniques au total | 0 |
 | Fiches avec un constat à trancher par une personne | 1 |
@@ -34,8 +34,8 @@ Pour la ligne « page précise » : ces fiches ne citent que des portails (racin
 
 | Fait mesuré | Valeur |
 | --- | ---: |
-| Sources déclarées au total | 138 |
-| dont licence déclarée « non vérifiée » | 135 |
+| Sources déclarées au total | 146 |
+| dont licence déclarée « non vérifiée » | 143 |
 | Fiches sans aucune source | 0 |
 | Prochaine revue la plus proche | 2027-01-09 (info-lire-adresse-web) |
 | Fiches dont la revue de contenu est échue à la date de référence | 0 |
@@ -115,6 +115,7 @@ Ces nombres ne disent rien de la qualité d'une fiche. Ils disent ce qui est **d
 | [Repérer un angle droit](fiches/maths-reperer-angle-droit.html) | Mathématiques, mesures et données | 17 | 0 | 0 | — |
 | [Nommer sa méthode après un exercice, pour comprendre ce qui a marché](fiches/methode-verbaliser-sa-methode.html) | Apprendre à apprendre, autonomie et relations | 17 | 0 | 0 | — |
 | [Reformuler une demande avant de commencer](fiches/methodes-demander-clarification.html) | Apprendre à apprendre, autonomie et relations | 17 | 0 | 0 | — |
+| [Signaler, déclarer ou porter plainte : quelle démarche pour quelle fraude ?](fiches/numerique-declarer-fraude.html) | Numérique, données, cybersécurité et intelligence artificielle | 17 | 0 | 0 | — |
 | [Formuler une recherche sur le Web](fiches/numerique-formuler-recherche.html) | Numérique, données, cybersécurité et intelligence artificielle | 17 | 0 | 0 | — |
 | [Nommer et retrouver ses fichiers sans exposer ses données](fiches/numerique-organiser-fichiers.html) | Numérique, données, cybersécurité et intelligence artificielle | 17 | 0 | 0 | — |
 | [Aménager son logement pour limiter les chutes, sans se mettre en danger](fiches/sante-amenager-logement-chutes.html) | Santé, alimentation, corps et sécurité | 17 | 0 | 0 | — |

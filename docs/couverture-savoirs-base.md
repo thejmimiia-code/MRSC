@@ -1,6 +1,6 @@
 # Couverture des savoirs de base — carte éditoriale vivante
 
-**Dernière revue éditoriale déclarée : 2026-11-06.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
+**Dernière revue éditoriale déclarée : 2026-11-12.** Ce document est généré depuis `docs/apprentissage/referentiel.toml` et `catalogue.toml`. Il distingue les fiches publiées des thèmes qui restent à créer. Il ne présente pas le catalogue comme complet, officiel ou certifiant.
 
 L’objectif de couverture est d’élargir progressivement des premiers pas utiles vers les matières générales et professionnelles, les études supérieures, les spécialisations et la recherche. Cet objectif n’est pas l’état actuel du catalogue : les lacunes sont indiquées et la carte reste évolutive.
 
@@ -166,7 +166,7 @@ Utiliser le numérique, protéger les données, comprendre l’IA et réagir aux
 | Vérifier l’origine, le contexte et la demande d’une image, d’une voix ou d’une vidéo | Début de couverture — à approfondir | [`numerique-verifier-media`](../apprendre/fiches/numerique-verifier-media.html) |
 | Contrôler une identité usurpée et une sollicitation urgente par un canal indépendant | Début de couverture — à approfondir | [`numerique-verifier-demande`](../apprendre/fiches/numerique-verifier-demande.html) |
 | Hameçonnage, faux support ou conseiller, urgences, faux achats, emplois et placements | Début de couverture — à approfondir | [`numerique-hameconnage`](../apprendre/fiches/numerique-hameconnage.html)<br>[`numerique-verifier-demande`](../apprendre/fiches/numerique-verifier-demande.html) |
-| Protéger ses comptes, conserver les preuves, contacter les services et signaler | Début de couverture — à approfondir | [`numerique-reagir-fraude`](../apprendre/fiches/numerique-reagir-fraude.html) |
+| Protéger ses comptes, conserver les preuves, contacter les services et signaler | Début de couverture — à approfondir | [`numerique-reagir-fraude`](../apprendre/fiches/numerique-reagir-fraude.html)<br>[`numerique-declarer-fraude`](../apprendre/fiches/numerique-declarer-fraude.html) |
 | Fichiers, logiciels, comptes, accessibilité et sauvegardes | Début de couverture — à approfondir | [`numerique-organiser-fichiers`](../apprendre/fiches/numerique-organiser-fichiers.html) |
 | Rechercher, communiquer et résoudre un problème numérique | Début de couverture — à approfondir | [`numerique-formuler-recherche`](../apprendre/fiches/numerique-formuler-recherche.html) |
 

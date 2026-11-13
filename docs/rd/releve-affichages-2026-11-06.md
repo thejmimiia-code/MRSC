@@ -88,6 +88,18 @@ le corps est nul, et nommer cet écart. Cette correction n'est pas faite dans ce
 lot : elle demande un banc qui exécute réellement le filtre, alors que le banc
 actuel remplace le navigateur par un faux qui renvoie directement les compteurs.
 
+> **Suite, 12 novembre 2026.** La correction est faite dans l’outil : le filtre
+> écarte un `aria-hidden` **dont le corps est nul**, compte les décors écartés
+> (`nbDecorsEcartes`) et nomme chacun dans le rapport. Le banc
+> `test_auditer_affichages.mjs` ne se contente plus du faux : il extrait du
+> script la fonction de mesure réellement envoyée au navigateur et l’exécute sur
+> trois DOM témoins — le décor à écarter, un vrai texte de 11 px à conserver, et
+> un `aria-hidden` visible de 11 px qui doit rester compté. Trois mutations de
+> `test_mutations_affichages.py` et une garde de `verifier-affichages.py`
+> tiennent la décision. Le paragraphe ci-dessus reste tel qu’il a été écrit le
+> 6 novembre ; ce qui l’a changé est daté ici. **Aucune mesure réelle n’a été
+> rejouée** : le navigateur n’était pas disponible dans cet environnement.
+
 ### 4.2 Dix agrandissements d'image réellement mesurés
 
 Dans les dix modes, `index.html` au format « tel paysage 844 » (844 × 390,

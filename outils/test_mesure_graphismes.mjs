@@ -21,6 +21,11 @@
  *   insuffisante » à 1 comme à 2 pixels par point ;
  * - `perimetre` : le rapport réduit doit le dire, sinon un relevé de quatre
  *   lignes se lirait comme l'audit complet.
+ * - `indecodable` : un fichier qui n'est pas une image doit produire un constat
+ *   **nommé et situé**, pas une exception qui emporte la mesure. Le 12 novembre
+ *   2026, la CI est tombée sur « EncodingError: The source image cannot be
+ *   decoded » : aucun relevé n'était écrit, et l'annotation ne nommait ni page
+ *   ni largeur. Le cas est ici pour que cela ne puisse plus revenir en silence.
  *
  * Les nombres du rapport sont confrontés à l'arithmétique, pas à des constantes
  * recopiées : `densite = largeur native / largeur rendue`, `distorsion =
@@ -132,6 +137,15 @@ const CAS = [
     distorsion: 0.5,
   },
   {
+    nom: 'image non décodable : constat nommé et situé, pas de plantage',
+    natif: [600, 300],
+    boite: [200, 100],
+    erreurs: ['image non décodée figure.png'],
+    densite: null,
+    distorsion: null,
+    fichier: 'pas-une-image',
+  },
+  {
     nom: 'basse densité : image 60 × 30 dans une boîte 200 × 100, insuffisante aux deux densités',
     natif: [60, 30],
     boite: [200, 100],
@@ -161,7 +175,10 @@ function servir(dossier) {
 
 async function mesurer(cas) {
   const dossier = await mkdtemp(path.join(os.tmpdir(), 'mrsc-mesure-graphismes-'));
-  await writeFile(path.join(dossier, 'figure.png'), png(...cas.natif));
+  await writeFile(
+    path.join(dossier, 'figure.png'),
+    cas.fichier === 'pas-une-image' ? Buffer.from('ceci n’est pas un PNG\n') : png(...cas.natif),
+  );
   await writeFile(path.join(dossier, 'index.html'), pageControle({
     image: 'figure.png', largeurBoite: cas.boite[0], hauteurBoite: cas.boite[1],
   }));
@@ -231,6 +248,18 @@ for (const cas of CAS) {
 
   for (const ligne of lignes) {
     const ou = `${ligne.page} ${ligne.largeur}px dpr${ligne.dpr}`;
+    if (cas.fichier === 'pas-une-image') {
+      // Aucune dimension ne peut être mesurée sur une source qui ne se décode
+      // pas : on vérifie le constat, et on refuse une ligne qui prétendrait
+      // quand même annoncer une densité.
+      const erreurs = new Set(ligne.erreurs || []);
+      for (const attendue of cas.erreurs) {
+        verifier(erreurs.has(attendue), `${ou} : erreur « ${attendue} » absente`, JSON.stringify([...erreurs]));
+      }
+      verifier(ligne.densite === undefined || ligne.no_mesure === true,
+        `${ou} : une source illisible ne peut pas annoncer une densité`, JSON.stringify(ligne));
+      continue;
+    }
     // Les dimensions natives sont celles du fichier écrit par le banc, pas
     // celles qu'une image d'exemple porterait : si le script recopiait
     // `naturalWidth`, ce contrôle le verrait à la première divergence.

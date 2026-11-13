@@ -433,7 +433,7 @@ fiches = ["numerique-hameconnage", "numerique-verifier-demande"]
 id = "reagir-fraude-numerique"
 titre = "Protéger ses comptes, conserver les preuves, contacter les services et signaler"
 statut = "partiel"
-fiches = ["numerique-reagir-fraude"]
+fiches = ["numerique-reagir-fraude", "numerique-declarer-fraude"]
 
 [[domaine.sujet]]
 id = "outils-fichiers-accessibilite"

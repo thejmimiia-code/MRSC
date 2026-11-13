@@ -1,0 +1,14 @@
+id = cybermalveillance-hameconnage-victime
+url = https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing
+date = 2026-11-12
+empreinte = 0d3d7d8901b6c0ef012fa7ce6741db8bfa5362a6e7f0d558a14c2453e5edaa15
+---
+Victime d’hameçonnage, que faire ? — fiche réflexe.
+
+« 2. Faites opposition immédiatement si vous avez malencontreusement communiqué des éléments sur vos moyens de paiement ou si vous avez constaté des débits frauduleux sur votre compte, faites opposition immédiatement auprès de votre organisme bancaire ou financier. 3. Conservez les preuves et, en particulier, le message d’hameçonnage reçu. 4. Déposez plainte [...] commissariat de police ou à la brigade de gendarmerie dont vous dépendez. »
+
+« 6. Signalez tout message ou site douteux à Signal Spam. » « 7. Signalez tous messages suspects reçus par SMS au 33 700. » « 8. Signalez l’adresse d’un site d’hameçonnage à Phishing Initiative. »
+
+« Pour être conseillé dans vos démarches, contactez la plateforme Info Escroqueries du ministère de l’Intérieur au 0 805 805 817 (appel et service gratuits de 9h à 18h30 du lundi au vendredi). »
+
+Texte recopié à la main depuis la page lue le 12 novembre 2026.

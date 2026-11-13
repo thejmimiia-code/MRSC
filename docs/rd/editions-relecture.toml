@@ -4001,3 +4001,1657 @@ sources = []
 mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py", "outils/relire-contenus.py"]
 constat = "Relecture de la consignation de publication du lot statutaire : la chaîne réellement suivie est écrite dans le journal — commit sur la branche de session, poussage sur origin, demande de fusion vers main, contrôles attendus, fusion, puis lecture de l’état du run de publication et du déploiement sur l’API du dépôt — et la suite de la 111e avancée est alignée sur cette chaîne au lieu d’attendre une demande séparée. Les avancées sont régénérées à 111 entrées, la mémoire ÉVA à 512 entrées, 324 nœuds et 734 arêtes, puis toutes deux vérifiées. Aucun fait externe : la règle de publication citée est la demande verbatim de la personne à 18 h 55 UTC et les compteurs viennent des outils reproductibles cités en mesures."
 limite = "Cette signature atteste une lecture d’agent et des exécutions locales reproductibles, pas une validation humaine du texte ou du rendu, ni une expertise, ni un avis juridique, ni une interprétation des statuts, ni un essai avec des personnes. Elle ne certifie ni la fusion ni le déploiement : leur état réel est lu après coup sur l’API du dépôt et rapporté. Elle ne prouve pas que la nouvelle ouverture plaît à l’œil sur téléphone, clavier, zoom ou lecteur d’écran, ne couvre ni www.ign.fr/ (HTTP 403) ni aucune date ultérieure, ne promeut aucun statut et n’écrit aucun registre humain."
+
+[[edition]]
+chemin = "outils/auditer-affichages.mjs"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d2920ec84faf06d2f8c57eab57710e35c2f57f8698b6727f0427bb2b40f91f2d"
+empreinte_apres = "54f4a93b09c05ecb142857a650b62853cfae7157e7dcd0789d90e0f0b82e004f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Correction du faux positif du 6 novembre 2026 : auditer-affichages.mjs n'écarte plus le chevron aria-hidden à font-size 0, compte et nomme l'écart, et test_auditer_affichages.mjs extrait la vraie fonction de mesure pour l'exécuter sur trois DOM témoins."
+limite = "Aucun navigateur n'a été lancé : ni les 2 470 mesures réelles, ni le rendu, ni un zoom, ni un lecteur d'écran. Le banc exécute le filtre sur des témoins écrits à la main, pas sur la géométrie réelle du site."
+[[edition]]
+chemin = "outils/test_auditer_affichages.mjs"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "eb0ad2c915844431083eec49ad6f6cb0ba675f21407c5d722b74be352adb1947"
+empreinte_apres = "9cb5b4423088bac6db33fffad25824d4ea310bee265f612ed7d79a502699a598"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Correction du faux positif du 6 novembre 2026 : auditer-affichages.mjs n'écarte plus le chevron aria-hidden à font-size 0, compte et nomme l'écart, et test_auditer_affichages.mjs extrait la vraie fonction de mesure pour l'exécuter sur trois DOM témoins."
+limite = "Aucun navigateur n'a été lancé : ni les 2 470 mesures réelles, ni le rendu, ni un zoom, ni un lecteur d'écran. Le banc exécute le filtre sur des témoins écrits à la main, pas sur la géométrie réelle du site."
+[[edition]]
+chemin = "outils/test_mutations_affichages.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "f141fd618433cb1637637afa0d3990bde38c74ea8875e7064879bda87833b203"
+empreinte_apres = "9d7e0e058ed2abfa2098aa07481fa7450ea9713551955cd7edcf88a5a192fa67"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Correction du faux positif du 6 novembre 2026 : auditer-affichages.mjs n'écarte plus le chevron aria-hidden à font-size 0, compte et nomme l'écart, et test_auditer_affichages.mjs extrait la vraie fonction de mesure pour l'exécuter sur trois DOM témoins."
+limite = "Aucun navigateur n'a été lancé : ni les 2 470 mesures réelles, ni le rendu, ni un zoom, ni un lecteur d'écran. Le banc exécute le filtre sur des témoins écrits à la main, pas sur la géométrie réelle du site."
+[[edition]]
+chemin = "outils/verifier-affichages.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e2219e529c128bc1577b180ac5a50f481fdbfb44127d884faa8878839e8de591"
+empreinte_apres = "7713179f98e1f89d1e2aefbdf441a90555c39cdd4999e36375989599c898c88a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Correction du faux positif du 6 novembre 2026 : auditer-affichages.mjs n'écarte plus le chevron aria-hidden à font-size 0, compte et nomme l'écart, et test_auditer_affichages.mjs extrait la vraie fonction de mesure pour l'exécuter sur trois DOM témoins."
+limite = "Aucun navigateur n'a été lancé : ni les 2 470 mesures réelles, ni le rendu, ni un zoom, ni un lecteur d'écran. Le banc exécute le filtre sur des témoins écrits à la main, pas sur la géométrie réelle du site."
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "405b97cfe0c5026b1b64902e3582879d0bed22ac854ce029208a405e87fc05a0"
+empreinte_apres = "b9915c8a939f757e4b625bf4f19026dcadec9e561a265045d45610e8d43d4b02"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Relecture des documents de méthode du lot du 12 novembre 2026 : chaque affirmation sur l’outil, le banc et les gardes correspond à une commande réellement lancée dans cette session, et le relevé du 6 novembre reçoit sa suite datée sans que son constat d’origine soit réécrit."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles, le rendu, le zoom et le lecteur d’écran restent non vérifiés, et le banc exécute le filtre sur des témoins écrits à la main, pas sur la géométrie du site."
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "cad2159ef8300e136b55d9be95c03a5175988f33128120f5aca4d3250b694665"
+empreinte_apres = "73c9a6ed05b8fdd46252dac831c3772541ff90268b7e24b341f4e2d12cc1bf2e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Relecture des documents de méthode du lot du 12 novembre 2026 : chaque affirmation sur l’outil, le banc et les gardes correspond à une commande réellement lancée dans cette session, et le relevé du 6 novembre reçoit sa suite datée sans que son constat d’origine soit réécrit."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles, le rendu, le zoom et le lecteur d’écran restent non vérifiés, et le banc exécute le filtre sur des témoins écrits à la main, pas sur la géométrie du site."
+[[edition]]
+chemin = "docs/rd/formats-affichage.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "fd22b5236e6c3bb45ad39d9c3e4609c2410a91300eb668b5f64ea375b9eeb39b"
+empreinte_apres = "10ae6af3165255408a00a6f79e4d6d3079112b1162ad227647cd80dd2fa01996"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Relecture des documents de méthode du lot du 12 novembre 2026 : chaque affirmation sur l’outil, le banc et les gardes correspond à une commande réellement lancée dans cette session, et le relevé du 6 novembre reçoit sa suite datée sans que son constat d’origine soit réécrit."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles, le rendu, le zoom et le lecteur d’écran restent non vérifiés, et le banc exécute le filtre sur des témoins écrits à la main, pas sur la géométrie du site."
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "b20e9418d224b411bf226c1c525db296c882d4f1c2d19d6a427c0873873849fb"
+empreinte_apres = "90b99da0f2ef87330398b0c3708fc146b3afd73d3fa8984a572f5ed89330aa1c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Relecture des documents de méthode du lot du 12 novembre 2026 : chaque affirmation sur l’outil, le banc et les gardes correspond à une commande réellement lancée dans cette session, et le relevé du 6 novembre reçoit sa suite datée sans que son constat d’origine soit réécrit."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles, le rendu, le zoom et le lecteur d’écran restent non vérifiés, et le banc exécute le filtre sur des témoins écrits à la main, pas sur la géométrie du site."
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "35cdb746d6f735bfd17a664ff971c5917b622482b135b1d144e5363b3cd23d79"
+empreinte_apres = "d6cf252d3efd65f7db1085a84bc7e30ca19bd96287d0e00946f6ca869a5953f7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Relecture des documents de méthode du lot du 12 novembre 2026 : chaque affirmation sur l’outil, le banc et les gardes correspond à une commande réellement lancée dans cette session, et le relevé du 6 novembre reçoit sa suite datée sans que son constat d’origine soit réécrit."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles, le rendu, le zoom et le lecteur d’écran restent non vérifiés, et le banc exécute le filtre sur des témoins écrits à la main, pas sur la géométrie du site."
+[[edition]]
+chemin = "docs/rd/releve-affichages-2026-11-06.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "804dc97ac7067d36af50e2cb7bee364217276971328277dcb634202da58313e3"
+empreinte_apres = "ef9c7083a5a546be7388f731b5016f4558946c9a6b2f075ec55caca5ace1cca7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Relecture des documents de méthode du lot du 12 novembre 2026 : chaque affirmation sur l’outil, le banc et les gardes correspond à une commande réellement lancée dans cette session, et le relevé du 6 novembre reçoit sa suite datée sans que son constat d’origine soit réécrit."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles, le rendu, le zoom et le lecteur d’écran restent non vérifiés, et le banc exécute le filtre sur des témoins écrits à la main, pas sur la géométrie du site."
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "c4c363142157b5ee52748f4f624719e2666292c0956753f122d8b1e054390287"
+empreinte_apres = "0f73a2f68e88ae0d87816ac7ea8e4423b2fa28f62eadb90a8c9791e5e3b493be"
+nature = "mesure-interne"
+sources = []
+mesures = ["docs/rd/avancees.toml"]
+constat = "Régénération de la mémoire ÉVA par l’outil du dépôt après l’ajout de la 112ᵉ avancée : 512 entrées, 321 nœuds, 733 arêtes, graphe et plan recalculés depuis leurs sources, aucune entrée écrite à la main."
+limite = "La mémoire ÉVA est un index de retrouvailles : elle ne dit ni l’exactitude d’une entrée, ni la qualité d’une source, et sa régénération ne vaut aucune validation humaine."
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "0b86abca904578da8e46bb55637ea552f40a77169c34a99d6412fcf986766e90"
+empreinte_apres = "7f491b1966236f3e7504cbda564ff05148732cc3b3136491e365b5c3d99f51e9"
+nature = "mesure-interne"
+sources = []
+mesures = ["docs/rd/avancees.toml"]
+constat = "Régénération de la mémoire ÉVA par l’outil du dépôt après l’ajout de la 112ᵉ avancée : 512 entrées, 321 nœuds, 733 arêtes, graphe et plan recalculés depuis leurs sources, aucune entrée écrite à la main."
+limite = "La mémoire ÉVA est un index de retrouvailles : elle ne dit ni l’exactitude d’une entrée, ni la qualité d’une source, et sa régénération ne vaut aucune validation humaine."
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "4011737836818bf06a6ad742ba06749f9d78840e65c117043d4ea5f852f662b5"
+empreinte_apres = "666efe5c6f2ff82a7b61b0528fb76984510878e0c905f0b01251488e6e949781"
+nature = "mesure-interne"
+sources = []
+mesures = ["docs/rd/avancees.toml"]
+constat = "Régénération de la mémoire ÉVA par l’outil du dépôt après l’ajout de la 112ᵉ avancée : 512 entrées, 321 nœuds, 733 arêtes, graphe et plan recalculés depuis leurs sources, aucune entrée écrite à la main."
+limite = "La mémoire ÉVA est un index de retrouvailles : elle ne dit ni l’exactitude d’une entrée, ni la qualité d’une source, et sa régénération ne vaut aucune validation humaine."
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "b9915c8a939f757e4b625bf4f19026dcadec9e561a265045d45610e8d43d4b02"
+empreinte_apres = "f41acac8765a28e69ba81b6571313ea08395ebbf805d74a4ccb7ba08ca18372b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Second passage du 12 novembre 2026 : le filtre exige désormais trois conditions (corps nul, texte présent, aria-hidden) pour que le compteur d’écarts ne mesure pas une non-mesure ; un quatrième DOM témoin et ses mutations l’éprouvent, et les textes de méthode annoncent les 7 cas réellement exécutés."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles ne sont pas rejouées, et le banc exécute le filtre sur des témoins à géométrie simulée, pas sur le site lui-même."
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "73c9a6ed05b8fdd46252dac831c3772541ff90268b7e24b341f4e2d12cc1bf2e"
+empreinte_apres = "333852be26b31dfa4749bc417e7d732491c01d2d5bc4c329f1dbdac5c80bf58d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Second passage du 12 novembre 2026 : le filtre exige désormais trois conditions (corps nul, texte présent, aria-hidden) pour que le compteur d’écarts ne mesure pas une non-mesure ; un quatrième DOM témoin et ses mutations l’éprouvent, et les textes de méthode annoncent les 7 cas réellement exécutés."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles ne sont pas rejouées, et le banc exécute le filtre sur des témoins à géométrie simulée, pas sur le site lui-même."
+[[edition]]
+chemin = "docs/rd/formats-affichage.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "10ae6af3165255408a00a6f79e4d6d3079112b1162ad227647cd80dd2fa01996"
+empreinte_apres = "24fa87cae3f05511e6af969e7b2e3b7815ed9cbcd44ebc8fc4a18dc9a392f807"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Second passage du 12 novembre 2026 : le filtre exige désormais trois conditions (corps nul, texte présent, aria-hidden) pour que le compteur d’écarts ne mesure pas une non-mesure ; un quatrième DOM témoin et ses mutations l’éprouvent, et les textes de méthode annoncent les 7 cas réellement exécutés."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles ne sont pas rejouées, et le banc exécute le filtre sur des témoins à géométrie simulée, pas sur le site lui-même."
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "90b99da0f2ef87330398b0c3708fc146b3afd73d3fa8984a572f5ed89330aa1c"
+empreinte_apres = "9ec033c8085d42fc943524e3d35c289b5ae97fc84dd119405daa475795d98c82"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Second passage du 12 novembre 2026 : le filtre exige désormais trois conditions (corps nul, texte présent, aria-hidden) pour que le compteur d’écarts ne mesure pas une non-mesure ; un quatrième DOM témoin et ses mutations l’éprouvent, et les textes de méthode annoncent les 7 cas réellement exécutés."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles ne sont pas rejouées, et le banc exécute le filtre sur des témoins à géométrie simulée, pas sur le site lui-même."
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d6cf252d3efd65f7db1085a84bc7e30ca19bd96287d0e00946f6ca869a5953f7"
+empreinte_apres = "00bd19cc598bdb770549ed7aec6497ef77c856eaea554b5af52af1886836335c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Second passage du 12 novembre 2026 : le filtre exige désormais trois conditions (corps nul, texte présent, aria-hidden) pour que le compteur d’écarts ne mesure pas une non-mesure ; un quatrième DOM témoin et ses mutations l’éprouvent, et les textes de méthode annoncent les 7 cas réellement exécutés."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles ne sont pas rejouées, et le banc exécute le filtre sur des témoins à géométrie simulée, pas sur le site lui-même."
+[[edition]]
+chemin = "outils/auditer-affichages.mjs"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "54f4a93b09c05ecb142857a650b62853cfae7157e7dcd0789d90e0f0b82e004f"
+empreinte_apres = "777357258e1b2193c0e0457c83c3c307cd2fc9fb8d48d9f5c413799987c8b3fe"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Second passage du 12 novembre 2026 : le filtre exige désormais trois conditions (corps nul, texte présent, aria-hidden) pour que le compteur d’écarts ne mesure pas une non-mesure ; un quatrième DOM témoin et ses mutations l’éprouvent, et les textes de méthode annoncent les 7 cas réellement exécutés."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles ne sont pas rejouées, et le banc exécute le filtre sur des témoins à géométrie simulée, pas sur le site lui-même."
+[[edition]]
+chemin = "outils/test_auditer_affichages.mjs"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "9cb5b4423088bac6db33fffad25824d4ea310bee265f612ed7d79a502699a598"
+empreinte_apres = "fd2ad1b5a53cee183eead15df42703de24ff3f917ed836173e5e0c0a0f54695f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Second passage du 12 novembre 2026 : le filtre exige désormais trois conditions (corps nul, texte présent, aria-hidden) pour que le compteur d’écarts ne mesure pas une non-mesure ; un quatrième DOM témoin et ses mutations l’éprouvent, et les textes de méthode annoncent les 7 cas réellement exécutés."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles ne sont pas rejouées, et le banc exécute le filtre sur des témoins à géométrie simulée, pas sur le site lui-même."
+[[edition]]
+chemin = "outils/test_mutations_affichages.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "9d7e0e058ed2abfa2098aa07481fa7450ea9713551955cd7edcf88a5a192fa67"
+empreinte_apres = "5996f675b320c03e634346d134fe9c47f6a1a6fd34c61244a1d6e07fe9da0e83"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Second passage du 12 novembre 2026 : le filtre exige désormais trois conditions (corps nul, texte présent, aria-hidden) pour que le compteur d’écarts ne mesure pas une non-mesure ; un quatrième DOM témoin et ses mutations l’éprouvent, et les textes de méthode annoncent les 7 cas réellement exécutés."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles ne sont pas rejouées, et le banc exécute le filtre sur des témoins à géométrie simulée, pas sur le site lui-même."
+[[edition]]
+chemin = "outils/verifier-affichages.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "7713179f98e1f89d1e2aefbdf441a90555c39cdd4999e36375989599c898c88a"
+empreinte_apres = "7381934bb7b4ab389eb9541867503d3eb8cd1570f9fe12bd4c6e7c6b36249a10"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Second passage du 12 novembre 2026 : le filtre exige désormais trois conditions (corps nul, texte présent, aria-hidden) pour que le compteur d’écarts ne mesure pas une non-mesure ; un quatrième DOM témoin et ses mutations l’éprouvent, et les textes de méthode annoncent les 7 cas réellement exécutés."
+limite = "Aucun navigateur n’a été lancé : les 2 470 mesures réelles ne sont pas rejouées, et le banc exécute le filtre sur des témoins à géométrie simulée, pas sur le site lui-même."
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "7f491b1966236f3e7504cbda564ff05148732cc3b3136491e365b5c3d99f51e9"
+empreinte_apres = "3010caf313ab9cbf76dc5c008497f9f150b60d087c4c8372ab998bfca6b6deaf"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_mutations_affichages.py", "docs/rd/avancees.toml"]
+constat = "Alignement du message attendu dans le banc de mutations sur le message réellement produit par la garde, et régénération de la mémoire ÉVA après la révision de la 112ᵉ avancée ; les deux commandes ont été relancées et passent."
+limite = "Aucun navigateur n’a été lancé ; la mémoire ÉVA est un index de retrouvailles et sa régénération ne vaut ni relecture humaine ni validation éditoriale."
+[[edition]]
+chemin = "outils/test_mutations_affichages.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "5996f675b320c03e634346d134fe9c47f6a1a6fd34c61244a1d6e07fe9da0e83"
+empreinte_apres = "e5fe44d7e5bd7bdd748d46c4290a5b52b432e09272e4f52fcb066397b2b4c390"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_mutations_affichages.py", "docs/rd/avancees.toml"]
+constat = "Alignement du message attendu dans le banc de mutations sur le message réellement produit par la garde, et régénération de la mémoire ÉVA après la révision de la 112ᵉ avancée ; les deux commandes ont été relancées et passent."
+limite = "Aucun navigateur n’a été lancé ; la mémoire ÉVA est un index de retrouvailles et sa régénération ne vaut ni relecture humaine ni validation éditoriale."
+[[edition]]
+chemin = "outils/verifier-affichages.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "7381934bb7b4ab389eb9541867503d3eb8cd1570f9fe12bd4c6e7c6b36249a10"
+empreinte_apres = "b1c2e60d005ea7603c25de6e588cd323180298508b312ae6c89b35ef07a14b30"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/auditer-affichages.mjs", "outils/test_auditer_affichages.mjs"]
+constat = "Relecture finale de la 21ᵉ garde : sa docstring décrit les quatre DOM témoins réellement éprouvés par le banc et ses deux refus, et les deux commentaires empilés n’en font plus qu’un."
+limite = "Garde statique seulement : elle lit la forme du filtre dans l’auditeur, elle n’exécute ni la mesure ni le banc, qui restent seuls juges du comportement."
+[[edition]]
+chemin = "README.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "4f8e341c68c63ff77c6844939aee848866963e98bae5a136d6917540d00f279c"
+empreinte_apres = "ff09f6a54d1e2fe01e4a3e0042bdbb7cf7e1831ec5e7a80d533c32cc73e7d629"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "anglais-aventure.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "1a97f406ecc687325b4b513125c890d00b6664359e6f76878dd0eb234afdaeb0"
+empreinte_apres = "3306f3637b623a798d20a3075df5ed12bc6a76eca4d36605fb446f2f8e6be0c0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "apprendre.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "21980bd3924d6ef8b8b18ba2a510685a69cb558f43e989b1be90edc79f475b60"
+empreinte_apres = "905e5a9e063f2156bebb2f397e22a8c6f0c5ddc035dd0f9f1830990563f5adbd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "22f9aa4d515f6a7e66c62f3bc34b28b9bd261b28c64a30323ff761828b794ba7"
+empreinte_apres = "f2d93d5a18ac421cb08cb096817760ebd8f4f60d6c2933baed0c0b366a51ccc2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "assets/js/apprentissage-aventure-data.js"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d4cb4843323b97e1ccd497a11f265463ac8f66cf4bbee81e7bd024668e33f0b0"
+empreinte_apres = "d01dc827f7963dd31ac6fc9c9ee41eec0af360063eb16eef93e3d75df0728820"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/apprentissage/audit-automatique.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "2ac8d24bf41e93039f13a751dac2a0dbfd761179255d749e6d6bd4bb59d43bac"
+empreinte_apres = "a9627dcae49db8f1abc4df923652a1d011563fa277fa0931e7f673299ee6526c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/apprentissage/catalogue.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "9ad245e350dc06603e602f7c2712cdae5814aaad0c1919110fa4fd38c064938b"
+empreinte_apres = "82e518a81048df8ecc4074ead13e8812c2bd30f2c74114a9c09ef53b422492c7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/apprentissage/file-relecture.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "22b89a4d13bed311d3efd0b024bfac451a22720d16a7ab155e51ca65ef51da1a"
+empreinte_apres = "ac01c774000568585eacc1e91e465428f97a16c601e642665efc6dfc5899972e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/apprentissage/grille-relecture.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "f948e02008e2e0289bf41fc246bab4c1d52c72cc269c43d2e65db2e826a90703"
+empreinte_apres = "9ed677281fa311763ba02c2721c46068698523b1094b33e03d6d4a3c31083172"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/apprentissage/objectif-1000.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "2e874da1feea8e85feff1f3481f415f59483bb32634691055dc50d016fc78d0e"
+empreinte_apres = "37d20e7b29b34a7a6569e0f13f2b9b5815587365f0c3bc793b9774287428f356"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/apprentissage/paquets-relecture.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "2b378e32ee2a5d77e6a720fee0b56e1698c14d9e95c4c9d0ba78f35ff767e938"
+empreinte_apres = "f657459b8668416ec92235e4c9d68ddd18001c09848caaf0e2b9dc10d6101823"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/apprentissage/referentiel.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d3bc4c60a98b8ae14daaa68282851abcb0d9d19e658b30d821c24397ca2752bf"
+empreinte_apres = "f42d6b363b1d62d7b3f6db97a2d4631a0c6937db0bdac76e6c85aadeeba6d2e0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/couverture-savoirs-base.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "f78d25aa6b02188be1fdb5030bac7874f4500511ff48dc9f64976bf8f6ffa3c7"
+empreinte_apres = "a4b9d22970f60f256f22c576278ae979d904e64220ff8068b3a71ece7cc43822"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/rd-anglais-aventure.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "fe4ea4f8e74233a1616e9d51f4c995fd063385337a08253b4466e5d4658bcde0"
+empreinte_apres = "e7ac39b5634c018a499fb725d05b061ce42e2a2d0923f8f64838b1bfed8a5312"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/rd-coherence-visuelle-editoriale.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "68cd789f87f5ee93dd359d9313872e09a89d7abf8a05d54f6d3a4fcf48fa800a"
+empreinte_apres = "5241dded58db0a2577de34831df0fa9ed2e1c0c6b983d682ae3fc63c4aaeaf0c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/rd-ia-usages-fraudes.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "eecc3f9ee7c9a799e88577958525d8961d6e74abfbbb9db8146e304bc2a3a079"
+empreinte_apres = "ae68e1b282280a04183e3fe5b2f4237178f13c5965ff8784030760c9abb5c1ce"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/rd-innovation-continue.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e5f89faced467803a85fd0aed8797dfad46aaa3e564972642dbc1fe77da06c9b"
+empreinte_apres = "7c4aaff901ab702ffecf556e893fd8d558f5f12c2bdd7fbb121aa90f808879ff"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/rd-parcours-apprentissage.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "8439107ca2727bbb26868f6e71818b05426e7ef12899b816d88cba6a0e91910b"
+empreinte_apres = "4e4652b1781b354259b7373b577e78004f4a6ad1c32478144ce3ed7c6d6fb88d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/rd/carte-lacunes.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e7add6c1a9d899b883dccf3af09e67ed3e85c9ca950765c7c03f79d6c80bfd85"
+empreinte_apres = "adb743798fb1c98e6d70ab984b507a1003c1f52acb1e2e44c870ef414c3469c8"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/rd/poids-et-sobriete-numerique.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "5063554bef492fdf8be4305c7c0fa582654735e242ab05303e32016549c20764"
+empreinte_apres = "a640aaf86c40f04b9e84653d4109c7002fb8695adf5e6cb5703feeda35b9b2ee"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/rd/portefeuille.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "c3f82a933326a3af80ee182fa25a38b08fd39ef67f39c13c9d34d3e5a9fc4645"
+empreinte_apres = "cdb022a1bfb9cbbc62e9677160b88e9e25fdc177ebcfae6277ed43b9542373db"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/rd/prospective-2027-2030.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "047e011911712f08070679192a985932e7401ee4873e0ecb0a445e2804631061"
+empreinte_apres = "0ffdd1212020011d1599339c9321237e5af1070d7171d85ffb086d3c0d7c16c4"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/rd/relecture-contenus.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e9da687eed9ac39e37d2a91ed28d44ad5140e675c3c93bd5b66dc05dda979b9a"
+empreinte_apres = "7b5c02ec879df102e5867b58709f7a22d6c1e990dfc36b26736b1477fcfa1e4a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "a5d9057d9e4d09fb5491c48660194d6d15d844c4f843282a49229ed41c5fdf00"
+empreinte_apres = "67daa4fbd682d086d179f60c0c0022f0a3d1123ccffd230eb1efd925202d727b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "index.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "0790e676f5e11d18a6b51af2381b6ab09b571c6be491cdff43b024460ff7dc0e"
+empreinte_apres = "517d1e2a6f89b3d2f9a563d0d12a24a597a907ccba3053c8c3fac461c68a2e11"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "liens-utiles.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e8bf281791a0822562563090cfafcabc966ca845b6679b8843fddf7533fdbfbf"
+empreinte_apres = "e0d99f037a40ba6cd9eb51741bbe2b3e1918e9e77898569228fbd5c517cca7fb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "outils/construire-paquets-relecture.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "72bfe6f1a33d2b60d4db8f5aa60dab53320345df0cd5c0df6aa89d6f324637b9"
+empreinte_apres = "c214b4117ffdfcdf7b3e81282412535f5dbf5d44ec633b8bc2367e38edb31a73"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "bc3bd67e4dd533d5f52a711d3edf76c23b8fea11dae13ac677db038f1365c1f6"
+empreinte_apres = "1536938a33af356d669f0594126e6993bc853a508e1aeb3f83fb441824514ab0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "outils/verifier-relecture-contenus.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "84e760cf8c9efdde73de28a76c1fea9388b6e58cf44692d366218535784cf9eb"
+empreinte_apres = "e4caf59fed1d87858433aa96dc8f4de1feb693d6cdef1e073676b16152eda0b1"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "sitemap.xml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "1fe0d0a61955f024f5c312cb62c35bfa4da77342b229fe073775033ebcdbd6b2"
+empreinte_apres = "84b59e1ee0436e9022d04ecf751d8c9cd1fa1fc82c3688dd6d6b749e9adcdd3c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "transparence.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "a6dfa35c2de34504aaaccf2c09c67cb1d592e4fedca37d4138bc77cf2335f046"
+empreinte_apres = "8d1905e18d126a50e7c6d03673984fb4df599945260491bc5dd5dec5f926f703"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-apprentissages.py", "outils/verifier-site-statique.py"]
+constat = "Signature groupée du lot « déclarer » du 12 novembre 2026 : les unités restantes sont les pages, registres, rapports générés et outils que la fiche numerique-declarer-fraude fait changer (catalogue 108 fiches / 82 prototypes / 123 pages), plus les deux outils de relecture élargis aux administrations françaises et au rapport du lot. Chaque unité est soit une sortie régénérée par son générateur, soit un compteur public réaligné sur le recomptage, soit un fichier d'outillage lu dans son diff."
+limite = "Signature de mesure interne : elle atteste la cohérence des compteurs et la régénération des sorties, pas l'exactitude éditoriale de chaque fiche comptée. Les autres signatures du même lot portent les faits externes et leurs sources ; celle-ci ne revendique aucune source nouvelle."
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "f41acac8765a28e69ba81b6571313ea08395ebbf805d74a4ccb7ba08ca18372b"
+empreinte_apres = "86f7f55742d64236ed4f0d7df812527e191ff7502b111b578f6a41d131028d21"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Traçabilité du lot « déclarer » : le journal reçoit l'entrée datée du 12 novembre 2026 avec ses contrôles réels et ses limites, le registre des avancées reçoit une 113e entrée traçable vers deux initiatives existantes du portefeuille (veille-savoirs-evolutifs, coherence-textes-publics) — la première version citait deux identifiants inexistants et le générateur l'a refusée —, et ÉVA est régénérée : 515 entrées, 324 nœuds, 739 arêtes."
+limite = "Ces fichiers sont générés ou rédigés après coup : la signature atteste qu'ils décrivent le lot réellement exécuté, pas qu'ils en constituent une preuve indépendante. La vérification d'ÉVA --verifier passe, mais elle ne juge pas la pertinence des liens ; elle vérifie la cohérence des compteurs et de l'index. Aucune de ces entrées ne promeut un statut ni ne remplace une relecture humaine."
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "333852be26b31dfa4749bc417e7d732491c01d2d5bc4c329f1dbdac5c80bf58d"
+empreinte_apres = "5fae6d9e7883aa5f4178f880137e3bcacfe380806f07d5f8e03227655fb78f0e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Traçabilité du lot « déclarer » : le journal reçoit l'entrée datée du 12 novembre 2026 avec ses contrôles réels et ses limites, le registre des avancées reçoit une 113e entrée traçable vers deux initiatives existantes du portefeuille (veille-savoirs-evolutifs, coherence-textes-publics) — la première version citait deux identifiants inexistants et le générateur l'a refusée —, et ÉVA est régénérée : 515 entrées, 324 nœuds, 739 arêtes."
+limite = "Ces fichiers sont générés ou rédigés après coup : la signature atteste qu'ils décrivent le lot réellement exécuté, pas qu'ils en constituent une preuve indépendante. La vérification d'ÉVA --verifier passe, mais elle ne juge pas la pertinence des liens ; elle vérifie la cohérence des compteurs et de l'index. Aucune de ces entrées ne promeut un statut ni ne remplace une relecture humaine."
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "0f73a2f68e88ae0d87816ac7ea8e4423b2fa28f62eadb90a8c9791e5e3b493be"
+empreinte_apres = "cddce7df39d6b55670605affbdbf0eb7dc88422474bb1542aa63b06c71517ab2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Traçabilité du lot « déclarer » : le journal reçoit l'entrée datée du 12 novembre 2026 avec ses contrôles réels et ses limites, le registre des avancées reçoit une 113e entrée traçable vers deux initiatives existantes du portefeuille (veille-savoirs-evolutifs, coherence-textes-publics) — la première version citait deux identifiants inexistants et le générateur l'a refusée —, et ÉVA est régénérée : 515 entrées, 324 nœuds, 739 arêtes."
+limite = "Ces fichiers sont générés ou rédigés après coup : la signature atteste qu'ils décrivent le lot réellement exécuté, pas qu'ils en constituent une preuve indépendante. La vérification d'ÉVA --verifier passe, mais elle ne juge pas la pertinence des liens ; elle vérifie la cohérence des compteurs et de l'index. Aucune de ces entrées ne promeut un statut ni ne remplace une relecture humaine."
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "3010caf313ab9cbf76dc5c008497f9f150b60d087c4c8372ab998bfca6b6deaf"
+empreinte_apres = "6f444b66723b2a96aa50a370842d5ead8903c94f18ad6d14a2cea2548afcb21c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Traçabilité du lot « déclarer » : le journal reçoit l'entrée datée du 12 novembre 2026 avec ses contrôles réels et ses limites, le registre des avancées reçoit une 113e entrée traçable vers deux initiatives existantes du portefeuille (veille-savoirs-evolutifs, coherence-textes-publics) — la première version citait deux identifiants inexistants et le générateur l'a refusée —, et ÉVA est régénérée : 515 entrées, 324 nœuds, 739 arêtes."
+limite = "Ces fichiers sont générés ou rédigés après coup : la signature atteste qu'ils décrivent le lot réellement exécuté, pas qu'ils en constituent une preuve indépendante. La vérification d'ÉVA --verifier passe, mais elle ne juge pas la pertinence des liens ; elle vérifie la cohérence des compteurs et de l'index. Aucune de ces entrées ne promeut un statut ni ne remplace une relecture humaine."
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "666efe5c6f2ff82a7b61b0528fb76984510878e0c905f0b01251488e6e949781"
+empreinte_apres = "377c106084ad9ac228a9c426644d0d633ff8064bb191ac2a400815f2d7aac175"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Traçabilité du lot « déclarer » : le journal reçoit l'entrée datée du 12 novembre 2026 avec ses contrôles réels et ses limites, le registre des avancées reçoit une 113e entrée traçable vers deux initiatives existantes du portefeuille (veille-savoirs-evolutifs, coherence-textes-publics) — la première version citait deux identifiants inexistants et le générateur l'a refusée —, et ÉVA est régénérée : 515 entrées, 324 nœuds, 739 arêtes."
+limite = "Ces fichiers sont générés ou rédigés après coup : la signature atteste qu'ils décrivent le lot réellement exécuté, pas qu'ils en constituent une preuve indépendante. La vérification d'ÉVA --verifier passe, mais elle ne juge pas la pertinence des liens ; elle vérifie la cohérence des compteurs et de l'index. Aucune de ces entrées ne promeut un statut ni ne remplace une relecture humaine."
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "00bd19cc598bdb770549ed7aec6497ef77c856eaea554b5af52af1886836335c"
+empreinte_apres = "e589c32510c196f20fc6cb5dc8680d1927ab07cbbf5e19bf5748e7b69a1fb84e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Traçabilité du lot « déclarer » : le journal reçoit l'entrée datée du 12 novembre 2026 avec ses contrôles réels et ses limites, le registre des avancées reçoit une 113e entrée traçable vers deux initiatives existantes du portefeuille (veille-savoirs-evolutifs, coherence-textes-publics) — la première version citait deux identifiants inexistants et le générateur l'a refusée —, et ÉVA est régénérée : 515 entrées, 324 nœuds, 739 arêtes."
+limite = "Ces fichiers sont générés ou rédigés après coup : la signature atteste qu'ils décrivent le lot réellement exécuté, pas qu'ils en constituent une preuve indépendante. La vérification d'ÉVA --verifier passe, mais elle ne juge pas la pertinence des liens ; elle vérifie la cohérence des compteurs et de l'index. Aucune de ces entrées ne promeut un statut ni ne remplace une relecture humaine."
+[[edition]]
+chemin = "docs/rd/grilles-dynamiques.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "4e920573d31d84a5d2251047420abc8e91b98fde48f0a64f30c3f4b4a7b3da37"
+empreinte_apres = "83f97758dc586ce2496e1aeda06eba33860f90ea5e5611db8d8579ddc622001b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/modele-grilles.py"]
+constat = "Trois capacités du registre des grilles étaient devenues fausses avec la nouvelle fiche : le catalogue passe de 107 à 108 cartes, la liste de leçons de la page fraude de 5 à 6, et une grille de liens de 7 à 8. La grille du nouveau bloc, .ai-fraud-declare-steps, est déclarée à 6 éléments, 3 colonnes et 300 px de minimum, avec un motif d'écart écrit contre la proposition de 350 px du modèle. Le relevé du modèle confirme l'ensemble : plus aucun écart refusé, et cinq minima adoptés sont désormais nommés avec leur motif."
+limite = "Aucune mesure de navigateur : les 300 px et le motif d'écart sont un raisonnement sur la place calculée par le modèle (1 087,6 px), pas un relevé de rendu. Le registre ne dit pas que le dessin est beau ni lisible à 320 px ; il dit seulement que la feuille et le registre s'accordent sur le nombre de cartes et le comportement des colonnes."
+
+[[edition]]
+chemin = "README.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "4f8e341c68c63ff77c6844939aee848866963e98bae5a136d6917540d00f279c"
+empreinte_apres = "ff09f6a54d1e2fe01e4a3e0042bdbb7cf7e1831ec5e7a80d533c32cc73e7d629"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "anglais-aventure.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "1a97f406ecc687325b4b513125c890d00b6664359e6f76878dd0eb234afdaeb0"
+empreinte_apres = "3306f3637b623a798d20a3075df5ed12bc6a76eca4d36605fb446f2f8e6be0c0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "apprendre.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "21980bd3924d6ef8b8b18ba2a510685a69cb558f43e989b1be90edc79f475b60"
+empreinte_apres = "905e5a9e063f2156bebb2f397e22a8c6f0c5ddc035dd0f9f1830990563f5adbd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "22f9aa4d515f6a7e66c62f3bc34b28b9bd261b28c64a30323ff761828b794ba7"
+empreinte_apres = "f2d93d5a18ac421cb08cb096817760ebd8f4f60d6c2933baed0c0b366a51ccc2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "assets/js/apprentissage-aventure-data.js"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d4cb4843323b97e1ccd497a11f265463ac8f66cf4bbee81e7bd024668e33f0b0"
+empreinte_apres = "d01dc827f7963dd31ac6fc9c9ee41eec0af360063eb16eef93e3d75df0728820"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/apprentissage/audit-automatique.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "2ac8d24bf41e93039f13a751dac2a0dbfd761179255d749e6d6bd4bb59d43bac"
+empreinte_apres = "a9627dcae49db8f1abc4df923652a1d011563fa277fa0931e7f673299ee6526c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/apprentissage/catalogue.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "9ad245e350dc06603e602f7c2712cdae5814aaad0c1919110fa4fd38c064938b"
+empreinte_apres = "82e518a81048df8ecc4074ead13e8812c2bd30f2c74114a9c09ef53b422492c7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/apprentissage/file-relecture.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "22b89a4d13bed311d3efd0b024bfac451a22720d16a7ab155e51ca65ef51da1a"
+empreinte_apres = "ac01c774000568585eacc1e91e465428f97a16c601e642665efc6dfc5899972e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/apprentissage/grille-relecture.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "f948e02008e2e0289bf41fc246bab4c1d52c72cc269c43d2e65db2e826a90703"
+empreinte_apres = "9ed677281fa311763ba02c2721c46068698523b1094b33e03d6d4a3c31083172"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/apprentissage/objectif-1000.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "2e874da1feea8e85feff1f3481f415f59483bb32634691055dc50d016fc78d0e"
+empreinte_apres = "37d20e7b29b34a7a6569e0f13f2b9b5815587365f0c3bc793b9774287428f356"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/apprentissage/paquets-relecture.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "2b378e32ee2a5d77e6a720fee0b56e1698c14d9e95c4c9d0ba78f35ff767e938"
+empreinte_apres = "f657459b8668416ec92235e4c9d68ddd18001c09848caaf0e2b9dc10d6101823"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/apprentissage/referentiel.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d3bc4c60a98b8ae14daaa68282851abcb0d9d19e658b30d821c24397ca2752bf"
+empreinte_apres = "f42d6b363b1d62d7b3f6db97a2d4631a0c6937db0bdac76e6c85aadeeba6d2e0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/couverture-savoirs-base.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "f78d25aa6b02188be1fdb5030bac7874f4500511ff48dc9f64976bf8f6ffa3c7"
+empreinte_apres = "a4b9d22970f60f256f22c576278ae979d904e64220ff8068b3a71ece7cc43822"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd-anglais-aventure.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "fe4ea4f8e74233a1616e9d51f4c995fd063385337a08253b4466e5d4658bcde0"
+empreinte_apres = "e7ac39b5634c018a499fb725d05b061ce42e2a2d0923f8f64838b1bfed8a5312"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd-coherence-visuelle-editoriale.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "b4fe43844679960d0eff29de497a783358a8eb88836837749b85f79830c1bbbd"
+empreinte_apres = "081d1167bf0e1d37f5888a290cf4650d8d168293e4425ff4d90456094a416923"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd-ia-usages-fraudes.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "eecc3f9ee7c9a799e88577958525d8961d6e74abfbbb9db8146e304bc2a3a079"
+empreinte_apres = "ae68e1b282280a04183e3fe5b2f4237178f13c5965ff8784030760c9abb5c1ce"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd-innovation-continue.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e5f89faced467803a85fd0aed8797dfad46aaa3e564972642dbc1fe77da06c9b"
+empreinte_apres = "7c4aaff901ab702ffecf556e893fd8d558f5f12c2bdd7fbb121aa90f808879ff"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd-parcours-apprentissage.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "8439107ca2727bbb26868f6e71818b05426e7ef12899b816d88cba6a0e91910b"
+empreinte_apres = "4e4652b1781b354259b7373b577e78004f4a6ad1c32478144ce3ed7c6d6fb88d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "13cf1dacf257d6812355f96579a6833b35add86a4fc10cbc020a510673bb07c0"
+empreinte_apres = "d5cbbdaa6b6d9f77ffa58f7ba7c1af783b41bdea974ec807a545619970c02b56"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "39456dfafef219e62683466b7bbd08335eb81de543689e9d46b6a6b6252f855a"
+empreinte_apres = "768ed82516fd0fece52fe68d75ba74bcb883022c450a3c5816510a4205196fb3"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/carte-lacunes.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e7add6c1a9d899b883dccf3af09e67ed3e85c9ca950765c7c03f79d6c80bfd85"
+empreinte_apres = "adb743798fb1c98e6d70ab984b507a1003c1f52acb1e2e44c870ef414c3469c8"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "0f0ff7297a5aa911f66d211455fa1aa4815a7f2ccf71d3bb25391d67da717e77"
+empreinte_apres = "92f884705b729b42ea9dedb277b740944f8642402f8263dc26e7c0e35a430807"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "c8194f7c046f8898015a3e10318339fa0861e3dcff08e1e9305a5bc6604214a5"
+empreinte_apres = "8f5156004e3396417a7dcc1135128fb6fe37faf59bbabd3d6bb349ebeb35368a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "8b09062ec70374082d78a7c5f26ac730a5d818c5afc97624455f74e39aea8dc9"
+empreinte_apres = "6e3b07896178e3c18f58680e0635786a1a30e1e81401c68abf14024e8e1056af"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/formats-affichage.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "fd22b5236e6c3bb45ad39d9c3e4609c2410a91300eb668b5f64ea375b9eeb39b"
+empreinte_apres = "24fa87cae3f05511e6af969e7b2e3b7815ed9cbcd44ebc8fc4a18dc9a392f807"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/grilles-dynamiques.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "4e920573d31d84a5d2251047420abc8e91b98fde48f0a64f30c3f4b4a7b3da37"
+empreinte_apres = "83f97758dc586ce2496e1aeda06eba33860f90ea5e5611db8d8579ddc622001b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "b20e9418d224b411bf226c1c525db296c882d4f1c2d19d6a427c0873873849fb"
+empreinte_apres = "9ec033c8085d42fc943524e3d35c289b5ae97fc84dd119405daa475795d98c82"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "466c69bc480148f1473195d2b989cfa4a8be13bd1abbd90905ea23845607605f"
+empreinte_apres = "93f375728b4b323a9edfa7f77bc50de59f2536f71d3c18cda3895d63399d52e0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/poids-et-sobriete-numerique.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "5063554bef492fdf8be4305c7c0fa582654735e242ab05303e32016549c20764"
+empreinte_apres = "a640aaf86c40f04b9e84653d4109c7002fb8695adf5e6cb5703feeda35b9b2ee"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/portefeuille.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "c3f82a933326a3af80ee182fa25a38b08fd39ef67f39c13c9d34d3e5a9fc4645"
+empreinte_apres = "cdb022a1bfb9cbbc62e9677160b88e9e25fdc177ebcfae6277ed43b9542373db"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/prospective-2027-2030.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "047e011911712f08070679192a985932e7401ee4873e0ecb0a445e2804631061"
+empreinte_apres = "0ffdd1212020011d1599339c9321237e5af1070d7171d85ffb086d3c0d7c16c4"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/relecture-contenus.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e9da687eed9ac39e37d2a91ed28d44ad5140e675c3c93bd5b66dc05dda979b9a"
+empreinte_apres = "7b5c02ec879df102e5867b58709f7a22d6c1e990dfc36b26736b1477fcfa1e4a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "docs/rd/releve-affichages-2026-11-06.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "804dc97ac7067d36af50e2cb7bee364217276971328277dcb634202da58313e3"
+empreinte_apres = "ef9c7083a5a546be7388f731b5016f4558946c9a6b2f075ec55caca5ace1cca7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "a5d9057d9e4d09fb5491c48660194d6d15d844c4f843282a49229ed41c5fdf00"
+empreinte_apres = "67daa4fbd682d086d179f60c0c0022f0a3d1123ccffd230eb1efd925202d727b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "a464017cc7e6c4b586db5ce0fe288ed6f5b93f4e229805ffbfc23f1bf8927954"
+empreinte_apres = "697b7348ae3bd709fcac93051bb2c6504c2a16ff7e2a11e392619779d672a5c6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "liens-utiles.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e8bf281791a0822562563090cfafcabc966ca845b6679b8843fddf7533fdbfbf"
+empreinte_apres = "e0d99f037a40ba6cd9eb51741bbe2b3e1918e9e77898569228fbd5c517cca7fb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "outils/auditer-affichages.mjs"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d2920ec84faf06d2f8c57eab57710e35c2f57f8698b6727f0427bb2b40f91f2d"
+empreinte_apres = "777357258e1b2193c0e0457c83c3c307cd2fc9fb8d48d9f5c413799987c8b3fe"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "outils/construire-paquets-relecture.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "72bfe6f1a33d2b60d4db8f5aa60dab53320345df0cd5c0df6aa89d6f324637b9"
+empreinte_apres = "c214b4117ffdfcdf7b3e81282412535f5dbf5d44ec633b8bc2367e38edb31a73"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "bc3bd67e4dd533d5f52a711d3edf76c23b8fea11dae13ac677db038f1365c1f6"
+empreinte_apres = "1536938a33af356d669f0594126e6993bc853a508e1aeb3f83fb441824514ab0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "outils/test_auditer_affichages.mjs"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "eb0ad2c915844431083eec49ad6f6cb0ba675f21407c5d722b74be352adb1947"
+empreinte_apres = "fd2ad1b5a53cee183eead15df42703de24ff3f917ed836173e5e0c0a0f54695f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "outils/test_mutations_affichages.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "f141fd618433cb1637637afa0d3990bde38c74ea8875e7064879bda87833b203"
+empreinte_apres = "e5fe44d7e5bd7bdd748d46c4290a5b52b432e09272e4f52fcb066397b2b4c390"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "outils/verifier-affichages.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e2219e529c128bc1577b180ac5a50f481fdbfb44127d884faa8878839e8de591"
+empreinte_apres = "b1c2e60d005ea7603c25de6e588cd323180298508b312ae6c89b35ef07a14b30"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "outils/verifier-relecture-contenus.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "84e760cf8c9efdde73de28a76c1fea9388b6e58cf44692d366218535784cf9eb"
+empreinte_apres = "e4caf59fed1d87858433aa96dc8f4de1feb693d6cdef1e073676b16152eda0b1"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "sitemap.xml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "1fe0d0a61955f024f5c312cb62c35bfa4da77342b229fe073775033ebcdbd6b2"
+empreinte_apres = "84b59e1ee0436e9022d04ecf751d8c9cd1fa1fc82c3688dd6d6b749e9adcdd3c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "transparence.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "a6dfa35c2de34504aaaccf2c09c67cb1d592e4fedca37d4138bc77cf2335f046"
+empreinte_apres = "8d1905e18d126a50e7c6d03673984fb4df599945260491bc5dd5dec5f926f703"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/relire-contenus.py", "outils/construire-avancees.py", "outils/memoire-eva.py"]
+constat = "Fusion de main (1ab732c) dans la branche du lot « déclarer » : sept conflits, tous sur des fichiers générés. Résolution par reprise de la version de main puis régénération avec les générateurs propriétaires ; les deux entrées d'avancées et les deux entrées de journal du 12 novembre ont été réintégrées, et les deux unités neuves du lot (fiche numerique-declarer-fraude, rapport de relecture du 12 novembre) réinscrites au manifeste d'empreintes que la fusion avait écrasé. Après régénération : 113 avancées traçables, ÉVA à 517 entrées / 328 nœuds / 746 arêtes."
+limite = "Signature de mesure interne : elle atteste la cohérence des fichiers régénérés et des empreintes après la fusion, pas une relecture ligne à ligne du contenu fusionné. Les deux lots ont été signés séparément avant la fusion ; celle-ci ne change aucune phrase, seulement des sorties dérivées et des compteurs. Aucune promotion de statut, aucune écriture dans relectures.toml."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "67daa4fbd682d086d179f60c0c0022f0a3d1123ccffd230eb1efd925202d727b"
+empreinte_apres = "928279f6d787e037a8b74a752b8c5f9aa1b03b3ff4c63458206d530d6daf8767"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/versionner-css-ia.py"]
+constat = "Le lot « déclarer » a modifié assets/css/site.css sans régénérer la version de cache du CSS de la page IA : l'étape CI « Vérifier la version du CSS de la page IA » et, par ricochet, le contrôle navigateur des graphismes, échouaient. La version est régénérée par l'outil propriétaire (f2d93d5a18ac421c, sha256 tronqué du fichier) et la page ia-societe.html la porte."
+limite = "Cette signature couvre le réalignement d'une version de cache, pas une relecture nouvelle du contenu de la page : les phrases du bloc « déclarer » ont été signées séparément. Elle ne dit rien du rendu ni du cache réel d'un navigateur ; elle atteste seulement que le nom versionné correspond au fichier servi."
+
+[[edition]]
+chemin = "docs/rd/couverture-sujets.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "246bf872d994c002bffa3a702c3189b1779c9704f6743a97a67230c0bd0c769d"
+empreinte_apres = "ddf0d8e7be87455c5839bd583e8182e07d7f218bef5cb3ca476f48b3750417a3"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-couverture-sujets.py", "outils/verifier-decision-prospective.py", "outils/test_mutations_couverture_sujets.py"]
+constat = "Fichiers régénérés après l'ajout de la 108ᵉ fiche (numerique-declarer-fraude) et resynchronisation du brief prospectif : 108 fiches dans 15 domaines, 82 prototypes. Le banc de mutations lit désormais le compte réel du catalogue au lieu de coder 107 en dur, ce qui le rendait aveugle depuis la nouvelle fiche."
+limite = "Comptes et phrases produits par les outils et relus par l'agent ; aucune relecture humaine. Le banc de mutations n'éprouve que le compteur de fiches, pas la qualité éditoriale des fiches."
+
+[[edition]]
+chemin = "docs/rd/decision-prospective.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "df52266a3c8acc8f8cdd91a95919c6bf48088447a570886625a759383d736df9"
+empreinte_apres = "5be66fef4863dc1b681dffa78d6fe36716298c378df51e0a8e6fe304906ea378"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-couverture-sujets.py", "outils/verifier-decision-prospective.py", "outils/test_mutations_couverture_sujets.py"]
+constat = "Fichiers régénérés après l'ajout de la 108ᵉ fiche (numerique-declarer-fraude) et resynchronisation du brief prospectif : 108 fiches dans 15 domaines, 82 prototypes. Le banc de mutations lit désormais le compte réel du catalogue au lieu de coder 107 en dur, ce qui le rendait aveugle depuis la nouvelle fiche."
+limite = "Comptes et phrases produits par les outils et relus par l'agent ; aucune relecture humaine. Le banc de mutations n'éprouve que le compteur de fiches, pas la qualité éditoriale des fiches."
+
+[[edition]]
+chemin = "docs/rd/prospective-lacunes-2027.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "6148ea5fcd5600a89ee66689c8f8b400f5b3e384646d6d30a78ef69525ebab90"
+empreinte_apres = "f19a4e0fdf6f7cfc3e343d630dd8eeb5d185bed88bf16884018bda9881554350"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-couverture-sujets.py", "outils/verifier-decision-prospective.py", "outils/test_mutations_couverture_sujets.py"]
+constat = "Fichiers régénérés après l'ajout de la 108ᵉ fiche (numerique-declarer-fraude) et resynchronisation du brief prospectif : 108 fiches dans 15 domaines, 82 prototypes. Le banc de mutations lit désormais le compte réel du catalogue au lieu de coder 107 en dur, ce qui le rendait aveugle depuis la nouvelle fiche."
+limite = "Comptes et phrases produits par les outils et relus par l'agent ; aucune relecture humaine. Le banc de mutations n'éprouve que le compteur de fiches, pas la qualité éditoriale des fiches."
+
+[[edition]]
+chemin = "outils/test_mutations_couverture_sujets.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "5929999fdf0c3b15628547409a9f7b78dc4ea6c72b11bf291c42c11bdbf19900"
+empreinte_apres = "5e0517a3df8d34439e3eff8a77777e04258d53d9cc6bae1902b157754c2984fc"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-couverture-sujets.py", "outils/verifier-decision-prospective.py", "outils/test_mutations_couverture_sujets.py"]
+constat = "Fichiers régénérés après l'ajout de la 108ᵉ fiche (numerique-declarer-fraude) et resynchronisation du brief prospectif : 108 fiches dans 15 domaines, 82 prototypes. Le banc de mutations lit désormais le compte réel du catalogue au lieu de coder 107 en dur, ce qui le rendait aveugle depuis la nouvelle fiche."
+limite = "Comptes et phrases produits par les outils et relus par l'agent ; aucune relecture humaine. Le banc de mutations n'éprouve que le compteur de fiches, pas la qualité éditoriale des fiches."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "ffb80175a00b67a4d9ebcd46be1864063d2ae001bcae01dc311b06a47e169225"
+empreinte_apres = "8abce9abd1a818ab76e2c919532bf847f716b5b6fb59cef3b47736d5304edb73"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
+constat = "Compteurs du plan du projet recalculés depuis l'arbre réel après le lot fraude : 589 fichiers en 11 zones (apprendre 108, docs 173), 108 pages de fiches et 82 prototypes annoncés. Les phrases du plan citent le lot du 12 novembre à côté du lot site du 11, sans réécrire l'histoire."
+limite = "Le comptage porte sur les fichiers présents, pas sur leur qualité ni sur l'avancement du projet ; un plan à jour ne prouve ni justesse éditoriale ni validation humaine."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "9bded1d9bfc0400d629d89c57062a7a09ea6fe0515863fa6be22b47070f55bb3"
+empreinte_apres = "cd8bf8c069044bdc7202aa219f162db38b9f860f61098c329bac593092f1c011"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
+constat = "Compteurs du plan du projet recalculés depuis l'arbre réel après le lot fraude : 589 fichiers en 11 zones (apprendre 108, docs 173), 108 pages de fiches et 82 prototypes annoncés. Les phrases du plan citent le lot du 12 novembre à côté du lot site du 11, sans réécrire l'histoire."
+limite = "Le comptage porte sur les fichiers présents, pas sur leur qualité ni sur l'avancement du projet ; un plan à jour ne prouve ni justesse éditoriale ni validation humaine."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "f2d93d5a18ac421cb08cb096817760ebd8f4f60d6c2933baed0c0b366a51ccc2"
+empreinte_apres = "bf9eb33a7a0f42d514cacf7232b8dc708946703d48546addc235ad13427efed9"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "assets/js/site.js"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d1f342c392520945e0c8da18dd2dcff623970d2f64b703c2cf6f4fd76868d976"
+empreinte_apres = "5d82d9ff8ef0ce4b32c98d5948cb001198a58a9614c8013101f7cb29643f00e5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "9ec033c8085d42fc943524e3d35c289b5ae97fc84dd119405daa475795d98c82"
+empreinte_apres = "b4822de48fdbf322179b07fce22b47640dee7e71a32b2b5f39b65ebe0f6100fb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "docs/rd/relecture-contenus.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "7b5c02ec879df102e5867b58709f7a22d6c1e990dfc36b26736b1477fcfa1e4a"
+empreinte_apres = "f25f0e0033ded1bb4f3b06afb71982ca81b078a461f41fe8d9d4f1549c7d0333"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "outils/test-experience.cjs"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "26ea66693863e70acde6ee3b103d16f65760015964d1359a62dcd3e70bd147df"
+empreinte_apres = "5b00606f7dd2237e64df288411832eb989d6e447df013894431c9cfa48226000"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "outils/test_mutations_affichages.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "e5fe44d7e5bd7bdd748d46c4290a5b52b432e09272e4f52fcb066397b2b4c390"
+empreinte_apres = "f38546539dbf0518dc2ce84f47f1312192e833ae90345c1165ae812af87af12a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "outils/verifier-affichages.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "b1c2e60d005ea7603c25de6e588cd323180298508b312ae6c89b35ef07a14b30"
+empreinte_apres = "896cb4d71684bd8c56bbd77dd44bfafeb1dfdd449c9da57420a0de765e4ab814"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "outils/verifier-integration.py"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "1ee54fcb9e765cf29ffb3fcace6f283ecfb440521188044050187d083a26829f"
+empreinte_apres = "1ba77deed22f02c110c5c5283fbd1699e11fff39d141a46851e307680910ec3d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/test_mutations_affichages.py", "outils/test-experience.cjs", "outils/verifier-integration.py"]
+constat = "Trois modules d'accessibilité destinés aux personnes handicapées sont ajoutés au panneau Personnalisation : lecture facilitée (police et espacement), réduction des mouvements (durées coupées) et repères clavier visibles (lien d'évitement affiché). Aucun code, texte, icône ni mise en page n'est repris de Lisio (logiciel propriétaire payant) ni du téléservice MDPH en ligne : les fonctions de ces deux sites ont servi de liste de besoins, et les équivalents sont écrits ici avec les polices du système et une icône dessinée pour le site. Mesures : 14/14 essais navigateur, 0 violation axe sur 49 exécutions puis 0 avec les modules actifs, contrastes de 6,3:1 à 12,3:1, cibles de 44 px de 320 à 1280 px, aucun débordement."
+limite = "Aucun essai avec des personnes handicapées, aucune validation RGAA ou WCAG, aucune expertise orthophonique. Les modules ne remplacent ni un lecteur d'écran, ni les réglages du système, et le contenu n'est pas traduit en FALC. Les mutations prouvent que les gardes mordent, pas qu'elles couvrent tous les cas."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "d5cbbdaa6b6d9f77ffa58f7ba7c1af783b41bdea974ec807a545619970c02b56"
+empreinte_apres = "4d54731ec89f96d954e399268ad2e6597ad5054a86f38c5f62f72b695c99b4bc"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "768ed82516fd0fece52fe68d75ba74bcb883022c450a3c5816510a4205196fb3"
+empreinte_apres = "a3362fa78238a2e682ec306d29dfeda540bbccb1e5239f388cff8c190a35a32b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/decision-prospective.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "5be66fef4863dc1b681dffa78d6fe36716298c378df51e0a8e6fe304906ea378"
+empreinte_apres = "46dcb8dd8bfccc17fe4b0ab581decf0960e543eb74c52a52ed4a6ac6be6895f2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "92f884705b729b42ea9dedb277b740944f8642402f8263dc26e7c0e35a430807"
+empreinte_apres = "aa718cac3bb01cc2eeb81f752c1a60f98d57504a65925fb58f400bee983e89bd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "8f5156004e3396417a7dcc1135128fb6fe37faf59bbabd3d6bb349ebeb35368a"
+empreinte_apres = "c59dd4847232e84bf4c4323e52f35df07abdc63ffb14485e733e504378234d42"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "6e3b07896178e3c18f58680e0635786a1a30e1e81401c68abf14024e8e1056af"
+empreinte_apres = "4e50c489c3f345e71c46ba839031ee067cd4e96f09ef911890143cb8915df79a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "93f375728b4b323a9edfa7f77bc50de59f2536f71d3c18cda3895d63399d52e0"
+empreinte_apres = "f865cc9f94ab828a3ea1ceb761c07973a79846a79d8b7a1ca1f6aca43fd6c4d7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/plan-complet-rd-innovation-prospective.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "51636d55c2169a4aa92f0a98530c1e647bc635a78e7e91b75dce073e8504d5c7"
+empreinte_apres = "d170fb42fdec70a79803cacb9d9b7a7e81f0b090d7bf25492061ecb683dda888"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/poids-pages.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "753a00986876c3f4873dee5c35541e8bf967b7bdb215845cac7ceae6444911fa"
+empreinte_apres = "e0b79d85835d80fba122697396671610b5acb448c8e5676a434e4d361e66c4a4"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-poids-pages.py", "outils/construire-avancees.py", "outils/memoire-eva.py", "outils/verifier-decision-prospective.py"]
+constat = "Relevé de poids régénéré après le lot accessibilité (122 pages, apprendre.html à 250,0 Kio mobile et 438,2 Kio grand écran, tous sous les budgets de 300 et 450 Kio). Regénération des avancées (114ᵉ entrée : modules d'accessibilité originaux) et de la mémoire ÉVA (520 entrées, 329 nœuds, 752 arêtes, 9,0 % du corpus). Le brief prospectif reprend le poids mesuré ; le journal consigne le lot et son geste de droits."
+limite = "Les chiffres sont recalculés par les outils, pas relus à l'œil page par page ; un relevé de poids n'est ni une mesure réseau ni une mesure de sobriété. Aucune relecture humaine de ces documents générés."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "c59dd4847232e84bf4c4323e52f35df07abdc63ffb14485e733e504378234d42"
+empreinte_apres = "098ea1996b375a109d85641422de7bb5ca99b45e46c90e87d579b1915753ee2f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Mémoire ÉVA régénérée depuis ses sources après la signature du journal et de l'avancée du 12 novembre : 520 entrées, 329 nœuds, 752 arêtes, index de 208028 octets pour un corpus de 2303752 octets (9,0 %). Le fichier est un rendu, pas une écriture à la main."
+limite = "Le rendu est recalculé par l'outil et non relu entrée par entrée ; un index de mémoire n'est ni une preuve d'apprentissage ni une validation de contenu."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "928279f6d787e037a8b74a752b8c5f9aa1b03b3ff4c63458206d530d6daf8767"
+empreinte_apres = "6163d4fa0c8aba170fa7a72422e8f6d79eed2adc88aeffe2b0bac74dc5485024"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/versionner-css-ia.py"]
+constat = "L'URL de la feuille de style de la page IA porte l'empreinte de contenu du CSS après le lot accessibilité : bf9eb33a7a0f42d5. Seul le paramètre de version change ; aucun texte de la page n'est modifié par ce geste."
+limite = "L'empreinte prouve que le cache du navigateur est invalidé, pas que la page est exacte ni que son rendu a été relu à l'œil. Aucun texte éditorial n'a été retouché ici."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "8abce9abd1a818ab76e2c919532bf847f716b5b6fb59cef3b47736d5304edb73"
+empreinte_apres = "769da923c34e056abeb54e1c72d0fd3e0ac24411780e2b0ddc19cd5a4a03bc9a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
+constat = "Compteurs du plan du projet recalculés depuis l'arbre réel après le lot accessibilité : 590 fichiers en 11 zones, dont 174 dans docs. La zone apprendre reste à 108 pages et docs à 174 fichiers ; les phrases du plan citent les trois lots du 12 novembre (fraude, plan, accessibilité) sans réécrire l'histoire."
+limite = "Le comptage porte sur les fichiers présents, pas sur leur qualité ni sur l'avancement du projet ; un plan à jour ne prouve ni justesse éditoriale ni validation humaine."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
+date = 2026-11-12
+auteur = "agent"
+empreinte_avant = "cd8bf8c069044bdc7202aa219f162db38b9f860f61098c329bac593092f1c011"
+empreinte_apres = "8cc9c31edf48dfdb4b194d128d618b79593dc179ee94e43ff50d27814f6bcc12"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
+constat = "Compteurs du plan du projet recalculés depuis l'arbre réel après le lot accessibilité : 590 fichiers en 11 zones, dont 174 dans docs. La zone apprendre reste à 108 pages et docs à 174 fichiers ; les phrases du plan citent les trois lots du 12 novembre (fraude, plan, accessibilité) sans réécrire l'histoire."
+limite = "Le comptage porte sur les fichiers présents, pas sur leur qualité ni sur l'avancement du projet ; un plan à jour ne prouve ni justesse éditoriale ni validation humaine."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "bf9eb33a7a0f42d514cacf7232b8dc708946703d48546addc235ad13427efed9"
+empreinte_apres = "bf1f609e14a2a12c6d30035eac2a737bcbfbda62a582bc1efe1ef129487995bd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-graphismes.cjs", "outils/test_mesure_graphismes.mjs", "outils/verifier-poids-pages.py", "outils/optimiser-images.py"]
+constat = "Deux défauts de mesure corrigés après un échec de CI. D'abord, sizes annonçait 700 px alors que la boîte de contenu en fait 698 à cause des deux bordures, donc à 768 px et densité 2 le navigateur servait l'image 800 px pour 698 px rendus : le contrôle de densité refusait légitimement, et sizes annonce maintenant 698. Ensuite, la mesure lisait currentSrc avant que le navigateur n'échange son image après un changement de densité : elle attend désormais deux lectures stables, plafonnées à 1,5 s, et une image qui ne se décode pas produit un constat nommé au lieu d'un plantage. Mesures : 3 780 relevés, 0 échec ; banc de la mesure 4/4 ; poids de la page Apprendre 250,0 Kio mobile et 438,2 Kio grand écran."
+limite = "L'attente de stabilisation est bornée et ne garantit pas un échange au-delà de 1,5 s sur une machine très lente ; une densité insuffisante après stabilisation reste un échec. Le relevé ne couvre que trois pages et les largeurs du script, pas tous les appareils."
+
+[[edition]]
+chemin = "docs/rd/poids-pages.md"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "e0b79d85835d80fba122697396671610b5acb448c8e5676a434e4d361e66c4a4"
+empreinte_apres = "31eff8b149c38e783a549dbab4cdf8173533920ea709cf8ef04547ae24a82a25"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-graphismes.cjs", "outils/test_mesure_graphismes.mjs", "outils/verifier-poids-pages.py", "outils/optimiser-images.py"]
+constat = "Deux défauts de mesure corrigés après un échec de CI. D'abord, sizes annonçait 700 px alors que la boîte de contenu en fait 698 à cause des deux bordures, donc à 768 px et densité 2 le navigateur servait l'image 800 px pour 698 px rendus : le contrôle de densité refusait légitimement, et sizes annonce maintenant 698. Ensuite, la mesure lisait currentSrc avant que le navigateur n'échange son image après un changement de densité : elle attend désormais deux lectures stables, plafonnées à 1,5 s, et une image qui ne se décode pas produit un constat nommé au lieu d'un plantage. Mesures : 3 780 relevés, 0 échec ; banc de la mesure 4/4 ; poids de la page Apprendre 250,0 Kio mobile et 438,2 Kio grand écran."
+limite = "L'attente de stabilisation est bornée et ne garantit pas un échange au-delà de 1,5 s sur une machine très lente ; une densité insuffisante après stabilisation reste un échec. Le relevé ne couvre que trois pages et les largeurs du script, pas tous les appareils."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "697b7348ae3bd709fcac93051bb2c6504c2a16ff7e2a11e392619779d672a5c6"
+empreinte_apres = "280ad77c132c241731baa59e3753205ee1111ada846b6d9e3e18358ede0ef6fe"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-graphismes.cjs", "outils/test_mesure_graphismes.mjs", "outils/verifier-poids-pages.py", "outils/optimiser-images.py"]
+constat = "Deux défauts de mesure corrigés après un échec de CI. D'abord, sizes annonçait 700 px alors que la boîte de contenu en fait 698 à cause des deux bordures, donc à 768 px et densité 2 le navigateur servait l'image 800 px pour 698 px rendus : le contrôle de densité refusait légitimement, et sizes annonce maintenant 698. Ensuite, la mesure lisait currentSrc avant que le navigateur n'échange son image après un changement de densité : elle attend désormais deux lectures stables, plafonnées à 1,5 s, et une image qui ne se décode pas produit un constat nommé au lieu d'un plantage. Mesures : 3 780 relevés, 0 échec ; banc de la mesure 4/4 ; poids de la page Apprendre 250,0 Kio mobile et 438,2 Kio grand écran."
+limite = "L'attente de stabilisation est bornée et ne garantit pas un échange au-delà de 1,5 s sur une machine très lente ; une densité insuffisante après stabilisation reste un échec. Le relevé ne couvre que trois pages et les largeurs du script, pas tous les appareils."
+
+[[edition]]
+chemin = "outils/test_mesure_graphismes.mjs"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "f3d244ca82564d9606d44e9e0c6f4ba9736eedeaf0c7f325490dc13d2279a89b"
+empreinte_apres = "8bfe1ecde701b44022c3ba5ed2f1bcb626275115a3a6e58bc6eca064b7612cc5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-graphismes.cjs", "outils/test_mesure_graphismes.mjs", "outils/verifier-poids-pages.py", "outils/optimiser-images.py"]
+constat = "Deux défauts de mesure corrigés après un échec de CI. D'abord, sizes annonçait 700 px alors que la boîte de contenu en fait 698 à cause des deux bordures, donc à 768 px et densité 2 le navigateur servait l'image 800 px pour 698 px rendus : le contrôle de densité refusait légitimement, et sizes annonce maintenant 698. Ensuite, la mesure lisait currentSrc avant que le navigateur n'échange son image après un changement de densité : elle attend désormais deux lectures stables, plafonnées à 1,5 s, et une image qui ne se décode pas produit un constat nommé au lieu d'un plantage. Mesures : 3 780 relevés, 0 échec ; banc de la mesure 4/4 ; poids de la page Apprendre 250,0 Kio mobile et 438,2 Kio grand écran."
+limite = "L'attente de stabilisation est bornée et ne garantit pas un échange au-delà de 1,5 s sur une machine très lente ; une densité insuffisante après stabilisation reste un échec. Le relevé ne couvre que trois pages et les largeurs du script, pas tous les appareils."
+
+[[edition]]
+chemin = "outils/verifier-graphismes.cjs"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "27711c8689352fffadc4b726b7bba1a55c69e20ddcfdd5800126361e3ab723a3"
+empreinte_apres = "ba9bd2f08cb2d3ed3ab9ae44a990f7d614b08e51f727a32b1574e5934e2cbf93"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-graphismes.cjs", "outils/test_mesure_graphismes.mjs", "outils/verifier-poids-pages.py", "outils/optimiser-images.py"]
+constat = "Deux défauts de mesure corrigés après un échec de CI. D'abord, sizes annonçait 700 px alors que la boîte de contenu en fait 698 à cause des deux bordures, donc à 768 px et densité 2 le navigateur servait l'image 800 px pour 698 px rendus : le contrôle de densité refusait légitimement, et sizes annonce maintenant 698. Ensuite, la mesure lisait currentSrc avant que le navigateur n'échange son image après un changement de densité : elle attend désormais deux lectures stables, plafonnées à 1,5 s, et une image qui ne se décode pas produit un constat nommé au lieu d'un plantage. Mesures : 3 780 relevés, 0 échec ; banc de la mesure 4/4 ; poids de la page Apprendre 250,0 Kio mobile et 438,2 Kio grand écran."
+limite = "L'attente de stabilisation est bornée et ne garantit pas un échange au-delà de 1,5 s sur une machine très lente ; une densité insuffisante après stabilisation reste un échec. Le relevé ne couvre que trois pages et les largeurs du script, pas tous les appareils."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "098ea1996b375a109d85641422de7bb5ca99b45e46c90e87d579b1915753ee2f"
+empreinte_apres = "c04a6c7c3750fe20922e7b449d73339f8e912444998be1bb2d2c4902bd067546"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Mémoire ÉVA régénérée depuis ses sources après la correction du releveur de graphismes et du sizes de l'accueil : le fichier est un rendu recalculé, pas une écriture à la main."
+limite = "Le rendu est recalculé par l'outil et non relu entrée par entrée ; un index de mémoire n'est ni une preuve d'apprentissage ni une validation de contenu."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-13
+auteur = "agent"
+empreinte_avant = "6163d4fa0c8aba170fa7a72422e8f6d79eed2adc88aeffe2b0bac74dc5485024"
+empreinte_apres = "9bb019eb49527afc7cc5f25899e4061c1780c0d3c8e09d848077d071704181a6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/versionner-css-ia.py"]
+constat = "L'URL de la feuille de la page IA porte la nouvelle empreinte du CSS : bf1f609e14a2a12c. Le changement de site.css est un commentaire daté qui explique le correctif de sizes à l'accueil ; aucun style n'est modifié par lui."
+limite = "L'empreinte prouve que le cache est invalidé, pas que la page est exacte ni que son rendu a été relu à l'œil."

@@ -1,0 +1,16 @@
+id = signal-spam-accueil
+url = https://www.signal-spam.fr/
+date = 2026-11-12
+empreinte = 883bc24972087a18e5f6b797b4b180c22336b523fe1f23e4ed1634d2d85ffd6f
+---
+Signal Spam — page d’accueil.
+
+« Découvrez la plateforme en charge de la collecte des signalements des internautes pour spam ! »
+
+Trois étapes présentées : « Je m’inscris — Créez un compte pour pouvoir signaler un spam et accéder à votre Espace Signalant » ; « Je télécharge — Téléchargez le module qui correspond à votre environnement de messagerie et installez-le » ; « Je signale — Signalez les spams depuis votre messagerie et suivez l’évolution dans votre Espace Signalant ».
+
+« Créée en 2005, Signal Spam est une association à but non lucratif qui oeuvre pour des pratiques plus responsables et une meilleure prise en compte des droits de l’internaute. »
+
+« Grâce à vos signalements, Signal Spam recueille des informations essentielles à l’identification des spammeurs, et les partage avec les acteurs capables d’entreprendre des mesures appropriées. »
+
+Texte recopié à la main depuis la page lue le 12 novembre 2026.

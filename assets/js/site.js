@@ -46,6 +46,13 @@
     text: "mrsc-texte-cran",
     contrast: "mrsc-contraste-renforce",
     spacing: "mrsc-espacement-renforce",
+    // Trois réglages d'accessibilité pour les personnes handicapées : une
+    // police adaptée à la dyslexie, une atténuation des mouvements et des
+    // liens d'évitement rendus visibles en permanence. Chacun répond à un
+    // besoin qui n'était couvert par aucun des réglages précédents.
+    langue: "mrsc-lecture-aide",
+    mouvement: "mrsc-mouvement-attenue",
+    reperes: "mrsc-reperes-visibles",
   };
   // Réduire l'en-tête est un choix de la personne, pas un effet du format de
   // fenêtre. Le 5 novembre 2026, ce choix n'était pas mémorisé : chaque entrée
@@ -61,6 +68,9 @@
   let textLevel = 100;
   let contrastEnabled = false;
   let spacingEnabled = false;
+  let aideLecture = false;
+  let mouvementAttenue = false;
+  let reperesVisibles = false;
   // Rappels exécutés après un changement de réglage d'affichage. La taille du
   // texte et l'espacement changent la largeur des entrées de navigation : le
   // panneau du menu doit alors réévaluer s'il est flottant, et se replacer.
@@ -149,6 +159,37 @@
     apresChangementReglages.forEach((rappel) => rappel());
   };
 
+  // --- Aides à la lecture et au mouvement -----------------------------------
+  // Trois réglages d'accessibilité pensés pour des besoins précis, et non pour
+  // « faire plus » : une police à empattements larges et un espacement des
+  // lettres pour la dyslexie, l'arrêt des mouvements pour les troubles
+  // vestibulaires et l'épilepsie photosensible, et des liens d'évitement
+  // visibles pour qui navigue au clavier sans les découvrir au survol.
+  // Chaque réglage est une classe sur `<html>` : aucune règle ne dépend d'un
+  // format de fenêtre, et le contenu n'est jamais réécrit ni réordonné.
+  const appliquerReglageClasse = (cle, classe, actif, bouton) => {
+    root.classList.toggle(classe, actif);
+    if (bouton) bouton.setAttribute("aria-pressed", String(actif));
+    savePreference(cle, actif ? "oui" : "non");
+    synchroniserSimulateurs();
+    apresChangementReglages.forEach((rappel) => rappel());
+  };
+
+  const applyAideLecture = (actif) => {
+    aideLecture = Boolean(actif);
+    root.classList.toggle("aide-lecture", aideLecture);
+  };
+
+  const applyMouvementAttenue = (actif) => {
+    mouvementAttenue = Boolean(actif);
+    root.classList.toggle("mouvement-attenue", mouvementAttenue);
+  };
+
+  const applyReperesVisibles = (actif) => {
+    reperesVisibles = Boolean(actif);
+    root.classList.toggle("reperes-visibles", reperesVisibles);
+  };
+
   const loadPreferences = () => {
     const storedTextLevel = readPreference(keys.text);
     if (storedTextLevel === null) {
@@ -162,6 +203,9 @@
     applyTextLevel(textLevel);
     applyContrast(readPreference(keys.contrast) === "oui");
     applySpacing(readPreference(keys.spacing) === "oui");
+    applyAideLecture(readPreference(keys.langue) === "oui");
+    applyMouvementAttenue(readPreference(keys.mouvement) === "oui");
+    applyReperesVisibles(readPreference(keys.reperes) === "oui");
   };
 
   loadPreferences();
@@ -333,6 +377,7 @@
       if (!layoutSettings.open) return;
       if (settings) settings.open = false;
       if (apparenceSettings) apparenceSettings.open = false;
+      if (accessibiliteSettings) accessibiliteSettings.open = false;
       const journeySettings = document.querySelector("[data-site-journey]");
       if (journeySettings) journeySettings.open = false;
       if (toggle && navigation) {
@@ -525,6 +570,7 @@
       if (!apparenceSettings.open) return;
       if (settings) settings.open = false;
       if (layoutSettings) layoutSettings.open = false;
+      if (accessibiliteSettings) accessibiliteSettings.open = false;
       const journeySettings = document.querySelector("[data-site-journey]");
       if (journeySettings) journeySettings.open = false;
       ajusterPanneauxFlottants();
@@ -542,6 +588,151 @@
     }
   } else {
     appliquerApparence(lireApparence());
+  }
+
+  // --- Accessibilité : trois modules pour les personnes handicapées ---------
+  // Ce panneau n'invente pas une nouvelle façon de naviguer : il donne accès à
+  // des réglages qui n'existaient pas et qui correspondent à des besoins
+  // documentés — lecture avec une police plus ouverte, arrêt des mouvements,
+  // repères clavier visibles. Aucun texte, aucune icône ni aucune mise en page
+  // n'est repris d'un produit tiers ; les trois modules sont écrits ici, avec
+  // le vocabulaire du site. Voir docs/rd/accessibilite-modules-2026-11-12.md.
+  const MODULES_ACCESSIBILITE = [
+    {
+      cle: "langue",
+      classe: "aide-lecture",
+      label: "Lecture facilitée",
+      description: "Police plus ouverte, lettres espacées et interlignes larges, pour la dyslexie et les difficultés de lecture.",
+      appliquer: applyAideLecture,
+      actif: () => aideLecture,
+    },
+    {
+      cle: "mouvement",
+      classe: "mouvement-attenue",
+      label: "Réduire les mouvements",
+      description: "Coupe les animations et les transitions, pour les troubles vestibulaires et la photosensibilité.",
+      appliquer: applyMouvementAttenue,
+      actif: () => mouvementAttenue,
+    },
+    {
+      cle: "reperes",
+      classe: "reperes-visibles",
+      label: "Repères clavier visibles",
+      description: "Le lien « Aller au contenu » et le contour de focus restent affichés, pour qui navigue sans souris.",
+      appliquer: applyReperesVisibles,
+      actif: () => reperesVisibles,
+    },
+  ];
+  const accessibiliteSettings = settings ? document.createElement("details") : null;
+  const accessibiliteBoutons = [];
+
+  if (accessibiliteSettings) {
+    accessibiliteSettings.className = "accessibilite-settings";
+    accessibiliteSettings.dataset.accessibiliteSettings = "";
+
+    const resume = document.createElement("summary");
+    resume.className = "accessibilite-settings-summary";
+    const chevron = document.createElement("span");
+    chevron.className = "accessibilite-settings-chevron";
+    chevron.setAttribute("aria-hidden", "true");
+    chevron.textContent = "⌄";
+    resume.append("Accessibilité", " ", chevron);
+
+    const panneau = document.createElement("div");
+    panneau.className = "accessibilite-settings-panel";
+    panneau.id = "site-accessibilite-settings-panel";
+    resume.setAttribute("aria-controls", panneau.id);
+
+    const titre = document.createElement("p");
+    titre.className = "accessibilite-settings-title";
+    const titreFort = document.createElement("strong");
+    titreFort.textContent = "Adapter le site à votre situation";
+    titre.appendChild(titreFort);
+
+    const etatAnnonce = document.createElement("p");
+    etatAnnonce.className = "accessibilite-settings-status";
+    etatAnnonce.setAttribute("role", "status");
+    etatAnnonce.setAttribute("aria-live", "polite");
+    etatAnnonce.setAttribute("aria-atomic", "true");
+    const annoncerAccessibilite = (module, actif) => {
+      etatAnnonce.textContent = actif
+        ? `${module.label} : activé.`
+        : `${module.label} : désactivé.`;
+    };
+
+    const liste = document.createElement("div");
+    liste.className = "accessibilite-settings-actions";
+    liste.setAttribute("role", "group");
+    liste.setAttribute("aria-label", "Modules d’accessibilité");
+
+    MODULES_ACCESSIBILITE.forEach((module) => {
+      const bouton = document.createElement("button");
+      bouton.type = "button";
+      bouton.className = "display-control display-control-wide";
+      bouton.dataset.accessibiliteToggle = module.cle;
+      bouton.textContent = module.label;
+      bouton.setAttribute("aria-pressed", String(module.actif()));
+      bouton.addEventListener("click", () => {
+        const actif = !module.actif();
+        module.appliquer(actif);
+        // La préférence est écrite par le même chemin que les autres réglages,
+        // et annoncée : un bouton muet laisserait douter de l'effet.
+        appliquerReglageClasse(keys[module.cle], module.classe, actif, bouton);
+        annoncerAccessibilite(module, actif);
+      });
+      const description = document.createElement("span");
+      description.className = "accessibilite-settings-description";
+      description.id = `site-accessibilite-${module.cle}-description`;
+      description.textContent = module.description;
+      bouton.setAttribute("aria-describedby", description.id);
+      const ligne = document.createElement("div");
+      ligne.className = "accessibilite-settings-row";
+      ligne.append(bouton, description);
+      liste.appendChild(ligne);
+      accessibiliteBoutons.push({ bouton, module });
+    });
+
+    const note = document.createElement("p");
+    note.className = "accessibilite-settings-note";
+    note.textContent = "Ces réglages restent sur cet appareil et se combinent avec la taille du texte, le contraste et l’espacement. Les préférences de votre système (mouvement réduit, contraste élevé) continuent de s’appliquer.";
+
+    const retour = document.createElement("button");
+    retour.type = "button";
+    retour.className = "display-control display-control-wide accessibilite-settings-reset";
+    retour.textContent = "Désactiver les trois modules";
+    retour.addEventListener("click", () => {
+      MODULES_ACCESSIBILITE.forEach((module) => {
+        module.appliquer(false);
+        savePreference(keys[module.cle], "non");
+      });
+      accessibiliteBoutons.forEach(({ bouton }) => bouton.setAttribute("aria-pressed", "false"));
+      etatAnnonce.textContent = "Modules d’accessibilité désactivés.";
+    });
+
+    panneau.append(titre, liste, etatAnnonce, note, retour);
+    accessibiliteSettings.append(resume, panneau);
+    settings.insertAdjacentElement("afterend", accessibiliteSettings);
+
+    accessibiliteSettings.addEventListener("toggle", () => {
+      if (!accessibiliteSettings.open) return;
+      if (settings) settings.open = false;
+      if (apparenceSettings) apparenceSettings.open = false;
+      if (layoutSettings) layoutSettings.open = false;
+      const journeySettings = document.querySelector("[data-site-journey]");
+      if (journeySettings) journeySettings.open = false;
+      ajusterPanneauxFlottants();
+    });
+
+    window.addEventListener("storage", (event) => {
+      if (event.key === null || Object.values(keys).includes(event.key)) {
+        MODULES_ACCESSIBILITE.forEach((module) => {
+          module.appliquer(readPreference(keys[module.cle]) === "oui");
+        });
+        accessibiliteBoutons.forEach(({ bouton, module }) => {
+          bouton.setAttribute("aria-pressed", String(module.actif()));
+        });
+      }
+    });
   }
 
   // --- Écouter la page -------------------------------------------------------
@@ -988,6 +1179,7 @@
     if (settings && !settings.contains(event.target)) settings.open = false;
     if (layoutSettings && !layoutSettings.contains(event.target)) layoutSettings.open = false;
     if (apparenceSettings && !apparenceSettings.contains(event.target)) apparenceSettings.open = false;
+    if (accessibiliteSettings && !accessibiliteSettings.contains(event.target)) accessibiliteSettings.open = false;
     if (personnalisation && !personnalisation.contains(event.target)) personnalisation.open = false;
   });
 
@@ -1234,7 +1426,7 @@
       const lectureVocale = construireLectureVocale();
       // L'écoute vient en dernier : elle ne fait pas partie des réglages de
       // présentation, et l'intercaler coupait le groupe en deux.
-      [headerCompactToggle, settings, apparenceSettings, layoutSettings, lectureVocale].forEach((element) => {
+      [headerCompactToggle, settings, apparenceSettings, layoutSettings, accessibiliteSettings, lectureVocale].forEach((element) => {
         if (element) panneauPersonnalisation.append(element);
       });
       outilsEntete.append(personnalisation);
@@ -1281,6 +1473,7 @@
       if (personnalisation && personnalisation.open) personnalisation.open = false;
       if (settings) settings.open = false;
       if (apparenceSettings) apparenceSettings.open = false;
+      if (accessibiliteSettings) accessibiliteSettings.open = false;
       if (layoutSettings) layoutSettings.open = false;
       const journeySettings = document.querySelector("[data-site-journey]");
       if (journeySettings) journeySettings.open = false;
@@ -1444,6 +1637,11 @@
         const focusDansApparence = apparenceSettings.contains(document.activeElement);
         apparenceSettings.open = false;
         if (focusDansApparence) apparenceSettings.querySelector("summary")?.focus();
+      }
+      if (accessibiliteSettings?.open) {
+        const focusDansAccessibilite = accessibiliteSettings.contains(document.activeElement);
+        accessibiliteSettings.open = false;
+        if (focusDansAccessibilite) accessibiliteSettings.querySelector("summary")?.focus();
       }
     });
   }
