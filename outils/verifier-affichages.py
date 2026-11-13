@@ -1534,7 +1534,10 @@ def controler_pied_de_page() -> list[str]:
     fautives = []
     for page in pages:
         contenu = page.read_text(encoding="utf-8")
-        if '<ul class="footer-legal">' not in contenu:
+        # Depuis le 13 novembre 2026, la liste légale porte `role="list"` : la
+        # balise exacte ne suffit plus, l'attribut peut s'ajouter. La règle qui
+        # compte ici est la présence de la liste, pas l'écriture d'un attribut.
+        if not re.search(r'<ul\b[^>]*class="footer-legal"', contenu):
             fautives.append(page.name)
     if fautives:
         erreurs.append(

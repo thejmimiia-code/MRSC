@@ -17,6 +17,7 @@ digraph memoire {
   "assets/js/site.js" [shape=plaintext, label="assets/js/site.js"];
   "avancee:accessibilite-modules-originaux-2026-11-12" [shape=note, label="avancee:accessibilite-modules-originaux-2026-11-12"];
   "avancee:accueil-d-apres-les-statuts-2026-11-11" [shape=note, label="avancee:accueil-d-apres-les-statuts-2026-11-11"];
+  "avancee:arbre-accessibilite-2026-11-13" [shape=note, label="avancee:arbre-accessibilite-2026-11-13"];
   "avancee:attente-navigateur-nommee" [shape=note, label="avancee:attente-navigateur-nommee"];
   "avancee:aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran" [shape=note, label="avancee:aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran"];
   "avancee:badges-en-rem" [shape=note, label="avancee:badges-en-rem"];
@@ -156,6 +157,7 @@ digraph memoire {
   "docs/apprentissage/sources-refusees.md" [shape=plaintext, label="docs/apprentissage/sources-refusees.md"];
   "docs/apprentissage/sources-refusees.toml" [shape=plaintext, label="docs/apprentissage/sources-refusees.toml"];
   "docs/rd/apparences-themes.md" [shape=plaintext, label="docs/rd/apparences-themes.md"];
+  "docs/rd/arbre-accessibilite-2026-11-13.md" [shape=plaintext, label="docs/rd/arbre-accessibilite-2026-11-13.md"];
   "docs/rd/archives-et-poids-du-depot.md" [shape=plaintext, label="docs/rd/archives-et-poids-du-depot.md"];
   "docs/rd/audit-criteres-22-2026-10-24.json" [shape=plaintext, label="docs/rd/audit-criteres-22-2026-10-24.json"];
   "docs/rd/audit-fiches-statistiques-2026-10-24.json" [shape=plaintext, label="docs/rd/audit-fiches-statistiques-2026-10-24.json"];
@@ -218,6 +220,7 @@ digraph memoire {
   "ia-societe.html" [shape=plaintext, label="ia-societe.html"];
   "index.html" [shape=plaintext, label="index.html"];
   "liens-utiles.html" [shape=plaintext, label="liens-utiles.html"];
+  "outils/arbre-accessibilite.py" [shape=plaintext, label="outils/arbre-accessibilite.py"];
   "outils/attente-navigateur.cjs" [shape=plaintext, label="outils/attente-navigateur.cjs"];
   "outils/auditer-affichages.mjs" [shape=plaintext, label="outils/auditer-affichages.mjs"];
   "outils/auditer-criteres-22.mjs" [shape=plaintext, label="outils/auditer-criteres-22.mjs"];
@@ -238,6 +241,7 @@ digraph memoire {
   "outils/file-relecture.py" [shape=plaintext, label="outils/file-relecture.py"];
   "outils/focus.py" [shape=plaintext, label="outils/focus.py"];
   "outils/memoire-eva.py" [shape=plaintext, label="outils/memoire-eva.py"];
+  "outils/mesurer-arbre-accessibilite.cjs" [shape=plaintext, label="outils/mesurer-arbre-accessibilite.cjs"];
   "outils/mesurer-cadrages.cjs" [shape=plaintext, label="outils/mesurer-cadrages.cjs"];
   "outils/mesurer-focus.cjs" [shape=plaintext, label="outils/mesurer-focus.cjs"];
   "outils/mesurer-grilles.cjs" [shape=plaintext, label="outils/mesurer-grilles.cjs"];
@@ -247,6 +251,7 @@ digraph memoire {
   "outils/relecture-agent-prototypes.py" [shape=plaintext, label="outils/relecture-agent-prototypes.py"];
   "outils/test-cache-css-ia.cjs" [shape=plaintext, label="outils/test-cache-css-ia.cjs"];
   "outils/test-experience.cjs" [shape=plaintext, label="outils/test-experience.cjs"];
+  "outils/test_arbre_accessibilite.py" [shape=plaintext, label="outils/test_arbre_accessibilite.py"];
   "outils/test_attente_navigateur.cjs" [shape=plaintext, label="outils/test_attente_navigateur.cjs"];
   "outils/test_audit_prototypes.py" [shape=plaintext, label="outils/test_audit_prototypes.py"];
   "outils/test_auditer_affichages.mjs" [shape=plaintext, label="outils/test_auditer_affichages.mjs"];
@@ -341,6 +346,10 @@ digraph memoire {
   "avancee:accueil-d-apres-les-statuts-2026-11-11" -> "docs/rd/statuts-matrice-tracabilite.toml" [label="prouvée par"];
   "avancee:accueil-d-apres-les-statuts-2026-11-11" -> "docs/rd/statuts-revue-juridique.md" [label="prouvée par"];
   "avancee:accueil-d-apres-les-statuts-2026-11-11" -> "index.html" [label="prouvée par"];
+  "avancee:arbre-accessibilite-2026-11-13" -> "docs/rd/arbre-accessibilite-2026-11-13.md" [label="prouvée par"];
+  "avancee:arbre-accessibilite-2026-11-13" -> "outils/arbre-accessibilite.py" [label="prouvée par"];
+  "avancee:arbre-accessibilite-2026-11-13" -> "outils/mesurer-arbre-accessibilite.cjs" [label="prouvée par"];
+  "avancee:arbre-accessibilite-2026-11-13" -> "outils/test_arbre_accessibilite.py" [label="prouvée par"];
   "avancee:attente-navigateur-nommee" -> "outils/attente-navigateur.cjs" [label="prouvée par"];
   "avancee:attente-navigateur-nommee" -> "outils/test-experience.cjs" [label="prouvée par"];
   "avancee:attente-navigateur-nommee" -> "outils/test_attente_navigateur.cjs" [label="prouvée par"];
@@ -797,6 +806,7 @@ digraph memoire {
   "branche:co-conception-et-essais" -> "avancee:une-structure-qui-convient-nest-pas-un-texte-relu" [label="a produit"];
   "branche:co-conception-et-essais" -> "phase:apprentissages-et-relecture" [label="servie par"];
   "branche:coherence-textes-publics" -> "avancee:accessibilite-modules-originaux-2026-11-12" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:arbre-accessibilite-2026-11-13" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:cadrages-personnalises-au-pixel" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:contraste-et-pages-oubliees" [label="a produit"];
@@ -916,6 +926,7 @@ digraph memoire {
   "branche:indexation-et-lecteurs-de-contenu" -> "phase:rappel-mesure" [label="servie par"];
   "branche:mondes-3d-pluridisciplinaires" -> "phase:conscience-et-corps" [label="servie par"];
   "branche:optimisation-du-site" -> "avancee:accessibilite-modules-originaux-2026-11-12" [label="a produit"];
+  "branche:optimisation-du-site" -> "avancee:arbre-accessibilite-2026-11-13" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:attente-navigateur-nommee" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:aucune-grille-a-pistes-egales-ne-depend-plus-d-une-largeur-d-ecran" [label="a produit"];
   "branche:optimisation-du-site" -> "avancee:badges-en-rem" [label="a produit"];

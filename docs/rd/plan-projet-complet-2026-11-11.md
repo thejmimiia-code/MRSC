@@ -26,7 +26,7 @@ Méthode : `orchestration-taches` pour cadrer et router, `conception-innovation`
 | `outils` | 143 | Gardes, générateurs et bancs de mutation | `outils/verifier-rd-continue.py` | `outils/verifier-inventaire-controles.py` | Tout nouvel outil doit entrer dans l’inventaire avec son banc |
 | `simulateur` | 31 | Moteur embarqué et pages du simulateur | `simulateur/donnees_live.py` | `outils/construire-simulateur.py` | Comparer l’amont avant toute mise à jour du moteur |
 
-**Total recalculé : 594 fichiers présents**, 11 zones, aucune zone sans garde (les 4 fichiers de plus que le relevé initial viennent du lot site du 17 h 24 UTC, les 11 suivants des lots fraude et accessibilité du 12 novembre 2026, les 4 derniers du matériel de séance du 13 novembre 2026 (fiche de notes, consignes imprimables, profil de démonstration et son banc)). Le comptage est fait sur le système de fichiers, hors historique Git, caches et brouillons de signature ; il fonctionne donc aussi dans la copie jetable du banc de mutation. `docs/apprentissage/relectures.toml` reste à 0 relecture humaine : aucun des 594 fichiers n’est une preuve de validation.
+**Total recalculé : 598 fichiers présents**, 11 zones, aucune zone sans garde (les 4 fichiers de plus que le relevé initial viennent du lot site du 17 h 24 UTC, les 11 suivants des lots fraude et accessibilité du 12 novembre 2026, les 4 du matériel de séance du 13 novembre 2026 (fiche de notes, consignes imprimables, profil de démonstration et son banc), les 4 du lot arbre d’accessibilité du même jour (la sonde, le verdict, son banc et le dossier)). Le comptage est fait sur le système de fichiers, hors historique Git, caches et brouillons de signature ; il fonctionne donc aussi dans la copie jetable du banc de mutation. `docs/apprentissage/relectures.toml` reste à 0 relecture humaine : aucun des 598 fichiers n’est une preuve de validation.
 
 Ce que l’inventaire ne dit pas : qu’une ressource est utile, qu’une page est lue, qu’un contrôle est éprouvé sur toutes les fautes possibles, ou qu’un fichier suivi par Git est encore servi tel quel. Les six relevés binaires périmés de `docs/rd/inventaire-controles.md` restent à remesurer après publication.
 
@@ -179,7 +179,7 @@ Les neuf portes restent `ouvertes` dans la matrice. `docs/apprentissage/relectur
 2. Il régénère `docs/rd/carte-lacunes.md`, `docs/rd/couverture-sujets.md` et `docs/rd/prospective-lacunes-2027.md` : 8 cartes de sujet, 0 manque `sans-carte-de-sujet`, 6 sujets toujours sans fiche.
 3. Il ajoute `outils/verifier-plan-projet.py` et `outils/test_mutations_plan_projet.py` : 12 situations plantées dans une copie complète, dont une zone retirée, un compte falsifié et une porte humaine racontée comme franchie.
 4. Il câble ces deux commandes dans `.github/workflows/verification.yml` et tient `docs/rd/inventaire-controles.md` à jour avec ses comptes recalculés.
-5. Il produit `docs/rd/plan-projet-complet-2026-11-11.toml` et le présent plan, qui couvrent 594 fichiers, 11 zones, 19 initiatives, 39 actions, 9 portes et 5 horizons.
+5. Il produit `docs/rd/plan-projet-complet-2026-11-11.toml` et le présent plan, qui couvrent 598 fichiers, 11 zones, 19 initiatives, 39 actions, 9 portes et 5 horizons.
 6. Il amende `docs/rd/plan-complet-rd-innovation-prospective.md`, `docs/rd/relecture-automatique.md`, `docs/rd/journal.md`, `docs/rd/avancees.toml`, `docs/rd/avancees.md` et la mémoire ÉVA, puis signe chaque unité modifiée par `outils/relire-contenus.py --appliquer`.
 7. Il relance les gardes concernées, la batterie complète reconstruite depuis le workflow et `git diff --check`, sans commit, sans poussage, sans fusion, sans déploiement et sans certification.
 
@@ -187,7 +187,7 @@ Les neuf portes restent `ouvertes` dans la matrice. `docs/apprentissage/relectur
 
 ## 10. Limites, entretien et prochaine action
 
-Limites : une carte de 594 fichiers ne couvre ni tous les besoins, ni la vérité du monde, ni l’effet d’apprentissage ; un contrôle vert ne prouve pas l’exactitude ; un lien vivant ne prouve pas l’actualité ; 387 unités restaient en dette initiale consignée au 16 h 48 UTC ; 14 fiches attendent une expertise compétente ; 0 relecture humaine est consignée ; les 4 nouvelles cartes sont des cadrages internes sans source primaire de domaine. Aucune validation humaine, aucun avis juridique, aucun essai volontaire, aucun rendu visuel validé, aucune publication à 16 h 48 UTC : la publication demandée par la personne plus tard le 11 novembre 2026 porte sur le lot site et est consignée dans `docs/rd/journal.md`.
+Limites : une carte de 598 fichiers ne couvre ni tous les besoins, ni la vérité du monde, ni l’effet d’apprentissage ; un contrôle vert ne prouve pas l’exactitude ; un lien vivant ne prouve pas l’actualité ; 387 unités restaient en dette initiale consignée au 16 h 48 UTC ; 14 fiches attendent une expertise compétente ; 0 relecture humaine est consignée ; les 4 nouvelles cartes sont des cadrages internes sans source primaire de domaine. Aucune validation humaine, aucun avis juridique, aucun essai volontaire, aucun rendu visuel validé, aucune publication à 16 h 48 UTC : la publication demandée par la personne plus tard le 11 novembre 2026 porte sur le lot site et est consignée dans `docs/rd/journal.md`.
 
 Après toute modification d’une source de vérité, relancer dans cet ordre :
 

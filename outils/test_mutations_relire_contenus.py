@@ -11,7 +11,8 @@ déclarée disparue, ancre morte, lien local cassé, marqueur de brouillon, TOML
 illisible, extrait de source modifié, extrait sans ancre, source sans extrait,
 source périmée, crochet supprimé, déclencheur de branche retiré, apostrophe
 droite nouvelle, édition falsifiée, écriture dans le registre humain, et URL
-externe nouvelle non sourcée au moment de signer.
+externe nouvelle non sourcée au moment de signer, et — à l’inverse — une URL
+conservée dans une ligne réécrite qui doit passer sans source nouvelle.
 
 Usage :
     python3 outils/test_mutations_relire_contenus.py
@@ -166,6 +167,48 @@ class MutationsRelireContenus(unittest.TestCase):
             lambda d: ajouter(d, HUMAIN, '[[relecture]]\nfiche = "fr-distinguer-fait-interpretation"\n'),
             "ne doit jamais y écrire",
         )
+
+    def test_url_conservee_par_une_reecriture(self) -> None:
+        """Réécrire une ligne ne crée pas une source : l’inverse doit aussi tenir.
+
+        Le 13 novembre 2026, la pose de `role="list"` a réécrit des lignes qui
+        portaient déjà des liens (ANLCI, W3C, éduscol, ADEME) et la porte a
+        réclamé six sources pour des URL inchangées. Le cas présent exige que la
+        même URL, conservée dans une ligne neuve, passe **sans** source nouvelle.
+        """
+        def preparer(dossier: Path) -> None:
+            chemin = banc_mutations.cible(dossier, PAGE)
+            lignes = chemin.read_text(encoding="utf-8").splitlines(keepends=True)
+            for index, ligne in enumerate(lignes):
+                if "https://schema.org" in ligne:
+                    # Une espace en fin de ligne la rend neuve sans toucher aux URL.
+                    lignes[index] = ligne.rstrip("\n") + " \n"
+                    break
+            else:  # pragma: no cover - la page témoin a perdu son URL
+                raise AssertionError("aucune URL externe dans la page témoin")
+            chemin.write_text("".join(lignes), encoding="utf-8")
+
+        with tempfile.TemporaryDirectory(prefix="mrsc-relire-") as tmp:
+            dossier = Path(tmp)
+            banc_mutations.copie_jetable(dossier)
+            preparer(dossier)
+            resultat = banc_mutations.lancer(
+                OUTIL, dossier,
+                arguments=(
+                    "--appliquer", PAGE,
+                    "--nature", "mesure-interne",
+                    "--mesures", "outils/mesurer-arbre-accessibilite.cjs",
+                    "--constat", "Relecture d’un remaniement de balise, aucun fait nouveau.",
+                    "--limite", "Cette relecture ne couvre ni le rendu visuel ni une expertise humaine.",
+                ),
+            )
+            # `--appliquer` refuse toujours d'écrire dans une racine de banc :
+            # le succès ne peut donc pas être un code 0. Ce qui se prouve ici,
+            # c'est que la porte des URL laisse passer et que seul le garde-fou
+            # d'écriture arrête la commande.
+            sortie = resultat.stderr + resultat.stdout
+            self.assertNotIn("URL externe nouvelle", sortie, sortie[-1200:])
+            self.assertIn("racine de banc", sortie)
 
     def test_url_externe_nouvelle_non_sourcee(self) -> None:
         def preparer(dossier: Path) -> None:

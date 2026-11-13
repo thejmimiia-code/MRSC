@@ -79,6 +79,7 @@ empreinte = "cb14c1eff5a972c7a556d81d19c3ff268290c14969aacba19fda588966313ec3"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/addyosmani/agent-skills"]
 
 [[unite]]
 chemin = ".agents/skills/debugging-methodique/upstream/SKILL.md"
@@ -156,6 +157,7 @@ empreinte = "3368562dab435c5eb9f9aa5a4d85666c24a6f62206531acc4ffffcfec48005ae"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/mattpocock/skills"]
 
 [[unite]]
 chemin = ".agents/skills/strategie-tests/upstream/SKILL.md"
@@ -205,6 +207,7 @@ empreinte = "a21d66f073c4089efb8cf5e97ddf5c1b098a515555ac644068ddb8ad18955c25"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/anthropics/skills"]
 
 [[unite]]
 chemin = ".claude/skills/motion-design/SKILL.md"
@@ -219,6 +222,7 @@ empreinte = "80c76296224ea9def17fb4cb01773ecd9d9deb416fa900a1fc7b6a4bbc65bb6a"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/LottieFiles/motion-design-skill"]
 
 [[unite]]
 chemin = ".claude/skills/motion-design/UPSTREAM-SKILL.md"
@@ -345,6 +349,7 @@ empreinte = "03185dc3d266d139517e57020fe8430fdf89027eda3802a83d23241f69b2ef7c"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/portefeuille.toml"]
 
 [[unite]]
 chemin = ".github/dependabot.yml"
@@ -390,10 +395,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = ".github/workflows/verification.yml"
-empreinte = "846a8f2d616900e93ea9014874017fc74bfc00ff54ff120249fbde5becdf0848"
+empreinte = "ba3e970d4aea2667fe77ad95712234a92bc1510793d3b9f9f942a237663ce458"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-11
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = ".github/workflows/verifier-publication.yml"
@@ -401,6 +406,7 @@ empreinte = "580f11b8fffd5de055d63716632ace76ae088389c0c38d92fbc1a52dcf0927fb"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://thejmimiia-code.github.io/MRSC/"]
 
 [[unite]]
 chemin = ".gitignore"
@@ -408,6 +414,7 @@ empreinte = "2f14ae639c9b4ec45f071f8c66597d5a9da22b8b89c54ca8589172e47bec5ef8"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/github/pages-gem#conventional", "https://github.com/github/pages-gem/issues/768"]
 
 [[unite]]
 chemin = ".vercelignore"
@@ -418,10 +425,11 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "404.html"
-empreinte = "2ce55265971a7f54adf1ea0b048f3220431bcd566f95d46504f3a75ba399f619"
-etat = "reference-initiale"
+empreinte = "eddb4f6d2151bb94d58a547b701c02ca18774d11d32e5a56228120090b98fccc"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/404.html"]
 
 [[unite]]
 chemin = "AGENTS.md"
@@ -436,13 +444,15 @@ empreinte = "ff09f6a54d1e2fe01e4a3e0042bdbb7cf7e1831ec5e7a80d533c32cc73e7d629"
 etat = "relu-par-agent"
 apostrophes = 14
 date_derniere_relecture = 2026-11-12
+urls = ["https://thejmimiia-code.github.io/MRSC/](https://thejmimiia-code.github.io/MRSC/", "https://www.mrsc.fr/", "https://d-mocratie-et-politique-du-peuple-p.vercel.app/", "https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple/pull/53", "https://thejmimiia-code.github.io/MRSC/", "https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple"]
 
 [[unite]]
 chemin = "anglais-aventure.html"
-empreinte = "3306f3637b623a798d20a3075df5ed12bc6a76eca4d36605fb446f2f8e6be0c0"
+empreinte = "7a856da090061cb1cf4fe08953801e2a73a6367f21cb74820199d8dfa5a69886"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/anglais-aventure.html", "https://thejmimiia-code.github.io/MRSC/assets/images/mondes-savoirs-hero.jpg"]
 
 [[unite]]
 chemin = "api/bulle.py"
@@ -562,769 +572,879 @@ empreinte = "17008e4afaf1637d4beec90bb1db9fa73f13fa1e995846a7f65d9fd9a205fc5d"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/thejmimiia-code/MRSC"]
 
 [[unite]]
 chemin = "apprendre.html"
-empreinte = "905e5a9e063f2156bebb2f397e22a8c6f0c5ddc035dd0f9f1830990563f5adbd"
+empreinte = "18abc022e7bff4eccc4400e5488f91c3e52a680a54b4c34026e217377bb36d68"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre.html", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512", "https://isced.uis.unesco.org/about/", "https://www.anlci.gouv.fr/nos-piliers/lillettrisme-au-travail/", "https://www.w3.org/TR/WCAG22/"]
 
 [[unite]]
 chemin = "apprendre/fiches/apprendre-methode.html"
-empreinte = "1830dc5659a152fb168efd3e02b706f182d7dab8bdedc9a136e3fb9562104a17"
-etat = "reference-initiale"
+empreinte = "b6eff25745613f3f4de55d8de16da3f9433e89b5b94d39a301583283a863430a"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/apprendre-methode.html", "https://www.anlci.gouv.fr/app/uploads/2025/04/20250910_Prez-webinaire-AFEST.pdf", "https://www.w3.org/TR/coga-usable/"]
 
 [[unite]]
 chemin = "apprendre/fiches/apprendre-se-tester-plutot-que-relire.html"
-empreinte = "50601252ba07abe25ad2e3b4255eaa3fc39d0a09bc5f431346c447ce8a8123c0"
+empreinte = "f41c24c137b438be745d175617d525dc6cd180e629555b4f08206eae049bd3a6"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/apprendre-se-tester-plutot-que-relire.html", "https://fondation-lamap.org/sites/default/files/pdf/La%20re%CC%81cupe%CC%81ration%20en%20me%CC%81moire.pdf"]
 
 [[unite]]
 chemin = "apprendre/fiches/arts-composer-formes.html"
-empreinte = "a7a151d8d2b5c3e0dd3b4a9eaafca27315df7dbe25f8b1ab22a0b4cddf1d6e3b"
+empreinte = "7e60c759174f196770d86ce0169bb886c02c33a9dc68b778ec2ae558f17c55e9"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/arts-composer-formes.html", "https://www.education.gouv.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/arts-lire-cartel.html"
-empreinte = "35394536caf29c92838d221964a21bdd529e1d4e73dd32bd0d635cf678ae6705"
+empreinte = "7a96277cf2e202e656a0dc4477e3030740ecb1f370b4d208c90075aeb1a2cb31"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/arts-lire-cartel.html", "https://www.culture.gouv.fr/", "https://www.culture.gouv.fr/thematiques/photographie/gerer-un-fonds-photographique/rediger-des-cartels"]
 
 [[unite]]
 chemin = "apprendre/fiches/arts-lire-generique-film.html"
-empreinte = "f5d03cc23abd5f537419a042e642969668a6a7dc8f75f22d66800a6b4d7b53ba"
+empreinte = "441ec3f567d86b4ebc5af76136f11dad6a6121678a360252f187daa4ac1631a0"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/arts-lire-generique-film.html", "https://eduscol.education.gouv.fr/sites/default/files/document/ateliercinemaglossaire1277577pdf-81519.pdf"]
 
 [[unite]]
 chemin = "apprendre/fiches/arts-lire-image.html"
-empreinte = "73778969b6d8f70ee062fc0dafe0c18e67eb783fef7763ad477042e47c99e006"
-etat = "reference-initiale"
+empreinte = "033ea8f3d34c2ee175d7faf51ac83f40324d5f019ce0ce4c7449b03b4499347e"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/arts-lire-image.html", "https://www.clemi.fr/ressources/ressources-pedagogiques/evaluer-linformation"]
 
 [[unite]]
 chemin = "apprendre/fiches/arts-rythme-musique.html"
-empreinte = "b51d5e8a062bc1f29d6e737cbb00e3bbea75e4d046e3f081562fb278d2941b25"
-etat = "reference-initiale"
+empreinte = "1327184286fc1b4be6e68015d435b7108e45d564197f76f1b39d977075fb0a4f"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/arts-rythme-musique.html", "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011"]
 
 [[unite]]
 chemin = "apprendre/fiches/civ-choisir-source-publique.html"
-empreinte = "443f8bdf0834d900ddce79666f7cd9a322160eb5b6a95a60f62d67a348c83e32"
+empreinte = "f1457b379b79619b2f08815d04504433e19e867452e37d46e81c8227f715b405"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-choisir-source-publique.html", "https://www.service-public.gouv.fr/", "https://www.legifrance.gouv.fr/", "https://www.data.gouv.fr/", "https://www.insee.fr/", "https://www.data.gouv.fr/pages/legal/licences", "https://www.vie-publique.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/civ-lire-document.html"
-empreinte = "149c0ed9cbec3104721a676f4aad9ca4b5836a1cef048e907a4d37dfa268ed8c"
-etat = "reference-initiale"
+empreinte = "4f441c5523f80394f0f6fef8ebd97f8aca4a71caabec505a32dc33f2da58eeed"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-lire-document.html", "https://www.service-public.fr/", "https://www.cnil.fr/fr/passer-laction/rgpd-les-premieres-etapes"]
 
 [[unite]]
 chemin = "apprendre/fiches/civ-lire-un-sondage.html"
-empreinte = "2b055e892f062e76bcb9a4535ea385e07e5175cdb1b05fec4df336ee83159391"
+empreinte = "b2f48177e903bbee579eb2af7bc74a50d16b809ec106e9f736b3c19b41266cbe"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-lire-un-sondage.html", "https://www.commission-des-sondages.fr/oblig/obligations.htm"]
 
 [[unite]]
 chemin = "apprendre/fiches/civ-reperer-echelle-institution.html"
-empreinte = "873395967a092f41b4ed00ef61b2cb168fb3458ac028c87d4ad6eb7cc55fd516"
+empreinte = "c008ed4914eb76c2c545a0f7c357904a7feb4533021171e81aedeafe5bcc5eac"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-reperer-echelle-institution.html", "https://www.vie-publique.fr/fiches", "https://www.service-public.gouv.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/civ-reperer-info-electorale.html"
-empreinte = "3a031b6a5888015d12234160b1b80200321a63294aef8eab23afa3724585a039"
+empreinte = "cf7b4c2cbf695f01f652ad3d3db647c145894e07d087ffb92ca788ca65447840"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-reperer-info-electorale.html", "https://www.vie-publique.fr/fiches", "https://www.service-public.gouv.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/civ-trouver-service-public.html"
-empreinte = "6f0e3c1e26782ce3b4315f694d763ed0197a836425b4930cd2884ab1f41f3874"
+empreinte = "3aabc2b6b9942eb394da334863f5d31448eeef99e3fe961ac0d047faa91e6553"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-trouver-service-public.html", "https://www.service-public.gouv.fr/", "https://www.france-services.gouv.fr/", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing"]
 
 [[unite]]
 chemin = "apprendre/fiches/civ-verifier-information.html"
-empreinte = "ff79b19f70e586fbf73372ad1eb3b54b5eecc5bf142ae5e7176b38c7cf3b2c62"
-etat = "reference-initiale"
+empreinte = "562224e7f4edb5f398e3091d0409e77dd2f8931d8233f7d03eb889527a7cbe8e"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-verifier-information.html", "https://www.clemi.fr/ressources/ressources-pedagogiques/evaluer-linformation", "https://anssi.gouv.fr/agence/cybersecurite/le-cybermois/cybermois-2022-tous-ensemble-face-aux-rancongiciels-et-au-hameconnage/"]
 
 [[unite]]
 chemin = "apprendre/fiches/demarche-lire-devis-travaux.html"
-empreinte = "d8c32f64b6f73d6ad407d2757534ddb921c99a6c930a444a915a10a9e4e7873b"
+empreinte = "532613de7b8654ad22d272c0338fe78ba43b9b520d3539d5d8616524d0662d54"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/demarche-lire-devis-travaux.html", "https://www.service-public.fr/particuliers/vosdroits/F31144"]
 
 [[unite]]
 chemin = "apprendre/fiches/demarche-obtenir-acte-naissance.html"
-empreinte = "3b12a0f0607dd7258cc6d8d2cc6489e5bc79300d4d1267c1c5e219492d306300"
+empreinte = "a08a1acf208c42de3373aaaad77b1acb3456ea5edbcaed0009fce9438f62359d"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/demarche-obtenir-acte-naissance.html", "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427"]
 
 [[unite]]
 chemin = "apprendre/fiches/econ-comparer-prix-unitaires.html"
-empreinte = "6c62f99491e99f29571ed9e9fbdf008003631fa40667b1beab26aa9cc5d84b59"
+empreinte = "dbdf286844a0ef1bc78dc2a1be125549a64b359a842d1b91089002b17cd1d1f1"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/econ-comparer-prix-unitaires.html", "https://www.economie.gouv.fr/dgccrf", "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"]
 
 [[unite]]
 chemin = "apprendre/fiches/econ-distinguer-interet-frais.html"
-empreinte = "9aa1f71cecc343ed8be63b7b0ceca4f09d201ae0478dc23248f7d85fadce0ade"
+empreinte = "9d77514d05f13084254a29f25ba2c5a8300de14549bd67889b5bfd101f722d41"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/econ-distinguer-interet-frais.html", "https://www.banque-france.fr/", "https://www.service-public.gouv.fr/", "https://www.service-public.gouv.fr/particuliers/vosdroits/F2451"]
 
 [[unite]]
 chemin = "apprendre/fiches/econ-lire-facture.html"
-empreinte = "76d36f3d9c9e44549508a04cf8179675c9fe80e674f3673be2d70ca875baa4a6"
+empreinte = "29d2f6adb2063a10361ed090d7cdfd6e6aa731f2bf8f542bf4f59e78983ec06a"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/econ-lire-facture.html", "https://www.service-public.gouv.fr/", "https://www.economie.gouv.fr/dgccrf"]
 
 [[unite]]
 chemin = "apprendre/fiches/econ-lire-mention-garantie.html"
-empreinte = "cf0511a90ad63a0454dafb8d1a0208daf952aef0f29215a429a843cbc4024675"
+empreinte = "ce7422ca28d8dd3cdb0e47466065d1ae617f4d10b601114f8320aa39cc563034"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/econ-lire-mention-garantie.html", "https://www.economie.gouv.fr/dgccrf", "https://signal.conso.gouv.fr/fr"]
 
 [[unite]]
 chemin = "apprendre/fiches/etudes-lire-fiche-rncp.html"
-empreinte = "d2d7c5c7deb69328ae2dca886814075af154f8443f958ec16acafed20f2df089"
+empreinte = "95cd632b4055e5fe6d9dbdc5135ddb760a9fc03a30db0f269da0b1845235908c"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/etudes-lire-fiche-rncp.html", "https://www.francecompetences.fr/app/uploads/2026/01/Vademecum-VF_2026.pdf"]
 
 [[unite]]
 chemin = "apprendre/fiches/fr-argumenter-avec-exemple.html"
-empreinte = "e24666210f41c84123247213393524fa0a3d220530220f654584453deaeabb1b"
+empreinte = "b58a925267af9450719ba507ce4a583abb20a5ba14241fddf34fc32fd45efb31"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-argumenter-avec-exemple.html", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"]
 
 [[unite]]
 chemin = "apprendre/fiches/fr-comprendre-mot-contexte.html"
-empreinte = "64b22c3f8bc19fb1385068698fb275e8ac82bf430ceef96507abde71c9754888"
+empreinte = "756260bc066498fb2c6dbe975e97cf76c3f2c3f5fda8bb4379009c293a42865f"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-comprendre-mot-contexte.html", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"]
 
 [[unite]]
 chemin = "apprendre/fiches/fr-distinguer-fait-interpretation.html"
-empreinte = "12fa0517360f4b6634a65cde8fb91d60950cf49f3199c285f2e3fc891d89202d"
+empreinte = "51b7cfc82afaac51f766568f59469e5915d8ebdd1577be4b737085dc906b2273"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-distinguer-fait-interpretation.html", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"]
 
 [[unite]]
 chemin = "apprendre/fiches/fr-ecrire-message.html"
-empreinte = "9499cea0ad8e4e14f1b74eb0533f858be6e1df462f55061f997026f858bffd6c"
-etat = "reference-initiale"
+empreinte = "548b59f694478d1a8789d356ddc3a6c9fe65e219b748837433b28687a4fd3e58"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-ecrire-message.html", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"]
 
 [[unite]]
 chemin = "apprendre/fiches/fr-lire-consigne.html"
-empreinte = "fb347fb7d9211f573140fea74cb54abf4167672d10ab6e1ec2006c9de98230d3"
-etat = "reference-initiale"
+empreinte = "7a7b36fd6677193228ba006fb97910a9f7169246f8b6a501c6de19a83754edaa"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-lire-consigne.html", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"]
 
 [[unite]]
 chemin = "apprendre/fiches/fr-lire-ponctuation.html"
-empreinte = "1f42b16fcb376534c5d025e31ea50f3fc23a108f869b8f597ba375b7e63f41fa"
+empreinte = "23676ee35d2f2d3b9df4fba8423f3f5cbc44a3fa895a53593070eb7969767269"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-lire-ponctuation.html", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"]
 
 [[unite]]
 chemin = "apprendre/fiches/fr-preparer-explication-orale.html"
-empreinte = "a0507246d3728f6676adbb6dc00ad406610c95d927988fa26a035a9c6e07ded0"
+empreinte = "2d2262a04cbf16f651477dd3c8b5dbec74f300cd75204a78197704a4c356dbf3"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-preparer-explication-orale.html", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"]
 
 [[unite]]
 chemin = "apprendre/fiches/fr-reperer-idee-texte.html"
-empreinte = "5d29b8f683eaa8b70d7473f3f8b9cb0591f1e7e19913e96570945c7bc9a1e987"
+empreinte = "e812c14801122e1de252a6cb42df4283518317c8ea8ddd5435c1d6f310a7a7ff"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-reperer-idee-texte.html", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"]
 
 [[unite]]
 chemin = "apprendre/fiches/geo-choisir-une-projection.html"
-empreinte = "221f6f098a05ecdf87f45492e7840224a92348a91a1457d7780b646a28932a48"
+empreinte = "d3a35f4b48c43a8c0d9a879065bd0e91bcda821071a01248b5dd5248094dff24"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-choisir-une-projection.html", "https://www.visionscarto.net/peut-on-corriger-la-carte-du-monde"]
 
 [[unite]]
 chemin = "apprendre/fiches/geo-decrire-paysage.html"
-empreinte = "69d25e9bb918ec3574df6a6f9b012b61bbc8236bef43300d1295bbfa2a6a7235"
+empreinte = "b6778d70a4ac793a9748adebe30b15431efaf55ed5f46315a5b6a81530ceef8c"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-decrire-paysage.html", "https://www.ign.fr/", "https://eduscol.education.fr/document/16804/download"]
 
 [[unite]]
 chemin = "apprendre/fiches/geo-echelle-carte.html"
-empreinte = "b84742c5ff9abbb36247fb58c76a9f58af75bbee069c7eb57f4da45924010469"
-etat = "reference-initiale"
+empreinte = "9c2386d3d3af0bd5f53a488d1fdada37129cb87aea9464e6fc49db9e63c7030b"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-echelle-carte.html", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"]
 
 [[unite]]
 chemin = "apprendre/fiches/geo-lire-legende-carte.html"
-empreinte = "5fadc9565e4ef50275aa9d1ec7a9c86603c697e2f5586afd5943caebf95ac0db"
+empreinte = "7ce0bb880d75a008e8e68833268e6c16a92ee5fa2cf49b8b153457e8ca34ca82"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-lire-legende-carte.html", "https://www.ign.fr/", "https://eduscol.education.fr/document/16807/download"]
 
 [[unite]]
 chemin = "apprendre/fiches/geo-points-cardinaux.html"
-empreinte = "3d63ae595bbb811a4e4a4e9671803974fef6cd058be06ab5d54087c609cc3e6a"
+empreinte = "9fa302199ee35f2ac42eacf4accee0daf7fd55cf04d38d6077721fbba035ad1d"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-points-cardinaux.html", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"]
 
 [[unite]]
 chemin = "apprendre/fiches/geographie-preparer-trajet-horaires.html"
-empreinte = "ace06dbedbe7e25194cdfe4b89a175a08513a7baa0b7cee2371fda0712be04ec"
+empreinte = "5b76805f9fa41b154fda4ee1ca5a7845e05328784a6160cf1bae2c0419af2606"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geographie-preparer-trajet-horaires.html", "https://transport.data.gouv.fr/datasets/reseau-urbain-et-interurbain-dile-de-france-mobilites"]
 
 [[unite]]
 chemin = "apprendre/fiches/histoire-comparer-sources.html"
-empreinte = "43a38619bd71ceb0950d9c63ea1af37ed5df2ad9d90e55559c2d3948b6e018f1"
+empreinte = "ba9a4e70b9a101cdc0cabe25fcc4b9ff33531d7a3a7f96b52e087fcdc7e98d12"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-comparer-sources.html", "https://www.archives-nationales.culture.gouv.fr/", "https://cache.media.eduscol.education.fr/file/HG_Competences/11/4/RA16_C3C4_HIGE_Analyser_comprendre_document_819114.pdf"]
 
 [[unite]]
 chemin = "apprendre/fiches/histoire-lire-frise.html"
-empreinte = "70a3346f8bd9fba44f06750c8a68c5b877ed97b4f506c28d6f44e45c07b98f3e"
+empreinte = "b835562f67468845619febb2ba501e90aadca90a71265fcb77acd305c671844d"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-lire-frise.html", "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011"]
 
 [[unite]]
 chemin = "apprendre/fiches/histoire-lire-une-cote.html"
-empreinte = "3e3f11db461979f4ebf6fd9f9acae53bf2fb6231eb054dde3f18a8f1d3151751"
+empreinte = "93b4a81c1888548c2b33ef3994ee807a05a61b0c2911f0dfa1886e28b7b359d6"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-lire-une-cote.html", "https://www.archives-nationales.culture.gouv.fr/methodologie-de-recherche-en-salle-de-lecture-virtuelle"]
 
 [[unite]]
 chemin = "apprendre/fiches/histoire-reperer-echelle-france-monde.html"
-empreinte = "a01ed816bf8bbc9058d07f292c34d31913218d314b3a0055be24317a3513e803"
+empreinte = "b4d2e5bf1ad72f71ea3114b485e10b9a7c364159f642dc2e7a6e59e6bc0f31b9"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-reperer-echelle-france-monde.html", "https://www.vie-publique.fr/fiches", "https://www.education.gouv.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/histoire-situer-siecle.html"
-empreinte = "dc5100fc7a053074f4a32f7eb1b4cc420bcd809c4aac2107f64e046fbc84a0e5"
+empreinte = "75e166c73bff5d440b2dcde7142b79adf3ffaa6db04f438bcea604c69bdaefe4"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-situer-siecle.html", "https://eduscol.education.fr/", "https://promenade.imcce.fr/fr/pages2/277.html"]
 
 [[unite]]
 chemin = "apprendre/fiches/info-bits-octets.html"
-empreinte = "d2bc58d017ef09adea61b62e6701ad631d083a40990bf44b497a24e923440f1b"
+empreinte = "e1aef27eff9bba503394612a520a41fdff19575e6d0945ce93ae328520142e7d"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-bits-octets.html", "https://developer.mozilla.org/fr/docs/Glossary/Byte"]
 
 [[unite]]
 chemin = "apprendre/fiches/info-lire-adresse-web.html"
-empreinte = "b01e7293f73f84f0b615029cc264503446b1e46db6e2903795062f68fb65a5f0"
+empreinte = "0e20840b490eaa156237599936eed0c2487d31932035c45dcee8cd86d7d8b163"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-lire-adresse-web.html", "https://site-fictif.test/agenda?jour=mardi", "https://developer.mozilla.org/fr/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_URL"]
 
 [[unite]]
 chemin = "apprendre/fiches/info-objet-connecte-local-distant.html"
-empreinte = "9d7b0a812956274b8804139e4d6b0f1ac9df3c8b5d8cf21d7365a627e0e008d7"
+empreinte = "d5f93e7dcc183dc89cffd19b9241be0b4b6312cb3b46e5cfae1183e4559fce0e"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-objet-connecte-local-distant.html", "https://eduscol.education.fr/document/23494/download", "https://eduscol.education.fr/document/23560/download", "https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-securite_des_systemes_objets_connectes_iot-v1.0.pdf"]
 
 [[unite]]
 chemin = "apprendre/fiches/info-ordinateur-fonctions.html"
-empreinte = "fe9e95fd5b3a404000f8e37556010ae22af321572d49a7ce697312f533141e18"
+empreinte = "49558cec054851b70f0a10817e78bd3bcb34a60b8f204c9c52548d45642743a6"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-ordinateur-fonctions.html", "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegnsi1-tpourquoi-choisir-nsi1243842pdf-89505.pdf"]
 
 [[unite]]
 chemin = "apprendre/fiches/info-systeme-exploitation.html"
-empreinte = "25a3609f40e5e037544008f465949c2642994c4d0e5dba7a0d8dd638f61aad04"
+empreinte = "2bab283fed39112cb7af0cbc8bb2f4613923c21c1ad48f2e2dbe52f2e3157447"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-systeme-exploitation.html", "https://eduscol.education.fr/", "https://eduscol.education.fr/document/30046/download"]
 
 [[unite]]
 chemin = "apprendre/fiches/info-table-requete-web.html"
-empreinte = "805debea4a5195fa5b5dced71346347f4b841b74dedf58c87fa19bd0ba325f9b"
+empreinte = "40c589903aedf1e459a1041e8f772732658804adb7cd66f0755e0fe0c291f698"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-table-requete-web.html", "https://developer.mozilla.org/fr/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview", "https://www.data.gouv.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/langue-anglais-demander-aide.html"
-empreinte = "11fad4960dfc7bc758485a2788ad7108d15efc71417e880c381821f81811d256"
+empreinte = "eddafca4e0c8ce384b2cd4bacd3cbf0e08be2d97c4d741ebfda8f301269b250d"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-anglais-demander-aide.html", "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011"]
 
 [[unite]]
 chemin = "apprendre/fiches/langue-anglais-direction.html"
-empreinte = "4d663461af1fce158a879f7b45baf7dce6d08f6d79e7624f3aa800ef823446de"
-etat = "reference-initiale"
+empreinte = "1cddc77380b83d487bf83e2cce612c833bfda085640530852a4dc01526d7f019"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-anglais-direction.html", "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011"]
 
 [[unite]]
 chemin = "apprendre/fiches/langue-anglais-epeler.html"
-empreinte = "d0f4006728aa827776ece15837d1480eb881449452681fb4e0645d452860497d"
+empreinte = "9125352b53f7edd00efe40cbd4628600922c75a0860f4dcca74b2272ab2f8452"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-anglais-epeler.html", "https://eduscol.education.fr/", "https://dictionary.cambridge.org/dictionary/english/spell"]
 
 [[unite]]
 chemin = "apprendre/fiches/langue-anglais-prononcer-ed.html"
-empreinte = "f9c195bf9d10f2fbabde457c284274c53e81b4cd3e39a0da00f677ecc1a198ef"
+empreinte = "ce406bcad00495895f3f2eeafb9177b172851edecdae6be3dce91e14c09dafcc"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-anglais-prononcer-ed.html", "https://www.britannica.com/dictionary/eb/qa/Pronunciation-of-ed-Endings-on-Verbs", "https://www.coe.int/en/web/common-european-framework-reference-languages/phonological-competence"]
 
 [[unite]]
 chemin = "apprendre/fiches/langue-anglais-prononcer-th.html"
-empreinte = "a9424cbaccec309c68ff722553561da437c97c4ad6edb4b6f434491275a0e777"
+empreinte = "ff1bd3875e6d117277bc50e42134d1424d814ca587bfd17763aff7236a1f666b"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-anglais-prononcer-th.html", "https://dictionary.cambridge.org/help/phonetics.html", "https://dictionary.cambridge.org/dictionary/english/three", "https://dictionary.cambridge.org/dictionary/english/mother", "https://dictionary.cambridge.org/dictionary/english/breath", "https://dictionary.cambridge.org/dictionary/english/breathe", "https://rm.coe.int/chapter-5-communicative-language-competences/1680a084c3"]
 
 [[unite]]
 chemin = "apprendre/fiches/langue-reperer-mot-deja-connu.html"
-empreinte = "92900491a0cd7cd2da605b1c1d6450ff60fca2ebe3fde747e139d295a22f3932"
+empreinte = "0c49cd5ebeab4e5b454d005c5f2f93d7b00efb17474aa76399eb83c72a9ce9a5"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-reperer-mot-deja-connu.html", "https://www.culture.gouv.fr/", "https://www.education.gouv.fr/", "https://www.coe.int/fr/web/common-european-framework-reference-languages/plurilingualism-in-the-classroom"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-budget.html"
-empreinte = "0bf4f4cf364d430fa1f237715b9111406ba9f6e19ff9304c95b7f6d254ca5342"
-etat = "reference-initiale"
+empreinte = "fba8fd02790efa9474d3ad57bc87938ed7182d15023dd8b990915704697f9c88"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-budget.html", "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-comparer-deux-releves.html"
-empreinte = "927280ef02fbdbf7a7c18b8a123c32622d8081fd617f2fc0aa1046e8d2102e72"
+empreinte = "fc2274a21edb5821c0bbd00c5b34e0dab9fb4d46763c4468cd744adbcd6483af"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-comparer-deux-releves.html", "https://docs.python.org/3/library/statistics.html"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-convertir-unites.html"
-empreinte = "2f29be36316cb4b42d7e0a6be97e83e06844002cc0ec3053feb88283f548d15d"
+empreinte = "743f8ded0dac942d35da744c2318829357a847bc800b98d0ca2cf7cea11d8956"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-convertir-unites.html", "https://www.education.gouv.fr/media/199172/download", "https://www.bipm.org/en/measurement-units"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-equation-simple.html"
-empreinte = "13a5fc8b038e6d1892d3ad5e2950e2f33426703488fe4c396712572a53f010c0"
+empreinte = "5d0c26d3db878cf16836b7bfd0a5247def5addf1f94b41c3908f48a89e53c944"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-equation-simple.html", "https://eduscol.education.fr/", "https://eduscol.education.fr/document/59725/download"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-estimer-calcul.html"
-empreinte = "d5347fe25752c00552513e5e32d2beccacf83171a02344bea6a8a08d617d793e"
+empreinte = "6693143951e6ef4608583c7669708d53ed895c91299a3ed775f2cda0912add80"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-estimer-calcul.html", "https://eduscol.education.gouv.fr/sites/default/files/document/ra16c3c4mathmathetquotidien600998pdf-77574.pdf"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-fractions-recette.html"
-empreinte = "addccba88b149a2a0c069d3c491e3c1ee4b8bc2625c033980c327432af26bd2f"
-etat = "reference-initiale"
+empreinte = "034c428c2d00e24b2d6c5f7cfac5cf386c12c5032afef0431a42d2aa47d59b57"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-fractions-recette.html", "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-lire-echelle-graphique.html"
-empreinte = "6fdd2c21639e3481d6541ab569e30e45e8fa1aa38edeb59af6f4b754877c4457"
+empreinte = "9d0c15247ff7586a22c0a2b9a02e1a51cf705ed03bcba1a2842526cc94c7edbb"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-lire-echelle-graphique.html", "https://eduscol.education.fr/", "https://eduscol.education.fr/document/58959/download"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-lire-graphique.html"
-empreinte = "a6cb9a65622323cf10292c0f6b8d0e6727198d686d2dc17b90b7478832cd99d2"
-etat = "reference-initiale"
+empreinte = "c7f3efbf320dd1aa9f3452d29f8dbf829cadcf3af6054dd11445430df9687a2c"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-lire-graphique.html", "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-lire-planning.html"
-empreinte = "107e9c6e9d1511eecede94c7c8d7fd6e6d59fa9cdb316139fc36364b39be3637"
-etat = "reference-initiale"
+empreinte = "96014b228402e387a035cd2430ba6f6b1e099b5c369823824826cf9c9480fc0f"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-lire-planning.html", "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-lire-tableau-croise.html"
-empreinte = "33a86e6d21d096e77ce76740e4c978621f10ea76d09cc07cdc4337518419e78e"
+empreinte = "a9a87c64cbb588ed01935922b61efbd766e782c91831fcf16026221caf0c19bd"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-lire-tableau-croise.html", "https://eduscol.education.fr/", "https://eduscol.education.fr/document/58956/download"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-moyenne-mediane.html"
-empreinte = "cd346af1bb4b08e462ac8190cbd050d0fc154e172114fafae1dcb2472e0928ac"
+empreinte = "93a521d94df9bd2cf50f523fb66d28b91d51731eb8ca38fae41bf0cd6193e01e"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-moyenne-mediane.html", "https://github.com/python/cpython/blob/v3.14.0/Doc/library/statistics.rst"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-moyenne.html"
-empreinte = "4cd67f481fdcedee4f390187f61ed7814903a671ab3bc654fb534f7483d8dba8"
+empreinte = "3b944547298764c3c3224178c1b3f1cacbb9507039ceaf40ab1a62a6912ec986"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-moyenne.html", "https://www.education.gouv.fr/sites/default/files/document/Annexe%202%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20pour%20le%20cycle%204-480716.pdf", "https://github.com/python/cpython/blob/v3.14.0/Doc/library/statistics.rst"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-partager.html"
-empreinte = "ba7a38c76b1fcd4de30fdca0019e85eed40d5f223b39c19316ffb2f7ea78fbdb"
-etat = "reference-initiale"
+empreinte = "facf5b53e87a26ec2bb3c1a857231d0e75358a7719126148aaeebae0381ca0d7"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-partager.html", "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-pourcentage.html"
-empreinte = "1325de7ceb1db59a853e99a5748dc2c04108682184f26218039a6da5a6b86c2f"
-etat = "reference-initiale"
+empreinte = "b9b259e44ad7124416116253c87ca439d7aac8587498374de764e1f62aa66865"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-pourcentage.html", "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-probabilite-tirage.html"
-empreinte = "87d192b848eab9f0457a77c14f2456d1bf2cc3ea9ee0b03da63dff8fa83ca3f8"
+empreinte = "e38a1971ab2879004e5daf083784ac151b17c771c959b872e034a1b8fee0d634"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-probabilite-tirage.html", "https://www.education.gouv.fr/sites/default/files/document/Annexe%202%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20pour%20le%20cycle%204-480716.pdf"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-reperer-angle-droit.html"
-empreinte = "5d2bc4bf3836b13659f230e8f3b7d435961d9d1a64a4633bbcfdc5c54874ce0a"
+empreinte = "de3161b556e71a011f59dfd95cbadd65bea83bd3abf19257558a4654e63ee690"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-reperer-angle-droit.html", "https://eduscol.education.fr/document/36614/download", "https://eduscol.education.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/maths-surface.html"
-empreinte = "8b71db5b643aa6599452e47c522692895612186a2484f1c59b21ed70bd13c333"
-etat = "reference-initiale"
+empreinte = "d611285ba5ee9f738341dbd5dd62402dbd6f1589362c6100268ba5746d2d688a"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-surface.html", "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2"]
 
 [[unite]]
 chemin = "apprendre/fiches/methode-verbaliser-sa-methode.html"
-empreinte = "f87522ffecd3a059a251f2e92fec56d126eaf0ae645de4f5c8eaf7b1b895e584"
+empreinte = "fb6106bf4a95b0990d565c2ef2854dc8fcdf75852d70c5871815b0ce9a332eca"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/methode-verbaliser-sa-methode.html", "https://eduscol.education.gouv.fr/sites/default/files/document/ra16c4apevalfiche2708865pdf-78576.pdf"]
 
 [[unite]]
 chemin = "apprendre/fiches/methodes-demander-clarification.html"
-empreinte = "bfe20928956a61a8c49efbcb7b59ffadff451fa7b157a90ed34e4e6039560f70"
+empreinte = "1c27ab7b536bbd709d023759588343a09b535faf29e3acf3845160ccf91521fb"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/methodes-demander-clarification.html", "https://www.certificat-clea.fr/employeurs/le-socle/"]
 
 [[unite]]
 chemin = "apprendre/fiches/numerique-declarer-fraude.html"
-empreinte = "4c764a4648e40e04cb7eca7a987ae79f5961528080bd6f1e0883e2e344dcdc1e"
-etat = "reference-initiale"
+empreinte = "8108e2f5a70d46c68b1dc6399c1045d3870a84ec150892a0917bf61ff95bab10"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-12
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-declarer-fraude.html", "https://www.service-public.gouv.fr/particuliers/vosdroits/F34800", "https://www.service-public.gouv.fr/particuliers/vosdroits/N31138", "https://www.service-public.gouv.fr/particuliers/vosdroits/F31324", "https://www.service-public.gouv.fr/particuliers/vosdroits/R17674", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance", "https://www.signal-spam.fr/", "https://www.33700.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/numerique-formuler-recherche.html"
-empreinte = "8d7f22886575d24bd5ba95081808bd906818a48aa120190828f465621fbb4f98"
+empreinte = "3c593e9a602a36f548179c0766c9168e37cf1ff4925c37b7c70692c3af042606"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-formuler-recherche.html", "https://www.cnil.fr/fr"]
 
 [[unite]]
 chemin = "apprendre/fiches/numerique-hameconnage.html"
-empreinte = "b50edf17778d682e4cbf834c8d80411b7da134fde7980583bf41809f8742a935"
-etat = "reference-initiale"
+empreinte = "6b34fbbb879ec9459639b7b025cbabaa432acc6a1268e4177f73b1743bd5edb7"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-hameconnage.html", "https://www.anssi.gouv.fr/particulier/principales-menaces/cybercriminalite/attaque-par-hameconnage-phishing//", "https://www.service-public.fr/particuliers/vosdroits/F47157"]
 
 [[unite]]
 chemin = "apprendre/fiches/numerique-ia-usages.html"
-empreinte = "2b3e8e3ed3d6103521e123a38dc0e40a678e4a2c65e0afbf2b1f171ee415cd32"
-etat = "reference-initiale"
+empreinte = "7e1188318ab4e5eff7e7d1f741221076893bb3169873ba425f2d611389482d1e"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-ia-usages.html", "https://www.cnil.fr/fr/intelligence-artificielle", "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"]
 
 [[unite]]
 chemin = "apprendre/fiches/numerique-organiser-fichiers.html"
-empreinte = "5edb24ba7f1c353fb79d7010f4d1bed0215e88c4c9ec5cc87b316a6273e33d87"
+empreinte = "24205eb8ce568bc0ee8937ee811aeb3dba5d528f6cc66e2145257ac752107b0a"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-organiser-fichiers.html", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/bonnes-pratiques/sauvegardes", "https://www.cybermalveillance.gouv.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/numerique-preparer-sauvegarde.html"
-empreinte = "e043800296e05bd2b41cc3f7c37c0532ff3f2245ce1cf0b7f5d3538a4e195c4e"
+empreinte = "aa38642cd1558cdcc23da71d8a263dfae5557204a400b7bc5edc6315cbd685ff"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-preparer-sauvegarde.html", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/rancongiciel-ransomware-particuliers", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/rancongiciels-ransomwares"]
 
 [[unite]]
 chemin = "apprendre/fiches/numerique-proteger-donnees.html"
-empreinte = "487aea22ce02b655549a73bc2dd1652b84f14e74a1aa5cbea00da10ccd454671"
-etat = "reference-initiale"
+empreinte = "65c5766baa1000e77a404003cdcce1903bf626fba2012e89cbe564953d85b482"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-proteger-donnees.html", "https://www.cnil.fr/fr/identifier-les-donnees-personnelles", "https://www.cnil.fr/fr/passer-laction/rgpd-les-premieres-etapes"]
 
 [[unite]]
 chemin = "apprendre/fiches/numerique-reagir-fraude.html"
-empreinte = "849a06c4bff4b37ee2b8f731514990f7098d23b2ad04dd2e154ed81059686b89"
-etat = "reference-initiale"
+empreinte = "5dab7b99a97d2c27e897b9248923d3f8a168ad7d1f5e780c002e7934b5244f0f"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-reagir-fraude.html", "https://17cyber.gouv.fr/", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/usurpation-identite-que-faire"]
 
 [[unite]]
 chemin = "apprendre/fiches/numerique-verifier-demande.html"
-empreinte = "4773ea3c3be576847977f79923a2034634c4c969ee35d37f8f6e9cd3ce5f092f"
-etat = "reference-initiale"
+empreinte = "64811242a03a2634b768462d758b22ad62e1402a1b9e364e7fbb2d1258483ad4"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-verifier-demande.html", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/rapport-activite-2025", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/fraude-faux-conseiller-bancaire", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing"]
 
 [[unite]]
 chemin = "apprendre/fiches/numerique-verifier-ia.html"
-empreinte = "8392df952da339da6296538f06cec5c1df9853390973bfa94d41e2c7ad417302"
-etat = "reference-initiale"
+empreinte = "84fae9a66093de8321aa0bbe3200ac617ff57dbf03d2bf02be2710b9e3588741"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-verifier-ia.html", "https://www.cnil.fr/fr/intelligence-artificielle", "https://www.w3.org/TR/coga-usable/"]
 
 [[unite]]
 chemin = "apprendre/fiches/numerique-verifier-media.html"
-empreinte = "a167d85192a2b71f9e02764932c22bf32924ce8c0316557091f6f065e274e3ea"
-etat = "reference-initiale"
+empreinte = "9a486d163cce0018fb09eabce86e6a323ffb7654c414373d66c3352aab7aa982"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-verifier-media.html", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/intelligence-artificielle-ia", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroquerie-enfant-probleme-telephone-coucou-papa-maman"]
 
 [[unite]]
 chemin = "apprendre/fiches/prog-comparer-langages.html"
-empreinte = "d6bad57eb4fd781a3e4fb013766ecfc739d4c08ce0e10f6314996d6bba34d855"
+empreinte = "05d7c4ca526271c948970d7f6e31c9448a7d79fd1bdd2e707859553792dfabc7"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/prog-comparer-langages.html", "https://eduscol.education.gouv.fr/sites/default/files/document/vademecum-sciences-numeriques-et-technologie-numerique-et-sciences-informatiques-101937.pdf", "https://docs.python.org/3/tutorial/controlflow.html", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration"]
 
 [[unite]]
 chemin = "apprendre/fiches/prog-lire-licence-logiciel.html"
-empreinte = "a05d6a71ee8a2e34ed332a245fc3ead028bf017230b8b9aaf59ea5956d30da06"
+empreinte = "c8f8a3d7c21363dab2b893bd86f386f74e60272bd57379651dad9080542b098d"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/prog-lire-licence-logiciel.html", "https://opensource.org/osd", "https://spdx.org/licenses/"]
 
 [[unite]]
 chemin = "apprendre/fiches/prog-lire-trace-erreur.html"
-empreinte = "ecf41f80d56f1f9c2f0f6e9d34abf854ca3ebd5b40dcc1e37a15fccd17e8fd3a"
+empreinte = "04e95ef21473ca9fe5ceeaac4515a359d2e7bddd060293dbc30a34da77c80959"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/prog-lire-trace-erreur.html", "https://docs.python.org/3/tutorial/errors.html"]
 
 [[unite]]
 chemin = "apprendre/fiches/prog-tester-exemples.html"
-empreinte = "0a12f74bfdbd5299282079127be47296e02bee7233ab8982c48125f3650552e8"
+empreinte = "c24a6cd612fc134d9377d78710089524a941574e2d7e97ca908e7c1e8ad96a5a"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/prog-tester-exemples.html", "https://docs.python.org/fr/3/library/unittest.html"]
 
 [[unite]]
 chemin = "apprendre/fiches/recherche-conserver-reference.html"
-empreinte = "e74b58fab5366c2fcce8a708193ebcb8b541754417d37953734ac10c8c8aef95"
+empreinte = "3d76a4d27a82e4ed67d05de0e20871a3fa295f932e703138766f3ffec99edf39"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/recherche-conserver-reference.html", "https://exemple.test/jardins", "https://www.hceres.fr/fr/ofis"]
 
 [[unite]]
 chemin = "apprendre/fiches/recherche-distinguer-resume-citation.html"
-empreinte = "d9033fc745d8906ff0e745e8f7e1172691de2f5552d6b50c64e2bbc868d244be"
+empreinte = "df5e98be76ca03c80f3e0e39de6316f04cb517572fad5010757d16c68d766570"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/recherche-distinguer-resume-citation.html", "https://hal.science/", "https://www.enseignementsup-recherche.gouv.fr/", "https://doc.hal.science/visualisation-dun-depot/"]
 
 [[unite]]
 chemin = "apprendre/fiches/recherche-lire-etude.html"
-empreinte = "2043a94ef8096dc260a88d5ab6e7074a645fbf5a830a62b4ab4a6720c2f3a6b5"
+empreinte = "3a3b49a946ec451f722f2bbd1de287409f926bad25cffa08affa61ff43a39405"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/recherche-lire-etude.html", "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008032"]
 
 [[unite]]
 chemin = "apprendre/fiches/recherche-question-hypothese.html"
-empreinte = "976bdbc19c68ecc6cbeb96055dedb675f071aae8ddd63fe1a7d5004dace75e08"
+empreinte = "315d5cedb3ac694ec3d7e09202b5f2196693bcebbd1aa17b4c3d042ff7a4c60b"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/recherche-question-hypothese.html", "https://www.cnrs.fr/fr"]
 
 [[unite]]
 chemin = "apprendre/fiches/recherche-verifier-chiffre-public.html"
-empreinte = "241f75e3a9e916a7607d96f1e1e26d0bab9077618d3f688b4f273760e1ca93bd"
+empreinte = "21d7b31273c9aca12b09649e03334a84eaab3fdcf49b27b9757acfbcc65e8332"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/recherche-verifier-chiffre-public.html", "https://guides.data.gouv.fr/ecologie.data.gouv.fr/ecologie.data.gouv.fr/indicateurs-phares/utiliser-un-indicateur/comprendre-un-indicateur"]
 
 [[unite]]
 chemin = "apprendre/fiches/sante-amenager-logement-chutes.html"
-empreinte = "e819c65785d03c0cf0040de50b94b7033d9755deb7f580309edc3cc6c3f37cbe"
+empreinte = "7d7cec7cd73c928e7b909e65973aadb8623627a6a230b8d5922df642df081302"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-amenager-logement-chutes.html", "https://www.ameli.fr/assure/sante/bons-gestes/seniors/prevenir-chutes-personnes-agees"]
 
 [[unite]]
 chemin = "apprendre/fiches/sante-comprendre-depistage-organise.html"
-empreinte = "e690e97d990fcc535c109c7a08286a2773d242179a5a8ef4b0b70916a4e725f7"
+empreinte = "94623ea1855e55f3b83d9618d90c6058b4e2c3d33514bc42e5d97e635e7859e3"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-comprendre-depistage-organise.html", "https://www.santepubliquefrance.fr/maladies-et-traumatismes/cancers/cancer-du-sein/articles/taux-de-participation-au-programme-de-depistage-organise-du-cancer-du-sein-en-2022-2023-et-evolution-depuis-2005"]
 
 [[unite]]
 chemin = "apprendre/fiches/sante-comprendre-parcours-soins.html"
-empreinte = "888a895fd09a317ba1fbf4f0c239ad7e2bffd9d1b3152eedd85a21187945641a"
+empreinte = "4f53ca2a49deca5d9cc4e75a2e2467064acc5b863487cc227bfd6bdc93752650"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-comprendre-parcours-soins.html", "https://www.ameli.fr/assure/remboursements/rembourse/consultations-telemedecine/metropole", "https://www.assurance-maladie.ameli.fr/index.php/medecin/exercice-liberal/facturation-remuneration/dispositif-medecin-traitant/dispositif-medecin-traitant"]
 
 [[unite]]
 chemin = "apprendre/fiches/sante-lire-etiquette-produit-menager.html"
-empreinte = "44617ebfbe625f6fa58594ea6f1fca009e7796b0a9c69cf5f72c9b9ef5148e4e"
+empreinte = "5fa5eeb683f22a9241be396434fae36cc8bc4c4120df9267312775cbbb53068f"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-lire-etiquette-produit-menager.html", "https://www.inrs.fr/publications/essentiels/CLP.html", "https://www.inrs.fr/dam/inrs/CataloguePapier/ED/TI-ED-6197.pdf"]
 
 [[unite]]
 chemin = "apprendre/fiches/sante-lire-etiquette.html"
-empreinte = "5dd429889bd555e405a0332b44545200b80c2d8cbba66f231aac306544c0a537"
-etat = "reference-initiale"
+empreinte = "6a6c41c1c9f7573606be7a17f6d63295d42b20ee47866f775b219261ce90b688"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-lire-etiquette.html", "https://food.ec.europa.eu/food-safety/labelling-and-nutrition/food-information-consumers-legislation/mandatory-food-information_en"]
 
 [[unite]]
 chemin = "apprendre/fiches/sante-reperer-signes-qualite-origine.html"
-empreinte = "bde7a60bcc07c8c6654c834900637d251c037d372f082fe15d65fb7ff562cc48"
+empreinte = "36222b336837bd0af13084a4218db5d1df041dba1e2b8bc0a00a796e9401be7e"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-reperer-signes-qualite-origine.html", "https://extranet.inao.gouv.fr/fichier/Plaquette-SIQO-francais.pdf"]
 
 [[unite]]
 chemin = "apprendre/fiches/sante-reperer-source-publique.html"
-empreinte = "b1e4615854b3dac3cff1f04f4c9622e0134726cf12fd2cb009b76230bef6fb3f"
+empreinte = "07bf99836c903d5b5068dbc7a16b9908ba64fb96d5755eff886bdffc8ab9cdb1"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-reperer-source-publique.html", "https://sante.gouv.fr/", "https://www.santepubliquefrance.fr/a-propos/sante-publique-france-qui-sommes-nous", "https://www.santepubliquefrance.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/sciences-calculer-vitesse-moyenne.html"
-empreinte = "add150f1e64a8d7c4d980b475e871728b927994544da90af66c597d00ca3b2ce"
+empreinte = "47572659e46a8586d1754e571100182ed2d836ed712b5afd050add91d47fd16a"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-calculer-vitesse-moyenne.html", "https://eduscol.education.fr/document/16837/download", "https://eduscol.education.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/sciences-comprendre-isolation-r-et-u.html"
-empreinte = "63ce9ef3e683eda272305093a56ca920eb306a8dff24425452f563c52e6637d1"
+empreinte = "90360e64e685a4248df359bf247a3ce3e7e92eedc7519b41fb77eaa1e69c19d9"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-comprendre-isolation-r-et-u.html", "https://librairie.ademe.fr/index.php?controller=attachment&amp;id_attachment=2645"]
 
 [[unite]]
 chemin = "apprendre/fiches/sciences-comprendre-pluie-millimetres.html"
-empreinte = "99ff51ac917b2fc536ce441666c4c1e890542fb295fa41043bde9860ac802bb6"
+empreinte = "8c347fc3ffb9f6880647fa9a247df16a47ab41e79bad653c3b61c4f2cb3977c5"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-comprendre-pluie-millimetres.html", "https://meteofrance.com/meteo-a-z/les-precipitations-pluie-neige-grele"]
 
 [[unite]]
 chemin = "apprendre/fiches/sciences-cycle-vie-plante.html"
-empreinte = "a8dd0626cbc4a1b9b0ff0674b9a8816ff7b85783b91b09e979642f3c69fe4c75"
+empreinte = "f2d93334b079a92ba44b068fa4d8eef85e58b136b88eb7c571858cea11f1a8dd"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-cycle-vie-plante.html", "https://eduscol.education.gouv.fr/sites/default/files/document/ra23c2progressionintercyclesvivantpdf-100509.pdf", "https://eduscol.education.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/sciences-demarche.html"
-empreinte = "1b1c8dfbc7283aba6afb4ed2a525b20cc0b4b905ba4c79a1fb4c8ac7c5dfd0f4"
-etat = "reference-initiale"
+empreinte = "a8fd8d77fa1177637dc2315b2f1d6c5a471bb7b3c328aecb00272055b90efa2d"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-demarche.html", "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011"]
 
 [[unite]]
 chemin = "apprendre/fiches/sciences-distinguer-melange-changement-etat.html"
-empreinte = "7b9f1d9483fb3f693d140f4eee10661965d160976d8abe3562aa6d7e45d43242"
+empreinte = "bd99161dd58dfdf51a46621cb3f6801e71ee404cd844613536f83b5a0ee1b6df"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-distinguer-melange-changement-etat.html", "https://eduscol.education.fr/document/15199/download", "https://eduscol.education.gouv.fr/sites/default/files/document/ra22c3sciencestechnogriesppreservereaupdf-95295.pdf", "https://eduscol.education.fr/"]
 
 [[unite]]
 chemin = "apprendre/fiches/sciences-meteo-climat.html"
-empreinte = "7d0dd0d168445885b68fe4ed8f86c3cf95d953a2fe638633bf725d5b3e6153f2"
+empreinte = "1e2401c478590f8ab8a49c242252e594ad15ac6b447d0cc7d641c3ecd8d87d67"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-meteo-climat.html", "https://meteofrance.com/", "https://meteofrance.com/meteo-a-z/quelle-difference-entre-meteo-et-climat", "https://www.ipcc.ch/"]
 
 [[unite]]
 chemin = "apprendre/fiches/tech-circuit-ouvert-ferme.html"
-empreinte = "fe9b878867b5f257d73dfa8a3dd9a8585a7362620de8f360e250ab7c70722779"
+empreinte = "f87a707c04a271b2b2af086b16e0711a66a089734c161716139e94d5f78af5e0"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/tech-circuit-ouvert-ferme.html", "https://eduscol.education.gouv.fr/5745/ressources-d-accompagnement-du-programme-de-technologie-au-cycle-4", "https://www.inrs.fr/risques/electriques/prevention-risque-electrique.html"]
 
 [[unite]]
 chemin = "apprendre/fiches/tech-electronique-capteur.html"
-empreinte = "dbb778b5755747e70403577f1ebd7eda2d9f5d5532fb5ef54d337078ac743494"
+empreinte = "3e281ab6104963eb484c545ffa7860a099eff7feaeedb2af2b77a76062c30b78"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-10
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/tech-electronique-capteur.html", "https://eduscol.education.gouv.fr/5745/ressources-d-accompagnement-du-programme-de-technologie-au-cycle-4"]
 
 [[unite]]
 chemin = "apprendre/fiches/tech-kwh.html"
-empreinte = "ccb2c97b1ad14e1db79b6b7273d7350bfb863711611e5191a5339405d6a90374"
-etat = "reference-initiale"
+empreinte = "fef096b79fe824197b7c3fcc6b054853d2c5d546290d031bcede0ab822080c29"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre/fiches/tech-kwh.html", "https://agirpourlatransition.ademe.fr/particuliers/evaluer-son-impact/calculer-impact-logement/simulez-votre-consommation-electrique-avec-wattris"]
 
 [[unite]]
 chemin = "assets/css/anglais-aventure.css"
@@ -1339,6 +1459,7 @@ empreinte = "fa2aa17af75203530b3773348d2a8b649a3cf5749e402590e3e49bcbcd93cf82"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/transparence.html#licence"]
 
 [[unite]]
 chemin = "assets/js/anglais-aventure-data.js"
@@ -1360,6 +1481,7 @@ empreinte = "d01dc827f7963dd31ac6fc9c9ee41eec0af360063eb16eef93e3d75df0728820"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
+urls = ["https://site-fictif.test/agenda?jour=mardi"]
 
 [[unite]]
 chemin = "assets/js/apprentissage.js"
@@ -1388,13 +1510,15 @@ empreinte = "5d82d9ff8ef0ce4b32c98d5948cb001198a58a9614c8013101f7cb29643f00e5"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
+urls = ["https://thejmimiia-code.github.io/MRSC/"]
 
 [[unite]]
 chemin = "confidentialite.html"
-empreinte = "6e33ba4f51abe03f70389110406de1a56f46eb27f6611113e0b79fa9f22f7acc"
-etat = "reference-initiale"
+empreinte = "cdc297f0ea465741cdfab5d5b37c9219c2c3deb5860046c57fda9e0d851a0c2c"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/confidentialite.html", "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages", "https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement", "https://d-mocratie-et-politique-du-peuple-p.vercel.app/", "https://policies.google.com/privacy", "https://www.cnil.fr/fr/plaintes", "https://www.cnil.fr/fr/passer-laction/rgpd-les-premieres-etapes", "https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookies/comment-mettre-mon-site-web-en-conformite", "https://www.cnil.fr/fr/identifier-les-donnees-personnelles"]
 
 [[unite]]
 chemin = "docs/apprentissage/audit-automatique.md"
@@ -1409,6 +1533,7 @@ empreinte = "82e518a81048df8ecc4074ead13e8812c2bd30f2c74114a9c09ef53b422492c7"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
+urls = ["https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512", "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2", "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011", "https://agirpourlatransition.ademe.fr/particuliers/evaluer-son-impact/calculer-impact-logement/simulez-votre-consommation-electrique-avec-wattris", "https://www.clemi.fr/ressources/ressources-pedagogiques/evaluer-linformation", "https://anssi.gouv.fr/agence/cybersecurite/le-cybermois/cybermois-2022-tous-ensemble-face-aux-rancongiciels-et-au-hameconnage/", "https://www.service-public.fr/", "https://www.cnil.fr/fr/passer-laction/rgpd-les-premieres-etapes", "https://www.anssi.gouv.fr/particulier/principales-menaces/cybercriminalite/attaque-par-hameconnage-phishing//", "https://www.service-public.fr/particuliers/vosdroits/F47157", "https://www.cnil.fr/fr/identifier-les-donnees-personnelles", "https://www.cnil.fr/fr/intelligence-artificielle", "https://www.w3.org/TR/coga-usable/", "https://food.ec.europa.eu/food-safety/labelling-and-nutrition/food-information-consumers-legislation/mandatory-food-information_en", "https://www.anlci.gouv.fr/app/uploads/2025/04/20250910_Prez-webinaire-AFEST.pdf", "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/intelligence-artificielle-ia", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroquerie-enfant-probleme-telephone-coucou-papa-maman", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/rapport-activite-2025", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/fraude-faux-conseiller-bancaire", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing", "https://17cyber.gouv.fr/", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/usurpation-identite-que-faire", "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008032", "https://www.education.gouv.fr/media/199172/download", "https://www.bipm.org/en/measurement-units", "https://www.education.gouv.fr/sites/default/files/document/Annexe%202%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20pour%20le%20cycle%204-480716.pdf", "https://github.com/python/cpython/blob/v3.14.0/Doc/library/statistics.rst", "https://eduscol.education.gouv.fr/sites/default/files/document/ra16c3c4mathmathetquotidien600998pdf-77574.pdf", "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegnsi1-tpourquoi-choisir-nsi1243842pdf-89505.pdf", "https://eduscol.education.gouv.fr/sites/default/files/document/vademecum-sciences-numeriques-et-technologie-numerique-et-sciences-informatiques-101937.pdf", "https://docs.python.org/3/tutorial/controlflow.html", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration", "https://eduscol.education.gouv.fr/5745/ressources-d-accompagnement-du-programme-de-technologie-au-cycle-4", "https://www.inrs.fr/risques/electriques/prevention-risque-electrique.html", "https://www.service-public.gouv.fr/", "https://www.legifrance.gouv.fr/", "https://www.data.gouv.fr/", "https://www.insee.fr/", "https://www.data.gouv.fr/pages/legal/licences", "https://www.vie-publique.fr/", "https://www.economie.gouv.fr/dgccrf", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/bonnes-pratiques/sauvegardes", "https://www.cybermalveillance.gouv.fr/", "https://www.certificat-clea.fr/employeurs/le-socle/", "https://eduscol.education.fr/", "https://eduscol.education.fr/document/59725/download", "https://meteofrance.com/", "https://meteofrance.com/meteo-a-z/quelle-difference-entre-meteo-et-climat", "https://www.ipcc.ch/", "https://www.archives-nationales.culture.gouv.fr/", "https://cache.media.eduscol.education.fr/file/HG_Competences/11/4/RA16_C3C4_HIGE_Analyser_comprendre_document_819114.pdf", "https://developer.mozilla.org/fr/docs/Glossary/Byte", "https://docs.python.org/fr/3/library/unittest.html", "https://www.education.gouv.fr/", "https://eduscol.education.fr/document/58959/download", "https://eduscol.education.fr/document/16837/download", "https://eduscol.education.fr/document/15199/download", "https://eduscol.education.gouv.fr/sites/default/files/document/ra22c3sciencestechnogriesppreservereaupdf-95295.pdf", "https://www.ign.fr/", "https://eduscol.education.fr/document/16804/download", "https://site-fictif.test/agenda?jour=mardi", "https://developer.mozilla.org/fr/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_URL", "https://www.culture.gouv.fr/", "https://www.culture.gouv.fr/thematiques/photographie/gerer-un-fonds-photographique/rediger-des-cartels", "https://www.cnrs.fr/fr", "https://dictionary.cambridge.org/dictionary/english/spell", "https://eduscol.education.fr/document/58956/download", "https://eduscol.education.fr/document/36614/download", "https://eduscol.education.gouv.fr/sites/default/files/document/ra23c2progressionintercyclesvivantpdf-100509.pdf", "https://eduscol.education.fr/document/16807/download", "https://promenade.imcce.fr/fr/pages2/277.html", "https://eduscol.education.fr/document/30046/download", "https://www.cnil.fr/fr", "https://exemple.test/jardins", "https://www.hceres.fr/fr/ofis", "https://www.france-services.gouv.fr/", "https://developer.mozilla.org/fr/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview", "https://opensource.org/osd", "https://spdx.org/licenses/", "https://www.vie-publique.fr/fiches", "https://signal.conso.gouv.fr/fr", "https://www.banque-france.fr/", "https://www.service-public.gouv.fr/particuliers/vosdroits/F2451", "https://www.coe.int/fr/web/common-european-framework-reference-languages/plurilingualism-in-the-classroom", "https://hal.science/", "https://www.enseignementsup-recherche.gouv.fr/", "https://doc.hal.science/visualisation-dun-depot/", "https://sante.gouv.fr/", "https://www.santepubliquefrance.fr/a-propos/sante-publique-france-qui-sommes-nous", "https://www.santepubliquefrance.fr/", "https://www.britannica.com/dictionary/eb/qa/Pronunciation-of-ed-Endings-on-Verbs", "https://www.coe.int/en/web/common-european-framework-reference-languages/phonological-competence", "https://dictionary.cambridge.org/help/phonetics.html", "https://dictionary.cambridge.org/dictionary/english/three", "https://dictionary.cambridge.org/dictionary/english/mother", "https://dictionary.cambridge.org/dictionary/english/breath", "https://dictionary.cambridge.org/dictionary/english/breathe", "https://rm.coe.int/chapter-5-communicative-language-competences/1680a084c3", "https://eduscol.education.fr/document/23494/download", "https://eduscol.education.fr/document/23560/download", "https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-securite_des_systemes_objets_connectes_iot-v1.0.pdf", "https://www.francecompetences.fr/app/uploads/2026/01/Vademecum-VF_2026.pdf", "https://fondation-lamap.org/sites/default/files/pdf/La%20re%CC%81cupe%CC%81ration%20en%20me%CC%81moire.pdf", "https://eduscol.education.gouv.fr/sites/default/files/document/ateliercinemaglossaire1277577pdf-81519.pdf", "https://guides.data.gouv.fr/ecologie.data.gouv.fr/ecologie.data.gouv.fr/indicateurs-phares/utiliser-un-indicateur/comprendre-un-indicateur", "https://www.service-public.fr/particuliers/vosdroits/F31144", "https://meteofrance.com/meteo-a-z/les-precipitations-pluie-neige-grele", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/rancongiciel-ransomware-particuliers", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/rancongiciels-ransomwares", "https://librairie.ademe.fr/index.php?controller=attachment&id_attachment=2645", "https://extranet.inao.gouv.fr/fichier/Plaquette-SIQO-francais.pdf", "https://www.santepubliquefrance.fr/maladies-et-traumatismes/cancers/cancer-du-sein/articles/taux-de-participation-au-programme-de-depistage-organise-du-cancer-du-sein-en-2022-2023-et-evolution-depuis-2005", "https://transport.data.gouv.fr/datasets/reseau-urbain-et-interurbain-dile-de-france-mobilites", "https://www.ameli.fr/assure/remboursements/rembourse/consultations-telemedecine/metropole", "https://www.assurance-maladie.ameli.fr/index.php/medecin/exercice-liberal/facturation-remuneration/dispositif-medecin-traitant/dispositif-medecin-traitant", "https://www.inrs.fr/publications/essentiels/CLP.html", "https://www.inrs.fr/dam/inrs/CataloguePapier/ED/TI-ED-6197.pdf", "https://eduscol.education.gouv.fr/sites/default/files/document/ra16c4apevalfiche2708865pdf-78576.pdf", "https://www.visionscarto.net/peut-on-corriger-la-carte-du-monde", "https://www.archives-nationales.culture.gouv.fr/methodologie-de-recherche-en-salle-de-lecture-virtuelle", "https://www.commission-des-sondages.fr/oblig/obligations.htm", "https://www.ameli.fr/assure/sante/bons-gestes/seniors/prevenir-chutes-personnes-agees", "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "https://docs.python.org/3/library/statistics.html", "https://docs.python.org/3/tutorial/errors.html", "https://www.service-public.gouv.fr/particuliers/vosdroits/F34800", "https://www.service-public.gouv.fr/particuliers/vosdroits/N31138", "https://www.service-public.gouv.fr/particuliers/vosdroits/F31324", "https://www.service-public.gouv.fr/particuliers/vosdroits/R17674", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance", "https://www.signal-spam.fr/", "https://www.33700.fr/"]
 
 [[unite]]
 chemin = "docs/apprentissage/file-relecture.md"
@@ -1423,6 +1548,7 @@ empreinte = "9ed677281fa311763ba02c2721c46068698523b1094b33e03d6d4a3c31083172"
 etat = "relu-par-agent"
 apostrophes = 11
 date_derniere_relecture = 2026-11-12
+urls = ["https://exemple.org/page-consultee"]
 
 [[unite]]
 chemin = "docs/apprentissage/objectif-1000.md"
@@ -1437,6 +1563,7 @@ empreinte = "f657459b8668416ec92235e4c9d68ddd18001c09848caaf0e2b9dc10d6101823"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
+urls = ["https://www.service-public.gouv.fr/", "https://www.legifrance.gouv.fr/", "https://www.data.gouv.fr/", "https://www.insee.fr/", "https://www.data.gouv.fr/pages/legal/licences", "https://www.vie-publique.fr/", "https://www.commission-des-sondages.fr/oblig/obligations.htm", "https://www.vie-publique.fr/fiches", "https://www.france-services.gouv.fr/", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing", "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "https://www.economie.gouv.fr/dgccrf", "https://eduscol.education.gouv.fr/4746/ressources-d-accompagnement-du-programme-de-mathematiques-au-cycle-2", "https://www.banque-france.fr/", "https://www.service-public.gouv.fr/particuliers/vosdroits/F2451", "https://signal.conso.gouv.fr/fr", "https://www.ameli.fr/assure/sante/bons-gestes/seniors/prevenir-chutes-personnes-agees", "https://www.ameli.fr/assure/remboursements/rembourse/consultations-telemedecine/metropole", "https://www.assurance-maladie.ameli.fr/index.php/medecin/exercice-liberal/facturation-remuneration/dispositif-medecin-traitant/dispositif-medecin-traitant", "https://www.inrs.fr/publications/essentiels/CLP.html", "https://www.inrs.fr/dam/inrs/CataloguePapier/ED/TI-ED-6197.pdf", "https://sante.gouv.fr/", "https://www.santepubliquefrance.fr/a-propos/sante-publique-france-qui-sommes-nous", "https://www.santepubliquefrance.fr/", "https://www.service-public.fr/particuliers/vosdroits/F31144", "https://www.francecompetences.fr/app/uploads/2026/01/Vademecum-VF_2026.pdf", "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008032", "https://www.cnrs.fr/fr", "https://guides.data.gouv.fr/ecologie.data.gouv.fr/ecologie.data.gouv.fr/indicateurs-phares/utiliser-un-indicateur/comprendre-un-indicateur", "https://www.santepubliquefrance.fr/maladies-et-traumatismes/cancers/cancer-du-sein/articles/taux-de-participation-au-programme-de-depistage-organise-du-cancer-du-sein-en-2022-2023-et-evolution-depuis-2005", "https://extranet.inao.gouv.fr/fichier/Plaquette-SIQO-francais.pdf", "https://librairie.ademe.fr/index.php?controller=attachment&id_attachment=2645", "https://meteofrance.com/meteo-a-z/les-precipitations-pluie-neige-grele", "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011", "https://developer.mozilla.org/fr/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_URL", "https://eduscol.education.fr/document/23494/download", "https://eduscol.education.fr/document/23560/download", "https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-securite_des_systemes_objets_connectes_iot-v1.0.pdf", "https://opensource.org/osd", "https://spdx.org/licenses/", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512", "https://github.com/python/cpython/blob/v3.14.0/Doc/library/statistics.rst", "https://eduscol.education.gouv.fr/sites/default/files/document/ra16c4apevalfiche2708865pdf-78576.pdf", "https://www.service-public.gouv.fr/particuliers/vosdroits/F34800", "https://www.service-public.gouv.fr/particuliers/vosdroits/N31138", "https://www.service-public.gouv.fr/particuliers/vosdroits/F31324", "https://www.service-public.gouv.fr/particuliers/vosdroits/R17674", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance", "https://www.signal-spam.fr/", "https://www.33700.fr/", "https://www.cnil.fr/fr", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/bonnes-pratiques/sauvegardes", "https://www.cybermalveillance.gouv.fr/"]
 
 [[unite]]
 chemin = "docs/apprentissage/plan-1000.toml"
@@ -1458,6 +1585,7 @@ empreinte = "76c1f2e34ae4d7d1d69dd4dfba00ffc56bc1c6477341130ef2583c776fe1291a"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://exemple.org/page-consultee"]
 
 [[unite]]
 chemin = "docs/apprentissage/revue-interne-prototypes-2026-10-11.md"
@@ -1472,6 +1600,7 @@ empreinte = "bc9c5c8c15501f3ab3b12bc16ee1dddb9d37117aa90978a84b53c9684b48555a"
 etat = "reference-initiale"
 apostrophes = 51
 date_reference = 2026-11-09
+urls = ["https://eduscol.education.fr/document/14122/download", "https://referentiels-professionnels.eduscol.education.fr/h092/h092c.pdf", "https://eduscol.education.fr/document/16789/download", "https://promenade.imcce.fr/fr/pages2/277.html", "https://doc.hal.science/citations/", "https://doc.hal.science/visualisation-dun-depot/", "https://www.ign.fr/publications-de-l-ign/institut/Ressources_pedagogiques/livret_decouvrez_LMDC.pdf", "https://eduscol.education.fr/document/16807/download", "https://eduscol.education.fr/document/16804/download", "https://www.ign.fr/mag/apprendre-lire-une-carte-en-cinq-etapes"]
 
 [[unite]]
 chemin = "docs/apprentissage/sources-refusees.toml"
@@ -1479,6 +1608,7 @@ empreinte = "2bce6cce4a91f9f563e384b3ae0d8814a68cca22d0d5663376c0244543a11020"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://doc.hal.science/citations/", "https://doc.hal.science/visualisation-dun-depot/", "https://www.ign.fr/mag/apprendre-lire-une-carte-en-cinq-etapes", "https://eduscol.education.fr/document/16807/download", "https://www.ign.fr/publications-de-l-ign/institut/Ressources_pedagogiques/livret_decouvrez_LMDC.pdf", "https://eduscol.education.fr/document/16804/download", "https://eduscol.education.fr/document/16789/download", "https://promenade.imcce.fr/fr/pages2/277.html", "https://eduscol.education.fr/document/14122/download", "https://referentiels-professionnels.eduscol.education.fr/h092/h092c.pdf"]
 
 [[unite]]
 chemin = "docs/apprentissage/sources-utilite-publique.md"
@@ -1486,6 +1616,7 @@ empreinte = "c82ca98db56c93448bba20a6b64fc70c9ed074456f65379d6519b7cbf330d04f"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://www.service-public.gouv.fr/", "https://www.france-services.gouv.fr/", "https://www.legifrance.gouv.fr/", "https://www.vie-publique.fr/", "https://www.defenseurdesdroits.fr/", "https://www.impots.gouv.fr/", "https://www.elections.interieur.gouv.fr/", "https://www.economie.gouv.fr/dgccrf", "https://signal.conso.gouv.fr/", "https://www.data.gouv.fr/", "https://www.insee.fr/", "https://ec.europa.eu/eurostat/", "https://www.cnil.fr/", "https://cyber.gouv.fr/", "https://www.cybermalveillance.gouv.fr/", "https://17cyber.gouv.fr/", "https://www.arcep.fr/", "https://accessibilite.numerique.gouv.fr/", "https://www.inrs.fr/risques/electriques/prevention-risque-electrique.html", "https://www.ademe.fr/", "https://www.energie-info.fr/", "https://www.rte-france.com/eco2mix", "https://www.georisques.gouv.fr/", "https://meteofrance.com/", "https://eduscol.education.gouv.fr/5823/programmes-et-ressources-en-numerique-et-sciences-informatiques-voie-g", "https://docs.python.org/fr/3/tutorial/", "https://docs.python.org/fr/3/license.html", "https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/Loops", "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license", "https://docs.arduino.cc/language-reference/", "https://www.santepubliquefrance.fr/", "https://www.ameli.fr/assure", "https://www.francetravail.fr/"]
 
 [[unite]]
 chemin = "docs/couverture-savoirs-base.md"
@@ -1493,6 +1624,7 @@ empreinte = "a4b9d22970f60f256f22c576278ae979d904e64220ff8068b3a71ece7cc43822"
 etat = "relu-par-agent"
 apostrophes = 1
 date_derniere_relecture = 2026-11-12
+urls = ["https://isced.uis.unesco.org/about/", "https://isced.uis.unesco.org/q-and-a/", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512", "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011", "https://www.anlci.gouv.fr/nos-piliers/lillettrisme-au-travail/", "https://www.anlci.gouv.fr/app/uploads/2025/04/20250910_Prez-webinaire-AFEST.pdf", "https://www.certificat-clea.fr/employeurs/le-socle/", "https://www.w3.org/TR/WCAG22/", "https://www.w3.org/TR/coga-usable/", "https://www.cnil.fr/fr/passer-laction/rgpd-les-premieres-etapes"]
 
 [[unite]]
 chemin = "docs/diagnostic-404-vercel.md"
@@ -1500,6 +1632,7 @@ empreinte = "cd4e38a33ab5fc3623d9a2b9cd5a66a0d58204f37decaf347b2edae76e1918ab"
 etat = "reference-initiale"
 apostrophes = 25
 date_reference = 2026-11-09
+urls = ["https://d-mocratie-et-politique-du-peuple-p.vercel.app/", "https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple/pull/53", "https://d-mocratie-et-politique-du-peuple-pour-le-peup-git-ec5223-mrsc1.vercel.app/", "https://d-mocratie-et-politique-du-peuple-p.vercel.app/outils/reglages_depot.html", "https://vercel.com/docs/errors/not_found", "https://vercel.com/kb/guide/how-to-debug-404-errors", "https://vercel.com/guides/custom-404-page", "https://vercel.com/changelog/deployment-protection-is-now-enabled-by-default-for-new-projects", "https://community.vercel.com/t/404-not-found-for-simple-html-css-site/1719"]
 
 [[unite]]
 chemin = "docs/gabarits/contenu-editorial.md"
@@ -1514,6 +1647,7 @@ empreinte = "54dff283edfe09d8458552223ab11bcbe81b9dfa58ab2be322f3930aa0f83e46"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://d-mocratie-et-politique-du-peuple-p.vercel.app/`](https://d-mocratie-et-politique-du-peuple-p.vercel.app/", "https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple", "https://d-mocratie-et-politique-du-peuple-p.vercel.app/", "https://thejmimiia-code.github.io/MRSC/`](https://thejmimiia-code.github.io/MRSC/", "https://vercel.com/docs/functions/runtimes/python/api-directory", "https://vercel.com/docs/functions/runtimes/python", "https://vercel.com/guides/custom-404-page", "https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple/pull/53"]
 
 [[unite]]
 chemin = "docs/pistes-visuelles-ia.html"
@@ -1528,6 +1662,7 @@ empreinte = "7cc7d73612e199100c32d5e043c1bf33ad67330065ddbd35929690c9f7e75a31"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple", "https://d-mocratie-et-politique-du-peuple-p.vercel.app/", "https://thejmimiia-code.github.io/MRSC/"]
 
 [[unite]]
 chemin = "docs/protocole-editorial.md"
@@ -1542,6 +1677,7 @@ empreinte = "a14b2f42ac83c8bc5f4e0646c2c37809bedf480391d48463bc4643a5cfe3e054"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://www.w3.org/WAI/WCAG22/Understanding/reflow.html", "https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html", "https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html", "https://www.w3.org/TR/WCAG22/", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-contrast", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/forced-colors", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-transparency", "https://www.w3.org/TR/coga-usable/"]
 
 [[unite]]
 chemin = "docs/rd-anglais-aventure.md"
@@ -1549,6 +1685,7 @@ empreinte = "e7ac39b5634c018a499fb725d05b061ce42e2a2d0923f8f64838b1bfed8a5312"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
+urls = ["https://rm.coe.int/common-european-framework-of-reference-for-languages-learning-teaching/16809ea0d4", "https://www.coe.int/en/web/common-european-framework-reference-languages/cefr-descriptors-search", "https://learnenglish.britishcouncil.org/getting-started", "https://learnenglish.britishcouncil.org/free-resources/speaking", "https://www.bbc.co.uk/learningenglish/easy_course", "https://doi.org/10.1080/09588221.2025.2528786", "https://doi.org/10.1016/j.compedu.2018.06.020", "https://doi.org/10.1111/lang.12479", "https://doi.org/10.1007/s10648-020-09572-8", "https://selfdeterminationtheory.org/wp-content/uploads/2024/06/2024_WangWangEtAl_MetaEdu.pdf", "https://www.w3.org/2018/12/games-workshop/papers/web-games-adaptive-accessibility.html"]
 
 [[unite]]
 chemin = "docs/rd-audit-securite-optimisation.md"
@@ -1570,6 +1707,7 @@ empreinte = "a666e2e2ac31e8e9b9c317b3b118a559c6034b4e48ae9a328681f2f461155889"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://thejmimiia-code.github.io/MRSC/", "https://www.cnil.fr/fr/passer-laction/rgpd-les-premieres-etapes", "https://www.cnil.fr/fr/identifier-les-donnees-personnelles", "https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookies/comment-mettre-mon-site-web-en-conformite", "https://www.cnil.fr/sites/default/files/2026-01/recommandation_cookies_consolidee.pdf", "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages", "https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement", "https://www.cnil.fr/fr/la-cnil-publie-une-recommandation-relative-aux-mesures-de-journalisation"]
 
 [[unite]]
 chemin = "docs/rd-ia-usages-fraudes.md"
@@ -1577,6 +1715,7 @@ empreinte = "ae68e1b282280a04183e3fe5b2f4237178f13c5965ff8784030760c9abb5c1ce"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
+urls = ["https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/rapport-activite-2025", "https://www.cybermalveillance.gouv.fr/medias/2026/09/Deck-IPSOS-2026-1409-DEF.pdf", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/intelligence-artificielle-ia", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroquerie-enfant-probleme-telephone-coucou-papa-maman", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/fraude-faux-conseiller-bancaire", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/fausses-offres-demploi-creees-par-des-fraudeurs", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/escroquerie-placement-financier", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/usurpation-identite-que-faire", "https://17cyber.gouv.fr/", "https://www.signal-spam.fr/", "https://www.33700.fr/", "https://www.service-public.gouv.fr/particuliers/vosdroits/F34800", "https://www.service-public.gouv.fr/particuliers/vosdroits/N31138", "https://www.service-public.gouv.fr/particuliers/vosdroits/F31324", "https://www.service-public.gouv.fr/particuliers/vosdroits/R17674", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance"]
 
 [[unite]]
 chemin = "docs/rd-innovation-continue.md"
@@ -1591,6 +1730,7 @@ empreinte = "4e4652b1781b354259b7373b577e78004f4a6ad1c32478144ce3ed7c6d6fb88d"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
+urls = ["https://www.education.gouv.fr/bo/15/Hebdo17/MENE1506516D.htm", "https://www.certificat-clea.fr/employeurs/le-socle/", "https://www.anlci.gouv.fr/comment-agir/je-me-forme/", "https://www.anlci.gouv.fr/app/uploads/2025/04/20250910_Prez-webinaire-AFEST.pdf", "https://www.w3.org/TR/WCAG22/", "https://www.w3.org/WAI/WCAG22/Understanding/intro", "https://isced.uis.unesco.org/about/", "https://isced.uis.unesco.org/q-and-a/", "https://www.w3.org/TR/coga-usable/", "https://uis.unesco.org/sites/default/files/documents/isced-fields-of-education-and-training-2013-en.pdf", "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008032", "https://www.education.gouv.fr/media/199172/download", "https://www.education.gouv.fr/sites/default/files/document/Annexe%202%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20pour%20le%20cycle%204-480716.pdf", "https://eduscol.education.gouv.fr/sites/default/files/document/ra16c3c4mathmathetquotidien600998pdf-77574.pdf", "https://www.bipm.org/en/measurement-units", "https://www.inrs.fr/risques/electriques/prevention-risque-electrique.html", "https://eduscol.education.gouv.fr/5823/programmes-et-ressources-en-numerique-et-sciences-informatiques-voie-g", "https://docs.python.org/fr/3/tutorial/", "https://docs.python.org/fr/3/license.html", "https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/Loops", "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license"]
 
 [[unite]]
 chemin = "docs/rd-plan-global-consolidation.md"
@@ -1621,11 +1761,19 @@ apostrophes = 55
 date_reference = 2026-11-09
 
 [[unite]]
+chemin = "docs/rd/arbre-accessibilite-2026-11-13.md"
+empreinte = "ef5f8bff8573d97de705c184bc1b496c33dc5963323f3d70114a88babe775ae8"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-13
+
+[[unite]]
 chemin = "docs/rd/archives-et-poids-du-depot.md"
 empreinte = "ae45840b1f89f6ceec1222818287889ad535319df0f485f7ed2a30ef2c6283f0"
 etat = "reference-initiale"
 apostrophes = 19
 date_reference = 2026-11-09
+urls = ["https://github.com/thejmimiia-code/MRSC/releases/tag/planches-statuts-animation-2026-10", "https://github.com/thejmimiia-code/MRSC/tree/planches-statuts-animation-2026-10/docs/rd/statuts-animation", "https://github.com/thejmimiia-code/MRSC.git"]
 
 [[unite]]
 chemin = "docs/rd/audit-cache-css-ia-2026-10-24.json"
@@ -1664,17 +1812,17 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/avancees.md"
-empreinte = "4d54731ec89f96d954e399268ad2e6597ad5054a86f38c5f62f72b695c99b4bc"
+empreinte = "440532ed9c95359e2a93fca8cda030275ad48beb20976af909edb2c1904234d9"
 etat = "relu-par-agent"
 apostrophes = 1240
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/avancees.toml"
-empreinte = "a3362fa78238a2e682ec306d29dfeda540bbccb1e5239f388cff8c190a35a32b"
+empreinte = "d5fdccfb80cd7bff35dfaece30e6b51b90e9deb533b1e52064aa6207e9d3fd15"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/bibliotheque-skills.md"
@@ -1682,6 +1830,7 @@ empreinte = "c90d68395800c4db0616f1633b8d664c2c0df10df597bf255d0f99c5146431ae"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/mattpocock/skills/tree/49dd158d1076134a641b33efb035946536778336/skills/engineering/tdd", "https://github.com/addyosmani/agent-skills/tree/1be8e34187e34647bb83adc3a1323b26ae6f6abe/skills/debugging-and-error-recovery", "https://github.com/addyosmani/agent-skills/tree/1be8e34187e34647bb83adc3a1323b26ae6f6abe", "https://github.com/mattpocock/skills/tree/49dd158d1076134a641b33efb035946536778336", "https://github.com/addyosmani/agent-skills/tree/1be8e34187e34647bb83adc3a1323b26ae6f6abe/skills/doubt-driven-development"]
 
 [[unite]]
 chemin = "docs/rd/cadrages.toml"
@@ -1703,6 +1852,7 @@ empreinte = "7bb1125c6ccc536ade6c1da766e6d74ddc7470655b10201e204b92021f738ce9"
 etat = "reference-initiale"
 apostrophes = 73
 date_reference = 2026-11-09
+urls = ["https://eduscol.education.fr/document/36614/download", "https://cache.media.eduscol.education.fr/file/HG_Competences/11/4/RA16_C3C4_HIGE_Analyser_comprendre_document_819114.pdf", "https://www.service-public.gouv.fr/particuliers/vosdroits/F2451", "https://eduscol.education.fr/document/16804/download", "https://eduscol.education.fr/document/15199/download", "https://meteofrance.com/meteo-a-z/quelle-difference-entre-meteo-et-climat", "https://eduscol.education.fr/document/23494/download", "https://promenade.imcce.fr/fr/pages2/277.html", "https://eduscol.education.fr/document/16837/download"]
 
 [[unite]]
 chemin = "docs/rd/confrontations-sources.toml"
@@ -1710,6 +1860,7 @@ empreinte = "c48d525d6259042387a2b515de3e5d3be1c726a5f8d720d67ae7c268e5d7e55c"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://meteofrance.com/meteo-a-z/quelle-difference-entre-meteo-et-climat", "https://eduscol.education.fr/document/16837/download", "https://www.service-public.gouv.fr/particuliers/vosdroits/F2451", "https://eduscol.education.fr/document/15199/download", "https://eduscol.education.fr/document/36614/download", "https://promenade.imcce.fr/fr/pages2/277.html", "https://cache.media.eduscol.education.fr/file/HG_Competences/11/4/RA16_C3C4_HIGE_Analyser_comprendre_document_819114.pdf", "https://eduscol.education.fr/document/16804/download", "https://eduscol.education.fr/document/23494/download"]
 
 [[unite]]
 chemin = "docs/rd/consignes-seance-imprimables.md"
@@ -1745,13 +1896,14 @@ empreinte = "ebe871884691885169957d718d8af62000da9d4e0a19f20527e5cc4eaf2a9a9b"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://thejmimiia-code.github.io/MRSC/", "https://github.com/thejmimiia-code/MRSC/issues/90"]
 
 [[unite]]
 chemin = "docs/rd/eva/graphe.dot"
-empreinte = "aa718cac3bb01cc2eeb81f752c1a60f98d57504a65925fb58f400bee983e89bd"
+empreinte = "cf3c53910c99f95e684eb6b8571cb2b3f5faad7eca00d816098f07db72923df6"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/eva/graphe.md"
@@ -1762,17 +1914,18 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "d78282a33be551f640fd99f8131aab7b4b4c578906520cf758ca940ce6d81c9b"
+empreinte = "fa9e1fd7cc3665befc16d3fb530ff1dcf3f1a7c35199ef7ab0970aa12329863c"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
+urls = ["https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr-executive-summary"]
 
 [[unite]]
 chemin = "docs/rd/eva/plan.md"
-empreinte = "4e50c489c3f345e71c46ba839031ee067cd4e96f09ef911890143cb8915df79a"
+empreinte = "6c5e8782f70483924c8ba794c804d478230e30b1da9b14e196b3c873379bcb92"
 etat = "relu-par-agent"
 apostrophes = 72
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/eva/plan.toml"
@@ -1794,6 +1947,7 @@ empreinte = "24fa87cae3f05511e6af969e7b2e3b7815ed9cbcd44ebc8fc4a18dc9a392f807"
 etat = "relu-par-agent"
 apostrophes = 950
 date_derniere_relecture = 2026-11-12
+urls = ["https://thejmimiia-code.github.io/MRSC/assets/css/site.css"]
 
 [[unite]]
 chemin = "docs/rd/fusions-du-19-octobre-2026.md"
@@ -1801,6 +1955,7 @@ empreinte = "e84190d8ad6497b680b2f5b12b34a35c5cc2f8d6fb85ccf63005ff9b9739b1e8"
 etat = "reference-initiale"
 apostrophes = 76
 date_reference = 2026-11-09
+urls = ["https://github.com/thejmimiia-code/MRSC/pull/85", "https://github.com/thejmimiia-code/MRSC/pull/94", "https://github.com/thejmimiia-code/MRSC/pull/98", "https://github.com/thejmimiia-code/MRSC/pull/100", "https://github.com/thejmimiia-code/MRSC/pull/104", "https://github.com/thejmimiia-code/MRSC/pull/112"]
 
 [[unite]]
 chemin = "docs/rd/gabarit-initiative.md"
@@ -1822,6 +1977,7 @@ empreinte = "cdb8c36c59a01a1771c4fe544946afaf132adb69f4d6252de45247ca37762c41"
 etat = "reference-initiale"
 apostrophes = 19
 date_reference = 2026-11-09
+urls = ["https://github.com/python/cpython/blob/v3.14.0/Doc/library/statistics.rst"]
 
 [[unite]]
 chemin = "docs/rd/inclusion-criteres-wcag-22.md"
@@ -1829,6 +1985,7 @@ empreinte = "34d6d5fc41e0aaec7661643b015197a3863442b0963f96de588b1137f5918784"
 etat = "reference-initiale"
 apostrophes = 58
 date_reference = 2026-11-09
+urls = ["https://www.numerique.gouv.fr/actualites/nouvelle-version-rgaa-2026/", "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054393304", "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html", "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html"]
 
 [[unite]]
 chemin = "docs/rd/inclusion-lecture-vocale.md"
@@ -1836,10 +1993,11 @@ empreinte = "163fbae588beb08899348149e4006bddf57f697376aa286aea01198f8b7fd929"
 etat = "reference-initiale"
 apostrophes = 112
 date_reference = 2026-11-09
+urls = ["https://www.insee.fr/fr/statistiques/8739245", "https://doi.org/10.1177/0022219416688170", "https://link.springer.com/article/10.1007/s11881-026-00389-8", "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054393304", "https://www.numerique.gouv.fr/actualites/nouvelle-version-rgaa-2026/", "https://pubmed.ncbi.nlm.nih.gov/31689376/", "https://academic.oup.com/applij/article-abstract/18/1/49/233475"]
 
 [[unite]]
 chemin = "docs/rd/inventaire-controles.md"
-empreinte = "6859b861c8de47f42c4a149c4bd3bfe227ab4598bccb16c430adfba6cfbe2ae0"
+empreinte = "cd7df4548aea35dc5e951c2a0b244d4803cf012d946d4b72f7498b81726305c9"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
@@ -1853,10 +2011,11 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "9e2bc71dd893ce26f015485d537d30b63ec0dcc58cb9c727bc72250bdebcd239"
+empreinte = "5cd92ff58eb1e7d9a87f3ccfce59376ce171056863498ebbc7e50378fde2fd5d"
 etat = "relu-par-agent"
 apostrophes = 2405
 date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/assets/css/site.css", "https://www.ign.fr/mag/apprendre-lire-une-carte-en-cinq-etapes", "https://www.ign.fr/publications-de-l-ign/institut/Ressources_pedagogiques/livret_decouvrez_LMDC.pdf", "https://thejmimiia-code.github.io/MRSC/", "https://github.com/AnswerDotAI/llms-txt", "https://github.com/mattpocock/skills/tree/49dd158d1076134a641b33efb035946536778336", "https://github.com/addyosmani/agent-skills/tree/1be8e34187e34647bb83adc3a1323b26ae6f6abe"]
 
 [[unite]]
 chemin = "docs/rd/ligne-graphique.md"
@@ -1878,6 +2037,7 @@ empreinte = "189c179b4a9d20bbd8a63cf849f803b0a402ab94e4ea32abefb104b0742621b4"
 etat = "reference-initiale"
 apostrophes = 32
 date_reference = 2026-11-09
+urls = ["https://github.com/python/cpython/blob/v3.14.0/Doc/library/statistics.rst"]
 
 [[unite]]
 chemin = "docs/rd/materiel-spark-serveur-dons.md"
@@ -1885,6 +2045,7 @@ empreinte = "42ebe8bb0e595717cacb8918b3e05b90fa67bf17c323383904621ce618420fe7"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://www.nvidia.com/en-us/products/workstations/dgx-spark/"]
 
 [[unite]]
 chemin = "docs/rd/paliers-affichage.toml"
@@ -1902,14 +2063,14 @@ date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
-empreinte = "f91ed2c6b03ee98a2ed2caef2cf9abb60b75fb1122fde16d35b99635081720a2"
+empreinte = "fb561f29bac9ab5535f28959733dd270c1499c12a19499f80be521517c424653"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
-empreinte = "e3ab6fbeedd2e64824a632ba9801cd43960508f38bd97bbc2b9a791c41998934"
+empreinte = "b120ca2643b72aa036e11bb16283225399ab6b61d2edf1d0be7ac0e563d48a4e"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
@@ -1934,6 +2095,7 @@ empreinte = "920f0cb82fdd5c04ae0690ad033a6d145e81f041677094c8b863059331aed159"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/thejmimiia-code/MRSC/releases/tag/planches-statuts-animation-2026-10"]
 
 [[unite]]
 chemin = "docs/rd/poids-et-sobriete-numerique.md"
@@ -1941,6 +2103,7 @@ empreinte = "a640aaf86c40f04b9e84653d4109c7002fb8695adf5e6cb5703feeda35b9b2ee"
 etat = "relu-par-agent"
 apostrophes = 92
 date_derniere_relecture = 2026-11-12
+urls = ["https://www.ademe.fr/wp-content/uploads/2025/01/dossier-de-presse-numerique-et-environnement-090125.pdf", "https://www.insee.fr/fr/statistiques/8616811", "https://www.arcep.fr/uploads/tx_gspublication/dossier-presse-Etude-Ademe-Arcep-lot3_mars2023.pdf", "https://almanac.httparchive.org/en/2025/page-weight", "https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/", "https://www.w3.org/news/2025/web-sustainability-guidelines-wsg-becomes-a-first-public-draft-note/", "https://thejmimiia-code.github.io/MRSC/"]
 
 [[unite]]
 chemin = "docs/rd/poids-pages.md"
@@ -1951,7 +2114,7 @@ date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/portefeuille.toml"
-empreinte = "4862ffae1fca481be60a8df10b75cef5f92c3bd7139ace58cd76e35a283eeac6"
+empreinte = "93f7fd78ba359bbd23745e36a0c8e82d325a2ed0a37168b98e063ba723f38f9a"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
@@ -1976,6 +2139,7 @@ empreinte = "f19a4e0fdf6f7cfc3e343d630dd8eeb5d185bed88bf16884018bda9881554350"
 etat = "relu-par-agent"
 apostrophes = 69
 date_derniere_relecture = 2026-11-12
+urls = ["https://docs.python.org/3/library/statistics.html", "https://docs.python.org/3/tutorial/errors.html", "https://docs.python.org/3/tutorial/controlflow.html", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512"]
 
 [[unite]]
 chemin = "docs/rd/protocole-essais-usage.md"
@@ -1990,6 +2154,7 @@ empreinte = "e2c4b24672c6682bd0a5acccfe1a1e80c197803c1f291388ab4275f7bd604c86"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple/commit/4b15284892114235bc1e16a0e8cb2c801de9a115", "https://github.com/thejmimiia-code/MRSC/pull/27", "https://github.com/thejmimiia-code/MRSC/actions/runs/38461428394", "https://github.com/thejmimiia-code/MRSC/actions/runs/38461428457", "https://github.com/thejmimiia-code/MRSC/actions/runs/38461428409"]
 
 [[unite]]
 chemin = "docs/rd/reglement-fiches-redaction.toml"
@@ -2025,6 +2190,7 @@ empreinte = "27d97adbc2473d4a7bfa39989c2758875541cad6f0a66d1637b54d1d675ced9e"
 etat = "relu-par-agent"
 apostrophes = 98
 date_derniere_relecture = 2026-11-09
+urls = ["https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color-scheme", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/forced-colors", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/theme-color", "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html", "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html", "https://github.com/w3c/wcag/blob/main/guidelines/terms/20/relative-luminance.html"]
 
 [[unite]]
 chemin = "docs/rd/relecture-automatique.md"
@@ -2039,6 +2205,7 @@ empreinte = "f25f0e0033ded1bb4f3b06afb71982ca81b078a461f41fe8d9d4f1549c7d0333"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
+urls = ["https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color-scheme", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/forced-colors", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/theme-color", "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html", "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html", "https://github.com/w3c/wcag/blob/main/guidelines/terms/20/relative-luminance.html", "https://www.service-public.gouv.fr/particuliers/vosdroits/F34800", "https://www.service-public.gouv.fr/particuliers/vosdroits/N31138", "https://www.service-public.gouv.fr/particuliers/vosdroits/F31324", "https://www.service-public.gouv.fr/particuliers/vosdroits/R17674", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing", "https://www.signal-spam.fr/", "https://www.33700.fr/"]
 
 [[unite]]
 chemin = "docs/rd/relecture-fraudes-declaration-2026-11-12.md"
@@ -2046,6 +2213,7 @@ empreinte = "cd1c97b0d3ff314782454c859ed351f3f5a1c7139ca68fec8d0d209ea1d37254"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-12
+urls = ["https://www.service-public.gouv.fr/particuliers/vosdroits/F34800", "https://www.service-public.gouv.fr/particuliers/vosdroits/N31138", "https://www.service-public.gouv.fr/particuliers/vosdroits/F31324", "https://www.service-public.gouv.fr/particuliers/vosdroits/R17674", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing", "https://www.signal-spam.fr/", "https://www.33700.fr/"]
 
 [[unite]]
 chemin = "docs/rd/releve-affichages-2026-11-06.json"
@@ -2130,6 +2298,7 @@ empreinte = "e6c9d68cd8aec46f237a9c0e3214fabd252f4b68421b40ca3b87a12ddae940c3"
 etat = "reference-initiale"
 apostrophes = 5
 date_reference = 2026-11-09
+urls = ["https://github.com/thejmimiia-code/MRSC/releases/tag/planches-statuts-animation-2026-10"]
 
 [[unite]]
 chemin = "docs/rd/statuts-couverture-angles-morts.toml"
@@ -2200,6 +2369,7 @@ empreinte = "8c40c610a1c811070021534e7495593507cb6cd2c22d5ffff06ce9f2db664c42"
 etat = "reference-initiale"
 apostrophes = 114
 date_reference = 2026-11-09
+urls = ["https://www.coe.int/en/web/common-european-framework-reference-languages/phonological-competence", "https://www.w3.org/WAI/WCAG22/Understanding/audio-only-and-video-only-prerecorded.html", "https://www.w3.org/WAI/WCAG22/Understanding/audio-control.html", "https://rm.coe.int/chapter-5-communicative-language-competences/1680a084c3"]
 
 [[unite]]
 chemin = "docs/rd/sujet-premiers-secours.md"
@@ -2214,6 +2384,7 @@ empreinte = "bccdab467bcf25053bee25196332124a2c067d0776f6718a3bd6bb5a80f9fa95"
 etat = "reference-initiale"
 apostrophes = 97
 date_reference = 2026-11-09
+urls = ["https://www.service-public.gouv.fr/particuliers/vosdroits/F559", "https://www.service-public.gouv.fr/particuliers/vosdroits/F34009", "https://www.service-public.gouv.fr/particuliers/vosdroits/F2302", "https://www.urssaf.fr/accueil/salarie/salarie-particulier-employeur/salarie-declaration-remuneration/salarie-domicile-bulletin-paie.html", "https://www.impots.gouv.fr/particulier/le-prelevement-la-source", "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000033024547"]
 
 [[unite]]
 chemin = "docs/rd/sujet-securite-electricite.md"
@@ -2228,6 +2399,7 @@ empreinte = "187024b8ce67a0135bfe5e17ea2451ba0720c62203359452fb7d2d795fd854ed"
 etat = "reference-initiale"
 apostrophes = 84
 date_reference = 2026-11-09
+urls = ["https://www.inrs.fr/risques/classification-etiquetage-produits-chimiques/comprendre-systemes-etiquetage-produits-chimiques.html", "https://www.inrs.fr/actualites/nouvelles-regles-etiquetage-produits-chimiques-preoccupants-sante-environnement.html", "https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes/college/cycle-3/16806-cycle3-sc-et-techno-juin-2023.pdf"]
 
 [[unite]]
 chemin = "docs/rd/sujet-systemes-embarques.md"
@@ -2235,6 +2407,7 @@ empreinte = "fa2793f5e4b31c0be952b40031c5f754238055b337d1339b576d91d6ec20e6be"
 etat = "reference-initiale"
 apostrophes = 73
 date_reference = 2026-11-09
+urls = ["https://eduscol.education.fr/document/23494/download", "https://eduscol.education.fr/document/23560/download", "https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-securite_des_systemes_objets_connectes_iot-v1.0.pdf"]
 
 [[unite]]
 chemin = "docs/rd/veille-2026-10-17.md"
@@ -2242,6 +2415,7 @@ empreinte = "1e5435dc0d1cd94065561c1a78f30eaa9d21bbffb7035bf97aadc81b2aff1f5c"
 etat = "reference-initiale"
 apostrophes = 73
 date_reference = 2026-11-09
+urls = ["https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr-executive-summary", "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/emerging-uses-ai-chatbots-news-and-what-it-means-journalism", "https://www.defenseurdesdroits.fr/sites/default/files/2026-04/ddd_rapport-annuel-2025_dossier-de-presse_20260402.pdf", "https://www.arcep.fr/cartes-et-donnees/nos-publications-chiffrees/impact-environnemental/enquete-annuelle-pour-un-numerique-soutenable-edition-2026.html", "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"]
 
 [[unite]]
 chemin = "docs/rd/visuel-motion.md"
@@ -2249,6 +2423,7 @@ empreinte = "42670fb3c19838fe5b21f71379ce040c6886a1cb724c8514bf71e36db1b329a9"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/anthropics/skills/tree/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/frontend-design", "https://github.com/LottieFiles/motion-design-skill/tree/f9a8a041b85185ee4881b3471d3415e939aac772/skills/motion-design", "https://github.com/anthropics/skills/blob/main/skills/algorithmic-art/SKILL.md", "https://github.com/vercel-labs/agent-skills/tree/main/skills/web-design-guidelines", "https://github.com/vercel-labs/web-interface-guidelines", "https://github.com/anthropics/skills/tree/main/skills/webapp-testing", "https://github.com/anthropics/skills/tree/main/skills/canvas-design", "https://github.com/anthropics/skills/tree/main/skills/brand-guidelines", "https://github.com/anthropics/skills/tree/main/skills/theme-factory", "https://github.com/anthropics/skills/tree/main/skills/web-artifacts-builder", "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill", "https://github.com/kylezantos/design-motion-principles", "https://github.com/joepUI/motion-ref-skill", "https://github.com/delphi-ai/animate-skill", "https://github.com/neonwatty/css-animation-skill", "https://github.com/iart-ai/web-animation-skills", "https://code.claude.com/docs/en/slash-commands", "https://github.com/anthropics/skills/blob/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/frontend-design/SKILL.md", "https://github.com/anthropics/skills/blob/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/frontend-design/LICENSE.txt", "https://github.com/LottieFiles/motion-design-skill/blob/f9a8a041b85185ee4881b3471d3415e939aac772/skills/motion-design/SKILL.md", "https://github.com/LottieFiles/motion-design-skill/blob/f9a8a041b85185ee4881b3471d3415e939aac772/skills/motion-design/director/context-adaptation.md", "https://github.com/LottieFiles/motion-design-skill/blob/f9a8a041b85185ee4881b3471d3415e939aac772/LICENSE", "https://github.com/anthropics/skills/blob/main/skills/algorithmic-art/LICENSE.txt", "https://github.com/vercel-labs/agent-skills/blob/main/skills/web-design-guidelines/SKILL.md", "https://github.com/vercel-labs/web-interface-guidelines/blob/main/LICENSE", "https://github.com/anthropics/skills/blob/main/skills/webapp-testing/SKILL.md", "https://github.com/anthropics/skills/blob/main/skills/webapp-testing/LICENSE.txt", "https://github.com/delphi-ai/animate-skill/blob/main/SKILL.md"]
 
 [[unite]]
 chemin = "docs/rd/vote-distanciel-accessibilite.toml"
@@ -2291,6 +2466,7 @@ empreinte = "180224acc898035a035da0a9e17d7813c81edd78da727be542cf5c7b169563ee"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/glondu/belenios", "https://github.com/benadida/helios-server", "https://github.com/Election-Tech-Initiative/electionguard"]
 
 [[unite]]
 chemin = "docs/rd/vote-distanciel-continuite.toml"
@@ -2347,6 +2523,7 @@ empreinte = "d9b767d59fba56d292c6d5e1fc3c0ee5e34b4e3a06941f4d9c3258de24efcb72"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/glondu/belenios/blob/8888045a7650df5241a76ae75128ebde61e83904/README.md", "https://github.com/glondu/belenios/blob/8888045a7650df5241a76ae75128ebde61e83904/doc/tool.md", "https://github.com/glondu/belenios/blob/8888045a7650df5241a76ae75128ebde61e83904/doc/specification.tex", "https://github.com/benadida/helios-server/blob/88621e3196961ec03fe54bbd3a1c2196e715e9a2/README.md", "https://github.com/benadida/helios-server/blob/88621e3196961ec03fe54bbd3a1c2196e715e9a2/server_ui/templates/privacy.html", "https://github.com/Election-Tech-Initiative/electionguard/blob/c6786d8bab5c15f33181dadf91b919541aae0ffd/README.md", "https://github.com/Election-Tech-Initiative/electionguard/blob/c6786d8bab5c15f33181dadf91b919541aae0ffd/SECURITY.md"]
 
 [[unite]]
 chemin = "docs/rd/vote-distanciel-profils.toml"
@@ -2389,6 +2566,7 @@ empreinte = "b695f2b7bc8da014f080181219c61637fb1a70979319724d7aeb4778aaff4a88"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/glondu/belenios", "https://gitlab.com/vcast.vote/belenios", "https://github.com/benadida/helios-server", "https://github.com/Election-Tech-Initiative/electionguard"]
 
 [[unite]]
 chemin = "docs/rd/vote-distanciel-statuts.md"
@@ -2403,6 +2581,7 @@ empreinte = "d56cb26d12152756e0f6afac8a4473d35daccb0fd7540081b439518c2ed3958e"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/glondu/belenios", "https://github.com/benadida/helios-server", "https://github.com/Election-Tech-Initiative/electionguard"]
 
 [[unite]]
 chemin = "docs/rd/vote-distanciel-vie-privee.md"
@@ -2417,41 +2596,47 @@ empreinte = "4736ca2e9100fcd8bcaeb5334ea3530ce08adc83c8fc6b4c460534e6d631acd3"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://www.odoxa.fr/sondage/priorites-des-francais-12-000-personnes-interrogees-30-000-verbatims/", "https://www.sciencespo.fr/cevipof/fr/actualites/barometre-de-la-confiance-politique-cevipof-2026-la-confiance-s-effondre-en-politique-la-proximite-fait-figure-de-refuge/", "https://www.ifop.com/wp-content/uploads/2025/11/2025-rapport-d-etude-ifop-ruralites-def.pdf", "https://www.creditmutuel.com/partage/fr/CNCM/telechargements/etude-barometre-france-benevolat-2025.pdf", "https://recherches-solidarites.org/wp-content/uploads/2024/11/La-France-benevole-2024-27-mai.pdf", "https://www.helloasso.com/blog/cap-2-milliards-collectes-sur-helloasso/", "https://about.make.org/post/le-chemin-vers-le-consensus-la-methodologie-de-make-org", "https://decidim.org/usedby/", "https://www.jeveuxaider.gouv.fr/domaines-action/benevolat-de-competences", "https://www.nngroup.com/articles/homepage-design-principles/", "https://www.gov.uk/service-manual/design/writing-for-user-interfaces", "https://www.arcom.fr/sites/default/files/2025-03/Barometre-du-numerique-edition-2025.pdf", "https://www.ilo.org/publications/generative-ai-and-jobs-2025-update", "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026", "https://www.iea.org/reports/energy-and-ai/executive-summary", "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics", "https://www.oecd.org/en/topics/ai-and-work.html", "https://www.who.int/news/item/18-01-2024-who-releases-ai-ethics-and-governance-guidance-for-large-multi-modal-models", "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai", "https://www.w3.org/TR/WCAG22/"]
 
 [[unite]]
 chemin = "documents.html"
-empreinte = "207b30afc9b4f300c5667e507c0047bbd2eb9c71fe89c38255ad32c5b4d1330d"
+empreinte = "024465b7635e089b4d448259bdce534e6db144240222911f019ef153ca158d37"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/documents.html", "https://www.journal-officiel.gouv.fr/publications/assoc/pdf/2016/0015/JOAFE_PDF_Unitaire_20160015_01361.pdf"]
 
 [[unite]]
 chemin = "eva.html"
-empreinte = "ac61baf4f41f8ab9a1333769762d85a0b036e6554dd34303f9e40dd294cd2d9a"
-etat = "reference-initiale"
+empreinte = "64b2a207a14a97e08772df4f1444437e5e9f14fe7f53bae6bd5c6c43b5f484fd"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/eva.html", "https://www.nvidia.com/en-us/products/workstations/dgx-spark/"]
 
 [[unite]]
 chemin = "ia-societe.html"
-empreinte = "835e00e09f1c107e878bc92211246ec7fc1b0b0a49dc3a86ce3cbffa6b3e0ad6"
+empreinte = "3c9266197d06abe9258235a0675f9a9dec39be50877ff9708d52243a282aa27e"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/ia-societe.html", "https://www.arcom.fr/sites/default/files/2025-03/Barometre-du-numerique-edition-2025.pdf", "https://www.ilo.org/publications/generative-ai-and-jobs-2025-update", "https://www.iea.org/reports/energy-and-ai/executive-summary", "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics", "https://www.oecd.org/en/topics/ai-and-work.html", "https://www.who.int/news/item/18-01-2024-who-releases-ai-ethics-and-governance-guidance-for-large-multi-modal-models", "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026", "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/rapport-activite-2025", "https://www.cybermalveillance.gouv.fr/medias/2026/09/Deck-IPSOS-2026-1409-DEF.pdf", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/intelligence-artificielle-ia", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroquerie-enfant-probleme-telephone-coucou-papa-maman", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing", "https://17cyber.gouv.fr/", "https://www.service-public.gouv.fr/particuliers/vosdroits/F34800", "https://www.service-public.gouv.fr/particuliers/vosdroits/F31324", "https://www.service-public.gouv.fr/particuliers/vosdroits/R17674", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance", "https://www.signal-spam.fr/", "https://www.33700.fr/"]
 
 [[unite]]
 chemin = "index.html"
-empreinte = "91805afc9491df85df735c116f29281399f8b04c5cb90b7577145d2bb6246d8f"
+empreinte = "8b519b6235e78969c3197f0bc0481876797cba839aeff264581a6cca1a74de31"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/", "https://thejmimiia-code.github.io/MRSC/assets/images/logo-mrsc.jpg", "https://schema.org", "https://thejmimiia-code.github.io/MRSC/#organization", "https://thejmimiia-code.github.io/MRSC/#website", "https://thejmimiia-code.github.io/MRSC/#homepage"]
 
 [[unite]]
 chemin = "liens-utiles.html"
-empreinte = "e0d99f037a40ba6cd9eb51741bbe2b3e1918e9e77898569228fbd5c517cca7fb"
+empreinte = "ffdbbd930f0bf14e6c5815ca157d508239f71ac1710372a73c8b696b0c2ddc74"
 etat = "relu-par-agent"
 apostrophes = 3
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/liens-utiles.html", "https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur", "https://www.legifrance.gouv.fr/Droit-francais/Constitution/Declaration-des-Droits-de-l-Homme-et-du-Citoyen-de-1789", "https://www.legifrance.gouv.fr/Droit-francais/Constitution/Charte-de-l-environnement-de-2004", "https://www.vie-publique.fr/", "https://www.legifrance.gouv.fr/", "https://www.service-public.gouv.fr/", "https://www.france-services.gouv.fr/", "https://www.defenseurdesdroits.fr/", "https://www.impots.gouv.fr/", "https://www.elections.interieur.gouv.fr/", "https://www.data.gouv.fr/", "https://www.insee.fr/", "https://ec.europa.eu/eurostat/", "https://www.cnil.fr/", "https://cyber.gouv.fr/", "https://www.cybermalveillance.gouv.fr/", "https://17cyber.gouv.fr/", "https://www.service-public.gouv.fr/particuliers/vosdroits/F34800", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance", "https://www.arcep.fr/", "https://accessibilite.numerique.gouv.fr/", "https://www.inrs.fr/risques/electriques/prevention-risque-electrique.html", "https://www.ademe.fr/", "https://www.energie-info.fr/", "https://www.rte-france.com/eco2mix", "https://www.georisques.gouv.fr/", "https://meteofrance.com/", "https://www.economie.gouv.fr/dgccrf", "https://signal.conso.gouv.fr/", "https://eduscol.education.gouv.fr/5823/programmes-et-ressources-en-numerique-et-sciences-informatiques-voie-g", "https://docs.python.org/fr/3/tutorial/", "https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/Loops", "https://docs.arduino.cc/language-reference/", "https://www.santepubliquefrance.fr/", "https://www.ameli.fr/assure", "https://www.francetravail.fr/", "https://projetarcadie.com/", "https://transparency-france.org/", "https://www.greenpeace.fr/", "https://www.april.org/"]
 
 [[unite]]
 chemin = "llms.txt"
@@ -2459,20 +2644,23 @@ empreinte = "e7572d8fbf698ab44517cf7642bc3f6d1c7ef847967b81b2645bad2ff620e314"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-11
+urls = ["https://thejmimiia-code.github.io/MRSC/", "https://thejmimiia-code.github.io/MRSC/apprendre.html", "https://thejmimiia-code.github.io/MRSC/anglais-aventure.html", "https://thejmimiia-code.github.io/MRSC/ia-societe.html", "https://thejmimiia-code.github.io/MRSC/eva.html", "https://thejmimiia-code.github.io/MRSC/#rd-eva", "https://thejmimiia-code.github.io/MRSC/simulateur.html", "https://thejmimiia-code.github.io/MRSC/simulateur/", "https://thejmimiia-code.github.io/MRSC/documents.html", "https://thejmimiia-code.github.io/MRSC/liens-utiles.html", "https://thejmimiia-code.github.io/MRSC/localisation.html", "https://thejmimiia-code.github.io/MRSC/nous-contacter.html", "https://thejmimiia-code.github.io/MRSC/transparence.html", "https://thejmimiia-code.github.io/MRSC/confidentialite.html", "https://thejmimiia-code.github.io/MRSC/sitemap.xml"]
 
 [[unite]]
 chemin = "localisation.html"
-empreinte = "1213fc5e958ee91bc3985c0aa173bc74d7671133907daf8e0c551a6c444854b2"
-etat = "reference-initiale"
+empreinte = "8f4e1b558bac114c68f56ad2a4b5465b4c74aa9415533d9a3add4e665aa1efff"
+etat = "relu-par-agent"
 apostrophes = 4
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/localisation.html", "https://www.google.com/maps/d/embed?mid=1dTEwwCHGfOHOujnofRVhdsW4NPU&amp;hl=fr&amp;ll=0%2C0&amp;z=5", "https://www.google.com/maps/d/embed?mid=1dTEwwCHGfOHOujnofRVhdsW4NPU&amp;hl=fr&amp;ll=0%2C0&amp;z=5#"]
 
 [[unite]]
 chemin = "nous-contacter.html"
-empreinte = "2db9c22caf24c4eb35e1b80f683b1e59079209318184270b1910d61dc61fc835"
-etat = "reference-initiale"
+empreinte = "2d463a5d750b2770ed5316adcae933042188300407cacbad5b2ca0fb64fe874a"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/nous-contacter.html"]
 
 [[unite]]
 chemin = "outils/annoncer-echec-graphismes.py"
@@ -2480,6 +2668,13 @@ empreinte = "a13a16f91f277d2eeffc097923fb257228c11e89ea5f03c7b961e38b4e46d517"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+
+[[unite]]
+chemin = "outils/arbre-accessibilite.py"
+empreinte = "f6710953d4ae323d90054c96ec1ece8073899d6f0111d1b1755daa9f79bc86e8"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "outils/attente-navigateur.cjs"
@@ -2546,10 +2741,11 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/construire-apprentissages.py"
-empreinte = "4b680512822dadcfeb5d82d572478835dc951f02efde6e9691641a3e7d5ab754"
-etat = "reference-initiale"
+empreinte = "13c7bdb09c09663a9c3646a2bf46d2193e272f1504fc709132ea3b3330c4b330"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512", "https://isced.uis.unesco.org/about/", "https://www.anlci.gouv.fr/nos-piliers/lillettrisme-au-travail/", "https://www.w3.org/TR/WCAG22/", "https://isced.uis.unesco.org/q-and-a/", "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011", "https://www.anlci.gouv.fr/app/uploads/2025/04/20250910_Prez-webinaire-AFEST.pdf", "https://www.certificat-clea.fr/employeurs/le-socle/", "https://www.w3.org/TR/coga-usable/", "https://www.cnil.fr/fr/passer-laction/rgpd-les-premieres-etapes"]
 
 [[unite]]
 chemin = "outils/construire-avancees.py"
@@ -2657,6 +2853,13 @@ apostrophes = 0
 date_reference = 2026-11-09
 
 [[unite]]
+chemin = "outils/mesurer-arbre-accessibilite.cjs"
+empreinte = "f6abed45221180d7e32bb1e993937fb748941deffc5df4c7df9f995dcc4839e2"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-13
+
+[[unite]]
 chemin = "outils/mesurer-cadrages.cjs"
 empreinte = "d1175951bf1240dc7910355d17cf2905ee558e4ca3e88c374aee1f30027ccc5f"
 etat = "reference-initiale"
@@ -2742,7 +2945,7 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "outils/relire-contenus.py"
-empreinte = "0df6ec9b81d5b30516f2f3ab2fa85700e460bd3ac3bc705613af489900f3e04e"
+empreinte = "184409ee73976c66f44f67d3064cc3394bcf46eeaffa8352d0b2340a475fd3b8"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
@@ -2783,6 +2986,13 @@ apostrophes = 0
 date_reference = 2026-11-09
 
 [[unite]]
+chemin = "outils/test_arbre_accessibilite.py"
+empreinte = "362bd5a0e7d9d00f12e5a8af4345c9445f9fbf95dc7630a3cc00bf08b7d06510"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-13
+
+[[unite]]
 chemin = "outils/test_attente_navigateur.cjs"
 empreinte = "22fd278e2c10e0b8ada7b6f8f0e7de49ba013e6bf9c6461b125def2c4cc053d8"
 etat = "reference-initiale"
@@ -2795,6 +3005,7 @@ empreinte = "a925ded8e4239909f4cf505f5b4272b34c4398e02b0248decab1dc1c0b29b26c"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://exemple.org/page", "https://exemple.org/", "https://exemple.org/?q=1"]
 
 [[unite]]
 chemin = "outils/test_auditer_affichages.mjs"
@@ -2837,6 +3048,7 @@ empreinte = "859fbeca6670643a359b73a02052af8f858b7217e05afeb4599aa4bd87bbd05d"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://exemple.test/source-inconnue"]
 
 [[unite]]
 chemin = "outils/test_contraste-degrade.py"
@@ -2865,6 +3077,7 @@ empreinte = "efe6189423d2aef6751594ad331bcbe55111cf65874bf210173aa4d635792e0b"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://exemple.test/", "https://exemple.test/issues/1"]
 
 [[unite]]
 chemin = "outils/test_focus.py"
@@ -2907,6 +3120,7 @@ empreinte = "f38546539dbf0518dc2ce84f47f1312192e833ae90345c1165ae812af87af12a"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
+urls = ["https://thejmimiia-code.github.io/MRSC/"]
 
 [[unite]]
 chemin = "outils/test_mutations_apparences.py"
@@ -3005,6 +3219,7 @@ empreinte = "aa39f092483c5e609e8152a737df96874f8b421cfbc18e50f2b7002fe32cd193"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://thejmimiia-code.github.io/MRSC/apprendre.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre-disparu.html</loc"]
 
 [[unite]]
 chemin = "outils/test_mutations_rd_continue.py"
@@ -3026,13 +3241,15 @@ empreinte = "32064838b852ddf08d886f6ac52d21f3d876664114a031e477bacb270f866061"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color-scheme", "https://un-blog.test/couleurs"]
 
 [[unite]]
 chemin = "outils/test_mutations_relire_contenus.py"
-empreinte = "e9f20324a85b95aa5874511b30c933e58cd11dc32baa910c2012ac848286b713"
+empreinte = "09cb13381eb78013c8e241646a2960e31b0cda858b6e76e4449f09587dade847"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://schema.org", "https://source-inconnue.test/fait-non-source.</p"]
 
 [[unite]]
 chemin = "outils/test_mutations_securite.py"
@@ -3047,6 +3264,7 @@ empreinte = "2fb7859bd402eb2b932a5d04858713bc827c12521cff8140b0bf0150a8829573"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://thejmimiia-code.github.io/MRSC/", "https://thejmimiia-code.github.io/MRSC/index.html", "https://thejmimiia-code.github.io/MRSC/eva.html</loc"]
 
 [[unite]]
 chemin = "outils/test_mutations_sources_ouvertes.py"
@@ -3054,6 +3272,7 @@ empreinte = "a300c595eded30f8b7fe65bbd40550698eaca7fa068c921f935fad18e4fe5bcf"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-11
+urls = ["https://exemple.test/"]
 
 [[unite]]
 chemin = "outils/test_paliers_affichage.py"
@@ -3117,6 +3336,7 @@ empreinte = "bcd2f936f6c59c8582f982ba839a68c2f99d9a2ab5551db8db99ef8bb2a4b491"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://doc.hal.science/visualisation-dun-depot/", "https://exemple.test/page-non-citee"]
 
 [[unite]]
 chemin = "outils/test_test_cache_css_ia.mjs"
@@ -3173,6 +3393,7 @@ empreinte = "673d9e63184679d93352c3228181a632ae1249cf601a170050ae6e0ecdacbeb0"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/"]
 
 [[unite]]
 chemin = "outils/test_verifier_mutation_graphismes.py"
@@ -3208,6 +3429,7 @@ empreinte = "5bd59c25581d1f4a02411eb61690ec24f4ef0e22e03f70800a85e9012bf83323"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://exemple.invalid"]
 
 [[unite]]
 chemin = "outils/test_verifier_taux_dates.py"
@@ -3215,6 +3437,7 @@ empreinte = "33dc026d6088a854af898b77b6f4ff7d9c95cf9cf90e8be059e3521d58ffa0fa"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://exemple.gouv.fr/"]
 
 [[unite]]
 chemin = "outils/test_verifier_vote_distanciel.py"
@@ -3243,13 +3466,15 @@ empreinte = "676151e79822eb4d4867ce7e3d060c67b171559508a0bd223f1133df71235f9d"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://exemple/"]
 
 [[unite]]
 chemin = "outils/verifier-affichages.py"
-empreinte = "896cb4d71684bd8c56bbd77dd44bfafeb1dfdd449c9da57420a0de765e4ab814"
+empreinte = "6601e9db8599f6ae1a1525f893b963f71391bfb6648c077be81f17ba1f15c149"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
+urls = ["https://api"]
 
 [[unite]]
 chemin = "outils/verifier-apparences.py"
@@ -3267,10 +3492,10 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "outils/verifier-decision-prospective.py"
-empreinte = "1d40eab8fa4105f0e77c47918507b88bfb41b41eb42ec690b86e5a15f91d9278"
-etat = "reference-initiale"
+empreinte = "ce89c393c6b2555816889977fe393c02ece9daab55f1a6e41aa9f22f82d8f880"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "outils/verifier-feuille-servie.py"
@@ -3278,6 +3503,7 @@ empreinte = "618e341ec428a4aefa247b4851722b0755d6f759c3ca6823e62925f91b86dba8"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://exemple.github.io/MRSC/"]
 
 [[unite]]
 chemin = "outils/verifier-fiches-statistiques.cjs"
@@ -3313,6 +3539,7 @@ empreinte = "1ba77deed22f02c110c5c5283fbd1699e11fff39d141a46851e307680910ec3d"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
+urls = ["https://www.journal-officiel.gouv.fr/publications/assoc/pdf/2016/0015/JOAFE_PDF_Unitaire_20160015_01361.pdf", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/prospective-2027-2030.md", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/poids-et-sobriete-numerique.md", "https://thejmimiia-code.github.io/MRSC/", "https://d-mocratie-et-politique-du-peuple-p.vercel.app/", "https://simulateur-macro-politique.onrender.com/"]
 
 [[unite]]
 chemin = "outils/verifier-inventaire-controles.py"
@@ -3383,6 +3610,7 @@ empreinte = "59866c4358d4bd2b16dffd7951374ac36f32831e4a1df9d7dbc961574cc4a1ec"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://thejmimiia-code.github.io/MRSC/"]
 
 [[unite]]
 chemin = "outils/verifier-publication.py"
@@ -3390,6 +3618,7 @@ empreinte = "b229704b96a08818909180f60dd49e599f3b75800b7e76a19cf85732c0952ac2"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://exemple.github.io/MRSC/"]
 
 [[unite]]
 chemin = "outils/verifier-rd-continue.py"
@@ -3397,6 +3626,7 @@ empreinte = "04b2a091917b0736cc9beebaf02eae52ddd77641b02c82246432b7ce5cb2daf5"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
+urls = ["https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/protocole-essais-usage.md"]
 
 [[unite]]
 chemin = "outils/verifier-relecture-contenus.py"
@@ -3418,6 +3648,7 @@ empreinte = "4ce1261446a44c4e5057a18497216a2895015a29e693bb0de6ccbcc006f0c998"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://source.example/test", "https://d-mocratie-et-politique-du-peuple-p.vercel.app/", "https://simulateur-macro-politique.onrender.com/", "https://d-mocratie-et-politique-du-peuple-p.vercel.app.example.org/", "https://d-mocratie-et-politique-du-peuple-p.vercel.app"]
 
 [[unite]]
 chemin = "outils/verifier-separation-contenus.py"
@@ -3432,6 +3663,7 @@ empreinte = "5496eb3a3c797246f8123d0b39a0a9f19a09d8186afbac6722ef1b3cf521f7fe"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://thejmimiia-code.github.io/MRSC/", "https://schema.org", "https://site-fictif.test/agenda?jour=mardi", "https://docs.python.org/fr/3/tutorial/", "https://developer.mozilla.org/fr/"]
 
 [[unite]]
 chemin = "outils/verifier-source-distante.py"
@@ -3477,10 +3709,11 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "simulateur.html"
-empreinte = "492d0529fb3259c5031b66a35a4af1a482dd06ce866c0fa524d32cce2c8859ba"
-etat = "reference-initiale"
+empreinte = "7d43e645922c318838465a4d18375cf6df6d9027bf99441f88bad71d86e012b0"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/simulateur.html", "https://d-mocratie-et-politique-du-peuple-p.vercel.app/", "https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple"]
 
 [[unite]]
 chemin = "simulateur/PROVENANCE.json"
@@ -3488,6 +3721,7 @@ empreinte = "83a3200d6b254551ff8186697b63233dce60f06dd04b9e5c2054d41a752954c2"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple"]
 
 [[unite]]
 chemin = "simulateur/__init__.py"
@@ -3558,6 +3792,7 @@ empreinte = "a9f5dedb63e5f409038edc9330d66c1959837e367b834bceeeb5d46389e419d0"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data", "https://ec.europa.eu/eurostat/databrowser/view/{dataset.upper(", "https://data-api.ecb.europa.eu/service/data/{flux}/{cle_serie}?{requete", "https://data.ecb.europa.eu/", "https://api.frankfurter.dev/v1/latest?from=EUR&to={devise", "https://frankfurter.dev/", "https://api.worldbank.org/v2/country/", "https://data.worldbank.org/indicator/{indicateur", "https://query1.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(symbole", "https://finance.yahoo.com/quote/{urllib.parse.quote(symbole", "https://stooq.com/q/l/?s={symbole}&f=sd2t2ohlcv&h&e=csv", "https://stooq.com/q/?s={symbole", "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/", "https://data.economie.gouv.fr/explore/dataset/dette-negociable-de-letat/", "https://api.energy-charts.info/price?bzn=FR&start=2026-01-01", "https://www.energy-charts.info/", "https://www.eex.com/en/market-data/environmental-markets/spot-market", "https://www.eex.com/en/market-data/environmental-markets", "https://data.economie.gouv.fr/", "https://api.frankfurter.dev/v1/latest?from=EUR&to=USD"]
 
 [[unite]]
 chemin = "simulateur/fichiers.py"
@@ -3589,17 +3824,19 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "simulateur/index.html"
-empreinte = "e005523395cad121b6ac12056c4e45710d289458f9881cef9620e82c9571c28b"
-etat = "reference-initiale"
+empreinte = "010e5afa7d6ca5ba561226d27e867b71040d9c0d5819615cbb2243151e9d9da8"
+etat = "relu-par-agent"
 apostrophes = 166
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple", "https://thejmimiia-code.github.io/MRSC/simulateur/", "https://www.ccomptes.fr/sites/default/files/2024-04/NEB-2023-Gestion-patrimoine-immobilier-Etat.pdf", "https://www.ecologie.gouv.fr/sites/default/files/documents/PNACC3.pdf", "https://www.defense.gouv.fr/sites/default/files/ministere-armees/LPM.pdf", "https://www.insee.fr/fr/statistiques/9004289"]
 
 [[unite]]
 chemin = "simulateur/interface.py"
-empreinte = "98aa27a6d31123823780dc1b1e451be6dbdf205e600550483bd59d433d1a9728"
-etat = "reference-initiale"
+empreinte = "764007e9eca872af35a5cc268cd9c1e3976452317e8a893b17e3e61b9ab98938"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/simulateur/", "https://www.ccomptes.fr/sites/default/files/2024-04/NEB-2023-Gestion-patrimoine-immobilier-Etat.pdf", "https://www.ecologie.gouv.fr/sites/default/files/documents/PNACC3.pdf", "https://www.defense.gouv.fr/sites/default/files/ministere-armees/LPM.pdf", "https://www.insee.fr/fr/statistiques/9004289"]
 
 [[unite]]
 chemin = "simulateur/laboratoire.py"
@@ -3621,6 +3858,7 @@ empreinte = "a63d4d0d4249ad9ba7b1af2a82ba73a1a26656a69c416b3e60694617ffa6db74"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://live.euronext.com/en/product/indices/FR0003500008-XPAR", "https://www.stoxx.com/index-details?symbol=SX5E", "https://www.stoxx.com/index-details?symbol=DAX", "https://www.londonstockexchange.com/indices/ftse-100", "https://www.spglobal.com/spdji/en/indices/equity/sp-500/", "https://www.nasdaq.com/market-activity/indexes/comp", "https://www.tsx.com/", "https://www.b3.com.br/en_us/market-data-and-indices/indices/broad-indices/ibovespa.htm", "https://indexes.nikkei.co.jp/en/nkave/index/profile?idx=nk225", "https://www.hsi.com.hk/eng/indexes/all-indexes/hsi", "https://english.sse.com.cn/markets/indices/overview/", "https://www.niftyindices.com/indices/equity/broad-based-indices/nifty-50", "https://www.asx.com.au/markets/indices/price-returns", "https://query1.finance.yahoo.com/v8/finance/chart/"]
 
 [[unite]]
 chemin = "simulateur/model.py"
@@ -3649,6 +3887,7 @@ empreinte = "ca4849812957d8a0315ab2b110574bd1e29c9bf1cbb28921eaf35394e2fa43d1"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://www.collectivites-locales.gouv.fr/files/files/Etudes-et-statistiques/", "https://www.collectivites-locales.gouv.fr/etudes-et-statistiques/", "https://www.insee.fr/fr/statistiques/2830276", "https://www.insee.fr/fr/statistiques/9006503?sommaire=8071406", "https://www.insee.fr/fr/statistiques/9053584", "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/2-02102026-ap", "https://www.caf.fr/sites/default/files/medias/cnaf/Professionnels/Nous_connaitre/", "https://drees.solidarites-sante.gouv.fr/sites/default/files/2025-12/Drees-Pano-MS%202025.pdf", "https://drees.solidarites-sante.gouv.fr/communique-de-presse/communique-de-presse/251204-nombre-allocataires-minima-sociaux", "https://www.ecologie.gouv.fr/presse/debut-denvoi-cheques-energie-lannee-2023-aux-56-millions-menages-beneficiaires", "https://www.insee.fr/fr/statistiques/8997691", "https://ec.europa.eu/eurostat/databrowser/product/view/prc_hicp_minr", "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419", "https://www.insee.fr/fr/statistiques/8988833", "https://www.legifrance.gouv.fr/codes/id/LEGITEXT000006070633/", "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000497458/", "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/F23575"]
 
 [[unite]]
 chemin = "simulateur/parametres.py"
@@ -3705,13 +3944,15 @@ empreinte = "84b59e1ee0436e9022d04ecf751d8c9cd1fa1fc82c3688dd6d6b749e9adcdd3c"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-12
+urls = ["https://thejmimiia-code.github.io/MRSC/</loc", "https://thejmimiia-code.github.io/MRSC/apprendre.html</loc", "https://thejmimiia-code.github.io/MRSC/anglais-aventure.html</loc", "https://thejmimiia-code.github.io/MRSC/ia-societe.html</loc", "https://thejmimiia-code.github.io/MRSC/eva.html</loc", "https://thejmimiia-code.github.io/MRSC/simulateur.html</loc", "https://thejmimiia-code.github.io/MRSC/simulateur/</loc", "https://thejmimiia-code.github.io/MRSC/documents.html</loc", "https://thejmimiia-code.github.io/MRSC/liens-utiles.html</loc", "https://thejmimiia-code.github.io/MRSC/localisation.html</loc", "https://thejmimiia-code.github.io/MRSC/nous-contacter.html</loc", "https://thejmimiia-code.github.io/MRSC/transparence.html</loc", "https://thejmimiia-code.github.io/MRSC/confidentialite.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-lire-consigne.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-ecrire-message.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-lire-planning.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-budget.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-partager.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-fractions-recette.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-pourcentage.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-lire-graphique.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-surface.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-demarche.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/tech-kwh.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-echelle-carte.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-verifier-information.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-lire-document.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-hameconnage.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-proteger-donnees.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-verifier-ia.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-anglais-direction.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/arts-lire-image.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/arts-rythme-musique.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-lire-etiquette.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/apprendre-methode.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-ia-usages.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-verifier-media.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-verifier-demande.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-reagir-fraude.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/recherche-lire-etude.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-convertir-unites.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-moyenne.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-estimer-calcul.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-ordinateur-fonctions.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/prog-comparer-langages.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/tech-circuit-ouvert-ferme.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/tech-electronique-capteur.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-choisir-source-publique.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/econ-lire-facture.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/econ-comparer-prix-unitaires.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-reperer-idee-texte.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-anglais-demander-aide.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-points-cardinaux.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-lire-frise.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-probabilite-tirage.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-organiser-fichiers.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/methodes-demander-clarification.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-preparer-explication-orale.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-argumenter-avec-exemple.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-equation-simple.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-meteo-climat.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-comparer-sources.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-bits-octets.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/prog-tester-exemples.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/arts-composer-formes.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-comprendre-mot-contexte.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-lire-echelle-graphique.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-calculer-vitesse-moyenne.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-distinguer-melange-changement-etat.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-decrire-paysage.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-lire-adresse-web.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/arts-lire-cartel.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/recherche-question-hypothese.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-lire-ponctuation.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-anglais-epeler.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-lire-tableau-croise.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-reperer-angle-droit.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-cycle-vie-plante.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-lire-legende-carte.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-situer-siecle.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-systeme-exploitation.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-formuler-recherche.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/recherche-conserver-reference.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-trouver-service-public.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-table-requete-web.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/prog-lire-licence-logiciel.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-reperer-echelle-institution.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/econ-lire-mention-garantie.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-reperer-info-electorale.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/econ-distinguer-interet-frais.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-reperer-mot-deja-connu.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/recherche-distinguer-resume-citation.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-reperer-echelle-france-monde.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-reperer-source-publique.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-anglais-prononcer-ed.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/langue-anglais-prononcer-th.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/info-objet-connecte-local-distant.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-moyenne-mediane.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/etudes-lire-fiche-rncp.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/apprendre-se-tester-plutot-que-relire.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/arts-lire-generique-film.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/recherche-verifier-chiffre-public.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/demarche-lire-devis-travaux.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-comprendre-pluie-millimetres.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-preparer-sauvegarde.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sciences-comprendre-isolation-r-et-u.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-reperer-signes-qualite-origine.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-comprendre-depistage-organise.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geographie-preparer-trajet-horaires.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-comprendre-parcours-soins.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-lire-etiquette-produit-menager.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/methode-verbaliser-sa-methode.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/geo-choisir-une-projection.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/histoire-lire-une-cote.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/civ-lire-un-sondage.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/sante-amenager-logement-chutes.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/demarche-obtenir-acte-naissance.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/fr-distinguer-fait-interpretation.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/maths-comparer-deux-releves.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/prog-lire-trace-erreur.html</loc", "https://thejmimiia-code.github.io/MRSC/apprendre/fiches/numerique-declarer-fraude.html</loc"]
 
 [[unite]]
 chemin = "transparence.html"
-empreinte = "8d1905e18d126a50e7c6d03673984fb4df599945260491bc5dd5dec5f926f703"
+empreinte = "83d1b2f1f9e985b5d686ba2533a73e4fe6e8850f00367a5f525616fbaf82e10f"
 etat = "relu-par-agent"
 apostrophes = 1
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
+urls = ["https://thejmimiia-code.github.io/MRSC/transparence.html", "https://www.arcom.fr/sites/default/files/2025-03/Barometre-du-numerique-edition-2025.pdf", "https://www.ilo.org/publications/generative-ai-and-jobs-2025-update", "https://www.iea.org/reports/energy-and-ai/executive-summary", "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026", "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics", "https://www.oecd.org/en/topics/ai-and-work.html", "https://www.who.int/news/item/18-01-2024-who-releases-ai-ethics-and-governance-guidance-for-large-multi-modal-models", "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai", "https://www.education.gouv.fr/bo/15/Hebdo17/MENE1506516D.htm", "https://www.certificat-clea.fr/employeurs/le-socle/", "https://www.anlci.gouv.fr/comment-agir/je-me-forme/", "https://www.w3.org/TR/WCAG22/", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd-innovation-continue.md", "https://github.com/thejmimiia-code/MRSC/tree/main/.agents/skills", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/portefeuille.toml", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/prospective-2027-2030.md", "https://www.journal-officiel.gouv.fr/publications/assoc/pdf/2016/0015/JOAFE_PDF_Unitaire_20160015_01361.pdf", "https://github.com/thejmimiia-code/D-mocratie-et-politique-du-peuple-pour-le-peuple-par-le-peuple", "https://www.google.com/maps/d/embed?mid=1dTEwwCHGfOHOujnofRVhdsW4NPU&amp;hl=fr&amp;ll=0%2C0&amp;z=5#", "https://thejmimiia-code.github.io/MRSC/", "https://github.com/thejmimiia-code/MRSC", "https://github.com/thejmimiia-code/MRSC/blob/main/LICENCE", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/journal.md", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/avancees.md", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/apprentissage/sources-refusees.md", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/confrontations-sources.md", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/protocole-essais-usage.md", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/apprentissage/relectures.toml", "https://github.com/thejmimiia-code/MRSC/blob/main/AGENTS.md", "https://github.com/thejmimiia-code/MRSC/issues/new?template=proposition-rd.yml", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/veille-2026-10-17.md", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/decision-prospective.md", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/ligne-graphique.md", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/poids-et-sobriete-numerique.md", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/inclusion-lecture-vocale.md", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/inclusion-criteres-wcag-22.md", "https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/accessibilite-2026-10-17.md"]
 
 [[unite]]
 chemin = "vercel.json"
@@ -3719,3 +3960,4 @@ empreinte = "2de1e2de337e6200821d7e751078b6a58fe5e2e270887f907db8f125845d6212"
 etat = "reference-initiale"
 apostrophes = 0
 date_reference = 2026-11-09
+urls = ["https://openapi.vercel.sh/vercel.json"]

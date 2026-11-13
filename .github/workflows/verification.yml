@@ -982,6 +982,61 @@ jobs:
             exit "$statut"
           fi
 
+      # Le dépôt mesurait les contrastes, le focus, la taille des cibles et
+      # l'espacement du texte. Aucune de ces mesures ne dit ce qu'un lecteur
+      # d'écran reçoit : le 13 novembre 2026, 397 listes du site n'étaient plus
+      # annoncées comme des listes dans WebKit, faute de `role="list"`, et rien
+      # ne le voyait. Ce relevé lit l'arbre d'accessibilité de Chromium — rôles,
+      # noms, niveaux de titres, repères, zones vivantes, cadres — sur les 122
+      # pages publiées, puis le refuse s'il manque une information.
+      #
+      # Il vit ici pour la même raison que les essais navigateur : ce job est le
+      # seul à installer Chromium. Les échecs sont publiés en annotations, le
+      # journal complet de l'exécution n'étant pas lisible depuis l'atelier.
+      - name: Mesurer l’arbre d’accessibilité et refuser ce qui y manque
+        env:
+          MRSC_BROWSER_NODE_MODULES: ${{ runner.temp }}/mrsc-browser/node_modules
+          MRSC_TEST_URL: http://127.0.0.1:4186/
+        run: |
+          mkdir -p "$RUNNER_TEMP/graphismes/arbre"
+          python3 outils/arbre-accessibilite.py --plan "$RUNNER_TEMP/graphismes/arbre/plan.json"
+          python3 outils/test_arbre_accessibilite.py
+          python3 -m http.server 4186 --bind 0.0.0.0 >"$RUNNER_TEMP/serveur-arbre.log" 2>&1 &
+          serveur=$!
+          trap 'kill "$serveur"' EXIT
+          sleep 1
+          set +e
+          node outils/mesurer-arbre-accessibilite.cjs \
+            "$RUNNER_TEMP/graphismes/arbre/plan.json" \
+            "$RUNNER_TEMP/graphismes/arbre/rapport.json" \
+            >"$RUNNER_TEMP/graphismes/arbre/mesure.log" 2>&1
+          mesure=$?
+          set -e
+          cat "$RUNNER_TEMP/graphismes/arbre/mesure.log"
+          if [ "$mesure" -ne 0 ]; then
+            grep -E '^(  -|Environnement)' "$RUNNER_TEMP/graphismes/arbre/mesure.log" \
+              | head -n 10 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::error title=Arbre d’accessibilité::$ligne"
+            done
+            exit "$mesure"
+          fi
+          set +e
+          python3 outils/arbre-accessibilite.py --controler \
+            "$RUNNER_TEMP/graphismes/arbre/rapport.json" \
+            >"$RUNNER_TEMP/graphismes/arbre/controle.log" 2>&1
+          controle=$?
+          set -e
+          head -n 6 "$RUNNER_TEMP/graphismes/arbre/controle.log" | cut -c1-900 | while IFS= read -r ligne; do
+            echo "::notice title=Arbre d’accessibilité::$ligne"
+          done
+          if [ "$controle" -ne 0 ]; then
+            grep -E '^  !' "$RUNNER_TEMP/graphismes/arbre/controle.log" \
+              | head -n 10 | cut -c1-900 | while IFS= read -r ligne; do
+              echo "::error title=Arbre d’accessibilité::$ligne"
+            done
+            exit "$controle"
+          fi
+
       - name: Conserver les mesures et captures même en échec
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 114 |
-| Période couverte | du 2026-10-20 au 2026-11-12 |
-| Contrôles exécutables cités | 128 |
+| Avancées consignées | 115 |
+| Période couverte | du 2026-10-20 au 2026-11-13 |
+| Contrôles exécutables cités | 133 |
 | Initiatives du portefeuille concernées | 16 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -2810,6 +2810,32 @@ Initiatives liées : `veille-savoirs-evolutifs`, `coherence-textes-publics`.
 **Suite.** Rejouer les 2 470 mesures dans un vrai Chromium dès qu’un navigateur est disponible, confronter le total de « texte sous 12 px » au chiffre du 6 novembre et consigner le relevé daté. Puis traiter la seconde limite du même relevé, l’emblème d’accueil agrandi 1,50× à 844 px en densité 3×, qui reste un arbitrage de dessin laissé à l’association.
 
 Initiatives liées : `optimisation-du-site`, `poids-et-sobriete-numerique`.
+
+### `arbre-accessibilite-2026-11-13` — Ce qu’un lecteur d’écran reçoit ne se lit pas dans le HTML : 397 listes muettes trouvées dans l’arbre
+
+*Consignée le 2026-11-13.*
+
+**Constat.** Le dépôt mesurait les contrastes, l’indicateur de focus, la taille des cibles, l’espacement du texte et les violations d’axe-core. Aucune de ces mesures ne dit ce que le navigateur **expose** aux technologies d’assistance : une cible peut être nommée dans le HTML et annoncée sans nom, une image `alt=""` peut rester exposée, une liste peut perdre sa sémantique. Le 13 novembre 2026, l’arbre d’accessibilité de Chromium a été lu sur les 122 pages publiées : 397 listes sans puces et sans `role="list"` sur 121 pages, dont les trois listes du pied de page présentes partout. Chromium garde la sémantique malgré `list-style: none` ; WebKit la retire — le défaut était donc invisible dans toutes les mesures du dépôt, et réel pour qui navigue avec VoiceOver.
+
+**Ce que cela change.** Sonde `outils/mesurer-arbre-accessibilite.cjs` (CDP `Accessibility.getFullAXTree`, ordre des titres relu dans le DOM) et verdict `outils/arbre-accessibilite.py` (treize règles : langue, titre unique de niveau 1, niveaux non sautés, un `main`, repères distingués par leur nom, cibles nommées, `alt` et images décoratives retirées de l’arbre, cadres nommés, zones vivantes non masquées, listes). Correction : `role="list"` sur les 1 085 balises `ul`/`ol` du site, portées par les deux générateurs (pages Apprendre et fiches, simulateur) pour que la régénération ne défasse rien. Deux contrôles qui lisaient la balise d’ouverture mot pour mot lisent désormais la classe par expression régulière. Le relevé est câblé dans le job `graphismes`, seul job qui installe Chromium, avec annotations d’échec lisibles par l’API.
+
+**Preuves dans le dépôt :**
+
+- `outils/mesurer-arbre-accessibilite.cjs`
+- `outils/arbre-accessibilite.py`
+- `outils/test_arbre_accessibilite.py`
+- `docs/rd/arbre-accessibilite-2026-11-13.md`
+- `outils/construire-apprentissages.py`
+- `simulateur/interface.py`
+- `docs/rd/inventaire-controles.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_arbre_accessibilite.py && python3 outils/arbre-accessibilite.py --plan /tmp/arbre.json && MRSC_BROWSER_NODE_MODULES=/tmp/mrsc-browser/node_modules node outils/mesurer-arbre-accessibilite.cjs /tmp/arbre.json /tmp/rapport.json && python3 outils/arbre-accessibilite.py --controler /tmp/rapport.json && python3 outils/construire-apprentissages.py --verifier && python3 outils/construire-simulateur.py --verifier && python3 outils/verifier-workflows.py`
+
+**Limite — ce que cela ne prouve pas.** Chromium seulement, à une largeur et sur un état par page : panneaux, menus et `<details>` fermés ne sont pas dans l’arbre. La règle des listes est **préventive** — elle protège WebKit, que ce dépôt ne peut pas mesurer — et c’est écrit dans l’outil. L’ordre des titres a d’abord produit deux faux positifs, l’arbre ne rendant pas ses nœuds dans l’ordre du document : corrigé, mais cela rappelle que la sonde elle-même n’est pas éprouvée par un banc. Un nom accessible présent peut rester incompréhensible : ce relevé ne juge pas la qualité du nom. L’iframe du simulateur n’a pas été exposée à la mesure, donc la règle « cadre nommé » n’a rien eu à juger. Aucune personne experte, aucun lecteur d’écran réel, aucune personne utilisatrice.
+
+**Suite.** Faire relire le relevé par une personne compétente en accessibilité et faire une passe au lecteur d’écran avec une personne qui l’utilise. Ensuite : mesurer les états interactifs (panneau d’accessibilité ouvert, menu ouvert, `<details>` dépliés), éprouver l’iframe du simulateur, puis Firefox et Safari si un poste le permet.
+
+Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`.
 
 ## 3. Ce que ce registre ne dit pas
 

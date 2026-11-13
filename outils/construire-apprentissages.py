@@ -173,7 +173,7 @@ def pied_de_page(prefixe: str = "") -> str:
         </div>
         <nav class="footer-nav" aria-label="Navigation de pied de page">
           <p class="footer-heading">Naviguer</p>
-          <ul>
+          <ul role="list">
             <li><a href="{prefixe}index.html">Accueil</a></li>
             <li><a href="{prefixe}ia-societe.html">IA &amp; société</a></li>
             <li><a href="{prefixe}apprendre.html">Apprendre</a></li>
@@ -189,7 +189,7 @@ def pied_de_page(prefixe: str = "") -> str:
         </div>
         <div class="footer-docs">
           <p class="footer-heading">Documents</p>
-          <ul>
+          <ul role="list">
             <li><a href="{prefixe}assets/documents/statuts-2020.pdf" target="_blank" rel="noopener noreferrer">Nos statuts</a></li>
             <li><a href="{prefixe}documents.html">Tous les documents</a></li>
           </ul>
@@ -197,7 +197,7 @@ def pied_de_page(prefixe: str = "") -> str:
       </div>
       <div class="footer-bottom">
         <p>&copy; <span data-year>2026</span> Mouvement Représentatif de la Société Civile (M.R.S.C).</p>
-        <ul class="footer-legal">
+        <ul role="list" class="footer-legal">
           <li><a href="{prefixe}confidentialite.html">Vie privée et données</a></li>
           <li><a href="{prefixe}nous-contacter.html">Contact</a></li>
           <li><a href="{prefixe}transparence.html#licence">Licence</a></li>
@@ -244,8 +244,13 @@ def page_enveloppe(titre: str, description: str, contenu: str, prefixe: str = ""
 
 
 def liste_html(elements: list[str], balise: str = "ul", classe: str = "") -> str:
+    # `role="list"` n'ajoute rien dans Chromium, qui garde la sémantique de liste
+    # même sans puces ou en `flex`. WebKit la retire : le 13 novembre 2026, les
+    # 122 pages du site portaient 397 listes muettes pour un lecteur d'écran sur
+    # Safari. La règle est donc portée par le générateur, et refusée par
+    # `outils/arbre-accessibilite.py`.
     classe_attr = f' class="{e(classe)}"' if classe else ""
-    return f"<{balise}{classe_attr}>" + "".join(f"<li>{element}</li>" for element in elements) + f"</{balise}>"
+    return f'<{balise} role="list"{classe_attr}>' + "".join(f"<li>{element}</li>" for element in elements) + f"</{balise}>"
 
 
 def mots_cles_html(mots: list[str]) -> str:
@@ -256,7 +261,7 @@ def mots_cles_html(mots: list[str]) -> str:
             resultats.append(f"<li><strong>{e(terme)}</strong> — {e(definition)}</li>")
         else:
             resultats.append(f"<li>{e(mot)}</li>")
-    return '<ul class="learning-vocabulary">' + "".join(resultats) + "</ul>"
+    return '<ul role="list" class="learning-vocabulary">' + "".join(resultats) + "</ul>"
 
 
 def exemples_code_html(exemples: list[dict], identifiant: str) -> str:
@@ -307,7 +312,7 @@ def render_voisines(fiche: dict, fiches: list[dict]) -> str:
     return (
         '<div class="learning-voisines">'
         "<p><strong>Dans le même domaine</strong> — pistes facultatives, pas un cursus.</p>"
-        f'<ul>{"".join(items)}</ul>'
+        f'<ul role="list">{"".join(items)}</ul>'
         '<p><a href="../../apprendre.html#catalogue-fiches">Parcourir toutes les fiches</a></p>'
         '<p><a href="../../simulateur.html">Découvrir le simulateur M.R.S.C</a></p>'
         "</div>"
@@ -380,7 +385,7 @@ def render_fiche(fiche: dict, fiches: list[dict] | None = None) -> str:
 {exemples_code}
           <section aria-labelledby="exercice-fiche"><h2 id="exercice-fiche">À toi d’essayer</h2><p>{e(fiche["exercice"])}</p><details class="learning-answer"><summary>Afficher une aide</summary><p>{e(fiche["aide"])}</p></details><details class="learning-answer"><summary>Afficher une correction possible</summary>{correction}<p>La correction montre un chemin possible. Pour un calcul, vérifie aussi chaque étape et le résultat.</p></details></section>
           <section aria-labelledby="retenir-fiche"><h2 id="retenir-fiche">Pour retenir</h2>{a_retenir}<p><strong>Et dans une autre situation :</strong> {e(fiche["transferer"])}</p></section>
-          <section class="learning-sources" aria-labelledby="sources-fiche"><h2 id="sources-fiche">Sources facultatives et limites</h2><p>Tu peux suivre cette fiche sans ouvrir ces liens : les notions, les exemples, la démarche, l’aide et la correction sont présentés sur cette page. Les sources facultatives servent à vérifier ou approfondir. Pour une décision ou une démarche réelle où les règles peuvent changer, vérifie les consignes actuelles d’un service compétent avant d’agir.</p><ul>{sources}</ul>{note_revue}</section>
+          <section class="learning-sources" aria-labelledby="sources-fiche"><h2 id="sources-fiche">Sources facultatives et limites</h2><p>Tu peux suivre cette fiche sans ouvrir ces liens : les notions, les exemples, la démarche, l’aide et la correction sont présentés sur cette page. Les sources facultatives servent à vérifier ou approfondir. Pour une décision ou une démarche réelle où les règles peuvent changer, vérifie les consignes actuelles d’un service compétent avant d’agir.</p><ul role="list">{sources}</ul>{note_revue}</section>
         </article>
         <aside class="learning-lesson-aside" aria-label="Poursuivre l’apprentissage"><p class="eyebrow">Tu choisis la suite</p><h2>Un autre point de départ ?</h2><p>Change de matière, de repère ou de format quand tu le souhaites. La page ne note pas et ne suit pas ta progression.</p><a class="button" href="../../anglais-aventure.html#mondes">Retour aux mondes et parcours</a>{voisines}</aside>
       </div>
@@ -483,7 +488,7 @@ def render_coverage(domains: list[dict], fiches_by_id: dict[str, dict]) -> tuple
         sorties.append(
             f'<details class="learning-coverage-domain" id="couverture-domaine-{e(domain["id"])}"><summary><span><strong>{e(domain["titre"])}</strong>'
             f'<small>{e(titre_statut)}</small></span></summary>'
-            f'<p>{e(domain["intention"])}</p><ul>{contenu_lignes}</ul></details>'
+            f'<p>{e(domain["intention"])}</p><ul role="list">{contenu_lignes}</ul></details>'
         )
         compte_rendus.append(f'- **{domain["titre"]}** — {titre_statut}.')
     return "\n".join(sorties), compte_rendus
@@ -527,7 +532,7 @@ def render_boussole(fiches: list[dict]) -> str:
           <h2 id="titre-boussole-savoirs">Partir d’une question, pas d’un cursus.</h2>
           <p>Ces pistes mènent vers des fiches déjà publiées. Ce n’est ni un programme, ni une réponse complète, ni une validation. Le statut de chaque fiche reste affiché.</p>
         </div>
-        <ol class="knowledge-compass">
+        <ol role="list" class="knowledge-compass">
 {liste}
         </ol>
         <p class="learning-level-note"><strong>Limite :</strong> dix questions seulement, choisies dans le catalogue actuel. D’autres sujets existent plus bas, y compris des prototypes à relire. Tu peux ignorer cette liste et filtrer le catalogue.</p>
@@ -559,7 +564,7 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
           <div class="hero-actions"><a class="button" href="#boussole-savoirs">Partir d’une question</a><a class="button button-secondary" href="#catalogue-fiches">Choisir une fiche</a><a class="button button-secondary" href="anglais-aventure.html">Explorer l’aventure anglaise</a><a class="button button-secondary" href="#couverture">Voir les sujets à développer</a><a class="button button-secondary" href="transparence.html#rd-innovation">Comprendre la R&amp;D continue</a></div>
           <p class="learning-reassurance"><strong>Ce que tu sais déjà compte.</strong> Les repères aident à choisir une fiche, pas à te classer. Tu peux avancer différemment selon les matières.</p>
         </div>
-        <aside class="learning-principles" aria-labelledby="principes-apprentissage"><p class="eyebrow">Une règle éditoriale durable</p><h2 id="principes-apprentissage">Partir du réel, puis revenir au réel.</h2><ul><li>Une analogie concrète dans chaque fiche, avec ses limites expliquées.</li><li>Des notions définies, une méthode découpée et un essai facultatif.</li><li>Des corrections masquées : tu les ouvres quand tu le souhaites.</li><li>Des repères par matière et difficulté, sans test ni étiquette.</li></ul></aside>
+        <aside class="learning-principles" aria-labelledby="principes-apprentissage"><p class="eyebrow">Une règle éditoriale durable</p><h2 id="principes-apprentissage">Partir du réel, puis revenir au réel.</h2><ul role="list"><li>Une analogie concrète dans chaque fiche, avec ses limites expliquées.</li><li>Des notions définies, une méthode découpée et un essai facultatif.</li><li>Des corrections masquées : tu les ouvres quand tu le souhaites.</li><li>Des repères par matière et difficulté, sans test ni étiquette.</li></ul></aside>
       </div>
     </section>'''
     jeu_anglais = f'''    <section class="section section-muted" id="aventure-anglais" aria-labelledby="titre-aventure-anglais">
@@ -580,7 +585,7 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
 {render_filters(fiches)}
         <p class="learning-filter-count" data-filter-count role="status" aria-live="polite" aria-atomic="true">{resume_catalogue}. Les filtres interactifs nécessitent JavaScript ; les liens restent accessibles ci-dessous.</p>
         <p class="learning-no-results" data-filter-empty hidden>Aucune entrée du catalogue ne correspond à ces critères. Essaie un autre mot ou efface les filtres.</p>
-        <ul class="learning-catalogue-grid" data-fiche-list>
+        <ul role="list" class="learning-catalogue-grid" data-fiche-list>
 {cartes}
         </ul>
       </div>
@@ -595,7 +600,7 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
     how_to = '''    <section class="section" id="reperes" aria-labelledby="titre-reperes">
       <div class="container">
         <div class="section-heading"><p class="eyebrow">Choisir son point de départ</p><h2 id="titre-reperes">Des repères pour choisir, jamais des étiquettes.</h2><p>Ces repères aident à trouver une fiche. Ils ne mesurent ni la valeur ni les capacités d’une personne. Le repère peut changer selon la matière.</p></div>
-        <ol class="learning-level-grid">
+        <ol role="list" class="learning-level-grid">
           <li><article class="learning-level-card"><span class="learning-level-number">Repère 1</span><p class="learning-school-reference">Départ libre</p><h3>Premiers pas</h3><p>Lire une consigne, repérer une information, compter et faire un premier calcul — à partir de ce que tu sais déjà.</p></article></li>
           <li><article class="learning-level-card"><span class="learning-level-number">Repère 2</span><p class="learning-school-reference">Consolider</p><h3>Relier des étapes</h3><p>Comprendre un document, combiner des calculs et s’exercer dans une situation familière.</p></article></li>
           <li><article class="learning-level-card"><span class="learning-level-number">Repère 3</span><p class="learning-school-reference">Raisonner</p><h3>Comparer et expliquer</h3><p>Examiner une source, lire des données et expliquer comment on arrive à une réponse.</p></article></li>
@@ -607,7 +612,7 @@ def render_catalogue(fiches: list[dict], domains: list[dict], objectif_fiches: i
     contexte = '''    <section class="section section-muted" id="experiences" aria-labelledby="titre-experiences">
       <div class="container learning-work-panel">
         <div><p class="eyebrow">Apprendre depuis son expérience</p><h2 id="titre-experiences">Le quotidien et le travail sont aussi des lieux d’apprentissage.</h2><p>Un horaire, une recette, un trajet, une tâche d’équipe ou une démarche peut servir de point d’appui. On relie une notion à ce que l’on sait déjà, puis on essaie de la réutiliser ailleurs.</p><p>Les ressources sont gratuites et non certifiantes. Elles ne remplacent ni une formation adaptée ni un accompagnement si tu en as besoin.</p></div>
-        <ol class="learning-work-steps"><li><span>1</span><div><strong>Choisir une situation connue</strong><p>Un document, un calcul ou une question du quotidien.</p></div></li><li><span>2</span><div><strong>Nommer un petit objectif</strong><p>Une action ou une notion à comprendre.</p></div></li><li><span>3</span><div><strong>Essayer et vérifier</strong><p>Sans note : la correction est là si tu la demandes.</p></div></li></ol>
+        <ol role="list" class="learning-work-steps"><li><span>1</span><div><strong>Choisir une situation connue</strong><p>Un document, un calcul ou une question du quotidien.</p></div></li><li><span>2</span><div><strong>Nommer un petit objectif</strong><p>Une action ou une notion à comprendre.</p></div></li><li><span>3</span><div><strong>Essayer et vérifier</strong><p>Sans note : la correction est là si tu la demandes.</p></div></li></ol>
       </div>
     </section>'''
     ecosysteme = '''    <section class="section" id="ecosysteme" aria-labelledby="titre-ecosysteme">
