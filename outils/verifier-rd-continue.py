@@ -148,6 +148,36 @@ def verifier_skills(verificateur: Verificateur) -> set[str]:
         and "aucune personne handicapée ne les a essayés" in protocole_text
         and "C1–C4 sont des consignes candidates, pas des résultats" in protocole_text,
     )
+    # Le matériel de séance est promis par le protocole : fiche de notes,
+    # consignes imprimables, profil de démonstration. Une promesse sans support
+    # laisse la séance sans cadre — et un support qui perdrait ses garde-fous
+    # ferait passer un formulaire de notes pour un consentement.
+    fiche = ROOT / "docs" / "rd" / "fiche-notes-seance.md"
+    consignes = ROOT / "docs" / "rd" / "consignes-seance-imprimables.md"
+    profil = ROOT / "outils" / "profil-demonstration.mjs"
+    fiche_text = fiche.read_text(encoding="utf-8") if fiche.is_file() else ""
+    consignes_text = consignes.read_text(encoding="utf-8") if consignes.is_file() else ""
+    profil_text = profil.read_text(encoding="utf-8") if profil.is_file() else ""
+    verificateur.verifier(
+        "Le matériel de séance existe et nomme ses propres limites",
+        "Ne pas écrire :" in fiche_text
+        and "ne remplace pas un consentement écrit" in fiche_text
+        and "arrêter à tout moment" in consignes_text
+        and "Ne pas noter :" in consignes_text
+        and "MRSC_PROFIL" in profil_text
+        and "profil-demonstration.mjs" in protocole_text
+        and "fiche-notes-seance.md" in protocole_text,
+    )
+    # Un `clear()` effacerait tout le stockage de l'origine — y compris ce qui
+    # n'appartient pas au site. Le profil doit retirer les seules clés qu'il
+    # connaît, une par une, et le dire.
+    retraits_un_a_un = "s.removeItem(cle)" in profil_text
+    vidage_global = ".clear(" in profil_text
+    verificateur.verifier(
+        "Le profil de démonstration ne vide jamais le stockage de la personne",
+        retraits_un_a_un and not vidage_global,
+        f"retraits un à un : {retraits_un_a_un}, vidage global : {vidage_global}",
+    )
     return slugs
 
 

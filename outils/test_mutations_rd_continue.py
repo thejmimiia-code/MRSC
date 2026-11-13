@@ -17,7 +17,9 @@ Cinq fautes sont plantées dans une copie complète du dépôt :
    autres workflows qui doivent la citer ;
 5. une tâche d'essai des modules d'accessibilité retirée du protocole — les
    trois modules du 12 novembre 2026 n'ont été essayés par personne et le
-   protocole doit le dire, tâche par tâche.
+   protocole doit le dire, tâche par tâche ;
+6. le profil de démonstration vidant tout le stockage au lieu de retirer ses
+   propres clés — il effacerait alors les données de la personne.
 
 Usage :
     python3 outils/test_mutations_rd_continue.py
@@ -40,6 +42,7 @@ OUTIL = "verifier-rd-continue.py"
 PORTEFEUILLE = "docs/rd/portefeuille.toml"
 VEILLE = ".github/workflows/veille-apprentissages.yml"
 PROTOCOLE = "docs/rd/protocole-essais-usage.md"
+PROFIL = "outils/profil-demonstration.mjs"
 
 
 def executer(mutation) -> subprocess.CompletedProcess[str]:  # noqa: ANN001 - préparation de copie
@@ -99,6 +102,16 @@ class TestRdContinue(unittest.TestCase):
         resultat = executer(retirer)
         self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
         self.assertIn("modules d'accessibilité", resultat.stdout)
+
+    def test_profil_qui_vide_le_stockage_refuse(self) -> None:
+        """Un `clear()` effacerait les données de la personne, pas nos clés."""
+
+        def vider(copie: Path) -> None:
+            banc_mutations.muter(copie, PROFIL, "s.removeItem(cle);", "s.clear();")
+
+        resultat = executer(vider)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn("ne vide jamais le stockage", resultat.stdout)
 
     def test_veille_decalee_refusee(self) -> None:
         def decaler(copie: Path) -> None:

@@ -148,6 +148,12 @@ def nombre_apostrophes(relatif: str) -> int:
     return apostrophes((RACINE / relatif).read_text(encoding="utf-8"))
 
 
+#: Empreinte d'une unité qui n'existait pas au manifeste précédent. Elle ne
+#: peut pas être confondue avec un SHA-256 réel, et `--appliquer` la remplace
+#: aussitôt par l'empreinte du fichier écrit.
+EMPREINTE_ABSENT = "(absente : unite nouvelle)"
+
+
 def lire_toml(chemin: Path) -> dict:
     return tomllib.loads(chemin.read_text(encoding="utf-8"))
 
@@ -360,8 +366,22 @@ def verifier(exceptions: set[str] | None = None) -> list[str]:
             erreurs.append(f"manifeste : unité déclarée deux fois : {chemin}")
         declares[chemin] = unite
 
+    editions_relues_chemins = {str(e.get("chemin")) for e in editions()}
+    # Une unité nouvelle n'est pas une faute : elle n'a simplement pas encore
+    # d'empreinte. Elle est refusée seulement si aucune [[edition]] ne la couvre,
+    # ce que le contrôle des éditions ci-dessous fait déjà. Le message qui
+    # envoyait vers `--initialiser --forcer` était un piège : ce mode réécrit
+    # tout le manifeste et remet les 176 relectures consignées en dette.
     for chemin in sorted(set(reel) - set(declares)):
-        erreurs.append(f"unité non enregistrée : {chemin} — lancer --initialiser puis relire")
+        # `exceptions` porte les chemins que `--appliquer` est en train de
+        # signer : ils ne sont pas encore au manifeste, c'est normal.
+        if chemin in exceptions:
+            continue
+        if chemin not in editions_relues_chemins:
+            erreurs.append(
+                f"unité non enregistrée : {chemin} — la consigner par "
+                "--appliquer avec son constat et sa limite"
+            )
     for chemin in sorted(set(declares) - set(reel)):
         erreurs.append(f"unité déclarée mais absente du dépôt : {chemin}")
 
@@ -544,9 +564,22 @@ def appliquer(args: argparse.Namespace) -> int:
 
     erreurs: list[str] = []
     for chemin in chemins:
-        if chemin not in reel or chemin not in declares:
+        if chemin not in reel:
             erreurs.append(f"--appliquer : unité inconnue : {chemin}")
             continue
+        if chemin not in declares:
+            # Une unité nouvelle (fichier créé par ce lot) n'a pas d'empreinte
+            # antérieure : elle entre au manifeste par la même relecture que les
+            # autres, avec l'empreinte du fichier absent comme référence. Refuser
+            # ce cas obligeait à `--initialiser --forcer`, qui réécrit tout le
+            # manifeste et **efface les relectures déjà consignées** : une
+            # nouvelle unité ne doit pas coûter la mémoire des autres.
+            declares[chemin] = {
+                "chemin": chemin,
+                "empreinte": EMPREINTE_ABSENT,
+                "etat": "reference-initiale",
+                "apostrophes": 0,
+            }
         avant = declares[chemin]["empreinte"]
         apres = empreinte(RACINE / chemin)
         if avant == apres:

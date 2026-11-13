@@ -83,11 +83,17 @@ C1–C4 sont des consignes candidates, pas des résultats. Une personne qui ne t
 
 ### Préparation technique et données pour cette série
 
-Avant une séance, noter la version du site, la page de départ, la largeur CSS approximative, le zoom et le mode d’entrée, sans identifiant ni profil de la personne. Revenir à un état de test connu au moyen d’un profil de démonstration ou d’une session dédiée. Ne pas effacer les préférences, l’historique ou les données du navigateur personnel d’une personne sans son accord explicite; ne pas lui demander d’ouvrir les outils de développement. Aucun enregistrement d’écran, de voix, aucune capture contenant des données personnelles et aucune mesure de temps ne sont prévus par défaut.
+Avant une séance, noter la version du site, la page de départ, la largeur CSS approximative, le zoom et le mode d’entrée, sans identifiant ni profil de la personne. Revenir à un état de test connu au moyen du profil de démonstration [`outils/profil-demonstration.mjs`](../../outils/profil-demonstration.mjs) — `node outils/profil-demonstration.mjs --liste` donne les états disponibles et la commande à coller — ou d’une session dédiée. Ce profil n’écrit que les clés que le site lit déjà ; il ne lit jamais le stockage existant et ne le vide jamais en entier. Ne pas effacer les préférences, l’historique ou les données du navigateur personnel d’une personne sans son accord explicite; ne pas lui demander d’ouvrir les outils de développement. Aucun enregistrement d’écran, de voix, aucune capture contenant des données personnelles et aucune mesure de temps ne sont prévus par défaut.
 
 Si l’essai exige de bloquer `localStorage`, `sessionStorage`, le réseau ou une fonction optionnelle, le faire comme contrôle technique séparé avec un profil de test — ne pas faire porter ce réglage à la personne volontaire. Consigner le comportement observé et son contexte, pas des réponses ni un historique de navigation. Le lien distant du simulateur constitue un essai distinct : ne pas le traiter comme disponible ou vérifié sur la seule base de son statut de publication.
 
 ## 5. Fiche de notes minimale
+
+Le support de séance est préparé à part, pour être imprimé :
+[`fiche-notes-seance.md`](fiche-notes-seance.md) (contexte, déroulé, obstacles classés, arrêt, suites)
+et [`consignes-seance-imprimables.md`](consignes-seance-imprimables.md) (les consignes à lire à voix haute).
+Ce sont des **supports**, pas un second protocole : ce document reste la référence, et un support
+qui le contredirait doit être corrigé, pas suivi.
 
 Copier ce tableau pour chaque observation, sans nom ni données personnelles :
 
