@@ -7,14 +7,17 @@ refusées, le registre de relecture, ce que la page de transparence en dit, et l
 veille hebdomadaire. C'est la mémoire du projet — et sa seule preuve était son
 propre vert.
 
-Quatre fautes sont plantées dans une copie complète du dépôt :
+Cinq fautes sont plantées dans une copie complète du dépôt :
 
 1. une initiative du portefeuille privée de son champ `question` ;
 2. une section `## Garde-fous` retirée d'un skill — le skill devient inexploitable
    et les initiatives qui s'y appuient le signalent ;
 3. l'ancre `rd-innovation` renommée dans `transparence.html` ;
 4. la veille hebdomadaire déplacée du lundi au mardi, sans mise à jour des
-   autres workflows qui doivent la citer.
+   autres workflows qui doivent la citer ;
+5. une tâche d'essai des modules d'accessibilité retirée du protocole — les
+   trois modules du 12 novembre 2026 n'ont été essayés par personne et le
+   protocole doit le dire, tâche par tâche.
 
 Usage :
     python3 outils/test_mutations_rd_continue.py
@@ -36,6 +39,7 @@ import banc_mutations  # noqa: E402
 OUTIL = "verifier-rd-continue.py"
 PORTEFEUILLE = "docs/rd/portefeuille.toml"
 VEILLE = ".github/workflows/veille-apprentissages.yml"
+PROTOCOLE = "docs/rd/protocole-essais-usage.md"
 
 
 def executer(mutation) -> subprocess.CompletedProcess[str]:  # noqa: ANN001 - préparation de copie
@@ -87,6 +91,14 @@ class TestRdContinue(unittest.TestCase):
         resultat = executer(renommer)
         self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
         self.assertIn("La R&D continue est visible", resultat.stdout)
+
+    def test_tache_dessai_des_modules_retiree_refusee(self) -> None:
+        def retirer(copie: Path) -> None:
+            banc_mutations.muter(copie, PROTOCOLE, "| C4 |", "| XX |")
+
+        resultat = executer(retirer)
+        self.assertEqual(resultat.returncode, 1, resultat.stdout[-2000:])
+        self.assertIn("modules d'accessibilité", resultat.stdout)
 
     def test_veille_decalee_refusee(self) -> None:
         def decaler(copie: Path) -> None:

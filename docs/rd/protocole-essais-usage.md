@@ -8,7 +8,7 @@ Ce document est un cadre de préparation, non un protocole scientifique approuv�
 
 Observer si des personnes volontaires peuvent effectuer quelques tâches du catalogue, de l’atlas et du site, repérer les aides et comprendre les états éditoriaux sans explication préalable. Relever les obstacles, pas classer les personnes.
 
-Périmètre candidat : `apprendre.html`, `anglais-aventure.html` (atlas), des fiches autonomes, `transparence.html#rd-innovation`, et les parcours de navigation partagés. Les cinq scènes d’anglais peuvent être testées séparément. Ne pas utiliser de contenu médical, juridique, financier ou de sécurité comme conseil d’action réel pendant une séance.
+Périmètre candidat : `apprendre.html`, `anglais-aventure.html` (atlas), des fiches autonomes, `transparence.html#rd-innovation`, les parcours de navigation partagés et, depuis le 12 novembre 2026, le bloc « Accessibilité » du menu « Personnalisation » (trois modules : lecture facilitée, mouvements réduits, repères clavier visibles). Les cinq scènes d’anglais peuvent être testées séparément. Ne pas utiliser de contenu médical, juridique, financier ou de sécurité comme conseil d’action réel pendant une séance.
 
 ### Questions d’essai
 
@@ -18,6 +18,7 @@ Périmètre candidat : `apprendre.html`, `anglais-aventure.html` (atlas), des fi
 - Les aides en français et les choix facultatifs des Escales sont-ils repérables?
 - Peut-elle poursuivre si JavaScript, stockage, audio, WebGL ou réseau est indisponible?
 - Les mêmes tâches restent-elles possibles au clavier, au zoom, sur petit écran et avec la technologie d'assistance testée?
+- Les trois modules d’accessibilité sont-ils repérables, compris comme des réglages personnels, et distincts du zoom, du contraste et de la taille du texte?
 
 ## 2. Rôles à prévoir
 
@@ -66,6 +67,19 @@ Les commandes « Affichage », « Présentation », « Parcours » et « Réduir
 | B7 (proposition du 18 octobre 2026, à relire) | « Tu veux parcourir la liste des fiches à ta façon. Ouvre “Présentation” et choisis la mise en page qui te convient pour cela, puis dis ce que les petits schémas et les mentions “Idéal pour” t’ont aidé — ou non — à comprendre. » | Page « Apprendre » (catalogue), état initial « Équilibrée » dans un profil de démonstration ; laisser le choix libre entre Vitrine, Mosaïque, Panorama composite et Compacte. | La personne relie les libellés à son intention, observe le changement sans rechargement, retrouve les mêmes fiches et filtres, puis peut revenir à « Équilibrée » ; noter les confusions de vocabulaire sans noter la personne ni mesurer un temps. |
 
 B1–B7 sont des consignes candidates, pas des résultats. Choisir seulement une ou deux tâches par séance selon l’accord et le confort de la personne; ne pas imposer de chronomètre, comparer les personnes ou interpréter une difficulté comme un manque de compétence. Répéter une tâche dans une autre largeur ou avec un autre mode d’accès est une observation de contexte, pas une mesure représentative.
+
+### Complément candidat — les trois modules d’accessibilité du 12 novembre 2026
+
+Les modules « Lecture facilitée », « Réduire les mouvements » et « Repères clavier visibles » ont été livrés le 12 novembre 2026 dans le menu « Personnalisation » (bloc « Accessibilité »). Ils n’ont été éprouvés que par des contrôles automatiques et des mesures de style dans un Chromium sans interface : **aucune personne handicapée ne les a essayés**. Les tâches ci-dessous sont des **propositions à relire** par les mêmes rôles que B1–B7, et ne valent ni validation d’accessibilité, ni approbation du consentement, ni autorisation de recruter. Ne pas les administrer avant cette relecture.
+
+| ID | Consigne candidate à lire | Mise en place | Signal à observer, sans noter la personne |
+|---|---|---|---|
+| C1 | « Si tu veux lire plus facilement, regarde dans “Personnalisation” s’il existe un réglage pour ça. Active-le et dis-moi si le texte te semble plus lisible. » | Page de lecture longue (`apprendre.html` ou une fiche), état initial sans module. Laisser la personne choisir son appareil et son zoom habituels. | La personne trouve le bloc « Accessibilité », distingue « Lecture facilitée » d’un agrandissement de texte, et dit en ses mots si la police, l’espacement ou l’interligne l’aident — ou non. Noter seulement ce qu’elle dit du texte, jamais un diagnostic ni une gêne nommée. |
+| C2 | « Le site bouge peut-être trop pour toi. Regarde s’il y a un réglage pour calmer les animations. » | Même page, état initial sans module ; ne pas régler `prefers-reduced-motion` à la place de la personne. | La personne comprend que le réglage coupe les animations sans rapport avec le contraste ni la taille du texte, et l’active sans aide. Si son système demande déjà moins de mouvement, noter si le module est perçu comme redondant. |
+| C3 | « Avec le clavier seulement, essaie de voir où tu es dans la page. Y a-t-il quelque chose qui t’aide à suivre ? » | Clavier seul ; vérifier d’abord que la personne utilise cette méthode sans qu’on la lui impose. | Le lien « Aller au contenu » reste visible, le contour de focus se distingue du fond, et la personne retrouve le bouton qui a activé le module. Noter une gêne visuelle ou une confusion de repère, sans la rapporter à une condition médicale. |
+| C4 | « Tu as changé des réglages. Peux-tu les retrouver sur une autre page du site, puis les enlever ? » | Deux pages publiques distinctes, même session, profil de démonstration. | Les trois choix sont mémorisés et repris ailleurs ; le bouton « Désactiver les trois modules » est compris comme un retour groupé, distinct d’un retrait un par un. Ne pas demander à la personne d’inspecter le stockage du navigateur. |
+
+C1–C4 sont des consignes candidates, pas des résultats. Une personne qui ne trouve pas un module n’a pas échoué : c’est le repérage du panneau qui est en cause. Ne pas cumuler les trois modules dans une même séance sans l’accord de la personne, et ne pas présenter ces réglages comme un substitut à son lecteur d’écran, à son zoom ou à ses réglages système.
 
 ### Préparation technique et données pour cette série
 

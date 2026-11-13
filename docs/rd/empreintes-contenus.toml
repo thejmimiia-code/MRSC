@@ -1755,7 +1755,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "c04a6c7c3750fe20922e7b449d73339f8e912444998be1bb2d2c4902bd067546"
+empreinte = "5f6846df906b44afabf6e382a9496d657f66d3163b944ecbc1fcc3461d0be005"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-13
@@ -1839,10 +1839,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "f865cc9f94ab828a3ea1ceb761c07973a79846a79d8b7a1ca1f6aca43fd6c4d7"
+empreinte = "22f7e37e7f9efe7dff939ba87e3b1452f6aaab64467dc385c2404e71ff9376bf"
 etat = "relu-par-agent"
 apostrophes = 2405
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/ligne-graphique.md"
@@ -1937,10 +1937,10 @@ date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/portefeuille.toml"
-empreinte = "cdb022a1bfb9cbbc62e9677160b88e9e25fdc177ebcfae6277ed43b9542373db"
+empreinte = "4862ffae1fca481be60a8df10b75cef5f92c3bd7139ace58cd76e35a283eeac6"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-12
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/presentations-personnalisees.md"
@@ -1965,10 +1965,10 @@ date_derniere_relecture = 2026-11-12
 
 [[unite]]
 chemin = "docs/rd/protocole-essais-usage.md"
-empreinte = "283de211f52c780d5dbfa30d0d1749841e4fff573401a931f50e90d99900c2a1"
-etat = "reference-initiale"
+empreinte = "bb163c085cc2e34268e1fb5ed148197226c59a0ade1449b6410a194df444f5b2"
+etat = "relu-par-agent"
 apostrophes = 50
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "docs/rd/rapport-coherence-editoriale-2026-10-13.md"
@@ -2987,10 +2987,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test_mutations_rd_continue.py"
-empreinte = "0fe9e43309451e20a0b0b9086918c8d4127e28b3d50aeca9ba80914191228d2e"
-etat = "reference-initiale"
+empreinte = "49b339fb18911dda2da2ef6c36ea2e037d650b8e1757598c0bb02a660f8045eb"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "outils/test_mutations_relecture_agent_prototypes.py"
@@ -3365,10 +3365,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/verifier-rd-continue.py"
-empreinte = "f64e486cf6c1ed58f5f68e5d49b6feb7e1f8a35780a56e83518859c58b928658"
-etat = "reference-initiale"
+empreinte = "8a5a54a43097b16c69b57dd9c5dc92c9517be983a12c740e8a9306a6e31ce558"
+etat = "relu-par-agent"
 apostrophes = 0
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-13
 
 [[unite]]
 chemin = "outils/verifier-relecture-contenus.py"
