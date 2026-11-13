@@ -87,7 +87,7 @@
       <div class="container privacy-content">
         <aside class="privacy-summary" aria-labelledby="privacy-summary-title">
           <h2 id="privacy-summary-title">À retenir</h2>
-          <ul>
+          <ul role="list">
             <li>Les fiches d’apprentissage ne demandent ni compte, ni réponse, ni note, et ne conservent pas de progression.</li>
             <li>Les réglages de texte, de contraste et de présentation peuvent être gardés dans le stockage local de votre navigateur ; ils ne sont pas envoyés au site par ce code.</li>
             <li>L’hébergeur GitHub Pages reçoit au minimum l’adresse IP nécessaire pour servir la page et indique la journaliser à des fins de sécurité.</li>
@@ -112,7 +112,7 @@
         <section aria-labelledby="privacy-preferences-title">
           <h2 id="privacy-preferences-title">Préférences enregistrées sur votre appareil</h2>
           <p>Les boutons « Affichage » peuvent mémoriser le niveau d’agrandissement du texte, le contraste renforcé et l’espacement. Le bouton « Présentation » mémorise, si vous choisissez une option, la mise en page « Équilibrée », « Lecture », « Vitrine », « Mosaïque », « Panorama composite » ou « Compacte » sous la clé <code>mrsc-mise-en-page</code>. La commande « Écouter la page » mémorise la vitesse de lecture choisie sous la clé <code>mrsc-lecture-vitesse</code> ; ni le texte lu, ni la position atteinte, ni la moindre mesure d’écoute ne sont conservés. Le jeu « Les Mondes » peut mémoriser, si vous composez un parcours ou terminez une Escale, la liste ordonnée des identifiants de fiches choisies, les missions terminées et le niveau d’aide, sous la clé <code>mrsc-anglais-aventure-v1</code>. Le navigateur garde ces valeurs dans son <code>localStorage</code>, sous une origine propre à M.R.S.C ; aucun compte ni identifiant de personne n’est créé.</p>
-          <ul>
+          <ul role="list">
             <li><strong>Catégories :</strong> niveau de texte, contraste, espacement et choix de mise en page ; dans le jeu, niveau d’aide, identifiants des Escales terminées et identifiants ordonnés des fiches ajoutées au parcours. Aucun texte libre, réponse, score ou résultat d’exercice.</li>
             <li><strong>Finalité :</strong> remettre en place l’affichage et laisser la personne retrouver sur le même appareil son parcours de fiches choisi et son carnet d’Escales.</li>
             <li><strong>Transmission :</strong> le code lit et écrit ces valeurs dans le navigateur ; il ne les ajoute pas aux requêtes vers le serveur M.R.S.C. Le jeu ne comporte ni compte, publicité, outil d’audience ou mesure individuelle.</li>
@@ -123,7 +123,7 @@
           <p>La CNIL inclut l’accès au <code>localStorage</code> dans les technologies de lecture ou d’écriture sur le terminal. Elle indique que la personnalisation de la présentation peut être dispensée de consentement lorsqu’elle est intrinsèque et attendue du service. Les préférences sont activées à la demande ; le parcours local change lorsque la personne ajoute ou réordonne elle-même des fiches, et le carnet d’Escales lorsqu’une mission est terminée. La qualification juridique de ces écritures locales doit être confirmée par l’association. Elles sont décrites par transparence. Si un traceur non nécessaire est ajouté, l’information et le consentement requis devront être mis en place avant son activation.</p>
           <h3>Historique de navigation pour reprendre son parcours</h3>
           <p>Les commandes « Précédent », « Suivant », « Accueil » et « Dernière vue » peuvent utiliser le <code>sessionStorage</code> pour rejouer les étapes internes visitées dans l’onglet et retrouver le dernier point parcouru avant un retour à l’accueil. Le site conserve uniquement des chemins de pages et leurs fragments internes ; il n’enregistre pas les paramètres de requête, le texte saisi, les réponses aux exercices ni un profil d’apprentissage.</p>
-          <ul>
+          <ul role="list">
             <li><strong>Finalité :</strong> permettre à la personne de revenir ou d’avancer dans son parcours de navigation et de reprendre sa dernière page visitée.</li>
             <li><strong>Périmètre :</strong> liens internes de M.R.S.C ; les liens vers des sites externes ne sont pas ajoutés à cet historique.</li>
             <li><strong>Transmission :</strong> le script lit et écrit ces chemins dans le navigateur ; il ne les envoie pas au serveur M.R.S.C.</li>
@@ -136,7 +136,7 @@
         <section aria-labelledby="privacy-contact-title">
           <h2 id="privacy-contact-title">Si vous écrivez au M.R.S.C</h2>
           <p>Le lien de contact ouvre votre logiciel de messagerie ; rien n’est envoyé tant que vous ne décidez pas d’expédier le message. Celui-ci peut contenir l’adresse de réponse, un nom ou toute information que vous choisissez d’ajouter.</p>
-          <ul>
+          <ul role="list">
             <li><strong>Finalité :</strong> lire et répondre à votre demande, ou tenir compte d’un retour sur le site.</li>
             <li><strong>Destinataires :</strong> les personnes habilitées à gérer le courrier de l’association et le fournisseur du service de messagerie utilisé pour l’envoi et la réception.</li>
             <li><strong>Limitation :</strong> ne transmettez pas de mot de passe, de numéro de carte, de document d’identité ou de détail de santé si ce n’est pas indispensable. N’envoyez pas d’information sur une autre personne sans raison valable.</li>
@@ -179,7 +179,7 @@
         <section class="privacy-review-note" aria-labelledby="privacy-update-title">
           <h2 id="privacy-update-title">Mise à jour et points à confirmer</h2>
           <p>Notice mise à jour le <time datetime="2026-10-15">15 octobre 2026</time> après examen des pages et du code du dépôt. Elle doit être révisée si l’hébergement, les scripts, les formulaires, les services tiers ou les données traitées changent.</p>
-          <ul>
+          <ul role="list">
             <li>Confirmer le responsable de traitement, la base juridique des courriels et la personne chargée des demandes de droits.</li>
             <li>Définir puis appliquer une durée de conservation des courriels reçus.</li>
             <li>Vérifier les conditions du compte Gmail de l’association et celles de l’hébergeur utilisé en production.</li>
@@ -187,7 +187,7 @@
             <li>Auditer les journaux, les durées, les sous-traitants et les paramètres du déploiement Vercel maintenant utilisé pour le simulateur ; confirmer auprès du fournisseur et par l’association les informations à publier, puis mettre à jour cette page avant tout nouveau changement d’hébergeur ou l’ajout d’un outil d’audience, d’une vidéo intégrée, d’une newsletter, d’un compte ou d’un suivi pédagogique.</li>
           </ul>
           <p>Cette page est une information de transparence construite à partir du dépôt ; ce n’est pas un avis juridique ni une déclaration de conformité certifiée.</p>
-          <ul class="trace-list">
+          <ul role="list" class="trace-list">
             <li><a href="https://www.cnil.fr/fr/passer-laction/rgpd-les-premieres-etapes" target="_blank" rel="noopener noreferrer">CNIL — les premières étapes du RGPD</a></li>
             <li><a href="https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookies/comment-mettre-mon-site-web-en-conformite" target="_blank" rel="noopener noreferrer">CNIL — cookies, autres traceurs et personnalisation d’interface</a></li>
             <li><a href="https://www.cnil.fr/fr/identifier-les-donnees-personnelles" target="_blank" rel="noopener noreferrer">CNIL — identifier les données personnelles</a></li>
@@ -206,12 +206,12 @@
         </div>
         <nav class="footer-nav" aria-label="Navigation de pied de page">
           <p class="footer-heading">Naviguer</p>
-          <ul><li><a href="index.html">Accueil</a></li><li><a href="apprendre.html">Apprendre</a></li><li><a href="simulateur.html">Simulateur</a></li><li><a href="transparence.html">Transparence</a></li><li><a href="confidentialite.html" aria-current="page">Vie privée</a></li><li><a href="nous-contacter.html">Nous contacter</a></li></ul>
+          <ul role="list"><li><a href="index.html">Accueil</a></li><li><a href="apprendre.html">Apprendre</a></li><li><a href="simulateur.html">Simulateur</a></li><li><a href="transparence.html">Transparence</a></li><li><a href="confidentialite.html" aria-current="page">Vie privée</a></li><li><a href="nous-contacter.html">Nous contacter</a></li></ul>
         </nav>
         <div class="footer-contact"><p class="footer-heading">Nous contacter</p><a class="footer-mail" href="mailto:assomrsc@gmail.com">assomrsc@gmail.com</a></div>
-        <div class="footer-docs"><p class="footer-heading">Documents</p><ul><li><a href="documents.html">Documents officiels</a></li><li><a href="transparence.html#licence">Licence</a></li></ul></div>
+        <div class="footer-docs"><p class="footer-heading">Documents</p><ul role="list"><li><a href="documents.html">Documents officiels</a></li><li><a href="transparence.html#licence">Licence</a></li></ul></div>
       </div>
-      <div class="footer-bottom"><p>&copy; <span data-year>2026</span> Mouvement Représentatif de la Société Civile (M.R.S.C).</p>        <ul class="footer-legal">
+      <div class="footer-bottom"><p>&copy; <span data-year>2026</span> Mouvement Représentatif de la Société Civile (M.R.S.C).</p>        <ul role="list" class="footer-legal">
           <li><a href="confidentialite.html" aria-current="page">Vie privée et données</a></li>
           <li><a href="nous-contacter.html">Contact</a></li>
           <li><a href="#contenu">Haut de page</a></li>

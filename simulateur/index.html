@@ -1185,7 +1185,7 @@ html[data-layout="compacte"] #contenu-principal .clair-lignes { grid-template-co
     <h2>🧭 Lire le résultat <span class="aide">la même simulation, expliquée phrase par phrase — sans jargon, à partir des chiffres déjà calculés</span></h2>
     <div class="clair-resume" id="clair-resume">en attente de la première simulation…</div>
     <div class="clair-lignes" id="clair-lignes"></div>
-    <ul class="clair-limites" id="clair-limites"></ul>
+    <ul role="list" class="clair-limites" id="clair-limites"></ul>
   </section>
 
   <section class="bloc" id="section-impact">
@@ -2525,7 +2525,7 @@ function chaineHtml(bulle){
     `<li class="bulle-alerte">⚠ ${maillon.mediateur} : ${maillon.note}</li>`).join('');
   const vide = (!lignes && !moteur) ? '<li>Aucun médiateur propre : le levier agit par le champ du moteur.</li>' : '';
   return `<div class="bulle-section"><span class="bulle-titre">Chaîne d'interaction (plein régime)</span>`
-    + `<ul>${lignes}${moteur}${vide}${maillons}</ul></div>`;
+    + `<ul role="list">${lignes}${moteur}${vide}${maillons}</ul></div>`;
 }
 function effetsDeclaresHtml(bulle){
   const jetons = [...(bulle.effets_directs || []), ...(bulle.effets_hors_domaine || [])].map(effet => {
@@ -2565,9 +2565,9 @@ function mesuresHtml(bulle){
       + `<div><b>${mesure.nom}</b> · score moyen ${fmt(mesure.score_moyen, 1)} · `
       + `niveau ${seuils.niveau_global_libelle || '—'}${risque}</div>`
       + `<div>${domaines}</div>`
-      + (indicateurs ? `<ul>${indicateurs}</ul>` : '')
-      + (alertes ? `<ul>${alertes}</ul>` : '')
-      + (journal ? `<ul class="bulle-journal">${journal}</ul>` : '')
+      + (indicateurs ? `<ul role="list">${indicateurs}</ul>` : '')
+      + (alertes ? `<ul role="list">${alertes}</ul>` : '')
+      + (journal ? `<ul role="list" class="bulle-journal">${journal}</ul>` : '')
       + `</div>`;
   }).join('');
   return `<div class="bulle-section"><span class="bulle-titre">Répercussions mesurées `
@@ -2593,7 +2593,7 @@ function lectureHtml(bulle){
   const compensations = liste(lecture.compensations, entree =>
     `<li>${entree.libelle} : ${(entree.leviers || []).map(levier => levier.libelle).join(', ')}</li>`);
   const bloc = (titre, contenu) => contenu
-    ? `<div class="bulle-section"><span class="bulle-titre">${titre}</span><ul>${contenu}</ul></div>` : '';
+    ? `<div class="bulle-section"><span class="bulle-titre">${titre}</span><ul role="list">${contenu}</ul></div>` : '';
   const bouge = (lecture.opportunites || []).length + (lecture.desagrements || []).length;
   return bloc('Opportunités', opportunites) + bloc('Désagréments', desagrements)
     + bloc('À surveiller (garde-fous et strates)', surveillance)
@@ -3894,7 +3894,7 @@ function renderDomaines(donnees){
           <div class="ref">sans politique : ${domaine.tendance_reference === null || domaine.tendance_reference === undefined ? '—' : fmt(domaine.tendance_reference, 1)}</div>
         </div>
       </div>
-      <ul>${indicateurs}</ul>
+      <ul role="list">${indicateurs}</ul>
     </div>`;
   }).join('');
 }
@@ -4072,7 +4072,7 @@ function auditMethodesHtml(){
   const nbDomaines = ((CATALOGUE || {}).domaines || []).length;
   const nbIndicateurs = ((CATALOGUE || {}).domaines || [])
     .reduce((somme, domaine) => somme + (domaine.indicateurs || []).length, 0);
-  return `<ul style="margin-left:16px;line-height:1.7">
+  return `<ul role="list" style="margin-left:16px;line-height:1.7">
     <li><b>Scores 0-100 :</b> chaque domaine est noté par rapport à la trajectoire de référence
       (aucun levier actif) : 50 = aucune politique. Les écarts sont des écarts de politique
       publique, jamais des prophéties.</li>

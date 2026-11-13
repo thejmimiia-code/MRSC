@@ -477,6 +477,10 @@ def ecrire_manifeste(unites_declarees: list[dict], meta: dict) -> None:
             lignes.append(f"date_reference = {unite['date_reference']}")
         if unite.get("date_derniere_relecture"):
             lignes.append(f"date_derniere_relecture = {unite['date_derniere_relecture']}")
+        if unite.get("urls"):
+            lignes.append(
+                "urls = [" + ", ".join('"' + str(u).replace('"', '\\"') + '"' for u in unite["urls"]) + "]"
+            )
         if unite.get("raison"):
             lignes.append('raison = "' + unite["raison"].replace('"', '\\"') + '"')
         lignes.append("")
@@ -507,6 +511,7 @@ def initialiser() -> int:
                 "etat": "reference-initiale",
                 "date_reference": date,
                 "apostrophes": nombre_apostrophes(chemin),
+                "urls": urls_du_fichier(chemin),
             }
             for chemin in reel
         ],
@@ -534,14 +539,56 @@ def lignes_ajoutees(relatif: str) -> list[str]:
     return ajoutees
 
 
-def urls_nouvelles(relatif: str) -> list[str]:
+def urls_du_fichier(relatif: str) -> list[str]:
+    """Les URL externes du fichier, dans l'ordre, débarrassées de la ponctuation."""
+    texte = (RACINE / relatif).read_text(encoding="utf-8")
     urls: list[str] = []
-    for ligne in lignes_ajoutees(relatif):
-        for url in MOTIF_URL.findall(ligne):
-            url = url.rstrip(".,;:)]}|`")
-            if url not in urls:
-                urls.append(url)
+    for url in MOTIF_URL.findall(texte):
+        url = url.rstrip(".,;:)]}|`")
+        if url not in urls:
+            urls.append(url)
     return urls
+
+
+def urls_connues(relatif: str, declare: dict) -> set[str]:
+    """Les URL que la dernière relecture signée connaissait.
+
+    Le manifeste les garde. À défaut — unité jamais signée depuis l'ajout de ce
+    champ — la version de `HEAD` fait foi. Si ni l'un ni l'autre n'existe, rien
+    n'est connu : toute URL du fichier est alors nouvelle, et la porte refuse.
+    """
+    gardees = declare.get("urls")
+    if isinstance(gardees, list):
+        return {str(u).rstrip(".,;:)]}|`") for u in gardees}
+    ancien = subprocess.run(
+        ["git", "show", f"HEAD:{relatif}"],
+        cwd=RACINE, capture_output=True, text=True, check=False,
+    )
+    if ancien.returncode != 0:
+        return set()
+    return {url.rstrip(".,;:)]}|`") for url in MOTIF_URL.findall(ancien.stdout)}
+
+
+def urls_nouvelles(relatif: str, connues: set[str] | None = None) -> list[str]:
+    """URL absentes de la version signée : réécrire une ligne n'invente pas une source.
+
+    La première version comparait les URL des **lignes ajoutées**. Sur ce site,
+    où une section entière tient souvent sur une seule ligne, ajouter un attribut
+    à une balise rend la ligne neuve : les liens qu'elle portait déjà, et qui
+    avaient été vus et signés, redevenaient « nouveaux ». Le 13 novembre 2026,
+    la pose de `role="list"` a ainsi produit six refus pour des URL inchangées
+    depuis des semaines (ANLCI, W3C, éduscol, ADEME). La comparaison porte donc
+    sur les **ensembles d'URL avant et après** : une URL qui était déjà là ne
+    demande pas de source nouvelle, une URL qui apparaît en demande une.
+
+    La mémoire de ces URL est le manifeste, pas l'historique Git : un banc de
+    mutation travaille sur une copie sans `.git`, et une porte qui ne sait pas
+    répondre hors du dépôt ne s'éprouve pas. La mémoire se remplit à chaque
+    signature ; les unités signées avant son ajout retombent sur `HEAD`.
+    """
+    if connues is None:
+        connues = urls_connues(relatif, {})
+    return [url for url in urls_du_fichier(relatif) if url not in connues]
 
 
 def appliquer(args: argparse.Namespace) -> int:
@@ -591,7 +638,7 @@ def appliquer(args: argparse.Namespace) -> int:
         # éprouver le refus : ce sont des fixtures, pas des faits à sourcer.
         if chemin.startswith("outils/test_"):
             continue
-        for url in urls_nouvelles(chemin):
+        for url in urls_nouvelles(chemin, urls_connues(chemin, declares[chemin])):
             try:
                 domaine = urlparse(url).netloc.lower()
             except ValueError:
@@ -667,6 +714,7 @@ def appliquer(args: argparse.Namespace) -> int:
             etat="relu-par-agent",
             date_derniere_relecture=date,
             apostrophes=nombre_apostrophes(chemin),
+            urls=urls_du_fichier(chemin),
         )
         declares[chemin].pop("date_reference", None)
 

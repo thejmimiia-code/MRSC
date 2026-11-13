@@ -14,7 +14,7 @@
    "titre": "2026-11-13 — Une colonne qui sortait du modèle : le contrôle des colonnes avait raison",
    "resume": "Signal : la CI de la PR #293 tombait rouge sur graphismes, sans journal lisible (--log-failed rendait une erreur de stockage, pas une trace).",
    "source": "docs/rd/journal.md",
-   "ligne": 5,
+   "ligne": 20,
    "cache_de": "moyen:journal:2026-11-13:une-colonne-qui-sortait-du-modele-:-le-controle-"
   },
   {
@@ -23,7 +23,7 @@
    "titre": "2026-11-13 — Matériel de séance : de quoi faire un essai, pas de quoi le déclarer fait",
    "resume": "Suite de : l’entrée du même jour qui inscrivait C1–C4 au protocole.",
    "source": "docs/rd/journal.md",
-   "ligne": 19,
+   "ligne": 34,
    "cache_de": "moyen:journal:2026-11-13:materiel-de-seance-:-de-quoi-faire-un-essai,-pas"
   },
   {
@@ -32,11 +32,20 @@
    "titre": "2026-11-13 — L’ouverture de l’accueil dit ce que l’association est, dans ses propres mots",
    "resume": "Signal : la personne a fourni le texte de présentation de l’association et demandé de le mettre « à la place de » l’ouverture d’alors — celle que le lot du 11…",
    "source": "docs/rd/journal.md",
-   "ligne": 35,
+   "ligne": 50,
    "cache_de": "moyen:journal:2026-11-13:l’ouverture-de-l’accueil-dit-ce-que-l’associatio"
   },
   {
    "id": "court:4",
+   "horizon": "court",
+   "titre": "Ce qu’un lecteur d’écran reçoit ne se lit pas dans le HTML : 397 listes muettes trouvées dans l’arbre",
+   "resume": "Le dépôt mesurait les contrastes, l’indicateur de focus, la taille des cibles, l’espacement du texte et les violations d’axe-core.",
+   "source": "docs/rd/avancees.toml",
+   "ligne": 1694,
+   "cache_de": "moyen:avancee:arbre-accessibilite-2026-11-13"
+  },
+  {
+   "id": "court:5",
    "horizon": "court",
    "titre": "Un module d’accessibilité se juge sur l’effet mesuré, et un produit propriétaire n’est qu’une liste de besoins",
    "resume": "La demande citait deux exemples : Lisio, une surcouche d’accessibilité, et le téléservice MDPH en ligne de la CNSA.",
@@ -45,22 +54,13 @@
    "cache_de": "moyen:avancee:accessibilite-modules-originaux-2026-11-12"
   },
   {
-   "id": "court:5",
+   "id": "court:6",
    "horizon": "court",
    "titre": "Déclarer n’est pas un réflexe de plus : quatre démarches, quatre interlocuteurs, et une source primaire pour chacune",
    "resume": "La section `#fraudes-ia` traitait la prévention, la vérification et le signalement, mais la déclaration tenait en une phrase et quatre canaux.",
    "source": "docs/rd/avancees.toml",
    "ligne": 1646,
    "cache_de": "moyen:avancee:declarer-fraude-demarches-distinctes-2026-11-12"
-  },
-  {
-   "id": "court:6",
-   "horizon": "court",
-   "titre": "Un décor sans texte lisible n’est pas un texte trop petit — et le banc exécute enfin le filtre",
-   "resume": "Le relevé d’affichage du 6 novembre 2026 avait trouvé un faux positif : les 2 470 mesures comptaient chacune un « texte sous 12 px » qui était toujours…",
-   "source": "docs/rd/avancees.toml",
-   "ligne": 1625,
-   "cache_de": "moyen:avancee:filtre-decor-aria-hidden-2026-11-12"
   },
   {
    "id": "court:phase:apprentissages-et-relecture",
@@ -129,6 +129,14 @@
    "titre": "Apparences du site — six thèmes dans « Personnalisation »",
    "resume": "Ce document n'est ni une charte graphique adoptée, ni une validation visuelle, ni un essai avec des personnes.",
    "source": "docs/rd/apparences-themes.md",
+   "ligne": 1
+  },
+  {
+   "id": "long:arbre-accessibilite-2026-11-13",
+   "horizon": "long",
+   "titre": "Arbre d’accessibilité : ce que le navigateur expose, mesuré le 13 novembre 2026",
+   "resume": "Statut : **relevé technique par l’agent**, pas un audit d’accessibilité, ni une",
+   "source": "docs/rd/arbre-accessibilite-2026-11-13.md",
    "ligne": 1
   },
   {
@@ -644,6 +652,15 @@
    "source": "docs/rd/avancees.toml",
    "ligne": 1613,
    "date": "2026-11-11"
+  },
+  {
+   "id": "moyen:avancee:arbre-accessibilite-2026-11-13",
+   "horizon": "moyen",
+   "titre": "Ce qu’un lecteur d’écran reçoit ne se lit pas dans le HTML : 397 listes muettes trouvées dans l’arbre",
+   "resume": "Le dépôt mesurait les contrastes, l’indicateur de focus, la taille des cibles, l’espacement du texte et les violations d’axe-core.",
+   "source": "docs/rd/avancees.toml",
+   "ligne": 1694,
+   "date": "2026-11-13"
   },
   {
    "id": "moyen:avancee:attente-navigateur-nommee",
@@ -1830,7 +1847,7 @@
    "titre": "2026-10-12 — Barre de parcours compacte et plan global de consolidation",
    "resume": "Signal et périmètre : demande d’alléger les commandes de pages visitées et de mieux intégrer leur barre à l’accueil et aux pages du site ; revue de structure…",
    "source": "docs/rd/journal.md",
-   "ligne": 3440
+   "ligne": 3455
   },
   {
    "id": "moyen:journal:2026-10-12:contraste,-defilement-et-clavier-dans-le-simulat",
@@ -1838,7 +1855,7 @@
    "titre": "2026-10-12 — Contraste, défilement et clavier dans le simulateur",
    "resume": "Signal : un contrôle axe initial avait relevé 178 cibles de contraste et deux régions défilantes non accessibles au clavier dans la page du simulateur.",
    "source": "docs/rd/journal.md",
-   "ligne": 3465
+   "ligne": 3480
   },
   {
    "id": "moyen:journal:2026-10-12:mise-en-place-du-dispositif-de-r&d-multi-agent",
@@ -1846,7 +1863,7 @@
    "titre": "2026-10-12 — Mise en place du dispositif de R&D multi-agent",
    "resume": "Décision : utiliser AGENTS.md comme consigne commune, des cartes de skills sous .agents/skills/, le manuel…",
    "source": "docs/rd/journal.md",
-   "ligne": 3429
+   "ligne": 3444
   },
   {
    "id": "moyen:journal:2026-10-12:verification-fonctionnelle-transversale",
@@ -1854,7 +1871,7 @@
    "titre": "2026-10-12 — Vérification fonctionnelle transversale",
    "resume": "Demande reprise : s’assurer que les principales surfaces et interactions déjà présentes sont reliées et utilisables sans retirer de contenu.",
    "source": "docs/rd/journal.md",
-   "ligne": 3452
+   "ligne": 3467
   },
   {
    "id": "moyen:journal:2026-10-13:accueil-simplifie-et-espace-de-suivi-pour-eva",
@@ -1862,7 +1879,7 @@
    "titre": "2026-10-13 — Accueil simplifié et espace de suivi pour ÉVA",
    "resume": "Signal : le texte « Faire société à partir de ce que chacune et chacun apporte » a été jugé peu compréhensible.",
    "source": "docs/rd/journal.md",
-   "ligne": 3355
+   "ligne": 3370
   },
   {
    "id": "moyen:journal:2026-10-13:bibliotheque-polyvalente-de-skills-et-curation-c",
@@ -1870,7 +1887,7 @@
    "titre": "2026-10-13 — Bibliothèque polyvalente de skills et curation contrôlée",
    "resume": "Demande : conserver les méthodes réutilisables dans le dépôt et repérer de nouvelles compétences pour des tâches variées, sans import indiscriminé.",
    "source": "docs/rd/journal.md",
-   "ligne": 3405
+   "ligne": 3420
   },
   {
    "id": "moyen:journal:2026-10-13:commandes-du-parcours-regroupees-dans-une-bascul",
@@ -1878,7 +1895,7 @@
    "titre": "2026-10-13 — Commandes du parcours regroupées dans une bascule",
    "resume": "Demande et hypothèse : regrouper Précédent, Suivant, Accueil et Dernière vue derrière une seule commande dans la barre commune, afin que les quatre actions…",
    "source": "docs/rd/journal.md",
-   "ligne": 3385
+   "ligne": 3400
   },
   {
    "id": "moyen:journal:2026-10-13:controle-reduire/agrandir-de-l’en-tete-adaptatif",
@@ -1886,7 +1903,7 @@
    "titre": "2026-10-13 — Contrôle Réduire/Agrandir de l’en-tête adaptatif",
    "resume": "Demande et hypothèse : ajouter entre Menu et Affichage un moyen de libérer de la hauteur sur téléphone, tout en gardant disponibles navigation, réglages et…",
    "source": "docs/rd/journal.md",
-   "ligne": 3395
+   "ligne": 3410
   },
   {
    "id": "moyen:journal:2026-10-13:harmonisation-visuelle-des-commandes-du-bandeau",
@@ -1894,7 +1911,7 @@
    "titre": "2026-10-13 — Harmonisation visuelle des commandes du bandeau",
    "resume": "Signal : la barre « Menu / Réduire / Parcours / Affichage » a été signalée comme visuellement dispersée et peu cohérente avec l’identité générale du site.",
    "source": "docs/rd/journal.md",
-   "ligne": 3365
+   "ligne": 3380
   },
   {
    "id": "moyen:journal:2026-10-13:indexabilite-et-reperes-pour-les-lecteurs-automa",
@@ -1902,7 +1919,7 @@
    "titre": "2026-10-13 — Indexabilité et repères pour les lecteurs automatiques",
    "resume": "Signal et audit : demande d’améliorer la découverte des pages par les moteurs et les outils de lecture, sans promettre leur indexation ou leur classement.",
    "source": "docs/rd/journal.md",
-   "ligne": 3343
+   "ligne": 3358
   },
   {
    "id": "moyen:journal:2026-10-13:paliers-de-texte-50–150-%-et-navigation-stable-a",
@@ -1910,7 +1927,7 @@
    "titre": "2026-10-13 — Paliers de texte 50–150 % et navigation stable à fort agrandissement",
    "resume": "Signal : demande d’abaisser le réglage « Affichage » à 50 % pour montrer davantage de contenu et observation d’une barre de navigation qui s’empile et prend…",
    "source": "docs/rd/journal.md",
-   "ligne": 3375
+   "ligne": 3390
   },
   {
    "id": "moyen:journal:2026-10-13:skills-claude-pour-la-direction-artistique-et-le",
@@ -1918,7 +1935,7 @@
    "titre": "2026-10-13 — Skills Claude pour la direction artistique et le mouvement web",
    "resume": "Signal : demande d'une identité visuelle plus ludique et distinctive, d'animations web et d'une impression de découverte lors des visites répétées, pour…",
    "source": "docs/rd/journal.md",
-   "ligne": 3417
+   "ligne": 3432
   },
   {
    "id": "moyen:journal:2026-10-13:tour-r&d-de-coherence-des-textes-publics",
@@ -1926,7 +1943,7 @@
    "titre": "2026-10-13 — Tour R&D de cohérence des textes publics",
    "resume": "Signal et périmètre : demande de conduire un cycle R&D complet avec brainstorming, vérifier la cohérence des textes du site et optimiser sans inventer de…",
    "source": "docs/rd/journal.md",
-   "ligne": 3329
+   "ligne": 3344
   },
   {
    "id": "moyen:journal:2026-10-14:correction-du-panneau-affichage-sur-smartphone",
@@ -1934,7 +1951,7 @@
    "titre": "2026-10-14 — Correction du panneau Affichage sur smartphone",
    "resume": "Signal : retour signalant que le panneau « Affichage » peut se décaler à gauche et devenir partiellement invisible sur smartphone, en particulier lorsque le…",
    "source": "docs/rd/journal.md",
-   "ligne": 3303
+   "ligne": 3318
   },
   {
    "id": "moyen:journal:2026-10-14:delai-de-deploiement-github-pages-apres-la-nouve",
@@ -1942,7 +1959,7 @@
    "titre": "2026-10-14 — Délai de déploiement GitHub Pages après la nouvelle présentation",
    "resume": "Signal : après la fusion de la PR #35, le contrôle qualité et la veille ont réussi, mais la publication Pages a expiré pendant Deploy to GitHub Pages (run…",
    "source": "docs/rd/journal.md",
-   "ligne": 3277
+   "ligne": 3292
   },
   {
    "id": "moyen:journal:2026-10-14:essais-chromium-des-panneaux-et-du-reflow-mobile",
@@ -1950,7 +1967,7 @@
    "titre": "2026-10-14 — Essais Chromium des panneaux et du reflow mobile",
    "resume": "Périmètre : création du harnais navigateur outils/test-experience.cjs, dans la continuité de la matrice d’essais.",
    "source": "docs/rd/journal.md",
-   "ligne": 3250
+   "ligne": 3265
   },
   {
    "id": "moyen:journal:2026-10-14:largeur-stable-du-bouton-agrandir/reduire",
@@ -1958,7 +1975,7 @@
    "titre": "2026-10-14 — Largeur stable du bouton Agrandir/Réduire",
    "resume": "Signal et reproduction : après la correction du retour compact, le bouton changeait encore visiblement de largeur quand son texte basculait.",
    "source": "docs/rd/journal.md",
-   "ligne": 3240
+   "ligne": 3255
   },
   {
    "id": "moyen:journal:2026-10-14:orientation-des-fleches-des-panneaux-affichage-e",
@@ -1966,7 +1983,7 @@
    "titre": "2026-10-14 — Orientation des flèches des panneaux Affichage et Présentation",
    "resume": "Signal : retour indiquant que les flèches décoratives restent fixes quand « Affichage » ou « Présentation » s’ouvre.",
    "source": "docs/rd/journal.md",
-   "ligne": 3295
+   "ligne": 3310
   },
   {
    "id": "moyen:journal:2026-10-14:presentation-de-l’association-et-trois-reperes-d",
@@ -1974,7 +1991,7 @@
    "titre": "2026-10-14 — Présentation de l’association et trois repères de réflexion sur l’accueil",
    "resume": "Signal et décision : l’utilisateur a retrouvé et fourni une proposition de rédaction issue d’Arena, absente du dépôt.",
    "source": "docs/rd/journal.md",
-   "ligne": 3285
+   "ligne": 3300
   },
   {
    "id": "moyen:journal:2026-10-14:presentations-personnalisables-et-panorama-compo",
@@ -1982,7 +1999,7 @@
    "titre": "2026-10-14 — Présentations personnalisables et Panorama composite",
    "resume": "Signal et périmètre : demande d’ajouter dans la barre supérieure une commande repliable permettant de choisir une présentation CSS sur tout le site et dans le…",
    "source": "docs/rd/journal.md",
-   "ligne": 3311
+   "ligne": 3326
   },
   {
    "id": "moyen:journal:2026-10-14:protocole-editorial-et-contexte-des-echanges-rep",
@@ -1990,7 +2007,7 @@
    "titre": "2026-10-14 — Protocole éditorial et contexte des échanges repris depuis Drive",
    "resume": "Signal et décision : les échanges transmis confirment une ligne éditoriale positive et concrète fondée sur les expériences, le partage des savoirs et des…",
    "source": "docs/rd/journal.md",
-   "ligne": 3268
+   "ligne": 3283
   },
   {
    "id": "moyen:journal:2026-10-14:recompactage-de-l’en-tete-en-fenetre-tres-etroit",
@@ -1998,7 +2015,7 @@
    "titre": "2026-10-14 — Recompactage de l’en-tête en fenêtre très étroite",
    "resume": "Signal rapporté en Chrome : en réduisant fortement la largeur de la fenêtre, le bouton « Agrandir » présentait un défaut visuel et la personne souhaitait que…",
    "source": "docs/rd/journal.md",
-   "ligne": 3259
+   "ligne": 3274
   },
   {
    "id": "moyen:journal:2026-10-14:remediation-ci-et-diagnostic-du-domaine",
@@ -2006,7 +2023,7 @@
    "titre": "2026-10-14 — Remédiation CI et diagnostic du domaine",
    "resume": "Signal et périmètre : demande de régler les problèmes restés ouverts après le tour R&D : avertissements des workflows GitHub Actions, raccordement de…",
    "source": "docs/rd/journal.md",
-   "ligne": 3320
+   "ligne": 3335
   },
   {
    "id": "moyen:journal:2026-10-15:agrandir-le-logo-a-cote-des-boutons-reduits",
@@ -2014,7 +2031,7 @@
    "titre": "2026-10-15 — Agrandir le logo à côté des boutons réduits",
    "resume": "Signal : le logo compact restait trop petit à côté du groupe de boutons (deux rangées).",
    "source": "docs/rd/journal.md",
-   "ligne": 3016
+   "ligne": 3031
   },
   {
    "id": "moyen:journal:2026-10-15:boutons-encore-plus-serres-en-mode-reduit",
@@ -2022,7 +2039,7 @@
    "titre": "2026-10-15 — Boutons encore plus serrés en mode réduit",
    "resume": "Signal : les boutons du mode réduit restaient gros (min-height 44 px imposée après coup par les media queries).",
    "source": "docs/rd/journal.md",
-   "ligne": 3030
+   "ligne": 3045
   },
   {
    "id": "moyen:journal:2026-10-15:chaque-phrase-commence-en-debut-de-ligne",
@@ -2030,7 +2047,7 @@
    "titre": "2026-10-15 — Chaque phrase commence en début de ligne",
    "resume": "Signal : les débuts de phrase se retrouvaient au milieu d’une ligne, avec la suite en dessous.",
    "source": "docs/rd/journal.md",
-   "ligne": 3058
+   "ligne": 3073
   },
   {
    "id": "moyen:journal:2026-10-15:echelle-france-/-monde-sur-une-frise-fictive",
@@ -2038,7 +2055,7 @@
    "titre": "2026-10-15 — Échelle France / monde sur une frise fictive",
    "resume": "Signal : continuer et fusionner.",
    "source": "docs/rd/journal.md",
-   "ligne": 3106
+   "ligne": 3121
   },
   {
    "id": "moyen:journal:2026-10-15:favicon-au-logo-m.r.s.c.",
@@ -2046,7 +2063,7 @@
    "titre": "2026-10-15 — Favicon au logo M.R.S.C.",
    "resume": "Signal : pas d’icône dans la barre d’onglets / favoris ; le logo identifie mieux le site.",
    "source": "docs/rd/journal.md",
-   "ligne": 3098
+   "ligne": 3113
   },
   {
    "id": "moyen:journal:2026-10-15:logo-compact-a-l’echelle-des-boutons",
@@ -2054,7 +2071,7 @@
    "titre": "2026-10-15 — Logo compact à l’échelle des boutons",
    "resume": "Signal : après le resserrement des boutons, le logo compact restait trop grand.",
    "source": "docs/rd/journal.md",
-   "ligne": 3023
+   "ligne": 3038
   },
   {
    "id": "moyen:journal:2026-10-15:logo-compact-hors-du-groupe-de-boutons",
@@ -2062,7 +2079,7 @@
    "titre": "2026-10-15 — Logo compact hors du groupe de boutons",
    "resume": "Signal : en en-tête réduit, le logo s’insérait entre Agrandir et Parcours.",
    "source": "docs/rd/journal.md",
-   "ligne": 3051
+   "ligne": 3066
   },
   {
    "id": "moyen:journal:2026-10-15:migration-de-la-cible-declaree-du-simulateur-ver",
@@ -2070,7 +2087,7 @@
    "titre": "2026-10-15 — Migration de la cible déclarée du simulateur vers Vercel",
    "resume": "Signal : le lien de simulateur.html, la sonde et plusieurs consignes indiquaient encore Render alors que la personne a fourni l’alias Vercel du simulateur.",
    "source": "docs/rd/journal.md",
-   "ligne": 3210
+   "ligne": 3225
   },
   {
    "id": "moyen:journal:2026-10-15:navigation-sans-retour-a-la-ligne-et-prenom-eva",
@@ -2078,7 +2095,7 @@
    "titre": "2026-10-15 — Navigation sans retour à la ligne et prénom Éva",
    "resume": "Signal : les libellés du menu (IA & société, Liens utiles, Nous contacter) se cassaient ; les phrases partaient en milieu de ligne ; préciser qu’ÉVA donne le…",
    "source": "docs/rd/journal.md",
-   "ligne": 3074
+   "ligne": 3089
   },
   {
    "id": "moyen:journal:2026-10-15:proposition-de-presentation-publique-prudente-po",
@@ -2086,7 +2103,7 @@
    "titre": "2026-10-15 — Proposition de présentation publique prudente pour ÉVA",
    "resume": "Constat : la PR #44 (c3c9ce2) a ajouté eva.html et relié la page depuis l’accueil, le sitemap et llms.txt, mais le workflow Pages ne la publiait pas.",
    "source": "docs/rd/journal.md",
-   "ligne": 3201
+   "ligne": 3216
   },
   {
    "id": "moyen:journal:2026-10-15:prospective-et-innovation-pour-l’apprentissage-a",
@@ -2094,7 +2111,7 @@
    "titre": "2026-10-15 — Prospective et innovation pour l’apprentissage à l’horizon 2030",
    "resume": "Question : quelles capacités d’apprentissage et de délibération restent utiles sous plusieurs futurs plausibles de médiation numérique, continuité des…",
    "source": "docs/rd/journal.md",
-   "ligne": 3230
+   "ligne": 3245
   },
   {
    "id": "moyen:journal:2026-10-15:prototype-d’echelle-d’institution",
@@ -2102,7 +2119,7 @@
    "titre": "2026-10-15 — Prototype d’échelle d’institution",
    "resume": "Question : comment commencer une recherche d’information publique par l’échelle (proximité, nationale, européenne) sans enseigner un organigramme ?",
    "source": "docs/rd/journal.md",
-   "ligne": 3164
+   "ligne": 3179
   },
   {
    "id": "moyen:journal:2026-10-15:prototype-d’orientation-vers-un-service-public",
@@ -2110,7 +2127,7 @@
    "titre": "2026-10-15 — Prototype d’orientation vers un service public",
    "resume": "Question : comment aider à trouver un point d’entrée public et à préparer un formulaire, sans enseigner une procédure en vigueur ni un conseil juridique ?",
    "source": "docs/rd/journal.md",
-   "ligne": 3191
+   "ligne": 3206
   },
   {
    "id": "moyen:journal:2026-10-15:prototype-interet-/-frais-sur-un-credit-fictif",
@@ -2118,7 +2135,7 @@
    "titre": "2026-10-15 — Prototype intérêt / frais sur un crédit fictif",
    "resume": "Signal : poursuivre le cycle R&D après fusion de la PR #52 ; sujet banque-credit-interets encore à créer.",
    "source": "docs/rd/journal.md",
-   "ligne": 3130
+   "ligne": 3145
   },
   {
    "id": "moyen:journal:2026-10-15:prototype-lecture-d’une-licence-logicielle",
@@ -2126,7 +2143,7 @@
    "titre": "2026-10-15 — Prototype lecture d’une licence logicielle",
    "resume": "Question : comment aider à lire une notice de licence avant de réutiliser un programme, sans donner d’avis juridique ?",
    "source": "docs/rd/journal.md",
-   "ligne": 3173
+   "ligne": 3188
   },
   {
    "id": "moyen:journal:2026-10-15:prototype-lecture-d’une-mention-de-garantie",
@@ -2134,7 +2151,7 @@
    "titre": "2026-10-15 — Prototype lecture d’une mention de garantie",
    "resume": "Question : comment lire un ticket d’achat fictif (vendeur, objet, prix, date, mention) sans enseigner le droit de la garantie ?",
    "source": "docs/rd/journal.md",
-   "ligne": 3155
+   "ligne": 3170
   },
   {
    "id": "moyen:journal:2026-10-15:prototype-table-/-requete-/-page-web",
@@ -2142,7 +2159,7 @@
    "titre": "2026-10-15 — Prototype table / requête / page Web",
    "resume": "Question : comment distinguer un stockage structuré, une question posée aux données et un affichage Web, sans enseigner un langage de requête ?",
    "source": "docs/rd/journal.md",
-   "ligne": 3182
+   "ligne": 3197
   },
   {
    "id": "moyen:journal:2026-10-15:r&d,-innovation-et-prospective-:-citation-/-resu",
@@ -2150,7 +2167,7 @@
    "titre": "2026-10-15 — R&D, innovation et prospective : citation / résumé",
    "resume": "Signal : demander de faire la R&D, l’innovation et la prospective, puis fusionner.",
    "source": "docs/rd/journal.md",
-   "ligne": 3114
+   "ligne": 3129
   },
   {
    "id": "moyen:journal:2026-10-15:r&d,-innovation-et-prospective-:-source-de-sante",
@@ -2158,7 +2175,7 @@
    "titre": "2026-10-15 — R&D, innovation et prospective : source de santé publique",
    "resume": "Signal : continuer la R&D, l’innovation et la prospective, puis fusionner.",
    "source": "docs/rd/journal.md",
-   "ligne": 3090
+   "ligne": 3105
   },
   {
    "id": "moyen:journal:2026-10-15:ranger-les-boutons-du-mode-reduit",
@@ -2166,7 +2183,7 @@
    "titre": "2026-10-15 — Ranger les boutons du mode réduit",
    "resume": "Signal : en en-tête réduit, Menu, Agrandir, Parcours, Affichage et Présentation s’empilaient sans alignement.",
    "source": "docs/rd/journal.md",
-   "ligne": 3044
+   "ligne": 3059
   },
   {
    "id": "moyen:journal:2026-10-15:reduire-le-padding-des-boutons-en-mode-compact",
@@ -2174,7 +2191,7 @@
    "titre": "2026-10-15 — Réduire le padding des boutons en mode compact",
    "resume": "Signal : en mode réduit, surtout sur smartphone, les boutons étaient trop grands autour du texte.",
    "source": "docs/rd/journal.md",
-   "ligne": 3037
+   "ligne": 3052
   },
   {
    "id": "moyen:journal:2026-10-15:retirer-le-repere-«-cp-»-des-textes-d’accueil-de",
@@ -2182,7 +2199,7 @@
    "titre": "2026-10-15 — Retirer le repère « CP » des textes d’accueil de l’apprentissage",
    "resume": "Signal : la personne a vu sur le site la mention « des bases du CP jusqu’aux spécialités », jugée trop péjorative pour qui vient apprendre, et un compteur…",
    "source": "docs/rd/journal.md",
-   "ligne": 3146
+   "ligne": 3161
   },
   {
    "id": "moyen:journal:2026-10-15:taches-candidates-pour-les-controles-d’affichage",
@@ -2190,7 +2207,7 @@
    "titre": "2026-10-15 — Tâches candidates pour les contrôles d’affichage et de navigation",
    "resume": "Signal observé dans le dépôt : le protocole existant proposait huit tâches centrées sur le catalogue, les fiches et les Escales; depuis sa rédaction, le site…",
    "source": "docs/rd/journal.md",
-   "ligne": 3220
+   "ligne": 3235
   },
   {
    "id": "moyen:journal:2026-10-15:valoriser-les-langues-deja-connues",
@@ -2198,7 +2215,7 @@
    "titre": "2026-10-15 — Valoriser les langues déjà connues",
    "resume": "Signal : poursuivre le cycle et produire du contenu qui valorise l’apprentissage.",
    "source": "docs/rd/journal.md",
-   "ligne": 3122
+   "ligne": 3137
   },
   {
    "id": "moyen:journal:2026-10-15:valoriser-l’apprentissage-et-prototype-d’informa",
@@ -2206,7 +2223,7 @@
    "titre": "2026-10-15 — Valoriser l’apprentissage et prototype d’information électorale",
    "resume": "Signal : la personne demande de valoriser l’apprentissage (après le retrait du CP) et de poursuivre la R&D.",
    "source": "docs/rd/journal.md",
-   "ligne": 3138
+   "ligne": 3153
   },
   {
    "id": "moyen:journal:2026-10-15:visuel-3d-a-l’accueil-et-logo-en-en-tete-reduit",
@@ -2214,7 +2231,7 @@
    "titre": "2026-10-15 — Visuel 3D à l’accueil et logo en en-tête réduit",
    "resume": "Signal : en mode réduit, l’identité disparaît ; intégrer le visuel 3D choisi à l’accueil.",
    "source": "docs/rd/journal.md",
-   "ligne": 3082
+   "ligne": 3097
   },
   {
    "id": "moyen:journal:2026-10-15:visuel-d’accueil-valide",
@@ -2222,7 +2239,7 @@
    "titre": "2026-10-15 — Visuel d’accueil validé",
    "resume": "Signal : la légende présentait encore le bandeau 3D comme une proposition à relire, alors qu’il a été validé.",
    "source": "docs/rd/journal.md",
-   "ligne": 3066
+   "ligne": 3081
   },
   {
    "id": "moyen:journal:2026-10-16:accroche-humaniste-du-film-des-statuts",
@@ -2230,7 +2247,7 @@
    "titre": "2026-10-16 — Accroche humaniste du film des statuts",
    "resume": "Signal : partir du repli (écrans, distance) pour faire revivre convivialité, savoir-être, partage des savoir-faire et des expériences ; découvrir le M.R.S.C.",
    "source": "docs/rd/journal.md",
-   "ligne": 2886
+   "ligne": 2901
   },
   {
    "id": "moyen:journal:2026-10-16:achats-indexes-sur-les-dons,-puis-complement",
@@ -2238,7 +2255,7 @@
    "titre": "2026-10-16 — Achats indexés sur les dons, puis complément",
    "resume": "Signal : adapter vraiment les achats à la capacité des dons ; si le total ne permet pas le matériel, conserver / placer les fonds et lancer un appel…",
    "source": "docs/rd/journal.md",
-   "ligne": 2906
+   "ligne": 2921
   },
   {
    "id": "moyen:journal:2026-10-16:bandeau-compact-identique-chrome-et-firefox",
@@ -2246,7 +2263,7 @@
    "titre": "2026-10-16 — Bandeau compact identique Chrome et Firefox",
    "resume": "Signal : le mode réduit était correct dans Firefox, pas dans Chrome (float / flex).",
    "source": "docs/rd/journal.md",
-   "ligne": 2974
+   "ligne": 2989
   },
   {
    "id": "moyen:journal:2026-10-16:bandeau-compact-smartphone-:-boutons-a-droite-du",
@@ -2254,7 +2271,7 @@
    "titre": "2026-10-16 — Bandeau compact smartphone : boutons à droite du logo",
    "resume": "Signal : sur téléphone, Affichage et Présentation passaient sous le logo.",
    "source": "docs/rd/journal.md",
-   "ligne": 2981
+   "ligne": 2996
   },
   {
    "id": "moyen:journal:2026-10-16:bible-lena-/-marc-/-karim-et-video-01",
@@ -2262,7 +2279,7 @@
    "titre": "2026-10-16 — Bible Léna / Marc / Karim et vidéo 01",
    "resume": "Signal : mêmes personnages principaux de A à Z ; figurants et périodes seuls changent ; vieillir sans excès ; première vidéo ; histoire concrète sur toutes…",
    "source": "docs/rd/journal.md",
-   "ligne": 2858
+   "ligne": 2873
   },
   {
    "id": "moyen:journal:2026-10-16:boutons-a-droite-du-logo,-sans-passage-dessous",
@@ -2270,7 +2287,7 @@
    "titre": "2026-10-16 — Boutons à droite du logo, sans passage dessous",
    "resume": "Signal : Présentation passait encore sous le logo.",
    "source": "docs/rd/journal.md",
-   "ligne": 2995
+   "ligne": 3010
   },
   {
    "id": "moyen:journal:2026-10-16:cadre-du-logo-compact,-meme-fichier",
@@ -2278,7 +2295,7 @@
    "titre": "2026-10-16 — Cadre du logo compact, même fichier",
    "resume": "Signal : trop de blanc autour du logo en mode réduit.",
    "source": "docs/rd/journal.md",
-   "ligne": 2967
+   "ligne": 2982
   },
   {
    "id": "moyen:journal:2026-10-16:compilation-drive-+-x17",
@@ -2286,7 +2303,7 @@
    "titre": "2026-10-16 — Compilation Drive + X17",
    "resume": "Signal : zipper toutes les planches sur Drive ; dix autres ; l’association sélectionnera pour des fusions.",
    "source": "docs/rd/journal.md",
-   "ligne": 2753
+   "ligne": 2768
   },
   {
    "id": "moyen:journal:2026-10-16:cycle-r&d-:-boussole,-impression,-prospective",
@@ -2294,7 +2311,7 @@
    "titre": "2026-10-16 — Cycle R&D : boussole, impression, prospective",
    "resume": "Signal : poursuivre R&D, prospective et innovation sur l’ensemble du site, sans inventer de validation.",
    "source": "docs/rd/journal.md",
-   "ligne": 2945
+   "ligne": 2960
   },
   {
    "id": "moyen:journal:2026-10-16:cycle-r&d-:-voisines,-passeport-simulateur,-pied",
@@ -2302,7 +2319,7 @@
    "titre": "2026-10-16 — Cycle R&D : voisines, passeport simulateur, pied de page",
    "resume": "Signal : second cycle R&D / prospective / innovation sur l’ensemble du site, sans inventer de validation.",
    "source": "docs/rd/journal.md",
-   "ligne": 2935
+   "ligne": 2950
   },
   {
    "id": "moyen:journal:2026-10-16:dix-experiences-80s-(x14)",
@@ -2310,7 +2327,7 @@
    "titre": "2026-10-16 — Dix expériences 80s (X14)",
    "resume": "Signal : innover absolument et tenir les codes 80s.",
    "source": "docs/rd/journal.md",
-   "ligne": 2774
+   "ligne": 2789
   },
   {
    "id": "moyen:journal:2026-10-16:dix-experiences-80s-(x15)",
@@ -2318,7 +2335,7 @@
    "titre": "2026-10-16 — Dix expériences 80s (X15)",
    "resume": "Signal : des choses intéressantes, encore ; codes 80s.",
    "source": "docs/rd/journal.md",
-   "ligne": 2767
+   "ligne": 2782
   },
   {
    "id": "moyen:journal:2026-10-16:dix-experiences-de-style-(x10)",
@@ -2326,7 +2343,7 @@
    "titre": "2026-10-16 — Dix expériences de style (X10)",
    "resume": "Signal : innover ; un style déjà repéré dans la série précédente (non nommé) ; dix autres.",
    "source": "docs/rd/journal.md",
-   "ligne": 2802
+   "ligne": 2817
   },
   {
    "id": "moyen:journal:2026-10-16:dix-experiences-de-style-(x11)",
@@ -2334,7 +2351,7 @@
    "titre": "2026-10-16 — Dix expériences de style (X11)",
    "resume": "Signal : continuer la R&D jusqu’au style unique ; dix autres.",
    "source": "docs/rd/journal.md",
-   "ligne": 2795
+   "ligne": 2810
   },
   {
    "id": "moyen:journal:2026-10-16:dix-experiences-de-style-(x12)",
@@ -2342,7 +2359,7 @@
    "titre": "2026-10-16 — Dix expériences de style (X12)",
    "resume": "Signal : dix autres innovants.",
    "source": "docs/rd/journal.md",
-   "ligne": 2788
+   "ligne": 2803
   },
   {
    "id": "moyen:journal:2026-10-16:dix-experiences-de-style-(x13)",
@@ -2350,7 +2367,7 @@
    "titre": "2026-10-16 — Dix expériences de style (X13)",
    "resume": "Signal : dix autres.",
    "source": "docs/rd/journal.md",
-   "ligne": 2781
+   "ligne": 2796
   },
   {
    "id": "moyen:journal:2026-10-16:dix-mixtes-inedits-pour-trouver-la-touche",
@@ -2358,7 +2375,7 @@
    "titre": "2026-10-16 — Dix mixtes inédits pour trouver la touche",
    "resume": "Signal : dix autres, mixtes jamais faits, France.",
    "source": "docs/rd/journal.md",
-   "ligne": 2823
+   "ligne": 2838
   },
   {
    "id": "moyen:journal:2026-10-16:dix-pistes-totalement-nouvelles",
@@ -2366,7 +2383,7 @@
    "titre": "2026-10-16 — Dix pistes totalement nouvelles",
    "resume": "Signal : des essais totalement nouveaux, hors fusions grille/gouache/pixels.",
    "source": "docs/rd/journal.md",
-   "ligne": 2732
+   "ligne": 2747
   },
   {
    "id": "moyen:journal:2026-10-16:dix-planches-france,-plus-de-diner-us",
@@ -2374,7 +2391,7 @@
    "titre": "2026-10-16 — Dix planches France, plus de diner US",
    "resume": "Signal : dix autres styles ; tout en français ; décors en France.",
    "source": "docs/rd/journal.md",
-   "ligne": 2830
+   "ligne": 2845
   },
   {
    "id": "moyen:journal:2026-10-16:dix-styles-d’animation-supplementaires",
@@ -2382,7 +2399,7 @@
    "titre": "2026-10-16 — Dix styles d’animation supplémentaires",
    "resume": "Signal : dix autres, variés.",
    "source": "docs/rd/journal.md",
-   "ligne": 2837
+   "ligne": 2852
   },
   {
    "id": "moyen:journal:2026-10-16:experiences-80s,-humanite-et-sensualite-(x16)",
@@ -2390,7 +2407,7 @@
    "titre": "2026-10-16 — Expériences 80s, humanité et sensualité (X16)",
    "resume": "Signal : ajouter une part de sensualité et d’humanité.",
    "source": "docs/rd/journal.md",
-   "ligne": 2760
+   "ligne": 2775
   },
   {
    "id": "moyen:journal:2026-10-16:fil-narratif-entre-les-decennies",
@@ -2398,7 +2415,7 @@
    "titre": "2026-10-16 — Fil narratif entre les décennies",
    "resume": "Signal : relier intelligemment les décennies par des histoires qui mènent à la conclusion M.R.S.C.",
    "source": "docs/rd/journal.md",
-   "ligne": 2865
+   "ligne": 2880
   },
   {
    "id": "moyen:journal:2026-10-16:fusions-11–20",
@@ -2406,7 +2423,7 @@
    "titre": "2026-10-16 — Fusions 11–20",
    "resume": "Signal : encore des fusions (grille, gouache, pixels, mains).",
    "source": "docs/rd/journal.md",
-   "ligne": 2739
+   "ligne": 2754
   },
   {
    "id": "moyen:journal:2026-10-16:fusions-de-styles-(quatre-planches-choisies)",
@@ -2414,7 +2431,7 @@
    "titre": "2026-10-16 — Fusions de styles (quatre planches choisies)",
    "resume": "Signal : mélanger mots croisés, gouache fraîche, pixels visages, mains ; innover.",
    "source": "docs/rd/journal.md",
-   "ligne": 2746
+   "ligne": 2761
   },
   {
    "id": "moyen:journal:2026-10-16:listes-r&d-eva-et-materiel-ideal",
@@ -2422,7 +2439,7 @@
    "titre": "2026-10-16 — Listes R&D Éva et matériel idéal",
    "resume": "Signal : il faut une liste de travail pour la R&D d’Éva et pour le matériel idéal.",
    "source": "docs/rd/journal.md",
-   "ligne": 2921
+   "ligne": 2936
   },
   {
    "id": "moyen:journal:2026-10-16:logo-compact-:-plus-de-coupe-en-haut",
@@ -2430,7 +2447,7 @@
    "titre": "2026-10-16 — Logo compact : plus de coupe en haut",
    "resume": "Signal : en mode réduit, le haut du logo (barres de couleur) était coupé.",
    "source": "docs/rd/journal.md",
-   "ligne": 2928
+   "ligne": 2943
   },
   {
    "id": "moyen:journal:2026-10-16:logo-compact-a-la-hauteur-des-deux-rangees",
@@ -2438,7 +2455,7 @@
    "titre": "2026-10-16 — Logo compact à la hauteur des deux rangées",
    "resume": "Signal : sur smartphone le logo restait petit (plafond 40 px) à côté des deux rangées de boutons.",
    "source": "docs/rd/journal.md",
-   "ligne": 3009
+   "ligne": 3024
   },
   {
    "id": "moyen:journal:2026-10-16:logo-et-boutons-sans-superposition",
@@ -2446,7 +2463,7 @@
    "titre": "2026-10-16 — Logo et boutons sans superposition",
    "resume": "Signal : le logo étiré recouvrait Menu et Agrandir.",
    "source": "docs/rd/journal.md",
-   "ligne": 3002
+   "ligne": 3017
   },
   {
    "id": "moyen:journal:2026-10-16:mix-vhs+volume-et-cinq-styles-inedits",
@@ -2454,7 +2471,7 @@
    "titre": "2026-10-16 — Mix VHS+volume et cinq styles inédits",
    "resume": "Signal : mixer la piste 3 et la 6, plus cinq inédits.",
    "source": "docs/rd/journal.md",
-   "ligne": 2844
+   "ligne": 2859
   },
   {
    "id": "moyen:journal:2026-10-16:personnages-materiaux-pour-l’identite-pedagogiqu",
@@ -2462,7 +2479,7 @@
    "titre": "2026-10-16 — Personnages-matériaux pour l’identité pédagogique",
    "resume": "Signal : reprendre les matériaux du visuel d’accueil (verre, métal, arcs, cristal) pour des personnages uniques, vidéos de présentation et animations…",
    "source": "docs/rd/journal.md",
-   "ligne": 2718
+   "ligne": 2733
   },
   {
    "id": "moyen:journal:2026-10-16:pistes-nouvelles-11–20",
@@ -2470,7 +2487,7 @@
    "titre": "2026-10-16 — Pistes nouvelles 11–20",
    "resume": "Signal : encore des pistes totalement nouvelles.",
    "source": "docs/rd/journal.md",
-   "ligne": 2725
+   "ligne": 2740
   },
   {
    "id": "moyen:journal:2026-10-16:plan-films-d’animation-des-statuts",
@@ -2478,7 +2495,7 @@
    "titre": "2026-10-16 — Plan films d’animation des statuts",
    "resume": "Signal : expliquer le fonctionnement associatif par des films 3D, depuis le début des statuts, tous les articles, VO française, sous-titres anglais…",
    "source": "docs/rd/journal.md",
-   "ligne": 2900
+   "ligne": 2915
   },
   {
    "id": "moyen:journal:2026-10-16:plan-global-:-une-phrase-par-ligne",
@@ -2486,7 +2503,7 @@
    "titre": "2026-10-16 — Plan global : une phrase par ligne",
    "resume": "Signal : après un point, la phrase suivante restait sur la même ligne ; ce n’est ni joli ni confortable à lire.",
    "source": "docs/rd/journal.md",
-   "ligne": 2955
+   "ligne": 2970
   },
   {
    "id": "moyen:journal:2026-10-16:prologue-en-decennies,-style-80s-colore",
@@ -2494,7 +2511,7 @@
    "titre": "2026-10-16 — Prologue en décennies, style 80s coloré",
    "resume": "Signal : partir des années 80 (tout était possible), faire défiler les décennies, montrer la dégradation des relations et le nombrilisme ; ambiance 80s…",
    "source": "docs/rd/journal.md",
-   "ligne": 2879
+   "ligne": 2894
   },
   {
    "id": "moyen:journal:2026-10-16:seconds-angles-de-presentation-des-statuts",
@@ -2502,7 +2519,7 @@
    "titre": "2026-10-16 — Seconds angles de présentation des statuts",
    "resume": "Signal : les premières chartes mascottes n’étaient pas à la hauteur ; il faut l’angle, pas seulement le dessin.",
    "source": "docs/rd/journal.md",
-   "ligne": 2893
+   "ligne": 2908
   },
   {
    "id": "moyen:journal:2026-10-16:six-pistes-d’animation-(sortie-du-realisme)",
@@ -2510,7 +2527,7 @@
    "titre": "2026-10-16 — Six pistes d’animation (sortie du réalisme)",
    "resume": "Signal : même ambiance 80s, passer au dessin animé pour suivre les personnages ; style neuf, inspiré de plusieurs recettes qui tiennent ; 6 présentations.",
    "source": "docs/rd/journal.md",
-   "ligne": 2851
+   "ligne": 2866
   },
   {
    "id": "moyen:journal:2026-10-16:spark,-serveur-dedie,-cagnotte-et-conscience-com",
@@ -2518,7 +2535,7 @@
    "titre": "2026-10-16 — Spark, serveur dédié, cagnotte et conscience comme question",
    "resume": "Signal : cadrer une première capacité de calcul (type Spark, peu énergivore), un palier serveur, des recherches sur la conscience autonome, et une cagnotte…",
    "source": "docs/rd/journal.md",
-   "ligne": 2913
+   "ligne": 2928
   },
   {
    "id": "moyen:journal:2026-10-16:style-amblin-/-80s-cinema-(bttf,-stranger-things",
@@ -2526,7 +2543,7 @@
    "titre": "2026-10-16 — Style Amblin / 80s cinéma (BTTF, Stranger Things)",
    "resume": "Signal : revoir le style vers Retour vers le futur, Stranger Things, etc.",
    "source": "docs/rd/journal.md",
-   "ligne": 2872
+   "ligne": 2887
   },
   {
    "id": "moyen:journal:2026-10-16:une-ligne-compacte-sur-ordinateur",
@@ -2534,7 +2551,7 @@
    "titre": "2026-10-16 — Une ligne compacte sur ordinateur",
    "resume": "Signal : sur PC, Présentation tombait seul sous un logo trop haut.",
    "source": "docs/rd/journal.md",
-   "ligne": 2988
+   "ligne": 3003
   },
   {
    "id": "moyen:journal:2026-10-16:vingt-mixtes,-lot-2/2",
@@ -2542,7 +2559,7 @@
    "titre": "2026-10-16 — Vingt mixtes, lot 2/2",
    "resume": "Signal : dix autres.",
    "source": "docs/rd/journal.md",
-   "ligne": 2809
+   "ligne": 2824
   },
   {
    "id": "moyen:journal:2026-10-16:vingt-mixtes,-premier-lot-de-dix",
@@ -2550,7 +2567,7 @@
    "titre": "2026-10-16 — Vingt mixtes, premier lot de dix",
    "resume": "Signal : vingt autres mixtes.",
    "source": "docs/rd/journal.md",
-   "ligne": 2816
+   "ligne": 2831
   },
   {
    "id": "moyen:journal:2026-10-17:accessibilite-:-recherche-vide,-aides-et-contras",
@@ -2558,7 +2575,7 @@
    "titre": "2026-10-17 — Accessibilité : recherche vide, aides et contraste du héros",
    "resume": "Signal : après fusion de la PR #93, les états restants étaient la recherche sans résultat, les aides dépliées des fiches, une réponse de mission choisie et…",
    "source": "docs/rd/journal.md",
-   "ligne": 2659
+   "ligne": 2674
   },
   {
    "id": "moyen:journal:2026-10-17:accessibilite-:-toutes-les-pages-et-les-panneaux",
@@ -2566,7 +2583,7 @@
    "titre": "2026-10-17 — Accessibilité : toutes les pages et les panneaux ouverts",
    "resume": "Signal : le premier balayage ne couvrait que huit pages au repos.",
    "source": "docs/rd/journal.md",
-   "ligne": 2671
+   "ligne": 2686
   },
   {
    "id": "moyen:journal:2026-10-17:accessibilite-et-repli-examines-sans-donnee-de-s",
@@ -2574,7 +2591,7 @@
    "titre": "2026-10-17 — Accessibilité et repli examinés sans donnée de santé",
    "resume": "Décision : structurer huit barrières et le risque propre à chaque repli sans déclarer de conformité ni autoriser d’essai avec des personnes.",
    "source": "docs/rd/journal.md",
-   "ligne": 2416
+   "ligne": 2431
   },
   {
    "id": "moyen:journal:2026-10-17:assistance-distinguee-de-la-procuration-et-du-ch",
@@ -2582,7 +2599,7 @@
    "titre": "2026-10-17 — Assistance distinguée de la procuration et du choix",
    "resume": "Décision : séparer assistance, support, procuration, recours et protection contre la coercition avant toute définition opérationnelle.",
    "source": "docs/rd/journal.md",
-   "ligne": 2406
+   "ligne": 2421
   },
   {
    "id": "moyen:journal:2026-10-17:banc-synthetique-du-vote-defini-sans-l’executer",
@@ -2590,7 +2607,7 @@
    "titre": "2026-10-17 — Banc synthétique du vote défini sans l’exécuter",
    "resume": "Décision : préparer un protocole capable d’invalider une solution candidate, sans développer d’urne ni utiliser de données réelles.",
    "source": "docs/rd/journal.md",
-   "ligne": 2521
+   "ligne": 2536
   },
   {
    "id": "moyen:journal:2026-10-17:brief-prospectif-rendu-verifiable",
@@ -2598,7 +2615,7 @@
    "titre": "2026-10-17 — Brief prospectif rendu vérifiable",
    "resume": "Décision : contrôler automatiquement quatre faits internes du brief (fiches, prototypes, initiatives/P0, questions de la Boussole) au lieu de laisser vieillir…",
    "source": "docs/rd/journal.md",
-   "ligne": 2616
+   "ligne": 2631
   },
   {
    "id": "moyen:journal:2026-10-17:chronologie-de-decision-prospective-controlee",
@@ -2606,7 +2623,7 @@
    "titre": "2026-10-17 — Chronologie de décision prospective contrôlée",
    "resume": "Décision : empêcher une trace où la décision précède le brief ou où le réexamen n’est pas postérieur à la décision.",
    "source": "docs/rd/journal.md",
-   "ligne": 2568
+   "ligne": 2583
   },
   {
    "id": "moyen:journal:2026-10-17:comparaison-du-vote-sans-score-ni-classement",
@@ -2614,7 +2631,7 @@
    "titre": "2026-10-17 — Comparaison du vote sans score ni classement",
    "resume": "Décision : comparer l’option A et trois projets existants sans score compensatoire, rang ou probabilité ; une inconnue sur un critère bloquant empêche la…",
    "source": "docs/rd/journal.md",
-   "ligne": 2503
+   "ligne": 2518
   },
   {
    "id": "moyen:journal:2026-10-17:continuite-bornee-par-des-arrets-surs",
@@ -2622,7 +2639,7 @@
    "titre": "2026-10-17 — Continuité bornée par des arrêts sûrs",
    "resume": "Décision : traiter sept incidents sans automatiser une décision associative ni dégrader les garanties sous prétexte de disponibilité.",
    "source": "docs/rd/journal.md",
-   "ligne": 2426
+   "ligne": 2441
   },
   {
    "id": "moyen:journal:2026-10-17:date-du-brief-rendue-explicite-et-testable",
@@ -2630,7 +2647,7 @@
    "titre": "2026-10-17 — Date du brief rendue explicite et testable",
    "resume": "Décision : lire la date de référence dans l’en-tête du brief plutôt que la coder dans l’outil, et exiger que l’en-tête du tableau porte la même date.",
    "source": "docs/rd/journal.md",
-   "ligne": 2592
+   "ligne": 2607
   },
   {
    "id": "moyen:journal:2026-10-17:decision-et-portefeuille-rendus-coherents",
@@ -2638,7 +2655,7 @@
    "titre": "2026-10-17 — Décision et portefeuille rendus cohérents",
    "resume": "Décision : relier l’état de la trace au statut du portefeuille : une décision vide exige a-cadrer, tandis qu’une décision consignée exige une évolution d’état…",
    "source": "docs/rd/journal.md",
-   "ligne": 2576
+   "ligne": 2591
   },
   {
    "id": "moyen:journal:2026-10-17:decision-suivante-du-vote-bornee-et-tracable",
@@ -2646,7 +2663,7 @@
    "titre": "2026-10-17 — Décision suivante du vote bornée et traçable",
    "resume": "Décision de méthode : demander à l’association un profil statutaire et une voie A/B/C, sans autoriser de scrutin ni présélectionner un outil.",
    "source": "docs/rd/journal.md",
-   "ligne": 2512
+   "ligne": 2527
   },
   {
    "id": "moyen:journal:2026-10-17:directives-statutaires-relevees-pour-le-vote-dis",
@@ -2654,7 +2671,7 @@
    "titre": "2026-10-17 — Directives statutaires relevées pour le vote distanciel",
    "resume": "Source : copie locale assets/documents/statuts-2020.pdf, 25 pages, empreinte SHA-256 938bd5b72d70ab4e3737f61b91818a6813b29cc5453da44c81d5b7f33ca143c3.",
    "source": "docs/rd/journal.md",
-   "ligne": 2530
+   "ligne": 2545
   },
   {
    "id": "moyen:journal:2026-10-17:donnees-du-vote-separees-avant-toute-collecte",
@@ -2662,7 +2679,7 @@
    "titre": "2026-10-17 — Données du vote séparées avant toute collecte",
    "resume": "Décision : modéliser identité, justificatif, bulletin, reçu, preuves, journaux et procurations avant tout essai ; le chiffrement seul ne suffit pas à empêcher…",
    "source": "docs/rd/journal.md",
-   "ligne": 2446
+   "ligne": 2461
   },
   {
    "id": "moyen:journal:2026-10-17:echeances-et-poids-ajoutes-au-garde-fou-prospect",
@@ -2670,7 +2687,7 @@
    "titre": "2026-10-17 — Échéances et poids ajoutés au garde-fou prospectif",
    "resume": "Initiatives : prospective-apprentissages-2030, poids-et-sobriete-numerique.",
    "source": "docs/rd/journal.md",
-   "ligne": 2600
+   "ligne": 2615
   },
   {
    "id": "moyen:journal:2026-10-17:epreuve-de-correlation-rendue-non-executable",
@@ -2678,7 +2695,7 @@
    "titre": "2026-10-17 — Épreuve de corrélation rendue non exécutable",
    "resume": "Décision : formaliser les vues et signaux d’une future épreuve synthétique sans produire de jeu, de code d’attaque ni de seuil numérique.",
    "source": "docs/rd/journal.md",
-   "ligne": 2436
+   "ligne": 2451
   },
   {
    "id": "moyen:journal:2026-10-17:file-de-relecture-des-55-prototypes",
@@ -2686,7 +2703,7 @@
    "titre": "2026-10-17 — File de relecture des 55 prototypes",
    "resume": "Signal : la prochaine action de l'initiative P0 — organiser les relectures — restait une consigne sans support.",
    "source": "docs/rd/journal.md",
-   "ligne": 2640
+   "ligne": 2655
   },
   {
    "id": "moyen:journal:2026-10-17:modele-de-menace-du-vote-rendu-reproductible",
@@ -2694,7 +2711,7 @@
    "titre": "2026-10-17 — Modèle de menace du vote rendu reproductible",
    "resume": "Décision : transformer la revue contradictoire en registre TOML maintenable plutôt qu’en liste implicite dans une architecture.",
    "source": "docs/rd/journal.md",
-   "ligne": 2549
+   "ligne": 2564
   },
   {
    "id": "moyen:journal:2026-10-17:noms-accessibles-et-contrastes-:-balayage-axe-co",
@@ -2702,7 +2719,7 @@
    "titre": "2026-10-17 — Noms accessibles et contrastes : balayage axe-core",
    "resume": "Signal : les essais navigateur du dépôt couvraient le réflow, le zoom et les réglages, mais aucun contrôle automatique ne portait sur les noms accessibles ni…",
    "source": "docs/rd/journal.md",
-   "ligne": 2683
+   "ligne": 2698
   },
   {
    "id": "moyen:journal:2026-10-17:options-de-vote-et-tests-negatifs-du-registre",
@@ -2710,7 +2727,7 @@
    "titre": "2026-10-17 — Options de vote et tests négatifs du registre",
    "resume": "Prospective : quatre options sans probabilité sont comparées : ne pas voter à distance, service existant expertisé, logiciel existant auto-hébergé, nouveau…",
    "source": "docs/rd/journal.md",
-   "ligne": 2540
+   "ligne": 2555
   },
   {
    "id": "moyen:journal:2026-10-17:poids-des-pages,-sobriete-et-reflow-a-320-px",
@@ -2718,7 +2735,7 @@
    "titre": "2026-10-17 — Poids des pages, sobriété et réflow à 320 px",
    "resume": "Signal et périmètre : trois illustrations portaient l’essentiel du poids des pages principales; les essais navigateur du dépôt échouaient déjà sur trois cas…",
    "source": "docs/rd/journal.md",
-   "ligne": 2704
+   "ligne": 2719
   },
   {
    "id": "moyen:journal:2026-10-17:pr-#93-fusionnee-et-publication-verifiee",
@@ -2726,7 +2743,7 @@
    "titre": "2026-10-17 — PR #93 fusionnée et publication vérifiée",
    "resume": "Initiatives : prospective-apprentissages-2030, veille-savoirs-evolutifs, optimisation-du-site.",
    "source": "docs/rd/journal.md",
-   "ligne": 2651
+   "ligne": 2666
   },
   {
    "id": "moyen:journal:2026-10-17:pr-#94-ouverte",
@@ -2734,7 +2751,7 @@
    "titre": "2026-10-17 — PR #94 ouverte",
    "resume": "Initiatives : relire-les-44-prototypes, optimisation-du-site.",
    "source": "docs/rd/journal.md",
-   "ligne": 2632
+   "ligne": 2647
   },
   {
    "id": "moyen:journal:2026-10-17:premiers-ecarts-documentaires-des-candidats",
@@ -2742,7 +2759,7 @@
    "titre": "2026-10-17 — Premiers écarts documentaires des candidats",
    "resume": "Recherche : lecture à commit épinglé de la spécification et du guide outil Belenios, du modèle de confidentialité Helios et du fichier SECURITY ElectionGuard.",
    "source": "docs/rd/journal.md",
-   "ligne": 2483
+   "ligne": 2498
   },
   {
    "id": "moyen:journal:2026-10-17:profils-statutaires-relies-sans-devenir-executab",
@@ -2750,7 +2767,7 @@
    "titre": "2026-10-17 — Profils statutaires reliés sans devenir exécutables",
    "resume": "Décision : relier les 15 relevés à 8 profils distincts sans encoder de quorum, majorité, délai, procuration ou secret directement utilisable par une urne.",
    "source": "docs/rd/journal.md",
-   "ligne": 2474
+   "ligne": 2489
   },
   {
    "id": "moyen:journal:2026-10-17:reprise-r&d,-optimisation-et-pre-mortem-prospect",
@@ -2758,7 +2775,7 @@
    "titre": "2026-10-17 — Reprise R&D, optimisation et pré-mortem prospectif",
    "resume": "Initiatives : relire-les-44-prototypes, optimisation-du-site, prospective-apprentissages-2030.",
    "source": "docs/rd/journal.md",
-   "ligne": 2624
+   "ligne": 2639
   },
   {
    "id": "moyen:journal:2026-10-17:revues-du-vote-separees-par-role",
@@ -2766,7 +2783,7 @@
    "titre": "2026-10-17 — Revues du vote séparées par rôle",
    "resume": "Décision : ne pas laisser une même personne, un agent ou la CI tenir lieu de validation globale ; séparer association décisionnaire, droit/statuts,…",
    "source": "docs/rd/journal.md",
-   "ligne": 2456
+   "ligne": 2471
   },
   {
    "id": "moyen:journal:2026-10-17:sources-candidates-epinglees-sans-selection",
@@ -2774,7 +2791,7 @@
    "titre": "2026-10-17 — Sources candidates épinglées sans sélection",
    "resume": "Recherche : API GitHub et README consultés le 17 octobre 2026 pour les dépôts de Belenios, Helios et ElectionGuard.",
    "source": "docs/rd/journal.md",
-   "ligne": 2493
+   "ligne": 2508
   },
   {
    "id": "moyen:journal:2026-10-17:trace-de-decision-prospective-protegee",
@@ -2782,7 +2799,7 @@
    "titre": "2026-10-17 — Trace de décision prospective protégée",
    "resume": "Décision : distinguer automatiquement une décision en attente d’une trace complète et refuser les traces partielles, sans choisir d’option à la place de…",
    "source": "docs/rd/journal.md",
-   "ligne": 2584
+   "ligne": 2599
   },
   {
    "id": "moyen:journal:2026-10-17:trois-directives-statutaires-manquantes-structur",
@@ -2790,7 +2807,7 @@
    "titre": "2026-10-17 — Trois directives statutaires manquantes structurées",
    "resume": "Constat : le conseil d’éthique, les phases participatives préalables et le procès-verbal d’AGO figuraient dans la note humaine mais pas dans le registre…",
    "source": "docs/rd/journal.md",
-   "ligne": 2465
+   "ligne": 2480
   },
   {
    "id": "moyen:journal:2026-10-17:veille-externe,-brief-de-decision-et-etat-verifi",
@@ -2798,7 +2815,7 @@
    "titre": "2026-10-17 — Veille externe, brief de décision et état vérifiable",
    "resume": "Initiatives : prospective-apprentissages-2030 (P1, a-cadrer) et veille-savoirs-evolutifs (P0, en-cours).",
    "source": "docs/rd/journal.md",
-   "ligne": 2693
+   "ligne": 2708
   },
   {
    "id": "moyen:journal:2026-10-17:verificateur-prospectif-durci-apres-fusion",
@@ -2806,7 +2823,7 @@
    "titre": "2026-10-17 — Vérificateur prospectif durci après fusion",
    "resume": "Décision : supprimer le nombre de domaines codé en dur et le recalculer depuis le catalogue ; couvrir le comptage de la Boussole par trois tests unitaires.",
    "source": "docs/rd/journal.md",
-   "ligne": 2608
+   "ligne": 2623
   },
   {
    "id": "moyen:journal:2026-10-17:vote-distanciel-verifiable-cadre-sans-promesse-a",
@@ -2814,7 +2831,7 @@
    "titre": "2026-10-17 — Vote distanciel vérifiable cadré sans promesse absolue",
    "resume": "Besoin exprimé : permettre un vote à distance secret, vérifiable et résistant au détournement, avec une analogie à la vérification publique de Bitcoin.",
    "source": "docs/rd/journal.md",
-   "ligne": 2558
+   "ligne": 2573
   },
   {
    "id": "moyen:journal:2026-10-18:arbitrage-de-l’ensemble-gele-:-les-couleurs-de-m",
@@ -2822,7 +2839,7 @@
    "titre": "2026-10-18 — Arbitrage de l’ensemble gelé : les couleurs de marque suivent le contraste renforcé",
    "resume": "Décision : brancher sur leurs jetons les littéraux laissés en suspens aux phases 1–2 : les quatre libellés de cartes d’accueil (vert et bleu sur leurs jetons…",
    "source": "docs/rd/journal.md",
-   "ligne": 2343
+   "ligne": 2358
   },
   {
    "id": "moyen:journal:2026-10-18:calcul,-contestation-et-proclamation-separes",
@@ -2830,7 +2847,7 @@
    "titre": "2026-10-18 — Calcul, contestation et proclamation séparés",
    "resume": "Décision : interdire qu’un total calculé devienne automatiquement un résultat associatif.",
    "source": "docs/rd/journal.md",
-   "ligne": 2376
+   "ligne": 2391
   },
   {
    "id": "moyen:journal:2026-10-18:chaine-logicielle-reliee-a-une-porte-humaine-ava",
@@ -2838,7 +2855,7 @@
    "titre": "2026-10-18 — Chaîne logicielle reliée à une porte humaine avant banc",
    "resume": "Décision : exiger sept preuves cumulatives entre source épinglée, dépendances, construction, provenance, écarts, gel des mises à jour et vérification future.",
    "source": "docs/rd/journal.md",
-   "ligne": 2386
+   "ligne": 2401
   },
   {
    "id": "moyen:journal:2026-10-18:classement-normatif-propose-pour-chaque-groupe-d",
@@ -2846,7 +2863,7 @@
    "titre": "2026-10-18 — Classement normatif proposé pour chaque groupe d’articles",
    "resume": "Décision : distinguer ce qui relève des statuts, du règlement, d’une procédure, d’un niveau mixte ou d’une décision préalable.",
    "source": "docs/rd/journal.md",
-   "ligne": 2255
+   "ligne": 2270
   },
   {
    "id": "moyen:journal:2026-10-18:couverture-croisee-et-angles-morts-maintenus-ouv",
@@ -2854,7 +2871,7 @@
    "titre": "2026-10-18 — Couverture croisée et angles morts maintenus ouverts",
    "resume": "Décision : rechercher les trous entre risques, invariants, articles du règlement, preuves et rôles plutôt que déclarer la couverture complète.",
    "source": "docs/rd/journal.md",
-   "ligne": 2228
+   "ligne": 2243
   },
   {
    "id": "moyen:journal:2026-10-18:cycle-projete-des-cles-borne-de-la-designation-a",
@@ -2862,7 +2879,7 @@
    "titre": "2026-10-18 — Cycle projeté des clés borné de la désignation à la destruction",
    "resume": "Décision : formaliser six phases de cérémonie sans primitive locale, secret réel ni autorisation d’exécution.",
    "source": "docs/rd/journal.md",
-   "ligne": 2396
+   "ligne": 2411
   },
   {
    "id": "moyen:journal:2026-10-18:fiches-de-redaction-bornees-pour-les-dix-neuf-ti",
@@ -2870,7 +2887,7 @@
    "titre": "2026-10-18 — Fiches de rédaction bornées pour les dix-neuf titres",
    "resume": "Décision : préparer la rédaction titre par titre sans transformer le squelette en règlement adopté.",
    "source": "docs/rd/journal.md",
-   "ligne": 2237
+   "ligne": 2252
   },
   {
    "id": "moyen:journal:2026-10-18:inventaire-des-couleurs-et-plan-de-jetons-(aucun",
@@ -2878,7 +2895,7 @@
    "titre": "2026-10-18 — Inventaire des couleurs et plan de jetons (aucune valeur modifiée)",
    "resume": "Signal et demande : suite des présentations et du correctif d’en-tête du même jour — réaliser l’inventaire de couleurs que le § 6 de…",
    "source": "docs/rd/journal.md",
-   "ligne": 2312
+   "ligne": 2327
   },
   {
    "id": "moyen:journal:2026-10-18:jetons-de-role,-phase-1-:-84-litteraux-remplaces",
@@ -2886,7 +2903,7 @@
    "titre": "2026-10-18 — Jetons de rôle, phase 1 : 84 littéraux remplacés à valeurs identiques",
    "resume": "Signal et demande : exécuter la phase 1 du plan de l’inventaire des couleurs du même jour, sans changer le rendu.",
    "source": "docs/rd/journal.md",
-   "ligne": 2323
+   "ligne": 2338
   },
   {
    "id": "moyen:journal:2026-10-18:jetons-de-role,-phase-2-:-aventure-et-habillage-",
@@ -2894,7 +2911,7 @@
    "titre": "2026-10-18 — Jetons de rôle, phase 2 : aventure et habillage du simulateur",
    "resume": "Signal et demande : exécuter la phase 2 du plan de l’inventaire des couleurs, toujours sans changer le rendu.",
    "source": "docs/rd/journal.md",
-   "ligne": 2333
+   "ligne": 2348
   },
   {
    "id": "moyen:journal:2026-10-18:jetons-de-role,-phase-2.5-:-scission-des-doubles",
@@ -2902,7 +2919,7 @@
    "titre": "2026-10-18 — Jetons de rôle, phase 2.5 : scission des doubles rôles et surfaces littérales résorbées",
    "resume": "Signal et demande : exécuter le prérequis « phase 2.5 » issu du prototype sombre borné du même jour, sans changer le rendu ni activer quoi que ce soit.",
    "source": "docs/rd/journal.md",
-   "ligne": 2358
+   "ligne": 2373
   },
   {
    "id": "moyen:journal:2026-10-18:matrice-de-tracabilite-des-vingt-groupes-d’artic",
@@ -2910,7 +2927,7 @@
    "titre": "2026-10-18 — Matrice de traçabilité des vingt groupes d’articles",
    "resume": "Décision : relier chaque partie des statuts à son objet, sa compétence, sa preuve, son recours, sa règle d’urgence et son point restant à trancher.",
    "source": "docs/rd/journal.md",
-   "ligne": 2264
+   "ligne": 2279
   },
   {
    "id": "moyen:journal:2026-10-18:mouture-globale-candidate-a-trois-niveaux",
@@ -2918,7 +2935,7 @@
    "titre": "2026-10-18 — Mouture globale candidate à trois niveaux",
    "resume": "Décision : consolider les arbitrages en une architecture où les statuts gardent le pouvoir et les droits, le règlement précise les modalités durables et les…",
    "source": "docs/rd/journal.md",
-   "ligne": 2209
+   "ligne": 2224
   },
   {
    "id": "moyen:journal:2026-10-18:plan-global-de-resilience-et-prevention-des-deto",
@@ -2926,7 +2943,7 @@
    "titre": "2026-10-18 — Plan global de résilience et prévention des détournements",
    "resume": "Décision : cartographier les dynamiques croisées des statuts, les captations internes ou externes, les crises et les erreurs avant de rédiger le règlement…",
    "source": "docs/rd/journal.md",
-   "ligne": 2282
+   "ligne": 2297
   },
   {
    "id": "moyen:journal:2026-10-18:pre-verification-juridique-complete-des-statuts",
@@ -2934,7 +2951,7 @@
    "titre": "2026-10-18 — Pré-vérification juridique complète des statuts",
    "resume": "Décision : relire les 25 pages article par article avant de poursuivre le QCM et la rédaction du règlement intérieur.",
    "source": "docs/rd/journal.md",
-   "ligne": 2291
+   "ligne": 2306
   },
   {
    "id": "moyen:journal:2026-10-18:prototype-sombre-borne-et-non-active-:-faisabili",
@@ -2942,7 +2959,7 @@
    "titre": "2026-10-18 — Prototype sombre borné et non activé : faisabilité partielle",
    "resume": "Démarche : valeurs sombres candidates pour les seuls jetons de rôle, calculées puis injectées uniquement dans la session du navigateur d’essai — aucun fichier…",
    "source": "docs/rd/journal.md",
-   "ligne": 2350
+   "ligne": 2365
   },
   {
    "id": "moyen:journal:2026-10-18:re-prototype-sombre-borne-apres-phase-2.5-:-feui",
@@ -2950,7 +2967,7 @@
    "titre": "2026-10-18 — Re-prototype sombre borné après phase 2.5 : feuille principale débloquée, deux résidus à traiter",
    "resume": "Signal et demande : le prérequis « phase 2.5 » étant rempli, re-prototyper la variante sombre sur les seuls jetons — toujours sans rien activer ni publier de…",
    "source": "docs/rd/journal.md",
-   "ligne": 2367
+   "ligne": 2382
   },
   {
    "id": "moyen:journal:2026-10-18:registre-controlable-des-risques-statutaires",
@@ -2958,7 +2975,7 @@
    "titre": "2026-10-18 — Registre contrôlable des risques statutaires",
    "resume": "Décision : transformer le brainstorming global en registre structuré sans score, probabilité ni prétention d’exhaustivité.",
    "source": "docs/rd/journal.md",
-   "ligne": 2273
+   "ligne": 2288
   },
   {
    "id": "moyen:journal:2026-10-18:six-presentations-par-intention-derriere-«-prese",
@@ -2966,7 +2983,7 @@
    "titre": "2026-10-18 — Six présentations par intention derrière « Présentation »",
    "resume": "Signal et demande : produire d’autres personnalisations de présentation via le bouton prévu, avec des compositions pertinentes qui donnent envie de profiter…",
    "source": "docs/rd/journal.md",
-   "ligne": 2300
+   "ligne": 2315
   },
   {
    "id": "moyen:journal:2026-10-18:squelette-non-adopte-du-reglement-interieur",
@@ -2974,7 +2991,7 @@
    "titre": "2026-10-18 — Squelette non adopté du règlement intérieur",
    "resume": "Décision : organiser les modalités candidates sans transformer les cinq décisions préalables en règles ni présenter le projet comme adopté.",
    "source": "docs/rd/journal.md",
-   "ligne": 2246
+   "ligne": 2261
   },
   {
    "id": "moyen:journal:2026-10-18:variantes-pour-preserver-la-vision-sans-captatio",
@@ -2982,7 +2999,7 @@
    "titre": "2026-10-18 — Variantes pour préserver la vision sans captation",
    "resume": "Décision : comparer plusieurs solutions pour chaque point sensible au lieu d’imposer immédiatement une rédaction unique.",
    "source": "docs/rd/journal.md",
-   "ligne": 2218
+   "ligne": 2233
   },
   {
    "id": "moyen:journal:2026-10-19:doublons-inutiles-retires-du-depot,-rien-d'autre",
@@ -2990,7 +3007,7 @@
    "titre": "2026-10-19 — Doublons inutiles retirés du dépôt, rien d'autre en attente",
    "resume": "Signal : demande de ne plus rien laisser en attente, de fusionner ce qui reste et de supprimer les doublons inutiles.",
    "source": "docs/rd/journal.md",
-   "ligne": 2108
+   "ligne": 2123
   },
   {
    "id": "moyen:journal:2026-10-19:fusionner-et-importer-sans-perte-:-controle-ajou",
@@ -2998,7 +3015,7 @@
    "titre": "2026-10-19 — Fusionner et importer sans perte : contrôle ajouté et branches absorbées supprimées",
    "resume": "Signal : exigence que toute fusion ou import se fasse sans perte de contenu et sans laisser d'erreur ouverte.",
    "source": "docs/rd/journal.md",
-   "ligne": 2130
+   "ligne": 2145
   },
   {
    "id": "moyen:journal:2026-10-19:fusions-du-19-octobre-:-point,-controle-d'integr",
@@ -3006,7 +3023,7 @@
    "titre": "2026-10-19 — Fusions du 19 octobre : point, contrôle d'intégrité et liens de la bible",
    "resume": "Initiatives : direction-artistique-motion, relire-les-44-prototypes, optimisation-du-site, prospective-apprentissages-2030, vote-distanciel-verifiable.",
    "source": "docs/rd/journal.md",
-   "ligne": 2186
+   "ligne": 2201
   },
   {
    "id": "moyen:journal:2026-10-19:l'apercu-local-avait-sa-propre-liste-de-fichiers",
@@ -3014,7 +3031,7 @@
    "titre": "2026-10-19 — L'aperçu local avait sa propre liste de fichiers et divergeait du site",
    "resume": "Initiatives : optimisation-du-site, coherence-textes-publics.",
    "source": "docs/rd/journal.md",
-   "ligne": 2119
+   "ligne": 2134
   },
   {
    "id": "moyen:journal:2026-10-19:l'icone-192-px-branchee-sur-les-94-pages,-plus-a",
@@ -3022,7 +3039,7 @@
    "titre": "2026-10-19 — L'icône 192 px branchée sur les 94 pages, plus aucune ressource orpheline",
    "resume": "Signal : finir le ménage sans rien perdre et sans laisser de ressource livrée pour rien.",
    "source": "docs/rd/journal.md",
-   "ligne": 2097
+   "ligne": 2112
   },
   {
    "id": "moyen:journal:2026-10-19:la-lecture-des-en-tetes-suit-la-publication-au-l",
@@ -3030,7 +3047,7 @@
    "titre": "2026-10-19 — La lecture des en-têtes suit la publication au lieu de la précéder",
    "resume": "Signal : après la fusion du correctif du favicon, Vérifier les en-têtes servis par l'hébergement a échoué sur main alors que le fichier était correct.",
    "source": "docs/rd/journal.md",
-   "ligne": 2142
+   "ligne": 2157
   },
   {
    "id": "moyen:journal:2026-10-19:le-site-publie-manquait-d'un-fichier-:-le-favico",
@@ -3038,7 +3055,7 @@
    "titre": "2026-10-19 — Le site publié manquait d'un fichier : le favicon",
    "resume": "Initiatives : optimisation-du-site, coherence-textes-publics.",
    "source": "docs/rd/journal.md",
-   "ligne": 2153
+   "ligne": 2168
   },
   {
    "id": "moyen:journal:2026-10-19:menage-des-propositions-de-fusion-et-des-branche",
@@ -3046,7 +3063,7 @@
    "titre": "2026-10-19 — Ménage des propositions de fusion et des branches résiduelles",
    "resume": "Signal : aucune proposition de fusion n'était plus ouverte, mais deux branches distantes restaient en attente et le dépôt s'était alourdi de 1,29 Go de…",
    "source": "docs/rd/journal.md",
-   "ligne": 2199
+   "ligne": 2214
   },
   {
    "id": "moyen:journal:2026-10-19:planches-conservees-sans-perte-et-archive-scelle",
@@ -3054,7 +3071,7 @@
    "titre": "2026-10-19 — Planches conservées sans perte et archive scellée",
    "resume": "Signal : exigence explicite de ne rien perdre, ni en qualité ni en fonction, après la sortie des planches de l'arbre.",
    "source": "docs/rd/journal.md",
-   "ligne": 2165
+   "ligne": 2180
   },
   {
    "id": "moyen:journal:2026-10-19:planches-des-statuts-sorties-de-l'arbre,-origina",
@@ -3062,7 +3079,7 @@
    "titre": "2026-10-19 — Planches des statuts sorties de l'arbre, originales archivées",
    "resume": "Signal : les 505 planches entrées avec la PR #85 pesaient 1 290,9 Mo et n'étaient ni publiées ni validées ; le dépôt dépassait le seuil d'alerte de GitHub et…",
    "source": "docs/rd/journal.md",
-   "ligne": 2176
+   "ligne": 2191
   },
   {
    "id": "moyen:journal:2026-10-19:une-ressource-livree-sans-etre-citee-fait-desorm",
@@ -3070,7 +3087,7 @@
    "titre": "2026-10-19 — Une ressource livrée sans être citée fait désormais échouer la porte",
    "resume": "Signal : favicon-192.png n'avait été trouvée orpheline qu'à la main, après coup.",
    "source": "docs/rd/journal.md",
-   "ligne": 2085
+   "ligne": 2100
   },
   {
    "id": "moyen:journal:2026-10-20:ce-qui-est-mecanique-est-automatise-:-16-control",
@@ -3078,7 +3095,7 @@
    "titre": "2026-10-20 — Ce qui est mécanique est automatisé : 16 contrôles par fiche",
    "resume": "Frontière posée noir sur blanc : six questions restent humaines (la source dit-elle ce que la fiche affirme ; les exemples sont-ils exacts ; les droits…",
    "source": "docs/rd/journal.md",
-   "ligne": 1958
+   "ligne": 1973
   },
   {
    "id": "moyen:journal:2026-10-20:deuxieme-fiche-de-prononciation-et-lecture-direc",
@@ -3086,7 +3103,7 @@
    "titre": "2026-10-20 — Deuxième fiche de prononciation et lecture directe de l'échelle du CEFR",
    "resume": "Signal : la carte de sujet demandait deux choses restées en suspens — lire l'échelle de phonologie du Companion Volume 2020 au texte, et traiter un second…",
    "source": "docs/rd/journal.md",
-   "ligne": 1985
+   "ligne": 2000
   },
   {
    "id": "moyen:journal:2026-10-20:la-sonde-de-production-couvre-enfin-les-ressourc",
@@ -3094,7 +3111,7 @@
    "titre": "2026-10-20 — La sonde de production couvre enfin les ressources que les pages demandent",
    "resume": "Signal : la revue de cohérence cherchait une divergence entre ce que le site demande et ce qui est contrôlé.",
    "source": "docs/rd/journal.md",
-   "ligne": 2053
+   "ligne": 2068
   },
   {
    "id": "moyen:journal:2026-10-20:le-site-a-cesse-de-repondre,-puis-est-revenu-:-s",
@@ -3102,7 +3119,7 @@
    "titre": "2026-10-20 — Le site a cessé de répondre, puis est revenu : surveillance quotidienne",
    "resume": "Symptôme constaté par une personne, pas par un contrôle : l’adresse publique répondait 404 « There isn’t a GitHub Pages site here », alors que le dernier…",
    "source": "docs/rd/journal.md",
-   "ligne": 1898
+   "ligne": 1913
   },
   {
    "id": "moyen:journal:2026-10-20:le-statut-«-relu-»-cesse-d'etre-une-opinion-:-re",
@@ -3110,7 +3127,7 @@
    "titre": "2026-10-20 — Le statut « relu » cesse d'être une opinion : registre vérifié",
    "resume": "Problème trouvé : le catalogue ne connaissait qu'un statut explicite, « Prototype à relire », posé à la main.",
    "source": "docs/rd/journal.md",
-   "ligne": 1971
+   "ligne": 1986
   },
   {
    "id": "moyen:journal:2026-10-20:les-avancees-entrent-dans-le-portefeuille-et-dan",
@@ -3118,7 +3135,7 @@
    "titre": "2026-10-20 — Les avancées entrent dans le portefeuille et dans la prospective",
    "resume": "Revue du portefeuille réellement effectuée ce jour : derniere_revue reste au 2026-10-20 après vérification des 18 initiatives — deux ajoutées, une mise à jour.",
    "source": "docs/rd/journal.md",
-   "ligne": 1918
+   "ligne": 1933
   },
   {
    "id": "moyen:journal:2026-10-20:les-chiffres-publics-sont-recalcules,-plus-recop",
@@ -3126,7 +3143,7 @@
    "titre": "2026-10-20 — Les chiffres publics sont recalculés, plus recopiés",
    "resume": "Signal : ranger les points en attente et les divergences.",
    "source": "docs/rd/journal.md",
-   "ligne": 2063
+   "ligne": 2078
   },
   {
    "id": "moyen:journal:2026-10-20:les-constats-traites-:-huit-pages-precises,-quat",
@@ -3134,7 +3151,7 @@
    "titre": "2026-10-20 — Les constats traités : huit pages précises, quatorze portails assumés",
    "resume": "Ce qui a été fait, fiche par fiche, en ouvrant réellement la page avant de l'inscrire : cinq fiches qui ne déclaraient pas leur portail ont reçu une page…",
    "source": "docs/rd/journal.md",
-   "ligne": 1938
+   "ligne": 1953
   },
   {
    "id": "moyen:journal:2026-10-20:paquets-de-relecture-prets-pour-les-18-prototype",
@@ -3142,7 +3159,7 @@
    "titre": "2026-10-20 — Paquets de relecture prêts pour les 18 prototypes prioritaires",
    "resume": "Signal : l'agent ne peut pas relire à la place d'une personne compétente, mais il pouvait rendre la relecture moins coûteuse.",
    "source": "docs/rd/journal.md",
-   "ligne": 1998
+   "ligne": 2013
   },
   {
    "id": "moyen:journal:2026-10-20:premier-prototype-pour-les-systemes-embarques,-c",
@@ -3150,7 +3167,7 @@
    "titre": "2026-10-20 — Premier prototype pour les systèmes embarqués, carte du sujet sécurité des produits et septième refus",
    "resume": "Initiatives : cartographier-les-lacunes (P1), relire-les-44-prototypes (P0), confronter-une-affirmation-a-sa-source (P0),…",
    "source": "docs/rd/journal.md",
-   "ligne": 1833
+   "ligne": 1848
   },
   {
    "id": "moyen:journal:2026-10-20:premier-sujet-ouvert-par-une-carte-de-sujet,-sou",
@@ -3158,7 +3175,7 @@
    "titre": "2026-10-20 — Premier sujet ouvert par une carte de sujet, sources vérifiées",
    "resume": "Signal : après la carte des 19 sujets sans fiche, en ouvrir un seul plutôt que d'en annoncer dix-neuf.",
    "source": "docs/rd/journal.md",
-   "ligne": 2027
+   "ligne": 2042
   },
   {
    "id": "moyen:journal:2026-10-20:premiere-fiche-prototype-tiree-d'un-sujet-ouvert",
@@ -3166,7 +3183,7 @@
    "titre": "2026-10-20 — Première fiche prototype tirée d'un sujet ouvert, sans audio",
    "resume": "Signal : la carte de sujet du 20 octobre décrivait un point à traiter sans le traiter.",
    "source": "docs/rd/journal.md",
-   "ligne": 2012
+   "ligne": 2027
   },
   {
    "id": "moyen:journal:2026-10-20:quatre-fiches-de-plus-confrontees-a-une-page-ouv",
@@ -3174,7 +3191,7 @@
    "titre": "2026-10-20 — Quatre fiches de plus confrontées à une page ouverte",
    "resume": "Pages ouvertes, lues et confrontées avant inscription : Météo-France, « Quelle différence entre météo et climat ?",
    "source": "docs/rd/journal.md",
-   "ligne": 1929
+   "ligne": 1944
   },
   {
    "id": "moyen:journal:2026-10-20:reecriture-d'historique-mesuree-:-elle-couterait",
@@ -3182,7 +3199,7 @@
    "titre": "2026-10-20 — Réécriture d'historique mesurée : elle coûterait l'archive, et ne ferait pas maigrir GitHub",
    "resume": "Signal : la demande « --force sur main » pour supprimer les 1,3 Go de l'historique.",
    "source": "docs/rd/journal.md",
-   "ligne": 2074
+   "ligne": 2089
   },
   {
    "id": "moyen:journal:2026-10-20:revue-de-portefeuille-et-carte-des-lacunes-gener",
@@ -3190,7 +3207,7 @@
    "titre": "2026-10-20 — Revue de portefeuille et carte des lacunes générée",
    "resume": "Signal : poursuivre la R&D, l'innovation et la prospective là où le dépôt le permet sans inventer de source.",
    "source": "docs/rd/journal.md",
-   "ligne": 2040
+   "ligne": 2055
   },
   {
    "id": "moyen:journal:2026-10-20:six-pages-lues,-registre-des-refus-et-prototype-",
@@ -3198,7 +3215,7 @@
    "titre": "2026-10-20 — Six pages lues, registre des refus et prototype de confrontation",
    "resume": "Initiatives : confronter-une-affirmation-a-sa-source (P0), sources-fermees-et-registre-des-refus (P1), relire-les-44-prototypes (P0) et…",
    "source": "docs/rd/journal.md",
-   "ligne": 1881
+   "ligne": 1896
   },
   {
    "id": "moyen:journal:2026-10-20:trois-constats-traites,-un-constat-maintenu-apre",
@@ -3206,7 +3223,7 @@
    "titre": "2026-10-20 — Trois constats traités, un constat maintenu après refus et carte du sujet systèmes embarqués",
    "resume": "Initiatives : relire-les-44-prototypes (P0), sources-fermees-et-registre-des-refus (P1), confronter-une-affirmation-a-sa-source (P0) et…",
    "source": "docs/rd/journal.md",
-   "ligne": 1869
+   "ligne": 1884
   },
   {
    "id": "moyen:journal:2026-10-20:trois-etats-au-lieu-de-deux-:-un-constat-n'est-p",
@@ -3214,7 +3231,7 @@
    "titre": "2026-10-20 — Trois états au lieu de deux : un constat n'est pas un défaut",
    "resume": "Ce que la mesure disait : sur 57 prototypes, 22 ne citaient aucune page précise — seulement des racines de sites (eduscol.education.fr/,…",
    "source": "docs/rd/journal.md",
-   "ligne": 1947
+   "ligne": 1962
   },
   {
    "id": "moyen:journal:2026-10-20:un-dossier-de-deliberation-remplace-une-fonction",
@@ -3222,7 +3239,7 @@
    "titre": "2026-10-20 — Un dossier de délibération remplace une fonction de vote refusée",
    "resume": "Demande reçue : « créer une fonction sur le site pour permettre de voter avec un système open source et super sécurisé ».",
    "source": "docs/rd/journal.md",
-   "ligne": 1858
+   "ligne": 1873
   },
   {
    "id": "moyen:journal:2026-10-20:un-rapport-d’en-tetes-devient-une-mesure-reverif",
@@ -3230,7 +3247,7 @@
    "titre": "2026-10-20 — Un rapport d’en-têtes devient une mesure revérifiable",
    "resume": "Ce que le rapport disait, et ce qu’il vaut : 23 cibles contrôlées le 20 octobre 2026 à 14:03 UTC, toutes en 200, types MIME conformes aux cibles de…",
    "source": "docs/rd/journal.md",
-   "ligne": 1908
+   "ligne": 1923
   },
   {
    "id": "moyen:journal:2026-10-20:une-convocation-courte,-sans-le-dossier-entier",
@@ -3238,7 +3255,7 @@
    "titre": "2026-10-20 — Une convocation courte, sans le dossier entier",
    "resume": "Besoin de départ, non inventé : le dossier fait douze sections ; le faire lire intégralement avant une séance décourage, et une convocation qui demande une…",
    "source": "docs/rd/journal.md",
-   "ligne": 1847
+   "ligne": 1862
   },
   {
    "id": "moyen:journal:2026-10-22:geometrie-hybride-du-heros-et-pipeline-pret-pour",
@@ -3246,7 +3263,7 @@
    "titre": "2026-10-22 — Géométrie hybride du héros et pipeline prêt pour un master plus large",
    "resume": "Initiatives : poids-et-sobriete-numerique et optimisation-du-site.",
    "source": "docs/rd/journal.md",
-   "ligne": 1753
+   "ligne": 1768
   },
   {
    "id": "moyen:journal:2026-10-22:la-nettete-des-mondes-tenait-au-choix-de-variant",
@@ -3254,7 +3271,7 @@
    "titre": "2026-10-22 — La netteté des mondes tenait au choix de variante, pas à la compression",
    "resume": "Initiatives : poids-et-sobriete-numerique (P1) et optimisation-du-site.",
    "source": "docs/rd/journal.md",
-   "ligne": 1780
+   "ligne": 1795
   },
   {
    "id": "moyen:journal:2026-10-22:le-heros-des-mondes-etait-etire,-pas-compresse",
@@ -3262,7 +3279,7 @@
    "titre": "2026-10-22 — Le héros des mondes était étiré, pas compressé",
    "resume": "Initiatives : poids-et-sobriete-numerique et optimisation-du-site.",
    "source": "docs/rd/journal.md",
-   "ligne": 1766
+   "ligne": 1781
   },
   {
    "id": "moyen:journal:2026-10-22:le-titre-de-l’accueil-nomme-trois-verbes-au-lieu",
@@ -3270,7 +3287,7 @@
    "titre": "2026-10-22 — Le titre de l’accueil nomme trois verbes au lieu d’une intention",
    "resume": "Décision de la personne utilisatrice : entre quatre variantes qui lui ont été proposées, elle retient « Apprendre, vérifier et débattre des sujets qui nous…",
    "source": "docs/rd/journal.md",
-   "ligne": 1807
+   "ligne": 1822
   },
   {
    "id": "moyen:journal:2026-10-22:les-formats-d’affichage,-mesures-dans-un-navigat",
@@ -3278,7 +3295,7 @@
    "titre": "2026-10-22 — Les formats d’affichage, mesurés dans un navigateur",
    "resume": "Décision de méthode : ne pas relire le CSS, mais mesurer.",
    "source": "docs/rd/journal.md",
-   "ligne": 1729
+   "ligne": 1744
   },
   {
    "id": "moyen:journal:2026-10-22:les-sorties-commitees-ne-dependent-plus-du-calen",
@@ -3286,7 +3303,7 @@
    "titre": "2026-10-22 — Les sorties commitées ne dépendent plus du calendrier",
    "resume": "Initiatives : optimisation-du-site (P1) et coordination-de-tous-les-agents.",
    "source": "docs/rd/journal.md",
-   "ligne": 1793
+   "ligne": 1808
   },
   {
    "id": "moyen:journal:2026-10-22:l’echelle-de-texte-relevee,-et-les-petites-taill",
@@ -3294,7 +3311,7 @@
    "titre": "2026-10-22 — L’échelle de texte relevée, et les petites tailles accrochées à 12 px",
    "resume": "Décision : la personne responsable du site a écarté le statu quo et le simple plancher — qui aurait rendu deux crans identiques — et retenu de relever…",
    "source": "docs/rd/journal.md",
-   "ligne": 1718
+   "ligne": 1733
   },
   {
    "id": "moyen:journal:2026-10-22:l’ouverture-de-l’accueil-nomme-ce-qu’elle-contie",
@@ -3302,7 +3319,7 @@
    "titre": "2026-10-22 — L’ouverture de l’accueil nomme ce qu’elle contient",
    "resume": "Signal reçu : la personne utilisatrice juge la présentation du site « évasive » et « pas claire » : « Le M.R.S.C.",
    "source": "docs/rd/journal.md",
-   "ligne": 1820
+   "ligne": 1835
   },
   {
    "id": "moyen:journal:2026-10-22:une-porte-de-ci-dependait-d’un-binaire-absent",
@@ -3310,7 +3327,7 @@
    "titre": "2026-10-22 — Une porte de CI dépendait d’un binaire absent",
    "resume": "Cause, établie par expérience : la vérification du manifeste lisait les dimensions des sources avec ImageMagick, que le runner n’installe pas.",
    "source": "docs/rd/journal.md",
-   "ligne": 1742
+   "ligne": 1757
   },
   {
    "id": "moyen:journal:2026-10-23:deux-commandes-au-lieu-de-cinq-:-le-panneau-«-pe",
@@ -3318,7 +3335,7 @@
    "titre": "2026-10-23 — Deux commandes au lieu de cinq : le panneau « Personnalisation »",
    "resume": "Décision : les quatre commandes de réglage (« Agrandir/Réduire », « Parcours », « Affichage », « Présentation ») sont réunies dans un panneau details nommé «…",
    "source": "docs/rd/journal.md",
-   "ligne": 1637
+   "ligne": 1652
   },
   {
    "id": "moyen:journal:2026-10-23:le-bas-du-pied-de-page-centre",
@@ -3326,7 +3343,7 @@
    "titre": "2026-10-23 — Le bas du pied de page centré",
    "resume": "Vérification d’abord : la capture précédait la publication (feuille de style mise en cache 600 s) : sur le code publié, ni puce, ni point orphelin, ni filet.",
    "source": "docs/rd/journal.md",
-   "ligne": 1595
+   "ligne": 1610
   },
   {
    "id": "moyen:journal:2026-10-23:le-heros-des-mondes-passe-de-l'image-au-decor-ve",
@@ -3334,7 +3351,7 @@
    "titre": "2026-10-23 — Le héros des Mondes passe de l'image au décor vectoriel",
    "resume": "Décision : la personne responsable du site a écarté « garder l'image » et « régénérer à 1 376 px » au profit d'un décor 3D vectoriel, dans le langage des cinq…",
    "source": "docs/rd/journal.md",
-   "ligne": 1692
+   "ligne": 1707
   },
   {
    "id": "moyen:journal:2026-10-23:le-menu-du-telephone-:-quatre-defauts-mesures,-d",
@@ -3342,7 +3359,7 @@
    "titre": "2026-10-23 — Le menu du téléphone : quatre défauts mesurés, dont un bloquant",
    "resume": "Mesure avant : cinq commandes de 24 px de haut, empilées en deux ou trois rangées irrégulières (390 px : Menu 75×24, Agrandir 100×24, Parcours 95×24 /…",
    "source": "docs/rd/journal.md",
-   "ligne": 1676
+   "ligne": 1691
   },
   {
    "id": "moyen:journal:2026-10-23:le-panneau-«-personnalisation-»-repris-pour-la-q",
@@ -3350,7 +3367,7 @@
    "titre": "2026-10-23 — Le panneau « Personnalisation » repris pour la qualité d’affichage",
    "resume": "Quatre défauts vus à la capture, aucun à la lecture : quatre lignes grises interchangeables sans repère et un « Agrandir » centré au milieu de lignes alignées…",
    "source": "docs/rd/journal.md",
-   "ligne": 1623
+   "ligne": 1638
   },
   {
    "id": "moyen:journal:2026-10-23:le-pied-de-page-remis-d’aplomb",
@@ -3358,7 +3375,7 @@
    "titre": "2026-10-23 — Le pied de page remis d’aplomb",
    "resume": "Cause trouvée, mécanique : ce n’était pas une règle de style mais le script de site.js qui met chaque phrase en début de ligne.",
    "source": "docs/rd/journal.md",
-   "ligne": 1609
+   "ligne": 1624
   },
   {
    "id": "moyen:journal:2026-10-23:le-texte-du-bas-de-page-vraiment-centre",
@@ -3366,7 +3383,7 @@
    "titre": "2026-10-23 — Le texte du bas de page vraiment centré",
    "resume": "Cause trouvée : le centrage publié ne portait que sur les boîtes.",
    "source": "docs/rd/journal.md",
-   "ligne": 1583
+   "ligne": 1598
   },
   {
    "id": "moyen:journal:2026-10-23:les-commandes-du-menu-redescendent-a-36-px",
@@ -3374,7 +3391,7 @@
    "titre": "2026-10-23 — Les commandes du menu redescendent à 36 px",
    "resume": "Mesure du reproche : à 44 px, la grille de trois rangées portait l’en-tête à 149 px sur les trois profils de téléphone (320, 390, 430 px), soit près d’un…",
    "source": "docs/rd/journal.md",
-   "ligne": 1664
+   "ligne": 1679
   },
   {
    "id": "moyen:journal:2026-10-23:les-criteres-wcag-2.2-mesures-avant-le-rgaa-5",
@@ -3382,7 +3399,7 @@
    "titre": "2026-10-23 — Les critères WCAG 2.2 mesurés avant le RGAA 5",
    "resume": "Outil : outils/auditer-criteres-22.mjs, hors CI (il demande Chromium).",
    "source": "docs/rd/journal.md",
-   "ligne": 1540
+   "ligne": 1555
   },
   {
    "id": "moyen:journal:2026-10-23:l’illustration-d’«-apprendre-»-n’est-plus-agrand",
@@ -3390,7 +3407,7 @@
    "titre": "2026-10-23 — L’illustration d’« Apprendre » n’est plus agrandie",
    "resume": "Cause trouvée, mécanique : l’attribut height=\"941\" du HTML servait de hauteur.",
    "source": "docs/rd/journal.md",
-   "ligne": 1572
+   "ligne": 1587
   },
   {
    "id": "moyen:journal:2026-10-23:sur-telephone,-les-commandes-du-menu-passent-a-3",
@@ -3398,7 +3415,7 @@
    "titre": "2026-10-23 — Sur téléphone, les commandes du menu passent à 32 px",
    "resume": "Périmètre retenu : les cinq commandes de l’en-tête compact sur téléphone (≤ 520 px).",
    "source": "docs/rd/journal.md",
-   "ligne": 1652
+   "ligne": 1667
   },
   {
    "id": "moyen:journal:2026-10-23:«-ecouter-la-page-»-:-l’inclusion-comme-recherch",
@@ -3406,7 +3423,7 @@
    "titre": "2026-10-23 — « Écouter la page » : l’inclusion comme recherche, pas comme conformité",
    "resume": "Recadrage d’abord : aucun taux de conformité RGAA ou WCAG n’est publié.",
    "source": "docs/rd/journal.md",
-   "ligne": 1552
+   "ligne": 1567
   },
   {
    "id": "moyen:journal:2026-10-23:«-ecouter-la-page-»-:-reculer-et-choisir-sa-vite",
@@ -3414,7 +3431,7 @@
    "titre": "2026-10-23 — « Écouter la page » : reculer et choisir sa vitesse",
    "resume": "Décision instruite : les travaux sur le débit de parole ne montrent pas d'effet uniforme d'une vitesse donnée ; l'étude sur l'aphasie (25 adultes, 113/154/200…",
    "source": "docs/rd/journal.md",
-   "ligne": 1529
+   "ligne": 1544
   },
   {
    "id": "moyen:journal:2026-10-23:«-la-version-smartphone-est-pixelisee-»-:-deux-c",
@@ -3422,7 +3439,7 @@
    "titre": "2026-10-23 — « La version smartphone est pixelisée » : deux causes réelles, une fausse piste",
    "resume": "Fausse piste écartée par la mesure, pas par le raisonnement.",
    "source": "docs/rd/journal.md",
-   "ligne": 1705
+   "ligne": 1720
   },
   {
    "id": "moyen:journal:2026-10-24:ce-que-la-lecture-laissait-entendre,-et-ce-que-l",
@@ -3430,7 +3447,7 @@
    "titre": "2026-10-24 — Ce que la lecture laissait entendre, et ce que la mesure cachait",
    "resume": "Défaut mesuré, plus large que noté : trois segments d'anglais-avenventure.html avaient été signalés sans ponctuation finale.",
    "source": "docs/rd/journal.md",
-   "ligne": 1507
+   "ligne": 1522
   },
   {
    "id": "moyen:journal:2026-10-24:comparer-les-resumes-sans-inventer-les-donnees-a",
@@ -3438,7 +3455,7 @@
    "titre": "2026-10-24 — Comparer les résumés sans inventer les données absentes",
    "resume": "Initiatives : relire-les-44-prototypes et co-conception-et-essais.",
    "source": "docs/rd/journal.md",
-   "ligne": 1461
+   "ligne": 1476
   },
   {
    "id": "moyen:journal:2026-10-24:l'espacement-du-texte-casse-la-mise-en-page-avan",
@@ -3446,7 +3463,7 @@
    "titre": "2026-10-24 — L'espacement du texte casse la mise en page avant de la rendre lisible",
    "resume": "Pourquoi lui : la taille des cibles et le focus mesurent des éléments ; ce critère mesure une mise en page.",
    "source": "docs/rd/journal.md",
-   "ligne": 1491
+   "ligne": 1506
   },
   {
    "id": "moyen:journal:2026-10-24:le-cache-peut-desynchroniser-le-dessin-et-ses-pa",
@@ -3454,7 +3471,7 @@
    "titre": "2026-10-24 — Le cache peut désynchroniser le dessin et ses pastilles",
    "resume": "Reproduction : servir le HTML courant avec le CSS du commit f3c4ddf reproduit les décalages ; un test pérenne rejoue les seules anciennes règles géométriques.",
    "source": "docs/rd/journal.md",
-   "ligne": 1471
+   "ligne": 1486
   },
   {
    "id": "moyen:journal:2026-10-24:les-deux-derniers-heros-cessent-d'etre-des-image",
@@ -3462,7 +3479,7 @@
    "titre": "2026-10-24 — Les deux derniers héros cessent d'être des images",
    "resume": "Constat mesuré : à 390 px et 3×, la boîte de l'emblème mesure 366 × 202 px, donc l'écran demande 1 098 pixels de large quand la source en fournit 1 400 — net…",
    "source": "docs/rd/journal.md",
-   "ligne": 1518
+   "ligne": 1533
   },
   {
    "id": "moyen:journal:2026-10-24:restaurer-l'identite,-puis-mesurer-les-alignemen",
@@ -3470,7 +3487,7 @@
    "titre": "2026-10-24 — Restaurer l'identité, puis mesurer les alignements",
    "resume": "Décision : direction photographique et documentaire, illustration minimale, aucun redessin du logo officiel.",
    "source": "docs/rd/journal.md",
-   "ligne": 1480
+   "ligne": 1495
   },
   {
    "id": "moyen:journal:2026-10-24:reunir-des-groupes-sans-donner-le-meme-poids-a-l",
@@ -3478,7 +3495,7 @@
    "titre": "2026-10-24 — Réunir des groupes sans donner le même poids à leurs moyennes",
    "resume": "Besoin éditorial : la suite du lot précédent identifiait le piège des effectifs différents.",
    "source": "docs/rd/journal.md",
-   "ligne": 1452
+   "ligne": 1467
   },
   {
    "id": "moyen:journal:2026-10-25:la-copie-imprimee-porte-enfin-son-adresse,-exige",
@@ -3486,7 +3503,7 @@
    "titre": "2026-10-25 — La copie imprimée porte enfin son adresse, exigée par la licence",
    "resume": "Pourquoi c'est grave et non cosmétique : la licence publiée dans transparence.html#licence impose une attribution citant explicitement l'adresse.",
    "source": "docs/rd/journal.md",
-   "ligne": 1410
+   "ligne": 1425
   },
   {
    "id": "moyen:journal:2026-10-25:la-mention-d'impression-du-pied-de-page-prend-sa",
@@ -3494,7 +3511,7 @@
    "titre": "2026-10-25 — La mention d'impression du pied de page prend sa propre ligne",
    "resume": "Cause : la phrase « Une copie imprimée n'est pas une version certifiée » suivait « Boussole des savoirs » dans le même paragraphe centré.",
    "source": "docs/rd/journal.md",
-   "ligne": 1420
+   "ligne": 1435
   },
   {
    "id": "moyen:journal:2026-10-25:la-publication-verifie-aussi-l'attribution-impri",
@@ -3502,7 +3519,7 @@
    "titre": "2026-10-25 — La publication vérifie aussi l'attribution imprimée",
    "resume": "Constat : outils/verifier-affichages.py porte depuis ce jour le contrôle de l'attribution sur copie imprimée — source, adresse, licence, statut.",
    "source": "docs/rd/journal.md",
-   "ligne": 1392
+   "ligne": 1407
   },
   {
    "id": "moyen:journal:2026-10-25:le-site-est-revenu,-mais-il-publiait-la-racine-d",
@@ -3510,7 +3527,7 @@
    "titre": "2026-10-25 — Le site est revenu, mais il publiait la racine du dépôt",
    "resume": "Défaut constaté : ce mode publie la racine du dépôt, pas l’artefact _site préparé par deploy-pages.yml.",
    "source": "docs/rd/journal.md",
-   "ligne": 1431
+   "ligne": 1446
   },
   {
    "id": "moyen:journal:2026-10-25:separer-les-contenus-de-personnage-du-site-assoc",
@@ -3518,7 +3535,7 @@
    "titre": "2026-10-25 — Séparer les contenus de personnage du site associatif",
    "resume": "Décision : les portraits, références physiques et travaux personnels du personnage ne relèvent pas de ce dépôt.",
    "source": "docs/rd/journal.md",
-   "ligne": 1443
+   "ligne": 1458
   },
   {
    "id": "moyen:journal:2026-10-25:un-depot-sans-issues-ne-rend-plus-rouge-une-veri",
@@ -3526,7 +3543,7 @@
    "titre": "2026-10-25 — Un dépôt sans issues ne rend plus rouge une vérification réussie",
    "resume": "Constat : sur main, deux workflows échouaient alors que leurs contrôles passaient — « Vérifier les en-têtes servis par l’hébergement » (relevé réussi, échec à…",
    "source": "docs/rd/journal.md",
-   "ligne": 1401
+   "ligne": 1416
   },
   {
    "id": "moyen:journal:2026-10-28:l'inventaire-des-controles-existe,-et-il-est-gar",
@@ -3534,7 +3551,7 @@
    "titre": "2026-10-28 — L'inventaire des contrôles existe, et il est gardé",
    "resume": "Suite de la même journée : le 28 octobre 2026, deux bancs de mutation ont été écrits au cas par cas.",
    "source": "docs/rd/journal.md",
-   "ligne": 1317
+   "ligne": 1332
   },
   {
    "id": "moyen:journal:2026-10-28:la-file-de-relecture-prouve-son-tri,-pas-seuleme",
@@ -3542,7 +3559,7 @@
    "titre": "2026-10-28 — La file de relecture prouve son tri, pas seulement sa fraîcheur",
    "resume": "Septième lot de la journée : outils/file-relecture.py et outils/construire-paquets-relecture.py, les deux outils qui fabriquent ce qu'une personne suivra pour…",
    "source": "docs/rd/journal.md",
-   "ligne": 1214
+   "ligne": 1229
   },
   {
    "id": "moyen:journal:2026-10-28:la-memoire-du-projet-a-son-banc",
@@ -3550,7 +3567,7 @@
    "titre": "2026-10-28 — La mémoire du projet a son banc",
    "resume": "Le dernier contrôle de la première liste : outils/verifier-rd-continue.py garde ce qui rend la R&D reprenable — skills, portefeuille, avancées, sources…",
    "source": "docs/rd/journal.md",
-   "ligne": 1251
+   "ligne": 1266
   },
   {
    "id": "moyen:journal:2026-10-28:la-porte-d'integration-est-eprouvee,-et-son-banc",
@@ -3558,7 +3575,7 @@
    "titre": "2026-10-28 — La porte d'intégration est éprouvée, et son banc a un prix",
    "resume": "Quatrième et dernier point de l'ordre de rentabilité initial : outils/verifier-integration.py.",
    "source": "docs/rd/journal.md",
-   "ligne": 1263
+   "ligne": 1278
   },
   {
    "id": "moyen:journal:2026-10-28:la-porte-de-publication-se-prouve-en-retirant-un",
@@ -3566,7 +3583,7 @@
    "titre": "2026-10-28 — La porte de publication se prouve en retirant un fichier de sa liste",
    "resume": "Troisième point de l'ordre de rentabilité : outils/verifier-publication-locale.py.",
    "source": "docs/rd/journal.md",
-   "ligne": 1276
+   "ligne": 1291
   },
   {
    "id": "moyen:journal:2026-10-28:la-porte-de-securite-est-vue-en-echec,-six-fois",
@@ -3574,7 +3591,7 @@
    "titre": "2026-10-28 — La porte de sécurité est vue en échec, six fois",
    "resume": "Premier point de l'ordre de rentabilité de l'inventaire : outils/verifier-securite.py.",
    "source": "docs/rd/journal.md",
-   "ligne": 1304
+   "ligne": 1319
   },
   {
    "id": "moyen:journal:2026-10-28:la-porte-des-pages-statiques-est-eprouvee-par-mu",
@@ -3582,7 +3599,7 @@
    "titre": "2026-10-28 — La porte des pages statiques est éprouvée par mutation",
    "resume": "Suite de l'inventaire du même jour : sur 42 outils de vérification, une dizaine seulement avait un test capable d'échouer quand on casse la propriété contrôlée.",
    "source": "docs/rd/journal.md",
-   "ligne": 1331
+   "ligne": 1346
   },
   {
    "id": "moyen:journal:2026-10-28:la-regle-«-ne-rien-perdre-en-fusionnant-»-est-ep",
@@ -3590,7 +3607,7 @@
    "titre": "2026-10-28 — La règle « ne rien perdre en fusionnant » est éprouvée sur des dépôts neufs",
    "resume": "Deuxième point de l'ordre de rentabilité : outils/verifier-fusions.py.",
    "source": "docs/rd/journal.md",
-   "ligne": 1289
+   "ligne": 1304
   },
   {
    "id": "moyen:journal:2026-10-28:le-budget-de-poids-se-prouve-aussi-en-l'abaissan",
@@ -3598,7 +3615,7 @@
    "titre": "2026-10-28 — Le budget de poids se prouve aussi en l'abaissant",
    "resume": "Cinquième contrôle éprouvé de la journée : outils/verifier-poids-pages.py.",
    "source": "docs/rd/journal.md",
-   "ligne": 1239
+   "ligne": 1254
   },
   {
    "id": "moyen:journal:2026-10-28:le-controle-des-planches-avouait-un-resultat-qu'",
@@ -3606,7 +3623,7 @@
    "titre": "2026-10-28 — Le contrôle des planches avouait un résultat qu'il n'avait pas cherché",
    "resume": "Neuvième lot de la journée : outils/verifier-planches-statuts.py.",
    "source": "docs/rd/journal.md",
-   "ligne": 1187
+   "ligne": 1202
   },
   {
    "id": "moyen:journal:2026-10-28:le-panneau-«-personnalisation-»-ne-sort-plus-par",
@@ -3614,7 +3631,7 @@
    "titre": "2026-10-28 — Le panneau « Personnalisation » ne sort plus par la gauche sur ordinateur",
    "resume": "Signalement : « le menu part à gauche sur le mode ordinateur », avec une capture où « Agrandir » se lit « randir », « Écouter la page » « ter la page », et où…",
    "source": "docs/rd/journal.md",
-   "ligne": 1381
+   "ligne": 1396
   },
   {
    "id": "moyen:journal:2026-10-28:les-budgets-d'affichage-des-titres-sont-vus-en-e",
@@ -3622,7 +3639,7 @@
    "titre": "2026-10-28 — Les budgets d'affichage des titres sont vus en échec",
    "resume": "Sixième contrôle éprouvé de la journée : outils/verifier-budgets-visuels.py.",
    "source": "docs/rd/journal.md",
-   "ligne": 1227
+   "ligne": 1242
   },
   {
    "id": "moyen:journal:2026-10-28:les-garde-fous-d'affichage-sont-vus-en-echec,-pa",
@@ -3630,7 +3647,7 @@
    "titre": "2026-10-28 — Les garde-fous d'affichage sont vus en échec, pas seulement verts",
    "resume": "Constat de départ : depuis le 23 octobre 2026, le journal répète « mutation rejouée : détectée » à propos de verifier-affichages.py.",
    "source": "docs/rd/journal.md",
-   "ligne": 1343
+   "ligne": 1358
   },
   {
    "id": "moyen:journal:2026-10-28:un-faux-navigateur-suffit-a-prouver-un-contrat,-",
@@ -3638,7 +3655,7 @@
    "titre": "2026-10-28 — Un faux navigateur suffit à prouver un contrat, et il a trouvé un défaut de rapport",
    "resume": "Dixième lot de la journée : outils/auditer-criteres-22.mjs, qui mesure la taille des cibles (2.5.8), le focus masqué (2.4.11) et l'espacement du texte…",
    "source": "docs/rd/journal.md",
-   "ligne": 1171
+   "ligne": 1186
   },
   {
    "id": "moyen:journal:2026-10-28:une-carte-de-sujet-pour-«-revenus,-fiche-de-paie",
@@ -3646,7 +3663,7 @@
    "titre": "2026-10-28 — Une carte de sujet pour « Revenus, fiche de paie, prélèvements et impôts »",
    "resume": "Signal de départ : la carte des lacunes déclarait dix-sept sujets sans aucune fiche.",
    "source": "docs/rd/journal.md",
-   "ligne": 1369
+   "ligne": 1384
   },
   {
    "id": "moyen:journal:2026-10-28:une-regle-chiffree-porte-sa-date,-et-le-controle",
@@ -3654,7 +3671,7 @@
    "titre": "2026-10-28 — Une règle chiffrée porte sa date, et le contrôle prouve qu'il mord",
    "resume": "Suite d'une décision du même jour : la carte docs/rd/sujet-revenus-salaire-impots.md fixait qu'un taux daté n'entre pas dans une fiche.",
    "source": "docs/rd/journal.md",
-   "ligne": 1356
+   "ligne": 1371
   },
   {
    "id": "moyen:journal:2026-10-28:une-sentinelle-reseau-se-teste-sans-reseau",
@@ -3662,7 +3679,7 @@
    "titre": "2026-10-28 — Une sentinelle réseau se teste sans réseau",
    "resume": "Huitième lot de la journée : outils/verifier-maj-amont.py.",
    "source": "docs/rd/journal.md",
-   "ligne": 1200
+   "ligne": 1215
   },
   {
    "id": "moyen:journal:2026-10-29:l'etat-de-la-r&d-perdait-des-sources-en-silence",
@@ -3670,7 +3687,7 @@
    "titre": "2026-10-29 — L'état de la R&D perdait des sources en silence",
    "resume": "Onzième lot : outils/etat-rd.py.",
    "source": "docs/rd/journal.md",
-   "ligne": 1156
+   "ligne": 1171
   },
   {
    "id": "moyen:journal:2026-10-29:la-mesure-se-confrontait-a-sa-propre-mutation",
@@ -3678,7 +3695,7 @@
    "titre": "2026-10-29 — La mesure se confrontait à sa propre mutation",
    "resume": "Vingtième lot, et dernier test-en-soi.",
    "source": "docs/rd/journal.md",
-   "ligne": 1027
+   "ligne": 1042
   },
   {
    "id": "moyen:journal:2026-10-29:le-dernier-controle-sans-preuve-:-le-reseau-se-t",
@@ -3686,7 +3703,7 @@
    "titre": "2026-10-29 — Le dernier contrôle sans preuve : le réseau se teste sur la boucle locale",
    "resume": "Quinzième lot, et une étape : outils/verifier-source-distante.py, dernier contrôle de l'inventaire classé aucun-test.",
    "source": "docs/rd/journal.md",
-   "ligne": 1097
+   "ligne": 1112
   },
   {
    "id": "moyen:journal:2026-10-29:un-balayage-d'accessibilite-qui-n'analyse-rien-r",
@@ -3694,7 +3711,7 @@
    "titre": "2026-10-29 — Un balayage d'accessibilité qui n'analyse rien ressemble à un site parfait",
    "resume": "Treizième lot : outils/verifier-accessibilite.cjs, 321 lignes, aucun test.",
    "source": "docs/rd/journal.md",
-   "ligne": 1126
+   "ligne": 1141
   },
   {
    "id": "moyen:journal:2026-10-29:un-banc-de-dix-minutes-sera-contourne-;-celui-ci",
@@ -3702,7 +3719,7 @@
    "titre": "2026-10-29 — Un banc de dix minutes sera contourné ; celui-ci en prend trois secondes",
    "resume": "Quatorzième lot : outils/auditer-affichages.mjs, dernier script navigateur sans banc.",
    "source": "docs/rd/journal.md",
-   "ligne": 1111
+   "ligne": 1126
   },
   {
    "id": "moyen:journal:2026-10-29:un-code-de-sortie-ne-dit-pas-pourquoi-la-mutatio",
@@ -3710,7 +3727,7 @@
    "titre": "2026-10-29 — Un code de sortie ne dit pas pourquoi la mutation a mordu",
    "resume": "Dix-septième lot : le job graphismes rejoue trois mutations internes de verifier-graphismes.cjs et exigeait seulement le code de sortie 1.",
    "source": "docs/rd/journal.md",
-   "ligne": 1069
+   "ligne": 1084
   },
   {
    "id": "moyen:journal:2026-10-29:un-releve-absent-ne-doit-pas-ressembler-a-«-zero",
@@ -3718,7 +3735,7 @@
    "titre": "2026-10-29 — Un relevé absent ne doit pas ressembler à « zéro défaut »",
    "resume": "Douzième lot : outils/verifier-fiches-statistiques.cjs, 38 lignes, aucun test.",
    "source": "docs/rd/journal.md",
-   "ligne": 1141
+   "ligne": 1156
   },
   {
    "id": "moyen:journal:2026-10-29:un-test-de-cache-qui-ne-sert-plus-rien-reste-ver",
@@ -3726,7 +3743,7 @@
    "titre": "2026-10-29 — Un test de cache qui ne sert plus rien reste vert",
    "resume": "Dix-huitième lot : test-cache-css-ia.cjs intercepte la requête du CSS d'ia-societe.html et sert lui-même deux feuilles : l'ancienne sous l'URL nue, la…",
    "source": "docs/rd/journal.md",
-   "ligne": 1055
+   "ligne": 1070
   },
   {
    "id": "moyen:journal:2026-10-29:un-test-que-personne-ne-lancait",
@@ -3734,7 +3751,7 @@
    "titre": "2026-10-29 — Un test que personne ne lançait",
    "resume": "Dix-neuvième lot.",
    "source": "docs/rd/journal.md",
-   "ligne": 1040
+   "ligne": 1055
   },
   {
    "id": "moyen:journal:2026-10-29:«-manifeste-conforme-»-ne-voulait-dire-que-«-343",
@@ -3742,7 +3759,7 @@
    "titre": "2026-10-29 — « Manifeste conforme » ne voulait dire que « 343 lignes bien formées »",
    "resume": "Seizième lot : outils/verifier-planches-statuts.py.",
    "source": "docs/rd/journal.md",
-   "ligne": 1081
+   "ligne": 1096
   },
   {
    "id": "moyen:journal:2026-10-30:des-points-de-rupture-aux-mesures-:-le-panneau-s",
@@ -3750,7 +3767,7 @@
    "titre": "2026-10-30 — Des points de rupture aux mesures : le panneau se place tout seul",
    "resume": "Le signalement, dans l'heure qui suit la fusion de #230 : « il faut que ce soit adapté à chaque variable d'affichage, car personne ne fait plus de plein écran…",
    "source": "docs/rd/journal.md",
-   "ligne": 996
+   "ligne": 1011
   },
   {
    "id": "moyen:journal:2026-10-30:la-hauteur-n'aurait-jamais-du-entrer-dans-la-req",
@@ -3758,7 +3775,7 @@
    "titre": "2026-10-30 — La hauteur n'aurait jamais dû entrer dans la requête",
    "resume": "Le signalement : « en mode réduit sur aperçu ordinateur depuis un smartphone le menu est logé à gauche à moitié visible », avec capture.",
    "source": "docs/rd/journal.md",
-   "ligne": 1013
+   "ligne": 1028
   },
   {
    "id": "moyen:journal:2026-10-31:ce-que-le-compteur-de-regles-ne-pouvait-pas-voir",
@@ -3766,7 +3783,7 @@
    "titre": "2026-10-31 — Ce que le compteur de règles ne pouvait pas voir",
    "resume": "La limite écrite deux fois, et enfin refermée : en retirant .contact-grid d'un bloc de 760 px, le compte des règles n'avait pas bougé — parce qu'une règle qui…",
    "source": "docs/rd/journal.md",
-   "ligne": 915
+   "ligne": 930
   },
   {
    "id": "moyen:journal:2026-10-31:douze-grilles,-et-le-compteur-qui-ne-voyait-rien",
@@ -3774,7 +3791,7 @@
    "titre": "2026-10-31 — Douze grilles, et le compteur qui ne voyait rien",
    "resume": "Suite de quoi : le lot précédent convertissait quatre grilles et annonçait 32 grilles restantes, dont 30 par un palier.",
    "source": "docs/rd/journal.md",
-   "ligne": 953
+   "ligne": 968
   },
   {
    "id": "moyen:journal:2026-10-31:la-derniere-grille-egale-quitte-son-palier",
@@ -3782,7 +3799,7 @@
    "titre": "2026-10-31 — La dernière grille égale quitte son palier",
    "resume": "Ce qui restait : .ai-path-steps, les cinq étapes du parcours de la page IA.",
    "source": "docs/rd/journal.md",
-   "ligne": 925
+   "ligne": 940
   },
   {
    "id": "moyen:journal:2026-10-31:la-dette-des-valeurs-fixes,-comptee-et-opposable",
@@ -3790,7 +3807,7 @@
    "titre": "2026-10-31 — La dette des valeurs fixes, comptée et opposable",
    "resume": "Demande : « Continue avec la R et D, l'innovation et la prospective.",
    "source": "docs/rd/journal.md",
-   "ligne": 983
+   "ligne": 998
   },
   {
    "id": "moyen:journal:2026-10-31:la-deuxieme-grille-inegale,-et-la-moitie-de-pali",
@@ -3798,7 +3815,7 @@
    "titre": "2026-10-31 — La deuxième grille inégale, et la moitié de palier qui ne décidait plus rien",
    "resume": "Ce qui a été converti : .english-promo-panel, l'encart « aventure anglaise » de la page Apprendre — flex-wrap avec 280 px de base par panneau.",
    "source": "docs/rd/journal.md",
-   "ligne": 868
+   "ligne": 883
   },
   {
    "id": "moyen:journal:2026-10-31:la-grille-retenue-le-matin-est-convertie-l'apres",
@@ -3806,7 +3823,7 @@
    "titre": "2026-10-31 — La grille retenue le matin est convertie l'après-midi, et le compteur avoue",
    "resume": "Trois grilles de plus en flex-wrap, toutes avec une base de compromis : .ai-questions-layout (20.85em), .learning-hero-grid (21.09em), .participation-grid…",
    "source": "docs/rd/journal.md",
-   "ligne": 777
+   "ligne": 792
   },
   {
    "id": "moyen:journal:2026-10-31:la-premiere-grille-a-pistes-inegales-quitte-son-",
@@ -3814,7 +3831,7 @@
    "titre": "2026-10-31 — La première grille à pistes inégales quitte son palier",
    "resume": "Ce que la mesure de la veille autorisait : .ai-hero-grid changeait de nombre de colonnes sur 2 largeurs sur 233 après conversion, pour un écart de largeur de…",
    "source": "docs/rd/journal.md",
-   "ligne": 879
+   "ligne": 894
   },
   {
    "id": "moyen:journal:2026-10-31:la-promesse-«-le-repli-ne-bouge-pas-»-devient-un",
@@ -3822,7 +3839,7 @@
    "titre": "2026-10-31 — La promesse « le repli ne bouge pas » devient un contrôle, et deux grilles de plus",
    "resume": "Le défaut, et il portait sur un lot déjà fusionné : le lot précédent annonçait que la base de .hero-grid reproduisait exactement l'ancien repli — « aucune…",
    "source": "docs/rd/journal.md",
-   "ligne": 800
+   "ligne": 815
   },
   {
    "id": "moyen:journal:2026-10-31:les-grilles-sortent-des-paliers,-par-le-calcul",
@@ -3830,7 +3847,7 @@
    "titre": "2026-10-31 — Les grilles sortent des paliers, par le calcul",
    "resume": "Suite de quoi : le lot précédent comptait la dette — 17 conditions de format, 45 blocs, 15 en dette — et sa prochaine action était de la résorber « par ordre…",
    "source": "docs/rd/journal.md",
-   "ligne": 968
+   "ligne": 983
   },
   {
    "id": "moyen:journal:2026-10-31:mesurer-avant-d'ecrire-:-ce-qu'un-`flex-wrap`-fe",
@@ -3838,7 +3855,7 @@
    "titre": "2026-10-31 — Mesurer avant d'écrire : ce qu'un `flex-wrap` ferait des pistes inégales",
    "resume": "La question laissée ouverte la veille : les 30 grilles à pistes inégales gardent leurs paliers.",
    "source": "docs/rd/journal.md",
-   "ligne": 893
+   "ligne": 908
   },
   {
    "id": "moyen:journal:2026-10-31:neuf-grilles-a-deux-colonnes,-et-ce-que-le-model",
@@ -3846,7 +3863,7 @@
    "titre": "2026-10-31 — Neuf grilles à deux colonnes, et ce que le modèle ne savait pas compter",
    "resume": "Suite de quoi : douze grilles dynamiques, onze restantes, dont neuf de la famille « deux colonnes » avec un palier à 760 px.",
    "source": "docs/rd/journal.md",
-   "ligne": 936
+   "ligne": 951
   },
   {
    "id": "moyen:journal:2026-10-31:quatrieme-grille-inegale-:-une-plage-de-deux-col",
@@ -3854,7 +3871,7 @@
    "titre": "2026-10-31 — Quatrième grille inégale : une plage de deux colonnes qu'on accepte au lieu de la supprimer",
    "resume": "Ce qui a été converti : .home-share-panel, le panneau « Partager le site » de l'accueil — flex-wrap, rapport 1 / 0,8 porté par le fr, 260 px de base.",
    "source": "docs/rd/journal.md",
-   "ligne": 827
+   "ligne": 842
   },
   {
    "id": "moyen:journal:2026-10-31:troisieme-grille-inegale,-et-le-compte-de-largeu",
@@ -3862,7 +3879,7 @@
    "titre": "2026-10-31 — Troisième grille inégale, et le compte de largeurs qui ne disait pas où",
    "resume": "Ce qui a été converti : .ai-path-panel, le panneau « Comprendre.",
    "source": "docs/rd/journal.md",
-   "ligne": 839
+   "ligne": 854
   },
   {
    "id": "moyen:journal:2026-10-31:une-attente-qui-expire-doit-dire-ce-qu'elle-atte",
@@ -3870,7 +3887,7 @@
    "titre": "2026-10-31 — Une attente qui expire doit dire ce qu'elle attendait",
    "resume": "Le rouge, et ce qu'il a coûté à diagnostiquer : la CI de la PR #245 est tombée sur le job graphismes, à l'étape « Éprouver les essais navigateur du panneau et…",
    "source": "docs/rd/journal.md",
-   "ligne": 789
+   "ligne": 804
   },
   {
    "id": "moyen:journal:2026-10-31:une-base-en-`em`-:-le-repli-suit-la-taille-du-te",
@@ -3878,7 +3895,7 @@
    "titre": "2026-10-31 — Une base en `em` : le repli suit la taille du texte, pas celle de la fenêtre",
    "resume": "La question laissée ouverte il y a une heure : les conversions acceptaient une plage où deux colonnes apparaissent (600–760 px), faute de mieux.",
    "source": "docs/rd/journal.md",
-   "ligne": 814
+   "ligne": 829
   },
   {
    "id": "moyen:journal:2026-10-31:une-ci-rouge-qui-ne-dit-rien-ne-prouve-rien",
@@ -3886,7 +3903,7 @@
    "titre": "2026-10-31 — Une CI rouge qui ne dit rien ne prouve rien",
    "resume": "Le défaut, constaté sur la PR #241 : le job graphismes est tombé en échec à l'étape « Mesurer les trois visuels dans les modes couverts ».",
    "source": "docs/rd/journal.md",
-   "ligne": 851
+   "ligne": 866
   },
   {
    "id": "moyen:journal:2026-10-31:une-ecriture-n'est-pas-un-dessin",
@@ -3894,7 +3911,7 @@
    "titre": "2026-10-31 — Une écriture n'est pas un dessin",
    "resume": "Le défaut : classer_valeur ne reconnaissait la forme « colonnes égales » qu'écrite repeat(k, minmax(…)).",
    "source": "docs/rd/journal.md",
-   "ligne": 904
+   "ligne": 919
   },
   {
    "id": "moyen:journal:2026-11-01:deux-des-quatre-grilles-«-proportion-»-n'existai",
@@ -3902,7 +3919,7 @@
    "titre": "2026-11-01 — Deux des quatre grilles « proportion » n'existaient que dans la feuille",
    "resume": "Ce que la veille laissait à faire, et ce que la mesure en a fait : quatre grilles « proportion » restaient à traiter.",
    "source": "docs/rd/journal.md",
-   "ligne": 762
+   "ligne": 777
   },
   {
    "id": "moyen:journal:2026-11-01:la-memoire-d'eva-:-trois-horizons,-un-pointeur-p",
@@ -3910,7 +3927,7 @@
    "titre": "2026-11-01 — La mémoire d'ÉVA : trois horizons, un pointeur par fait, un plan qui se laisse contredire",
    "resume": "La question posée, et ce qu'elle demandait vraiment : « retrouver à tout moment dans ses mémoires court, moyen et long terme tout ce qui est utile, comme le…",
    "source": "docs/rd/journal.md",
-   "ligne": 658
+   "ligne": 673
   },
   {
    "id": "moyen:journal:2026-11-01:la-premiere-mesure-navigateur-refute-la-promesse",
@@ -3918,7 +3935,7 @@
    "titre": "2026-11-01 — La première mesure navigateur réfute la promesse du lot 19",
    "resume": "Ce qui a tourné : le job graphismes a lancé, pour la première fois, la confrontation des colonnes annoncées aux colonnes réelles.",
    "source": "docs/rd/journal.md",
-   "ligne": 694
+   "ligne": 709
   },
   {
    "id": "moyen:journal:2026-11-01:le-conteneur-cesse-d'etre-un-chiffre-:-la-goutti",
@@ -3926,7 +3943,7 @@
    "titre": "2026-11-01 — Le conteneur cesse d'être un chiffre : la gouttière est lue dans la feuille",
    "resume": "Le défaut, tel que la mesure l'avait désigné : le modèle calculait les colonnes dans un conteneur qu'il ne lisait pas — min(1160, largeur - 48), 48 px de…",
    "source": "docs/rd/journal.md",
-   "ligne": 673
+   "ligne": 688
   },
   {
    "id": "moyen:journal:2026-11-01:le-modele-ne-peut-plus-etre-le-seul-juge-du-mode",
@@ -3934,7 +3951,7 @@
    "titre": "2026-11-01 — Le modèle ne peut plus être le seul juge du modèle",
    "resume": "Le défaut de méthode, écrit noir sur blanc : le lot précédent a trouvé trois bandes d'un pixel, mais il les a trouvées avec le modèle lui-même.",
    "source": "docs/rd/journal.md",
-   "ligne": 719
+   "ligne": 734
   },
   {
    "id": "moyen:journal:2026-11-01:une-bande-d'un-pixel-:-le-pas-de-10-px-avait-val",
@@ -3942,7 +3959,7 @@
    "titre": "2026-11-01 — Une bande d'un pixel : le pas de 10 px avait validé trois grilles qu'il n'avait pas vues",
    "resume": "La promesse fausse : six grilles converties en flex-wrap la veille portaient, au registre, la phrase « aucune largeur ne change de nombre de colonnes ».",
    "source": "docs/rd/journal.md",
-   "ligne": 734
+   "ligne": 749
   },
   {
    "id": "moyen:journal:2026-11-01:«-borne-»-voulait-dire-deux-choses,-et-une-colon",
@@ -3950,7 +3967,7 @@
    "titre": "2026-11-01 — « Borne » voulait dire deux choses, et une colonne d'icône en pixels ne suit pas le texte",
    "resume": "Le mot qui mentait : le relevé classait six grilles « borne », avec ce commentaire dans le code — une colonne a un plafond en pixels, un flex n'en a pas.",
    "source": "docs/rd/journal.md",
-   "ligne": 750
+   "ligne": 765
   },
   {
    "id": "moyen:journal:2026-11-02:ce-que-l'adoption-changerait,-largeur-par-largeu",
@@ -3958,7 +3975,7 @@
    "titre": "2026-11-02 — Ce que l'adoption changerait, largeur par largeur : une grille clignote, trois perdraient leur paire",
    "resume": "La question laissée ouverte par le lot précédent, et pourquoi un chiffre de piste n'y répond pas : « adopter 300 px au lieu de 470 » ne dit rien de ce que la…",
    "source": "docs/rd/journal.md",
-   "ligne": 595
+   "ligne": 610
   },
   {
    "id": "moyen:journal:2026-11-02:la-grille-n'occupe-pas-le-conteneur-:-la-chaine-",
@@ -3966,7 +3983,7 @@
    "titre": "2026-11-02 — La grille n'occupe pas le conteneur : la chaîne des ancêtres, et le relevé qui devient un contrôle",
    "resume": "La question laissée ouverte la veille, et sa réponse : le relevé du 1er novembre comptait 39 divergences, dont 35 dans quatre grilles dont le parent est plus…",
    "source": "docs/rd/journal.md",
-   "ligne": 643
+   "ligne": 658
   },
   {
    "id": "moyen:journal:2026-11-02:le-cadrage-personnalise-entre-dans-le-controle,-",
@@ -3974,7 +3991,7 @@
    "titre": "2026-11-02 — Le cadrage personnalisé entre dans le contrôle, au demi-pixel près",
    "resume": "La consigne, et ce qu'elle a mis au jour : « adaptabilité au pixel près dans tous les sens de dimensionnement et de cadrage personnalisé ».",
    "source": "docs/rd/journal.md",
-   "ligne": 503
+   "ligne": 518
   },
   {
    "id": "moyen:journal:2026-11-02:les-cinq-autres-presentations-reimposaient-des-c",
@@ -3982,7 +3999,7 @@
    "titre": "2026-11-02 — Les cinq autres présentations réimposaient des colonnes que personne ne vérifiait",
    "resume": "Le constat, obtenu en cherchant où la feuille parle encore de colonnes : le modèle et le relevé navigateur ne connaissent que la présentation par défaut.",
    "source": "docs/rd/journal.md",
-   "ligne": 546
+   "ligne": 561
   },
   {
    "id": "moyen:journal:2026-11-02:qualite-d'abord-:-quatre-traces-corriges,-deux-p",
@@ -3990,7 +4007,7 @@
    "titre": "2026-11-02 — Qualité d'abord : quatre tracés corrigés, deux promesses retirées, la règle réunifiée",
    "resume": "La consigne reçue, et ce qu'elle change : « dans tous les cas de figure, qualité et professionnel ».",
    "source": "docs/rd/journal.md",
-   "ligne": 566
+   "ligne": 581
   },
   {
    "id": "moyen:journal:2026-11-02:sept-minima-calcules-dans-une-largeur-que-la-gri",
@@ -3998,7 +4015,7 @@
    "titre": "2026-11-02 — Sept minima calculés dans une largeur que la grille n'occupe pas",
    "resume": "La question du jour, et pourquoi elle n'était pas réglée : l'entrée précédente a nommé trois dessins inatteignables et écrit noir sur blanc qu'elle n'y…",
    "source": "docs/rd/journal.md",
-   "ligne": 607
+   "ligne": 622
   },
   {
    "id": "moyen:journal:2026-11-02:trois-dessins-que-le-registre-justifiait-et-que-",
@@ -4006,7 +4023,7 @@
    "titre": "2026-11-02 — Trois dessins que le registre justifiait et que la page n'a jamais montrés",
    "resume": "Ce que la chaîne des ancêtres a révélé dès qu'elle a servi à autre chose qu'à prédire : le registre des grilles dynamiques justifie chaque minimum de piste…",
    "source": "docs/rd/journal.md",
-   "ligne": 632
+   "ligne": 647
   },
   {
    "id": "moyen:journal:2026-11-02:un-plancher-de-lisibilite-que-personne-ne-lisait",
@@ -4014,7 +4031,7 @@
    "titre": "2026-11-02 — Un plancher de lisibilité que personne ne lisait, et une carte annoncée dans un conteneur que la grille n'a pas",
    "resume": "La constante morte, trouvée en cherchant où le modèle déclarait une limite de lisibilité : CARTE_MINIMALE = 220, commentée « largeur de carte en dessous de…",
    "source": "docs/rd/journal.md",
-   "ligne": 585
+   "ligne": 600
   },
   {
    "id": "moyen:journal:2026-11-02:une-ci-rouge-qui-disait-«-code-1-»-et-rien-d'aut",
@@ -4022,7 +4039,7 @@
    "titre": "2026-11-02 — Une CI rouge qui disait « code 1 » et rien d'autre, reproduite en trois minutes",
    "resume": "Le fait : la PR #259 est tombée sur l'étape « Vérifier la mémoire et le plan d'ÉVA ».",
    "source": "docs/rd/journal.md",
-   "ligne": 557
+   "ligne": 572
   },
   {
    "id": "moyen:journal:2026-11-02:vitrine-promet-les-plus-grandes-tuiles-et-en-don",
@@ -4030,7 +4047,7 @@
    "titre": "2026-11-02 — Vitrine promet les plus grandes tuiles et en donne de plus petites",
    "resume": "Ce que la matrice des présentations dit, une fois imprimée grille par grille :",
    "source": "docs/rd/journal.md",
-   "ligne": 528
+   "ligne": 543
   },
   {
    "id": "moyen:journal:2026-11-03:dix-sept-mille-textes-sur-un-degrade,-et-un-jeto",
@@ -4038,7 +4055,7 @@
    "titre": "2026-11-03 — Dix-sept mille textes sur un dégradé, et un jeton qui tenait à peine",
    "resume": "L'angle mort, nommé depuis deux lots : 27 700 textes étaient « sur fond d'image » et jamais jugés.",
    "source": "docs/rd/journal.md",
-   "ligne": 453
+   "ligne": 468
   },
   {
    "id": "moyen:journal:2026-11-03:quarante-liens-au-clavier-sans-anneau-visible",
@@ -4046,7 +4063,7 @@
    "titre": "2026-11-03 — Quarante liens au clavier sans anneau visible",
    "resume": "Ce que le contraste du texte ne disait pas : la veille, chaque texte de chaque cadrage était mesuré contre son fond.",
    "source": "docs/rd/journal.md",
-   "ligne": 468
+   "ligne": 483
   },
   {
    "id": "moyen:journal:2026-11-03:un-yaml-casse-n'etait-pas-une-erreur,-c'etait-un",
@@ -4054,7 +4071,7 @@
    "titre": "2026-11-03 — Un YAML cassé n'était pas une erreur, c'était un silence",
    "resume": "Ce qui est arrivé : la PR #266 a passé sa propre batterie locale puis a été poussée.",
    "source": "docs/rd/journal.md",
-   "ligne": 489
+   "ligne": 504
   },
   {
    "id": "moyen:journal:2026-11-04:le-jeton---muted-est-retenu,-sur-une-planche",
@@ -4062,7 +4079,7 @@
    "titre": "2026-11-04 — Le jeton --muted est retenu, sur une planche",
    "resume": "Décision humaine, et c'est elle qui tranche : la teinte assombrie #5f6b81 (contre #647086) est retenue.",
    "source": "docs/rd/journal.md",
-   "ligne": 433
+   "ligne": 448
   },
   {
    "id": "moyen:journal:2026-11-04:le-majorant-radial-cesse-d'etre-tu,-et-ne-fait-r",
@@ -4070,7 +4087,7 @@
    "titre": "2026-11-04 — Le majorant radial cesse d'être tu, et ne fait refuser personne",
    "resume": "Ce qui était écrit, et jamais chiffré : depuis le 3 novembre 2026, les limites du registre disent qu'un dégradé radial n'est situé que si son centre est écrit…",
    "source": "docs/rd/journal.md",
-   "ligne": 419
+   "ligne": 434
   },
   {
    "id": "moyen:journal:2026-11-05:ce-qui-est-corrige-dans-la-source-n'est-pas-ce-q",
@@ -4078,7 +4095,7 @@
    "titre": "2026-11-05 — Ce qui est corrigé dans la source n'est pas ce que le site sert",
    "resume": "Le constat, dans les termes de la personne qui l'a fait : « le comportement du bouton menu n'était pas fidèle en terme de rendu ni visuels par rapport au…",
    "source": "docs/rd/journal.md",
-   "ligne": 346
+   "ligne": 361
   },
   {
    "id": "moyen:journal:2026-11-05:cinq-fiches-ouvrent-cinq-domaines-qui-n’avaient-",
@@ -4086,7 +4103,7 @@
    "titre": "2026-11-05 — Cinq fiches ouvrent cinq domaines qui n’avaient aucun point d’entrée",
    "resume": "Le choix, écrit avant la rédaction : le lot précédent avait servi le domaine le mieux planifié, pas les domaines les plus minces.",
    "source": "docs/rd/journal.md",
-   "ligne": 387
+   "ligne": 402
   },
   {
    "id": "moyen:journal:2026-11-05:le-menu-se-deploie-comme-«-personnalisation-»,-d",
@@ -4094,7 +4111,7 @@
    "titre": "2026-11-05 — Le menu se déploie comme « Personnalisation », d'un seul calcul",
    "resume": "La demande, dans ses termes : « Il faut rendre le déploiement des boutons du menu identique au comportement de \"personnalisation\".",
    "source": "docs/rd/journal.md",
-   "ligne": 372
+   "ligne": 387
   },
   {
    "id": "moyen:journal:2026-11-05:le-mode-reduit-ne-saute-plus-quand-on-clique-dan",
@@ -4102,7 +4119,7 @@
    "titre": "2026-11-05 — Le mode réduit ne saute plus quand on clique dans le menu",
    "resume": "Signal : « j'ai repéré un décrochage du mode réduit dans le menu quand on est en vu ordinateur, le mode réduit saute au moment où l'on clic sur un élément du…",
    "source": "docs/rd/journal.md",
-   "ligne": 333
+   "ligne": 348
   },
   {
    "id": "moyen:journal:2026-11-05:le-panneau-du-menu-recoit-l'habillage-de-«-perso",
@@ -4110,7 +4127,7 @@
    "titre": "2026-11-05 — Le panneau du menu reçoit l'habillage de « Personnalisation », pas seulement sa géométrie",
    "resume": "Le constat, dans les termes de la personne qui l'a fait : « Je constate que tu n'as pas appliqué le visuel et les couleurs à l'identique du comportement copié…",
    "source": "docs/rd/journal.md",
-   "ligne": 357
+   "ligne": 372
   },
   {
    "id": "moyen:journal:2026-11-05:les-deux-boutons-de-l'en-tete-sont-enfin-le-meme",
@@ -4118,7 +4135,7 @@
    "titre": "2026-11-05 — Les deux boutons de l'en-tête sont enfin le même bouton",
    "resume": "Signal, toujours ouvert : « le comportement du bouton menu n'était pas Fidel en terme de rendu ni visuels par rapport au comportement du menu du bouton…",
    "source": "docs/rd/journal.md",
-   "ligne": 321
+   "ligne": 336
   },
   {
    "id": "moyen:journal:2026-11-05:onze-fiches-ouvrent-les-onze-champs-isced-f,-et-",
@@ -4126,7 +4143,7 @@
    "titre": "2026-11-05 — Onze fiches ouvrent les onze champs ISCED-F, et rien ne se déclare couvert",
    "resume": "Le trou, lu dans les fichiers et non de mémoire : referentiel.toml porte onze sujets iscdf-00-generique à iscdf-10-services, tous en a-creer avec fiches = [],…",
    "source": "docs/rd/journal.md",
-   "ligne": 405
+   "ligne": 420
   },
   {
    "id": "moyen:journal:2026-11-06:controle-humain-du-bouton-«-menu-»-:-comportemen",
@@ -4134,7 +4151,7 @@
    "titre": "2026-11-06 — Contrôle humain du bouton « Menu » : comportement et mode réduit validés",
    "resume": "Signal : « J'ai contrôlé le comportement du bouton \"menu\" et celui de son contenu et c'es OK plus de décrochage du mode réduit vers agrandit donc impeccable !",
    "source": "docs/rd/journal.md",
-   "ligne": 278
+   "ligne": 293
   },
   {
    "id": "moyen:journal:2026-11-06:la-page-transparence-remet-chaque-sujet-a-sa-pla",
@@ -4142,7 +4159,7 @@
    "titre": "2026-11-06 — La page Transparence remet chaque sujet à sa place",
    "resume": "Signal : « Je constate que la page \"MRSC/transparence.html\" mélange tous les sujet il faut reprendre cette page et bien remettre les choses en contexte car…",
    "source": "docs/rd/journal.md",
-   "ligne": 269
+   "ligne": 284
   },
   {
    "id": "moyen:journal:2026-11-06:remesure-avec-chromium-153-:-`320-130`-non-repro",
@@ -4150,7 +4167,7 @@
    "titre": "2026-11-06 — Remesure avec Chromium 153 : `320-130` non reproduit, deux limites nommées",
    "resume": "Signal : la publication de #281 s'était faite sans navigateur ; deux points restaient en attente — « remesurer les six configurations » et « débordement…",
    "source": "docs/rd/journal.md",
-   "ligne": 251
+   "ligne": 266
   },
   {
    "id": "moyen:journal:2026-11-06:un-helper-d'essai-ne-doit-pas-faire-tomber-une-m",
@@ -4158,7 +4175,7 @@
    "titre": "2026-11-06 — Un helper d'essai ne doit pas faire tomber une mesure qui n'est pas la sienne",
    "resume": "Signal : la vérification de la PR #279 (42203805424, job graphismes) sort 12/13 : le premier essai, « Choix immédiat, contenu préservé, réglages existants et…",
    "source": "docs/rd/journal.md",
-   "ligne": 311
+   "ligne": 326
   },
   {
    "id": "moyen:journal:2026-11-06:une-formule-ancienne-n'est-pas-une-explication-:",
@@ -4166,7 +4183,7 @@
    "titre": "2026-11-06 — Une formule ancienne n'est pas une explication : la Transparence parle aux citoyennes et aux citoyens",
    "resume": "Signal : « il faudrait changer \"Un outil du peuple, pour le peuple\" pour plus de clarté et d'ancrage dans la réalité de la société parler de citoyennes et…",
    "source": "docs/rd/journal.md",
-   "ligne": 298
+   "ligne": 313
   },
   {
    "id": "moyen:journal:2026-11-06:une-lacune-qualifiee-n'est-pas-un-compteur-:-r&d",
@@ -4174,7 +4191,7 @@
    "titre": "2026-11-06 — Une lacune qualifiée n'est pas un compteur : R&D, innovation et prospective des contenus",
    "resume": "Signal : « Continues la R et D, l'innovation et la prospective pour combler les lacunes et les manques dans les contenus !",
    "source": "docs/rd/journal.md",
-   "ligne": 287
+   "ligne": 302
   },
   {
    "id": "moyen:journal:2026-11-06:«-cela-correspond-»-:-validation-humaine-de-la-s",
@@ -4182,7 +4199,7 @@
    "titre": "2026-11-06 — « Cela correspond » : validation humaine de la structure publiée",
    "resume": "Signal : après la fusion de la PR #281, le déploiement Pages et la relecture du HTML réellement servi, la personne utilisatrice répond « Cela correspond » à…",
    "source": "docs/rd/journal.md",
-   "ligne": 260
+   "ligne": 275
   },
   {
    "id": "moyen:journal:2026-11-07:relecture-par-agent-:-une-etape-executable,-des-",
@@ -4190,7 +4207,7 @@
    "titre": "2026-11-07 — Relecture par agent : une étape exécutable, des sources primaires confrontées",
    "resume": "Signal : « la relecture c'est à toi de la faire par une nouvelle étape de vérification car moi perso je vais pas me cogner la lecture de millier de lignes, je…",
    "source": "docs/rd/journal.md",
-   "ligne": 232
+   "ligne": 247
   },
   {
    "id": "moyen:journal:2026-11-07:six-apparences-dans-«-personnalisation-»,-sans-r",
@@ -4198,7 +4215,7 @@
    "titre": "2026-11-07 — Six apparences dans « Personnalisation », sans reprendre aucun nom d'œuvre",
    "resume": "Signal : « Il faudrait pouvoir proposer dans le menu \"personnalisation\" plusieurs choix de configuration d'apparences graphiques du sites sous forme de thème…",
    "source": "docs/rd/journal.md",
-   "ligne": 242
+   "ligne": 257
   },
   {
    "id": "moyen:journal:2026-11-09:la-presentation-de-l’association-devient-un-parc",
@@ -4206,7 +4223,7 @@
    "titre": "2026-11-09 — La présentation de l’association devient un parcours vérifiable",
    "resume": "Signal : « Il faut rendre la présentation de l’association \"professionnellement\" avec un travail soigné et des informations qui soient pertinentes et incitent…",
    "source": "docs/rd/journal.md",
-   "ligne": 204
+   "ligne": 219
   },
   {
    "id": "moyen:journal:2026-11-09:la-relecture-passe-a-toutes-les-editions,-sans-l",
@@ -4214,7 +4231,7 @@
    "titre": "2026-11-09 — La relecture passe à toutes les éditions, sans lecture demandée à la personne",
    "resume": "Signal : « fait en sorte que ce soit fait automatiquement lors de toutes éditions afin d’assurer d’avoir toujours du contenu qui soit propre, pro et sourcé…",
    "source": "docs/rd/journal.md",
-   "ligne": 223
+   "ligne": 238
   },
   {
    "id": "moyen:journal:2026-11-09:l’ouverture-de-l’accueil-:-trois-collages-mesure",
@@ -4222,7 +4239,7 @@
    "titre": "2026-11-09 — L’ouverture de l’accueil : trois collages mesurés, pas trois coquilles",
    "resume": "Signal : « continues et faut revoir l’acceuil […] ce n’est pas vraiment profesionnel comme présentation !",
    "source": "docs/rd/journal.md",
-   "ligne": 214
+   "ligne": 229
   },
   {
    "id": "moyen:journal:2026-11-10:deux-retraits-demandes-sur-la-presentation-publi",
@@ -4230,7 +4247,7 @@
    "titre": "2026-11-10 — Deux retraits demandés sur la présentation publiée",
    "resume": "Signal : « Il faut supprimer \"Ce résumé n’est pas un appel aux dons.\" et aussi la carte qui présente le siège social ».",
    "source": "docs/rd/journal.md",
-   "ligne": 195
+   "ligne": 210
   },
   {
    "id": "moyen:journal:2026-11-10:plan-complet-de-r&d,-d’innovation-et-de-prospect",
@@ -4238,7 +4255,7 @@
    "titre": "2026-11-10 — Plan complet de R&D, d’innovation et de prospective",
    "resume": "Signal : « Fais toute la R et D, l’innovation et la prospective, avec un plan complet sur l’ensemble du projet ».",
    "source": "docs/rd/journal.md",
-   "ligne": 186
+   "ligne": 201
   },
   {
    "id": "moyen:journal:2026-11-10:relecture-de-contenu-des-81-prototypes-par-l’age",
@@ -4246,7 +4263,7 @@
    "titre": "2026-11-10 — Relecture de contenu des 81 prototypes par l’agent",
    "resume": "Signal : « la relecture c’est toi qui doit la faire ».",
    "source": "docs/rd/journal.md",
-   "ligne": 177
+   "ligne": 192
   },
   {
    "id": "moyen:journal:2026-11-11:les-89-adresses-de-source-encore-non-ouvertes,-t",
@@ -4254,7 +4271,7 @@
    "titre": "2026-11-11 — Les 89 adresses de source encore non ouvertes, tentées par l’agent",
    "resume": "Signal : « continues ».",
    "source": "docs/rd/journal.md",
-   "ligne": 167
+   "ligne": 182
   },
   {
    "id": "moyen:journal:2026-11-11:l’accueil-ne-representait-pas-l’association-:-re",
@@ -4262,7 +4279,7 @@
    "titre": "2026-11-11 — L’accueil ne représentait pas l’association : réécriture d’après les statuts, lus en entier",
    "resume": "Signal : « moi perso, [l’ouverture citée mot pour mot, du H1 « Apprendre, vérifier et débattre des sujets qui nous concernent » jusqu’aux boutons] ça ne…",
    "source": "docs/rd/journal.md",
-   "ligne": 103
+   "ligne": 118
   },
   {
    "id": "moyen:journal:2026-11-11:plan-complet-du-projet-:-couverture-fichier-par-",
@@ -4270,7 +4287,7 @@
    "titre": "2026-11-11 — Plan complet du projet : couverture fichier par fichier et 4 cartes de cadrage",
    "resume": "Signal : « continues et fais toute la R et D, l’innovation et la prospective, avec un plan complet sur l’ensemble du projet ».",
    "source": "docs/rd/journal.md",
-   "ligne": 137
+   "ligne": 152
   },
   {
    "id": "moyen:journal:2026-11-11:plan-complet-du-site,-audit-des-redondances-et-a",
@@ -4278,7 +4295,7 @@
    "titre": "2026-11-11 — Plan complet du site, audit des redondances et accueil refondu en une seule passe",
    "resume": "Signal : « faire le plan complet du site, vérifier toutes les redondances surtout sur la page d’accueil car en faisant la lecture je suis rendu compte que les…",
    "source": "docs/rd/journal.md",
-   "ligne": 127
+   "ligne": 142
   },
   {
    "id": "moyen:journal:2026-11-11:publication-demandee-:-le-lot-site-est-pousse-et",
@@ -4286,7 +4303,7 @@
    "titre": "2026-11-11 — Publication demandée : le lot site est poussé et proposé en fusion vers `main`",
    "resume": "Signal : « pousses et fusionnes que je vois directement sur le site ».",
    "source": "docs/rd/journal.md",
-   "ligne": 117
+   "ligne": 132
   },
   {
    "id": "moyen:journal:2026-11-11:seconde-passe-:-les-6-adresses-sans-contenu-repr",
@@ -4294,7 +4311,7 @@
    "titre": "2026-11-11 — Seconde passe : les 6 adresses sans contenu reprises par l’agent",
    "resume": "Signal : « continues », après la livraison de la passe des 89 adresses.",
    "source": "docs/rd/journal.md",
-   "ligne": 157
+   "ligne": 172
   },
   {
    "id": "moyen:journal:2026-11-11:troisieme-passe-:-accueil-ign-retente-et-service",
@@ -4302,7 +4319,7 @@
    "titre": "2026-11-11 — Troisième passe : accueil IGN retenté et services officiels de l’IGN lus",
    "resume": "Signal : « continues », après la livraison du complément.",
    "source": "docs/rd/journal.md",
-   "ligne": 147
+   "ligne": 162
   },
   {
    "id": "moyen:journal:2026-11-12:accessibilite-:-trois-modules-pour-les-personnes",
@@ -4310,7 +4327,7 @@
    "titre": "2026-11-12 — Accessibilité : trois modules pour les personnes handicapées, écrits ici",
    "resume": "Signal : « Vois pour intégrer les modules inspiré de \"lisio\" si c’est pas libre de droit pour la partie PH, pour exemple le site internet de l’Isère…",
    "source": "docs/rd/journal.md",
-   "ligne": 61
+   "ligne": 76
   },
   {
    "id": "moyen:journal:2026-11-12:declarer-une-fraude-:-la-partie-qui-manquait-a-l",
@@ -4318,7 +4335,7 @@
    "titre": "2026-11-12 — Déclarer une fraude : la partie qui manquait à la section #fraudes-ia",
    "resume": "Signal : « continues et vois l’optimisation et l’information et le sourcing sur les fraudes et comment les éviter et surtout les déclarer ».",
    "source": "docs/rd/journal.md",
-   "ligne": 77
+   "ligne": 92
   },
   {
    "id": "moyen:journal:2026-11-12:le-faux-positif-de-la-sonde-d’affichage-est-corr",
@@ -4326,7 +4343,15 @@
    "titre": "2026-11-12 — Le faux positif de la sonde d’affichage est corrigé, et son filtre a enfin un banc",
    "resume": "Signal : « reprends ».",
    "source": "docs/rd/journal.md",
-   "ligne": 91
+   "ligne": 106
+  },
+  {
+   "id": "moyen:journal:2026-11-13:ce-qu’un-lecteur-d’ecran-recoit-:-397-listes-mue",
+   "horizon": "moyen",
+   "titre": "2026-11-13 — Ce qu’un lecteur d’écran reçoit : 397 listes muettes, et un contrôle qui les refuse",
+   "resume": "Ce qui manquait : quatre couches d’accessibilité étaient mesurées — contrastes, indicateur de focus, taille des cibles et espacement du texte, violations…",
+   "source": "docs/rd/journal.md",
+   "ligne": 5
   },
   {
    "id": "moyen:journal:2026-11-13:les-trois-modules-d’accessibilite-entrent-au-pro",
@@ -4334,7 +4359,7 @@
    "titre": "2026-11-13 — Les trois modules d’accessibilité entrent au protocole d’essai",
    "resume": "Suite de : l’entrée du 12 novembre 2026, qui livrait les trois modules et se terminait sur une limite assumée — aucun essai avec des personnes handicapées.",
    "source": "docs/rd/journal.md",
-   "ligne": 48
+   "ligne": 63
   },
   {
    "id": "moyen:journal:2026-11-13:l’ouverture-de-l’accueil-dit-ce-que-l’associatio",
@@ -4342,7 +4367,7 @@
    "titre": "2026-11-13 — L’ouverture de l’accueil dit ce que l’association est, dans ses propres mots",
    "resume": "Signal : la personne a fourni le texte de présentation de l’association et demandé de le mettre « à la place de » l’ouverture d’alors — celle que le lot du 11…",
    "source": "docs/rd/journal.md",
-   "ligne": 35
+   "ligne": 50
   },
   {
    "id": "moyen:journal:2026-11-13:materiel-de-seance-:-de-quoi-faire-un-essai,-pas",
@@ -4350,7 +4375,7 @@
    "titre": "2026-11-13 — Matériel de séance : de quoi faire un essai, pas de quoi le déclarer fait",
    "resume": "Suite de : l’entrée du même jour qui inscrivait C1–C4 au protocole.",
    "source": "docs/rd/journal.md",
-   "ligne": 19
+   "ligne": 34
   },
   {
    "id": "moyen:journal:2026-11-13:une-colonne-qui-sortait-du-modele-:-le-controle-",
@@ -4358,13 +4383,13 @@
    "titre": "2026-11-13 — Une colonne qui sortait du modèle : le contrôle des colonnes avait raison",
    "resume": "Signal : la CI de la PR #293 tombait rouge sur graphismes, sans journal lisible (--log-failed rendait une erreur de stockage, pas une trace).",
    "source": "docs/rd/journal.md",
-   "ligne": 5
+   "ligne": 20
   }
  ],
  "compte": {
   "court": 11,
-  "moyen": 450,
-  "long": 65
+  "moyen": 452,
+  "long": 66
  },
- "poids_corpus": 2336723
+ "poids_corpus": 2355851
 }

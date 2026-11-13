@@ -36,7 +36,9 @@ def compter_questions_boussole(html: str) -> int:
     bloc = re.search(r'id="boussole-savoirs"(?P<contenu>.*?)(?:</section>|<section\b)', html, re.S)
     if not bloc:
         raise ValueError("section #boussole-savoirs introuvable")
-    liste = re.search(r'<ol class="knowledge-compass">(?P<contenu>.*?)</ol>', bloc.group("contenu"), re.S)
+    liste = re.search(
+        r'<ol\b[^>]*class="knowledge-compass"[^>]*>(?P<contenu>.*?)</ol>', bloc.group("contenu"), re.S
+    )
     if not liste:
         raise ValueError("liste .knowledge-compass introuvable")
     return len(re.findall(r"<li\b", liste.group("contenu")))

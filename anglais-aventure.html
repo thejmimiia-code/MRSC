@@ -104,7 +104,7 @@
           <a class="button adventure-primary-button" href="#mondes">Explorer les 15 mondes</a>
           <a class="button button-secondary adventure-secondary-button" href="#missions">Jouer une escale en anglais</a>
         </div>
-        <ul class="adventure-promise-list" aria-label="Principes du jeu">
+        <ul role="list" class="adventure-promise-list" aria-label="Principes du jeu">
           <li>Gratuit, sans publicité ni compte</li>
           <li>Aucun ordre, score ou calendrier obligatoire</li>
           <li>Pas de minuteur, pas de pénalité</li>
@@ -179,7 +179,7 @@
               </form>
               <p class="adventure-learning-result-count" id="learning-result-count" role="status" aria-live="polite" aria-atomic="true">Les fiches du catalogue se chargent…</p>
               <p class="adventure-learning-no-results" id="learning-no-results" hidden>Aucune fiche ne correspond à ces critères. Essaie un autre mot ou efface les filtres.</p>
-              <ul class="adventure-learning-sheet-grid" id="learning-sheet-grid" aria-label="Fiches d’apprentissage des mondes"></ul>
+              <ul role="list" class="adventure-learning-sheet-grid" id="learning-sheet-grid" aria-label="Fiches d’apprentissage des mondes"></ul>
             </section>
 
             <aside class="adventure-learning-path" aria-labelledby="learning-path-title">
@@ -188,7 +188,7 @@
               <p>Ajoute, enlève ou réordonne les fiches qui t’intéressent. Ce parcours est facultatif, modifiable et enregistré uniquement sur cet appareil.</p>
               <p class="adventure-learning-path-count" id="learning-path-count" role="status" aria-live="polite" aria-atomic="true">Aucune fiche ajoutée.</p>
               <p id="learning-path-empty">Pour commencer, sélectionne « Ajouter à mon parcours » sur une fiche. Cela ne marque pas la fiche comme terminée.</p>
-              <ol class="adventure-learning-path-list" id="learning-path-list" aria-label="Fiches choisies pour ton parcours" tabindex="0"></ol>
+              <ol role="list" class="adventure-learning-path-list" id="learning-path-list" aria-label="Fiches choisies pour ton parcours" tabindex="0"></ol>
               <button class="button button-secondary" id="learning-path-clear" type="button">Effacer mon parcours local</button>
               <p class="adventure-learning-path-privacy">Seuls les identifiants des fiches choisies sont gardés dans le stockage local. Aucun exercice, texte saisi, score ni résultat n’est conservé ou transmis.</p>
             </aside>
@@ -244,7 +244,7 @@
               <p class="eyebrow">Ton carnet de voyage</p>
               <h3 id="progress-title">Tu gardes le cap que tu veux.</h3>
               <p class="adventure-progress-summary" id="progress-summary" role="status" aria-live="polite" aria-atomic="true">Ta progression reste facultative.</p>
-              <ul class="adventure-progress-list" id="progress-list"></ul>
+              <ul role="list" class="adventure-progress-list" id="progress-list"></ul>
               <button class="button button-secondary adventure-reset-button" id="clear-progress" type="button">Effacer mon avancement local</button>
               <p class="adventure-privacy-note">Dans les Escales d’anglais, seuls les identifiants des missions découvertes et ton choix d’aide peuvent être gardés localement. Les fiches ajoutées au parcours sont gérées séparément dans l’atlas. Tes réponses libres ne sont ni enregistrées, ni envoyées. Aucun compte, publicité, mesure d’audience ou suivi individuel.</p>
               <p class="adventure-storage-note" id="storage-note" role="status" aria-live="polite" hidden></p>
@@ -300,7 +300,7 @@
                   <section class="adventure-answer-area" aria-labelledby="reply-heading">
                     <h4 id="reply-heading">À toi de répondre</h4>
                     <p class="adventure-objective" id="turn-objective"></p>
-                    <ul class="adventure-answer-list" id="answer-options"></ul>
+                    <ul role="list" class="adventure-answer-list" id="answer-options"></ul>
                   </section>
 
                   <details class="adventure-free-practice" id="free-practice">
@@ -342,7 +342,7 @@
               <p id="finish-message"></p>
               <details class="adventure-keepsake">
                 <summary>Garder quelques phrases utiles</summary>
-                <ul id="keepsake-list"></ul>
+                <ul role="list" id="keepsake-list"></ul>
               </details>
               <div class="hero-actions adventure-finish-actions">
                 <button class="button" id="replay-mission" type="button">Refaire cette escale</button>
@@ -376,7 +376,7 @@
         <div>
           <p class="eyebrow">Transparence de la R&amp;D</p>
           <h2 id="adventure-method-title">Un jeu comme support, pas comme promesse de résultat.</h2>
-          <ul class="trace-list">
+          <ul role="list" class="trace-list">
             <li>Les Escales mobilisent la réception (lire ou écouter), la production (choisir ou essayer une phrase) et l’interaction. Les repères CECRL restent indicatifs : ils ne sont ni un test officiel ni une évaluation de ton niveau.</li>
             <li>Les recherches sur les jeux en langue sont encourageantes pour certains apprentissages, notamment le vocabulaire, mais ne prouvent pas que cette maquette rende autonome en conversation.</li>
             <li>Les dialogues, les lieux et l’illustration de ce prototype sont originaux. Aucun compte, aucune IA, aucun microphone ni téléchargement de contenu tiers n’est requis pour jouer.</li>
@@ -393,7 +393,7 @@
           <h2 id="roadmap-title">Un atlas complet à explorer, un contenu à faire relire.</h2>
           <p>Les 108 fiches existantes sont maintenant reliées aux mondes. Les prochaines étapes portent sur leur qualité, l’accès réel et les sujets absents ; ajouter une carte ou un badge ne vaut pas validation d’un contenu.</p>
         </div>
-        <ol class="adventure-roadmap-list">
+        <ol role="list" class="adventure-roadmap-list">
           <li><strong>Relire les contenus.</strong><span>Faire vérifier les cinq dialogues anglais et relire les 82 prototypes des fiches par des personnes compétentes ; maintenir visibles les thèmes encore à créer.</span></li>
           <li><strong>Tester l’accès à l’atlas.</strong><span>Essayer recherche, filtres, parcours local, clavier, toucher, lecteur d’écran, zoom et contrastes sur plusieurs appareils.</span></li>
           <li><strong>Créer des expériences dans d’autres mondes.</strong><span>Après relecture éditoriale, concevoir des activités originales pour d’autres matières sans recopier les fiches ni imposer un cursus.</span></li>
@@ -412,7 +412,7 @@
         </div>
         <nav class="footer-nav" aria-label="Navigation de pied de page">
           <p class="footer-heading">Naviguer</p>
-          <ul>
+          <ul role="list">
             <li><a href="index.html">Accueil</a></li>
             <li><a href="ia-societe.html">IA &amp; société</a></li>
             <li><a href="apprendre.html">Apprendre</a></li>
@@ -428,7 +428,7 @@
         </div>
         <div class="footer-docs">
           <p class="footer-heading">Documents</p>
-          <ul>
+          <ul role="list">
             <li><a href="assets/documents/statuts-2020.pdf" target="_blank" rel="noopener noreferrer">Nos statuts</a></li>
             <li><a href="documents.html">Tous les documents</a></li>
           </ul>
@@ -436,7 +436,7 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; <span data-year>2026</span> Mouvement Représentatif de la Société Civile (M.R.S.C).</p>
-        <ul class="footer-legal">
+        <ul role="list" class="footer-legal">
           <li><a href="confidentialite.html">Vie privée et données</a></li>
           <li><a href="nous-contacter.html">Contact</a></li>
           <li><a href="transparence.html#licence">Licence</a></li>
