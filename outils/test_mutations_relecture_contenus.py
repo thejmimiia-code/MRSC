@@ -290,5 +290,45 @@ class ListeDUnOutil(unittest.TestCase):
             self.assertIn("aucune édition à relire", resultat.stderr)
 
 
+class FichierServiParUneSource(unittest.TestCase):
+    """Une URL horodatée d'archive n'est pas une source ; sa fiche en est une.
+
+    Le 14 novembre 2026, la collecte a écrit dans son état de provenance l'adresse
+    de l'archive DVF réellement téléchargée, horodatée à la seconde. Aucun registre
+    ne peut l'enregistrer d'avance. La porte la refusait — correctement — et la
+    collecte ne pouvait donc jamais signer sa provenance. La règle ajoutée est
+    étroite : un hôte de distribution, et seulement lui, est couvert par une source
+    qui partage son domaine.
+    """
+
+    def module(self):  # noqa: ANN201
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("relire_banc_distribution", RACINE / "outils" / "relire-contenus.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module
+
+    def test_archive_sous_la_fiche_du_jeu(self) -> None:
+        module = self.module()
+        sources = {"https://www.data.gouv.fr/api/1/datasets/demandes-de-valeurs-foncieres/"}
+        self.assertTrue(
+            module.servi_par_une_source("static.data.gouv.fr", sources),
+            "une archive de data.gouv.fr n'est pas couverte par la fiche du jeu",
+        )
+
+    def test_hote_de_distribution_sans_fiche(self) -> None:
+        module = self.module()
+        sources = {"https://exemple.test/jeu/"}
+        self.assertFalse(module.servi_par_une_source("static.data.gouv.fr", sources))
+
+    def test_hote_quelconque_jamais_couvert(self) -> None:
+        module = self.module()
+        sources = {"https://static.data.gouv.fr/jeu/"}
+        self.assertFalse(
+            module.servi_par_une_source("autre.data.gouv.fr", sources),
+            "un hôte non déclaré comme distributeur ne doit pas passer par cette règle",
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

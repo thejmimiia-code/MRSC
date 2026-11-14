@@ -110,6 +110,15 @@ DOMAINES_SURS = {
     "data.economie.gouv.fr", "www.data.economie.gouv.fr",
 }
 DOMAINES_PROPRES = {"thejmimiia-code.github.io"}
+#: Hôtes qui ne servent que des **fichiers** de jeux de données dont la fiche est
+#: enregistrée ailleurs. Le 14 novembre 2026, la collecte a écrit dans son état de
+#: provenance les adresses des archives DVF réellement téléchargées — des URL
+#: horodatées, donc impossibles à enregistrer d'avance dans le registre. La porte
+#: les a refusées à juste titre : une URL inconnue n'est pas une source. La règle
+#: retenue ici est plus étroite et vérifiable — un hôte de distribution n'est
+#: couvert que si une source enregistrée partage son domaine, et cette source est
+#: celle qui décrit le jeu que le fichier sert.
+HOSTS_DE_DISTRIBUTION = {"static.data.gouv.fr"}
 #: Domaines réservés aux fixtures des bancs de mutation et aux exemples de fiche :
 #: `site-fictif.test` est l'adresse d'exercice de la fiche « lire une adresse web »,
 #: reproduite à l'identique dans les données d'aventure ; c'est une URL inventée pour
@@ -605,6 +614,27 @@ def urls_nouvelles(relatif: str, connues: set[str] | None = None) -> list[str]:
     return [url for url in urls_du_fichier(relatif) if url not in connues]
 
 
+def servi_par_une_source(domaine: str, urls_sources: set[str]) -> bool:
+    """Un fichier servi par un hôte de distribution est couvert par sa fiche.
+
+    `static.data.gouv.fr` sert les archives d'un jeu dont la fiche vit sur
+    `www.data.gouv.fr`. Le domaine commun est ce qui fait le lien ; sans lui, une
+    URL horodatée ne pourrait jamais être sourcée, et la sentinelle obligerait à
+    taire la provenance réelle des fichiers.
+    """
+    if domaine not in HOSTS_DE_DISTRIBUTION:
+        return False
+    domaine_commun = domaine.split(".", 1)[1]
+    for url in urls_sources:
+        try:
+            hote = urlparse(url).netloc.lower()
+        except ValueError:
+            continue
+        if hote == domaine_commun or hote.endswith("." + domaine_commun):
+            return True
+    return False
+
+
 def appliquer(args: argparse.Namespace) -> int:
     if not MANIFESTE.is_file() or not REGISTRE.is_file():
         print("Registre ou manifeste absent : lancer --initialiser.", file=sys.stderr)
@@ -668,7 +698,7 @@ def appliquer(args: argparse.Namespace) -> int:
             if (domaine in DOMAINES_PROPRES or domaine in DOMAINES_FICTIFS
                     or "/thejmimiia-code/MRSC" in url):
                 continue
-            if url.rstrip("/") not in urls_sources:
+            if url.rstrip("/") not in urls_sources and not servi_par_une_source(domaine, urls_sources):
                 erreurs.append(
                     f"--appliquer : URL externe nouvelle sans source primaire enregistrée : {url} — "
                     "ajouter une [[source]] datée et son extrait avant de signer"

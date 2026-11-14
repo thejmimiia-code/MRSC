@@ -8943,3 +8943,27 @@ sources = []
 mesures = ["outils/verifier-workflows.py", "outils/test_verifier_workflows.py", "outils/test_mutations_relecture_contenus.py"]
 constat = "L'étape de provenance de la collecte savait échouer sans dire pourquoi : elle passe désormais --ignorer-inchanges, pour qu'un fichier touché puis rendu identique ne bloque plus la signature, et rejoue son journal en annotations d'erreur, seule voie lisible depuis l'atelier. Rien d'autre ne change dans la collecte."
 limite = "Cette signature ne dit pas que la collecte aboutira : la cause exacte de l'échec du 14 novembre n'a pas été lue, seulement approchée par reproduction locale d'un cas voisin. La prochaine exécution donnera le vrai message, en annotation, s'il y en a un."
+
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "389ce6139fa3d57d56a9d0150b74cfc9ac5f3d5fcc0b276dc70a1747c8ba7976"
+empreinte_apres = "56f0619ea70350a0caea916b9c646c9900e91e9426079470e36f3824f260b11e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_mutations_relecture_contenus.py", "outils/relire-contenus.py"]
+constat = "La provenance d'un fichier téléchargé porte l'adresse horodatée de l'archive, qu'aucun registre ne peut enregistrer d'avance : la sentinelle refusait donc toute collecte DVF. Un hôte de distribution déclaré — static.data.gouv.fr — est désormais couvert par une source enregistrée qui partage son domaine, et par elle seule. Trois cas ajoutés, dont un qui vérifie qu'un autre hôte ne passe pas."
+limite = "La règle repose sur une liste d'hôtes écrite à la main : un nouveau miroir demandera une ligne, et ce cas-là ne sera pas deviné par le banc. Elle ne dit rien non plus de la fraîcheur de l'archive : elle autorise à citer l'adresse, pas à garantir son contenu."
+
+[[edition]]
+chemin = "outils/test_mutations_relecture_contenus.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "d1d24bca2f5e211bc075570911acc680299eff8fac7fd9a5ac7b8d0ef5931563"
+empreinte_apres = "e13d8c49d57773ed8abac8cf58d1ec764467f4658469a1163f217d34a4557838"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_mutations_relecture_contenus.py", "outils/relire-contenus.py"]
+constat = "La provenance d'un fichier téléchargé porte l'adresse horodatée de l'archive, qu'aucun registre ne peut enregistrer d'avance : la sentinelle refusait donc toute collecte DVF. Un hôte de distribution déclaré — static.data.gouv.fr — est désormais couvert par une source enregistrée qui partage son domaine, et par elle seule. Trois cas ajoutés, dont un qui vérifie qu'un autre hôte ne passe pas."
+limite = "La règle repose sur une liste d'hôtes écrite à la main : un nouveau miroir demandera une ligne, et ce cas-là ne sera pas deviné par le banc. Elle ne dit rien non plus de la fraîcheur de l'archive : elle autorise à citer l'adresse, pas à garantir son contenu."
