@@ -96,9 +96,15 @@ def lire_stations(contenu: bytes) -> list[dict[str, str]]:
     except UnicodeDecodeError as erreur:
         raise Refus(f"flux illisible : {erreur}") from erreur
     premiere = texte.splitlines()[0] if texte.strip() else ""
-    if "code_departement" not in premiere:
+    if "code_departement" not in premiere.replace(" ", ""):
         raise Refus("le flux n'a pas de colonne code_departement : format inattendu, rien n'est publié")
-    lignes = list(csv.DictReader(io.StringIO(texte)))
+    # L'export CSV d'une plateforme Opendatasoft suit la langue de l'interface :
+    # séparateur point-virgule et virgule décimale en français, virgule et point
+    # en anglais. Lire la virgule comme séparateur d'un fichier français donne une
+    # seule colonne, donc zéro station, donc un refus — un refus qui accusait le
+    # flux alors que c'était la lecture qui se trompait. L'en-tête tranche.
+    separateur = ";" if premiere.count(";") > premiere.count(",") else ","
+    lignes = list(csv.DictReader(io.StringIO(texte), delimiter=separateur))
     if len(lignes) < MINIMUM_STATIONS:
         raise Refus(
             f"{len(lignes)} station(s) reçue(s), au moins {MINIMUM_STATIONS} attendues : "
