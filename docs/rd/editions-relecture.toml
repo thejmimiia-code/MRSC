@@ -8907,3 +8907,39 @@ sources = []
 mesures = ["outils/memoire-eva.py"]
 constat = "Régénération mécanique de l'index de la mémoire d'ÉVA après la mise à jour de l'inventaire des contrôles et du collecteur de carburants : l'index suit ses sources, le graphe et le plan sont inchangés."
 limite = "Cette signature atteste la cohérence du rendu, pas la justesse des textes recopiés ; et le graphe n'a été ni ouvert ni regardé."
+
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "f9027ebbd39e1934ed21c80b2fa63d1e45939374fa0f3f60d801f667de1183e4"
+empreinte_apres = "389ce6139fa3d57d56a9d0150b74cfc9ac5f3d5fcc0b276dc70a1747c8ba7976"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_mutations_relecture_contenus.py", "outils/relire-contenus.py"]
+constat = "Une liste de fichiers venue d'un outil peut contenir un fichier touché puis rendu identique ; la sentinelle le refusait, ce qui bloquait la collecte automatique pour rien. L'option --ignorer-inchanges le tolère explicitement, sans rien signer pour ce fichier, et deux cas la tiennent : toléré avec, refusé sans. Le refus à la main reste le comportement par défaut."
+limite = "Ces deux cas éprouvent la mécanique de signature sur une copie complète du dépôt, pas la collecte réelle : ils ne disent rien des fichiers de données produits par le workflow, ni si la cause exacte de l'échec du 14 novembre était bien celle-là — l'annotation de la prochaine exécution le dira."
+
+[[edition]]
+chemin = "outils/test_mutations_relecture_contenus.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "23379978b4a671fbade1431f4c0e10edb1559653294a34a69e0bc84c24160e14"
+empreinte_apres = "d1d24bca2f5e211bc075570911acc680299eff8fac7fd9a5ac7b8d0ef5931563"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_mutations_relecture_contenus.py", "outils/relire-contenus.py"]
+constat = "Une liste de fichiers venue d'un outil peut contenir un fichier touché puis rendu identique ; la sentinelle le refusait, ce qui bloquait la collecte automatique pour rien. L'option --ignorer-inchanges le tolère explicitement, sans rien signer pour ce fichier, et deux cas la tiennent : toléré avec, refusé sans. Le refus à la main reste le comportement par défaut."
+limite = "Ces deux cas éprouvent la mécanique de signature sur une copie complète du dépôt, pas la collecte réelle : ils ne disent rien des fichiers de données produits par le workflow, ni si la cause exacte de l'échec du 14 novembre était bien celle-là — l'annotation de la prochaine exécution le dira."
+
+[[edition]]
+chemin = ".github/workflows/collecte-vie-chere.yml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "744742e8bb059a664aed7da137e7bb4ad43823a03ba998f65969d8fb5fcb05f2"
+empreinte_apres = "fe734fa16f74cfc0eb763023df85245c58c676c5e773159c07ef55d8cf1b2a3d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-workflows.py", "outils/test_verifier_workflows.py", "outils/test_mutations_relecture_contenus.py"]
+constat = "L'étape de provenance de la collecte savait échouer sans dire pourquoi : elle passe désormais --ignorer-inchanges, pour qu'un fichier touché puis rendu identique ne bloque plus la signature, et rejoue son journal en annotations d'erreur, seule voie lisible depuis l'atelier. Rien d'autre ne change dans la collecte."
+limite = "Cette signature ne dit pas que la collecte aboutira : la cause exacte de l'échec du 14 novembre n'a pas été lue, seulement approchée par reproduction locale d'un cas voisin. La prochaine exécution donnera le vrai message, en annotation, s'il y en a un."

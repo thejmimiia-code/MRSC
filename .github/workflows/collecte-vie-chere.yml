@@ -99,14 +99,25 @@ jobs:
             echo "Aucun fichier de données modifié."
             exit 0
           fi
+          set +e
           python3 outils/relire-contenus.py --appliquer $fichiers \
             --nature mesure-interne \
             --mesures "outils/collecter-vie-chere.py,outils/test_collecte_vie_chere.py,outils/collecter-carburants.py,outils/test_collecte_carburants.py,outils/preparer-fond-de-carte.py" \
             --constat "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station." \
-            --limite "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF." || {
-              echo "::error title=Collecte::la provenance n'a pas pu être consignée";
-              exit 1;
-            }
+            --limite "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF." \
+            --ignorer-inchanges >"$RUNNER_TEMP/provenance.log" 2>&1
+          code=$?
+          set -e
+          cat "$RUNNER_TEMP/provenance.log"
+          if [ "$code" -ne 0 ]; then
+            # La même leçon que pour les collectes : un échec qu'on ne peut pas
+            # lire est un échec qu'on répare à l'aveugle. Le 14 novembre 2026, ce
+            # pas a échoué en n'affichant qu'un titre.
+            tail -n 12 "$RUNNER_TEMP/provenance.log" | cut -c1-800 | while IFS= read -r ligne; do
+              echo "::error title=Provenance::$ligne"
+            done
+            exit "$code"
+          fi
 
       - name: Ouvrir une proposition de fusion si les données ont changé
         env:

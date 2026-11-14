@@ -367,7 +367,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = ".github/workflows/collecte-vie-chere.yml"
-empreinte = "744742e8bb059a664aed7da137e7bb4ad43823a03ba998f65969d8fb5fcb05f2"
+empreinte = "fe734fa16f74cfc0eb763023df85245c58c676c5e773159c07ef55d8cf1b2a3d"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -3036,7 +3036,7 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "outils/relire-contenus.py"
-empreinte = "f9027ebbd39e1934ed21c80b2fa63d1e45939374fa0f3f60d801f667de1183e4"
+empreinte = "389ce6139fa3d57d56a9d0150b74cfc9ac5f3d5fcc0b276dc70a1747c8ba7976"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -3342,7 +3342,7 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "outils/test_mutations_relecture_contenus.py"
-empreinte = "23379978b4a671fbade1431f4c0e10edb1559653294a34a69e0bc84c24160e14"
+empreinte = "d1d24bca2f5e211bc075570911acc680299eff8fac7fd9a5ac7b8d0ef5931563"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14

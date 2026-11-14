@@ -21,6 +21,7 @@ Usage :
 from __future__ import annotations
 
 import re
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -236,6 +237,57 @@ class ManifesteDesUrl(unittest.TestCase):
             )
             donnees = tomllib.loads(module.MANIFESTE.read_text(encoding="utf-8"))
             self.assertEqual(donnees["unite"][0]["urls"], ['https://exemple.test/a"b', "https://exemple.test/c\\d"])
+
+
+
+class ListeDUnOutil(unittest.TestCase):
+    """Ce que fait `--ignorer-inchanges`, et ce qu'il ne fait pas.
+
+    Le 14 novembre 2026, la collecte automatique a échoué à l'étape de provenance
+    sans qu'on puisse lire pourquoi. La cause probable — un fichier touché puis
+    rendu identique, présent dans une liste venue de `git status` — se répare par
+    une option ; encore faut-il que l'option ne transforme pas la sentinelle en
+    tampon. Ces deux cas tiennent les deux bords : toléré avec l'option, refusé
+    sans elle.
+
+    La copie est complète — pas de liens symboliques — et c'est le script de la
+    copie qui s'exécute : `--appliquer` refuse MRSC_RACINE, et il a raison.
+    """
+
+    def arguments(self, chemin: str) -> list[str]:
+        return [
+            "--appliquer", chemin,
+            "--nature", "mesure-interne",
+            "--mesures", "outils/relire-contenus.py",
+            "--constat", "Essai : un fichier inchangé dans une liste produite par un outil.",
+            "--limite", "Essai local sur une copie complète : ce cas ne prouve que la mécanique de signature, pas la justesse des textes.",
+        ]
+
+    def lancer(self, dossier: Path, chemin: str, tolerer: bool) -> subprocess.CompletedProcess[str]:
+        arguments = self.arguments(chemin)
+        if tolerer:
+            arguments.append("--ignorer-inchanges")
+        return subprocess.run(
+            [sys.executable, str(dossier / "outils" / "relire-contenus.py"), *arguments],
+            cwd=dossier, capture_output=True, text=True, check=False,
+        )
+
+    def test_fichier_inchange_tolere(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="mrsc-liste-") as tmp:
+            dossier = Path(tmp)
+            banc_mutations.copie_complete(dossier)
+            resultat = self.lancer(dossier, "docs/rd/journal.md", tolerer=True)
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-800:])
+            self.assertIn("Aucune unité modifiée", resultat.stdout)
+            self.assertIn('chemin = "docs/rd/journal.md"', (dossier / "docs/rd/editions-relecture.toml").read_text(encoding="utf-8"))
+
+    def test_fichier_inchange_refuse_sans_option(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="mrsc-liste-") as tmp:
+            dossier = Path(tmp)
+            banc_mutations.copie_complete(dossier)
+            resultat = self.lancer(dossier, "docs/rd/journal.md", tolerer=False)
+            self.assertNotEqual(resultat.returncode, 0, "un fichier inchangé a été signé sans option")
+            self.assertIn("aucune édition à relire", resultat.stderr)
 
 
 if __name__ == "__main__":
