@@ -118,7 +118,11 @@ DOMAINES_PROPRES = {"thejmimiia-code.github.io"}
 #: retenue ici est plus étroite et vérifiable — un hôte de distribution n'est
 #: couvert que si une source enregistrée partage son domaine, et cette source est
 #: celle qui décrit le jeu que le fichier sert.
-HOSTS_DE_DISTRIBUTION = {"static.data.gouv.fr"}
+#: L’API tabulaire de data.gouv.fr sert le fichier d’un jeu dont la fiche vit sur
+#: `www.data.gouv.fr` : même domaine commun, même ressource, autre porte. Sans
+#: elle, une page qui lit un fichier par cette API devrait citer une adresse
+#: qu’elle n’utilise pas, ou taire comment elle a lu.
+HOSTS_DE_DISTRIBUTION = {"static.data.gouv.fr", "tabular-api.data.gouv.fr"}
 #: Domaines réservés aux fixtures des bancs de mutation et aux exemples de fiche :
 #: `site-fictif.test` est l'adresse d'exercice de la fiche « lire une adresse web »,
 #: reproduite à l'identique dans les données d'aventure ; c'est une URL inventée pour

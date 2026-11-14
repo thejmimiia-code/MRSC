@@ -157,6 +157,14 @@
       </div>
     </section>
 
+    <section class="content-section" aria-labelledby="titre-loyers">
+      <div class="container">
+        <h2 id="titre-loyers">Les loyers observés, agglomération par agglomération</h2>
+        <p>Acheter n’est pas louer : la carte mesure des prix de vente, pas des loyers. Les loyers sont observés par un autre réseau — les observatoires locaux des loyers, animés par l’ANIL — qui publie chaque année, sous Licence Ouverte 2.0, une médiane par agglomération. C’est cette mesure-là qui figure ici, à la seule maille où elle existe.</p>
+<p class="couts-note">Aucune collecte de loyers n’a encore été faite : la page ne les estime pas et n’affiche aucun chiffre. La source est identifiée (observatoires locaux des loyers, Licence Ouverte 2.0) et la collecte est en place ; le premier passage la fera entrer.</p>
+      </div>
+    </section>
+
     <section class="content-section" aria-labelledby="titre-methode">
       <div class="container">
         <h2 id="titre-methode">Ce que la carte mesure, et ce qu’elle ne mesure pas</h2>
@@ -172,7 +180,7 @@
           <div>
             <h3>Non mesuré, donc absent</h3>
             <ul class="couts-liste" role="list">
-              <li>Les <strong>loyers</strong> : aucune source libre ne les couvre pour toutes les communes ; la page ne les estime pas.</li>
+              <li>Les <strong>loyers</strong> de la carte : aucune source libre ne les couvre commune par commune. Ils sont observés par agglomération et publiés comme tels dans la section précédente ; la page ne les répartit pas sur les communes, faute de source qui le fasse.</li>
               <li>Le <strong>reste à vivre</strong> : les revenus médians ne sont pas encore collectés (source identifiée, collecte non automatisée).</li>
               <li>Les <strong>charges, transports, alimentation, impôts locaux</strong> : ce ne sont pas des données communales publiques homogènes ; les inventer donnerait un « coût de la vie » qui n’existe nulle part.</li>
               <li>L’<strong>Alsace et la Moselle</strong> : hors du champ de DVF (livre foncier), donc sans prix de vente, même quand la commune existe.</li>
@@ -195,7 +203,7 @@
             <tbody>
               <tr><th scope="row">Achat de logement</th><td>Prix médian au m², appartements et maisons, et nombre de ventes</td><td>Commune</td><td>DVF, DGFiP (Licence Ouverte 2.0)</td></tr>
               <tr><th scope="row">Carburants</th><td>Prix médian au litre, par carburant, et nombre de stations</td><td>Département</td><td>DGCCRF, flux des prix des carburants (Licence Ouverte 2.0)</td></tr>
-              <tr><th scope="row">Loyers</th><td>Rien pour l’instant : les observatoires locaux des loyers (ANIL) publient par agglomération, avec des fichiers séparés et des mailles différentes ; la collecte n’est pas faite</td><td>Agglomération, quand elle existe</td><td>Identifiée, non collectée</td></tr>
+              <tr><th scope="row">Loyers</th><td>Rien pour l’instant : la collecte des loyers par agglomération n’a pas encore eu lieu ; la source est identifiée et l’outil en place</td><td>Agglomération, quand elle existe</td><td>Observatoires locaux des loyers, réseau OLL animé par l’ANIL (Licence Ouverte 2.0)</td></tr>
               <tr><th scope="row">Revenus et salaires</th><td>Rien pour l’instant : le revenu médian communal existe (FiLoSoFi, INSEE) mais ses fichiers passent par des pages sans URL stable</td><td>Commune</td><td>Identifiée, non collectée</td></tr>
               <tr><th scope="row">Alimentation, biens de consommation</th><td>Rien : les enquêtes publiques publiées portent sur des <em>indices</em> de prix (base 100), pas sur le prix d’un panier dans une commune</td><td>National</td><td>Aucune donnée de prix local trouvée</td></tr>
               <tr><th scope="row">Assurances</th><td>Rien : les tarifs dépendent du contrat, du véhicule, du logement et du profil ; aucun jeu public ne les publie par commune</td><td>—</td><td>Aucune donnée publique trouvée</td></tr>
@@ -216,10 +224,11 @@
           <li><strong>Prix de vente</strong> — DGFiP, « Demandes de valeurs foncières », publiées sur data.gouv.fr sous Licence Ouverte 2.0. Fichiers semestriels, agrégés par commune, sans parcelle ni adresse. Deux précautions que la première collecte avait manquées : DVF écrit le code commune sans ses zéros de tête (la commune 01001 arrive en <code>1</code>), et Paris, Lyon et Marseille y sont vendues par arrondissement (75101…, 69381…, 13201…) — leurs ventes sont donc rétablies puis réunies sous la commune. Sans ces deux règles, les trois plus grandes villes de France et les cent premières communes de chaque département restaient vides. <a href="https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres">Fiche du jeu de données</a>.</li>
           <li><strong>Communes, population, coordonnées</strong> — API Découpage administratif de l’État (<a href="https://geo.api.gouv.fr/decoupage-administratif">geo.api.gouv.fr</a>), alimentée par le jeu de données « Découpage administratif » publié sous Licence Ouverte 2.0 (<a href="https://www.data.gouv.fr/datasets/decoupage-administratif-1">fiche du jeu de données</a>).</li>
           <li><strong>Carburants</strong> — DGCCRF, « Prix des carburants en France, flux instantané », Licence Ouverte 2.0, mis à jour toutes les dix minutes. Le site n’en garde que des <strong>médianes départementales</strong> et le nombre de stations, jamais le nom d’une station. <a href="https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree">Fiche du jeu de données</a>.</li>
+          <li><strong>Loyers</strong> — Observatoires locaux des loyers, réseau OLL animé par l’ANIL, « Loyers 2025 dans les agglomérations observées par les observatoires du réseau », Licence Ouverte 2.0. Le site lit la fiche par son API publique, prend la ressource de l’année la plus récente et ne garde que la ligne « ensemble des logements » de chaque agglomération : ni découpage par nombre de pièces, ni par époque, ni par ancienneté. <a href="https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers">Fiche du jeu de données</a>.</li>
           <li><strong>Contours</strong> — IGN, ADMIN EXPRESS COG (édition 2018), Licence Ouverte 2.0, export GeoJSON déjà simplifié, puis seconde simplification par ce site. <a href="https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe">Fiche du jeu de données sur data.gouv.fr</a> ; la fiche produit de l’IGN (geoservices.ign.fr) a répondu 403 lors de la rédaction, elle n’est donc pas citée.</li>
         </ul>
         <p class="couts-note">Les jeux complets ne sont pas exposés à l’indexation : seules des médianes communales sont publiées, conformément aux conditions d’utilisation de DVF, qui interdisent la réidentification des personnes et l’indexation des fichiers.</p>
-        <p class="couts-note">Cette page ne figure pas encore dans le menu principal : on y arrive depuis <a href="documents.html">Documents</a>. Le menu est recopié dans chaque page du site, dont 108 fiches produites par un générateur ; l’y ajouter demande de régénérer puis de revérifier l’ensemble. Tant que ce n’est pas fait, c’est écrit ici.</p>
+        <p class="couts-note">Cette page figure dans le menu principal depuis le 14 novembre 2026, sous « Coût de la vie », entre « Simulateur » et « Documents ». Elle est aussi la cinquième entrée de l’accueil.</p>
       </div>
     </section>
   </main>

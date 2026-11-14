@@ -395,9 +395,122 @@ class FondEtPage(unittest.TestCase):
             self.assertNotEqual(resultat.returncode, 0)
             self.assertIn("Licence Ouverte", resultat.stderr)
 
+    #: La page dépend maintenant de la collecte des loyers : sans le fichier, elle
+    #: doit dire que la collecte n'a pas eu lieu ; avec, elle doit porter le
+    #: tableau. Les copies du banc emportent donc le fichier quand il existe dans
+    #: le dépôt, sinon elles éprouveraient un état que le dépôt n'a pas.
+    FICHIERS_PAGE = ["localisation.html", "couts-vie-chere/contenu.txt", "couts-vie-chere.html"]
+
+    def copier_page(self, dossier: Path, loyers: dict | None = None) -> None:
+        self.copier(dossier, self.FICHIERS_PAGE)
+        chemin = dossier / "assets/data/vie-chere/loyers.json"
+        chemin.parent.mkdir(parents=True, exist_ok=True)
+        if loyers is not None:
+            chemin.write_text(json.dumps(loyers, ensure_ascii=False), encoding="utf-8")
+        elif (RACINE / "assets/data/vie-chere/loyers.json").is_file():
+            self.copier(dossier, ["assets/data/vie-chere/loyers.json"])
+
+    def construire(self, dossier: Path, verifier: bool = True) -> subprocess.CompletedProcess:
+        commande = [sys.executable, str(RACINE / "outils" / "construire-page-couts.py")]
+        if verifier:
+            commande.append("--verifier")
+        return subprocess.run(
+            commande, capture_output=True, text=True, check=False,
+            env={**__import__("os").environ, "MRSC_RACINE": str(dossier)},
+        )
+
+    def loyers_fictifs(self, territoires: list[dict] | None = None) -> dict:
+        if territoires is None:
+            territoires = [
+                {
+                    "observatoire": "B6900",
+                    "nom": "Agglomération de Lyon",
+                    "loyer_median": 13.3,
+                    "loyer_mensuel_median": 700,
+                    "surface_moyenne": 60,
+                    "logements": 37_900,
+                    "observations": 4_120,
+                    "methode_production": "Estimation directe",
+                },
+                {
+                    "observatoire": "B2B00",
+                    "nom": "Agglomération de Bastia",
+                    "loyer_median": 9.1,
+                    "loyer_mensuel_median": 540,
+                    "surface_moyenne": 55,
+                    "logements": 2_100,
+                    "observations": 610,
+                    "methode_production": "Estimation directe",
+                },
+            ]
+        return {
+            "collecte_le": "2026-11-15",
+            "annee": 2025,
+            "source": {
+                "producteur": "Réseau des observatoires locaux des loyers (OLL), animé par l’ANIL",
+                "licence": "Licence Ouverte 2.0 (lov2)",
+                "jeu": "https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/",
+                "fiche": "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers",
+                "ressource_id": "aaaaaaaa-0000-0000-0000-000000000025",
+                "ressource_titre": "Loyers 2025 dans les agglomérations observées par les observatoires du réseau",
+                "date_ressource": "2026-10-28T15:13:11+00:00",
+            },
+            "territoires": territoires,
+        }
+
+    def test_page_sans_collecte_de_loyers(self) -> None:
+        """Sans fichier de loyers, la page doit l'avouer, et pas se taire."""
+        with tempfile.TemporaryDirectory(prefix="mrsc-page-") as tmp:
+            self.copier(Path(tmp), self.FICHIERS_PAGE)
+            resultat = self.construire(Path(tmp), verifier=False)
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-800:])
+            page = (Path(tmp) / "couts-vie-chere.html").read_text(encoding="utf-8")
+            self.assertIn("Aucune collecte de loyers", page)
+            self.assertIn("la collecte des loyers par agglomération n’a pas encore eu lieu", page)
+            self.assertNotIn("loyers:", page)
+            self.assertEqual(self.construire(Path(tmp)).returncode, 0)
+
+    def test_page_avec_loyers_collectes(self) -> None:
+        """Avec un fichier, la page porte le tableau, à la française et sans marque."""
+        with tempfile.TemporaryDirectory(prefix="mrsc-page-") as tmp:
+            self.copier_page(Path(tmp), loyers=self.loyers_fictifs())
+            resultat = self.construire(Path(tmp), verifier=False)
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-800:])
+            page = (Path(tmp) / "couts-vie-chere.html").read_text(encoding="utf-8")
+            self.assertIn("Loyer médian mensuel", page)
+            self.assertIn("13,30&nbsp;€/m²", page)
+            self.assertIn("Affiché : loyer médian", page)
+            self.assertNotIn("Aucune collecte de loyers", page)
+            self.assertNotIn("loyers:", page)
+            self.assertIn("B2B00", page)
+            self.assertEqual(self.construire(Path(tmp)).returncode, 0)
+
+    def test_page_refuse_des_loyers_sans_territoire(self) -> None:
+        """Une collecte vide ne doit pas produire une section muette."""
+        with tempfile.TemporaryDirectory(prefix="mrsc-page-") as tmp:
+            self.copier_page(Path(tmp), loyers=self.loyers_fictifs(territoires=[]))
+            resultat = self.construire(Path(tmp), verifier=False)
+            self.assertNotEqual(resultat.returncode, 0)
+            self.assertIn("aucun territoire", resultat.stderr)
+
+    def test_page_signale_une_collecte_non_regenerée(self) -> None:
+        """La donnée arrive, la page ne bouge pas : c'est un écart, pas un détail."""
+        with tempfile.TemporaryDirectory(prefix="mrsc-page-") as tmp:
+            self.copier(Path(tmp), self.FICHIERS_PAGE)
+            self.assertEqual(self.construire(Path(tmp), verifier=False).returncode, 0)
+            chemin = Path(tmp) / "assets/data/vie-chere/loyers.json"
+            chemin.parent.mkdir(parents=True, exist_ok=True)
+            chemin.write_text(json.dumps(self.loyers_fictifs(), ensure_ascii=False), encoding="utf-8")
+            resultat = self.construire(Path(tmp))
+            self.assertNotEqual(resultat.returncode, 0)
+            # La comparaison octet à octet tombe la première ; le contrôle de
+            # présence du tableau la doublerait si la page était reconstruite
+            # depuis un autre fragment.
+            self.assertIn("plus le rendu du fragment", resultat.stderr)
+
     def test_page_a_jour(self) -> None:
         with tempfile.TemporaryDirectory(prefix="mrsc-page-") as tmp:
-            self.copier(Path(tmp), ["localisation.html", "couts-vie-chere/contenu.txt", "couts-vie-chere.html"])
+            self.copier_page(Path(tmp))
             resultat = subprocess.run(
                 [sys.executable, str(RACINE / "outils" / "construire-page-couts.py"), "--verifier"],
                 capture_output=True, text=True, check=False,
@@ -408,7 +521,7 @@ class FondEtPage(unittest.TestCase):
     def test_page_derivee_du_fragment(self) -> None:
         """Une page modifiée à la main ne doit plus être « à jour »."""
         with tempfile.TemporaryDirectory(prefix="mrsc-page-") as tmp:
-            self.copier(Path(tmp), ["localisation.html", "couts-vie-chere/contenu.txt", "couts-vie-chere.html"])
+            self.copier_page(Path(tmp))
             page = Path(tmp) / "couts-vie-chere.html"
             page.write_text(page.read_text(encoding="utf-8").replace("La carte", "La carte (retouchée)"), encoding="utf-8")
             resultat = subprocess.run(

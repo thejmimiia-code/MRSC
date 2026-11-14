@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 117 |
+| Avancées consignées | 118 |
 | Période couverte | du 2026-10-20 au 2026-11-14 |
-| Contrôles exécutables cités | 136 |
+| Contrôles exécutables cités | 137 |
 | Initiatives du portefeuille concernées | 17 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -2865,6 +2865,32 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`.
 **Suite.** Lancer `collecte-vie-chere.yml` à la main, puis relire les médianes de Paris, de Lyon et d’un village contre les fichiers DVF publiés avant d’écrire que la carte affiche des prix réels. Ensuite seulement : trancher le lien de navigation, automatiser les revenus FiLoSoFi ou y renoncer, puis faire relire le modèle par une personne compétente en statistique publique.
 
 Initiatives liées : `cout-de-la-vie-et-carte`, `poids-et-sobriete-numerique`, `sources-fermees-et-registre-des-refus`.
+
+### `une-maille-qu-on-ne-peut-pas-tenir-ne-se-simule-pas` — Une maille qu’on ne peut pas tenir ne se simule pas — les loyers entrent, par agglomération
+
+*Consignée le 2026-11-14.*
+
+**Constat.** Trois postes de dépense sont mesurés, publiés et libres : le prix d’achat, le carburant, le loyer. Le troisième était resté dehors, avec une raison écrite — « les observatoires locaux des loyers publient par agglomération, la collecte n’est pas faite ». Cette raison protégeait d’un raccourci tentant : la source ne publie pas par commune, et la page est une carte de communes. La facilité aurait été de rattacher chaque agglomération à ses communes par le nom, ou de lire le département dans le code d’observatoire (`B1300`, `B2B00`). Les deux auraient produit une correspondance plausible, non publiée par la source : un chiffre inventé qui ne dit pas son nom, exactement ce que ce chantier s’interdit.
+
+**Ce que cela change.** La page publie les loyers observés en 2025 par le réseau des observatoires locaux des loyers, sous Licence Ouverte 2.0 : loyer médian au m², loyer médian mensuel, surface moyenne et nombre de logements, pour chaque agglomération observée, avec le code de l’observatoire. La section écrit que la maille est l’agglomération et que la liste n’est pas un calque de la carte. `outils/collecter-loyers.py` trouve la ressource de l’année la plus récente par l’API de la fiche — l’adresse du fichier change à chaque millésime — et lit les lignes par l’API tabulaire de data.gouv.fr, qui donne le format au lieu de le faire deviner dans un CSV dont le séparateur dépend de la langue de l’export. `outils/construire-page-couts.py` rend le tableau depuis le fichier collecté, et refuse une page qui n’aurait pas été reconstruite après la collecte.
+
+**Preuves dans le dépôt :**
+
+- `outils/collecter-loyers.py`
+- `outils/test_collecte_loyers.py`
+- `outils/construire-page-couts.py`
+- `couts-vie-chere/contenu.txt`
+- `.github/workflows/collecte-vie-chere.yml`
+- `docs/rd/sources-primaires/data-gouv-loyers-api.txt`
+- `docs/rd/sources-primaires/data-gouv-loyers-fiche.txt`
+
+**Contrôle qui la maintient :** `python3 outils/test_collecte_loyers.py && python3 outils/test_collecte_vie_chere.py && python3 outils/construire-page-couts.py --verifier && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Le banc exerce dix-sept refus contre un serveur local, avec des fixtures qui reprennent les types servis par l’API — pas la source elle-même : aucun fichier n’a été téléchargé depuis l’atelier, et la stabilité du service n’est pas prouvée. Les médianes ne sont pas recoupées avec un observatoire local, et rien ne dit qu’un loyer médian décrive le logement qu’un ménage trouvera. La couverture dépend des territoires observés, qui ne sont pas tous les territoires habités.
+
+**Suite.** Relire la proposition de fusion de la collecte quand elle arrive, confronter deux ou trois agglomérations à leur observatoire local, puis passer au poste suivant : les revenus FiLoSoFi, dont les fichiers passent par des pages sans adresse stable et qu’il faudra donc résoudre, ou abandonner explicitement.
+
+Initiatives liées : `cout-de-la-vie-et-carte`, `sources-fermees-et-registre-des-refus`.
 
 ### `une-page-qu-on-ne-trouve-pas-n-existe-pas` — Une page qu’on ne trouve pas n’existe pas — même quand elle est juste
 

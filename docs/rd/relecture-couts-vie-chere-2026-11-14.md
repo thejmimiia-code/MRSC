@@ -156,3 +156,26 @@ de fusion des données a été fermée sans fusion ; le détail est dans
 - Les extraits ont été recopiés à la main depuis les réponses d’API : la mise en
   forme, les liens et les info-bulles ne sont pas reproduits, et une réponse
   d’API n’est pas une page mise en page.
+
+## Loyers observés, ajoutés le 14 novembre 2026
+
+La page publie désormais les loyers observés par le réseau des observatoires
+locaux des loyers, à la maille où la source les publie : l’agglomération.
+
+- Source `data-gouv-loyers-api` — <https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/>.
+  La réponse de l’API porte la licence `lov2` et la ressource de l’année la plus
+  récente ; le collecteur la trouve par son intitulé, jamais par une adresse
+  écrite en dur. Ce que cela ne prouve pas : que la ressource soit complète, ni
+  que le fichier soit lisible le jour de la collecte.
+- Source `data-gouv-loyers-fiche` — <https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers>.
+  La fiche publique décrit deux échelles, l’agglomération et la ville centre.
+  La page ne publie que la première, pour ne pas mettre deux périmètres dans une
+  même colonne.
+
+Ce que cette relecture ne couvre pas, pour les loyers : aucun fichier n’a été
+téléchargé depuis cette machine ; la lecture des lignes passe par l’API tabulaire
+de data.gouv.fr, dont le format a été relevé page par page mais dont la stabilité
+n’est pas garantie. Aucun loyer n’a été recoupé avec un observatoire local, et
+personne n’a vérifié qu’une agglomération porte bien le nom que la source lui
+donne. Le rattachement des agglomérations aux communes n’est pas publié par la
+source : la page ne le fabrique donc pas, et c’est écrit sur la page.
