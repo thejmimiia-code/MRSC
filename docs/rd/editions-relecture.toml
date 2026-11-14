@@ -9063,3 +9063,1335 @@ sources = []
 mesures = ["outils/memoire-eva.py"]
 constat = "Régénération mécanique de l'index de la mémoire d'ÉVA après la correction du collecteur DVF, les trois nouveaux cas du banc et les textes ajoutés au dossier, au journal et au rapport de relecture."
 limite = "Cette signature atteste que l'index correspond à ses sources, pas que ces sources soient justes ; l'analyse de la mémoire n'a pas été relue, et le graphe n'a pas été ouvert."
+
+[[edition]]
+chemin = "assets/data/vie-chere/_etat.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "f9beecdb85336c809545984fc99da1096631680a548159a7319045fd99d01477"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/carburants.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "64e3e65ba2f97878d1d58e0b7f86fcabd3f435a886b051b3fead7d5f9856cc8b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-01.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "2ea337c4ce7bbdb56d517729e66fd82615d1426973160d73be3c22cdf1009b62"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-02.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "d9462e2345a9a9c581c85872a6829bd89269f783aced9e75e9c02e94f02e89cb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-03.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "aa042dc7ac69133bd647b51bd4428ec62cc87687e776d3ccbe760fa2bb0804fc"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-04.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "7ac3708777ab3c9e9545f5d79e7ca78e25ab54f1c1e60f049d4738238a9deb08"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-05.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "7072d13246195f12b99ffacacf010b41e187a2e57abc4249671612a7e5961662"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-06.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "27a0688cdd780a09b7debc23160e35082a1f46978664ce4d039eb52f44b3be79"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-07.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "5c3dc841fd932e12e92256dfe14c279f160f2568f6083c9d809e5d5cf30f860c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-08.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "e8002dde42509f9b7fa4e8760cd0e43e7514d4c2cde27a8d9f072f74a9d04fa4"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-09.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "ea351e902f70bec4c830b3131f58bdc2c0ee6882df316000ae5cac2454bbc8d9"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-10.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "98defe27275466a6b8f02c6a50d33061bf1efc21e4b533b248b4bda7e214b93e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-11.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "cdd1a5e429ccfbebb1e60ad3b1544ccc73e1c7ebb9ace7b6620a19b3f5a49197"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-12.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "7698a26a8b5f7ef68fa7617271200718a568d8116260f8eaaa74f6dc136b6347"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-13.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "ff3caf4c7c9a0c664c4cc3ff79628144bcb5a985a0a131701bb8d2435d9d3f71"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-14.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "6d06c5b04b3556e57cc71ed211a3438534cb9746c2a01c9ae54b6f718da9df21"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-15.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "9e2dc0e189a3b075cf6934fec10c62feeb1475026ca1db68a8d9d1b34e70ae62"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-16.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "fa6ea34f6fb73b78925ba1f6b5503f2a92dcb27b16c354d606851ff29ce1707f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-17.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "047bd9f7165a0c4e7b77eb43928ada99faac9e060595700c4808b8af767cd966"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-18.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "4777b4c2f84feda6ed2dec407c3f1de5465dbd99b202540fbb424ec7e36cc48e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-19.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "d41f020a5581cfa9027f98f0209f9b5e0c7c74b2165d2f8a3a3b5e9f960a9d44"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-21.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "2cce2fd3740592bfb4901a6ad215e102564a8046b2845d2c6cad9930b5d9dbc0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-22.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "d92b2ba187aa4f35303db461087777f5ff921500bf75dedb75a8f3c7673072a0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-23.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "50737c195622580223b43f4f5a45ff58291aca74f0780c4a7bbf47257dc83a49"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-24.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "0ec4f703f6d4684725219edb8aa0c2ce8c6f621637dcb8db11ba7171d50b9a3e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-25.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "94e98e40de92503b037828da9a85c48db880e55a734220a0669fb78e177f4cda"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-26.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "b5f91a380af70e80e86a466ad7730ae4b956b1d9067f62618390a4ad52dbfdfd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-27.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "9a05acd78d2e4f5d0939ce32f66e19e0e695cc02f0703b40c19b14f405a105bb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-28.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "24f4a4ce422a4a9aef95ce52e8ac57399bae19211b29b4c4e2011ebd784e9531"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-29.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "c55c58174343efbf329b2452cd9049b454f91c0952b73aa21a91f1bcb2a7476a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-2A.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "823a9ee5334062bd684164c71bd5d6425e8b4779869003b2cc30e2609f8bbe57"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-2B.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "e8f3f9dfd0ea2fa2d688be1d58595ccbf2ead649c15312ee92ef86d57c46d43d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-30.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "a4a8103e2b40d94ba15024804a818153cc49e567db90a76a00a4677680c957a4"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-31.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "2bd8a33f905215a57c6355cba219724382ac9ffa2e5a77db178292a108c8e622"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-32.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "42fd5cc355c554783026a3acf4b07c4b1b14a61723a1955fb22dec4853edb973"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-33.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "07a4f7426962ab594759167bf05426172754e6d26ceb1afd7a38247edc607d6d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-34.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "2f2be575918bad3a6ecc2de7b41bdf72db9aafb8609eec4c6ffd0a9c8f356591"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-35.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "96b09f35f9fce6f8a07dce09b2ae0463e01f652c7a76b563d432cf56c2403aa3"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-36.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "78170329c388f5886a830500c968cae2459f32f706cfe412ecc37590336a0b47"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-37.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "abb4310143d92afa2198984dbd5643f06094a6a0b53d7b4ac31c4c07c8b7ec0c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-38.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "e4fa76757b5eeb1c464dda5ce61ad2507c1abcdc1141531fba059631e23638ab"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-39.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "5d7d2ce8d10a70501b2975822c2a790bff401c45e688546a0014a69c27a2514d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-40.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "b65d7bd2fe46a9f0c1e1172733db91f500ae87e36291ca5b1080c73f8b3c9ba2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-41.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "20d6fe08f409fd172cbe5014cf770c645baf83a91b3bb4e3b753b7ae1d833ac8"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-42.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "e05ab873d1df9e22ced44c767b54d2091b2c447e0f59c702cc77a057b9232792"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-43.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "8902bbb61898e2ca39ac1278c5a6ef98bbfab097c1716fc7ab498a88d5ad24a7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-44.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "510b8f9a2130c92114730ce89fd46d0766564c6e279f5c6db68503a7ff5dfb9a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-45.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "c6f71adadb59ed73ff1b62e882e477bf18cf379e260ff385374847007fb918f2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-46.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "9dac473191725f4187cbe6c5cfcb66dd8d47c9effd9b183de4405e3ff39fa8d0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-47.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "11c0912a0f1b6117de0a65532fb51330615f13161b5377fc048e34b787d0a856"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-48.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "5765599206e04242f00658477b55bca6147ca0b8d93f84137791a3504bcb4316"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-49.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "930e9453aa72abcc1622a6a0afa98dec7c4b809c1723789cdf86b1f3f3e36a05"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-50.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "c65a1fdbe63c568093fe3a22ee58cf11880508aa47cde64270b5da9cd97408bc"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-51.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "8ba435870e52a8d1504b6a9d59094d66b8a626131cfc9dddb9cf0426302e1897"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-52.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "4290b0b25cd388279a57b57a7e8e4c813ee1309891168a630b297a1ac161051f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-53.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "54f99483fc32bd9db654aa4406f8b088a4f1d0254f91124c389708f3d9afe237"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-54.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "d37dd8857bbc4de17a2b0fde9a132bacab8772e1dc8cbc188e57ccbca1e3e902"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-55.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "d664da9331db2579a5aa5f5f3eadd57b4b50ef7bacc4cd3ae0a5ae5e77d59fca"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-56.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "689010723cbc1c442882403798e777f206e52624ba454c55f8dc6c6d972e738b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-57.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "a8bd8bdb514766a5e47d7162aca64a85067f01c89f411ebc3080e7620605c7e4"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-58.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "efa9e617870335e2974ca0c21407896699e514b7921df048479a45d79edc8616"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-59.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "80ad5ae4641a36cca0bfdc0fa45ed17fefb401df08528d1b6e93dd9c6fbb347d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-60.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "29b148483ebd06e2f878ee5fa441944456857088c6d86171a71bccda53f0529d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-61.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "b0b5ac85053e402be1dfae29ada985e0ae18d4a35d2481e1e7fad2d43ee8ada2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-62.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "a36183b11f56780f01afba6be9bb25c6f3fa64ad04aa052868c166941f4f2b4c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-63.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "398e2747d6037bda33c09b51da6340f6a5172fe02ea91fc07addd3d2c551830d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-64.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "964aa141e408cbde7ba918ad2bea1a8414a71db136e36151f994720795db1959"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-65.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "403e45b230cfbc5728b91e82e346f56666cedcf522200d216ec5cb7e749372b0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-66.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "422f1a87f26089cb29b886d7d88a34753b66fe92cbfaa637908431e8c39b1aae"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-67.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "c822e86f354e9df9623e66e4612cb8f704c85141c1efc8caa165c64e714e1676"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-68.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "b763fa2e59dd1627b07a67652742b03e4c3890dc4b9be6bdf471243b539a06d0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-69.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "660e479c0f7ad4cfa19de486f017b2d1f15171c2951fae1e27cce6397b9c5876"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-70.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "6dd68837323e3cce0e8fa46a3797e97a5e31ff1c9e1329e69ad1bbaae00b97b2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-71.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "fe272322b43d3eb1206c5b3cbf88eb58f20d317cbf54163b0c844856085dab26"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-72.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "dfe4519506ab88b6a44dd5d585d1480bbc244a2a973e0aa575749912c3cd515b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-73.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "874173a79c49209344e947cd823d0a6e1ebbadee9b20ae27124a909351e2b3c7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-74.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "541bd203049f4f850666be58911897453a5f6da6ef37a0aa3269f363f25f5991"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-75.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "6cbb1a36639e0918550af9ec15277647ff99c24343130f58d14f36e95908d9e9"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-76.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "6008628b7eafa5e532a295f6ef3e4c15a2efd029fc26dd16440c289494b1f044"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-77.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "2e4fd1922eb7b0d1fbf495aa04d8f5426f3867e8d32575ba27165df11db8e949"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-78.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "1bafb5b1fa1bae64d26a2edb6ce09947a65fd85812b266dca7e70b2a341d1794"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-79.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "79838b2882abb6b9ca15b7eb6dcd9a457346637471f9a5eb9f4ccfe4381560ea"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-80.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "ffbf2fa4c5c53ebec43fc2c6f96db77b93e97166e943b3fc3ea1b50ad369b764"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-81.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "f6b162d54b2ef57d4f4b634aa89af5aca48df1ccb5f3883a3503c61de139948a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-82.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "8dbbe3283f907643cdbbc124b1d2816574384df63c4b89c873822d4b39134be1"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-83.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "5e9c735fb0b9543bb75412807fb815af4aa52b7eef2328e774ca455867489039"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-84.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "41eb24d93c6e62062d9e94412a12bff422dffd9be1accf94b08b50f3d81c53cb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-85.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "ad2356753f783eff346948e0c5c34427d7b595f889632c526e281d7a1013e0de"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-86.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "d8519d6699039871574e2cb5d9d5424bd5b010fa588efc070604dd96aa1cab0e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-87.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "f0a437daf9286db7df9546cbd5c0877f63721c9858849f760f942a637537bf82"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-88.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "10dfba64d14ef972b9339428e33be4d2527d375ba5270fb6545676346609f484"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-89.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "8c0d0300e39df215eecd80776a701f075231a8b5a52035f8c1e3f585f7b27a32"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-90.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "0bdcc80e7cca17fbda74d0fefeea5c1b931b44eea2ac33720dd8a579661bd21f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-91.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "3125d63d521deeacadbad111869f22e972b4b6f169a8867adb01afb01bfe7c81"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-92.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "394772a99252e0582c0766127ea8ddb4d94c8ad3a50fc2fc14ef64ae39e51abf"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-93.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "a07fa302c984143f41ce9a5c8b7d3aac69086d2616a45022d7224e45696fef66"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-94.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "f0f848b5dc2dba0a7fd62234f26662c0e8182341f1ca6f9802499d4e19a649b9"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-95.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "6670895debd5fa3023258659850dd440b1dbd2e0f302cf7f9809b45d31204648"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-971.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "7935384b76718f2eb06c90ed2668a375237c01a25a5f14981a74fd22bb77a4ee"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-972.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "13f5221ca78cd7ef8fbbaf66bfb125777df70d2fe4dfd367bd6ca9718e0265db"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-973.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "976dd48fcb030e459b7b47192d95a3252cc9c277b689d0109da0120b64b8d430"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-974.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "2bb67a6c47105351bc6ad7ef4e6ae98f46c3b4a1422be2f8b7c44ef97f32d589"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-975.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "af4c9920498eb2a7c5a9317cea74338f612541f19f1c6e8e8a32d94aacf5a7d1"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-976.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "47209f87d4f8d6c11d2096b943528ca6f9818147f6288a8eb69f71201c48f0ca"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-977.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "cedb64bdde6ffe63f2fe8c2323982be2114ab46aeb04e1da85507a02c2a056cb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-978.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "392cead70c1d3dacce5bf933097cce3b29dbb761bb9fa000da6989f98079c30b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-984.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "29ca904c19eecbd4401ec596efa432e0b098ab0e43cceb512cc57a510fa530ec"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-986.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "2089c6956f47b860c12540e48fb08c961acc0d78c6012a8ff42f0cd6189aa700"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-987.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "3071dcc987d6d579a217e52bd818d66e904a238c855f14c2eb500d93157ffb92"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-988.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "4c0c7e3d5fc9d20cdc60bf858a0bf4ec4c376ef3b373d4fcb17dd98bb1cc014d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/d-989.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "091887052801f9f11e6cc6a97dab3fe0e4d1c9534e2fa648e411a5a064e47470"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
