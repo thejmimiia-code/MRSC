@@ -17,6 +17,16 @@ on:
   schedule:
     - cron: "0 6 1 * *" # le 1er de chaque mois, 6 h UTC
   workflow_dispatch:
+  # Le 14 novembre 2026 : lancer cette collecte depuis la ligne de commande
+  # (`gh workflow run`) a été refusé — HTTP 403 « Resource not accessible by
+  # integration ». Ce refus ne dit rien de la collecte : il dit qu'un jeton qui
+  # peut pousser du code n'a pas forcément le droit d'écrire des workflows. Un
+  # événement `repository_dispatch`, lui, ne demande que le droit de pousser,
+  # que la poussée exige déjà. Il ne remplace pas le bouton « Run workflow » :
+  # il donne une seconde porte, utilisable par un agent, et tracée dans
+  # l'historique comme n'importe quelle exécution.
+  repository_dispatch:
+    types: [collecte-vie-chere]
 
 permissions:
   contents: write
@@ -61,7 +71,7 @@ jobs:
           python3 outils/relire-contenus.py --appliquer $fichiers \
             --nature mesure-interne \
             --mesures "outils/collecter-vie-chere.py,outils/test_collecte_vie_chere.py,outils/collecter-carburants.py,outils/test_collecte_carburants.py,outils/preparer-fond-de-carte.py" \
-            --constat "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0) et du découpage administratif de l'État (geo.api.gouv.fr). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population. Aucun chiffre estimé, aucune parcelle, aucune adresse." \
+            --constat "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station." \
             --limite "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF." || {
               echo "::error title=Collecte::la provenance n'a pas pu être consignée";
               exit 1;
