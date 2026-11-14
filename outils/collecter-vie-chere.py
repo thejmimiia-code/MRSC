@@ -53,6 +53,21 @@ PRIX_PLAUSIBLE = (300, 30_000)
 SURFACE_MINIMALE = 9.0
 DELIMITEUR = "|"
 
+#: Paris, Lyon et Marseille sont vendus par arrondissement dans DVF — le code
+#: commune y est celui de l'arrondissement (75101, 69381, 13201…), pas celui de
+#: la commune. Sans ce regroupement, les trois plus grandes villes de France
+#: n'avaient aucun prix, et la carte affichait un vide qui ressemblait à une
+#: absence de ventes. Les ventes d'arrondissement sont bien des ventes de la
+#: commune : elles sont agrégées sous le code de la commune, et le fichier d'état
+#: le dit.
+ARRONDISSEMENTS: dict[str, str] = {}
+for _n in range(1, 21):  # 75101 à 75120
+    ARRONDISSEMENTS[f"751{_n:02d}"] = "75056"
+for _n in range(81, 90):  # 69381 à 69389
+    ARRONDISSEMENTS[f"693{_n:02d}"] = "69123"
+for _n in range(1, 17):  # 13201 à 13216
+    ARRONDISSEMENTS[f"132{_n:02d}"] = "13055"
+
 
 class Refus(Exception):
     """Une source ne permet pas de publier : rien n'est écrit."""
@@ -136,6 +151,28 @@ def nombre(valeur: str) -> float | None:
         return None
 
 
+def code_commune(departement: str, code: str) -> str:
+    """Le code commune à cinq caractères, à partir de ce que DVF écrit vraiment.
+
+    Le 14 novembre 2026, la première collecte réelle a rendu zéro prix pour
+    **toutes** les communes dont le numéro est inférieur à 100 — dans chaque
+    département — et pour Paris, Lyon et Marseille. Deux causes, une seule
+    conséquence : la carte se taisait sur les plus grandes villes et sur les
+    cent premières communes de chaque département.
+
+    1. DVF écrit le code commune sans ses zéros de tête perdus en route : la
+       commune 01001 arrive en `1`, la 01101 en `101`. Concaténer tel quel donnait
+       `011` et `01101` : la seconde tombait juste, la première jamais.
+    2. Paris, Lyon et Marseille arrivent par arrondissement (75101…, 69381…,
+       13201…) : ces codes sont ramenés à la commune.
+    """
+    departement = departement.strip().zfill(2)
+    code = code.strip()
+    if len(code) == 5:
+        return ARRONDISSEMENTS.get(code, code)
+    return ARRONDISSEMENTS.get(f"{departement}{code.zfill(3)}", f"{departement}{code.zfill(3)}")
+
+
 def prix_par_commune(contenu: bytes, nom: str) -> dict[str, dict[str, list[float]]]:
     """Lit un fichier DVF semestriel et rend, par commune, les prix au m² par type."""
     resultat: dict[str, dict[str, list[float]]] = {}
@@ -178,7 +215,7 @@ def prix_par_commune(contenu: bytes, nom: str) -> dict[str, dict[str, list[float
                 departement = (ligne.get("Code departement") or "").strip()
                 if not code or not departement:
                     continue
-                cle = f"{departement}{code}" if len(code) < 5 else code
+                cle = code_commune(departement, code)
                 resultat.setdefault(cle, {}).setdefault(type_local, []).append(prix_m2)
     return resultat
 
@@ -237,6 +274,12 @@ def construire(communes: list[dict], prix: dict[str, dict[str, list[float]]], pr
             "prix_plausible_eur_m2": list(PRIX_PLAUSIBLE),
             "mediane_nationale_eur_m2": round(mediane),
             "sous_cinq_ventes": "médiane publiée avec son nombre de ventes, la page décide de l'afficher",
+            "arrondissements_regroupes": {
+                "75101-75120": "75056 (Paris)",
+                "69381-69389": "69123 (Lyon)",
+                "13201-13216": "13055 (Marseille)",
+            },
+            "code_commune": "complété à cinq caractères : DVF perd les zéros de tête",
         },
         "couverture": {
             "communes": len(communes),

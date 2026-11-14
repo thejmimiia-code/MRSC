@@ -210,6 +210,33 @@ flux tronqué (moins de 3 000 stations), un format inattendu, une médiane hors 
 fermée ou une date future. Le banc `outils/test_collecte_carburants.py` exerce
 chacun de ces refus contre un serveur local : **10 cas**.
 
+## 6 ter. Ce que la première collecte réelle a révélé
+
+La collecte a tourné pour la première fois le 14 novembre 2026, après cinq
+tentatives d’exécution : les trois premières ont échoué sur des détails de
+lecture (séparateur point-virgule, corps gzip, URL d’archive horodatée qu’aucun
+registre ne peut enregistrer), et chacune a été rendue lisible en convertissant
+le journal d’étape en annotations — un journal qu’on ne peut pas lire est un
+échec qu’on répare à l’aveugle.
+
+Les données sont arrivées, et **la relecture des données a trouvé ce que les
+bancs ne voyaient pas** :
+
+| Défaut | Ampleur | Cause | Correction |
+| --- | --- | --- | --- |
+| Paris, Lyon, Marseille sans aucun prix | 3 communes, 4,7 millions d’habitants | DVF vend par arrondissement (75101…, 69381…, 13201…), codes inconnus du répertoire communal | arrondissements ramenés à 75056, 69123, 13055 |
+| Cent premières communes de chaque département sans prix | ≈ 9 % des 34 969 communes | DVF écrit le code commune sans zéros de tête : 01001 arrive en `1`, 01101 en `101` | code complété à cinq caractères |
+
+Pourquoi les bancs ne l’ont pas vu : leurs fixtures écrivaient `001`, une forme
+que le fichier réel n’a pas, et ne contenaient aucune commune d’arrondissement.
+Un banc qui invente le format qu’il éprouve ne protège que de ses propres
+erreurs. Les fixtures imitent désormais l’écriture réelle, et trois cas
+supplémentaires tiennent les deux règles (**18 cas**).
+
+La proposition de fusion des données a été **fermée sans fusion**, avec le
+détail de ces deux écarts : une donnée fausse mise en ligne est plus coûteuse
+qu’une collecte refaite.
+
 ## 7. Ce que cette R et D ne prouve pas
 
 - Aucune donnée n’a encore été collectée par la machine au moment d’écrire ces

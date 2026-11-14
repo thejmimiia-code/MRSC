@@ -2,6 +2,16 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-11-14 — La collecte a tourné, et les données ont trouvé deux défauts que les bancs cachaient
+
+- **Initiative :** `cout-de-la-vie-et-carte`.
+- **Ce qui a été fait :** cinq exécutions du workflow de collecte, chacune corrigeant ce que la précédente avait révélé, puis la relecture des fichiers produits.
+- **Ce que chaque échec a nommé :** l’export des carburants arrive en point-virgule et virgule décimale, puis compressé en gzip ; l’étape de provenance refusait l’adresse horodatée de l’archive DVF qu’elle venait elle-même d’écrire. Chacune de ces causes a été rendue lisible en annotations, parce que le journal d’un job est servi depuis un stockage que cet atelier n’atteint pas.
+- **Ce que la relecture des données a trouvé :** Paris, Lyon et Marseille **sans aucun prix** (DVF les vend par arrondissement), et les **cent premières communes de chaque département** vides (DVF écrit `1` pour 01001 ; la concaténation donnait `011`). Environ 9 % des communes, et les trois plus grandes villes.
+- **Pourquoi les bancs ne l’avaient pas vu :** leurs fixtures fabriquaient `001`, une écriture que le fichier DVF n’a pas, et ne contenaient aucun arrondissement. Un banc qui invente son format ne protège que de ses propres erreurs.
+- **Décision :** la proposition de fusion des données (#301) a été **fermée sans fusion**. La correction est dans le collecteur, les fixtures imitent désormais l’écriture réelle et trois cas ont été ajoutés (**18 au banc**). Une nouvelle collecte produira les données propres.
+- **Limites :** les prix ne seront pas vérifiés contre un site officiel avant publication ; aucun essai utilisateur, aucun autre navigateur, aucune lecture d’écran. Les loyers, revenus, assurances, transports et loisirs restent sans chiffre.
+
 ## 2026-11-14 — Les autres postes d’un budget : le carburant est mesuré, le reste est nommé
 
 - **Initiative :** `cout-de-la-vie-et-carte`.

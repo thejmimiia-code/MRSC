@@ -69,12 +69,20 @@ def dvf_zip(lignes: list[dict], entete: list[str] | None = None) -> bytes:
     return tampon.getvalue()
 
 
-def vente(code: str, departement: str, prix: float, surface: float, type_local: str = "Appartement") -> dict:
+def vente(code: str, departement: str, prix: float, surface: float, type_local: str = "Appartement",
+          code_dvf: str | None = None) -> dict:
+    """Une vente DVF. `code_dvf` permet d'imiter l'écriture réelle du fichier.
+
+    DVF livre le code commune sans ses zéros de tête : 01001 arrive en `1`. Les
+    fixtures d'origine écrivaient `001`, une forme que le fichier réel n'a pas —
+    elles ne pouvaient donc pas voir que la collecte perdait les cent premières
+    communes de chaque département.
+    """
     return {
         "Nature mutation": "Vente",
         "Valeur fonciere": f"{prix:.2f}",
         "Code departement": departement,
-        "Code commune": code[len(departement):],
+        "Code commune": code_dvf if code_dvf is not None else str(int(code[len(departement):])),
         "Type local": type_local,
         "Surface reelle bati": f"{surface:.0f}",
     }
@@ -188,6 +196,67 @@ class CollecteVieChere(unittest.TestCase):
                 capture_output=True, text=True, check=False,
             )
             self.assertEqual(verification.returncode, 0, verification.stderr[-800:])
+
+    def test_code_commune_sans_zero_initial(self) -> None:
+        """La commune 01001 arrive en `1` dans DVF : elle doit être reconnue."""
+        communes = communes_factices()
+        communes[0] = {
+            "nom": "Première commune", "code": "01001", "population": 500,
+            "centre": {"type": "Point", "coordinates": [5.0, 46.0]},
+            "departement": {"code": "01", "nom": "Ain"},
+        }
+        reponses = communes_et_dvf([
+            vente("01001", "01", 200_000, 50, code_dvf="1"),
+            vente("01001", "01", 220_000, 50, code_dvf="1"),
+            vente("01001", "01", 240_000, 50, code_dvf="1"),
+        ])
+        reponses["/communes"] = (200, json.dumps(communes).encode("utf-8"))
+        with tempfile.TemporaryDirectory(prefix="mrsc-couts-") as tmp:
+            resultat, sortie = self.executer(reponses, Path(tmp))
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-1200:])
+            fichier = json.loads((sortie / "d-01.json").read_text(encoding="utf-8"))
+            commune = next(c for c in fichier["communes"] if c["c"] == "01001")
+            self.assertEqual(commune["pa"], 4400, "médiane de 4 000, 4 400 et 4 800 €/m²")
+
+    def test_code_commune_padde_tolere(self) -> None:
+        """Les deux écritures sont lues : `1` comme `001`."""
+        communes = communes_factices()
+        communes[0] = {
+            "nom": "Première commune", "code": "01001", "population": 500,
+            "centre": {"type": "Point", "coordinates": [5.0, 46.0]},
+            "departement": {"code": "01", "nom": "Ain"},
+        }
+        reponses = communes_et_dvf([vente("01001", "01", 200_000, 50, code_dvf="001")])
+        reponses["/communes"] = (200, json.dumps(communes).encode("utf-8"))
+        with tempfile.TemporaryDirectory(prefix="mrsc-couts-") as tmp:
+            resultat, sortie = self.executer(reponses, Path(tmp))
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-1200:])
+            fichier = json.loads((sortie / "d-01.json").read_text(encoding="utf-8"))
+            self.assertTrue(any(c["c"] == "01001" and c.get("pa") for c in fichier["communes"]))
+
+    def test_arrondissements_regroupes(self) -> None:
+        """Paris arrive par arrondissement : ses ventes vont à la commune 75056."""
+        communes = communes_factices()
+        communes[0] = {
+            "nom": "Paris", "code": "75056", "population": 2_103_778,
+            "centre": {"type": "Point", "coordinates": [2.347, 48.8589]},
+            "departement": {"code": "75", "nom": "Paris"},
+        }
+        reponses = communes_et_dvf([
+            vente("75101", "75", 400_000, 50),
+            vente("75101", "75", 450_000, 50),
+            vente("75102", "75", 500_000, 50),
+        ])
+        reponses["/communes"] = (200, json.dumps(communes).encode("utf-8"))
+        with tempfile.TemporaryDirectory(prefix="mrsc-couts-") as tmp:
+            resultat, sortie = self.executer(reponses, Path(tmp))
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-1200:])
+            fichier = json.loads((sortie / "d-75.json").read_text(encoding="utf-8"))
+            paris = next(c for c in fichier["communes"] if c["c"] == "75056")
+            self.assertEqual(paris["na"], 3, "trois ventes d'arrondissement, une seule commune")
+            self.assertEqual(paris["pa"], 9000, "médiane de 8 000, 9 000 et 10 000 €/m²")
+            etat = json.loads((sortie / "_etat.json").read_text(encoding="utf-8"))
+            self.assertIn("arrondissements_regroupes", etat["regles"], "la règle doit être écrite")
 
     def test_communes_tronquees(self) -> None:
         reponses = communes_et_dvf()
