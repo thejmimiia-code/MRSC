@@ -82,6 +82,7 @@ MAXIMUM_LIGNES = 200
 LOYER_PLAUSIBLE = (3.0, 40.0)
 MENSUEL_PLAUSIBLE = (100, 4_000)
 SURFACE_PLAUSIBLE = (10, 200)
+NOMBRE_PLAUSIBLE = (1, 10_000_000)
 COLONNES = (
     "Observatory",
     "agglomeration",
@@ -258,8 +259,21 @@ def territoires(lignes: list[dict], annee: int) -> list[dict]:
                 "surface_moyenne": int(
                     nombre(ligne.get("surface_moyenne"), SURFACE_PLAUSIBLE, "surface moyenne", nom)
                 ),
-                "logements": int(ligne.get("nombre_logements") or 0),
-                "observations": int(ligne.get("nombre_observations") or 0),
+                # La première collecte réelle a trouvé trois territoires du
+                # Morbihan avec un loyer publié et **aucun nombre de logements**.
+                # Écrire 0 aurait été un chiffre inventé — et faux, puisque le
+                # loyer, lui, est calculé sur des logements. L'absence se publie
+                # comme une absence.
+                "logements": (
+                    int(nombre(ligne.get("nombre_logements"), NOMBRE_PLAUSIBLE, "nombre de logements", nom))
+                    if ligne.get("nombre_logements") is not None
+                    else None
+                ),
+                "observations": (
+                    int(nombre(ligne.get("nombre_observations"), NOMBRE_PLAUSIBLE, "nombre d’observations", nom))
+                    if ligne.get("nombre_observations") is not None
+                    else None
+                ),
                 "methode_production": str(ligne.get("methodologie_production") or "").strip() or "non précisée",
             }
         )
@@ -352,16 +366,22 @@ def verifier(chemin: Path) -> int:
             valeur = territoire.get(cle)
             if not isinstance(valeur, (int, float)) or not borne[0] <= float(valeur) <= borne[1]:
                 erreurs.append(f"{nom} : {cle} invraisemblable {valeur!r}")
-        if int(territoire.get("logements") or 0) < 1:
-            erreurs.append(f"{nom} : loyer publié sans logement observé")
+        if "logements" not in territoire:
+            erreurs.append(f"{nom} : le nombre de logements n’est pas déclaré du tout")
+        elif territoire["logements"] is not None and (
+            not isinstance(territoire["logements"], int) or territoire["logements"] < 1
+        ):
+            erreurs.append(f"{nom} : nombre de logements invraisemblable {territoire['logements']!r}")
     if erreurs:
         print("ÉCHEC — collecte des loyers", file=sys.stderr)
         for erreur in erreurs:
             print(f"    {erreur}", file=sys.stderr)
         return 1
+    sans_logements = sum(1 for territoire in liste if territoire.get("logements") is None)
     print(
         f"Loyers conformes : {len(liste)} territoires observés en {annee}, collecte du {collecte}, "
-        f"licence {source.get('licence')}, ressource « {source.get('ressource_titre')} »."
+        f"licence {source.get('licence')}, ressource « {source.get('ressource_titre')} »"
+        + (f", dont {sans_logements} sans nombre de logements publié (affiché comme tel)." if sans_logements else ".")
     )
     return 0
 

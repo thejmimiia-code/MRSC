@@ -12459,3 +12459,123 @@ sources = []
 mesures = ["outils/collecter-loyers.py", "outils/collecter-vie-chere.py", "outils/collecter-carburants.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
 constat = "La première exécution réelle de la collecte, après la fusion, a échoué sur un RemoteDisconnected : le serveur a fermé la connexion sans répondre. Ce n’est pas une URLError mais une OSError de bas niveau, qui échappait donc aux trois essais de lecture et sortait en traceback au lieu d’un refus nommé. Les trois collecteurs rattrapent désormais OSError et HTTPException, refusent proprement après trois essais, et chacun des deux bancs concernés exerce une connexion coupée sans réponse — 18 cas pour les loyers, 23 pour la page et la collecte DVF. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, et la mémoire d’ÉVA régénérée."
 limite = "Un cas de banc par collecteur ne prouve pas que toutes les pannes réseau sont couvertes : une réponse tronquée en cours de corps, une redirection bouclée ou un certificat invalide peuvent encore sortir autrement. Le correctif a été éprouvé contre un serveur local qui ferme la connexion, pas contre la panne réelle rencontrée en intégration continue, dont seule la prochaine exécution dira si elle est bien traitée."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "9ba7f9a053042162a11d762e1520cb45821890f57daa83751a632a38870709de"
+empreinte_apres = "995056eb0f5abcb5c85b1b1f2674c2208a69afbc5bfcb2f9e30bafd2f40e39d3"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La deuxième exécution réelle de la collecte a fait entrer les 53 territoires observés en 2025, puis la garde du vérificateur a refusé le fichier : trois territoires du Morbihan publient un loyer sans nombre de logements, et le collecteur écrivait zéro. Une absence n’est pas un zéro : le collecteur conserve désormais null, la page écrit « non publié », compte ces territoires dans sa phrase d’introduction, et un zéro explicite reste refusé. Deux cas de banc s’ajoutent côté collecte (20 au total), un côté page (24 au total, dont les cas de page). Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, mémoire d’ÉVA régénérée."
+limite = "Le fichier réel n’a pas été relu ici : la correction est éprouvée contre des fixtures qui imitent la forme servie, pas contre les lignes du Morbihan elles-mêmes. Que trois territoires publient un loyer sans nombre de logements est un fait constaté une fois ; rien ne dit combien seront dans ce cas au prochain millésime, ni si la colonne manquera toujours pour la même raison."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "a5ba95a09407a565b430148eab4ef4c12702c1ab9ab46a0226124f434d628fdf"
+empreinte_apres = "4875d390c0f6b55c519ea6cb978d180cce1dbe4455427b7b76055748552ffc11"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La deuxième exécution réelle de la collecte a fait entrer les 53 territoires observés en 2025, puis la garde du vérificateur a refusé le fichier : trois territoires du Morbihan publient un loyer sans nombre de logements, et le collecteur écrivait zéro. Une absence n’est pas un zéro : le collecteur conserve désormais null, la page écrit « non publié », compte ces territoires dans sa phrase d’introduction, et un zéro explicite reste refusé. Deux cas de banc s’ajoutent côté collecte (20 au total), un côté page (24 au total, dont les cas de page). Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, mémoire d’ÉVA régénérée."
+limite = "Le fichier réel n’a pas été relu ici : la correction est éprouvée contre des fixtures qui imitent la forme servie, pas contre les lignes du Morbihan elles-mêmes. Que trois territoires publient un loyer sans nombre de logements est un fait constaté une fois ; rien ne dit combien seront dans ce cas au prochain millésime, ni si la colonne manquera toujours pour la même raison."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "8b6dadb2abc1b8156e4217016527baff6babb3829bf743be5a24912a569b496e"
+empreinte_apres = "959ce30a484cd6b72d7d55953246c4b27704ba730216d848d4169618487b7d76"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La deuxième exécution réelle de la collecte a fait entrer les 53 territoires observés en 2025, puis la garde du vérificateur a refusé le fichier : trois territoires du Morbihan publient un loyer sans nombre de logements, et le collecteur écrivait zéro. Une absence n’est pas un zéro : le collecteur conserve désormais null, la page écrit « non publié », compte ces territoires dans sa phrase d’introduction, et un zéro explicite reste refusé. Deux cas de banc s’ajoutent côté collecte (20 au total), un côté page (24 au total, dont les cas de page). Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, mémoire d’ÉVA régénérée."
+limite = "Le fichier réel n’a pas été relu ici : la correction est éprouvée contre des fixtures qui imitent la forme servie, pas contre les lignes du Morbihan elles-mêmes. Que trois territoires publient un loyer sans nombre de logements est un fait constaté une fois ; rien ne dit combien seront dans ce cas au prochain millésime, ni si la colonne manquera toujours pour la même raison."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "22ff51283f40f7189726bcf1063f8e7decfd0989354daad92b563fd1380fb752"
+empreinte_apres = "53a9ccdeea6e3ad0a300865936f2feaf41acfc39bcd45f315085c46aca24885b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La deuxième exécution réelle de la collecte a fait entrer les 53 territoires observés en 2025, puis la garde du vérificateur a refusé le fichier : trois territoires du Morbihan publient un loyer sans nombre de logements, et le collecteur écrivait zéro. Une absence n’est pas un zéro : le collecteur conserve désormais null, la page écrit « non publié », compte ces territoires dans sa phrase d’introduction, et un zéro explicite reste refusé. Deux cas de banc s’ajoutent côté collecte (20 au total), un côté page (24 au total, dont les cas de page). Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, mémoire d’ÉVA régénérée."
+limite = "Le fichier réel n’a pas été relu ici : la correction est éprouvée contre des fixtures qui imitent la forme servie, pas contre les lignes du Morbihan elles-mêmes. Que trois territoires publient un loyer sans nombre de logements est un fait constaté une fois ; rien ne dit combien seront dans ce cas au prochain millésime, ni si la colonne manquera toujours pour la même raison."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "0577fd921f05a3c0bc0b9640521756cc0d31d2e43595d7f8299a73d3c01b517a"
+empreinte_apres = "d0573110431bba9f5e66f59198b30d5f077a39ca4520ed9b80b6b0e7a1826728"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La deuxième exécution réelle de la collecte a fait entrer les 53 territoires observés en 2025, puis la garde du vérificateur a refusé le fichier : trois territoires du Morbihan publient un loyer sans nombre de logements, et le collecteur écrivait zéro. Une absence n’est pas un zéro : le collecteur conserve désormais null, la page écrit « non publié », compte ces territoires dans sa phrase d’introduction, et un zéro explicite reste refusé. Deux cas de banc s’ajoutent côté collecte (20 au total), un côté page (24 au total, dont les cas de page). Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, mémoire d’ÉVA régénérée."
+limite = "Le fichier réel n’a pas été relu ici : la correction est éprouvée contre des fixtures qui imitent la forme servie, pas contre les lignes du Morbihan elles-mêmes. Que trois territoires publient un loyer sans nombre de logements est un fait constaté une fois ; rien ne dit combien seront dans ce cas au prochain millésime, ni si la colonne manquera toujours pour la même raison."
+
+[[edition]]
+chemin = "docs/rd/vie-chere-carte-2026-11-13.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "3ccd45c644039fb38efab4bc0cbe67059b68c4ad7f84df7c677e47405671b213"
+empreinte_apres = "e9d1764cdbdca1c1257d0c1acefe3f88d7b53f413bc3d6e0499fdcf8ef925f7f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La deuxième exécution réelle de la collecte a fait entrer les 53 territoires observés en 2025, puis la garde du vérificateur a refusé le fichier : trois territoires du Morbihan publient un loyer sans nombre de logements, et le collecteur écrivait zéro. Une absence n’est pas un zéro : le collecteur conserve désormais null, la page écrit « non publié », compte ces territoires dans sa phrase d’introduction, et un zéro explicite reste refusé. Deux cas de banc s’ajoutent côté collecte (20 au total), un côté page (24 au total, dont les cas de page). Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, mémoire d’ÉVA régénérée."
+limite = "Le fichier réel n’a pas été relu ici : la correction est éprouvée contre des fixtures qui imitent la forme servie, pas contre les lignes du Morbihan elles-mêmes. Que trois territoires publient un loyer sans nombre de logements est un fait constaté une fois ; rien ne dit combien seront dans ce cas au prochain millésime, ni si la colonne manquera toujours pour la même raison."
+
+[[edition]]
+chemin = "outils/collecter-loyers.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "26131301f68aa0d629288eadb6f24609e481643f1899adbe3acfe8804701eeb5"
+empreinte_apres = "88cc2f6f5d1d80a21433b22187d28c936ad9aebe333c73c97334f5ff77cf3480"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La deuxième exécution réelle de la collecte a fait entrer les 53 territoires observés en 2025, puis la garde du vérificateur a refusé le fichier : trois territoires du Morbihan publient un loyer sans nombre de logements, et le collecteur écrivait zéro. Une absence n’est pas un zéro : le collecteur conserve désormais null, la page écrit « non publié », compte ces territoires dans sa phrase d’introduction, et un zéro explicite reste refusé. Deux cas de banc s’ajoutent côté collecte (20 au total), un côté page (24 au total, dont les cas de page). Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, mémoire d’ÉVA régénérée."
+limite = "Le fichier réel n’a pas été relu ici : la correction est éprouvée contre des fixtures qui imitent la forme servie, pas contre les lignes du Morbihan elles-mêmes. Que trois territoires publient un loyer sans nombre de logements est un fait constaté une fois ; rien ne dit combien seront dans ce cas au prochain millésime, ni si la colonne manquera toujours pour la même raison."
+
+[[edition]]
+chemin = "outils/construire-page-couts.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "cceac28f3d85ca86c5cdfa64430fba0522c08dcdf9f1bcd6383c45c351d3b737"
+empreinte_apres = "2ad43c0d33df4fac5f136691d5e3ecc0e54c0e4a97655cc1e86ca1d4f947d46a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La deuxième exécution réelle de la collecte a fait entrer les 53 territoires observés en 2025, puis la garde du vérificateur a refusé le fichier : trois territoires du Morbihan publient un loyer sans nombre de logements, et le collecteur écrivait zéro. Une absence n’est pas un zéro : le collecteur conserve désormais null, la page écrit « non publié », compte ces territoires dans sa phrase d’introduction, et un zéro explicite reste refusé. Deux cas de banc s’ajoutent côté collecte (20 au total), un côté page (24 au total, dont les cas de page). Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, mémoire d’ÉVA régénérée."
+limite = "Le fichier réel n’a pas été relu ici : la correction est éprouvée contre des fixtures qui imitent la forme servie, pas contre les lignes du Morbihan elles-mêmes. Que trois territoires publient un loyer sans nombre de logements est un fait constaté une fois ; rien ne dit combien seront dans ce cas au prochain millésime, ni si la colonne manquera toujours pour la même raison."
+
+[[edition]]
+chemin = "outils/test_collecte_loyers.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "d15d7594f71e65f2a9c0409ea6d0ccd6b08f35882b43b4f5a94c7d621a953dc9"
+empreinte_apres = "32f291ccdbf5902339bf83e5e8d342a157e76ca27f7e1e0499e6e4b420a8bb8e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La deuxième exécution réelle de la collecte a fait entrer les 53 territoires observés en 2025, puis la garde du vérificateur a refusé le fichier : trois territoires du Morbihan publient un loyer sans nombre de logements, et le collecteur écrivait zéro. Une absence n’est pas un zéro : le collecteur conserve désormais null, la page écrit « non publié », compte ces territoires dans sa phrase d’introduction, et un zéro explicite reste refusé. Deux cas de banc s’ajoutent côté collecte (20 au total), un côté page (24 au total, dont les cas de page). Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, mémoire d’ÉVA régénérée."
+limite = "Le fichier réel n’a pas été relu ici : la correction est éprouvée contre des fixtures qui imitent la forme servie, pas contre les lignes du Morbihan elles-mêmes. Que trois territoires publient un loyer sans nombre de logements est un fait constaté une fois ; rien ne dit combien seront dans ce cas au prochain millésime, ni si la colonne manquera toujours pour la même raison."
+
+[[edition]]
+chemin = "outils/test_collecte_vie_chere.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "b1cecddd40d47239b73243dcd2e40d106ecb7a2f3e2e9da74ce0ac03a1b6b30f"
+empreinte_apres = "238bd57a662023f8f281fd0459610263590d842bd7125e95f41b2e0e373a48d2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La deuxième exécution réelle de la collecte a fait entrer les 53 territoires observés en 2025, puis la garde du vérificateur a refusé le fichier : trois territoires du Morbihan publient un loyer sans nombre de logements, et le collecteur écrivait zéro. Une absence n’est pas un zéro : le collecteur conserve désormais null, la page écrit « non publié », compte ces territoires dans sa phrase d’introduction, et un zéro explicite reste refusé. Deux cas de banc s’ajoutent côté collecte (20 au total), un côté page (24 au total, dont les cas de page). Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, mémoire d’ÉVA régénérée."
+limite = "Le fichier réel n’a pas été relu ici : la correction est éprouvée contre des fixtures qui imitent la forme servie, pas contre les lignes du Morbihan elles-mêmes. Que trois territoires publient un loyer sans nombre de logements est un fait constaté une fois ; rien ne dit combien seront dans ce cas au prochain millésime, ni si la colonne manquera toujours pour la même raison."

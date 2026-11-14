@@ -78,6 +78,7 @@ def bloc_loyers() -> str:
     annee = donnees.get("annee")
     lignes = []
     for territoire in territoires:
+        logements = territoire.get("logements")
         lignes.append(
             "              <tr>"
             f'<th scope="row">{html.escape(str(territoire["nom"]))} '
@@ -85,15 +86,22 @@ def bloc_loyers() -> str:
             f'<td>{nombre_fr(float(territoire["loyer_median"]), 2)}&nbsp;€/m²</td>'
             f'<td>{nombre_fr(float(territoire["loyer_mensuel_median"]))}&nbsp;€</td>'
             f'<td>{nombre_fr(float(territoire["surface_moyenne"]))}&nbsp;m²</td>'
-            f'<td>{nombre_fr(float(territoire["logements"]))}</td>'
+            f'<td>{nombre_fr(float(logements)) if logements is not None else "non publié"}</td>'
             "</tr>"
         )
     source = donnees.get("source") or {}
+    sans_logements = sum(1 for territoire in territoires if territoire.get("logements") is None)
+    phrase_absences = (
+        f" {sans_logements} d’entre eux publient un loyer sans nombre de logements : "
+        "la colonne l’écrit « non publié », elle n’écrit pas zéro."
+        if sans_logements
+        else ""
+    )
     return (
         f"<p>{len(territoires)} territoires sont observés par le réseau des observatoires "
         f"locaux des loyers en {html.escape(str(annee))}. La maille est l’agglomération, pas la "
         "commune : cette liste n’est donc pas un calque de la carte, et le site ne rattache "
-        "aucune agglomération à ses communes, faute de source qui le publie.</p>\n"
+        f"aucune agglomération à ses communes, faute de source qui le publie.{phrase_absences}</p>\n"
         '            <div class="couts-tableau-defilant" tabindex="0" role="region" '
         'aria-labelledby="titre-tableau-loyers">\n'
         '              <table class="couts-tableau">\n'
