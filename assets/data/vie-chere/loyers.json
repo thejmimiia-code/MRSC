@@ -1,0 +1,551 @@
+{
+ "annee": 2025,
+ "collecte_le": "2026-11-14",
+ "methode": "médiane des loyers observés par l’observatoire local des loyers, échelle de l’agglomération, ensemble des logements sans découpage par époque, ancienneté, type ni nombre de pièces",
+ "ne_dit_pas": "Ni le loyer d’un logement précis, ni celui d’une commune à l’intérieur de l’agglomération, ni les charges, ni ce qu’un ménage donné peut se permettre.",
+ "source": {
+  "api": "https://tabular-api.data.gouv.fr/api/resources/21543ae5-7d6e-4c49-8719-e7f725d441da/data/",
+  "date_ressource": "2026-10-28T15:13:11+00:00",
+  "fiche": "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers",
+  "jeu": "https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/",
+  "licence": "Licence Ouverte 2.0 (lov2)",
+  "lignes": 53,
+  "producteur": "Réseau des observatoires locaux des loyers (OLL), animé par l’ANIL",
+  "ressource_id": "21543ae5-7d6e-4c49-8719-e7f725d441da",
+  "ressource_titre": "Loyers 2025 dans les agglomérations observées par les observatoires du réseau",
+  "sha256": "f88141a50331ece62aa3eedde36344b563c06f4fc6de622c797a67d6043c87c3"
+ },
+ "territoires": [
+  {
+   "logements": 11693,
+   "loyer_median": 12.0,
+   "loyer_mensuel_median": 795,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération d'Ajaccio",
+   "observations": 2739,
+   "observatoire": "B2A00",
+   "surface_moyenne": 71
+  },
+  {
+   "logements": 5346,
+   "loyer_median": 8.3,
+   "loyer_mensuel_median": 481,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération d'Alençon",
+   "observations": 1199,
+   "observatoire": "B6100",
+   "surface_moyenne": 64
+  },
+  {
+   "logements": 15897,
+   "loyer_median": 8.4,
+   "loyer_mensuel_median": 600,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération d'Alès",
+   "observations": 1885,
+   "observatoire": "B3000",
+   "surface_moyenne": 75
+  },
+  {
+   "logements": 18488,
+   "loyer_median": 15.5,
+   "loyer_mensuel_median": 909,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération d'Annemasse",
+   "observations": 5589,
+   "observatoire": "B7400",
+   "surface_moyenne": 66
+  },
+  {
+   "logements": 9277,
+   "loyer_median": 11.1,
+   "loyer_mensuel_median": 690,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Bastia",
+   "observations": 1578,
+   "observatoire": "B2B00",
+   "surface_moyenne": 67
+  },
+  {
+   "logements": 20164,
+   "loyer_median": 10.5,
+   "loyer_mensuel_median": 560,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Besançon",
+   "observations": 4887,
+   "observatoire": "B2500",
+   "surface_moyenne": 59
+  },
+  {
+   "logements": 138590,
+   "loyer_median": 12.8,
+   "loyer_mensuel_median": 676,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Bordeaux",
+   "observations": 30550,
+   "observatoire": "B3300",
+   "surface_moyenne": 60
+  },
+  {
+   "logements": 27162,
+   "loyer_median": 9.9,
+   "loyer_mensuel_median": 535,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Brest",
+   "observations": 4341,
+   "observatoire": "B2900",
+   "surface_moyenne": 60
+  },
+  {
+   "logements": 18864,
+   "loyer_median": 8.9,
+   "loyer_mensuel_median": 550,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Chalon-sur-Saône",
+   "observations": 1609,
+   "observatoire": "B7100",
+   "surface_moyenne": 71
+  },
+  {
+   "logements": 5623,
+   "loyer_median": 8.1,
+   "loyer_mensuel_median": 550,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Châteauroux",
+   "observations": 1991,
+   "observatoire": "B3600",
+   "surface_moyenne": 73
+  },
+  {
+   "logements": 11742,
+   "loyer_median": 10.9,
+   "loyer_mensuel_median": 650,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Draguignan",
+   "observations": 1002,
+   "observatoire": "B8300",
+   "surface_moyenne": 67
+  },
+  {
+   "logements": 14802,
+   "loyer_median": 14.0,
+   "loyer_mensuel_median": 719,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Fréjus",
+   "observations": 4392,
+   "observatoire": "B8300",
+   "surface_moyenne": 59
+  },
+  {
+   "logements": 9955,
+   "loyer_median": 9.0,
+   "loyer_mensuel_median": 571,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Montauban",
+   "observations": 2571,
+   "observatoire": "B8200",
+   "surface_moyenne": 70
+  },
+  {
+   "logements": 7372,
+   "loyer_median": 8.2,
+   "loyer_mensuel_median": 530,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Montbéliard",
+   "observations": 1324,
+   "observatoire": "B2500",
+   "surface_moyenne": 73
+  },
+  {
+   "logements": 83979,
+   "loyer_median": 13.7,
+   "loyer_mensuel_median": 664,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Montpellier",
+   "observations": 23885,
+   "observatoire": "B3400",
+   "surface_moyenne": 55
+  },
+  {
+   "logements": 7363,
+   "loyer_median": 8.8,
+   "loyer_mensuel_median": 590,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Mâcon",
+   "observations": 1994,
+   "observatoire": "B7101",
+   "surface_moyenne": 73
+  },
+  {
+   "logements": 44372,
+   "loyer_median": 10.5,
+   "loyer_mensuel_median": 550,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Nancy",
+   "observations": 7835,
+   "observatoire": "B5400",
+   "surface_moyenne": 60
+  },
+  {
+   "logements": 87173,
+   "loyer_median": 12.2,
+   "loyer_mensuel_median": 610,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Nantes",
+   "observations": 19792,
+   "observatoire": "B4400",
+   "surface_moyenne": 56
+  },
+  {
+   "logements": 12992,
+   "loyer_median": 8.7,
+   "loyer_mensuel_median": 600,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Niort",
+   "observations": 3677,
+   "observatoire": "B7900",
+   "surface_moyenne": 73
+  },
+  {
+   "logements": 34131,
+   "loyer_median": 10.7,
+   "loyer_mensuel_median": 609,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Nîmes",
+   "observations": 8240,
+   "observatoire": "B3000",
+   "surface_moyenne": 63
+  },
+  {
+   "logements": 77440,
+   "loyer_median": 12.0,
+   "loyer_mensuel_median": 615,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Rennes",
+   "observations": 17534,
+   "observatoire": "B3500",
+   "surface_moyenne": 57
+  },
+  {
+   "logements": 7994,
+   "loyer_median": 10.6,
+   "loyer_mensuel_median": 640,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Saint-Malo",
+   "observations": 2086,
+   "observatoire": "B3500",
+   "surface_moyenne": 68
+  },
+  {
+   "logements": 16325,
+   "loyer_median": 11.5,
+   "loyer_mensuel_median": 630,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Sète",
+   "observations": 3121,
+   "observatoire": "B3401",
+   "surface_moyenne": 65
+  },
+  {
+   "logements": 78935,
+   "loyer_median": 12.9,
+   "loyer_mensuel_median": 697,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Toulon",
+   "observations": 17847,
+   "observatoire": "B8300",
+   "surface_moyenne": 60
+  },
+  {
+   "logements": 172235,
+   "loyer_median": 11.9,
+   "loyer_mensuel_median": 625,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Toulouse",
+   "observations": 39064,
+   "observatoire": "B3100",
+   "surface_moyenne": 59
+  },
+  {
+   "logements": 39196,
+   "loyer_median": 11.5,
+   "loyer_mensuel_median": 593,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Tours",
+   "observations": 12940,
+   "observatoire": "B3700",
+   "surface_moyenne": 59
+  },
+  {
+   "logements": 6942,
+   "loyer_median": 7.9,
+   "loyer_mensuel_median": 590,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération de Vitré",
+   "observations": 1210,
+   "observatoire": "B3500",
+   "surface_moyenne": 80
+  },
+  {
+   "logements": 19141,
+   "loyer_median": 14.5,
+   "loyer_mensuel_median": 808,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomération du Grand Annecy",
+   "observations": 3219,
+   "observatoire": "B7400",
+   "surface_moyenne": 62
+  },
+  {
+   "logements": 4,
+   "loyer_median": 20.8,
+   "loyer_mensuel_median": 904,
+   "methode_production": "non précisée",
+   "nom": "Agglomération parisienne",
+   "observations": 10817,
+   "observatoire": "B7500",
+   "surface_moyenne": 53
+  },
+  {
+   "logements": 4,
+   "loyer_median": 18.3,
+   "loyer_mensuel_median": 850,
+   "methode_production": "non précisée",
+   "nom": "Agglomération parisienne (hors Paris)",
+   "observations": 6938,
+   "observatoire": "B7500",
+   "surface_moyenne": 54
+  },
+  {
+   "logements": 246851,
+   "loyer_median": 13.3,
+   "loyer_mensuel_median": 700,
+   "methode_production": "Estimation directe",
+   "nom": "Agglomérations d'Aix-Marseille et Arles",
+   "observations": 29710,
+   "observatoire": "B1300",
+   "surface_moyenne": 60
+  },
+  {
+   "logements": null,
+   "loyer_median": 10.2,
+   "loyer_mensuel_median": 625,
+   "methode_production": "Estimation directe",
+   "nom": "Auray Quiberon Terre Atlantique",
+   "observations": 709,
+   "observatoire": "B5600",
+   "surface_moyenne": 68
+  },
+  {
+   "logements": 5284,
+   "loyer_median": 7.0,
+   "loyer_mensuel_median": 550,
+   "methode_production": "Estimation directe",
+   "nom": "Communauté d'agglomération du Bocage Bressuirais",
+   "observations": 718,
+   "observatoire": "B7901",
+   "surface_moyenne": 82
+  },
+  {
+   "logements": 13134,
+   "loyer_median": 11.6,
+   "loyer_mensuel_median": 701,
+   "methode_production": "Estimation directe",
+   "nom": "Communauté d'agglomération Grand Chambéry et Cur de Savoie",
+   "observations": 3430,
+   "observatoire": "B7300",
+   "surface_moyenne": 67
+  },
+  {
+   "logements": 7389,
+   "loyer_median": 12.6,
+   "loyer_mensuel_median": 725,
+   "methode_production": "Estimation directe",
+   "nom": "Communauté d'agglomération Grand Lac",
+   "observations": 1904,
+   "observatoire": "B7300",
+   "surface_moyenne": 65
+  },
+  {
+   "logements": 5541,
+   "loyer_median": 6.3,
+   "loyer_mensuel_median": 590,
+   "methode_production": "Estimation directe",
+   "nom": "Communautés de communes Mellois en Poitou et Haut Val de Sèvres",
+   "observations": 729,
+   "observatoire": "B7902",
+   "surface_moyenne": 96
+  },
+  {
+   "logements": 7673,
+   "loyer_median": 8.0,
+   "loyer_mensuel_median": 609,
+   "methode_production": "Estimation directe",
+   "nom": "Communautés de communes Terres des Confluences et Grand Sud Tarn",
+   "observations": 1081,
+   "observatoire": "B8200",
+   "surface_moyenne": 81
+  },
+  {
+   "logements": null,
+   "loyer_median": 9.5,
+   "loyer_mensuel_median": 670,
+   "methode_production": "Estimation directe",
+   "nom": "Communes rurales de l'OLL du Morbihan",
+   "observations": 1009,
+   "observatoire": "B5600",
+   "surface_moyenne": 77
+  },
+  {
+   "logements": 79975,
+   "loyer_median": 11.6,
+   "loyer_mensuel_median": 660,
+   "methode_production": "Estimation directe",
+   "nom": "Eurométropole de Strasbourg",
+   "observations": 15105,
+   "observatoire": "B6700",
+   "surface_moyenne": 64
+  },
+  {
+   "logements": 7002,
+   "loyer_median": 14.6,
+   "loyer_mensuel_median": 800,
+   "methode_production": "Estimation directe",
+   "nom": "Golfe de Saint-Tropez",
+   "observations": 1444,
+   "observatoire": "B8300",
+   "surface_moyenne": 62
+  },
+  {
+   "logements": 14796,
+   "loyer_median": 10.9,
+   "loyer_mensuel_median": 610,
+   "methode_production": "Estimation directe",
+   "nom": "Golfe du Morbihan - Vannes Agglomération",
+   "observations": 2680,
+   "observatoire": "B5600",
+   "surface_moyenne": 64
+  },
+  {
+   "logements": 5190,
+   "loyer_median": 10.9,
+   "loyer_mensuel_median": 780,
+   "methode_production": "Estimation directe",
+   "nom": "Haut Var",
+   "observations": 387,
+   "observatoire": "B8300",
+   "surface_moyenne": 77
+  },
+  {
+   "logements": 4,
+   "loyer_median": 27.3,
+   "loyer_mensuel_median": 1108,
+   "methode_production": "non précisée",
+   "nom": "L7500",
+   "observations": 3879,
+   "observatoire": "B7500",
+   "surface_moyenne": 50
+  },
+  {
+   "logements": 9040,
+   "loyer_median": 9.6,
+   "loyer_mensuel_median": 585,
+   "methode_production": "Estimation directe",
+   "nom": "La Roche-sur-Yon Agglomération",
+   "observations": 2619,
+   "observatoire": "B8500",
+   "surface_moyenne": 68
+  },
+  {
+   "logements": 6345,
+   "loyer_median": 11.3,
+   "loyer_mensuel_median": 694,
+   "methode_production": "Estimation directe",
+   "nom": "Les Sables d'Olonne Agglomération",
+   "observations": 2411,
+   "observatoire": "B8500",
+   "surface_moyenne": 67
+  },
+  {
+   "logements": 4,
+   "loyer_median": 27.3,
+   "loyer_mensuel_median": 1108,
+   "methode_production": "non précisée",
+   "nom": "Paris intra-muros",
+   "observations": 3879,
+   "observatoire": "B7500",
+   "surface_moyenne": 50
+  },
+  {
+   "logements": 5363,
+   "loyer_median": 9.4,
+   "loyer_mensuel_median": 662,
+   "methode_production": "Estimation directe",
+   "nom": "Pays de Challans",
+   "observations": 1810,
+   "observatoire": "B8500",
+   "surface_moyenne": 75
+  },
+  {
+   "logements": null,
+   "loyer_median": 10.4,
+   "loyer_mensuel_median": 590,
+   "methode_production": "Estimation directe",
+   "nom": "Pays de Lorient",
+   "observations": 2233,
+   "observatoire": "B5600",
+   "surface_moyenne": 66
+  },
+  {
+   "logements": 4885,
+   "loyer_median": 9.8,
+   "loyer_mensuel_median": 692,
+   "methode_production": "Estimation directe",
+   "nom": "Pays de Saint Gilles Croix de Vie",
+   "observations": 1543,
+   "observatoire": "B8500",
+   "surface_moyenne": 75
+  },
+  {
+   "logements": 17319,
+   "loyer_median": 11.5,
+   "loyer_mensuel_median": 700,
+   "methode_production": "Estimation directe",
+   "nom": "Porte des Maures et Moyen Var",
+   "observations": 3606,
+   "observatoire": "B8300",
+   "surface_moyenne": 68
+  },
+  {
+   "logements": 11742,
+   "loyer_median": 13.1,
+   "loyer_mensuel_median": 750,
+   "methode_production": "Estimation directe",
+   "nom": "Thonon agglomération et Pays d'Evian",
+   "observations": 2925,
+   "observatoire": "B7400",
+   "surface_moyenne": 67
+  },
+  {
+   "logements": 8565,
+   "loyer_median": 11.8,
+   "loyer_mensuel_median": 700,
+   "methode_production": "Estimation directe",
+   "nom": "Unité urbaine Cluses",
+   "observations": 1284,
+   "observatoire": "B7400",
+   "surface_moyenne": 67
+  },
+  {
+   "logements": 46406,
+   "loyer_median": 11.4,
+   "loyer_mensuel_median": 655,
+   "methode_production": "Estimation directe",
+   "nom": "Unité urbaine de l'agglomération de Bayonne",
+   "observations": 11460,
+   "observatoire": "B6400",
+   "surface_moyenne": 66
+  }
+ ],
+ "unite": "€/m² de surface habitable et par mois"
+}

@@ -1478,7 +1478,7 @@ urls = ["https://geo.api.gouv.fr/communes?fields=nom,code,codesPostaux,populatio
 
 [[unite]]
 chemin = "assets/data/vie-chere/carburants.json"
-empreinte = "64e3e65ba2f97878d1d58e0b7f86fcabd3f435a886b051b3fead7d5f9856cc8b"
+empreinte = "d85362189d14b3734a4bfcc0294b9c3b2f6f71967ef8de98405d0c24c9208086"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -2255,6 +2255,14 @@ apostrophes = 0
 date_derniere_relecture = 2026-11-14
 
 [[unite]]
+chemin = "assets/data/vie-chere/loyers.json"
+empreinte = "6f54eaf84a5b1dab11196c0d3d019e609a8b50d447811a24907acac10559bd73"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-14
+urls = ["https://tabular-api.data.gouv.fr/api/resources/21543ae5-7d6e-4c49-8719-e7f725d441da/data/", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers", "https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/"]
+
+[[unite]]
 chemin = "assets/js/anglais-aventure-data.js"
 empreinte = "79c07ce53d8f678badfb0d145dc670b221a7a5b8784829bfc162c8c85f71d780"
 etat = "reference-initiale"
@@ -2322,11 +2330,11 @@ urls = ["https://thejmimiia-code.github.io/MRSC/confidentialite.html", "https://
 
 [[unite]]
 chemin = "couts-vie-chere.html"
-empreinte = "4ca74d72ad91d0cdc48bb8bb6ba5f885f852cd4b0288a2844c3b803fc211b070"
+empreinte = "3335ffb215d2033814401ad9c5108ab34ec120562cbe4a5ca0bc849d7f04902a"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
-urls = ["https://thejmimiia-code.github.io/MRSC/couts-vie-chere.html", "https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres", "https://geo.api.gouv.fr/decoupage-administratif", "https://www.data.gouv.fr/datasets/decoupage-administratif-1", "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers", "https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe"]
+urls = ["https://thejmimiia-code.github.io/MRSC/couts-vie-chere.html", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers", "https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres", "https://geo.api.gouv.fr/decoupage-administratif", "https://www.data.gouv.fr/datasets/decoupage-administratif-1", "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree", "https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe"]
 
 [[unite]]
 chemin = "couts-vie-chere/contenu.txt"

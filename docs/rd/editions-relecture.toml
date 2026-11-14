@@ -12579,3 +12579,39 @@ sources = []
 mesures = ["outils/collecter-loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
 constat = "La deuxième exécution réelle de la collecte a fait entrer les 53 territoires observés en 2025, puis la garde du vérificateur a refusé le fichier : trois territoires du Morbihan publient un loyer sans nombre de logements, et le collecteur écrivait zéro. Une absence n’est pas un zéro : le collecteur conserve désormais null, la page écrit « non publié », compte ces territoires dans sa phrase d’introduction, et un zéro explicite reste refusé. Deux cas de banc s’ajoutent côté collecte (20 au total), un côté page (24 au total, dont les cas de page). Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, mémoire d’ÉVA régénérée."
 limite = "Le fichier réel n’a pas été relu ici : la correction est éprouvée contre des fixtures qui imitent la forme servie, pas contre les lignes du Morbihan elles-mêmes. Que trois territoires publient un loyer sans nombre de logements est un fait constaté une fois ; rien ne dit combien seront dans ce cas au prochain millésime, ni si la colonne manquera toujours pour la même raison."
+
+[[edition]]
+chemin = "assets/data/vie-chere/carburants.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "64e3e65ba2f97878d1d58e0b7f86fcabd3f435a886b051b3fead7d5f9856cc8b"
+empreinte_apres = "d85362189d14b3734a4bfcc0294b9c3b2f6f71967ef8de98405d0c24c9208086"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/collecter-loyers.py", "outils/test_collecte_loyers.py", "outils/preparer-fond-de-carte.py", "outils/construire-page-couts.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr), des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0) et des loyers observés par agglomération (réseau des observatoires locaux des loyers, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations ; par agglomération : loyer médian au m² et loyer médian mensuel, surface moyenne et nombre de logements observés. La page est reconstruite depuis ces fichiers dans la même exécution. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian ou du loyer médian comme indicateurs, ni le rattachement des agglomérations à leurs communes — que la source ne publie pas et que la page ne fabrique donc pas —, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "assets/data/vie-chere/loyers.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "6f54eaf84a5b1dab11196c0d3d019e609a8b50d447811a24907acac10559bd73"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/collecter-loyers.py", "outils/test_collecte_loyers.py", "outils/preparer-fond-de-carte.py", "outils/construire-page-couts.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr), des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0) et des loyers observés par agglomération (réseau des observatoires locaux des loyers, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations ; par agglomération : loyer médian au m² et loyer médian mensuel, surface moyenne et nombre de logements observés. La page est reconstruite depuis ces fichiers dans la même exécution. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian ou du loyer médian comme indicateurs, ni le rattachement des agglomérations à leurs communes — que la source ne publie pas et que la page ne fabrique donc pas —, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "couts-vie-chere.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "4ca74d72ad91d0cdc48bb8bb6ba5f885f852cd4b0288a2844c3b803fc211b070"
+empreinte_apres = "3335ffb215d2033814401ad9c5108ab34ec120562cbe4a5ca0bc849d7f04902a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/collecter-loyers.py", "outils/test_collecte_loyers.py", "outils/preparer-fond-de-carte.py", "outils/construire-page-couts.py"]
+constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr), des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0) et des loyers observés par agglomération (réseau des observatoires locaux des loyers, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations ; par agglomération : loyer médian au m² et loyer médian mensuel, surface moyenne et nombre de logements observés. La page est reconstruite depuis ces fichiers dans la même exécution. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
+limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian ou du loyer médian comme indicateurs, ni le rattachement des agglomérations à leurs communes — que la source ne publie pas et que la page ne fabrique donc pas —, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."

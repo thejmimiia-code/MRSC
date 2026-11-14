@@ -29,8 +29,8 @@
   },
   "02": {
    "e10": {
-    "mediane": 1.969,
-    "stations": 68
+    "mediane": 1.961,
+    "stations": 67
    },
    "e85": {
     "mediane": 0.869,
@@ -38,7 +38,7 @@
    },
    "gazole": {
     "mediane": 2.109,
-    "stations": 89
+    "stations": 88
    },
    "gplc": {
     "mediane": 1.079,
@@ -49,26 +49,26 @@
     "stations": 23
    },
    "sp98": {
-    "mediane": 2.064,
-    "stations": 66
+    "mediane": 2.069,
+    "stations": 65
    }
   },
   "03": {
    "e10": {
     "mediane": 2.019,
-    "stations": 54
+    "stations": 53
    },
    "e85": {
-    "mediane": 0.898,
-    "stations": 23
+    "mediane": 0.883,
+    "stations": 22
    },
    "gazole": {
-    "mediane": 2.176,
-    "stations": 73
+    "mediane": 2.173,
+    "stations": 70
    },
    "gplc": {
     "mediane": 1.099,
-    "stations": 10
+    "stations": 9
    },
    "sp95": {
     "mediane": 2.1,
@@ -76,7 +76,7 @@
    },
    "sp98": {
     "mediane": 2.159,
-    "stations": 59
+    "stations": 58
    }
   },
   "04": {
@@ -134,11 +134,11 @@
   "06": {
    "e10": {
     "mediane": 1.99,
-    "stations": 119
+    "stations": 118
    },
    "e85": {
     "mediane": 0.925,
-    "stations": 61
+    "stations": 60
    },
    "gazole": {
     "mediane": 2.179,
@@ -153,8 +153,8 @@
     "stations": 24
    },
    "sp98": {
-    "mediane": 2.076,
-    "stations": 119
+    "mediane": 2.091,
+    "stations": 115
    }
   },
   "07": {
@@ -189,16 +189,16 @@
     "stations": 33
    },
    "e85": {
-    "mediane": 0.873,
-    "stations": 16
+    "mediane": 0.872,
+    "stations": 15
    },
    "gazole": {
-    "mediane": 2.189,
-    "stations": 47
+    "mediane": 2.192,
+    "stations": 46
    },
    "gplc": {
     "mediane": 0.999,
-    "stations": 6
+    "stations": 5
    },
    "sp95": {
     "mediane": 2.084,
@@ -211,11 +211,11 @@
   },
   "09": {
    "e10": {
-    "mediane": 1.99,
+    "mediane": 1.994,
     "stations": 30
    },
    "e85": {
-    "mediane": 0.874,
+    "mediane": 0.882,
     "stations": 18
    },
    "gazole": {
@@ -227,7 +227,7 @@
     "stations": 4
    },
    "sp95": {
-    "mediane": 2.039,
+    "mediane": 2.072,
     "stations": 10
    },
    "sp98": {
@@ -238,7 +238,7 @@
   "10": {
    "e10": {
     "mediane": 1.99,
-    "stations": 49
+    "stations": 48
    },
    "e85": {
     "mediane": 0.884,
@@ -316,7 +316,7 @@
   "13": {
    "e10": {
     "mediane": 1.99,
-    "stations": 230
+    "stations": 228
    },
    "e85": {
     "mediane": 0.899,
@@ -341,12 +341,12 @@
   },
   "14": {
    "e10": {
-    "mediane": 1.977,
-    "stations": 92
+    "mediane": 1.979,
+    "stations": 91
    },
    "e85": {
     "mediane": 0.869,
-    "stations": 39
+    "stations": 38
    },
    "gazole": {
     "mediane": 2.099,
@@ -362,7 +362,7 @@
    },
    "sp98": {
     "mediane": 2.059,
-    "stations": 93
+    "stations": 92
    }
   },
   "15": {
@@ -419,8 +419,8 @@
   },
   "17": {
    "e10": {
-    "mediane": 1.939,
-    "stations": 95
+    "mediane": 1.942,
+    "stations": 94
    },
    "e85": {
     "mediane": 0.858,
@@ -428,7 +428,7 @@
    },
    "gazole": {
     "mediane": 2.079,
-    "stations": 115
+    "stations": 113
    },
    "gplc": {
     "mediane": 1.094,
@@ -439,14 +439,14 @@
     "stations": 25
    },
    "sp98": {
-    "mediane": 2.04,
-    "stations": 102
+    "mediane": 2.045,
+    "stations": 100
    }
   },
   "18": {
    "e10": {
-    "mediane": 1.989,
-    "stations": 47
+    "mediane": 1.987,
+    "stations": 46
    },
    "e85": {
     "mediane": 0.869,
@@ -465,8 +465,8 @@
     "stations": 20
    },
    "sp98": {
-    "mediane": 2.112,
-    "stations": 51
+    "mediane": 2.115,
+    "stations": 50
    }
   },
   "19": {
@@ -501,12 +501,12 @@
     "stations": 86
    },
    "e85": {
-    "mediane": 0.909,
-    "stations": 41
+    "mediane": 0.911,
+    "stations": 40
    },
    "gazole": {
-    "mediane": 2.212,
-    "stations": 117
+    "mediane": 2.221,
+    "stations": 116
    },
    "gplc": {
     "mediane": 1.087,
@@ -518,7 +518,7 @@
    },
    "sp98": {
     "mediane": 2.149,
-    "stations": 93
+    "stations": 92
    }
   },
   "22": {
@@ -531,8 +531,8 @@
     "stations": 41
    },
    "gazole": {
-    "mediane": 2.072,
-    "stations": 110
+    "mediane": 2.079,
+    "stations": 109
    },
    "gplc": {
     "mediane": 1.029,
@@ -596,7 +596,7 @@
    },
    "sp98": {
     "mediane": 2.078,
-    "stations": 80
+    "stations": 79
    }
   },
   "25": {
@@ -617,7 +617,7 @@
     "stations": 7
    },
    "sp95": {
-    "mediane": 2.115,
+    "mediane": 2.119,
     "stations": 42
    },
    "sp98": {
@@ -706,7 +706,7 @@
   "29": {
    "e10": {
     "mediane": 1.949,
-    "stations": 109
+    "stations": 107
    },
    "e85": {
     "mediane": 0.869,
@@ -726,7 +726,7 @@
    },
    "sp98": {
     "mediane": 2.079,
-    "stations": 112
+    "stations": 111
    }
   },
   "2A": {
@@ -764,7 +764,7 @@
   "30": {
    "e10": {
     "mediane": 1.99,
-    "stations": 104
+    "stations": 103
    },
    "e85": {
     "mediane": 0.879,
@@ -772,7 +772,7 @@
    },
    "gazole": {
     "mediane": 2.129,
-    "stations": 129
+    "stations": 128
    },
    "gplc": {
     "mediane": 1.061,
@@ -784,13 +784,13 @@
    },
    "sp98": {
     "mediane": 2.11,
-    "stations": 98
+    "stations": 97
    }
   },
   "31": {
    "e10": {
-    "mediane": 1.962,
-    "stations": 152
+    "mediane": 1.969,
+    "stations": 150
    },
    "e85": {
     "mediane": 0.869,
@@ -798,18 +798,18 @@
    },
    "gazole": {
     "mediane": 2.099,
-    "stations": 173
+    "stations": 170
    },
    "gplc": {
-    "mediane": 1.079,
-    "stations": 45
+    "mediane": 1.084,
+    "stations": 44
    },
    "sp95": {
     "mediane": 2.029,
     "stations": 37
    },
    "sp98": {
-    "mediane": 2.069,
+    "mediane": 2.078,
     "stations": 139
    }
   },
@@ -823,7 +823,7 @@
     "stations": 13
    },
    "gazole": {
-    "mediane": 2.145,
+    "mediane": 2.149,
     "stations": 45
    },
    "gplc": {
@@ -831,7 +831,7 @@
     "stations": 7
    },
    "sp95": {
-    "mediane": 1.994,
+    "mediane": 2.024,
     "stations": 14
    },
    "sp98": {
@@ -861,14 +861,14 @@
     "stations": 62
    },
    "sp98": {
-    "mediane": 2.043,
-    "stations": 172
+    "mediane": 2.044,
+    "stations": 171
    }
   },
   "34": {
    "e10": {
-    "mediane": 1.988,
-    "stations": 143
+    "mediane": 1.989,
+    "stations": 142
    },
    "e85": {
     "mediane": 0.879,
@@ -975,8 +975,8 @@
     "stations": 156
    },
    "e85": {
-    "mediane": 0.894,
-    "stations": 74
+    "mediane": 0.899,
+    "stations": 73
    },
    "gazole": {
     "mediane": 2.154,
@@ -1024,7 +1024,7 @@
   "40": {
    "e10": {
     "mediane": 1.989,
-    "stations": 79
+    "stations": 80
    },
    "e85": {
     "mediane": 0.869,
@@ -1032,7 +1032,7 @@
    },
    "gazole": {
     "mediane": 2.139,
-    "stations": 101
+    "stations": 102
    },
    "gplc": {
     "mediane": 1.064,
@@ -1044,7 +1044,7 @@
    },
    "sp98": {
     "mediane": 2.129,
-    "stations": 70
+    "stations": 71
    }
   },
   "41": {
@@ -1096,7 +1096,7 @@
    },
    "sp98": {
     "mediane": 2.099,
-    "stations": 88
+    "stations": 87
    }
   },
   "43": {
@@ -1128,7 +1128,7 @@
   "44": {
    "e10": {
     "mediane": 1.939,
-    "stations": 127
+    "stations": 126
    },
    "e85": {
     "mediane": 0.869,
@@ -1147,8 +1147,8 @@
     "stations": 45
    },
    "sp98": {
-    "mediane": 2.038,
-    "stations": 136
+    "mediane": 2.039,
+    "stations": 135
    }
   },
   "45": {
@@ -1213,7 +1213,7 @@
     "stations": 36
    },
    "gazole": {
-    "mediane": 2.119,
+    "mediane": 2.109,
     "stations": 78
    },
    "gplc": {
@@ -1221,7 +1221,7 @@
     "stations": 10
    },
    "sp95": {
-    "mediane": 2.029,
+    "mediane": 2.039,
     "stations": 35
    },
    "sp98": {
@@ -1258,7 +1258,7 @@
   "49": {
    "e10": {
     "mediane": 1.959,
-    "stations": 84
+    "stations": 83
    },
    "e85": {
     "mediane": 0.858,
@@ -1266,7 +1266,7 @@
    },
    "gazole": {
     "mediane": 2.099,
-    "stations": 108
+    "stations": 107
    },
    "gplc": {
     "mediane": 1.079,
@@ -1277,8 +1277,8 @@
     "stations": 32
    },
    "sp98": {
-    "mediane": 2.072,
-    "stations": 84
+    "mediane": 2.075,
+    "stations": 83
    }
   },
   "50": {
@@ -1303,8 +1303,8 @@
     "stations": 41
    },
    "sp98": {
-    "mediane": 2.067,
-    "stations": 88
+    "mediane": 2.069,
+    "stations": 87
    }
   },
   "51": {
@@ -1314,11 +1314,11 @@
    },
    "e85": {
     "mediane": 0.869,
-    "stations": 44
+    "stations": 45
    },
    "gazole": {
     "mediane": 2.132,
-    "stations": 79
+    "stations": 78
    },
    "gplc": {
     "mediane": 0.999,
@@ -1329,8 +1329,8 @@
     "stations": 16
    },
    "sp98": {
-    "mediane": 2.111,
-    "stations": 78
+    "mediane": 2.112,
+    "stations": 76
    }
   },
   "52": {
@@ -1361,16 +1361,16 @@
   },
   "53": {
    "e10": {
-    "mediane": 1.989,
-    "stations": 33
+    "mediane": 1.99,
+    "stations": 32
    },
    "e85": {
-    "mediane": 0.869,
-    "stations": 15
+    "mediane": 0.883,
+    "stations": 14
    },
    "gazole": {
     "mediane": 2.109,
-    "stations": 53
+    "stations": 52
    },
    "gplc": {
     "mediane": 1.034,
@@ -1395,8 +1395,8 @@
     "stations": 36
    },
    "gazole": {
-    "mediane": 2.164,
-    "stations": 90
+    "mediane": 2.17,
+    "stations": 89
    },
    "gplc": {
     "mediane": 1.069,
@@ -1466,7 +1466,7 @@
   "57": {
    "e10": {
     "mediane": 1.999,
-    "stations": 97
+    "stations": 95
    },
    "e85": {
     "mediane": 0.899,
@@ -1485,7 +1485,7 @@
     "stations": 29
    },
    "sp98": {
-    "mediane": 2.149,
+    "mediane": 2.139,
     "stations": 93
    }
   },
@@ -1517,20 +1517,20 @@
   },
   "59": {
    "e10": {
-    "mediane": 1.967,
-    "stations": 203
+    "mediane": 1.969,
+    "stations": 200
    },
    "e85": {
     "mediane": 0.869,
     "stations": 103
    },
    "gazole": {
-    "mediane": 2.099,
-    "stations": 244
+    "mediane": 2.103,
+    "stations": 240
    },
    "gplc": {
-    "mediane": 1.023,
-    "stations": 40
+    "mediane": 1.024,
+    "stations": 39
    },
    "sp95": {
     "mediane": 2.019,
@@ -1544,15 +1544,15 @@
   "60": {
    "e10": {
     "mediane": 1.986,
-    "stations": 90
+    "stations": 88
    },
    "e85": {
     "mediane": 0.87,
     "stations": 51
    },
    "gazole": {
-    "mediane": 2.119,
-    "stations": 109
+    "mediane": 2.115,
+    "stations": 107
    },
    "gplc": {
     "mediane": 1.069,
@@ -1560,11 +1560,11 @@
    },
    "sp95": {
     "mediane": 2.021,
-    "stations": 32
+    "stations": 31
    },
    "sp98": {
-    "mediane": 2.076,
-    "stations": 87
+    "mediane": 2.082,
+    "stations": 84
    }
   },
   "61": {
@@ -1595,16 +1595,16 @@
   },
   "62": {
    "e10": {
-    "mediane": 1.965,
-    "stations": 179
+    "mediane": 1.962,
+    "stations": 178
    },
    "e85": {
     "mediane": 0.869,
     "stations": 86
    },
    "gazole": {
-    "mediane": 2.109,
-    "stations": 222
+    "mediane": 2.11,
+    "stations": 221
    },
    "gplc": {
     "mediane": 1.013,
@@ -1615,8 +1615,8 @@
     "stations": 46
    },
    "sp98": {
-    "mediane": 2.06,
-    "stations": 177
+    "mediane": 2.07,
+    "stations": 175
    }
   },
   "63": {
@@ -1629,8 +1629,8 @@
     "stations": 39
    },
    "gazole": {
-    "mediane": 2.159,
-    "stations": 112
+    "mediane": 2.169,
+    "stations": 111
    },
    "gplc": {
     "mediane": 1.04,
@@ -1647,8 +1647,8 @@
   },
   "64": {
    "e10": {
-    "mediane": 1.983,
-    "stations": 88
+    "mediane": 1.985,
+    "stations": 87
    },
    "e85": {
     "mediane": 0.869,
@@ -1674,15 +1674,15 @@
   "65": {
    "e10": {
     "mediane": 1.99,
-    "stations": 34
+    "stations": 35
    },
    "e85": {
     "mediane": 0.933,
     "stations": 21
    },
    "gazole": {
-    "mediane": 2.149,
-    "stations": 47
+    "mediane": 2.17,
+    "stations": 48
    },
    "gplc": {
     "mediane": 1.16,
@@ -1693,14 +1693,14 @@
     "stations": 14
    },
    "sp98": {
-    "mediane": 2.092,
-    "stations": 34
+    "mediane": 2.095,
+    "stations": 35
    }
   },
   "66": {
    "e10": {
-    "mediane": 1.989,
-    "stations": 61
+    "mediane": 1.99,
+    "stations": 60
    },
    "e85": {
     "mediane": 0.869,
@@ -1725,42 +1725,42 @@
   },
   "67": {
    "e10": {
-    "mediane": 2.084,
-    "stations": 88
+    "mediane": 2.089,
+    "stations": 83
    },
    "e85": {
     "mediane": 0.906,
-    "stations": 41
+    "stations": 40
    },
    "gazole": {
-    "mediane": 2.23,
-    "stations": 129
+    "mediane": 2.232,
+    "stations": 122
    },
    "gplc": {
     "mediane": 0.999,
     "stations": 21
    },
    "sp95": {
-    "mediane": 2.149,
-    "stations": 22
+    "mediane": 2.15,
+    "stations": 21
    },
    "sp98": {
     "mediane": 2.199,
-    "stations": 75
+    "stations": 72
    }
   },
   "68": {
    "e10": {
     "mediane": 2.089,
-    "stations": 73
+    "stations": 72
    },
    "e85": {
-    "mediane": 0.895,
-    "stations": 41
+    "mediane": 0.892,
+    "stations": 40
    },
    "gazole": {
     "mediane": 2.199,
-    "stations": 81
+    "stations": 80
    },
    "gplc": {
     "mediane": 1.069,
@@ -1785,8 +1785,8 @@
     "stations": 83
    },
    "gazole": {
-    "mediane": 2.159,
-    "stations": 193
+    "mediane": 2.169,
+    "stations": 191
    },
    "gplc": {
     "mediane": 1.091,
@@ -1834,7 +1834,7 @@
    },
    "e85": {
     "mediane": 0.899,
-    "stations": 50
+    "stations": 49
    },
    "gazole": {
     "mediane": 2.17,
@@ -1850,25 +1850,25 @@
    },
    "sp98": {
     "mediane": 2.119,
-    "stations": 113
+    "stations": 111
    }
   },
   "72": {
    "e10": {
     "mediane": 1.985,
-    "stations": 73
+    "stations": 72
    },
    "e85": {
     "mediane": 0.879,
-    "stations": 27
+    "stations": 26
    },
    "gazole": {
     "mediane": 2.119,
-    "stations": 92
+    "stations": 91
    },
    "gplc": {
-    "mediane": 1.043,
-    "stations": 24
+    "mediane": 1.06,
+    "stations": 23
    },
    "sp95": {
     "mediane": 2.039,
@@ -1876,7 +1876,7 @@
    },
    "sp98": {
     "mediane": 2.089,
-    "stations": 69
+    "stations": 68
    }
   },
   "73": {
@@ -1908,10 +1908,10 @@
   "74": {
    "e10": {
     "mediane": 1.99,
-    "stations": 90
+    "stations": 89
    },
    "e85": {
-    "mediane": 0.894,
+    "mediane": 0.899,
     "stations": 46
    },
    "gazole": {
@@ -1934,7 +1934,7 @@
   "75": {
    "e10": {
     "mediane": 1.99,
-    "stations": 37
+    "stations": 36
    },
    "e85": {
     "mediane": 0.974,
@@ -1953,14 +1953,14 @@
     "stations": 4
    },
    "sp98": {
-    "mediane": 2.112,
-    "stations": 34
+    "mediane": 2.117,
+    "stations": 33
    }
   },
   "76": {
    "e10": {
-    "mediane": 1.988,
-    "stations": 127
+    "mediane": 1.989,
+    "stations": 126
    },
    "e85": {
     "mediane": 0.869,
@@ -1979,14 +1979,14 @@
     "stations": 48
    },
    "sp98": {
-    "mediane": 2.088,
-    "stations": 125
+    "mediane": 2.089,
+    "stations": 122
    }
   },
   "77": {
    "e10": {
     "mediane": 1.979,
-    "stations": 150
+    "stations": 147
    },
    "e85": {
     "mediane": 0.878,
@@ -2005,14 +2005,14 @@
     "stations": 33
    },
    "sp98": {
-    "mediane": 2.058,
-    "stations": 144
+    "mediane": 2.059,
+    "stations": 141
    }
   },
   "78": {
    "e10": {
-    "mediane": 1.989,
-    "stations": 123
+    "mediane": 1.985,
+    "stations": 120
    },
    "e85": {
     "mediane": 0.915,
@@ -2031,8 +2031,8 @@
     "stations": 20
    },
    "sp98": {
-    "mediane": 2.044,
-    "stations": 106
+    "mediane": 2.05,
+    "stations": 103
    }
   },
   "79": {
@@ -2063,16 +2063,16 @@
   },
   "80": {
    "e10": {
-    "mediane": 1.988,
-    "stations": 87
+    "mediane": 1.989,
+    "stations": 86
    },
    "e85": {
     "mediane": 0.869,
     "stations": 44
    },
    "gazole": {
-    "mediane": 2.139,
-    "stations": 109
+    "mediane": 2.143,
+    "stations": 108
    },
    "gplc": {
     "mediane": 1.058,
@@ -2090,7 +2090,7 @@
   "81": {
    "e10": {
     "mediane": 1.99,
-    "stations": 49
+    "stations": 48
    },
    "e85": {
     "mediane": 0.875,
@@ -2098,7 +2098,7 @@
    },
    "gazole": {
     "mediane": 2.099,
-    "stations": 66
+    "stations": 65
    },
    "gplc": {
     "mediane": 1.047,
@@ -2109,7 +2109,7 @@
     "stations": 24
    },
    "sp98": {
-    "mediane": 2.069,
+    "mediane": 2.079,
     "stations": 49
    }
   },
@@ -2162,7 +2162,7 @@
    },
    "sp98": {
     "mediane": 2.079,
-    "stations": 133
+    "stations": 132
    }
   },
   "84": {
@@ -2272,11 +2272,11 @@
   "88": {
    "e10": {
     "mediane": 2.028,
-    "stations": 55
+    "stations": 54
    },
    "e85": {
-    "mediane": 0.873,
-    "stations": 22
+    "mediane": 0.869,
+    "stations": 21
    },
    "gazole": {
     "mediane": 2.192,
@@ -2350,7 +2350,7 @@
   "91": {
    "e10": {
     "mediane": 1.99,
-    "stations": 108
+    "stations": 106
    },
    "e85": {
     "mediane": 0.907,
@@ -2370,7 +2370,7 @@
    },
    "sp98": {
     "mediane": 2.099,
-    "stations": 96
+    "stations": 95
    }
   },
   "92": {
@@ -2402,11 +2402,11 @@
   "93": {
    "e10": {
     "mediane": 1.99,
-    "stations": 73
+    "stations": 72
    },
    "e85": {
-    "mediane": 0.953,
-    "stations": 31
+    "mediane": 0.956,
+    "stations": 30
    },
    "gazole": {
     "mediane": 2.17,
@@ -2421,8 +2421,8 @@
     "stations": 15
    },
    "sp98": {
-    "mediane": 2.055,
-    "stations": 63
+    "mediane": 2.058,
+    "stations": 62
    }
   },
   "94": {
@@ -2454,15 +2454,15 @@
   "95": {
    "e10": {
     "mediane": 1.99,
-    "stations": 90
+    "stations": 87
    },
    "e85": {
     "mediane": 0.908,
     "stations": 46
    },
    "gazole": {
-    "mediane": 2.162,
-    "stations": 102
+    "mediane": 2.159,
+    "stations": 101
    },
    "gplc": {
     "mediane": 1.079,
@@ -2473,8 +2473,8 @@
     "stations": 10
    },
    "sp98": {
-    "mediane": 2.059,
-    "stations": 84
+    "mediane": 2.062,
+    "stations": 83
    }
   }
  },
@@ -2484,8 +2484,8 @@
   "fiche": "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree",
   "licence": "Licence Ouverte 2.0 (lov2)",
   "producteur": "DGCCRF / Ministères économiques et financiers",
-  "sha256": "3d399941a6acea94b612636eee90c7d16cc134066e1bb1ee61a5fdb010a2384e",
-  "stations": 9832,
+  "sha256": "c337b71ef396dff7bb8a1ff423a2dbb2ea41628fffb914f4eac0289639ec0d2a",
+  "stations": 9830,
   "url": "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/csv"
  },
  "unite": "€/L"
