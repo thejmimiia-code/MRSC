@@ -49,13 +49,44 @@ jobs:
           python3 outils/test_collecte_vie_chere.py
           python3 outils/test_collecte_carburants.py
 
-      - name: Collecter les prix réels
+      # Le 14 novembre 2026, la première exécution a échoué sans qu'on puisse lire
+      # pourquoi : le journal d'un job est servi depuis un stockage que l'atelier de
+      # l'agent n'atteint pas. Un échec qu'on ne peut pas lire est un échec qu'on
+      # répare à l'aveugle. Chaque collecte devient donc son étape — la liste des
+      # étapes dit laquelle est tombée — et la fin de son journal sort en
+      # annotations, qui, elles, se lisent.
+      - name: Collecter les prix de vente (DVF, DGFiP)
         run: |
-          python3 outils/collecter-vie-chere.py --sortie assets/data/vie-chere --semestres 2
-          python3 outils/collecter-vie-chere.py --verifier --sortie assets/data/vie-chere
-          python3 outils/collecter-carburants.py
-          python3 outils/collecter-carburants.py --verifier
-          python3 outils/preparer-fond-de-carte.py --verifier
+          set +e
+          python3 outils/collecter-vie-chere.py --sortie assets/data/vie-chere --semestres 2 >"$RUNNER_TEMP/dvf.log" 2>&1
+          code=$?
+          python3 outils/collecter-vie-chere.py --verifier --sortie assets/data/vie-chere >>"$RUNNER_TEMP/dvf.log" 2>&1 || code=$?
+          set -e
+          tail -n 25 "$RUNNER_TEMP/dvf.log"
+          if [ "$code" -ne 0 ]; then
+            tail -n 12 "$RUNNER_TEMP/dvf.log" | cut -c1-800 | while IFS= read -r ligne; do
+              echo "::error title=Collecte DVF::$ligne"
+            done
+            exit "$code"
+          fi
+
+      - name: Collecter les prix des carburants (DGCCRF)
+        run: |
+          set +e
+          python3 outils/collecter-carburants.py >"$RUNNER_TEMP/carburants.log" 2>&1
+          code=$?
+          python3 outils/collecter-carburants.py --verifier >>"$RUNNER_TEMP/carburants.log" 2>&1 || code=$?
+          set -e
+          tail -n 25 "$RUNNER_TEMP/carburants.log"
+          if [ "$code" -ne 0 ]; then
+            tail -n 12 "$RUNNER_TEMP/carburants.log" | cut -c1-800 | while IFS= read -r ligne; do
+              echo "::error title=Collecte carburants::$ligne"
+            done
+            exit "$code"
+          fi
+
+      - name: Vérifier le fond de carte
+        run: python3 outils/preparer-fond-de-carte.py --verifier
 
       # Les fichiers de données sont des unités de contenu : la sentinelle de
       # relecture exige que leur provenance soit consignée. La signature est

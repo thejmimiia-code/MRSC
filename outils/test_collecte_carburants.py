@@ -38,21 +38,30 @@ COLONNES = [
 DEPARTEMENTS = [f"{n:02d}" for n in range(1, 20)] + ["2A", "2B"] + [f"{n:02d}" for n in range(21, 96)]
 
 
-def flux(nombre: int = 3_100, departements: int = 60, prix: float = 1.85) -> bytes:
-    """Un flux plausible : assez de stations et de départements pour publier."""
+def flux(nombre: int = 3_100, departements: int = 60, prix: float = 1.85,
+         separateur: str = ",", virgule: bool = False) -> bytes:
+    """Un flux plausible : assez de stations et de départements pour publier.
+
+    Les deux écritures de l'export Opendatasoft sont servies : virgule et point
+    décimal à l'anglaise, point-virgule et virgule décimale à la française.
+    """
     tampon = io.StringIO()
-    ecrivain = csv.DictWriter(tampon, fieldnames=COLONNES)
+    ecrivain = csv.DictWriter(tampon, fieldnames=COLONNES, delimiter=separateur)
     ecrivain.writeheader()
+    def chiffre(valeur: float) -> str:
+        texte = f"{valeur:.3f}"
+        return texte.replace(".", ",") if virgule else texte
+
     for i in range(nombre):
         departement = DEPARTEMENTS[i % departements]
         ecrivain.writerow(
             {
                 "code_departement": departement,
-                "ville": f"Commune {i}",
-                "gazole_prix": f"{prix + (i % 7) / 100:.3f}",
-                "sp95_prix": f"{prix + 0.10 + (i % 5) / 100:.3f}",
+                "ville": f"Lieu-dit {i}",
+                "gazole_prix": chiffre(prix + (i % 7) / 100),
+                "sp95_prix": chiffre(prix + 0.10 + (i % 5) / 100),
                 "sp98_prix": "",
-                "e10_prix": f"{prix + 0.05:.3f}",
+                "e10_prix": chiffre(prix + 0.05),
                 "e85_prix": "",
                 "gplc_prix": "",
             }
@@ -129,6 +138,16 @@ class CollecteCarburants(unittest.TestCase):
                 capture_output=True, text=True, check=False,
             )
             self.assertEqual(verification.returncode, 0, verification.stderr[-800:])
+
+    def test_export_francais_point_virgule(self) -> None:
+        """L'écriture réelle de l'export : séparateur point-virgule, virgule décimale."""
+        with tempfile.TemporaryDirectory(prefix="mrsc-carburants-") as tmp:
+            resultat, sortie = self.collecter(flux(separateur=";", virgule=True), Path(tmp))
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-800:])
+            donnees = json.loads(sortie.read_text(encoding="utf-8"))
+            self.assertEqual(donnees["source"]["stations"], 3_100)
+            mediane = donnees["departements"]["01"]["gazole"]["mediane"]
+            self.assertTrue(1.5 < mediane < 2.5, mediane)
 
     def test_flux_tronque(self) -> None:
         self.refuser(flux(nombre=2_500), "au moins 3000 attendues")

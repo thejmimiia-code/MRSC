@@ -367,7 +367,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = ".github/workflows/collecte-vie-chere.yml"
-empreinte = "edc9a8529a9561cb43da9279553d1ffea801dd46c3011e363e9ed77c0e32d53a"
+empreinte = "744742e8bb059a664aed7da137e7bb4ad43823a03ba998f65969d8fb5fcb05f2"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -2787,7 +2787,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/collecter-carburants.py"
-empreinte = "96c176ea9f95547bad1f762d4a0a75d6adff4ebd231e68ea254b94dd744e5bc7"
+empreinte = "2267b124a99165449aeaaaf1d81c4185e97b8e7bec9cccc8f98dbf1470b9c098"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -3135,7 +3135,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test_collecte_carburants.py"
-empreinte = "a31c672cd4c5f4ca680b81eaa50c1bf817552078d5dffb4ea3a0c515d6424eb1"
+empreinte = "a7a1896ef6781e937b4552c5ab39512df5831f9c8abea579a4d2a1694499e754"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14

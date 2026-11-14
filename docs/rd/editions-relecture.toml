@@ -8823,3 +8823,39 @@ sources = []
 mesures = ["outils/verifier-workflows.py", "outils/test_verifier_workflows.py"]
 constat = "La collecte mensuelle gagne une seconde porte : un événement repository_dispatch de type collecte-vie-chere. La première, gh workflow run, a été refusée en 403 — le jeton qui pousse du code n'a pas le droit d'écrire des workflows. La collecte elle-même ne change pas ; le constat de provenance, lui, nomme désormais les carburants de la DGCCRF à côté de DVF et du découpage administratif."
 limite = "Cette signature ne dit pas que la collecte réussira : elle n'a pas tourné ici, l'atelier n'atteint ni data.gouv.fr ni data.economie.gouv.fr. Le déclencheur ajouté ne teste rien de plus que la lecture YAML du workflow ; il faudra lire le journal d'exécution réel et vérifier les médianes publiées contre les sites officiels."
+
+[[edition]]
+chemin = ".github/workflows/collecte-vie-chere.yml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "edc9a8529a9561cb43da9279553d1ffea801dd46c3011e363e9ed77c0e32d53a"
+empreinte_apres = "744742e8bb059a664aed7da137e7bb4ad43823a03ba998f65969d8fb5fcb05f2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_carburants.py", "outils/verifier-workflows.py"]
+constat = "Deux corrections nées d'un échec réel : l'export CSV d'Opendatasoft arrive avec un point-virgule et une virgule décimale, ce que la lecture prenait pour une seule colonne — onze cas au banc désormais, dont le fichier français. Et l'échec lui-même était illisible : chaque collecte devient une étape nommée, et la fin de son journal sort en annotations."
+limite = "Ni l'une ni l'autre de ces corrections n'a été confrontée au flux réel : l'atelier n'atteint pas data.economie.gouv.fr, et l'export de 9 800 stations n'a pas été téléchargé ici. Le banc imite les deux écritures possibles, il ne prouve pas que la troisième — celle qui a échoué — soit l'une des deux."
+
+[[edition]]
+chemin = "outils/collecter-carburants.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "96c176ea9f95547bad1f762d4a0a75d6adff4ebd231e68ea254b94dd744e5bc7"
+empreinte_apres = "2267b124a99165449aeaaaf1d81c4185e97b8e7bec9cccc8f98dbf1470b9c098"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_carburants.py", "outils/verifier-workflows.py"]
+constat = "Deux corrections nées d'un échec réel : l'export CSV d'Opendatasoft arrive avec un point-virgule et une virgule décimale, ce que la lecture prenait pour une seule colonne — onze cas au banc désormais, dont le fichier français. Et l'échec lui-même était illisible : chaque collecte devient une étape nommée, et la fin de son journal sort en annotations."
+limite = "Ni l'une ni l'autre de ces corrections n'a été confrontée au flux réel : l'atelier n'atteint pas data.economie.gouv.fr, et l'export de 9 800 stations n'a pas été téléchargé ici. Le banc imite les deux écritures possibles, il ne prouve pas que la troisième — celle qui a échoué — soit l'une des deux."
+
+[[edition]]
+chemin = "outils/test_collecte_carburants.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "a31c672cd4c5f4ca680b81eaa50c1bf817552078d5dffb4ea3a0c515d6424eb1"
+empreinte_apres = "a7a1896ef6781e937b4552c5ab39512df5831f9c8abea579a4d2a1694499e754"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_carburants.py", "outils/verifier-workflows.py"]
+constat = "Deux corrections nées d'un échec réel : l'export CSV d'Opendatasoft arrive avec un point-virgule et une virgule décimale, ce que la lecture prenait pour une seule colonne — onze cas au banc désormais, dont le fichier français. Et l'échec lui-même était illisible : chaque collecte devient une étape nommée, et la fin de son journal sort en annotations."
+limite = "Ni l'une ni l'autre de ces corrections n'a été confrontée au flux réel : l'atelier n'atteint pas data.economie.gouv.fr, et l'export de 9 800 stations n'a pas été téléchargé ici. Le banc imite les deux écritures possibles, il ne prouve pas que la troisième — celle qui a échoué — soit l'une des deux."
