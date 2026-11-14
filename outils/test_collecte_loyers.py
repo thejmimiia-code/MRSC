@@ -25,6 +25,7 @@ Usage :
 from __future__ import annotations
 
 import json
+import socket
 import subprocess
 import sys
 import tempfile
@@ -183,6 +184,44 @@ class Serveur:
         return f"http://127.0.0.1:{self.port}"
 
 
+class ServeurCoupe:
+    """Accepte la connexion, puis la ferme sans répondre.
+
+    C'est ce que la collecte DVF a rencontré le 14 novembre 2026 : un
+    `RemoteDisconnected`, c'est-à-dire une `OSError`, qui n'était pas une
+    `URLError` et échappait donc aux essais. Le collecteur doit en sortir par un
+    refus nommé, pas par une traceback.
+    """
+
+    def __init__(self) -> None:
+        self.actif = True
+        self.ecoute = socket.socket()
+        self.ecoute.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.ecoute.bind(("127.0.0.1", 0))
+        self.ecoute.listen(8)
+        self.port = self.ecoute.getsockname()[1]
+
+    def __enter__(self) -> "ServeurCoupe":
+        def boucle() -> None:
+            while self.actif:
+                try:
+                    connexion, _ = self.ecoute.accept()
+                except OSError:
+                    return
+                connexion.close()
+
+        threading.Thread(target=boucle, daemon=True).start()
+        return self
+
+    def __exit__(self, *args) -> None:
+        self.actif = False
+        self.ecoute.close()
+
+    @property
+    def base(self) -> str:
+        return f"http://127.0.0.1:{self.port}"
+
+
 class CollecteLoyers(unittest.TestCase):
     def collecter(self, fiche_servie: dict, rangees: list[dict], tmp: Path,
                   total_annonce: int | None = None):
@@ -274,6 +313,20 @@ class CollecteLoyers(unittest.TestCase):
 
     def test_reponse_tronquee(self) -> None:
         self.refuser(fiche(), lignes(nombre=40), "réponse tronquée", total_annonce=60)
+
+    def test_connexion_coupee(self) -> None:
+        """Une connexion fermée sans réponse est une panne, pas un plantage."""
+        with tempfile.TemporaryDirectory(prefix="mrsc-loyers-") as tmp:
+            with ServeurCoupe() as serveur:
+                sortie = Path(tmp) / "loyers.json"
+                resultat = subprocess.run(
+                    [sys.executable, str(OUTIL), "--sortie", str(sortie), "--base", serveur.base],
+                    capture_output=True, text=True, check=False,
+                )
+            self.assertNotEqual(resultat.returncode, 0)
+            self.assertIn("source injoignable", resultat.stderr)
+            self.assertNotIn("Traceback", resultat.stderr)
+            self.assertFalse(sortie.exists())
 
     def test_verificateur_refuse_un_fichier_sans_provenance(self) -> None:
         with tempfile.TemporaryDirectory(prefix="mrsc-loyers-") as tmp:

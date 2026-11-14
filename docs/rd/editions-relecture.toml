@@ -12327,3 +12327,135 @@ sources = []
 mesures = ["outils/collecter-loyers.py", "outils/test_collecte_loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
 constat = "Les loyers observés entrent dans la page des coûts, à la maille où la source les publie : l’agglomération. Le collecteur trouve la ressource de l’année la plus récente par l’API de la fiche du jeu de données, lit les lignes de l’ensemble des logements par l’API tabulaire de data.gouv.fr, et refuse une licence fermée, une fiche sans ressource d’agglomérations, un filtre devenu trop large, moins de trente territoires, une année mélangée, un code d’observatoire inattendu, un territoire en double, un loyer invraisemblable et une réponse tronquée. La page rend le tableau depuis le fichier collecté, dit que cette liste n’est pas un calque de la carte, et avoue tant que la collecte n’a pas eu lieu. Les registres suivent : journal, avancées, inventaire des contrôles, plan du projet, dossier de R et D, rapport de relecture, deux sources primaires datées, et la mémoire d’ÉVA régénérée depuis ses sources (540 entrées, 348 nœuds)."
 limite = "Aucun fichier n’a été téléchargé depuis cet atelier : la lecture est éprouvée par dix-sept cas contre un serveur local dont les fixtures reprennent les types servis par l’API, pas par un appel à la source. La stabilité du service, la complétude des territoires observés et la justesse d’un loyer médian comme description d’un logement ne sont pas prouvées. Le rattachement des agglomérations à leurs communes n’est publié par personne : le site ne le fabrique pas, et les loyers ne figurent donc pas sur la carte. Aucune personne compétente en statistique publique n’a relu le dispositif, et les rendus d’ÉVA sont signés pour leur cohérence, pas pour la vérité des textes qu’ils recopient."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "aae372089fd25a1f90ddad79deae2aeef2c3ae227dd831f4f20067bfc5d6440a"
+empreinte_apres = "9ba7f9a053042162a11d762e1520cb45821890f57daa83751a632a38870709de"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/collecter-vie-chere.py", "outils/collecter-carburants.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La première exécution réelle de la collecte, après la fusion, a échoué sur un RemoteDisconnected : le serveur a fermé la connexion sans répondre. Ce n’est pas une URLError mais une OSError de bas niveau, qui échappait donc aux trois essais de lecture et sortait en traceback au lieu d’un refus nommé. Les trois collecteurs rattrapent désormais OSError et HTTPException, refusent proprement après trois essais, et chacun des deux bancs concernés exerce une connexion coupée sans réponse — 18 cas pour les loyers, 23 pour la page et la collecte DVF. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, et la mémoire d’ÉVA régénérée."
+limite = "Un cas de banc par collecteur ne prouve pas que toutes les pannes réseau sont couvertes : une réponse tronquée en cours de corps, une redirection bouclée ou un certificat invalide peuvent encore sortir autrement. Le correctif a été éprouvé contre un serveur local qui ferme la connexion, pas contre la panne réelle rencontrée en intégration continue, dont seule la prochaine exécution dira si elle est bien traitée."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "16a8b94435fed5529373cf1ae991d5e93d532a8ef7bd0e4931efc9dc969eada3"
+empreinte_apres = "a5ba95a09407a565b430148eab4ef4c12702c1ab9ab46a0226124f434d628fdf"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/collecter-vie-chere.py", "outils/collecter-carburants.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La première exécution réelle de la collecte, après la fusion, a échoué sur un RemoteDisconnected : le serveur a fermé la connexion sans répondre. Ce n’est pas une URLError mais une OSError de bas niveau, qui échappait donc aux trois essais de lecture et sortait en traceback au lieu d’un refus nommé. Les trois collecteurs rattrapent désormais OSError et HTTPException, refusent proprement après trois essais, et chacun des deux bancs concernés exerce une connexion coupée sans réponse — 18 cas pour les loyers, 23 pour la page et la collecte DVF. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, et la mémoire d’ÉVA régénérée."
+limite = "Un cas de banc par collecteur ne prouve pas que toutes les pannes réseau sont couvertes : une réponse tronquée en cours de corps, une redirection bouclée ou un certificat invalide peuvent encore sortir autrement. Le correctif a été éprouvé contre un serveur local qui ferme la connexion, pas contre la panne réelle rencontrée en intégration continue, dont seule la prochaine exécution dira si elle est bien traitée."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "aec6cd65b86b395c6e08643178c6df6dfb844cb311d24bc16db7f0e83712f41e"
+empreinte_apres = "8b6dadb2abc1b8156e4217016527baff6babb3829bf743be5a24912a569b496e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/collecter-vie-chere.py", "outils/collecter-carburants.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La première exécution réelle de la collecte, après la fusion, a échoué sur un RemoteDisconnected : le serveur a fermé la connexion sans répondre. Ce n’est pas une URLError mais une OSError de bas niveau, qui échappait donc aux trois essais de lecture et sortait en traceback au lieu d’un refus nommé. Les trois collecteurs rattrapent désormais OSError et HTTPException, refusent proprement après trois essais, et chacun des deux bancs concernés exerce une connexion coupée sans réponse — 18 cas pour les loyers, 23 pour la page et la collecte DVF. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, et la mémoire d’ÉVA régénérée."
+limite = "Un cas de banc par collecteur ne prouve pas que toutes les pannes réseau sont couvertes : une réponse tronquée en cours de corps, une redirection bouclée ou un certificat invalide peuvent encore sortir autrement. Le correctif a été éprouvé contre un serveur local qui ferme la connexion, pas contre la panne réelle rencontrée en intégration continue, dont seule la prochaine exécution dira si elle est bien traitée."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "61d4ea73720f4874c8091110cdfe48b622b66f07f780c3df77caabfb37c31dc5"
+empreinte_apres = "22ff51283f40f7189726bcf1063f8e7decfd0989354daad92b563fd1380fb752"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/collecter-vie-chere.py", "outils/collecter-carburants.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La première exécution réelle de la collecte, après la fusion, a échoué sur un RemoteDisconnected : le serveur a fermé la connexion sans répondre. Ce n’est pas une URLError mais une OSError de bas niveau, qui échappait donc aux trois essais de lecture et sortait en traceback au lieu d’un refus nommé. Les trois collecteurs rattrapent désormais OSError et HTTPException, refusent proprement après trois essais, et chacun des deux bancs concernés exerce une connexion coupée sans réponse — 18 cas pour les loyers, 23 pour la page et la collecte DVF. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, et la mémoire d’ÉVA régénérée."
+limite = "Un cas de banc par collecteur ne prouve pas que toutes les pannes réseau sont couvertes : une réponse tronquée en cours de corps, une redirection bouclée ou un certificat invalide peuvent encore sortir autrement. Le correctif a été éprouvé contre un serveur local qui ferme la connexion, pas contre la panne réelle rencontrée en intégration continue, dont seule la prochaine exécution dira si elle est bien traitée."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "cd6522f10b66cb112943913e47b7ba065b722995df021c7ebb5e02ba3123e726"
+empreinte_apres = "0577fd921f05a3c0bc0b9640521756cc0d31d2e43595d7f8299a73d3c01b517a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/collecter-vie-chere.py", "outils/collecter-carburants.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La première exécution réelle de la collecte, après la fusion, a échoué sur un RemoteDisconnected : le serveur a fermé la connexion sans répondre. Ce n’est pas une URLError mais une OSError de bas niveau, qui échappait donc aux trois essais de lecture et sortait en traceback au lieu d’un refus nommé. Les trois collecteurs rattrapent désormais OSError et HTTPException, refusent proprement après trois essais, et chacun des deux bancs concernés exerce une connexion coupée sans réponse — 18 cas pour les loyers, 23 pour la page et la collecte DVF. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, et la mémoire d’ÉVA régénérée."
+limite = "Un cas de banc par collecteur ne prouve pas que toutes les pannes réseau sont couvertes : une réponse tronquée en cours de corps, une redirection bouclée ou un certificat invalide peuvent encore sortir autrement. Le correctif a été éprouvé contre un serveur local qui ferme la connexion, pas contre la panne réelle rencontrée en intégration continue, dont seule la prochaine exécution dira si elle est bien traitée."
+
+[[edition]]
+chemin = "docs/rd/vie-chere-carte-2026-11-13.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "b39293e1670256a628fbff444b90c543c65222a05b6cc4ed4d5952c1d803730c"
+empreinte_apres = "3ccd45c644039fb38efab4bc0cbe67059b68c4ad7f84df7c677e47405671b213"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/collecter-vie-chere.py", "outils/collecter-carburants.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La première exécution réelle de la collecte, après la fusion, a échoué sur un RemoteDisconnected : le serveur a fermé la connexion sans répondre. Ce n’est pas une URLError mais une OSError de bas niveau, qui échappait donc aux trois essais de lecture et sortait en traceback au lieu d’un refus nommé. Les trois collecteurs rattrapent désormais OSError et HTTPException, refusent proprement après trois essais, et chacun des deux bancs concernés exerce une connexion coupée sans réponse — 18 cas pour les loyers, 23 pour la page et la collecte DVF. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, et la mémoire d’ÉVA régénérée."
+limite = "Un cas de banc par collecteur ne prouve pas que toutes les pannes réseau sont couvertes : une réponse tronquée en cours de corps, une redirection bouclée ou un certificat invalide peuvent encore sortir autrement. Le correctif a été éprouvé contre un serveur local qui ferme la connexion, pas contre la panne réelle rencontrée en intégration continue, dont seule la prochaine exécution dira si elle est bien traitée."
+
+[[edition]]
+chemin = "outils/collecter-carburants.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "38afb1f89e78e53f9224c74a00b3eb0304945c1954d1af96327c77877b22be74"
+empreinte_apres = "5e67fcb0f75300be074048cb2e201387e82b8c750dd44d2a6e73aafbe75e564c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/collecter-vie-chere.py", "outils/collecter-carburants.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La première exécution réelle de la collecte, après la fusion, a échoué sur un RemoteDisconnected : le serveur a fermé la connexion sans répondre. Ce n’est pas une URLError mais une OSError de bas niveau, qui échappait donc aux trois essais de lecture et sortait en traceback au lieu d’un refus nommé. Les trois collecteurs rattrapent désormais OSError et HTTPException, refusent proprement après trois essais, et chacun des deux bancs concernés exerce une connexion coupée sans réponse — 18 cas pour les loyers, 23 pour la page et la collecte DVF. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, et la mémoire d’ÉVA régénérée."
+limite = "Un cas de banc par collecteur ne prouve pas que toutes les pannes réseau sont couvertes : une réponse tronquée en cours de corps, une redirection bouclée ou un certificat invalide peuvent encore sortir autrement. Le correctif a été éprouvé contre un serveur local qui ferme la connexion, pas contre la panne réelle rencontrée en intégration continue, dont seule la prochaine exécution dira si elle est bien traitée."
+
+[[edition]]
+chemin = "outils/collecter-loyers.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "767a30d5f74e2429b62109471a931f13e427b73cd89f2cd945360e3ca861fffb"
+empreinte_apres = "26131301f68aa0d629288eadb6f24609e481643f1899adbe3acfe8804701eeb5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/collecter-vie-chere.py", "outils/collecter-carburants.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La première exécution réelle de la collecte, après la fusion, a échoué sur un RemoteDisconnected : le serveur a fermé la connexion sans répondre. Ce n’est pas une URLError mais une OSError de bas niveau, qui échappait donc aux trois essais de lecture et sortait en traceback au lieu d’un refus nommé. Les trois collecteurs rattrapent désormais OSError et HTTPException, refusent proprement après trois essais, et chacun des deux bancs concernés exerce une connexion coupée sans réponse — 18 cas pour les loyers, 23 pour la page et la collecte DVF. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, et la mémoire d’ÉVA régénérée."
+limite = "Un cas de banc par collecteur ne prouve pas que toutes les pannes réseau sont couvertes : une réponse tronquée en cours de corps, une redirection bouclée ou un certificat invalide peuvent encore sortir autrement. Le correctif a été éprouvé contre un serveur local qui ferme la connexion, pas contre la panne réelle rencontrée en intégration continue, dont seule la prochaine exécution dira si elle est bien traitée."
+
+[[edition]]
+chemin = "outils/collecter-vie-chere.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "89b80557f20d02b784849e7a0cfe13a1c1df197ac5ec7e70b0c8b36f47508bbb"
+empreinte_apres = "8c7584c7856357efa5258419109b338db89cea2e37865f441455556816091f15"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/collecter-vie-chere.py", "outils/collecter-carburants.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La première exécution réelle de la collecte, après la fusion, a échoué sur un RemoteDisconnected : le serveur a fermé la connexion sans répondre. Ce n’est pas une URLError mais une OSError de bas niveau, qui échappait donc aux trois essais de lecture et sortait en traceback au lieu d’un refus nommé. Les trois collecteurs rattrapent désormais OSError et HTTPException, refusent proprement après trois essais, et chacun des deux bancs concernés exerce une connexion coupée sans réponse — 18 cas pour les loyers, 23 pour la page et la collecte DVF. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, et la mémoire d’ÉVA régénérée."
+limite = "Un cas de banc par collecteur ne prouve pas que toutes les pannes réseau sont couvertes : une réponse tronquée en cours de corps, une redirection bouclée ou un certificat invalide peuvent encore sortir autrement. Le correctif a été éprouvé contre un serveur local qui ferme la connexion, pas contre la panne réelle rencontrée en intégration continue, dont seule la prochaine exécution dira si elle est bien traitée."
+
+[[edition]]
+chemin = "outils/test_collecte_loyers.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "34b9287dfb64257c7822ce0528e0441d512ada2e84a6c6e6d82963b3b5a08eb0"
+empreinte_apres = "d15d7594f71e65f2a9c0409ea6d0ccd6b08f35882b43b4f5a94c7d621a953dc9"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/collecter-vie-chere.py", "outils/collecter-carburants.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La première exécution réelle de la collecte, après la fusion, a échoué sur un RemoteDisconnected : le serveur a fermé la connexion sans répondre. Ce n’est pas une URLError mais une OSError de bas niveau, qui échappait donc aux trois essais de lecture et sortait en traceback au lieu d’un refus nommé. Les trois collecteurs rattrapent désormais OSError et HTTPException, refusent proprement après trois essais, et chacun des deux bancs concernés exerce une connexion coupée sans réponse — 18 cas pour les loyers, 23 pour la page et la collecte DVF. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, et la mémoire d’ÉVA régénérée."
+limite = "Un cas de banc par collecteur ne prouve pas que toutes les pannes réseau sont couvertes : une réponse tronquée en cours de corps, une redirection bouclée ou un certificat invalide peuvent encore sortir autrement. Le correctif a été éprouvé contre un serveur local qui ferme la connexion, pas contre la panne réelle rencontrée en intégration continue, dont seule la prochaine exécution dira si elle est bien traitée."
+
+[[edition]]
+chemin = "outils/test_collecte_vie_chere.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "6a6fd1ccb2a9739ced87602f7d1d461fa99ad3abc44b19c3ca43b7e7c35f6b24"
+empreinte_apres = "b1cecddd40d47239b73243dcd2e40d106ecb7a2f3e2e9da74ce0ac03a1b6b30f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/collecter-loyers.py", "outils/collecter-vie-chere.py", "outils/collecter-carburants.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
+constat = "La première exécution réelle de la collecte, après la fusion, a échoué sur un RemoteDisconnected : le serveur a fermé la connexion sans répondre. Ce n’est pas une URLError mais une OSError de bas niveau, qui échappait donc aux trois essais de lecture et sortait en traceback au lieu d’un refus nommé. Les trois collecteurs rattrapent désormais OSError et HTTPException, refusent proprement après trois essais, et chacun des deux bancs concernés exerce une connexion coupée sans réponse — 18 cas pour les loyers, 23 pour la page et la collecte DVF. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, et la mémoire d’ÉVA régénérée."
+limite = "Un cas de banc par collecteur ne prouve pas que toutes les pannes réseau sont couvertes : une réponse tronquée en cours de corps, une redirection bouclée ou un certificat invalide peuvent encore sortir autrement. Le correctif a été éprouvé contre un serveur local qui ferme la connexion, pas contre la panne réelle rencontrée en intégration continue, dont seule la prochaine exécution dira si elle est bien traitée."
