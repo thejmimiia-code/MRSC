@@ -704,3 +704,27 @@ consulte_le = 2026-11-14
 ancre = "quartiles"
 permet = "Établir que le revenu médian communal existe bien, qu’il est libre (Licence Ouverte, jeu à haute valeur) et produit par l’INSEE — donc que son absence de la page est un choix de collecte, pas une donnée qui n’existe pas."
 limites = "La fiche ne donne aucun chiffre : elle ne permet pas d’affirmer un revenu pour une commune. Ses ressources passent par des pages HTML de l’INSEE et non par des fichiers à URL stable, ce qui explique pourquoi la collecte automatique n’a pas été faite et pourquoi le site préfère ne rien afficher."
+
+# Lot « coût de la vie » : les carburants, fiche de licence et flux réellement appelé.
+
+[[source]]
+id = "data-gouv-carburants"
+extrait = "docs/rd/sources-primaires/data-gouv-carburants.txt"
+editeur = "DGCCRF (Ministères économiques et financiers), via data.gouv.fr"
+titre = "Prix des carburants en France, flux instantané (v2 améliorée)"
+url = "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree"
+consulte_le = 2026-11-14
+ancre = "toutes les 10 minutes"
+permet = "Établir que les prix à la pompe sont publiés par la DGCCRF sous Licence Ouverte, station par station, avec leur date de mise à jour — donc qu’une médiane départementale peut être calculée sur des prix réellement affichés."
+limites = "La fiche décrit le dispositif, pas les prix : elle ne dit ni combien de stations répondent, ni si toutes déclarent, ni si un prix affiché est un prix pratiqué. Elle ne dit rien du prix payé (promotions, lavage, cartes de fidélité), et une station peut manquer sans que rien ne le signale."
+
+[[source]]
+id = "data-economie-carburants-api"
+extrait = "docs/rd/sources-primaires/data-economie-carburants-api.txt"
+editeur = "DGCCRF / data.economie.gouv.fr"
+titre = "Prix des carburants — export CSV de la plateforme Opendatasoft"
+url = "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/csv"
+consulte_le = 2026-11-14
+ancre = "code_departement"
+permet = "Prouver la forme réelle des données collectées — une ligne par station, les prix par carburant, le département — et le nombre de stations annoncé par l’API (9 833) le jour du contrôle."
+limites = "Un appel de contrôle sur une ligne ne prouve pas la stabilité du schéma : un champ renommé ferait refuser la collecte, pas produire un chiffre faux, mais l’outil ne teste que le champ département. Les prix absents (`null`) ne sont pas distingués d’un carburant non vendu par la station."

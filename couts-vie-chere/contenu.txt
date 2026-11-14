@@ -56,6 +56,12 @@
               </dl>
               <p class="couts-source" data-couts-source></p>
 
+              <div class="couts-carburants" data-couts-carburants hidden>
+                <h4>Carburants dans ce département</h4>
+                <dl class="couts-chiffres" data-couts-carburants-liste></dl>
+                <p class="couts-source" data-couts-carburants-source></p>
+              </div>
+
               <fieldset class="couts-calcul">
                 <legend>Combien de m² votre budget permet-il d’acheter ici ?</legend>
                 <p class="couts-aide">Le calcul n’utilise que le prix médian ci-dessus et vos propres hypothèses. Le site ne connaît ni votre taux réel, ni les frais, ni la fiscalité locale.</p>
@@ -96,12 +102,40 @@
       </div>
     </section>
 
+    <section class="content-section" aria-labelledby="titre-autres-postes">
+      <div class="container">
+        <h2 id="titre-autres-postes">Les autres postes d’un budget : ce qui est mesuré, ce qui ne l’est pas</h2>
+        <p>Un foyer ne vit pas seulement de loyer et de carburant. Voici, poste par poste, ce que des données publiques libres permettent réellement d’afficher — et ce qu’elles ne permettent pas. Une case vide n’est pas un oubli : c’est une mesure qui n’existe pas à cette maille, ou une collecte qui n’a pas encore été faite.</p>
+        <div class="couts-tableau-defilant" tabindex="0" role="region" aria-labelledby="titre-tableau-postes">
+          <table class="couts-tableau">
+            <caption id="titre-tableau-postes">Postes de dépense et état de la donnée libre, au 14 novembre 2026</caption>
+            <thead>
+              <tr><th scope="col">Poste</th><th scope="col">Ce qui est affiché</th><th scope="col">Maille</th><th scope="col">Source</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Achat de logement</th><td>Prix médian au m², appartements et maisons, et nombre de ventes</td><td>Commune</td><td>DVF, DGFiP (Licence Ouverte 2.0)</td></tr>
+              <tr><th scope="row">Carburants</th><td>Prix médian au litre, par carburant, et nombre de stations</td><td>Département</td><td>DGCCRF, flux des prix des carburants (Licence Ouverte 2.0)</td></tr>
+              <tr><th scope="row">Loyers</th><td>Rien pour l’instant : les observatoires locaux des loyers (ANIL) publient par agglomération, avec des fichiers séparés et des mailles différentes ; la collecte n’est pas faite</td><td>Agglomération, quand elle existe</td><td>Identifiée, non collectée</td></tr>
+              <tr><th scope="row">Revenus et salaires</th><td>Rien pour l’instant : le revenu médian communal existe (FiLoSoFi, INSEE) mais ses fichiers passent par des pages sans URL stable</td><td>Commune</td><td>Identifiée, non collectée</td></tr>
+              <tr><th scope="row">Alimentation, biens de consommation</th><td>Rien : les enquêtes publiques publiées portent sur des <em>indices</em> de prix (base 100), pas sur le prix d’un panier dans une commune</td><td>National</td><td>Aucune donnée de prix local trouvée</td></tr>
+              <tr><th scope="row">Assurances</th><td>Rien : les tarifs dépendent du contrat, du véhicule, du logement et du profil ; aucun jeu public ne les publie par commune</td><td>—</td><td>Aucune donnée publique trouvée</td></tr>
+              <tr><th scope="row">Transports</th><td>Rien : les réseaux publient des horaires (GTFS) plus souvent que des tarifs, et ces tarifs sont propres à chaque autorité organisatrice</td><td>Réseau</td><td>Aucune donnée harmonisée trouvée</td></tr>
+              <tr><th scope="row">Sports, loisirs, sorties</th><td>Rien : les prix des places, licences et abonnements ne font l’objet d’aucun jeu de données public national</td><td>—</td><td>Aucune donnée publique trouvée</td></tr>
+              <tr><th scope="row">Coût du travail</th><td>Rien ici : le coût horaire du travail est mesuré par la DARES, mais au niveau national et par branche, pas par commune</td><td>National</td><td>Identifiée, hors du périmètre de cette carte</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="couts-note">Les lignes « identifiée, non collectée » disent une dette de collecte, pas une absence de donnée. Les lignes « aucune donnée trouvée » disent le résultat d’une recherche datée : elles n’affirment pas que rien n’existe, seulement que rien de libre n’a été trouvé à cette maille le 14 novembre 2026.</p>
+      </div>
+    </section>
+
     <section class="content-section" aria-labelledby="titre-sources">
       <div class="container">
         <h2 id="titre-sources">D’où viennent les chiffres</h2>
         <ul class="couts-sources" role="list">
           <li><strong>Prix de vente</strong> — DGFiP, « Demandes de valeurs foncières », publiées sur data.gouv.fr sous Licence Ouverte 2.0. Fichiers semestriels, agrégés par commune, sans parcelle ni adresse. <a href="https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres">Fiche du jeu de données</a>.</li>
           <li><strong>Communes, population, coordonnées</strong> — API Découpage administratif de l’État (<a href="https://geo.api.gouv.fr/decoupage-administratif">geo.api.gouv.fr</a>), alimentée par le jeu de données « Découpage administratif » publié sous Licence Ouverte 2.0 (<a href="https://www.data.gouv.fr/datasets/decoupage-administratif-1">fiche du jeu de données</a>).</li>
+          <li><strong>Carburants</strong> — DGCCRF, « Prix des carburants en France, flux instantané », Licence Ouverte 2.0, mis à jour toutes les dix minutes. Le site n’en garde que des <strong>médianes départementales</strong> et le nombre de stations, jamais le nom d’une station. <a href="https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree">Fiche du jeu de données</a>.</li>
           <li><strong>Contours</strong> — IGN, ADMIN EXPRESS COG (édition 2018), Licence Ouverte 2.0, export GeoJSON déjà simplifié, puis seconde simplification par ce site. <a href="https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe">Fiche du jeu de données sur data.gouv.fr</a> ; la fiche produit de l’IGN (geoservices.ign.fr) a répondu 403 lors de la rédaction, elle n’est donc pas citée.</li>
         </ul>
         <p class="couts-note">Les jeux complets ne sont pas exposés à l’indexation : seules des médianes communales sont publiées, conformément aux conditions d’utilisation de DVF, qui interdisent la réidentification des personnes et l’indexation des fichiers.</p>

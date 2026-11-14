@@ -5842,3 +5842,21 @@ html.contraste-renforce .association-suite-grid li { border-color: currentColor;
   .couts-departement.est-ouvert { fill: Highlight; }
   .couts-commune { fill: CanvasText; }
 }
+
+/* Bloc « Coût de la vie » — carburants et tableau des postes de dépense.
+   Même logique que le reste du bloc : cibles de 44 px, focus visible, une seule
+   colonne qui défile horizontalement sur petit écran, et couleurs de système en
+   contraste forcé. Aucune couleur ne porte d'information seule. */
+.couts-carburants { margin-top: 1rem; border-top: 1px solid #dbe2ec; padding-top: .8rem; }
+.couts-carburants h4 { margin: 0 0 .5rem; font-size: max(14px, 1rem); }
+.couts-tableau-defilant { overflow-x: auto; max-width: 100%; padding-bottom: .2rem; }
+.couts-tableau-defilant:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.couts-tableau { width: 100%; min-width: 640px; border-collapse: collapse; font-size: max(13px, .92rem); }
+.couts-tableau caption { text-align: left; font-weight: 700; padding: 0 0 .5rem; color: #25324a; }
+.couts-tableau th, .couts-tableau td { padding: .5rem .6rem; border-bottom: 1px solid #dbe2ec; text-align: left; vertical-align: top; }
+.couts-tableau thead th { background: #eef2f8; font-size: max(13px, .88rem); }
+.couts-tableau tbody th { font-weight: 700; }
+@media (forced-colors: active) {
+  .couts-tableau th, .couts-tableau td { border-color: CanvasText; }
+  .couts-tableau thead th { background: Canvas; }
+}

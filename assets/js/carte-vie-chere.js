@@ -31,8 +31,11 @@
   var vide = panneau.querySelector("[data-couts-vide]");
   var mensualite = document.querySelector("[data-couts-mensualite]");
   var resultat = document.querySelector("[data-couts-surface]");
+  var blocCarburants = panneau.querySelector("[data-couts-carburants]");
 
   var fond = null;
+  var carburants = null;
+  var carburantsDemande = null;
   var departementOuvert = null;
   var donneesDepartement = null;
   var communeChoisie = null;
@@ -138,6 +141,54 @@
       traces[i].classList.toggle("est-ouvert", actif);
       traces[i].setAttribute("fill", actif ? "#b9cdec" : COULEUR_VIDE);
     }
+  }
+
+  function dateFr(iso) {
+    if (!iso || iso.length < 10) return "date inconnue";
+    return iso.slice(8, 10) + "/" + iso.slice(5, 7) + "/" + iso.slice(0, 4);
+  }
+
+  var LIBELLES_CARBURANTS = {
+    gazole: "Gazole", sp95: "SP95", sp98: "SP98", e10: "SP95-E10", e85: "E85", gplc: "GPLc"
+  };
+
+  function chargerCarburants() {
+    if (!carburantsDemande) {
+      carburantsDemande = charger(DOSSIER + "carburants.json")
+        .then(function (donnees) { carburants = donnees; })
+        .catch(function () { carburants = null; });
+    }
+    return carburantsDemande;
+  }
+
+  function afficherCarburants() {
+    if (!blocCarburants) return;
+    var liste = blocCarburants.querySelector("[data-couts-carburants-liste]");
+    var note = blocCarburants.querySelector("[data-couts-carburants-source]");
+    blocCarburants.hidden = false;
+    liste.textContent = "";
+    var parDepartement = carburants && carburants.departements ? carburants.departements[departementOuvert] : null;
+    if (!parDepartement) {
+      note.textContent =
+        "Aucun prix de carburant collecté pour ce département : la page ne l’estime pas et ne le remplace par aucune moyenne nationale.";
+      return;
+    }
+    Object.keys(LIBELLES_CARBURANTS).forEach(function (cle) {
+      if (!parDepartement[cle]) return;
+      var ligne = document.createElement("div");
+      var terme = document.createElement("dt");
+      terme.textContent = LIBELLES_CARBURANTS[cle];
+      var valeur = document.createElement("dd");
+      valeur.textContent =
+        parDepartement[cle].mediane.toFixed(3).replace(".", ",") + " €/L (" +
+        nombre(parDepartement[cle].stations) + " stations)";
+      ligne.appendChild(terme);
+      ligne.appendChild(valeur);
+      liste.appendChild(ligne);
+    });
+    note.textContent =
+      "Médiane des prix affichés par les stations du département (DGCCRF, Licence Ouverte 2.0), collecte du " +
+      dateFr(carburants.collecte_le) + ". Le prix payé dépend de la station choisie, pas du département.";
   }
 
   function charger(chemin) {
@@ -250,6 +301,7 @@
         "Sous " + SEUIL_VENTES + " ventes, une médiane ne décrit pas une commune : elle est alors signalée par son nombre de ventes.";
     }
     calculerSurface();
+    chargerCarburants().then(afficherCarburants);
   }
 
   function calculerSurface() {

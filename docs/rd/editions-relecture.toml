@@ -8487,3 +8487,195 @@ sources = []
 mesures = ["outils/verifier-affichages.py", "outils/verifier-plan-complet.py"]
 constat = "Relu les documents dérivés après l’ajout de l’initiative cout-de-la-vie-et-carte : cartographie des 20 initiatives, plan du projet (618 fichiers, 12 zones, zone couts-vie-chere), plan d’ÉVA, brief prospectif, et la piste de grille du bloc des coûts écrite en minmax(0, 1fr) pour satisfaire la mesure des paliers."
 limite = "Ces compteurs sont recalculés par les outils du dépôt, pas par une mesure indépendante ; le plan du projet photographie un arbre de travail qui bougera au prochain lot. Aucune de ces pages n’est une validation, et aucune ne remplace une relecture humaine du plan."
+
+[[edition]]
+chemin = ".github/workflows/collecte-vie-chere.yml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "95f28741b1c6a9c94183ea797e8cd718eaf13f26ec66a9b5483ed8d01c30bd97"
+empreinte_apres = "cbb323794c932fbb0d458cb9fcd102fc836cc81375551d7fbe2d25365c737d63"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "87922cb6233da8c3991eba125a94a73ccba8a9495ed711aaa55584c33ec072ac"
+empreinte_apres = "dfb3b9392ddd37314547bc4e7dcb72289dc2e65671d85b9ee1ed73a451fa06a1"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "assets/js/carte-vie-chere.js"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "0801ab61dc2f5535c3ca8a5644a5d66c2b0188472667f25d3355637d3d9127cb"
+empreinte_apres = "0571897e19062e15892a309181a739654af55087cd294b60710144f5ababc18c"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "couts-vie-chere.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "dcf158f784867b326f2f68b2dfe31186a1bc0a5270305f491999c799f0055d54"
+empreinte_apres = "789a776567702e90d2358fc546c31cdf856ea5245a5d8e494bad690de9311841"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "couts-vie-chere/contenu.txt"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "8af67568c27aa216214399d375189927359af57aae3b8bf7daeecf232f5f82c5"
+empreinte_apres = "89abe1ae35ed01957319d5c0c13f7d1f9f33a13df2c96c5224da83a0dd8b7685"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "e5b6a33323dd9319ac4300d15d734ab8cb6d85e80a1a30128a4de707340cc76b"
+empreinte_apres = "231f45f557c80f5e81628e54ff39e29e04e9a2ba588bd1e393255bff9774182a"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "66e283b4ca23fba626107ec8bc2771303bc5f574dab2ef78fba874fec6e2b7c2"
+empreinte_apres = "9cf90aa7ea32ce509420d8d235a804bb49b4a1ecd49b747370a9d9957f87c25b"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "docs/rd/relecture-contenus.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "e44f7fbd9790475bed1bb3592a4a395c61eec752181f549797aa93a5e836e610"
+empreinte_apres = "f1fd132a00e99ed65cf0832e3bf6508371ccb1068cf0ee1a4951ab33b649aefe"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "docs/rd/relecture-couts-vie-chere-2026-11-14.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "602a0ebb8c29c9ec7401fa98b32c3d445305f0f22c568664f23f631e31ac1d92"
+empreinte_apres = "df0ab9cd7f3105d01d4606ca9737b815c8ce3c8622af4978dea55497abfa1260"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "docs/rd/sources-vie-chere.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "d4735a26d2d39c6449c9f4dbd2f858abc10b8038ebed78e40863fd56d55562c1"
+empreinte_apres = "0a5ec7c8009d8b85a8ba9afef11ae89a9d8efa57517821de349aa251482558f4"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "docs/rd/vie-chere-carte-2026-11-13.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "026ab290dcb3ec4b2d99f21b27be413ea1eb524c27898b0f842ef7a62b566b13"
+empreinte_apres = "2fb8483cc6a5209e97c6ecb9763763a7c528fa6f15f6830bde1b050438cc0196"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "f93d663a187a05d28b3568bc451c7398db2c9d8ee1a17ad53c495fcbe47e1e35"
+empreinte_apres = "361cdcdd7b8281f8beadd6075cf23047fdcbfc4d8ce49d3424766ea364d0eacc"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "outils/collecter-carburants.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "96c176ea9f95547bad1f762d4a0a75d6adff4ebd231e68ea254b94dd744e5bc7"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "8f1f1dd19cb08c9a54ce56e02ef3eb39caaef400859a8c830a7386a20479ba44"
+empreinte_apres = "f9027ebbd39e1934ed21c80b2fa63d1e45939374fa0f3f60d801f667de1183e4"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "outils/test_collecte_carburants.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "a31c672cd4c5f4ca680b81eaa50c1bf817552078d5dffb4ea3a0c515d6424eb1"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "outils/verifier-relecture-contenus.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "bfacf135648587e55806ac38c72500a76a9c2abe9d7e26ff09846aeb9c050a76"
+empreinte_apres = "e290d05d07f57b47dab74fd60d17cbb022c1f0df822ccae8fd8bc2410894cc84"
+nature = "mesure-interne"
+sources = ["data-gouv-carburants", "data-economie-carburants-api"]
+mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
+limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."

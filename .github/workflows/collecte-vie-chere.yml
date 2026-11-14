@@ -34,13 +34,17 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Éprouver la machine avant de lui confier des données
-        run: python3 outils/test_collecte_vie_chere.py
+      - name: Éprouver les machines avant de leur confier des données
+        run: |
+          python3 outils/test_collecte_vie_chere.py
+          python3 outils/test_collecte_carburants.py
 
       - name: Collecter les prix réels
         run: |
           python3 outils/collecter-vie-chere.py --sortie assets/data/vie-chere --semestres 2
           python3 outils/collecter-vie-chere.py --verifier --sortie assets/data/vie-chere
+          python3 outils/collecter-carburants.py
+          python3 outils/collecter-carburants.py --verifier
           python3 outils/preparer-fond-de-carte.py --verifier
 
       # Les fichiers de données sont des unités de contenu : la sentinelle de
@@ -56,7 +60,7 @@ jobs:
           fi
           python3 outils/relire-contenus.py --appliquer $fichiers \
             --nature mesure-interne \
-            --mesures "outils/collecter-vie-chere.py,outils/test_collecte_vie_chere.py,outils/preparer-fond-de-carte.py" \
+            --mesures "outils/collecter-vie-chere.py,outils/test_collecte_vie_chere.py,outils/collecter-carburants.py,outils/test_collecte_carburants.py,outils/preparer-fond-de-carte.py" \
             --constat "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0) et du découpage administratif de l'État (geo.api.gouv.fr). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population. Aucun chiffre estimé, aucune parcelle, aucune adresse." \
             --limite "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF." || {
               echo "::error title=Collecte::la provenance n'a pas pu être consignée";
@@ -83,8 +87,8 @@ jobs:
             --title "Collecte des prix réels par commune — $jour" \
             --body "Collecte automatique du $(date -u +%Y-%m-%d).
 
-          Sources : DVF (DGFiP, Licence Ouverte 2.0) et API Découpage administratif de l'État (Licence Ouverte 2.0).
+          Sources : DVF (DGFiP, Licence Ouverte 2.0), API Découpage administratif de l'État (Licence Ouverte 2.0) et flux des prix des carburants (DGCCRF, Licence Ouverte 2.0).
 
-          Ce que la collecte contrôle avant d'écrire : licence ouverte, nombre de communes, prix médian national plausible, absence de prix en Alsace-Moselle, empreinte de chaque fichier source.
+          Ce que la collecte contrôle avant d'écrire : licence ouverte, nombre de communes, prix médian national plausible, absence de prix en Alsace-Moselle, nombre de stations et de départements couverts, prix au litre plausible, empreinte de chaque fichier source.
 
-          Ce qu'elle ne prouve pas : la justesse du prix médian comme indicateur de coût de la vie, la couverture des loyers (inexistante), ni la qualité des contours de 2018. Voir \`docs/rd/vie-chere-carte-2026-11-13.md\`."
+          Ce qu'elle ne prouve pas : la justesse du prix médian comme indicateur de coût de la vie, la couverture des loyers (non collectée), ni la qualité des contours de 2018. Le prix payé à la pompe dépend de la station, pas du département. Voir \`docs/rd/vie-chere-carte-2026-11-13.md\`."

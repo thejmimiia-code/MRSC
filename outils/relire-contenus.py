@@ -105,6 +105,9 @@ DOMAINES_SURS = {
     # qui n’existe nulle part ailleurs. C’est une métadonnée officielle, pas
     # un commentaire tiers.
     "www.data.gouv.fr", "data.gouv.fr", "geo.api.gouv.fr", "www.geo.api.gouv.fr",
+    # Plateforme Opendatasoft de l’État : c’est là que vit l’export réellement
+    # téléchargé des prix des carburants, distinct de la fiche de licence data.gouv.
+    "data.economie.gouv.fr", "www.data.economie.gouv.fr",
 }
 DOMAINES_PROPRES = {"thejmimiia-code.github.io"}
 #: Domaines réservés aux fixtures des bancs de mutation et aux exemples de fiche :

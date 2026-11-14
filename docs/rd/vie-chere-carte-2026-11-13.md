@@ -179,6 +179,37 @@ qui n’a pas été fait ici. La page s’atteint depuis `documents.html`, elle 
 dans le `sitemap.xml`, et elle le dit elle-même à la fin de la section des
 sources. C’est une dette nommée, pas un oubli.
 
+## 6 bis. Les autres postes d’un budget : ce qui est mesuré, ce qui ne l’est pas
+
+La demande élargie du 14 novembre 2026 couvre « tout ce dont un foyer a besoin
+pour vivre » : salaires, loyers, locations, biens de consommation, carburants,
+assurances, sports, loisirs, sorties, transports, travail et coût du travail. La
+réponse honnête n’est pas de remplir la page : c’est de dire, poste par poste, où
+la donnée libre existe et à quelle maille.
+
+| Poste | Donnée libre trouvée | Maille | Décision |
+| --- | --- | --- | --- |
+| Achat de logement | DVF (DGFiP, Lov2) | commune | affiché |
+| Carburants | flux DGCCRF (Lov2), rafraîchi toutes les 10 min | département | **affiché**, médiane et nombre de stations |
+| Loyers | observatoires locaux des loyers (ANIL), un fichier par agglomération | agglomération | collecte non faite |
+| Revenus, salaires | FiLoSoFi (INSEE, `fr-lo`), ressources sans URL stable | commune | collecte non faite |
+| Alimentation, biens de consommation | indices de prix (base 100), pas de prix d’un panier | national | non affiché : un indice n’est pas un prix |
+| Assurances | aucun jeu public de tarifs | — | non affiché |
+| Transports | horaires GTFS plus souvent que tarifs, un tarif par réseau | réseau | non affiché |
+| Sports, loisirs, sorties | aucun jeu public national de prix | — | non affiché |
+| Coût du travail | DARES, par branche et au national | national | hors du périmètre de la carte |
+
+Deux distinctions tenues par la page : « identifiée, non collectée » est une
+**dette de collecte** ; « aucune donnée trouvée » est le résultat d’une
+**recherche datée**, qui n’affirme pas l’inexistence. Aucune des deux ne devient
+un chiffre inventé.
+
+Les carburants sont collectés par `outils/collecter-carburants.py`, qui refuse un
+flux tronqué (moins de 3 000 stations), un format inattendu, une médiane hors de
+0,50 à 3,50 €/L, moins de 50 départements, une provenance incomplète, une licence
+fermée ou une date future. Le banc `outils/test_collecte_carburants.py` exerce
+chacun de ces refus contre un serveur local : **10 cas**.
+
 ## 7. Ce que cette R et D ne prouve pas
 
 - Aucune donnée n’a encore été collectée par la machine au moment d’écrire ces

@@ -83,6 +83,9 @@ DOMAINES_SURS = {
     # portail public. La source citée est une métadonnée officielle, pas la donnée
     # elle-même, et chaque extrait garde son empreinte et ses limites écrites.
     "www.data.gouv.fr", "data.gouv.fr", "geo.api.gouv.fr", "www.geo.api.gouv.fr",
+    # Plateforme Opendatasoft de l’État : c’est là que vit l’export réellement
+    # téléchargé des prix des carburants, distinct de la fiche de licence data.gouv.
+    "data.economie.gouv.fr", "www.data.economie.gouv.fr",
 }
 EDITEURS_ATTENDUS = (
     "MDN Web Docs", "W3C",
@@ -90,7 +93,7 @@ EDITEURS_ATTENDUS = (
     "Signal Spam", "33700",
     # Éditeurs publics du lot « coût de la vie », ajoutés avec leur domaine et
     # leur extrait daté comme les précédents.
-    "DGFiP", "Etalab", "data.gouv.fr", "IGN", "INSEE", "gregoiredavid",
+    "DGFiP", "Etalab", "data.gouv.fr", "IGN", "INSEE", "gregoiredavid", "DGCCRF",
 )
 NATURES = {"fait-source", "mesure-interne", "proposition"}
 VERDICTS = {"concordant", "corrige", "retire", "sans-objet"}

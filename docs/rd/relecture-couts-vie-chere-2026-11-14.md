@@ -102,6 +102,22 @@ quel millésime porte la population. Une réponse d’API n’est pas une page.
   xls/xlsx, sans URL de fichier stable. La page n’affiche donc aucun revenu :
   c’est une collecte non faite, pas une donnée inexistante.
 
+### Les carburants
+
+- `data-gouv-carburants` —
+  `https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree`
+  : la DGCCRF publie les prix à la pompe station par station, sous Licence
+  Ouverte 2.0, avec une mise à jour annoncée toutes les dix minutes.
+- `data-economie-carburants-api` —
+  `https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/csv`
+  : l’export réellement téléchargé. Un appel de contrôle a rendu **9 833**
+  stations le 14 novembre 2026, avec les champs `code_departement` et les six
+  prix au litre.
+
+Ce que le site en fait : une **médiane départementale** et le nombre de stations,
+rien d’autre. Ni nom de station, ni adresse, ni horaires ne sont conservés. Une
+médiane départementale n’est pas le prix payé par un foyer.
+
 ## Ce que la relecture a vérifié dans les contenus
 
 - **Aucun total de coût de la vie n’est calculé.** La page affiche la population,

@@ -98,3 +98,18 @@ apporte = "Rien : c'est une absence établie, pas une source."
 ne_dit_pas = "Les observatoires locaux des loyers et l'encadrement des loyers ne couvrent que quelques agglomérations ; aucune donnée libre ne couvre les 34 000 communes."
 statut = "absence-etablie"
 verification = "Recherche menée le 13 novembre 2026 sur data.gouv.fr : pas de jeu de données couvrant les loyers à la commune sur tout le territoire."
+
+[[source]]
+id = "dgccrf-carburants"
+organisme = "DGCCRF (Ministères économiques et financiers)"
+titre = "Prix des carburants en France, flux instantané (v2 améliorée)"
+url = "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree"
+licence = "Lov2 (Licence Ouverte 2.0)"
+consultee_le = 2026-11-14
+maille = "departement"
+champs = ["code_departement", "gazole_prix", "sp95_prix", "sp98_prix", "e10_prix", "e85_prix", "gplc_prix"]
+apporte = "Prix médian au litre par carburant et par département, et nombre de stations qui le fondent."
+ne_dit_pas = "Ni le prix payé par un foyer, ni le coût d'un trajet, ni la consommation d'un véhicule. Une médiane départementale n'est pas un budget de carburant."
+statut = "verifiee"
+verification = "Fiche lue le 14 novembre 2026 : producteur DGCCRF, licence Lov2, flux mis à jour toutes les dix minutes, 8 931 points de vente annoncés et une dizaine de milliers de stations dans l'export interrogé. Un appel de contrôle a rendu 9 833 stations, dont la structure de champs attendue."
+contrainte = "Aucun nom de station, aucune adresse : la page ne garde que des médianes départementales et un nombre de stations."
