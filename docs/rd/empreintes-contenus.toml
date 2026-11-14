@@ -1937,32 +1937,32 @@ urls = ["https://thejmimiia-code.github.io/MRSC/", "https://github.com/thejmimii
 
 [[unite]]
 chemin = "docs/rd/eva/graphe.dot"
-empreinte = "cf3c53910c99f95e684eb6b8571cb2b3f5faad7eca00d816098f07db72923df6"
+empreinte = "ccc78b9acdd5d4bdac42c4c975e529fb6aed1bfe558db25169b04321718ca3d6"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-13
+date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/eva/graphe.md"
-empreinte = "88d191ef2849c70ab498c1bb05d06332309061a18d5d9b16e48849983f5e5b0a"
-etat = "reference-initiale"
+empreinte = "e40581913a6d431000a0c924e867a53953deb4ae5788a95d941d5f2af278f8b6"
+etat = "relu-par-agent"
 apostrophes = 1
-date_reference = 2026-11-09
+date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "fa9e1fd7cc3665befc16d3fb530ff1dcf3f1a7c35199ef7ab0970aa12329863c"
+empreinte = "26d2cf9442f52e78036a8ce2cec135de4a469d2a7f0f0d99fa9c897ca5ff7c5e"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-13
+date_derniere_relecture = 2026-11-14
 urls = ["https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr-executive-summary"]
 
 [[unite]]
 chemin = "docs/rd/eva/plan.md"
-empreinte = "6c5e8782f70483924c8ba794c804d478230e30b1da9b14e196b3c873379bcb92"
+empreinte = "5ccb298b9f76e3e2840db0dd25ccb1f08b13bb263f0dfc05e2bb81156430bdd0"
 etat = "relu-par-agent"
 apostrophes = 72
-date_derniere_relecture = 2026-11-13
+date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/eva/plan.toml"

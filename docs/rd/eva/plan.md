@@ -24,7 +24,7 @@ Ce plan ne décide pas d'un achat, d'un devis, d'un hébergement, d'un modèle n
 | [`rappel-mesure`](#rappel-mesure) | court | en-cours | `outils/test_memoire_eva.py` | `indexation-et-lecteurs-de-contenu`, `ecouter-la-page` |
 | [`couverture-des-branches`](#couverture-des-branches) | moyen | fait | `outils/test_verifier_plan_eva.py` | `documentation-rd-eva`, `coherence-textes-publics` |
 | [`verite-et-refus`](#verite-et-refus) | long | fait | `outils/test_verifier_plan_eva.py` | `sources-fermees-et-registre-des-refus`, `confronter-une-affirmation-a-sa-source`, `vote-distanciel-verifiable` |
-| [`continuite-du-support`](#continuite-du-support) | long | en-cours | `outils/test_memoire_eva.py` | `optimisation-du-site`, `raccordement-domaine-www`, `poids-et-sobriete-numerique` |
+| [`continuite-du-support`](#continuite-du-support) | long | en-cours | `outils/test_memoire_eva.py` | `optimisation-du-site`, `raccordement-domaine-www`, `poids-et-sobriete-numerique`, `cout-de-la-vie-et-carte` |
 | [`apprentissages-et-relecture`](#apprentissages-et-relecture) | long | en-attente | `outils/test_audit_prototypes.py` | `relire-les-44-prototypes`, `co-conception-et-essais`, `autres-langues-et-contextes` |
 | [`voix-et-ecoute`](#voix-et-ecoute) | moyen | en-attente | `outils/test_verifier_accessibilite.mjs` | `ecouter-la-page`, `direction-artistique-motion` |
 | [`persona-de-conception`](#persona-de-conception) | long | en-attente | `outils/verifier-plan-eva.py` | `documentation-rd-eva`, `coherence-textes-publics` |
@@ -170,7 +170,7 @@ Distinguer deux choses que la demande mélange : le temps de **rappel** de l'ind
 
 ## Le graphe
 
-334 nœuds et 758 arêtes, dérivés de ce plan, du portefeuille et des avancées.
+340 nœuds et 766 arêtes, dérivés de ce plan, du portefeuille et des avancées.
 
 - `graphe.md` — diagramme Mermaid, lisible dans Obsidian ou Graphify ;
 - `graphe.dot` — même graphe, fichiers compris, pour les outils de graphe ;

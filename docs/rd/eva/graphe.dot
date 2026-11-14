@@ -118,6 +118,7 @@ digraph memoire {
   "avancee:un-trace-remplace-une-photo-de-logo" [shape=note, label="avancee:un-trace-remplace-une-photo-de-logo"];
   "avancee:un-vide-assume-porte-son-motif" [shape=note, label="avancee:un-vide-assume-porte-son-motif"];
   "avancee:un-yaml-casse-n-etait-pas-une-erreur" [shape=note, label="avancee:un-yaml-casse-n-etait-pas-une-erreur"];
+  "avancee:une-absence-de-donnee-doit-dire-pourquoi" [shape=note, label="avancee:une-absence-de-donnee-doit-dire-pourquoi"];
   "avancee:une-copie-de-banc-ne-se-mute-pas-par-ses-liens" [shape=note, label="avancee:une-copie-de-banc-ne-se-mute-pas-par-ses-liens"];
   "avancee:une-dette-d-affichage-se-compte-ou-se-perd" [shape=note, label="avancee:une-dette-d-affichage-se-compte-ou-se-perd"];
   "avancee:une-ecriture-n-est-pas-un-dessin-et-ce-qui-doit-rester-fixe-se-declare" [shape=note, label="avancee:une-ecriture-n-est-pas-un-dessin-et-ce-qui-doit-rester-fixe-se-declare"];
@@ -136,6 +137,7 @@ digraph memoire {
   "branche:coherence-textes-publics" [shape=ellipse, label="branche:coherence-textes-publics"];
   "branche:confronter-une-affirmation-a-sa-source" [shape=ellipse, label="branche:confronter-une-affirmation-a-sa-source"];
   "branche:coordination-de-tous-les-agents" [shape=ellipse, label="branche:coordination-de-tous-les-agents"];
+  "branche:cout-de-la-vie-et-carte" [shape=ellipse, label="branche:cout-de-la-vie-et-carte"];
   "branche:direction-artistique-motion" [shape=ellipse, label="branche:direction-artistique-motion"];
   "branche:documentation-rd-eva" [shape=ellipse, label="branche:documentation-rd-eva"];
   "branche:ecouter-la-page" [shape=ellipse, label="branche:ecouter-la-page"];
@@ -206,6 +208,7 @@ digraph memoire {
   "docs/rd/sources-ign-2026-11-11.toml" [shape=plaintext, label="docs/rd/sources-ign-2026-11-11.toml"];
   "docs/rd/sources-ouvertes-2026-11-11.md" [shape=plaintext, label="docs/rd/sources-ouvertes-2026-11-11.md"];
   "docs/rd/sources-ouvertes-2026-11-11.toml" [shape=plaintext, label="docs/rd/sources-ouvertes-2026-11-11.toml"];
+  "docs/rd/sources-vie-chere.toml" [shape=plaintext, label="docs/rd/sources-vie-chere.toml"];
   "docs/rd/statuts-animation/ARCHIVE-film-associatif.sha256" [shape=plaintext, label="docs/rd/statuts-animation/ARCHIVE-film-associatif.sha256"];
   "docs/rd/statuts-matrice-tracabilite.toml" [shape=plaintext, label="docs/rd/statuts-matrice-tracabilite.toml"];
   "docs/rd/statuts-revue-juridique.md" [shape=plaintext, label="docs/rd/statuts-revue-juridique.md"];
@@ -215,6 +218,7 @@ digraph memoire {
   "docs/rd/sujet-securite-electricite.md" [shape=plaintext, label="docs/rd/sujet-securite-electricite.md"];
   "docs/rd/sujet-securite-sciences.md" [shape=plaintext, label="docs/rd/sujet-securite-sciences.md"];
   "docs/rd/sujet-systemes-embarques.md" [shape=plaintext, label="docs/rd/sujet-systemes-embarques.md"];
+  "docs/rd/vie-chere-carte-2026-11-13.md" [shape=plaintext, label="docs/rd/vie-chere-carte-2026-11-13.md"];
   "documents.html" [shape=plaintext, label="documents.html"];
   "eva.html" [shape=plaintext, label="eva.html"];
   "ia-societe.html" [shape=plaintext, label="ia-societe.html"];
@@ -228,6 +232,7 @@ digraph memoire {
   "outils/auditer-selecteurs-morts.py" [shape=plaintext, label="outils/auditer-selecteurs-morts.py"];
   "outils/banc_mutations.py" [shape=plaintext, label="outils/banc_mutations.py"];
   "outils/cadrages.py" [shape=plaintext, label="outils/cadrages.py"];
+  "outils/collecter-vie-chere.py" [shape=plaintext, label="outils/collecter-vie-chere.py"];
   "outils/compter-paliers.py" [shape=plaintext, label="outils/compter-paliers.py"];
   "outils/confronter-sources.py" [shape=plaintext, label="outils/confronter-sources.py"];
   "outils/construire-avancees.py" [shape=plaintext, label="outils/construire-avancees.py"];
@@ -259,6 +264,7 @@ digraph memoire {
   "outils/test_auditer_selecteurs_morts.py" [shape=plaintext, label="outils/test_auditer_selecteurs_morts.py"];
   "outils/test_avancees.py" [shape=plaintext, label="outils/test_avancees.py"];
   "outils/test_cadrages.py" [shape=plaintext, label="outils/test_cadrages.py"];
+  "outils/test_collecte_vie_chere.py" [shape=plaintext, label="outils/test_collecte_vie_chere.py"];
   "outils/test_confronter_sources.py" [shape=plaintext, label="outils/test_confronter_sources.py"];
   "outils/test_contraste-degrade.py" [shape=plaintext, label="outils/test_contraste-degrade.py"];
   "outils/test_etat_rd.py" [shape=plaintext, label="outils/test_etat_rd.py"];
@@ -735,6 +741,10 @@ digraph memoire {
   "avancee:un-yaml-casse-n-etait-pas-une-erreur" -> "docs/rd/inventaire-controles.md" [label="prouvée par"];
   "avancee:un-yaml-casse-n-etait-pas-une-erreur" -> "outils/test_verifier_workflows.py" [label="prouvée par"];
   "avancee:un-yaml-casse-n-etait-pas-une-erreur" -> "outils/verifier-workflows.py" [label="prouvée par"];
+  "avancee:une-absence-de-donnee-doit-dire-pourquoi" -> "docs/rd/sources-vie-chere.toml" [label="prouvée par"];
+  "avancee:une-absence-de-donnee-doit-dire-pourquoi" -> "docs/rd/vie-chere-carte-2026-11-13.md" [label="prouvée par"];
+  "avancee:une-absence-de-donnee-doit-dire-pourquoi" -> "outils/collecter-vie-chere.py" [label="prouvée par"];
+  "avancee:une-absence-de-donnee-doit-dire-pourquoi" -> "outils/test_collecte_vie_chere.py" [label="prouvée par"];
   "avancee:une-copie-de-banc-ne-se-mute-pas-par-ses-liens" -> "docs/rd/paliers-affichage.toml" [label="prouvée par"];
   "avancee:une-copie-de-banc-ne-se-mute-pas-par-ses-liens" -> "outils/banc_mutations.py" [label="prouvée par"];
   "avancee:une-copie-de-banc-ne-se-mute-pas-par-ses-liens" -> "outils/compter-paliers.py" [label="prouvée par"];
@@ -884,6 +894,8 @@ digraph memoire {
   "branche:coordination-de-tous-les-agents" -> "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" [label="a produit"];
   "branche:coordination-de-tous-les-agents" -> "phase:economie-de-contexte" [label="servie par"];
   "branche:coordination-de-tous-les-agents" -> "phase:memoire-trois-horizons" [label="servie par"];
+  "branche:cout-de-la-vie-et-carte" -> "avancee:une-absence-de-donnee-doit-dire-pourquoi" [label="a produit"];
+  "branche:cout-de-la-vie-et-carte" -> "phase:continuite-du-support" [label="servie par"];
   "branche:direction-artistique-motion" -> "avancee:la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider" [label="a produit"];
   "branche:direction-artistique-motion" -> "avancee:un-theme-est-une-promesse-sur-toutes-les-surfaces" [label="a produit"];
   "branche:direction-artistique-motion" -> "phase:conscience-et-corps" [label="servie par"];
@@ -1020,6 +1032,7 @@ digraph memoire {
   "branche:poids-et-sobriete-numerique" -> "avancee:un-banc-a-dix-minutes-se-reduit-en-lecrivant" [label="a produit"];
   "branche:poids-et-sobriete-numerique" -> "avancee:un-budget-qui-se-prouve-en-le-baissant" [label="a produit"];
   "branche:poids-et-sobriete-numerique" -> "avancee:un-manifeste-verifie-sa-forme-ne-verifie-pas-son-contenu" [label="a produit"];
+  "branche:poids-et-sobriete-numerique" -> "avancee:une-absence-de-donnee-doit-dire-pourquoi" [label="a produit"];
   "branche:poids-et-sobriete-numerique" -> "phase:continuite-du-support" [label="servie par"];
   "branche:poids-et-sobriete-numerique" -> "phase:economie-de-contexte" [label="servie par"];
   "branche:prospective-apprentissages-2030" -> "avancee:indice-de-confrontation-non-certifiant" [label="a produit"];
@@ -1045,6 +1058,7 @@ digraph memoire {
   "branche:relire-les-44-prototypes" -> "avancee:trois-etats-de-controle" [label="a produit"];
   "branche:relire-les-44-prototypes" -> "phase:apprentissages-et-relecture" [label="servie par"];
   "branche:sources-fermees-et-registre-des-refus" -> "avancee:registre-des-refus-verifie" [label="a produit"];
+  "branche:sources-fermees-et-registre-des-refus" -> "avancee:une-absence-de-donnee-doit-dire-pourquoi" [label="a produit"];
   "branche:sources-fermees-et-registre-des-refus" -> "phase:verite-et-refus" [label="servie par"];
   "branche:veille-savoirs-evolutifs" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:declarer-fraude-demarches-distinctes-2026-11-12" [label="a produit"];

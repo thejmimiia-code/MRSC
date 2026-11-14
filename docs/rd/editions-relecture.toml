@@ -8739,3 +8739,51 @@ sources = []
 mesures = ["outils/compter-paliers.py", "outils/verifier-affichages.py", "outils/construire-page-couts.py"]
 constat = "Le repli de la grille carte + panneau sous 760 px : le palier de 900 px que j'avais écrit n'existait pas au registre et en créait un de plus ; il rejoint le palier de 760 px déjà déclaré, dont la dette augmente d'un bloc et d'une règle, consignée dans paliers-affichage.toml. La feuille, la page générée et la version CSS IA sont réalignées."
 limite = "Cette relecture ne dit pas que 760 px est la bonne limite : le registre la déclare en dette, et aucune largeur réelle n'a été mesurée dans un navigateur cette fois — pas de capture, pas de fenêtre redimensionnée. Le repli n'a été vérifié que par le comptage des paliers et la porte d'affichage."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "cf3c53910c99f95e684eb6b8571cb2b3f5faad7eca00d816098f07db72923df6"
+empreinte_apres = "ccc78b9acdd5d4bdac42c4c975e529fb6aed1bfe558db25169b04321718ca3d6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Régénération mécanique de la mémoire d'ÉVA après l'ajout du journal, du dossier de R et D, des deux extraits de sources et des deux outils du lot carburants : 535 entrées, 340 nœuds, 766 arêtes. Rien n'est écrit à la main dans ces quatre fichiers, ils sont le rendu de leurs sources."
+limite = "Cette signature atteste que le rendu correspond à ses sources, pas que les sources sont justes : la mémoire recopie des textes relus par ailleurs, et une erreur de fond y serait reproduite à l'identique. Elle ne dit rien non plus de la lisibilité du graphe, qui n'a été ni ouvert ni regardé."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "88d191ef2849c70ab498c1bb05d06332309061a18d5d9b16e48849983f5e5b0a"
+empreinte_apres = "e40581913a6d431000a0c924e867a53953deb4ae5788a95d941d5f2af278f8b6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Régénération mécanique de la mémoire d'ÉVA après l'ajout du journal, du dossier de R et D, des deux extraits de sources et des deux outils du lot carburants : 535 entrées, 340 nœuds, 766 arêtes. Rien n'est écrit à la main dans ces quatre fichiers, ils sont le rendu de leurs sources."
+limite = "Cette signature atteste que le rendu correspond à ses sources, pas que les sources sont justes : la mémoire recopie des textes relus par ailleurs, et une erreur de fond y serait reproduite à l'identique. Elle ne dit rien non plus de la lisibilité du graphe, qui n'a été ni ouvert ni regardé."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "fa9e1fd7cc3665befc16d3fb530ff1dcf3f1a7c35199ef7ab0970aa12329863c"
+empreinte_apres = "26d2cf9442f52e78036a8ce2cec135de4a469d2a7f0f0d99fa9c897ca5ff7c5e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Régénération mécanique de la mémoire d'ÉVA après l'ajout du journal, du dossier de R et D, des deux extraits de sources et des deux outils du lot carburants : 535 entrées, 340 nœuds, 766 arêtes. Rien n'est écrit à la main dans ces quatre fichiers, ils sont le rendu de leurs sources."
+limite = "Cette signature atteste que le rendu correspond à ses sources, pas que les sources sont justes : la mémoire recopie des textes relus par ailleurs, et une erreur de fond y serait reproduite à l'identique. Elle ne dit rien non plus de la lisibilité du graphe, qui n'a été ni ouvert ni regardé."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "6c5e8782f70483924c8ba794c804d478230e30b1da9b14e196b3c873379bcb92"
+empreinte_apres = "5ccb298b9f76e3e2840db0dd25ccb1f08b13bb263f0dfc05e2bb81156430bdd0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Régénération mécanique de la mémoire d'ÉVA après l'ajout du journal, du dossier de R et D, des deux extraits de sources et des deux outils du lot carburants : 535 entrées, 340 nœuds, 766 arêtes. Rien n'est écrit à la main dans ces quatre fichiers, ils sont le rendu de leurs sources."
+limite = "Cette signature atteste que le rendu correspond à ses sources, pas que les sources sont justes : la mémoire recopie des textes relus par ailleurs, et une erreur de fond y serait reproduite à l'identique. Elle ne dit rien non plus de la lisibilité du graphe, qui n'a été ni ouvert ni regardé."
