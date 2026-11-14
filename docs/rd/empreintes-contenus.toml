@@ -1462,7 +1462,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/css/site.css"
-empreinte = "ee02ab54ace2c236c812cc1cdf58e20b5ae5fb2d5d7aaee9a22af5a76d3f9976"
+empreinte = "c317abf9b831557d0fe3ba7520e408b0342e9ce76e441d984450b72c1fb32a4e"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -2676,7 +2676,7 @@ urls = ["https://thejmimiia-code.github.io/MRSC/eva.html", "https://www.nvidia.c
 
 [[unite]]
 chemin = "ia-societe.html"
-empreinte = "d5a0610e0f6c619916de57cb8178dcb4e1f63d026df32cf9c61339b217a670a4"
+empreinte = "c4e6445656cf63ee5782bc027774451ae8de32589617d5cab4d0765025ea7989"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14

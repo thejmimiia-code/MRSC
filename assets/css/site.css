@@ -5811,15 +5811,20 @@ html.contraste-renforce .association-suite-grid li { border-color: currentColor;
 .couts-vue {
   position: relative; background: #f4f6fa; border: 1px solid #ccd4e2; border-radius: 14px;
   overflow: hidden; aspect-ratio: 4 / 3;
+  /* Le message d'état vit sous la carte, dans la même boîte au format 4/3. En flux
+     normal, il commençait sous un SVG qui occupait déjà toute la hauteur : le
+     cadrage de 390 px mesurait un mot coupé de 66,69 px. Une colonne flexible lui
+     donne sa hauteur propre et la carte prend le reste. */
+  display: flex; flex-direction: column;
 }
-.couts-vue svg { display: block; width: 100%; height: 100%; }
+.couts-vue svg { display: block; width: 100%; flex: 1 1 auto; min-height: 0; }
 .couts-vue:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 .couts-departement { cursor: pointer; transition: fill .15s ease; }
 .couts-departement:hover, .couts-departement:focus { fill: #dbe6f6; }
 .couts-commune { fill: #2f5da8; opacity: .55; cursor: pointer; }
 .couts-commune.a-un-prix { fill: var(--green); opacity: .9; }
 .couts-commune:hover { opacity: 1; }
-.couts-message { margin: 0; padding: .6rem .8rem; font-size: max(12px, .85rem); color: #25324a; background: #fff; border-top: 1px solid #ccd4e2; }
+.couts-message { flex: 0 0 auto; margin: 0; padding: .6rem .8rem; font-size: max(12px, .85rem); color: #25324a; background: #fff; border-top: 1px solid #ccd4e2; overflow-wrap: anywhere; }
 .couts-carte figcaption { margin-top: .5rem; font-size: max(12px, .8rem); color: #33405a; }
 .couts-panneau { border: 1px solid #ccd4e2; border-radius: 14px; padding: 1rem 1.1rem; background: #fff; }
 .couts-panneau h3 { margin-top: 0; }

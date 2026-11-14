@@ -8787,3 +8787,27 @@ sources = []
 mesures = ["outils/memoire-eva.py"]
 constat = "Régénération mécanique de la mémoire d'ÉVA après l'ajout du journal, du dossier de R et D, des deux extraits de sources et des deux outils du lot carburants : 535 entrées, 340 nœuds, 766 arêtes. Rien n'est écrit à la main dans ces quatre fichiers, ils sont le rendu de leurs sources."
 limite = "Cette signature atteste que le rendu correspond à ses sources, pas que les sources sont justes : la mémoire recopie des textes relus par ailleurs, et une erreur de fond y serait reproduite à l'identique. Elle ne dit rien non plus de la lisibilité du graphe, qui n'a été ni ouvert ni regardé."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ee02ab54ace2c236c812cc1cdf58e20b5ae5fb2d5d7aaee9a22af5a76d3f9976"
+empreinte_apres = "c317abf9b831557d0fe3ba7520e408b0342e9ce76e441d984450b72c1fb32a4e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/verifier-affichages.py", "outils/verifier-budgets-visuels.py"]
+constat = "Le cadrage de 390 px mesuré en intégration continue signalait un mot coupé de 66,69 px dans div.couts-vue : le message d'état commençait sous un SVG qui occupait déjà toute la hauteur de la boîte au format 4/3. La boîte devient une colonne flexible — la carte prend la place restante, le message la sienne — et les mots longs peuvent se couper. Version CSS IA c317abf9b831557d."
+limite = "La correction n'a pas été revue dans un navigateur ici : le binaire Chromium de l'intégration continue manque ses bibliothèques système, et l'atelier n'en a aucun. Elle est tenue par le raisonnement sur la cascade et par les portes hors ligne, pas par une capture ; seule la prochaine exécution des cadrages dira si le mot n'est plus coupé."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "d5a0610e0f6c619916de57cb8178dcb4e1f63d026df32cf9c61339b217a670a4"
+empreinte_apres = "c4e6445656cf63ee5782bc027774451ae8de32589617d5cab4d0765025ea7989"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/verifier-affichages.py", "outils/verifier-budgets-visuels.py"]
+constat = "Le cadrage de 390 px mesuré en intégration continue signalait un mot coupé de 66,69 px dans div.couts-vue : le message d'état commençait sous un SVG qui occupait déjà toute la hauteur de la boîte au format 4/3. La boîte devient une colonne flexible — la carte prend la place restante, le message la sienne — et les mots longs peuvent se couper. Version CSS IA c317abf9b831557d."
+limite = "La correction n'a pas été revue dans un navigateur ici : le binaire Chromium de l'intégration continue manque ses bibliothèques système, et l'atelier n'en a aucun. Elle est tenue par le raisonnement sur la cascade et par les portes hors ligne, pas par une capture ; seule la prochaine exécution des cadrages dira si le mot n'est plus coupé."
