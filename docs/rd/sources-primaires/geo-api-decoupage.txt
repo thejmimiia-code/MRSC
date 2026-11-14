@@ -1,0 +1,14 @@
+id = geo-api-decoupage
+url = https://geo.api.gouv.fr/decoupage-administratif
+date = 2026-11-14
+empreinte = 8e1c17d482064bbd337bc1a6e2419f044dc34f8c586c625cbcecf4496a0dd62c
+---
+API Découpage administratif | geo.api.gouv.fr — page d’accueil lue le 14 novembre 2026.
+
+« API Découpage administratif »
+« Rechercher et localiser les communes, communes associées et déléguées, EPCI, départements et régions, et obtenez des informations les concernant »
+
+Sections listées : « Communes — Toutes les communes de France, mais aussi les arrondissements. », « Communes associées et déléguées », « EPCI », « Départements », « Régions ».
+
+Cette page ne porte pas la licence : elle est donnée par la fiche du jeu de données « Découpage administratif » (source `data-gouv-decoupage-administratif`).
+Appel vérifié le même jour : `https://geo.api.gouv.fr/communes?code=75056&fields=nom,code,population,centre` répond `[{"nom":"Paris","code":"75056","population":2103778,"centre":{"type":"Point","coordinates":[2.347,48.8589]}}]`.

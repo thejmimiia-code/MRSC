@@ -1,0 +1,13 @@
+id = geo-api-communes-champs
+url = https://geo.api.gouv.fr/communes?fields=nom,code,codesPostaux,population,centre,departement
+date = 2026-11-14
+empreinte = 26af61a7a6cd3421ce8c518acb2245c5da54af857a891232cdc9a60c2f42a63f
+---
+API Découpage administratif — appel des communes avec les champs utilisés par le site, lu le 14 novembre 2026.
+
+Forme de l’adresse : `communes?fields=nom,code,codesPostaux,population,centre,departement`.
+
+Appel de contrôle sur Paris, `communes?code=75056&fields=nom,code,population,centre`, réponse obtenue :
+`[{"nom":"Paris","code":"75056","population":2103778,"centre":{"type":"Point","coordinates":[2.347,48.8589]}}]`
+
+Ce que le site en garde : le nom, le code INSEE, la population et le point central ; les codes postaux et le département ne sont pas publiés par la page.

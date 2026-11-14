@@ -1,0 +1,18 @@
+id = data-gouv-decoupage-administratif
+url = https://www.data.gouv.fr/datasets/decoupage-administratif-1
+date = 2026-11-14
+empreinte = bfa6776e433ba3f6e71df5b837043af3069433cc748333bc03ce2790e2ecddf4
+---
+Découpage administratif — fiche du jeu de données lue le 14 novembre 2026 par son API publique.
+
+« Ce jeu de données concerne le découpage administratif français (Hexagone, DROM, COM), au format JSON. Il ne contient pas de géométries. »
+
+« Le jeu de données couvre les principales entités administratives françaises : Communes, Arrondissements, Départements, Régions, EPCI (à fiscalité propre), EPT. »
+
+« Celles-ci sont utilisées notamment par l’API Découpage Administratif. »
+
+« Les données sont préparées […] à partir des sources suivantes : Code officiel géographique (COG) – INSEE ; Liste des EPCI à fiscalité propre – DGCL ; Population légale – INSEE ; Codes postaux – La Poste. »
+
+« Ce jeu de données ne contient pas de données spatiales (de type GeoJSON). Pour obtenir les contours géographiques, veuillez consulter le jeu de données Contours administratifs. »
+
+Métadonnées de la même réponse : licence « lov2 », périodicité « annual ».

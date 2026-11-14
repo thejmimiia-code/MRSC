@@ -1,0 +1,14 @@
+id = data-gouv-dvf-api
+url = https://www.data.gouv.fr/api/1/datasets/demandes-de-valeurs-foncieres/
+date = 2026-11-14
+empreinte = 15a11616dba211a771005b7d6719cec812f8c001da7be0bdec838a5bae8098f3
+---
+Demandes de valeurs foncières — réponse de l’API publique du jeu de données, lue le 14 novembre 2026.
+
+Champs de la réponse recopiés ici : « acronym » : « DVF » ; « license » : « lov2 » ; « frequency » : « semiannual » ; « last_update » : « 2026-10-12T17:16:52.659000+00:00 » ; « organization » : « Ministères économiques et financiers ».
+
+Description : « publié et produit par la direction générale des finances publiques » […] « sur le territoire métropolitain et les DOM-TOM, à l’exception de l’Alsace, de la Moselle et de Mayotte ».
+
+Une ressource listée porte une empreinte SHA-1 (« 019a72a9de6baa79d2f97a4c7de435a332e12485 ») et une taille annoncée de 31 913 761 octets.
+
+C’est exactement l’adresse que le collecteur du site interroge pour connaître la licence, la date et les empreintes avant de télécharger.

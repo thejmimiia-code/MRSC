@@ -1,0 +1,100 @@
+# Sources de la carte des coûts, vérifiées une par une.
+#
+# Chaque entrée dit qui publie, sous quelle licence, à quelle maille, ce que le
+# site en tire, et ce qu'elle ne permet pas de dire. Chaque URL citée ici est enregistrée
+# comme source primaire dans `docs/rd/relecture-contenus.toml`, avec son extrait daté dans
+# `docs/rd/sources-primaires/` : c'est cette lecture-là qui fait foi, et c'est elle que
+# `outils/relire-contenus.py` vérifie à chaque édition.
+#
+# Aucune de ces lignes n'est une validation : ce sont des lectures datées.
+
+[meta]
+version = 1
+date = 2026-11-13
+auteur = "agent"
+regle = "Une source n'entre ici qu'après lecture de sa fiche ou de sa réponse ; une source qui ne répond pas reste en dette, elle n'est pas inventée."
+
+[[source]]
+id = "ign-admin-express-departements"
+organisme = "IGN"
+titre = "ADMINEXPRESS-COG-CARTO.LATEST:departement (WFS)"
+url = "https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe"
+licence = "Licence Ouverte 2.0"
+consultee_le = 2026-11-13
+maille = "departement"
+champs = ["geometrie", "code_insee", "nom_officiel"]
+apporte = "Contours des 96 départements de métropole pour le fond de carte."
+ne_dit_pas = "Rien des communes : les contours communaux de 2018 sont périmés depuis les fusions, et 34 000 polygones ne tiennent pas dans une page."
+statut = "verifiee"
+verification = "Couche interrogée en WFS le 13 novembre 2026 sur le géoservice de l’État (data.geopf.fr, requête GetFeature sur ADMINEXPRESS-COG-CARTO.LATEST:departement) : elle existe, répond en GeoJSON, et refuse une propriété absente en nommant les propriétés valides. La fiche de licence et de producteur retenue est celle du jeu ADMIN EXPRESS sur data.gouv.fr, enregistrée dans `docs/rd/relecture-contenus.toml` (source `data-gouv-admin-express`)."
+
+[[source]]
+id = "france-geojson-2018"
+organisme = "Export communautaire des données IGN (gregoiredavid/france-geojson)"
+titre = "departements-version-simplifiee.geojson (IGN Admin Express COG, édition 2018)"
+url = "https://api.github.com/repos/gregoiredavid/france-geojson"
+licence = "Licence Ouverte 2.0 (données IGN à la source)"
+consultee_le = 2026-11-13
+maille = "departement"
+champs = ["geometrie", "code", "nom"]
+apporte = "Fond de carte effectivement livré : 96 départements, 14 335 points après simplification à 25 % par l'auteur de l'export."
+ne_dit_pas = "Ni les communes à jour, ni les départements d'outre-mer à une échelle lisible. Export de 2018 : la date fait partie de la donnée."
+statut = "verifiee"
+verification = "Fichier téléchargé le 13 novembre 2026 (556 Ko, 96 entités, emprise métropole), provenance et méthode de simplification lues dans le README de l'export. Le dépôt ne déclare aucune licence (champ « license » à null dans l'API GitHub, relevé le 14 novembre 2026) : la Licence Ouverte est celle de l'IGN, producteur d'origine, et elle est enregistrée sous la source `data-gouv-admin-express`."
+
+[[source]]
+id = "dvf-dgfip"
+organisme = "DGFiP (publié par data.gouv.fr)"
+titre = "Demandes de valeurs foncières (DVF)"
+url = "https://www.data.gouv.fr/api/1/datasets/demandes-de-valeurs-foncieres/"
+licence = "Lov2 (Licence Ouverte 2.0)"
+consultee_le = 2026-11-13
+maille = "commune"
+champs = ["valeur_fonciere", "surface_reelle_bati", "type_local", "nature_mutation", "code_commune"]
+apporte = "Prix médian au m² des ventes d'appartements et de maisons, et nombre de ventes, par commune."
+ne_dit_pas = "Ni les loyers, ni le coût pour un ménage, ni l'Alsace-Moselle et Mayotte (hors champ), ni les biens non vendus. Une médiane de ventes n'est pas un indice de prix."
+statut = "verifiee"
+verification = "Fiche du jeu de données lue le 13 novembre 2026 : licence Lov2, mise à jour du 12 octobre 2026, fichiers semestriels de 32 à 47 Mo avec empreinte SHA-1, champ limité à la métropole et aux DOM hors Alsace, Moselle et Mayotte, interdiction de réidentification et d'indexation par les moteurs."
+contrainte = "Agrégation communale seulement : aucune parcelle, aucune adresse, aucun nom publié ; pas d'indexation de ces fichiers."
+
+[[source]]
+id = "geo-api-communes"
+organisme = "Direction interministérielle du numérique / Etalab"
+titre = "API Découpage administratif — communes"
+url = "https://geo.api.gouv.fr/communes?fields=nom,code,codesPostaux,population,centre,departement"
+licence = "Licence Ouverte 2.0"
+consultee_le = 2026-11-13
+maille = "commune"
+champs = ["nom", "code", "population", "centre", "departement"]
+apporte = "Liste courante des communes, population légale, point central (lon/lat) : les villes de la carte."
+ne_dit_pas = "Aucun prix, aucun revenu. La population est celle du dernier recensement, pas celle de l'année affichée."
+statut = "verifiee"
+verification = "Réponse lue le 13 novembre 2026 pour Paris (75056) : nom, code, codes postaux, population 2 103 778, centre [2.347, 48.8589], département et région."
+
+[[source]]
+id = "insee-filosofi"
+organisme = "INSEE"
+titre = "Revenus et pauvreté des ménages aux niveaux national et local (FiLoSoFi)"
+url = "https://www.data.gouv.fr/datasets/revenus-et-pauvrete-des-menages-aux-niveaux-national-et-local-revenus-localises-sociaux-et-fiscaux"
+licence = "Licence Ouverte"
+consultee_le = 2026-11-13
+maille = "commune"
+champs = []
+apporte = "Rien pour l'instant : identifiée comme la bonne source du revenu médian communal."
+ne_dit_pas = "Ses ressources pointent vers des pages HTML de l'INSEE (xls/xlsx), sans URL stable : une collecte automatique casserait à la première refonte de page."
+statut = "identifiee-non-automatisee"
+verification = "Fiche du jeu de données lue le 13 novembre 2026 : licence et organisme confirmés, ressources distantes vers insee.fr."
+
+[[source]]
+id = "loyers-commune"
+organisme = "aucun organisme ne publie de loyers médians pour toutes les communes"
+titre = "Loyers médians par commune"
+url = ""
+licence = "sans objet"
+consultee_le = 2026-11-13
+maille = "commune"
+champs = []
+apporte = "Rien : c'est une absence établie, pas une source."
+ne_dit_pas = "Les observatoires locaux des loyers et l'encadrement des loyers ne couvrent que quelques agglomérations ; aucune donnée libre ne couvre les 34 000 communes."
+statut = "absence-etablie"
+verification = "Recherche menée le 13 novembre 2026 sur data.gouv.fr : pas de jeu de données couvrant les loyers à la commune sur tout le territoire."

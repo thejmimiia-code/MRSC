@@ -1,0 +1,16 @@
+id = data-gouv-admin-express
+url = https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe
+date = 2026-11-14
+empreinte = 8c0f57b4350d7ed4ef7b56c440a44799ae4674f50ae175f7960508e9994f63e4
+---
+ADMIN EXPRESS — fiche du jeu de données lue le 14 novembre 2026 par son API publique.
+
+« Les produits ADMIN EXPRESS, ADMIN EXPRESS COG, ADMIN EXPRESS COG CARTO, ADMIN EXPRESS COG CARTO PE, et ADMIN EXPRESS COG CARTOPLUS PE décrivent l’ensemble des informations administratives présentes dans la base de données interne de l’IGN sur le territoire métropolitain et les départements d’outre-mer à la date d’extraction des données. »
+
+« ADMIN EXPRESS COG […] prennent en compte le COG (Code Officiel Géographique) de l’INSEE qui rassemble les codes et libellés des entités administratives y compris d’outre-mer au 1er janvier de l’année en cours. »
+
+Licence déclarée dans les métadonnées de la même réponse : « Licence Ouverte / Open License (compatible ODC-BY, CC-BY 2.0) », identifiant « lov2 ». Producteur : Institut national de l’information géographique et forestière (IGN).
+
+Éditions annoncées : « API de diffusion : Services TMS, WFS, WMS-Raster et WMTS - ADMIN EXPRESS - Edition Septembre 2026 » ; « API de téléchargement : ADMIN EXPRESS - Edition Octobre 2026 ».
+
+La fiche produit `https://geoservices.ign.fr/adminexpress`, citée comme ressource de ce jeu de données, a répondu 403 le 14 novembre 2026 : elle n’est pas citée comme lue.

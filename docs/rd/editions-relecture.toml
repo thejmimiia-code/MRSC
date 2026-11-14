@@ -7995,3 +7995,387 @@ sources = []
 mesures = ["outils/memoire-eva.py", "docs/rd/journal.md", "docs/rd/avancees.toml", "docs/rd/arbre-accessibilite-2026-11-13.md"]
 constat = "Index d'EVA regenere apres les dernieres editions : 529 entrees, 334 noeuds, 758 aretes, rappel mesure a 21,73 ms de mediane. Aucune promotion de statut, aucune relecture humaine inventee, aucune entree ajoutee qui ne soit dans les sources."
 limite = "L'index mesure un rappel, pas une pensee : aucune comparaison avec un temps de reponse humain, aucune validation de pertinence. Il peut citer un document que la personne n'a jamais lu."
+
+[[edition]]
+chemin = ".github/workflows/collecte-vie-chere.yml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "95f28741b1c6a9c94183ea797e8cd718eaf13f26ec66a9b5483ed8d01c30bd97"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = ".github/workflows/deploy-pages.yml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "c08787802b598f41e5eec5b0a0ebf90630449f22afb403ab5559d5a6854e6e95"
+empreinte_apres = "9e73153cfac84f580659812c09fc80a6d4933227aacda8efa1846419e7e44d77"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "README.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ff09f6a54d1e2fe01e4a3e0042bdbb7cf7e1831ec5e7a80d533c32cc73e7d629"
+empreinte_apres = "4c6b279dbbf6e22a72b3969bfde48dffbec5be079911fc1842470ae4a5acc00e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "fa2aa17af75203530b3773348d2a8b649a3cf5749e402590e3e49bcbcd93cf82"
+empreinte_apres = "cbc6be51a1b990284da23a92d2ec6b32cc293615339dfe92d774b489bceb71f4"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "assets/data/vie-chere/fond-departements.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "72ea3804d4ccbb7412743890833f696a6eb9c85a2b53ea19dfab968077ee2686"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "assets/js/carte-vie-chere.js"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "0801ab61dc2f5535c3ca8a5644a5d66c2b0188472667f25d3355637d3d9127cb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "couts-vie-chere.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "dcf158f784867b326f2f68b2dfe31186a1bc0a5270305f491999c799f0055d54"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "couts-vie-chere/contenu.txt"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "8af67568c27aa216214399d375189927359af57aae3b8bf7daeecf232f5f82c5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "440532ed9c95359e2a93fca8cda030275ad48beb20976af909edb2c1904234d9"
+empreinte_apres = "ca86a5d3fe1651d4983d83db4a191a0c245a9e5a548568efa2e2d8ccd77fba45"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "d5fdccfb80cd7bff35dfaece30e6b51b90e9deb533b1e52064aa6207e9d3fd15"
+empreinte_apres = "a72c5163b1ed636b8864a1ac7c80138ee78beabfa81a6599158a64c9082cd4c7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "cd7df4548aea35dc5e951c2a0b244d4803cf012d946d4b72f7498b81726305c9"
+empreinte_apres = "ac095a4a5d8a43a6610433991a466791103ae36bae12e0681afbb3889081b181"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "5cd92ff58eb1e7d9a87f3ccfce59376ce171056863498ebbc7e50378fde2fd5d"
+empreinte_apres = "66e283b4ca23fba626107ec8bc2771303bc5f574dab2ef78fba874fec6e2b7c2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "docs/rd/poids-et-sobriete-numerique.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "a640aaf86c40f04b9e84653d4109c7002fb8695adf5e6cb5703feeda35b9b2ee"
+empreinte_apres = "bb8e3a7d22eb613fb2ddb85590b4d53eaaefb0c156be4931901a38a9f6f8eea8"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "docs/rd/portefeuille.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "93f7fd78ba359bbd23745e36a0c8e82d325a2ed0a37168b98e063ba723f38f9a"
+empreinte_apres = "b2b2cde979f16fa2ad2fa4237a1dd4381d45a81fc49402dd0298ed74ed5edce3"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "docs/rd/relecture-contenus.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "f25f0e0033ded1bb4f3b06afb71982ca81b078a461f41fe8d9d4f1549c7d0333"
+empreinte_apres = "e44f7fbd9790475bed1bb3592a4a395c61eec752181f549797aa93a5e836e610"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "docs/rd/relecture-couts-vie-chere-2026-11-14.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "602a0ebb8c29c9ec7401fa98b32c3d445305f0f22c568664f23f631e31ac1d92"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "docs/rd/sources-vie-chere.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "d4735a26d2d39c6449c9f4dbd2f858abc10b8038ebed78e40863fd56d55562c1"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "docs/rd/vie-chere-carte-2026-11-13.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "026ab290dcb3ec4b2d99f21b27be413ea1eb524c27898b0f842ef7a62b566b13"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "documents.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "024465b7635e089b4d448259bdce534e6db144240222911f019ef153ca158d37"
+empreinte_apres = "4a667762e28c9e116808ffb1ec4c014761844aad81da55c022e2c329e89e18e8"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "3c9266197d06abe9258235a0675f9a9dec39be50877ff9708d52243a282aa27e"
+empreinte_apres = "a4d225715f71bf810d64fe3df7942db9923e87c8cb444e3fee9dc9bafd531080"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "outils/collecter-vie-chere.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "1cfada700f3e8b717ed170dc829ecfa2de6181a3c07c1f8e9e1497b672d682e0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "outils/construire-page-couts.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "91417c88e84e0ece03310dc2d29e4983e109871f882d6c9db283fda8d0e386a0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "outils/preparer-fond-de-carte.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "ad0eb9e9cbca3ed1f6474af7430876ede418196df68b78cd05e19001335e52a5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "184409ee73976c66f44f67d3064cc3394bcf46eeaffa8352d0b2340a475fd3b8"
+empreinte_apres = "daef1838b3d7dc0773d3601e1309d21b8886fc0ac42721da01ced7ee021ba007"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "outils/serveur-local.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "171ec6389ac5c8761c3d5b25d80afbea0884192b3627c92a8b509321f0496d01"
+empreinte_apres = "453d80520ddbd65718e2fc9db614a83e63e56e7b0c854ec62d62581a9f642bc1"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "outils/test_collecte_vie_chere.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "df046689030278344c6ac9b652c32dfae25304c925d9725e1527ba63e5dd1554"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "outils/verifier-relecture-contenus.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "e4caf59fed1d87858433aa96dc8f4de1feb693d6cdef1e073676b16152eda0b1"
+empreinte_apres = "bfacf135648587e55806ac38c72500a76a9c2abe9d7e26ff09846aeb9c050a76"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "sitemap.xml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "84b59e1ee0436e9022d04ecf751d8c9cd1fa1fc82c3688dd6d6b749e9adcdd3c"
+empreinte_apres = "1e3e3d0ec7bd4fec3b9bf9678244a329e98126858a9c2e819331d6b641e2d88c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "transparence.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "83d1b2f1f9e985b5d686ba2533a73e4fe6e8850f00367a5f525616fbaf82e10f"
+empreinte_apres = "d51e9dc5e8dfb9ad630ba44efe7814d095eb2355ea16a660bce5c1b251c0444a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py"]
+constat = "Relu le lot entier : collecteur, fabricant de fond, assembleur de page, banc de 15 cas, carte SVG, CSS, workflows, serveur local, compteurs et documents. Les faits publiés par la page sont couverts par les huit fiches de sources enregistrées le même jour, y compris les deux adresses d’API interrogées et l’export de contours qui ne déclare aucune licence."
+limite = "Le fichier DVF n’a pas été téléchargé depuis cette machine : la justesse des prix, la couverture réelle et le millésime de population ne sont pas vérifiés, seulement le refus des cas douteux par le banc. Aucun essai dans Firefox ou Safari, aucun lecteur d’écran, aucune personne. Rien ici n’est un audit ni une validation statistique."
+
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "daef1838b3d7dc0773d3601e1309d21b8886fc0ac42721da01ced7ee021ba007"
+empreinte_apres = "8f1f1dd19cb08c9a54ce56e02ef3eb39caaef400859a8c830a7386a20479ba44"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_mutations_relecture_contenus.py"]
+constat = "Relu la sentinelle après un défaut trouvé par elle-même : une URL échappée dans du code Python (barre oblique finale) était recopiée telle quelle dans le manifeste, qui devenait alors illisible. Les URL sont désormais nettoyées et les barres obliques échappées à l’écriture."
+limite = "Ce défaut n’avait pas de banc : c’est la porte qui l’a signalé en refusant de relire son propre manifeste. Aucun cas du banc de mutations ne vise encore une URL échappée, donc une régression identique serait de nouveau trouvée par accident, pas par un test."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ac095a4a5d8a43a6610433991a466791103ae36bae12e0681afbb3889081b181"
+empreinte_apres = "e5b6a33323dd9319ac4300d15d734ab8cb6d85e80a1a30128a4de707340cc76b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_mutations_relecture_contenus.py"]
+constat = "Relu l’inventaire et le banc de la porte de relecture après l’ajout de deux cas : une URL échappée dans du code Python ne doit plus salir le manifeste, et le manifeste écrit doit se relire. Les 22 cas du banc passent."
+limite = "Deux cas ne font pas une preuve d’exhaustivité : d’autres écritures du manifeste (raison, chemin) restent couvertes par échappement simple et non par un cas dédié. Le banc travaille sur des copies jetables, jamais sur le dépôt réel."
+
+[[edition]]
+chemin = "outils/test_mutations_relecture_contenus.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "32064838b852ddf08d886f6ac52d21f3d876664114a031e477bacb270f866061"
+empreinte_apres = "23379978b4a671fbade1431f4c0e10edb1559653294a34a69e0bc84c24160e14"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_mutations_relecture_contenus.py"]
+constat = "Relu l’inventaire et le banc de la porte de relecture après l’ajout de deux cas : une URL échappée dans du code Python ne doit plus salir le manifeste, et le manifeste écrit doit se relire. Les 22 cas du banc passent."
+limite = "Deux cas ne font pas une preuve d’exhaustivité : d’autres écritures du manifeste (raison, chemin) restent couvertes par échappement simple et non par un cas dédié. Le banc travaille sur des copies jetables, jamais sur le dépôt réel."

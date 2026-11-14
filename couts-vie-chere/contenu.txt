@@ -1,0 +1,110 @@
+    <section class="page-banner">
+      <div class="container">
+        <p class="eyebrow">Données publiques</p>
+        <h1>Coût de la vie par commune</h1>
+        <p class="page-lead">Une carte de France qu’on agrandit jusqu’à la ville, avec les prix réellement pratiqués à la vente. Aucun chiffre n’est estimé : quand une commune n’a pas de données, la page le dit et explique pourquoi.</p>
+        <p class="couts-etat" data-etat-collecte role="status" aria-live="polite">Chargement de l’état de la collecte…</p>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="titre-carte">
+      <div class="container">
+        <h2 id="titre-carte">La carte</h2>
+        <p>Choisissez un département sur la carte ou dans la liste. Le zoom se fait aussi au clavier : les flèches déplacent la vue, les touches <kbd>+</kbd> et <kbd>−</kbd> l’agrandissent et la réduisent.</p>
+
+        <div class="couts-outils">
+          <div class="couts-champ">
+            <label for="couts-departement">Département</label>
+            <select id="couts-departement" data-couts-departement>
+              <option value="">Choisir un département…</option>
+            </select>
+          </div>
+          <div class="couts-champ">
+            <label for="couts-recherche">Chercher une commune du département ouvert</label>
+            <input id="couts-recherche" type="search" data-couts-recherche autocomplete="off" placeholder="Exemple : Lyon">
+          </div>
+          <div class="couts-zoom">
+            <button type="button" class="button button-secondary" data-couts-zoom="plus" aria-label="Agrandir la carte">+</button>
+            <button type="button" class="button button-secondary" data-couts-zoom="moins" aria-label="Réduire la carte">−</button>
+            <button type="button" class="button button-secondary" data-couts-recentrer>Voir toute la France</button>
+          </div>
+        </div>
+
+        <div class="couts-grille">
+          <figure class="couts-carte">
+            <div class="couts-vue" data-couts-vue tabindex="0" role="group" aria-label="Carte des départements de métropole. Utilisez les flèches pour déplacer la vue.">
+              <svg data-couts-svg viewBox="0 0 100 100" role="img" aria-label="Carte des départements de France métropolitaine">
+                <g data-couts-departements></g>
+              </svg>
+              <p class="couts-message" data-couts-message role="status" aria-live="polite">Chargement de la carte…</p>
+            </div>
+            <figcaption>
+              Contours : IGN, Admin Express COG (édition 2018), Licence Ouverte 2.0, export simplifié par ce site. Métropole seulement : les départements d’outre-mer ne sont pas représentés à cette échelle.
+            </figcaption>
+          </figure>
+
+          <div class="couts-panneau" data-couts-panneau>
+            <h3>Fiche de la commune</h3>
+            <p class="couts-vide" data-couts-vide>Cliquez une ville sur la carte, ou cherchez-la, pour voir ses chiffres.</p>
+            <div data-couts-fiche hidden>
+              <p class="couts-nom" data-couts-nom></p>
+              <dl class="couts-chiffres">
+                <div><dt>Population</dt><dd data-couts-population>—</dd></div>
+                <div><dt>Prix médian au m² — appartements</dt><dd data-couts-appartements>—</dd></div>
+                <div><dt>Prix médian au m² — maisons</dt><dd data-couts-maisons>—</dd></div>
+                <div><dt>Ventes observées</dt><dd data-couts-ventes>—</dd></div>
+              </dl>
+              <p class="couts-source" data-couts-source></p>
+
+              <fieldset class="couts-calcul">
+                <legend>Combien de m² votre budget permet-il d’acheter ici ?</legend>
+                <p class="couts-aide">Le calcul n’utilise que le prix médian ci-dessus et vos propres hypothèses. Le site ne connaît ni votre taux réel, ni les frais, ni la fiscalité locale.</p>
+                <div class="couts-champ">
+                  <label for="couts-mensualite">Mensualité que vous pouvez consacrer au logement (€)</label>
+                  <input id="couts-mensualite" type="number" inputmode="numeric" min="0" step="50" value="900" data-couts-mensualite>
+                </div>
+                <p class="couts-resultat" data-couts-surface role="status" aria-live="polite">—</p>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="titre-methode">
+      <div class="container">
+        <h2 id="titre-methode">Ce que la carte mesure, et ce qu’elle ne mesure pas</h2>
+        <div class="couts-deux-colonnes">
+          <div>
+            <h3>Mesuré, commune par commune</h3>
+            <ul class="couts-liste" role="list">
+              <li>La <strong>population</strong> légale, d’après le découpage administratif de l’État.</li>
+              <li>Le <strong>prix médian au m²</strong> des appartements et des maisons réellement vendus, calculé sur les transactions enregistrées par la DGFiP (base DVF).</li>
+              <li>Le <strong>nombre de ventes</strong> qui fonde chaque médiane : sous cinq ventes, la médiane ne dit plus rien d’une commune et n’est pas publiée.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Non mesuré, donc absent</h3>
+            <ul class="couts-liste" role="list">
+              <li>Les <strong>loyers</strong> : aucune source libre ne les couvre pour toutes les communes ; la page ne les estime pas.</li>
+              <li>Le <strong>reste à vivre</strong> : les revenus médians ne sont pas encore collectés (source identifiée, collecte non automatisée).</li>
+              <li>Les <strong>charges, transports, alimentation, impôts locaux</strong> : ce ne sont pas des données communales publiques homogènes ; les inventer donnerait un « coût de la vie » qui n’existe nulle part.</li>
+              <li>L’<strong>Alsace et la Moselle</strong> : hors du champ de DVF (livre foncier), donc sans prix de vente, même quand la commune existe.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="titre-sources">
+      <div class="container">
+        <h2 id="titre-sources">D’où viennent les chiffres</h2>
+        <ul class="couts-sources" role="list">
+          <li><strong>Prix de vente</strong> — DGFiP, « Demandes de valeurs foncières », publiées sur data.gouv.fr sous Licence Ouverte 2.0. Fichiers semestriels, agrégés par commune, sans parcelle ni adresse. <a href="https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres">Fiche du jeu de données</a>.</li>
+          <li><strong>Communes, population, coordonnées</strong> — API Découpage administratif de l’État (<a href="https://geo.api.gouv.fr/decoupage-administratif">geo.api.gouv.fr</a>), alimentée par le jeu de données « Découpage administratif » publié sous Licence Ouverte 2.0 (<a href="https://www.data.gouv.fr/datasets/decoupage-administratif-1">fiche du jeu de données</a>).</li>
+          <li><strong>Contours</strong> — IGN, ADMIN EXPRESS COG (édition 2018), Licence Ouverte 2.0, export GeoJSON déjà simplifié, puis seconde simplification par ce site. <a href="https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe">Fiche du jeu de données sur data.gouv.fr</a> ; la fiche produit de l’IGN (geoservices.ign.fr) a répondu 403 lors de la rédaction, elle n’est donc pas citée.</li>
+        </ul>
+        <p class="couts-note">Les jeux complets ne sont pas exposés à l’indexation : seules des médianes communales sont publiées, conformément aux conditions d’utilisation de DVF, qui interdisent la réidentification des personnes et l’indexation des fichiers.</p>
+        <p class="couts-note">Cette page ne figure pas encore dans le menu principal : on y arrive depuis <a href="documents.html">Documents</a>. Le menu est recopié dans chaque page du site, dont 108 fiches produites par un générateur ; l’y ajouter demande de régénérer puis de revérifier l’ensemble. Tant que ce n’est pas fait, c’est écrit ici.</p>
+      </div>
+    </section>

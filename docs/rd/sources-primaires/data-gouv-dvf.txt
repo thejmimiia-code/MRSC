@@ -1,0 +1,18 @@
+id = data-gouv-dvf
+url = https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres
+date = 2026-11-14
+empreinte = 834a98775f23e6449d0fe7b3cbf62670590d4bec394740f256afceabddbbd777
+---
+Demandes de valeurs foncières — fiche du jeu de données lue le 14 novembre 2026 par son API publique, puis recopiée ici.
+
+« Le présent jeu de données “ Demandes de valeurs foncières ”, publié et produit par la direction générale des finances publiques, permet de connaître les transactions immobilières intervenues au cours des cinq dernières années sur le territoire métropolitain et les DOM-TOM, à l’exception de l’Alsace, de la Moselle et de Mayotte. »
+
+« Les fichiers mis à disposition font l’objet d’une mise à jour semestrielle, en avril et en octobre. Chaque mise à jour supprime puis remplace la totalité des fichiers précédemment publiés. »
+
+« L’article R112 A-3 du Livre des procédures fiscales prévoit que l’utilisation de ces fichiers ne doit pas permettre la ré-identification des personnes concernées, de manière indirecte. »
+
+« La réutilisation des données ne doit pas permettre l’indexation des données depuis les moteurs de recherche externes. »
+
+« La dernière mise à jour date du 12 octobre 2026. »
+
+Métadonnées de la même réponse : licence « lov2 », périodicité « semiannual », dernière mise à jour « 2026-10-12 », ressource au format texte compressé avec empreinte SHA-1 publiée.

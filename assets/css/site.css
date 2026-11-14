@@ -5788,3 +5788,57 @@ html.contraste-renforce .association-suite-grid li { border-color: currentColor;
   }
   .home-discover-link { border-top-color: CanvasText; }
 }
+
+/* --- Carte des coûts (13 novembre 2026) -----------------------------------
+   La carte est un SVG sans tuiles : aucune requête tierce, un seul fichier de
+   contours. Le panneau latéral porte les chiffres, la carte porte les lieux. */
+.couts-etat { margin: .6rem 0 0; font-size: max(12px, .9rem); color: #33405a; }
+.couts-outils { display: flex; flex-wrap: wrap; gap: .9rem 1.2rem; align-items: flex-end; margin: 1rem 0 1.2rem; }
+.couts-champ { display: flex; flex-direction: column; gap: .35rem; min-width: min(100%, 15rem); }
+.couts-champ label { font-size: max(12px, .82rem); font-weight: 700; color: #33405a; }
+.couts-champ select, .couts-champ input {
+  font: inherit; font-size: max(14px, .95rem); padding: .45rem .6rem;
+  border: 1px solid #b6c2d6; border-radius: 8px; background: #fff; color: #18243b;
+  min-height: 44px;
+}
+.couts-zoom { display: flex; flex-wrap: wrap; gap: .5rem; }
+.couts-zoom .button { min-width: 44px; }
+.couts-grille { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
+@media (max-width: 900px) { .couts-grille { grid-template-columns: 1fr; } }
+.couts-carte { margin: 0; }
+.couts-vue {
+  position: relative; background: #f4f6fa; border: 1px solid #ccd4e2; border-radius: 14px;
+  overflow: hidden; aspect-ratio: 4 / 3;
+}
+.couts-vue svg { display: block; width: 100%; height: 100%; }
+.couts-vue:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.couts-departement { cursor: pointer; transition: fill .15s ease; }
+.couts-departement:hover, .couts-departement:focus { fill: #dbe6f6; }
+.couts-commune { fill: #2f5da8; opacity: .55; cursor: pointer; }
+.couts-commune.a-un-prix { fill: var(--green); opacity: .9; }
+.couts-commune:hover { opacity: 1; }
+.couts-message { margin: 0; padding: .6rem .8rem; font-size: max(12px, .85rem); color: #25324a; background: #fff; border-top: 1px solid #ccd4e2; }
+.couts-carte figcaption { margin-top: .5rem; font-size: max(12px, .8rem); color: #33405a; }
+.couts-panneau { border: 1px solid #ccd4e2; border-radius: 14px; padding: 1rem 1.1rem; background: #fff; }
+.couts-panneau h3 { margin-top: 0; }
+.couts-vide { color: #33405a; }
+.couts-nom { font-weight: 800; font-size: 1.05rem; margin: 0 0 .6rem; }
+.couts-chiffres { display: grid; gap: .55rem; margin: 0 0 .7rem; }
+.couts-chiffres > div { display: flex; justify-content: space-between; gap: .8rem; border-bottom: 1px dashed #d7dded; padding-bottom: .35rem; }
+.couts-chiffres dt { font-size: max(12px, .82rem); color: #33405a; }
+.couts-chiffres dd { margin: 0; font-weight: 700; text-align: right; }
+.couts-source { font-size: max(12px, .8rem); color: #33405a; }
+.couts-calcul { border: 1px solid #ccd4e2; border-radius: 10px; padding: .8rem .9rem; margin: 0; }
+.couts-calcul legend { font-weight: 700; font-size: max(13px, .9rem); padding: 0 .3rem; }
+.couts-aide { font-size: max(12px, .8rem); color: #33405a; margin: .2rem 0 .7rem; }
+.couts-resultat { margin: .6rem 0 0; font-weight: 700; }
+.couts-deux-colonnes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1.2rem; }
+.couts-liste, .couts-sources { margin: 0; padding-left: 1.1rem; }
+.couts-liste li, .couts-sources li { margin-bottom: .5rem; }
+.couts-note { font-size: max(12px, .85rem); color: #33405a; }
+.couts-departement, .couts-commune { forced-color-adjust: none; }
+@media (forced-colors: active) {
+  .couts-departement { fill: Canvas; stroke: CanvasText; }
+  .couts-departement.est-ouvert { fill: Highlight; }
+  .couts-commune { fill: CanvasText; }
+}

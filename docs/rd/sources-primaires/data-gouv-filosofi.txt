@@ -1,0 +1,12 @@
+id = data-gouv-filosofi
+url = https://www.data.gouv.fr/datasets/revenus-et-pauvrete-des-menages-aux-niveaux-national-et-local-revenus-localises-sociaux-et-fiscaux
+date = 2026-11-14
+empreinte = 49e4b469731390854381c55948c2f71abe245bf275ad743f615322ba75fdc3bd
+---
+Revenus et pauvreté des ménages aux niveaux national et local (FiLoSoFi) — fiche lue le 14 novembre 2026 par son API publique.
+
+« L’objectif du dispositif FiLoSoFi est de produire un ensemble d’indicateurs sur les revenus déclarés (avant redistribution) d’une part, et sur les revenus disponibles (après redistribution et imputation de revenus financiers non déclarés) d’autre part, à l’échelle communale, supra-communale et infra-communale : indicateurs usuels d’analyse de la distribution des revenus (nombres, quartiles, déciles, médiane, etc. des revenus par unité de consommation) […] ; taux de pauvreté monétaire ; indicateurs de structure des revenus. »
+
+Métadonnées de la même réponse : licence « fr-lo », badge « hvd » (jeu de données à haute valeur), périodicité « annual », organisation « Institut national de la statistique et des études économiques (Insee) ».
+
+Les ressources listées pointent vers des pages de insee.fr au format xls/xlsx (« Revenus et pauvreté des ménages en 2018 » → insee.fr/fr/statistiques/5055909), sans URL de fichier stable.

@@ -257,3 +257,22 @@ prochaine_action = "Registre ouvert et vérifié le 20 octobre 2026 (`docs/appre
 criteres_sortie = ["Chaque source tentée et refusée laisse une trace datée avec son motif, sans recopie de contenu.", "Un refus ne fait jamais passer une fiche pour vérifiée, et un compteur qui baisse sans explication est signalé.", "Le registre est vérifié par un contrôle local qui refuse une entrée sans motif ni date.", "Les limites du registre sont publiées : il ne prouve pas l'exhaustivité des sources existantes."]
 skills = ["recherche-sources", "evaluation-maintenance", "documentation-technique"]
 
+[[initiative]]
+id = "cout-de-la-vie-et-carte"
+titre = "Montrer les prix réels sur une carte de France, sans fabriquer un « coût de la vie »"
+priorite = "P1"
+phase = "prototype"
+etat = "a-tester"
+domaines = ["economie-finances", "geographie", "numerique-ia", "demarches-droits-travail"]
+question = "Que peuvent dire des données publiques libres sur le coût de la vie d'une commune, une fois admis qu'aucune source ne le mesure comme un tout — et comment l'afficher sans qu'un chiffre estimé prenne la place d'un chiffre mesuré ?"
+preuves = ["docs/rd/vie-chere-carte-2026-11-13.md", "docs/rd/sources-vie-chere.toml", "outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/preparer-fond-de-carte.py", "outils/construire-page-couts.py", "couts-vie-chere/contenu.txt", "couts-vie-chere.html", "assets/js/carte-vie-chere.js", "assets/data/vie-chere/fond-departements.json", ".github/workflows/collecte-vie-chere.yml", "docs/rd/inventaire-controles.md", "docs/rd/avancees.toml"]
+prochaine_action = "La page est publiée et tenue par la porte (collecteur : 10 cas de banc ; fond de carte : 96 départements, 118 Kio, Licence Ouverte ; fabricant de page : page retouchée à la main refusée). Aucune donnée réelle n'est encore dans `assets/data/vie-chere/` : la machine de l'agent n'atteint ni data.gouv.fr, ni geo.api.gouv.fr, donc la collecte est portée par `.github/workflows/collecte-vie-chere.yml` (cron mensuel et déclenchement manuel, PR au lieu d'un commit direct). Lancer le workflow, relire les médianes de Paris, Lyon et d'un village contre les fichiers DVF publiés, puis seulement annoncer que la carte affiche des prix réels. Dettes nommées : page hors du menu principal (dite sur la page), revenus FiLoSoFi non automatisés, loyers absents, communes en points et non en contours, aucun essai dans Firefox ni Safari, aucun essai avec une personne."
+criteres_sortie = [
+  "Chaque chiffre affiché cite une source libre, datée, avec sa licence et son empreinte ; un chiffre sans provenance n'est pas publié.",
+  "Aucun « coût de la vie total » n'est calculé ; les calculs affichés (surface accessible) sont présentés comme des hypothèses de la personne.",
+  "Une absence de données est affichée avec sa cause (aucune vente, hors champ DVF, non collectée) et une médiane sous cinq ventes n'est jamais publiée.",
+  "Une collecte qui échoue n'écrit rien et laisse les données précédentes avec leur date ; le banc le prouve sans réseau public.",
+  "Les limites de couverture (métropole seulement, contours 2018, Alsace-Moselle, loyers et revenus absents) sont écrites dans la page et dans le dossier de R et D.",
+]
+skills = ["recherche-sources", "analyse-donnees-reproductible", "conception-innovation", "strategie-tests", "integration-securite"]
+

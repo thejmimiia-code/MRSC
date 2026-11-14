@@ -96,10 +96,15 @@ PREFIXES_EXCLUS = ("docs/rd/sources-primaires/",)
 #: sont les deux plateformes nationales citées par la fiche réflexe de
 #: Cybermalveillance ; elles ne sont ni des blogs ni des revendeurs.
 DOMAINES_SURS = {
-    "developer.mozilla.org", "www.w3.org", "w3.org", "github.com",
+    "developer.mozilla.org", "www.w3.org", "w3.org", "github.com", "api.github.com",
     "www.service-public.gouv.fr", "service-public.fr", "service-public.gouv.fr",
     "www.cybermalveillance.gouv.fr", "cybermalveillance.gouv.fr",
     "www.signal-spam.fr", "signal-spam.fr", "www.33700.fr", "33700.fr",
+    # Portail public des données ouvertes : il publie la fiche de licence des
+    # jeux de données de l’État (DVF, ADMIN EXPRESS, découpage administratif),
+    # qui n’existe nulle part ailleurs. C’est une métadonnée officielle, pas
+    # un commentaire tiers.
+    "www.data.gouv.fr", "data.gouv.fr", "geo.api.gouv.fr", "www.geo.api.gouv.fr",
 }
 DOMAINES_PROPRES = {"thejmimiia-code.github.io"}
 #: Domaines réservés aux fixtures des bancs de mutation et aux exemples de fiche :
@@ -479,7 +484,9 @@ def ecrire_manifeste(unites_declarees: list[dict], meta: dict) -> None:
             lignes.append(f"date_derniere_relecture = {unite['date_derniere_relecture']}")
         if unite.get("urls"):
             lignes.append(
-                "urls = [" + ", ".join('"' + str(u).replace('"', '\\"') + '"' for u in unite["urls"]) + "]"
+                "urls = [" + ", ".join(
+                    '"' + str(u).replace("\\", "\\\\").replace('"', '\\"') + '"' for u in unite["urls"]
+                ) + "]"
             )
         if unite.get("raison"):
             lignes.append('raison = "' + unite["raison"].replace('"', '\\"') + '"')
@@ -544,7 +551,11 @@ def urls_du_fichier(relatif: str) -> list[str]:
     texte = (RACINE / relatif).read_text(encoding="utf-8")
     urls: list[str] = []
     for url in MOTIF_URL.findall(texte):
-        url = url.rstrip(".,;:)]}|`")
+        # Une URL écrite dans une chaîne Python échappée arrive avec une barre
+        # oblique finale : `...localisation.html\"` dans le code source. Sans ce
+        # nettoyage, le manifeste recevait une URL fausse et le TOML écrit ne se
+        # relisait plus — un fichier corrompu par sa propre ponctuation.
+        url = url.rstrip(".,;:)]}|`\\")
         if url not in urls:
             urls.append(url)
     return urls
@@ -559,14 +570,14 @@ def urls_connues(relatif: str, declare: dict) -> set[str]:
     """
     gardees = declare.get("urls")
     if isinstance(gardees, list):
-        return {str(u).rstrip(".,;:)]}|`") for u in gardees}
+        return {str(u).rstrip(".,;:)]}|`\\") for u in gardees}
     ancien = subprocess.run(
         ["git", "show", f"HEAD:{relatif}"],
         cwd=RACINE, capture_output=True, text=True, check=False,
     )
     if ancien.returncode != 0:
         return set()
-    return {url.rstrip(".,;:)]}|`") for url in MOTIF_URL.findall(ancien.stdout)}
+    return {url.rstrip(".,;:)]}|`\\") for url in MOTIF_URL.findall(ancien.stdout)}
 
 
 def urls_nouvelles(relatif: str, connues: set[str] | None = None) -> list[str]:

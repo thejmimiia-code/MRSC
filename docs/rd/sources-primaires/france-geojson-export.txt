@@ -1,0 +1,10 @@
+id = france-geojson-export
+url = https://api.github.com/repos/gregoiredavid/france-geojson
+date = 2026-11-14
+empreinte = b90348ef0de5db618423da45dc3f4e73603e6eec17e1f744646bf634df77bad1
+---
+gregoiredavid/france-geojson — réponse de l’API GitHub du dépôt, lue le 14 novembre 2026.
+
+Champs recopiés : « description » : « Contours des régions, départements, arrondissements, cantons et communes de France (métropole et départements d’outre-mer) au format GeoJSON » ; « license » : null ; « default_branch » : « master » ; « pushed_at » : « 2022-12-02T14:25:58Z » ; « homepage » : « france-geojson.gregoiredavid.fr ».
+
+Le fichier utilisé par ce site, `departements-version-simplifiee.geojson`, vient de ce dépôt. L’API ne déclare **aucune licence** : c’est écrit ici pour que la licence du fond ne soit pas supposée venir de l’export, mais de l’IGN, producteur d’origine.
