@@ -8379,3 +8379,15 @@ sources = []
 mesures = ["outils/test_mutations_relecture_contenus.py"]
 constat = "Relu l’inventaire et le banc de la porte de relecture après l’ajout de deux cas : une URL échappée dans du code Python ne doit plus salir le manifeste, et le manifeste écrit doit se relire. Les 22 cas du banc passent."
 limite = "Deux cas ne font pas une preuve d’exhaustivité : d’autres écritures du manifeste (raison, chemin) restent couvertes par échappement simple et non par un cas dédié. Le banc travaille sur des copies jetables, jamais sur le dépôt réel."
+
+[[edition]]
+chemin = "outils/construire-apprentissages.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "13c7bdb09c09663a9c3646a2bf46d2193e272f1504fc709132ea3b3330c4b330"
+empreinte_apres = "b917299b2fdc4f33276a965ff39af7f1bb99fc5e6f244075cae6849780758009"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/construire-apprentissages.py"]
+constat = "Relu le générateur des fiches : la page des coûts est déclarée dans la liste du sitemap, qui est produite par cet outil et non éditée à la main. Le contrôle de synchronisation des sorties repasse au vert."
+limite = "Le sitemap ne dit rien de la qualité d’une page ni de son indexation réelle : il déclare une adresse. Aucun moteur n’a été interrogé, et la page reste hors du menu principal."

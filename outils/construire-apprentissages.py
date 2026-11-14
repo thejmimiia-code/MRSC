@@ -813,6 +813,7 @@ def render_sitemap(fiches: list[dict]) -> str:
         "ia-societe.html",
         "eva.html",
         "simulateur.html",
+        "couts-vie-chere.html",
         "simulateur/",
         "documents.html",
         "liens-utiles.html",

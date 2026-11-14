@@ -2809,10 +2809,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/construire-apprentissages.py"
-empreinte = "13c7bdb09c09663a9c3646a2bf46d2193e272f1504fc709132ea3b3330c4b330"
+empreinte = "b917299b2fdc4f33276a965ff39af7f1bb99fc5e6f244075cae6849780758009"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-13
+date_derniere_relecture = 2026-11-14
 urls = ["https://thejmimiia-code.github.io/MRSC/", "https://www.education.gouv.fr/le-socle-commun-de-connaissances-de-competences-et-de-culture-12512", "https://isced.uis.unesco.org/about/", "https://www.anlci.gouv.fr/nos-piliers/lillettrisme-au-travail/", "https://www.w3.org/TR/WCAG22/", "https://isced.uis.unesco.org/q-and-a/", "https://www.education.gouv.fr/programmes-et-horaires-l-ecole-elementaire-9011", "https://www.anlci.gouv.fr/app/uploads/2025/04/20250910_Prez-webinaire-AFEST.pdf", "https://www.certificat-clea.fr/employeurs/le-socle/", "https://www.w3.org/TR/coga-usable/", "https://www.cnil.fr/fr/passer-laction/rgpd-les-premieres-etapes"]
 
 [[unite]]
