@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-11-14 — Les loyers entrent, à la maille où ils existent
+
+- **Initiative :** `cout-de-la-vie-et-carte`.
+- **Demande reprise :** le poste « loyers » de la demande élargie, celui qui était resté « identifiée, non collectée ».
+- **Ce qui change :** la page publie les loyers observés par le réseau des observatoires locaux des loyers, en 2025, pour chaque agglomération observée : loyer médian au m², loyer médian mensuel, surface moyenne, nombre de logements — et la section dit elle-même que cette liste n’est pas un calque de la carte.
+- **Pourquoi pas par commune :** la source publie par agglomération. La rattacher aux communes demanderait une table de composition qu’elle ne publie pas à cette maille ; deviner la correspondance par le nom, ou lire le département dans le code d’observatoire (`B1300`, `B2B00`), aurait produit une donnée inventée qui ne dit pas son nom. Écarté.
+- **Comment la source est lue :** la ressource de l’année la plus récente est trouvée par l’API de la fiche (l’adresse du fichier change chaque année), et les lignes sont lues par l’API tabulaire de data.gouv.fr, qui donne le format au lieu de le faire deviner. Deux sources primaires datées et deux extraits ont été ajoutés au registre.
+- **Ce qui empêche la rechute :** `outils/collecter-loyers.py` refuse onze familles de défauts, `test_collecte_loyers.py` les exerce (17 cas) — dont le filtre devenu trop large, qui publierait des studios à côté des cinq-pièces —, et le fabricant de page refuse une collecte vide comme une page qui n’aurait pas été reconstruite après la collecte.
+- **Contrôles exécutés :** `test_collecte_loyers.py` (17 cas), `test_collecte_vie_chere.py` (22 cas), `construire-page-couts.py --verifier`, `verifier-plan-projet.py` (737 fichiers), `verifier-site-statique.py`, `verifier-integration.py`, `verifier-inventaire-controles.py`, `verifier-workflows.py`, `relire-contenus.py`. Le banc des loyers a été vu mordre : retirer la garde de licence fait tomber deux cas.
+- **Limites :** aucun fichier n’a été téléchargé depuis l’atelier ; la collecte réelle passe par le workflow et sa proposition de fusion, qui reste à relire. Aucun loyer n’a été recoupé avec un observatoire local, et personne n’a vérifié la stabilité de l’API tabulaire.
+- **Registre :** 118 avancées, dont celle-ci — « une maille qu’on ne peut pas tenir ne se simule pas ».
+
 ## 2026-11-14 — La page entre au menu, et devient une porte d’accueil
 
 - **Initiative :** `cout-de-la-vie-et-carte`.

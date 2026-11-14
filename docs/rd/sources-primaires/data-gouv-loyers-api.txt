@@ -1,0 +1,12 @@
+id = data-gouv-loyers-api
+url = https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/
+date = 2026-11-14
+empreinte = d1cb351be79b4f04765fae2e95df2e179c838d61e12344686d892551a5854806
+---
+Fiche du jeu de données « Résultats nationaux des observatoires locaux des loyers » lue par son API publique le 14 novembre 2026 (identifiant 56fd8e8788ee387079c352f7).
+
+Licence déclarée : « lov2 » (Licence Ouverte 2.0). Organisation : « Observatoires Locaux des Loyers ». Périodicité : annual. Badge : jeu de données à haute valeur.
+
+Ressource de l’année la plus récente : « Loyers 2025 dans les agglomérations observées par les observatoires du réseau », format csv, type main, dernière modification 2026-10-28T15:13:11+00:00, fichier servi par l’adresse .../datagouv/2025/Base_OP_2025_Nationale.csv (1 453 636 octets, type text/csv). La ressource de 2024 porte le même intitulé avec l’année 2024 et une autre adresse.
+
+Ce que la fiche ne donne pas : ni le nombre de territoires observés, ni la composition des agglomérations en communes. Ces informations ne sont pas publiées à cette maille, et la page ne les fabrique donc pas.

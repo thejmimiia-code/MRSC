@@ -1,0 +1,12 @@
+id = data-gouv-loyers-fiche
+url = https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers
+date = 2026-11-14
+empreinte = c6f82fe13703424dfcf2d6a0fdc95944814841a1cb48654a4a0ac8fedaabd7f9
+---
+Fiche publique « Résultats nationaux des observatoires locaux des loyers », lue le 14 novembre 2026.
+
+Description publiée : « Ces données présentent les loyers observés par les observatoires des loyers du réseau selon le type de logement, l’époque de construction, le nombre de pièces ou l’ancienneté d’occupation. Les données sont mise à disposition pour chaque année de collecte et selon deux échelles géographiques : l’agglomération et la ville centre. Elles correspondent aux résultats présentés sur www.observatoires-des-loyers.org. »
+
+Métadonnées : licence Licence Ouverte 2.0, producteur « Observatoires Locaux des Loyers » (réseau animé par l’ANIL), périodicité annuelle, une trentaine de ressources dont une par année de collecte, au format csv pour la base nationale et zip pour les fichiers par observatoire.
+
+Deux échelles sont donc publiées, l’agglomération et la ville centre : la page ne publie que la première, pour ne pas additionner deux périmètres différents dans une même colonne.

@@ -160,11 +160,13 @@ recalcule l’empreinte et refuse un fichier modifié à la main.
 | `assets/js/carte-vie-chere.js` | carte SVG, zoom, recherche, fiche, calcul de surface | `node --check` ; rendu constaté en Chromium |
 | `assets/css/site.css` (bloc `.couts-*`) | grille deux colonnes, cibles de 44 px, `forced-colors` | `verifier-budgets-visuels.py`, empreinte CSS |
 
-Le banc commun est `outils/test_collecte_vie_chere.py` : **15 cas**, dont cinq qui
-visent les deux fabricants (fond amputé d’un département, licence fermée, page
-dérivée du fragment). Aucun cas ne touche le réseau public : le collecteur est
-éprouvé contre un serveur local qui joue la panne, la licence fermée et le
-fichier tronqué.
+Le banc commun est `outils/test_collecte_vie_chere.py` : **22 cas**, dont neuf qui
+visent les trois fabricants (fond amputé d’un département, licence fermée, page
+dérivée du fragment, page sans collecte de loyers qui l’avoue, page avec loyers
+rendus, collecte vide refusée). Les carburants ont le leur (13 cas) et les
+loyers le leur (17 cas). Aucun cas ne touche le réseau public : chaque
+collecteur est éprouvé contre un serveur local qui joue la panne, la licence
+fermée et le fichier tronqué.
 
 La page a été regardée dans un Chromium sans interface : 97 options de
 département, 96 tracés, message « Carte de la métropole prête », état « Aucune
@@ -191,7 +193,7 @@ la donnée libre existe et à quelle maille.
 | --- | --- | --- | --- |
 | Achat de logement | DVF (DGFiP, Lov2) | commune | affiché |
 | Carburants | flux DGCCRF (Lov2), rafraîchi toutes les 10 min | département | **affiché**, médiane et nombre de stations |
-| Loyers | observatoires locaux des loyers (ANIL), un fichier par agglomération | agglomération | collecte non faite |
+| Loyers | observatoires locaux des loyers (réseau OLL, animé par l’ANIL), base nationale annuelle | agglomération | **affiché**, médiane au m² et médiane mensuelle |
 | Revenus, salaires | FiLoSoFi (INSEE, `fr-lo`), ressources sans URL stable | commune | collecte non faite |
 | Alimentation, biens de consommation | indices de prix (base 100), pas de prix d’un panier | national | non affiché : un indice n’est pas un prix |
 | Assurances | aucun jeu public de tarifs | — | non affiché |
@@ -254,6 +256,49 @@ Ce que cela ne dit pas : que « Coût de la vie » soit le mot qu’un visiteur
 cherche, ni que la rangée d’en-tête, désormais à dix liens, se replie
 proprement — cela se lit dans les cadrages de l’intégration continue, pas ici.
 
+## 6 quinquies. Les loyers : la maille de la source n’est pas celle de la carte
+
+Le loyer est le troisième poste qu’un foyer paie tous les mois, et le seul des
+trois dont la donnée publique soit **observée** plutôt que déclarée : le réseau
+des observatoires locaux des loyers publie chaque année, sous Licence Ouverte
+2.0, une base nationale par agglomération. La page l’affiche désormais — mais
+pas sur la carte.
+
+**Pourquoi pas sur la carte :** la source publie par agglomération, jamais par
+commune. Rattacher une agglomération à ses communes demande une table de
+composition que la source ne met pas à cette maille ; le site aurait pu la
+deviner par le nom du territoire, ou lire le département dans le code
+d’observatoire (`B1300`, `B2B00`), qui suit la nomenclature des départements.
+Les deux ont été écartés : une correspondance devinée est un chiffre inventé
+qui ne dit pas son nom. Les loyers ont donc leur propre section, triée par
+territoire, avec le code d’observatoire de la source pour qu’on puisse la
+retrouver — et la page écrit que cette liste n’est pas un calque de la carte.
+
+**Comment la source est lue :** la fiche du jeu de données est interrogée par son
+API pour trouver la ressource de l’année la plus récente — l’adresse du fichier
+change à chaque millésime, une URL écrite en dur vieillirait sans le dire. Les
+lignes sont ensuite lues par l’API tabulaire de data.gouv.fr, qui sert le même
+fichier en JSON : le format est alors donné par la source, au lieu d’être deviné
+dans un CSV dont le séparateur et la virgule décimale dépendent de la langue de
+l’export. C’est exactement la faute qui avait laissé Paris, Lyon et Marseille
+vides lors de la première collecte DVF.
+
+**Ce que le collecteur refuse :** une licence fermée ; une fiche sans ressource
+« Loyers AAAA dans les agglomérations » ; un filtre qui ne sélectionne plus
+l’ensemble des logements (plus de 200 lignes) ; moins de 30 territoires ; une
+année mélangée ; un code d’observatoire inattendu ; un territoire en double ;
+un loyer hors de 3 à 40 €/m², une médiane mensuelle hors de 100 à 4 000 €, une
+surface moyenne hors de 10 à 200 m² ; une réponse tronquée. Le banc
+`outils/test_collecte_loyers.py` exerce chacun de ces refus contre un serveur
+local — **17 cas** —, avec des fixtures qui reprennent les types réels servis
+par l’API (un loyer à `13.3`, un mensuel à `700`, les codes `B1300` et `B2B00`).
+
+**Ce que cette collecte ne prouve pas :** que la source réponde ainsi le jour où
+la collecte tourne — le banc éprouve la lecture d’un format relevé, pas la
+stabilité du service ; ni que les agglomérations soient complètes (la source ne
+couvre que les territoires observés) ; ni qu’un loyer médian décrive le logement
+qu’un ménage trouvera. La page le dit.
+
 ## 7. Ce que cette R et D ne prouve pas
 
 - Aucune donnée n’a encore été collectée par la machine au moment d’écrire ces
@@ -264,8 +309,9 @@ proprement — cela se lit dans les cadrages de l’intégration continue, pas i
   existe.
 - Le prix médian au m² n’est pas un indice de prix : il mélange des biens de
   qualités différentes et ne suit pas l’évolution d’un même bien.
-- DVF ne couvre pas l’Alsace-Moselle ni Mayotte ; les loyers ne sont pas couverts
-  du tout ; les revenus ne sont pas encore collectés.
+- DVF ne couvre pas l’Alsace-Moselle ni Mayotte ; les loyers sont observés par
+  agglomération seulement, jamais par commune ; les revenus ne sont pas encore
+  collectés.
 - Les contours sont ceux de 2018 : justes pour les départements, impropres aux
   communes, qui sont donc des points.
 - Aucun essai avec des personnes, aucune validation par un statisticien, aucune

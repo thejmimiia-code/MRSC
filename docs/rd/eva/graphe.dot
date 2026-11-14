@@ -126,6 +126,7 @@ digraph memoire {
   "avancee:une-formule-ancienne-nest-pas-une-explication" [shape=note, label="avancee:une-formule-ancienne-nest-pas-une-explication"];
   "avancee:une-lacune-qualifiee-nest-pas-un-compteur" [shape=note, label="avancee:une-lacune-qualifiee-nest-pas-un-compteur"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" [shape=note, label="avancee:une-largeur-de-piste-se-calcule-pas-se-choisit"];
+  "avancee:une-maille-qu-on-ne-peut-pas-tenir-ne-se-simule-pas" [shape=note, label="avancee:une-maille-qu-on-ne-peut-pas-tenir-ne-se-simule-pas"];
   "avancee:une-page-de-transparence-se-lit-dans-un-ordre" [shape=note, label="avancee:une-page-de-transparence-se-lit-dans-un-ordre"];
   "avancee:une-page-qu-on-ne-trouve-pas-n-existe-pas" [shape=note, label="avancee:une-page-qu-on-ne-trouve-pas-n-existe-pas"];
   "avancee:une-planche-qui-repond-lit-le-registre" [shape=note, label="avancee:une-planche-qui-repond-lit-le-registre"];
@@ -152,6 +153,7 @@ digraph memoire {
   "branche:sources-fermees-et-registre-des-refus" [shape=ellipse, label="branche:sources-fermees-et-registre-des-refus"];
   "branche:veille-savoirs-evolutifs" [shape=ellipse, label="branche:veille-savoirs-evolutifs"];
   "branche:vote-distanciel-verifiable" [shape=ellipse, label="branche:vote-distanciel-verifiable"];
+  "couts-vie-chere/contenu.txt" [shape=plaintext, label="couts-vie-chere/contenu.txt"];
   "docs/apprentissage/audit-automatique.md" [shape=plaintext, label="docs/apprentissage/audit-automatique.md"];
   "docs/apprentissage/catalogue.toml" [shape=plaintext, label="docs/apprentissage/catalogue.toml"];
   "docs/apprentissage/file-relecture.md" [shape=plaintext, label="docs/apprentissage/file-relecture.md"];
@@ -234,12 +236,14 @@ digraph memoire {
   "outils/auditer-selecteurs-morts.py" [shape=plaintext, label="outils/auditer-selecteurs-morts.py"];
   "outils/banc_mutations.py" [shape=plaintext, label="outils/banc_mutations.py"];
   "outils/cadrages.py" [shape=plaintext, label="outils/cadrages.py"];
+  "outils/collecter-loyers.py" [shape=plaintext, label="outils/collecter-loyers.py"];
   "outils/collecter-vie-chere.py" [shape=plaintext, label="outils/collecter-vie-chere.py"];
   "outils/compter-paliers.py" [shape=plaintext, label="outils/compter-paliers.py"];
   "outils/confronter-sources.py" [shape=plaintext, label="outils/confronter-sources.py"];
   "outils/construire-apprentissages.py" [shape=plaintext, label="outils/construire-apprentissages.py"];
   "outils/construire-avancees.py" [shape=plaintext, label="outils/construire-avancees.py"];
   "outils/construire-couverture-sujets.py" [shape=plaintext, label="outils/construire-couverture-sujets.py"];
+  "outils/construire-page-couts.py" [shape=plaintext, label="outils/construire-page-couts.py"];
   "outils/construire-paquets-relecture.py" [shape=plaintext, label="outils/construire-paquets-relecture.py"];
   "outils/construire-sources-refusees.py" [shape=plaintext, label="outils/construire-sources-refusees.py"];
   "outils/etat-rd.py" [shape=plaintext, label="outils/etat-rd.py"];
@@ -267,6 +271,7 @@ digraph memoire {
   "outils/test_auditer_selecteurs_morts.py" [shape=plaintext, label="outils/test_auditer_selecteurs_morts.py"];
   "outils/test_avancees.py" [shape=plaintext, label="outils/test_avancees.py"];
   "outils/test_cadrages.py" [shape=plaintext, label="outils/test_cadrages.py"];
+  "outils/test_collecte_loyers.py" [shape=plaintext, label="outils/test_collecte_loyers.py"];
   "outils/test_collecte_vie_chere.py" [shape=plaintext, label="outils/test_collecte_vie_chere.py"];
   "outils/test_confronter_sources.py" [shape=plaintext, label="outils/test_confronter_sources.py"];
   "outils/test_contraste-degrade.py" [shape=plaintext, label="outils/test_contraste-degrade.py"];
@@ -776,6 +781,10 @@ digraph memoire {
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" -> "docs/rd/paliers-affichage.toml" [label="prouvée par"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" -> "outils/modele-grilles.py" [label="prouvée par"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" -> "outils/test_modele_grilles.py" [label="prouvée par"];
+  "avancee:une-maille-qu-on-ne-peut-pas-tenir-ne-se-simule-pas" -> "couts-vie-chere/contenu.txt" [label="prouvée par"];
+  "avancee:une-maille-qu-on-ne-peut-pas-tenir-ne-se-simule-pas" -> "outils/collecter-loyers.py" [label="prouvée par"];
+  "avancee:une-maille-qu-on-ne-peut-pas-tenir-ne-se-simule-pas" -> "outils/construire-page-couts.py" [label="prouvée par"];
+  "avancee:une-maille-qu-on-ne-peut-pas-tenir-ne-se-simule-pas" -> "outils/test_collecte_loyers.py" [label="prouvée par"];
   "avancee:une-page-de-transparence-se-lit-dans-un-ordre" -> "docs/rd/inventaire-controles.md" [label="prouvée par"];
   "avancee:une-page-de-transparence-se-lit-dans-un-ordre" -> "outils/test_mutations_integration.py" [label="prouvée par"];
   "avancee:une-page-de-transparence-se-lit-dans-un-ordre" -> "outils/verifier-integration.py" [label="prouvée par"];
@@ -903,6 +912,7 @@ digraph memoire {
   "branche:coordination-de-tous-les-agents" -> "phase:economie-de-contexte" [label="servie par"];
   "branche:coordination-de-tous-les-agents" -> "phase:memoire-trois-horizons" [label="servie par"];
   "branche:cout-de-la-vie-et-carte" -> "avancee:une-absence-de-donnee-doit-dire-pourquoi" [label="a produit"];
+  "branche:cout-de-la-vie-et-carte" -> "avancee:une-maille-qu-on-ne-peut-pas-tenir-ne-se-simule-pas" [label="a produit"];
   "branche:cout-de-la-vie-et-carte" -> "avancee:une-page-qu-on-ne-trouve-pas-n-existe-pas" [label="a produit"];
   "branche:cout-de-la-vie-et-carte" -> "phase:continuite-du-support" [label="servie par"];
   "branche:direction-artistique-motion" -> "avancee:la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider" [label="a produit"];
@@ -1068,6 +1078,7 @@ digraph memoire {
   "branche:relire-les-44-prototypes" -> "phase:apprentissages-et-relecture" [label="servie par"];
   "branche:sources-fermees-et-registre-des-refus" -> "avancee:registre-des-refus-verifie" [label="a produit"];
   "branche:sources-fermees-et-registre-des-refus" -> "avancee:une-absence-de-donnee-doit-dire-pourquoi" [label="a produit"];
+  "branche:sources-fermees-et-registre-des-refus" -> "avancee:une-maille-qu-on-ne-peut-pas-tenir-ne-se-simule-pas" [label="a produit"];
   "branche:sources-fermees-et-registre-des-refus" -> "phase:verite-et-refus" [label="servie par"];
   "branche:veille-savoirs-evolutifs" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
   "branche:veille-savoirs-evolutifs" -> "avancee:declarer-fraude-demarches-distinctes-2026-11-12" [label="a produit"];

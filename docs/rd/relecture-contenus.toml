@@ -728,3 +728,25 @@ consulte_le = 2026-11-14
 ancre = "code_departement"
 permet = "Prouver la forme réelle des données collectées — une ligne par station, les prix par carburant, le département — et le nombre de stations annoncé par l’API (9 833) le jour du contrôle."
 limites = "Un appel de contrôle sur une ligne ne prouve pas la stabilité du schéma : un champ renommé ferait refuser la collecte, pas produire un chiffre faux, mais l’outil ne teste que le champ département. Les prix absents (`null`) ne sont pas distingués d’un carburant non vendu par la station."
+
+[[source]]
+id = "data-gouv-loyers-api"
+extrait = "docs/rd/sources-primaires/data-gouv-loyers-api.txt"
+editeur = "data.gouv.fr — Observatoires Locaux des Loyers"
+titre = "Résultats nationaux des observatoires locaux des loyers — réponse de l’API du jeu de données"
+url = "https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/"
+consulte_le = 2026-11-14
+ancre = "Base_OP_2025_Nationale.csv"
+permet = "Prouver que la licence est ouverte, qu’une ressource nationale par année existe, et que le collecteur peut la trouver par son intitulé plutôt que par une adresse écrite en dur — l’adresse du fichier change à chaque millésime."
+limites = "La réponse décrit la fiche, pas les loyers : elle ne dit ni combien de territoires sont observés, ni si la ressource de l’année est complète. Un intitulé de ressource reformulé ferait refuser la collecte — c’est voulu, mais cela signifie qu’un millésime peut manquer sans qu’aucun chiffre ne soit faux."
+
+[[source]]
+id = "data-gouv-loyers-fiche"
+extrait = "docs/rd/sources-primaires/data-gouv-loyers-fiche.txt"
+editeur = "data.gouv.fr — Observatoires Locaux des Loyers"
+titre = "Résultats nationaux des observatoires locaux des loyers"
+url = "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers"
+consulte_le = 2026-11-14
+ancre = "deux échelles géographiques"
+permet = "Établir ce que la source publie et à quelle maille : les loyers observés par les observatoires du réseau, sous Licence Ouverte 2.0, pour l’agglomération et pour la ville centre — donc qu’une page par commune ne peut pas s’en servir sans le dire."
+limites = "La fiche ne donne aucun chiffre : elle ne permet pas de vérifier un loyer, seulement la nature et la licence de la source. Elle ne dit rien non plus de la couverture géographique réelle, qui dépend des observatoires existants."
