@@ -20,6 +20,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import socket
 import subprocess
 import sys
 import tempfile
@@ -150,6 +151,44 @@ def communes_et_dvf(lignes: list[dict] | None = None, licence: str = "lov2") -> 
     }
 
 
+class ServeurCoupe:
+    """Accepte la connexion, puis la ferme sans répondre.
+
+    C'est ce que la collecte DVF a rencontré le 14 novembre 2026 : un
+    `RemoteDisconnected`, c'est-à-dire une `OSError`, qui n'était pas une
+    `URLError` et échappait donc aux essais. Le collecteur doit en sortir par un
+    refus nommé, pas par une traceback.
+    """
+
+    def __init__(self) -> None:
+        self.actif = True
+        self.ecoute = socket.socket()
+        self.ecoute.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.ecoute.bind(("127.0.0.1", 0))
+        self.ecoute.listen(8)
+        self.port = self.ecoute.getsockname()[1]
+
+    def __enter__(self) -> "ServeurCoupe":
+        def boucle() -> None:
+            while self.actif:
+                try:
+                    connexion, _ = self.ecoute.accept()
+                except OSError:
+                    return
+                connexion.close()
+
+        threading.Thread(target=boucle, daemon=True).start()
+        return self
+
+    def __exit__(self, *args) -> None:
+        self.actif = False
+        self.ecoute.close()
+
+    @property
+    def base(self) -> str:
+        return f"http://127.0.0.1:{self.port}"
+
+
 class CollecteVieChere(unittest.TestCase):
     def executer(self, reponses: dict, tmp: Path) -> tuple[subprocess.CompletedProcess, Path]:
         """Monte le serveur, la fiche DVF et le collecteur ; rend le résultat et la sortie."""
@@ -262,6 +301,25 @@ class CollecteVieChere(unittest.TestCase):
         reponses = communes_et_dvf()
         reponses["/communes"] = (200, json.dumps(communes_factices(200)).encode("utf-8"))
         self.refuser(reponses, attendu="attendues")
+
+    def test_connexion_coupee(self) -> None:
+        """La panne réelle du 14 novembre 2026 : connexion fermée sans réponse."""
+        with tempfile.TemporaryDirectory(prefix="mrsc-couts-") as tmp:
+            with ServeurCoupe() as serveur:
+                sortie = Path(tmp) / "donnees"
+                resultat = subprocess.run(
+                    [
+                        sys.executable, str(OUTIL),
+                        "--sortie", str(sortie),
+                        "--base-geo", f"{serveur.base}/communes",
+                        "--base-data", f"{serveur.base}/dataset",
+                    ],
+                    capture_output=True, text=True, check=False,
+                )
+            self.assertNotEqual(resultat.returncode, 0)
+            self.assertIn("source injoignable", resultat.stderr)
+            self.assertNotIn("Traceback", resultat.stderr)
+            self.assertFalse(sortie.exists())
 
     def test_source_absente(self) -> None:
         reponses = communes_et_dvf()

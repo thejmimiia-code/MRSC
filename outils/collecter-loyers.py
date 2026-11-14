@@ -52,6 +52,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import http.client
 import json
 import re
 import sys
@@ -115,7 +116,13 @@ def lire(url: str, essais: int = 3) -> bytes:
         try:
             with urllib.request.urlopen(demande, timeout=120) as reponse:  # noqa: S310
                 return reponse.read()
-        except (urllib.error.URLError, TimeoutError) as erreur:
+        # Le 14 novembre 2026, la collecte de DVF est tombée sur un
+        # `RemoteDisconnected` : le serveur a fermé la connexion sans répondre.
+        # Ce n'est pas une `URLError` — c'est une `OSError` de bas niveau —, donc
+        # elle échappait aux trois essais et sortait en traceback au lieu d'un
+        # refus nommé. Une connexion coupée est une panne passagère : elle mérite
+        # un essai de plus, et un refus lisible si elle persiste.
+        except (OSError, http.client.HTTPException) as erreur:
             derniere = erreur
     raise Refus(f"source injoignable : {url} ({derniere})")
 

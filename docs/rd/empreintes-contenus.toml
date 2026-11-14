@@ -2628,14 +2628,14 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/avancees.md"
-empreinte = "aae372089fd25a1f90ddad79deae2aeef2c3ae227dd831f4f20067bfc5d6440a"
+empreinte = "9ba7f9a053042162a11d762e1520cb45821890f57daa83751a632a38870709de"
 etat = "relu-par-agent"
 apostrophes = 1240
 date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/avancees.toml"
-empreinte = "16a8b94435fed5529373cf1ae991d5e93d532a8ef7bd0e4931efc9dc969eada3"
+empreinte = "a5ba95a09407a565b430148eab4ef4c12702c1ab9ab46a0226124f434d628fdf"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -2730,7 +2730,7 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "aec6cd65b86b395c6e08643178c6df6dfb844cb311d24bc16db7f0e83712f41e"
+empreinte = "8b6dadb2abc1b8156e4217016527baff6babb3829bf743be5a24912a569b496e"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -2813,7 +2813,7 @@ urls = ["https://www.insee.fr/fr/statistiques/8739245", "https://doi.org/10.1177
 
 [[unite]]
 chemin = "docs/rd/inventaire-controles.md"
-empreinte = "61d4ea73720f4874c8091110cdfe48b622b66f07f780c3df77caabfb37c31dc5"
+empreinte = "22ff51283f40f7189726bcf1063f8e7decfd0989354daad92b563fd1380fb752"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -2827,7 +2827,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "cd6522f10b66cb112943913e47b7ba065b722995df021c7ebb5e02ba3123e726"
+empreinte = "0577fd921f05a3c0bc0b9640521756cc0d31d2e43595d7f8299a73d3c01b517a"
 etat = "relu-par-agent"
 apostrophes = 2405
 date_derniere_relecture = 2026-11-14
@@ -3251,7 +3251,7 @@ urls = ["https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr
 
 [[unite]]
 chemin = "docs/rd/vie-chere-carte-2026-11-13.md"
-empreinte = "b39293e1670256a628fbff444b90c543c65222a05b6cc4ed4d5952c1d803730c"
+empreinte = "3ccd45c644039fb38efab4bc0cbe67059b68c4ad7f84df7c677e47405671b213"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -3566,7 +3566,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/collecter-carburants.py"
-empreinte = "38afb1f89e78e53f9224c74a00b3eb0304945c1954d1af96327c77877b22be74"
+empreinte = "5e67fcb0f75300be074048cb2e201387e82b8c750dd44d2a6e73aafbe75e564c"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -3574,7 +3574,7 @@ urls = ["https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-de
 
 [[unite]]
 chemin = "outils/collecter-loyers.py"
-empreinte = "767a30d5f74e2429b62109471a931f13e427b73cd89f2cd945360e3ca861fffb"
+empreinte = "26131301f68aa0d629288eadb6f24609e481643f1899adbe3acfe8804701eeb5"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -3582,7 +3582,7 @@ urls = ["https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observa
 
 [[unite]]
 chemin = "outils/collecter-vie-chere.py"
-empreinte = "89b80557f20d02b784849e7a0cfe13a1c1df197ac5ec7e70b0c8b36f47508bbb"
+empreinte = "8c7584c7856357efa5258419109b338db89cea2e37865f441455556816091f15"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -3929,7 +3929,7 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "outils/test_collecte_loyers.py"
-empreinte = "34b9287dfb64257c7822ce0528e0441d512ada2e84a6c6e6d82963b3b5a08eb0"
+empreinte = "d15d7594f71e65f2a9c0409ea6d0ccd6b08f35882b43b4f5a94c7d621a953dc9"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -3937,7 +3937,7 @@ urls = ["https://www.observatoires-des-loyers.org/datagouv/2025/Base_OP_2025_Nat
 
 [[unite]]
 chemin = "outils/test_collecte_vie_chere.py"
-empreinte = "6a6fd1ccb2a9739ced87602f7d1d461fa99ad3abc44b19c3ca43b7e7c35f6b24"
+empreinte = "b1cecddd40d47239b73243dcd2e40d106ecb7a2f3e2e9da74ce0ac03a1b6b30f"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14

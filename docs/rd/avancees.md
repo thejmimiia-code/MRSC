@@ -2886,9 +2886,9 @@ Initiatives liées : `cout-de-la-vie-et-carte`, `poids-et-sobriete-numerique`, `
 
 **Contrôle qui la maintient :** `python3 outils/test_collecte_loyers.py && python3 outils/test_collecte_vie_chere.py && python3 outils/construire-page-couts.py --verifier && python3 outils/verifier-inventaire-controles.py`
 
-**Limite — ce que cela ne prouve pas.** Le banc exerce dix-sept refus contre un serveur local, avec des fixtures qui reprennent les types servis par l’API — pas la source elle-même : aucun fichier n’a été téléchargé depuis l’atelier, et la stabilité du service n’est pas prouvée. Les médianes ne sont pas recoupées avec un observatoire local, et rien ne dit qu’un loyer médian décrive le logement qu’un ménage trouvera. La couverture dépend des territoires observés, qui ne sont pas tous les territoires habités.
+**Limite — ce que cela ne prouve pas.** Le banc exerce dix-huit refus contre un serveur local, avec des fixtures qui reprennent les types servis par l’API — pas la source elle-même : aucun fichier n’a été téléchargé depuis l’atelier, et la stabilité du service n’est pas prouvée. Les médianes ne sont pas recoupées avec un observatoire local, et rien ne dit qu’un loyer médian décrive le logement qu’un ménage trouvera. La couverture dépend des territoires observés, qui ne sont pas tous les territoires habités.
 
-**Suite.** Relire la proposition de fusion de la collecte quand elle arrive, confronter deux ou trois agglomérations à leur observatoire local, puis passer au poste suivant : les revenus FiLoSoFi, dont les fichiers passent par des pages sans adresse stable et qu’il faudra donc résoudre, ou abandonner explicitement.
+**Suite.** La première exécution réelle de la collecte a d’ailleurs trouvé ce que les bancs ne voyaient pas : un serveur qui ferme la connexion sans répondre levait une OSError que les trois collecteurs ne rattrapaient pas, et sortait en traceback. Corrigé le même jour, avec un cas de banc par collecteur. Reste à relire la proposition de fusion des loyers, à confronter deux ou trois agglomérations à leur observatoire local, puis à passer au poste suivant : les revenus FiLoSoFi, dont les fichiers passent par des pages sans adresse stable.
 
 Initiatives liées : `cout-de-la-vie-et-carte`, `sources-fermees-et-registre-des-refus`.
 
