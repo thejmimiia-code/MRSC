@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import hashlib
 import io
 import json
@@ -39,6 +40,7 @@ import statistics
 import sys
 import urllib.error
 import urllib.request
+import zlib
 from datetime import date, datetime
 from pathlib import Path
 
@@ -71,9 +73,10 @@ class Refus(Exception):
 
 def lire(url: str, essais: int = 3) -> bytes:
     derniere: Exception | None = None
+    demande = urllib.request.Request(url, headers={"Accept-Encoding": "identity"})
     for _ in range(essais):
         try:
-            with urllib.request.urlopen(url, timeout=120) as reponse:  # noqa: S310
+            with urllib.request.urlopen(demande, timeout=120) as reponse:  # noqa: S310
                 return reponse.read()
         except (urllib.error.URLError, TimeoutError) as erreur:
             derniere = erreur
@@ -91,6 +94,17 @@ def nombre(valeur: str) -> float | None:
 
 
 def lire_stations(contenu: bytes) -> list[dict[str, str]]:
+    # L'export d'Opendatasoft arrive compressé quand on ne demande rien : le 14
+    # novembre 2026, la collecte a rendu « flux illisible : 'utf-8' codec can't
+    # decode byte 0x8b » — la signature du gzip. On demande l'identité, et si le
+    # fichier est compressé malgré tout, on le décompresse : refuser un flux parce
+    # qu'il est compressé serait refuser une source qui répond correctement.
+    if contenu[:2] == b"\x1f\x8b":
+        try:
+            contenu = gzip.decompress(contenu)
+        except (OSError, zlib.error) as erreur:
+            # zlib.error n'est pas un OSError : un gzip tronqué sort par là.
+            raise Refus(f"flux compressé illisible : {erreur}") from erreur
     try:
         texte = contenu.decode("utf-8-sig")
     except UnicodeDecodeError as erreur:
