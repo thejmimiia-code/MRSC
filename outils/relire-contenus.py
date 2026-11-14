@@ -644,6 +644,13 @@ def appliquer(args: argparse.Namespace) -> int:
         avant = declares[chemin]["empreinte"]
         apres = empreinte(RACINE / chemin)
         if avant == apres:
+            # Une liste venue d'un `git status` peut contenir un fichier touché
+            # puis rendu identique : le refus, juste à la main, bloque une
+            # collecte automatique pour rien. `--ignorer-inchanges` dit que la
+            # liste vient d'un outil et qu'un fichier inchangé n'est pas une
+            # faute — il n'est alors pas signé, et le reste l'est.
+            if args.ignorer_inchanges:
+                continue
             erreurs.append(f"--appliquer : aucune édition à relire dans {chemin}")
         compte = nombre_apostrophes(chemin)
         if compte > int(declares[chemin].get("apostrophes", 0)):
@@ -704,8 +711,12 @@ def appliquer(args: argparse.Namespace) -> int:
         return 1
 
     date = dt.date.today().isoformat()
+    modifies = [c for c in chemins if declares[c]["empreinte"] != empreinte(RACINE / c)]
+    if not modifies:
+        print("Aucune unité modifiée : rien n'est signé, rien n'est réécrit.")
+        return 0
     blocs: list[str] = []
-    for chemin in chemins:
+    for chemin in modifies:
         avant = declares[chemin]["empreinte"]
         apres = empreinte(RACINE / chemin)
         champs = [
@@ -749,7 +760,7 @@ def appliquer(args: argparse.Namespace) -> int:
             "limite_reference": manifeste["meta"]["limite_reference"],
         },
     )
-    print(f"Relecture consignée : {len(chemins)} unité(s), nature « {args.nature} », sources : {ids or 'aucune'}.")
+    print(f"Relecture consignée : {len(modifies)} unité(s), nature « {args.nature} », sources : {ids or 'aucune'}.")
     return 0
 
 
@@ -758,6 +769,10 @@ def principal() -> int:
     parseur.add_argument("--initialiser", action="store_true", help="créer la référence initiale des empreintes")
     parseur.add_argument("--forcer", action="store_true", help="autoriser --initialiser à réécrire le manifeste")
     parseur.add_argument("--appliquer", nargs="+", metavar="CHEMIN", help="consigner la relecture de ces unités")
+    parseur.add_argument(
+        "--ignorer-inchanges", action="store_true",
+        help="ne pas refuser une liste d'outil où un fichier est revenu identique",
+    )
     parseur.add_argument("--nature", choices=sorted(NATURES), default="proposition")
     parseur.add_argument("--sources", default="", help="identifiants de sources primaires, séparés par des virgules")
     parseur.add_argument("--mesures", default="", help="fichiers reproductibles pour une mesure interne")
