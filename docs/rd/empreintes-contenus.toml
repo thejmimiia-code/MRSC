@@ -3036,7 +3036,7 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "outils/relire-contenus.py"
-empreinte = "389ce6139fa3d57d56a9d0150b74cfc9ac5f3d5fcc0b276dc70a1747c8ba7976"
+empreinte = "56f0619ea70350a0caea916b9c646c9900e91e9426079470e36f3824f260b11e"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -3342,11 +3342,11 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "outils/test_mutations_relecture_contenus.py"
-empreinte = "d1d24bca2f5e211bc075570911acc680299eff8fac7fd9a5ac7b8d0ef5931563"
+empreinte = "e13d8c49d57773ed8abac8cf58d1ec764467f4658469a1163f217d34a4557838"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
-urls = ["https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color-scheme", "https://un-blog.test/couleurs", "https://thejmimiia-code.github.io/MRSC/x.html", "https://exemple.test/page.html", "https://exemple.test/a", "https://exemple.test/c\\\\d"]
+urls = ["https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color-scheme", "https://un-blog.test/couleurs", "https://thejmimiia-code.github.io/MRSC/x.html", "https://exemple.test/page.html", "https://exemple.test/a", "https://exemple.test/c\\\\d", "https://www.data.gouv.fr/api/1/datasets/demandes-de-valeurs-foncieres/", "https://exemple.test/jeu/", "https://static.data.gouv.fr/jeu/"]
 
 [[unite]]
 chemin = "outils/test_mutations_relire_contenus.py"
