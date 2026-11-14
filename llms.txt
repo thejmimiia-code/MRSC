@@ -14,6 +14,7 @@ Les pages HTML sont les contenus de référence. Ce sommaire facultatif s’insp
 - [Recherche sur ÉVA](https://thejmimiia-code.github.io/MRSC/#rd-eva): présentation du projet et de son état public.
 - [Simulateur — présentation](https://thejmimiia-code.github.io/MRSC/simulateur.html): description et limites du simulateur macro-politique.
 - [Simulateur — interface](https://thejmimiia-code.github.io/MRSC/simulateur/): interface du modèle.
+- [Le coût de la vie par commune](https://thejmimiia-code.github.io/MRSC/couts-vie-chere.html): carte de France des prix de vente médians au m² (DVF, DGFiP) et des prix des carburants par département (DGCCRF) ; aucun chiffre estimé, et les postes sans donnée libre — loyers, revenus, assurances, transports, loisirs — sont nommés comme tels.
 - [Documents](https://thejmimiia-code.github.io/MRSC/documents.html): documents de l’association.
 - [Liens utiles](https://thejmimiia-code.github.io/MRSC/liens-utiles.html): ressources externes sélectionnées par le M.R.S.C.
 - [Localisation](https://thejmimiia-code.github.io/MRSC/localisation.html): informations de localisation.

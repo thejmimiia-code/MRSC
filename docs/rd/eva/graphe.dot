@@ -127,6 +127,7 @@ digraph memoire {
   "avancee:une-lacune-qualifiee-nest-pas-un-compteur" [shape=note, label="avancee:une-lacune-qualifiee-nest-pas-un-compteur"];
   "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" [shape=note, label="avancee:une-largeur-de-piste-se-calcule-pas-se-choisit"];
   "avancee:une-page-de-transparence-se-lit-dans-un-ordre" [shape=note, label="avancee:une-page-de-transparence-se-lit-dans-un-ordre"];
+  "avancee:une-page-qu-on-ne-trouve-pas-n-existe-pas" [shape=note, label="avancee:une-page-qu-on-ne-trouve-pas-n-existe-pas"];
   "avancee:une-planche-qui-repond-lit-le-registre" [shape=note, label="avancee:une-planche-qui-repond-lit-le-registre"];
   "avancee:une-sentinelle-reseau-se-teste-sans-reseau" [shape=note, label="avancee:une-sentinelle-reseau-se-teste-sans-reseau"];
   "avancee:une-structure-qui-convient-nest-pas-un-texte-relu" [shape=note, label="avancee:une-structure-qui-convient-nest-pas-un-texte-relu"];
@@ -224,6 +225,7 @@ digraph memoire {
   "ia-societe.html" [shape=plaintext, label="ia-societe.html"];
   "index.html" [shape=plaintext, label="index.html"];
   "liens-utiles.html" [shape=plaintext, label="liens-utiles.html"];
+  "llms.txt" [shape=plaintext, label="llms.txt"];
   "outils/arbre-accessibilite.py" [shape=plaintext, label="outils/arbre-accessibilite.py"];
   "outils/attente-navigateur.cjs" [shape=plaintext, label="outils/attente-navigateur.cjs"];
   "outils/auditer-affichages.mjs" [shape=plaintext, label="outils/auditer-affichages.mjs"];
@@ -235,6 +237,7 @@ digraph memoire {
   "outils/collecter-vie-chere.py" [shape=plaintext, label="outils/collecter-vie-chere.py"];
   "outils/compter-paliers.py" [shape=plaintext, label="outils/compter-paliers.py"];
   "outils/confronter-sources.py" [shape=plaintext, label="outils/confronter-sources.py"];
+  "outils/construire-apprentissages.py" [shape=plaintext, label="outils/construire-apprentissages.py"];
   "outils/construire-avancees.py" [shape=plaintext, label="outils/construire-avancees.py"];
   "outils/construire-couverture-sujets.py" [shape=plaintext, label="outils/construire-couverture-sujets.py"];
   "outils/construire-paquets-relecture.py" [shape=plaintext, label="outils/construire-paquets-relecture.py"];
@@ -777,6 +780,10 @@ digraph memoire {
   "avancee:une-page-de-transparence-se-lit-dans-un-ordre" -> "outils/test_mutations_integration.py" [label="prouvée par"];
   "avancee:une-page-de-transparence-se-lit-dans-un-ordre" -> "outils/verifier-integration.py" [label="prouvée par"];
   "avancee:une-page-de-transparence-se-lit-dans-un-ordre" -> "transparence.html" [label="prouvée par"];
+  "avancee:une-page-qu-on-ne-trouve-pas-n-existe-pas" -> "index.html" [label="prouvée par"];
+  "avancee:une-page-qu-on-ne-trouve-pas-n-existe-pas" -> "llms.txt" [label="prouvée par"];
+  "avancee:une-page-qu-on-ne-trouve-pas-n-existe-pas" -> "outils/construire-apprentissages.py" [label="prouvée par"];
+  "avancee:une-page-qu-on-ne-trouve-pas-n-existe-pas" -> "outils/verifier-integration.py" [label="prouvée par"];
   "avancee:une-planche-qui-repond-lit-le-registre" -> "docs/rd/cadrages.toml" [label="prouvée par"];
   "avancee:une-planche-qui-repond-lit-le-registre" -> "docs/rd/inventaire-controles.md" [label="prouvée par"];
   "avancee:une-planche-qui-repond-lit-le-registre" -> "docs/rd/journal.md" [label="prouvée par"];
@@ -850,6 +857,7 @@ digraph memoire {
   "branche:coherence-textes-publics" -> "avancee:une-edition-non-relue-ne-peut-plus-etre-publiee" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:une-formule-ancienne-nest-pas-une-explication" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:une-page-de-transparence-se-lit-dans-un-ordre" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:une-page-qu-on-ne-trouve-pas-n-existe-pas" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:une-planche-qui-repond-lit-le-registre" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:une-structure-qui-convient-nest-pas-un-texte-relu" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:unifier-les-panneaux-ne-rend-pas-les-boutons-identiques" [label="a produit"];
@@ -895,6 +903,7 @@ digraph memoire {
   "branche:coordination-de-tous-les-agents" -> "phase:economie-de-contexte" [label="servie par"];
   "branche:coordination-de-tous-les-agents" -> "phase:memoire-trois-horizons" [label="servie par"];
   "branche:cout-de-la-vie-et-carte" -> "avancee:une-absence-de-donnee-doit-dire-pourquoi" [label="a produit"];
+  "branche:cout-de-la-vie-et-carte" -> "avancee:une-page-qu-on-ne-trouve-pas-n-existe-pas" [label="a produit"];
   "branche:cout-de-la-vie-et-carte" -> "phase:continuite-du-support" [label="servie par"];
   "branche:direction-artistique-motion" -> "avancee:la-relecture-de-contenu-est-une-etape-executable-pas-une-lecture-a-faire-valider" [label="a produit"];
   "branche:direction-artistique-motion" -> "avancee:un-theme-est-une-promesse-sur-toutes-les-surfaces" [label="a produit"];

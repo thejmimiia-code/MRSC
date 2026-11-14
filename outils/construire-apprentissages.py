@@ -99,6 +99,7 @@ def classes_entete(prefixe: str = "", page: str = "apprendre") -> str:
         ("ia-societe.html", "IA &amp; société", "ia"),
         ("apprendre.html", "Apprendre", "apprendre"),
         ("simulateur.html", "Simulateur", "simulateur"),
+        ("couts-vie-chere.html", "Coût de la vie", "couts"),
         ("documents.html", "Documents", "documents"),
         ("liens-utiles.html", "Liens utiles", "liens"),
         ("localisation.html", "Localisation", "localisation"),
@@ -178,6 +179,7 @@ def pied_de_page(prefixe: str = "") -> str:
             <li><a href="{prefixe}ia-societe.html">IA &amp; société</a></li>
             <li><a href="{prefixe}apprendre.html">Apprendre</a></li>
             <li><a href="{prefixe}simulateur.html">Simulateur</a></li>
+            <li><a href="{prefixe}couts-vie-chere.html">Coût de la vie</a></li>
             <li><a href="{prefixe}documents.html">Documents</a></li>
             <li><a href="{prefixe}transparence.html">Transparence</a></li>
             <li><a href="{prefixe}confidentialite.html">Vie privée et données</a></li>

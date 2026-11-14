@@ -53,7 +53,7 @@ Règles reprises de `AGENTS.md` et de `docs/rd-innovation-continue.md` :
 | `docs/rd/sources-ign-2026-11-11.toml` | Troisième passe : 17 tentatives, 13 HTTP 403, 10 pages officielles lues et datées, 2 confrontations | `outils/verifier-sources-ouvertes.py` |
 | `docs/rd/sources-ign-2026-11-11.md` | Rapport de la troisième passe du 11 novembre 2026 | `outils/verifier-sources-ouvertes.py` |
 | `docs/rd/plan-projet-complet-2026-11-11.toml` | Matrice : 579 fichiers en 11 zones après le lot site du 17 h 24 UTC, 19 initiatives, 39 actions, 9 portes, 5 horizons | `outils/verifier-plan-projet.py` |
-| `docs/rd/plan-site-complet-2026-11-11.toml` | Matrice du plan du site : 19 surfaces, 10 reprises mesurées, 3 options de brainstorming, 6 sections et 4 portes distinctes | `outils/verifier-plan-site.py` |
+| `docs/rd/plan-site-complet-2026-11-11.toml` | Matrice du plan du site : 19 surfaces, 10 reprises mesurées, 3 options de brainstorming, 6 sections et 5 portes distinctes | `outils/verifier-plan-site.py` |
 | `docs/rd/plan-projet-complet-2026-11-11.md` | Plan complet du projet : R&D, innovation, prospective, couverture fichier par fichier | `outils/verifier-plan-projet.py` |
 | `docs/rd/relecture-automatique.md` | Portée et limites de la sentinelle | `outils/verifier-relecture-contenus.py` |
 | `docs/rd/paliers-affichage.toml` | Dette de format comptée | `outils/compter-paliers.py` |

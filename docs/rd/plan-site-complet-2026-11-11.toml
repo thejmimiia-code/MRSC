@@ -164,7 +164,7 @@ classes = "trace-section, trace-panel, trace-list"
 
 [[page]]
 chemin = "index.html"
-role = "Accueil : présenter l’association une fois et orienter vers les quatre portes"
+role = "Accueil : présenter l’association une fois et orienter vers les cinq portes"
 public = "Tous les visiteurs"
 entree_depuis = "navigation, footer, llms.txt, sitemap.xml"
 destination = "#contenu, #mission, #actions, #rd-eva, #rejoindre"
@@ -344,7 +344,7 @@ decision = "écartée"
 [[option]]
 id = "B"
 titre = "Une seule porte par intention"
-contenu = "L’ouverture décrit une fois les trois ressources ; l’orienteur pose quatre questions ; les cartes deviennent des gestes ; les principes ne renvoient plus aux ressources ; ÉVA est déplacé ; contact et partage fusionnent ; sources une seule fois."
+contenu = "L’ouverture décrit une fois les trois ressources ; l’orienteur pose cinq questions ; les cartes deviennent des gestes ; les principes ne renvoient plus aux ressources ; ÉVA est déplacé ; contact et partage fusionnent ; sources une seule fois."
 cout = "Moyen : réécriture du seul <main>, head, header, footer et toutes les classes CSS conservés."
 risque = "Le ton des nouvelles questions reste à juger à l’œil ; aucun essai avec des personnes."
 decision = "retenue"
@@ -380,4 +380,13 @@ numero = "04"
 question = "Suivre le chantier ÉVA"
 destination = "#rd-eva"
 indice = "Ce qui est documenté, ce qui reste à tester."
+
+# Le 14 novembre 2026 : la page des coûts de la vie existe et se trouve ; elle
+# devient une porte d’entrée comme les quatre autres, et le registre des portes
+# suit le compte réel — cinq, pas quatre.
+[[porte]]
+numero = "05"
+question = "Situer le coût de la vie"
+destination = "couts-vie-chere.html"
+indice = "Les prix de vente réels, commune par commune, et les postes qui n’ont pas de donnée."
 

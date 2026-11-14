@@ -5,7 +5,7 @@ Le 11 novembre 2026, la personne a signalé que l’accueil « rabâchait
 différemment » les mêmes choses à plusieurs reprises. Ce contrôle ne juge ni
 le ton, ni le rendu, ni la compréhension réelle : il **compte** les reprises
 dans `index.html`, vérifie que chaque information a une place, que l’ordre des
-sections suit la logique du visiteur, que les quatre portes de l’orienteur
+sections suit la logique du visiteur, que les portes de l’orienteur
 mènent à leur destination et qu’aucune classe CSS n’a été perdue.
 
 Les seuils viennent de `docs/rd/plan-site-complet-2026-11-11.toml`, mais les
@@ -194,14 +194,18 @@ def controler() -> list[str]:
         if repere not in accueil:
             erreurs.append(f"repère d’accueil exigé par une autre garde, absent : {repere}")
 
-    # 3. Les quatre portes de l’orienteur : une question, une destination.
+    # 3. Les portes de l’orienteur, autant que le registre en déclare.
     liste = re.search(r'<ul\b[^>]*class="home-entry-list"[^>]*>(.*?)</ul>', corps, re.S)
     portes = matrice.get("porte", [])
     if liste is None:
         erreurs.append("orienteur absent : liste « home-entry-list » introuvable")
     else:
         entrees = MOTIF_LI.findall(liste.group(1))
-        if len(entrees) != len(portes) or len(portes) != 4:
+        # Le nombre n'est plus écrit ici : il est lu dans le registre des portes.
+        # Figé à quatre, il refusait la cinquième porte ajoutée le 14 novembre
+        # 2026 alors que le registre la déclarait — un contrôle qui contredit sa
+        # propre source ne protège rien.
+        if len(entrees) != len(portes):
             erreurs.append(f"orienteur : {len(entrees)} entrée(s) pour {len(portes)} porte(s) déclarée(s)")
         else:
             for entree, porte in zip(entrees, portes):
