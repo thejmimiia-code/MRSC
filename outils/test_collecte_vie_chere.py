@@ -543,6 +543,18 @@ class FondEtPage(unittest.TestCase):
             self.assertIn("B2B00", page)
             self.assertEqual(self.construire(Path(tmp)).returncode, 0)
 
+    def test_page_loyers_sans_nombre_de_logements(self) -> None:
+        """Un loyer sans nombre de logements s'écrit « non publié », jamais zéro."""
+        with tempfile.TemporaryDirectory(prefix="mrsc-page-") as tmp:
+            loyers = self.loyers_fictifs()
+            loyers["territoires"][0]["logements"] = None
+            self.copier_page(Path(tmp), loyers=loyers)
+            resultat = self.construire(Path(tmp), verifier=False)
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-800:])
+            page = (Path(tmp) / "couts-vie-chere.html").read_text(encoding="utf-8")
+            self.assertIn("non publié", page)
+            self.assertIn("publient un loyer sans nombre de logements", page)
+
     def test_page_refuse_des_loyers_sans_territoire(self) -> None:
         """Une collecte vide ne doit pas produire une section muette."""
         with tempfile.TemporaryDirectory(prefix="mrsc-page-") as tmp:

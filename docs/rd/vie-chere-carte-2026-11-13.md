@@ -160,11 +160,11 @@ recalcule l’empreinte et refuse un fichier modifié à la main.
 | `assets/js/carte-vie-chere.js` | carte SVG, zoom, recherche, fiche, calcul de surface | `node --check` ; rendu constaté en Chromium |
 | `assets/css/site.css` (bloc `.couts-*`) | grille deux colonnes, cibles de 44 px, `forced-colors` | `verifier-budgets-visuels.py`, empreinte CSS |
 
-Le banc commun est `outils/test_collecte_vie_chere.py` : **23 cas**, dont neuf qui
+Le banc commun est `outils/test_collecte_vie_chere.py` : **24 cas**, dont neuf qui
 visent les trois fabricants (fond amputé d’un département, licence fermée, page
 dérivée du fragment, page sans collecte de loyers qui l’avoue, page avec loyers
 rendus, collecte vide refusée). Les carburants ont le leur (13 cas) et les
-loyers le leur (18 cas). Aucun cas ne touche le réseau public : chaque
+loyers le leur (20 cas). Aucun cas ne touche le réseau public : chaque
 collecteur est éprouvé contre un serveur local qui joue la panne, la licence
 fermée et le fichier tronqué.
 
@@ -290,7 +290,7 @@ année mélangée ; un code d’observatoire inattendu ; un territoire en double
 un loyer hors de 3 à 40 €/m², une médiane mensuelle hors de 100 à 4 000 €, une
 surface moyenne hors de 10 à 200 m² ; une réponse tronquée, une connexion coupée sans réponse. Le banc
 `outils/test_collecte_loyers.py` exerce chacun de ces refus contre un serveur
-local — **18 cas** —, avec des fixtures qui reprennent les types réels servis
+local — **20 cas** —, avec des fixtures qui reprennent les types réels servis
 par l’API (un loyer à `13.3`, un mensuel à `700`, les codes `B1300` et `B2B00`).
 
 **Ce que cette collecte ne prouve pas :** que la source réponde ainsi le jour où

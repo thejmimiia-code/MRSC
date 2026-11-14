@@ -314,6 +314,35 @@ class CollecteLoyers(unittest.TestCase):
     def test_reponse_tronquee(self) -> None:
         self.refuser(fiche(), lignes(nombre=40), "réponse tronquée", total_annonce=60)
 
+    def test_logements_non_publies(self) -> None:
+        """Trois territoires du Morbihan, le 14 novembre 2026 : loyer sans logements.
+
+        L'absence se publie comme une absence. Écrire zéro serait un chiffre
+        inventé, et faux : le loyer est bien calculé sur des logements.
+        """
+        rangees = lignes()
+        rangees[1]["nombre_logements"] = None
+        rangees[2]["nombre_observations"] = None
+        with tempfile.TemporaryDirectory(prefix="mrsc-loyers-") as tmp:
+            resultat, sortie = self.collecter(fiche(), rangees, Path(tmp))
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-900:])
+            donnees = json.loads(sortie.read_text(encoding="utf-8"))
+            sans = [t for t in donnees["territoires"] if t["logements"] is None]
+            self.assertEqual(len(sans), 1)
+            self.assertIsNone(sans[0]["observations"] if sans[0]["observations"] is None else None)
+            verification = subprocess.run(
+                [sys.executable, str(OUTIL), "--verifier", "--sortie", str(sortie)],
+                capture_output=True, text=True, check=False,
+            )
+            self.assertEqual(verification.returncode, 0, verification.stderr[-800:])
+            self.assertIn("sans nombre de logements", verification.stdout)
+
+    def test_logements_nuls_refuses(self) -> None:
+        """Zéro logement pour un loyer publié : incohérent, donc refusé."""
+        rangees = lignes()
+        rangees[3]["nombre_logements"] = 0
+        self.refuser(fiche(), rangees, "nombre de logements")
+
     def test_connexion_coupee(self) -> None:
         """Une connexion fermée sans réponse est une panne, pas un plantage."""
         with tempfile.TemporaryDirectory(prefix="mrsc-loyers-") as tmp:
