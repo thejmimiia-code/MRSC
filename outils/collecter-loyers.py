@@ -77,6 +77,11 @@ LICENCES_OUVERTES = {"lov2", "fr-lo"}
 SORTIE = RACINE / "assets" / "data" / "vie-chere" / "loyers.json"
 MOTIF_RESSOURCE = re.compile(r"^Loyers (?P<annee>\d{4}) dans les agglom")
 MOTIF_OBSERVATOIRE = re.compile(r"^B(?:\d{2}|2A|2B)\d{2}$")
+#: Un nom de territoire qui n'a pas une seule minuscule est un code : la base
+#: nationale contient au moins une ligne dont l'agglomération s'appelle `L7500`.
+#: La publier telle quelle donnerait un tableau avec une ligne qui n'est pas un
+#: lieu. Elle est écartée, et son nombre déclaré.
+MOTIF_NOM_DE_CODE = re.compile(r"^[A-Z0-9 ]+$")
 MINIMUM_TERRITOIRES = 30
 MAXIMUM_LIGNES = 200
 LOYER_PLAUSIBLE = (3.0, 40.0)
@@ -90,7 +95,6 @@ COLONNES = (
     "loyer_median",
     "loyer_mensuel_median",
     "surface_moyenne",
-    "nombre_logements",
     "nombre_observations",
     "methodologie_production",
 )
@@ -232,6 +236,7 @@ def nombre(valeur: object, borne: tuple[float, float], etiquette: str, territoir
 def territoires(lignes: list[dict], annee: int) -> list[dict]:
     resultat: list[dict] = []
     vus: set[tuple[str, str]] = set()
+    ecartes: list[str] = []
     for ligne in lignes:
         observatoire = str(ligne.get("Observatory") or "").strip()
         nom = str(ligne.get("agglomeration") or "").strip()
@@ -239,6 +244,11 @@ def territoires(lignes: list[dict], annee: int) -> list[dict]:
             raise Refus(f"code d’observatoire inattendu : {observatoire!r} pour {nom!r}")
         if not nom:
             raise Refus(f"agglomération sans nom pour l’observatoire {observatoire}")
+        if MOTIF_NOM_DE_CODE.match(nom):
+            # Ni refus global, ni publication d'une ligne qui n'est pas un lieu :
+            # la ligne est écartée et comptée.
+            ecartes.append(nom)
+            continue
         if ligne.get("Data_year") != annee:
             raise Refus(
                 f"{nom} — année {ligne.get('Data_year')!r} dans une ressource annoncée {annee} : "
@@ -259,16 +269,13 @@ def territoires(lignes: list[dict], annee: int) -> list[dict]:
                 "surface_moyenne": int(
                     nombre(ligne.get("surface_moyenne"), SURFACE_PLAUSIBLE, "surface moyenne", nom)
                 ),
-                # La première collecte réelle a trouvé trois territoires du
-                # Morbihan avec un loyer publié et **aucun nombre de logements**.
-                # Écrire 0 aurait été un chiffre inventé — et faux, puisque le
-                # loyer, lui, est calculé sur des logements. L'absence se publie
-                # comme une absence.
-                "logements": (
-                    int(nombre(ligne.get("nombre_logements"), NOMBRE_PLAUSIBLE, "nombre de logements", nom))
-                    if ligne.get("nombre_logements") is not None
-                    else None
-                ),
+                # `nombre_logements` n'est **pas** publié : la relecture des
+                # données du 14 novembre 2026 a trouvé `4` pour les quatre lignes
+                # parisiennes, alors que leurs observations valent de 3 879 à
+                # 10 817. Un champ dont le sens n'est pas établi ne devient pas
+                # une colonne « logements observés » : ce serait notre chiffre,
+                # pas celui de la source. Seul le nombre d'observations est
+                # publié, et l'absence s'y écrit `null`, jamais zéro.
                 "observations": (
                     int(nombre(ligne.get("nombre_observations"), NOMBRE_PLAUSIBLE, "nombre d’observations", nom))
                     if ligne.get("nombre_observations") is not None
@@ -282,14 +289,14 @@ def territoires(lignes: list[dict], annee: int) -> list[dict]:
             f"{len(resultat)} territoire(s) retenu(s), au moins {MINIMUM_TERRITOIRES} attendus"
         )
     resultat.sort(key=lambda territoire: (territoire["nom"].lower(), territoire["observatoire"]))
-    return resultat
+    return resultat, ecartes
 
 
 def collecter(base: str) -> dict:
     fiche = lire_json(url_jeu(base))
     ressource, annee, titre, modifiee = resoudre_ressource(fiche)
     lignes, total = pages(base, ressource)
-    donnees = territoires(lignes, annee)
+    donnees, ecartes = territoires(lignes, annee)
     return {
         "collecte_le": date.today().isoformat(),
         "annee": annee,
@@ -301,7 +308,9 @@ def collecter(base: str) -> dict:
         ),
         "ne_dit_pas": (
             "Ni le loyer d’un logement précis, ni celui d’une commune à l’intérieur de "
-            "l’agglomération, ni les charges, ni ce qu’un ménage donné peut se permettre."
+            "l’agglomération, ni les charges, ni ce qu’un ménage donné peut se permettre. "
+            "Le nombre de logements publié par la source n’est pas repris : il vaut 4 pour "
+            "les quatre lignes parisiennes, ce qui n’est pas un compte de logements."
         ),
         "source": {
             "producteur": PRODUCTEUR,
@@ -313,6 +322,7 @@ def collecter(base: str) -> dict:
             "ressource_titre": titre,
             "date_ressource": modifiee,
             "lignes": total,
+            "lignes_ecartees": ecartes,
             "sha256": hashlib.sha256(json.dumps(lignes, sort_keys=True).encode("utf-8")).hexdigest(),
         },
         "territoires": donnees,
@@ -366,22 +376,26 @@ def verifier(chemin: Path) -> int:
             valeur = territoire.get(cle)
             if not isinstance(valeur, (int, float)) or not borne[0] <= float(valeur) <= borne[1]:
                 erreurs.append(f"{nom} : {cle} invraisemblable {valeur!r}")
-        if "logements" not in territoire:
-            erreurs.append(f"{nom} : le nombre de logements n’est pas déclaré du tout")
-        elif territoire["logements"] is not None and (
-            not isinstance(territoire["logements"], int) or territoire["logements"] < 1
+        if "logements" in territoire:
+            erreurs.append(f"{nom} : un nombre de logements est publié alors que la source ne le permet pas")
+        if "observations" not in territoire:
+            erreurs.append(f"{nom} : le nombre d’observations n’est pas déclaré du tout")
+        elif territoire["observations"] is not None and (
+            not isinstance(territoire["observations"], int) or territoire["observations"] < 1
         ):
-            erreurs.append(f"{nom} : nombre de logements invraisemblable {territoire['logements']!r}")
+            erreurs.append(f"{nom} : nombre d’observations invraisemblable {territoire['observations']!r}")
+        if MOTIF_NOM_DE_CODE.match(nom):
+            erreurs.append(f"{nom} : nom de territoire qui est un code")
     if erreurs:
         print("ÉCHEC — collecte des loyers", file=sys.stderr)
         for erreur in erreurs:
             print(f"    {erreur}", file=sys.stderr)
         return 1
-    sans_logements = sum(1 for territoire in liste if territoire.get("logements") is None)
+    ecartees = source.get("lignes_ecartees") or []
     print(
         f"Loyers conformes : {len(liste)} territoires observés en {annee}, collecte du {collecte}, "
         f"licence {source.get('licence')}, ressource « {source.get('ressource_titre')} »"
-        + (f", dont {sans_logements} sans nombre de logements publié (affiché comme tel)." if sans_logements else ".")
+        + (f", {len(ecartees)} ligne(s) écartée(s) pour nom de territoire remplacé par un code." if ecartees else ".")
     )
     return 0
 

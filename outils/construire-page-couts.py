@@ -78,7 +78,7 @@ def bloc_loyers() -> str:
     annee = donnees.get("annee")
     lignes = []
     for territoire in territoires:
-        logements = territoire.get("logements")
+        observations = territoire.get("observations")
         lignes.append(
             "              <tr>"
             f'<th scope="row">{html.escape(str(territoire["nom"]))} '
@@ -86,22 +86,22 @@ def bloc_loyers() -> str:
             f'<td>{nombre_fr(float(territoire["loyer_median"]), 2)}&nbsp;€/m²</td>'
             f'<td>{nombre_fr(float(territoire["loyer_mensuel_median"]))}&nbsp;€</td>'
             f'<td>{nombre_fr(float(territoire["surface_moyenne"]))}&nbsp;m²</td>'
-            f'<td>{nombre_fr(float(logements)) if logements is not None else "non publié"}</td>'
+            f'<td>{nombre_fr(float(observations)) if observations is not None else "non publié"}</td>'
             "</tr>"
         )
     source = donnees.get("source") or {}
-    sans_logements = sum(1 for territoire in territoires if territoire.get("logements") is None)
-    phrase_absences = (
-        f" {sans_logements} d’entre eux publient un loyer sans nombre de logements : "
-        "la colonne l’écrit « non publié », elle n’écrit pas zéro."
-        if sans_logements
+    ecartees = source.get("lignes_ecartees") or []
+    phrase_ecartees = (
+        f" Une ligne de la source ({len(ecartees)}) est écartée : son territoire s’y appelle "
+        f"« {html.escape(str(ecartees[0]))} », un code et non un lieu."
+        if ecartees
         else ""
     )
     return (
         f"<p>{len(territoires)} territoires sont observés par le réseau des observatoires "
         f"locaux des loyers en {html.escape(str(annee))}. La maille est l’agglomération, pas la "
         "commune : cette liste n’est donc pas un calque de la carte, et le site ne rattache "
-        f"aucune agglomération à ses communes, faute de source qui le publie.{phrase_absences}</p>\n"
+        f"aucune agglomération à ses communes, faute de source qui le publie.{phrase_ecartees}</p>\n"
         '            <div class="couts-tableau-defilant" tabindex="0" role="region" '
         'aria-labelledby="titre-tableau-loyers">\n'
         '              <table class="couts-tableau">\n'
@@ -112,7 +112,7 @@ def bloc_loyers() -> str:
         "<th scope=\"col\">Loyer médian au m²</th>"
         "<th scope=\"col\">Loyer médian mensuel</th>"
         "<th scope=\"col\">Surface moyenne</th>"
-        "<th scope=\"col\">Logements observés</th></tr>\n"
+        "<th scope=\"col\">Observations</th></tr>\n"
         "                </thead>\n"
         "                <tbody>\n" + "\n".join(lignes) + "\n"
         "                </tbody>\n"
@@ -126,7 +126,10 @@ def bloc_loyers() -> str:
         f'<a href="{html.escape(str(source.get("fiche")))}">Fiche du jeu de données</a>. '
         "Ce que ces chiffres ne disent pas : le loyer d’un logement précis, celui d’une commune "
         "à l’intérieur de l’agglomération, les charges, ni ce qu’un ménage donné peut se "
-        "permettre.</p>"
+        "permettre. Le nombre de logements que la source publie n’est pas repris : il vaut 4 "
+        "pour les quatre lignes parisiennes, ce qui n’est pas un décompte de logements. La "
+        "colonne « Observations » compte les observations qui fondent la médiane, sans que le "
+        "site prétende savoir comment la source les a tirées.</p>"
     )
 
 
@@ -137,8 +140,8 @@ def etat_loyers() -> str:
             "lieu ; la source est identifiée et l’outil en place"
         )
     return (
-        "Affiché : loyer médian au m² et loyer médian mensuel, surface moyenne et nombre de "
-        "logements observés, agglomération par agglomération"
+        "Affiché : loyer médian au m² et loyer médian mensuel, surface moyenne et nombre "
+        "d’observations, agglomération par agglomération"
     )
 
 
