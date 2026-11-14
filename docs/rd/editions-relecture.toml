@@ -8679,3 +8679,27 @@ sources = ["data-gouv-carburants", "data-economie-carburants-api"]
 mesures = ["outils/test_collecte_carburants.py", "outils/test_collecte_vie_chere.py"]
 constat = "Relu le lot carburants : collecteur et banc de 10 cas, bloc de fiche, tableau des postes de dépense, CSS, étape de workflow, dossier de R et D, journal et inventaire. Les faits publiés (DGCCRF, Licence Ouverte 2.0, flux toutes les dix minutes, 9 833 stations au contrôle) sont confrontés à la fiche du jeu de données et à l'export réellement appelé ; les autres postes sont annoncés comme non collectés ou sans donnée libre trouvée, jamais chiffrés."
 limite = "La collecte n'a pas tourné ici : la page dit « aucun prix collecté » tant que le workflow n'a pas écrit le fichier. La forme du flux est éprouvée sur des fixtures, pas sur les 9 833 stations réelles. Un prix médian départemental n'est pas un prix payé ; les loyers, revenus, assurances, transports et loisirs restent sans chiffre, et rien n'a été vu dans un autre navigateur qu'un Chromium sans interface."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "384ceb4e7a6fa8f0b379035fc69c94ddfc34757e6c6578aed1389984a874d033"
+empreinte_apres = "dce4a3ef7ca757fb50e9f4843e765ccfa97549e715881777a6cf9bfbca693cbd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py"]
+constat = "Deux fichiers ajoutés au lot carburants (collecteur et banc) font passer le plan de projet de 618 à 622 fichiers : la zone outils de 150 à 152, la zone docs de 188 à 190. Les compteurs du plan ont été réalignés sur le compte réel rendu par verifier-plan-projet.py, sans ajouter d'initiative ni d'action."
+limite = "Cette relecture ne vérifie qu'un compte de fichiers et de zones ; elle ne dit rien de la pertinence du découpage, et les autres compteurs du plan (initiatives, actions, portes) n'ont pas bougé — c'est le vérificateur qui le garantit, pas cette signature."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ad1246ff44e2db35d139bbf6cd1e3a788703cd44264e18554008a89a5907598f"
+empreinte_apres = "8d337374395a71f41166d2929fc2cf88ada20d6648f5ade3a0eb389c1886620c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py"]
+constat = "Deux fichiers ajoutés au lot carburants (collecteur et banc) font passer le plan de projet de 618 à 622 fichiers : la zone outils de 150 à 152, la zone docs de 188 à 190. Les compteurs du plan ont été réalignés sur le compte réel rendu par verifier-plan-projet.py, sans ajouter d'initiative ni d'action."
+limite = "Cette relecture ne vérifie qu'un compte de fichiers et de zones ; elle ne dit rien de la pertinence du découpage, et les autres compteurs du plan (initiatives, actions, portes) n'ont pas bougé — c'est le vérificateur qui le garantit, pas cette signature."
