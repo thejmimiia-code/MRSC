@@ -12075,3 +12075,15 @@ sources = []
 mesures = ["outils/memoire-eva.py"]
 constat = "Régénération de la mémoire d'ÉVA après l'entrée de la page des coûts de la vie dans le menu, la nouvelle avancée et les entrées de journal et de dossier : 538 entrées, 340 nœuds. Ces fichiers sont le rendu de leurs sources, pas des textes écrits à la main."
 limite = "Cette signature atteste la cohérence du rendu, pas la justesse des textes recopiés ; le graphe n'a été ni ouvert ni regardé, et l'index ne dit rien de la navigation réelle du site."
+
+[[edition]]
+chemin = ".github/workflows/verification.yml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ba3e970d4aea2667fe77ad95712234a92bc1510793d3b9f9f942a237663ce458"
+empreinte_apres = "cd3454e8a1ecedc669d47d26792ea37cbcf932461edaf2dc5128599c48652c09"
+nature = "mesure-interne"
+sources = []
+mesures = [".github/workflows/verification.yml", "outils/verifier-workflows.py"]
+constat = "Le plafond du lot graphismes passe de trente à quarante minutes. Le 14 novembre, l'étape 16 sur 16, qui mesure l'arbre d'accessibilité, a été annulée à la trentième minute après quinze étapes vertes : le relevé a grossi avec le site, désormais cent vingt-trois pages dont cent huit fiches. Le commentaire au-dessus du réglage garde la chronologie des relèvements et la raison de chacun, pour qu'un plafond ne se relève jamais sans phrase."
+limite = "Quarante minutes est une marge raisonnée, pas une mesure : la durée de l'étape coupée reste inconnue, puisque l'annulation n'écrit que le moment où elle a eu lieu. Si elle dépasse de nouveau, la prochaine réponse devra être de raccourcir le relevé, pas de relever encore, et ce sera alors au parcours des pages qu'il faudra s'attaquer."

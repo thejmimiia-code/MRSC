@@ -402,10 +402,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = ".github/workflows/verification.yml"
-empreinte = "ba3e970d4aea2667fe77ad95712234a92bc1510793d3b9f9f942a237663ce458"
+empreinte = "cd3454e8a1ecedc669d47d26792ea37cbcf932461edaf2dc5128599c48652c09"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-13
+date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = ".github/workflows/verifier-publication.yml"
