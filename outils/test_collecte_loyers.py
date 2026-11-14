@@ -56,9 +56,15 @@ TERRITOIRES = [
 
 
 def ligne(observatoire: str, nom: str, annee: int = 2025, loyer: float = 12.4,
-          mensuel: int = 640, surface: int = 58, logements: int = 12_000,
-          observations: int = 3_000, methode: str = "Estimation directe") -> dict:
-    """Une ligne telle que l'API tabulaire la sert : types réels, pas des chaînes."""
+          mensuel: int = 640, surface: int = 58, logements: int | None = 12_000,
+          observations: int | None = 3_000, methode: str = "Estimation directe") -> dict:
+    """Une ligne telle que l'API tabulaire la sert : types réels, pas des chaînes.
+
+    `nombre_logements` figure dans la source mais n'est pas publié : la relecture
+    des données du 14 novembre 2026 y a trouvé `4` pour les quatre lignes
+    parisiennes. Les fixtures le portent pour que le banc vérifie justement qu'il
+    ne ressort pas.
+    """
     return {
         "Observatory": observatoire,
         "agglomeration": nom,
@@ -314,34 +320,49 @@ class CollecteLoyers(unittest.TestCase):
     def test_reponse_tronquee(self) -> None:
         self.refuser(fiche(), lignes(nombre=40), "réponse tronquée", total_annonce=60)
 
-    def test_logements_non_publies(self) -> None:
-        """Trois territoires du Morbihan, le 14 novembre 2026 : loyer sans logements.
+    def test_nombre_de_logements_non_publie(self) -> None:
+        """La source publie `nombre_logements` ; la page ne doit pas le reprendre.
 
-        L'absence se publie comme une absence. Écrire zéro serait un chiffre
-        inventé, et faux : le loyer est bien calculé sur des logements.
+        Le 14 novembre 2026, la relecture des données a trouvé `4` pour les
+        quatre lignes parisiennes, dont les observations valent de 3 879 à
+        10 817. Un champ dont le sens n'est pas établi n'est pas une colonne.
         """
         rangees = lignes()
-        rangees[1]["nombre_logements"] = None
-        rangees[2]["nombre_observations"] = None
+        rangees[0]["nombre_logements"] = 4
         with tempfile.TemporaryDirectory(prefix="mrsc-loyers-") as tmp:
             resultat, sortie = self.collecter(fiche(), rangees, Path(tmp))
             self.assertEqual(resultat.returncode, 0, resultat.stderr[-900:])
             donnees = json.loads(sortie.read_text(encoding="utf-8"))
-            sans = [t for t in donnees["territoires"] if t["logements"] is None]
-            self.assertEqual(len(sans), 1)
-            self.assertIsNone(sans[0]["observations"] if sans[0]["observations"] is None else None)
+            for territoire in donnees["territoires"]:
+                self.assertNotIn("logements", territoire, "le nombre de logements ne se publie pas")
+            self.assertTrue(all(isinstance(t["observations"], int) for t in donnees["territoires"]))
+
+    def test_nom_de_territoire_remplace_par_un_code(self) -> None:
+        """`L7500` : une ligne réelle de la base nationale, qui n'est pas un lieu."""
+        rangees = lignes()
+        rangees[2]["agglomeration"] = "L7500"
+        with tempfile.TemporaryDirectory(prefix="mrsc-loyers-") as tmp:
+            resultat, sortie = self.collecter(fiche(), rangees, Path(tmp))
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-900:])
+            donnees = json.loads(sortie.read_text(encoding="utf-8"))
+            self.assertNotIn("L7500", [t["nom"] for t in donnees["territoires"]])
+            self.assertEqual(donnees["source"]["lignes_ecartees"], ["L7500"])
             verification = subprocess.run(
                 [sys.executable, str(OUTIL), "--verifier", "--sortie", str(sortie)],
                 capture_output=True, text=True, check=False,
             )
             self.assertEqual(verification.returncode, 0, verification.stderr[-800:])
-            self.assertIn("sans nombre de logements", verification.stdout)
+            self.assertIn("écartée", verification.stdout)
 
-    def test_logements_nuls_refuses(self) -> None:
-        """Zéro logement pour un loyer publié : incohérent, donc refusé."""
+    def test_observations_absentes(self) -> None:
+        """Une observation absente se publie `null`, jamais zéro."""
         rangees = lignes()
-        rangees[3]["nombre_logements"] = 0
-        self.refuser(fiche(), rangees, "nombre de logements")
+        rangees[4]["nombre_observations"] = None
+        with tempfile.TemporaryDirectory(prefix="mrsc-loyers-") as tmp:
+            resultat, sortie = self.collecter(fiche(), rangees, Path(tmp))
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-900:])
+            donnees = json.loads(sortie.read_text(encoding="utf-8"))
+            self.assertEqual(sum(1 for t in donnees["territoires"] if t["observations"] is None), 1)
 
     def test_connexion_coupee(self) -> None:
         """Une connexion fermée sans réponse est une panne, pas un plantage."""

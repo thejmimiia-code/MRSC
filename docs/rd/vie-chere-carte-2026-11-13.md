@@ -160,11 +160,11 @@ recalcule l’empreinte et refuse un fichier modifié à la main.
 | `assets/js/carte-vie-chere.js` | carte SVG, zoom, recherche, fiche, calcul de surface | `node --check` ; rendu constaté en Chromium |
 | `assets/css/site.css` (bloc `.couts-*`) | grille deux colonnes, cibles de 44 px, `forced-colors` | `verifier-budgets-visuels.py`, empreinte CSS |
 
-Le banc commun est `outils/test_collecte_vie_chere.py` : **24 cas**, dont neuf qui
+Le banc commun est `outils/test_collecte_vie_chere.py` : **25 cas**, dont neuf qui
 visent les trois fabricants (fond amputé d’un département, licence fermée, page
 dérivée du fragment, page sans collecte de loyers qui l’avoue, page avec loyers
 rendus, collecte vide refusée). Les carburants ont le leur (13 cas) et les
-loyers le leur (20 cas). Aucun cas ne touche le réseau public : chaque
+loyers le leur (21 cas). Aucun cas ne touche le réseau public : chaque
 collecteur est éprouvé contre un serveur local qui joue la panne, la licence
 fermée et le fichier tronqué.
 
@@ -288,10 +288,22 @@ vides lors de la première collecte DVF.
 l’ensemble des logements (plus de 200 lignes) ; moins de 30 territoires ; une
 année mélangée ; un code d’observatoire inattendu ; un territoire en double ;
 un loyer hors de 3 à 40 €/m², une médiane mensuelle hors de 100 à 4 000 €, une
-surface moyenne hors de 10 à 200 m² ; une réponse tronquée, une connexion coupée sans réponse. Le banc
-`outils/test_collecte_loyers.py` exerce chacun de ces refus contre un serveur
-local — **20 cas** —, avec des fixtures qui reprennent les types réels servis
-par l’API (un loyer à `13.3`, un mensuel à `700`, les codes `B1300` et `B2B00`).
+surface moyenne hors de 10 à 200 m² ; une réponse tronquée ; une connexion
+coupée sans réponse. Le banc `outils/test_collecte_loyers.py` exerce chacun de
+ces refus contre un serveur local — **21 cas** —, avec des fixtures qui
+reprennent les types réels servis par l’API (un loyer à `13.3`, un mensuel à
+`700`, les codes `B1300` et `B2B00`).
+
+**Deux champs de la source ne sont pas publiés tels quels**, et c’est la
+relecture des données qui l’a appris, pas le banc — la première proposition de
+fusion a été fermée sans fusion pour cette raison. Le champ `nombre_logements`
+vaut `4` pour les quatre lignes parisiennes, dont les observations vont de 3 879
+à 10 817 : ce n’est pas un décompte de logements, et l’intituler « logements
+observés » aurait été un chiffre du site, pas celui de la source. La colonne
+publiée est donc « Observations », et le fichier ne contient pas `logements`.
+Une ligne de la base nationale porte `L7500` comme nom de territoire : elle est
+écartée, et son nombre déclaré dans la provenance. Enfin, une observation
+absente s’écrit `null` puis « non publié » dans la page — jamais zéro.
 
 **Ce que cette collecte ne prouve pas :** que la source réponde ainsi le jour où
 la collecte tourne — le banc éprouve la lecture d’un format relevé, pas la
