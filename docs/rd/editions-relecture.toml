@@ -8895,3 +8895,15 @@ sources = []
 mesures = ["outils/test_collecte_carburants.py", "outils/verifier-inventaire-controles.py"]
 constat = "L'annotation de la deuxième exécution a nommé la cause : « flux illisible : 'utf-8' codec can't decode byte 0x8b », la signature du gzip. Le collecteur demande désormais un corps non compressé, et décompresse s'il en reçoit un quand même — un refus pour cause de compression accuserait une source qui répond. Treize cas au banc, dont un gzip lisible et un gzip tronqué."
 limite = "Le gzip a été reconnu par sa signature, pas par un en-tête HTTP lu : le cas réel du 14 novembre n'a pas été rejoué ici, l'atelier n'atteignant pas data.economie.gouv.fr. Si la source renvoie encore autre chose — un zip, une redirection vers un fichier daté — la prochaine annotation le dira, et pas avant."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "26d2cf9442f52e78036a8ce2cec135de4a469d2a7f0f0d99fa9c897ca5ff7c5e"
+empreinte_apres = "fa89ff1b31adb38339f151381be54129d1827fa17448fc5162e2b6f3c17935bb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Régénération mécanique de l'index de la mémoire d'ÉVA après la mise à jour de l'inventaire des contrôles et du collecteur de carburants : l'index suit ses sources, le graphe et le plan sont inchangés."
+limite = "Cette signature atteste la cohérence du rendu, pas la justesse des textes recopiés ; et le graphe n'a été ni ouvert ni regardé."
