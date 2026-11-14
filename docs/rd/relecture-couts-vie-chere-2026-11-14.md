@@ -118,6 +118,15 @@ Ce que le site en fait : une **médiane départementale** et le nombre de statio
 rien d’autre. Ni nom de station, ni adresse, ni horaires ne sont conservés. Une
 médiane départementale n’est pas le prix payé par un foyer.
 
+### Ce que la première collecte réelle a révélé
+
+Les fichiers produits le 14 novembre 2026 ont été relus avant fusion, et deux
+défauts de lecture y ont été trouvés : Paris, Lyon et Marseille sans prix (DVF
+les vend par arrondissement) et les cent premières communes de chaque
+département vides (DVF écrit le code commune sans zéros de tête). La proposition
+de fusion des données a été fermée sans fusion ; le détail est dans
+`docs/rd/vie-chere-carte-2026-11-13.md`, section 6 ter.
+
 ## Ce que la relecture a vérifié dans les contenus
 
 - **Aucun total de coût de la vie n’est calculé.** La page affiche la population,

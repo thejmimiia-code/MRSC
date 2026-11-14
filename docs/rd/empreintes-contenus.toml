@@ -1543,7 +1543,7 @@ urls = ["https://thejmimiia-code.github.io/MRSC/confidentialite.html", "https://
 
 [[unite]]
 chemin = "couts-vie-chere.html"
-empreinte = "789a776567702e90d2358fc546c31cdf856ea5245a5d8e494bad690de9311841"
+empreinte = "8e64658f3e5f1e3a0d6318920b7e893585e8bbcea3600c4fd185c911b9d87e69"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -1551,7 +1551,7 @@ urls = ["https://thejmimiia-code.github.io/MRSC/couts-vie-chere.html", "https://
 
 [[unite]]
 chemin = "couts-vie-chere/contenu.txt"
-empreinte = "89abe1ae35ed01957319d5c0c13f7d1f9f33a13df2c96c5224da83a0dd8b7685"
+empreinte = "254aa29347bbfefd765a59270bcbb48f20aa56e76ad5e1685fb76c5e0a584967"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -1951,7 +1951,7 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "fa89ff1b31adb38339f151381be54129d1827fa17448fc5162e2b6f3c17935bb"
+empreinte = "1c430a798f14b21bc057ee4acad322bb4dc4f5762a7968575667aec28c876615"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -2048,7 +2048,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "9cf90aa7ea32ce509420d8d235a804bb49b4a1ecd49b747370a9d9957f87c25b"
+empreinte = "e87db06d83ce8de7c9ba9a50dfd18148efcc3c8d86a0d2f8ebb8f046e325e18d"
 etat = "relu-par-agent"
 apostrophes = 2405
 date_derniere_relecture = 2026-11-14
@@ -2246,7 +2246,7 @@ urls = ["https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/c
 
 [[unite]]
 chemin = "docs/rd/relecture-couts-vie-chere-2026-11-14.md"
-empreinte = "df0ab9cd7f3105d01d4606ca9737b815c8ce3c8622af4978dea55497abfa1260"
+empreinte = "dbd1ef7684a68c7558d2bef2f9c117f67ceb442a7b915edd17904a46f2482f26"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -2472,7 +2472,7 @@ urls = ["https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr
 
 [[unite]]
 chemin = "docs/rd/vie-chere-carte-2026-11-13.md"
-empreinte = "2fb8483cc6a5209e97c6ecb9763763a7c528fa6f15f6830bde1b050438cc0196"
+empreinte = "150e4f2111371681aacbe24d69ad756a916565cbc342eae45a77a7ee6c9798dc"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -2795,7 +2795,7 @@ urls = ["https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-de
 
 [[unite]]
 chemin = "outils/collecter-vie-chere.py"
-empreinte = "1cfada700f3e8b717ed170dc829ecfa2de6181a3c07c1f8e9e1497b672d682e0"
+empreinte = "89b80557f20d02b784849e7a0cfe13a1c1df197ac5ec7e70b0c8b36f47508bbb"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -3142,7 +3142,7 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "outils/test_collecte_vie_chere.py"
-empreinte = "df046689030278344c6ac9b652c32dfae25304c925d9725e1527ba63e5dd1554"
+empreinte = "02b238d963157028338d53d5d89e7ac3333d5f16c52025fa2680b4b7a05ad316"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14

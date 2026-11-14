@@ -8967,3 +8967,99 @@ sources = []
 mesures = ["outils/test_mutations_relecture_contenus.py", "outils/relire-contenus.py"]
 constat = "La provenance d'un fichier téléchargé porte l'adresse horodatée de l'archive, qu'aucun registre ne peut enregistrer d'avance : la sentinelle refusait donc toute collecte DVF. Un hôte de distribution déclaré — static.data.gouv.fr — est désormais couvert par une source enregistrée qui partage son domaine, et par elle seule. Trois cas ajoutés, dont un qui vérifie qu'un autre hôte ne passe pas."
 limite = "La règle repose sur une liste d'hôtes écrite à la main : un nouveau miroir demandera une ligne, et ce cas-là ne sera pas deviné par le banc. Elle ne dit rien non plus de la fraîcheur de l'archive : elle autorise à citer l'adresse, pas à garantir son contenu."
+
+[[edition]]
+chemin = "couts-vie-chere.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "789a776567702e90d2358fc546c31cdf856ea5245a5d8e494bad690de9311841"
+empreinte_apres = "8e64658f3e5f1e3a0d6318920b7e893585e8bbcea3600c4fd185c911b9d87e69"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py", "outils/collecter-vie-chere.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle a rendu des données que la relecture a refusées : Paris, Lyon et Marseille sans prix, et les cent premières communes de chaque département vides. Deux causes trouvées — arrondissements DVF non ramenés à la commune, zéros de tête perdus dans le code commune. Le collecteur les corrige, les fixtures du banc imitent enfin l'écriture réelle, trois cas ajoutés (18 au total), la page dit les deux règles et le dossier de R et D raconte l'écart."
+limite = "Les chiffres publiés ne sont pas confrontés à un site officiel : la nouvelle collecte produira des médianes non vérifiées à la main. Les arrondissements sont réunis sous la commune, ce qui mélange des marchés distincts à l'intérieur d'une même ville ; c'est dit sur la page, pas mesuré. Rien n'a été vu dans un navigateur depuis ces changements, et les loyers restent absents."
+
+[[edition]]
+chemin = "couts-vie-chere/contenu.txt"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "89abe1ae35ed01957319d5c0c13f7d1f9f33a13df2c96c5224da83a0dd8b7685"
+empreinte_apres = "254aa29347bbfefd765a59270bcbb48f20aa56e76ad5e1685fb76c5e0a584967"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py", "outils/collecter-vie-chere.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle a rendu des données que la relecture a refusées : Paris, Lyon et Marseille sans prix, et les cent premières communes de chaque département vides. Deux causes trouvées — arrondissements DVF non ramenés à la commune, zéros de tête perdus dans le code commune. Le collecteur les corrige, les fixtures du banc imitent enfin l'écriture réelle, trois cas ajoutés (18 au total), la page dit les deux règles et le dossier de R et D raconte l'écart."
+limite = "Les chiffres publiés ne sont pas confrontés à un site officiel : la nouvelle collecte produira des médianes non vérifiées à la main. Les arrondissements sont réunis sous la commune, ce qui mélange des marchés distincts à l'intérieur d'une même ville ; c'est dit sur la page, pas mesuré. Rien n'a été vu dans un navigateur depuis ces changements, et les loyers restent absents."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "9cf90aa7ea32ce509420d8d235a804bb49b4a1ecd49b747370a9d9957f87c25b"
+empreinte_apres = "e87db06d83ce8de7c9ba9a50dfd18148efcc3c8d86a0d2f8ebb8f046e325e18d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py", "outils/collecter-vie-chere.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle a rendu des données que la relecture a refusées : Paris, Lyon et Marseille sans prix, et les cent premières communes de chaque département vides. Deux causes trouvées — arrondissements DVF non ramenés à la commune, zéros de tête perdus dans le code commune. Le collecteur les corrige, les fixtures du banc imitent enfin l'écriture réelle, trois cas ajoutés (18 au total), la page dit les deux règles et le dossier de R et D raconte l'écart."
+limite = "Les chiffres publiés ne sont pas confrontés à un site officiel : la nouvelle collecte produira des médianes non vérifiées à la main. Les arrondissements sont réunis sous la commune, ce qui mélange des marchés distincts à l'intérieur d'une même ville ; c'est dit sur la page, pas mesuré. Rien n'a été vu dans un navigateur depuis ces changements, et les loyers restent absents."
+
+[[edition]]
+chemin = "docs/rd/relecture-couts-vie-chere-2026-11-14.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "df0ab9cd7f3105d01d4606ca9737b815c8ce3c8622af4978dea55497abfa1260"
+empreinte_apres = "dbd1ef7684a68c7558d2bef2f9c117f67ceb442a7b915edd17904a46f2482f26"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py", "outils/collecter-vie-chere.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle a rendu des données que la relecture a refusées : Paris, Lyon et Marseille sans prix, et les cent premières communes de chaque département vides. Deux causes trouvées — arrondissements DVF non ramenés à la commune, zéros de tête perdus dans le code commune. Le collecteur les corrige, les fixtures du banc imitent enfin l'écriture réelle, trois cas ajoutés (18 au total), la page dit les deux règles et le dossier de R et D raconte l'écart."
+limite = "Les chiffres publiés ne sont pas confrontés à un site officiel : la nouvelle collecte produira des médianes non vérifiées à la main. Les arrondissements sont réunis sous la commune, ce qui mélange des marchés distincts à l'intérieur d'une même ville ; c'est dit sur la page, pas mesuré. Rien n'a été vu dans un navigateur depuis ces changements, et les loyers restent absents."
+
+[[edition]]
+chemin = "docs/rd/vie-chere-carte-2026-11-13.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "2fb8483cc6a5209e97c6ecb9763763a7c528fa6f15f6830bde1b050438cc0196"
+empreinte_apres = "150e4f2111371681aacbe24d69ad756a916565cbc342eae45a77a7ee6c9798dc"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py", "outils/collecter-vie-chere.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle a rendu des données que la relecture a refusées : Paris, Lyon et Marseille sans prix, et les cent premières communes de chaque département vides. Deux causes trouvées — arrondissements DVF non ramenés à la commune, zéros de tête perdus dans le code commune. Le collecteur les corrige, les fixtures du banc imitent enfin l'écriture réelle, trois cas ajoutés (18 au total), la page dit les deux règles et le dossier de R et D raconte l'écart."
+limite = "Les chiffres publiés ne sont pas confrontés à un site officiel : la nouvelle collecte produira des médianes non vérifiées à la main. Les arrondissements sont réunis sous la commune, ce qui mélange des marchés distincts à l'intérieur d'une même ville ; c'est dit sur la page, pas mesuré. Rien n'a été vu dans un navigateur depuis ces changements, et les loyers restent absents."
+
+[[edition]]
+chemin = "outils/collecter-vie-chere.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "1cfada700f3e8b717ed170dc829ecfa2de6181a3c07c1f8e9e1497b672d682e0"
+empreinte_apres = "89b80557f20d02b784849e7a0cfe13a1c1df197ac5ec7e70b0c8b36f47508bbb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py", "outils/collecter-vie-chere.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle a rendu des données que la relecture a refusées : Paris, Lyon et Marseille sans prix, et les cent premières communes de chaque département vides. Deux causes trouvées — arrondissements DVF non ramenés à la commune, zéros de tête perdus dans le code commune. Le collecteur les corrige, les fixtures du banc imitent enfin l'écriture réelle, trois cas ajoutés (18 au total), la page dit les deux règles et le dossier de R et D raconte l'écart."
+limite = "Les chiffres publiés ne sont pas confrontés à un site officiel : la nouvelle collecte produira des médianes non vérifiées à la main. Les arrondissements sont réunis sous la commune, ce qui mélange des marchés distincts à l'intérieur d'une même ville ; c'est dit sur la page, pas mesuré. Rien n'a été vu dans un navigateur depuis ces changements, et les loyers restent absents."
+
+[[edition]]
+chemin = "outils/test_collecte_vie_chere.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "df046689030278344c6ac9b652c32dfae25304c925d9725e1527ba63e5dd1554"
+empreinte_apres = "02b238d963157028338d53d5d89e7ac3333d5f16c52025fa2680b4b7a05ad316"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_vie_chere.py", "outils/collecter-vie-chere.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle a rendu des données que la relecture a refusées : Paris, Lyon et Marseille sans prix, et les cent premières communes de chaque département vides. Deux causes trouvées — arrondissements DVF non ramenés à la commune, zéros de tête perdus dans le code commune. Le collecteur les corrige, les fixtures du banc imitent enfin l'écriture réelle, trois cas ajoutés (18 au total), la page dit les deux règles et le dossier de R et D raconte l'écart."
+limite = "Les chiffres publiés ne sont pas confrontés à un site officiel : la nouvelle collecte produira des médianes non vérifiées à la main. Les arrondissements sont réunis sous la commune, ce qui mélange des marchés distincts à l'intérieur d'une même ville ; c'est dit sur la page, pas mesuré. Rien n'a été vu dans un navigateur depuis ces changements, et les loyers restent absents."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "fa89ff1b31adb38339f151381be54129d1827fa17448fc5162e2b6f3c17935bb"
+empreinte_apres = "1c430a798f14b21bc057ee4acad322bb4dc4f5762a7968575667aec28c876615"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Régénération mécanique de l'index de la mémoire d'ÉVA après la correction du collecteur DVF, les trois nouveaux cas du banc et les textes ajoutés au dossier, au journal et au rapport de relecture."
+limite = "Cette signature atteste que l'index correspond à ses sources, pas que ces sources soient justes ; l'analyse de la mémoire n'a pas été relue, et le graphe n'a pas été ouvert."
