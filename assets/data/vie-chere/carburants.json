@@ -1,0 +1,2492 @@
+{
+ "collecte_le": "2026-11-14",
+ "departements": {
+  "01": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 87
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 42
+   },
+   "gazole": {
+    "mediane": 2.139,
+    "stations": 117
+   },
+   "gplc": {
+    "mediane": 1.134,
+    "stations": 8
+   },
+   "sp95": {
+    "mediane": 2.073,
+    "stations": 40
+   },
+   "sp98": {
+    "mediane": 2.098,
+    "stations": 98
+   }
+  },
+  "02": {
+   "e10": {
+    "mediane": 1.969,
+    "stations": 68
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 41
+   },
+   "gazole": {
+    "mediane": 2.109,
+    "stations": 89
+   },
+   "gplc": {
+    "mediane": 1.079,
+    "stations": 19
+   },
+   "sp95": {
+    "mediane": 2.089,
+    "stations": 23
+   },
+   "sp98": {
+    "mediane": 2.064,
+    "stations": 66
+   }
+  },
+  "03": {
+   "e10": {
+    "mediane": 2.019,
+    "stations": 56
+   },
+   "e85": {
+    "mediane": 0.898,
+    "stations": 23
+   },
+   "gazole": {
+    "mediane": 2.176,
+    "stations": 73
+   },
+   "gplc": {
+    "mediane": 1.099,
+    "stations": 10
+   },
+   "sp95": {
+    "mediane": 2.112,
+    "stations": 23
+   },
+   "sp98": {
+    "mediane": 2.16,
+    "stations": 59
+   }
+  },
+  "04": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 44
+   },
+   "e85": {
+    "mediane": 0.879,
+    "stations": 21
+   },
+   "gazole": {
+    "mediane": 2.17,
+    "stations": 55
+   },
+   "gplc": {
+    "mediane": 1.069,
+    "stations": 8
+   },
+   "sp95": {
+    "mediane": 2.099,
+    "stations": 14
+   },
+   "sp98": {
+    "mediane": 2.069,
+    "stations": 41
+   }
+  },
+  "05": {
+   "e10": {
+    "mediane": 1.986,
+    "stations": 32
+   },
+   "e85": {
+    "mediane": 0.919,
+    "stations": 17
+   },
+   "gazole": {
+    "mediane": 2.158,
+    "stations": 42
+   },
+   "gplc": {
+    "mediane": 1.099,
+    "stations": 5
+   },
+   "sp95": {
+    "mediane": 2.089,
+    "stations": 17
+   },
+   "sp98": {
+    "mediane": 2.077,
+    "stations": 32
+   }
+  },
+  "06": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 119
+   },
+   "e85": {
+    "mediane": 0.925,
+    "stations": 61
+   },
+   "gazole": {
+    "mediane": 2.179,
+    "stations": 140
+   },
+   "gplc": {
+    "mediane": 1.059,
+    "stations": 13
+   },
+   "sp95": {
+    "mediane": 2.104,
+    "stations": 24
+   },
+   "sp98": {
+    "mediane": 2.076,
+    "stations": 119
+   }
+  },
+  "07": {
+   "e10": {
+    "mediane": 1.999,
+    "stations": 51
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 28
+   },
+   "gazole": {
+    "mediane": 2.163,
+    "stations": 68
+   },
+   "gplc": {
+    "mediane": 1.086,
+    "stations": 7
+   },
+   "sp95": {
+    "mediane": 2.059,
+    "stations": 29
+   },
+   "sp98": {
+    "mediane": 2.104,
+    "stations": 50
+   }
+  },
+  "08": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 33
+   },
+   "e85": {
+    "mediane": 0.873,
+    "stations": 16
+   },
+   "gazole": {
+    "mediane": 2.189,
+    "stations": 47
+   },
+   "gplc": {
+    "mediane": 0.999,
+    "stations": 6
+   },
+   "sp95": {
+    "mediane": 2.084,
+    "stations": 14
+   },
+   "sp98": {
+    "mediane": 2.13,
+    "stations": 34
+   }
+  },
+  "09": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 30
+   },
+   "e85": {
+    "mediane": 0.874,
+    "stations": 18
+   },
+   "gazole": {
+    "mediane": 2.18,
+    "stations": 34
+   },
+   "gplc": {
+    "mediane": 1.095,
+    "stations": 4
+   },
+   "sp95": {
+    "mediane": 2.039,
+    "stations": 10
+   },
+   "sp98": {
+    "mediane": 2.169,
+    "stations": 27
+   }
+  },
+  "10": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 49
+   },
+   "e85": {
+    "mediane": 0.884,
+    "stations": 24
+   },
+   "gazole": {
+    "mediane": 2.218,
+    "stations": 66
+   },
+   "gplc": {
+    "mediane": 1.02,
+    "stations": 7
+   },
+   "sp95": {
+    "mediane": 2.079,
+    "stations": 29
+   },
+   "sp98": {
+    "mediane": 2.084,
+    "stations": 53
+   }
+  },
+  "11": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 68
+   },
+   "e85": {
+    "mediane": 0.899,
+    "stations": 45
+   },
+   "gazole": {
+    "mediane": 2.169,
+    "stations": 83
+   },
+   "gplc": {
+    "mediane": 1.111,
+    "stations": 18
+   },
+   "sp95": {
+    "mediane": 2.099,
+    "stations": 18
+   },
+   "sp98": {
+    "mediane": 2.143,
+    "stations": 64
+   }
+  },
+  "12": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 51
+   },
+   "e85": {
+    "mediane": 0.898,
+    "stations": 27
+   },
+   "gazole": {
+    "mediane": 2.15,
+    "stations": 85
+   },
+   "gplc": {
+    "mediane": 1.079,
+    "stations": 8
+   },
+   "sp95": {
+    "mediane": 2.059,
+    "stations": 46
+   },
+   "sp98": {
+    "mediane": 2.099,
+    "stations": 53
+   }
+  },
+  "13": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 234
+   },
+   "e85": {
+    "mediane": 0.899,
+    "stations": 126
+   },
+   "gazole": {
+    "mediane": 2.15,
+    "stations": 270
+   },
+   "gplc": {
+    "mediane": 1.069,
+    "stations": 39
+   },
+   "sp95": {
+    "mediane": 2.059,
+    "stations": 52
+   },
+   "sp98": {
+    "mediane": 2.099,
+    "stations": 192
+   }
+  },
+  "14": {
+   "e10": {
+    "mediane": 1.979,
+    "stations": 93
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 39
+   },
+   "gazole": {
+    "mediane": 2.099,
+    "stations": 117
+   },
+   "gplc": {
+    "mediane": 1.043,
+    "stations": 22
+   },
+   "sp95": {
+    "mediane": 2.027,
+    "stations": 38
+   },
+   "sp98": {
+    "mediane": 2.059,
+    "stations": 95
+   }
+  },
+  "15": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 25
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 15
+   },
+   "gazole": {
+    "mediane": 2.19,
+    "stations": 47
+   },
+   "gplc": {
+    "mediane": 1.09,
+    "stations": 5
+   },
+   "sp95": {
+    "mediane": 2.06,
+    "stations": 29
+   },
+   "sp98": {
+    "mediane": 2.195,
+    "stations": 29
+   }
+  },
+  "16": {
+   "e10": {
+    "mediane": 1.966,
+    "stations": 54
+   },
+   "e85": {
+    "mediane": 0.861,
+    "stations": 30
+   },
+   "gazole": {
+    "mediane": 2.089,
+    "stations": 67
+   },
+   "gplc": {
+    "mediane": 1.093,
+    "stations": 8
+   },
+   "sp95": {
+    "mediane": 2.099,
+    "stations": 17
+   },
+   "sp98": {
+    "mediane": 2.069,
+    "stations": 56
+   }
+  },
+  "17": {
+   "e10": {
+    "mediane": 1.939,
+    "stations": 95
+   },
+   "e85": {
+    "mediane": 0.858,
+    "stations": 50
+   },
+   "gazole": {
+    "mediane": 2.079,
+    "stations": 115
+   },
+   "gplc": {
+    "mediane": 1.094,
+    "stations": 24
+   },
+   "sp95": {
+    "mediane": 1.999,
+    "stations": 25
+   },
+   "sp98": {
+    "mediane": 2.039,
+    "stations": 103
+   }
+  },
+  "18": {
+   "e10": {
+    "mediane": 1.989,
+    "stations": 47
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 19
+   },
+   "gazole": {
+    "mediane": 2.138,
+    "stations": 62
+   },
+   "gplc": {
+    "mediane": 1.073,
+    "stations": 6
+   },
+   "sp95": {
+    "mediane": 2.087,
+    "stations": 20
+   },
+   "sp98": {
+    "mediane": 2.112,
+    "stations": 51
+   }
+  },
+  "19": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 48
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 19
+   },
+   "gazole": {
+    "mediane": 2.17,
+    "stations": 61
+   },
+   "gplc": {
+    "mediane": 1.099,
+    "stations": 5
+   },
+   "sp95": {
+    "mediane": 2.048,
+    "stations": 20
+   },
+   "sp98": {
+    "mediane": 2.076,
+    "stations": 47
+   }
+  },
+  "21": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 86
+   },
+   "e85": {
+    "mediane": 0.909,
+    "stations": 41
+   },
+   "gazole": {
+    "mediane": 2.212,
+    "stations": 117
+   },
+   "gplc": {
+    "mediane": 1.087,
+    "stations": 16
+   },
+   "sp95": {
+    "mediane": 2.209,
+    "stations": 44
+   },
+   "sp98": {
+    "mediane": 2.149,
+    "stations": 93
+   }
+  },
+  "22": {
+   "e10": {
+    "mediane": 1.958,
+    "stations": 87
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 41
+   },
+   "gazole": {
+    "mediane": 2.072,
+    "stations": 110
+   },
+   "gplc": {
+    "mediane": 1.029,
+    "stations": 14
+   },
+   "sp95": {
+    "mediane": 1.988,
+    "stations": 37
+   },
+   "sp98": {
+    "mediane": 2.032,
+    "stations": 94
+   }
+  },
+  "23": {
+   "e10": {
+    "mediane": 2.014,
+    "stations": 26
+   },
+   "e85": {
+    "mediane": 0.878,
+    "stations": 11
+   },
+   "gazole": {
+    "mediane": 2.169,
+    "stations": 33
+   },
+   "gplc": {
+    "mediane": 1.089,
+    "stations": 3
+   },
+   "sp95": {
+    "mediane": 2.059,
+    "stations": 12
+   },
+   "sp98": {
+    "mediane": 2.168,
+    "stations": 21
+   }
+  },
+  "24": {
+   "e10": {
+    "mediane": 1.965,
+    "stations": 66
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 31
+   },
+   "gazole": {
+    "mediane": 2.124,
+    "stations": 96
+   },
+   "gplc": {
+    "mediane": 1.026,
+    "stations": 14
+   },
+   "sp95": {
+    "mediane": 2.039,
+    "stations": 41
+   },
+   "sp98": {
+    "mediane": 2.078,
+    "stations": 80
+   }
+  },
+  "25": {
+   "e10": {
+    "mediane": 1.999,
+    "stations": 71
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 37
+   },
+   "gazole": {
+    "mediane": 2.169,
+    "stations": 94
+   },
+   "gplc": {
+    "mediane": 1.099,
+    "stations": 7
+   },
+   "sp95": {
+    "mediane": 2.115,
+    "stations": 42
+   },
+   "sp98": {
+    "mediane": 2.179,
+    "stations": 69
+   }
+  },
+  "26": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 95
+   },
+   "e85": {
+    "mediane": 0.879,
+    "stations": 60
+   },
+   "gazole": {
+    "mediane": 2.159,
+    "stations": 116
+   },
+   "gplc": {
+    "mediane": 1.111,
+    "stations": 25
+   },
+   "sp95": {
+    "mediane": 2.059,
+    "stations": 32
+   },
+   "sp98": {
+    "mediane": 2.109,
+    "stations": 88
+   }
+  },
+  "27": {
+   "e10": {
+    "mediane": 1.974,
+    "stations": 76
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 48
+   },
+   "gazole": {
+    "mediane": 2.1,
+    "stations": 93
+   },
+   "gplc": {
+    "mediane": 1.027,
+    "stations": 14
+   },
+   "sp95": {
+    "mediane": 2.049,
+    "stations": 19
+   },
+   "sp98": {
+    "mediane": 2.066,
+    "stations": 80
+   }
+  },
+  "28": {
+   "e10": {
+    "mediane": 1.966,
+    "stations": 62
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 28
+   },
+   "gazole": {
+    "mediane": 2.104,
+    "stations": 74
+   },
+   "gplc": {
+    "mediane": 0.999,
+    "stations": 9
+   },
+   "sp95": {
+    "mediane": 1.99,
+    "stations": 19
+   },
+   "sp98": {
+    "mediane": 2.051,
+    "stations": 62
+   }
+  },
+  "29": {
+   "e10": {
+    "mediane": 1.949,
+    "stations": 111
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 44
+   },
+   "gazole": {
+    "mediane": 2.089,
+    "stations": 145
+   },
+   "gplc": {
+    "mediane": 1.028,
+    "stations": 20
+   },
+   "sp95": {
+    "mediane": 2.001,
+    "stations": 67
+   },
+   "sp98": {
+    "mediane": 2.079,
+    "stations": 113
+   }
+  },
+  "2A": {
+   "gazole": {
+    "mediane": 2.23,
+    "stations": 59
+   },
+   "gplc": {
+    "mediane": 1.409,
+    "stations": 5
+   },
+   "sp95": {
+    "mediane": 1.99,
+    "stations": 59
+   }
+  },
+  "2B": {
+   "gazole": {
+    "mediane": 2.23,
+    "stations": 66
+   },
+   "gplc": {
+    "mediane": 1.35,
+    "stations": 7
+   },
+   "sp95": {
+    "mediane": 2.09,
+    "stations": 66
+   },
+   "sp98": {
+    "mediane": 1.99,
+    "stations": 1
+   }
+  },
+  "30": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 105
+   },
+   "e85": {
+    "mediane": 0.879,
+    "stations": 66
+   },
+   "gazole": {
+    "mediane": 2.129,
+    "stations": 129
+   },
+   "gplc": {
+    "mediane": 1.08,
+    "stations": 16
+   },
+   "sp95": {
+    "mediane": 2.097,
+    "stations": 37
+   },
+   "sp98": {
+    "mediane": 2.11,
+    "stations": 98
+   }
+  },
+  "31": {
+   "e10": {
+    "mediane": 1.962,
+    "stations": 153
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 105
+   },
+   "gazole": {
+    "mediane": 2.099,
+    "stations": 173
+   },
+   "gplc": {
+    "mediane": 1.079,
+    "stations": 45
+   },
+   "sp95": {
+    "mediane": 2.029,
+    "stations": 37
+   },
+   "sp98": {
+    "mediane": 2.069,
+    "stations": 139
+   }
+  },
+  "32": {
+   "e10": {
+    "mediane": 1.999,
+    "stations": 34
+   },
+   "e85": {
+    "mediane": 0.87,
+    "stations": 13
+   },
+   "gazole": {
+    "mediane": 2.145,
+    "stations": 45
+   },
+   "gplc": {
+    "mediane": 1.11,
+    "stations": 7
+   },
+   "sp95": {
+    "mediane": 1.994,
+    "stations": 14
+   },
+   "sp98": {
+    "mediane": 2.139,
+    "stations": 32
+   }
+  },
+  "33": {
+   "e10": {
+    "mediane": 1.959,
+    "stations": 184
+   },
+   "e85": {
+    "mediane": 0.868,
+    "stations": 101
+   },
+   "gazole": {
+    "mediane": 2.099,
+    "stations": 218
+   },
+   "gplc": {
+    "mediane": 1.052,
+    "stations": 47
+   },
+   "sp95": {
+    "mediane": 1.999,
+    "stations": 62
+   },
+   "sp98": {
+    "mediane": 2.043,
+    "stations": 172
+   }
+  },
+  "34": {
+   "e10": {
+    "mediane": 1.989,
+    "stations": 144
+   },
+   "e85": {
+    "mediane": 0.879,
+    "stations": 78
+   },
+   "gazole": {
+    "mediane": 2.139,
+    "stations": 159
+   },
+   "gplc": {
+    "mediane": 1.11,
+    "stations": 29
+   },
+   "sp95": {
+    "mediane": 2.069,
+    "stations": 31
+   },
+   "sp98": {
+    "mediane": 2.099,
+    "stations": 128
+   }
+  },
+  "35": {
+   "e10": {
+    "mediane": 1.939,
+    "stations": 116
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 60
+   },
+   "gazole": {
+    "mediane": 2.089,
+    "stations": 139
+   },
+   "gplc": {
+    "mediane": 0.999,
+    "stations": 32
+   },
+   "sp95": {
+    "mediane": 1.999,
+    "stations": 42
+   },
+   "sp98": {
+    "mediane": 2.039,
+    "stations": 114
+   }
+  },
+  "36": {
+   "e10": {
+    "mediane": 1.983,
+    "stations": 35
+   },
+   "e85": {
+    "mediane": 0.919,
+    "stations": 16
+   },
+   "gazole": {
+    "mediane": 2.119,
+    "stations": 47
+   },
+   "gplc": {
+    "mediane": 1.062,
+    "stations": 6
+   },
+   "sp95": {
+    "mediane": 2.029,
+    "stations": 19
+   },
+   "sp98": {
+    "mediane": 2.089,
+    "stations": 33
+   }
+  },
+  "37": {
+   "e10": {
+    "mediane": 1.973,
+    "stations": 62
+   },
+   "e85": {
+    "mediane": 0.868,
+    "stations": 31
+   },
+   "gazole": {
+    "mediane": 2.099,
+    "stations": 86
+   },
+   "gplc": {
+    "mediane": 1.054,
+    "stations": 16
+   },
+   "sp95": {
+    "mediane": 2.018,
+    "stations": 28
+   },
+   "sp98": {
+    "mediane": 2.055,
+    "stations": 69
+   }
+  },
+  "38": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 157
+   },
+   "e85": {
+    "mediane": 0.894,
+    "stations": 74
+   },
+   "gazole": {
+    "mediane": 2.154,
+    "stations": 182
+   },
+   "gplc": {
+    "mediane": 1.01,
+    "stations": 27
+   },
+   "sp95": {
+    "mediane": 2.036,
+    "stations": 43
+   },
+   "sp98": {
+    "mediane": 2.099,
+    "stations": 151
+   }
+  },
+  "39": {
+   "e10": {
+    "mediane": 1.989,
+    "stations": 48
+   },
+   "e85": {
+    "mediane": 0.896,
+    "stations": 25
+   },
+   "gazole": {
+    "mediane": 2.179,
+    "stations": 73
+   },
+   "gplc": {
+    "mediane": 1.097,
+    "stations": 13
+   },
+   "sp95": {
+    "mediane": 2.249,
+    "stations": 27
+   },
+   "sp98": {
+    "mediane": 2.169,
+    "stations": 51
+   }
+  },
+  "40": {
+   "e10": {
+    "mediane": 1.989,
+    "stations": 79
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 43
+   },
+   "gazole": {
+    "mediane": 2.139,
+    "stations": 101
+   },
+   "gplc": {
+    "mediane": 1.064,
+    "stations": 17
+   },
+   "sp95": {
+    "mediane": 2.059,
+    "stations": 40
+   },
+   "sp98": {
+    "mediane": 2.129,
+    "stations": 70
+   }
+  },
+  "41": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 49
+   },
+   "e85": {
+    "mediane": 0.879,
+    "stations": 27
+   },
+   "gazole": {
+    "mediane": 2.159,
+    "stations": 61
+   },
+   "gplc": {
+    "mediane": 1.049,
+    "stations": 14
+   },
+   "sp95": {
+    "mediane": 2.044,
+    "stations": 17
+   },
+   "sp98": {
+    "mediane": 2.139,
+    "stations": 48
+   }
+  },
+  "42": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 96
+   },
+   "e85": {
+    "mediane": 0.899,
+    "stations": 54
+   },
+   "gazole": {
+    "mediane": 2.15,
+    "stations": 125
+   },
+   "gplc": {
+    "mediane": 1.009,
+    "stations": 17
+   },
+   "sp95": {
+    "mediane": 2.045,
+    "stations": 40
+   },
+   "sp98": {
+    "mediane": 2.099,
+    "stations": 88
+   }
+  },
+  "43": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 33
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 18
+   },
+   "gazole": {
+    "mediane": 2.167,
+    "stations": 52
+   },
+   "gplc": {
+    "mediane": 1.117,
+    "stations": 5
+   },
+   "sp95": {
+    "mediane": 2.05,
+    "stations": 20
+   },
+   "sp98": {
+    "mediane": 2.107,
+    "stations": 34
+   }
+  },
+  "44": {
+   "e10": {
+    "mediane": 1.939,
+    "stations": 126
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 71
+   },
+   "gazole": {
+    "mediane": 2.06,
+    "stations": 163
+   },
+   "gplc": {
+    "mediane": 0.996,
+    "stations": 40
+   },
+   "sp95": {
+    "mediane": 1.999,
+    "stations": 45
+   },
+   "sp98": {
+    "mediane": 2.039,
+    "stations": 134
+   }
+  },
+  "45": {
+   "e10": {
+    "mediane": 1.979,
+    "stations": 88
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 46
+   },
+   "gazole": {
+    "mediane": 2.119,
+    "stations": 106
+   },
+   "gplc": {
+    "mediane": 1.009,
+    "stations": 21
+   },
+   "sp95": {
+    "mediane": 2.049,
+    "stations": 20
+   },
+   "sp98": {
+    "mediane": 2.087,
+    "stations": 89
+   }
+  },
+  "46": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 49
+   },
+   "e85": {
+    "mediane": 0.876,
+    "stations": 24
+   },
+   "gazole": {
+    "mediane": 2.179,
+    "stations": 58
+   },
+   "gplc": {
+    "mediane": 1.123,
+    "stations": 7
+   },
+   "sp95": {
+    "mediane": 2.074,
+    "stations": 8
+   },
+   "sp98": {
+    "mediane": 2.132,
+    "stations": 42
+   }
+  },
+  "47": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 59
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 36
+   },
+   "gazole": {
+    "mediane": 2.119,
+    "stations": 78
+   },
+   "gplc": {
+    "mediane": 1.136,
+    "stations": 10
+   },
+   "sp95": {
+    "mediane": 2.029,
+    "stations": 35
+   },
+   "sp98": {
+    "mediane": 2.089,
+    "stations": 55
+   }
+  },
+  "48": {
+   "e10": {
+    "mediane": 2.049,
+    "stations": 24
+   },
+   "e85": {
+    "mediane": 0.911,
+    "stations": 13
+   },
+   "gazole": {
+    "mediane": 2.222,
+    "stations": 36
+   },
+   "gplc": {
+    "mediane": 1.15,
+    "stations": 1
+   },
+   "sp95": {
+    "mediane": 2.099,
+    "stations": 13
+   },
+   "sp98": {
+    "mediane": 2.187,
+    "stations": 20
+   }
+  },
+  "49": {
+   "e10": {
+    "mediane": 1.959,
+    "stations": 84
+   },
+   "e85": {
+    "mediane": 0.858,
+    "stations": 42
+   },
+   "gazole": {
+    "mediane": 2.099,
+    "stations": 108
+   },
+   "gplc": {
+    "mediane": 1.079,
+    "stations": 18
+   },
+   "sp95": {
+    "mediane": 2.027,
+    "stations": 32
+   },
+   "sp98": {
+    "mediane": 2.072,
+    "stations": 84
+   }
+  },
+  "50": {
+   "e10": {
+    "mediane": 1.985,
+    "stations": 87
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 40
+   },
+   "gazole": {
+    "mediane": 2.129,
+    "stations": 118
+   },
+   "gplc": {
+    "mediane": 1.02,
+    "stations": 13
+   },
+   "sp95": {
+    "mediane": 2.03,
+    "stations": 41
+   },
+   "sp98": {
+    "mediane": 2.067,
+    "stations": 88
+   }
+  },
+  "51": {
+   "e10": {
+    "mediane": 1.989,
+    "stations": 73
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 44
+   },
+   "gazole": {
+    "mediane": 2.132,
+    "stations": 79
+   },
+   "gplc": {
+    "mediane": 0.999,
+    "stations": 24
+   },
+   "sp95": {
+    "mediane": 2.099,
+    "stations": 16
+   },
+   "sp98": {
+    "mediane": 2.111,
+    "stations": 78
+   }
+  },
+  "52": {
+   "e10": {
+    "mediane": 2.005,
+    "stations": 35
+   },
+   "e85": {
+    "mediane": 0.889,
+    "stations": 19
+   },
+   "gazole": {
+    "mediane": 2.205,
+    "stations": 48
+   },
+   "gplc": {
+    "mediane": 1.149,
+    "stations": 7
+   },
+   "sp95": {
+    "mediane": 2.2,
+    "stations": 14
+   },
+   "sp98": {
+    "mediane": 2.158,
+    "stations": 33
+   }
+  },
+  "53": {
+   "e10": {
+    "mediane": 1.989,
+    "stations": 33
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 15
+   },
+   "gazole": {
+    "mediane": 2.109,
+    "stations": 53
+   },
+   "gplc": {
+    "mediane": 1.034,
+    "stations": 14
+   },
+   "sp95": {
+    "mediane": 2.031,
+    "stations": 27
+   },
+   "sp98": {
+    "mediane": 2.077,
+    "stations": 39
+   }
+  },
+  "54": {
+   "e10": {
+    "mediane": 1.994,
+    "stations": 59
+   },
+   "e85": {
+    "mediane": 0.899,
+    "stations": 36
+   },
+   "gazole": {
+    "mediane": 2.17,
+    "stations": 91
+   },
+   "gplc": {
+    "mediane": 1.069,
+    "stations": 17
+   },
+   "sp95": {
+    "mediane": 2.095,
+    "stations": 24
+   },
+   "sp98": {
+    "mediane": 2.147,
+    "stations": 63
+   }
+  },
+  "55": {
+   "e10": {
+    "mediane": 1.984,
+    "stations": 27
+   },
+   "e85": {
+    "mediane": 0.877,
+    "stations": 12
+   },
+   "gazole": {
+    "mediane": 2.135,
+    "stations": 34
+   },
+   "gplc": {
+    "mediane": 1.077,
+    "stations": 6
+   },
+   "sp95": {
+    "mediane": 2.046,
+    "stations": 10
+   },
+   "sp98": {
+    "mediane": 2.091,
+    "stations": 26
+   }
+  },
+  "56": {
+   "e10": {
+    "mediane": 1.956,
+    "stations": 113
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 53
+   },
+   "gazole": {
+    "mediane": 2.099,
+    "stations": 140
+   },
+   "gplc": {
+    "mediane": 1.058,
+    "stations": 17
+   },
+   "sp95": {
+    "mediane": 2.004,
+    "stations": 45
+   },
+   "sp98": {
+    "mediane": 2.049,
+    "stations": 106
+   }
+  },
+  "57": {
+   "e10": {
+    "mediane": 1.999,
+    "stations": 98
+   },
+   "e85": {
+    "mediane": 0.899,
+    "stations": 40
+   },
+   "gazole": {
+    "mediane": 2.195,
+    "stations": 121
+   },
+   "gplc": {
+    "mediane": 0.999,
+    "stations": 19
+   },
+   "sp95": {
+    "mediane": 2.049,
+    "stations": 29
+   },
+   "sp98": {
+    "mediane": 2.149,
+    "stations": 93
+   }
+  },
+  "58": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 38
+   },
+   "e85": {
+    "mediane": 0.872,
+    "stations": 20
+   },
+   "gazole": {
+    "mediane": 2.199,
+    "stations": 58
+   },
+   "gplc": {
+    "mediane": 1.049,
+    "stations": 7
+   },
+   "sp95": {
+    "mediane": 2.179,
+    "stations": 26
+   },
+   "sp98": {
+    "mediane": 2.157,
+    "stations": 46
+   }
+  },
+  "59": {
+   "e10": {
+    "mediane": 1.966,
+    "stations": 205
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 103
+   },
+   "gazole": {
+    "mediane": 2.099,
+    "stations": 244
+   },
+   "gplc": {
+    "mediane": 1.023,
+    "stations": 40
+   },
+   "sp95": {
+    "mediane": 2.019,
+    "stations": 35
+   },
+   "sp98": {
+    "mediane": 2.064,
+    "stations": 189
+   }
+  },
+  "60": {
+   "e10": {
+    "mediane": 1.988,
+    "stations": 91
+   },
+   "e85": {
+    "mediane": 0.87,
+    "stations": 51
+   },
+   "gazole": {
+    "mediane": 2.119,
+    "stations": 110
+   },
+   "gplc": {
+    "mediane": 1.069,
+    "stations": 18
+   },
+   "sp95": {
+    "mediane": 2.021,
+    "stations": 32
+   },
+   "sp98": {
+    "mediane": 2.076,
+    "stations": 87
+   }
+  },
+  "61": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 39
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 18
+   },
+   "gazole": {
+    "mediane": 2.159,
+    "stations": 57
+   },
+   "gplc": {
+    "mediane": 1.09,
+    "stations": 9
+   },
+   "sp95": {
+    "mediane": 2.07,
+    "stations": 22
+   },
+   "sp98": {
+    "mediane": 2.099,
+    "stations": 41
+   }
+  },
+  "62": {
+   "e10": {
+    "mediane": 1.969,
+    "stations": 182
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 86
+   },
+   "gazole": {
+    "mediane": 2.109,
+    "stations": 222
+   },
+   "gplc": {
+    "mediane": 1.013,
+    "stations": 31
+   },
+   "sp95": {
+    "mediane": 2.026,
+    "stations": 46
+   },
+   "sp98": {
+    "mediane": 2.06,
+    "stations": 177
+   }
+  },
+  "63": {
+   "e10": {
+    "mediane": 1.989,
+    "stations": 92
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 39
+   },
+   "gazole": {
+    "mediane": 2.15,
+    "stations": 113
+   },
+   "gplc": {
+    "mediane": 1.04,
+    "stations": 11
+   },
+   "sp95": {
+    "mediane": 2.098,
+    "stations": 31
+   },
+   "sp98": {
+    "mediane": 2.1,
+    "stations": 87
+   }
+  },
+  "64": {
+   "e10": {
+    "mediane": 1.983,
+    "stations": 88
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 46
+   },
+   "gazole": {
+    "mediane": 2.149,
+    "stations": 112
+   },
+   "gplc": {
+    "mediane": 1.119,
+    "stations": 19
+   },
+   "sp95": {
+    "mediane": 2.019,
+    "stations": 43
+   },
+   "sp98": {
+    "mediane": 2.099,
+    "stations": 91
+   }
+  },
+  "65": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 35
+   },
+   "e85": {
+    "mediane": 0.933,
+    "stations": 21
+   },
+   "gazole": {
+    "mediane": 2.17,
+    "stations": 48
+   },
+   "gplc": {
+    "mediane": 1.16,
+    "stations": 5
+   },
+   "sp95": {
+    "mediane": 2.04,
+    "stations": 14
+   },
+   "sp98": {
+    "mediane": 2.095,
+    "stations": 35
+   }
+  },
+  "66": {
+   "e10": {
+    "mediane": 1.989,
+    "stations": 61
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 33
+   },
+   "gazole": {
+    "mediane": 2.114,
+    "stations": 70
+   },
+   "gplc": {
+    "mediane": 1.099,
+    "stations": 8
+   },
+   "sp95": {
+    "mediane": 2.034,
+    "stations": 18
+   },
+   "sp98": {
+    "mediane": 2.099,
+    "stations": 50
+   }
+  },
+  "67": {
+   "e10": {
+    "mediane": 2.079,
+    "stations": 90
+   },
+   "e85": {
+    "mediane": 0.906,
+    "stations": 41
+   },
+   "gazole": {
+    "mediane": 2.23,
+    "stations": 130
+   },
+   "gplc": {
+    "mediane": 0.999,
+    "stations": 21
+   },
+   "sp95": {
+    "mediane": 2.149,
+    "stations": 22
+   },
+   "sp98": {
+    "mediane": 2.199,
+    "stations": 78
+   }
+  },
+  "68": {
+   "e10": {
+    "mediane": 2.089,
+    "stations": 73
+   },
+   "e85": {
+    "mediane": 0.892,
+    "stations": 42
+   },
+   "gazole": {
+    "mediane": 2.199,
+    "stations": 82
+   },
+   "gplc": {
+    "mediane": 1.069,
+    "stations": 13
+   },
+   "sp95": {
+    "mediane": 2.135,
+    "stations": 22
+   },
+   "sp98": {
+    "mediane": 2.199,
+    "stations": 66
+   }
+  },
+  "69": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 168
+   },
+   "e85": {
+    "mediane": 0.923,
+    "stations": 83
+   },
+   "gazole": {
+    "mediane": 2.159,
+    "stations": 193
+   },
+   "gplc": {
+    "mediane": 1.091,
+    "stations": 27
+   },
+   "sp95": {
+    "mediane": 2.072,
+    "stations": 38
+   },
+   "sp98": {
+    "mediane": 2.099,
+    "stations": 148
+   }
+  },
+  "70": {
+   "e10": {
+    "mediane": 1.999,
+    "stations": 32
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 13
+   },
+   "gazole": {
+    "mediane": 2.139,
+    "stations": 49
+   },
+   "gplc": {
+    "mediane": 1.06,
+    "stations": 4
+   },
+   "sp95": {
+    "mediane": 2.15,
+    "stations": 14
+   },
+   "sp98": {
+    "mediane": 2.143,
+    "stations": 30
+   }
+  },
+  "71": {
+   "e10": {
+    "mediane": 1.979,
+    "stations": 95
+   },
+   "e85": {
+    "mediane": 0.899,
+    "stations": 50
+   },
+   "gazole": {
+    "mediane": 2.17,
+    "stations": 140
+   },
+   "gplc": {
+    "mediane": 1.051,
+    "stations": 14
+   },
+   "sp95": {
+    "mediane": 2.064,
+    "stations": 62
+   },
+   "sp98": {
+    "mediane": 2.119,
+    "stations": 113
+   }
+  },
+  "72": {
+   "e10": {
+    "mediane": 1.979,
+    "stations": 75
+   },
+   "e85": {
+    "mediane": 0.879,
+    "stations": 27
+   },
+   "gazole": {
+    "mediane": 2.119,
+    "stations": 92
+   },
+   "gplc": {
+    "mediane": 1.043,
+    "stations": 24
+   },
+   "sp95": {
+    "mediane": 2.039,
+    "stations": 31
+   },
+   "sp98": {
+    "mediane": 2.088,
+    "stations": 70
+   }
+  },
+  "73": {
+   "e10": {
+    "mediane": 1.999,
+    "stations": 65
+   },
+   "e85": {
+    "mediane": 0.899,
+    "stations": 29
+   },
+   "gazole": {
+    "mediane": 2.187,
+    "stations": 90
+   },
+   "gplc": {
+    "mediane": 1.099,
+    "stations": 16
+   },
+   "sp95": {
+    "mediane": 2.094,
+    "stations": 34
+   },
+   "sp98": {
+    "mediane": 2.129,
+    "stations": 68
+   }
+  },
+  "74": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 90
+   },
+   "e85": {
+    "mediane": 0.894,
+    "stations": 46
+   },
+   "gazole": {
+    "mediane": 2.199,
+    "stations": 122
+   },
+   "gplc": {
+    "mediane": 1.099,
+    "stations": 21
+   },
+   "sp95": {
+    "mediane": 2.059,
+    "stations": 41
+   },
+   "sp98": {
+    "mediane": 2.109,
+    "stations": 96
+   }
+  },
+  "75": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 37
+   },
+   "e85": {
+    "mediane": 0.974,
+    "stations": 12
+   },
+   "gazole": {
+    "mediane": 2.211,
+    "stations": 40
+   },
+   "gplc": {
+    "mediane": 1.094,
+    "stations": 3
+   },
+   "sp95": {
+    "mediane": 2.324,
+    "stations": 4
+   },
+   "sp98": {
+    "mediane": 2.108,
+    "stations": 35
+   }
+  },
+  "76": {
+   "e10": {
+    "mediane": 1.989,
+    "stations": 129
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 63
+   },
+   "gazole": {
+    "mediane": 2.143,
+    "stations": 162
+   },
+   "gplc": {
+    "mediane": 0.999,
+    "stations": 27
+   },
+   "sp95": {
+    "mediane": 2.038,
+    "stations": 48
+   },
+   "sp98": {
+    "mediane": 2.088,
+    "stations": 126
+   }
+  },
+  "77": {
+   "e10": {
+    "mediane": 1.979,
+    "stations": 150
+   },
+   "e85": {
+    "mediane": 0.878,
+    "stations": 79
+   },
+   "gazole": {
+    "mediane": 2.119,
+    "stations": 169
+   },
+   "gplc": {
+    "mediane": 1.083,
+    "stations": 31
+   },
+   "sp95": {
+    "mediane": 2.023,
+    "stations": 33
+   },
+   "sp98": {
+    "mediane": 2.058,
+    "stations": 146
+   }
+  },
+  "78": {
+   "e10": {
+    "mediane": 1.989,
+    "stations": 123
+   },
+   "e85": {
+    "mediane": 0.915,
+    "stations": 57
+   },
+   "gazole": {
+    "mediane": 2.119,
+    "stations": 136
+   },
+   "gplc": {
+    "mediane": 1.069,
+    "stations": 23
+   },
+   "sp95": {
+    "mediane": 2.027,
+    "stations": 20
+   },
+   "sp98": {
+    "mediane": 2.04,
+    "stations": 108
+   }
+  },
+  "79": {
+   "e10": {
+    "mediane": 1.949,
+    "stations": 51
+   },
+   "e85": {
+    "mediane": 0.879,
+    "stations": 29
+   },
+   "gazole": {
+    "mediane": 2.102,
+    "stations": 70
+   },
+   "gplc": {
+    "mediane": 1.09,
+    "stations": 12
+   },
+   "sp95": {
+    "mediane": 1.999,
+    "stations": 26
+   },
+   "sp98": {
+    "mediane": 2.049,
+    "stations": 51
+   }
+  },
+  "80": {
+   "e10": {
+    "mediane": 1.988,
+    "stations": 87
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 44
+   },
+   "gazole": {
+    "mediane": 2.139,
+    "stations": 109
+   },
+   "gplc": {
+    "mediane": 1.058,
+    "stations": 16
+   },
+   "sp95": {
+    "mediane": 2.059,
+    "stations": 17
+   },
+   "sp98": {
+    "mediane": 2.099,
+    "stations": 87
+   }
+  },
+  "81": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 49
+   },
+   "e85": {
+    "mediane": 0.875,
+    "stations": 36
+   },
+   "gazole": {
+    "mediane": 2.099,
+    "stations": 66
+   },
+   "gplc": {
+    "mediane": 1.047,
+    "stations": 14
+   },
+   "sp95": {
+    "mediane": 2.018,
+    "stations": 24
+   },
+   "sp98": {
+    "mediane": 2.069,
+    "stations": 49
+   }
+  },
+  "82": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 45
+   },
+   "e85": {
+    "mediane": 0.89,
+    "stations": 27
+   },
+   "gazole": {
+    "mediane": 2.149,
+    "stations": 57
+   },
+   "gplc": {
+    "mediane": 1.062,
+    "stations": 10
+   },
+   "sp95": {
+    "mediane": 2.039,
+    "stations": 15
+   },
+   "sp98": {
+    "mediane": 2.119,
+    "stations": 43
+   }
+  },
+  "83": {
+   "e10": {
+    "mediane": 1.97,
+    "stations": 154
+   },
+   "e85": {
+    "mediane": 0.909,
+    "stations": 83
+   },
+   "gazole": {
+    "mediane": 2.139,
+    "stations": 170
+   },
+   "gplc": {
+    "mediane": 1.099,
+    "stations": 25
+   },
+   "sp95": {
+    "mediane": 2.037,
+    "stations": 42
+   },
+   "sp98": {
+    "mediane": 2.079,
+    "stations": 133
+   }
+  },
+  "84": {
+   "e10": {
+    "mediane": 1.984,
+    "stations": 89
+   },
+   "e85": {
+    "mediane": 0.874,
+    "stations": 63
+   },
+   "gazole": {
+    "mediane": 2.159,
+    "stations": 104
+   },
+   "gplc": {
+    "mediane": 1.074,
+    "stations": 16
+   },
+   "sp95": {
+    "mediane": 2.125,
+    "stations": 22
+   },
+   "sp98": {
+    "mediane": 2.089,
+    "stations": 74
+   }
+  },
+  "85": {
+   "e10": {
+    "mediane": 1.939,
+    "stations": 85
+   },
+   "e85": {
+    "mediane": 0.849,
+    "stations": 49
+   },
+   "gazole": {
+    "mediane": 2.099,
+    "stations": 118
+   },
+   "gplc": {
+    "mediane": 1.06,
+    "stations": 23
+   },
+   "sp95": {
+    "mediane": 2.009,
+    "stations": 33
+   },
+   "sp98": {
+    "mediane": 2.059,
+    "stations": 92
+   }
+  },
+  "86": {
+   "e10": {
+    "mediane": 1.969,
+    "stations": 58
+   },
+   "e85": {
+    "mediane": 0.858,
+    "stations": 26
+   },
+   "gazole": {
+    "mediane": 2.121,
+    "stations": 72
+   },
+   "gplc": {
+    "mediane": 1.018,
+    "stations": 17
+   },
+   "sp95": {
+    "mediane": 1.997,
+    "stations": 21
+   },
+   "sp98": {
+    "mediane": 2.074,
+    "stations": 54
+   }
+  },
+  "87": {
+   "e10": {
+    "mediane": 1.989,
+    "stations": 67
+   },
+   "e85": {
+    "mediane": 0.869,
+    "stations": 31
+   },
+   "gazole": {
+    "mediane": 2.149,
+    "stations": 83
+   },
+   "gplc": {
+    "mediane": 1.147,
+    "stations": 10
+   },
+   "sp95": {
+    "mediane": 2.029,
+    "stations": 29
+   },
+   "sp98": {
+    "mediane": 2.114,
+    "stations": 64
+   }
+  },
+  "88": {
+   "e10": {
+    "mediane": 2.028,
+    "stations": 55
+   },
+   "e85": {
+    "mediane": 0.873,
+    "stations": 22
+   },
+   "gazole": {
+    "mediane": 2.19,
+    "stations": 75
+   },
+   "gplc": {
+    "mediane": 1.048,
+    "stations": 12
+   },
+   "sp95": {
+    "mediane": 2.099,
+    "stations": 20
+   },
+   "sp98": {
+    "mediane": 2.168,
+    "stations": 52
+   }
+  },
+  "89": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 58
+   },
+   "e85": {
+    "mediane": 0.894,
+    "stations": 34
+   },
+   "gazole": {
+    "mediane": 2.244,
+    "stations": 82
+   },
+   "gplc": {
+    "mediane": 1.136,
+    "stations": 16
+   },
+   "sp95": {
+    "mediane": 2.249,
+    "stations": 32
+   },
+   "sp98": {
+    "mediane": 2.209,
+    "stations": 62
+   }
+  },
+  "90": {
+   "e10": {
+    "mediane": 2.009,
+    "stations": 9
+   },
+   "e85": {
+    "mediane": 0.889,
+    "stations": 6
+   },
+   "gazole": {
+    "mediane": 2.149,
+    "stations": 11
+   },
+   "gplc": {
+    "mediane": 1.073,
+    "stations": 4
+   },
+   "sp95": {
+    "mediane": 2.119,
+    "stations": 7
+   },
+   "sp98": {
+    "mediane": 2.256,
+    "stations": 8
+   }
+  },
+  "91": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 109
+   },
+   "e85": {
+    "mediane": 0.907,
+    "stations": 52
+   },
+   "gazole": {
+    "mediane": 2.119,
+    "stations": 124
+   },
+   "gplc": {
+    "mediane": 1.155,
+    "stations": 27
+   },
+   "sp95": {
+    "mediane": 2.007,
+    "stations": 27
+   },
+   "sp98": {
+    "mediane": 2.095,
+    "stations": 98
+   }
+  },
+  "92": {
+   "e10": {
+    "mediane": 1.999,
+    "stations": 51
+   },
+   "e85": {
+    "mediane": 0.959,
+    "stations": 21
+   },
+   "gazole": {
+    "mediane": 2.176,
+    "stations": 65
+   },
+   "gplc": {
+    "mediane": 1.099,
+    "stations": 5
+   },
+   "sp95": {
+    "mediane": 1.999,
+    "stations": 3
+   },
+   "sp98": {
+    "mediane": 2.189,
+    "stations": 47
+   }
+  },
+  "93": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 73
+   },
+   "e85": {
+    "mediane": 0.953,
+    "stations": 31
+   },
+   "gazole": {
+    "mediane": 2.17,
+    "stations": 78
+   },
+   "gplc": {
+    "mediane": 1.099,
+    "stations": 16
+   },
+   "sp95": {
+    "mediane": 2.023,
+    "stations": 15
+   },
+   "sp98": {
+    "mediane": 2.055,
+    "stations": 63
+   }
+  },
+  "94": {
+   "e10": {
+    "mediane": 2.0,
+    "stations": 66
+   },
+   "e85": {
+    "mediane": 0.964,
+    "stations": 23
+   },
+   "gazole": {
+    "mediane": 2.203,
+    "stations": 72
+   },
+   "gplc": {
+    "mediane": 1.152,
+    "stations": 12
+   },
+   "sp95": {
+    "mediane": 1.997,
+    "stations": 12
+   },
+   "sp98": {
+    "mediane": 2.146,
+    "stations": 57
+   }
+  },
+  "95": {
+   "e10": {
+    "mediane": 1.99,
+    "stations": 92
+   },
+   "e85": {
+    "mediane": 0.907,
+    "stations": 47
+   },
+   "gazole": {
+    "mediane": 2.162,
+    "stations": 102
+   },
+   "gplc": {
+    "mediane": 1.076,
+    "stations": 19
+   },
+   "sp95": {
+    "mediane": 2.019,
+    "stations": 10
+   },
+   "sp98": {
+    "mediane": 2.059,
+    "stations": 84
+   }
+  }
+ },
+ "methode": "médiane des prix affichés par les stations du département, tous horaires confondus",
+ "ne_dit_pas": "Ni le prix payé par un foyer (il dépend de la station et des promotions), ni le coût d'un trajet, ni la consommation d'un véhicule.",
+ "source": {
+  "fiche": "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree",
+  "licence": "Licence Ouverte 2.0 (lov2)",
+  "producteur": "DGCCRF / Ministères économiques et financiers",
+  "sha256": "49342fc2e9847b524e42589b6dc2918d5a4d8acba91bd29241b1afb07544b1fe",
+  "stations": 9832,
+  "url": "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/csv"
+ },
+ "unite": "€/L"
+}
