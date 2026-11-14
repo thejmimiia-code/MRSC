@@ -8859,3 +8859,51 @@ sources = []
 mesures = ["outils/test_collecte_carburants.py", "outils/verifier-workflows.py"]
 constat = "Deux corrections nées d'un échec réel : l'export CSV d'Opendatasoft arrive avec un point-virgule et une virgule décimale, ce que la lecture prenait pour une seule colonne — onze cas au banc désormais, dont le fichier français. Et l'échec lui-même était illisible : chaque collecte devient une étape nommée, et la fin de son journal sort en annotations."
 limite = "Ni l'une ni l'autre de ces corrections n'a été confrontée au flux réel : l'atelier n'atteint pas data.economie.gouv.fr, et l'export de 9 800 stations n'a pas été téléchargé ici. Le banc imite les deux écritures possibles, il ne prouve pas que la troisième — celle qui a échoué — soit l'une des deux."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "231f45f557c80f5e81628e54ff39e29e04e9a2ba588bd1e393255bff9774182a"
+empreinte_apres = "dd2fabc9deae5c3bb2c6f37170c0df5fefa1c0572c078363451a9e101b806db6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_carburants.py", "outils/verifier-inventaire-controles.py"]
+constat = "L'annotation de la deuxième exécution a nommé la cause : « flux illisible : 'utf-8' codec can't decode byte 0x8b », la signature du gzip. Le collecteur demande désormais un corps non compressé, et décompresse s'il en reçoit un quand même — un refus pour cause de compression accuserait une source qui répond. Treize cas au banc, dont un gzip lisible et un gzip tronqué."
+limite = "Le gzip a été reconnu par sa signature, pas par un en-tête HTTP lu : le cas réel du 14 novembre n'a pas été rejoué ici, l'atelier n'atteignant pas data.economie.gouv.fr. Si la source renvoie encore autre chose — un zip, une redirection vers un fichier daté — la prochaine annotation le dira, et pas avant."
+
+[[edition]]
+chemin = "outils/collecter-carburants.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "2267b124a99165449aeaaaf1d81c4185e97b8e7bec9cccc8f98dbf1470b9c098"
+empreinte_apres = "38afb1f89e78e53f9224c74a00b3eb0304945c1954d1af96327c77877b22be74"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_carburants.py", "outils/verifier-inventaire-controles.py"]
+constat = "L'annotation de la deuxième exécution a nommé la cause : « flux illisible : 'utf-8' codec can't decode byte 0x8b », la signature du gzip. Le collecteur demande désormais un corps non compressé, et décompresse s'il en reçoit un quand même — un refus pour cause de compression accuserait une source qui répond. Treize cas au banc, dont un gzip lisible et un gzip tronqué."
+limite = "Le gzip a été reconnu par sa signature, pas par un en-tête HTTP lu : le cas réel du 14 novembre n'a pas été rejoué ici, l'atelier n'atteignant pas data.economie.gouv.fr. Si la source renvoie encore autre chose — un zip, une redirection vers un fichier daté — la prochaine annotation le dira, et pas avant."
+
+[[edition]]
+chemin = "outils/test_collecte_carburants.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "a7a1896ef6781e937b4552c5ab39512df5831f9c8abea579a4d2a1694499e754"
+empreinte_apres = "1fc17271307a85ad2b12204e7eedf4fd5304ac2de24f80acc00e95ce083bb248"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/test_collecte_carburants.py", "outils/verifier-inventaire-controles.py"]
+constat = "L'annotation de la deuxième exécution a nommé la cause : « flux illisible : 'utf-8' codec can't decode byte 0x8b », la signature du gzip. Le collecteur demande désormais un corps non compressé, et décompresse s'il en reçoit un quand même — un refus pour cause de compression accuserait une source qui répond. Treize cas au banc, dont un gzip lisible et un gzip tronqué."
+limite = "Le gzip a été reconnu par sa signature, pas par un en-tête HTTP lu : le cas réel du 14 novembre n'a pas été rejoué ici, l'atelier n'atteignant pas data.economie.gouv.fr. Si la source renvoie encore autre chose — un zip, une redirection vers un fichier daté — la prochaine annotation le dira, et pas avant."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "26d2cf9442f52e78036a8ce2cec135de4a469d2a7f0f0d99fa9c897ca5ff7c5e"
+empreinte_apres = "fa89ff1b31adb38339f151381be54129d1827fa17448fc5162e2b6f3c17935bb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Régénération mécanique de l'index de la mémoire d'ÉVA après la mise à jour de l'inventaire des contrôles et du collecteur de carburants : l'index suit ses sources, le graphe et le plan sont inchangés."
+limite = "Cette signature atteste la cohérence du rendu, pas la justesse des textes recopiés ; et le graphe n'a été ni ouvert ni regardé."

@@ -1951,7 +1951,7 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "26d2cf9442f52e78036a8ce2cec135de4a469d2a7f0f0d99fa9c897ca5ff7c5e"
+empreinte = "fa89ff1b31adb38339f151381be54129d1827fa17448fc5162e2b6f3c17935bb"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -2034,7 +2034,7 @@ urls = ["https://www.insee.fr/fr/statistiques/8739245", "https://doi.org/10.1177
 
 [[unite]]
 chemin = "docs/rd/inventaire-controles.md"
-empreinte = "231f45f557c80f5e81628e54ff39e29e04e9a2ba588bd1e393255bff9774182a"
+empreinte = "dd2fabc9deae5c3bb2c6f37170c0df5fefa1c0572c078363451a9e101b806db6"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -2787,7 +2787,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/collecter-carburants.py"
-empreinte = "2267b124a99165449aeaaaf1d81c4185e97b8e7bec9cccc8f98dbf1470b9c098"
+empreinte = "38afb1f89e78e53f9224c74a00b3eb0304945c1954d1af96327c77877b22be74"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -3135,7 +3135,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test_collecte_carburants.py"
-empreinte = "a7a1896ef6781e937b4552c5ab39512df5831f9c8abea579a4d2a1694499e754"
+empreinte = "1fc17271307a85ad2b12204e7eedf4fd5304ac2de24f80acc00e95ce083bb248"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14

@@ -18,6 +18,7 @@ Usage :
 from __future__ import annotations
 
 import csv
+import gzip
 import io
 import json
 import subprocess
@@ -148,6 +149,18 @@ class CollecteCarburants(unittest.TestCase):
             self.assertEqual(donnees["source"]["stations"], 3_100)
             mediane = donnees["departements"]["01"]["gazole"]["mediane"]
             self.assertTrue(1.5 < mediane < 2.5, mediane)
+
+    def test_flux_compresse(self) -> None:
+        """L'export arrive compressé quand rien n'est demandé : gzip compris."""
+        with tempfile.TemporaryDirectory(prefix="mrsc-carburants-") as tmp:
+            comprime = gzip.compress(flux(separateur=";", virgule=True))
+            resultat, sortie = self.collecter(comprime, Path(tmp))
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-800:])
+            donnees = json.loads(sortie.read_text(encoding="utf-8"))
+            self.assertEqual(donnees["source"]["stations"], 3_100)
+
+    def test_flux_compresse_illisible(self) -> None:
+        self.refuser(b"\x1f\x8b\x08\x00pas un gzip valide", "compressé illisible")
 
     def test_flux_tronque(self) -> None:
         self.refuser(flux(nombre=2_500), "au moins 3000 attendues")
