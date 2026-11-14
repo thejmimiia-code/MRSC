@@ -8,9 +8,9 @@ auteur = "agent"
 date = "2026-11-11"
 heure_utc = "16:48"
 demande = "continues et fais toute la R et D, l’innovation et la prospective, avec un plan complet sur l’ensemble du projet"
-total = 598
-zones = 11
-initiatives = 19
+total = 618
+zones = 12
+initiatives = 20
 actions = 39
 portes = 9
 horizons = 5
@@ -28,7 +28,7 @@ garde = "outils/verifier-site-statique.py"
 etat = "mesuré, non validé"
 prochaine_action = "Tenir les 121 pages servies et les 16 fichiers racine alignés"
 limite = "Un lien résolu ne dit pas que le rendu plaît ni que le contenu est à jour."
-nombre = 22
+nombre = 23
 
 [[zone]]
 id = ".agents"
@@ -58,7 +58,7 @@ garde = "outils/verifier-workflows.py"
 etat = "7 workflows conformes"
 prochaine_action = "Garder la sentinelle câblée sur chaque push et chaque PR"
 limite = "Un workflow vert ne prouve ni la qualité éditoriale ni un déploiement réussi."
-nombre = 9
+nombre = 10
 
 [[zone]]
 id = ".githooks"
@@ -98,7 +98,7 @@ garde = "outils/verifier-integration.py"
 etat = "ressources non orphelines"
 prochaine_action = "Maintenir les relevés de poids et les variantes d’images"
 limite = "Les six relevés binaires périmés restent à remesurer après publication."
-nombre = 33
+nombre = 35
 
 [[zone]]
 id = "docs"
@@ -108,7 +108,7 @@ garde = "outils/verifier-rd-continue.py"
 etat = "19 initiatives suivies"
 prochaine_action = "Régénérer toute sortie dérivée depuis son générateur"
 limite = "Un document de travail n’est ni une décision ni une validation."
-nombre = 177
+nombre = 188
 
 [[zone]]
 id = "outils"
@@ -118,7 +118,7 @@ garde = "outils/verifier-inventaire-controles.py"
 etat = "contrôles classés"
 prochaine_action = "Tout nouvel outil doit entrer dans l’inventaire avec son banc"
 limite = "Un banc prouve qu’une porte peut échouer, pas qu’elle voit toutes les fautes."
-nombre = 146
+nombre = 150
 
 [[zone]]
 id = "simulateur"
@@ -129,6 +129,16 @@ etat = "moteur amont non synchronisé"
 prochaine_action = "Comparer l’amont avant toute mise à jour du moteur"
 limite = "Le résultat d’une simulation n’est ni une prévision ni un fait observé."
 nombre = 31
+
+[[zone]]
+id = "couts-vie-chere"
+nombre = 1
+surface = "Fragment texte de la page des coûts, tenu hors HTML pour ne pas compter une page publique de plus"
+source_verite = "couts-vie-chere/contenu.txt"
+garde = "outils/construire-page-couts.py"
+etat = "mesuré, non validé"
+prochaine_action = "Ne jamais éditer la page générée à la main ; toute retouche passe par le fragment et la relecture signée"
+limite = "Le fragment ne garantit pas que la page dit vrai : seule la lecture des sources le fait, et elle n’est pas humaine."
 
 [[initiative]]
 id = "relire-les-44-prototypes"
@@ -337,6 +347,17 @@ chantier = "B"
 action_agent = "Tenir sept sources tentées et refusées, arbitrer arts-composer-formes"
 porte_humaine = "aucune"
 preuve = "docs/apprentissage/sources-refusees.toml"
+echeance = "sans échéance"
+
+[[initiative]]
+id = "cout-de-la-vie-et-carte"
+priorite = "P1"
+etat = "a-tester"
+phase = "prototype"
+chantier = "C"
+action_agent = "Tenir la page des coûts, ses refus de collecte et sa provenance ; lancer la collecte hors de l’atelier"
+porte_humaine = "relecture-statistique"
+preuve = "docs/rd/vie-chere-carte-2026-11-13.md"
 echeance = "sans échéance"
 
 [[action]]

@@ -8391,3 +8391,99 @@ sources = []
 mesures = ["outils/construire-apprentissages.py"]
 constat = "Relu le générateur des fiches : la page des coûts est déclarée dans la liste du sitemap, qui est produite par cet outil et non éditée à la main. Le contrôle de synchronisation des sorties repasse au vert."
 limite = "Le sitemap ne dit rien de la qualité d’une page ni de son indexation réelle : il déclare une adresse. Aucun moteur n’a été interrogé, et la page reste hors du menu principal."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "cbc6be51a1b990284da23a92d2ec6b32cc293615339dfe92d774b489bceb71f4"
+empreinte_apres = "87922cb6233da8c3991eba125a94a73ccba8a9495ed711aaa55584c33ec072ac"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/verifier-plan-complet.py"]
+constat = "Relu les documents dérivés après l’ajout de l’initiative cout-de-la-vie-et-carte : cartographie des 20 initiatives, plan du projet (618 fichiers, 12 zones, zone couts-vie-chere), plan d’ÉVA, brief prospectif, et la piste de grille du bloc des coûts écrite en minmax(0, 1fr) pour satisfaire la mesure des paliers."
+limite = "Ces compteurs sont recalculés par les outils du dépôt, pas par une mesure indépendante ; le plan du projet photographie un arbre de travail qui bougera au prochain lot. Aucune de ces pages n’est une validation, et aucune ne remplace une relecture humaine du plan."
+
+[[edition]]
+chemin = "docs/rd/decision-prospective.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "46dcb8dd8bfccc17fe4b0ab581decf0960e543eb74c52a52ed4a6ac6be6895f2"
+empreinte_apres = "46f149e5e97c85a0879026b3b12f4b8c0c9ac331614b68ba5ab80fe8422bda1f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/verifier-plan-complet.py"]
+constat = "Relu les documents dérivés après l’ajout de l’initiative cout-de-la-vie-et-carte : cartographie des 20 initiatives, plan du projet (618 fichiers, 12 zones, zone couts-vie-chere), plan d’ÉVA, brief prospectif, et la piste de grille du bloc des coûts écrite en minmax(0, 1fr) pour satisfaire la mesure des paliers."
+limite = "Ces compteurs sont recalculés par les outils du dépôt, pas par une mesure indépendante ; le plan du projet photographie un arbre de travail qui bougera au prochain lot. Aucune de ces pages n’est une validation, et aucune ne remplace une relecture humaine du plan."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "4d867ef2989a742bb405e0b296f6d256943f754974e8d37b94a182052cb4c2cb"
+empreinte_apres = "79e9d2b64ee9215fb8ded7c74f14671dd2b84db3cb883b0f59024f20a6f4a75d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/verifier-plan-complet.py"]
+constat = "Relu les documents dérivés après l’ajout de l’initiative cout-de-la-vie-et-carte : cartographie des 20 initiatives, plan du projet (618 fichiers, 12 zones, zone couts-vie-chere), plan d’ÉVA, brief prospectif, et la piste de grille du bloc des coûts écrite en minmax(0, 1fr) pour satisfaire la mesure des paliers."
+limite = "Ces compteurs sont recalculés par les outils du dépôt, pas par une mesure indépendante ; le plan du projet photographie un arbre de travail qui bougera au prochain lot. Aucune de ces pages n’est une validation, et aucune ne remplace une relecture humaine du plan."
+
+[[edition]]
+chemin = "docs/rd/plan-complet-rd-innovation-prospective.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "d170fb42fdec70a79803cacb9d9b7a7e81f0b090d7bf25492061ecb683dda888"
+empreinte_apres = "93d5b58a0e2f27126fe43b341f415139dd806db395a428527d983daea4710398"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/verifier-plan-complet.py"]
+constat = "Relu les documents dérivés après l’ajout de l’initiative cout-de-la-vie-et-carte : cartographie des 20 initiatives, plan du projet (618 fichiers, 12 zones, zone couts-vie-chere), plan d’ÉVA, brief prospectif, et la piste de grille du bloc des coûts écrite en minmax(0, 1fr) pour satisfaire la mesure des paliers."
+limite = "Ces compteurs sont recalculés par les outils du dépôt, pas par une mesure indépendante ; le plan du projet photographie un arbre de travail qui bougera au prochain lot. Aucune de ces pages n’est une validation, et aucune ne remplace une relecture humaine du plan."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "fb561f29bac9ab5535f28959733dd270c1499c12a19499f80be521517c424653"
+empreinte_apres = "384ceb4e7a6fa8f0b379035fc69c94ddfc34757e6c6578aed1389984a874d033"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/verifier-plan-complet.py"]
+constat = "Relu les documents dérivés après l’ajout de l’initiative cout-de-la-vie-et-carte : cartographie des 20 initiatives, plan du projet (618 fichiers, 12 zones, zone couts-vie-chere), plan d’ÉVA, brief prospectif, et la piste de grille du bloc des coûts écrite en minmax(0, 1fr) pour satisfaire la mesure des paliers."
+limite = "Ces compteurs sont recalculés par les outils du dépôt, pas par une mesure indépendante ; le plan du projet photographie un arbre de travail qui bougera au prochain lot. Aucune de ces pages n’est une validation, et aucune ne remplace une relecture humaine du plan."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "b120ca2643b72aa036e11bb16283225399ab6b61d2edf1d0be7ac0e563d48a4e"
+empreinte_apres = "ad1246ff44e2db35d139bbf6cd1e3a788703cd44264e18554008a89a5907598f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/verifier-plan-complet.py"]
+constat = "Relu les documents dérivés après l’ajout de l’initiative cout-de-la-vie-et-carte : cartographie des 20 initiatives, plan du projet (618 fichiers, 12 zones, zone couts-vie-chere), plan d’ÉVA, brief prospectif, et la piste de grille du bloc des coûts écrite en minmax(0, 1fr) pour satisfaire la mesure des paliers."
+limite = "Ces compteurs sont recalculés par les outils du dépôt, pas par une mesure indépendante ; le plan du projet photographie un arbre de travail qui bougera au prochain lot. Aucune de ces pages n’est une validation, et aucune ne remplace une relecture humaine du plan."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "a4d225715f71bf810d64fe3df7942db9923e87c8cb444e3fee9dc9bafd531080"
+empreinte_apres = "f93d663a187a05d28b3568bc451c7398db2c9d8ee1a17ad53c495fcbe47e1e35"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/verifier-plan-complet.py"]
+constat = "Relu les documents dérivés après l’ajout de l’initiative cout-de-la-vie-et-carte : cartographie des 20 initiatives, plan du projet (618 fichiers, 12 zones, zone couts-vie-chere), plan d’ÉVA, brief prospectif, et la piste de grille du bloc des coûts écrite en minmax(0, 1fr) pour satisfaire la mesure des paliers."
+limite = "Ces compteurs sont recalculés par les outils du dépôt, pas par une mesure indépendante ; le plan du projet photographie un arbre de travail qui bougera au prochain lot. Aucune de ces pages n’est une validation, et aucune ne remplace une relecture humaine du plan."
+
+[[edition]]
+chemin = "outils/verifier-plan-complet.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ef9c52d78872261eb6e4ede8c1dc957359e036b9ddc7c40419c7a60d92cdfc8f"
+empreinte_apres = "4166510440d748e9c50058ce04f8b8c8bcb543895f0cd27a97d8698ab717b814"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-affichages.py", "outils/verifier-plan-complet.py"]
+constat = "Relu les documents dérivés après l’ajout de l’initiative cout-de-la-vie-et-carte : cartographie des 20 initiatives, plan du projet (618 fichiers, 12 zones, zone couts-vie-chere), plan d’ÉVA, brief prospectif, et la piste de grille du bloc des coûts écrite en minmax(0, 1fr) pour satisfaire la mesure des paliers."
+limite = "Ces compteurs sont recalculés par les outils du dépôt, pas par une mesure indépendante ; le plan du projet photographie un arbre de travail qui bougera au prochain lot. Aucune de ces pages n’est une validation, et aucune ne remplace une relecture humaine du plan."

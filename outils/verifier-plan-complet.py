@@ -32,7 +32,7 @@ SECTIONS = (
     "## 1. Portée de la demande et limites",
     "## 2. Méthode et sources de vérité",
     "## 3. État mesuré au 10 novembre 2026",
-    "## 4. Cartographie des 19 initiatives",
+    "## 4. Cartographie des 20 initiatives",
     "## 5. Plan par chantiers",
     "## 6. Ordonnancement et horizons",
     "## 7. Portes de décision et rôles",

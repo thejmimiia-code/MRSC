@@ -5804,7 +5804,7 @@ html.contraste-renforce .association-suite-grid li { border-color: currentColor;
 .couts-zoom { display: flex; flex-wrap: wrap; gap: .5rem; }
 .couts-zoom .button { min-width: 44px; }
 .couts-grille { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
-@media (max-width: 900px) { .couts-grille { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .couts-grille { grid-template-columns: minmax(0, 1fr); } }
 .couts-carte { margin: 0; }
 .couts-vue {
   position: relative; background: #f4f6fa; border: 1px solid #ccd4e2; border-radius: 14px;
