@@ -439,6 +439,20 @@ def fichiers_du_site() -> None:
         all('href="simulateur.html"' in (RACINE / page).read_text(encoding="utf-8") for page in publiques),
         f"{len(publiques)} pages publiques vérifiées",
     )
+    # Le 14 novembre 2026, la page des coûts de la vie a été mise en ligne sans
+    # entrée de menu : elle n'était atteignable que par le catalogue des
+    # documents. Une page qu'on ne trouve pas n'existe pas pour qui ne la
+    # cherche pas — d'où ce contrôle, qui vaut pour toutes les pages publiques.
+    verifier(
+        "La page des coûts de la vie est dans la navigation des pages",
+        all('href="couts-vie-chere.html"' in (RACINE / page).read_text(encoding="utf-8") for page in publiques),
+        f"{len(publiques)} pages publiques vérifiées",
+    )
+    verifier(
+        "La page des coûts de la vie figure aussi dans le sommaire llms.txt",
+        "couts-vie-chere.html" in (RACINE / "llms.txt").read_text(encoding="utf-8"),
+        "sommaire lisible par une machine",
+    )
     verifier(
         "La page d’apprentissage est dans la navigation des pages",
         all('href="apprendre.html"' in (RACINE / page).read_text(encoding="utf-8") for page in publiques),

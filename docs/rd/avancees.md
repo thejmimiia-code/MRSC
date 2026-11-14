@@ -10,7 +10,7 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 116 |
+| Avancées consignées | 117 |
 | Période couverte | du 2026-10-20 au 2026-11-14 |
 | Contrôles exécutables cités | 136 |
 | Initiatives du portefeuille concernées | 17 |
@@ -2865,6 +2865,32 @@ Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`.
 **Suite.** Lancer `collecte-vie-chere.yml` à la main, puis relire les médianes de Paris, de Lyon et d’un village contre les fichiers DVF publiés avant d’écrire que la carte affiche des prix réels. Ensuite seulement : trancher le lien de navigation, automatiser les revenus FiLoSoFi ou y renoncer, puis faire relire le modèle par une personne compétente en statistique publique.
 
 Initiatives liées : `cout-de-la-vie-et-carte`, `poids-et-sobriete-numerique`, `sources-fermees-et-registre-des-refus`.
+
+### `une-page-qu-on-ne-trouve-pas-n-existe-pas` — Une page qu’on ne trouve pas n’existe pas — même quand elle est juste
+
+*Consignée le 2026-11-14.*
+
+**Constat.** La page des coûts de la vie était en ligne, sourcée, vérifiée par quatorze contrôles… et absente du menu. Elle n’était atteignable que par le catalogue des documents et par le sitemap. Un site n’est pas un dépôt : une page qu’on ne croise pas n’existe pas pour qui ne la cherche pas déjà, et la meilleure preuve de rigueur ne sert à rien si elle reste derrière une porte qu’on n’ouvre pas. La première version l’assumait — « pas de lien dans le menu » était consigné comme dette —, ce qui était honnête et insuffisant.
+
+**Ce que cela change.** La page entre au menu principal et au pied de page de **toutes** les pages publiques (13 pages racine, 108 fiches d’apprentissage, l’interface du simulateur), entre « Simulateur » et « Documents », sous le libellé « Coût de la vie ». Elle devient la **cinquième porte** de l’orienteur d’accueil (« Situer le coût de la vie »), figure dans le sommaire `llms.txt`, et deux contrôles empêchent la rechute : `verifier-integration.py` exige le lien de navigation sur chaque page publique et dans `llms.txt` ; `verifier-plan-site.py` lit désormais le nombre de portes dans son registre au lieu de le figer à quatre, et `verifier-site-statique.py` vérifie que les cinq propositions de l’accueil pointent vers leurs destinations. La navigation des fiches est générée : une seule liste, deux modifications, 108 pages réalignées.
+
+**Preuves dans le dépôt :**
+
+- `index.html`
+- `llms.txt`
+- `outils/construire-apprentissages.py`
+- `outils/verifier-integration.py`
+- `outils/verifier-plan-site.py`
+- `outils/verifier-site-statique.py`
+- `docs/rd/plan-site-complet-2026-11-11.toml`
+
+**Contrôle qui la maintient :** `python3 outils/verifier-integration.py && python3 outils/verifier-plan-site.py && python3 outils/verifier-site-statique.py && python3 outils/construire-apprentissages.py --verifier && python3 outils/test_mutations_plan_site.py`
+
+**Limite — ce que cela ne prouve pas.** L’entrée de menu est un dixième lien dans une rangée d’en-tête déjà chargée : le repli et le passage sur deux lignes n’ont pas été regardés dans un navigateur ici, seul le comptage des cadrages en intégration continue le dira. Aucun essai avec une personne n’a vérifié que « Coût de la vie » est le mot qu’un visiteur cherche — le libellé est un choix, pas une mesure. Le lien n’a pas été ajouté aux pages externes du simulateur ni aux documents PDF.
+
+**Suite.** Lire les cadrages de l’en-tête à 360, 390 et 1440 px après publication, et faire trancher le libellé (« Coût de la vie », « Prix et loyers », « Vivre ici ») par une personne qui ne connaît pas le chantier.
+
+Initiatives liées : `cout-de-la-vie-et-carte`, `coherence-textes-publics`.
 
 ## 3. Ce que ce registre ne dit pas
 

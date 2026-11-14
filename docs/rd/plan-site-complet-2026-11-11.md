@@ -20,7 +20,7 @@ Le site compte 19 surfaces : 13 pages racine servies, 107 fiches générées, l�
 
 | Surface | Rôle unique | Pour qui | On y arrive depuis | Statut |
 | --- | --- | --- | --- | --- |
-| `index.html` | Accueil : présenter l’association une fois et orienter vers les quatre portes | Tous les visiteurs | navigation, footer, llms.txt, sitemap.xml | page refondue |
+| `index.html` | Accueil : présenter l’association une fois et orienter vers les cinq portes | Tous les visiteurs | navigation, footer, llms.txt, sitemap.xml | page refondue |
 | `apprendre.html` | Catalogue des 107 fiches, boussole et parcours | Visiteur qui veut comprendre une notion | accueil, navigation, footer, fiches | page servie |
 | `apprendre/fiches/` | 107 fiches autonomes générées depuis le catalogue | Visiteur en situation d’apprentissage | apprendre.html, atlas, sitemap.xml | pages générées |
 | `anglais-aventure.html` | Les Mondes : atlas et aventure d’apprentissage libre | Visiteur qui veut explorer par le jeu | apprendre.html, navigation, footer | prototype |
@@ -133,7 +133,7 @@ Ce qui n’est **pas** publié : les noms du fondateur et des cofondateurs que l
 | 03 | Comparer des choix publics | `simulateur.html` | Régler un levier et lire les effets, échelon par échelon. |
 | 04 | Suivre le chantier ÉVA | `#rd-eva` | Ce qui est documenté, ce qui reste à tester. |
 
-Les quatre portes mènent à quatre endroits distincts. Les quatre cartes d’action mènent à `apprendre.html`, `ia-societe.html`, `simulateur.html` et `transparence.html`. La section association mène à `documents.html` et à l’ancre `#actions` ; la section ÉVA mène à `eva.html` et à la méthode R&D ; la section participer mène à `nous-contacter.html`, au bulletin d’adhésion et au partage ; la section sources mène à `transparence.html`. Le pied de page reste la navigation exhaustive, l’en-tête reste le menu, et l’accueil n’invente aucune dixième entrée.
+Les portes mènent à des endroits distincts — cinq depuis le 14 novembre 2026, la page des coûts de la vie ayant rejoint l’orienteur. Les quatre cartes d’action mènent à `apprendre.html`, `ia-societe.html`, `simulateur.html` et `transparence.html`. La section association mène à `documents.html` et à l’ancre `#actions` ; la section ÉVA mène à `eva.html` et à la méthode R&D ; la section participer mène à `nous-contacter.html`, au bulletin d’adhésion et au partage ; la section sources mène à `transparence.html`. Le pied de page reste la navigation exhaustive, l’en-tête reste le menu, et l’accueil n’invente aucune dixième entrée.
 
 Un visiteur qui arrive avec une question n’a donc qu’un choix à faire au premier écran. S’il descend, il trouve une seule section par sujet, dans un ordre qui va du plus concret au plus général.
 

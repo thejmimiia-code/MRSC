@@ -2,6 +2,17 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-11-14 — La page entre au menu, et devient une porte d’accueil
+
+- **Initiative :** `cout-de-la-vie-et-carte`.
+- **Demande reprise :** « il faut l’intégrer dans le menu du site et aussi dans les contenus ».
+- **Ce qui change :** « Coût de la vie » entre dans le menu principal et dans le pied de page de toutes les pages publiques, entre « Simulateur » et « Documents » ; l’accueil gagne une cinquième porte, « Situer le coût de la vie » ; le sommaire `llms.txt` cite la page avec ses sources et ses absences.
+- **Comment :** la navigation des 108 fiches d’apprentissage est générée — une liste, deux entrées ajoutées dans `construire-apprentissages.py`. Les treize pages racine ont été complétées par un script qui repère le lien « Simulateur » et insère le nouveau lien juste après, dans le menu comme dans le pied de page.
+- **Ce qui empêche la rechute :** `verifier-integration.py` exige désormais le lien sur chaque page publique et dans `llms.txt` ; `verifier-plan-site.py` lit le nombre de portes dans son registre au lieu de le figer à quatre ; `verifier-site-statique.py` attend cinq propositions à l’accueil, pas quatre. Les trois contrôles ont été vus en échec avant d’être vus en succès.
+- **Contrôles exécutés :** `verifier-integration.py`, `verifier-plan-site.py` (5 portes), `verifier-site-statique.py` (123 pages), `verifier-publication-locale.py`, `verifier-affichages.py --verifier`, `verifier-budgets-visuels.py`, `construire-apprentissages.py --verifier`, `construire-page-couts.py --verifier`, `auditer-selecteurs-morts.py --verifier`, `test_mutations_plan_site.py` (14 cas) — tous verts.
+- **Limites :** un dixième lien dans une rangée d’en-tête déjà chargée ; le repli et le passage sur deux lignes n’ont pas été regardés dans un navigateur ici. Le libellé est un choix, pas une mesure : personne n’a cherché cette page sans en connaître le nom.
+- **Registre :** 117 avancées, dont celle-ci — « une page qu’on ne trouve pas n’existe pas ».
+
 ## 2026-11-14 — La collecte a tourné, et les données ont trouvé deux défauts que les bancs cachaient
 
 - **Initiative :** `cout-de-la-vie-et-carte`.

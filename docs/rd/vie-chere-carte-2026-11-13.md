@@ -237,6 +237,23 @@ La proposition de fusion des données a été **fermée sans fusion**, avec le
 détail de ces deux écarts : une donnée fausse mise en ligne est plus coûteuse
 qu’une collecte refaite.
 
+## 6 quater. Entrer dans le site : menu, pied de page, accueil
+
+La page a d’abord vécu hors du menu, et ce choix était consigné comme dette. Le
+14 novembre 2026, elle rejoint la navigation : « Coût de la vie », entre
+« Simulateur » et « Documents », sur les treize pages racine, les 108 fiches et
+l’interface du simulateur ; elle devient la cinquième porte de l’orienteur
+d’accueil et entre dans `llms.txt`.
+
+Trois contrôles tiennent l’intégration, et chacun a d’abord été vu en échec :
+le lien de navigation sur chaque page publique, le nombre de portes lu dans le
+registre du plan de site, les cinq propositions de l’accueil et leurs
+destinations.
+
+Ce que cela ne dit pas : que « Coût de la vie » soit le mot qu’un visiteur
+cherche, ni que la rangée d’en-tête, désormais à dix liens, se replie
+proprement — cela se lit dans les cadrages de l’intégration continue, pas ici.
+
 ## 7. Ce que cette R et D ne prouve pas
 
 - Aucune donnée n’a encore été collectée par la machine au moment d’écrire ces

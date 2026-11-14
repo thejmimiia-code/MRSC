@@ -10419,3 +10419,1671 @@ sources = []
 mesures = ["outils/verifier-plan-projet.py"]
 constat = "La fusion des données collectées ajoute 111 fichiers sous assets/data/vie-chere : le plan de projet passe de 622 à 733 fichiers, et la zone assets de 35 à 146. Compteurs réalignés sur le compte réel rendu par verifier-plan-projet.py ; ni initiative, ni action, ni porte ajoutée."
 limite = "Cette signature ne vérifie qu'un compte de fichiers ; elle ne dit rien de la structure du plan ni de la qualité des données publiées. Les autres compteurs du plan restent ceux qu'il annonçait, et c'est le vérificateur qui le garantit."
+
+[[edition]]
+chemin = "404.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "eddb4f6d2151bb94d58a547b701c02ca18774d11d32e5a56228120090b98fccc"
+empreinte_apres = "f2aa81cb9b5db320725d8d6430ea086fbf391af5f6bc902c5965f11f8c078735"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "anglais-aventure.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "7a856da090061cb1cf4fe08953801e2a73a6367f21cb74820199d8dfa5a69886"
+empreinte_apres = "236a89a525086e8012b5f61321ed6d57724099131793df78b541ff301c5f84d9"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "18abc022e7bff4eccc4400e5488f91c3e52a680a54b4c34026e217377bb36d68"
+empreinte_apres = "6332fb860905ab0f4354c650f8e4791f85a0a124dc6e4e603df424216386a595"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/apprendre-methode.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "b6eff25745613f3f4de55d8de16da3f9433e89b5b94d39a301583283a863430a"
+empreinte_apres = "48a7c60193a1c8ab1c62644616cf1f5977fdae72ccca6c85a72e43864be2549e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/apprendre-se-tester-plutot-que-relire.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "f41c24c137b438be745d175617d525dc6cd180e629555b4f08206eae049bd3a6"
+empreinte_apres = "846b30b3304e450c57eaa703a87e0abbcb76a37ad2b6a0cb686c9b1083bec3d1"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/arts-composer-formes.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "7e60c759174f196770d86ce0169bb886c02c33a9dc68b778ec2ae558f17c55e9"
+empreinte_apres = "6278667b3d663b37293d4321beb0924e4f4a78d94b2beccb2b53a4a971696a59"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/arts-lire-cartel.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "7a96277cf2e202e656a0dc4477e3030740ecb1f370b4d208c90075aeb1a2cb31"
+empreinte_apres = "cdf447fca605b0a761711904deab8e144036c850bee692ce49f04e18d36d4018"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/arts-lire-generique-film.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "441ec3f567d86b4ebc5af76136f11dad6a6121678a360252f187daa4ac1631a0"
+empreinte_apres = "99e97820e2b507df44ea75cafa0c4959249fe01058e9f01bdd1c7cb5c1ff64b3"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/arts-lire-image.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "033ea8f3d34c2ee175d7faf51ac83f40324d5f019ce0ce4c7449b03b4499347e"
+empreinte_apres = "5d84813a012a7e0e733f5da32609fa69030235cd3abba397fe5a6e8e3a4942bb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/arts-rythme-musique.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "1327184286fc1b4be6e68015d435b7108e45d564197f76f1b39d977075fb0a4f"
+empreinte_apres = "5b016528df8888d47bda944078a4fc1be4f7788f56c2c342e87764ae3f706451"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/civ-choisir-source-publique.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "f1457b379b79619b2f08815d04504433e19e867452e37d46e81c8227f715b405"
+empreinte_apres = "7ecb2ba900eb98c4d03082dfe64a6e28ba3a8a51aa31e0e652bb069d6cbc9f19"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/civ-lire-document.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "4f441c5523f80394f0f6fef8ebd97f8aca4a71caabec505a32dc33f2da58eeed"
+empreinte_apres = "8651f515ff33cb2882afabb367e42a9091d3967cc8a3923427b14c40954a9cc5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/civ-lire-un-sondage.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "b2f48177e903bbee579eb2af7bc74a50d16b809ec106e9f736b3c19b41266cbe"
+empreinte_apres = "d105bee71fc87566586b4fef437f1a1d687d2315d270cf358f24bd12c696c6ee"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/civ-reperer-echelle-institution.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "c008ed4914eb76c2c545a0f7c357904a7feb4533021171e81aedeafe5bcc5eac"
+empreinte_apres = "661f5f286ace319ce77b24947ab6a80692994eeffdc223560caab7c648380bbc"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/civ-reperer-info-electorale.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "cf7b4c2cbf695f01f652ad3d3db647c145894e07d087ffb92ca788ca65447840"
+empreinte_apres = "2fcb4bda3e0a7ce7f0852a2674fb4464ca85fec8385695cc3fa49b72ff1585c7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/civ-trouver-service-public.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "3aabc2b6b9942eb394da334863f5d31448eeef99e3fe961ac0d047faa91e6553"
+empreinte_apres = "b4d166f6b15fd784b7f1b89ec0eda9fcbbd55928198fe3d1ee93e77536926203"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/civ-verifier-information.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "562224e7f4edb5f398e3091d0409e77dd2f8931d8233f7d03eb889527a7cbe8e"
+empreinte_apres = "3d45cf7fb73799d7667b7877c0acc82f5b5bfa2e58f8d9009d34a59b2ebea972"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/demarche-lire-devis-travaux.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "532613de7b8654ad22d272c0338fe78ba43b9b520d3539d5d8616524d0662d54"
+empreinte_apres = "f2dbb9b9f8abdf92cf47475b4802898da6a896f74ff978a575e8aa41f3f7f509"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/demarche-obtenir-acte-naissance.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "a08a1acf208c42de3373aaaad77b1acb3456ea5edbcaed0009fce9438f62359d"
+empreinte_apres = "3e63f9bec2a5e7753036fe0fde203598928fb978c1fe58ed84e74683d904183b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/econ-comparer-prix-unitaires.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "dbdf286844a0ef1bc78dc2a1be125549a64b359a842d1b91089002b17cd1d1f1"
+empreinte_apres = "c0d0b88eba293ee3735f40a88b8cb011be6d1a5199d3c1300eb92dc6fa106ddf"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/econ-distinguer-interet-frais.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "9d77514d05f13084254a29f25ba2c5a8300de14549bd67889b5bfd101f722d41"
+empreinte_apres = "8fb4816efa5c03ed8db0c2bac5a1d2c7b1c9b4261f5b49a6bf3d7aab5e50ea04"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/econ-lire-facture.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "29d2f6adb2063a10361ed090d7cdfd6e6aa731f2bf8f542bf4f59e78983ec06a"
+empreinte_apres = "6956b2eab2a00eb815520fcd35c15940327c5ace9600f2014af0e36d2abba815"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/econ-lire-mention-garantie.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ce7422ca28d8dd3cdb0e47466065d1ae617f4d10b601114f8320aa39cc563034"
+empreinte_apres = "320f265c2d5326cf42f35deba1cd38e50163e9f3ce8bf0280ede75b65722458c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/etudes-lire-fiche-rncp.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "95cd632b4055e5fe6d9dbdc5135ddb760a9fc03a30db0f269da0b1845235908c"
+empreinte_apres = "b353cc6a3b3ac5f3685ace9bf849ede2fd600af3c9eb537f7ab1b9d7a635844c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/fr-argumenter-avec-exemple.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "b58a925267af9450719ba507ce4a583abb20a5ba14241fddf34fc32fd45efb31"
+empreinte_apres = "73bebbd4d01b4497f72a30e8046def521481e45bae251522828bb390415822ac"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/fr-comprendre-mot-contexte.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "756260bc066498fb2c6dbe975e97cf76c3f2c3f5fda8bb4379009c293a42865f"
+empreinte_apres = "8ffb4a4b1cc833291a017712ec7d963a9617c8666bc9ffa4eec4543c6503a403"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/fr-distinguer-fait-interpretation.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "51b7cfc82afaac51f766568f59469e5915d8ebdd1577be4b737085dc906b2273"
+empreinte_apres = "1532a9fb3f66075ff1cedaa760df785ee0f9eb8243f739f126049b4eeabe6c94"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/fr-ecrire-message.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "548b59f694478d1a8789d356ddc3a6c9fe65e219b748837433b28687a4fd3e58"
+empreinte_apres = "086901615d92ea0787e3170051983b703a2ea2f562aeb96a4ae949d68afa77b9"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/fr-lire-consigne.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "7a7b36fd6677193228ba006fb97910a9f7169246f8b6a501c6de19a83754edaa"
+empreinte_apres = "de22a8fd24aef81d95de3c3b02bf7b9edb46c55763d5bfd96d191e216a8dedef"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/fr-lire-ponctuation.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "23676ee35d2f2d3b9df4fba8423f3f5cbc44a3fa895a53593070eb7969767269"
+empreinte_apres = "5c7b8187e41bcf1bb5ff266619f9ab4eb778e0540d1cd87077b4e2264d4f2567"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/fr-preparer-explication-orale.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "2d2262a04cbf16f651477dd3c8b5dbec74f300cd75204a78197704a4c356dbf3"
+empreinte_apres = "7853b0cd6217d7e13c3ca8f5f678fbde4d47e3c523488580ccb243e1086b6967"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/fr-reperer-idee-texte.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "e812c14801122e1de252a6cb42df4283518317c8ea8ddd5435c1d6f310a7a7ff"
+empreinte_apres = "8f8806ab12b11c08575b58e2a2d00e3dabecbbddb96c390329f8017eb1e391c0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/geo-choisir-une-projection.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "d3a35f4b48c43a8c0d9a879065bd0e91bcda821071a01248b5dd5248094dff24"
+empreinte_apres = "508bbbafff17d1b56a0ca9fb414b28a82fee88052cddb70ffa4c3f60587d7063"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/geo-decrire-paysage.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "b6778d70a4ac793a9748adebe30b15431efaf55ed5f46315a5b6a81530ceef8c"
+empreinte_apres = "ed76fd28f7d6f0ca138abbce7b4a1609a26939a39b6f7b1040670259da6c6a7f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/geo-echelle-carte.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "9c2386d3d3af0bd5f53a488d1fdada37129cb87aea9464e6fc49db9e63c7030b"
+empreinte_apres = "9e0c4d3c8a9078700f7fcded2fd7bf30cb368f7d32209fbdf9dd22fc5d8c09ea"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/geo-lire-legende-carte.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "7ce0bb880d75a008e8e68833268e6c16a92ee5fa2cf49b8b153457e8ca34ca82"
+empreinte_apres = "eab9e0148724a5e7f10e51cdeb19e92dd420d3cb7ad61ead43cba37fa624f763"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/geo-points-cardinaux.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "9fa302199ee35f2ac42eacf4accee0daf7fd55cf04d38d6077721fbba035ad1d"
+empreinte_apres = "a3a85875db47614fc14ef396a2bf51760cf6f660215b3644ff294a3d4fd43f53"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/geographie-preparer-trajet-horaires.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "5b76805f9fa41b154fda4ee1ca5a7845e05328784a6160cf1bae2c0419af2606"
+empreinte_apres = "74c6a28b407ee93806c6c0bcfa385db3c9fab58b9e4a4d0dd0159ebf2016be21"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/histoire-comparer-sources.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ba9a4e70b9a101cdc0cabe25fcc4b9ff33531d7a3a7f96b52e087fcdc7e98d12"
+empreinte_apres = "dff462f8ad91e3ec2d6fb13cc29dcde29eddd3779f522dcbac3f110ac60e7a23"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/histoire-lire-frise.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "b835562f67468845619febb2ba501e90aadca90a71265fcb77acd305c671844d"
+empreinte_apres = "ed5231699459fabc7e1413a75e5cca45ed086730bf07f96d3cc45b0066c7652c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/histoire-lire-une-cote.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "93b4a81c1888548c2b33ef3994ee807a05a61b0c2911f0dfa1886e28b7b359d6"
+empreinte_apres = "12a4bac6234cddcf7da1984b518799aace9a6e98fcae4337f8d5170ae1c333e5"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/histoire-reperer-echelle-france-monde.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "b4d2e5bf1ad72f71ea3114b485e10b9a7c364159f642dc2e7a6e59e6bc0f31b9"
+empreinte_apres = "8c2f1b4a3d4d45e8ddec387b837f54314f7a847323e16a6a8cfa3ffbc30e28bc"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/histoire-situer-siecle.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "75e166c73bff5d440b2dcde7142b79adf3ffaa6db04f438bcea604c69bdaefe4"
+empreinte_apres = "0275aa8d6d0a05e369c57b1a3c0cf337c1abe3060431badb012ea7c2cc31f242"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/info-bits-octets.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "e1aef27eff9bba503394612a520a41fdff19575e6d0945ce93ae328520142e7d"
+empreinte_apres = "168bb86ee84ea3b9fd22b051749d48b4bd3ffe579405f9b8f7fa7ec9b610c996"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/info-lire-adresse-web.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "0e20840b490eaa156237599936eed0c2487d31932035c45dcee8cd86d7d8b163"
+empreinte_apres = "d048ffff9cf51c7d8a95383f6bf48c6d358519b1099466f285470399cdf1ce04"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/info-objet-connecte-local-distant.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "d5f93e7dcc183dc89cffd19b9241be0b4b6312cb3b46e5cfae1183e4559fce0e"
+empreinte_apres = "110a59c56aa863ae37b31402765beedcfdab3418f7fd9234403c24484df12ec3"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/info-ordinateur-fonctions.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "49558cec054851b70f0a10817e78bd3bcb34a60b8f204c9c52548d45642743a6"
+empreinte_apres = "46cc2bb3f027daf4c02c5e23f247d468fba67806fc0f785a9f16707357e19027"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/info-systeme-exploitation.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "2bab283fed39112cb7af0cbc8bb2f4613923c21c1ad48f2e2dbe52f2e3157447"
+empreinte_apres = "62a5efe2dbc3839f68dc7cdea21f36b7ab6a45edb8582c5818ced7e08ccaf387"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/info-table-requete-web.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "40c589903aedf1e459a1041e8f772732658804adb7cd66f0755e0fe0c291f698"
+empreinte_apres = "a06960c6ebcdd66f01cca70af64c29351891c4597254bd10c4021dd0fa26d25a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/langue-anglais-demander-aide.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "eddafca4e0c8ce384b2cd4bacd3cbf0e08be2d97c4d741ebfda8f301269b250d"
+empreinte_apres = "6343d1516c11a633fb80ac18f001c08961255f28f1103e5342ddfc2ffe7be480"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/langue-anglais-direction.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "1cddc77380b83d487bf83e2cce612c833bfda085640530852a4dc01526d7f019"
+empreinte_apres = "cb060b77e79f12717130408c2850fd6a2d05a63d57bf22d03492cf95fa1ea8ec"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/langue-anglais-epeler.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "9125352b53f7edd00efe40cbd4628600922c75a0860f4dcca74b2272ab2f8452"
+empreinte_apres = "de4e3e80c83227c65e3ab31a7c119b0ff9a1b3ba8196bfdc45c5e9d855c361c0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/langue-anglais-prononcer-ed.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ce406bcad00495895f3f2eeafb9177b172851edecdae6be3dce91e14c09dafcc"
+empreinte_apres = "67d8ed4a4b2fc417bc0665bfa39083934970c39f3fb1198b9afad87551da2317"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/langue-anglais-prononcer-th.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ff1bd3875e6d117277bc50e42134d1424d814ca587bfd17763aff7236a1f666b"
+empreinte_apres = "09258c607161dca59f7fc5bbda0369bbf2fef58689083a207d78616f5965dd7b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/langue-reperer-mot-deja-connu.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "0c49cd5ebeab4e5b454d005c5f2f93d7b00efb17474aa76399eb83c72a9ce9a5"
+empreinte_apres = "4e9423e0632f7726243008825d36303c51fbfa2ff79b1af0e94325ae4a8c10c3"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-budget.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "fba8fd02790efa9474d3ad57bc87938ed7182d15023dd8b990915704697f9c88"
+empreinte_apres = "ba757c10e4e7af24560a675df92373a84b59487bbff55fbd589bed4e6efbbadd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-comparer-deux-releves.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "fc2274a21edb5821c0bbd00c5b34e0dab9fb4d46763c4468cd744adbcd6483af"
+empreinte_apres = "7990dc8fde09a730a178f15c780ddf4954fb0688ecd0e8bb4e827e663ea243ab"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-convertir-unites.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "743f8ded0dac942d35da744c2318829357a847bc800b98d0ca2cf7cea11d8956"
+empreinte_apres = "5a173026d410337bf299c95962922a8ea10caa1e2b5f94365ba35853859f4659"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-equation-simple.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "5d0c26d3db878cf16836b7bfd0a5247def5addf1f94b41c3908f48a89e53c944"
+empreinte_apres = "aab28810048cc5d7418c8e6c3f6955dca4851e2ca0f4e9c8c52a1c613d7dddfe"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-estimer-calcul.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "6693143951e6ef4608583c7669708d53ed895c91299a3ed775f2cda0912add80"
+empreinte_apres = "990b691574e7a8320f7e2133328707e26bcd34bc384805867b07b5d842fc0298"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-fractions-recette.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "034c428c2d00e24b2d6c5f7cfac5cf386c12c5032afef0431a42d2aa47d59b57"
+empreinte_apres = "50602021cc4ca02f7140ddcb25bfedd47dc4d3fe14ecd048389516e74d02629e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-lire-echelle-graphique.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "9d0c15247ff7586a22c0a2b9a02e1a51cf705ed03bcba1a2842526cc94c7edbb"
+empreinte_apres = "8f9010c55bfcfc8b5d641e4915e840212f8fd51df769780ba604fcf58947a069"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-lire-graphique.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "c7f3efbf320dd1aa9f3452d29f8dbf829cadcf3af6054dd11445430df9687a2c"
+empreinte_apres = "65b1f31af2153a1f9511ac28f42a07a2be4a5a1899bbd73060d225ad5250c9c6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-lire-planning.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "96014b228402e387a035cd2430ba6f6b1e099b5c369823824826cf9c9480fc0f"
+empreinte_apres = "e7346c6ee65803d8f879718dd8d915ec42e7c460adc6acb4214c7274264615be"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-lire-tableau-croise.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "a9a87c64cbb588ed01935922b61efbd766e782c91831fcf16026221caf0c19bd"
+empreinte_apres = "f34c2ce234e12f5a149244cc3171282c3b48b2b6dae53fe6cff4bb7c7d04c381"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-moyenne-mediane.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "93a521d94df9bd2cf50f523fb66d28b91d51731eb8ca38fae41bf0cd6193e01e"
+empreinte_apres = "9bdb882b9f23b3a5e5ddbe712edee5e5bb56a1472fc33201c98acb403bdc4dc7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-moyenne.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "3b944547298764c3c3224178c1b3f1cacbb9507039ceaf40ab1a62a6912ec986"
+empreinte_apres = "ae7a25de6a0205fe5c9824c4dd660fbddfca0f6c8166d6769339bfebf549642d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-partager.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "facf5b53e87a26ec2bb3c1a857231d0e75358a7719126148aaeebae0381ca0d7"
+empreinte_apres = "86357c825bf5e9cdad84ff281ab9d7cba0f806a8537debb874ae74024886d46a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-pourcentage.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "b9b259e44ad7124416116253c87ca439d7aac8587498374de764e1f62aa66865"
+empreinte_apres = "38685f677f9e9621cf9727efd0993d41438067ac22b0d05ae6de1dcd6b3558b7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-probabilite-tirage.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "e38a1971ab2879004e5daf083784ac151b17c771c959b872e034a1b8fee0d634"
+empreinte_apres = "297811e1f6a0b9fa332f21ba3e99c1c1c9d562bb7cc02a6c1ea97d26bae558fa"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-reperer-angle-droit.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "de3161b556e71a011f59dfd95cbadd65bea83bd3abf19257558a4654e63ee690"
+empreinte_apres = "4dd261e6a9a18d70dfaaf1ab17de5edf0ff5a2b6c3c80e24619cd17abdb296be"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/maths-surface.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "d611285ba5ee9f738341dbd5dd62402dbd6f1589362c6100268ba5746d2d688a"
+empreinte_apres = "eb4e8708310a75d34b4bb01e7fe9fdf1724588ac441643ed062a85056dde88df"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/methode-verbaliser-sa-methode.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "fb6106bf4a95b0990d565c2ef2854dc8fcdf75852d70c5871815b0ce9a332eca"
+empreinte_apres = "3be181eae6bde7fc0dcaba6008643d3239fc6bc62fda97dca8efe8440a82e9b7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/methodes-demander-clarification.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "1c27ab7b536bbd709d023759588343a09b535faf29e3acf3845160ccf91521fb"
+empreinte_apres = "a3fed9974c23dbd35e1bb21468f3af718d10be5ee5c74d7d952f44bd72065c8a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/numerique-declarer-fraude.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "8108e2f5a70d46c68b1dc6399c1045d3870a84ec150892a0917bf61ff95bab10"
+empreinte_apres = "acb9db57c08c0677545fe25e2ab7efe70a7e274c6a57c7825f5d781a03456fad"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/numerique-formuler-recherche.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "3c593e9a602a36f548179c0766c9168e37cf1ff4925c37b7c70692c3af042606"
+empreinte_apres = "2ae273e69fa528a2429643f9f089aa82e00b71d8ca0c927468c6284505363045"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/numerique-hameconnage.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "6b34fbbb879ec9459639b7b025cbabaa432acc6a1268e4177f73b1743bd5edb7"
+empreinte_apres = "d7836774e32a277c497b11544b7629aad5f26717ebd55a2d50af684bf908f1c0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/numerique-ia-usages.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "7e1188318ab4e5eff7e7d1f741221076893bb3169873ba425f2d611389482d1e"
+empreinte_apres = "1c6a1620af7130fef38f2a09513a4b3b869e3c51756b896ca964e1e5a140f495"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/numerique-organiser-fichiers.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "24205eb8ce568bc0ee8937ee811aeb3dba5d528f6cc66e2145257ac752107b0a"
+empreinte_apres = "43c1f26ad11cbae50552dcac2cac4a34d5d0ed5135a891cd5fb83e8c80d5db6b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/numerique-preparer-sauvegarde.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "aa38642cd1558cdcc23da71d8a263dfae5557204a400b7bc5edc6315cbd685ff"
+empreinte_apres = "fa7ac5f97b555a62abd060790b8d2c90d028db9c59757aa4b2513425b741f97d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/numerique-proteger-donnees.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "65c5766baa1000e77a404003cdcce1903bf626fba2012e89cbe564953d85b482"
+empreinte_apres = "e7c06a612c16428631bf090eb70b12957f4cf10ba5b875b7e2d681e7bb51a076"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/numerique-reagir-fraude.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "5dab7b99a97d2c27e897b9248923d3f8a168ad7d1f5e780c002e7934b5244f0f"
+empreinte_apres = "8b872a2bdf3d42eaf19d9293a696e41e99e602001819fc1c89a654dd6d64faec"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/numerique-verifier-demande.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "64811242a03a2634b768462d758b22ad62e1402a1b9e364e7fbb2d1258483ad4"
+empreinte_apres = "82ad1a6454abb7c9e9750c50c61ab3454a1dd3370cb771e594984963758e0ca8"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/numerique-verifier-ia.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "84fae9a66093de8321aa0bbe3200ac617ff57dbf03d2bf02be2710b9e3588741"
+empreinte_apres = "ca8d9a09625b15d3a1e26dc3743e7b8fcb2f18253c788a755b053f76cbd8f706"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/numerique-verifier-media.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "9a486d163cce0018fb09eabce86e6a323ffb7654c414373d66c3352aab7aa982"
+empreinte_apres = "ef3a6cf98a29e0692a2e357d7be1b91a96ac0868789f0c350ca03540fa9e8798"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/prog-comparer-langages.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "05d7c4ca526271c948970d7f6e31c9448a7d79fd1bdd2e707859553792dfabc7"
+empreinte_apres = "e6715b9eb237a5c08cda57155d290c83ea267b0eac947ce786b021c7229c6b31"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/prog-lire-licence-logiciel.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "c8f8a3d7c21363dab2b893bd86f386f74e60272bd57379651dad9080542b098d"
+empreinte_apres = "b1c8c322866e1bdf988dcb4e851d69a29e1d6fc6bbba712aa4890989e6d8b9c2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/prog-lire-trace-erreur.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "04e95ef21473ca9fe5ceeaac4515a359d2e7bddd060293dbc30a34da77c80959"
+empreinte_apres = "aaf959ca070735379341ec094bffabb2f61e0ea19a7ab129241342e3b3bbf1e6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/prog-tester-exemples.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "c24a6cd612fc134d9377d78710089524a941574e2d7e97ca908e7c1e8ad96a5a"
+empreinte_apres = "420a830c6e8fe0216a5af63c12073f2273b02cb23ebdac0de91a42052286de4b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/recherche-conserver-reference.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "3d76a4d27a82e4ed67d05de0e20871a3fa295f932e703138766f3ffec99edf39"
+empreinte_apres = "fd89a97633cf42410bde6cf8c17f63cdb18234b6dbc6cda89ef4d99e70cfeb4e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/recherche-distinguer-resume-citation.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "df5e98be76ca03c80f3e0e39de6316f04cb517572fad5010757d16c68d766570"
+empreinte_apres = "2e71df1f99969b20a5abf29e6f7a168b886642b61926e4482a49cecef9877a75"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/recherche-lire-etude.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "3a3b49a946ec451f722f2bbd1de287409f926bad25cffa08affa61ff43a39405"
+empreinte_apres = "9b3e132adb0ec7d08ab08b7e1b763f07da1481954b409c106d85f98a0cca573e"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/recherche-question-hypothese.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "315d5cedb3ac694ec3d7e09202b5f2196693bcebbd1aa17b4c3d042ff7a4c60b"
+empreinte_apres = "7ee14f1f8d7281293a0a480b5da58aea93e3bc7ccbeb7377fe4abb2405bb5cdc"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/recherche-verifier-chiffre-public.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "21d7b31273c9aca12b09649e03334a84eaab3fdcf49b27b9757acfbcc65e8332"
+empreinte_apres = "9acc23d97165ab614edc62d23348350b1f6ff7a3188405efb7d3085189237aaa"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sante-amenager-logement-chutes.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "7d7cec7cd73c928e7b909e65973aadb8623627a6a230b8d5922df642df081302"
+empreinte_apres = "9dabb81f4f8f1d4f08b938770af321d2daf5130b7350c56d68f76c646664b2c7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sante-comprendre-depistage-organise.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "94623ea1855e55f3b83d9618d90c6058b4e2c3d33514bc42e5d97e635e7859e3"
+empreinte_apres = "e32254f7bacdfa081d7ab42d09aff8a77eada5002fee864e90befb5e2826f3a4"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sante-comprendre-parcours-soins.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "4f53ca2a49deca5d9cc4e75a2e2467064acc5b863487cc227bfd6bdc93752650"
+empreinte_apres = "4c099c97a3668dff8f00ff6f0b4157b2c6f2e0add180a304867d240ab9dc43d9"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sante-lire-etiquette-produit-menager.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "5fa5eeb683f22a9241be396434fae36cc8bc4c4120df9267312775cbbb53068f"
+empreinte_apres = "0ad7d6315c4a720ad4d3bd96b0e7ffb1def93096cd10aa75a52294d350db3d9c"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sante-lire-etiquette.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "6a6c41c1c9f7573606be7a17f6d63295d42b20ee47866f775b219261ce90b688"
+empreinte_apres = "c8cd9cf28d6ad136ce4edb7cc9f59d7bb6dbd48fa3c0e8648c64a03420c275cf"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sante-reperer-signes-qualite-origine.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "36222b336837bd0af13084a4218db5d1df041dba1e2b8bc0a00a796e9401be7e"
+empreinte_apres = "9c4ebe5d84578dcc3157b638a3bb27405b05428f9ad388d834806b80373bc5bf"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sante-reperer-source-publique.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "07bf99836c903d5b5068dbc7a16b9908ba64fb96d5755eff886bdffc8ab9cdb1"
+empreinte_apres = "f7aa13a5c2c87c1b21f4359e5424a24c33d196f8dc6cf3bfdda56f04f68ab0fa"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sciences-calculer-vitesse-moyenne.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "47572659e46a8586d1754e571100182ed2d836ed712b5afd050add91d47fd16a"
+empreinte_apres = "4e96afd8c4e5a8e9fa28ce7585b143960c3f07584e6fa6af966c3e20ab9fdbea"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sciences-comprendre-isolation-r-et-u.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "90360e64e685a4248df359bf247a3ce3e7e92eedc7519b41fb77eaa1e69c19d9"
+empreinte_apres = "504bb03d97a70f7588b9d71d911e585a922014f7437f062cecc99c36e468acbb"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sciences-comprendre-pluie-millimetres.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "8c347fc3ffb9f6880647fa9a247df16a47ab41e79bad653c3b61c4f2cb3977c5"
+empreinte_apres = "c8db6bcca53c853d4e58684028fa2e83a780e23b9fa6979820d5560428635494"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sciences-cycle-vie-plante.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "f2d93334b079a92ba44b068fa4d8eef85e58b136b88eb7c571858cea11f1a8dd"
+empreinte_apres = "8dbefba3d5ab9a50992f1e4e5924768d68a3c0ed2e45ff47eb017945a7ffd065"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sciences-demarche.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "a8fd8d77fa1177637dc2315b2f1d6c5a471bb7b3c328aecb00272055b90efa2d"
+empreinte_apres = "df235ca9b49a494ea180f14108f29b3a4731abeb8268e02548faf94f9560e628"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sciences-distinguer-melange-changement-etat.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "bd99161dd58dfdf51a46621cb3f6801e71ee404cd844613536f83b5a0ee1b6df"
+empreinte_apres = "b6356299ef54c175b3c90e1abca34ec1773374fe5dc5a6eacef3c8a30dac8a5d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/sciences-meteo-climat.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "1e2401c478590f8ab8a49c242252e594ad15ac6b447d0cc7d641c3ecd8d87d67"
+empreinte_apres = "9c7a614ecfb51219c8e74444184dd432fe8d5a31f782cbe02a4dbb0b4b6689e6"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/tech-circuit-ouvert-ferme.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "f87a707c04a271b2b2af086b16e0711a66a089734c161716139e94d5f78af5e0"
+empreinte_apres = "2916b527ddfb9a73380e95e7aa1bbea351abdd3127bfdd287a1f83866ac03688"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/tech-electronique-capteur.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "3e281ab6104963eb484c545ffa7860a099eff7feaeedb2af2b77a76062c30b78"
+empreinte_apres = "158e4d3ec51c1a71e7fa74dd1c22b804c48987485a1d578b6b8c91c382f42587"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "apprendre/fiches/tech-kwh.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "fef096b79fe824197b7c3fcc6b054853d2c5d546290d031bcede0ab822080c29"
+empreinte_apres = "48bb5a69e2862ba1aa43391aabb554151c157d3c1a5bd99a91bb3aa32f791d5f"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "confidentialite.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "cdc297f0ea465741cdfab5d5b37c9219c2c3deb5860046c57fda9e0d851a0c2c"
+empreinte_apres = "0be78f8c38872b3b5014d73a52e04cacb8caa137862ef232bcdeedd43ddb7230"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "couts-vie-chere.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "8e64658f3e5f1e3a0d6318920b7e893585e8bbcea3600c4fd185c911b9d87e69"
+empreinte_apres = "ecfd59ad8b817a139133e67927131a30f9ecc73b785b9b1e685c4c0b88285edd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ca86a5d3fe1651d4983d83db4a191a0c245a9e5a548568efa2e2d8ccd77fba45"
+empreinte_apres = "20d13578f271e265cbd8e78a4d95b83a7b2e8b041d24e3a9dcc77a375d19d9ec"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "a72c5163b1ed636b8864a1ac7c80138ee78beabfa81a6599158a64c9082cd4c7"
+empreinte_apres = "23a3e29c45fa43612464d5b1ff0b577fcdf192ca1bc10513d026eee3c4e412a7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "dd2fabc9deae5c3bb2c6f37170c0df5fefa1c0572c078363451a9e101b806db6"
+empreinte_apres = "19b85098607190ad1532a11db30963ba0391695747479c088c7ee255293df932"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "e87db06d83ce8de7c9ba9a50dfd18148efcc3c8d86a0d2f8ebb8f046e325e18d"
+empreinte_apres = "47e3a03b625bb623bd6482bf39d0fc78cf2380fabc0104870acf5f978de55570"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "docs/rd/plan-complet-rd-innovation-prospective.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "93d5b58a0e2f27126fe43b341f415139dd806db395a428527d983daea4710398"
+empreinte_apres = "fb8841c7afdbadebfe72128f30a33ceb7c8068abf06d17d451d2c755dbcf7f28"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "docs/rd/plan-site-complet-2026-11-11.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "578ef04fda5aca5bab7cbd2f72b905fb41e82b848539b2577545ce85830e8b0c"
+empreinte_apres = "be883dd6b8a2db1343d5e1f0a8903b302d3e01be90d2c24975019a7da0751cb2"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "docs/rd/plan-site-complet-2026-11-11.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "9c429e28cdd00a980033b5b7e2351327396c37fa830294e96d1475f02c0a808d"
+empreinte_apres = "0d2a1cd9b4d78b4714a5b5ee396069a7e51a1fc74da32bbf527143267f2d5f00"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "docs/rd/vie-chere-carte-2026-11-13.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "150e4f2111371681aacbe24d69ad756a916565cbc342eae45a77a7ee6c9798dc"
+empreinte_apres = "128471615abad74b232a47f96be89a806d47f887a8c9d3a9685a106271562c3a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "documents.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "4a667762e28c9e116808ffb1ec4c014761844aad81da55c022e2c329e89e18e8"
+empreinte_apres = "9a62a5f1b3b5559a9c6fd26288a1eba33e780f707fb1f5aa0b07d7239a891c99"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "eva.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "64b2a207a14a97e08772df4f1444437e5e9f14fe7f53bae6bd5c6c43b5f484fd"
+empreinte_apres = "aa042ed52c4d0032969c4b307552c3b2b98c3b0a974900da24d4e6f5e97d26ca"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "c4e6445656cf63ee5782bc027774451ae8de32589617d5cab4d0765025ea7989"
+empreinte_apres = "f7590b86075049918a8ac65bc575ef60077403475f4b7e2c896eaf8e34737ff1"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "index.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "8b519b6235e78969c3197f0bc0481876797cba839aeff264581a6cca1a74de31"
+empreinte_apres = "aa437ba47a40006125d1c789d18d35d87263b7730c906ccb617fe5c8040d7544"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "liens-utiles.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ffdbbd930f0bf14e6c5815ca157d508239f71ac1710372a73c8b696b0c2ddc74"
+empreinte_apres = "1d6754cafc2014886b36d75675c90ff1c5f90f128578e86ce2e73409b5fbce19"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "llms.txt"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "e7572d8fbf698ab44517cf7642bc3f6d1c7ef847967b81b2645bad2ff620e314"
+empreinte_apres = "1e811cfc49ac230ecc3421a29072b90482cfd992d207dc1e1873a12cc0306533"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "localisation.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "8f4e1b558bac114c68f56ad2a4b5465b4c74aa9415533d9a3add4e665aa1efff"
+empreinte_apres = "e720c337bebc983af69b1cc550828a2970b0e56ac9f54e6f83cea8ade1c9245b"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "nous-contacter.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "2d463a5d750b2770ed5316adcae933042188300407cacbad5b2ca0fb64fe874a"
+empreinte_apres = "700405fc39612759392efb9547de80cf582ec7c887e8573385ca1d3446ec2452"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "outils/construire-apprentissages.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "b917299b2fdc4f33276a965ff39af7f1bb99fc5e6f244075cae6849780758009"
+empreinte_apres = "76893555b0c7d153713b167cf42c84a763e267196fa7d306daf3185bca633dca"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "outils/verifier-integration.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "1ba77deed22f02c110c5c5283fbd1699e11fff39d141a46851e307680910ec3d"
+empreinte_apres = "c54c2546ef803051462195ea7de94a9d5fa695de042c02d36493f121f1efd722"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "outils/verifier-plan-site.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "6475cb6699d281b153f1d33ac99676f6cc10672497ea797e30839bf656f24675"
+empreinte_apres = "7f8d10abbf9544020007c866db6ee5f4c3862b09308c2c7a04a6c2209e4a723a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "outils/verifier-site-statique.py"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "5496eb3a3c797246f8123d0b39a0a9f19a09d8186afbac6722ef1b3cf521f7fe"
+empreinte_apres = "8cf7e808ccbbb9dc26c8661a7cb4f23f16309135306e1ac64fa011f5ac0fd903"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "simulateur.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "7d43e645922c318838465a4d18375cf6df6d9027bf99441f88bad71d86e012b0"
+empreinte_apres = "4347ef6bf2facce7eb4adceb471fe1ea03f6788bbae3606e4ce62d4cbf8eeee7"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "transparence.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "d51e9dc5e8dfb9ad630ba44efe7814d095eb2355ea16a660bce5c1b251c0444a"
+empreinte_apres = "3f7ab309cd6c87027b86c1f7bb918b8b2b0934a6c3c388d5013351a66fa1d84a"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-integration.py", "outils/verifier-plan-site.py", "outils/verifier-site-statique.py", "outils/construire-apprentissages.py", "outils/construire-avancees.py"]
+constat = "La page des coûts de la vie entre dans le menu principal et dans le pied de page de toutes les pages publiques, dans le sommaire llms.txt, et devient la cinquième porte de l'accueil. Trois contrôles sont ajoutés ou resserrés pour que la rechute soit impossible : lien de navigation exigé partout, nombre de portes lu dans le registre du plan de site, cinq propositions vérifiées à l'accueil. Le journal, le dossier de R et D et le registre des avancées consignent le changement et ses limites."
+limite = "L'insertion du lien a été faite par script sur treize pages racine et par le générateur pour les fiches : la cohérence des libellés et de la place dans la rangée n'a pas été vue dans un navigateur. Aucun essai avec une personne n'a dit si « Coût de la vie » est le mot attendu, et l'en-tête passe à dix liens sans mesure de repli avant l'intégration continue."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ccc78b9acdd5d4bdac42c4c975e529fb6aed1bfe558db25169b04321718ca3d6"
+empreinte_apres = "015e8c9b490880b1ea4c468e8b60068af363e09659ac265c531590997527b662"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Régénération de la mémoire d'ÉVA après l'entrée de la page des coûts de la vie dans le menu, la nouvelle avancée et les entrées de journal et de dossier : 538 entrées, 340 nœuds. Ces fichiers sont le rendu de leurs sources, pas des textes écrits à la main."
+limite = "Cette signature atteste la cohérence du rendu, pas la justesse des textes recopiés ; le graphe n'a été ni ouvert ni regardé, et l'index ne dit rien de la navigation réelle du site."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "1c430a798f14b21bc057ee4acad322bb4dc4f5762a7968575667aec28c876615"
+empreinte_apres = "568532f2effa9225b5e411ef66b4c2b0fdb2930e311c2c0821a927e5becb8ab0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Régénération de la mémoire d'ÉVA après l'entrée de la page des coûts de la vie dans le menu, la nouvelle avancée et les entrées de journal et de dossier : 538 entrées, 340 nœuds. Ces fichiers sont le rendu de leurs sources, pas des textes écrits à la main."
+limite = "Cette signature atteste la cohérence du rendu, pas la justesse des textes recopiés ; le graphe n'a été ni ouvert ni regardé, et l'index ne dit rien de la navigation réelle du site."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "5ccb298b9f76e3e2840db0dd25ccb1f08b13bb263f0dfc05e2bb81156430bdd0"
+empreinte_apres = "7a5e276738136fc0c97cbcadd5372b8f0e50849957c0322aead0e056c51def72"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py"]
+constat = "Régénération de la mémoire d'ÉVA après l'entrée de la page des coûts de la vie dans le menu, la nouvelle avancée et les entrées de journal et de dossier : 538 entrées, 340 nœuds. Ces fichiers sont le rendu de leurs sources, pas des textes écrits à la main."
+limite = "Cette signature atteste la cohérence du rendu, pas la justesse des textes recopiés ; le graphe n'a été ni ouvert ni regardé, et l'index ne dit rien de la navigation réelle du site."
+
+[[edition]]
+chemin = ".github/workflows/verification.yml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "ba3e970d4aea2667fe77ad95712234a92bc1510793d3b9f9f942a237663ce458"
+empreinte_apres = "cd3454e8a1ecedc669d47d26792ea37cbcf932461edaf2dc5128599c48652c09"
+nature = "mesure-interne"
+sources = []
+mesures = [".github/workflows/verification.yml", "outils/verifier-workflows.py"]
+constat = "Le plafond du lot graphismes passe de trente à quarante minutes. Le 14 novembre, l'étape 16 sur 16, qui mesure l'arbre d'accessibilité, a été annulée à la trentième minute après quinze étapes vertes : le relevé a grossi avec le site, désormais cent vingt-trois pages dont cent huit fiches. Le commentaire au-dessus du réglage garde la chronologie des relèvements et la raison de chacun, pour qu'un plafond ne se relève jamais sans phrase."
+limite = "Quarante minutes est une marge raisonnée, pas une mesure : la durée de l'étape coupée reste inconnue, puisque l'annulation n'écrit que le moment où elle a eu lieu. Si elle dépasse de nouveau, la prochaine réponse devra être de raccourcir le relevé, pas de relever encore, et ce sera alors au parcours des pages qu'il faudra s'attaquer."

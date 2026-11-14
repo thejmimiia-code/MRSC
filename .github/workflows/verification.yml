@@ -517,7 +517,15 @@ jobs:
     # une mesure : elle est désormais mise en cache, et le plafond reste à 30
     # minutes pour que ce soit une mesure trop lente qui le franchisse, jamais
     # un téléchargement.
-    timeout-minutes: 30
+    #
+    # Le 14 novembre 2026, ce n'est ni un téléchargement ni une faute de mesure
+    # qui l'a franchi, mais la mesure elle-même devenue la plus longue : l'arbre
+    # d'accessibilité des pages n'a pas fini avant la trentième minute, et l'étape
+    # a été coupée — un « annulé » qui ne dit rien de la page. Le relevé a grossi
+    # avec le site (cent vingt-trois pages à parcourir, dont les cent huit
+    # fiches). Le plafond passe à quarante minutes, et il est écrit ici pourquoi :
+    # la marge n'est pas de la tolérance, c'est le temps qu'il faut vraiment.
+    timeout-minutes: 40
     steps:
       - name: Récupérer les sources
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

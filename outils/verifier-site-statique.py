@@ -581,9 +581,12 @@ def verifier_entrees_accueil() -> None:
         signaler("index.html : liste des points d’entrée absente")
         return
     entrees = re.findall(r"<li\b[^>]*>(.*?)</li>", liste.group(1), re.DOTALL)
-    destinations = ("apprendre.html", "ia-societe.html", "simulateur.html", "#rd-eva")
+    # Cinq depuis le 14 novembre 2026 : la page des coûts de la vie est devenue
+    # une porte d'entrée, comme les quatre autres. Le compte est écrit ici pour
+    # qu'une sixième proposition ne s'ajoute pas sans qu'on la voie.
+    destinations = ("apprendre.html", "ia-societe.html", "simulateur.html", "#rd-eva", "couts-vie-chere.html")
     if len(entrees) != len(destinations):
-        signaler("index.html : quatre propositions attendues dans Par où commencer")
+        signaler(f"index.html : {len(destinations)} propositions attendues dans Par où commencer")
         return
     avant = len(ERREURS)
     for numero, (entree, destination) in enumerate(zip(entrees, destinations), start=1):
@@ -593,7 +596,7 @@ def verifier_entrees_accueil() -> None:
         if liens != [destination]:
             signaler(f"index.html : proposition {numero} attendue avec un lien vers {destination}")
     if len(ERREURS) == avant:
-        print("Accueil : les quatre propositions pointent vers leurs ressources respectives.")
+        print(f"Accueil : les {len(destinations)} propositions pointent vers leurs ressources respectives.")
 
 
 def verifier_dependances_apprentissage() -> None:
