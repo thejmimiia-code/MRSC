@@ -60,6 +60,7 @@ RAPPORT = RACINE / "docs" / "rd" / "relecture-apparences-2026-11-07.md"
 RAPPORTS = (
     RAPPORT,
     RACINE / "docs" / "rd" / "relecture-fraudes-declaration-2026-11-12.md",
+    RACINE / "docs" / "rd" / "relecture-couts-vie-chere-2026-11-14.md",
 )
 JS = RACINE / "assets" / "js" / "site.js"
 CSS = RACINE / "assets" / "css" / "site.css"
@@ -73,15 +74,26 @@ INVENTAIRE = RACINE / "docs" / "rd" / "inventaire-controles.md"
 #: ne dispense d'aucun contrôle : extrait daté, ancre de cinq mots au plus,
 #: « permet » et « limites » explicites restent exigés pour chaque source.
 DOMAINES_SURS = {
-    "developer.mozilla.org", "www.w3.org", "w3.org", "github.com",
+    "developer.mozilla.org", "www.w3.org", "w3.org", "github.com", "api.github.com",
     "www.service-public.gouv.fr", "service-public.fr", "service-public.gouv.fr",
     "www.cybermalveillance.gouv.fr", "cybermalveillance.gouv.fr",
     "www.signal-spam.fr", "signal-spam.fr", "www.33700.fr", "33700.fr",
+    # Élargi le 14 novembre 2026 au lot « coût de la vie » : les fiches de licence
+    # de DVF, d’ADMIN EXPRESS et du découpage administratif n’existent que sur ce
+    # portail public. La source citée est une métadonnée officielle, pas la donnée
+    # elle-même, et chaque extrait garde son empreinte et ses limites écrites.
+    "www.data.gouv.fr", "data.gouv.fr", "geo.api.gouv.fr", "www.geo.api.gouv.fr",
+    # Plateforme Opendatasoft de l’État : c’est là que vit l’export réellement
+    # téléchargé des prix des carburants, distinct de la fiche de licence data.gouv.
+    "data.economie.gouv.fr", "www.data.economie.gouv.fr",
 }
 EDITEURS_ATTENDUS = (
     "MDN Web Docs", "W3C",
     "Service-Public.gouv.fr", "Cybermalveillance.gouv.fr",
     "Signal Spam", "33700",
+    # Éditeurs publics du lot « coût de la vie », ajoutés avec leur domaine et
+    # leur extrait daté comme les précédents.
+    "DGFiP", "Etalab", "data.gouv.fr", "IGN", "INSEE", "gregoiredavid", "DGCCRF",
 )
 NATURES = {"fait-source", "mesure-interne", "proposition"}
 VERDICTS = {"concordant", "corrige", "retire", "sans-objet"}

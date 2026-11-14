@@ -11,6 +11,7 @@ flowchart LR
   n_branche_coherence_textes_publics["branche:coherence-textes-publics"]
   n_branche_confronter_une_affirmation_a_sa_source["branche:confronter-une-affirmation-a-sa-source"]
   n_branche_coordination_de_tous_les_agents["branche:coordination-de-tous-les-agents"]
+  n_branche_cout_de_la_vie_et_carte["branche:cout-de-la-vie-et-carte"]
   n_branche_direction_artistique_motion["branche:direction-artistique-motion"]
   n_branche_documentation_rd_eva["branche:documentation-rd-eva"]
   n_branche_ecouter_la_page["branche:ecouter-la-page"]
@@ -44,6 +45,7 @@ flowchart LR
   n_branche_confronter_une_affirmation_a_sa_source -->|servie par| n_phase_verite_et_refus
   n_branche_coordination_de_tous_les_agents -->|servie par| n_phase_economie_de_contexte
   n_branche_coordination_de_tous_les_agents -->|servie par| n_phase_memoire_trois_horizons
+  n_branche_cout_de_la_vie_et_carte -->|servie par| n_phase_continuite_du_support
   n_branche_direction_artistique_motion -->|servie par| n_phase_conscience_et_corps
   n_branche_direction_artistique_motion -->|servie par| n_phase_voix_et_ecoute
   n_branche_documentation_rd_eva -->|servie par| n_phase_couverture_des_branches

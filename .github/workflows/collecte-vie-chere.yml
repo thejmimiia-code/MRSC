@@ -1,0 +1,94 @@
+name: Collecte — coût de la vie par commune
+
+# La page `couts-vie-chere.html` n'invente aucun chiffre : elle lit des fichiers
+# figés, écrits par `outils/collecter-vie-chere.py`. Cette collecte a besoin du
+# réseau (data.gouv.fr, geo.api.gouv.fr) ; elle tourne donc ici, où le réseau
+# existe, et jamais dans l'atelier de l'agent.
+#
+# Elle n'écrit pas dans `main` : elle ouvre une branche et une proposition de
+# fusion. Les chiffres publiés engagent le site, et une donnée qui change sans
+# qu'on la voie passer est une donnée qu'on ne relit pas.
+#
+# Si une source ne répond pas, ou si un contrôle de vraisemblance échoue, le job
+# s'arrête en erreur : aucun fichier n'est écrit, les données précédentes restent
+# en place avec leur date.
+
+on:
+  schedule:
+    - cron: "0 6 1 * *" # le 1er de chaque mois, 6 h UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  collecte:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Récupérer les sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Installer Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Éprouver les machines avant de leur confier des données
+        run: |
+          python3 outils/test_collecte_vie_chere.py
+          python3 outils/test_collecte_carburants.py
+
+      - name: Collecter les prix réels
+        run: |
+          python3 outils/collecter-vie-chere.py --sortie assets/data/vie-chere --semestres 2
+          python3 outils/collecter-vie-chere.py --verifier --sortie assets/data/vie-chere
+          python3 outils/collecter-carburants.py
+          python3 outils/collecter-carburants.py --verifier
+          python3 outils/preparer-fond-de-carte.py --verifier
+
+      # Les fichiers de données sont des unités de contenu : la sentinelle de
+      # relecture exige que leur provenance soit consignée. La signature est
+      # faite ici, avec les empreintes des sources réellement téléchargées, pour
+      # qu'aucune donnée n'entre dans le dépôt sans dire d'où elle vient.
+      - name: Consigner la provenance des fichiers collectés
+        run: |
+          fichiers=$(git status --porcelain -- assets/data/vie-chere | awk '{print $2}' | grep '\.json$' | tr '\n' ' ')
+          if [ -z "$fichiers" ]; then
+            echo "Aucun fichier de données modifié."
+            exit 0
+          fi
+          python3 outils/relire-contenus.py --appliquer $fichiers \
+            --nature mesure-interne \
+            --mesures "outils/collecter-vie-chere.py,outils/test_collecte_vie_chere.py,outils/collecter-carburants.py,outils/test_collecte_carburants.py,outils/preparer-fond-de-carte.py" \
+            --constat "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0) et du découpage administratif de l'État (geo.api.gouv.fr). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population. Aucun chiffre estimé, aucune parcelle, aucune adresse." \
+            --limite "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF." || {
+              echo "::error title=Collecte::la provenance n'a pas pu être consignée";
+              exit 1;
+            }
+
+      - name: Ouvrir une proposition de fusion si les données ont changé
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Collecte identique à la précédente : rien à proposer."
+            exit 0
+          fi
+          jour=$(date -u +%Y-%m-%d)
+          branche="donnees/vie-chere-$jour"
+          git config user.name "collecte-mrsc"
+          git config user.email "collecte-mrsc@users.noreply.github.com"
+          git checkout -b "$branche"
+          git add -A
+          git commit -m "Collecte des prix réels par commune — $jour"
+          git push origin "$branche"
+          gh pr create --base main --head "$branche" \
+            --title "Collecte des prix réels par commune — $jour" \
+            --body "Collecte automatique du $(date -u +%Y-%m-%d).
+
+          Sources : DVF (DGFiP, Licence Ouverte 2.0), API Découpage administratif de l'État (Licence Ouverte 2.0) et flux des prix des carburants (DGCCRF, Licence Ouverte 2.0).
+
+          Ce que la collecte contrôle avant d'écrire : licence ouverte, nombre de communes, prix médian national plausible, absence de prix en Alsace-Moselle, nombre de stations et de départements couverts, prix au litre plausible, empreinte de chaque fichier source.
+
+          Ce qu'elle ne prouve pas : la justesse du prix médian comme indicateur de coût de la vie, la couverture des loyers (non collectée), ni la qualité des contours de 2018. Le prix payé à la pompe dépend de la station, pas du département. Voir \`docs/rd/vie-chere-carte-2026-11-13.md\`."

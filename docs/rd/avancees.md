@@ -10,10 +10,10 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 115 |
-| Période couverte | du 2026-10-20 au 2026-11-13 |
-| Contrôles exécutables cités | 133 |
-| Initiatives du portefeuille concernées | 16 |
+| Avancées consignées | 116 |
+| Période couverte | du 2026-10-20 au 2026-11-14 |
+| Contrôles exécutables cités | 136 |
+| Initiatives du portefeuille concernées | 17 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
 
@@ -2836,6 +2836,35 @@ Initiatives liées : `optimisation-du-site`, `poids-et-sobriete-numerique`.
 **Suite.** Faire relire le relevé par une personne compétente en accessibilité et faire une passe au lecteur d’écran avec une personne qui l’utilise. Ensuite : mesurer les états interactifs (panneau d’accessibilité ouvert, menu ouvert, `<details>` dépliés), éprouver l’iframe du simulateur, puis Firefox et Safari si un poste le permet.
 
 Initiatives liées : `optimisation-du-site`, `coherence-textes-publics`.
+
+### `une-absence-de-donnee-doit-dire-pourquoi` — Sur une carte de données publiques, le travail n’est pas la carte : c’est la case vide
+
+*Consignée le 2026-11-14.*
+
+**Constat.** Un simulateur de coût de la vie ne se juge pas à ce qu’il affiche quand la donnée existe, mais à ce qu’il dit quand elle manque. Sur la carte des prix de vente, une commune peut être vide pour trois raisons qui n’ont rien à voir : aucune vente enregistrée dans le fichier, commune d’Alsace-Moselle hors du champ de DVF (livre foncier), ou collecte qui n’a pas encore tourné. Une seule phrase « pas de données » confond un fait mesuré, une limite légale et une panne d’atelier ; et un total agrégé « coût de la vie » masquerait les trois en donnant un chiffre là où aucune source ne mesure rien. La tentation du chiffre unique est d’autant plus forte que la demande formulée était « les vrais coûts de la vie ».
+
+**Ce que cela change.** Le modèle retenu n’additionne rien : population (geo.api), prix médian au m² des ventes réelles (DVF/DGFiP, Lov2) et nombre de ventes ; une médiane sous cinq ventes n’est pas publiée, et chaque absence est écrite avec sa cause. Le collecteur n’écrit **rien** si une source manque, si la licence n’est pas libre, si la couverture tombe sous 30 000 communes, si une colonne disparaît, si la médiane nationale sort de 800 à 12 000 €/m² ou si un prix apparaît en 57/67/68/976 : il sort en erreur et laisse les données précédentes avec leur date. Le fond de carte est fabriqué et vérifié (96 départements, 118 Kio, Licence Ouverte, empreinte recalculée), la page est assemblée depuis un fragment et refuse un rendu retouché à la main. Les absences sont donc des états testés, pas des accidents d’affichage.
+
+**Preuves dans le dépôt :**
+
+- `docs/rd/vie-chere-carte-2026-11-13.md`
+- `docs/rd/sources-vie-chere.toml`
+- `outils/collecter-vie-chere.py`
+- `outils/test_collecte_vie_chere.py`
+- `outils/preparer-fond-de-carte.py`
+- `outils/construire-page-couts.py`
+- `couts-vie-chere/contenu.txt`
+- `couts-vie-chere.html`
+- `assets/js/carte-vie-chere.js`
+- `.github/workflows/collecte-vie-chere.yml`
+
+**Contrôle qui la maintient :** `python3 outils/test_collecte_vie_chere.py && python3 outils/preparer-fond-de-carte.py --verifier && python3 outils/construire-page-couts.py --verifier && python3 outils/verifier-inventaire-controles.py`
+
+**Limite — ce que cela ne prouve pas.** Aucune donnée réelle n’a encore été collectée : l’atelier de l’agent n’atteint ni data.gouv.fr, ni geo.api.gouv.fr, ni l’IGN, et la collecte est déléguée au workflow, qui n’a pas encore tourné. Les cas du banc jouent la panne contre un serveur local : ils prouvent que le collecteur refuse, pas que les chiffres qu’il produira seront justes. Les contours sont ceux de 2018 et les communes sont des points, pas des polygones : « jusqu’à la ville » vaut pour la sélection et la fiche. Les loyers et les revenus manquent ; la page n’est pas dans le menu principal et le dit. Rien n’a été essayé avec une personne, ni dans Firefox ou Safari.
+
+**Suite.** Lancer `collecte-vie-chere.yml` à la main, puis relire les médianes de Paris, de Lyon et d’un village contre les fichiers DVF publiés avant d’écrire que la carte affiche des prix réels. Ensuite seulement : trancher le lien de navigation, automatiser les revenus FiLoSoFi ou y renoncer, puis faire relire le modèle par une personne compétente en statistique publique.
+
+Initiatives liées : `cout-de-la-vie-et-carte`, `poids-et-sobriete-numerique`, `sources-fermees-et-registre-des-refus`.
 
 ## 3. Ce que ce registre ne dit pas
 

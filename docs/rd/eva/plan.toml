@@ -109,7 +109,7 @@ objectif = "La mémoire ne doit pas dépendre d'une conversation en cours. Tout 
 preuve = "outils/memoire-eva.py"
 test = "outils/test_memoire_eva.py"
 limite = "La continuité repose sur git et sur une copie distante : si les deux disparaissent, la mémoire disparaît. Aucune sauvegarde hors du dépôt n'est décidée ici, et le plan de sauvegarde reste à écrire avec l'association."
-branches = ["optimisation-du-site", "raccordement-domaine-www", "poids-et-sobriete-numerique"]
+branches = ["optimisation-du-site", "raccordement-domaine-www", "poids-et-sobriete-numerique", "cout-de-la-vie-et-carte"]
 depends_on = ["memoire-trois-horizons", "verite-et-refus"]
 
 [[phase]]

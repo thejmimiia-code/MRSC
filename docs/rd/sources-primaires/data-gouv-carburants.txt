@@ -1,0 +1,16 @@
+id = data-gouv-carburants
+url = https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree
+date = 2026-11-14
+empreinte = 8dd999e60abc87cec625e23c80125ba7451a948beddddecc130af408d86b9bc2
+---
+Prix des carburants en France, flux instantané — fiche du jeu de données lue le 14 novembre 2026 par son API publique.
+
+« Les données mises à disposition sont les informations extraites du système d’information “Prix des carburants”. »
+
+« Chaque ligne contient tous les carburants, les prix et les services proposés pour un point de vente. »
+
+« Les données ouvertes comprennent : les informations générales sur un point de vente : adresse, coordonnées géographiques, horaires d’ouverture et services proposés ; les carburants proposés par le point de vente ; les prix des carburants figurant dans le système d’information ; les dates et heures de mises à jour des prix. »
+
+« Le flux de données instantané est mis à jour toutes les 10 minutes. »
+
+Métadonnées de la même réponse : licence « lov2 », périodicité « continuous », organisation « Ministères économiques et financiers », contact de publication « DGCCRF ».

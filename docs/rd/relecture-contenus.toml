@@ -14,9 +14,9 @@
 [meta]
 version = 1
 date_relecture = 2026-11-07
-dates_lots = [2026-11-07, 2026-11-12]
+dates_lots = [2026-11-07, 2026-11-12, 2026-11-14]
 auteur = "agent"
-lot = "apparences-du-7-novembre-2026-et-declaration-fraudes-du-12-novembre-2026"
+lot = "apparences-du-7-novembre-2026-et-declaration-fraudes-du-12-novembre-2026-et-cout-de-la-vie-du-14-novembre-2026"
 statut = "relu-par-agent-sources-confrontees"
 regle = "La personne valide le rendu à l'oeil ; l'agent relit les contenus, confronte chaque fait à une source primaire datée et consigne les limites. Aucune chaîne publique du lot sans entrée ici."
 rapport = "docs/rd/relecture-apparences-2026-11-07.md"
@@ -607,3 +607,124 @@ mesures = ["outils/verifier-apparences.py"]
 verdict = "concordant"
 ce_qui_est_verifie = "MDN confirme que reduce demande à supprimer les animations non essentielles et que forced-colors force déjà background-image à none pour les dégradés. La porte refuse toute propriété animation dans les trois règles de décor, et une mesure navigateur en couleurs forcées donne background-image: none."
 limite = "Cela ne couvre pas les transitions déjà présentes ailleurs sur le site, ni un essai avec une personne sensible au mouvement. La conformité globale à la préférence de mouvement n'est pas revendiquée."
+
+# Lot « coût de la vie » du 14 novembre 2026 : quatre sources publiques lues par
+# leur API ou leur page, puis recopiées à la main dans `sources-primaires`.
+# Chaque extrait porte son empreinte, son URL et sa date de consultation.
+
+[[source]]
+id = "data-gouv-dvf"
+extrait = "docs/rd/sources-primaires/data-gouv-dvf.txt"
+editeur = "DGFiP (Ministères économiques et financiers), via data.gouv.fr"
+titre = "Demandes de valeurs foncières (DVF)"
+url = "https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres"
+consulte_le = 2026-11-14
+ancre = "mise à jour semestrielle"
+permet = "Établir que le fichier est produit par la DGFiP, semestriel, sous Licence Ouverte 2.0, qu’il exclut l’Alsace, la Moselle et Mayotte, et que sa réutilisation interdit la ré-identification et l’indexation."
+limites = "La fiche décrit le fichier, elle ne dit rien de la qualité des prix, ni des ventes non enregistrées, ni des écarts entre communes. Elle ne prouve pas que le fichier téléchargé est intact : c’est l’empreinte SHA-1 de la ressource qui le dira. Les fichiers antérieurs sont supprimés à chaque mise à jour, donc un chiffre publié n’est reproductible qu’avec l’archive du jour."
+
+[[source]]
+id = "geo-api-decoupage"
+extrait = "docs/rd/sources-primaires/geo-api-decoupage.txt"
+editeur = "Etalab / DINUM (geo.api.gouv.fr)"
+titre = "API Découpage administratif"
+url = "https://geo.api.gouv.fr/decoupage-administratif"
+consulte_le = 2026-11-14
+ancre = "Rechercher et localiser les communes"
+permet = "Confirmer que l’API couvre les communes, et qu’un appel par code INSEE rend le nom, la population et le centre — ce que la page utilise pour placer les villes et afficher leur population."
+limites = "Page d’accueil d’une API : elle ne documente ni les champs, ni les limites d’usage, ni la licence. Elle ne dit pas quelle population est rendue (légale, millésimée) : la réponse de l’exemple ne porte pas cette précision, donc la page l’annonce comme un ordre de grandeur daté, pas comme une donnée millésimée."
+
+[[source]]
+id = "data-gouv-decoupage-administratif"
+extrait = "docs/rd/sources-primaires/data-gouv-decoupage-administratif.txt"
+editeur = "data.gouv.fr (Etalab), d’après INSEE et DGCL"
+titre = "Découpage administratif"
+url = "https://www.data.gouv.fr/datasets/decoupage-administratif-1"
+consulte_le = 2026-11-14
+ancre = "Code officiel géographique"
+permet = "Établir la licence (Licence Ouverte 2.0) des données communales servies par l’API, leur chaîne de provenance (COG INSEE, population légale INSEE, codes postaux La Poste) et le fait qu’elles ne contiennent aucun contour."
+limites = "Fiche de métadonnées : elle attribue la licence au jeu de données, pas explicitement au service `geo.api.gouv.fr` qui le sert. Elle ne dit pas quel millésime de population répond l’API. Elle rappelle surtout que les contours sont ailleurs — ce qui interdit de dessiner une commune à partir de ces données."
+
+[[source]]
+id = "data-gouv-admin-express"
+extrait = "docs/rd/sources-primaires/data-gouv-admin-express.txt"
+editeur = "IGN (Institut national de l’information géographique et forestière), via data.gouv.fr"
+titre = "ADMIN EXPRESS (ADMIN EXPRESS COG, CARTO, CARTO PE, CARTOPLUS PE)"
+url = "https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe"
+consulte_le = 2026-11-14
+ancre = "Licence Ouverte / Open License"
+permet = "Établir que les contours départementaux viennent de l’IGN, sous Licence Ouverte, et qu’ils suivent le Code officiel géographique de l’INSEE — donc qu’un contour publié n’est pas un dessin du site."
+limites = "La fiche décrit l’édition courante, pas l’édition 2018 utilisée par le fond de carte : elle prouve le producteur et la licence, pas la date du contour affiché. Elle ne dit rien de la simplification appliquée par un intermédiaire. La fiche produit de l’IGN étant inaccessible (403), les conditions détaillées de réutilisation n’ont pas été lues à la source."
+
+# Lot « coût de la vie » : les deux adresses d’API que le collecteur interroge,
+# distinctes des fiches de présentation citées par la page publique.
+
+[[source]]
+id = "data-gouv-dvf-api"
+extrait = "docs/rd/sources-primaires/data-gouv-dvf-api.txt"
+editeur = "DGFiP (Ministères économiques et financiers), via l’API data.gouv.fr"
+titre = "DVF — réponse d’API du jeu de données"
+url = "https://www.data.gouv.fr/api/1/datasets/demandes-de-valeurs-foncieres/"
+consulte_le = 2026-11-14
+ancre = "lov2"
+permet = "Prouver que le collecteur lit la licence et la date de mise à jour **dans l’API**, et non dans une valeur écrite à la main : c’est cette lecture qui déclenche le refus si la licence change."
+limites = "Une réponse d’API n’est pas une page : elle ne montre ni la notice, ni les conditions générales d’utilisation, ni les fichiers eux-mêmes. Les empreintes annoncées prouvent l’identité d’un fichier, pas son contenu. La réponse peut changer sans préavis."
+
+[[source]]
+id = "geo-api-communes-champs"
+extrait = "docs/rd/sources-primaires/geo-api-communes-champs.txt"
+editeur = "Etalab / DINUM (geo.api.gouv.fr)"
+titre = "API Découpage administratif — communes et champs demandés"
+url = "https://geo.api.gouv.fr/communes?fields=nom,code,codesPostaux,population,centre,departement"
+consulte_le = 2026-11-14
+ancre = "75056"
+permet = "Prouver que l’adresse appelée par le collecteur est bien celle qui rend la population et le point central, et qu’une réponse réelle contient ces champs pour une commune connue."
+limites = "Un seul appel de contrôle a été fait, sur une commune. Rien ne dit que la réponse est complète pour les 34 000 communes, ni quel millésime de population elle sert, ni si l’API limite le débit. Le champ « centre » est un point, pas un contour."
+
+# Lot « coût de la vie » : l’export intermédiaire des contours et la source des revenus.
+
+[[source]]
+id = "france-geojson-export"
+extrait = "docs/rd/sources-primaires/france-geojson-export.txt"
+editeur = "gregoiredavid (export communautaire de données IGN)"
+titre = "france-geojson — dépôt des contours au format GeoJSON"
+url = "https://api.github.com/repos/gregoiredavid/france-geojson"
+consulte_le = 2026-11-14
+ancre = "license"
+permet = "Établir que l’export ne déclare aucune licence, et que la Licence Ouverte invoquée pour le fond vient donc de l’IGN à la source — pas du dépôt intermédiaire. C’est la distinction entre réutiliser un jeu de données et le valider."
+limites = "L’API d’un dépôt ne prouve ni la provenance exacte des géométries, ni leur date, ni la simplification appliquée. Le dépôt n’a pas bougé depuis 2022 selon « pushed_at », mais rien ne garantit que le fichier téléchargé est celui décrit ici : c’est l’empreinte du fichier local qui le dira."
+
+[[source]]
+id = "data-gouv-filosofi"
+extrait = "docs/rd/sources-primaires/data-gouv-filosofi.txt"
+editeur = "INSEE"
+titre = "Revenus et pauvreté des ménages aux niveaux national et local (FiLoSoFi)"
+url = "https://www.data.gouv.fr/datasets/revenus-et-pauvrete-des-menages-aux-niveaux-national-et-local-revenus-localises-sociaux-et-fiscaux"
+consulte_le = 2026-11-14
+ancre = "quartiles"
+permet = "Établir que le revenu médian communal existe bien, qu’il est libre (Licence Ouverte, jeu à haute valeur) et produit par l’INSEE — donc que son absence de la page est un choix de collecte, pas une donnée qui n’existe pas."
+limites = "La fiche ne donne aucun chiffre : elle ne permet pas d’affirmer un revenu pour une commune. Ses ressources passent par des pages HTML de l’INSEE et non par des fichiers à URL stable, ce qui explique pourquoi la collecte automatique n’a pas été faite et pourquoi le site préfère ne rien afficher."
+
+# Lot « coût de la vie » : les carburants, fiche de licence et flux réellement appelé.
+
+[[source]]
+id = "data-gouv-carburants"
+extrait = "docs/rd/sources-primaires/data-gouv-carburants.txt"
+editeur = "DGCCRF (Ministères économiques et financiers), via data.gouv.fr"
+titre = "Prix des carburants en France, flux instantané (v2 améliorée)"
+url = "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree"
+consulte_le = 2026-11-14
+ancre = "toutes les 10 minutes"
+permet = "Établir que les prix à la pompe sont publiés par la DGCCRF sous Licence Ouverte, station par station, avec leur date de mise à jour — donc qu’une médiane départementale peut être calculée sur des prix réellement affichés."
+limites = "La fiche décrit le dispositif, pas les prix : elle ne dit ni combien de stations répondent, ni si toutes déclarent, ni si un prix affiché est un prix pratiqué. Elle ne dit rien du prix payé (promotions, lavage, cartes de fidélité), et une station peut manquer sans que rien ne le signale."
+
+[[source]]
+id = "data-economie-carburants-api"
+extrait = "docs/rd/sources-primaires/data-economie-carburants-api.txt"
+editeur = "DGCCRF / data.economie.gouv.fr"
+titre = "Prix des carburants — export CSV de la plateforme Opendatasoft"
+url = "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/csv"
+consulte_le = 2026-11-14
+ancre = "code_departement"
+permet = "Prouver la forme réelle des données collectées — une ligne par station, les prix par carburant, le département — et le nombre de stations annoncé par l’API (9 833) le jour du contrôle."
+limites = "Un appel de contrôle sur une ligne ne prouve pas la stabilité du schéma : un champ renommé ferait refuser la collecte, pas produire un chiffre faux, mais l’outil ne teste que le champ département. Les prix absents (`null`) ne sont pas distingués d’un carburant non vendu par la station."

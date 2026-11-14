@@ -14,25 +14,26 @@ Méthode : `orchestration-taches` pour cadrer et router, `conception-innovation`
 
 | Zone | Fichiers | Surface | Source de vérité | Garde | Prochaine action |
 | --- | --- | --- | --- | --- | --- |
-| `racine` | 22 | Site public et entrées du dépôt | `index.html` | `outils/verifier-site-statique.py` | Tenir les 121 pages servies et les 16 fichiers racine alignés |
+| `racine` | 23 | Site public et entrées du dépôt | `index.html` | `outils/verifier-site-statique.py` | Tenir les 121 pages servies et les 16 fichiers racine alignés |
 | `.agents` | 28 | Bibliothèque de skills méthodologiques | `docs/rd/bibliotheque-skills.md` | `outils/verifier-rd-continue.py` | Ne charger que les cartes utiles, une à trois par tâche |
 | `.claude` | 26 | Point d’entrée visuel et skills amont licenciées | `docs/rd/bibliotheque-skills.md` | `outils/verifier-rd-continue.py` | Vérifier les fichiers de provenance et les empreintes des skills amont |
-| `.github` | 9 | CI, publication, veille et crochets | `docs/rd/inventaire-controles.md` | `outils/verifier-workflows.py` | Garder la sentinelle câblée sur chaque push et chaque PR |
+| `.github` | 10 | CI, publication, veille et crochets | `docs/rd/inventaire-controles.md` | `outils/verifier-workflows.py` | Garder la sentinelle câblée sur chaque push et chaque PR |
 | `.githooks` | 1 | Crochet local pre-commit | `docs/rd/relecture-automatique.md` | `outils/verifier-relecture-contenus.py` | Refuser toute édition non signée localement |
 | `api` | 17 | API du simulateur, servie par Vercel | `api/donnees.py` | `outils/verifier-securite.py` | Séparer paramètres, modèle, calcul et résultat |
 | `apprendre` | 107 | 107 pages de fiches générées | `docs/apprentissage/catalogue.toml` | `outils/construire-apprentissages.py` | Ne jamais éditer une page générée à la main |
-| `assets` | 33 | CSS, JavaScript, images et documents | `assets/css/site.css` | `outils/verifier-integration.py` | Maintenir les relevés de poids et les variantes d’images |
-| `docs` | 164 | R&D, apprentissage, gouvernance et prospective | `docs/rd/portefeuille.toml` | `outils/verifier-rd-continue.py` | Régénérer toute sortie dérivée depuis son générateur |
-| `outils` | 143 | Gardes, générateurs et bancs de mutation | `outils/verifier-rd-continue.py` | `outils/verifier-inventaire-controles.py` | Tout nouvel outil doit entrer dans l’inventaire avec son banc |
+| `assets` | 35 | CSS, JavaScript, images et documents | `assets/css/site.css` | `outils/verifier-integration.py` | Maintenir les relevés de poids et les variantes d’images |
+| `docs` | 190 | R&D, apprentissage, gouvernance et prospective | `docs/rd/portefeuille.toml` | `outils/verifier-rd-continue.py` | Régénérer toute sortie dérivée depuis son générateur |
+| `outils` | 152 | Gardes, générateurs et bancs de mutation | `outils/verifier-rd-continue.py` | `outils/verifier-inventaire-controles.py` | Tout nouvel outil doit entrer dans l’inventaire avec son banc |
 | `simulateur` | 31 | Moteur embarqué et pages du simulateur | `simulateur/donnees_live.py` | `outils/construire-simulateur.py` | Comparer l’amont avant toute mise à jour du moteur |
+| `couts-vie-chere` | 1 | Fragment texte de la page des coûts, hors HTML pour ne pas compter une page publique de plus | `couts-vie-chere/contenu.txt` | `outils/construire-page-couts.py` | Toute retouche passe par le fragment et la relecture signée |
 
-**Total recalculé : 598 fichiers présents**, 11 zones, aucune zone sans garde (les 4 fichiers de plus que le relevé initial viennent du lot site du 17 h 24 UTC, les 11 suivants des lots fraude et accessibilité du 12 novembre 2026, les 4 du matériel de séance du 13 novembre 2026 (fiche de notes, consignes imprimables, profil de démonstration et son banc), les 4 du lot arbre d’accessibilité du même jour (la sonde, le verdict, son banc et le dossier)). Le comptage est fait sur le système de fichiers, hors historique Git, caches et brouillons de signature ; il fonctionne donc aussi dans la copie jetable du banc de mutation. `docs/apprentissage/relectures.toml` reste à 0 relecture humaine : aucun des 598 fichiers n’est une preuve de validation.
+**Total recalculé : 622 fichiers présents**, 12 zones, aucune zone sans garde (les 4 fichiers de plus que le relevé initial viennent du lot site du 17 h 24 UTC, les 11 suivants des lots fraude et accessibilité du 12 novembre 2026, les 4 du matériel de séance du 13 novembre 2026 (fiche de notes, consignes imprimables, profil de démonstration et son banc), les 4 du lot arbre d’accessibilité du même jour (la sonde, le verdict, son banc et le dossier)). Le comptage est fait sur le système de fichiers, hors historique Git, caches et brouillons de signature ; il fonctionne donc aussi dans la copie jetable du banc de mutation. `docs/apprentissage/relectures.toml` reste à 0 relecture humaine : aucun des 598 fichiers n’est une preuve de validation.
 
 Ce que l’inventaire ne dit pas : qu’une ressource est utile, qu’une page est lue, qu’un contrôle est éprouvé sur toutes les fautes possibles, ou qu’un fichier suivi par Git est encore servi tel quel. Les six relevés binaires périmés de `docs/rd/inventaire-controles.md` restent à remesurer après publication.
 
 ## 3. Toute la R&D : initiatives et état mesuré
 
-Les 19 initiatives viennent de `docs/rd/portefeuille.toml` ; aucun état, aucune priorité et aucune `derniere_revue` n’est modifié. La garde refuse qu’une initiative disparaisse de la matrice ou que son état y soit embelli.
+Les 20 initiatives viennent de `docs/rd/portefeuille.toml` ; aucun état, aucune priorité et aucune `derniere_revue` n’est modifié. La garde refuse qu’une initiative disparaisse de la matrice ou que son état y soit embelli.
 
 | Initiative | Priorité | État | Chantier | Action portée par l’agent | Preuve |
 | --- | --- | --- | --- | --- | --- |
@@ -55,6 +56,7 @@ Les 19 initiatives viennent de `docs/rd/portefeuille.toml` ; aucun état, aucune
 | `confronter-une-affirmation-a-sa-source` | P0 | a-tester | A | Tenter les 89 adresses, puis consigner trois passes datées | `docs/rd/sources-ouvertes-2026-11-11.toml` |
 | `ecouter-la-page` | P1 | a-valider | D | Garder un repli texte et une écoute sur l’appareil | `docs/rd/inclusion-lecture-vocale.md` |
 | `sources-fermees-et-registre-des-refus` | P1 | en-cours | B | Tenir sept sources tentées et refusées, arbitrer arts-composer-formes | `docs/apprentissage/sources-refusees.toml` |
+| `cout-de-la-vie-et-carte` | P1 | a-tester | C | Tenir la page des coûts, ses refus de collecte et sa provenance ; lancer la collecte hors de l’atelier | `docs/rd/vie-chere-carte-2026-11-13.md` |
 
 Chronologie de la R&D réellement exécutée : le 10 novembre 2026, relecture de contenu des 81 prototypes (17 pages de source, 131 rattachements, 20 égalités sans écart) ; le 11 novembre en première passe, 89 adresses uniques tentées, 83 contenus consignés, 3 pages d’erreur servies et 3 erreurs de récupération ; en seconde passe, 16 pages officielles lues et datées, 2 remplacements exacts, 2 partiels, 1 contexte et 1 adresse sans page lue ; en troisième passe, 17 tentatives dont 13 HTTP 403, 10 pages de l’IGN lues et datées sur `cartes.gouv.fr` et `data.geopf.fr`, 2 confrontations avec les fiches de géographie, **avant toute modification de fiche**. Ce lot ajoute la quatrième brique : 4 cartes de cadrage, la régénération de `docs/rd/carte-lacunes.md`, `docs/rd/couverture-sujets.md` et `docs/rd/prospective-lacunes-2027.md`, puis la matrice et le présent plan.
 

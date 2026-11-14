@@ -181,5 +181,62 @@ class MutationsRelectureContenus(unittest.TestCase):
             "ne pas revendiquer")
 
 
+class ManifesteDesUrl(unittest.TestCase):
+    """Deux cas trouvés par la porte elle-même, pas par une idée.
+
+    Le 14 novembre 2026, le manifeste a été écrit avec une URL finissant par une
+    barre oblique échappée — le code source d'un outil contenait
+    `data-print-url=\"https://…\"` — et le fichier ne se relisait plus. La porte
+    a refusé son propre manifeste : c'est bien, mais un défaut trouvé par hasard
+    n'est pas un défaut protégé. Ces deux cas le protègent.
+    """
+
+    def module(self, racine: Path):  # noqa: ANN001
+        import importlib.util
+        import os
+        ancien = os.environ.get("MRSC_RACINE")
+        os.environ["MRSC_RACINE"] = str(racine)
+        try:
+            spec = importlib.util.spec_from_file_location(
+                "relire_contenus_banc", RACINE / "outils" / "relire-contenus.py"
+            )
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            return module
+        finally:
+            if ancien is None:
+                os.environ.pop("MRSC_RACINE", None)
+            else:
+                os.environ["MRSC_RACINE"] = ancien
+
+    def test_url_echappee_nettoyee(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="mrsc-url-") as dossier:
+            racine = Path(dossier)
+            (racine / "outil.py").write_text(
+                'ligne = "data-print-url=\\"https://thejmimiia-code.github.io/MRSC/x.html\\""\n'
+                'autre = "<a href=\\"https://exemple.test/page.html\\">"\n',
+                encoding="utf-8",
+            )
+            urls = self.module(racine).urls_du_fichier("outil.py")
+            self.assertTrue(urls, "aucune URL relevée : le cas ne prouve rien")
+            for url in urls:
+                self.assertFalse(url.endswith("\\"), f"barre oblique finale conservée : {url!r}")
+                self.assertNotIn("\"", url)
+
+    def test_manifeste_relu_apres_ecriture(self) -> None:
+        import tomllib
+        with tempfile.TemporaryDirectory(prefix="mrsc-manifeste-") as dossier:
+            racine = Path(dossier)
+            (racine / "docs" / "rd").mkdir(parents=True)
+            module = self.module(racine)
+            module.ecrire_manifeste(
+                [{"chemin": "a.py", "empreinte": "0" * 64, "etat": "relu-par-agent",
+                  "apostrophes": 0, "urls": ['https://exemple.test/a"b', "https://exemple.test/c\\d"]}],
+                {"date_reference": "2026-11-14", "regle": "r", "limite_reference": "l"},
+            )
+            donnees = tomllib.loads(module.MANIFESTE.read_text(encoding="utf-8"))
+            self.assertEqual(donnees["unite"][0]["urls"], ['https://exemple.test/a"b', "https://exemple.test/c\\d"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -85,7 +85,7 @@ Le plan lui-même est une **sortie de synthèse**, pas une nouvelle source de v�
 | Essais navigateur | 13/13 et 0 violation axe sur les mesures d’agent | Qu’un lecteur d’écran ou une personne a validé le rendu |
 | Dette de format | +2 règles et +1 bloc à 520 px, consignée dans `docs/rd/paliers-affichage.toml` | Que le palier a été adopté |
 
-## 4. Cartographie des 19 initiatives
+## 4. Cartographie des 20 initiatives
 
 Chaque identifiant renvoie à une entrée de `docs/rd/portefeuille.toml`. Aucun état n’est modifié par ce plan.
 
@@ -110,6 +110,7 @@ Chaque identifiant renvoie à une entrée de `docs/rd/portefeuille.toml`. Aucun 
 | `cartographier-les-lacunes` | P1 | veille / `en-cours` | Six sujets sans fiche laissés visibles, pas comblés d’autorité |
 | `ecouter-la-page` | P1 | prototype / `a-valider` | Relecture accessibilité et essai avec technologies d’assistance |
 | `sources-fermees-et-registre-des-refus` | P1 | maintien / `en-cours` | Arbitrage éditorial sur `arts-composer-formes` : ajouter une page précise ou garder le portail assumé |
+| `cout-de-la-vie-et-carte` | P1 | prototype / `a-tester` | Collecte réelle à lancer hors de l’atelier (réseau bloqué) et trois communes à relire avant de dire que la carte affiche des prix réels ; page hors du menu principal, loyers et revenus absents |
 
 ## 5. Plan par chantiers
 

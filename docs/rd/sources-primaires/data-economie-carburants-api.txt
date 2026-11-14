@@ -1,0 +1,12 @@
+id = data-economie-carburants-api
+url = https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/csv
+date = 2026-11-14
+empreinte = d852e87e14f2e1e405cbef8d29fa7cebddc5a681e45770bf7e305c06e5a7054c
+---
+Export CSV du jeu « prix-des-carburants-en-france-flux-instantane-v2 » — appel de contrôle du 14 novembre 2026.
+
+Appel de contrôle sur l’API de la même plateforme, jeu `prix-des-carburants-en-france-flux-instantane-v2`, champs `code_departement, ville, gazole_prix, sp95_prix, e10_prix, gplc_prix, horaires_automate_24_24`, `limit=1` : réponse `{"total_count": 9833, "results": [{"code_departement": "56", "ville": "Bréhan", "gazole_prix": 2.109, "sp95_prix": 2.009, "e10_prix": null, "gplc_prix": null}]}`.
+
+Ce que le site en garde : le code département, six prix au litre et rien d’autre. Ni nom de station, ni adresse, ni horaires.
+
+C’est cette adresse que `outils/collecter-carburants.py` interroge ; le champ `code_departement` est contrôlé à la lecture, et son absence fait refuser le flux.
