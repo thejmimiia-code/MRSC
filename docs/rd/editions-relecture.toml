@@ -8703,3 +8703,39 @@ sources = []
 mesures = ["outils/verifier-plan-projet.py"]
 constat = "Deux fichiers ajoutés au lot carburants (collecteur et banc) font passer le plan de projet de 618 à 622 fichiers : la zone outils de 150 à 152, la zone docs de 188 à 190. Les compteurs du plan ont été réalignés sur le compte réel rendu par verifier-plan-projet.py, sans ajouter d'initiative ni d'action."
 limite = "Cette relecture ne vérifie qu'un compte de fichiers et de zones ; elle ne dit rien de la pertinence du découpage, et les autres compteurs du plan (initiatives, actions, portes) n'ont pas bougé — c'est le vérificateur qui le garantit, pas cette signature."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "dfb3b9392ddd37314547bc4e7dcb72289dc2e65671d85b9ee1ed73a451fa06a1"
+empreinte_apres = "ee02ab54ace2c236c812cc1cdf58e20b5ae5fb2d5d7aaee9a22af5a76d3f9976"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/verifier-affichages.py", "outils/construire-page-couts.py"]
+constat = "Le repli de la grille carte + panneau sous 760 px : le palier de 900 px que j'avais écrit n'existait pas au registre et en créait un de plus ; il rejoint le palier de 760 px déjà déclaré, dont la dette augmente d'un bloc et d'une règle, consignée dans paliers-affichage.toml. La feuille, la page générée et la version CSS IA sont réalignées."
+limite = "Cette relecture ne dit pas que 760 px est la bonne limite : le registre la déclare en dette, et aucune largeur réelle n'a été mesurée dans un navigateur cette fois — pas de capture, pas de fenêtre redimensionnée. Le repli n'a été vérifié que par le comptage des paliers et la porte d'affichage."
+
+[[edition]]
+chemin = "docs/rd/paliers-affichage.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "6783f6edf9e128045f00f692260b518af01f283df625a0e7aac19f9a65d3607c"
+empreinte_apres = "e583b203c97f7edf7f75e1e5e3684fa712f7e0ff08776d528f5eb814f2c41e10"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/verifier-affichages.py", "outils/construire-page-couts.py"]
+constat = "Le repli de la grille carte + panneau sous 760 px : le palier de 900 px que j'avais écrit n'existait pas au registre et en créait un de plus ; il rejoint le palier de 760 px déjà déclaré, dont la dette augmente d'un bloc et d'une règle, consignée dans paliers-affichage.toml. La feuille, la page générée et la version CSS IA sont réalignées."
+limite = "Cette relecture ne dit pas que 760 px est la bonne limite : le registre la déclare en dette, et aucune largeur réelle n'a été mesurée dans un navigateur cette fois — pas de capture, pas de fenêtre redimensionnée. Le repli n'a été vérifié que par le comptage des paliers et la porte d'affichage."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "361cdcdd7b8281f8beadd6075cf23047fdcbfc4d8ce49d3424766ea364d0eacc"
+empreinte_apres = "d5a0610e0f6c619916de57cb8178dcb4e1f63d026df32cf9c61339b217a670a4"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/compter-paliers.py", "outils/verifier-affichages.py", "outils/construire-page-couts.py"]
+constat = "Le repli de la grille carte + panneau sous 760 px : le palier de 900 px que j'avais écrit n'existait pas au registre et en créait un de plus ; il rejoint le palier de 760 px déjà déclaré, dont la dette augmente d'un bloc et d'une règle, consignée dans paliers-affichage.toml. La feuille, la page générée et la version CSS IA sont réalignées."
+limite = "Cette relecture ne dit pas que 760 px est la bonne limite : le registre la déclare en dette, et aucune largeur réelle n'a été mesurée dans un navigateur cette fois — pas de capture, pas de fenêtre redimensionnée. Le repli n'a été vérifié que par le comptage des paliers et la porte d'affichage."

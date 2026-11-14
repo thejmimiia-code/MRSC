@@ -1462,7 +1462,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/css/site.css"
-empreinte = "dfb3b9392ddd37314547bc4e7dcb72289dc2e65671d85b9ee1ed73a451fa06a1"
+empreinte = "ee02ab54ace2c236c812cc1cdf58e20b5ae5fb2d5d7aaee9a22af5a76d3f9976"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
@@ -2086,10 +2086,10 @@ urls = ["https://www.nvidia.com/en-us/products/workstations/dgx-spark/"]
 
 [[unite]]
 chemin = "docs/rd/paliers-affichage.toml"
-empreinte = "6783f6edf9e128045f00f692260b518af01f283df625a0e7aac19f9a65d3607c"
+empreinte = "e583b203c97f7edf7f75e1e5e3684fa712f7e0ff08776d528f5eb814f2c41e10"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-09
+date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/plan-complet-rd-innovation-prospective.md"
@@ -2676,7 +2676,7 @@ urls = ["https://thejmimiia-code.github.io/MRSC/eva.html", "https://www.nvidia.c
 
 [[unite]]
 chemin = "ia-societe.html"
-empreinte = "361cdcdd7b8281f8beadd6075cf23047fdcbfc4d8ce49d3424766ea364d0eacc"
+empreinte = "d5a0610e0f6c619916de57cb8178dcb4e1f63d026df32cf9c61339b217a670a4"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-14
