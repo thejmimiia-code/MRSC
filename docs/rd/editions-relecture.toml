@@ -10395,3 +10395,27 @@ sources = []
 mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/preparer-fond-de-carte.py"]
 constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr) et des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
 limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian comme indicateur, ni la couverture des loyers, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "dce4a3ef7ca757fb50e9f4843e765ccfa97549e715881777a6cf9bfbca693cbd"
+empreinte_apres = "d1ca4dadd97415a4c8f204bdec70ca5b51123aca4fb400d4c1b47828dffb08a0"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py"]
+constat = "La fusion des données collectées ajoute 111 fichiers sous assets/data/vie-chere : le plan de projet passe de 622 à 733 fichiers, et la zone assets de 35 à 146. Compteurs réalignés sur le compte réel rendu par verifier-plan-projet.py ; ni initiative, ni action, ni porte ajoutée."
+limite = "Cette signature ne vérifie qu'un compte de fichiers ; elle ne dit rien de la structure du plan ni de la qualité des données publiées. Les autres compteurs du plan restent ceux qu'il annonçait, et c'est le vérificateur qui le garantit."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
+date = 2026-11-14
+auteur = "agent"
+empreinte_avant = "8d337374395a71f41166d2929fc2cf88ada20d6648f5ade3a0eb389c1886620c"
+empreinte_apres = "a47088c3da267b7e0b5911cfe6c9a912163d2a9e4e4c1a0bd14b2fd6804fe08d"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py"]
+constat = "La fusion des données collectées ajoute 111 fichiers sous assets/data/vie-chere : le plan de projet passe de 622 à 733 fichiers, et la zone assets de 35 à 146. Compteurs réalignés sur le compte réel rendu par verifier-plan-projet.py ; ni initiative, ni action, ni porte ajoutée."
+limite = "Cette signature ne vérifie qu'un compte de fichiers ; elle ne dit rien de la structure du plan ni de la qualité des données publiées. Les autres compteurs du plan restent ceux qu'il annonçait, et c'est le vérificateur qui le garantit."
