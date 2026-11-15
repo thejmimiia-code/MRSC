@@ -2,6 +2,18 @@
 
 Ce journal conserve les décisions structurantes et les relais utiles, pas le détail de chaque commit. Utiliser le [gabarit d'initiative](gabarit-initiative.md) pour une décision nouvelle et le [portefeuille vivant](portefeuille.toml) pour son état courant. Une entrée doit rester datée, reliée à un identifiant d'initiative, préciser les preuves, la décision, les contrôles réellement exécutés et la suite. Ne pas y mettre de données personnelles ni recopier les réponses de personnes apprenantes.
 
+## 2026-11-15 — Les loyers réels entrent, et la collecte cesse de mourir en silence
+
+- **Initiative :** `cout-de-la-vie-et-carte`.
+- **Demande reprise :** le poste « loyers », affiché à la maille où la source le publie.
+- **Ce qui change :** la page publie 52 agglomérations observées en 2025 : loyer médian au m², loyer médian mensuel, surface moyenne et nombre d’observations. Paris intra-muros vaut 27,30 €/m² et 1 108 €/mois, les communautés de communes Mellois en Poitou et Haut Val de Sèvres 6,30 €/m² et 590 €/mois : les extrêmes d’une distribution observée, pas des cas choisis. Les chiffres sont aussi publiés en clair dans `assets/data/vie-chere/loyers.json`, cité par la page.
+- **Ce que la relecture a retiré :** le champ `nombre_logements` de la source n’est pas republié — il vaut 4 pour les quatre lignes parisiennes —, la ligne nommée `L7500` est écartée et la page dit pourquoi. C’est la deuxième fois qu’une proposition de fusion de données est fermée, puis reprise après correction : la règle « une donnée fausse ne se publie pas » a un coût, et ce coût est le prix du chiffre juste.
+- **Une panne muette, et sa cause :** la deuxième collecte a réussi ses six étapes de données puis échoué à l’ouverture de sa proposition de fusion, avec pour seul indice un code de sortie. La branche `donnees/vie-chere-2026-11-14` existait déjà, laissée par la proposition fermée ; la poussée a été refusée. La branche porte désormais le numéro d’exécution, et un refus de poussée remonte en annotation. La cause reste une déduction : le journal du pas n’est pas lisible depuis l’atelier.
+- **Ce que la collecte ne peut pas faire seule :** un fichier de données de plus décale le plan complet du projet, un fichier publié que rien ne cite devient une ressource orpheline. Les deux sont des défauts de code et de documents, pas de collecte : la collecte a donc été reprise sur la branche de l’atelier, où elle a reçu le lien qui cite son JSON et la resynchronisation du plan à 738 fichiers.
+- **Contrôles exécutés :** `test_collecte_loyers.py` (21 cas), `test_collecte_vie_chere.py` (25 cas), `construire-page-couts.py --verifier`, `verifier-plan-projet.py` (738 fichiers), `verifier-plan-site.py`, `verifier-site-statique.py`, `verifier-integration.py` (147 ressources, aucune orpheline), `verifier-affichages.py --verifier`, `verifier-budgets-visuels.py`, `verifier-poids-pages.py`, `verifier-inventaire-controles.py`, `verifier-workflows.py`, `relire-contenus.py`.
+- **Limites :** aucun loyer n’a été recoupé avec un observatoire local ; la signification exacte de `nombre_logements` reste inconnue ; la maille est l’agglomération, et la fiche communale continue de dire que la source ne publie pas à cette maille. Rien n’a été essayé avec un lecteur d’écran ni dans Firefox ou Safari.
+- **Registre :** 119 avancées, dont celle-ci — « cinquante-deux agglomérations publiées, un code écarté, un champ qui n’est pas un compte ».
+
 ## 2026-11-14 — Les loyers entrent, à la maille où ils existent
 
 - **Initiative :** `cout-de-la-vie-et-carte`.

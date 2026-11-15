@@ -11,6 +11,7 @@ digraph memoire {
   "api/verifier-source.py" [shape=plaintext, label="api/verifier-source.py"];
   "assets/css/anglais-aventure.css" [shape=plaintext, label="assets/css/anglais-aventure.css"];
   "assets/css/site.css" [shape=plaintext, label="assets/css/site.css"];
+  "assets/data/vie-chere/loyers.json" [shape=plaintext, label="assets/data/vie-chere/loyers.json"];
   "assets/documents/statuts-2020.pdf" [shape=plaintext, label="assets/documents/statuts-2020.pdf"];
   "assets/images/accueil-logo-mrsc-3d.jpg" [shape=plaintext, label="assets/images/accueil-logo-mrsc-3d.jpg"];
   "assets/images/mondes-savoirs-hero.jpg" [shape=plaintext, label="assets/images/mondes-savoirs-hero.jpg"];
@@ -28,6 +29,7 @@ digraph memoire {
   "avancee:cadrages-personnalises-au-pixel" [shape=note, label="avancee:cadrages-personnalises-au-pixel"];
   "avancee:carte-de-sujet-avant-premiere-fiche" [shape=note, label="avancee:carte-de-sujet-avant-premiere-fiche"];
   "avancee:cinq-domaines-points-entree" [shape=note, label="avancee:cinq-domaines-points-entree"];
+  "avancee:cinquante-deux-agglomerations-un-code-ecarte" [shape=note, label="avancee:cinquante-deux-agglomerations-un-code-ecarte"];
   "avancee:classes-mortes-relevees" [shape=note, label="avancee:classes-mortes-relevees"];
   "avancee:compteur-paliers-avoue" [shape=note, label="avancee:compteur-paliers-avoue"];
   "avancee:conteneur-jamais-mesure" [shape=note, label="avancee:conteneur-jamais-mesure"];
@@ -404,6 +406,10 @@ digraph memoire {
   "avancee:cinq-domaines-points-entree" -> "docs/apprentissage/catalogue.toml" [label="prouvée par"];
   "avancee:cinq-domaines-points-entree" -> "docs/apprentissage/referentiel.toml" [label="prouvée par"];
   "avancee:cinq-domaines-points-entree" -> "docs/rd/carte-lacunes.md" [label="prouvée par"];
+  "avancee:cinquante-deux-agglomerations-un-code-ecarte" -> "assets/data/vie-chere/loyers.json" [label="prouvée par"];
+  "avancee:cinquante-deux-agglomerations-un-code-ecarte" -> "outils/collecter-loyers.py" [label="prouvée par"];
+  "avancee:cinquante-deux-agglomerations-un-code-ecarte" -> "outils/construire-page-couts.py" [label="prouvée par"];
+  "avancee:cinquante-deux-agglomerations-un-code-ecarte" -> "outils/test_collecte_loyers.py" [label="prouvée par"];
   "avancee:classes-mortes-relevees" -> "assets/css/site.css" [label="prouvée par"];
   "avancee:classes-mortes-relevees" -> "docs/rd/paliers-affichage.toml" [label="prouvée par"];
   "avancee:classes-mortes-relevees" -> "outils/auditer-selecteurs-morts.py" [label="prouvée par"];
@@ -911,6 +917,7 @@ digraph memoire {
   "branche:coordination-de-tous-les-agents" -> "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" [label="a produit"];
   "branche:coordination-de-tous-les-agents" -> "phase:economie-de-contexte" [label="servie par"];
   "branche:coordination-de-tous-les-agents" -> "phase:memoire-trois-horizons" [label="servie par"];
+  "branche:cout-de-la-vie-et-carte" -> "avancee:cinquante-deux-agglomerations-un-code-ecarte" [label="a produit"];
   "branche:cout-de-la-vie-et-carte" -> "avancee:une-absence-de-donnee-doit-dire-pourquoi" [label="a produit"];
   "branche:cout-de-la-vie-et-carte" -> "avancee:une-maille-qu-on-ne-peut-pas-tenir-ne-se-simule-pas" [label="a produit"];
   "branche:cout-de-la-vie-et-carte" -> "avancee:une-page-qu-on-ne-trouve-pas-n-existe-pas" [label="a produit"];
@@ -1076,6 +1083,7 @@ digraph memoire {
   "branche:relire-les-44-prototypes" -> "avancee:taux-date-hors-de-la-fiche" [label="a produit"];
   "branche:relire-les-44-prototypes" -> "avancee:trois-etats-de-controle" [label="a produit"];
   "branche:relire-les-44-prototypes" -> "phase:apprentissages-et-relecture" [label="servie par"];
+  "branche:sources-fermees-et-registre-des-refus" -> "avancee:cinquante-deux-agglomerations-un-code-ecarte" [label="a produit"];
   "branche:sources-fermees-et-registre-des-refus" -> "avancee:registre-des-refus-verifie" [label="a produit"];
   "branche:sources-fermees-et-registre-des-refus" -> "avancee:une-absence-de-donnee-doit-dire-pourquoi" [label="a produit"];
   "branche:sources-fermees-et-registre-des-refus" -> "avancee:une-maille-qu-on-ne-peut-pas-tenir-ne-se-simule-pas" [label="a produit"];

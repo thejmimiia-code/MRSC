@@ -14067,3 +14067,135 @@ sources = []
 mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/collecter-loyers.py", "outils/test_collecte_loyers.py", "outils/preparer-fond-de-carte.py", "outils/construire-page-couts.py"]
 constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr), des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0) et des loyers observés par agglomération (réseau des observatoires locaux des loyers, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations ; par agglomération : loyer médian au m² et loyer médian mensuel, surface moyenne et nombre de logements observés. La page est reconstruite depuis ces fichiers dans la même exécution. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
 limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian ou du loyer médian comme indicateurs, ni le rattachement des agglomérations à leurs communes — que la source ne publie pas et que la page ne fabrique donc pas —, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = "couts-vie-chere.html"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "9a81431c61e288c4dc441cb99f0e9d6e788472c66ef00045f93ce02c0f539f08"
+empreinte_apres = "37e214a6586656d55db6467d40c954fe73a2177d526644f50968f7b131526661"
+nature = "mesure-interne"
+sources = []
+mesures = ["couts-vie-chere/contenu.txt", "assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle des loyers entre dans la page : 52 agglomérations observées en 2025, loyer médian au m² et loyer médian mensuel, surface moyenne et nombre d’observations, la ligne nommée L7500 écartée et déclarée, le champ nombre_logements de la source non republié. Le paragraphe de source cite désormais le fichier JSON que la page publie. Les compteurs du plan complet suivent l’arbre, le journal et les avancées disent ce que la relecture des données a retiré, et la mémoire d’EVA est régénérée depuis ce corpus."
+limite = "La relecture a porté sur ce que la source publie et sur ce que la page en montre, pas sur la justesse des médianes : aucun loyer n’a été recoupé avec un observatoire local, et la signification exacte de nombre_logements reste inconnue. La maille est l’agglomération, pas la commune, et rien n’a été regardé dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "3a63a53ad24e96ac3479fbe830ce62138746934d5918c520f653d8a9b33d44bb"
+empreinte_apres = "bab46491ba535903feb133ccd5462c9bb6ac94342d8391aade5a4ea37b202468"
+nature = "mesure-interne"
+sources = []
+mesures = ["couts-vie-chere/contenu.txt", "assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle des loyers entre dans la page : 52 agglomérations observées en 2025, loyer médian au m² et loyer médian mensuel, surface moyenne et nombre d’observations, la ligne nommée L7500 écartée et déclarée, le champ nombre_logements de la source non republié. Le paragraphe de source cite désormais le fichier JSON que la page publie. Les compteurs du plan complet suivent l’arbre, le journal et les avancées disent ce que la relecture des données a retiré, et la mémoire d’EVA est régénérée depuis ce corpus."
+limite = "La relecture a porté sur ce que la source publie et sur ce que la page en montre, pas sur la justesse des médianes : aucun loyer n’a été recoupé avec un observatoire local, et la signification exacte de nombre_logements reste inconnue. La maille est l’agglomération, pas la commune, et rien n’a été regardé dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "4dee0486569b1c553b81c1085f149dd54a8f9c34cc0a51b84675821865ff3dab"
+empreinte_apres = "0355a3237e1376363c6e03b5b5803f7ea8d6f93f74c6760ca8d79b3730aea98e"
+nature = "mesure-interne"
+sources = []
+mesures = ["couts-vie-chere/contenu.txt", "assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle des loyers entre dans la page : 52 agglomérations observées en 2025, loyer médian au m² et loyer médian mensuel, surface moyenne et nombre d’observations, la ligne nommée L7500 écartée et déclarée, le champ nombre_logements de la source non republié. Le paragraphe de source cite désormais le fichier JSON que la page publie. Les compteurs du plan complet suivent l’arbre, le journal et les avancées disent ce que la relecture des données a retiré, et la mémoire d’EVA est régénérée depuis ce corpus."
+limite = "La relecture a porté sur ce que la source publie et sur ce que la page en montre, pas sur la justesse des médianes : aucun loyer n’a été recoupé avec un observatoire local, et la signification exacte de nombre_logements reste inconnue. La maille est l’agglomération, pas la commune, et rien n’a été regardé dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "cb46a3e2ba04dbe85baaff99e3c32e3bfbd4481166ed9691e470f7c5b98b4159"
+empreinte_apres = "92ea659345dcf40e8d400a05efd95f816c84ae2a17c03795f29ad4dce359c415"
+nature = "mesure-interne"
+sources = []
+mesures = ["couts-vie-chere/contenu.txt", "assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle des loyers entre dans la page : 52 agglomérations observées en 2025, loyer médian au m² et loyer médian mensuel, surface moyenne et nombre d’observations, la ligne nommée L7500 écartée et déclarée, le champ nombre_logements de la source non republié. Le paragraphe de source cite désormais le fichier JSON que la page publie. Les compteurs du plan complet suivent l’arbre, le journal et les avancées disent ce que la relecture des données a retiré, et la mémoire d’EVA est régénérée depuis ce corpus."
+limite = "La relecture a porté sur ce que la source publie et sur ce que la page en montre, pas sur la justesse des médianes : aucun loyer n’a été recoupé avec un observatoire local, et la signification exacte de nombre_logements reste inconnue. La maille est l’agglomération, pas la commune, et rien n’a été regardé dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "4748d79dbdcb6e670b4ca1fe3f5e34498146481a528e3b7ec051fd29e2780fd6"
+empreinte_apres = "807d99b4a47987e20b900bc5674872450dbc0d1bed4bfe1dea304cca916d6bb4"
+nature = "mesure-interne"
+sources = []
+mesures = ["couts-vie-chere/contenu.txt", "assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle des loyers entre dans la page : 52 agglomérations observées en 2025, loyer médian au m² et loyer médian mensuel, surface moyenne et nombre d’observations, la ligne nommée L7500 écartée et déclarée, le champ nombre_logements de la source non republié. Le paragraphe de source cite désormais le fichier JSON que la page publie. Les compteurs du plan complet suivent l’arbre, le journal et les avancées disent ce que la relecture des données a retiré, et la mémoire d’EVA est régénérée depuis ce corpus."
+limite = "La relecture a porté sur ce que la source publie et sur ce que la page en montre, pas sur la justesse des médianes : aucun loyer n’a été recoupé avec un observatoire local, et la signification exacte de nombre_logements reste inconnue. La maille est l’agglomération, pas la commune, et rien n’a été regardé dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "3095b7c0bbe7d8098fbcc75174a36395558d98081d289db0d01ea1fee889b50c"
+empreinte_apres = "3c03c8f615e0f979c80fe4a061ec9acba7062e6766fd8ac76d027b1a78101d80"
+nature = "mesure-interne"
+sources = []
+mesures = ["couts-vie-chere/contenu.txt", "assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle des loyers entre dans la page : 52 agglomérations observées en 2025, loyer médian au m² et loyer médian mensuel, surface moyenne et nombre d’observations, la ligne nommée L7500 écartée et déclarée, le champ nombre_logements de la source non republié. Le paragraphe de source cite désormais le fichier JSON que la page publie. Les compteurs du plan complet suivent l’arbre, le journal et les avancées disent ce que la relecture des données a retiré, et la mémoire d’EVA est régénérée depuis ce corpus."
+limite = "La relecture a porté sur ce que la source publie et sur ce que la page en montre, pas sur la justesse des médianes : aucun loyer n’a été recoupé avec un observatoire local, et la signification exacte de nombre_logements reste inconnue. La maille est l’agglomération, pas la commune, et rien n’a été regardé dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "dcc0023c26b35119f12d862bdc813981938856c63303b1f99efe266d75da02ab"
+empreinte_apres = "5333ccc4350946c4359e3781874fcb671440c159feb8efc47df6977201301788"
+nature = "mesure-interne"
+sources = []
+mesures = ["couts-vie-chere/contenu.txt", "assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle des loyers entre dans la page : 52 agglomérations observées en 2025, loyer médian au m² et loyer médian mensuel, surface moyenne et nombre d’observations, la ligne nommée L7500 écartée et déclarée, le champ nombre_logements de la source non republié. Le paragraphe de source cite désormais le fichier JSON que la page publie. Les compteurs du plan complet suivent l’arbre, le journal et les avancées disent ce que la relecture des données a retiré, et la mémoire d’EVA est régénérée depuis ce corpus."
+limite = "La relecture a porté sur ce que la source publie et sur ce que la page en montre, pas sur la justesse des médianes : aucun loyer n’a été recoupé avec un observatoire local, et la signification exacte de nombre_logements reste inconnue. La maille est l’agglomération, pas la commune, et rien n’a été regardé dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "outils/construire-page-couts.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "e39dda9df6921870c94915fe95cfd10c61ea0b579336e42b4a025f5021034daf"
+empreinte_apres = "ea494f4473c086e20f06316ef05ad82dffa535dd6ccabf053de365d9d3f5391f"
+nature = "mesure-interne"
+sources = []
+mesures = ["couts-vie-chere/contenu.txt", "assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La première collecte réelle des loyers entre dans la page : 52 agglomérations observées en 2025, loyer médian au m² et loyer médian mensuel, surface moyenne et nombre d’observations, la ligne nommée L7500 écartée et déclarée, le champ nombre_logements de la source non republié. Le paragraphe de source cite désormais le fichier JSON que la page publie. Les compteurs du plan complet suivent l’arbre, le journal et les avancées disent ce que la relecture des données a retiré, et la mémoire d’EVA est régénérée depuis ce corpus."
+limite = "La relecture a porté sur ce que la source publie et sur ce que la page en montre, pas sur la justesse des médianes : aucun loyer n’a été recoupé avec un observatoire local, et la signification exacte de nombre_logements reste inconnue. La maille est l’agglomération, pas la commune, et rien n’a été regardé dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "5a86f22dbee82f5dde48cc3673f49805a49b6da6e8af90eb3ccb5e69e9641f26"
+empreinte_apres = "699bc3817344cf38293ffc513afbc380699ef50f003d63932ce4ee18b986f7cf"
+nature = "mesure-interne"
+sources = []
+mesures = ["docs/rd/journal.md", "docs/rd/avancees.toml", "docs/rd/plan-projet-complet-2026-11-11.md"]
+constat = "La mémoire d’EVA est régénérée après l’entrée de journal et l’avancée du 15 novembre 2026 : 542 entrées, 350 nœuds, 784 arêtes, index de 216 905 octets pour un corpus de 2 432 179 octets. Les trois rendus viennent de la même exécution, donc ils ne peuvent pas se contredire entre eux."
+limite = "Le graphe et le plan sont des vues dérivées du corpus, pas une lecture : ils disent quelles entrées existent et comment elles se relient, jamais ce qu’une page affirme de vrai. La régénération ne vérifie aucun chiffre publié."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "92ea659345dcf40e8d400a05efd95f816c84ae2a17c03795f29ad4dce359c415"
+empreinte_apres = "1e902a9e9f168712adf55399465659f142b65c7f3f12f7c88c3886bd81f157eb"
+nature = "mesure-interne"
+sources = []
+mesures = ["docs/rd/journal.md", "docs/rd/avancees.toml", "docs/rd/plan-projet-complet-2026-11-11.md"]
+constat = "La mémoire d’EVA est régénérée après l’entrée de journal et l’avancée du 15 novembre 2026 : 542 entrées, 350 nœuds, 784 arêtes, index de 216 905 octets pour un corpus de 2 432 179 octets. Les trois rendus viennent de la même exécution, donc ils ne peuvent pas se contredire entre eux."
+limite = "Le graphe et le plan sont des vues dérivées du corpus, pas une lecture : ils disent quelles entrées existent et comment elles se relient, jamais ce qu’une page affirme de vrai. La régénération ne vérifie aucun chiffre publié."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "32a8671483d9b8f0dc026bb9fd5ea68997faff1301c160bd68d29c2933b4e840"
+empreinte_apres = "7c353dbad6b8a7fbb89742593f22b16811d30b48e61c6610d47ce886776bcf63"
+nature = "mesure-interne"
+sources = []
+mesures = ["docs/rd/journal.md", "docs/rd/avancees.toml", "docs/rd/plan-projet-complet-2026-11-11.md"]
+constat = "La mémoire d’EVA est régénérée après l’entrée de journal et l’avancée du 15 novembre 2026 : 542 entrées, 350 nœuds, 784 arêtes, index de 216 905 octets pour un corpus de 2 432 179 octets. Les trois rendus viennent de la même exécution, donc ils ne peuvent pas se contredire entre eux."
+limite = "Le graphe et le plan sont des vues dérivées du corpus, pas une lecture : ils disent quelles entrées existent et comment elles se relient, jamais ce qu’une page affirme de vrai. La régénération ne vérifie aucun chiffre publié."

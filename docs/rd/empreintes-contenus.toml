@@ -2330,7 +2330,7 @@ urls = ["https://thejmimiia-code.github.io/MRSC/confidentialite.html", "https://
 
 [[unite]]
 chemin = "couts-vie-chere.html"
-empreinte = "9a81431c61e288c4dc441cb99f0e9d6e788472c66ef00045f93ce02c0f539f08"
+empreinte = "37e214a6586656d55db6467d40c954fe73a2177d526644f50968f7b131526661"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -2636,17 +2636,17 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/avancees.md"
-empreinte = "3a63a53ad24e96ac3479fbe830ce62138746934d5918c520f653d8a9b33d44bb"
+empreinte = "bab46491ba535903feb133ccd5462c9bb6ac94342d8391aade5a4ea37b202468"
 etat = "relu-par-agent"
 apostrophes = 1240
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 
 [[unite]]
 chemin = "docs/rd/avancees.toml"
-empreinte = "4dee0486569b1c553b81c1085f149dd54a8f9c34cc0a51b84675821865ff3dab"
+empreinte = "0355a3237e1376363c6e03b5b5803f7ea8d6f93f74c6760ca8d79b3730aea98e"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 
 [[unite]]
 chemin = "docs/rd/bibliotheque-skills.md"
@@ -2724,10 +2724,10 @@ urls = ["https://thejmimiia-code.github.io/MRSC/", "https://github.com/thejmimii
 
 [[unite]]
 chemin = "docs/rd/eva/graphe.dot"
-empreinte = "5a86f22dbee82f5dde48cc3673f49805a49b6da6e8af90eb3ccb5e69e9641f26"
+empreinte = "699bc3817344cf38293ffc513afbc380699ef50f003d63932ce4ee18b986f7cf"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 
 [[unite]]
 chemin = "docs/rd/eva/graphe.md"
@@ -2738,18 +2738,18 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "cb46a3e2ba04dbe85baaff99e3c32e3bfbd4481166ed9691e470f7c5b98b4159"
+empreinte = "1e902a9e9f168712adf55399465659f142b65c7f3f12f7c88c3886bd81f157eb"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 urls = ["https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr-executive-summary"]
 
 [[unite]]
 chemin = "docs/rd/eva/plan.md"
-empreinte = "32a8671483d9b8f0dc026bb9fd5ea68997faff1301c160bd68d29c2933b4e840"
+empreinte = "7c353dbad6b8a7fbb89742593f22b16811d30b48e61c6610d47ce886776bcf63"
 etat = "relu-par-agent"
 apostrophes = 72
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 
 [[unite]]
 chemin = "docs/rd/eva/plan.toml"
@@ -2835,10 +2835,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "4748d79dbdcb6e670b4ca1fe3f5e34498146481a528e3b7ec051fd29e2780fd6"
+empreinte = "807d99b4a47987e20b900bc5674872450dbc0d1bed4bfe1dea304cca916d6bb4"
 etat = "relu-par-agent"
 apostrophes = 2405
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 urls = ["https://thejmimiia-code.github.io/MRSC/assets/css/site.css", "https://www.ign.fr/mag/apprendre-lire-une-carte-en-cinq-etapes", "https://www.ign.fr/publications-de-l-ign/institut/Ressources_pedagogiques/livret_decouvrez_LMDC.pdf", "https://thejmimiia-code.github.io/MRSC/", "https://github.com/AnswerDotAI/llms-txt", "https://github.com/mattpocock/skills/tree/49dd158d1076134a641b33efb035946536778336", "https://github.com/addyosmani/agent-skills/tree/1be8e34187e34647bb83adc3a1323b26ae6f6abe"]
 
 [[unite]]
@@ -2887,17 +2887,17 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
-empreinte = "3095b7c0bbe7d8098fbcc75174a36395558d98081d289db0d01ea1fee889b50c"
+empreinte = "3c03c8f615e0f979c80fe4a061ec9acba7062e6766fd8ac76d027b1a78101d80"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 
 [[unite]]
 chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
-empreinte = "dcc0023c26b35119f12d862bdc813981938856c63303b1f99efe266d75da02ab"
+empreinte = "5333ccc4350946c4359e3781874fcb671440c159feb8efc47df6977201301788"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 
 [[unite]]
 chemin = "docs/rd/plan-site-complet-2026-11-11.md"
@@ -3641,10 +3641,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/construire-page-couts.py"
-empreinte = "e39dda9df6921870c94915fe95cfd10c61ea0b579336e42b4a025f5021034daf"
+empreinte = "ea494f4473c086e20f06316ef05ad82dffa535dd6ccabf053de365d9d3f5391f"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 urls = ["https://thejmimiia-code.github.io/MRSC/couts-vie-chere.html", "https://thejmimiia-code.github.io/MRSC/localisation.html"]
 
 [[unite]]
