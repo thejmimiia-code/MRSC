@@ -10,8 +10,8 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 118 |
-| Période couverte | du 2026-10-20 au 2026-11-14 |
+| Avancées consignées | 119 |
+| Période couverte | du 2026-10-20 au 2026-11-15 |
 | Contrôles exécutables cités | 137 |
 | Initiatives du portefeuille concernées | 17 |
 
@@ -2917,6 +2917,31 @@ Initiatives liées : `cout-de-la-vie-et-carte`, `sources-fermees-et-registre-des
 **Suite.** Lire les cadrages de l’en-tête à 360, 390 et 1440 px après publication, et faire trancher le libellé (« Coût de la vie », « Prix et loyers », « Vivre ici ») par une personne qui ne connaît pas le chantier.
 
 Initiatives liées : `cout-de-la-vie-et-carte`, `coherence-textes-publics`.
+
+### `cinquante-deux-agglomerations-un-code-ecarte` — Cinquante-deux agglomérations publiées, un code écarté, un champ qui n’est pas un compte
+
+*Consignée le 2026-11-15.*
+
+**Constat.** La collecte des loyers a fini par produire des chiffres réels, et ces chiffres ont dû passer une relecture avant publication : c’est elle, et non la collecte, qui a décidé de ce que la page montrerait. Deux champs de la source ne pouvaient pas être publiés tels quels. `nombre_logements` vaut 4 pour les quatre lignes parisiennes qui portent 3 879 à 10 817 observations : ce n’est pas un décompte de logements, et le publier aurait donné à lire un chiffre faux dans une colonne juste. Une ligne de la base nationale s’appelle `L7500` : un code d’observatoire à la place d’un nom de lieu, qui aurait affiché un territoire inexistant.
+
+**Ce que cela change.** La page publie 52 agglomérations observées en 2025, sous Licence Ouverte 2.0 : loyer médian au m², loyer médian mensuel, surface moyenne et nombre d’observations, avec le code de l’observatoire. La colonne « Observations » remplace celle des logements, la ligne nommée `L7500` est écartée et la page le dit en toutes lettres, et une note de bas de tableau explique que le nombre de logements de la source n’est pas repris. Le collecteur refuse désormais un nom de territoire qui est un code, et son vérificateur refuse tout champ `logements`. Les chiffres eux-mêmes sont publiés en clair dans `assets/data/vie-chere/loyers.json`, cité par la page : un chiffre qu’on affiche sans publier sa source collectée n’est vérifiable par personne. Le plan complet du projet est resynchronisé à 738 fichiers.
+
+**Preuves dans le dépôt :**
+
+- `outils/collecter-loyers.py`
+- `outils/test_collecte_loyers.py`
+- `outils/construire-page-couts.py`
+- `assets/data/vie-chere/loyers.json`
+- `couts-vie-chere.html`
+- `docs/rd/vie-chere-carte-2026-11-13.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_collecte_loyers.py && python3 outils/test_collecte_vie_chere.py && python3 outils/construire-page-couts.py --verifier && python3 outils/verifier-integration.py && python3 outils/verifier-plan-projet.py`
+
+**Limite — ce que cela ne prouve pas.** La relecture a porté sur ce que la source publie et sur ce que la page en montre, pas sur la justesse des médianes : aucun loyer n’a été recoupé avec un observatoire local, et rien ne dit qu’un loyer médian décrive le logement qu’un ménage trouvera. La signification exacte de `nombre_logements` reste inconnue — le descriptif des variables est dans une archive que l’atelier n’a pas ouverte. La couverture dépend des territoires observés, qui ne sont pas tous les territoires habités, et la maille reste l’agglomération : la carte par commune ne reçoit toujours pas de loyer.
+
+**Suite.** Confronter deux ou trois agglomérations à leur observatoire local, puis passer aux revenus et salaires, dont la source FiLoSoFi se sert en pages sans adresse stable. Un loyer publié par agglomération ne dispense pas de dire, sur la fiche communale, qu’aucune source ne le publie à cette maille.
+
+Initiatives liées : `cout-de-la-vie-et-carte`, `sources-fermees-et-registre-des-refus`.
 
 ## 3. Ce que ce registre ne dit pas
 

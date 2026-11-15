@@ -124,6 +124,8 @@ def bloc_loyers() -> str:
         f"{html.escape(str(source.get('date_ressource'))[:10])}, collecte du "
         f"{html.escape(str(donnees.get('collecte_le')))}. "
         f'<a href="{html.escape(str(source.get("fiche")))}">Fiche du jeu de données</a>. '
+        'Les chiffres de ce tableau sont publiés en clair, tels que collectés : '
+        '<a href="assets/data/vie-chere/loyers.json">loyers.json</a>. '
         "Ce que ces chiffres ne disent pas : le loyer d’un logement précis, celui d’une commune "
         "à l’intérieur de l’agglomération, les charges, ni ce qu’un ménage donné peut se "
         "permettre. Le nombre de logements que la source publie n’est pas repris : il vaut 4 "
