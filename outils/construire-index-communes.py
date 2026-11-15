@@ -76,7 +76,7 @@ def construire(donnees: Path = DONNEES, minimum: int = MINIMUM_COMMUNES) -> dict
     if not fichiers:
         raise Refus("aucun fichier `d-<département>.json` : il n'y a rien à indexer")
 
-    communes: list[list[str]] = []
+    communes: list[list] = []
     codes: set[str] = set()
     for chemin in fichiers:
         contenu = lire_json(chemin)
@@ -100,7 +100,12 @@ def construire(donnees: Path = DONNEES, minimum: int = MINIMUM_COMMUNES) -> dict
                 raise Refus(f"{code} : le nom {nom!r} est un code, pas un lieu")
             if any(0x80 <= ord(caractere) <= 0x9F for caractere in nom):
                 raise Refus(f"{code} : le nom {nom!r} contient un caractère de contrôle illisible")
-            communes.append([nom, code])
+            # Un troisième champ dit si la collecte publie un prix pour cette
+            # commune. La liste de suggestions peut donc prévenir avant le clic
+            # qu'une commune n'a pas de prix, au lieu de laisser la fiche
+            # l'apprendre. Ce n'est pas un prix : c'est la présence d'un prix.
+            avec_prix = 1 if (commune.get("pa") or commune.get("pm")) else 0
+            communes.append([nom, code, avec_prix])
 
     if len(communes) < minimum:
         raise Refus(

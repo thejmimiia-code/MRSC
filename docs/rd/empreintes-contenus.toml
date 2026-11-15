@@ -1462,7 +1462,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/css/site.css"
-empreinte = "44e79d3f9c5babd9092cc9a2f854f6937a084f375a33569dce4401ccb6839e17"
+empreinte = "cc36b167a9e6e6b2d7cb67af920a3f3279732dd249f2ec3591c7f505e806a3d9"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -1486,7 +1486,7 @@ urls = ["https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-in
 
 [[unite]]
 chemin = "assets/data/vie-chere/communes-index.json"
-empreinte = "accfdc0c282b2637a9e746bf06683c9b9f90925c60337793631cde4608e253c9"
+empreinte = "c0ad268a62b9412ba7bd8c1751bcf5e7cc9327d557140afad03c13ac81bd15ec"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -2300,7 +2300,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/js/carte-vie-chere.js"
-empreinte = "e9a1ba4d4617c0b8bf254d0fa622b078c2c6a76d437a388d9b4cd89a93c456a1"
+empreinte = "177aacf142ec6d3c047a4fabcfe989d808fc98f4a555b00e401ffb8330b40a14"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -2337,7 +2337,7 @@ urls = ["https://thejmimiia-code.github.io/MRSC/confidentialite.html", "https://
 
 [[unite]]
 chemin = "couts-vie-chere.html"
-empreinte = "26ed33589a3824b08dd88560c16c650da153b14b665180fa6789baf69a8d0597"
+empreinte = "48d793cad07bb124f2b58d4c7877a5cbf009ba33aee4329b4654711cf92024d0"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -2345,7 +2345,7 @@ urls = ["https://thejmimiia-code.github.io/MRSC/couts-vie-chere.html", "https://
 
 [[unite]]
 chemin = "couts-vie-chere/contenu.txt"
-empreinte = "ba2cb7ae810e8a74afa806a0babfc82105b737a559e6b407b3aab42415b9a8c2"
+empreinte = "5af1aabc535cf3210ed644875a7ea03b4c7220537ce06d604634ebea75f0176e"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -3648,7 +3648,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/construire-index-communes.py"
-empreinte = "acd8263a919706cd73e128bcb1fdb6a5cb1ff5d5c6f762f6d68a170db62ec6ec"
+empreinte = "7508189384a283c1d4fa76e80e0fec8e3cc48f05ebc3cbf1414b05819c9ce249"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -3873,7 +3873,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test-experience.cjs"
-empreinte = "e3acda61b28e067a26bb72925dec6141cc0b8a9a76f957a12b9b24b35a0b4617"
+empreinte = "ef47199c58590339cbb93f5630011dfd59ea5db4a2342ad66bbf37ccc2ead6d1"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -3975,7 +3975,7 @@ urls = ["https://exemple.test/source-inconnue"]
 
 [[unite]]
 chemin = "outils/test_construire_index_communes.py"
-empreinte = "6fcbddcf57f6c6f8a2151f2e47538b7429e53d9792cd19ef352fb5204c9d03fd"
+empreinte = "c6911576cbd66bc8f99a608d4b5394227079f5ab488fd9d375c66f2a656d88ce"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15

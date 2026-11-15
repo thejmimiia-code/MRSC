@@ -23,8 +23,11 @@ from pathlib import Path
 OUTIL = Path(__file__).resolve().parent / "construire-index-communes.py"
 
 
-def commune(nom: str, code: str) -> dict:
-    return {"c": code, "n": nom, "x": 2.0, "y": 47.0, "p": 1000}
+def commune(nom: str, code: str, prix: int | None = None) -> dict:
+    entree = {"c": code, "n": nom, "x": 2.0, "y": 47.0, "p": 1000}
+    if prix is not None:
+        entree["pm"] = prix
+    return entree
 
 
 def ecrire_donnees(
@@ -61,7 +64,7 @@ class IndexCommunes(unittest.TestCase):
                 donnees,
                 {
                     "69": [commune("Villeurbanne", "69266"), commune("Lyon", "69123"), commune("Y", "69001")],
-                    "42": [commune("Saint-Étienne", "42218"), commune("Roanne", "42159")],
+                    "42": [commune("Saint-Étienne", "42218"), commune("Roanne", "42159", prix=2100)],
                 },
             )
             sortie = Path(tmp) / "index.json"
@@ -73,6 +76,10 @@ class IndexCommunes(unittest.TestCase):
                 [entree[0] for entree in index["communes"]],
                 ["Lyon", "Roanne", "Saint-Étienne", "Villeurbanne", "Y"],
             )
+            # Le drapeau suit la collecte : Lyon n'a pas de prix dans ce jeu,
+            # Roanne en a un. La suggestion peut donc prévenir avant le clic.
+            drapeaux = {entree[0]: entree[2] for entree in index["communes"]}
+            self.assertEqual(drapeaux, {"Lyon": 0, "Roanne": 1, "Saint-Étienne": 0, "Villeurbanne": 0, "Y": 0})
             verification = self.lancer("--donnees", str(donnees), "--sortie", str(sortie), "--minimum", "3", "--verifier")
             self.assertEqual(verification.returncode, 0, verification.stderr[-800:])
             self.assertIn("5 communes", verification.stdout)
@@ -121,7 +128,7 @@ class IndexCommunes(unittest.TestCase):
             sortie = Path(tmp) / "i.json"
             resultat = self.lancer("--donnees", str(donnees), "--sortie", str(sortie), "--minimum", "1")
             self.assertEqual(resultat.returncode, 0, resultat.stderr[-800:])
-            self.assertEqual(json.loads(sortie.read_text(encoding="utf-8"))["communes"], [["Y", "80829"]])
+            self.assertEqual(json.loads(sortie.read_text(encoding="utf-8"))["communes"], [["Y", "80829", 0]])
 
     def test_collecte_absente(self) -> None:
         """Sans `_etat.json`, il n'y a rien à indexer : un index vide mentirait."""

@@ -1935,6 +1935,28 @@ async function main() {
       assert.ok(apresChoix <= 0.2, `choisir une ville doit cadrer sur elle, largeur ${apresChoix}`);
       assert.equal(await page.$eval('[data-couts-svg]', (element) => Boolean(element.querySelector('[data-couts-choisie]'))), true);
 
+      // Le 15 novembre 2026, la carte devenait blanche dès qu'on choisissait
+      // une ville : le nom écrit à côté d'elle gardait la taille par défaut du
+      // SVG — 16 unités de carte, des milliers de pixels à ce zoom — et son
+      // liseré blanc recouvrait tout. Deux mesures le voient désormais.
+      const etiquette = await page.$eval('[data-couts-etiquette]', (element) => {
+        const rectangle = element.getBoundingClientRect();
+        return { largeur: rectangle.width, hauteur: rectangle.height };
+      });
+      assert.ok(etiquette.hauteur > 4 && etiquette.hauteur <= 40, `le nom sur la carte doit rester lisible, hauteur ${etiquette.hauteur}`);
+      const centrage = await page.evaluate(() => {
+        const svg = document.querySelector('[data-couts-svg]');
+        const boite = svg.getBoundingClientRect();
+        const anneau = svg.querySelector('[data-couts-choisie]').getBoundingClientRect();
+        return {
+          ecartX: Math.abs((anneau.left + anneau.width / 2) - (boite.left + boite.width / 2)),
+          ecartY: Math.abs((anneau.top + anneau.height / 2) - (boite.top + boite.height / 2)),
+          rayon: anneau.width / 2,
+        };
+      });
+      assert.ok(centrage.ecartX <= 6 && centrage.ecartY <= 6, `la commune choisie doit être au centre de la carte : ${JSON.stringify(centrage)}`);
+      assert.ok(centrage.rayon >= 4, `l’anneau doit rester visible, rayon ${centrage.rayon} px`);
+
       for (let i = 0; i < 14; i += 1) await page.click('[data-couts-zoom="plus"]');
       const plancher = await largeurVue(page);
       assert.ok(plancher >= 0.029 && plancher <= 0.031, `le plancher de zoom vaut 0,03 degré, largeur ${plancher}`);

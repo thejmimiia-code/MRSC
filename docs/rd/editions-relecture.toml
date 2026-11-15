@@ -14571,3 +14571,99 @@ sources = []
 mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
 constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
 limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "44e79d3f9c5babd9092cc9a2f854f6937a084f375a33569dce4401ccb6839e17"
+empreinte_apres = "cc36b167a9e6e6b2d7cb67af920a3f3279732dd249f2ec3591c7f505e806a3d9"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "assets/data/vie-chere/communes-index.json"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "accfdc0c282b2637a9e746bf06683c9b9f90925c60337793631cde4608e253c9"
+empreinte_apres = "c0ad268a62b9412ba7bd8c1751bcf5e7cc9327d557140afad03c13ac81bd15ec"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "assets/js/carte-vie-chere.js"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "e9a1ba4d4617c0b8bf254d0fa622b078c2c6a76d437a388d9b4cd89a93c456a1"
+empreinte_apres = "177aacf142ec6d3c047a4fabcfe989d808fc98f4a555b00e401ffb8330b40a14"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "couts-vie-chere.html"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "26ed33589a3824b08dd88560c16c650da153b14b665180fa6789baf69a8d0597"
+empreinte_apres = "48d793cad07bb124f2b58d4c7877a5cbf009ba33aee4329b4654711cf92024d0"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "couts-vie-chere/contenu.txt"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "ba2cb7ae810e8a74afa806a0babfc82105b737a559e6b407b3aab42415b9a8c2"
+empreinte_apres = "5af1aabc535cf3210ed644875a7ea03b4c7220537ce06d604634ebea75f0176e"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "outils/construire-index-communes.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "acd8263a919706cd73e128bcb1fdb6a5cb1ff5d5c6f762f6d68a170db62ec6ec"
+empreinte_apres = "7508189384a283c1d4fa76e80e0fec8e3cc48f05ebc3cbf1414b05819c9ce249"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "outils/test-experience.cjs"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "e3acda61b28e067a26bb72925dec6141cc0b8a9a76f957a12b9b24b35a0b4617"
+empreinte_apres = "ef47199c58590339cbb93f5630011dfd59ea5db4a2342ad66bbf37ccc2ead6d1"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "outils/test_construire_index_communes.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "6fcbddcf57f6c6f8a2151f2e47538b7429e53d9792cd19ef352fb5204c9d03fd"
+empreinte_apres = "c6911576cbd66bc8f99a608d4b5394227079f5ab488fd9d375c66f2a656d88ce"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."

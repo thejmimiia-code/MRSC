@@ -114,6 +114,7 @@
       anneau.setAttribute("r", rayonPx(RAYON_ACTIF_PX).toFixed(4));
       anneau.setAttribute("stroke-width", rayonPx(2).toFixed(4));
     }
+    ajusterEtiquette();
   }
 
   /// La vue ne sort pas de la France : sans cette borne, deux flèches et l'on
@@ -372,6 +373,36 @@
     anneau.setAttribute("r", rayonPx(RAYON_ACTIF_PX).toFixed(4));
     anneau.setAttribute("stroke-width", rayonPx(2).toFixed(4));
     svg.appendChild(anneau);
+    var etiquette = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    etiquette.setAttribute("data-couts-etiquette", "");
+    etiquette.setAttribute("class", "couts-etiquette");
+    etiquette.setAttribute("aria-hidden", "true");
+    etiquette.setAttribute("x", point[0] + rayonPx(RAYON_ACTIF_PX) * 1.4);
+    etiquette.setAttribute("y", point[1] + rayonPx(4));
+    etiquette.textContent = communeChoisie.n;
+    // Sans cette remise à l'échelle immédiate, le texte garde la taille par
+    // défaut du SVG — 16 unités de carte, soit plusieurs milliers de pixels à
+    // ce niveau de zoom — et son liseré blanc recouvre la carte entière.
+    // Constaté à l'écran : la carte devenait blanche dès qu'on choisissait une
+    // ville.
+    rendreEtiquetteLisible(etiquette);
+    svg.appendChild(etiquette);
+  }
+
+  function rendreEtiquetteLisible(etiquette) {
+    var visible = vue.largeur <= 0.6;
+    etiquette.style.display = visible ? "" : "none";
+    if (!visible) return;
+    etiquette.setAttribute("font-size", rayonPx(13).toFixed(5));
+    etiquette.setAttribute("stroke-width", rayonPx(3).toFixed(5));
+  }
+
+  /// Au fond de zoom, le nom de la commune choisie est écrit à côté d'elle :
+  /// des points sans nom ne disent pas où l'on est. Le nom disparaît quand la
+  /// vue s'élargit, où il masquerait les autres communes.
+  function ajusterEtiquette() {
+    var etiquette = svg.querySelector("[data-couts-etiquette]");
+    if (etiquette) rendreEtiquetteLisible(etiquette);
   }
 
   function viderFiche() {
@@ -559,8 +590,12 @@
       var complement = document.createElement("span");
       complement.className = "couts-resultat-complement";
       complement.textContent = (candidat.departement ? libelleDepartement(candidat.departement) + " — " : "") + candidat.code;
+      var prix = document.createElement("span");
+      prix.className = "couts-suggestion-prix";
+      prix.textContent = candidat.prix ? "prix publié" : "sans prix publié";
       ligne.appendChild(nom);
       ligne.appendChild(complement);
+      ligne.appendChild(prix);
       ligne.addEventListener("mousedown", function (evenement) {
         evenement.preventDefault();
         choisirResultat(position);
@@ -583,7 +618,9 @@
     if (!candidat) return;
     recherche.value = candidat.nom;
     viderResultats();
-    dire(candidat.nom + " (" + (candidat.departement || "") + ") : ouverture de la fiche.");
+    // Pas de `dire()` ici : le message de la carte et le déplacement du focus
+    // sur la fiche disent déjà ce qui vient de se passer. Deux zones vivantes
+    // qui annoncent la même chose font répéter le lecteur d'écran.
     if (candidat.commune) {
       choisirCommune(candidat.commune, { cadrer: true, focus: true });
       return;
@@ -629,7 +666,13 @@
         })
         .slice(0, 40)
         .map(function (commune) {
-          return { nom: commune.n, code: commune.c, departement: departementOuvert, commune: commune };
+          return {
+            nom: commune.n,
+            code: commune.c,
+            departement: departementOuvert,
+            commune: commune,
+            prix: Boolean(commune.pa || commune.pm)
+          };
         });
     }
     if (locaux.length) {
@@ -647,12 +690,19 @@
       for (var i = 0; i < index.length; i++) {
         var nom = index[i][0];
         var code = index[i][1];
+        var entree = {
+          nom: nom,
+          code: code,
+          departement: code.slice(0, 2),
+          commune: null,
+          prix: index[i][2] === 1
+        };
         if (code === plie) {
-          trouves.unshift({ nom: nom, code: code, departement: code.slice(0, 2), commune: null });
+          trouves.unshift(entree);
           continue;
         }
         if (normaliser(nom).indexOf(plie) === -1) continue;
-        trouves.push({ nom: nom, code: code, departement: code.slice(0, 2), commune: null });
+        trouves.push(entree);
       }
       trouves = trier(trouves, plie).slice(0, 40);
       if (!trouves.length) {
@@ -751,6 +801,12 @@
       else { return; }
       evenement.preventDefault();
       appliquerVue();
+    });
+    svg.addEventListener("dblclick", function (evenement) {
+      if (evenement.target && evenement.target.closest && evenement.target.closest(".couts-departement")) return;
+      // Le double-clic complète le clavier et la molette : agrandir sans viser
+      // le bouton « + », qui reste le chemin accessible.
+      zoomer(0.6);
     });
     racine.addEventListener("wheel", function (evenement) {
       if (!evenement.ctrlKey) return; // le zoom natif de la page reste prioritaire
