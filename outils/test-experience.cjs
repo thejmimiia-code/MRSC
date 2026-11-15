@@ -1957,10 +1957,12 @@ async function main() {
       assert.ok(centrage.ecartX <= 6 && centrage.ecartY <= 6, `la commune choisie doit être au centre de la carte : ${JSON.stringify(centrage)}`);
       assert.ok(centrage.rayon >= 4, `l’anneau doit rester visible, rayon ${centrage.rayon} px`);
 
+      await page.$eval('[data-couts-zoom="plus"]', (element) => element.scrollIntoView({ behavior: 'instant', block: 'center' }));
       for (let i = 0; i < 14; i += 1) await page.click('[data-couts-zoom="plus"]');
       const plancher = await largeurVue(page);
       assert.ok(plancher >= 0.029 && plancher <= 0.031, `le plancher de zoom vaut 0,03 degré, largeur ${plancher}`);
 
+      await page.$eval('[data-couts-recentrer]', (element) => element.scrollIntoView({ behavior: 'instant', block: 'center' }));
       await page.click('[data-couts-recentrer]');
       await attendre(page, () => document.querySelectorAll('[data-couts-communes] circle').length === 0, { timeout: 15000 });
       assert.ok((await largeurVue(page)) > 5, '« Voir toute la France » doit revenir à la vue d’ensemble');
@@ -2013,7 +2015,7 @@ async function main() {
       // Tri avant découpage : dans l'Oise (60), « Ville » dépasse la 40e place
       // alphabétique des noms en « ville », mais le nom exact passe devant.
       await page.select('#couts-departement', '60');
-      await attendre(page, () => /Oise/.test(document.querySelector('[data-couts-message]').textContent), { timeout: 45000 });
+      await attendre(page, () => document.querySelectorAll('[data-couts-communes] circle').length > 100, { timeout: 45000 });
       await saisirCommune(page, 'ville');
       await attendre(page, () => !document.querySelector('[data-couts-resultats]').hidden, { timeout: 45000 });
       assert.equal(
@@ -2034,7 +2036,9 @@ async function main() {
 
       // Les flèches clavier restent bornées à la France ; le glisser déplace
       // la vue sans déclencher de clic involontaire sur un département.
+      await page.$eval('[data-couts-recentrer]', (element) => element.scrollIntoView({ behavior: 'instant', block: 'center' }));
       await page.click('[data-couts-recentrer]');
+      await attendre(page, () => document.querySelector('#couts-departement').value === '', { timeout: 15000 });
       await page.$eval('[data-couts-vue]', (element) => element.scrollIntoView({ behavior: 'instant', block: 'center' }));
       await page.focus('[data-couts-vue]');
       for (let i = 0; i < 30; i += 1) await page.keyboard.press('ArrowRight');

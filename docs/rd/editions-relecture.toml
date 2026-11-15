@@ -14787,3 +14787,15 @@ sources = []
 mesures = ["assets/data/vie-chere/d-2A.json", "assets/data/vie-chere/d-60.json", "assets/data/vie-chere/d-75.json"]
 constat = "Correctif de fiabilité du défilement instantané dans l’essai du glisser sur la carte (scroll-behavior smooth décalait le centre de la carte entre la lecture du rectangle et le clic) et neutralisation de dragstart natif sur le SVG ; 18/18 essais navigateur réussis."
 limite = "Vérifié dans Chromium headless uniquement : ni lecteur d’écran, ni Firefox, ni WebKit, ni appareil tactile réel n’ont été éprouvés."
+
+[[edition]]
+chemin = "outils/test-experience.cjs"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "70510df5d43380068dc4bae172eca540bebe87b2e71600fe9e4da9fa645ce311"
+empreinte_apres = "2f333685e91d92ae16ff2ed5d4d2f8d36128b3c8caefa05ffbdddedfeef6304a"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-60.json", "assets/data/vie-chere/d-69.json"]
+constat = "Centrage instantané des boutons de zoom et recentrage avant les clics de test pour éviter l’en-tête fixe et le défilement doux ; 18/18 essais navigateur réussis."
+limite = "Vérifié dans Chromium headless uniquement : ni lecteur d’écran, ni Firefox, ni WebKit, ni appareil tactile réel n’ont été éprouvés."

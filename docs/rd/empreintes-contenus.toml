@@ -3873,7 +3873,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test-experience.cjs"
-empreinte = "70510df5d43380068dc4bae172eca540bebe87b2e71600fe9e4da9fa645ce311"
+empreinte = "2f333685e91d92ae16ff2ed5d4d2f8d36128b3c8caefa05ffbdddedfeef6304a"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
