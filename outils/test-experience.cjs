@@ -2035,7 +2035,7 @@ async function main() {
       // Les flèches clavier restent bornées à la France ; le glisser déplace
       // la vue sans déclencher de clic involontaire sur un département.
       await page.click('[data-couts-recentrer]');
-      await page.$eval('[data-couts-vue]', (element) => element.scrollIntoView({ block: 'center' }));
+      await page.$eval('[data-couts-vue]', (element) => element.scrollIntoView({ behavior: 'instant', block: 'center' }));
       await page.focus('[data-couts-vue]');
       for (let i = 0; i < 30; i += 1) await page.keyboard.press('ArrowRight');
       const xApresFleches = await page.$eval('[data-couts-svg]', (element) => (

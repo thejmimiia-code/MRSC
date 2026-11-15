@@ -884,6 +884,9 @@
     }
     window.addEventListener("pointerup", terminerGlissement);
     window.addEventListener("pointercancel", terminerGlissement);
+    svg.addEventListener("dragstart", function (evenement) {
+      evenement.preventDefault();
+    });
     svg.addEventListener("click", function (evenement) {
       if (!ignorerProchainClic) return;
       ignorerProchainClic = false;
