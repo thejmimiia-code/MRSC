@@ -16,6 +16,18 @@
   var SEUIL_VENTES = 5;
   var COULEUR_VIDE = "#dbe2ec";
   var ECHELLE_X = Math.cos((46.5 * Math.PI) / 180);
+  // Le zoom s'arrêtait à 1,5 degré, soit environ 165 km : la carte ne pouvait
+  // pas descendre jusqu'à une ville, alors que la page promet « qu'on agrandit
+  // jusqu'à la ville ». Le plancher est maintenant de 0,03 degré, environ 3 km,
+  // et la vue ne peut plus sortir de la France.
+  var LARGEUR_MIN = 0.03;
+  var LARGEUR_MAX = 140;
+  var LARGEUR_COMMUNE = 0.09;
+  var LARGEUR_PREMIER_CLIC = 0.35;
+  // Rayons en pixels d'écran, convertis à chaque vue : un point doit rester
+  // cliquable au fond de zoom comme sur la carte de France.
+  var RAYON_POINT_PX = 3.5;
+  var RAYON_ACTIF_PX = 8;
 
   var racine = document.querySelector("[data-couts-vue]");
   if (!racine) return;
@@ -26,6 +38,8 @@
   var etatCollecte = document.querySelector("[data-etat-collecte]");
   var choix = document.querySelector("[data-couts-departement]");
   var recherche = document.querySelector("[data-couts-recherche]");
+  var listeResultats = document.querySelector("[data-couts-resultats]");
+  var etatRecherche = document.querySelector("[data-couts-recherche-etat]");
   var panneau = document.querySelector("[data-couts-panneau]");
   var fiche = panneau.querySelector("[data-couts-fiche]");
   var vide = panneau.querySelector("[data-couts-vide]");
@@ -40,6 +54,12 @@
   var donneesDepartement = null;
   var communeChoisie = null;
   var vue = { x: 0, y: 0, largeur: 100 };
+  var bornes = null;
+  var indexNational = null;
+  var indexDemande = null;
+  var indexIndisponible = false;
+  var resultats = [];
+  var actif = -1;
 
   function dire(texte) {
     if (message) message.textContent = texte;
@@ -75,6 +95,42 @@
   function appliquerVue() {
     var hauteur = vue.largeur * (racine.clientHeight / Math.max(racine.clientWidth, 1));
     svg.setAttribute("viewBox", vue.x + " " + vue.y + " " + vue.largeur + " " + hauteur);
+    ajusterRayons();
+  }
+
+  /// Un rayon exprimé en pixels d'écran, ramené aux unités de la vue.
+  function rayonPx(pixels) {
+    return (pixels * vue.largeur) / Math.max(racine.clientWidth, 1);
+  }
+
+  function ajusterRayons() {
+    var points = svg.querySelectorAll("[data-couts-communes] circle");
+    var rayon = rayonPx(RAYON_POINT_PX);
+    for (var i = 0; i < points.length; i++) {
+      points[i].setAttribute("r", rayon.toFixed(4));
+    }
+    var anneau = svg.querySelector("[data-couts-choisie]");
+    if (anneau) {
+      anneau.setAttribute("r", rayonPx(RAYON_ACTIF_PX).toFixed(4));
+      anneau.setAttribute("stroke-width", rayonPx(2).toFixed(4));
+    }
+    ajusterEtiquette();
+  }
+
+  /// La vue ne sort pas de la France : sans cette borne, deux flèches et l'on
+  /// regardait l'Atlantique sans comprendre où l'on était.
+  function bornerVue() {
+    if (!bornes) return;
+    var ratio = racine.clientHeight / Math.max(racine.clientWidth, 1);
+    var demiX = vue.largeur / 2;
+    var demiY = (vue.largeur * ratio) / 2;
+    var marge = vue.largeur * 0.25;
+    var centreX = vue.x + demiX;
+    var centreY = vue.y + demiY;
+    centreX = Math.min(Math.max(centreX, bornes.x1 - marge), bornes.x2 + marge);
+    centreY = Math.min(Math.max(centreY, bornes.y1 - marge), bornes.y2 + marge);
+    vue.x = centreX - demiX;
+    vue.y = centreY - demiY;
   }
 
   function dessinerDepartements() {
@@ -112,9 +168,21 @@
     var hauteur = Math.abs(b[1] - a[1]);
     var ratio = racine.clientHeight / Math.max(racine.clientWidth, 1);
     var besoin = Math.max(largeur, hauteur / Math.max(ratio, 0.0001));
-    vue.largeur = besoin * 1.12;
+    vue.largeur = Math.min(Math.max(besoin * 1.12, LARGEUR_MIN), LARGEUR_MAX);
     vue.x = (a[0] + b[0]) / 2 - vue.largeur / 2;
     vue.y = (a[1] + b[1]) / 2 - (vue.largeur * ratio) / 2;
+    appliquerVue();
+  }
+
+  /// Cadre la carte sur une commune, sans jamais dépasser le plancher de zoom.
+  function cadrerCommune(commune, largeur) {
+    if (!commune) return;
+    var point = projeter(commune.x, commune.y);
+    var ratio = racine.clientHeight / Math.max(racine.clientWidth, 1);
+    vue.largeur = Math.min(Math.max(largeur || LARGEUR_COMMUNE, LARGEUR_MIN), LARGEUR_MAX);
+    vue.x = point[0] - vue.largeur / 2;
+    vue.y = point[1] - (vue.largeur * ratio) / 2;
+    bornerVue();
     appliquerVue();
   }
 
@@ -131,6 +199,7 @@
         });
       });
     });
+    bornes = { x1: projeter(x1, y1)[0], y1: projeter(x1, y2)[1], x2: projeter(x2, y1)[0], y2: projeter(x1, y1)[1] };
     cadrer(x1, y1, x2, y2);
   }
 
@@ -198,7 +267,7 @@
     });
   }
 
-  function ouvrirDepartement(code) {
+  function ouvrirDepartement(code, communeVisee) {
     if (!code || !fond) return;
     var departement = fond.departements.filter(function (d) { return d.c === code; })[0];
     if (!departement) return;
@@ -237,6 +306,20 @@
               : "Aucune vente exploitable dans la collecte.")
           );
         }
+        if (communeVisee) {
+          var visee = donnees.communes.filter(function (c) { return c.c === communeVisee; })[0];
+          if (visee) {
+            choisirCommune(visee, { cadrer: true, largeur: LARGEUR_COMMUNE, focus: true });
+            dire(visee.n + " (" + departement.n + ") : " + (visee.pa || visee.pm
+              ? "prix publié, fiche à droite."
+              : "aucun prix publié pour cette commune — la fiche dit pourquoi."));
+          } else {
+            dire(
+              "La commune " + communeVisee + " n’est pas dans la collecte du département " +
+              departement.n + " : la carte n’invente pas sa fiche."
+            );
+          }
+        }
       })
       .catch(function () {
         dire(
@@ -252,23 +335,74 @@
     if (!communes || !communes.length) return;
     var groupeCommunes = document.createElementNS("http://www.w3.org/2000/svg", "g");
     groupeCommunes.setAttribute("data-couts-communes", "");
-    var echelle = vue.largeur / 100;
     communes.forEach(function (commune) {
       var point = projeter(commune.x, commune.y);
       var cercle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
       cercle.setAttribute("cx", point[0]);
       cercle.setAttribute("cy", point[1]);
-      cercle.setAttribute("r", (0.16 * echelle).toFixed(3));
+      cercle.setAttribute("r", rayonPx(RAYON_POINT_PX).toFixed(4));
       cercle.setAttribute("class", "couts-commune" + (commune.pa || commune.pm ? " a-un-prix" : ""));
       var titre = document.createElementNS("http://www.w3.org/2000/svg", "title");
       titre.textContent = commune.n + (commune.pa || commune.pm ? " — prix publié" : " — sans prix publié");
       cercle.appendChild(titre);
       cercle.addEventListener("click", function () {
-        choisirCommune(commune);
+        // Le premier clic sur un point cadre déjà sur la ville : c'est ce que
+        // « agrandir jusqu'à la ville » veut dire, sans avoir à chercher le
+        // bouton « + » une dizaine de fois.
+        choisirCommune(commune, { cadrer: true, largeur: LARGEUR_PREMIER_CLIC });
       });
       groupeCommunes.appendChild(cercle);
     });
     svg.appendChild(groupeCommunes);
+    dessinerChoix();
+  }
+
+  /// L'anneau de la commune choisie. Sans lui, au fond de zoom, rien ne dit
+  /// laquelle des dizaines de points est celle dont la fiche parle.
+  function dessinerChoix() {
+    var ancien = svg.querySelector("[data-couts-choisie]");
+    if (ancien) ancien.remove();
+    if (!communeChoisie) return;
+    var point = projeter(communeChoisie.x, communeChoisie.y);
+    var anneau = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    anneau.setAttribute("data-couts-choisie", "");
+    anneau.setAttribute("class", "couts-choisie");
+    anneau.setAttribute("aria-hidden", "true");
+    anneau.setAttribute("cx", point[0]);
+    anneau.setAttribute("cy", point[1]);
+    anneau.setAttribute("r", rayonPx(RAYON_ACTIF_PX).toFixed(4));
+    anneau.setAttribute("stroke-width", rayonPx(2).toFixed(4));
+    svg.appendChild(anneau);
+    var etiquette = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    etiquette.setAttribute("data-couts-etiquette", "");
+    etiquette.setAttribute("class", "couts-etiquette");
+    etiquette.setAttribute("aria-hidden", "true");
+    etiquette.setAttribute("x", point[0] + rayonPx(RAYON_ACTIF_PX) * 1.4);
+    etiquette.setAttribute("y", point[1] + rayonPx(4));
+    etiquette.textContent = communeChoisie.n;
+    // Sans cette remise à l'échelle immédiate, le texte garde la taille par
+    // défaut du SVG — 16 unités de carte, soit plusieurs milliers de pixels à
+    // ce niveau de zoom — et son liseré blanc recouvre la carte entière.
+    // Constaté à l'écran : la carte devenait blanche dès qu'on choisissait une
+    // ville.
+    rendreEtiquetteLisible(etiquette);
+    svg.appendChild(etiquette);
+  }
+
+  function rendreEtiquetteLisible(etiquette) {
+    var visible = vue.largeur <= 0.6;
+    etiquette.style.display = visible ? "" : "none";
+    if (!visible) return;
+    etiquette.setAttribute("font-size", rayonPx(13).toFixed(5));
+    etiquette.setAttribute("stroke-width", rayonPx(3).toFixed(5));
+  }
+
+  /// Au fond de zoom, le nom de la commune choisie est écrit à côté d'elle :
+  /// des points sans nom ne disent pas où l'on est. Le nom disparaît quand la
+  /// vue s'élargit, où il masquerait les autres communes.
+  function ajusterEtiquette() {
+    var etiquette = svg.querySelector("[data-couts-etiquette]");
+    if (etiquette) rendreEtiquetteLisible(etiquette);
   }
 
   function viderFiche() {
@@ -277,7 +411,8 @@
     resultat.textContent = "—";
   }
 
-  function choisirCommune(commune) {
+  function choisirCommune(commune, options) {
+    var reglages = options || {};
     communeChoisie = commune;
     vide.hidden = true;
     fiche.hidden = false;
@@ -302,6 +437,28 @@
     }
     calculerSurface();
     chargerCarburants().then(afficherCarburants);
+    if (reglages.cadrer !== false && commune.x != null && commune.y != null) {
+      cadrerCommune(commune, reglages.largeur);
+    }
+    dessinerChoix();
+    adressePartageable(commune.c);
+    viderResultats();
+    if (reglages.focus) {
+      // Le panneau est la réponse : un lecteur d'écran doit l'annoncer sans
+      // que la personne ait à chercher où le texte a changé.
+      panneau.setAttribute("tabindex", "-1");
+      panneau.focus({ preventScroll: false });
+    }
+  }
+
+  /// L'adresse garde la commune choisie : « ?commune=69123 » se partage, se
+  /// met en favori et se rouvre sur la bonne fiche.
+  function adressePartageable(code) {
+    if (!window.history || !window.history.replaceState) return;
+    var url = new URL(window.location.href);
+    if (code) url.searchParams.set("commune", code);
+    else url.searchParams.delete("commune");
+    window.history.replaceState(null, "", url.pathname + (url.search || "") + url.hash);
   }
 
   function calculerSurface() {
@@ -322,39 +479,301 @@
       "avant frais, charges et intérêts.";
   }
 
-  function filtrerRecherche() {
-    if (!donneesDepartement) return;
-    var terme = (recherche.value || "").trim().toLowerCase();
-    var trouvees = donneesDepartement.communes.filter(function (commune) {
-      return !terme || commune.n.toLowerCase().indexOf(terme) !== -1;
+  /// « Saint-Étienne », « saint etienne » et « SAINT-ETIENNE » désignent la même
+  /// commune. La première version comparait les chaînes telles quelles : une
+  /// majuscule, un accent ou une apostrophe suffisaient à répondre « aucune
+  /// commune », alors que la commune existait et que la carte savait la montrer.
+  function normaliser(texte) {
+    var plie = String(texte == null ? "" : texte);
+    if (plie.normalize) {
+      plie = plie.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+    return plie
+      .toLowerCase()
+      .replace(/['’‘`´\-–—_.]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function direRecherche(texte) {
+    if (etatRecherche) etatRecherche.textContent = texte;
+  }
+
+  /// L'index national n'est pas chargé avec la page : il pèse plus que la page
+  /// elle-même. Il arrive au premier besoin réel, une fois pour la visite, et
+  /// son coût est annoncé dans l'état de la recherche avant qu'il ne parte.
+  function chargerIndex() {
+    if (indexNational) return Promise.resolve(indexNational);
+    if (indexIndisponible) return Promise.resolve(null);
+    if (!indexDemande) {
+      direRecherche("Recherche dans toute la France : chargement de l’index des noms de communes…");
+      indexDemande = charger(DOSSIER + "communes-index.json")
+        .then(function (donnees) {
+          indexNational = donnees.communes || [];
+          return indexNational;
+        })
+        .catch(function () {
+          indexIndisponible = true;
+          indexDemande = null;
+          direRecherche(
+            "L’index de recherche n’a pas pu être chargé : la recherche reste limitée au " +
+            "département ouvert, et la page le dit plutôt que de répondre « aucune commune »."
+          );
+          return null;
+        });
+    }
+    return indexDemande;
+  }
+
+  function viderResultats() {
+    resultats = [];
+    actif = -1;
+    if (listeResultats) {
+      listeResultats.textContent = "";
+      listeResultats.hidden = true;
+    }
+    if (recherche) recherche.setAttribute("aria-expanded", "false");
+    if (recherche) recherche.removeAttribute("aria-activedescendant");
+  }
+
+  /// Le classement compte : en tapant « lyon », sept communes contiennent ces
+  /// lettres, et la première version les rendait par ordre alphabétique —
+  /// « Beauficel-en-Lyons » arrivait avant « Lyon ». Le nom exact d'abord, puis
+  /// les noms qui commencent par le terme, puis le reste.
+  function rangDe(nom, plie) {
+    var plieNom = normaliser(nom);
+    if (plieNom === plie) return 0;
+    if (plieNom.indexOf(plie) === 0) return 1;
+    return 2;
+  }
+
+  function trier(candidats, plie) {
+    return candidats
+      .map(function (candidat, ordre) {
+        return { candidat: candidat, rang: rangDe(candidat.nom, plie), code: candidat.code, ordre: ordre };
+      })
+      .sort(function (a, b) {
+        if (a.rang !== b.rang) return a.rang - b.rang;
+        if (a.candidat.nom.toLowerCase() !== b.candidat.nom.toLowerCase()) {
+          return a.candidat.nom.toLowerCase() < b.candidat.nom.toLowerCase() ? -1 : 1;
+        }
+        return a.ordre - b.ordre;
+      })
+      .map(function (entree) { return entree.candidat; });
+  }
+
+  function libelleDepartement(code) {
+    var trouve = fond && fond.departements.filter(function (d) { return d.c === code; })[0];
+    return trouve ? trouve.n : code;
+  }
+
+  function afficherResultats(liste, portee) {
+    resultats = liste;
+    actif = -1;
+    if (!listeResultats) return;
+    listeResultats.textContent = "";
+    if (!liste.length) {
+      listeResultats.hidden = true;
+      recherche.setAttribute("aria-expanded", "false");
+      return;
+    }
+    liste.slice(0, 12).forEach(function (candidat, position) {
+      // Un `li` sous `role="option"` aurait gardé la puce d'une liste dont le
+      // rôle est ailleurs : la mesure de l'arbre d'accessibilité refusait cette
+      // liste sans puces, et elle avait raison de se méfier de `ul` sans
+      // `role="list"` (WebKit retire alors la sémantique). Une liste de
+      // suggestions n'est pas une liste de lecture : des `div` portent le rôle.
+      var ligne = document.createElement("div");
+      ligne.setAttribute("role", "option");
+      ligne.id = "couts-resultat-" + candidat.code;
+      ligne.setAttribute("aria-selected", "false");
+      ligne.className = "couts-suggestion";
+      ligne.setAttribute("data-position", String(position));
+      var nom = document.createElement("span");
+      nom.className = "couts-resultat-nom";
+      nom.textContent = candidat.nom;
+      var complement = document.createElement("span");
+      complement.className = "couts-resultat-complement";
+      complement.textContent = (candidat.departement ? libelleDepartement(candidat.departement) + " — " : "") + candidat.code;
+      var prix = document.createElement("span");
+      prix.className = "couts-suggestion-prix";
+      prix.textContent = candidat.prix ? "prix publié" : "sans prix publié";
+      ligne.appendChild(nom);
+      ligne.appendChild(complement);
+      ligne.appendChild(prix);
+      ligne.addEventListener("mousedown", function (evenement) {
+        evenement.preventDefault();
+        choisirResultat(position);
+      });
+      listeResultats.appendChild(ligne);
     });
-    if (terme && trouvees.length === 1) {
-      choisirCommune(trouvees[0]);
+    listeResultats.hidden = false;
+    recherche.setAttribute("aria-expanded", "true");
+    var annonce = liste.length === 1
+      ? "1 commune trouvée"
+      : Math.min(liste.length, 12) + " communes trouvées";
+    direRecherche(
+      annonce + (portee === "france" ? " dans toute la France" : " dans ce département") +
+      ". Flèches pour choisir, Entrée pour ouvrir."
+    );
+  }
+
+  function choisirResultat(position) {
+    var candidat = resultats[position];
+    if (!candidat) return;
+    recherche.value = candidat.nom;
+    viderResultats();
+    // Pas de `dire()` ici : le message de la carte et le déplacement du focus
+    // sur la fiche disent déjà ce qui vient de se passer. Deux zones vivantes
+    // qui annoncent la même chose font répéter le lecteur d'écran.
+    if (candidat.commune) {
+      choisirCommune(candidat.commune, { cadrer: true, focus: true });
       return;
     }
-    if (terme && !trouvees.length) {
-      viderFiche();
-      dire("Aucune commune de ce département ne correspond à « " + recherche.value + " ».");
+    if (candidat.departement === departementOuvert && donneesDepartement) {
+      var locale = donneesDepartement.communes.filter(function (c) { return c.c === candidat.code; })[0];
+      if (locale) {
+        choisirCommune(locale, { cadrer: true, focus: true });
+        return;
+      }
+    }
+    ouvrirDepartement(candidat.departement, candidat.code);
+  }
+
+  function surlignerResultat(position) {
+    if (!listeResultats) return;
+    actif = position;
+    var lignes = listeResultats.querySelectorAll(".couts-suggestion");
+    for (var i = 0; i < lignes.length; i++) {
+      var choisi = i === position;
+      lignes[i].setAttribute("aria-selected", choisi ? "true" : "false");
+      lignes[i].classList.toggle("est-actif", choisi);
+      if (choisi) {
+        recherche.setAttribute("aria-activedescendant", lignes[i].id);
+        if (lignes[i].scrollIntoView) lignes[i].scrollIntoView({ block: "nearest" });
+      }
+    }
+    if (position < 0) recherche.removeAttribute("aria-activedescendant");
+  }
+
+  function chercher(terme) {
+    var plie = normaliser(terme);
+    if (!plie) {
+      viderResultats();
+      direRecherche("");
       return;
     }
-    if (terme) {
-      dire(trouvees.length + " commune(s) correspondent dans ce département.");
+    var locaux = [];
+    if (donneesDepartement && donneesDepartement.communes) {
+      locaux = donneesDepartement.communes
+        .filter(function (commune) {
+          return normaliser(commune.n).indexOf(plie) !== -1 || commune.c.indexOf(plie) === 0;
+        })
+        .slice(0, 40)
+        .map(function (commune) {
+          return {
+            nom: commune.n,
+            code: commune.c,
+            departement: departementOuvert,
+            commune: commune,
+            prix: Boolean(commune.pa || commune.pm)
+          };
+        });
     }
+    if (locaux.length) {
+      afficherResultats(trier(locaux, plie), "departement");
+      return;
+    }
+    direRecherche("Aucune commune du département ouvert ne correspond. Recherche dans toute la France…");
+    chargerIndex().then(function (index) {
+      if (!index) return;
+      if (normaliser(recherche.value) !== plie) return; // la frappe a continué
+      var trouves = [];
+      // L'index entier est parcouru, sans arrêt au quarantième résultat : un
+      // arrêt sur l'ordre alphabétique ferait manquer le nom exact (« Saint-
+      // Étienne » derrière quarante « Saint-… »).
+      for (var i = 0; i < index.length; i++) {
+        var nom = index[i][0];
+        var code = index[i][1];
+        var entree = {
+          nom: nom,
+          code: code,
+          departement: code.slice(0, 2),
+          commune: null,
+          prix: index[i][2] === 1
+        };
+        if (code === plie) {
+          trouves.unshift(entree);
+          continue;
+        }
+        if (normaliser(nom).indexOf(plie) === -1) continue;
+        trouves.push(entree);
+      }
+      trouves = trier(trouves, plie).slice(0, 40);
+      if (!trouves.length) {
+        viderResultats();
+        direRecherche(
+          "Aucune commune de France métropolitaine ne commence par « " + recherche.value +
+          " ». La carte ne s’étend pas aux départements d’outre-mer."
+        );
+        return;
+      }
+      afficherResultats(trouves, "france");
+    });
+  }
+
+  /// Ouvre une commune depuis son code seul : c'est le chemin du lien partagé
+  /// et de la recherche par code INSEE.
+  function ouvrirCommuneParCode(code) {
+    if (!/^(\d{2}|2[AB])\d{3}$/.test(code)) {
+      dire("Le code « " + code + " » n’est pas un code de commune : la carte n’ouvre rien.");
+      return;
+    }
+    var departement = code.slice(0, 2);
+    var connu = fond && fond.departements.filter(function (d) { return d.c === departement; })[0];
+    if (!connu) {
+      dire(
+        "La commune " + code + " appartient au département " + departement +
+        ", absent de cette carte : elle ne couvre que la métropole."
+      );
+      return;
+    }
+    ouvrirDepartement(departement, code);
   }
 
   function zoomer(facteur) {
     var centreX = vue.x + vue.largeur / 2;
     var ratio = racine.clientHeight / Math.max(racine.clientWidth, 1);
     var centreY = vue.y + (vue.largeur * ratio) / 2;
-    vue.largeur = Math.min(Math.max(vue.largeur * facteur, 1.5), 140);
+    vue.largeur = Math.min(Math.max(vue.largeur * facteur, LARGEUR_MIN), LARGEUR_MAX);
     vue.x = centreX - vue.largeur / 2;
     vue.y = centreY - (vue.largeur * ratio) / 2;
+    bornerVue();
     appliquerVue();
   }
 
   function brancher() {
     choix.addEventListener("change", function () { ouvrirDepartement(choix.value); });
-    recherche.addEventListener("input", filtrerRecherche);
+    recherche.addEventListener("input", function () { chercher(recherche.value); });
+    recherche.addEventListener("keydown", function (evenement) {
+      if (evenement.key === "ArrowDown") {
+        if (!resultats.length) return;
+        evenement.preventDefault();
+        surlignerResultat(Math.min(actif + 1, resultats.length - 1));
+      } else if (evenement.key === "ArrowUp") {
+        if (!resultats.length) return;
+        evenement.preventDefault();
+        surlignerResultat(Math.max(actif - 1, 0));
+      } else if (evenement.key === "Enter") {
+        if (!resultats.length) return;
+        evenement.preventDefault();
+        choisirResultat(actif >= 0 ? actif : 0);
+      } else if (evenement.key === "Escape") {
+        recherche.value = "";
+        viderResultats();
+        direRecherche("");
+      }
+    });
     mensualite.addEventListener("input", calculerSurface);
     Array.prototype.forEach.call(document.querySelectorAll("[data-couts-zoom]"), function (bouton) {
       bouton.addEventListener("click", function () {
@@ -363,10 +782,18 @@
     });
     document.querySelector("[data-couts-recentrer]").addEventListener("click", function () {
       departementOuvert = null;
+      donneesDepartement = null;
+      communeChoisie = null;
       choix.value = "";
+      recherche.value = "";
+      viderResultats();
+      direRecherche("");
       colorer();
+      dessinerCommunes([]);
+      viderFiche();
+      adressePartageable(null);
       cadrerFrance();
-      dire("Vue d’ensemble de la métropole. Choisissez un département.");
+      dire("Vue d’ensemble de la métropole. Choisissez un département ou cherchez une commune.");
     });
     racine.addEventListener("keydown", function (evenement) {
       var pas = vue.largeur / 12;
@@ -379,6 +806,12 @@
       else { return; }
       evenement.preventDefault();
       appliquerVue();
+    });
+    svg.addEventListener("dblclick", function (evenement) {
+      if (evenement.target && evenement.target.closest && evenement.target.closest(".couts-departement")) return;
+      // Le double-clic complète le clavier et la molette : agrandir sans viser
+      // le bouton « + », qui reste le chemin accessible.
+      zoomer(0.6);
     });
     racine.addEventListener("wheel", function (evenement) {
       if (!evenement.ctrlKey) return; // le zoom natif de la page reste prioritaire
@@ -409,7 +842,14 @@
       dessinerDepartements();
       brancher();
       cadrerFrance();
-      dire("Carte de la métropole prête. Choisissez un département pour voir ses communes.");
+      dire("Carte de la métropole prête. Choisissez un département ou cherchez une commune.");
+      var vise = null;
+      try {
+        vise = new URL(window.location.href).searchParams.get("commune");
+      } catch (_erreur) {
+        vise = null;
+      }
+      if (vise) ouvrirCommuneParCode(vise);
       return etatDeLaCollecte();
     })
     .catch(function () {

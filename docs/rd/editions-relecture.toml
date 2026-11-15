@@ -14319,3 +14319,423 @@ sources = []
 mesures = ["outils/collecter-vie-chere.py", "outils/test_collecte_vie_chere.py", "outils/collecter-carburants.py", "outils/test_collecte_carburants.py", "outils/collecter-loyers.py", "outils/test_collecte_loyers.py", "outils/preparer-fond-de-carte.py", "outils/construire-page-couts.py"]
 constat = "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr), des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0) et des loyers observés par agglomération (réseau des observatoires locaux des loyers, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations ; par agglomération : loyer médian au m² et loyer médian mensuel, surface moyenne et nombre de logements observés. La page est reconstruite depuis ces fichiers dans la même exécution. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station."
 limite = "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian ou du loyer médian comme indicateurs, ni le rattachement des agglomérations à leurs communes — que la source ne publie pas et que la page ne fabrique donc pas —, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF."
+
+[[edition]]
+chemin = ".github/workflows/collecte-vie-chere.yml"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "cdc50dc750786c7b08a2ed0a6a84ebc1f3b4261570611387f9f9d36b7cccae29"
+empreinte_apres = "bc1ae4e4e36414fb35882b6f961366e27fdd210658adc26a8abba739b6b0adac"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "c317abf9b831557d0fe3ba7520e408b0342e9ce76e441d984450b72c1fb32a4e"
+empreinte_apres = "44e79d3f9c5babd9092cc9a2f854f6937a084f375a33569dce4401ccb6839e17"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "assets/data/vie-chere/communes-index.json"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "accfdc0c282b2637a9e746bf06683c9b9f90925c60337793631cde4608e253c9"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "assets/js/carte-vie-chere.js"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "0571897e19062e15892a309181a739654af55087cd294b60710144f5ababc18c"
+empreinte_apres = "e9a1ba4d4617c0b8bf254d0fa622b078c2c6a76d437a388d9b4cd89a93c456a1"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "couts-vie-chere.html"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "7a3db9798b10a850ada6c48acc4cdfbc19a744b69f2329ef745b62f8cbed971d"
+empreinte_apres = "26ed33589a3824b08dd88560c16c650da153b14b665180fa6789baf69a8d0597"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "couts-vie-chere/contenu.txt"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "e3371a573f5d7659904bc788537051f6b9e2770cf4338171528dee1ed88a06bb"
+empreinte_apres = "ba2cb7ae810e8a74afa806a0babfc82105b737a559e6b407b3aab42415b9a8c2"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "docs/rd/avancees.md"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "bab46491ba535903feb133ccd5462c9bb6ac94342d8391aade5a4ea37b202468"
+empreinte_apres = "388ae892a4e9a59a4f5bbb6d0a463c0d6aa477143f6717b9aa34bf265d0b9e79"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "docs/rd/avancees.toml"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "0355a3237e1376363c6e03b5b5803f7ea8d6f93f74c6760ca8d79b3730aea98e"
+empreinte_apres = "49d557f6224e65dd86ccb29c656c8774bb8bf24ee50721078840a42452a29abd"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "docs/rd/eva/graphe.dot"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "699bc3817344cf38293ffc513afbc380699ef50f003d63932ce4ee18b986f7cf"
+empreinte_apres = "fca1d1d320ceb6c15b602cc9d3adbfecc466255d9071e72f90ee8cb174464d73"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "000e291e7894f2ccc7c9342888812a0bca6ff1647fd3e314d3ad1f98e9b8787d"
+empreinte_apres = "08b6d223c733cbcd984a228d3425d265f000f9d67cbce4179447577dce68bcdb"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "docs/rd/eva/plan.md"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "7c353dbad6b8a7fbb89742593f22b16811d30b48e61c6610d47ce886776bcf63"
+empreinte_apres = "a86b7ec9330d0963d88224c791585be618d0ae7a1e7bb03933682c3358eefc50"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "2ea64cf1cd15ae4b0e5e7a4d171839e89476d35311302b61f659225f08c1b606"
+empreinte_apres = "0d4a377d3a557a3e5d40d04c837fe3993e8ee0548fe9d5b49bba3fd86974e272"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "e7e490ed734ffed7142b5285777ed6d8db51457540b44ae34c817e154e92ca7d"
+empreinte_apres = "8f174256e076940efb3a112741ae6e29ac891e8073bb7a75e8353a8f3d1bc40d"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "3c03c8f615e0f979c80fe4a061ec9acba7062e6766fd8ac76d027b1a78101d80"
+empreinte_apres = "f828267731efd09625b7db324fd28cd5a5bc94001058fade289eb087a48bbdbd"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "5333ccc4350946c4359e3781874fcb671440c159feb8efc47df6977201301788"
+empreinte_apres = "1fcb54b4317745c16046246011a7d57d7ac6ae138dbf495166e5229ba7715348"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "docs/rd/vie-chere-carte-2026-11-13.md"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "2c262d1edca19a13089e69c43f98f4ba2ae2d770d3532ff43e0c5f52e42eaec2"
+empreinte_apres = "f54a4a20b391f6e90de5c956f7127d767ef29f3ae01bc21ad9c9041ff48b610c"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "outils/collecter-loyers.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "cfe51079a1d03e12e1ec21e245cf0cbf56e667db96279e9d362bd13ea7da09bc"
+empreinte_apres = "f9f54ddd0ecbd2e67a59822ac4b7ab4487d402067031f02849932333e75e5e99"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "outils/construire-index-communes.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "acd8263a919706cd73e128bcb1fdb6a5cb1ff5d5c6f762f6d68a170db62ec6ec"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "outils/test-experience.cjs"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "5b00606f7dd2237e64df288411832eb989d6e447df013894431c9cfa48226000"
+empreinte_apres = "e3acda61b28e067a26bb72925dec6141cc0b8a9a76f957a12b9b24b35a0b4617"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "outils/test_collecte_loyers.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "4a0e780314e65b2ebe07182d3f7cd99f5794784a2e29d46824d29b1eeb85fab0"
+empreinte_apres = "98701d2b15ea7e86ad10bf9a3308a7a0479570ffbafdbf167c8d7f62dd331bdd"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "outils/test_construire_index_communes.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "6fcbddcf57f6c6f8a2151f2e47538b7429e53d9792cd19ef352fb5204c9d03fd"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json", "assets/data/vie-chere/_etat.json"]
+constat = "La recherche par ville et le zoom jusqu’à la ville sont refaits et mesurés. Le zoom descend à 0,03 degré au lieu de 1,5 ; choisir une commune la cadre et l’entoure d’un anneau ; la recherche plie accents, capitales et tirets, classe le nom exact devant, accepte le code INSEE, se pilote au clavier et porte sur toute la France via un index dérivé de la collecte (34 969 noms et codes, recalculé depuis les fichiers de département par outils/construire-index-communes.py), chargé seulement au premier besoin. L’adresse garde la commune. Le refus « un nom est un code » exige désormais un chiffre, dans les loyers comme dans l’index : sans cela, « Y », commune de la Somme, était rejetée. Le dossier des coûts, le plan complet (741 fichiers), l’inventaire des contrôles, le journal et l’avancée disent ce qui a été mesuré, et la mémoire d’EVA est régénérée."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. La recherche ne va pas par rue ni par code postal, aucune source de la carte ne publiant ces champs, et l’outre-mer reste absent. Les communes sont des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour. L’index est un dérivé : la garde le refuse s’il est périmé, elle ne le répare pas."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "44e79d3f9c5babd9092cc9a2f854f6937a084f375a33569dce4401ccb6839e17"
+empreinte_apres = "cc36b167a9e6e6b2d7cb67af920a3f3279732dd249f2ec3591c7f505e806a3d9"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "assets/data/vie-chere/communes-index.json"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "accfdc0c282b2637a9e746bf06683c9b9f90925c60337793631cde4608e253c9"
+empreinte_apres = "c0ad268a62b9412ba7bd8c1751bcf5e7cc9327d557140afad03c13ac81bd15ec"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "assets/js/carte-vie-chere.js"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "e9a1ba4d4617c0b8bf254d0fa622b078c2c6a76d437a388d9b4cd89a93c456a1"
+empreinte_apres = "177aacf142ec6d3c047a4fabcfe989d808fc98f4a555b00e401ffb8330b40a14"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "couts-vie-chere.html"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "26ed33589a3824b08dd88560c16c650da153b14b665180fa6789baf69a8d0597"
+empreinte_apres = "48d793cad07bb124f2b58d4c7877a5cbf009ba33aee4329b4654711cf92024d0"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "couts-vie-chere/contenu.txt"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "ba2cb7ae810e8a74afa806a0babfc82105b737a559e6b407b3aab42415b9a8c2"
+empreinte_apres = "5af1aabc535cf3210ed644875a7ea03b4c7220537ce06d604634ebea75f0176e"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "outils/construire-index-communes.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "acd8263a919706cd73e128bcb1fdb6a5cb1ff5d5c6f762f6d68a170db62ec6ec"
+empreinte_apres = "7508189384a283c1d4fa76e80e0fec8e3cc48f05ebc3cbf1414b05819c9ce249"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "outils/test-experience.cjs"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "e3acda61b28e067a26bb72925dec6141cc0b8a9a76f957a12b9b24b35a0b4617"
+empreinte_apres = "ef47199c58590339cbb93f5630011dfd59ea5db4a2342ad66bbf37ccc2ead6d1"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "outils/test_construire_index_communes.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "6fcbddcf57f6c6f8a2151f2e47538b7429e53d9792cd19ef352fb5204c9d03fd"
+empreinte_apres = "c6911576cbd66bc8f99a608d4b5394227079f5ab488fd9d375c66f2a656d88ce"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
+constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
+limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "f7590b86075049918a8ac65bc575ef60077403475f4b7e2c896eaf8e34737ff1"
+empreinte_apres = "2396deb46ded2f50e4e6eb80bb63f70d941fcbe5b9f09f51a33287cb71701154"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
+constat = "La page IA porte la version du CSS qu’elle sert : une feuille modifiée sans rejouer versionner-css-ia.py laissait la page annoncer une version périmée, et le banc du cache CSS tombait. Le fichier ne change que par cette empreinte."
+limite = "Le numéro de version n’est pas une mesure de contenu : il prouve seulement que la page et la feuille sont servies ensemble."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "cc36b167a9e6e6b2d7cb67af920a3f3279732dd249f2ec3591c7f505e806a3d9"
+empreinte_apres = "45b620d451cd1bf5dfde5faf42a0c873d9797d9760e504eb1de6e0672fceb48e"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
+constat = "La liste de suggestions n’est plus une liste de lecture : des éléments de rôle « option » la portent, sans puce ni sémantique de liste à perdre dans WebKit. La mesure de l’arbre d’accessibilité refusait la liste précédente, et c’est cette mesure qui a mené au changement. Rien d’autre ne bouge dans la page : ni le champ, ni les phrases, ni les chiffres."
+limite = "Le rôle « option » n’est pas mesuré par le relevé d’arbre au-delà de son nom accessible ; ni lecteur d’écran, ni WebKit, ni appareil réel n’ont été éprouvés. La page IA change encore une fois parce que la feuille a changé."
+
+[[edition]]
+chemin = "assets/js/carte-vie-chere.js"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "177aacf142ec6d3c047a4fabcfe989d808fc98f4a555b00e401ffb8330b40a14"
+empreinte_apres = "723b41cb6452fc350b21b7d647d031dca020be7f5038bc333af4919245505aee"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
+constat = "La liste de suggestions n’est plus une liste de lecture : des éléments de rôle « option » la portent, sans puce ni sémantique de liste à perdre dans WebKit. La mesure de l’arbre d’accessibilité refusait la liste précédente, et c’est cette mesure qui a mené au changement. Rien d’autre ne bouge dans la page : ni le champ, ni les phrases, ni les chiffres."
+limite = "Le rôle « option » n’est pas mesuré par le relevé d’arbre au-delà de son nom accessible ; ni lecteur d’écran, ni WebKit, ni appareil réel n’ont été éprouvés. La page IA change encore une fois parce que la feuille a changé."
+
+[[edition]]
+chemin = "couts-vie-chere.html"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "48d793cad07bb124f2b58d4c7877a5cbf009ba33aee4329b4654711cf92024d0"
+empreinte_apres = "221b832b86b230a1e0a7e67edbc88f096b32a0c50b8418fdde527cadfead2998"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
+constat = "La liste de suggestions n’est plus une liste de lecture : des éléments de rôle « option » la portent, sans puce ni sémantique de liste à perdre dans WebKit. La mesure de l’arbre d’accessibilité refusait la liste précédente, et c’est cette mesure qui a mené au changement. Rien d’autre ne bouge dans la page : ni le champ, ni les phrases, ni les chiffres."
+limite = "Le rôle « option » n’est pas mesuré par le relevé d’arbre au-delà de son nom accessible ; ni lecteur d’écran, ni WebKit, ni appareil réel n’ont été éprouvés. La page IA change encore une fois parce que la feuille a changé."
+
+[[edition]]
+chemin = "couts-vie-chere/contenu.txt"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "5af1aabc535cf3210ed644875a7ea03b4c7220537ce06d604634ebea75f0176e"
+empreinte_apres = "8c4a97946feccf23632d928780719f50dabf1e3d09676c82276bd87f6f7129d4"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
+constat = "La liste de suggestions n’est plus une liste de lecture : des éléments de rôle « option » la portent, sans puce ni sémantique de liste à perdre dans WebKit. La mesure de l’arbre d’accessibilité refusait la liste précédente, et c’est cette mesure qui a mené au changement. Rien d’autre ne bouge dans la page : ni le champ, ni les phrases, ni les chiffres."
+limite = "Le rôle « option » n’est pas mesuré par le relevé d’arbre au-delà de son nom accessible ; ni lecteur d’écran, ni WebKit, ni appareil réel n’ont été éprouvés. La page IA change encore une fois parce que la feuille a changé."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "2396deb46ded2f50e4e6eb80bb63f70d941fcbe5b9f09f51a33287cb71701154"
+empreinte_apres = "b65c5254f6f0c238563eef1e7c640887e46426d92b083accb1faadaac3cdc59c"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
+constat = "La liste de suggestions n’est plus une liste de lecture : des éléments de rôle « option » la portent, sans puce ni sémantique de liste à perdre dans WebKit. La mesure de l’arbre d’accessibilité refusait la liste précédente, et c’est cette mesure qui a mené au changement. Rien d’autre ne bouge dans la page : ni le champ, ni les phrases, ni les chiffres."
+limite = "Le rôle « option » n’est pas mesuré par le relevé d’arbre au-delà de son nom accessible ; ni lecteur d’écran, ni WebKit, ni appareil réel n’ont été éprouvés. La page IA change encore une fois parce que la feuille a changé."

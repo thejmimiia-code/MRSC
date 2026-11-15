@@ -5793,7 +5793,7 @@ html.contraste-renforce .association-suite-grid li { border-color: currentColor;
    La carte est un SVG sans tuiles : aucune requête tierce, un seul fichier de
    contours. Le panneau latéral porte les chiffres, la carte porte les lieux. */
 .couts-etat { margin: .6rem 0 0; font-size: max(12px, .9rem); color: #33405a; }
-.couts-outils { display: flex; flex-wrap: wrap; gap: .9rem 1.2rem; align-items: flex-end; margin: 1rem 0 1.2rem; }
+.couts-outils { display: flex; flex-wrap: wrap; gap: .9rem 1.2rem; align-items: flex-start; margin: 1rem 0 1.2rem; }
 .couts-champ { display: flex; flex-direction: column; gap: .35rem; min-width: min(100%, 15rem); }
 .couts-champ label { font-size: max(12px, .82rem); font-weight: 700; color: #33405a; }
 .couts-champ select, .couts-champ input {
@@ -5801,6 +5801,35 @@ html.contraste-renforce .association-suite-grid li { border-color: currentColor;
   border: 1px solid #b6c2d6; border-radius: 8px; background: #fff; color: #18243b;
   min-height: 44px;
 }
+/* Le champ de recherche porte sa liste : une commune trouvée se choisit au
+   clavier comme à la souris, et la ligne active reste visible. Les cibles font
+   44 px de haut, comme les boutons de zoom. */
+.couts-champ-recherche { flex: 1 1 18rem; position: relative; }
+/* Le champ et sa liste forment une seule zone : la liste se pose sur la carte
+   au lieu de pousser la rangée d'outils, qui devenait haute comme elle. */
+.couts-recherche-zone { position: relative; }
+.couts-touches { white-space: nowrap; }
+.couts-recherche-etat { margin: .3rem 0 0; font-size: max(12px, .8rem); color: #33405a; }
+.couts-resultats {
+  margin: 0; padding: .2rem; background: #fff;
+  border: 1px solid #b6c2d6; border-radius: 10px; max-height: 15rem; overflow-y: auto;
+  box-shadow: 0 10px 24px rgba(18, 31, 67, .12);
+  position: absolute; top: calc(100% + .3rem); left: 0; right: 0; z-index: 20;
+}
+.couts-suggestion {
+  display: flex; justify-content: space-between; gap: .8rem; align-items: baseline;
+  min-height: 44px; padding: .45rem .6rem; border-radius: 8px; cursor: pointer;
+  font-size: max(14px, .95rem);
+}
+.couts-suggestion .couts-resultat-complement { font-size: max(12px, .8rem); color: #33405a; white-space: nowrap; }
+.couts-suggestion-prix { font-size: max(12px, .78rem); color: #4a5670; white-space: nowrap; }
+/* Le nom de la commune choisie, écrit à côté d'elle au fond de zoom. Le
+   liseré blanc garde le texte lisible sur les zones colorées de la carte. */
+.couts-etiquette { fill: #18243b; stroke: #fff; paint-order: stroke; pointer-events: none; font-weight: 700; }
+.couts-suggestion:hover, .couts-suggestion.est-actif { background: #e8eefb; }
+.couts-suggestion[aria-selected="true"] { background: #dbe6f6; outline: 2px solid var(--blue); outline-offset: -2px; }
+/* L'anneau de la commune choisie : la fiche parle d'un lieu, la carte le montre. */
+.couts-choisie { fill: none; stroke: #b3261e; }
 .couts-zoom { display: flex; flex-wrap: wrap; gap: .5rem; }
 .couts-zoom .button { min-width: 44px; }
 .couts-grille { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
@@ -5848,6 +5877,9 @@ html.contraste-renforce .association-suite-grid li { border-color: currentColor;
   .couts-departement { fill: Canvas; stroke: CanvasText; }
   .couts-departement.est-ouvert { fill: Highlight; }
   .couts-commune { fill: CanvasText; }
+  .couts-choisie { stroke: CanvasText; }
+  .couts-suggestion:hover, .couts-suggestion.est-actif,
+  .couts-suggestion[aria-selected="true"] { background: Highlight; color: HighlightText; }
 }
 
 /* Bloc « Coût de la vie » — carburants et tableau des postes de dépense.

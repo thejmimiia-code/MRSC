@@ -392,6 +392,22 @@ class CollecteLoyers(unittest.TestCase):
             self.assertIn("illisible", resultat.stderr)
             self.assertFalse(sortie.exists())
 
+    def test_nom_en_capitales_sans_chiffre(self) -> None:
+        """« GRAND PARIS » est un nom ; seul un nom qui contient un chiffre est un code.
+
+        Le motif d'origine rejetait toute suite de capitales : un territoire
+        réellement publié en capitales aurait été écarté en silence, avec pour
+        seule trace une ligne de plus dans le compte des lignes écartées.
+        """
+        rangees = lignes()
+        rangees[3]["agglomeration"] = "GRAND PARIS"
+        with tempfile.TemporaryDirectory(prefix="mrsc-loyers-") as tmp:
+            resultat, sortie = self.collecter(fiche(), rangees, Path(tmp))
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-900:])
+            donnees = json.loads(sortie.read_text(encoding="utf-8"))
+            self.assertIn("GRAND PARIS", [t["nom"] for t in donnees["territoires"]])
+            self.assertEqual(donnees["source"]["lignes_ecartees"], [])
+
     def test_observations_absentes(self) -> None:
         """Une observation absente se publie `null`, jamais zéro."""
         rangees = lignes()

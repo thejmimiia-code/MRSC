@@ -1830,6 +1830,157 @@ async function main() {
     }
   });
 
+  // La carte du coût de la vie n'avait aucun essai navigateur : ni la
+  // recherche par ville, ni le zoom jusqu'à la commune, ni le lien partagé
+  // n'étaient exercés ailleurs que dans un contrôle de texte. Le 15 novembre
+  // 2026, la carte ne descendait pas plus bas que 1,5 degré — environ 165 km —
+  // et sa recherche comparait les chaînes telles quelles : « saint etienne »
+  // ne trouvait pas Saint-Étienne, et rien ne le disait.
+  const ouvrirCarte = async (page, requete = '') => {
+    await page.goto(adresse('couts-vie-chere.html' + requete), { waitUntil: 'domcontentloaded' });
+    await attendre(page, () => document.querySelectorAll('.couts-departement').length > 90, { timeout: 45000 });
+  };
+  const saisirCommune = (page, texte) => page.$eval('#couts-recherche', (element, valeur) => {
+    element.focus();
+    element.value = valeur;
+    element.dispatchEvent(new Event('input', { bubbles: true }));
+  }, texte);
+  const largeurVue = (page) => page.$eval('[data-couts-svg]', (element) => (
+    Number(String(element.getAttribute('viewBox')).split(/\s+/)[2])
+  ));
+
+  await executer('Carte des coûts : trouver une ville par son nom, ses accents manquants ou son code INSEE', async () => {
+    const page = await creerPage({ width: 1280, height: 900 });
+    try {
+      await ouvrirCarte(page);
+
+      // Aucun département n'est ouvert : la recherche doit quand même trouver.
+      await saisirCommune(page, 'saint etienne');
+      await attendre(page, () => !document.querySelector('[data-couts-resultats]').hidden, { timeout: 45000 });
+      const suggestion = await page.$eval('.couts-suggestion .couts-resultat-nom', (element) => element.textContent);
+      assert.equal(suggestion, 'Saint-Étienne', 'le nom exact doit passer devant, sans accent ni majuscule');
+      const annonce = await page.$eval('[data-couts-recherche-etat]', (element) => element.textContent);
+      assert.match(annonce, /communes? trouvée/, 'le nombre de résultats doit être annoncé');
+      assert.equal(await page.$eval('#couts-recherche', (element) => element.getAttribute('aria-expanded')), 'true');
+
+      await page.keyboard.press('Enter');
+      await attendre(page, () => !document.querySelector('[data-couts-fiche]').hidden, { timeout: 30000 });
+      assert.match(await page.$eval('[data-couts-nom]', (element) => element.textContent), /Saint-Étienne \(42218\)/);
+      assert.match(page.url(), /commune=42218/, 'l’adresse doit garder la commune choisie');
+
+      // Le code INSEE, saisi seul, mène à la même fiche.
+      await saisirCommune(page, '69123');
+      await attendre(page, () => {
+        const liste = document.querySelector('[data-couts-resultats]');
+        return Boolean(liste && !liste.hidden && liste.children.length);
+      }, { timeout: 45000 });
+      assert.equal(
+        await page.$eval('.couts-suggestion .couts-resultat-nom', (element) => element.textContent),
+        'Lyon'
+      );
+      await page.keyboard.press('Enter');
+      await attendre(page, () => /Lyon \(69123\)/.test(document.querySelector('[data-couts-nom]').textContent), { timeout: 30000 });
+
+      // Sans résultat, la page le dit et n'invente pas de fiche.
+      const ficheAvant = await page.$eval('[data-couts-nom]', (element) => element.textContent);
+      await saisirCommune(page, 'zzzz');
+      await attendre(page, () => /Aucune commune/.test(document.querySelector('[data-couts-recherche-etat]').textContent), { timeout: 45000 });
+      assert.equal(await page.$eval('[data-couts-resultats]', (element) => element.hidden), true);
+      assert.equal(await page.$eval('[data-couts-nom]', (element) => element.textContent), ficheAvant);
+    } finally {
+      await page.close();
+    }
+  });
+
+  await executer('Carte des coûts : le clavier choisit dans la liste, et Échap efface la recherche', async () => {
+    const page = await creerPage({ width: 1280, height: 900 });
+    try {
+      await ouvrirCarte(page);
+      await saisirCommune(page, 'saint');
+      await attendre(page, () => !document.querySelector('[data-couts-resultats]').hidden, { timeout: 45000 });
+      await page.keyboard.press('ArrowDown');
+      await page.keyboard.press('ArrowDown');
+      const actif = await page.$eval('#couts-recherche', (element) => element.getAttribute('aria-activedescendant'));
+      assert.ok(actif, 'la ligne active doit être annoncée par aria-activedescendant');
+      assert.equal(
+        await page.$eval(`#${actif}`, (element) => element.getAttribute('aria-selected')),
+        'true'
+      );
+      const second = await page.$eval(`#${actif} .couts-resultat-nom`, (element) => element.textContent);
+      await page.keyboard.press('Enter');
+      await attendre(page, () => !document.querySelector('[data-couts-fiche]').hidden, { timeout: 30000 });
+      assert.match(await page.$eval('[data-couts-nom]', (element) => element.textContent), new RegExp(second.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+      await saisirCommune(page, 'brest');
+      await attendre(page, () => !document.querySelector('[data-couts-resultats]').hidden, { timeout: 45000 });
+      await page.keyboard.press('Escape');
+      assert.equal(await page.$eval('#couts-recherche', (element) => element.value), '');
+      assert.equal(await page.$eval('[data-couts-resultats]', (element) => element.hidden), true);
+    } finally {
+      await page.close();
+    }
+  });
+
+  await executer('Carte des coûts : le zoom descend jusqu’à la ville, et le lien partagé y mène directement', async () => {
+    const page = await creerPage({ width: 1280, height: 900 });
+    try {
+      await ouvrirCarte(page);
+      const france = await largeurVue(page);
+      assert.ok(france > 5, `la vue d’ensemble doit tenir la France, largeur ${france}`);
+
+      await saisirCommune(page, 'lyon');
+      await attendre(page, () => !document.querySelector('[data-couts-resultats]').hidden, { timeout: 45000 });
+      await page.keyboard.press('Enter');
+      await attendre(page, () => !document.querySelector('[data-couts-fiche]').hidden, { timeout: 30000 });
+      const apresChoix = await largeurVue(page);
+      assert.ok(apresChoix <= 0.2, `choisir une ville doit cadrer sur elle, largeur ${apresChoix}`);
+      assert.equal(await page.$eval('[data-couts-svg]', (element) => Boolean(element.querySelector('[data-couts-choisie]'))), true);
+
+      // Le 15 novembre 2026, la carte devenait blanche dès qu'on choisissait
+      // une ville : le nom écrit à côté d'elle gardait la taille par défaut du
+      // SVG — 16 unités de carte, des milliers de pixels à ce zoom — et son
+      // liseré blanc recouvrait tout. Deux mesures le voient désormais.
+      const etiquette = await page.$eval('[data-couts-etiquette]', (element) => {
+        const rectangle = element.getBoundingClientRect();
+        return { largeur: rectangle.width, hauteur: rectangle.height };
+      });
+      assert.ok(etiquette.hauteur > 4 && etiquette.hauteur <= 40, `le nom sur la carte doit rester lisible, hauteur ${etiquette.hauteur}`);
+      const centrage = await page.evaluate(() => {
+        const svg = document.querySelector('[data-couts-svg]');
+        const boite = svg.getBoundingClientRect();
+        const anneau = svg.querySelector('[data-couts-choisie]').getBoundingClientRect();
+        return {
+          ecartX: Math.abs((anneau.left + anneau.width / 2) - (boite.left + boite.width / 2)),
+          ecartY: Math.abs((anneau.top + anneau.height / 2) - (boite.top + boite.height / 2)),
+          rayon: anneau.width / 2,
+        };
+      });
+      assert.ok(centrage.ecartX <= 6 && centrage.ecartY <= 6, `la commune choisie doit être au centre de la carte : ${JSON.stringify(centrage)}`);
+      assert.ok(centrage.rayon >= 4, `l’anneau doit rester visible, rayon ${centrage.rayon} px`);
+
+      for (let i = 0; i < 14; i += 1) await page.click('[data-couts-zoom="plus"]');
+      const plancher = await largeurVue(page);
+      assert.ok(plancher >= 0.029 && plancher <= 0.031, `le plancher de zoom vaut 0,03 degré, largeur ${plancher}`);
+
+      await page.click('[data-couts-recentrer]');
+      await attendre(page, () => document.querySelectorAll('[data-couts-communes] circle').length === 0, { timeout: 15000 });
+      assert.ok((await largeurVue(page)) > 5, '« Voir toute la France » doit revenir à la vue d’ensemble');
+      assert.doesNotMatch(page.url(), /commune=/, 'revenir à la France doit retirer la commune de l’adresse');
+
+      // Le lien partagé rouvre la fiche et le cadrage sans passer par la liste.
+      await ouvrirCarte(page, '?commune=75056');
+      await attendre(page, () => !document.querySelector('[data-couts-fiche]').hidden, { timeout: 45000 });
+      assert.match(await page.$eval('[data-couts-nom]', (element) => element.textContent), /Paris \(75056\)/);
+      assert.ok((await largeurVue(page)) <= 0.2, 'le lien partagé doit cadrer sur la commune');
+
+      // Un code hors métropole ne fabrique pas de fiche.
+      await ouvrirCarte(page, '?commune=97411');
+      await attendre(page, () => /métropole/.test(document.querySelector('[data-couts-message]').textContent), { timeout: 30000 });
+      assert.equal(await page.$eval('[data-couts-fiche]', (element) => element.hidden), true);
+    } finally {
+      await page.close();
+    }
+  });
+
   const echoues = resultats.filter((resultat) => !resultat.reussi);
   console.log(`\n${resultats.length - echoues.length}/${resultats.length} essais navigateur réussis.`);
   if (echoues.length) process.exitCode = 1;

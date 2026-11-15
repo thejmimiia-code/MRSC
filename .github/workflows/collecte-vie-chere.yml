@@ -49,6 +49,7 @@ jobs:
           python3 outils/test_collecte_vie_chere.py
           python3 outils/test_collecte_carburants.py
           python3 outils/test_collecte_loyers.py
+          python3 outils/test_construire_index_communes.py
 
       # Le 14 novembre 2026, la première exécution a échoué sans qu'on puisse lire
       # pourquoi : le journal d'un job est servi depuis un stockage que l'atelier de
@@ -114,6 +115,25 @@ jobs:
           python3 outils/construire-page-couts.py
           python3 outils/construire-page-couts.py --verifier
 
+      # La recherche par ville ne peut pas télécharger cent douze fichiers de
+      # département : elle utilise un index de noms et de codes, dérivé de la
+      # collecte. Un dérivé qu'on oublie de refaire est un dérivé faux — la
+      # recherche dirait « aucune commune » à une commune qui existe.
+      - name: Écrire l'index de recherche des communes
+        run: |
+          set +e
+          python3 outils/construire-index-communes.py >"$RUNNER_TEMP/index.log" 2>&1
+          code=$?
+          python3 outils/construire-index-communes.py --verifier >>"$RUNNER_TEMP/index.log" 2>&1 || code=$?
+          set -e
+          tail -n 10 "$RUNNER_TEMP/index.log"
+          if [ "$code" -ne 0 ]; then
+            tail -n 6 "$RUNNER_TEMP/index.log" | cut -c1-800 | while IFS= read -r ligne; do
+              echo "::error title=Index des communes::$ligne"
+            done
+            exit "$code"
+          fi
+
       # Les fichiers de données sont des unités de contenu : la sentinelle de
       # relecture exige que leur provenance soit consignée. La signature est
       # faite ici, avec les empreintes des sources réellement téléchargées, pour
@@ -131,8 +151,8 @@ jobs:
           set +e
           python3 outils/relire-contenus.py --appliquer $fichiers \
             --nature mesure-interne \
-            --mesures "outils/collecter-vie-chere.py,outils/test_collecte_vie_chere.py,outils/collecter-carburants.py,outils/test_collecte_carburants.py,outils/collecter-loyers.py,outils/test_collecte_loyers.py,outils/preparer-fond-de-carte.py,outils/construire-page-couts.py" \
-            --constat "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr), des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0) et des loyers observés par agglomération (réseau des observatoires locaux des loyers, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations ; par agglomération : loyer médian au m² et loyer médian mensuel, surface moyenne et nombre de logements observés. La page est reconstruite depuis ces fichiers dans la même exécution. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station." \
+            --mesures "outils/collecter-vie-chere.py,outils/test_collecte_vie_chere.py,outils/collecter-carburants.py,outils/test_collecte_carburants.py,outils/collecter-loyers.py,outils/test_collecte_loyers.py,outils/preparer-fond-de-carte.py,outils/construire-page-couts.py,outils/construire-index-communes.py,outils/test_construire_index_communes.py" \
+            --constat "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr), des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0) et des loyers observés par agglomération (réseau des observatoires locaux des loyers, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations ; par agglomération : loyer médian au m² et loyer médian mensuel, surface moyenne et nombre de logements observés. La page est reconstruite depuis ces fichiers dans la même exécution. L'index de recherche des communes est recalculé depuis les fichiers de département : il ne contient que les noms et les codes INSEE, aucune coordonnée, aucun prix. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station." \
             --limite "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian ou du loyer médian comme indicateurs, ni le rattachement des agglomérations à leurs communes — que la source ne publie pas et que la page ne fabrique donc pas —, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF." \
             --ignorer-inchanges >"$RUNNER_TEMP/provenance.log" 2>&1
           code=$?
