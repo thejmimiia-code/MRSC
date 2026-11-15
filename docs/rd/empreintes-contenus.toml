@@ -367,10 +367,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = ".github/workflows/collecte-vie-chere.yml"
-empreinte = "fc71c3a577f5873cec686c83d8be0ac391c1b39986406777fbcfa8c77962b12b"
+empreinte = "cdc50dc750786c7b08a2ed0a6a84ebc1f3b4261570611387f9f9d36b7cccae29"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 
 [[unite]]
 chemin = ".github/workflows/deploy-pages.yml"
