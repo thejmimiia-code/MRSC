@@ -2300,7 +2300,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/js/carte-vie-chere.js"
-empreinte = "723b41cb6452fc350b21b7d647d031dca020be7f5038bc333af4919245505aee"
+empreinte = "26ccd9b2abce205529ebee444d54d973b94fca11aaf0b16efea53b7e56609de7"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -3873,7 +3873,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test-experience.cjs"
-empreinte = "ef47199c58590339cbb93f5630011dfd59ea5db4a2342ad66bbf37ccc2ead6d1"
+empreinte = "2f333685e91d92ae16ff2ed5d4d2f8d36128b3c8caefa05ffbdddedfeef6304a"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15

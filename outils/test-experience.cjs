@@ -1957,10 +1957,12 @@ async function main() {
       assert.ok(centrage.ecartX <= 6 && centrage.ecartY <= 6, `la commune choisie doit être au centre de la carte : ${JSON.stringify(centrage)}`);
       assert.ok(centrage.rayon >= 4, `l’anneau doit rester visible, rayon ${centrage.rayon} px`);
 
+      await page.$eval('[data-couts-zoom="plus"]', (element) => element.scrollIntoView({ behavior: 'instant', block: 'center' }));
       for (let i = 0; i < 14; i += 1) await page.click('[data-couts-zoom="plus"]');
       const plancher = await largeurVue(page);
       assert.ok(plancher >= 0.029 && plancher <= 0.031, `le plancher de zoom vaut 0,03 degré, largeur ${plancher}`);
 
+      await page.$eval('[data-couts-recentrer]', (element) => element.scrollIntoView({ behavior: 'instant', block: 'center' }));
       await page.click('[data-couts-recentrer]');
       await attendre(page, () => document.querySelectorAll('[data-couts-communes] circle').length === 0, { timeout: 15000 });
       assert.ok((await largeurVue(page)) > 5, '« Voir toute la France » doit revenir à la vue d’ensemble');
@@ -1976,6 +1978,89 @@ async function main() {
       await ouvrirCarte(page, '?commune=97411');
       await attendre(page, () => /métropole/.test(document.querySelector('[data-couts-message]').textContent), { timeout: 30000 });
       assert.equal(await page.$eval('[data-couts-fiche]', (element) => element.hidden), true);
+    } finally {
+      await page.close();
+    }
+  });
+
+  await executer('Carte des coûts : Tab ferme la liste, code corse, tri complet, bornes et ?dep=', async () => {
+    const page = await creerPage({ width: 1280, height: 900 });
+    try {
+      // ?dep=75 ouvre le département demandé ; ?dep=974 refuse honnêtement.
+      await ouvrirCarte(page, '?dep=75');
+      await attendre(page, () => /Paris/.test(document.querySelector('[data-couts-message]').textContent), { timeout: 45000 });
+      assert.equal(await page.$eval('#couts-departement', (element) => element.value), '75');
+
+      await ouvrirCarte(page, '?dep=974');
+      await attendre(page, () => /métropole/.test(document.querySelector('[data-couts-message]').textContent), { timeout: 30000 });
+
+      // Code corse 2A004 trouvé sans département ouvert puis avec 2A ouvert.
+      await ouvrirCarte(page);
+      await saisirCommune(page, '2a004');
+      await attendre(page, () => !document.querySelector('[data-couts-resultats]').hidden, { timeout: 45000 });
+      assert.equal(
+        await page.$eval('.couts-suggestion .couts-resultat-nom', (element) => element.textContent),
+        'Ajaccio'
+      );
+
+      await page.select('#couts-departement', '2A');
+      await attendre(page, () => document.querySelectorAll('[data-couts-communes] circle').length > 10, { timeout: 45000 });
+      await saisirCommune(page, '2A004');
+      await attendre(page, () => !document.querySelector('[data-couts-resultats]').hidden, { timeout: 45000 });
+      assert.equal(
+        await page.$eval('.couts-suggestion .couts-resultat-nom', (element) => element.textContent),
+        'Ajaccio'
+      );
+
+      // Tri avant découpage : dans l'Oise (60), « Ville » dépasse la 40e place
+      // alphabétique des noms en « ville », mais le nom exact passe devant.
+      await page.select('#couts-departement', '60');
+      await attendre(page, () => document.querySelectorAll('[data-couts-communes] circle').length > 100, { timeout: 45000 });
+      await saisirCommune(page, 'ville');
+      await attendre(page, () => !document.querySelector('[data-couts-resultats]').hidden, { timeout: 45000 });
+      assert.equal(
+        await page.$eval('.couts-suggestion .couts-resultat-nom', (element) => element.textContent),
+        'Ville'
+      );
+
+      // Tab quitte la recherche en refermant la liste défilante sans s'y piéger.
+      await page.keyboard.press('Tab');
+      const apresTab = await page.evaluate(() => ({
+        actif: document.activeElement ? document.activeElement.getAttribute('data-couts-zoom') : null,
+        expanded: document.querySelector('#couts-recherche').getAttribute('aria-expanded'),
+        hidden: document.querySelector('[data-couts-resultats]').hidden,
+      }));
+      assert.equal(apresTab.hidden, true, 'Tab doit fermer la liste des suggestions');
+      assert.equal(apresTab.expanded, 'false', 'aria-expanded doit repasser à false');
+      assert.equal(apresTab.actif, 'plus', 'Tab doit atteindre le bouton + sans piéger dans la liste');
+
+      // Les flèches clavier restent bornées à la France ; le glisser déplace
+      // la vue sans déclencher de clic involontaire sur un département.
+      await page.$eval('[data-couts-recentrer]', (element) => element.scrollIntoView({ behavior: 'instant', block: 'center' }));
+      await page.click('[data-couts-recentrer]');
+      await attendre(page, () => document.querySelector('#couts-departement').value === '', { timeout: 15000 });
+      await page.$eval('[data-couts-vue]', (element) => element.scrollIntoView({ behavior: 'instant', block: 'center' }));
+      await page.focus('[data-couts-vue]');
+      for (let i = 0; i < 30; i += 1) await page.keyboard.press('ArrowRight');
+      const xApresFleches = await page.$eval('[data-couts-svg]', (element) => (
+        Number(String(element.getAttribute('viewBox')).split(/\s+/)[0])
+      ));
+      assert.ok(xApresFleches < 6, `la vue ne doit pas sortir de la France vers l’est, x=${xApresFleches}`);
+
+      const boite = await page.$eval('[data-couts-svg]', (element) => {
+        const r = element.getBoundingClientRect();
+        return { x: r.x, y: r.y, w: r.width, h: r.height };
+      });
+      const vbAvant = await page.$eval('[data-couts-svg]', (element) => element.getAttribute('viewBox'));
+      const cx = boite.x + boite.w / 2;
+      const cy = boite.y + boite.h / 2;
+      await page.mouse.move(cx, cy);
+      await page.mouse.down();
+      await page.mouse.move(cx + 100, cy + 30, { steps: 10 });
+      await page.mouse.up();
+      const vbApres = await page.$eval('[data-couts-svg]', (element) => element.getAttribute('viewBox'));
+      assert.notEqual(vbApres, vbAvant, 'glisser la souris doit déplacer la vue');
+      assert.equal(await page.$eval('#couts-departement', (element) => element.value), '', 'glisser ne doit pas ouvrir un département');
     } finally {
       await page.close();
     }

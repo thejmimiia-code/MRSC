@@ -14739,3 +14739,63 @@ sources = []
 mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
 constat = "La liste de suggestions n’est plus une liste de lecture : des éléments de rôle « option » la portent, sans puce ni sémantique de liste à perdre dans WebKit. La mesure de l’arbre d’accessibilité refusait la liste précédente, et c’est cette mesure qui a mené au changement. Rien d’autre ne bouge dans la page : ni le champ, ni les phrases, ni les chiffres."
 limite = "Le rôle « option » n’est pas mesuré par le relevé d’arbre au-delà de son nom accessible ; ni lecteur d’écran, ni WebKit, ni appareil réel n’ont été éprouvés. La page IA change encore une fois parce que la feuille a changé."
+
+[[edition]]
+chemin = "assets/js/carte-vie-chere.js"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "723b41cb6452fc350b21b7d647d031dca020be7f5038bc333af4919245505aee"
+empreinte_apres = "c1a1716e46761ed6833323bf7f546c0ffbfa8b0361627767ef0759c0f472f70f"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-2A.json", "assets/data/vie-chere/d-60.json", "assets/data/vie-chere/d-75.json"]
+constat = "Corrections de la troisième passe sur la carte des coûts de la vie, appuyées sur les essais navigateur (18/18 réussis) : fermeture de la liste de suggestions sur Tab et perte de focus (sinon la boîte défilante captait Tab dans Chromium avec aria-expanded à true), classement avant découpage à 40 dans le département ouvert (sinon « Ville » dans l’Oise disparaissait), comparaison en minuscules des codes INSEE corses (2A004/2B…), bornage du déplacement aux flèches clavier, glissement au pointeur sans clic involontaire, et ouverture directe par ?dep=."
+limite = "Vérifié dans Chromium headless uniquement (18/18 essais et mesure de la vue 360 px) : ni lecteur d’écran, ni Firefox, ni WebKit, ni appareil tactile réel n’ont été éprouvés."
+
+[[edition]]
+chemin = "outils/test-experience.cjs"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "ef47199c58590339cbb93f5630011dfd59ea5db4a2342ad66bbf37ccc2ead6d1"
+empreinte_apres = "e8a2cb65da47663deb3e1d6949e1a61fa824ddea58777206280c8fbf4c8ebf8c"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-2A.json", "assets/data/vie-chere/d-60.json", "assets/data/vie-chere/d-75.json"]
+constat = "Corrections de la troisième passe sur la carte des coûts de la vie, appuyées sur les essais navigateur (18/18 réussis) : fermeture de la liste de suggestions sur Tab et perte de focus (sinon la boîte défilante captait Tab dans Chromium avec aria-expanded à true), classement avant découpage à 40 dans le département ouvert (sinon « Ville » dans l’Oise disparaissait), comparaison en minuscules des codes INSEE corses (2A004/2B…), bornage du déplacement aux flèches clavier, glissement au pointeur sans clic involontaire, et ouverture directe par ?dep=."
+limite = "Vérifié dans Chromium headless uniquement (18/18 essais et mesure de la vue 360 px) : ni lecteur d’écran, ni Firefox, ni WebKit, ni appareil tactile réel n’ont été éprouvés."
+
+[[edition]]
+chemin = "assets/js/carte-vie-chere.js"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "c1a1716e46761ed6833323bf7f546c0ffbfa8b0361627767ef0759c0f472f70f"
+empreinte_apres = "26ccd9b2abce205529ebee444d54d973b94fca11aaf0b16efea53b7e56609de7"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-2A.json", "assets/data/vie-chere/d-60.json", "assets/data/vie-chere/d-75.json"]
+constat = "Correctif de fiabilité du défilement instantané dans l’essai du glisser sur la carte (scroll-behavior smooth décalait le centre de la carte entre la lecture du rectangle et le clic) et neutralisation de dragstart natif sur le SVG ; 18/18 essais navigateur réussis."
+limite = "Vérifié dans Chromium headless uniquement : ni lecteur d’écran, ni Firefox, ni WebKit, ni appareil tactile réel n’ont été éprouvés."
+
+[[edition]]
+chemin = "outils/test-experience.cjs"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "e8a2cb65da47663deb3e1d6949e1a61fa824ddea58777206280c8fbf4c8ebf8c"
+empreinte_apres = "70510df5d43380068dc4bae172eca540bebe87b2e71600fe9e4da9fa645ce311"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-2A.json", "assets/data/vie-chere/d-60.json", "assets/data/vie-chere/d-75.json"]
+constat = "Correctif de fiabilité du défilement instantané dans l’essai du glisser sur la carte (scroll-behavior smooth décalait le centre de la carte entre la lecture du rectangle et le clic) et neutralisation de dragstart natif sur le SVG ; 18/18 essais navigateur réussis."
+limite = "Vérifié dans Chromium headless uniquement : ni lecteur d’écran, ni Firefox, ni WebKit, ni appareil tactile réel n’ont été éprouvés."
+
+[[edition]]
+chemin = "outils/test-experience.cjs"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "70510df5d43380068dc4bae172eca540bebe87b2e71600fe9e4da9fa645ce311"
+empreinte_apres = "2f333685e91d92ae16ff2ed5d4d2f8d36128b3c8caefa05ffbdddedfeef6304a"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-60.json", "assets/data/vie-chere/d-69.json"]
+constat = "Centrage instantané des boutons de zoom et recentrage avant les clics de test pour éviter l’en-tête fixe et le défilement doux ; 18/18 essais navigateur réussis."
+limite = "Vérifié dans Chromium headless uniquement : ni lecteur d’écran, ni Firefox, ni WebKit, ni appareil tactile réel n’ont été éprouvés."
