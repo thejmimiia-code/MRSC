@@ -14199,3 +14199,87 @@ sources = []
 mesures = ["docs/rd/journal.md", "docs/rd/avancees.toml", "docs/rd/plan-projet-complet-2026-11-11.md"]
 constat = "La mémoire d’EVA est régénérée après l’entrée de journal et l’avancée du 15 novembre 2026 : 542 entrées, 350 nœuds, 784 arêtes, index de 216 905 octets pour un corpus de 2 432 179 octets. Les trois rendus viennent de la même exécution, donc ils ne peuvent pas se contredire entre eux."
 limite = "Le graphe et le plan sont des vues dérivées du corpus, pas une lecture : ils disent quelles entrées existent et comment elles se relient, jamais ce qu’une page affirme de vrai. La régénération ne vérifie aucun chiffre publié."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "1e902a9e9f168712adf55399465659f142b65c7f3f12f7c88c3886bd81f157eb"
+empreinte_apres = "000e291e7894f2ccc7c9342888812a0bca6ff1647fd3e314d3ad1f98e9b8787d"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La page publiée affichait « Grand Chambéry et Cur de Savoie » : la source écrit ce nom avec U+009C, l’octet 0x9C de la page de codes Windows qui encode le « œ ». Le collecteur rétablit la lettre correspondante, publie la liste des noms réparés dans sa provenance et la page écrit qu’un nom a été réparé ; un caractère de contrôle qu’aucune lettre ne désigne fait refuser la collecte. Le banc des loyers passe de 21 à 23 cas et celui de la page de 25 à 26, l’inventaire des contrôles et le journal suivent, et la mémoire d’EVA est régénérée."
+limite = "La réparation suppose que l’octet vienne bien de la page de codes Windows : c’est ce que dit la valeur 0x9C et la place du caractère dans le mot, pas une déclaration de la source. Un nom qui contiendrait légitimement un caractère de contrôle serait modifié sans qu’on puisse le savoir, et deux noms réparés différemment ne seraient plus distincts. Le rendu n’a pas été revérifié dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "ba6ee1a6b1feef13b745a9ab1b572b0616e7e89f61afbf2696c05e618df1b613"
+empreinte_apres = "2ea64cf1cd15ae4b0e5e7a4d171839e89476d35311302b61f659225f08c1b606"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La page publiée affichait « Grand Chambéry et Cur de Savoie » : la source écrit ce nom avec U+009C, l’octet 0x9C de la page de codes Windows qui encode le « œ ». Le collecteur rétablit la lettre correspondante, publie la liste des noms réparés dans sa provenance et la page écrit qu’un nom a été réparé ; un caractère de contrôle qu’aucune lettre ne désigne fait refuser la collecte. Le banc des loyers passe de 21 à 23 cas et celui de la page de 25 à 26, l’inventaire des contrôles et le journal suivent, et la mémoire d’EVA est régénérée."
+limite = "La réparation suppose que l’octet vienne bien de la page de codes Windows : c’est ce que dit la valeur 0x9C et la place du caractère dans le mot, pas une déclaration de la source. Un nom qui contiendrait légitimement un caractère de contrôle serait modifié sans qu’on puisse le savoir, et deux noms réparés différemment ne seraient plus distincts. Le rendu n’a pas été revérifié dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "docs/rd/journal.md"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "807d99b4a47987e20b900bc5674872450dbc0d1bed4bfe1dea304cca916d6bb4"
+empreinte_apres = "e7e490ed734ffed7142b5285777ed6d8db51457540b44ae34c817e154e92ca7d"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La page publiée affichait « Grand Chambéry et Cur de Savoie » : la source écrit ce nom avec U+009C, l’octet 0x9C de la page de codes Windows qui encode le « œ ». Le collecteur rétablit la lettre correspondante, publie la liste des noms réparés dans sa provenance et la page écrit qu’un nom a été réparé ; un caractère de contrôle qu’aucune lettre ne désigne fait refuser la collecte. Le banc des loyers passe de 21 à 23 cas et celui de la page de 25 à 26, l’inventaire des contrôles et le journal suivent, et la mémoire d’EVA est régénérée."
+limite = "La réparation suppose que l’octet vienne bien de la page de codes Windows : c’est ce que dit la valeur 0x9C et la place du caractère dans le mot, pas une déclaration de la source. Un nom qui contiendrait légitimement un caractère de contrôle serait modifié sans qu’on puisse le savoir, et deux noms réparés différemment ne seraient plus distincts. Le rendu n’a pas été revérifié dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "outils/collecter-loyers.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "a3c1002012e6b9dc5e11c40af29d1aa96ceb6354a6e4abf4552fe4fd43781185"
+empreinte_apres = "cfe51079a1d03e12e1ec21e245cf0cbf56e667db96279e9d362bd13ea7da09bc"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La page publiée affichait « Grand Chambéry et Cur de Savoie » : la source écrit ce nom avec U+009C, l’octet 0x9C de la page de codes Windows qui encode le « œ ». Le collecteur rétablit la lettre correspondante, publie la liste des noms réparés dans sa provenance et la page écrit qu’un nom a été réparé ; un caractère de contrôle qu’aucune lettre ne désigne fait refuser la collecte. Le banc des loyers passe de 21 à 23 cas et celui de la page de 25 à 26, l’inventaire des contrôles et le journal suivent, et la mémoire d’EVA est régénérée."
+limite = "La réparation suppose que l’octet vienne bien de la page de codes Windows : c’est ce que dit la valeur 0x9C et la place du caractère dans le mot, pas une déclaration de la source. Un nom qui contiendrait légitimement un caractère de contrôle serait modifié sans qu’on puisse le savoir, et deux noms réparés différemment ne seraient plus distincts. Le rendu n’a pas été revérifié dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "outils/construire-page-couts.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "ea494f4473c086e20f06316ef05ad82dffa535dd6ccabf053de365d9d3f5391f"
+empreinte_apres = "e69bcf8c26b083b316cb9cc8434dcf05c833fb5f432f09fb9832b046f21fa557"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La page publiée affichait « Grand Chambéry et Cur de Savoie » : la source écrit ce nom avec U+009C, l’octet 0x9C de la page de codes Windows qui encode le « œ ». Le collecteur rétablit la lettre correspondante, publie la liste des noms réparés dans sa provenance et la page écrit qu’un nom a été réparé ; un caractère de contrôle qu’aucune lettre ne désigne fait refuser la collecte. Le banc des loyers passe de 21 à 23 cas et celui de la page de 25 à 26, l’inventaire des contrôles et le journal suivent, et la mémoire d’EVA est régénérée."
+limite = "La réparation suppose que l’octet vienne bien de la page de codes Windows : c’est ce que dit la valeur 0x9C et la place du caractère dans le mot, pas une déclaration de la source. Un nom qui contiendrait légitimement un caractère de contrôle serait modifié sans qu’on puisse le savoir, et deux noms réparés différemment ne seraient plus distincts. Le rendu n’a pas été revérifié dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "outils/test_collecte_loyers.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "beea4d39ded2712986794c88928fa5c010d4f09d6265e9d073974531e72d3261"
+empreinte_apres = "4a0e780314e65b2ebe07182d3f7cd99f5794784a2e29d46824d29b1eeb85fab0"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La page publiée affichait « Grand Chambéry et Cur de Savoie » : la source écrit ce nom avec U+009C, l’octet 0x9C de la page de codes Windows qui encode le « œ ». Le collecteur rétablit la lettre correspondante, publie la liste des noms réparés dans sa provenance et la page écrit qu’un nom a été réparé ; un caractère de contrôle qu’aucune lettre ne désigne fait refuser la collecte. Le banc des loyers passe de 21 à 23 cas et celui de la page de 25 à 26, l’inventaire des contrôles et le journal suivent, et la mémoire d’EVA est régénérée."
+limite = "La réparation suppose que l’octet vienne bien de la page de codes Windows : c’est ce que dit la valeur 0x9C et la place du caractère dans le mot, pas une déclaration de la source. Un nom qui contiendrait légitimement un caractère de contrôle serait modifié sans qu’on puisse le savoir, et deux noms réparés différemment ne seraient plus distincts. Le rendu n’a pas été revérifié dans un navigateur depuis l’atelier."
+
+[[edition]]
+chemin = "outils/test_collecte_vie_chere.py"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "6652e19e063c5c55540495b99ec0485354f7f45c6672d79283fe4f2f37643b79"
+empreinte_apres = "bd60efdf4706dd5825f4def9d0a454186a683577d3fa2b54edba9708858118d0"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/loyers.json", "outils/collecter-loyers.py", "outils/construire-page-couts.py"]
+constat = "La page publiée affichait « Grand Chambéry et Cur de Savoie » : la source écrit ce nom avec U+009C, l’octet 0x9C de la page de codes Windows qui encode le « œ ». Le collecteur rétablit la lettre correspondante, publie la liste des noms réparés dans sa provenance et la page écrit qu’un nom a été réparé ; un caractère de contrôle qu’aucune lettre ne désigne fait refuser la collecte. Le banc des loyers passe de 21 à 23 cas et celui de la page de 25 à 26, l’inventaire des contrôles et le journal suivent, et la mémoire d’EVA est régénérée."
+limite = "La réparation suppose que l’octet vienne bien de la page de codes Windows : c’est ce que dit la valeur 0x9C et la place du caractère dans le mot, pas une déclaration de la source. Un nom qui contiendrait légitimement un caractère de contrôle serait modifié sans qu’on puisse le savoir, et deux noms réparés différemment ne seraient plus distincts. Le rendu n’a pas été revérifié dans un navigateur depuis l’atelier."

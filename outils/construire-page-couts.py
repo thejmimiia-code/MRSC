@@ -97,11 +97,20 @@ def bloc_loyers() -> str:
         if ecartees
         else ""
     )
+    noms_repares = source.get("noms_repares") or []
+    phrase_repares = (
+        f" Un nom de la source ({len(noms_repares)}) est publié avec un caractère de la page de "
+        f"codes Windows à la place d’une lettre : « {html.escape(str(noms_repares[0]))} » est "
+        "affiché avec la lettre que ce caractère désigne, et rien d’autre n’est changé."
+        if noms_repares
+        else ""
+    )
     return (
         f"<p>{len(territoires)} territoires sont observés par le réseau des observatoires "
         f"locaux des loyers en {html.escape(str(annee))}. La maille est l’agglomération, pas la "
         "commune : cette liste n’est donc pas un calque de la carte, et le site ne rattache "
-        f"aucune agglomération à ses communes, faute de source qui le publie.{phrase_ecartees}</p>\n"
+        f"aucune agglomération à ses communes, faute de source qui le publie.{phrase_ecartees}"
+        f"{phrase_repares}</p>\n"
         '            <div class="couts-tableau-defilant" tabindex="0" role="region" '
         'aria-labelledby="titre-tableau-loyers">\n'
         '              <table class="couts-tableau">\n'

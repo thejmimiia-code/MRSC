@@ -354,6 +354,44 @@ class CollecteLoyers(unittest.TestCase):
             self.assertEqual(verification.returncode, 0, verification.stderr[-800:])
             self.assertIn("écartée", verification.stdout)
 
+    def test_nom_avec_un_caractere_windows(self) -> None:
+        """Le 15 novembre 2026, la page a affiché « Grand Chambéry et Cur de Savoie ».
+
+        La source publie ce nom avec U+009C à la place du « œ » : l’octet 0x9C
+        de la page de codes Windows, relu comme de l’Unicode. La lettre est
+        rétablie, le nom réparé est publié dans la provenance, et le
+        vérificateur relit le fichier sans y trouver de caractère de contrôle.
+        """
+        rangees = lignes()
+        rangees[1]["agglomeration"] = "Communaut\u00e9 d’agglom\u00e9ration Grand Chamb\u00e9ry et C\u009cur de Savoie"
+        with tempfile.TemporaryDirectory(prefix="mrsc-loyers-") as tmp:
+            resultat, sortie = self.collecter(fiche(), rangees, Path(tmp))
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-900:])
+            donnees = json.loads(sortie.read_text(encoding="utf-8"))
+            noms = [t["nom"] for t in donnees["territoires"]]
+            self.assertIn("Communauté d’agglomération Grand Chambéry et Cœur de Savoie", noms)
+            self.assertFalse(
+                any(0x80 <= ord(c) <= 0x9F for nom in noms for c in nom),
+                "aucun caractère de contrôle ne doit rester dans un nom publié",
+            )
+            self.assertEqual(len(donnees["source"]["noms_repares"]), 1)
+            verification = subprocess.run(
+                [sys.executable, str(OUTIL), "--verifier", "--sortie", str(sortie)],
+                capture_output=True, text=True, check=False,
+            )
+            self.assertEqual(verification.returncode, 0, verification.stderr[-800:])
+            self.assertIn("réparé", verification.stdout)
+
+    def test_nom_avec_un_caractere_sans_lettre(self) -> None:
+        """U+0081 ne désigne aucune lettre : un nom illisible ne se publie pas."""
+        rangees = lignes()
+        rangees[1]["agglomeration"] = "Territoire \u0081 illisible"
+        with tempfile.TemporaryDirectory(prefix="mrsc-loyers-") as tmp:
+            resultat, sortie = self.collecter(fiche(), rangees, Path(tmp))
+            self.assertNotEqual(resultat.returncode, 0)
+            self.assertIn("illisible", resultat.stderr)
+            self.assertFalse(sortie.exists())
+
     def test_observations_absentes(self) -> None:
         """Une observation absente se publie `null`, jamais zéro."""
         rangees = lignes()

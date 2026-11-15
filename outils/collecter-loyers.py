@@ -223,6 +223,42 @@ def pages(base: str, ressource: str) -> tuple[list[dict], int]:
     return lignes, total
 
 
+#: Le 15 novembre 2026, la page a affiché « Grand Chambéry et Cur de Savoie » :
+#: la source publie ce nom avec le caractère U+009C à la place du « œ ». U+009C
+#: est l’octet 0x9C de la page de codes Windows, celle qui encode précisément
+#: cette ligature ; le nom a donc été écrit en Windows puis relu comme de
+#: l’Unicode. Rétablir la lettre que l’octet désigne n’invente rien — c’est le
+#: seul sens que cet octet ait jamais eu —, à condition de le dire : le nombre
+#: de noms réparés est publié dans la provenance, et la page l’écrit. Un
+#: caractère qu’aucune lettre ne désigne (0x81, 0x8D, 0x8F, 0x90, 0x9D) fait
+#: refuser la collecte : un nom illisible ne se publie pas.
+WINDOWS: dict[int, str] = {}
+for _octet in range(0x80, 0xA0):
+    try:
+        WINDOWS[_octet] = bytes([_octet]).decode("cp1252")
+    except UnicodeDecodeError:
+        continue
+del _octet
+
+
+def reparer_nom(nom: str) -> tuple[str, bool]:
+    """Rétablit les lettres qu’une page de codes Windows a laissées en caractères de contrôle."""
+    sortie: list[str] = []
+    repare = False
+    for caractere in nom:
+        point = ord(caractere)
+        if 0x80 <= point <= 0x9F:
+            if point not in WINDOWS:
+                raise Refus(
+                    f"{nom!r} — caractère de contrôle U+{point:04X} sans lettre connue : nom illisible"
+                )
+            sortie.append(WINDOWS[point])
+            repare = True
+        else:
+            sortie.append(caractere)
+    return "".join(sortie), repare
+
+
 def nombre(valeur: object, borne: tuple[float, float], etiquette: str, territoire: str) -> float:
     if isinstance(valeur, bool) or not isinstance(valeur, (int, float)):
         raise Refus(f"{territoire} — {etiquette} absente ou non numérique : {valeur!r}")
@@ -233,13 +269,17 @@ def nombre(valeur: object, borne: tuple[float, float], etiquette: str, territoir
     return float(valeur)
 
 
-def territoires(lignes: list[dict], annee: int) -> list[dict]:
+def territoires(lignes: list[dict], annee: int) -> tuple[list[dict], list[str], list[str]]:
     resultat: list[dict] = []
     vus: set[tuple[str, str]] = set()
     ecartes: list[str] = []
+    repares: list[str] = []
     for ligne in lignes:
         observatoire = str(ligne.get("Observatory") or "").strip()
         nom = str(ligne.get("agglomeration") or "").strip()
+        nom, repare = reparer_nom(nom)
+        if repare:
+            repares.append(nom)
         if not MOTIF_OBSERVATOIRE.match(observatoire):
             raise Refus(f"code d’observatoire inattendu : {observatoire!r} pour {nom!r}")
         if not nom:
@@ -289,14 +329,14 @@ def territoires(lignes: list[dict], annee: int) -> list[dict]:
             f"{len(resultat)} territoire(s) retenu(s), au moins {MINIMUM_TERRITOIRES} attendus"
         )
     resultat.sort(key=lambda territoire: (territoire["nom"].lower(), territoire["observatoire"]))
-    return resultat, ecartes
+    return resultat, ecartes, repares
 
 
 def collecter(base: str) -> dict:
     fiche = lire_json(url_jeu(base))
     ressource, annee, titre, modifiee = resoudre_ressource(fiche)
     lignes, total = pages(base, ressource)
-    donnees, ecartes = territoires(lignes, annee)
+    donnees, ecartes, repares = territoires(lignes, annee)
     return {
         "collecte_le": date.today().isoformat(),
         "annee": annee,
@@ -323,6 +363,7 @@ def collecter(base: str) -> dict:
             "date_ressource": modifiee,
             "lignes": total,
             "lignes_ecartees": ecartes,
+            "noms_repares": repares,
             "sha256": hashlib.sha256(json.dumps(lignes, sort_keys=True).encode("utf-8")).hexdigest(),
         },
         "territoires": donnees,
@@ -386,6 +427,8 @@ def verifier(chemin: Path) -> int:
             erreurs.append(f"{nom} : nombre d’observations invraisemblable {territoire['observations']!r}")
         if MOTIF_NOM_DE_CODE.match(nom):
             erreurs.append(f"{nom} : nom de territoire qui est un code")
+        if any(0x80 <= ord(caractere) <= 0x9F for caractere in nom):
+            erreurs.append(f"{nom!r} : nom de territoire avec un caractère de contrôle non réparé")
     if erreurs:
         print("ÉCHEC — collecte des loyers", file=sys.stderr)
         for erreur in erreurs:
@@ -396,6 +439,11 @@ def verifier(chemin: Path) -> int:
         f"Loyers conformes : {len(liste)} territoires observés en {annee}, collecte du {collecte}, "
         f"licence {source.get('licence')}, ressource « {source.get('ressource_titre')} »"
         + (f", {len(ecartees)} ligne(s) écartée(s) pour nom de territoire remplacé par un code." if ecartees else ".")
+        + (
+            f" {len(repares)} nom(s) réparé(s) depuis la page de codes Windows : {', '.join(repares)}."
+            if (repares := source.get("noms_repares") or [])
+            else ""
+        )
     )
     return 0
 

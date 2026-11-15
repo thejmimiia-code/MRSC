@@ -2738,7 +2738,7 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "1e902a9e9f168712adf55399465659f142b65c7f3f12f7c88c3886bd81f157eb"
+empreinte = "000e291e7894f2ccc7c9342888812a0bca6ff1647fd3e314d3ad1f98e9b8787d"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -2821,10 +2821,10 @@ urls = ["https://www.insee.fr/fr/statistiques/8739245", "https://doi.org/10.1177
 
 [[unite]]
 chemin = "docs/rd/inventaire-controles.md"
-empreinte = "ba6ee1a6b1feef13b745a9ab1b572b0616e7e89f61afbf2696c05e618df1b613"
+empreinte = "2ea64cf1cd15ae4b0e5e7a4d171839e89476d35311302b61f659225f08c1b606"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 
 [[unite]]
 chemin = "docs/rd/inventaire-couleurs-jetons.md"
@@ -2835,7 +2835,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "807d99b4a47987e20b900bc5674872450dbc0d1bed4bfe1dea304cca916d6bb4"
+empreinte = "e7e490ed734ffed7142b5285777ed6d8db51457540b44ae34c817e154e92ca7d"
 etat = "relu-par-agent"
 apostrophes = 2405
 date_derniere_relecture = 2026-11-15
@@ -3582,10 +3582,10 @@ urls = ["https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-de
 
 [[unite]]
 chemin = "outils/collecter-loyers.py"
-empreinte = "a3c1002012e6b9dc5e11c40af29d1aa96ceb6354a6e4abf4552fe4fd43781185"
+empreinte = "cfe51079a1d03e12e1ec21e245cf0cbf56e667db96279e9d362bd13ea7da09bc"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 urls = ["https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers", "https://tabular-api.data.gouv.fr/api/resources/{ressource}/data/"]
 
 [[unite]]
@@ -3641,7 +3641,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/construire-page-couts.py"
-empreinte = "ea494f4473c086e20f06316ef05ad82dffa535dd6ccabf053de365d9d3f5391f"
+empreinte = "e69bcf8c26b083b316cb9cc8434dcf05c833fb5f432f09fb9832b046f21fa557"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -3937,18 +3937,18 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "outils/test_collecte_loyers.py"
-empreinte = "beea4d39ded2712986794c88928fa5c010d4f09d6265e9d073974531e72d3261"
+empreinte = "4a0e780314e65b2ebe07182d3f7cd99f5794784a2e29d46824d29b1eeb85fab0"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 urls = ["https://www.observatoires-des-loyers.org/datagouv/2025/Base_OP_2025_Nationale.csv", "https://www.observatoires-des-loyers.org/datagouv/2024/Base_OP_2024_Nationale.csv"]
 
 [[unite]]
 chemin = "outils/test_collecte_vie_chere.py"
-empreinte = "6652e19e063c5c55540495b99ec0485354f7f45c6672d79283fe4f2f37643b79"
+empreinte = "bd60efdf4706dd5825f4def9d0a454186a683577d3fa2b54edba9708858118d0"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 urls = ["https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers"]
 
 [[unite]]

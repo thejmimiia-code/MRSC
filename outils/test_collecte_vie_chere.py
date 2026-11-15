@@ -554,6 +554,19 @@ class FondEtPage(unittest.TestCase):
             self.assertIn("est écartée", page)
             self.assertIn("L7500", page)
 
+    def test_page_loyers_avec_un_nom_repare(self) -> None:
+        """Un nom réparé depuis la page de codes Windows est affiché, et la page le dit."""
+        with tempfile.TemporaryDirectory(prefix="mrsc-page-") as tmp:
+            loyers = self.loyers_fictifs()
+            loyers["territoires"][0]["nom"] = "Agglomération de Chambéry et Cœur de Savoie"
+            loyers["source"]["noms_repares"] = ["Agglomération de Chambéry et Cœur de Savoie"]
+            self.copier_page(Path(tmp), loyers=loyers)
+            resultat = self.construire(Path(tmp), verifier=False)
+            self.assertEqual(resultat.returncode, 0, resultat.stderr[-800:])
+            page = (Path(tmp) / "couts-vie-chere.html").read_text(encoding="utf-8")
+            self.assertIn("Cœur de Savoie", page)
+            self.assertIn("page de codes Windows", page)
+
     def test_page_loyers_sans_observation(self) -> None:
         """Une observation absente s'écrit « non publié », jamais zéro."""
         with tempfile.TemporaryDirectory(prefix="mrsc-page-") as tmp:
