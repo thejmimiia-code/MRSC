@@ -5801,6 +5801,26 @@ html.contraste-renforce .association-suite-grid li { border-color: currentColor;
   border: 1px solid #b6c2d6; border-radius: 8px; background: #fff; color: #18243b;
   min-height: 44px;
 }
+/* Le champ de recherche porte sa liste : une commune trouvée se choisit au
+   clavier comme à la souris, et la ligne active reste visible. Les cibles font
+   44 px de haut, comme les boutons de zoom. */
+.couts-champ-recherche { flex: 1 1 18rem; position: relative; }
+.couts-recherche-etat { margin: .3rem 0 0; font-size: max(12px, .8rem); color: #33405a; }
+.couts-resultats {
+  list-style: none; margin: .35rem 0 0; padding: .2rem; background: #fff;
+  border: 1px solid #b6c2d6; border-radius: 10px; max-height: 15rem; overflow-y: auto;
+  box-shadow: 0 10px 24px rgba(18, 31, 67, .12);
+}
+.couts-suggestion {
+  display: flex; justify-content: space-between; gap: .8rem; align-items: baseline;
+  min-height: 44px; padding: .45rem .6rem; border-radius: 8px; cursor: pointer;
+  font-size: max(14px, .95rem);
+}
+.couts-suggestion .couts-resultat-complement { font-size: max(12px, .8rem); color: #33405a; white-space: nowrap; }
+.couts-suggestion:hover, .couts-suggestion.est-actif { background: #e8eefb; }
+.couts-suggestion[aria-selected="true"] { background: #dbe6f6; outline: 2px solid var(--blue); outline-offset: -2px; }
+/* L'anneau de la commune choisie : la fiche parle d'un lieu, la carte le montre. */
+.couts-choisie { fill: none; stroke: #b3261e; }
 .couts-zoom { display: flex; flex-wrap: wrap; gap: .5rem; }
 .couts-zoom .button { min-width: 44px; }
 .couts-grille { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
@@ -5848,6 +5868,9 @@ html.contraste-renforce .association-suite-grid li { border-color: currentColor;
   .couts-departement { fill: Canvas; stroke: CanvasText; }
   .couts-departement.est-ouvert { fill: Highlight; }
   .couts-commune { fill: CanvasText; }
+  .couts-choisie { stroke: CanvasText; }
+  .couts-suggestion:hover, .couts-suggestion.est-actif,
+  .couts-suggestion[aria-selected="true"] { background: Highlight; color: HighlightText; }
 }
 
 /* Bloc « Coût de la vie » — carburants et tableau des postes de dépense.

@@ -11,10 +11,12 @@ digraph memoire {
   "api/verifier-source.py" [shape=plaintext, label="api/verifier-source.py"];
   "assets/css/anglais-aventure.css" [shape=plaintext, label="assets/css/anglais-aventure.css"];
   "assets/css/site.css" [shape=plaintext, label="assets/css/site.css"];
+  "assets/data/vie-chere/communes-index.json" [shape=plaintext, label="assets/data/vie-chere/communes-index.json"];
   "assets/data/vie-chere/loyers.json" [shape=plaintext, label="assets/data/vie-chere/loyers.json"];
   "assets/documents/statuts-2020.pdf" [shape=plaintext, label="assets/documents/statuts-2020.pdf"];
   "assets/images/accueil-logo-mrsc-3d.jpg" [shape=plaintext, label="assets/images/accueil-logo-mrsc-3d.jpg"];
   "assets/images/mondes-savoirs-hero.jpg" [shape=plaintext, label="assets/images/mondes-savoirs-hero.jpg"];
+  "assets/js/carte-vie-chere.js" [shape=plaintext, label="assets/js/carte-vie-chere.js"];
   "assets/js/site.js" [shape=plaintext, label="assets/js/site.js"];
   "avancee:accessibilite-modules-originaux-2026-11-12" [shape=note, label="avancee:accessibilite-modules-originaux-2026-11-12"];
   "avancee:accueil-d-apres-les-statuts-2026-11-11" [shape=note, label="avancee:accueil-d-apres-les-statuts-2026-11-11"];
@@ -28,6 +30,7 @@ digraph memoire {
   "avancee:boite-non-nulle-nest-pas-affichee" [shape=note, label="avancee:boite-non-nulle-nest-pas-affichee"];
   "avancee:cadrages-personnalises-au-pixel" [shape=note, label="avancee:cadrages-personnalises-au-pixel"];
   "avancee:carte-de-sujet-avant-premiere-fiche" [shape=note, label="avancee:carte-de-sujet-avant-premiere-fiche"];
+  "avancee:chercher-une-ville-et-zoomer-jusqu-a-elle" [shape=note, label="avancee:chercher-une-ville-et-zoomer-jusqu-a-elle"];
   "avancee:cinq-domaines-points-entree" [shape=note, label="avancee:cinq-domaines-points-entree"];
   "avancee:cinquante-deux-agglomerations-un-code-ecarte" [shape=note, label="avancee:cinquante-deux-agglomerations-un-code-ecarte"];
   "avancee:classes-mortes-relevees" [shape=note, label="avancee:classes-mortes-relevees"];
@@ -245,6 +248,7 @@ digraph memoire {
   "outils/construire-apprentissages.py" [shape=plaintext, label="outils/construire-apprentissages.py"];
   "outils/construire-avancees.py" [shape=plaintext, label="outils/construire-avancees.py"];
   "outils/construire-couverture-sujets.py" [shape=plaintext, label="outils/construire-couverture-sujets.py"];
+  "outils/construire-index-communes.py" [shape=plaintext, label="outils/construire-index-communes.py"];
   "outils/construire-page-couts.py" [shape=plaintext, label="outils/construire-page-couts.py"];
   "outils/construire-paquets-relecture.py" [shape=plaintext, label="outils/construire-paquets-relecture.py"];
   "outils/construire-sources-refusees.py" [shape=plaintext, label="outils/construire-sources-refusees.py"];
@@ -276,6 +280,7 @@ digraph memoire {
   "outils/test_collecte_loyers.py" [shape=plaintext, label="outils/test_collecte_loyers.py"];
   "outils/test_collecte_vie_chere.py" [shape=plaintext, label="outils/test_collecte_vie_chere.py"];
   "outils/test_confronter_sources.py" [shape=plaintext, label="outils/test_confronter_sources.py"];
+  "outils/test_construire_index_communes.py" [shape=plaintext, label="outils/test_construire_index_communes.py"];
   "outils/test_contraste-degrade.py" [shape=plaintext, label="outils/test_contraste-degrade.py"];
   "outils/test_etat_rd.py" [shape=plaintext, label="outils/test_etat_rd.py"];
   "outils/test_exemples_statistiques.py" [shape=plaintext, label="outils/test_exemples_statistiques.py"];
@@ -402,6 +407,10 @@ digraph memoire {
   "avancee:carte-de-sujet-avant-premiere-fiche" -> "docs/rd/sujet-ecoute-prononciation.md" [label="prouvée par"];
   "avancee:carte-de-sujet-avant-premiere-fiche" -> "docs/rd/sujet-securite-sciences.md" [label="prouvée par"];
   "avancee:carte-de-sujet-avant-premiere-fiche" -> "docs/rd/sujet-systemes-embarques.md" [label="prouvée par"];
+  "avancee:chercher-une-ville-et-zoomer-jusqu-a-elle" -> "assets/data/vie-chere/communes-index.json" [label="prouvée par"];
+  "avancee:chercher-une-ville-et-zoomer-jusqu-a-elle" -> "assets/js/carte-vie-chere.js" [label="prouvée par"];
+  "avancee:chercher-une-ville-et-zoomer-jusqu-a-elle" -> "outils/construire-index-communes.py" [label="prouvée par"];
+  "avancee:chercher-une-ville-et-zoomer-jusqu-a-elle" -> "outils/test_construire_index_communes.py" [label="prouvée par"];
   "avancee:cinq-domaines-points-entree" -> "docs/apprentissage/audit-automatique.md" [label="prouvée par"];
   "avancee:cinq-domaines-points-entree" -> "docs/apprentissage/catalogue.toml" [label="prouvée par"];
   "avancee:cinq-domaines-points-entree" -> "docs/apprentissage/referentiel.toml" [label="prouvée par"];
@@ -840,6 +849,7 @@ digraph memoire {
   "branche:coherence-textes-publics" -> "avancee:accessibilite-modules-originaux-2026-11-12" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:arbre-accessibilite-2026-11-13" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:cadrages-personnalises-au-pixel" [label="a produit"];
+  "branche:coherence-textes-publics" -> "avancee:chercher-une-ville-et-zoomer-jusqu-a-elle" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:cinq-domaines-points-entree" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:contraste-et-pages-oubliees" [label="a produit"];
   "branche:coherence-textes-publics" -> "avancee:declarer-fraude-demarches-distinctes-2026-11-12" [label="a produit"];
@@ -917,6 +927,7 @@ digraph memoire {
   "branche:coordination-de-tous-les-agents" -> "avancee:une-largeur-de-piste-se-calcule-pas-se-choisit" [label="a produit"];
   "branche:coordination-de-tous-les-agents" -> "phase:economie-de-contexte" [label="servie par"];
   "branche:coordination-de-tous-les-agents" -> "phase:memoire-trois-horizons" [label="servie par"];
+  "branche:cout-de-la-vie-et-carte" -> "avancee:chercher-une-ville-et-zoomer-jusqu-a-elle" [label="a produit"];
   "branche:cout-de-la-vie-et-carte" -> "avancee:cinquante-deux-agglomerations-un-code-ecarte" [label="a produit"];
   "branche:cout-de-la-vie-et-carte" -> "avancee:une-absence-de-donnee-doit-dire-pourquoi" [label="a produit"];
   "branche:cout-de-la-vie-et-carte" -> "avancee:une-maille-qu-on-ne-peut-pas-tenir-ne-se-simule-pas" [label="a produit"];

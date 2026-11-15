@@ -311,6 +311,56 @@ stabilité du service ; ni que les agglomérations soient complètes (la source 
 couvre que les territoires observés) ; ni qu’un loyer médian décrive le logement
 qu’un ménage trouvera. La page le dit.
 
+## 6 sexies. Chercher une ville, et zoomer jusqu’à elle
+
+Le 15 novembre 2026, la question posée était simple : « assure le
+fonctionnement de la recherche par ville, et le zoom jusqu’à la ville ». La
+réponse honnête a été de mesurer, pas de promettre : trois choses ne
+fonctionnaient pas, et aucune ne se voyait dans les chiffres.
+
+**Le zoom ne descendait pas jusqu’à la ville.** La vue s’arrêtait à 1,5 degré,
+soit environ 165 km : à cette échelle, une ville est déjà un point confondu avec
+ses voisines. Le plancher est passé à 0,03 degré — environ 3 km —, la vue ne
+peut plus sortir de la France, et le rayon des points est calculé en pixels
+d’écran puis reconverti à chaque vue : un point reste cliquable au fond de zoom
+comme sur la carte de France. Choisir une commune, par la recherche comme par un
+clic sur la carte, cadre la vue sur elle (environ 10 km) et pose un anneau
+autour d’elle — sans cet anneau, rien ne disait laquelle des dizaines de points
+la fiche décrivait.
+
+**La recherche ne trouvait que le département ouvert.** Sans département
+sélectionné, elle ne répondait rien ; dans un département, elle ignorait le
+reste de la France. Elle porte maintenant sur les deux : le département ouvert
+d’abord, puis la France métropolitaine entière. Le pliage du texte — accents,
+majuscules, apostrophes, tirets — fait que « saint etienne » trouve
+Saint-Étienne ; l’ordre place le nom exact avant les noms qui le contiennent,
+sinon « lyon » rendait d’abord « Beauficel-en-Lyons ». Le code INSEE est accepté
+seul, et les résultats se choisissent au clavier (flèches, Entrée, Échap) avec
+`aria-activedescendant`, la liste et le nombre de résultats annoncés.
+
+**Rien ne se partageait.** L’adresse garde la commune choisie
+(`?commune=69123`) : elle se met en favori, s’envoie, et rouvre la fiche — c’est
+ce que fait un lien quand on cherche une ville pour quelqu’un d’autre.
+
+**Le coût, et pourquoi il est assumé.** Chercher dans toute la France demande un
+index : les cent douze fichiers de département pèsent 3,3 Mio, et les
+télécharger tous pour une recherche serait absurde. L’index ne contient que le
+nom et le code INSEE de chaque commune — 34 969 entrées, 854 Kio bruts, 266 Kio
+compressés —, il est **fabriqué depuis la collecte** par
+`outils/construire-index-communes.py`, qui refuse un code rangé dans un autre
+département, un code en double, un nom qui est un code et un index plus vieux
+que la collecte. Il n’est pas chargé avec la page : il part au premier besoin
+réel, une fois par visite, et l’état de la recherche l’annonce avant qu’il ne
+parte. Si le fichier manque, la page le dit et reste limitée au département
+ouvert — elle ne répond jamais « aucune commune » à une commune qui existe.
+
+**Ce que cette recherche ne fait pas.** Elle ne cherche ni par rue, ni par code
+postal : aucun de ces deux champs n’est publié par les sources de la carte, et
+inventer une correspondance serait exactement ce que ce chantier s’interdit.
+Elle ne couvre pas l’outre-mer, absent du fond de carte, et le dit quand un code
+hors métropole est demandé. Les points ne sont pas des contours : « jusqu’à la
+ville » vaut pour la sélection et la fiche, pas pour le dessin du bâti.
+
 ## 7. Ce que cette R et D ne prouve pas
 
 - Aucune donnée n’a encore été collectée par la machine au moment d’écrire ces
@@ -330,8 +380,10 @@ qu’un ménage trouvera. La page le dit.
   vérification du rendu de la carte sur un appareil réel : la page a été
   regardée dans un Chromium sans interface, à une largeur, sans lecteur d’écran.
 - Aucun essai dans Firefox ni Safari. La carte est du SVG lu par le navigateur ;
-  rien ne dit qu’elle se comporte pareil ailleurs, et le zoom n’a été éprouvé
-  qu’à la souris simulée et par le code, pas au clavier par une personne.
+  rien ne dit qu’elle se comporte pareil ailleurs. Depuis le 15 novembre 2026,
+  trois essais navigateur exercent la recherche, le choix au clavier, le zoom
+  jusqu’à la commune et le lien partagé — dans Chromium sans interface, avec un
+  clavier simulé, jamais avec une personne.
 - Le zoom va jusqu’à la commune **comme point** : il n’y a pas de contour
   communal. « Jusqu’à la ville » est donc tenu pour la sélection et la fiche,
   pas pour le dessin du bâti.

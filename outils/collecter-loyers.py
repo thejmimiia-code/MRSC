@@ -81,7 +81,11 @@ MOTIF_OBSERVATOIRE = re.compile(r"^B(?:\d{2}|2A|2B)\d{2}$")
 #: nationale contient au moins une ligne dont l'agglomération s'appelle `L7500`.
 #: La publier telle quelle donnerait un tableau avec une ligne qui n'est pas un
 #: lieu. Elle est écartée, et son nombre déclaré.
-MOTIF_NOM_DE_CODE = re.compile(r"^[A-Z0-9 ]+$")
+# Le motif exige un chiffre : « GRAND PARIS » est un nom, « L7500 » est un code.
+# La première version rejetait tout nom en capitales, et aurait écarté un vrai
+# territoire sans que rien ne le dise (leçon de l'index des communes, 16
+# novembre 2026 : « Y », commune de la Somme, y ressemblait aussi à un code).
+MOTIF_NOM_DE_CODE = re.compile(r"^[A-Z0-9 ]*\d[A-Z0-9 ]*$")
 MINIMUM_TERRITOIRES = 30
 MAXIMUM_LIGNES = 200
 LOYER_PLAUSIBLE = (3.0, 40.0)

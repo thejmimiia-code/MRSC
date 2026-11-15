@@ -10,9 +10,9 @@
 
 | Mesure | Valeur |
 | --- | ---: |
-| Avancées consignées | 119 |
+| Avancées consignées | 120 |
 | Période couverte | du 2026-10-20 au 2026-11-15 |
-| Contrôles exécutables cités | 137 |
+| Contrôles exécutables cités | 140 |
 | Initiatives du portefeuille concernées | 17 |
 
 Ces nombres mesurent la traçabilité du registre, pas la valeur des avancées. Une entrée peut être parfaitement traçable et se révéler fausse plus tard : c'est le contrôle qui la contredira.
@@ -2915,6 +2915,32 @@ Initiatives liées : `cout-de-la-vie-et-carte`, `sources-fermees-et-registre-des
 **Limite — ce que cela ne prouve pas.** L’entrée de menu est un dixième lien dans une rangée d’en-tête déjà chargée : le repli et le passage sur deux lignes n’ont pas été regardés dans un navigateur ici, seul le comptage des cadrages en intégration continue le dira. Aucun essai avec une personne n’a vérifié que « Coût de la vie » est le mot qu’un visiteur cherche — le libellé est un choix, pas une mesure. Le lien n’a pas été ajouté aux pages externes du simulateur ni aux documents PDF.
 
 **Suite.** Lire les cadrages de l’en-tête à 360, 390 et 1440 px après publication, et faire trancher le libellé (« Coût de la vie », « Prix et loyers », « Vivre ici ») par une personne qui ne connaît pas le chantier.
+
+Initiatives liées : `cout-de-la-vie-et-carte`, `coherence-textes-publics`.
+
+### `chercher-une-ville-et-zoomer-jusqu-a-elle` — Chercher une ville, et zoomer jusqu’à elle : trois pannes que les chiffres ne montraient pas
+
+*Consignée le 2026-11-15.*
+
+**Constat.** La page promettait « une carte de France qu’on agrandit jusqu’à la ville » et un champ « Chercher une commune du département ouvert ». Ni l’un ni l’autre n’était tenu. Le zoom s’arrêtait à 1,5 degré, environ 165 km : à cette échelle une ville est un point confondu avec ses voisines, donc on ne zoomait pas jusqu’à la ville, on zoomait jusqu’au département. La recherche ne répondait rien tant qu’aucun département n’était ouvert, et ne regardait qu’un département à la fois ; elle comparait les chaînes telles quelles, si bien que « saint etienne » ne trouvait pas Saint-Étienne, et elle classait par ordre alphabétique, si bien que « lyon » proposait d’abord « Beauficel-en-Lyons ». Aucun de ces trois défauts n’était visible dans une mesure : la page se chargeait, le compte des communes était juste, les prix étaient bons.
+
+**Ce que cela change.** Le zoom descend à 0,03 degré (environ 3 km), la vue ne sort plus de la France, et le rayon des points est calculé en pixels d’écran puis reconverti à chaque vue : un point reste cliquable au fond de zoom. Choisir une commune — par la recherche, par un clic sur la carte ou par un lien partagé — cadre la vue sur elle et pose un anneau autour d’elle. La recherche porte d’abord sur le département ouvert, puis sur toute la France métropolitaine, plie les accents, les majuscules, les apostrophes et les tirets, classe le nom exact avant les noms qui le contiennent, accepte le code INSEE seul, et se pilote au clavier avec `aria-activedescendant` et une annonce du nombre de résultats. L’adresse garde la commune (`?commune=69123`). L’index national est un dérivé de la collecte : `outils/construire-index-communes.py` l’écrit depuis les fichiers de département et refuse un code rangé ailleurs, un code en double, un nom qui est un code et un index périmé ; il ne contient que les noms et les codes, 854 Kio bruts et 266 Kio compressés, chargés au premier besoin et annoncés avant de partir. Trois essais navigateur (recherche par nom, accents et code, choix au clavier, zoom jusqu’à la ville et lien partagé) et neuf cas de banc accompagnent le tout.
+
+**Preuves dans le dépôt :**
+
+- `assets/js/carte-vie-chere.js`
+- `outils/construire-index-communes.py`
+- `outils/test_construire_index_communes.py`
+- `assets/data/vie-chere/communes-index.json`
+- `outils/test-experience.cjs`
+- `.github/workflows/collecte-vie-chere.yml`
+- `docs/rd/vie-chere-carte-2026-11-13.md`
+
+**Contrôle qui la maintient :** `python3 outils/test_construire_index_communes.py && python3 outils/construire-index-communes.py --verifier && MRSC_BROWSER_NODE_MODULES=... node outils/test-experience.cjs && python3 outils/verifier-plan-projet.py`
+
+**Limite — ce que cela ne prouve pas.** Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ils ne remplacent ni une personne devant l’écran, ni un lecteur d’écran, ni Firefox ou Safari. La recherche ne va pas par rue ni par code postal — aucune source de la carte ne publie ces champs — et ne couvre pas l’outre-mer, absent du fond de carte. L’index est un dérivé : s’il n’est pas reconstruit après une collecte, la recherche répond juste sur les noms mais peut ignorer une commune nouvelle ; la garde le refuse, elle ne le répare pas. Les points restent des points : « jusqu’à la ville » vaut pour la sélection et la fiche, pas pour un contour communal.
+
+**Suite.** Mesurer la recherche avec une personne qui ne connaît pas le chantier et lui demander de trouver sa commune sans consigne. Ajouter, si le budget de poids le permet, un contour communal au fond de zoom. Éprouver la carte dans Firefox et Safari, et avec un lecteur d’écran, avant de dire que la recherche fonctionne pour tout le monde.
 
 Initiatives liées : `cout-de-la-vie-et-carte`, `coherence-textes-publics`.
 

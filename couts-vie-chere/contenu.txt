@@ -10,7 +10,7 @@
     <section class="content-section" aria-labelledby="titre-carte">
       <div class="container">
         <h2 id="titre-carte">La carte</h2>
-        <p>Choisissez un département sur la carte ou dans la liste. Le zoom se fait aussi au clavier : les flèches déplacent la vue, les touches <kbd>+</kbd> et <kbd>−</kbd> l’agrandissent et la réduisent.</p>
+        <p>Choisissez un département sur la carte ou dans la liste, ou cherchez directement une commune. Le zoom se fait aussi au clavier : les flèches déplacent la vue, les touches <kbd>+</kbd> et <kbd>−</kbd> l’agrandissent et la réduisent. Choisir une commune cadre la carte sur elle.</p>
 
         <div class="couts-outils">
           <div class="couts-champ">
@@ -19,9 +19,16 @@
               <option value="">Choisir un département…</option>
             </select>
           </div>
-          <div class="couts-champ">
-            <label for="couts-recherche">Chercher une commune du département ouvert</label>
-            <input id="couts-recherche" type="search" data-couts-recherche autocomplete="off" placeholder="Exemple : Lyon">
+          <div class="couts-champ couts-champ-recherche">
+            <label for="couts-recherche">Chercher une commune</label>
+            <input id="couts-recherche" type="search" data-couts-recherche autocomplete="off"
+              placeholder="Exemple : Lyon ou 69123" role="combobox" aria-expanded="false"
+              aria-autocomplete="list" aria-controls="couts-resultats"
+              aria-describedby="couts-recherche-aide">
+            <p class="couts-aide" id="couts-recherche-aide">Nom, début de nom ou code INSEE. Les accents, les majuscules et les tirets n’ont pas d’importance. La recherche commence dans le département ouvert, puis s’étend à toute la France métropolitaine.</p>
+            <ul class="couts-resultats" id="couts-resultats" data-couts-resultats role="listbox"
+              aria-label="Communes trouvées" hidden></ul>
+            <p class="couts-recherche-etat" data-couts-recherche-etat role="status" aria-live="polite"></p>
           </div>
           <div class="couts-zoom">
             <button type="button" class="button button-secondary" data-couts-zoom="plus" aria-label="Agrandir la carte">+</button>
