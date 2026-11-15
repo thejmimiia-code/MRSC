@@ -157,13 +157,27 @@ jobs:
             exit 0
           fi
           jour=$(date -u +%Y-%m-%d)
-          branche="donnees/vie-chere-$jour"
+          # Le 14 novembre 2026, la deuxième collecte a échoué ici sans rien dire :
+          # la branche `donnees/vie-chere-2026-11-14` existait déjà, laissée par la
+          # proposition de fusion fermée après relecture, et la poussée a été
+          # refusée. Une branche qui porte le numéro d'exécution ne peut pas être
+          # celle d'une collecte précédente.
+          branche="donnees/vie-chere-$jour-${GITHUB_RUN_NUMBER}"
           git config user.name "collecte-mrsc"
           git config user.email "collecte-mrsc@users.noreply.github.com"
           git checkout -b "$branche"
           git add -A
           git commit -m "Collecte des prix réels par commune — $jour"
-          git push origin "$branche"
+          set +e
+          git push origin "$branche" 2>"$RUNNER_TEMP/poussee.log"
+          code=$?
+          set -e
+          if [ "$code" -ne 0 ]; then
+            tail -n 5 "$RUNNER_TEMP/poussee.log" | cut -c1-400 | while IFS= read -r ligne; do
+              echo "::error title=Poussée de la collecte::$ligne"
+            done
+            exit "$code"
+          fi
           gh pr create --base main --head "$branche" \
             --title "Collecte des prix réels par commune — $jour" \
             --body "Collecte automatique du $(date -u +%Y-%m-%d).

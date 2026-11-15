@@ -12699,3 +12699,15 @@ sources = []
 mesures = ["outils/collecter-loyers.py", "outils/construire-page-couts.py", "outils/test_collecte_loyers.py", "outils/test_collecte_vie_chere.py", "outils/memoire-eva.py"]
 constat = "La relecture des données de la première collecte réelle a fait fermer sa proposition de fusion sans fusion, pour deux défauts que le banc ne pouvait pas voir : la source publie un champ nombre_logements qui vaut 4 pour les quatre lignes parisiennes dont les observations valent de 3 879 à 10 817, et une ligne de la base nationale porte L7500 comme nom de territoire. La colonne « logements observés » est retirée au profit de la seule colonne « Observations », le fichier ne contient plus de champ logements, la ligne au nom de code est écartée et son nombre déclaré dans la provenance, et les fixtures portent désormais nombre_logements = 4 ainsi qu’un nom de code, pour que le banc éprouve qu’ils ne ressortent pas. Les registres suivent : journal, avancées, inventaire des contrôles, dossier de R et D, mémoire d’ÉVA régénérée."
 limite = "Le fichier réel n’a pas été relu dans cet atelier : les deux défauts ont été vus dans la proposition de fusion, sur les lignes effectivement collectées, mais la correction est éprouvée contre des fixtures. La signification exacte du champ nombre_logements reste inconnue — la source ne la documente pas dans la fiche, et le fichier descriptif des variables est dans une archive que la collecte n’ouvre pas. Les observations, elles, sont publiées sans que le site sache comment la source les a tirées."
+
+[[edition]]
+chemin = ".github/workflows/collecte-vie-chere.yml"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "fc71c3a577f5873cec686c83d8be0ac391c1b39986406777fbcfa8c77962b12b"
+empreinte_apres = "cdc50dc750786c7b08a2ed0a6a84ebc1f3b4261570611387f9f9d36b7cccae29"
+nature = "mesure-interne"
+sources = []
+mesures = [".github/workflows/collecte-vie-chere.yml", "outils/verifier-workflows.py"]
+constat = "La branche de collecte porte désormais le numéro d’exécution. Le 14 novembre 2026, la deuxième collecte a échoué à l’étape d’ouverture de la proposition de fusion sans autre explication qu’un code de sortie : la branche donnees/vie-chere-2026-11-14 existait déjà, laissée par la proposition fermée après relecture des données, et la poussée a été refusée. La poussée est maintenant surveillée et son échec remonte en annotation, pour qu’un refus de ce genre ne se lise pas comme une panne muette."
+limite = "Ce diagnostic est une déduction à partir de l’état des branches et du seul code de sortie : le journal du pas n’est pas lisible depuis cet atelier. La correction rend le nom de branche unique, ce qui couvre ce cas, mais un autre refus de poussée — droits, quota, protection — produirait désormais un message lisible sans être corrigé pour autant."
