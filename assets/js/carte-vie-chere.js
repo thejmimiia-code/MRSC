@@ -277,6 +277,7 @@
     choix.value = code;
     colorer();
     viderFiche();
+    if (!communeVisee) adressePartageable(null, code);
     var x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity;
     departement.p.forEach(function (polygone) {
       polygone.forEach(function (anneau) {
@@ -451,13 +452,21 @@
     }
   }
 
-  /// L'adresse garde la commune choisie : « ?commune=69123 » se partage, se
-  /// met en favori et se rouvre sur la bonne fiche.
-  function adressePartageable(code) {
+  /// L'adresse garde la commune ou le département choisi : « ?commune=69123 »
+  /// ou « ?dep=69 » se partage, se met en favori et se rouvre sur la bonne vue.
+  function adressePartageable(code, departement) {
     if (!window.history || !window.history.replaceState) return;
     var url = new URL(window.location.href);
-    if (code) url.searchParams.set("commune", code);
-    else url.searchParams.delete("commune");
+    if (code) {
+      url.searchParams.set("commune", code);
+      url.searchParams.delete("dep");
+    } else if (departement) {
+      url.searchParams.delete("commune");
+      url.searchParams.set("dep", departement);
+    } else {
+      url.searchParams.delete("commune");
+      url.searchParams.delete("dep");
+    }
     window.history.replaceState(null, "", url.pathname + (url.search || "") + url.hash);
   }
 
@@ -538,19 +547,21 @@
 
   /// Le classement compte : en tapant « lyon », sept communes contiennent ces
   /// lettres, et la première version les rendait par ordre alphabétique —
-  /// « Beauficel-en-Lyons » arrivait avant « Lyon ». Le nom exact d'abord, puis
-  /// les noms qui commencent par le terme, puis le reste.
-  function rangDe(nom, plie) {
-    var plieNom = normaliser(nom);
+  /// « Beauficel-en-Lyons » arrivait avant « Lyon ». Le code exact ou le nom
+  /// exact d'abord, puis ce qui commence par le terme, puis le reste.
+  function rangDe(candidat, plie) {
+    var code = candidat.code.toLowerCase();
+    if (code === plie) return 0;
+    var plieNom = normaliser(candidat.nom);
     if (plieNom === plie) return 0;
-    if (plieNom.indexOf(plie) === 0) return 1;
+    if (code.indexOf(plie) === 0 || plieNom.indexOf(plie) === 0) return 1;
     return 2;
   }
 
   function trier(candidats, plie) {
     return candidats
       .map(function (candidat, ordre) {
-        return { candidat: candidat, rang: rangDe(candidat.nom, plie), code: candidat.code, ordre: ordre };
+        return { candidat: candidat, rang: rangDe(candidat, plie), code: candidat.code, ordre: ordre };
       })
       .sort(function (a, b) {
         if (a.rang !== b.rang) return a.rang - b.rang;
@@ -665,11 +676,13 @@
     }
     var locaux = [];
     if (donneesDepartement && donneesDepartement.communes) {
+      // Le tri précède le découpage à 40 : sinon, dans un département riche en
+      // noms composés (« Ville » dans l'Oise, « Y » dans la Somme), le nom
+      // exact est rejeté au-delà de la quarantième place avant même d'être classé.
       locaux = donneesDepartement.communes
         .filter(function (commune) {
-          return normaliser(commune.n).indexOf(plie) !== -1 || commune.c.indexOf(plie) === 0;
+          return normaliser(commune.n).indexOf(plie) !== -1 || commune.c.toLowerCase().indexOf(plie) === 0;
         })
-        .slice(0, 40)
         .map(function (commune) {
           return {
             nom: commune.n,
@@ -681,7 +694,7 @@
         });
     }
     if (locaux.length) {
-      afficherResultats(trier(locaux, plie), "departement");
+      afficherResultats(trier(locaux, plie).slice(0, 40), "departement");
       return;
     }
     direRecherche("Aucune commune du département ouvert ne correspond. Recherche dans toute la France…");
@@ -689,12 +702,14 @@
       if (!index) return;
       if (normaliser(recherche.value) !== plie) return; // la frappe a continué
       var trouves = [];
+      var parCode = /^(\d|2[ab])/.test(plie) && plie.length >= 2;
       // L'index entier est parcouru, sans arrêt au quarantième résultat : un
       // arrêt sur l'ordre alphabétique ferait manquer le nom exact (« Saint-
       // Étienne » derrière quarante « Saint-… »).
       for (var i = 0; i < index.length; i++) {
         var nom = index[i][0];
         var code = index[i][1];
+        var codePlie = code.toLowerCase();
         var entree = {
           nom: nom,
           code: code,
@@ -702,7 +717,7 @@
           commune: null,
           prix: index[i][2] === 1
         };
-        if (code === plie) {
+        if (codePlie === plie || (parCode && codePlie.indexOf(plie) === 0)) {
           trouves.unshift(entree);
           continue;
         }
@@ -725,20 +740,34 @@
   /// Ouvre une commune depuis son code seul : c'est le chemin du lien partagé
   /// et de la recherche par code INSEE.
   function ouvrirCommuneParCode(code) {
-    if (!/^(\d{2}|2[AB])\d{3}$/.test(code)) {
+    var normalise = String(code || "").trim().toUpperCase();
+    if (!/^(\d{2}|2[AB])\d{3}$/.test(normalise)) {
       dire("Le code « " + code + " » n’est pas un code de commune : la carte n’ouvre rien.");
       return;
     }
-    var departement = code.slice(0, 2);
+    var departement = normalise.slice(0, 2);
     var connu = fond && fond.departements.filter(function (d) { return d.c === departement; })[0];
     if (!connu) {
       dire(
-        "La commune " + code + " appartient au département " + departement +
+        "La commune " + normalise + " appartient au département " + departement +
         ", absent de cette carte : elle ne couvre que la métropole."
       );
       return;
     }
-    ouvrirDepartement(departement, code);
+    ouvrirDepartement(departement, normalise);
+  }
+
+  /// Ouvre un département depuis un lien partagé « ?dep=75 ».
+  function ouvrirDepartementParCode(code) {
+    var normalise = String(code || "").trim().toUpperCase();
+    var connu = fond && fond.departements.filter(function (d) { return d.c === normalise; })[0];
+    if (!connu) {
+      dire(
+        "Le département « " + code + " » est absent de cette carte : elle ne couvre que la métropole."
+      );
+      return;
+    }
+    ouvrirDepartement(normalise);
   }
 
   function zoomer(facteur) {
@@ -772,8 +801,20 @@
         recherche.value = "";
         viderResultats();
         direRecherche("");
+      } else if (evenement.key === "Tab") {
+        // Fermer la liste avant le déplacement du focus : sinon, la boîte
+        // défilante de suggestions capte Tab dans Chromium et aria-expanded
+        // reste à true alors qu'on a quitté la recherche.
+        viderResultats();
       }
     });
+    var zoneRecherche = recherche.closest ? recherche.closest(".couts-recherche-zone") : null;
+    if (zoneRecherche) {
+      zoneRecherche.addEventListener("focusout", function (evenement) {
+        if (evenement.relatedTarget && zoneRecherche.contains(evenement.relatedTarget)) return;
+        viderResultats();
+      });
+    }
     mensualite.addEventListener("input", calculerSurface);
     Array.prototype.forEach.call(document.querySelectorAll("[data-couts-zoom]"), function (bouton) {
       bouton.addEventListener("click", function () {
@@ -805,8 +846,50 @@
       else if (evenement.key === "-") { zoomer(1.45); }
       else { return; }
       evenement.preventDefault();
+      bornerVue();
       appliquerVue();
     });
+    var glissement = null;
+    var ignorerProchainClic = false;
+    svg.addEventListener("pointerdown", function (evenement) {
+      if (evenement.button !== 0 || (evenement.isPrimary === false)) return;
+      glissement = {
+        id: evenement.pointerId,
+        x: evenement.clientX,
+        y: evenement.clientY,
+        vueX: vue.x,
+        vueY: vue.y,
+        glisse: false
+      };
+    });
+    window.addEventListener("pointermove", function (evenement) {
+      if (!glissement || evenement.pointerId !== glissement.id) return;
+      var dx = evenement.clientX - glissement.x;
+      var dy = evenement.clientY - glissement.y;
+      if (!glissement.glisse && (dx * dx + dy * dy) > 25) glissement.glisse = true;
+      if (!glissement.glisse) return;
+      var echelle = vue.largeur / Math.max(racine.clientWidth, 1);
+      vue.x = glissement.vueX - dx * echelle;
+      vue.y = glissement.vueY - dy * echelle;
+      bornerVue();
+      appliquerVue();
+    });
+    function terminerGlissement(evenement) {
+      if (!glissement || evenement.pointerId !== glissement.id) return;
+      if (glissement.glisse) {
+        ignorerProchainClic = true;
+        setTimeout(function () { ignorerProchainClic = false; }, 0);
+      }
+      glissement = null;
+    }
+    window.addEventListener("pointerup", terminerGlissement);
+    window.addEventListener("pointercancel", terminerGlissement);
+    svg.addEventListener("click", function (evenement) {
+      if (!ignorerProchainClic) return;
+      ignorerProchainClic = false;
+      evenement.stopPropagation();
+      evenement.preventDefault();
+    }, true);
     svg.addEventListener("dblclick", function (evenement) {
       if (evenement.target && evenement.target.closest && evenement.target.closest(".couts-departement")) return;
       // Le double-clic complète le clavier et la molette : agrandir sans viser
@@ -844,12 +927,17 @@
       cadrerFrance();
       dire("Carte de la métropole prête. Choisissez un département ou cherchez une commune.");
       var vise = null;
+      var depVise = null;
       try {
-        vise = new URL(window.location.href).searchParams.get("commune");
+        var params = new URL(window.location.href).searchParams;
+        vise = params.get("commune");
+        depVise = params.get("dep");
       } catch (_erreur) {
         vise = null;
+        depVise = null;
       }
       if (vise) ouvrirCommuneParCode(vise);
+      else if (depVise) ouvrirDepartementParCode(depVise);
       return etatDeLaCollecte();
     })
     .catch(function () {
