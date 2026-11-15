@@ -13,6 +13,9 @@
   "lignes_ecartees": [
    "L7500"
   ],
+  "noms_repares": [
+   "Communauté d'agglomération Grand Chambéry et Cœur de Savoie"
+  ],
   "producteur": "Réseau des observatoires locaux des loyers (OLL), animé par l’ANIL",
   "ressource_id": "21543ae5-7d6e-4c49-8719-e7f725d441da",
   "ressource_titre": "Loyers 2025 dans les agglomérations observées par les observatoires du réseau",
@@ -320,7 +323,7 @@
    "loyer_median": 11.6,
    "loyer_mensuel_median": 701,
    "methode_production": "Estimation directe",
-   "nom": "Communauté d'agglomération Grand Chambéry et Cur de Savoie",
+   "nom": "Communauté d'agglomération Grand Chambéry et Cœur de Savoie",
    "observations": 3430,
    "observatoire": "B7300",
    "surface_moyenne": 67

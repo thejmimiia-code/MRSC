@@ -1478,7 +1478,7 @@ urls = ["https://geo.api.gouv.fr/communes?fields=nom,code,codesPostaux,populatio
 
 [[unite]]
 chemin = "assets/data/vie-chere/carburants.json"
-empreinte = "5686d32e15b39a7aa24fa7699899c85e1aa4dd7450c90a37df75496b05128bd0"
+empreinte = "f26a1f3e33cfa0163df3e3e9ebb5d493a4cd6d908af56a3853ae7c981a9d92d5"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -2256,7 +2256,7 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "assets/data/vie-chere/loyers.json"
-empreinte = "e06ae3c5453f9c7a773779ed47c4bd997e8474a697e9082b52c26c99848dbe9c"
+empreinte = "d3449902e98a1ae2bda90c274d64c9e92f2770b05ee8723b41f2ce612268d987"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -2330,7 +2330,7 @@ urls = ["https://thejmimiia-code.github.io/MRSC/confidentialite.html", "https://
 
 [[unite]]
 chemin = "couts-vie-chere.html"
-empreinte = "37e214a6586656d55db6467d40c954fe73a2177d526644f50968f7b131526661"
+empreinte = "7a3db9798b10a850ada6c48acc4cdfbc19a744b69f2329ef745b62f8cbed971d"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
