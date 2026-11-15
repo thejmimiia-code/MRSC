@@ -578,7 +578,12 @@
       return;
     }
     liste.slice(0, 12).forEach(function (candidat, position) {
-      var ligne = document.createElement("li");
+      // Un `li` sous `role="option"` aurait gardé la puce d'une liste dont le
+      // rôle est ailleurs : la mesure de l'arbre d'accessibilité refusait cette
+      // liste sans puces, et elle avait raison de se méfier de `ul` sans
+      // `role="list"` (WebKit retire alors la sémantique). Une liste de
+      // suggestions n'est pas une liste de lecture : des `div` portent le rôle.
+      var ligne = document.createElement("div");
       ligne.setAttribute("role", "option");
       ligne.id = "couts-resultat-" + candidat.code;
       ligne.setAttribute("aria-selected", "false");

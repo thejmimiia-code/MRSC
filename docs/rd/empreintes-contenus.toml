@@ -1462,7 +1462,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/css/site.css"
-empreinte = "cc36b167a9e6e6b2d7cb67af920a3f3279732dd249f2ec3591c7f505e806a3d9"
+empreinte = "45b620d451cd1bf5dfde5faf42a0c873d9797d9760e504eb1de6e0672fceb48e"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -2300,7 +2300,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/js/carte-vie-chere.js"
-empreinte = "177aacf142ec6d3c047a4fabcfe989d808fc98f4a555b00e401ffb8330b40a14"
+empreinte = "723b41cb6452fc350b21b7d647d031dca020be7f5038bc333af4919245505aee"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -2337,7 +2337,7 @@ urls = ["https://thejmimiia-code.github.io/MRSC/confidentialite.html", "https://
 
 [[unite]]
 chemin = "couts-vie-chere.html"
-empreinte = "48d793cad07bb124f2b58d4c7877a5cbf009ba33aee4329b4654711cf92024d0"
+empreinte = "221b832b86b230a1e0a7e67edbc88f096b32a0c50b8418fdde527cadfead2998"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -2345,7 +2345,7 @@ urls = ["https://thejmimiia-code.github.io/MRSC/couts-vie-chere.html", "https://
 
 [[unite]]
 chemin = "couts-vie-chere/contenu.txt"
-empreinte = "5af1aabc535cf3210ed644875a7ea03b4c7220537ce06d604634ebea75f0176e"
+empreinte = "8c4a97946feccf23632d928780719f50dabf1e3d09676c82276bd87f6f7129d4"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
@@ -3470,10 +3470,10 @@ urls = ["https://thejmimiia-code.github.io/MRSC/eva.html", "https://www.nvidia.c
 
 [[unite]]
 chemin = "ia-societe.html"
-empreinte = "f7590b86075049918a8ac65bc575ef60077403475f4b7e2c896eaf8e34737ff1"
+empreinte = "b65c5254f6f0c238563eef1e7c640887e46426d92b083accb1faadaac3cdc59c"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-15
 urls = ["https://thejmimiia-code.github.io/MRSC/ia-societe.html", "https://www.arcom.fr/sites/default/files/2025-03/Barometre-du-numerique-edition-2025.pdf", "https://www.ilo.org/publications/generative-ai-and-jobs-2025-update", "https://www.iea.org/reports/energy-and-ai/executive-summary", "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics", "https://www.oecd.org/en/topics/ai-and-work.html", "https://www.who.int/news/item/18-01-2024-who-releases-ai-ethics-and-governance-guidance-for-large-multi-modal-models", "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026", "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/rapport-activite-2025", "https://www.cybermalveillance.gouv.fr/medias/2026/09/Deck-IPSOS-2026-1409-DEF.pdf", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/intelligence-artificielle-ia", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroquerie-enfant-probleme-telephone-coucou-papa-maman", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing", "https://17cyber.gouv.fr/", "https://www.service-public.gouv.fr/particuliers/vosdroits/F34800", "https://www.service-public.gouv.fr/particuliers/vosdroits/F31324", "https://www.service-public.gouv.fr/particuliers/vosdroits/R17674", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance", "https://www.signal-spam.fr/", "https://www.33700.fr/"]
 
 [[unite]]

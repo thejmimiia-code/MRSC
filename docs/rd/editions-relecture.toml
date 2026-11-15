@@ -14667,3 +14667,75 @@ sources = []
 mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-42.json", "assets/data/vie-chere/d-75.json"]
 constat = "Deuxième passe sur la recherche et le zoom. La liste de suggestions se pose sur la carte au lieu de pousser la rangée d’outils, et porte l’information « un prix est publié ici », lue dans l’index comme présence d’un prix et non comme un prix. Le nom de la commune choisie s’écrit à côté d’elle au fond de zoom. Un défaut vu à l’écran est corrigé : le texte du nom gardait la taille par défaut du SVG et son liseré blanc recouvrait la carte entière, qui devenait blanche dès qu’on choisissait une ville ; deux mesures d’essai navigateur le voient désormais, et retirer la correction fait tomber l’essai. Un double-clic agrandit la carte."
 limite = "Les essais navigateur tournent dans un Chromium sans interface, avec un clavier simulé : ni personne devant l’écran, ni lecteur d’écran, ni Firefox, ni Safari. L’index porte une présence de prix, pas un prix : elle peut changer à la collecte suivante sans que la fiche soit fausse, et un index périmé est refusé, pas corrigé. Le rendu a été regardé en captures à 360 et 1280 px, jamais sur un appareil réel."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "f7590b86075049918a8ac65bc575ef60077403475f4b7e2c896eaf8e34737ff1"
+empreinte_apres = "2396deb46ded2f50e4e6eb80bb63f70d941fcbe5b9f09f51a33287cb71701154"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
+constat = "La page IA porte la version du CSS qu’elle sert : une feuille modifiée sans rejouer versionner-css-ia.py laissait la page annoncer une version périmée, et le banc du cache CSS tombait. Le fichier ne change que par cette empreinte."
+limite = "Le numéro de version n’est pas une mesure de contenu : il prouve seulement que la page et la feuille sont servies ensemble."
+
+[[edition]]
+chemin = "assets/css/site.css"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "cc36b167a9e6e6b2d7cb67af920a3f3279732dd249f2ec3591c7f505e806a3d9"
+empreinte_apres = "45b620d451cd1bf5dfde5faf42a0c873d9797d9760e504eb1de6e0672fceb48e"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
+constat = "La liste de suggestions n’est plus une liste de lecture : des éléments de rôle « option » la portent, sans puce ni sémantique de liste à perdre dans WebKit. La mesure de l’arbre d’accessibilité refusait la liste précédente, et c’est cette mesure qui a mené au changement. Rien d’autre ne bouge dans la page : ni le champ, ni les phrases, ni les chiffres."
+limite = "Le rôle « option » n’est pas mesuré par le relevé d’arbre au-delà de son nom accessible ; ni lecteur d’écran, ni WebKit, ni appareil réel n’ont été éprouvés. La page IA change encore une fois parce que la feuille a changé."
+
+[[edition]]
+chemin = "assets/js/carte-vie-chere.js"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "177aacf142ec6d3c047a4fabcfe989d808fc98f4a555b00e401ffb8330b40a14"
+empreinte_apres = "723b41cb6452fc350b21b7d647d031dca020be7f5038bc333af4919245505aee"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
+constat = "La liste de suggestions n’est plus une liste de lecture : des éléments de rôle « option » la portent, sans puce ni sémantique de liste à perdre dans WebKit. La mesure de l’arbre d’accessibilité refusait la liste précédente, et c’est cette mesure qui a mené au changement. Rien d’autre ne bouge dans la page : ni le champ, ni les phrases, ni les chiffres."
+limite = "Le rôle « option » n’est pas mesuré par le relevé d’arbre au-delà de son nom accessible ; ni lecteur d’écran, ni WebKit, ni appareil réel n’ont été éprouvés. La page IA change encore une fois parce que la feuille a changé."
+
+[[edition]]
+chemin = "couts-vie-chere.html"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "48d793cad07bb124f2b58d4c7877a5cbf009ba33aee4329b4654711cf92024d0"
+empreinte_apres = "221b832b86b230a1e0a7e67edbc88f096b32a0c50b8418fdde527cadfead2998"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
+constat = "La liste de suggestions n’est plus une liste de lecture : des éléments de rôle « option » la portent, sans puce ni sémantique de liste à perdre dans WebKit. La mesure de l’arbre d’accessibilité refusait la liste précédente, et c’est cette mesure qui a mené au changement. Rien d’autre ne bouge dans la page : ni le champ, ni les phrases, ni les chiffres."
+limite = "Le rôle « option » n’est pas mesuré par le relevé d’arbre au-delà de son nom accessible ; ni lecteur d’écran, ni WebKit, ni appareil réel n’ont été éprouvés. La page IA change encore une fois parce que la feuille a changé."
+
+[[edition]]
+chemin = "couts-vie-chere/contenu.txt"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "5af1aabc535cf3210ed644875a7ea03b4c7220537ce06d604634ebea75f0176e"
+empreinte_apres = "8c4a97946feccf23632d928780719f50dabf1e3d09676c82276bd87f6f7129d4"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
+constat = "La liste de suggestions n’est plus une liste de lecture : des éléments de rôle « option » la portent, sans puce ni sémantique de liste à perdre dans WebKit. La mesure de l’arbre d’accessibilité refusait la liste précédente, et c’est cette mesure qui a mené au changement. Rien d’autre ne bouge dans la page : ni le champ, ni les phrases, ni les chiffres."
+limite = "Le rôle « option » n’est pas mesuré par le relevé d’arbre au-delà de son nom accessible ; ni lecteur d’écran, ni WebKit, ni appareil réel n’ont été éprouvés. La page IA change encore une fois parce que la feuille a changé."
+
+[[edition]]
+chemin = "ia-societe.html"
+date = 2026-11-15
+auteur = "agent"
+empreinte_avant = "2396deb46ded2f50e4e6eb80bb63f70d941fcbe5b9f09f51a33287cb71701154"
+empreinte_apres = "b65c5254f6f0c238563eef1e7c640887e46426d92b083accb1faadaac3cdc59c"
+nature = "mesure-interne"
+sources = []
+mesures = ["assets/data/vie-chere/d-69.json", "assets/data/vie-chere/d-75.json"]
+constat = "La liste de suggestions n’est plus une liste de lecture : des éléments de rôle « option » la portent, sans puce ni sémantique de liste à perdre dans WebKit. La mesure de l’arbre d’accessibilité refusait la liste précédente, et c’est cette mesure qui a mené au changement. Rien d’autre ne bouge dans la page : ni le champ, ni les phrases, ni les chiffres."
+limite = "Le rôle « option » n’est pas mesuré par le relevé d’arbre au-delà de son nom accessible ; ni lecteur d’écran, ni WebKit, ni appareil réel n’ont été éprouvés. La page IA change encore une fois parce que la feuille a changé."
