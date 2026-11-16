@@ -156,7 +156,7 @@ jobs:
       # qu'aucune donnée n'entre dans le dépôt sans dire d'où elle vient.
       - name: Consigner la provenance des fichiers collectés
         run: |
-          fichiers=$(git status --porcelain -- assets/data/vie-chere | awk '{print $2}' | grep '\.json$' | tr '\n' ' ')
+          fichiers=$(git status --porcelain -uall -- assets/data/vie-chere | awk '{print $2}' | grep '\.json$' | tr '\n' ' ')
           if ! git diff --quiet -- couts-vie-chere.html; then
             fichiers="$fichiers couts-vie-chere.html"
           fi

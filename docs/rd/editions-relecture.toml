@@ -15003,3 +15003,15 @@ sources = []
 mesures = ["outils/memoire-eva.py", "outils/test_memoire_eva.py"]
 constat = "Régénération de l'index mémoire ÉVA après mise à jour des documents R&D du lot revenus FiLoSoFi."
 limite = "Index mécanique des documents du dépôt, sans validation des contenus indexés."
+
+[[edition]]
+chemin = ".github/workflows/collecte-vie-chere.yml"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "c02e0e042f1ee65814751501963762b26a2d7f1e58a1159c40d9b11052b145bd"
+empreinte_apres = "e65f1df65a09a03e2c28d04e78a9ca371eb096742ba10eb9027e6297220f1c71"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-workflows.py", "outils/test_verifier_workflows.py"]
+constat = "Utilise git status --porcelain -uall dans collecte-vie-chere.yml pour lister les fichiers créés dans un sous-dossier neuf (assets/data/vie-chere/revenus/)."
+limite = "Correction du périmètre de détection des fichiers collectés dans le workflow ; ne dispense pas de la relecture de la PR ouverte par la collecte."
