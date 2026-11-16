@@ -15099,3 +15099,15 @@ sources = []
 mesures = ["simulateur/index.html", "outils/test-experience.cjs", "outils/construire-page-couts.py"]
 constat = "Relecture du correctif du calculateur et de ses documents : vérification de la conversion d’une mensualité en capacité d’emprunt par annuité constante, du cas de taux nul, de l’absence de valeurs présaisies, de la formulation hors frais, assurance et fiscalité, de la page reconstruite depuis son fragment, et du test navigateur qui couvre les cas 3 450 €/mois à 3 % sur 25 ans et taux nul."
 limite = "Mesure et essais reproductibles du calcul, sans expertise financière ni validation du taux, de la durée ou des prix immobiliers pour une situation réelle ; aucun essai avec une personne, lecteur d’écran, Firefox ou Safari."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "de7362de692fb3aed2d0c1ea3870e116f272fcaeab305b2f18e89ca3b6cf4256"
+empreinte_apres = "0c6d588055563f7ec59b38287677d9c8cfb49eadf8680eb7e279992e1b07debd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py", "outils/test_memoire_eva.py"]
+constat = "Régénération de l’index mémoire ÉVA après l’ajout de l’entrée de journal sur le correctif du calculateur : les entrées et ancres du journal correspondent maintenant à la source et les anciens repères de ligne sont recalculés."
+limite = "Index mécanique des documents du dépôt ; ce contrôle vérifie la cohérence et les temps de réponse de l’index, pas la qualité des conclusions ni la justesse d’une expertise."

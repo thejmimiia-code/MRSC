@@ -2745,7 +2745,7 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "de7362de692fb3aed2d0c1ea3870e116f272fcaeab305b2f18e89ca3b6cf4256"
+empreinte = "0c6d588055563f7ec59b38287677d9c8cfb49eadf8680eb7e279992e1b07debd"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-16
