@@ -108,6 +108,9 @@ DOMAINES_SURS = {
     # Plateforme Opendatasoft de l’État : c’est là que vit l’export réellement
     # téléchargé des prix des carburants, distinct de la fiche de licence data.gouv.
     "data.economie.gouv.fr", "www.data.economie.gouv.fr",
+    # API Mélodi de l’INSEE : expose en accès libre (Licence Ouverte 2.0) le
+    # catalogue et l’archive CSV directe des revenus localisés (FiLoSoFi).
+    "api.insee.fr",
 }
 DOMAINES_PROPRES = {"thejmimiia-code.github.io"}
 #: Hôtes qui ne servent que des **fichiers** de jeux de données dont la fiche est
@@ -122,7 +125,7 @@ DOMAINES_PROPRES = {"thejmimiia-code.github.io"}
 #: `www.data.gouv.fr` : même domaine commun, même ressource, autre porte. Sans
 #: elle, une page qui lit un fichier par cette API devrait citer une adresse
 #: qu’elle n’utilise pas, ou taire comment elle a lu.
-HOSTS_DE_DISTRIBUTION = {"static.data.gouv.fr", "tabular-api.data.gouv.fr"}
+HOSTS_DE_DISTRIBUTION = {"static.data.gouv.fr", "tabular-api.data.gouv.fr", "api.insee.fr"}
 #: Domaines réservés aux fixtures des bancs de mutation et aux exemples de fiche :
 #: `site-fictif.test` est l'adresse d'exercice de la fiche « lire une adresse web »,
 #: reproduite à l'identique dans les données d'aventure ; c'est une URL inventée pour

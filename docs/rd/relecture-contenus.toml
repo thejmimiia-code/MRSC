@@ -14,7 +14,7 @@
 [meta]
 version = 1
 date_relecture = 2026-11-07
-dates_lots = [2026-11-07, 2026-11-12, 2026-11-14]
+dates_lots = [2026-11-07, 2026-11-12, 2026-11-14, 2026-11-16]
 auteur = "agent"
 lot = "apparences-du-7-novembre-2026-et-declaration-fraudes-du-12-novembre-2026-et-cout-de-la-vie-du-14-novembre-2026"
 statut = "relu-par-agent-sources-confrontees"
@@ -750,3 +750,27 @@ consulte_le = 2026-11-14
 ancre = "deux échelles géographiques"
 permet = "Établir ce que la source publie et à quelle maille : les loyers observés par les observatoires du réseau, sous Licence Ouverte 2.0, pour l’agglomération et pour la ville centre — donc qu’une page par commune ne peut pas s’en servir sans le dire."
 limites = "La fiche ne donne aucun chiffre : elle ne permet pas de vérifier un loyer, seulement la nature et la licence de la source. Elle ne dit rien non plus de la couverture géographique réelle, qui dépend des observatoires existants."
+
+# Lot « coût de la vie » (suite du 16 novembre 2026) : revenus communaux FiLoSoFi 2 via API Mélodi INSEE.
+
+[[source]]
+id = "insee-melodi-filosofi-catalog"
+extrait = "docs/rd/sources-primaires/insee-melodi-filosofi-catalog.txt"
+editeur = "INSEE (API Mélodi)"
+titre = "FiLoSoFi 2 (DS_FILOSOFI_CC) — catalogue et archive CSV directe"
+url = "https://api.insee.fr/melodi/catalog/DS_FILOSOFI_CC"
+consulte_le = 2026-11-16
+ancre = "DS_FILOSOFI_CC_2023_CSV_FR"
+permet = "Établir que l’INSEE publie désormais en accès libre (« Libre », jeu public) l’archive CSV directe de FiLoSoFi 2 (millésime 2023, mis à jour le 6 août 2026) via l’API Mélodi, avec une URL stable trouvée dans le catalogue sans passer par des pages HTML."
+limites = "La réponse du catalogue décrit le jeu et ses produits, pas les observations communales elles-mêmes. Elle ne garantit pas qu’une future refonte de l’API Mélodi conservera exactement le même nom de produit, ni que toutes les communes soient publiées sans secret statistique."
+
+[[source]]
+id = "insee-melodi-filosofi-sample"
+extrait = "docs/rd/sources-primaires/insee-melodi-filosofi-sample.txt"
+editeur = "INSEE (API Mélodi)"
+titre = "FiLoSoFi 2 (DS_FILOSOFI_CC) — observations communales et référence nationale 2023"
+url = "https://api.insee.fr/melodi/data/DS_FILOSOFI_CC?GEO=COM-69123&TIME_PERIOD=2023"
+consulte_le = 2026-11-16
+ancre = "28290.0"
+permet = "Prouver sur des réponses réelles de l’API Mélodi que la commune (Lyon 69123) porte bien le niveau de vie médian annuel (MED_SL = 28 290 €/an) et le taux de pauvreté à 60 % (PR_MD60 = 18,0 %), tandis que les autres indicateurs portent OBS_STATUS = O (omission à respecter, jamais mise à zéro)."
+limites = "Deux appels unitaires (Lyon et France métropolitaine) ne prouvent pas la complétude des 34 900 communes dans le CSV complet, ni l’absence d’omissions ponctuelles liées au secret statistique ou aux fusions de communes documentées au 1er janvier 2026."

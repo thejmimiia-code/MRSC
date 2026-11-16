@@ -508,6 +508,11 @@ jobs:
           python3 outils/auditer-selecteurs-morts.py --verifier
           python3 outils/test_auditer_selecteurs_morts.py
 
+      - name: Éprouver les collectes et la page du coût de la vie
+        run: |
+          python3 outils/construire-page-couts.py --verifier
+          python3 outils/test_collecte_revenus.py
+
   graphismes:
     runs-on: ubuntu-24.04
     # 20 minutes ne suffisaient plus depuis le contrôle des cadrages (5 min 02

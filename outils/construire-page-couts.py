@@ -43,6 +43,7 @@ DESCRIPTION = (
 )
 CANONIQUE = "https://thejmimiia-code.github.io/MRSC/couts-vie-chere.html"
 LOYERS = RACINE / "assets" / "data" / "vie-chere" / "loyers.json"
+REVENUS_ETAT = RACINE / "assets" / "data" / "vie-chere" / "revenus" / "_etat.json"
 #: Le fragment porte la section des loyers, avec ses deux marques : le tableau
 #: lui-même n'est pas écrit à la main, il est le rendu de la collecte. Recopier
 #: cinquante-trois lignes à la main ferait diverger la page de la donnée au
@@ -53,6 +54,9 @@ MARQUE_FIN = "<!-- loyers:fin -->"
 #: intention : elle est donc écrite par le même rendu que le tableau, pour qu'elle
 #: ne puisse pas affirmer une collecte qui n'a pas eu lieu.
 MARQUE_ETAT = "<!-- loyers:etat -->"
+MARQUE_REVENUS_ETAT = "<!-- revenus:etat -->"
+MARQUE_REVENUS_SOURCE = "<!-- revenus:source -->"
+MARQUE_REVENUS_METHODE = "<!-- revenus:methode -->"
 SCRIPT = '  <script src="assets/js/carte-vie-chere.js" defer></script>\n'
 
 
@@ -156,6 +160,32 @@ def etat_loyers() -> str:
     )
 
 
+def textes_revenus() -> tuple[str, str, str]:
+    if not REVENUS_ETAT.is_file():
+        return (
+            "Rien pour l’instant : aucune collecte de revenus n’a encore eu lieu ; le niveau de "
+            "vie médian communal existe (FiLoSoFi, INSEE via API Mélodi) et la collecte est en place",
+            "Identifiée, collecte en place (INSEE, API Mélodi)",
+            "Le <strong>niveau de vie médian</strong> et le <strong>reste à vivre</strong> : "
+            "aucune collecte de revenus n’a encore été écrite dans le dépôt (source identifiée, "
+            "outil de collecte en place).",
+        )
+    etat = json.loads(REVENUS_ETAT.read_text(encoding="utf-8"))
+    millesime = html.escape(str(etat.get("millesime") or ""))
+    ref = etat.get("reference_nationale") or {}
+    med = ref.get("mediane")
+    repere = f", France métropolitaine : {nombre_fr(float(med))}\u00a0€/an" if isinstance(med, (int, float)) else ""
+    return (
+        f"Affiché dans la fiche de chaque commune : niveau de vie médian annuel par unité de "
+        f"consommation et taux de pauvreté à 60 %, quand publiés (FiLoSoFi {millesime}{repere})",
+        f"INSEE, FiLoSoFi {millesime} via API Mélodi (Licence Ouverte 2.0)",
+        f"Le <strong>reste à vivre</strong> : le niveau de vie médian communal (FiLoSoFi "
+        f"{millesime}) figure dans la fiche de la commune, mais il ne dit ni les charges du "
+        "foyer, ni les salaires individuels, ni le patrimoine ; certaines petites communes "
+        "restent omises par secret statistique.",
+    )
+
+
 def injecter(fragment: str) -> str:
     """Remplace le contenu entre les deux marques par le rendu de la collecte."""
     if MARQUE_DEBUT not in fragment or MARQUE_FIN not in fragment:
@@ -171,7 +201,14 @@ def injecter(fragment: str) -> str:
     fragment = avant + "\n" + bloc_loyers() + "\n" + apres
     if fragment.count(MARQUE_ETAT) != 1:
         raise ValueError(f"le fragment n'a pas exactement une marque d'état des loyers ({MARQUE_ETAT})")
-    return fragment.replace(MARQUE_ETAT, etat_loyers())
+    fragment = fragment.replace(MARQUE_ETAT, etat_loyers())
+    for marque in (MARQUE_REVENUS_ETAT, MARQUE_REVENUS_SOURCE, MARQUE_REVENUS_METHODE):
+        if fragment.count(marque) != 1:
+            raise ValueError(f"le fragment n'a pas exactement une marque de revenus ({marque})")
+    rev_etat, rev_source, rev_methode = textes_revenus()
+    fragment = fragment.replace(MARQUE_REVENUS_ETAT, rev_etat)
+    fragment = fragment.replace(MARQUE_REVENUS_SOURCE, rev_source)
+    return fragment.replace(MARQUE_REVENUS_METHODE, rev_methode)
 
 
 def coque() -> tuple[str, str]:
@@ -228,14 +265,19 @@ def verifier(contenu: str) -> int:
         erreurs.append(f"{contenu.count('<h1')} titre(s) de niveau 1 au lieu d'un")
     if contenu.count("<main") != 1:
         erreurs.append(f"{contenu.count('<main')} zone(s) principale(s)")
-    for marque in (MARQUE_DEBUT, MARQUE_FIN, MARQUE_ETAT):
+    for marque in (MARQUE_DEBUT, MARQUE_FIN, MARQUE_ETAT, MARQUE_REVENUS_ETAT, MARQUE_REVENUS_SOURCE, MARQUE_REVENUS_METHODE):
         if marque in contenu:
-            erreurs.append(f"marque de loyers non remplacée dans la page : {marque}")
+            erreurs.append(f"marque non remplacée dans la page : {marque}")
     if LOYERS.is_file():
         if "Loyer médian mensuel" not in contenu:
             erreurs.append("collecte des loyers présente mais tableau absent de la page")
     elif "Aucune collecte de loyers" not in contenu:
         erreurs.append("aucune collecte de loyers, et la page ne le dit pas")
+    if REVENUS_ETAT.is_file():
+        if "FiLoSoFi" not in contenu or "Affiché dans la fiche de chaque commune" not in contenu:
+            erreurs.append("collecte des revenus présente mais état absent de la page")
+    elif "aucune collecte de revenus" not in contenu:
+        erreurs.append("aucune collecte de revenus, et la page ne le dit pas")
     if erreurs:
         for erreur in erreurs:
             print(f"ERREUR — {erreur}", file=sys.stderr)

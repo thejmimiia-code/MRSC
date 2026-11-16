@@ -367,10 +367,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = ".github/workflows/collecte-vie-chere.yml"
-empreinte = "bc1ae4e4e36414fb35882b6f961366e27fdd210658adc26a8abba739b6b0adac"
+empreinte = "c02e0e042f1ee65814751501963762b26a2d7f1e58a1159c40d9b11052b145bd"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 
 [[unite]]
 chemin = ".github/workflows/deploy-pages.yml"
@@ -402,10 +402,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = ".github/workflows/verification.yml"
-empreinte = "cd3454e8a1ecedc669d47d26792ea37cbcf932461edaf2dc5128599c48652c09"
+empreinte = "73861d989af20a276e2a7637d2ea13da66b435899902ae83c263a9e99ae87885"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-16
 
 [[unite]]
 chemin = ".github/workflows/verifier-publication.yml"
@@ -2300,10 +2300,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/js/carte-vie-chere.js"
-empreinte = "26ccd9b2abce205529ebee444d54d973b94fca11aaf0b16efea53b7e56609de7"
+empreinte = "3ae7430064fc1e8b0561d6d1e544bb5a43683d92a256fcece4096ca230bcdc48"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 
 [[unite]]
 chemin = "assets/js/decor-atlas.js"
@@ -2337,19 +2337,19 @@ urls = ["https://thejmimiia-code.github.io/MRSC/confidentialite.html", "https://
 
 [[unite]]
 chemin = "couts-vie-chere.html"
-empreinte = "221b832b86b230a1e0a7e67edbc88f096b32a0c50b8418fdde527cadfead2998"
+empreinte = "f7f1d5595e420adc86d109bceb810c660fd8b1389519dc486dfff6d956efe6bd"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
-urls = ["https://thejmimiia-code.github.io/MRSC/couts-vie-chere.html", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers", "https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres", "https://geo.api.gouv.fr/decoupage-administratif", "https://www.data.gouv.fr/datasets/decoupage-administratif-1", "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree", "https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe"]
+date_derniere_relecture = 2026-11-16
+urls = ["https://thejmimiia-code.github.io/MRSC/couts-vie-chere.html", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers", "https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres", "https://geo.api.gouv.fr/decoupage-administratif", "https://www.data.gouv.fr/datasets/decoupage-administratif-1", "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree", "https://api.insee.fr/melodi/catalog/DS_FILOSOFI_CC", "https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe"]
 
 [[unite]]
 chemin = "couts-vie-chere/contenu.txt"
-empreinte = "8c4a97946feccf23632d928780719f50dabf1e3d09676c82276bd87f6f7129d4"
+empreinte = "e0232e39cbaf4cd35bf927a7e99655eb4e99e595a7918b63a4aa2def1f3d823c"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
-urls = ["https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres", "https://geo.api.gouv.fr/decoupage-administratif", "https://www.data.gouv.fr/datasets/decoupage-administratif-1", "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers", "https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe"]
+date_derniere_relecture = 2026-11-16
+urls = ["https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres", "https://geo.api.gouv.fr/decoupage-administratif", "https://www.data.gouv.fr/datasets/decoupage-administratif-1", "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers", "https://api.insee.fr/melodi/catalog/DS_FILOSOFI_CC", "https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe"]
 
 [[unite]]
 chemin = "docs/apprentissage/audit-automatique.md"
@@ -2745,10 +2745,10 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "08b6d223c733cbcd984a228d3425d265f000f9d67cbce4179447577dce68bcdb"
+empreinte = "de7362de692fb3aed2d0c1ea3870e116f272fcaeab305b2f18e89ca3b6cf4256"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 urls = ["https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr-executive-summary"]
 
 [[unite]]
@@ -2828,10 +2828,10 @@ urls = ["https://www.insee.fr/fr/statistiques/8739245", "https://doi.org/10.1177
 
 [[unite]]
 chemin = "docs/rd/inventaire-controles.md"
-empreinte = "0d4a377d3a557a3e5d40d04c837fe3993e8ee0548fe9d5b49bba3fd86974e272"
+empreinte = "cd3effdf115b298d5d9bb49a7c47a5049e5d7e501e4d08b157688d1cd6132a64"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 
 [[unite]]
 chemin = "docs/rd/inventaire-couleurs-jetons.md"
@@ -2894,17 +2894,17 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
-empreinte = "f828267731efd09625b7db324fd28cd5a5bc94001058fade289eb087a48bbdbd"
+empreinte = "f3ec6a7dcf714c5f56209952b4b625c0e1ba1c8938e50efb9a0007f1aabf62ed"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 
 [[unite]]
 chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
-empreinte = "1fcb54b4317745c16046246011a7d57d7ac6ae138dbf495166e5229ba7715348"
+empreinte = "d2adcd3d60cf512b1260d15d45d959fb1d2d2084bf2ecc17c6bf588fb3b3c9fd"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 
 [[unite]]
 chemin = "docs/rd/plan-site-complet-2026-11-11.md"
@@ -3032,19 +3032,19 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "docs/rd/relecture-contenus.toml"
-empreinte = "77e9e3dd2bb561314c8ac22aa0733a9dc2175467b37f13c7b2c41d5625bd6179"
+empreinte = "dfdc4bcf8b62e830ef59c8d51a336a17810489725ef018caad31d4ff5786304f"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
-urls = ["https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color-scheme", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/forced-colors", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/theme-color", "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html", "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html", "https://github.com/w3c/wcag/blob/main/guidelines/terms/20/relative-luminance.html", "https://www.service-public.gouv.fr/particuliers/vosdroits/F34800", "https://www.service-public.gouv.fr/particuliers/vosdroits/N31138", "https://www.service-public.gouv.fr/particuliers/vosdroits/F31324", "https://www.service-public.gouv.fr/particuliers/vosdroits/R17674", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing", "https://www.signal-spam.fr/", "https://www.33700.fr/", "https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres", "https://geo.api.gouv.fr/decoupage-administratif", "https://www.data.gouv.fr/datasets/decoupage-administratif-1", "https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe", "https://www.data.gouv.fr/api/1/datasets/demandes-de-valeurs-foncieres/", "https://geo.api.gouv.fr/communes?fields=nom,code,codesPostaux,population,centre,departement", "https://api.github.com/repos/gregoiredavid/france-geojson", "https://www.data.gouv.fr/datasets/revenus-et-pauvrete-des-menages-aux-niveaux-national-et-local-revenus-localises-sociaux-et-fiscaux", "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree", "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/csv", "https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers"]
+date_derniere_relecture = 2026-11-16
+urls = ["https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color-scheme", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/forced-colors", "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion", "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/theme-color", "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html", "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html", "https://github.com/w3c/wcag/blob/main/guidelines/terms/20/relative-luminance.html", "https://www.service-public.gouv.fr/particuliers/vosdroits/F34800", "https://www.service-public.gouv.fr/particuliers/vosdroits/N31138", "https://www.service-public.gouv.fr/particuliers/vosdroits/F31324", "https://www.service-public.gouv.fr/particuliers/vosdroits/R17674", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/page/deposer-plainte-cybermalveillance", "https://www.cybermalveillance.gouv.fr/tous-nos-contenus/fiches-reflexes/hameconnage-phishing", "https://www.signal-spam.fr/", "https://www.33700.fr/", "https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres", "https://geo.api.gouv.fr/decoupage-administratif", "https://www.data.gouv.fr/datasets/decoupage-administratif-1", "https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe", "https://www.data.gouv.fr/api/1/datasets/demandes-de-valeurs-foncieres/", "https://geo.api.gouv.fr/communes?fields=nom,code,codesPostaux,population,centre,departement", "https://api.github.com/repos/gregoiredavid/france-geojson", "https://www.data.gouv.fr/datasets/revenus-et-pauvrete-des-menages-aux-niveaux-national-et-local-revenus-localises-sociaux-et-fiscaux", "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree", "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/csv", "https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers", "https://api.insee.fr/melodi/catalog/DS_FILOSOFI_CC", "https://api.insee.fr/melodi/data/DS_FILOSOFI_CC?GEO=COM-69123&TIME_PERIOD=2023"]
 
 [[unite]]
 chemin = "docs/rd/relecture-couts-vie-chere-2026-11-14.md"
-empreinte = "dd0dc3e540c0c313de896db7f4fb7b02b0af44ff52cc9b9de3b054df7f8daa98"
+empreinte = "38bd3e029f8f5f81fba02de55db93b4ac9e35b3d36c7798f93616456e2340cb4"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
-urls = ["https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres", "https://geo.api.gouv.fr/decoupage-administratif", "https://www.data.gouv.fr/datasets/decoupage-administratif-1", "https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe", "https://www.data.gouv.fr/api/1/datasets/demandes-de-valeurs-foncieres/", "https://geo.api.gouv.fr/communes?fields=nom,code,codesPostaux,population,centre,departement", "https://api.github.com/repos/gregoiredavid/france-geojson", "https://www.data.gouv.fr/datasets/revenus-et-pauvrete-des-menages-aux-niveaux-national-et-local-revenus-localises-sociaux-et-fiscaux", "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree", "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/csv", "https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers"]
+date_derniere_relecture = 2026-11-16
+urls = ["https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres", "https://geo.api.gouv.fr/decoupage-administratif", "https://www.data.gouv.fr/datasets/decoupage-administratif-1", "https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe", "https://www.data.gouv.fr/api/1/datasets/demandes-de-valeurs-foncieres/", "https://geo.api.gouv.fr/communes?fields=nom,code,codesPostaux,population,centre,departement", "https://api.github.com/repos/gregoiredavid/france-geojson", "https://www.data.gouv.fr/datasets/revenus-et-pauvrete-des-menages-aux-niveaux-national-et-local-revenus-localises-sociaux-et-fiscaux", "https://www.data.gouv.fr/datasets/prix-des-carburants-en-france-flux-instantane-v2-amelioree", "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/exports/csv", "https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers", "https://api.insee.fr/melodi/catalog/DS_FILOSOFI_CC", "https://api.insee.fr/melodi/data/DS_FILOSOFI_CC?GEO=COM-69123&TIME_PERIOD=2023"]
 
 [[unite]]
 chemin = "docs/rd/relecture-fraudes-declaration-2026-11-12.md"
@@ -3596,6 +3596,14 @@ date_derniere_relecture = 2026-11-15
 urls = ["https://www.data.gouv.fr/api/1/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers/", "https://www.data.gouv.fr/datasets/resultats-nationaux-des-observatoires-locaux-des-loyers", "https://tabular-api.data.gouv.fr/api/resources/{ressource}/data/"]
 
 [[unite]]
+chemin = "outils/collecter-revenus.py"
+empreinte = "de8b683cd2d50fae06a99ab9e2781853a42f79671944badd1a19d3e543748088"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-16
+urls = ["https://api.insee.fr/melodi/catalog/DS_FILOSOFI_CC", "https://api.insee.fr/"]
+
+[[unite]]
 chemin = "outils/collecter-vie-chere.py"
 empreinte = "8c7584c7856357efa5258419109b338db89cea2e37865f441455556816091f15"
 etat = "relu-par-agent"
@@ -3655,10 +3663,10 @@ date_derniere_relecture = 2026-11-15
 
 [[unite]]
 chemin = "outils/construire-page-couts.py"
-empreinte = "e69bcf8c26b083b316cb9cc8434dcf05c833fb5f432f09fb9832b046f21fa557"
+empreinte = "5cbc3f154a7c4ecc23f1adf5205a399c7e73df925a916882c2f8a20412f86e4a"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 urls = ["https://thejmimiia-code.github.io/MRSC/couts-vie-chere.html", "https://thejmimiia-code.github.io/MRSC/localisation.html"]
 
 [[unite]]
@@ -3845,10 +3853,10 @@ date_derniere_relecture = 2026-11-11
 
 [[unite]]
 chemin = "outils/relire-contenus.py"
-empreinte = "14bca36caf0fbd8bd31e92a745f526eb50639f34188ee3c4bd6ed200d798c24b"
+empreinte = "28d54363d3bcb86fb5644b5d03899fedd0884239b8e62b4d6c9945fb9db9a608"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-16
 
 [[unite]]
 chemin = "outils/serveur-local.py"
@@ -3873,10 +3881,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test-experience.cjs"
-empreinte = "2f333685e91d92ae16ff2ed5d4d2f8d36128b3c8caefa05ffbdddedfeef6304a"
+empreinte = "cec7fc42aaa009f98284cfde7d0fb3f58cb02b758ad9fdfbdff1400bae7f73cf"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 
 [[unite]]
 chemin = "outils/test_annoncer_echec_graphismes.py"
@@ -3956,6 +3964,14 @@ etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-15
 urls = ["https://www.observatoires-des-loyers.org/datagouv/2025/Base_OP_2025_Nationale.csv", "https://www.observatoires-des-loyers.org/datagouv/2024/Base_OP_2024_Nationale.csv"]
+
+[[unite]]
+chemin = "outils/test_collecte_revenus.py"
+empreinte = "0157be666e9a7092f5e523e9b38e3e1f183135412f351bcbfdbac441b6aee807"
+etat = "relu-par-agent"
+apostrophes = 0
+date_derniere_relecture = 2026-11-16
+urls = ["https://api.insee.fr/melodi/file/DS_FILOSOFI_CC/DS_FILOSOFI_CC_2023_CSV_FR", "https://api.insee.fr/melodi/file/DS_FILOSOFI_CC/FILOSOFI_CC_2023_FR", "https://api.insee.fr/melodi/catalog/DS_FILOSOFI_CC"]
 
 [[unite]]
 chemin = "outils/test_collecte_vie_chere.py"
@@ -4560,10 +4576,10 @@ urls = ["https://github.com/thejmimiia-code/MRSC/blob/main/docs/rd/protocole-ess
 
 [[unite]]
 chemin = "outils/verifier-relecture-contenus.py"
-empreinte = "e290d05d07f57b47dab74fd60d17cbb022c1f0df822ccae8fd8bc2410894cc84"
+empreinte = "105667b4fb96dfc7beacfad572ea7ff83f36af61595c610297d90de49c6524c7"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-14
+date_derniere_relecture = 2026-11-16
 
 [[unite]]
 chemin = "outils/verifier-resilience-statutaire.py"

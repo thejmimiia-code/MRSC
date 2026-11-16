@@ -46,10 +46,15 @@
   var mensualite = document.querySelector("[data-couts-mensualite]");
   var resultat = document.querySelector("[data-couts-surface]");
   var blocCarburants = panneau.querySelector("[data-couts-carburants]");
+  var blocRevenus = panneau.querySelector("[data-couts-revenus]");
 
   var fond = null;
   var carburants = null;
   var carburantsDemande = null;
+  var etatRevenus = null;
+  var etatRevenusDemande = null;
+  var revenusParDep = {};
+  var revenusDemandes = {};
   var departementOuvert = null;
   var donneesDepartement = null;
   var communeChoisie = null;
@@ -260,6 +265,92 @@
       dateFr(carburants.collecte_le) + ". Le prix payé dépend de la station choisie, pas du département.";
   }
 
+  function chargerEtatRevenus() {
+    if (!etatRevenusDemande) {
+      etatRevenusDemande = charger(DOSSIER + "revenus/_etat.json")
+        .then(function (donnees) { etatRevenus = donnees; return donnees; })
+        .catch(function () { etatRevenus = null; return null; });
+    }
+    return etatRevenusDemande;
+  }
+
+  function departementDeCommune(code) {
+    return code.indexOf("97") === 0 || code.indexOf("98") === 0 ? code.slice(0, 3) : code.slice(0, 2);
+  }
+
+  function chargerRevenusDep(dep) {
+    if (Object.prototype.hasOwnProperty.call(revenusParDep, dep)) {
+      return Promise.resolve(revenusParDep[dep]);
+    }
+    if (!revenusDemandes[dep]) {
+      revenusDemandes[dep] = charger(DOSSIER + "revenus/r-" + dep + ".json")
+        .then(function (donnees) { revenusParDep[dep] = donnees; return donnees; })
+        .catch(function () { revenusParDep[dep] = null; return null; });
+    }
+    return revenusDemandes[dep];
+  }
+
+  function ajouterLigneChiffre(liste, libelle, valeur) {
+    var ligne = document.createElement("div");
+    var terme = document.createElement("dt");
+    terme.textContent = libelle;
+    var definition = document.createElement("dd");
+    definition.textContent = valeur;
+    ligne.appendChild(terme);
+    ligne.appendChild(definition);
+    liste.appendChild(ligne);
+  }
+
+  function afficherRevenus(commune) {
+    if (!blocRevenus || !commune) return;
+    var liste = blocRevenus.querySelector("[data-couts-revenus-liste]");
+    var note = blocRevenus.querySelector("[data-couts-revenus-source]");
+    var cible = commune.c;
+    blocRevenus.hidden = false;
+    liste.textContent = "";
+    note.textContent = "Chargement des revenus communaux…";
+    chargerEtatRevenus().then(function (etat) {
+      if (!communeChoisie || communeChoisie.c !== cible) return;
+      if (!etat) {
+        note.textContent =
+          "Aucune collecte de revenus n’a encore été publiée : la page ne l’estime pas et n’affiche aucun chiffre.";
+        return;
+      }
+      var dep = departementDeCommune(cible);
+      chargerRevenusDep(dep).then(function (donneesDep) {
+        if (!communeChoisie || communeChoisie.c !== cible) return;
+        liste.textContent = "";
+        var valeurs = donneesDep && donneesDep.communes ? donneesDep.communes[cible] : null;
+        if (!valeurs) {
+          note.textContent =
+            "Aucun niveau de vie médian publié pour cette commune dans FiLoSoFi " +
+            (etat.millesime || "") +
+            " (secret statistique ou commune intégrée à une commune nouvelle). La page n’estime aucun chiffre.";
+          return;
+        }
+        ajouterLigneChiffre(liste, "Niveau de vie médian", euros(valeurs[0]) + " / an par UC");
+        ajouterLigneChiffre(
+          liste,
+          "Taux de pauvreté (seuil 60 %)",
+          valeurs[1] != null ? valeurs[1].toFixed(1).replace(".", ",") + " %" : "non publié (secret statistique)"
+        );
+        var ref = etat.reference_nationale;
+        if (ref && ref.mediane != null) {
+          ajouterLigneChiffre(
+            liste,
+            "Repère — France métropolitaine",
+            euros(ref.mediane) + " / an" +
+            (ref.taux_pauvrete != null ? " (" + ref.taux_pauvrete.toFixed(1).replace(".", ",") + " %)" : "")
+          );
+        }
+        note.textContent =
+          "INSEE, FiLoSoFi " + (etat.millesime || "") + " (géographie " + dateFr(etat.geographie) +
+          ", Licence Ouverte 2.0), collecte du " + dateFr(etat.collecte_le) +
+          ". Ménages fiscaux à revenu disponible positif ou nul ; par unité de consommation.";
+      });
+    });
+  }
+
   function charger(chemin) {
     return fetch(chemin).then(function (reponse) {
       if (!reponse.ok) throw new Error(String(reponse.status));
@@ -438,6 +529,7 @@
     }
     calculerSurface();
     chargerCarburants().then(afficherCarburants);
+    afficherRevenus(commune);
     if (reglages.cadrer !== false && commune.x != null && commune.y != null) {
       cadrerCommune(commune, reglages.largeur);
     }

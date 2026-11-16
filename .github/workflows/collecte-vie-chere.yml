@@ -49,6 +49,7 @@ jobs:
           python3 outils/test_collecte_vie_chere.py
           python3 outils/test_collecte_carburants.py
           python3 outils/test_collecte_loyers.py
+          python3 outils/test_collecte_revenus.py
           python3 outils/test_construire_index_communes.py
 
       # Le 14 novembre 2026, la première exécution a échoué sans qu'on puisse lire
@@ -102,6 +103,21 @@ jobs:
             exit "$code"
           fi
 
+      - name: Collecter les revenus communaux (FiLoSoFi, INSEE Mélodi)
+        run: |
+          set +e
+          python3 outils/collecter-revenus.py >"$RUNNER_TEMP/revenus.log" 2>&1
+          code=$?
+          python3 outils/collecter-revenus.py --verifier >>"$RUNNER_TEMP/revenus.log" 2>&1 || code=$?
+          set -e
+          tail -n 25 "$RUNNER_TEMP/revenus.log"
+          if [ "$code" -ne 0 ]; then
+            tail -n 12 "$RUNNER_TEMP/revenus.log" | cut -c1-800 | while IFS= read -r ligne; do
+              echo "::error title=Collecte revenus::$ligne"
+            done
+            exit "$code"
+          fi
+
       - name: Vérifier le fond de carte
         run: python3 outils/preparer-fond-de-carte.py --verifier
 
@@ -151,9 +167,9 @@ jobs:
           set +e
           python3 outils/relire-contenus.py --appliquer $fichiers \
             --nature mesure-interne \
-            --mesures "outils/collecter-vie-chere.py,outils/test_collecte_vie_chere.py,outils/collecter-carburants.py,outils/test_collecte_carburants.py,outils/collecter-loyers.py,outils/test_collecte_loyers.py,outils/preparer-fond-de-carte.py,outils/construire-page-couts.py,outils/construire-index-communes.py,outils/test_construire_index_communes.py" \
-            --constat "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr), des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0) et des loyers observés par agglomération (réseau des observatoires locaux des loyers, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population ; par département : médiane au litre et nombre de stations ; par agglomération : loyer médian au m² et loyer médian mensuel, surface moyenne et nombre de logements observés. La page est reconstruite depuis ces fichiers dans la même exécution. L'index de recherche des communes est recalculé depuis les fichiers de département : il ne contient que les noms et les codes INSEE, aucune coordonnée, aucun prix. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station." \
-            --limite "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian ou du loyer médian comme indicateurs, ni le rattachement des agglomérations à leurs communes — que la source ne publie pas et que la page ne fabrique donc pas —, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF." \
+            --mesures "outils/collecter-vie-chere.py,outils/test_collecte_vie_chere.py,outils/collecter-carburants.py,outils/test_collecte_carburants.py,outils/collecter-loyers.py,outils/test_collecte_loyers.py,outils/collecter-revenus.py,outils/test_collecte_revenus.py,outils/preparer-fond-de-carte.py,outils/construire-page-couts.py,outils/construire-index-communes.py,outils/test_construire_index_communes.py" \
+            --constat "Collecte automatique des prix de vente réels (DVF, DGFiP, Licence Ouverte 2.0), du découpage administratif de l'État (geo.api.gouv.fr), des prix des carburants à la pompe (DGCCRF, Licence Ouverte 2.0), des loyers observés par agglomération (réseau des observatoires locaux des loyers, Licence Ouverte 2.0) et des niveaux de vie médians communaux (INSEE FiLoSoFi 2 via API Mélodi, Licence Ouverte 2.0). Agrégation par commune : médiane au m² des appartements et des maisons, nombre de ventes, population, niveau de vie médian annuel par UC et taux de pauvreté à 60 % (omissions de secret statistique respectées, jamais mises à zéro) ; par département : médiane au litre et nombre de stations ; par agglomération : loyer médian au m² et loyer médian mensuel, surface moyenne et nombre de logements observés. La page est reconstruite depuis ces fichiers dans la même exécution. L'index de recherche des communes est recalculé depuis les fichiers de département : il ne contient que les noms et les codes INSEE, aucune coordonnée, aucun prix. Aucun chiffre estimé, aucune parcelle, aucune adresse, aucun nom de station." \
+            --limite "Une collecte automatique ne vaut pas relecture statistique : elle prouve que les fichiers répondent, que les empreintes correspondent et que les valeurs passent les contrôles de vraisemblance. Elle ne prouve ni la justesse du prix médian, du loyer médian ou du niveau de vie médian comme indicateurs, ni le rattachement des agglomérations à leurs communes — que la source ne publie pas et que la page ne fabrique donc pas —, ni la qualité des contours de 2018. Les communes d'Alsace-Moselle restent hors champ de DVF, et certaines petites communes ou communes intégrées restent omises par secret statistique dans FiLoSoFi." \
             --ignorer-inchanges >"$RUNNER_TEMP/provenance.log" 2>&1
           code=$?
           set -e
@@ -202,8 +218,8 @@ jobs:
             --title "Collecte des prix réels par commune — $jour" \
             --body "Collecte automatique du $(date -u +%Y-%m-%d).
 
-          Sources : DVF (DGFiP, Licence Ouverte 2.0), API Découpage administratif de l'État (Licence Ouverte 2.0), flux des prix des carburants (DGCCRF, Licence Ouverte 2.0) et loyers observés par agglomération (réseau des observatoires locaux des loyers, Licence Ouverte 2.0).
+          Sources : DVF (DGFiP, Licence Ouverte 2.0), API Découpage administratif de l'État (Licence Ouverte 2.0), flux des prix des carburants (DGCCRF, Licence Ouverte 2.0), loyers observés par agglomération (réseau des observatoires locaux des loyers, Licence Ouverte 2.0) et revenus communaux FiLoSoFi 2 (INSEE via API Mélodi, Licence Ouverte 2.0).
 
-          Ce que la collecte contrôle avant d'écrire : licence ouverte, nombre de communes, prix médian national plausible, absence de prix en Alsace-Moselle, nombre de stations et de départements couverts, prix au litre plausible, ressource de l'année la plus récente pour les loyers, filtre de l'ensemble des logements, nombre de territoires observés et loyers plausibles, empreinte de chaque fichier source.
+          Ce que la collecte contrôle avant d'écrire : licence ouverte, nombre de communes, prix médian national plausible, absence de prix en Alsace-Moselle, nombre de stations et de départements couverts, prix au litre plausible, ressource de l'année la plus récente pour les loyers, filtre de l'ensemble des logements, nombre de territoires observés et loyers plausibles, archive CSV FiLoSoFi et droits libres au catalogue Mélodi, au moins 25 000 communes avec médiane plausible, observations omises conservées absentes (jamais mises à zéro), empreinte de chaque fichier source.
 
           Ce qu'elle ne prouve pas : la justesse du prix médian ou du loyer médian comme indicateurs de coût de la vie, le rattachement de chaque agglomération à ses communes (la source publie par agglomération, la page ne le fabrique pas), ni la qualité des contours de 2018. Le prix payé à la pompe dépend de la station, pas du département. Voir \`docs/rd/vie-chere-carte-2026-11-13.md\`."

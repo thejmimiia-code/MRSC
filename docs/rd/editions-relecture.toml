@@ -14799,3 +14799,207 @@ sources = []
 mesures = ["assets/data/vie-chere/d-60.json", "assets/data/vie-chere/d-69.json"]
 constat = "Centrage instantané des boutons de zoom et recentrage avant les clics de test pour éviter l’en-tête fixe et le défilement doux ; 18/18 essais navigateur réussis."
 limite = "Vérifié dans Chromium headless uniquement : ni lecteur d’écran, ni Firefox, ni WebKit, ni appareil tactile réel n’ont été éprouvés."
+
+[[edition]]
+chemin = ".github/workflows/collecte-vie-chere.yml"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "bc1ae4e4e36414fb35882b6f961366e27fdd210658adc26a8abba739b6b0adac"
+empreinte_apres = "c02e0e042f1ee65814751501963762b26a2d7f1e58a1159c40d9b11052b145bd"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = ".github/workflows/verification.yml"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "cd3454e8a1ecedc669d47d26792ea37cbcf932461edaf2dc5128599c48652c09"
+empreinte_apres = "73861d989af20a276e2a7637d2ea13da66b435899902ae83c263a9e99ae87885"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "assets/js/carte-vie-chere.js"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "26ccd9b2abce205529ebee444d54d973b94fca11aaf0b16efea53b7e56609de7"
+empreinte_apres = "3ae7430064fc1e8b0561d6d1e544bb5a43683d92a256fcece4096ca230bcdc48"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "couts-vie-chere.html"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "221b832b86b230a1e0a7e67edbc88f096b32a0c50b8418fdde527cadfead2998"
+empreinte_apres = "f7f1d5595e420adc86d109bceb810c660fd8b1389519dc486dfff6d956efe6bd"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "couts-vie-chere/contenu.txt"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "8c4a97946feccf23632d928780719f50dabf1e3d09676c82276bd87f6f7129d4"
+empreinte_apres = "e0232e39cbaf4cd35bf927a7e99655eb4e99e595a7918b63a4aa2def1f3d823c"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "docs/rd/inventaire-controles.md"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "0d4a377d3a557a3e5d40d04c837fe3993e8ee0548fe9d5b49bba3fd86974e272"
+empreinte_apres = "cd3effdf115b298d5d9bb49a7c47a5049e5d7e501e4d08b157688d1cd6132a64"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "docs/rd/relecture-contenus.toml"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "77e9e3dd2bb561314c8ac22aa0733a9dc2175467b37f13c7b2c41d5625bd6179"
+empreinte_apres = "dfdc4bcf8b62e830ef59c8d51a336a17810489725ef018caad31d4ff5786304f"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "docs/rd/relecture-couts-vie-chere-2026-11-14.md"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "dd0dc3e540c0c313de896db7f4fb7b02b0af44ff52cc9b9de3b054df7f8daa98"
+empreinte_apres = "38bd3e029f8f5f81fba02de55db93b4ac9e35b3d36c7798f93616456e2340cb4"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "outils/collecter-revenus.py"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "de8b683cd2d50fae06a99ab9e2781853a42f79671944badd1a19d3e543748088"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "outils/construire-page-couts.py"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "e69bcf8c26b083b316cb9cc8434dcf05c833fb5f432f09fb9832b046f21fa557"
+empreinte_apres = "5cbc3f154a7c4ecc23f1adf5205a399c7e73df925a916882c2f8a20412f86e4a"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "outils/relire-contenus.py"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "14bca36caf0fbd8bd31e92a745f526eb50639f34188ee3c4bd6ed200d798c24b"
+empreinte_apres = "28d54363d3bcb86fb5644b5d03899fedd0884239b8e62b4d6c9945fb9db9a608"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "outils/test-experience.cjs"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "2f333685e91d92ae16ff2ed5d4d2f8d36128b3c8caefa05ffbdddedfeef6304a"
+empreinte_apres = "cec7fc42aaa009f98284cfde7d0fb3f58cb02b758ad9fdfbdff1400bae7f73cf"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "outils/test_collecte_revenus.py"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "(absente : unite nouvelle)"
+empreinte_apres = "0157be666e9a7092f5e523e9b38e3e1f183135412f351bcbfdbac441b6aee807"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "outils/verifier-relecture-contenus.py"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "e290d05d07f57b47dab74fd60d17cbb022c1f0df822ccae8fd8bc2410894cc84"
+empreinte_apres = "105667b4fb96dfc7beacfad572ea7ff83f36af61595c610297d90de49c6524c7"
+nature = "fait-source"
+sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
+mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
+constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
+limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "f828267731efd09625b7db324fd28cd5a5bc94001058fade289eb087a48bbdbd"
+empreinte_apres = "f3ec6a7dcf714c5f56209952b4b625c0e1ba1c8938e50efb9a0007f1aabf62ed"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
+constat = "Mise à jour des comptes du plan complet du projet (741 -> 745 fichiers : +2 dans docs/ pour les extraits Mélodi, +2 dans outils/ pour le collecteur de revenus et son banc)."
+limite = "Comptage mécanique des fichiers du dépôt sur disque, sans jugement sur la complétude fonctionnelle."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "1fcb54b4317745c16046246011a7d57d7ac6ae138dbf495166e5229ba7715348"
+empreinte_apres = "d2adcd3d60cf512b1260d15d45d959fb1d2d2084bf2ecc17c6bf588fb3b3c9fd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
+constat = "Mise à jour des comptes du plan complet du projet (741 -> 745 fichiers : +2 dans docs/ pour les extraits Mélodi, +2 dans outils/ pour le collecteur de revenus et son banc)."
+limite = "Comptage mécanique des fichiers du dépôt sur disque, sans jugement sur la complétude fonctionnelle."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "08b6d223c733cbcd984a228d3425d265f000f9d67cbce4179447577dce68bcdb"
+empreinte_apres = "de7362de692fb3aed2d0c1ea3870e116f272fcaeab305b2f18e89ca3b6cf4256"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py", "outils/test_memoire_eva.py"]
+constat = "Régénération de l'index mémoire ÉVA après mise à jour des documents R&D du lot revenus FiLoSoFi."
+limite = "Index mécanique des documents du dépôt, sans validation des contenus indexés."

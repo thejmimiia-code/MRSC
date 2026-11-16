@@ -1,0 +1,14 @@
+id = insee-melodi-filosofi-sample
+url = https://api.insee.fr/melodi/data/DS_FILOSOFI_CC?GEO=COM-69123&TIME_PERIOD=2023
+date = 2026-11-16
+empreinte = 6a77c6a845f07dace303808adfc2ab159f641be0b3b7a455007dafd850dd298c
+---
+Réponse réelle de l’API Mélodi de l’INSEE sur `DS_FILOSOFI_CC` pour la commune de Lyon (`2026-COM-69123`, `TIME_PERIOD = 2023`), lue le 16 novembre 2026.
+
+Observations publiées (`OBS_STATUS = A`, `CONF_STATUS = F`) :
+- `MED_SL` (`UNIT_MEASURE = EUR_YR`, `UNIT_MULT = 0`) : `28290.0` (28 290 € par an et par unité de consommation) ;
+- `PR_MD60` (`UNIT_MEASURE = PT`, `UNIT_MULT = 0`) : `18.0` (18,0 %).
+
+Toutes les autres mesures de l’enveloppe communale (`D1_SL`..`D9_SL`, `Q1_SL`, `Q3_SL`, `GI_SL`, décomposition du revenu disponible) portent `OBS_STATUS = O` (omises à cette maille).
+
+Contrôle croisé sur la référence nationale (`GEO=FRANCE-FM&TIME_PERIOD=2023`) le même jour : `MED_SL = 25920.0` €/an et `PR_MD60 = 15.9` % (`OBS_STATUS = A`).
