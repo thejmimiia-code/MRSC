@@ -2300,7 +2300,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "assets/js/carte-vie-chere.js"
-empreinte = "3ae7430064fc1e8b0561d6d1e544bb5a43683d92a256fcece4096ca230bcdc48"
+empreinte = "b972414b05d0e6069b664f7060dbcff9edc4b056746acacb688a762ff76b4e8e"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-16
@@ -2337,7 +2337,7 @@ urls = ["https://thejmimiia-code.github.io/MRSC/confidentialite.html", "https://
 
 [[unite]]
 chemin = "couts-vie-chere.html"
-empreinte = "f7f1d5595e420adc86d109bceb810c660fd8b1389519dc486dfff6d956efe6bd"
+empreinte = "1eafed66933676842197b92ae59dea8f5c9ebccfb5ddbfe59959a4ed6e83551c"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-16
@@ -2345,7 +2345,7 @@ urls = ["https://thejmimiia-code.github.io/MRSC/couts-vie-chere.html", "https://
 
 [[unite]]
 chemin = "couts-vie-chere/contenu.txt"
-empreinte = "e0232e39cbaf4cd35bf927a7e99655eb4e99e595a7918b63a4aa2def1f3d823c"
+empreinte = "ef605c9bb6f9ac01646e6a85934817bdf255f4d8354cbfb880cb151efd1e59b7"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-16
@@ -2842,10 +2842,10 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "docs/rd/journal.md"
-empreinte = "8f174256e076940efb3a112741ae6e29ac891e8073bb7a75e8353a8f3d1bc40d"
+empreinte = "98ce1a20432e93740fe70ff92cbb629a710409eed21370ae008f896dd1493822"
 etat = "relu-par-agent"
 apostrophes = 2405
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 urls = ["https://thejmimiia-code.github.io/MRSC/assets/css/site.css", "https://www.ign.fr/mag/apprendre-lire-une-carte-en-cinq-etapes", "https://www.ign.fr/publications-de-l-ign/institut/Ressources_pedagogiques/livret_decouvrez_LMDC.pdf", "https://thejmimiia-code.github.io/MRSC/", "https://github.com/AnswerDotAI/llms-txt", "https://github.com/mattpocock/skills/tree/49dd158d1076134a641b33efb035946536778336", "https://github.com/addyosmani/agent-skills/tree/1be8e34187e34647bb83adc3a1323b26ae6f6abe"]
 
 [[unite]]
@@ -3040,7 +3040,7 @@ urls = ["https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/c
 
 [[unite]]
 chemin = "docs/rd/relecture-couts-vie-chere-2026-11-14.md"
-empreinte = "38bd3e029f8f5f81fba02de55db93b4ac9e35b3d36c7798f93616456e2340cb4"
+empreinte = "621dcb7b0a55cc9476a5ea576e874935427b66f7ec9433ce161bcba450a5f13f"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-16
@@ -3266,10 +3266,10 @@ urls = ["https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr
 
 [[unite]]
 chemin = "docs/rd/vie-chere-carte-2026-11-13.md"
-empreinte = "f54a4a20b391f6e90de5c956f7127d767ef29f3ae01bc21ad9c9041ff48b610c"
+empreinte = "198d123d4ef21a60881dbc24f733f7bd3a7e898fe58fb40fef1b52e433c19c75"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 
 [[unite]]
 chemin = "docs/rd/visuel-motion.md"
@@ -3881,7 +3881,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = "outils/test-experience.cjs"
-empreinte = "cec7fc42aaa009f98284cfde7d0fb3f58cb02b758ad9fdfbdff1400bae7f73cf"
+empreinte = "f6ef050501dc35ee2b03d2c4c87340928dd5ed6bfb8e57e4f6f2608357ab51c8"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-16
