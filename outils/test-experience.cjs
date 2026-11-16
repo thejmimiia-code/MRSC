@@ -1849,6 +1849,41 @@ async function main() {
     Number(String(element.getAttribute('viewBox')).split(/\s+/)[2])
   ));
 
+  await executer('Carte des coûts : mensualité convertie en capacité avant calcul de surface', async () => {
+    const page = await creerPage({ width: 1280, height: 900 });
+    try {
+      await ouvrirCarte(page, '?commune=75056');
+      await attendre(page, () => !document.querySelector('[data-couts-fiche]').hidden, { timeout: 45000 });
+      assert.equal(await page.$eval('[data-couts-mensualite]', (element) => element.value), '', 'aucune mensualité arbitraire ne doit être présaisie');
+      assert.equal(await page.$eval('[data-couts-taux]', (element) => element.value), '', 'aucun taux arbitraire ne doit être présaisi');
+      assert.equal(await page.$eval('[data-couts-duree]', (element) => element.value), '', 'aucune durée arbitraire ne doit être présaisie');
+      assert.match(await page.$eval('[data-couts-surface]', (element) => element.textContent), /Saisissez une mensualité/);
+
+      const saisirValeur = (selecteur, valeur) => page.$eval(selecteur, (element, nombre) => {
+        element.value = String(nombre);
+        element.dispatchEvent(new Event('input', { bubbles: true }));
+      }, valeur);
+      await saisirValeur('[data-couts-mensualite]', 3450);
+      await saisirValeur('[data-couts-taux]', 3);
+      await saisirValeur('[data-couts-duree]', 25);
+      let texte = await page.$eval('[data-couts-surface]', (element) => element.textContent);
+      const capaciteTexte = texte.match(/capacité d’emprunt est d’environ ([\d\s ]+) €/);
+      assert.ok(capaciteTexte, `la capacité d’emprunt doit être explicitée : ${texte}`);
+      assert.equal(Number(capaciteTexte[1].replace(/\D/g, '')), 727524, '3 450 €/mois, 3 % sur 25 ans donnent environ 727 524 €, pas 1 m²');
+      assert.match(texte, /25 ans à 3 %/);
+      assert.doesNotMatch(texte, /correspondent à environ 1 m²/);
+
+      // À taux nul, la capacité vaut mensualité × nombre de mois.
+      await saisirValeur('[data-couts-taux]', 0);
+      texte = await page.$eval('[data-couts-surface]', (element) => element.textContent);
+      const capaciteNulle = texte.match(/capacité d’emprunt est d’environ ([\d\s ]+) €/);
+      assert.ok(capaciteNulle, `le cas à taux nul doit afficher une capacité : ${texte}`);
+      assert.equal(Number(capaciteNulle[1].replace(/\D/g, '')), 1035000);
+    } finally {
+      await page.close();
+    }
+  });
+
   await executer('Carte des coûts : trouver une ville par son nom, ses accents manquants ou son code INSEE', async () => {
     const page = await creerPage({ width: 1280, height: 900 });
     try {

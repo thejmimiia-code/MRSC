@@ -110,10 +110,7 @@ Le simulateur affiche, pour une commune :
 | Surface accessible avec un budget | **calcul**, à partir des chiffres ci-dessus et de la saisie de la personne | une division, pas une donnée |
 
 Et **pas** de « coût de la vie total » : aucune source ne le mesure par commune.
-Le calcul de surface est transparent : budget mensuel saisi, taux et durée
-affichés comme des **hypothèses de la personne**, mensualité calculée, surface =
-mensualité ÷ prix au m². Le site ne prétend ni connaître le taux réel d’un
-emprunt, ni les frais, ni la fiscalité locale, ni le coût du transport.
+Le calcul de surface exige les trois hypothèses saisies par la personne : mensualité, taux annuel et durée. La mensualité est convertie en capacité d’emprunt par la formule d’annuité constante (inverse de celle du simulateur), puis cette capacité est divisée par le prix au m². La mensualité seule divisée par le prix au m² est une erreur d’unités et ne donne pas une surface. Le site ne prétend ni connaître le taux réel d’un emprunt, ni les frais, ni la fiscalité locale, ni le coût du transport. Les champs restent vides tant que la personne ne les a pas renseignés : aucune hypothèse chiffrée n’est présaisie.
 
 Deux règles de lecture sont affichées avec les chiffres :
 

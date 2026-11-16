@@ -44,6 +44,8 @@
   var fiche = panneau.querySelector("[data-couts-fiche]");
   var vide = panneau.querySelector("[data-couts-vide]");
   var mensualite = document.querySelector("[data-couts-mensualite]");
+  var taux = document.querySelector("[data-couts-taux]");
+  var duree = document.querySelector("[data-couts-duree]");
   var resultat = document.querySelector("[data-couts-surface]");
   var blocCarburants = panneau.querySelector("[data-couts-carburants]");
   var blocRevenus = panneau.querySelector("[data-couts-revenus]");
@@ -562,22 +564,55 @@
     window.history.replaceState(null, "", url.pathname + (url.search || "") + url.hash);
   }
 
+  function nombreSaisi(element) {
+    if (!element || element.value == null || String(element.value).trim() === "") return NaN;
+    return Number(element.value);
+  }
+
   function calculerSurface() {
     if (!communeChoisie) return;
     var prix = communeChoisie.pa || communeChoisie.pm;
-    var budget = Number(mensualite.value);
-    if (!prix || !budget || budget <= 0) {
-      resultat.textContent = prix
-        ? "Saisissez une mensualité pour obtenir une surface."
-        : "Pas de prix publié ici : aucune surface ne peut être calculée sans inventer un prix.";
+    if (!prix) {
+      resultat.textContent = "Pas de prix publié ici : aucune surface ne peut être calculée sans inventer un prix.";
       return;
     }
-    var surface = Math.floor(budget / prix);
+    var mensualiteSaisie = nombreSaisi(mensualite);
+    var tauxSaisi = nombreSaisi(taux);
+    var dureeSaisie = nombreSaisi(duree);
+    if (isNaN(mensualiteSaisie) || mensualiteSaisie <= 0) {
+      resultat.textContent = "Saisissez une mensualité pour obtenir une surface.";
+      return;
+    }
+    if (isNaN(dureeSaisie) || dureeSaisie <= 0) {
+      resultat.textContent = "Saisissez une durée d’emprunt (en années) pour obtenir une surface.";
+      return;
+    }
+    if (isNaN(tauxSaisi) || tauxSaisi < 0) {
+      resultat.textContent = "Saisissez un taux d’intérêt annuel pour obtenir une surface.";
+      return;
+    }
+    // Une mensualité seule ne donne pas une surface : il faut d'abord la
+    // convertir en capacité d'emprunt (montant total emprunté), puis diviser
+    // par le prix au m². Sans durée, « 3 450 € par mois » divisé par
+    // « 3 007 € le m² » donnait « 1 m² » : des euros par mois divisés par
+    // des euros tout court ne font pas des m². Formule d'annuité constante,
+    // inverse de celle du simulateur : capacité = mensualité ×
+    // (1 − (1 + r)^−n) / r, avec r = taux annuel en % / 1200 et n = durée en mois.
+    // À taux nul, la capacité vaut simplement mensualité × n.
+    var tauxMensuel = tauxSaisi / 1200;
+    var nombreMois = Math.round(dureeSaisie * 12);
+    var capacite = tauxMensuel === 0
+      ? mensualiteSaisie * nombreMois
+      : mensualiteSaisie * (1 - Math.pow(1 + tauxMensuel, -nombreMois)) / tauxMensuel;
+    var surface = Math.floor(capacite / prix);
     var type = communeChoisie.pa ? "appartements" : "maisons";
+    var surfaceTexte = surface > 0 ? "environ " + surface + " m²" : "moins de 1 m²";
     resultat.textContent =
-      budget.toLocaleString("fr-FR") + " € par mois correspondent à environ " +
-      surface + " m² au prix médian des " + type + " (" + euros(prix) + " le m²), " +
-      "avant frais, charges et intérêts.";
+      "Avec " + mensualiteSaisie.toLocaleString("fr-FR") + " € par mois pendant " +
+      dureeSaisie.toLocaleString("fr-FR") + " ans à " + tauxSaisi.toLocaleString("fr-FR") +
+      " %, la capacité d’emprunt est d’environ " + Math.round(capacite).toLocaleString("fr-FR") +
+      " €, soit " + surfaceTexte + " au prix médian des " + type + " (" + euros(prix) + " le m²), " +
+      "avant frais, charges, assurance et impôts.";
   }
 
   /// « Saint-Étienne », « saint etienne » et « SAINT-ETIENNE » désignent la même
@@ -908,6 +943,8 @@
       });
     }
     mensualite.addEventListener("input", calculerSurface);
+    taux.addEventListener("input", calculerSurface);
+    duree.addEventListener("input", calculerSurface);
     Array.prototype.forEach.call(document.querySelectorAll("[data-couts-zoom]"), function (bouton) {
       bouton.addEventListener("click", function () {
         zoomer(bouton.getAttribute("data-couts-zoom") === "plus" ? 0.7 : 1.45);
