@@ -131,8 +131,12 @@ de fusion des données a été fermée sans fusion ; le détail est dans
 
 - **Aucun total de coût de la vie n’est calculé.** La page affiche la population,
   les prix médians au m² des appartements et des maisons, et le nombre de ventes.
-  Le seul calcul est une division présentée comme une hypothèse de la personne :
-  mensualité saisie ÷ prix médian.
+  Le calcul de surface demande une mensualité, un taux annuel et une durée saisis
+  par la personne : la mensualité est d’abord convertie en capacité d’emprunt par
+  la formule d’annuité constante, puis divisée par le prix médian au m². La
+  division directe mensualité ÷ prix médian, présente dans la première version,
+  était une erreur d’unités (€/mois ÷ €/m²) et ne donnait pas des m². Les champs
+  sont laissés vides : le site ne présume ni le budget ni les conditions d’emprunt.
 - **Une médiane sous cinq ventes n’est pas publiée**, et la page dit pourquoi.
 - **Trois causes d’absence, trois phrases** : aucune vente enregistrée, commune
   d’Alsace-Moselle hors du champ de DVF, données non encore collectées. Ce sont

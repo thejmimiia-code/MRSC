@@ -159,10 +159,18 @@
 
               <fieldset class="couts-calcul">
                 <legend>Combien de m² votre budget permet-il d’acheter ici ?</legend>
-                <p class="couts-aide">Le calcul n’utilise que le prix médian ci-dessus et vos propres hypothèses. Le site ne connaît ni votre taux réel, ni les frais, ni la fiscalité locale.</p>
+                <p class="couts-aide">Le calcul n’utilise que le prix médian ci-dessus et vos propres hypothèses (mensualité, taux, durée). La capacité d’emprunt est calculée hors apport, frais, assurance et fiscalité : le site ne connaît ni votre taux réel, ni les frais, ni la fiscalité locale.</p>
                 <div class="couts-champ">
-                  <label for="couts-mensualite">Mensualité que vous pouvez consacrer au logement (€)</label>
-                  <input id="couts-mensualite" type="number" inputmode="numeric" min="0" step="50" value="900" data-couts-mensualite>
+                  <label for="couts-mensualite">Mensualité que vous pouvez consacrer au logement (€ par mois)</label>
+                  <input id="couts-mensualite" type="number" inputmode="numeric" min="0" step="50" data-couts-mensualite>
+                </div>
+                <div class="couts-champ">
+                  <label for="couts-taux">Taux d’intérêt annuel (%)</label>
+                  <input id="couts-taux" type="number" inputmode="decimal" min="0" step="0.1" data-couts-taux>
+                </div>
+                <div class="couts-champ">
+                  <label for="couts-duree">Durée de l’emprunt (années)</label>
+                  <input id="couts-duree" type="number" inputmode="numeric" min="1" step="1" data-couts-duree>
                 </div>
                 <p class="couts-resultat" data-couts-surface role="status" aria-live="polite">—</p>
               </fieldset>
