@@ -2745,10 +2745,10 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/eva/memoire.json"
-empreinte = "08b6d223c733cbcd984a228d3425d265f000f9d67cbce4179447577dce68bcdb"
+empreinte = "de7362de692fb3aed2d0c1ea3870e116f272fcaeab305b2f18e89ca3b6cf4256"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 urls = ["https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr-executive-summary"]
 
 [[unite]]

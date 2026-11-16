@@ -14991,3 +14991,15 @@ sources = []
 mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
 constat = "Mise à jour des comptes du plan complet du projet (741 -> 745 fichiers : +2 dans docs/ pour les extraits Mélodi, +2 dans outils/ pour le collecteur de revenus et son banc)."
 limite = "Comptage mécanique des fichiers du dépôt sur disque, sans jugement sur la complétude fonctionnelle."
+
+[[edition]]
+chemin = "docs/rd/eva/memoire.json"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "08b6d223c733cbcd984a228d3425d265f000f9d67cbce4179447577dce68bcdb"
+empreinte_apres = "de7362de692fb3aed2d0c1ea3870e116f272fcaeab305b2f18e89ca3b6cf4256"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/memoire-eva.py", "outils/test_memoire_eva.py"]
+constat = "Régénération de l'index mémoire ÉVA après mise à jour des documents R&D du lot revenus FiLoSoFi."
+limite = "Index mécanique des documents du dépôt, sans validation des contenus indexés."
