@@ -1,0 +1,16 @@
+id = insee-melodi-filosofi-catalog
+url = https://api.insee.fr/melodi/catalog/DS_FILOSOFI_CC
+date = 2026-11-16
+empreinte = d1e3989c6addf9668df57f2462340ed3e667d1be331e2dbfb070e855413a4036
+---
+Catalogue officiel de l’API Mélodi de l’INSEE pour le jeu « DS_FILOSOFI_CC » (« Niveau de vie, taux de pauvreté, décomposition du revenu disponible en 2023 »), lu le 16 novembre 2026.
+
+Producteur : INSEE (« Institut national de la statistique et des etudes economiques (INSEE) »). Droits d’accès : « Libre » (`accessRights = Libre`, `confidentialityStatus = Libre`), diffusion publique (« Public »), périodicité annuelle.
+
+Indicateurs publiés au niveau communal (`COM`, arrondissement municipal `ARM`, EPCI, etc.) :
+- `MED_SL` : Médiane du niveau de vie ;
+- `PR_MD60` : Taux de pauvreté à 60 % du niveau de vie médian de la France métropolitaine.
+
+Champ : personnes appartenant à des ménages fiscaux dont le revenu disponible est positif ou nul, France métropolitaine et La Réunion.
+
+Produit CSV direct : identifiant `DS_FILOSOFI_CC_2023_CSV_FR`, format CSV, langue FR, archive ZIP (`application/zip`) de 5 352 911 octets à l’adresse `https://api.insee.fr/melodi/file/DS_FILOSOFI_CC/DS_FILOSOFI_CC_2023_CSV_FR`, mise à jour le 2026-08-06 selon le référentiel géographique au 1er janvier 2026 (non comparable aux millésimes 2012–2021 ; fusion de périmètre documentée pour `15031`/`15035`/`15047`/`15171` dans `15141`, `85165`/`85212` dans `85084`, `09304` dans `09042`).

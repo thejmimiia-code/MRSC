@@ -86,6 +86,8 @@ DOMAINES_SURS = {
     # Plateforme Opendatasoft de l’État : c’est là que vit l’export réellement
     # téléchargé des prix des carburants, distinct de la fiche de licence data.gouv.
     "data.economie.gouv.fr", "www.data.economie.gouv.fr",
+    # API Mélodi de l’INSEE : catalogue et observations FiLoSoFi (DS_FILOSOFI_CC).
+    "api.insee.fr",
 }
 EDITEURS_ATTENDUS = (
     "MDN Web Docs", "W3C",

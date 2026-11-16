@@ -179,3 +179,31 @@ n’est pas garantie. Aucun loyer n’a été recoupé avec un observatoire loca
 personne n’a vérifié qu’une agglomération porte bien le nom que la source lui
 donne. Le rattachement des agglomérations aux communes n’est pas publié par la
 source : la page ne le fabrique donc pas, et c’est écrit sur la page.
+
+## Revenus communaux (FiLoSoFi 2, API Mélodi INSEE), ajoutés le 16 novembre 2026
+
+La fiche `data-gouv-filosofi` du 14 novembre 2026 constatait que les liens sur
+data.gouv.fr renvoyaient vers des pages HTML d’archives XLS/XLSX sans URL
+stable. Le 16 novembre 2026, le jeu officiel **FiLoSoFi 2** (`DS_FILOSOFI_CC`,
+millésime 2023, mis à jour le 6 août 2026 selon la géographie au 1er janvier
+2026) a été vérifié directement sur l’API Mélodi de l’INSEE.
+
+- Source `insee-melodi-filosofi-catalog` — <https://api.insee.fr/melodi/catalog/DS_FILOSOFI_CC>.
+  Le catalogue déclare des droits d’accès « Libre », les indicateurs publiés à
+  la maille communale (`MED_SL` et `PR_MD60`) et l’adresse directe de l’archive
+  CSV ZIP (`DS_FILOSOFI_CC_2023_CSV_FR`), ainsi que les fusions et intégrations
+  communales (par exemple `15031`/`15035`/`15047`/`15171` dans `15141`). Ce que
+  cela ne prouve pas : la disponibilité future du même identifiant de produit.
+- Source `insee-melodi-filosofi-sample` — <https://api.insee.fr/melodi/data/DS_FILOSOFI_CC?GEO=COM-69123&TIME_PERIOD=2023>.
+  Vérifie la forme réelle des observations : `MED_SL = 28290.0` €/an par UC et
+  `PR_MD60 = 18.0` % pour Lyon (`OBS_STATUS = A`, `CONF_STATUS = F`),
+  `25920.0` €/an et `15.9` % pour la France métropolitaine (`FRANCE-FM`), et
+  `OBS_STATUS = O` pour les indicateurs non diffusés au niveau communal (jamais
+  transformés en `0`).
+
+Ce que cette relecture ne couvre pas : l’archive ZIP complète (5,35 Mio) n’a
+pas été téléchargée depuis le bac à sable local (réseau restreint) ; c’est le
+workflow de collecte sur GitHub Actions qui télécharge l’archive et en vérifie
+l’empreinte, la couverture (au moins 25 000 communes) et les bornes de
+vraisemblance. Le niveau de vie médian par unité de consommation ne dit ni les
+salaires individuels, ni les loyers, ni le reste à vivre d’un foyer donné.

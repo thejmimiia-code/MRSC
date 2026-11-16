@@ -1880,6 +1880,15 @@ async function main() {
       );
       await page.keyboard.press('Enter');
       await attendre(page, () => /Lyon \(69123\)/.test(document.querySelector('[data-couts-nom]').textContent), { timeout: 30000 });
+      await attendre(page, () => {
+        const bloc = document.querySelector('[data-couts-revenus]');
+        const note = document.querySelector('[data-couts-revenus-source]');
+        return Boolean(bloc && !bloc.hidden && note && note.textContent && !/Chargement/.test(note.textContent));
+      }, { timeout: 15000 });
+      assert.match(
+        await page.$eval('[data-couts-revenus-source]', (element) => element.textContent),
+        /(FiLoSoFi|Aucune collecte de revenus)/
+      );
 
       // Sans résultat, la page le dit et n'invente pas de fiche.
       const ficheAvant = await page.$eval('[data-couts-nom]', (element) => element.textContent);
