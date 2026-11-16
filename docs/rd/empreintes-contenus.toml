@@ -367,7 +367,7 @@ date_reference = 2026-11-09
 
 [[unite]]
 chemin = ".github/workflows/collecte-vie-chere.yml"
-empreinte = "c02e0e042f1ee65814751501963762b26a2d7f1e58a1159c40d9b11052b145bd"
+empreinte = "e65f1df65a09a03e2c28d04e78a9ca371eb096742ba10eb9027e6297220f1c71"
 etat = "relu-par-agent"
 apostrophes = 0
 date_derniere_relecture = 2026-11-16
