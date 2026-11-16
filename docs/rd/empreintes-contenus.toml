@@ -2894,17 +2894,17 @@ date_derniere_relecture = 2026-11-14
 
 [[unite]]
 chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
-empreinte = "f828267731efd09625b7db324fd28cd5a5bc94001058fade289eb087a48bbdbd"
+empreinte = "f3ec6a7dcf714c5f56209952b4b625c0e1ba1c8938e50efb9a0007f1aabf62ed"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 
 [[unite]]
 chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
-empreinte = "1fcb54b4317745c16046246011a7d57d7ac6ae138dbf495166e5229ba7715348"
+empreinte = "d2adcd3d60cf512b1260d15d45d959fb1d2d2084bf2ecc17c6bf588fb3b3c9fd"
 etat = "relu-par-agent"
 apostrophes = 0
-date_derniere_relecture = 2026-11-15
+date_derniere_relecture = 2026-11-16
 
 [[unite]]
 chemin = "docs/rd/plan-site-complet-2026-11-11.md"

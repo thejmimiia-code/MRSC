@@ -14967,3 +14967,27 @@ sources = ["insee-melodi-filosofi-catalog", "insee-melodi-filosofi-sample"]
 mesures = ["outils/test_collecte_revenus.py", "outils/test_collecte_vie_chere.py", "outils/test_verifier_inventaire_controles.py", "outils/test_test_experience.mjs"]
 constat = "Ajout du collecteur des revenus communaux FiLoSoFi 2 (API Mélodi de l'INSEE, DS_FILOSOFI_CC) et de son banc de 13 cas, intégration dans collecte-vie-chere.yml et verification.yml, affichage honnête des niveaux de vie médians et taux de pauvreté dans couts-vie-chere.html et carte-vie-chere.js (omissions de secret statistique conservées absentes, jamais mises à zéro), et mise à jour de l'inventaire des contrôles et du registre des sources."
 limite = "La collecte réseau réelle de l'archive ZIP de 5,35 Mio (DS_FILOSOFI_CC_2023_CSV_FR) tourne dans le workflow GitHub Actions et non depuis ce bac à sable ; tant que la première collecte n'a pas été fusionnée, la page et la carte affichent explicitement qu'aucune collecte de revenus n'a encore été publiée. Les contrôles navigateur ont été vérifiés dans Chromium uniquement (18/18 essais et arbre d'accessibilité à 0 refus), sans essai humain ni lecteur d'écran."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.md"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "f828267731efd09625b7db324fd28cd5a5bc94001058fade289eb087a48bbdbd"
+empreinte_apres = "f3ec6a7dcf714c5f56209952b4b625c0e1ba1c8938e50efb9a0007f1aabf62ed"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
+constat = "Mise à jour des comptes du plan complet du projet (741 -> 745 fichiers : +2 dans docs/ pour les extraits Mélodi, +2 dans outils/ pour le collecteur de revenus et son banc)."
+limite = "Comptage mécanique des fichiers du dépôt sur disque, sans jugement sur la complétude fonctionnelle."
+
+[[edition]]
+chemin = "docs/rd/plan-projet-complet-2026-11-11.toml"
+date = 2026-11-16
+auteur = "agent"
+empreinte_avant = "1fcb54b4317745c16046246011a7d57d7ac6ae138dbf495166e5229ba7715348"
+empreinte_apres = "d2adcd3d60cf512b1260d15d45d959fb1d2d2084bf2ecc17c6bf588fb3b3c9fd"
+nature = "mesure-interne"
+sources = []
+mesures = ["outils/verifier-plan-projet.py", "outils/test_mutations_plan_projet.py"]
+constat = "Mise à jour des comptes du plan complet du projet (741 -> 745 fichiers : +2 dans docs/ pour les extraits Mélodi, +2 dans outils/ pour le collecteur de revenus et son banc)."
+limite = "Comptage mécanique des fichiers du dépôt sur disque, sans jugement sur la complétude fonctionnelle."
